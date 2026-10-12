@@ -1,0 +1,449 @@
+/* Onglet « Extraction » : la vue d'ensemble en table, puis une cible — son
+   en-tête et ses gestes, le plan d'une confirmation, le bilan d'images, les
+   filtres, et les entités en lignes repliées dont le diff se déplie : les
+   champs groupés par racine, un texte en diff de mots, le reste en deux
+   arbres. Le reste — carte, `.form`, `.btn`, `.badge`, table — vient de
+   `quick.css`. */
+
+#tab-extractor .ex-end {
+  margin-left: auto;
+}
+/* `.btn` pose un `display` : sans cette règle, `hidden` ne masquerait pas un geste. */
+#tab-extractor .btn[hidden] {
+  display: none;
+}
+#tab-extractor .ex-badges {
+  display: inline-flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  min-height: 20px;
+}
+
+/* ------------------------------------------------------- la vue d'ensemble */
+#tab-extractor th.ex-n,
+#tab-extractor td.ex-n {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+#tab-extractor td.ex-n.new {
+  color: var(--accent);
+}
+#tab-extractor td.ex-n.diff,
+#tab-extractor td.ex-n.removed {
+  color: var(--danger);
+}
+#tab-extractor td.ex-n.minor,
+#tab-extractor td.ex-n.typo {
+  color: var(--content-muted);
+}
+/* Un zéro ne porte aucune couleur : après les teintes, il les efface. */
+#tab-extractor td.ex-n.zero {
+  color: var(--content-muted);
+  opacity: 0.45;
+}
+/* Une cible sans rien à revoir, atténuée ; une ligne est un chemin vers sa cible. */
+#tab-extractor tr.ex-quiet td {
+  color: var(--content-muted);
+  opacity: 0.7;
+}
+#tab-extractor tr.ex-quiet td.ex-n {
+  opacity: 0.45;
+}
+#tab-extractor .ex-tlabel {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+#tab-extractor .ex-tlabel strong {
+  font-weight: 600;
+}
+#tab-extractor .ex-scope {
+  color: var(--content-muted);
+  font-size: 11.5px;
+}
+#tab-extractor #ex-targets .btn {
+  white-space: nowrap;
+}
+
+/* --------------------------------------------------------------- la cible */
+#tab-extractor .ex-head {
+  gap: 10px;
+}
+#tab-extractor .ex-who {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+#tab-extractor .ex-id {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+#tab-extractor .ex-id strong {
+  font-size: 16px;
+}
+#tab-extractor .ex-meta {
+  color: var(--content-muted);
+  font-size: 12.5px;
+}
+#tab-extractor .ex-acts {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-left: auto;
+}
+#tab-extractor .ex-head .hint {
+  margin: 0;
+}
+/* Le plan d'une confirmation : ce qui va être écrit, en clair, avant le geste. */
+#tab-extractor .ex-plan {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 12px 14px;
+  border: 1px solid color-mix(in srgb, var(--danger) 45%, transparent);
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--danger) 7%, transparent);
+}
+#tab-extractor .ex-plan[hidden] {
+  display: none;
+}
+#tab-extractor .ex-plan p {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.5;
+}
+#tab-extractor .ex-plan .actions {
+  margin: 0;
+}
+
+/* Le bilan d'images. */
+#tab-extractor .ex-assets {
+  gap: 8px;
+  border-color: color-mix(in srgb, var(--success) 45%, transparent);
+}
+#tab-extractor .ex-assets[hidden] {
+  display: none;
+}
+#tab-extractor .ex-assets-head {
+  padding: 0 0 8px;
+}
+#tab-extractor .ex-assets p {
+  margin: 0;
+  font-size: 13px;
+}
+#tab-extractor .ex-assets .hint {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+#tab-extractor .ex-missing {
+  margin: 0;
+  padding-left: 18px;
+  color: var(--warn);
+  font-size: 12.5px;
+}
+#tab-extractor .ex-missing:empty {
+  display: none;
+}
+#tab-extractor .ex-missing code {
+  font-family: var(--mono);
+}
+
+/* Le groupe segmenté des statuts (celui de Gear reco, recopié), un compte par bouton. */
+#tab-extractor .ex-seg {
+  display: inline-flex;
+  height: 34px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  overflow: hidden;
+}
+#tab-extractor .ex-seg button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 10px;
+  border: 0;
+  background: transparent;
+  color: var(--content-muted);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+}
+#tab-extractor .ex-seg button[aria-pressed='true'] {
+  background: var(--accent);
+  color: var(--accent-fg);
+}
+#tab-extractor .ex-seg button:disabled {
+  opacity: 0.55;
+  cursor: default;
+}
+#tab-extractor .ex-seg button:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: -2px;
+}
+#tab-extractor .ex-seg .ex-c {
+  font-size: 11px;
+  opacity: 0.8;
+}
+#tab-extractor .ex-total {
+  display: inline-flex;
+  align-items: center;
+  height: 34px;
+}
+
+/* ------------------------------------------------------------- les entités */
+#tab-extractor .ex-list {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+#tab-extractor .ex-rows {
+  padding: 4px 6px;
+}
+#tab-extractor .ex-rows:empty {
+  display: none;
+}
+#tab-extractor .ex-row + .ex-row {
+  border-top: 1px solid color-mix(in srgb, var(--line-subtle) 45%, transparent);
+}
+#tab-extractor .ex-list .empty {
+  margin: 14px;
+}
+#tab-extractor .card-foot[hidden] {
+  display: none;
+}
+#tab-extractor #ex-more {
+  margin-left: auto;
+}
+
+/* Une ligne : le bouton qui déplie (badge de statut, nom, clé, « n champs »),
+   et, pour un item, son geste à droite. */
+#tab-extractor .ex-line {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+#tab-extractor .ex-toggle {
+  display: flex;
+  flex: 1 1 auto;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  padding: 7px 8px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--content);
+  font: inherit;
+  font-size: 13px;
+  text-align: left;
+  cursor: pointer;
+}
+#tab-extractor .ex-toggle:hover {
+  background: var(--surface-overlay);
+}
+#tab-extractor .ex-toggle[aria-expanded='true'] {
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+}
+#tab-extractor .ex-toggle:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: -2px;
+}
+#tab-extractor .ex-toggle .badge {
+  flex: none;
+  min-width: 58px;
+  justify-content: center;
+}
+#tab-extractor .ex-name {
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+#tab-extractor .ex-key {
+  color: var(--content-muted);
+  font-family: var(--mono);
+  font-size: 12px;
+  overflow-wrap: anywhere;
+}
+#tab-extractor .ex-fields {
+  flex: none;
+  margin-left: auto;
+  color: var(--content-muted);
+  font-size: 12px;
+  white-space: nowrap;
+}
+#tab-extractor .ex-chev {
+  flex: none;
+  color: var(--content-muted);
+  font-size: 11px;
+  transition: transform 0.12s;
+}
+#tab-extractor .ex-toggle[aria-expanded='true'] .ex-chev {
+  transform: rotate(90deg);
+}
+#tab-extractor .ex-line .btn {
+  flex: none;
+  margin-right: 6px;
+}
+
+/* ------------------------------------------------------------------ le diff
+   Les groupes par racine ; dans chacun, un champ par ligne : son chemin, puis
+   un texte (existant dessus, extrait dessous — un mot à mot se lit en
+   colonne) ou deux arbres côte à côte (existant à gauche, extrait à droite —
+   deux listes de clés se comparent en face à face). */
+#tab-extractor .ex-diff {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 4px 10px 12px 44px;
+}
+#tab-extractor .ex-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 8px 12px;
+  border: 1px solid var(--line-subtle);
+  border-radius: 8px;
+  background: var(--surface-base);
+}
+#tab-extractor .ex-gtitle {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--content-muted);
+}
+#tab-extractor .ex-gtitle .ex-glabel {
+  color: var(--content);
+  text-transform: none;
+  letter-spacing: 0;
+}
+#tab-extractor .ex-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+#tab-extractor .ex-fname {
+  color: var(--content-muted);
+  font-family: var(--mono);
+  font-size: 11.5px;
+}
+#tab-extractor .ex-side {
+  flex: none;
+  margin-right: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  opacity: 0.7;
+}
+/* Un texte : deux bandes, l'existant en rouge, l'extrait en vert. */
+#tab-extractor .ex-text {
+  padding: 5px 8px;
+  border-radius: 6px;
+  font-size: 12.5px;
+  line-height: 1.55;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+#tab-extractor .ex-text.del {
+  background: color-mix(in srgb, var(--danger) 6%, transparent);
+}
+#tab-extractor .ex-text.del .ex-side {
+  color: var(--danger);
+}
+#tab-extractor .ex-text.add {
+  background: color-mix(in srgb, var(--success) 6%, transparent);
+}
+#tab-extractor .ex-text.add .ex-side {
+  color: var(--success);
+}
+#tab-extractor .ex-w {
+  color: var(--content-muted);
+}
+#tab-extractor .ex-w.rm {
+  background: color-mix(in srgb, var(--danger) 25%, transparent);
+  color: var(--danger);
+}
+#tab-extractor .ex-w.ad {
+  background: color-mix(in srgb, var(--success) 25%, transparent);
+  color: var(--success);
+}
+/* Deux arbres : une ligne par clé, indentée par sa profondeur. */
+#tab-extractor .ex-trees {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+#tab-extractor .ex-tree {
+  padding: 5px 8px;
+  border-radius: 6px;
+  font-size: 12.5px;
+  line-height: 1.5;
+}
+#tab-extractor .ex-tree.del {
+  background: color-mix(in srgb, var(--danger) 6%, transparent);
+}
+#tab-extractor .ex-tree.del .ex-side {
+  color: var(--danger);
+}
+#tab-extractor .ex-tree.add {
+  background: color-mix(in srgb, var(--success) 6%, transparent);
+}
+#tab-extractor .ex-tree.add .ex-side {
+  color: var(--success);
+}
+#tab-extractor .ex-tl {
+  display: flex;
+  gap: 6px;
+  padding-left: calc(var(--d, 0) * 14px);
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+#tab-extractor .ex-tk {
+  flex: none;
+  color: var(--content-muted);
+  font-family: var(--mono);
+  font-size: 12px;
+}
+#tab-extractor .ex-tl.branch .ex-tk {
+  color: var(--content);
+  font-weight: 600;
+}
+#tab-extractor .ex-tv {
+  min-width: 0;
+}
+#tab-extractor .ex-tree.del .ex-tv .ex-w {
+  color: var(--danger);
+}
+#tab-extractor .ex-tree.add .ex-tv .ex-w {
+  color: var(--success);
+}
+#tab-extractor .ex-tl.absent .ex-tv {
+  color: var(--content-muted);
+  font-style: italic;
+}
+#tab-extractor .ex-tl.absent .ex-tv .ex-w {
+  color: inherit;
+}
+#tab-extractor .ex-tlabel-id {
+  color: var(--content-muted);
+  font-size: 12px;
+}
+#tab-extractor .ex-tcount {
+  color: var(--content-muted);
+  font-size: 11px;
+}
+
+/* Fenêtre étroite : les deux arbres l'un sous l'autre, le diff moins en retrait. */
+@media (max-width: 800px) {
+  #tab-extractor .ex-trees {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  #tab-extractor .ex-diff {
+    padding-left: 12px;
+  }
+}

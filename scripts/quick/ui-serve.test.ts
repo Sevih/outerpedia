@@ -20,6 +20,7 @@ const TABS = [
   'videos',
   'ranks',
   'gamedata',
+  'extractor',
   'character',
   'effects',
   'monsters',
@@ -69,7 +70,7 @@ describe('assemblePage — la coquille et ses onglets', () => {
     expect(() => assemblePage('<!-- @tab a -->', () => '<!-- @tab b -->')).toThrow(/illisible/);
   });
 
-  it('assemble la vraie page : quinze sections, plus aucun marqueur', () => {
+  it('assemble la vraie page : dix-sept sections, plus aucun marqueur', () => {
     expect(tabsOf(shell())).toEqual(TABS);
     const page = assemblePage(shell(), readTab);
     expect(page).not.toContain('@tab');
@@ -288,6 +289,12 @@ describe('shot — la page que le banc de captures photographie', () => {
     ]);
     expect(READ_ONLY_POSTS.has('/api/guides')).toBe(false);
     expect(READ_ONLY_POSTS.has('/api/guides/version')).toBe(false);
+  });
+
+  it('de l’extraction, ne relaie aucun POST : confirmer, appliquer, intégrer écrivent et committent', () => {
+    expect([...READ_ONLY_POSTS].filter((path) => path.startsWith('/api/extractor'))).toEqual([]);
+    expect(READ_ONLY_POSTS.has('/api/extractor/accept')).toBe(false);
+    expect(READ_ONLY_POSTS.has('/api/extractor/item')).toBe(false);
   });
 
   it('des monstres, ne relaie aucun POST : le roster et l’état d’un kit sont des GET', () => {
@@ -4667,6 +4674,7 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
     expect(page.all('#tabs [data-group="data"]').map((b) => b.dataset.tab)).toEqual([
       'ranks',
       'gamedata',
+      'extractor',
     ]);
 
     await page.gear();
@@ -8478,6 +8486,7 @@ describe('Tables du jeu — la page, sur le vrai markup', () => {
     ).toEqual([
       ['ranks', 'Rangs'],
       ['gamedata', 'Tables du jeu'],
+      ['extractor', 'Extraction'],
     ]);
     // La page s'ouvre sur le tableau de bord : ni catalogue ni passe sur les sources.
     expect(page.el('tab-gamedata').hidden).toBe(true);
@@ -11411,5 +11420,603 @@ describe('Guides — la page, sur le vrai markup', () => {
     await page.settle();
     expect(page.calls.filter((c) => c.path === '/api/guides/import')).toHaveLength(1);
     expect(page.el('journal-last').textContent).toContain('Contribution illisible : nope.json');
+  });
+});
+
+describe('Extraction — la page, sur le vrai markup', () => {
+  afterEach(() => {
+    vi.useRealTimers();
+    vi.unstubAllGlobals();
+  });
+
+  const EMPTY = { new: 0, diff: 0, minor: 0, typo: 0, removed: 0 };
+  const seg = (kind: 'same' | 'removed' | 'added', text: string, color?: string) => ({
+    kind,
+    text,
+    ...(color ? { color } : {}),
+  });
+  /** Les entités d'une cible, telles que le serveur les rend. */
+  const ENTITIES = [
+    {
+      key: '2000001',
+      name: 'Aer',
+      status: 'diff',
+      fields: 3,
+      diff: [
+        {
+          key: 'skills[#103]',
+          title: 'skills › Fire Strike · second',
+          fields: [
+            {
+              path: 'skills[#103].desc.en',
+              name: 'desc › en',
+              kind: 'text',
+              existing: [
+                seg('same', 'Deal '),
+                seg('removed', '30%', '#ff0000'),
+                seg('same', ' damage'),
+              ],
+              extracted: [
+                seg('same', 'Deal '),
+                seg('added', '50%', '#ff0000'),
+                seg('same', ' damage'),
+              ],
+            },
+          ],
+        },
+        {
+          key: 'costumes[#9]',
+          title: 'costumes › #9',
+          fields: [
+            {
+              path: 'costumes[#9]',
+              name: '(entier)',
+              kind: 'tree',
+              existing: [{ depth: 0, key: '', value: [seg('same', '(absent)')], absent: true }],
+              extracted: [
+                { depth: 0, key: 'id', value: [seg('same', '9')] },
+                { depth: 0, key: 'name', count: 1 },
+                { depth: 1, key: 'en', value: [seg('same', 'Summer')] },
+                { depth: 0, key: 'model', value: [seg('same', '2010009')], label: 'Summer skin' },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+    { key: '2000003', name: 'Lambda', status: 'new', fields: 0, diff: [] },
+    { key: '2000002', name: 'Old Hero', status: 'removed', fields: 0, diff: [] },
+    { key: '2000004', name: 'Rin', status: 'minor', fields: 1, diff: [] },
+  ];
+  const TARGETS = [
+    {
+      id: 'character',
+      label: 'Personnages',
+      file: 'characters.json',
+      site: false,
+      committed: 129,
+      buckets: { new: 1, diff: 1, minor: 1, typo: 0, removed: 1 },
+      actionable: 3,
+      soft: 1,
+    },
+    {
+      id: 'effect',
+      label: 'Effets',
+      file: 'glossaries.json',
+      site: false,
+      committed: 212,
+      buckets: EMPTY,
+      actionable: 0,
+      soft: 0,
+    },
+    {
+      id: 'monster',
+      label: 'Monstres',
+      file: 'monsters.json',
+      site: true,
+      committed: 2451,
+      buckets: { ...EMPTY, minor: 2 },
+      actionable: 0,
+      soft: 2,
+    },
+    {
+      id: 'item',
+      label: 'Items',
+      file: 'items.json',
+      site: false,
+      committed: 1208,
+      buckets: { ...EMPTY, new: 1, removed: 1 },
+      actionable: 2,
+      soft: 0,
+    },
+  ];
+  const ITEM_ENTITIES = [
+    { key: '15003', name: 'Stamina', status: 'new', fields: 0, diff: [] },
+    { key: '15002', name: 'Gone Gem', status: 'removed', fields: 0, diff: [] },
+  ];
+
+  interface Call {
+    path: string;
+    body?: unknown;
+  }
+
+  /**
+   * La page avec l'onglet « Extraction » : la coquille assemblée, `lib.js` et
+   * `extractor.js` chargés, `fetch` factice. `opts.tables` à faux : un poste
+   * sans tables du jeu. `opts.posted` : la réponse d'un geste.
+   */
+  async function extractor(
+    opts: { hash?: string; tables?: boolean; posted?: (body: unknown) => unknown } = {},
+  ) {
+    vi.resetModules();
+    const window = new Window({ url: `http://localhost:4747/${opts.hash ?? ''}` });
+    const { document } = window;
+    const page = assemblePage(shell(), readTab);
+    document.body.innerHTML = (/<body>([\s\S]*)<\/body>/.exec(page)?.[1] ?? '').replace(
+      /<script[\s\S]*?<\/script>/g,
+      '',
+    );
+    const tables = opts.tables ?? true;
+    const calls: Call[] = [];
+    const answer = (data: unknown) => {
+      const bytes = new TextEncoder().encode(JSON.stringify(data));
+      let read = false;
+      return {
+        ok: true,
+        json: async () => data,
+        body: {
+          getReader: () => ({
+            read: async () => (read ? { done: true } : ((read = true), { value: bytes })),
+          }),
+        },
+      };
+    };
+    const fetch = vi.fn(async (path: string, init?: { body?: string }) => {
+      const body: unknown = init?.body ? JSON.parse(init.body) : undefined;
+      const url = new URL(path, 'http://localhost:4747');
+      if (url.pathname.startsWith('/api/extractor')) calls.push(body ? { path, body } : { path });
+      if (url.pathname === '/api/extractor')
+        return answer({
+          tables,
+          ...(tables ? {} : { reason: 'Pas de données du jeu : lancer un patch (pull) d’abord.' }),
+          targets: tables
+            ? TARGETS
+            : TARGETS.map((t) => ({ ...t, buckets: EMPTY, actionable: 0, soft: 0 })),
+        });
+      if (url.pathname === '/api/extractor/target') {
+        const id = url.searchParams.get('id') ?? '';
+        const t = TARGETS.find((x) => x.id === id);
+        if (!t)
+          return {
+            ok: false,
+            status: 404,
+            json: async () => ({ error: `cible inconnue : ${id}` }),
+          };
+        const status = url.searchParams.get('status');
+        const q = (url.searchParams.get('q') ?? '').toLowerCase();
+        const all = id === 'item' ? ITEM_ENTITIES : id === 'character' ? ENTITIES : [];
+        if (!tables)
+          return answer({
+            id,
+            label: t.label,
+            file: t.file,
+            site: t.site,
+            tables: false,
+            reason: 'Pas de données du jeu : lancer un patch (pull) d’abord.',
+            buckets: EMPTY,
+            total: 0,
+            shown: 0,
+            entities: [],
+            was: '',
+          });
+        const entities = all
+          .filter((e) => !status || e.status === status)
+          .filter((e) => !q || e.name.toLowerCase().startsWith(q) || e.key.startsWith(q));
+        return answer({
+          id,
+          label: t.label,
+          file: t.file,
+          site: t.site,
+          tables: true,
+          buckets: t.buckets,
+          total: all.length,
+          shown: entities.length,
+          entities,
+          was: `sig:${id}:v1`,
+        });
+      }
+      if (url.pathname === '/api/extractor/accept' || url.pathname === '/api/extractor/item')
+        return answer(
+          opts.posted?.(body) ?? {
+            ok: true,
+            log: ['fait'],
+            git: { branch: 'main', ahead: 1, behind: 0 },
+          },
+        );
+      return answer({ imgBase: 'https://img.test', host: 'banc', port: 4747 });
+    });
+
+    vi.stubGlobal('window', window);
+    vi.stubGlobal('document', document);
+    vi.stubGlobal('location', window.location);
+    vi.stubGlobal('history', window.history);
+    vi.stubGlobal('fetch', fetch);
+    // `post()` annonce un commit par un `Event` sur `document` : celui du document.
+    vi.stubGlobal('Event', window.Event);
+
+    const lib = (await import(/* @vite-ignore */ resolve(UI, 'lib.js'))) as {
+      sections: { start: () => void; go: (tab: string) => void };
+    };
+    await import(/* @vite-ignore */ resolve(UI, 'tabs', 'extractor.js'));
+    lib.sections.start();
+    const settle = async () => {
+      for (let i = 0; i < 4; i++) await new Promise((done) => setTimeout(done, 0));
+    };
+    await settle();
+
+    const el = (id: string) => document.getElementById(id) as unknown as HTMLInputElement;
+    const all = (selector: string) =>
+      [...document.querySelectorAll(selector)] as unknown as HTMLElement[];
+    const fire = (target: HTMLElement, type: string) =>
+      target.dispatchEvent(new window.Event(type, { bubbles: true }) as unknown as Event);
+    return {
+      el,
+      all,
+      calls,
+      settle,
+      go: lib.sections.go,
+      hash: () => window.location.hash,
+      /** Les lignes de la vue d'ensemble : la cible, le fichier, ses comptes, « rien à revoir ». */
+      overview: () =>
+        all('#ex-tbody tr').map((tr) => ({
+          id: tr.dataset.id,
+          quiet: tr.classList.contains('ex-quiet'),
+          cells: [...tr.querySelectorAll('td')].map((td) => td.textContent?.trim()),
+        })),
+      /** Les entités dessinées : clé, badge, nom, « n champs », dépliée, geste d'item. */
+      rows: () =>
+        all('#ex-rows .ex-row').map((r) => ({
+          key: r.dataset.key,
+          badge: r.querySelector('.badge')?.textContent,
+          name: r.querySelector('.ex-name')?.textContent,
+          fields: r.querySelector('.ex-fields')?.textContent,
+          open: r.querySelector('.ex-toggle')?.getAttribute('aria-expanded') === 'true',
+          item: r.querySelector('[data-item]')?.textContent ?? null,
+        })),
+      open: (key: string) =>
+        all('#ex-rows .ex-toggle')
+          .find((b) => b.dataset.key === key)
+          ?.click(),
+      status: (value: string) =>
+        all('#ex-status button')
+          .find((b) => b.dataset.status === value)
+          ?.click(),
+      /** Cherche, et attend la réponse (200 ms après la dernière frappe). */
+      search: async (q: string) => {
+        vi.useFakeTimers();
+        el('ex-q').value = q;
+        fire(el('ex-q'), 'input');
+        await vi.advanceTimersByTimeAsync(200);
+        vi.useRealTimers();
+        await settle();
+      },
+      /** Le diff déplié d'une ligne : ses groupes, leurs champs, le texte des segments. */
+      diff: (key: string) => {
+        const r = all('#ex-rows .ex-row').find((x) => x.dataset.key === key);
+        return [...(r?.querySelectorAll('.ex-group') ?? [])].map((g) => ({
+          title: g.querySelector('.ex-gtitle')?.textContent,
+          fields: [...g.querySelectorAll('.ex-field')].map((f) => ({
+            name: f.querySelector('.ex-fname')?.textContent,
+            text: [...f.querySelectorAll('.ex-text')].map((t) =>
+              [...t.querySelectorAll('.ex-w')]
+                .map(
+                  (w) =>
+                    `${w.classList.contains('rm') ? '-' : w.classList.contains('ad') ? '+' : ''}${w.textContent}${(w as HTMLElement).style.color ? `{${(w as HTMLElement).style.color}}` : ''}`,
+                )
+                .join('|'),
+            ),
+            trees: [...f.querySelectorAll('.ex-tree')].map((t) =>
+              [...t.querySelectorAll('.ex-tl')].map(
+                (l) =>
+                  `${(l as HTMLElement).style.getPropertyValue('--d')}:${l.querySelector('.ex-tk')?.textContent ?? ''}${l.querySelector('.ex-tv')?.textContent ?? l.querySelector('.ex-tcount')?.textContent ?? ''}`,
+              ),
+            ),
+          })),
+        }));
+      },
+    };
+  }
+
+  it('le groupe Données a sa troisième section, en pleine largeur, et la vue d’ensemble s’y lit', async () => {
+    const page = await extractor({ hash: '#extractor' });
+    expect(page.all('#tabs [data-tab="extractor"]')[0].textContent).toBe('Extraction');
+    expect(page.all('#tabs [data-tab="extractor"]')[0].getAttribute('aria-selected')).toBe('true');
+    expect(page.all('main')[0].classList.contains('wide')).toBe(true);
+    expect(page.el('tab-extractor').hidden).toBe(false);
+    expect(page.el('ex-overview').hidden).toBe(false);
+    expect(page.el('ex-target').hidden).toBe(true);
+    expect(page.calls).toEqual([{ path: '/api/extractor' }]);
+    expect(page.el('ex-tables').textContent).toBe('tables du jeu présentes');
+    expect(page.overview()).toEqual([
+      {
+        id: 'character',
+        quiet: false,
+        cells: ['Personnages', 'characters.json', '1', '1', '1', '0', '1', '129', 'Ouvrir'],
+      },
+      {
+        id: 'effect',
+        quiet: true,
+        cells: [
+          'Effets',
+          'glossaries.json',
+          '0',
+          '0',
+          '0',
+          '0',
+          '0',
+          '212',
+          'rien à revoir Ouvrir',
+        ],
+      },
+      {
+        id: 'monster',
+        quiet: false,
+        cells: [
+          'Monstrespérimètre du site',
+          'monsters.json',
+          '0',
+          '0',
+          '2',
+          '0',
+          '0',
+          '2451',
+          'Ouvrir',
+        ],
+      },
+      {
+        id: 'item',
+        quiet: false,
+        cells: ['Items', 'items.json', '1', '0', '0', '0', '1', '1208', 'Ouvrir'],
+      },
+    ]);
+    expect(page.el('ex-ov-empty').hidden).toBe(true);
+  });
+
+  it('sans tables du jeu : la raison en badge, des zéros, et une cible se lit vide avec la raison', async () => {
+    const page = await extractor({ hash: '#extractor', tables: false });
+    expect(page.el('ex-tables').textContent).toBe(
+      'Pas de données du jeu : lancer un patch (pull) d’abord.',
+    );
+    expect(page.overview().map((r) => r.quiet)).toEqual([true, true, true, true]);
+    // Pas de « rien à revoir » quand rien n'a pu être lu.
+    expect(page.overview()[1].cells.at(-1)).toBe('Ouvrir');
+    page.all('[data-open="character"]')[0].click();
+    await page.settle();
+    expect(page.el('ex-target').hidden).toBe(false);
+    expect(page.el('ex-badges').textContent).toBe(
+      'Pas de données du jeu : lancer un patch (pull) d’abord.',
+    );
+    expect(page.el('ex-minor').hidden).toBe(true);
+    expect(page.el('ex-accept').hidden).toBe(true);
+    expect(page.el('ex-empty').hidden).toBe(false);
+    expect(page.el('ex-empty').textContent).toBe(
+      'Pas de données du jeu : lancer un patch (pull) d’abord.',
+    );
+  });
+
+  it('une cible : l’en-tête, ses gestes, les statuts comptés, les entités repliées, l’adresse', async () => {
+    const page = await extractor({ hash: '#extractor' });
+    page.all('[data-open="character"]')[0].click();
+    await page.settle();
+    expect(page.hash()).toBe('#extractor/character');
+    expect(page.calls.at(-1)).toEqual({ path: '/api/extractor/target?id=character' });
+    expect(page.el('ex-overview').hidden).toBe(true);
+    expect(page.el('ex-title').textContent).toBe('Personnages');
+    expect(page.el('ex-meta').textContent).toBe('data/generated/characters.json');
+    expect([...page.el('ex-badges').querySelectorAll('.badge')].map((b) => b.textContent)).toEqual([
+      '1 new',
+      '1 diff',
+      '1 minor',
+      '1 removed',
+    ]);
+    expect(page.el('ex-minor').hidden).toBe(false);
+    expect(page.el('ex-minor').textContent).toBe('Appliquer les retouches mineures (1)');
+    expect(page.el('ex-accept').hidden).toBe(false);
+    expect(
+      page
+        .all('#ex-status button')
+        .map((b) => `${b.dataset.status}:${b.textContent}:${b.getAttribute('aria-pressed')}`),
+    ).toEqual([
+      ':tout4:true',
+      'new:new1:false',
+      'diff:diff1:false',
+      'minor:minor1:false',
+      'typo:typo0:false',
+      'removed:removed1:false',
+    ]);
+    expect(page.el('ex-total').textContent).toBe('4 entités à revoir');
+    expect(page.rows()).toEqual([
+      { key: '2000001', badge: 'diff', name: 'Aer', fields: '3 champs', open: false, item: null },
+      { key: '2000003', badge: 'new', name: 'Lambda', fields: '', open: false, item: null },
+      { key: '2000002', badge: 'removed', name: 'Old Hero', fields: '', open: false, item: null },
+      { key: '2000004', badge: 'minor', name: 'Rin', fields: '1 champ', open: false, item: null },
+    ]);
+    expect(page.el('ex-foot').hidden).toBe(true);
+    // « ← Extraction » rend la vue d'ensemble, relue.
+    page.el('ex-back').click();
+    await page.settle();
+    expect(page.hash()).toBe('#extractor');
+    expect(page.el('ex-overview').hidden).toBe(false);
+    expect(page.calls.filter((c) => c.path === '/api/extractor')).toHaveLength(2);
+  });
+
+  it('les filtres sont joués au serveur : le statut, puis la recherche après la dernière frappe', async () => {
+    const page = await extractor({ hash: '#extractor/character' });
+    page.status('minor');
+    await page.settle();
+    expect(page.calls.at(-1)).toEqual({ path: '/api/extractor/target?id=character&status=minor' });
+    expect(page.rows().map((r) => r.key)).toEqual(['2000004']);
+    expect(page.el('ex-total').textContent).toBe('1 sur 4 entités');
+    expect(page.all('#ex-status button[aria-pressed="true"]')[0].dataset.status).toBe('minor');
+    page.status('');
+    await page.search('lam');
+    expect(page.calls.at(-1)).toEqual({ path: '/api/extractor/target?id=character&q=lam' });
+    expect(page.rows().map((r) => r.key)).toEqual(['2000003']);
+    await page.search('zzz');
+    expect(page.rows()).toEqual([]);
+    expect(page.el('ex-empty').hidden).toBe(false);
+    expect(page.el('ex-empty').textContent).toBe('Aucune entité ne correspond.');
+  });
+
+  it('une entité dépliée montre son diff : les groupes, un texte en mots colorés, deux arbres ; l’adresse la nomme', async () => {
+    const page = await extractor({ hash: '#extractor/character' });
+    page.open('2000001');
+    expect(page.hash()).toBe('#extractor/character/2000001');
+    expect(page.rows()[0].open).toBe(true);
+    expect(page.diff('2000001')).toEqual([
+      {
+        title: 'skills › Fire Strike · second',
+        fields: [
+          {
+            name: 'desc › en',
+            text: ['Deal |-30%{#ff0000}| damage', 'Deal |+50%{#ff0000}| damage'],
+            trees: [],
+          },
+        ],
+      },
+      {
+        title: 'costumes › #9',
+        fields: [
+          {
+            name: '(entier)',
+            text: [],
+            trees: [
+              ['0:(absent)'],
+              ['0:id:9', '0:name(1)', '1:en:Summer', '0:model:2010009 — Summer skin'],
+            ],
+          },
+        ],
+      },
+    ]);
+    // Le côté existant d'un côté vide est dit absent ; une branche n'a pas de valeur.
+    const tree = page.all('#ex-rows .ex-tree.del .ex-tl')[0];
+    expect(tree.classList.contains('absent')).toBe(true);
+    expect(page.all('#ex-rows .ex-tree.add .ex-tl.branch').map((l) => l.textContent)).toEqual([
+      'name(1)',
+    ]);
+    // Replier rend l'adresse de la cible, et la ligne reste.
+    page.open('2000001');
+    expect(page.hash()).toBe('#extractor/character');
+    expect(page.rows()[0].open).toBe(false);
+    expect(page.diff('2000001')).toEqual([]);
+    // Un replié n'a rien de dessiné ; la nouvelle n'a pas de diff.
+    page.open('2000003');
+    expect(page.diff('2000003')).toEqual([]);
+  });
+
+  it('« Confirmer l’extraction » dit d’abord ce qu’il va écrire, puis poste `all` avec `was` ; annuler ne poste rien', async () => {
+    const page = await extractor({ hash: '#extractor/character' });
+    page.el('ex-accept').click();
+    expect(page.el('ex-plan').hidden).toBe(false);
+    expect(page.el('ex-plan-text').textContent).toBe(
+      'Écrire l’extraction fraîche ENTIÈRE dans data/generated/characters.json : 1 entité nouvelle écrite, 2 entités modifiées (dont 1 mineure et 0 coquille) réécrites, 1 entité retirée SUPPRIMÉE — tout ou rien, puis un commit « chore(extractor): character — extraction confirmee ».',
+    );
+    page.el('ex-plan-cancel').click();
+    expect(page.el('ex-plan').hidden).toBe(true);
+    expect(page.calls.filter((c) => c.body)).toEqual([]);
+    page.el('ex-accept').click();
+    page.el('ex-plan-go').click();
+    await page.settle();
+    expect(page.el('ex-plan').hidden).toBe(true);
+    expect(page.calls.filter((c) => c.body)).toEqual([
+      {
+        path: '/api/extractor/accept',
+        body: { id: 'character', mode: 'all', was: 'sig:character:v1' },
+      },
+    ]);
+    // Le disque fait foi : la cible est relue après le geste.
+    expect(page.calls.at(-1)).toEqual({ path: '/api/extractor/target?id=character' });
+  });
+
+  it('« Appliquer les retouches mineures » poste `minor` sans confirmation ; le bilan d’images se lit après', async () => {
+    const page = await extractor({
+      hash: '#extractor/monster',
+      posted: () => ({
+        ok: true,
+        log: ['fait'],
+        git: { branch: 'main', ahead: 1, behind: 0 },
+        assets: {
+          staged: 2,
+          restaged: 0,
+          present: 1,
+          missing: [{ key: 'images/monsters/MT_x.webp', reason: 'absente du jeu' }],
+        },
+      }),
+    });
+    expect(page.el('ex-note').textContent).toMatch(/périmètre du SITE/);
+    expect(page.el('ex-accept').hidden).toBe(true); // rien d'actionnable : total 0
+    expect(page.el('ex-assets').hidden).toBe(true);
+    page.el('ex-minor').click();
+    await page.settle();
+    expect(page.calls.filter((c) => c.body)).toEqual([
+      {
+        path: '/api/extractor/accept',
+        body: { id: 'monster', mode: 'minor', was: 'sig:monster:v1' },
+      },
+    ]);
+    expect(page.el('ex-assets').hidden).toBe(false);
+    expect(page.el('ex-assets-text').textContent).toBe(
+      '2 produites, 0 refaite, 1 déjà là, 1 manquante.',
+    );
+    expect(page.all('#ex-assets-missing li').map((l) => l.textContent)).toEqual([
+      'images/monsters/MT_x.webp — absente du jeu',
+    ]);
+    // « Ouvrir Patch » renvoie à la section — un lien, pas un geste.
+    expect(page.all('#ex-assets [data-go="patch"]')).toHaveLength(1);
+    page.el('ex-assets-close').click();
+    expect(page.el('ex-assets').hidden).toBe(true);
+  });
+
+  it('les items : « Intégrer » ou « Retirer » par ligne, postés avec `was`', async () => {
+    const page = await extractor({ hash: '#extractor/item' });
+    expect(page.rows()).toEqual([
+      { key: '15003', badge: 'new', name: 'Stamina', fields: '', open: false, item: 'Intégrer' },
+      {
+        key: '15002',
+        badge: 'removed',
+        name: 'Gone Gem',
+        fields: '',
+        open: false,
+        item: 'Retirer',
+      },
+    ]);
+    expect(page.el('ex-note').textContent).toMatch(/un par un/);
+    page.all('[data-item="15002"]')[0].click();
+    await page.settle();
+    expect(page.calls.filter((c) => c.body)).toEqual([
+      { path: '/api/extractor/item', body: { key: '15002', was: 'sig:item:v1' } },
+    ]);
+  });
+
+  it('les trois formes de l’adresse : la cible, l’entité dépliée, et le chemin que le tableau de bord ouvre', async () => {
+    const entity = await extractor({ hash: '#extractor/character/2000001' });
+    expect(entity.el('tab-extractor').hidden).toBe(false);
+    expect(entity.el('ex-target').hidden).toBe(false);
+    expect(entity.rows()[0]).toMatchObject({ key: '2000001', open: true });
+    expect(entity.hash()).toBe('#extractor/character/2000001');
+
+    const page = await extractor();
+    expect(page.el('tab-extractor').hidden).toBe(true);
+    // Le tableau de bord : `sections.go('extractor/item')`, depuis une autre section.
+    page.go('extractor/item');
+    await page.settle();
+    expect(page.el('tab-extractor').hidden).toBe(false);
+    expect(page.el('ex-title').textContent).toBe('Items');
+    expect(page.hash()).toBe('#extractor/item');
+    // Déjà sur l'onglet : un autre chemin ouvre l'autre cible, sans quitter la section.
+    page.go('extractor/character');
+    await page.settle();
+    expect(page.el('ex-title').textContent).toBe('Personnages');
+    expect(page.hash()).toBe('#extractor/character');
   });
 });

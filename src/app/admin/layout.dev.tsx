@@ -1,6 +1,6 @@
 import { AdminSidebar, type NavSection } from '@/components/admin/AdminSidebar';
 import { assertDevOnly } from '@/lib/admin/guard';
-import { actionableCount, bucketsOf, EXTRACTOR_ENTITIES } from '@/lib/admin/admin-inbox';
+import { actionableCount, adminExtractorMenu, bucketsOf } from '@/lib/admin/admin-inbox';
 import { RootDocument } from '../root-document';
 
 // Outil local : jamais prérendu, 404 en prod.
@@ -34,9 +34,14 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const sections: NavSection[] = [
     {
       // Liste + ordre viennent d'`admin-inbox` (source unique, partagée avec la
-      // home) — le Monstre et l'Item ferment la liste (décision Sevih).
+      // home) — le Monstre et l'Item ferment la liste (décision Sevih). Effect,
+      // Armor et Item : portés dans quick (Données › Extraction, lot F20 — la
+      // revue par cible, l'acceptation, l'intégration des items), liens
+      // retirés le 12/10 ; les pages restent joignables par leur URL jusqu'au
+      // retrait de l'admin. Les sept autres restent jusqu'aux lots F21 et F22
+      // (fiches par entité, intégration, versionnage).
       title: 'Extractor',
-      items: EXTRACTOR_ENTITIES.map((e) => ({
+      items: adminExtractorMenu().map((e) => ({
         label: e.label,
         href: e.href,
         badge: badge(e.id),

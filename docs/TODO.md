@@ -64,11 +64,41 @@
       catégories mortes), Guide editor › General guides et Overview (la même
       section, lot F19 — les trois guides généraux à fragment éditable sous
       une même forme, et l'import de contribution ; le groupe « Guide
-      editor » quitte le menu de l'admin). Clos sans portage (lot A34) : Gear presets
+      editor » quitte le menu de l'admin), Extractor › revue par cible et
+      acceptation (section « Extraction » des Données, lot F20 — les dix
+      cibles, leurs entités et un diff lisible, « Confirmer l'extraction »,
+      les retouches mineures, « Intégrer » / « Retirer » un item ; les liens
+      Effect, Armor et Item quittent le menu de l'admin, les sept autres
+      attendent F21 — fiches et intégration — et F22 — versionnage). Clos sans portage (lot A34) : Gear presets
       (non porté, le fichier s'édite à la main) et Tag control (le contrôle
       est le test, bloquant dans `pnpm commit`).
       À faire par Sevih : remplir
       la colonne « Agacements » (en vrac) ; puis un lot par section.
+- [ ] **« Extraction » — contrôles à l'écran (lot F20)** : le banc ne
+      clique pas, aucun geste réel n'a été joué (le dépôt du jour n'a qu'un
+      perso nouveau sans nom, `2400015`, et aucun écart). Relancer quick
+      d'abord (Ctrl-C puis `pnpm quick` : quatre routes nouvelles). Au
+      prochain patch — Steam à jour, Patch › « Rafraîchir depuis le jeu »
+      d'abord, pour que `.gamedata` porte les tables neuves — : (1) la vue
+      d'ensemble contre l'inbox du Tableau de bord, mêmes comptes par cible
+      (les monstres au périmètre du site) ; « Ouvrir » d'un item
+      `extract:<cible>` du tableau arrive sur SA cible. (2) Une cible avec un
+      diff : une entité dépliée — les groupes par racine, un texte en mots
+      surlignés, un arbre pour un costume ajouté, un skill nommé ; le texte
+      doit se lire sans avoir à décoder du JSON. (3) « Appliquer les
+      retouches mineures (n) » → le journal dit « n retouches mineures et m
+      coquilles appliquées », puis « committé », `git log -1` =
+      `chore(extractor): <cible> — n retouches mineures` sur le seul fichier
+      de la cible ; la cible relue n'a plus que ses vrais écarts ; le bilan
+      d'images dans sa carte, puis Patch › « Committer » pousse le staging
+      (l'ancien item « B27 retouches mineures » renvoie ici). (4) « Confirmer
+      l'extraction » : le plan dit les comptes et le fichier AVANT, « Écrire
+      et committer » écrit le fichier entier, UN commit. (5) Un item
+      « Intégrer » → `chore(extractor): item <nom> (<clé>)`. (6) Rejouer un
+      geste sur une cible lue avant un refresh → « Rien n'est écrit — … ont
+      changé depuis la lecture », la cible relue. (7) Sur un poste sans
+      `.gamedata` : le badge ambre, des zéros, une cible vide avec la raison,
+      aucun bouton de geste.
 - [ ] **« Guides » › guides généraux et import — contrôles à l'écran (lot
       F19)** : le banc ne clique pas, aucun enregistrement réel n'a été
       joué, `/api/translate` jamais appelé avec des clés. Relancer quick
@@ -493,15 +523,13 @@
       dans quick ; `patch-runner.ts` et `patch-commands.ts` restent (quick
       les importe).
 - [ ] **Retouches mineures des monstres et de l'équipement (lot B27)** : au
-      premier patch qui en apporte, `/admin/extractor/monsters` — cases Diff
-      et Minor, « Apply minor changes (n) », badge `minor` discret dans la
-      sidebar — puis le bouton, sur les monstres ou une page d'équipement :
-      le message doit finir par le bilan d'images
-      (`images: … produced, … already there`). Idem à
-      `pnpm datagen:promote --apply` : une ligne
+      premier patch qui en apporte, le contrôle se joue désormais dans quick,
+      section « Extraction » (point 3 de « contrôles à l'écran (lot F20) »
+      ci-dessus : la cible Monstres ou une cible d'équipement, « Appliquer les
+      retouches mineures (n) », le bilan d'images). Reste à vérifier à part :
+      `pnpm datagen:promote --apply` écrit une ligne
       `images : monsters.json — n entité(s) validée(s) modifiée(s) — …` par
-      fichier touché. Page jamais vue à l'écran par l'agent (pas de serveur
-      de dev) : entrée DONE du lot B27 (06/10).
+      fichier touché. Entrée DONE du lot B27 (06/10).
 - [ ] **Rapport des effets de portrait (lot F12)** : au premier patch qui
       apporte un effet, contrôler la dernière ligne du refresh (« ◆ Portraits
       animés — à lire ») — l'effet y est nommé avec ses porteurs, « servi tel

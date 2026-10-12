@@ -1,0 +1,115 @@
+<section id="tab-extractor" hidden>
+  <div class="head">
+    <h2>Extraction</h2>
+    <p class="hint">
+      Le jeu a bougé : ce que l'extraction fraîche — bâtie des tables du jeu de ce poste —
+      changerait à ce que le site committe (data/generated/), cible par cible, entité par entité.
+      Rien ne se lit sans les tables. Un geste écrit le fichier et committe ; les images qu'il met
+      en place attendent dans le staging, que « Committer » de la section Patch pousse. Rien ne part
+      en ligne avant « Pousser » et le build de la CI.
+    </p>
+  </div>
+
+  <!-- La vue d'ensemble (`#extractor`) : les dix cibles et leurs comptes. -->
+  <div id="ex-overview">
+    <div class="card" aria-label="Cibles">
+      <div class="card-head">
+        <strong>Dix cibles</strong>
+        <span class="ex-badges" id="ex-tables"></span>
+        <button class="btn ghost sm ex-end" id="ex-refresh">Actualiser</button>
+      </div>
+      <div class="scroll">
+        <table id="ex-targets" aria-label="Les cibles de l'extraction">
+          <thead>
+            <tr>
+              <th>Cible</th>
+              <th>Fichier committé</th>
+              <th class="ex-n">Nouvelles</th>
+              <th class="ex-n">Écarts</th>
+              <th class="ex-n">Mineures</th>
+              <th class="ex-n">Coquilles</th>
+              <th class="ex-n">Retirées</th>
+              <th class="ex-n">Committées</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="ex-tbody"></tbody>
+        </table>
+      </div>
+      <div class="empty" id="ex-ov-empty">Lecture…</div>
+    </div>
+  </div>
+
+  <!-- Une cible (`#extractor/<cible>`) : ses gestes, ses filtres, ses entités. -->
+  <div id="ex-target" hidden>
+    <div class="card pad ex-head" aria-label="Cible">
+      <div class="ex-who">
+        <button class="btn ghost sm" id="ex-back" type="button">← Extraction</button>
+        <div class="ex-id">
+          <strong id="ex-title"></strong>
+          <span class="ex-meta" id="ex-meta"></span>
+          <span class="ex-badges" id="ex-badges"></span>
+        </div>
+        <div class="ex-acts">
+          <button class="btn ghost" id="ex-minor" type="button" hidden></button>
+          <button class="btn primary" id="ex-accept" type="button" hidden>
+            Confirmer l'extraction
+          </button>
+        </div>
+      </div>
+      <p class="hint" id="ex-note"></p>
+      <!-- Ce que « Confirmer l'extraction » va faire, et sa confirmation. -->
+      <div class="ex-plan" id="ex-plan" hidden>
+        <p id="ex-plan-text"></p>
+        <div class="actions">
+          <button class="btn danger" id="ex-plan-go" type="button">Écrire et committer</button>
+          <button class="btn ghost" id="ex-plan-cancel" type="button">Annuler</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Le bilan d'images du dernier geste : le staging, que Patch pousse. -->
+    <div class="card pad ex-assets" id="ex-assets" aria-label="Images" hidden>
+      <div class="card-head ex-assets-head">
+        <strong>Images mises en place</strong>
+        <button class="btn icon ex-end" id="ex-assets-close" aria-label="Fermer le bilan">✕</button>
+      </div>
+      <p id="ex-assets-text"></p>
+      <ul class="ex-missing" id="ex-assets-missing"></ul>
+      <p class="hint">
+        Elles attendent dans le staging (.assets-staging/) : « Committer » de la section Patch les
+        pousse sur R2 avec le commit de publication — rien ne part d'ici.
+        <button class="btn ghost sm" type="button" data-go="patch">Ouvrir Patch</button>
+      </p>
+    </div>
+
+    <div class="card pad" aria-label="Recherche et filtres">
+      <div class="form">
+        <div class="field">
+          <label for="ex-q">Chercher</label>
+          <input
+            id="ex-q"
+            type="search"
+            class="w-search"
+            placeholder="Début d'un mot du nom, ou la clé"
+            autocomplete="off"
+          />
+        </div>
+        <div class="field">
+          <span class="lbl" id="ex-status-label">Statut</span>
+          <div class="ex-seg" id="ex-status" role="group" aria-labelledby="ex-status-label"></div>
+        </div>
+        <span class="lbl ex-total" id="ex-total"></span>
+      </div>
+    </div>
+
+    <div class="card ex-list" aria-label="Entités">
+      <div class="ex-rows" id="ex-rows"></div>
+      <div class="empty" id="ex-empty" hidden>Aucune entité ne correspond.</div>
+      <div class="card-foot" id="ex-foot" hidden>
+        <span class="lbl" id="ex-shown"></span>
+        <button class="btn ghost sm" id="ex-more" type="button"></button>
+      </div>
+    </div>
+  </div>
+</section>

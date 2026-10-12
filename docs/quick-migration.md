@@ -69,8 +69,9 @@ dry-run EST la revue, décision Sevih ; la garde perso de `promote.ts` tient),
 (`acquirePatchJob`), que « Pousser » prend aussi ; « Arrêter » coupe le
 travail en cours. Portage de la `PatchCard` COMPLET côté gestes, mais son
 lien reste dans l'admin tant que le cycle n'a pas été joué une fois dans
-quick — cf. TODO ; la revue par entité et l'intégration, étapes 19 et 20,
-restent dans l'admin).
+quick — cf. TODO ; la revue par cible est l'étape 19, section « Extraction »
+des Données ; les fiches et l'intégration par entité, étape 20, restent dans
+l'admin).
 Publication : Codes promo (= Tools › Promo code ; lien retiré du menu admin le
 08/10 — quick ajoute et supprime un code, mais ne RETOUCHE pas un code
 existant, période ou récompenses : supprimer puis recréer, ou lot A pour
@@ -85,7 +86,29 @@ l'historique, le perso cherché dans le roster donne le titre en six langues,
 la puce et le slug), « Traduire » par entrée, et sous la fiche l'APERÇU de la
 carte de `/changelog` dans la langue choisie ; lien retiré du menu admin le
 08/10), 4-comics, Vidéos, Discord.
-Données : Rangs, Tables du jeu (= Tools › Game data, étape 8, lot B38 : les
+Données : Rangs, Extraction (= Extractor › la revue de chaque cible et son
+acceptation, étape 19, lot F20 : la vue d'ensemble des dix cibles avec leurs
+cinq comptes — ceux de l'inbox, les monstres au périmètre du site — et leur
+fichier committé ; une cible ouverte, ses entités par statut (new · diff ·
+minor · typo · removed), recherche par début de mot sur le nom et la clé,
+REPLIÉES, cent à la fois ; une entité dépliée montre son diff LISIBLE : les
+champs groupés par racine et par élément identifié (« skills › Fire
+Strike »), un texte contre un texte en diff de mots (`diff-words.ts`, la
+règle de `DiffHighlight`, que l'admin importe désormais), toute autre valeur
+en deux arbres (`diff-tree.ts`), « (absent) » pour un côté vide, les balises
+`<color>` du jeu rendues en couleur. Les gestes COMMITTENT : « Confirmer
+l'extraction » (`acceptTarget`, le fichier entier, tout ou rien — un plan en
+clair puis confirmation), « Appliquer les retouches mineures (n) »
+(`acceptMinor`), et pour les items « Intégrer » / « Retirer » par ligne
+(`integrateItem`) ; chaque geste porte `was`, la signature des tables et du
+fichier que l'écran a vus, et refuse `stale` sinon ; le bilan d'images se
+lit après, avec un lien vers Patch, dont « Committer » pousse le staging.
+Sans `.gamedata` rien ne se lit et l'écran le dit. Hash `#extractor`,
+`#extractor/<cible>`, `#extractor/<cible>/<clé>`. Les dix items
+`extract:<id>` du Tableau de bord ouvrent leur cible ici. Liens Effect,
+Armor et Item retirés du menu admin le 12/10 — les sept autres restent
+jusqu'à F21 (fiches et intégration) et F22 (versionnage)), Tables du jeu (=
+Tools › Game data, étape 8, lot B38 : les
 tables brutes de `.gamedata/parsed/`, en lecture seule — un champ de recherche
 à la place de la liste latérale, ses suggestions rangées par USAGE : les
 tables que le code lit d'abord, avec les fichiers qui les lisent et la
@@ -234,7 +257,8 @@ C10) → 7 Changelog (fait, B37) → 8 Game data (fait, B38) → 9 à 15 Éditeu
 Con ; 10 Effect fait, B41 ; 11 EE fait, B43 ; 12 Monster fait, C12 ; 13 Item
 fait, B44 ; 14 Gear presets non porté et 15 Tag control fait autrement, A34) →
 16 Guides de boss (fait, F18) → 17 Guides généraux (fait, F19) →
-19 et 20 Extractor (revue par entité, intégration) → 6 Events (décision Sevih
+19 Extractor › revue (fait, F20) → 20 Extractor › fiches, intégration et
+versionnage (F21, F22) → 6 Events (décision Sevih
 du 08/10 : tout dernier, un seul événement publié à ce jour) → 22 Clôture. La
 numérotation des étapes ne change pas.
 
@@ -243,8 +267,9 @@ numérotation des étapes ne change pas.
 - **21 Patch** — FAIT, lot C10 (cf. « Déjà dans quick ») : la chaîne
   `datagen/refresh.ts`, la promotion et le commit, lancés de la section
   « Patch » du groupe Accueil. Les persos non intégrés restent gardés :
-  l'intégration par entité (19, 20) reste dans l'admin tant qu'elle n'est
-  pas portée, et son lien reste.
+  l'intégration par entité (20) reste dans l'admin tant qu'elle n'est
+  pas portée, et son lien reste ; la revue par cible (19) est dans quick
+  depuis F20.
 
 ## Ordre et inventaire
 
@@ -430,9 +455,18 @@ Chaque entrée : l'écran admin, ce qu'il contient, puis la ligne
     était vide : l'inbox est portée telle quelle. L'entrée reste pour que la
     numérotation des suivantes ne bouge pas.
 
-19. **Extractor › revue par entité**
+19. **Extractor › revue par entité** — FAIT pour la REVUE PAR CIBLE et
+    l'acceptation, lot F20 : la section « Extraction » (groupe Données, cf.
+    « Déjà dans quick »). L'agacement de Sevih y est corrigé : plus de
+    `JSON.stringify` sur une ligne — chaque champ sous sa racine, le texte en
+    diff de mots, le reste en deux arbres. Les pages de revue pure de l'admin
+    (effects, armors, items) quittent son menu ; les fiches par entité
+    (perso, équipement, monstre avec `MonsterStatsCard`) sont le lot F21.
+    L'entrée reste pour que la numérotation ne bouge pas.
     `ExtractorReview`, `EntityDiffPanel`, `DiffHighlight`, `EntitySwitch` — Character, Effect, EE, Weapons, Amulet, Armor, Talisman, Sets, Monster, Item ; pour un monstre, `MonsterStatsCard` (ses stats, en lecture — cf. la correction de l'étape 12)
-    - Agacements : ui pas joli
+    - Agacements : ui pas joli — corrigé pour la revue : le diff lisible
+      (`diff-tree.ts`, `diff-words.ts`), les entités repliées par défaut et
+      paginées, les gestes avec leur plan et leur confirmation.
 
 20. **Extractor › intégration**
     `IntegrateCharacterButton`, `IntegrateGearButton`, `IntegrateModeButton`, `AcceptTargetButton`, `ContributionImport` ; pour un monstre, `MonsterActions` (Save, « Version » — cf. la correction de l'étape 12)

@@ -7,6 +7,130 @@
 
 ## 2026-10-12
 
+- **quick : section « Extraction » — la revue par cible, un diff lisible,
+  l'acceptation et les items committés (lot F20, étape 19 de la migration,
+  premier de trois sur l'extractor)** — la revue de maintenance de l'admin
+  (`datagen/extractor/review.ts` : une extraction FRAÎCHE bâtie en mémoire
+  depuis `.gamedata` contre ce que `data/generated/` committe, dix cibles)
+  est portée dans quick, groupe Données après « Tables du jeu », `wide`,
+  hash `#extractor`, `#extractor/<cible>`, `#extractor/<cible>/<clé>`.
+  L'agacement de Sevih (« ui pas joli ») tenait au `JSON.stringify` sur une
+  ligne d'`EntityDiffPanel` : il est corrigé par un diff en ARBRE. **Ce qui
+  descend dans `src/lib/admin/` (testé)** : `diff-words.ts` — la règle de
+  `DiffHighlight.tsx` (appariement glouton à fenêtre de vingt mots, balises
+  `<color=#…>` retirées pour comparer et rendues par segment) en segments
+  `{kind: same|removed|added, text, color?}`, que `DiffHighlight.tsx` importe
+  désormais (mêmes spans, mêmes classes : rendu inchangé) ; `diff-tree.ts` —
+  un `FieldDiff[]` groupé par racine ET par élément identifié
+  (`skills[#102].desc.en` sous « skills › Fire Strike · active », le libellé
+  par `diffLabels`), une chaîne contre une chaîne en diff de mots sauf si l'un
+  des deux est un id résolu, toute autre valeur en lignes d'arbre (une par
+  clé, les listes par rang ou par `#id`, les branches avec leur compte,
+  « (absent) » pour un côté vide, les scalaires avec leur couleur du jeu, un
+  id suivi de son libellé) ; `admin-inbox.ts` gagne `EXTRACTOR_IN_QUICK`
+  (effect, armor, item) et `adminExtractorMenu()`, que `layout.dev.tsx` lit
+  — l'inbox et `bucketsOf` gardent les dix (testé). **Serveur**
+  (`actions.ts`, quatre routes dans `server.ts`, `EXTRACTOR_DEPS` tout
+  injecté : les tables, les cibles, `bucketsOf`, `reviewTarget`,
+  `reviewEntities`, `actionableDiff`, `targetBuild`, le committé du disque,
+  les résolveurs, la signature, `acceptTarget`, `acceptMinor`,
+  `integrateItem`, `commitPaths` — le moteur, qui ouvre les tables, est
+  importé à la demande comme pour l'inbox) : `extractorOverview()` →
+  `GET /api/extractor` (les dix cibles dans l'ordre de l'admin, les comptes de
+  l'inbox — mémoïsés, les monstres au périmètre du site —, le fichier et le
+  nombre d'entités committées ; sans `.gamedata`, `tables: false` et
+  `NO_GAME_DATA`, le moteur jamais appelé) ; `extractorTarget(id, {status,
+q})` → `GET /api/extractor/target?id=&status=&q=` (les entités classées et
+  nommées — le frais d'abord, le committé pour un disparu, le nom d'affichage
+  d'un perso surnom compris —, filtrées par statut et par la règle d'Effets
+  sur le nom et la clé, triées comme la sidebar de l'admin : diff, new,
+  removed, puis minor et typo, les plus touchées d'abord, puis par clé ;
+  chacune avec son diff en arbre, les skills d'un perso ou d'un monstre
+  résolus par `skillLabel` sur le frais ∪ le committé, mémoïsés sur les dates
+  des tables et du fichier ; `was` = date des tables + du fichier committé —
+  et du curé des items pour la cible item — sans le délai de `fileStamp`) ;
+  `acceptExtraction(id, {mode, was})` → `POST /api/extractor/accept` et
+  `integrateItemAction(key, was)` → `POST /api/extractor/item`, via
+  `withGit` : REFUS AVANT D'ÉCRIRE sans tables ou si `was` a bougé
+  (`stale: true`, la page relit), puis `acceptTarget` (le fichier entier),
+  `acceptMinor` (rien à appliquer = pas de commit) ou `integrateItem`
+  (`removed` quand l'id a disparu du frais), le bilan d'images
+  (`StageResult`) en lignes de journal — « le staging part avec
+  « Committer » de la section Patch » —, UN `commitPaths` :
+  `chore(extractor): <cible> — extraction confirmee`, `… — n retouches
+mineures`, `chore(extractor): item <nom> (<clé>)`. `ADMIN_TO_QUICK` gagne
+  les dix hrefs de `EXTRACTOR_ENTITIES` → `extractor/<cible>` : les items
+  `extract:<id>` de l'inbox deviennent `inQuick`, le lien « dans l'admin ↗ »
+  disparaît pour eux. **`lib.js`** : `sections.go` accepte un CHEMIN
+  (`extractor/character`) — ouvre la section de son premier segment, laisse
+  le chemin entier dans l'adresse avant `open()`, et rejoue `open()` quand
+  la section est déjà à l'écran ; le bouton « Ouvrir » du tableau de bord
+  suffit donc tel quel. **La page** (`tabs/extractor.{html,js,css}`, préfixe
+  `ex-`) : la vue d'ensemble en table (cible, fichier en chasse fixe, cinq
+  comptes en chiffres tabulaires teintés — un zéro effacé —, committées,
+  « rien à revoir » atténué, « périmètre du site » sous Monstres, la ligne
+  ouvre la cible ; badge « tables du jeu présentes » ou la raison en ambre,
+  « Actualiser ») ; une cible : son en-tête (← Extraction, libellé, fichier,
+  badges des comptes, la règle de la cible en `hint`), à droite « Appliquer
+  les retouches mineures (n) » et « Confirmer l'extraction » (cachés à zéro,
+  éteints pendant un geste), le PLAN de la confirmation dans un cadre rouge
+  — les comptes et le fichier en clair, « Écrire et committer » /
+  « Annuler » — pour « Confirmer l'extraction » seul (les retouches et un
+  item partent sans confirmation, leur plan est la ligne en cours du
+  journal), le bilan d'images dans sa carte après un geste (produites,
+  refaites, déjà là, manquantes listées, « Ouvrir Patch »), la recherche
+  (200 ms après la dernière frappe) et le statut en groupe segmenté avec son
+  compte, les entités REPLIÉES par pages de 100 (badge, nom, clé, « n
+  champs », chevron ; « Intégrer » / « Retirer » par ligne pour les items),
+  une entité dépliée montre son diff : un groupe par racine, le chemin du
+  champ en chasse fixe, un texte en deux bandes l'une SOUS l'autre (un mot à
+  mot se lit en colonne), un arbre en deux colonnes CÔTE À CÔTE (deux listes
+  de clés se comparent en face à face ; l'une sous l'autre sous 800 px) —
+  c'est le choix de forme du lot. Jamais `dirty` : rien ne se saisit. Les
+  filtres sont joués au serveur (la cible est relue à chaque filtre : c'est
+  ce que la décision demandait, et le diff entier part à chaque lecture —
+  acceptable en local, à surveiller sur Monstres). `docs/quick-migration.md`
+  (19 FAIT pour la revue, F21 et F22 restent), `STYLE.md` (croquis
+  « Extraction », préfixe `ex-`), TODO (contrôles à l'écran au prochain
+  patch ; « B27 retouches mineures » renvoie ici). **Choix du lot** : les
+  noms des entités viennent de l'entrée elle-même (`name.en` du frais puis du
+  committé, `characterDisplayName` pour un perso) plutôt que des familles
+  d'`equipment-review.ts` — toutes les cibles portent `name`, et un nom par
+  id est plus juste qu'un nom de famille ; la cible item signe aussi le curé
+  des items (le catalogue frais le lit) ; les messages de commit prennent
+  l'id de la cible (`character`, `monster`), pas son libellé. **Vérifié** :
+  `pnpm typecheck` vert (sortie vide), `pnpm lint` vert (sortie vide),
+  `pnpm test` « Test Files 216 passed (216) · Tests 3570 passed (3570) »,
+  `NODE_ENV=development pnpm exec vitest run scripts/quick src/lib/admin`
+  « 54 passed · 1478 passed ». Tests : `diff-words.test.ts` (13),
+  `diff-tree.test.ts` (13), `admin-inbox.test.ts` (le menu filtré, l'inbox
+  entière), `actions.test.ts` (la vue d'ensemble avec et sans tables, la
+  cible nommée et triée, le diff en arbre d'un costume ajouté et d'une liste
+  de skills, les filtres, le périmètre site des monstres, `stale`, accept
+  all/minor à moteur et git factices, item intégré et retiré, les refus,
+  un commit qui échoue — le diff par `diffRecords`, le cœur pur du moteur),
+  `ui-serve.test.ts` (la page en happy-dom : vue d'ensemble, sans tables,
+  cible, filtres au serveur, dépliage et markup du diff, le plan et la
+  confirmation, les retouches et le bilan d'images, les items, les trois
+  formes du hash et `sections.go` par chemin ; `READ_ONLY_POSTS` sans les
+  deux POST ; dix-sept sections). Banc : quick ISOLÉ sur :4790 (clés
+  vidées), `shot.mjs --tabs extractor` avec `--hash extractor`,
+  `extractor/character`, `extractor/item` — le dépôt du jour n'a qu'un perso
+  nouveau (`2400015`, sans nom) et aucun écart ; pour JUGER le diff, un faux
+  quick de banc (la vraie page et `/ui/*`, des réponses fabriquées par
+  `diffRecords` + `diffTree` sur deux dictionnaires) photographié sur
+  `extractor/character/2000001` : les groupes, le texte surligné avec ses
+  couleurs du jeu, l'arbre d'un costume ajouté, un skill nommé. Aucun POST
+  d'acceptation appelé (pas dans `READ_ONLY_POSTS`) : leurs refus sont
+  testés. **Laissé** : les fiches par entité (`#extractor/<cible>/<clé>`
+  déplie l'entité, F21 y mettra les fiches), l'intégration perso /
+  équipement / monstre / mode (F21), le versionnage (F22),
+  `EffectHiddenToggle`, les sept autres liens du menu admin ; les anciens
+  composants React de revue restent (l'admin les sert encore par leur URL).
+  Hors périmètre, repéré : `siteMonsterCounts` de `monster-review.ts` n'est
+  plus lu que par l'admin ; `freshMonsters()` de `monster-store.ts` relance
+  `buildMonsters()` sans la mémoïsation de `targets.ts` (quick passe par
+  `targetBuild`, pas par lui).
 - **Relecture F19 (Fable) — quick : les trois guides généraux sous une même
   forme et l'import de contribution, le menu « Guide editor » hors de
   l'admin, validé** — commit `84df70d7`, 18 fichiers, le message attendu, ni

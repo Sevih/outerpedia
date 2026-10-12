@@ -54,6 +54,7 @@ export const GROUPS = [
     sections: [
       { id: 'ranks', label: 'Rangs', wide: true },
       { id: 'gamedata', label: 'Tables du jeu', wide: true },
+      { id: 'extractor', label: 'Extraction', wide: true },
     ],
   },
   {
@@ -365,6 +366,10 @@ export const sections = {
   /**
    * Ouvre la section `tab`, groupe compris, comme un clic sur son onglet (la
    * section quittée peut refuser : `canLeave`). Sans effet avant `start`.
+   * Un CHEMIN (`extractor/character`) ouvre la section de son premier segment
+   * et lui laisse le chemin entier dans l'adresse avant son `open()` : une
+   * section qui lit son hash s'ouvre alors sur cet état — même si elle est
+   * déjà à l'écran.
    */
   go(tab) {
     goTo?.(tab);
@@ -391,12 +396,15 @@ export const sections = {
       document.querySelector('main').classList.toggle('wide', wide);
       current = tab;
     };
-    const go = (tab) => {
-      if (tab === current) return;
-      if (!(registry.get(current)?.canLeave?.() ?? true)) return;
-      show(tab);
-      // La section ouverte est dans l'adresse : recharger y revient.
-      history.replaceState(null, '', `#${tab}`);
+    const go = (path) => {
+      const tab = path.split('/')[0];
+      const within = tab === current && path !== tab;
+      if (tab === current && !within) return;
+      if (!within && !(registry.get(current)?.canLeave?.() ?? true)) return;
+      if (!within) show(tab);
+      // La section ouverte est dans l'adresse : recharger y revient. Un chemin
+      // y reste entier, pour la section qui le lit à son `open()`.
+      history.replaceState(null, '', `#${path}`);
       registry.get(tab)?.open?.();
     };
     goTo = go;

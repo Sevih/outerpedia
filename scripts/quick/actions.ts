@@ -292,6 +292,17 @@ import type {
   SkillPriority,
 } from '@contracts';
 import type { InboxItem } from '@/lib/admin/admin-inbox';
+import { diffLabels, skillLabel, type DiffResolvers } from '@/lib/admin/diff-labels';
+import { diffTree, type DiffGroup } from '@/lib/admin/diff-tree';
+import type {
+  DiffBuckets,
+  ReviewEntity,
+  ReviewEntityStatus,
+  TargetReview,
+} from '@/lib/admin/review-types';
+import type { IntegrateReport } from '@/lib/admin/review-store';
+import type { AcceptReport, MinorReport } from '@datagen/extractor/review';
+import type { StageResult } from '@datagen/assets/stage';
 import type { SynergyGroup } from '@datagen/curated/character';
 import type { EquipmentCuratedEntry } from '@datagen/curated/equipment';
 import { compactEffect } from '@datagen/curated/effects';
@@ -1111,9 +1122,10 @@ export const ADMIN_BASE_DEFAULT = 'https://outerpedia.local';
  * effets, celui des persos (la « Fiche perso », Gear reco compris), celui des
  * EE (son sous-onglet « EE »), celui des monstres (« Monstres »), celui des
  * items (« Items »), les outils Pro / Con et Synergy (deux autres
- * sous-onglets de la fiche) et l'éditeur des guides de boss (« Guides ») —
- * l'inbox, elle,
- * ne renvoie encore qu'à l'extractor, aux tags et aux données du jeu.
+ * sous-onglets de la fiche), l'éditeur des guides de boss (« Guides ») et les
+ * dix cibles de l'extractor (« Extraction », chacune sur SA cible :
+ * `extractor/<cible>`, un chemin que `sections.go` sait ouvrir) — l'inbox,
+ * elle, ne renvoie plus à l'admin que pour les tags et les données du jeu.
  */
 export const ADMIN_TO_QUICK: Readonly<Record<string, string>> = {
   '/admin/editor/characters': 'character',
@@ -1124,6 +1136,16 @@ export const ADMIN_TO_QUICK: Readonly<Record<string, string>> = {
   '/admin/editor/monsters': 'monsters',
   '/admin/tools/pros-cons': 'character',
   '/admin/tools/synergies': 'character',
+  '/admin/extractor/characters': 'extractor/character',
+  '/admin/extractor/effects': 'extractor/effect',
+  '/admin/extractor/ee': 'extractor/ee',
+  '/admin/extractor/weapons': 'extractor/weapon',
+  '/admin/extractor/amulets': 'extractor/amulet',
+  '/admin/extractor/armors': 'extractor/armor',
+  '/admin/extractor/talismans': 'extractor/talisman',
+  '/admin/extractor/sets': 'extractor/set',
+  '/admin/extractor/monsters': 'extractor/monster',
+  '/admin/extractor/items': 'extractor/item',
 };
 
 /**
@@ -6423,4 +6445,434 @@ export async function importContributionAction(
   }
   const commit = deps.commitPaths([...new Set(paths)], `chore(guides): import ${kind}`, report);
   return done(commit.ok, [...j.lines, ...commit.log]);
+}
+
+// ------------------------------------------------------------- extraction ----
+//
+// La section « Extraction » (lot F20, étape 19 de la migration) : la REVUE de
+// maintenance de l'admin (`datagen/extractor/review.ts` — une extraction
+// FRAÎCHE bâtie en mémoire depuis `.gamedata` contre ce que `data/generated/`
+// committe), cible par cible, puis ses gestes : confirmer l'extraction d'une
+// cible, appliquer ses retouches mineures, intégrer ou retirer un item. Dans
+// l'admin ces gestes écrivaient et disaient « commit via git » ; ici ils
+// COMMITTENT, comme tout quick. Le moteur pèse (il ouvre les tables du jeu) :
+// il est importé à la demande, comme l'inbox du tableau de bord.
+
+/** Une cible de l'extractor : la ligne de `datagen/extractor/targets.ts` que quick montre. */
+export interface ExtractorTargetInfo {
+  id: string;
+  label: string;
+  /** Relatif à `data/generated/`. */
+  file: string;
+  /** Le sous-objet d'un fichier partagé (les effets sous `glossaries.json`). */
+  subKey?: string;
+}
+
+/** Ce qu'une cible a à revoir, les cinq comptes de l'admin. */
+export type ExtractorBuckets = DiffBuckets;
+
+/** Une entité de la revue, nommée, son diff prêt à poser. */
+export interface ExtractorEntityRow {
+  key: string;
+  name: string;
+  status: ReviewEntityStatus;
+  /** Le nombre de feuilles qui divergent (zéro pour une nouvelle ou une disparue). */
+  fields: number;
+  diff: DiffGroup[];
+}
+
+export type ExtractorMode = 'all' | 'minor';
+
+/** Les lectures et les écritures de la section, injectées : le moteur de revue, le disque, git. */
+export interface ExtractorDeps {
+  /** Les tables du jeu sont sur ce poste (sans elles, rien ne se lit ni ne s'écrit). */
+  tables: () => boolean;
+  /** Les dix cibles, dans l'ordre de l'admin (`EXTRACTOR_ENTITIES`). */
+  targets: () => Promise<ExtractorTargetInfo[]>;
+  /** `bucketsOf` de l'admin : mémoïsé, tolérant (zéro partout sans extraction). */
+  bucketsOf: (id: string) => Promise<DiffBuckets>;
+  /** `reviewTarget` : le committé contre l'extraction fraîche. */
+  review: (id: string) => Promise<TargetReview>;
+  /** `reviewEntities` : le diff aplati en entités classées. */
+  entities: (diff: TargetReview['diff']) => Promise<ReviewEntity[]>;
+  /** `actionableDiff` : les monstres restreints au périmètre du site. */
+  actionable: (id: string, diff: TargetReview['diff']) => Promise<TargetReview['diff']>;
+  /** `targetBuild` : l'extraction fraîche d'une cible (clé → entité). */
+  fresh: (id: string) => Promise<Record<string, unknown>>;
+  /** Le committé d'une cible, lu du disque (`{}` s'il manque). */
+  committed: (target: ExtractorTargetInfo) => Record<string, unknown>;
+  /** Les résolveurs d'ids d'une cible (`diff-labels`) : les skills d'un perso, d'un monstre. */
+  resolvers: (id: string) => Promise<DiffResolvers>;
+  /** La signature de ce que l'écran a vu : les tables et le fichier committé. */
+  signature: (target: ExtractorTargetInfo) => string;
+  acceptTarget: (id: string) => Promise<AcceptReport>;
+  acceptMinor: (id: string) => Promise<MinorReport>;
+  integrateItem: (key: string) => Promise<IntegrateReport>;
+  commitPaths: (paths: string[], message: string, report?: Report) => Outcome;
+}
+
+const EXTRACTOR_EMPTY: DiffBuckets = { new: 0, diff: 0, minor: 0, typo: 0, removed: 0 };
+const GENERATED_DIR = 'data/generated';
+
+/** Le moteur de revue, importé à la demande : il ouvre les tables du jeu. */
+const reviewEngine = () => import('@/lib/admin/review-store');
+
+/** Un JSON de `data/generated/`, du disque ; `{}` s'il manque. */
+function readGeneratedJson(file: string): Record<string, unknown> {
+  const path = resolve(GENERATED_DIR, file);
+  if (!existsSync(path)) return {};
+  return JSON.parse(readFileSync(path, 'utf8')) as Record<string, unknown>;
+}
+
+/** La date d'un fichier, `absent` s'il manque — sans le délai de `fileStamp`. */
+function mtimeOf(path: string): string {
+  const s = statSync(path, { throwIfNoEntry: false });
+  return s ? String(s.mtimeMs) : 'absent';
+}
+
+/**
+ * Les skills frais et committés d'une cible (perso ou monstre), pour nommer un
+ * id de skill dans un diff : l'id qui DISPARAÎT n'existe que côté committé,
+ * celui qui apparaît que côté extraction. Mémoïsés sur la date des tables et
+ * du fichier : `buildSkills` relit plusieurs tables.
+ */
+const skillsMemo = new Map<string, { stamp: string; skills: Record<string, unknown> }>();
+async function skillsOf(id: 'character' | 'monster'): Promise<Record<string, unknown>> {
+  const file = id === 'character' ? 'skills.json' : 'monster-skills.json';
+  const stamp = `${mtimeOf(tablePath('TextSystem'))}|${mtimeOf(resolve(GENERATED_DIR, file))}`;
+  const hit = skillsMemo.get(id);
+  if (hit && hit.stamp === stamp) return hit.skills;
+  const fresh =
+    id === 'character'
+      ? (await import('@datagen/generators/skills')).buildSkills().skills
+      : (await import('@datagen/generators/monster-skills')).buildMonsterSkills().skills;
+  const skills = { ...readGeneratedJson(file), ...fresh };
+  skillsMemo.set(id, { stamp, skills });
+  return skills;
+}
+
+/** Celles de la route : le moteur de l'admin, le disque, le vrai `commitPaths`. */
+export const EXTRACTOR_DEPS: ExtractorDeps = {
+  tables: () => existsSync(tablePath('TextSystem')),
+  targets: async () => {
+    const { EXTRACTOR_ENTITIES } = await import('@/lib/admin/admin-inbox');
+    const { getTarget } = await import('@datagen/extractor/targets');
+    return EXTRACTOR_ENTITIES.flatMap((e) => {
+      const t = getTarget(e.id);
+      return t
+        ? [{ id: t.id, label: t.label, file: t.file, ...(t.subKey ? { subKey: t.subKey } : {}) }]
+        : [];
+    });
+  },
+  bucketsOf: async (id) => (await import('@/lib/admin/admin-inbox')).bucketsOf(id),
+  review: async (id) => (await reviewEngine()).reviewTarget(id),
+  entities: async (diff) => (await reviewEngine()).reviewEntities(diff),
+  actionable: async (id, diff) =>
+    (await import('@/lib/admin/monster-review')).actionableDiff(id, diff),
+  fresh: async (id) => (await reviewEngine()).targetBuild(id),
+  committed: (target) => {
+    const raw = readGeneratedJson(target.file);
+    if (!target.subKey) return raw;
+    const sub = raw[target.subKey];
+    return sub && typeof sub === 'object' ? (sub as Record<string, unknown>) : {};
+  },
+  resolvers: async (id): Promise<DiffResolvers> => {
+    if (id === 'character') {
+      const skills = await skillsOf('character');
+      const sets = readGeneratedJson('equipment/sets.json') as Record<
+        string,
+        { name?: LangDict } | undefined
+      >;
+      return {
+        skills: (sid) => skillLabel(skills[sid] as Parameters<typeof skillLabel>[0]),
+        recommendedSets: (sid) => sets[sid]?.name?.en,
+      };
+    }
+    if (id === 'monster') {
+      const skills = await skillsOf('monster');
+      return { skills: (sid) => skillLabel(skills[sid] as Parameters<typeof skillLabel>[0]) };
+    }
+    return {};
+  },
+  signature: (target) =>
+    [
+      mtimeOf(tablePath('TextSystem')),
+      mtimeOf(resolve(GENERATED_DIR, target.file)),
+      // Le catalogue d'items frais lit aussi le curé éditable.
+      ...(target.id === 'item' ? [mtimeOf(resolve(ITEMS_CURATED_PATH))] : []),
+    ].join('|'),
+  acceptTarget: async (id) => (await reviewEngine()).acceptTarget(id),
+  acceptMinor: async (id) => (await reviewEngine()).acceptMinor(id),
+  integrateItem: async (key) => (await reviewEngine()).integrateItem(key),
+  commitPaths,
+};
+
+/**
+ * Le nom d'une entité d'une cible, d'après son entrée : le nom d'affichage
+ * d'un perso (surnom ou « Core Fusion » compris), sinon `name.en`, sinon rien.
+ */
+function entityName(id: string, entry: unknown): string | undefined {
+  if (!isRecord(entry)) return undefined;
+  const name = entry.name;
+  if (typeof name === 'string') return name || undefined;
+  if (!isRecord(name)) return undefined;
+  if (id === 'character' && typeof name.en === 'string')
+    return characterDisplayName(entry as Parameters<typeof characterDisplayName>[0]) || undefined;
+  return typeof name.en === 'string' && name.en ? name.en : undefined;
+}
+
+/** Les comptes d'une liste d'entités classées. */
+function bucketsOfEntities(entities: ReviewEntity[]): DiffBuckets {
+  const b: DiffBuckets = { ...EXTRACTOR_EMPTY };
+  for (const e of entities) b[e.status]++;
+  return b;
+}
+
+const EXTRACTOR_STATUSES: readonly ReviewEntityStatus[] = [
+  'new',
+  'diff',
+  'minor',
+  'typo',
+  'removed',
+];
+
+/** Le rang de tri d'un statut : les vrais écarts d'abord, comme la sidebar de l'admin. */
+const statusRank = (s: ReviewEntityStatus): number =>
+  s === 'diff' ? 0 : s === 'new' ? 1 : s === 'removed' ? 2 : 3;
+
+/**
+ * La vue d'ensemble : les dix cibles, chacune avec ses cinq comptes (ceux de
+ * l'inbox — les monstres au périmètre du site), son fichier et le nombre
+ * d'entités committées. Sans tables du jeu sur le poste, les comptes sont à
+ * zéro et `tables` le dit avec sa raison : rien ne se lit.
+ */
+export async function extractorOverview(deps: ExtractorDeps = EXTRACTOR_DEPS) {
+  const tables = deps.tables();
+  const targets = await deps.targets();
+  const rows = [];
+  for (const t of targets) {
+    const buckets = tables ? await deps.bucketsOf(t.id) : EXTRACTOR_EMPTY;
+    rows.push({
+      id: t.id,
+      label: t.label,
+      file: t.file,
+      site: t.id === 'monster',
+      committed: Object.keys(deps.committed(t)).length,
+      buckets,
+      actionable: buckets.new + buckets.diff + buckets.removed,
+      soft: buckets.minor + buckets.typo,
+    });
+  }
+  return { tables, ...(tables ? {} : { reason: NO_GAME_DATA }), targets: rows };
+}
+
+/**
+ * Une cible ouverte : ses entités classées et nommées, triées comme la sidebar
+ * de l'admin (vrais écarts, nouvelles, disparues, puis retouches ; à statut
+ * égal les plus touchées d'abord, puis par clé), filtrées par `status` et par
+ * `q` (la règle d'Effets — chaque mot commence un mot — sur le nom et la clé),
+ * chacune avec son diff en arbre (`diffTree`, les ids résolus). Les monstres
+ * sont au périmètre du SITE, comme les comptes. `was` est la signature de ce
+ * que l'écran voit : un geste la renvoie, et refuse si elle a bougé.
+ */
+export async function extractorTarget(
+  id: string,
+  opts: { status?: string | null; q?: string | null } = {},
+  deps: ExtractorDeps = EXTRACTOR_DEPS,
+) {
+  const target = (await deps.targets()).find((t) => t.id === id);
+  if (!target) return { error: `cible inconnue : ${id}`, status: 404 } as const;
+  const base = { id: target.id, label: target.label, file: target.file, site: id === 'monster' };
+  if (!deps.tables())
+    return {
+      ...base,
+      tables: false as const,
+      reason: NO_GAME_DATA,
+      buckets: EXTRACTOR_EMPTY,
+      total: 0,
+      shown: 0,
+      entities: [] as ExtractorEntityRow[],
+      was: '',
+    };
+  const review = await deps.review(id);
+  const diff = await deps.actionable(id, review.diff);
+  const all = await deps.entities(diff);
+  const fresh = await deps.fresh(id);
+  const committed = deps.committed(target);
+  const nameOf = (key: string): string =>
+    entityName(id, fresh[key]) ?? entityName(id, committed[key]) ?? key;
+  const labels = diffLabels(
+    all.flatMap((e) => e.fields),
+    await deps.resolvers(id),
+  );
+  const status = EXTRACTOR_STATUSES.find((s) => s === opts.status);
+  const q = typeof opts.q === 'string' ? opts.q.trim() : '';
+  const named = all.map((e) => ({ ...e, name: nameOf(e.key) }));
+  const entities: ExtractorEntityRow[] = named
+    .filter((e) => !status || e.status === status)
+    .filter(
+      (e) => !q || effectMatches(effectHaystack({ id: e.key, keys: [], name: { en: e.name } }), q),
+    )
+    .sort(
+      (a, b) =>
+        statusRank(a.status) - statusRank(b.status) ||
+        b.fields.length - a.fields.length ||
+        a.key.localeCompare(b.key, undefined, { numeric: true }),
+    )
+    .map((e) => ({
+      key: e.key,
+      name: e.name,
+      status: e.status,
+      fields: e.fields.length,
+      diff: diffTree(e.fields, labels),
+    }));
+  return {
+    ...base,
+    tables: true as const,
+    buckets: bucketsOfEntities(all),
+    total: all.length,
+    shown: entities.length,
+    entities,
+    was: deps.signature(target),
+  };
+}
+
+/** Le bilan d'images d'une écriture, en lignes de journal. */
+function assetLines(assets: StageResult | undefined): string[] {
+  if (!assets) return [];
+  const lines = [
+    `images : ${assets.staged} produite${assets.staged > 1 ? 's' : ''}, ${assets.restaged} refaite${assets.restaged > 1 ? 's' : ''}, ${assets.present} déjà là${assets.missing.length ? `, ${assets.missing.length} manquante${assets.missing.length > 1 ? 's' : ''}` : ''} — le staging part avec « Committer » de la section Patch.`,
+  ];
+  for (const m of assets.missing) lines.push(`image manquante : ${m.key} — ${m.reason}`);
+  return lines;
+}
+
+export interface ExtractorOutcome extends Outcome {
+  /** L'écran a vu autre chose que le disque : relire. */
+  stale?: boolean;
+  assets?: StageResult | null;
+  typo?: number;
+  minor?: number;
+}
+
+/** La porte des gestes : les tables du jeu, puis la signature. */
+async function extractorGate(
+  id: string,
+  was: unknown,
+  deps: ExtractorDeps,
+): Promise<{ target: ExtractorTargetInfo } | { refused: ExtractorOutcome }> {
+  const target = (await deps.targets()).find((t) => t.id === id);
+  if (!target) return { refused: { ok: false, log: [`cible inconnue : ${id}`] } };
+  if (!deps.tables())
+    return { refused: { ok: false, log: [`Rien n’est écrit — ${NO_GAME_DATA}`] } };
+  if (was !== deps.signature(target))
+    return {
+      refused: {
+        ok: false,
+        stale: true,
+        log: [
+          `Rien n’est écrit — ${target.label} : les tables du jeu ou data/generated/${target.file} ont changé depuis la lecture, la cible est relue.`,
+        ],
+      },
+    };
+  return { target };
+}
+
+/**
+ * « Confirmer l'extraction » (`all` : `acceptTarget`, le fichier ENTIER
+ * réécrit — nouvelles et disparues comprises, tout-ou-rien) ou « Appliquer les
+ * retouches mineures » (`minor` : `acceptMinor`, les seules entités typo ou
+ * mineures fusionnées) d'une cible, puis UN commit du fichier. Refusé AVANT
+ * d'écrire sans tables du jeu, ou si l'écran a vu autre chose (`stale`). Les
+ * images des entités validées que l'écriture touche sont stagées par le
+ * moteur ; le bilan va au journal, et la section Patch pousse le staging.
+ */
+export async function acceptExtraction(
+  id: string,
+  body: { mode?: unknown; was?: unknown },
+  deps: ExtractorDeps = EXTRACTOR_DEPS,
+  report?: Report,
+): Promise<ExtractorOutcome> {
+  const mode: ExtractorMode = body.mode === 'minor' ? 'minor' : 'all';
+  const gate = await extractorGate(id, body.was, deps);
+  if ('refused' in gate) return gate.refused;
+  const { target } = gate;
+  const path = `${GENERATED_DIR}/${target.file}`;
+  const j = journal(report);
+  if (mode === 'all') {
+    j.doing(`${target.label} : écriture de l’extraction fraîche, entière, dans ${path}`);
+    const r = await deps.acceptTarget(id);
+    j.done(`${target.label} : extraction confirmée — ${path} réécrit en entier.`);
+    for (const l of assetLines(r.assets)) j.done(l);
+    const commit = deps.commitPaths(
+      [path],
+      `chore(extractor): ${id} — extraction confirmee`,
+      report,
+    );
+    return { ok: commit.ok, log: [...j.lines, ...commit.log], assets: r.assets ?? null };
+  }
+  j.doing(`${target.label} : retouches mineures dans ${path}`);
+  const r = await deps.acceptMinor(id);
+  const n = r.typo + r.minor;
+  if (!n)
+    return {
+      ok: true,
+      log: [`${target.label} : aucune retouche mineure à appliquer.`],
+      assets: null,
+      typo: 0,
+      minor: 0,
+    };
+  j.done(
+    `${target.label} : ${r.minor} retouche${r.minor > 1 ? 's' : ''} mineure${r.minor > 1 ? 's' : ''} et ${r.typo} coquille${r.typo > 1 ? 's' : ''} appliquées dans ${path}.`,
+  );
+  for (const l of assetLines(r.assets)) j.done(l);
+  const commit = deps.commitPaths(
+    [path],
+    `chore(extractor): ${id} — ${n} retouche${n > 1 ? 's' : ''} mineure${n > 1 ? 's' : ''}`,
+    report,
+  );
+  return {
+    ok: commit.ok,
+    log: [...j.lines, ...commit.log],
+    assets: r.assets ?? null,
+    typo: r.typo,
+    minor: r.minor,
+  };
+}
+
+/**
+ * « Intégrer » ou « Retirer » UN item de la revue (`integrateItem` : son entrée
+ * fraîche reportée dans `items.json` — créée, mise à jour, ou supprimée quand
+ * l'id a disparu du frais — et son icône stagée), puis UN commit. Même porte
+ * que les acceptations : tables du jeu, signature.
+ */
+export async function integrateItemAction(
+  key: unknown,
+  was: unknown,
+  deps: ExtractorDeps = EXTRACTOR_DEPS,
+  report?: Report,
+): Promise<ExtractorOutcome & { removed?: boolean }> {
+  const id = typeof key === 'string' ? key.trim() : '';
+  if (!id) return { ok: false, log: ['Aucun item.'] };
+  const gate = await extractorGate('item', was, deps);
+  if ('refused' in gate) return gate.refused;
+  const { target } = gate;
+  const fresh = await deps.fresh('item');
+  const committed = deps.committed(target);
+  if (!(id in fresh) && !(id in committed)) return { ok: false, log: [`item inconnu : ${id}`] };
+  const name = entityName('item', fresh[id]) ?? entityName('item', committed[id]) ?? id;
+  const removed = !(id in fresh);
+  const j = journal(report);
+  j.doing(`${name} (${id}) : ${removed ? 'retrait de' : 'intégration dans'} items.json`);
+  const r = await deps.integrateItem(id);
+  j.done(
+    `${name} (${id}) : ${removed ? 'retiré de' : 'intégré dans'} ${r.files.map((f) => `${GENERATED_DIR}/${f}`).join(', ')}.`,
+  );
+  for (const l of assetLines(r.assets)) j.done(l);
+  const commit = deps.commitPaths(
+    r.files.map((f) => `${GENERATED_DIR}/${f}`),
+    `chore(extractor): item ${name} (${id})`,
+    report,
+  );
+  return { ok: commit.ok, log: [...j.lines, ...commit.log], assets: r.assets, removed };
 }

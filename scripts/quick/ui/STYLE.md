@@ -65,7 +65,7 @@ pastille.
   Les sections vivent dans UN document : chacune préfixe ses `id` et ses
   classes d'une lettre à elle (`b-` Bannières, `c-` Codes promo, `d-` et
   `e-` Discord, `g-` Gear reco (sous-onglet de Fiche perso), `h-` Tableau de bord, `i-` Items, `j-` Journal du site,
-  `k-` 4-comics, `m-` Monstres, `n-` Noms, `p-` Patch, `r-` Rangs, `t-` Tables du jeu,
+  `k-` 4-comics, `m-` Monstres, `n-` Noms, `p-` Patch, `r-` Rangs, `t-` Tables du jeu, `ex-` Extraction,
   `v-` Vidéos, `x-` Effets, `gd-` Guides) — une lettre reprise et `$('c-list')` rend l'élément de l'autre
   onglet, sans erreur. Fiche perso PARTAGE `c-` avec Codes promo (décision du
   lot C11) : aucun id de l'un n'est repris par l'autre, et un test le garde
@@ -81,7 +81,7 @@ pastille.
   résultat — la console de « Patch » s'en sert.
 - **`<main>`** : 1200 px centrés, 24 px de marge.
   `wide: true` dans l'entrée de `GROUPS` lui donne toute la largeur
-  (`main.wide`) : Patch, Rangs, Tables du jeu, Fiche perso, Effets, Monstres, Items, Guides, Discord. Une section
+  (`main.wide`) : Patch, Rangs, Tables du jeu, Extraction, Fiche perso, Effets, Monstres, Items, Guides, Discord. Une section
   est une colonne à 18 px d'écart : `.head` (le `h2` et sa `p.hint`), puis des
   `.card`.
 - **Journal** (`aside.journal`, `surface-overlay`) : une bande DANS LE FLUX,
@@ -323,9 +323,10 @@ accolés), `.d-seg` (bouton segmenté), `.d-menu` (liste de cases déroulante).
 
 ## Données — croquis
 
-Deux onglets : Rangs, dont le croquis est plus haut avec les premiers onglets
-« wide », et Tables du jeu. Gear reco, qui était le troisième, est le dernier
-sous-onglet de la « Fiche perso » (B40) : son croquis est avec elle.
+Trois onglets : Rangs, dont le croquis est plus haut avec les premiers onglets
+« wide », Tables du jeu, et Extraction (F20). Gear reco, qui était le
+troisième, est le dernier sous-onglet de la « Fiche perso » (B40) : son
+croquis est avec elle.
 
 ### Tables du jeu (`wide`, fait — B38)
 
@@ -373,6 +374,68 @@ croisé pose une entrée d'historique : « Précédent » du navigateur revient 
 table quittée. Propres à l'onglet, dans `tabs/gamedata.css` : `.t-info`,
 `.t-id`, `.t-reader`, `.t-note`, `.t-bar`, `.t-cols`, `.t-grid`, `.t-v`,
 `.t-text`, `.t-raw`, `.t-kv`, `.t-pair`.
+
+### Extraction (`wide`, fait — F20 ; fiches et intégration F21, versionnage F22)
+
+La revue de maintenance de l'admin — l'extraction fraîche des tables du jeu
+contre ce que le site committe —, cible par cible, et ses gestes. Croquis du
+rendu :
+
+```
+.head  Extraction — Le jeu a bougé : ce que l'extraction fraîche… changerait à ce que le site committe… Un geste écrit le fichier et committe ; les images… attendent dans le staging, que « Committer » de la section Patch pousse…
+LA VUE D'ENSEMBLE (#ex-overview, `#extractor`)
+.card  card-head : « Dix cibles » · badge ok « tables du jeu présentes » (ou badge warn, la raison du serveur) … [Actualiser]
+   table : Cible (le libellé ; « périmètre du site » sous Monstres) | Fichier committé (chasse fixe) | Nouvelles | Écarts | Mineures | Coquilles | Retirées | Committées | « rien à revoir » atténué … [Ouvrir]
+     les comptes à droite, en chiffres tabulaires : nouveau en accent, écart et retirée en rouge, mineure et coquille atténuées, un zéro à 55 % ; une cible sans rien à revoir est atténuée (.ex-quiet) ; la ligne entière ouvre la cible
+LA CIBLE (#ex-target, `#extractor/<cible>` ; la vue d'ensemble se cache)
+.card.pad.ex-head  [← Extraction] Personnages · data/generated/characters.json · badges « 1 new » (edit) « 2 diff » (ko) « 3 minor » « 1 typo » (off) « 1 removed » (ko), ou « rien à revoir » (ok), ou la raison sans tables (warn) … à droite .ex-acts : [Appliquer les retouches mineures (4)] (.btn.ghost, caché à zéro) [Confirmer l'extraction] (.btn.primary, caché sans rien à revoir)
+   p.hint : la règle de la cible — les monstres « comptés au périmètre du SITE ; « Confirmer l'extraction » écrit quand même le fichier entier », les items « un par un, par sa ligne », les autres « les retouches mineures s'appliquent d'un geste ; les vrais écarts attendent « Confirmer l'extraction », tout ou rien par fichier »
+   .ex-plan (bordé de rouge, caché) — le PLAN de « Confirmer l'extraction », en clair : « Écrire l'extraction fraîche ENTIÈRE dans data/generated/<fichier> : 1 entité nouvelle écrite, 3 entités modifiées (dont 2 mineures et 1 coquille) réécrites, 1 entité retirée SUPPRIMÉE — tout ou rien, puis un commit « chore(extractor): <cible> — extraction confirmee ». » [Écrire et committer] (.btn.danger) [Annuler]
+.card.pad.ex-assets (bordé de vert, caché ; après un geste qui a stagé) — « Images mises en place » [✕] · « 2 produites, 1 refaite, 3 déjà là, 1 manquante. » · ul.ex-missing : `clé` — raison · p.hint « Elles attendent dans le staging (.assets-staging/) : « Committer » de la section Patch les pousse sur R2… » [Ouvrir Patch] (data-go)
+.card.pad  .form : [Chercher 30ch « Début d'un mot du nom, ou la clé »] Statut [tout 12 | new 1 | diff 2 | minor 3 | typo 1 | removed 1] (.ex-seg, le segmenté de Gear reco recopié, le compte en petit dans chaque bouton)   « 12 entités à revoir » ; dès qu'un filtre ou la recherche joue : « 3 sur 12 entités »
+.card.ex-list — les entités en LIGNES, repliées, par pages de 100 : card-foot « 100 lignes montrées sur 312 » … [100 de plus]
+   une ligne (.ex-line) : .ex-toggle (un bouton, aria-expanded) = badge du statut (58 px, centré : new = edit, diff et removed = ko, minor et typo = off) · nom · clé (chasse fixe, atténuée) … « 3 champs » (rien pour une nouvelle ou une disparue) · chevron ▶ (tourné quand déplié) ; pour un item, à droite [Intégrer] ou [Retirer] (.btn.ghost.sm, éteints pendant un geste)
+   tri du serveur : diff, new, removed, puis minor et typo ; à statut égal les plus touchées d'abord, puis par clé
+   dépliée, .ex-diff (en retrait de 44 px, sous la ligne) : un .ex-group par racine (fond de page, bordé), titré en capitales « SKILLS › Fire Strike · second » (l'élément résolu en texte normal) ; dans le groupe, un .ex-field par feuille : son chemin sous le groupe en chasse fixe (« desc › en », « (entier) » pour l'élément même), puis
+     un TEXTE : deux bandes l'une sous l'autre — « existant » (fond rouge à 6 %) et « extrait » (vert) —, les mots retirés surlignés rouge à 25 %, les ajoutés vert, le reste atténué ; la couleur d'une balise `<color=#…>` du jeu posée sur ses mots
+     un ARBRE : deux colonnes côte à côte (.ex-trees, l'existant à gauche, l'extrait à droite ; l'une sous l'autre sous 800 px) — une ligne par clé, indentée de 14 px par profondeur (`--d`), la clé en chasse fixe, une branche en gras avec son compte « (2) », « (absent) » en italique pour un côté vide, un id résolu suivi de « — son libellé »
+   .empty « Aucune entité ne correspond. » · « Pas de données du jeu : lancer un patch (pull) d'abord. »
+```
+
+Tout ce qui se lit vient du serveur. `GET /api/extractor` (`extractorOverview`)
+rend les dix cibles — l'ordre de l'admin, `EXTRACTOR_ENTITIES` —, chacune
+avec les comptes de l'inbox (`bucketsOf`, mémoïsés ; les monstres au
+périmètre du site), son fichier et le nombre d'entités committées ; sans
+`.gamedata`, `tables: false` et la raison. `GET
+/api/extractor/target?id=&status=&q=` (`extractorTarget`) lance la revue
+(`reviewTarget`, `actionableDiff`, `reviewEntities`), nomme chaque entité
+(le frais, puis le committé — un disparu n'a de nom que là), filtre par
+statut et par la règle d'Effets sur le nom et la clé, trie comme la sidebar
+de l'admin, et rend par entité son diff en arbre (`diffTree` de
+`src/lib/admin/diff-tree.ts`, les ids de skills résolus par `diffLabels`) et
+la signature `was` — les tables et le fichier committé. La page relit la
+cible à chaque filtre et 200 ms après la dernière frappe (seule la dernière
+demande se dessine), déplie et replie sans rien redemander, et met la clé
+dépliée dans l'adresse. Les gestes : `POST /api/extractor/accept`
+(`acceptExtraction`, `mode: 'all' | 'minor'`, `was`) et `POST
+/api/extractor/item` (`integrateItemAction`, `key`, `was`) — refusés AVANT
+d'écrire sans tables ou si `was` a bougé (`stale`) ; puis `acceptTarget`,
+`acceptMinor` ou `integrateItem` de l'admin, le bilan d'images au journal,
+UN `commitPaths` du fichier (`chore(extractor): <cible> — extraction
+confirmee`, `… — n retouches mineures`, `chore(extractor): item <nom>
+(<clé>)`). Après un geste, la cible est relue (le disque fait foi) et le
+bilan d'images posé dans sa carte. Un seul geste à la fois : les boutons
+sont éteints pendant qu'il tourne. Rien ne se saisit : jamais `dirty`.
+`sections.go('extractor/<cible>')` (le Tableau de bord) ouvre la section sur
+cette cible, même déjà à l'écran. Propres à l'onglet, dans
+`tabs/extractor.css` : `.ex-end`, `.ex-badges`, `.ex-n`, `.ex-quiet`,
+`.ex-tlabel`, `.ex-scope`, `.ex-head`, `.ex-who`, `.ex-id`, `.ex-meta`,
+`.ex-acts`, `.ex-plan`, `.ex-assets`, `.ex-missing`, `.ex-seg`, `.ex-total`,
+`.ex-list`, `.ex-rows`, `.ex-row`, `.ex-line`, `.ex-toggle`, `.ex-name`,
+`.ex-key`, `.ex-fields`, `.ex-chev`, `.ex-diff`, `.ex-group`, `.ex-gtitle`,
+`.ex-glabel`, `.ex-field`, `.ex-fname`, `.ex-side`, `.ex-text`, `.ex-w`,
+`.ex-trees`, `.ex-tree`, `.ex-tl`, `.ex-tk`, `.ex-tv`, `.ex-tlabel-id`,
+`.ex-tcount`.
 
 ## Accueil — croquis
 

@@ -13,7 +13,10 @@
  * le journal du site (le changelog, par gabarits), lire une table brute du jeu
  * (« Tables du jeu »), éditer un guide de boss (« Guides » : ses textes
  * dans les six langues, son combat, ses versions — la date du guide re-datée
- * avant le commit). Tous committent, sauf le message Discord et les deux
+ * avant le commit), relire l'extraction cible par cible et l'accepter
+ * (« Extraction » : le committé contre l'extraction fraîche, un diff lisible,
+ * la confirmation d'une cible, ses retouches mineures, un item intégré).
+ * Tous committent, sauf le message Discord et les deux
  * écrans qui ne font que lire (le tableau de bord, les tables du jeu) ;
  * « Pousser », dans l'en-tête, pousse `main`. Et, à chaque patch du jeu, la
  * chaîne des données — rafraîchir, relire la promotion, promouvoir,
@@ -52,6 +55,7 @@ import {
   CHANGELOG_DISK,
   CHARACTER_SHEET_DEPS,
   EFFECTS_DEPS,
+  EXTRACTOR_DEPS,
   GAME_TABLES_DISK,
   GEAR_RECO_DEPS,
   GENERAL_GUIDES_DEPS,
@@ -60,6 +64,7 @@ import {
   MONSTERS_DEPS,
   NAMES_DEPS,
   TRANSLATE_DEPS,
+  acceptExtraction,
   addComics,
   addGuideVersionAction,
   addVideo,
@@ -72,6 +77,8 @@ import {
   effectNewId,
   effectsSearch,
   effectsState,
+  extractorOverview,
+  extractorTarget,
   fillChangelogTemplate,
   fitNames,
   gameTableSchema,
@@ -82,6 +89,7 @@ import {
   guideDraftState,
   guidesOverview,
   importContributionAction,
+  integrateItemAction,
   itemsSearch,
   itemsState,
   monsterSheetState,
@@ -912,6 +920,46 @@ async function route(req: IncomingMessage, res: ServerResponse): Promise<void> {
     await stream(res, (report) =>
       withGit(importContributionAction(contribution, GENERAL_GUIDES_DEPS, report)),
     );
+    return;
+  }
+
+  if (req.method === 'GET' && url.pathname === '/api/extractor') {
+    // La vue d'ensemble de l'extraction : les dix cibles et leurs comptes (ceux
+    // de l'inbox, mémoïsés), le fichier committé de chacune ; sans tables du
+    // jeu, des zéros et la raison. Rien ne s'écrit.
+    json(res, await extractorOverview());
+    return;
+  }
+
+  if (req.method === 'GET' && url.pathname === '/api/extractor/target') {
+    // Une cible (`?id=`) : ses entités nommées et classées, filtrées par
+    // `?status=` et `?q=`, chacune avec son diff en arbre, et la signature
+    // `was` de ce que l'écran voit. Le moteur de revue est importé ici.
+    const out = await extractorTarget(url.searchParams.get('id') ?? '', {
+      status: url.searchParams.get('status'),
+      q: url.searchParams.get('q'),
+    });
+    if ('error' in out) return json(res, { error: out.error }, out.status);
+    json(res, out);
+    return;
+  }
+
+  if (req.method === 'POST' && url.pathname === '/api/extractor/accept') {
+    // « Confirmer l'extraction » (`mode: 'all'`) ou « Appliquer les retouches
+    // mineures » (`mode: 'minor'`) d'une cible, puis UN commit du fichier :
+    // refusé avant d'écrire sans tables du jeu ou si `was` a bougé (`stale`).
+    const { id, mode, was } = await body<{ id?: unknown; mode?: unknown; was?: unknown }>(req);
+    await stream(res, (report) =>
+      withGit(acceptExtraction(String(id ?? ''), { mode, was }, EXTRACTOR_DEPS, report)),
+    );
+    return;
+  }
+
+  if (req.method === 'POST' && url.pathname === '/api/extractor/item') {
+    // « Intégrer » ou « Retirer » un item de la revue, puis UN commit — même
+    // porte que les acceptations.
+    const { key, was } = await body<{ key?: unknown; was?: unknown }>(req);
+    await stream(res, (report) => withGit(integrateItemAction(key, was, EXTRACTOR_DEPS, report)));
     return;
   }
 

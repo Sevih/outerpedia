@@ -43,6 +43,19 @@ export const EXTRACTOR_ENTITIES: readonly ExtractorEntity[] = [
   { id: 'item', label: 'Item', href: '/admin/extractor/items' },
 ];
 
+/**
+ * Les cibles dont la page admin n'est QUE la revue — et que la section
+ * « Extraction » de quick porte en entier (lot F20, migration 19) : leur lien
+ * sort du menu de l'admin (`adminExtractorMenu`). L'inbox et `bucketsOf`
+ * gardent les dix. Les sept autres ont une fiche par entité (intégration,
+ * versionnage) : elles restent au menu jusqu'aux lots F21 et F22.
+ */
+export const EXTRACTOR_IN_QUICK: ReadonlySet<string> = new Set(['effect', 'armor', 'item']);
+
+/** Les entités d'extraction encore proposées par le menu de l'admin. */
+export const adminExtractorMenu = (): ExtractorEntity[] =>
+  EXTRACTOR_ENTITIES.filter((e) => !EXTRACTOR_IN_QUICK.has(e.id));
+
 const EMPTY: DiffBuckets = { new: 0, diff: 0, minor: 0, typo: 0, removed: 0 };
 
 /**

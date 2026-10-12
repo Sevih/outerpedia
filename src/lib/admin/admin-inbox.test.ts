@@ -258,3 +258,37 @@ describe('buildInbox — ce qu’il rend, pour un seul calcul', () => {
     expect(buildInbox()).toEqual([]);
   });
 });
+
+describe('adminExtractorMenu — les cibles que le menu de l’admin propose encore', () => {
+  it('écarte les cibles portées dans quick ; l’inbox et les buckets gardent les dix', async () => {
+    engineReturns({ effect: buckets({ diff: 1 }), armor: buckets({ new: 1 }), item: buckets() });
+    const { EXTRACTOR_ENTITIES, EXTRACTOR_IN_QUICK, adminExtractorMenu, bucketsOf, buildInbox } =
+      await load();
+    expect([...EXTRACTOR_IN_QUICK].sort()).toEqual(['armor', 'effect', 'item']);
+    expect(EXTRACTOR_ENTITIES.map((e) => e.id)).toEqual([
+      'character',
+      'effect',
+      'ee',
+      'weapon',
+      'amulet',
+      'armor',
+      'talisman',
+      'set',
+      'monster',
+      'item',
+    ]);
+    // Le menu : les sept autres, dans le même ordre.
+    expect(adminExtractorMenu().map((e) => e.id)).toEqual([
+      'character',
+      'ee',
+      'weapon',
+      'amulet',
+      'talisman',
+      'set',
+      'monster',
+    ]);
+    // L'inbox et `bucketsOf` ne filtrent pas : une cible portée reste comptée.
+    expect(buildInbox().map((i) => i.key)).toEqual(['extract:effect', 'extract:armor']);
+    expect(bucketsOf('effect')).toEqual(buckets({ diff: 1 }));
+  });
+});
