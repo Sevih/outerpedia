@@ -179,6 +179,8 @@ import type { InboxItem } from '@/lib/admin/admin-inbox';
 import { collectTagOccurrences } from '@/lib/admin/tag-control';
 import type { TablePage, TableSchema } from '@/lib/admin/gamedata-store';
 import { validateBanners, type Banner, type PromoCode } from '@/lib/data/promo-rules';
+import { validateEvents } from '@/lib/admin/events-store';
+import type { EventEntry } from '@/lib/data/events';
 import { LANGS } from '@/lib/i18n/config';
 import type { RecruitWindow } from '@datagen/generators/recruit';
 import { emptyDict } from '@datagen/lib/lang';
@@ -216,6 +218,7 @@ import {
   effectNewId,
   effectsSearch,
   effectsState,
+  eventsState,
   acceptExtraction,
   extractorOverview,
   extractorTarget,
@@ -245,6 +248,7 @@ import {
   queryGameTable,
   resolveText,
   saveBannerList,
+  saveEventList,
   saveChangelogList,
   saveCharacterSheet,
   saveGearReco,
@@ -258,6 +262,7 @@ import {
   tagSourceSheet,
   translateNotes,
   type BannersDeps,
+  type EventsDeps,
   type BannersDisk,
   type ChangelogDeps,
   type ChangelogDisk,
@@ -4013,6 +4018,295 @@ describe('saveBannerList — écritures injectées', () => {
   it('un commit refusé est un échec d’après écriture : le disque porte la liste', async () => {
     const { fake } = deps({ git: { ok: false, log: ['git commit a échoué'] } });
     const out = await saveBannerList([RIN], ['Resonance Rin'], fake);
+    expect(out).toMatchObject({ ok: false, written: true });
+    expect(out.log.at(-1)).toBe('git commit a échoué');
+  });
+});
+
+describe('eventsState — le fichier, les statuts à l’instant du serveur, les squelettes', () => {
+  const VIDEO: EventEntry = {
+    slug: '20260324-video',
+    type: 'contest',
+    title: { en: 'Hero Video Event', fr: 'Événement vidéo' },
+    start: '2026-03-24T00:00:00Z',
+    end: '2026-05-05T00:00:00Z',
+    blocks: [{ kind: 'prose', text: { en: 'Hello' } }],
+  };
+  const SOON: EventEntry = {
+    slug: 'soon',
+    type: 'tournament',
+    title: { en: 'Soon' },
+    start: '2026-11-01T00:00:00Z',
+    end: '2026-11-08T00:00:00Z',
+    blocks: [{ kind: 'timeline' }],
+  };
+  const DRAFT: EventEntry = { ...SOON, slug: '_draft', type: 'community', draft: true };
+  const NOW = Date.parse('2026-10-12T13:00:00Z');
+
+  const deps = (events: EventEntry[], now = NOW): EventsDeps => ({
+    loadEvents: () => events,
+    validateEvents,
+    saveEvents: async () => [],
+    publishEvents: async () => ({ ok: true, purged: true }),
+    commitPaths: () => ({ ok: true, log: [] }),
+    now: () => now,
+  });
+
+  it('les événements dans l’ordre du fichier, leur statut à `now` — pas à l’horloge —, l’instant servi', () => {
+    const state = eventsState(deps([VIDEO, SOON, DRAFT]));
+    expect(state.events).toEqual([VIDEO, SOON, DRAFT]);
+    expect(state.status).toEqual(['ended', 'upcoming', 'upcoming']);
+    expect(state.now).toBe('2026-10-12T13:00:00.000Z');
+    // Le même fichier, un autre instant : d'autres statuts.
+    expect(eventsState(deps([VIDEO, SOON], Date.parse('2026-04-01T00:00:00Z'))).status).toEqual([
+      'ongoing',
+      'upcoming',
+    ]);
+    expect(state.siteBase).toBe('https://outerpedia.local/en/event');
+    expect(state.langs).toEqual({ default: 'en', shown: ['en', 'jp', 'kr', 'zh', 'fr', 'es'] });
+  });
+
+  it('les libellés, les genres, les plateformes et les squelettes : la page n’en recopie aucun', () => {
+    const state = eventsState(deps([]));
+    expect(state.labels.type).toEqual({
+      tournament: 'Tournoi',
+      contest: 'Concours',
+      community: 'Communauté',
+    });
+    expect(state.kinds).toEqual([
+      'prose',
+      'list',
+      'sections',
+      'timeline',
+      'callout',
+      'cta',
+      'videos',
+      'image',
+    ]);
+    expect(state.types).toEqual(['tournament', 'contest', 'community']);
+    expect(state.platforms).toEqual(['youtube', 'twitch', 'bilibili']);
+    // Le squelette d'un événement neuf : du jour UTC du serveur.
+    expect(state.skeleton.event).toEqual({
+      slug: '',
+      type: 'community',
+      title: {},
+      start: '2026-10-12T00:00:00Z',
+      end: '2026-10-12T23:59:00Z',
+      blocks: [{ kind: 'prose', title: {}, text: {} }],
+      draft: true,
+    });
+    // Un bloc neuf porte son titre (le bug de l'admin).
+    expect(state.skeleton.block.list).toEqual({ kind: 'list', title: {}, items: [{}] });
+    expect(state.skeleton.block.cta).toEqual({ kind: 'cta', label: {}, href: '' });
+  });
+});
+
+describe('saveEventList — écritures injectées', () => {
+  const VIDEO: EventEntry = {
+    slug: '20260324-video',
+    type: 'contest',
+    title: { en: 'Hero Video Event' },
+    start: '2026-03-24T00:00:00Z',
+    end: '2026-05-05T00:00:00Z',
+    blocks: [{ kind: 'prose', text: { en: 'Hello' } }],
+  };
+  const PEEK: EventEntry = {
+    slug: '_no-peaking',
+    type: 'community',
+    title: { en: 'Get out' },
+    start: '2025-10-09T00:00:00Z',
+    end: '2025-10-15T23:59:59Z',
+    draft: true,
+    blocks: [{ kind: 'callout', text: { en: 'Nothing here' } }],
+  };
+  const DISK = [VIDEO, PEEK];
+
+  /**
+   * Les écritures, factices : elles notent leur ordre. `validateEvents` est la
+   * VRAIE validation du store ; `saveEvents` ne revalide pas (le vrai le fait,
+   * à l'identique).
+   */
+  function deps(
+    over: {
+      disk?: EventEntry[];
+      publish?: Awaited<ReturnType<EventsDeps['publishEvents']>>;
+      git?: Outcome;
+    } = {},
+  ) {
+    const calls = {
+      order: [] as string[],
+      written: [] as EventEntry[][],
+      git: [] as [string[], string][],
+    };
+    const fake: EventsDeps = {
+      loadEvents: () => over.disk ?? DISK,
+      validateEvents,
+      saveEvents: async (list) => {
+        calls.order.push('fichier');
+        calls.written.push(list);
+        return [];
+      },
+      publishEvents: async () => {
+        calls.order.push('R2');
+        return over.publish ?? { ok: true, purged: true };
+      },
+      commitPaths: (paths, message) => {
+        calls.order.push('commit');
+        calls.git.push([paths, message]);
+        return over.git ?? { ok: true, log: ['git : fait'] };
+      },
+      now: () => 0,
+    };
+    return { calls, fake };
+  }
+
+  it('validation → fichier → R2 → commit, sur le seul events.json, la liste entière ; le slug qui a bougé nomme le commit', async () => {
+    const { calls, fake } = deps();
+    const edited = { ...VIDEO, title: { en: 'Hero Video Event — results' } };
+    const steps: string[] = [];
+    const out = await saveEventList([edited, PEEK], DISK, fake, (line, doing) =>
+      steps.push(`${doing ? '… ' : ''}${line}`),
+    );
+
+    expect(out).toEqual({
+      ok: true,
+      log: [
+        '2 événements écrits dans data/curated/events.json.',
+        'publié sur R2 + edge purgé — en ligne en ≤ 10 min, sans déploiement.',
+        'git : fait',
+      ],
+      issues: [],
+      written: true,
+      stale: false,
+    });
+    expect(calls.order).toEqual(['fichier', 'R2', 'commit']);
+    expect(calls.written).toEqual([[edited, PEEK]]);
+    expect(calls.git).toEqual([[['data/curated/events.json'], 'chore(events): 20260324-video']]);
+    expect(steps).toEqual([
+      '2 événements écrits dans data/curated/events.json.',
+      '… publication sur R2, puis purge de l’edge',
+      'publié sur R2 + edge purgé — en ligne en ≤ 10 min, sans déploiement.',
+    ]);
+  });
+
+  it('le message de commit : un slug ajouté, retiré ou retouché ; leur compte à plusieurs ; l’ordre des clés ne compte pas', async () => {
+    const message = async (list: EventEntry[]) => {
+      const { calls, fake } = deps();
+      await saveEventList(list, DISK, fake);
+      return calls.git[0][1];
+    };
+    const NEW: EventEntry = { ...VIDEO, slug: 'new-one' };
+    expect(await message([VIDEO, PEEK, NEW])).toBe('chore(events): new-one');
+    expect(await message([VIDEO])).toBe('chore(events): _no-peaking');
+    expect(
+      await message([
+        { ...VIDEO, draft: true },
+        { ...PEEK, draft: false },
+      ]),
+    ).toBe('chore(events): 2 événements');
+    // Les mêmes événements, les clés dans un autre ordre : rien n'a bougé.
+    const { blocks, ...rest } = VIDEO;
+    expect(await message([{ blocks, ...rest } as EventEntry, PEEK])).toBe(
+      'chore(events): mise à jour des événements',
+    );
+  });
+
+  it('n’écrit que les clés du modèle : celles de la page restent à la page', async () => {
+    const { calls, fake } = deps();
+    await saveEventList([{ ...VIDEO, key: 3, was: null } as EventEntry, PEEK], DISK, fake);
+    expect(calls.written).toEqual([[VIDEO, PEEK]]);
+  });
+
+  it('R2 en échec : une ligne du journal, le commit est fait — et le résultat le dit', async () => {
+    const { calls, fake } = deps({
+      publish: { ok: false, purged: false, error: 'R2_* absents de .env.local' },
+    });
+    const out = await saveEventList([VIDEO], DISK, fake);
+
+    expect(calls.order).toEqual(['fichier', 'R2', 'commit']);
+    expect(out).toMatchObject({ ok: false, written: true, stale: false, issues: [] });
+    expect(out.log).toEqual([
+      '1 événement écrit dans data/curated/events.json.',
+      'R2 NON PUBLIÉ : R2_* absents de .env.local',
+      'git : fait',
+      'R2 non publié : le site ne suivra qu’au prochain enregistrement, ou à `pnpm commit`.',
+    ]);
+  });
+
+  it('`was` différent du disque : `stale`, rien d’écrit, ni publié, ni committé', async () => {
+    const { calls, fake } = deps();
+    const out = await saveEventList([VIDEO, PEEK], [VIDEO], fake);
+    expect(out).toEqual({
+      ok: false,
+      log: [
+        'REFUSÉ — le disque a changé depuis le chargement : la page est relue, rien n’est écrit.',
+      ],
+      issues: [],
+      written: false,
+      stale: true,
+    });
+    expect(calls.order).toEqual([]);
+  });
+
+  it('un refus de validation : rien d’écrit, chaque refus SITUÉ — événement, onglet, bloc, entrée', async () => {
+    const { calls, fake } = deps();
+    const out = await saveEventList(
+      [
+        VIDEO,
+        { ...PEEK, title: { fr: 'sans anglais' } },
+        {
+          ...VIDEO, // le slug en double
+          blocks: [
+            { kind: 'prose', text: {} },
+            { kind: 'cta', label: { en: 'Go' }, href: 'pas une url' },
+          ],
+        },
+      ],
+      DISK,
+      fake,
+    );
+    expect(calls.order).toEqual([]);
+    expect(out).toMatchObject({ ok: false, written: false, stale: false });
+    expect(out.log).toEqual([
+      'REFUSÉ — Événement 2 (_no-peaking) : titre EN requis.',
+      'REFUSÉ — Événement 3 (20260324-video) : slug en double.',
+      'REFUSÉ — Événement 3 (20260324-video), bloc 1 (prose) : texte EN requis.',
+      'REFUSÉ — Événement 3 (20260324-video), bloc 2 (cta) : URL http(s) requise.',
+    ]);
+    expect(out.issues).toEqual([
+      { index: 1, tab: 'meta', message: 'Événement 2 (_no-peaking) : titre EN requis.' },
+      { index: 2, tab: 'meta', message: 'Événement 3 (20260324-video) : slug en double.' },
+      {
+        index: 2,
+        tab: 'blocks',
+        block: 0,
+        message: 'Événement 3 (20260324-video), bloc 1 (prose) : texte EN requis.',
+      },
+      {
+        index: 2,
+        tab: 'blocks',
+        block: 1,
+        message: 'Événement 3 (20260324-video), bloc 2 (cta) : URL http(s) requise.',
+      },
+    ]);
+  });
+
+  it('une liste qui n’en est pas une : refusée avant tout', async () => {
+    const { calls, fake } = deps();
+    const out = await saveEventList(undefined, DISK, fake);
+    expect(out).toEqual({
+      ok: false,
+      log: ['Liste d’événements attendue.'],
+      issues: [],
+      written: false,
+      stale: false,
+    });
+    expect(calls.order).toEqual([]);
+  });
+
+  it('un commit refusé est un échec d’après écriture : le disque porte la liste', async () => {
+    const { fake } = deps({ git: { ok: false, log: ['git commit a échoué'] } });
+    const out = await saveEventList([VIDEO], DISK, fake);
     expect(out).toMatchObject({ ok: false, written: true });
     expect(out.log.at(-1)).toBe('git commit a échoué');
   });

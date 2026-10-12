@@ -43,7 +43,7 @@ import {
   LocalField,
   BlockEditor,
 } from '@/components/admin/events/EventBlocks';
-import { collectTexts } from '@/components/admin/events/event-text';
+import { collectTexts } from '@/lib/admin/event-text';
 import { moveItem } from '@/lib/admin/reorder';
 import { MoveButtons } from '@/components/admin/MoveButtons';
 

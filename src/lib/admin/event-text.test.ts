@@ -1,6 +1,6 @@
 /**
  * Contrat de `collectTexts` (audit F9 — cœur devenu testable en sortant du
- * composant).
+ * composant ; dans `lib/admin` depuis le lot F23, l'admin et quick l'importent).
  *
  * Deux choses valent d'être verrouillées ici :
  *   - la RÉFÉRENCE : les valeurs rendues sont les objets de l'événement, pas des

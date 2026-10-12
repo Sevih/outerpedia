@@ -4,7 +4,8 @@
  * Un serveur HTTP local de quelques routes et UNE page (`ui/`, un fichier par
  * onglet, assemblée à la requête — cf. `ui-serve.ts`) : voir d'abord ce qui
  * demande une action (le tableau de bord, qui ne fait que lire), mettre à jour
- * un code promo ou une bannière, déposer une 4-comic, ajouter une vidéo, régler
+ * un code promo, une bannière ou un événement communautaire (publié sur R2, en
+ * ligne sans déploiement), déposer une 4-comic, ajouter une vidéo, régler
  * les rangs, éditer les recos d'équipement d'un perso, écrire un message
  * Discord que le bot poste, curer un nom court ou des alias de recherche, curer
  * un effet (son nom, sa description, son icône, sa famille — ou en créer un),
@@ -51,6 +52,7 @@ import { dirname, extname, resolve } from 'node:path';
 import { loadEnvLocal } from '@datagen/lib/env';
 import {
   BANNERS_DEPS,
+  EVENTS_DEPS,
   CHANGELOG_DEPS,
   CHANGELOG_DISK,
   CHARACTER_SHEET_DEPS,
@@ -70,6 +72,7 @@ import {
   addGuideVersionAction,
   addVideo,
   bannersState,
+  eventsState,
   changelogState,
   characterRoster,
   characterSheetState,
@@ -112,6 +115,7 @@ import {
   resolveText,
   rewardOptions,
   saveBannerList,
+  saveEventList,
   saveChangelogList,
   saveCharacterSheet,
   saveCouponList,
@@ -545,6 +549,35 @@ async function route(req: IncomingMessage, res: ServerResponse): Promise<void> {
     await stream(res, (report) =>
       withGit(saveBannerList(list, strings(changed), BANNERS_DEPS, report)),
     );
+    return;
+  }
+
+  if (req.method === 'GET' && url.pathname === '/api/events/state') {
+    // Lu du disque à chaque appel, comme les bannières : `events.json` dans
+    // l'ordre du fichier, le statut de chacun à l'instant du SERVEUR (pas à
+    // l'horloge du navigateur), les libellés et les squelettes que la page
+    // n'a pas à recopier, la base des images pour la cover.
+    json(res, { ...eventsState(), imgBase: IMG_BASE });
+    return;
+  }
+
+  if (req.method === 'POST' && url.pathname === '/api/events') {
+    // La liste est l'ÉTAT COMPLET, comme dans l'admin ; `was` est ce que la
+    // page avait chargé — un disque qui a bougé depuis refuse (`stale`).
+    // Validation AVANT toute écriture, puis le fichier, R2 (le site le lit au
+    // runtime : l'événement paraît sans déploiement), UN commit.
+    const { list, was } = await body<{ list?: unknown; was?: unknown }>(req);
+    await stream(res, (report) => withGit(saveEventList(list, was, EVENTS_DEPS, report)));
+    return;
+  }
+
+  if (req.method === 'POST' && url.pathname === '/api/events/preview') {
+    // L'aperçu des textes d'un événement en cours de saisie : les segments que
+    // le site rendra, dans la langue demandée (`previewInline`, celui de la
+    // fiche perso). Rien ne s'écrit.
+    const b = await body<{ texts?: unknown; lang?: unknown } | null>(req).catch(() => null);
+    const out = await previewInline(b?.texts, b?.lang);
+    json(res, out, 'error' in out ? 400 : 200);
     return;
   }
 

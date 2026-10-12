@@ -1,0 +1,59 @@
+<section id="tab-events" hidden>
+  <div class="head">
+    <h2>Événements</h2>
+    <p class="hint">
+      Les événements communautaires du site (<code>/event</code>, <code>/event/&lt;slug&gt;</code>)
+      : la liste dans l'ordre du fichier, un événement ouvert en trois onglets — Méta, Jalons,
+      Blocs. Le statut (à venir, en cours, terminé) se déduit des dates, en UTC, à l'heure du
+      serveur ; un événement à venir est un TEASER (sa famille et sa date, rien d'autre) tant que «
+      dévoiler avant le début » n'est pas coché ; un brouillon n'est jamais publié. L'anglais se
+      saisit et porte la structure (le nombre de puces, de jalons, de vidéos) ; « Traduire » ne
+      génère que les traductions manquantes ou périmées, à relire. Rien ne s'écrit à la saisie : «
+      Enregistrer » envoie la liste entière, la publie sur R2 — en ligne en ≤ 10 min, SANS
+      déploiement — puis committe. Les images ne se téléversent pas d'ici : le chemin R2 se tape
+      (<code>/images/events/…</code>), la source va à la main dans
+      <code>data/editorial/events/</code> et part avec <code>pnpm commit</code>.
+    </p>
+  </div>
+
+  <!-- La savebar, commune à la liste et à l'événement ouvert : la liste entière part. -->
+  <div class="savebar" id="ev-bar" role="toolbar" aria-label="Enregistrement">
+    <span id="ev-count"></span>
+    <div class="ev-pv-lang" id="ev-pv-lang"></div>
+    <button class="btn ghost" id="ev-reset" disabled>Annuler</button>
+    <button class="btn primary" id="ev-save" disabled>Enregistrer</button>
+  </div>
+
+  <!-- La liste : une carte, une ligne par événement, dans l'ordre du fichier. -->
+  <div id="ev-list">
+    <div class="card" aria-label="Événements">
+      <div class="card-head">
+        <span id="ev-summary"></span>
+        <button class="btn ghost sm" id="ev-add">＋ événement</button>
+      </div>
+      <div class="scroll">
+        <table>
+          <thead>
+            <tr>
+              <th><span class="sr">Cover</span></th>
+              <th>Événement</th>
+              <th>Famille</th>
+              <th>Statut</th>
+              <th>Dates (UTC)</th>
+              <th><span class="sr">Actions</span></th>
+            </tr>
+          </thead>
+          <tbody id="ev-rows"></tbody>
+        </table>
+      </div>
+      <div class="empty" id="ev-empty" hidden>Aucun événement.</div>
+    </div>
+  </div>
+
+  <!-- L'événement ouvert : son en-tête, les sous-onglets, le panneau. -->
+  <div id="ev-event" hidden>
+    <div class="card pad ev-head" id="ev-head"></div>
+    <div class="ev-tabs" id="ev-tabs" role="tablist" aria-label="Sous-onglets de l’événement"></div>
+    <div id="ev-panel" role="tabpanel"></div>
+  </div>
+</section>

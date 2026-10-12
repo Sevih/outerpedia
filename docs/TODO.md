@@ -74,8 +74,11 @@
       mode », les sprites du jeu ; les six liens quittent le menu de l'admin),
       Extractor › versionnage (la même section, lot F22 — « Figer et
       ré-épingler » sur la fiche monstre, le plan des guides avant de figer ;
-      le groupe « Extractor » quitte le menu de l'admin : restent Events, 6,
-      et le retrait de `/admin`, 22). Clos sans portage (lot A34) : Gear presets
+      le groupe « Extractor » quitte le menu de l'admin), Events (onglet
+      « Événements », lot F23 — la liste, l'éditeur à six langues en trois
+      sous-onglets, « Enregistrer » publie sur R2 et committe ; le groupe
+      « Tools » quitte le menu de l'admin : reste le retrait de `/admin`,
+      22). Clos sans portage (lot A34) : Gear presets
       (non porté, le fichier s'édite à la main) et Tag control (le contrôle
       est le test, bloquant dans `pnpm commit`).
       À faire par Sevih : remplir
@@ -169,6 +172,34 @@
       perso » / « câbler les chips » depuis la fiche, « extraction » depuis
       la Fiche perso et depuis Monstres. (6) Un geste sur une fiche lue
       avant un refresh → « Rien n'est écrit — … ont changé », la fiche relue.
+- [ ] **« Événements » — contrôles à l'écran (lot F23)** : le banc ne
+      clique pas, aucun enregistrement réel n'a été joué, `/api/translate`
+      jamais appelé avec des clés, `POST /api/events` jamais appelé (les
+      clés `R2_*` sont réelles sur ce poste). Relancer quick d'abord (Ctrl-C
+      puis `pnpm quick` : trois routes nouvelles — sans ça l'onglet dit
+      « quick lancé avant ce code »). (1) Publication › Événements : la liste
+      dans l'ordre du fichier, `20260324-video` « terminé », `_no-peaking`
+      « terminé · brouillon », les dates en UTC, la cover, « ouvrir sur le
+      site ». (2) Ouvrir `20260324-video` : Méta (l'heure de Paris à côté de
+      l'UTC), retoucher un texte EN (le titre), « à retraduire » apparaît,
+      « Traduire » (le seul texte périmé part, ses cinq langues réécrites ;
+      les « Traductions » se déplient), puis « Enregistrer » → le journal :
+      « 2 événements écrits dans data/curated/events.json », la ligne R2
+      « publié sur R2 + edge purgé » (ou « R2 NON PUBLIÉ … sautée » sans
+      clés), UN commit `chore(events): 20260324-video` (`git show --stat` :
+      le seul `events.json`), la savebar revient à « aucune modification ».
+      (3) Dix minutes plus tard au plus, la page `/event/20260324-video` du
+      site SANS déploiement porte le titre retouché (la copie R2). (4) Blocs :
+      « ＋ Liste à puces » → le bloc a son champ Titre, éditable ; une puce,
+      ↑ ↓ ✕ ; « Enregistrer » → le titre est dans le fichier. (5) Supprimer
+      un événement (✕ de la liste ou « Supprimer » de l'en-tête) : la boîte
+      de confirmation, « Annuler » le garde, confirmer le retire, la savebar
+      compte « 1 événement modifié » ; « Annuler » de la savebar le ramène.
+      (6) Le menu de l'admin : plus de groupe « Tools » ;
+      `/admin/tools/events` répond encore par son URL. (7) Une saisie fautive
+      (un bloc sans texte EN) : « Enregistrer » refuse, le message sous le
+      bloc, le point rouge sur « Blocs », « refusé » dans l'en-tête, rien
+      d'écrit ni committé.
 - [ ] **« Guides » › guides généraux et import — contrôles à l'écran (lot
       F19)** : le banc ne clique pas, aucun enregistrement réel n'a été
       joué, `/api/translate` jamais appelé avec des clés. Relancer quick

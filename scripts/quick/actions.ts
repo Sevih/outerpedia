@@ -58,7 +58,27 @@ import {
   type Banner,
   type PromoCode,
 } from '@/lib/admin/promo-banner-store';
-import { publishBanners, type RuntimePublishResult } from '@/lib/admin/runtime-publish';
+import {
+  publishBanners,
+  publishEvents,
+  type RuntimePublishResult,
+} from '@/lib/admin/runtime-publish';
+import { loadEventsForAdmin, saveEvents, validateEvents } from '@/lib/admin/events-store';
+import {
+  EVENT_BLOCK_KINDS,
+  EVENT_BLOCK_LABEL,
+  EVENT_TYPE_LABEL,
+  locateEventError,
+  newEvent,
+  newEventBlock,
+  type EventIssue,
+} from '@/lib/admin/event-edit';
+import {
+  EVENT_TYPES,
+  EVENT_VIDEO_PLATFORMS,
+  eventStatus,
+  type EventEntry,
+} from '@/lib/data/events';
 import { loadChangelog, saveChangelog } from '@/lib/admin/changelog-store';
 import { HIDDEN_LANG_COLUMNS } from '@/lib/admin/gamedata-columns';
 import {
@@ -852,6 +872,201 @@ export async function saveBannerList(
     ],
     issues: [],
     written: true,
+  };
+}
+
+// ------------------------------------------------------------- événements ----
+
+/** Le seul fichier que la section « Événements » écrit et committe. */
+const EVENTS_PATH = 'data/curated/events.json';
+
+/** Les lectures et les écritures de la section « Événements », injectées. */
+export interface EventsDeps {
+  loadEvents: () => EventEntry[];
+  /** La validation de l'admin, pure : les refus, situables par `locateEventError`. */
+  validateEvents: (list: EventEntry[]) => string[];
+  saveEvents: (list: EventEntry[]) => Promise<string[]>;
+  publishEvents: () => Promise<RuntimePublishResult>;
+  commitPaths: (paths: string[], message: string, report?: Report) => Outcome;
+  /** L'instant du serveur (ms) : le statut se calcule ici, pas à l'horloge du navigateur. */
+  now: () => number;
+}
+
+/** Celles de la route : le store et la publication de l'admin, le vrai `commitPaths`, l'horloge. */
+export const EVENTS_DEPS: EventsDeps = {
+  loadEvents: loadEventsForAdmin,
+  validateEvents,
+  saveEvents,
+  publishEvents,
+  commitPaths,
+  now: Date.now,
+};
+
+/** Les pages `/event/<slug>` du site, pour « ouvrir sur le site ». */
+const eventsSiteBase = (): string =>
+  `${process.env.ADMIN_BASE || ADMIN_BASE_DEFAULT}/${DEFAULT_LANG}/event`;
+
+/**
+ * La section « Événements » : `events.json` tel que le disque le porte (pas sa
+ * copie R2), dans l'ordre du fichier, le statut de chacun à l'instant du
+ * serveur (`eventStatus` : la règle du site, en UTC — `status[i]` va avec
+ * `events[i]`), cet instant, et ce que la page n'a pas à recopier : les
+ * libellés des familles et des genres de bloc, les genres, les plateformes, et
+ * les squelettes d'un événement neuf (du jour UTC du serveur) et d'un bloc
+ * neuf par genre, avec son titre.
+ */
+export function eventsState(deps: EventsDeps = EVENTS_DEPS) {
+  const events = deps.loadEvents();
+  const now = deps.now();
+  const day = new Date(now).toISOString().slice(0, 10);
+  return {
+    events,
+    status: events.map((e) => eventStatus(e, now)),
+    now: new Date(now).toISOString(),
+    siteBase: eventsSiteBase(),
+    langs: { default: DEFAULT_LANG, shown: LANGS },
+    labels: { type: EVENT_TYPE_LABEL, block: EVENT_BLOCK_LABEL },
+    types: EVENT_TYPES,
+    kinds: EVENT_BLOCK_KINDS,
+    platforms: EVENT_VIDEO_PLATFORMS,
+    skeleton: {
+      event: newEvent(day),
+      block: Object.fromEntries(EVENT_BLOCK_KINDS.map((k) => [k, newEventBlock(k)])),
+    },
+  };
+}
+
+/** JSON à clés triées : deux objets égaux le sont quel que soit l'ordre de leurs clés. */
+function canonJson(v: unknown): string {
+  const sort = (x: unknown): unknown =>
+    Array.isArray(x)
+      ? x.map(sort)
+      : x && typeof x === 'object'
+        ? Object.fromEntries(
+            Object.entries(x as Record<string, unknown>)
+              .filter(([, y]) => y !== undefined)
+              .sort(([a], [b]) => a.localeCompare(b))
+              .map(([k, y]) => [k, sort(y)]),
+          )
+        : x;
+  return JSON.stringify(sort(v ?? null));
+}
+
+/** Les clés du modèle, et elles seules : la page peut porter les siennes. */
+const EVENT_KEYS = [
+  'slug',
+  'type',
+  'title',
+  'summary',
+  'organizer',
+  'cover',
+  'start',
+  'end',
+  'phases',
+  'blocks',
+  'draft',
+  'revealEarly',
+] as const;
+
+const cleanEvent = (raw: unknown): EventEntry => {
+  const r = (raw && typeof raw === 'object' ? raw : {}) as Record<string, unknown>;
+  return Object.fromEntries(
+    EVENT_KEYS.filter((k) => r[k] !== undefined).map((k) => [k, r[k]]),
+  ) as unknown as EventEntry;
+};
+
+/** `chore(events): <slug>` quand un seul événement a bougé (ajouté, retouché, retiré), sinon leur compte. */
+function eventsCommitMessage(list: EventEntry[], disk: EventEntry[]): string {
+  const before = new Map(disk.map((e) => [e.slug, canonJson(e)]));
+  const changed = new Set<string>();
+  for (const e of list) if (before.get(e.slug) !== canonJson(e)) changed.add(e.slug);
+  const kept = new Set(list.map((e) => e.slug));
+  for (const e of disk) if (!kept.has(e.slug)) changed.add(e.slug);
+  const slugs = [...changed];
+  if (slugs.length === 1) return `chore(events): ${slugs[0]}`;
+  return `chore(events): ${slugs.length ? `${slugs.length} événements` : 'mise à jour des événements'}`;
+}
+
+/**
+ * Enregistre la LISTE complète des événements (le contrat de la route admin :
+ * l'écran est l'éditeur, il renvoie son état) : `was` — la liste telle que la
+ * page l'avait chargée — doit être ce que le disque porte encore, sinon
+ * `stale` et rien n'est écrit (la page relit) ; `validateEvents` AVANT toute
+ * écriture, chaque refus situé (`issues`) pour la page et dit au journal ;
+ * puis `saveEvents` (le fichier, canonique), `publishEvents` (R2 et purge de
+ * l'edge : le site lit R2 au runtime, l'événement paraît SANS déploiement) et
+ * UN commit sur ce seul fichier, nommé d'après ce qui a bougé.
+ *
+ * Un échec de R2 n'est PAS un refus, la règle des Bannières : le fichier est
+ * écrit et committé quand même, le résultat est en échec (`ok` faux) pour que
+ * le journal se déplie sur la ligne qui le dit. `written` : le disque porte la
+ * liste, la page le relit.
+ */
+export async function saveEventList(
+  list: unknown,
+  was: unknown,
+  deps: EventsDeps = EVENTS_DEPS,
+  report?: Report,
+): Promise<Outcome & { issues: EventIssue[]; written: boolean; stale: boolean }> {
+  const refuse = (log: string[], issues: EventIssue[] = [], stale = false) => ({
+    ok: false,
+    log,
+    issues,
+    written: false,
+    stale,
+  });
+  if (!Array.isArray(list)) return refuse(['Liste d’événements attendue.']);
+
+  const disk = deps.loadEvents();
+  if (canonJson(was) !== canonJson(disk))
+    return refuse(
+      ['REFUSÉ — le disque a changé depuis le chargement : la page est relue, rien n’est écrit.'],
+      [],
+      true,
+    );
+
+  const events = list.map(cleanEvent);
+  const errors = deps.validateEvents(events);
+  if (errors.length)
+    return refuse(
+      errors.map((e) => `REFUSÉ — ${e}`),
+      errors.map(locateEventError),
+    );
+  // Le store revalide avant d'écrire : un refus ici serait une divergence entre
+  // les deux, à dire plutôt qu'à taire.
+  const more = await deps.saveEvents(events);
+  if (more.length)
+    return refuse(
+      more.map((e) => `REFUSÉ — ${e}`),
+      more.map(locateEventError),
+    );
+
+  const j = journal(report);
+  const n = events.length;
+  j.done(`${n} événement${n > 1 ? 's écrits' : ' écrit'} dans ${EVENTS_PATH}.`);
+
+  j.doing('publication sur R2, puis purge de l’edge');
+  const pub = await deps.publishEvents();
+  j.done(
+    pub.ok
+      ? `publié sur R2${pub.purged ? ' + edge purgé' : ` (${pub.error ?? 'edge non purgé'})`} — en ligne en ≤ 10 min, sans déploiement.`
+      : `R2 NON PUBLIÉ : ${pub.error ?? 'erreur inconnue'}`,
+  );
+
+  const commit = deps.commitPaths([EVENTS_PATH], eventsCommitMessage(events, disk), report);
+  return {
+    ok: commit.ok && pub.ok,
+    log: [
+      ...j.lines,
+      ...commit.log,
+      // En dernier : c'est la ligne que le journal montre en rouge.
+      ...(pub.ok
+        ? []
+        : ['R2 non publié : le site ne suivra qu’au prochain enregistrement, ou à `pnpm commit`.']),
+    ],
+    issues: [],
+    written: true,
+    stale: false,
   };
 }
 

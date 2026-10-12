@@ -1,6 +1,7 @@
 /**
  * Collecte des textes traduisibles d'un ÉVÉNEMENT (audit F9) — cœur PUR, sorti
- * du composant pour être lisible et testable seul.
+ * du composant pour être lisible et testable seul ; descendu de
+ * `components/admin/events/` ici le 12/10 (lot F23) : quick s'en sert aussi.
  *
  * ⚠ Les valeurs sont rendues PAR RÉFÉRENCE : l'appelant travaille sur une copie
  * profonde de l'événement et `applyTranslation` remplit les champs EN PLACE.

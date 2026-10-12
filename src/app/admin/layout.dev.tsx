@@ -35,29 +35,19 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     // (armes/amulettes/armures/talismans/sets) : rien à curer dessus. Les
     // pages (`/admin/editor/…`) restent joignables par leur URL jusqu'au
     // retrait de l'admin.
-    {
-      title: 'Tools',
-      items: [
-        // Pro / Con et Synergy : portés dans quick (Éditeurs › Fiche perso,
-        // sous-onglets « Pros / Cons » et « Synergies »), liens retirés le
-        // 08/10 — les pages restent joignables par leur URL jusqu'au retrait
-        // de l'admin.
-        // Short names et Search aliases : portés dans quick (Outils › Noms),
-        // liens retirés le 08/10 — les pages restent joignables par leur URL
-        // jusqu'au retrait de l'admin.
-        // Promo code : porté dans quick (Codes promo), lien retiré le 08/10 —
-        // la page reste joignable par son URL jusqu'au retrait de l'admin.
-        // Banner : porté dans quick (Publication › Bannières), lien retiré le
-        // 08/10 — la page reste joignable par son URL jusqu'au retrait de l'admin.
-        // Changelog : porté dans quick (Publication › Journal du site), lien
-        // retiré le 08/10 — la page reste joignable par son URL jusqu'au retrait
-        // de l'admin.
-        { label: 'Events', href: '/admin/tools/events' },
-        // Game data : porté dans quick (Données › Tables du jeu), lien retiré
-        // le 08/10 — la page reste joignable par son URL jusqu'au retrait de
-        // l'admin, et l'item « Assets » de l'inbox y renvoie toujours.
-      ],
-    },
+    // Groupe « Tools » : vide depuis le 12/10, il sort du menu. Pro / Con et
+    // Synergy : portés dans quick (Éditeurs › Fiche perso, sous-onglets
+    // « Pros / Cons » et « Synergies »), liens retirés le 08/10. Short names et
+    // Search aliases : portés dans quick (Outils › Noms), liens retirés le
+    // 08/10. Promo code : porté dans quick (Codes promo), lien retiré le 08/10.
+    // Banner : porté dans quick (Publication › Bannières), lien retiré le 08/10.
+    // Changelog : porté dans quick (Publication › Journal du site), lien retiré
+    // le 08/10. Game data : porté dans quick (Données › Tables du jeu), lien
+    // retiré le 08/10 — l'item « Assets » de l'inbox y renvoie toujours. Events :
+    // porté dans quick (Publication › Événements, lot F23 — la liste, l'éditeur
+    // à six langues, « Enregistrer » publie sur R2 et committe), lien retiré le
+    // 12/10. Les pages (`/admin/tools/…`) restent joignables par leur URL
+    // jusqu'au retrait de l'admin.
     // Groupe « Guide editor » : vide depuis le 11/10, il sort du menu. Les
     // guides de BOSS (`GUIDE_SPECS`) sont portés dans quick (Guides › Guides,
     // lot F18), liens sortis le 11/10 ; les trois guides GÉNÉRAUX à fragment

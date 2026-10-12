@@ -78,7 +78,26 @@ existant, période ou récompenses : supprimer puis recréer, ou lot A pour
 l'ajouter), Bannières (= Tools › Banner, étape 5, lot B35 : la liste de
 `banner.json` éditée en place et, au-dessus, la détection dans la table du jeu
 `RecruitGroupTemplet` — ce qui manque s'insère d'un clic, une fin différente
-s'aligne ; lien retiré du menu admin le 08/10), Journal du site (= Tools ›
+s'aligne ; lien retiré du menu admin le 08/10), Événements (= Tools › Events,
+étape 6, lot F23 : `events.json` — la liste dans l'ordre du fichier, le
+statut de chacun à l'instant du SERVEUR (`eventStatus`, UTC), « brouillon »,
+« teaser » ; un événement ouvert dans la coquille des Guides, trois
+sous-onglets — Méta (slug, famille, brouillon, dévoiler avant le début, titre
+et résumé, organisateur, cover et son aperçu, début et fin en UTC avec l'heure
+de Paris en clair), Jalons (ordonnés, ↑ ↓ ✕), Blocs (les huit genres, ordonnés,
+leurs entrées ordonnées, chaque bloc avec son titre TOUJOURS éditable — le bug
+de l'admin, qui n'ouvrait le titre que si la clé existait déjà, est corrigé
+par le squelette de `event-edit.ts`) ; chaque texte localisé est le TEXTE des
+Guides — l'anglais, son aperçu (`previewInline`, les liens `[x](url)` rendus),
+les traductions repliées, « à retraduire » — et « Traduire » par sous-onglet
+ne traduit que le périmé ou l'incomplet ; « Enregistrer » envoie la liste
+entière : `was` contre le disque (`stale`), `validateEvents` AVANT toute
+écriture avec chaque refus SITUÉ (événement, onglet, bloc, entrée), le
+fichier, `publishEvents` (R2 : un échec n'annule rien, une ligne rouge le
+dit), UN commit `chore(events): <slug>` ; supprimer demande confirmation ; les
+images ne se téléversent pas (le chemin se tape, la source va dans
+`data/editorial/events/`) ; lien retiré du menu admin le 12/10, le groupe
+« Tools » avec lui), Journal du site (= Tools ›
 Changelog, étape 7, lot B37 : `changelog.json` édité entrée par entrée — une
 ligne pliée, sa fiche dépliée —, une entrée nouvelle posée par GABARIT
 (`src/lib/admin/changelog-templates.ts` : un par type, textes tirés de
@@ -311,8 +330,8 @@ fait, B44 ; 14 Gear presets non porté et 15 Tag control fait autrement, A34) �
 16 Guides de boss (fait, F18) → 17 Guides généraux (fait, F19) →
 19 Extractor › revue (fait, F20) → 20 Extractor › fiches, intégration et
 versionnage (fait, F21 et F22) → 6 Events (décision Sevih
-du 08/10 : tout dernier, un seul événement publié à ce jour) → 22 Clôture. La
-numérotation des étapes ne change pas.
+du 08/10 : tout dernier, un seul événement publié à ce jour ; fait, F23) →
+22 Clôture. La numérotation des étapes ne change pas.
 
 - **18 Tableau de bord** — FAIT, lot B36 (cf. « Déjà dans quick ») : un
   groupe « Accueil » en tête du menu, où l'étape 21 posera sa section.
@@ -351,9 +370,17 @@ Chaque entrée : l'écran admin, ce qu'il contient, puis la ligne
    détection dans `RecruitGroupTemplet`. L'entrée reste pour que la
    numérotation des suivantes ne bouge pas.
 
-6. **Tools › Events**
+6. **Tools › Events** — FAIT, lot F23 : l'onglet « Événements » (groupe
+   Publication, cf. « Déjà dans quick »). La ligne « Agacements » était vide :
+   l'écran est porté dans la charte, sur le modèle des Guides, et ce qui était
+   cassé corrigé en portant — le titre d'un bloc ajouté enfin éditable, les
+   six langues ensemble au lieu d'« une à la fois », la suppression sur
+   confirmation, les refus situés au lieu d'un message concaténé, `dirty` et
+   `stale`. Le lien a quitté le menu de l'admin le 12/10 (le groupe « Tools »
+   avec lui) ; la page reste joignable par son URL jusqu'à l'étape 22.
+   L'entrée reste pour que la numérotation des suivantes ne bouge pas.
    `EventsEditor` (451 l.)
-   - Agacements :
+   - Agacements : (vide — porté tel quel, défauts corrigés en portant)
 
 7. **Tools › Changelog** — FAIT, lot B37 : l'onglet « Journal du site »
    (cf. « Déjà dans quick »). Les deux agacements de Sevih y sont corrigés :
@@ -530,7 +557,7 @@ Chaque entrée : l'écran admin, ce qu'il contient, puis la ligne
     sur la fiche monstre, le plan des guides touchés avant de figer, les
     archives avec qui les épingle. Les dix liens ont quitté le menu de
     l'admin, le groupe « Extractor » avec eux ; les pages restent par leur
-    URL jusqu'à l'étape 22. Restent 6 (Events) et 22 (clôture).
+    URL jusqu'à l'étape 22. Events (6) a suivi, lot F23 : reste 22 (clôture).
     `IntegrateCharacterButton`, `IntegrateGearButton`, `IntegrateModeButton`, `AcceptTargetButton`, `ContributionImport` ; pour un monstre, `MonsterActions` (Save, « Version » — cf. la correction de l'étape 12)
     - Agacements : (reporté de l'étape 12 — « c'est le bordel, surtout la
       partie versionnage ») versionnage à repenser : les archives et

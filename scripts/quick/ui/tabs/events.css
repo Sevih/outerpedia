@@ -1,0 +1,483 @@
+/* Onglet « Événements » : la liste (une table, une ligne par événement), puis
+   l'événement ouvert dans la coquille des Guides — l'en-tête, la savebar
+   (commune aux deux vues), les sous-onglets, le panneau. Le reste — carte,
+   `.savebar`, `.form`, `.btn`, `.badge`, table — vient de `quick.css` ; les
+   textes à six langues et l'aperçu reprennent `guides.css` sous `ev-`. */
+
+/* ---------------------------------------------------------------- la liste */
+/* Les badges et les actions d'une ligne vivent dans un `span` flex, jamais la
+   cellule elle-même : une cellule qui n'en est plus une décale son filet (la
+   leçon des Bannières). */
+#tab-events #ev-summary,
+#tab-events .ev-badges {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+#tab-events #ev-summary > .lbl {
+  margin-left: 6px;
+}
+#tab-events #ev-add {
+  margin-left: auto;
+}
+#tab-events .ev-cover {
+  width: 72px;
+  padding-right: 0;
+}
+#tab-events .ev-cover img {
+  display: block;
+  width: 72px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 6px;
+  background: var(--surface-base);
+}
+/* Le titre d'une ligne est le bouton qui ouvre l'événement. */
+#tab-events .ev-open {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 2px 0;
+  border: 0;
+  background: none;
+  color: var(--content);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+#tab-events .ev-open:hover strong {
+  color: var(--accent);
+}
+#tab-events .ev-open:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+#tab-events .ev-slug {
+  color: var(--content-muted);
+  font-size: 12px;
+}
+#tab-events .ev-dates {
+  color: var(--content-muted);
+  white-space: nowrap;
+}
+#tab-events .ev-acts {
+  text-align: right;
+  white-space: nowrap;
+}
+#tab-events .ev-acts-in {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+#tab-events tr.ko td {
+  box-shadow: inset 2px 0 0 var(--danger);
+}
+#tab-events #ev-list[hidden],
+#tab-events #ev-event[hidden] {
+  display: none;
+}
+
+/* ---------------------------------------------------------------- l'en-tête */
+#tab-events .ev-head {
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding: 14px 20px;
+}
+#tab-events .ev-id {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+  flex: 1 1 320px;
+}
+#tab-events .ev-id strong {
+  font-size: 16px;
+}
+#tab-events .ev-traits {
+  display: flex;
+  align-items: center;
+  gap: 6px 14px;
+  flex-wrap: wrap;
+  color: var(--content-muted);
+  font-size: 13px;
+}
+#tab-events .ev-site {
+  margin-left: auto;
+}
+
+/* ---------------------------------------------------------------- savebar */
+#tab-events #ev-count {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1 1 200px;
+  min-width: 0;
+}
+#tab-events #ev-count span {
+  margin-right: 0;
+}
+#tab-events .ev-msg {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+/* La langue de l'aperçu, une pour tout l'événement : le groupe segmenté des Guides. */
+#tab-events .ev-pv-lang {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+#tab-events .ev-pv-lang:empty {
+  display: none;
+}
+#tab-events .ev-pv-lang .lbl {
+  margin-right: 0;
+}
+#tab-events .ev-seg {
+  display: inline-flex;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  overflow: hidden;
+}
+#tab-events .ev-seg button {
+  height: 26px;
+  padding: 0 9px;
+  border: 0;
+  background: none;
+  color: var(--content-muted);
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
+}
+#tab-events .ev-seg button[aria-pressed='true'] {
+  background: var(--accent);
+  color: var(--accent-fg);
+}
+#tab-events .ev-seg button:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: -2px;
+}
+
+/* ------------------------------------------------------------- sous-onglets */
+#tab-events .ev-tabs {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  border-bottom: 1px solid var(--line-subtle);
+  overflow-x: auto;
+}
+#tab-events .ev-tabs:empty {
+  display: none;
+}
+#tab-events .ev-tabs .tab {
+  flex: none;
+  height: 32px;
+  padding: 0 12px;
+  font-size: 13px;
+}
+#tab-events .ev-tabs .tab:focus-visible {
+  outline-offset: -2px;
+}
+#tab-events .tab .dot.edit {
+  background: var(--accent);
+}
+#tab-events #ev-panel:empty {
+  display: none;
+}
+
+/* ---------------------------------------------------------------- le panneau
+   Un sous-onglet est une pile de cartes (`.ev-stack`) ; un bloc est une carte
+   (`.ev-block`) ; une entrée ordonnée (jalon, puce, sous-section, vidéo) une
+   bande bordée (`.ev-entry`) avec ses ↑ ↓ ✕ à droite. */
+#tab-events .ev-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+#tab-events .ev-block .card-head {
+  flex-wrap: wrap;
+  border-bottom: 1px solid var(--line-subtle);
+}
+#tab-events .ev-block.ko,
+#tab-events .card.ko {
+  border-color: var(--danger);
+}
+#tab-events .ev-body {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 16px 20px 18px;
+}
+#tab-events .ev-body p,
+#tab-events .ev-entry p {
+  margin: 0;
+}
+#tab-events .ev-moves {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: auto;
+}
+#tab-events .ev-entry {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 12px 20px 14px;
+  border-top: 1px solid var(--line-subtle);
+}
+#tab-events .ev-body > .ev-entry {
+  padding: 12px 0 14px;
+}
+#tab-events .ev-body > .ev-entry:first-child {
+  border-top: none;
+  padding-top: 0;
+}
+#tab-events .ev-entry.ko {
+  box-shadow: inset 2px 0 0 var(--danger);
+}
+#tab-events .ev-entry-head {
+  display: flex;
+  align-items: center;
+  gap: 10px 14px;
+  flex-wrap: wrap;
+}
+#tab-events .ev-foot {
+  display: flex;
+  align-items: center;
+  gap: 10px 14px;
+  flex-wrap: wrap;
+}
+/* « Traduire » dit son refus à côté de lui, sur plusieurs lignes s'il le faut. */
+#tab-events .ev-foot .badge {
+  height: auto;
+  min-height: 20px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  white-space: normal;
+}
+/* Le refus d'un champ, sous lui ; vide, la ligne ne prend pas de place. */
+#tab-events .ev-err,
+#tab-events .ev-ko {
+  margin: 0;
+  color: var(--danger);
+  font-size: 12.5px;
+}
+#tab-events .ev-err:empty,
+#tab-events .ev-ko:empty {
+  display: none;
+}
+/* Un jour, une heure (UTC), l'heure de Paris en clair. */
+#tab-events .ev-when {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+#tab-events .ev-when > .lbl:first-child {
+  min-width: 48px;
+}
+#tab-events .ev-when input[type='time'] {
+  width: 110px;
+}
+#tab-events .ev-paris {
+  color: var(--content-muted);
+}
+#tab-events .ev-paris:empty {
+  display: none;
+}
+/* L'aperçu d'une image saisie par son chemin : la cover, le visuel d'un bloc. */
+#tab-events .ev-img:empty {
+  display: none;
+}
+#tab-events .ev-img img {
+  display: block;
+  max-width: 480px;
+  max-height: 200px;
+  border-radius: 8px;
+  background: var(--surface-base);
+}
+
+/* ---------------------------------------------------------------- les textes
+   Le texte des Guides : l'anglais (un champ d'une ligne pour un titre, une
+   textarea qui grandit sinon), son aperçu sur le fond de la page, ses refus,
+   puis les traductions repliées, trois par rangée. */
+#tab-events .ev-text {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+#tab-events .ev-text textarea,
+#tab-events .ev-text input {
+  width: 100%;
+  min-height: 0;
+  font-size: 13px;
+}
+#tab-events .ev-text .refused {
+  border-color: var(--danger);
+}
+#tab-events .ev-text.ko {
+  padding-left: 10px;
+  border-left: 2px solid var(--danger);
+}
+#tab-events .ev-trs {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+#tab-events .ev-trs .field {
+  min-width: 0;
+}
+#tab-events .ev-trs label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+#tab-events summary {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  width: max-content;
+  max-width: 100%;
+  list-style: none;
+  cursor: pointer;
+}
+#tab-events summary::-webkit-details-marker {
+  display: none;
+}
+#tab-events details[open] summary {
+  margin-bottom: 8px;
+}
+#tab-events summary:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 1px;
+}
+@media (max-width: 900px) {
+  #tab-events .ev-trs {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+/* L'aperçu : les segments de `noteHtml` (`.pv-*`) et les liens markdown, sur le fond de la page. */
+#tab-events .ev-pv {
+  padding: 8px 12px;
+  border-radius: 8px;
+  background: var(--surface-base);
+  color: var(--content);
+  font-size: 14px;
+  line-height: 1.65;
+  transition: opacity 0.12s;
+}
+#tab-events .ev-pv:empty {
+  display: none;
+}
+#tab-events .ev-pv.busy {
+  opacity: 0.45;
+}
+#tab-events .ev-link {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+/* Les jetons et classes de couleur des segments, ceux de la Fiche perso
+   (`character.css` ne les règle que sous `#tab-character`). */
+#tab-events {
+  --buff: #38bdf8;
+  --debuff: #f87171;
+  --buff-bg: #1a69a7;
+  --debuff-bg: #a72a27;
+  --stat: #fbbf24;
+  --highlight: #22d3ee;
+  --equipment: #fbbf24;
+}
+#tab-events .text-buff {
+  color: var(--buff);
+}
+#tab-events .text-debuff {
+  color: var(--debuff);
+}
+#tab-events .text-class {
+  color: var(--klass);
+}
+#tab-events .text-stat {
+  color: var(--stat);
+}
+#tab-events .text-highlight {
+  color: var(--highlight);
+}
+#tab-events .text-equipment {
+  color: var(--equipment);
+}
+#tab-events .text-item-normal {
+  color: var(--item-normal);
+}
+#tab-events .text-item-superior {
+  color: var(--item-superior);
+}
+#tab-events .text-item-epic {
+  color: var(--item-epic);
+}
+#tab-events .text-item-legendary {
+  color: var(--item-legendary);
+}
+#tab-events .text-fire {
+  color: var(--fire);
+}
+#tab-events .text-water {
+  color: var(--water);
+}
+#tab-events .text-earth {
+  color: var(--earth);
+}
+#tab-events .text-light {
+  color: var(--light);
+}
+#tab-events .text-dark-elem {
+  color: var(--dark-elem);
+}
+#tab-events .pv-unknown {
+  color: var(--danger);
+  font-weight: 600;
+}
+#tab-events .pv-seg {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  vertical-align: middle;
+}
+#tab-events .pv-u {
+  text-decoration: underline;
+}
+#tab-events .pv-ico {
+  flex: none;
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+}
+#tab-events .pv-fx,
+#tab-events .pv-it {
+  position: relative;
+  flex: none;
+  width: 18px;
+  height: 18px;
+}
+#tab-events .pv-fx {
+  border-radius: 4px;
+  background: var(--buff-bg);
+}
+#tab-events .pv-fx.debuff {
+  background: var(--debuff-bg);
+}
+#tab-events .pv-fx img,
+#tab-events .pv-it img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}

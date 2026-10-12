@@ -16,58 +16,26 @@
  */
 import type { LocalizedText } from '@contracts';
 import { LANGUAGES, type Lang } from '@/lib/i18n/config';
+import { EVENT_VIDEO_PLATFORMS, type EventBlock, type EventVideoPlatform } from '@/lib/data/events';
 import {
-  EVENT_VIDEO_PLATFORMS,
-  type EventBlock,
-  type EventBlockKind,
-  type EventType,
-  type EventVideoPlatform,
-} from '@/lib/data/events';
+  EVENT_BLOCK_KINDS,
+  EVENT_BLOCK_LABEL,
+  EVENT_TYPE_LABEL,
+  newEventBlock,
+} from '@/lib/admin/event-edit';
 import { input as inputBase } from '../_ui';
 
 export const input = `${inputBase} text-content`;
 export const btn = 'rounded-md border border-line px-2.5 py-1 text-xs hover:border-accent';
 
-export const TYPE_LABEL: Record<EventType, string> = {
-  tournament: 'Tournoi',
-  contest: 'Concours',
-  community: 'Communauté',
-};
-
-export const BLOCK_LABEL: Record<EventBlockKind, string> = {
-  prose: 'Paragraphe',
-  list: 'Liste à puces',
-  sections: 'Sous-sections',
-  timeline: 'Calendrier (jalons)',
-  callout: 'Encart',
-  cta: 'Bouton d’action',
-  videos: 'Vidéos',
-  image: 'Image',
-};
-
-export const BLOCK_KINDS = Object.keys(BLOCK_LABEL) as EventBlockKind[];
-
-/** Bloc vierge du type demandé. */
-export function emptyBlock(kind: EventBlockKind): EventBlock {
-  switch (kind) {
-    case 'prose':
-      return { kind, text: {} };
-    case 'callout':
-      return { kind, text: {} };
-    case 'list':
-      return { kind, items: [{}] };
-    case 'sections':
-      return { kind, items: [{ title: {}, text: {} }] };
-    case 'timeline':
-      return { kind };
-    case 'cta':
-      return { kind, label: {}, href: '' };
-    case 'videos':
-      return { kind, entries: [{ platform: 'youtube', id: '', title: '' }] };
-    case 'image':
-      return { kind, src: '' };
-  }
-}
+// Les libellés et les squelettes vivent dans `lib/admin/event-edit` (lot F23) :
+// quick les sert à sa page. `emptyBlock` pose la clé `title` d'un bloc qui en a
+// une — sans elle, le champ du titre (`'title' in block`, plus bas) n'apparaissait
+// jamais sur un bloc ajouté.
+export const TYPE_LABEL = EVENT_TYPE_LABEL;
+export const BLOCK_LABEL = EVENT_BLOCK_LABEL;
+export const BLOCK_KINDS = EVENT_BLOCK_KINDS;
+export const emptyBlock = newEventBlock;
 
 /* --- Dates UTC : ISO ⇄ (jour, heure) --------------------------------------- */
 

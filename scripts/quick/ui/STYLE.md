@@ -64,7 +64,7 @@ pastille.
   la première section du premier groupe est sans `hidden` dans son HTML.
   Les sections vivent dans UN document : chacune préfixe ses `id` et ses
   classes d'une lettre à elle (`b-` Bannières, `c-` Codes promo, `d-` et
-  `e-` Discord, `g-` Gear reco (sous-onglet de Fiche perso), `h-` Tableau de bord, `i-` Items, `j-` Journal du site,
+  `e-` Discord, `ev-` Événements, `g-` Gear reco (sous-onglet de Fiche perso), `h-` Tableau de bord, `i-` Items, `j-` Journal du site,
   `k-` 4-comics, `m-` Monstres, `n-` Noms, `p-` Patch, `r-` Rangs, `t-` Tables du jeu, `ex-` Extraction,
   `v-` Vidéos, `x-` Effets, `gd-` Guides) — une lettre reprise et `$('c-list')` rend l'élément de l'autre
   onglet, sans erreur. Fiche perso PARTAGE `c-` avec Codes promo (décision du
@@ -81,7 +81,7 @@ pastille.
   résultat — la console de « Patch » s'en sert.
 - **`<main>`** : 1200 px centrés, 24 px de marge.
   `wide: true` dans l'entrée de `GROUPS` lui donne toute la largeur
-  (`main.wide`) : Patch, Rangs, Tables du jeu, Extraction, Fiche perso, Effets, Monstres, Items, Guides, Discord. Une section
+  (`main.wide`) : Patch, Rangs, Tables du jeu, Extraction, Fiche perso, Effets, Monstres, Items, Guides, Événements, Discord. Une section
   est une colonne à 18 px d'écart : `.head` (le `h2` et sa `p.hint`), puis des
   `.card`.
 - **Journal** (`aside.journal`, `surface-overlay`) : une bande DANS LE FLUX,
@@ -238,7 +238,7 @@ survol d'un fichier). `.empty` : l'état vide d'une carte, en pointillés —
 
 ### `.savebar`
 
-La barre d'enregistrement de Rangs, Noms, Fiche perso (la sienne, et celle des builds de son sous-onglet Gear reco), Effets, Monstres, Items, Bannières et Journal du site : le compte de changements
+La barre d'enregistrement de Rangs, Noms, Fiche perso (la sienne, et celle des builds de son sous-onglet Gear reco), Effets, Monstres, Items, Bannières, Événements et Journal du site : le compte de changements
 (le `span`, poussé à gauche), « Annuler », « Enregistrer ». Collante en haut.
 
 ```html
@@ -658,6 +658,63 @@ la liste de suggestions sort de la table au lieu d'y être rognée. La cellule
 du ✕ est `td.b-del`, pas `td.actions` : `.actions` est une rangée flex, et une
 cellule qui n'en est plus une décale son filet. Quitter l'onglet avec des
 changements en attente demande confirmation (`canLeave`).
+
+### Événements (`wide`, fait — F23)
+
+Les événements communautaires du site (`events.json`, les pages `/event` et
+`/event/<slug>`) : la liste, puis un événement ouvert dans la coquille des
+Guides. Croquis du rendu :
+
+```
+.head  Événements — Les événements communautaires du site… Le statut se déduit des dates, en UTC, à l'heure du serveur… « Enregistrer » envoie la liste entière, la publie sur R2 — SANS déploiement — puis committe…
+.savebar (commune à la liste et à l'événement ouvert)  badge edit « 1 événement modifié » · badge ko « 1 refus » | « aucune modification »   Aperçu [en|jp|kr|zh|fr|es] (événement ouvert seulement)   [Annuler] [Enregistrer]
+LA LISTE (#ev-list) .card  card-head : « 3 événements » · badges « 1 en cours » · « 1 à venir » · « 1 brouillon » · lbl « statut à l'heure du serveur : 2026-10-12 13:00 UTC » … [＋ événement]
+   table, l'ordre du FICHIER (pas de réordonnancement, c'est l'admin) :  cover 72×40 (`${imgBase}${cover}`) | titre EN en bouton (.ev-open) + slug en chasse fixe | famille (Tournoi, Concours, Communauté) | statut | « 2026-03-24 00:00 → 2026-05-05 00:00 » | [ouvrir sur le site ↗] ✕
+     statut : badge upcoming « à venir » · active « en cours » · expired « terminé » (eventStatus à `now` du serveur) ; puis warn « brouillon » (jamais publié), off « teaser » (à venir sans « dévoiler avant le début »), edit « nouveau » / « modifié », ko « refusé » (`title` = les refus ; filet rouge à gauche)
+     ✕ demande confirmation ; l'événement quitte la liste, rien ne s'écrit avant « Enregistrer » (qui retire alors sa page du site)
+     « ＋ événement » : le squelette du SERVEUR (communautaire, brouillon, un paragraphe vide, du jour UTC 00:00 → 23:59), ouvert sur Méta, le curseur dans le slug
+   .empty « Aucun événement. »
+L'ÉVÉNEMENT OUVERT (#ev-event)
+.card.pad.ev-head  [← Événements]  titre EN (16 px) / slug (chasse fixe) · badge off famille · ses badges de statut · « 2026-03-24 00:00 → 2026-05-05 00:00 UTC » … [ouvrir sur le site ↗] (s'il est sur le disque) [Supprimer] (danger, sm, confirmation)
+.ev-tabs (`.tab` 32 px) : Méta · Jalons · Blocs — un point accent = modifié, rouge = refusé
+#ev-panel, Méta : .ev-stack
+   .card.pad.ko en tête quand un refus vise Méta (slug invalide ou en double, titre EN, dates)
+   .card.pad  .form : [Slug 30ch chasse fixe] [Famille ▾] [☐ brouillon] [☐ dévoiler le contenu avant le début]
+              Titre — le TEXTE (ci-dessous) sur une ligne · Résumé — le TEXTE, textarea
+   .card.pad  .form : [Organisateur 30ch] [Cover (chemin R2) 42ch chasse fixe] ; dessous l'aperçu de la cover (480 px au plus) ; le hint dit que la source va dans data/editorial/events/ à la main
+              .ev-when : « Début » [date] [heure] UTC · « 24/03/2026 01:00 à Paris » (calculée) ; « Fin » pareil
+   .ev-foot [Traduire] · badge error (le refus du traducteur) · p.ev-ko (l'aperçu indisponible)
+Jalons : .card  card-head « 4 jalons » · lbl (ce qu'est un jalon) … [＋ jalon]
+   une bande par jalon (.ev-entry) : badge off « jalon 1 » · .ev-when [date] [heure] UTC · Paris … ↑ ↓ ✕ ; dessous le TEXTE du libellé, une ligne
+   .empty « Aucun jalon : « ＋ jalon » pour en poser un. »   puis [Traduire]
+Blocs : une .card.ev-block par bloc, dans l'ordre : card-head badge upcoming du genre (Paragraphe, Encart, Liste à puces…) · lbl « bloc 1 » … ↑ ↓ ✕
+   .ev-body : le TEXTE du titre (une ligne, TOUJOURS là — sauf cta et image, qui n'en ont pas dans le modèle), puis selon le genre :
+     prose, callout : le TEXTE (textarea) · list : une .ev-entry par puce (badge « puce 1 », ↑ ↓ ✕, le TEXTE) puis [＋ puce] · sections : par sous-section le sous-titre (ligne) et le texte, [＋ sous-section]
+     timeline : « Rend les jalons de l'onglet Jalons — rien à saisir ici. » · cta : libellé (ligne), .form [URL 42ch], note (ligne) · videos : par vidéo .form [Plateforme ▾] [Identifiant 22ch] [Titre 30ch] [Auteur 22ch] ↑ ↓ ✕, puis « Mise en avant » (ligne), [＋ vidéo] · image : .form [Chemin R2 42ch] + aperçu, alt et légende (lignes)
+   .empty « Aucun bloc : au moins un est requis. » · .ev-foot « ＋ bloc » [＋ Paragraphe] [＋ Liste à puces] … [＋ Image] (un bouton par genre du serveur)   puis [Traduire]
+le TEXTE (.ev-text, celui des Guides) : lbl du champ · l'anglais (input ou textarea qui grandit) · .ev-pv l'aperçu sur le fond de la page (les segments de `noteHtml`, les liens `[x](url)` en lien accent) · p.ev-err le refus situé · details ▸ [Traductions (5)] badge warn « à retraduire » lbl « 1 / 5 » → .ev-trs cinq champs, trois par rangée, placeholder = l'anglais
+le hash : `#events` la liste · `#events/<slug>` un événement (les deux formes que la page écrit) · `#events/<slug>/<onglet>` (meta, phases, blocks) l'ouvre sur ce sous-onglet, pour un lien ou le banc
+```
+
+Tout vient de `GET /api/events/state` (les événements dans l'ordre du fichier,
+le statut de chacun et `now` — l'instant du serveur, jamais l'horloge du
+navigateur —, `imgBase`, `siteBase`, les langues, les libellés des familles et
+des genres, les genres, les plateformes, les squelettes d'un événement et d'un
+bloc par genre). L'anglais porte la structure ; « Traduire » (`POST
+/api/translate`) n'envoie que les textes de l'onglet dont l'anglais a bougé
+(leurs langues sont alors toutes réécrites) ou à qui il manque une langue
+(elle seule est posée) — les traductions à jour restent. L'aperçu rend `POST
+/api/events/preview` (`previewInline`) dans la langue du segmenté, UNE requête
+pour les textes de l'onglet, 400 ms après la dernière frappe. Une frappe ne
+redessine pas le panneau : les badges, l'en-tête, les points, la savebar et
+l'heure de Paris suivent. « Enregistrer » (`POST /api/events` : `list`, `was`)
+— `stale` relit le disque tel quel ; un refus garde la saisie, situé sous son
+champ (`issues` : événement, onglet, bloc, entrée) ; écrit, le disque est relu
+et l'événement rouvert par son slug. Quitter l'onglet avec des changements en
+attente demande confirmation (`canLeave`). Propres à l'onglet, dans
+`tabs/events.css` : `.ev-open`, `.ev-head`, `.ev-tabs`, `.ev-stack`,
+`.ev-block`, `.ev-entry`, `.ev-when`, `.ev-text`, `.ev-pv`, `.ev-trs`,
+`.ev-seg` (le segmenté des Guides, recopié faute de composant commun).
 
 ### Journal du site (1200 px, fait — B37)
 

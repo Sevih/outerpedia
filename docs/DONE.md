@@ -7,6 +7,103 @@
 
 ## 2026-10-12
 
+- **quick : section « Événements » — la liste, l'éditeur à six langues,
+  enregistrer publie sur R2 et committe (lot F23, migration 6)** — le dernier
+  écran de l'admin avant la clôture (22), porté dans la charte sur le modèle
+  des Guides. **Quoi** : un onglet « Événements » dans Publication, après
+  Bannières, `wide`, préfixe `ev-` (`tabs/events.{html,js,css}`, `GROUPS`,
+  `index.html`). La LISTE dans l'ordre du fichier (pas de réordonnancement,
+  c'est l'admin) : la cover sous `imgBase`, le titre EN en bouton et le slug,
+  la famille, le statut en français (« à venir », « en cours », « terminé »),
+  « brouillon », « teaser » (à venir sans `revealEarly`), les dates UTC,
+  « ouvrir sur le site » (`/<lang>/event/<slug>`), ✕ sur confirmation,
+  « ＋ événement » (le squelette de l'admin, servi par le serveur). Un
+  ÉVÉNEMENT OUVERT : l'en-tête (titre, slug, famille, statut, dates,
+  « Supprimer »), la savebar — commune à la liste et à l'événement, puisque la
+  liste entière part —, trois sous-onglets : Méta (slug, famille, brouillon,
+  dévoiler avant le début, titre et résumé, organisateur, cover avec son
+  aperçu, début et fin en jour + heure UTC comme l'admin, l'heure de Paris en
+  clair à côté, calculée par `Intl` dans `Europe/Paris`), Jalons (ordonnés,
+  ↑ ↓ ✕, « ＋ jalon »), Blocs (les huit genres, ↑ ↓ ✕, « ＋ bloc » par genre,
+  les puces, sous-sections et vidéos en entrées ordonnées). Chaque texte
+  localisé est le TEXTE des Guides (F18) : l'anglais, son aperçu
+  (`previewInline` par `POST /api/events/preview`, dans la langue du segmenté
+  de la savebar, UNE requête par onglet 400 ms après la frappe ; les liens
+  `[x](url)` rendus en lien par-dessus `noteHtml`, comme `EventBlocks` du
+  site), les cinq traductions repliées, « à retraduire » quand l'anglais a
+  bougé — les six langues ensemble, plus « une à la fois ». « Traduire » par
+  sous-onglet (`POST /api/translate`) n'envoie que les textes périmés (leurs
+  cinq langues réécrites) ou incomplets (la langue manquante seule posée) :
+  les traductions à jour restent. « Enregistrer » = le TABLEAU complet
+  (`POST /api/events` : `list`, `was`) → `saveEventList` : `was` contre le
+  disque (`stale`, rien d'écrit, la page relit), `validateEvents` AVANT toute
+  écriture et chaque refus SITUÉ (`locateEventError` : événement, onglet,
+  bloc, entrée — le message sous le champ, le point rouge sur l'onglet,
+  « refusé » dans la liste, la saisie gardée), `saveEvents`, `publishEvents`
+  (R2 : un échec n'annule rien, le fichier est écrit et committé, la ligne
+  rouge le dit — la règle des Bannières), UN `commitPaths` de
+  `data/curated/events.json`, message `chore(events): <slug>` quand un seul
+  événement a bougé (ajouté, retouché, retiré — comparé à clés triées), sinon
+  « n événements ». `dirty`, `canLeave`, l'état relu après, l'événement
+  rouvert par son slug. `GET /api/events/state` sert la liste, `status[]`
+  (`eventStatus` à `now`), `now`, `imgBase`, `siteBase`, les langues, les
+  libellés, les genres, les plateformes, les squelettes : la page ne recopie
+  rien. Hash `#events`, `#events/<slug>` (écrits), `/<onglet>` (meta,
+  phases, blocks) pour un lien ou le banc. **Ce qui descend dans
+  `src/lib/admin/`** : `collectTexts` (`event-text.ts`, avec son test ; le
+  composant l'importe de là) ; `event-edit.ts` (+ test) — les libellés
+  (`EVENT_TYPE_LABEL`, `EVENT_BLOCK_LABEL`), `newEvent(day)`,
+  `newEventBlock(kind)` avec `title: {}` pour les genres qui en ont un,
+  `locateEventError` (regex sur « Événement i (slug), jalon n / bloc n (kind),
+  puce k : … », vérifiée contre les vrais messages du store). Le BUG de
+  l'admin — le titre d'un bloc ajouté n'était jamais éditable
+  (`'title' in block`) — est corrigé à la source : `emptyBlock` de
+  `EventBlocks.tsx` est désormais `newEventBlock`, donc l'admin le corrige
+  aussi, tant que sa page vit. **Admin** : « Events » quitte
+  `layout.dev.tsx`, et le groupe « Tools », vide, avec lui (le commentaire
+  garde l'historique des sept liens) ; `/admin/tools/events` répond encore
+  par son URL. **Ce que j'ai tranché (lot F)** : la savebar hors de
+  l'événement ouvert, visible aussi sur la liste (une suppression ou un
+  événement ajouté puis refermé se voient et s'enregistrent de là) ;
+  « Supprimer » dans l'en-tête ET ✕ dans la liste, même confirmation ; le
+  statut d'une ligne dont les dates viennent d'être retouchées est recalculé
+  à l'écran avec le `now` du SERVEUR (la règle d'`eventStatus`, trois
+  lignes) — le `status[]` servi vaut pour le disque, l'horloge du navigateur
+  ne sert jamais ; un texte facultatif laissé vide (titre de bloc, note,
+  alt, légende, mise en avant) ne part pas ; un libellé au-dessus de chaque
+  texte (« Titre du bloc », « Puce 2 »…), les Guides n'en avaient pas ; pas
+  de garde au retour à la liste (les changements restent comptés). **Hors
+  périmètre, mais nécessaire** : `ui-serve.test.ts` tourne dans UN processus
+  et gardait chaque page assemblée en mémoire — à la trois-centième (sept
+  pages de plus) le tas de Node (4 Go) débordait, et le fichier passait déjà à
+  171 pages sous 2 Go. Les fenêtres happy-dom sont désormais ouvertes par
+  `openWindow` et FERMÉES après chaque test (`happyDOM.close()`, un
+  `afterEach` de fichier) : 299 pages sous 2 Go. happy-dom ne reflète pas
+  `selected` dans `select.value` : le test lit `option[selected]`.
+  **Vérification** : `pnpm typecheck` (les trois `tsc`, rien), `pnpm lint`
+  (rien), `pnpm test` « Test Files 221 passed (221) / Tests 3672 passed
+  (3672) », `NODE_ENV=development pnpm exec vitest run scripts/quick
+src/lib/admin` « Test Files 60 passed (60) / Tests 1593 passed (1593) ».
+  Tests : `event-edit.test.ts` (squelettes, refus situés sur les vrais
+  messages), `actions.test.ts` (`eventsState` : statuts à `now` injecté,
+  squelettes ; `saveEventList` : fichier → R2 → commit, `stale`, refus situés
+  — slug en double, titre EN, bloc sans texte, cta sans URL —, R2 non
+  bloquant, message de commit, clés du modèle seules), `ui-serve.test.ts`
+  (la page : la liste et ses statuts, un événement et ses trois onglets,
+  l'heure de Paris, l'aperçu, Jalons ↓ ✕ ＋, un bloc ajouté AVEC son titre
+  et ce qui part, « Traduire » sélectif, refus situé puis `stale`, « ＋
+  événement », suppression sur confirmation, `canLeave` ; TABS,
+  `READ_ONLY_POSTS`, les listes du groupe Publication). Banc : quick ISOLÉ
+  (:3179, clés vidées), `--tabs events` avec `--hash events`,
+  `events/20260324-video`, `…/blocks`, `…/phases` : la liste, Méta, Blocs,
+  Jalons à la charte ; `POST /api/events` jamais appelé (les clés `R2_*` de
+  ce poste sont réelles), `/api/translate` jamais appelé, `events.json`
+  intact. **Laissé** : les contrôles à l'écran (TODO, lot F23) ; l'upload
+  d'images (le chemin se tape, la source va dans `data/editorial/events/` —
+  le hint le dit) ; le retrait de `/admin` (22). Docs : `quick-migration.md`
+  (6 FAIT, « Déjà dans quick » › Publication), `STYLE.md` (croquis, préfixe
+  `ev-`, savebar, `wide`), TODO.
+
 - **Relecture A35 (Fable) — quick : figer un monstre dont le disque diffère de
   HEAD, l'avertissement remplace le refus, validé** — commit `01df42a0` (lot
   joué par Opus). Périmètre : un seul commit, le message attendu, dix

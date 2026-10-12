@@ -15,6 +15,7 @@ const TABS = [
   'patch',
   'coupons',
   'banners',
+  'events',
   'changelog',
   'comics',
   'videos',
@@ -36,6 +37,22 @@ const readTab = (name: string): string | null => {
   return existsSync(file) ? readFileSync(file, 'utf8') : null;
 };
 const shell = (): string => readFileSync(resolve(UI, 'index.html'), 'utf8');
+
+/**
+ * Les fenêtres happy-dom qu'un test ouvre, FERMÉES après lui : ce fichier
+ * tourne dans UN processus, et une page assemblée (dix-huit onglets) reste en
+ * mémoire tant que sa fenêtre est ouverte — à la trois-centième page, le tas
+ * de Node (4 Go) débordait (12/10, lot F23 : sept pages de plus suffisaient).
+ */
+const windows: Window[] = [];
+const openWindow = (...args: ConstructorParameters<typeof Window>): Window => {
+  const w = new Window(...args);
+  windows.push(w);
+  return w;
+};
+afterEach(async () => {
+  for (const w of windows.splice(0)) await w.happyDOM.close();
+});
 
 describe('assemblePage — la coquille et ses onglets', () => {
   it('remplace chaque marqueur par le markup de son onglet, dans l’ordre', () => {
@@ -70,7 +87,7 @@ describe('assemblePage — la coquille et ses onglets', () => {
     expect(() => assemblePage('<!-- @tab a -->', () => '<!-- @tab b -->')).toThrow(/illisible/);
   });
 
-  it('assemble la vraie page : dix-sept sections, plus aucun marqueur', () => {
+  it('assemble la vraie page : dix-huit sections, plus aucun marqueur', () => {
     expect(tabsOf(shell())).toEqual(TABS);
     const page = assemblePage(shell(), readTab);
     expect(page).not.toContain('@tab');
@@ -246,6 +263,7 @@ describe('shot — la page que le banc de captures photographie', () => {
       '/api/patch/stop',
       '/api/coupons',
       '/api/banners',
+      '/api/events',
       '/api/changelog',
       '/api/translate',
       '/api/gear-reco/translate',
@@ -281,6 +299,13 @@ describe('shot — la page que le banc de captures photographie', () => {
     expect([...READ_ONLY_POSTS].filter((path) => path.startsWith('/api/character'))).toEqual([
       '/api/character/preview',
     ]);
+  });
+
+  it('des événements, relaie l’aperçu de ses textes et rien d’autre : l’enregistrement publie sur R2 et committe', () => {
+    expect([...READ_ONLY_POSTS].filter((path) => path.startsWith('/api/events'))).toEqual([
+      '/api/events/preview',
+    ]);
+    expect(READ_ONLY_POSTS.has('/api/events')).toBe(false);
   });
 
   it('des guides, relaie l’aperçu de ses textes et rien d’autre — ni l’enregistrement, ni « ＋ version »', () => {
@@ -321,7 +346,7 @@ describe('gitBar — le bouton « Pousser » de l’en-tête', () => {
    * qu'à l'appel.
    */
   async function bar() {
-    const { document } = new Window();
+    const { document } = openWindow();
     document.body.innerHTML = /<header class="top">[\s\S]*?<\/header>/.exec(shell())?.[0] ?? '';
     vi.stubGlobal('document', document);
     const lib = (await import(/* @vite-ignore */ resolve(UI, 'lib.js'))) as {
@@ -394,7 +419,7 @@ describe('log — le journal en haut de la page', () => {
    * voir quand la page remonte au journal.
    */
   async function journal(clipboard: unknown = { writeText: vi.fn(() => Promise.resolve()) }) {
-    const { document } = new Window();
+    const { document } = openWindow();
     document.body.innerHTML = /<aside class="journal"[\s\S]*?<\/aside>/.exec(shell())?.[0] ?? '';
     vi.stubGlobal('document', document);
     vi.stubGlobal('navigator', { clipboard });
@@ -621,7 +646,7 @@ describe('Noms — la page, sur le vrai markup', () => {
    */
   async function names(opts: { hash?: string; saved?: (changes: Call['body']) => unknown } = {}) {
     vi.resetModules();
-    const window = new Window({ url: `http://localhost:4747/${opts.hash ?? ''}` });
+    const window = openWindow({ url: `http://localhost:4747/${opts.hash ?? ''}` });
     const { document } = window;
     const page = assemblePage(shell(), readTab);
     document.body.innerHTML = (/<body>([\s\S]*)<\/body>/.exec(page)?.[1] ?? '').replace(
@@ -1098,7 +1123,7 @@ describe('Effets — la page, sur le vrai markup', () => {
     } = {},
   ) {
     vi.resetModules();
-    const window = new Window({ url: `http://localhost:4747/${opts.hash ?? ''}` });
+    const window = openWindow({ url: `http://localhost:4747/${opts.hash ?? ''}` });
     const { document } = window;
     const page = assemblePage(shell(), readTab);
     document.body.innerHTML = (/<body>([\s\S]*)<\/body>/.exec(page)?.[1] ?? '').replace(
@@ -1754,7 +1779,7 @@ describe('hero-picker — le picker de héros partagé, dans un document', () =>
    */
   async function picker() {
     vi.resetModules();
-    const window = new Window({ url: 'http://localhost:4747/' });
+    const window = openWindow({ url: 'http://localhost:4747/' });
     const { document } = window;
     document.body.innerHTML = '<button id="opener">Choisir</button>';
     vi.stubGlobal('window', window);
@@ -2393,7 +2418,7 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
     } = {},
   ) {
     vi.resetModules();
-    const window = new Window({ url: `http://localhost:4747/${opts.hash ?? ''}` });
+    const window = openWindow({ url: `http://localhost:4747/${opts.hash ?? ''}` });
     const { document } = window;
     const page = assemblePage(shell(), readTab);
     document.body.innerHTML = (/<body>([\s\S]*)<\/body>/.exec(page)?.[1] ?? '').replace(
@@ -5186,7 +5211,7 @@ describe('Monstres — la page, sur le vrai markup', () => {
     } = {},
   ) {
     vi.resetModules();
-    const window = new Window({ url: `http://localhost:4747/${opts.hash ?? ''}` });
+    const window = openWindow({ url: `http://localhost:4747/${opts.hash ?? ''}` });
     const { document } = window;
     const page = assemblePage(shell(), readTab);
     document.body.innerHTML = (/<body>([\s\S]*)<\/body>/.exec(page)?.[1] ?? '').replace(
@@ -5929,7 +5954,7 @@ describe('Items — la page, sur le vrai markup', () => {
     } = {},
   ) {
     vi.resetModules();
-    const window = new Window({ url: `http://localhost:4747/${opts.hash ?? '#items'}` });
+    const window = openWindow({ url: `http://localhost:4747/${opts.hash ?? '#items'}` });
     const { document } = window;
     const page = assemblePage(shell(), readTab);
     document.body.innerHTML = (/<body>([\s\S]*)<\/body>/.exec(page)?.[1] ?? '').replace(
@@ -6799,7 +6824,7 @@ describe('Bannières — la page, sur le vrai markup', () => {
     opts: { state?: Partial<State>; saved?: (body: Call['body']) => unknown } = {},
   ) {
     vi.resetModules();
-    const window = new Window({ url: 'http://localhost:4747/#banners' });
+    const window = openWindow({ url: 'http://localhost:4747/#banners' });
     const { document } = window;
     const page = assemblePage(shell(), readTab);
     document.body.innerHTML = (/<body>([\s\S]*)<\/body>/.exec(page)?.[1] ?? '').replace(
@@ -6916,6 +6941,7 @@ describe('Bannières — la page, sur le vrai markup', () => {
     ).toEqual([
       ['coupons', 'Codes promo'],
       ['banners', 'Bannières'],
+      ['events', 'Événements'],
       ['changelog', 'Journal du site'],
       ['comics', '4-comics'],
       ['videos', 'Vidéos'],
@@ -7195,6 +7221,626 @@ describe('Bannières — la page, sur le vrai markup', () => {
   });
 });
 
+describe('Événements — la page, sur le vrai markup', () => {
+  // L'horloge est FACTICE d'un bout à l'autre : l'aperçu part 400 ms après une
+  // frappe, et un minuteur laissé en vol par un test irait frapper le `fetch`
+  // du suivant.
+  afterEach(() => {
+    vi.clearAllTimers();
+    vi.useRealTimers();
+    vi.unstubAllGlobals();
+  });
+
+  type Text = Record<string, string>;
+  interface EventRow {
+    slug: string;
+    type: string;
+    title: Text;
+    summary?: Text;
+    organizer?: string;
+    cover?: string;
+    start: string;
+    end: string;
+    phases?: { until: string; label: Text }[];
+    blocks: Record<string, unknown>[];
+    draft?: boolean;
+    revealEarly?: boolean;
+  }
+  interface Issue {
+    index: number | null;
+    tab: string;
+    block?: number;
+    entry?: number;
+    message: string;
+  }
+  interface Saved {
+    ok: boolean;
+    log: string[];
+    issues: Issue[];
+    written: boolean;
+    stale: boolean;
+  }
+  type Call = { path: string; body?: unknown };
+
+  const SIX = { en: 'Hero Video Event', jp: 'jp', kr: 'kr', zh: 'zh', es: 'es', fr: 'fr' };
+  const disk = (): EventRow[] => [
+    {
+      slug: '20260324-video',
+      type: 'contest',
+      // Le titre n'a que le français : « Traduire » doit le compléter sans l'écraser.
+      title: { en: 'Hero Video Event', fr: 'Événement vidéo' },
+      summary: { ...SIX, en: 'Calling all creators!' },
+      organizer: 'Outerpedia / EvaMains',
+      cover: '/images/events/default.webp',
+      start: '2026-03-24T00:00:00Z',
+      end: '2026-05-05T00:00:00Z',
+      phases: [
+        { until: '2026-03-24T00:00:00Z', label: { ...SIX, en: 'Submissions open' } },
+        { until: '2026-04-28T00:00:00Z', label: { ...SIX, en: 'Deadline' } },
+      ],
+      blocks: [
+        { kind: 'prose', text: { ...SIX, en: 'Gifts from Major9!' } },
+        {
+          kind: 'callout',
+          title: { ...SIX, en: 'Results' },
+          text: { ...SIX, en: 'Shoutout to [Rick](https://youtu.be/x)! Redeem {I-I/Free Ether}.' },
+        },
+        { kind: 'list', title: { ...SIX, en: 'Rules' }, items: [{ ...SIX, en: 'Rule one' }] },
+      ],
+    },
+    {
+      slug: 'soon',
+      type: 'tournament',
+      title: { en: 'Soon' },
+      start: '2026-11-01T00:00:00Z',
+      end: '2026-11-08T00:00:00Z',
+      blocks: [{ kind: 'timeline' }],
+    },
+    {
+      slug: '_no-peaking',
+      type: 'community',
+      title: { en: 'Get out' },
+      start: '2025-10-09T00:00:00Z',
+      end: '2025-10-15T23:59:59Z',
+      draft: true,
+      blocks: [{ kind: 'prose', text: { en: 'Nothing here' } }],
+    },
+  ];
+  const NOW = '2026-10-12T13:00:00.000Z';
+  const state = (events: EventRow[]) => ({
+    events,
+    status: events.map((e) =>
+      Date.parse(NOW) < Date.parse(e.start)
+        ? 'upcoming'
+        : Date.parse(NOW) <= Date.parse(e.end)
+          ? 'ongoing'
+          : 'ended',
+    ),
+    now: NOW,
+    imgBase: 'https://img.test',
+    siteBase: 'https://outerpedia.local/en/event',
+    langs: { default: 'en', shown: ['en', 'jp', 'kr', 'zh', 'fr', 'es'] },
+    labels: {
+      type: { tournament: 'Tournoi', contest: 'Concours', community: 'Communauté' },
+      block: {
+        prose: 'Paragraphe',
+        list: 'Liste à puces',
+        sections: 'Sous-sections',
+        timeline: 'Calendrier (jalons)',
+        callout: 'Encart',
+        cta: 'Bouton d’action',
+        videos: 'Vidéos',
+        image: 'Image',
+      },
+    },
+    types: ['tournament', 'contest', 'community'],
+    kinds: ['prose', 'list', 'sections', 'timeline', 'callout', 'cta', 'videos', 'image'],
+    platforms: ['youtube', 'twitch', 'bilibili'],
+    skeleton: {
+      event: {
+        slug: '',
+        type: 'community',
+        title: {},
+        start: '2026-10-12T00:00:00Z',
+        end: '2026-10-12T23:59:00Z',
+        blocks: [{ kind: 'prose', title: {}, text: {} }],
+        draft: true,
+      },
+      block: {
+        prose: { kind: 'prose', title: {}, text: {} },
+        list: { kind: 'list', title: {}, items: [{}] },
+        sections: { kind: 'sections', title: {}, items: [{ title: {}, text: {} }] },
+        timeline: { kind: 'timeline', title: {} },
+        callout: { kind: 'callout', title: {}, text: {} },
+        cta: { kind: 'cta', label: {}, href: '' },
+        videos: {
+          kind: 'videos',
+          title: {},
+          entries: [{ platform: 'youtube', id: '', title: '' }],
+        },
+        image: { kind: 'image', src: '' },
+      },
+    },
+  });
+
+  /**
+   * La page de quick dans un document happy-dom, comme pour les Guides : la
+   * VRAIE coquille assemblée, le vrai `lib.js` et le vrai `tabs/events.js`,
+   * démarrés par `sections.start()`. `fetch` est factice : il sert l'état,
+   * répond à l'enregistrement et note ce que la page poste.
+   */
+  async function events(
+    opts: {
+      hash?: string;
+      saved?: (body: { list: EventRow[]; was: EventRow[] }, data: EventRow[]) => Saved;
+      translated?: (texts: string[]) => unknown;
+    } = {},
+  ) {
+    vi.useFakeTimers();
+    vi.resetModules();
+    const window = openWindow({ url: `http://localhost:4747/${opts.hash ?? '#events'}` });
+    const { document } = window;
+    const page = assemblePage(shell(), readTab);
+    document.body.innerHTML = (/<body>([\s\S]*)<\/body>/.exec(page)?.[1] ?? '').replace(
+      /<script[\s\S]*?<\/script>/g,
+      '',
+    );
+
+    const data = { events: disk(), reads: 0 };
+    const calls: Call[] = [];
+    const confirm = vi.fn(() => true);
+    const answer = (payload: unknown, status = 200) => {
+      const bytes = new TextEncoder().encode(JSON.stringify(payload));
+      let read = false;
+      return {
+        ok: status === 200,
+        status,
+        json: async () => payload,
+        body: {
+          getReader: () => ({
+            read: async () => (read ? { done: true } : ((read = true), { value: bytes })),
+          }),
+        },
+      };
+    };
+    const written = (body: { list: EventRow[] }): Saved => {
+      data.events = JSON.parse(JSON.stringify(body.list)) as EventRow[];
+      return { ok: true, log: ['fait'], issues: [], written: true, stale: false };
+    };
+    const fetch = vi.fn(async (path: string, init?: { body?: string }) => {
+      const body: unknown = init?.body ? JSON.parse(init.body) : undefined;
+      if (path.startsWith('/api/events') || path === '/api/translate')
+        calls.push(body ? { path, body } : { path });
+      if (path === '/api/events/state') {
+        data.reads += 1;
+        return answer(state(JSON.parse(JSON.stringify(data.events)) as EventRow[]));
+      }
+      if (path === '/api/events/preview') {
+        const { texts } = body as { texts: string[] };
+        return answer({ segments: texts.map((t) => (t ? [{ t: 'text', s: `[${t}]` }] : [])) });
+      }
+      if (path === '/api/translate') {
+        const { texts } = body as { texts: string[] };
+        return answer(
+          opts.translated?.(texts) ?? {
+            results: texts.map((t) => ({
+              fr: `fr ${t}`,
+              es: `es ${t}`,
+              jp: `jp ${t}`,
+              kr: `kr ${t}`,
+              zh: `zh ${t}`,
+            })),
+            provider: 'deepl',
+          },
+        );
+      }
+      if (path === '/api/events') {
+        const b = body as { list: EventRow[]; was: EventRow[] };
+        return answer(opts.saved?.(b, data.events) ?? written(b));
+      }
+      return answer({ imgBase: 'https://img.test', host: 'banc', port: 4747 });
+    });
+
+    vi.stubGlobal('window', window);
+    vi.stubGlobal('document', document);
+    vi.stubGlobal('location', window.location);
+    vi.stubGlobal('history', window.history);
+    vi.stubGlobal('fetch', fetch);
+    vi.stubGlobal('confirm', confirm);
+    vi.stubGlobal('Event', window.Event);
+
+    const lib = (await import(/* @vite-ignore */ resolve(UI, 'lib.js'))) as {
+      sections: { start: () => void };
+    };
+    await import(/* @vite-ignore */ resolve(UI, 'tabs', 'events.js'));
+    lib.sections.start();
+    const settle = async () => {
+      for (let i = 0; i < 6; i++) {
+        await vi.advanceTimersByTimeAsync(500);
+        await Promise.resolve();
+      }
+    };
+    await settle();
+
+    const el = (id: string) => document.getElementById(id) as unknown as HTMLInputElement;
+    const all = (selector: string) =>
+      [...document.querySelectorAll(selector)] as unknown as HTMLElement[];
+    const fire = (target: HTMLElement, type: string) =>
+      target.dispatchEvent(new window.Event(type, { bubbles: true }) as unknown as Event);
+    const type = (field: HTMLInputElement, value: string) => {
+      field.value = value;
+      fire(field as unknown as HTMLElement, 'input');
+    };
+    const field = (key: string, lang = 'en') =>
+      all(`#ev-panel [data-key="${key}"][data-lang="${lang}"]`)[0] as unknown as HTMLInputElement;
+    const path = (p: string, part?: string) =>
+      all(
+        `#ev-panel [data-path="${p}"]${part ? `[data-part="${part}"]` : ''}`,
+      )[0] as unknown as HTMLInputElement;
+    /** L'option choisie d'un `select` — happy-dom ne suit pas `selected` dans `.value`. */
+    const chosen = (p: string) =>
+      (path(p) as unknown as HTMLElement).querySelector('option[selected]')?.getAttribute('value');
+    const texts = (root: HTMLElement, selector: string) =>
+      [...root.querySelectorAll(selector)].map((n) => n.textContent ?? '');
+    /** La valeur d'un champ — happy-dom garde le saut de ligne qui ouvre une `<textarea>`, un navigateur le mange. */
+    const val = (f: HTMLInputElement) => f.value.replace(/^\n/, '');
+    return {
+      el,
+      all,
+      calls,
+      confirm,
+      data,
+      settle,
+      window,
+      type,
+      field,
+      path,
+      chosen,
+      val,
+      /** Les lignes de la liste : titre, slug, famille, badges, dates. */
+      rows: () =>
+        all('#ev-rows tr').map((tr) => [
+          texts(tr, '.ev-open strong')[0],
+          texts(tr, '.ev-slug')[0],
+          tr.children[2].textContent,
+          texts(tr, '.ev-status .badge').join(' | '),
+          texts(tr, '.ev-dates')[0],
+        ]),
+      open: async (slug: string) => {
+        const tr = all('#ev-rows tr').find((r) => texts(r, '.ev-slug')[0] === slug);
+        (tr?.querySelector('[data-open]') as HTMLElement).click();
+        await settle();
+      },
+      sub: async (id: string) => {
+        all(`#ev-tabs [data-sub="${id}"]`)[0].click();
+        await settle();
+      },
+      subs: () => all('#ev-tabs [role="tab"]').map((t) => t.dataset.sub),
+      dots: () =>
+        all('#ev-tabs [role="tab"]')
+          .filter((t) => t.querySelector('.dot'))
+          .map((t) => [t.dataset.sub, t.querySelector('.dot')!.className]),
+      count: () => el('ev-count').textContent,
+      act: async (selector: string) => {
+        all(`#ev-panel ${selector}`)[0].click();
+        await settle();
+      },
+      states: () => calls.filter((c) => c.path === '/api/events/state').length,
+      posted: () =>
+        calls
+          .filter((c) => c.path === '/api/events')
+          .map((c) => c.body as { list: EventRow[]; was: EventRow[] }),
+      previews: () =>
+        calls
+          .filter((c) => c.path === '/api/events/preview')
+          .map((c) => c.body as { texts: string[]; lang: string }),
+      translated: () =>
+        calls
+          .filter((c) => c.path === '/api/translate')
+          .map((c) => (c.body as { texts: string[] }).texts),
+      save: async () => {
+        el('ev-save').click();
+        await settle();
+      },
+    };
+  }
+
+  it('servie dans Publication, après Bannières, en pleine largeur ; la liste dans l’ordre du fichier, le statut à l’heure du serveur', async () => {
+    const page = await events();
+    expect(
+      page.all('#tabs [data-group="publication"]').map((b) => [b.dataset.tab, b.textContent]),
+    ).toEqual([
+      ['coupons', 'Codes promo'],
+      ['banners', 'Bannières'],
+      ['events', 'Événements'],
+      ['changelog', 'Journal du site'],
+      ['comics', '4-comics'],
+      ['videos', 'Vidéos'],
+      ['discord', 'Discord'],
+    ]);
+    expect(page.el('tab-events').hidden).toBe(false);
+    expect(page.all('main')[0].classList.contains('wide')).toBe(true);
+    expect(page.states()).toBe(1);
+    expect(page.rows()).toEqual([
+      [
+        'Hero Video Event',
+        '20260324-video',
+        'Concours',
+        'terminé',
+        '2026-03-24 00:00 → 2026-05-05 00:00',
+      ],
+      // À venir sans « dévoiler avant le début » : un teaser.
+      ['Soon', 'soon', 'Tournoi', 'à venir | teaser', '2026-11-01 00:00 → 2026-11-08 00:00'],
+      [
+        'Get out',
+        '_no-peaking',
+        'Communauté',
+        'terminé | brouillon',
+        '2025-10-09 00:00 → 2025-10-15 23:59',
+      ],
+    ]);
+    expect(page.el('ev-summary').textContent).toBe(
+      '3 événements1 à venir1 brouillonstatut à l’heure du serveur : 2026-10-12 13:00 UTC',
+    );
+    expect(page.count()).toBe('aucune modification');
+    expect(page.el('ev-save').disabled).toBe(true);
+    // La cover sous `imgBase`, « ouvrir sur le site » vers la page du site.
+    expect(page.all('#ev-rows .ev-cover img')[0].getAttribute('src')).toBe(
+      'https://img.test/images/events/default.webp',
+    );
+    expect(page.all('#ev-rows .ev-acts a')[0].getAttribute('href')).toBe(
+      'https://outerpedia.local/en/event/20260324-video',
+    );
+  });
+
+  it('un événement ouvert au clic : l’en-tête, l’adresse, Méta — les champs, l’heure de Paris, les six langues ensemble, l’aperçu d’UNE requête', async () => {
+    const page = await events();
+    await page.open('20260324-video');
+    expect(page.window.location.hash).toBe('#events/20260324-video');
+    expect(page.el('ev-list').hidden).toBe(true);
+    expect(page.el('ev-head').querySelector('[data-title]')?.textContent).toBe('Hero Video Event');
+    expect(page.subs()).toEqual(['meta', 'phases', 'blocks']);
+    expect(page.path('slug').value).toBe('20260324-video');
+    expect(page.chosen('type')).toBe('contest');
+    expect(page.path('draft').checked).toBe(false);
+    expect(page.path('start', 'day').value).toBe('2026-03-24');
+    expect(page.path('start', 'time').value).toBe('00:00');
+    // L'heure de Paris, calculée, à côté de l'UTC (heure d'hiver encore le 24 mars : +1).
+    expect(page.all('#ev-panel [data-when="start"] [data-paris]')[0].textContent).toBe(
+      '24/03/2026 01:00 à Paris',
+    );
+    // Le titre : l'anglais, puis les cinq autres langues sous « Traductions », repliées.
+    expect(page.field('meta.title').value).toBe('Hero Video Event');
+    expect(page.field('meta.title', 'fr').value).toBe('Événement vidéo');
+    expect(page.field('meta.title', 'jp').value).toBe('');
+    expect(page.all('#ev-panel [data-text="meta.title"] [data-tally]')[0].textContent).toBe(
+      '1 / 5',
+    );
+    expect(page.all('#ev-panel [data-text="meta.title"] details[open]')).toHaveLength(0);
+    // L'aperçu : les deux textes de Méta, en anglais, d'une requête.
+    expect(page.previews()).toEqual([
+      { texts: ['Hero Video Event', 'Calling all creators!'], lang: 'en' },
+    ]);
+    expect(page.all('#ev-panel [data-pv="meta.title"]')[0].textContent).toBe('[Hero Video Event]');
+    // Une frappe : l'aperçu repart 400 ms après, l'en-tête suit sans redessin.
+    page.type(page.field('meta.title'), 'Hero Video Event 2026');
+    expect(page.el('ev-head').querySelector('[data-title]')?.textContent).toBe(
+      'Hero Video Event 2026',
+    );
+    expect(page.previews()).toHaveLength(1);
+    await page.settle();
+    expect(page.previews()[1]).toEqual({
+      texts: ['Hero Video Event 2026', 'Calling all creators!'],
+      lang: 'en',
+    });
+    expect(page.count()).toBe('1 événement modifié');
+    expect(page.dots()).toEqual([['meta', 'dot edit']]);
+  });
+
+  it('Jalons : la liste ordonnée, ↓ puis ✕ ; « ＋ jalon » pose une date et un libellé', async () => {
+    const page = await events({ hash: '#events/20260324-video/phases' });
+    expect(page.el('tab-events').hidden).toBe(false);
+    expect(page.subs()).toEqual(['meta', 'phases', 'blocks']);
+    expect(page.all('#ev-tabs [aria-selected="true"]')[0].dataset.sub).toBe('phases');
+    expect(page.field('phases.0.label').value).toBe('Submissions open');
+    expect(page.field('phases.1.label').value).toBe('Deadline');
+    await page.act('[data-act="down-phase"][data-i="0"]');
+    expect(page.field('phases.0.label').value).toBe('Deadline');
+    expect(page.dots()).toEqual([['phases', 'dot edit']]);
+    await page.act('[data-act="del-phase"][data-i="1"]');
+    expect(page.all('#ev-panel [data-key^="phases."][data-lang="en"]')).toHaveLength(1);
+    await page.act('[data-act="add-phase"]');
+    expect(page.all('#ev-panel [data-key^="phases."][data-lang="en"]')).toHaveLength(2);
+    page.type(page.path('phases.1.until', 'day'), '2026-05-05');
+    page.type(page.path('phases.1.until', 'time'), '18:00');
+    expect(page.all('#ev-panel [data-when="phases.1.until"] [data-paris]')[0].textContent).toBe(
+      '05/05/2026 20:00 à Paris',
+    );
+    page.type(page.field('phases.1.label'), 'Winners');
+    await page.save();
+    expect(page.posted()[0].list[0].phases).toEqual([
+      { until: '2026-04-28T00:00:00Z', label: { ...SIX, en: 'Deadline' } },
+      { until: '2026-05-05T18:00:00Z', label: { en: 'Winners' } },
+    ]);
+  });
+
+  it('Blocs : un bloc ajouté a son titre, ÉDITABLE (le bug de l’admin) ; ↑ ↓ ✕, « ＋ puce » ; ce qui part', async () => {
+    const page = await events({ hash: '#events/20260324-video/blocks' });
+    expect(page.all('#ev-panel .ev-block .card-head .badge').map((b) => b.textContent)).toEqual([
+      'Paragraphe',
+      'Encart',
+      'Liste à puces',
+    ]);
+    // Le paragraphe sans titre sur le disque a quand même son champ de titre.
+    expect(page.field('blocks.0.title')).toBeDefined();
+    // L'aperçu rend le lien markdown en lien, et le tag en segment.
+    expect(page.all('#ev-panel [data-pv="blocks.1.text"] a')[0].getAttribute('href')).toBe(
+      'https://youtu.be/x',
+    );
+    await page.act('[data-act="add-block"][data-kind="list"]');
+    expect(page.all('#ev-panel .ev-block')).toHaveLength(4);
+    page.type(page.field('blocks.3.title'), 'Prizes');
+    page.type(page.field('blocks.3.items.0'), 'First: 3000 ether');
+    await page.act('[data-block="3"] [data-act="add-entry"]');
+    page.type(page.field('blocks.3.items.1'), 'Second: 1000 ether');
+    await page.act('[data-block="3"] [data-act="up-entry"][data-i="1"]');
+    expect(page.val(page.field('blocks.3.items.0'))).toBe('Second: 1000 ether');
+    await page.act('[data-act="up-block"][data-i="3"]');
+    expect(page.all('#ev-panel .ev-block .card-head .badge').map((b) => b.textContent)).toEqual([
+      'Paragraphe',
+      'Encart',
+      'Liste à puces',
+      'Liste à puces',
+    ]);
+    await page.act('[data-act="del-block"][data-i="0"]');
+    expect(page.dots()).toEqual([['blocks', 'dot edit']]);
+    await page.save();
+    const sent = page.posted()[0];
+    expect(sent.was).toEqual(disk());
+    expect(sent.list[0].blocks).toEqual([
+      disk()[0].blocks[1],
+      {
+        kind: 'list',
+        title: { en: 'Prizes' },
+        items: [{ en: 'Second: 1000 ether' }, { en: 'First: 3000 ether' }],
+      },
+      disk()[0].blocks[2],
+    ]);
+    // Écrit : le disque relu, l'événement rouvert, plus rien en attente.
+    expect(page.states()).toBe(2);
+    expect(page.count()).toBe('aucune modification');
+    expect(page.window.location.hash).toBe('#events/20260324-video');
+  });
+
+  it('« Traduire » : les seuls textes périmés ou incomplets de l’onglet, d’UN appel ; une langue en place et à jour reste', async () => {
+    const page = await events({ hash: '#events/20260324-video' });
+    // Le résumé est traduit partout : rien à faire. Le titre n'a que le français.
+    page.all('#ev-panel [data-act="translate"]')[0].click();
+    await page.settle();
+    expect(page.translated()).toEqual([['Hero Video Event']]);
+    expect(page.field('meta.title', 'jp').value).toBe('jp Hero Video Event');
+    // Le français était là : gardé.
+    expect(page.field('meta.title', 'fr').value).toBe('Événement vidéo');
+    expect(page.all('#ev-panel [data-text="meta.title"] details[open]')).toHaveLength(1);
+    // L'anglais du résumé retouché : « à retraduire », et il part cette fois, écrasé partout.
+    page.type(page.field('meta.summary'), 'Calling all creators, again!');
+    expect(page.all('#ev-panel [data-text="meta.summary"] [data-stale]')[0].textContent).toBe(
+      'à retraduire',
+    );
+    page.all('#ev-panel [data-act="translate"]')[0].click();
+    await page.settle();
+    expect(page.translated()[1]).toEqual(['Calling all creators, again!']);
+    expect(page.val(page.field('meta.summary', 'fr'))).toBe('fr Calling all creators, again!');
+    expect(page.all('#ev-panel [data-text="meta.summary"] [data-stale]')[0].textContent).toBe('');
+    // Tout traduit : le bouton le dit, rien ne part.
+    page.all('#ev-panel [data-act="translate"]')[0].click();
+    await page.settle();
+    expect(page.translated()).toHaveLength(2);
+  });
+
+  it('un refus SITUÉ : la saisie reste, le point rouge sur l’onglet, le message sous le bloc, « refusé » dans la liste ; `stale` relit', async () => {
+    const page = await events({
+      hash: '#events/20260324-video/blocks',
+      saved: (body) =>
+        body.list[0].blocks[0].text && !(body.list[0].blocks[0].text as Text).en
+          ? {
+              ok: false,
+              log: ['REFUSÉ'],
+              written: false,
+              stale: false,
+              issues: [
+                {
+                  index: 0,
+                  tab: 'blocks',
+                  block: 0,
+                  message: 'Événement 1 (20260324-video), bloc 1 (prose) : texte EN requis.',
+                },
+              ],
+            }
+          : { ok: false, log: ['REFUSÉ'], written: false, stale: true, issues: [] },
+    });
+    page.type(page.field('blocks.0.text'), '');
+    await page.save();
+    expect(page.states()).toBe(1);
+    expect(page.val(page.field('blocks.0.text'))).toBe('');
+    expect(page.count()).toBe('1 événement modifié1 refus');
+    expect(page.dots()).toEqual([['blocks', 'dot ko']]);
+    expect(page.all('#ev-panel .ev-block')[0].classList.contains('ko')).toBe(true);
+    expect(
+      page
+        .all('#ev-panel .ev-err')
+        .map((e) => e.textContent)
+        .filter(Boolean),
+    ).toEqual(['Événement 1 (20260324-video), bloc 1 (prose) : texte EN requis.']);
+    expect(page.el('ev-head').querySelector('[data-status]')?.textContent).toBe(
+      'terminémodifiérefusé',
+    );
+    // Y retoucher lève le refus.
+    page.type(page.field('blocks.0.text'), 'Gifts!');
+    expect(page.dots()).toEqual([['blocks', 'dot edit']]);
+    // Le disque avait changé : relu tel quel.
+    await page.save();
+    expect(page.states()).toBe(2);
+    expect(page.val(page.field('blocks.0.text'))).toBe('Gifts from Major9!');
+    expect(page.count()).toBe('aucune modification');
+  });
+
+  it('« ＋ événement » : le squelette du serveur, ouvert sur Méta ; supprimer demande confirmation ; quitter avec des changements aussi', async () => {
+    const page = await events();
+    page.el('ev-add').click();
+    await page.settle();
+    expect(page.el('ev-event').hidden).toBe(false);
+    expect(page.path('slug').value).toBe('');
+    expect(page.chosen('type')).toBe('community');
+    expect(page.path('draft').checked).toBe(true);
+    expect(page.path('start', 'day').value).toBe('2026-10-12');
+    expect(page.count()).toBe('1 événement modifié');
+    // Pas de slug : l'adresse reste la liste.
+    expect(page.window.location.hash).toBe('#events');
+    page.type(page.path('slug'), 'new-one');
+    page.type(page.field('meta.title'), 'New one');
+    await page.sub('blocks');
+    // Le paragraphe du squelette a son titre.
+    expect(page.field('blocks.0.title')).toBeDefined();
+    page.type(page.field('blocks.0.text'), 'Hello');
+    // Retour à la liste : la ligne nouvelle, la savebar la compte encore.
+    page.el('ev-head').querySelector<HTMLElement>('[data-act="back"]')!.click();
+    await page.settle();
+    expect(page.rows().map((r) => [r[0], r[3]])).toEqual([
+      ['Hero Video Event', 'terminé'],
+      ['Soon', 'à venir | teaser'],
+      ['Get out', 'terminé | brouillon'],
+      // Du jour, 00:00 → 23:59 : en cours à 13:00.
+      ['New one', 'en cours | brouillon | nouveau'],
+    ]);
+    expect(page.count()).toBe('1 événement modifié');
+    // Supprimer « Soon » : refusé une fois, puis fait — un retrait compte.
+    page.confirm.mockReturnValueOnce(false);
+    (page.all('#ev-rows [data-del]')[1] as HTMLElement).click();
+    expect(page.rows()).toHaveLength(4);
+    (page.all('#ev-rows [data-del]')[1] as HTMLElement).click();
+    expect(page.rows().map((r) => r[0])).toEqual(['Hero Video Event', 'Get out', 'New one']);
+    expect(page.count()).toBe('2 événements modifiés');
+    // Quitter l'onglet : sur confirmation ; `dirty` compte.
+    page.confirm.mockReturnValueOnce(false);
+    page.all('#tabs [data-tab="banners"]')[0].click();
+    expect(page.el('tab-events').hidden).toBe(false);
+    await page.save();
+    const sent = page.posted()[0];
+    expect(sent.list.map((e) => e.slug)).toEqual(['20260324-video', '_no-peaking', 'new-one']);
+    expect(sent.list[2]).toEqual({
+      slug: 'new-one',
+      type: 'community',
+      title: { en: 'New one' },
+      start: '2026-10-12T00:00:00Z',
+      end: '2026-10-12T23:59:00Z',
+      blocks: [{ kind: 'prose', text: { en: 'Hello' } }],
+      draft: true,
+    });
+    expect(page.count()).toBe('aucune modification');
+  });
+});
+
 describe('Journal du site — la page, sur le vrai markup', () => {
   // L'horloge est FACTICE d'un bout à l'autre (cf. `journal`) : l'aperçu se
   // relance 400 ms après une frappe, et un minuteur laissé en vol par un test
@@ -7422,7 +8068,7 @@ describe('Journal du site — la page, sur le vrai markup', () => {
     } = {},
   ) {
     vi.resetModules();
-    const window = new Window({ url: `http://localhost:4747/#${opts.hash ?? 'changelog'}` });
+    const window = openWindow({ url: `http://localhost:4747/#${opts.hash ?? 'changelog'}` });
     const { document } = window;
     const page = assemblePage(shell(), readTab);
     document.body.innerHTML = (/<body>([\s\S]*)<\/body>/.exec(page)?.[1] ?? '').replace(
@@ -7589,6 +8235,7 @@ describe('Journal du site — la page, sur le vrai markup', () => {
     ).toEqual([
       ['coupons', 'Codes promo'],
       ['banners', 'Bannières'],
+      ['events', 'Événements'],
       ['changelog', 'Journal du site'],
       ['comics', '4-comics'],
       ['videos', 'Vidéos'],
@@ -8361,7 +9008,7 @@ describe('Tables du jeu — la page, sur le vrai markup', () => {
     } = {},
   ) {
     vi.resetModules();
-    const window = new Window({ url: `http://localhost:4747/${opts.hash ?? ''}` });
+    const window = openWindow({ url: `http://localhost:4747/${opts.hash ?? ''}` });
     const { document } = window;
     const page = assemblePage(shell(), readTab);
     document.body.innerHTML = (/<body>([\s\S]*)<\/body>/.exec(page)?.[1] ?? '').replace(
@@ -9053,7 +9700,7 @@ describe('Tableau de bord — la page, sur le vrai markup', () => {
     } = {},
   ) {
     vi.resetModules();
-    const window = new Window({ url: `http://localhost:4747/${opts.hash ?? ''}` });
+    const window = openWindow({ url: `http://localhost:4747/${opts.hash ?? ''}` });
     const { document } = window;
     const page = assemblePage(shell(), readTab);
     document.body.innerHTML = (/<body>([\s\S]*)<\/body>/.exec(page)?.[1] ?? '').replace(
@@ -9547,7 +10194,7 @@ describe('Patch — la page, sur le vrai markup', () => {
    */
   async function patch(opts: { state?: Partial<State>; hash?: string; stop?: unknown } = {}) {
     vi.resetModules();
-    const window = new Window({ url: `http://localhost:4747/${opts.hash ?? '#patch'}` });
+    const window = openWindow({ url: `http://localhost:4747/${opts.hash ?? '#patch'}` });
     const { document } = window;
     const page = assemblePage(shell(), readTab);
     document.body.innerHTML = (/<body>([\s\S]*)<\/body>/.exec(page)?.[1] ?? '').replace(
@@ -10514,7 +11161,7 @@ describe('Guides — la page, sur le vrai markup', () => {
   ) {
     vi.useFakeTimers();
     vi.resetModules();
-    const window = new Window({ url: `http://localhost:4747/${opts.hash ?? ''}` });
+    const window = openWindow({ url: `http://localhost:4747/${opts.hash ?? ''}` });
     const { document } = window;
     const page = assemblePage(shell(), readTab);
     document.body.innerHTML = (/<body>([\s\S]*)<\/body>/.exec(page)?.[1] ?? '').replace(
@@ -11820,7 +12467,7 @@ describe('Extraction — la page, sur le vrai markup', () => {
     } = {},
   ) {
     vi.resetModules();
-    const window = new Window({ url: `http://localhost:4747/${opts.hash ?? ''}` });
+    const window = openWindow({ url: `http://localhost:4747/${opts.hash ?? ''}` });
     const { document } = window;
     const page = assemblePage(shell(), readTab);
     document.body.innerHTML = (/<body>([\s\S]*)<\/body>/.exec(page)?.[1] ?? '').replace(
