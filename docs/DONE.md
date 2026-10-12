@@ -7,6 +7,31 @@
 
 ## 2026-10-12
 
+- **Relecture A35 (Fable) — quick : figer un monstre dont le disque diffère de
+  HEAD, l'avertissement remplace le refus, validé** — commit `01df42a0` (lot
+  joué par Opus). Périmètre : un seul commit, le message attendu, dix
+  fichiers, tous dans le lot (`actions.ts`, `monster-freeze.ts` en commentaires
+  seuls, `tabs/extractor.{html,js}`, `STYLE.md`, les deux tests, `TODO.md`,
+  `quick-migration.md`, DONE) ; ni `package.json`, ni `pnpm-lock.yaml`, ni
+  CSS (`.ex-warn` existait, vérifié dans `extractor.css`) ; `monsterDirtyFiles`
+  et `monster-freeze.test.ts` intacts ; le bouton « 2. Committer la promotion
+  (Patch) » passe par le `data-go` délégué sur `#tab-extractor`, déjà là.
+  Contrôles sur `01df42a0` : `pnpm typecheck` 0, `pnpm lint` 0, `pnpm test`
+  220 fichiers / 3647 tests, `scripts/quick` + `src/lib/admin` sous
+  `NODE_ENV=development` 58 / 1555. Rejoué par `tsx` avec des deps factices :
+  un monstre sale passe, `was` identique propre ou sale, la ligne « le disque
+  diffère de HEAD … l'archive fige l'état COMMITTÉ abc1234 du 2026-10-12 » est
+  la première du journal streamé et de `log`, avant « état de abc1234 figé
+  sous 1@3 », `versionMonster … HEAD`, le commit ne porte que l'archive, les
+  `meta.json` et les `config.json` ; un monstre propre n'a pas la ligne ; sale
+  et `stale` refuse toujours sans écrire ; le moteur qui lève garde la ligne
+  devant « Rien n'est figé ». Banc (quick isolé :3177, clés vidées,
+  `#extractor/monster/4318062/freeze`) : le plan d'un monstre propre est
+  inchangé, « Figer » actif, pas d'ambre. Reste à Sevih : le contrôle (9) du
+  TODO (l'ambre et le bandeau « disque » après un « Promouvoir » non
+  committé, que ni le banc ni moi n'avons fabriqué). Suite : lot F23
+  (Événements, migration 6).
+
 - **quick : figer un monstre dont le disque diffère de HEAD — l'avertissement
   remplace le refus (lot A35)** — l'item « À TRANCHER par Sevih » du lot F22,
   tranché le 12/10 : le refus tombe, l'avertissement reste. **Pourquoi** :
