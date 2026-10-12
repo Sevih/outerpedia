@@ -7,6 +7,39 @@
 
 ## 2026-10-12
 
+- **Relecture F23 (Fable) — quick : section « Événements », la liste,
+  l'éditeur à six langues, enregistrer publie sur R2 et committe, validé** —
+  commit `2930dfc1` (lot joué par Opus). Périmètre : un seul commit, le
+  message attendu, vingt et un fichiers tous dans le lot (`tabs/events.*`,
+  `actions.ts`, `server.ts`, `shot.mjs`, `lib.js`, `index.html`,
+  `event-edit.ts` et `event-text.ts` descendus dans `src/lib/admin/` avec
+  leurs tests, `EventBlocks.tsx` et `EventsEditor.tsx` qui les importent,
+  `layout.dev.tsx`, les trois docs) ; ni `package.json`, ni `pnpm-lock.yaml`,
+  ni `data/curated/events.json`. Contrôles sur `2930dfc1` : `pnpm typecheck`
+  0, `pnpm lint` 0, `pnpm test` 221 fichiers / 3672 tests, `scripts/quick` +
+  `src/lib/admin` sous `NODE_ENV=development` 60 / 1593. Rejoué par `tsx`
+  avec des deps factices sur le VRAI `events.json` : l'état sert les deux
+  événements « ended » à `now` injecté, « ongoing » et « upcoming » quand les
+  dates bougent, le squelette d'un bloc porte `title: {}` ; `was` qui n'est
+  pas le disque → `stale`, rien d'appelé ; quatre fautes en une liste (bloc
+  sans texte, cta sans URL, titre EN manquant, slug en double) → quatre refus
+  situés (`{index, tab, block}`), ni écriture ni commit ; une retouche →
+  `saveEvents`, `publishEvents`, `commitPaths` dans cet ordre, message
+  `chore(events): 20260324-video`, « 2 événements » pour deux, le slug retiré
+  pour une suppression ; R2 en échec → fichier écrit et committé, `ok` faux,
+  la ligne rouge en dernier ; une clé étrangère est nettoyée avant
+  comparaison. Banc (quick isolé :3181, clés vidées, `--tabs events` sur
+  `#events`, `#events/20260324-video`, `…/blocks`, `…/phases`) : la liste
+  avec statuts, badge « brouillon », covers et dates UTC ; Méta avec les
+  textes à aperçu et « Traductions (5) 5 / 5 » ; Blocs avec « Titre du bloc »
+  éditable sur un bloc qui n'en avait pas (le bug) ; Jalons avec l'heure de
+  Paris juste (01:00 le 24/03, 02:00 le 28/04 : le passage à l'heure d'été
+  est pris). `POST /api/events` jamais appelé, `events.json` intact,
+  `git status` propre après le banc. Reste à Sevih : les sept contrôles du
+  TODO (le vrai enregistrement, R2, « Traduire », le site sans déploiement)
+  et deux notes ajoutées au même item. Suite : aucun lot ouvert — la revue
+  de tout quick par Sevih, puis le lot 22 (retrait de `/admin`).
+
 - **quick : section « Événements » — la liste, l'éditeur à six langues,
   enregistrer publie sur R2 et committe (lot F23, migration 6)** — le dernier
   écran de l'admin avant la clôture (22), porté dans la charte sur le modèle

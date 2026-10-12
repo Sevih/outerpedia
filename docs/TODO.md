@@ -199,7 +199,12 @@
       `/admin/tools/events` répond encore par son URL. (7) Une saisie fautive
       (un bloc sans texte EN) : « Enregistrer » refuse, le message sous le
       bloc, le point rouge sur « Blocs », « refusé » dans l'en-tête, rien
-      d'écrit ni committé.
+      d'écrit ni committé. Notes de relecture (Fable, 12/10), pour la revue
+      de quick : le message de commit « chore(events): 2 événements » porte
+      des accents, alors que les autres messages de quick n'en ont pas
+      (« re-epingles ») ; un titre de bloc vide affiche « Traductions (5)
+      0 / 5 », un compte qui ne veut rien dire pour un texte facultatif
+      laissé vide.
 - [ ] **« Guides » › guides généraux et import — contrôles à l'écran (lot
       F19)** : le banc ne clique pas, aucun enregistrement réel n'a été
       joué, `/api/translate` jamais appelé avec des clés. Relancer quick
