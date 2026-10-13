@@ -180,14 +180,10 @@
       depuis l'Extraction sur une page déjà ouverte (A44) ; Pros / Cons :
       effacer une ligne anglaise, lire le compteur ambre, « Enregistrer »
       (A47) ; le picker d'effets de Monstres à 28 px (A42) ; « 3★ » dans
-      les vignettes de palier (A46). À décider : (1) A43 — Rang PvP compte
-      93 éligibles (règle « base 3★ » du commentaire de `rankPvp`), pas
-      127 ; dire si c'est la règle, et un `hint` « parmi les persos de base
-      3★ » sur la ligne. (2) A47 — une ligne anglaise retouchée d'un
-      caractère est une ligne NOUVELLE : ses traductions tombent si
-      « Traduire » n'est pas relancé ; si c'est trop coûteux à l'usage, une
-      retouche à rang égal devrait garder ses traductions avec « à
-      retraduire » (changement de décision, un lot A). (3) A45 — « Autres »
+      les vignettes de palier (A46). À décider : (1) A43 — TRANCHÉ le 13/10 : PvP = 3★ natifs seulement,
+      93 éligibles ; reste un `hint` « parmi les persos de base 3★ » sur
+      la ligne (un lot A, à grouper). (2) A47 — TRANCHÉ le 13/10 : une
+      ligne retouchée est une ligne nouvelle, on garde. (3) A45 — « Autres »
       est dans le select de l'Extraction et les lignes de l'admin, pas dans
       l'en-tête de la fiche monstre (vide pour un monstre sans mode titré).
       (4) A40 — `/api/extractor` lance une revue monster non mémoïsée
