@@ -173,31 +173,28 @@
       perso » / « câbler les chips » depuis la fiche, « extraction » depuis
       la Fiche perso et depuis Monstres. (6) Un geste sur une fiche lue
       avant un refresh → « Rien n'est écrit — … ont changé », la fiche relue.
-- [ ] **Relecture A38 → A47 (13/10) — contrôles à l'écran et suites à
-      décider** : à l'écran (relancer quick : routes nouvelles) — Patch ›
-      « Dry-run » : la revue par fichier avec ses comptes, « voir » qui
-      ouvre la cible d'Extraction, « dont 3 hors périmètre du site », la
-      console repliée, l'annonce de « Promouvoir » ; « ouvrir dans Guides »
-      depuis l'Extraction sur une page déjà ouverte (A44) ; Pros / Cons :
-      effacer une ligne anglaise, lire le compteur ambre, « Enregistrer »
-      (A47) ; le picker d'effets de Monstres à 28 px (A42) ; « 3★ » dans
-      les vignettes de palier (A46). À décider : (1) A43 — TRANCHÉ le 13/10 : PvP = 3★ natifs seulement,
-      93 éligibles ; le `hint` de la ligne : FAIT (A49). (2) A47 — TRANCHÉ le 13/10 : une
-      ligne retouchée est une ligne nouvelle, on garde. (3) A45 — FAIT
-      (A49) : l'en-tête de la fiche monstre dit « Autres », comme le select
-      de l'Extraction et les lignes de l'admin.
-      (4) A40 — FAIT (A50) : le « +n hors site » sort du mémo de l'inbox
-      (`offSiteOf`), plus aucune revue à empreinte égale. (5) A39 — FAIT
-      (A50) : le dry-run n'émet plus `quick:changed`, « Pousser » ne relance
-      plus les pastilles ; RESTE : pas de pastille « Patch » pour un patch
-      en attente (bloc `game`, hors inbox). (6) A41 — FAIT (A50) : la Fiche
-      perso lit le roster de la page (`readHeroRoster()` de `lib.js`), une
-      seule requête. (7) A42 —
-      FAIT (A49) : `sprite` / `effectSprite` retirés des états de Monstres
-      et d'Extraction ; restent servis sans lecteur ceux d'Effets et du kit
-      de la Fiche perso.
-      (8) A44 — FAIT (A49) : un guide inconnu au chargement ouvre la vue
-      d'ensemble.
+- [ ] **Après le retrait de `/admin` (relecture du 13/10) — un lot A de
+      nettoyage** : (1) `datagen/README.md` (cinq passages) et
+      `docs/procedure/newPatch.md` décrivent la procédure par l'admin : la
+      récrire vers quick (Patch, Extraction). (2) Les en-têtes qui citent
+      encore une URL `/admin/…` (`src/lib/admin/{character-kit,
+  effect-catalog, effect-search, gear-sheet, guide-pin-targets,
+  monster-kit, monster-sheet, tag-control, extractor-rows,
+  useAutoTranslate}.ts`, `src/lib/data/{events,pros-cons}.ts`,
+      `src/lib/home.ts`, `src/lib/skill-view.ts`, `CurrentBanners.tsx`,
+      `EditorialFields.tsx`, `editorial.ts` du guide shop) — dont
+      `useAutoTranslate.ts` l.19 « il ne sert QUE l'admin », faux. (3)
+      « lu par l'admin » dans `tabs/dashboard.html`. (4) `ADMIN_BASE` /
+      `ADMIN_BASE_DEFAULT` de `actions.ts` ne servent plus qu'aux liens du
+      site de dev : renommer. (5) Quatre modules de `src/lib/admin/` sans
+      importeur, gardés pour leur test (`event-text.ts`,
+      `gear-presets-store.ts`, `monster-rows.ts`, `useAutoTranslate.ts`) :
+      supprimer ou dire pourquoi garder. (6) Le picker Monstres range sous
+      « sans mode » les 204 monstres que l'en-tête dit « Autres » (A49). (7)
+      Pas de pastille « Patch » pour un patch en attente (bloc `game`, hors
+      inbox). À l'écran, par Sevih : un vrai ajout Twitch ou Bilibili sur une
+      fiche (A48), les pastilles qui ne bougent plus au dry-run ni au push
+      (A50), « Autres » dans l'en-tête d'un monstre d'event (A49).
 - [ ] **« Événements » — contrôles à l'écran (lot F23)** : le banc ne
       clique pas, aucun enregistrement réel n'a été joué, `/api/translate`
       jamais appelé avec des clés, `POST /api/events` jamais appelé (les

@@ -7,6 +7,61 @@
 
 ## 2026-10-13
 
+- **Relecture A48 / A49 / A50 / C14 / C15 (Fable) — vidéos Twitch et
+  Bilibili, suites de la relecture, retrait de `/admin` en deux temps : les
+  cinq validés, l'étape 22 de la migration est close.** Cinq commits
+  (`d25535ea`, `5a40b837`, `550b30f9`, `d4cf84aa`, `2d8fcc1d`), chacun au
+  périmètre de son lot, le message attendu, ni `package.json` ni lock. Hors
+  liste mais justifié et déclaré : C14 retouche `eslint.config.mjs` (la
+  frontière de sécurité visait `components/admin/{editorial,premium-limited}`,
+  elle vise `components/contribute/` et `ADMIN_SHIPS_TO_PROD` gagne les
+  quatre modules que ces briques importent en valeur) ; C15 touche
+  `CLAUDE.md`, `CONVENTIONS.md`, `eslint.config.mjs` (commentaires et
+  motif), `src/proxy.test.ts` ; A48 fait lire `title` à la route
+  `/api/character/video-meta`. Les diffs relus par trois agents de lecture
+  (contrat, décisions, tests non affaiblis ; C15 : chacun des six modules
+  supprimés de `src/lib/admin/` revérifié sans consommateur, les quatre
+  gardés le sont pour leur test), les rejeux et le banc par moi. **Contrôles
+  sur HEAD (`2d8fcc1d`)** : typecheck, lint, `pnpm test` 220 fichiers /
+  3807 tests, `vitest run scripts/quick src/lib/admin src/lib/contribute`
+  63 / 1761 ; `pnpm build` vert (« Compiled successfully », aucune `/admin`
+  dans `routes-manifest.json` ni `app-path-routes-manifest.json`, les trois
+  pages /contribute au tableau) — APRÈS avoir mis `.next/dev` de côté : le
+  `validator.ts` que `next dev` y génère déclare la route `/dev`
+  (`layout.dev.tsx`) que le build prod ne connaît pas, et le type check du
+  build tombe dessus (« Type '"/dev"' is not assignable to type
+  '"/[lang]"' ») ; artefact de ce poste, pas le code, l'agent de C15 l'avait
+  contourné de même. **Rejeux (tsx, lecture seule)** : `resolveVideo` —
+  VOD Twitch et vidéo Bilibili résolues avec le titre saisi
+  (`{ platform, id, title }`), refus rendus pour chaîne, clip, `av…`, titre
+  absent, id nu ambigu, `fetchMeta` jamais appelé pour ces deux-là ;
+  `offSiteOf('monster')` 3 en 3,4 s puis 1 ms (même empreinte, une seule
+  revue), `character` 0 ; `extractorOverview` 1,4 s puis 0,13 s, `offSite`
+  3 ; `characterCoverage` porte les deux `hint` (PvP « parmi les persos de
+  base 3★ … », date de sortie) ; `monstersRoster` 2449 lignes, 204 en
+  « Autres », 136 sans mode, aucun mixte ; `buildInbox` → un item
+  `extract:character` adressé `tab: 'extractor/character'`, plus de `href`,
+  `badgesState` = `{ extractor: 1 warn }`. Greps sur HEAD :
+  `app/admin|api/admin|components/admin` vide dans `src scripts datagen`
+  (code) ; `src/app/admin`, `src/app/api/admin`, `src/components/admin`
+  absents ; `src/components/contribute/` porte les deux outils publics et
+  leurs huit briques. **Banc** (quick isolé :4873, clés vidées, GET seuls) :
+  Tableau de bord avec « Ouvrir » sur l'item Character, Extraction
+  inchangée (+3 hors site, Skills de monstres en lecture), fiche Aer avec
+  sa vidéo et « Ajouter une vidéo », `#guides/boss/nexistepas` → journal
+  « Guide inconnu : boss/nexistepas » et vue d'ensemble. **Reste à Sevih** :
+  relancer son quick (routes et libellés nouveaux), un vrai ajout Twitch ou
+  Bilibili sur une fiche (le lecteur Twitch exige `parent`, à voir sur le
+  site de dev), `pnpm dev` une fois pour régénérer `.next/dev` sans l'admin.
+  **Suites au TODO** (un lot de nettoyage) : `datagen/README.md` et
+  `docs/procedure/newPatch.md` décrivent encore la procédure par l'admin ;
+  des en-têtes citent une URL `/admin/…` (dont `useAutoTranslate.ts` l.19,
+  faux désormais) ; « lu par l'admin » dans `dashboard.html` ;
+  `ADMIN_BASE` ne sert plus qu'aux liens du site de dev ; quatre modules de
+  `src/lib/admin/` gardés sans importeur ; le picker Monstres range sous
+  « sans mode » ce que l'en-tête dit « Autres » ; pas de pastille « Patch ».
+  **Suite** : aucun lot ouvert ; Événements (F23) en stand-by.
+
 - **Retrait de `/admin`, seconde moitié : les pages, les routes et les
   composants de l'admin sont supprimés, quick est le seul outil (lot C15)**
   — étape 22 de `docs/quick-migration.md`, close : C14 avait PRÉPARÉ (tout
