@@ -83,6 +83,15 @@
       est le test, bloquant dans `pnpm commit`).
       À faire par Sevih : remplir
       la colonne « Agacements » (en vrac) ; puis un lot par section.
+- [ ] **quick, nav : des pastilles là où il y a à faire (constat du 13/10,
+      cycle du patch)** : après Patch › « Rafraîchir » puis « Dry-run », les
+      monstres montrent 3 diffs dans la revue, mais rien ne le dit dans le
+      menu du haut — il faut ouvrir le Tableau de bord ou la section pour le
+      voir. Attendu : une pastille (compte) sur le groupe et sur l'onglet
+      concernés (Données › Extraction, et par cible), nourrie par l'inbox
+      que `/api/dashboard` sert déjà (chaque item a sa section, cf.
+      `extract:<cible>`, « tags », bannières, coupons), rafraîchie au retour
+      sur l'accueil et à la fin d'un travail de Patch. Un lot A.
 - [ ] **« Extraction » — contrôles à l'écran (lot F20)** : le banc ne
       clique pas, aucun geste réel n'a été joué (le dépôt du jour n'a qu'un
       perso nouveau sans nom, `2400015`, et aucun écart). Relancer quick
