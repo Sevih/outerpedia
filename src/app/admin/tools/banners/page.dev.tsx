@@ -1,5 +1,5 @@
 import { BannersEditor } from '@/components/admin/BannersEditor';
-import type { CharOption } from '@/components/admin/CharacterPicker';
+import type { CharOption } from '@/components/contribute/CharacterPicker';
 import { loadBanners } from '@/lib/admin/promo-banner-store';
 import { characterDisplayName, getCharacterListItems } from '@/lib/data/characters';
 

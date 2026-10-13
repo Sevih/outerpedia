@@ -2,7 +2,8 @@ import Link from 'next/link';
 import type { Route } from 'next';
 import { getMergedEffects } from '@/lib/data/effects';
 import { reviewBuckets, reviewEntities, reviewTarget } from '@/lib/admin/review-store';
-import { ExtractorReview, type NamedReviewEntity } from '@/components/admin/ExtractorReview';
+import { ExtractorReview } from '@/components/admin/ExtractorReview';
+import type { NamedReviewEntity } from '@/lib/admin/review-types';
 
 export const dynamic = 'force-dynamic';
 

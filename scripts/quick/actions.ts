@@ -126,7 +126,12 @@ import {
   type DungeonSources,
   type MonsterStatsSheet,
 } from '@/lib/admin/monster-sheet';
-import { monsterBossBadgeSrc, monsterIconSrc, monsterSlotSrc } from '@/lib/admin/monster-icon';
+import {
+  SPRITE_ROUTE,
+  monsterBossBadgeSrc,
+  monsterIconSrc,
+  monsterSlotSrc,
+} from '@/lib/admin/monster-icon';
 import {
   RELEASE_CURATED_PATH,
   missingReleaseDates,
@@ -317,8 +322,8 @@ import { localePath } from '@/lib/navigation';
 import { TAG_REGEX, checkText, type InlineSegment } from '@/lib/parse-text';
 import { STAT_ICON, statAbbr } from '@/lib/stats';
 import { transcendenceFullSteps, transcendenceLabel } from '@/lib/transcendence';
-import type { EffectOption, KitEditorCard } from '@/components/admin/CharacterKitEditor';
-import type { KitChip } from '@/components/admin/MonsterKitEditor';
+import type { EffectOption, KitEditorCard } from '@/lib/admin/character-kit';
+import type { KitChip } from '@/lib/admin/monster-kit';
 import { fitsOnTwoLines } from '@/components/character/CharacterPortrait';
 import {
   CHANGELOG_TYPE_ICON,
@@ -1397,80 +1402,6 @@ export async function previewChangelogEntry(
  */
 export const ADMIN_BASE_DEFAULT = 'https://outerpedia.local';
 
-/**
- * Les pages de l'admin que quick a déjà : `href` d'un item de l'inbox → section
- * de quick. Le lot qui porte une page y ajoute sa ligne : le tableau de bord y
- * renvoie alors au lieu de l'admin (`inQuick`). Aujourd'hui l'éditeur des
- * effets, celui des persos (la « Fiche perso », Gear reco compris), celui des
- * EE (son sous-onglet « EE »), celui des monstres (« Monstres »), celui des
- * items (« Items »), les outils Pro / Con et Synergy (deux autres
- * sous-onglets de la fiche), l'éditeur des guides de boss (« Guides ») et les
- * dix cibles de l'extractor (« Extraction », chacune sur SA cible :
- * `extractor/<cible>`, un chemin que `sections.go` sait ouvrir) — l'inbox,
- * elle, ne renvoie plus à l'admin que pour les tags et les données du jeu.
- */
-export const ADMIN_TO_QUICK: Readonly<Record<string, string>> = {
-  '/admin/editor/characters': 'character',
-  '/admin/guides': 'guides',
-  '/admin/editor/ee': 'character',
-  '/admin/editor/effects': 'effects',
-  '/admin/editor/items': 'items',
-  '/admin/editor/monsters': 'monsters',
-  '/admin/tools/pros-cons': 'character',
-  '/admin/tools/synergies': 'character',
-  '/admin/extractor/characters': 'extractor/character',
-  '/admin/extractor/effects': 'extractor/effect',
-  '/admin/extractor/ee': 'extractor/ee',
-  '/admin/extractor/weapons': 'extractor/weapon',
-  '/admin/extractor/amulets': 'extractor/amulet',
-  '/admin/extractor/armors': 'extractor/armor',
-  '/admin/extractor/talismans': 'extractor/talisman',
-  '/admin/extractor/sets': 'extractor/set',
-  '/admin/extractor/monsters': 'extractor/monster',
-  '/admin/extractor/items': 'extractor/item',
-};
-
-/**
- * La section de quick d'un `href` de l'admin : la ligne de `ADMIN_TO_QUICK`,
- * ou, pour une page d'ENTITÉ de l'extractor (`/admin/extractor/<x>/<id>`),
- * la fiche de cette entité dans la section Extraction
- * (`extractor/<cible>/<id>`, lot F21) ; `null` si l'admin garde la page.
- */
-export function quickTabOf(tabs: Readonly<Record<string, string>>, href: string): string | null {
-  const direct = tabs[href];
-  if (direct) return direct;
-  const m = /^(\/admin\/extractor\/[a-z]+)\/([^/]+)$/.exec(href);
-  const base = m ? tabs[m[1]] : undefined;
-  return base ? `${base}/${decodeURIComponent(m![2])}` : null;
-}
-
-/**
- * Où un tag mort se corrige dans quick, d'après sa provenance (le `source` de
- * `collectTagOccurrences`, `tag-control.ts`) : le sous-onglet de la « Fiche
- * perso » qui porte le texte — pros / cons, synergies, note d'un build. `null`
- * pour ce que quick n'édite pas : un guide, un preset, un perso hors du roster
- * (sa provenance porte son id nu, sans nom).
- */
-export function tagSourceSheet(source: string): { id: string; sub: string } | null {
-  const text = /^(curated pros-cons|synergies) · .* \((\d+)\)(?=[.[]|$)/.exec(source);
-  if (text) return { id: text[2], sub: text[1] === 'synergies' ? 'synergies' : 'pros-cons' };
-  const build = /^gear-reco\.json\.(\d+)\[/.exec(source);
-  return build ? { id: build[1], sub: 'gear' } : null;
-}
-
-/**
- * La fiche où renvoyer l'item « tags » de l'inbox : `character/<id>/<sous-onglet>`
- * quand TOUS les tags morts viennent d'un même perso (le sous-onglet du
- * premier), `null` sinon — un guide, un preset ou plusieurs persos : seule la
- * page `/admin/tags` les liste tous.
- */
-function deadTagSheet(sources: readonly string[]): string | null {
-  const where = sources.map(tagSourceSheet);
-  const [first] = where;
-  if (!first || where.some((w) => w?.id !== first.id)) return null;
-  return `character/${first.id}/${first.sub}`;
-}
-
 /** Sous combien de jours un code promo actif est « à échéance ». */
 export const COUPON_EXPIRY_DAYS = 7;
 
@@ -1488,16 +1419,10 @@ const daysBetween = (from: string, to: string): number =>
 
 export type DashboardBlock = 'inbox' | 'git' | 'game' | 'banners' | 'coupons';
 
-/** Les lectures du tableau de bord, injectées : l'admin, git, le jeu, les deux listes. */
+/** Les lectures du tableau de bord, injectées : l'inbox, git, le jeu, les deux listes. */
 export interface DashboardDisk {
-  /** `buildInbox()` de l'admin : SA liste, triée par lui. */
+  /** `buildInbox()` (`admin-inbox.ts`) : SA liste, triée par lui, chaque item adressé à quick (`tab`). */
   inbox: () => InboxItem[] | Promise<InboxItem[]>;
-  /** Où l'admin répond (`ADMIN_BASE`). */
-  adminBase: () => string;
-  /** `href` admin → section de quick (`ADMIN_TO_QUICK`). */
-  quickTabs: Readonly<Record<string, string>>;
-  /** La provenance de chaque tag mort (`source`) ; lue seulement si l'inbox en annonce. */
-  deadTagSources: () => string[] | Promise<string[]>;
   gitState: () => GitState;
   /** `git log -1 --format=%h%x09%s%x09%cr`, brut ; vide sans commit. */
   lastCommit: () => string;
@@ -1522,17 +1447,10 @@ export interface DashboardDisk {
   today: () => string;
 }
 
-/** Celles de la route : l'admin tel quel, le dépôt, le client Steam, R2. */
+/** Celles de la route : l'inbox telle quelle, le dépôt, le client Steam, R2. */
 export const DASHBOARD_DISK: DashboardDisk = {
   // À la demande : le moteur de revue pèse, et les autres routes ne le lisent pas.
   inbox: async () => (await import('@/lib/admin/admin-inbox')).buildInbox(),
-  adminBase: () => process.env.ADMIN_BASE || ADMIN_BASE_DEFAULT,
-  quickTabs: ADMIN_TO_QUICK,
-  deadTagSources: async () =>
-    (await import('@/lib/admin/tag-control'))
-      .collectTagOccurrences()
-      .filter((o) => !o.ok)
-      .map((o) => o.source),
   gitState: () => gitState(),
   lastCommit: () => {
     const log = git(['log', '-1', '--format=%h%x09%s%x09%cr']);
@@ -1610,31 +1528,21 @@ function hasProposal(disk: DashboardDisk): boolean {
 }
 
 /** Ce que l'inbox lit — pour le tableau de bord comme pour les pastilles du menu. */
-type InboxDisk = Pick<DashboardDisk, 'inbox' | 'adminBase' | 'quickTabs' | 'deadTagSources'>;
+type InboxDisk = Pick<DashboardDisk, 'inbox'>;
 
 /**
- * L'inbox de l'admin telle que quick la sert : SA liste, dans son ordre, chaque
- * item avec son adresse complète dans l'admin (`href`), sa section de quick
- * quand il y en a une (`inQuick`, `tab`) et, pour les tags morts d'un seul
- * perso, sa fiche (`sheet`). UNE lecture pour le tableau de bord et pour les
+ * L'inbox telle que quick la sert : SA liste, dans son ordre, chaque item à
+ * l'adresse qu'elle lui donne dans quick (`tab`, `null` quand rien ne le
+ * situe — son `detail` dit alors où). L'item des tags morts d'un seul perso
+ * porte en plus `sheet`, la même adresse : c'est une FICHE, que la page ouvre
+ * dans un nouvel onglet. UNE lecture pour le tableau de bord et pour les
  * pastilles du menu : les deux comptent la même chose.
  */
 async function quickInbox(disk: InboxDisk) {
-  const base = disk.adminBase().replace(/\/+$/, '');
-  const items = await disk.inbox();
-  const sheet = items.some((i) => i.key === 'tags')
-    ? deadTagSheet(await disk.deadTagSources())
-    : null;
-  return items.map((item) => {
-    const tab = quickTabOf(disk.quickTabs, item.href);
-    return {
-      ...item,
-      href: `${base}${item.href}`,
-      inQuick: tab !== null,
-      tab,
-      ...(item.key === 'tags' && sheet ? { sheet } : {}),
-    };
-  });
+  return (await disk.inbox()).map((item) => ({
+    ...item,
+    ...(item.key === 'tags' && item.tab ? { sheet: item.tab } : {}),
+  }));
 }
 
 /** La gravité d'une teinte de l'inbox : la pire d'une section fait sa pastille. */
@@ -1650,7 +1558,7 @@ export interface SectionBadge {
  * L'inbox comptée par SECTION de quick : le premier segment de l'adresse où
  * l'item renvoie — sa fiche (`sheet`) sinon son onglet (`tab`) ; `extractor/monster`
  * compte pour `extractor`, `character/<id>/pros-cons` pour `character`. Un item
- * que l'admin garde (ni l'un ni l'autre) n'a pas de pastille. Le compte est le
+ * que rien ne situe (ni l'un ni l'autre) n'a pas de pastille. Le compte est le
  * `count` de l'item — le volume que l'inbox annonce, jamais nul chez elle ; un
  * item qui n'en dirait pas compte pour un —, la teinte la pire de la section.
  */
@@ -1687,11 +1595,10 @@ export async function badgesState(disk: InboxDisk = DASHBOARD_DISK) {
  * Le tableau de bord, l'accueil de quick : ce qui demande une action. Il ne
  * décide de rien — chaque bloc relit ce qu'un autre écran sait déjà :
  *
- *   - `inbox` : l'inbox de l'admin, TELLE QUELLE, chaque item avec son adresse
- *     complète dans l'admin (`href`) et, quand quick a déjà la section,
- *     `inQuick` et son `tab` ; l'item des tags morts porte en plus `sheet`,
- *     la fiche du perso dans quick, quand ils viennent tous de lui
- *     (`deadTagSheet`) ;
+ *   - `inbox` : l'inbox (`buildInbox`, `admin-inbox.ts`), TELLE QUELLE, chaque
+ *     item avec son adresse dans quick (`tab`, `null` quand rien ne le
+ *     situe) ; l'item des tags morts porte en plus `sheet`, la fiche du perso,
+ *     quand ils viennent tous de lui (`deadTagSheet`) ;
  *   - `git` : `gitState` (le compte de « Pousser »), le dernier commit et le
  *     nombre de fichiers modifiés ou non suivis (`dirty`) ;
  *   - `game` : la version du site contre celle du client installé (`client` :
@@ -7921,8 +7828,7 @@ export const SHEET_TARGETS: readonly SheetTarget[] = [
 export const isSheetTarget = (id: string): id is SheetTarget =>
   (SHEET_TARGETS as readonly string[]).includes(id);
 
-/** La route des sprites bruts de quick (`GET /api/sprite/<nom>`), et l'adresse d'un sprite. */
-export const SPRITE_ROUTE = '/api/sprite';
+/** L'adresse d'un sprite brut, sur la route de quick (`GET /api/sprite/<nom>`, `SPRITE_ROUTE`). */
 const spriteSrc = (name: string): string => `${SPRITE_ROUTE}/${encodeURIComponent(name)}`;
 
 /** Un nom de sprite : un basename, sans chemin ; l'extension est ignorée. */

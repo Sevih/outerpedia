@@ -13,7 +13,7 @@
  */
 import { useState } from 'react';
 import { CharacterPortrait } from '@/components/character/CharacterPortrait';
-import type { CharOption } from '@/components/admin/CharacterPicker';
+import type { CharOption } from '@/components/contribute/CharacterPicker';
 import { inputFull as input } from './_ui';
 
 /** Portrait d'une puce — forme commune aux `CharOption` et aux héros résolus. */

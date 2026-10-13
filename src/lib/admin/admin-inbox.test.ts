@@ -13,7 +13,8 @@
  *   - ni un calcul trop proche d'une écriture ni un échec ne sont retenus.
  *   - le « hors site » des monstres (`offSiteOf`) sort du même calcul : à
  *     empreinte égale, aucune revue de plus.
- * Et que `buildInbox` rend ce qu'il rendait, pour UN calcul.
+ * Et que `buildInbox` rend ce qu'il rendait, pour UN calcul — chaque item
+ * adressé à QUICK (`tab`), plus à l'admin (lot C14).
  *
  * Moteur FACTICE et compté (`reviewAll`) : le vrai ouvre les tables du jeu. Les
  * fichiers, eux, sont de vrais fichiers dans un tmp (`sandbox()`), parce que
@@ -40,6 +41,9 @@ vi.mock('@/lib/admin/monster-review', () => ({
 vi.mock('@/lib/admin/tag-control', () => ({ collectTagOccurrences: engine.tags }));
 
 const box = sandbox('inbox-');
+
+/** Une provenance de tag, au format de `collectTagOccurrences` : un texte de la fiche d'un perso. */
+const PROS = 'curated pros-cons · Valentine (2000012).pros[1].en';
 
 const COMMITTED = 'data/generated/characters.json';
 const EQUIPMENT = 'data/generated/equipment/weapon.json';
@@ -267,7 +271,12 @@ describe('buildInbox — ce qu’il rend, pour un seul calcul', () => {
       monster: buckets({ new: 4 }),
       item: buckets(),
     });
-    engine.tags.mockReturnValue([{ ok: false }, { ok: true }, { ok: false }]);
+    // Deux tags morts du même perso, dans deux textes : sa fiche, au sous-onglet du premier.
+    engine.tags.mockReturnValue([
+      { ok: false, source: PROS },
+      { ok: true, source: 'gear-presets.json.substats.dps' },
+      { ok: false, source: 'synergies · Valentine (2000012)[0]' },
+    ]);
     box.putRaw(
       '.assets-staging/manifest-report.json',
       JSON.stringify({ total: 900, missingCount: 5, generatedAt: '2026-10-08' }),
@@ -279,7 +288,7 @@ describe('buildInbox — ce qu’il rend, pour un seul calcul', () => {
         key: 'tags',
         label: 'Dead inline tags',
         detail: '2 tag(s) resolve to nothing',
-        href: '/admin/tags',
+        tab: 'character/2000012/pros-cons',
         tone: 'danger',
         rank: 0,
         count: 2,
@@ -288,7 +297,7 @@ describe('buildInbox — ce qu’il rend, pour un seul calcul', () => {
         key: 'extract:effect',
         label: 'Effect',
         detail: '2 diff · 1 removed · 3 minor',
-        href: '/admin/extractor/effects',
+        tab: 'extractor/effect',
         tone: 'danger',
         rank: 1,
         count: 3,
@@ -297,7 +306,7 @@ describe('buildInbox — ce qu’il rend, pour un seul calcul', () => {
         key: 'extract:monster',
         label: 'Monster',
         detail: '4 new',
-        href: '/admin/extractor/monsters',
+        tab: 'extractor/monster',
         tone: 'warn',
         rank: 2,
         count: 4,
@@ -306,7 +315,7 @@ describe('buildInbox — ce qu’il rend, pour un seul calcul', () => {
         key: 'extract:character',
         label: 'Character',
         detail: '1 new',
-        href: '/admin/extractor/characters',
+        tab: 'extractor/character',
         tone: 'warn',
         rank: 2,
         count: 1,
@@ -315,7 +324,7 @@ describe('buildInbox — ce qu’il rend, pour un seul calcul', () => {
         key: 'assets',
         label: 'Assets',
         detail: '5 missing from the pool',
-        href: '/admin/tools/gamedata',
+        tab: 'gamedata',
         tone: 'warn',
         rank: 3,
         count: 5,
@@ -324,7 +333,7 @@ describe('buildInbox — ce qu’il rend, pour un seul calcul', () => {
         key: 'extract:weapon',
         label: 'Weapons',
         detail: '1 minor · 2 typo',
-        href: '/admin/extractor/weapons',
+        tab: 'extractor/weapon',
         tone: 'muted',
         rank: 4,
         count: 3,
@@ -340,6 +349,60 @@ describe('buildInbox — ce qu’il rend, pour un seul calcul', () => {
     engineReturns({ character: buckets(), item: buckets() });
     const { buildInbox } = await load();
     expect(buildInbox()).toEqual([]);
+  });
+
+  it('les tags morts : la fiche d’UN perso, sinon aucune adresse et un détail qui nomme les provenances', async () => {
+    engineReturns({});
+    const { buildInbox } = await load();
+    const tagsOf = (sources: string[]) => {
+      engine.tags.mockReturnValue(sources.map((source) => ({ ok: false, source })));
+      const [tags] = buildInbox();
+      return [tags.tab, tags.detail];
+    };
+    // Un perso : sa fiche, au sous-onglet qui porte le texte ; le détail ne dit que le compte.
+    expect(tagsOf([PROS])).toEqual(['character/2000012/pros-cons', '1 tag(s) resolve to nothing']);
+    expect(tagsOf(['gear-reco.json.2000008[0].note.en'])).toEqual([
+      'character/2000008/gear',
+      '1 tag(s) resolve to nothing',
+    ]);
+    // Deux persos, un guide, un preset : quick ne les réunit nulle part.
+    const MARIAN = 'synergies · Marian (2000014)[0]';
+    const GUIDE = 'guides · adventure/S1-9-5 · content.json.tips[0].en';
+    expect(tagsOf([PROS, MARIAN])).toEqual([
+      null,
+      `2 tag(s) resolve to nothing — ${PROS} ; ${MARIAN}`,
+    ]);
+    expect(tagsOf(['gear-presets.json.substats.dps'])).toEqual([
+      null,
+      '1 tag(s) resolve to nothing — gear-presets.json.substats.dps',
+    ]);
+    // Une provenance n'est nommée qu'une fois, trois au plus, le reste compté.
+    expect(tagsOf([PROS, PROS, GUIDE, MARIAN, 'gear-presets.json.substats.dps', 'a', 'b'])).toEqual(
+      [null, `7 tag(s) resolve to nothing — ${PROS} ; ${GUIDE} ; ${MARIAN} ; +3 more`],
+    );
+  });
+
+  it('chaque item est adressé à quick : une cible d’Extraction par entité, plus aucune adresse de l’admin', async () => {
+    const { EXTRACTOR_ENTITIES, buildInbox } = await load();
+    expect(EXTRACTOR_ENTITIES.map((e) => e.tab)).toEqual(
+      EXTRACTOR_ENTITIES.map((e) => `extractor/${e.id}`),
+    );
+    engineReturns(Object.fromEntries(EXTRACTOR_ENTITIES.map((e) => [e.id, buckets({ new: 1 })])));
+    engine.tags.mockReturnValue([{ ok: false, source: PROS }]);
+    box.putRaw(
+      '.assets-staging/manifest-report.json',
+      JSON.stringify({ total: 900, missingCount: 5, generatedAt: '2026-10-08' }),
+    );
+    const inbox = buildInbox();
+    expect(inbox).toHaveLength(EXTRACTOR_ENTITIES.length + 2);
+    // Le premier segment de chaque adresse est une section de quick.
+    expect([...new Set(inbox.map((i) => i.tab?.split('/')[0]))].sort()).toEqual([
+      'character',
+      'extractor',
+      'gamedata',
+    ]);
+    expect(JSON.stringify(inbox)).not.toContain('admin');
+    expect(inbox.every((i) => !('href' in i))).toBe(true);
   });
 });
 

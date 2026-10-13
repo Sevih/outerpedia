@@ -12,7 +12,7 @@ import type { GearBuild, GearPick, SetCombo } from '@contracts';
 import type { GearOption } from '@/lib/admin/gear-options';
 import { postJson } from '@/lib/admin/post-json';
 import { type Keyed, rowKey, stripKey, withKey } from '@/lib/admin/keyed';
-import { InlineTextField } from '@/components/admin/InlineTextField';
+import { InlineTextField } from '@/components/contribute/InlineTextField';
 import {
   SlotCard,
   Row,

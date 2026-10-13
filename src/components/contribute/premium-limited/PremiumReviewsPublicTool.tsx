@@ -14,13 +14,13 @@
 import { useState } from 'react';
 import type { InlineRefs } from '@/lib/admin/inline-refs';
 import type { ReviewEntryData, ReviewsBundle } from '@/lib/admin/general-guide-store';
-import type { CharOption } from '@/components/admin/CharacterPicker';
+import type { CharOption } from '@/components/contribute/CharacterPicker';
 import {
   ReviewForm,
   downloadJson,
   emptyReview,
   type Bucket,
-} from '@/components/admin/premium-limited/PremiumLimitedParts';
+} from '@/components/contribute/premium-limited/PremiumLimitedParts';
 import { makeContribution, type ReviewContributionPayload } from '@/lib/contribute/contribution';
 import { btn } from '../_ui';
 

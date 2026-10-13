@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation';
 import { EntitySwitch } from '@/components/admin/EntitySwitch';
 import { EeCuratedEditor } from '@/components/admin/EeCuratedEditor';
-import { type EffectOption } from '@/components/admin/CharacterKitEditor';
+import { type EffectOption } from '@/lib/admin/character-kit';
 import { renderGameColors } from '@/components/ui/GameText';
 import { getEEViews } from '@/lib/data/equipment';
 import { eeEditorChips, eeModelForView } from '@/lib/data/equipment-detail';

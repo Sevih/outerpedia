@@ -16,16 +16,16 @@ import { useState } from 'react';
 import type { CharacterCurated } from '@contracts';
 import { type Keyed, stripKey, withKey } from '@/lib/admin/keyed';
 import type { InlineRefs } from '@/lib/admin/inline-refs';
-import type { CharOption } from '@/components/admin/CharacterPicker';
+import type { CharOption } from '@/components/contribute/CharacterPicker';
 import { CharacterPortrait } from '@/components/character/CharacterPortrait';
-import { downloadJson } from '@/components/admin/premium-limited/PremiumLimitedParts';
+import { downloadJson } from '@/components/contribute/premium-limited/PremiumLimitedParts';
 import {
   EditorialFields,
   makeResolveHero,
   type HeroView,
   type LocalizedText,
   type SynergyGroup,
-} from '@/components/admin/editorial/EditorialFields';
+} from '@/components/contribute/editorial/EditorialFields';
 import {
   makeContribution,
   type ContributionKind,

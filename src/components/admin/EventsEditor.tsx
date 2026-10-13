@@ -45,7 +45,7 @@ import {
 } from '@/components/admin/events/EventBlocks';
 import { collectTexts } from '@/lib/admin/event-text';
 import { moveItem } from '@/lib/admin/reorder';
-import { MoveButtons } from '@/components/admin/MoveButtons';
+import { MoveButtons } from '@/components/contribute/MoveButtons';
 
 // Les BLOCS portent aussi leur `_key` : ils se réordonnent (`MoveButtons`), et
 // keyés par index, l'état interne d'`InlineTextField` restait collé à la

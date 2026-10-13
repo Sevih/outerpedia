@@ -35,10 +35,12 @@ const goButton = (tab, text) =>
 
 // ------------------------------------------------------ « À faire »
 /**
- * L'inbox de l'admin, dans son ordre : la plus urgente d'abord. Un item que
- * quick sait situer (`sheet` : les tags morts d'un perso) ouvre sa fiche dans
- * un nouvel onglet — elle ne lit `#character/<id>/<sous-onglet>` qu'à son
- * chargement, et la page d'ici garde ce qu'elle a en attente.
+ * L'inbox, dans son ordre : la plus urgente d'abord. Chaque item est adressé à
+ * quick (`tab`) : « Ouvrir » ouvre sa section. Une FICHE (`sheet` : les tags
+ * morts d'un perso) s'ouvre dans un nouvel onglet — elle ne lit
+ * `#character/<id>/<sous-onglet>` qu'à son chargement, et la page d'ici garde
+ * ce qu'elle a en attente. Un item que rien ne situe (`tab` nul) n'a pas de
+ * geste : son détail dit où regarder.
  */
 function renderInbox(inbox, error) {
   $('h-inbox-count').innerHTML = inbox?.length
@@ -54,9 +56,9 @@ function renderInbox(inbox, error) {
               detail(item.detail) +
               (item.sheet
                 ? `<a class="h-out" href="#${esc(item.sheet)}" target="_blank" rel="noopener">fiche du perso ↗</a>`
-                : item.inQuick
+                : item.tab
                   ? goButton(item.tab, 'Ouvrir')
-                  : `<a class="h-out" href="${esc(item.href)}" target="_blank" rel="noopener">dans l’admin ↗</a>`),
+                  : ''),
           ),
         ),
       )

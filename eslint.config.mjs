@@ -22,12 +22,13 @@ const VIVID_COLOR_MSG =
   'Couleur vive en dur interdite dans les guides (déjà tokenisés). Utilise un token : --cat-*/--ed-*/--monad-*/--select/--danger-*/--stat… (cf. src/app/globals.css & /dev/tokens).';
 
 // FRONTIÈRE `admin/` (audit F2). Le chemin `admin/` NE garantit PAS qu'un module
-// reste en dev : **6 modules** sont importés EN VALEUR depuis du code servi au
-// public (les outils de contribution réutilisent volontairement les briques
-// éditoriales, et la home lit l'overlay du catalogue d'items), plus 2 en type
-// seul. Cette liste est la seule exception, et elle est BLOQUANTE — ce qui la
-// rend incapable de vieillir en mentant, contrairement à un commentaire en tête
-// de dossier.
+// reste en dev : **8 modules** de `src/lib/admin/` sont importés EN VALEUR
+// depuis du code servi au public (les outils de contribution et leurs briques,
+// sous `src/components/contribute/` depuis le 13/10 — lot C14, ils vivaient
+// sous `components/admin/` et échappaient à ce compte —, et la home, qui lit
+// l'overlay du catalogue d'items). Cette liste est la seule exception, et elle
+// est BLOQUANTE — ce qui la rend incapable de vieillir en mentant, contrairement
+// à un commentaire en tête de dossier.
 //
 // Les `import type` sont autorisés d'office (`allowTypeImports`) : effacés à la
 // compilation, ils ne peuvent rien embarquer.
@@ -42,11 +43,27 @@ const ADMIN_SHIPS_TO_PROD = [
   '@/lib/admin/inline-refs', // refs inline des outils publics de contribution
   '@/lib/admin/general-guide-store', // premiumLimitedRoster (/contribute/premium-reviews)
   '@/lib/admin/item-curated-store', // loadItemCurated — overlay catalogue, lu par la home
-  '@/components/admin/editorial/EditorialPublicTool',
-  '@/components/admin/premium-limited/PremiumReviewsPublicTool',
+  // Ce que les briques de `src/components/contribute/` importent en valeur —
+  // quatre modules sans secret ni garde `IS_DEV` :
+  '@/lib/admin/keyed', // clés React des listes éditables (pur)
+  '@/lib/admin/reorder', // moveItem (pur)
+  '@/lib/admin/review-shape', // forme des reviews Premium & Limited (pur, cf. son en-tête)
+  '@/lib/admin/inline-preview-actions', // aperçu inline, délibérément NON gardé (cf. son en-tête)
 ];
 const ADMIN_BOUNDARY_MSG =
   "Frontière admin/ : ce module n'est pas censé partir en production. Les exceptions assumées sont listées dans ADMIN_SHIPS_TO_PROD (eslint.config.mjs) — avant d'y ajouter la tienne, vérifie qu'elle ne porte ni secret ni garde IS_DEV, sinon extrais la brique partagée.";
+// Le motif du garde-fou, nommé : deux blocs le posent (cf. « DEUXIÈME SENS »).
+// Ordre gitignore : le large d'abord, les exceptions `!` ensuite.
+// ⚠ PAS de `**` ici : en sémantique gitignore on ne réinclut pas un fichier
+// situé dans un dossier exclu. `*` ne traversant pas `/`, ces motifs excluent
+// les FICHIERS un par un — et une exception `!` sur un fichier, elle,
+// fonctionne (vérifié : sans ça, une exception nichée restait bloquée malgré
+// la liste).
+const ADMIN_BOUNDARY_PATTERN = {
+  group: ['@/lib/admin/*', '@/components/admin/*/*', ...ADMIN_SHIPS_TO_PROD.map((m) => `!${m}`)],
+  allowTypeImports: true,
+  message: ADMIN_BOUNDARY_MSG,
+};
 // DATA LAYER (CONVENTIONS.md § Données, audit G14) : un JSON de `data/` ne
 // s'importe QUE dans `src/lib/data/**`, où un accesseur par fichier porte le
 // type et le mode de chargement (import statique, disque, runtime R2). Avant la
@@ -138,23 +155,7 @@ const eslintConfig = defineConfig([
       '@typescript-eslint/no-restricted-imports': [
         'error',
         {
-          patterns: [
-            {
-              // Ordre gitignore : le large d'abord, les exceptions `!` ensuite.
-              // ⚠ PAS de `**` ici : en sémantique gitignore on ne réinclut pas un
-              // fichier situé dans un dossier exclu. `*` ne traversant pas `/`,
-              // ces motifs excluent les FICHIERS un par un — et une exception `!`
-              // sur un fichier, elle, fonctionne (vérifié : sans ça, les deux
-              // outils publics nichés restaient bloqués malgré la liste).
-              group: [
-                '@/lib/admin/*',
-                '@/components/admin/*/*',
-                ...ADMIN_SHIPS_TO_PROD.map((m) => `!${m}`),
-              ],
-              allowTypeImports: true,
-              message: ADMIN_BOUNDARY_MSG,
-            },
-          ],
+          patterns: [ADMIN_BOUNDARY_PATTERN],
         },
       ],
     },
@@ -167,23 +168,27 @@ const eslintConfig = defineConfig([
     // outils publics) importait `translate-actions` et embarquait ainsi
     // DEEPL_API_KEY / ANTHROPIC_API_KEY dans le graphe des pages `/contribute`.
     //
-    // Ces deux dossiers portent donc un INVARIANT : tout ce qui y vit part en
-    // prod. On y interdit l'import d'un module porteur de secret ou dont la
-    // sûreté repose sur `IS_DEV`. `*-actions` étant la convention de nommage des
+    // Ce dossier porte donc un INVARIANT : tout ce qui y vit part en prod (les
+    // deux outils publics et les briques qu'ils tirent ont quitté
+    // `components/admin/` pour `components/contribute/` le 13/10, lot C14). On
+    // y interdit l'import d'un module porteur de secret ou dont la sûreté
+    // repose sur `IS_DEV`. `*-actions` étant la convention de nommage des
     // server actions du repo, un nouveau module d'actions est couvert d'office.
     //
     // Seule exception, `inline-preview-actions` : délibérément NON gardée, en
     // lecture seule sur des données de jeu publiques, et nécessaire aux outils
     // publics (décision documentée en tête de ce fichier-là).
-    files: [
-      'src/components/admin/editorial/**/*.{ts,tsx}',
-      'src/components/admin/premium-limited/**/*.{ts,tsx}',
-    ],
+    //
+    // ⚠ En flat config ce bloc REMPLACE, pour ces fichiers, les options du
+    // garde-fou ci-dessus (même règle) : il en REPREND donc le motif, pour que
+    // le dossier reste sous les deux sens de la frontière.
+    files: ['src/components/contribute/**/*.{ts,tsx}'],
     rules: {
       '@typescript-eslint/no-restricted-imports': [
         'error',
         {
           patterns: [
+            ADMIN_BOUNDARY_PATTERN,
             {
               group: [
                 '@/lib/admin/*-actions',

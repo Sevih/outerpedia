@@ -13,7 +13,7 @@ import {
   rebuiltContent,
   type Localized,
 } from '@/components/admin/changelog/changelog-text';
-import { input as inputBase } from './_ui';
+import { input as inputBase } from '@/components/contribute/_ui';
 
 const input = `${inputBase} text-content`;
 

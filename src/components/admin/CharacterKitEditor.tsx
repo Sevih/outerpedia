@@ -5,37 +5,7 @@ import { useRouter } from 'next/navigation';
 import { EffectPillShell } from '@/components/character/EffectChips';
 import { renderGameColors } from '@/components/ui/GameText';
 import { postJson } from '@/lib/admin/post-json';
-
-/** Une chip AUTO d'une carte (positions « règles pures »), déjà résolue. */
-export interface CardChip {
-  /** Ref d'identité = `tooltip ?? label` de l'effet (clé de chipHide). */
-  ref: string;
-  name: string;
-  icon?: string;
-  isDebuff: boolean;
-}
-
-/** Une carte de skill éditable (main, fusion_passive, extra, chaîne, duo). */
-export interface KitEditorCard {
-  id: string;
-  name: string;
-  type: string;
-  desc?: string;
-  iconSrc?: string;
-  chips: CardChip[];
-}
-
-/** Effet du glossaire proposable en chipAdd. */
-export interface EffectOption {
-  id: string;
-  name: string;
-  icon?: string;
-  isDebuff: boolean;
-  /** Variante indissipable (effet DISTINCT de la version normale). */
-  irremovable?: boolean;
-  /** Description du jeu (aide-mémoire de curation). */
-  desc?: string;
-}
+import type { EffectOption, KitEditorCard } from '@/lib/admin/character-kit';
 
 /**
  * Éditeur du CÂBLAGE d'affichage d'un kit PERSO, rendu comme l'extracteur

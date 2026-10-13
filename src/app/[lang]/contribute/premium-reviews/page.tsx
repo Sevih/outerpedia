@@ -14,7 +14,7 @@ import {
   premiumReviews,
   limitedReviews,
 } from '../../guides/_contents/general-guides/premium-limited/reviews';
-import { PremiumReviewsPublicTool } from '@/components/admin/premium-limited/PremiumReviewsPublicTool';
+import { PremiumReviewsPublicTool } from '@/components/contribute/premium-limited/PremiumReviewsPublicTool';
 
 // Import STATIQUE (bundlé, prod-safe) — pas de lecture fs à l'exécution.
 const initialReviews: ReviewsBundle = { premium: premiumReviews, limited: limitedReviews };

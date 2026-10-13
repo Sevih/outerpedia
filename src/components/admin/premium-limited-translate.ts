@@ -27,7 +27,7 @@
 import type { ReviewEntryData, ReviewsBundle } from '@/lib/admin/general-guide-store';
 import { autoTranslate } from '@/lib/admin/translate-actions';
 import { applyTranslation, type Freshness } from '@/lib/admin/translate-fill';
-import { LANGS, type LText } from '@/components/admin/premium-limited/PremiumLimitedParts';
+import { LANGS, type LText } from '@/components/contribute/premium-limited/PremiumLimitedParts';
 
 /**
  * Regénère les REVIEWS des deux buckets depuis leur EN (admin) — écrase les

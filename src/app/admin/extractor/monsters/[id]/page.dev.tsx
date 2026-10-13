@@ -16,6 +16,7 @@ import { MonsterStatsCard } from '@/components/admin/MonsterStatsCard';
 import { entityReview, monsterArchiveOf } from '@/lib/admin/review-store';
 import { diffLabels, skillLabel } from '@/lib/admin/diff-labels';
 import { monsterBossBadgeSrc, monsterIconSrc, monsterSlotSrc } from '@/lib/admin/monster-icon';
+import { ADMIN_SPRITE_ROUTE } from '@/components/admin/sprite-route';
 import { img } from '@/lib/images';
 import {
   committedEncounters,
@@ -152,20 +153,20 @@ export default async function ExtractorMonsterPage({
         <h1 className="text-content-strong flex items-center gap-3 text-xl font-semibold">
           <span className="relative h-14 w-14 shrink-0">
             <img
-              src={monsterSlotSrc(m.type)}
+              src={monsterSlotSrc(m.type, ADMIN_SPRITE_ROUTE)}
               alt=""
               aria-hidden
               className="absolute inset-0 h-full w-full rounded object-cover"
             />
             <img
-              src={monsterIconSrc(m.icon)}
+              src={monsterIconSrc(m.icon, ADMIN_SPRITE_ROUTE)}
               alt=""
               aria-hidden
               className="absolute inset-[7%] h-[86%] w-[86%] rounded object-cover"
             />
-            {monsterBossBadgeSrc(m.type) && (
+            {monsterBossBadgeSrc(m.type, ADMIN_SPRITE_ROUTE) && (
               <img
-                src={monsterBossBadgeSrc(m.type)}
+                src={monsterBossBadgeSrc(m.type, ADMIN_SPRITE_ROUTE)}
                 alt="boss"
                 className="absolute -top-1 -left-1 h-[30%] w-auto drop-shadow-md"
               />

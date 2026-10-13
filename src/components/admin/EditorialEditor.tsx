@@ -23,11 +23,11 @@ import {
   type HeroView,
   type LocalizedText,
   type SynergyGroup,
-} from '@/components/admin/editorial/EditorialFields';
+} from '@/components/contribute/editorial/EditorialFields';
 import { LANGS } from '@/lib/i18n/config';
-import { btn } from './_ui';
+import { btn } from '@/components/contribute/_ui';
 
-export type { HeroView } from '@/components/admin/editorial/EditorialFields';
+export type { HeroView } from '@/components/contribute/editorial/EditorialFields';
 
 type L = (typeof LANGS)[number];
 

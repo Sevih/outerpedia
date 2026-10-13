@@ -5,11 +5,11 @@ import { useRouter } from 'next/navigation';
 import { EffectIconTile, EffectPillShell } from '@/components/character/EffectChips';
 import { renderGameColors } from '@/components/ui/GameText';
 import type { EeChipMeta } from '@/lib/data/equipment-detail';
-import type { EffectOption } from '@/components/admin/CharacterKitEditor';
+import type { EffectOption } from '@/lib/admin/character-kit';
 import { img } from '@/lib/images';
 import { postJson } from '@/lib/admin/post-json';
 import { EE_TIERS } from '@/components/tierlist/tiers';
-import { field, label } from './_ui';
+import { field, label } from '@/components/contribute/_ui';
 
 /** Rangs éditoriaux EE avec image (`IG_Event_Rank_*`). */
 const RANKS: string[] = ['', ...EE_TIERS];

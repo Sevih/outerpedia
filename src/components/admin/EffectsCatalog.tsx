@@ -6,7 +6,7 @@ import type { Route } from 'next';
 import { NewEffectForm } from '@/components/admin/NewEffectForm';
 import { EffectIconTile } from '@/components/character/EffectChips';
 import { filterEffectCatalog, type EffectCatalog } from '@/lib/admin/effect-search';
-import { input } from './_ui';
+import { input } from '@/components/contribute/_ui';
 
 /** Une ligne du catalogue, préparée par le serveur (il lit les fichiers). */
 export interface EffectRow {

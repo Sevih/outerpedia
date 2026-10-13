@@ -148,7 +148,7 @@ import type {
   Monster,
   Skill,
 } from '@contracts';
-import type { EffectOption, KitEditorCard } from '@/components/admin/CharacterKitEditor';
+import type { EffectOption, KitEditorCard } from '@/lib/admin/character-kit';
 import { HUMAN_TAGS } from '@/components/tierlist/tiers';
 import type { CharacterKitPatch } from '@/lib/admin/character-skill-curated-store';
 import { collapseBuild, expandBuild } from '@/lib/admin/gear-preset-resolve';
@@ -180,7 +180,7 @@ import { img } from '@/lib/images';
 import en from '@/i18n/locales/en';
 import fr from '@/i18n/locales/fr';
 import { loadGearPresets, loadGearReco } from '@/lib/data/gear-reco';
-import type { InboxItem } from '@/lib/admin/admin-inbox';
+import { tagSourceSheet, type InboxItem } from '@/lib/admin/admin-inbox';
 import { collectTagOccurrences } from '@/lib/admin/tag-control';
 import type { TablePage, TableSchema } from '@/lib/admin/gamedata-store';
 import { validateBanners, type Banner, type PromoCode } from '@/lib/data/promo-rules';
@@ -202,12 +202,10 @@ import { MONSTER_FILES, type FreezeGuide, type PinRef } from '@/lib/admin/monste
 import type { RepinPlan, RepinResult } from '@/lib/admin/repin-guides';
 import {
   ADMIN_BASE_DEFAULT,
-  ADMIN_TO_QUICK,
   BANNER_LOOKBACK_DAYS,
   CHARACTER_COVERAGE_DISK,
   CHARACTER_SHEET_DEPS,
   COUPON_EXPIRY_DAYS,
-  DASHBOARD_DISK,
   ITEMS_DISK,
   NO_GAME_DATA,
   OFF_SITE_STATUS,
@@ -271,7 +269,6 @@ import {
   saveNames,
   sectionBadges,
   tableUsage,
-  tagSourceSheet,
   translateNotes,
   type BannersDeps,
   type EventsDeps,
@@ -3901,9 +3898,6 @@ describe('dashboardState — l’accueil de quick, toutes lectures injectées', 
   /** Un poste sans rien à signaler : chaque test n'y change que sa lecture. */
   const disk = (over: Partial<DashboardDisk> = {}): DashboardDisk => ({
     inbox: () => [],
-    adminBase: () => 'https://outerpedia.local',
-    quickTabs: {},
-    deadTagSources: () => [],
     gitState: () => ({ branch: 'main', ahead: 0, behind: 0 }),
     lastCommit: () => 'f1b28e5\tfeat(quick): tableau de bord\til y a 3 heures',
     porcelain: () => '',
@@ -3922,7 +3916,7 @@ describe('dashboardState — l’accueil de quick, toutes lectures injectées', 
     key: 'extract:character',
     label: 'Character',
     detail: '1 new',
-    href: '/admin/extractor/characters',
+    tab: 'extractor/character',
     tone: 'warn',
     rank: 2,
     count: 1,
@@ -3947,118 +3941,41 @@ describe('dashboardState — l’accueil de quick, toutes lectures injectées', 
     });
   });
 
-  it('inbox : la liste de l’admin telle quelle, dans son ordre, chaque `href` en adresse complète', async () => {
+  it('inbox : la liste telle quelle, dans son ordre, chaque item à son adresse dans quick', async () => {
+    // Des tags morts que rien ne situe (`tab` nul), une cible d'Extraction,
+    // les assets aux Tables du jeu : rien n'est traduit ni ajouté.
     const tags = item({
       key: 'tags',
       label: 'Dead inline tags',
-      detail: '2 tag(s) resolve to nothing',
-      href: '/admin/tags',
+      detail: '2 tag(s) resolve to nothing — gear-presets.json.substats.dps',
+      tab: null,
       tone: 'danger',
       rank: 0,
       count: 2,
     });
-    const { inbox } = await dashboardState(
-      // Une base écrite avec sa barre finale ne la double pas.
-      disk({ inbox: () => [tags, item()], adminBase: () => 'http://localhost:3000/' }),
-    );
-    expect(inbox).toEqual([
-      { ...tags, href: 'http://localhost:3000/admin/tags', inQuick: false, tab: null },
-      {
-        ...item(),
-        href: 'http://localhost:3000/admin/extractor/characters',
-        inQuick: false,
-        tab: null,
-      },
-    ]);
+    const assets = item({ key: 'assets', label: 'Assets', tab: 'gamedata', rank: 3, count: 40 });
+    const { inbox } = await dashboardState(disk({ inbox: async () => [tags, item(), assets] }));
+    expect(inbox).toEqual([tags, item(), assets]);
+    // Plus aucune adresse de l'admin dans ce que le tableau de bord sert.
+    expect(JSON.stringify(inbox)).not.toContain('admin');
   });
 
-  it('inbox : `inQuick` et son onglet quand quick a déjà la page', async () => {
-    const { inbox } = await dashboardState(
-      disk({
-        inbox: async () => [item(), item({ key: 'tags', href: '/admin/tags' })],
-        quickTabs: { '/admin/tags': 'tags' },
-      }),
-    );
-    expect(inbox?.map((i) => [i.key, i.inQuick, i.tab])).toEqual([
-      ['extract:character', false, null],
-      ['tags', true, 'tags'],
-    ]);
-    // La table du jour : l'éditeur des effets, celui des persos (la « Fiche
-    // perso », Gear reco compris), celui des EE et les outils Pro / Con et
-    // Synergy, trois de ses sous-onglets, celui des monstres, celui des
-    // items, l'éditeur des guides de boss, et les dix cibles de l'extractor —
-    // chacune sur SA cible de la section « Extraction » (un chemin, que
-    // `sections.go` ouvre). L'inbox ne renvoie plus à l'admin que pour les
-    // tags et les données du jeu.
-    expect(ADMIN_TO_QUICK).toEqual({
-      '/admin/editor/characters': 'character',
-      '/admin/guides': 'guides',
-      '/admin/editor/ee': 'character',
-      '/admin/editor/effects': 'effects',
-      '/admin/editor/items': 'items',
-      '/admin/editor/monsters': 'monsters',
-      '/admin/tools/pros-cons': 'character',
-      '/admin/tools/synergies': 'character',
-      '/admin/extractor/characters': 'extractor/character',
-      '/admin/extractor/effects': 'extractor/effect',
-      '/admin/extractor/ee': 'extractor/ee',
-      '/admin/extractor/weapons': 'extractor/weapon',
-      '/admin/extractor/amulets': 'extractor/amulet',
-      '/admin/extractor/armors': 'extractor/armor',
-      '/admin/extractor/talismans': 'extractor/talisman',
-      '/admin/extractor/sets': 'extractor/set',
-      '/admin/extractor/monsters': 'extractor/monster',
-      '/admin/extractor/items': 'extractor/item',
+  it('inbox : les tags morts d’UN perso, adressés à sa fiche, portent `sheet` — eux seuls', async () => {
+    const tags = item({
+      key: 'tags',
+      tab: 'character/2000012/pros-cons',
+      tone: 'danger',
+      rank: 0,
     });
-    expect(DASHBOARD_DISK.quickTabs).toBe(ADMIN_TO_QUICK);
-  });
-
-  it('inbox : les tags morts d’UN perso renvoient à sa fiche dans quick, les autres à l’admin', async () => {
-    const tags = item({ key: 'tags', href: '/admin/tags', tone: 'danger', rank: 0 });
-    const sheetOf = async (sources: string[]) => {
-      const { inbox } = await dashboardState(
-        disk({ inbox: () => [tags, item()], deadTagSources: () => sources }),
-      );
-      return inbox?.map((i) => i.sheet);
-    };
-    const PROS = 'curated pros-cons · Valentine (2000012).pros[1].en';
-    // Un perso, plusieurs textes : sa fiche, au sous-onglet du premier — et
-    // l'item d'à côté n'y gagne rien.
-    expect(await sheetOf([PROS, 'synergies · Valentine (2000012)[0]'])).toEqual([
-      'character/2000012/pros-cons',
-      undefined,
-    ]);
-    expect(await sheetOf(['gear-reco.json.2000008[0].note.en'])).toEqual([
-      'character/2000008/gear',
-      undefined,
-    ]);
-    // Deux persos, un guide, un preset : la page de l'admin, qui les liste tous.
-    for (const sources of [
-      [PROS, 'synergies · Marian (2000014)[0]'],
-      [PROS, 'guides · adventure/S1-9-5 · content.json.tips[0].en'],
-      ['gear-presets.json.substats.dps'],
-      [],
-    ])
-      expect(await sheetOf(sources)).toEqual([undefined, undefined]);
-    // L'adresse de l'admin reste dans l'item : `sheet` s'y ajoute.
-    const { inbox } = await dashboardState(
-      disk({ inbox: () => [tags], deadTagSources: () => [PROS] }),
+    const { inbox } = await dashboardState(disk({ inbox: () => [tags, item()] }));
+    // La même adresse, dite FICHE : la page l'ouvre dans un nouvel onglet.
+    expect(inbox).toEqual([{ ...tags, sheet: 'character/2000012/pros-cons' }, item()]);
+    // Un chemin d'une autre section n'est pas une fiche ; des tags morts sans
+    // adresse non plus.
+    const others = await dashboardState(
+      disk({ inbox: () => [item({ tab: 'extractor/character/2000012' }), { ...tags, tab: null }] }),
     );
-    expect(inbox).toEqual([
-      {
-        ...tags,
-        href: 'https://outerpedia.local/admin/tags',
-        inQuick: false,
-        tab: null,
-        sheet: 'character/2000012/pros-cons',
-      },
-    ]);
-  });
-
-  it('inbox : sans tag mort annoncé, les provenances ne sont pas lues', async () => {
-    const deadTagSources = vi.fn(() => []);
-    await dashboardState(disk({ inbox: () => [item()], deadTagSources }));
-    expect(deadTagSources).not.toHaveBeenCalled();
+    expect(others.inbox?.map((i) => i.sheet)).toEqual([undefined, undefined]);
   });
 
   it('`tagSourceSheet` lit les provenances RÉELLES de `collectTagOccurrences`', () => {
@@ -4086,12 +4003,8 @@ describe('dashboardState — l’accueil de quick, toutes lectures injectées', 
     expect(tagSourceSheet('curated pros-cons · 2999999.pros[0].en')).toBeNull();
   });
 
-  it('`ADMIN_BASE` : le site de dev de Caddy d’office, `.env.local` le remplace', () => {
-    vi.stubEnv('ADMIN_BASE', '');
-    expect(DASHBOARD_DISK.adminBase()).toBe('https://outerpedia.local');
+  it('`ADMIN_BASE_DEFAULT` : le site de dev de Caddy', () => {
     expect(ADMIN_BASE_DEFAULT).toBe('https://outerpedia.local');
-    vi.stubEnv('ADMIN_BASE', 'http://localhost:3000');
-    expect(DASHBOARD_DISK.adminBase()).toBe('http://localhost:3000');
   });
 
   it('git : l’état de « Pousser », le dernier commit, les fichiers modifiés ou non suivis comptés', async () => {
@@ -4386,7 +4299,7 @@ describe('dashboardState — l’accueil de quick, toutes lectures injectées', 
       throw new Error('boom');
     };
     for (const [name, over] of [
-      ['inbox', { adminBase: boom }],
+      ['inbox', { inbox: boom }],
       ['git', { porcelain: boom }],
       ['git', { gitState: boom }],
       ['game', { siteVersion: boom }],
@@ -4401,8 +4314,6 @@ describe('dashboardState — l’accueil de quick, toutes lectures injectées', 
   });
 
   describe('les pastilles du menu — l’inbox comptée par section de quick', () => {
-    const PROS = 'curated pros-cons · Valentine (2000012).pros[1].en';
-
     it('`sectionBadges` : le premier segment de l’adresse, les comptes sommés, la pire teinte', () => {
       // Deux cibles d'Extraction : une seule pastille, celle de la section.
       expect(
@@ -4417,7 +4328,7 @@ describe('dashboardState — l’accueil de quick, toutes lectures injectées', 
           { tab: null, sheet: 'character/2000012/pros-cons', count: 4, tone: 'danger' },
         ]),
       ).toEqual({ character: { count: 4, tone: 'danger' } });
-      // Ce que l'admin garde n'a pas de pastille.
+      // Ce que rien ne situe n'a pas de pastille.
       expect(sectionBadges([{ tab: null, count: 7, tone: 'warn' }])).toEqual({});
       expect(sectionBadges([])).toEqual({});
     });
@@ -4450,39 +4361,36 @@ describe('dashboardState — l’accueil de quick, toutes lectures injectées', 
       ).toEqual({ effects: { count: 3, tone: 'warn' } });
     });
 
-    it('`badgesState` : l’inbox du tableau de bord, par la table du jour, et rien d’autre', async () => {
-      const inbox = [
-        item({ key: 'tags', href: '/admin/tags', tone: 'danger', rank: 0, count: 2 }),
-        item({
-          key: 'extract:monster',
-          href: '/admin/extractor/monsters',
-          tone: 'danger',
-          count: 5,
-        }),
+    it('`badgesState` : l’inbox du tableau de bord, par l’adresse de chaque item, et rien d’autre', async () => {
+      const tags = item({
+        key: 'tags',
+        tab: 'character/2000012/pros-cons',
+        tone: 'danger',
+        rank: 0,
+        count: 2,
+      });
+      const rest = [
+        item({ key: 'extract:monster', tab: 'extractor/monster', tone: 'danger', count: 5 }),
         item({ count: 3 }),
-        item({ key: 'assets', href: '/admin/tools/gamedata', rank: 3, count: 40 }),
-        item({ key: 'extract:item', href: '/admin/extractor/items', tone: 'muted', count: 9 }),
+        item({ key: 'assets', tab: 'gamedata', rank: 3, count: 40 }),
+        item({ key: 'extract:item', tab: 'extractor/item', tone: 'muted', count: 9 }),
       ];
-      // Les quatre lectures de l'inbox, sans git, sans le jeu, sans R2.
-      const reads = {
-        inbox: () => inbox,
-        adminBase: () => 'https://outerpedia.local',
-        quickTabs: ADMIN_TO_QUICK,
-        deadTagSources: () => [PROS],
-      };
+      // La seule lecture de l'inbox, sans git, sans le jeu, sans R2.
+      const reads = { inbox: () => [tags, ...rest] };
       const { sections, at } = await badgesState(reads);
       expect(sections).toEqual({
         character: { count: 2, tone: 'danger' },
         extractor: { count: 17, tone: 'danger' },
+        gamedata: { count: 40, tone: 'warn' },
       });
       expect(at).toMatch(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/);
 
-      // Des tags morts de deux persos : `/admin/tags` les liste, quick non.
-      const spread = await badgesState({
-        ...reads,
-        deadTagSources: () => [PROS, 'synergies · Marian (2000014)[0]'],
+      // Des tags morts de deux persos : aucune section ne les réunit, pas de pastille.
+      const spread = await badgesState({ inbox: () => [{ ...tags, tab: null }, ...rest] });
+      expect(spread.sections).toEqual({
+        extractor: { count: 17, tone: 'danger' },
+        gamedata: { count: 40, tone: 'warn' },
       });
-      expect(spread.sections).toEqual({ extractor: { count: 17, tone: 'danger' } });
 
       // Les mêmes items que le tableau de bord : une section par item situé.
       const { inbox: served } = await dashboardState(disk({ ...reads }));

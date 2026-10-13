@@ -25,12 +25,12 @@ import type {
   OverlayEntry,
   TextShop,
 } from '@/lib/admin/shop-priorities-store';
-import { InlineTextField } from '@/components/admin/InlineTextField';
+import { InlineTextField } from '@/components/contribute/InlineTextField';
 import { ItemInline } from '@/components/inline/ItemInline';
 import { img } from '@/lib/images';
 import { LANGS } from '@/lib/i18n/config';
 import { PERIODS, PRIORITIES, type Period, type Priority } from '@/lib/admin/shop-priorities-shape';
-import { btn, input } from '../_ui';
+import { btn, input } from '@/components/contribute/_ui';
 export { btn };
 
 /** Langues du SITE (5) — dérivées de la source de vérité i18n. */

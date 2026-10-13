@@ -15,7 +15,7 @@ import type { Lang } from '@/lib/i18n/config';
 import type { InlineRefs, RefItem } from '@/lib/admin/inline-refs';
 import type { InlineSegment, TagCheck } from '@/lib/parse-text';
 import { renderInlineBatch, renderInlinePreview } from '@/lib/admin/inline-preview-actions';
-import { InlinePreview } from '@/components/admin/InlinePreview';
+import { InlinePreview } from '@/components/contribute/InlinePreview';
 
 /** Un bouton de la barre : type de tag + libellé + source de refs. */
 interface TokenDef {

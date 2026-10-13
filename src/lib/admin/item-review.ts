@@ -7,7 +7,7 @@
  */
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
-import type { NamedReviewEntity } from '@/components/admin/ExtractorReview';
+import type { NamedReviewEntity } from '@/lib/admin/review-types';
 import {
   reviewBuckets,
   reviewEntities,

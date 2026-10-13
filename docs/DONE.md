@@ -7,6 +7,114 @@
 
 ## 2026-10-13
 
+- **Retrait de `/admin`, première moitié : ce que le site et quick
+  partagent quitte l'admin, l'inbox adresse quick (lot C14)** — étape 22 de
+  `docs/quick-migration.md`, en deux lots : celui-ci PRÉPARE (rien n'est
+  supprimé, tout ce qui vivra après le retrait sort de `src/app/admin`,
+  `src/app/api/admin` et `src/components/admin`), C15 supprimera. Le site
+  public et quick restent identiques à l'écran et au build.
+  (1) LES OUTILS PUBLICS. Douze fichiers déménagent de
+  `src/components/admin/` à `src/components/contribute/` : les quatre des
+  outils de /contribute (`editorial/EditorialFields.tsx`,
+  `editorial/EditorialPublicTool.tsx`,
+  `premium-limited/PremiumLimitedParts.tsx`,
+  `premium-limited/PremiumReviewsPublicTool.tsx`) et les HUIT briques
+  qu'ils tirent, fermeture calculée sur leurs imports — `_ui.ts`,
+  `MoveButtons.tsx`, `CharacterPicker.tsx`, `SearchPicker.tsx`,
+  `CharacterChips.tsx`, `CharacterGroups.tsx`, `InlineTextField.tsx`,
+  `InlinePreview.tsx`. Aucun contenu ne change, hors leurs imports et deux
+  en-têtes remis à jour. Les trois pages
+  `src/app/[lang]/contribute/*/page.tsx`, `editorial-tool-data.ts` et les
+  28 fichiers de l'admin qui s'en servaient (ils vivent jusqu'à C15)
+  importent du nouvel emplacement. Déplacés par `mv` puis indexés
+  ensemble au commit plutôt que par `git mv` : git y lit les mêmes
+  renommages, et l'index partagé n'a rien porté de moi avant le commit.
+  (2) LES TYPES. `ExtractorRow` → `src/lib/admin/extractor-rows.ts`
+  (nouveau, type seul) ; `NamedReviewEntity` → `review-types.ts`, le module
+  de types de la revue qui portait déjà `ReviewEntity` (pas
+  `review-shape.ts`, qui est la forme des reviews Premium & Limited) ;
+  `CardChip`, `KitEditorCard`, `EffectOption` → `character-kit.ts` ;
+  `KitChip` et l'`EffectOption` des monstres (sans `desc`, un autre type
+  que celui des persos, resté distinct) → `monster-kit.ts`. Aucune forme
+  ne change ; les composants de l'admin et `scripts/quick/actions.ts`
+  importent de `src/lib/admin/`, plus aucun module de `src/lib` ni de
+  `scripts` ne lit un composant de l'admin.
+  (3) L'INBOX. `admin-inbox.ts` : `ExtractorEntity` et `InboxItem` portent
+  `tab` à la place de `href`. Les dix entités adressent
+  `extractor/<cible>`, les assets `gamedata`, les tags morts
+  `character/<id>/<sous-onglet>` quand ils viennent tous d'un même perso —
+  `tagSourceSheet` et `deadTagSheet` y sont descendus d'`actions.ts` — et
+  `null` sinon, avec un `detail` qui nomme les provenances (distinctes,
+  trois au plus, puis « +n more »). `actions.ts` perd `ADMIN_TO_QUICK`,
+  `quickTabOf` et, de `DashboardDisk`, `adminBase`, `quickTabs` et
+  `deadTagSources` (l'inbox lit elle-même les provenances) ; `quickInbox`
+  sert la liste telle quelle et pose `sheet` sur l'item des tags adressé à
+  une fiche, que la page ouvre toujours dans un nouvel onglet. `inQuick`
+  disparaît avec `href` : il ne disait plus que « `tab` non nul ».
+  `tabs/dashboard.js` : « Ouvrir » sur `tab`, le lien « dans l'admin ↗ »
+  retiré — un item que rien ne situe n'a plus de geste. `sectionBadges`
+  n'est pas touché. La home de l'admin (`src/app/admin/page.dev.tsx`) lit
+  l'inbox sans lien et affiche « quick › `tab` ».
+  (4) LES SPRITES. `monster-icon.ts` : `SPRITE_ROUTE = '/api/sprite'`, la
+  route de quick, devient le défaut (elle remplace `ADMIN_SPRITE_ROUTE`) ;
+  `buildGearRows` et `buildMonsterRows` prennent la route en paramètre,
+  celle de quick d'office. L'admin passe la sienne par une constante à
+  lui, `src/components/admin/sprite-route.ts`, dans ses huit layouts et ses
+  deux fiches monstre ; `src/app/api/admin/sprite/[name]` reste.
+  `actions.ts` lit `SPRITE_ROUTE` de `monster-icon.ts` au lieu de la
+  redéclarer.
+  (5) L'EN-TÊTE. `HeaderClient.tsx` : le lien « Admin » du développement
+  est retiré, « Dev » reste. `proxy.ts` et `robots.ts` ne bougent pas.
+  (6) LA FRONTIÈRE ESLINT, non citée par le lot mais déplacée avec les
+  fichiers : sans elle le garde « deuxième sens » (aucun secret dans ce
+  qui part en prod) ne visait plus rien. `eslint.config.mjs` : ce bloc
+  vise `src/components/contribute/**` et REPREND le motif du premier
+  (`ADMIN_BOUNDARY_PATTERN`, nommé), parce qu'en flat config il en
+  remplace les options pour ces fichiers ; `ADMIN_SHIPS_TO_PROD` perd les
+  deux outils (ils ne sont plus sous `admin/`) et gagne les quatre modules
+  de `src/lib/admin/` que les briques importent en valeur — `keyed`,
+  `reorder`, `review-shape`, `inline-preview-actions`, relus : ni secret
+  ni garde `IS_DEV`. Sondé par stdin : un `*-actions`, un store ou un
+  composant niché de l'admin importés d'un fichier de `contribute/` sont
+  refusés, ces quatre-là et un `import type` passent.
+  VÉRIFIÉ. `pnpm typecheck` :
+  `tsc --noEmit && tsc --noEmit -p datagen/tsconfig.json && tsc --noEmit -p scripts/tsconfig.json`,
+  code 0 ; `pnpm lint` : `$ eslint`, code 0 ; `pnpm test` :
+  `Tests  3841 passed (3841)` (223 fichiers) ;
+  `NODE_ENV=development pnpm exec vitest run scripts/quick src/lib/admin src/lib/contribute` :
+  `Tests  1761 passed (1761)`. `pnpm build` : code 0, 1964 pages, dernière
+  ligne `ƒ  (Dynamic)  server-rendered on demand`, les trois pages
+  /contribute au tableau des routes, aucune `/admin` ; 12 avertissements
+  Turbopack, les 11 du dernier build vert de la CI plus celui du dossier
+  `.gamedata`, qui n'existe qu'en local. Le `.next` du dev a été mis de
+  côté pendant le build puis remis, `next-env.d.ts` aussi.
+  `grep -rn "components/admin" src/app/\[lang\] src/lib scripts` et
+  `grep -rn "'/admin" src/lib/admin/admin-inbox.ts scripts/quick` : vides
+  (le commentaire d'`event-text.ts` est reformulé pour le premier). Tests :
+  `admin-inbox.test.ts` (chaque item avec `tab`, les tags d'un perso ou de
+  plusieurs, plus aucune adresse de l'admin), `actions.test.ts` (l'inbox
+  servie telle quelle, `sheet`, les pastilles), `ui-serve.test.ts`
+  (« Ouvrir » ouvre la section, plus de lien vers l'admin),
+  `monster-rows.test.ts` (la route des sprites). Banc : quick isolé sur
+  :4799, avant et après — `--tabs extractor` identique à l'octet ;
+  `--tabs dashboard` identique hors la carte « Dépôt » (l'âge du commit, le
+  compte de fichiers modifiés) ; `/api/badges`, `/api/extractor` et deux
+  cibles identiques ; l'item de l'inbox ne perd que `href` et `inQuick`.
+  CE QUI CHANGE À L'ÉCRAN, par décision du lot : un manque d'assets ouvre
+  « Tables du jeu » et y pose une pastille ; des tags morts de plusieurs
+  provenances n'ont plus de lien, leur détail les nomme.
+  LAISSÉ. Rien n'est supprimé : `post-json.ts`, les pages, les routes et
+  les composants de l'admin partent en C15, avec `sprite-route.ts`,
+  `adminExtractorMenu` et `EXTRACTOR_IN_QUICK`. Non joué : l'admin dans un
+  navigateur (`pnpm dev` est à Sevih) — ses pages ne sont couvertes que
+  par le typecheck et le lint. Vu hors périmètre : `ADMIN_BASE` et
+  `ADMIN_BASE_DEFAULT` d'`actions.ts` nomment encore « l'admin » alors
+  qu'ils ne servent plus qu'aux liens vers le site de dev (événements,
+  guides) ; le libellé « lu par l'admin » de la carte « À faire »
+  (`dashboard.html`) ; `gear-rows.ts`, `monster-rows.ts` et
+  `character-rows.ts` n'ont plus d'autre lecteur que les sidebars de
+  l'admin — à supprimer en C15 plutôt qu'à garder.
+
 - **quick, suites de la relecture A38 → A47 (2/2) : le « +n hors site »
   sort du mémo de l'inbox, les pastilles ne se relisent qu'après une
   écriture, un seul lecteur du roster (lot A50)** — trois restes de la

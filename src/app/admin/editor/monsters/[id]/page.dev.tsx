@@ -3,6 +3,7 @@ import type { Skill } from '@datagen/contracts';
 import { MonsterKitEditor, type KitEditorSkill } from '@/components/admin/MonsterKitEditor';
 import { EntitySwitch } from '@/components/admin/EntitySwitch';
 import { monsterBossBadgeSrc, monsterIconSrc, monsterSlotSrc } from '@/lib/admin/monster-icon';
+import { ADMIN_SPRITE_ROUTE } from '@/components/admin/sprite-route';
 import { monsterKitCards, monsterKitCatalog } from '@/lib/admin/monster-kit';
 import { committedMonsterSkills, committedMonsters } from '@/lib/admin/monster-store';
 import { extractedMonsterBundle } from '@/lib/admin/review-store';
@@ -48,20 +49,20 @@ export default async function EditorMonsterPage({ params }: { params: Promise<{ 
       <div className="flex items-center gap-3">
         <span className="relative h-14 w-14 shrink-0">
           <img
-            src={monsterSlotSrc(m.type)}
+            src={monsterSlotSrc(m.type, ADMIN_SPRITE_ROUTE)}
             alt=""
             aria-hidden
             className="absolute inset-0 h-full w-full rounded object-cover"
           />
           <img
-            src={monsterIconSrc(m.icon)}
+            src={monsterIconSrc(m.icon, ADMIN_SPRITE_ROUTE)}
             alt=""
             aria-hidden
             className="absolute inset-[7%] h-[86%] w-[86%] rounded object-cover"
           />
-          {monsterBossBadgeSrc(m.type) && (
+          {monsterBossBadgeSrc(m.type, ADMIN_SPRITE_ROUTE) && (
             <img
-              src={monsterBossBadgeSrc(m.type)}
+              src={monsterBossBadgeSrc(m.type, ADMIN_SPRITE_ROUTE)}
               alt="boss"
               className="absolute -top-1 -left-1 h-[30%] w-auto drop-shadow-md"
             />

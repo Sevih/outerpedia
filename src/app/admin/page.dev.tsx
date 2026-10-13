@@ -116,7 +116,9 @@ export default function AdminHome() {
         </p>
       </div>
 
-      {/* INBOX — uniquement ce qui demande une action, trié par urgence. */}
+      {/* INBOX — uniquement ce qui demande une action, trié par urgence. Les
+          items sont adressés à quick (`tab`, lot C14) : ici on les LIT, sans
+          lien — c'est le tableau de bord de quick qui y mène. */}
       <section className="space-y-2">
         <h2 className="text-content-strong text-sm font-semibold uppercase">Inbox</h2>
         {inbox.length === 0 ? (
@@ -127,16 +129,17 @@ export default function AdminHome() {
           <ul className="space-y-2">
             {inbox.map((it) => (
               <li key={it.key}>
-                <Link
-                  href={it.href as Route}
-                  className={`bg-surface-raised hover:bg-surface-base flex items-center gap-3 rounded-lg border border-l-4 p-3 ${TONE[it.tone]}`}
+                <div
+                  className={`bg-surface-raised flex items-center gap-3 rounded-lg border border-l-4 p-3 ${TONE[it.tone]}`}
                 >
                   <span className="text-content-strong text-sm font-medium">{it.label}</span>
                   <span className="text-content-muted min-w-0 flex-1 truncate text-sm">
                     {it.detail}
                   </span>
-                  <span className="text-content-subtle shrink-0 text-xs">→</span>
-                </Link>
+                  {it.tab && (
+                    <span className="text-content-subtle shrink-0 text-xs">quick › {it.tab}</span>
+                  )}
+                </div>
               </li>
             ))}
           </ul>

@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import type { VideoRef } from '@contracts';
-import { btn } from './_ui';
+import { btn } from '@/components/contribute/_ui';
 
 /** Candidat renvoyé par /api/admin/youtube/search (méta complète). */
 interface Candidate {

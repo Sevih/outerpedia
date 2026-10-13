@@ -18,11 +18,11 @@
 import type { InlineRefs } from '@/lib/admin/inline-refs';
 import type { InlineSegment } from '@/lib/parse-text';
 import { hasText, type RecoGroupDraft } from '@/lib/admin/guide-draft';
-import { InlinePreview } from '@/components/admin/InlinePreview';
-import { CharacterChips, type ChipView } from '@/components/admin/CharacterChips';
-import { CharacterGroups, type GroupWithReason } from '@/components/admin/CharacterGroups';
+import { InlinePreview } from '@/components/contribute/InlinePreview';
+import { CharacterChips, type ChipView } from '@/components/contribute/CharacterChips';
+import { CharacterGroups, type GroupWithReason } from '@/components/contribute/CharacterGroups';
 import { LANGS } from '@/lib/i18n/config';
-import { btn, inputFull as input } from '../_ui';
+import { btn, inputFull as input } from '@/components/contribute/_ui';
 export { btn, input };
 
 /** Langues du SITE (5) — dérivées de la source de vérité i18n. */

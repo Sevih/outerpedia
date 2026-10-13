@@ -7,7 +7,7 @@ import Link from 'next/link';
 import { normalizeLang } from '@/lib/i18n/config';
 import { localePath } from '@/lib/navigation';
 import { editorialToolData } from '@/lib/contribute/editorial-tool-data';
-import { EditorialPublicTool } from '@/components/admin/editorial/EditorialPublicTool';
+import { EditorialPublicTool } from '@/components/contribute/editorial/EditorialPublicTool';
 
 export const revalidate = 3600;
 

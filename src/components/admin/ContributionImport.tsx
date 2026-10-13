@@ -9,7 +9,7 @@
  */
 import { useRef, useState } from 'react';
 import { importContribution, type ImportResult } from '@/lib/admin/contribution-actions';
-import { btn } from './_ui';
+import { btn } from '@/components/contribute/_ui';
 
 export function ContributionImport() {
   const fileRef = useRef<HTMLInputElement>(null);

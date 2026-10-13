@@ -19,10 +19,15 @@ import {
   type EncountersData,
   type Monster,
 } from '@/lib/admin/monster-store';
-import { monsterBossBadgeSrc, monsterIconSrc, monsterSlotSrc } from '@/lib/admin/monster-icon';
+import {
+  SPRITE_ROUTE,
+  monsterBossBadgeSrc,
+  monsterIconSrc,
+  monsterSlotSrc,
+} from '@/lib/admin/monster-icon';
 import { monsterPlaces } from '@/lib/admin/monster-kit';
 import { img } from '@/lib/images';
-import type { ExtractorRow } from '@/components/admin/ExtractorSidebar';
+import type { ExtractorRow } from '@/lib/admin/extractor-rows';
 
 export interface MonsterRowsResult {
   rows: ExtractorRow[];
@@ -68,7 +73,14 @@ export function monsterRowStatuses(
   return statuses;
 }
 
-export function buildMonsterRows(src: MonsterRowsSource = freshSource()): MonsterRowsResult {
+/**
+ * `spriteRoute` : la route des sprites bruts — celle de quick par défaut
+ * (`SPRITE_ROUTE`), l'admin passe la sienne.
+ */
+export function buildMonsterRows(
+  src: MonsterRowsSource = freshSource(),
+  spriteRoute = SPRITE_ROUTE,
+): MonsterRowsResult {
   const { monsters: fresh, encounters: enc, site, diff } = src;
   const statusOf = monsterRowStatuses(diff);
   const diffCounts = new Map(diff.changed.map((c) => [c.key, c.fields.length]));
@@ -95,12 +107,12 @@ export function buildMonsterRows(src: MonsterRowsSource = freshSource()): Monste
         // overlays — pas de doublon texte. Ligne 3 (sub) : stage/zone.
         meta: modeLabelsOf(groups, modes).slice(0, 2).join(', '),
         sub: zones.slice(0, 2).join(', '),
-        icon: monsterIconSrc(m.icon),
-        iconFrame: monsterSlotSrc(m.type),
+        icon: monsterIconSrc(m.icon, spriteRoute),
+        iconFrame: monsterSlotSrc(m.type, spriteRoute),
         iconInset: true,
         elementIcon: img.element(m.element),
         classIcon: img.klass(m.class),
-        badgeIcon: monsterBossBadgeSrc(m.type),
+        badgeIcon: monsterBossBadgeSrc(m.type, spriteRoute),
         stars: m.rarity,
         status: statusOf.get(m.id) ?? 'ok',
         count: diffCounts.get(m.id) ?? 0,

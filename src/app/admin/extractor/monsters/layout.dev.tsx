@@ -1,4 +1,5 @@
 import { ExtractorSidebar } from '@/components/admin/ExtractorSidebar';
+import { ADMIN_SPRITE_ROUTE } from '@/components/admin/sprite-route';
 import { buildMonsterRows } from '@/lib/admin/monster-rows';
 import { siteMonsterCounts } from '@/lib/admin/monster-review';
 
@@ -6,7 +7,7 @@ export const dynamic = 'force-dynamic';
 
 /** Master-detail Extractor monstres : même UX que les personnages. */
 export default function ExtractorMonstersLayout({ children }: { children: React.ReactNode }) {
-  const { rows, modeOptions } = buildMonsterRows();
+  const { rows, modeOptions } = buildMonsterRows(undefined, ADMIN_SPRITE_ROUTE);
   return (
     <div className="flex gap-6">
       <ExtractorSidebar

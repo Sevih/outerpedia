@@ -2,7 +2,7 @@ import { characterDisplayName, getCharacterListItems } from '@/lib/data/characte
 import { loadCuratedCharacters } from '@/lib/data/curated';
 import { extractedCharacter, reviewEntities, reviewTarget } from '@/lib/admin/review-store';
 import { img } from '@/lib/images';
-import type { ExtractorRow } from '@/components/admin/ExtractorSidebar';
+import type { ExtractorRow } from '@/lib/admin/extractor-rows';
 
 export interface SidebarRow {
   id: string;

@@ -1,5 +1,6 @@
 /**
- * INBOX de l'accueil admin : ce qui DEMANDE UNE ACTION, trié par urgence.
+ * INBOX du tableau de bord de quick (née sur l'accueil de l'admin, qui la lit
+ * encore jusqu'à son retrait) : ce qui DEMANDE UNE ACTION, trié par urgence.
  *
  * Remplace la matrice entité × fonction de la home, qui redisait les badges de
  * la sidebar (mêmes chiffres, mêmes liens) en dix lignes dont neuf « ✓ ». Ici on
@@ -23,11 +24,15 @@ import {
 import { actionableDiff } from '@/lib/admin/monster-review';
 import { collectTagOccurrences } from '@/lib/admin/tag-control';
 
-/** Une entité du moteur d'extraction : id de revue, libellé, page dédiée. */
+/**
+ * Une entité du moteur d'extraction : id de revue, libellé, et sa cible dans la
+ * section « Extraction » de quick (`extractor/<cible>`, un chemin que
+ * `sections.go` sait ouvrir).
+ */
 export interface ExtractorEntity {
   id: string;
   label: string;
-  href: string;
+  tab: string;
 }
 
 /**
@@ -36,16 +41,16 @@ export interface ExtractorEntity {
  * copies dérivaient déjà (la home plaçait le Monstre en 3e).
  */
 export const EXTRACTOR_ENTITIES: readonly ExtractorEntity[] = [
-  { id: 'character', label: 'Character', href: '/admin/extractor/characters' },
-  { id: 'effect', label: 'Effect', href: '/admin/extractor/effects' },
-  { id: 'ee', label: 'EE', href: '/admin/extractor/ee' },
-  { id: 'weapon', label: 'Weapons', href: '/admin/extractor/weapons' },
-  { id: 'amulet', label: 'Amulet', href: '/admin/extractor/amulets' },
-  { id: 'armor', label: 'Armor', href: '/admin/extractor/armors' },
-  { id: 'talisman', label: 'Talisman', href: '/admin/extractor/talismans' },
-  { id: 'set', label: 'Sets', href: '/admin/extractor/sets' },
-  { id: 'monster', label: 'Monster', href: '/admin/extractor/monsters' },
-  { id: 'item', label: 'Item', href: '/admin/extractor/items' },
+  { id: 'character', label: 'Character', tab: 'extractor/character' },
+  { id: 'effect', label: 'Effect', tab: 'extractor/effect' },
+  { id: 'ee', label: 'EE', tab: 'extractor/ee' },
+  { id: 'weapon', label: 'Weapons', tab: 'extractor/weapon' },
+  { id: 'amulet', label: 'Amulet', tab: 'extractor/amulet' },
+  { id: 'armor', label: 'Armor', tab: 'extractor/armor' },
+  { id: 'talisman', label: 'Talisman', tab: 'extractor/talisman' },
+  { id: 'set', label: 'Sets', tab: 'extractor/set' },
+  { id: 'monster', label: 'Monster', tab: 'extractor/monster' },
+  { id: 'item', label: 'Item', tab: 'extractor/item' },
 ];
 
 /**
@@ -225,13 +230,18 @@ export const actionableCount = (b: DiffBuckets): number => b.new + b.diff + b.re
 
 export type InboxTone = 'danger' | 'warn' | 'muted';
 
-/** Une entrée d'inbox : un travail identifié, chiffré, cliquable. */
+/** Une entrée d'inbox : un travail identifié, chiffré, situé dans quick. */
 export interface InboxItem {
   key: string;
   label: string;
   /** Ce qu'il y a à faire, en clair (« 2 new · 1 diff »). */
   detail: string;
-  href: string;
+  /**
+   * Où ça se traite dans quick : une section (`gamedata`) ou un chemin qu'elle
+   * sait ouvrir (`extractor/<cible>`, `character/<id>/<sous-onglet>`) ;
+   * `null` quand quick ne sait pas situer le travail — le `detail` dit alors où.
+   */
+  tab: string | null;
   tone: InboxTone;
   /** Rang d'urgence (croissant) — ordre de tri principal. */
   rank: number;
@@ -255,6 +265,43 @@ export function readAssetsReport(): {
 }
 
 /**
+ * Où un tag mort se corrige dans quick, d'après sa provenance (le `source` de
+ * `collectTagOccurrences`, `tag-control.ts`) : le sous-onglet de la « Fiche
+ * perso » qui porte le texte — pros / cons, synergies, note d'un build. `null`
+ * pour ce que quick n'édite pas : un guide, un preset, un perso hors du roster
+ * (sa provenance porte son id nu, sans nom).
+ */
+export function tagSourceSheet(source: string): { id: string; sub: string } | null {
+  const text = /^(curated pros-cons|synergies) · .* \((\d+)\)(?=[.[]|$)/.exec(source);
+  if (text) return { id: text[2], sub: text[1] === 'synergies' ? 'synergies' : 'pros-cons' };
+  const build = /^gear-reco\.json\.(\d+)\[/.exec(source);
+  return build ? { id: build[1], sub: 'gear' } : null;
+}
+
+/**
+ * La fiche où renvoyer l'item « tags » : `character/<id>/<sous-onglet>` quand
+ * TOUS les tags morts viennent d'un même perso (le sous-onglet du premier),
+ * `null` sinon — un guide, un preset ou plusieurs persos : aucune section de
+ * quick ne les réunit, c'est le `detail` qui nomme les provenances.
+ */
+function deadTagSheet(sources: readonly string[]): string | null {
+  const where = sources.map(tagSourceSheet);
+  const [first] = where;
+  if (!first || where.some((w) => w?.id !== first.id)) return null;
+  return `character/${first.id}/${first.sub}`;
+}
+
+/** Combien de provenances le `detail` de l'item « tags » nomme, au plus. */
+const TAG_SOURCES_NAMED = 3;
+
+/** Les provenances distinctes des tags morts, en clair : les premières, puis « +n more ». */
+function namedTagSources(sources: readonly string[]): string {
+  const distinct = [...new Set(sources)];
+  const more = distinct.length - TAG_SOURCES_NAMED;
+  return distinct.slice(0, TAG_SOURCES_NAMED).join(' ; ') + (more > 0 ? ` ; +${more} more` : '');
+}
+
+/**
  * Construit l'inbox, la plus urgente d'abord. Barème :
  *   0 — tag éditorial mort : casse le rendu ET bloque la suite de tests ;
  *   1 — entité `diff`/`removed` : le site sert une donnée fausse ou disparue ;
@@ -262,6 +309,11 @@ export function readAssetsReport(): {
  *   3 — asset manquant du pool : une image ne sera pas servie ;
  *   4 — `minor`/`typo` seuls : retouches à appliquer d'un geste, jamais urgent.
  * Rien à signaler → tableau vide (la page affiche l'état « rien à traiter »).
+ *
+ * Chaque item est ADRESSÉ À QUICK (`tab`), plus à l'admin (lot C14) : une
+ * entité à sa cible d'Extraction, les assets aux Tables du jeu, les tags morts
+ * à la fiche du perso quand ils viennent tous de lui — sinon nulle part, et
+ * leur `detail` nomme les provenances.
  */
 export function buildInbox(): InboxItem[] {
   const items: InboxItem[] = [];
@@ -271,17 +323,24 @@ export function buildInbox(): InboxItem[] {
   // jeu. Normalement zéro — `tag-control.test.ts` le rend bloquant — donc une
   // ligne ici signale une régression que le prochain test refusera.
   try {
-    const broken = collectTagOccurrences().filter((o) => !o.ok).length;
-    if (broken > 0)
+    const sources = collectTagOccurrences()
+      .filter((o) => !o.ok)
+      .map((o) => o.source);
+    const broken = sources.length;
+    if (broken > 0) {
+      const sheet = deadTagSheet(sources);
       items.push({
         key: 'tags',
         label: 'Dead inline tags',
-        detail: `${broken} tag(s) resolve to nothing`,
-        href: '/admin/tags',
+        detail: sheet
+          ? `${broken} tag(s) resolve to nothing`
+          : `${broken} tag(s) resolve to nothing — ${namedTagSources(sources)}`,
+        tab: sheet,
         tone: 'danger',
         rank: 0,
         count: broken,
       });
+    }
   } catch {
     /* contrôle indisponible */
   }
@@ -305,7 +364,7 @@ export function buildInbox(): InboxItem[] {
       key: `extract:${e.id}`,
       label: e.label,
       detail: parts.join(' · '),
-      href: e.href,
+      tab: e.tab,
       tone: act === 0 ? 'muted' : severe ? 'danger' : 'warn',
       rank: act === 0 ? 4 : severe ? 1 : 2,
       count: act || soft,
@@ -319,7 +378,7 @@ export function buildInbox(): InboxItem[] {
       key: 'assets',
       label: 'Assets',
       detail: `${assets.missingCount} missing from the pool`,
-      href: '/admin/tools/gamedata',
+      tab: 'gamedata',
       tone: 'warn',
       rank: 3,
       count: assets.missingCount,

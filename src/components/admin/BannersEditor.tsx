@@ -4,8 +4,8 @@ import { useState } from 'react';
 import type { Banner } from '@/lib/admin/promo-banner-store';
 import { postJson } from '@/lib/admin/post-json';
 import { type Keyed, rowKey, withKey } from '@/lib/admin/keyed';
-import { CharacterPicker, type CharOption } from '@/components/admin/CharacterPicker';
-import { input as inputBase } from './_ui';
+import { CharacterPicker, type CharOption } from '@/components/contribute/CharacterPicker';
+import { input as inputBase } from '@/components/contribute/_ui';
 
 const input = `${inputBase} text-content`;
 

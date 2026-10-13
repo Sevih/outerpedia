@@ -10,6 +10,8 @@ export type {
   EntityDiff,
   RecordDiff,
 } from '@datagen/extractor/core/changes';
+import type { ReviewEntity } from '@datagen/extractor/review';
+
 export type {
   EntityReview,
   EntityStatus,
@@ -18,3 +20,6 @@ export type {
   TargetReview,
 } from '@datagen/extractor/review';
 export type { EquipmentEntityKind } from '@datagen/extractor/integrate-equipment';
+
+/** Entité de revue enrichie d'un nom lisible (résolu côté serveur). */
+export type NamedReviewEntity = ReviewEntity & { name: string };

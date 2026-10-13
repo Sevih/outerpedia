@@ -50,15 +50,17 @@ rapport d'assets — « Rien à faire. » quand elle est vide), l'état git (com
 site contre celle du client installé, les bannières actives et à venir avec
 ce que la table du jeu sait de plus, les codes promo qui expirent sous sept
 jours. Il montre et renvoie, il ne fait rien : chaque item de l'inbox ouvre
-sa page de l'ADMIN dans un nouvel onglet (`ADMIN_BASE`,
-`https://outerpedia.local` d'office) tant que quick n'a pas la section — le
-lot qui la porte ajoute sa ligne à `ADMIN_TO_QUICK` d'`actions.ts`. Depuis
+SA section de quick — son `tab`, posé par `buildInbox` depuis le lot C14
+(une cible d'Extraction, les Tables du jeu pour les assets, la fiche du
+perso pour ses tags morts ; des tags morts que rien ne réunit n'ont pas de
+geste, leur détail nomme les provenances). Plus aucune adresse de l'admin :
+la table `ADMIN_TO_QUICK` d'`actions.ts` a disparu avec elles. Depuis
 le lot A39 cette inbox nourrit aussi le MENU : une pastille sur chaque
 section où il y a à faire, et sur son groupe la somme (`GET /api/badges`,
 `badgesState` — l'inbox comptée par section de quick, relue au chargement,
 en venant sur le Tableau de bord et trois secondes après un commit ou un
-geste de Patch qui écrit — ni « Pousser » ni le dry-run ; ce que l'admin garde, tags de plusieurs persos et assets,
-n'a pas de pastille). Portage
+geste de Patch qui écrit — ni « Pousser » ni le dry-run ; des tags morts de plusieurs persos, que rien ne situe,
+n'ont pas de pastille ; les assets ont la leur sur « Tables du jeu » depuis C14). Portage
 PARTIEL de la home admin : sa `PatchCard` est l'étape 21, sa couverture
 éditoriale suivra les éditeurs ; l'admin garde donc sa home), Patch (= la
 chaîne de `pnpm dev` et la `PatchCard` de la home admin, étape 21, lot C10 :
@@ -534,9 +536,10 @@ Chaque entrée : l'écran admin, ce qu'il contient, puis la ligne
     fait échouer `pnpm test` dès qu'un tag inline n'a pas de correspondance,
     et `pnpm commit` joue `pnpm test` avant tout effet de bord (`scripts/commit.ts`,
     « contrôle : test »). La page `/admin/tags` reste, par son URL, pour le
-    diagnostic tag par tag ; l'inbox du tableau de bord y renvoie toujours,
-    sauf quand tous les tags morts viennent d'un même perso — elle ouvre alors
-    sa fiche dans quick, au sous-onglet qui porte le texte. L'entrée reste
+    diagnostic tag par tag, jusqu'au lot C15 ; l'inbox du tableau de bord n'y
+    renvoie plus (lot C14) : quand tous les tags morts viennent d'un même
+    perso elle ouvre sa fiche dans quick, au sous-onglet qui porte le texte,
+    sinon son détail nomme les provenances. L'entrée reste
     pour que la numérotation des suivantes ne bouge pas.
     page `tags`
     - Agacements : ça ça devrais plus etre dans le pnpm commit en bloquant (on refuse de livrer si des tag ne sont pas valide) que dans les outils d'admin — c'était
@@ -634,7 +637,20 @@ Chaque entrée : l'écran admin, ce qu'il contient, puis la ligne
 
 ### 5. Clôture
 
-22. **Retirer `/admin` du site**
-    routes `.dev`, composants, `api/admin` devenus inutiles — un lot, quand
-    1 à 21 sont faits
+22. **Retirer `/admin` du site** — en deux lots. C14 fait : tout ce qui vit
+    après le retrait a quitté l'admin, rien n'est supprimé. Les outils
+    publics de /contribute et les huit briques qu'ils tirent sont sous
+    `src/components/contribute/` (la frontière d'`eslint.config.mjs` les y
+    suit) ; les types que `src/lib/admin/` et quick lisaient dans des
+    composants sont dans `src/lib/admin/` (`extractor-rows.ts`,
+    `review-types.ts`, `character-kit.ts`, `monster-kit.ts`) ; l'inbox
+    adresse quick (`tab` à la place de `href`, `ADMIN_TO_QUICK` et
+    `quickTabOf` retirés) ; `monster-icon.ts`, `monster-rows.ts` et
+    `gear-rows.ts` fabriquent l'adresse des sprites de quick, l'admin passe
+    la sienne (`src/components/admin/sprite-route.ts`) ; le lien « Admin »
+    a quitté l'en-tête du site. Reste C15 : supprimer `src/app/admin`,
+    `src/app/api/admin`, `src/components/admin` et ce qui ne servait qu'à
+    eux (`post-json.ts`, les fabriques de lignes des sidebars), puis
+    `proxy.ts`, `robots.ts` et la frontière d'eslint.
+    routes `.dev`, composants, `api/admin` devenus inutiles
     - Agacements :

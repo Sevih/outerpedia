@@ -2,12 +2,9 @@
 
 import { useMemo, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import type { DiffBuckets, ReviewEntity } from '@/lib/admin/review-types';
+import type { DiffBuckets, NamedReviewEntity, ReviewEntity } from '@/lib/admin/review-types';
 import { postJson } from '@/lib/admin/post-json';
 import { EntityDiffPanel } from './EntityDiffPanel';
-
-/** Entité de revue enrichie d'un nom lisible (résolu côté serveur). */
-export type NamedReviewEntity = ReviewEntity & { name: string };
 
 type Status = ReviewEntity['status'];
 type Filter = 'all' | Status;

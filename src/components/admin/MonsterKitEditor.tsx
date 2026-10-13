@@ -5,22 +5,7 @@ import { useRouter } from 'next/navigation';
 import { EffectPillShell } from '@/components/character/EffectChips';
 import { renderGameColors } from '@/components/ui/GameText';
 import { postJson } from '@/lib/admin/post-json';
-
-/** Un buff CHIPABLE du kit, selon les tables. */
-export interface KitChip {
-  buff: string;
-  /** Skill PORTEUR selon les tables (cible par défaut de chipHide). */
-  carrier: string;
-  name: string;
-  icon?: string;
-  isDebuff: boolean;
-  /** Cartes où la chip s'affiche sous les RÈGLES SEULES (caller/desc-réf). */
-  defaultCards: string[];
-  /** chipOwner posé pour CE kit (null = règles). */
-  owner: string | null;
-  /** Cartes où la chip est masquée (chipHide). */
-  hiddenOn: string[];
-}
+import type { EffectOption, KitChip } from '@/lib/admin/monster-kit';
 
 export interface KitEditorSkill {
   id: string;
@@ -28,16 +13,6 @@ export interface KitEditorSkill {
   type: string;
   desc?: string;
   iconSrc?: string;
-}
-
-/** Effet du glossaire proposable en chipAdd. */
-export interface EffectOption {
-  id: string;
-  name: string;
-  icon?: string;
-  isDebuff: boolean;
-  /** Variante indissipable (effet DISTINCT de la version normale). */
-  irremovable?: boolean;
 }
 
 /**

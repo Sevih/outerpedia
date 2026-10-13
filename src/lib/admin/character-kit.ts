@@ -9,7 +9,6 @@
  * ses skills), chacun avec sa source d'icônes de skill.
  */
 import type { Skill } from '@contracts';
-import type { CardChip, EffectOption, KitEditorCard } from '@/components/admin/CharacterKitEditor';
 import { isDebuffEffect, type ClientEffect } from '@/components/character/EffectChips';
 import { getMergedEffects, type MergedEffect } from '@/lib/data/effects';
 import {
@@ -23,6 +22,37 @@ import {
 import { img } from '@/lib/images';
 import { lRec } from '@/lib/i18n/localize';
 import { resolveSkillText } from '@/lib/skills';
+
+/** Une chip AUTO d'une carte (positions « règles pures »), déjà résolue. */
+export interface CardChip {
+  /** Ref d'identité = `tooltip ?? label` de l'effet (clé de chipHide). */
+  ref: string;
+  name: string;
+  icon?: string;
+  isDebuff: boolean;
+}
+
+/** Une carte de skill éditable (main, fusion_passive, extra, chaîne, duo). */
+export interface KitEditorCard {
+  id: string;
+  name: string;
+  type: string;
+  desc?: string;
+  iconSrc?: string;
+  chips: CardChip[];
+}
+
+/** Effet du glossaire proposable en chipAdd. */
+export interface EffectOption {
+  id: string;
+  name: string;
+  icon?: string;
+  isDebuff: boolean;
+  /** Variante indissipable (effet DISTINCT de la version normale). */
+  irremovable?: boolean;
+  /** Description du jeu (aide-mémoire de curation). */
+  desc?: string;
+}
 
 /** Le perso et SES skills : le bundle de l'extraction, ou son équivalent committé. */
 export interface CharacterKitBundle {

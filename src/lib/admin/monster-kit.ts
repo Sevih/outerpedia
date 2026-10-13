@@ -13,7 +13,6 @@
  * met en avant, plutôt que les 4 848 monstres du jeu.
  */
 import type { DungeonRef, Monster, Skill } from '@contracts';
-import type { EffectOption, KitChip } from '@/components/admin/MonsterKitEditor';
 import { kitEffectCatalog } from '@/lib/admin/character-kit';
 import { committedMonsters } from '@/lib/admin/monster-store';
 import { getMergedEffects, type MergedEffect } from '@/lib/data/effects';
@@ -21,6 +20,32 @@ import { encountersOfGroup, getEncounter } from '@/lib/data/encounters';
 import { listGuides, readGuideVersionFile } from '@/lib/data/guides';
 import { monsterChipMeta, monsterSkillViews } from '@/lib/skill-view';
 import { resolveSkillText } from '@/lib/skills';
+
+/** Un buff CHIPABLE du kit, selon les tables. */
+export interface KitChip {
+  buff: string;
+  /** Skill PORTEUR selon les tables (cible par défaut de chipHide). */
+  carrier: string;
+  name: string;
+  icon?: string;
+  isDebuff: boolean;
+  /** Cartes où la chip s'affiche sous les RÈGLES SEULES (caller/desc-réf). */
+  defaultCards: string[];
+  /** chipOwner posé pour CE kit (null = règles). */
+  owner: string | null;
+  /** Cartes où la chip est masquée (chipHide). */
+  hiddenOn: string[];
+}
+
+/** Effet du glossaire proposable en chipAdd. */
+export interface EffectOption {
+  id: string;
+  name: string;
+  icon?: string;
+  isDebuff: boolean;
+  /** Variante indissipable (effet DISTINCT de la version normale). */
+  irremovable?: boolean;
+}
 
 /** Les trois sections du fichier curé, telles que le disque les porte. */
 export interface MonsterKitSections {

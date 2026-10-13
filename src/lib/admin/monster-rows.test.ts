@@ -6,7 +6,9 @@
  * `data/generated`.
  *
  * Et les modes de jeu des lignes (`buildMonsterRows`, sa source injectée) : le
- * `meta` et le select suivent l'ordre et les titres de `gameModeGroups`.
+ * `meta` et le select suivent l'ordre et les titres de `gameModeGroups`. Et
+ * l'adresse de leurs sprites : la route de quick d'office, celle qu'on passe
+ * sinon (l'admin, jusqu'à son retrait).
  */
 import { describe, expect, it } from 'vitest';
 import { diffRecords } from '@datagen/extractor/core/changes';
@@ -120,5 +122,19 @@ describe('buildMonsterRows — les modes de jeu, comme le damage calc les liste'
       flags: [],
     });
     expect(row('gate')).toMatchObject({ meta: 'Autres', tags: ['monad_battle_1'] });
+  });
+
+  it('les sprites : la route de quick d’office, celle qu’on passe sinon', () => {
+    // Un monstre sans type : le slot vert des mobs, pas de badge « BOSS ».
+    expect(row('jc')).toMatchObject({
+      icon: '/api/sprite/MT_jc',
+      iconFrame: '/api/sprite/GD_Slot_Bg_01',
+    });
+    expect(row('jc')?.badgeIcon).toBeUndefined();
+    const admin = buildMonsterRows(source, '/api/admin/sprite').rows.find((r) => r.id === 'jc');
+    expect(admin).toMatchObject({
+      icon: '/api/admin/sprite/MT_jc',
+      iconFrame: '/api/admin/sprite/GD_Slot_Bg_01',
+    });
   });
 });

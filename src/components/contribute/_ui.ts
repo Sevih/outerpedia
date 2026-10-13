@@ -1,7 +1,9 @@
 /**
- * Primitives de style de l'ADMIN — les classes Tailwind que les écrans se
- * recopiaient. Avant extraction : `btn` déclaré 17×, `input` 11×, `field` 7×,
- * `label` 6× (audit du 07/08). Aucune n'était importée d'ailleurs — les
+ * Primitives de style de l'ADMIN et des outils publics de `/contribute`, qui
+ * les lui empruntent — d'où leur place ici depuis le lot C14 : elles partent
+ * en production. Ce sont les classes Tailwind que les écrans se recopiaient.
+ * Avant extraction : `btn` déclaré 17×, `input` 11×, `field` 7×, `label` 6×
+ * (audit du 07/08). Aucune n'était importée d'ailleurs — les
  * quelques `export const btn` existants n'avaient aucun consommateur.
  *
  * Règle : on n'unifie QUE des chaînes strictement identiques. Les variantes

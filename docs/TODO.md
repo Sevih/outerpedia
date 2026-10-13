@@ -78,7 +78,9 @@
       « Événements », lot F23 — la liste, l'éditeur à six langues en trois
       sous-onglets, « Enregistrer » publie sur R2 et committe ; le groupe
       « Tools » quitte le menu de l'admin : reste le retrait de `/admin`,
-      22). Clos sans portage (lot A34) : Gear presets
+      22 — première moitié FAITE, lot C14 : ce que le site et quick partagent
+      a quitté l'admin, l'inbox adresse quick ; reste C15, la suppression).
+      Clos sans portage (lot A34) : Gear presets
       (non porté, le fichier s'édite à la main) et Tag control (le contrôle
       est le test, bloquant dans `pnpm commit`).
       À faire par Sevih : remplir
@@ -318,9 +320,10 @@
       site. Hors périmètre vu en portant : le gabarit « Mise à jour » du
       Journal ne connaît que Joint Challenge, Guild Raid et World Boss (pas
       de mode pour un Special Request re-versionné — ils sont plats, c'est
-      normal) ; `tagSourceSheet` (l'inbox des tags morts) renvoie encore à
-      `/admin/tags` pour un tag mort DANS UN GUIDE alors que quick l'édite
-      désormais : un lot A pour l'envoyer sur `#guides/<cat>/<slug>`.
+      normal) ; `tagSourceSheet` (l'inbox des tags morts) ne situe pas un
+      tag mort DANS UN GUIDE alors que quick l'édite désormais (depuis C14
+      l'item n'a alors pas de geste, son détail nomme la provenance) : un
+      lot A pour l'envoyer sur `#guides/<cat>/<slug>`.
 - [ ] **« Monstres » — contrôles à l'écran (lot C12)** : le banc ne clique
       pas, et aucun enregistrement réel n'a été joué. Relancer quick d'abord
       (Ctrl-C puis `pnpm quick` : trois routes nouvelles — sans ça l'onglet

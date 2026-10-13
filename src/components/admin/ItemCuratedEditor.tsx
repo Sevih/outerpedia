@@ -7,7 +7,7 @@ import { postJson } from '@/lib/admin/post-json';
 import { img } from '@/lib/images';
 import { ItemInline } from '@/components/inline/ItemInline';
 import { GAME_LANGS } from '@/lib/i18n/config';
-import { field, label } from './_ui';
+import { field, label } from '@/components/contribute/_ui';
 
 // Langues de JEU (4), PAS les 5 du site : cet écran écrit un `LangDict`, dont
 // `fr` n'est pas une clé (traduction communautaire, absente des données de jeu).

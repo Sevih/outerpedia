@@ -16,7 +16,7 @@
  * lisibilité douteux. Ce qui sort ici, ce sont les briques réellement autonomes.
  */
 import type { GearOption } from '@/lib/admin/gear-options';
-import { label } from '../_ui';
+import { label } from '@/components/contribute/_ui';
 export { label };
 
 export const NOTE_LANGS = ['en', 'jp', 'kr', 'zh', 'fr'] as const;

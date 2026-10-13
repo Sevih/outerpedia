@@ -13,7 +13,7 @@ import {
   HUMAN_TAGS,
   TIERS,
 } from '@/components/tierlist/tiers';
-import { field, label } from './_ui';
+import { field, label } from '@/components/contribute/_ui';
 
 // Listes partagées avec l'onglet « Rangs » de `pnpm quick` (cf. `tiers.ts`).
 const ROLES: Array<'' | CuratedRole> = ['', ...CURATED_ROLES];

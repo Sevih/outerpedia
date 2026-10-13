@@ -1,6 +1,6 @@
 'use client';
 
-import { SearchPicker } from './SearchPicker';
+import { SearchPicker } from '@/components/contribute/SearchPicker';
 
 export interface GroupOption {
   group: string;

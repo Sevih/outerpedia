@@ -1,4 +1,5 @@
 import { ExtractorSidebar } from '@/components/admin/ExtractorSidebar';
+import { ADMIN_SPRITE_ROUTE } from '@/components/admin/sprite-route';
 import { buildGearRows } from '@/lib/admin/gear-rows';
 
 export const dynamic = 'force-dynamic';
@@ -8,7 +9,10 @@ export const dynamic = 'force-dynamic';
 export default function EditorEeLayout({ children }: { children: React.ReactNode }) {
   return (
     <div className="flex gap-6">
-      <ExtractorSidebar rows={buildGearRows('ee')} basePath="/admin/editor/ee" />
+      <ExtractorSidebar
+        rows={buildGearRows('ee', ADMIN_SPRITE_ROUTE)}
+        basePath="/admin/editor/ee"
+      />
       <div className="min-w-0 flex-1">{children}</div>
     </div>
   );

@@ -23,7 +23,7 @@ import {
   EVENT_TYPE_LABEL,
   newEventBlock,
 } from '@/lib/admin/event-edit';
-import { input as inputBase } from '../_ui';
+import { input as inputBase } from '@/components/contribute/_ui';
 
 export const input = `${inputBase} text-content`;
 export const btn = 'rounded-md border border-line px-2.5 py-1 text-xs hover:border-accent';

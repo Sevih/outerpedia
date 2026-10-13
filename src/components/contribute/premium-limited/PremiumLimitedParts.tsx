@@ -14,13 +14,14 @@
  * Composants CONTRÔLÉS (état chez le parent). Types du store en `import type`
  * uniquement (le store touche `node:fs`, interdit côté client).
  *
- * ⚠ CE MODULE SHIPPE EN PROD malgré son chemin `admin/` (audit F2) : il part
- * dans le bundle client des pages `/contribute`. RÈGLE — rien ici ne doit
- * importer un module qui porte un secret ou dont la sûreté repose sur `IS_DEV`.
- * C'est pour ça que `translateReviews` a été sortie vers
- * `../premium-limited-translate.ts` (elle tirait `translate-actions` et ses deux
- * clés API). Le garde-fou eslint applique la règle sur TOUT ce dossier — l'ajout
- * d'un import de secret ici est BLOQUANT, pas seulement déconseillé.
+ * ⚠ CE MODULE SHIPPE EN PROD (audit F2 ; il a vécu sous `components/admin/`
+ * jusqu'au 13/10, lot C14) : il part dans le bundle client des pages
+ * `/contribute`. RÈGLE — rien ici ne doit importer un module qui porte un
+ * secret ou dont la sûreté repose sur `IS_DEV`. C'est pour ça que
+ * `translateReviews` a été sortie vers `premium-limited-translate.ts`, resté
+ * dans l'admin (elle tirait `translate-actions` et ses deux clés API). Le
+ * garde-fou eslint applique la règle sur TOUT `components/contribute/` —
+ * l'ajout d'un import de secret ici est BLOQUANT, pas seulement déconseillé.
  */
 import type { InlineRefs } from '@/lib/admin/inline-refs';
 import type {
@@ -29,9 +30,9 @@ import type {
   ReviewEntryData,
   ReviewsBundle,
 } from '@/lib/admin/general-guide-store';
-import { InlineTextField } from '@/components/admin/InlineTextField';
-import { CharacterChips, chipView } from '@/components/admin/CharacterChips';
-import { CharacterPicker, type CharOption } from '@/components/admin/CharacterPicker';
+import { InlineTextField } from '@/components/contribute/InlineTextField';
+import { CharacterChips, chipView } from '@/components/contribute/CharacterChips';
+import { CharacterPicker, type CharOption } from '@/components/contribute/CharacterPicker';
 import { LANGS } from '@/lib/i18n/config';
 import { btn, input } from '../_ui';
 // Forme des reviews : module PUR, seule dédup possible avec le store serveur
@@ -40,7 +41,7 @@ import { STARS, emptyReview, normalizeReview } from '@/lib/admin/review-shape';
 import { transcendenceFullSteps, transcendenceLabel } from '@/lib/transcendence';
 import { moveItem } from '@/lib/admin/reorder';
 import { type Keyed, rowKey, stripKey, withKey } from '@/lib/admin/keyed';
-import { MoveButtons } from '@/components/admin/MoveButtons';
+import { MoveButtons } from '@/components/contribute/MoveButtons';
 export { emptyReview, normalizeReview };
 
 /** Langues du SITE (5) — dérivées de la source de vérité i18n. */

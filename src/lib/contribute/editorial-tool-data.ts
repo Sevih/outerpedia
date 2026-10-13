@@ -7,9 +7,9 @@
 import { characterDisplayName, getAllCharacters, slugForId } from '@/lib/data/characters';
 import { loadCuratedCharacters } from '@/lib/data/curated';
 import { buildInlineRefs, type InlineRefs } from '@/lib/admin/inline-refs';
-import type { CharOption } from '@/components/admin/CharacterPicker';
-import type { HeroView } from '@/components/admin/editorial/EditorialFields';
-import type { EditorialSeed } from '@/components/admin/editorial/EditorialPublicTool';
+import type { CharOption } from '@/components/contribute/CharacterPicker';
+import type { HeroView } from '@/components/contribute/editorial/EditorialFields';
+import type { EditorialSeed } from '@/components/contribute/editorial/EditorialPublicTool';
 
 export interface EditorialToolData {
   charOptions: CharOption[];

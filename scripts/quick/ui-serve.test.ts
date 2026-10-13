@@ -11270,7 +11270,6 @@ describe('Tables du jeu — la page, sur le vrai markup', () => {
 describe('Tableau de bord — la page, sur le vrai markup', () => {
   afterEach(() => vi.unstubAllGlobals());
 
-  const ADMIN = 'https://outerpedia.local';
   interface Dash {
     today: string;
     inbox:
@@ -11278,9 +11277,7 @@ describe('Tableau de bord — la page, sur le vrai markup', () => {
           key: string;
           label: string;
           detail: string;
-          href: string;
           tone: string;
-          inQuick: boolean;
           tab: string | null;
           sheet?: string;
         }[]
@@ -11318,27 +11315,21 @@ describe('Tableau de bord — la page, sur le vrai markup', () => {
         key: 'tags',
         label: 'Dead inline tags',
         detail: '2 tag(s) resolve to nothing',
-        href: `${ADMIN}/admin/tags`,
         tone: 'danger',
-        inQuick: false,
         tab: null,
       },
       {
         key: 'extract:character',
         label: 'Character',
         detail: '1 new',
-        href: `${ADMIN}/admin/extractor/characters`,
         tone: 'warn',
-        inQuick: false,
-        tab: null,
+        tab: 'extractor/character',
       },
       {
         key: 'extract:item',
         label: 'Item',
         detail: '3 typo',
-        href: `${ADMIN}/admin/extractor/items`,
         tone: 'muted',
-        inQuick: true,
         tab: 'names',
       },
     ],
@@ -11530,20 +11521,21 @@ describe('Tableau de bord — la page, sur le vrai markup', () => {
     expect(page.cards()).toEqual(['À faire', 'Dépôt', 'Jeu', 'Publication']);
     expect(page.text(page.el('h-today'))).toBe('au 2026-10-08 (UTC)');
 
-    // « À faire » : l'inbox de l'admin, dans son ordre, une pastille par teinte.
+    // « À faire » : l'inbox, dans son ordre, une pastille par teinte. Un item
+    // adressé à quick a son bouton ; celui que rien ne situe, aucun geste.
     expect(page.rows('h-inbox')).toEqual([
-      ['danger', 'Dead inline tags2 tag(s) resolve to nothingdans l’admin ↗', false],
-      ['warn', 'Character1 newdans l’admin ↗', false],
+      ['danger', 'Dead inline tags2 tag(s) resolve to nothing', false],
+      ['warn', 'Character1 newOuvrir', false],
       ['muted', 'Item3 typoOuvrir', false],
+    ]);
+    expect(page.all('#h-inbox [data-go]').map((b) => b.getAttribute('data-go'))).toEqual([
+      'extractor/character',
+      'names',
     ]);
     expect(page.text(page.el('h-inbox-count'))).toBe('3');
     expect(page.el('h-inbox-count').querySelector('.badge')?.className).toBe('badge ko');
-    expect(
-      page.all('#h-inbox a').map((a) => [a.getAttribute('href'), a.getAttribute('target')]),
-    ).toEqual([
-      ['https://outerpedia.local/admin/tags', '_blank'],
-      ['https://outerpedia.local/admin/extractor/characters', '_blank'],
-    ]);
+    // Plus aucun lien vers l'admin.
+    expect(page.all('#h-inbox a')).toEqual([]);
     expect(page.text(page.all('[aria-label="À faire"] .card-head')[0])).toContain(
       "extraction, tags, assets — lu par l'admin",
     );
@@ -11583,10 +11575,11 @@ describe('Tableau de bord — la page, sur le vrai markup', () => {
     expect(page.text(page.el('h-coupons-count'))).toBe('8 actifs');
   });
 
-  it('les tags morts d’un perso : un lien vers sa fiche dans quick, pas vers l’admin', async () => {
+  it('les tags morts d’un perso : un lien vers sa fiche dans quick, pas un bouton', async () => {
     const [tags, ...rest] = busy().inbox ?? [];
+    const sheet = 'character/2000012/pros-cons';
     const page = await dashboard({
-      state: busy({ inbox: [{ ...tags, sheet: 'character/2000012/pros-cons' }, ...rest] }),
+      state: busy({ inbox: [{ ...tags, tab: sheet, sheet }, ...rest] }),
     });
     expect(page.rows('h-inbox')[0]).toEqual([
       'danger',
@@ -11596,10 +11589,7 @@ describe('Tableau de bord — la page, sur le vrai markup', () => {
     // Un nouvel onglet de quick : la fiche lit ce hash à son chargement.
     expect(
       page.all('#h-inbox a').map((a) => [a.getAttribute('href'), a.getAttribute('target')]),
-    ).toEqual([
-      ['#character/2000012/pros-cons', '_blank'],
-      ['https://outerpedia.local/admin/extractor/characters', '_blank'],
-    ]);
+    ).toEqual([['#character/2000012/pros-cons', '_blank']]);
   });
 
   it('rien à signaler : « Rien à faire. », et des pastilles vertes', async () => {
@@ -11758,8 +11748,8 @@ describe('Tableau de bord — la page, sur le vrai markup', () => {
     await page.settle();
     expect(page.served.reads).toBe(3);
 
-    // Un item de l'inbox que quick a déjà : son bouton, pas le lien de l'admin.
-    button('Ouvrir').click();
+    // Un item de l'inbox : son bouton ouvre la section qu'il adresse.
+    (page.all('#h-inbox [data-go="names"]')[0] as HTMLElement).click();
     expect(page.el('tab-names').hidden).toBe(false);
   });
 

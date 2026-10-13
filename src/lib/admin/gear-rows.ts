@@ -10,8 +10,9 @@
  * restent sur la page index — d'où `gearReviewCounts`, qui donne les compteurs
  * AUTORITAIRES (par item) pour l'en-tête de la sidebar.
  */
-import type { ExtractorRow } from '@/components/admin/ExtractorSidebar';
+import type { ExtractorRow } from '@/lib/admin/extractor-rows';
 import { img } from '@/lib/images';
+import { SPRITE_ROUTE } from '@/lib/admin/monster-icon';
 import { reviewBuckets, reviewTarget } from '@/lib/admin/review-store';
 import {
   getAmuletFamilies,
@@ -23,8 +24,6 @@ import {
 } from '@/lib/data/equipment';
 
 export type GearKind = 'weapons' | 'amulets' | 'talismans' | 'ee' | 'sets';
-
-const sprite = (name: string) => `/api/admin/sprite/${encodeURIComponent(name)}`;
 
 /** Cible de review correspondante (sidebar au pluriel, cible au singulier). */
 const REVIEW_TARGET: Record<GearKind, string> = {
@@ -60,7 +59,11 @@ export function gearReviewCounts(kind: GearKind): { new: number; diff: number } 
   return gearDiff(kind).counts;
 }
 
-function famRows(fams: GearFamily[], changed: Map<string, number>): ExtractorRow[] {
+function famRows(
+  fams: GearFamily[],
+  changed: Map<string, number>,
+  sprite: (name: string) => string,
+): ExtractorRow[] {
   return fams.map((f) => {
     // Une famille couvre plusieurs ids (paliers d'étoiles) : on agrège leurs écarts.
     const count = f.ids.reduce((n, id) => n + (changed.get(id) ?? 0), 0);
@@ -77,15 +80,20 @@ function famRows(fams: GearFamily[], changed: Map<string, number>): ExtractorRow
   });
 }
 
-export function buildGearRows(kind: GearKind): ExtractorRow[] {
+/**
+ * `spriteRoute` : la route des sprites bruts — celle de quick par défaut
+ * (`SPRITE_ROUTE`), l'admin passe la sienne.
+ */
+export function buildGearRows(kind: GearKind, spriteRoute = SPRITE_ROUTE): ExtractorRow[] {
   const { changed } = gearDiff(kind);
+  const sprite = (name: string) => `${spriteRoute}/${encodeURIComponent(name)}`;
   switch (kind) {
     case 'weapons':
-      return famRows(getWeaponFamilies(), changed);
+      return famRows(getWeaponFamilies(), changed, sprite);
     case 'amulets':
-      return famRows(getAmuletFamilies(), changed);
+      return famRows(getAmuletFamilies(), changed, sprite);
     case 'talismans':
-      return famRows(getTalismanFamilies(), changed);
+      return famRows(getTalismanFamilies(), changed, sprite);
     case 'ee':
       return getEEViews().map((e) => {
         const count = changed.get(e.itemId) ?? 0;

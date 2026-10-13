@@ -6,7 +6,7 @@ import { postJson } from '@/lib/admin/post-json';
 import { img } from '@/lib/images';
 import { EFFECT_FAMILIES, effectFamilyLabel } from '@/lib/data/effect-families';
 import { LANGS } from '@/lib/i18n/config';
-import { field, label } from './_ui';
+import { field, label } from '@/components/contribute/_ui';
 
 type Status = { kind: 'idle' | 'ok' | 'err'; msg?: string };
 

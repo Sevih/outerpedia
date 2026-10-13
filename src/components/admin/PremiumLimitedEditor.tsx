@@ -13,8 +13,8 @@
 import { useRef, useState } from 'react';
 import type { InlineRefs } from '@/lib/admin/inline-refs';
 import type { PremiumLimitedData, ReviewsBundle } from '@/lib/admin/general-guide-store';
-import type { CharOption } from '@/components/admin/CharacterPicker';
-import { CharacterNameDatalist } from '@/components/admin/CharacterChips';
+import type { CharOption } from '@/components/contribute/CharacterPicker';
+import { CharacterNameDatalist } from '@/components/contribute/CharacterChips';
 import { createFreshness } from '@/lib/admin/translate-fill';
 import { TRANSLATE_MSG } from '@/lib/admin/useAutoTranslate';
 import {
@@ -28,7 +28,7 @@ import {
   unkeyOrder,
   type Bucket,
   type L,
-} from '@/components/admin/premium-limited/PremiumLimitedParts';
+} from '@/components/contribute/premium-limited/PremiumLimitedParts';
 // Traduction à part : elle porte les clés API, donc elle ne peut PAS vivre dans
 // le module partagé avec les outils publics (audit F2).
 import { translateReviews } from '@/components/admin/premium-limited-translate';
@@ -37,7 +37,7 @@ import {
   parseContribution,
   type ReviewContributionPayload,
 } from '@/lib/contribute/contribution';
-import { btn } from './_ui';
+import { btn } from '@/components/contribute/_ui';
 
 const fileSlug = (s: string) =>
   s

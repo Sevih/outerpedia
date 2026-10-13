@@ -22,8 +22,8 @@ import type { InlineRefs } from '@/lib/admin/inline-refs';
 import type { FreeHeroesData, FreeHeroSourceData } from '@/lib/admin/general-guide-store';
 import { createFreshness } from '@/lib/admin/translate-fill';
 import { useAutoTranslate } from '@/lib/admin/useAutoTranslate';
-import { InlineTextField } from '@/components/admin/InlineTextField';
-import { InlinePreview } from '@/components/admin/InlinePreview';
+import { InlineTextField } from '@/components/contribute/InlineTextField';
+import { InlinePreview } from '@/components/contribute/InlinePreview';
 import { renderInlineBatch } from '@/lib/admin/inline-preview-actions';
 import type { InlineSegment } from '@/lib/parse-text';
 import { TranslateButton } from '@/components/admin/TranslateButton';
@@ -31,10 +31,10 @@ import {
   CharacterChips,
   CharacterNameDatalist,
   viewsByName,
-} from '@/components/admin/CharacterChips';
-import type { CharOption } from '@/components/admin/CharacterPicker';
+} from '@/components/contribute/CharacterChips';
+import type { CharOption } from '@/components/contribute/CharacterPicker';
 import { LANGS } from '@/lib/i18n/config';
-import { btn, inputFull as input } from './_ui';
+import { btn, inputFull as input } from '@/components/contribute/_ui';
 
 type L = (typeof LANGS)[number];
 type LText = { en?: string } & Record<string, string | undefined>;

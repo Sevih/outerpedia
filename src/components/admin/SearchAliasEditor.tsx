@@ -12,7 +12,7 @@
  */
 import { useState } from 'react';
 import { postJson } from '@/lib/admin/post-json';
-import { btn, inputFull as input } from './_ui';
+import { btn, inputFull as input } from '@/components/contribute/_ui';
 
 export function SearchAliasEditor({
   id,

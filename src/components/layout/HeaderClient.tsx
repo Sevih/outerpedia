@@ -199,7 +199,7 @@ export function HeaderClient({
           ))}
         </nav>
 
-        {/* Droite desktop : recherche + admin/dev (dev) + langue. */}
+        {/* Droite desktop : recherche + dev (dev) + langue. */}
         <div className="ml-auto hidden items-center gap-2 md:flex">
           <button
             type="button"
@@ -214,22 +214,13 @@ export function HeaderClient({
             </kbd>
           </button>
           {process.env.NODE_ENV === 'development' && (
-            <>
-              <Link
-                href={'/admin' as Route}
-                className="bg-warn/15 text-warn rounded-md px-2.5 py-1.5 text-xs font-semibold tracking-wide uppercase"
-                title="Admin (dev only)"
-              >
-                Admin
-              </Link>
-              <Link
-                href={'/dev' as Route}
-                className="bg-accent/15 text-accent rounded-md px-2.5 py-1.5 text-xs font-semibold tracking-wide uppercase"
-                title="Pages de test de rendu (dev only)"
-              >
-                Dev
-              </Link>
-            </>
+            <Link
+              href={'/dev' as Route}
+              className="bg-accent/15 text-accent rounded-md px-2.5 py-1.5 text-xs font-semibold tracking-wide uppercase"
+              title="Pages de test de rendu (dev only)"
+            >
+              Dev
+            </Link>
           )}
           <button
             type="button"

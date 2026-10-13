@@ -6,7 +6,7 @@ import { postJson } from '@/lib/admin/post-json';
 import { rowKey } from '@/lib/admin/keyed';
 import type { ItemOption } from '@/lib/data/items';
 import { ItemPicker } from './ItemPicker';
-import { input as inputBase } from './_ui';
+import { input as inputBase } from '@/components/contribute/_ui';
 
 const input = `${inputBase} text-content`;
 

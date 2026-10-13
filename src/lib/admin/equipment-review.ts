@@ -4,7 +4,7 @@
  * familles/vues d'équipement) — les entités du fichier généré sont keyées par id
  * numérique.
  */
-import type { NamedReviewEntity } from '@/components/admin/ExtractorReview';
+import type { NamedReviewEntity } from '@/lib/admin/review-types';
 import {
   reviewBuckets,
   reviewEntities,

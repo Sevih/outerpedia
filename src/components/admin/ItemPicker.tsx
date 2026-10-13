@@ -4,7 +4,7 @@ import { img } from '@/lib/images';
 import { ItemInline } from '@/components/inline/ItemInline';
 import type { ItemOption } from '@/lib/data/items';
 import { rankItemMatches } from '@/lib/data/item-search';
-import { SearchPicker } from './SearchPicker';
+import { SearchPicker } from '@/components/contribute/SearchPicker';
 
 const inline = (o: ItemOption) => ({
   name: o.name,

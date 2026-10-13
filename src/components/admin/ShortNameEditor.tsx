@@ -10,7 +10,7 @@ import { useState } from 'react';
 import type { LocalizedText } from '@contracts';
 import { postJson } from '@/lib/admin/post-json';
 import { LANGS } from '@/lib/i18n/config';
-import { btn, inputFull } from './_ui';
+import { btn, inputFull } from '@/components/contribute/_ui';
 
 type L = (typeof LANGS)[number];
 

@@ -709,8 +709,8 @@ rien. Croquis du rendu :
 .head  Tableau de bord — Ce qui demande une action. Rien ne se fait d'ici…        « au 2026-10-08 (UTC) » [Actualiser]
 .h-grid — des .card sur deux colonnes au-dessus de 900 px, une en dessous ; chaque carte a sa hauteur
   .card « À faire »    card-head : titre · badge du compte (ko s'il y a du rouge, sinon warn) … « extraction, tags, assets — lu par l'admin »
-     une ligne par item de l'inbox de l'admin, dans SON ordre :  ● Character  1 new … dans l'admin ↗ (nouvel onglet)
-       ● = `.dot` de la teinte de l'item (danger, warn, muted) ; un item que quick a déjà : [Ouvrir] (va à l'onglet) à la place du lien
+     une ligne par item de l'inbox, dans SON ordre :  ● Character  1 new … [Ouvrir] (va à la section que l'item adresse, `tab`)
+       ● = `.dot` de la teinte de l'item (danger, warn, muted) ; les tags morts d'un seul perso : « fiche du perso ↗ » (nouvel onglet) à la place du bouton ; un item que rien ne situe : pas de geste, son détail nomme les provenances
      .empty « Rien à faire. »
   .card « Dépôt »      card-head : titre · la branche en chasse fixe
      ● 7 commits à pousser  « Pousser », dans l'en-tête      (accent ; « rien à pousser » en vert ; « pas d'amont » atténué)
