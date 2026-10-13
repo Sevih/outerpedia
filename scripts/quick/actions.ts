@@ -106,7 +106,7 @@ import {
 } from '@/lib/admin/changelog-templates';
 import { catalogOptions, listItemEntries } from '@/lib/data/item-catalog';
 import { rankItemMatches } from '@/lib/data/item-search';
-import { resolveVideo } from '@/lib/admin/video-add';
+import { isVideoPlatform, resolveVideo } from '@/lib/admin/video-add';
 import { fetchMeta, searchOfficial } from '@/lib/admin/youtube';
 import { characterKitCards, kitEffectCatalog, pickKitCards } from '@/lib/admin/character-kit';
 import {
@@ -1941,8 +1941,11 @@ const VIDEO_META_PATH = 'data/generated/video-meta.json';
 
 export const searchVideos = (query: string) => searchOfficial(query);
 
-/** La vidéo d'une URL ou d'un id, métadonnées YouTube comprises — rien n'est écrit. */
-export const videoMeta = (input: unknown) => resolveVideo(input, fetchMeta);
+/**
+ * La vidéo d'une URL ou d'un id — rien n'est écrit. YouTube : ses métadonnées
+ * lues de l'API ; Twitch et Bilibili : le `title` saisi, sans appel réseau.
+ */
+export const videoMeta = (input: unknown, title?: unknown) => resolveVideo(input, fetchMeta, title);
 
 /**
  * Le cache `video-meta.json` après une écriture qui a touché des vidéos
@@ -2911,9 +2914,10 @@ function cleanSheetTags(raw: unknown, disk: readonly string[]): string[] | strin
 
 /**
  * Les vidéos d'un perso venues de la page, dans SON ordre, rebâties sur les
- * seules clés du modèle (`VideoRef`) : la plateforme et l'id, puis le titre,
- * l'auteur et la date quand ils sont là. Un id en double est refusé — la page
- * le refuse déjà à l'ajout.
+ * seules clés du modèle (`VideoRef`) : la plateforme — une de celles que le
+ * site rend, gardée telle quelle — et l'id, puis le titre, l'auteur et la date
+ * quand ils sont là. Un id en double est refusé — la page le refuse déjà à
+ * l'ajout.
  */
 function cleanSheetVideos(raw: unknown): VideoRef[] | string {
   if (!Array.isArray(raw)) return 'une liste attendue';
@@ -2922,6 +2926,7 @@ function cleanSheetVideos(raw: unknown): VideoRef[] | string {
     if (!v || typeof v !== 'object' || Array.isArray(v)) return 'forme inattendue';
     const r = v as Record<string, unknown>;
     if (typeof r.platform !== 'string' || !r.platform.trim()) return 'une vidéo sans plateforme';
+    if (!isVideoPlatform(r.platform)) return `« ${r.platform} » n'est pas une plateforme connue`;
     if (typeof r.id !== 'string' || !r.id.trim()) return 'une vidéo sans id';
     if (out.some((o) => o.platform === r.platform && o.id === r.id))
       return `« ${r.id} » est en double`;
@@ -5995,12 +6000,19 @@ function cleanPins(raw: unknown): string[] | string {
   return [...(raw as string[])];
 }
 
-/** Les vidéos d'une version, telles que la page les a reçues : `label` et le reste préservés. */
+/**
+ * Les vidéos d'une version, telles que la page les a reçues : `label` et le
+ * reste préservés. La plateforme est une de celles que le site rend.
+ */
 function cleanVideos(raw: unknown): VideoItem[] | string {
   if (!Array.isArray(raw)) return 'videos : une liste attendue';
-  for (const v of raw)
+  for (const v of raw) {
     if (!v || typeof v !== 'object' || typeof (v as { id?: unknown }).id !== 'string')
       return 'videos : chaque vidéo porte un id';
+    const { platform } = v as { platform?: unknown };
+    if (!isVideoPlatform(platform))
+      return `videos : « ${String(platform)} » n'est pas une plateforme connue`;
+  }
   return raw as VideoItem[];
 }
 

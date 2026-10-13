@@ -344,7 +344,7 @@ de 5 px sur le côté, bordure en pointillé d'accent sur la rangée). Les bouto
 les tests tirent des `Event` nus (`dragstart`, `dragover`, `drop`, `dragend`),
 sans `dataTransfer` ni `clientX`.
 
-### L'ajout d'une vidéo (`ui/video-add.js`, B48)
+### L'ajout d'une vidéo (`ui/video-add.js`, B48, A48)
 
 Une vidéo s'ajoute là où elle vit — la carte Vidéos d'une fiche de perso, le
 sous-onglet Vidéos d'un guide — par LE MÊME formulaire :
@@ -360,22 +360,34 @@ onglets) porte sa mise en page. Il n'y a plus de section « Vidéos ».
           sans YOUTUBE_API_KEY (`hasYoutubeKey` de /api/state) : le champ et le bouton GRISÉS, `title` = pourquoi
   .va-cands  une .card.va-cand par candidat : miniature 120 × 68 (i.ytimg.com, dérivée de l'id) · titre (une ligne, tronqué) · chaîne · date · [choisir] (.btn.ghost.sm)
           « choisir » pose l'id dans le champ URL et replie les candidats ; un candidat déjà dans la liste : badge off « déjà dans la liste », pas de bouton
-  .form   [URL ou id YouTube 42ch] ([Libellé d'onglet (option) 22ch] — un guide seulement) [＋ vidéo] (.btn.ghost : un ajout LOCAL, pas un `primary`)
-  .va-err le refus, en rouge sous le formulaire : « URL ou id requis. », « Déjà dans la liste. », « Vidéo refusée : pas un id YouTube… », « Recherche refusée : … »
+  .form   [URL (YouTube, Twitch, Bilibili) ou id YouTube 42ch] ([Titre 22ch] — une URL Twitch ou Bilibili seulement) ([Libellé d'onglet (option) 22ch] — un guide seulement) [＋ vidéo] (.btn.ghost : un ajout LOCAL, pas un `primary`)
+  .va-err le refus, en rouge sous le formulaire : « URL ou id requis. », « Déjà dans la liste. », « Titre requis pour une vidéo Twitch ou Bilibili. », « Vidéo refusée : pas un id YouTube… », « Recherche refusée : … »
 ```
+
+Trois plateformes, celles que le site rend (`MultiVideoEmbed`) : YouTube (une
+URL ou un id nu, métadonnées lues de l'API), une VOD Twitch
+(`twitch.tv/videos/<n>`) et une vidéo Bilibili (`bilibili.com/video/BV…`). Pour
+ces deux-là RIEN n'est demandé à la plateforme : le champ « Titre » apparaît
+dès que l'URL saisie est la leur (le formulaire se redessine, le curseur rendu
+à l'URL), il est obligatoire, et la vidéo n'a ni auteur ni date. Une chaîne, un
+live, un clip, un id `av…`, des chiffres nus : refusés par le serveur, dits
+sous le formulaire. Dans une liste, `videoBadge(platform)` dit la plateforme
+d'une vidéo (`.badge.off` « twitch », « bilibili » — rien pour YouTube, comme
+le site) et la miniature (`videoThumb`) n'existe que pour YouTube.
 
 « ＋ vidéo » n'écrit RIEN : `POST /api/character/video-meta` `{ input }` lit les
 métadonnées de YouTube (`resolveVideo`, 1 unité de quota — la route est une
-lecture, le banc la relaie) et la vidéo rendue est remise à l'onglet (`onAdd`),
+lecture, le banc la relaie ; `{ input, title }` pour Twitch et Bilibili, sans
+appel réseau) et la vidéo rendue est remise à l'onglet (`onAdd`),
 qui la pose en fin de SA liste ; elle part au disque avec « Enregistrer », dans
 le commit de la fiche ou du guide, `data/generated/video-meta.json` avec. Le
 refus se lit SOUS le formulaire (`.va-err`), comme un refus situé sous son
 champ (`.c-err`, `.gd-err`) — pas au journal, qui dit les gestes qui écrivent :
 ici rien n'a été tenté sur le disque. `has(id)` dit le doublon (refusé
 avant l'appel pour un id nu, après pour une URL) ; `scope()` abandonne une
-réponse arrivée après un changement de perso ou de version. YouTube seul à
-l'ajout ; une entrée d'une autre plateforme déjà dans une liste repart telle
-quelle.
+réponse arrivée après un changement de perso ou de version. À l'écriture, la
+plateforme est gardée telle que rendue, et une quatrième est refusée
+(`isVideoPlatform`).
 
 ## Les règles
 
@@ -1008,7 +1020,7 @@ du rendu :
      PRIORITÉ DE SKILLS  .form : [Skill 1] [Skill 2] [Ultimate] (nombre, 1 à 3) « 1 à 3 ; vide = non renseigné. » — une valeur hors de 1 à 3 : champ rouge, l'erreur dessous, rien n'est envoyé
      TAGS  les tags humains en cases (.check : free) ; dessous « déduits des données » puis les tags du jeu en .badge.off (lecture)
   .card « Vidéos » (pleine largeur ; B48 : éditable)  card-head : titre · badge edit « modifié » · badge ko « refusé » · badge off du compte
-     .c-videos, une ligne par vidéo : miniature 120 × 68 (YouTube) · titre · auteur · date · ✕ (.btn.icon, au bout) ; filet accent à gauche d'une vidéo AJOUTÉE ; « aucune vidéo » ; le refus du serveur dessous, en rouge
+     .c-videos, une ligne par vidéo : miniature 120 × 68 (YouTube seul) · titre · badge off de la plateforme (« twitch », « bilibili » — rien pour YouTube) · auteur · date · ✕ (.btn.icon, au bout) ; filet accent à gauche d'une vidéo AJOUTÉE ; « aucune vidéo » ; le refus du serveur dessous, en rouge
      AJOUTER UNE VIDÉO  le formulaire partagé (`video-add.js`, plus haut), sans libellé : la vidéo se pose en fin de liste
      chaque vidéo ajoutée ou retirée compte pour un changement dans la savebar ; la liste part ENTIÈRE, dans l'ordre de la page (`curated.videos`), contrôlée contre `was` comme les autres champs
 #c-panel — Pros / Cons (F24) : .c-cols, UNE .card par colonne, côte à côte (une seule sous 1000 px)
@@ -1543,7 +1555,7 @@ LE GUIDE (#gd-guide, `#guides/<cat>/<slug>` ; la vue d'ensemble se cache)
    sections (world boss) : une .card « Phase n » — ✕, titre, slots, note ; [＋ équipe (phase)]
    named (irregular, AL) : une .card « Équipe n » — ✕, titre (auto ou libre), slots, la note en BLOC (un paragraphe par ligne) ; [＋ équipe] ; [Traduire]
 #gd-panel — Vidéos : .card « Vidéos » badge du compte ; une ligne par vidéo : titre · auteur · plateforme · id · badge du `label` (préservé) · ✕
-   puis .card « Ajouter une vidéo » · .lbl « YouTube — elle part avec « Enregistrer » » : le formulaire partagé (`video-add.js`, B48), avec [Libellé d'onglet] ; la vidéo se pose en fin de liste de la version MONTRÉE (chaque version a la sienne, une ancienne comprise)
+   puis .card « Ajouter une vidéo » · .lbl « YouTube, Twitch ou Bilibili — elle part avec « Enregistrer » » : le formulaire partagé (`video-add.js`, B48), avec [Libellé d'onglet] ; la vidéo se pose en fin de liste de la version MONTRÉE (chaque version a la sienne, une ancienne comprise)
 en tête du panneau : les refus qui ne visent aucun onglet (le disque a changé, la forme) en rouge
 le hash : `#guides/<cat>` (la vue d'ensemble, sur cette catégorie), `#guides/<cat>/<slug>` (un guide), `#guides/<cat>/<slug>/<version>` (une version) — la page les écrit ; `#guides` seul se lit (la dernière catégorie montrée) et se réécrit en `#guides/<cat>` ; « ← Guides » revient sur la catégorie du guide ; `…/<sous-onglet>` (`tips`, `team`…) en plus, pour un lien ou le banc, ne s'écrit pas ; la page déjà chargée, un chemin (`sections.go('guides/<cat>/<slug>')`, « ouvrir dans Guides » de l'Extraction) se lit pareil à chaque venue (A44) : ce guide, sa version, son sous-onglet, ou la vue d'ensemble sur la catégorie — un guide ouvert qui porte des changements ne se quitte que sur la confirmation de « ← Guides » ; refusé, il reste et l'adresse le redit ; le même guide demandé garde sa saisie
 UN GUIDE GÉNÉRAL (F19 ; `#guides/general-guides/<slug>`, `…/<onglet>` pour un lien ou le banc) : la même coquille — en-tête (titre, badge « General Guides », cat/slug, la date), savebar, .gd-tabs — mais les sous-onglets, les cartes et les champs viennent de la FORME servie (`spec.tabs` : onglets › blocs › champs, cf. `general-guide-form.ts`) ; la page ne connaît aucun des quatre guides

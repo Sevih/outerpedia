@@ -1,16 +1,26 @@
-// L'ajout d'une vidéo YouTube, partagé : la carte Vidéos d'une fiche de perso
-// et le sous-onglet Vidéos d'un guide portent LE MÊME formulaire — chercher sur
-// la chaîne officielle (`GET /api/youtube`, cinq candidats, « choisir » pose
-// l'id), une URL ou un id, « ＋ vidéo ». L'ajout est LOCAL : `POST
-// /api/character/video-meta` ne fait que lire les métadonnées de YouTube, et la
-// vidéo rendue est remise à l'onglet (`onAdd`), qui la pose dans SA liste —
-// elle ne part au disque qu'à son « Enregistrer ». Un doublon, un id illisible,
-// YouTube injoignable : dits SOUS le formulaire (`.va-err`), pas au journal —
-// rien n'a été tenté sur le disque.
+// L'ajout d'une vidéo, partagé : la carte Vidéos d'une fiche de perso et le
+// sous-onglet Vidéos d'un guide portent LE MÊME formulaire — chercher sur la
+// chaîne officielle (`GET /api/youtube`, cinq candidats, « choisir » pose
+// l'id), une URL ou un id, « ＋ vidéo ». Une URL Twitch ou Bilibili fait
+// apparaître le champ « Titre », obligatoire : rien n'est demandé à ces
+// plateformes, le titre est celui qu'on saisit. L'ajout est LOCAL : `POST
+// /api/character/video-meta` ne fait que lire (les métadonnées de YouTube ; la
+// plateforme et l'id d'une URL Twitch ou Bilibili), et la vidéo rendue est
+// remise à l'onglet (`onAdd`), qui la pose dans SA liste — elle ne part au
+// disque qu'à son « Enregistrer ». Un doublon, un id illisible, un titre
+// absent, YouTube injoignable : dits SOUS le formulaire (`.va-err`), pas au
+// journal — rien n'a été tenté sur le disque.
 import { esc, state, stateLoaded } from './lib.js';
 
-/** La miniature d'une vidéo YouTube, dérivée de son id (jamais stockée). */
+/** La miniature d'une vidéo YouTube, dérivée de son id (jamais stockée) — les autres plateformes n'en ont pas. */
 export const videoThumb = (id) => `https://i.ytimg.com/vi/${encodeURIComponent(id)}/mqdefault.jpg`;
+
+/** Le badge de plateforme d'une vidéo de la liste : `twitch`, `bilibili` — rien pour YouTube, comme le site. */
+export const videoBadge = (platform) =>
+  platform && platform !== 'youtube' ? `<span class="badge off">${esc(platform)}</span>` : '';
+
+/** L'URL collée est-elle Twitch ou Bilibili — celles dont le titre se saisit. */
+const titled = (input) => /(?:^|[/.])(?:twitch\.tv|bilibili\.com)(?:[/?#]|$)/i.test(input.trim());
 
 const NO_KEY = 'YOUTUBE_API_KEY absente de .env.local : pas de recherche sur la chaîne';
 
@@ -26,12 +36,14 @@ const refusal = (res, body) => body?.error ?? body?.log?.[0] ?? `réponse ${res.
  * - `has(id)` : la liste de l'onglet porte déjà cette vidéo ;
  * - `scope()` : ce à quoi l'ajout se destine (le perso, la version du guide) —
  *   s'il a changé pendant l'appel, la réponse est abandonnée ;
- * - `onAdd(video, label)` : la vidéo résolue (`{ id, title, author,
- *   uploadDate }`), à poser dans la liste — l'onglet redessine.
+ * - `onAdd(video, label)` : la vidéo résolue (`{ platform, id, title }`, plus
+ *   `author` et `uploadDate` pour YouTube), à poser dans la liste — l'onglet
+ *   redessine.
  */
 export function videoAdder({ root, id, label = false, has, scope, onAdd }) {
   let q = '';
   let url = '';
+  let title = '';
   let tab = '';
   let cands = [];
   let said = '';
@@ -59,7 +71,12 @@ export function videoAdder({ root, id, label = false, has, scope, onAdd }) {
       )
       .join('')}</div>
     <div class="form">
-      <div class="field"><label for="${id}-url">URL ou id YouTube</label><input id="${id}-url" class="w-url" data-va="url" placeholder="https://youtu.be/…" value="${esc(url)}" /></div>
+      <div class="field"><label for="${id}-url">URL (YouTube, Twitch, Bilibili) ou id YouTube</label><input id="${id}-url" class="w-url" data-va="url" placeholder="https://youtu.be/…" value="${esc(url)}" /></div>
+      ${
+        titled(url)
+          ? `<div class="field"><label for="${id}-title">Titre</label><input id="${id}-title" class="w-text" data-va="title" value="${esc(title)}" /></div>`
+          : ''
+      }
       ${
         label
           ? `<div class="field"><label for="${id}-tab">Libellé d’onglet (option)</label><input id="${id}-tab" class="w-text" data-va="tab" value="${esc(tab)}" /></div>`
@@ -113,6 +130,12 @@ export function videoAdder({ root, id, label = false, has, scope, onAdd }) {
       said = 'Déjà dans la liste.';
       return draw('[data-va="url"]');
     }
+    // Twitch, Bilibili : le titre se saisit, rien n'est demandé sans lui.
+    const named = titled(raw);
+    if (named && !title.trim()) {
+      said = 'Titre requis pour une vidéo Twitch ou Bilibili.';
+      return draw('[data-va="title"]');
+    }
     const at = scope();
     busy = 'add';
     draw();
@@ -121,7 +144,7 @@ export function videoAdder({ root, id, label = false, has, scope, onAdd }) {
       const res = await fetch('/api/character/video-meta', {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({ input: raw }),
+        body: JSON.stringify(named ? { input: raw, title: title.trim() } : { input: raw }),
       });
       const r = await res.json();
       if (!r.video) throw new Error(refusal(res, r));
@@ -135,7 +158,7 @@ export function videoAdder({ root, id, label = false, has, scope, onAdd }) {
     if (scope() !== at) return draw();
     if (!video) return draw('[data-va="url"]');
     const tabLabel = tab.trim();
-    url = tab = '';
+    url = title = tab = '';
     cands = [];
     onAdd(video, tabLabel);
   }
@@ -149,8 +172,17 @@ export function videoAdder({ root, id, label = false, has, scope, onAdd }) {
     if (!field) return;
     const { va } = field.dataset;
     if (va === 'q') q = field.value;
-    else if (va === 'url') url = field.value;
+    else if (va === 'title') title = field.value;
     else if (va === 'tab') tab = field.value;
+    else if (va === 'url') {
+      const had = titled(url);
+      url = field.value;
+      if (titled(url) === had) return;
+      // Le champ « Titre » vient ou s'en va : redessiné, le curseur rendu à l'URL.
+      const { selectionStart, selectionEnd } = field;
+      draw('[data-va="url"]');
+      host()?.querySelector('[data-va="url"]')?.setSelectionRange(selectionStart, selectionEnd);
+    }
   });
   root.addEventListener('click', (e) => {
     const btn = inside(e) && e.target.closest('button[data-va]');
@@ -182,7 +214,7 @@ export function videoAdder({ root, id, label = false, has, scope, onAdd }) {
     html: () => `<div class="va" id="${id}">${inner()}</div>`,
     /** Un autre perso, un autre guide : la saisie et les candidats ne sont plus les siens. */
     reset: () => {
-      q = url = tab = said = '';
+      q = url = title = tab = said = '';
       cands = [];
     },
   };

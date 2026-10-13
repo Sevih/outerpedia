@@ -1022,11 +1022,12 @@ const vidAdd = videoAdder({
   has: (id) => Boolean(v()?.videos.some((vid) => vid.id === id)),
   scope: () => v(),
   onAdd: (vid, label) => {
+    // `author` : YouTube seul le rend.
     v().videos.push({
-      platform: 'youtube',
+      platform: vid.platform,
       id: vid.id,
       title: vid.title,
-      author: vid.author,
+      ...(vid.author ? { author: vid.author } : {}),
       ...(label ? { label } : {}),
     });
     forgive('videos');
@@ -1053,7 +1054,7 @@ function videosHtml() {
     }${tabErr('videos')}</div>
   </div>
   <div class="card gd-card">
-    <div class="card-head"><strong>Ajouter une vidéo</strong><span class="lbl">YouTube — elle part avec « Enregistrer »</span></div>
+    <div class="card-head"><strong>Ajouter une vidéo</strong><span class="lbl">YouTube, Twitch ou Bilibili — elle part avec « Enregistrer »</span></div>
     <div class="gd-body">${vidAdd.html()}</div>
   </div></div>`;
 }

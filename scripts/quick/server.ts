@@ -720,11 +720,13 @@ async function route(req: IncomingMessage, res: ServerResponse): Promise<void> {
 
   if (req.method === 'POST' && url.pathname === '/api/character/video-meta') {
     // « ＋ vidéo » par URL ou par id, de la fiche d'un perso comme d'un guide :
-    // l'id et ses métadonnées YouTube (`resolveVideo`). Une LECTURE — rien ne
-    // s'écrit, la page pose l'entrée dans sa liste, qui part avec
-    // « Enregistrer ». Un refus : 400 `{ error }`, que la page affiche.
-    const b = await body<{ input?: unknown } | null>(req).catch(() => null);
-    const out = await videoMeta(b?.input);
+    // la plateforme, l'id et — YouTube — ses métadonnées (`resolveVideo`) ; une
+    // VOD Twitch ou une vidéo Bilibili porte le `title` saisi, sans appel
+    // réseau. Une LECTURE — rien ne s'écrit, la page pose l'entrée dans sa
+    // liste, qui part avec « Enregistrer ». Un refus : 400 `{ error }`, que la
+    // page affiche.
+    const b = await body<{ input?: unknown; title?: unknown } | null>(req).catch(() => null);
+    const out = await videoMeta(b?.input, b?.title);
     json(res, out, 'error' in out ? 400 : 200);
     return;
   }

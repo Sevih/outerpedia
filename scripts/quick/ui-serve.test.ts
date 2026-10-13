@@ -2897,7 +2897,7 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
       noYoutube?: boolean;
       /** Ce que répond la recherche sur la chaîne, et la résolution d'une URL (YouTube factice). */
       found?: (q: string) => unknown;
-      resolved?: (input: string) => unknown;
+      resolved?: (input: string, title?: string) => unknown;
       /** Les pros d'Aer sur le disque (d'office : BEACH et « strong »). */
       pros?: Text[];
     } = {},
@@ -3001,7 +3001,8 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
         return answer(out, 'candidates' in (out as object) ? 200 : 500);
       }
       if (url.pathname === '/api/character/video-meta') {
-        const out = opts.resolved?.((body as { input: string }).input) ?? {
+        const sent = body as { input: string; title?: string };
+        const out = opts.resolved?.(sent.input, sent.title) ?? {
           error: 'vidéo introuvable',
         };
         return answer(out, 'error' in (out as object) ? 400 : 200);
@@ -3710,7 +3711,7 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
         .map((l) => [l.textContent, l.getAttribute('for')]),
     ).toEqual([
       ['Chercher sur la chaîne officielle', 'c-va-q'],
-      ['URL ou id YouTube', 'c-va-url'],
+      ['URL (YouTube, Twitch, Bilibili) ou id YouTube', 'c-va-url'],
     ]);
 
     const ais = await character({ hash: `#character/${AIS}` });
@@ -4134,6 +4135,7 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
   /** YouTube factice : une vidéo par URL collée, son id pris à la fin. */
   const youtube = (input: string) => ({
     video: {
+      platform: 'youtube',
       id: input.slice(-11),
       title: `Video ${input.slice(-11)}`,
       author: 'OUTERPLANE',
@@ -4244,6 +4246,94 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
     expect(page.va('url').value).toBe('nope');
     expect(page.videos()).toHaveLength(1);
     expect(page.count()).toBe('aucune modification');
+  });
+
+  /** Twitch et Bilibili factices : la plateforme et l'id de l'URL, le titre SAISI — comme le serveur. */
+  const hosted = (input: string, title?: string) => {
+    if (!title) return { error: 'titre requis pour une vidéo Twitch ou Bilibili' };
+    return {
+      video: {
+        platform: input.includes('twitch') ? 'twitch' : 'bilibili',
+        id: input.split('/').pop(),
+        title,
+      },
+    };
+  };
+
+  it('une URL Twitch ou Bilibili : le champ « Titre » apparaît, obligatoire ; la vidéo se pose avec le badge de sa plateforme, sans miniature', async () => {
+    const page = await character({ hash: `#character/${AER}`, resolved: hosted });
+    const labels = () => page.all('#c-va label').map((l) => l.textContent);
+    // YouTube, ou rien : pas de titre à saisir.
+    expect(page.va('title')).toBeUndefined();
+    page.type(page.va('url'), `https://youtu.be/${SURF_ID}`);
+    expect(page.va('title')).toBeUndefined();
+    // Une URL Twitch : le champ vient, la saisie de l'URL reste — et repart avec elle.
+    page.type(page.va('url'), 'https://www.twitch.tv/videos/2222222222');
+    expect(labels()).toEqual([
+      'Chercher sur la chaîne officielle',
+      'URL (YouTube, Twitch, Bilibili) ou id YouTube',
+      'Titre',
+    ]);
+    expect(page.va('title').id).toBe('c-va-title');
+    expect(page.va('url').value).toBe('https://www.twitch.tv/videos/2222222222');
+    expect(page.window.document.activeElement).toBe(page.va('url'));
+    page.type(page.va('url'), 'abc');
+    expect(page.va('title')).toBeUndefined();
+
+    // Sans titre : refusé sous le formulaire, rien n'est demandé au serveur.
+    page.type(page.va('url'), 'https://www.twitch.tv/videos/2222222222');
+    page.type(page.va('title'), '   ');
+    page.va('add').click();
+    await page.settle();
+    expect(page.vaErr()).toBe('Titre requis pour une vidéo Twitch ou Bilibili.');
+    expect(page.resolved()).toEqual([]);
+    expect(page.window.document.activeElement).toBe(page.va('title'));
+    expect(page.videos()).toHaveLength(1);
+
+    // Le titre saisi part avec l'URL ; la vidéo rendue est posée, comptée.
+    page.type(page.va('title'), ' Guild Raid VOD ');
+    page.va('add').click();
+    await page.settle();
+    await page.settle();
+    expect(page.resolved()).toEqual([
+      { input: 'https://www.twitch.tv/videos/2222222222', title: 'Guild Raid VOD' },
+    ]);
+    expect(page.vaErr()).toBe('');
+    // Le formulaire est vidé : le champ « Titre » repart avec l'URL.
+    expect(page.va('url').value).toBe('');
+    expect(page.va('title')).toBeUndefined();
+
+    page.type(page.va('url'), 'https://www.bilibili.com/video/BV11EXHBNEt2');
+    page.type(page.va('title'), '异域战记');
+    page.va('add').click();
+    await page.settle();
+    await page.settle();
+    expect(page.videos()).toEqual([
+      'Slacking Surfer, Aer — Outerplane · 2025-09-22',
+      'Guild Raid VOD — ',
+      '异域战记 — ',
+    ]);
+    // Le badge dit la plateforme — rien pour YouTube ; la miniature n'existe que pour YouTube.
+    const rows = page.all('#c-panel .c-videos li');
+    expect(rows.map((li) => li.querySelector('.badge')?.textContent)).toEqual([
+      undefined,
+      'twitch',
+      'bilibili',
+    ]);
+    expect(rows.map((li) => li.querySelectorAll('img').length)).toEqual([1, 0, 0]);
+    expect(page.count()).toBe('2 changements');
+
+    await page.save();
+    const sent = page.posted()[0] as { changes: { curated: { videos: object[] } } };
+    // Ni auteur ni date : YouTube seul les rend.
+    expect(sent.changes.curated.videos.slice(1)).toEqual([
+      { platform: 'twitch', id: '2222222222', title: 'Guild Raid VOD' },
+      { platform: 'bilibili', id: 'BV11EXHBNEt2', title: '异域战记' },
+    ]);
+    expect(sent.changes.curated.videos.slice(1).map((v) => Object.keys(v))).toEqual([
+      ['platform', 'id', 'title'],
+      ['platform', 'id', 'title'],
+    ]);
   });
 
   it('« Chercher sur la chaîne officielle » : les candidats en cartes, « choisir » pose l’id ; celui de la liste n’est pas proposé', async () => {
@@ -13355,7 +13445,7 @@ describe('Guides — la page, sur le vrai markup', () => {
       translated?: (texts: string[]) => unknown;
       /** YouTube factice : la recherche sur la chaîne, la résolution d'une URL. */
       found?: (q: string) => unknown;
-      resolved?: (input: string) => unknown;
+      resolved?: (input: string, title?: string) => unknown;
     } = {},
   ) {
     vi.useFakeTimers();
@@ -13408,7 +13498,8 @@ describe('Guides — la page, sur le vrai markup', () => {
       }
       if (url.pathname === '/api/character/video-meta') {
         calls.push({ path, body });
-        const out = opts.resolved?.((body as { input: string }).input) ?? {
+        const sent = body as { input: string; title?: string };
+        const out = opts.resolved?.(sent.input, sent.title) ?? {
           error: 'vidéo introuvable',
         };
         return answer(out, 'error' in (out as object) ? 400 : 200);
@@ -13997,6 +14088,7 @@ describe('Guides — la page, sur le vrai markup', () => {
       hash: `${JC}/videos`,
       resolved: (input) => ({
         video: {
+          platform: 'youtube',
           id: input.slice(-11),
           title: `Run ${input.slice(-11)}`,
           author: 'Au',
@@ -14007,7 +14099,7 @@ describe('Guides — la page, sur le vrai markup', () => {
     // Le même formulaire que la fiche d'un perso, plus le libellé d'onglet.
     expect(page.all('#gd-va label').map((l) => [l.textContent, l.getAttribute('for')])).toEqual([
       ['Chercher sur la chaîne officielle', 'gd-va-q'],
-      ['URL ou id YouTube', 'gd-va-url'],
+      ['URL (YouTube, Twitch, Bilibili) ou id YouTube', 'gd-va-url'],
       ['Libellé d’onglet (option)', 'gd-va-tab'],
     ]);
     expect(page.va('search').disabled).toBe(false);
@@ -14049,6 +14141,54 @@ describe('Guides — la page, sur le vrai markup', () => {
     ]);
     expect(sent[0].videos).toEqual([
       { platform: 'youtube', id: 'abc', title: 'Run', author: 'Au', label: 'Legacy' },
+    ]);
+  });
+
+  it('« ＋ vidéo » d’un guide, Twitch : le titre saisi, la plateforme gardée, sans auteur — avec son libellé d’onglet', async () => {
+    const page = await guides({
+      hash: `${JC}/videos`,
+      resolved: (input, title) =>
+        title
+          ? { video: { platform: 'twitch', id: input.split('/').pop(), title } }
+          : { error: 'titre requis pour une vidéo Twitch ou Bilibili' },
+    });
+    expect(page.va('title')).toBeUndefined();
+    page.type(page.va('url'), 'https://www.twitch.tv/videos/2222222222');
+    // Le titre vient entre l'URL et le libellé d'onglet.
+    expect(page.all('#gd-va label').map((l) => l.getAttribute('for'))).toEqual([
+      'gd-va-q',
+      'gd-va-url',
+      'gd-va-title',
+      'gd-va-tab',
+    ]);
+    page.va('add').click();
+    await page.settle();
+    expect(page.vaErr()).toBe('Titre requis pour une vidéo Twitch ou Bilibili.');
+    expect(page.resolved()).toEqual([]);
+    page.type(page.va('title'), 'Stream run');
+    page.type(page.va('tab'), 'VOD');
+    page.va('add').click();
+    await page.settle();
+    expect(page.resolved()).toEqual([
+      { input: 'https://www.twitch.tv/videos/2222222222', title: 'Stream run' },
+    ]);
+    expect(page.all('#gd-panel .gd-videos li').map((li) => li.textContent)).toEqual([
+      'RunAu · youtube · abcLegacy✕',
+      'Stream runtwitch · 2222222222VOD✕',
+    ]);
+
+    await page.save();
+    expect(page.posted()[0].draft.versions[0].videos[1]).toEqual({
+      platform: 'twitch',
+      id: '2222222222',
+      title: 'Stream run',
+      label: 'VOD',
+    });
+    expect(Object.keys(page.posted()[0].draft.versions[0].videos[1])).toEqual([
+      'platform',
+      'id',
+      'title',
+      'label',
     ]);
   });
 

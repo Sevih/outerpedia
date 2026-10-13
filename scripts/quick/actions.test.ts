@@ -1332,6 +1332,19 @@ describe('saveCharacterSheet — disque, stores et git injectés', () => {
     expect(other.calls.character[0][1].videos).toEqual([twitch, SURF]);
   });
 
+  it('des vidéos : les trois plateformes du site s’écrivent telles quelles, sans auteur ni date pour Twitch et Bilibili', async () => {
+    const { calls, fake } = deps();
+    const twitch = { platform: 'twitch', id: '2222222222', title: 'VOD' };
+    const bilibili = { platform: 'bilibili', id: 'BV11EXHBNEt2', title: '异域战记' };
+    const out = await save({ curated: { videos: [SURF, twitch, bilibili] } }, fake);
+    expect(out).toMatchObject({ ok: true, written: true, refused: [] });
+    expect(calls.character[0][1].videos).toEqual([SURF, twitch, bilibili]);
+    expect(calls.character[0][1].videos!.slice(1).map((v) => Object.keys(v))).toEqual([
+      ['platform', 'id', 'title'],
+      ['platform', 'id', 'title'],
+    ]);
+  });
+
   it('des vidéos : `was` contrôlé — le disque en a changé : `stale`, rien n’est écrit ni rafraîchi', async () => {
     const { calls, fake, refreshed } = deps();
     const out = await saveCharacterSheet(
@@ -1355,6 +1368,9 @@ describe('saveCharacterSheet — disque, stores et git injectés', () => {
       [['abc'], 'forme inattendue'],
       [[{ id: 'aaaaaaaaaaa' }], 'une vidéo sans plateforme'],
       [[{ platform: 'youtube', id: ' ' }], 'une vidéo sans id'],
+      // Une quatrième plateforme : le site ne saurait pas la rendre.
+      [[SURF, { platform: 'vimeo', id: '123456' }], "« vimeo » n'est pas une plateforme connue"],
+      [[{ ...SURF, platform: 'YouTube' }], "« YouTube » n'est pas une plateforme connue"],
       [[SURF, { platform: 'youtube', id: SURF.id }], `« ${SURF.id} » est en double`],
       [[{ ...SURF, title: 42 }], `${SURF.id} · title : une chaîne attendue`],
     ] as const) {
@@ -8274,6 +8290,43 @@ describe('guidesOverview, guideDraftState, saveGuide, addGuideVersionAction — 
         { platform: 'youtube', id: 'abc', title: 'T', author: 'Au', label: 'Legacy' },
         { platform: 'youtube', id: 'def', title: 'T2', author: 'Au' },
       ]);
+    });
+
+    it('une vidéo Twitch ou Bilibili repart avec sa plateforme ; une quatrième est refusée à l’onglet Vidéos, rien n’est écrit', async () => {
+      const { calls, fake } = deps({ dirty: [`${BASE}versions/2026-10/config.json`] });
+      const draft = clone(JC_DRAFT);
+      const twitch = { platform: 'twitch' as const, id: '2222222222', title: 'VOD' };
+      const bilibili = {
+        platform: 'bilibili' as const,
+        id: 'BV11EXHBNEt2',
+        title: 'B',
+        label: 'CN',
+      };
+      draft.versions[0].videos.push(twitch, bilibili);
+      await saveGuide(CAT, SLUG, { draft, meta: metaOf(JC), was: wasOf(JC) }, fake);
+      expect(calls.save[0].versions[0].videos.slice(1)).toEqual([twitch, bilibili]);
+
+      for (const platform of ['vimeo', undefined]) {
+        const bad = deps();
+        const odd = clone(JC_DRAFT);
+        odd.versions[0].videos.push({ platform, id: 'def', title: 'T2' } as never);
+        const r = await saveGuide(
+          CAT,
+          SLUG,
+          { draft: odd, meta: metaOf(JC), was: wasOf(JC) },
+          bad.fake,
+        );
+        expect(r).toMatchObject({ ok: false, written: false });
+        expect(r.refused).toEqual([
+          {
+            version: '2026-10',
+            tab: 'videos',
+            reason: `videos : « ${platform} » n'est pas une plateforme connue`,
+          },
+        ]);
+        expect(bad.calls.save).toEqual([]);
+        expect(bad.calls.git).toEqual([]);
+      }
     });
 
     it('une vidéo ajoutée à une version ANCIENNE : le cache rafraîchi part dans le commit du guide', async () => {

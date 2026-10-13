@@ -7,6 +7,82 @@
 
 ## 2026-10-13
 
+- **quick, Vidéos : une VOD Twitch ou une vidéo Bilibili s'ajoute depuis la
+  fiche et les guides, par l'adder partagé — titre saisi, aucun appel réseau
+  (lot A48)** — suite de la relecture B48 (12/10), décision levée par Fable
+  le 13/10 : le curé porte DÉJÀ une plateforme (`VideoRef.platform`), le site
+  rend les trois (`MultiVideoEmbed`), seul quick n'acceptait que YouTube.
+  QUOI. `src/lib/admin/video-add.ts` : `resolveVideo(input, fetchMeta, title?)`
+  rend maintenant `{ platform, id, title, author?, uploadDate? }` et
+  reconnaît trois formes — YouTube comme avant (URL ou id nu, métadonnées par
+  `fetchMeta`), une VOD Twitch `twitch.tv/videos/<n>` (l'id numérique ; un `v`
+  devant est retiré), une vidéo Bilibili `bilibili.com/video/BV…` (l'id
+  `BV…`, douze caractères). Pour Twitch et Bilibili `fetchMeta` n'est JAMAIS
+  appelé : le titre est celui du troisième argument, rogné, obligatoire
+  (« titre requis pour une vidéo Twitch ou Bilibili »), ni auteur ni date.
+  Refus rendus, jamais levés, en citant la saisie : une chaîne ou un live
+  Twitch (même adresse, `player.twitch.tv/?channel=` compris), un clip
+  (`clips.twitch.tv`, `/clip/`), un live Bilibili (`live.bilibili.com`), un
+  id `av…`, une adresse Bilibili sans `BV…` (un lien court `b23.tv` aussi : le
+  suivre serait un appel réseau), et l'id nu ambigu — des chiffres seuls ou un
+  `av…` nu (« id nu ambigu, colle l'URL complète de la vidéo »). Le module
+  exporte aussi `isVideoPlatform`, bâti sur un `Record<VideoPlatform, true>` :
+  une plateforme de plus dans `MultiVideoEmbed` casse la compilation ici.
+  ÉCRITURE (`scripts/quick/actions.ts`) : `cleanSheetVideos` gardait déjà
+  `platform` tel que reçu — c'étaient les PAGES qui posaient `'youtube'` en dur
+  à l'ajout ; il refuse maintenant une quatrième plateforme (« « vimeo » n'est
+  pas une plateforme connue »), et `cleanVideos` des guides de même, à l'onglet
+  Vidéos de la version. `videoMeta(input, title?)` et la route
+  `POST /api/character/video-meta` passent le titre ; elle reste une lecture
+  (`READ_ONLY_POSTS` inchangé). `datagen/video-meta.ts` non modifié : sa
+  collecte ne retient que `platform === 'youtube'`, les autres sont ignorées
+  sans ligne d'erreur. ADDER (`scripts/quick/ui/video-add.js`) : le champ
+  « Titre » n'est dessiné que quand l'URL saisie est Twitch ou Bilibili — le
+  formulaire se redessine à ce moment-là seulement, le curseur rendu à l'URL —
+  et il repart avec elle ; sans titre, « Titre requis pour une vidéo Twitch ou
+  Bilibili. » sous le formulaire, sans rien demander au serveur ; le corps de
+  l'appel reste `{ input }` pour YouTube, `{ input, title }` sinon. Le libellé
+  du champ devient « URL (YouTube, Twitch, Bilibili) ou id YouTube ». Les deux
+  onglets posent la `platform` RENDUE, sans clé `author` ni `uploadDate`
+  quand elles manquent. LISTE : `videoBadge(platform)` (exporté par l'adder)
+  met un `.badge.off` « twitch » ou « bilibili » après le titre dans la carte
+  Vidéos de la fiche, rien pour YouTube ; la miniature y était déjà réservée
+  à YouTube (`v.platform === 'youtube'`), donc pas d'image cassée. Dans un
+  guide, la ligne disait déjà la plateforme en texte (« auteur · plateforme ·
+  id ») : laissée telle quelle, seule l'étiquette de la carte « Ajouter une
+  vidéo » passe à « YouTube, Twitch ou Bilibili ». `STYLE.md` (§ L'ajout d'une
+  vidéo, et les deux gabarits) suit. Aucune clé i18n, rien côté site.
+  VÉRIFICATION : `pnpm typecheck` (les trois `tsc --noEmit`, sans sortie),
+  `pnpm lint` (`eslint`, sans sortie), `pnpm test` « Test Files 223 passed
+  (223) · Tests 3831 passed (3831) », et sous `NODE_ENV=development` le
+  sous-ensemble `scripts/quick` + `src/lib/admin` « Test Files 62 passed (62)
+  · Tests 1749 passed (1749) ». Tests ajoutés : `resolveVideo` sur les trois plateformes, le titre absent, dix
+  refus de forme (avec et sans titre) et quatre ids nus, le `fetchMeta`
+  factice affirmé jamais appelé à chaque fois ; `isVideoPlatform` ;
+  `saveCharacterSheet` écrit les trois plateformes telles quelles et refuse
+  « vimeo » et « YouTube » ; `saveGuide` garde Twitch et Bilibili et refuse
+  une quatrième ou une absente sans rien écrire ; en happy-dom, sur la fiche
+  — le champ « Titre » absent pour YouTube, présent pour Twitch, reparti
+  quand l'URL change, le refus sans titre sans appel, les badges `twitch` /
+  `bilibili` et aucune `<img>` sur ces lignes, la liste envoyée — et sur un
+  guide (titre entre l'URL et le libellé d'onglet, plateforme gardée). Banc :
+  quick isolé :4861, toutes les clés vidées dont `YOUTUBE_API_KEY`,
+  `--tabs character --hash character/2000055/fiche` — la carte Vidéos d'Aer
+  inchangée (miniature, titre, chaîne, date), le formulaire avec son nouveau
+  libellé, pas de champ « Titre » au repos ; aucun appel YouTube au journal.
+  Le banc ne clique pas : le champ « Titre » et le badge ne sont vus que par
+  les tests. LAISSÉ : (1) un id `BV…` NU n'est pas une des trois formes
+  demandées, il est refusé « pas un id YouTube » — l'URL est attendue ;
+  (2) onze chiffres nus étaient jusqu'ici pris pour un id YouTube, ils sont
+  maintenant « ambigus » (un id YouTube tout en chiffres est improbable, un
+  numéro de VOD Twitch ne l'est pas) ; (3) le doublon se juge toujours sur
+  l'id seul côté page (`has`), sur `platform` + id à l'écriture d'une fiche ; (4) dans un
+  guide la ligne d'une vidéo YouTube dit toujours « youtube » en texte, là où
+  la fiche ne dit rien — à aligner si Sevih le veut ; (5) la relecture
+  d'écran reste à Sevih : coller une VOD Twitch et une vidéo Bilibili sur une
+  fiche et dans un guide, enregistrer, voir le lecteur sur le site (Twitch
+  exige l'hôte en `parent`).
+
 - **Relecture A38 / A39 / A40 / A41 / A42 / A43 / A44 / A45 / A46 / A47
   (Fable) — Patch → Extraction et suites des relectures du 12/10, les dix
   validés.** Dix commits (`ce18e097`, `e953e13b`, `7b0f969a`, `6698e264`,

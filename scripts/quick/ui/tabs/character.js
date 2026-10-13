@@ -20,7 +20,7 @@ import { $, esc, getJson, log, post, sections, state, stateLoaded } from '../lib
 import { effectTile, gameText, itemName, itemTile, noteHtml } from '../gear-view.mjs';
 import { heroFilters, openHeroPicker } from '../hero-picker.mjs';
 import { heroTile } from '../hero-tile.mjs';
-import { videoAdder, videoThumb } from '../video-add.js';
+import { videoAdder, videoBadge, videoThumb } from '../video-add.js';
 import { gearChanges, gearReset, mountGear } from './gear.js';
 
 // Les sous-onglets, dans l'ordre de la fiche du site.
@@ -877,13 +877,13 @@ function tiersHtml() {
     }</span></div>`;
 }
 
-/** Une vidéo curée : sa miniature (YouTube), son titre, son auteur, sa date, ✕. */
+/** Une vidéo curée : sa miniature (YouTube) ou le badge de sa plateforme, son titre, son auteur, sa date, ✕. */
 const videoRow = (v, i) =>
   `<li${sheet.videos.some((d) => d.id === v.id) ? '' : ' class="dirty"'}>${
     v.platform === 'youtube'
       ? `<img src="${esc(videoThumb(v.id))}" alt="" aria-hidden="true" width="120" height="68" loading="lazy" />`
       : ''
-  }<span class="c-vt">${esc(v.title || v.id)}</span><span class="lbl">${esc(
+  }<span class="c-vt">${esc(v.title || v.id)}</span>${videoBadge(v.platform)}<span class="lbl">${esc(
     [v.author, v.uploadDate?.slice(0, 10)].filter(Boolean).join(' · '),
   )}</span><button class="btn icon" type="button" data-act="del-video" data-i="${i}" title="Retirer" aria-label="Retirer ${esc(v.title || v.id)}">✕</button></li>`;
 
@@ -895,9 +895,16 @@ const vidAdd = videoAdder({
   has: (id) => Boolean(sheet) && vidsNow().some((v) => v.id === id),
   scope: () => sheet?.char.id,
   onAdd: (v) => {
+    // `author` et `uploadDate` : YouTube seul les rend.
     setVids([
       ...vidsNow(),
-      { platform: 'youtube', id: v.id, title: v.title, author: v.author, uploadDate: v.uploadDate },
+      {
+        platform: v.platform,
+        id: v.id,
+        title: v.title,
+        ...(v.author ? { author: v.author } : {}),
+        ...(v.uploadDate ? { uploadDate: v.uploadDate } : {}),
+      },
     ]);
     render();
     $('c-panel').querySelector('#c-va [data-va="url"]')?.focus();
