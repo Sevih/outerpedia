@@ -172,24 +172,34 @@
       perso » / « câbler les chips » depuis la fiche, « extraction » depuis
       la Fiche perso et depuis Monstres. (6) Un geste sur une fiche lue
       avant un refresh → « Rien n'est écrit — … ont changé », la fiche relue.
-- [ ] **Relecture F24 / B47 / A37 / F25 / C13 / B48 (12/10) — suites à
-      décider** : (1) F24 — une ligne effacée en anglais laisse ses
-      traductions à leur rang (l'identité d'un pro est son rang) ; à juger à
-      l'usage, sinon un lot pour retrancher à l'enregistrement. (2) A37 —
-      `open()` de Guides ne relit pas le hash : un `sections.go('guides/<cat>/<slug>')`
-      venu d'une autre section (« ouvrir dans Guides » de l'extractor)
-      arriverait sur la vue d'ensemble quand la page est déjà chargée ; à
-      vérifier à l'écran, un lot A s'il le faut (le même défaut que Noms
-      avant B46). (3) B47 — l'en-tête de la fiche monstre garde `place` à
-      deux slugs ; `modeOptions` de l'extractor et `buildMonsterRows` de
-      l'admin refont leur liste de modes à part de `game-modes.ts`. (4) C13
-      / F25 — dans les vignettes de palier, le select de palier large de 6ch
-      montre « 3 » et non « 3★ » ; le store de Core Fusion ne refuse pas une
-      fusion du jeu SANS review, que le build refuse pourtant (choix de
-      l'agent pour ne pas bloquer la saisie une par une). (5) B48 — un échec
-      du rafraîchissement de `video-meta.json` n'arrête pas le commit (le
-      curé est déjà écrit ; `pnpm datagen:video-meta` rattrape) : à
-      confirmer ; twitch et bilibili ne s'ajoutent pas depuis quick. → TRANCHÉ le 13/10 : (1) A47 — FAIT le 13/10, reste à voir à l'écran (le compteur ambre sous l'anglais, un vrai « Enregistrer » après une ligne effacée), (2) A44 — FAIT le 13/10, reste à voir à l'écran depuis l'Extraction, (3) A45 — FAIT le 13/10, (4) A46 — FAIT le 13/10 (la saisie reste permise, le danger est dit ; « 3★ » à voir à l'écran, le badge et l'avertissement ne s'y verront qu'à la prochaine fusion du jeu sortie sans review), (5) l'échec de video-meta non bloquant est confirmé ; twitch/bilibili → F26.
+- [ ] **Relecture A38 → A47 (13/10) — contrôles à l'écran et suites à
+      décider** : à l'écran (relancer quick : routes nouvelles) — Patch ›
+      « Dry-run » : la revue par fichier avec ses comptes, « voir » qui
+      ouvre la cible d'Extraction, « dont 3 hors périmètre du site », la
+      console repliée, l'annonce de « Promouvoir » ; « ouvrir dans Guides »
+      depuis l'Extraction sur une page déjà ouverte (A44) ; Pros / Cons :
+      effacer une ligne anglaise, lire le compteur ambre, « Enregistrer »
+      (A47) ; le picker d'effets de Monstres à 28 px (A42) ; « 3★ » dans
+      les vignettes de palier (A46). À décider : (1) A43 — Rang PvP compte
+      93 éligibles (règle « base 3★ » du commentaire de `rankPvp`), pas
+      127 ; dire si c'est la règle, et un `hint` « parmi les persos de base
+      3★ » sur la ligne. (2) A47 — une ligne anglaise retouchée d'un
+      caractère est une ligne NOUVELLE : ses traductions tombent si
+      « Traduire » n'est pas relancé ; si c'est trop coûteux à l'usage, une
+      retouche à rang égal devrait garder ses traductions avec « à
+      retraduire » (changement de décision, un lot A). (3) A45 — « Autres »
+      est dans le select de l'Extraction et les lignes de l'admin, pas dans
+      l'en-tête de la fiche monstre (vide pour un monstre sans mode titré).
+      (4) A40 — `/api/extractor` lance une revue monster non mémoïsée
+      (0,2 s) pour « +n hors site » ; à mémoïser sur l'empreinte comme
+      `memoizedBuckets`. (5) A39 — le dry-run émet `quick:changed` sans rien
+      écrire et « Pousser » relance les pastilles (une relecture de trop) ;
+      pas de pastille « Patch » pour un patch en attente (bloc `game`, hors
+      inbox). (6) A41 — `tabs/character.js` garde sa propre lecture du
+      roster, `heroRoster()` de `lib.js` pourrait servir les deux. (7) A42 —
+      `sprite` / `effectSprite` encore servis par les états sans lecteur.
+      (8) A44 — un guide inconnu AU CHARGEMENT laisse `wanted` posé :
+      section blanche (défaut antérieur).
 - [ ] **« Événements » — contrôles à l'écran (lot F23)** : le banc ne
       clique pas, aucun enregistrement réel n'a été joué, `/api/translate`
       jamais appelé avec des clés, `POST /api/events` jamais appelé (les

@@ -7,6 +7,61 @@
 
 ## 2026-10-13
 
+- **Relecture A38 / A39 / A40 / A41 / A42 / A43 / A44 / A45 / A46 / A47
+  (Fable) — Patch → Extraction et suites des relectures du 12/10, les dix
+  validés.** Dix commits (`ce18e097`, `e953e13b`, `7b0f969a`, `6698e264`,
+  `ae8ee410`, `201ebd32`, `33161487`, `63908a40`, `f353204e`, `219ada22`),
+  chacun au périmètre de son lot, le message attendu, ni `package.json` ni
+  lock ; A43 touche `datagen/curated/character.ts` pour y exposer
+  `isPvpEligible` (une fonction pure qui met en code le commentaire de
+  `rankPvp`, aucune donnée ni schéma) ; A40 retouche un test d'A38
+  (`monster-skills.json` → cible `monster-skill`). Les trois diffs relus par
+  trois agents de lecture (contrat, décisions, tests non affaiblis), les
+  rejeux par moi. **Contrôles sur HEAD (`219ada22`)** : typecheck, lint,
+  `pnpm test` 223 fichiers / 3820 tests, `vitest run scripts/quick
+src/lib/admin datagen/extractor` 69 / 1823 ; `pnpm test` relancé deux
+  fois de plus sans ligne « Errors » (le minuteur de « Copier », A42).
+  **Rejeux (tsx, lecture seule)** : `parsePromoteOutput` sur la sortie d'un
+  vrai `pnpm datagen:promote` du jour → 61 identiques, 4 fichiers
+  (`game-version.json` ~1, `monster-skills.json` +2, `monsters.json` ~3,
+  `wallpapers.json` ~2 · 17 retenues), `2400015` écarté, `ok` ;
+  `promoteReview` → `monsters.json` cible `monster` et `offSite: 3`,
+  `monster-skills.json` cible `monster-skill`, les deux autres sans cible ;
+  `sectionBadges` agrège `extractor/x` + `extractor/y` en `extractor: 2` et
+  une fiche en `character`, `badgesState` réel = `{ extractor: 1 warn }`
+  en 789 ms puis 54 ms, égal à l'inbox du tableau de bord ; `TARGETS` =
+  onze cibles, `monster-skill` seule en lecture juste après `monster` ;
+  `extractorOverview` → Monstres `offSite: 3` à comptes site nuls, Skills de
+  monstres `readOnly`, 2 nouvelles ; `extractorTarget('monster', {status:
+'offsite'})` → `55300019`, `55300018`, `55300006` (« Doppelakeus »), total
+  et comptes restés site ; `acceptTarget('monster-skill')` refuse « cible
+  en lecture seule ». `characterCoverage` sur le disque réel (rejeu de
+  l'agent) : Date de sortie 129/129 (48 curées, 129 dérivées), Rang PvP
+  92/93, seul manquant Demiurge Lambda, raretés 9 × 1★, 25 × 2★, 89 × 3★,
+  6 fusions → 93 = 89 + 6 − 2. **Banc** (quick isolé :4871, clés vidées,
+  GET seuls) : pastilles « Données 1 » et « Extraction 1 » au menu ;
+  Extraction « Dix cibles, une en lecture », Monstres « périmètre du site ·
+  +3 hors site », Skills de monstres « en lecture — promu avec Monstres »
+  avec 2 nouvelles ; la cible Monstres avec sa bascule « hors site 3 » ;
+  vignettes complètes (cadre de rareté, coin d'élément) dans Bannières,
+  Noms, Tableau de bord ; récap « Date de sortie 129/129 complet », « Rang
+  PvP 92/93 » ; Pros / Cons avec « Traductions (5) 5/5 » ; Core Fusion 6/6
+  reviews. La revue structurée du dry-run et l'annonce de « Promouvoir » ne
+  se voient pas au banc (le dry-run est un POST hors `READ_ONLY_POSTS`) :
+  rejouées par le module. **Écarts entérinés** : A43 compte 93 éligibles au
+  PvP (règle écrite « base 3★ », aucun 1★/2★ natif ne porte de rang) au
+  lieu des 127 que le lot supposait — l'agent aurait dû bloquer, la règle
+  du dépôt l'emporte ; A39 ne mémoïse pas sa route (elle repose sur
+  `memoizedBuckets`, 54 ms à chaud) ; A45 met « Autres » dans le select et
+  l'admin mais pas dans l'en-tête de la fiche ; A47 traite une ligne
+  anglaise retouchée d'un caractère comme nouvelle (lettre du contrat,
+  traductions perdues sans « Traduire ») — à juger à l'écran. **Reste à
+  Sevih** : jouer le dry-run dans Patch (revue par fichier, « voir »,
+  « dont 3 hors périmètre du site », l'annonce de Promouvoir) ; « ouvrir
+  dans Guides » depuis l'Extraction ; un vrai « Enregistrer » de Pros / Cons
+  après une ligne effacée ; les suites au TODO. **Suite** : F26 reste
+  ouvert, puis le lot 22 (retrait de `/admin`).
+
 - **quick, Fiche perso › Pros / Cons : les traductions suivent leur ligne
   anglaise — une ligne effacée n'emporte plus les siennes au rang suivant, les
   orphelines sont dites sous le texte et retranchées par le serveur (lot
