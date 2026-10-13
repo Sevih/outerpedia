@@ -11517,7 +11517,9 @@ describe('Patch — la page, sur le vrai markup', () => {
     expect(page.console()).toBe('');
     expect(page.text(page.el('p-console-state'))).toBe('au repos');
     expect(page.el('p-stop').hidden).toBe(true);
-    expect(page.el('p-review').hidden).toBe(true);
+    expect(page.el('p-raw').hidden).toBe(true);
+    expect(page.el('p-rev').hidden).toBe(true);
+    expect(page.el('p-apply-plan').hidden).toBe(true);
     expect(readFileSync(resolve(UI, 'tabs', 'patch.css'), 'utf8')).toMatch(
       /#p-console \{\s*height: 40vh;/,
     );
@@ -11638,8 +11640,9 @@ describe('Patch — la page, sur le vrai markup', () => {
     await page.settle();
     expect(page.calls.at(-1)).toEqual({ path: '/api/patch/promote', body: { apply: false } });
     expect(page.states()[1]).toBe('dry-run en cours…');
-    // La revue est à l'écran dès le lancement, et reçoit SA copie de la sortie.
-    expect(page.el('p-review').hidden).toBe(false);
+    // La sortie brute est à l'écran dès le lancement, dépliée, et la revue reçoit SA copie.
+    expect(page.el('p-raw').hidden).toBe(false);
+    expect((page.el('p-raw') as unknown as HTMLDetailsElement).open).toBe(true);
     await page.finish(OK('dry-run de la promotion'), [
       '$ pnpm datagen:promote',
       '~ characters.json : 2 modifiées (2000095, 2000101)',
@@ -11690,6 +11693,243 @@ describe('Patch — la page, sur le vrai markup', () => {
       '/api/patch/promote',
       '/api/patch/promote',
     ]);
+  });
+
+  /** La revue que le serveur lit de la sortie d'un dry-run (`promoteReview` de `patch.ts`). */
+  interface ReviewFile {
+    file: string;
+    status: 'new' | 'changed' | 'retained';
+    added: number;
+    changed: number;
+    removed: number;
+    target: string | null;
+    offSite?: number;
+    note?: string;
+    raw: string;
+  }
+  const file = (name: string, over: Partial<ReviewFile> = {}): ReviewFile => ({
+    file: name,
+    status: 'changed',
+    added: 0,
+    changed: 0,
+    removed: 0,
+    target: null,
+    raw: '',
+    ...over,
+  });
+  /** Le dry-run du 13/10 : trois monstres hors du site, deux skills de monstres sans cible. */
+  const REVIEW = {
+    ok: true,
+    identical: 61,
+    files: [
+      file('characters.json', {
+        changed: 2,
+        target: 'character',
+        note: '1 perso(s) non intégré(s) écarté(s) : 2400015',
+        raw: '~2 · 1 perso(s) non intégré(s) écarté(s) : 2400015',
+      }),
+      file('monster-skills.json', { added: 2, raw: '+2 (1120923, 1120924)' }),
+      file('monsters.json', { changed: 3, target: 'monster', offSite: 3, raw: '~3' }),
+      file('skills.json', {
+        status: 'retained',
+        note: 'réf(s) de perso non intégré : 2400015',
+        raw: '⛔ RETENU (non promu) — réf(s) de perso non intégré : 2400015',
+      }),
+      file('unlock-content.json', { status: 'new', raw: 'NOUVEAU fichier' }),
+    ],
+    stripped: ['2400015'],
+    orphans: ['old-table.json'],
+  };
+  const reviewed = (review: unknown) => ({ ...OK('dry-run de la promotion'), review });
+  const raw = (page: { el: (id: string) => HTMLElement }) =>
+    page.el('p-raw') as unknown as HTMLDetailsElement;
+
+  it('la revue du dry-run : une ligne par fichier différent, « voir » là où Extraction a une cible', async () => {
+    const page = await patch();
+    page.el('p-dry').click();
+    await page.settle();
+    // Pendant le dry-run : pas encore de revue, la sortie brute dépliée.
+    expect(page.el('p-rev').hidden).toBe(true);
+    expect(raw(page).open).toBe(true);
+    await page.finish(reviewed(REVIEW), ['$ pnpm datagen:promote', '  monsters.json  ~3']);
+
+    expect(page.el('p-rev').hidden).toBe(false);
+    const rows = page.all('#p-rev .p-file');
+    expect(
+      rows.map((r) => [
+        page.text(r.querySelector('.p-name')),
+        page.text(r.querySelector('.p-counts')),
+        page.text(r.querySelector('.p-why')),
+        r.querySelector('[data-go]')?.getAttribute('data-go') ?? null,
+      ]),
+    ).toEqual([
+      [
+        'characters.json',
+        '+0 · ~2 · −0',
+        '1 perso(s) non intégré(s) écarté(s) : 2400015',
+        'extractor/character',
+      ],
+      ['monster-skills.json', '+2 · ~0 · −0', '', null],
+      [
+        'monsters.json',
+        '+0 · ~3 · −0',
+        'dont 3 hors périmètre du site — aucune action dans Extraction',
+        'extractor/monster',
+      ],
+      ['skills.json', 'retenu, non promu', 'réf(s) de perso non intégré : 2400015', null],
+      ['unlock-content.json', 'nouveau fichier', '', null],
+    ]);
+    // Le retenu en ambre, lui seul ; les clés ajoutées se lisent au survol des comptes.
+    expect(rows.map((r) => r.classList.contains('warn'))).toEqual([
+      false,
+      false,
+      false,
+      true,
+      false,
+    ]);
+    expect(rows[1].querySelector('.p-counts')?.getAttribute('title')).toBe('+2 (1120923, 1120924)');
+    expect(page.all('#p-rev [data-go]').map((b) => page.text(b))).toEqual(['voir', 'voir']);
+    // Sous les lignes : les identiques en un compte, les écartés et les orphelins en ambre, la fin.
+    expect(page.all('#p-rev > .p-note').map((n) => [page.text(n), n.className])).toEqual([
+      ['61 fichiers identiques.', 'p-note'],
+      [
+        'Persos non intégrés, jamais promus — l’intégration se fait par entité, dans Extraction : 2400015',
+        'p-note warn',
+      ],
+      ['Validés sans équivalent extrait, à trancher : old-table.json', 'p-note warn'],
+      ['Dry-run : rien n’a été écrit.', 'p-note'],
+    ]);
+    // La sortie brute reste, repliée ; un clic la rouvre (le `details` du navigateur).
+    expect(raw(page).hidden).toBe(false);
+    expect(raw(page).open).toBe(false);
+    expect(page.text(raw(page).querySelector('summary'))).toBe('Sortie brute du dry-run');
+    expect(page.el('p-review').textContent).toBe('$ pnpm datagen:promote\n  monsters.json  ~3\n');
+
+    // « voir » ouvre Extraction sur la cible du fichier.
+    (rows[2].querySelector('[data-go]') as unknown as HTMLElement).click();
+    expect(page.el('tab-extractor').hidden).toBe(false);
+    expect(page.el('tab-patch').hidden).toBe(true);
+    expect(location.hash).toBe('#extractor/monster');
+  });
+
+  it('la revue : rien de différent, un nom à échapper, une sortie non reconnue, un échec', async () => {
+    const page = await patch();
+    const dry = async (done: unknown) => {
+      page.el('p-dry').click();
+      await page.settle();
+      await page.finish(done, ['sortie']);
+    };
+
+    await dry(reviewed({ ok: true, identical: 65, files: [], stripped: [], orphans: [] }));
+    expect(page.all('#p-rev .p-file')).toHaveLength(0);
+    expect(page.all('#p-rev > .p-note').map((n) => page.text(n))).toEqual([
+      'Rien à promouvoir : la proposition est identique au validé (65 fichiers identiques).',
+      'Dry-run : rien n’a été écrit.',
+    ]);
+    expect(raw(page).open).toBe(false);
+
+    // Un nom de fichier vient de la sortie d'une commande : posé en texte.
+    await dry(
+      reviewed({
+        ok: true,
+        identical: 1,
+        files: [file('<img src=x>.json', { changed: 1, target: 'a"b', raw: '~1 "x"' })],
+        stripped: [],
+        orphans: [],
+      }),
+    );
+    expect(page.all('#p-rev img')).toHaveLength(0);
+    expect(page.text(page.all('#p-rev .p-name')[0])).toBe('<img src=x>.json');
+    expect(page.all('#p-rev [data-go]')[0].getAttribute('data-go')).toBe('extractor/a"b');
+    expect(page.all('#p-rev > .p-note').map((n) => page.text(n))[0]).toBe('1 fichier identique.');
+
+    // Sortie non reconnue : dit, et la sortie brute reste dépliée — « Promouvoir » s'allume comme avant.
+    await dry(reviewed({ ok: false, identical: 0, files: [], stripped: [], orphans: [] }));
+    expect(page.all('#p-rev > *').map((n) => [page.text(n), n.className])).toEqual([
+      ['Sortie du dry-run non reconnue : la lire ci-dessous.', 'p-note warn'],
+    ]);
+    expect(raw(page).open).toBe(true);
+    expect(page.el('p-apply').disabled).toBe(false);
+    expect(page.el('p-apply-plan').hidden).toBe(true);
+    expect(page.el('p-apply').title).toBe('');
+
+    // Un serveur d'avant ce lot (pas de `review`), puis un échec : la sortie brute seule.
+    await dry(OK('dry-run de la promotion'));
+    expect(page.el('p-rev').hidden).toBe(true);
+    expect(raw(page).open).toBe(true);
+    await dry({ ...KO('dry-run de la promotion'), review: REVIEW });
+    expect(page.el('p-rev').hidden).toBe(true);
+    expect(page.el('p-rev').innerHTML).toBe('');
+    expect(raw(page).open).toBe(true);
+  });
+
+  it('« Promouvoir » annonce ce qu’il écrira, d’après la revue — tant qu’elle vaut', async () => {
+    const page = await patch();
+    const plan = () => page.el('p-apply-plan');
+    const dry = async (review: unknown) => {
+      page.el('p-dry').click();
+      await page.settle();
+      await page.finish(reviewed(review));
+    };
+    expect(plan().hidden).toBe(true);
+    expect(page.el('p-apply').title).toBe('');
+
+    await dry(REVIEW);
+    // Le retenu ne part pas : quatre fichiers écrits, dans l'ordre de la revue.
+    const said =
+      'écrira 4 fichiers : characters.json (~2), monster-skills.json (+2), monsters.json (~3), unlock-content.json (nouveau) — 1 retenu, non promu';
+    expect(plan().hidden).toBe(false);
+    expect(page.text(plan())).toBe(said);
+    expect(page.el('p-apply').title).toBe(said);
+    expect(page.el('p-apply').disabled).toBe(false);
+    // À côté du bouton, dans sa rangée.
+    expect(plan().previousElementSibling?.id).toBe('p-apply');
+
+    // Au-delà de quatre, le texte abrège ; le `title` les dit tous.
+    const many = {
+      ...REVIEW,
+      files: [
+        ...['a', 'b', 'c', 'd', 'e', 'f'].map((n) => file(`${n}.json`, { changed: 1 })),
+        file('g.json', { added: 1, changed: 2, removed: 3 }),
+        file('h.json', { note: 'reformatage seul' }),
+      ],
+    };
+    await dry(many);
+    expect(page.text(plan())).toBe(
+      'écrira 8 fichiers : a.json (~1), b.json (~1), c.json (~1), d.json (~1), … et 4 autres',
+    );
+    expect(page.el('p-apply').title).toBe(
+      'écrira 8 fichiers : a.json (~1), b.json (~1), c.json (~1), d.json (~1), e.json (~1), f.json (~1), g.json (+1 ~2 −3), h.json (reformatage seul)',
+    );
+
+    // Rien à écrire : dit — identique, ou tout retenu.
+    await dry({ ...REVIEW, files: [] });
+    expect(page.text(plan())).toBe('n’écrira rien : la proposition est identique au validé');
+    await dry({ ...REVIEW, files: [REVIEW.files[3], { ...REVIEW.files[3], file: 'x.json' }] });
+    expect(page.text(plan())).toBe('n’écrira rien — 2 retenus, non promus');
+    expect(page.el('p-apply').title).toBe('n’écrira rien — 2 retenus, non promus');
+
+    // La proposition va changer : la revue ne vaut plus, l'annonce se tait — la revue reste lisible.
+    await dry(REVIEW);
+    expect(page.text(plan())).toBe(said);
+    page.el('p-refresh').click();
+    await page.settle();
+    await page.finish(OK('rafraîchissement depuis le jeu (Steam)'));
+    expect(page.el('p-apply').disabled).toBe(true);
+    expect(plan().hidden).toBe(true);
+    expect(page.text(plan())).toBe('');
+    expect(page.el('p-apply').title).toBe('');
+    expect(page.all('#p-rev .p-file')).toHaveLength(5);
+
+    // Promue : plus d'annonce non plus.
+    await dry(REVIEW);
+    page.el('p-apply').click();
+    await page.settle();
+    expect(page.calls.at(-1)).toEqual({ path: '/api/patch/promote', body: { apply: true } });
+    await page.finish(OK('promotion de l’extraction'));
+    expect(plan().hidden).toBe(true);
+    expect(page.el('p-apply').title).toBe('');
+    expect(page.confirm).not.toHaveBeenCalled();
   });
 
   it('une revue ne survit pas à un rafraîchissement, ni à une promotion en échec', async () => {

@@ -18,15 +18,19 @@
  *     lui envoie SIGTERM. L'admin, lui, laisse un travail aller au bout ;
  *   - un geste = un PLAN (`refreshPlan`, `promotePlan`, `commitPlan`) : son
  *     libellé et les arguments de pnpm, construits d'un corps de requête, ou le
- *     motif du refus. Purs — c'est eux que les tests lisent.
+ *     motif du refus. Purs — c'est eux que les tests lisent ;
+ *   - le dry-run rend sa REVUE (`promoteReview`) : la sortie de
+ *     `datagen/promote.ts` relue ici, une entrée par fichier différent — la
+ *     page la dessine, et « Promouvoir » y lit ce qu'il va écrire.
  *
  * UN SEUL travail à la fois : le verrou est celui de l'admin, sur `globalThis`,
  * que `/api/push` prend aussi (pousser pendant une promotion serait un
  * non-sens).
  */
 import { spawn, type ChildProcess, type SpawnOptions } from 'node:child_process';
-import { statSync } from 'node:fs';
+import { existsSync, readFileSync, statSync } from 'node:fs';
 import { resolve } from 'node:path';
+import { siteMonsterIds } from '@/lib/admin/monster-store';
 import { COMMIT_MESSAGE_MAX, parsePublishRequest, publishArgs } from '@/lib/admin/patch-commands';
 import {
   acquirePatchJob,
@@ -36,8 +40,15 @@ import {
 } from '@/lib/admin/patch-runner';
 import { findSteamInstall } from '@datagen/extract/steam';
 import { ANDROID_GAMEDATA_ROOT, DEFAULT_GAMEDATA_ROOT } from '@datagen/lib/paths';
+import { applyRetention } from '@datagen/promote';
 import type { SourceName } from '@datagen/refresh';
-import { DASHBOARD_DISK, type GitState, type Outcome, type Report } from './actions';
+import {
+  DASHBOARD_DISK,
+  EXTRACTOR_DEPS,
+  type GitState,
+  type Outcome,
+  type Report,
+} from './actions';
 
 // ---------------------------------------------------------------- lanceur ----
 
@@ -170,6 +181,8 @@ export function stopJob(): { ok: true; stopped: string } | { ok: false; error: s
 export interface Plan {
   label: string;
   args: string[];
+  /** Le geste rend une `review` de sa sortie : le dry-run de la promotion. */
+  review?: true;
 }
 
 export type Planned = Plan | { error: string };
@@ -214,7 +227,7 @@ export function promotePlan(body: unknown): Planned {
   if (typeof apply !== 'boolean') return { error: 'apply attendu : true ou false.' };
   return apply
     ? { label: 'promotion de l’extraction', args: ['datagen:promote', '--apply'] }
-    : { label: 'dry-run de la promotion', args: ['datagen:promote'] };
+    : { label: 'dry-run de la promotion', args: ['datagen:promote'], review: true };
 }
 
 /**
@@ -238,18 +251,24 @@ const TAIL = 15;
 export interface GestureOutcome extends Outcome {
   code: number | null;
   stopped?: boolean;
+  /** La revue d'un dry-run réussi (`Plan.review`). */
+  review?: PromoteReview;
 }
 
 /**
  * Déroule un plan : la commande en première ligne, sa sortie au fil, puis
  * l'issue. Le journal rendu (`log`) est court — une ligne quand ça passe, la
  * fin de la sortie quand ça casse : la sortie entière est dans la console de
- * la section, qui a reçu chaque ligne.
+ * la section, qui a reçu chaque ligne. Un dry-run réussi y joint sa revue.
  */
 export async function runGesture(
   plan: Plan,
   report: Report,
-  opts: JobOptions & { pnpm?: { command: string; args: string[] } } = {},
+  opts: JobOptions & {
+    pnpm?: { command: string; args: string[] };
+    /** Remplacé par les tests seulement : les lectures de la revue. */
+    reviewDisk?: ReviewDisk;
+  } = {},
 ): Promise<GestureOutcome> {
   const pnpm = opts.pnpm ?? pnpmInvocation();
   report(`$ ${displayCommand(plan.args)}`);
@@ -257,7 +276,10 @@ export async function runGesture(
   if (job.error) return { ok: false, code: job.code, log: [job.error] };
   if (job.stopped)
     return { ok: false, code: job.code, stopped: true, log: [`${plan.label} : arrêté.`] };
-  if (job.ok) return { ok: true, code: job.code, log: [`${plan.label} : terminé.`] };
+  if (job.ok) {
+    const done = { ok: true, code: job.code, log: [`${plan.label} : terminé.`] };
+    return plan.review ? { ...done, review: await promoteReview(job.out, opts.reviewDisk) } : done;
+  }
   return {
     ok: false,
     code: job.code,
@@ -268,6 +290,187 @@ export async function runGesture(
         .slice(-TAIL),
       `${plan.label} : échec (code ${job.code ?? 'inconnu'}) — toute la sortie est dans la console de « Patch ».`,
     ],
+  };
+}
+
+// ------------------------------------------------------------------ revue ----
+
+/** Un fichier que la promotion ne laisserait pas tel quel. */
+export interface ReviewFile {
+  /** Relatif à `data/generated/`. */
+  file: string;
+  /** `retained` : différent mais RETENU, non promu (réf de perso non intégré). */
+  status: 'new' | 'changed' | 'retained';
+  /** Entités ajoutées, modifiées, retirées — zéro pour un fichier nouveau ou retenu. */
+  added: number;
+  changed: number;
+  removed: number;
+  /** La cible d'Extraction dont c'est le fichier ; `null` : aucune ne le montre. */
+  target: string | null;
+  /**
+   * `monsters.json` : combien des entités ajoutées ou modifiées sont HORS du
+   * périmètre du site — Extraction › Monstres ne les compte pas. Absent si
+   * le périmètre n'est pas calculable.
+   */
+  offSite?: number;
+  /** Ce que la ligne dit de plus : entités retenues, « reformatage seul », la raison d'un fichier retenu. */
+  note?: string;
+  /** La ligne de `promote.ts`, sans le nom du fichier : les clés ajoutées et retirées y sont. */
+  raw: string;
+}
+
+/**
+ * La revue d'un dry-run. `promote.ts` ne nomme que les fichiers DIFFÉRENTS :
+ * les identiques n'ont que leur compte.
+ */
+export interface PromoteReview {
+  /**
+   * La sortie a été reconnue : la ligne de bilan y est, et autant de fichiers
+   * lus qu'elle en annonce. Faux : la page s'en tient à la sortie brute.
+   */
+  ok: boolean;
+  identical: number;
+  files: ReviewFile[];
+  /** Les persos non intégrés écartés : ils ne partent jamais. */
+  stripped: string[];
+  /** Les fichiers validés sans équivalent extrait, à trancher. */
+  orphans: string[];
+}
+
+/** Les lectures de la revue, injectées. */
+export interface ReviewDisk {
+  /** Les cibles qu'Extraction montre, et leur fichier (relatif à `data/generated/`). */
+  targets: () => Promise<ReadonlyArray<{ id: string; file: string }>>;
+  /** Un JSON du validé ou de la proposition ; `null` s'il manque. */
+  read: (side: 'generated' | 'extracted', file: string) => Record<string, unknown> | null;
+  /** Le périmètre du site (`siteMonsterIds`). */
+  siteMonsters: () => ReadonlySet<string>;
+}
+
+export const REVIEW_DISK: ReviewDisk = {
+  targets: EXTRACTOR_DEPS.targets,
+  read: (side, file) => {
+    const path = resolve('data', side, file);
+    return existsSync(path)
+      ? (JSON.parse(readFileSync(path, 'utf8')) as Record<string, unknown>)
+      : null;
+  },
+  siteMonsters: siteMonsterIds,
+};
+
+// Les lignes de `promote()` (datagen/promote.ts), dont la sortie est le contrat
+// de la CLI : le bilan, un fichier (`  <rel calé à 34> <label>`), un validé
+// sans équivalent, les persos écartés.
+const SUMMARY = /^promotion extrait → validé : (\d+) identique\(s\), (\d+) différent\(s\)$/;
+const ORPHAN = /^ {2}⚠ (\S+) — validé sans équivalent extrait/;
+const STRIPPED = /^ {2}⛔ perso\(s\) non intégré\(s\), jamais promu\(s\) : (.+?) — /;
+const FILE =
+  /^ {2}(\S+) +((?:NOUVEAU fichier|⛔ RETENU|[+~−]\d|reformatage seul|contenu modifié).*)$/;
+
+/** Le label d'un fichier (`entityDiff` et ses notes, séparés par « · ») en comptes. */
+function parseLabel(file: string, raw: string): Omit<ReviewFile, 'target'> {
+  const counts = { added: 0, changed: 0, removed: 0 };
+  if (raw.startsWith('⛔ RETENU'))
+    return {
+      file,
+      status: 'retained',
+      ...counts,
+      note: raw.split(' — ').slice(1).join(' — '),
+      raw,
+    };
+  let status: ReviewFile['status'] = 'changed';
+  const notes: string[] = [];
+  for (const part of raw.split(' · ')) {
+    const count = /^([+~−])(\d+)(?: \(.*\))?$/.exec(part);
+    if (count)
+      counts[count[1] === '+' ? 'added' : count[1] === '~' ? 'changed' : 'removed'] = Number(
+        count[2],
+      );
+    else if (part === 'NOUVEAU fichier') status = 'new';
+    else notes.push(part);
+  }
+  return { file, status, ...counts, ...(notes.length ? { note: notes.join(' · ') } : {}), raw };
+}
+
+/** La sortie de `pnpm datagen:promote`, relue : sans cible ni périmètre du site. */
+export function parsePromoteOutput(out: string): Omit<PromoteReview, 'files'> & {
+  files: Array<Omit<ReviewFile, 'target'>>;
+} {
+  let identical = 0;
+  let announced: number | null = null;
+  const files: Array<Omit<ReviewFile, 'target'>> = [];
+  const stripped: string[] = [];
+  const orphans: string[] = [];
+  for (const line of out.split('\n').map((l) => l.trimEnd())) {
+    const summary = SUMMARY.exec(line);
+    if (summary) {
+      identical = Number(summary[1]);
+      announced = Number(summary[2]);
+      continue;
+    }
+    const orphan = ORPHAN.exec(line);
+    if (orphan) {
+      orphans.push(orphan[1]);
+      continue;
+    }
+    const gone = STRIPPED.exec(line);
+    if (gone) {
+      stripped.push(...gone[1].split(', '));
+      continue;
+    }
+    const file = FILE.exec(line);
+    if (file) files.push(parseLabel(file[1], file[2]));
+  }
+  return { ok: announced === files.length, identical, files, stripped, orphans };
+}
+
+/**
+ * Combien des monstres que la promotion ajouterait ou modifierait sont hors du
+ * périmètre du site. Le même calcul que `promote()` : la proposition, ses
+ * entités retenues réinjectées (`applyRetention`), contre le validé — en
+ * dry-run rien n'est écrit, `data/generated/` est encore le validé.
+ */
+function offSiteMonsters(disk: ReviewDisk): number | undefined {
+  try {
+    const validated = disk.read('generated', 'monsters.json');
+    const proposed = disk.read('extracted', 'monsters.json');
+    if (!validated || !proposed) return undefined;
+    const { merged } = applyRetention(validated, proposed);
+    const site = disk.siteMonsters();
+    return Object.keys(merged).filter(
+      (id) =>
+        !site.has(id) &&
+        (!(id in validated) || JSON.stringify(validated[id]) !== JSON.stringify(merged[id])),
+    ).length;
+  } catch {
+    // Extraction absente, fichier illisible : la revue se passe de la mention.
+    return undefined;
+  }
+}
+
+/**
+ * La revue d'un dry-run, de sa sortie : chaque fichier différent, la cible
+ * d'Extraction qui le montre, et pour les monstres ce qui est hors du site —
+ * là où Extraction dit zéro quand le dry-run dit trois.
+ */
+export async function promoteReview(
+  out: string,
+  disk: ReviewDisk = REVIEW_DISK,
+): Promise<PromoteReview> {
+  const parsed = parsePromoteOutput(out);
+  // Le moteur d'Extraction qui ne se charge pas : la revue reste, sans « voir ».
+  const targets = await disk.targets().catch(() => []);
+  return {
+    ...parsed,
+    files: parsed.files.map((f) => {
+      const offSite =
+        f.file === 'monsters.json' && f.status === 'changed' ? offSiteMonsters(disk) : undefined;
+      return {
+        ...f,
+        target: targets.find((t) => t.file === f.file)?.id ?? null,
+        ...(offSite === undefined ? {} : { offSite }),
+      };
+    }),
   };
 }
 

@@ -1,8 +1,10 @@
 // Onglet « Patch » : la chaîne des données à chaque patch du jeu, en quatre
 // gestes — rafraîchir, relire la promotion (dry-run), promouvoir, committer.
 // Chacun lance UNE commande du dépôt côté serveur (`patch.ts`), un seul travail
-// à la fois ; sa sortie arrive ligne à ligne dans la console du bas.
-import { $, gitBar, log, post, sections } from '../lib.js';
+// à la fois ; sa sortie arrive ligne à ligne dans la console du bas. Le
+// dry-run rend en plus sa revue, lue de sa sortie par le serveur : une ligne
+// par fichier différent, et ce que « Promouvoir » écrira.
+import { $, esc, gitBar, log, post, sections } from '../lib.js';
 
 /** Les quatre gestes : leur nom dans le journal, et leur route. */
 const REFRESH = { label: 'rafraîchissement depuis le jeu', path: '/api/patch/refresh' };
@@ -21,6 +23,11 @@ let running = null;
  */
 let review = 'none';
 let reviewAt = '';
+/**
+ * La revue du dernier dry-run réussi, telle que le serveur l'a lue de sa
+ * sortie (`promoteReview` de `patch.ts`) ; `null` avant, ou après un échec.
+ */
+let sheet = null;
 
 /** Toute la sortie reçue, telle que « Copier » la rend. */
 const lines = [];
@@ -91,7 +98,100 @@ const REVIEW_STATES = {
   applied: ['promue — un nouveau dry-run avant une autre promotion', ''],
 };
 
+/** Les comptes d'un fichier, comme `promote.ts` les écrit. */
+const counts = (f) => `+${f.added} · ~${f.changed} · −${f.removed}`;
+
+/** Une ligne de la revue : le fichier, ses comptes, ce qu'il y a à en savoir, « voir ». */
+function fileRow(f) {
+  const held = f.status === 'retained';
+  const what = held ? 'retenu, non promu' : f.status === 'new' ? 'nouveau fichier' : counts(f);
+  const why = [
+    f.note,
+    f.offSite ? `dont ${f.offSite} hors périmètre du site — aucune action dans Extraction` : '',
+  ].filter(Boolean);
+  const see = f.target
+    ? `<button class="btn ghost sm" data-go="extractor/${esc(f.target)}" title="Ouvrir Extraction sur cette cible">voir</button>`
+    : '';
+  return `<li class="p-file${held ? ' warn' : ''}"><span class="mono p-name">${esc(f.file)}</span><span class="p-counts${f.status === 'changed' ? '' : ' said'}" title="${esc(f.raw)}">${esc(what)}</span><span class="p-why">${esc(why.join(' · '))}</span>${see}</li>`;
+}
+
+/**
+ * La revue du dry-run, au-dessus de sa sortie brute. Dessinée quand elle
+ * change (un dry-run part, ou rend son issue), pas à chaque `render`.
+ */
+function renderSheet() {
+  const box = $('p-rev');
+  box.hidden = !sheet;
+  if (!sheet) {
+    box.innerHTML = '';
+    return;
+  }
+  if (!sheet.ok) {
+    box.innerHTML =
+      '<p class="p-note warn">Sortie du dry-run non reconnue : la lire ci-dessous.</p>';
+    return;
+  }
+  const same = plural(sheet.identical, 'fichier identique', 'fichiers identiques');
+  const notes = [
+    sheet.files.length
+      ? `<p class="p-note">${same}.</p>`
+      : `<p class="p-note">Rien à promouvoir : la proposition est identique au validé (${same}).</p>`,
+  ];
+  if (sheet.stripped.length)
+    notes.push(
+      `<p class="p-note warn">Persos non intégrés, jamais promus — l’intégration se fait par entité, dans Extraction : <span class="mono">${esc(sheet.stripped.join(', '))}</span></p>`,
+    );
+  if (sheet.orphans.length)
+    notes.push(
+      `<p class="p-note warn">Validés sans équivalent extrait, à trancher : <span class="mono">${esc(sheet.orphans.join(', '))}</span></p>`,
+    );
+  notes.push('<p class="p-note">Dry-run : rien n’a été écrit.</p>');
+  box.innerHTML =
+    (sheet.files.length ? `<ul class="p-files">${sheet.files.map(fileRow).join('')}</ul>` : '') +
+    notes.join('');
+}
+
+/** Combien de fichiers l'annonce de « Promouvoir » nomme ; le `title` les dit tous. */
+const PLAN_SHOWN = 4;
+
+/** Un fichier de l'annonce : « monsters.json (~3) ». */
+function planned(f) {
+  const n = [f.added && `+${f.added}`, f.changed && `~${f.changed}`, f.removed && `−${f.removed}`]
+    .filter(Boolean)
+    .join(' ');
+  return `${f.file} (${n || (f.status === 'new' ? 'nouveau' : (f.note ?? 'modifié'))})`;
+}
+
+/** « Promouvoir » annonce ce qu'il écrira, d'après la revue — tant qu'elle vaut. */
+function renderPlan() {
+  const text = $('p-apply-plan');
+  const usable = review === 'ok' && sheet?.ok;
+  text.hidden = !usable;
+  text.textContent = '';
+  $('p-apply').title = '';
+  if (!usable) return;
+  const writes = sheet.files.filter((f) => f.status !== 'retained').map(planned);
+  const held = sheet.files.length - writes.length;
+  const kept = held
+    ? ` — ${plural(held, 'retenu', 'retenus')}, non promu${held > 1 ? 's' : ''}`
+    : '';
+  if (!writes.length) {
+    text.textContent = `n’écrira rien${kept || ' : la proposition est identique au validé'}`;
+    $('p-apply').title = text.textContent;
+    return;
+  }
+  const head = `écrira ${plural(writes.length, 'fichier')} : `;
+  const more = writes.length - PLAN_SHOWN;
+  text.textContent =
+    head +
+    writes.slice(0, PLAN_SHOWN).join(', ') +
+    (more > 0 ? `, … et ${plural(more, 'autre')}` : '') +
+    kept;
+  $('p-apply').title = head + writes.join(', ') + kept;
+}
+
 function renderReview() {
+  renderPlan();
   const [text, tone] = REVIEW_STATES[review];
   const state = $('p-review-state');
   state.textContent =
@@ -241,7 +341,11 @@ $('p-refresh').onclick = () => {
 $('p-dry').onclick = () => {
   const box = $('p-review');
   box.textContent = '';
-  box.hidden = false;
+  sheet = null;
+  renderSheet();
+  // La sortie brute, dépliée tant qu'elle court.
+  $('p-raw').hidden = false;
+  $('p-raw').open = true;
   run({
     ...DRY,
     button: $('p-dry'),
@@ -251,9 +355,19 @@ $('p-dry').onclick = () => {
     after: (data) => {
       review = data.ok ? 'ok' : 'ko';
       reviewAt = hhmm();
+      sheet = (data.ok && data.review) || null;
+      // La revue est là : la sortie brute se replie dessous, un clic la rouvre.
+      $('p-raw').open = !sheet?.ok;
+      renderSheet();
     },
   });
 };
+
+// « voir » : la cible d'Extraction dont c'est le fichier.
+$('p-rev').addEventListener('click', (e) => {
+  const to = e.target.closest('[data-go]')?.dataset.go;
+  if (to) sections.go(to);
+});
 
 // Pas de confirmation : le dry-run EST la revue, et la promotion se défait par git.
 $('p-apply').onclick = () =>

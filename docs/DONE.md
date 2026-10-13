@@ -5,6 +5,101 @@
 > détail vit dans git. Le `CHANGELOG.md` racine est GELÉ depuis le 03/08 —
 > ce fichier et le log git SONT le journal du projet.
 
+## 2026-10-13
+
+- **quick : Patch — la revue du dry-run est structurée (une ligne par fichier,
+  « voir » vers Extraction, hors périmètre du site dit), et « Promouvoir »
+  annonce ce qu'il écrit (lot A38)** — constat de Sevih au cycle du patch
+  (13/10) : après « Rafraîchir » puis « Dry-run », la revue était la sortie
+  brute de `pnpm datagen:promote` dans une console, « monsters.json ~3 » en
+  texte, sans rien qui mène où ces monstres se lisent — et Extraction ›
+  Monstres disait zéro, les trois étant hors périmètre du site. Serveur
+  (`scripts/quick/patch.ts`, section « revue ») : `parsePromoteOutput(out)`
+  relit les lignes de `promote()` — le bilan (« n identique(s), m
+  différent(s) »), une ligne par fichier (le nom calé à 34, puis son label :
+  `NOUVEAU fichier`, `⛔ RETENU`, les comptes d'`entityDiff` et leurs notes
+  séparées par « · »), les validés sans équivalent extrait, les persos écartés
+  — et `promoteReview(out, disk)` y joint, par fichier, `target` (la cible
+  d'Extraction dont c'est le fichier : celles que la section montre,
+  `EXTRACTOR_DEPS.targets`, `null` sinon) et, pour `monsters.json` modifié,
+  `offSite` : le nombre d'entités ajoutées ou modifiées hors de
+  `siteMonsterIds`, calculé comme `promote()` compare (la proposition, ses
+  entités retenues réinjectées par `applyRetention`, contre le validé — en
+  dry-run rien n'est écrit, `data/generated/` est encore le validé). Le plan du
+  dry-run porte `review: true` (`promotePlan`), `runGesture` joint `review` à
+  l'issue d'un dry-run RÉUSSI ; ni un échec ni `--apply` n'en rendent (après
+  l'apply le validé est la proposition). `server.ts` et `datagen/promote.ts` ne
+  bougent pas : la sortie de la CLI reste le contrat. Forme rendue : `ok`,
+  `identical`, `stripped`, `orphans`, et `files`, par fichier `file`, `status`
+  (`new`, `changed` ou `retained`), `added`, `changed`, `removed`, `target`,
+  `offSite?`, `note?`, `raw`. Deux écarts à la forme du lot, dits : pas de
+  statut `identical` — `promote()` ne NOMME que les fichiers différents, les
+  identiques n'ont que leur compte (`identical`), ce que la page demande
+  (« comptés en une ligne ») ; et deux champs de plus, `note` (ce que la ligne
+  dit après ses comptes : « 17 retenue(s), jamais supprimées », « reformatage
+  seul », la raison d'un fichier retenu) et `raw` (la ligne entière, où sont
+  les clés ajoutées et retirées). `ok` dit que la sortie a été reconnue : le
+  bilan y est et annonce autant de fichiers qu'il en est lu — sinon la page
+  s'en tient à la sortie brute. Un périmètre incalculable (extraction absente)
+  ou un moteur d'Extraction qui ne se charge pas n'ôtent que `offSite` ou les
+  « voir », pas la revue. Page (`tabs/patch.html`, `.js`, `.css`) : sous
+  [Dry-run], `.p-rev` — une ligne par fichier différent (nom, « +0 · ~3 · −0 »
+  avec la ligne de `promote.ts` en `title`, ce qu'elle dit de plus, et pour les
+  monstres « dont 3 hors périmètre du site — aucune action dans Extraction »),
+  un bouton « voir » (`sections.go('extractor/<cible>')`) seulement quand la
+  cible existe, le fichier retenu en ambre avec sa raison, puis « 61 fichiers
+  identiques. », les persos écartés et les validés sans équivalent en ambre,
+  « Dry-run : rien n'a été écrit. » ; la sortie brute reste dessous dans un
+  `details` (`#p-raw`), dépliée tant que le dry-run court ou s'il n'a pas rendu
+  de revue, repliée dès que la revue est là. « Promouvoir » porte son annonce à
+  côté du bouton (`#p-apply-plan`) et en `title` : « écrira 4 fichiers :
+  game-version.json (~1), monster-skills.json (+2), monsters.json (~3),
+  wallpapers.json (~2) », quatre nommés puis « … et n autres » (le `title` les
+  dit tous), « — 1 retenu, non promu », « n'écrira rien : … » ; elle se tait
+  dès que la revue ne vaut plus (à refaire, promue, sortie non reconnue), et le
+  bouton s'allume et s'éteint comme avant — aucune confirmation ajoutée. Les
+  noms viennent de la sortie d'une commande : posés par `esc`. Rejoué sur le
+  dépôt du jour par un vrai `pnpm datagen:promote` (dry-run, lecture seule) :
+  61 identiques, 4 différents — `game-version.json` ~1, `monster-skills.json`
+  +2 (sans cible), `monsters.json` ~3 avec `offSite` 3 et la cible `monster`,
+  `wallpapers.json` ~2 « 17 retenue(s) » —, `2400015` écarté : le constat du
+  matin, lisible. Tests : `patch.test.ts` (+7 : le parse sur une sortie
+  réaliste — bannière de pnpm, avertissement des retenus sur stderr dont la
+  ligne « skills.json : 2400015 » n'est pas prise pour un fichier, nouveau,
+  modifié, retenu, « reformatage seul », nom plus long que le calage,
+  orphelins, écartés ; `offSite` avec une entité retenue ; périmètre
+  incalculable ; zéro différent ; sortie non reconnue ; les cibles du vrai
+  registre ; `runGesture` avec un `spawn` factice) et `ui-serve.test.ts` (+3
+  sur la vraie page en happy-dom : une ligne par fichier, « voir » absent sans
+  cible et son clic qui ouvre `#extractor/monster`, le `details` déplié puis
+  replié, l'annonce et ses cas ; une mutation — « voir » posé partout — fait
+  bien tomber le test). Vérification : `pnpm typecheck` → sa ligne de commande
+  (les trois `tsc --noEmit` : racine, datagen, scripts) et rien dessous, code
+  0 ; `pnpm lint` → `$ eslint`, code 0 ; `pnpm test` →
+  `Test Files 223 passed (223)`, `Tests 3763 passed (3763)` ; `scripts/quick`
+  sous `NODE_ENV=development` → `Test Files 8 passed (8)`,
+  `Tests 1083 passed (1083)` ; `pnpm format:check` vert. Banc (quick
+  isolé :4799, clés vidées, arrêté ensuite ; `shot.mjs --tabs patch`) : au
+  repos la section est celle d'avant (les trois blocs nouveaux sont cachés). Le
+  dry-run est un POST hors `READ_ONLY_POSTS` : il n'a PAS été joué sur un quick
+  — la revue a été photographiée par un relais de banc GET seulement qui rejoue
+  dans le navigateur la sortie réelle ci-dessus et sa `review` (aucun POST ne
+  part), en 1440 px et en 420 px (la ligne se replie, « voir » reste à droite).
+  Docs : `STYLE.md` § Patch (le croquis des cartes 2 et 3, les classes),
+  `docs/quick-migration.md` (« Déjà dans quick » › Patch). Laissé : l'annonce
+  dit ce que la PROMOTION écrit, pas la re-dérivation qui la suit
+  (`syncDerived` : damage et solver, quand persos, skills, monstres ou
+  rencontres changent) — la sortie du dry-run n'en dit rien ; une revue « à
+  refaire » ou « promue » reste lisible avec ses « voir », seule l'annonce se
+  tait ; la ligne des persos écartés dit « l'intégration se fait par entité,
+  dans Extraction » alors que `promote.ts` écrit encore « via l'admin
+  uniquement » (hors périmètre, sa sortie est contractuelle) ; `siteMonsterIds`
+  écrit son avertissement « encounters : butin partiellement ignoré » dans le
+  terminal de quick à chaque dry-run ; les pastilles de nav (A39), « +n hors
+  site » dans Extraction et la cible monster-skills (A40) ne sont pas touchées.
+  `docs/TODO.md` : les points (1) et (3) de l'item marqués FAITS, (2) et (4)
+  restent.
+
 ## 2026-10-12
 
 - **Relecture F24, B47, A37, F25, C13, B48 (Fable) — quick : Pros / Cons

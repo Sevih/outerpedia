@@ -88,9 +88,85 @@
   margin-left: auto;
 }
 
+/* La revue du dry-run : une ligne par fichier différent — son nom, ses
+   comptes, ce que la ligne dit de plus, « voir » poussé à droite — puis une
+   phrase par bilan (`.p-note`). Étroit, la ligne se replie. */
+#tab-patch .p-rev {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+#tab-patch .p-rev[hidden] {
+  display: none;
+}
+#tab-patch .p-files {
+  margin: 0;
+  padding: 0;
+  border: 1px solid var(--line-subtle);
+  border-radius: 8px;
+  list-style: none;
+}
+#tab-patch .p-file {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 14px;
+  min-height: 40px;
+  padding: 5px 12px;
+  font-size: 12.5px;
+}
+#tab-patch .p-file + .p-file {
+  border-top: 1px solid var(--line-subtle);
+}
+#tab-patch .p-name {
+  min-width: 26ch;
+}
+#tab-patch .p-counts {
+  min-width: 15ch;
+  font-family: var(--mono);
+  white-space: nowrap;
+}
+/* Un état en mots (« nouveau fichier », « retenu, non promu ») : la police du texte. */
+#tab-patch .p-counts.said {
+  font-family: inherit;
+}
+#tab-patch .p-why {
+  flex: 1;
+  min-width: 14ch;
+  color: var(--content-muted);
+}
+#tab-patch .p-file .btn {
+  margin-left: auto;
+}
+/* Retenu, non promu : en ambre, avec sa raison. */
+#tab-patch .p-file.warn .p-counts,
+#tab-patch .p-file.warn .p-why {
+  color: var(--warn);
+}
+
+/* La sortie brute du dry-run, sous la revue : un clic la déplie. */
+#tab-patch .p-raw summary {
+  width: fit-content;
+  color: var(--content-muted);
+  font-size: 12.5px;
+  cursor: pointer;
+}
+#tab-patch .p-raw summary:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+#tab-patch .p-raw[open] summary {
+  margin-bottom: 8px;
+}
+
+/* Ce que « Promouvoir » écrira, à côté du bouton. */
+#tab-patch .p-plan {
+  font-size: 12.5px;
+}
+
 /* Une sortie de commande : chasse fixe, lignes repliées, défilement dans son
-   cadre. La console commune tient 40 % de la fenêtre ; la revue du dry-run,
-   dans sa carte, 32 % au plus. */
+   cadre. La console commune tient 40 % de la fenêtre ; la sortie brute du
+   dry-run, dans sa carte, 32 % au plus. */
 #tab-patch .p-out {
   margin: 0;
   overflow-y: auto;
@@ -117,10 +193,6 @@
   border: 1px solid var(--line-subtle);
   border-radius: 8px;
 }
-#tab-patch #p-review[hidden] {
-  display: none;
-}
-
 /* « Arrêter » n'existe que pendant un travail : `.btn` pose son `display`. */
 #tab-patch .btn[hidden] {
   display: none;

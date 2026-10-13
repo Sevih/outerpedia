@@ -61,9 +61,16 @@ quatre gestes lancés de quick, chacun une commande du dépôt, sa sortie ligne
 (`pnpm datagen:patch`, source Steam ou Android, `--force`, `--no-pull`,
 `--collect`, `--news` : pull, dump si le code a changé, extract, build,
 promote en DRY), « Dry-run » (`pnpm datagen:promote`, la revue par fichier et
-par entité, qui reste à l'écran), « Promouvoir » (`--apply`, allumé seulement
-après un dry-run réussi dans la page, sans boîte de confirmation — le
-dry-run EST la revue, décision Sevih ; la garde perso de `promote.ts` tient),
+par entité, qui reste à l'écran — STRUCTURÉE depuis le lot A38 : le serveur
+relit la sortie de `promote.ts` (`promoteReview` de `patch.ts`, la sortie
+elle-même inchangée) et la page pose une ligne par fichier différent, ses
+comptes, un « voir » vers la cible d'Extraction dont c'est le fichier, et
+pour `monsters.json` ce qui est hors du périmètre du site, là où Extraction
+dit zéro ; la sortie brute reste dessous, repliée), « Promouvoir »
+(`--apply`, allumé seulement après un dry-run réussi dans la page, sans
+boîte de confirmation — le dry-run EST la revue, décision Sevih ; il annonce
+ce qu'il écrira, fichiers et comptes, d'après cette revue ; la garde perso
+de `promote.ts` tient),
 « Committer » (`pnpm commit --no-push`, message et bump) ; le push reste
 « Pousser ». Un seul travail à la fois, le verrou de l'admin
 (`acquirePatchJob`), que « Pousser » prend aussi ; « Arrêter » coupe le

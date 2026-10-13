@@ -55,8 +55,13 @@
     </div>
     <div class="p-body">
       <div class="actions"><button class="btn primary" id="p-dry">Dry-run</button></div>
-      <!-- La sortie du dernier dry-run : elle reste, c'est la revue. -->
-      <pre class="p-out" id="p-review" tabindex="0" aria-label="Sortie du dry-run" hidden></pre>
+      <!-- La revue du dernier dry-run réussi : une ligne par fichier différent. -->
+      <div class="p-rev" id="p-rev" hidden></div>
+      <!-- Sa sortie brute, qui reste : repliée dès que la revue est au-dessus. -->
+      <details class="p-raw" id="p-raw" hidden>
+        <summary>Sortie brute du dry-run</summary>
+        <pre class="p-out" id="p-review" tabindex="0" aria-label="Sortie du dry-run"></pre>
+      </details>
     </div>
   </div>
 
@@ -69,6 +74,8 @@
     <div class="p-body">
       <div class="actions">
         <button class="btn primary" id="p-apply" disabled>Promouvoir (--apply)</button>
+        <!-- Ce que la promotion écrira, lu de la revue. -->
+        <span class="p-plan" id="p-apply-plan" hidden></span>
         <span class="lbl"
           >Les persos pas encore intégrés dans l'admin ne partent pas, même ici (la garde de
           <span class="mono">promote.ts</span>).</span

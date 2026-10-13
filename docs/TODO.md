@@ -108,6 +108,9 @@
       compter dans la pastille), et une cible « Skills de monstres » en
       lecture, ou au moins la ligne du dry-run qui dit « hors périmètre du
       site, aucune action ». → LOTS A38 (revue du dry-run, Promouvoir), A39 (pastilles), A40 (hors site, cible monster-skills), rédigés le 13/10.
+      FAIT le 13/10 (lot A38) : (1) et (3), et la ligne du dry-run qui dit
+      « dont n hors périmètre du site — aucune action dans Extraction ».
+      Restent (2), lot A39, et (4), lot A40.
 - [ ] **« Extraction » — contrôles à l'écran (lot F20)** : le banc ne
       clique pas, aucun geste réel n'a été joué (le dépôt du jour n'a qu'un
       perso nouveau sans nom, `2400015`, et aucun écart). Relancer quick

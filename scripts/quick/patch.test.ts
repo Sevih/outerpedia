@@ -1,7 +1,8 @@
 /**
  * Contrat de la section « Patch » côté serveur : le lanceur (`runJob`), le
  * verrou qu'il partage avec l'admin, « Arrêter » (`stopJob`), les arguments de
- * chaque geste et leurs refus, et l'état au repos (`patchState`).
+ * chaque geste et leurs refus, la revue d'un dry-run lue de sa sortie
+ * (`promoteReview`), et l'état au repos (`patchState`).
  *
  * AUCUNE commande ne part d'ici : `spawn` est factice — un enfant qui écrit
  * les lignes qu'on lui donne et sort avec le code qu'on lui dit —, et les
@@ -13,17 +14,21 @@ import { PassThrough } from 'node:stream';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { acquirePatchJob, runningPatchJob } from '@/lib/admin/patch-runner';
 import {
+  REVIEW_DISK,
   busyRefusal,
   commitPlan,
   displayCommand,
+  parsePromoteOutput,
   patchState,
   promotePlan,
+  promoteReview,
   refreshPlan,
   runGesture,
   runJob,
   stopJob,
   type PatchDisk,
   type Plan,
+  type ReviewDisk,
 } from './patch';
 
 /** Un enfant factice : on y écrit, puis on le fait sortir. */
@@ -287,9 +292,11 @@ describe('les plans — ce que chaque geste lance', () => {
   });
 
   it('promotion : le dry-run de revue, ou `--apply` — sur un booléen, rien d’autre', () => {
+    // Le dry-run seul rend une revue : après `--apply`, le validé EST la proposition.
     expect(promotePlan({ apply: false })).toEqual({
       label: 'dry-run de la promotion',
       args: ['datagen:promote'],
+      review: true,
     });
     expect(promotePlan({ apply: true })).toEqual({
       label: 'promotion de l’extraction',
@@ -413,6 +420,217 @@ describe('runGesture — un plan, de la commande à l’issue', () => {
     });
     expect(spawned).toEqual([]);
     release?.();
+  });
+
+  it('un dry-run réussi joint sa revue ; en échec, ou pour `--apply`, il n’y en a pas', async () => {
+    const dry: Plan = { label: 'dry-run de la promotion', args: ['datagen:promote'], review: true };
+    const out =
+      'promotion extrait → validé : 61 identique(s), 1 différent(s)\n' +
+      `  ${'items.json'.padEnd(34)} +1 (9001)\n`;
+    const reviewDisk: ReviewDisk = {
+      targets: async () => [{ id: 'item', file: 'items.json' }],
+      read: () => null,
+      siteMonsters: () => new Set(),
+    };
+    const ok = fakeSpawn((child) => child.exit(0, out));
+    expect(await runGesture(dry, () => {}, { spawn: ok.spawnFn, pnpm: PNPM, reviewDisk })).toEqual({
+      ok: true,
+      code: 0,
+      log: ['dry-run de la promotion : terminé.'],
+      review: {
+        ok: true,
+        identical: 61,
+        files: [
+          {
+            file: 'items.json',
+            status: 'changed',
+            added: 1,
+            changed: 0,
+            removed: 0,
+            raw: '+1 (9001)',
+            target: 'item',
+          },
+        ],
+        stripped: [],
+        orphans: [],
+      },
+    });
+
+    const ko = fakeSpawn((child) => child.exit(1, out));
+    expect(
+      await runGesture(dry, () => {}, { spawn: ko.spawnFn, pnpm: PNPM, reviewDisk }),
+    ).not.toHaveProperty('review');
+    const applied = fakeSpawn((child) => child.exit(0, out));
+    expect(
+      await runGesture(promote, () => {}, { spawn: applied.spawnFn, pnpm: PNPM, reviewDisk }),
+    ).not.toHaveProperty('review');
+  });
+});
+
+describe('promoteReview — la revue du dry-run, lue de sa sortie', () => {
+  /** Une ligne de fichier de `promote()` : le nom calé à 34, puis son label. */
+  const row = (rel: string, label: string): string => `  ${rel.padEnd(34)} ${label}`;
+
+  /**
+   * Un dry-run comme pnpm le rend : sa bannière, l'avertissement des fichiers
+   * retenus (stderr, mêlé), le bilan, une ligne par fichier différent, puis ce
+   * que `promote()` signale et sa ligne de fin.
+   */
+  const OUT = [
+    '',
+    '> outerpedia@3.41.2 datagen:promote /home/x/outerpedia',
+    '> tsx datagen/promote.ts',
+    '',
+    '⚠ perso(s) non intégré(s) encore référencé(s) après écartement — fichier(s) RETENU(S), le reste du lot se promeut. Intégrer via l’admin pour les débloquer :',
+    '  skills.json : 2400015',
+    'promotion extrait → validé : 58 identique(s), 8 différent(s)',
+    row('characters.json', '~2 · 1 perso(s) non intégré(s) écarté(s) : 2400015'),
+    row('equipment/accessory.json', '+7 (a1, a2, a3, a4, a5, a6, …) · ~1 · −1 (a0)'),
+    row('glossaries.json', 'reformatage seul'),
+    row('monster-skills.json', '+2 (1120923, 1120924)'),
+    row('monsters.json', '+2 (E, F) · ~3 · 1 retenue(s), jamais supprimées'),
+    row('skills.json', '⛔ RETENU (non promu) — réf(s) de perso non intégré : 2400015'),
+    row('unlock-content.json', 'NOUVEAU fichier'),
+    // Un nom plus long que le calage : un seul espace le sépare de son label.
+    row('damage/a-very-long-file-name-over-34c.json', 'contenu modifié'),
+    '  ⚠ old-table.json — validé sans équivalent extrait (à trancher)',
+    '  ⚠ equipment/legacy.json — validé sans équivalent extrait (à trancher)',
+    "  ⛔ perso(s) non intégré(s), jamais promu(s) : 2400015, 2400016 — intégration via l'admin uniquement",
+    '',
+    '(dry-run — rien n’a été écrit ; relance avec --apply pour valider)',
+  ].join('\n');
+
+  /**
+   * Le validé et la proposition des monstres : A et B changent, C non, D quitte
+   * le jeu (retenu, il prend `retired`), E et F arrivent. Le site sert A et F.
+   */
+  const MONSTERS = {
+    generated: { A: { hp: 1 }, B: { hp: 1 }, C: { hp: 1 }, D: { hp: 1 } },
+    extracted: { A: { hp: 2 }, B: { hp: 2 }, C: { hp: 1 }, E: { hp: 1 }, F: { hp: 1 } },
+  };
+  const disk = (over: Partial<ReviewDisk> = {}): ReviewDisk => ({
+    targets: async () => [
+      { id: 'character', file: 'characters.json' },
+      { id: 'effect', file: 'glossaries.json' },
+      { id: 'amulet', file: 'equipment/accessory.json' },
+      { id: 'monster', file: 'monsters.json' },
+    ],
+    read: (side, file) => (file === 'monsters.json' ? MONSTERS[side] : null),
+    siteMonsters: () => new Set(['A', 'F']),
+    ...over,
+  });
+
+  it('une entrée par fichier différent : son état, ses comptes, sa cible d’Extraction', async () => {
+    const review = await promoteReview(OUT, disk());
+    expect(review.ok).toBe(true);
+    // Les identiques n'ont que leur compte : `promote()` ne les nomme pas.
+    expect(review.identical).toBe(58);
+    expect(
+      review.files.map((f) => [f.file, f.status, f.added, f.changed, f.removed, f.target]),
+    ).toEqual([
+      ['characters.json', 'changed', 0, 2, 0, 'character'],
+      ['equipment/accessory.json', 'changed', 7, 1, 1, 'amulet'],
+      ['glossaries.json', 'changed', 0, 0, 0, 'effect'],
+      ['monster-skills.json', 'changed', 2, 0, 0, null],
+      ['monsters.json', 'changed', 2, 3, 0, 'monster'],
+      ['skills.json', 'retained', 0, 0, 0, null],
+      ['unlock-content.json', 'new', 0, 0, 0, null],
+      ['damage/a-very-long-file-name-over-34c.json', 'changed', 0, 0, 0, null],
+    ]);
+    // Ce que la ligne dit de plus, et la ligne entière (les clés y sont).
+    expect(review.files.map((f) => f.note)).toEqual([
+      '1 perso(s) non intégré(s) écarté(s) : 2400015',
+      undefined,
+      'reformatage seul',
+      undefined,
+      '1 retenue(s), jamais supprimées',
+      'réf(s) de perso non intégré : 2400015',
+      undefined,
+      'contenu modifié',
+    ]);
+    expect(review.files[1].raw).toBe('+7 (a1, a2, a3, a4, a5, a6, …) · ~1 · −1 (a0)');
+    // La ligne de l'avertissement (`  skills.json : 2400015`) n'est pas un fichier.
+    expect(review.files.filter((f) => f.file === 'skills.json')).toHaveLength(1);
+    expect(review.stripped).toEqual(['2400015', '2400016']);
+    expect(review.orphans).toEqual(['old-table.json', 'equipment/legacy.json']);
+  });
+
+  it('monsters.json : ce qui est hors du périmètre du site, compté comme `promote()` compare', async () => {
+    const review = await promoteReview(OUT, disk());
+    // B et E ne sont pas servis ; D, retenu, prend `retired` : hors site aussi.
+    expect(review.files.find((f) => f.file === 'monsters.json')?.offSite).toBe(3);
+    // Les autres fichiers n'en portent pas.
+    expect(review.files.filter((f) => 'offSite' in f).map((f) => f.file)).toEqual([
+      'monsters.json',
+    ]);
+    // Tout est servi par le site : zéro, dit.
+    const all = await promoteReview(
+      OUT,
+      disk({ siteMonsters: () => new Set(['A', 'B', 'D', 'E', 'F']) }),
+    );
+    expect(all.files.find((f) => f.file === 'monsters.json')?.offSite).toBe(0);
+  });
+
+  it('un périmètre incalculable, un moteur qui ne se charge pas : la revue reste', async () => {
+    const blind = await promoteReview(
+      OUT,
+      disk({
+        siteMonsters: () => {
+          throw new Error('extraction absente');
+        },
+        targets: () => Promise.reject(new Error('tables illisibles')),
+      }),
+    );
+    expect(blind.ok).toBe(true);
+    expect(blind.files).toHaveLength(8);
+    expect(blind.files.some((f) => 'offSite' in f)).toBe(false);
+    expect(blind.files.every((f) => f.target === null)).toBe(true);
+    // Un des deux fichiers manque : pas de mention non plus.
+    const absent = await promoteReview(OUT, disk({ read: () => null }));
+    expect(absent.files.some((f) => 'offSite' in f)).toBe(false);
+  });
+
+  it('rien de différent : zéro fichier, et c’est une revue', () => {
+    expect(
+      parsePromoteOutput(
+        '$ tsx datagen/promote.ts\npromotion extrait → validé : 65 identique(s), 0 différent(s)\n',
+      ),
+    ).toEqual({ ok: true, identical: 65, files: [], stripped: [], orphans: [] });
+  });
+
+  it('une sortie qui n’est pas celle attendue n’est PAS une revue', () => {
+    // Pas de bilan : rien n'est reconnu.
+    expect(parsePromoteOutput('Erreur : data/extracted/ absent').ok).toBe(false);
+    expect(parsePromoteOutput('').ok).toBe(false);
+    // Le bilan annonce deux fichiers, un seul est lu : le format a bougé.
+    expect(
+      parsePromoteOutput(
+        [
+          'promotion extrait → validé : 1 identique(s), 2 différent(s)',
+          row('items.json', '~1'),
+          row('skills.json', 'un label que ce module ne connaît pas'),
+        ].join('\n'),
+      ),
+    ).toMatchObject({ ok: false, identical: 1 });
+  });
+
+  it('les cibles sont celles qu’Extraction montre : le vrai registre', async () => {
+    const out = [
+      'promotion extrait → validé : 0 identique(s), 5 différent(s)',
+      row('characters.json', '~1'),
+      row('glossaries.json', '~1'),
+      row('equipment/accessory.json', '~1'),
+      row('items.json', '~1'),
+      row('monster-skills.json', '~1'),
+    ].join('\n');
+    const review = await promoteReview(out, { ...disk(), targets: REVIEW_DISK.targets });
+    expect(review.files.map((f) => [f.file, f.target])).toEqual([
+      ['characters.json', 'character'],
+      ['glossaries.json', 'effect'],
+      ['equipment/accessory.json', 'amulet'],
+      ['items.json', 'item'],
+      ['monster-skills.json', null],
+    ]);
   });
 });
 

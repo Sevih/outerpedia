@@ -689,10 +689,18 @@ quatre .card empilées, dans l'ordre du flux ; chacune : card-head = « n · tit
      .p-note.warn « une reprise attend (checkpoint du 08/10 14:30) : « Lancer » reprend où la chaîne a cassé, « forcer » repart de zéro. » — seulement s'il y en a un pour la source choisie
   .card « 2 · Revue de la promotion »         … « pas encore de dry-run » · « dry-run en cours… » · « dry-run réussi à 14:32 » (ok) · « dry-run en échec à 14:32 » (ko) · « dry-run à refaire : la proposition a pu changer » (warn)
      [Dry-run]
-     pre.p-out (32 vh au plus, absente avant le premier dry-run) : la sortie du DERNIER dry-run, qui reste après la fin — c'est la revue
+     .p-rev (absente avant un dry-run réussi ; A38) : la REVUE, lue de la sortie par le serveur (`promoteReview` de `patch.ts`)
+        ul.p-files (cadre, une ligne par fichier DIFFÉRENT) : li.p-file = `monsters.json` (.mono.p-name, 26ch) · « +0 · ~3 · −0 » (.p-counts, chasse fixe ; `title` : la ligne de promote.ts, où sont les clés ajoutées et retirées ; en mots, `.said` : « nouveau fichier », « retenu, non promu ») · ce que la ligne dit de plus (.p-why, atténué : « 17 retenue(s), jamais supprimées », « reformatage seul », et pour monsters.json « dont 3 hors périmètre du site — aucune action dans Extraction ») … [voir] (.btn.ghost.sm, data-go « extractor/<cible> », poussé à droite — seulement quand Extraction a une cible pour ce fichier : rien pour monster-skills.json, encounters.json, damage/*)
+           li.p-file.warn : un fichier RETENU, non promu — ses mots et sa raison en ambre (« réf(s) de perso non intégré : 2400015 »)
+        p.p-note « 61 fichiers identiques. » (rien de différent : « Rien à promouvoir : la proposition est identique au validé (65 fichiers identiques). »)
+        p.p-note.warn « Persos non intégrés, jamais promus — l'intégration se fait par entité, dans Extraction : 2400015 » · p.p-note.warn « Validés sans équivalent extrait, à trancher : old-table.json » — chacune seulement s'il y en a
+        p.p-note « Dry-run : rien n'a été écrit. »
+        sortie non reconnue (le bilan manque, ou n'annonce pas autant de fichiers qu'il en est lu) : une seule p.p-note.warn « Sortie du dry-run non reconnue : la lire ci-dessous. », la sortie brute dépliée
+     details.p-raw (absent avant le premier dry-run) « Sortie brute du dry-run » : pre.p-out (32 vh au plus), la sortie du DERNIER dry-run, qui reste après la fin — dépliée tant qu'il court et quand il n'a pas rendu de revue (échec, sortie non reconnue), REPLIÉE dès que la revue est au-dessus, un clic la rouvre
   .card « 3 · Promouvoir »                    … « après un dry-run réussi » · « prêt : la revue est au-dessus » · « promue à 14:40 — reste à committer » (ok)
-     [Promouvoir (--apply)]  Les persos pas encore intégrés dans l'admin ne partent pas, même ici (la garde de promote.ts).
-     éteint tant qu'un dry-run n'a pas réussi DANS CETTE PAGE ; pas de boîte de confirmation (le dry-run est la revue, la promotion se défait par git) ; un rafraîchissement lancé, une promotion faite ou ratée : la revue est à refaire
+     [Promouvoir (--apply)]  « écrira 4 fichiers : game-version.json (~1), monster-skills.json (+2), monsters.json (~3), wallpapers.json (~2) » (.p-plan, à côté du bouton, et son `title`)  Les persos pas encore intégrés dans l'admin ne partent pas, même ici (la garde de promote.ts).
+     l'annonce est bâtie de la revue (A38) : les fichiers nouveaux et modifiés, leurs comptes non nuls (« (+1 ~2 −3) », « (nouveau) », « (reformatage seul) ») ; quatre nommés, puis « , … et 4 autres » — le `title` les dit tous ; « — 1 retenu, non promu » ; « n'écrira rien : la proposition est identique au validé ». Absente sans revue qui vaille (aucune, à refaire, promue, sortie non reconnue)
+     éteint tant qu'un dry-run n'a pas réussi DANS CETTE PAGE ; pas de boîte de confirmation (le dry-run est la revue, la promotion se défait par git) ; un rafraîchissement lancé, une promotion faite ou ratée : la revue est à refaire (elle reste lisible, l'annonce se tait)
   .card « 4 · Committer les données »         … « 11 fichiers modifiés · 2 commits à pousser — « Pousser », dans l'en-tête » (warn s'il y a des fichiers ; « aucun fichier modifié » ; « dépôt illisible : … » en ko)
      .form : [Message 42ch, prérempli « chore(data): patch du 08/10 », borné à 200] [Version ▾ patch · minor · major] [Committer (pnpm commit)]
      .p-note « Le commit lance format, lint, typecheck et tests : compter dix minutes. Il embarque tout ce qui est modifié dans le dépôt (git add -A)… »
@@ -715,7 +723,9 @@ sa sortie, elle, n'est pas rejouée. Recharger la page pendant un geste lancé
 d'ici demande confirmation (`dirty`). Propres à l'onglet, dans
 `tabs/patch.css` : `.p-state`, `.p-body`, `.p-note`, `.p-seg` (le segmenté de
 Discord, recopié faute de composant commun), `.p-out` (une sortie de
-commande).
+commande), `.p-rev` / `.p-files` / `.p-file` (la revue du dry-run, une ligne
+par fichier ; étroit, la ligne se replie), `.p-raw` (sa sortie brute,
+repliable), `.p-plan` (l'annonce de « Promouvoir »).
 
 ## Publication — croquis
 
