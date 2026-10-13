@@ -98,7 +98,16 @@
       `extract:<cible>`, « tags », bannières, coupons), rafraîchies au retour
       sur l'accueil et à la fin d'un travail de Patch ; (3) « Promouvoir »
       annonce ce qu'il va écrire (fichiers et comptes), pas seulement
-      « --apply ».
+      « --apply ». Constaté le 13/10 en situation : le dry-run disait
+      « 3 monstres, 2 skills de monstres », Extraction › Monstres disait zéro
+      — les trois (`55300006`, `55300018`, `55300019`, emplacements recyclés
+      en « Doppelakeus ») sont HORS périmètre du site, filtrés par
+      `actionableDiff`, et `monster-skills.json` n'a aucune cible dans
+      Extraction. À régler dans le même lot : (4) la vue d'ensemble dit « +n
+      hors site » sur la cible Monstres (bascule pour les voir, sans les
+      compter dans la pastille), et une cible « Skills de monstres » en
+      lecture, ou au moins la ligne du dry-run qui dit « hors périmètre du
+      site, aucune action ».
 - [ ] **« Extraction » — contrôles à l'écran (lot F20)** : le banc ne
       clique pas, aucun geste réel n'a été joué (le dépôt du jour n'a qu'un
       perso nouveau sans nom, `2400015`, et aucun écart). Relancer quick
