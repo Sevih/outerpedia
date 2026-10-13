@@ -181,11 +181,10 @@
       effacer une ligne anglaise, lire le compteur ambre, « Enregistrer »
       (A47) ; le picker d'effets de Monstres à 28 px (A42) ; « 3★ » dans
       les vignettes de palier (A46). À décider : (1) A43 — TRANCHÉ le 13/10 : PvP = 3★ natifs seulement,
-      93 éligibles ; reste un `hint` « parmi les persos de base 3★ » sur
-      la ligne (un lot A, à grouper). (2) A47 — TRANCHÉ le 13/10 : une
-      ligne retouchée est une ligne nouvelle, on garde. (3) A45 — « Autres »
-      est dans le select de l'Extraction et les lignes de l'admin, pas dans
-      l'en-tête de la fiche monstre (vide pour un monstre sans mode titré).
+      93 éligibles ; le `hint` de la ligne : FAIT (A49). (2) A47 — TRANCHÉ le 13/10 : une
+      ligne retouchée est une ligne nouvelle, on garde. (3) A45 — FAIT
+      (A49) : l'en-tête de la fiche monstre dit « Autres », comme le select
+      de l'Extraction et les lignes de l'admin.
       (4) A40 — `/api/extractor` lance une revue monster non mémoïsée
       (0,2 s) pour « +n hors site » ; à mémoïser sur l'empreinte comme
       `memoizedBuckets`. (5) A39 — le dry-run émet `quick:changed` sans rien
@@ -193,9 +192,11 @@
       pas de pastille « Patch » pour un patch en attente (bloc `game`, hors
       inbox). (6) A41 — `tabs/character.js` garde sa propre lecture du
       roster, `heroRoster()` de `lib.js` pourrait servir les deux. (7) A42 —
-      `sprite` / `effectSprite` encore servis par les états sans lecteur.
-      (8) A44 — un guide inconnu AU CHARGEMENT laisse `wanted` posé :
-      section blanche (défaut antérieur). → LOTS A49 (1, 3, 7, 8) et A50 (4, 5, 6), rédigés le 13/10.
+      FAIT (A49) : `sprite` / `effectSprite` retirés des états de Monstres
+      et d'Extraction ; restent servis sans lecteur ceux d'Effets et du kit
+      de la Fiche perso.
+      (8) A44 — FAIT (A49) : un guide inconnu au chargement ouvre la vue
+      d'ensemble. → reste le LOT A50 (4, 5, 6), rédigé le 13/10.
 - [ ] **« Événements » — contrôles à l'écran (lot F23)** : le banc ne
       clique pas, aucun enregistrement réel n'a été joué, `/api/translate`
       jamais appelé avec des clés, `POST /api/events` jamais appelé (les

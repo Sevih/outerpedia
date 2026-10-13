@@ -146,7 +146,7 @@ import {
   type MonsterKitDisk,
   type MonsterKitSections,
 } from '@/lib/admin/monster-kit';
-import { gameModeGroups, modeKeysOf, modeOptionsOf } from '@/lib/admin/game-modes';
+import { gameModeGroups, modeKeysOf, modeLabelsOf, modeOptionsOf } from '@/lib/admin/game-modes';
 import {
   applyKitCuration,
   loadKitCurationSections,
@@ -2521,6 +2521,7 @@ export function characterCoverage(
         'fiche',
         (id) => Boolean(curated[id]?.rankPvp),
         roster.filter((c) => pvpEligible.has(c.id)),
+        'parmi les persos de base 3★ (règle du site : pas de rang PvP pour un 1★ ou 2★ natif)',
       ),
       field('gear', 'Gear reco', 'gear', (id) => Boolean(gear[id]?.length)),
       field(
@@ -4555,7 +4556,10 @@ export interface MonsterRosterRow {
   type: string;
   /** L'adresse de son icône (`img.monster`). */
   icon: string;
-  /** Où on l'affronte : les titres de ses modes de jeu (`modes`), deux au plus puis « +n » ; vide : sans mode. */
+  /**
+   * Où on l'affronte : les titres de ses modes de jeu (`modeLabelsOf` — « Autres »
+   * pour un mode qu'aucun groupe ne range), deux au plus puis « +n » ; vide : aucun spawn.
+   */
   place: string;
   /** Les modes de jeu de ses spawns : des clés de `modeGroups`, dans leur ordre ; vide : sans mode. */
   modes: string[];
@@ -4699,18 +4703,16 @@ function monstersIndex(disk: MonstersDisk): MonstersIndex {
   const monsters = disk.monsters();
   const dungeons = disk.dungeons();
   const groups = gameModeGroups(dungeons, DEFAULT_LANG);
-  const titles = new Map(groups.map((g) => [g.key, g.label]));
   const guides = disk.guideIds(monsters);
   const row = (m: Monster): MonsterRosterRow => {
     const { modes, zones } = monsterPlaces(m, dungeons);
-    const keys = modeKeysOf(groups, modes);
     return {
       id: m.id,
       name: m.name.en || NO_NAME,
       type: m.type,
       icon: img.monster(m.icon),
-      place: modesPlace(keys.flatMap((key) => titles.get(key) ?? [])),
-      modes: keys,
+      place: modesPlace(modeLabelsOf(groups, modes)),
+      modes: modeKeysOf(groups, modes),
       zones: zones.slice(0, 2),
       guides: guides.get(m.id) ?? [],
     };
@@ -4786,8 +4788,8 @@ const SHARED_NAMES = 5;
  * compris), les cartes de son kit et leurs chips (`monsterKitCards` sur le
  * COMMITTÉ — ce que le site montre), ce que le disque en cure, restreint à ce
  * kit (`disk` : `chipOwner`, `chipHide`, `chipAdd` — renvoyé tel quel à
- * l'enregistrement, c'est son `was`), le catalogue des effets et le dossier de
- * leurs icônes, où mènent les liens de guide (`guideBase`), et `shared` : par
+ * l'enregistrement, c'est son `was`), le catalogue des effets, où mènent les
+ * liens de guide (`guideBase`), et `shared` : par
  * skill que d'AUTRES monstres portent aussi, leur nombre (lui compris) et
  * jusqu'à cinq de leurs noms — masquer ou ajouter sur un tel skill vaut pour
  * tous. Lu du disque à chaque appel. `error` : le monstre n'est pas du committé.
@@ -4828,7 +4830,6 @@ export function monsterSheetState(id: string, disk: MonstersDisk = MONSTERS_DEPS
       cards.map((c) => c.id),
     ),
     catalog: disk.catalog(),
-    sprite: EFFECT_SPRITE,
     shared,
     guideBase: `${process.env.ADMIN_BASE || ADMIN_BASE_DEFAULT}/${DEFAULT_LANG}/guides`,
   };
@@ -8124,8 +8125,6 @@ export async function extractorEntity(
   const common = {
     ...base,
     tables: true as const,
-    /** Le dossier des icônes d'effets sous `imgBase`, pour les chips. */
-    effectSprite: EFFECT_SPRITE,
     /** Le statut de revue de l'entité : added, changed, removed, same. */
     review: review.status,
     fields: review.fields.length,

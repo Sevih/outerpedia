@@ -722,8 +722,13 @@ describe('characterCoverage — le récap de la curation, stores factices', () =
       ['release', 'Date de sortie', 'extractor/character'],
       ['videos', 'Vidéos', 'fiche'],
     ]);
-    // Un seul libellé a besoin d'un survol : celui qui compte deux sources.
+    // Deux libellés ont besoin d'un survol : celui dont le dénominateur n'est
+    // pas le roster sans que rien ne le dise, et celui qui compte deux sources.
     expect(out.fields.filter((f) => f.hint).map((f) => [f.key, f.hint])).toEqual([
+      [
+        'rankPvp',
+        'parmi les persos de base 3★ (règle du site : pas de rang PvP pour un 1★ ou 2★ natif)',
+      ],
       ['release', 'curée ou dérivée des notes de MAJ'],
     ]);
   });
@@ -7210,15 +7215,16 @@ describe('monstersRoster, monsterSheetState, saveMonsterKit — l’onglet « Mo
       ['mob', ['mode-inconnu'], ['Stage 1']],
     ]);
     // `place` : les titres de ces groupes, pas ceux des slugs — les deux tours
-    // n'en font qu'un, le skirmish et le donjon retiré n'en ont pas.
+    // n'en font qu'un ; le skirmish et le donjon retiré, qu'aucun groupe ne
+    // range, ferment la ligne sous « Autres » (`modeLabelsOf`, comme l'admin).
     expect(out.roster.map((r) => r.place)).toEqual([
-      'Story · Joint Challenge',
-      'Skyward Tower',
+      'Story · Joint Challenge +1',
+      'Skyward Tower · Autres',
       'mode_inconnu',
     ]);
   });
 
-  it('roster : `place` nomme deux modes de jeu au plus, puis « +n » ; sans mode de jeu, rien', () => {
+  it('roster : `place` nomme deux modes de jeu au plus, puis « +n » ; un mode hors groupes, « Autres » ; sans spawn, rien', () => {
     const { fake } = deps();
     const at = (...ids: string[]) => ids.map((id) => ({ dungeon: id })) as Monster['spawns'];
     const out = monstersRoster({
@@ -7227,6 +7233,7 @@ describe('monstersRoster, monsterSheetState, saveMonsterKit — l’onglet « Mo
         [BOSS.id]: { ...BOSS, spawns: at('chase', 't1', 'jc', 'hard') },
         twin: { ...TWIN, spawns: at('jc', 't1', 'hard') },
         mob: { ...MOB, spawns: at('gate') },
+        'hors-committe': named('hors-committe', 'Zzz Add'),
       }),
       dungeons: () => ({
         t1: dungeon('tower', '1F'),
@@ -7239,10 +7246,13 @@ describe('monstersRoster, monsterSheetState, saveMonsterKit — l’onglet « Mo
     expect(out.roster.map((r) => [r.id, r.place, r.modes.length])).toEqual([
       [BOSS.id, 'Story · Skyward Tower +2', 4],
       ['twin', 'Story · Skyward Tower +1', 3],
-      // Le seul skirmish, que la liste écarte : pas de mode, ses zones restent.
-      ['mob', '', 0],
+      // Aucun spawn : ni mode ni « Autres ».
+      ['hors-committe', '', 0],
+      // Le seul skirmish (`monad_battle_1`), que la liste écarte : pas de clé
+      // de mode, mais « Autres » — le mot du select de l'Extraction et de l'admin.
+      ['mob', 'Autres', 0],
     ]);
-    expect(out.roster[2].zones).toEqual(['Gate']);
+    expect(out.roster[3].zones).toEqual(['Gate']);
   });
 
   it('roster : gardé tant que rien ne bouge (`stamp`), recalculé ensuite', () => {
@@ -7280,7 +7290,8 @@ describe('monstersRoster, monsterSheetState, saveMonsterKit — l’onglet « Mo
     expect(state.kit.chips).toEqual(KIT.chips);
     expect(state.disk).toEqual(none);
     expect(state.catalog).toBe(CATALOG);
-    expect(state.sprite).toBe('images/ui/effect');
+    // Le dossier des icônes d'effets n'est plus servi : `effectTile` le porte.
+    expect(state).not.toHaveProperty('sprite');
     expect(state.guideBase).toBe(`${process.env.ADMIN_BASE || ADMIN_BASE_DEFAULT}/en/guides`);
   });
 
@@ -10384,8 +10395,9 @@ describe('Extraction — extractorOverview, extractorTarget, acceptExtraction, i
       diff: [],
       was: 'sig:character:v1',
       links: { sheet: 'character/2000003' },
-      effectSprite: 'images/ui/effect',
     });
+    // Le dossier des icônes d'effets n'est plus servi : `effectTile` le porte.
+    expect(out).not.toHaveProperty('effectSprite');
     const c = sheetOf(out).character;
     if (!c) throw new Error('pas de perso');
     expect(c).toMatchObject({

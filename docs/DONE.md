@@ -7,6 +7,90 @@
 
 ## 2026-10-13
 
+- **quick, suites de la relecture A38 → A47 (1/2) : le survol du Rang PvP,
+  « Autres » dans l'en-tête d'un monstre, `sprite` / `effectSprite` retirés
+  des états, un guide inconnu au chargement n'est plus attendu (lot A49)** —
+  quatre restes de la relecture du 13/10, un commit.
+  (1) LE RÉCAP. La ligne « Rang PvP » de `characterCoverage`
+  (`scripts/quick/actions.ts`) porte un `hint` : « parmi les persos de base
+  3★ (règle du site : pas de rang PvP pour un 1★ ou 2★ natif) ». La page le
+  pose déjà en `title` du libellé (A43, `tabs/character.js`, non touché) : le
+  dénominateur 93, plus court que le roster, se lit au survol.
+  (2) L'EN-TÊTE D'UN MONSTRE. `place` de `MonsterRosterRow` passe par
+  `modeLabelsOf` de `src/lib/admin/game-modes.ts` au lieu des titres des clés
+  de `modeKeysOf` : un mode qu'aucun groupe ne range ferme la ligne sous
+  « Autres », le mot du select de l'Extraction et du `meta` de l'admin. La
+  table `titles` sort de `monstersIndex` ; `modes` reste les clés
+  (`modeKeysOf`), que le picker filtre. Sur le roster servi (2 449 monstres) :
+  204 passent de rien à « Autres » (tous du seul « Monad Gate: Skirmish »),
+  136 restent vides (aucun spawn), 2 109 ne bougent pas ; aucun ne mêle
+  aujourd'hui un mode titré et « Autres », cas tenu par le test. « Autres »
+  compte dans les deux titres et dans « +n », comme un titre.
+  (3) LES CHAMPS SANS LECTEUR. `sprite` sort de `monsterSheetState` et
+  `effectSprite` d'`extractorEntity` (aucun type déclaré ne les portait : les
+  deux retours sont inférés). Lecteurs cherchés dans `scripts/quick/ui/` :
+  `effectSprite`, aucun ; `.sprite`, un seul, `tabs/items.js` (`it.sprite`,
+  le dossier `images/items` de l'état d'Items — un autre champ, laissé).
+  (4) GUIDES. Un guide que le serveur ne connaît pas, demandé au chargement
+  (`#guides/boss/nexistepas`), laissait `wanted` posé : `reload` ne faisait
+  qu'écrire au journal, la section restait blanche et `open()` attendait « le
+  guide du hash » à chaque retour. `init` lit maintenant par `load()` et
+  remet son refus à `missed(to, e)`, que `follow()` partage (c'était le corps
+  de son `catch`) : `wanted` et `wantedSub` vidés, le journal, le guide ouvert
+  gardé avec son adresse, sinon la vue d'ensemble sur la catégorie demandée.
+  À RELIRE, tranché sur la forme. (a) Le journal dit « Guide inconnu :
+  `<cat>/<slug>` » quand c'est le mot du serveur (`guide inconnu : …`), et
+  garde « Guide illisible : » suivi de la cause sinon : le même 404 répond
+  aussi « contenu en code » et « données illisibles », où « inconnu »
+  mentirait. Majuscule, comme les autres lignes du journal. (b) La venue par
+  un chemin (A44) dit donc la même ligne qu'au chargement, au lieu de
+  « Guide illisible : » et l'erreur entière : son assertion passe de
+  `toContain('Guide illisible')` à la ligne exacte. (c) « Sinon la première »
+  est la règle d'`openCat`, non touchée : la catégorie demandée si elle
+  s'ouvre, sinon la dernière montrée, sinon la première éditable.
+  `STYLE.md` suit (le récap, l'en-tête de Monstres, le hash de Guides).
+  TESTS. `actions.test.ts` : les deux `hint` du récap ; `monad_battle_1` seul
+  donne `place: 'Autres'` et aucune clé, un monstre sans spawn rien, « Skyward
+  Tower · Autres » et « Story · Joint Challenge +1 » quand un mode écarté
+  s'ajoute à des modes titrés ; les deux états affirmés SANS `sprite` ni
+  `effectSprite`. `ui-serve.test.ts` : le `title` de « Rang PvP » ; les faux
+  états de Monstres et d'Extraction perdent le champ, les tuiles (22 et 28 px)
+  toujours rendues ; un test Guides, rouge sur le `guides.js` d'avant —
+  chargement sur `#guides/boss/nexistepas` (la ligne au journal, la vue
+  d'ensemble sur la première catégorie, l'adresse réécrite, un retour sur
+  l'onglet qui relit la vue d'ensemble, puis
+  `go('guides/joint-challenge/annihilator')` qui ouvre le guide), une
+  catégorie connue gardée devant la dernière montrée, un sous-onglet demandé
+  qui ne traîne pas, un général au contenu en code qui garde sa cause. Le banc
+  de Guides gagne `journal`, chaque ligne montrée dans l'ordre : le Journal du
+  site, importé par Guides et sans état dans ce faux, y écrit son refus après
+  coup.
+  VÉRIFICATION. `pnpm typecheck` (« tsc --noEmit -p scripts/tsconfig.json »,
+  code 0), `pnpm lint` (« $ eslint », code 0), `pnpm test` (« Test Files 223
+  passed (223) · Tests 3832 passed (3832) »),
+  `NODE_ENV=development pnpm exec vitest run scripts/quick src/lib/admin`
+  (« Test Files 62 passed (62) · Tests 1750 passed (1750) »). Banc : quick
+  isolé :4862, clés vidées, GET seuls, arrêté ensuite.
+  `--tabs character --hash character` : le récap comme avant, « Rang PvP
+  92 / 93 » — le `title` ne se voit pas à l'image, il est lu de
+  `/api/character/coverage` (le `hint` sur `rankPvp` et `release`, aucun
+  autre). `--tabs guides --hash guides/boss/nexistepas` : « Guide inconnu :
+  boss/nexistepas » en rouge au journal, la vue d'ensemble sur General Guides.
+  En plus, `--tabs monsters --hash monsters/74003092` : « boss · 74003092 ·
+  Autres · Monad Gate: Skirmish ». Par `curl` : `/api/monsters/state` et
+  `/api/extractor/entity?target=character&key=2000055` sans les deux champs.
+  LAISSÉ. (i) Le picker de Monstres range toujours ces 204 monstres sous la
+  pastille « sans mode » (elle lit `modes`, les clés) quand leur en-tête dit
+  « Autres » : deux mots pour le même cas, à aligner si Sevih le veut.
+  (ii) `sprite` reste servi sans lecteur par `effectsState` et par le kit de
+  la Fiche perso (`SheetKit`) : le lot ne nommait que Monstres et Extraction.
+  (iii) « ＋ version » pose `wanted` avant de relire : si cette relecture
+  échoue après une création réussie, il reste posé et le guide n'est plus
+  relu aux retours sur l'onglet — même famille, pas au chargement, non
+  touché. (iv) Le survol du Rang PvP et un vrai rechargement sur un hash
+  périmé restent à voir à l'écran. Items (1), (3), (7), (8) de « Relecture
+  A38 → A47 » marqués FAIT dans `docs/TODO.md`.
+
 - **quick, Vidéos : une VOD Twitch ou une vidéo Bilibili s'ajoute depuis la
   fiche et les guides, par l'adder partagé — titre saisi, aucun appel réseau
   (lot A48)** — suite de la relecture B48 (12/10), décision levée par Fable

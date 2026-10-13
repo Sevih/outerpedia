@@ -2835,6 +2835,31 @@ function asked() {
 }
 
 /**
+ * Le guide que le hash demandait ne s'est pas lu : plus rien n'est attendu
+ * (`open()` ne l'attend plus à chaque retour), le journal le dit — « inconnu »
+ * quand c'est le mot du serveur (`guide inconnu : …`, que `getJson` rapporte),
+ * « illisible » et la cause sinon : un contenu en code, des données
+ * illisibles, un serveur qui ne répond pas. Le guide ouvert reste et
+ * l'adresse le redit ; sans guide ouvert, la vue d'ensemble, sur la catégorie
+ * demandée si elle s'ouvre (`openCat` : sinon la dernière montrée, sinon la
+ * première).
+ */
+function missed(to, e) {
+  wanted = wantedSub = null;
+  log(
+    [
+      String(e).includes('guide inconnu')
+        ? `Guide inconnu : ${to.cat}/${to.slug}`
+        : `Guide illisible : ${e}`,
+    ],
+    false,
+  );
+  if (sheet) return writeHash();
+  cat = to.cat;
+  return reloadOverview();
+}
+
+/**
  * Ce que le hash demande, la page déjà chargée (`sections.go('guides/…')`,
  * d'une autre section ou d'ici) : ce guide, sur sa version et son sous-onglet,
  * ou la vue d'ensemble sur cette catégorie. Le guide ouvert ne se quitte avec
@@ -2870,15 +2895,7 @@ function follow(to) {
   }
   wanted = { cat: to.cat, slug: to.slug, version: to.version };
   wantedSub = to.sub ?? null;
-  return load(to.cat, to.slug).catch((e) => {
-    // Illisible (un guide que le serveur ne connaît pas) : le guide ouvert
-    // reste, sinon la vue d'ensemble, sur la catégorie demandée.
-    wanted = wantedSub = null;
-    log([`Guide illisible : ${e}`], false);
-    if (sheet) return writeHash();
-    cat = to.cat;
-    return reloadOverview();
-  });
+  return load(to.cat, to.slug).catch((e) => missed(to, e));
 }
 
 sections.register('guides', {
@@ -2903,7 +2920,8 @@ sections.register('guides', {
       if (state.imgBase === drawnBase) return;
       render();
     });
-    if (wanted) return reload(wanted.cat, wanted.slug);
+    // Le guide du hash : inconnu du serveur, la section ne reste pas blanche.
+    if (wanted) return load(to.cat, to.slug).catch((e) => missed(to, e));
     return undefined;
   },
   // Chaque venue à l'écran : ce que le hash demande (une venue par un chemin,

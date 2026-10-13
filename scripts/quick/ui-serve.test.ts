@@ -3387,6 +3387,14 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
         fields: [
           { key: 'rank', label: 'Rang PvE', sub: 'fiche', done: 3, missing: [] },
           {
+            key: 'rankPvp',
+            label: 'Rang PvP',
+            sub: 'fiche',
+            hint: 'parmi les persos de base 3★ (règle du site : pas de rang PvP pour un 1★ ou 2★ natif)',
+            done: 2,
+            missing: [],
+          },
+          {
             key: 'release',
             label: 'Date de sortie',
             sub: 'extractor/character',
@@ -3401,6 +3409,10 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
       page.all('#c-panel .c-cov-row > strong').map((s) => [s.textContent, s.getAttribute('title')]),
     ).toEqual([
       ['Rang PvE', null],
+      [
+        'Rang PvP',
+        'parmi les persos de base 3★ (règle du site : pas de rang PvP pour un 1★ ou 2★ natif)',
+      ],
       ['Date de sortie', 'curée ou dérivée des notes de MAJ'],
     ]);
   });
@@ -6617,7 +6629,6 @@ describe('Monstres — la page, sur le vrai markup', () => {
             JSON.stringify(mine ? disk : { chipOwner: {}, chipHide: {}, chipAdd: {} }),
           ),
           catalog: CATALOG,
-          sprite: 'images/ui/effect',
           shared: mine ? { '113651': { count: 3, names: ['Annihilator', 'Prototype'] } } : {},
           guideBase: 'https://outerpedia.local/en/guides',
         });
@@ -13665,6 +13676,14 @@ describe('Guides — la page, sur le vrai markup', () => {
     vi.stubGlobal('Event', window.Event);
     if (opts.lastCat) window.localStorage.setItem('quick.guides.cat', opts.lastCat);
     vi.stubGlobal('localStorage', window.localStorage);
+    // Chaque ligne que le journal a montrée, dans l'ordre : ici le Journal du
+    // site (importé par Guides, sans état dans ce faux) y écrit son refus au
+    // démarrage, APRÈS une ligne que Guides aurait posée au chargement.
+    const journal: string[] = [];
+    new window.MutationObserver((records) => {
+      for (const r of records)
+        for (const n of r.addedNodes) if (n.textContent) journal.push(n.textContent);
+    }).observe(document.getElementById('journal-last')!, { childList: true });
 
     const lib = (await import(/* @vite-ignore */ resolve(UI, 'lib.js'))) as {
       sections: { start: () => void; go: (path: string) => void };
@@ -13699,6 +13718,7 @@ describe('Guides — la page, sur le vrai markup', () => {
       calls,
       confirm,
       data,
+      journal,
       settle,
       window,
       type,
@@ -14392,7 +14412,7 @@ describe('Guides — la page, sur le vrai markup', () => {
     expect(page.all('#gd-tabs [aria-selected="true"]')[0].dataset.sub).toBe('event');
     // Un guide que le serveur ne connaît pas : le journal le dit, le guide ouvert reste, l'adresse le redit.
     await page.go('guides/joint-challenge/ghost');
-    expect(page.el('journal-last').textContent).toContain('Guide illisible');
+    expect(page.el('journal-last').textContent).toBe('Guide inconnu : joint-challenge/ghost');
     expect(page.el('gd-guide').hidden).toBe(false);
     expect(page.window.location.hash).toBe('#guides/general-guides/shop-purchase-priorities');
     // Une catégorie seule : la vue d'ensemble, sur elle.
@@ -14406,6 +14426,57 @@ describe('Guides — la page, sur le vrai markup', () => {
     expect(page.shown()).toEqual(['special-request']);
     expect(page.window.location.hash).toBe('#guides/special-request');
     expect(page.confirm).not.toHaveBeenCalled();
+  });
+
+  it('un guide inconnu demandé AU CHARGEMENT (`#guides/boss/nexistepas`) : le journal le dit, la vue d’ensemble s’ouvre, plus rien n’est attendu', async () => {
+    const page = await guides({ hash: '#guides/boss/nexistepas' });
+    expect(page.states()).toBe(1);
+    expect(page.journal).toContain('Guide inconnu : boss/nexistepas');
+    // La section n'est pas blanche : la vue d'ensemble, sur la première
+    // catégorie (le faux n'a pas de `boss`), et l'adresse ne redit plus le guide.
+    expect(page.el('gd-overview').hidden).toBe(false);
+    expect(page.el('gd-guide').hidden).toBe(true);
+    expect(page.shown()).toEqual(['general-guides']);
+    expect(page.window.location.hash).toBe('#guides/general-guides');
+    // Un retour sur l'onglet n'attend plus « le guide du hash » : la vue d'ensemble, relue.
+    page.all('#tabs [data-tab="comics"]')[0].click();
+    const overviews = () => page.calls.filter((c) => c.path === '/api/guides').length;
+    const before = overviews();
+    await page.come();
+    expect(overviews()).toBe(before + 1);
+    expect(page.shown()).toEqual(['general-guides']);
+    // Et un chemin ouvre son guide.
+    await page.go('guides/joint-challenge/annihilator');
+    expect(page.el('gd-guide').hidden).toBe(false);
+    expect(page.shownGuide()).toEqual([
+      'Annihilator Joint Challenge Guide',
+      '2026-10récente',
+      'meta',
+    ]);
+    expect(page.window.location.hash).toBe(`${JC}/2026-10`);
+    expect(page.confirm).not.toHaveBeenCalled();
+
+    // La catégorie existe, pas le guide : la vue d'ensemble sur elle, pas sur la dernière montrée.
+    const known = await guides({
+      hash: '#guides/special-request/ghost',
+      lastCat: 'joint-challenge',
+    });
+    expect(known.journal).toContain('Guide inconnu : special-request/ghost');
+    expect(known.shown()).toEqual(['special-request']);
+    expect(known.window.location.hash).toBe('#guides/special-request');
+    // Un sous-onglet demandé avec ce guide ne traîne pas jusqu'au suivant.
+    const sub = await guides({ hash: '#guides/special-request/ghost/tips' });
+    await sub.go('guides/special-request/amadeus');
+    expect(sub.shownGuide()).toEqual(['Amadeus Special Request Guide', undefined, 'meta']);
+
+    // Un autre refus que « guide inconnu » (ici un général au contenu en code) garde sa cause au journal.
+    const code = await guides({ hash: '#guides/general-guides/beginner-faq' });
+    expect(code.journal.filter((l) => l.startsWith('Guide'))).toEqual([
+      expect.stringContaining('Guide illisible : Error: /api/guides/general?slug=beginner-faq'),
+    ]);
+    expect(code.journal.join('\n')).toContain('guide général non éditable');
+    expect(code.el('gd-overview').hidden).toBe(false);
+    expect(code.shown()).toEqual(['general-guides']);
   });
 
   it('une venue par un chemin sur un guide qui porte des changements : il ne se quitte que sur confirmation, le hash n’emporte rien', async () => {
@@ -15584,7 +15655,6 @@ describe('Extraction — la page, sur le vrai markup', () => {
     file: TARGETS.find((t) => t.id === target)?.file ?? 'equipment/weapon.json',
     key,
     tables: true,
-    effectSprite: 'images/ui/effect',
     review,
     fields,
     diff: fields ? ENTITIES[0].diff : [],
