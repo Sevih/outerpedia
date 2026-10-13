@@ -195,7 +195,7 @@
       roster, `heroRoster()` de `lib.js` pourrait servir les deux. (7) A42 —
       `sprite` / `effectSprite` encore servis par les états sans lecteur.
       (8) A44 — un guide inconnu AU CHARGEMENT laisse `wanted` posé :
-      section blanche (défaut antérieur).
+      section blanche (défaut antérieur). → LOTS A49 (1, 3, 7, 8) et A50 (4, 5, 6), rédigés le 13/10.
 - [ ] **« Événements » — contrôles à l'écran (lot F23)** : le banc ne
       clique pas, aucun enregistrement réel n'a été joué, `/api/translate`
       jamais appelé avec des clés, `POST /api/events` jamais appelé (les
@@ -720,7 +720,7 @@
       la carte de `src/app/admin/page.dev.tsx` et ses routes
       `api/admin/patch/*` — quand le cycle ci-dessus aura été joué une fois
       dans quick ; `patch-runner.ts` et `patch-commands.ts` restent (quick
-      les importe).
+      les importe). → emporté par le retrait de l'admin, LOTS C14 (préparer) puis C15 (supprimer), rédigés le 13/10.
 - [ ] **Retouches mineures des monstres et de l'équipement (lot B27)** : au
       premier patch qui en apporte, le contrôle se joue désormais dans quick,
       section « Extraction » (point 3 de « contrôles à l'écran (lot F20) »
