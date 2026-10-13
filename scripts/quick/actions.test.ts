@@ -7050,8 +7050,9 @@ describe('monstersRoster, monsterSheetState, saveMonsterKit — l’onglet « Mo
         row(BOSS, [GUIDE, GUIDE2]),
         row(TWIN, [GUIDE]),
         // Du site, sans guide : après les guides, quel que soit son nom. Son
-        // libellé : « mode · stage » de ses spawns (un mode sans titre garde son slug).
-        row(MOB, [], 'mode_inconnu · Stage 1', ['mode-inconnu'], ['Stage 1']),
+        // `place` : le titre de son mode de jeu (sans titre du jeu, le groupe
+        // porte son slug) ; le stage est dans `zones`.
+        row(MOB, [], 'mode_inconnu', ['mode-inconnu'], ['Stage 1']),
       ],
       // `site` compte les deux ; un id que le committé n'a pas n'a pas de ligne.
       counts: { guides: 2, site: 3 },
@@ -7097,6 +7098,40 @@ describe('monstersRoster, monsterSheetState, saveMonsterKit — l’onglet « Mo
       ['twin', ['skyward-tower'], ['2F', '1F']],
       ['mob', ['mode-inconnu'], ['Stage 1']],
     ]);
+    // `place` : les titres de ces groupes, pas ceux des slugs — les deux tours
+    // n'en font qu'un, le skirmish et le donjon retiré n'en ont pas.
+    expect(out.roster.map((r) => r.place)).toEqual([
+      'Story · Joint Challenge',
+      'Skyward Tower',
+      'mode_inconnu',
+    ]);
+  });
+
+  it('roster : `place` nomme deux modes de jeu au plus, puis « +n » ; sans mode de jeu, rien', () => {
+    const { fake } = deps();
+    const at = (...ids: string[]) => ids.map((id) => ({ dungeon: id })) as Monster['spawns'];
+    const out = monstersRoster({
+      ...fake,
+      monsters: () => ({
+        [BOSS.id]: { ...BOSS, spawns: at('chase', 't1', 'jc', 'hard') },
+        twin: { ...TWIN, spawns: at('jc', 't1', 'hard') },
+        mob: { ...MOB, spawns: at('gate') },
+      }),
+      dungeons: () => ({
+        t1: dungeon('tower', '1F'),
+        gate: dungeon('monad_battle_1', 'Gate'),
+        chase: dungeon('irregular_chase', 'Chase'),
+        jc: dungeon('event_boss', 'Defeat'),
+        hard: dungeon('normal_hard', 'Stage 2'),
+      }),
+    });
+    expect(out.roster.map((r) => [r.id, r.place, r.modes.length])).toEqual([
+      [BOSS.id, 'Story · Skyward Tower +2', 4],
+      ['twin', 'Story · Skyward Tower +1', 3],
+      // Le seul skirmish, que la liste écarte : pas de mode, ses zones restent.
+      ['mob', '', 0],
+    ]);
+    expect(out.roster[2].zones).toEqual(['Gate']);
   });
 
   it('roster : gardé tant que rien ne bouge (`stamp`), recalculé ensuite', () => {
@@ -9325,7 +9360,12 @@ describe('Extraction — extractorOverview, extractorTarget, acceptExtraction, i
   const ENCOUNTERS = {
     modes: { joint_challenge: { en: 'Joint Challenge' } },
     dungeons: {
-      d1: { mode: 'joint_challenge', name: { en: 'Annihilator VH' }, adv: { atk: 100 } },
+      d1: {
+        mode: 'joint_challenge',
+        name: { en: 'Annihilator VH' },
+        adv: { atk: 100 },
+        monsters: [{ id: '400101' }],
+      },
     },
     rankOptions: {},
     bossQuirkMods: {},
@@ -10056,6 +10096,60 @@ describe('Extraction — extractorOverview, extractorTarget, acceptExtraction, i
     // La cible monster porte le select d'« Intégrer un mode ».
     expect(monster.modes).toEqual([{ value: 'joint_challenge', label: 'Joint Challenge' }]);
     expect((await target('character')).modes).toBeUndefined();
+  });
+
+  it('le select d’« Intégrer un mode » : une option par slug où un monstre frais spawne, dans l’ordre et sous les titres de `gameModeGroups`', async () => {
+    const { fake } = deps();
+    const at = (...ids: string[]) => ids.map((dungeon) => ({ dungeon, level: 1 }));
+    const dungeon = (mode: string) => ({ mode, name: { en: mode }, monsters: [{ id: 'a' }] });
+    const t = await extractorTarget(
+      'monster',
+      {},
+      {
+        ...fake,
+        fresh: async () => ({
+          a: { ...MON_BASE, id: 'a', name: { en: 'A' }, spawns: at('gate', 't2', 'jc') },
+          b: { ...MON_BASE, id: 'b', name: { en: 'B' }, spawns: at('t1', 'hard', 'r1', 'nope') },
+        }),
+        encounters: async () =>
+          ({
+            modes: {
+              tower: { en: 'Skyward Tower' },
+              tower_hard: { en: 'Skyward Tower' },
+              event_boss: { en: 'Joint Challenge' },
+              raid_1: { en: 'Special Request: Ecology Study' },
+              irregular_chase: { en: 'Pursuit Operation' },
+              monad_battle_1: { en: 'Monad Gate' },
+            },
+            modeFamilies: {
+              story: { en: 'Story' },
+              special_request: { en: 'Special Request' },
+            },
+            dungeons: {
+              t1: dungeon('tower'),
+              gate: dungeon('monad_battle_1'),
+              // Un mode où aucun monstre frais ne spawne : pas d'option.
+              chase: dungeon('irregular_chase'),
+              jc: dungeon('event_boss'),
+              t2: dungeon('tower_hard'),
+              r1: dungeon('raid_1'),
+              hard: dungeon('normal_hard'),
+            },
+          }) as unknown as EncountersData,
+      },
+    );
+    if ('error' in t || !t.tables) throw new Error('error' in t ? t.error : 'sans tables');
+    // Story en tête, puis la première apparition au fil des donjons ; le titre
+    // de la famille (« Special Request »), pas celui du slug ; les deux tours
+    // sous le même titre, suffixé ; le skirmish, hors groupes, sous « Autres ».
+    expect(t.modes).toEqual([
+      { value: 'normal_hard', label: 'Story' },
+      { value: 'tower', label: 'Skyward Tower (tower)' },
+      { value: 'tower_hard', label: 'Skyward Tower (tower_hard)' },
+      { value: 'event_boss', label: 'Joint Challenge' },
+      { value: 'raid_1', label: 'Special Request' },
+      { value: 'monad_battle_1', label: 'Autres (monad_battle_1)' },
+    ]);
   });
 
   it('la fiche d’un perso NOUVEAU : le frais, ses cartes aux sprites du jeu, le plan, le lien vers la Fiche perso', async () => {

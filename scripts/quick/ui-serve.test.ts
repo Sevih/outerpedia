@@ -6201,7 +6201,7 @@ describe('Monstres — la page, sur le vrai markup', () => {
       name: 'Annihilator',
       type: 'area_boss',
       icon: '/images/ui/boss/MT_4014002.webp',
-      place: 'Joint Challenge · Defeat the Annihilator Very Hard',
+      place: 'Joint Challenge',
       modes: ['joint-challenge'],
       zones: ['Defeat the Annihilator Very Hard'],
       guides: [JC, S3],
@@ -6211,7 +6211,7 @@ describe('Monstres — la page, sur le vrai markup', () => {
       name: 'Annihilator',
       type: 'boss',
       icon: 'https://cdn.test/annihilator.webp',
-      place: 'Story Hard, Joint Challenge · S3 · Ep1 · Stage 10, Defeat the Annihilator Hard',
+      place: 'Story · Joint Challenge',
       modes: ['story', 'joint-challenge'],
       zones: ['S3 · Ep1 · Stage 10', 'Defeat the Annihilator Hard'],
       guides: [JC],
@@ -6231,12 +6231,28 @@ describe('Monstres — la page, sur le vrai markup', () => {
       name: 'Goblin Scout',
       type: 'monster',
       icon: '/images/ui/boss/MT_4004100.webp',
-      place: 'Skyward Tower · 5F',
+      place: 'Skyward Tower',
       modes: ['skyward-tower'],
       zones: ['5F'],
       guides: [],
     },
   ];
+  /** Ce qu'un serveur d'avant les modes de jeu servait pour `place` : « mode · stage », en une chaîne. */
+  const LEGACY_PLACE: Record<string, string> = {
+    [BOSS]: 'Joint Challenge · Defeat the Annihilator Very Hard',
+    [TWIN]: 'Story Hard, Joint Challenge · S3 · Ep1 · Stage 10, Defeat the Annihilator Hard',
+    [ADD]: '',
+    [MOB]: 'Skyward Tower · 5F',
+  };
+  /** La ligne d'un monstre telle que ce serveur-là la servait : ni `modes`, ni `zones`. */
+  const legacyRow = ({ id, name, type, icon, guides }: (typeof ROSTER)[number]) => ({
+    id,
+    name,
+    type,
+    icon,
+    place: LEGACY_PLACE[id],
+    guides,
+  });
   /** Les modes de jeu du serveur, dans l'ordre du damage calc ; aucun monstre du roster en Origin Story. */
   const MODES = [
     { key: 'story', label: 'Story', count: 1 },
@@ -6365,24 +6381,16 @@ describe('Monstres — la page, sur le vrai markup', () => {
       if (url.pathname.startsWith('/api/monsters')) calls.push(body ? { path, body } : { path });
       if (url.pathname === '/api/monsters/roster')
         return answer({
-          roster: opts.legacy
-            ? ROSTER.map(({ id, name, type, icon, place, guides }) => ({
-                id,
-                name,
-                type,
-                icon,
-                place,
-                guides,
-              }))
-            : ROSTER,
+          roster: opts.legacy ? ROSTER.map(legacyRow) : ROSTER,
           counts: { guides: 3, site: 4 },
           ...(opts.legacy ? {} : { modeGroups: MODES }),
           ...(opts.siteError ? { siteError: opts.siteError } : {}),
         });
       if (url.pathname === '/api/monsters/state') {
         const id = url.searchParams.get('id') ?? '';
-        const row = ROSTER.find((m) => m.id === id);
-        if (!row) return answer({ error: `monstre inconnu : ${id}` }, 404);
+        const found = ROSTER.find((m) => m.id === id);
+        if (!found) return answer({ error: `monstre inconnu : ${id}` }, 404);
+        const row = opts.legacy ? legacyRow(found) : found;
         const mine = id === BOSS;
         return answer({
           monster: row,
@@ -6713,9 +6721,13 @@ describe('Monstres — la page, sur le vrai markup', () => {
     expect(who.querySelector('.m-face')?.getAttribute('src')).toBe(
       'https://img.test/images/ui/boss/MT_4014002.webp',
     );
-    expect(who.querySelector('.m-traits')?.textContent).toBe(
-      `area boss${BOSS}Joint Challenge · Defeat the Annihilator Very Hard`,
-    );
+    // Type, id, puis ses modes de jeu sous leurs titres, puis ses zones.
+    expect([...who.querySelectorAll('.m-traits > span')].map((s) => s.textContent)).toEqual([
+      'area boss',
+      BOSS,
+      'Joint Challenge',
+      'Defeat the Annihilator Very Hard',
+    ]);
     expect(
       [...who.querySelectorAll('.m-link')].map((a) => [a.textContent, a.getAttribute('href')]),
     ).toEqual([
@@ -6731,6 +6743,25 @@ describe('Monstres — la page, sur le vrai markup', () => {
     expect(page.el('m-bar').hidden).toBe(false);
     expect(page.count()).toBe('aucune modification');
     expect(page.el('m-save').disabled).toBe(true);
+  });
+
+  it('l’en-tête : les modes de jeu sous leurs titres (`place` du serveur), puis les zones ; sans mode ni zone, ni l’un ni l’autre', async () => {
+    const traits = (page: Awaited<ReturnType<typeof monsters>>) =>
+      [...page.el('m-who').querySelectorAll('.m-traits > span')].map((s) => s.textContent);
+    expect(traits(await monsters({ hash: `#monsters/${TWIN}` }))).toEqual([
+      'boss',
+      TWIN,
+      'Story · Joint Challenge',
+      'S3 · Ep1 · Stage 10, Defeat the Annihilator Hard',
+    ]);
+    // Un add sans spawn : son type et son id.
+    expect(traits(await monsters({ hash: `#monsters/${ADD}` }))).toEqual(['named', ADD]);
+    // Un quick lancé avant les modes de jeu : sa chaîne « mode · stage », telle quelle.
+    expect(traits(await monsters({ hash: `#monsters/${MOB}`, legacy: true }))).toEqual([
+      'monster',
+      MOB,
+      'Skyward Tower · 5F',
+    ]);
   });
 
   it('un monstre du site, sans guide : le badge « aucun guide », et un kit vide le dit', async () => {

@@ -7,10 +7,18 @@
  *   - flag `site` (case cochée par défaut) : monstres UTILISÉS PAR LE SITE
  *     (réfs de content-schedule/singularity/towers + spawns dans leurs donjons
  *     + adds rattachés — cf. `siteMonsterIds`) ;
- *   - tags = slugs des MODES DE JEU où le monstre spawne (select).
+ *   - tags = slugs des MODES DE JEU où le monstre spawne (select) — l'ordre et
+ *     les titres du select sont ceux du damage calc du site (`game-modes.ts`).
  */
+import { gameModeGroups, modeLabelsOf, modeOptionsOf } from '@/lib/admin/game-modes';
 import { reviewEntities, reviewTarget, type TargetReview } from '@/lib/admin/review-store';
-import { freshEncounters, freshMonsters, siteMonsterIds } from '@/lib/admin/monster-store';
+import {
+  freshEncounters,
+  freshMonsters,
+  siteMonsterIds,
+  type EncountersData,
+  type Monster,
+} from '@/lib/admin/monster-store';
 import { monsterBossBadgeSrc, monsterIconSrc, monsterSlotSrc } from '@/lib/admin/monster-icon';
 import { monsterPlaces } from '@/lib/admin/monster-kit';
 import { img } from '@/lib/images';
@@ -18,9 +26,29 @@ import type { ExtractorRow } from '@/components/admin/ExtractorSidebar';
 
 export interface MonsterRowsResult {
   rows: ExtractorRow[];
-  /** Modes de jeu présents dans les spawns (slug + libellé EN), triés. */
+  /**
+   * Modes de jeu présents dans les spawns : une option par slug, dans l'ordre et
+   * sous les titres EN des groupes du damage calc (`modeOptionsOf`).
+   */
   modeOptions: Array<{ value: string; label: string }>;
 }
+
+/** Ce que les lignes lisent — l'extraction fraîche, d'office ; injecté par les tests. */
+export interface MonsterRowsSource {
+  monsters: Record<string, Monster>;
+  encounters: Pick<EncountersData, 'dungeons' | 'modes' | 'modeFamilies'>;
+  /** Les monstres utilisés par le site (`siteMonsterIds`). */
+  site: Set<string>;
+  /** Le diff committé ↔ frais de la cible monster. */
+  diff: TargetReview['diff'];
+}
+
+const freshSource = (): MonsterRowsSource => ({
+  monsters: freshMonsters(),
+  encounters: freshEncounters(),
+  site: siteMonsterIds(),
+  diff: reviewTarget('monster').diff,
+});
 
 /**
  * Statut de revue par monstre, comme `character-rows.ts` : `new` (extrait, pas
@@ -40,15 +68,12 @@ export function monsterRowStatuses(
   return statuses;
 }
 
-export function buildMonsterRows(): MonsterRowsResult {
-  const fresh = freshMonsters();
-  const enc = freshEncounters();
-  const site = siteMonsterIds();
-  const review = reviewTarget('monster');
-  const statusOf = monsterRowStatuses(review.diff);
-  const diffCounts = new Map(review.diff.changed.map((c) => [c.key, c.fields.length]));
-
-  const modeLabel = (mode: string): string => enc.modes[mode]?.en ?? mode;
+export function buildMonsterRows(src: MonsterRowsSource = freshSource()): MonsterRowsResult {
+  const { monsters: fresh, encounters: enc, site, diff } = src;
+  const statusOf = monsterRowStatuses(diff);
+  const diffCounts = new Map(diff.changed.map((c) => [c.key, c.fields.length]));
+  // Les modes de jeu comme le damage calc les liste, titrés par l'extraction fraîche.
+  const groups = gameModeGroups(enc.dungeons, 'en', enc);
 
   const seenModes = new Set<string>();
   const rows: ExtractorRow[] = Object.values(fresh).flatMap((m) => {
@@ -68,7 +93,7 @@ export function buildMonsterRows(): MonsterRowsResult {
         // Le(s) mode(s) dans le meta : c'est CE qui distingue les boss
         // homonymes. Type = badge BOSS sur le portrait, élément/classe =
         // overlays — pas de doublon texte. Ligne 3 (sub) : stage/zone.
-        meta: modes.slice(0, 2).map(modeLabel).join(', '),
+        meta: modeLabelsOf(groups, modes).slice(0, 2).join(', '),
         sub: zones.slice(0, 2).join(', '),
         icon: monsterIconSrc(m.icon),
         iconFrame: monsterSlotSrc(m.type),
@@ -85,18 +110,5 @@ export function buildMonsterRows(): MonsterRowsResult {
     ];
   });
 
-  // Labels dupliqués (guild_raid_main/sub → « Guild Raid ») : suffixe le slug.
-  const labelCounts = new Map<string, number>();
-  for (const mode of seenModes) {
-    const l = modeLabel(mode);
-    labelCounts.set(l, (labelCounts.get(l) ?? 0) + 1);
-  }
-  const modeOptions = [...seenModes]
-    .map((value) => {
-      const l = modeLabel(value);
-      return { value, label: (labelCounts.get(l) ?? 0) > 1 ? `${l} (${value})` : l };
-    })
-    .sort((a, b) => a.label.localeCompare(b.label));
-
-  return { rows, modeOptions };
+  return { rows, modeOptions: modeOptionsOf(groups, [...seenModes]) };
 }

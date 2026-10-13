@@ -146,7 +146,7 @@ import {
   type MonsterKitDisk,
   type MonsterKitSections,
 } from '@/lib/admin/monster-kit';
-import { gameModeGroups, modeKeysOf } from '@/lib/admin/game-modes';
+import { gameModeGroups, modeKeysOf, modeOptionsOf } from '@/lib/admin/game-modes';
 import {
   applyKitCuration,
   loadKitCurationSections,
@@ -289,13 +289,7 @@ import {
 } from '@/lib/data/equipment';
 import { eeEditorChips, eeModelForView, type EeChipMeta } from '@/lib/data/equipment-detail';
 import { loadGearPresets, loadGearReco } from '@/lib/data/gear-reco';
-import {
-  getEncounters,
-  listDungeons,
-  listGroups,
-  modeLabel,
-  type GroupChoice,
-} from '@/lib/data/encounters';
+import { getEncounters, listDungeons, listGroups, type GroupChoice } from '@/lib/data/encounters';
 import { guideUpdatedDate, listGuides, readGuideVersionFile, type Guide } from '@/lib/data/guides';
 import { listMonsters } from '@/lib/data/monsters';
 import { loadSearchAliases } from '@/lib/data/search-aliases';
@@ -4470,11 +4464,11 @@ export interface MonsterRosterRow {
   type: string;
   /** L'adresse de son icône (`img.monster`). */
   icon: string;
-  /** Où on l'affronte : « mode · stage / zone » de ses spawns, comme la sidebar de l'admin. */
+  /** Où on l'affronte : les titres de ses modes de jeu (`modes`), deux au plus puis « +n » ; vide : sans mode. */
   place: string;
   /** Les modes de jeu de ses spawns : des clés de `modeGroups`, dans leur ordre ; vide : sans mode. */
   modes: string[];
-  /** Les stages / zones de ses spawns : les deux premiers, ceux de `place`. */
+  /** Les stages / zones de ses spawns : les deux premiers. */
   zones: string[];
   /** Les guides qui le désignent ; vide : un monstre du site, sans guide. */
   guides: GuideRef[];
@@ -4591,6 +4585,14 @@ const monstersMemo = new WeakMap<MonstersDisk, { stamp: string; index: MonstersI
 /** Ce que montre un monstre que le jeu ne nomme pas. */
 const NO_NAME = '(sans nom)';
 
+/** Combien de modes de jeu l'en-tête d'un monstre nomme, avant « +n ». */
+const PLACE_MODES = 2;
+
+/** Les modes de jeu d'un monstre, en une ligne : « Story · Skyward Tower +1 ». */
+const modesPlace = (labels: string[]): string =>
+  labels.slice(0, PLACE_MODES).join(' · ') +
+  (labels.length > PLACE_MODES ? ` +${labels.length - PLACE_MODES}` : '');
+
 /** Par nom, puis par id ; les monstres sans nom ferment la liste. */
 const byName = (a: MonsterRosterRow, b: MonsterRosterRow): number =>
   Number(a.name === NO_NAME) - Number(b.name === NO_NAME) ||
@@ -4605,29 +4607,19 @@ function monstersIndex(disk: MonstersDisk): MonstersIndex {
 
   const monsters = disk.monsters();
   const dungeons = disk.dungeons();
-  const modeNames = new Map<string, string>();
-  for (const d of Object.values(dungeons))
-    if (!modeNames.has(d.mode)) modeNames.set(d.mode, modeLabel(d, DEFAULT_LANG));
   const groups = gameModeGroups(dungeons, DEFAULT_LANG);
+  const titles = new Map(groups.map((g) => [g.key, g.label]));
   const guides = disk.guideIds(monsters);
   const row = (m: Monster): MonsterRosterRow => {
     const { modes, zones } = monsterPlaces(m, dungeons);
+    const keys = modeKeysOf(groups, modes);
     return {
       id: m.id,
       name: m.name.en || NO_NAME,
       type: m.type,
       icon: img.monster(m.icon),
-      // Les deux premiers de chaque, comme la sidebar de l'admin.
-      place: [
-        modes
-          .slice(0, 2)
-          .map((mode) => modeNames.get(mode) ?? mode)
-          .join(', '),
-        zones.slice(0, 2).join(', '),
-      ]
-        .filter(Boolean)
-        .join(' · '),
-      modes: modeKeysOf(groups, modes),
+      place: modesPlace(keys.flatMap((key) => titles.get(key) ?? [])),
+      modes: keys,
       zones: zones.slice(0, 2),
       guides: guides.get(m.id) ?? [],
     };
@@ -7843,30 +7835,24 @@ export interface ModeOption {
 }
 
 /**
- * Les modes où un monstre frais spawne, nommés (la règle de la sidebar de
- * l'admin : un libellé partagé par deux slugs — guild raid main et sub — est
- * suffixé du slug), triés par libellé.
+ * Les modes où un monstre frais spawne : une option par slug (« Intégrer un
+ * mode » en intègre UN), dans l'ordre et sous les titres des groupes du damage
+ * calc du site (`gameModeGroups`, titrés par l'extraction fraîche) — un titre
+ * que plusieurs slugs portent est suffixé du slug, un mode sans groupe ferme la
+ * liste sous « Autres » (`modeOptionsOf`).
  */
 async function modeOptions(
   fresh: Record<string, Monster>,
   deps: ExtractorDeps,
 ): Promise<ModeOption[]> {
   const enc = await deps.encounters();
-  const label = (mode: string): string => enc.modes[mode]?.en ?? mode;
   const seen = new Set<string>();
   for (const m of Object.values(fresh))
     for (const s of m.spawns ?? []) {
       const mode = enc.dungeons[s.dungeon]?.mode;
       if (mode) seen.add(mode);
     }
-  const counts = new Map<string, number>();
-  for (const mode of seen) counts.set(label(mode), (counts.get(label(mode)) ?? 0) + 1);
-  return [...seen]
-    .map((value) => ({
-      value,
-      label: (counts.get(label(value)) ?? 0) > 1 ? `${label(value)} (${value})` : label(value),
-    }))
-    .sort((a, b) => a.label.localeCompare(b.label));
+  return modeOptionsOf(gameModeGroups(enc.dungeons, DEFAULT_LANG, enc), [...seen]);
 }
 
 /** Une ligne de stats extraites d'un perso : la fourchette du Lv 1 au Lv 100. */

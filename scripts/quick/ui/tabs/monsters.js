@@ -138,7 +138,10 @@ function cardChips(card) {
 }
 
 // ------------------------------------------------------ l'en-tête
-/** Le monstre choisi : icône, nom, type, id, mode · zone, ses guides. */
+/**
+ * Le monstre choisi : icône, nom, type, id, ses modes de jeu (`place` : leurs
+ * titres, deux au plus puis « +n »), ses stages / zones, ses guides.
+ */
 function who() {
   const m = sheet?.monster;
   drawnBase = state.imgBase;
@@ -156,7 +159,7 @@ function who() {
       <div class="m-id"><strong>${esc(m.name)}</strong>
         <span class="m-traits"><span class="badge off">${esc(typeLabel(m.type))}</span><span class="m-mono">${esc(m.id)}</span>${
           m.place ? `<span>${esc(m.place)}</span>` : ''
-        }</span>
+        }${m.zones?.length ? `<span>${esc(m.zones.join(', '))}</span>` : ''}</span>
         <span class="m-guides">${guides()}</span>
         <span class="lbl">Stats, intégration et versions : <a class="m-goto" href="#extractor/monster/${esc(m.id)}" data-go="extractor/monster/${esc(m.id)}">extraction</a></span>
       </div>`

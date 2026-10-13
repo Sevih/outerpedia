@@ -1,6 +1,7 @@
 /**
  * LES MODES DE JEU, tels que le damage calc du site les liste — pour le picker
- * de Monstres de quick, qui filtre par mode « comme le damage calc ».
+ * de Monstres de quick, qui filtre par mode « comme le damage calc », l'en-tête
+ * d'un monstre, le `select` d'« Intégrer un mode » et la sidebar de l'admin.
  *
  * Le damage calc compose sa liste en trois endroits de
  * `src/app/[lang]/tools/_contents/damage-calculator/` — `index.tsx` (le
@@ -83,7 +84,59 @@ export function gameModeGroups(
   return [...story, ...[...groups.values()].filter((g) => !STORY_KEYS.includes(g.key))];
 }
 
+/** Les groupes où tombent des slugs de mode, dans l'ordre des groupes. */
+const groupsOf = (groups: readonly GameModeGroup[], slugs: readonly string[]): GameModeGroup[] =>
+  groups.filter((g) => g.slugs.some((s) => slugs.includes(s)));
+
 /** Les clés des groupes où tombent des slugs de mode, dans l'ordre des groupes. */
 export function modeKeysOf(groups: readonly GameModeGroup[], slugs: readonly string[]): string[] {
-  return groups.filter((g) => g.slugs.some((s) => slugs.includes(s))).map((g) => g.key);
+  return groupsOf(groups, slugs).map((g) => g.key);
+}
+
+/**
+ * Le titre des modes qu'aucun groupe ne range : ceux que la liste écarte (les
+ * skirmish du Monad Gate, un mode dont tous les donjons sont retirés ou vides).
+ */
+export const OTHER_MODES = 'Autres';
+
+/** Les slugs qu'aucun groupe ne range, dans l'ordre reçu. */
+const strays = (groups: readonly GameModeGroup[], slugs: readonly string[]): string[] => {
+  const known = new Set(groups.flatMap((g) => g.slugs));
+  return slugs.filter((s) => !known.has(s));
+};
+
+/**
+ * Les titres des groupes où tombent des slugs de mode, dans l'ordre des
+ * groupes ; « Autres » ferme la liste dès qu'un slug n'a pas de groupe.
+ */
+export function modeLabelsOf(groups: readonly GameModeGroup[], slugs: readonly string[]): string[] {
+  const labels = groupsOf(groups, slugs).map((g) => g.label);
+  return strays(groups, slugs).length ? [...labels, OTHER_MODES] : labels;
+}
+
+/** Un mode de jeu dans un `select` : son slug, et le titre de son groupe. */
+export interface ModeSlugOption {
+  value: string;
+  label: string;
+}
+
+/**
+ * Une option PAR SLUG, pour les gestes qui agissent sur un seul (« Intégrer un
+ * mode », le filtre de la sidebar de l'admin) : dans l'ordre des groupes, sous
+ * leur titre. Un titre que plusieurs options se partagent (les trois tours)
+ * est suffixé du slug ; un slug sans groupe ferme la liste sous « Autres ».
+ */
+export function modeOptionsOf(
+  groups: readonly GameModeGroup[],
+  slugs: readonly string[],
+): ModeSlugOption[] {
+  const titled = groups.flatMap((g) => {
+    const mine = g.slugs.filter((s) => slugs.includes(s));
+    return mine.map((value) => ({
+      value,
+      label: mine.length > 1 ? `${g.label} (${value})` : g.label,
+    }));
+  });
+  const others = [...new Set(strays(groups, slugs))].sort();
+  return [...titled, ...others.map((value) => ({ value, label: `${OTHER_MODES} (${value})` }))];
 }

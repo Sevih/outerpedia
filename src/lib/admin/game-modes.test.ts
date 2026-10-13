@@ -6,7 +6,7 @@
 import { describe, expect, it } from 'vitest';
 import type { DungeonRef } from '@contracts';
 import { getEncounters, storyFamilyOf } from '@/lib/data/encounters';
-import { gameModeGroups, modeKeysOf } from './game-modes';
+import { gameModeGroups, modeKeysOf, modeLabelsOf, modeOptionsOf } from './game-modes';
 
 /** Un donjon peuplé. */
 const dungeon = (mode: string, over: Partial<DungeonRef> = {}) =>
@@ -127,6 +127,58 @@ describe('gameModeGroups — les modes de jeu, comme le damage calc les liste', 
     ]);
     expect(modeKeysOf(list, [])).toEqual([]);
     expect(modeKeysOf(list, ['mode_inconnu'])).toEqual([]);
+  });
+
+  it('`modeLabelsOf` : les titres des groupes, dans leur ordre et une fois chacun — un slug sans groupe ferme sous « Autres »', () => {
+    const list = groups({
+      a: dungeon('tower'),
+      b: dungeon('normal_hard'),
+      c: dungeon('tower_hard'),
+      d: dungeon('event_boss'),
+    });
+    // Deux tours : un seul titre ; l'ordre est celui des groupes, pas celui reçu.
+    expect(modeLabelsOf(list, ['tower_hard', 'event_boss', 'tower', 'normal_hard'])).toEqual([
+      'Story',
+      'Skyward Tower',
+      'Joint Challenge',
+    ]);
+    expect(modeLabelsOf(list, ['monad_battle_1', 'tower'])).toEqual(['Skyward Tower', 'Autres']);
+    expect(modeLabelsOf(list, ['mode_inconnu', 'monad_battle_1'])).toEqual(['Autres']);
+    expect(modeLabelsOf(list, [])).toEqual([]);
+  });
+
+  it('`modeOptionsOf` : une option par slug, dans l’ordre des groupes et sous leur titre — suffixé du slug quand il est partagé, « Autres » en queue', () => {
+    const list = groups({
+      a: dungeon('event_boss'),
+      b: dungeon('tower'),
+      c: dungeon('normal'),
+      d: dungeon('tower_hard'),
+      e: dungeon('normal_hard'),
+      f: dungeon('raid_1'),
+      g: dungeon('monad_battle_1'),
+    });
+    expect(
+      modeOptionsOf(list, [
+        'zz_neuf',
+        'tower_hard',
+        'monad_battle_1',
+        'raid_1',
+        'normal',
+        'event_boss',
+        'tower',
+      ]),
+    ).toEqual([
+      // Story en tête ; `normal_hard` n'est pas demandé : le titre reste nu.
+      { value: 'normal', label: 'Story' },
+      { value: 'event_boss', label: 'Joint Challenge' },
+      { value: 'tower', label: 'Skyward Tower (tower)' },
+      { value: 'tower_hard', label: 'Skyward Tower (tower_hard)' },
+      { value: 'raid_1', label: 'Special Request' },
+      // Hors groupes — le skirmish écarté, un mode que la liste n'a pas — par slug.
+      { value: 'monad_battle_1', label: 'Autres (monad_battle_1)' },
+      { value: 'zz_neuf', label: 'Autres (zz_neuf)' },
+    ]);
+    expect(modeOptionsOf(list, [])).toEqual([]);
   });
 
   it('sur le committé : des clés uniques et lisibles, aucun slug dans deux groupes, les familles story en tête', () => {

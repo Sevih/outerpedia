@@ -7,6 +7,102 @@
 
 ## 2026-10-13
 
+- **quick, Monstres : une seule liste des modes de jeu (`game-modes.ts`) pour
+  l'en-tête, le select d'« Intégrer un mode » et les lignes de l'admin ;
+  `place` dit les titres des modes (lot A45)** — suite de la relecture B47
+  (12/10), tranchée le 13/10. B47 avait posé `src/lib/admin/game-modes.ts`
+  (`gameModeGroups`, `modeKeysOf`) pour le picker ; trois endroits refaisaient
+  encore leur liste à part : `modeOptions` de l'Extraction (les titres des
+  SLUGS, triés par libellé), `buildMonsterRows` de la sidebar de l'admin (la
+  même règle, recopiée), et `place` du roster, que l'en-tête de la fiche
+  affichait tel quel — les titres des deux premiers slugs (« Skyward Tower,
+  Skyward Tower »), le slug brut faute de titre, puis les zones. LE MODULE
+  gagne trois exports, sans rien changer à `gameModeGroups` :
+  `modeLabelsOf(groups, slugs)` (les titres des groupes où tombent des slugs,
+  dans l'ordre des groupes, un par groupe), `modeOptionsOf(groups, slugs)` (une
+  option `{ value, label }` PAR SLUG, dans l'ordre des groupes et sous leur
+  titre) et `OTHER_MODES` (« Autres »). L'EXTRACTION
+  (`scripts/quick/actions.ts`) : `modeOptions` garde ce qu'il liste — les slugs
+  où un monstre frais spawne — et rend `modeOptionsOf` sur
+  `gameModeGroups(enc.dungeons, DEFAULT_LANG, enc)`, les titres lus de
+  l'extraction fraîche (le `gloss` du module, comme avant `enc.modes`).
+  L'option reste un SLUG : « Intégrer un mode » en intègre un
+  (`integrateMonsterMode(slug)`), le geste, son plan et sa route ne bougent
+  pas. Un titre que plusieurs options portent est suffixé du slug, la règle
+  d'avant. Sur ce poste, vingt options, les mêmes slugs qu'avant, dans
+  l'ordre du damage calc : Story (normal), Story (normal_hard), Origin Story
+  (origin), Origin Story (origin_hard), les trois Skyward Tower, Elemental
+  Tower, Special Request (raid_1), Special Request (raid_2), World Boss, les
+  deux Guild Raid, Weekly Conquest Mission, Promotion Challenge, Pursuit
+  Operation, Infiltration Operation, Dimensional Singularity, Joint Challenge,
+  puis Autres (monad_battle_1). L'ADMIN (`src/lib/admin/monster-rows.ts`) :
+  `buildMonsterRows` prend sa source en paramètre (`MonsterRowsSource` —
+  monstres, encounters, périmètre du site, diff ; l'extraction fraîche
+  d'office, les trois appelants ne changent pas), `meta` = les deux premiers
+  titres de `modeLabelsOf` (les deux tours n'en font plus qu'un), `modeOptions`
+  = `modeOptionsOf` ; `modeLabel`, `labelCounts` et le tri par libellé
+  disparaissent. `tags` reste les slugs : ce sont les valeurs que le select de
+  la sidebar filtre, et `IntegrateModeButton` de `/admin/extractor/monsters`
+  reçoit la même liste pour intégrer UN slug. L'EN-TÊTE : `place` de
+  `MonsterRosterRow` devient les titres des groupes du monstre (ses `modes`,
+  les clés de `modeKeysOf`), séparés par « · », deux au plus puis « +n »
+  (`modesPlace`) ; `modeNames` et l'import de `modeLabel` sortent
+  d'`actions.ts`. `who()` de `tabs/monsters.js` affiche `place` comme avant,
+  puis les zones dans un second `<span>` de `.m-traits`, lues de `zones` (servi
+  depuis B47) : « Origin Story · Skyward Tower », puis « S1 Ep8 · Maxwell's
+  Lab · Collecting Evidence, S1 Ep8 · Maxwell's Lab · Puppet ». « AUTRES »,
+  VÉRIFIÉ dans `game-modes.ts` comme le lot le demandait : B47 n'y avait PAS
+  de groupe « Autres » — un slug écarté (`monad_battle_1`, un mode aux donjons
+  tous retirés ou vides) n'a simplement pas de clé (`modeKeysOf` le saute), et
+  c'est le picker qui dit « sans mode » d'un monstre sans clé. Appliqué tel
+  que le lot l'écrit là où il le demande : dans le select (« Autres (slug) »,
+  en queue, par slug) et dans le `meta` de l'admin (« Autres » ferme la
+  liste). L'en-tête de quick, lui, ne lit que les clés : un monstre sans mode
+  n'y montre aucun mode, comme la pastille « sans mode » du picker, qui ne
+  bouge pas. TRANCHÉ SUR LA FORME, à relire : (1) une option par slug et non
+  par groupe, pour ne pas toucher au geste d'intégration ; (2) les zones
+  restent dans l'en-tête, à part — le lot ne demandait pas de les retirer,
+  et « · » sépare déjà les modes ; (3) `place` calculé au serveur, pas dans
+  `who()` : l'état d'un monstre peut arriver avant le roster, donc avant les
+  titres. Ni donnée ni ordre des monstres ne changent : le roster trie comme
+  avant (test inchangé), aucun fichier de `data/`. Limites : un mode que le
+  jeu ne titre pas garde son slug pour titre de groupe (la règle de
+  `gameModeGroups`) — aucun des vingt aujourd'hui ; « +n » ne se voit qu'en
+  test, le roster servi (2 449 monstres) en compte 340 sans mode, 2 076 à un
+  mode et 33 à deux ; un quick lancé AVANT ce code sert encore l'ancien
+  `place`, zones comprises, que la page doublerait des zones jusqu'au
+  redémarrage. Vérification : `pnpm typecheck` exit 0 (« tsc --noEmit &&
+  tsc --noEmit -p datagen/tsconfig.json && tsc --noEmit -p
+  scripts/tsconfig.json »), `pnpm lint` exit 0 (« eslint », aucun
+  avertissement), `pnpm test` « Test Files 223 passed (223) / Tests 3808
+  passed (3808) »,
+  `NODE_ENV=development pnpm exec vitest run scripts/quick src/lib/admin`
+  « Test Files 62 passed (62) / Tests 1726 passed (1726) ». Tests :
+  `game-modes.test.ts` (`modeLabelsOf`, `modeOptionsOf` : l'ordre des groupes,
+  un titre par groupe, le suffixe, « Autres ») ; `monster-rows.test.ts`
+  (`buildMonsterRows` sur une source factice : le select, le `meta`, les
+  `tags` en slugs, un monstre sans rencontre sans ligne) ; `actions.test.ts`
+  (le select de la cible monster sur un encounters factice — Story en tête,
+  le titre de la famille, les deux tours suffixées, le skirmish sous
+  « Autres » ; `place` du roster, à deux modes, à trois et quatre, sans
+  mode ; la fixture `ENCOUNTERS` gagne un donjon PEUPLÉ, sans quoi son mode
+  n'a pas de groupe) ; `ui-serve.test.ts` (l'en-tête en happy-dom : les
+  titres, puis les zones ; un add sans spawn ; un quick d'avant les modes,
+  sa chaîne telle quelle — la fixture garde les anciennes chaînes sous
+  `LEGACY_PLACE`). Banc : quick isolé :4795, clés vidées, arrêté ensuite ;
+  `--tabs monsters --hash monsters/mode/skyward-tower` (le picker, ses
+  pastilles et sa ligne comme avant — la ligne lit `modes` et `zones`, pas
+  `place`), `--hash monsters/415101391` (l'en-tête ci-dessus),
+  `--tabs extractor --hash extractor/monster` (le select, « Story (normal) »
+  en tête) ; lus par `curl`, en GET seulement, `/api/monsters/roster` et
+  `/api/extractor/target?id=monster`. Laissé, hors périmètre : le libellé du
+  PLAN d'« Intégrer un mode » (`modeIds`) reste le titre du slug
+  (`enc.modes[mode].en`) — le plan dit « mode Special Request: Ecology Study »
+  quand le select dit « Special Request (raid_1) » ; `whereOf` du picker garde
+  son repli sur `place` pour un serveur d'avant B47 ; le damage calc n'est pas
+  touché. Item (3) de « Relecture F24 / B47 / … — suites à décider » marqué
+  FAIT dans `docs/TODO.md`.
+
 - **quick, Guides : `open()` relit le hash à chaque venue — un
   `sections.go('guides/<cat>/<slug>')` venu d'une autre section ouvre ce guide
   (lot A44)** — suite de la relecture A37 (12/10), tranchée le 13/10.
