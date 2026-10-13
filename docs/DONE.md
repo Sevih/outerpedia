@@ -7,6 +7,75 @@
 
 ## 2026-10-13
 
+- **quick : le menu porte des pastilles là où il y a à faire — sections et
+  groupes —, nourries par l'inbox du Tableau de bord (lot A39)** — constat de
+  Sevih (13/10) : le dry-run montre des écarts, l'inbox les liste, mais le
+  menu du haut ne dit rien ; il fallait ouvrir l'accueil ou la section pour
+  savoir qu'il y avait à faire. Serveur (`scripts/quick/actions.ts`) : le bloc
+  `inbox` de `dashboardState` devient `quickInbox(disk)`, lu par le tableau de
+  bord ET par les pastilles — une seule lecture, les deux comptent la même
+  chose, l'accueil n'est pas refait. `sectionBadges(items)` la compte par
+  SECTION de quick : le premier segment de l'adresse où l'item renvoie, sa
+  fiche (`sheet`) sinon son onglet (`tab`) — `extractor/monster` compte pour
+  `extractor`, les tags morts d'un seul perso pour `character` ; un item que
+  l'admin garde (tags de plusieurs persos, assets) est ignoré ; le compte est
+  la somme des `count`, la teinte la pire (`danger`, `warn`, `muted`).
+  `badgesState()` rend `{ sections, at }`, servi par `GET /api/badges`
+  (`server.ts`) : l'inbox seule, sans git, sans le client du jeu, sans R2.
+  Vérifié, comme le lot le demandait : `buildInbox` ne pose jamais un `count`
+  nul (chaque item n'entre que si son volume est positif) ; le repli « un par
+  item » existe et il est testé, mais rien ne l'atteint aujourd'hui. Pas de
+  mémo en plus : le diff, la part lourde, est déjà mémoïsé sur l'empreinte de
+  ses entrées (`memoizedBuckets`) — mesuré sur un quick isolé, 1,1 s au
+  premier appel puis 0,05 s (le balayage des tags, que l'inbox refait à
+  chaque lecture). Page (`scripts/quick/ui/lib.js`) : `paintBadges` pose un
+  `.badge` après le libellé de chaque section qui en a (`ko`, `warn` ou
+  `off`), et sur son groupe la somme et la pire teinte ; le `title` dit la
+  source et l'heure de la lecture ; une section traitée perd la sienne. Lue
+  au chargement, à chaque `go()` vers `dashboard`, et trois secondes
+  (`BADGES_AFTER_WRITE_MS`) après une écriture — `post()` l'arme lui-même
+  quand un geste a committé, et « Patch » annonce la fin de chacun de ses
+  gestes, réussi ou non, par `quick:changed` sur `document`
+  (`tabs/patch.js`, dans `run`). Plusieurs écritures rapprochées ne font
+  qu'une relecture ; jamais de polling. L'événement choisi est un `Event` nu,
+  pas un `CustomEvent` : il ne porte rien, et c'est la forme de
+  `quick:saved`. Une lecture qui échoue laisse le menu tel quel, sans un mot
+  au journal, qui appartient au geste en cours. Aucun CSS : le `.badge` de
+  `quick.css` tel quel ; aucune clé i18n ; `READ_ONLY_POSTS` ne bouge pas (un
+  GET). Tests : `actions.test.ts` — l'agrégation (deux cibles d'Extraction
+  font `extractor: 2`, les tags d'une fiche vont à `character`, un item sans
+  section est ignoré, la pire teinte dans tous les ordres, un volume nul
+  compte pour un), `badgesState` par la table du jour et à égalité avec
+  l'inbox de `dashboardState` ; `ui-serve.test.ts`, en happy-dom sur la vraie
+  coquille — les pastilles des deux rangées, la sélection et les clics qui
+  tiennent dessous, la relecture en venant au tableau de bord, les trois
+  secondes après « Pousser » et après un geste de Patch (faux minuteurs),
+  une route en erreur, et la route dans `server.ts`. Trois comportements
+  retirés à la main (la garde du minuteur, l'écoute de `quick:changed`, la
+  relecture au `go()`) font chacun tomber leur test. Vérification :
+  `pnpm typecheck` (dernière ligne
+  `$ tsc --noEmit && tsc --noEmit -p datagen/tsconfig.json && tsc --noEmit -p scripts/tsconfig.json`,
+  code 0), `pnpm lint` (`$ eslint`, code 0), `pnpm test`
+  (`Tests  3777 passed (3777)`),
+  `NODE_ENV=development pnpm exec vitest run scripts/quick`
+  (`Tests  1097 passed (1097)`). Banc : quick isolé sur :4799,
+  `--tabs dashboard` et `--tabs extractor` — le dépôt du jour a un écart
+  (un perso nouveau), la pastille ambre « 1 » est à l'image sur « Données »
+  et sur « Extraction », et le reste du menu est identique. STYLE.md
+  (§ La coquille) et `docs/quick-migration.md` suivent. Laissé, et dit : (1)
+  la pastille compte le VOLUME (« 3 new » compte trois), la carte « À faire »
+  le nombre de LIGNES — les deux chiffres diffèrent, par décision du lot ;
+  (2) « Patch » n'a pas de pastille quand un patch attend : c'est le bloc
+  `game` du tableau de bord, pas l'inbox (hors périmètre) ; (3) un quick
+  lancé AVANT ce code répond 404 à la route, donc aucune pastille et aucun
+  message — Ctrl-C puis `pnpm quick` ; (4) `loadBadges` porte une garde
+  d'une ligne pour les tests seuls (un minuteur armé par une page fermée ne
+  lit rien pour la suivante : ils ouvrent une page par cas dans un même
+  processus) ; (5) le dry-run émet aussi `quick:changed` alors qu'il
+  n'écrit rien, et « Pousser » relance la lecture : une relecture mémoïsée
+  de trop, pour une règle simple ; (6) le banc ne clique pas — la relecture
+  après une écriture réelle n'a été vue qu'en happy-dom.
+
 - **quick : Patch — la revue du dry-run est structurée (une ligne par fichier,
   « voir » vers Extraction, hors périmètre du site dit), et « Promouvoir »
   annonce ce qu'il écrit (lot A38)** — constat de Sevih au cycle du patch

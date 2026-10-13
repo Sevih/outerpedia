@@ -212,6 +212,7 @@ import {
   NO_TRANSLATE_KEY,
   addComics,
   addGuideVersionAction,
+  badgesState,
   bannersState,
   changelogState,
   characterCoverage,
@@ -264,6 +265,7 @@ import {
   saveItems,
   saveMonsterKit,
   saveNames,
+  sectionBadges,
   tableUsage,
   tagSourceSheet,
   translateNotes,
@@ -4209,6 +4211,109 @@ describe('dashboardState — l’accueil de quick, toutes lectures injectées', 
       expect(one.errors, name).toEqual({ [name]: 'boom' });
       expect(one[name], name).toBeNull();
     }
+  });
+
+  describe('les pastilles du menu — l’inbox comptée par section de quick', () => {
+    const PROS = 'curated pros-cons · Valentine (2000012).pros[1].en';
+
+    it('`sectionBadges` : le premier segment de l’adresse, les comptes sommés, la pire teinte', () => {
+      // Deux cibles d'Extraction : une seule pastille, celle de la section.
+      expect(
+        sectionBadges([
+          { tab: 'extractor/x', count: 1, tone: 'warn' },
+          { tab: 'extractor/y', count: 1, tone: 'warn' },
+        ]),
+      ).toEqual({ extractor: { count: 2, tone: 'warn' } });
+      // Les tags morts d'un perso : sa fiche l'emporte sur l'onglet absent.
+      expect(
+        sectionBadges([
+          { tab: null, sheet: 'character/2000012/pros-cons', count: 4, tone: 'danger' },
+        ]),
+      ).toEqual({ character: { count: 4, tone: 'danger' } });
+      // Ce que l'admin garde n'a pas de pastille.
+      expect(sectionBadges([{ tab: null, count: 7, tone: 'warn' }])).toEqual({});
+      expect(sectionBadges([])).toEqual({});
+    });
+
+    it('`sectionBadges` : la pire teinte de la section, dans un ordre comme dans l’autre', () => {
+      const soft = { tab: 'extractor/item', count: 3, tone: 'muted' } as const;
+      const warn = { tab: 'extractor/character', count: 2, tone: 'warn' } as const;
+      const severe = { tab: 'extractor/monster', count: 5, tone: 'danger' } as const;
+      for (const items of [
+        [soft, warn, severe],
+        [severe, warn, soft],
+        [warn, severe, soft],
+      ])
+        expect(sectionBadges(items)).toEqual({ extractor: { count: 10, tone: 'danger' } });
+      expect(sectionBadges([soft, warn])).toEqual({ extractor: { count: 5, tone: 'warn' } });
+      expect(sectionBadges([soft])).toEqual({ extractor: { count: 3, tone: 'muted' } });
+      // Une section n'emprunte pas la teinte d'une autre.
+      expect(sectionBadges([severe, { tab: 'guides', count: 1, tone: 'muted' }])).toEqual({
+        extractor: { count: 5, tone: 'danger' },
+        guides: { count: 1, tone: 'muted' },
+      });
+    });
+
+    it('`sectionBadges` : un item sans volume compte pour un', () => {
+      expect(
+        sectionBadges([
+          { tab: 'effects', count: 0, tone: 'warn' },
+          { tab: 'effects', count: 2, tone: 'warn' },
+        ]),
+      ).toEqual({ effects: { count: 3, tone: 'warn' } });
+    });
+
+    it('`badgesState` : l’inbox du tableau de bord, par la table du jour, et rien d’autre', async () => {
+      const inbox = [
+        item({ key: 'tags', href: '/admin/tags', tone: 'danger', rank: 0, count: 2 }),
+        item({
+          key: 'extract:monster',
+          href: '/admin/extractor/monsters',
+          tone: 'danger',
+          count: 5,
+        }),
+        item({ count: 3 }),
+        item({ key: 'assets', href: '/admin/tools/gamedata', rank: 3, count: 40 }),
+        item({ key: 'extract:item', href: '/admin/extractor/items', tone: 'muted', count: 9 }),
+      ];
+      // Les quatre lectures de l'inbox, sans git, sans le jeu, sans R2.
+      const reads = {
+        inbox: () => inbox,
+        adminBase: () => 'https://outerpedia.local',
+        quickTabs: ADMIN_TO_QUICK,
+        deadTagSources: () => [PROS],
+      };
+      const { sections, at } = await badgesState(reads);
+      expect(sections).toEqual({
+        character: { count: 2, tone: 'danger' },
+        extractor: { count: 17, tone: 'danger' },
+      });
+      expect(at).toMatch(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/);
+
+      // Des tags morts de deux persos : `/admin/tags` les liste, quick non.
+      const spread = await badgesState({
+        ...reads,
+        deadTagSources: () => [PROS, 'synergies · Marian (2000014)[0]'],
+      });
+      expect(spread.sections).toEqual({ extractor: { count: 17, tone: 'danger' } });
+
+      // Les mêmes items que le tableau de bord : une section par item situé.
+      const { inbox: served } = await dashboardState(disk({ ...reads }));
+      expect(sectionBadges(served ?? [])).toEqual(sections);
+    });
+
+    it('`badgesState` : rien à faire, aucune pastille ; une inbox illisible lève', async () => {
+      expect((await badgesState(disk())).sections).toEqual({});
+      await expect(
+        badgesState(
+          disk({
+            inbox: () => {
+              throw new Error('extraction indisponible');
+            },
+          }),
+        ),
+      ).rejects.toThrow('extraction indisponible');
+    });
   });
 });
 

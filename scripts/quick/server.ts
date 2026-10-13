@@ -70,6 +70,7 @@ import {
   acceptExtraction,
   addComics,
   addGuideVersionAction,
+  badgesState,
   bannersState,
   eventsState,
   changelogState,
@@ -473,6 +474,13 @@ async function route(req: IncomingMessage, res: ServerResponse): Promise<void> {
     // Relu à chaque appel ; un bloc illisible est `null` avec sa raison dans
     // `errors`, les autres sont servis — pas un 500.
     json(res, await dashboardState());
+    return;
+  }
+
+  if (req.method === 'GET' && url.pathname === '/api/badges') {
+    // Les pastilles du menu : l'inbox du tableau de bord, comptée par section
+    // de quick — elle seule, sans git, sans le client du jeu, sans R2.
+    json(res, await badgesState());
     return;
   }
 

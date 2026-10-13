@@ -57,6 +57,24 @@ pastille.
 - **Sections** (`nav.tabs`, 40 px, `surface-sunken`) : les sections du groupe
   actif (`.tab`, filet accent sous l'active). Un groupe s'ouvre sur sa
   première section. Le hash (`#ranks`) sélectionne le groupe ET la section.
+- **Pastilles du menu** (lot A39) : une section où il y a à faire porte son
+  compte dans un `.badge`, après son libellé, et son groupe la somme des
+  siens — sans avoir à ouvrir l'accueil. La teinte est la pire de ce qu'elle
+  compte : `.ko` (un écart ou un retrait, un tag mort), `.warn` (du nouveau),
+  `.off` (des retouches mineures seules). Le `title` dit d'où vient le compte
+  et l'heure de la lecture. Tout vient de `GET /api/badges`
+  (`{ sections: { <id> : { count, tone } }, at }`) : l'inbox du Tableau de
+  bord — la même lecture, `quickInbox` d'`actions.ts` — comptée par section,
+  le premier segment de l'adresse où chaque item renvoie (`extractor/monster`
+  compte pour `extractor`, la fiche d'un perso pour `character`) ; un item
+  que l'admin garde n'a pas de pastille. Le compte d'une pastille est le
+  VOLUME (la somme des `count` : « 3 new » compte trois), celui de la carte
+  « À faire » le nombre de LIGNES. `lib.js` la lit au chargement, à chaque
+  venue sur le Tableau de bord, et TROIS SECONDES après une écriture — un
+  `post()` qui a committé, ou la fin d'un geste de « Patch »
+  (`quick:changed`) : avant, le diff de l'inbox peut encore être celui
+  d'avant (`ENGINE_STAMP_TTL_MS`). Jamais en boucle. Une lecture qui échoue
+  laisse le menu tel quel, sans un mot au journal.
 - Les deux rangées sont posées par `lib.js` d'après son tableau `GROUPS` :
   **ajouter une section** = une entrée `{ id, label, wide? }` dans le bon
   groupe, ses trois fichiers `tabs/<id>.{html,css,js}`, son marqueur
@@ -77,7 +95,10 @@ pastille.
   démarrage), `open()` (chaque fois qu'elle vient à l'écran), `dirty()`,
   `canLeave()`. `sections.go('<id>')` ouvre une autre section, comme un clic
   sur son onglet. Un `post()` réussi qui a committé ou poussé émet
-  `quick:saved` sur `document`. `post(path, payload, onStep)` : avec
+  `quick:saved` sur `document`. Une section qui change les fichiers du dépôt
+  SANS committer l'annonce de même par `quick:changed` (un `Event` nu sur
+  `document`, à la fin du geste, réussi ou non) : « Patch » le fait pour ses
+  quatre gestes, et le menu relit ses pastilles. `post(path, payload, onStep)` : avec
   `onStep`, chaque ligne du flux est remise à la section au lieu d'être
   empilée au journal, qui ne montre alors que la ligne en cours puis le
   résultat — la console de « Patch » s'en sert.

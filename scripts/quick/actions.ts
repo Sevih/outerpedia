@@ -359,7 +359,7 @@ import type {
   VideoRef,
 } from '@contracts';
 import type { Character } from '@datagen/extractor/specs/character';
-import type { InboxItem } from '@/lib/admin/admin-inbox';
+import type { InboxItem, InboxTone } from '@/lib/admin/admin-inbox';
 import { diffLabels, skillLabel, type DiffResolvers } from '@/lib/admin/diff-labels';
 import { diffTree, type DiffGroup } from '@/lib/admin/diff-tree';
 import type {
@@ -1615,6 +1615,80 @@ function hasProposal(disk: DashboardDisk): boolean {
   });
 }
 
+/** Ce que l'inbox lit — pour le tableau de bord comme pour les pastilles du menu. */
+type InboxDisk = Pick<DashboardDisk, 'inbox' | 'adminBase' | 'quickTabs' | 'deadTagSources'>;
+
+/**
+ * L'inbox de l'admin telle que quick la sert : SA liste, dans son ordre, chaque
+ * item avec son adresse complète dans l'admin (`href`), sa section de quick
+ * quand il y en a une (`inQuick`, `tab`) et, pour les tags morts d'un seul
+ * perso, sa fiche (`sheet`). UNE lecture pour le tableau de bord et pour les
+ * pastilles du menu : les deux comptent la même chose.
+ */
+async function quickInbox(disk: InboxDisk) {
+  const base = disk.adminBase().replace(/\/+$/, '');
+  const items = await disk.inbox();
+  const sheet = items.some((i) => i.key === 'tags')
+    ? deadTagSheet(await disk.deadTagSources())
+    : null;
+  return items.map((item) => {
+    const tab = quickTabOf(disk.quickTabs, item.href);
+    return {
+      ...item,
+      href: `${base}${item.href}`,
+      inQuick: tab !== null,
+      tab,
+      ...(item.key === 'tags' && sheet ? { sheet } : {}),
+    };
+  });
+}
+
+/** La gravité d'une teinte de l'inbox : la pire d'une section fait sa pastille. */
+const TONE_RANK: Record<InboxTone, number> = { muted: 0, warn: 1, danger: 2 };
+
+/** La pastille d'une section du menu : ce qu'il y a à y faire, et sa teinte. */
+export interface SectionBadge {
+  count: number;
+  tone: InboxTone;
+}
+
+/**
+ * L'inbox comptée par SECTION de quick : le premier segment de l'adresse où
+ * l'item renvoie — sa fiche (`sheet`) sinon son onglet (`tab`) ; `extractor/monster`
+ * compte pour `extractor`, `character/<id>/pros-cons` pour `character`. Un item
+ * que l'admin garde (ni l'un ni l'autre) n'a pas de pastille. Le compte est le
+ * `count` de l'item — le volume que l'inbox annonce, jamais nul chez elle ; un
+ * item qui n'en dirait pas compte pour un —, la teinte la pire de la section.
+ */
+export function sectionBadges(
+  items: readonly { tab: string | null; sheet?: string; count: number; tone: InboxTone }[],
+): Record<string, SectionBadge> {
+  const sections: Record<string, SectionBadge> = {};
+  for (const item of items) {
+    const section = (item.sheet ?? item.tab)?.split('/')[0];
+    if (!section) continue;
+    const count = item.count > 0 ? item.count : 1;
+    const seen = sections[section];
+    sections[section] = seen
+      ? {
+          count: seen.count + count,
+          tone: TONE_RANK[item.tone] > TONE_RANK[seen.tone] ? item.tone : seen.tone,
+        }
+      : { count, tone: item.tone };
+  }
+  return sections;
+}
+
+/**
+ * Les pastilles du menu (`GET /api/badges`) : l'inbox du tableau de bord, et
+ * elle seule, par section (`sectionBadges`) ; `at`, l'heure de la lecture. Rien
+ * de git, du jeu ni de R2 : la route ne coûte que l'inbox, dont le diff est
+ * mémoïsé sur l'empreinte de ses entrées (`memoizedBuckets`, `admin-inbox.ts`).
+ */
+export async function badgesState(disk: InboxDisk = DASHBOARD_DISK) {
+  return { sections: sectionBadges(await quickInbox(disk)), at: new Date().toISOString() };
+}
+
 /**
  * Le tableau de bord, l'accueil de quick : ce qui demande une action. Il ne
  * décide de rien — chaque bloc relit ce qu'un autre écran sait déjà :
@@ -1665,23 +1739,7 @@ export async function dashboardState(disk: DashboardDisk = DASHBOARD_DISK) {
     };
   });
 
-  const inbox = await block('inbox', async () => {
-    const base = disk.adminBase().replace(/\/+$/, '');
-    const items = await disk.inbox();
-    const sheet = items.some((i) => i.key === 'tags')
-      ? deadTagSheet(await disk.deadTagSources())
-      : null;
-    return items.map((item) => {
-      const tab = quickTabOf(disk.quickTabs, item.href);
-      return {
-        ...item,
-        href: `${base}${item.href}`,
-        inQuick: tab !== null,
-        tab,
-        ...(item.key === 'tags' && sheet ? { sheet } : {}),
-      };
-    });
-  });
+  const inbox = await block('inbox', () => quickInbox(disk));
 
   const gitBlock = await block('git', () => {
     const [hash = '', subject = '', when = ''] = disk.lastCommit().split('\t');

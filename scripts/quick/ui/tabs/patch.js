@@ -292,7 +292,8 @@ async function load() {
 /**
  * Lance un geste : le journal de l'en-tête suit la ligne en cours, la console
  * reçoit tout (`onStep` de `post()`), puis l'état est relu. `after` voit
- * l'issue avant ce redessin.
+ * l'issue avant ce redessin. La fin du geste, réussi ou non, est annoncée
+ * (`quick:changed` sur `document`).
  */
 async function run({ label, path, payload, button, onLine, after }) {
   running = label;
@@ -313,6 +314,9 @@ async function run({ label, path, payload, button, onLine, after }) {
   }
   running = null;
   button.classList.remove('busy');
+  // Tables, proposition, validé : les fichiers du dépôt ont pu bouger sans
+  // commit. Le menu relira ses pastilles (`lib.js`).
+  document.dispatchEvent(new Event('quick:changed'));
   after?.(data);
   await load();
   return data;

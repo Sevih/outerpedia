@@ -12155,6 +12155,346 @@ describe('Patch — la page, sur le vrai markup', () => {
   });
 });
 
+describe('Pastilles du menu — la page, sur le vrai markup', () => {
+  afterEach(() => {
+    vi.useRealTimers();
+    vi.unstubAllGlobals();
+  });
+
+  type Badges = Record<string, { count: number; tone: string }>;
+
+  /** De quoi faire dans Extraction (rouge), Fiche perso (ambre) et Effets (atténué). */
+  const BUSY: Badges = {
+    extractor: { count: 17, tone: 'danger' },
+    character: { count: 2, tone: 'warn' },
+    effects: { count: 1, tone: 'muted' },
+  };
+
+  /**
+   * La page de quick dans un document happy-dom : la VRAIE coquille, le vrai
+   * `lib.js`, et les deux sections de l'accueil (`dashboard.js`, `patch.js`).
+   * `fetch` est factice : il sert `served.sections` sur `/api/badges` — dont il
+   * compte les lectures —, un tableau de bord et un Patch au repos, et répond
+   * à « Pousser » (`pushed`) comme à un geste de Patch.
+   */
+  async function menu(
+    opts: { sections?: Badges; hash?: string; pushed?: unknown; status?: number } = {},
+  ) {
+    vi.resetModules();
+    const window = openWindow({ url: `http://localhost:4747/${opts.hash ?? ''}` });
+    const { document } = window;
+    const page = assemblePage(shell(), readTab);
+    document.body.innerHTML = (/<body>([\s\S]*)<\/body>/.exec(page)?.[1] ?? '').replace(
+      /<script[\s\S]*?<\/script>/g,
+      '',
+    );
+
+    const served = { sections: opts.sections ?? BUSY, status: opts.status ?? 200, reads: 0 };
+    const posts: string[] = [];
+    const answer = (data: unknown, ok = true) => {
+      const bytes = new TextEncoder().encode(JSON.stringify(data));
+      let read = false;
+      return {
+        ok,
+        json: async () => data,
+        body: {
+          getReader: () => ({
+            read: async () => (read ? { done: true } : ((read = true), { value: bytes })),
+          }),
+        },
+      };
+    };
+    const fetch = vi.fn(async (path: string, init?: { body?: string }) => {
+      if (init) posts.push(path);
+      if (path === '/api/badges') {
+        served.reads += 1;
+        return served.status === 200
+          ? answer({ sections: served.sections, at: '2026-10-13T12:02:00.000Z' })
+          : answer({ ok: false, log: ['Error: extraction indisponible'] }, false);
+      }
+      if (path === '/api/dashboard')
+        return answer({
+          today: '2026-10-13',
+          inbox: [],
+          git: null,
+          game: null,
+          banners: null,
+          coupons: null,
+          errors: {},
+        });
+      if (path === '/api/patch/state')
+        return answer({
+          job: null,
+          source: 'steam',
+          steam: true,
+          site: '1.11.404',
+          client: '1.11.404',
+          checkpoint: { steam: null, android: null },
+          git: { branch: 'main', ahead: 0, behind: 0, dirty: 0 },
+          messageMax: 200,
+          errors: {},
+        });
+      if (path === '/api/push')
+        return answer(
+          opts.pushed ?? {
+            ok: true,
+            log: ['poussé — la CI build et déploie.'],
+            git: { branch: 'main', ahead: 0, behind: 0 },
+          },
+        );
+      // Un geste de Patch : son issue d'une pièce, sans `git` — rien n'est committé.
+      if (init) return answer({ ok: true, code: 0, log: ['dry-run de la promotion : terminé.'] });
+      return answer({
+        imgBase: 'https://img.test',
+        host: 'banc',
+        port: 4747,
+        git: { branch: 'main', ahead: 1, behind: 0 },
+      });
+    });
+
+    vi.stubGlobal('window', window);
+    vi.stubGlobal('document', document);
+    vi.stubGlobal('location', window.location);
+    vi.stubGlobal('history', window.history);
+    vi.stubGlobal('fetch', fetch);
+    vi.stubGlobal('Event', window.Event);
+
+    const lib = (await import(/* @vite-ignore */ resolve(UI, 'lib.js'))) as {
+      sections: { start: () => void };
+    };
+    await import(/* @vite-ignore */ resolve(UI, 'tabs', 'dashboard.js'));
+    await import(/* @vite-ignore */ resolve(UI, 'tabs', 'patch.js'));
+    lib.sections.start();
+    /** Laisse la page lire ce qui est arrivé — sous de faux minuteurs aussi. */
+    const settle = async () => {
+      for (let i = 0; i < 4; i++)
+        if (vi.isFakeTimers()) await vi.advanceTimersByTimeAsync(0);
+        else await new Promise((done) => setTimeout(done, 0));
+    };
+    await settle();
+
+    const el = (id: string) => document.getElementById(id) as unknown as HTMLButtonElement;
+    const all = (selector: string) =>
+      [...document.querySelectorAll(selector)] as unknown as HTMLElement[];
+    /** Un onglet d'une rangée du menu : son libellé, puis sa pastille — compte et classe. */
+    const tabOf = (b: HTMLElement) => {
+      const badge = b.querySelector('.badge');
+      return [
+        (b.firstChild?.textContent ?? '').trim(),
+        ...(badge ? [badge.textContent, badge.className.replace('badge ', '')] : []),
+      ];
+    };
+    return {
+      el,
+      all,
+      served,
+      posts,
+      settle,
+      /** La rangée des groupes : `[libellé]`, ou `[libellé, compte, classe]`. */
+      groups: () => all('#groups button').map(tabOf),
+      /** Les sections d'un groupe, de même. */
+      tabs: (group: string) => all(`#tabs [data-group="${group}"]`).map(tabOf),
+      /** Les sections qui portent une pastille, par leur id. */
+      badged: () =>
+        all('#tabs button')
+          .filter((b) => b.querySelector('.badge'))
+          .map((b) => b.dataset.tab),
+    };
+  }
+
+  it('au chargement : une pastille par section qui a à faire, et sur son groupe la somme', async () => {
+    const page = await menu();
+    expect(page.served.reads).toBe(1);
+    expect(page.tabs('data')).toEqual([['Rangs'], ['Tables du jeu'], ['Extraction', '17', 'ko']]);
+    expect(page.tabs('editors')).toEqual([
+      ['Fiche perso', '2', 'warn'],
+      ['Effets', '1', 'off'],
+      ['Monstres'],
+      ['Items'],
+    ]);
+    // Le groupe : la somme de ses sections, et la pire de leurs teintes.
+    expect(page.groups()).toEqual([
+      ['Accueil'],
+      ['Publication'],
+      ['Données', '17', 'ko'],
+      ['Éditeurs', '3', 'warn'],
+      ['Guides'],
+      ['Outils'],
+    ]);
+    // La pastille dit d'où vient son compte, et de quand.
+    expect(page.all('#tabs [data-tab="extractor"] .badge')[0].title).toMatch(
+      /^À faire, d’après le Tableau de bord — relu à \d{2}:\d{2}$/,
+    );
+    // Rien n'est posté : la route est un GET, et le banc de captures la relaie.
+    expect(page.posts).toEqual([]);
+    expect(READ_ONLY_POSTS.has('/api/badges')).toBe(false);
+  });
+
+  it('le menu reste le menu : la sélection et les clics tiennent sous les pastilles', async () => {
+    const page = await menu();
+    expect(page.all('#groups [data-group="home"]')[0].getAttribute('aria-selected')).toBe('true');
+    expect(page.all('#tabs [data-tab="dashboard"]')[0].getAttribute('aria-selected')).toBe('true');
+    // Un clic sur la pastille est un clic sur son onglet.
+    (page.all('#groups [data-group="editors"] .badge')[0] as HTMLElement).click();
+    expect(page.el('tab-character').hidden).toBe(false);
+    expect(page.all('#tabs [data-tab="character"]')[0].getAttribute('aria-selected')).toBe('true');
+    (page.all('#tabs [data-tab="effects"] .badge')[0] as HTMLElement).click();
+    expect(page.el('tab-effects').hidden).toBe(false);
+    expect(page.all('#tabs [data-tab="character"]')[0].hidden).toBe(false);
+    expect(page.all('#tabs [data-tab="extractor"]')[0].hidden).toBe(true);
+  });
+
+  it('rien à faire : aucune pastille, les libellés seuls', async () => {
+    const page = await menu({ sections: {} });
+    expect(page.served.reads).toBe(1);
+    expect(page.all('#groups .badge, #tabs .badge')).toEqual([]);
+    expect(page.all('#groups button').map((b) => b.textContent)).toEqual([
+      'Accueil',
+      'Publication',
+      'Données',
+      'Éditeurs',
+      'Guides',
+      'Outils',
+    ]);
+    expect(page.all('#tabs [data-group="data"]').map((b) => b.textContent)).toEqual([
+      'Rangs',
+      'Tables du jeu',
+      'Extraction',
+    ]);
+  });
+
+  it('venir au tableau de bord relit ; une section traitée perd sa pastille', async () => {
+    const page = await menu();
+    page.all('#tabs [data-tab="patch"]')[0].click();
+    page.all('#groups [data-group="data"]')[0].click();
+    await page.settle();
+    // Ni Patch ni Rangs ne relisent.
+    expect(page.served.reads).toBe(1);
+
+    page.served.sections = { character: { count: 2, tone: 'danger' } };
+    page.all('#groups [data-group="home"]')[0].click();
+    await page.settle();
+    expect(page.served.reads).toBe(2);
+    expect(page.badged()).toEqual(['character']);
+    expect(page.groups()).toEqual([
+      ['Accueil'],
+      ['Publication'],
+      ['Données'],
+      ['Éditeurs', '2', 'ko'],
+      ['Guides'],
+      ['Outils'],
+    ]);
+    // Déjà dessus : un clic de plus n'est pas une venue.
+    page.all('#tabs [data-tab="dashboard"]')[0].click();
+    await page.settle();
+    expect(page.served.reads).toBe(2);
+  });
+
+  it('une écriture réussie relit après trois secondes, pas avant — un refus, jamais', async () => {
+    vi.useFakeTimers({ toFake: ['setTimeout', 'clearTimeout'] });
+    const page = await menu();
+    page.served.sections = {};
+    page.el('push').click();
+    await page.settle();
+    expect(page.posts).toEqual(['/api/push']);
+    // Le diff de l'inbox peut encore être celui d'avant : la relecture attend.
+    await vi.advanceTimersByTimeAsync(2900);
+    expect(page.served.reads).toBe(1);
+    expect(page.badged()).toEqual(['extractor', 'character', 'effects']);
+    await vi.advanceTimersByTimeAsync(100);
+    await page.settle();
+    expect(page.served.reads).toBe(2);
+    expect(page.badged()).toEqual([]);
+    // Une fois, pas en boucle.
+    await vi.advanceTimersByTimeAsync(60_000);
+    expect(page.served.reads).toBe(2);
+
+    const refused = await menu({
+      pushed: {
+        ok: false,
+        log: ['git push a échoué'],
+        git: { branch: 'main', ahead: 1, behind: 1 },
+      },
+    });
+    refused.el('push').click();
+    await refused.settle();
+    await vi.advanceTimersByTimeAsync(60_000);
+    expect(refused.posts).toEqual(['/api/push']);
+    expect(refused.served.reads).toBe(1);
+  });
+
+  it('la fin d’un geste de Patch (`quick:changed`) relit après trois secondes, sans commit', async () => {
+    vi.useFakeTimers({ toFake: ['setTimeout', 'clearTimeout'] });
+    const page = await menu({ hash: '#patch' });
+    expect(page.served.reads).toBe(1);
+    let changed = 0;
+    document.addEventListener('quick:changed', () => (changed += 1));
+
+    page.served.sections = { extractor: { count: 4, tone: 'warn' } };
+    page.el('p-dry').click();
+    await page.settle();
+    expect(page.posts).toEqual(['/api/patch/promote']);
+    expect(changed).toBe(1);
+    await vi.advanceTimersByTimeAsync(2900);
+    expect(page.served.reads).toBe(1);
+    await vi.advanceTimersByTimeAsync(100);
+    await page.settle();
+    expect(page.served.reads).toBe(2);
+    expect(page.tabs('data')[2]).toEqual(['Extraction', '4', 'warn']);
+
+    // Deux écritures rapprochées : une seule relecture, trois secondes après la dernière.
+    page.el('p-dry').click();
+    await page.settle();
+    await vi.advanceTimersByTimeAsync(2000);
+    page.el('p-dry').click();
+    await page.settle();
+    expect(changed).toBe(3);
+    await vi.advanceTimersByTimeAsync(2900);
+    expect(page.served.reads).toBe(2);
+    await vi.advanceTimersByTimeAsync(100);
+    await page.settle();
+    expect(page.served.reads).toBe(3);
+    await vi.advanceTimersByTimeAsync(60_000);
+    expect(page.served.reads).toBe(3);
+  });
+
+  it('une route en erreur laisse le menu tel qu’il est, sans un mot au journal', async () => {
+    const page = await menu();
+    page.served.status = 500;
+    page.all('#tabs [data-tab="patch"]')[0].click();
+    page.all('#tabs [data-tab="dashboard"]')[0].click();
+    await page.settle();
+    expect(page.served.reads).toBe(2);
+    expect(page.badged()).toEqual(['extractor', 'character', 'effects']);
+    expect(page.el('journal').hidden).toBe(true);
+
+    // Dès le chargement : un menu sans pastille, et la page s'ouvre quand même.
+    const down = await menu({ status: 500 });
+    expect(down.served.reads).toBe(1);
+    expect(down.badged()).toEqual([]);
+    expect(down.el('tab-dashboard').hidden).toBe(false);
+    expect(down.el('journal').hidden).toBe(true);
+  });
+
+  it('un minuteur armé par une page fermée ne lit rien pour la suivante', async () => {
+    vi.useFakeTimers({ toFake: ['setTimeout', 'clearTimeout'] });
+    const old = await menu();
+    old.el('push').click();
+    await old.settle();
+    const next = await menu();
+    await vi.advanceTimersByTimeAsync(60_000);
+    expect(old.served.reads).toBe(1);
+    expect(next.served.reads).toBe(1);
+  });
+
+  it('la route : `GET /api/badges` rend `badgesState`, sans rien d’autre du tableau de bord', () => {
+    const server = readFileSync(resolve(import.meta.dirname, 'server.ts'), 'utf8');
+    expect(server).toContain("if (req.method === 'GET' && url.pathname === '/api/badges') {");
+    expect(server.match(/badgesState\(\)/g)).toHaveLength(1);
+    expect(server.match(/dashboardState\(\)/g)).toHaveLength(1);
+  });
+});
+
 describe('Guides — la page, sur le vrai markup', () => {
   // L'horloge est FACTICE (l'aperçu part 400 ms après une frappe).
   afterEach(() => {

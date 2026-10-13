@@ -1,8 +1,8 @@
 /**
  * quick/ui/lib — ce que les sections de la page ont en commun : les helpers
  * (`$`, `esc`, `log`, `post`), l'état de `/api/state`, le bouton « Pousser » de
- * l'en-tête (`gitBar`), le menu à deux niveaux (`GROUPS`) et le registre des
- * sections avec la bascule.
+ * l'en-tête (`gitBar`), le menu à deux niveaux (`GROUPS`), ses pastilles
+ * (`/api/badges`) et le registre des sections avec la bascule.
  *
  * UNE SECTION = UN ONGLET, dans ses fichiers : `tabs/<nom>.html` (son markup,
  * posé dans la page par `ui-serve.ts`), `tabs/<nom>.css` (son style) et
@@ -246,7 +246,8 @@ export const journalWire = () => {
  * Un geste qui committe (et « Pousser ») rend aussi `git`, l'état d'après :
  * le bouton de l'en-tête se met à jour ici, aucune section n'a rien à faire.
  * Quand il a réussi, la page l'annonce (`quick:saved` sur `document`) : le
- * tableau de bord, s'il est à l'écran, se relit.
+ * tableau de bord, s'il est à l'écran, se relit — et les pastilles du menu,
+ * après leur délai (`badgesSoon`).
  *
  * `onStep` (facultatif) : la section veut les lignes ELLE-MÊME — la sortie
  * d'une commande longue, des milliers de lignes, va dans sa console (« Patch »).
@@ -318,7 +319,10 @@ export async function post(path, payload, onStep) {
   log(data.log ?? [data.error ?? 'erreur'], data.ok);
   if (data.git) {
     gitBar(data.git);
-    if (data.ok) document.dispatchEvent(new Event('quick:saved'));
+    if (data.ok) {
+      document.dispatchEvent(new Event('quick:saved'));
+      badgesSoon();
+    }
   }
   return data;
 }
@@ -344,6 +348,89 @@ function buildMenu() {
         `<button class="tab" data-tab="${s.id}" data-group="${g.id}" aria-selected="false" hidden>${s.label}</button>`,
     ),
   ).join('');
+}
+
+// ------------------------------------------------------ pastilles du menu
+/** La classe de `.badge` d'une teinte de l'inbox ; une teinte inconnue est neutre. */
+const BADGE_TONES = { danger: 'ko', warn: 'warn', muted: 'off' };
+/** La pire d'abord : la pastille d'un groupe prend la pire de ses sections. */
+const TONE_ORDER = ['danger', 'warn', 'muted'];
+/**
+ * Après une écriture, la relecture attend : dans les deux secondes qui la
+ * suivent (`ENGINE_STAMP_TTL_MS`, `admin-inbox.ts`), le diff de l'inbox peut
+ * encore être celui d'avant.
+ */
+const BADGES_AFTER_WRITE_MS = 3000;
+let badgeSeq = 0;
+let badgeTimer;
+/** `#groups` tel que `start` l'a rempli : les pastilles ne se lisent que pour lui. */
+let menu = null;
+
+/** Le libellé d'un onglet du menu, et sa pastille quand il y a à faire. */
+const menuLabel = (label, badge, title) =>
+  badge
+    ? `${label} <span class="badge ${BADGE_TONES[badge.tone] ?? 'off'}" title="${esc(title)}">${esc(badge.count)}</span>`
+    : label;
+
+/**
+ * Pose les pastilles de `/api/badges` (`sections` : `{ <id> : { count, tone } }`)
+ * sur les deux rangées : chaque section qui a à faire porte son compte, son
+ * groupe la somme des siens et leur pire teinte. Une section absente perd la
+ * sienne — le menu redit tout à chaque lecture.
+ */
+function paintBadges(sections, at) {
+  const when = at
+    ? ` — relu à ${new Date(at).toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })}`
+    : '';
+  const title = `À faire, d’après le Tableau de bord${when}`;
+  for (const g of GROUPS) {
+    const own = g.sections.map((s) => sections[s.id]).filter(Boolean);
+    const sum = own.length
+      ? {
+          count: own.reduce((n, b) => n + b.count, 0),
+          tone: TONE_ORDER.find((t) => own.some((b) => b.tone === t)),
+        }
+      : null;
+    const gtab = document.querySelector(`#groups [data-group="${g.id}"]`);
+    if (gtab) gtab.innerHTML = menuLabel(g.label, sum, title);
+    for (const s of g.sections) {
+      const tab = document.querySelector(`#tabs [data-tab="${s.id}"]`);
+      if (tab) tab.innerHTML = menuLabel(s.label, sections[s.id], title);
+    }
+  }
+}
+
+/**
+ * Relit `/api/badges` et pose les pastilles. Seule la DERNIÈRE demande se
+ * dessine. Une lecture qui échoue laisse le menu tel qu'il est, sans un mot :
+ * le journal appartient au geste en cours, pas à une pastille. Jamais en
+ * boucle — au chargement, en venant au tableau de bord, et après une écriture
+ * (`badgesSoon`).
+ */
+async function loadBadges() {
+  const mine = ++badgeSeq;
+  clearTimeout(badgeTimer);
+  try {
+    // Un minuteur qui survit à sa page (les tests en ouvrent une par cas,
+    // dans le même processus) n'a plus rien à relire.
+    if ($('groups') !== menu) return;
+    const res = await fetch('/api/badges');
+    if (!res.ok) return;
+    const data = await res.json();
+    if (mine === badgeSeq) paintBadges(data.sections ?? {}, data.at);
+  } catch {
+    /* serveur injoignable, réponse illisible : les pastilles restent */
+  }
+}
+
+/**
+ * Une écriture vient d'avoir lieu — un `post()` qui a committé, ou un geste de
+ * « Patch » (`quick:changed`) : UNE relecture des pastilles, après le délai.
+ * Plusieurs écritures rapprochées n'en font qu'une.
+ */
+function badgesSoon() {
+  clearTimeout(badgeTimer);
+  badgeTimer = setTimeout(loadBadges, BADGES_AFTER_WRITE_MS);
 }
 
 export const sections = {
@@ -404,6 +491,8 @@ export const sections = {
       // y reste entier, pour la section qui le lit à son `open()`.
       history.replaceState(null, '', `#${path}`);
       registry.get(tab)?.open?.();
+      // Le tableau de bord se relit en venant à l'écran : les pastilles avec lui.
+      if (tab === 'dashboard') loadBadges();
     };
     goTo = go;
     for (const b of tabs) b.onclick = () => go(b.dataset.tab);
@@ -449,5 +538,12 @@ export const sections = {
     for (const s of registry.values()) s.init?.();
     registry.get(current)?.open?.();
     loadState();
+
+    // Les pastilles du menu : lues au chargement, puis quand le dépôt a pu
+    // changer — `post()` les relance lui-même après un commit, « Patch »
+    // l'annonce à la fin de chaque geste (`quick:changed` sur `document`).
+    menu = $('groups');
+    loadBadges();
+    document.addEventListener('quick:changed', badgesSoon);
   },
 };
