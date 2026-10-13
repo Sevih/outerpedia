@@ -7,6 +7,57 @@
 
 ## 2026-10-13
 
+- **quick : la vignette de perso complète (rareté, élément, classe) dans
+  Bannières, Journal du site, Tableau de bord et Noms (lot A41)** — suite de la
+  relecture B45 (12/10), tranchée par Sevih le 13/10 : ces quatre sections ne
+  passaient que `{ id }` à `heroTile`, d'où le fond gris et pas de coin, alors
+  que Rangs, la Fiche perso et les Guides montrent la vignette du site. La
+  décision était de lire le roster côté page, sans nouveau champ dans les états
+  du serveur. Le comment : `/api/character/roster` sert déjà id, nom, rareté,
+  élément et classe (vérifié sur un quick isolé : 129 lignes, `2000055` en
+  3★ fire striker) — `server.ts` et `actions.ts` ne bougent pas. La lecture de
+  `tabs/character.js` n'était pas partagée (un `getJson` dans son `init`) :
+  `lib.js` gagne `heroRoster()`, une promesse mémoïsée d'une `Map` id → perso,
+  lue UNE fois pour la page à la première demande ; illisible, elle rend une
+  `Map` vide sans un mot au journal (il appartient au geste en cours) et la
+  demande suivante réessaie. Chaque section garde sa `Map` (`heroes`) et la
+  demande à sa venue à l'écran — `open()`, que Bannières et le Journal
+  n'avaient pas — puis passe `heroes.get(id) ?? { id }` : Tableau de bord
+  (bannières actives et à venir ; seule la carte « Bannières » se redessine
+  quand le roster arrive après le tableau, d'après la dernière lecture gardée),
+  Noms (liste et fiche), Bannières (liste, « Dans le jeu »), Journal (les
+  suggestions de perso, dessinées à la frappe : rien à redessiner). Un id hors
+  du roster — le perso « hors roster » de la table du jeu — reste neutre, comme
+  avant. Une ligne au-delà de celles que le lot citait : les suggestions de
+  Bannières (`suggest`, l'équivalent de celle du Journal, qui l'était) passent
+  par le même chemin — une vignette neutre dans une section sur quatre aurait
+  été un oubli. `STYLE.md` (§ vignette) disait ces quatre onglets neutres : la
+  phrase dit maintenant `heroRoster()`. Vérifié : `pnpm typecheck` (« tsc
+  --noEmit && tsc --noEmit -p datagen/tsconfig.json && tsc --noEmit -p
+  scripts/tsconfig.json », code 0), `pnpm lint` (« eslint », code 0),
+  `pnpm test` (« Tests 3793 passed (3793) »),
+  `NODE_ENV=development pnpm exec vitest run scripts/quick` (« Tests 1110
+  passed (1110) », cinq de plus). Tests happy-dom (`ui-serve.test.ts`, les
+  harnais des quatre sections servent `/api/character/roster` — vide par
+  défaut, ou `'down'`) : dans chacune, un perso du roster porte le fond de
+  rareté et le coin, un id inconnu reste neutre, et le roster n'est lu qu'une
+  fois malgré les redessins, « Rafraîchir », un retour sur l'onglet ; rien
+  n'est lu tant que la section n'est pas venue à l'écran ; roster en 500 :
+  vignettes neutres, section lisible, journal au repos, nouvelle tentative à la
+  venue suivante. Banc (quick isolé sur :4799, clés vidées, lectures seules) :
+  `--tabs banners,dashboard,changelog` et `--tabs names --hash names/2000055`,
+  captures relues — fond de rareté et coin sur les lignes de Bannières, du
+  Tableau de bord, la liste et la fiche de Noms ; rien d'autre ne bouge (le diff
+  des quatre `tabs/*.js` ne touche que l'argument de `heroTile` et la lecture).
+  Laissé : au Journal la vignette n'est PAS à l'image — elle n'existe que dans
+  les suggestions, à la frappe, que le banc ne sait pas provoquer (le test
+  happy-dom la couvre) ; `tabs/character.js` garde sa propre lecture du roster
+  (hors périmètre) — une page qui ouvre la Fiche perso et une de ces sections
+  le lit donc deux fois, `heroRoster()` pourrait servir les deux ; l'arrivée du
+  roster redessine la liste de Bannières et la fiche de Noms une fois, quelques
+  millisecondes après la première venue — un champ en cours de frappe à cet
+  instant perdrait le curseur, pas sa saisie.
+
 - **quick, Extraction : les monstres hors du périmètre du site sont dits
   (« +n hors site », une bascule pour les lire), et « Skills de monstres »
   devient une cible en lecture (lot A40)** — constat de Sevih (13/10) : trois

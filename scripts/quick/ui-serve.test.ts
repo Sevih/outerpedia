@@ -53,6 +53,43 @@ afterEach(async () => {
   for (const w of windows.splice(0)) await w.happyDOM.close();
 });
 
+/** Une ligne de `/api/character/roster` : ce que la vignette lit d'un perso. */
+interface RosterHero {
+  id: string;
+  name: string;
+  element: string;
+  class: string;
+  subClass: string;
+  rarity: number;
+}
+/** Un 3★ feu striker, sauf mention. */
+const rosterHero = (id: string, name: string, over: Partial<RosterHero> = {}): RosterHero => ({
+  id,
+  name,
+  element: 'fire',
+  class: 'striker',
+  subClass: '',
+  rarity: 3,
+  ...over,
+});
+/** Un 2★ eau mage : une vignette qui ne se confond pas avec celle de `rosterHero`. */
+const RARE_MAGE = { rarity: 2, element: 'water', class: 'mage' };
+/** `/api/character/roster` qui ne répond pas : le moteur, un quick lancé avant l'onglet. */
+const ROSTER_DOWN = { ok: false, status: 500, json: async () => ({ error: 'roster illisible' }) };
+/** Combien de fois une page a lu le roster. */
+const rosterReads = (fetch: { mock: { calls: unknown[][] } }): number =>
+  fetch.mock.calls.filter(([path]) => path === '/api/character/roster').length;
+/** Ce qu'une vignette montre de son perso : le fond, l'élément, la classe — `null` pour ce qu'elle n'a pas. */
+const tileLook = (ht: Element | null | undefined): (string | null)[] => [
+  ht?.querySelector('.ht-bg')?.getAttribute('src')?.replace(/^.*\//, '') ?? null,
+  ht?.querySelector('.ht-el')?.getAttribute('data-el') ?? null,
+  ht?.querySelector('.ht-cls')?.getAttribute('src')?.replace(/^.*\//, '') ?? null,
+];
+const TILE_FULL = ['CT_Slot_Unique.webp', 'fire', 'CT_Class_Striker.webp'];
+const TILE_RARE_MAGE = ['CT_Slot_Rare.webp', 'water', 'CT_Class_Mage.webp'];
+/** Le perso hors du roster, ou le roster pas lu : le fond gris, pas de coin. */
+const TILE_NEUTRAL = ['TI_Slot_Normal.webp', null, null];
+
 describe('assemblePage — la coquille et ses onglets', () => {
   it('remplace chaque marqueur par le markup de son onglet, dans l’ordre', () => {
     const page = assemblePage('<main>\n<!-- @tab a -->\n<!-- @tab b -->\n<p>fin</p></main>', (n) =>
@@ -753,7 +790,14 @@ describe('Noms — la page, sur le vrai markup', () => {
    * il sert `rows`, juge un nom court à sa longueur (dix caractères au plus) et
    * note ce que la page poste.
    */
-  async function names(opts: { hash?: string; saved?: (changes: Call['body']) => unknown } = {}) {
+  async function names(
+    opts: {
+      hash?: string;
+      saved?: (changes: Call['body']) => unknown;
+      /** `/api/character/roster` : ses lignes (aucune, par défaut), ou `'down'` — il ne répond pas. */
+      heroes?: RosterHero[] | 'down';
+    } = {},
+  ) {
     vi.resetModules();
     const window = openWindow({ url: `http://localhost:4747/${opts.hash ?? ''}` });
     const { document } = window;
@@ -786,6 +830,8 @@ describe('Noms — la page, sur le vrai markup', () => {
       if (path === '/api/names/fit')
         return answer({ fits: (body as { texts: string[] }).texts.map((t) => t.length <= 10) });
       if (path === '/api/names') return answer(opts.saved?.(body) ?? { ok: true, log: ['fait'] });
+      if (path === '/api/character/roster')
+        return opts.heroes === 'down' ? ROSTER_DOWN : answer({ roster: opts.heroes ?? [] });
       return answer({ imgBase: 'https://img.test', host: 'banc', port: 4747 });
     });
 
@@ -821,6 +867,7 @@ describe('Noms — la page, sur le vrai markup', () => {
       confirm,
       disk,
       settle,
+      rosterReads: () => rosterReads(fetch),
       /** Une venue par un chemin, comme d'une autre section (`sections.go`). */
       go: (path: string) => lib.sections.go(path),
       /** Les lignes de la liste : nom, badge, point. */
@@ -888,7 +935,7 @@ describe('Noms — la page, sur le vrai markup', () => {
       'court trop long',
       'court',
     ]);
-    // Chaque ligne : la vignette partagée (32 px), le fond neutre — l'onglet ne reçoit pas la rareté.
+    // Chaque ligne : la vignette partagée (32 px), le fond neutre — ces persos ne sont pas du roster servi.
     expect(page.all('#n-list .n-row > .ht').map((t) => t.getAttribute('style'))).toEqual(
       Array.from({ length: 4 }, () => '--ht:32px'),
     );
@@ -1115,6 +1162,56 @@ describe('Noms — la page, sur le vrai markup', () => {
     page.all('#tabs [data-tab="coupons"]')[0].click();
     expect(page.confirm).toHaveBeenCalledTimes(1);
     expect(page.el('tab-names').hidden).toBe(true);
+  });
+
+  it('la vignette complète : le roster lu une fois, à la première venue ; un id inconnu reste neutre', async () => {
+    const page = await names({
+      heroes: [rosterHero('1', 'Overflowing Name Anna'), rosterHero('2', 'Long Bella', RARE_MAGE)],
+    });
+    // Paresseux : l'onglet n'est pas venu à l'écran, rien n'est lu.
+    expect(page.rosterReads()).toBe(0);
+    page.go('names/1');
+    await page.settle();
+    expect(page.rosterReads()).toBe(1);
+
+    // La liste : Anna et Bella sont du roster, Carla et Zed n'y sont pas.
+    page.filter('all');
+    expect(page.all('#n-list .n-row > .ht').map(tileLook)).toEqual([
+      TILE_FULL,
+      TILE_RARE_MAGE,
+      TILE_NEUTRAL,
+      TILE_NEUTRAL,
+    ]);
+    // La fiche : la même vignette, en 56 px.
+    const who = () => page.all('#n-sheet .n-who > .ht')[0];
+    expect(who().getAttribute('style')).toBe('--ht:56px');
+    expect(tileLook(who())).toEqual(TILE_FULL);
+
+    // Quitter l'onglet et y revenir, ouvrir un autre perso : rien n'est relu.
+    page.all('#tabs [data-tab="coupons"]')[0].click();
+    page.go('names/2');
+    await page.settle();
+    expect(tileLook(who())).toEqual(TILE_RARE_MAGE);
+    page.open('3');
+    await page.settle();
+    expect(tileLook(who())).toEqual(TILE_NEUTRAL);
+    expect(page.rosterReads()).toBe(1);
+  });
+
+  it('roster illisible : les vignettes restent neutres, sans un mot au journal, et la venue suivante réessaie', async () => {
+    const page = await names({ heroes: 'down' });
+    page.go('names/1');
+    await page.settle();
+    expect(page.all('#n-list .n-row > .ht').map(tileLook)).toEqual([TILE_NEUTRAL]);
+    expect(tileLook(page.all('#n-sheet .n-who > .ht')[0])).toEqual(TILE_NEUTRAL);
+    // La section se lit quand même, et le journal reste au repos.
+    expect(page.list()).toEqual([['Overflowing Name Anna', 'badge ko', '']]);
+    expect(page.el('journal').hidden).toBe(true);
+    expect(page.rosterReads()).toBe(1);
+
+    page.go('names/2');
+    await page.settle();
+    expect(page.rosterReads()).toBe(2);
   });
 });
 
@@ -7932,7 +8029,12 @@ describe('Bannières — la page, sur le vrai markup', () => {
    * `state`, répond à l'enregistrement et note ce que la page poste.
    */
   async function banners(
-    opts: { state?: Partial<State>; saved?: (body: Call['body']) => unknown } = {},
+    opts: {
+      state?: Partial<State>;
+      saved?: (body: Call['body']) => unknown;
+      /** `/api/character/roster` : ses lignes (aucune, par défaut), ou `'down'` — il ne répond pas. */
+      heroes?: RosterHero[] | 'down';
+    } = {},
   ) {
     vi.resetModules();
     const window = openWindow({ url: 'http://localhost:4747/#banners' });
@@ -7968,6 +8070,8 @@ describe('Bannières — la page, sur le vrai markup', () => {
       }
       if (path === '/api/banners')
         return answer(opts.saved?.(body) ?? { ok: true, log: ['fait'], issues: [], written: true });
+      if (path === '/api/character/roster')
+        return opts.heroes === 'down' ? ROSTER_DOWN : answer({ roster: opts.heroes ?? [] });
       return answer({ imgBase: 'https://img.test', host: 'banc', port: 4747 });
     });
 
@@ -8003,6 +8107,7 @@ describe('Bannières — la page, sur le vrai markup', () => {
       confirm,
       served,
       settle,
+      rosterReads: () => rosterReads(fetch),
       /** Les lignes de la table : nom, début, fin, badges, classe. */
       rows: () =>
         all('#b-list tr').map((tr) => [
@@ -8328,6 +8433,49 @@ describe('Bannières — la page, sur le vrai markup', () => {
     page.all('#tabs [data-tab="coupons"]')[0].click();
     expect(page.confirm).toHaveBeenCalledTimes(1);
     expect(page.el('tab-banners').hidden).toBe(true);
+  });
+
+  it('la vignette complète dans la liste, « Dans le jeu » et les suggestions ; le roster lu une fois', async () => {
+    const page = await banners({
+      heroes: [
+        rosterHero('4', 'Dana'),
+        rosterHero('2', 'Bella'),
+        rosterHero('5', 'Summer Anna', RARE_MAGE),
+      ],
+    });
+    // La liste : Dana est du roster servi, Anna n'y est pas — l'id seul, le fond neutre.
+    expect(page.rows().map(([name]) => name)).toEqual(['Dana', 'Anna']);
+    expect(page.all('#b-list .b-who > .ht').map(tileLook)).toEqual([TILE_FULL, TILE_NEUTRAL]);
+    // « Dans le jeu » : à insérer (Summer Anna, puis le perso hors roster), à aligner (Bella).
+    expect(page.game().map(([name]) => name)).toEqual(['Summer Anna', '9', 'Bella']);
+    expect(page.all('#b-game .b-win > .ht').map(tileLook)).toEqual([
+      TILE_RARE_MAGE,
+      TILE_NEUTRAL,
+      TILE_FULL,
+    ]);
+
+    // Les suggestions d'une ligne ajoutée, puis la ligne une fois le perso choisi.
+    page.el('b-add').click();
+    page.type(page.all('#b-list [data-pick]')[0] as HTMLInputElement, 'AN');
+    expect(page.all('#b-list .results div').map((d) => d.textContent)).toEqual([
+      'Anna',
+      'Dana',
+      'Summer Anna',
+    ]);
+    expect(page.all('#b-list .results div > .ht').map(tileLook)).toEqual([
+      TILE_NEUTRAL,
+      TILE_FULL,
+      TILE_RARE_MAGE,
+    ]);
+    page.all('#b-list .results div')[2].click();
+    expect(tileLook(page.all('#b-list tr')[0].querySelector('.b-who > .ht'))).toEqual(
+      TILE_RARE_MAGE,
+    );
+
+    // Tous ces redessins, et « Annuler » : une seule lecture du roster.
+    page.el('b-reset').click();
+    expect(page.all('#b-list .b-who > .ht').map(tileLook)).toEqual([TILE_FULL, TILE_NEUTRAL]);
+    expect(page.rosterReads()).toBe(1);
   });
 });
 
@@ -9174,6 +9322,8 @@ describe('Journal du site — la page, sur le vrai markup', () => {
       translated?: (texts: string[]) => unknown;
       /** L'état répond autre chose que 200 : un serveur plus vieux que l'onglet (404), le moteur (500). */
       stateDown?: { status: number; body: unknown };
+      /** `/api/character/roster` : ses lignes (aucune, par défaut), ou `'down'` — il ne répond pas. */
+      heroes?: RosterHero[] | 'down';
     } = {},
   ) {
     vi.resetModules();
@@ -9225,6 +9375,8 @@ describe('Journal du site — la page, sur le vrai markup', () => {
         previews.push(asked);
         return answer(viewOf(asked.entry, asked.lang));
       }
+      if (path === '/api/character/roster')
+        return opts.heroes === 'down' ? ROSTER_DOWN : answer({ roster: opts.heroes ?? [] });
       if (init) calls.push({ path, body });
       if (path === '/api/translate') {
         const { texts } = body as { texts: string[] };
@@ -9290,6 +9442,7 @@ describe('Journal du site — la page, sur le vrai markup', () => {
       confirm,
       served,
       settle,
+      rosterReads: () => rosterReads(fetch),
       texts,
       item,
       type,
@@ -9985,6 +10138,30 @@ describe('Journal du site — la page, sur le vrai markup', () => {
     const none = await journal({ hash: 'changelog/7' });
     expect(none.all('#j-list .j-item.open')).toEqual([]);
     expect(none.titles()).toHaveLength(3);
+  });
+
+  it('les suggestions de perso portent la vignette complète ; le roster lu une fois', async () => {
+    const page = await journal({
+      heroes: [rosterHero('4', 'Dana'), rosterHero('5', 'Summer Anna', RARE_MAGE)],
+    });
+    page.template('Perso').click();
+    const search = page.el('j-form').querySelector('[data-pick]') as unknown as HTMLInputElement;
+    page.type(search, 'AN');
+    // Anna n'est pas du roster servi : l'id seul, le fond neutre.
+    expect(page.all('#j-form .results div > .ht + span').map((n) => n.textContent)).toEqual([
+      'Anna',
+      'Dana',
+      'Summer Anna',
+    ]);
+    expect(page.all('#j-form .results div > .ht').map(tileLook)).toEqual([
+      TILE_NEUTRAL,
+      TILE_FULL,
+      TILE_RARE_MAGE,
+    ]);
+    // Chaque frappe redessine les suggestions : rien n'est relu.
+    page.type(search, 'DAN');
+    expect(page.all('#j-form .results div > .ht').map(tileLook)).toEqual([TILE_FULL]);
+    expect(page.rosterReads()).toBe(1);
   });
 });
 
@@ -10816,6 +10993,8 @@ describe('Tableau de bord — la page, sur le vrai markup', () => {
       pushed?: unknown;
       status?: number;
       git?: GitState;
+      /** `/api/character/roster` : ses lignes (aucune, par défaut), ou `'down'` — il ne répond pas. */
+      heroes?: RosterHero[] | 'down';
     } = {},
   ) {
     vi.resetModules();
@@ -10858,6 +11037,8 @@ describe('Tableau de bord — la page, sur le vrai markup', () => {
             git: { branch: 'main', ahead: 0, behind: 0 },
           },
         );
+      if (path === '/api/character/roster')
+        return opts.heroes === 'down' ? ROSTER_DOWN : answer({ roster: opts.heroes ?? [] });
       // `/api/state`, sans `git` d'office : l'en-tête ne suit alors que le
       // tableau de bord.
       return answer({ imgBase: 'https://img.test', host: 'banc', port: 4747, git: opts.git });
@@ -10894,6 +11075,7 @@ describe('Tableau de bord — la page, sur le vrai markup', () => {
       served,
       posts,
       settle,
+      rosterReads: () => rosterReads(fetch),
       /** Les lignes d'un bloc : la teinte de la pastille, ce qui s'y lit, teintée ? */
       rows: (id: string) =>
         all(`#${id} .h-row`).map((li) => [
@@ -11238,6 +11420,38 @@ describe('Tableau de bord — la page, sur le vrai markup', () => {
     await hidden.settle();
     expect(hidden.posts).toEqual(['/api/push']);
     expect(hidden.served.reads).toBe(0);
+  });
+
+  it('les bannières portent la vignette complète ; le roster lu une fois, « Rafraîchir » compris', async () => {
+    const heroes = [rosterHero('2', 'Bella'), rosterHero('4', 'Dana', RARE_MAGE)];
+    const page = await dashboard({ heroes });
+    const tiles = () => page.all('#h-banners .h-row > .ht');
+    // Bella (active) et Dana (à venir) sont du roster servi ; Anna n'y est pas.
+    expect(tiles().map(tileLook)).toEqual([TILE_FULL, TILE_NEUTRAL, TILE_RARE_MAGE]);
+    expect(tiles().map((t) => t.getAttribute('style'))).toEqual(
+      Array.from({ length: 3 }, () => '--ht:24px'),
+    );
+    expect(page.rosterReads()).toBe(1);
+
+    // « Rafraîchir » relit le tableau, pas le roster.
+    page.el('h-refresh').click();
+    await page.settle();
+    expect(page.served.reads).toBe(2);
+    expect(tiles().map(tileLook)).toEqual([TILE_FULL, TILE_NEUTRAL, TILE_RARE_MAGE]);
+    expect(page.rosterReads()).toBe(1);
+
+    // Illisible : les vignettes neutres, comme avant, et le journal au repos.
+    const down = await dashboard({ heroes: 'down' });
+    expect(down.all('#h-banners .h-row > .ht').map(tileLook)).toEqual([
+      TILE_NEUTRAL,
+      TILE_NEUTRAL,
+      TILE_NEUTRAL,
+    ]);
+    expect(down.el('journal').hidden).toBe(true);
+
+    // Tableau caché au démarrage : rien n'est lu tant qu'il ne vient pas à l'écran.
+    const hidden = await dashboard({ hash: '#coupons', heroes });
+    expect(hidden.rosterReads()).toBe(0);
   });
 });
 

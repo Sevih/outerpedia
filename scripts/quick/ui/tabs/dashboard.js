@@ -1,12 +1,16 @@
 // Onglet « Tableau de bord » : l'accueil de quick — ce qui demande une action.
 // Il montre et renvoie, il ne fait rien : aucune route n'est postée d'ici.
-import { $, GROUPS, esc, gitBar, log, sections, state } from '../lib.js';
+import { $, GROUPS, esc, gitBar, heroRoster, log, sections, state } from '../lib.js';
 import { heroTile } from '../hero-tile.mjs';
 
 // `/api/dashboard` : cinq blocs indépendants (`inbox`, `git`, `game`,
 // `banners`, `coupons`), chacun `null` avec sa raison dans `errors` quand sa
 // lecture a levé, et `today`, le jour UTC du serveur.
 let seq = 0;
+let last = null; // la dernière lecture dessinée (cf. `askHeroes`)
+// id → sa ligne du roster (`heroRoster`) : la rareté, l'élément et la classe
+// que la vignette montre. Vide tant qu'il n'est pas lu, ou illisible.
+let heroes = new Map();
 
 /** Les teintes qu'une pastille sait prendre ; le reste est neutre. */
 const TONES = new Set(['ok', 'warn', 'danger', 'info', 'muted']);
@@ -158,13 +162,13 @@ function renderBanners(banners, error) {
     ...banners.active.map((b) =>
       row(
         'ok',
-        `${heroTile(state, { id: b.id }, { px: 24 })}${label(b.name)}<span class="badge active h-end">${left(b.daysLeft)}</span>`,
+        `${heroTile(state, heroes.get(b.id) ?? { id: b.id }, { px: 24 })}${label(b.name)}<span class="badge active h-end">${left(b.daysLeft)}</span>`,
       ),
     ),
     ...banners.upcoming.map((b) =>
       row(
         'info',
-        `${heroTile(state, { id: b.id }, { px: 24 })}${label(b.name)}<span class="badge upcoming h-end">dans ${b.inDays} j</span>`,
+        `${heroTile(state, heroes.get(b.id) ?? { id: b.id }, { px: 24 })}${label(b.name)}<span class="badge upcoming h-end">dans ${b.inDays} j</span>`,
       ),
     ),
   ];
@@ -203,6 +207,7 @@ function renderCoupons(coupons, error) {
 
 // ------------------------------------------------------ la lecture
 function render(data) {
+  last = data;
   const errors = data.errors ?? {};
   $('h-today').textContent = data.today ? `au ${data.today} (UTC)` : '';
   renderInbox(data.inbox, errors.inbox);
@@ -235,6 +240,18 @@ async function load() {
   }
 }
 
+/**
+ * Le roster, en venant à l'écran : lu une fois pour la page (`heroRoster`).
+ * Arrivé après le tableau, il redessine la carte « Bannières », elle seule.
+ */
+function askHeroes() {
+  heroRoster().then((map) => {
+    if (map === heroes || !map.size) return;
+    heroes = map;
+    if (last) renderBanners(last.banners, last.errors?.banners);
+  });
+}
+
 $('h-refresh').onclick = load;
 
 // Les boutons qui renvoient à une section de quick.
@@ -252,5 +269,8 @@ document.addEventListener('quick:saved', () => {
 sections.register('dashboard', {
   // À chaque venue à l'écran : au démarrage si c'est lui qui s'ouvre, puis à
   // chaque retour sur l'onglet.
-  open: load,
+  open: () => {
+    askHeroes();
+    return load();
+  },
 });

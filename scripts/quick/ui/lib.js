@@ -327,6 +327,31 @@ export async function post(path, payload, onStep) {
   return data;
 }
 
+// ------------------------------------------------------ le roster des vignettes
+let heroes = null;
+
+/**
+ * Le roster des persos, par id (`/api/character/roster` : id, nom, rareté,
+ * élément, classe) : ce que la vignette (`heroTile`) lit pour son fond de
+ * rareté et son coin, dans les sections dont l'état ne porte que des ids
+ * (Bannières, Journal du site, Tableau de bord, Noms). Lu UNE fois pour la
+ * page, à la première demande — une section le demande en venant à l'écran —,
+ * puis rendu de mémoire : la même `Map` à chaque appel.
+ *
+ * Illisible (un quick lancé avant ce code, le moteur) : une `Map` vide, sans un
+ * mot au journal — les vignettes restent neutres, rien d'autre n'en dépend — et
+ * la demande suivante réessaie.
+ */
+export function heroRoster() {
+  heroes ??= getJson('/api/character/roster')
+    .then((r) => new Map(r.roster.map((c) => [c.id, c])))
+    .catch(() => {
+      heroes = null;
+      return new Map();
+    });
+  return heroes;
+}
+
 // ------------------------------------------------------ sections
 const registry = new Map();
 /** La bascule de `start`, pour `sections.go`. */

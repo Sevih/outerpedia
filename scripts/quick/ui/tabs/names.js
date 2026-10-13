@@ -1,5 +1,5 @@
 // Onglet « Noms » : le nom court d'affichage et les alias de recherche.
-import { $, esc, getJson, log, post, sections, state, stateLoaded } from '../lib.js';
+import { $, esc, getJson, heroRoster, log, post, sections, state, stateLoaded } from '../lib.js';
 import { heroTile } from '../hero-tile.mjs';
 
 let names = { rows: [], langs: [], width: 80 };
@@ -14,6 +14,9 @@ let refused = new Set(); // persos écartés au dernier enregistrement
 // `/api/names/fit` à la saisie — la page ne mesure rien elle-même.
 const verdicts = new Map();
 let drawnBase = state.imgBase; // la base du dernier dessin (cf. `init`)
+// id → sa ligne du roster des persos (`heroRoster`) : la rareté, l'élément et la
+// classe que la vignette montre. Vide tant qu'il n'est pas lu, ou illisible.
+let heroes = new Map();
 
 /** La langue de repli du site (`lRec`) : le nom court anglais sert aux autres. */
 const FALLBACK = 'en';
@@ -121,7 +124,7 @@ function renderList() {
   list.innerHTML = rows
     .map(
       (row) =>
-        `<li><button type="button" class="n-row" data-id="${esc(row.id)}" aria-current="${row.id === current}">${heroTile(state, { id: row.id }, { px: 32 })}<span class="n-name">${esc(row.name)}</span>${statusBadge(row)}<span class="n-pt">${dot(row.id)}</span></button></li>`,
+        `<li><button type="button" class="n-row" data-id="${esc(row.id)}" aria-current="${row.id === current}">${heroTile(state, heroes.get(row.id) ?? { id: row.id }, { px: 32 })}<span class="n-name">${esc(row.name)}</span>${statusBadge(row)}<span class="n-pt">${dot(row.id)}</span></button></li>`,
     )
     .join('');
   if (focused) rowButton(focused)?.focus();
@@ -193,7 +196,7 @@ function renderSheet() {
   }
   const w = workOf(row);
   $('n-sheet').innerHTML =
-    `<div class="n-who">${heroTile(state, { id: row.id }, { px: 56 })}<div class="n-id"><strong>${esc(row.name)}</strong><span class="n-badges" id="n-badges">${sheetBadges(row)}</span></div></div>
+    `<div class="n-who">${heroTile(state, heroes.get(row.id) ?? { id: row.id }, { px: 56 })}<div class="n-id"><strong>${esc(row.name)}</strong><span class="n-badges" id="n-badges">${sheetBadges(row)}</span></div></div>
     <p class="hint">Le site affiche le nom court là où le nom complet ne tient pas sur deux lignes de ${names.width} px, la largeur du libellé sur mobile ; sans valeur dans une langue, l'anglais sert.</p>
     <div class="scroll"><table>
       <thead><tr><th>Langue</th><th>Nom complet</th><th>Nom court</th></tr></thead>
@@ -410,6 +413,18 @@ function namesLeave() {
   );
 }
 
+/**
+ * Le roster des persos, à la première venue à l'écran : lu une fois pour la
+ * page (`heroRoster`). Arrivé après la liste, il la redessine, la fiche avec.
+ */
+function askHeroes() {
+  heroRoster().then((map) => {
+    if (map === heroes || !map.size) return;
+    heroes = map;
+    if (names.rows.length) renderNames();
+  });
+}
+
 sections.register('names', {
   init: () => {
     // `#names/<id>` ouvre l'onglet sur la fiche de ce perso (un lien, le banc
@@ -432,6 +447,7 @@ sections.register('names', {
   // Une venue par un chemin (`sections.go('names/<id>')`, le récap de la Fiche
   // perso) : ce perso, comme au démarrage.
   open: () => {
+    askHeroes();
     const [, id] = /^#names\/([^/]+)$/.exec(location.hash) ?? [];
     if (id) select(decodeURIComponent(id));
   },

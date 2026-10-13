@@ -1,7 +1,7 @@
 // Onglet « Journal du site » : le changelog du site (`changelog.json`) — une
 // entrée se pose par gabarit, se traduit, et se relit telle que la page
 // `/changelog` la montrera.
-import { $, esc, getJson, log, post, sections, state, stateLoaded } from '../lib.js';
+import { $, esc, getJson, heroRoster, log, post, sections, state, stateLoaded } from '../lib.js';
 import { heroTile } from '../hero-tile.mjs';
 
 // `/api/changelog/state` : le fichier curé dans son ordre, le jour UTC, le
@@ -31,6 +31,10 @@ let limit = 0; // combien de lignes sont dessinées (cf. `PAGE`)
 let form = null; // le gabarit dont le formulaire est ouvert
 let seq = 0;
 let drawnBase = state.imgBase; // la base du dernier dessin (cf. `init`)
+// id → sa ligne du roster des persos (`heroRoster`) : la rareté, l'élément et la
+// classe que la vignette d'une suggestion montre. Vide tant qu'il n'est pas lu,
+// ou illisible.
+let heroes = new Map();
 // L'aperçu : une langue pour toutes les fiches, et par ligne sa requête en
 // cours, son dernier rendu, son refus.
 const pv = { lang: 'en', of: new Map() };
@@ -465,7 +469,7 @@ function suggest(input, on = true) {
   box.innerHTML = hits
     .map(
       (c) =>
-        `<div data-id="${esc(c.id)}" data-slug="${esc(c.slug)}">${heroTile(state, { id: c.id }, { px: 24 })}<span>${esc(c.name)}</span><span class="lbl mono">${esc(c.slug)}</span></div>`,
+        `<div data-id="${esc(c.id)}" data-slug="${esc(c.slug)}">${heroTile(state, heroes.get(c.id) ?? { id: c.id }, { px: 24 })}<span>${esc(c.name)}</span><span class="lbl mono">${esc(c.slug)}</span></div>`,
     )
     .join('');
   box.hidden = !hits.length;
@@ -833,6 +837,14 @@ sections.register('changelog', {
         }
       })
       .catch((e) => log([`Journal du site illisible : ${e}`], false));
+  },
+  // À la première venue à l'écran : le roster des persos, lu une fois pour la
+  // page (`heroRoster`). Rien à redessiner — les suggestions se dessinent à la
+  // frappe.
+  open: () => {
+    heroRoster().then((map) => {
+      if (map.size) heroes = map;
+    });
   },
   // Des changements en attente ne survivent pas à un rechargement de la page.
   dirty: () => pending(),

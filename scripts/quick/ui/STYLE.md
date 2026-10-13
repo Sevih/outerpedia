@@ -306,9 +306,13 @@ onglets) porte ses proportions. `env` = `{ imgBase }` (`state` convient) ;
 Les tailles : 64 px dans le picker de héros, 56 px en tête d'une fiche (Fiche
 perso, Noms), 44 px avec le nom sur une tuile de héros (synergies, Guides),
 36 px dans Rangs, 32 px dans une liste (Bannières, Noms), 24 px dans une liste
-de suggestions et au Tableau de bord. Un onglet qui ne reçoit que l'id (pas la
-rareté, l'élément ni la classe : Bannières, Journal, Tableau de bord, Noms) a
-le fond neutre et pas d'icône au coin. Ce que `Thumbnail` fait de plus et que
+de suggestions et au Tableau de bord. Un onglet dont l'état ne porte que l'id
+(pas la rareté, l'élément ni la classe : Bannières, Journal, Tableau de bord,
+Noms) lit le roster par `heroRoster()` de `lib.js` — `/api/character/roster`,
+une `Map` id → perso, lue UNE fois pour la page à la première venue à l'écran
+d'une de ces sections — et passe `heroes.get(id) ?? { id }` (A41). Un id hors
+du roster, ou un roster illisible : le fond neutre et pas d'icône au coin,
+sans erreur. Ce que `Thumbnail` fait de plus et que
 la vignette ne reproduit pas : les étoiles de transcendance (elles se lisent
 dans la table du jeu, que la page n'a pas), le niveau, le skin des réglages du
 site. Un onglet ne recompose plus ni visage ni portrait : ni `.face`, ni
