@@ -7062,6 +7062,8 @@ export interface ExtractorTargetInfo {
   file: string;
   /** Le sous-objet d'un fichier partagé (les effets sous `glossaries.json`). */
   subKey?: string;
+  /** Cible en LECTURE (`readOnly` du registre) : elle se lit, aucun geste ne l'écrit. */
+  readOnly?: true;
 }
 
 /** Ce qu'une cible a à revoir, les cinq comptes de l'admin. */
@@ -7075,6 +7077,8 @@ export interface ExtractorEntityRow {
   /** Le nombre de feuilles qui divergent (zéro pour une nouvelle ou une disparue). */
   fields: number;
   diff: DiffGroup[];
+  /** Hors du périmètre du site (la bascule « hors site ») : ni fiche, ni intégration. */
+  offSite?: true;
 }
 
 export type ExtractorMode = 'all' | 'minor';
@@ -7083,7 +7087,11 @@ export type ExtractorMode = 'all' | 'minor';
 export interface ExtractorDeps {
   /** Les tables du jeu sont sur ce poste (sans elles, rien ne se lit ni ne s'écrit). */
   tables: () => boolean;
-  /** Les dix cibles, dans l'ordre de l'admin (`EXTRACTOR_ENTITIES`). */
+  /**
+   * Les dix cibles, dans l'ordre de l'admin (`EXTRACTOR_ENTITIES`), et les
+   * cibles en lecture du registre, chacune à la suite de celle qu'elle y suit
+   * (« Skills de monstres » sous « Monstres »).
+   */
   targets: () => Promise<ExtractorTargetInfo[]>;
   /** `bucketsOf` de l'admin : mémoïsé, tolérant (zéro partout sans extraction). */
   bucketsOf: (id: string) => Promise<DiffBuckets>;
@@ -7219,12 +7227,23 @@ export const EXTRACTOR_DEPS: ExtractorDeps = {
   tables: () => existsSync(tablePath('TextSystem')),
   targets: async () => {
     const { EXTRACTOR_ENTITIES } = await import('@/lib/admin/admin-inbox');
-    const { getTarget } = await import('@datagen/extractor/targets');
+    const { TARGETS, getTarget } = await import('@datagen/extractor/targets');
+    const info = (t: (typeof TARGETS)[number]): ExtractorTargetInfo => ({
+      id: t.id,
+      label: t.label,
+      file: t.file,
+      ...(t.subKey ? { subKey: t.subKey } : {}),
+      ...(t.readOnly ? { readOnly: true } : {}),
+    });
     return EXTRACTOR_ENTITIES.flatMap((e) => {
       const t = getTarget(e.id);
-      return t
-        ? [{ id: t.id, label: t.label, file: t.file, ...(t.subKey ? { subKey: t.subKey } : {}) }]
-        : [];
+      if (!t) return [];
+      // Une cible en lecture n'est pas une entité de l'inbox : elle se range
+      // sous celle qui la précède dans le registre.
+      const readOnly: ExtractorTargetInfo[] = [];
+      for (let i = TARGETS.indexOf(t) + 1; TARGETS[i]?.readOnly; i++)
+        readOnly.push(info(TARGETS[i]));
+      return [info(t), ...readOnly];
     });
   },
   bucketsOf: async (id) => (await import('@/lib/admin/admin-inbox')).bucketsOf(id),
@@ -7385,6 +7404,8 @@ function entityName(id: string, entry: unknown): string | undefined {
   if (!isRecord(name)) return undefined;
   if (id === 'character' && typeof name.en === 'string')
     return characterDisplayName(entry as Parameters<typeof characterDisplayName>[0]) || undefined;
+  // Un skill de monstre sans nom localisé (finisher, passif d'IA) : son type.
+  if (id === 'monster-skill') return skillLabel(entry as Parameters<typeof skillLabel>[0]);
   return typeof name.en === 'string' && name.en ? name.en : undefined;
 }
 
@@ -7407,11 +7428,56 @@ const EXTRACTOR_STATUSES: readonly ReviewEntityStatus[] = [
 const statusRank = (s: ReviewEntityStatus): number =>
   s === 'diff' ? 0 : s === 'new' ? 1 : s === 'removed' ? 2 : 3;
 
+/** Le `?status=` de la bascule « hors site » de la cible monster. */
+export const OFF_SITE_STATUS = 'offsite';
+
+type ReviewDiff = TargetReview['diff'];
+
 /**
- * La vue d'ensemble : les dix cibles, chacune avec ses cinq comptes (ceux de
+ * Un diff partagé en deux : ce que le site sert (`actionableDiff`) et ce qu'il
+ * écarte — les entités HORS du périmètre du site. Le complément de ce qu'il
+ * garde, sans relire le périmètre : vide quand rien n'est filtré (une autre
+ * cible que les monstres, ou un périmètre qui ne se calcule pas).
+ */
+async function splitBySite(
+  id: string,
+  diff: ReviewDiff,
+  deps: ExtractorDeps,
+): Promise<{ site: ReviewDiff; off: ReviewDiff }> {
+  const site = await deps.actionable(id, diff);
+  const kept = new Set([...site.added, ...site.removed, ...site.changed.map((c) => c.key)]);
+  return {
+    site,
+    off: {
+      ...diff,
+      added: diff.added.filter((k) => !kept.has(k)),
+      removed: diff.removed.filter((k) => !kept.has(k)),
+      changed: diff.changed.filter((c) => !kept.has(c.key)),
+    },
+  };
+}
+
+/**
+ * Les monstres nouveaux, modifiés ou retirés que le site ne sert pas : ce que
+ * le diff complet porte en plus des comptes de la ligne. Tolérant comme
+ * `bucketsOf` — une extraction qui ne se lit pas rend zéro.
+ */
+async function offSiteCount(deps: ExtractorDeps): Promise<number> {
+  try {
+    const { off } = await splitBySite('monster', (await deps.review('monster')).diff, deps);
+    return off.added.length + off.changed.length + off.removed.length;
+  } catch {
+    return 0;
+  }
+}
+
+/**
+ * La vue d'ensemble : les cibles, chacune avec ses cinq comptes (ceux de
  * l'inbox — les monstres au périmètre du site), son fichier et le nombre
- * d'entités committées. Sans tables du jeu sur le poste, les comptes sont à
- * zéro et `tables` le dit avec sa raison : rien ne se lit.
+ * d'entités committées. La ligne des monstres dit de plus ce que le diff
+ * complet porte HORS du site (`offSite`) : ses comptes restent ceux du site.
+ * Sans tables du jeu sur le poste, les comptes sont à zéro et `tables` le dit
+ * avec sa raison : rien ne se lit.
  */
 export async function extractorOverview(deps: ExtractorDeps = EXTRACTOR_DEPS) {
   const tables = deps.tables();
@@ -7424,6 +7490,8 @@ export async function extractorOverview(deps: ExtractorDeps = EXTRACTOR_DEPS) {
       label: t.label,
       file: t.file,
       site: t.id === 'monster',
+      ...(t.id === 'monster' ? { offSite: tables ? await offSiteCount(deps) : 0 } : {}),
+      ...(t.readOnly ? { readOnly: true as const } : {}),
       sheet: isSheetTarget(t.id),
       committed: Object.keys(deps.committed(t)).length,
       buckets,
@@ -7440,7 +7508,10 @@ export async function extractorOverview(deps: ExtractorDeps = EXTRACTOR_DEPS) {
  * égal les plus touchées d'abord, puis par clé), filtrées par `status` et par
  * `q` (la règle d'Effets — chaque mot commence un mot — sur le nom et la clé),
  * chacune avec son diff en arbre (`diffTree`, les ids résolus). Les monstres
- * sont au périmètre du SITE, comme les comptes. `was` est la signature de ce
+ * sont au périmètre du SITE, comme les comptes ; `offSite` compte ceux que le
+ * diff complet porte en plus, et `status: 'offsite'` (la bascule « hors site »)
+ * montre CEUX-LÀ à la place, tous statuts confondus, cherchés par `q` de même
+ * — les comptes et `total` restent ceux du site. `was` est la signature de ce
  * que l'écran voit : un geste la renvoie, et refuse si elle a bougé.
  */
 export async function extractorTarget(
@@ -7455,6 +7526,7 @@ export async function extractorTarget(
     label: target.label,
     file: target.file,
     site: id === 'monster',
+    ...(target.readOnly ? { readOnly: true as const } : {}),
     /** Les entités de cette cible ont une fiche (`#extractor/<cible>/<clé>`). */
     sheet: isSheetTarget(id),
   };
@@ -7466,23 +7538,27 @@ export async function extractorTarget(
       buckets: EXTRACTOR_EMPTY,
       total: 0,
       shown: 0,
+      ...(base.site ? { offSite: 0 } : {}),
       entities: [] as ExtractorEntityRow[],
       was: '',
     };
   const review = await deps.review(id);
-  const diff = await deps.actionable(id, review.diff);
-  const all = await deps.entities(diff);
+  const { site, off } = await splitBySite(id, review.diff, deps);
+  const all = await deps.entities(site);
+  const outside = base.site ? await deps.entities(off) : [];
+  const offSite = base.site && opts.status === OFF_SITE_STATUS;
+  const pool = offSite ? outside : all;
   const fresh = await deps.fresh(id);
   const committed = deps.committed(target);
   const nameOf = (key: string): string =>
     entityName(id, fresh[key]) ?? entityName(id, committed[key]) ?? key;
   const labels = diffLabels(
-    all.flatMap((e) => e.fields),
+    pool.flatMap((e) => e.fields),
     await deps.resolvers(id),
   );
   const status = EXTRACTOR_STATUSES.find((s) => s === opts.status);
   const q = typeof opts.q === 'string' ? opts.q.trim() : '';
-  const named = all.map((e) => ({ ...e, name: nameOf(e.key) }));
+  const named = pool.map((e) => ({ ...e, name: nameOf(e.key) }));
   const entities: ExtractorEntityRow[] = named
     .filter((e) => !status || e.status === status)
     .filter(
@@ -7500,6 +7576,7 @@ export async function extractorTarget(
       status: e.status,
       fields: e.fields.length,
       diff: diffTree(e.fields, labels),
+      ...(offSite ? { offSite: true as const } : {}),
     }));
   return {
     ...base,
@@ -7507,6 +7584,7 @@ export async function extractorTarget(
     buckets: bucketsOfEntities(all),
     total: all.length,
     shown: entities.length,
+    ...(base.site ? { offSite: outside.length } : {}),
     entities,
     was: deps.signature(target),
     // La cible monster porte le `select` de « Intégrer un mode ».
@@ -7534,7 +7612,7 @@ export interface ExtractorOutcome extends Outcome {
   minor?: number;
 }
 
-/** La porte des gestes : les tables du jeu, puis la signature. */
+/** La porte des gestes : une cible qui s'écrit, les tables du jeu, puis la signature. */
 async function extractorGate(
   id: string,
   was: unknown,
@@ -7542,6 +7620,15 @@ async function extractorGate(
 ): Promise<{ target: ExtractorTargetInfo } | { refused: ExtractorOutcome }> {
   const target = (await deps.targets()).find((t) => t.id === id);
   if (!target) return { refused: { ok: false, log: [`cible inconnue : ${id}`] } };
+  if (target.readOnly)
+    return {
+      refused: {
+        ok: false,
+        log: [
+          `Rien n’est écrit — ${target.label} est une cible en lecture : data/generated/${target.file} part avec ses monstres (« Promouvoir » de la section Patch, ou « Intégrer » d’un monstre), jamais d’ici.`,
+        ],
+      },
+    };
   if (!deps.tables())
     return { refused: { ok: false, log: [`Rien n’est écrit — ${NO_GAME_DATA}`] } };
   if (was !== deps.signature(target))
@@ -7562,7 +7649,8 @@ async function extractorGate(
  * réécrit — nouvelles et disparues comprises, tout-ou-rien) ou « Appliquer les
  * retouches mineures » (`minor` : `acceptMinor`, les seules entités typo ou
  * mineures fusionnées) d'une cible, puis UN commit du fichier. Refusé AVANT
- * d'écrire sans tables du jeu, ou si l'écran a vu autre chose (`stale`). Les
+ * d'écrire pour une cible en lecture, sans tables du jeu, ou si l'écran a vu
+ * autre chose (`stale`). Les
  * images des entités validées que l'écriture touche sont stagées par le
  * moteur ; le bilan va au journal, et la section Patch pousse le staging.
  */

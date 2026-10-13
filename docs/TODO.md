@@ -83,36 +83,6 @@
       est le test, bloquant dans `pnpm commit`).
       À faire par Sevih : remplir
       la colonne « Agacements » (en vrac) ; puis un lot par section.
-- [ ] **quick, Patch → Extraction : zéro repère sur ce qui a changé (constat du
-      13/10, cycle du patch)** : après Patch › « Rafraîchir » puis « Dry-run »,
-      la revue dit « monsters : 3 diff » en texte brut dans une console, et
-      c'est tout — rien dans le menu du haut, rien qui mène à Données ›
-      Extraction où les écarts sont pourtant comptés par cible et dépliables
-      entité par entité (même base que le dry-run : extraction fraîche
-      depuis `.gamedata` contre `data/generated/`). Avant de promouvoir, on
-      ne sait ni quoi ni où. Attendu, en un lot A : (1) la revue du dry-run
-      devient structurée — une ligne par cible touchée avec ses comptes et un
-      lien « voir » qui ouvre `#extractor/<cible>` ; (2) des pastilles
-      (compte) sur le groupe Données et l'onglet Extraction, nourries par
-      l'inbox que `/api/dashboard` sert déjà (chaque item a sa section :
-      `extract:<cible>`, « tags », bannières, coupons), rafraîchies au retour
-      sur l'accueil et à la fin d'un travail de Patch ; (3) « Promouvoir »
-      annonce ce qu'il va écrire (fichiers et comptes), pas seulement
-      « --apply ». Constaté le 13/10 en situation : le dry-run disait
-      « 3 monstres, 2 skills de monstres », Extraction › Monstres disait zéro
-      — les trois (`55300006`, `55300018`, `55300019`, emplacements recyclés
-      en « Doppelakeus ») sont HORS périmètre du site, filtrés par
-      `actionableDiff`, et `monster-skills.json` n'a aucune cible dans
-      Extraction. À régler dans le même lot : (4) la vue d'ensemble dit « +n
-      hors site » sur la cible Monstres (bascule pour les voir, sans les
-      compter dans la pastille), et une cible « Skills de monstres » en
-      lecture, ou au moins la ligne du dry-run qui dit « hors périmètre du
-      site, aucune action ». → LOTS A38 (revue du dry-run, Promouvoir), A39 (pastilles), A40 (hors site, cible monster-skills), rédigés le 13/10.
-      FAIT le 13/10 (lot A38) : (1) et (3), et la ligne du dry-run qui dit
-      « dont n hors périmètre du site — aucune action dans Extraction ».
-      FAIT le 13/10 (lot A39) : (2), les pastilles — sur chaque section où
-      l'inbox a un item et sur son groupe, pas seulement Données ›
-      Extraction. Reste (4), lot A40.
 - [ ] **« Extraction » — contrôles à l'écran (lot F20)** : le banc ne
       clique pas, aucun geste réel n'a été joué (le dépôt du jour n'a qu'un
       perso nouveau sans nom, `2400015`, et aucun écart). Relancer quick

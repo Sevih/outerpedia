@@ -1,7 +1,10 @@
 // Onglet « Extraction » : la revue de maintenance de l'admin — l'extraction
 // fraîche des tables du jeu contre ce que le site committe —, cible par cible,
 // et ses gestes : confirmer une extraction, appliquer ses retouches mineures,
-// intégrer ou retirer un item. Puis la FICHE d'une entité — un perso, un
+// intégrer ou retirer un item. Les monstres se comptent au périmètre du site :
+// ce que le diff porte en plus se dit (« +n hors site ») et se lit sous sa
+// bascule, sans geste ; « Skills de monstres » est une cible en lecture, sans
+// geste non plus. Puis la FICHE d'une entité — un perso, un
 // monstre, une famille d'équipement — : ce que le jeu en dit, son écart, et
 // « Intégrer », qui l'écrit ; et « Intégrer un mode » sur la cible monster.
 // Un monstre a de plus son bloc « Versions » : ses archives figées, qui les
@@ -14,7 +17,7 @@ import { gameText } from '../gear-view.mjs';
 let ov = null; // la vue d'ensemble : `/api/extractor`
 let tg = null; // la cible ouverte : `/api/extractor/target`
 let current = null; // l'id de la cible ouverte
-let status = ''; // le statut filtré ; '' : tout
+let status = ''; // le statut filtré ; '' : tout ; `OFF_SITE` : la bascule « hors site »
 let limit = 0; // le nombre de lignes dessinées (cf. `PAGE`)
 let busy = false; // un geste tourne : les autres attendent
 let seq = 0; // la dernière lecture d'une cible est la seule qui se dessine
@@ -44,6 +47,11 @@ const STATUSES = [
   ['typo', 'typo'],
   ['removed', 'removed'],
 ];
+/** Le `?status=` de la bascule « hors site » (`OFF_SITE_STATUS` du serveur). */
+const OFF_SITE = 'offsite';
+/** Pourquoi une ligne hors site n'a ni « Fiche » ni « Intégrer ». */
+const OFF_SITE_WHY =
+  'Hors périmètre du site : aucune page ne sert ce monstre — ni fiche, ni intégration ici. Il part avec « Promouvoir » de la section Patch, ou avec « Confirmer l’extraction », qui écrit le fichier entier.';
 /** La teinte du badge d'un statut : les vrais écarts en rouge, le nouveau en accent, le reste discret. */
 const TONE = { new: 'edit', diff: 'ko', minor: 'off', typo: 'off', removed: 'ko' };
 
@@ -97,7 +105,12 @@ function renderOverview() {
     .map((t) => {
       const b = t.buckets;
       const quiet = !t.actionable && !t.soft;
-      return `<tr class="${quiet ? 'ex-quiet' : ''}" data-id="${esc(t.id)}"><td><span class="ex-tlabel"><strong>${esc(t.label)}</strong>${t.site ? '<span class="ex-scope">périmètre du site</span>' : ''}</span></td><td class="code">${esc(t.file)}</td>${cell(b.new, 'new')}${cell(b.diff, 'diff')}${cell(b.minor, 'minor')}${cell(b.typo, 'typo')}${cell(b.removed, 'removed')}<td class="ex-n">${t.committed}</td><td>${
+      const scope = t.site
+        ? `<span class="ex-scope">périmètre du site${t.offSite ? ` · <span class="ex-quiet" title="${esc(`${plural(t.offSite, 'monstre nouveau, modifié ou retiré', 'monstres nouveaux, modifiés ou retirés')} que le site ne sert pas : la bascule « hors site » de la cible les montre.`)}">+${t.offSite} hors site</span>` : ''}</span>`
+        : t.readOnly
+          ? '<span class="ex-scope">en lecture — promu avec Monstres</span>'
+          : '';
+      return `<tr class="${quiet ? 'ex-quiet' : ''}" data-id="${esc(t.id)}"><td><span class="ex-tlabel"><strong>${esc(t.label)}</strong>${scope}</span></td><td class="code">${esc(t.file)}</td>${cell(b.new, 'new')}${cell(b.diff, 'diff')}${cell(b.minor, 'minor')}${cell(b.typo, 'typo')}${cell(b.removed, 'removed')}<td class="ex-n">${t.committed}</td><td>${
         quiet && ov.tables ? '<span class="lbl">rien à revoir</span> ' : ''
       }<button type="button" class="btn ghost sm" data-open="${esc(t.id)}">Ouvrir</button></td></tr>`;
     })
@@ -182,20 +195,29 @@ const isItem = () => tg?.id === 'item';
 function rowHtml(e) {
   const open = opened.has(e.key);
   const fields = e.status === 'new' || e.status === 'removed' ? '' : plural(e.fields, 'champ');
-  const action = isItem()
-    ? `<button type="button" class="btn ghost sm" data-item="${esc(e.key)}"${busy || !tg.tables ? ' disabled' : ''}>${e.status === 'removed' ? 'Retirer' : 'Intégrer'}</button>`
-    : tg?.sheet
-      ? `<button type="button" class="btn ghost sm" data-sheet="${esc(e.key)}">Fiche</button>`
-      : '';
-  return `<div class="ex-row" data-key="${esc(e.key)}"><div class="ex-line"><button type="button" class="ex-toggle" data-key="${esc(e.key)}" aria-expanded="${open}"><span class="badge ${TONE[e.status] ?? 'off'}">${esc(e.status)}</span><span class="ex-name">${esc(e.name)}</span><span class="ex-key">${esc(e.key)}</span><span class="ex-fields">${fields}</span><span class="ex-chev" aria-hidden="true">▶</span></button>${action}</div>${open ? diffHtml(e.diff) : ''}</div>`;
+  // Une entité hors site n'a pas de fiche : sa ligne se lit, sans geste, et dit pourquoi au survol.
+  const action = e.offSite
+    ? ''
+    : isItem()
+      ? `<button type="button" class="btn ghost sm" data-item="${esc(e.key)}"${busy || !tg.tables ? ' disabled' : ''}>${e.status === 'removed' ? 'Retirer' : 'Intégrer'}</button>`
+      : tg?.sheet
+        ? `<button type="button" class="btn ghost sm" data-sheet="${esc(e.key)}">Fiche</button>`
+        : '';
+  return `<div class="ex-row" data-key="${esc(e.key)}"><div class="ex-line"${e.offSite ? ` title="${esc(OFF_SITE_WHY)}"` : ''}><button type="button" class="ex-toggle" data-key="${esc(e.key)}" aria-expanded="${open}"><span class="badge ${TONE[e.status] ?? 'off'}">${esc(e.status)}</span><span class="ex-name">${esc(e.name)}</span><span class="ex-key">${esc(e.key)}</span><span class="ex-fields">${fields}</span><span class="ex-chev" aria-hidden="true">▶</span></button>${action}</div>${open ? diffHtml(e.diff) : ''}</div>`;
 }
 
 function renderStatuses() {
   const b = tg?.buckets ?? {};
-  $('ex-status').innerHTML = STATUSES.map(
-    ([value, label]) =>
-      `<button type="button" data-status="${value}" aria-pressed="${status === value}">${label}<span class="ex-c">${value ? (b[value] ?? 0) : (tg?.total ?? 0)}</span></button>`,
-  ).join('');
+  // La bascule « hors site » : la cible monster seule, quand le diff en porte
+  // (ou qu'elle est tenue — un geste a pu les écrire entre-temps).
+  const off = tg?.offSite || status === OFF_SITE ? [[OFF_SITE, 'hors site']] : [];
+  $('ex-status').innerHTML = [...STATUSES, ...off]
+    .map(([value, label]) => {
+      const n =
+        value === OFF_SITE ? (tg?.offSite ?? 0) : value ? (b[value] ?? 0) : (tg?.total ?? 0);
+      return `<button type="button" data-status="${value}" aria-pressed="${status === value}"${value === OFF_SITE ? ' title="Les monstres nouveaux, modifiés ou retirés que le site ne sert pas : à lire, sans fiche ni intégration."' : ''}>${label}<span class="ex-c">${n}</span></button>`;
+    })
+    .join('');
 }
 
 function renderHead() {
@@ -206,27 +228,32 @@ function renderHead() {
   if (!tg.tables)
     badges.push(`<span class="badge warn">${esc(tg.reason ?? 'tables absentes')}</span>`);
   else if (!tg.total) badges.push('<span class="badge ok">rien à revoir</span>');
+  if (tg.readOnly) badges.push('<span class="badge off">en lecture</span>');
   if (b.new) badges.push(`<span class="badge edit">${b.new} new</span>`);
   if (b.diff) badges.push(`<span class="badge ko">${b.diff} diff</span>`);
   if (b.minor) badges.push(`<span class="badge off">${b.minor} minor</span>`);
   if (b.typo) badges.push(`<span class="badge off">${b.typo} typo</span>`);
   if (b.removed) badges.push(`<span class="badge ko">${b.removed} removed</span>`);
+  if (tg.offSite) badges.push(`<span class="badge off">+${tg.offSite} hors site</span>`);
   $('ex-badges').innerHTML = badges.join('');
   const soft = b.minor + b.typo;
+  // Une cible en lecture n'a aucun geste : ni retouches, ni confirmation.
   const minor = $('ex-minor');
-  minor.hidden = !tg.tables || !soft;
+  minor.hidden = !tg.tables || !soft || Boolean(tg.readOnly);
   minor.textContent = `Appliquer les retouches mineures (${soft})`;
   minor.disabled = busy;
   const accept = $('ex-accept');
-  accept.hidden = !tg.tables || !tg.total;
+  accept.hidden = !tg.tables || !tg.total || Boolean(tg.readOnly);
   accept.disabled = busy;
-  $('ex-note').textContent = tg.site
-    ? 'Les monstres sont comptés au périmètre du SITE (ceux qu’une page sert) ; « Confirmer l’extraction » écrit quand même le fichier entier, toute l’extraction. « Fiche » : les stats, les rencontres, les skills, les archives et « Intégrer » d’un monstre.'
-    : isItem()
-      ? 'Un item s’intègre ou se retire un par un, par sa ligne ; « Confirmer l’extraction » écrit tout le catalogue d’un coup.'
-      : tg.sheet
-        ? 'Les retouches mineures (texte reformulé sans nombre changé, costume ajouté, coquille) s’appliquent d’un geste ; les vrais écarts attendent « Confirmer l’extraction », tout ou rien par fichier — ou « Fiche », puis « Intégrer » : cette seule entité.'
-        : 'Les retouches mineures (texte reformulé sans nombre changé, costume ajouté, coquille) s’appliquent d’un geste ; les vrais écarts attendent « Confirmer l’extraction », tout ou rien par fichier.';
+  $('ex-note').textContent = tg.readOnly
+    ? `À lire seulement : ce que l’extraction fraîche changerait à data/generated/${tg.file}. Rien ne se confirme ici — le fichier part avec ses monstres : « Promouvoir » de la section Patch (monsters, monster-skills et encounters, le trio à rétention), ou « Intégrer » d’un monstre, qui écrit ses skills avec lui.`
+    : tg.site
+      ? `Les monstres sont comptés au périmètre du SITE (ceux qu’une page sert) ; « Confirmer l’extraction » écrit quand même le fichier entier, toute l’extraction. « Fiche » : les stats, les rencontres, les skills, les archives et « Intégrer » d’un monstre.${tg.offSite ? ` « hors site » : ${plural(tg.offSite, 'monstre')} que le diff porte en plus — à lire, sans fiche ni intégration.` : ''}`
+      : isItem()
+        ? 'Un item s’intègre ou se retire un par un, par sa ligne ; « Confirmer l’extraction » écrit tout le catalogue d’un coup.'
+        : tg.sheet
+          ? 'Les retouches mineures (texte reformulé sans nombre changé, costume ajouté, coquille) s’appliquent d’un geste ; les vrais écarts attendent « Confirmer l’extraction », tout ou rien par fichier — ou « Fiche », puis « Intégrer » : cette seule entité.'
+          : 'Les retouches mineures (texte reformulé sans nombre changé, costume ajouté, coquille) s’appliquent d’un geste ; les vrais écarts attendent « Confirmer l’extraction », tout ou rien par fichier.';
   $('ex-plan').hidden = true;
   renderMode();
 }
@@ -242,14 +269,22 @@ function renderList() {
   $('ex-foot').hidden = rows.length <= drawn;
   $('ex-shown').textContent = `${drawn} lignes montrées sur ${rows.length}`;
   $('ex-more').textContent = `${Math.min(PAGE, rows.length - drawn)} de plus`;
-  const filtering = Boolean(status) || Boolean($('ex-q').value.trim());
-  $('ex-total').textContent = tg
-    ? filtering
-      ? `${tg.shown} sur ${plural(tg.total, 'entité')}`
-      : tg.total
-        ? `${plural(tg.total, 'entité')} à revoir`
-        : 'rien à revoir'
-    : '';
+  const q = Boolean($('ex-q').value.trim());
+  const filtering = Boolean(status) || q;
+  // Sous la bascule, le total est celui du hors-site, pas celui du site.
+  const outside =
+    tg && status === OFF_SITE
+      ? `${q ? `${tg.shown} sur ` : ''}${plural(tg.offSite ?? 0, 'entité')} hors site`
+      : null;
+  $('ex-total').textContent =
+    outside ??
+    (tg
+      ? filtering
+        ? `${tg.shown} sur ${plural(tg.total, 'entité')}`
+        : tg.total
+          ? `${plural(tg.total, 'entité')} à revoir`
+          : 'rien à revoir'
+      : '');
 }
 
 function renderTarget() {
@@ -426,7 +461,7 @@ $('ex-accept').onclick = () => {
       `${plural(bk().removed, 'entité retirée', 'entités retirées')} SUPPRIMÉE${bk().removed > 1 ? 'S' : ''}`,
     );
   $('ex-plan-text').textContent =
-    `Écrire l’extraction fraîche ENTIÈRE dans data/generated/${tg.file}${tg.site ? ' — toute l’extraction, pas seulement le périmètre du site' : ''} : ${parts.join(', ') || 'aucun écart'} — tout ou rien, puis un commit « chore(extractor): ${tg.id} — extraction confirmee ».`;
+    `Écrire l’extraction fraîche ENTIÈRE dans data/generated/${tg.file}${tg.site ? ` — toute l’extraction, pas seulement le périmètre du site${tg.offSite ? ` (${plural(tg.offSite, 'monstre')} hors site en plus)` : ''}` : ''} : ${parts.join(', ') || 'aucun écart'} — tout ou rien, puis un commit « chore(extractor): ${tg.id} — extraction confirmee ».`;
   $('ex-plan').hidden = false;
   $('ex-plan-go').focus();
 };

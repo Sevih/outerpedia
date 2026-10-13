@@ -155,6 +155,10 @@ let bucketsMemo: { stamp: string; buckets: Map<string, DiffBuckets> } | undefine
  * Monstres restreints au périmètre SITE (`actionableDiff`) : sans ça le compte
  * intègre du bruit d'extraction que rien ne peut traiter. Tolérant à l'échec —
  * une extraction cassée ne doit pas faire tomber la coquille admin.
+ *
+ * `reviewAll` couvre tout le registre, la cible en lecture « Skills de
+ * monstres » comprise : ses comptes sont ici pour la vue d'ensemble de quick,
+ * mais l'inbox ne la liste pas — elle parcourt `EXTRACTOR_ENTITIES`.
  */
 function memoizedBuckets(): Map<string, DiffBuckets> {
   const { stamp, newest } = inputsStamp();

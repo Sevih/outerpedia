@@ -14742,6 +14742,39 @@ describe('Extraction — la page, sur le vrai markup', () => {
     { key: '15003', name: 'Stamina', status: 'new', fields: 0, diff: [] },
     { key: '15002', name: 'Gone Gem', status: 'removed', fields: 0, diff: [] },
   ];
+  // --- le hors-site et la cible en lecture (`opts.offSite`) ---
+  /** Les deux retouches que le site sert : les comptes de la ligne des monstres. */
+  const MONSTER_ENTITIES = [
+    { key: '400101', name: 'Slime', status: 'minor', fields: 1, diff: [] },
+    { key: '400103', name: 'Bat', status: 'minor', fields: 1, diff: [] },
+  ];
+  /** Ce que le diff porte en plus, sous la bascule « hors site ». */
+  const OFF_SITE_ENTITIES = [
+    {
+      key: '55300006',
+      name: 'Doppelakeus',
+      status: 'diff',
+      fields: 2,
+      diff: ENTITIES[0].diff,
+      offSite: true,
+    },
+    { key: '55300018', name: 'Doppelakeus', status: 'new', fields: 0, diff: [], offSite: true },
+  ];
+  const SKILL_TARGET = {
+    id: 'monster-skill',
+    label: 'Skills de monstres',
+    file: 'monster-skills.json',
+    site: false,
+    readOnly: true,
+    committed: 4064,
+    buckets: { ...EMPTY, new: 1, minor: 1 },
+    actionable: 1,
+    soft: 1,
+  };
+  const SKILL_ENTITIES = [
+    { key: '1120923', name: 'Mirror Slash · monster_1', status: 'new', fields: 0, diff: [] },
+    { key: '1120001', name: 'Bite · monster_1', status: 'minor', fields: 1, diff: [] },
+  ];
   /** Les cibles qui ont une fiche (`isSheetTarget` du serveur). */
   const SHEET_TARGETS = ['character', 'monster', 'ee', 'weapon', 'amulet', 'talisman', 'set'];
   const MODES = [{ value: 'joint_challenge', label: 'Joint Challenge' }];
@@ -15017,6 +15050,11 @@ describe('Extraction — la page, sur le vrai markup', () => {
       freeze?: unknown[];
       /** Le statut de revue de la fiche de Slime (`same` d'office). */
       review?: string;
+      /**
+       * Le serveur d'après A40 : la ligne des monstres porte ce compte « hors
+       * site » (et la cible sa bascule), « Skills de monstres » suit, en lecture.
+       */
+      offSite?: number;
     } = {},
   ) {
     vi.resetModules();
@@ -15028,6 +15066,13 @@ describe('Extraction — la page, sur le vrai markup', () => {
       '',
     );
     const tables = opts.tables ?? true;
+    const withOffSite = opts.offSite !== undefined;
+    const targets: Array<(typeof TARGETS)[number] & { offSite?: number; readOnly?: boolean }> =
+      withOffSite
+        ? TARGETS.flatMap((t) =>
+            t.id === 'monster' ? [{ ...t, offSite: opts.offSite }, SKILL_TARGET] : [t],
+          )
+        : TARGETS;
     const calls: Call[] = [];
     let freezeReads = 0;
     const answer = (data: unknown) => {
@@ -15117,12 +15162,12 @@ describe('Extraction — la page, sur le vrai markup', () => {
           tables,
           ...(tables ? {} : { reason: 'Pas de données du jeu : lancer un patch (pull) d’abord.' }),
           targets: tables
-            ? TARGETS
-            : TARGETS.map((t) => ({ ...t, buckets: EMPTY, actionable: 0, soft: 0 })),
+            ? targets
+            : targets.map((t) => ({ ...t, buckets: EMPTY, actionable: 0, soft: 0 })),
         });
       if (url.pathname === '/api/extractor/target') {
         const id = url.searchParams.get('id') ?? '';
-        const t = TARGETS.find((x) => x.id === id);
+        const t = targets.find((x) => x.id === id);
         if (!t)
           return {
             ok: false,
@@ -15131,7 +15176,19 @@ describe('Extraction — la page, sur le vrai markup', () => {
           };
         const status = url.searchParams.get('status');
         const q = (url.searchParams.get('q') ?? '').toLowerCase();
-        const all = id === 'item' ? ITEM_ENTITIES : id === 'character' ? ENTITIES : [];
+        // La bascule « hors site » : ces entités à la place, tous statuts confondus.
+        const off = id === 'monster' && withOffSite && status === 'offsite';
+        const outside = OFF_SITE_ENTITIES.slice(0, opts.offSite ?? 0);
+        const all =
+          id === 'item'
+            ? ITEM_ENTITIES
+            : id === 'character'
+              ? ENTITIES
+              : id === 'monster-skill'
+                ? SKILL_ENTITIES
+                : id === 'monster' && withOffSite
+                  ? MONSTER_ENTITIES
+                  : [];
         if (!tables)
           return answer({
             id,
@@ -15146,19 +15203,21 @@ describe('Extraction — la page, sur le vrai markup', () => {
             entities: [],
             was: '',
           });
-        const entities = all
-          .filter((e) => !status || e.status === status)
+        const entities = (off ? outside : all)
+          .filter((e) => off || !status || e.status === status)
           .filter((e) => !q || e.name.toLowerCase().startsWith(q) || e.key.startsWith(q));
         return answer({
           id,
           label: t.label,
           file: t.file,
           site: t.site,
+          ...(t.readOnly ? { readOnly: true } : {}),
           sheet: SHEET_TARGETS.includes(id),
           tables: true,
           buckets: t.buckets,
           total: all.length,
           shown: entities.length,
+          ...(t.offSite === undefined ? {} : { offSite: outside.length }),
           entities,
           was: `sig:${id}:v1`,
           ...(id === 'monster' ? { modes: MODES } : {}),
@@ -15469,6 +15528,160 @@ describe('Extraction — la page, sur le vrai markup', () => {
     expect(page.hash()).toBe('#extractor');
     expect(page.el('ex-overview').hidden).toBe(false);
     expect(page.calls.filter((c) => c.path === '/api/extractor')).toHaveLength(2);
+  });
+
+  it('la vue d’ensemble dit le hors-site des monstres, et range « Skills de monstres » dessous, en lecture', async () => {
+    const page = await extractor({ hash: '#extractor', offSite: 2 });
+    const rows = page.overview();
+    expect(rows.map((r) => r.id)).toEqual([
+      'character',
+      'effect',
+      'monster',
+      'monster-skill',
+      'item',
+    ]);
+    // Les comptes de la ligne restent ceux du site ; « +2 hors site » s'y ajoute, discret.
+    expect(rows[2].cells).toEqual([
+      'Monstrespérimètre du site · +2 hors site',
+      'monsters.json',
+      '0',
+      '0',
+      '2',
+      '0',
+      '0',
+      '2451',
+      'Ouvrir',
+    ]);
+    const more = page.all('#ex-tbody tr[data-id="monster"] .ex-scope .ex-quiet');
+    expect(more.map((x) => x.textContent)).toEqual(['+2 hors site']);
+    expect(more[0].title).toBe(
+      '2 monstres nouveaux, modifiés ou retirés que le site ne sert pas : la bascule « hors site » de la cible les montre.',
+    );
+    expect(rows[3].cells).toEqual([
+      'Skills de monstresen lecture — promu avec Monstres',
+      'monster-skills.json',
+      '1',
+      '0',
+      '1',
+      '0',
+      '0',
+      '4064',
+      'Ouvrir',
+    ]);
+    // Rien hors site : la ligne ne dit que son périmètre.
+    const none = await extractor({ hash: '#extractor', offSite: 0 });
+    expect(none.overview()[2].cells[0]).toBe('Monstrespérimètre du site');
+    expect(none.all('#ex-tbody .ex-scope .ex-quiet')).toEqual([]);
+  });
+
+  it('la bascule « hors site » de la cible monster : ces entités, leur diff, sans « Fiche », et pourquoi au survol', async () => {
+    const page = await extractor({ hash: '#extractor/monster', offSite: 2 });
+    expect([...page.el('ex-badges').querySelectorAll('.badge')].map((b) => b.textContent)).toEqual([
+      '2 minor',
+      '+2 hors site',
+    ]);
+    expect(
+      page
+        .all('#ex-status button')
+        .map((b) => `${b.dataset.status}:${b.textContent}:${b.getAttribute('aria-pressed')}`),
+    ).toEqual([
+      ':tout2:true',
+      'new:new0:false',
+      'diff:diff0:false',
+      'minor:minor2:false',
+      'typo:typo0:false',
+      'removed:removed0:false',
+      'offsite:hors site2:false',
+    ]);
+    // Au périmètre du site, chaque ligne a sa fiche.
+    expect(page.all('#ex-rows [data-sheet]').map((b) => b.dataset.sheet)).toEqual([
+      '400101',
+      '400103',
+    ]);
+    expect(page.all('#ex-rows .ex-line').map((l) => l.title)).toEqual(['', '']);
+    expect(page.el('ex-total').textContent).toBe('2 entités à revoir');
+
+    page.status('offsite');
+    await page.settle();
+    expect(page.calls.at(-1)).toEqual({ path: '/api/extractor/target?id=monster&status=offsite' });
+    expect(page.all('#ex-status button[aria-pressed="true"]')[0].dataset.status).toBe('offsite');
+    expect(page.rows().map((r) => [r.key, r.badge, r.name, r.fields])).toEqual([
+      ['55300006', 'diff', 'Doppelakeus', '2 champs'],
+      ['55300018', 'new', 'Doppelakeus', ''],
+    ]);
+    // Le total de la bascule est celui du hors-site ; les badges du site ne bougent pas.
+    expect(page.el('ex-total').textContent).toBe('2 entités hors site');
+    expect([...page.el('ex-badges').querySelectorAll('.badge')].map((b) => b.textContent)).toEqual([
+      '2 minor',
+      '+2 hors site',
+    ]);
+    // Ni fiche ni intégration : la ligne se lit, et dit pourquoi.
+    expect(page.all('#ex-rows [data-sheet]')).toEqual([]);
+    expect(page.all('#ex-rows [data-item]')).toEqual([]);
+    expect(page.all('#ex-rows .ex-line').map((l) => l.title)).toEqual([
+      'Hors périmètre du site : aucune page ne sert ce monstre — ni fiche, ni intégration ici. Il part avec « Promouvoir » de la section Patch, ou avec « Confirmer l’extraction », qui écrit le fichier entier.',
+      'Hors périmètre du site : aucune page ne sert ce monstre — ni fiche, ni intégration ici. Il part avec « Promouvoir » de la section Patch, ou avec « Confirmer l’extraction », qui écrit le fichier entier.',
+    ]);
+    // Le diff se déplie comme ailleurs, et la ligne dépliée reste sans geste.
+    page.open('55300006');
+    expect(page.rows()[0].open).toBe(true);
+    expect(page.diff('55300006').map((g) => g.title)).toEqual([
+      'skills › Fire Strike · second',
+      'costumes › #9',
+    ]);
+    expect(page.all('#ex-rows [data-sheet]')).toEqual([]);
+    // La recherche joue dans la bascule.
+    await page.search('zzz');
+    expect(page.calls.at(-1)).toEqual({
+      path: '/api/extractor/target?id=monster&status=offsite&q=zzz',
+    });
+    expect(page.el('ex-total').textContent).toBe('0 sur 2 entités hors site');
+
+    // « Confirmer l'extraction » écrit le fichier entier : son plan compte le hors-site.
+    page.el('ex-accept').click();
+    expect(page.el('ex-plan-text').textContent).toBe(
+      'Écrire l’extraction fraîche ENTIÈRE dans data/generated/monsters.json — toute l’extraction, pas seulement le périmètre du site (2 monstres hors site en plus) : 2 entités modifiées (dont 2 mineures et 0 coquille) réécrites — tout ou rien, puis un commit « chore(extractor): monster — extraction confirmee ».',
+    );
+    expect(page.calls.filter((c) => c.body)).toEqual([]);
+
+    // Rien hors site : pas de bascule, pas de badge.
+    const none = await extractor({ hash: '#extractor/monster', offSite: 0 });
+    expect(none.all('#ex-status button').map((b) => b.dataset.status)).toEqual([
+      '',
+      'new',
+      'diff',
+      'minor',
+      'typo',
+      'removed',
+    ]);
+    expect([...none.el('ex-badges').querySelectorAll('.badge')].map((b) => b.textContent)).toEqual([
+      '2 minor',
+    ]);
+  });
+
+  it('« Skills de monstres », en lecture : les entités se lisent, aucun geste n’est à l’écran', async () => {
+    const page = await extractor({ hash: '#extractor/monster-skill', offSite: 0 });
+    expect(page.el('ex-title').textContent).toBe('Skills de monstres');
+    expect(page.el('ex-meta').textContent).toBe('data/generated/monster-skills.json');
+    expect([...page.el('ex-badges').querySelectorAll('.badge')].map((b) => b.textContent)).toEqual([
+      'en lecture',
+      '1 new',
+      '1 minor',
+    ]);
+    // Des retouches et des écarts sont là : sur une cible qui s'écrit, les deux gestes seraient montrés.
+    expect(page.el('ex-minor').hidden).toBe(true);
+    expect(page.el('ex-accept').hidden).toBe(true);
+    expect(page.el('ex-mode').hidden).toBe(true);
+    expect(page.el('ex-note').textContent).toBe(
+      'À lire seulement : ce que l’extraction fraîche changerait à data/generated/monster-skills.json. Rien ne se confirme ici — le fichier part avec ses monstres : « Promouvoir » de la section Patch (monsters, monster-skills et encounters, le trio à rétention), ou « Intégrer » d’un monstre, qui écrit ses skills avec lui.',
+    );
+    expect(page.rows().map((r) => [r.key, r.badge, r.name, r.item])).toEqual([
+      ['1120923', 'new', 'Mirror Slash · monster_1', null],
+      ['1120001', 'minor', 'Bite · monster_1', null],
+    ]);
+    expect(page.all('#ex-rows [data-sheet]')).toEqual([]);
+    expect(page.all('#ex-status button').map((b) => b.dataset.status)).not.toContain('offsite');
+    expect(page.calls.filter((c) => c.body)).toEqual([]);
   });
 
   it('les filtres sont joués au serveur : le statut, puis la recherche après la dernière frappe', async () => {

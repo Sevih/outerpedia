@@ -7,6 +7,79 @@
 
 ## 2026-10-13
 
+- **quick, Extraction : les monstres hors du périmètre du site sont dits
+  (« +n hors site », une bascule pour les lire), et « Skills de monstres »
+  devient une cible en lecture (lot A40)** — constat de Sevih (13/10) : trois
+  monstres différaient au dry-run (`55300006`, `55300018`, `55300019`, des
+  emplacements de boss recyclés en « Doppelakeus »), Extraction › Monstres
+  affichait zéro partout, et les deux skills nouveaux n'avaient aucune cible.
+  Rien n'était faux — les comptes sont au périmètre du site, c'est voulu — mais
+  rien ne le disait. Serveur (`scripts/quick/actions.ts`) : `splitBySite`
+  partage un diff en ce que le site sert (`actionableDiff`, inchangé) et son
+  complément, sans relire `siteMonsterIds` — vide quand rien n'est filtré, donc
+  quand le périmètre ne se calcule pas. `extractorOverview` garde les comptes
+  de l'inbox sur la ligne des monstres et lui ajoute `offSite` ;
+  `extractorTarget` rend `offSite` aussi, et `status=offsite`
+  (`OFF_SITE_STATUS`) rend CES entités à la place des autres, chacune marquée
+  `offSite`, nommées, cherchées par `q` et dépliées comme les autres —
+  `buckets` et `total` restent ceux du site, la pastille ne bouge pas. Écran
+  (`ui/tabs/extractor.{js,html,css}`) : « périmètre du site · +3 hors site »
+  sous Monstres (span `.ex-quiet`, discret, le pourquoi au survol), un badge
+  « +3 hors site » et un septième bouton « hors site 3 » dans le segmenté des
+  statuts de la cible, visible seulement quand le diff en porte ; sous la
+  bascule une ligne n'a ni « Fiche » ni geste et son `title` dit pourquoi, le
+  total devient « 3 entités hors site ». « Confirmer l'extraction » reste tout
+  ou rien par fichier : son plan le disait déjà (« toute l'extraction, pas
+  seulement le périmètre du site »), il y ajoute le compte (« 3 monstres hors
+  site en plus ») ; sa règle d'affichage n'a PAS bougé — il n'apparaît que si
+  le site a quelque chose à revoir, le hors-site seul part par « Promouvoir »,
+  comme la ligne du dry-run d'A38 le dit. La cible `monster-skill`
+  (`datagen/extractor/targets.ts`, `readOnly`) : `buildMonsters()` ne rend PAS
+  les skills — la spec monstre ne fait que les référencer par id — mais ils
+  sont isolables sans rien rebâtir : `buildMonsterSkills()`
+  (`generators/monster-skills.ts`), le générateur même de `build.ts`, 65 ms
+  mesurés, mémoïsé sur les tables comme les autres. La cible existe donc, et
+  le repli « promu avec Monstres, sans comptes » n'a pas servi. Elle n'est pas
+  une entité de l'inbox : `EXTRACTOR_DEPS.targets` la range sous Monstres
+  (onzième ligne, « en lecture — promu avec Monstres »), `reviewAll` lui donne
+  ses comptes dans `bucketsOf`, et `buildInbox`, qui parcourt
+  `EXTRACTOR_ENTITIES`, ne la liste pas. Sur elle « Confirmer », « retouches
+  mineures », « Fiche » et « Intégrer » sont absents, et le serveur refuse
+  deux fois : `acceptTarget` et `acceptMinor` lèvent avant toute lecture
+  (`assertWritable`, `datagen/extractor/review.ts` — la route de l'admin est
+  couverte du même coup), et la porte des gestes de quick répond « Rien n'est
+  écrit » avant de les appeler. `datagen/promote.ts` et `RETAIN_ENTITIES` sont
+  intacts. Conséquence hors du code touché, à connaître : Patch pose son
+  « voir » là où Extraction a une cible pour le fichier — `monster-skills.json`
+  en a une désormais, le lien apparaît dans la revue du dry-run et ouvre la
+  cible en lecture ; `patch.ts` n'est pas modifié, seul son test du vrai
+  registre suit (`encounters.json` y tient le cas « aucune cible »). Vérifié :
+  `pnpm typecheck` (« tsc --noEmit … -p scripts/tsconfig.json », code 0),
+  `pnpm lint` (« eslint », code 0), `pnpm test` (« Tests 3788 passed
+  (3788) »), et le lancement ciblé
+  `NODE_ENV=development pnpm exec vitest run scripts/quick src/lib/admin`
+  (« Tests 1706 passed (1706) »). Tests ajoutés : la vue
+  d'ensemble à deux monstres dont un hors site (comptes du site inchangés,
+  `offSite: 1`, zéro si l'extraction ne se lit pas ou sans tables), la bascule
+  (entités, diff, recherche, comptes inchangés), la cible en lecture et ses
+  deux refus d'écriture (moteur et quick), l'ordre des onze cibles de la
+  route, et trois tests de page sur le vrai markup. Banc : quick isolé sur
+  :4799, clés vidées, GET seulement — la vue d'ensemble rend `offSite: 3` et
+  `monster-skill` à 2 nouveaux, `?id=monster&status=offsite` rend les trois
+  Doppelakeus avec leur diff (17 à 21 champs) ; captures de `extractor`,
+  `extractor/monster` et `extractor/monster-skill` relues, les neuf autres
+  lignes de la vue d'ensemble identiques. `STYLE.md` (§ Extraction, et la
+  ligne « voir » de Patch) et `docs/quick-migration.md` suivent ; l'item du
+  TODO, dont c'était le dernier point, est retiré. Laissé : le banc ne clique
+  pas — la bascule à l'écran et le survol d'une ligne hors site restent à
+  regarder par Sevih, quick relancé (deux réponses de route ont changé) ; la
+  vue d'ensemble lance maintenant UNE revue, celle des monstres, pour compter
+  le hors-site — 0,2 s à chaud à chaque ouverture, non mémoïsée ; le
+  second skill nouveau s'affiche sous son nom coréen (`의태한 암종룡`), le jeu
+  ne l'ayant pas traduit — rien à corriger ici ; `monsters.json` confirmé seul
+  n'écrit toujours pas `monster-skills.json` (le trio ne part ensemble que par
+  « Promouvoir » ou « Intégrer »), comme avant ce lot.
+
 - **quick : le menu porte des pastilles là où il y a à faire — sections et
   groupes —, nourries par l'inbox du Tableau de bord (lot A39)** — constat de
   Sevih (13/10) : le dry-run montre des écarts, l'inbox les liste, mais le

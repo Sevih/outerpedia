@@ -208,6 +208,7 @@ import {
   DASHBOARD_DISK,
   ITEMS_DISK,
   NO_GAME_DATA,
+  OFF_SITE_STATUS,
   NO_ITEM_BAKE,
   NO_TRANSLATE_KEY,
   addComics,
@@ -227,6 +228,7 @@ import {
   effectsState,
   eventsState,
   acceptExtraction,
+  EXTRACTOR_DEPS,
   extractorOverview,
   extractorTarget,
   integrateItemAction,
@@ -9134,6 +9136,13 @@ describe('Extraction — extractorOverview, extractorTarget, acceptExtraction, i
     { id: 'item', label: 'Items', file: 'items.json' },
     { id: 'weapon', label: 'Armes', file: 'equipment/weapon.json' },
   ];
+  /** La cible en lecture du registre, que `deps({ readOnly: true })` range sous les monstres. */
+  const SKILL_TARGET: ExtractorTargetInfo = {
+    id: 'monster-skill',
+    label: 'Skills de monstres',
+    file: 'monster-skills.json',
+    readOnly: true,
+  };
   type Dict = Record<string, unknown>;
   const COMMITTED: Record<string, Dict> = {
     character: {
@@ -9155,6 +9164,7 @@ describe('Extraction — extractorOverview, extractorTarget, acceptExtraction, i
     },
     item: { '15001': { name: { en: 'Gem' } }, '15002': { name: { en: 'Gone Gem' } } },
     weapon: { '1001': { name: { en: 'Steel Sword' }, star: 5 } },
+    'monster-skill': { m1: { id: 'm1', name: { en: 'Bite' }, type: 'monster_1', maxLevel: 1 } },
   };
   const FRESH: Record<string, Dict> = {
     character: {
@@ -9190,6 +9200,10 @@ describe('Extraction — extractorOverview, extractorTarget, acceptExtraction, i
     weapon: {
       '1001': { name: { en: 'Steel Sword' }, star: 5 },
       '1002': { name: { en: 'Steel Sword' }, star: 6 },
+    },
+    'monster-skill': {
+      m1: { id: 'm1', name: { en: 'Bite' }, type: 'monster_1', maxLevel: 2 },
+      m2: { id: 'm2', name: { en: '' }, type: 'rage_enter1', maxLevel: 1 },
     },
   };
   const SKILLS: Record<string, string> = { '101': 'S1 · first', '103': 'Fire Strike · second' };
@@ -9367,21 +9381,29 @@ describe('Extraction — extractorOverview, extractorTarget, acceptExtraction, i
       missing?: boolean;
       /** L'index inverse des pins : par clé d'archive, qui l'épingle. */
       pinners?: Record<string, PinRef[]>;
+      /** « Skills de monstres », la cible en lecture, rangée sous les monstres. */
+      readOnly?: boolean;
+      /** La revue des monstres lève : l'extraction ne se lit pas. */
+      broken?: boolean;
     } = {},
   ) {
     const calls: string[] = [];
     const git: [string[], string][] = [];
+    const targets = over.readOnly
+      ? TARGETS.flatMap((t) => (t.id === 'monster' ? [t, SKILL_TARGET] : [t]))
+      : TARGETS;
     const fake: ExtractorDeps = {
       tables: () => over.tables ?? true,
-      targets: async () => TARGETS,
+      targets: async () => targets,
       bucketsOf: async (id) => {
         calls.push(`buckets ${id}`);
         return over.buckets?.[id] ?? EMPTY;
       },
       review: async (id) => {
         calls.push(`review ${id}`);
-        const t = TARGETS.find((x) => x.id === id);
+        const t = targets.find((x) => x.id === id);
         if (!t) throw new Error(`cible inconnue : ${id}`);
+        if (over.broken) throw new Error('extraction illisible');
         return { ...t, diff: diffRecords(COMMITTED[id], FRESH[id]) };
       },
       entities: async (diff) => classify(diff),
@@ -9516,11 +9538,13 @@ describe('Extraction — extractorOverview, extractorTarget, acceptExtraction, i
       soft: 2,
     });
     expect(out.targets[1]).toMatchObject({ buckets: EMPTY, actionable: 0, soft: 0 });
-    // Les comptes viennent de l'inbox (mémoïsés), jamais du moteur : aucune revue lancée.
+    // Les comptes viennent de l'inbox (mémoïsés), jamais du moteur ; la seule
+    // revue lancée est celle des monstres, pour dire ce qui est hors du site.
     expect(calls).toEqual([
       'buckets character',
       'buckets effect',
       'buckets monster',
+      'review monster',
       'buckets item',
       'buckets weapon',
     ]);
@@ -9638,6 +9662,152 @@ describe('Extraction — extractorOverview, extractorTarget, acceptExtraction, i
     const [group] = out.entities[0].diff;
     expect(group.title).toBe('stats');
     expect(group.fields.map((f) => `${f.name}:${f.kind}`)).toEqual(['hp › max:tree']);
+  });
+
+  it('la vue d’ensemble dit les monstres hors du site : les comptes du site inchangés, `offSite` en plus', async () => {
+    // Deux monstres diffèrent, un seul est servi par le site.
+    const siteBuckets = { ...EMPTY, diff: 1 };
+    const { fake } = deps({ site: ['400101'], buckets: { monster: siteBuckets } });
+    const out = await extractorOverview(fake);
+    const monster = out.targets.find((t) => t.id === 'monster');
+    expect(monster).toMatchObject({
+      site: true,
+      buckets: siteBuckets,
+      actionable: 1,
+      soft: 0,
+      offSite: 1,
+    });
+    // Les autres cibles n'ont pas de périmètre : pas de compte « hors site ».
+    expect(out.targets.filter((t) => 'offSite' in t).map((t) => t.id)).toEqual(['monster']);
+
+    // Tout le diff est au site (ou le périmètre ne se calcule pas) : zéro.
+    const whole = await extractorOverview(deps().fake);
+    expect(whole.targets.find((t) => t.id === 'monster')?.offSite).toBe(0);
+    // Une extraction qui ne se lit pas : zéro, la vue d'ensemble tient.
+    const broken = await extractorOverview(deps({ site: ['400101'], broken: true }).fake);
+    expect(broken.targets.find((t) => t.id === 'monster')?.offSite).toBe(0);
+    // Sans tables du jeu : zéro, sans lancer la revue.
+    const none = deps({ site: ['400101'], tables: false });
+    const off = await extractorOverview(none.fake);
+    expect(off.targets.find((t) => t.id === 'monster')?.offSite).toBe(0);
+    expect(none.calls).toEqual([]);
+  });
+
+  it('la bascule « hors site » de la cible monster : CES entités, leur diff, les comptes du site inchangés', async () => {
+    const { fake } = deps({ site: ['400101'] });
+    const site = await extractorTarget('monster', {}, fake);
+    if (!('entities' in site)) throw new Error('cible attendue');
+    expect(site).toMatchObject({ total: 1, shown: 1, offSite: 1 });
+    expect(site.entities.map((e) => [e.key, 'offSite' in e])).toEqual([['400101', false]]);
+
+    const off = await extractorTarget('monster', { status: OFF_SITE_STATUS }, fake);
+    if (!('entities' in off)) throw new Error('cible attendue');
+    // Les comptes et le total restent ceux du site : la bascule ne les déplace pas.
+    expect(off).toMatchObject({
+      site: true,
+      buckets: { ...EMPTY, diff: 1 },
+      total: 1,
+      shown: 1,
+      offSite: 1,
+      was: 'sig:monster:v1',
+    });
+    expect(off.entities.map((e) => [e.key, e.name, e.status, e.fields, e.offSite])).toEqual([
+      ['400102', 'Off-site mob', 'diff', 1, true],
+    ]);
+    // Le diff se déplie comme celui d'une entité du site.
+    expect(off.entities[0].diff.map((g) => g.title)).toEqual(['stats']);
+
+    // La recherche joue dans la bascule, sur ces entités-là.
+    const hit = await extractorTarget('monster', { status: OFF_SITE_STATUS, q: 'off' }, fake);
+    if (!('entities' in hit)) throw new Error('cible attendue');
+    expect(hit.entities.map((e) => e.key)).toEqual(['400102']);
+    const miss = await extractorTarget('monster', { status: OFF_SITE_STATUS, q: 'slime' }, fake);
+    if (!('entities' in miss)) throw new Error('cible attendue');
+    expect([miss.shown, miss.offSite]).toEqual([0, 1]);
+
+    // Sans tables : zéro, comme le reste.
+    const none = await extractorTarget('monster', {}, deps({ tables: false }).fake);
+    expect(none).toMatchObject({ tables: false, offSite: 0 });
+    // Une cible sans périmètre ignore la bascule : un statut inconnu ne filtre pas.
+    const other = await extractorTarget('character', { status: OFF_SITE_STATUS }, fake);
+    if (!('entities' in other)) throw new Error('cible attendue');
+    expect(other.shown).toBe(5);
+    expect(other).not.toHaveProperty('offSite');
+  });
+
+  it('« Skills de monstres », la cible en lecture : rangée sous les monstres, lue comme une autre', async () => {
+    const { fake } = deps({
+      readOnly: true,
+      buckets: { 'monster-skill': { ...EMPTY, new: 1, diff: 1 } },
+    });
+    const out = await extractorOverview(fake);
+    expect(out.targets.map((t) => t.id)).toEqual([
+      'character',
+      'effect',
+      'monster',
+      'monster-skill',
+      'item',
+      'weapon',
+    ]);
+    expect(out.targets.filter((t) => 'readOnly' in t).map((t) => t.id)).toEqual(['monster-skill']);
+    expect(out.targets[3]).toMatchObject({
+      label: 'Skills de monstres',
+      file: 'monster-skills.json',
+      site: false,
+      readOnly: true,
+      sheet: false,
+      committed: 1,
+      buckets: { ...EMPTY, new: 1, diff: 1 },
+    });
+
+    const target = await extractorTarget('monster-skill', {}, fake);
+    if (!('entities' in target)) throw new Error('cible attendue');
+    expect(target).toMatchObject({ readOnly: true, site: false, sheet: false, total: 2 });
+    expect(target).not.toHaveProperty('offSite');
+    // Un skill sans nom localisé se lit par son type.
+    expect(target.entities.map((e) => [e.key, e.status, e.name])).toEqual([
+      ['m1', 'diff', 'Bite · monster_1'],
+      ['m2', 'new', 'rage_enter1'],
+    ]);
+    // Les cibles qui s'écrivent ne portent pas la marque.
+    expect(await extractorTarget('monster', {}, fake)).not.toHaveProperty('readOnly');
+  });
+
+  it('une cible en lecture refuse « Confirmer » et les retouches mineures : rien n’est écrit ni committé', async () => {
+    for (const mode of ['all', 'minor']) {
+      const { calls, git, fake } = deps({ readOnly: true, typo: 1, minor: 1 });
+      const out = await acceptExtraction(
+        'monster-skill',
+        { mode, was: 'sig:monster-skill:v1' },
+        fake,
+      );
+      expect(out, mode).toEqual({
+        ok: false,
+        log: [
+          'Rien n’est écrit — Skills de monstres est une cible en lecture : data/generated/monster-skills.json part avec ses monstres (« Promouvoir » de la section Patch, ou « Intégrer » d’un monstre), jamais d’ici.',
+        ],
+      });
+      expect(calls, mode).toEqual([]);
+      expect(git, mode).toEqual([]);
+    }
+  });
+
+  it('les cibles de la route : les dix de l’admin dans leur ordre, « Skills de monstres » en lecture sous les monstres', async () => {
+    const targets = await EXTRACTOR_DEPS.targets();
+    expect(targets.map((t) => t.id)).toEqual([
+      'character',
+      'effect',
+      'ee',
+      'weapon',
+      'amulet',
+      'armor',
+      'talisman',
+      'set',
+      'monster',
+      'monster-skill',
+      'item',
+    ]);
+    expect(targets.filter((t) => t.readOnly)).toEqual([SKILL_TARGET]);
   });
 
   it('sans tables du jeu, une cible se lit vide avec sa raison ; une cible inconnue est un 404', async () => {

@@ -141,6 +141,12 @@ clair puis confirmation), « Appliquer les retouches mineures (n) »
 (`integrateItem`) ; chaque geste porte `was`, la signature des tables et du
 fichier que l'écran a vus, et refuse `stale` sinon ; le bilan d'images se
 lit après, avec un lien vers Patch, dont « Committer » pousse le staging.
+Depuis le lot A40 la ligne des monstres dit ce que le diff porte HORS du
+périmètre du site (« +n hors site », ses comptes restant ceux du site), la
+cible le montre sous une bascule « hors site (n) » — à lire, sans fiche ni
+intégration —, et une onzième ligne, « Skills de monstres »
+(`monster-skills.json`), se lit sans aucun geste : une cible en lecture,
+que la promotion écrit avec ses monstres.
 Sans `.gamedata` rien ne se lit et l'écran le dit. Hash `#extractor`,
 `#extractor/<cible>`, `#extractor/<cible>/<clé>`. Les dix items
 `extract:<id>` du Tableau de bord ouvrent leur cible ici. Puis les FICHES

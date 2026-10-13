@@ -616,12 +616,13 @@ describe('promoteReview — la revue du dry-run, lue de sa sortie', () => {
 
   it('les cibles sont celles qu’Extraction montre : le vrai registre', async () => {
     const out = [
-      'promotion extrait → validé : 0 identique(s), 5 différent(s)',
+      'promotion extrait → validé : 0 identique(s), 6 différent(s)',
       row('characters.json', '~1'),
       row('glossaries.json', '~1'),
       row('equipment/accessory.json', '~1'),
       row('items.json', '~1'),
       row('monster-skills.json', '~1'),
+      row('encounters.json', '~1'),
     ].join('\n');
     const review = await promoteReview(out, { ...disk(), targets: REVIEW_DISK.targets });
     expect(review.files.map((f) => [f.file, f.target])).toEqual([
@@ -629,7 +630,9 @@ describe('promoteReview — la revue du dry-run, lue de sa sortie', () => {
       ['glossaries.json', 'effect'],
       ['equipment/accessory.json', 'amulet'],
       ['items.json', 'item'],
-      ['monster-skills.json', null],
+      // Une cible en lecture depuis A40 : « voir » y mène, rien ne s'y écrit.
+      ['monster-skills.json', 'monster-skill'],
+      ['encounters.json', null],
     ]);
   });
 });

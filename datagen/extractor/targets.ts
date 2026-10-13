@@ -13,6 +13,7 @@ import { buildCharacters } from './specs/character';
 import { buildMonsters } from './specs/monster';
 import { buildEquipment, type EquipmentData } from '../generators/equipment';
 import { buildItemCatalog } from '../generators/item-catalog';
+import { buildMonsterSkills } from '../generators/monster-skills';
 import { buildEffectGlossary } from '../lib/effects';
 import { fileStamp, tablesStamp } from '../lib/tables';
 
@@ -33,6 +34,14 @@ export interface GeneratedTarget {
    * éléments…) ne doivent pas être touchées par un accept.
    */
   subKey?: string;
+  /**
+   * Cible en LECTURE : la revue la montre (ce que l'extraction fraîche
+   * changerait), mais rien ne l'écrit par ici — `acceptTarget` et `acceptMinor`
+   * la refusent. Pour un fichier qui ne part qu'avec un autre : les skills de
+   * monstres suivent leurs monstres (promotion du trio à rétention de
+   * `promote.ts`, ou « Intégrer » d'un monstre, qui écrit ses skills avec lui).
+   */
+  readOnly?: true;
 }
 
 /**
@@ -99,6 +108,21 @@ function monsters(): ReturnType<typeof buildMonsters> {
   return monsterCache.data;
 }
 
+/**
+ * Le catalogue des skills de monstres, comme `build.ts` l'écrit dans
+ * `monster-skills.json`. La spec monstre ne le produit pas (elle ne fait que
+ * RÉFÉRENCER les skills par id) : c'est un générateur à part, léger (deux
+ * tables et l'index des buffs), mémoïsé sur les tables comme les autres.
+ */
+let monsterSkillCache:
+  { stamp: string; data: ReturnType<typeof buildMonsterSkills>['skills'] } | undefined;
+function monsterSkills(): ReturnType<typeof buildMonsterSkills>['skills'] {
+  const stamp = tablesStamp(['TextSystem']);
+  if (!monsterSkillCache || monsterSkillCache.stamp !== stamp)
+    monsterSkillCache = { stamp, data: buildMonsterSkills().skills };
+  return monsterSkillCache.data;
+}
+
 export const TARGETS: GeneratedTarget[] = [
   {
     id: 'character',
@@ -111,6 +135,13 @@ export const TARGETS: GeneratedTarget[] = [
     label: 'Monstres',
     file: 'monsters.json',
     build: () => monsters().monsters as unknown as Record<string, unknown>,
+  },
+  {
+    id: 'monster-skill',
+    label: 'Skills de monstres',
+    file: 'monster-skills.json',
+    readOnly: true,
+    build: () => monsterSkills() as unknown as Record<string, unknown>,
   },
   {
     id: 'effect',

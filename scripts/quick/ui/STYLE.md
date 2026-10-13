@@ -499,17 +499,17 @@ rendu :
 ```
 .head  Extraction — Le jeu a bougé : ce que l'extraction fraîche… changerait à ce que le site committe… Un geste écrit le fichier et committe ; les images… attendent dans le staging, que « Committer » de la section Patch pousse…
 LA VUE D'ENSEMBLE (#ex-overview, `#extractor`)
-.card  card-head : « Dix cibles » · badge ok « tables du jeu présentes » (ou badge warn, la raison du serveur) … [Actualiser]
-   table : Cible (le libellé ; « périmètre du site » sous Monstres) | Fichier committé (chasse fixe) | Nouvelles | Écarts | Mineures | Coquilles | Retirées | Committées | « rien à revoir » atténué … [Ouvrir]
+.card  card-head : « Dix cibles, une en lecture » · badge ok « tables du jeu présentes » (ou badge warn, la raison du serveur) … [Actualiser]
+   table : Cible (le libellé ; dessous, en .ex-scope : « périmètre du site » sous Monstres, suivi de « · +3 hors site » (span.ex-quiet, discret, `title` : ce que c'est et où le lire) quand le diff complet en porte — les comptes de la ligne restent ceux du site ; « en lecture — promu avec Monstres » sous Skills de monstres, la onzième ligne, rangée sous Monstres ; A40) | Fichier committé (chasse fixe) | Nouvelles | Écarts | Mineures | Coquilles | Retirées | Committées | « rien à revoir » atténué … [Ouvrir]
      les comptes à droite, en chiffres tabulaires : nouveau en accent, écart et retirée en rouge, mineure et coquille atténuées, un zéro à 55 % ; une cible sans rien à revoir est atténuée (.ex-quiet) ; la ligne entière ouvre la cible
 LA CIBLE (#ex-target, `#extractor/<cible>` ; la vue d'ensemble se cache)
-.card.pad.ex-head  [← Extraction] Personnages · data/generated/characters.json · badges « 1 new » (edit) « 2 diff » (ko) « 3 minor » « 1 typo » (off) « 1 removed » (ko), ou « rien à revoir » (ok), ou la raison sans tables (warn) … à droite .ex-acts : [Appliquer les retouches mineures (4)] (.btn.ghost, caché à zéro) [Confirmer l'extraction] (.btn.primary, caché sans rien à revoir)
-   p.hint : la règle de la cible — les monstres « comptés au périmètre du SITE ; « Confirmer l'extraction » écrit quand même le fichier entier », les items « un par un, par sa ligne », les autres « les retouches mineures s'appliquent d'un geste ; les vrais écarts attendent « Confirmer l'extraction », tout ou rien par fichier »
-   .ex-plan (bordé de rouge, caché) — le PLAN de « Confirmer l'extraction », en clair : « Écrire l'extraction fraîche ENTIÈRE dans data/generated/<fichier> : 1 entité nouvelle écrite, 3 entités modifiées (dont 2 mineures et 1 coquille) réécrites, 1 entité retirée SUPPRIMÉE — tout ou rien, puis un commit « chore(extractor): <cible> — extraction confirmee ». » [Écrire et committer] (.btn.danger) [Annuler]
+.card.pad.ex-head  [← Extraction] Personnages · data/generated/characters.json · badges « 1 new » (edit) « 2 diff » (ko) « 3 minor » « 1 typo » (off) « 1 removed » (ko), ou « rien à revoir » (ok), ou la raison sans tables (warn) ; sur les monstres « +3 hors site » (off) en dernier, sur une cible en lecture « en lecture » (off) en premier … à droite .ex-acts : [Appliquer les retouches mineures (4)] (.btn.ghost, caché à zéro) [Confirmer l'extraction] (.btn.primary, caché sans rien à revoir) — les deux ABSENTS d'une cible en lecture, quels que soient ses comptes
+   p.hint : la règle de la cible — les monstres « comptés au périmètre du SITE ; « Confirmer l'extraction » écrit quand même le fichier entier » (et, s'il y en a, « « hors site » : 3 monstres que le diff porte en plus — à lire, sans fiche ni intégration. »), une cible en lecture « À lire seulement… Rien ne se confirme ici — le fichier part avec ses monstres : « Promouvoir » de la section Patch (…le trio à rétention), ou « Intégrer » d'un monstre… », les items « un par un, par sa ligne », les autres « les retouches mineures s'appliquent d'un geste ; les vrais écarts attendent « Confirmer l'extraction », tout ou rien par fichier »
+   .ex-plan (bordé de rouge, caché) — le PLAN de « Confirmer l'extraction », en clair : « Écrire l'extraction fraîche ENTIÈRE dans data/generated/<fichier> : 1 entité nouvelle écrite, 3 entités modifiées (dont 2 mineures et 1 coquille) réécrites, 1 entité retirée SUPPRIMÉE — tout ou rien, puis un commit « chore(extractor): <cible> — extraction confirmee ». » [Écrire et committer] (.btn.danger) [Annuler] ; pour les monstres, après le fichier : « — toute l'extraction, pas seulement le périmètre du site (3 monstres hors site en plus) »
 .card.pad.ex-assets (bordé de vert, caché ; après un geste qui a stagé) — « Images mises en place » [✕] · « 2 produites, 1 refaite, 3 déjà là, 1 manquante. » · ul.ex-missing : `clé` — raison · p.hint « Elles attendent dans le staging (.assets-staging/) : « Committer » de la section Patch les pousse sur R2… » [Ouvrir Patch] (data-go)
-.card.pad  .form : [Chercher 30ch « Début d'un mot du nom, ou la clé »] Statut [tout 12 | new 1 | diff 2 | minor 3 | typo 1 | removed 1] (.ex-seg, le segmenté de Gear reco recopié, le compte en petit dans chaque bouton)   « 12 entités à revoir » ; dès qu'un filtre ou la recherche joue : « 3 sur 12 entités »
+.card.pad  .form : [Chercher 30ch « Début d'un mot du nom, ou la clé »] Statut [tout 12 | new 1 | diff 2 | minor 3 | typo 1 | removed 1] (.ex-seg, le segmenté de Gear reco recopié, le compte en petit dans chaque bouton)   « 12 entités à revoir » ; dès qu'un filtre ou la recherche joue : « 3 sur 12 entités » ; sur les monstres, un septième bouton [hors site 3] quand le diff en porte (A40) — une BASCULE, pas un statut : elle montre ces entités-là À LA PLACE, tous statuts confondus, les comptes des six autres et les badges restant ceux du site ; dessous « 3 entités hors site » (« 1 sur 3 entités hors site » en cherchant)
 .card.ex-list — les entités en LIGNES, repliées, par pages de 100 : card-foot « 100 lignes montrées sur 312 » … [100 de plus]
-   une ligne (.ex-line) : .ex-toggle (un bouton, aria-expanded) = badge du statut (58 px, centré : new = edit, diff et removed = ko, minor et typo = off) · nom · clé (chasse fixe, atténuée) … « 3 champs » (rien pour une nouvelle ou une disparue) · chevron ▶ (tourné quand déplié) ; pour un item, à droite [Intégrer] ou [Retirer] (.btn.ghost.sm, éteints pendant un geste) ; sur une cible à fiches (`sheet`), à droite [Fiche] (.btn.ghost.sm)
+   une ligne (.ex-line) : .ex-toggle (un bouton, aria-expanded) = badge du statut (58 px, centré : new = edit, diff et removed = ko, minor et typo = off) · nom · clé (chasse fixe, atténuée) … « 3 champs » (rien pour une nouvelle ou une disparue) · chevron ▶ (tourné quand déplié) ; pour un item, à droite [Intégrer] ou [Retirer] (.btn.ghost.sm, éteints pendant un geste) ; sur une cible à fiches (`sheet`), à droite [Fiche] (.btn.ghost.sm) ; une ligne HORS SITE (sous la bascule) n'a aucun geste, et son `title` dit pourquoi (« Hors périmètre du site : aucune page ne sert ce monstre — ni fiche, ni intégration ici… ») — elle se déplie comme les autres
 .card.pad#ex-mode (la cible monster seule, F21) — .form : [Intégrer un mode ▾ (select, 30ch)] [Planifier] (.btn.ghost) · « Tous les monstres qui spawnent dans ce mode, et leurs adds… UN commit. » ; puis .ex-plan (rouge) : « Écrire n monstres du mode X dans monsters.json, monster-skills.json et encounters.json (les spawnés, puis leurs adds), re-dériver damage et solver, puis un commit « … ». » · .ex-mode-ids : `id` nom, les adds atténués et suffixés « (add) », quarante puis « … n de plus » · [Écrire et committer] (.btn.danger) [Annuler]
    tri du serveur : diff, new, removed, puis minor et typo ; à statut égal les plus touchées d'abord, puis par clé
    dépliée, .ex-diff (en retrait de 44 px, sous la ligne) : un .ex-group par racine (fond de page, bordé), titré en capitales « SKILLS › Fire Strike · second » (l'élément résolu en texte normal) ; dans le groupe, un .ex-field par feuille : son chemin sous le groupe en chasse fixe (« desc › en », « (entier) » pour l'élément même), puis
@@ -549,7 +549,27 @@ périmètre du site), son fichier et le nombre d'entités committées ; sans
 statut et par la règle d'Effets sur le nom et la clé, trie comme la sidebar
 de l'admin, et rend par entité son diff en arbre (`diffTree` de
 `src/lib/admin/diff-tree.ts`, les ids de skills résolus par `diffLabels`) et
-la signature `was` — les tables et le fichier committé. La page relit la
+la signature `was` — les tables et le fichier committé.
+
+Le hors-site et la cible en lecture (A40). Les comptes des monstres sont ceux
+du site, et ils le restent — ce sont ceux de l'inbox et de la pastille. Le
+serveur dit en plus ce que le diff COMPLET porte hors du périmètre
+(`offSite`, sur la ligne de la vue d'ensemble comme sur la cible) : le
+complément de ce qu'`actionableDiff` garde, sans relire `siteMonsterIds`. La
+vue d'ensemble lance pour cela UNE revue, celle des monstres (0,2 s à
+chaud) ; elle rend zéro si l'extraction ne se lit pas. `status=offsite` (la
+bascule) rend ces entités À LA PLACE des autres, chacune marquée `offSite`,
+`buckets` et `total` inchangés ; `q` y joue de même. « Skills de monstres »
+(`monster-skill`, `monster-skills.json`) est une cible `readOnly` du registre
+(`datagen/extractor/targets.ts`) : son `build` est `buildMonsterSkills()`,
+le générateur de `build.ts`, mémoïsé sur les tables. Elle n'est pas une
+entité de l'inbox — `EXTRACTOR_DEPS.targets` la range sous celle qu'elle suit
+dans le registre, et aucune pastille ne la compte. Rien ne l'écrit d'ici :
+`acceptTarget` et `acceptMinor` lèvent (`assertWritable` de `review.ts`), et
+la porte des gestes de quick la refuse avant eux. Son fichier part avec ses
+monstres — le trio à rétention de `promote.ts`, ou « Intégrer » d'un monstre.
+
+La page relit la
 cible à chaque filtre et 200 ms après la dernière frappe (seule la dernière
 demande se dessine), déplie et replie sans rien redemander, et met la clé
 dépliée dans l'adresse. Les gestes : `POST /api/extractor/accept`
@@ -711,7 +731,7 @@ quatre .card empilées, dans l'ordre du flux ; chacune : card-head = « n · tit
   .card « 2 · Revue de la promotion »         … « pas encore de dry-run » · « dry-run en cours… » · « dry-run réussi à 14:32 » (ok) · « dry-run en échec à 14:32 » (ko) · « dry-run à refaire : la proposition a pu changer » (warn)
      [Dry-run]
      .p-rev (absente avant un dry-run réussi ; A38) : la REVUE, lue de la sortie par le serveur (`promoteReview` de `patch.ts`)
-        ul.p-files (cadre, une ligne par fichier DIFFÉRENT) : li.p-file = `monsters.json` (.mono.p-name, 26ch) · « +0 · ~3 · −0 » (.p-counts, chasse fixe ; `title` : la ligne de promote.ts, où sont les clés ajoutées et retirées ; en mots, `.said` : « nouveau fichier », « retenu, non promu ») · ce que la ligne dit de plus (.p-why, atténué : « 17 retenue(s), jamais supprimées », « reformatage seul », et pour monsters.json « dont 3 hors périmètre du site — aucune action dans Extraction ») … [voir] (.btn.ghost.sm, data-go « extractor/<cible> », poussé à droite — seulement quand Extraction a une cible pour ce fichier : rien pour monster-skills.json, encounters.json, damage/*)
+        ul.p-files (cadre, une ligne par fichier DIFFÉRENT) : li.p-file = `monsters.json` (.mono.p-name, 26ch) · « +0 · ~3 · −0 » (.p-counts, chasse fixe ; `title` : la ligne de promote.ts, où sont les clés ajoutées et retirées ; en mots, `.said` : « nouveau fichier », « retenu, non promu ») · ce que la ligne dit de plus (.p-why, atténué : « 17 retenue(s), jamais supprimées », « reformatage seul », et pour monsters.json « dont 3 hors périmètre du site — aucune action dans Extraction ») … [voir] (.btn.ghost.sm, data-go « extractor/<cible> », poussé à droite — seulement quand Extraction a une cible pour ce fichier : rien pour encounters.json, damage/* ; monster-skills.json a la sienne depuis A40, en lecture)
            li.p-file.warn : un fichier RETENU, non promu — ses mots et sa raison en ambre (« réf(s) de perso non intégré : 2400015 »)
         p.p-note « 61 fichiers identiques. » (rien de différent : « Rien à promouvoir : la proposition est identique au validé (65 fichiers identiques). »)
         p.p-note.warn « Persos non intégrés, jamais promus — l'intégration se fait par entité, dans Extraction : 2400015 » · p.p-note.warn « Validés sans équivalent extrait, à trancher : old-table.json » — chacune seulement s'il y en a

@@ -62,6 +62,18 @@ async function writeBack(target: GeneratedTarget, data: Dict, dir = GENERATED): 
   await writeJson(path, { ...readCommitted(target.file, dir), [target.subKey]: data });
 }
 
+/**
+ * Refuse d'écrire une cible en LECTURE (`readOnly`) : son fichier ne part
+ * qu'avec un autre (les skills de monstres avec leurs monstres). Appelé AVANT
+ * toute lecture, par chaque écriture de cible.
+ */
+function assertWritable(target: GeneratedTarget): void {
+  if (target.readOnly)
+    throw new Error(
+      `cible en lecture seule : ${target.id} — data/generated/${target.file} n'est pas écrit par la revue`,
+    );
+}
+
 export interface TargetReview {
   id: string;
   label: string;
@@ -227,6 +239,7 @@ export async function stageChangedEntities(
 export async function acceptTarget(id: string): Promise<AcceptReport> {
   const target = getTarget(id);
   if (!target) throw new Error(`cible inconnue : ${id}`);
+  assertWritable(target);
   const committed = committedOf(target);
   const fresh = target.build();
   await writeBack(target, fresh);
@@ -264,6 +277,7 @@ export async function acceptMinorIn(
   dir: string,
   target: GeneratedTarget,
 ): Promise<{ typo: string[]; minor: string[] }> {
+  assertWritable(target);
   const { merged, typo, minor } = mergeMinor(committedOf(target, dir), target.build());
   if (typo.length + minor.length) await writeBack(target, merged, dir);
   return { typo, minor };

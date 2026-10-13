@@ -61,6 +61,11 @@
   color: var(--content-muted);
   font-size: 11.5px;
 }
+/* « +n hors site » : ce que le diff porte en plus des comptes de la ligne, discret. */
+#tab-extractor .ex-scope .ex-quiet {
+  opacity: 0.8;
+  white-space: nowrap;
+}
 #tab-extractor #ex-targets .btn {
   white-space: nowrap;
 }

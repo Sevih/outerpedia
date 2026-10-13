@@ -985,15 +985,17 @@ async function route(req: IncomingMessage, res: ServerResponse): Promise<void> {
 
   if (req.method === 'GET' && url.pathname === '/api/extractor') {
     // La vue d'ensemble de l'extraction : les dix cibles et leurs comptes (ceux
-    // de l'inbox, mémoïsés), le fichier committé de chacune ; sans tables du
-    // jeu, des zéros et la raison. Rien ne s'écrit.
+    // de l'inbox, mémoïsés), le fichier committé de chacune, ce que les
+    // monstres portent hors du site, et « Skills de monstres », en lecture ;
+    // sans tables du jeu, des zéros et la raison. Rien ne s'écrit.
     json(res, await extractorOverview());
     return;
   }
 
   if (req.method === 'GET' && url.pathname === '/api/extractor/target') {
     // Une cible (`?id=`) : ses entités nommées et classées, filtrées par
-    // `?status=` et `?q=`, chacune avec son diff en arbre, et la signature
+    // `?status=` (`offsite` : les monstres hors du périmètre du site, à la
+    // place) et `?q=`, chacune avec son diff en arbre, et la signature
     // `was` de ce que l'écran voit. Le moteur de revue est importé ici.
     const out = await extractorTarget(url.searchParams.get('id') ?? '', {
       status: url.searchParams.get('status'),

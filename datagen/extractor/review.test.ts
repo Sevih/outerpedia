@@ -13,13 +13,23 @@
  * Et du BRANCHEMENT des images par cible (`stageChangedEntities`) : persos,
  * monstres et équipement ont chacun leur staging, les autres cibles aucun —
  * stagers injectés, rien n'est stagé pour de vrai.
+ *
+ * Et du REFUS d'écrire une cible en lecture (`readOnly`) : `acceptTarget`,
+ * `acceptMinor` et `acceptMinorIn` lèvent avant toute lecture.
  */
 import { existsSync, mkdtempSync, readFileSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { writeJson } from '../lib/json';
-import { acceptMinorIn, mergeMinor, reviewEntities, stageChangedEntities } from './review';
+import {
+  acceptMinor,
+  acceptMinorIn,
+  acceptTarget,
+  mergeMinor,
+  reviewEntities,
+  stageChangedEntities,
+} from './review';
 import { diffRecords } from './core/changes';
 import { TARGETS, type GeneratedTarget } from './targets';
 
@@ -140,6 +150,44 @@ describe('acceptMinorIn — écriture ciblée', () => {
     expect(out.classes).toEqual({ striker: { en: 'Striker' } });
     expect(out.effects.e1).toEqual({ id: 'e1', desc: { en: 'Hits...' } });
     expect(out.effects.e2).toEqual({ id: 'e2', desc: { en: '50%' } });
+  });
+});
+
+describe('cible en lecture (`readOnly`) — aucune écriture', () => {
+  it('le registre porte « Skills de monstres » en lecture, sur monster-skills.json', () => {
+    const t = TARGETS.find((x) => x.id === 'monster-skill');
+    expect(t).toMatchObject({
+      label: 'Skills de monstres',
+      file: 'monster-skills.json',
+      readOnly: true,
+    });
+    // Elle seule : les dix autres s'écrivent.
+    expect(TARGETS.filter((x) => x.readOnly).map((x) => x.id)).toEqual(['monster-skill']);
+  });
+
+  it('`acceptTarget` et `acceptMinor` la refusent, avant de lire ou de bâtir quoi que ce soit', async () => {
+    await expect(acceptTarget('monster-skill')).rejects.toThrow(
+      'cible en lecture seule : monster-skill',
+    );
+    await expect(acceptMinor('monster-skill')).rejects.toThrow(
+      'cible en lecture seule : monster-skill',
+    );
+  });
+
+  it('`acceptMinorIn` refuse de même : le fichier committé reste tel quel, `build()` jamais appelé', async () => {
+    await writeJson(join(dir, 'characters.json'), committed);
+    let built = 0;
+    const t: GeneratedTarget = {
+      ...target(fresh),
+      readOnly: true,
+      build: () => {
+        built++;
+        return fresh;
+      },
+    };
+    await expect(acceptMinorIn(dir, t)).rejects.toThrow('cible en lecture seule : character');
+    expect(built).toBe(0);
+    expect(read('characters.json')).toEqual(committed);
   });
 });
 
