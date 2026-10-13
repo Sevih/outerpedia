@@ -107,7 +107,7 @@
       hors site » sur la cible Monstres (bascule pour les voir, sans les
       compter dans la pastille), et une cible « Skills de monstres » en
       lecture, ou au moins la ligne du dry-run qui dit « hors périmètre du
-      site, aucune action ».
+      site, aucune action ». → LOTS A38 (revue du dry-run, Promouvoir), A39 (pastilles), A40 (hors site, cible monster-skills), rédigés le 13/10.
 - [ ] **« Extraction » — contrôles à l'écran (lot F20)** : le banc ne
       clique pas, aucun geste réel n'a été joué (le dépôt du jour n'a qu'un
       perso nouveau sans nom, `2400015`, et aucun écart). Relancer quick
@@ -214,7 +214,7 @@
       l'agent pour ne pas bloquer la saisie une par une). (5) B48 — un échec
       du rafraîchissement de `video-meta.json` n'arrête pas le commit (le
       curé est déjà écrit ; `pnpm datagen:video-meta` rattrape) : à
-      confirmer ; twitch et bilibili ne s'ajoutent pas depuis quick.
+      confirmer ; twitch et bilibili ne s'ajoutent pas depuis quick. → TRANCHÉ le 13/10 : (1) A47, (2) A44, (3) A45, (4) A46 (la saisie reste permise, le danger est dit), (5) l'échec de video-meta non bloquant est confirmé ; twitch/bilibili → F26.
 - [ ] **Relecture A36 / B45 / B46 (12/10) — suites à décider** : (1) B45 —
       Bannières, Journal, Tableau de bord et Noms ne reçoivent que l'id du
       perso : leur vignette a le fond neutre et pas d'icône au coin ; soit
@@ -231,7 +231,7 @@
       minuteur de « Copier » de `tabs/gamedata.js`, 2 s, qui tire après la
       fermeture d'une fenêtre happy-dom) alors que tous les tests passent —
       antérieur ; un `clearTimeout` à la fermeture ou un garde `typeof
-document` (un lot A).
+document` (un lot A). → TRANCHÉ le 13/10 : (1) A41 (la page lit le roster), (2) et (4) A42, (3) A43 (date d'aucune source, PvP éligibles seulement ; Nom court et Tags restent).
 - [ ] **« Événements » — contrôles à l'écran (lot F23)** : le banc ne
       clique pas, aucun enregistrement réel n'a été joué, `/api/translate`
       jamais appelé avec des clés, `POST /api/events` jamais appelé (les
