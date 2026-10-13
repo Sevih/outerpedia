@@ -131,10 +131,10 @@ describe('buildMonsterRows — les modes de jeu, comme le damage calc les liste'
       iconFrame: '/api/sprite/GD_Slot_Bg_01',
     });
     expect(row('jc')?.badgeIcon).toBeUndefined();
-    const admin = buildMonsterRows(source, '/api/admin/sprite').rows.find((r) => r.id === 'jc');
-    expect(admin).toMatchObject({
-      icon: '/api/admin/sprite/MT_jc',
-      iconFrame: '/api/admin/sprite/GD_Slot_Bg_01',
+    const other = buildMonsterRows(source, '/api/other/sprite').rows.find((r) => r.id === 'jc');
+    expect(other).toMatchObject({
+      icon: '/api/other/sprite/MT_jc',
+      iconFrame: '/api/other/sprite/GD_Slot_Bg_01',
     });
   });
 });

@@ -34,14 +34,13 @@ import { LANG_ROUTING } from '@/lib/site';
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  // Assets statiques, API, outils locaux (admin/dev) : on ne touche pas.
+  // Assets statiques, API, outils locaux (dev) : on ne touche pas.
   // `/s/` : le raccourcisseur (src/app/s/[id]) vit à la RACINE, hors langue —
   // le chemin stocké est sans préfixe, c'est le sous-domaine qui porte la
   // langue. Réécrit en /{lang}/s/…, la route ne serait jamais atteinte.
   if (
     pathname.startsWith('/_next') ||
     pathname.startsWith('/api') ||
-    pathname.startsWith('/admin') ||
     pathname.startsWith('/dev') ||
     pathname.startsWith('/images') ||
     pathname.startsWith('/icons') ||

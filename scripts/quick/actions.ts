@@ -7842,7 +7842,7 @@ const SPRITE_TYPES: Record<string, string> = {
 
 /**
  * Le fichier d'un sprite brut de `.gamedata/extracted/images`, par basename
- * (la règle de `/api/admin/sprite/[name]` : insensible à la casse, extension
+ * (la règle de l'ancienne route de sprites du panneau admin : insensible à la casse, extension
  * tolérée) ; `null` pour un nom qui n'en est pas un ou un sprite absent.
  */
 export function spriteFile(

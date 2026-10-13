@@ -12118,7 +12118,7 @@ describe('Patch — la page, sur le vrai markup', () => {
       'Le commit lance format, lint, typecheck et tests : compter dix minutes.',
     );
     expect(page.text(page.all('[aria-label="Promouvoir"] .actions')[0])).toContain(
-      "Les persos pas encore intégrés dans l'admin ne partent pas",
+      'Les persos pas encore intégrés (Données › Extraction) ne partent pas',
     );
     // La console : vide, au repos, « Arrêter » absent, la revue pas encore là.
     expect(page.console()).toBe('');

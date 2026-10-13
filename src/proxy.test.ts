@@ -91,7 +91,7 @@ describe('proxy — mode path (défaut des tests)', () => {
   });
 
   it('chemins exclus : jamais redirigés, même avec un cookie', () => {
-    for (const path of ['/api/x', '/_next/data/x', '/images/a/b', '/s/abc', '/admin']) {
+    for (const path of ['/api/x', '/_next/data/x', '/images/a/b', '/s/abc', '/dev']) {
       expect(outcome(proxy(req(path, { lang: 'fr' })))).toEqual({ next: true });
     }
   });

@@ -163,7 +163,7 @@ export function pushRefusal(branch: string, revList: string): string | null {
 }
 
 /**
- * Une ligne du flux NDJSON des routes `/api/admin/patch/*` : une ligne de
+ * Une ligne du flux NDJSON des gestes de la section « Patch » de quick : une ligne de
  * sortie de la commande, ou la dernière, `done`, qui porte l'issue.
  */
 export type PatchEvent =

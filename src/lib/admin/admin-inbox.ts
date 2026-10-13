@@ -1,6 +1,11 @@
 /**
- * INBOX du tableau de bord de quick (née sur l'accueil de l'admin, qui la lit
- * encore jusqu'à son retrait) : ce qui DEMANDE UNE ACTION, trié par urgence.
+ * INBOX du tableau de bord de quick (née sur l'accueil du panneau `/admin`,
+ * retiré du site le 13/10, lot C15) : ce qui DEMANDE UNE ACTION, trié par
+ * urgence.
+ *
+ * « admin », dans `src/lib/admin/`, désigne désormais la LOGIQUE DE CURATION
+ * que quick appelle (stores, actions, formes) — plus aucune page du site. Le
+ * dossier garde son nom : des centaines d'imports `@/lib/admin/` en dépendent.
  *
  * Remplace la matrice entité × fonction de la home, qui redisait les badges de
  * la sidebar (mêmes chiffres, mêmes liens) en dix lignes dont neuf « ✓ ». Ici on

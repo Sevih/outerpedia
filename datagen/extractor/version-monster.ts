@@ -16,7 +16,7 @@
  *
  * Ce module ne fait que FIGER. Le ré-épinglage des guides qui référencent `<id>`
  * (live) vers `<id>@<n>` est `src/lib/admin/repin-guides.ts`, joué par le
- * bouton « Version the committed state » (route `api/admin/version/monster/[id]`) — pas par la
+ * geste « Figer et ré-épingler » de quick (`freezeMonster`, `scripts/quick/actions.ts`) — pas par la
  * CLI de rattrapage.
  */
 import { execFileSync } from 'node:child_process';

@@ -3,7 +3,9 @@
 > Décision de Sevih du 08/10/2026 : `pnpm quick` remplace TOUT le panneau admin
 > (`/admin`, extractor et outils compris), petit à petit. Trois raisons : quick
 > est beaucoup plus rapide, son UI est plus agréable, et tout se fait d'un seul
-> endroit. Quand tout est passé, l'admin sort du site.
+> endroit. Quand tout est passé, l'admin sort du site — FAIT le 13/10/2026
+> (étape 22, lots C14 et C15) : quick est le seul outil, et `src/lib/admin/`
+> ne désigne plus que la logique de curation qu'il appelle.
 >
 > Ce fichier est l'inventaire et l'ordre. **Chaque section a une ligne
 > « Agacements »** : Sevih y note, en vrac, ce qui l'a gêné dans l'écran admin
@@ -25,13 +27,10 @@
   existantes se réutilisent : pickers modaux et tuiles (`tabs/gear.js`,
   `ui/gear-view.mjs`), segments de note (`previewHtml`), traduction
   (« Traduire » de Gear reco), savebar et journal.
-- Les deux outils coexistent pendant la transition : ils écrivent par les
-  mêmes stores, les données ne divergent pas. **Une section portée
-  COMPLÈTEMENT retire son lien du menu de l'admin** (`AdminSidebar`, nourri
-  par `src/app/admin/layout.dev.tsx` ; pour l'extractor, `EXTRACTOR_ENTITIES`
-  de `admin-inbox.ts`) dans le même lot — la page reste joignable par son
-  URL jusqu'au retrait final, mais plus proposée. Un portage partiel garde
-  son lien.
+- Les deux outils ont coexisté pendant la transition (jusqu'au 13/10,
+  étape 22) : ils écrivaient par les mêmes stores, les données ne
+  divergeaient pas, et une section portée COMPLÈTEMENT retirait son lien du
+  menu de l'admin dans le même lot. Les pages de l'admin n'existent plus.
 - Un lot = une section (A ou B), sauf les guides (F) et l'extractor (plusieurs
   lots). Les lots qui touchent `lib.js`/`index.html` ne tournent pas en
   parallèle ; ceux qui n'ajoutent que leur `tabs/<nom>.*` et leur route, si.
@@ -61,8 +60,9 @@ section où il y a à faire, et sur son groupe la somme (`GET /api/badges`,
 en venant sur le Tableau de bord et trois secondes après un commit ou un
 geste de Patch qui écrit — ni « Pousser » ni le dry-run ; des tags morts de plusieurs persos, que rien ne situe,
 n'ont pas de pastille ; les assets ont la leur sur « Tables du jeu » depuis C14). Portage
-PARTIEL de la home admin : sa `PatchCard` est l'étape 21, sa couverture
-éditoriale suivra les éditeurs ; l'admin garde donc sa home), Patch (= la
+PARTIEL de la home admin : sa `PatchCard` est l'étape 21 ; sa couverture
+éditoriale n'a pas été portée, elle est partie avec la home à l'étape 22),
+Patch (= la
 chaîne de `pnpm dev` et la `PatchCard` de la home admin, étape 21, lot C10 :
 quatre gestes lancés de quick, chacun une commande du dépôt, sa sortie ligne
 à ligne dans la console de la section — « Rafraîchir depuis le jeu »
@@ -82,9 +82,9 @@ de `promote.ts` tient),
 « Committer » (`pnpm commit --no-push`, message et bump) ; le push reste
 « Pousser ». Un seul travail à la fois, le verrou de l'admin
 (`acquirePatchJob`), que « Pousser » prend aussi ; « Arrêter » coupe le
-travail en cours. Portage de la `PatchCard` COMPLET côté gestes, mais son
-lien reste dans l'admin tant que le cycle n'a pas été joué une fois dans
-quick — cf. TODO ; la revue par cible est l'étape 19, section « Extraction »
+travail en cours. Portage de la `PatchCard` COMPLET côté gestes ; la carte
+et ses routes sont parties avec l'admin (étape 22), le cycle reste à jouer
+une fois dans quick — cf. TODO ; la revue par cible est l'étape 19, section « Extraction »
 des Données ; les fiches, l'intégration par entité et le versionnage d'un
 monstre, étape 20, y sont aussi).
 Publication : Codes promo (= Tools › Promo code ; lien retiré du menu admin le
@@ -430,7 +430,7 @@ Chaque entrée : l'écran admin, ce qu'il contient, puis la ligne
    six langues ensemble au lieu d'« une à la fois », la suppression sur
    confirmation, les refus situés au lieu d'un message concaténé, `dirty` et
    `stale`. Le lien a quitté le menu de l'admin le 12/10 (le groupe « Tools »
-   avec lui) ; la page reste joignable par son URL jusqu'à l'étape 22.
+   avec lui) ; la page est partie à l'étape 22.
    L'entrée reste pour que la numérotation des suivantes ne bouge pas.
    `EventsEditor` (451 l.)
    - Agacements : (vide — porté tel quel, défauts corrigés en portant)
@@ -523,10 +523,9 @@ Chaque entrée : l'écran admin, ce qu'il contient, puis la ligne
 
 14. **Misc › Gear presets** — NON PORTÉ, décision du 09/10 (lot A34) : la
     raison est l'agacement lui-même, l'écran ne sert plus. La page
-    `/admin/gear-presets` et `GearPresetsEditor` restent tels quels jusqu'au
-    retrait de l'admin (étape 22), le lien est retiré du menu ;
-    `data/curated/gear-presets.json` s'édite à la main (ou par la page, par
-    son URL), et l'aide de Gear reco dans quick le dit. L'entrée reste pour
+    `/admin/gear-presets` et `GearPresetsEditor` sont partis avec l'admin
+    (étape 22, lot C15) ; `data/curated/gear-presets.json` s'édite à la
+    main, et l'aide de Gear reco dans quick le dit. L'entrée reste pour
     que la numérotation des suivantes ne bouge pas.
     `GearPresetsEditor` (318 l.)
     - Agacements : c'etait surtout utile quand j'ai refait le site mais maintenant pllus vraiment
@@ -535,9 +534,9 @@ Chaque entrée : l'écran admin, ce qu'il contient, puis la ligne
     test, bloquant dans `pnpm commit` ; lien retiré. `tag-control.test.ts`
     fait échouer `pnpm test` dès qu'un tag inline n'a pas de correspondance,
     et `pnpm commit` joue `pnpm test` avant tout effet de bord (`scripts/commit.ts`,
-    « contrôle : test »). La page `/admin/tags` reste, par son URL, pour le
-    diagnostic tag par tag, jusqu'au lot C15 ; l'inbox du tableau de bord n'y
-    renvoie plus (lot C14) : quand tous les tags morts viennent d'un même
+    « contrôle : test »). La page `/admin/tags` (le diagnostic tag par tag)
+    est partie avec le lot C15 ; l'inbox du tableau de bord n'y
+    renvoyait plus (lot C14) : quand tous les tags morts viennent d'un même
     perso elle ouvre sa fiche dans quick, au sous-onglet qui porte le texte,
     sinon son détail nomme les provenances. L'entrée reste
     pour que la numérotation des suivantes ne bouge pas.
@@ -618,8 +617,8 @@ Chaque entrée : l'écran admin, ce qu'il contient, puis la ligne
     et Monstres. F22 : le VERSIONNAGE — « Figer et ré-épingler » en un geste
     sur la fiche monstre, le plan des guides touchés avant de figer, les
     archives avec qui les épingle. Les dix liens ont quitté le menu de
-    l'admin, le groupe « Extractor » avec eux ; les pages restent par leur
-    URL jusqu'à l'étape 22. Events (6) a suivi, lot F23 : reste 22 (clôture).
+    l'admin, le groupe « Extractor » avec eux ; les pages sont parties à
+    l'étape 22. Events (6) a suivi, lot F23, puis 22 (clôture).
     `IntegrateCharacterButton`, `IntegrateGearButton`, `IntegrateModeButton`, `AcceptTargetButton`, `ContributionImport` ; pour un monstre, `MonsterActions` (Save, « Version » — cf. la correction de l'étape 12)
     - Agacements : (reporté de l'étape 12 — « c'est le bordel, surtout la
       partie versionnage ») versionnage à repenser : les archives et
@@ -637,7 +636,8 @@ Chaque entrée : l'écran admin, ce qu'il contient, puis la ligne
 
 ### 5. Clôture
 
-22. **Retirer `/admin` du site** — en deux lots. C14 fait : tout ce qui vit
+22. **Retirer `/admin` du site** — FAIT le 13/10, en deux lots (C14 puis
+    C15). C14 : tout ce qui vit
     après le retrait a quitté l'admin, rien n'est supprimé. Les outils
     publics de /contribute et les huit briques qu'ils tirent sont sous
     `src/components/contribute/` (la frontière d'`eslint.config.mjs` les y
@@ -648,9 +648,12 @@ Chaque entrée : l'écran admin, ce qu'il contient, puis la ligne
     `quickTabOf` retirés) ; `monster-icon.ts`, `monster-rows.ts` et
     `gear-rows.ts` fabriquent l'adresse des sprites de quick, l'admin passe
     la sienne (`src/components/admin/sprite-route.ts`) ; le lien « Admin »
-    a quitté l'en-tête du site. Reste C15 : supprimer `src/app/admin`,
-    `src/app/api/admin`, `src/components/admin` et ce qui ne servait qu'à
-    eux (`post-json.ts`, les fabriques de lignes des sidebars), puis
-    `proxy.ts`, `robots.ts` et la frontière d'eslint.
-    routes `.dev`, composants, `api/admin` devenus inutiles
+    a quitté l'en-tête du site. C15 : `src/app/admin`, `src/app/api/admin`
+    et `src/components/admin` sont supprimés (157 fichiers), avec les six
+    modules de `src/lib/admin/` qui ne servaient qu'à eux (`post-json.ts`,
+    `assets.ts`, `character-rows.ts`, `gear-rows.ts`,
+    `equipment-review.ts`, `item-review.ts`) ; `proxy.ts` et `robots.ts`
+    ne connaissent plus `/admin`, la frontière d'eslint ne vise plus que
+    `src/lib/admin/`, qui garde son nom et désigne désormais la logique de
+    curation que quick appelle. Le mécanisme `.dev.*` reste, pour `/dev/*`.
     - Agacements :

@@ -21,7 +21,9 @@ const VIVID_COLOR =
 const VIVID_COLOR_MSG =
   'Couleur vive en dur interdite dans les guides (déjà tokenisés). Utilise un token : --cat-*/--ed-*/--monad-*/--select/--danger-*/--stat… (cf. src/app/globals.css & /dev/tokens).';
 
-// FRONTIÈRE `admin/` (audit F2). Le chemin `admin/` NE garantit PAS qu'un module
+// FRONTIÈRE `admin/` (audit F2). Depuis le retrait du panneau `/admin` (13/10,
+// lot C15), `admin/` ne désigne plus que `src/lib/admin/`, la logique de
+// curation que quick appelle. Le chemin `admin/` NE garantit PAS qu'un module
 // reste en dev : **8 modules** de `src/lib/admin/` sont importés EN VALEUR
 // depuis du code servi au public (les outils de contribution et leurs briques,
 // sous `src/components/contribute/` depuis le 13/10 — lot C14, ils vivaient
@@ -37,7 +39,8 @@ const VIVID_COLOR_MSG =
 // t-elle sur `IS_DEV` ? Si oui, sors la brique partagée dans un module neutre au
 // lieu d'élargir la liste — c'est exactement ce qui a été fait pour
 // `translateReviews` (elle tirait DEEPL_API_KEY / ANTHROPIC_API_KEY dans le
-// bundle des pages `/contribute`), cf. `src/components/admin/premium-limited-translate.ts`.
+// bundle des pages `/contribute` ; sortie des briques partagées, puis partie
+// avec le panneau admin le 13/10, lot C15).
 const ADMIN_SHIPS_TO_PROD = [
   '@/lib/admin/guard', // IS_DEV — simple constante (pages event)
   '@/lib/admin/inline-refs', // refs inline des outils publics de contribution
@@ -60,7 +63,7 @@ const ADMIN_BOUNDARY_MSG =
 // fonctionne (vérifié : sans ça, une exception nichée restait bloquée malgré
 // la liste).
 const ADMIN_BOUNDARY_PATTERN = {
-  group: ['@/lib/admin/*', '@/components/admin/*/*', ...ADMIN_SHIPS_TO_PROD.map((m) => `!${m}`)],
+  group: ['@/lib/admin/*', ...ADMIN_SHIPS_TO_PROD.map((m) => `!${m}`)],
   allowTypeImports: true,
   message: ADMIN_BOUNDARY_MSG,
 };
@@ -72,7 +75,7 @@ const ADMIN_BOUNDARY_PATTERN = {
 const DATA_LAYER_MSG =
   "JSON de data/ importé hors du data layer. Passe par (ou crée) son accesseur dans src/lib/data — un module par fichier, pour que le graphe client n'emporte que ce qu'il lit.";
 const SHARED_BRICK_MSG =
-  "Ce dossier de briques est PARTAGÉ avec les outils publics de contribution : tout ce qui s'y trouve part dans le bundle de production. Interdit d'y importer un module porteur de secret (server actions `*-actions`) ou dont la sûreté repose sur IS_DEV. Sors la fonction concernée dans un module admin-only, hors de ce dossier (cf. premium-limited-translate.ts).";
+  "Ce dossier de briques est PARTAGÉ avec les outils publics de contribution : tout ce qui s'y trouve part dans le bundle de production. Interdit d'y importer un module porteur de secret (server actions `*-actions`) ou dont la sûreté repose sur IS_DEV. Sors la fonction concernée dans un module à part, hors de ce dossier.";
 
 // On NE désactive PAS react-hooks/set-state-in-effect (l'ancien site le faisait) :
 // la règle reste active et on corrige les vrais cas (faire BIEN).

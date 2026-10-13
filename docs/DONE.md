@@ -7,6 +7,110 @@
 
 ## 2026-10-13
 
+- **Retrait de `/admin`, seconde moitié : les pages, les routes et les
+  composants de l'admin sont supprimés, quick est le seul outil (lot C15)**
+  — étape 22 de `docs/quick-migration.md`, close : C14 avait PRÉPARÉ (tout
+  ce qui vit après le retrait avait quitté l'admin), celui-ci SUPPRIME.
+  Décision de Sevih du 08/10 : quick remplace tout le panneau ; ses pages
+  n'étaient joignables qu'en développement et ne servaient plus. Aucun
+  changement de comportement du site public ni de quick.
+  (1) SUPPRIMÉS, 157 fichiers : `src/app/admin/` en entier (65 — dont
+  `gear-presets`, non porté par décision du 09/10 : l'aide de Gear reco de
+  quick dit déjà que les presets se règlent dans
+  `data/curated/gear-presets.json`, relu dans `tabs/gear.js` ; et `tags`,
+  dont le contrôle est `tag-control.test.ts`, bloquant dans `pnpm commit`),
+  `src/app/api/admin/` en entier (30, `patch/*` compris : quick a sa
+  section Patch, `pnpm datagen:promote --apply` et `pnpm commit` restent le
+  repli) et `src/components/admin/` en entier (62, dont trois tests partis
+  avec ce qu'ils testaient : `changelog-text.test.ts`,
+  `guide-text.test.ts`, `shop-text.test.ts`). Relu avant : aucune route de
+  `scripts/quick/server.ts` ne délègue à `src/app/api`.
+  (2) `src/lib/admin/`, SIX modules sans plus aucun consommateur ni test
+  propre, un par un (importeurs calculés sur `from`, `import()` et
+  `vi.mock` de `src`, `scripts` et `datagen`, puis `grep -rn` du nom :
+  vide hors des trois dossiers) : `post-json.ts` (21 composants de
+  l'admin), `assets.ts` (`CharacterVisual.tsx` seul), `character-rows.ts`
+  (deux layouts), `gear-rows.ts` (six layouts et `GearDetail.tsx`),
+  `equipment-review.ts` (six pages de l'extractor), `item-review.ts` (une
+  page). La fermeture, rejouée après eux, n'en ajoute aucun. GARDÉS par la
+  règle du lot (un test propre, donc le doute) bien que plus rien d'autre
+  ne les importe : `event-text.ts`, `gear-presets-store.ts`,
+  `monster-rows.ts`, `useAutoTranslate.ts` ; `store-fixture.ts` est la
+  fixture de seize tests. `patch-runner.ts`, `patch-commands.ts`,
+  `admin-inbox.ts`, les stores et les formes restent : quick vit dessus.
+  Hors de `src/lib/admin/`, aucun module de `src` n'a perdu tous ses
+  importeurs (même calcul, sur l'arbre d'avant).
+  (3) LE SITE. `src/proxy.ts` et `src/app/robots.ts` ne connaissent plus
+  `/admin` (`/api` et `/dev` restent) ; `proxy.test.ts` éprouve `/dev` à
+  sa place parmi les chemins exclus. `next.config.ts` : le mécanisme
+  `.dev.*` reste, son commentaire cite `src/app/dev/`.
+  `eslint.config.mjs` (la « frontière d'eslint » que l'étape 22 laissait à
+  ce lot) : le motif perd `@/components/admin/*/*`, les deux renvois à
+  `premium-limited-translate.ts`, parti avec l'admin, sont reformulés ;
+  l'exemption `src/**/admin/**` reste, elle couvre `src/lib/admin/`.
+  (4) LE NOM. `src/lib/admin/` garde le sien ; l'en-tête
+  d'`admin-inbox.ts`, `CONVENTIONS.md` (§ Données, une puce ; et « se
+  traduit par l'outil admin » devient « dans quick ») et la ligne
+  d'architecture de `CLAUDE.md` disent qu'« admin » désigne désormais la
+  logique de curation que quick appelle.
+  (5) LES RENVOIS. Le `grep` du lot exigé VIDE a fait reformuler cinq
+  commentaires (`PremiumLimitedParts.tsx`, `patch-commands.ts`,
+  `scripts/quick/server.ts`, `scripts/quick/actions.ts`,
+  `datagen/extractor/version-monster.ts`) et la route d'essai de
+  `monster-rows.test.ts` (`/api/other/sprite`, une route quelconque).
+  Dans quick, ce qui renvoyait à une page disparue : le libellé de la
+  carte « Promouvoir » de `tabs/patch.html` dit « pas encore intégrés
+  (Données › Extraction) » au lieu de « dans l'admin » — SEUL texte
+  changé à l'écran, son assertion suit dans `ui-serve.test.ts` — et cinq
+  passages de `STYLE.md`. `docs/quick-migration.md` : l'étape 22 FAITE,
+  plus aucune phrase qui dise une page joignable par son URL.
+  `docs/TODO.md` : la ligne « Admin : retirer le lien Patch » sort, l'item
+  de la migration dit 22 faite, les deux lignes de Gear reco ne renvoient
+  plus à l'admin.
+  VÉRIFIÉ. `pnpm typecheck` :
+  `tsc --noEmit && tsc --noEmit -p datagen/tsconfig.json && tsc --noEmit -p scripts/tsconfig.json`,
+  code 0 — après avoir retiré du cache `.next/dev/types/validator.ts`
+  (ignoré par git, récrit par `next dev`) ses 48 blocs qui importaient
+  encore les routes de l'admin : sans cela 48 erreurs TS2307, toutes dans
+  ce fichier, que la CI n'a pas. `pnpm lint` : `$ eslint`, code 0.
+  `pnpm test` : `Tests  3807 passed (3807)` (220 fichiers — les 3841 de
+  C14 moins les 34 des trois tests supprimés).
+  `NODE_ENV=development pnpm exec vitest run scripts/quick src/lib/admin` :
+  `Tests  1759 passed (1759)`. `pnpm build` : code 0, dernière ligne
+  `ƒ  (Dynamic)  server-rendered on demand` ; aucune `/admin` dans
+  `routes-manifest.json` ni `app-path-routes-manifest.json`, le
+  `robots.txt` bâti n'interdit plus que `/api` et `/dev`, les trois pages
+  /contribute au tableau des routes. Le `.next` du dev a été mis de côté
+  pendant le build puis remis, `next-env.d.ts` aussi ; clés de service
+  vidées. Le `grep` du lot
+  (`app/admin\|api/admin\|components/admin` sur `src scripts datagen`) :
+  vide. Banc, quick isolé sur :4799, clés vidées : `--tabs dashboard`
+  (l'inbox, « Character 1 new », « Ouvrir »),
+  `--tabs extractor --hash extractor/monster` (la cible s'ouvre, « rien à
+  revoir » : aucune ligne,
+  donc aucune vignette à juger — la route est sondée à part,
+  `GET /api/sprite/GD_Slot_Bg_01` : 200, `image/png`),
+  `--tabs character --hash character/2000055/skills` (le portrait, les
+  icônes des skills et les tuiles d'effets à l'image). Aucun serveur sur
+  :3000 : le `curl` de `/en/contribute/pros-cons` n'a pas été joué, le
+  build en tient lieu.
+  LAISSÉ. (a) Des commentaires nomment encore une page de l'admin par son
+  URL, hors du `grep` du lot : `CurrentBanners.tsx`, `src/lib/home.ts`,
+  `src/lib/data/pros-cons.ts`, `src/lib/data/events.ts`,
+  `src/lib/skill-view.ts`, `EditorialFields.tsx`, l'`editorial.ts` de
+  shop-purchase-priorities, `root-document.tsx`, `datagen/version-boss.ts`,
+  deux en-têtes de `scripts/quick/actions.ts`, et les « comme dans
+  l'admin » des `.js` de quick et de `quick.css`. (b) `datagen/README.md`
+  (cinq passages) et `docs/procedure/newPatch.md` décrivent encore la
+  procédure de patch par l'admin (`/admin/effects`,
+  `/admin/extractor/monsters/<id>`, `/admin/editor/characters/<id>`) : à
+  récrire vers quick, un lot à part. (c) Les « contrôles à l'écran » de
+  `docs/TODO.md` qui demandent d'ouvrir une page de l'admin ne se jouent
+  plus. (d) Le libellé « lu par l'admin » du Tableau de bord reste : il
+  désigne la logique, pas une page. (e) Les quatre modules gardés pour
+  leur test, et `ADMIN_SHIPS_TO_PROD`, non ré-audité. (f) Renommer
+  `src/lib/admin/` : hors périmètre.
+
 - **Retrait de `/admin`, première moitié : ce que le site et quick
   partagent quitte l'admin, l'inbox adresse quick (lot C14)** — étape 22 de
   `docs/quick-migration.md`, en deux lots : celui-ci PRÉPARE (rien n'est

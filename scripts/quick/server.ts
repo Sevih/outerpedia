@@ -1090,7 +1090,7 @@ async function route(req: IncomingMessage, res: ServerResponse): Promise<void> {
 
   if (req.method === 'GET' && url.pathname.startsWith('/api/sprite/')) {
     // Un sprite BRUT de `.gamedata/extracted/images`, par basename — ce que
-    // `/api/admin/sprite/<nom>` sert à l'admin : les vignettes `MT_*` des
+    // le panneau admin servait par sa propre route : les vignettes `MT_*` des
     // monstres, les fonds de slot, les icônes des skills frais, que le site
     // n'a pas (encore). Lecture seule ; 404 pour un sprite absent.
     const hit = spriteFile(decodeURIComponent(url.pathname.slice('/api/sprite/'.length)));

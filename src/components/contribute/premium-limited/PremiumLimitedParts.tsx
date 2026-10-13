@@ -14,12 +14,12 @@
  * Composants CONTRÔLÉS (état chez le parent). Types du store en `import type`
  * uniquement (le store touche `node:fs`, interdit côté client).
  *
- * ⚠ CE MODULE SHIPPE EN PROD (audit F2 ; il a vécu sous `components/admin/`
- * jusqu'au 13/10, lot C14) : il part dans le bundle client des pages
+ * ⚠ CE MODULE SHIPPE EN PROD (audit F2 ; il a vécu parmi les composants du
+ * panneau admin jusqu'au 13/10, lot C14) : il part dans le bundle client des pages
  * `/contribute`. RÈGLE — rien ici ne doit importer un module qui porte un
  * secret ou dont la sûreté repose sur `IS_DEV`. C'est pour ça que
- * `translateReviews` a été sortie vers `premium-limited-translate.ts`, resté
- * dans l'admin (elle tirait `translate-actions` et ses deux clés API). Le
+ * `translateReviews` en a été sortie (elle tirait `translate-actions` et ses
+ * deux clés API ; elle est partie avec le panneau admin, lot C15). Le
  * garde-fou eslint applique la règle sur TOUT `components/contribute/` —
  * l'ajout d'un import de secret ici est BLOQUANT, pas seulement déconseillé.
  */

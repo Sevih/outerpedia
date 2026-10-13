@@ -4,11 +4,11 @@ import { getBaseUrl } from '@/lib/seo';
 /**
  * robots.txt. Décision GEO : on AUTORISE explicitement les crawlers des moteurs
  * génératifs (pour être cité par ChatGPT/Claude/Perplexity/Google AI Overviews).
- * Outils locaux (admin/api/dev) exclus.
+ * Outils locaux (api/dev) exclus.
  */
 export default function robots(): MetadataRoute.Robots {
   const base = getBaseUrl();
-  const disallow = ['/admin', '/api', '/dev'];
+  const disallow = ['/api', '/dev'];
   const aiBots = ['GPTBot', 'OAI-SearchBot', 'ClaudeBot', 'PerplexityBot', 'Google-Extended'];
 
   return {

@@ -23,13 +23,12 @@
 
 - [ ] **Bloody Edge (`631`)** : deux builds de `data/curated/gear-reco.json`
       lui donnent ATK% en stat principale, son pool ne propose que HP% — à
-      corriger dans quick (Fiche perso › Gear reco) ou l'admin (Sevih).
+      corriger dans quick (Fiche perso › Gear reco) (Sevih).
 - [ ] **Presets en double** (`$mrs` = `$elemcritAP`, `a2p2` = `p2a2` dans
-      `gear-presets.json`) : `collapseBuild` rend le premier trouvé, l'admin
-      change donc le slug au save (quick, lui, garde celui du disque). À
-      fusionner ou à distinguer à la main dans le fichier (ou par
-      `/admin/gear-presets`, sortie du menu le 09/10 mais joignable par son
-      URL).
+      `gear-presets.json`) : `collapseBuild` rend le premier trouvé (l'admin
+      changeait donc le slug au save ; quick, lui, garde celui du disque). À
+      fusionner ou à distinguer à la main dans le fichier (la page
+      `/admin/gear-presets` est partie avec l'admin le 13/10, lot C15).
 
 ## 🎟️ Codes promo (rapport de cloisonnement du 11/10, lot L8)
 
@@ -77,9 +76,9 @@
       le groupe « Extractor » quitte le menu de l'admin), Events (onglet
       « Événements », lot F23 — la liste, l'éditeur à six langues en trois
       sous-onglets, « Enregistrer » publie sur R2 et committe ; le groupe
-      « Tools » quitte le menu de l'admin : reste le retrait de `/admin`,
-      22 — première moitié FAITE, lot C14 : ce que le site et quick partagent
-      a quitté l'admin, l'inbox adresse quick ; reste C15, la suppression).
+      « Tools » quitte le menu de l'admin), le retrait de `/admin` (22,
+      lots C14 et C15 — pages, routes et composants supprimés le 13/10 :
+      quick est le seul outil).
       Clos sans portage (lot A34) : Gear presets
       (non porté, le fichier s'édite à la main) et Tag control (le contrôle
       est le test, bloquant dans `pnpm commit`).
@@ -719,12 +718,6 @@
       puis rallumés seuls à sa fin), « Pousser » pendant un travail (refusé :
       « Un travail tourne déjà : … »). À NE PAS arrêter : « Committer » une
       fois les images parties sur R2 (la prod les servirait sans commit).
-- [ ] **Admin : retirer le lien « Patch » (suite de C10)** : la `PatchCard`
-      de la home admin fait doublon avec la section de quick. À retirer —
-      la carte de `src/app/admin/page.dev.tsx` et ses routes
-      `api/admin/patch/*` — quand le cycle ci-dessus aura été joué une fois
-      dans quick ; `patch-runner.ts` et `patch-commands.ts` restent (quick
-      les importe). → emporté par le retrait de l'admin, LOTS C14 (préparer) puis C15 (supprimer), rédigés le 13/10.
 - [ ] **Retouches mineures des monstres et de l'équipement (lot B27)** : au
       premier patch qui en apporte, le contrôle se joue désormais dans quick,
       section « Extraction » (point 3 de « contrôles à l'écran (lot F20) »

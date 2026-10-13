@@ -61,8 +61,8 @@ const securityHeaders = [
 ];
 
 // Pages/routes suffixées `.dev.*` ne sont reconnues qu'en développement →
-// l'admin local n'est PAS buildé en prod (ni son code, ni le runtime datagen
-// qu'il importe). Voir src/app/admin/*.dev.tsx.
+// les outils locaux ne sont PAS buildés en prod (ni leur code, ni ce qu'ils
+// importent). Voir src/app/dev/.
 // PIÈGE, à ne pas réintroduire : ce `pageExtensions` personnalisé CASSE les
 // fichiers de métadonnées statiques de l'app router (`apple-icon.png`,
 // `opengraph-image.png`…). Next les détecte assez pour émettre le

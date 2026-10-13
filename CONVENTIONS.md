@@ -99,8 +99,9 @@ l'entrée DONE ne cite pas le hash du commit, inconnu au moment de l'écrire.
   est typé `LocalizedText`, PARTIEL avec repli EN : une langue peut y manquer
   sans rien casser. Il est traduit dans les six langues depuis le 2026-09-23
   (passe Sonnet 5 sur ~4 700 textes, balises inline masquées et vérifiées) ;
-  un nouveau texte s'écrit en anglais puis se traduit par l'outil admin
-  (DeepL/Haiku, `es` compris) — ne pas laisser une langue en repli par habitude.
+  un nouveau texte s'écrit en anglais puis se traduit dans quick
+  (« Traduire » : DeepL/Haiku, `es` compris) — ne pas laisser une langue en
+  repli par habitude.
   Conventions de traduction : le jargon commun reste en anglais dans toutes les
   langues (DPS, AoE, buff/debuff, gear, build, tier, clear, ATK/DEF/HP/SPD…,
   S1/S2/S3, FAQ) ; en français les CLASSES restent en anglais (Striker,
@@ -136,6 +137,9 @@ l'entrée DONE ne cite pas le hash du commit, inconnu au moment de l'écrire.
   versionnés ici parce qu'ils sont des SOURCES ; la collecte les pousse sur R2.
 - Passer par la **data access layer** (`src/lib/data/`) — ne jamais importer le
   JSON directement pour les données de jeu.
+- `src/lib/admin/` : « admin » y désigne la LOGIQUE DE CURATION (stores,
+  actions, formes) que `pnpm quick` appelle. Le panneau `/admin` a quitté le
+  site le 2026-10-13 ; le dossier garde son nom.
 
 ### Documenter un curé (`data/curated/`)
 

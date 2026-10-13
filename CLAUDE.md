@@ -57,8 +57,11 @@ Jeu : **Outerplane**. Wiki communautaire — le code de [outerpedia.com](https:/
 ## Architecture
 
 - Routing : pas de `middleware.ts` (voir la stratégie de proxy du projet).
-- Le panneau admin est **dev-only** : fichiers `.dev.tsx`/`.dev.ts` absents du
-  build de prod, doublés d'un garde `IS_DEV`. Ne pas retirer l'un des deux.
+- Le panneau `/admin` a quitté le site (2026-10-13) : quick est le seul outil,
+  et `src/lib/admin/` est la logique de curation qu'il appelle. Les pages
+  `/dev/*` restent **dev-only** : fichiers `.dev.tsx`/`.dev.ts` absents du
+  build de prod, la route d'API doublée d'un garde `IS_DEV`. Ne pas retirer
+  l'un des deux.
 - Mettre à jour la navigation centrale quand on ajoute des pages.
 
 <!-- BEGIN:nextjs-agent-rules -->

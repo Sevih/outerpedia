@@ -1,15 +1,14 @@
 # quick — la charte graphique
 
-> La page de `pnpm quick` ressemble à l'admin du site : mêmes couleurs, même
-> sobriété, pas de web font. Ce fichier dit d'où viennent les jetons, ce que
+> La page de `pnpm quick` porte les couleurs du site (ses jetons, ceux que
+> portait le panneau admin, retiré le 13/10) : même sobriété, pas de web font. Ce fichier dit d'où viennent les jetons, ce que
 > fait chaque composant de `quick.css` (un exemple de markup chacun), les
 > règles de mise en page, et le croquis de chaque onglet tel qu'il est rendu
 > (les six de départ sont à la charte depuis le 07/10/2026 ; les écarts aux croquis de
 > départ sont dans les entrées DONE des lots B28, B29 et C6). La maquette de
 > départ est l'artefact Claude Design de Sevih du 07/10/2026 (sept planches) ;
-> ici, c'est ce que le code rend. Une section nouvelle (éditeurs, guides,
-> outils de l'admin que quick doit absorber) suit ces composants et ces
-> croquis.
+> ici, c'est ce que le code rend. Une section nouvelle suit ces composants et
+> ces croquis.
 
 ## Les jetons
 
@@ -67,7 +66,7 @@ pastille.
   bord — la même lecture, `quickInbox` d'`actions.ts` — comptée par section,
   le premier segment de l'adresse où chaque item renvoie (`extractor/monster`
   compte pour `extractor`, la fiche d'un perso pour `character`) ; un item
-  que l'admin garde n'a pas de pastille. Le compte d'une pastille est le
+  que rien ne situe (`tab` nul) n'a pas de pastille. Le compte d'une pastille est le
   VOLUME (la somme des `count` : « 3 new » compte trois), celui de la carte
   « À faire » le nombre de LIGNES. `lib.js` la lit au chargement, à chaque
   venue sur le Tableau de bord, et TROIS SECONDES après une écriture — un
@@ -555,7 +554,7 @@ LA FICHE (#ex-entity, `#extractor/<cible>/<clé>` sur une cible à fiches — pe
       .form : [Note de l'archive (facultative) 30ch « avant la refonte 1.11 »] · « Puis UN commit « chore(monsters): Slime (400101) fige en v3, 2 guides re-epingles » : l'archive, les meta.json et les config.json touchés, les meta.json re-datés. » · [Figer] (.btn.danger) [Annuler]
    .ex-freport (bordé de vert, caché ; après un figeage, tant que la fiche reste ouverte) — badge ok « figé » `400101@3` — 6 skills, le fichier · « Dépingler une version : dans Guides, onglet Combat. » · les mêmes .ex-fgroup, tels qu'ÉCRITS (« … · version 2026-10 épinglée »), plus « Non écrits » si le store a refusé un meta.json
 #ex-sheet — deux colonnes de .card.pad.ex-sec (titre en capitales grises + badge off du compte ; `.ex-sec-wide` prend les deux ; une seule sous 1000 px) :
-   PERSO : « Stats extraites » (.ex-grid de .ex-cell : abréviation au-dessus de la valeur « 100 – 1000 ») · « Tags détectés » (.ex-tag : `slug` · libellé · groupe · détail ; le rappel de la page admin en hint) · « Skills » (wide : .ex-cols, deux .card.ex-skill par rangée — icône 36 px du sprite du jeu, nom, `id · type`, la description du jeu (`gameText`), les chips d'effets .ex-chip avec leur tuile .ex-fx) · « Statuts référencés » (chips : la tuile, le nom en lien vers `#effects/<id>`, badge off « caché du live » ; en hint « Cacher un statut du live se règle dans Éditeurs › Effets ») · « Costumes » (ul)
+   PERSO : « Stats extraites » (.ex-grid de .ex-cell : abréviation au-dessus de la valeur « 100 – 1000 ») · « Tags détectés » (.ex-tag : `slug` · libellé · groupe · détail ; le rappel des règles de détection en hint) · « Skills » (wide : .ex-cols, deux .card.ex-skill par rangée — icône 36 px du sprite du jeu, nom, `id · type`, la description du jeu (`gameText`), les chips d'effets .ex-chip avec leur tuile .ex-fx) · « Statuts référencés » (chips : la tuile, le nom en lien vers `#effects/<id>`, badge off « caché du live » ; en hint « Cacher un statut du live se règle dans Éditeurs › Effets ») · « Costumes » (ul)
    MONSTRE : « Stats à la rencontre » (wide : [Rencontre ▾ « SSS · Lv 120 — Mode · Stage (palier SSS) »] (select, éteint à une seule option, le palier le plus haut d'office) · la grille (HP « × 3 barres ») · .ex-ctx : « Lv 120 · transcendance 2 » / « modificateurs du donjon : ATK +10 % · quirks de compte : RES −10 % » ou « valeurs du templet, interpolées » / « dégâts : 4 250 001 – 5 000 000 · barre du palier : 750 000 · PV du mode : … » / « Passifs du palier : » pastilles) · « Rencontres » (ul : mode · stage (zone) · Lv n · n barres ; « … n de plus » après vingt-cinq ; sinon « Jamais spawné directement — invoqué par : …, lié au kit de : … » ; « Invoque : … » — chaque monstre un lien vers sa fiche) · « Immunités » (chips, et « ⚠ sans entrée au glossaire des effets : 64 “Freeze” » en ambre) · « Skills » (wide, comme le perso ; un rage_enter porte « — à 70 % PV ») — les archives figées ont quitté ces cartes pour le bloc « Versions »
    ÉQUIPEMENT : « Main stats » (.ex-pill) · « Passif » / « Passif (base → +10) » (.ex-passive : icône 24 px, nom, « niv. 1 (s'ajoute) · 2 paliers », le texte au premier palier, « max : » au dernier ; .ex-variant « variante striker » `id` + ses mains + ses passifs ; les effets structurés en pastilles) · « Pièces (6★) » (.ex-piece : icône 40 px + slot) · « Bonus (base → enchanté) » (ul : base · 2P : … · 4P : …) · « Membres de la famille » (.ex-mono : les ids)
    .empty « Lecture… » / « Fiche illisible : … »
@@ -766,7 +765,7 @@ quatre .card empilées, dans l'ordre du flux ; chacune : card-head = « n · tit
         sortie non reconnue (le bilan manque, ou n'annonce pas autant de fichiers qu'il en est lu) : une seule p.p-note.warn « Sortie du dry-run non reconnue : la lire ci-dessous. », la sortie brute dépliée
      details.p-raw (absent avant le premier dry-run) « Sortie brute du dry-run » : pre.p-out (32 vh au plus), la sortie du DERNIER dry-run, qui reste après la fin — dépliée tant qu'il court et quand il n'a pas rendu de revue (échec, sortie non reconnue), REPLIÉE dès que la revue est au-dessus, un clic la rouvre
   .card « 3 · Promouvoir »                    … « après un dry-run réussi » · « prêt : la revue est au-dessus » · « promue à 14:40 — reste à committer » (ok)
-     [Promouvoir (--apply)]  « écrira 4 fichiers : game-version.json (~1), monster-skills.json (+2), monsters.json (~3), wallpapers.json (~2) » (.p-plan, à côté du bouton, et son `title`)  Les persos pas encore intégrés dans l'admin ne partent pas, même ici (la garde de promote.ts).
+     [Promouvoir (--apply)]  « écrira 4 fichiers : game-version.json (~1), monster-skills.json (+2), monsters.json (~3), wallpapers.json (~2) » (.p-plan, à côté du bouton, et son `title`)  Les persos pas encore intégrés (Données › Extraction) ne partent pas, même ici (la garde de promote.ts).
      l'annonce est bâtie de la revue (A38) : les fichiers nouveaux et modifiés, leurs comptes non nuls (« (+1 ~2 −3) », « (nouveau) », « (reformatage seul) ») ; quatre nommés, puis « , … et 4 autres » — le `title` les dit tous ; « — 1 retenu, non promu » ; « n'écrira rien : la proposition est identique au validé ». Absente sans revue qui vaille (aucune, à refaire, promue, sortie non reconnue)
      éteint tant qu'un dry-run n'a pas réussi DANS CETTE PAGE ; pas de boîte de confirmation (le dry-run est la revue, la promotion se défait par git) ; un rafraîchissement lancé, une promotion faite ou ratée : la revue est à refaire (elle reste lisible, l'annonce se tait)
   .card « 4 · Committer les données »         … « 11 fichiers modifiés · 2 commits à pousser — « Pousser », dans l'en-tête » (warn s'il y a des fichiers ; « aucun fichier modifié » ; « dépôt illisible : … » en ko)
@@ -1135,7 +1134,7 @@ dans le picker), de Monstres (22 et 28 px), d'Extraction (22 px) et de l'onglet 
 quand ce n'est pas les 18 px d'un texte. « à retraduire » : l'anglais a bougé depuis le chargement (ou
 depuis le dernier « Traduire ») et des traductions sont en place. « Traduire »
 envoie les textes anglais du sous-onglet à `POST /api/translate` et ÉCRASE les
-cinq autres langues, comme dans l'admin ; ce qu'il vient de traduire se
+cinq autres langues, l'anglais fait foi ; ce qu'il vient de traduire se
 déplie ; un refus (pas de clé, le moteur) va au journal et à côté du bouton,
 rien ne bouge. À l'enregistrement le serveur CONTRÔLE avant d'écrire, comme
 les notes de Gear reco : chaque tag de chaque langue par la résolution du
