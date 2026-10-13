@@ -83,15 +83,22 @@
       est le test, bloquant dans `pnpm commit`).
       À faire par Sevih : remplir
       la colonne « Agacements » (en vrac) ; puis un lot par section.
-- [ ] **quick, nav : des pastilles là où il y a à faire (constat du 13/10,
-      cycle du patch)** : après Patch › « Rafraîchir » puis « Dry-run », les
-      monstres montrent 3 diffs dans la revue, mais rien ne le dit dans le
-      menu du haut — il faut ouvrir le Tableau de bord ou la section pour le
-      voir. Attendu : une pastille (compte) sur le groupe et sur l'onglet
-      concernés (Données › Extraction, et par cible), nourrie par l'inbox
-      que `/api/dashboard` sert déjà (chaque item a sa section, cf.
-      `extract:<cible>`, « tags », bannières, coupons), rafraîchie au retour
-      sur l'accueil et à la fin d'un travail de Patch. Un lot A.
+- [ ] **quick, Patch → Extraction : zéro repère sur ce qui a changé (constat du
+      13/10, cycle du patch)** : après Patch › « Rafraîchir » puis « Dry-run »,
+      la revue dit « monsters : 3 diff » en texte brut dans une console, et
+      c'est tout — rien dans le menu du haut, rien qui mène à Données ›
+      Extraction où les écarts sont pourtant comptés par cible et dépliables
+      entité par entité (même base que le dry-run : extraction fraîche
+      depuis `.gamedata` contre `data/generated/`). Avant de promouvoir, on
+      ne sait ni quoi ni où. Attendu, en un lot A : (1) la revue du dry-run
+      devient structurée — une ligne par cible touchée avec ses comptes et un
+      lien « voir » qui ouvre `#extractor/<cible>` ; (2) des pastilles
+      (compte) sur le groupe Données et l'onglet Extraction, nourries par
+      l'inbox que `/api/dashboard` sert déjà (chaque item a sa section :
+      `extract:<cible>`, « tags », bannières, coupons), rafraîchies au retour
+      sur l'accueil et à la fin d'un travail de Patch ; (3) « Promouvoir »
+      annonce ce qu'il va écrire (fichiers et comptes), pas seulement
+      « --apply ».
 - [ ] **« Extraction » — contrôles à l'écran (lot F20)** : le banc ne
       clique pas, aucun geste réel n'a été joué (le dépôt du jour n'a qu'un
       perso nouveau sans nom, `2400015`, et aucun écart). Relancer quick
