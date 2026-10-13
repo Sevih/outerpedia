@@ -189,7 +189,7 @@
       l'agent pour ne pas bloquer la saisie une par une). (5) B48 — un échec
       du rafraîchissement de `video-meta.json` n'arrête pas le commit (le
       curé est déjà écrit ; `pnpm datagen:video-meta` rattrape) : à
-      confirmer ; twitch et bilibili ne s'ajoutent pas depuis quick. → TRANCHÉ le 13/10 : (1) A47, (2) A44 — FAIT le 13/10, reste à voir à l'écran depuis l'Extraction, (3) A45 — FAIT le 13/10, (4) A46 — FAIT le 13/10 (la saisie reste permise, le danger est dit ; « 3★ » à voir à l'écran, le badge et l'avertissement ne s'y verront qu'à la prochaine fusion du jeu sortie sans review), (5) l'échec de video-meta non bloquant est confirmé ; twitch/bilibili → F26.
+      confirmer ; twitch et bilibili ne s'ajoutent pas depuis quick. → TRANCHÉ le 13/10 : (1) A47 — FAIT le 13/10, reste à voir à l'écran (le compteur ambre sous l'anglais, un vrai « Enregistrer » après une ligne effacée), (2) A44 — FAIT le 13/10, reste à voir à l'écran depuis l'Extraction, (3) A45 — FAIT le 13/10, (4) A46 — FAIT le 13/10 (la saisie reste permise, le danger est dit ; « 3★ » à voir à l'écran, le badge et l'avertissement ne s'y verront qu'à la prochaine fusion du jeu sortie sans review), (5) l'échec de video-meta non bloquant est confirmé ; twitch/bilibili → F26.
 - [ ] **« Événements » — contrôles à l'écran (lot F23)** : le banc ne
       clique pas, aucun enregistrement réel n'a été joué, `/api/translate`
       jamais appelé avec des clés, `POST /api/events` jamais appelé (les
@@ -445,9 +445,12 @@
       pro, les traductions ligne à ligne) : saisir trois pros, un avec un tag
       `{B/…}` — le rendu suit la frappe, l'aperçu arrive après 400 ms, icône
       et nom de l'effet ; changer la langue « Aperçu » de la savebar ;
-      réordonner deux pros dans le texte (les traductions restent à leur rang,
-      « à retraduire ») ; « Enregistrer », vérifier le fichier : l'ordre du
-      texte, les traductions au rang. Une traduction de trop (une ligne de
+      réordonner deux pros dans le texte, en effacer un au milieu (A47 : les
+      traductions suivent leur ligne, dans les textarea des langues aussi ;
+      sous l'anglais, en ambre, « 1 traduction orpheline retranchée ») ;
+      « Enregistrer », vérifier le fichier : l'ordre du texte, chaque ligne
+      avec SES traductions, celles de la ligne effacée parties. Une
+      traduction de trop (une ligne de
       plus que l'anglais dans une langue) : ambre sous la textarea, « 1
       erreur » dans la savebar, rien ne part. (2) Un tag faux (`{B/Foo}`) :
       rouge dans le rendu ; « Enregistrer » — attendu : refus sur le rang
@@ -465,8 +468,7 @@
       la fiche du perso sur le site, sections Pros / Cons et Synergies. À
       juger : « Traduire » de Pros / Cons posé sous les deux cartes ; le
       rendu du site AU-DESSUS du texte (F24 : Sevih a dit « au-dessus ou en
-      dessous ») ; une traduction orpheline après une ligne effacée en anglais
-      reste à son rang (à effacer à la main, « à retraduire » sinon) ; les
+      dessous ») ; les
       textarea de deux lignes des Synergies ; faut-il une saisie assistée des
       tags (les `refs` sont servis, la page ne les lit pas encore) ?
 - [ ] **« Fiche perso » — contrôles à l'écran (lot C11)** : le banc ne

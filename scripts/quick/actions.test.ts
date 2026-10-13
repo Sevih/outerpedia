@@ -1596,6 +1596,101 @@ describe('saveCharacterSheet — disque, stores et git injectés', () => {
     expect(calls.git).toEqual([[['data/curated/characters.json'], `chore(characters): ${name}`]]);
   });
 
+  // Trois pros traduits, et ce que la page envoie quand leur anglais a bougé :
+  // les textes PAR RANG, et `from`, le rang qui porte les traductions de chaque ligne.
+  const pro = (word: string) => ({ en: word, fr: `fr:${word}`, es: `es:${word}` });
+  const THREE = { ...ENTRY, prosCons: { pros: [pro('a'), pro('b'), pro('c')], cons: [] } };
+  const realign = async (
+    pros: Partial<Record<'en' | 'fr' | 'es', string>>[],
+    from: (number | null)[],
+  ) => {
+    const { calls, fake } = deps({ entry: THREE });
+    const out = await save(
+      { curated: { prosCons: { pros, cons: [], from: { pros: from } } }, was: THREE },
+      fake,
+    );
+    return { out, written: calls.character[0]?.[1].prosCons?.pros };
+  };
+
+  it('`from` : la 2e ligne de trois effacée — la 3e garde ses traductions, celles de la 2e sont retranchées et dites', async () => {
+    // « c » est monté au rang 2, où les traductions de « b » sont restées.
+    const { out, written } = await realign(
+      [pro('a'), { ...pro('b'), en: 'c' }, { fr: 'fr:c', es: 'es:c' }],
+      [0, 2],
+    );
+    expect(written).toEqual([pro('a'), pro('c')]);
+    expect(Object.keys(written?.[1] ?? {})).toEqual(['en', 'fr', 'es']);
+    expect(out).toMatchObject({ ok: true, written: true, refused: [] });
+    expect(out.log[0]).toBe('pros / cons : 2 pros, 0 con — 1 traduction orpheline retranchée');
+  });
+
+  it('`from` : une ligne insérée au milieu n’a que son anglais, les suivantes gardent leurs traductions', async () => {
+    const { out, written } = await realign(
+      [pro('a'), { ...pro('b'), en: 'new' }, { ...pro('c'), en: 'b' }, { en: 'c' }],
+      [0, null, 1, 2],
+    );
+    expect(written).toEqual([pro('a'), { en: 'new' }, pro('b'), pro('c')]);
+    expect(out.log[0]).toBe('pros / cons : 4 pros, 0 con — 1 ligne nouvelle sans traduction');
+  });
+
+  it('`from` : deux lignes réordonnées — leurs traductions suivent ; une ligne retouchée perd les siennes', async () => {
+    const swapped = await realign(
+      [{ ...pro('a'), en: 'b' }, { ...pro('b'), en: 'a' }, pro('c')],
+      [1, 0, 2],
+    );
+    expect(swapped.written).toEqual([pro('b'), pro('a'), pro('c')]);
+    expect(swapped.out.log[0]).toBe('pros / cons : 3 pros, 0 con');
+
+    const retyped = await realign([pro('a'), { ...pro('b'), en: 'b!' }, pro('c')], [0, null, 2]);
+    expect(retyped.written).toEqual([pro('a'), { en: 'b!' }, pro('c')]);
+    expect(retyped.out.log[0]).toBe(
+      'pros / cons : 3 pros, 0 con — 1 ligne nouvelle sans traduction, 1 traduction orpheline retranchée',
+    );
+  });
+
+  it('`from` : seules les traductions bougent — chaque ligne à son rang, rien ne change', async () => {
+    const pros = [pro('a'), { ...pro('b'), fr: 'fr:B' }, pro('c')];
+    const { out, written } = await realign(pros, [0, 1, 2]);
+    expect(written).toEqual(pros);
+    expect(out.log[0]).toBe('pros / cons : 3 pros, 0 con');
+    // Le contrôle des tags vaut pour le texte RÉALIGNÉ, situé au rang de la ligne.
+    const bad = await realign([{ en: 'x' }, { en: 'y', fr: '{B/Foo}' }, { fr: 'ok' }], [1, 2]);
+    expect(bad.out.refused).toEqual([
+      {
+        field: 'prosCons',
+        list: 'pros',
+        index: 0,
+        reason: 'fr : tag inconnu {B/Foo} (effet inconnu)',
+      },
+    ]);
+    expect(bad.written).toBeUndefined();
+  });
+
+  it('`from` mal formé : un rang hors de l’envoi, pris deux fois, ou une ligne anglaise sans rang — refusé, rien n’est écrit', async () => {
+    for (const from of [[0, 3], [1, 1], [0, 1, 2, 2], ['0'], 'x'] as unknown[]) {
+      const { out, written } = await realign(
+        [pro('a'), pro('b'), pro('c')],
+        from as (number | null)[],
+      );
+      expect(written, JSON.stringify(from)).toBeUndefined();
+      expect(
+        out.refused.map((r) => [r.field, r.list]),
+        JSON.stringify(from),
+      ).toEqual([['prosCons', undefined]]);
+      expect(out.refused[0].reason).toContain('pros · rangs d’origine');
+    }
+    const { out, written } = await realign([pro('a'), pro('b'), pro('c')], [0, 1]);
+    expect(written).toBeUndefined();
+    expect(out.refused).toEqual([
+      {
+        field: 'prosCons',
+        list: 'pros',
+        index: 2,
+        reason: 'une ligne anglaise sans rang d’origine',
+      },
+    ]);
+  });
+
   it('un tag inconnu : refus SITUÉ à la ligne, rien n’est écrit ni committé', async () => {
     const { calls, fake } = deps();
     const out = await save(

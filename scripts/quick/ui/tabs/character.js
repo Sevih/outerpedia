@@ -100,6 +100,10 @@ let refused = new Map();
 // se compare au disque par son RANG). Un groupe de synergie est une ligne qui
 // porte en plus ses héros.
 const lists = { pros: [], cons: [], synergies: [] };
+// Les traductions d'une colonne que plus aucune ligne anglaise ne reprend,
+// mises de côté par `colSettle` (`at`, `text`) : elles reviennent si leur
+// anglais est retapé, et sont retranchées à l'enregistrement.
+const spare = { pros: [], cons: [] };
 // Les groupes du disque retirés : ils comptent dans la savebar (un pro retiré
 // compte par son rang).
 const gone = { pros: 0, cons: 0, synergies: 0 };
@@ -191,7 +195,8 @@ function setVids(list) {
 // génèrent (« Traduire ») et se relisent ; le site replie une langue absente
 // sur l'anglais. Pros / Cons : une colonne est UN texte par langue, une ligne
 // par rang, et le rang est l'identité d'une ligne — la ligne i de chaque
-// langue traduit le pro i, ce que le disque porte au rang i est sa base.
+// langue traduit le pro i, ce que le disque porte au rang i est sa base. Les
+// traductions SUIVENT leur ligne quand l'anglais bouge (`colPlan`).
 // Synergies : une ligne = un groupe, qui garde sa clé et sa base.
 const def = () => sheet.langs.default;
 const others = () => sheet.langs.shown.filter((l) => l !== def());
@@ -219,21 +224,28 @@ const diskAt = (list, i) => {
   const item = diskList(list)[i];
   return item === undefined ? null : JSON.stringify(textOut(item));
 };
-/** Une ligne diffère-t-elle du disque — pour Pros / Cons, de ce qu'il porte à son rang `i` ? */
-const lineMoved = (list, line, i) => {
-  const base = byRank(list) ? diskAt(list, i) : line.base;
-  return base === null ? !blank(list, line) : JSON.stringify(lineOut(list, line)) !== base;
+/** Un groupe de synergie diffère-t-il de ce que le disque en portait ? */
+const lineMoved = (list, line) =>
+  line.base === null ? !blank(list, line) : JSON.stringify(lineOut(list, line)) !== line.base;
+/**
+ * Le rang `i` d'une colonne diffère-t-il de ce que le disque y porte ? Comparé
+ * à ce qui s'écrira (`colShown` : l'anglais du rang, les traductions de sa ligne).
+ */
+const rankMoved = (list, i, shown = colShown(list)) => {
+  const now = JSON.stringify(textOut(shown[i] ?? {}));
+  return now !== (diskAt(list, i) ?? '{}');
 };
 /**
  * Lignes ajoutées, modifiées, retirées. Pros / Cons : par rang — un rang que
  * le disque porte et que la page n'a plus compte aussi.
  */
-const listChanges = (list) =>
-  byRank(list)
-    ? Math.max(lists[list].length, diskList(list).length) -
-      lists[list].filter((l, i) => !lineMoved(list, l, i)).length
-    : gone[list] + lists[list].filter((l) => lineMoved(list, l)).length;
-/** Une liste telle qu'elle partirait : ses lignes non vides. */
+function listChanges(list) {
+  if (!byRank(list)) return gone[list] + lists[list].filter((l) => lineMoved(list, l)).length;
+  const shown = colShown(list);
+  const ranks = Math.max(shown.length, diskList(list).length);
+  return Array.from({ length: ranks }, (_, i) => i).filter((i) => rankMoved(list, i, shown)).length;
+}
+/** Une liste de groupes telle qu'elle partirait : ses lignes non vides. */
 const listOut = (list) => lists[list].filter((l) => !blank(list, l));
 
 function newLine(list, item) {
@@ -253,6 +265,7 @@ function fromDisk(which = LISTS) {
   for (const list of which) {
     lists[list] = diskList(list).map((item) => newLine(list, item));
     gone[list] = 0;
+    if (byRank(list)) spare[list] = [];
   }
   const alive = new Set(LISTS.flatMap((list) => lists[list].map((l, i) => pvKey(list, l, i))));
   for (const k of [...pv.segs.keys()]) if (!alive.has(k)) pv.segs.delete(k);
@@ -263,7 +276,7 @@ function fromDisk(which = LISTS) {
 }
 /** Le disque porte-t-il déjà ce que la liste enverrait ? */
 const sameAsDisk = (list) =>
-  JSON.stringify(listOut(list).map((l) => lineOut(list, l))) ===
+  JSON.stringify(byRank(list) ? colOut(list) : listOut(list).map((l) => lineOut(list, l))) ===
   JSON.stringify(diskList(list).map((item) => lineOut(list, newLine(list, item))));
 
 const en = (line) => (line.text[def()] ?? '').trim();
@@ -274,30 +287,142 @@ const tally = (line) =>
   `${others().filter((l) => line.text[l]?.trim()).length} / ${others().length}`;
 
 // Les colonnes de Pros / Cons : une langue = une textarea, une ligne par rang.
-/** Les textes d'une langue par rang, sans les vides de la fin : le contenu de sa textarea. */
-function colLines(list, lang) {
-  const out = lists[list].map((l) => l.text[lang] ?? '');
-  while (out.length && !out.at(-1).trim()) out.pop();
+/** Les lignes anglaises d'une colonne, sans les rangs vides de la fin : une par pro. */
+function enLines(list) {
+  const out = lists[list].map((l) => (l.text[def()] ?? '').trim());
+  while (out.length && !out.at(-1)) out.pop();
   return out;
 }
 /** Les rangs que l'anglais porte : le nombre de pros. */
-const enCount = (list) => colLines(list, def()).length;
+const enCount = (list) => enLines(list).length;
+/** Un texte porte-t-il une traduction ? */
+const hasTr = (text) => Object.entries(text).some(([l, v]) => l !== def() && v.trim());
+/** Les traductions d'un rang sous l'anglais d'une autre ligne : ses langues, dans leur ordre. */
+function underEn(text, en) {
+  const out = Object.fromEntries(Object.entries(text).map(([l, v]) => [l, l === def() ? en : v]));
+  return def() in out ? out : { [def()]: en, ...out };
+}
+/**
+ * À qui vont les traductions d'une colonne dont l'anglais a bougé. Le rang est
+ * l'identité d'une ligne, mais ses traductions traduisent UN anglais (`at`,
+ * celui du disque ou du dernier « Traduire ») : une ligne anglaise identique à
+ * cet anglais les garde, où qu'elle soit maintenant ; les autres sont
+ * nouvelles. `from` le dit par ligne anglaise — le rang, dans `pool` (les rangs
+ * de la colonne puis les traductions mises de côté), qui porte ses
+ * traductions, `null` pour une ligne nouvelle : c'est ce qui part au serveur,
+ * qui réaligne. À son rang d'abord (un rang jamais traduit dont les
+ * traductions sont tapées à la main y compte), puis au premier rang libre.
+ * `fresh` : les lignes nouvelles ; `orphans` : les rangs dont plus aucune
+ * ligne ne reprend les traductions, retranchées à l'enregistrement ; `stale` :
+ * une ligne nouvelle a pris la place d'une ligne traduite.
+ */
+function colPlan(list) {
+  const rows = lists[list];
+  const pool = [...rows, ...spare[list]];
+  const ens = enLines(list);
+  const from = ens.map((en, i) => {
+    const at = rows[i].at.trim();
+    return at === en || (!at && hasTr(rows[i].text)) ? i : null;
+  });
+  const used = new Set(from.filter((n) => n !== null));
+  ens.forEach((en, i) => {
+    if (from[i] !== null) return;
+    const n = pool.findIndex((l, k) => !used.has(k) && l.at.trim() === en);
+    if (n < 0) return;
+    from[i] = n;
+    used.add(n);
+  });
+  const lost = (k) => !used.has(k) && Boolean(pool[k].at.trim()) && hasTr(pool[k].text);
+  return {
+    ens,
+    pool,
+    from,
+    used,
+    fresh: from.filter((n) => n === null).length,
+    orphans: pool.filter((_, k) => lost(k)).length,
+    stale: from.some((n, i) => n === null && lost(i)),
+  };
+}
+/** Les rangs d'une colonne laissés sans anglais dont les traductions n'ont jamais traduit de ligne : tapés en trop. */
+const colExtra = (list, { ens, used }) =>
+  lists[list].filter((l, k) => k >= ens.length && !used.has(k) && !l.at.trim());
+/**
+ * Les textes d'une colonne tels que ses textarea les montrent : par ligne
+ * anglaise, son anglais et les traductions de SA ligne (`colPlan`) ; puis les
+ * rangs tapés en trop dans une traduction.
+ */
+function colShown(list) {
+  const plan = colPlan(list);
+  const { ens, pool, from } = plan;
+  return [
+    ...ens.map((en, i) =>
+      from[i] === i
+        ? pool[i].text
+        : from[i] === null
+          ? { [def()]: en }
+          : underEn(pool[from[i]].text, en),
+    ),
+    ...colExtra(list, plan).map((l) => l.text),
+  ];
+}
+/** Une colonne telle qu'elle s'écrira : ses lignes anglaises, chacune avec ses traductions. */
+const colOut = (list) =>
+  colShown(list)
+    .slice(0, enCount(list))
+    .map((text) => textOut(text));
+/** Les textes d'une langue par rang, sans les vides de la fin : le contenu de sa textarea. */
+function colLines(list, lang) {
+  if (lang === def()) return enLines(list);
+  const out = colShown(list).map((text) => text[lang] ?? '');
+  while (out.length && !out.at(-1).trim()) out.pop();
+  return out;
+}
+/**
+ * Pose dans le modèle ce que les textarea montrent déjà : chaque ligne
+ * anglaise à son rang avec ses traductions, les rangs tapés en trop derrière,
+ * et les traductions orphelines de côté (`spare`). Avant toute écriture dans
+ * une traduction — à la main ou par « Traduire » —, qui se fait par rang.
+ */
+function colSettle(list) {
+  const plan = colPlan(list);
+  const { ens, pool, from, used } = plan;
+  const rows = ens.map((en, i) => {
+    const n = from[i];
+    if (n === i) return pool[i];
+    const line = newLine(list);
+    line.text = n === null ? { [def()]: en } : underEn(pool[n].text, en);
+    line.at = n === null ? '' : pool[n].at;
+    return line;
+  });
+  const extra = colExtra(list, plan);
+  spare[list] = pool
+    .filter((l, k) => !used.has(k) && l.at.trim() && hasTr(l.text))
+    .map((l) => ({ at: l.at, text: underEn(l.text, '') }));
+  lists[list] = [...rows, ...extra];
+}
 /**
  * Pose une langue d'une colonne, ligne à ligne : la ligne i va au rang i, les
- * rangs au-delà perdent cette langue, et les rangs vides de la fin s'en vont.
- * L'anglais s'écrit sans ses lignes vides (une ligne = un pro) ; une
- * traduction garde les siennes, qui disent « pas traduit » à ce rang.
+ * rangs au-delà perdent cette langue, et les rangs vides de la fin s'en vont
+ * — sauf celui qui garde l'anglais d'une ligne (`at`) : elle peut revenir.
+ * L'anglais s'écrit sans ses lignes vides (une ligne = un pro), et ne touche
+ * pas aux traductions : `colPlan` dit à quelle ligne elles vont. Une
+ * traduction garde ses lignes vides, qui disent « pas traduit » à ce rang ;
+ * elle s'écrit sur la colonne posée (`colSettle`), et une ligne jamais
+ * traduite qui en reçoit une la tient désormais de son anglais.
  */
 function setCol(list, lang, raw) {
   let value = raw.split('\n').map((s) => s.trim());
   if (lang === def()) value = value.filter(Boolean);
+  else colSettle(list);
   while (value.length && !value.at(-1)) value.pop();
   const rows = lists[list];
   while (rows.length < value.length) rows.push(newLine(list));
   rows.forEach((l, i) => {
     l.text[lang] = value[i] ?? '';
   });
-  while (rows.length && blank(list, rows.at(-1))) rows.pop();
+  while (rows.length && blank(list, rows.at(-1)) && !rows.at(-1).at.trim()) rows.pop();
+  if (lang !== def())
+    for (const l of rows) if (!l.at.trim() && en(l) && hasTr(l.text)) l.at = en(l);
 }
 /** Une traduction : ses rangs écrits sur ceux de l'anglais — « 4 / 5 ». */
 const colTally = (list, lang) =>
@@ -308,17 +433,32 @@ function colOver(list, lang) {
   const m = enCount(list);
   return n > m ? `${plural(n, 'ligne')}, l’anglais en a ${m}` : '';
 }
-/** « à retraduire » : un rang dont l'anglais a bougé depuis sa traduction. */
-const colStale = (list) => lists[list].some(stale);
+/** « à retraduire » : une ligne nouvelle a pris la place d'une ligne traduite. */
+const colStale = (list) => colPlan(list).stale;
 /** Les langues traduites à chaque rang de l'anglais — « 3 / 5 ». */
 const colDone = (list) =>
   `${
     enCount(list)
-      ? others().filter((lang) =>
-          lists[list].slice(0, enCount(list)).every((l) => l.text[lang]?.trim()),
-        ).length
+      ? others().filter((lang) => colOut(list).every((text) => text[lang]?.trim())).length
       : 0
   } / ${others().length}`;
+/**
+ * Ce que l'enregistrement fera des traductions d'une colonne dont l'anglais a
+ * bougé, dit sous sa textarea : ses lignes nouvelles, qui n'en ont pas, et les
+ * traductions que plus aucune ligne ne reprend, retranchées.
+ */
+function colShift(list) {
+  const { fresh, orphans } = colPlan(list);
+  const s = (n) => (n > 1 ? 's' : '');
+  return [
+    fresh ? `${fresh} ligne${s(fresh)} nouvelle${s(fresh)} sans traduction` : '',
+    orphans
+      ? `${orphans} traduction${s(orphans)} orpheline${s(orphans)} retranchée${s(orphans)}`
+      : '',
+  ]
+    .filter(Boolean)
+    .join(', ');
+}
 /** Un rang de la colonne refusé par le serveur. */
 const colRefused = (list) => lists[list].some((l) => refused.has(lineKey(list, l)));
 
@@ -897,16 +1037,17 @@ const SIGNS = { pros: '+', cons: '−' };
  * d'accent, un rang refusé de rouge.
  */
 function viewHtml(list) {
-  const shown = lists[list].slice(0, enCount(list));
+  const all = colShown(list);
+  const shown = all.slice(0, enCount(list));
   if (!shown.length) return `<p class="lbl">Aucun ${LIST_WORDS[list]}.</p>`;
   return `<ul class="c-view ${list}" aria-label="${cap(LIST_WORDS[list])}s, tels que le site les rend">${shown
-    .map((line, i) => {
-      const key = pvKey(list, line, i);
-      return `<li class="c-vl${lineMoved(list, line, i) ? ' dirty' : ''}${
+    .map((text, i) => {
+      const key = `${list}:${i}`;
+      return `<li class="c-vl${rankMoved(list, i, all) ? ' dirty' : ''}${
         refused.has(key) ? ' ko' : ''
       }" data-rank="${i}"><span class="c-sign" aria-hidden="true">${SIGNS[list]}</span><span class="c-pv pv-note${
         pv.busy ? ' busy' : ''
-      }" data-pv="${key}">${pvBody(key, pvText(line))}</span></li>`;
+      }" data-pv="${key}">${pvBody(key, pvText({ text }))}</span></li>`;
     })
     .join('')}</ul>`;
 }
@@ -924,11 +1065,12 @@ const colSaid = (list) =>
 
 /**
  * Une colonne de Pros / Cons : le rendu du site, puis l'anglais en UNE
- * textarea — une ligne = un pro —, ses refus, puis les traductions repliées,
- * une textarea par langue, elle aussi une ligne par rang : la ligne i traduit
- * le pro i, l'anglais ligne à ligne en placeholder ; sous chacune, ses rangs
- * écrits « 4 / 5 » et, en ambre, les lignes en trop. Le saut de ligne après
- * `<textarea>` : cf. `textHtml`.
+ * textarea — une ligne = un pro —, ce que l'enregistrement fera de ses
+ * traductions si l'anglais a bougé (`colShift`), ses refus, puis les
+ * traductions repliées, une textarea par langue, elle aussi une ligne par
+ * rang : la ligne i traduit le pro i, l'anglais ligne à ligne en placeholder ;
+ * sous chacune, ses rangs écrits « 4 / 5 » et, en ambre, les lignes en trop.
+ * Le saut de ligne après `<textarea>` : cf. `textHtml`.
  */
 function colHtml(list, title) {
   const word = LIST_WORDS[list];
@@ -951,6 +1093,7 @@ function colHtml(list, title) {
           colRefused(list) ? ' class="refused"' : ''
         }`,
       )}
+      <p class="c-shift" data-shift>${esc(colShift(list))}</p>
       ${err(list, colSaid(list))}
       <details data-fold="${list}"${trOpen.has(list) ? ' open' : ''}>
         <summary><span class="btn ghost sm">Traductions (${others().length})</span><span class="badge warn" data-stale>${
@@ -1338,11 +1481,15 @@ const growAll = (root) => root.querySelectorAll('textarea[data-lang]').forEach(g
  */
 const pvItems = () =>
   (TEXT_TABS[sub] ?? []).flatMap((list) =>
-    lists[list].slice(0, byRank(list) ? enCount(list) : undefined).map((line, i) => ({
-      key: pvKey(list, line, i),
-      text: pvText(line),
-      raw: byRank(list) ? pvText(line) : undefined,
-    })),
+    byRank(list)
+      ? colShown(list)
+          .slice(0, enCount(list))
+          .map((text, i) => ({
+            key: `${list}:${i}`,
+            text: pvText({ text }),
+            raw: pvText({ text }),
+          }))
+      : lists[list].map((line) => ({ key: line.k, text: pvText(line), raw: undefined })),
   );
 
 /** L'aperçu des lignes en place : son atténuation, et `redraw` son contenu. */
@@ -1470,25 +1617,27 @@ function render() {
 
 /**
  * Ce qui suit la saisie dans une colonne de Pros / Cons, sans la redessiner :
- * son compte, « à retraduire », les langues complètes, sous chaque traduction
- * ses rangs écrits et ses lignes en trop, le bord de l'anglais refusé, et
- * dans le rendu les rangs modifiés ou refusés.
+ * son compte, ce que l'enregistrement fera de ses traductions, « à
+ * retraduire », les langues complètes, sous chaque traduction ses rangs écrits
+ * et ses lignes en trop, le bord de l'anglais refusé, et dans le rendu les
+ * rangs modifiés ou refusés.
  */
 function colMarks(card, list) {
   card
     .querySelector(`textarea[data-col][data-lang="${def()}"]`)
     .classList.toggle('refused', colRefused(list));
   card.querySelector('[data-n]').textContent = String(enCount(list));
+  card.querySelector('[data-shift]').textContent = colShift(list);
   card.querySelector('[data-stale]').textContent = colStale(list) ? 'à retraduire' : '';
   card.querySelector('[data-tally]').textContent = colDone(list);
   for (const lang of others()) {
     card.querySelector(`[data-tc="${lang}"]`).textContent = colTally(list, lang);
     card.querySelector(`[data-over="${lang}"]`).textContent = colOver(list, lang);
   }
+  const shown = colShown(list);
   for (const li of card.querySelectorAll('[data-rank]')) {
     const i = Number(li.dataset.rank);
-    const line = lists[list][i];
-    li.classList.toggle('dirty', Boolean(line) && lineMoved(list, line, i));
+    li.classList.toggle('dirty', rankMoved(list, i, shown));
     li.classList.toggle('ko', refused.has(`${list}:${i}`));
   }
 }
@@ -1609,10 +1758,16 @@ $('c-panel').oninput = (e) => {
     grow(col);
     const card = col.closest('[data-card]');
     card.querySelector('[data-view]').innerHTML = viewHtml(list);
-    // Une traduction pas encore écrite montre l'anglais qu'elle remplacera, ligne à ligne.
+    // Les traductions suivent leur ligne : chaque textarea montre celles de la
+    // ligne anglaise de son rang (`colShown`) — et, pas encore écrite, l'anglais
+    // qu'elle remplacera, ligne à ligne.
     if (lang === def()) {
       const en = colLines(list, def()).join('\n');
-      for (const other of card.querySelectorAll('.c-trs textarea')) other.placeholder = en;
+      for (const other of card.querySelectorAll('.c-trs textarea')) {
+        other.placeholder = en;
+        other.value = colLines(list, other.dataset.lang).join('\n');
+        grow(other);
+      }
     }
     marks();
     return pvAsk(PV_DELAY);
@@ -1737,7 +1892,10 @@ async function translate() {
   const of = TEXT_TABS[sub];
   if (tr.busy || !of) return;
   // Pros / Cons : par ligne, celles qui sont périmées ou qu'une langue n'a pas ;
-  // une ligne traduite partout et à jour ne repart pas. Synergies : toutes.
+  // une ligne traduite partout et à jour ne repart pas — sur la colonne posée
+  // (`colSettle`) : une ligne déplacée a ses traductions, une ligne nouvelle
+  // n'en a pas. Synergies : toutes.
+  for (const list of of) if (byRank(list)) colSettle(list);
   const needs = (list, line) =>
     !byRank(list) || stale(line) || others().some((l) => !line.text[l]?.trim());
   const typed = of.flatMap((list) =>
@@ -1973,10 +2131,27 @@ $('c-save').onclick = async () => {
   const sentKeys = {};
   const send = (list) => {
     const kept = listOut(list);
-    sentKeys[list] = kept.map((l) => (byRank(list) ? lists[list].indexOf(l) : l.k));
+    sentKeys[list] = kept.map((l) => l.k);
     return kept.map((l) => lineOut(list, l));
   };
-  if (subChanges('pros-cons')) curated.prosCons = { pros: send('pros'), cons: send('cons') };
+  // Une colonne part PAR RANG, avec les traductions mises de côté ; `from` dit
+  // au serveur, par ligne anglaise, quel rang de l'envoi porte ses traductions
+  // (`colPlan`) — il réaligne, et retranche celles que plus rien ne reprend.
+  // Une colonne que le réalignement laisserait telle quelle part sans `from`.
+  const from = {};
+  const sendCol = (list) => {
+    const plan = colPlan(list);
+    const texts = plan.pool.map((l) => textOut(l.text));
+    sentKeys[list] = texts.map((_, i) => i);
+    const asIs = texts.filter((text) => Object.keys(text).length);
+    if (JSON.stringify(asIs) === JSON.stringify(colOut(list))) return asIs;
+    from[list] = plan.from;
+    return texts;
+  };
+  if (subChanges('pros-cons')) {
+    curated.prosCons = { pros: sendCol('pros'), cons: sendCol('cons') };
+    if (Object.keys(from).length) curated.prosCons.from = from;
+  }
   if (subChanges('synergies')) curated.synergies = send('synergies');
   const chips = kitOut();
   const eeChips = eeOut();

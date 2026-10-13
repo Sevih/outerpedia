@@ -2806,15 +2806,30 @@ const SHEET_LABELS: Record<SheetKey, string> = {
 /** Les listes de textes de la fiche : où un refus se situe, à la ligne près. */
 export type SheetList = 'pros' | 'cons' | 'synergies';
 
+/**
+ * Les pros et les cons tels que la page les envoie. Une colonne est une liste
+ * de textes PAR RANG ; son identité étant le rang, une ligne anglaise effacée,
+ * insérée ou déplacée ne dit pas d'elle-même où sont ses traductions. `from`
+ * le dit, par colonne : pour chaque ligne anglaise (les `from.length` premiers
+ * textes), le rang DE L'ENVOI qui porte ses traductions — `null` pour une ligne
+ * nouvelle. Les textes au-delà ne sont que des traductions à reprendre. Sans
+ * `from`, chaque texte est une ligne, à son rang.
+ */
+export interface SentProsCons extends ProsCons {
+  from?: Partial<Record<'pros' | 'cons', (number | null)[]>>;
+}
+
 const PRIORITY_KEYS = ['first', 'second', 'ultimate'] as const;
 
 /**
  * Ce que la fiche envoie. `ranks` : des cellules, comme Rangs les envoie (rang
  * PvE, rang PvP, rôle, paliers). `curated` : les champs hors rangs, chacun
  * ENTIER et seulement s'il a bougé — une priorité vide n'y est pas, une liste
- * de tags est celle des tags humains cochés, `prosCons` porte les deux listes,
- * `videos` toutes les vidéos dans l'ordre de la page et `synergies` tous les
- * groupes. `was` : l'entrée que la page avait chargée.
+ * de tags est celle des tags humains cochés, `prosCons` porte les deux listes
+ * (`SentProsCons` : avec, quand l'anglais d'une colonne a bougé, le rang
+ * d'origine de chaque ligne), `videos` toutes les vidéos dans l'ordre de la
+ * page et `synergies` tous les groupes. `was` : l'entrée que la page avait
+ * chargée.
  * `kit` : les chips de skills, par carte modifiée — la liste ENTIÈRE de ses refs
  * masquées, celle de ses effets ajoutés (vide = plus rien sur cette carte).
  * `ee` : les chips de l'EE, ses deux listes ENTIÈRES, et l'entrée curée de l'EE
@@ -2826,7 +2841,7 @@ export interface CharacterSheetChanges {
   curated?: {
     skillPriority?: SkillPriority;
     tags?: string[];
-    prosCons?: ProsCons;
+    prosCons?: SentProsCons;
     videos?: VideoRef[];
     synergies?: SynergyGroup[];
   };
@@ -2983,27 +2998,85 @@ const prosConsSides = (pc: ProsCons | undefined): Required<ProsCons> => ({
 });
 
 /**
+ * Les rangs d'origine d'une colonne (`SentProsCons.from`), contrôlés contre ses
+ * `sent` textes : un rang de l'envoi, pris une seule fois, ou `null`. Absents :
+ * chaque texte est une ligne, à son rang.
+ */
+function lineOrigins(raw: unknown, sent: number): (number | null)[] | string {
+  if (raw === undefined) return Array.from({ length: sent }, (_, i) => i);
+  if (!Array.isArray(raw) || raw.length > sent) return 'rangs d’origine : forme inattendue';
+  const seen = new Set<number>();
+  for (const n of raw as unknown[]) {
+    if (n === null) continue;
+    if (typeof n !== 'number' || !Number.isInteger(n) || n < 0 || n >= sent || seen.has(n))
+      return `rangs d’origine : « ${String(n)} » inattendu`;
+    seen.add(n);
+  }
+  return raw as (number | null)[];
+}
+
+/**
+ * Les traductions d'un rang sous l'anglais d'une autre ligne : les langues du
+ * rang, dans leur ordre — l'anglais en tête s'il n'en portait pas.
+ */
+function underEnglish(source: LocalizedText, en: string | undefined): LocalizedText {
+  const out: LocalizedText = {};
+  if (en !== undefined && !(DEFAULT_LANG in source)) out[DEFAULT_LANG] = en;
+  for (const [lang, text] of Object.entries(source) as [Lang, string][])
+    if (lang !== DEFAULT_LANG) out[lang] = text;
+    else if (en !== undefined) out[lang] = en;
+  return out;
+}
+
+/**
  * Les pros et les cons venus de la page, contrôlés ligne à ligne. Une ligne
  * sans aucun texte n'est pas écrite (elle ne compte pas non plus comme un
  * écart) ; `index` reste celui de la liste envoyée.
+ *
+ * Les traductions sont RÉALIGNÉES sur `from` : une ligne garde celles de son
+ * rang d'origine, où qu'elle soit maintenant ; une ligne nouvelle n'a que son
+ * anglais (`fresh` les compte) ; les traductions d'un rang que plus aucune
+ * ligne ne reprend sont retranchées (`orphans` compte ces rangs).
  */
-function cleanProsCons(raw: unknown): { value: Required<ProsCons>; issues: ListIssue[] } | string {
+function cleanProsCons(
+  raw: unknown,
+): { value: Required<ProsCons>; issues: ListIssue[]; fresh: number; orphans: number } | string {
   if (!raw || typeof raw !== 'object' || Array.isArray(raw)) return 'forme inattendue';
+  const origins = (raw as Record<string, unknown>).from ?? {};
+  if (typeof origins !== 'object' || Array.isArray(origins))
+    return 'rangs d’origine : forme inattendue';
   const value: Required<ProsCons> = { pros: [], cons: [] };
   const issues: ListIssue[] = [];
+  let fresh = 0;
+  let orphans = 0;
   for (const list of ['pros', 'cons'] as const) {
     const sent = (raw as Record<string, unknown>)[list] ?? [];
     if (!Array.isArray(sent)) return `${list} : une liste attendue`;
-    sent.forEach((item: unknown, index) => {
-      const text = cleanSheetText(item);
-      if (typeof text === 'string') return void issues.push({ list, index, reason: text });
+    const from = lineOrigins((origins as Record<string, unknown>)[list], sent.length);
+    if (typeof from === 'string') return `${list} · ${from}`;
+    const taken = new Set(from);
+    const texts = sent.map((item: unknown) => cleanSheetText(item));
+    texts.forEach((own, index) => {
+      if (typeof own === 'string') return void issues.push({ list, index, reason: own });
+      if (!taken.has(index) && Object.keys(own).some((lang) => lang !== DEFAULT_LANG)) orphans++;
+      if (index >= from.length) {
+        if (DEFAULT_LANG in own)
+          issues.push({ list, index, reason: 'une ligne anglaise sans rang d’origine' });
+        return;
+      }
+      const origin = from[index];
+      const source = origin === null ? {} : texts[origin];
+      // Un rang d'origine illisible : son refus est dit à SON rang.
+      if (typeof source === 'string') return;
+      const text = origin === index ? own : underEnglish(source, own[DEFAULT_LANG]);
       if (!Object.keys(text).length) return;
+      if (origin === null) fresh++;
       const bad = localizedIssues(text);
       if (bad.length) issues.push({ list, index, reason: bad.join(' ; ') });
       else value[list].push(text);
     });
   }
-  return { value, issues };
+  return { value, issues, fresh, orphans };
 }
 
 /**
@@ -3171,8 +3244,11 @@ function planEe(
  *     Les pros, les cons et les raisons de synergie sont CONTRÔLÉS avant
  *     (`localizedIssues` : tags inline, langue de repli, parité), les héros
  *     d'une synergie aussi : un écart est un refus situé à la ligne
- *     (`list`, `index`), et la liste entière n'est pas écrite. Les vidéos
- *     (`cleanSheetVideos`) partent dans l'ordre de la page ; écrites, le cache
+ *     (`list`, `index`), et la liste entière n'est pas écrite. Les traductions
+ *     des pros et des cons sont réalignées sur le rang d'origine de chaque
+ *     ligne (`SentProsCons.from`, `cleanProsCons`) : le journal dit les lignes
+ *     nouvelles sans traduction et les traductions orphelines retranchées. Les
+ *     vidéos (`cleanSheetVideos`) partent dans l'ordre de la page ; écrites, le cache
  *     `video-meta.json` est rafraîchi (`deps.refreshVideoMeta`) et part dans
  *     le commit ;
  *   - puis les chips de skills (`changes.kit`), contrôlées par `planKit` contre
@@ -3344,10 +3420,20 @@ export async function saveCharacterSheet(
       const { pros, cons } = pc.value;
       const empty = !pros.length && !cons.length;
       next = withField(next, 'prosCons', empty ? undefined : pc.value);
+      // Ce que le réalignement a fait des traductions, comme la page l'annonçait.
+      const s = (n: number): string => (n > 1 ? 's' : '');
+      const shifted = [
+        pc.fresh ? `${pc.fresh} ligne${s(pc.fresh)} nouvelle${s(pc.fresh)} sans traduction` : '',
+        pc.orphans
+          ? `${pc.orphans} traduction${s(pc.orphans)} orpheline${s(pc.orphans)} retranchée${s(pc.orphans)}`
+          : '',
+      ].filter(Boolean);
       said.push(
         empty
           ? `${SHEET_LABELS.prosCons} retirés`
-          : `${SHEET_LABELS.prosCons} : ${pros.length} pro${pros.length > 1 ? 's' : ''}, ${cons.length} con${cons.length > 1 ? 's' : ''}`,
+          : `${SHEET_LABELS.prosCons} : ${pros.length} pro${s(pros.length)}, ${cons.length} con${s(cons.length)}${
+              shifted.length ? ` — ${shifted.join(', ')}` : ''
+            }`,
       );
     }
   }

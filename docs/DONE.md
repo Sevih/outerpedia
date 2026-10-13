@@ -7,6 +7,121 @@
 
 ## 2026-10-13
 
+- **quick, Fiche perso › Pros / Cons : les traductions suivent leur ligne
+  anglaise — une ligne effacée n'emporte plus les siennes au rang suivant, les
+  orphelines sont dites sous le texte et retranchées par le serveur (lot
+  A47)** — suite de la relecture F24 (12/10), tranchée par Sevih le 13/10.
+  LE DÉFAUT : depuis F24 une colonne est un texte par langue, une ligne par
+  rang, et le rang est l'identité d'un pro ; effacer la 2e ligne anglaise de
+  trois faisait monter la 3e sous les traductions de la 2e, et la page
+  refusait d'enregistrer tant que les cinq langues n'étaient pas recalées à
+  la main (« 3 lignes, l'anglais en a 2 »). LE PRINCIPE : chaque rang retient
+  déjà l'anglais que ses traductions traduisent (`at` : celui du disque, ou
+  du dernier « Traduire ») ; une ligne anglaise IDENTIQUE à cet anglais garde
+  ces traductions où qu'elle soit maintenant, les autres sont nouvelles.
+  CÔTÉ PAGE (`scripts/quick/ui/tabs/character.js`) : `colPlan(list)` rend,
+  par ligne anglaise, `from` — le rang qui porte ses traductions (le sien
+  d'abord, puis le premier rang libre du même anglais ; `null` : ligne
+  nouvelle) —, `fresh` (les lignes nouvelles) et `orphans` (les rangs dont
+  plus aucune ligne ne reprend les traductions). `colShown` en tire ce qui
+  s'écrira, et TOUT l'affichage le lit : les textarea des langues (récrites
+  à chaque frappe dans l'anglais — les traductions suivent à l'écran aussi),
+  le rendu du site dans la langue de la savebar (`pvItems`, `viewHtml` : la
+  traduction de LA ligne, plus celle du rang), « 4 / 5 », « 3 / 5 », les
+  rangs modifiés (`rankMoved`), le compte de la savebar (`listChanges`),
+  `sameAsDisk`. Sous la textarea anglaise, en ambre (un `<p>` de classe
+  `c-shift`, `colShift`, tenu à jour par `colMarks`) : « 1 ligne nouvelle
+  sans traduction, 1 traduction orpheline retranchée » — chaque moitié
+  seulement si elle compte, rien quand l'anglais n'a pas bougé (le `<p>`
+  vide ne prend pas de place). À L'ENVOI (`sendCol`) : la colonne part PAR
+  RANG telle que la page la tient, avec `prosCons.from = { pros: [0, 2] }` ;
+  une colonne que le réalignement laisserait telle quelle part SANS `from`,
+  comme avant — « rien ne change pour une liste dont seules les traductions
+  bougent », et les envois que les tests de F24 comparent en entier n'ont
+  pas bougé. CÔTÉ SERVEUR (`scripts/quick/actions.ts`) : `SentProsCons`
+  (`ProsCons` + `from` par colonne) ; `cleanProsCons` réaligne — la ligne i
+  prend son anglais au rang i et ses traductions au rang `from[i]`
+  (`underEnglish` garde l'ordre des langues du rang d'origine, donc celui du
+  fichier), une ligne `null` n'a que son anglais, les textes au-delà de
+  `from.length` ne sont que des traductions à reprendre, et celles que plus
+  rien ne reprend sont retranchées ; `lineOrigins` refuse un `from` mal formé
+  (pas une liste, un rang hors de l'envoi ou pris deux fois : refus du champ,
+  « pros · rangs d'origine : … ») et une ligne anglaise au-delà de `from` est
+  un refus situé ; les contrôles de tags (`localizedIssues`) portent sur le
+  texte RÉALIGNÉ, au rang de la ligne. Le journal le redit : « pros / cons :
+  2 pros, 0 con — 1 traduction orpheline retranchée ». Sans `from`, le
+  serveur fait exactement ce qu'il faisait. ÉCARTS À LA DÉCISION, à relire :
+  (a) elle disait « diff contre les lignes d'origine, à l'enregistrement » ;
+  le calcul se fait contre `at`, qui EST l'anglais d'origine tant qu'on n'a
+  ni traduit ni tapé de traduction — et qui, après, permet à « Traduire » de
+  combler (une ligne nouvelle traduite n'est plus nouvelle) et à une
+  traduction tapée à la main sur une ligne nouvelle de ne pas être
+  retranchée ; `from` est donc un rang DE L'ENVOI, pas du disque (les deux
+  coïncident dans le cas simple). (b) Une traduction se tape par rang : avant
+  d'y écrire — à la main ou par « Traduire » —, `colSettle` pose dans le
+  modèle ce que les textarea montraient (chaque ligne avec ses traductions),
+  et met les orphelines DE CÔTÉ (`spare`) au lieu de les perdre : le compteur
+  les dit jusqu'à l'enregistrement, retaper la ligne les rend (le principe
+  de F24, « la page ne retranche rien d'elle-même », tient : c'est le
+  serveur qui retranche). Sans cela « Traduire » retraduisait les lignes
+  déplacées et écrasait leurs traductions relues. (c) « à retraduire » ne
+  peut plus dire « ce rang porte les traductions d'un autre anglais » (elles
+  sont orphelines) : il dit qu'une ligne nouvelle a pris la place d'une
+  ligne traduite — le cas de la retouche, comme avant. (d) Conséquence de la
+  décision, à juger à l'écran : corriger une faute dans une ligne anglaise
+  en fait une ligne NOUVELLE, ses cinq traductions partent à
+  l'enregistrement si « Traduire » n'est pas repassé (le compteur le dit).
+  (e) L'erreur « 3 lignes, l'anglais en a 2 » reste pour une ligne TAPÉE en
+  trop dans une traduction (un rang qui n'a jamais traduit de ligne) ; un
+  rang laissé sans anglais par une ligne effacée est une orpheline, plus une
+  erreur. CSS : `.c-shift` (`character.css`). Docs : `STYLE.md` (le croquis
+  et le paragraphe Pros / Cons), `TODO.md` (le point (1) des suites de F24
+  marqué FAIT, les contrôles à l'écran de B42 récrits : réordonner, effacer
+  au milieu, vérifier le fichier ; le « à juger » des orphelines retiré).
+  Vérification : `pnpm typecheck` exit 0 (`tsc --noEmit` ×3, la dernière
+  ligne étant celle de la commande), `pnpm lint` exit 0 (`eslint`),
+  `pnpm test` « Test Files 223 passed (223) / Tests 3820 passed (3820) »,
+  `scripts/quick` sous `NODE_ENV=development` (`vitest run`) « Test Files 8
+  passed (8) / Tests 1133 passed (1133) ».
+  Tests du serveur (`actions.test.ts`, cinq cas par `saveCharacterSheet`,
+  jamais par un POST) : la 2e de trois effacée → la 3e garde ses traductions
+  dans l'ordre du fichier, celles de la 2e parties et dites au journal ; une
+  ligne insérée au milieu → elle n'a que son anglais, les suivantes gardent
+  les leurs ; deux lignes réordonnées → leurs traductions suivent, une ligne
+  retouchée perd les siennes ; `from` à l'identique → rien ne change, et un
+  tag faux d'une traduction réalignée est situé au rang de SA ligne ; cinq
+  `from` mal formés et une ligne sans rang refusés, rien d'écrit. Tests de
+  la page (`ui-serve.test.ts`, happy-dom ; `character({ pros })` pose trois
+  pros traduits sur le disque factice) : le compteur — vide au repos, « 1
+  traduction orpheline retranchée » après la 2e effacée avec les textarea
+  fr / es recalées, « 2 lignes nouvelles sans traduction, 2 traductions
+  orphelines retranchées » après une retouche et un ajout, les traductions
+  retrouvées quand la ligne est remise, puis l'envoi (`from` vaut
+  `{ pros: [0, 2] }`) ; insertion au milieu et échange de deux lignes (l'aperçu en français
+  demande la traduction de la ligne) ; une traduction retouchée puis
+  « Traduire » après un anglais déplacé, les orphelines encore dites, et
+  « beta » retapé qui retrouve les siennes (`from: [0, 1, 2, 4]`). Deux cas
+  de F24 récrits, qui affirmaient l'ancien comportement (réordonner laissait
+  les traductions au rang ; une ligne effacée laissait les siennes sous la
+  suivante). Banc : quick isolé :4791, clés vidées ; `shot.mjs` ne tape pas,
+  donc l'édition est simulée par un relais JETABLE hors dépôt, en lecture
+  seule (GET et `POST /api/character/preview`), qui pose dans la page un
+  script effaçant la 2e ligne des pros d'Aer (2000055, quatre pros traduits)
+  et en ajoutant une : à l'image, sous l'anglais, en ambre, « 1 ligne
+  nouvelle sans traduction, 1 traduction orpheline retranchée », la savebar
+  à « 3 changements », le français recalé (« 3 / 4 », les lignes 3 et 4 du
+  disque aux rangs 2 et 3). Au repos (`--hash character/2000055/pros-cons`
+  sans relais) : aucun compteur, aucun espace de plus — pas d'autre
+  changement visuel. Aucun POST d'écriture n'a été joué ; quick isolé arrêté
+  par son pid. Laissé : un vrai « Enregistrer » après une ligne effacée et
+  la lecture de l'ambre à l'écran (TODO) ; deux lignes anglaises IDENTIQUES
+  se partagent leurs traductions dans l'ordre des rangs ; une traduction
+  tapée AVANT que sa ligne anglaise existe (le rattrapage de F24) reste
+  attachée à son rang tant qu'aucune traduction n'est retouchée — réordonner
+  aussitôt l'anglais la laisserait sous la mauvaise ligne ; Synergies,
+  « Traduire » (le moteur, la route) et le rendu ne sont pas touchés ;
+  aucune clé i18n, `package.json` intouché.
+
 - **quick, Guides › Core Fusion et Premium & Limited : le select de palier dit
   « 3★ », et une fusion du jeu sans review est signalée sans bloquer la saisie
   (lot A46)** — suite de la relecture C13 / F25 (12/10), tranchée par Sevih le

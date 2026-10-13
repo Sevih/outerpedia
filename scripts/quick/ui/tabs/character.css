@@ -558,6 +558,16 @@
   font-size: 13px;
   line-height: 1.5;
 }
+/* Sous l'anglais d'une colonne, en ambre : ce que l'enregistrement fera de ses
+   traductions (lignes nouvelles, traductions orphelines) ; vide, rien. */
+#tab-character .c-shift {
+  margin: 0;
+  color: var(--warn);
+  font-size: 12.5px;
+}
+#tab-character .c-shift:empty {
+  display: none;
+}
 /* Sous une traduction : ses rangs écrits « 4 / 5 », et en ambre ses lignes en trop. */
 #tab-character .c-tc {
   display: flex;

@@ -1015,10 +1015,11 @@ du rendu :
   .card « Pros » | .card « Cons »   card-head : titre · badge off (le compte de lignes) · badge edit « modifié » · badge ko « refusé » · .lbl « une ligne par pro ; dans chaque langue, la ligne i traduit le pro i » (le contrat)
      .c-view  LE RENDU DU SITE (`ProsConsSection`), sur le fond de la page : une ligne (.c-vl) par rang = la puce du composant (.c-sign : `+` émeraude pour les pros, `−` rouge pour les cons) puis l'aperçu de la ligne (.c-pv, 13 px, première lettre en capitale) dans la langue de la savebar — les segments que le site rendra (icône + libellé dans la couleur du site, un effet sur sa tuile noire teintée, un item sur son cadre), un tag inconnu en ROUGE ; le texte BRUT tant que l'aperçu n'est pas arrivé ; atténué pendant que la requête court ; filet accent à gauche pour un rang modifié, rouge pour un rang refusé ; « Aucun pro. » / « Aucun con. »
      [textarea EN, une ligne = un pro, qui grandit avec ses lignes — les lignes vides ignorées, pas de numérotation]   (bord danger quand un rang est refusé)
+     .c-shift  en ambre, quand l'anglais a bougé : ce que l'enregistrement fera des traductions — « 1 ligne nouvelle sans traduction, 2 traductions orphelines retranchées » (A47) ; vide, rien
      .c-err  les refus de la colonne : ceux de la page (« Cons · fr : 3 lignes, l'anglais en a 2 »), puis ceux du serveur par rang (« Pro 3 : tag inconnu … »)
-     <details> [Traductions (5)] · badge warn « à retraduire » (un rang dont l'anglais a bougé depuis sa traduction) · « 3 / 5 » (les langues traduites à chaque rang)   — replié ; déplié : cinq textarea fr · es · jp · kr · zh, trois par rangée (une seule dans `.c-cols` sous 1300 px), chacune UNE LIGNE PAR RANG, placeholder = l'anglais ligne à ligne ; dessous (.c-tc) ses rangs écrits « 4 / 5 » et, en ambre, « 6 lignes, l'anglais en a 5 » quand elle en a trop
-     une traduction qui a MOINS de lignes que l'anglais laisse les rangs manquants vides (« pas traduit », à traduire) ; PLUS de lignes : une erreur de la page (savebar « 1 erreur », carte cerclée, point rouge), rien ne part tant qu'elle reste
-     réordonner = réordonner l'anglais ; les traductions RESTENT À LEUR RANG — un rang dont l'anglais a changé est « à retraduire »
+     <details> [Traductions (5)] · badge warn « à retraduire » (une ligne nouvelle a pris la place d'une ligne traduite) · « 3 / 5 » (les langues traduites à chaque rang)   — replié ; déplié : cinq textarea fr · es · jp · kr · zh, trois par rangée (une seule dans `.c-cols` sous 1300 px), chacune UNE LIGNE PAR RANG, placeholder = l'anglais ligne à ligne ; dessous (.c-tc) ses rangs écrits « 4 / 5 » et, en ambre, « 6 lignes, l'anglais en a 5 » quand elle en a trop
+     une traduction qui a MOINS de lignes que l'anglais laisse les rangs manquants vides (« pas traduit », à traduire) ; PLUS de lignes, tapées en trop : une erreur de la page (savebar « 1 erreur », carte cerclée, point rouge), rien ne part tant qu'elle reste
+     réordonner, insérer, effacer = le faire dans l'anglais ; les traductions SUIVENT LEUR LIGNE (A47), dans les textarea des langues aussi — une ligne retouchée est nouvelle, sans traduction
   sous les deux cartes : [Traduire] (.btn.ghost, `title` : les lignes périmées ou pas encore traduites, il ÉCRASE leurs traductions) · badge error (son refus) · le refus du champ entier (`stale`, forme)
 #c-panel — Synergies : .c-syn, une pile de .card.c-group, une par groupe
   .card   card-head : « Groupe 1 » · badge edit « modifié » · badge ko « refusé » … ✕ à droite (retire le groupe)
@@ -1145,10 +1146,19 @@ ambre sous la textarea et sous la carte, « 1 erreur » dans la savebar, point
 rouge) : rien ne part tant qu'elle reste, et la page ne retranche rien
 d'elle-même — pendant un réordonnement par couper-coller l'anglais passe
 par moins de lignes, retrancher les traductions à ce moment les perdrait.
-Réordonner = réordonner l'anglais ; les traductions RESTENT à leur rang, et
-un rang dont l'anglais n'est plus celui de sa traduction est « à
-retraduire » (comparé à l'anglais du disque, ou du dernier « Traduire ») —
-c'est le prix de l'identité par rang, dit dans DONE. « Traduire » n'envoie
+Les traductions SUIVENT LEUR LIGNE (A47) : chaque rang retient l'anglais que
+ses traductions traduisent (celui du disque, ou du dernier « Traduire »), et
+une ligne anglaise identique à cet anglais les garde, effacée plus haut,
+insérée ou déplacée ; une ligne retouchée est nouvelle, sans traduction. Les
+textarea des langues, le rendu et les comptes montrent déjà ce qui s'écrira ;
+sous l'anglais, en ambre (`.c-shift`), ce que l'enregistrement fera : « 1
+ligne nouvelle sans traduction, 1 traduction orpheline retranchée » — les
+orphelines sont celles d'un anglais que plus aucune ligne ne porte, gardées
+de côté tant que la fiche n'est pas enregistrée (retaper la ligne les rend).
+La colonne part PAR RANG avec `from`, le rang qui porte les traductions de
+chaque ligne anglaise : c'est le serveur qui réaligne (`cleanProsCons`) et
+retranche. « À retraduire » : une ligne nouvelle a pris la place d'une ligne
+traduite. « Traduire » n'envoie
 que les lignes périmées ou qu'une langue n'a pas ; une ligne traduite partout
 et à jour ne repart pas (le `title` du bouton le dit) ; ce qu'il a traduit
 déplie les « Traductions » de sa colonne. L'aperçu reste UNE requête pour les

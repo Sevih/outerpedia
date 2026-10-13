@@ -2898,6 +2898,8 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
       /** Ce que répond la recherche sur la chaîne, et la résolution d'une URL (YouTube factice). */
       found?: (q: string) => unknown;
       resolved?: (input: string) => unknown;
+      /** Les pros d'Aer sur le disque (d'office : BEACH et « strong »). */
+      pros?: Text[];
     } = {},
   ) {
     vi.resetModules();
@@ -2915,6 +2917,7 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
       ee: { rank: 'A', rank10: 'S', chipHide: [], chipAdd: [], ...opts.ee } as EeDisk,
       gear: gearDisk(),
     };
+    if (opts.pros) disk.curated[AER].prosCons = { ...disk.curated[AER].prosCons, pros: opts.pros };
     const calls: Call[] = [];
     // Ce que Gear reco demande, à part : les tests de la fiche comptent les leurs.
     const gearCalls: Call[] = [];
@@ -4533,12 +4536,15 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
     expect(page.text(card, '[data-stale]')).toBe('');
     expect(page.count()).toBe('1 changement');
 
-    // Réordonner l'anglais : les traductions restent à leur rang — le rang 1 est à retraduire.
+    // Réordonner l'anglais : les traductions SUIVENT leur ligne — rien à retraduire.
     page.type(page.col('pros'), `stronger\n${BEACH.en}`);
-    expect(page.text(card, '[data-stale]')).toBe('à retraduire');
+    expect(page.text(card, '[data-stale]')).toBe('');
+    expect(page.col('pros', 'fr').value).toBe(`\n${BEACH.fr}`);
+    expect(page.text(card, '[data-tc="fr"]')).toBe('1 / 2');
     expect(page.view('pros').map((li) => li.classList.contains('dirty'))).toEqual([true, true]);
     expect(page.count()).toBe('2 changements');
     page.type(page.col('pros'), `${BEACH.en}\nstronger`);
+    expect(page.col('pros', 'fr').value).toBe(BEACH.fr);
 
     // Une traduction se retouche à la main, ligne à ligne : la ligne 2 va au rang 2.
     page.type(page.col('pros', 'fr'), 'Retire {D/BT_REMOVE_BUFF}\nplus fort');
@@ -4709,27 +4715,148 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
     expect(none.count()).toBe('aucune modification');
   });
 
-  it('une ligne effacée du texte : elle compte par son rang, la liste part ENTIÈRE sans elle ; ses traductions restent à leur rang, « à retraduire »', async () => {
+  it('une ligne effacée du texte : elle compte par son rang, la liste part ENTIÈRE sans elle ; la suivante n’hérite pas de ses traductions', async () => {
     const page = await character({ hash: PROS });
     const card = page.all('#c-panel [data-card="pros"]')[0];
     page.type(page.col('pros'), BEACH.en ?? '');
     expect(page.view('pros')).toHaveLength(1);
     expect(page.all('#c-panel [data-n]').map((b) => b.textContent)).toEqual(['1', '1']);
     expect(page.count()).toBe('1 changement');
-    // Effacer le PREMIER : les traductions du rang 1 restent, sous « strong » — à retraduire, le prix du rang.
+    expect(page.text(card, '[data-shift]')).toBe('');
+    // Effacer le PREMIER : « strong » monte au rang 1 SANS les traductions de
+    // BEACH — orphelines, dites sous le texte ; rien à retraduire.
     page.type(page.col('pros'), 'strong');
-    expect(page.colText('pros', 'fr')).toBe(BEACH.fr);
-    expect(page.text(card, '[data-stale]')).toBe('à retraduire');
+    expect(page.col('pros', 'fr').value).toBe('');
+    expect(page.text(card, '[data-stale]')).toBe('');
+    expect(page.text(card, '[data-shift]')).toBe('1 traduction orpheline retranchée');
     expect(page.count()).toBe('2 changements');
     page.type(page.col('pros'), BEACH.en ?? '');
+    expect(page.col('pros', 'fr').value).toBe(BEACH.fr);
+    expect(page.text(card, '[data-shift]')).toBe('');
     expect(page.count()).toBe('1 changement');
 
     await page.save();
+    // Rien à réaligner : la colonne part comme avant, sans `from`.
     expect((page.posted()[0] as { changes: unknown }).changes).toEqual({
       ranks: [],
       curated: { prosCons: { pros: [BEACH], cons: [{ en: 'slow' }] } },
       was: page.disk.curated[AER],
     });
+  });
+
+  // Trois pros traduits : ce que l'anglais devient dit où vont leurs traductions.
+  const tr = (word: string): Text => ({ en: word, fr: `fr:${word}`, es: `es:${word}` });
+  const THREE = [tr('alpha'), tr('beta'), tr('gamma')];
+  type SentCols = { pros: Text[]; cons: Text[]; from?: { pros?: (number | null)[] } };
+  const sentCols = (body: unknown) =>
+    (body as { changes: { curated: { prosCons: SentCols } } }).changes.curated.prosCons;
+
+  it('le compteur sous l’anglais : la 2e de trois effacée, la 3e garde ses traductions — « 1 traduction orpheline retranchée », et `from` part au serveur', async () => {
+    const page = await character({ hash: PROS, pros: THREE });
+    const card = page.all('#c-panel [data-card="pros"]')[0];
+    const shift = () => card.querySelector('[data-shift]') as unknown as HTMLElement;
+    expect(shift().className).toBe('c-shift');
+    expect(shift().textContent).toBe('');
+    expect(page.colText('pros', 'fr')).toBe('fr:alpha\nfr:beta\nfr:gamma');
+
+    page.type(page.col('pros'), 'alpha\ngamma');
+    // Les traductions suivent leur ligne, à l'écran aussi ; rien n'est en trop.
+    expect(page.col('pros', 'fr').value).toBe('fr:alpha\nfr:gamma');
+    expect(page.col('pros', 'es').value).toBe('es:alpha\nes:gamma');
+    expect(page.text(card, '[data-tc="fr"]')).toBe('2 / 2');
+    expect(page.text(card, '[data-over="fr"]')).toBe('');
+    expect(page.text(card, '[data-stale]')).toBe('');
+    expect(shift().textContent).toBe('1 traduction orpheline retranchée');
+    expect(page.count()).toBe('2 changements');
+    expect(page.view('pros').map((li) => li.classList.contains('dirty'))).toEqual([false, true]);
+
+    // Une ligne retouchée est NOUVELLE : sans traduction, celles de l'ancienne orphelines.
+    page.type(page.col('pros'), 'alpha!\ngamma\ndelta');
+    expect(page.col('pros', 'fr').value).toBe('\nfr:gamma');
+    expect(shift().textContent).toBe(
+      '2 lignes nouvelles sans traduction, 2 traductions orphelines retranchées',
+    );
+    expect(page.text(card, '[data-stale]')).toBe('à retraduire');
+    // Remise, elle retrouve les siennes : la page n'a rien retranché d'elle-même.
+    page.type(page.col('pros'), 'alpha\ngamma');
+    expect(page.col('pros', 'fr').value).toBe('fr:alpha\nfr:gamma');
+    expect(shift().textContent).toBe('1 traduction orpheline retranchée');
+
+    await page.save();
+    // Par rang, tels que la page les tenait ; `from` dit quel rang porte les traductions de chaque ligne.
+    expect(sentCols(page.posted()[0])).toEqual({
+      pros: [tr('alpha'), { ...tr('beta'), en: 'gamma' }, { fr: 'fr:gamma', es: 'es:gamma' }],
+      cons: [{ en: 'slow' }],
+      from: { pros: [0, 2] },
+    });
+  });
+
+  it('une ligne insérée au milieu, deux lignes réordonnées : les traductions suivent, la ligne nouvelle n’en a pas', async () => {
+    const page = await character({ hash: PROS, pros: THREE });
+    const card = page.all('#c-panel [data-card="pros"]')[0];
+    page.type(page.col('pros'), 'alpha\nnew\nbeta\ngamma');
+    expect(page.col('pros', 'fr').value).toBe('fr:alpha\n\nfr:beta\nfr:gamma');
+    expect(page.text(card, '[data-shift]')).toBe('1 ligne nouvelle sans traduction');
+    expect(page.text(card, '[data-stale]')).toBe('');
+    expect(page.text(card, '[data-tc="fr"]')).toBe('3 / 4');
+    expect(page.count()).toBe('3 changements');
+    await page.save();
+    expect(sentCols(page.posted()[0])).toMatchObject({
+      pros: [
+        tr('alpha'),
+        { ...tr('beta'), en: 'new' },
+        { ...tr('gamma'), en: 'beta' },
+        { en: 'gamma' },
+      ],
+      from: { pros: [0, null, 1, 2] },
+    });
+
+    const swap = await character({ hash: PROS, pros: THREE });
+    swap.type(swap.col('pros'), 'beta\nalpha\ngamma');
+    expect(swap.col('pros', 'fr').value).toBe('fr:beta\nfr:alpha\nfr:gamma');
+    expect(swap.text(swap.all('#c-panel [data-card="pros"]')[0], '[data-shift]')).toBe('');
+    expect(swap.count()).toBe('2 changements');
+    // L'aperçu dans une autre langue montre la traduction de LA ligne, pas celle du rang.
+    swap.all('#c-pv-lang button[data-lang="fr"]')[0].click();
+    await swap.settle();
+    expect(swap.previews().at(-1)).toEqual({
+      texts: ['fr:beta', 'fr:alpha', 'fr:gamma', 'slow'],
+      lang: 'fr',
+    });
+    await swap.save();
+    expect(sentCols(swap.posted()[0])).toMatchObject({
+      pros: [{ ...tr('alpha'), en: 'beta' }, { ...tr('beta'), en: 'alpha' }, tr('gamma')],
+      from: { pros: [1, 0, 2] },
+    });
+  });
+
+  it('une traduction retouchée ou « Traduire » après un anglais déplacé : écrite sur SA ligne, les orphelines restent dites', async () => {
+    const page = await character({ hash: PROS, pros: THREE, translated: deepl });
+    const card = () => page.all('#c-panel [data-card="pros"]')[0];
+    page.type(page.col('pros'), 'alpha\ngamma\ndelta');
+    expect(page.col('pros', 'fr').value).toBe('fr:alpha\nfr:gamma');
+    // Le français de « gamma », retouché à son rang d'aujourd'hui.
+    page.type(page.col('pros', 'fr'), 'fr:alpha\nfr:GAMMA');
+    expect(page.col('pros', 'es').value).toBe('es:alpha\nes:gamma');
+    expect(page.text(card(), '[data-shift]')).toBe(
+      '1 ligne nouvelle sans traduction, 1 traduction orpheline retranchée',
+    );
+    // « Traduire » comble la ligne nouvelle (et les autres, à qui il manque trois
+    // langues) : chacune à SON rang — les traductions de « beta » restent orphelines.
+    page.act('translate').click();
+    for (let i = 0; i < 4; i++) await page.settle();
+    expect(page.translations()).toEqual([{ texts: ['alpha', 'gamma', 'delta', 'slow'] }]);
+    expect(page.text(card(), '[data-shift]')).toBe('1 traduction orpheline retranchée');
+    // « beta », retapé : ses traductions du disque reviennent, mises de côté jusque-là.
+    page.type(page.col('pros'), 'alpha\ngamma\ndelta\nbeta');
+    expect(page.col('pros', 'fr').value).toBe('fr:alpha\nfr:gamma\nfr:delta\nfr:beta');
+    expect(page.text(card(), '[data-shift]')).toBe('');
+    await page.save();
+    // La ligne retapée part à son rang, ses traductions derrière la colonne : `from` les lui rend.
+    const sent = sentCols(page.posted()[0]);
+    expect(sent.from).toEqual({ pros: [0, 1, 2, 4] });
+    expect(sent.pros[2]).toMatchObject({ en: 'delta', fr: 'fr:delta' });
+    expect(sent.pros.slice(3)).toEqual([{ en: 'beta' }, { fr: 'fr:beta', es: 'es:beta' }]);
   });
 
   it('un tag refusé à l’enregistrement : situé sur SON rang — carte cerclée, le rang en rouge dans le rendu, le message sous le texte, saisie gardée', async () => {
