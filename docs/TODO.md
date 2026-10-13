@@ -189,7 +189,7 @@
       l'agent pour ne pas bloquer la saisie une par une). (5) B48 — un échec
       du rafraîchissement de `video-meta.json` n'arrête pas le commit (le
       curé est déjà écrit ; `pnpm datagen:video-meta` rattrape) : à
-      confirmer ; twitch et bilibili ne s'ajoutent pas depuis quick. → TRANCHÉ le 13/10 : (1) A47, (2) A44 — FAIT le 13/10, reste à voir à l'écran depuis l'Extraction, (3) A45 — FAIT le 13/10, (4) A46 (la saisie reste permise, le danger est dit), (5) l'échec de video-meta non bloquant est confirmé ; twitch/bilibili → F26.
+      confirmer ; twitch et bilibili ne s'ajoutent pas depuis quick. → TRANCHÉ le 13/10 : (1) A47, (2) A44 — FAIT le 13/10, reste à voir à l'écran depuis l'Extraction, (3) A45 — FAIT le 13/10, (4) A46 — FAIT le 13/10 (la saisie reste permise, le danger est dit ; « 3★ » à voir à l'écran, le badge et l'avertissement ne s'y verront qu'à la prochaine fusion du jeu sortie sans review), (5) l'échec de video-meta non bloquant est confirmé ; twitch/bilibili → F26.
 - [ ] **« Événements » — contrôles à l'écran (lot F23)** : le banc ne
       clique pas, aucun enregistrement réel n'a été joué, `/api/translate`
       jamais appelé avec des clés, `POST /api/events` jamais appelé (les

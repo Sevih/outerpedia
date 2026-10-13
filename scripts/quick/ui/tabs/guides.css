@@ -945,6 +945,26 @@
   width: 6ch;
   height: 24px;
 }
+/* Le palier : « 3★ » entier. À 6ch le chevron dessiné (28 px) ne laissait que
+   le chiffre ; la relation (`>`, `≥`, `—`), un seul signe, garde 6ch. */
+#tab-guides .gd-pick .gd-step {
+  width: 8.5ch;
+}
+/* Un attendu sans review (`missing` de la forme) : dans la vignette, étroite,
+   le badge se plie sur plusieurs lignes au lieu de l'élargir. */
+#tab-guides .gd-pick .gd-unreviewed {
+  max-width: 84px;
+  height: auto;
+  padding: 3px 6px;
+  border-radius: 8px;
+  line-height: 1.25;
+  text-align: center;
+  text-wrap: balance;
+  white-space: normal;
+}
+#tab-guides .gd-rrow .gd-unreviewed {
+  flex: none;
+}
 #tab-guides .gd-pick-acts {
   display: flex;
   gap: 2px;

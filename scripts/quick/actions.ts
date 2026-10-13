@@ -6893,6 +6893,22 @@ function situateStoreError(kind: GeneralGuideKind, error: string): Omit<GeneralR
 }
 
 /**
+ * L'avertissement d'un Core Fusion écrit alors qu'une fusion du jeu n'a pas de
+ * review : le store l'accepte (la saisie se fait une par une), le rendu du
+ * guide lève au build (`core-fusion/index.tsx` : « n'a pas encore de review »).
+ * Une ligne, ou aucune.
+ */
+function unreviewedFusionsWarning(data: CoreFusionData, fusions: Iterable<string>): string[] {
+  const reviewed = new Set(data.reviews.map((r) => r.name));
+  const missing = [...fusions].filter((name) => !reviewed.has(name));
+  if (!missing.length) return [];
+  const many = missing.length > 1;
+  return [
+    `${missing.length} fusion${many ? 's' : ''} sans review (${missing.join(', ')}) : le build du site refusera tant qu’${many ? 'elles n’en ont' : 'elle n’en a'} pas.`,
+  ];
+}
+
+/**
  * « Enregistrer » d'un guide général : ses données entières, en un geste.
  *
  * Dans l'ordre : `was` doit être ce que le store lit encore (sinon `stale`,
@@ -6905,7 +6921,9 @@ function situateStoreError(kind: GeneralGuideKind, error: string): Omit<GeneralR
  * `saveCoreFusion`, `saveFreeHeroes` — les deux fichiers de Premium & Limited
  * sont solidaires, ceux de Core Fusion aussi —, ou
  * `saveShopPriorities` sous verrou : le curé, le dérivé régénéré,
- * l'éditorial), ses refus rendus situés eux aussi ; puis ce qui a BOUGÉ se
+ * l'éditorial), ses refus rendus situés eux aussi — Core Fusion écrit avec
+ * une fusion du jeu sans review : pas un refus, un AVERTISSEMENT, en dernière
+ * ligne du journal (celle qu'un journal réussi montre replié) ; puis ce qui a BOUGÉ se
  * lit de git — le dossier du guide et, pour les shops, ses deux fichiers de
  * `data/` —, rien : rien à committer, ni stamp ; sinon `meta.updated` passe à
  * aujourd'hui (la règle de F18 : un fichier du guide a bougé, le guide est
@@ -6983,13 +7001,22 @@ export async function saveGeneralGuide(
           : await deps.saveShopPriorities(payload as ShopPrioritiesSaveData);
   for (const e of errors) refuse({ ...situateStoreError(kind, e), reason: e });
   if (errors.length) return out(false, [...j.lines, 'Rien à enregistrer.']);
+  // Écrit : ce que le build du site refusera encore se dit, sans rien refuser ici.
+  const warned =
+    kind === 'core-fusion'
+      ? unreviewedFusionsWarning(payload as CoreFusionData, fusionLevels.keys())
+      : [];
 
   // Ce qui a bougé, lu de git : le dossier du guide, et pour les shops le curé et le dérivé.
   const dir = guideDirOf(GENERAL_CATEGORY, slug);
   const roots = [dir, ...(kind === 'shop-priorities' ? SHOP_DATA_FILES : [])];
   const changed = [...new Set(roots.flatMap((r) => deps.dirty(r)))];
   if (!changed.length)
-    return out(true, [...j.lines, 'Rien à enregistrer : le disque porte déjà ces valeurs.']);
+    return out(true, [
+      ...j.lines,
+      'Rien à enregistrer : le disque porte déjà ces valeurs.',
+      ...warned,
+    ]);
   j.done(
     `${changed.length} fichier${changed.length > 1 ? 's' : ''} ${changed.length > 1 ? 'ont' : 'a'} bougé`,
   );
@@ -6998,7 +7025,9 @@ export async function saveGeneralGuide(
   if (await deps.stamp(metaPath, today)) j.done(`meta.updated : ${today}`);
   const paths = [...new Set([...changed, metaPath])];
   const commit = deps.commitPaths(paths, `chore(guides): ${name}`, report);
-  return out(commit.ok, [...j.lines, ...commit.log], { written: true });
+  // Un commit raté garde SA ligne en dernier : c'est elle que le journal montre en rouge.
+  const tail = commit.ok ? [...commit.log, ...warned] : [...warned, ...commit.log];
+  return out(commit.ok, [...j.lines, ...tail], { written: true });
 }
 
 export interface ImportOutcome extends Outcome {

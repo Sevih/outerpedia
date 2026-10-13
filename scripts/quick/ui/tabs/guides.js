@@ -1248,12 +1248,17 @@ function recoStar(r, s) {
 }
 const recoOn = (r, s) => !r.any && r.min !== undefined && s >= r.min && s <= (r.max ?? r.min);
 
-/** Le sélecteur de palier d'une entrée : les crans PLEINS de son perso. */
+/**
+ * Le sélecteur de palier d'une entrée : les crans PLEINS de son perso, sous
+ * leur libellé du jeu (« 3★ » — `.gd-step` lui donne la largeur de le montrer).
+ * Un perso sans paliers connus garde sa valeur NUE : c'est un `TransStar` (9
+ * pour 6★), pas un compte d'étoiles.
+ */
 function starsSelect(f, e, key, more = '') {
   const steps = stepsOf(e.name ?? '');
   const cur = e[f.key];
   const opts = steps.length ? steps : [{ value: cur, label: String(cur) }];
-  return `<select class="w-qty" ${genAttr(key, 'number')} aria-label="${esc(f.label)}${e.name ? ` de ${esc(e.name)}` : ''}" ${more}>${opts
+  return `<select class="w-qty gd-step" ${genAttr(key, 'number')} aria-label="${esc(f.label)}${e.name ? ` de ${esc(e.name)}` : ''}" ${more}>${opts
     .map(
       (o) =>
         `<option value="${esc(o.value)}"${o.value === cur ? ' selected' : ''}>${esc(o.label)}</option>`,
@@ -1496,6 +1501,28 @@ function entryHtml(block, e, ek, i, count, listKey) {
 /** Une review compte quand son anglais est écrit (la règle du site : une entrée vide n'enfle pas le compteur). */
 const reviewed = (e) => Boolean(e?.review?.[def()]?.trim());
 /**
+ * Les persos ATTENDUS sans review que la forme dit de signaler (`missing` d'un
+ * bloc `roster` : son absence coûte, le badge le dit) — nom → le libellé. Lu
+ * des données en cours, tous onglets confondus : la vignette d'un palier le
+ * porte comme la ligne de la liste.
+ */
+function unreviewed() {
+  const out = new Map();
+  for (const tab of gen.form.tabs)
+    for (const block of tab.blocks) {
+      if (block.view !== 'roster' || !block.missing) continue;
+      const list = getAt(gen.data, block.path) ?? [];
+      for (const name of sheet.options.rosters?.[block.roster ?? ''] ?? [])
+        if (!reviewed(list.find((e) => e.name === name))) out.set(name, block.missing);
+    }
+  return out;
+}
+/** Le badge ambre d'un perso attendu sans review (`unreviewed`), ou rien. */
+const unreviewedBadge = (name) => {
+  const said = unreviewed().get(name);
+  return said ? `<span class="badge warn gd-unreviewed">${esc(said)}</span>` : '';
+};
+/**
  * Le résumé d'une review en une ligne, d'après les champs du bloc : avec une
  * grille d'impact, « PvE 5 · PvP Any · impact 3/2 · 2/2 · 3/5 · 2/4 » (3★ → 6★,
  * PvE/PvP, « – » pour une case vide) ; avec des niveaux et un groupe, « Lv 3,
@@ -1518,7 +1545,7 @@ function reviewSummary(block, e) {
   }
   return parts.join(' · ');
 }
-/** Une ligne de la liste compacte : la vignette, ★ ou ☆, le nom, le résumé ; un clic déplie sa review (ou la crée, pour un perso du roster). */
+/** Une ligne de la liste compacte : la vignette, ★ ou ☆, le nom, le badge d'un attendu sans review (`missing` de la forme), le résumé ; un clic déplie sa review (ou la crée, pour un perso du roster). */
 function rosterRowHtml(block, listKey, name, e, i) {
   const c = heroByName(name);
   const open = e !== undefined && e === openEntry;
@@ -1545,7 +1572,7 @@ function rosterRowHtml(block, listKey, name, e, i) {
       : c
         ? ''
         : '<span class="badge warn">hors roster</span>'
-  }${e ? `<span class="gd-rsum lbl mono">${esc(reviewSummary(block, e))}</span>` : '<span class="gd-rsum lbl">— pas de review</span>'}</button>`;
+  }${unreviewedBadge(name)}${e ? `<span class="gd-rsum lbl mono">${esc(reviewSummary(block, e))}</span>` : '<span class="gd-rsum lbl">— pas de review</span>'}</button>`;
 }
 /** Le bloc des reviews : le compteur et les manquants, la liste du roster puis les entrées hors roster, UNE review dépliée. */
 function rosterBlockHtml(block) {
@@ -1583,7 +1610,7 @@ function rosterBlockHtml(block) {
 }
 
 /* --- `view: 'tiles'` : les paliers en rangées de vignettes, glisser-déposer --- */
-/** Une vignette d'un palier : le rang, le perso, son palier de transcendance, sa relation avec la suivante (`op`, si la forme en a une), ↑ ↓ ✕ ; `draggable`. */
+/** Une vignette d'un palier : le rang, le perso, son palier de transcendance, sa relation avec la suivante (`op`, si la forme en a une), le badge d'un attendu sans review, ↑ ↓ ✕ ; `draggable`. */
 function tileHtml(block, e, ek, i, count, listKey) {
   const bad = refusedKey(ek);
   const stars = (block.fields ?? []).find((f) => f.kind === 'stars');
@@ -1591,7 +1618,7 @@ function tileHtml(block, e, ek, i, count, listKey) {
   const fbad = (block.fields ?? []).flatMap((f) => refusedKey(`${ek}.${f.key}`));
   const name = e.name ?? '';
   return `<div class="gd-pick${bad.length || fbad.length ? ' ko' : ''}" draggable="true" role="listitem" data-entry="${esc(ek)}" data-key="${esc(listKey)}" data-i="${i}" aria-label="${esc(`rang ${i + 1} : ${name || 'aucun perso'}`)}">
-      <span class="gd-pick-n lbl mono">${i + 1}</span>${heroFace(name)}${stars ? starsSelect(stars, e, `${ek}.${stars.key}`) : ''}${op ? opSelect(op, e, `${ek}.${op.key}`) : ''}
+      <span class="gd-pick-n lbl mono">${i + 1}</span>${heroFace(name)}${stars ? starsSelect(stars, e, `${ek}.${stars.key}`) : ''}${op ? opSelect(op, e, `${ek}.${op.key}`) : ''}${unreviewedBadge(name)}
       <span class="gd-pick-acts"><button class="btn icon" type="button" data-act="gen-up" data-key="${esc(listKey)}" data-i="${i}" title="Monter" aria-label="Monter ${esc(name)}"${i ? '' : ' disabled'}>↑</button><button class="btn icon" type="button" data-act="gen-down" data-key="${esc(listKey)}" data-i="${i}" title="Descendre" aria-label="Descendre ${esc(name)}"${i < count - 1 ? '' : ' disabled'}>↓</button><button class="btn icon" type="button" data-act="gen-del" data-key="${esc(listKey)}" data-i="${i}" title="Retirer" aria-label="Retirer ${esc(name)}">✕</button></span>${errHtml([...bad, ...fbad])}
     </div>`;
 }

@@ -133,6 +133,12 @@ export interface GeneralBlock {
   view?: 'roster' | 'tiles';
   /** `roster` : la clé, dans `options.rosters` de l'état, des persos attendus (`premium`, `core-fusion`). */
   roster?: string;
+  /**
+   * `roster` : ce que la page dit d'un perso ATTENDU sans review quand son
+   * absence coûte — un badge ambre sur sa ligne, et sur ses vignettes des blocs
+   * `tiles` du guide. Absent : la ligne dit seulement « pas de review ».
+   */
+  missing?: string;
   /** `text`, `texts` : l'anglais est requis. */
   required?: boolean;
   /** Un shop dérivé : sa monnaie (le coût des lignes se lit avec son icône). */
@@ -295,6 +301,9 @@ function coreFusionForm(slug: string): GeneralGuideForm {
             title: 'name',
             view: 'roster',
             roster: 'core-fusion',
+            // Le store accepte une fusion du jeu sans review (la saisie se fait une
+            // par une) ; le rendu du guide, lui, lève au build (`core-fusion/index.tsx`).
+            missing: 'sans review — le build refusera',
             fields: FUSION_REVIEW_FIELDS,
           },
         ],

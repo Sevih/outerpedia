@@ -59,6 +59,8 @@ describe('generalGuideForm — Premium & Limited', () => {
         b.ordered ?? false,
       ]),
     ).toEqual([['limited-reviews', 'reviews.limited', 'hero', 'roster', 'limited', false]]);
+    // Un perso attendu sans review n'y casse rien : la forme ne demande aucun badge.
+    expect(form.tabs.flatMap((t) => t.blocks).some((b) => b.missing)).toBe(false);
     expect(
       priorities.blocks.map((b) => [b.id, b.path.join('.'), b.add, b.view, b.ordered ?? false]),
     ).toEqual([
@@ -108,6 +110,8 @@ describe('generalGuideForm — Core Fusion (C13)', () => {
     expect(
       reviews.blocks.map((b) => [b.id, b.path.join('.'), b.add, b.view, b.roster, b.title]),
     ).toEqual([['reviews', 'reviews', 'hero', 'roster', 'core-fusion', 'name']]);
+    // Une fusion du jeu sans review : la saisie reste permise, la page le DIT (le build du site la refuse).
+    expect(reviews.blocks[0].missing).toBe('sans review — le build refusera');
     expect(
       priorities.blocks.map((b) => [b.id, b.path.join('.'), b.add, b.view, b.ordered ?? false]),
     ).toEqual([

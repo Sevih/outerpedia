@@ -9017,6 +9017,77 @@ describe('generalGuideState, saveGeneralGuide, importContributionAction — les 
       ]);
     });
 
+    it('Core Fusion : une fusion du jeu sans review est ÉCRITE et dite — un avertissement en dernière ligne du journal, pas un refus ; toutes reviewées, ou un autre guide : aucune ligne (A46)', async () => {
+      const one = 'le build du site refusera tant qu’elle n’en a pas.';
+      // Alice est une fusion du jeu (FUSIONS) sans review ; seule une relation bouge.
+      const { calls, fake } = deps({ dirty: { [CF_DIR]: [`${CF_DIR}/priorities.json`] } });
+      const data = clone(CF_DATA);
+      data.priorities.first[1].op = '>=';
+      const r = await saveGeneralGuide('core-fusion', { data, was: clone(CF_DATA) }, fake);
+      expect(r).toMatchObject({ ok: true, written: true, stale: false, refused: [] });
+      expect(calls.saveCF).toHaveLength(1);
+      expect((calls.saveCF[0] as CoreFusionData).reviews.map((x) => x.name)).toEqual(['Aer']);
+      expect(calls.git).toHaveLength(1);
+      expect(r.log.slice(-2)).toEqual(['git : fait', `1 fusion sans review (Alice) : ${one}`]);
+
+      // Rien n'a bougé : dit quand même, au pluriel quand elles sont deux.
+      const none = deps();
+      const bare: CoreFusionData = { ...clone(CF_DATA), reviews: [] };
+      none.fake.loadCoreFusion = () => clone(bare);
+      const r2 = await saveGeneralGuide(
+        'core-fusion',
+        { data: clone(bare), was: clone(bare) },
+        none.fake,
+      );
+      expect(r2).toMatchObject({ ok: true, written: false, refused: [] });
+      expect(none.calls.saveCF).toHaveLength(1);
+      expect(r2.log.slice(-2)).toEqual([
+        'Rien à enregistrer : le disque porte déjà ces valeurs.',
+        '2 fusions sans review (Aer, Alice) : le build du site refusera tant qu’elles n’en ont pas.',
+      ]);
+
+      // Un commit raté garde SA ligne en dernier (celle que le journal montre en rouge).
+      const ko = deps({ dirty: { [CF_DIR]: [`${CF_DIR}/priorities.json`] } });
+      ko.fake.commitPaths = () => ({ ok: false, log: ['git commit a échoué : x'] });
+      const r3 = await saveGeneralGuide('core-fusion', { data, was: clone(CF_DATA) }, ko.fake);
+      expect(r3.ok).toBe(false);
+      expect(r3.log.slice(-2)).toEqual([
+        `1 fusion sans review (Alice) : ${one}`,
+        'git commit a échoué : x',
+      ]);
+
+      // Un refus : rien n'est écrit, donc rien à dire du build.
+      const refused = deps({ errors: ['Reviews #1 (Aer): EN review is required.'] });
+      const r4 = await saveGeneralGuide(
+        'core-fusion',
+        { data: clone(CF_DATA), was: clone(CF_DATA) },
+        refused.fake,
+      );
+      expect(r4.ok).toBe(false);
+      expect(r4.log.join('\n')).not.toMatch(/sans review/);
+
+      // Toutes les fusions reviewées : aucune ligne.
+      const full = deps({ dirty: { [CF_DIR]: [`${CF_DIR}/reviews.json`] } });
+      const all = clone(CF_DATA);
+      all.reviews.push({ name: 'Alice', review: { en: 'Solid' }, recommendedLevels: [] });
+      const r5 = await saveGeneralGuide(
+        'core-fusion',
+        { data: all, was: clone(CF_DATA) },
+        full.fake,
+      );
+      expect(r5).toMatchObject({ ok: true, written: true });
+      expect(r5.log.at(-1)).toBe('git : fait');
+      // Premium & Limited a ses manquants lui aussi (Mene, Alice) : le build ne les refuse pas, rien n'est dit.
+      const pl = deps({ dirty: { [PL_DIR]: [`${PL_DIR}/priorities.json`] } });
+      const r6 = await saveGeneralGuide(
+        'premium-limited',
+        { data: clone(PL_DATA), was: clone(PL_DATA) },
+        pl.fake,
+      );
+      expect(r6.ok).toBe(true);
+      expect(r6.log.join('\n')).not.toMatch(/sans review/);
+    });
+
     it('Core Fusion : les refus situés — un niveau hors de la table du jeu, une relation inconnue, un tag dans un changement, un palier, un héros hors roster ; ceux du store aussi', async () => {
       const { calls, fake } = deps();
       const data = clone(CF_DATA) as unknown as {

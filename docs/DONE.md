@@ -7,6 +7,91 @@
 
 ## 2026-10-13
 
+- **quick, Guides › Core Fusion et Premium & Limited : le select de palier dit
+  « 3★ », et une fusion du jeu sans review est signalée sans bloquer la saisie
+  (lot A46)** — suite de la relecture C13 / F25 (12/10), tranchée par Sevih le
+  13/10. (1) LE SELECT. Les libellés portaient déjà l'étoile : l'état servi
+  (`options.steps`, par `transcendenceLabel`) donne « 3★ », « 4★ », « 5★ »,
+  « 6★ » — c'est la LARGEUR qui coupait. `#tab-guides .gd-pick .w-qty` vaut
+  6ch et le chevron dessiné du select prend 28 px à droite, 10 à gauche : il
+  ne restait que le chiffre. `starsSelect` (`tabs/guides.js`) pose désormais
+  `w-qty gd-step`, et `guides.css` donne 8.5ch à `.gd-pick .gd-step` ; la
+  relation (`opSelect`, un seul signe) reste à 6ch, aucun autre `w-qty` n'est
+  touché. 8.5 et non 9 : à 9ch la vignette gagnait 2 px, à 8.5 elle garde ses
+  84 px. Premium & Limited passe par le même `starsSelect` : « 3★ » là aussi.
+  Le repli d'un perso sans paliers connus garde sa valeur NUE — c'est un
+  `TransStar` (9 pour 6★), pas un compte d'étoiles. (2) LA FUSION SANS REVIEW.
+  La règle du build, inchangée : `core-fusion/index.tsx` (dans
+  `src/app/[lang]/guides/_contents/general-guides/`) lève
+  `core-fusion : « ${name} » (${p.fusion.id}) n'a pas encore de review` pour
+  chaque paire de `getCoreFusionPairs()` dont le nom d'affichage manque à
+  `fusionReviews` ; le store (`saveCoreFusion`) l'accepte toujours. (a) LA
+  FORME : `GeneralBlock` gagne `missing` (facultatif : ce que la page dit
+  d'un perso attendu sans review quand son absence coûte), que
+  `coreFusionForm` pose sur son bloc `roster` — « sans review — le build
+  refusera ». La page ne nomme toujours aucun guide : `unreviewed()` lit les
+  blocs `roster` qui portent `missing`, croise `options.rosters` et les
+  données en cours, et `unreviewedBadge(nom)` rend un
+  `.badge.warn.gd-unreviewed` sur la ligne de la liste (`rosterRowHtml`, après
+  le nom) et sur la vignette de palier (`tileHtml`, sous la relation, plié sur
+  trois lignes, 84 px au plus). « Sans review » y est la règle du compteur
+  (`reviewed` : pas d'entrée, ou un anglais vide) ; Premium & Limited n'a pas
+  de `missing`, donc aucun badge. (b) L'ENREGISTREMENT (`saveGeneralGuide`,
+  `scripts/quick/actions.ts`) : une fois le store passé,
+  `unreviewedFusionsWarning` compare les reviews écrites aux fusions du jeu
+  (`deps.fusions()`) et rend UNE ligne — « 1 fusion sans review (Alice) : le
+  build du site refusera tant qu’elle n’en a pas. », au pluriel « 2 fusions …
+  tant qu’elles n’en ont pas. » — posée en DERNIÈRE ligne du journal : un
+  journal réussi ne montre, replié, que celle-là (`log` de `ui/lib.js`). Pas
+  un refus : `ok` reste vrai, `refused` vide, le commit part. Elle est dite
+  aussi quand rien n'a bougé (« Rien à enregistrer : le disque porte déjà ces
+  valeurs. » puis elle) ; un commit raté garde SA ligne en dernier, en rouge,
+  l'avertissement juste avant ; un refus n'écrit rien et n'en dit rien. (c) Le
+  récap et le tableau de bord (`guidesOverview`) ne sont pas touchés. CHOIX
+  D'INTERPRÉTATION, à relire : l'avertissement vient de l'ACTION, pas du store
+  — `saveCoreFusion` garde son contrat (`string[]` = des refus, celui des
+  quatre stores) et `general-guide-store.ts` n'est pas modifié ; l'énoncé
+  disait « `saveCoreFusion` … écrit ET rend l'avertissement », testé ici par
+  `saveGeneralGuide('core-fusion')` sur le store factice qui enregistre
+  l'écriture. Les noms des fusions sont ajoutés entre parenthèses, et la
+  phrase s'accorde au singulier. « Sa vignette » est lu comme la vignette de
+  palier, le mot du point (1). Le hash du banc est
+  `guides/general-guides/core-fusion`, pas `guides/general/core-fusion`.
+  VÉRIFIÉ : `pnpm typecheck` (dernière ligne :
+  `$ tsc --noEmit && tsc --noEmit -p datagen/tsconfig.json && tsc --noEmit -p scripts/tsconfig.json`,
+  sans erreur), `pnpm lint` (`$ eslint`, sans sortie), `pnpm test`
+  (`Tests  3812 passed (3812)`, 223 fichiers),
+  `NODE_ENV=development pnpm exec vitest run scripts/quick src/lib/admin`
+  (`Tests  1730 passed (1730)`). Tests ajoutés : `ui-serve.test.ts` — le
+  select en happy-dom porte « 3★ » (l'option choisie et les quatre options,
+  la classe `w-qty gd-step`, la relation restée `w-qty`, les deux règles de
+  `guides.css`) ; le badge sur la ligne ET la vignette d'une fusion sans
+  review, tombé des deux une fois sa review écrite ; Premium & Limited :
+  « 3★ » et aucun badge — ; `actions.test.ts` — une fusion sans review est
+  écrite (le store appelé, le commit parti) et l'avertissement clôt le
+  journal, puis le pluriel sans rien de bougé, le commit raté, le refus,
+  toutes reviewées, Premium & Limited — ; `general-guide-form.test.ts` —
+  `missing` sur Core Fusion, absent de Premium & Limited. Contre-épreuve :
+  `guides.js`, `guides.css` et `actions.ts` remis à leur état d'avant, les
+  quatre tests échouent. BANC : un quick isolé (clés vidées, :4846, des GET
+  et les POST de lecture),
+  `--tabs guides --hash guides/general-guides/core-fusion/priorities` avant et
+  après : « 3 » devient « 3★ », les vignettes gardent leur taille ; de même sur
+  `premium-limited/premium-priorities` ; l'onglet Reviews de Core Fusion est
+  identique au pixel avant et après (les six fusions ont leur review : aucun
+  badge sur les vraies données). Le badge a été photographié par un relais
+  jetable en lecture seule, non committé, qui retire deux reviews (Notia,
+  Snow) de l'état servi : les deux lignes le portent, la vignette de Notia
+  aussi. L'enregistrement n'a été joué que par le module en test, jamais sur
+  un quick. LAISSÉ : le badge suit le redessin, comme le ☆ et le compteur — il
+  ne tombe pas pendant la frappe de la review, mais au clic suivant ; la ligne
+  d'avertissement sort en VERT dans le journal replié (le journal n'a que
+  « ok » et « ko » ; un état « attention » toucherait `lib.js` et `quick.css`,
+  partagés par toutes les sections — hors périmètre, à trancher) ; la vignette
+  signalée est plus large que ses voisines de 14 px (le badge) ; à l'écran, le
+  badge et l'avertissement ne se verront qu'à la prochaine fusion du jeu
+  sortie sans review. `ui/STYLE.md` suit (le palier, le badge) ; la ligne du
+  TODO est marquée FAIT.
 - **quick, Monstres : une seule liste des modes de jeu (`game-modes.ts`) pour
   l'en-tête, le select d'« Intégrer un mode » et les lignes de l'admin ;
   `place` dit les titres des modes (lot A45)** — suite de la relecture B47

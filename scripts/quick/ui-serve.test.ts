@@ -14811,6 +14811,88 @@ describe('Guides — la page, sur le vrai markup', () => {
     expect(page.all('#gd-panel [data-count]')[0].textContent).toBe('2 / 2 reviews');
   });
 
+  /** Les libellés d'un select de la page : ses options, et celle que le markup dit choisie (ce que le select fermé montre). */
+  const selectOf = (page: Awaited<ReturnType<typeof guides>>, key: string) => {
+    const el = page.all(`#gd-panel [data-gen="${key}"]`)[0];
+    const options = [...el.querySelectorAll('option')];
+    return {
+      cls: el.className,
+      options: options.map((o) => o.textContent),
+      shown: options.filter((o) => o.hasAttribute('selected')).map((o) => o.textContent),
+    };
+  };
+
+  it('Core Fusion › Priorités : le select de palier porte « 3★ » — fermé comme dans ses options —, sous `.gd-step`, plus large que la relation restée à 6ch (A46)', async () => {
+    const page = await guides({ hash: `${CF}/priorities` });
+    expect(selectOf(page, 'priorities.first.0.stars')).toEqual({
+      cls: 'w-qty gd-step',
+      options: ['3★', '4★', '5★', '6★'],
+      shown: ['3★'],
+    });
+    expect(selectOf(page, 'priorities.first.1.stars').shown).toEqual(['4★']);
+    // La relation, un seul signe, garde la largeur de la vignette.
+    expect(selectOf(page, 'priorities.first.0.op').cls).toBe('w-qty');
+    const css = readFileSync(resolve(UI, 'tabs', 'guides.css'), 'utf8');
+    expect(css).toMatch(/#tab-guides \.gd-pick \.w-qty \{\s*width: 6ch;/);
+    expect(css).toMatch(/#tab-guides \.gd-pick \.gd-step \{\s*width: 8\.5ch;/);
+  });
+
+  it('Core Fusion : une fusion du jeu sans review porte le badge ambre « sans review — le build refusera » sur sa ligne ET sur sa vignette de palier ; sa review écrite, il tombe des deux (A46)', async () => {
+    const page = await guides({ hash: CF });
+    const SAID = 'sans review — le build refusera';
+    const badges = (sel: string) =>
+      page
+        .all(`#gd-panel ${sel}`)
+        .map((r) => [
+          r.dataset.name ?? r.querySelector('.gd-hero .ht-n')?.textContent,
+          r.querySelector('.badge.warn.gd-unreviewed')?.textContent ?? null,
+        ]);
+    // La liste : Aer a sa review, Alice non — le compteur et « Sans review : » restent ce qu'ils étaient.
+    expect(badges('.gd-rrow')).toEqual([
+      ['Aer', null],
+      ['Alice', SAID],
+    ]);
+    expect(page.all('#gd-panel [data-count]')[0].textContent).toBe('1 / 2 reviews');
+    expect(page.all('#gd-panel .gd-missing')[0].textContent).toBe('Sans review : Alice');
+    // Sa vignette, dans le palier où elle est rangée.
+    await page.sub('priorities');
+    expect(badges('[data-block="first"] .gd-pick')).toEqual([
+      ['Aer', null],
+      ['Alice', SAID],
+    ]);
+    expect(page.count()).toBe('aucune modification');
+    // Sa review écrite (la ligne se redessine au clic suivant) : plus de badge, ni là ni dans le palier.
+    await page.sub('reviews');
+    page.all('#gd-panel .gd-rrow[data-name="Alice"]')[0].click();
+    await page.settle();
+    expect(badges('.gd-rrow')[1]).toEqual(['Alice', SAID]);
+    page.type(page.field('reviews.1.review'), 'Solid');
+    page.all('#gd-panel .gd-rrow[data-name="Aer"]')[0].click();
+    await page.settle();
+    expect(badges('.gd-rrow')).toEqual([
+      ['Aer', null],
+      ['Alice', null],
+    ]);
+    await page.sub('priorities');
+    expect(badges('[data-block="first"] .gd-pick')).toEqual([
+      ['Aer', null],
+      ['Alice', null],
+    ]);
+  });
+
+  it('Premium & Limited : le palier dit « 3★ » lui aussi, et un perso attendu sans review n’y porte AUCUN badge de build (la forme n’en demande pas) (A46)', async () => {
+    const page = await guides({ hash: `${PL}/premium-priorities` });
+    expect(selectOf(page, 'priorities.premium.first.0.stars')).toMatchObject({
+      cls: 'w-qty gd-step',
+      shown: ['3★'],
+    });
+    expect(selectOf(page, 'priorities.premium.first.1.stars').shown).toEqual(['4★']);
+    expect(page.all('#gd-panel .gd-unreviewed')).toHaveLength(0);
+    await page.sub('premium-reviews');
+    expect(page.all('#gd-panel .gd-missing')).toHaveLength(1);
+    expect(page.all('#gd-panel .gd-unreviewed')).toHaveLength(0);
+  });
+
   it('Core Fusion : un refus sur un texte de `changes` cercle la ligne de la review et ouvre le groupe sur le champ fautif', async () => {
     const page = await guides({
       hash: CF,
