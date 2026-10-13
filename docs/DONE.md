@@ -7,6 +7,67 @@
 
 ## 2026-10-13
 
+- **quick, Guides : `open()` relit le hash à chaque venue — un
+  `sections.go('guides/<cat>/<slug>')` venu d'une autre section ouvre ce guide
+  (lot A44)** — suite de la relecture A37 (12/10), tranchée le 13/10.
+  `sections.go(path)` (`scripts/quick/ui/lib.js`) pose le chemin entier dans
+  l'adresse puis appelle `open()` de la section ; celui de Guides
+  (`scripts/quick/ui/tabs/guides.js`) ne lisait le hash qu'au chargement de la
+  page (`wanted`, posé par `init`) : « ouvrir dans Guides » de l'Extraction, la
+  page déjà chargée, arrivait sur la vue d'ensemble, ou sur le guide ouvert
+  avant — le défaut de Noms avant B46. LE COMMENT. La lecture du hash sort
+  d'`init` dans `asked()` (les deux regex d'avant, telles quelles) : une
+  catégorie, un guide avec sa version et son sous-onglet, ou rien ; `init` et
+  `open()` la partagent. `open()` la relit à chaque appel et, quand elle demande
+  quelque chose, passe par `follow()` : un AUTRE guide se charge sur la version
+  et le sous-onglet demandés ; le MÊME guide sans rien en attente se relit du
+  disque comme avant, sur eux ; une catégorie seule ferme le guide ouvert (le
+  `back()` de « ← Guides », qui prend maintenant la catégorie d'arrivée) et
+  montre la vue d'ensemble sur elle, la recherche levée ; `#guides` nu ou
+  absent garde le comportement d'avant, à la ligne près. LA GARDE. Un guide
+  ouvert qui porte des changements ne se quitte que par `leave()` — la
+  confirmation de « ← Guides » et de l'onglet, son message inchangé, qui nomme
+  le guide et le compte d'onglets modifiés ; refusée, le guide reste, sa saisie
+  avec, rien n'est relu, et `writeHash()` redit son adresse. C'est `open()` qui
+  la pose, une fois : `lib.js` n'interroge que la section QUITTÉE. Le même guide
+  demandé alors qu'il porte de la saisie ne demande rien : la version et le
+  sous-onglet se montrent sur elle, sans relecture. LE SOUS-ONGLET. `init`
+  posait celui d'un guide de boss droit dans `sub`, et `load()` ne le gardait
+  que pour le PREMIER guide ouvert ; il passe par `wantedSub` pour les deux
+  familles, appliqué (puis vidé) en fin de `load()` et de `loadGeneral()` s'il
+  est de ce guide — au démarrage le résultat est le même, et un `wantedSub`
+  resté d'un hash sans objet ne traîne plus jusqu'au guide général suivant.
+  ILLISIBLE (un guide que le serveur ne connaît pas) : le journal le dit, le
+  guide ouvert reste et l'adresse le redit, sinon la vue d'ensemble s'ouvre sur
+  la catégorie demandée — et `load()` ne vide plus `gen` AVANT d'avoir lu : un
+  guide général ouvert survivait mal à un guide de boss refusé (`changes()`
+  lisait un brouillon nul), chemin que rien n'empruntait avant ce lot.
+  `STYLE.md` (§ Guides, le hash) le dit. LA VÉRIFICATION. `pnpm typecheck` (les
+  trois `tsc --noEmit`, sans sortie), `pnpm lint` (`$ eslint`, sans sortie),
+  `pnpm test` (`Tests 3801 passed (3801)`),
+  `NODE_ENV=development pnpm exec vitest run scripts/quick`
+  (`Tests 1118 passed (1118)`). Deux tests happy-dom dans `ui-serve.test.ts`
+  (la page de Guides gagne `go` et `shownGuide`), rouges sur le code d'avant :
+  la page chargée sur `#guides/special-request` (le faux n'a pas de catégorie
+  `boss`), une venue d'une autre section ouvre le guide, puis d'ici même un
+  autre guide sur son sous-onglet, une version et son sous-onglet, la version
+  seule (le sous-onglet reste), un guide général sur un onglet de sa forme, un
+  guide inconnu avec puis sans guide ouvert, une catégorie seule ; et le guide
+  sale — autre guide puis catégorie refusés, même guide sur une autre version
+  sans question, la garde depuis une autre section, puis la confirmation qui
+  ouvre l'autre guide relu du disque. Banc : quick isolé sur :4799, clés vidées,
+  `shot.mjs --tabs guides --hash guides/joint-challenge/annihilator`, puis
+  `…/2026-05/team` et `guides/special-request` — l'arrivée directe ouvre
+  toujours le guide, sa version et son sous-onglet, ou la catégorie ; aucun
+  changement visuel. LAISSÉ. Le banc ne clique pas : la venue par un chemin
+  dans un vrai navigateur (« ouvrir dans Guides » depuis l'Extraction, la page
+  déjà chargée) reste à voir à l'écran. Un guide inconnu AU CHARGEMENT de la
+  page laisse toujours `wanted` posé (`reload` ne le vide pas) : la section
+  reste blanche, et `open()` attend ce guide à chaque retour — défaut d'avant
+  ce lot, hors périmètre. Confirmer la sortie d'un guide sale par un chemin
+  abandonne sa saisie, comme « ← Guides » : c'est la garde existante, pas un
+  refus sec.
+
 - **quick, Fiche perso : le récap compte ce qui est DÛ — la date de sortie
   d'aucune source, le Rang PvP parmi les éligibles seulement (lot A43)** —
   suite de la relecture B46 (12/10), tranchée le 13/10. `characterCoverage`

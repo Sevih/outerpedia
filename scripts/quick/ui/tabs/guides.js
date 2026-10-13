@@ -52,7 +52,7 @@ let was = null; // le brouillon et le meta tels que le disque les portait au cha
 let sub = 'meta'; // le sous-onglet montré
 let ver = 0; // la version montrée (index dans `draft.versions`)
 let wanted = null; // ce que le hash demande : { cat, slug, version }, tant que ce n'est pas chargé
-let wantedSub = null; // le sous-onglet que le hash demande d'un guide général, tant qu'il n'est pas chargé
+let wantedSub = null; // le sous-onglet que le hash demande de ce guide, tant qu'il n'est pas chargé
 let gen = null; // le guide GÉNÉRAL ouvert : { slug, form, data, was } — `draft` et `meta` restent nuls
 const genOpen = new Set(); // par clé : les notes de produit ouvertes par « ＋ note » tant qu'elles sont vides, les groupes (`group`) dépliés
 let openEntry = null; // l'entrée dépliée d'un bloc `roster` (une review) : l'objet lui-même, les index bougent
@@ -1959,15 +1959,15 @@ async function loadGeneral(slug, keep = false) {
   } else gen.was = was;
   if (other) {
     const tabs = s.spec.tabs;
-    // Un autre guide s'ouvre sur son premier onglet ; le premier garde celui du hash.
-    const want = first ? wantedSub : null;
-    if (!tabs.some((t) => t.id === sub) || !first)
-      sub = tabs.some((t) => t.id === want) ? want : tabs[0].id;
+    // Un autre guide s'ouvre sur son premier onglet.
+    if (!tabs.some((t) => t.id === sub) || !first) sub = tabs[0].id;
     created = null;
     adding = false;
     trOpen.clear();
     genOpen.clear();
   }
+  // Le sous-onglet que le hash demande passe devant, s'il est de ce guide.
+  if (subsOn().some((t) => t.id === wantedSub)) sub = wantedSub;
   wantedSub = null;
   ver = 0;
   render();
@@ -2643,12 +2643,13 @@ function baseline() {
  */
 async function load(cat, slug, keep = false) {
   if (cat === 'general-guides') return loadGeneral(slug, keep);
-  gen = null;
   const s = await getJson(
     `/api/guides/state?cat=${encodeURIComponent(cat)}&slug=${encodeURIComponent(slug)}`,
   );
   if (!s.draft || !s.spec || !s.langs)
     throw new Error('quick lancé avant ce code : Ctrl-C puis `pnpm quick`');
+  // Lu : un guide général ouvert cède la place (illisible, il reste entier).
+  gen = null;
   const key = wanted?.version ?? (draft ? v()?.key : undefined);
   const first = !sheet;
   const other = sheet?.guide.category !== cat || sheet?.guide.slug !== slug;
@@ -2667,13 +2668,16 @@ async function load(cat, slug, keep = false) {
     baseline();
   }
   if (other) {
-    // Un autre guide s'ouvre sur Méta ; le premier garde le sous-onglet du hash.
+    // Un autre guide s'ouvre sur Méta ; le premier garde le sous-onglet montré.
     if (!first || !subsOn().some((t) => t.id === sub)) sub = 'meta';
     created = null;
     adding = false;
     trOpen.clear();
     vidAdd.reset();
   }
+  // Le sous-onglet que le hash demande passe devant, s'il est de ce guide.
+  if (subsOn().some((t) => t.id === wantedSub)) sub = wantedSub;
+  wantedSub = null;
   const i = draft.versions.findIndex((x) => x.key === key);
   ver = i >= 0 ? i : 0;
   render();
@@ -2688,10 +2692,13 @@ function choose(cat, slug) {
   reload(cat, slug);
 }
 
-/** Retour à la vue d'ensemble, sur la catégorie du guide : sur confirmation s'il reste des changements. */
-function back() {
+/**
+ * Retour à la vue d'ensemble, sur la catégorie du guide (ou `to`, celle que le
+ * hash demande) : sur confirmation s'il reste des changements.
+ */
+function back(to = sheet?.guide.category) {
   if (!sheet || !leave()) return;
-  cat = sheet.guide.category;
+  cat = to;
   sheet = draft = meta = was = gen = null;
   refused = [];
   render();
@@ -2781,6 +2788,71 @@ function leave() {
   );
 }
 
+/**
+ * Ce que le hash demande de Guides : une catégorie (`{ cat }`), un guide
+ * (`{ cat, slug, version, sub }`, la version et le sous-onglet s'il les
+ * porte), ou rien — `#guides` nu, l'adresse d'une autre section.
+ */
+function asked() {
+  const [, gcat, slug, ...rest] =
+    /^#guides\/([^/]+)\/([^/]+)(?:\/([^/]+))?(?:\/([^/]+))?$/.exec(location.hash) ?? [];
+  // Une catégorie seule : `openCat` la retient si le serveur la sert et que quick l'édite.
+  const [, only] = /^#guides\/([^/]+)$/.exec(location.hash) ?? [];
+  if (only) return { cat: decodeURIComponent(only) };
+  if (!gcat) return null;
+  const parts = rest.filter(Boolean).map(decodeURIComponent);
+  const version = /^\d{4}-\d{2}$/.test(parts[0] ?? '') ? parts.shift() : undefined;
+  // Ce qui reste : un sous-onglet (`tips`, `team`, ou `premium`, `guild` d'un guide général).
+  return { cat: decodeURIComponent(gcat), slug: decodeURIComponent(slug), version, sub: parts[0] };
+}
+
+/**
+ * Ce que le hash demande, la page déjà chargée (`sections.go('guides/…')`,
+ * d'une autre section ou d'ici) : ce guide, sur sa version et son sous-onglet,
+ * ou la vue d'ensemble sur cette catégorie. Le guide ouvert ne se quitte avec
+ * des changements que sur confirmation (`leave`) ; refusé, il reste, et
+ * l'adresse le redit.
+ */
+function follow(to) {
+  if (!to.slug) {
+    if (sheet) {
+      back(to.cat);
+      if (sheet) writeHash();
+      return undefined;
+    }
+    cat = to.cat;
+    query = $('gd-q').value = '';
+    writeHash();
+    return reloadOverview();
+  }
+  const same = sheet?.guide.category === to.cat && sheet.guide.slug === to.slug;
+  if (same && changes()) {
+    // Le guide ouvert, sa saisie en attente : pas de relecture, la version et
+    // le sous-onglet demandés se montrent sur elle.
+    const i = draft?.versions.findIndex((x) => x.key === to.version) ?? -1;
+    if (i >= 0) ver = i;
+    if (subsOn().some((t) => t.id === to.sub)) sub = to.sub;
+    render();
+    writeHash();
+    return undefined;
+  }
+  if (!same && !leave()) {
+    writeHash();
+    return undefined;
+  }
+  wanted = { cat: to.cat, slug: to.slug, version: to.version };
+  wantedSub = to.sub ?? null;
+  return load(to.cat, to.slug).catch((e) => {
+    // Illisible (un guide que le serveur ne connaît pas) : le guide ouvert
+    // reste, sinon la vue d'ensemble, sur la catégorie demandée.
+    wanted = wantedSub = null;
+    log([`Guide illisible : ${e}`], false);
+    if (sheet) return writeHash();
+    cat = to.cat;
+    return reloadOverview();
+  });
+}
+
 sections.register('guides', {
   init: () => {
     // `#guides` : la vue d'ensemble, sur la dernière catégorie visitée ;
@@ -2791,18 +2863,12 @@ sections.register('guides', {
     // `team`, ou `limited`, `guild` d'un général), l'ouvre sur ce sous-onglet :
     // pour un lien ou le banc, la page ne l'écrit pas. `lib.js` ne connaît que `#guides` : c'est le clic sur
     // l'onglet qui l'ouvre.
-    const [, gcat, slug, ...rest] =
-      /^#guides\/([^/]+)\/([^/]+)(?:\/([^/]+))?(?:\/([^/]+))?$/.exec(location.hash) ?? [];
-    // Une catégorie seule : `openCat` la retient si le serveur la sert et que quick l'édite.
-    const [, only] = /^#guides\/([^/]+)$/.exec(location.hash) ?? [];
-    if (gcat) {
-      const parts = rest.filter(Boolean).map(decodeURIComponent);
-      const version = /^\d{4}-\d{2}$/.test(parts[0] ?? '') ? parts.shift() : undefined;
-      wanted = { cat: decodeURIComponent(gcat), slug: decodeURIComponent(slug), version };
-      if (SUBS.some((s) => s.id === parts[0])) sub = parts[0];
-      else if (parts[0]) wantedSub = parts[0]; // un onglet d'un guide général (`premium`, `guild`…)
-    } else if (only) cat = decodeURIComponent(only);
-    if (gcat || only) document.querySelector('#tabs [data-tab="guides"]')?.click();
+    const to = asked();
+    if (to?.slug) {
+      wanted = { cat: to.cat, slug: to.slug, version: to.version };
+      wantedSub = to.sub ?? null;
+    } else if (to) cat = to.cat;
+    if (to) document.querySelector('#tabs [data-tab="guides"]')?.click();
     head();
     bar();
     stateLoaded.then(() => {
@@ -2812,8 +2878,13 @@ sections.register('guides', {
     if (wanted) return reload(wanted.cat, wanted.slug);
     return undefined;
   },
-  // Chaque venue à l'écran : la vue d'ensemble relue, ou le guide (s'il n'y a rien en attente).
+  // Chaque venue à l'écran : ce que le hash demande (une venue par un chemin,
+  // `sections.go('guides/<cat>/<slug>')` de l'Extraction), sinon la vue
+  // d'ensemble relue, ou le guide (s'il n'y a rien en attente).
   open: () => {
+    const to = asked();
+    const coming = wanted && wanted.cat === to?.cat && wanted.slug === to.slug;
+    if (to && !coming) return follow(to);
     if (wanted) return undefined; // le guide du hash arrive
     if (!sheet) {
       writeHash();

@@ -13418,7 +13418,7 @@ describe('Guides — la page, sur le vrai markup', () => {
     vi.stubGlobal('localStorage', window.localStorage);
 
     const lib = (await import(/* @vite-ignore */ resolve(UI, 'lib.js'))) as {
-      sections: { start: () => void };
+      sections: { start: () => void; go: (path: string) => void };
     };
     await import(/* @vite-ignore */ resolve(UI, 'tabs', 'guides.js'));
     lib.sections.start();
@@ -13458,6 +13458,17 @@ describe('Guides — la page, sur le vrai markup', () => {
         all('#tabs [data-tab="guides"]')[0].click();
         await settle();
       },
+      /** Une venue par un chemin, comme d'une autre section (`sections.go`). */
+      go: async (path: string) => {
+        lib.sections.go(path);
+        await settle();
+      },
+      /** Le titre du guide ouvert, la version et le sous-onglet montrés. */
+      shownGuide: () => [
+        all('#gd-head strong')[0]?.textContent,
+        all('#gd-versions [data-ver][aria-selected="true"]')[0]?.textContent,
+        all('#gd-tabs [aria-selected="true"]')[0]?.dataset.sub,
+      ],
       /** Un clic sur une catégorie de la rangée. */
       cat: (slug: string) => all(`#gd-cats [data-cat="${slug}"]`)[0].click(),
       /** La rangée : chaque catégorie, son texte, l'active, les inactives. */
@@ -14044,6 +14055,106 @@ describe('Guides — la page, sur le vrai markup', () => {
     expect(page.shown()).toEqual(['joint-challenge']);
     expect(page.stored()).toBe('joint-challenge');
     expect(page.confirm).toHaveBeenCalledTimes(2);
+  });
+
+  it("une venue par un chemin (`sections.go('guides/<cat>/<slug>')`, « ouvrir dans Guides » de l’Extraction), la page déjà chargée : ce guide, sa version, son sous-onglet", async () => {
+    const page = await guides({ hash: '#guides/special-request' });
+    expect(page.shown()).toEqual(['special-request']);
+    // D'une autre section : l'onglet vient à l'écran sur le guide, pas sur la vue d'ensemble.
+    page.all('#tabs [data-tab="comics"]')[0].click();
+    expect(page.el('tab-guides').hidden).toBe(true);
+    await page.go('guides/joint-challenge/annihilator');
+    expect(page.el('tab-guides').hidden).toBe(false);
+    expect(page.el('gd-guide').hidden).toBe(false);
+    expect(page.shownGuide()).toEqual([
+      'Annihilator Joint Challenge Guide',
+      '2026-10récente',
+      'meta',
+    ]);
+    expect(page.window.location.hash).toBe(`${JC}/2026-10`);
+    // Déjà à l'écran, un autre guide ouvert : un chemin en change, sur le sous-onglet qu'il porte.
+    await page.go('guides/special-request/amadeus/tips');
+    expect(page.shownGuide()).toEqual(['Amadeus Special Request Guide', undefined, 'tips']);
+    expect(page.window.location.hash).toBe('#guides/special-request/amadeus');
+    // La version et le sous-onglet ; puis le même guide, une autre version : le sous-onglet reste.
+    await page.go('guides/joint-challenge/annihilator/2026-05/team');
+    expect(page.shownGuide()).toEqual(['Annihilator Joint Challenge Guide', '2026-05', 'team']);
+    expect(page.window.location.hash).toBe(`${JC}/2026-05`);
+    await page.go('guides/joint-challenge/annihilator/2026-10');
+    expect(page.shownGuide()).toEqual([
+      'Annihilator Joint Challenge Guide',
+      '2026-10récente',
+      'team',
+    ]);
+    // Un guide général, sur un onglet de sa forme.
+    await page.go('guides/general-guides/shop-purchase-priorities/event');
+    expect(page.all('#gd-head .gd-traits .mono')[0].textContent).toBe(
+      'general-guides/shop-purchase-priorities',
+    );
+    expect(page.all('#gd-tabs [aria-selected="true"]')[0].dataset.sub).toBe('event');
+    // Un guide que le serveur ne connaît pas : le journal le dit, le guide ouvert reste, l'adresse le redit.
+    await page.go('guides/joint-challenge/ghost');
+    expect(page.el('journal-last').textContent).toContain('Guide illisible');
+    expect(page.el('gd-guide').hidden).toBe(false);
+    expect(page.window.location.hash).toBe('#guides/general-guides/shop-purchase-priorities');
+    // Une catégorie seule : la vue d'ensemble, sur elle.
+    await page.go('guides/joint-challenge');
+    expect(page.el('gd-overview').hidden).toBe(false);
+    expect(page.shown()).toEqual(['joint-challenge']);
+    expect(page.window.location.hash).toBe('#guides/joint-challenge');
+    // Sans guide ouvert, un guide inconnu laisse la vue d'ensemble, sur la catégorie demandée.
+    await page.go('guides/special-request/ghost');
+    expect(page.el('gd-overview').hidden).toBe(false);
+    expect(page.shown()).toEqual(['special-request']);
+    expect(page.window.location.hash).toBe('#guides/special-request');
+    expect(page.confirm).not.toHaveBeenCalled();
+  });
+
+  it('une venue par un chemin sur un guide qui porte des changements : il ne se quitte que sur confirmation, le hash n’emporte rien', async () => {
+    const page = await guides({ hash: `${JC}/meta` });
+    page.type(page.field('meta.title'), 'Renamed');
+    expect(page.count()).toBe('1 onglet modifié');
+    // Un autre guide, refusé : le guide reste, sa saisie avec, l'adresse le redit, rien n'est relu.
+    page.confirm.mockReturnValueOnce(false);
+    await page.go('guides/special-request/amadeus');
+    expect(page.confirm).toHaveBeenCalledTimes(1);
+    expect(page.confirm.mock.calls[0]).toEqual([
+      expect.stringContaining('pas encore enregistré sur joint-challenge/annihilator'),
+    ]);
+    expect(page.field('meta.title').value).toBe('Renamed');
+    expect(page.count()).toBe('1 onglet modifié');
+    expect(page.window.location.hash).toBe(`${JC}/2026-10`);
+    expect(page.states()).toBe(1);
+    // Une catégorie seule, refusée : pareil.
+    page.confirm.mockReturnValueOnce(false);
+    await page.go('guides/special-request');
+    expect(page.confirm).toHaveBeenCalledTimes(2);
+    expect(page.el('gd-guide').hidden).toBe(false);
+    expect(page.window.location.hash).toBe(`${JC}/2026-10`);
+    // Le MÊME guide, une autre version, un autre sous-onglet : montrés sur la saisie, sans question ni relecture.
+    await page.go('guides/joint-challenge/annihilator/2026-05/tips');
+    expect(page.confirm).toHaveBeenCalledTimes(2);
+    expect(page.shownGuide()).toEqual(['Renamed', '2026-05', 'tips']);
+    expect(page.window.location.hash).toBe(`${JC}/2026-05`);
+    expect(page.count()).toBe('1 onglet modifié');
+    expect(page.states()).toBe(1);
+    // D'une autre section (l'onglet quitté sur confirmation, les changements en attente) : la même garde.
+    page.all('#tabs [data-tab="comics"]')[0].click();
+    expect(page.confirm).toHaveBeenCalledTimes(3);
+    expect(page.el('tab-guides').hidden).toBe(true);
+    page.confirm.mockReturnValueOnce(false);
+    await page.go('guides/special-request/amadeus');
+    expect(page.confirm).toHaveBeenCalledTimes(4);
+    expect(page.el('tab-guides').hidden).toBe(false);
+    expect(page.shownGuide()).toEqual(['Renamed', '2026-05', 'tips']);
+    expect(page.window.location.hash).toBe(`${JC}/2026-05`);
+    expect(page.states()).toBe(1);
+    // Confirmé : l'autre guide s'ouvre, relu du disque.
+    await page.go('guides/special-request/amadeus');
+    expect(page.confirm).toHaveBeenCalledTimes(5);
+    expect(page.shownGuide()).toEqual(['Amadeus Special Request Guide', undefined, 'meta']);
+    expect(page.count()).toBe('aucune modification');
+    expect(page.states()).toBe(2);
   });
   // ---------------------------------------------------------- les guides généraux
   const PL = '#guides/general-guides/premium-limited';
