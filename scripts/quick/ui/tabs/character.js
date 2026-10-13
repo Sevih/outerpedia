@@ -593,14 +593,15 @@ function subTabs() {
  * Une ligne du récap : le champ, son compte, puis les persos à qui il manque,
  * en vignettes — les `COVER_SHOWN` premiers, le reste derrière « … et n autres ».
  * Le compte se lit sur ceux que le champ concerne (`done` + les manquants) :
- * l'EE ne compte que les persos qui en ont un.
+ * l'EE ne compte que les persos qui en ont un, le Rang PvP que ceux que le PvP
+ * admet. `hint`, quand le serveur en donne un, se lit au survol du libellé.
  */
 function coverRow(f, rows) {
   const all = coverOpen.has(f.key) || f.missing.length <= COVER_SHOWN;
   const hero = (m) =>
     `<button class="c-cov-hero" type="button" data-cov-id="${esc(m.id)}" data-cov-sub="${esc(f.sub)}" title="${esc(m.name)}" aria-label="${esc(`${m.name} — ${f.label}`)}">${heroTile(state, rows.get(m.id) ?? m, { px: 32 })}</button>`;
   return `<div class="c-cov-row" data-cov="${esc(f.key)}">
-      <strong>${esc(f.label)}</strong>
+      <strong${f.hint ? ` title="${esc(f.hint)}"` : ''}>${esc(f.label)}</strong>
       <span class="badge ${f.missing.length ? 'off' : 'ok'}">${f.done} / ${f.done + f.missing.length}</span>
       <div class="c-cov-miss">${(all ? f.missing : f.missing.slice(0, COVER_SHOWN)).map(hero).join('')}${
         all

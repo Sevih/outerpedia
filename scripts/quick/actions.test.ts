@@ -194,6 +194,7 @@ import type { ReviewEntity } from '@/lib/admin/review-types';
 import type { DiffResolvers } from '@/lib/admin/diff-labels';
 import type { StageResult } from '@datagen/assets/stage';
 import type { Character } from '@datagen/extractor/specs/character';
+import { isPvpEligible } from '@datagen/curated/character';
 import type { EquipmentData } from '@datagen/generators/equipment';
 import type { EncountersData } from '@/lib/admin/monster-store';
 import type { MonsterArchiveEntry } from '@contracts';
@@ -203,6 +204,7 @@ import {
   ADMIN_BASE_DEFAULT,
   ADMIN_TO_QUICK,
   BANNER_LOOKBACK_DAYS,
+  CHARACTER_COVERAGE_DISK,
   CHARACTER_SHEET_DEPS,
   COUPON_EXPIRY_DAYS,
   DASHBOARD_DISK,
@@ -647,7 +649,7 @@ describe('characterCoverage — le récap de la curation, stores factices', () =
     subClass: 'attacker',
     rarity: 3,
   });
-  /** Quatre persos, dans le désordre : Zed seul n'a pas d'EE. */
+  /** Quatre persos, dans le désordre : Zed seul n'a pas d'EE, et le PvP ne l'admet pas. */
   const ROSTER = [row('4', 'Zed'), row('1', 'Anna'), row('3', 'Carla'), row('2', 'Bob')];
   const fake = (over: Partial<CharacterCoverageDisk> = {}) => {
     const state = { stamp: 's1' };
@@ -683,13 +685,16 @@ describe('characterCoverage — le récap de la curation, stores factices', () =
       },
       gearReco: () => ({ '1': [{ name: 'Speed' }], '2': [] }) as Record<string, GearBuild[]>,
       shortNames: () => ({ '3': { en: 'Car' }, '2': { en: ' ' } }),
+      // Anna : posée à la main (et reprise par le généré). Carla : dérivée seulement.
       releases: () => ({ '1': '2023-04-19' }),
+      generatedReleases: () => ({ '1': '2023-04-19', '3': '2024-02-06' }),
       ee: () => ({
         '1': { rank: 'S', rank10: 'S' },
         '2': { chipAdd: ['7'] },
         '3': { rank10: 'A' },
       }),
       eeOwners: () => new Set(['1', '2', '3']),
+      pvpEligible: () => new Set(['1', '2', '3']),
       stamp: () => state.stamp,
       ...over,
     };
@@ -714,8 +719,12 @@ describe('characterCoverage — le récap de la curation, stores factices', () =
       ['gear', 'Gear reco', 'gear'],
       ['ee', 'EE', 'ee'],
       ['shortName', 'Nom court', 'names'],
-      ['release', 'Date de sortie à la main', 'extractor/character'],
+      ['release', 'Date de sortie', 'extractor/character'],
       ['videos', 'Vidéos', 'fiche'],
+    ]);
+    // Un seul libellé a besoin d'un survol : celui qui compte deux sources.
+    expect(out.fields.filter((f) => f.hint).map((f) => [f.key, f.hint])).toEqual([
+      ['release', 'curée ou dérivée des notes de MAJ'],
     ]);
   });
 
@@ -726,11 +735,11 @@ describe('characterCoverage — le récap de la curation, stores factices', () =
     expect(line('skillPriority', disk)).toEqual([1, ['Bob', 'Carla', 'Zed']]);
     expect(line('tags', disk)).toEqual([1, ['Bob', 'Carla', 'Zed']]);
     expect(line('rank', disk)).toEqual([2, ['Bob', 'Zed']]);
-    expect(line('rankPvp', disk)).toEqual([1, ['Bob', 'Carla', 'Zed']]);
+    expect(line('rankPvp', disk)).toEqual([1, ['Bob', 'Carla']]);
     expect(line('gear', disk)).toEqual([1, ['Bob', 'Carla', 'Zed']]);
     // Un nom court tout en blancs n'en est pas un.
     expect(line('shortName', disk)).toEqual([1, ['Anna', 'Bob', 'Zed']]);
-    expect(line('release', disk)).toEqual([1, ['Bob', 'Carla', 'Zed']]);
+    expect(line('release', disk)).toEqual([2, ['Bob', 'Zed']]);
     expect(line('videos', disk)).toEqual([1, ['Bob', 'Carla', 'Zed']]);
     // Un manquant : son id et son nom, rien d'autre.
     expect(characterCoverage(disk).fields[0].missing).toEqual([
@@ -743,6 +752,47 @@ describe('characterCoverage — le récap de la curation, stores factices', () =
     const { disk } = fake();
     // Zed n'a pas d'EE : ni fait, ni manquant. Bob n'a que des chips : manquant.
     expect(line('ee', disk)).toEqual([2, ['Bob']]);
+  });
+
+  it('la date de sortie ne manque qu’au perso sans date d’AUCUNE source', () => {
+    // Dérivée seulement (Carla), posée seulement (Bob, pas encore régénéré) : aucune ne manque.
+    const { disk } = fake({
+      releases: () => ({ '2': '2023-04-19' }),
+      generatedReleases: () => ({ '3': '2024-02-06' }),
+    });
+    expect(line('release', disk)).toEqual([2, ['Anna', 'Zed']]);
+    // Aucune source lisible : tout le roster manque, rien n'est inventé.
+    const none = fake({ releases: () => ({}), generatedReleases: () => ({}) }).disk;
+    expect(line('release', none)).toEqual([0, ['Anna', 'Bob', 'Carla', 'Zed']]);
+  });
+
+  it('le Rang PvP ne se compte que parmi ceux que le PvP admet : un inéligible n’est ni compté ni listé', () => {
+    // Zed, sans rang PvP : pas un manquant. Le compte se lit sur trois persos.
+    const { disk } = fake();
+    const pvp = characterCoverage(disk).fields.find((f) => f.key === 'rankPvp')!;
+    expect(pvp.done + pvp.missing.length).toBe(3);
+    expect(pvp.missing.map((m) => m.id)).not.toContain('4');
+    // Anna, rangée « A » mais hors du PvP : son rang ne fait pas un « fait ».
+    const out = fake({ pvpEligible: () => new Set(['2', '3']) }).disk;
+    expect(line('rankPvp', out)).toEqual([0, ['Bob', 'Carla']]);
+    // Le Rang PvE, lui, reste dû à tout le roster.
+    expect(line('rank', out)).toEqual([2, ['Bob', 'Zed']]);
+  });
+
+  it('`isPvpEligible` — la base est 3★ : la rareté du perso, ou celle de sa base pour une Core Fusion', () => {
+    const rarity = new Map([
+      ['base2', 2],
+      ['base3', 3],
+    ]);
+    const of = (id: string) => rarity.get(id);
+    expect(isPvpEligible({ rarity: 3 }, of)).toBe(true);
+    expect(isPvpEligible({ rarity: 2 }, of)).toBe(false);
+    expect(isPvpEligible({ rarity: 1 }, of)).toBe(false);
+    // Une Core Fusion porte 3 quelle que soit sa base : c'est la base qui tranche.
+    expect(isPvpEligible({ rarity: 3, originalCharacter: 'base3' }, of)).toBe(true);
+    expect(isPvpEligible({ rarity: 3, originalCharacter: 'base2' }, of)).toBe(false);
+    // Une base inconnue ne prouve rien.
+    expect(isPvpEligible({ rarity: 3, originalCharacter: 'absente' }, of)).toBe(true);
   });
 
   it('gardé tant que rien ne bouge (`stamp`), recalculé ensuite', () => {
@@ -759,13 +809,32 @@ describe('characterCoverage — le récap de la curation, stores factices', () =
     const out = characterCoverage();
     expect(out.total).toBe(getCharacterListItems().length);
     const eeOwners = new Set(getEEViews().map((e) => e.characterId));
+    // Le PvP n'admet que les persos dont la BASE est 3★ — recompté ici sans `isPvpEligible`.
+    const items = getCharacterListItems();
+    const rarityOf = new Map(items.map((c) => [c.id, c.rarity]));
+    const pvp = items.filter(
+      (c) => (c.originalCharacter ? rarityOf.get(c.originalCharacter) : c.rarity) === 3,
+    );
+    const sized: Record<string, number> = { ee: eeOwners.size, rankPvp: pvp.length };
     for (const f of out.fields) {
-      const among = f.key === 'ee' ? eeOwners.size : out.total;
+      const among = sized[f.key] ?? out.total;
       expect([f.key, f.done + f.missing.length]).toEqual([f.key, among]);
       expect(f.missing.map((m) => m.name)).toEqual(
         [...f.missing.map((m) => m.name)].sort((a, b) => a.localeCompare(b)),
       );
     }
+    // Snow et Lisha fusionnés (base 2★), K (2★) : pas des manquants du PvP ;
+    // Veronica fusionnée (base 3★) en est, elle : comptée.
+    const eligible = CHARACTER_COVERAGE_DISK.pvpEligible();
+    expect(['2700003', '2700005', '2000001'].filter((id) => eligible.has(id))).toEqual([]);
+    expect(eligible.has('2700037')).toBe(true);
+    const missingPvp = out.fields.find((f) => f.key === 'rankPvp')!.missing.map((m) => m.id);
+    expect(missingPvp.filter((id) => !eligible.has(id))).toEqual([]);
+    // Une date dérivée suffit : le curé seul en laisserait des dizaines dehors.
+    const dated = CHARACTER_COVERAGE_DISK.generatedReleases();
+    const release = out.fields.find((f) => f.key === 'release')!;
+    expect(release.missing.filter((m) => dated[m.id])).toEqual([]);
+    expect(release.done).toBeGreaterThan(Object.keys(CHARACTER_COVERAGE_DISK.releases()).length);
   });
 });
 

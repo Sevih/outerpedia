@@ -7,6 +7,66 @@
 
 ## 2026-10-13
 
+- **quick, Fiche perso : le récap compte ce qui est DÛ — la date de sortie
+  d'aucune source, le Rang PvP parmi les éligibles seulement (lot A43)** —
+  suite de la relecture B46 (12/10), tranchée le 13/10. `characterCoverage`
+  (`scripts/quick/actions.ts`, `GET /api/character/coverage`) comptait le curé
+  posé, et deux lignes mentaient sur ce qui manque. (1) LA DATE DE SORTIE.
+  « Date de sortie à la main » ne lisait que
+  `data/curated/character-release.json` (48 persos) et listait 81 manquants
+  dont la date est dérivée des notes de MAJ. La ligne s'appelle « Date de
+  sortie » et ne liste que le perso sans date d'AUCUNE source : ni curée, ni
+  dans `data/generated/character-release.json` (le fichier que le site sert,
+  dérivation + curé par-dessus). `CharacterCoverageDisk` gagne
+  `generatedReleases` (dep injectée ; la route lit le fichier du disque, `{}`
+  s'il manque), le fichier entre dans `stamp` (une régénération relance le
+  calcul), et `CoverageField` gagne un `hint` facultatif que la page pose en
+  `title` du libellé : « curée ou dérivée des notes de MAJ ». Un manquant
+  ouvre toujours `extractor/character/<id>`. (2) LE RANG PVP. Le
+  dénominateur est le sous-roster des éligibles, passé à `field` comme celui
+  de l'EE (`disk.pvpEligible()`, pendant d'`eeOwners`). La source est celle
+  du site : la règle écrite sur `rankPvp` dans `datagen/curated/character.ts`
+  (« le PvP n'admet que les personnages dont la BASE est 3★ ») y devient
+  `isPvpEligible(c, rarityOf)` — la rareté du perso, ou celle de son
+  `originalCharacter` pour une Core Fusion, une base inconnue ne prouvant
+  rien — et quick la joue sur le roster ; aucune liste d'ids dans quick.
+  ÉCART AVEC LE LOT, À RELIRE : le lot attendait « Rang PvP sur 127 » (le
+  roster moins Snow et Lisha). La règle lue dit plus : les 34 persos 1★ et 2★
+  natifs n'ont pas de rang PvP non plus (aucun n'en porte, la tier list PvP
+  n'a que des 3★), et l'ancien récap les listait tous — 92 / 129, 37
+  manquants, pas deux. Appliquée telle qu'écrite, la règle donne 93 éligibles
+  (129 − 9 en 1★ − 25 en 2★ − Snow et Lisha fusionnés). Ne retirer que les
+  deux Core Fusion aurait laissé 34 manquants perpétuels sur la ligne, ou
+  demandé la liste en dur que le lot interdit. CHIFFRES DU DISQUE RÉEL :
+  « Date de sortie » 129 / 129, complet (48 curées, 129 dans le généré) ;
+  « Rang PvP » 92 / 93, un seul manquant, Demiurge Lambda (2000124), qui n'a
+  pas non plus de Rang PvE ni d'EE rangé. Les neuf autres lignes n'ont pas
+  bougé (Pros / Cons 48, Synergies 25, Priorité de skills 127, Tags 41, Rang
+  PvE 128, Gear reco 96, EE 128 / 129, Nom court 35, Vidéos 79). Tests
+  (`actions.test.ts`, le disque factice mis à jour, rien d'affaibli) : un
+  perso daté par le seul dérivé ne manque pas, un perso posé à la main et
+  pas encore régénéré non plus, sans aucune source tout le roster manque ;
+  un inéligible n'est ni compté ni listé en PvP, même rangé, et le Rang PvE
+  reste dû à tous ; `isPvpEligible` sur ses six cas ; sur le vrai disque, le
+  dénominateur du PvP recompté sans la fonction, Snow, Lisha et K hors des
+  éligibles, Veronica fusionnée dedans. Côté page (`ui-serve.test.ts`) : le
+  `title` du libellé qui porte un `hint`, aucun sur les autres. Vérifié :
+  `pnpm typecheck` (« tsc --noEmit -p scripts/tsconfig.json », sans
+  erreur), `pnpm lint` (« $ eslint », sans sortie), `pnpm test` (« Tests
+  3799 passed (3799) », 223 fichiers),
+  `NODE_ENV=development pnpm exec vitest run scripts/quick` (« Tests 1116
+  passed (1116) », 8 fichiers). Banc sur un quick isolé (:4796, clés vidées,
+  GET seuls) : `--tabs character --hash character` montre « Rang PvP
+  92 / 93 » avec une vignette et « Date de sortie 129 / 129 — complet » en
+  vert ; rien d'autre n'a changé à l'image. `STYLE.md` suit (les deux
+  lignes, le `hint`). Laissé : le
+  dénominateur du PvP n'est pas expliqué à l'écran (un `hint` « parmi les
+  persos de base 3★ » tiendrait en une ligne, pas demandé) ; « Nom court »
+  et « Tags » comptent toujours le posé (non tranché) ; le commentaire de
+  `rankPvp` ne nomme que Snow et Lisha, les 1★ et 2★ y sont implicites ; pas
+  d'édition des dates de sortie, pas de compteur au Tableau de bord (hors
+  lot).
+
 - **quick : la tuile d'effet partagée dans Monstres et Extraction, et les
   minuteries de Tables du jeu qui ne tirent plus sur une page disparue (lot
   A42)** — deux restes de la relecture A36 (12/10), tranchés le 13/10.

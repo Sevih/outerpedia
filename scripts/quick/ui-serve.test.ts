@@ -2824,6 +2824,7 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
       key: string;
       label: string;
       sub: string;
+      hint?: string;
       done: number;
       missing: { id: string; name: string }[];
     }[];
@@ -3372,6 +3373,32 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
     });
     expect(page.recap()).toEqual([['Rang PvE', '3 / 3', [], 'complet']]);
     expect(page.all('#c-panel .c-cov-row .badge')[0].className).toBe('badge ok');
+  });
+
+  it('récap : un libellé qui porte un `hint` le dit au survol, les autres n’ont pas de `title`', async () => {
+    const page = await character({
+      hash: '#character',
+      coverage: () => ({
+        total: 3,
+        fields: [
+          { key: 'rank', label: 'Rang PvE', sub: 'fiche', done: 3, missing: [] },
+          {
+            key: 'release',
+            label: 'Date de sortie',
+            sub: 'extractor/character',
+            hint: 'curée ou dérivée des notes de MAJ',
+            done: 3,
+            missing: [],
+          },
+        ],
+      }),
+    });
+    expect(
+      page.all('#c-panel .c-cov-row > strong').map((s) => [s.textContent, s.getAttribute('title')]),
+    ).toEqual([
+      ['Rang PvE', null],
+      ['Date de sortie', 'curée ou dérivée des notes de MAJ'],
+    ]);
   });
 
   it('récap : un clic sur un manquant ouvre sa fiche sur le sous-onglet du champ', async () => {

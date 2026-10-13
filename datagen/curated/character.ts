@@ -97,6 +97,21 @@ export interface CharacterCurated {
   synergies?: SynergyGroup[];
 }
 
+/**
+ * Éligibilité au PvP — la règle de `CharacterCurated.rankPvp`, en code : la
+ * BASE du perso est 3★. `rarity` seul ne la dit pas (une Core Fusion porte 3
+ * quelle que soit sa base) : on remonte `originalCharacter`, dont `rarityOf`
+ * donne la rareté. Une base inconnue ne prouve rien — le perso reste éligible,
+ * un rang manquant se voit, un rang jamais demandé non.
+ */
+export function isPvpEligible(
+  c: { rarity: number; originalCharacter?: string },
+  rarityOf: (id: string) => number | undefined,
+): boolean {
+  const base = c.originalCharacter ? (rarityOf(c.originalCharacter) ?? c.rarity) : c.rarity;
+  return base === 3;
+}
+
 export const characterCuratedSchema: Schema = {
   kind: 'object',
   fields: {

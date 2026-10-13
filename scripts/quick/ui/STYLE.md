@@ -990,7 +990,7 @@ du rendu :
      .c-cov-miss : les persos à qui le champ manque, par nom — la vignette de perso en 32 px (`heroTile`), chacune un bouton (.c-cov-hero, `title` = le nom) ; « complet » (.lbl) quand il n'y en a pas
         au-delà de 24 : [… et 57 autres] (.btn.ghost.sm) déplie le reste, et le champ reste déplié d'une venue à l'autre
      un clic sur une vignette ouvre le perso LÀ OÙ LE CHAMP SE RÈGLE : sa fiche sur le sous-onglet (`#character/<id>/<sous-onglet>`), ou une autre section (`#names/<id>`, `#extractor/character/<id>`)
-  les champs : Pros / Cons (`pros-cons`) · Synergies (`synergies`) · Priorité de skills, Tags, Rang PvE, Rang PvP (`fiche`) · Gear reco (`gear`) · EE (`ee`, compté parmi les persos qui en ont un) · Nom court (Noms) · Date de sortie à la main (Extraction, en lecture) · Vidéos (`fiche`)
+  les champs : Pros / Cons (`pros-cons`) · Synergies (`synergies`) · Priorité de skills, Tags, Rang PvE, Rang PvP (`fiche` ; le PvP compté parmi les persos qu'il admet, base 3★) · Gear reco (`gear`) · EE (`ee`, compté parmi les persos qui en ont un) · Nom court (Noms) · Date de sortie (Extraction, en lecture ; ne manque qu'au perso sans date d'AUCUNE source, `title` du libellé « curée ou dérivée des notes de MAJ ») · Vidéos (`fiche`)
 .savebar   2 changements · 1 refus · 1 erreur · « Priorité de skills · Skill 2 : entre 1 et 3, ou vide »   Aperçu [en|fr|es|jp|kr|zh]   [Annuler] [Enregistrer]   (UNE barre pour tous les sous-onglets, sauf les builds de Gear reco, qui ont la leur ; absente sans perso)
    « Aperçu » (.c-pv-lang, le groupe segmenté .c-seg — celui de Gear reco) : la langue de l'aperçu des textes, `en` d'office, UNE pour toute la fiche ; absent du sous-onglet Fiche, qui n'a pas de texte
 .c-tabs (role tablist — la rangée des onglets de builds de Gear reco, `.tab` en 32 px)  [Fiche ●] [Pros / Cons ●] [Synergies] [Skills] [EE] [Gear reco]
@@ -1053,10 +1053,11 @@ le hash : `#character/<id>/<sous-onglet>` (`fiche` · `pros-cons` · `synergies`
 ```
 
 Le récap de l'arrivée vient de `GET /api/character/coverage`
-(`characterCoverage` : `{ total, fields: [{ key, label, sub, done, missing }] }`,
-gardé au serveur tant qu'aucun des cinq curés lus n'a bougé), RELU à chaque
-venue sans perso — un enregistrement vient peut-être de bouger les comptes ;
-le dernier lu reste à l'écran pendant la lecture.
+(`characterCoverage` : `{ total, fields: [{ key, label, sub, hint?, done, missing }] }`,
+gardé au serveur tant qu'aucun des cinq curés lus ni les dates de sortie
+générées n'ont bougé), RELU à chaque venue sans perso — un enregistrement
+vient peut-être de bouger les comptes ; le dernier lu reste à l'écran pendant
+la lecture.
 Le roster vient de `GET /api/character/roster`, lu UNE fois ; la fiche d'un
 perso de `GET /api/character/state?id=` (`characterSheetState` : sa ligne, sa
 chaîne, ses tags dérivés, son entrée curée entière, ses rangs et les listes de

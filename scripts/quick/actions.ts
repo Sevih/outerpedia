@@ -397,7 +397,7 @@ import type { EquipmentData } from '@datagen/generators/equipment';
 import { ITEM_SPRITE_DIR, buildImageIndex, type ImageIndex } from '@datagen/assets/source';
 import type { AcceptReport, MinorReport } from '@datagen/extractor/review';
 import type { StageResult } from '@datagen/assets/stage';
-import type { SynergyGroup } from '@datagen/curated/character';
+import { isPvpEligible, type SynergyGroup } from '@datagen/curated/character';
 import type { EquipmentCuratedEntry } from '@datagen/curated/equipment';
 import { compactEffect } from '@datagen/curated/effects';
 import { validateGearBuilds } from '@datagen/curated/gear-reco';
@@ -2333,6 +2333,8 @@ export async function saveRanks(
 const CHARACTERS_PATH = 'data/curated/characters.json';
 const EQUIPMENT_PATH = 'data/curated/equipment.json';
 const CHARACTER_SKILLS_PATH = 'data/curated/character-skills.json';
+/** Les dates de sortie servies au site : dérivées des notes de MAJ, le curé par-dessus. */
+const RELEASE_GENERATED_PATH = 'data/generated/character-release.json';
 
 /** Un perso du roster, pour l'en-tête de la fiche et le picker de héros. */
 export interface SheetRosterRow {
@@ -2378,6 +2380,8 @@ export interface CoverageField {
    * `extractor/character`) — la page y ouvre le perso manquant.
    */
   sub: string;
+  /** Ce que le libellé dit au survol, quand il ne se suffit pas. */
+  hint?: string;
   done: number;
   /** Par nom. */
   missing: { id: string; name: string }[];
@@ -2391,8 +2395,9 @@ export interface CharacterCoverage {
 
 /**
  * Les lectures du récap de la « Fiche perso » : le roster, le curé des persos,
- * les recos de gear, les noms courts, les dates de sortie posées à la main, le
- * curé des EE et ceux qui en ont un — et `stamp`, ce qui date le tout : le
+ * les recos de gear, les noms courts, les dates de sortie posées à la main et
+ * celles du fichier généré (dérivées des notes de MAJ), le curé des EE et ceux
+ * qui en ont un, ceux que le PvP admet — et `stamp`, ce qui date le tout : le
  * récap n'est recalculé que s'il bouge.
  */
 export interface CharacterCoverageDisk {
@@ -2401,15 +2406,19 @@ export interface CharacterCoverageDisk {
   gearReco: () => Record<string, GearBuild[]>;
   shortNames: () => Record<string, LocalizedText>;
   releases: () => Record<string, string>;
+  generatedReleases: () => Record<string, string>;
   ee: () => Record<string, EquipmentCuratedEntry>;
   eeOwners: () => ReadonlySet<string>;
+  pvpEligible: () => ReadonlySet<string>;
   stamp: () => string;
 }
 
 /**
- * Celles de la route : les cinq curés du disque. `mtimeOf`, pas `fileStamp` :
- * la page relit le récap au retour d'un enregistrement, que les deux secondes
- * de `fileStamp` lui cacheraient.
+ * Celles de la route : les cinq curés du disque et les dates de sortie
+ * générées. L'éligibilité au PvP est la règle du site (`isPvpEligible`, base
+ * 3★), jouée sur le roster — pas une liste d'ids tenue ici. `mtimeOf`, pas
+ * `fileStamp` : la page relit le récap au retour d'un enregistrement, que les
+ * deux secondes de `fileStamp` lui cacheraient.
  */
 export const CHARACTER_COVERAGE_DISK: CharacterCoverageDisk = {
   roster: () => characterRoster().roster,
@@ -2419,10 +2428,23 @@ export const CHARACTER_COVERAGE_DISK: CharacterCoverageDisk = {
   releases: () =>
     loadCuratedJson<{ releases?: Record<string, string> }>('curated/character-release.json', {})
       .releases ?? {},
+  generatedReleases: () => readGeneratedJson('character-release.json') as Record<string, string>,
   ee: () => loadEquipmentEditorial().ee,
   eeOwners: () => new Set(getEEViews().map((e) => e.characterId)),
+  pvpEligible: () => {
+    const items = getCharacterListItems();
+    const rarity = new Map(items.map((c) => [c.id, c.rarity]));
+    return new Set(items.filter((c) => isPvpEligible(c, (id) => rarity.get(id))).map((c) => c.id));
+  },
   stamp: () =>
-    [CHARACTERS_PATH, GEAR_RECO_PATH, SHORT_NAMES_PATH, RELEASE_CURATED_PATH, EQUIPMENT_PATH]
+    [
+      CHARACTERS_PATH,
+      GEAR_RECO_PATH,
+      SHORT_NAMES_PATH,
+      RELEASE_CURATED_PATH,
+      RELEASE_GENERATED_PATH,
+      EQUIPMENT_PATH,
+    ]
       .map(mtimeOf)
       .join('|'),
 };
@@ -2436,12 +2458,14 @@ const coverageMemo = new WeakMap<
  * Le récap de la curation, pour l'arrivée sur la « Fiche perso » : par champ,
  * combien de persos le portent et lesquels ne l'ont pas (par nom). Un champ
  * VIDE ne compte pas : des pros / cons sans ligne, un texte sans langue, une
- * liste sans élément. L'EE ne se compte que parmi les persos qui en ont un —
- * les autres ne sont ni faits ni manquants, `done + missing` y est plus court
- * que `total`. La date de sortie est celle POSÉE À LA MAIN
- * (`character-release.json`) : les autres persos tiennent la leur des notes de
- * mise à jour, ils ne manquent de rien sur le site. Gardé tant qu'aucun des
- * fichiers lus n'a bougé (`disk.stamp()`), comme `monstersIndex`.
+ * liste sans élément. Le récap compte ce qui est DÛ : l'EE ne se compte que
+ * parmi les persos qui en ont un, le Rang PvP que parmi ceux que le PvP admet
+ * (`disk.pvpEligible()`) — les autres ne sont ni faits ni manquants, `done +
+ * missing` y est plus court que `total`. La date de sortie ne manque qu'au
+ * perso qui n'en a d'AUCUNE source : ni posée à la main (le curé), ni dans le
+ * fichier généré, qui porte celles dérivées des notes de mise à jour. Gardé
+ * tant qu'aucun des fichiers lus n'a bougé (`disk.stamp()`), comme
+ * `monstersIndex`.
  */
 export function characterCoverage(
   disk: CharacterCoverageDisk = CHARACTER_COVERAGE_DISK,
@@ -2455,8 +2479,10 @@ export function characterCoverage(
   const gear = disk.gearReco();
   const short = disk.shortNames();
   const releases = disk.releases();
+  const generatedReleases = disk.generatedReleases();
   const ee = disk.ee();
   const eeOwners = disk.eeOwners();
+  const pvpEligible = disk.pvpEligible();
   const said = (text: LocalizedText | undefined): boolean =>
     Object.values(text ?? {}).some((v) => Boolean(v?.trim()));
 
@@ -2466,10 +2492,12 @@ export function characterCoverage(
     sub: string,
     has: (id: string) => boolean,
     among: SheetRosterRow[] = roster,
+    hint?: string,
   ): CoverageField => ({
     key,
     label,
     sub,
+    ...(hint ? { hint } : {}),
     done: among.filter((c) => has(c.id)).length,
     missing: among
       .filter((c) => !has(c.id))
@@ -2490,7 +2518,13 @@ export function characterCoverage(
       ),
       field('tags', 'Tags', 'fiche', (id) => Boolean(curated[id]?.tags?.length)),
       field('rank', 'Rang PvE', 'fiche', (id) => Boolean(curated[id]?.rank)),
-      field('rankPvp', 'Rang PvP', 'fiche', (id) => Boolean(curated[id]?.rankPvp)),
+      field(
+        'rankPvp',
+        'Rang PvP',
+        'fiche',
+        (id) => Boolean(curated[id]?.rankPvp),
+        roster.filter((c) => pvpEligible.has(c.id)),
+      ),
       field('gear', 'Gear reco', 'gear', (id) => Boolean(gear[id]?.length)),
       field(
         'ee',
@@ -2500,8 +2534,13 @@ export function characterCoverage(
         roster.filter((c) => eeOwners.has(c.id)),
       ),
       field('shortName', 'Nom court', 'names', (id) => said(short[id])),
-      field('release', 'Date de sortie à la main', 'extractor/character', (id) =>
-        Boolean(releases[id]),
+      field(
+        'release',
+        'Date de sortie',
+        'extractor/character',
+        (id) => Boolean(releases[id] || generatedReleases[id]),
+        roster,
+        'curée ou dérivée des notes de MAJ',
       ),
       field('videos', 'Vidéos', 'fiche', (id) => Boolean(curated[id]?.videos?.length)),
     ],
