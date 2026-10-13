@@ -12,7 +12,7 @@
 // figer, la note, puis le rapport. Chaque geste écrit et COMMITTE. Rien ne se
 // saisit que la note d'une archive : la page n'est jamais « sale ».
 import { $, esc, getJson, log, post, sections, state } from '../lib.js';
-import { gameText } from '../gear-view.mjs';
+import { effectTile, gameText } from '../gear-view.mjs';
 
 let ov = null; // la vue d'ensemble : `/api/extractor`
 let tg = null; // la cible ouverte : `/api/extractor/target`
@@ -568,21 +568,14 @@ $('ex-mode-go').onclick = () => {
 };
 
 // ------------------------------------------------------ la fiche
-/** La tuile d'un effet : fond noir, l'icône en masque teinté de sa nature (celle des Monstres). */
-function fxTile(icon, isDebuff) {
-  if (!icon) return '<span class="ex-fx none" aria-hidden="true"></span>';
-  const url = esc(
-    `${state.imgBase}/${en.effectSprite}/${encodeURIComponent(icon).replace(/['()]/g, (c) => `%${c.charCodeAt(0).toString(16)}`)}.webp`,
-  );
-  if (icon.includes('Interruption'))
-    return `<span class="ex-fx" aria-hidden="true"><img src="${url}" alt="" loading="lazy" /></span>`;
-  return `<span class="ex-fx ${isDebuff ? 'debuff' : 'buff'}" style="--ex-src: url('${url}')" aria-hidden="true"><i></i><i></i><i></i></span>`;
-}
+const env = () => ({ imgBase: state.imgBase, esc });
+
+/** La tuile d'un effet, celle du site (`effectTile` de `gear-view.mjs`), 22 px sur une chip. */
+const fxTile = (icon, isDebuff) => effectTile(env(), icon, isDebuff, 22);
 
 const chipHtml = (c) =>
   `<span class="chip ex-chip" title="${esc(c.ref)}">${fxTile(c.icon, c.isDebuff)}<span class="ex-chn">${esc(c.name)}</span></span>`;
 
-const env = () => ({ imgBase: state.imgBase, esc });
 /** Une description de skill, sans les sauts de ligne qui la terminent. */
 const skillDesc = (desc) => desc.replace(/(?:\\n|\s)+$/, '');
 

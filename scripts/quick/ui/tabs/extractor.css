@@ -868,47 +868,12 @@
   border-style: dashed;
   background: transparent;
 }
-#tab-extractor .ex-chip.off .ex-fx {
+#tab-extractor .ex-chip.off .pv-fx {
   opacity: 0.5;
 }
 #tab-extractor .ex-chip .badge {
   height: 18px;
   padding: 0 6px;
-}
-/* La tuile d'un effet (celle des Monstres, `.m-fx`) : fond noir, l'icône en
-   masque teinté de sa nature — les teintes de `globals.css`. */
-#tab-extractor .ex-fx {
-  --buff-tint: #4cc2ff;
-  --debuff-tint: #ff5a4e;
-  position: relative;
-  display: inline-block;
-  flex: 0 0 auto;
-  width: 22px;
-  height: 22px;
-  border-radius: 4px;
-  background: #000;
-}
-#tab-extractor .ex-fx.none {
-  border: 1px dashed var(--line);
-  background: transparent;
-}
-#tab-extractor .ex-fx i {
-  position: absolute;
-  inset: 0;
-  background: var(--buff-tint);
-  -webkit-mask: var(--ex-src) center / contain no-repeat;
-  mask: var(--ex-src) center / contain no-repeat;
-  mask-mode: luminance;
-}
-#tab-extractor .ex-fx.debuff i {
-  background: var(--debuff-tint);
-}
-#tab-extractor .ex-fx img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
 }
 
 /* ------------------------------------------------------------ « Versions » */

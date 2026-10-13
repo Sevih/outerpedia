@@ -158,7 +158,7 @@
   border-style: dashed;
   background: transparent;
 }
-#tab-monsters .m-chip.off .m-fx,
+#tab-monsters .m-chip.off .pv-fx,
 #tab-monsters .m-chip.off .m-chn {
   opacity: 0.5;
 }
@@ -190,51 +190,6 @@
 #tab-monsters .m-move.dirty {
   border-color: var(--accent);
   color: var(--content);
-}
-/* La tuile d'un effet, celle du site (`EffectIconTile`) et de `pv.css`
-   (`.pv-fx`) : fond noir, l'icône en masque teinté de sa nature — les teintes
-   de `globals.css`. Elle vit aussi dans le picker d'effets, posé dans `<body>`. */
-#tab-monsters .m-fx,
-.hp-modal .m-fx {
-  --buff-tint: #4cc2ff;
-  --debuff-tint: #ff5a4e;
-  position: relative;
-  display: inline-block;
-  flex: 0 0 auto;
-  width: 22px;
-  height: 22px;
-  border-radius: 4px;
-  background: #000;
-}
-.hp-modal .m-fx {
-  width: 28px;
-  height: 28px;
-}
-#tab-monsters .m-fx.none,
-.hp-modal .m-fx.none {
-  border: 1px dashed var(--line);
-  background: transparent;
-}
-#tab-monsters .m-fx i,
-.hp-modal .m-fx i {
-  position: absolute;
-  inset: 0;
-  background: var(--buff-tint);
-  -webkit-mask: var(--m-src) center / contain no-repeat;
-  mask: var(--m-src) center / contain no-repeat;
-  mask-mode: luminance;
-}
-#tab-monsters .m-fx.debuff i,
-.hp-modal .m-fx.debuff i {
-  background: var(--debuff-tint);
-}
-#tab-monsters .m-fx img,
-.hp-modal .m-fx img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
 }
 
 /* ---------------------------------------------------------------- le picker

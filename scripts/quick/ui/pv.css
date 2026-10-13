@@ -3,8 +3,8 @@
    (`effectTile`, `.pv-fx`). UNE feuille pour toutes les sections qui montrent
    un texte — « Fiche perso » (Pros / Cons, Synergies, la note d'un build de
    Gear reco), Guides, Événements — et pour la tuile d'effet des chips de la
-   fiche et de l'onglet « Effets ». Hors de tout onglet : la tuile vit aussi
-   dans le picker d'effets, posé dans `<body>`. Chargée avant les feuilles des
+   fiche, de « Monstres », d'« Extraction » et de l'onglet « Effets ». Hors de
+   tout onglet : la tuile vit aussi dans le picker d'effets, posé dans `<body>`. Chargée avant les feuilles des
    onglets, qui gardent leur conteneur (`.c-pv`, `.gd-pv`, `.ev-pv`). */
 
 /* Les jetons du site qui manquent à `quick.css`, recopiés de `globals.css` sous

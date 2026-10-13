@@ -206,7 +206,7 @@
       minuteur de « Copier » de `tabs/gamedata.js`, 2 s, qui tire après la
       fermeture d'une fenêtre happy-dom) alors que tous les tests passent —
       antérieur ; un `clearTimeout` à la fermeture ou un garde `typeof
-document` (un lot A). → TRANCHÉ le 13/10 : (1) A41 (la page lit le roster), (2) et (4) A42, (3) A43 (date d'aucune source, PvP éligibles seulement ; Nom court et Tags restent). (1) FAIT le 13/10 (lot A41) ; restent (2) et (4) → A42, (3) → A43.
+document` (un lot A). → TRANCHÉ le 13/10 : (1) A41 (la page lit le roster), (2) et (4) A42, (3) A43 (date d'aucune source, PvP éligibles seulement ; Nom court et Tags restent). (1) FAIT le 13/10 (lot A41) ; (2) et (4) FAITS le 13/10 (lot A42) ; reste (3) → A43.
 - [ ] **« Événements » — contrôles à l'écran (lot F23)** : le banc ne
       clique pas, aucun enregistrement réel n'a été joué, `/api/translate`
       jamais appelé avec des clés, `POST /api/events` jamais appelé (les

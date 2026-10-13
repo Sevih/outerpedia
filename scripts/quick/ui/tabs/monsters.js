@@ -7,7 +7,7 @@
 // versions d'un monstre sont sur sa fiche de la section « Extraction » :
 // l'en-tête y mène.
 import { $, esc, getJson, log, post, sections, state, stateLoaded } from '../lib.js';
-import { gameText } from '../gear-view.mjs';
+import { effectTile, gameText } from '../gear-view.mjs';
 import { heroFilters, openHeroPicker } from '../hero-picker.mjs';
 
 // Les types, dans l'ordre des pastilles du picker : les boss d'abord.
@@ -176,22 +176,9 @@ function bar() {
 }
 
 // ------------------------------------------------------ les cartes du kit
-// Les caractères qu'`encodeURIComponent` laisse et qu'un `url('…')` lirait.
-const fxUrl = (icon) =>
-  `${state.imgBase}/${sheet.sprite}/${encodeURIComponent(icon).replace(/['()]/g, (c) => `%${c.charCodeAt(0).toString(16)}`)}.webp`;
-
-/**
- * La tuile d'un effet, celle de la « Fiche perso » et de l'onglet Effets : fond
- * noir, l'icône en MASQUE teinté de sa nature — sauf les « Interruption », qui
- * gardent leurs couleurs. Décorative : le nom est à côté.
- */
-function fxTile(icon, isDebuff) {
-  if (!icon) return '<span class="m-fx none" aria-hidden="true"></span>';
-  const url = esc(fxUrl(icon));
-  if (icon.includes('Interruption'))
-    return `<span class="m-fx" aria-hidden="true"><img src="${url}" alt="" loading="lazy" /></span>`;
-  return `<span class="m-fx ${isDebuff ? 'debuff' : 'buff'}" style="--m-src: url('${url}')" aria-hidden="true"><i></i><i></i><i></i></span>`;
-}
+/** La tuile d'un effet, celle du site (`effectTile` de `gear-view.mjs`) : 22 px sur une chip, 28 dans le picker. */
+const fxTile = (icon, isDebuff, px = 22) =>
+  effectTile({ imgBase: state.imgBase, esc }, icon, isDebuff, px);
 
 /** Le refus d'une clé, sous sa carte ; vide, la ligne ne s'affiche pas. */
 const err = (key) => `<p class="m-err" data-err="${esc(key)}">${esc(refused.get(key) ?? '')}</p>`;
@@ -351,7 +338,7 @@ function pickEffect(card) {
     roster: options,
     imgBase: state.imgBase,
     rows: true,
-    tile: (o) => `${fxTile(o.icon, o.isDebuff)}<span>${esc(o.name)}</span>`,
+    tile: (o) => `${fxTile(o.icon, o.isDebuff, 28)}<span>${esc(o.name)}</span>`,
     hint: (o) => `${o.name} — ${o.id}`,
     placeholder: 'Chercher un effet…',
     none: 'Aucun effet ne correspond.',

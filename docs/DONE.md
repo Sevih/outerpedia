@@ -7,6 +7,74 @@
 
 ## 2026-10-13
 
+- **quick : la tuile d'effet partagée dans Monstres et Extraction, et les
+  minuteries de Tables du jeu qui ne tirent plus sur une page disparue (lot
+  A42)** — deux restes de la relecture A36 (12/10), tranchés le 13/10.
+  (1) LA TUILE. `tabs/monsters.js` et `tabs/extractor.js` gardaient chacun
+  leur `fxTile` et sa feuille (`.m-fx` dans `monsters.css`, `.ex-fx` dans
+  `extractor.css`, teintes `--buff-tint` / `--debuff-tint` recopiées) : la
+  même tuile que `effectTile(env, icon, isDebuff, px)` de `gear-view.mjs`,
+  écrite trois fois. Les deux `fxTile` sont désormais une ligne sur
+  `effectTile` — 22 px sur une chip, 28 px dans le picker d'effets de
+  Monstres (le côté que posait `.hp-modal .m-fx` vient maintenant du module,
+  comme sur la Fiche perso) — et les deux blocs CSS sont retirés ; n'en reste
+  que l'atténuation d'une chip masquée, sur `.pv-fx`
+  (`.m-chip.off .pv-fx`, `.ex-chip.off .pv-fx`). Le sprite : les deux états
+  servent `images/ui/effect` (`EFFECT_SPRITE` d'`actions.ts`, vérifié sur
+  `/api/monsters/state`), celui qu'`effectTile` porte en dur — `sheet.sprite`
+  et `en.effectSprite` ne sont plus lus par la page, les routes sont
+  intactes (même sort que ceux d'Effets et de la Fiche perso au lot A36).
+  (2) LES MINUTERIES. Le rappel de « Copier » (`tabs/gamedata.js`, 2 s)
+  faisait `$('t-copy')` sur un `document` global qui n'existe plus quand la
+  fenêtre happy-dom d'un test est fermée : d'où le « Errors 1 error —
+  ReferenceError: document is not defined » intermittent. F25 (12/10) avait
+  déjà tenu les deux tests « Copier » en faux temps : la garde côté tests
+  reste telle quelle, ce lot corrige la page. `resetCopy()` éteint la
+  minuterie et rend le libellé ; il est appelé quand le brut change de ligne
+  ou se ferme (`select`) et quand la section est quittée (`canLeave`, qui ne
+  retient jamais : le registre de `lib.js` n'a pas d'autre crochet de
+  sortie). Le rappel, lui, lit `globalThis.document?.getElementById` et ne
+  fait rien sans bouton — le garde écrit dans le lot, un test sur
+  `document.getElementById(…)`, aurait levé la même `ReferenceError`,
+  `document` n'étant plus défini du tout. La minuterie de la frappe
+  (`typing`, 200 ms, qui lance `loadRows`) avait le même défaut — `loadRows`
+  lit `$('t-resolve')`, d'où une « unhandled rejection » : même garde dans
+  son rappel ; elle n'est PAS éteinte à la sortie de la section, une
+  recherche tapée juste avant de changer d'onglet doit aboutir. Seul écart de comportement : « copié » disparaît dès
+  qu'on ouvre une autre ligne, au lieu de finir ses deux secondes sur le brut
+  de la suivante. Tests (`ui-serve.test.ts`) : les tuiles de Monstres et
+  d'Extraction attendues en `.pv-fx` avec leur côté (22 px, 28 dans le
+  picker) ; `monsters` et `extractor` rejoignent la liste des feuilles qui ne
+  recopient ni jeton de teinte ni tuile ; deux tests de Tables du jeu — la
+  croix du brut, une autre ligne et un autre onglet éteignent la minuterie
+  (`vi.getTimerCount()`) et rendent « Copier » ; une minuterie de « Copier »
+  et une frappe qui tombent après `vi.unstubAllGlobals()` ne lèvent rien et
+  ne lancent aucune requête. Rejoués sur le `gamedata.js` de `HEAD` : les
+  deux échouent, le second sur la `ReferenceError` et l'« unhandled
+  rejection » d'origine. Vérifié : `pnpm typecheck` (« tsc --noEmit && tsc
+  --noEmit -p datagen/tsconfig.json && tsc --noEmit -p
+  scripts/tsconfig.json », code 0), `pnpm lint` (« eslint », code 0),
+  `pnpm test` TROIS fois (« Test Files 223 passed (223) / Tests 3795 passed
+  (3795) » chaque fois, aucune ligne « Errors »),
+  `NODE_ENV=development pnpm exec vitest run scripts/quick` (« Test Files 8
+  passed (8) / Tests 1112 passed (1112) »). Banc sur un quick ISOLÉ (:4796,
+  clés vidées, arrêté ensuite), avant / après comparés par `cmp` :
+  `--tabs monsters --hash monsters/4014005` (Abomination Hunter Belial, sept
+  chips), `--tabs extractor --hash extractor/effect`,
+  `--tabs extractor --hash extractor/character/2000055` et
+  `--tabs character --hash character/2000055/pros-cons` — les quatre PNG
+  identiques au bit près, ainsi que Monstres en 1440×2400 et la fiche
+  d'Extraction en 1440×3600 (les chips des skills et « Statuts référencés »),
+  rejouées sur les fichiers de `HEAD`. `STYLE.md` (§ Monstres, § Extraction,
+  § aperçu, « Copier » de Tables du jeu), l'en-tête de `pv.css` et le
+  commentaire d'`effectTile` disent la tuile partagée. LAISSÉ : le picker
+  d'effets de Monstres (28 px) n'est pas photographié — il ne s'ouvre qu'au
+  clic, que le banc ne fait pas ; son côté est tenu par le test.
+  `extractor/effect` n'a aucune entité à revoir sur ce poste : la capture
+  n'y montre pas de tuile, c'est la fiche d'un perso qui la porte. Les champs
+  `sprite` / `effectSprite` restent servis par `actions.ts`, sans lecteur
+  côté page : à retirer dans un lot serveur si on veut.
+
 - **quick : la vignette de perso complète (rareté, élément, classe) dans
   Bannières, Journal du site, Tableau de bord et Noms (lot A41)** — suite de la
   relecture B45 (12/10), tranchée par Sevih le 13/10 : ces quatre sections ne

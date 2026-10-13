@@ -268,7 +268,14 @@ function renderRaw() {
     .join('');
 }
 
+/** « Copier » reprend son libellé, minuterie éteinte : le brut change de ligne, se ferme, ou la section est quittée. */
+function resetCopy() {
+  clearTimeout(copyTimer);
+  $('t-copy').textContent = COPY;
+}
+
 function select(i) {
+  resetCopy();
   selected = i;
   for (const tr of $('t-rows').querySelectorAll('tr[data-i]'))
     tr.setAttribute('aria-selected', String(Number(tr.dataset.i) === selected));
@@ -309,7 +316,11 @@ $('t-copy').onclick = async () => {
   }
   $('t-copy').textContent = said;
   clearTimeout(copyTimer);
-  copyTimer = setTimeout(() => ($('t-copy').textContent = COPY), 2000);
+  copyTimer = setTimeout(() => {
+    // La page a pu disparaître entre-temps (une fenêtre fermée) : plus de bouton à reposer.
+    const btn = globalThis.document?.getElementById('t-copy');
+    if (btn) btn.textContent = COPY;
+  }, 2000);
 };
 
 // ------------------------------------------------------ la lecture
@@ -369,7 +380,10 @@ $('t-q').oninput = () => {
   filter.q = $('t-q').value;
   filter.page = 1;
   clearTimeout(typing);
-  typing = setTimeout(loadRows, TYPING_DELAY);
+  typing = setTimeout(() => {
+    // Même garde que « Copier » : sans page, plus de recherche à lancer.
+    if (globalThis.document?.getElementById('t-q')) loadRows();
+  }, TYPING_DELAY);
 };
 $('t-col').onchange = () => {
   filter.col = $('t-col').value;
@@ -454,5 +468,10 @@ sections.register('gamedata', {
         $('t-none').textContent = 'Tables du jeu illisibles.';
         log([`Tables du jeu illisibles : ${e}`], false);
       });
+  },
+  // Rien ne retient ici : la section quittée éteint seulement la minuterie de « Copier ».
+  canLeave: () => {
+    resetCopy();
+    return true;
   },
 });

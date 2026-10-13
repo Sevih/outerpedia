@@ -239,14 +239,14 @@ describe('assemblePage — la coquille et ses onglets', () => {
     expect(pv).toMatch(/\.pv-seg \{[^}]*gap: 2px;/);
     expect(pv).toMatch(/\.pv-seg\.wide \{\s*gap: 4px;/);
     // Les onglets n'en gardent que leur conteneur : ni segment, ni classe de couleur, ni jeton.
-    for (const tab of ['character', 'guides', 'events', 'gear']) {
+    for (const tab of ['character', 'guides', 'events', 'gear', 'monsters', 'extractor']) {
       const css = readFileSync(resolve(UI, 'tabs', `${tab}.css`), 'utf8').replace(
         /\/\*[\s\S]*?\*\//g,
         '',
       );
       expect(css, tab).not.toMatch(/\.pv-(seg|u|ico|it|unknown)\b|\.text-[a-z]/);
       expect(css, tab).not.toMatch(/--(buff|debuff|stat|highlight|equipment)(-tint|-bg)?:/);
-      expect(css, tab).not.toMatch(/\.(c-fx|x-ico)\b/);
+      expect(css, tab).not.toMatch(/\.(c-fx|x-ico|m-fx|ex-fx)\b/);
     }
   });
 
@@ -6759,12 +6759,12 @@ describe('Monstres — la page, sur le vrai markup', () => {
     ]);
     expect(menu.getAttribute('aria-label')).toBe('Carte de Barrier');
     expect(page.chip('113651', 'buff_502').title).toBe('buff_502 — porté par 113651');
-    // La tuile du site : l'icône en masque teinté de sa nature ; sans icône, un cadre vide.
-    expect(page.chip('113652', 'buff_503').querySelector('.m-fx')?.className).toBe('m-fx debuff');
-    expect(page.chip('113652', 'buff_503').querySelector('.m-fx')?.getAttribute('style')).toContain(
-      "url('https://img.test/images/ui/effect/IG_Buff_Stun.webp')",
+    // La tuile du site (`effectTile`), 22 px : l'icône en masque teinté de sa nature ; sans icône, un cadre vide.
+    expect(page.chip('113652', 'buff_503').querySelector('.pv-fx')?.className).toBe('pv-fx debuff');
+    expect(page.chip('113652', 'buff_503').querySelector('.pv-fx')?.getAttribute('style')).toBe(
+      "width:22px;height:22px;--x-src:url('https://img.test/images/ui/effect/IG_Buff_Stun.webp')",
     );
-    expect(page.chip('113652', 'buff_437').querySelector('.m-fx')?.className).toBe('m-fx none');
+    expect(page.chip('113652', 'buff_437').querySelector('.pv-fx')?.className).toBe('pv-fx none');
     expect(cards.map((c) => c.querySelector('[data-act="add-chip"]')?.textContent)).toEqual(
       Array(3).fill('＋ effet'),
     );
@@ -6815,7 +6815,11 @@ describe('Monstres — la page, sur le vrai markup', () => {
       'Increased Attack',
     ]);
     expect(page.all('#hp-filters .hp-tog')).toEqual([]);
-    expect(page.all('#hp-results .m-fx')).toHaveLength(4);
+    // La même tuile, à 28 px dans le picker.
+    expect(page.all('#hp-results .pv-fx')).toHaveLength(4);
+    expect(page.all('#hp-results .pv-fx')[0].getAttribute('style')).toMatch(
+      /^width:28px;height:28px;--x-src:url\('https:\/\/img\.test\/images\/ui\/effect\//,
+    );
 
     page.tile('7').click();
     expect(page.el('hp-modal').hidden).toBe(true);
@@ -10723,6 +10727,50 @@ describe('Tables du jeu — la page, sur le vrai markup', () => {
     expect(page.el('t-copy').textContent).toBe('impossible');
     await vi.advanceTimersByTimeAsync(2000);
     expect(page.el('t-copy').textContent).toBe('Copier');
+  });
+
+  it('« Copier » : fermer le brut ou quitter la section éteint sa minuterie et rend le libellé', async () => {
+    const page = await gamedata({ hash: '#gamedata/RecruitGroupTemplet' });
+    vi.useFakeTimers();
+    const idle = vi.getTimerCount();
+    const copy = async () => {
+      page.all('#t-rows tr[data-i="0"] td')[0].click();
+      page.el('t-copy').click();
+      await vi.advanceTimersByTimeAsync(10);
+      expect(page.el('t-copy').textContent).toBe('copié');
+      expect(vi.getTimerCount()).toBe(idle + 1);
+    };
+    // La croix du brut.
+    await copy();
+    page.el('t-raw-close').click();
+    expect(page.el('t-copy').textContent).toBe('Copier');
+    expect(vi.getTimerCount()).toBe(idle);
+    // Une autre ligne : le « copié » de la précédente ne vaut plus.
+    await copy();
+    page.all('#t-rows tr[data-i="1"] td')[0].click();
+    expect(page.el('t-copy').textContent).toBe('Copier');
+    expect(vi.getTimerCount()).toBe(idle);
+    // Un autre onglet : la section ne retient pas, et ne laisse rien tourner.
+    await copy();
+    page.all('#tabs [data-tab="ranks"]')[0].click();
+    expect(page.el('tab-gamedata').hidden).toBe(true);
+    expect(page.el('t-copy').textContent).toBe('Copier');
+    expect(vi.getTimerCount()).toBe(idle);
+  });
+
+  it('une minuterie qui tire sur une page disparue (fenêtre fermée) ne lève rien : « Copier », la frappe', async () => {
+    const page = await gamedata({ hash: '#gamedata/RecruitGroupTemplet' });
+    page.all('#t-rows tr[data-i="0"] td')[0].click();
+    vi.useFakeTimers();
+    page.el('t-copy').click();
+    await vi.advanceTimersByTimeAsync(10);
+    page.type(page.el('t-q'), 'pickup');
+    const asked = page.queries.length;
+    // La fin d'un test : `document` n'est plus un global quand les rappels tombent.
+    vi.unstubAllGlobals();
+    await vi.advanceTimersByTimeAsync(2000);
+    expect(page.queries).toHaveLength(asked);
+    expect(page.el('t-copy').textContent).toBe('copié');
   });
 
   it('`&row=<n>` dans le hash montre la ligne brute de la n-ième ligne (le banc ne clique pas)', async () => {
@@ -16144,9 +16192,10 @@ describe('Extraction — la page, sur le vrai markup', () => {
         chips: ['Burn'],
       },
     ]);
-    // La tuile d'une chip : l'icône en masque, sous `imgBase`.
-    expect(page.all('#ex-sheet .ex-skill .ex-fx')[0].getAttribute('style')).toBe(
-      "--ex-src: url('https://img.test/images/ui/effect/IC_Burn.webp')",
+    // La tuile d'une chip, celle du site (`effectTile`), 22 px : l'icône en masque, sous `imgBase`.
+    expect(page.all('#ex-sheet .ex-skill .pv-fx')[0].className).toBe('pv-fx debuff');
+    expect(page.all('#ex-sheet .ex-skill .pv-fx')[0].getAttribute('style')).toBe(
+      "width:22px;height:22px;--x-src:url('https://img.test/images/ui/effect/IC_Burn.webp')",
     );
     // Un statut référencé mène à sa fiche dans Effets, et dit s'il est caché du live.
     const fx = page.all('#ex-sheet .ex-fxlist .ex-chip')[0];

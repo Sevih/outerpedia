@@ -300,8 +300,9 @@ const titleOf = (env, name, desc) =>
  * arrondi, l'icône en MASQUE de luminance teinté de sa nature, sur trois
  * couches (`TintedIcon`) — sauf les « Interruption », qui gardent leurs
  * couleurs. Sans icône, un cadre vide. Décorative : le nom est à côté. UNE
- * construction pour l'aperçu des textes, les chips de la « Fiche perso » et
- * l'onglet « Effets » ; les règles (`.pv-fx`) et les teintes sont dans `pv.css`.
+ * construction pour l'aperçu des textes, les chips de la « Fiche perso », de
+ * « Monstres » et d'« Extraction », et l'onglet « Effets » ; les règles
+ * (`.pv-fx`) et les teintes sont dans `pv.css`.
  *
  * @param {ViewEnv} env
  * @param {string | undefined} icon Son sprite (`images/ui/effect`).

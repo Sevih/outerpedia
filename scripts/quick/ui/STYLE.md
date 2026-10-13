@@ -476,7 +476,7 @@ Lecture seule : ni savebar ni `canLeave`, que des GET. Croquis du rendu :
         une ligne se clique (ou Entrée) : fond `surface-overlay`, et sa LIGNE BRUTE s'ouvre
      aside.t-raw  card-head : « Ligne brute » · « 32 champs » … [Copier] ✕
         dl.t-kv : une paire par champ de la ligne, clé atténuée | valeur entière — toutes les colonnes, toutes les langues, rien de résolu
-        « Copier » : le JSON de la ligne ; le bouton dit « copié » deux secondes, « impossible » si le navigateur refuse
+        « Copier » : le JSON de la ligne ; le bouton dit « copié » deux secondes, « impossible » si le navigateur refuse — il reprend son libellé dès que le brut change de ligne, se ferme, ou que la section est quittée
    .empty « Aucune ligne ne correspond. »
 le hash : `#gamedata/<Table>` ouvre l'onglet sur la table (la page l'écrit au choix : recharger y revient) ; un lien croisé est `#gamedata/<Cible>?col=ID&exact=1&q=<valeur>` — égalité stricte, `ID=101` ne ramène pas `1011` ; `&row=<n>` y montre en plus la ligne brute de la n-ième ligne, à partir de 0 (le banc ne clique pas)
 ```
@@ -670,8 +670,9 @@ Propres à l'onglet, dans `tabs/extractor.css` :
 `.ex-pills`, `.ex-pill`, `.ex-passives`, `.ex-passive`, `.ex-passive-head`,
 `.ex-pico`, `.ex-variant`, `.ex-variant-head`, `.ex-pieces`, `.ex-piece`,
 `.ex-cols`, `.ex-skill`, `.ex-skico`, `.ex-skid`, `.ex-body`, `.ex-desc`,
-`.ex-chips`, `.ex-fxlist`, `.ex-chip`, `.ex-chn`, `.ex-fx` (la tuile
-d'effet des Monstres, recopiée) ; et pour le versionnage : `.ex-order`,
+`.ex-chips`, `.ex-fxlist`, `.ex-chip`, `.ex-chn` — la tuile d'effet d'une
+chip est celle de `pv.css` (`effectTile`, `.pv-fx`, 22 px), la feuille n'en
+garde rien ; et pour le versionnage : `.ex-order`,
 `.ex-versions`, `.ex-ver-head`, `.ex-archives`, `.ex-pinby`,
 `.ex-fplan-body`, `.ex-fgroup`, `.ex-fgroup-head`, `.ex-freport`.
 
@@ -1105,7 +1106,7 @@ couleur (`text-buff`, `text-item-legendary`, `text-earth`…), les segments
 et Événements, qui n'en gardent que leur conteneur.
 `effectTile(env, icon, isDebuff, px)` est aussi la tuile des chips d'effets
 de la fiche (22 px, 28
-dans le picker) et de l'onglet Effets (28 et 48 px) : le module pose le côté
+dans le picker), de Monstres (22 et 28 px), d'Extraction (22 px) et de l'onglet Effets (28 et 48 px) : le module pose le côté
 quand ce n'est pas les 18 px d'un texte. « à retraduire » : l'anglais a bougé depuis le chargement (ou
 depuis le dernier « Traduire ») et des traductions sont en place. « Traduire »
 envoie les textes anglais du sous-onglet à `POST /api/translate` et ÉCRASE les
@@ -1334,7 +1335,7 @@ le picker (le picker partagé en `rows`, élargi à 1040 px, deux colonnes) : «
   .card   card-head : icône du skill 36 px · nom (« (sans nom) » pour un skill technique) · id · type (chasse fixe) · badge off « partagé par N monstres » (`title` : jusqu'à cinq noms) · badge edit « modifié » · badge ko « refusé »
      .m-desc   la description telle que le jeu l'écrit, en anglais (`gameText` de `gear-view.mjs`)
      .m-chips  les chips d'effets, puis [＋ effet] (.btn.ghost.sm)
-        une chip du kit = la `.chip` de la charte : tuile de l'effet 22 px (.m-fx) · nom · [badge edit « déplacée »] · son MENU · ✕ (`title` = son buff et le skill qui le porte)
+        une chip du kit = la `.chip` de la charte : tuile de l'effet 22 px (.pv-fx de `pv.css`) · nom · [badge edit « déplacée »] · son MENU · ✕ (`title` = son buff et le skill qui le porte)
         le menu (.m-move, un `select` à la hauteur de la chip) : « sur la carte… » puis les cartes du kit (« nom · type ») ; il pose la chip sur la carte choisie (`chipOwner`) — elle quitte sa carte et apparaît sur la cible, « déplacée » ; son menu propose alors « par défaut », qui la rend aux règles
         ✕ la MASQUE sur cette carte (`chipHide`) : pointillés, atténuée, nom barré, sans menu, et [rétablir] à la place de ✕
         un masquage resté sur une carte alors que la chip est montrée ailleurs : la chip y paraît masquée, [rétablir] seulement
@@ -1383,9 +1384,9 @@ site n'a pas (un monstre hors de ses pages) laisse son cadre vide. Propres à
 l'onglet, dans `tabs/monsters.css` : `.m-char`, `.m-who`, `.m-face`, `.m-id`,
 `.m-traits`, `.m-mono`, `.m-guides`, `.m-link`, `.m-cols`, `.m-wide`,
 `.m-card`, `.m-body`, `.m-err`, `.m-skico`, `.m-skid`, `.m-desc`, `.m-chips`,
-`.m-chip`, `.m-chn`, `.m-move`, et `.m-fx`, la tuile d'effet de `pv.css`
-(`.pv-fx`), recopiée — elle vaut aussi sous `.hp-modal`, pour le picker
-d'effets ; pour le picker de monstres, sous `.hp-modal` : `.m-pk`, `.m-pico`,
+`.m-chip`, `.m-chn`, `.m-move` — la tuile d'effet est celle de `pv.css`
+(`effectTile`, `.pv-fx` : 22 px sur une chip, 28 dans le picker d'effets), la
+feuille n'en garde rien ; pour le picker de monstres, sous `.hp-modal` : `.m-pk`, `.m-pico`,
 `.m-pn`, `.m-pname`, `.m-pwhere`, et l'élargissement du panneau
 (`:has(.m-pk)`).
 
