@@ -185,18 +185,18 @@
       ligne retouchée est une ligne nouvelle, on garde. (3) A45 — FAIT
       (A49) : l'en-tête de la fiche monstre dit « Autres », comme le select
       de l'Extraction et les lignes de l'admin.
-      (4) A40 — `/api/extractor` lance une revue monster non mémoïsée
-      (0,2 s) pour « +n hors site » ; à mémoïser sur l'empreinte comme
-      `memoizedBuckets`. (5) A39 — le dry-run émet `quick:changed` sans rien
-      écrire et « Pousser » relance les pastilles (une relecture de trop) ;
-      pas de pastille « Patch » pour un patch en attente (bloc `game`, hors
-      inbox). (6) A41 — `tabs/character.js` garde sa propre lecture du
-      roster, `heroRoster()` de `lib.js` pourrait servir les deux. (7) A42 —
+      (4) A40 — FAIT (A50) : le « +n hors site » sort du mémo de l'inbox
+      (`offSiteOf`), plus aucune revue à empreinte égale. (5) A39 — FAIT
+      (A50) : le dry-run n'émet plus `quick:changed`, « Pousser » ne relance
+      plus les pastilles ; RESTE : pas de pastille « Patch » pour un patch
+      en attente (bloc `game`, hors inbox). (6) A41 — FAIT (A50) : la Fiche
+      perso lit le roster de la page (`readHeroRoster()` de `lib.js`), une
+      seule requête. (7) A42 —
       FAIT (A49) : `sprite` / `effectSprite` retirés des états de Monstres
       et d'Extraction ; restent servis sans lecteur ceux d'Effets et du kit
       de la Fiche perso.
       (8) A44 — FAIT (A49) : un guide inconnu au chargement ouvre la vue
-      d'ensemble. → reste le LOT A50 (4, 5, 6), rédigé le 13/10.
+      d'ensemble.
 - [ ] **« Événements » — contrôles à l'écran (lot F23)** : le banc ne
       clique pas, aucun enregistrement réel n'a été joué, `/api/translate`
       jamais appelé avec des clés, `POST /api/events` jamais appelé (les

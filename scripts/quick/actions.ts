@@ -7254,6 +7254,11 @@ export interface ExtractorDeps {
   targets: () => Promise<ExtractorTargetInfo[]>;
   /** `bucketsOf` de l'admin : mémoïsé, tolérant (zéro partout sans extraction). */
   bucketsOf: (id: string) => Promise<DiffBuckets>;
+  /**
+   * `offSiteOf` de l'admin : les entités d'une cible hors du périmètre du site,
+   * du même mémo que `bucketsOf` (aucune revue de plus), zéro sans extraction.
+   */
+  offSiteOf: (id: string) => Promise<number>;
   /** `reviewTarget` : le committé contre l'extraction fraîche. */
   review: (id: string) => Promise<TargetReview>;
   /** `reviewEntities` : le diff aplati en entités classées. */
@@ -7406,6 +7411,7 @@ export const EXTRACTOR_DEPS: ExtractorDeps = {
     });
   },
   bucketsOf: async (id) => (await import('@/lib/admin/admin-inbox')).bucketsOf(id),
+  offSiteOf: async (id) => (await import('@/lib/admin/admin-inbox')).offSiteOf(id),
   review: async (id) => (await reviewEngine()).reviewTarget(id),
   entities: async (diff) => (await reviewEngine()).reviewEntities(diff),
   actionable: async (id, diff) =>
@@ -7617,24 +7623,12 @@ async function splitBySite(
 }
 
 /**
- * Les monstres nouveaux, modifiés ou retirés que le site ne sert pas : ce que
- * le diff complet porte en plus des comptes de la ligne. Tolérant comme
- * `bucketsOf` — une extraction qui ne se lit pas rend zéro.
- */
-async function offSiteCount(deps: ExtractorDeps): Promise<number> {
-  try {
-    const { off } = await splitBySite('monster', (await deps.review('monster')).diff, deps);
-    return off.added.length + off.changed.length + off.removed.length;
-  } catch {
-    return 0;
-  }
-}
-
-/**
  * La vue d'ensemble : les cibles, chacune avec ses cinq comptes (ceux de
  * l'inbox — les monstres au périmètre du site), son fichier et le nombre
  * d'entités committées. La ligne des monstres dit de plus ce que le diff
  * complet porte HORS du site (`offSite`) : ses comptes restent ceux du site.
+ * Les uns et l'autre sortent du mémo de l'inbox (`bucketsOf`, `offSiteOf`) :
+ * la vue d'ensemble ne lance aucune revue elle-même, et rien à empreinte égale.
  * Sans tables du jeu sur le poste, les comptes sont à zéro et `tables` le dit
  * avec sa raison : rien ne se lit.
  */
@@ -7649,7 +7643,7 @@ export async function extractorOverview(deps: ExtractorDeps = EXTRACTOR_DEPS) {
       label: t.label,
       file: t.file,
       site: t.id === 'monster',
-      ...(t.id === 'monster' ? { offSite: tables ? await offSiteCount(deps) : 0 } : {}),
+      ...(t.id === 'monster' ? { offSite: tables ? await deps.offSiteOf(t.id) : 0 } : {}),
       ...(t.readOnly ? { readOnly: true as const } : {}),
       sheet: isSheetTarget(t.id),
       committed: Object.keys(deps.committed(t)).length,

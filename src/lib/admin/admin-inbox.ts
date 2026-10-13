@@ -14,7 +14,12 @@ import { cache } from 'react';
 import { readdirSync, readFileSync, statSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { listTableNames, tablePath } from '@datagen/lib/tables';
-import { reviewAll, reviewBuckets, type DiffBuckets } from '@/lib/admin/review-store';
+import {
+  reviewAll,
+  reviewBuckets,
+  type DiffBuckets,
+  type TargetReview,
+} from '@/lib/admin/review-store';
 import { actionableDiff } from '@/lib/admin/monster-review';
 import { collectTagOccurrences } from '@/lib/admin/tag-control';
 
@@ -135,11 +140,21 @@ function inputsStamp(): { stamp: string; newest: number } {
  */
 const ENGINE_STAMP_TTL_MS = 2000;
 
-let bucketsMemo: { stamp: string; buckets: Map<string, DiffBuckets> } | undefined;
+/** Ce qu'une revue de tout le registre laisse : les comptes du site, et ce qu'il écarte. */
+interface ReviewCounts {
+  buckets: Map<string, DiffBuckets>;
+  offSite: Map<string, number>;
+}
+
+let countsMemo: ({ stamp: string } & ReviewCounts) | undefined;
+
+/** Le nombre d'entités qu'un diff porte : nouvelles, modifiées, retirées. */
+const diffSize = (d: TargetReview['diff']): number =>
+  d.added.length + d.changed.length + d.removed.length;
 
 /**
  * Diff « jeu ↔ site » par entité, MÉMOÏSÉ AU MODULE sur l'empreinte de ses
- * entrées : même empreinte, même `Map` (en LECTURE SEULE) ; un fichier qui bouge
+ * entrées : même empreinte, mêmes `Map` (en LECTURE SEULE) ; un fichier qui bouge
  * — promotion, build, curé édité — et on recalcule. Pas de TTL : l'empreinte
  * est le seul signal juste.
  *
@@ -156,23 +171,34 @@ let bucketsMemo: { stamp: string; buckets: Map<string, DiffBuckets> } | undefine
  * intègre du bruit d'extraction que rien ne peut traiter. Tolérant à l'échec —
  * une extraction cassée ne doit pas faire tomber la coquille admin.
  *
+ * Ce que le périmètre ÉCARTE est compté de la même revue (`offSite`, le
+ * « +n hors site » de quick) : la taille du diff complet moins celle du diff
+ * gardé. Rien pour une cible que rien ne filtre — `actionableDiff` rend alors
+ * le diff lui-même, comme quand le périmètre ne se calcule pas.
+ *
  * `reviewAll` couvre tout le registre, la cible en lecture « Skills de
  * monstres » comprise : ses comptes sont ici pour la vue d'ensemble de quick,
  * mais l'inbox ne la liste pas — elle parcourt `EXTRACTOR_ENTITIES`.
  */
-function memoizedBuckets(): Map<string, DiffBuckets> {
+function memoizedCounts(): ReviewCounts {
   const { stamp, newest } = inputsStamp();
-  if (bucketsMemo?.stamp === stamp) return bucketsMemo.buckets;
+  if (countsMemo?.stamp === stamp) return countsMemo;
   const settled = Date.now() - newest >= ENGINE_STAMP_TTL_MS;
-  const buckets = new Map<string, DiffBuckets>();
+  const counts: ReviewCounts = { buckets: new Map(), offSite: new Map() };
   try {
-    for (const r of reviewAll()) buckets.set(r.id, reviewBuckets(actionableDiff(r.id, r.diff)));
-    bucketsMemo = settled ? { stamp, buckets } : undefined;
+    for (const r of reviewAll()) {
+      const site = actionableDiff(r.id, r.diff);
+      counts.buckets.set(r.id, reviewBuckets(site));
+      if (site !== r.diff) counts.offSite.set(r.id, diffSize(r.diff) - diffSize(site));
+    }
+    countsMemo = settled ? { stamp, ...counts } : undefined;
   } catch {
     /* extraction indisponible */
   }
-  return buckets;
+  return counts;
 }
+
+const memoizedBuckets = (): Map<string, DiffBuckets> => memoizedCounts().buckets;
 
 /**
  * Le même, MÉMOÏSÉ EN PLUS À LA REQUÊTE dans Next (`cache()`) : le layout
@@ -182,6 +208,13 @@ export const entityBuckets = cache(memoizedBuckets);
 
 /** Buckets d'une entité (jamais undefined — tout à zéro si inconnue). */
 export const bucketsOf = (id: string): DiffBuckets => entityBuckets().get(id) ?? EMPTY;
+
+/**
+ * Les entités d'une cible que le diff complet porte HORS du périmètre du site
+ * (zéro pour une cible sans périmètre, ou sans extraction). Du même mémo que
+ * `bucketsOf` : à empreinte égale, aucune revue de plus.
+ */
+export const offSiteOf = (id: string): number => memoizedCounts().offSite.get(id) ?? 0;
 
 /**
  * Total « à traiter » d'un bucket : le typo (cosmétique) et le mineur (texte

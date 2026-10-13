@@ -56,8 +56,8 @@ lot qui la porte ajoute sa ligne à `ADMIN_TO_QUICK` d'`actions.ts`. Depuis
 le lot A39 cette inbox nourrit aussi le MENU : une pastille sur chaque
 section où il y a à faire, et sur son groupe la somme (`GET /api/badges`,
 `badgesState` — l'inbox comptée par section de quick, relue au chargement,
-en venant sur le Tableau de bord et trois secondes après une écriture ou un
-geste de Patch ; ce que l'admin garde, tags de plusieurs persos et assets,
+en venant sur le Tableau de bord et trois secondes après un commit ou un
+geste de Patch qui écrit — ni « Pousser » ni le dry-run ; ce que l'admin garde, tags de plusieurs persos et assets,
 n'a pas de pastille). Portage
 PARTIEL de la home admin : sa `PatchCard` est l'étape 21, sa couverture
 éditoriale suivra les éditeurs ; l'admin garde donc sa home), Patch (= la

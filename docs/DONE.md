@@ -7,6 +7,112 @@
 
 ## 2026-10-13
 
+- **quick, suites de la relecture A38 → A47 (2/2) : le « +n hors site »
+  sort du mémo de l'inbox, les pastilles ne se relisent qu'après une
+  écriture, un seul lecteur du roster (lot A50)** — trois restes de la
+  relecture du 13/10, un commit.
+  (1) LE HORS-SITE. Depuis A40, `GET /api/extractor` lançait à chaque appel
+  une revue des monstres, non mémoïsée, pour compter ce que le périmètre du
+  site écarte. Le compte sort maintenant de la revue que l'inbox fait déjà :
+  dans `src/lib/admin/admin-inbox.ts`, `memoizedBuckets` devient
+  `memoizedCounts`, qui garde sous la même empreinte (`inputsStamp`) les
+  buckets ET `offSite` — par cible, la taille du diff complet moins celle du
+  diff gardé par `actionableDiff`, posée seulement quand le périmètre filtre
+  (il rend le diff lui-même pour une autre cible, ou quand il ne se calcule
+  pas : zéro). `offSiteOf(id)` le lit, à côté de `bucketsOf` ; mêmes règles
+  que les buckets (un calcul à moins de 2 s d'une écriture ou un échec ne
+  sont pas retenus). `scripts/quick/actions.ts` : `ExtractorDeps` gagne
+  `offSiteOf`, `extractorOverview` l'appelle, `offSiteCount` disparaît —
+  la vue d'ensemble ne lance plus aucune revue elle-même. `splitBySite`
+  reste, pour la cible ouverte (`extractorTarget`, non touchée).
+  (2) LES PASTILLES. `post()` de `lib.js` ne relance la lecture que si le
+  geste a committé. LE SIGNAL, lu dans ce que les réponses portent : aucune
+  n'a de `committed`, toutes celles qui écrivent ont `git`, l'état d'après
+  (`withGit`, `server.ts`) — le plus simple est donc le compte de
+  « Pousser » qui MONTE par rapport à celui que l'en-tête montrait avant le
+  geste (`lastGit`, pris à l'entrée de `post()`). Un push le fait descendre,
+  un push refusé ou un enregistrement sans rien à committer le laissent, un
+  lot à moitié refusé qui a committé le reste le monte (la relecture ne
+  dépend plus de `ok`). Sans amont (`ahead` nul) ou avant le premier état,
+  rien à comparer : la réussite du geste en tient lieu, la règle d'avant.
+  « Pousser » ne relance donc pas, sans cas particulier ; `quick:saved`,
+  que le tableau de bord écoute, n'a pas bougé. `tabs/patch.js` : les
+  gestes qui écrivent portent `writes` (rafraîchir, promouvoir, committer),
+  et `run()` n'émet `quick:changed` que pour eux — plus pour le dry-run.
+  (3) LE ROSTER. `lib.js` : la lecture partagée s'appelle `readHeroRoster()`
+  (la promesse mémoïsée d'A41, qui REJETTE avec sa raison au lieu de rendre
+  une `Map` vide, et n'est pas retenue) ; `heroRoster()` en est l'enveloppe
+  silencieuse, inchangée pour Bannières, le Journal, le Tableau de bord et
+  Noms (la même `Map` à chaque appel). `tabs/character.js` lit par
+  `readHeroRoster()` et en tire ses lignes (`[...map.values()]`, l'ordre du
+  serveur) : la `Map` gardait déjà la ligne entière de `sheetRosterRow`,
+  rien à élargir. La Fiche garde ainsi sa ligne au journal quand le roster
+  ne se lit pas (« Fiche perso illisible : … », le chemin, le code, le mot
+  du serveur) — c'est pour elle que la lecture rejette. Une requête par
+  page : la Fiche la fait à son `init`, les vignettes la retrouvent.
+  TESTS. `admin-inbox.test.ts`, quatre cas : cinq monstres dont trois hors
+  du site → `offSiteOf('monster')` 3 et les buckets du diff gardé, UNE
+  revue, puis onze `entityBuckets()` et un second `offSiteOf` sans revue de
+  plus (« aucune revue sur un second appel à empreinte égale ») ; un curé
+  réécrit → une revue, le nouveau compte ; tout au site, ou le périmètre
+  qui ne se calcule pas → zéro ; un moteur qui lève → zéro, pas retenu.
+  `actions.test.ts` : le faux `offSiteOf`, et la vue d'ensemble appelée
+  deux fois sans un seul `review` (l'assertion « seule `review monster` »
+  est remplacée) ; une revue qui lèverait n'est pas lancée.
+  `ui-serve.test.ts`, Pastilles (deux tests réécrits en quatre) : un
+  `post()` dont le compte monte relit à 3 s, pas avant, une fois — rejoué
+  sans que le compte monte, jamais ; compte inchangé, réponse sans `git` :
+  jamais ; échec dont le compte monte : relu ; sans amont : la réussite ;
+  « Pousser » réussi (1 → 0) ou refusé : aucune relecture en 60 s ; le
+  dry-run n'émet rien et ne relit pas, « Promouvoir » émet et relit à 3 s,
+  deux rafraîchissements rapprochés et un dry-run entre eux font UNE
+  relecture ; le commit des données (annoncé par Patch et vu par `post()`)
+  relit une fois à 3 s. Fiche perso, deux tests, le harnais chargeant aussi
+  `tabs/banners.js` : ouverte sur Bannières, puis la Fiche, puis retour,
+  UNE lecture du roster — la vignette de Bannières complète, le picker dans
+  l'ordre servi ; roster en 500 : la ligne au journal avec sa raison, le
+  picker éteint, et Bannières qui redemande (deuxième lecture) sans un mot
+  de plus. Quatre mutations à la main font chacune tomber leur test : la
+  Fiche relisant elle-même, `run()` annonçant tout, `post()` relançant sur
+  `ok`, le mémo ignoré.
+  VÉRIFICATION. `pnpm typecheck` (dernière ligne
+  `$ tsc --noEmit && tsc --noEmit -p datagen/tsconfig.json && tsc --noEmit -p scripts/tsconfig.json`,
+  code 0), `pnpm lint` (« $ eslint », code 0), `pnpm test` (« Test Files 223
+  passed (223) · Tests 3840 passed (3840) »),
+  `NODE_ENV=development pnpm exec vitest run scripts/quick src/lib/admin`
+  (« Test Files 62 passed (62) · Tests 1758 passed (1758) »). REJEU CHIFFRÉ
+  (tsx, disque réel, `EXTRACTOR_DEPS` avec `review` compté) : trois
+  `extractorOverview()` de suite — 1 375 ms, puis 87 ms et 83 ms, zéro revue
+  lancée par la vue, `offSite: 3` ; le même rejeu sur le code d'avant :
+  1 494 ms, 230 ms, 225 ms, une revue par appel. Contre-épreuve : une revue
+  monster directe (139 ms) donne diff complet 3, site 0, hors site 3. Sur
+  la route : `GET /api/extractor` 1,37 s puis 0,09 s (avant : 1,50 s puis
+  0,23 s), le JSON identique à l'octet. BANC : deux quicks isolés, clés
+  vidées, GET seuls, arrêtés ensuite — :4874 sur le code d'avant, :4873 sur
+  celui-ci. `--tabs extractor`,
+  `--tabs character --hash character/2000055/fiche`, et `--tabs banners`
+  en plus : comparées pixel à pixel, les trois paires ne diffèrent que d'un
+  rectangle de 7 × 9 px dans l'en-tête, le dernier chiffre du port.
+  LAISSÉ. (i) Le signal compare au DERNIER compte que la page connaît : un
+  `git push` fait au terminal le laisse trop haut, et le premier
+  enregistrement qui suit ne relit pas les pastilles (elles reviennent à la
+  venue sur le Tableau de bord, qui relit aussi le compte) — un `committed`
+  rendu par le serveur fermerait le cas, hors de ce lot. (ii) Roster
+  illisible au démarrage : la Fiche ne redemande pas, son picker reste
+  éteint jusqu'au rechargement même si une section à vignettes le relit
+  avec succès — comme avant, où elle ne relisait pas non plus. (iii) Le
+  second appel coûte encore ~85 ms : onze fichiers committés reparsés pour
+  leur compte et douze empreintes, non touché. (iv) Dans les 2 s qui
+  suivent une écriture rien n'est retenu : `offSiteOf` y coûte une revue
+  entière de plus (là où `offSiteCount` ne revoyait que les monstres), en
+  plus des onze que `bucketsOf` y lance déjà. (v) Le banc ne clique pas :
+  la relecture après un vrai commit, et son absence après « Pousser » et le
+  dry-run, ne sont vues qu'en happy-dom. `STYLE.md` (§ pastilles, § les
+  sections, § vignette, § Extraction, le roster de la Fiche) et
+  `docs/quick-migration.md` suivent ; items (4), (5), (6) de « Relecture
+  A38 → A47 » marqués FAIT dans `docs/TODO.md` — reste de (5) : pas de
+  pastille « Patch » pour un patch en attente.
+
 - **quick, suites de la relecture A38 → A47 (1/2) : le survol du Rang PvP,
   « Autres » dans l'en-tête d'un monstre, `sprite` / `effectSprite` retirés
   des états, un guide inconnu au chargement n'est plus attendu (lot A49)** —

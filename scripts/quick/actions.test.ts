@@ -9722,7 +9722,7 @@ describe('Extraction — extractorOverview, extractorTarget, acceptExtraction, i
       pinners?: Record<string, PinRef[]>;
       /** « Skills de monstres », la cible en lecture, rangée sous les monstres. */
       readOnly?: boolean;
-      /** La revue des monstres lève : l'extraction ne se lit pas. */
+      /** Toute revue lève : l'extraction ne se lit pas. */
       broken?: boolean;
     } = {},
   ) {
@@ -9737,6 +9737,17 @@ describe('Extraction — extractorOverview, extractorTarget, acceptExtraction, i
       bucketsOf: async (id) => {
         calls.push(`buckets ${id}`);
         return over.buckets?.[id] ?? EMPTY;
+      },
+      // `offSiteOf` de l'inbox, rejoué sur les mêmes tables : ce que le diff
+      // complet porte et que le périmètre ne garde pas — sans passer par `review`.
+      offSiteOf: async (id) => {
+        calls.push(`offSite ${id}`);
+        if (id !== 'monster' || !over.site) return 0;
+        const diff = diffRecords(COMMITTED[id], FRESH[id]);
+        const site = new Set(over.site);
+        return [...diff.added, ...diff.removed, ...diff.changed.map((c) => c.key)].filter(
+          (k) => !site.has(k),
+        ).length;
       },
       review: async (id) => {
         calls.push(`review ${id}`);
@@ -9877,16 +9888,21 @@ describe('Extraction — extractorOverview, extractorTarget, acceptExtraction, i
       soft: 2,
     });
     expect(out.targets[1]).toMatchObject({ buckets: EMPTY, actionable: 0, soft: 0 });
-    // Les comptes viennent de l'inbox (mémoïsés), jamais du moteur ; la seule
-    // revue lancée est celle des monstres, pour dire ce qui est hors du site.
-    expect(calls).toEqual([
+    // Les comptes viennent de l'inbox (mémoïsés), le « hors site » des monstres
+    // aussi : la vue d'ensemble ne lance aucune revue, ni au premier appel ni
+    // au second (le mémo lui-même est tenu par `admin-inbox.test.ts`).
+    const asked = [
       'buckets character',
       'buckets effect',
       'buckets monster',
-      'review monster',
+      'offSite monster',
       'buckets item',
       'buckets weapon',
-    ]);
+    ];
+    expect(calls).toEqual(asked);
+    await extractorOverview(fake);
+    expect(calls).toEqual([...asked, ...asked]);
+    expect(calls.filter((c) => c.startsWith('review'))).toEqual([]);
   });
 
   it('sans tables du jeu : des zéros, la raison, et le moteur n’est pas appelé', async () => {
@@ -10022,9 +10038,11 @@ describe('Extraction — extractorOverview, extractorTarget, acceptExtraction, i
     // Tout le diff est au site (ou le périmètre ne se calcule pas) : zéro.
     const whole = await extractorOverview(deps().fake);
     expect(whole.targets.find((t) => t.id === 'monster')?.offSite).toBe(0);
-    // Une extraction qui ne se lit pas : zéro, la vue d'ensemble tient.
-    const broken = await extractorOverview(deps({ site: ['400101'], broken: true }).fake);
-    expect(broken.targets.find((t) => t.id === 'monster')?.offSite).toBe(0);
+    // Une extraction qui ne se lit pas : la vue d'ensemble tient, elle ne lance
+    // pas la revue qui lèverait (le zéro de ce cas est celui d'`offSiteOf`).
+    const broken = deps({ site: ['400101'], broken: true });
+    await expect(extractorOverview(broken.fake)).resolves.toMatchObject({ tables: true });
+    expect(broken.calls.filter((c) => c.startsWith('review'))).toEqual([]);
     // Sans tables du jeu : zéro, sans lancer la revue.
     const none = deps({ site: ['400101'], tables: false });
     const off = await extractorOverview(none.fake);

@@ -16,7 +16,17 @@
 // Sans perso, le récap de la curation : par champ, ce qui est fait et les persos
 // à qui il manque — un clic en ouvre un là où le champ se règle. Le picker ne
 // s'ouvre qu'à son bouton.
-import { $, esc, getJson, log, post, sections, state, stateLoaded } from '../lib.js';
+import {
+  $,
+  esc,
+  getJson,
+  log,
+  post,
+  readHeroRoster,
+  sections,
+  state,
+  stateLoaded,
+} from '../lib.js';
 import { effectTile, gameText, itemName, itemTile, noteHtml } from '../gear-view.mjs';
 import { heroFilters, openHeroPicker } from '../hero-picker.mjs';
 import { heroTile } from '../hero-tile.mjs';
@@ -71,7 +81,7 @@ const LIST_WORDS = { pros: 'pro', cons: 'con', synergies: 'groupe' };
 // L'aperçu part ce délai après la dernière frappe, celui de Gear reco.
 const PV_DELAY = 400;
 
-let roster = null; // `/api/character/roster`, lu une fois : le picker
+let roster = null; // les lignes du roster de la page (`readHeroRoster`, `lib.js`) : le picker
 let sheet = null; // l'état du perso ouvert (`/api/character/state`)
 let sub = 'fiche'; // le sous-onglet montré
 let wanted = null; // le perso que le hash demande, tant qu'il n'est pas chargé
@@ -2274,9 +2284,11 @@ sections.register('character', {
       who();
       render();
     });
-    return getJson('/api/character/roster')
-      .then((r) => {
-        roster = r.roster;
+    // Le roster de la page, celui des vignettes des autres sections : une
+    // seule lecture pour toutes. Ses lignes, dans l'ordre du serveur.
+    return readHeroRoster()
+      .then((map) => {
+        roster = [...map.values()];
         $('c-pick').disabled = false;
         if (!wanted) return showRecap();
         return load(wanted).then(() => {

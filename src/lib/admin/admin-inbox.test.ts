@@ -11,6 +11,8 @@
  *   - l'instantané des codes promo, que le tableau de bord réécrit en le lisant,
  *     n'en est pas ;
  *   - ni un calcul trop proche d'une écriture ni un échec ne sont retenus.
+ *   - le « hors site » des monstres (`offSiteOf`) sort du même calcul : à
+ *     empreinte égale, aucune revue de plus.
  * Et que `buildInbox` rend ce qu'il rendait, pour UN calcul.
  *
  * Moteur FACTICE et compté (`reviewAll`) : le vrai ouvre les tables du jeu. Les
@@ -25,14 +27,15 @@ import { afterAll, beforeEach, describe, expect, it, vi } from 'vitest';
 import { sandbox } from './store-fixture';
 import type { DiffBuckets } from './review-store';
 
-const engine = vi.hoisted(() => ({ reviewAll: vi.fn(), tags: vi.fn() }));
-// Le faux diff d'une cible EST déjà ses buckets : les deux passes le rendent tel quel.
+const engine = vi.hoisted(() => ({ reviewAll: vi.fn(), tags: vi.fn(), site: vi.fn() }));
+// Le faux diff d'une cible EST déjà ses buckets : les deux passes le rendent tel
+// quel — sauf quand un cas pose un périmètre (`engine.site`, le diff gardé).
 vi.mock('@/lib/admin/review-store', () => ({
   reviewAll: engine.reviewAll,
   reviewBuckets: (diff: unknown) => diff,
 }));
 vi.mock('@/lib/admin/monster-review', () => ({
-  actionableDiff: (_id: string, diff: unknown) => diff,
+  actionableDiff: (id: string, diff: unknown) => engine.site(id, diff) ?? diff,
 }));
 vi.mock('@/lib/admin/tag-control', () => ({ collectTagOccurrences: engine.tags }));
 
@@ -82,6 +85,7 @@ beforeEach(() => {
   vi.setSystemTime(diskNow() + 60_000);
   engine.reviewAll.mockReset();
   engine.tags.mockReset().mockReturnValue([]);
+  engine.site.mockReset();
   engineReturns({ character: buckets({ new: 1 }) });
 });
 
@@ -171,6 +175,86 @@ describe('entityBuckets — mémoïsé sur l’empreinte des fichiers lus', () =
     expect(bucketsOf('character')).toEqual(buckets({ diff: 2 }));
     entityBuckets();
     expect(engine.reviewAll).toHaveBeenCalledTimes(3);
+  });
+});
+
+describe('offSiteOf — le hors-site des monstres, de la même revue que les buckets', () => {
+  /** Un diff à la forme du moteur : les clés ajoutées, modifiées, retirées. */
+  const diffOf = (added: string[], changed: string[], removed: string[]) => ({
+    added,
+    changed: changed.map((key) => ({ key })),
+    removed,
+  });
+  /** Le périmètre du site, pour les monstres seuls : le diff restreint à ces clés. */
+  const siteKeeps = (...keys: string[]) =>
+    engine.site.mockImplementation((id: string, diff: ReturnType<typeof diffOf>) =>
+      id === 'monster'
+        ? diffOf(
+            diff.added.filter((k) => keys.includes(k)),
+            diff.changed.map((c) => c.key).filter((k) => keys.includes(k)),
+            diff.removed.filter((k) => keys.includes(k)),
+          )
+        : undefined,
+    );
+  const monsters = () =>
+    engine.reviewAll.mockImplementation(() => [
+      { id: 'character', diff: diffOf(['2000003'], [], []) },
+      { id: 'monster', diff: diffOf(['400103', '55300019'], ['400101', '55300006'], ['55300018']) },
+    ]);
+
+  it('ce que le périmètre écarte, compté une fois : aucune revue sur un second appel à empreinte égale', async () => {
+    monsters();
+    siteKeeps('400101', '400103');
+    const { offSiteOf, bucketsOf, entityBuckets } = await load();
+    expect(offSiteOf('monster')).toBe(3);
+    // Les buckets sont ceux du diff GARDÉ, du même calcul.
+    expect(bucketsOf('monster')).toEqual(diffOf(['400103'], ['400101'], []));
+    expect(engine.reviewAll).toHaveBeenCalledTimes(1);
+    // La vue d'ensemble de quick, une seconde fois : onze buckets et le hors-site.
+    for (let i = 0; i < 11; i++) entityBuckets();
+    expect(offSiteOf('monster')).toBe(3);
+    expect(engine.reviewAll).toHaveBeenCalledTimes(1);
+    // Une cible sans périmètre, une cible inconnue : zéro.
+    expect(offSiteOf('character')).toBe(0);
+    expect(offSiteOf('inconnue')).toBe(0);
+    expect(engine.reviewAll).toHaveBeenCalledTimes(1);
+  });
+
+  it('un fichier d’entrée qui bouge : une revue de plus, le nouveau compte', async () => {
+    monsters();
+    siteKeeps('400101', '400103');
+    const { offSiteOf } = await load();
+    expect(offSiteOf('monster')).toBe(3);
+    siteKeeps('400101', '400103', '55300006');
+    box.putRaw(CURATED, '{"a":1}');
+    expect(offSiteOf('monster')).toBe(2);
+    expect(offSiteOf('monster')).toBe(2);
+    expect(engine.reviewAll).toHaveBeenCalledTimes(2);
+  });
+
+  it('tout le diff au site, ou un périmètre qui ne se calcule pas (le diff rendu intact) : zéro', async () => {
+    monsters();
+    const { offSiteOf } = await load();
+    siteKeeps('400101', '400103', '55300006', '55300018', '55300019');
+    expect(offSiteOf('monster')).toBe(0);
+    engine.site.mockReset();
+    box.putRaw(CURATED, '{"b":1}');
+    expect(offSiteOf('monster')).toBe(0);
+    expect(engine.reviewAll).toHaveBeenCalledTimes(2);
+  });
+
+  it('une extraction qui ne se lit pas : zéro, pas retenu — l’appel suivant réessaie', async () => {
+    const { offSiteOf } = await load();
+    engine.reviewAll.mockImplementation(() => {
+      throw new Error('extraction indisponible');
+    });
+    expect(offSiteOf('monster')).toBe(0);
+    expect(engine.reviewAll).toHaveBeenCalledTimes(1);
+    monsters();
+    siteKeeps('400101');
+    expect(offSiteOf('monster')).toBe(4);
+    expect(offSiteOf('monster')).toBe(4);
+    expect(engine.reviewAll).toHaveBeenCalledTimes(2);
   });
 });
 

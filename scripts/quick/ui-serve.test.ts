@@ -2900,6 +2900,10 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
       resolved?: (input: string, title?: string) => unknown;
       /** Les pros d'Aer sur le disque (d'office : BEACH et « strong »). */
       pros?: Text[];
+      /** `/api/character/roster` ne répond pas : le moteur, un quick lancé avant l'onglet. */
+      rosterDown?: boolean;
+      /** Bannières est chargée aussi (`tabs/banners.js`) : une bannière, celle d'Aer. */
+      banners?: boolean;
     } = {},
   ) {
     vi.resetModules();
@@ -2942,7 +2946,17 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
       const body: unknown = init?.body ? JSON.parse(init.body) : undefined;
       const url = new URL(path, 'http://localhost:4747');
       if (url.pathname.startsWith('/api/character')) calls.push(body ? { path, body } : { path });
-      if (url.pathname === '/api/character/roster') return answer({ roster: ROSTER });
+      if (url.pathname === '/api/character/roster')
+        return opts.rosterDown ? ROSTER_DOWN : answer({ roster: ROSTER });
+      if (url.pathname === '/api/banners/state')
+        return answer({
+          banners: [{ id: AER, name: 'Aer', start: '2026-10-13', end: '2026-11-10' }],
+          today: '2026-10-13',
+          roster: [{ id: AER, name: 'Aer' }],
+          game: [],
+          missing: [],
+          drift: [],
+        });
       if (url.pathname === '/api/character/coverage') {
         if (opts.coverage === null) return answer({ error: 'curé illisible' }, 500);
         return answer(opts.coverage?.() ?? coverage(disk.curated, disk.gear));
@@ -3110,8 +3124,9 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
     vi.stubGlobal('Event', window.Event);
 
     const lib = (await import(/* @vite-ignore */ resolve(UI, 'lib.js'))) as {
-      sections: { start: () => void };
+      sections: { start: () => void; go: (path: string) => void };
     };
+    if (opts.banners) await import(/* @vite-ignore */ resolve(UI, 'tabs', 'banners.js'));
     await import(/* @vite-ignore */ resolve(UI, 'tabs', 'character.js'));
     vi.useFakeTimers({ toFake: ['setTimeout', 'clearTimeout'] });
     lib.sections.start();
@@ -3156,6 +3171,10 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
       type,
       val,
       window,
+      /** Une venue sur une section, comme d'une autre (`sections.go`). */
+      go: (path: string) => lib.sections.go(path),
+      /** Combien de fois la page a lu le roster. */
+      rosterReads: () => calls.filter((c) => c.path === '/api/character/roster').length,
       /** Le menu d'une cellule de rang : un champ, ou le palier `step` d'une table. */
       cell: (field: string, step?: string) =>
         all(
@@ -3547,6 +3566,56 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
     expect(page.el('log').textContent).toContain('curé illisible');
     expect(page.el('hp-modal')).toBeNull();
     expect(page.el('c-pick').disabled).toBe(false);
+  });
+
+  it('le roster de la page : UNE lecture pour la Fiche et pour les vignettes de Bannières, dans les deux sens', async () => {
+    // La page s'ouvre sur Bannières : la Fiche perso lit le roster à son `init`,
+    // Bannières le demande en venant à l'écran — la même lecture.
+    const page = await character({ hash: '#banners', banners: true });
+    expect(page.el('tab-banners').hidden).toBe(false);
+    expect(page.rosterReads()).toBe(1);
+    // La vignette de Bannières a la ligne entière : rareté, élément, classe.
+    expect(page.all('#b-list .b-who > .ht').map(tileLook)).toEqual([TILE_FULL]);
+
+    // De Bannières à la Fiche perso : son picker a le roster, dans l'ordre servi.
+    page.go('character');
+    await page.settle();
+    expect(page.el('tab-character').hidden).toBe(false);
+    expect(page.el('c-pick').disabled).toBe(false);
+    page.el('c-pick').click();
+    expect(page.all('#hp-results .hp-n').map((n) => n.textContent)).toEqual([
+      'Aer',
+      'Ais Wallenstein',
+      'Alice',
+    ]);
+    page.all('#hp-results .hp-tile')[0].click();
+    await page.settle();
+    expect(page.el('c-pick-label').textContent).toBe('Changer de perso');
+
+    // Et retour, puis encore la Fiche : toujours une seule requête.
+    page.go('banners');
+    await page.settle();
+    page.go('character');
+    await page.settle();
+    expect(page.rosterReads()).toBe(1);
+  });
+
+  it('roster illisible : le journal de la Fiche le dit avec sa raison, le picker reste éteint — et la lecture n’est pas retenue', async () => {
+    const page = await character({ hash: '#character', rosterDown: true, banners: true });
+    expect(page.rosterReads()).toBe(1);
+    expect(page.el('journal').dataset.state).toBe('ko');
+    expect(page.el('log').textContent).toContain(
+      'Fiche perso illisible : Error: /api/character/roster : HTTP 500 — roster illisible',
+    );
+    expect(page.el('c-pick').disabled).toBe(true);
+    expect(page.el('c-panel').innerHTML).toBe('');
+    // Une section à vignettes redemande en venant à l'écran : nouvelle
+    // tentative, sans un mot de plus au journal, ses vignettes neutres.
+    page.go('banners');
+    await page.settle();
+    expect(page.rosterReads()).toBe(2);
+    expect(page.all('#b-list .b-who > .ht').map(tileLook)).toEqual([TILE_NEUTRAL]);
+    expect(page.all('#log > div')).toHaveLength(1);
   });
 
   it('un perso choisi dans le picker : sa fiche, son en-tête, et l’adresse qui le dit', async () => {
@@ -12723,10 +12792,21 @@ describe('Pastilles du menu — la page, sur le vrai markup', () => {
    * `lib.js`, et les deux sections de l'accueil (`dashboard.js`, `patch.js`).
    * `fetch` est factice : il sert `served.sections` sur `/api/badges` — dont il
    * compte les lectures —, un tableau de bord et un Patch au repos, et répond
-   * à « Pousser » (`pushed`) comme à un geste de Patch.
+   * à « Pousser » (`pushed`) comme à un geste de Patch : sans `git`, sauf le
+   * commit des données, qui en ajoute un au compte (`served.ahead`). `posted`
+   * répond à un autre POST, celui d'une section (`page.post`).
    */
   async function menu(
-    opts: { sections?: Badges; hash?: string; pushed?: unknown; status?: number } = {},
+    opts: {
+      sections?: Badges;
+      hash?: string;
+      pushed?: unknown;
+      status?: number;
+      /** Les fichiers modifiés que Patch voit : sans eux, « Committer » est éteint. */
+      dirty?: number;
+      /** La réponse à un POST que ni « Pousser » ni Patch ne font. */
+      posted?: (path: string) => unknown;
+    } = {},
   ) {
     vi.resetModules();
     const window = openWindow({ url: `http://localhost:4747/${opts.hash ?? ''}` });
@@ -12737,7 +12817,13 @@ describe('Pastilles du menu — la page, sur le vrai markup', () => {
       '',
     );
 
-    const served = { sections: opts.sections ?? BUSY, status: opts.status ?? 200, reads: 0 };
+    const served = {
+      sections: opts.sections ?? BUSY,
+      status: opts.status ?? 200,
+      reads: 0,
+      /** Les commits à pousser que Patch voit, et que son commit fait monter. */
+      ahead: 0,
+    };
     const posts: string[] = [];
     const answer = (data: unknown, ok = true) => {
       const bytes = new TextEncoder().encode(JSON.stringify(data));
@@ -12778,10 +12864,21 @@ describe('Pastilles du menu — la page, sur le vrai markup', () => {
           site: '1.11.404',
           client: '1.11.404',
           checkpoint: { steam: null, android: null },
-          git: { branch: 'main', ahead: 0, behind: 0, dirty: 0 },
+          git: { branch: 'main', ahead: served.ahead, behind: 0, dirty: opts.dirty ?? 0 },
           messageMax: 200,
           errors: {},
         });
+      if (path === '/api/patch/commit') {
+        served.ahead += 1;
+        return answer({
+          ok: true,
+          code: 0,
+          log: ['commit des données : terminé.'],
+          git: { branch: 'main', ahead: served.ahead, behind: 0 },
+        });
+      }
+      const posted = init ? opts.posted?.(path) : undefined;
+      if (posted) return answer(posted);
       if (path === '/api/push')
         return answer(
           opts.pushed ?? {
@@ -12809,6 +12906,7 @@ describe('Pastilles du menu — la page, sur le vrai markup', () => {
 
     const lib = (await import(/* @vite-ignore */ resolve(UI, 'lib.js'))) as {
       sections: { start: () => void };
+      post: (path: string, payload: unknown) => Promise<unknown>;
     };
     await import(/* @vite-ignore */ resolve(UI, 'tabs', 'dashboard.js'));
     await import(/* @vite-ignore */ resolve(UI, 'tabs', 'patch.js'));
@@ -12838,6 +12936,8 @@ describe('Pastilles du menu — la page, sur le vrai markup', () => {
       served,
       posts,
       settle,
+      /** L'enregistrement d'une section : le `post()` de `lib.js`, tel quel. */
+      post: (path: string) => lib.post(path, {}),
       /** La rangée des groupes : `[libellé]`, ou `[libellé, compte, classe]`. */
       groups: () => all('#groups button').map(tabOf),
       /** Les sections d'un groupe, de même. */
@@ -12938,13 +13038,15 @@ describe('Pastilles du menu — la page, sur le vrai markup', () => {
     expect(page.served.reads).toBe(2);
   });
 
-  it('une écriture réussie relit après trois secondes, pas avant — un refus, jamais', async () => {
+  it('un `post()` qui a committé relit après trois secondes, pas avant ; rien de committé : jamais', async () => {
     vi.useFakeTimers({ toFake: ['setTimeout', 'clearTimeout'] });
-    const page = await menu();
+    // L'en-tête montre 1 commit à pousser (`/api/state`) : la réponse en rend 2.
+    const page = await menu({
+      posted: () => ({ ok: true, log: ['fait'], git: { branch: 'main', ahead: 2, behind: 0 } }),
+    });
     page.served.sections = {};
-    page.el('push').click();
-    await page.settle();
-    expect(page.posts).toEqual(['/api/push']);
+    await page.post('/api/names');
+    expect(page.el('push-count').textContent).toBe('2');
     // Le diff de l'inbox peut encore être celui d'avant : la relecture attend.
     await vi.advanceTimersByTimeAsync(2900);
     expect(page.served.reads).toBe(1);
@@ -12956,6 +13058,65 @@ describe('Pastilles du menu — la page, sur le vrai markup', () => {
     // Une fois, pas en boucle.
     await vi.advanceTimersByTimeAsync(60_000);
     expect(page.served.reads).toBe(2);
+    // Le même enregistrement, rejoué : le compte ne monte plus (rien à committer).
+    await page.post('/api/names');
+    await vi.advanceTimersByTimeAsync(60_000);
+    expect(page.served.reads).toBe(2);
+
+    // Un geste réussi dont le compte ne bouge pas : rien n'a été committé.
+    const same = await menu({
+      posted: () => ({ ok: true, log: ['fait'], git: { branch: 'main', ahead: 1, behind: 0 } }),
+    });
+    await same.post('/api/names');
+    await vi.advanceTimersByTimeAsync(60_000);
+    expect(same.served.reads).toBe(1);
+
+    // Un lot à moitié refusé qui a committé le reste : en échec, mais le compte monte.
+    const half = await menu({
+      posted: () => ({
+        ok: false,
+        log: ['2 refusés'],
+        git: { branch: 'main', ahead: 2, behind: 0 },
+      }),
+    });
+    await half.post('/api/ranks');
+    await vi.advanceTimersByTimeAsync(3000);
+    await half.settle();
+    expect(half.served.reads).toBe(2);
+
+    // Une réponse sans `git` : un geste qui ne committe pas.
+    const bare = await menu({ posted: () => ({ ok: true, log: ['fait'] }) });
+    await bare.post('/api/character/preview');
+    await vi.advanceTimersByTimeAsync(60_000);
+    expect(bare.served.reads).toBe(1);
+
+    // Sans amont, le compte ne dit rien : la réussite du geste en tient lieu.
+    const none = { branch: 'essai', ahead: null, behind: 0 };
+    let ok = true;
+    const detached = await menu({ posted: () => ({ ok, log: ['fait'], git: none }) });
+    await detached.post('/api/names');
+    await detached.post('/api/names');
+    await vi.advanceTimersByTimeAsync(3000);
+    await detached.settle();
+    expect(detached.served.reads).toBe(2);
+    ok = false;
+    await detached.post('/api/names');
+    await vi.advanceTimersByTimeAsync(60_000);
+    expect(detached.served.reads).toBe(2);
+  });
+
+  it('« Pousser » ne relit pas les pastilles : un push ne change pas l’inbox', async () => {
+    vi.useFakeTimers({ toFake: ['setTimeout', 'clearTimeout'] });
+    const page = await menu();
+    page.served.sections = {};
+    page.el('push').click();
+    await page.settle();
+    expect(page.posts).toEqual(['/api/push']);
+    // Le bouton suit (1 → 0), le tableau de bord aussi (`quick:saved`) — pas le menu.
+    expect(page.el('push-count').textContent).toBe('0');
+    await vi.advanceTimersByTimeAsync(60_000);
+    expect(page.served.reads).toBe(1);
+    expect(page.badged()).toEqual(['extractor', 'character', 'effects']);
 
     const refused = await menu({
       pushed: {
@@ -12971,17 +13132,28 @@ describe('Pastilles du menu — la page, sur le vrai markup', () => {
     expect(refused.served.reads).toBe(1);
   });
 
-  it('la fin d’un geste de Patch (`quick:changed`) relit après trois secondes, sans commit', async () => {
+  it('Patch : le dry-run n’annonce rien et ne relit pas ; un geste qui écrit (`quick:changed`) relit après trois secondes, sans commit', async () => {
     vi.useFakeTimers({ toFake: ['setTimeout', 'clearTimeout'] });
     const page = await menu({ hash: '#patch' });
     expect(page.served.reads).toBe(1);
     let changed = 0;
     document.addEventListener('quick:changed', () => (changed += 1));
 
+    // Le dry-run ne fait que lire : ni annonce, ni relecture.
     page.served.sections = { extractor: { count: 4, tone: 'warn' } };
     page.el('p-dry').click();
     await page.settle();
     expect(page.posts).toEqual(['/api/patch/promote']);
+    expect(changed).toBe(0);
+    await vi.advanceTimersByTimeAsync(60_000);
+    expect(page.served.reads).toBe(1);
+    expect(page.tabs('data')[2]).toEqual(['Extraction', '17', 'ko']);
+
+    // « Promouvoir » écrit le validé, sans committer : annoncé, relu à trois secondes.
+    expect(page.el('p-apply').disabled).toBe(false);
+    page.el('p-apply').click();
+    await page.settle();
+    expect(page.posts).toEqual(['/api/patch/promote', '/api/patch/promote']);
     expect(changed).toBe(1);
     await vi.advanceTimersByTimeAsync(2900);
     expect(page.served.reads).toBe(1);
@@ -12990,12 +13162,20 @@ describe('Pastilles du menu — la page, sur le vrai markup', () => {
     expect(page.served.reads).toBe(2);
     expect(page.tabs('data')[2]).toEqual(['Extraction', '4', 'warn']);
 
-    // Deux écritures rapprochées : une seule relecture, trois secondes après la dernière.
-    page.el('p-dry').click();
+    // Deux écritures rapprochées (le rafraîchissement, deux fois) : une seule
+    // relecture, trois secondes après la dernière — un dry-run entre-temps n'y change rien.
+    page.el('p-refresh').click();
     await page.settle();
     await vi.advanceTimersByTimeAsync(2000);
+    page.el('p-refresh').click();
+    await page.settle();
     page.el('p-dry').click();
     await page.settle();
+    expect(page.posts.slice(2)).toEqual([
+      '/api/patch/refresh',
+      '/api/patch/refresh',
+      '/api/patch/promote',
+    ]);
     expect(changed).toBe(3);
     await vi.advanceTimersByTimeAsync(2900);
     expect(page.served.reads).toBe(2);
@@ -13004,6 +13184,29 @@ describe('Pastilles du menu — la page, sur le vrai markup', () => {
     expect(page.served.reads).toBe(3);
     await vi.advanceTimersByTimeAsync(60_000);
     expect(page.served.reads).toBe(3);
+  });
+
+  it('Patch : le commit des données relit après trois secondes, une fois', async () => {
+    vi.useFakeTimers({ toFake: ['setTimeout', 'clearTimeout'] });
+    const page = await menu({ hash: '#patch', dirty: 3 });
+    let changed = 0;
+    document.addEventListener('quick:changed', () => (changed += 1));
+    page.served.sections = {};
+    expect(page.el('p-commit').disabled).toBe(false);
+    page.el('p-commit').click();
+    await page.settle();
+    expect(page.posts).toEqual(['/api/patch/commit']);
+    // Annoncé par Patch ET vu par `post()` (le compte monte) : une seule relecture.
+    expect(changed).toBe(1);
+    expect(page.el('push-count').textContent).toBe('1');
+    await vi.advanceTimersByTimeAsync(2900);
+    expect(page.served.reads).toBe(1);
+    await vi.advanceTimersByTimeAsync(100);
+    await page.settle();
+    expect(page.served.reads).toBe(2);
+    expect(page.badged()).toEqual([]);
+    await vi.advanceTimersByTimeAsync(60_000);
+    expect(page.served.reads).toBe(2);
   });
 
   it('une route en erreur laisse le menu tel qu’il est, sans un mot au journal', async () => {

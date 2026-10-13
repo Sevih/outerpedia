@@ -71,9 +71,13 @@ pastille.
   VOLUME (la somme des `count` : « 3 new » compte trois), celui de la carte
   « À faire » le nombre de LIGNES. `lib.js` la lit au chargement, à chaque
   venue sur le Tableau de bord, et TROIS SECONDES après une écriture — un
-  `post()` qui a committé, ou la fin d'un geste de « Patch »
+  `post()` qui a committé, ou la fin d'un geste de « Patch » qui écrit
   (`quick:changed`) : avant, le diff de l'inbox peut encore être celui
-  d'avant (`ENGINE_STAMP_TTL_MS`). Jamais en boucle. Une lecture qui échoue
+  d'avant (`ENGINE_STAMP_TTL_MS`). « A committé » se lit du compte de
+  « Pousser » : celui de la réponse (`git.ahead`) dépasse celui que l'en-tête
+  montrait avant le geste — sans amont, la réussite du geste en tient lieu.
+  « Pousser » (le compte descend) et le dry-run de « Patch » (rien n'est
+  écrit) ne relisent donc pas (A50). Jamais en boucle. Une lecture qui échoue
   laisse le menu tel quel, sans un mot au journal.
 - Les deux rangées sont posées par `lib.js` d'après son tableau `GROUPS` :
   **ajouter une section** = une entrée `{ id, label, wide? }` dans le bon
@@ -98,7 +102,8 @@ pastille.
   `quick:saved` sur `document`. Une section qui change les fichiers du dépôt
   SANS committer l'annonce de même par `quick:changed` (un `Event` nu sur
   `document`, à la fin du geste, réussi ou non) : « Patch » le fait pour ses
-  quatre gestes, et le menu relit ses pastilles. `post(path, payload, onStep)` : avec
+  trois gestes qui écrivent (rafraîchir, promouvoir, committer — pas le
+  dry-run), et le menu relit ses pastilles. `post(path, payload, onStep)` : avec
   `onStep`, chaque ligne du flux est remise à la section au lieu d'être
   empilée au journal, qui ne montre alors que la ligne en cours puis le
   résultat — la console de « Patch » s'en sert.
@@ -309,8 +314,11 @@ perso, Noms), 44 px avec le nom sur une tuile de héros (synergies, Guides),
 de suggestions et au Tableau de bord. Un onglet dont l'état ne porte que l'id
 (pas la rareté, l'élément ni la classe : Bannières, Journal, Tableau de bord,
 Noms) lit le roster par `heroRoster()` de `lib.js` — `/api/character/roster`,
-une `Map` id → perso, lue UNE fois pour la page à la première venue à l'écran
-d'une de ces sections — et passe `heroes.get(id) ?? { id }` (A41). Un id hors
+une `Map` id → perso (la ligne entière), lue UNE fois pour la page — et passe
+`heroes.get(id) ?? { id }` (A41). C'est la lecture de la Fiche perso, qui la
+fait au démarrage pour son picker (`readHeroRoster()`, la même promesse, qui
+rejette au lieu de rendre une `Map` vide : la Fiche dit l'échec au journal) :
+une seule requête par page, quelle que soit la section ouverte (A50). Un id hors
 du roster, ou un roster illisible : le fond neutre et pas d'icône au coin,
 sans erreur. Ce que `Thumbnail` fait de plus et que
 la vignette ne reproduit pas : les étoiles de transcendance (elles se lisent
@@ -572,8 +580,10 @@ du site, et ils le restent — ce sont ceux de l'inbox et de la pastille. Le
 serveur dit en plus ce que le diff COMPLET porte hors du périmètre
 (`offSite`, sur la ligne de la vue d'ensemble comme sur la cible) : le
 complément de ce qu'`actionableDiff` garde, sans relire `siteMonsterIds`. La
-vue d'ensemble lance pour cela UNE revue, celle des monstres (0,2 s à
-chaud) ; elle rend zéro si l'extraction ne se lit pas. `status=offsite` (la
+vue d'ensemble ne lance aucune revue pour cela : son compte sort du mémo de
+l'inbox (`offSiteOf` d'`admin-inbox.ts`, la revue même de `bucketsOf`,
+retenue sur l'empreinte de ses entrées — A50) ; zéro si l'extraction ne se
+lit pas. `status=offsite` (la
 bascule) rend ces entités À LA PLACE des autres, chacune marquée `offSite`,
 `buckets` et `total` inchangés ; `q` y joue de même. « Skills de monstres »
 (`monster-skill`, `monster-skills.json`) est une cible `readOnly` du registre
@@ -1071,7 +1081,8 @@ gardé au serveur tant qu'aucun des cinq curés lus ni les dates de sortie
 générées n'ont bougé), RELU à chaque venue sans perso — un enregistrement
 vient peut-être de bouger les comptes ; le dernier lu reste à l'écran pendant
 la lecture.
-Le roster vient de `GET /api/character/roster`, lu UNE fois ; la fiche d'un
+Le roster vient de `GET /api/character/roster`, lu UNE fois pour la page
+(`readHeroRoster()` de `lib.js`, partagé avec les vignettes) ; la fiche d'un
 perso de `GET /api/character/state?id=` (`characterSheetState` : sa ligne, sa
 chaîne, ses tags dérivés, son entrée curée entière, ses rangs et les listes de
 leurs menus, les tags humains, ses vidéos — la page n'en recopie aucun), relue

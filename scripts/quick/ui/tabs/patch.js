@@ -6,11 +6,18 @@
 // par fichier différent, et ce que « Promouvoir » écrira.
 import { $, esc, gitBar, log, post, sections } from '../lib.js';
 
-/** Les quatre gestes : leur nom dans le journal, et leur route. */
-const REFRESH = { label: 'rafraîchissement depuis le jeu', path: '/api/patch/refresh' };
+/**
+ * Les quatre gestes : leur nom dans le journal, leur route, et `writes` pour
+ * ceux qui écrivent dans le dépôt — le dry-run ne fait que lire.
+ */
+const REFRESH = {
+  label: 'rafraîchissement depuis le jeu',
+  path: '/api/patch/refresh',
+  writes: true,
+};
 const DRY = { label: 'dry-run de la promotion', path: '/api/patch/promote' };
-const APPLY = { label: 'promotion de l’extraction', path: '/api/patch/promote' };
-const COMMIT = { label: 'commit des données', path: '/api/patch/commit' };
+const APPLY = { label: 'promotion de l’extraction', path: '/api/patch/promote', writes: true };
+const COMMIT = { label: 'commit des données', path: '/api/patch/commit', writes: true };
 
 /** Le dernier `/api/patch/state` : travail en cours, versions, reprise, dépôt. */
 let st = null;
@@ -292,10 +299,10 @@ async function load() {
 /**
  * Lance un geste : le journal de l'en-tête suit la ligne en cours, la console
  * reçoit tout (`onStep` de `post()`), puis l'état est relu. `after` voit
- * l'issue avant ce redessin. La fin du geste, réussi ou non, est annoncée
- * (`quick:changed` sur `document`).
+ * l'issue avant ce redessin. La fin d'un geste qui écrit (`writes`), réussi ou
+ * non, est annoncée (`quick:changed` sur `document`) ; celle du dry-run, non.
  */
-async function run({ label, path, payload, button, onLine, after }) {
+async function run({ label, path, payload, button, onLine, after, writes }) {
   running = label;
   button.classList.add('busy');
   // Les sorties s'enchaînent dans la console : une ligne vide les sépare.
@@ -316,7 +323,7 @@ async function run({ label, path, payload, button, onLine, after }) {
   button.classList.remove('busy');
   // Tables, proposition, validé : les fichiers du dépôt ont pu bouger sans
   // commit. Le menu relira ses pastilles (`lib.js`).
-  document.dispatchEvent(new Event('quick:changed'));
+  if (writes) document.dispatchEvent(new Event('quick:changed'));
   after?.(data);
   await load();
   return data;

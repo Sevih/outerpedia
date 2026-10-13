@@ -246,8 +246,9 @@ export const journalWire = () => {
  * Un geste qui committe (et « Pousser ») rend aussi `git`, l'état d'après :
  * le bouton de l'en-tête se met à jour ici, aucune section n'a rien à faire.
  * Quand il a réussi, la page l'annonce (`quick:saved` sur `document`) : le
- * tableau de bord, s'il est à l'écran, se relit — et les pastilles du menu,
- * après leur délai (`badgesSoon`).
+ * tableau de bord, s'il est à l'écran, se relit. Les pastilles du menu, elles,
+ * ne se relisent (après leur délai, `badgesSoon`) que si le geste a COMMITTÉ
+ * (`committed`) : un push ne change pas l'inbox.
  *
  * `onStep` (facultatif) : la section veut les lignes ELLE-MÊME — la sortie
  * d'une commande longue, des milliers de lignes, va dans sa console (« Patch »).
@@ -276,7 +277,23 @@ export async function getJson(path) {
   throw new Error(`${path} : ${why}`);
 }
 
+/**
+ * Le geste a-t-il committé ? Une réponse d'écriture ne porte que `git`, l'état
+ * d'APRÈS (`withGit`, server.ts) — aucun `committed` : le signal est le compte
+ * de « Pousser » qui MONTE par rapport à celui que l'en-tête montrait avant le
+ * geste. Un push le fait descendre, un push refusé ou un enregistrement sans
+ * rien à committer le laissent, un lot à moitié refusé qui a committé le reste
+ * le monte. Sans amont (`ahead` nul) ou avant le premier état, rien à
+ * comparer : la réussite du geste en tient lieu.
+ */
+const committed = (before, after, ok) =>
+  typeof before?.ahead === 'number' && typeof after.ahead === 'number'
+    ? after.ahead > before.ahead
+    : ok;
+
 export async function post(path, payload, onStep) {
+  // Ce que l'en-tête montre AVANT le geste : la réponse dira s'il a committé.
+  const before = lastGit;
   const res = await fetch(path, {
     method: 'POST',
     headers: { 'content-type': 'application/json' },
@@ -319,38 +336,41 @@ export async function post(path, payload, onStep) {
   log(data.log ?? [data.error ?? 'erreur'], data.ok);
   if (data.git) {
     gitBar(data.git);
-    if (data.ok) {
-      document.dispatchEvent(new Event('quick:saved'));
-      badgesSoon();
-    }
+    if (data.ok) document.dispatchEvent(new Event('quick:saved'));
+    if (committed(before, data.git, data.ok)) badgesSoon();
   }
   return data;
 }
 
-// ------------------------------------------------------ le roster des vignettes
+// ------------------------------------------------------ le roster des persos
 let heroes = null;
 
 /**
- * Le roster des persos, par id (`/api/character/roster` : id, nom, rareté,
- * élément, classe) : ce que la vignette (`heroTile`) lit pour son fond de
- * rareté et son coin, dans les sections dont l'état ne porte que des ids
- * (Bannières, Journal du site, Tableau de bord, Noms). Lu UNE fois pour la
- * page, à la première demande — une section le demande en venant à l'écran —,
- * puis rendu de mémoire : la même `Map` à chaque appel.
- *
- * Illisible (un quick lancé avant ce code, le moteur) : une `Map` vide, sans un
- * mot au journal — les vignettes restent neutres, rien d'autre n'en dépend — et
- * la demande suivante réessaie.
+ * Le roster des persos, par id (`/api/character/roster` : la ligne entière —
+ * id, nom, rareté, élément, classe —, dans l'ordre du serveur) : LA lecture de
+ * la page, partagée. Lu UNE fois, à la première demande — la Fiche perso au
+ * démarrage, pour son picker —, puis rendu de mémoire : la même `Map` à chaque
+ * appel. Illisible (un quick lancé avant ce code, le moteur), la lecture
+ * REJETTE avec sa raison, n'est pas retenue, et la demande suivante réessaie.
  */
-export function heroRoster() {
+export function readHeroRoster() {
   heroes ??= getJson('/api/character/roster')
     .then((r) => new Map(r.roster.map((c) => [c.id, c])))
-    .catch(() => {
+    .catch((e) => {
       heroes = null;
-      return new Map();
+      throw e;
     });
   return heroes;
 }
+
+/**
+ * Le même roster, pour ce que la vignette (`heroTile`) lit — son fond de
+ * rareté et son coin — dans les sections dont l'état ne porte que des ids
+ * (Bannières, Journal du site, Tableau de bord, Noms) : une section le demande
+ * en venant à l'écran. Illisible : une `Map` vide, sans un mot au journal — les
+ * vignettes restent neutres, rien d'autre n'en dépend.
+ */
+export const heroRoster = () => readHeroRoster().catch(() => new Map());
 
 // ------------------------------------------------------ sections
 const registry = new Map();
@@ -450,8 +470,9 @@ async function loadBadges() {
 
 /**
  * Une écriture vient d'avoir lieu — un `post()` qui a committé, ou un geste de
- * « Patch » (`quick:changed`) : UNE relecture des pastilles, après le délai.
- * Plusieurs écritures rapprochées n'en font qu'une.
+ * « Patch » qui écrit dans le dépôt (`quick:changed`) : UNE relecture des
+ * pastilles, après le délai. Plusieurs écritures rapprochées n'en font qu'une.
+ * Ni « Pousser » ni le dry-run de « Patch » n'en sont : ils n'écrivent rien.
  */
 function badgesSoon() {
   clearTimeout(badgeTimer);
@@ -566,7 +587,7 @@ export const sections = {
 
     // Les pastilles du menu : lues au chargement, puis quand le dépôt a pu
     // changer — `post()` les relance lui-même après un commit, « Patch »
-    // l'annonce à la fin de chaque geste (`quick:changed` sur `document`).
+    // l'annonce à la fin d'un geste qui écrit (`quick:changed` sur `document`).
     menu = $('groups');
     loadBadges();
     document.addEventListener('quick:changed', badgesSoon);
