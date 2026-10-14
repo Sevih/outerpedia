@@ -18,7 +18,7 @@
 
 ## 🧰 Outil quick
 
-- [ ] **Restes d'A51 (relecture du 14/10)** : (1) des chaînes VISIBLES
+- [ ] **Restes d'A51 (relecture du 14/10) — lot A52, rédigé le 14/10** : (1) des chaînes VISIBLES
       renvoient encore à l'admin, ex. « à extraire/valider via l'admin
       (Extractor › Monsters) » dans `BossPanel.tsx` et `encounters.ts`, une
       chaîne de `fr.ts`, l'URL « vérifie /admin… » imprimée par
