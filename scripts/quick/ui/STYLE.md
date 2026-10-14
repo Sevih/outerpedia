@@ -66,7 +66,11 @@ pastille.
   bord — la même lecture, `quickInbox` d'`actions.ts` — comptée par section,
   le premier segment de l'adresse où chaque item renvoie (`extractor/monster`
   compte pour `extractor`, la fiche d'un perso pour `character`) ; un item
-  que rien ne situe (`tab` nul) n'a pas de pastille. Le compte d'une pastille est le
+  que rien ne situe (`tab` nul) n'a pas de pastille. S'y ajoute, hors inbox, celle
+  de « Patch » (`{ count: 1, tone: 'warn' }`) quand le client installé est en
+  avance sur le site — le `client: 'ahead'` du bloc `game` du Tableau de bord,
+  deux fichiers lus sans réseau ; une version illisible l'ôte, jamais la route
+  (A51). Le compte d'une pastille est le
   VOLUME (la somme des `count` : « 3 new » compte trois), celui de la carte
   « À faire » le nombre de LIGNES. `lib.js` la lit au chargement, à chaque
   venue sur le Tableau de bord, et TROIS SECONDES après une écriture — un
@@ -707,7 +711,7 @@ rien. Croquis du rendu :
 ```
 .head  Tableau de bord — Ce qui demande une action. Rien ne se fait d'ici…        « au 2026-10-08 (UTC) » [Actualiser]
 .h-grid — des .card sur deux colonnes au-dessus de 900 px, une en dessous ; chaque carte a sa hauteur
-  .card « À faire »    card-head : titre · badge du compte (ko s'il y a du rouge, sinon warn) … « extraction, tags, assets — lu par l'admin »
+  .card « À faire »    card-head : titre · badge du compte (ko s'il y a du rouge, sinon warn) … « extraction, tags, assets »
      une ligne par item de l'inbox, dans SON ordre :  ● Character  1 new … [Ouvrir] (va à la section que l'item adresse, `tab`)
        ● = `.dot` de la teinte de l'item (danger, warn, muted) ; les tags morts d'un seul perso : « fiche du perso ↗ » (nouvel onglet) à la place du bouton ; un item que rien ne situe : pas de geste, son détail nomme les provenances
      .empty « Rien à faire. »
@@ -1359,8 +1363,8 @@ désignent. Croquis du rendu :
 le picker (le picker partagé en `rows`, élargi à 1040 px, deux colonnes) : « Choisir un monstre » · badge « 543 des guides · 2451 avec le site »
    la recherche « Chercher un monstre (nom ou id)… » : chaque mot de la saisie COMMENCE un mot du nom (la règle d'Effets), ou la saisie commence l'id
    pastilles de MODE DE JEU (B47 — `pills`, groupe « Mode », `counted`) : les modes que le roster porte, dans l'ordre et sous les titres du damage calc du site, chacune avec son compte dans le périmètre courant, sur trois lignes dans le panneau
-      [Story 3] [Origin Story 132] [Skyward Tower 1] [Elemental Tower 0] [Special Request 166] [World Boss 36] [Guild Raid 103] [Weekly Conquest Mission 29] [Promotion Challenge 10] [Pursuit Operation 12] [Infiltration Operation 0] [Dimensional Singularity 15] [Joint Challenge 15] [sans mode 25]
-      « sans mode », en fin : un monstre qu'aucun mode ne range (un add sans spawn, un monstre des seuls modes que le damage calc écarte) ; un mode où le roster n'a personne n'a pas de pastille
+      [Story 3] [Origin Story 132] [Skyward Tower 1] [Elemental Tower 0] [Special Request 166] [World Boss 36] [Guild Raid 103] [Weekly Conquest Mission 29] [Promotion Challenge 10] [Pursuit Operation 12] [Infiltration Operation 0] [Dimensional Singularity 15] [Joint Challenge 15] [Autres 0] [sans mode 25]
+      « Autres », avant-dernière : un monstre dont un spawn tombe dans un mode qu'aucun groupe ne range (`otherModes` du serveur ; le mot de l'en-tête — au 14/10, 204 monstres du site, tous du seul Monad Gate: Skirmish) ; « sans mode », en fin : un monstre sans aucun spawn (un add invoqué — 136 au 14/10) ; un mode où le roster n'a personne n'a pas de pastille, « Autres » et « sans mode » si aucun monstre du roster n'y tombe
    dessous, pastilles de type (groupe « Type » : boss · area boss · season boss · named · monster — ceux que le roster porte) ; à droite le segmenté [Guides | Site], « Guides » d'office
    une ligne (.m-pk) : icône 36 px · nom, et dessous en atténué « modes · stages » — TOUS ses modes de jeu, sous leurs titres (« Story, Origin Story »), puis ses deux premiers stages ; son id pour un add sans spawn — · badge off du type · badge edit « N guides » ; `title` = nom, id, titres de ses guides
    les monstres des guides d'abord, par nom, puis ceux du site ; .empty « Aucun monstre ne correspond. »

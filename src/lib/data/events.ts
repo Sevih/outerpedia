@@ -5,8 +5,8 @@
  * concours, corriger une date ou ajouter les gagnants demandait un commit et un
  * redéploiement, et son dictionnaire i18n vivait dans le fichier. Ici un
  * événement est une DONNÉE (`data/curated/events.json`) : des métadonnées + une
- * liste de BLOCS au vocabulaire fermé, rendus par un composant unique. L'admin
- * l'édite (`/admin/tools/events`) et la sauvegarde publie le fichier sur R2 —
+ * liste de BLOCS au vocabulaire fermé, rendus par un composant unique. Quick
+ * l'édite (Publication › Événements) et l'enregistrement publie le fichier sur R2 —
  * l'événement paraît en prod sans redéploiement (cf. `runtime-json`).
  *
  * Un contenu vraiment hors-modèle reste possible sans tordre le vocabulaire :
@@ -95,7 +95,7 @@ export interface EventEntry {
   end: string;
   phases?: EventPhase[];
   blocks: EventBlock[];
-  /** Jamais publié, quelle que soit la date (invisible hors admin local). */
+  /** Jamais publié, quelle que soit la date (invisible hors du site de dev). */
   draft?: boolean;
   /**
    * Montrer le contenu AVANT le début. Par défaut un événement pas encore
@@ -181,8 +181,8 @@ const isPublic = (e: EventEntry): boolean => !e.draft;
 /**
  * Liste résolue pour `lang`. Les BROUILLONS sont écartés côté SERVEUR (leur
  * contenu ne part jamais dans le HTML ni dans le bundle — ils étaient filtrés
- * côté client, donc les livrait quand même) ; `includeDrafts` n'est utilisé que
- * par l'admin local.
+ * côté client, donc les livrait quand même) ; `includeDrafts` n'est posé que
+ * par le site de dev (`IS_DEV`).
  */
 export async function getEvents(
   lang: Lang,
@@ -224,7 +224,7 @@ export function summarize(
     .sort(compareEvents);
 }
 
-/** Un événement par slug, ou `undefined` (inconnu ou brouillon hors admin). */
+/** Un événement par slug, ou `undefined` (inconnu ou brouillon hors du site de dev). */
 export async function getEvent(
   slug: string,
   options?: { includeDrafts?: boolean },

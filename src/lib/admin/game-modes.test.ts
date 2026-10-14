@@ -6,7 +6,13 @@
 import { describe, expect, it } from 'vitest';
 import type { DungeonRef } from '@contracts';
 import { getEncounters, storyFamilyOf } from '@/lib/data/encounters';
-import { gameModeGroups, modeKeysOf, modeLabelsOf, modeOptionsOf } from './game-modes';
+import {
+  gameModeGroups,
+  hasOtherModes,
+  modeKeysOf,
+  modeLabelsOf,
+  modeOptionsOf,
+} from './game-modes';
 
 /** Un donjon peuplé. */
 const dungeon = (mode: string, over: Partial<DungeonRef> = {}) =>
@@ -145,6 +151,10 @@ describe('gameModeGroups — les modes de jeu, comme le damage calc les liste', 
     expect(modeLabelsOf(list, ['monad_battle_1', 'tower'])).toEqual(['Skyward Tower', 'Autres']);
     expect(modeLabelsOf(list, ['mode_inconnu', 'monad_battle_1'])).toEqual(['Autres']);
     expect(modeLabelsOf(list, [])).toEqual([]);
+    // `hasOtherModes` : le même verdict, sans les titres.
+    expect(hasOtherModes(list, ['monad_battle_1', 'tower'])).toBe(true);
+    expect(hasOtherModes(list, ['tower', 'event_boss'])).toBe(false);
+    expect(hasOtherModes(list, [])).toBe(false);
   });
 
   it('`modeOptionsOf` : une option par slug, dans l’ordre des groupes et sous leur titre — suffixé du slug quand il est partagé, « Autres » en queue', () => {

@@ -8,6 +8,11 @@ Prérequis : le client Steam installé et lancé une fois depuis le patch (il se
 à jour au lancement). Secours LDPlayer : `pnpm datagen:patch-android`, racine
 `.gamedata-android/` — cf. datagen/README § « Récupérer les données du jeu ».
 
+Le cycle se joue dans `pnpm quick`, Accueil › Patch : « Lancer » (le
+`datagen:patch` ci-dessous), « Dry-run » puis « Promouvoir » (`datagen:promote`,
+puis `--apply`), « Committer » (`pnpm commit --no-push`), et « Pousser » dans
+l'en-tête. Les mêmes étapes, à la main :
+
 ```bash
 pnpm datagen:patch           # pull → extract → convert → build → résumé du diff (dry)
                              # + dump/ASM si le CODE a changé, + pipeline DAMAGE
@@ -18,11 +23,12 @@ pnpm datagen:patch           # pull → extract → convert → build → résum
                              # après patch = le jeu a changé, à revérifier en jeu
 
 pnpm datagen:promote --apply # si le résumé est cohérent : valider
-pnpm datagen:regen           # après une correction curée (/admin/effects…) : build + apply
+pnpm datagen:regen           # après une correction curée (quick, Effets…) : build + apply
 pnpm images                  # assets:collect + assets:push (R2) — AVANT le push git
 ```
 
-Vérifier dans `/admin`, puis publier :
+Vérifier dans quick — Données › Extraction, la revue par cible et
+l'intégration entité par entité —, puis publier :
 
 ```bash
 pnpm commit                  # contrôles → bump version → images R2 → commit + push
@@ -59,15 +65,15 @@ Deux exceptions valent la place qu'elles prennent : la liste de ce qu'on a
 ## Ce que le pipeline ne fait PAS : la couche curée
 
 `datagen` intègre le perso, ses skills, son EE et ses items — il ne **décide**
-rien. Deux saisies restent, **toutes deux par l'admin** (jamais à la main dans
-les JSON), et chacune alimente plusieurs pages : l'oubli ne casse rien, il
-laisse un trou silencieux. D'où la carte.
+rien. Deux saisies restent, **toutes deux dans quick, Éditeurs › Fiche perso**
+(jamais à la main dans les JSON), et chacune alimente plusieurs pages : l'oubli
+ne casse rien, il laisse un trou silencieux. D'où la carte.
 
-| Où saisir                                                                                  | Ce qui l'affiche                                                                             |
-| ------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------- |
-| `/admin/editor/characters/<id>` — `role`, `skillPriority`, `videos`, puis `rank`/`rankPvp` | fiche perso, `/tierlist`, tierlistpve/pvp, tier-list-maker, contribute/ranking-helper        |
-| la même page, onglet gear — la reco d'équipement                                           | fiche perso, `/equipment/<slug>` (« qui utilise »), gear-usage-finder, gear-usage-statistics |
-| `/admin/editor/ee/<id>` — `rank`, `rank10`                                                 | `/equipment`, `/equipment/<slug>`, fiche perso, ee-priority-base, ee-priority-plus10         |
+| Où saisir                                                                                                 | Ce qui l'affiche                                                                             |
+| --------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| sous-onglet Fiche — rôle, priorité des skills, vidéos, puis rangs PvE et PvP (aussi dans Données › Rangs) | fiche perso, `/tierlist`, tierlistpve/pvp, tier-list-maker, contribute/ranking-helper        |
+| sous-onglet Gear reco — la reco d'équipement                                                              | fiche perso, `/equipment/<slug>` (« qui utilise »), gear-usage-finder, gear-usage-statistics |
+| sous-onglet EE — `rank`, `rank10` (aussi les cellules « EE base » et « EE +10 » de Données › Rangs)       | `/equipment`, `/equipment/<slug>`, fiche perso, ee-priority-base, ee-priority-plus10         |
 
 Un seul piège, et il prévient : une mécanique de perso sort souvent un `BT_`
 inédit (précédents : `BT_2000065_A`, `BT_2000094`), que le build **warn**. Tant

@@ -1,8 +1,8 @@
 /**
  * Forces & faiblesses par personnage — contenu ÉDITORIAL écrit par un joueur
  * (pas une extraction). Source de vérité : la couche CURÉE
- * (`data/curated/characters.json`, éditée via /admin/editorial). Les textes
- * portent des tags inline `{B/…}` résolus par parse-text.
+ * (`data/curated/characters.json`, éditée dans quick, Fiche perso › Pros /
+ * Cons). Les textes portent des tags inline `{B/…}` résolus par parse-text.
  */
 import { getCharacterCurated } from '@/lib/data/curated';
 

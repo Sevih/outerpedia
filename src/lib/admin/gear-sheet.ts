@@ -1,10 +1,11 @@
 /**
- * La FICHE d'une entité d'équipement depuis l'extraction FRAÎCHE — ce que
- * `GearDetail` de l'admin lisait du COMMITTÉ (`@/lib/data/equipment`), relu
+ * La FICHE d'une entité d'équipement depuis l'extraction FRAÎCHE, pour la
+ * section Extraction de quick — ce que `GearDetail` de l'ancien panneau admin
+ * lisait du COMMITTÉ (`@/lib/data/equipment`), relu
  * ici du build de la cible (`buildEquipment`) : une famille d'armes, d'amulettes
  * ou de talismans (l'unité de la sidebar et du catalogue public), un EE, un
  * set. Un équipement `new` a donc sa fiche avant d'être intégré, ce que
- * l'admin ne savait pas faire.
+ * l'ancien panneau ne savait pas faire.
  *
  * Et le PONT entre la cible de revue (`weapon`, `amulet`…), le kind
  * d'intégration (`weapon`, `accessory`…), le slot du build et la clé de
@@ -35,11 +36,11 @@ export interface GearTargetInfo {
   slot: 'ee' | 'weapon' | 'accessory' | 'talisman' | 'sets';
   /** La clé de `families` ; `null` pour un EE ou un set (un seul id). */
   familyKey: 'weapon' | 'accessory' | 'talisman' | null;
-  /** Le segment de la page de l'admin (`/admin/extractor/<segment>/<id>`). */
+  /** Le segment de l'ancienne page de l'admin, retirée le 13/10 : plus lu que par son test. */
   adminPath: string;
 }
 
-/** Cible de revue → kind d'intégration, slot, famille, page de l'admin. */
+/** Cible de revue → kind d'intégration, slot, famille, ancien segment d'URL. */
 export const GEAR_TARGETS: Readonly<Record<GearTarget, GearTargetInfo>> = {
   ee: { kind: 'ee', slot: 'ee', familyKey: null, adminPath: 'ee' },
   weapon: { kind: 'weapon', slot: 'weapon', familyKey: 'weapon', adminPath: 'weapons' },

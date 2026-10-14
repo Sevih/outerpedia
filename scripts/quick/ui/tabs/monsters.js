@@ -21,8 +21,11 @@ const TYPES = [
 // Les deux groupes de pastilles du picker, sous leurs libellés.
 const MODE = 'Mode';
 const TYPE = 'Type';
-// La pastille « sans mode » : un monstre qu'aucun mode de jeu ne range (un add
-// sans spawn, un monstre des seuls modes que le damage calc écarte).
+// La pastille « Autres » : un monstre dont un spawn tombe dans un mode qu'aucun
+// groupe ne range (les skirmish du Monad Gate, que le damage calc écarte) — le
+// mot de l'en-tête. Une valeur qu'aucune clé de mode (un slug) ne prend.
+const OTHER_MODES = '*autres';
+// La pastille « sans mode » : un monstre sans aucun spawn (un add invoqué).
 const NO_MODE = '';
 // Les deux sections par carte du curé, sous leurs noms.
 const KIT = { hide: 'chipHide', add: 'chipAdd' };
@@ -474,8 +477,14 @@ function matches(m, q) {
   return needle.length > 0 && needle.every((n) => words.some((w) => w.startsWith(n)));
 }
 
-/** Les modes de jeu d'un monstre, ou « sans mode » : ce que ses pastilles filtrent. */
-const modesOf = (m) => (m.modes?.length ? m.modes : [NO_MODE]);
+/**
+ * Les modes de jeu d'un monstre, « Autres » compris, ou « sans mode » : ce que
+ * ses pastilles filtrent.
+ */
+const modesOf = (m) => {
+  const modes = [...(m.modes ?? []), ...(m.otherModes ? [OTHER_MODES] : [])];
+  return modes.length ? modes : [NO_MODE];
+};
 
 /**
  * Où on affronte un monstre : tous ses modes de jeu, sous leurs titres, puis
@@ -496,12 +505,15 @@ const pickTile = (m) =>
 
 /**
  * Les pastilles de mode de jeu : les modes que le roster porte, dans l'ordre et
- * sous les titres du damage calc du site (`modeGroups` du serveur), puis « sans
- * mode » s'il en reste. Aucune pour un serveur d'avant les modes.
+ * sous les titres du damage calc du site (`modeGroups` du serveur), puis
+ * « Autres » et « sans mode » s'il en reste. Aucune pour un serveur d'avant les
+ * modes.
  */
 function modePills() {
   const options = (roster.modeGroups ?? []).filter((g) => g.count).map((g) => [g.key, g.label]);
-  if (options.length && roster.roster.some((m) => !m.modes?.length))
+  if (options.length && roster.roster.some((m) => m.otherModes))
+    options.push([OTHER_MODES, 'Autres']);
+  if (options.length && roster.roster.some((m) => modesOf(m)[0] === NO_MODE))
     options.push([NO_MODE, 'sans mode']);
   return options.length ? [{ label: MODE, options, of: modesOf, counted: true }] : [];
 }

@@ -1,8 +1,8 @@
 /**
- * CLI de RATTRAPAGE du versionnage de boss — la voie NORMALE est le bouton
- * « Versionner » de l'admin (`/admin/extractor/monsters/<id>`), qui fige HEAD.
+ * CLI de RATTRAPAGE du versionnage de boss — la voie NORMALE est le geste
+ * « Figer et ré-épingler » de quick (Extraction, fiche du monstre), qui fige HEAD.
  *
- * Cette CLI ne sert que le cas que l'admin ne couvre pas : repêcher un état
+ * Cette CLI ne sert que le cas que quick ne couvre pas : repêcher un état
  * DÉJÀ recouvert par plusieurs commits, via `--ref <commit>` (le trouver :
  * `git log -- data/generated/monsters.json`).
  *

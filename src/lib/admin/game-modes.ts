@@ -1,7 +1,7 @@
 /**
  * LES MODES DE JEU, tels que le damage calc du site les liste — pour le picker
  * de Monstres de quick, qui filtre par mode « comme le damage calc », l'en-tête
- * d'un monstre, le `select` d'« Intégrer un mode » et la sidebar de l'admin.
+ * d'un monstre et le `select` d'« Intégrer un mode » de la section Extraction.
  *
  * Le damage calc compose sa liste en trois endroits de
  * `src/app/[lang]/tools/_contents/damage-calculator/` — `index.tsx` (le
@@ -105,13 +105,18 @@ const strays = (groups: readonly GameModeGroup[], slugs: readonly string[]): str
   return slugs.filter((s) => !known.has(s));
 };
 
+/** Un des slugs n'a pas de groupe : ce que « Autres » dit, de l'en-tête au picker. */
+export function hasOtherModes(groups: readonly GameModeGroup[], slugs: readonly string[]): boolean {
+  return strays(groups, slugs).length > 0;
+}
+
 /**
  * Les titres des groupes où tombent des slugs de mode, dans l'ordre des
  * groupes ; « Autres » ferme la liste dès qu'un slug n'a pas de groupe.
  */
 export function modeLabelsOf(groups: readonly GameModeGroup[], slugs: readonly string[]): string[] {
   const labels = groupsOf(groups, slugs).map((g) => g.label);
-  return strays(groups, slugs).length ? [...labels, OTHER_MODES] : labels;
+  return hasOtherModes(groups, slugs) ? [...labels, OTHER_MODES] : labels;
 }
 
 /** Un mode de jeu dans un `select` : son slug, et le titre de son groupe. */

@@ -5,7 +5,7 @@ import { getActiveBanners } from '@/lib/home';
 import { BannerCountdown, BannerWrapper } from './BannerCountdown';
 
 /**
- * Bannières de recrutement ACTIVES (curées via /admin/tools/banners) — carte
+ * Bannières de recrutement ACTIVES (curées dans quick, section Bannières) — carte
  * perso + compte à rebours. Section masquée s'il n'y en a aucune. Layout unique flex-wrap
  * (desktop et mobile) — pas de carousel dédié, les cartes s'enroulent.
  */

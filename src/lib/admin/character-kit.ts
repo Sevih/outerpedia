@@ -4,9 +4,9 @@
  * résolues comme le rendu, la curation du disque restreinte à ces cartes, et le
  * catalogue du glossaire que « + » propose.
  *
- * Partagé par l'éditeur de l'admin (`/admin/editor/characters/[id]`) et la
- * « Fiche perso » de quick : le même calcul, sur le même bundle (un perso et
- * ses skills), chacun avec sa source d'icônes de skill.
+ * Partagé par deux sections de quick, la « Fiche perso » (sous-onglet Skills)
+ * et la fiche perso d'« Extraction » : le même calcul, sur le même bundle (un
+ * perso et ses skills), chacune avec sa source d'icônes de skill.
  */
 import type { Skill } from '@contracts';
 import { isDebuffEffect, type ClientEffect } from '@/components/character/EffectChips';
@@ -63,7 +63,7 @@ export interface CharacterKitBundle {
 /**
  * Les cartes éditables d'un kit — mains, fusion_passive, extra, puis la chaîne
  * et le duo — avec leurs chips AUTO. `skillIconSrc` : l'adresse de l'icône d'un
- * skill (l'admin sert les sprites bruts, pas encore stagés).
+ * skill (la fiche d'Extraction sert les sprites bruts, pas encore stagés).
  */
 export function characterKitCards(
   bundle: CharacterKitBundle,

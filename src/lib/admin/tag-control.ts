@@ -3,7 +3,8 @@
  * éditorial ({B/…}, {P/…}, {I-W/…}…) et vérifie que chaque tag a une
  * correspondance dans la donnée — même résolution que le rendu parse-text.
  *
- * Collecte PARTAGÉE entre la page /admin/tags (diagnostic) et le test vitest
+ * Collecte PARTAGÉE entre l'inbox du Tableau de bord de quick
+ * (`admin-inbox.ts`, les tags morts et où les corriger) et le test vitest
  * (`tag-control.test.ts`) qui rend le contrôle BLOQUANT : un tag sans
  * correspondance fait échouer la suite avant tout build.
  */
@@ -81,7 +82,7 @@ export function collectTagOccurrences(): TagOccurrence[] {
 
   // GUIDES : contenu colocalisé (`_contents/<cat>/<slug>/`). Le rendu est
   // STRICT (un tag mort casse le build SSG) — ce scan donne le même verdict
-  // PLUS TÔT (vitest) et le diagnostic détaillé (/admin/tags).
+  // PLUS TÔT (vitest) et le diagnostic détaillé (Tableau de bord de quick).
   for (const guide of listGuides()) {
     const dir = resolve(
       process.cwd(),

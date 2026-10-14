@@ -1,9 +1,9 @@
 /**
- * La FICHE d'un monstre telle que l'extractor la montre : ses rencontres, ses
- * stats à la rencontre, ses relations (invocateurs, kit lié, invoqués) et le
- * déclencheur d'enrage de ses skills — ce que la page de l'admin
- * (`/admin/extractor/monsters/[id]`) et `MonsterStatsCard` calculaient dans
- * leur rendu, descendu ici pour que quick n'en recopie aucune règle.
+ * La FICHE d'un monstre telle que la section Extraction de quick la montre :
+ * ses rencontres, ses stats à la rencontre, ses relations (invocateurs, kit
+ * lié, invoqués) et le déclencheur d'enrage de ses skills — des règles que
+ * l'ancien panneau admin calculait dans son rendu, descendues ici pour que
+ * quick n'en recopie aucune.
  *
  * Tout est PUR : le monstre, les donjons (frais, avec le committé en repli
  * pour un monstre retenu dont le donjon a disparu), les titres de modes, les
@@ -21,7 +21,7 @@ import {
 } from '@/lib/monster-stats';
 import { statAbbr } from '@/lib/stats';
 
-/** Les rencontres montrées avant « n de plus » (la règle de la page de l'admin). */
+/** Les rencontres montrées avant « n de plus » sur la fiche d'Extraction. */
 export const ENCOUNTERS_SHOWN = 25;
 
 /** Les donjons où lire une rencontre : le frais d'abord, le committé en repli. */
@@ -130,7 +130,7 @@ export interface MonsterStatsOption {
 }
 
 export interface MonsterStatsSheet {
-  /** Dédoublonnées par effet et triées par niveau, comme la carte de l'admin. */
+  /** Dédoublonnées par effet et triées par niveau. */
   options: MonsterStatsOption[];
   /** Celle que la carte montre d'abord : la dernière (le palier le plus haut). */
   selected: number;

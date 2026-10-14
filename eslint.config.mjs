@@ -197,7 +197,6 @@ const eslintConfig = defineConfig([
                 '@/lib/admin/*-actions',
                 '!@/lib/admin/inline-preview-actions',
                 '@/lib/admin/guard',
-                '@/lib/admin/useAutoTranslate',
               ],
               allowTypeImports: true,
               message: SHARED_BRICK_MSG,

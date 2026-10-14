@@ -40,8 +40,7 @@ export function actionableDiff(targetId: string, diff: Diff): Diff {
  * l'accueil. Sert d'en-tête AUTORITAIRE à la sidebar extractor : sinon elle
  * dériverait ses stats de TOUTES ses lignes (le toggle « Used by the site »
  * filtre la liste affichée, pas les compteurs) et contredirait le badge.
- * `minor` = retouches mineures et typos du même périmètre (la sidebar range les
- * deux sous `minor`, cf. `monster-rows.ts`).
+ * `minor` = retouches mineures et typos du même périmètre, comptées ensemble.
  */
 export function siteMonsterCounts(): { new: number; diff: number; minor: number } {
   try {

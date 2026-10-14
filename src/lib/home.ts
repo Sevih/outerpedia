@@ -63,12 +63,12 @@ function todayUTC(): string {
 
 /**
  * Bannières actives aujourd'hui, enrichies du perso. Source = le fichier CURÉ
- * (`/admin/tools/banners`), PAS `recruit.json` : les patch notes tombent 24-48 h
- * avant la mise à jour du jeu, la curation permet de pré-saisir une bannière
- * que les tables n'ont pas encore (le généré reste la source des guides —
- * historique release/rerun des limited). Lue en runtime comme les coupons :
- * une bannière sauvée en admin part en prod sans redéploiement. Dédupliquées
- * par perso (un même perso peut avoir deux fenêtres qui se chevauchent) et
+ * (`banner.json`, section Bannières de quick), PAS `recruit.json` : les patch
+ * notes tombent 24-48 h avant la mise à jour du jeu, la curation permet de
+ * pré-saisir une bannière que les tables n'ont pas encore (le généré reste la
+ * source des guides — historique release/rerun des limited). Lue en runtime
+ * comme les coupons : une bannière enregistrée dans quick part en prod sans
+ * redéploiement. Dédupliquées par perso (un même perso peut avoir deux fenêtres qui se chevauchent) et
  * triées par rareté.
  */
 export async function getActiveBanners(lang: Lang): Promise<BannerVM[]> {

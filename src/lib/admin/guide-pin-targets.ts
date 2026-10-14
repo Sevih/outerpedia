@@ -1,10 +1,9 @@
 /**
  * Ce qu'une version de guide VERSIONNÉ peut épingler : les monstres de SON
- * combat, chacun avec les archives qui existent pour lui. Sorti de la page
- * admin (`/admin/guides/[category]/[slug]`, lot F18) pour que quick (section
- * « Guides ») lise la même chose — les pins d'une version s'y lisent et s'y
- * dépinglent, ils ne s'y créent pas (le versionnage des monstres est à
- * l'extractor, étapes 19-20).
+ * combat, chacun avec les archives qui existent pour lui. Lu par la section
+ * « Guides » de quick (lot F18) — les pins d'une version s'y lisent et s'y
+ * dépinglent, ils ne s'y créent pas (le versionnage des monstres est dans la
+ * section Extraction, sur la fiche du monstre).
  *
  * Le combat est pris sur la première version qui en déclare un : il appartient
  * au guide, pas à la version (vérifié sur les 16 guides versionnés — aucun n'en

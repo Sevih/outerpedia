@@ -1,6 +1,6 @@
 /**
  * Vues « kit de skills » pré-localisées — partagées entre la fiche publique et
- * le panneau admin (même rendu, données construites UNE fois ici).
+ * quick (même rendu, données construites UNE fois ici).
  *
  * Rappels modèle : les buffs/debuffs de l'attaque en CHAÎNE vivent sur les
  * skills techniques `strike_*` (selon la position du perso dans la chaîne),
@@ -28,7 +28,7 @@ import type { ClientEffect, StatusMap } from '@/components/character/EffectChips
 import type { ChainLevel } from '@/components/character/ChainDualSection';
 
 // Curation lue au DISQUE (cache mtime), pas importée : ces fichiers sont
-// réécrits par l'admin en cours de session — un import statique les mettrait
+// réécrits par quick pendant que le site tourne — un import statique les mettrait
 // dans le graphe de modules et chaque save recompilerait le site (cf.
 // src/lib/data/disk.ts). Ce module est donc SERVEUR uniquement. Le glossaire,
 // lui, passe par son accesseur (import statique) : `effects.ts`, importé
@@ -200,7 +200,7 @@ function isTranscendUpgrade(s: Skill, e: RawEffect): boolean {
  * pour BT_SEALED_RESURRECTION…). Même pont que les passifs d'équipement. L'index
  * (`bySideKey`) est PARTAGÉ avec `resolveEffectKey`, mémoïsé sur le mtime du
  * fichier curé (cf. `curatedKeyIndex` d'effects.ts) — plus de cache local qui se
- * périmerait dans le process admin long-running. */
+ * périmerait dans un process long-running (quick, le serveur de dev). */
 function curatedCreationFor(
   side: 'buff' | 'debuff',
   type: string,
@@ -292,7 +292,7 @@ export function mainSkills(skills: Skill[]): Skill[] {
 /**
  * Statuts nommés référencés par les effets des skills (chips) : nom, nature,
  * icône et description depuis les effets FUSIONNÉS (les overrides curés de
- * /admin/effects comptent) — utilisé par le site ET l'admin.
+ * la section Effets de quick comptent) — utilisé par le site ET quick.
  */
 export function buildStatusMap(
   skills: Skill[],

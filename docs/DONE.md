@@ -7,6 +7,99 @@
 
 ## 2026-10-14
 
+- **Après le retrait de `/admin` : docs, en-têtes, libellés, modules
+  orphelins, pastilles « Autres » et « Patch » (lot A51)** — les points 1 à
+  7 de l'item du TODO, relevés par la relecture du 13/10 ; le point 8 (le
+  dépliant d'une entité nouvelle) est B49 et reste au TODO avec les
+  contrôles à l'écran. (1) DOCS : `docs/procedure/newPatch.md` dit le cycle
+  dans quick (Accueil › Patch : « Lancer », « Dry-run », « Promouvoir »,
+  « Committer », puis « Pousser » dans l'en-tête), la vérification dans
+  Données › Extraction, la carte des saisies curées vers les sous-onglets
+  Fiche, Gear reco et EE de la Fiche perso (et Données › Rangs) ;
+  `datagen/README.md` : l'intégration par entité dans Extraction, l'édition
+  du curé dans quick, `datagen:regen` après une correction d'Effets, le
+  versionnage par « Intégrer » et « Figer et ré-épingler » (bloc
+  « Versions », `POST /api/extractor/freeze`) à la place de « Save » et
+  « Version the committed state », les pages dev-only `/dev/*`. Rien d'autre
+  de ces deux fichiers. (2) EN-TÊTES, commentaires seulement, chaque lecteur
+  vérifié par `grep` de l'importeur : les neuf modules de `src/lib/admin/`
+  listés (`character-kit` et `monster-kit` : Fiche perso / Monstres et la
+  fiche d'Extraction ; `effect-catalog`, `effect-search` : Effets ;
+  `gear-sheet`, `monster-sheet` : Extraction ; `guide-pin-targets` :
+  Guides ; `tag-control` : l'inbox du Tableau de bord ; `extractor-rows`,
+  cf. laissé), `events.ts` (Publication › Événements ; `includeDrafts`
+  n'est posé que par le site de dev, `IS_DEV`), `pros-cons.ts`, `home.ts`,
+  `skill-view.ts`, `CurrentBanners.tsx`, `EditorialFields.tsx` (il ne sert
+  plus que l'outil public), `editorial.ts` et le `_doc` de
+  `shop-editorial.json` du guide shop (Guides, Shop priorities), le `_doc`
+  de `data/curated/gear-presets.json` (édité à la main, aucun écran ; la
+  garde « refuse d'en supprimer un encore référencé » est partie avec
+  l'admin, le `_doc` dit de vérifier les builds avant), plus les dernières
+  URL `/admin/…` en commentaire hors liste : `datagen/version-boss.ts`,
+  deux blocs d'`actions.ts`, l'en-tête de `game-modes.ts` (« la sidebar de
+  l'admin »). (3) « lu par l'admin » ôté de `tabs/dashboard.html`, de
+  `STYLE.md` et du test qui le fige (qui vérifie aussi qu'« admin » n'y est
+  plus). (4) `ADMIN_BASE_DEFAULT` / `ADMIN_BASE` → `DEV_SITE_BASE_DEFAULT`
+  / `DEV_SITE_BASE` dans `actions.ts` et `actions.test.ts`, sans alias
+  (aucun `.env` ne la pose). (5) SUPPRIMÉS, importeurs revérifiés par
+  `grep -rn` dans `src scripts datagen` (relatifs compris) — aucun n'en
+  avait gagné : `event-text.ts`, `gear-presets-store.ts`, `monster-rows.ts`,
+  `useAutoTranslate.ts` et leurs quatre tests ; retirés avec eux la ligne
+  `@/lib/admin/useAutoTranslate` d'`eslint.config.mjs` (aucun des quatre
+  n'était dans `ADMIN_SHIPS_TO_PROD`, ni dans `CONVENTIONS.md`) et le
+  renvoi à `monster-rows.ts` d'un commentaire de `monster-review.ts`. (6)
+  PICKER MONSTRES : `MonsterRosterRow` gagne `otherModes` (un spawn dans un
+  mode qu'aucun groupe ne range — `hasOtherModes`, exporté de
+  `game-modes.ts`, la règle que `modeLabelsOf` appliquait déjà pour
+  « Autres » ; `place` inchangé) ; `monsters.js` pose la pastille
+  « Autres » juste avant « sans mode », qui ne garde que les monstres sans
+  aucun spawn. Lu sur ce poste (`monstersRoster()` en `tsx`, lecture
+  seule) : 204 « Autres » et 136 « sans mode » dans le périmètre Site, 0 et
+  25 dans celui des Guides — d'où l'exemple `[Autres 0] [sans mode 25]` de
+  `STYLE.md`. (7) PASTILLE « PATCH » : la comparaison du bloc `game` sort en
+  `clientGap` (résultat de `dashboardState` inchangé) ; `badgesState` lit
+  en plus `siteVersion` et `clientVersion` et ajoute
+  `patch: { count: 1, tone: 'warn' }` quand le client est `ahead`, rien
+  pour `same`, `behind`, `absent` ; une lecture qui lève ôte la pastille,
+  pas la route. Rien à changer côté page : `paintBadges` pose toute section
+  servie, et la somme monte sur le groupe Accueil. Son commentaire et
+  `STYLE.md` (§ pastilles) le disent. **Vérifié** : tests ajoutés —
+  `hasOtherModes` ; le roster (`otherModes` vrai pour le skirmish, faux
+  pour le monstre sans spawn) ; le picker en happy-dom (« Autres 1 » avant
+  « sans mode 1 », chacun ne filtre que les siens) ; `badgesState` avec un
+  `disk` injecté (`ahead` → pastille, comparaison numérique ; `same`,
+  `behind`, `absent` → rien ; une version qui lève → rien, les autres
+  pastilles servies). Dernières lignes : `pnpm typecheck`, la commande
+  seule (les trois `tsc --noEmit`, sans erreur) ; `pnpm lint`, `$ eslint`
+  sans erreur ; `pnpm test`, « Tests 3769 passed (3769) » ;
+  `pnpm format:check`, « All matched files use Prettier code style! ». Pas
+  de quick lancé : tout est couvert par les tests sur le vrai markup.
+  Changement visuel : les seules deux pastilles et le libellé du Tableau
+  de bord demandés. Le grep du point 2
+  (`grep -rn "/admin\|l'admin" src scripts datagen data/curated`) rend
+  523 lignes dans 157 fichiers : 247 sont des
+  chemins `src/lib/admin/` (imports, noms de fichier) ; il reste UNE URL,
+  `datagen/promote.ts` l.630 (« vérifie /admin… », une chaîne imprimée par
+  `promote --apply` dans la console de Patch : du code, hors du point 2), et
+  275 « l'admin » génériques dans 76 fichiers hors tests (24 en tests) —
+  « l'admin voit ses écritures » dans `src/lib/data/`, le « verrou de
+  l'admin » de `patch.ts`, `server.ts`, des chaînes d'erreur des guides
+  (« à extraire/valider via l'admin (Extractor › Monsters) » :
+  `BossPanel.tsx`, `encounters.ts`…), une chaîne de `fr.ts`. Hors de la
+  liste du lot, elles demandent un lot à elles. **Laissé** : ces 276
+  lignes ; `extractor-rows.ts` n'a plus aucun importeur depuis la
+  suppression de `monster-rows.ts` (son en-tête le dit ; le supprimer est
+  une décision) ; `filterEffectCatalog` (`effect-search.ts`) et
+  `validateGearPresets` (`datagen/curated/gear-reco.ts`, dernier appelant
+  supprimé ici) ne servent plus que leur test, ou rien ; `adminPath` de
+  `GEAR_TARGETS` (`gear-sheet.ts`) n'est plus lu que par son test ; l'item
+  TODO « Tableau de bord — contrôles à l'écran (lot B36) » cite encore
+  `ADMIN_BASE` et des liens vers `/admin`. Effet du hook `stamp:guides` :
+  toucher l'en-tête et le `_doc` du guide shop a re-daté son `meta.json`
+  au 14/10, sans changement de contenu. **Reste à Sevih** : relancer
+  quick (route et page changées), voir « Autres » dans le picker Monstres
+  sous « Site », et la pastille « Patch » au prochain patch, avant
+  « Lancer ».
 - **Patch du 14/10 joué depuis quick (lot C10), R2 nettoyé, retouches des
   monstres (lot B27) closes.** Sevih a mené le cycle « Patch » de quick de
   bout en bout (Lancer, Dry-run, Promouvoir, Committer, Pousser :

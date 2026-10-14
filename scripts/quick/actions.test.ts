@@ -201,7 +201,7 @@ import type { MonsterArchiveEntry } from '@contracts';
 import { MONSTER_FILES, type FreezeGuide, type PinRef } from '@/lib/admin/monster-freeze';
 import type { RepinPlan, RepinResult } from '@/lib/admin/repin-guides';
 import {
-  ADMIN_BASE_DEFAULT,
+  DEV_SITE_BASE_DEFAULT,
   BANNER_LOOKBACK_DAYS,
   CHARACTER_COVERAGE_DISK,
   CHARACTER_SHEET_DEPS,
@@ -4003,8 +4003,8 @@ describe('dashboardState — l’accueil de quick, toutes lectures injectées', 
     expect(tagSourceSheet('curated pros-cons · 2999999.pros[0].en')).toBeNull();
   });
 
-  it('`ADMIN_BASE_DEFAULT` : le site de dev de Caddy', () => {
-    expect(ADMIN_BASE_DEFAULT).toBe('https://outerpedia.local');
+  it('`DEV_SITE_BASE_DEFAULT` : le site de dev de Caddy', () => {
+    expect(DEV_SITE_BASE_DEFAULT).toBe('https://outerpedia.local');
   });
 
   it('git : l’état de « Pousser », le dernier commit, les fichiers modifiés ou non suivis comptés', async () => {
@@ -4361,7 +4361,7 @@ describe('dashboardState — l’accueil de quick, toutes lectures injectées', 
       ).toEqual({ effects: { count: 3, tone: 'warn' } });
     });
 
-    it('`badgesState` : l’inbox du tableau de bord, par l’adresse de chaque item, et rien d’autre', async () => {
+    it('`badgesState` : l’inbox du tableau de bord, par l’adresse de chaque item', async () => {
       const tags = item({
         key: 'tags',
         tab: 'character/2000012/pros-cons',
@@ -4375,8 +4375,12 @@ describe('dashboardState — l’accueil de quick, toutes lectures injectées', 
         item({ key: 'assets', tab: 'gamedata', rank: 3, count: 40 }),
         item({ key: 'extract:item', tab: 'extractor/item', tone: 'muted', count: 9 }),
       ];
-      // La seule lecture de l'inbox, sans git, sans le jeu, sans R2.
-      const reads = { inbox: () => [tags, ...rest] };
+      // L'inbox et les deux versions du jeu (à jour ici), sans git ni R2.
+      const reads = {
+        inbox: () => [tags, ...rest],
+        siteVersion: () => '1.11.404',
+        clientVersion: () => '1.11.404',
+      };
       const { sections, at } = await badgesState(reads);
       expect(sections).toEqual({
         character: { count: 2, tone: 'danger' },
@@ -4386,7 +4390,10 @@ describe('dashboardState — l’accueil de quick, toutes lectures injectées', 
       expect(at).toMatch(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/);
 
       // Des tags morts de deux persos : aucune section ne les réunit, pas de pastille.
-      const spread = await badgesState({ inbox: () => [{ ...tags, tab: null }, ...rest] });
+      const spread = await badgesState({
+        ...reads,
+        inbox: () => [{ ...tags, tab: null }, ...rest],
+      });
       expect(spread.sections).toEqual({
         extractor: { count: 17, tone: 'danger' },
         gamedata: { count: 40, tone: 'warn' },
@@ -4408,6 +4415,46 @@ describe('dashboardState — l’accueil de quick, toutes lectures injectées', 
           }),
         ),
       ).rejects.toThrow('extraction indisponible');
+    });
+
+    it('`badgesState` : une pastille « Patch » quand le client installé est en avance sur le site, et dans ce cas seulement', async () => {
+      const patchOf = async (client: string | null) =>
+        (await badgesState(disk({ siteVersion: () => '1.11.404', clientVersion: () => client })))
+          .sections.patch;
+      // `ahead` : comparaison NUMÉRIQUE, « 1.11.1000 » dépasse « 1.11.404 ».
+      expect(await patchOf('1.11.1000')).toEqual({ count: 1, tone: 'warn' });
+      expect(await patchOf('1.12.0')).toEqual({ count: 1, tone: 'warn' });
+      // `same`, `behind`, `absent` : rien.
+      expect(await patchOf('1.11.404')).toBeUndefined();
+      expect(await patchOf('1.11.99')).toBeUndefined();
+      expect(await patchOf(null)).toBeUndefined();
+      // La même règle que le bloc `game` du tableau de bord.
+      const ahead = disk({ clientVersion: () => '1.11.405' });
+      expect((await dashboardState(ahead)).game?.client).toBe('ahead');
+      // Les autres pastilles restent celles de l'inbox.
+      const both = await badgesState({ ...ahead, inbox: () => [item({ count: 2 })] });
+      expect(both.sections).toEqual({
+        extractor: { count: 2, tone: 'warn' },
+        patch: { count: 1, tone: 'warn' },
+      });
+    });
+
+    it('`badgesState` : une version illisible ôte la pastille « Patch », pas la route', async () => {
+      const broken = (over: Partial<DashboardDisk>) =>
+        badgesState(disk({ inbox: () => [item()], clientVersion: () => '1.12.0', ...over }));
+      for (const over of [
+        {
+          siteVersion: () => {
+            throw new Error('game-version.json illisible');
+          },
+        },
+        {
+          clientVersion: () => {
+            throw new Error('client illisible');
+          },
+        },
+      ])
+        expect((await broken(over)).sections).toEqual({ extractor: { count: 1, tone: 'warn' } });
     });
   });
 });
@@ -7000,6 +7047,7 @@ describe('monstersRoster, monsterSheetState, saveMonsterKit — l’onglet « Mo
     place = '',
     modes: string[] = [],
     zones: string[] = [],
+    otherModes = false,
   ) => ({
     id: m.id,
     name: m.name.en,
@@ -7007,6 +7055,7 @@ describe('monstersRoster, monsterSheetState, saveMonsterKit — l’onglet « Mo
     icon: img.monster(m.icon),
     place,
     modes,
+    otherModes,
     zones,
     guides,
   });
@@ -7161,6 +7210,14 @@ describe('monstersRoster, monsterSheetState, saveMonsterKit — l’onglet « Mo
       ['mob', 'Autres', 0],
     ]);
     expect(out.roster[3].zones).toEqual(['Gate']);
+    // `otherModes` sépare les deux lignes sans clé de mode : le skirmish va sous
+    // « Autres » dans le picker, le monstre sans spawn sous « sans mode ».
+    expect(out.roster.map((r) => [r.id, r.otherModes])).toEqual([
+      [BOSS.id, false],
+      ['twin', false],
+      ['hors-committe', false],
+      ['mob', true],
+    ]);
   });
 
   it('roster : gardé tant que rien ne bouge (`stamp`), recalculé ensuite', () => {
@@ -7200,7 +7257,7 @@ describe('monstersRoster, monsterSheetState, saveMonsterKit — l’onglet « Mo
     expect(state.catalog).toBe(CATALOG);
     // Le dossier des icônes d'effets n'est plus servi : `effectTile` le porte.
     expect(state).not.toHaveProperty('sprite');
-    expect(state.guideBase).toBe(`${process.env.ADMIN_BASE || ADMIN_BASE_DEFAULT}/en/guides`);
+    expect(state.guideBase).toBe(`${process.env.DEV_SITE_BASE || DEV_SITE_BASE_DEFAULT}/en/guides`);
   });
 
   it('état : `shared` — les skills que d’autres monstres portent, leur nombre et leurs noms', () => {

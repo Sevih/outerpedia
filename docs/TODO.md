@@ -148,32 +148,16 @@
       perso » / « câbler les chips » depuis la fiche, « extraction » depuis
       la Fiche perso et depuis Monstres. (6) Un geste sur une fiche lue
       avant un refresh → « Rien n'est écrit — … ont changé », la fiche relue.
-- [ ] **Après le retrait de `/admin` (relecture du 13/10) — lots A51
-      (points 1 à 7) et B49 (point 8), rédigés le 14/10** : (1) `datagen/README.md` (cinq passages) et
-      `docs/procedure/newPatch.md` décrivent la procédure par l'admin : la
-      récrire vers quick (Patch, Extraction). (2) Les en-têtes qui citent
-      encore une URL `/admin/…` (`src/lib/admin/{character-kit,
-effect-catalog, effect-search, gear-sheet, guide-pin-targets,
-monster-kit, monster-sheet, tag-control, extractor-rows,
-useAutoTranslate}.ts`, `src/lib/data/{events,pros-cons}.ts`,
-      `src/lib/home.ts`, `src/lib/skill-view.ts`, `CurrentBanners.tsx`,
-      `EditorialFields.tsx`, `editorial.ts` du guide shop) — dont
-      `useAutoTranslate.ts` l.19 « il ne sert QUE l'admin », faux. (3)
-      « lu par l'admin » dans `tabs/dashboard.html`. (4) `ADMIN_BASE` /
-      `ADMIN_BASE_DEFAULT` de `actions.ts` ne servent plus qu'aux liens du
-      site de dev : renommer. (5) Quatre modules de `src/lib/admin/` sans
-      importeur, gardés pour leur test (`event-text.ts`,
-      `gear-presets-store.ts`, `monster-rows.ts`, `useAutoTranslate.ts`) :
-      supprimer ou dire pourquoi garder. (6) Le picker Monstres range sous
-      « sans mode » les 204 monstres que l'en-tête dit « Autres » (A49). (7)
-      Pas de pastille « Patch » pour un patch en attente (bloc `game`, hors
-      inbox). (8) Extraction, constat de Sevih du 14/10 : le dépliant d'une
-      entité NOUVELLE est vide (pas de diff à montrer) — pour toutes les
-      cibles, dont les deux skills de Doppelakeus en lecture ; attendu : le
-      contenu frais de l'entité (nom, type, description, niveaux), en
-      lecture, comme un diff où tout est « ajouté ». À l'écran, par Sevih : un vrai ajout Twitch ou Bilibili sur une
-      fiche (A48), les pastilles qui ne bougent plus au dry-run ni au push
-      (A50), « Autres » dans l'en-tête d'un monstre d'event (A49).
+- [ ] **Après le retrait de `/admin` (relecture du 13/10) — lot B49 (point
+      8), rédigé le 14/10 ; les points 1 à 7 sont faits (A51)** : (8)
+      Extraction, constat de Sevih du 14/10 : le dépliant d'une entité
+      NOUVELLE est vide (pas de diff à montrer) — pour toutes les cibles, dont
+      les deux skills de Doppelakeus en lecture ; attendu : le contenu frais
+      de l'entité (nom, type, description, niveaux), en lecture, comme un diff
+      où tout est « ajouté ». À l'écran, par Sevih : un vrai ajout Twitch ou
+      Bilibili sur une fiche (A48), les pastilles qui ne bougent plus au
+      dry-run ni au push (A50), « Autres » dans l'en-tête d'un monstre d'event
+      (A49).
 - [ ] **« Événements » — contrôles à l'écran (lot F23)** : le banc ne
       clique pas, aucun enregistrement réel n'a été joué, `/api/translate`
       jamais appelé avec des clés, `POST /api/events` jamais appelé (les

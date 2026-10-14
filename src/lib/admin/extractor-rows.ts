@@ -1,9 +1,8 @@
 /**
- * Une LIGNE des listes de l'extracteur — le type seul, sans rien d'autre : les
- * modules qui fabriquent ces lignes (`character-rows.ts`, `gear-rows.ts`,
- * `monster-rows.ts`) et la liste qui les affiche le lisent d'ici, descendu du
- * composant `ExtractorSidebar` le 13/10 (lot C14) pour qu'aucun module de
- * `src/lib/admin/` ne dépende d'un composant de l'admin.
+ * Une LIGNE des listes de l'extracteur de l'ancien panneau admin — le type
+ * seul, descendu du composant `ExtractorSidebar` le 13/10 (lot C14). Son
+ * dernier lecteur, `monster-rows.ts`, est supprimé (lot A51) : plus aucun
+ * importeur, ni quick ni le site.
  */
 export interface ExtractorRow {
   /** Clé de route (`basePath/<id>`) — encodée à l'affichage. */

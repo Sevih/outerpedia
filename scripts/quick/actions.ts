@@ -151,7 +151,13 @@ import {
   type MonsterKitDisk,
   type MonsterKitSections,
 } from '@/lib/admin/monster-kit';
-import { gameModeGroups, modeKeysOf, modeLabelsOf, modeOptionsOf } from '@/lib/admin/game-modes';
+import {
+  gameModeGroups,
+  hasOtherModes,
+  modeKeysOf,
+  modeLabelsOf,
+  modeOptionsOf,
+} from '@/lib/admin/game-modes';
 import {
   applyKitCuration,
   loadKitCurationSections,
@@ -917,7 +923,7 @@ export const EVENTS_DEPS: EventsDeps = {
 
 /** Les pages `/event/<slug>` du site, pour « ouvrir sur le site ». */
 const eventsSiteBase = (): string =>
-  `${process.env.ADMIN_BASE || ADMIN_BASE_DEFAULT}/${DEFAULT_LANG}/event`;
+  `${process.env.DEV_SITE_BASE || DEV_SITE_BASE_DEFAULT}/${DEFAULT_LANG}/event`;
 
 /**
  * La section « Événements » : `events.json` tel que le disque le porte (pas sa
@@ -1396,11 +1402,12 @@ export async function previewChangelogEntry(
 // -------------------------------------------------------- tableau de bord ----
 
 /**
- * Le site de dev de ce poste, où vit l'admin : Caddy le sert sous ce nom sur
- * les deux PC (`Caddyfile.dev`, comme `QUICK_HOST` de `lan.ts`). `ADMIN_BASE`
- * dans `.env.local` le remplace — un `http://localhost:3000` sans Caddy.
+ * Le site de dev de ce poste, cible des liens de quick vers le site (guides,
+ * événements) : Caddy le sert sous ce nom sur les deux PC (`Caddyfile.dev`,
+ * comme `QUICK_HOST` de `lan.ts`). `DEV_SITE_BASE` dans `.env.local` le remplace — un
+ * `http://localhost:3000` sans Caddy.
  */
-export const ADMIN_BASE_DEFAULT = 'https://outerpedia.local';
+export const DEV_SITE_BASE_DEFAULT = 'https://outerpedia.local';
 
 /** Sous combien de jours un code promo actif est « à échéance ». */
 export const COUPON_EXPIRY_DAYS = 7;
@@ -1582,13 +1589,43 @@ export function sectionBadges(
 }
 
 /**
- * Les pastilles du menu (`GET /api/badges`) : l'inbox du tableau de bord, et
- * elle seule, par section (`sectionBadges`) ; `at`, l'heure de la lecture. Rien
- * de git, du jeu ni de R2 : la route ne coûte que l'inbox, dont le diff est
- * mémoïsé sur l'empreinte de ses entrées (`memoizedBuckets`, `admin-inbox.ts`).
+ * Le client installé contre le site (`resVersion`, comparaison numérique) :
+ * `ahead` — un patch attend —, `behind`, `same`, ou `absent` sans client.
  */
-export async function badgesState(disk: InboxDisk = DASHBOARD_DISK) {
-  return { sections: sectionBadges(await quickInbox(disk)), at: new Date().toISOString() };
+function clientGap(site: string, client: string | null) {
+  const gap = client === null ? 0 : client.localeCompare(site, 'en', { numeric: true });
+  return client === null
+    ? ('absent' as const)
+    : gap > 0
+      ? ('ahead' as const)
+      : gap < 0
+        ? ('behind' as const)
+        : ('same' as const);
+}
+
+/** Ce que les pastilles lisent : l'inbox, et les deux versions du jeu. */
+type BadgesDisk = InboxDisk & Pick<DashboardDisk, 'siteVersion' | 'clientVersion'>;
+
+/**
+ * Les pastilles du menu (`GET /api/badges`) : l'inbox du tableau de bord par
+ * section (`sectionBadges`), plus une pastille « Patch » quand le client
+ * installé est en avance sur le site (`clientGap`, le `client: 'ahead'` du
+ * bloc `game`) ; `at`, l'heure de la lecture. Rien de git ni de R2, et du jeu
+ * ses deux seuls fichiers de version, sans réseau : la route coûte l'inbox,
+ * dont le diff est mémoïsé sur l'empreinte de ses entrées (`memoizedBuckets`,
+ * `admin-inbox.ts`). Une version illisible ôte la pastille « Patch », jamais
+ * la route.
+ */
+export async function badgesState(disk: BadgesDisk = DASHBOARD_DISK) {
+  const inbox = await quickInbox(disk);
+  let waiting = false;
+  try {
+    waiting = clientGap(disk.siteVersion(), disk.clientVersion()) === 'ahead';
+  } catch {
+    // Pas de pastille : le Tableau de bord, lui, dit pourquoi (`errors.game`).
+  }
+  const patch = waiting ? [{ tab: 'patch', count: 1, tone: 'warn' as const }] : [];
+  return { sections: sectionBadges([...inbox, ...patch]), at: new Date().toISOString() };
 }
 
 /**
@@ -1654,20 +1691,7 @@ export async function dashboardState(disk: DashboardDisk = DASHBOARD_DISK) {
   const game = await block('game', () => {
     const site = disk.siteVersion();
     const client = disk.clientVersion();
-    const gap = client === null ? 0 : client.localeCompare(site, 'en', { numeric: true });
-    return {
-      site,
-      version: client,
-      client:
-        client === null
-          ? ('absent' as const)
-          : gap > 0
-            ? ('ahead' as const)
-            : gap < 0
-              ? ('behind' as const)
-              : ('same' as const),
-      proposal: hasProposal(disk),
-    };
+    return { site, version: client, client: clientGap(site, client), proposal: hasProposal(disk) };
   });
 
   const banners = await block('banners', () => {
@@ -2510,9 +2534,8 @@ export interface CharacterSheetDeps extends CharacterSheetDisk {
 }
 
 /**
- * L'EE d'un perso, assemblé comme la fiche de l'éditeur de l'admin
- * (`/admin/editor/ee/[id]`) : la vue, les chips AUTO, les passifs résolus et le
- * second porteur du modèle de page.
+ * L'EE d'un perso pour le sous-onglet EE de la « Fiche perso » : la vue, les
+ * chips AUTO, les passifs résolus et le second porteur du modèle de page.
  */
 function sheetEeItem(id: string): SheetEeItem | null {
   const view = getEEViews().find((v) => v.characterId === id);
@@ -4468,8 +4491,13 @@ export interface MonsterRosterRow {
    * pour un mode qu'aucun groupe ne range), deux au plus puis « +n » ; vide : aucun spawn.
    */
   place: string;
-  /** Les modes de jeu de ses spawns : des clés de `modeGroups`, dans leur ordre ; vide : sans mode. */
+  /**
+   * Les modes de jeu de ses spawns : des clés de `modeGroups`, dans leur ordre ;
+   * vide avec `otherModes` faux : aucun spawn, la pastille « sans mode ».
+   */
   modes: string[];
+  /** Des spawns dans un mode qu'aucun groupe ne range : la pastille « Autres » du picker. */
+  otherModes: boolean;
   /** Les stages / zones de ses spawns : les deux premiers. */
   zones: string[];
   /** Les guides qui le désignent ; vide : un monstre du site, sans guide. */
@@ -4620,6 +4648,7 @@ function monstersIndex(disk: MonstersDisk): MonstersIndex {
       icon: img.monster(m.icon),
       place: modesPlace(modeLabelsOf(groups, modes)),
       modes: modeKeysOf(groups, modes),
+      otherModes: hasOtherModes(groups, modes),
       zones: zones.slice(0, 2),
       guides: guides.get(m.id) ?? [],
     };
@@ -4722,6 +4751,7 @@ export function monsterSheetState(id: string, disk: MonstersDisk = MONSTERS_DEPS
       icon: img.monster(m.icon),
       place: '',
       modes: [],
+      otherModes: false,
       zones: [],
       guides: [],
     },
@@ -4738,7 +4768,7 @@ export function monsterSheetState(id: string, disk: MonstersDisk = MONSTERS_DEPS
     ),
     catalog: disk.catalog(),
     shared,
-    guideBase: `${process.env.ADMIN_BASE || ADMIN_BASE_DEFAULT}/${DEFAULT_LANG}/guides`,
+    guideBase: `${process.env.DEV_SITE_BASE || DEV_SITE_BASE_DEFAULT}/${DEFAULT_LANG}/guides`,
   };
 }
 
@@ -5707,7 +5737,7 @@ export const GUIDES_DEPS: GuidesDeps = {
 
 /** Le site de dev du poste, où « ouvrir sur le site » mène (cf. `guideBase` des monstres). */
 const guidesSiteBase = (): string =>
-  `${process.env.ADMIN_BASE || ADMIN_BASE_DEFAULT}/${DEFAULT_LANG}/guides`;
+  `${process.env.DEV_SITE_BASE || DEV_SITE_BASE_DEFAULT}/${DEFAULT_LANG}/guides`;
 
 /** Les guides d'une catégorie, triés comme `listGuidesByCategory` : `order`, puis récent, puis slug. */
 const byGuideOrder = (a: Guide, b: Guide): number =>
@@ -7808,8 +7838,8 @@ export async function integrateItemAction(
 //
 // Les FICHES par entité de la section « Extraction » (lot F21, étape 20 de la
 // migration) : ce que l'extraction fraîche propose pour UN perso, UN monstre ou
-// UNE entité d'équipement — les pages `/admin/extractor/<x>/[id]` et
-// `GearDetail` —, et le geste « Intégrer » qui l'écrit dans `data/generated/`
+// UNE entité d'équipement — ce que montraient les pages de l'extractor de
+// l'ancien panneau admin —, et le geste « Intégrer » qui l'écrit dans `data/generated/`
 // et COMMITTE. S'y ajoutent « Intégrer un mode » (tous les monstres d'un mode
 // de jeu) et la route des sprites bruts du jeu, que les icônes des monstres et
 // des skills frais n'ont qu'ici.

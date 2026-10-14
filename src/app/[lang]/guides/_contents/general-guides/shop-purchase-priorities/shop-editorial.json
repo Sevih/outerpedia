@@ -1,5 +1,5 @@
 {
-  "_doc": "Contenu ÉDITORIAL du guide shop-purchase-priorities (shops NON dérivés du jeu) : tables Event/Resource, shops texte Supply/Rico, notes de shop. Édité via /admin/guides (general-guides). Le factuel des 8 shops permanents dérive de data/generated/shop-priorities.json ; leur priorité/notes vivent dans data/curated/shop-priorities.json.",
+  "_doc": "Contenu ÉDITORIAL du guide shop-purchase-priorities (shops NON dérivés du jeu) : tables Event/Resource, shops texte Supply/Rico, notes de shop. Édité dans quick, section Guides (Shop priorities). Le factuel des 8 shops permanents dérive de data/generated/shop-priorities.json ; leur priorité/notes vivent dans data/curated/shop-priorities.json.",
   "shopNotes": {
     "event": {
       "en": "Event shops vary a lot depending on the event. Adjust your priorities based on what's available, but generally focus on limited items first (cosmetics, 6★ event gear, rare manuals, transistones) before spending on more common resources.",

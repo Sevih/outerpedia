@@ -2,12 +2,11 @@
 
 /**
  * Corps d'édition ÉDITORIAL PARTAGÉ (pros/cons + synergies) — brique CONTRÔLÉE
- * (état chez le parent). Sert l'éditeur admin (`EditorialEditor` : barre de
- * langue + traduction + save fichier) ET l'outil public de contribution
- * (`ProsConsSynergyPublicTool` : EN only + export). L'UI de saisie n'existe qu'ICI
- * (pas de doublon) ; seuls diffèrent les alentours (langue, écriture).
+ * (état chez le parent). Sert l'outil public de contribution
+ * (`EditorialPublicTool` : EN only + export) ; quick saisit les mêmes textes
+ * dans sa Fiche perso (Pros / Cons, Synergies), avec sa propre UI.
  *
- * Les textes portent des tags inline `{B/…}` (contrôlés par /admin/tags), rendus
+ * Les textes portent des tags inline `{B/…}` (contrôlés par `tag-control.ts`), rendus
  * fidèlement en place via `renderInlineBatch` (server action publique).
  */
 import { useEffect, useState } from 'react';
@@ -45,7 +44,7 @@ const HERO_DATALIST = 'hero-names';
 
 /**
  * Résout un héros saisi (nom EN ou tag) vers son ID. Un id déjà connu, une saisie
- * vide ou un tag `{…}` passent tels quels. Partagé save (admin) / export (public).
+ * vide ou un tag `{…}` passent tels quels. Lu par l'export de l'outil public.
  */
 export function makeResolveHero(charNames: Record<string, string>): (raw: string) => string {
   const nameToId = new Map(Object.entries(charNames).map(([cid, n]) => [n.toLowerCase(), cid]));

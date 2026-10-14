@@ -6645,6 +6645,8 @@ describe('Monstres — la page, sur le vrai markup', () => {
       siteError?: string;
       /** Un serveur lancé avant les modes de jeu : ni `modes`, ni `zones`, ni `modeGroups`. */
       legacy?: boolean;
+      /** Le roster servi à la place de `ROSTER`. */
+      roster?: Array<(typeof ROSTER)[number] & { otherModes?: boolean }>;
     } = {},
   ) {
     vi.resetModules();
@@ -6679,7 +6681,7 @@ describe('Monstres — la page, sur le vrai markup', () => {
       if (url.pathname.startsWith('/api/monsters')) calls.push(body ? { path, body } : { path });
       if (url.pathname === '/api/monsters/roster')
         return answer({
-          roster: opts.legacy ? ROSTER.map(legacyRow) : ROSTER,
+          roster: opts.legacy ? ROSTER.map(legacyRow) : (opts.roster ?? ROSTER),
           counts: { guides: 3, site: 4 },
           ...(opts.legacy ? {} : { modeGroups: MODES }),
           ...(opts.siteError ? { siteError: opts.siteError } : {}),
@@ -6951,6 +6953,38 @@ describe('Monstres — la page, sur le vrai markup', () => {
     seg()[0].click();
     expect(modes()).toEqual(['Story 1', 'Skyward Tower 0', 'Joint Challenge 2', 'sans mode 1']);
     expect(ids()).toEqual([]);
+  });
+
+  it('le picker : « Autres » pour un mode qu’aucun groupe ne range, juste avant « sans mode », qui ne garde que les monstres sans spawn', async () => {
+    // Un skirmish du Monad Gate : aucune clé de mode, mais `otherModes`.
+    const SKIRM = {
+      id: '4090001',
+      name: 'Gate Sentry',
+      type: 'monster',
+      icon: '/images/g.webp',
+      place: 'Autres',
+      modes: [],
+      otherModes: true,
+      zones: ['Gate'],
+      guides: [FROST],
+    };
+    const page = await monsters({ hash: '#monsters', roster: [...ROSTER, SKIRM] });
+    const ids = () => page.all('#hp-results .hp-tile').map((t) => t.dataset.id);
+    const pills = () => page.all('#hp-filters [aria-label="Mode"] .hp-tog');
+    expect(pills().map((b) => b.textContent)).toEqual([
+      'Story 1',
+      'Skyward Tower 0',
+      'Joint Challenge 2',
+      'Autres 1',
+      'sans mode 1',
+    ]);
+    // « Autres » : le skirmish seul.
+    pills()[3].click();
+    expect(ids()).toEqual([SKIRM.id]);
+    pills()[3].click();
+    // « sans mode » : l’add sans spawn seul, sans le skirmish.
+    pills()[4].click();
+    expect(ids()).toEqual([ADD]);
   });
 
   it('`#monsters/mode/<clé>` : le picker s’ouvre sur ce mode de jeu, lui seul enfoncé ; une clé inconnue ne filtre rien', async () => {
@@ -11537,8 +11571,9 @@ describe('Tableau de bord — la page, sur le vrai markup', () => {
     // Plus aucun lien vers l'admin.
     expect(page.all('#h-inbox a')).toEqual([]);
     expect(page.text(page.all('[aria-label="À faire"] .card-head')[0])).toContain(
-      "extraction, tags, assets — lu par l'admin",
+      'extraction, tags, assets',
     );
+    expect(page.text(page.all('[aria-label="À faire"] .card-head')[0])).not.toContain('admin');
 
     // « Dépôt » : le compte de « Pousser », le dernier commit, l'index.
     expect(page.text(page.el('h-git-branch'))).toBe('main');

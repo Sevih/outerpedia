@@ -1,12 +1,11 @@
 /**
  * Le catalogue des effets tel que l'éditeur le RANGE : paires buff ↔ debuff
- * miroir, puis orphelins — la règle de `/admin/editor/effects`, descendue de sa
- * page pour que l'onglet « Effets » de quick range pareil.
+ * miroir, puis orphelins — la règle de l'onglet « Effets » de quick, qui
+ * l'appelle depuis son serveur.
  *
  * Fichier PUR : il ne lit rien, ses appelants lui passent les effets fusionnés
  * (`getMergedEffects`) et les sources (`liveEffectSources`). Les imports de la
- * couche de données ne sont que des TYPES — `NewEffectForm`, composant client,
- * importe d'ici la règle de l'id.
+ * couche de données ne sont que des TYPES.
  */
 import type { EffectCatalog } from '@/lib/admin/effect-search';
 import type { EffectSources, MergedEffect } from '@/lib/data/effects';

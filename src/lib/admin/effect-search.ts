@@ -1,10 +1,10 @@
 /**
- * Recherche de la liste des effets — celle de l'admin (`/admin/editor/effects`)
- * et celle de l'onglet « Effets » de quick, qui l'appelle depuis son serveur.
+ * Recherche de la liste des effets — celle de l'onglet « Effets » de quick, qui
+ * l'appelle depuis son serveur.
  *
  * Fichier PUR, sans lecture disque : le serveur y prépare la botte de foin de
- * chaque effet (`effectHaystack`), le composant client y filtre le catalogue à
- * chaque frappe (`filterEffectCatalog`). La saisie latine passe par
+ * chaque effet (`effectHaystack`) et y cherche (`effectMatches`) ;
+ * `filterEffectCatalog` filtre un catalogue entier. La saisie latine passe par
  * `normalizeSearchText` — la même normalisation que la palette du site.
  *
  * LA RÈGLE. Une sous-chaîne cherchée dans tous les champs à la fois trouvait

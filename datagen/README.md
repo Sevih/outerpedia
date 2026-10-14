@@ -59,7 +59,8 @@ promote.ts      refresh.ts définition UNIQUE du flux « rafraîchir depuis le
                            build → promote → damage → [collect]), partagé par
                            `pnpm dev` et `datagen:patch` — les DEUX en dry (le
                            dev ne promeut plus auto ; l'intégration se fait par
-                           entité depuis l'admin, ou promote manuel) ;
+                           entité dans quick, section Extraction, ou par promote :
+                           Accueil › Patch de quick, ou à la main) ;
                 promote.ts diff entité par entité + `--apply` → data/generated/.
 ```
 
@@ -68,10 +69,11 @@ promote.ts      refresh.ts définition UNIQUE du flux « rafraîchir depuis le
 - **`extractor/`** — extracteur **déclaratif** par entité : `specs/`
   (character, monster — la description de QUOI extraire), `integrate.ts` /
   `integrate-equipment.ts` / `integrate-item.ts` (intégration ciblée d'une
-  entité dans `data/generated/`, utilisée par l'admin), `version-monster.ts`
+  entité dans `data/generated/`, appelée par quick, section Extraction), `version-monster.ts`
   (figer l'état committé d'un monstre).
 - **`curated/`** — outillage de la couche curée : les schémas de validation
-  (personnages, gear reco, tags, effets…). L'édition se fait via l'admin.
+  (personnages, gear reco, tags, effets…). L'édition se fait dans quick
+  (Éditeurs, Données › Rangs).
 - **`damage/`** — pipeline des tables du calculateur de dégâts
   (`pnpm damage:build`, joué aussi par `refresh`) → `data/generated/damage/`.
 - **`assets/`** — collecte des images vers le staging et publication R2
@@ -256,7 +258,8 @@ additif, l'ignorer (ou l'effacer à la main) ramène au comportement d'avant.
 - **Données extraites (JSON)** : `data/extracted/` (🚧 gitignoré — la proposition du build).
 - **Données validées (JSON)** : `data/generated/` (✅ committé — SEULE source de l'app).
   On n'y écrit que par `pnpm datagen:promote` (diff entité par entité, `--apply`
-  pour appliquer) ou par l'intégration ciblée d'un perso depuis l'admin — un
+  pour appliquer) ou par l'intégration ciblée d'une entité depuis quick (section
+  Extraction) — un
   pull de patch ne peut pas partir en prod par accident.
 - **Sources éditoriales** : `data/editorial/` (✅ committé) — les assets que le
   wiki produit lui-même, absents du jeu (icônes d'effets corrigées, bannières
@@ -335,7 +338,7 @@ propre racine `.gamedata-android/` (`pnpm datagen:patch-android`).
 
 Les deux écrivent la **même arborescence**, dans des racines distinctes
 (`lib/paths.ts`) ; tout ce qui suit le pull (extract, convert, build, scripts
-python, admin) tourne tel quel sur l'une ou l'autre. Vérifié le 26/08 : les
+python, quick) tourne tel quel sur l'une ou l'autre. Vérifié le 26/08 : les
 `.bytes` extraits du client Steam sont **identiques octet pour octet** à ceux de
 l'Android (hashes de bundles différents, contenu identique).
 
@@ -379,7 +382,7 @@ première erreur) :
 ```bash
 pnpm datagen:patch-android   # pull → extract → convert → build → résumé du diff
 pnpm datagen:promote --apply # si le résumé est cohérent : valider
-pnpm datagen:regen           # après une correction curée (/admin/effects…) : build + apply
+pnpm datagen:regen           # après une correction curée (quick, Effets…) : build + apply
 pnpm images                  # collectes (images, wallpapers, audio, BD) + push R2 + auto-commit des états
 ```
 
@@ -429,28 +432,29 @@ protections, dont deux automatiques :
   `pnpm images` — et qu'un staging à jour (`pnpm assets:pull` sur une machine
   neuve) conditionne la détection.
 - **Versionnage au clic** (geste humain, à ton jugement — une maj sans impact
-  guide ne se versionne pas) : sur la fiche `/admin/extractor/monsters/<id>`,
-  deux boutons — **Save (apply extraction)** (applique l'extraction fraîche de
-  CE monstre) et **Version the committed state** (fige l'état git HEAD dans
-  `data/generated/monster-archive/<id>@<n>.json`, append-only, committé, puis
-  ré-épingle les guides — cf. plus bas).
+  guide ne se versionne pas) : sur sa fiche dans quick (Données › Extraction ›
+  Monstres, `#extractor/monster/<id>`), deux gestes — **« Intégrer »**
+  (applique l'extraction fraîche de CE monstre) et, dans le bloc « Versions »,
+  **« Figer et ré-épingler »** (montre d'abord son plan, puis fige l'état git
+  HEAD dans `data/generated/monster-archive/<id>@<n>.json`, append-only,
+  ré-épingle les guides et committe le tout — cf. plus bas).
 
 La **localisation** (où affronte-t-on le monstre : `spawns` = donjon + niveau
 réel + barres de vie ; `summonedBy`/`linkedTo` pour les adds jamais spawnés) est
 un champ **de l'entité monstre** : déplacer ou re-niveauter un boss apparaît
 comme un diff, s'enregistre et se versionne comme le reste. Les donjons
 référencés vivent dans `encounters.json` (mode, titre du stage, région — mergés
-par « Enregistrer » avec le monstre), les titres de modes dans
+par « Intégrer » avec le monstre), les titres de modes dans
 `glossaries.modes`, et l'archive d'un boss embarque un snapshot des
 donjons/modes référencés pour rester lisible seule.
 
-Flux type : le boss `1` change de façon significative → **Version the
-committed state** (fige l'ancien sous `1@1`) puis **Save** (le live prend le
-nouvel état). La
+Flux type : le boss `1` change de façon significative → **« 1. Figer l'état
+actuel »** (fige l'ancien sous `1@1`) puis **« 2. Intégrer l'extraction »** (le
+live prend le nouvel état). La
 version A du guide s'épingle sur `1@1`, la nouvelle version B suit le live.
 
-Le bouton ré-épingle les guides lui-même (`src/lib/admin/repin-guides.ts`, via
-la route `/api/admin/version/monster/<id>`) — versionner ne demande pas
+Le geste ré-épingle les guides lui-même (`src/lib/admin/repin-guides.ts`, via
+la route `POST /api/extractor/freeze` de quick) — versionner ne demande pas
 d'éditer un guide à la main :
 
 - références DIRECTES (`meta.bossId`, `meta.monsters`) encore en live :
@@ -463,7 +467,7 @@ d'éditer un guide à la main :
 
 > Le versionnage fige **HEAD** (dernier état committé — celui contre lequel les
 > guides ont été écrits) : le disque peut déjà porter le nouvel état (un
-> **Save** ou un `datagen:promote --apply` passé avant). Si la maj a été
+> **« Intégrer »** ou un `datagen:promote --apply` passé avant). Si la maj a été
 > committée il y a longtemps, rattrapage CLI :
 > `pnpm datagen:version-boss <id> --ref <commit>` (retrouver le commit :
 > `git log -- data/generated/monsters.json`). La CLI fige l'archive mais ne
@@ -479,7 +483,8 @@ d'éditer un guide à la main :
 > (`git add` de ce que tu as changé, mêmes hooks, même CI) — seules les deux
 > premières lignes ci-dessous sont spécifiques à la data.
 
-Une fois le patch validé et vérifié dans `/admin` :
+Une fois le patch validé et vérifié dans quick (Données › Extraction) —
+Accueil › Patch le publie par « Committer » puis « Pousser » —, à la main :
 
 ```bash
 pnpm images                              # 1. les images d'abord (la prod lit R2)
@@ -513,7 +518,7 @@ git push                                 # 3. sur une branche → PR vers main
 >
 > **Ne PAS lancer `pnpm build` en local** : le build de prod est le travail de
 > la CI. En local, les types générés du dev (`.next/dev/types`, qui connaissent
-> les pages dev-only comme `/admin`) entrent en conflit avec ceux du build
+> les pages dev-only comme `/dev/*`) entrent en conflit avec ceux du build
 > (`.next/types`) → échec garanti, et le `.next/types` orphelin fait ensuite
 > échouer le typecheck du pre-push (remède : supprimer `.next/types`).
 > Si un build local est vraiment nécessaire : stopper le dev server, puis

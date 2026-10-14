@@ -5,9 +5,10 @@
  * `chipAdd` de `data/curated/monster-skills.json`), et le catalogue du
  * glossaire que « + » propose.
  *
- * Partagé par l'éditeur de l'admin (`/admin/editor/monsters/[id]`) et l'onglet
- * « Monstres » de quick : le même calcul, sur un monstre et un catalogue de
- * skills — l'extraction fraîche pour l'admin, le committé pour quick.
+ * Partagé par deux sections de quick, « Monstres » et la fiche monstre
+ * d'« Extraction » : le même calcul, sur un monstre et un catalogue de skills
+ * — le committé pour Monstres, le frais par-dessus le committé pour
+ * Extraction.
  *
  * Et les monstres que les GUIDES désignent (`guideMonsterIds`) : ce que quick
  * met en avant, plutôt que les 4 848 monstres du jeu.
@@ -202,7 +203,7 @@ export function monsterKitCatalog(
 /**
  * Où l'on affronte un monstre : les slugs des modes de jeu de ses spawns, et
  * leurs stages / zones en anglais. `dungeons` : les donjons où lire —
- * l'extraction fraîche pour la sidebar de l'admin, `encounters.json` pour quick.
+ * `encounters.json` pour le picker de la section Monstres de quick.
  */
 export function monsterPlaces(
   m: Pick<Monster, 'spawns'>,

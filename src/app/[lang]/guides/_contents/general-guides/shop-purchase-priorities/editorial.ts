@@ -4,8 +4,8 @@
  * curées / templates variables — pas un shop entier à refléter, donc pas dans le
  * générateur). Les notes de shop (Event, Joint) accompagnent les tables dérivées.
  *
- * La DONNÉE vit dans `shop-editorial.json` (éditable via /admin/guides,
- * general-guides) ; ce module n'en porte plus que les TYPES et la lecture typée.
+ * La DONNÉE vit dans `shop-editorial.json` (éditable dans quick, section
+ * Guides, Shop priorities) ; ce module n'en porte plus que les TYPES et la lecture typée.
  * Les 7 shops permanents « à monnaie », eux, dérivent du jeu
  * (`data/generated/shop-priorities.json`, priorité/notes dans l'overlay curé).
  */
@@ -29,7 +29,7 @@ export interface TextShop {
   gearNote?: LocalizedText;
 }
 
-/** Forme complète du fichier éditorial (contrat partagé avec le store admin). */
+/** Forme complète du fichier éditorial (contrat partagé avec `shop-priorities-store.ts`). */
 export interface ShopEditorial {
   shopNotes: Record<string, LocalizedText>;
   textShops: Record<string, TextShop>;
