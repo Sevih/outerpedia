@@ -178,9 +178,9 @@
       `docs/procedure/newPatch.md` décrivent la procédure par l'admin : la
       récrire vers quick (Patch, Extraction). (2) Les en-têtes qui citent
       encore une URL `/admin/…` (`src/lib/admin/{character-kit,
-  effect-catalog, effect-search, gear-sheet, guide-pin-targets,
-  monster-kit, monster-sheet, tag-control, extractor-rows,
-  useAutoTranslate}.ts`, `src/lib/data/{events,pros-cons}.ts`,
+effect-catalog, effect-search, gear-sheet, guide-pin-targets,
+monster-kit, monster-sheet, tag-control, extractor-rows,
+useAutoTranslate}.ts`, `src/lib/data/{events,pros-cons}.ts`,
       `src/lib/home.ts`, `src/lib/skill-view.ts`, `CurrentBanners.tsx`,
       `EditorialFields.tsx`, `editorial.ts` du guide shop) — dont
       `useAutoTranslate.ts` l.19 « il ne sert QUE l'admin », faux. (3)
@@ -192,7 +192,11 @@
       supprimer ou dire pourquoi garder. (6) Le picker Monstres range sous
       « sans mode » les 204 monstres que l'en-tête dit « Autres » (A49). (7)
       Pas de pastille « Patch » pour un patch en attente (bloc `game`, hors
-      inbox). À l'écran, par Sevih : un vrai ajout Twitch ou Bilibili sur une
+      inbox). (8) Extraction, constat de Sevih du 14/10 : le dépliant d'une
+      entité NOUVELLE est vide (pas de diff à montrer) — pour toutes les
+      cibles, dont les deux skills de Doppelakeus en lecture ; attendu : le
+      contenu frais de l'entité (nom, type, description, niveaux), en
+      lecture, comme un diff où tout est « ajouté ». À l'écran, par Sevih : un vrai ajout Twitch ou Bilibili sur une
       fiche (A48), les pastilles qui ne bougent plus au dry-run ni au push
       (A50), « Autres » dans l'en-tête d'un monstre d'event (A49).
 - [ ] **« Événements » — contrôles à l'écran (lot F23)** : le banc ne
