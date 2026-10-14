@@ -7,10 +7,9 @@
 
 ## 🎮 Suites du patch du 06/10 (entrée DONE du 06/10)
 
-- [ ] **Demiurge Lambda, sur retour des joueurs** : rangs (quick, onglet
-      « Rangs » — PvE, PvP, EE base et +10), fiche curée (pros/cons,
-      synergies ; rôle DPS déjà posé, tag `premium` automatique), ligne de
-      `premium-limited`.
+- [ ] **Demiurge Lambda, fiche curée** : pros/cons et synergies (rangs,
+      priorité des skills et EE faits le 14/10 ; rôle DPS posé, tag
+      `premium` automatique, ligne de `premium-limited` présente).
 - [ ] **Sigma, après équilibrage** : curé à revoir (rang, pros/cons) ; et
       décider si le `damage-calculator` modélise [Tower Administrator]
       (+150 % de dégâts en Skyward Tower, les cibles de tour existent).

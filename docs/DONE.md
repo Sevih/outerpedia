@@ -5,6 +5,13 @@
 > détail vit dans git. Le `CHANGELOG.md` racine est GELÉ depuis le 03/08 —
 > ce fichier et le log git SONT le journal du projet.
 
+## 2026-10-14
+
+- **Demiurge Lambda — rangs (Sevih, `3c7826b3`)** : PvE S, PvP A, par
+  transcendance 3★/4★ A et 6★/9★ S (DPS partout), priorité des skills
+  ultime › S2 › S1, EE A en base et à +10. Restent pros/cons et synergies
+  (TODO).
+
 ## 2026-10-13
 
 - **Relecture A48 / A49 / A50 / C14 / C15 (Fable) — vidéos Twitch et
