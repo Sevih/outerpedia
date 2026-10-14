@@ -1001,6 +1001,12 @@
     "left": 2,
     "bottom": 2
   },
+  "at_thumbnailcharacterruntime/CT_2010092": {
+    "w": 180,
+    "h": 344,
+    "left": 2,
+    "bottom": 2
+  },
   "at_thumbnailcharacterruntime/CT_2010094": {
     "w": 180,
     "h": 344,
@@ -1338,6 +1344,18 @@
     "bottom": 2
   },
   "at_thumbnailcharacterruntime/CT_2030087": {
+    "w": 180,
+    "h": 344,
+    "left": 2,
+    "bottom": 2
+  },
+  "at_thumbnailcharacterruntime/CT_2030119": {
+    "w": 180,
+    "h": 344,
+    "left": 2,
+    "bottom": 2
+  },
+  "at_thumbnailcharacterruntime/CT_2030120": {
     "w": 180,
     "h": 344,
     "left": 2,

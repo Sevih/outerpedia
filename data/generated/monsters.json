@@ -212627,20 +212627,20 @@
   "55300006": {
     "id": "55300006",
     "name": {
-      "en": "Giant Doppelgänger",
-      "jp": "巨大な自己像幻視",
-      "kr": "거대 도플갱어",
-      "zh": "巨型二重身",
-      "fr": "Doppelgänger géant",
-      "es": "Gran Doppelgänger"
+      "en": "Doppelakeus",
+      "jp": "ドプラケウス",
+      "kr": "도플라케우스",
+      "zh": "多普拉修斯",
+      "fr": "Doppelakeus",
+      "es": "Doppelakeus"
     },
     "type": "boss",
     "race": "alien",
     "class": "striker",
     "element": "dark",
     "rarity": 3,
-    "icon": "4078020",
-    "skills": ["113571", "113573"],
+    "icon": "4086005",
+    "skills": ["133001", "133002", "1120923"],
     "stats": {
       "hp": {
         "min": 372,
@@ -212684,17 +212684,16 @@
       }
     },
     "nickname": {
-      "en": "Sticky Nightmare",
-      "jp": "ベタつく悪夢",
-      "kr": "끈적이는 악몽",
-      "zh": "粘稠的噩梦",
-      "fr": "Cauchemar collant",
-      "es": "Doppelgänger de Pesadilla"
+      "en": "Dragon of Death Mimic",
+      "jp": "臨終の竜の模倣体",
+      "kr": "의태된 임종룡",
+      "zh": "死亡龙拟态体",
+      "fr": "Simulacre du Dragon de la Mort",
+      "es": "Réplica del Dragón de la Muerte"
     },
     "aiType": "attack",
     "pushBack": false,
-    "pushUp": false,
-    "summonedBy": ["40103002"]
+    "pushUp": false
   },
   "55300007": {
     "id": "55300007",
@@ -213390,20 +213389,20 @@
   "55300018": {
     "id": "55300018",
     "name": {
-      "en": "Giant Doppelgänger",
-      "jp": "巨大な自己像幻視",
-      "kr": "거대 도플갱어",
-      "zh": "巨型二重身",
-      "fr": "Doppelgänger géant",
-      "es": "Gran Doppelgänger"
+      "en": "Doppelakeus",
+      "jp": "ドプラケウス",
+      "kr": "도플라케우스",
+      "zh": "多普拉修斯",
+      "fr": "Doppelakeus",
+      "es": "Doppelakeus"
     },
     "type": "boss",
     "race": "alien",
     "class": "striker",
     "element": "dark",
     "rarity": 3,
-    "icon": "4078020",
-    "skills": ["113571", "113573", "113579"],
+    "icon": "4086005",
+    "skills": ["133001", "133002", "1120923"],
     "stats": {
       "hp": {
         "min": 1686,
@@ -213447,35 +213446,36 @@
       }
     },
     "nickname": {
-      "en": "Sticky Nightmare",
-      "jp": "ベタつく悪夢",
-      "kr": "끈적이는 악몽",
-      "zh": "粘稠的噩梦",
-      "fr": "Cauchemar collant",
-      "es": "Doppelgänger de Pesadilla"
+      "en": "Dragon of Death Mimic",
+      "jp": "臨終の竜の模倣体",
+      "kr": "의태된 임종룡",
+      "zh": "死亡龙拟态体",
+      "fr": "Simulacre du Dragon de la Mort",
+      "es": "Réplica del Dragón de la Muerte"
     },
     "aiType": "attack",
     "pushBack": false,
     "pushUp": false,
-    "summonedBy": ["40103002"]
+    "buffImmune": ["BT_GOLDEN_CURSE", "BT_FREEZE", "BT_STONE", "BT_STUN", "BT_SILENCE", "BT_AGGRO"],
+    "immuneTooltips": ["104", "34", "33", "35", "37", "32"]
   },
   "55300019": {
     "id": "55300019",
     "name": {
-      "en": "Viella",
-      "jp": "ビエラ",
-      "kr": "비엘라",
-      "zh": "比埃拉",
-      "fr": "Viella",
-      "es": "Viella"
+      "en": "Doppelakeus",
+      "jp": "ドプラケウス",
+      "kr": "도플라케우스",
+      "zh": "多普拉修斯",
+      "fr": "Doppelakeus",
+      "es": "Doppelakeus"
     },
     "type": "boss",
-    "race": "demon",
-    "class": "healer",
-    "element": "earth",
+    "race": "alien",
+    "class": "striker",
+    "element": "dark",
     "rarity": 3,
-    "icon": "2010108",
-    "skills": ["153930", "153931", "153932"],
+    "icon": "4086005",
+    "skills": ["133001", "133002", "1120923", "1120924"],
     "stats": {
       "hp": {
         "min": 1686,
@@ -213519,14 +213519,13 @@
       }
     },
     "nickname": {
-      "en": "Archdemon of Bane",
-      "jp": "劇毒の魔王",
-      "kr": "극독의 마왕",
-      "zh": "剧毒魔王",
-      "fr": "Archidémon du Fléau",
-      "es": "Archidemonio del Mal"
+      "en": "Dragon of Death Mimic",
+      "jp": "臨終の竜の模倣体",
+      "kr": "의태된 임종룡",
+      "zh": "死亡龙拟态体",
+      "fr": "Simulacre du Dragon de la Mort",
+      "es": "Réplica del Dragón de la Muerte"
     },
-    "subClass": "sage",
     "aiType": "attack",
     "pushBack": true,
     "pushUp": true,

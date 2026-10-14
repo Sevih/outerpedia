@@ -265395,5 +265395,137 @@
         "buff": "event_monster_buff_571"
       }
     ]
+  },
+  "1120923": {
+    "id": "1120923",
+    "name": {
+      "en": "Proclaimed Deathstroy",
+      "jp": "宣告デストロイ",
+      "kr": "선고하는 데스트로이",
+      "zh": "宣判之死亡毁灭",
+      "fr": "Proclaimed Deathstroy",
+      "es": "Proclamada Deathstroy"
+    },
+    "type": "ultimate",
+    "subType": "active",
+    "offensive": true,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "damageFactor": 3000,
+        "cool": 7,
+        "startCool": 1,
+        "vars": {
+          "event_monster_buff_595_1": {
+            "c": "100%",
+            "v": "2"
+          },
+          "event_monster_buff_595_2": {
+            "c": "100%",
+            "v": "30%"
+          }
+        }
+      }
+    ],
+    "desc": {
+      "en": "자신이 <color=#28d9ed>방어력 증가</color> 보유 중이면 적 전체의 <color=#28d9ed>강화 효과</color>를 <color=#28d9ed>2개</color> 해제하고 적 전체를 공격합니다.\\n공격 후 적 전체에게 대상 최대 체력의 <color=#28d9ed>30%</color>만큼 고정 피해를 입힙니다.",
+      "jp": "자신이 <color=#28d9ed>방어력 증가</color> 보유 중이면 적 전체의 <color=#28d9ed>강화 효과</color>를 <color=#28d9ed>2개</color> 해제하고 적 전체를 공격합니다.\\n공격 후 적 전체에게 대상 최대 체력의 <color=#28d9ed>30%</color>만큼 고정 피해를 입힙니다.",
+      "kr": "자신이 <color=#28d9ed>방어력 증가</color> 보유 중이면 적 전체의 <color=#28d9ed>강화 효과</color>를 <color=#28d9ed>2개</color> 해제하고 적 전체를 공격합니다.\\n공격 후 적 전체에게 대상 최대 체력의 <color=#28d9ed>30%</color>만큼 고정 피해를 입힙니다.",
+      "zh": "자신이 <color=#28d9ed>방어력 증가</color> 보유 중이면 적 전체의 <color=#28d9ed>강화 효과</color>를 <color=#28d9ed>2개</color> 해제하고 적 전체를 공격합니다.\\n공격 후 적 전체에게 대상 최대 체력의 <color=#28d9ed>30%</color>만큼 고정 피해를 입힙니다.",
+      "fr": "자신이 <color=#28d9ed>방어력 증가</color> 보유 중이면 적 전체의 <color=#28d9ed>강화 효과</color>를 <color=#28d9ed>2개</color> 해제하고 적 전체를 공격합니다.\\n공격 후 적 전체에게 대상 최대 체력의 <color=#28d9ed>30%</color>만큼 고정 피해를 입힙니다.",
+      "es": "자신이 <color=#28d9ed>방어력 증가</color> 보유 중이면 적 전체의 <color=#28d9ed>강화 효과</color>를 <color=#28d9ed>2개</color> 해제하고 적 전체를 공격합니다.\\n공격 후 적 전체에게 대상 최대 체력의 <color=#28d9ed>30%</color>만큼 고정 피해를 입힙니다."
+    },
+    "target": "enemy",
+    "range": "all",
+    "icon": "Skill_Ultimate_4086001",
+    "effects": [
+      {
+        "family": "cleanse",
+        "category": "debuff",
+        "type": "BT_REMOVE_BUFF",
+        "target": "enemy_team",
+        "buff": "event_monster_buff_595_1",
+        "label": "SYS_BUFF_REMOVE_BUFF",
+        "caller": "ultimate"
+      },
+      {
+        "family": "anti_heal",
+        "category": "neutral",
+        "type": "BT_REVERSE_HEAL_BASED_TARGET",
+        "target": "enemy_team",
+        "buff": "event_monster_buff_595_2",
+        "stat": "hp",
+        "mode": "up",
+        "caller": "ultimate"
+      }
+    ]
+  },
+  "1120924": {
+    "id": "1120924",
+    "name": {
+      "en": "의태한 암종룡",
+      "jp": "의태한 암종룡",
+      "kr": "의태한 암종룡",
+      "zh": "의태한 암종룡",
+      "fr": "의태한 암종룡",
+      "es": "의태한 암종룡"
+    },
+    "type": "monster_1",
+    "subType": "passive",
+    "offensive": false,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "vars": {
+          "Singularity_Passive_AntiCurse": {
+            "c": "100%",
+            "v": "50000"
+          },
+          "Singularity_Passive_AntiTureDmg": {
+            "c": "100%",
+            "v": "50000"
+          },
+          "event_monster_buff_596": {
+            "c": "100%",
+            "v": "1"
+          }
+        }
+      }
+    ],
+    "desc": {
+      "en": "(패시브 효과) <color=#28d9ed>저주/고정 피해</color>의 피해는 <color=#28d9ed>50000</color>을 초과하지 않습니다.\\n적 행동 종료 후 자신이 <color=#28d9ed>방여력 증가</color> 보유 중이면 <color=#28d9ed>선고하는 데스트로이</color>의 쿨타임이 <color=#28d9ed>1턴</color> 감소합니다.",
+      "jp": "(패시브 효과) <color=#28d9ed>저주/고정 피해</color>의 피해는 <color=#28d9ed>50000</color>을 초과하지 않습니다.\\n적 행동 종료 후 자신이 <color=#28d9ed>방여력 증가</color> 보유 중이면 <color=#28d9ed>선고하는 데스트로이</color>의 쿨타임이 <color=#28d9ed>1턴</color> 감소합니다.",
+      "kr": "(패시브 효과) <color=#28d9ed>저주/고정 피해</color>의 피해는 <color=#28d9ed>50000</color>을 초과하지 않습니다.\\n적 행동 종료 후 자신이 <color=#28d9ed>방여력 증가</color> 보유 중이면 <color=#28d9ed>선고하는 데스트로이</color>의 쿨타임이 <color=#28d9ed>1턴</color> 감소합니다.",
+      "zh": "(패시브 효과) <color=#28d9ed>저주/고정 피해</color>의 피해는 <color=#28d9ed>50000</color>을 초과하지 않습니다.\\n적 행동 종료 후 자신이 <color=#28d9ed>방여력 증가</color> 보유 중이면 <color=#28d9ed>선고하는 데스트로이</color>의 쿨타임이 <color=#28d9ed>1턴</color> 감소합니다.",
+      "fr": "(패시브 효과) <color=#28d9ed>저주/고정 피해</color>의 피해는 <color=#28d9ed>50000</color>을 초과하지 않습니다.\\n적 행동 종료 후 자신이 <color=#28d9ed>방여력 증가</color> 보유 중이면 <color=#28d9ed>선고하는 데스트로이</color>의 쿨타임이 <color=#28d9ed>1턴</color> 감소합니다.",
+      "es": "(패시브 효과) <color=#28d9ed>저주/고정 피해</color>의 피해는 <color=#28d9ed>50000</color>을 초과하지 않습니다.\\n적 행동 종료 후 자신이 <color=#28d9ed>방여력 증가</color> 보유 중이면 <color=#28d9ed>선고하는 데스트로이</color>의 쿨타임이 <color=#28d9ed>1턴</color> 감소합니다."
+    },
+    "icon": "MT_Passive_1_Dark",
+    "effects": [
+      {
+        "family": "dot",
+        "category": "buff",
+        "type": "BT_DOT_CURSE_CAP",
+        "target": "me",
+        "buff": "Singularity_Passive_AntiCurse"
+      },
+      {
+        "family": "anti_heal",
+        "category": "buff",
+        "type": "BT_REVERSE_HEAL_CAP",
+        "target": "me",
+        "buff": "Singularity_Passive_AntiTureDmg"
+      },
+      {
+        "family": "cooldown",
+        "category": "buff",
+        "type": "BT_COOL3_CHARGE",
+        "target": "me",
+        "buff": "event_monster_buff_596",
+        "label": "SYS_BUFF_COOLTIME_REDUCE"
+      }
+    ]
   }
 }
