@@ -7,6 +7,24 @@
 
 ## 2026-10-14
 
+- **Relecture A52 (Opus) — restes d'A51 : messages vers quick, clés
+  `obs.*` et code sans lecteur, garde des presets de gear reco, validé.** Un
+  commit (`bf564e29`), au périmètre du lot, ni `package.json` ni lock. Les
+  15 clés `tools.damage-calculator.obs.*` retirées dans chacune des six
+  locales (compté au diff) ; le seul préfixe dynamique du dossier, `k()` de
+  `damage-calculator/index.tsx`, n'est appelé que sur `context.cond.*`,
+  `context.cond_ref.*` et `QUIRK_CATEGORY_KEY` : aucune clé `obs` construite.
+  La garde `datagen/curated/gear-reco.test.ts` lit les fichiers committés
+  (forme, références `$slug` / `preset`, doublons par ensemble d'ids, par
+  `comboKey`, par chaîne) ; le même contrôle, rejoué à part en Python sur
+  le dépôt, ne trouve ni doublon ni référence manquante. **Contrôles sur
+  HEAD (`bf564e29`)** : typecheck, lint, format:check verts ; `pnpm test`
+  217 fichiers / 3776 tests ; `vitest run scripts/quick` 8 / 1144.
+  **Rejeu** : `grep` des chaînes (hors tests et commentaires) qui citent
+  « l'admin » ou `/admin` dans `src datagen scripts` → seuls deux imports
+  de `src/lib/admin/` ; les messages de `BossPanel.tsx` et de `promote.ts`
+  disent bien le geste dans quick. **Reste à Sevih** : rien à l'écran (des
+  messages de build et de console). **Suite** : aucun lot ouvert.
 - **Restes d'A51 (lot A52) — messages qui renvoyaient à l'admin, clés
   `obs.*` et code sans lecteur, garde des presets de gear reco.** `/admin`
   parti le 13/10 (C15), quick est le seul outil ; A51 avait laissé ce qui
