@@ -568,7 +568,7 @@ export async function promote(opts: PromoteOptions = {}): Promise<PromoteResult>
   if (violations.length) {
     console.warn(
       '⚠ perso(s) non intégré(s) encore référencé(s) après écartement — fichier(s) RETENU(S), ' +
-        'le reste du lot se promeut. Intégrer via l’admin pour les débloquer :\n  ' +
+        'le reste du lot se promeut. Intégrer depuis quick (Données › Extraction › Personnages, « Intégrer ») pour les débloquer :\n  ' +
         violations.join('\n  '),
     );
   }
@@ -621,13 +621,13 @@ export async function promote(opts: PromoteOptions = {}): Promise<PromoteResult>
   // l'écran de revue doit dire QUI a été écarté et pourquoi il ne partira pas.
   if (strippedAll.size)
     console.log(
-      `  ⛔ perso(s) non intégré(s), jamais promu(s) : ${[...strippedAll].sort().join(', ')} — intégration via l'admin uniquement`,
+      `  ⛔ perso(s) non intégré(s), jamais promu(s) : ${[...strippedAll].sort().join(', ')} — intégration depuis quick uniquement`,
     );
 
   if (diffs.length) {
     console.log(
       apply
-        ? '\n✔ appliqué — vérifie /admin, la CLI de cohérence et les tests avant de committer.'
+        ? '\n✔ appliqué — vérifie la revue dans quick (Données › Extraction) et les tests avant de committer.'
         : '\n(dry-run — rien n’a été écrit ; relance avec --apply pour valider)',
     );
   }

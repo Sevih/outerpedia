@@ -528,13 +528,6 @@ const jp: Record<TranslationKey, string> = {
   'tools.damage-calculator.result.main_calc': '主撃',
   'tools.damage-calculator.result.add_calc': '追撃',
   'tools.damage-calculator.result.steps': 'f32 トレース',
-  // Dev-only observation divergence table
-  'tools.damage-calculator.obs.title': '管理者オブザベーション差分',
-  'tools.damage-calculator.obs.divergent': '差分',
-  'tools.damage-calculator.obs.matched': '一致',
-  'tools.damage-calculator.obs.no_baseline': '基準なし',
-  'tools.damage-calculator.obs.no_baseline_hint':
-    'スキーマに`calculatedAtSave`が追加される前に保存 — 管理画面で再保存してバックフィル。',
   // Share panel — export / import calc state
   'tools.damage-calculator.share.title': '共有',
   'tools.damage-calculator.share.subtitle':
@@ -556,16 +549,6 @@ const jp: Record<TranslationKey, string> = {
   'tools.damage-calculator.share.report_delta': 'Δ 観測 vs 計算',
   'tools.damage-calculator.share.report_note': 'ノート',
   'tools.damage-calculator.share.report_note_placeholder': 'コンテキスト、再現手順など…',
-  'tools.damage-calculator.obs.divergent_only': '差分のみ表示',
-  'tools.damage-calculator.obs.all_match': '全オブザベーション一致 — 差分なし。',
-  'tools.damage-calculator.obs.col.char': 'キャラ',
-  'tools.damage-calculator.obs.col.skill': 'スキル',
-  'tools.damage-calculator.obs.col.target': 'ターゲット',
-  'tools.damage-calculator.obs.col.observed': '観測値',
-  'tools.damage-calculator.obs.col.admin_calc': '管理者計算',
-  'tools.damage-calculator.obs.col.our_calc': '当方計算',
-  'tools.damage-calculator.obs.col.delta_admin': 'Δ 管理者',
-  'tools.damage-calculator.obs.col.delta_obs': 'Δ 観測',
   // Buffs panel — external % modifiers per stat (4-column layout)
   'tools.damage-calculator.buffs.col.attacker_buff': '使用者バフ',
   'tools.damage-calculator.buffs.col.attacker_debuff': '使用者デバフ',

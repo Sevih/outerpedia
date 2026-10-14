@@ -540,13 +540,6 @@ const en = {
   'tools.damage-calculator.result.main_calc': 'Main hit',
   'tools.damage-calculator.result.add_calc': 'Additional',
   'tools.damage-calculator.result.steps': 'f32 trace',
-  // Dev-only observation divergence table
-  'tools.damage-calculator.obs.title': 'Admin observation divergences',
-  'tools.damage-calculator.obs.divergent': 'divergent',
-  'tools.damage-calculator.obs.matched': 'matched',
-  'tools.damage-calculator.obs.no_baseline': 'no baseline',
-  'tools.damage-calculator.obs.no_baseline_hint':
-    'Saved before `calculatedAtSave` was added to the admin schema — re-save in admin to backfill.',
   // Share panel — export / import calc state
   'tools.damage-calculator.share.title': 'Share',
   'tools.damage-calculator.share.subtitle':
@@ -569,16 +562,6 @@ const en = {
   'tools.damage-calculator.share.report_note': 'Note',
   'tools.damage-calculator.share.report_note_placeholder':
     'Context, repro steps, anything that helps debug…',
-  'tools.damage-calculator.obs.divergent_only': 'Show divergent only',
-  'tools.damage-calculator.obs.all_match': 'All observations match — no divergence.',
-  'tools.damage-calculator.obs.col.char': 'Char',
-  'tools.damage-calculator.obs.col.skill': 'Skill',
-  'tools.damage-calculator.obs.col.target': 'Target',
-  'tools.damage-calculator.obs.col.observed': 'Observed',
-  'tools.damage-calculator.obs.col.admin_calc': 'Admin calc',
-  'tools.damage-calculator.obs.col.our_calc': 'Our calc',
-  'tools.damage-calculator.obs.col.delta_admin': 'Δ admin',
-  'tools.damage-calculator.obs.col.delta_obs': 'Δ obs',
   // Buffs panel — external % modifiers per stat (4-column layout)
   'tools.damage-calculator.buffs.col.attacker_buff': 'Caster buffs',
   'tools.damage-calculator.buffs.col.attacker_debuff': 'Caster debuffs',

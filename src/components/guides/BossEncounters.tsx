@@ -62,7 +62,7 @@ function lineup(
     if (!monster) {
       throw new Error(
         `BossEncounters : monstre « ${id} » (donjon ${e.id}) absent de ` +
-          `data/generated/monsters.json — à extraire/valider via l'admin.`,
+          `data/generated/monsters.json — à extraire/valider dans quick (Données › Extraction › Monstres).`,
       );
     }
     return {

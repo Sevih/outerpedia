@@ -92,7 +92,7 @@ function BannerCard({ guide, lang, sig }: { guide: Guide; lang: Lang; sig: LootS
   if (!monster) {
     throw new Error(
       `SpecialRequestSplit : monstre « ${guide.bossId} » (${guide.slug}) absent de ` +
-        `data/generated/monsters.json — à extraire/valider via l'admin (Extractor › Monsters).`,
+        `data/generated/monsters.json — à extraire/valider dans quick (Données › Extraction › Monstres).`,
     );
   }
   const name = lRec(monster.name, lang) || monster.name.en;

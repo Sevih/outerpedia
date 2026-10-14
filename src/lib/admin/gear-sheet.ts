@@ -36,17 +36,15 @@ export interface GearTargetInfo {
   slot: 'ee' | 'weapon' | 'accessory' | 'talisman' | 'sets';
   /** La clé de `families` ; `null` pour un EE ou un set (un seul id). */
   familyKey: 'weapon' | 'accessory' | 'talisman' | null;
-  /** Le segment de l'ancienne page de l'admin, retirée le 13/10 : plus lu que par son test. */
-  adminPath: string;
 }
 
-/** Cible de revue → kind d'intégration, slot, famille, ancien segment d'URL. */
+/** Cible de revue → kind d'intégration, slot, famille. */
 export const GEAR_TARGETS: Readonly<Record<GearTarget, GearTargetInfo>> = {
-  ee: { kind: 'ee', slot: 'ee', familyKey: null, adminPath: 'ee' },
-  weapon: { kind: 'weapon', slot: 'weapon', familyKey: 'weapon', adminPath: 'weapons' },
-  amulet: { kind: 'accessory', slot: 'accessory', familyKey: 'accessory', adminPath: 'amulets' },
-  talisman: { kind: 'talisman', slot: 'talisman', familyKey: 'talisman', adminPath: 'talismans' },
-  set: { kind: 'set', slot: 'sets', familyKey: null, adminPath: 'sets' },
+  ee: { kind: 'ee', slot: 'ee', familyKey: null },
+  weapon: { kind: 'weapon', slot: 'weapon', familyKey: 'weapon' },
+  amulet: { kind: 'accessory', slot: 'accessory', familyKey: 'accessory' },
+  talisman: { kind: 'talisman', slot: 'talisman', familyKey: 'talisman' },
+  set: { kind: 'set', slot: 'sets', familyKey: null },
 };
 
 export const isGearTarget = (id: string): id is GearTarget => id in GEAR_TARGETS;

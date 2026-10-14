@@ -204,7 +204,6 @@ describe('GEAR_TARGETS — le pont cible de revue ↔ intégration', () => {
       kind: 'accessory',
       slot: 'accessory',
       familyKey: 'accessory',
-      adminPath: 'amulets',
     });
     expect(GEAR_TARGETS.weapon.kind).toBe('weapon');
     expect(GEAR_TARGETS.ee.familyKey).toBeNull();

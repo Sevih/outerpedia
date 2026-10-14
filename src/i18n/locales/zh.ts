@@ -511,13 +511,6 @@ const zh: Record<TranslationKey, string> = {
   'tools.damage-calculator.result.main_calc': '主要攻击',
   'tools.damage-calculator.result.add_calc': '追加攻击',
   'tools.damage-calculator.result.steps': '计算过程追踪',
-  // Dev-only observation divergence table
-  'tools.damage-calculator.obs.title': '管理员观测偏差',
-  'tools.damage-calculator.obs.divergent': '偏差',
-  'tools.damage-calculator.obs.matched': '一致',
-  'tools.damage-calculator.obs.no_baseline': '无基准',
-  'tools.damage-calculator.obs.no_baseline_hint':
-    '在 `calculatedAtSave` 字段加入前保存 — 在管理端重新保存以回填。',
   // Share panel — export / import calc state
   'tools.damage-calculator.share.title': '分享',
   'tools.damage-calculator.share.subtitle': '导出分享您的设置以供他人复现研究。',
@@ -537,16 +530,6 @@ const zh: Record<TranslationKey, string> = {
   'tools.damage-calculator.share.report_delta': '观测与计算差值',
   'tools.damage-calculator.share.report_note': '备注',
   'tools.damage-calculator.share.report_note_placeholder': '详细背景、复现步骤等…',
-  'tools.damage-calculator.obs.divergent_only': '仅显示偏差',
-  'tools.damage-calculator.obs.all_match': '全部观测一致 — 无偏差。',
-  'tools.damage-calculator.obs.col.char': '角色',
-  'tools.damage-calculator.obs.col.skill': '技能',
-  'tools.damage-calculator.obs.col.target': '目标',
-  'tools.damage-calculator.obs.col.observed': '观测',
-  'tools.damage-calculator.obs.col.admin_calc': '管理员计算',
-  'tools.damage-calculator.obs.col.our_calc': '我方计算',
-  'tools.damage-calculator.obs.col.delta_admin': 'Δ 管理员',
-  'tools.damage-calculator.obs.col.delta_obs': 'Δ 观测',
   // Buffs panel — external % modifiers per stat (4-column layout)
   'tools.damage-calculator.buffs.col.attacker_buff': '攻击者增益',
   'tools.damage-calculator.buffs.col.attacker_debuff': '攻击者减益',

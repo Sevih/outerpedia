@@ -402,7 +402,7 @@ export function groupCombatants(group: string, lang: Lang): GroupCombatant[] {
       if (!monster) {
         throw new Error(
           `groupCombatants : monstre « ${m.id} » absent de data/generated/monsters.json — ` +
-            `à extraire/valider via l'admin (Extractor › Monsters).`,
+            `à extraire/valider dans quick (Données › Extraction › Monstres).`,
         );
       }
       const key = `${m.role}|${contentSignature(monster)}`;

@@ -7,6 +7,61 @@
 
 ## 2026-10-14
 
+- **Restes d'A51 (lot A52) — messages qui renvoyaient à l'admin, clés
+  `obs.*` et code sans lecteur, garde des presets de gear reco.** `/admin`
+  parti le 13/10 (C15), quick est le seul outil ; A51 avait laissé ce qui
+  suit (item « Restes d'A51 » du TODO, retiré). (1) **Messages** : les
+  erreurs de build « à extraire/valider via l'admin (Extractor › Monsters) »
+  (et la variante courte de `BossEncounters.tsx`) de `BossPanel.tsx`,
+  `BossEncounters.tsx`, `category-views/{AdventureSeasons,SpecialRequestSplit,IrregularChaseMap}.tsx`
+  et `src/lib/data/encounters.ts` disent « dans quick (Données › Extraction ›
+  Monstres) » ; `datagen/promote.ts` imprime dans la console de Patch
+  « Intégrer depuis quick (Données › Extraction › Personnages, « Intégrer »)
+  », « intégration depuis quick uniquement » et « vérifie la revue dans quick
+  (Données › Extraction) et les tests » (il n'y a pas de CLI de cohérence) —
+  la sortie de dry-run figée par `scripts/quick/patch.test.ts` suit ; texte
+  et logique inchangés autour. La chaîne de `fr.ts` (« re-sauvegardez dans
+  l'admin ») était une clé `obs.*`, partie au point 2. Grep final
+  `grep -rn "l'admin\|l’admin\|/admin" src datagen scripts` restreint aux
+  chaînes (hors imports `@/lib/admin/` et commentaires) : **0 hors tests** ;
+  restent 26 chaînes de TESTS, laissées — des titres `it`/`describe` qui
+  racontent la provenance d'une règle (14 dans `actions.test.ts`, ex.
+  « la règle de l’admin, jouée au serveur », 3 dans `patch.test.ts`, 1 dans
+  `ui-serve.test.ts`, 5 dans `src/lib/admin/{admin-inbox,guide-nav,shop-priorities-shape,event-edit}.test.ts`),
+  plus deux fixtures sans rapport (`http://local/admin` de
+  `route-body.test.ts`, la branche `feat/admin-auth` de
+  `patch-commands.test.ts`) : personne ne les lit hors du rapport de test,
+  à reprendre avec les ~270 commentaires si on les traite. (2) **Clés
+  i18n** : les 15 `tools.damage-calculator.obs.*` (panneau « Admin
+  observation divergences ») retirées, **15 par locale dans les six**, avec
+  leur commentaire de section ; revérifié avant : aucun `obs.` hors locales,
+  et le seul préfixe dynamique du dossier (`k()` de
+  `damage-calculator/index.tsx`, qui masque les clés mortes au test de
+  `keys.test.ts`) n'est jamais appelé sur `obs.`. (3) **Code** :
+  `src/lib/admin/extractor-rows.ts` supprimé (aucun importeur, et pas de
+  test à lui) ; `filterEffectCatalog` retiré d'`effect-search.ts` avec son
+  `describe` (l'interface `EffectCatalog` reste, `effect-catalog.ts`
+  l'importe ; en-tête corrigé) ; `adminPath` retiré de `GEAR_TARGETS` et de
+  l'attendu de `gear-sheet.test.ts`. `validateGearPresets` devient une
+  garde : `datagen/curated/gear-reco.test.ts` lit les
+  `gear-presets.json` / `gear-reco.json` committés et exige la forme sans
+  écart, chaque `$slug` de talismans et de substats et chaque `preset` de
+  sets cité par un build présent (aujourd'hui 259, 299 et 205 références
+  sur 96 persos), et aucun doublon — talismans par ensemble d'ids, sets par
+  la clé de `comboKey` (recopiée, `gear-preset-resolve.ts` ne l'exporte
+  pas), substats par chaîne ; il passe sur le dépôt du jour. (4)
+  **TODO** : l'item « Tableau de bord » (B36) perd ses contrôles (1) inbox
+  contre la home `/admin` et (2) lien « dans l'admin ↗ » / `ADMIN_BASE` —
+  ce lien n'existe plus dans `scripts/quick/ui/tabs/dashboard.{html,js}`
+  (seul y reste « fiche du perso ↗ », vers quick) — et renumérote les deux
+  restants. **Vérification** : `pnpm typecheck` (ses trois `tsc --noEmit`,
+  sans sortie), `pnpm lint` (`eslint`, sans sortie), `pnpm test` « Tests 3776 passed (3776) » (217 fichiers),
+  `pnpm format:check` « All matched files use Prettier code style! »
+  (prettier a remis en apostrophes simples une ligne de `patch.test.ts`).
+  Aucun changement visuel : seuls des messages d'erreur de build et de
+  console changent. Laissé : les commentaires « l'admin » et le dossier
+  `src/lib/admin/`, hors périmètre.
+
 - **Relecture A51 / B49 (Opus) — nettoyage après le retrait de `/admin`,
   pastilles « Autres » et « Patch », dépliant d'une entité nouvelle ou
   disparue : les deux validés.** Deux commits (`d1d4557e`, `a8f53270`),

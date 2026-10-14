@@ -543,13 +543,6 @@ const fr: Record<TranslationKey, string> = {
   'tools.damage-calculator.result.main_calc': 'Coup principal',
   'tools.damage-calculator.result.add_calc': 'Additionnel',
   'tools.damage-calculator.result.steps': 'Trace f32',
-  // Dev-only observation divergence table
-  'tools.damage-calculator.obs.title': "Divergences d'observation admin",
-  'tools.damage-calculator.obs.divergent': 'divergent',
-  'tools.damage-calculator.obs.matched': 'correspondant',
-  'tools.damage-calculator.obs.no_baseline': 'pas de référence',
-  'tools.damage-calculator.obs.no_baseline_hint':
-    "Enregistré avant l'ajout de `calculatedAtSave` au schéma admin — re-sauvegardez dans l'admin pour combler.",
   // Share panel — export / import calc state
   'tools.damage-calculator.share.title': 'Partager',
   'tools.damage-calculator.share.subtitle':
@@ -573,17 +566,6 @@ const fr: Record<TranslationKey, string> = {
   'tools.damage-calculator.share.report_note': 'Note',
   'tools.damage-calculator.share.report_note_placeholder':
     'Contexte, étapes de reproduction, tout ce qui aide à déboguer…',
-  'tools.damage-calculator.obs.divergent_only': 'Afficher uniquement les divergents',
-  'tools.damage-calculator.obs.all_match':
-    'Toutes les observations correspondent — aucune divergence.',
-  'tools.damage-calculator.obs.col.char': 'Perso',
-  'tools.damage-calculator.obs.col.skill': 'Skill',
-  'tools.damage-calculator.obs.col.target': 'Cible',
-  'tools.damage-calculator.obs.col.observed': 'Observé',
-  'tools.damage-calculator.obs.col.admin_calc': 'Calc admin',
-  'tools.damage-calculator.obs.col.our_calc': 'Notre calc',
-  'tools.damage-calculator.obs.col.delta_admin': 'Δ admin',
-  'tools.damage-calculator.obs.col.delta_obs': 'Δ obs',
   // Buffs panel — external % modifiers per stat (4-column layout)
   'tools.damage-calculator.buffs.col.attacker_buff': 'Buffs du lanceur',
   'tools.damage-calculator.buffs.col.attacker_debuff': 'Debuffs du lanceur',

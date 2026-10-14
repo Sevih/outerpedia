@@ -79,7 +79,7 @@ function BossPin({ guide, lang, t }: { guide: Guide; lang: Lang; t: TFunction })
   if (!monster) {
     throw new Error(
       `IrregularChaseMap : monstre « ${guide.bossId} » (${at}) absent de ` +
-        `data/generated/monsters.json — à extraire/valider via l'admin (Extractor › Monsters).`,
+        `data/generated/monsters.json — à extraire/valider dans quick (Données › Extraction › Monstres).`,
     );
   }
   const ladder = encountersOfGroup(guide.group);

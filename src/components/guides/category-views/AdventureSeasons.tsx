@@ -78,7 +78,7 @@ function stageCard(guide: Guide, lang: Lang, t: TFunction): StageCard {
   if (!monster) {
     throw new Error(
       `AdventureSeasons : monstre « ${guide.bossId} » (${at}) absent de ` +
-        `data/generated/monsters.json — à extraire/valider via l'admin (Extractor › Monsters).`,
+        `data/generated/monsters.json — à extraire/valider dans quick (Données › Extraction › Monstres).`,
     );
   }
 

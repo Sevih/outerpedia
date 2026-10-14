@@ -96,7 +96,7 @@ export async function BossCard({
   if (!view) {
     throw new Error(
       `BossCard : monstre « ${monsterId} » absent de data/generated/monsters.json — ` +
-        `à extraire/valider via l'admin (Extractor › Monsters).`,
+        `à extraire/valider dans quick (Données › Extraction › Monstres).`,
     );
   }
 

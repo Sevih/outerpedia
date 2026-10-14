@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { effectHaystack, effectMatches, filterEffectCatalog } from '@/lib/admin/effect-search';
+import { effectHaystack, effectMatches } from '@/lib/admin/effect-search';
 
 const row = (id: string, name: Record<string, string>, keys: string[] = []) => ({
   id,
@@ -188,43 +188,5 @@ describe('effectMatches — ce qui n’a pas changé', () => {
       field: 'name.en',
       value: 'Line one Line two',
     });
-  });
-});
-
-describe('filterEffectCatalog', () => {
-  const catalog = {
-    pairs: [{ buff: atkUp, debuff: atkDown }],
-    orphanBuffs: [uncounterable],
-    orphanDebuffs: [burn],
-  };
-
-  it('rend le catalogue tel quel sans saisie', () => {
-    expect(filterEffectCatalog(catalog, ' ')).toBe(catalog);
-  });
-
-  it('garde la paire entière quand un seul membre correspond', () => {
-    // « réduite » n’est que dans le debuff : le buff miroir reste affiché.
-    expect(filterEffectCatalog(catalog, 'reduite')).toEqual({
-      pairs: [{ buff: atkUp, debuff: atkDown }],
-      orphanBuffs: [],
-      orphanDebuffs: [],
-    });
-    expect(filterEffectCatalog(catalog, 'augmentée').pairs).toHaveLength(1);
-  });
-
-  it('filtre les deux colonnes d’orphelins chacune de son côté', () => {
-    expect(filterEffectCatalog(catalog, 'brule')).toEqual({
-      pairs: [],
-      orphanBuffs: [],
-      orphanDebuffs: [burn],
-    });
-    expect(filterEffectCatalog(catalog, 'uncounterable').orphanBuffs).toEqual([uncounterable]);
-  });
-
-  it('vide tout quand rien ne correspond', () => {
-    const none = { pairs: [], orphanBuffs: [], orphanDebuffs: [] };
-    expect(filterEffectCatalog(catalog, 'zzz')).toEqual(none);
-    // La règle nouvelle vaut ici aussi : plus de milieu de mot.
-    expect(filterEffectCatalog({ ...catalog, orphanBuffs: [speedUp] }, 'tes')).toEqual(none);
   });
 });

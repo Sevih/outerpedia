@@ -18,19 +18,6 @@
 
 ## 🧰 Outil quick
 
-- [ ] **Restes d'A51 (relecture du 14/10) — lot A52, rédigé le 14/10** : (1) des chaînes VISIBLES
-      renvoient encore à l'admin, ex. « à extraire/valider via l'admin
-      (Extractor › Monsters) » dans `BossPanel.tsx` et `encounters.ts`, une
-      chaîne de `fr.ts`, l'URL « vérifie /admin… » imprimée par
-      `datagen/promote.ts` (l.630) dans la console de Patch : les pointer vers
-      quick. Les ~270 autres « l'admin » sont des commentaires, à traiter
-      dans la foulée ou à laisser. (2) Sans lecteur hors de leur test :
-      `src/lib/admin/extractor-rows.ts`, `filterEffectCatalog`
-      (`effect-search.ts`), `validateGearPresets`
-      (`datagen/curated/gear-reco.ts`), `adminPath` de `GEAR_TARGETS`
-      (`gear-sheet.ts`) : supprimer. (3) L'item « Tableau de bord — contrôles
-      à l'écran (lot B36) » cite encore `ADMIN_BASE` et des liens `/admin` :
-      le réécrire vers `DEV_SITE_BASE` et quick.
 - [ ] **Migration de l'admin vers quick** (décision du 08/10) : inventaire,
       ordre et règles dans `docs/quick-migration.md`. FAIT : Short names et
       Search aliases (onglet « Noms », lot B34), Banner (onglet
@@ -583,16 +570,10 @@
       un lien entier) ; (c) le flux RSS garde sa propre copie du motif du
       gras (`src/app/feed/changelog/route.ts`) au lieu de `bulletSegments`.
 - [ ] **« Tableau de bord » — contrôles à l'écran (lot B36)** : le banc ne
-      clique pas. (1) L'inbox contre la home admin : ouvrir `/admin` à côté,
-      mêmes items, même ordre, mêmes chiffres (le 08/10 : « Character ·
-      1 new »). (2) Le lien « dans l'admin ↗ » : il ouvre
-      `https://outerpedia.local/admin/extractor/characters` dans un nouvel
-      onglet — il faut `pnpm dev` lancé sur un des deux postes ; sans Caddy,
-      poser `ADMIN_BASE=http://localhost:3000` dans `.env.local`. (3) La
-      version du client : « site 1.11.404 · client 1.11.404 » en vert
-      aujourd'hui ; après une mise à jour Steam du jeu, attendu en ambre avec
-      « un patch attend : onglet Patch », et sur un poste sans le jeu,
-      atténué (« pas de client Steam sur ce poste »). (4) « Ouvrir
+      clique pas. (1) La version du client : « site 1.11.404 · client
+      1.11.404 » en vert aujourd'hui ; après une mise à jour Steam du jeu,
+      attendu en ambre avec « un patch attend : onglet Patch », et sur un
+      poste sans le jeu, atténué (« pas de client Steam sur ce poste »). (2) « Ouvrir
       Bannières » et « Ouvrir Codes promo » mènent à l'onglet, revenir sur
       « Accueil » relit (un quart de seconde depuis A31, bouton « Actualiser »
       occupé le temps de la lecture) ; « Pousser » depuis le tableau le relit

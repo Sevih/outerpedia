@@ -519,13 +519,6 @@ const kr: Record<TranslationKey, string> = {
   'tools.damage-calculator.result.main_calc': '주공격',
   'tools.damage-calculator.result.add_calc': '추가공격',
   'tools.damage-calculator.result.steps': 'f32 추적',
-  // Dev-only observation divergence table
-  'tools.damage-calculator.obs.title': '관리자 관측 편차',
-  'tools.damage-calculator.obs.divergent': '편차',
-  'tools.damage-calculator.obs.matched': '일치',
-  'tools.damage-calculator.obs.no_baseline': '기준 없음',
-  'tools.damage-calculator.obs.no_baseline_hint':
-    '`calculatedAtSave` 필드 추가 전에 저장됨 — 관리자에서 재저장하여 백필.',
   // Share panel — export / import calc state
   'tools.damage-calculator.share.title': '공유',
   'tools.damage-calculator.share.subtitle':
@@ -546,16 +539,6 @@ const kr: Record<TranslationKey, string> = {
   'tools.damage-calculator.share.report_delta': 'Δ 관측 vs 계산',
   'tools.damage-calculator.share.report_note': '노트',
   'tools.damage-calculator.share.report_note_placeholder': '컨텍스트, 재현 단계 등…',
-  'tools.damage-calculator.obs.divergent_only': '편차만 표시',
-  'tools.damage-calculator.obs.all_match': '모든 관측 일치 — 편차 없음.',
-  'tools.damage-calculator.obs.col.char': '캐릭터',
-  'tools.damage-calculator.obs.col.skill': '스킬',
-  'tools.damage-calculator.obs.col.target': '타겟',
-  'tools.damage-calculator.obs.col.observed': '관측값',
-  'tools.damage-calculator.obs.col.admin_calc': '관리자 계산',
-  'tools.damage-calculator.obs.col.our_calc': '당측 계산',
-  'tools.damage-calculator.obs.col.delta_admin': 'Δ 관리자',
-  'tools.damage-calculator.obs.col.delta_obs': 'Δ 관측',
   // Buffs panel — external % modifiers per stat (4-column layout)
   'tools.damage-calculator.buffs.col.attacker_buff': '시전자 버프',
   'tools.damage-calculator.buffs.col.attacker_debuff': '시전자 디버프',

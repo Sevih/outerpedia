@@ -481,7 +481,7 @@ describe('promoteReview — la revue du dry-run, lue de sa sortie', () => {
     '> outerpedia@3.41.2 datagen:promote /home/x/outerpedia',
     '> tsx datagen/promote.ts',
     '',
-    '⚠ perso(s) non intégré(s) encore référencé(s) après écartement — fichier(s) RETENU(S), le reste du lot se promeut. Intégrer via l’admin pour les débloquer :',
+    '⚠ perso(s) non intégré(s) encore référencé(s) après écartement — fichier(s) RETENU(S), le reste du lot se promeut. Intégrer depuis quick (Données › Extraction › Personnages, « Intégrer ») pour les débloquer :',
     '  skills.json : 2400015',
     'promotion extrait → validé : 58 identique(s), 8 différent(s)',
     row('characters.json', '~2 · 1 perso(s) non intégré(s) écarté(s) : 2400015'),
@@ -495,7 +495,7 @@ describe('promoteReview — la revue du dry-run, lue de sa sortie', () => {
     row('damage/a-very-long-file-name-over-34c.json', 'contenu modifié'),
     '  ⚠ old-table.json — validé sans équivalent extrait (à trancher)',
     '  ⚠ equipment/legacy.json — validé sans équivalent extrait (à trancher)',
-    "  ⛔ perso(s) non intégré(s), jamais promu(s) : 2400015, 2400016 — intégration via l'admin uniquement",
+    '  ⛔ perso(s) non intégré(s), jamais promu(s) : 2400015, 2400016 — intégration depuis quick uniquement',
     '',
     '(dry-run — rien n’a été écrit ; relance avec --apply pour valider)',
   ].join('\n');
