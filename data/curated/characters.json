@@ -5031,6 +5031,11 @@
     "rank": "A",
     "rankPvp": "B",
     "role": "support",
+    "skillPriority": {
+      "first": 1,
+      "second": 2,
+      "ultimate": 3
+    },
     "prosCons": {
       "pros": [
         {
