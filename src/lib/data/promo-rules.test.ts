@@ -25,9 +25,19 @@ describe('applyCouponOp', () => {
     ).toEqual(['NEW', 'A', 'B']);
   });
 
-  it('add : refuse un code déjà présent (sensible à la casse)', () => {
+  it('add : refuse un code déjà présent, quelle que soit la casse ; range en majuscules', () => {
     expect(applyCouponOp(list, { action: 'add', coupon: coupon({ code: 'A' }) }).ok).toBe(false);
-    expect(applyCouponOp(list, { action: 'add', coupon: coupon({ code: 'a' }) }).ok).toBe(true);
+    expect(applyCouponOp(list, { action: 'add', coupon: coupon({ code: 'a' }) }).ok).toBe(false);
+    expect(
+      codes(applyCouponOp(list, { action: 'add', coupon: coupon({ code: ' new ' }) })),
+    ).toEqual(['NEW', 'A', 'B']);
+  });
+
+  it('edit / remove : retrouvent un code tapé en minuscules', () => {
+    expect(codes(applyCouponOp(list, { action: 'remove', code: 'a' }))).toEqual(['B']);
+    expect(
+      codes(applyCouponOp(list, { action: 'edit', code: 'b', coupon: coupon({ code: 'b2' }) })),
+    ).toEqual(['A', 'B2']);
   });
 
   it('edit : remplace l’entrée à sa place, renommage compris', () => {

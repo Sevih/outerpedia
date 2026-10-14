@@ -17,6 +17,7 @@ import { resolve } from 'node:path';
 import { writeJson } from '@datagen/lib/json';
 import { readLiveCoupons, writeLiveCoupons, type WriteResult } from '@/lib/data/live-coupons';
 import {
+  normalizeCouponCode,
   validateBanners,
   validateCoupons,
   type Banner,
@@ -73,7 +74,9 @@ export async function loadCouponsForEdit(): Promise<{
  * recharge (ses modifs non enregistrées sont à refaire, l'ajout de l'autre est
  * sauf).
  */
-export async function saveCouponsLive(list: PromoCode[], etag: string): Promise<WriteResult> {
+export async function saveCouponsLive(input: PromoCode[], etag: string): Promise<WriteResult> {
+  // Un code tapé en minuscules dans l'éditeur est rangé en majuscules plutôt que refusé.
+  const list = input.map((c) => ({ ...c, code: normalizeCouponCode(c.code ?? '') }));
   const res = await writeLiveCoupons(list, etag);
   if (res.ok) await writeArray(COUPONS_PATH, list);
   return res;

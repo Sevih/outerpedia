@@ -65,6 +65,10 @@ describe('validateCoupons', () => {
     expect(validateCoupons([coupon({ code: '  ' })]).join()).toMatch(/code is required/);
   });
 
+  it('refuse un code en minuscules (les codes du jeu sont en majuscules)', () => {
+    expect(validateCoupons([coupon({ code: 'outer2026' })]).join()).toMatch(/must be uppercase/);
+  });
+
   it('refuse deux fois le MÊME code (l’identité de l’entrée)', () => {
     // Deux lignes pour un code, et la période affichée devient un tirage au sort.
     expect(validateCoupons([coupon(), coupon()]).join()).toMatch(/duplicate code/);
@@ -161,6 +165,15 @@ describe('coupons — liste vivante R2 et instantané local', () => {
     expect((await saveCouponsLive(list, '"e1"')).ok).toBe(true);
     expect(live.writeLiveCoupons).toHaveBeenCalledWith(list, '"e1"');
     expect(box.read<PromoCode[]>(COUPONS)).toEqual(list);
+  });
+
+  it('range en majuscules un code tapé en minuscules, sur R2 comme dans l’instantané', async () => {
+    live.writeLiveCoupons.mockResolvedValue({ ok: true, etag: '"e2"', purged: true });
+    const want = [coupon({ code: 'OUTER2026' })];
+
+    expect((await saveCouponsLive([coupon({ code: ' outer2026 ' })], '"e1"')).ok).toBe(true);
+    expect(live.writeLiveCoupons).toHaveBeenCalledWith(want, '"e1"');
+    expect(box.read<PromoCode[]>(COUPONS)).toEqual(want);
   });
 
   it('conflit ou refus de R2 → l’instantané ne bouge PAS', async () => {

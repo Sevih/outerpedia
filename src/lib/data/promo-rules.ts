@@ -23,6 +23,14 @@ export interface Banner {
   end: string;
 }
 
+/**
+ * Forme CANONIQUE d'un code : espaces de bord retirés, MAJUSCULES. Les codes du
+ * jeu sont tous en majuscules (règle de Sevih, 11/10/2026), et le bot met déjà
+ * en majuscules ce que le staff tape : comparer tel quel l'empêchait d'éditer
+ * ou de retirer un code saisi en minuscules ailleurs.
+ */
+export const normalizeCouponCode = (code: string): string => code.trim().toUpperCase();
+
 /** Date de calendrier du jeu — `YYYY-MM-DD`, comme le changelog. */
 const DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
 
@@ -56,6 +64,7 @@ export function validateCoupons(list: PromoCode[]): string[] {
     const code = c.code?.trim();
     const at = `Coupon ${i + 1} (${code || '?'})`;
     if (!code) errors.push(`${at}: code is required.`);
+    else if (code !== code.toUpperCase()) errors.push(`${at}: code must be uppercase.`);
     else if (seen.has(code)) errors.push(`${at}: duplicate code.`);
     else seen.add(code);
 
@@ -97,15 +106,15 @@ export type CouponOp =
  * Applique une opération à la liste. Renvoie la nouvelle liste, ou les écarts
  * BLOQUANTS : code inconnu (edit/remove), code déjà pris (add, ou edit qui
  * renomme vers un code existant), puis `validateCoupons` sur la liste entière.
- * Le code est comparé TEL QUEL, espaces de bord retirés : un code du jeu est
- * sensible à la casse.
+ * Les codes sont ramenés à leur forme canonique (`normalizeCouponCode`) avant
+ * toute comparaison.
  */
 export function applyCouponOp(
   list: PromoCode[],
   op: CouponOp,
 ): { ok: true; list: PromoCode[] } | { ok: false; errors: string[] } {
   const has = (code: string) => list.some((c) => c.code === code);
-  const clean = (c: PromoCode): PromoCode => ({ ...c, code: c.code.trim() });
+  const clean = (c: PromoCode): PromoCode => ({ ...c, code: normalizeCouponCode(c.code) });
 
   let next: PromoCode[];
   if (op.action === 'add') {
@@ -113,7 +122,7 @@ export function applyCouponOp(
     if (has(coupon.code)) return { ok: false, errors: [`Code ${coupon.code} already exists.`] };
     next = [coupon, ...list];
   } else {
-    const code = op.code.trim();
+    const code = normalizeCouponCode(op.code);
     if (!has(code)) return { ok: false, errors: [`Code ${code} not found.`] };
     if (op.action === 'remove') {
       next = list.filter((c) => c.code !== code);
