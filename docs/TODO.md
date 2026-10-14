@@ -15,8 +15,6 @@
       (+150 % de dégâts en Skyward Tower, les cibles de tour existent).
 - [ ] **Revue d'extraction (suite de F14)** : le flag `art` qui apparaît sur
       un costume existant reste un écart — à trancher au premier cas.
-- [ ] **R2** : `images/ui/shop/al.webp` (onglet de l'Adventure License)
-      encore dans le bucket, plus référencé — à retirer (Sevih).
 
 ## 🧰 Outil quick
 
@@ -150,8 +148,8 @@
       perso » / « câbler les chips » depuis la fiche, « extraction » depuis
       la Fiche perso et depuis Monstres. (6) Un geste sur une fiche lue
       avant un refresh → « Rien n'est écrit — … ont changé », la fiche relue.
-- [ ] **Après le retrait de `/admin` (relecture du 13/10) — un lot A de
-      nettoyage** : (1) `datagen/README.md` (cinq passages) et
+- [ ] **Après le retrait de `/admin` (relecture du 13/10) — lots A51
+      (points 1 à 7) et B49 (point 8), rédigés le 14/10** : (1) `datagen/README.md` (cinq passages) et
       `docs/procedure/newPatch.md` décrivent la procédure par l'admin : la
       récrire vers quick (Patch, Extraction). (2) Les en-têtes qui citent
       encore une URL `/admin/…` (`src/lib/admin/{character-kit,
@@ -678,32 +676,13 @@ useAutoTranslate}.ts`, `src/lib/data/{events,pros-cons}.ts`,
 
 ## 🧪 À jouer au prochain patch
 
-- [ ] **quick, section « Patch » — le vrai cycle, à l'écran (lot C10)** :
-      l'agent a câblé les gestes sans en jouer aucun. Au prochain patch,
-      depuis quick (Accueil › Patch) au lieu de `pnpm dev` et de la
-      `PatchCard` : (1) « Lancer » (Steam, images et notes cochées) — la
-      console défile au fil du pull, reste collée au bas tant qu'on ne
-      remonte pas, le journal de l'en-tête ne montre que la ligne en cours ;
-      à la fin l'état passe à « client X · site Y ». (2) « Dry-run » — la
-      revue reste dans sa carte ; « Promouvoir » s'allume. (3) « Promouvoir
-      (--apply) » sans confirmation — vérifier qu'un perso non intégré ne
-      part pas. (4) « Committer » (message prérempli, bump) — dix minutes de
-      contrôles dans la console, puis « N commits à pousser » et le bouton
-      « Pousser » allumé. (5) « Pousser ». À essayer une fois : « Arrêter »
-      pendant le rafraîchissement (rien ne doit continuer derrière :
-      `pgrep -f datagen` vide ; « Lancer » reprend ensuite au checkpoint), recharger
-      la page pendant un travail (« un travail tourne : … », boutons éteints,
-      puis rallumés seuls à sa fin), « Pousser » pendant un travail (refusé :
-      « Un travail tourne déjà : … »). À NE PAS arrêter : « Committer » une
-      fois les images parties sur R2 (la prod les servirait sans commit).
-- [ ] **Retouches mineures des monstres et de l'équipement (lot B27)** : au
-      premier patch qui en apporte, le contrôle se joue désormais dans quick,
-      section « Extraction » (point 3 de « contrôles à l'écran (lot F20) »
-      ci-dessus : la cible Monstres ou une cible d'équipement, « Appliquer les
-      retouches mineures (n) », le bilan d'images). Reste à vérifier à part :
-      `pnpm datagen:promote --apply` écrit une ligne
-      `images : monsters.json — n entité(s) validée(s) modifiée(s) — …` par
-      fichier touché. Entrée DONE du lot B27 (06/10).
+- [ ] **quick, section « Patch » — « Arrêter », à essayer une fois (lot
+      C10)** : le cycle complet (Lancer, Dry-run, Promouvoir, Committer,
+      Pousser) a été joué au patch du 14/10. Reste : « Arrêter » pendant le
+      rafraîchissement (rien ne doit continuer derrière : `pgrep -f datagen`
+      vide ; « Lancer » reprend ensuite au checkpoint). À NE PAS arrêter :
+      « Committer » une fois les images parties sur R2 (la prod les servirait
+      sans commit).
 - [ ] **Rapport des effets de portrait (lot F12)** : au premier patch qui
       apporte un effet, contrôler la dernière ligne du refresh (« ◆ Portraits
       animés — à lire ») — l'effet y est nommé avec ses porteurs, « servi tel

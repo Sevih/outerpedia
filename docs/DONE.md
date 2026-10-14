@@ -7,6 +7,18 @@
 
 ## 2026-10-14
 
+- **Patch du 14/10 joué depuis quick (lot C10), R2 nettoyé, retouches des
+  monstres (lot B27) closes.** Sevih a mené le cycle « Patch » de quick de
+  bout en bout (Lancer, Dry-run, Promouvoir, Committer, Pousser :
+  `5ec7dbf4`, CI verte, prod en 200) ; reste au TODO l'essai d'« Arrêter ».
+  B27 : le patch a modifié un monstre validé (`pushBack` / `pushUp` dans
+  `monsters.json`), donc `promote --apply` a imprimé la ligne
+  `images : monsters.json — …` (branche de `datagen/promote.ts` l.609,
+  prise dès que `changedEntities` porte le fichier) ; la sortie n'a pas été
+  relue, l'item est clos sur la parole de Sevih. `images/ui/shop/al.webp`
+  retiré du bucket R2 par Sevih. Lots A51 et B49 rédigés dans
+  `docs/lots-opus-2026-09-25.md` (nettoyage post-`/admin`, dépliant d'une
+  entité nouvelle).
 - **Bloody Edge d'Eliza en HP%** (Sevih, `7b1441fc`, `ee92d0f9`) : les
   builds « Speed » et « Swift Mix » lui donnaient ATK%, que son pool ne
   propose pas.
