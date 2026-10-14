@@ -189,7 +189,13 @@ import type { EventEntry } from '@/lib/data/events';
 import { LANGS } from '@/lib/i18n/config';
 import type { RecruitWindow } from '@datagen/generators/recruit';
 import { emptyDict } from '@datagen/lib/lang';
-import { diffRecords, isMinorEntity, isTypoEntity } from '@datagen/extractor/core/changes';
+import {
+  addedFields,
+  diffRecords,
+  isMinorEntity,
+  isTypoEntity,
+  removedFields,
+} from '@datagen/extractor/core/changes';
 import type { ReviewEntity } from '@/lib/admin/review-types';
 import type { DiffResolvers } from '@/lib/admin/diff-labels';
 import type { StageResult } from '@datagen/assets/stage';
@@ -9482,6 +9488,7 @@ describe('Extraction — extractorOverview, extractorTarget, acceptExtraction, i
         name: { en: 'Lambda' },
         nickname: { en: 'Demiurge' },
         showNickName: true,
+        skills: ['101'],
       },
       '2000004': {
         id: '2000004',
@@ -9765,8 +9772,10 @@ describe('Extraction — extractorOverview, extractorTarget, acceptExtraction, i
       },
       entityReview: async (id, key) => {
         const diff = diffRecords(COMMITTED[id] ?? {}, FRESH[id] ?? {});
-        if (diff.added.includes(key)) return { status: 'added', fields: [] };
-        if (diff.removed.includes(key)) return { status: 'removed', fields: [] };
+        if (diff.added.includes(key))
+          return { status: 'added', fields: addedFields(FRESH[id][key]) };
+        if (diff.removed.includes(key))
+          return { status: 'removed', fields: removedFields(COMMITTED[id][key]) };
         const c = diff.changed.find((x) => x.key === key);
         return c ? { status: 'changed', fields: c.fields } : { status: 'same', fields: [] };
       },
@@ -9906,6 +9915,39 @@ describe('Extraction — extractorOverview, extractorTarget, acceptExtraction, i
       // Le nom FRAIS prime (l'écran montre ce que le jeu dit aujourd'hui).
       ['2000005', 'typo', 'Hello，world', 1],
     ]);
+  });
+
+  it('une nouvelle, une disparue : le dépliant montre toutes leurs feuilles, libellés compris ; ni les comptes ni le tri ne bougent', async () => {
+    const { fake } = deps();
+    const out = await extractorTarget('character', {}, fake);
+    if (!('entities' in out)) throw new Error('cible attendue');
+    // Une seule nouvelle, en `new` ; rien de plus en `diff` ni en `minor`.
+    expect(out.buckets).toEqual({ new: 1, diff: 1, minor: 1, typo: 1, removed: 1 });
+    const lambda = out.entities.find((e) => e.key === '2000003');
+    const gone = out.entities.find((e) => e.key === '2000002');
+    if (!lambda || !gone) throw new Error('entités attendues');
+    expect([lambda.fields, gone.fields]).toEqual([0, 0]);
+    expect(lambda.diff.map((g) => [g.title, g.fields.map((f) => `${f.name}:${f.kind}`)])).toEqual([
+      ['id', ['(entier):tree']],
+      ['name', ['en:tree']],
+      ['nickname', ['en:tree']],
+      ['showNickName', ['(entier):tree']],
+      ['skills', ['0:tree']],
+    ]);
+    // Chaque feuille est « ajoutée » : absente du committé, l'id de skill résolu.
+    const skill = lambda.diff[4].fields[0];
+    if (skill.kind !== 'tree') throw new Error('arbre attendu');
+    expect(skill.existing).toEqual([
+      { depth: 0, key: '', value: [{ kind: 'same', text: '(absent)' }], absent: true },
+    ]);
+    expect(skill.extracted).toEqual([
+      { depth: 0, key: '', value: [{ kind: 'same', text: '101' }], label: 'S1 · first' },
+    ]);
+    // La disparue, en miroir : tout retiré (`skills: []` n'a pas de feuille).
+    expect(gone.diff.map((g) => g.title)).toEqual(['id', 'name']);
+    const name = gone.diff[1].fields[0];
+    if (name.kind !== 'tree') throw new Error('arbre attendu');
+    expect(name.extracted[0]).toMatchObject({ absent: true });
   });
 
   it('le diff d’une entité en arbre : les skills résolus, un costume ajouté, un texte en mots', async () => {
@@ -10374,11 +10416,18 @@ describe('Extraction — extractorOverview, extractorTarget, acceptExtraction, i
       key: '2000003',
       tables: true,
       review: 'added',
-      fields: 0,
-      diff: [],
+      fields: 5,
       was: 'sig:character:v1',
       links: { sheet: 'character/2000003' },
     });
+    // Pas de diff à montrer : toutes ses feuilles, en ajout, rendues comme un diff.
+    expect(out.diff.map((g) => g.title)).toEqual([
+      'id',
+      'name',
+      'nickname',
+      'showNickName',
+      'skills',
+    ]);
     // Le dossier des icônes d'effets n'est plus servi : `effectTile` le porte.
     expect(out).not.toHaveProperty('effectSprite');
     const c = sheetOf(out).character;
@@ -10427,6 +10476,8 @@ describe('Extraction — extractorOverview, extractorTarget, acceptExtraction, i
     if ('error' in gone || !gone.tables)
       throw new Error('error' in gone ? gone.error : 'sans tables');
     expect(gone).toMatchObject({ review: 'removed', character: null, plan: null, links: {} });
+    // Le disparu, en miroir : ses feuilles committées, en retrait.
+    expect(gone.diff.map((g) => g.title)).toEqual(['id', 'name']);
   });
 
   it('la fiche d’un monstre : l’en-tête aux sprites, les stats par rencontre, les rencontres, les skills, les archives, le lien vers Monstres', async () => {

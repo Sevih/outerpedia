@@ -110,6 +110,46 @@ export function diffEntity(existing: unknown, extracted: unknown): FieldDiff[] {
 }
 
 /**
+ * Les feuilles d'une valeur, aux chemins que `walk` leur donnerait contre une
+ * valeur VIDE de la même forme : objets parcourus (clés triées), listes
+ * d'objets identifiés par `[#id]`, les autres par index ; un objet ou une
+ * liste vide n'a pas de feuille (vide contre vide), un scalaire à la racine
+ * en est une, au chemin `''`.
+ */
+function leaves(v: unknown, path: string, out: { path: string; value: unknown }[]): void {
+  if (isPlainObject(v)) {
+    for (const k of Object.keys(v).sort()) leaves(v[k], path ? `${path}.${k}` : k, out);
+    return;
+  }
+  if (Array.isArray(v)) {
+    const ids = listIds(v);
+    v.forEach((e, i) => leaves(e, ids ? `${path}[#${ids[i]}]` : `${path}[${i}]`, out));
+    return;
+  }
+  if (v !== undefined) out.push({ path, value: v });
+}
+
+/**
+ * Une entité NOUVELLE en champs « tout ajouté » (existant `undefined`) — ce que
+ * le dépliant de la revue montre à la place d'un diff, qu'elle n'a pas.
+ * Affichage seul : ni `diffRecords` ni le classement des buckets ne s'en servent.
+ */
+export function addedFields(extracted: unknown): FieldDiff[] {
+  const out: { path: string; value: unknown }[] = [];
+  leaves(extracted, '', out);
+  return out.map((l) => ({ path: l.path, existing: undefined, extracted: l.value }));
+}
+
+/** Le miroir d'`addedFields` pour une entité DISPARUE : tout retiré (extrait `undefined`). */
+export function removedFields(existing: unknown): FieldDiff[] {
+  return addedFields(existing).map((f) => ({
+    path: f.path,
+    existing: f.extracted,
+    extracted: undefined,
+  }));
+}
+
+/**
  * Normalisation TYPOGRAPHIQUE (portée telle quelle) : deux valeurs qui ne diffèrent
  * QUE par du blanc ou des variantes de ponctuation sont ramenées à la même
  * chaîne. Sert à séparer une vraie modif d'une coquille cosmétique — guillemets

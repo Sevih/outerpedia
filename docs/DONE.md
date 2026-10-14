@@ -7,6 +7,71 @@
 
 ## 2026-10-14
 
+- **Extraction : le dépliant d'une entité nouvelle (ou disparue) montre son
+  contenu (lot B49)** — constat de Sevih du 14/10 : dans quick, Données ›
+  Extraction, le dépliant d'une entité `new` était vide sur toutes les cibles
+  (rien de committé pour sa clé, donc aucun diff), comme la fiche
+  (`entityReview` rendait `{ status: 'added', fields: [] }`). QUOI : une
+  fonction pure `addedFields(extracted)` dans
+  `datagen/extractor/core/changes.ts` — les feuilles de la valeur fraîche en
+  `FieldDiff` « tout ajouté » (existant `undefined`), aux chemins que `walk`
+  leur donnerait contre une entité vide de la même forme : objets parcourus
+  clés triées, listes d'objets identifiés par `[#id]` (`listIds`), les autres
+  par index, un scalaire à la racine au chemin `''`, un objet ou une liste
+  vide sans feuille (vide contre vide) — et son miroir `removedFields(existing)`,
+  le même parcours retourné (extrait `undefined`) : le statut `removed`,
+  vide lui aussi, est traité par l'appel symétrique, rien de plus. COMMENT :
+  `entityReview` (`datagen/extractor/review.ts`) remplit `fields` pour
+  `added` et `removed` avec la valeur déjà lue (committé et frais y sont
+  chargés, le build est mémoïsé) ; `extractorTarget`
+  (`scripts/quick/actions.ts`) calcule ces feuilles pour les seules lignes
+  `new`/`removed`, dans le frais (`deps.fresh`) et le committé
+  (`deps.committed`) qu'il lisait déjà pour les noms, les passe à
+  `diffLabels` avec les autres et les rend par `diffTree` — le rendu de diff
+  existant (« (absent) » d'un côté, la valeur de l'autre), libellés compris
+  (sur ce poste : skills et sets recommandés du perso nouveau résolus).
+  `extractor.js` n'a pas bougé : il posait déjà `e.diff` et `en.diff`. CE QUI
+  NE BOUGE PAS : `diffRecords.added` reste une liste de clés (`datagen:promote`,
+  `promote.ts`, les tests de `changes.ts` intacts), `reviewEntities` rend
+  toujours `fields: []` pour new/removed, donc les comptes, le classement
+  des buckets, `mergeMinor` et « Appliquer les retouches mineures » ne voient
+  rien de ces champs ; la ligne garde `fields: 0` et le tri (le nombre de
+  feuilles divergentes, pas celui du dépliant) ; aucun geste ne lit les
+  champs de la revue. La fiche, elle, compte ses feuilles dans « Ce qui
+  change » (« 51 champs » pour le perso nouveau `2400015`). COÛT, quick isolé
+  du poste, avant → après (premier appel / second) : `extractorOverview`
+  1,42 s / 0,090 s → 1,36 s / 0,090 s (il ne touche pas aux entités) ;
+  ouverture de `character` 0,200 / 0,013 → 0,170 / 0,013 s, `item` 0,032 /
+  0,031 → 0,032 / 0,031 s, `weapon` 0,005 → 0,005 s, `monster` 0,275 / 0,185
+  → 0,264 / 0,176 s, `monster-skill` 0,190 / 0,184 → 0,189 / 0,189 s ; la fiche
+  de `2400015` 0,25 → 0,28 s. Aucun `build()` de plus : un parcours par
+  entité nouvelle ou disparue, sur l'objet déjà construit. VÉRIFIÉ :
+  `changes.test.ts` (objet imbriqué, liste d'objets identifiés alignée sur
+  les chemins de `walk`, listes de scalaires et d'objets sans `id`, scalaire
+  et `null` à la racine, conteneurs vides, miroir `removedFields`) ;
+  `actions.test.ts` (une revue qui porte une nouvelle et une disparue :
+  buckets inchangés `{ new: 1, diff: 1, minor: 1, typo: 1, removed: 1 }`,
+  `fields` à 0, le dépliant de la nouvelle feuille par feuille avec l'id de
+  skill résolu, la disparue en retrait ; la fiche du perso nouveau et du
+  disparu, le faux `entityReview` aligné sur le moteur) ; `ui-serve.test.ts`
+  (happy-dom, `extractor.js` réel : le dépliant de la ligne `new` n'est plus
+  vide, la fiche du nouveau montre « 2 champs » et ses groupes). Banc : quick
+  ISOLÉ (clés vidées), GET seuls — la seule entité ajoutée du poste est le
+  perso `2400015` ; ses comptes avant/après identiques, les réponses de
+  `weapon`, `item`, `monster` et `monster-skill` identiques à l'octet (rien
+  de nouveau ni de disparu chez elles) ; capture de sa fiche par `shot.mjs`
+  (`--hash extractor/character/2400015` ouvre la fiche, pas la ligne : le
+  dépliant de la liste est vérifié par le JSON de la route, 14 groupes, et
+  par le test happy-dom). `pnpm typecheck` (dernière ligne : la commande, les trois
+  `tsc --noEmit` sans erreur), `pnpm lint` (`$ eslint`, sans
+  erreur), `pnpm test` (`Tests  3775 passed (3775)`). LAISSÉ : un objet ou
+  une liste vide (`tags: []`) n'apparaît pas au dépliant, comme le demande
+  « vide contre vide » ; hors périmètre, le perso nouveau `2400015` a un
+  `name` vide dans les six langues du frais au 14/10 (sa fiche dit « sans
+  nom »), à revoir au prochain patch. TODO : le point (8) retiré de l'item
+  « Après le retrait de `/admin` », qui ne garde que ses contrôles à
+  l'écran, dont le dépliant sur une vraie entité ajoutée au prochain patch.
+
 - **Après le retrait de `/admin` : docs, en-têtes, libellés, modules
   orphelins, pastilles « Autres » et « Patch » (lot A51)** — les points 1 à
   7 de l'item du TODO, relevés par la relecture du 13/10 ; le point 8 (le

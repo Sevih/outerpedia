@@ -401,6 +401,7 @@ import type { VersionMonsterReport } from '@datagen/extractor/version-monster';
 import type { EquipmentData } from '@datagen/generators/equipment';
 import { ITEM_SPRITE_DIR, buildImageIndex, type ImageIndex } from '@datagen/assets/source';
 import type { AcceptReport, MinorReport } from '@datagen/extractor/review';
+import { addedFields, removedFields } from '@datagen/extractor/core/changes';
 import type { StageResult } from '@datagen/assets/stage';
 import { isPvpEligible, type SynergyGroup } from '@datagen/curated/character';
 import type { EquipmentCuratedEntry } from '@datagen/curated/equipment';
@@ -7172,6 +7173,7 @@ export interface ExtractorEntityRow {
   status: ReviewEntityStatus;
   /** Le nombre de feuilles qui divergent (zéro pour une nouvelle ou une disparue). */
   fields: number;
+  /** Le diff en arbre ; une nouvelle ou une disparue y montre toutes ses feuilles, en ajout ou en retrait. */
   diff: DiffGroup[];
   /** Hors du périmètre du site (la bascule « hors site ») : ni fiche, ni intégration. */
   offSite?: true;
@@ -7642,13 +7644,22 @@ export async function extractorTarget(
   const committed = deps.committed(target);
   const nameOf = (key: string): string =>
     entityName(id, fresh[key]) ?? entityName(id, committed[key]) ?? key;
-  const labels = diffLabels(
-    pool.flatMap((e) => e.fields),
-    await deps.resolvers(id),
-  );
+  // Une nouvelle (une disparue) n'a pas de diff : son dépliant montre toutes
+  // ses feuilles en ajout (en retrait), prises dans le frais (le committé) déjà
+  // lu. L'affichage seul : `fields`, le tri et les comptes restent ceux du diff.
+  const shownFields = (e: ReviewEntity) =>
+    e.status === 'new'
+      ? addedFields(fresh[e.key])
+      : e.status === 'removed'
+        ? removedFields(committed[e.key])
+        : e.fields;
   const status = EXTRACTOR_STATUSES.find((s) => s === opts.status);
   const q = typeof opts.q === 'string' ? opts.q.trim() : '';
-  const named = pool.map((e) => ({ ...e, name: nameOf(e.key) }));
+  const named = pool.map((e) => ({ ...e, name: nameOf(e.key), shown: shownFields(e) }));
+  const labels = diffLabels(
+    named.flatMap((e) => e.shown),
+    await deps.resolvers(id),
+  );
   const entities: ExtractorEntityRow[] = named
     .filter((e) => !status || e.status === status)
     .filter(
@@ -7665,7 +7676,7 @@ export async function extractorTarget(
       name: e.name,
       status: e.status,
       fields: e.fields.length,
-      diff: diffTree(e.fields, labels),
+      diff: diffTree(e.shown, labels),
       ...(offSite ? { offSite: true as const } : {}),
     }));
   return {

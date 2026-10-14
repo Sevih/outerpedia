@@ -15,11 +15,13 @@ import { stageEntityAssets, stagesEntityAssets } from '../assets/stage-entities'
 import type { StageResult } from '../assets/stage';
 import { buildSkills } from '../generators/skills';
 import {
+  addedFields,
   diffBuckets,
   diffEntity,
   diffRecords,
   isMinorEntity,
   isTypoEntity,
+  removedFields,
   type DiffBuckets,
   type FieldDiff,
   type RecordDiff,
@@ -147,7 +149,11 @@ export type EntityStatus = 'added' | 'removed' | 'changed' | 'same';
 
 export interface EntityReview {
   status: EntityStatus;
-  /** Feuilles divergentes (vide hors `changed`). */
+  /**
+   * Feuilles divergentes ; pour `added` (et `removed`), toutes les feuilles de
+   * l'entité, côté committé (ou frais) `undefined` — cf. `addedFields` ; vide
+   * pour `same`.
+   */
   fields: FieldDiff[];
 }
 
@@ -163,8 +169,8 @@ export function entityReview(id: string, key: string): EntityReview {
   const extracted = target.build();
   const inOld = key in existing;
   const inNew = key in extracted;
-  if (inOld && !inNew) return { status: 'removed', fields: [] };
-  if (!inOld && inNew) return { status: 'added', fields: [] };
+  if (inOld && !inNew) return { status: 'removed', fields: removedFields(existing[key]) };
+  if (!inOld && inNew) return { status: 'added', fields: addedFields(extracted[key]) };
   if (!inOld && !inNew) return { status: 'same', fields: [] };
   const fields = diffEntity(existing[key], extracted[key]);
   return { status: fields.length ? 'changed' : 'same', fields };

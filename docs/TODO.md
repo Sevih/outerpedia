@@ -148,16 +148,12 @@
       perso » / « câbler les chips » depuis la fiche, « extraction » depuis
       la Fiche perso et depuis Monstres. (6) Un geste sur une fiche lue
       avant un refresh → « Rien n'est écrit — … ont changé », la fiche relue.
-- [ ] **Après le retrait de `/admin` (relecture du 13/10) — lot B49 (point
-      8), rédigé le 14/10 ; les points 1 à 7 sont faits (A51)** : (8)
-      Extraction, constat de Sevih du 14/10 : le dépliant d'une entité
-      NOUVELLE est vide (pas de diff à montrer) — pour toutes les cibles, dont
-      les deux skills de Doppelakeus en lecture ; attendu : le contenu frais
-      de l'entité (nom, type, description, niveaux), en lecture, comme un diff
-      où tout est « ajouté ». À l'écran, par Sevih : un vrai ajout Twitch ou
-      Bilibili sur une fiche (A48), les pastilles qui ne bougent plus au
-      dry-run ni au push (A50), « Autres » dans l'en-tête d'un monstre d'event
-      (A49).
+- [ ] **Après le retrait de `/admin` (relecture du 13/10) — contrôles à
+      l'écran ; les points 1 à 7 sont faits (A51), le point 8 aussi (B49)** :
+      À l'écran, par Sevih : un vrai ajout Twitch ou Bilibili sur une fiche
+      (A48), les pastilles qui ne bougent plus au dry-run ni au push (A50),
+      « Autres » dans l'en-tête d'un monstre d'event (A49), le dépliant d'une
+      entité nouvelle, sur une vraie entité ajoutée au prochain patch (B49).
 - [ ] **« Événements » — contrôles à l'écran (lot F23)** : le banc ne
       clique pas, aucun enregistrement réel n'a été joué, `/api/translate`
       jamais appelé avec des clés, `POST /api/events` jamais appelé (les

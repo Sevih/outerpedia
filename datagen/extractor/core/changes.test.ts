@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import {
+  addedFields,
   diffBuckets,
   diffEntity,
   diffRecords,
@@ -10,6 +11,7 @@ import {
   isTypoField,
   normalizeTypo,
   numberSequence,
+  removedFields,
 } from './changes';
 
 describe('diffEntity — feuilles', () => {
@@ -102,6 +104,56 @@ describe('diffRecords — dictionnaires', () => {
       changed: [],
       unchanged: 1,
     });
+  });
+});
+
+describe('addedFields / removedFields — une entité entière en feuilles', () => {
+  it('descend dans les objets imbriqués, clés triées comme `walk`', () => {
+    expect(addedFields({ name: { fr: 'Épée', en: 'Sword' }, rarity: 3 })).toEqual([
+      { path: 'name.en', existing: undefined, extracted: 'Sword' },
+      { path: 'name.fr', existing: undefined, extracted: 'Épée' },
+      { path: 'rarity', existing: undefined, extracted: 3 },
+    ]);
+  });
+
+  it('aligne une liste d’objets identifiés par `#id`, comme le diff d’une entité qui existait', () => {
+    const fields = addedFields({ skills: [{ id: 102, lv: 1 }, { id: 101 }] });
+    expect(fields.map((f) => f.path)).toEqual([
+      'skills[#102].id',
+      'skills[#102].lv',
+      'skills[#101].id',
+    ]);
+    // Les mêmes chemins que `walk` contre l'entité vide de la même forme.
+    const empty = { skills: [{ id: 102 }, { id: 101 }] };
+    expect(
+      diffEntity(empty, { skills: [{ id: 102, lv: 1 }, { id: 101 }] }).map((f) => f.path),
+    ).toEqual(['skills[#102].lv']);
+  });
+
+  it('une liste de scalaires (ou d’objets sans `id` unique) va par index', () => {
+    expect(addedFields({ tags: ['a', 'b'], rows: [{ v: 1 }, { v: 2 }] })).toEqual([
+      { path: 'rows[0].v', existing: undefined, extracted: 1 },
+      { path: 'rows[1].v', existing: undefined, extracted: 2 },
+      { path: 'tags[0]', existing: undefined, extracted: 'a' },
+      { path: 'tags[1]', existing: undefined, extracted: 'b' },
+    ]);
+  });
+
+  it('un scalaire à la racine est une feuille au chemin vide ; un conteneur vide n’en a pas', () => {
+    expect(addedFields('Burn')).toEqual([{ path: '', existing: undefined, extracted: 'Burn' }]);
+    expect(addedFields(null)).toEqual([{ path: '', existing: undefined, extracted: null }]);
+    expect(addedFields({ tags: [], extra: {}, n: 0 })).toEqual([
+      { path: 'n', existing: undefined, extracted: 0 },
+    ]);
+    expect(addedFields(undefined)).toEqual([]);
+  });
+
+  it('removedFields est le miroir : tout retiré, extrait `undefined`', () => {
+    expect(removedFields({ id: 'gone', costumes: [{ id: 7, sort: 1 }] })).toEqual([
+      { path: 'costumes[#7].id', existing: 7, extracted: undefined },
+      { path: 'costumes[#7].sort', existing: 1, extracted: undefined },
+      { path: 'id', existing: 'gone', extracted: undefined },
+    ]);
   });
 });
 

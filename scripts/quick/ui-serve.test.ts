@@ -15723,6 +15723,35 @@ describe('Extraction — la page, sur le vrai markup', () => {
     ...(color ? { color } : {}),
   });
   /** Les entités d'une cible, telles que le serveur les rend. */
+  /** Le dépliant d'une NOUVELLE, tel que le serveur le rend : toutes ses feuilles, en ajout. */
+  const LAMBDA_DIFF = [
+    {
+      key: 'name',
+      title: 'name',
+      fields: [
+        {
+          path: 'name.en',
+          name: 'en',
+          kind: 'tree',
+          existing: [{ depth: 0, key: '', value: [seg('same', '(absent)')], absent: true }],
+          extracted: [{ depth: 0, key: '', value: [seg('same', 'Lambda')] }],
+        },
+      ],
+    },
+    {
+      key: 'skills',
+      title: 'skills',
+      fields: [
+        {
+          path: 'skills[0]',
+          name: '0',
+          kind: 'tree',
+          existing: [{ depth: 0, key: '', value: [seg('same', '(absent)')], absent: true }],
+          extracted: [{ depth: 0, key: '', value: [seg('same', '101')], label: 'S1 · first' }],
+        },
+      ],
+    },
+  ];
   const ENTITIES = [
     {
       key: '2000001',
@@ -15771,7 +15800,7 @@ describe('Extraction — la page, sur le vrai markup', () => {
         },
       ],
     },
-    { key: '2000003', name: 'Lambda', status: 'new', fields: 0, diff: [] },
+    { key: '2000003', name: 'Lambda', status: 'new', fields: 0, diff: LAMBDA_DIFF },
     { key: '2000002', name: 'Old Hero', status: 'removed', fields: 0, diff: [] },
     { key: '2000004', name: 'Rin', status: 'minor', fields: 1, diff: [] },
   ];
@@ -15944,6 +15973,8 @@ describe('Extraction — la page, sur le vrai markup', () => {
   };
   const CHARACTER = (missing: boolean) => ({
     ...sheetBase('character', '2000003', 'added'),
+    fields: 2,
+    diff: LAMBDA_DIFF,
     character: {
       id: '2000003',
       name: 'Demiurge Lambda',
@@ -16821,9 +16852,17 @@ describe('Extraction — la page, sur le vrai markup', () => {
     expect(page.hash()).toBe('#extractor/character');
     expect(page.rows()[0].open).toBe(false);
     expect(page.diff('2000001')).toEqual([]);
-    // Un replié n'a rien de dessiné ; la nouvelle n'a pas de diff.
-    page.open('2000003');
+    // Un replié n'a rien de dessiné ; la nouvelle, sans diff, montre toutes ses
+    // feuilles en ajout (B49) : absentes du committé, l'id de skill résolu.
     expect(page.diff('2000003')).toEqual([]);
+    page.open('2000003');
+    expect(page.diff('2000003')).toEqual([
+      { title: 'name', fields: [{ name: 'en', text: [], trees: [['0:(absent)'], ['0:Lambda']] }] },
+      {
+        title: 'skills',
+        fields: [{ name: '0', text: [], trees: [['0:(absent)'], ['0:101 — S1 · first']] }],
+      },
+    ]);
   });
 
   it('« Confirmer l’extraction » dit d’abord ce qu’il va écrire, puis poste `all` avec `was` ; annuler ne poste rien', async () => {
@@ -16987,7 +17026,12 @@ describe('Extraction — la page, sur le vrai markup', () => {
     expect(s.links).toEqual([['fiche perso', 'character/2000003']]);
     expect(s.button).toEqual({ hidden: false, text: 'Intégrer', disabled: false });
     expect(s.missing).toBeNull();
-    expect(s.diff).toBeNull();
+    // Pas de diff pour une nouvelle : ses feuilles, en ajout, dans le même bloc.
+    expect(s.diff).toBe('2 champs');
+    expect(page.all('#ex-entity-diff .ex-gtitle').map((g) => g.textContent)).toEqual([
+      'name',
+      'skills',
+    ]);
     expect(s.sections).toEqual([
       'Stats extraites',
       'Tags détectés',
