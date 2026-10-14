@@ -7,6 +7,41 @@
 
 ## 2026-10-14
 
+- **Relecture A51 / B49 (Opus) — nettoyage après le retrait de `/admin`,
+  pastilles « Autres » et « Patch », dépliant d'une entité nouvelle ou
+  disparue : les deux validés.** Deux commits (`d1d4557e`, `a8f53270`),
+  joués l'un après l'autre comme demandé, chacun au périmètre de son lot, ni
+  `package.json` ni lock. A51 : les sept points, plus quelques URL `/admin`
+  en commentaire hors liste (déclarées) ; effet de bord du hook
+  `stamp:guides` : le `meta.json` du guide Shop passe au 14/10
+  (`updated`) pour un simple commentaire (date publique avancée, contenu
+  inchangé). B49 : `addedFields` / `removedFields` purs dans `changes.ts`,
+  affichage seul ; seul `extractorEntity` lit les `fields` d'`entityReview`
+  (vérifié par grep, le réexport de `review-store.ts` n'a pas d'autre
+  lecteur). **Contrôles sur HEAD (`a8f53270`)** : typecheck, lint,
+  format:check verts ; `pnpm test` 216 fichiers / 3775 tests ;
+  `vitest run scripts/quick` 8 / 1144. **Rejeux (tsx, lecture seule)** :
+  `badgesState` réel → `{ extractor: 1 warn }`, site et client en 1.11.407,
+  pas de pastille Patch ; client simulé 9.9.9 → `patch: 1 warn`, à
+  égalité, en retard, absent ou qui lève → rien (les autres pastilles
+  servies). `monstersRoster` : 2 449 lignes, 204 « Autres », 136 « sans
+  mode », aucun « Autres » qui porte aussi un mode titré.
+  `extractorTarget('character', { status: 'new' })` : `2400015`, `fields`
+  0, 14 groupes au dépliant, 184 ms. Chemins : `addedFields` descend
+  jusqu'aux feuilles d'une liste d'objets identifiés (`a.d[#7].v`) là où
+  `walk` contre une liste vide s'arrêterait à l'objet (`a.d[#7]`) ; plus
+  lisible au dépliant, et un conteneur vide est omis, comme l'entrée B49 le
+  dit. **Banc** (quick isolé :4875, clés vidées, GET seuls, `shot.mjs`) :
+  picker Monstres « Autres 0 » juste avant « sans mode 25 » sous Guides ;
+  fiche de `2400015` avec « Ce qui change 51 champs », chaque champ
+  « (absent) » contre la valeur fraîche. **Reste à Sevih** : relancer son
+  quick ; « Autres » sous « Site » dans le picker Monstres ; la pastille
+  « Patch » au prochain patch, avant « Lancer » ; le dépliant sur une vraie
+  entité ajoutée (TODO). **Suites au TODO** : les restes d'A51 (chaînes
+  « l'admin » visibles, modules et fonctions sans lecteur, l'item B36). Le
+  perso `2400015` (sans nom ni date de sortie dans le frais) n'est pas un
+  défaut de B49 : sa fiche refuse l'intégration, comme prévu. **Suite** :
+  aucun lot ouvert.
 - **Extraction : le dépliant d'une entité nouvelle (ou disparue) montre son
   contenu (lot B49)** — constat de Sevih du 14/10 : dans quick, Données ›
   Extraction, le dépliant d'une entité `new` était vide sur toutes les cibles
