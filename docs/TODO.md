@@ -20,25 +20,10 @@
 
 ## 🎒 Gear reco — données (signalé par le lot C4)
 
-- [ ] **Bloody Edge (`631`)** : deux builds de `data/curated/gear-reco.json`
-      lui donnent ATK% en stat principale, son pool ne propose que HP% — à
+- [ ] **Bloody Edge (`631`)** : les builds « Speed » et « Swift Mix »
+      d'Eliza (`2000035`) lui donnent ATK% en stat principale, son pool ne
+      propose que HP% (Resonance Eliza l'a bien en HP%) — à
       corriger dans quick (Fiche perso › Gear reco) (Sevih).
-- [ ] **Presets en double** (`$mrs` = `$elemcritAP`, `a2p2` = `p2a2` dans
-      `gear-presets.json`) : `collapseBuild` rend le premier trouvé (l'admin
-      changeait donc le slug au save ; quick, lui, garde celui du disque). À
-      fusionner ou à distinguer à la main dans le fichier (la page
-      `/admin/gear-presets` est partie avec l'admin le 13/10, lot C15).
-
-## 🎟️ Codes promo (rapport de cloisonnement du 11/10, lot L8)
-
-- [ ] **Normaliser les codes en majuscules côté site** : les codes du jeu sont
-      tous en majuscules (règle de Sevih, 11/10). `applyCouponOp` et
-      `validateCoupons` (`src/lib/data/promo-rules.ts`) comparent le code tel
-      quel : passer en majuscules (ou refuser une minuscule) et réécrire le
-      commentaire « sensible à la casse ». Le bot, lui, met déjà en majuscules
-      ce qu'il reçoit : aujourd'hui il ne peut donc ni éditer ni retirer un
-      code en minuscules de la liste vivante. Rapport :
-      `sevih-tool/docs/revue/cloisonnement-2026-10.md` § 4.3.
 
 ## 🧰 Outil quick
 

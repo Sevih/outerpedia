@@ -7,6 +7,21 @@
 
 ## 2026-10-14
 
+- **Codes promo en majuscules (lot L8, rapport de cloisonnement du 11/10
+  § 4.3).** `normalizeCouponCode` (`src/lib/data/promo-rules.ts`) : espaces
+  de bord retirés et majuscules. `applyCouponOp` l'applique au code visé et
+  au coupon écrit, donc le bot retrouve un code quelle que soit la casse ;
+  `saveCouponsLive` (quick) range en majuscules un code tapé en minuscules ;
+  `validateCoupons` refuse en dernier recours un code qui ne l'est pas
+  (« code must be uppercase »). Les 103 codes de l'instantané l'étaient déjà.
+  Tests : add refuse `a` quand `A` existe, edit / remove retrouvent `a`,
+  minuscules refusées à la validation et rangées en majuscules à la
+  sauvegarde.
+- **Presets de gear reco en double fusionnés.** `$mrs` (3 builds de Rin) →
+  `$elemcritAP`, comme les mêmes builds de Resonance Rin : l'ordre affiché
+  des talismans de Rin passe de Mage / Rogue / Sage à Sage / Mage / Rogue.
+  `a2p2` (Atk Mix de Sigma) → `p2a2`, comme les 8 autres builds. Les deux
+  slugs minoritaires sont retirés de `gear-presets.json`.
 - **Demiurge Lambda — rangs (Sevih, `3c7826b3`)** : PvE S, PvP A, par
   transcendance 3★/4★ A et 6★/9★ S (DPS partout), priorité des skills
   ultime › S2 › S1, EE A en base et à +10. Restent pros/cons et synergies
