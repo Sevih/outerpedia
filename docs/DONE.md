@@ -7,6 +7,9 @@
 
 ## 2026-10-14
 
+- **Bloody Edge d'Eliza en HP%** (Sevih, `7b1441fc`, `ee92d0f9`) : les
+  builds « Speed » et « Swift Mix » lui donnaient ATK%, que son pool ne
+  propose pas.
 - **Codes promo en majuscules (lot L8, rapport de cloisonnement du 11/10
   § 4.3).** `normalizeCouponCode` (`src/lib/data/promo-rules.ts`) : espaces
   de bord retirés et majuscules. `applyCouponOp` l'applique au code visé et

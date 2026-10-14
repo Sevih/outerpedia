@@ -18,13 +18,6 @@
 - [ ] **R2** : `images/ui/shop/al.webp` (onglet de l'Adventure License)
       encore dans le bucket, plus référencé — à retirer (Sevih).
 
-## 🎒 Gear reco — données (signalé par le lot C4)
-
-- [ ] **Bloody Edge (`631`)** : les builds « Speed » et « Swift Mix »
-      d'Eliza (`2000035`) lui donnent ATK% en stat principale, son pool ne
-      propose que HP% (Resonance Eliza l'a bien en HP%) — à
-      corriger dans quick (Fiche perso › Gear reco) (Sevih).
-
 ## 🧰 Outil quick
 
 - [ ] **Migration de l'admin vers quick** (décision du 08/10) : inventaire,
