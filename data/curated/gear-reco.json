@@ -278,7 +278,7 @@
           "mainStat": "PEN%"
         }
       ],
-      "talismans": ["$mrs"],
+      "talismans": ["$elemcritAP"],
       "sets": [
         {
           "preset": "s4"
@@ -300,7 +300,7 @@
           "mainStat": "PEN%"
         }
       ],
-      "talismans": ["$mrs"],
+      "talismans": ["$elemcritAP"],
       "sets": [
         {
           "preset": "chd4"
@@ -322,7 +322,7 @@
           "mainStat": "PEN%"
         }
       ],
-      "talismans": ["$mrs"],
+      "talismans": ["$elemcritAP"],
       "sets": [
         {
           "preset": "p4"
@@ -1204,7 +1204,7 @@
           "preset": "a2chd2"
         },
         {
-          "preset": "a2p2"
+          "preset": "p2a2"
         },
         {
           "preset": "a2ag2"
