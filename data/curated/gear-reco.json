@@ -685,7 +685,7 @@
       "weapons": [
         {
           "id": "631",
-          "mainStat": "ATK%"
+          "mainStat": "ATK%/HP%"
         },
         {
           "id": "11",
@@ -716,14 +716,14 @@
           "preset": "s4"
         }
       ],
-      "substats": "SPD>ATK>CHC>CHD>DMG UP%"
+      "substats": "$sdps"
     },
     {
       "name": "Swift Mix",
       "weapons": [
         {
           "id": "631",
-          "mainStat": "ATK%"
+          "mainStat": "ATK%/HP%"
         },
         {
           "id": "11",
@@ -757,7 +757,7 @@
           "preset": "sw2a2"
         }
       ],
-      "substats": "SPD>ATK>CHC>CHD>DMG UP%"
+      "substats": "$sdps"
     }
   ],
   "2000037": [
