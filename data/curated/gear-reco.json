@@ -685,7 +685,7 @@
       "weapons": [
         {
           "id": "631",
-          "mainStat": "ATK%/HP%"
+          "mainStat": "HP%"
         },
         {
           "id": "11",
@@ -723,7 +723,7 @@
       "weapons": [
         {
           "id": "631",
-          "mainStat": "ATK%/HP%"
+          "mainStat": "HP%"
         },
         {
           "id": "11",
