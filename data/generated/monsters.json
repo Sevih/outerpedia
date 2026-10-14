@@ -213527,8 +213527,8 @@
       "es": "Réplica del Dragón de la Muerte"
     },
     "aiType": "attack",
-    "pushBack": true,
-    "pushUp": true,
+    "pushBack": false,
+    "pushUp": false,
     "buffImmune": [
       "BT_GOLDEN_CURSE",
       "BT_FREEZE",
