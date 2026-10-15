@@ -50,8 +50,9 @@ export function getTowerFloor(tower: Tower, floor: number): TowerFloor | undefin
  * `{0}` est le quota. Deux formes :
  *   - QUOTA (`count > 0`) : on interpole `{0}` = count.
  *   - BAN (`count === -1`) : pas de `{0}`, la phrase se suffit.
- * Le jeu ne fournit que `en/jp/kr/zh` — le français retombe sur l'anglais
- * (décision de portage : le desc n'a pas de `fr`, cf. tower-guides-port).
+ * Le jeu fournit le libellé dans ses six langues (`fr` et `es` compris depuis
+ * que le client les livre) ; le repli sur l'anglais ne joue que si une langue
+ * manque.
  */
 export function formatRestriction(r: TowerRestriction, lang: Lang): string {
   const desc = r.desc as Record<string, string | undefined>;

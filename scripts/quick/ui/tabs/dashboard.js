@@ -147,8 +147,8 @@ function renderGame(game, error) {
 }
 
 // ------------------------------------------------------ « Bannières », « Codes promo »
-/** Comme l'onglet Bannières : « 12 j restants », « dernier jour » à zéro. */
-const left = (n) => (n ? `${n} j restant${n > 1 ? 's' : ''}` : 'dernier jour');
+/** Comme l'onglet Bannières : « 12 j restants », « dernier jour » à un (`end` exclusif). */
+const left = (n) => (n > 1 ? `${n} j restants` : 'dernier jour');
 
 function renderBanners(banners, error) {
   $('h-banners-count').innerHTML = banners

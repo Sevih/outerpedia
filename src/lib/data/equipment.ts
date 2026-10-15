@@ -221,6 +221,23 @@ export function passiveTextAt(
 }
 
 /**
+ * Texte d'un passif de talisman ou d'EE à SON palier : les `values` y suivent
+ * les niveaux DÉCLARÉS du buff (souvent [1, 10]), on prend celle du plus haut
+ * niveau déclaré ≤ `ref.level` (Mage's Charm : 30 jusqu'à +9, 39 au +10). La
+ * page détail et l'`/item` du bot lisent cette même règle. `undefined` si le
+ * passif est inconnu.
+ */
+export function passiveTextAtLevel(ref: PassiveRef, lang: Lang, color = true): string | undefined {
+  const p = PASSIVES[ref.id];
+  if (!p) return undefined;
+  const desc = lRec(p.desc, lang) || p.desc.en;
+  if (!p.values.length) return desc;
+  let idx = 0;
+  for (let i = 0; i < (p.levels?.length ?? 0); i++) if (p.levels[i] <= ref.level) idx = i;
+  return fillPlaceholders(desc, p.values[Math.min(idx, p.values.length - 1)], color);
+}
+
+/**
  * Texte de tooltip d'une famille d'équipement : TOUS ses passifs au palier MAX,
  * joints par saut de ligne — même sélection que la page détail
  * (`equipment-detail`), et non plus le seul premier passif (Executioner's Charm
@@ -251,11 +268,7 @@ export function gearPassivesText(
     let filled: string;
     if (!p.values.length) filled = desc;
     else if (byTier) filled = fillPlaceholders(desc, p.values[p.values.length - 1], color);
-    else {
-      let idx = 0;
-      for (let i = 0; i < (p.levels?.length ?? 0); i++) if (p.levels[i] <= ref.level) idx = i;
-      filled = fillPlaceholders(desc, p.values[Math.min(idx, p.values.length - 1)], color);
-    }
+    else filled = passiveTextAtLevel(ref, lang, color)!;
     byTemplate.set(desc, filled);
   }
   const text = [...byTemplate.values()].join('\n');

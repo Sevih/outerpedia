@@ -91,7 +91,7 @@ export default async function QuirkGuide({ lang }: { lang: Lang }) {
     key: c.key,
     label: L(TERMS[CATEGORY_TERM[c.key]]),
     trees: c.trees.map((tr) => ({
-      label: quirkTreeSubLabel(c.key, tr.key, lang) ?? L(TERMS[CATEGORY_TERM[c.key]]),
+      label: quirkTreeSubLabel(c.key, tr.key, t) ?? L(TERMS[CATEGORY_TERM[c.key]]),
       tree: localizeTree(tr, lang),
     })),
   }));

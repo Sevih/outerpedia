@@ -8588,16 +8588,19 @@ describe('Bannières — la page, sur le vrai markup', () => {
       ['Carla', '2026-07-01', '2026-07-28', 'expirée', 'expired'],
     ]);
 
-    // La saisie d'une date refait le statut, sans redessiner la ligne.
+    // La saisie d'une date refait le statut, sans redessiner la ligne. `end`
+    // exclusif : la veille de la fin est le dernier jour, la fin est close.
     const end = page.field(page.row('Anna'), 'end') as HTMLInputElement;
-    page.type(end, TODAY);
+    page.type(end, '2026-10-09');
     expect(page.rows()[1]).toEqual([
       'Anna',
       '2026-09-22',
-      TODAY,
+      '2026-10-09',
       'active · dernier jour | modifiée',
       '',
     ]);
+    page.type(end, TODAY);
+    expect(page.rows()[1][3]).toBe('expirée | modifiée');
     expect(page.field(page.row('Anna'), 'end')).toBe(end);
     page.type(end, '');
     expect(page.rows()[1][3]).toBe('brouillon | modifiée');
@@ -11377,7 +11380,7 @@ describe('Tableau de bord — la page, sur le vrai markup', () => {
     game: { site: '1.11.404', version: '1.11.404', client: 'same', proposal: false },
     banners: {
       active: [
-        { id: '2', name: 'Bella', daysLeft: 0 },
+        { id: '2', name: 'Bella', daysLeft: 1 },
         { id: '1', name: 'Anna', daysLeft: 12 },
       ],
       upcoming: [{ id: '4', name: 'Dana', inDays: 5 }],

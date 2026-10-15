@@ -20,12 +20,14 @@ import { listGuides } from '@/lib/data/guides';
 import { getChangelog, type ChangelogType } from '@/lib/data/changelog';
 import { getActiveCoupons } from '@/lib/home';
 import { changelogHref, changelogThumb } from '@/components/changelog/presentation';
+import { gameLineBreaks } from '@/components/ui/GameText';
 import {
   getAmuletFamilies,
   getEEViews,
   getSetViews,
   getTalismanFamilies,
   getWeaponFamilies,
+  passiveTextAtLevel,
   resolvePassives,
   shopSourceLabel,
   slugifyEquipment,
@@ -153,21 +155,31 @@ export function buildBotChangelog(): BotChangelogEntry[] {
 
 const cap = (s: string): string => (s ? s[0]!.toUpperCase() + s.slice(1) : s);
 
-/** Les textes de jeu portent des balises `<color=…>` — un embed Discord n'en veut pas. */
-const stripColors = (s: string): string => s.replace(/<\/?color[^>]*>/g, '');
+/**
+ * Les textes de jeu portent des balises `<color=…>` — un embed Discord n'en veut
+ * pas — et des `\n` LITTÉRAUX, convertis en vrais sauts de ligne comme le site.
+ */
+const embedText = (s: string): string => gameLineBreaks(s.replace(/<\/?color[^>]*>/g, ''));
 
 /**
- * Passifs d'un item en lignes d'embed : une ligne par palier, au reforge MAX
- * (la valeur que le joueur vise — montrer min et max doublerait la taille pour
- * rien, un embed est borné à 1024 caractères par champ).
+ * Passifs d'un item en lignes d'embed, une ligne par palier. Armes et
+ * amulettes (`byLevel` faux) : valeurs par percée, on montre la MAX (la valeur
+ * que le joueur vise — montrer min et max doublerait la taille pour rien, un
+ * embed est borné à 1024 caractères par champ). Talismans et EE : valeurs aux
+ * niveaux déclarés, chaque palier dit SA valeur, comme la page détail.
  */
-function passiveView(refs: PassiveRef[]): { effectName?: string; effectTiers?: string[] } {
-  const resolved = resolvePassives(refs, 'en');
-  if (!resolved.length) return {};
-  return {
-    effectName: resolved[0].name,
-    effectTiers: resolved.map((p) => `Lv.${p.level}: ${stripColors(p.last ?? p.first)}`),
-  };
+function passiveView(
+  refs: PassiveRef[],
+  byLevel: boolean,
+): { effectName?: string; effectTiers?: string[] } {
+  const tiers = refs.flatMap((ref) => {
+    const [p] = resolvePassives([ref], 'en');
+    if (!p) return [];
+    const text = byLevel ? passiveTextAtLevel(ref, 'en')! : (p.last ?? p.first);
+    return [{ name: p.name, line: `Lv.${p.level}: ${embedText(text)}` }];
+  });
+  if (!tiers.length) return {};
+  return { effectName: tiers[0].name, effectTiers: tiers.map((p) => p.line) };
 }
 
 /** Source d'obtention en une chaîne (même assemblage que la page détail). */
@@ -186,7 +198,12 @@ function sourceText(source: ResolvedSource | undefined, t: TFunction): string | 
  * s'éclate en UNE entrée PAR variante — comme ses pages détail : nom suffixé
  * `[Defender]`, slug/icône/passif de la variante.
  */
-function familyItems(type: BotItem['type'], families: GearFamily[], t: TFunction): BotItem[] {
+function familyItems(
+  type: 'weapon' | 'amulet' | 'talisman',
+  families: GearFamily[],
+  t: TFunction,
+): BotItem[] {
+  const byLevel = type === 'talisman';
   return families.flatMap((f) => {
     const source = sourceText(f.source, t);
     if (f.classPassives) {
@@ -196,7 +213,7 @@ function familyItems(type: BotItem['type'], families: GearFamily[], t: TFunction
         name: withClassSuffix(f.name, v.classLimit).en,
         icon: `/images/equipment/${v.icon}.webp`,
         classLimit: cap(v.classLimit),
-        ...passiveView(v.passives),
+        ...passiveView(v.passives, byLevel),
         ...(source ? { source } : {}),
       }));
     }
@@ -207,7 +224,7 @@ function familyItems(type: BotItem['type'], families: GearFamily[], t: TFunction
         name: f.name.en,
         icon: `/images/equipment/${f.icon}.webp`,
         ...(f.classLimits.length ? { classLimit: f.classLimits.map(cap).join(' / ') } : {}),
-        ...passiveView(f.passives),
+        ...passiveView(f.passives, byLevel),
         ...(source ? { source } : {}),
       },
     ];
@@ -228,8 +245,8 @@ export function buildBotItems(t: TFunction): BotItem[] {
       effectTiers: s.tiers.flatMap((tier, i) => {
         const tag = i === 0 ? '' : ' (enchanted)';
         return [
-          ...(tier.p2 ? [`2-Set${tag}: ${stripColors(tier.p2)}`] : []),
-          ...(tier.p4 ? [`4-Set${tag}: ${stripColors(tier.p4)}`] : []),
+          ...(tier.p2 ? [`2-Set${tag}: ${embedText(tier.p2)}`] : []),
+          ...(tier.p4 ? [`4-Set${tag}: ${embedText(tier.p4)}`] : []),
         ];
       }),
       ...(source ? { source } : {}),
@@ -244,7 +261,7 @@ export function buildBotItems(t: TFunction): BotItem[] {
       name: e.name.en,
       icon: `/images/characters/ee/${e.characterId}.webp`,
       ...(owner ? { classLimit: cap(owner.class) } : {}),
-      ...passiveView(e.passives),
+      ...passiveView(e.passives, true),
       ...(owner ? { characterName: characterDisplayName(owner, 'en') } : {}),
     };
   });

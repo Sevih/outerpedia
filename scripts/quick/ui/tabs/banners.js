@@ -56,11 +56,14 @@ function resetRows() {
 /** Jours entiers de `a` à `b`. */
 const days = (a, b) => Math.round((Date.parse(b) - Date.parse(a)) / DAY);
 
-/** Le statut d'une fenêtre au jour UTC du serveur — la règle de la home. */
+/**
+ * Le statut d'une fenêtre au jour UTC du serveur — la règle de la home : `end`
+ * EXCLUSIF (l'`EndDate` du jeu, `end` 00:00 UTC), la bannière est close ce jour-là.
+ */
 function statusOf(b) {
   if (!b.start || !b.end) return 'draft';
   if (b.start > data.today) return 'upcoming';
-  if (b.end < data.today) return 'expired';
+  if (b.end <= data.today) return 'expired';
   return 'active';
 }
 
@@ -72,7 +75,7 @@ function statusBadge(b) {
     return `<span class="badge upcoming">à venir · dans ${days(data.today, b.start)} j</span>`;
   if (status === 'expired') return '<span class="badge expired">expirée</span>';
   const left = days(data.today, b.end);
-  return `<span class="badge active">active · ${left ? `${left} j restant${left > 1 ? 's' : ''}` : 'dernier jour'}</span>`;
+  return `<span class="badge active">active · ${left > 1 ? `${left} j restants` : 'dernier jour'}</span>`;
 }
 
 /** La vignette d'un perso : complète s'il est du roster, neutre sinon. */

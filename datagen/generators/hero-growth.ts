@@ -22,11 +22,13 @@
  *  • `xpCurve` / `affinityCurve` — courbes d'XP CUMULÉ par niveau de héros
  *    (1→120) et par niveau d'affinité (1→100) : `ExpCharacterTemplet`
  *    (`TotalExp` / `TrustExp`, tous deux vérifiés monotones = cumulés).
- *  • `gifts` — cadeaux d'affinité et leurs points. AUCUNE table ne porte ces
- *    points (`MaterialValue` est vide sur les présents) : ils vivent dans le
- *    TEXTE localisé de l'item (« …increase their Affinity level by 100 »), donc
- *    on les dérive de la description ANGLAISE avec un motif strict — et on jette
- *    si le motif ne matche plus, plutôt que de servir un barème muet et faux.
+ *  • `gifts` — cadeaux d'affinité et leurs points. Le jeu les chiffre dans
+ *    `ItemEnchantExpTemplet.ExpValue` (100/200/500/1000 par grade, sous-types
+ *    `ITS_PRESENT_*` ; `MaterialValue` est vide sur les présents), mais ce
+ *    générateur les lit ENCORE dans le TEXTE localisé de l'item (« …increase
+ *    their Affinity level by 100 ») : on les dérive de la description ANGLAISE
+ *    avec un motif strict — et on jette si le motif ne matche plus, plutôt que
+ *    de servir un barème muet et faux.
  *  • `fusion` — Core Fusion : couple (base → fusionné), étoile de transcendance
  *    exigée sur la base, et coût de chaque palier en Fusion-Type Core
  *    (`CharacterFusionTemplet` + `CharacterFusionLevelTemplet`). Le déblocage est
@@ -92,9 +94,10 @@ export interface XpFoodItem extends ItemRef {
 /** Un cadeau d'affinité. */
 export interface GiftItem extends ItemRef {
   /**
-   * Points d'affinité accordés. Bonus « cadeau PRÉFÉRÉ » NON inclus : le jeu ne
-   * le chiffre nulle part (le texte dit seulement « you will gain a bonus »),
-   * donc l'outil raisonne au taux de base — un majorant honnête.
+   * Points d'affinité accordés. Bonus « cadeau PRÉFÉRÉ » NON inclus ici : le
+   * texte dit seulement « you will gain a bonus », le jeu le chiffre dans
+   * GameConfig (`TRUST_ENCHANT_INCREASE_VALUE` = 50, soit +50 %) et l'outil
+   * l'applique de son côté (`PREFERRED_GIFT_BONUS` du hero tracker).
    */
   points: number;
   /** Type de présent (`present_01`…), à comparer au `gift` préféré du héros. */

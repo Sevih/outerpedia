@@ -1699,7 +1699,8 @@ export async function dashboardState(disk: DashboardDisk = DASHBOARD_DISK) {
     const state = disk.banners();
     return {
       active: state.banners
-        .filter((b) => b.start <= today && today <= b.end)
+        // `end` exclusif, comme la home : la bannière est close le jour de sa fin.
+        .filter((b) => b.start <= today && today < b.end)
         .map((b) => ({ id: b.id, name: b.name, daysLeft: daysBetween(today, b.end) }))
         .sort((a, b) => a.daysLeft - b.daysLeft),
       upcoming: state.banners

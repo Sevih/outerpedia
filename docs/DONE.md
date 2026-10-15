@@ -7,6 +7,64 @@
 
 ## 2026-10-15
 
+- **Coupons et menus du site : bannière du dernier jour, `/item` du bot,
+  déblocage, quirks, `<color>` imbriqués, commentaires périmés.** Sept écarts
+  site / jeu de la revue du 09/10 (B3, B4, B10, B11, § Cosmétique), sans
+  `datagen:build` ni `damage:build`. **① Bannières** : le `end` de
+  `banner.json` est l'`EndDate` du jeu, EXCLUSIF ; `getActiveBanners`
+  (`src/lib/home.ts`) passe à `b.end > today`, le HTML du jour J ne sert
+  plus une bannière que `BannerCountdown` masquait après hydratation. Quick
+  suit : `statusOf` (`scripts/quick/ui/tabs/banners.js`) expire à
+  `end <= today`, le badge dit « dernier jour » à 1 j restant (plus 0), le
+  bloc `banners` du tableau de bord (`scripts/quick/actions.ts`) filtre
+  `today < end`, `left` de `dashboard.js` suit. Codes promo inchangés.
+  **② `/item` du bot** : talismans et EE prenaient le dernier palier de
+  valeurs pour tous les niveaux (Assassin's Charm Lv.1 à 45 au lieu de 30) ;
+  la règle « plus haut niveau déclaré ≤ `ref.level` » vit désormais une
+  fois, `passiveTextAtLevel` (`src/lib/data/equipment.ts`), appelée par
+  `passiveTexts` de la page détail, `gearPassivesText` et `passiveView` du
+  bot (`familyItems` reçoit le type ; armes et amulettes gardent le max).
+  Rejoué : Assassin's 30/45, Mage's 30/39, Tactician's 20/30, Undertaker's
+  30/45, Vanguard's 50/60. Les `\n` littéraux des passifs ET des sets passent
+  par `gameLineBreaks` (`embedText` remplace `stripColors`) ; forme du
+  contrat inchangée. **③ Déblocage** : `getUnlockEntry` garde la PREMIÈRE
+  ligne d'un `ContentType` comme `CTempletManager.GetContentLock` (Friendly
+  Match : S1-4-6, plus S1-4-11) ; générateur intact. **④ Quirks** :
+  `ELEMENT_NAME` / `CLASS_NAME` supprimés (aucun autre lecteur, `grep`),
+  `quirkTreeSubLabel` lit `sys.element.*` / `sys.class.*` par `t` ; KR, ZH,
+  JP et ES prennent les noms du jeu (지, 土, 防御型, Oscuridad…), EN et FR
+  comparés identiques avant / après. **⑤ `<color>`** : `renderGameColors`
+  (`src/components/ui/GameText.tsx`) devient un analyseur à pile (règle
+  Unity : la plus intérieure s'applique, ouvrante non fermée jusqu'à la fin,
+  fermante orpheline retirée) ; `renderFragment` ne reçoit que du texte, mêmes
+  clés React sans imbrication. Contrôle hors dépôt,
+  `renderToStaticMarkup` ancien / nouveau sur toutes les chaînes de
+  `data/generated/` (sous-dossiers compris) : 884 184 chaînes, 37 335 à
+  balise `<color>`, **38 diffèrent, exactement les 38 à imbrication ou
+  balise orpheline** (36 dans `monster-skills.json` = 29 compétences dont
+  113394 et 130024 en anglais, 1 dans `skills.json` = 11721 es, 1 dans
+  `damage/skill-descs.json`, la même) ; aucune autre ne bouge. **⑥
+  Commentaires** : `towers.ts` (`towers.json` porte `fr` et `es` sur les 830
+  libellés), `hero-growth.ts` (`ItemEnchantExpTemplet.ExpValue` 100/200/500/
+  1000 existe, le générateur lit encore le texte ; `TRUST_ENCHANT_INCREASE_VALUE`
+  = 50, appliqué par `PREFERRED_GIFT_BONUS`). **⑦ `CLAUDE.md`** : les deux
+  mentions de python renvoient à `datagen/README.md` § « Exception assumée :
+  l'outillage Python ». **Tests** : `src/lib/home.test.ts` (date serveur et
+  `loadBanners` bouchonnés, `end` exclu, veille servie), quick à la nouvelle
+  règle (`actions.test.ts`, `ui-serve.test.ts`), `bot-api.test.ts` (palier
+  = texte de la page détail sans balises, aucun `\n` littéral),
+  `unlock-content.test.ts` (première de `entries`, en relation + fixture à
+  doublon), `src/components/quirks/localize.test.ts` (six langues, EN / FR
+  figés), `src/components/ui/GameText.test.tsx`. **Vérification** : dans
+  l'arbre partagé, typecheck et `pnpm test` rouges sur les seuls fichiers de
+  `src/lib/damage/` et du calculateur, en cours dans C16 ; rejoués sur une
+  copie de HEAD + ce diff seul : typecheck vert (`tsc` des trois projets sans
+  erreur), lint vert (`eslint` sans sortie), `vitest run` « Tests 3838 passed
+  (3838) », `vitest run scripts/quick` « Tests 1146 passed (1146) ».
+  **Laissé** : le commentaire de `PREFERRED_GIFT_BONUS` (`contracts.ts` du
+  hero tracker, « aucune table ») est périmé lui aussi, hors liste ; un arbre
+  de quirk à clé inconnue afficherait désormais la clé i18n brute (aucun
+  aujourd'hui).
 - **Relecture du lot S2 (Opus) — aperçus bornés, limiteur par préfixe et
   quota d'écriture, nettoyeur des notes de patch en liste blanche, seconde
   garde `IS_DEV`, forme des codes promo et date réelle : validé.** Un commit

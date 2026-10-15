@@ -69,12 +69,13 @@ function todayUTC(): string {
  * source des guides — historique release/rerun des limited). Lue en runtime
  * comme les coupons : une bannière enregistrée dans quick part en prod sans
  * redéploiement. Dédupliquées par perso (un même perso peut avoir deux fenêtres qui se chevauchent) et
- * triées par rareté.
+ * triées par rareté. Le `end` est EXCLUSIF : c'est l'`EndDate` du jeu (`end`
+ * 00:00 UTC), à laquelle `BannerCountdown` masque déjà la bannière côté client.
  */
 export async function getActiveBanners(lang: Lang): Promise<BannerVM[]> {
   const today = todayUTC();
   const byId = new Map<string, BannerVM>();
-  for (const b of (await loadBanners()).filter((b) => b.start <= today && b.end >= today)) {
+  for (const b of (await loadBanners()).filter((b) => b.start <= today && b.end > today)) {
     if (byId.has(b.id)) continue;
     const c = getCharacter(b.id);
     const slug = c && slugForId(c.id);

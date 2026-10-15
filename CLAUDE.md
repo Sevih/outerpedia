@@ -24,7 +24,7 @@ Jeu : **Outerplane**. Wiki communautaire — le code de [outerpedia.com](https:/
 
 - **PowerShell** sous Windows (Bash disponible en secondaire) — pas de syntaxe
   CMD (`>nul`, `chcp`).
-- Python = `python` (une seule utilisation, cf. ci-dessous).
+- Python = `python` (outillage local d'extraction seulement, cf. ci-dessous).
 - **pnpm uniquement** — pas de `package-lock.json` dans ce repo, `npm install`
   y échoue.
 
@@ -49,8 +49,9 @@ Jeu : **Outerplane**. Wiki communautaire — le code de [outerpedia.com](https:/
 - Le **build ne doit jamais dépendre de python** : il consomme des données déjà
   générées et committées. La génération est du **TypeScript** (`datagen/`,
   locale, séparée du build) — voir [datagen/README.md](./datagen/README.md).
-  Unique exception python : `datagen/assets/extract-face-layout.py` (local,
-  hors build).
+  Exception python : quelques scripts d'extraction, tous locaux et hors build,
+  listés dans [datagen/README.md](./datagen/README.md) § « Exception assumée :
+  l'outillage Python ».
 - Ne jamais éditer `data/generated/` à la main : c'est une sortie de pipeline.
   Les décisions humaines vont dans `data/curated/`.
 

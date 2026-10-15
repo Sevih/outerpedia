@@ -4170,7 +4170,8 @@ describe('dashboardState — l’accueil de quick, toutes lectures injectées', 
             banner('5', '2026-10-21', '2026-11-18'),
             banner('4', '2026-10-13', '2026-11-10'),
             banner('1', '2026-09-22', '2026-10-20'),
-            // Dernier jour, et premier jour : actives toutes les deux.
+            // `end` exclusif : finie à minuit (le jour de sa fin), et le
+            // premier jour qui est aussi le dernier (1 j restant).
             banner('2', '2026-09-10', TODAY),
             banner('6', TODAY, '2026-10-09'),
             // Finie hier.
@@ -4192,7 +4193,6 @@ describe('dashboardState — l’accueil de quick, toutes lectures injectées', 
     );
     expect(banners).toEqual({
       active: [
-        { id: '2', name: 'Perso 2', daysLeft: 0 },
         { id: '6', name: 'Perso 6', daysLeft: 1 },
         { id: '1', name: 'Perso 1', daysLeft: 12 },
       ],

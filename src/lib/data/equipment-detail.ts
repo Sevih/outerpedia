@@ -27,6 +27,7 @@ import {
   getWeaponFamilies,
   fillPlaceholders,
   loadEquipmentEditorial,
+  passiveTextAtLevel,
   resolvePassives,
   slugifyEquipment,
   withClassSuffix,
@@ -314,21 +315,18 @@ function toPassiveTiers(
 
 /**
  * Textes remplis des passifs. Gear (`byTier`) : un texte par palier de
- * breakthrough (le client indexe par T0..T4). Talisman/EE : les `values` sont
- * aux niveaux DÉCLARÉS du buff (souvent [1, 10]) — chaque palier affiche UN
- * texte, celui de la valeur à SON niveau de déblocage (Mage's Charm : 30
- * jusqu'à +9, 39 au +10).
+ * breakthrough (le client indexe par T0..T4). Talisman/EE : chaque palier
+ * affiche UN texte, celui de la valeur à SON niveau de déblocage
+ * (`passiveTextAtLevel`, règle partagée avec l'`/item` du bot).
  */
 function passiveTexts(refs: PassiveRef[], lang: Lang, byTier = true): string[][] {
   return refs.map((ref) => {
     const p = PASSIVES[ref.id];
     if (!p) return [];
+    if (!byTier) return [passiveTextAtLevel(ref, lang)!];
     const desc = lRec(p.desc, lang) || p.desc.en;
     if (!p.values.length) return [desc];
-    if (byTier) return p.values.map((v) => fillPlaceholders(desc, v));
-    let idx = 0;
-    for (let i = 0; i < (p.levels?.length ?? 0); i++) if (p.levels[i] <= ref.level) idx = i;
-    return [fillPlaceholders(desc, p.values[Math.min(idx, p.values.length - 1)])];
+    return p.values.map((v) => fillPlaceholders(desc, v));
   });
 }
 

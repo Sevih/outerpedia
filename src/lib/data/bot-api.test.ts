@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import type { TFunction } from '@/i18n';
 import { buildBotCharacters, buildBotGuides, buildBotItems } from '@/lib/data/bot-api';
+import { getEquipmentDetail } from '@/lib/data/equipment-detail';
 
 /**
  * L'API du bot Discord est un CONTRAT INTER-REPOS : outerbot (wiki/client.ts)
@@ -55,6 +56,25 @@ describe('/api/bot/items — catalogue pré-formaté pour les embeds', () => {
         expect(tier, `${i.name} : ${tier}`).not.toContain('<color');
         expect(tier).not.toContain('</color>');
       }
+    }
+  });
+
+  it('aucune ligne ne garde de `\\n` littéral (les sauts de ligne du jeu sont convertis)', () => {
+    for (const i of items) {
+      for (const tier of i.effectTiers ?? []) expect(tier, i.name).not.toContain('\\n');
+    }
+  });
+
+  it('talismans et EE : chaque palier dit le texte de la page détail, à SON niveau', () => {
+    const embed = (s: string) => s.replace(/<\/?color[^>]*>/g, '').replace(/\\n/g, '\n');
+    const levelled = items.filter((i) => i.type === 'talisman' || i.type === 'ee');
+    expect(levelled.length).toBeGreaterThan(50);
+    for (const i of levelled) {
+      const detail = getEquipmentDetail(i.slug, 'en');
+      expect(detail?.kind, i.name).toBe(i.type);
+      const page = detail!.passives.map((p) => embed(p.texts[0]));
+      const bot = (i.effectTiers ?? []).map((tier) => tier.replace(/^Lv\.\d+: /, ''));
+      expect(bot, i.name).toEqual(page);
     }
   });
 

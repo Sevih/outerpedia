@@ -4,6 +4,12 @@ import type { ReactNode } from 'react';
  * Rend un texte du jeu : balises `<color=#hex>…</color>` (casse variable —
  * les profils écrivent `<Color=…>`) en spans colorés.
  *
+ * Analyse à PILE, règle du rich text Unity : les balises s'imbriquent (la
+ * couleur la plus intérieure s'applique, une fermante rend celle de
+ * l'englobante), une ouvrante jamais fermée colore jusqu'à la fin, une fermante
+ * orpheline ne s'affiche pas. Sans imbrication, le balisage est celui d'un
+ * simple appariement (un span par paire).
+ *
  * `renderFragment` décore le TEXTE (jamais le balisage) : c'est le point
  * d'accroche des mentions d'élément/classe (cf. `renderGameText`). Il s'applique
  * aussi À L'INTÉRIEUR des passages colorés — le jeu colore justement ces
@@ -13,22 +19,52 @@ export function renderGameColors(
   text: string,
   renderFragment: (fragment: string, key: string) => ReactNode = (f) => f,
 ): ReactNode[] {
+  /** Un passage coloré ouvert : `key` = rang de son ouvrante dans le texte. */
+  type Open = { key: number; color: string; children: ReactNode[]; texts: number };
   const out: ReactNode[] = [];
-  const re = /<color=(#[0-9a-fA-F]{3,8})>([\s\S]*?)<\/color>/gi;
-  let last = 0;
-  let key = 0;
-  let m: RegExpExecArray | null;
-  while ((m = re.exec(text))) {
-    if (m.index > last) out.push(renderFragment(text.slice(last, m.index), `t${key}`));
-    out.push(
-      <span key={`c${key}`} style={{ color: m[1] }}>
-        {renderFragment(m[2], `c${key}i`)}
+  const stack: Open[] = [];
+  const re = /<color=(#[0-9a-fA-F]{3,8})>|<\/color>/gi;
+  let opened = 0;
+  let pending = '';
+
+  /** Pousse le texte accumulé dans le passage courant (ou à la racine). */
+  const flush = () => {
+    if (!pending) return;
+    const top = stack.at(-1);
+    if (top) {
+      top.children.push(renderFragment(pending, `c${top.key}i${top.texts || ''}`));
+      top.texts++;
+    } else out.push(renderFragment(pending, `t${opened}`));
+    pending = '';
+  };
+  /** Ferme le passage courant : son span rejoint l'englobant (ou la racine). */
+  const close = () => {
+    const node = stack.pop()!;
+    if (!node.children.length) node.children.push(renderFragment('', `c${node.key}i`));
+    (stack.at(-1)?.children ?? out).push(
+      <span key={`c${node.key}`} style={{ color: node.color }}>
+        {node.children.length === 1 ? node.children[0] : node.children}
       </span>,
     );
-    key++;
+  };
+
+  let last = 0;
+  let m: RegExpExecArray | null;
+  while ((m = re.exec(text))) {
+    pending += text.slice(last, m.index);
     last = m.index + m[0].length;
+    if (m[1]) {
+      flush();
+      stack.push({ key: opened++, color: m[1], children: [], texts: 0 });
+    } else if (stack.length) {
+      flush();
+      close();
+    }
+    // Fermante orpheline : retirée, le texte continue d'un seul tenant.
   }
-  if (last < text.length) out.push(renderFragment(text.slice(last), `t${key}`));
+  pending += text.slice(last);
+  flush();
+  while (stack.length) close();
   return out;
 }
 

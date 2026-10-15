@@ -35,9 +35,6 @@ les preuves et les décisions vivent dans le tri consolidé de sevih-tool
       Trouver ce qui les rend dynamiques (un `headers()`, `cookies()` ou
       `searchParams` lu en chemin) et décider : les mettre en cache, ou
       corriger les commentaires.
-- [ ] **Coupons et menus du site (A)** : bannière servie le jour de sa
-      fin, `/item` du bot, déblocage, quirks, `<color>` imbriqués,
-      commentaires périmés.
 - [ ] **Passifs de boss (C)** : H4, H5, M1, B9, M3, repli de H3.
 - [ ] **Sets et équipement (C, build)** : H2, M8, M9, M10, B1, R11, R12,
       R13, O11, R17.

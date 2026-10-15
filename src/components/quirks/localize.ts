@@ -5,6 +5,7 @@
  * un module importé côté client.)
  */
 import type { Lang } from '@/lib/i18n/config';
+import type { TFunction, TranslationKey } from '@/i18n';
 import { lRec } from '@/lib/i18n/localize';
 import { img } from '@/lib/images';
 import { getCatalog } from '@/lib/data/items';
@@ -12,36 +13,6 @@ import type { LocalizedText, QuirksData } from '@contracts';
 import type { LocalTree, QuirkTreeLabels } from './QuirkTreeView';
 
 const L = (m: LocalizedText, lang: Lang): string => lRec(m, lang) || m.en || '';
-
-export const ELEMENT_NAME: Record<string, LocalizedText> = {
-  earth: { en: 'Earth', jp: '地', kr: '땅', zh: '地', fr: 'Terre', es: 'Tierra' },
-  water: { en: 'Water', jp: '水', kr: '물', zh: '水', fr: 'Eau', es: 'Agua' },
-  fire: { en: 'Fire', jp: '火', kr: '불', zh: '火', fr: 'Feu', es: 'Fuego' },
-  light: { en: 'Light', jp: '光', kr: '빛', zh: '光', fr: 'Lumière', es: 'Luz' },
-  dark: { en: 'Dark', jp: '闇', kr: '어둠', zh: '暗', fr: 'Ténèbres', es: 'Oscuro' },
-};
-
-export const CLASS_NAME: Record<string, LocalizedText> = {
-  defender: {
-    en: 'Defender',
-    jp: 'ディフェンダー',
-    kr: '디펜더',
-    zh: '防御者',
-    fr: 'Defender',
-    es: 'Defensor',
-  },
-  striker: {
-    en: 'Striker',
-    jp: 'ストライカー',
-    kr: '스트라이커',
-    zh: '打击者',
-    fr: 'Striker',
-    es: 'Atacante',
-  },
-  ranger: { en: 'Ranger', jp: 'レンジャー', kr: '레인저', zh: '游侠', fr: 'Ranger', es: 'Ranger' },
-  mage: { en: 'Mage', jp: 'メイジ', kr: '메이지', zh: '法师', fr: 'Mage', es: 'Mago' },
-  healer: { en: 'Healer', jp: 'ヒーラー', kr: '힐러', zh: '治疗者', fr: 'Healer', es: 'Sanador' },
-};
 
 const TREE_LABELS: Record<keyof QuirkTreeLabels, LocalizedText> = {
   level: { en: 'Level', jp: 'レベル', kr: '레벨', zh: '等级', fr: 'Niveau', es: 'Nivel' },
@@ -100,10 +71,14 @@ export function localizeTree(
   };
 }
 
-/** Sous-libellé d'un arbre dans sa catégorie (élément / classe), localisé. */
-export function quirkTreeSubLabel(catKey: string, treeKey: string, lang: Lang): string | null {
-  if (catKey === 'elemental') return L(ELEMENT_NAME[treeKey] ?? { en: treeKey }, lang);
-  if (catKey === 'class') return L(CLASS_NAME[treeKey] ?? { en: treeKey }, lang);
+/**
+ * Sous-libellé d'un arbre dans sa catégorie (élément / classe) : le nom du JEU,
+ * lu dans les locales (`sys.element.*`, `sys.class.*`) — les clés d'arbres de
+ * `quirks.json` sont exactement ces slugs.
+ */
+export function quirkTreeSubLabel(catKey: string, treeKey: string, t: TFunction): string | null {
+  if (catKey === 'elemental') return t(`sys.element.${treeKey}` as TranslationKey);
+  if (catKey === 'class') return t(`sys.class.${treeKey}` as TranslationKey);
   return null;
 }
 
