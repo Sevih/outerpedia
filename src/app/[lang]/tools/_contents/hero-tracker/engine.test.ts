@@ -11,11 +11,16 @@ import {
   type HeroProgress,
   type TrackedHero,
 } from './engine';
+import { getCharacter, progressionStar } from '@/lib/data/characters';
+import { getHeroGrowth } from '@/lib/data/hero-growth';
+import { getProgression } from '@/lib/data/progression';
+import { transcendLadder } from '@/lib/transcendence';
 
 /**
  * Moteur du suivi de compte. Tout est synthétique : les barèmes réels vivent
  * dans `hero-growth.json` (testé chez lui), ici on ne vérifie que les RÈGLES —
- * différentiels de cumul, paliers franchis, bornes, agrégation.
+ * différentiels de cumul, paliers franchis, bornes, agrégation. Seule exception,
+ * le dernier bloc : des cas chiffrés contre le jeu, sur les barèmes réels.
  */
 
 const dict = (en: string) => ({ ...emptyDict(), en });
@@ -307,5 +312,90 @@ describe('mergeBreakdowns — totaliser APRÈS avoir converti par héros', () =>
 
   it('rien à convertir → aucune ligne', () => {
     expect(mergeBreakdowns([[], []])).toEqual([]);
+  });
+});
+
+describe('barèmes réels — limit break et transcendance chiffrés contre le jeu', () => {
+  const growth = getHeroGrowth();
+  // Même réduction que le wrapper serveur (`index.tsx`) : `requireLevel` → `fromLevel`.
+  const limitBreak = Object.fromEntries(
+    Object.entries(getProgression().limitBreak).map(([k, steps]) => [
+      k,
+      steps.map((x) => ({
+        fromLevel: x.requireLevel,
+        maxLevel: x.maxLevel,
+        pieces: x.pieces,
+        recallItemId: x.recallItemId,
+        price: x.price,
+      })),
+    ]),
+  );
+  const REAL: GrowthRules = {
+    xpCurve: growth.xpCurve,
+    affinityCurve: growth.affinityCurve,
+    gifts: growth.gifts,
+    xpFood: growth.xpFood,
+    skillUpgrade: growth.skillUpgrade,
+    limitBreak,
+    eeEnchant: growth.specialEquip.ee,
+    transcendLadder: (h) => transcendLadder(h.rarity, h.id),
+  };
+  /** Comme `asTracked` : l'étoile de base de PROGRESSION, pas la rareté affichée. */
+  const tracked = (id: string): TrackedHero => {
+    const c = getCharacter(id);
+    if (!c) throw new Error(id);
+    return {
+      id,
+      rarity: progressionStar(c),
+      element: c.element,
+      ...(c.originalCharacter ? { fusionLevels: [] } : {}),
+    };
+  };
+  const FIRE_MEMORY = limitBreak['3_fire'][0].recallItemId;
+  const lb = (from: number, to: number) => {
+    const n = heroNeed(
+      { id: '2000073', rarity: 3, element: 'fire' },
+      progress({ level: from }),
+      progress({ level: to }),
+      REAL,
+    );
+    return [n.gold, n.items[FIRE_MEMORY] ?? 0];
+  };
+
+  it('M6 : un palier est dû pour DÉPASSER son niveau requis, hors plafond compris', () => {
+    expect(lb(105, 108)).toEqual([1000000, 100]); // le palier 105 → 110
+    expect(lb(103, 111)).toEqual([3000000, 350]); // 105 → 110 et 110 → 120
+    expect(lb(102, 120)).toEqual([3000000, 350]); // celui de 100 est déjà payé
+    expect(lb(100, 120)).toEqual([3500000, 400]); // les boutons aux plafonds, inchangés
+  });
+
+  /** Lv 100 → 120, de l'étoile exigée par la fusion (6) au max. */
+  const toMax = (id: string) => {
+    const hero = tracked(id);
+    const stars = transcendLadder(hero.rarity, id).map((x) => x.star);
+    const n = heroNeed(
+      hero,
+      progress({ level: 100, transcend: stars.indexOf(6) }),
+      progress({ level: 120, transcend: stars.length - 1 }),
+      REAL,
+    );
+    const memory = limitBreak[`${hero.rarity}_${hero.element}`][0].recallItemId;
+    return [n.gold, n.items[memory], n.pieces, n.transcendSteps];
+  };
+
+  it('Snow fusionné : échelle et limit break de son origine 2★', () => {
+    expect(toMax('2700003')).toEqual([2810000, 300, 200, 1]);
+  });
+
+  it('Veronica fusionnée (origine 3★) : inchangée', () => {
+    expect(toMax('2700037')).toEqual([3530000, 400, 450, 3]);
+  });
+
+  it('un 2★ monte 2 → 3 → 4 → 6 → 9, sans étape fantôme', () => {
+    const hero = tracked('2000003');
+    const steps = transcendLadder(hero.rarity, hero.id);
+    expect(steps.map((x) => x.star)).toEqual([2, 3, 4, 6, 9]);
+    const n = heroNeed(hero, progress(), progress({ transcend: steps.length - 1 }), REAL);
+    expect([n.pieces, n.transcendSteps]).toEqual([450, 4]); // 65 + 85 + 100 + 200
   });
 });

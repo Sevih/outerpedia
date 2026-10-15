@@ -20,6 +20,7 @@ import {
   transcendenceStars,
   transcendenceSteps,
 } from '@/lib/transcendence';
+import { getCharacter, progressionStar } from '@/lib/data/characters';
 import { loadCuratedCharacters } from '@/lib/data/curated';
 import { atStep } from './TierListBrowser';
 
@@ -73,14 +74,15 @@ describe('les paliers du sélecteur', () => {
 });
 
 describe('le libellé d’un palier', () => {
-  it('vient de `StarPlus`, jamais de la couleur — le bug du slider 1★/2★', () => {
-    // Sur les raretés 1 et 2, les paliers « + » restent JAUNES : déduire le
-    // suffixe de la couleur donnait trois crans nommés « 5 » à la suite.
+  it('les 1★/2★ n’ont que les paliers que le jeu parcourt — aucun « + »', () => {
+    // La table garde en 1★/2★ des lignes 5, 7, 8 à `UseTransStar` faux (jaunes,
+    // sans coût ni bonus) : le jeu saute 4 → 6 → 9, l'extraction aussi.
+    expect(transcendenceSteps(1)).toEqual([1, 2, 3, 4, 6, 9]);
+    expect(transcendenceSteps(2)).toEqual([2, 3, 4, 6, 9]);
     for (const rarity of [1, 2]) {
       const labels = transcendenceSteps(rarity).map((s) => transcendenceLabel(rarity, s));
       expect(new Set(labels).size).toBe(labels.length);
-      expect(labels).toContain('4★+');
-      expect(labels).toContain('5★++');
+      expect(labels.some((l) => l.includes('+'))).toBe(false);
     }
   });
 });
@@ -116,16 +118,21 @@ describe('la source unique', () => {
    * Les colonnes d'affichage étaient recopiées à la main dans `Thumbnail` en plus
    * d'être extraites. La copie est partie ; ce test garde la porte fermée sur ce
    * que `transcendenceRow` ne sait PAS faire — distinguer un perso à échelle
-   * propre. Dix personnages en ont une, et elle est aujourd'hui identique au
-   * générique de leur rareté sur ces trois colonnes seulement.
+   * propre. Onze personnages en ont une, plus les six Core Fusion (l'échelle de
+   * leur origine, à partir de 3) ; chacune est identique au barème de son étoile
+   * de base, et au générique 3★ sur ces trois colonnes à chacun de ses paliers.
    */
   it('aucune échelle propre ne diverge du générique sur l’affichage', () => {
     const shape = (
       steps: { star: number; showStar: number; starColor: string; starPlus: number }[],
     ) => steps.map((s) => `${s.star}:${s.showStar}:${s.starColor}:${s.starPlus}`).join(' ');
     for (const [id, steps] of Object.entries(TRANSCEND.overrides)) {
-      const generic = TRANSCEND.byStar['3'];
+      const char = getCharacter(id);
+      const own = TRANSCEND.byStar[String(char ? progressionStar(char) : 3)];
+      const generic = own.filter((s) => s.star >= steps[0].star);
       expect(`${id} ${shape(steps)}`).toBe(`${id} ${shape(generic)}`);
+      const three = TRANSCEND.byStar['3'].filter((g) => steps.some((s) => s.star === g.star));
+      expect(`${id} ${shape(steps)}`).toBe(`${id} ${shape(three)}`);
     }
   });
 });

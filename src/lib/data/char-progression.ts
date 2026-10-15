@@ -28,13 +28,13 @@ import type {
   Skill,
   SolverStatBlock,
   StatBonus,
-  TranscendData,
   TranscendStep,
 } from '@contracts';
 import type { Lang } from '@/lib/i18n/config';
 import { lRec } from '@/lib/i18n/localize';
 import { transcendStarRow } from '@/lib/images';
-import { stepLabel } from '@/lib/transcendence';
+import { stepLabel, transcendLadder } from '@/lib/transcendence';
+import { progressionStar } from '@/lib/data/characters';
 import { GRADE_RANK } from '@/lib/data/gear-order';
 import {
   STEP_STAT_KEYS,
@@ -46,13 +46,11 @@ import {
 } from '@/lib/stat-compose';
 import { SUBSTAT_AXES, type SubstatAxis, type SubstatFlatProfile } from '@/lib/substat-verdict';
 import progressionData from '@data/generated/progression.json';
-import transcendData from '@data/generated/transcend.json';
 import itemsData from '@data/generated/items.json';
 import skillsData from '@data/generated/skills.json';
 import solverCharactersData from '@data/generated/solver/characters.json';
 
 const PROGRESSION = progressionData as unknown as ProgressionData;
-const TRANSCEND = transcendData as unknown as TranscendData;
 const ITEMS = itemsData as unknown as Record<string, Item>;
 const SKILLS = skillsData as unknown as Record<string, Skill>;
 const SOLVER = solverCharactersData as unknown as Record<
@@ -166,7 +164,7 @@ function whiteStatsAt(
 /** Paliers de stats d'un perso (lv1 + un par évolution, jusqu'au lv120). */
 export function computeStatSteps(char: Character): StatStepsView {
   const rungs = PROGRESSION.evolutions[String(char.rarity)] ?? [];
-  const lb = PROGRESSION.limitBreak[`${char.rarity}_${char.element}`] ?? [];
+  const lb = PROGRESSION.limitBreak[`${progressionStar(char)}_${char.element}`] ?? [];
 
   const points: { level: number; evo: number; evs: number[] }[] = [
     { level: 1, evo: 0, evs: [] },
@@ -233,7 +231,7 @@ function addBonus(parts: LayerParts, b: StatBonus): void {
  * sous-classe, niveau max) et passifs de fiche (`sheetPassives`).
  */
 export function getStatLayers(char: Character): StatLayersView {
-  const steps = TRANSCEND.overrides[char.id] ?? TRANSCEND.byStar[String(char.rarity)] ?? [];
+  const steps = transcendLadder(char.rarity, char.id);
   const uniqueId = char.skills.find((id) => SKILLS[id]?.type === 'unique_passive');
   const s8 = uniqueId ? PROGRESSION.skill8[uniqueId] : undefined;
   const transcend = steps.map((s) => {
@@ -337,7 +335,7 @@ export function getSubstatFlatProfile(
   layers: StatLayersView = getStatLayers(char),
 ): SubstatFlatProfile {
   const rungs = PROGRESSION.evolutions[String(char.rarity)] ?? [];
-  const lb = PROGRESSION.limitBreak[`${char.rarity}_${char.element}`] ?? [];
+  const lb = PROGRESSION.limitBreak[`${progressionStar(char)}_${char.element}`] ?? [];
   // Sans entrée de limit break pour ce couple rareté/élément, on n'invente pas
   // de palier : un seul, le cap d'avant-LB (100 — la borne où la formule
   // elle-même change de régime, cf. `whiteStatsAt`), pas le dernier rung
@@ -391,16 +389,11 @@ export interface TranscendTierView {
  *
  * Il se déduisait ici d'une table couleur → suffixe (`yellow` → rien, `orange` et
  * `red` → « + », `violet` → « ++ »). C'est juste sur un 3★, où le jeu colore
- * effectivement ses paliers « + », et FAUX sur toutes les raretés 1 et 2, dont les
- * paliers « + » restent jaunes — le + existe, il ne se voit pas (cf.
- * `lib/transcendence`). Le slider de la fiche perso y affichait donc
- *
- *     1 | 2 | 3 | 4 | 4 | 5 | 5 | 5 | 6        au lieu de
- *     1 | 2 | 3 | 4 | 4+| 5 | 5+| 5++| 6
- *
- * soit trois crans consécutifs nommés « 5 » sur les 34 personnages 1★ et 2★, sans
- * moyen de savoir lequel on venait de sélectionner. `stepLabel` lit la seule colonne
- * qui fasse foi, et sert aussi les libellés du tier-list-maker et de l'admin.
+ * effectivement ses paliers « + ». Les 1★ et 2★ ont, dans la table, des lignes
+ * « + » restées jaunes (5, 7, 8) : la fiche y affichait trois crans nommés « 5 ».
+ * Ces lignes ne sont pas des paliers du jeu (`UseTransStar` faux) et l'extraction
+ * les écarte désormais ; `stepLabel` lit quand même la seule colonne qui fasse
+ * foi, et sert aussi les libellés du tier-list-maker et de l'admin.
  */
 
 /** « +X% Label » / « +X Label » / « Label +X% » / « Label +X » (X décimal possible). */
@@ -475,7 +468,7 @@ function toTier(s: TranscendStep, unique: Skill | undefined, lang: Lang): Transc
 
 /** Paliers de transcendance d'un perso (overrides > barème de sa rareté). */
 export function getTranscendTiers(char: Character, lang: Lang): TranscendTierView[] {
-  const steps = TRANSCEND.overrides[char.id] ?? TRANSCEND.byStar[String(char.rarity)] ?? [];
+  const steps = transcendLadder(char.rarity, char.id);
   const unique = char.skills.map((id) => SKILLS[id]).find((s) => s?.type === 'unique_passive');
   return steps.map((s) => toTier(s, unique, lang));
 }
@@ -503,7 +496,7 @@ export function getTranscendSweetspots(
   lang: Lang,
   stars: number[],
 ): TranscendSweetspotView[] {
-  const steps = TRANSCEND.overrides[char.id] ?? TRANSCEND.byStar[String(char.rarity)] ?? [];
+  const steps = transcendLadder(char.rarity, char.id);
   const unique = char.skills.map((id) => SKILLS[id]).find((s) => s?.type === 'unique_passive');
   const out: TranscendSweetspotView[] = [];
   let prevSkillLevel = 0;

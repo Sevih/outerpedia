@@ -211,14 +211,6 @@
           "showUIStar": 4,
           "starPlus": 0
         },
-        "5": {
-          "atkPct": 0,
-          "defPct": 0,
-          "hpPct": 0,
-          "skillLevel": 2,
-          "showUIStar": 4,
-          "starPlus": 1
-        },
         "6": {
           "atkPct": 22,
           "defPct": 22,
@@ -226,22 +218,6 @@
           "skillLevel": 3,
           "showUIStar": 5,
           "starPlus": 0
-        },
-        "7": {
-          "atkPct": 0,
-          "defPct": 0,
-          "hpPct": 0,
-          "skillLevel": 3,
-          "showUIStar": 5,
-          "starPlus": 1
-        },
-        "8": {
-          "atkPct": 0,
-          "defPct": 0,
-          "hpPct": 0,
-          "skillLevel": 3,
-          "showUIStar": 5,
-          "starPlus": 2
         },
         "9": {
           "atkPct": 30,
@@ -910,14 +886,6 @@
           "showUIStar": 4,
           "starPlus": 0
         },
-        "5": {
-          "atkPct": 0,
-          "defPct": 0,
-          "hpPct": 0,
-          "skillLevel": 2,
-          "showUIStar": 4,
-          "starPlus": 1
-        },
         "6": {
           "atkPct": 22,
           "defPct": 22,
@@ -925,22 +893,6 @@
           "skillLevel": 3,
           "showUIStar": 5,
           "starPlus": 0
-        },
-        "7": {
-          "atkPct": 0,
-          "defPct": 0,
-          "hpPct": 0,
-          "skillLevel": 3,
-          "showUIStar": 5,
-          "starPlus": 1
-        },
-        "8": {
-          "atkPct": 0,
-          "defPct": 0,
-          "hpPct": 0,
-          "skillLevel": 3,
-          "showUIStar": 5,
-          "starPlus": 2
         },
         "9": {
           "atkPct": 30,
@@ -1793,14 +1745,6 @@
           "showUIStar": 4,
           "starPlus": 0
         },
-        "5": {
-          "atkPct": 0,
-          "defPct": 0,
-          "hpPct": 0,
-          "skillLevel": 2,
-          "showUIStar": 4,
-          "starPlus": 1
-        },
         "6": {
           "atkPct": 22,
           "defPct": 22,
@@ -1808,22 +1752,6 @@
           "skillLevel": 3,
           "showUIStar": 5,
           "starPlus": 0
-        },
-        "7": {
-          "atkPct": 0,
-          "defPct": 0,
-          "hpPct": 0,
-          "skillLevel": 3,
-          "showUIStar": 5,
-          "starPlus": 1
-        },
-        "8": {
-          "atkPct": 0,
-          "defPct": 0,
-          "hpPct": 0,
-          "skillLevel": 3,
-          "showUIStar": 5,
-          "starPlus": 2
         },
         "9": {
           "atkPct": 30,
@@ -2682,14 +2610,6 @@
           "showUIStar": 4,
           "starPlus": 0
         },
-        "5": {
-          "atkPct": 0,
-          "defPct": 0,
-          "hpPct": 0,
-          "skillLevel": 2,
-          "showUIStar": 4,
-          "starPlus": 1
-        },
         "6": {
           "atkPct": 22,
           "defPct": 22,
@@ -2697,22 +2617,6 @@
           "skillLevel": 3,
           "showUIStar": 5,
           "starPlus": 0
-        },
-        "7": {
-          "atkPct": 0,
-          "defPct": 0,
-          "hpPct": 0,
-          "skillLevel": 3,
-          "showUIStar": 5,
-          "starPlus": 1
-        },
-        "8": {
-          "atkPct": 0,
-          "defPct": 0,
-          "hpPct": 0,
-          "skillLevel": 3,
-          "showUIStar": 5,
-          "starPlus": 2
         },
         "9": {
           "atkPct": 30,
@@ -3380,14 +3284,6 @@
           "showUIStar": 4,
           "starPlus": 0
         },
-        "5": {
-          "atkPct": 0,
-          "defPct": 0,
-          "hpPct": 0,
-          "skillLevel": 2,
-          "showUIStar": 4,
-          "starPlus": 1
-        },
         "6": {
           "atkPct": 22,
           "defPct": 22,
@@ -3395,22 +3291,6 @@
           "skillLevel": 3,
           "showUIStar": 5,
           "starPlus": 0
-        },
-        "7": {
-          "atkPct": 0,
-          "defPct": 0,
-          "hpPct": 0,
-          "skillLevel": 3,
-          "showUIStar": 5,
-          "starPlus": 1
-        },
-        "8": {
-          "atkPct": 0,
-          "defPct": 0,
-          "hpPct": 0,
-          "skillLevel": 3,
-          "showUIStar": 5,
-          "starPlus": 2
         },
         "9": {
           "atkPct": 30,
@@ -4078,14 +3958,6 @@
           "showUIStar": 4,
           "starPlus": 0
         },
-        "5": {
-          "atkPct": 0,
-          "defPct": 0,
-          "hpPct": 0,
-          "skillLevel": 2,
-          "showUIStar": 4,
-          "starPlus": 1
-        },
         "6": {
           "atkPct": 22,
           "defPct": 22,
@@ -4093,22 +3965,6 @@
           "skillLevel": 3,
           "showUIStar": 5,
           "starPlus": 0
-        },
-        "7": {
-          "atkPct": 0,
-          "defPct": 0,
-          "hpPct": 0,
-          "skillLevel": 3,
-          "showUIStar": 5,
-          "starPlus": 1
-        },
-        "8": {
-          "atkPct": 0,
-          "defPct": 0,
-          "hpPct": 0,
-          "skillLevel": 3,
-          "showUIStar": 5,
-          "starPlus": 2
         },
         "9": {
           "atkPct": 30,
@@ -4961,14 +4817,6 @@
           "showUIStar": 4,
           "starPlus": 0
         },
-        "5": {
-          "atkPct": 0,
-          "defPct": 0,
-          "hpPct": 0,
-          "skillLevel": 2,
-          "showUIStar": 4,
-          "starPlus": 1
-        },
         "6": {
           "atkPct": 22,
           "defPct": 22,
@@ -4976,22 +4824,6 @@
           "skillLevel": 3,
           "showUIStar": 5,
           "starPlus": 0
-        },
-        "7": {
-          "atkPct": 0,
-          "defPct": 0,
-          "hpPct": 0,
-          "skillLevel": 3,
-          "showUIStar": 5,
-          "starPlus": 1
-        },
-        "8": {
-          "atkPct": 0,
-          "defPct": 0,
-          "hpPct": 0,
-          "skillLevel": 3,
-          "showUIStar": 5,
-          "starPlus": 2
         },
         "9": {
           "atkPct": 30,
@@ -6541,14 +6373,6 @@
           "showUIStar": 4,
           "starPlus": 0
         },
-        "5": {
-          "atkPct": 0,
-          "defPct": 0,
-          "hpPct": 0,
-          "skillLevel": 2,
-          "showUIStar": 4,
-          "starPlus": 1
-        },
         "6": {
           "atkPct": 22,
           "defPct": 22,
@@ -6556,22 +6380,6 @@
           "skillLevel": 3,
           "showUIStar": 5,
           "starPlus": 0
-        },
-        "7": {
-          "atkPct": 0,
-          "defPct": 0,
-          "hpPct": 0,
-          "skillLevel": 3,
-          "showUIStar": 5,
-          "starPlus": 1
-        },
-        "8": {
-          "atkPct": 0,
-          "defPct": 0,
-          "hpPct": 0,
-          "skillLevel": 3,
-          "showUIStar": 5,
-          "starPlus": 2
         },
         "9": {
           "atkPct": 30,
@@ -7239,14 +7047,6 @@
           "showUIStar": 4,
           "starPlus": 0
         },
-        "5": {
-          "atkPct": 0,
-          "defPct": 0,
-          "hpPct": 0,
-          "skillLevel": 2,
-          "showUIStar": 4,
-          "starPlus": 1
-        },
         "6": {
           "atkPct": 22,
           "defPct": 22,
@@ -7254,22 +7054,6 @@
           "skillLevel": 3,
           "showUIStar": 5,
           "starPlus": 0
-        },
-        "7": {
-          "atkPct": 0,
-          "defPct": 0,
-          "hpPct": 0,
-          "skillLevel": 3,
-          "showUIStar": 5,
-          "starPlus": 1
-        },
-        "8": {
-          "atkPct": 0,
-          "defPct": 0,
-          "hpPct": 0,
-          "skillLevel": 3,
-          "showUIStar": 5,
-          "starPlus": 2
         },
         "9": {
           "atkPct": 30,
@@ -8136,14 +7920,6 @@
           "showUIStar": 4,
           "starPlus": 0
         },
-        "5": {
-          "atkPct": 0,
-          "defPct": 0,
-          "hpPct": 0,
-          "skillLevel": 2,
-          "showUIStar": 4,
-          "starPlus": 1
-        },
         "6": {
           "atkPct": 22,
           "defPct": 22,
@@ -8151,22 +7927,6 @@
           "skillLevel": 3,
           "showUIStar": 5,
           "starPlus": 0
-        },
-        "7": {
-          "atkPct": 0,
-          "defPct": 0,
-          "hpPct": 0,
-          "skillLevel": 3,
-          "showUIStar": 5,
-          "starPlus": 1
-        },
-        "8": {
-          "atkPct": 0,
-          "defPct": 0,
-          "hpPct": 0,
-          "skillLevel": 3,
-          "showUIStar": 5,
-          "starPlus": 2
         },
         "9": {
           "atkPct": 30,
@@ -9894,14 +9654,6 @@
           "showUIStar": 4,
           "starPlus": 0
         },
-        "5": {
-          "atkPct": 0,
-          "defPct": 0,
-          "hpPct": 0,
-          "skillLevel": 2,
-          "showUIStar": 4,
-          "starPlus": 1
-        },
         "6": {
           "atkPct": 22,
           "defPct": 22,
@@ -9909,22 +9661,6 @@
           "skillLevel": 3,
           "showUIStar": 5,
           "starPlus": 0
-        },
-        "7": {
-          "atkPct": 0,
-          "defPct": 0,
-          "hpPct": 0,
-          "skillLevel": 3,
-          "showUIStar": 5,
-          "starPlus": 1
-        },
-        "8": {
-          "atkPct": 0,
-          "defPct": 0,
-          "hpPct": 0,
-          "skillLevel": 3,
-          "showUIStar": 5,
-          "starPlus": 2
         },
         "9": {
           "atkPct": 30,
@@ -10592,14 +10328,6 @@
           "showUIStar": 4,
           "starPlus": 0
         },
-        "5": {
-          "atkPct": 0,
-          "defPct": 0,
-          "hpPct": 0,
-          "skillLevel": 2,
-          "showUIStar": 4,
-          "starPlus": 1
-        },
         "6": {
           "atkPct": 22,
           "defPct": 22,
@@ -10607,22 +10335,6 @@
           "skillLevel": 3,
           "showUIStar": 5,
           "starPlus": 0
-        },
-        "7": {
-          "atkPct": 0,
-          "defPct": 0,
-          "hpPct": 0,
-          "skillLevel": 3,
-          "showUIStar": 5,
-          "starPlus": 1
-        },
-        "8": {
-          "atkPct": 0,
-          "defPct": 0,
-          "hpPct": 0,
-          "skillLevel": 3,
-          "showUIStar": 5,
-          "starPlus": 2
         },
         "9": {
           "atkPct": 30,
@@ -12165,14 +11877,6 @@
           "showUIStar": 4,
           "starPlus": 0
         },
-        "5": {
-          "atkPct": 0,
-          "defPct": 0,
-          "hpPct": 0,
-          "skillLevel": 2,
-          "showUIStar": 4,
-          "starPlus": 1
-        },
         "6": {
           "atkPct": 22,
           "defPct": 22,
@@ -12180,22 +11884,6 @@
           "skillLevel": 3,
           "showUIStar": 5,
           "starPlus": 0
-        },
-        "7": {
-          "atkPct": 0,
-          "defPct": 0,
-          "hpPct": 0,
-          "skillLevel": 3,
-          "showUIStar": 5,
-          "starPlus": 1
-        },
-        "8": {
-          "atkPct": 0,
-          "defPct": 0,
-          "hpPct": 0,
-          "skillLevel": 3,
-          "showUIStar": 5,
-          "starPlus": 2
         },
         "9": {
           "atkPct": 30,
@@ -13062,14 +12750,6 @@
           "showUIStar": 4,
           "starPlus": 0
         },
-        "5": {
-          "atkPct": 0,
-          "defPct": 0,
-          "hpPct": 0,
-          "skillLevel": 2,
-          "showUIStar": 4,
-          "starPlus": 1
-        },
         "6": {
           "atkPct": 22,
           "defPct": 22,
@@ -13077,22 +12757,6 @@
           "skillLevel": 3,
           "showUIStar": 5,
           "starPlus": 0
-        },
-        "7": {
-          "atkPct": 0,
-          "defPct": 0,
-          "hpPct": 0,
-          "skillLevel": 3,
-          "showUIStar": 5,
-          "starPlus": 1
-        },
-        "8": {
-          "atkPct": 0,
-          "defPct": 0,
-          "hpPct": 0,
-          "skillLevel": 3,
-          "showUIStar": 5,
-          "starPlus": 2
         },
         "9": {
           "atkPct": 30,
@@ -13833,14 +13497,6 @@
           "showUIStar": 4,
           "starPlus": 0
         },
-        "5": {
-          "atkPct": 0,
-          "defPct": 0,
-          "hpPct": 0,
-          "skillLevel": 2,
-          "showUIStar": 4,
-          "starPlus": 1
-        },
         "6": {
           "atkPct": 22,
           "defPct": 22,
@@ -13848,22 +13504,6 @@
           "skillLevel": 3,
           "showUIStar": 5,
           "starPlus": 0
-        },
-        "7": {
-          "atkPct": 0,
-          "defPct": 0,
-          "hpPct": 0,
-          "skillLevel": 3,
-          "showUIStar": 5,
-          "starPlus": 1
-        },
-        "8": {
-          "atkPct": 0,
-          "defPct": 0,
-          "hpPct": 0,
-          "skillLevel": 3,
-          "showUIStar": 5,
-          "starPlus": 2
         },
         "9": {
           "atkPct": 30,
@@ -18360,14 +18000,6 @@
           "showUIStar": 4,
           "starPlus": 0
         },
-        "5": {
-          "atkPct": 0,
-          "defPct": 0,
-          "hpPct": 0,
-          "skillLevel": 2,
-          "showUIStar": 4,
-          "starPlus": 1
-        },
         "6": {
           "atkPct": 22,
           "defPct": 22,
@@ -18375,22 +18007,6 @@
           "skillLevel": 3,
           "showUIStar": 5,
           "starPlus": 0
-        },
-        "7": {
-          "atkPct": 0,
-          "defPct": 0,
-          "hpPct": 0,
-          "skillLevel": 3,
-          "showUIStar": 5,
-          "starPlus": 1
-        },
-        "8": {
-          "atkPct": 0,
-          "defPct": 0,
-          "hpPct": 0,
-          "skillLevel": 3,
-          "showUIStar": 5,
-          "starPlus": 2
         },
         "9": {
           "atkPct": 30,
@@ -19941,14 +19557,6 @@
           "showUIStar": 4,
           "starPlus": 0
         },
-        "5": {
-          "atkPct": 0,
-          "defPct": 0,
-          "hpPct": 0,
-          "skillLevel": 2,
-          "showUIStar": 4,
-          "starPlus": 1
-        },
         "6": {
           "atkPct": 22,
           "defPct": 22,
@@ -19956,22 +19564,6 @@
           "skillLevel": 3,
           "showUIStar": 5,
           "starPlus": 0
-        },
-        "7": {
-          "atkPct": 0,
-          "defPct": 0,
-          "hpPct": 0,
-          "skillLevel": 3,
-          "showUIStar": 5,
-          "starPlus": 1
-        },
-        "8": {
-          "atkPct": 0,
-          "defPct": 0,
-          "hpPct": 0,
-          "skillLevel": 3,
-          "showUIStar": 5,
-          "starPlus": 2
         },
         "9": {
           "atkPct": 30,
@@ -20645,14 +20237,6 @@
           "showUIStar": 4,
           "starPlus": 0
         },
-        "5": {
-          "atkPct": 0,
-          "defPct": 0,
-          "hpPct": 0,
-          "skillLevel": 2,
-          "showUIStar": 4,
-          "starPlus": 1
-        },
         "6": {
           "atkPct": 22,
           "defPct": 22,
@@ -20660,22 +20244,6 @@
           "skillLevel": 3,
           "showUIStar": 5,
           "starPlus": 0
-        },
-        "7": {
-          "atkPct": 0,
-          "defPct": 0,
-          "hpPct": 0,
-          "skillLevel": 3,
-          "showUIStar": 5,
-          "starPlus": 1
-        },
-        "8": {
-          "atkPct": 0,
-          "defPct": 0,
-          "hpPct": 0,
-          "skillLevel": 3,
-          "showUIStar": 5,
-          "starPlus": 2
         },
         "9": {
           "atkPct": 30,
@@ -22033,14 +21601,6 @@
           "showUIStar": 4,
           "starPlus": 0
         },
-        "5": {
-          "atkPct": 0,
-          "defPct": 0,
-          "hpPct": 0,
-          "skillLevel": 2,
-          "showUIStar": 4,
-          "starPlus": 1
-        },
         "6": {
           "atkPct": 22,
           "defPct": 22,
@@ -22048,22 +21608,6 @@
           "skillLevel": 3,
           "showUIStar": 5,
           "starPlus": 0
-        },
-        "7": {
-          "atkPct": 0,
-          "defPct": 0,
-          "hpPct": 0,
-          "skillLevel": 3,
-          "showUIStar": 5,
-          "starPlus": 1
-        },
-        "8": {
-          "atkPct": 0,
-          "defPct": 0,
-          "hpPct": 0,
-          "skillLevel": 3,
-          "showUIStar": 5,
-          "starPlus": 2
         },
         "9": {
           "atkPct": 30,
@@ -22916,14 +22460,6 @@
           "showUIStar": 4,
           "starPlus": 0
         },
-        "5": {
-          "atkPct": 0,
-          "defPct": 0,
-          "hpPct": 0,
-          "skillLevel": 2,
-          "showUIStar": 4,
-          "starPlus": 1
-        },
         "6": {
           "atkPct": 22,
           "defPct": 22,
@@ -22931,22 +22467,6 @@
           "skillLevel": 3,
           "showUIStar": 5,
           "starPlus": 0
-        },
-        "7": {
-          "atkPct": 0,
-          "defPct": 0,
-          "hpPct": 0,
-          "skillLevel": 3,
-          "showUIStar": 5,
-          "starPlus": 1
-        },
-        "8": {
-          "atkPct": 0,
-          "defPct": 0,
-          "hpPct": 0,
-          "skillLevel": 3,
-          "showUIStar": 5,
-          "starPlus": 2
         },
         "9": {
           "atkPct": 30,
@@ -23614,14 +23134,6 @@
           "showUIStar": 4,
           "starPlus": 0
         },
-        "5": {
-          "atkPct": 0,
-          "defPct": 0,
-          "hpPct": 0,
-          "skillLevel": 2,
-          "showUIStar": 4,
-          "starPlus": 1
-        },
         "6": {
           "atkPct": 22,
           "defPct": 22,
@@ -23629,22 +23141,6 @@
           "skillLevel": 3,
           "showUIStar": 5,
           "starPlus": 0
-        },
-        "7": {
-          "atkPct": 0,
-          "defPct": 0,
-          "hpPct": 0,
-          "skillLevel": 3,
-          "showUIStar": 5,
-          "starPlus": 1
-        },
-        "8": {
-          "atkPct": 0,
-          "defPct": 0,
-          "hpPct": 0,
-          "skillLevel": 3,
-          "showUIStar": 5,
-          "starPlus": 2
         },
         "9": {
           "atkPct": 30,
@@ -24503,14 +23999,6 @@
           "showUIStar": 4,
           "starPlus": 0
         },
-        "5": {
-          "atkPct": 0,
-          "defPct": 0,
-          "hpPct": 0,
-          "skillLevel": 2,
-          "showUIStar": 4,
-          "starPlus": 1
-        },
         "6": {
           "atkPct": 22,
           "defPct": 22,
@@ -24518,22 +24006,6 @@
           "skillLevel": 3,
           "showUIStar": 5,
           "starPlus": 0
-        },
-        "7": {
-          "atkPct": 0,
-          "defPct": 0,
-          "hpPct": 0,
-          "skillLevel": 3,
-          "showUIStar": 5,
-          "starPlus": 1
-        },
-        "8": {
-          "atkPct": 0,
-          "defPct": 0,
-          "hpPct": 0,
-          "skillLevel": 3,
-          "showUIStar": 5,
-          "starPlus": 2
         },
         "9": {
           "atkPct": 30,
@@ -25386,14 +24858,6 @@
           "showUIStar": 4,
           "starPlus": 0
         },
-        "5": {
-          "atkPct": 0,
-          "defPct": 0,
-          "hpPct": 0,
-          "skillLevel": 2,
-          "showUIStar": 4,
-          "starPlus": 1
-        },
         "6": {
           "atkPct": 22,
           "defPct": 22,
@@ -25401,22 +24865,6 @@
           "skillLevel": 3,
           "showUIStar": 5,
           "starPlus": 0
-        },
-        "7": {
-          "atkPct": 0,
-          "defPct": 0,
-          "hpPct": 0,
-          "skillLevel": 3,
-          "showUIStar": 5,
-          "starPlus": 1
-        },
-        "8": {
-          "atkPct": 0,
-          "defPct": 0,
-          "hpPct": 0,
-          "skillLevel": 3,
-          "showUIStar": 5,
-          "starPlus": 2
         },
         "9": {
           "atkPct": 30,
@@ -26269,14 +25717,6 @@
           "showUIStar": 4,
           "starPlus": 0
         },
-        "5": {
-          "atkPct": 0,
-          "defPct": 0,
-          "hpPct": 0,
-          "skillLevel": 2,
-          "showUIStar": 4,
-          "starPlus": 1
-        },
         "6": {
           "atkPct": 22,
           "defPct": 22,
@@ -26284,22 +25724,6 @@
           "skillLevel": 3,
           "showUIStar": 5,
           "starPlus": 0
-        },
-        "7": {
-          "atkPct": 0,
-          "defPct": 0,
-          "hpPct": 0,
-          "skillLevel": 3,
-          "showUIStar": 5,
-          "starPlus": 1
-        },
-        "8": {
-          "atkPct": 0,
-          "defPct": 0,
-          "hpPct": 0,
-          "skillLevel": 3,
-          "showUIStar": 5,
-          "starPlus": 2
         },
         "9": {
           "atkPct": 30,
@@ -28027,14 +27451,6 @@
           "showUIStar": 4,
           "starPlus": 0
         },
-        "5": {
-          "atkPct": 0,
-          "defPct": 0,
-          "hpPct": 0,
-          "skillLevel": 2,
-          "showUIStar": 4,
-          "starPlus": 1
-        },
         "6": {
           "atkPct": 22,
           "defPct": 22,
@@ -28042,22 +27458,6 @@
           "skillLevel": 3,
           "showUIStar": 5,
           "starPlus": 0
-        },
-        "7": {
-          "atkPct": 0,
-          "defPct": 0,
-          "hpPct": 0,
-          "skillLevel": 3,
-          "showUIStar": 5,
-          "starPlus": 1
-        },
-        "8": {
-          "atkPct": 0,
-          "defPct": 0,
-          "hpPct": 0,
-          "skillLevel": 3,
-          "showUIStar": 5,
-          "starPlus": 2
         },
         "9": {
           "atkPct": 30,
@@ -29423,14 +28823,6 @@
           "showUIStar": 4,
           "starPlus": 0
         },
-        "5": {
-          "atkPct": 0,
-          "defPct": 0,
-          "hpPct": 0,
-          "skillLevel": 2,
-          "showUIStar": 4,
-          "starPlus": 1
-        },
         "6": {
           "atkPct": 22,
           "defPct": 22,
@@ -29438,22 +28830,6 @@
           "skillLevel": 3,
           "showUIStar": 5,
           "starPlus": 0
-        },
-        "7": {
-          "atkPct": 0,
-          "defPct": 0,
-          "hpPct": 0,
-          "skillLevel": 3,
-          "showUIStar": 5,
-          "starPlus": 1
-        },
-        "8": {
-          "atkPct": 0,
-          "defPct": 0,
-          "hpPct": 0,
-          "skillLevel": 3,
-          "showUIStar": 5,
-          "starPlus": 2
         },
         "9": {
           "atkPct": 30,
@@ -31877,14 +31253,6 @@
           "showUIStar": 4,
           "starPlus": 0
         },
-        "5": {
-          "atkPct": 0,
-          "defPct": 0,
-          "hpPct": 0,
-          "skillLevel": 2,
-          "showUIStar": 4,
-          "starPlus": 1
-        },
         "6": {
           "atkPct": 22,
           "defPct": 22,
@@ -31892,22 +31260,6 @@
           "skillLevel": 3,
           "showUIStar": 5,
           "starPlus": 0
-        },
-        "7": {
-          "atkPct": 0,
-          "defPct": 0,
-          "hpPct": 0,
-          "skillLevel": 3,
-          "showUIStar": 5,
-          "starPlus": 1
-        },
-        "8": {
-          "atkPct": 0,
-          "defPct": 0,
-          "hpPct": 0,
-          "skillLevel": 3,
-          "showUIStar": 5,
-          "starPlus": 2
         },
         "9": {
           "atkPct": 30,
@@ -34845,14 +34197,6 @@
           "showUIStar": 4,
           "starPlus": 0
         },
-        "5": {
-          "atkPct": 0,
-          "defPct": 0,
-          "hpPct": 0,
-          "skillLevel": 2,
-          "showUIStar": 4,
-          "starPlus": 1
-        },
         "6": {
           "atkPct": 22,
           "defPct": 22,
@@ -34860,22 +34204,6 @@
           "skillLevel": 3,
           "showUIStar": 5,
           "starPlus": 0
-        },
-        "7": {
-          "atkPct": 0,
-          "defPct": 0,
-          "hpPct": 0,
-          "skillLevel": 3,
-          "showUIStar": 5,
-          "starPlus": 1
-        },
-        "8": {
-          "atkPct": 0,
-          "defPct": 0,
-          "hpPct": 0,
-          "skillLevel": 3,
-          "showUIStar": 5,
-          "starPlus": 2
         },
         "9": {
           "atkPct": 30,
@@ -35551,14 +34879,6 @@
           "showUIStar": 4,
           "starPlus": 0
         },
-        "5": {
-          "atkPct": 0,
-          "defPct": 0,
-          "hpPct": 0,
-          "skillLevel": 2,
-          "showUIStar": 4,
-          "starPlus": 1
-        },
         "6": {
           "atkPct": 22,
           "defPct": 22,
@@ -35566,22 +34886,6 @@
           "skillLevel": 3,
           "showUIStar": 5,
           "starPlus": 0
-        },
-        "7": {
-          "atkPct": 0,
-          "defPct": 0,
-          "hpPct": 0,
-          "skillLevel": 3,
-          "showUIStar": 5,
-          "starPlus": 1
-        },
-        "8": {
-          "atkPct": 0,
-          "defPct": 0,
-          "hpPct": 0,
-          "skillLevel": 3,
-          "showUIStar": 5,
-          "starPlus": 2
         },
         "9": {
           "atkPct": 30,
@@ -36434,14 +35738,6 @@
           "showUIStar": 4,
           "starPlus": 0
         },
-        "5": {
-          "atkPct": 0,
-          "defPct": 0,
-          "hpPct": 0,
-          "skillLevel": 2,
-          "showUIStar": 4,
-          "starPlus": 1
-        },
         "6": {
           "atkPct": 22,
           "defPct": 22,
@@ -36449,22 +35745,6 @@
           "skillLevel": 3,
           "showUIStar": 5,
           "starPlus": 0
-        },
-        "7": {
-          "atkPct": 0,
-          "defPct": 0,
-          "hpPct": 0,
-          "skillLevel": 3,
-          "showUIStar": 5,
-          "starPlus": 1
-        },
-        "8": {
-          "atkPct": 0,
-          "defPct": 0,
-          "hpPct": 0,
-          "skillLevel": 3,
-          "showUIStar": 5,
-          "starPlus": 2
         },
         "9": {
           "atkPct": 30,
@@ -37132,14 +36412,6 @@
           "showUIStar": 4,
           "starPlus": 0
         },
-        "5": {
-          "atkPct": 0,
-          "defPct": 0,
-          "hpPct": 0,
-          "skillLevel": 2,
-          "showUIStar": 4,
-          "starPlus": 1
-        },
         "6": {
           "atkPct": 22,
           "defPct": 22,
@@ -37147,22 +36419,6 @@
           "skillLevel": 3,
           "showUIStar": 5,
           "starPlus": 0
-        },
-        "7": {
-          "atkPct": 0,
-          "defPct": 0,
-          "hpPct": 0,
-          "skillLevel": 3,
-          "showUIStar": 5,
-          "starPlus": 1
-        },
-        "8": {
-          "atkPct": 0,
-          "defPct": 0,
-          "hpPct": 0,
-          "skillLevel": 3,
-          "showUIStar": 5,
-          "starPlus": 2
         },
         "9": {
           "atkPct": 30,
@@ -37838,14 +37094,6 @@
           "showUIStar": 4,
           "starPlus": 0
         },
-        "5": {
-          "atkPct": 0,
-          "defPct": 0,
-          "hpPct": 0,
-          "skillLevel": 2,
-          "showUIStar": 4,
-          "starPlus": 1
-        },
         "6": {
           "atkPct": 22,
           "defPct": 22,
@@ -37853,22 +37101,6 @@
           "skillLevel": 3,
           "showUIStar": 5,
           "starPlus": 0
-        },
-        "7": {
-          "atkPct": 0,
-          "defPct": 0,
-          "hpPct": 0,
-          "skillLevel": 3,
-          "showUIStar": 5,
-          "starPlus": 1
-        },
-        "8": {
-          "atkPct": 0,
-          "defPct": 0,
-          "hpPct": 0,
-          "skillLevel": 3,
-          "showUIStar": 5,
-          "starPlus": 2
         },
         "9": {
           "atkPct": 30,
@@ -38729,14 +37961,6 @@
           "showUIStar": 4,
           "starPlus": 0
         },
-        "5": {
-          "atkPct": 0,
-          "defPct": 0,
-          "hpPct": 0,
-          "skillLevel": 2,
-          "showUIStar": 4,
-          "starPlus": 1
-        },
         "6": {
           "atkPct": 22,
           "defPct": 22,
@@ -38744,22 +37968,6 @@
           "skillLevel": 3,
           "showUIStar": 5,
           "starPlus": 0
-        },
-        "7": {
-          "atkPct": 0,
-          "defPct": 0,
-          "hpPct": 0,
-          "skillLevel": 3,
-          "showUIStar": 5,
-          "starPlus": 1
-        },
-        "8": {
-          "atkPct": 0,
-          "defPct": 0,
-          "hpPct": 0,
-          "skillLevel": 3,
-          "showUIStar": 5,
-          "starPlus": 2
         },
         "9": {
           "atkPct": 30,
@@ -39435,14 +38643,6 @@
           "showUIStar": 4,
           "starPlus": 0
         },
-        "5": {
-          "atkPct": 0,
-          "defPct": 0,
-          "hpPct": 0,
-          "skillLevel": 2,
-          "showUIStar": 4,
-          "starPlus": 1
-        },
         "6": {
           "atkPct": 22,
           "defPct": 22,
@@ -39450,22 +38650,6 @@
           "skillLevel": 3,
           "showUIStar": 5,
           "starPlus": 0
-        },
-        "7": {
-          "atkPct": 0,
-          "defPct": 0,
-          "hpPct": 0,
-          "skillLevel": 3,
-          "showUIStar": 5,
-          "starPlus": 1
-        },
-        "8": {
-          "atkPct": 0,
-          "defPct": 0,
-          "hpPct": 0,
-          "skillLevel": 3,
-          "showUIStar": 5,
-          "starPlus": 2
         },
         "9": {
           "atkPct": 30,
@@ -94550,7 +93734,7 @@
     "nickname": null,
     "cls": "CCT_RANGER",
     "element": "CET_WATER",
-    "star": 3,
+    "star": 2,
     "ingredients": {
       "base": {
         "atk": {
@@ -94749,14 +93933,6 @@
           "showUIStar": 4,
           "starPlus": 0
         },
-        "5": {
-          "atkPct": 19,
-          "defPct": 19,
-          "hpPct": 19,
-          "skillLevel": 2,
-          "showUIStar": 4,
-          "starPlus": 1
-        },
         "6": {
           "atkPct": 22,
           "defPct": 22,
@@ -94764,22 +93940,6 @@
           "skillLevel": 3,
           "showUIStar": 5,
           "starPlus": 0
-        },
-        "7": {
-          "atkPct": 25,
-          "defPct": 25,
-          "hpPct": 25,
-          "skillLevel": 3,
-          "showUIStar": 5,
-          "starPlus": 1
-        },
-        "8": {
-          "atkPct": 28,
-          "defPct": 28,
-          "hpPct": 28,
-          "skillLevel": 3,
-          "showUIStar": 5,
-          "starPlus": 2
         },
         "9": {
           "atkPct": 30,
@@ -95448,7 +94608,7 @@
     "nickname": null,
     "cls": "CCT_MAGE",
     "element": "CET_FIRE",
-    "star": 3,
+    "star": 2,
     "ingredients": {
       "base": {
         "atk": {
@@ -95647,14 +94807,6 @@
           "showUIStar": 4,
           "starPlus": 0
         },
-        "5": {
-          "atkPct": 19,
-          "defPct": 19,
-          "hpPct": 19,
-          "skillLevel": 2,
-          "showUIStar": 4,
-          "starPlus": 1
-        },
         "6": {
           "atkPct": 22,
           "defPct": 22,
@@ -95662,22 +94814,6 @@
           "skillLevel": 3,
           "showUIStar": 5,
           "starPlus": 0
-        },
-        "7": {
-          "atkPct": 25,
-          "defPct": 25,
-          "hpPct": 25,
-          "skillLevel": 3,
-          "showUIStar": 5,
-          "starPlus": 1
-        },
-        "8": {
-          "atkPct": 28,
-          "defPct": 28,
-          "hpPct": 28,
-          "skillLevel": 3,
-          "showUIStar": 5,
-          "starPlus": 2
         },
         "9": {
           "atkPct": 30,

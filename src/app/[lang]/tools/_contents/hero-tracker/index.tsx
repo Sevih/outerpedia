@@ -8,17 +8,17 @@ import {
   characterSearchNames,
   getCharacter,
   getCharacterListItems,
+  progressionStar,
   slugForId,
 } from '@/lib/data/characters';
 import { getHeroGrowth } from '@/lib/data/hero-growth';
 import { getProgression } from '@/lib/data/progression';
-import { getTranscend } from '@/lib/data/transcend';
 import { getEquipmentEe } from '@/lib/data/equipment-ee';
 import { getSkills } from '@/lib/data/skills';
 import { loadSearchAliases } from '@/lib/data/search-aliases';
 import { tagsInGroup } from '@/lib/data/tags';
 import { HeroTrackerBrowser } from './HeroTrackerBrowser';
-import type { HeroRow, HeroTrackerLabels, ItemAsset, TranscendStep } from './contracts';
+import type { HeroRow, HeroTrackerLabels, ItemAsset } from './contracts';
 import type { LimitBreakCost } from './engine';
 
 /**
@@ -39,11 +39,6 @@ interface ProgressionLimitBreakStep {
 }
 const progressionLimitBreak: Record<string, ProgressionLimitBreakStep[]> =
   getProgression().limitBreak;
-
-const transcend: {
-  byStar: Record<string, TranscendStep[]>;
-  overrides: Record<string, TranscendStep[]>;
-} = getTranscend();
 
 /** Équipements exclusifs, indexés par héros — un par personnage, fusionnés inclus. */
 const exclusiveEquip: Record<
@@ -159,6 +154,7 @@ export default async function HeroTracker({ lang }: { lang: Lang }) {
       element: c.element,
       class: c.class,
       rarity: c.rarity,
+      baseStar: progressionStar(c),
       ...(c.gift ? { gift: c.gift } : {}),
       searchNames: characterSearchNames(c, aliases[c.id]),
       tags: c.tags ?? [],
@@ -236,7 +232,6 @@ export default async function HeroTracker({ lang }: { lang: Lang }) {
         limitBreak,
         eeEnchant: growth.specialEquip.ee,
       }}
-      transcend={transcend}
       items={items}
       elementNames={elementNames}
       limitedTags={limitedTags}

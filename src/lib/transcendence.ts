@@ -43,16 +43,20 @@ const TONE: Record<string, StarTone> = { yellow: 'y', orange: 'o', red: 'r', vio
 
 /**
  * L'ÉCHELLE qui s'applique à un perso : ses paliers propres s'il en a, sinon le
- * barème de sa rareté de base. Même résolution que `char-progression`
- * (`overrides[id] ?? byStar[rarity]`) — dix personnages portent une échelle à eux.
+ * barème de sa rareté de base — `overrides[id] ?? byStar[rarity]`, LA résolution
+ * du site : la fiche (`char-progression`) et le Hero tracker l'appellent ici.
+ * Onze personnages portent une échelle à eux, plus les six Core Fusion, dont
+ * l'extraction pose l'échelle de leur ORIGINE (`transcend.json`) : la rareté
+ * affichée (3) n'a donc pas à connaître l'origine pour tomber juste.
  *
  * `charId` est OPTIONNEL parce que les habillages ne l'ont pas tous sous la main, et
- * que les dix échelles propres sont aujourd'hui identiques au générique SUR CES
- * TROIS COLONNES (elles ne diffèrent que par les stats et les coûts). Le test voisin
- * le vérifie : le jour où l'une divergerait, il vire au rouge au lieu de laisser un
- * portrait mentir en silence.
+ * que les échelles propres sont aujourd'hui identiques au générique SUR LES TROIS
+ * COLONNES D'AFFICHAGE (elles ne diffèrent que par les stats et les coûts ; celle
+ * d'un fusionné d'origine 2★ ne garde que les paliers 3, 4, 6, 9, où le barème 3★
+ * affiche la même chose). Le test voisin le vérifie : le jour où l'une
+ * divergerait, il vire au rouge au lieu de laisser un portrait mentir en silence.
  */
-function ladder(rarity: number, charId?: string): TranscendStep[] {
+export function transcendLadder(rarity: number, charId?: string): TranscendStep[] {
   return (
     (charId ? TRANSCEND.overrides[charId] : undefined) ?? TRANSCEND.byStar[String(rarity)] ?? []
   );
@@ -76,9 +80,9 @@ function ladder(rarity: number, charId?: string): TranscendStep[] {
  * Le nombre d'étoiles ne suit donc pas le palier : 4 étoiles au palier 5, puis 5 au
  * palier 6, puis toujours 5 aux paliers 7 et 8, puis 6 au palier 9.
  *
- * Les raretés 1 et 2 gardent leur `StarPlus` mais avec une teinte JAUNE : le +
- * existe, il ne se voit pas. Seuls les persos 3★ ont des étoiles colorées — d'où le
- * soin, dans `transcendenceLabel`, à lire `StarPlus` et non la couleur.
+ * Ces paliers « + » (5, 7, 8) n'existent qu'en 3★ : en 1★ et 2★, la table en garde
+ * des lignes jaunes, mais le jeu ne les parcourt pas (`UseTransStar` faux) et
+ * l'extraction les écarte. Seuls les persos 3★ ont donc des étoiles colorées.
  *
  * Palier omis = perso non transcendé, donc le palier de base (sa rareté). Palier ou
  * rareté hors table : autant de jaunes que la rareté — une donnée inattendue ne doit
@@ -89,7 +93,7 @@ export function transcendenceRow(
   transcendence?: number,
   charId?: string,
 ): readonly [number, StarTone, number] {
-  const step = ladder(rarity, charId).find((s) => s.star === (transcendence ?? rarity));
+  const step = transcendLadder(rarity, charId).find((s) => s.star === (transcendence ?? rarity));
   if (!step) return [Math.min(Math.max(rarity, 0), 6), 'y', 0];
   return [step.showStar, TONE[step.starColor] ?? 'y', step.starPlus];
 }
@@ -115,10 +119,10 @@ export function transcendenceStars(
 /**
  * LE PALIER TEL QU'UN JOUEUR L'ÉCRIT — « 4★ », « 5★+ », « 5★++ », « 6★ ».
  *
- * Le suffixe vient de `StarPlus`, JAMAIS de la couleur. Le déduire de la couleur
- * (`yellow` → rien) paraît équivalent sur un 3★ et se trompe sur toutes les raretés
- * 1 et 2, dont les paliers « + » restent jaunes : le slider de la fiche perso y
- * affichait « 4 | 4 | 5 | 5 | 5 | 6 », trois crans portant le même nom.
+ * Le suffixe vient de `StarPlus`, JAMAIS de la couleur. Les deux coïncident sur les
+ * paliers que le jeu parcourt (seuls les 3★ ont des « + », tous colorés), mais
+ * c'est `StarPlus` que la table déclare : une ligne « + » restée jaune (comme les
+ * paliers écartés des 1★/2★) y garderait son nom.
  */
 export function transcendenceLabel(rarity: number, transcendence: number, charId?: string): string {
   const [show, , plus] = transcendenceRow(rarity, transcendence, charId);
@@ -132,7 +136,7 @@ export function stepLabel(step: Pick<TranscendStep, 'showStar' | 'starPlus'>): s
 
 /** Tous les paliers (`TransStar`) d'une rareté, du plus bas au plus haut. */
 export function transcendenceSteps(rarity: number, charId?: string): number[] {
-  return ladder(rarity, charId).map((s) => s.star);
+  return transcendLadder(rarity, charId).map((s) => s.star);
 }
 
 /**
@@ -145,7 +149,7 @@ export function transcendenceSteps(rarity: number, charId?: string): number[] {
  * filtre, où trois crans à cinq étoiles ne se distingueraient qu'à la teinte.
  */
 export function transcendenceFullSteps(rarity: number, charId?: string): number[] {
-  return ladder(rarity, charId)
+  return transcendLadder(rarity, charId)
     .filter((s) => s.starPlus === 0)
     .map((s) => s.star);
 }

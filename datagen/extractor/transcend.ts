@@ -6,7 +6,19 @@
  * exceptions (`overrides`) — pas un blob dupliqué par personnage (c'était le
  * défaut d'avant, où le barème était sérialisé en chaînes sur chaque fiche).
  *
- * Résolution côté app : `overrides[charId] ?? byStar[character.rarity]`.
+ * Seuls les paliers que le jeu PARCOURT sont gardés : le client
+ * (`CTempletManager.GetCharacterTranscendentTempletList`) écarte les lignes à
+ * `UseTransStar` faux et suit `NextStar`. En 1★ et 2★, les paliers 5, 7 et 8 en
+ * sont (coût et bonus nuls) : la chaîne réelle est 1→2→3→4→6→9.
+ *
+ * Un Core Fusion suit l'échelle de son ORIGINE : le client la lit sur le templet
+ * d'origine, étoile de base et ID compris (`GetCharacterTranscendent(Templet.
+ * BasicStar, Star, ID)`). `overrides[fusionné]` porte donc l'échelle de l'origine,
+ * réduite aux paliers à partir de l'étoile de base du fusionné (3) : Snow et Lisha,
+ * 2★ à l'origine, y gardent 3, 4, 6, 9 au barème 2★.
+ *
+ * Résolution côté app : `overrides[charId] ?? byStar[character.rarity]`
+ * (`transcendLadder`, `src/lib/transcendence.ts`), juste aussi pour un fusionné.
  *
  * Rates en per-mille (÷10 pour un %), cohérent avec `statScales` : 50 ⇒ +5%.
  */
@@ -84,15 +96,50 @@ const stepSchema: Schema = {
 export function buildTranscend(): TranscendData {
   const byStar: Record<string, TranscendStep[]> = {};
   const overrides: Record<string, TranscendStep[]> = {};
+  /** `NextStar` de chaque palier gardé, par échelle — pour le contrôle de chaîne. */
+  const next = new Map<TranscendStep[], Map<number, number>>();
 
   for (const r of loadTable('CharacterTranscendentTemplet')) {
+    // Palier que le jeu ne parcourt pas (cf. en-tête).
+    if (!bool(r.UseTransStar)) continue;
     const step = toStep(r);
     const bucket =
       r.CharacterID === '0' ? (byStar[r.BasicStar] ??= []) : (overrides[r.CharacterID] ??= []);
     bucket.push(step);
+    if (!next.has(bucket)) next.set(bucket, new Map());
+    next.get(bucket)?.set(step.star, num(r.NextStar));
   }
   for (const ladder of [...Object.values(byStar), ...Object.values(overrides)]) {
     ladder.sort((a, b) => a.star - b.star);
+  }
+
+  // Contrat à dents : chaque `NextStar` non nul pointe un palier GARDÉ de la même
+  // échelle — une chaîne qui mènerait à un palier écarté serait un cran perdu.
+  const broken: string[] = [];
+  for (const [ladder, links] of next) {
+    const kept = new Set(ladder.map((s) => s.star));
+    for (const [star, to] of links) if (to !== 0 && !kept.has(to)) broken.push(`${star}→${to}`);
+  }
+  if (broken.length) {
+    throw new Error(`transcend: NextStar vers un palier écarté (${broken.join(', ')})`);
+  }
+
+  // Core Fusion : l'échelle de l'origine, à partir de l'étoile de base du fusionné.
+  const templet = new Map(loadTable('CharacterTemplet').map((r) => [r.ID, r]));
+  for (const f of loadTable('CharacterFusionTemplet')) {
+    const origin = templet.get(f.CharacterID);
+    const fused = templet.get(f.ChangeCharID);
+    if (!origin || !fused) {
+      throw new Error(`transcend: fusion ${f.CharacterID} → ${f.ChangeCharID} sans templet`);
+    }
+    const from = num(fused.BasicStar);
+    const ladder = (overrides[f.CharacterID] ?? byStar[origin.BasicStar] ?? []).filter(
+      (s) => s.star >= from,
+    );
+    if (!ladder.length) {
+      throw new Error(`transcend: fusion ${f.ChangeCharID} sans palier à partir de ${from}`);
+    }
+    overrides[f.ChangeCharID] = ladder;
   }
 
   // Contrat à dents : chaque palier conforme.

@@ -7,6 +7,96 @@
 
 ## 2026-10-15
 
+- **Progression : échelle de transcendance du jeu (`UseTransStar`), étoile de
+  base des Core Fusion, limit break du Hero tracker (lot C17, tri des revues du
+  15/10 : H6, M5, M6 et § Duplication de la revue de logique, R7 de la revue de
+  génération, § 3.4 du cloisonnement).** Pourquoi : (1)
+  `CharacterTranscendentTemplet` garde en 1★/2★ des lignes `TransStar` 5, 7, 8 à
+  `UseTransStar=False` (`NextStar` 0, coût et bonus nuls) que le client écarte
+  (`GetCharacterTranscendentTempletList`) ; l'extraction les gardait : sur les
+  34 persos 1★/2★ (9 + 25), curseur de 9 crans au lieu de 6 (8 au lieu de 5),
+  ATK/DEF/PV qui retombaient à +0 % sur ces crans, 3 étapes de trop au Hero
+  tracker ; (2) un Core Fusion lit transcendance et limit break sur le templet
+  de son ORIGINE : Snow (2700003) et Lisha (2700005), 2★ à l'origine,
+  affichaient le limit break 3★ (50/100/250 mémoires, 0,5/1/2 M) et les paliers
+  5, 7, 8 inaccessibles, et le Hero tracker leur comptait 3 530 000 or, 400
+  mémoires, 450 pièces, 3 étapes (lv 100→120, de 6 au max) pour 2 810 000, 300,
+  200, 1 en jeu ; (3) M6 : `engine.ts` comptait un palier de limit break si
+  `maxLevel > état && maxLevel ≤ cible`, alors qu'il est dû pour DÉPASSER
+  `fromLevel` (105→108 : 0 au lieu de 1 M ; 103→111 : 1,5 M au lieu de 3 M).
+  **Comment** : `buildTranscend` (`datagen/extractor/transcend.ts`) écarte les
+  lignes à `UseTransStar` faux, jette si un `NextStar` non nul pointe un palier
+  écarté, puis émet pour chaque ligne de `CharacterFusionTemplet`
+  `overrides[ChangeCharID]` = l'échelle de l'origine
+  (`overrides[CharacterID] ?? byStar[BasicStar de l'origine]`) réduite aux
+  paliers ≥ l'étoile de base du fusionné (3, règle confirmée le 15/10) ; en-tête
+  à jour. Le contrat solver suit la même règle sans changer de forme :
+  `extractTranscendByStar` filtre `UseTransStar` et, pour un fusionné, lit
+  étoile et ID de l'origine (`evoCharId`) à partir de sa propre étoile ; `star`
+  (`solver.ts`) devient l'étoile de base de l'origine. Un lecteur unique,
+  `transcendLadder(rarity, charId)` exporté par `src/lib/transcendence.ts`
+  (client-sûr), remplace les quatre autres copies de
+  `overrides[id] ?? byStar[rarity]` (`char-progression.ts` ×3,
+  `use-tracker-state.ts`) ; ses commentaires (onze échelles propres plus les six
+  fusionnés, plus de « + » invisible en 1★/2★, l'ancien slider « 4 | 4 | 5 | 5 |
+  5 | 6 ») et celui du libellé dans `char-progression.ts` sont réécrits.
+  `progressionStar` (`src/lib/data/characters.ts`, la rareté de
+  `originalCharacter` pour un fusionné) donne l'étoile de base de PROGRESSION :
+  clés `limitBreak` de `computeStatSteps` et `getSubstatFlatProfile`, nouveau
+  champ `HeroRow.baseStar` (posé par `index.tsx`) que `asTracked` passe en
+  `TrackedHero.rarity` et que `HeroCard` lit pour ses paliers de niveau ; la
+  rareté affichée (`HeroRow.rarity`, filtres 1★/2★, tris, tier list, tirages)
+  reste 3. Le Hero tracker lit l'échelle par `transcendLadder` : la prop
+  `transcend` de `HeroTrackerData` disparaît (wrapper, contrat,
+  `HeroTrackerBrowser`). M6 : le palier compte si
+  `état ≤ step.fromLevel && cible > step.fromLevel`. Store du tracker en v3
+  (`stores.ts`) : l'index de transcendance devient celui du plus haut palier
+  réel ≤ (rareté affichée + ancien index) ; la migration v1 est gardée et
+  réindexée au passage, v2 → v3 ajoutée (une v2 n'est plus perdue). Elle a
+  besoin de la rareté et de l'échelle de chaque héros : `SPEC` devient la
+  fabrique `trackerSpec(ladderOf)`, que `useTrackerState` construit une fois
+  dans un initialiseur de `useState` depuis le roster, sans toucher
+  `client-storage.ts` ; un héros absent du roster passe tel quel. **Vérifié** :
+  `pnpm datagen:build` puis `datagen:promote` à blanc : « 62 identique(s), 3
+  différent(s) » (`solver/characters.json` ~36, `solver/version.json` ~2,
+  `transcend.json` ~2), promus par `--apply` (contrat re-dérivé, hash
+  `6b05386eb070`). Script jetable hors dépôt : `byStar['1']` 1-9 → 1,2,3,4,6,9
+  et `byStar['2']` 2-9 → 2,3,4,6,9 (paliers gardés identiques), `byStar['3']` et
+  les onze overrides propres inchangés, `overrides` gagne 2700003, 2700005
+  (3,4,6,9, coûts 2★ 65/85/100/200) et 2700037, 2700043, 2700056, 2700070 (3 à
+  9, identiques au 3★) ; `solver/characters.json` : 36 persos touchés, les 34
+  1★/2★ perdent les clés 5/7/8 de `transcendByStar` (valeurs des autres
+  identiques), 2700003 et 2700005 passent à `star: 2` et aux clés 3, 4, 6, 9,
+  aucun autre champ ne change (`skill8ByLevel` compris). Rendu de
+  `getStatLayers` et `computeStatSteps` sur les 129 fiches, arbre de HEAD contre
+  arbre de travail : 36 diffèrent (9 1★, 25 2★, Snow et Lisha fusionnés), les 93
+  autres 3★ dont 2000073 et Veronica fusionnée 2700037 identiques ; sur les
+  1★/2★ seule la couche de transcendance change ; 2700003 passe de 7 à 4 crans
+  et de 50/100/250 à 40/80/180 mémoires, ses paliers de stats identiques. Tests
+  : `transcend-step.test.ts` affirme les échelles 1,2,3,4,6,9 et 2,3,4,6,9 sans
+  « + » et compare chaque override au barème de son étoile de base (et au 3★ sur
+  les colonnes d'affichage) ; `engine.test.ts` gagne un bloc sur barèmes réels
+  (M6 sur le 3★ Feu : 105→108 = 1 M et 100 mémoires, 103→111 et 102→120 = 3 M et
+  350 ; Snow fusionné 2 810 000 / 300 / 200 / 1 ; Veronica fusionnée 3 530 000 /
+  400 / 450 / 3 ; un 2★ en 4 étapes, 450 pièces) ; `stores.test.ts` (nouveau) la
+  migration (2★ index 7 → 4, 4 → 3, 5 → 3 ; Snow fusionné 6 → 3 ; 3★ et Veronica
+  immobiles ; v1 relevée ; saisie inconnue gardée) ; `char-progression.test.ts`
+  (2★ à 5 crans croissants, 2700003 au limit break 2★, Veronica au 3★) ;
+  `solver-ingredients.test.ts` (un 2★ sans clés 5/7/8, un fusionné d'origine 2★
+  sur l'échelle de son origine, `star` des trois fusionnés capturés).
+  `pnpm typecheck` : dernière ligne `tsc --noEmit` ×3 (app, datagen, scripts)
+  (aucune erreur) ; `pnpm lint` : `$ eslint` (aucune sortie) ; `pnpm test` :
+  `Tests  3879 passed (3879)`. `gear-solver-oracle.test.ts` reste vert (dernier
+  palier inchangé), gear-solver non touché. **Laissé** : l'échelle et le coût
+  d'ÉVOLUTION (§ 3.2 du cloisonnement, capture en attente) ; les crans sous
+  l'étoile exigée par la fusion (6) — 3 et 4 pour Snow et Lisha, 3 à 5 pour les
+  quatre autres — restent affichés sur la fiche de tous les fusionnés ; L1 et le
+  reste du contrat solver ; H1. Liens partagés du calculateur de dégâts non
+  migrés : l'index d'un allié 1★/2★ (ou Snow, Lisha fusionnés) est relu sur la
+  nouvelle échelle et borné au max ; les crans sous 5★ (index 0-2 en 2★ et
+  fusionné, 0-3 en 1★) gardent leur sens, un allié sauvé à 4★+ revient à 5★,
+  sauvé à 5★, 5★+ ou 5★++ revient à 6★ ; le max reste le max.
+
 - **Tests-gardes : six règles du jeu recopiées à la main, gardées contre la
   donnée générée ; la discussion des niveaux 30 et 70 dite « certains
   persos » (lot B50, tri des revues du 15/10, section « Règles recopiées à

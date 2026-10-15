@@ -89,12 +89,12 @@ export function HeroCard({
    */
   const jumps = useMemo(() => {
     const set = new Set<number>([rules.xpCurve.length]);
-    for (const s of rules.limitBreak[`${hero.rarity}_${hero.element}`] ?? []) {
+    for (const s of rules.limitBreak[`${hero.baseStar}_${hero.element}`] ?? []) {
       set.add(s.maxLevel);
       set.add(s.fromLevel);
     }
     return [...set].sort((a, b) => a - b);
-  }, [rules, hero.rarity, hero.element]);
+  }, [rules, hero.baseStar, hero.element]);
 
   /**
    * Paliers d'enchantement qui CHANGENT quelque chose : celui qui ouvre un slot

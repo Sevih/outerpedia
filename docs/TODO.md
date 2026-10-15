@@ -37,8 +37,6 @@ les preuves et les décisions vivent dans le tri consolidé de sevih-tool
       corriger les commentaires.
 - [ ] **Sets et équipement (C, build)** : H2, M8, M9, M10, B1, R11, R12,
       R13, O11, R17.
-- [ ] **Progression (B-C, build)** : H6, M5, M6, étoile de base des Core
-      Fusion.
 - [ ] **Rencontres (C, build)** : R1, R2, R3, O8, O9 ; côté site R4, R5,
       R21.
 - [ ] **Primitives texte et pourcentage (C, build)** : R6, O3, O4, O14,

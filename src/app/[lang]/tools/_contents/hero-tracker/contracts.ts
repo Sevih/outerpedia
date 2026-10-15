@@ -28,7 +28,13 @@ export interface HeroRow {
   name: string;
   element: string;
   class: string;
+  /** Rareté AFFICHÉE (3 pour un fusionné) : filtres, tris, pastilles. */
   rarity: number;
+  /**
+   * Étoile de base de PROGRESSION (`progressionStar`) : celle de l'origine pour un
+   * fusionné — clé des barèmes de limit break et de skill, et du moteur.
+   */
+  baseStar: number;
   /** Type de cadeau préféré (`present_01`…) — oriente la conversion en cadeaux. */
   gift?: string;
   searchNames: string[];
@@ -128,11 +134,6 @@ export interface HeroTrackerLabels {
 export interface HeroTrackerData {
   heroes: HeroRow[];
   rules: Omit<GrowthRules, 'transcendLadder'>;
-  /** Échelles de transcendance : barème par rareté + paliers propres à un héros. */
-  transcend: {
-    byStar: Record<string, TranscendStep[]>;
-    overrides: Record<string, TranscendStep[]>;
-  };
   /** Items référencés par les coûts (manuels, mémoires, matériaux EE, cores). */
   items: Record<string, ItemAsset>;
   /** Nom traduit de chaque élément — les pièces se groupent comme on les farme. */

@@ -15,7 +15,7 @@
  *
  * ⚠ Sortie pour l'app externe : enums moteur bruts, AUCUN slug wiki.
  */
-import type { Row } from '../lib/tables';
+import { bool, type Row } from '../lib/tables';
 
 const ELEMENT_INDEX: Record<string, number> = {
   CET_EARTH: 0,
@@ -218,16 +218,22 @@ export interface TranscendStar {
 }
 // Bonus % par TransStar + niveau de Skill_8 débloqué. Les lignes catch-all
 // `CharacterID="0"` (filtrées par BasicStar) servent les persos sans lignes propres.
+// Seuls les paliers que le jeu parcourt (`UseTransStar`) : en 1★/2★, les crans 5,
+// 7 et 8 n'en sont pas. Un Core Fusion passe l'étoile de base et l'ID de son
+// ORIGINE (le client lit la transcendance sur ce templet) et `fromStar`, l'étoile
+// de base du fusionné : son échelle commence là — même règle que `transcend.json`.
 function extractTranscendByStar(
   transcendByCharId: Map<string, Row[]>,
   basicStar: number,
   charId: string,
+  fromStar = 0,
 ): Record<string, TranscendStar> {
   const charSpecific = transcendByCharId.get(charId) ?? [];
-  const pool =
+  const pool = (
     charSpecific.length > 0
       ? charSpecific
-      : (transcendByCharId.get('0') ?? []).filter((r) => num(r.BasicStar) === basicStar);
+      : (transcendByCharId.get('0') ?? []).filter((r) => num(r.BasicStar) === basicStar)
+  ).filter((r) => bool(r.UseTransStar) && num(r.TransStar) >= fromStar);
   const out: Record<string, TranscendStar> = {};
   for (const r of pool) {
     const star = num(r.TransStar);
@@ -546,7 +552,15 @@ export function computeCharacterIngredients(tables: IngredientsTables): {
       for (const f of Object.keys(evoMax) as (keyof StatBlock)[]) evoMax[f] += evoByLevel[k][f];
     }
     const baseForRate = { spd: base.spd.max + evoMax.spd };
-    const transcendByStar = extractTranscendByStar(transcendByCharId, basicStar, id);
+    // Transcendance d'un fusionné : échelle de l'origine, à partir de sa propre étoile.
+    const transcendByStar = fusionRow
+      ? extractTranscendByStar(
+          transcendByCharId,
+          num(templetById.get(evoCharId)?.BasicStar),
+          evoCharId,
+          basicStar,
+        )
+      : extractTranscendByStar(transcendByCharId, basicStar, id);
     const classPassive = extractClassPassive(row, skillsByID, buffsByID, baseForRate);
     const skill8ByLevel = extractSkill8ByLevel(
       row,

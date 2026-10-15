@@ -28,7 +28,6 @@ import { useTrackerState } from './use-tracker-state';
 export function HeroTrackerBrowser({
   heroes,
   rules,
-  transcend,
   items,
   elementNames,
   limitedTags,
@@ -75,7 +74,7 @@ export function HeroTrackerBrowser({
     onImport,
     toggle,
     withTarget,
-  } = useTrackerState({ heroes, rules, transcend, labels });
+  } = useTrackerState({ heroes, rules, labels });
   const { shopping, itemTotal, trackedRows, sortedRows, trackedTotal, pickable } = useRosterView({
     heroes,
     rules,

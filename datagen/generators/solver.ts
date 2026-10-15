@@ -738,6 +738,7 @@ export function buildSolver(inputs: {
   // ---- ingredients + codex ----
   const characterTemplet = loadTable('CharacterTemplet');
   const skillLevels = loadTable('CharacterSkillLevelTemplet');
+  const fusionTemplet = loadTable('CharacterFusionTemplet');
   const ingredientsResult = computeCharacterIngredients({
     characterTemplet,
     evoStats: loadTable('CharacterEvolutionStatTemplet'),
@@ -747,7 +748,7 @@ export function buildSolver(inputs: {
     buffs: buffTemplet,
     awakLevels: loadTable('CharacterAwakeningLevelTemplet'),
     awakNodes: loadTable('CharacterAwakeningNodeTemplet'),
-    fusionTemplet: loadTable('CharacterFusionTemplet'),
+    fusionTemplet,
   });
   emit('codex-curve.json', ingredientsResult.codexByLevel satisfies CodexLevel[]);
 
@@ -828,6 +829,11 @@ export function buildSolver(inputs: {
   const damage = buildDamageCharacters();
   const withoutBestSkill: string[] = [];
 
+  // Étoile de base d'un Core Fusion : celle de son ORIGINE — le client y lit
+  // transcendance et limit break (`transcendByStar` suit la même règle).
+  const templetById = new Map(characterTemplet.map((r) => [r.ID, r]));
+  const originOf = new Map(fusionTemplet.map((r) => [r.ChangeCharID, r.CharacterID]));
+
   const characters: Record<string, unknown> = {};
   const unreleased: string[] = [];
   for (const c of characterTemplet) {
@@ -852,7 +858,7 @@ export function buildSolver(inputs: {
       nickname,
       cls: c.Class ?? null,
       element: c.Element ?? null,
-      star: Number(c.BasicStar) || null,
+      star: Number((templetById.get(originOf.get(c.ID) ?? '') ?? c).BasicStar) || null,
       ingredients: ing ?? null,
       recommendSetId:
         c.RecommandSetOptionID && c.RecommandSetOptionID !== '0' ? c.RecommandSetOptionID : null,

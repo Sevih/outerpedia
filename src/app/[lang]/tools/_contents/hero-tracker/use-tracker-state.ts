@@ -15,6 +15,7 @@
  */
 import { useCallback, useMemo, useState } from 'react';
 import { useStoredState } from '@/lib/client-storage';
+import { transcendLadder } from '@/lib/transcendence';
 import {
   MAX_SKILL,
   SKILL_SLOTS,
@@ -41,15 +42,23 @@ import {
   type HeroEntry,
   type ImportHero,
 } from './roster-import';
-import { SPEC } from './stores';
+import { trackerSpec } from './stores';
 
 export function useTrackerState({
   heroes,
   rules,
-  transcend,
   labels,
-}: Pick<HeroTrackerData, 'heroes' | 'rules' | 'transcend' | 'labels'>) {
-  const [store, setStore, ready] = useStoredState(SPEC);
+}: Pick<HeroTrackerData, 'heroes' | 'rules' | 'labels'>) {
+  // Spec construite UNE fois (initialiseur de `useState`) : sa migration v2 → v3
+  // lit la rareté et l'échelle de chaque héros, que le roster seul connaît.
+  const [spec] = useState(() => {
+    const byId = new Map(heroes.map((h) => [h.id, h]));
+    return trackerSpec((id) => {
+      const h = byId.get(id);
+      return h && { rarity: h.rarity, stars: transcendLadder(h.baseStar, h.id).map((s) => s.star) };
+    });
+  });
+  const [store, setStore, ready] = useStoredState(spec);
   const [query, setQuery] = useState('');
   const [axis, setAxis] = useState<NeedAxis | 'all'>('all');
   const [open, setOpen] = useState<string | null>(null);
@@ -67,9 +76,8 @@ export function useTrackerState({
   const heroById = useMemo(() => new Map(heroes.map((h) => [h.id, h])), [heroes]);
 
   const ladder = useCallback(
-    (hero: TrackedHero): TranscendStep[] =>
-      transcend.overrides[hero.id] ?? transcend.byStar[String(hero.rarity)] ?? [],
-    [transcend],
+    (hero: TrackedHero): TranscendStep[] => transcendLadder(hero.rarity, hero.id),
+    [],
   );
 
   const fullRules: GrowthRules = useMemo(
@@ -81,7 +89,7 @@ export function useTrackerState({
   const asTracked = useCallback(
     (h: HeroRow): TrackedHero => ({
       id: h.id,
-      rarity: h.rarity,
+      rarity: h.baseStar,
       element: h.element,
       ...(h.fusionLevels ? { fusionLevels: h.fusionLevels } : {}),
     }),

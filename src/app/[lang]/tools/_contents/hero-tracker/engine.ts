@@ -45,7 +45,10 @@ export interface HeroProgress {
 /** Ce qu'il faut connaître d'un héros pour chiffrer sa progression. */
 export interface TrackedHero {
   id: string;
-  /** Rareté de BASE (1/2/3) : clé des barèmes de skill et de limit break. */
+  /**
+   * Étoile de base de PROGRESSION (1/2/3), celle de l'ORIGINE pour un fusionné
+   * (`HeroRow.baseStar`) : clé des barèmes de skill et de limit break.
+   */
   rarity: number;
   /** Élément : le limit break se paie en mémoire de SON élément. */
   element: string;
@@ -159,14 +162,16 @@ export function heroNeed(
   };
 
   // ── Niveau : différence de deux CUMULS, plus les paliers de limit break
-  // franchis (un palier compte dès que la cible l'atteint, pas avant).
+  // franchis. Le palier `fromLevel → maxLevel` (`CharacterMaxLevelTemplet`) est
+  // dû pour DÉPASSER `fromLevel` : il compte si l'état n'y est pas encore passé
+  // et que la cible va au-delà — 105 → 108 doit le palier de 105.
   const maxLevel = rules.xpCurve.length;
   const fromLevel = clamp(state.level, 1, maxLevel);
   const toLevel = clamp(target.level, 1, maxLevel);
   if (toLevel > fromLevel) {
     need.xp = rules.xpCurve[toLevel - 1] - rules.xpCurve[fromLevel - 1];
     for (const step of rules.limitBreak[`${hero.rarity}_${hero.element}`] ?? []) {
-      if (step.maxLevel > fromLevel && step.maxLevel <= toLevel) {
+      if (fromLevel <= step.fromLevel && toLevel > step.fromLevel) {
         want('level', step.recallItemId, step.pieces);
         need.gold += step.price;
       }

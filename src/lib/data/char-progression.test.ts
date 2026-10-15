@@ -299,6 +299,41 @@ describe('getTranscendTiers (3★)', () => {
   });
 });
 
+describe('1★/2★ et Core Fusion d’origine 2★ — échelle et limit break du jeu', () => {
+  it('un 2★ a cinq crans, sans palier fantôme où ses stats retomberaient', () => {
+    const t = getStatLayers(CHARS['2000003']).transcend;
+    expect(t.map((x) => x.label)).toEqual(['2', '3', '4', '5', '6']);
+    t.slice(1).forEach((x, i) => expect(x.atkPM).toBeGreaterThan(t[i].atkPM));
+  });
+
+  it('Snow fusionné : paliers 3, 4, 6, 9 de son origine 2★, limit break 2★', () => {
+    expect(getStatLayers(CHARS['2700003']).transcend.map((x) => x.label)).toEqual([
+      '3',
+      '4',
+      '5',
+      '6',
+    ]);
+    const lb = computeStatSteps(CHARS['2700003']).steps.flatMap((s) =>
+      s.limitBreak ? [[s.limitBreak.pieces, s.limitBreak.price]] : [],
+    );
+    expect(lb).toEqual([
+      [40, 400000],
+      [80, 800000],
+      [180, 1600000],
+    ]);
+  });
+
+  it('Veronica fusionnée (origine 3★) garde l’échelle et le limit break 3★', () => {
+    const v = CHARS['2700037'];
+    expect(getStatLayers(v).transcend.map((x) => x.label)).toEqual(
+      getStatLayers(CHARS['2000073']).transcend.map((x) => x.label),
+    );
+    expect(computeStatSteps(v).steps.flatMap((s) => s.limitBreak?.pieces ?? [])).toEqual([
+      50, 100, 250,
+    ]);
+  });
+});
+
 describe('getSubstatFlatProfile — base aux paliers stables pour le verdict flat / %', () => {
   const char = CHARS['2000073'];
   const layers = getStatLayers(char);

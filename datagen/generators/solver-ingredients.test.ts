@@ -66,6 +66,35 @@ describe('computeCharacterIngredients — Core Fusion', () => {
   });
 });
 
+describe('computeCharacterIngredients — échelle de transcendance', () => {
+  // Barème 2★ du jeu : les lignes 5, 7, 8 existent, à `UseTransStar` faux.
+  const ladder2: Row[] = [2, 3, 4, 5, 6, 7, 8, 9].map((star) => ({
+    CharacterID: '0',
+    BasicStar: '2',
+    TransStar: String(star),
+    UseTransStar: [5, 7, 8].includes(star) ? 'False' : 'True',
+    RewardAtkRate: String(star * 10),
+  }));
+  const run = () =>
+    computeCharacterIngredients(
+      tables({
+        characterTemplet: [{ ...pcRow('2000003', 659), BasicStar: '2' }, pcRow('2700003', 757)],
+        fusionTemplet: [{ CharacterID: '2000003', ChangeCharID: '2700003' }],
+        transcendent: ladder2,
+      }),
+    ).characters;
+
+  it('un 2★ ne garde que les paliers que le jeu parcourt', () => {
+    expect(Object.keys(run()['2000003'].transcendByStar)).toEqual(['2', '3', '4', '6', '9']);
+  });
+
+  it("un fusionné d'origine 2★ suit l'échelle de son origine, à partir de sa propre étoile", () => {
+    const t = run()['2700003'].transcendByStar;
+    expect(Object.keys(t)).toEqual(['3', '4', '6', '9']);
+    expect(t['6'].atkPct).toBe(6);
+  });
+});
+
 describe('solver/characters.json — fusionnés des captures', () => {
   const chars = solverCharacters as unknown as Record<string, { ingredients: { base: unknown } }>;
   it.each([
@@ -74,5 +103,20 @@ describe('solver/characters.json — fusionnés des captures', () => {
     ['2700037', '2000037'], // Veronica
   ])('%s a la base de %s', (fused, origin) => {
     expect(chars[fused].ingredients.base).toEqual(chars[origin].ingredients.base);
+  });
+
+  it.each([
+    ['2700003', 2], // Snow, 2★ à l'origine
+    ['2700005', 2], // Lisha
+    ['2700037', 3], // Veronica
+  ])('%s : étoile de base et échelle de son origine (%i★)', (fused, star) => {
+    const c = solverCharacters as unknown as Record<
+      string,
+      { star: number; ingredients: { transcendByStar: Record<string, unknown> } }
+    >;
+    expect(c[fused].star).toBe(star);
+    expect(Object.keys(c[fused].ingredients.transcendByStar)).toEqual(
+      star === 2 ? ['3', '4', '6', '9'] : ['3', '4', '5', '6', '7', '8', '9'],
+    );
   });
 });

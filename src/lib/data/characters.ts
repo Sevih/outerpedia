@@ -137,6 +137,17 @@ export function getCharacter(id: string): Character | undefined {
   return CHARACTERS[id];
 }
 
+/**
+ * Étoile de base d'un perso pour la PROGRESSION — clé des barèmes de limit break
+ * (`${étoile}_${élément}`) et de skill. Un Core Fusion y prend celle de son
+ * ORIGINE : le client lit ces barèmes sur le templet d'origine (Snow et Lisha,
+ * 2★ à l'origine, paient le limit break 2★). La rareté AFFICHÉE (`rarity`, 3 pour
+ * un fusionné) ne change pas : filtres, tris et tier list la gardent.
+ */
+export function progressionStar(c: Pick<Character, 'rarity' | 'originalCharacter'>): number {
+  return (c.originalCharacter ? CHARACTERS[c.originalCharacter]?.rarity : undefined) ?? c.rarity;
+}
+
 /** Un perso de guide RÉSOLU : le record, son nom d'affichage, son lien de fiche. */
 export interface GuideCharacter {
   character: Character;
