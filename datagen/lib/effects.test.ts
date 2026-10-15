@@ -74,8 +74,8 @@ describe('classifyCategory', () => {
       classifyCategory({ BuffCCType: 'NONE', BuffDebuffType: 'DEBUFF_IGNORE_IMMUNE' } as Row),
     ).toBe('debuff');
   });
-  it('debuff via IsDebuff', () => {
-    expect(classifyCategory({ BuffDebuffType: 'BUFF', IsDebuff: 'True' } as Row)).toBe('debuff');
+  it('IsDebuff ignoré (colonne vide dans BuffTemplet) : BUFF reste buff', () => {
+    expect(classifyCategory({ BuffDebuffType: 'BUFF', IsDebuff: 'True' } as Row)).toBe('buff');
   });
   it('buff', () => {
     expect(classifyCategory({ BuffDebuffType: 'BUFF' } as Row)).toBe('buff');
@@ -129,7 +129,6 @@ describe('resolveEffect', () => {
       ApplyingType: 'OAT_RATE',
       Value: '-500',
       TargetType: 'ENEMY',
-      IsDebuff: 'True',
       BuffDebuffType: 'DEBUFF',
     } as Row);
     expect(eff).toMatchObject({ category: 'debuff', stat: 'def', mode: 'down', value: '50%' });
@@ -175,7 +174,6 @@ describe('effectShape', () => {
       TurnDuration: '2',
       TargetType: 'ENEMY',
       BuffDebuffType: 'DEBUFF',
-      IsDebuff: 'True',
       BuffID: '2000001_3_1',
     } as Row);
     expect(shape).toEqual({

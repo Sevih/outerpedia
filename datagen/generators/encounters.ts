@@ -104,8 +104,9 @@ export interface RankOption {
 }
 
 /**
- * Un PALIER de rencontre d'un mode à progression (guild dungeon, world boss,
- * singularity/Monad Gate, event challenge, adventure, exploration) : ces modes
+ * Un PALIER de rencontre d'un mode à progression (world boss, singularity/Monad
+ * Gate, adventure ; guild dungeon, event challenge et exploration sont ignorés à
+ * l'extraction, cf. `buildEncounters`) : ces modes
  * REDÉFINISSENT la rencontre par rang/palier — niveau du boss, PV, advantage
  * rates propres (REMPLACENT ceux du donjon) et passifs additionnels.
  */
@@ -335,9 +336,8 @@ export interface DungeonRef {
    * PV RÉELS du boss dans ce donjon. Sources : `EventBossDungeonTemplet.
    * BossMonsterHP` (CSV aligné au CSV `DungeonID` — joint challenge :
    * 2 000 000 en very hard), `GuildRaidGradeTemplet.BossMonsterHP` (guild raid
-   * saisonnier : un donjon PAR grade), `EventDungeonTemplet.BossHP` (challenge
-   * d'événement). Remplace les PV interpolés du templet. Saison la plus
-   * récente en cas de réutilisation du donjon.
+   * saisonnier : un donjon PAR grade). Remplace les PV interpolés du templet.
+   * Saison la plus récente en cas de réutilisation du donjon.
    */
   bossHp?: number;
   /** Paliers de rencontre des modes à progression (cf. `DungeonRank`). */
@@ -1327,25 +1327,13 @@ export function buildEncounters(): EncountersData {
       d.group = `${d.mode}:${id}`;
   }
 
-  // 3) Challenge d'événement : la saison (EventDungeonTemplet) porte le donjon
-  // (`ChallengeDungeonID`) + BossHP, ses paliers vivent dans
-  // EventRankChallengeTemplet (GroupID = GroupID de la saison).
-  const challengeRanks = groupBy(loadTable('EventRankChallengeTemplet'), 'GroupID');
-  for (const r of loadTable('EventDungeonTemplet')) {
-    const d = dungeons[r.ChallengeDungeonID ?? ''];
-    if (!d) continue;
-    if (num(r.BossHP)) d.bossHp = num(r.BossHP);
-    const ranks = challengeRanks.get(r.GroupID ?? '');
-    if (ranks?.length) d.ranks = ranks.map(rankOf);
-  }
-
-  // 4) Guild dungeon (élémentaire) : paliers de dégâts par donjon.
-  const guildRanks = groupBy(loadTable('GuildDungeonLevelTemplet'), 'GroupID');
-  for (const r of loadTable('GuildDungeonTemplet')) {
-    const d = dungeons[r.DungeonID ?? ''];
-    const ranks = guildRanks.get(r.GuilDungeonLevelGorupID ?? ''); // typo du jeu
-    if (d && ranks?.length) d.ranks = ranks.map(rankOf);
-  }
+  // Challenge d'événement, guild dungeon et exploration : pas de passe ici. Leurs
+  // modes sont ignorés à l'extraction (`ignore` de `mode-titles.json`), leurs
+  // donjons n'arrivent donc jamais jusqu'ici. Les rouvrir demande d'abord de
+  // trouver leurs PV ailleurs : `GuildDungeonLevelTemplet` et
+  // `EventRankChallengeTemplet` n'ont pas de `MaxHP`, `EventDungeonTemplet.BossHP`
+  // n'est lu par aucun code du client, et les PV d'un custom boss sont sa barre
+  // de dégâts (`CCustomBossStatValue`).
 
   // 5) World boss : la ligue porte le donjon, ses rangs (D…SSS) portent
   // niveau/PV/adv. Ligues croissantes → la plus récente l'emporte par donjon.
@@ -1405,22 +1393,6 @@ export function buildEncounters(): EncountersData {
   // licence, pas les stages (Masterless : 1,2,3,2,3,4…).
   for (const id of new Set([...seenStage].map((k) => k.split('|')[0])))
     dungeons[id].ranks?.sort((a, b) => (a.stage ?? 0) - (b.stage ?? 0));
-
-  // 8) Exploration : niveau du stage + adv propres par spot de combat.
-  const seenExpl = new Set<string>();
-  for (const r of loadTable('ExplorationStageTemplet')) {
-    if (r.SpotType !== 'ST_BATTLE') continue;
-    const d = dungeons[r.SpotValue ?? ''];
-    if (!d) continue;
-    const rank: DungeonRank = {};
-    if (num(r.ExplorationStageLevel)) rank.level = num(r.ExplorationStageLevel);
-    const adv = advOf(r);
-    if (adv) rank.adv = adv;
-    const key = `${r.SpotValue}|${JSON.stringify(rank)}`;
-    if (seenExpl.has(key)) continue;
-    seenExpl.add(key);
-    (d.ranks ??= []).push(rank);
-  }
 
   // --- invocations (heuristique texte, cf. en-tête) ------------------------------
 

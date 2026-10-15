@@ -48,9 +48,11 @@ les preuves et les décisions vivent dans le tri consolidé de sevih-tool
 - [ ] **Persos (B, build)** : O1, O2, O10. **Gacha (C)** : M7.
 - [ ] **Contrat solver, L1 d'abord** : `schema` et `resVersion` dans
       `solver/version.json` avant tout changement de forme (C1, M2, M3,
-      vitesse en %, noyau par niveau, `stat-keys.json`).
-- [ ] **Tests-gardes et code mort** : 7 règles recopiées sans test, trois
-      passes mortes d'`encounters.ts`.
+      vitesse en %, noyau par niveau, `stat-keys.json`). FAIT côté
+      outerpedia (A56) ; reste la lecture côté gear-solver (G1), puis les
+      changements de forme.
+- [ ] **Tests-gardes** : 7 règles recopiées sans test. Code mort FAIT
+      (A57, 15/10).
 
 ## 🧰 Outil quick
 

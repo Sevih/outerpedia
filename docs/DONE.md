@@ -7,6 +7,85 @@
 
 ## 2026-10-15
 
+- **Code mort de datagen : trois passes d'`encounters.ts` et `IsDebuff` de
+  `classifyCategory` retirés (lot A57, constats J9 et J11 de la revue de
+  génération des données).** Quoi : dans `datagen/generators/encounters.ts`,
+  les passes 3 (challenge d'événement : `EventDungeonTemplet`,
+  `EventRankChallengeTemplet`), 4 (guild dungeon : `GuildDungeonTemplet`,
+  `GuildDungeonLevelTemplet`) et 8 (exploration : `ExplorationStageTemplet`)
+  disparaissent ; un commentaire court les remplace. Pourquoi : leurs modes
+  sont dans `ignore` de `mode-titles.json`, leurs donjons sont écartés plus
+  haut (`ignoredModes`) et elles n'écrivaient jamais rien ; réactivées, elles
+  seraient fausses (`GuildDungeonLevelTemplet` et `EventRankChallengeTemplet`
+  sans `MaxHP`, `EventDungeonTemplet.BossHP` lu par aucun code du client, PV
+  d'un custom boss = barre de dégâts, `CCustomBossStatValue`) — c'est ce que
+  dit le commentaire, comme condition à leur réouverture. La doc de `bossHp`
+  perd la source `EventDungeonTemplet.BossHP`, celle de `DungeonRank` ne liste
+  plus ces trois modes parmi ceux qui émettent des paliers ; `rankOf`, `advOf`
+  et `groupBy` restent (world boss, singularity, adventure), `datagen/contracts/`
+  ne les nommait pas. Dans `datagen/lib/effects.ts`, `classifyCategory` perd
+  `bool(row.IsDebuff) ||` : la colonne `IsDebuff` de `BuffTemplet` est vide et
+  le critère du client est déjà `startsWith('DEBUFF')` ; sa doc et l'en-tête
+  du module le disent. Le test « debuff via IsDebuff » devient son inverse
+  (`BUFF` + `IsDebuff: 'True'` reste `buff`), et les fixtures de
+  `resolveEffect` / `effectShape` perdent leur `IsDebuff: 'True'`. Le
+  `IsDebuff` de `BuffToolTipTemplet` (vraie colonne) n'est pas touché.
+  **Vérifié** : sortie inchangée sans lancer `datagen:build` — un script
+  jetable hors dépôt (`pnpm exec tsx`) a écrit le JSON de `buildEncounters()`
+  avant et après : `cmp` sans écart (5 252 029 octets chacun) ; le même script
+  compte 0 ligne de `BuffTemplet` (sur 11 340) où `IsDebuff` est non vide.
+  `pnpm typecheck` (`tsc --noEmit && tsc --noEmit -p datagen/tsconfig.json &&
+tsc --noEmit -p scripts/tsconfig.json`) et `pnpm lint` (`eslint`) sans
+  sortie d'erreur ; `pnpm test` : « Tests 3850 passed (3850) » ;
+  `vitest run datagen/lib/effects.test.ts datagen/generators` : « Tests 384
+  passed (384) ». **Laissé** (hors périmètre) : `datagen/damage/buffs.ts:130`
+  lit la même colonne vide (`isDebuff` n'est jamais émis dans
+  `damage/buffs.json`) ; `effects.ts:541` lit aussi `bool(b.IsDebuff)` sur une
+  ligne de `BuffTemplet` (effets mécaniques `SYS_`), toujours faux, la
+  nature y vient de `[DEBUFF` puis du vote majoritaire ; la liste `ignore` de
+  `mode-titles.json` et les autres constats de J9 à J12. Le TODO garde les
+  tests-gardes (lot B50).
+
+- **Contrat solver : `schema` et `resVersion` dans `solver/version.json`
+  (lot A56, L1).** Quoi : `version.json` passe de `{hash, builtAt}` à
+  `{schema, resVersion, hash, builtAt}`, dans cet ordre de clés ; `schema` =
+  `SOLVER_SCHEMA = 1`, constante exportée de `datagen/generators/solver.ts`
+  (laissée là : le module ne charge aucune table à l'import —
+  `solver.test.ts` l'importe et passe avec `GAMEDATA_ROOT` vers un dossier
+  vide, 15 tests) ; `resVersion` = celle de `buildGameVersion()`, passée à
+  `buildSolver` par ses deux appelants (`datagen/build.ts` réutilise la
+  sienne, `datagen/sync-derived.ts` l'appelle) ; absente → `buildSolver`
+  lève une erreur claire avant tout calcul, pas de `version.json` sans elle.
+  Pourquoi : gear-solver tire ces tables de `main` sur GitHub, c'est le push
+  qui livre le contrat à toutes les installations ; sans champ de forme, un
+  changement de forme les cassait toutes à la fois — G1 refusera un schéma
+  plus récent que ce qu'il sait lire et gardera son cache. Comment : `hash`
+  reste le sha256 des 18 tables seules et `builtAt` reste idempotent — ni
+  `schema` ni `resVersion` n'entrent dans le hash (sinon chaque patch du jeu
+  ferait tout re-télécharger) ; la règle d'évolution est écrite dans le
+  paragraphe « ⚠ CONTRAT app externe » de l'en-tête de `solver.ts` et
+  rappelée en une ligne au-dessus de `SOLVER_SCHEMA` : `schema` ne monte que
+  pour un changement mal lu par une ancienne app (champ ou fichier retiré ou
+  renommé, sens changé — exemple T16), jamais pour un ajout ; ordre (a)
+  ajout à côté de l'ancien, (b) gear-solver qui lit le nouveau champ et
+  accepte `schema` + 1 publié, (c) seulement ensuite retrait et montée de
+  `schema` ; les versions 1.8.1 et avant ne sont tenues que par (a) ; jamais
+  (c) avant (b), un push part tel quel. L'en-tête de `solver.test.ts` suit.
+  Régénération : `data/generated/` propre avant, `pnpm datagen:sync-derived`
+  (42 lignes damage exactes, « solver/ re-dérivé (18 fichiers, hash
+  e0d0b39edac2) ») ; seul `data/generated/solver/version.json` a bougé —
+  `git diff` : `+  "schema": 1,` et `+  "resVersion": "1.11.407",`, `hash`
+  `e0d0b39edac2` et `builtAt` `2026-10-09T12:41:11.159Z` inchangés : les
+  installations existantes ne re-téléchargent rien. Vérification : le test
+  « version » de `solver.test.ts` exige les clés exactement `schema,
+resVersion, hash, builtAt`, `schema` entier ≥ 1 égal à `SOLVER_SCHEMA`,
+  `resVersion` en `X.Y.Z` égale à `data/generated/game-version.json`, `hash`
+  et `builtAt` comme avant ; `pnpm typecheck` et `pnpm lint` verts (sans
+  sortie après la commande), `pnpm test` « Tests 3850 passed (3850) ».
+  Laissé : tout changement de forme des tables (C1, M2, M3, vitesse en %,
+  noyau par niveau, `stat-keys.json`), qui attend G1 ; la copie
+  `data/extracted/solver/` (gitignorée) a été réécrite par le même run.
+
 - **Relecture des lots A55, C16 et G1 (Opus) — bannière du dernier jour,
   `/item` au niveau déclaré, déblocage, quirks, `<color>` imbriqués ; passifs
   de boss sous une seule condition ; lecture du `schema` du contrat dans

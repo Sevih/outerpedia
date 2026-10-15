@@ -7,7 +7,8 @@
  *   1. CLASSIFICATION  — `classify(row)` → { family, category }.
  *      - `family`   : ~16 grandes familles dérivées du `Type` (stat, dot, heal…).
  *      - `category` : buff | debuff | cc | neutral, dérivée de BuffDebuffType /
- *                     BuffCCType / IsDebuff (la nature réelle, fiable, du jeu).
+ *                     BuffCCType (la nature réelle, fiable, du jeu ; la colonne
+ *                     `IsDebuff` de `BuffTemplet` est vide, jamais lue).
  *
  *   2. GLOSSAIRE       — `buildEffectGlossary()` : `BuffToolTipTemplet` →
  *      catalogue des EFFETS NOMMÉS (« Burned », « Increased Defense »), variantes
@@ -196,14 +197,16 @@ export function classifyFamily(type: string): EffectFamily {
 /**
  * Catégorie (nature) d'un buff, dérivée des champs fiables du jeu :
  *   - contrôle si `BuffCCType` ≠ NONE (étourdit/gèle/etc., bloque le tour) ;
- *   - debuff si `IsDebuff` ou `BuffDebuffType` commence par DEBUFF ;
+ *   - debuff si `BuffDebuffType` commence par DEBUFF ;
  *   - buff si `BuffDebuffType` = BUFF ;
  *   - neutral sinon (NEUTRAL / NEUTRAL2).
+ * `IsDebuff` n'est pas lu : la colonne est vide sur toutes les lignes de
+ * `BuffTemplet`, et le critère du client est déjà `startsWith('DEBUFF')`.
  */
 export function classifyCategory(row: Row): EffectCategory {
   if ((row.BuffCCType ?? 'NONE') !== 'NONE') return 'cc';
   const dt = row.BuffDebuffType ?? '';
-  if (bool(row.IsDebuff) || dt.startsWith('DEBUFF')) return 'debuff';
+  if (dt.startsWith('DEBUFF')) return 'debuff';
   if (dt === 'BUFF') return 'buff';
   return 'neutral';
 }
