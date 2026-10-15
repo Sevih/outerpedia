@@ -7,6 +7,21 @@
 
 ## 2026-10-15
 
+- **Relecture du lot S2 (Opus) — aperçus bornés, limiteur par préfixe et
+  quota d'écriture, nettoyeur des notes de patch en liste blanche, seconde
+  garde `IS_DEV`, forme des codes promo et date réelle : validé.** Un commit
+  (`e759a939`), ni `package.json` ni lock. **Contrôles sur HEAD** :
+  typecheck, lint, format:check verts ; `pnpm test` 220 fichiers / 3817
+  tests ; `vitest run scripts/quick` 8 / 1146. **Liste vivante des coupons**
+  : l'agent signalait MAY2026T (fin `2026-06-31`) sur R2, qui aurait fait
+  refuser toute écriture de coupon après le déploiement ; Sevih l'a corrigé
+  par le bot. Vérifié le 15/10 sur R2 : 103 coupons, tous au format
+  `[A-Z0-9]{4,32}` et à dates réelles, MAY2026T au `2026-06-30`, identique à
+  l'instantané committé. Le fichier `data/curated/coupons.json` de l'arbre
+  de travail avait été réécrit avec l'ancienne date (relecture de quick
+  avant la correction) : remis à la version committée, égale à R2. **À
+  noter** : l'agent a tenté une écriture sur R2, refusée ; ce n'était pas
+  dans son lot. **Suite** : aucun lot ouvert.
 - **Aperçus publics bornés, limiteur par préfixe et quota d'écriture,
   nettoyeur des notes de patch en liste blanche, seconde garde `IS_DEV`,
   forme des codes promo et date réelle.** Cinq points d'un même lot.
