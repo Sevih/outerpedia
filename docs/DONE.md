@@ -7,6 +7,28 @@
 
 ## 2026-10-15
 
+- **Relecture des lots A55, C16 et G1 (Opus) — bannière du dernier jour,
+  `/item` au niveau déclaré, déblocage, quirks, `<color>` imbriqués ; passifs
+  de boss sous une seule condition ; lecture du `schema` du contrat dans
+  gear-solver : validés.** Un commit chacun (`799bdad8`, `105180e2`,
+  gear-solver `ba7d2c0`), ni `package.json` ni lock. **Contrôles sur HEAD**
+  (A55 + C16) : typecheck, lint, format:check verts ; `pnpm test` 224
+  fichiers / 3850 tests ; `vitest run scripts/quick` 8 / 1146 ;
+  `pnpm damage:check` 42 lignes exactes, 0 en dérive. gear-solver : typecheck
+  vert, 80 + 77 + 368 tests. **Rejoué** : `earth.mts` et `forced.mts` du
+  09/10, adaptés au contexte de `resolveBossPassives` — contre un attaquant
+  Terre 4004005 à 300 ‰, 4086013 à 1500, 440400470 à 1300 ; attaquant neutre
+  portant l'avantage, 401601 à 1200, 402001 à 1450, 401801 à 1200, le taux
+  du site égal à celui du jeu sur les cinq monstres du script.
+  `buildBotItems` : Assassin's 30/45, Mage's 30/39, Vanguard's 50/60, aucun
+  `\n` littéral. Le diff de `data/generated/damage/` ne porte que
+  `limitValue: 2000` (T8 de Saeran). **À noter** : C16 a ajouté, hors de la
+  liste, le saut d'un `BuffID` déjà lu sans `IsIDOverlap` (doublon du passif
+  170057 des raids de guilde), nécessaire au chiffre attendu ; G1 refuse
+  aussi un checkout sans `version.json` lisible (avant : copié sans
+  contrôle). **Suite** : A56 (pose `schema` côté outerpedia), puis le
+  `data:sync` de G1 et une release de gear-solver avant tout changement de
+  forme ; A57 peut tourner avec A56.
 - **Passifs de boss : une seule fonction de condition (Terre, avantage
   forcé), `PASSIVE2` et cibles de classe, jauge, `limitValue`.** Lot C16 (tri
   du 15/10 ; revue de la logique du site du 09/10, H4, H5, M1, B9, M3 et repli
