@@ -147937,6 +147937,7 @@
         "buffDebuffType": "BUFF",
         "applyingType": "OAT_RATE",
         "value": 200,
+        "limitValue": 2000,
         "callerSkillType": "SKT_ALL",
         "createType": "PASSIVE",
         "turnDuration": -1,

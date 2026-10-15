@@ -36,7 +36,18 @@ export interface ActiveBuff {
    * — absent : replié sur l'attaquant du contexte.
    */
   caster?: { maxHP: number; hp: number };
+  /** `BuffID` — clé du cumul plafonné des familles `*_LIMIT` (§ 9.1). */
+  id?: string;
+  /** `LimitValue` — plafond du cumul par `BuffID` des familles `*_LIMIT`
+   *  (absent = 0 : le jeu plafonne alors à 0). */
+  limitValue?: number;
 }
+
+/** Familles § 9.1 au cumul PLAFONNÉ par `BuffID` (164/165, 1.4.15). */
+export const LIMIT_FAMILIES: ReadonlySet<string> = new Set([
+  'BT_DMG_TARGET_BUFF_LIMIT',
+  'BT_DMG_TARGET_DEBUFF_LIMIT',
+]);
 
 /** § 14.1 — CBuff.get_Value : valeur × stacks courants. */
 export function effectiveValue(buff: ActiveBuff): number {
@@ -134,6 +145,18 @@ export function findBuffAdditionalDamage(
   ctx: AdditionalDamageContext,
 ): number {
   let sum = 0;
+  // Cumul par BuffID des familles `*_LIMIT` (dictionnaire local à l'appel,
+  // comme le binaire) : `cumul = min(cumul + compte × Value, LimitValue)`, la
+  // contribution est l'écart — plusieurs instances d'un même buff ne passent
+  // jamais le plafond ensemble.
+  const limited = new Map<string, number>();
+  const addLimited = (b: ActiveBuff, count: number): void => {
+    const key = b.id ?? b.type;
+    const prev = limited.get(key) ?? 0;
+    const next = Math.min(prev + count * effectiveValue(b), b.limitValue ?? 0);
+    sum += next - prev;
+    limited.set(key, next);
+  };
   for (const b of buffs) {
     const v = effectiveValue(b);
     switch (b.type) {
@@ -167,6 +190,12 @@ export function findBuffAdditionalDamage(
         break;
       case 'BT_DMG_TARGET_DEBUFF':
         sum += v * (ctx.defenderDebuffCount ?? 0);
+        break;
+      case 'BT_DMG_TARGET_BUFF_LIMIT':
+        addLimited(b, ctx.defenderBuffCount ?? 0);
+        break;
+      case 'BT_DMG_TARGET_DEBUFF_LIMIT':
+        addLimited(b, ctx.defenderDebuffCount ?? 0);
         break;
       case 'BT_DMG_OWNER_TEAM_BUFF':
         sum += v * (ctx.casterTeamBuffCount ?? 0);

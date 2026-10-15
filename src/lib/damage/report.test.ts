@@ -173,7 +173,7 @@ describe('report — buildSkillReport', () => {
     expect(state.expectedDamage).toBeCloseTo(expected, 9);
   });
 
-  it('défenseur invincible : branches non émises, dégâts 0 — la jauge reste servie', () => {
+  it('défenseur invincible : branches non émises, dégâts 0, jauge 0 (dégâts > 0 requis)', () => {
     const scenario = baseScenario();
     scenario.defenderBuffs = [{ type: 'BT_INVINCIBLE', value: 0 }];
     const report = buildSkillReport(
@@ -187,7 +187,15 @@ describe('report — buildSkillReport', () => {
     expect(report.defenderInvincible).toBe(true);
     expect(report.states[0].branches).toEqual([]);
     expect(report.states[0].expectedDamage).toBe(0);
-    expect(report.weaknessGaugeDamage).toBe(30);
+    // Le jeu ne réduit la jauge que dans la branche « dégâts > 0 »
+    // (CBattleManager.ProcessDamageSimulator) : rien sous invincibilité…
+    expect(report.weaknessGaugeDamage).toBe(0);
+    // … alors que le même coup sans elle la réduit.
+    scenario.defenderBuffs = [];
+    expect(
+      buildSkillReport({ skillFactor: 1000, wgReduce: 30, states: [] }, scenario)
+        .weaknessGaugeDamage,
+    ).toBe(30);
     // WG invincible, lui, coupe la jauge.
     scenario.defenderBuffs = [{ type: 'BT_WG_INVINCIBLE', value: 0 }];
     expect(

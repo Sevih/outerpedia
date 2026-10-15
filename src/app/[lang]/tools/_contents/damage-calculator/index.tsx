@@ -644,22 +644,33 @@ export default async function DamageCalculator({ lang }: { lang: Lang }) {
   // Références d'effets résolues (conditions `*HAS_BUFF*` + DoT des skills) :
   // cond-names.ts, prédicat partagé avec le client via `conditionBuffRef`.
   const effectRefs = buildEffectRefs(DMG_BUFFS, GLOSS, lang);
+  // Classes du binaire → noms localisés du glossaire système (Striker =
+  // CCT_ATTACKER en interne, Healer = CCT_PRIEST).
+  const classNames: Record<string, string> = {
+    CCT_DEFENDER: t('sys.class.defender'),
+    CCT_ATTACKER: t('sys.class.striker'),
+    CCT_RANGER: t('sys.class.ranger'),
+    CCT_MAGE: t('sys.class.mage'),
+    CCT_PRIEST: t('sys.class.healer'),
+  };
   const passivesCache = new Map<string, DcBossPassive[]>();
   const bossPassiveChips = (bossId: string): DcBossPassive[] => {
     const hit = passivesCache.get(bossId);
     if (hit) return hit;
     const out: DcBossPassive[] = [];
-    for (const e of staticBossPassives(bossId, DMG_TARGETS, DMG_BUFFS)?.entries ?? []) {
+    const entries = staticBossPassives(bossId, DMG_TARGETS, DMG_BUFFS)?.entries ?? [];
+    for (const [entry, e] of entries.entries()) {
       const nameRec = MONSTER_SKILLS[e.skillId]?.name;
       // Condition en clair sur la chip : celle de la ligne, précédée du gate
       // d'enrage quand le buff vient du skill d'enrage. `TARGET_ELEMENT` :
       // gabarit `{el}` rempli avec l'élément CET_* de `ConditionValue`
-      // (égalité stricte, binaire `CheckElementEqual` — 24/08/2026).
+      // (égalité stricte, binaire `CheckElementEqual` — 24/08/2026 ; valeur
+      // absente = 0 = Terre, l'extracteur omet les zéros).
       const ELEMENT_SLUGS = ['earth', 'water', 'fire', 'light', 'dark'];
       const condLabel = (): string | undefined => {
         if (e.condition === undefined || e.condition === 'OWNER_RAGE') return undefined;
         if (e.condition === 'TARGET_ELEMENT') {
-          const slug = e.conditionValue !== undefined ? ELEMENT_SLUGS[e.conditionValue] : undefined;
+          const slug = ELEMENT_SLUGS[e.conditionValue ?? 0];
           const el = slug ? t(`sys.element.${slug}` as Parameters<typeof t>[0]) : '?';
           return t(k('context.cond.target_element')).replace('{el}', el);
         }
@@ -668,9 +679,12 @@ export default async function DamageCalculator({ lang }: { lang: Lang }) {
       const condText = condLabel();
       const condParts = [
         ...(e.rage ? [condLabels.OWNER_RAGE] : []),
+        ...(e.targetClass !== undefined ? [classNames[e.targetClass] ?? e.targetClass] : []),
         ...(condText !== undefined ? [condText] : []),
       ];
       out.push({
+        entry,
+        buffId: e.buffId,
         name: nameRec ? lRec(nameRec, lang) || nameRec.en || e.skillId : e.skillId,
         side: e.side === 'attacker' ? 'attacker' : 'target',
         label: passiveLabel(e.buff),
@@ -680,6 +694,7 @@ export default async function DamageCalculator({ lang }: { lang: Lang }) {
         ...(e.buff.type === 'BT_STAT' && e.buff.stat !== undefined ? { stat: e.buff.stat } : {}),
         ...(e.condition !== undefined ? { condition: e.condition } : {}),
         ...(e.conditionValue !== undefined ? { conditionValue: e.conditionValue } : {}),
+        ...(e.targetClass !== undefined ? { targetClass: e.targetClass } : {}),
         ...(condParts.length ? { cond: condParts.join(' · ') } : {}),
         ...(e.rage ? { rage: true as const } : {}),
       });
@@ -1041,15 +1056,7 @@ export default async function DamageCalculator({ lang }: { lang: Lang }) {
       stackBuffs: t(k('context.stack_buffs')),
       stackBuffsHint: t(k('context.stack_buffs_hint')),
       dmgWord: t(k('context.dmg_word')),
-      // Classes du binaire → noms localisés du glossaire système (Striker =
-      // CCT_ATTACKER en interne, Healer = CCT_PRIEST).
-      classNames: {
-        CCT_DEFENDER: t('sys.class.defender'),
-        CCT_ATTACKER: t('sys.class.striker'),
-        CCT_RANGER: t('sys.class.ranger'),
-        CCT_MAGE: t('sys.class.mage'),
-        CCT_PRIEST: t('sys.class.healer'),
-      },
+      classNames,
       stackMax: t(k('context.stack_max')),
       ownBuffs: t(k('context.own_buffs')),
       ownDebuffs: t(k('context.own_debuffs')),

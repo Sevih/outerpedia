@@ -37,6 +37,9 @@ export interface DamageBuffLevel {
   stat?: string;
   applyingType?: string;
   value?: number;
+  /** `LimitValue` — plafond du cumul par `BuffID` des familles `*_LIMIT`
+   *  (164/165, spec § 9.1) ; absent = 0. */
+  limitValue?: number;
   /** Skills déclencheurs/portée (`SKT_*`, CSV brut) — conditions d'application. */
   callerSkillType?: string;
   targetSkillType?: string;
@@ -91,6 +94,7 @@ function buffLevel(r: Row): DamageBuffLevel {
     ...opt(!!r.StatType && r.StatType !== 'ST_NONE', 'stat', r.StatType),
     ...opt(!!r.ApplyingType && r.ApplyingType !== 'OAT_NONE', 'applyingType', r.ApplyingType),
     ...opt(!!r.Value && r.Value !== '0', 'value', num(r.Value)),
+    ...opt(num(r.LimitValue) !== 0, 'limitValue', num(r.LimitValue)),
     ...opt(
       !!r.CallerSkillType && r.CallerSkillType !== 'SKT_NONE',
       'callerSkillType',

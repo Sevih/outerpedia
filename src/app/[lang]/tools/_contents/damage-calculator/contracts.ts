@@ -143,9 +143,13 @@ export interface DcSpawn {
 
 /** Passif de BOSS (lib passives.ts) — chip AUTO de la section buff/débuff :
  *  posé par le boss lui-même, jamais togglable (en jeu il est permanent et
- *  indélébile). La condition élémentaire brute est évaluée CLIENT contre
- *  l'attaquant courant (même relation § 6 que le moteur). */
+ *  indélébile). Son état (actif ou tu) est celui que le MOTEUR calcule pour
+ *  le scénario courant (`report.bossPassives`, entrée `entry`). */
 export interface DcBossPassive {
+  /** Index de l'entrée dans `staticBossPassives` — même ordre que
+   *  `report.bossPassives.entries` ; `buffId` garde la jointure. */
+  entry: number;
+  buffId: string;
   /** Nom localisé du passif porteur (« Starving Devil », « Enraged »). */
   name: string;
   /** Qui le subit : l'équipe du joueur (attacker) ou le boss (target). */
@@ -160,6 +164,8 @@ export interface DcBossPassive {
   condition?: string;
   /** `ConditionValue` de la ligne (élément CET_* pour `TARGET_ELEMENT`). */
   conditionValue?: number;
+  /** Cible `ENEMY_TEAM_<CLASSE>` : classe `CCT_*` du seul attaquant touché. */
+  targetClass?: string;
   /** Libellé LISIBLE de la condition (localisé serveur) — affiché sur la chip
    *  pour dire POURQUOI elle est active ou barrée (Sevih 17/08/2026). */
   cond?: string;

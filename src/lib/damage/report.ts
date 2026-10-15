@@ -21,8 +21,9 @@
  *  - Contexte absent = contribution 0 (jamais deviné) : les agrégats § 9
  *    lisent le contexte explicite du scénario, comme `aggregate.ts`.
  *  - Défenseur invincible (§ 7 étape 2) : une seule issue, dégâts nuls —
- *    les branches ne sont pas émises (les dégâts de jauge, eux, ne dépendent
- *    que de BT_WG_INVINCIBLE, § 11).
+ *    les branches ne sont pas émises, et la jauge ne bouge pas : le jeu ne la
+ *    réduit que dans la branche « dégâts > 0 » (`CBattleManager.
+ *    ProcessDamageSimulator`) — dégâts de jauge 0.
  */
 
 import {
@@ -405,6 +406,14 @@ export function buildSkillReport(
   });
 
   if (flags.defenderInvincible) {
+    // Jauge : réduite seulement quand le coup inflige des dégâts — sous
+    // invincibilité, rien (ProcessDamageSimulator, branche « dégâts > 0 »).
+    wgTrace?.push({
+      ref: '§ 11',
+      label: 'jauge : défenseur invincible, aucun dégât → 0',
+      in: { computed: weaknessGaugeDamage },
+      out: 0,
+    });
     return {
       states: skill.states.map((s) => {
         const factor = stateTotalFactor(s);
@@ -417,7 +426,7 @@ export function buildSkillReport(
           expectedDamage: 0,
         };
       }),
-      weaknessGaugeDamage,
+      weaknessGaugeDamage: 0,
       defenderInvincible: true,
       ...(wgTrace ? { wgTrace } : {}),
     };
@@ -775,14 +784,15 @@ export interface DotLineInput {
   /** Stat que le BINAIRE lit pour ce type au moment du TICK (jump table de
    *  `ProcessDamageOverTime`, désassemblée le 24/08/2026) — l'ATK pour
    *  BURN, la stat de la LIGNE pour BLEED/POISON/LIGHTNING/PUNISH, les PV
-   *  max du poseur pour CURSE, l'Effectiveness pour le DoT custom 2000092. */
+   *  max de la CIBLE pour CURSE (C# du 26/08/2026), l'Effectiveness pour le
+   *  DoT custom 2000092. */
   statValue: number;
   /**
    * Forme du tick (jump table 56..62 du binaire) :
    * - `defense` (défaut) : `CalcDamageDOT` § 11 — défense (avec pénétration)
    *   + DMG_REDUCE cap 900 (BLEED / POISON / LIGHTNING / PUNISH).
    * - `flat` : `MulPermille(stat, rate)` SANS défense ni réduction — BURN
-   *   (ATK), CURSE (PV max du poseur, cappé par `capValue`) et le DoT custom
+   *   (ATK), CURSE (PV max de la cible, cappé par `capValue`) et le DoT custom
    *   2000092 (Effectiveness). PROUVÉ in-game 24/08/2026 : Eternal Bleeding
    *   = 2 × 7000 ‰ × 636 EXACT, sans le terme de défense d'Ars Nova.
    */

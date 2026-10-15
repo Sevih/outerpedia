@@ -19,7 +19,8 @@
  *     simulés — remontés `dynamic` (ex. le marking de Rampaging Caracal se
  *     représente par la chip « cible marquée ») ; les procs hors-dégâts
  *     (soins, CP/AP, jauge d'action…) sont ignorés silencieusement ;
- *   - `BT_WG_*` : agrégation de la jauge non désassemblée (§ 12.3) →
+ *   - `BT_WG_DMG` du porteur : entrée côté attaquant, lue par la jauge
+ *     (CalcDamageWG, spec § 11) ; les autres `BT_WG_*` sur le porteur →
  *     unresolved ; conditions non évaluables (§ 12.1) → unresolved.
  *
  * Sélections de niveau (spec § 17.5, prouvé binaire) :
@@ -40,11 +41,14 @@
  * `CHARACTER_ELEMENT_TYPE` de la CIBLE (EARTH=0, WATER=1, FIRE=2, LIGHT=3,
  * DARK=4 — dump.cs ; valeur absente = 0 = terre). Corroboration : la desc
  * officielle de l'EE 2000019 (« damage dealt to Fire enemies ») porte
- * `BuffConditionValue = 2` = CET_FIRE.
+ * `BuffConditionValue = 2` = CET_FIRE. Les conditions élémentaires passent
+ * par `elementConditionMet` (passives.ts), la fonction partagée ; la
+ * supériorité forcée de l'attaquant y est réappliquée par inputs.ts (le
+ * drapeau dépend des entrées collectées ici).
  */
 
-import type { ActiveBuff } from './aggregate';
-import { passiveConditionMet } from './passives';
+import { LIMIT_FAMILIES, type ActiveBuff } from './aggregate';
+import { elementConditionMet, TEAM_CLASS_TARGETS } from './passives';
 import { Element } from './types';
 import type {
   DamageBuffsData,
@@ -220,6 +224,8 @@ const ATTACKER_TYPES = new Set([
   'BT_DMG_OWNER_DEBUFF',
   'BT_DMG_TARGET_BUFF',
   'BT_DMG_TARGET_DEBUFF',
+  'BT_DMG_TARGET_BUFF_LIMIT',
+  'BT_DMG_TARGET_DEBUFF_LIMIT',
   'BT_DMG_OWNER_TEAM_BUFF',
   'BT_DMG_MY_TEAM_DECREASE',
   'BT_DMG_OWNER_LOST_HP_RATE',
@@ -234,6 +240,8 @@ const ATTACKER_TYPES = new Set([
   'BT_DMG_ELEMENT_ENCHANT',
   'BT_DMG_ENEMY_TEAM_DECREASE',
   'BT_SWAP_STAT_ATTACK',
+  // Jauge (CalcDamageWG § 11) : ajouté aux dégâts de jauge du coup.
+  'BT_WG_DMG',
 ]);
 
 /** Types côté DÉFENSEUR consommés (mêmes que passives.ts § 9.2/9.3). */
@@ -266,26 +274,6 @@ const DOT_ENHANCE_TYPES = new Set([
   'BT_ENHANCE_ALL',
   'BT_DOT_CURSE_CAP',
 ]);
-
-const ELEMENT_CONDITIONS = new Set([
-  'ATTACKER_ELEMENT_WIN',
-  'ATTACKER_ELEMENT_EQUAL',
-  'ATTACKER_ELEMENT_LOSE',
-]);
-
-/**
- * Cibles d'équipe FILTRÉES PAR CLASSE (`CCT_*` du receveur). La sémantique
- * « classe » (et non « membre en train d'agir ») est prouvée par la desc
- * officielle du S2 d'Eris : « increases the damage of ally Strikers » =
- * `MY_TEAM_ATTACKER` (2000117_2_5) — Striker = `CCT_ATTACKER` en interne.
- */
-const TEAM_CLASS_TARGETS: Record<string, string> = {
-  MY_TEAM_DEFENDER: 'CCT_DEFENDER',
-  MY_TEAM_ATTACKER: 'CCT_ATTACKER',
-  MY_TEAM_RANGER: 'CCT_RANGER',
-  MY_TEAM_MAGE: 'CCT_MAGE',
-  MY_TEAM_PRIEST: 'CCT_PRIEST',
-};
 
 /**
  * Conditions d'ÉTAT DE COMBAT (mécaniques perso — ressource unique, buffs
@@ -384,10 +372,15 @@ export function gearConditionMet(
   ownerIsBoss?: boolean,
 ): boolean | undefined {
   if (condition === undefined) return true;
-  if (ELEMENT_CONDITIONS.has(condition))
-    return passiveConditionMet(condition, attackerElement, defenderElement);
-  // BuffConditionValue = CET_* de la CIBLE, absente = 0 = terre (cf. en-tête).
-  if (condition === 'TARGET_ELEMENT') return defenderElement === ((conditionValue ?? 0) as Element);
+  // Élémentaires et TARGET_ELEMENT (CET_* de la CIBLE, cf. en-tête) : la
+  // fonction partagée, le PORTEUR étant côté attaquant.
+  const element = elementConditionMet(
+    condition,
+    conditionValue,
+    { attackerElement, defenderElement },
+    'attacker',
+  );
+  if (element !== undefined) return element;
   if (condition === 'TARGET_IS_BOSS') return targetIsBoss;
   if (condition === 'OWNER_IS_BOSS') return ownerIsBoss;
   if (condition === 'OWNER_CLASS')
@@ -423,12 +416,17 @@ function damageRelevant(row: DataBuffLevel): boolean {
   return ATTACKER_TYPES.has(row.type) || DEFENDER_TYPES.has(row.type);
 }
 
-function toActiveBuff(row: DataBuffLevel): ActiveBuff {
+function toActiveBuff(row: DataBuffLevel, buffId: string): ActiveBuff {
   return {
     type: row.type,
     ...(row.stat !== undefined ? { stat: row.stat } : {}),
     ...(row.applyingType !== undefined ? { applyingType: row.applyingType } : {}),
     ...(row.value !== undefined ? { value: row.value } : {}),
+    // Familles plafonnées par BuffID (§ 9.1, 164/165) : l'id fait la clé du
+    // cumul, `LimitValue` le plafond (absent = 0).
+    ...(LIMIT_FAMILIES.has(row.type)
+      ? { id: buffId, ...(row.limitValue !== undefined ? { limitValue: row.limitValue } : {}) }
+      : {}),
   };
 }
 
@@ -529,7 +527,7 @@ function makeCollector(
             sourceId,
             buffId,
             createType: ct ?? '',
-            buff: toActiveBuff(row),
+            buff: toActiveBuff(row, buffId),
             side: allyTarget === 'MY_TEAM' ? 'attacker' : 'defender',
             ...(row.stackCount !== undefined && row.stackCount > 1
               ? { maxStacks: row.stackCount }
@@ -587,7 +585,7 @@ function makeCollector(
           sourceId,
           buffId,
           createType: ct ?? '',
-          buff: toActiveBuff(row),
+          buff: toActiveBuff(row, buffId),
           ...(side !== undefined ? { side } : {}),
           ...(side !== undefined && row.stackCount !== undefined && row.stackCount > 1
             ? { maxStacks: row.stackCount }
@@ -662,9 +660,9 @@ function makeCollector(
       } else if (row.type.startsWith('BT_DMG')) {
         // Famille DAMAGE hors référentiel — typiquement un BT inédit d'un
         // patch (1.4.15 : `BT_DMG_TARGET_DEBUFF_LIMIT` 164, trans_8 de
-        // Demiurge Saeran). Sa sémantique n'est pas désassemblée : contribution
-        // 0 SIGNALÉE, jamais devinée — l'écarter en silence comme un soin
-        // cachait l'apparition du type.
+        // Demiurge Saeran, branché depuis). Sa sémantique n'est pas
+        // désassemblée : contribution 0 SIGNALÉE, jamais devinée — l'écarter
+        // en silence comme un soin cachait l'apparition du type.
         info.unresolved.push({
           source,
           sourceId,
@@ -774,7 +772,7 @@ function makeCollector(
           sourceId,
           buffId,
           side,
-          buff: toActiveBuff(row),
+          buff: toActiveBuff(row, buffId),
           condition,
           ...(row.conditionValue !== undefined ? { conditionValue: row.conditionValue } : {}),
           ...(callers ? { callers } : {}),
@@ -797,7 +795,7 @@ function makeCollector(
       sourceId,
       buffId,
       side,
-      buff: toActiveBuff(row),
+      buff: toActiveBuff(row, buffId),
       ...(condition !== undefined ? { condition } : {}),
       ...(condition === 'TARGET_ELEMENT'
         ? { conditionElement: (row.conditionValue ?? 0) as Element }

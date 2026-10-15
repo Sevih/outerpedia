@@ -37,7 +37,15 @@ import {
   type GearPassivesInfo,
   type GearSelection,
 } from './gear';
-import { BASE_AMOUNT_STATS, resolveBossPassives, type BossPassivesInfo } from './passives';
+import {
+  BASE_AMOUNT_STATS,
+  bossPassiveActive,
+  elementConditionMet,
+  isForcedSensitiveCondition,
+  resolveBossPassives,
+  type BossPassiveContext,
+  type BossPassivesInfo,
+} from './passives';
 import {
   attachChainClips,
   buildDotLine,
@@ -150,6 +158,8 @@ export interface DataBuffLevel {
   stat?: string;
   applyingType?: string;
   value?: number;
+  /** `LimitValue` — plafond par `BuffID` des familles `*_LIMIT` (§ 9.1). */
+  limitValue?: number;
   /** Cible du buff (`ME`, `ENEMY_TEAM`…) — classement des passifs de boss. */
   targetType?: string;
   /** `PASSIVE` = permanent au combat ; le reste est dynamique (état). */
@@ -168,6 +178,9 @@ export interface DataBuffLevel {
   createRate?: number;
   /** Valeur effective = `value × stacks` (§ 14.1). */
   stackCount?: number;
+  /** `IsIDOverlap` — deux poses du même `BuffID` coexistent ; sinon la
+   *  seconde retrouve la première (`CBuff`, `FindBuff(BuffID)`). */
+  isIdOverlap?: boolean;
   /** `DEBUFF_IGNORE_RESIST` = pose sans jet de résistance § 5. */
   buffDebuffType?: string;
   /** Tours de présence (`-1` = permanent) — affichage des lignes DoT. */
@@ -801,18 +814,19 @@ export function buildDamageReport(
 
   // Passifs de BOSS du preset (passives.ts) : « un débuff comme un autre »
   // (Sevih 05/08) — ils traversent les MÊMES canaux que les chips, jamais les
-  // stats saisies. Conditions élémentaires évaluées ici ; le reste est signalé.
+  // stats saisies. Conditions élémentaires, classe et enrage évalués ici (la
+  // supériorité forcée de l'attaquant plus bas, une fois ses buffs connus) ;
+  // le reste est signalé.
+  const bossCtx: BossPassiveContext = {
+    attackerElement,
+    defenderElement,
+    ...(char.class !== undefined ? { attackerClass: char.class } : {}),
+    enraged: target.enraged === true,
+  };
   let bossPassives: BossPassivesInfo | undefined;
   if (target.monsterId !== undefined) {
     bossPassives = data.targets
-      ? resolveBossPassives(
-          target.monsterId,
-          data.targets,
-          data.buffs,
-          attackerElement,
-          defenderElement,
-          target.enraged === true,
-        )
+      ? resolveBossPassives(target.monsterId, data.targets, data.buffs, bossCtx)
       : undefined;
     bossPassives ??= {
       entries: [],
@@ -1072,7 +1086,7 @@ export function buildDamageReport(
   // passifs de boss et d'équipement (donnée, évalués ci-dessus).
   const atkFx = resolveFx(attacker.fx ?? []);
   const tgtFx = resolveFx(target.fx ?? []);
-  const attackerBuffs = [
+  const buildAttackerBuffs = (): ActiveBuff[] => [
     ...trustBuffs(attacker.affinityTier, data.buffs),
     ...atkFx.buffs,
     ...passiveBuffs('attacker'),
@@ -1082,6 +1096,54 @@ export function buildDamageReport(
     ...allyBuffs('attacker'),
     ...declaredDynamicBuffs,
   ];
+  let attackerBuffs = buildAttackerBuffs();
+
+  // Supériorité élémentaire FORCÉE (`BT_DMG_ELEMENT_SUPERIORITY` sur
+  // l'attaquant) : `CheckElementWin` rend « attaquant gagnant » aux conditions
+  // `ATTACKER_ELEMENT_*` (spec § 16.3) — passifs de boss comme d'équipement et
+  // de kit, que les résolveurs ont évalués SANS le drapeau (il dépend de leurs
+  // propres entrées : ex. le passif de fusion 7072, avantage forcé + BT_DMG
+  // `ATTACKER_ELEMENT_WIN`). Une entrée qui POSE le drapeau sous condition
+  // `ATTACKER_ELEMENT_*` n'existe pas en donnée : elle resterait évaluée sans
+  // lui. `forcedFlips` liste les entrées dont l'état change sous le drapeau.
+  type ForcedFlip = {
+    entry: { active: boolean; callers?: string[] };
+    side: string;
+    buff: ActiveBuff;
+    active: boolean;
+    boss?: BossPassivesInfo['entries'][number];
+  };
+  const forcedFlips = (): ForcedFlip[] => {
+    const out: ForcedFlip[] = [];
+    for (const e of bossPassives?.entries ?? []) {
+      if (!isForcedSensitiveCondition(e.condition)) continue;
+      const active = bossPassiveActive(e, { ...bossCtx, forcedSuperiority: true });
+      if (active !== e.active) out.push({ entry: e, side: e.side, buff: e.buff, active, boss: e });
+    }
+    for (const i of gatedInfos())
+      for (const e of i?.entries ?? []) {
+        if (e.side === 'allies' || e.stateful || !isForcedSensitiveCondition(e.condition)) continue;
+        const active =
+          elementConditionMet(
+            e.condition as string,
+            e.conditionValue,
+            { attackerElement, defenderElement, forcedSuperiority: true },
+            'attacker',
+          ) === true;
+        if (active !== e.active) out.push({ entry: e, side: e.side, buff: e.buff, active });
+      }
+    return out;
+  };
+  const isForcedSuperiority = (b: ActiveBuff): boolean => b.type === 'BT_DMG_ELEMENT_SUPERIORITY';
+  // Drapeau GLOBAL (buffs du scénario hors restrictions de lanceur) : les
+  // entrées basculent pour toutes les lignes, chips comprises. Un drapeau
+  // posé par un buff restreint à certains skills (ex. le S2 et les bursts
+  // d'Ame) ne vaut que pour LEURS lignes : pushSlot réévalue alors par coup.
+  const forcedGlobal = attackerBuffs.some(isForcedSuperiority);
+  if (forcedGlobal) {
+    for (const f of forcedFlips()) f.entry.active = f.active;
+    attackerBuffs = buildAttackerBuffs();
+  }
   const defenderBuffs = [
     ...tgtFx.buffs,
     ...passiveBuffs('defender'),
@@ -1095,7 +1157,7 @@ export function buildDamageReport(
   // sur elle par le boss lui-même (enrage) ou par le kit/équipement/quirks du
   // porteur — hors callers (les débuffs AU LANCEMENT d'un skill passent par
   // le canal PAR SLOT de pushSlot, 18/08/2026).
-  const tgtStats = applyTargetStatChannel(target.stats, [
+  const defenderStatBuffs = [
     ...(bossPassives?.entries ?? [])
       .filter((e) => e.side === 'defender' && e.active && e.buff.type === 'BT_STAT')
       .map((e) => e.buff),
@@ -1104,7 +1166,8 @@ export function buildDamageReport(
         .filter((e) => e.side === 'defender' && e.active && !e.callers && e.buff.type === 'BT_STAT')
         .map((e) => e.buff),
     ),
-  ]);
+  ];
+  const tgtStats = applyTargetStatChannel(target.stats, defenderStatBuffs);
 
   // Stats de l'attaquant qui pèsent un MONTANT dans CE scénario (filtre des
   // chips de passifs de boss, cf. passives.ts) : la base § 8/§ 7.5/§ 9, plus
@@ -1471,19 +1534,39 @@ export function buildDamageReport(
     // LANCEMENT, passifs gated) passent par le canal § 16.1 — les stats de
     // COMBAT de CETTE ligne sont recalculées (le pierce du B2 de Caren n'est
     // pas celui du B1 : captures 18/08/2026, ratio exact).
-    const gatedAtk = gatedBuffs('attacker', sk.type);
-    const gatedDef = gatedBuffs('defender', sk.type);
+    let gatedAtk = gatedBuffs('attacker', sk.type);
+    let gatedDef = gatedBuffs('defender', sk.type);
+    // Supériorité forcée propre à CE skill (buff restreint par lanceur) : les
+    // conditions `ATTACKER_ELEMENT_*` se réévaluent pour sa ligne — la
+    // condition voit le MÊME drapeau que le taux élémentaire du coup. Les
+    // entrées qui s'éteignent sortent des listes du slot, celles qui
+    // s'allument y entrent ; l'état par skill est remonté aux chips (`bySkill`).
+    const removed = new Set<ActiveBuff>();
+    if (!forcedGlobal && gatedAtk.some(isForcedSuperiority)) {
+      const added: Record<string, ActiveBuff[]> = { attacker: [], defender: [] };
+      for (const f of forcedFlips()) {
+        if (f.entry.callers && !f.entry.callers.includes(sk.type)) continue;
+        if (f.boss) f.boss.bySkill = { ...f.boss.bySkill, [sk.type]: f.active };
+        if (f.active) added[f.side]?.push(f.buff);
+        else removed.add(f.buff);
+      }
+      gatedAtk = [...gatedAtk.filter((b) => !removed.has(b)), ...added.attacker];
+      gatedDef = [...gatedDef.filter((b) => !removed.has(b)), ...added.defender];
+    }
     let slotScenario: ReportScenario = scenario;
-    if (gatedAtk.length || gatedDef.length) {
+    if (gatedAtk.length || gatedDef.length || removed.size) {
       const statAtk = gatedAtk.filter(isStatChannel);
       const buffAtk = gatedAtk.filter((b) => !isStatChannel(b));
       const statDef = gatedDef.filter((b) => b.type === 'BT_STAT');
       const buffDef = gatedDef.filter((b) => b.type !== 'BT_STAT');
+      const baseAtk = attackerBuffs.filter((b) => !removed.has(b));
+      const baseDef = defenderBuffs.filter((b) => !removed.has(b));
+      const defStatRemoved = defenderStatBuffs.some((b) => removed.has(b));
       let slotAttacker = scenario.attacker;
       let slotStatOf = statOf;
       let slotAtkHp = scenario.additionalContext?.attacker;
-      if (statAtk.length) {
-        const sc = combatStatsWith([...attackerBuffs, ...statAtk]);
+      if (statAtk.length || attackerBuffs.some((b) => removed.has(b) && isStatChannel(b))) {
+        const sc = combatStatsWith([...baseAtk, ...statAtk]);
         slotAttacker = {
           ...scenario.attacker,
           attackStat: sc.atk ?? 0,
@@ -1503,8 +1586,14 @@ export function buildDamageReport(
       let slotDefender = scenario.defender;
       let slotDefStat = defenderStatOf;
       let slotDefHp = scenario.additionalContext?.defender;
-      if (statDef.length) {
-        const ts = applyTargetStatChannel(tgtStats, statDef);
+      if (statDef.length || defStatRemoved) {
+        const base = defStatRemoved
+          ? applyTargetStatChannel(
+              target.stats,
+              defenderStatBuffs.filter((b) => !removed.has(b)),
+            )
+          : tgtStats;
+        const ts = applyTargetStatChannel(base, statDef);
         slotDefender = {
           ...scenario.defender,
           defense: ts.def ?? 0,
@@ -1523,8 +1612,8 @@ export function buildDamageReport(
         ...scenario,
         attacker: slotAttacker,
         defender: slotDefender,
-        attackerBuffs: [...attackerBuffs, ...buffAtk],
-        defenderBuffs: [...defenderBuffs, ...buffDef],
+        attackerBuffs: [...baseAtk, ...buffAtk],
+        defenderBuffs: [...baseDef, ...buffDef],
         additionalContext: {
           ...scenario.additionalContext,
           attacker: slotAtkHp,

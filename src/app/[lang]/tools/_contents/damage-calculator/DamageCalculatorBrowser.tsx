@@ -45,12 +45,11 @@ import {
 } from '@/lib/damage/scenario';
 import {
   buildDamageReport,
-  elementOf,
   FX_CHIP_TOOLTIPS,
   sheetSlugOfStat,
   type DamageReportResult,
 } from '@/lib/damage/inputs';
-import { BASE_AMOUNT_STATS, passiveConditionMet } from '@/lib/damage/passives';
+import { BASE_AMOUNT_STATS } from '@/lib/damage/passives';
 import { conditionBuffRef } from '@/lib/damage/gear';
 import { ENGINE_GAME_VERSION, type DamageBranch, type DamageFixture } from '@/lib/damage/harness';
 import dynamic from 'next/dynamic';
@@ -318,21 +317,9 @@ export function DamageCalculatorBrowser({
     set((prev) => (prev.includes(key) ? prev.filter((x) => x !== key) : [...prev, key]));
 
   // Passifs de BOSS du preset — chips AUTO (jamais togglables : en jeu ils
-  // sont permanents et indélébiles). La condition élémentaire s'évalue contre
-  // l'attaquant COURANT, même relation § 6 que le moteur.
+  // sont permanents et indélébiles).
   const bossPassivesFor = (s: DcBossPassive['side']): DcBossPassive[] =>
     (target?.passives ?? []).filter((p) => p.side === s);
-  const bossPassiveActive = (p: DcBossPassive): boolean => {
-    // Buff d'ENRAGE : gaté par la coche du scénario (même règle que le moteur).
-    if (p.rage && !tgtEnraged) return false;
-    if (!p.condition) return true;
-    if (p.condition === 'OWNER_RAGE') return tgtEnraged;
-    const a = attacker ? elementOf(attacker.element) : undefined;
-    const d = target ? elementOf(target.element) : undefined;
-    return (
-      a !== undefined && d !== undefined && passiveConditionMet(p.condition, a, d, p.conditionValue)
-    );
-  };
 
   // ── MOTEUR BRANCHÉ (05/08/2026) : tables + resolvers dans useDamageTables
   // (chargées à la première sélection d'attaquant — ou dès l'hydratation si
@@ -390,6 +377,17 @@ export function DamageCalculatorBrowser({
   // scénario — la crit chance de l'équipe ne s'affiche que si le kit la LIT
   // (§ 9.1, ex. 2000067) ; sans rapport, repli sur la base (Sevih 17/08/2026).
   const amountStats = new Set(report?.attackerAmountStats ?? BASE_AMOUNT_STATS);
+  // État d'une chip : celui du MOTEUR (`report.bossPassives` — éléments,
+  // classe, enrage, avantage forcé), aucune règle de condition ici. Active
+  // si elle pèse sur au moins une ligne (`bySkill` : l'avantage forcé d'un
+  // seul skill la retourne sur ses lignes). Sans rapport (scénario
+  // incomplet) : seules les chips sans condition ni classe ni enrage.
+  const bossPassiveActive = (p: DcBossPassive): boolean => {
+    const e = report?.bossPassives?.entries[p.entry];
+    if (!e || e.buffId !== p.buffId)
+      return p.condition === undefined && p.targetClass === undefined && !p.rage;
+    return e.active || Object.values(e.bySkill ?? {}).some(Boolean);
+  };
   const bossPassiveShown = (p: DcBossPassive): boolean =>
     bossPassiveActive(p) &&
     (p.side !== 'attacker' || p.stat === undefined || amountStats.has(p.stat));

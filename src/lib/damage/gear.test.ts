@@ -448,13 +448,12 @@ describe('débuffs passifs ENEMY_* du kit — POSÉS in-game (mesure EE on/off 2
   });
 });
 
-describe('famille damage INCONNUE — signalée, jamais écartée en silence', () => {
-  it('le trans_8 de Demiurge Saeran (BT_DMG_TARGET_DEBUFF_LIMIT, nouveau 1.4.15) part en unresolved', () => {
+describe('familles *_LIMIT (164/165) — branchées, plafond par BuffID', () => {
+  it('le trans_8 de Demiurge Saeran (BT_DMG_TARGET_DEBUFF_LIMIT) : entrée attaquant plafonnée', () => {
     // Le patch 1.4.15 a changé le type de `trancendent_8_2000129_2`
-    // (BT_DMG_TARGET_DEBUFF → BT_DMG_TARGET_DEBUFF_LIMIT, enum 164 du dump).
-    // Sa sémantique n'est pas désassemblée : contribution 0 SIGNALÉE — la
-    // branche « soins/CP/AP » l'écartait en silence, un BT_DMG_* inédit doit
-    // remonter.
+    // (BT_DMG_TARGET_DEBUFF → BT_DMG_TARGET_DEBUFF_LIMIT, enum 164) ; le C# de
+    // FindBuffAdditionalDamage (26/08/2026) en donne la sémantique : Value ×
+    // débuffs de la cible, cumul plafonné à LimitValue par BuffID (§ 9.1).
     const saeran = data.characters.characters['2000129'] as unknown as KitCharacter;
     const kit = resolveKitPassives(
       saeran,
@@ -465,9 +464,18 @@ describe('famille damage INCONNUE — signalée, jamais écartée en silence', (
       Element.Dark,
       Element.Earth,
     );
-    const u = kit.unresolved.find((x) => x.buffId === 'trancendent_8_2000129_2');
-    expect(u?.reason).toContain('BT_DMG_TARGET_DEBUFF_LIMIT');
-    expect(kit.entries.some((x) => x.buffId === 'trancendent_8_2000129_2')).toBe(false);
+    const row = buffs.buffs['trancendent_8_2000129_2']![0];
+    expect(kit.entries.find((x) => x.buffId === 'trancendent_8_2000129_2')).toMatchObject({
+      side: 'attacker',
+      active: true,
+      buff: {
+        type: 'BT_DMG_TARGET_DEBUFF_LIMIT',
+        id: 'trancendent_8_2000129_2',
+        value: row.value, // 200
+        limitValue: row.limitValue, // 2000
+      },
+    });
+    expect(kit.unresolved.some((u) => u.buffId === 'trancendent_8_2000129_2')).toBe(false);
   });
 });
 

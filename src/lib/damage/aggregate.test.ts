@@ -106,6 +106,31 @@ describe('aggregate — canaux et familles § 9', () => {
     expect(findBuffDamageReduce([], { attackerHasDotPunish: true })).toBe(300);
   });
 
+  it('§ 9.1 : familles *_LIMIT (164/165) — Value × compte, cumul plafonné par BuffID', () => {
+    // Demiurge Saeran T8 (`trancendent_8_2000129_2`) : Value 200, LimitValue 2000.
+    const saeran = B({
+      type: 'BT_DMG_TARGET_DEBUFF_LIMIT',
+      id: 'trancendent_8_2000129_2',
+      value: 200,
+      limitValue: 2000,
+    });
+    const ctx = (n: number) => ({ branch: 'normal' as const, defenderDebuffCount: n });
+    expect(findBuffAdditionalDamage([saeran], ctx(3))).toBe(600);
+    expect(findBuffAdditionalDamage([saeran], ctx(10))).toBe(2000);
+    expect(findBuffAdditionalDamage([saeran], ctx(12))).toBe(2000);
+    // Deux instances du MÊME BuffID : un seul plafond pour les deux ; un
+    // autre BuffID a le sien.
+    expect(findBuffAdditionalDamage([saeran, saeran], ctx(6))).toBe(2000);
+    expect(findBuffAdditionalDamage([saeran, { ...saeran, id: 'autre' }], ctx(6))).toBe(2400);
+    // Jumeau côté buffs de la cible ; LimitValue absente = plafond 0.
+    const buffLimit = { ...saeran, type: 'BT_DMG_TARGET_BUFF_LIMIT' };
+    expect(findBuffAdditionalDamage([buffLimit], { branch: 'normal', defenderBuffCount: 12 })).toBe(
+      2000,
+    );
+    expect(findBuffAdditionalDamage([buffLimit], ctx(12))).toBe(0); // compte de BUFFS absent
+    expect(findBuffAdditionalDamage([{ ...saeran, limitValue: undefined }], ctx(3))).toBe(0);
+  });
+
   it('§ 11 : FindBuffWGDamageReduce — WG_DMG de l’attaquant ajoute, WG_DMG_REDUCE du défenseur retranche', () => {
     expect(
       findBuffWGDamageReduce(

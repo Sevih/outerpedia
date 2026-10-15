@@ -981,11 +981,13 @@ return restant
     `BT_DMG_TARGET_BUFF_LIMIT` (165) côté buffs. Donnée 1.4.15 : le trans_8 de
     Demiurge Saeran (`trancendent_8_2000129_2`) est la SEULE ligne de
     `BuffTemplet` à `LimitValue` non nul — `Value` 200, `LimitValue` 2000 :
-    +20 % par débuff, plafond +200 % (10 débuffs). RESTE — l'implémentation :
-    l'extracteur `datagen/damage/buffs.ts` n'exporte pas `LimitValue`, et le
-    moteur signale encore l'entrée `unresolved` (contribution 0, gear.ts). À
-    brancher : champ `limitValue` dans buffs.json, plafond par ID dans
-    l'agrégation § 9.1 — et une fixture Saeran pour le prouver.
+    +20 % par débuff, plafond +200 % (10 débuffs). **Branché le 15/10/2026** :
+    l'extracteur `datagen/damage/buffs.ts` exporte `limitValue` (buffs.json),
+    gear.ts porte l'id et le plafond dans l'entrée (`ActiveBuff.id`/
+    `limitValue`, plus d'`unresolved`) et `findBuffAdditionalDamage` cumule
+    les deux familles par `BuffID` sous le plafond (Saeran T8 : 3 débuffs →
+    +600 ‰, 10 et 12 → +2000 ‰, aggregate.test.ts). RESTE : une fixture
+    Saeran en jeu pour le prouver.
 
 ## 13. À vérifier in-game (phase 2)
 
@@ -1624,9 +1626,13 @@ existants ne portent que gold/exp/drop/stamina.
 
 Les monstres portent leurs skills aux slots `Skill_<n>` du templet ; les
 `SkillSubType == PASSIVE` posent leurs `BuffID` en PERMANENT au combat quand la
-ligne de buff a `BuffCreateType == PASSIVE` (les autres `BuffCreateType` sont
-des créations DYNAMIQUES — `ON_TURN`, `SKILL_FINISH`… — dépendantes de l'état
-du combat). Ce sont de VRAIS buffs de `BuffTemplet` : mêmes familles `BT_*`,
+ligne de buff a `BuffCreateType` `PASSIVE` ou `PASSIVE2`
+(`CSkillManager.GetPassiveBuffList` charge les deux pareil ; 596 lignes
+`PASSIVE2` dans 117 kits de boss) — les autres `BuffCreateType` sont des créations DYNAMIQUES
+(`ON_TURN`, `SKILL_FINISH`…) dépendantes de l'état du combat. Un même `BuffID`
+listé deux fois sans `IsIDOverlap` ne fait qu'une instance (la seconde pose
+retrouve la première, `CBuff` → `FindBuff(BuffID)`) — ex. `guild_raid_common_10`
+dans le passif 170057 des raids de guilde. Ce sont de VRAIS buffs de `BuffTemplet` : mêmes familles `BT_*`,
 mêmes canaux d'agrégation § 9/§ 16.1 — décision Sevih 05/08/2026 : « c'est un
 débuff comme un autre », on ne trafique JAMAIS les stats saisies pour les
 simuler.
@@ -1635,9 +1641,13 @@ simuler.
 l'équipe du JOUEUR (ex. « Starving Devil » de l'Unidentified Chimera, stage 12,
 skill 131113 : `4076007_15_1` crit +1000 ‰ forcé + `4076007_15_2` crit dmg
 −850 ‰, tous deux `BT_STAT OAT_ADD` permanents et indélébiles
-`IsIgnoreInterruption`) ; `ME`/`MY_TEAM` = le boss lui-même (réductions de
-dégâts, ex. buffs génériques `1`/`2`/`3` : `BT_DMG_REDUCE OAT_RATE` −150/+500/
-+500 conditionnés à l'élément de l'attaquant).
+`IsIgnoreInterruption`) ; `ENEMY_TEAM_<CLASSE>` (`DEFENDER`, `ATTACKER` =
+Striker, `RANGER`, `MAGE`, `PRIEST` = Healer) ne touche que l'attaquant de
+cette classe (ex. 4086025-30 : ATK +30 % aux Strikers, CDMG +50 % aux Mages),
+les autres sélections (`ENEMY_TEAM_HIGHEST_ATK`…) ne sont pas attribuables ;
+`ME`/`MY_TEAM` = le boss lui-même (réductions de dégâts, ex. buffs génériques
+`1`/`2`/`3` : `BT_DMG_REDUCE OAT_RATE` −150/+500/+500 conditionnés à l'élément
+de l'attaquant ; `BT_WG_DMG_REDUCE`, lu par la jauge CalcDamageWG).
 
 **Conditions élémentaires** : `ATTACKER_ELEMENT_WIN/EQUAL/LOSE`
 (`BUFF_CONDITION_TYPE` 140–142 en 1.4.15) s'évaluent par `CheckElementWin(attaquant)`
@@ -1653,8 +1663,9 @@ passif (le monde y est partagé en « Fire / non-Fire » pour un boss terre).
 C# : le case appelle `CCharacterBattle.CheckElementEqual(ConditionValue)` sur la cible
 ([`CCharacterBattle_CheckElementEqual.cs`](./damage-formula-cs/CCharacterBattle_CheckElementEqual.cs))
 = **égalité STRICTE** `cible.Data.Element == (CHARACTER_ELEMENT_TYPE)ConditionValue`
-(3 = Lumière). La « cible » d'un buff porté par
-un BOSS est l'ATTAQUANT. Preuve in-game (fixture `gnosisbeth-arsnova`) : le
+(3 = Lumière ; `ConditionValue` absente = 0 = `CET_EARTH`, l'extracteur
+omettant les zéros). La « cible » d'un buff porté par
+un BOSS est l'ATTAQUANT (celle d'un buff d'équipement, le défenseur). Preuve in-game (fixture `gnosisbeth-arsnova`) : le
 passif d'Ars Nova « The Boy Who Dreamed of Becoming a Musician » (skill
 monstre `132305`) porte `7` (+300 `ATTACKER_ELEMENT_EQUAL`) ET `9` (−450
 `TARGET_ELEMENT` 3) — pour Gnosis Beth (lumière vs boss lumière) les DEUX sont
@@ -1665,6 +1676,18 @@ mesure dark contredit un jour, chercher une ligne jumelle, pas élargir le case.
 Toute autre condition (`OWNER_HAS_BUFF` — le WG reduce sous bouclier de rage —,
 `OWNER_RAGE`…) dépend de l'état du combat : non évaluable statiquement.
 
+> RÉVISÉ le 15/10/2026 (revue du 09/10, H4/H5/M1/B9) : une seule fonction de
+> condition, `elementConditionMet` (passives.ts), appelée par les passifs de
+> boss, l'équipement, le kit et — via le moteur — les chips du calculateur ;
+> Terre lue `?? 0` ; supériorité forcée vue par les conditions avec le MÊME
+> drapeau que le taux du coup (global : toutes les lignes ; restreinte à des
+> skills, ex. Ame : réévaluée par ligne dans inputs.ts, `bySkill` exposé) ;
+> `PASSIVE2` et `ENEMY_TEAM_<CLASSE>` acceptés ; `BT_WG_DMG_REDUCE` du boss et
+> `BT_WG_DMG` du porteur deviennent des entrées de jauge ; `BT_LIMIT_DMG_TURN`
+> (plafond par tour) et `BT_STAT_PREMIUM` du boss (passif de fiche) restent
+> `unresolved`, contribution 0. Sous `BT_INVINCIBLE`, la jauge vaut 0 (le jeu
+> ne la réduit que dans la branche « dégâts > 0 » de `ProcessDamageSimulator`).
+>
 > RÉALISÉ (05/08/2026) : `src/lib/damage/passives.ts` —
 > `staticBossPassives(monsterId)` (targets.json → skills PASSIVE → buffs.json,
 > 650/650 passifs mono-niveau, garde datagen) classe les lignes par côté ;

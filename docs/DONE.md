@@ -7,6 +7,87 @@
 
 ## 2026-10-15
 
+- **Passifs de boss : une seule fonction de condition (Terre, avantage
+  forcé), `PASSIVE2` et cibles de classe, jauge, `limitValue`.** Lot C16 (tri
+  du 15/10 ; revue de la logique du site du 09/10, H4, H5, M1, B9, M3 et repli
+  de H3). Les formules concordaient avec le client ; ce qui était faux, c'est
+  quels passifs de boss on lisait et quand on les disait actifs, avec une
+  condition écrite trois fois (`passiveConditionMet`, `gearConditionMet`,
+  `bossPassiveActive` du composant). **① Une fonction** : `elementConditionMet`
+  (`src/lib/damage/passives.ts`) porte les trois `ATTACKER_ELEMENT_*` et
+  `TARGET_ELEMENT` ; `gearConditionMet` lui délègue, `bossPassiveActive`
+  (même fichier) évalue un passif de boss (enrage, classe, condition), et le
+  composant ne fait plus que lire l'état du moteur. Terre (H4) :
+  `ConditionValue` absente se lit `?? 0` = `CET_EARTH`, l'élément comparé
+  restant celui de l'adversaire du porteur (`holder`) ; la chip dit « Terre »
+  au lieu de « ? » (`index.tsx`). Avantage forcé (H5) : `CheckElementWin` rend
+  WIN dès que l'attaquant porte `BT_DMG_ELEMENT_SUPERIORITY`, l'infériorité
+  n'y joue pas. Le drapeau dépend des entrées collectées (le passif de fusion
+  7072 de Core Fusion pose l'avantage ET un `BT_DMG` sous
+  `ATTACKER_ELEMENT_WIN`), donc `buildDamageReport` réévalue les entrées
+  `ATTACKER_ELEMENT_*` (boss, équipement, kit, quirks, alliés) une fois les
+  buffs connus : drapeau global, l'état change pour toutes les lignes ;
+  drapeau posé par un buff restreint à des skills (Ame : S2 et bursts ;
+  2000082 : S3), `pushSlot` réévalue pour la ligne, retire ou ajoute les
+  buffs concernés (stats recalculées si un `BT_STAT` bascule) et remonte
+  l'état par skill dans un champ ajouté, `BossPassiveApplied.bySkill`. Chip :
+  visible si le passif pèse sur au moins une ligne (`active` ou `bySkill`) ;
+  sans rapport, seules les chips sans condition, classe ni enrage
+  (`DcBossPassive` gagne `entry`, `buffId`, `targetClass`). **② `PASSIVE2`**
+  (M1) : accepté comme `PASSIVE` ; `ENEMY_TEAM_<CLASSE>` ne vaut que pour un
+  attaquant de cette classe (`targetClass`, table `TEAM_CLASS_TARGETS`
+  déplacée de gear.ts vers passives.ts et partagée, `teamClassOf`), les
+  autres `ENEMY_TEAM_*` partent en `unresolved` ; `resolveBossPassives` prend
+  un contexte (éléments, classe, enrage). Le rejeu a montré un doublon : le
+  passif 170057 des raids de guilde liste `guild_raid_common_10` deux fois, et
+  sans `IsIDOverlap` le client n'en garde qu'une instance (`CBuff`,
+  `FindBuff(BuffID)`) ; `staticBossPassives` saute désormais un `BuffID` déjà
+  lu sauf `IsIDOverlap` (sinon 1600 ‰ au lieu de 1300). **③ Jauge** (B9) :
+  `BT_WG_DMG_REDUCE` du boss est une entrée défenseur (237 lignes ; celle sous
+  `OWNER_HAS_BUFF` reste `unresolved`), `BT_WG_DMG` du porteur une entrée
+  attaquant (`ATTACKER_TYPES`) ; `BT_LIMIT_DMG_TURN` part en `unresolved`.
+  Sous `BT_INVINCIBLE`, `weaknessGaugeDamage` vaut 0 (`report.ts`, code,
+  trace et en-tête) : `CBattleManager.ProcessDamageSimulator` ne réduit la
+  jauge que dans la branche « dégâts > 0 ». **④ Repli de H3** :
+  `BT_STAT_PREMIUM` sur `ME`/`MY_TEAM` part en `unresolved` (passif de fiche,
+  non versé aux stats). **⑤ M3** : `datagen/damage/buffs.ts` émet
+  `limitValue`, `pnpm damage:build --skip-anim` n'a changé que la ligne de
+  `trancendent_8_2000129_2` (`limitValue: 2000`, `resVersion` 1.11.407) ;
+  `ActiveBuff` porte `id`/`limitValue` (posés par `toActiveBuff` pour les
+  familles `LIMIT_FAMILIES`), `findBuffAdditionalDamage` cumule
+  `BT_DMG_TARGET_DEBUFF_LIMIT`/`_BUFF_LIMIT` par `BuffID` sous le plafond ;
+  le trans_8 de Saeran est une entrée, plus un `unresolved`. Spec : § 16.3
+  révisée, § 12.18 « branché le 15/10 ». **⑥ Commentaires** : en-tête de
+  `passives.ts`, CURSE de `DotLineInput` (PV max de la cible).
+  **Vérifié** : `pnpm typecheck` (les trois `tsc --noEmit`, site, datagen
+  et scripts, sans erreur), `pnpm lint` (`$ eslint`, 0 problème),
+  `pnpm test` (`Tests  3850 passed (3850)`), `pnpm damage:check` (42 lignes
+  exactes, 0 en dérive) ; `fixtures.test.ts` passe sans fixture touchée.
+  Tests : la fonction partagée (Terre, avantage forcé, infériorité sans
+  effet, `TARGET_ELEMENT` dans les deux sens), la donnée réelle en relation
+  (4004005 contre Terre, `PASSIVE2` et `ENEMY_TEAM_MAGE` Striker/Mage, armures
+  de jauge du Chimera, `BT_LIMIT_DMG_TURN` et `BT_STAT_PREMIUM` signalés,
+  doublon des raids), Ame contre 401801 (S2 et B1 au cas WIN, S1 neutre), le
+  passif de fusion 7072, jauge 0 sous invincibilité, Saeran T8 à 3/10/12
+  débuffs (+600/+2000/+2000 ‰). Rejeu des scripts du 09/10 (`earth.mts`,
+  `forced.mts`, HEAD contre ce lot ; taux ‰ contre l'attaquant Terre, puis
+  attaquant neutre portant l'avantage) : 4004005 1000 → 300 (copies 4104005,
+  62005208, 62101066, 62401031), 4086013 1000 → 1500, 440400470 1000 → 1300 ;
+  401601 300 → 1200, 402001 300 → 1450, 401801 800 → 1200. Visuel : seul le
+  rendu des chips de passifs de boss change (état lu du moteur, classe
+  ajoutée au libellé de condition, « Terre ») ; le reste de l'écran n'est pas
+  touché, comparaison faite sur le diff des composants, sans `pnpm dev`.
+  Solver : `solver-best-skill.ts` n'importe de gear.ts et report.ts que
+  `burstableSlotOf`, `attachChainClips`, `groupHitsByChain` et
+  `stateTotalFactor`, inchangés — la meilleure compétence ne bougera pas au
+  prochain build. **Laissé** : H3 entier (verser les passifs de fiche aux
+  stats) ; les `BT_WG_*` autres que `BT_WG_DMG` sur le porteur restent en
+  `unresolved` sous l'ancienne raison « agrégation jauge non désassemblée »,
+  désormais inexacte (ils protègent le porteur, sans effet sur le coup) ;
+  repérés hors périmètre : les `BT_DMG` (106 lignes) et `BT_WG_DMG` (49)
+  posés par des passifs de boss sur `ENEMY_TEAM` sont toujours écartés sans
+  un mot ; une fixture Saeran en jeu reste à faire (§ 12.18).
+
 - **Coupons et menus du site : bannière du dernier jour, `/item` du bot,
   déblocage, quirks, `<color>` imbriqués, commentaires périmés.** Sept écarts
   site / jeu de la revue du 09/10 (B3, B4, B10, B11, § Cosmétique), sans

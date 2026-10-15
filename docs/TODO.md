@@ -35,7 +35,6 @@ les preuves et les décisions vivent dans le tri consolidé de sevih-tool
       Trouver ce qui les rend dynamiques (un `headers()`, `cookies()` ou
       `searchParams` lu en chemin) et décider : les mettre en cache, ou
       corriger les commentaires.
-- [ ] **Passifs de boss (C)** : H4, H5, M1, B9, M3, repli de H3.
 - [ ] **Sets et équipement (C, build)** : H2, M8, M9, M10, B1, R11, R12,
       R13, O11, R17.
 - [ ] **Progression (B-C, build)** : H6, M5, M6, étoile de base des Core
