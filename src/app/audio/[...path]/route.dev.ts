@@ -1,6 +1,7 @@
 import { statSync, createReadStream, readFileSync } from 'node:fs';
 import { resolve, normalize, sep } from 'node:path';
 import { NextResponse } from 'next/server';
+import { IS_DEV } from '@/lib/admin/guard';
 import type { ReadStream } from 'node:fs';
 
 /**
@@ -32,6 +33,8 @@ function streamToWeb(stream: ReadStream): ReadableStream<Uint8Array> {
 }
 
 export async function GET(req: Request, { params }: { params: Promise<{ path: string[] }> }) {
+  // Seconde garde, en plus de l'exclusion `.dev.ts` du build de prod.
+  if (!IS_DEV) return new NextResponse(null, { status: 404 });
   const { path } = await params;
   const full = normalize(resolve(ROOT, ...path));
   if (!full.startsWith(ROOT + sep)) return new NextResponse(null, { status: 400 });

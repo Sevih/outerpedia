@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { getDbConnection } from '@/lib/db';
-import { createRateLimiter, clientIp } from '@/lib/rate-limit';
+import { createRateLimiter, createWriteQuota, clientIp } from '@/lib/rate-limit';
 import { ensureTable, isInternalPath, pathId, MAX_PATH } from '@/lib/short-links';
 
 export const dynamic = 'force-dynamic';
@@ -12,6 +12,11 @@ export const dynamic = 'force-dynamic';
  */
 
 const rateLimited = createRateLimiter();
+// 60 lignes nouvelles par minute au plus, toutes IP confondues : un partage
+// est un geste ponctuel (l'ancien site n'avait gardé que quelques dizaines de
+// liens en tout), le plafond ne se voit qu'en cas de flot. Refusé, le client
+// garde son lien long `?z=`.
+const writeQuotaExceeded = createWriteQuota({ max: 60 });
 
 export async function POST(request: Request) {
   if (rateLimited(clientIp(request))) {
@@ -26,6 +31,10 @@ export async function POST(request: Request) {
   }
   if (typeof path !== 'string' || path.length > MAX_PATH || !isInternalPath(path)) {
     return NextResponse.json({ error: 'bad_path' }, { status: 400 });
+  }
+
+  if (writeQuotaExceeded()) {
+    return NextResponse.json({ error: 'rate_limited' }, { status: 429 });
   }
 
   const conn = await getDbConnection();

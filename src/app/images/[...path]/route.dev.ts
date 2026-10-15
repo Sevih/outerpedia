@@ -1,6 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { resolve, normalize, sep } from 'node:path';
 import { NextResponse } from 'next/server';
+import { IS_DEV } from '@/lib/admin/guard';
 
 /**
  * DEV ONLY — sert `/images/*` depuis le staging local (`.assets-staging/images`),
@@ -20,6 +21,8 @@ const MIME: Record<string, string> = {
 };
 
 export async function GET(_req: Request, { params }: { params: Promise<{ path: string[] }> }) {
+  // Seconde garde, en plus de l'exclusion `.dev.ts` du build de prod.
+  if (!IS_DEV) return new NextResponse(null, { status: 404 });
   const { path } = await params;
   const full = normalize(resolve(ROOT, ...path));
   if (!full.startsWith(ROOT + sep)) return new NextResponse(null, { status: 400 });

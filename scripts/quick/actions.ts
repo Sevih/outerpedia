@@ -190,7 +190,7 @@ import { upsertEeCurated, type EeCuratedPatch } from '@/lib/admin/equipment-cura
 import { resolveGameText } from '@/lib/admin/game-text';
 import { gearSelectOptions, type GearOption } from '@/lib/admin/gear-options';
 import { previewGearReco } from '@/lib/admin/gear-preview-actions';
-import { renderInlineBatch } from '@/lib/admin/inline-preview-actions';
+import { resolveInlineBatch } from '@/lib/admin/inline-preview';
 import { buildInlineRefs } from '@/lib/admin/inline-refs';
 import { expandBuild } from '@/lib/admin/gear-preset-resolve';
 import {
@@ -2705,7 +2705,8 @@ export async function characterSheetState(
 /**
  * L'aperçu des textes à tags inline de la fiche (pros, cons, raisons de
  * synergie) : chaque texte en segments, tels que le site les rend dans `lang`
- * — `renderInlineBatch`, l'aperçu de l'éditeur de l'admin, appelé tel quel (pas
+ * — `resolveInlineBatch`, le cœur de l'aperçu des outils de contribution, sans
+ * les bornes de leurs server actions (un guide entier passe en un appel ; pas
  * de garde `IS_DEV` : il ne fait que lire). Un tag que le site ne résout pas
  * sort en segment `unknown`. `segments` est aligné sur `texts`. Rien ne
  * s'écrit ; tout refus est RENDU, jamais levé.
@@ -2713,7 +2714,7 @@ export async function characterSheetState(
 export async function previewInline(
   texts: unknown,
   lang: unknown,
-  render: (texts: string[], lang: string) => Promise<InlineSegment[][]> = renderInlineBatch,
+  render: (texts: string[], lang: string) => Promise<InlineSegment[][]> = resolveInlineBatch,
 ): Promise<{ segments: InlineSegment[][] } | { error: string }> {
   if (!Array.isArray(texts) || texts.some((t) => typeof t !== 'string'))
     return { error: 'texts : une liste de textes attendue' };

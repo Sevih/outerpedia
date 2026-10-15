@@ -96,9 +96,9 @@ describe('validateCoupons', () => {
   });
 
   it('NUMÉROTE le coupon fautif et rappelle son code', () => {
-    const errors = validateCoupons([coupon(), coupon({ code: 'CASSÉ', start: 'demain' })]);
+    const errors = validateCoupons([coupon(), coupon({ code: 'CASSE', start: 'demain' })]);
     expect(errors).toHaveLength(1);
-    expect(errors[0]).toMatch(/^Coupon 2 \(CASSÉ\)/);
+    expect(errors[0]).toMatch(/^Coupon 2 \(CASSE\)/);
   });
 });
 

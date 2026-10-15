@@ -7,6 +7,70 @@
 
 ## 2026-10-15
 
+- **Aperçus publics bornés, limiteur par préfixe et quota d'écriture,
+  nettoyeur des notes de patch en liste blanche, seconde garde `IS_DEV`,
+  forme des codes promo et date réelle.** Cinq points d'un même lot.
+  **① Aperçus** : `renderInlinePreview` / `renderInlineBatch`
+  (`src/lib/admin/inline-preview-actions.ts`), server actions des outils de
+  `/contribute`, refusent au-delà de 20 textes par appel ou de 4 000
+  caractères par texte (erreur levée, jamais de coupe), et comptent les appels
+  par IP (`headers()` → `clientIp`) : 240 par minute pour les deux, parce que
+  l'aperçu suit la frappe (un appel par pause de 250-300 ms) et que l'éditeur
+  des pros/cons en lance jusqu'à trois par pause. Usage réel mesuré sur
+  `data/curated/characters.json` et les reviews premium : 7 textes au plus par
+  appel (pros), 290 caractères pour le plus long pro/con, 991 pour le plus
+  long texte envoyé (review premium, `es`). La résolution passe dans
+  `src/lib/admin/inline-preview.ts` (sans `'use server'`) : quick
+  (`previewInline`) l'appelle directement, sans borne, puisqu'un guide entier
+  passe en un appel et que quick n'a pas de contexte de requête.
+  **② Limiteur** (`src/lib/rate-limit.ts`) : `rateKey` compte par adresse en
+  IPv4 et par préfixe `/64` en IPv6 (une IPv4 notée `::ffff:` compte comme
+  l'IPv4) ; `createWriteQuota` plafonne les insertions de `/api/shortlink` et
+  `/api/tierlist` à 60 par minute chacune, toutes IP confondues, contrôlé juste
+  avant l'écriture — l'ancien site n'avait gardé que quelques dizaines de
+  partages en tout (8 tier-lists, 31 équipes), et un refus laisse au client son
+  lien long `?z=`. `clientIp` accepte des en-têtes seuls. La purge des tables
+  attend une décision sur la durée de conservation. **③ Notes de patch** : le
+  nettoyeur sort de `scripts/get-news.ts` dans `scripts/patch-notes-sanitize.ts`
+  (testable : `get-news` lance `main()` à l'import) et passe en liste blanche
+  — balises et attributs nommés, `aria-*`/`data-*`, `href`/`src`/`cite`/`poster`
+  limités à `http(s)` et aux chemins relatifs après retrait des caractères de
+  contrôle et des blancs, `srcdoc` jamais gardé, balise inconnue remplacée par
+  son contenu ; le lien qui remplace une iframe hors liste se construit par
+  `$('<a>').attr(…).text(src)`. Comparaison ancien/nouveau sur `posts.json` :
+  **1 099 notes identiques sur 1 100** ; la seule différente (id 4037) est un
+  lien `file://` vers un partage interne de l'éditeur, qui perd son `href` (le
+  texte reste) au prochain `pnpm getNews`, `posts.json` n'est pas retouché ici.
+  Sur `legacy-posts.json` (que `getNews` ne repasse pas) : 805 / 806, l'écart
+  étant deux balises parasites `<before>`/`<skill>` déballées. **④ Gardes** :
+  `images/[...path]/route.dev.ts` et `audio/[...path]/route.dev.ts` répondent
+  404 hors développement (`IS_DEV`), `dev/layout.dev.tsx` appelle
+  `assertDevOnly()` — seconde garde à côté de l'exclusion `.dev.*` du build.
+  **⑤ Codes promo** (`src/lib/data/promo-rules.ts`) : `validateCoupons` refuse
+  un code hors `/^[A-Z0-9]{4,32}$/` (« code must be 4 to 32 letters or
+  digits », même règle que le bot) ; `validatePeriod` exige une vraie date de
+  calendrier (sur le modèle d'`isDate` d'outerbot), coupons et bannières. Les
+  103 codes de l'instantané passent ; ses dates aussi après correction de
+  MAY2026T, dont la fin `2026-06-31` devient `2026-06-30` dans
+  `data/curated/coupons.json`. Les 52 bannières passent. **Tests** :
+  `rate-limit.test.ts` (clé `/64`, notations, quota global),
+  `inline-preview-actions.test.ts` (bornes, refus sans résolution, débit par
+  IP), `guard.test.ts` (les trois surfaces en développement et hors
+  développement), `promo-rules.test.ts` (forme, dates impossibles, instantané
+  entier ; codes des tests existants allongés à 4 caractères),
+  `patch-notes-sanitize.test.ts` (`java&#9;script:`, `srcdoc`, iframe à URL
+  piégée, attributs d'évènement, et huit vraies notes rendues à l'identique).
+  `pnpm typecheck` et `pnpm lint` verts (sans sortie après la commande),
+  `pnpm test` : « Tests 3817 passed (3817) », `pnpm format:check` : « All
+  matched files use Prettier code style! ». **Reste à Sevih** : la liste
+  vivante sur R2 porte toujours MAY2026T jusqu'au `2026-06-31` — tant qu'elle
+  n'est pas corrigée (quick, Codes promo : fin au 30/06), toute écriture de
+  coupons, bot comme quick, sera refusée après le déploiement, car
+  `applyCouponOp` revalide la liste entière ; à faire AVANT le push.
+  **Laissé** : le `<video>` de `processContent` reste remplacé par une chaîne
+  concaténée, mais `getNews` repasse tout le corpus au nettoyeur avant
+  d'écrire, le lien passe donc la liste blanche.
+
 - **Relecture A53 / A54 (Opus) — « Confirmer l'extraction » refusé sur
   Personnages et Monstres, cache ISR en mémoire, proxy et `dynamicParams`
   resserrés : les deux validés.** Deux commits (`d7bbbcd0`, `62c2ae4c`),

@@ -1,40 +1,38 @@
 'use server';
 
 /**
- * Server action de l'APERÇU inline (admin) : résout le texte éditorial avec les
- * VRAIS résolveurs de `parseText` (mêmes icônes/couleurs/liens que le site) et
- * renvoie des DESCRIPTEURS de segments (données pures, sérialisables) que le
- * composant client rend avec les vrais composants inline. On plie la VALIDATION
- * (`checkText`) dans le même aller-retour.
- *
- * Pourquoi la résolution est ici (serveur) : les résolveurs d'effets/équipement
- * lisent la couche curée sur disque via `node:fs` (exprès — pour refléter tes
- * éditions sans rebuild). Ils ne peuvent pas tourner dans le navigateur.
+ * Server actions de l'APERÇU inline, appelées par les outils publics de
+ * contribution (`/contribute/*`) : la résolution vit dans `inline-preview` (voir
+ * pourquoi elle est côté serveur et rend des données) ; ici, l'entrée publique.
  *
  * Pourquoi des DONNÉES et pas du JSX : renvoyer un arbre React (composants
  * clients) depuis une action casse le manifeste RSC de Turbopack. Des
  * descripteurs plats traversent l'action sans souci ; le client fait le rendu.
  *
  * PAS de garde `IS_DEV` : aperçu READ-ONLY de données de jeu PUBLIQUES (aucun
- * secret, aucune écriture) — les outils publics de contribution (`/contribute/*`)
- * en ont besoin en prod. L'écriture et `autoTranslate` (clés API) restent, elles,
- * dev-only.
+ * secret, aucune écriture) — les outils publics de contribution en ont besoin
+ * en prod. L'écriture et `autoTranslate` (clés API) restent, elles, dev-only.
+ *
+ * Chaque appel est borné (`previewBoundsError` : nombre de textes, taille de
+ * chacun) et compté par IP. Hors bornes ou au-delà du débit, l'action lève une
+ * erreur : refus net, jamais un texte coupé en silence. Les composants gardent
+ * alors l'aperçu précédent.
  */
-import { resolveInlineSegments, checkText, type InlineSegment, type TagCheck } from '@/lib/parse-text'; // prettier-ignore
-import { getGuide } from '@/lib/data/guides';
-import { GUIDE_CATEGORY_SLUGS } from '@/lib/data/guide-categories';
-import { getT } from '@/i18n';
-import { normalizeLang } from '@/lib/i18n/config';
+import { headers } from 'next/headers';
+import type { InlineSegment, TagCheck } from '@/lib/parse-text';
+import { clientIp, createRateLimiter } from '@/lib/rate-limit';
+import { previewBoundsError, resolveInlineBatch, resolveInlinePreview } from './inline-preview';
 
-/** Existence d'une cible interne `/guides/…` (même règle que la gate CI). */
-function guideHrefExists(href: string): boolean {
-  const m = /^\/guides(?:\/([^/]+)(?:\/([^/]+))?)?\/?$/.exec(href.trim());
-  if (!m) return false;
-  const [, cat, slug] = m;
-  if (!cat) return true; // landing racine
-  if (!(GUIDE_CATEGORY_SLUGS as readonly string[]).includes(cat)) return false;
-  if (!slug) return true; // landing de catégorie
-  return Boolean(getGuide(cat, slug));
+// 240 appels par minute et par IP (4 par seconde), pour les deux actions :
+// l'aperçu suit la frappe (un appel par pause de 250 à 300 ms), et l'éditeur
+// des pros/cons en lance jusqu'à trois par pause (le champ édité et les deux
+// colonnes). Une saisie soutenue reste en dessous.
+const rateLimited = createRateLimiter({ max: 240 });
+
+async function admit(texts: unknown): Promise<void> {
+  if (rateLimited(clientIp({ headers: await headers() }))) throw new Error('rate_limited');
+  const refused = previewBoundsError(texts);
+  if (refused) throw new Error(refused);
 }
 
 /**
@@ -45,16 +43,12 @@ export async function renderInlinePreview(
   text: string,
   lang: string,
 ): Promise<{ segments: InlineSegment[]; checks: TagCheck[] }> {
-  const l = normalizeLang(lang);
-  const t = await getT(l);
-  const segments = text.trim() ? resolveInlineSegments(text, { lang: l, t }) : [];
-  const checks = checkText(text ?? '', { guideHrefExists });
-  return { segments, checks };
+  await admit([text]);
+  return resolveInlinePreview(text, lang);
 }
 
 /** Résout un LOT de textes en segments (aperçu des lignes d'un éditeur). */
 export async function renderInlineBatch(texts: string[], lang: string): Promise<InlineSegment[][]> {
-  const l = normalizeLang(lang);
-  const t = await getT(l);
-  return texts.map((text) => (text.trim() ? resolveInlineSegments(text, { lang: l, t }) : []));
+  await admit(texts);
+  return resolveInlineBatch(texts, lang);
 }

@@ -20,7 +20,7 @@
  * rangs et ses chips partent en UNE écriture, sur l'entrée que la page avait lue.
  * Le disque est FACTICE, les stores et git INJECTÉS ; seul le roster est réel
  * (Aer, `2000055`). Et `previewInline`, l'aperçu de ces textes, par un
- * `renderInlineBatch` factice. Et `characterCoverage`, le récap de la curation
+ * `resolveInlineBatch` factice. Et `characterCoverage`, le récap de la curation
  * montré sans perso : roster et curés FACTICES, gardé sur leur `stamp`.
  *
  * Et contrat de `saveGearReco` — l'onglet « Gear reco ». Lui écrit et committe :
@@ -1074,7 +1074,7 @@ describe('characterRoster, characterSheetState — la fiche lue, disque injecté
   });
 });
 
-describe('previewInline — l’aperçu des textes de la fiche, par un `renderInlineBatch` factice', () => {
+describe('previewInline — l’aperçu des textes de la fiche, par un `resolveInlineBatch` factice', () => {
   it('rend les segments du moteur, alignés sur les textes, dans la langue demandée', async () => {
     const calls: [string[], string][] = [];
     const out = await previewInline(['a {B/X}', ''], 'fr', async (texts, lang) => {

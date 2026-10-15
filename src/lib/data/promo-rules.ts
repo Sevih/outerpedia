@@ -31,8 +31,18 @@ export interface Banner {
  */
 export const normalizeCouponCode = (code: string): string => code.trim().toUpperCase();
 
+/** 4 à 32 lettres ou chiffres, après `normalizeCouponCode` — même règle que le bot. */
+const CODE_RE = /^[A-Z0-9]{4,32}$/;
+
 /** Date de calendrier du jeu — `YYYY-MM-DD`, comme le changelog. */
 const DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
+
+/** `YYYY-MM-DD` ET date réelle (pas de 2026-02-30), comme `isDate` du bot. */
+function isDate(s: string): boolean {
+  if (!DATE_RE.test(s ?? '')) return false;
+  const d = new Date(`${s}T00:00:00Z`);
+  return !Number.isNaN(d.getTime()) && d.toISOString().startsWith(s);
+}
 
 /**
  * Écarts BLOQUANTS communs aux deux surfaces : une période sans date lisible ne
@@ -41,9 +51,9 @@ const DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
  * `YYYY-MM-DD` est ordonnable tel quel, et ça évite un décalage de fuseau.
  */
 function validatePeriod(at: string, start: string, end: string, errors: string[]): void {
-  if (!DATE_RE.test(start ?? '')) errors.push(`${at}: invalid start date (YYYY-MM-DD expected).`);
-  if (!DATE_RE.test(end ?? '')) errors.push(`${at}: invalid end date (YYYY-MM-DD expected).`);
-  if (DATE_RE.test(start ?? '') && DATE_RE.test(end ?? '') && end < start)
+  if (!isDate(start)) errors.push(`${at}: invalid start date (YYYY-MM-DD expected).`);
+  if (!isDate(end)) errors.push(`${at}: invalid end date (YYYY-MM-DD expected).`);
+  if (isDate(start) && isDate(end) && end < start)
     errors.push(`${at}: end date precedes start date.`);
 }
 
@@ -54,7 +64,8 @@ function validatePeriod(at: string, start: string, end: string, errors: string[]
  * un coupon cassé part en prod — il faut l'arrêter à l'écriture, pas au rendu.
  * Le CODE est unique parce qu'il est l'identité de l'entrée : deux lignes pour le
  * même code, et la période affichée devient un tirage au sort.
- * (Vérifié sur les 91 coupons committés au 26/07 : tous passent ces règles.)
+ * (Vérifié sur les 91 coupons committés au 26/07 : tous passent ces règles ;
+ * forme du code et date réelle revérifiées sur les 103 de l'instantané au 15/10.)
  */
 export function validateCoupons(list: PromoCode[]): string[] {
   const errors: string[] = [];
@@ -65,6 +76,7 @@ export function validateCoupons(list: PromoCode[]): string[] {
     const at = `Coupon ${i + 1} (${code || '?'})`;
     if (!code) errors.push(`${at}: code is required.`);
     else if (code !== code.toUpperCase()) errors.push(`${at}: code must be uppercase.`);
+    else if (!CODE_RE.test(code)) errors.push(`${at}: code must be 4 to 32 letters or digits.`);
     else if (seen.has(code)) errors.push(`${at}: duplicate code.`);
     else seen.add(code);
 
