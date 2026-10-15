@@ -16,6 +16,39 @@
 - [ ] **Revue d'extraction (suite de F14)** : le flag `art` qui apparaît sur
       un costume existant reste un écart — à trancher au premier cas.
 
+## 🔎 Revues d'octobre (tri du 15/10)
+
+Les revues de la logique du site et de la génération de données (09-12/10)
+ont été confrontées au code du 15/10 : tout est encore présent. Le détail,
+les preuves et les décisions vivent dans le tri consolidé de sevih-tool
+(`docs/revue/tri-2026-10-15.md`). Lots proposés, dans l'ordre :
+
+- [ ] **Garde perso de « Confirmer l'extraction » (R20, O6, O7)** : le mode
+      `all` de quick sur Personnages et Monstres écrit tout le frais sans
+      écarter les persos non intégrés. D'ici le correctif, ne pas s'en
+      servir sur ces deux cibles. Décision : refuser ce mode, ou le passer
+      par la garde de promote ?
+- [ ] **Coupons et menus du site (A)** : date réelle dans `validatePeriod`,
+      bannière servie le jour de sa fin, `/item` du bot, déblocage,
+      quirks, `<color>` imbriqués, commentaires périmés.
+- [ ] **Passifs de boss (C)** : H4, H5, M1, B9, M3, repli de H3.
+- [ ] **Sets et équipement (C, build)** : H2, M8, M9, M10, B1, R11, R12,
+      R13, O11, R17.
+- [ ] **Progression (B-C, build)** : H6, M5, M6, étoile de base des Core
+      Fusion.
+- [ ] **Rencontres (C, build)** : R1, R2, R3, O8, O9 ; côté site R4, R5,
+      R21.
+- [ ] **Primitives texte et pourcentage (C, build)** : R6, O3, O4, O14,
+      O15, R8, R19.
+- [ ] **Calculateur (C, build)** : H1, H3, M2, M4, B6, R14, R15, R16, R18,
+      O12.
+- [ ] **Persos (B, build)** : O1, O2, O10. **Gacha (C)** : M7.
+- [ ] **Contrat solver, L1 d'abord** : `schema` et `resVersion` dans
+      `solver/version.json` avant tout changement de forme (C1, M2, M3,
+      vitesse en %, noyau par niveau, `stat-keys.json`).
+- [ ] **Tests-gardes et code mort** : 7 règles recopiées sans test, trois
+      passes mortes d'`encounters.ts`.
+
 ## 🧰 Outil quick
 
 - [ ] **Migration de l'admin vers quick** (décision du 08/10) : inventaire,
