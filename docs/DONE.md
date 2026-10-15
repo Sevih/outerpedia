@@ -77,8 +77,9 @@ tsc --noEmit -p scripts/tsconfig.json`) et `pnpm lint` (`eslint`) sans
   `git diff` : `+  "schema": 1,` et `+  "resVersion": "1.11.407",`, `hash`
   `e0d0b39edac2` et `builtAt` `2026-10-09T12:41:11.159Z` inchangés : les
   installations existantes ne re-téléchargent rien. Vérification : le test
-  « version » de `solver.test.ts` exige les clés exactement `schema,
-resVersion, hash, builtAt`, `schema` entier ≥ 1 égal à `SOLVER_SCHEMA`,
+  « version » de `solver.test.ts` exige les clés, exactement et dans l'ordre,
+  `schema, resVersion, hash, builtAt` ; `schema` entier ≥ 1 égal à
+  `SOLVER_SCHEMA`,
   `resVersion` en `X.Y.Z` égale à `data/generated/game-version.json`, `hash`
   et `builtAt` comme avant ; `pnpm typecheck` et `pnpm lint` verts (sans
   sortie après la commande), `pnpm test` « Tests 3850 passed (3850) ».

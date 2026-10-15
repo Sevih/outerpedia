@@ -25,6 +25,24 @@
  *
  * ⚠ CONTRAT app externe : enums moteur BRUTS (`ST_*`, `OAT_*`, `CCT_*`, slots
  * `weapon…boots/exclusive/ooparts`), textes EN en string simple. Aucun slug wiki.
+ * L'app tire ces fichiers de la branche `main` sur GitHub : c'est le PUSH qui
+ * livre le contrat à toutes les installations, pas le déploiement du site.
+ * `version.json` = `{schema, resVersion, hash, builtAt}` : `schema` = forme du
+ * contrat (`SOLVER_SCHEMA`), `resVersion` = version des tables du jeu, `hash` =
+ * clé d'invalidation (les 18 tables seules), `builtAt` = dernier vrai changement.
+ * Règle d'évolution de `schema` :
+ *   - il ne monte que pour un changement qu'une ancienne version de gear-solver
+ *     lirait mal : champ ou fichier retiré ou renommé, sens d'un champ changé
+ *     (exemple réel : T16, base des entrées `27xxxxx`). Un ajout ne le change pas ;
+ *   - ordre d'un changement de forme : (a) outerpedia ajoute le nouveau champ à
+ *     côté de l'ancien, `schema` inchangé ; (b) une version de gear-solver qui
+ *     lit le nouveau champ et accepte `schema` + 1 est publiée ; (c) ensuite
+ *     seulement, outerpedia retire l'ancien champ et monte `schema` — les
+ *     versions qui ne savent pas le lire refusent alors la mise à jour et gardent
+ *     leur cache. Les versions publiées avant la lecture de `schema` (1.8.1 et
+ *     avant) ne sont tenues que par (a) ;
+ *   - un push sur `main` part tel quel chez toutes les installations : jamais
+ *     (c) avant que (b) soit publié.
  */
 import { createHash } from 'node:crypto';
 import { existsSync, readFileSync } from 'node:fs';
@@ -41,6 +59,9 @@ import {
 } from './solver-ingredients';
 
 const lang = 'English';
+
+/** Forme du contrat — ne monte que pour un changement mal lu par une ancienne app (cf. en-tête, (a)→(b)→(c)). */
+export const SOLVER_SCHEMA = 1;
 
 // ---- vue « sets » injectée depuis buildEquipment() (même build, source unique) --
 interface SetsViewEffect {
@@ -143,11 +164,22 @@ function fmtTurn(buff: Row | undefined): string {
 export interface SolverFiles {
   /** nom de fichier (sans dossier) → contenu, dans l'ORDRE d'émission de l'ancien build.mjs. */
   files: [string, unknown][];
-  /** `{hash, builtAt}` — idempotent contre le version.json COMMITTÉ. */
-  version: { hash: string; builtAt: string };
+  /** `{schema, resVersion, hash, builtAt}` — `builtAt` idempotent contre le version.json COMMITTÉ. */
+  version: { schema: number; resVersion: string; hash: string; builtAt: string };
 }
 
-export function buildSolver(inputs: { setsView: SolverSetsView }): SolverFiles {
+export function buildSolver(inputs: {
+  setsView: SolverSetsView;
+  /** Version des tables du jeu (`buildGameVersion()`) — pas de version.json sans elle. */
+  resVersion: string | undefined;
+}): SolverFiles {
+  const { resVersion } = inputs;
+  if (!resVersion) {
+    throw new Error(
+      'buildSolver : resVersion introuvable (manifest.dat sans "version" final) — ' +
+        'solver/version.json ne s’écrit pas sans la version des tables du jeu.',
+    );
+  }
   const files: [string, unknown][] = [];
   const emit = (name: string, data: unknown): void => {
     files.push([name, data]);
@@ -903,5 +935,7 @@ export function buildSolver(inputs: { setsView: SolverSetsView }): SolverFiles {
       /* malformé → re-stamp */
     }
   }
-  return { files, version: { hash, builtAt } };
+  // `schema` et `resVersion` hors du hash : un patch du jeu sans changement des
+  // tables ne doit pas faire re-télécharger toutes les installations.
+  return { files, version: { schema: SOLVER_SCHEMA, resVersion, hash, builtAt } };
 }

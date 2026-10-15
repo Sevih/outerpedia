@@ -29,6 +29,7 @@ import { existsSync, mkdirSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { buildDamageArtifacts } from './damage/build';
 import { buildEquipment } from './generators/equipment';
+import { buildGameVersion } from './generators/game-version';
 import { buildSolver, type SolverSetsView } from './generators/solver';
 import { gamedata } from './lib/paths';
 import { isMain } from './lib/is-main';
@@ -49,7 +50,10 @@ export async function syncDerived(): Promise<boolean> {
 
   // Solver : même vue des sets que datagen:build (source unique buildEquipment).
   const equipment = buildEquipment();
-  const solver = buildSolver({ setsView: equipment.sets as unknown as SolverSetsView });
+  const solver = buildSolver({
+    setsView: equipment.sets as unknown as SolverSetsView,
+    resVersion: buildGameVersion()?.resVersion,
+  });
   for (const dir of ['data/generated/solver', 'data/extracted/solver']) {
     mkdirSync(resolve(dir), { recursive: true });
     for (const [name, data] of solver.files) await writeJson(resolve(dir, name), data);

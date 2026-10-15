@@ -7,8 +7,10 @@
  *      string simple (pas de LangDict), slots `weapon…boots/exclusive/ooparts`.
  *      Aucun slug wiki — l'app parse ces valeurs, un slug la casserait.
  *   2. COHÉRENCE : les renvois inter-fichiers résolvent (gem → option, EE
- *      passive → groupe d'item, expCurves complets), et `version.json` reste
- *      une clé d'invalidation valide (12 hexa).
+ *      passive → groupe d'item, expCurves complets), et `version.json` porte
+ *      `{schema, resVersion, hash, builtAt}` : `schema` = `SOLVER_SCHEMA`,
+ *      `resVersion` = celle de `game-version.json`, `hash` une clé
+ *      d'invalidation valide (12 hexa).
  *
  * Tourne SANS `.gamedata` (contrainte CI) : rien n'appelle `buildSolver()`.
  */
@@ -25,7 +27,9 @@ import subTicksData from '../../data/generated/solver/sub-ticks.json';
 import trustCharacterData from '../../data/generated/solver/trust-character.json';
 import versionData from '../../data/generated/solver/version.json';
 import heroGrowthData from '../../data/generated/hero-growth.json';
+import gameVersionData from '../../data/generated/game-version.json';
 import { singleValue } from '../lib/tables';
+import { SOLVER_SCHEMA } from './solver';
 
 const characters = charactersData as Record<
   string,
@@ -204,8 +208,13 @@ describe('solver — cohérence inter-fichiers', () => {
     }
   });
 
-  it('version : hash 12 hexa + builtAt ISO — la clé d’invalidation de cache de l’app', () => {
-    const v = versionData as { hash: string; builtAt: string };
+  it('version : schema + resVersion + hash 12 hexa + builtAt ISO — la clé d’invalidation de cache de l’app', () => {
+    const v = versionData as { schema: number; resVersion: string; hash: string; builtAt: string };
+    expect(Object.keys(v)).toEqual(['schema', 'resVersion', 'hash', 'builtAt']);
+    expect(Number.isInteger(v.schema) && v.schema >= 1).toBe(true);
+    expect(v.schema).toBe(SOLVER_SCHEMA);
+    expect(v.resVersion).toMatch(/^\d+\.\d+\.\d+$/);
+    expect(v.resVersion).toBe(gameVersionData.resVersion);
     expect(v.hash).toMatch(/^[0-9a-f]{12}$/);
     expect(Number.isNaN(Date.parse(v.builtAt))).toBe(false);
   });

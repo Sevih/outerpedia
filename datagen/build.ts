@@ -329,7 +329,10 @@ async function main(): Promise<void> {
   // telles quelles depuis le repo — cf. datagen/generators/solver.ts). La vue des
   // sets vient du MÊME buildEquipment() que ci-dessus (source unique).
   mkdirSync(resolve(OUT, 'solver'), { recursive: true });
-  const solver = buildSolver({ setsView: equipment.sets as unknown as SolverSetsView });
+  const solver = buildSolver({
+    setsView: equipment.sets as unknown as SolverSetsView,
+    resVersion: gameVersion?.resVersion,
+  });
   for (const [name, data] of solver.files) await writeJson(`solver/${name}`, data);
   await writeJson('solver/version.json', solver.version);
 
