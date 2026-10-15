@@ -15885,6 +15885,8 @@ describe('Extraction — la page, sur le vrai markup', () => {
   ];
   /** Les cibles qui ont une fiche (`isSheetTarget` du serveur). */
   const SHEET_TARGETS = ['character', 'monster', 'ee', 'weapon', 'amulet', 'talisman', 'set'];
+  /** Les cibles sans « Confirmer l'extraction » (`WHOLE_ACCEPT_REFUSED` du serveur). */
+  const WHOLE_REFUSED = ['character', 'monster'];
   const MODES = [{ value: 'joint_challenge', label: 'Joint Challenge' }];
   const MODE_PLAN = {
     mode: 'joint_challenge',
@@ -16322,6 +16324,7 @@ describe('Extraction — la page, sur le vrai markup', () => {
           site: t.site,
           ...(t.readOnly ? { readOnly: true } : {}),
           sheet: SHEET_TARGETS.includes(id),
+          whole: !t.readOnly && !WHOLE_REFUSED.includes(id),
           tables: true,
           buckets: t.buckets,
           total: all.length,
@@ -16610,7 +16613,8 @@ describe('Extraction — la page, sur le vrai markup', () => {
     ]);
     expect(page.el('ex-minor').hidden).toBe(false);
     expect(page.el('ex-minor').textContent).toBe('Appliquer les retouches mineures (1)');
-    expect(page.el('ex-accept').hidden).toBe(false);
+    // Personnages n'a pas « Confirmer l'extraction » (`whole: false`), malgré ses écarts.
+    expect(page.el('ex-accept').hidden).toBe(true);
     expect(
       page
         .all('#ex-status button')
@@ -16728,8 +16732,8 @@ describe('Extraction — la page, sur le vrai markup', () => {
     expect(page.all('#ex-rows [data-sheet]')).toEqual([]);
     expect(page.all('#ex-rows [data-item]')).toEqual([]);
     expect(page.all('#ex-rows .ex-line').map((l) => l.title)).toEqual([
-      'Hors périmètre du site : aucune page ne sert ce monstre — ni fiche, ni intégration ici. Il part avec « Promouvoir » de la section Patch, ou avec « Confirmer l’extraction », qui écrit le fichier entier.',
-      'Hors périmètre du site : aucune page ne sert ce monstre — ni fiche, ni intégration ici. Il part avec « Promouvoir » de la section Patch, ou avec « Confirmer l’extraction », qui écrit le fichier entier.',
+      'Hors périmètre du site : aucune page ne sert ce monstre — ni fiche, ni intégration ici. Il part avec « Promouvoir » de la section Patch.',
+      'Hors périmètre du site : aucune page ne sert ce monstre — ni fiche, ni intégration ici. Il part avec « Promouvoir » de la section Patch.',
     ]);
     // Le diff se déplie comme ailleurs, et la ligne dépliée reste sans geste.
     page.open('55300006');
@@ -16746,11 +16750,8 @@ describe('Extraction — la page, sur le vrai markup', () => {
     });
     expect(page.el('ex-total').textContent).toBe('0 sur 2 entités hors site');
 
-    // « Confirmer l'extraction » écrit le fichier entier : son plan compte le hors-site.
-    page.el('ex-accept').click();
-    expect(page.el('ex-plan-text').textContent).toBe(
-      'Écrire l’extraction fraîche ENTIÈRE dans data/generated/monsters.json — toute l’extraction, pas seulement le périmètre du site (2 monstres hors site en plus) : 2 entités modifiées (dont 2 mineures et 0 coquille) réécrites — tout ou rien, puis un commit « chore(extractor): monster — extraction confirmee ».',
-    );
+    // Pas de « Confirmer l'extraction » sur les monstres : le hors-site part avec la promotion.
+    expect(page.el('ex-accept').hidden).toBe(true);
     expect(page.calls.filter((c) => c.body)).toEqual([]);
 
     // Rien hors site : pas de bascule, pas de badge.
@@ -16866,11 +16867,12 @@ describe('Extraction — la page, sur le vrai markup', () => {
   });
 
   it('« Confirmer l’extraction » dit d’abord ce qu’il va écrire, puis poste `all` avec `was` ; annuler ne poste rien', async () => {
-    const page = await extractor({ hash: '#extractor/character' });
+    const page = await extractor({ hash: '#extractor/item' });
+    expect(page.el('ex-accept').hidden).toBe(false);
     page.el('ex-accept').click();
     expect(page.el('ex-plan').hidden).toBe(false);
     expect(page.el('ex-plan-text').textContent).toBe(
-      'Écrire l’extraction fraîche ENTIÈRE dans data/generated/characters.json : 1 entité nouvelle écrite, 2 entités modifiées (dont 1 mineure et 0 coquille) réécrites, 1 entité retirée SUPPRIMÉE — tout ou rien, puis un commit « chore(extractor): character — extraction confirmee ».',
+      'Écrire l’extraction fraîche ENTIÈRE dans data/generated/items.json : 1 entité nouvelle écrite, 1 entité retirée SUPPRIMÉE — tout ou rien, puis un commit « chore(extractor): item — extraction confirmee ».',
     );
     page.el('ex-plan-cancel').click();
     expect(page.el('ex-plan').hidden).toBe(true);
@@ -16882,11 +16884,26 @@ describe('Extraction — la page, sur le vrai markup', () => {
     expect(page.calls.filter((c) => c.body)).toEqual([
       {
         path: '/api/extractor/accept',
-        body: { id: 'character', mode: 'all', was: 'sig:character:v1' },
+        body: { id: 'item', mode: 'all', was: 'sig:item:v1' },
       },
     ]);
     // Le disque fait foi : la cible est relue après le geste.
-    expect(page.calls.at(-1)).toEqual({ path: '/api/extractor/target?id=character' });
+    expect(page.calls.at(-1)).toEqual({ path: '/api/extractor/target?id=item' });
+  });
+
+  it('Personnages : pas de « Confirmer l’extraction », les retouches mineures restent, la note dit « Fiche » puis « Intégrer » ou Patch', async () => {
+    const page = await extractor({ hash: '#extractor/character' });
+    expect(page.el('ex-title').textContent).toBe('Personnages');
+    expect(page.el('ex-accept').hidden).toBe(true);
+    expect(page.el('ex-minor').hidden).toBe(false);
+    expect(page.el('ex-note').textContent).toBe(
+      'Les retouches mineures (texte reformulé sans nombre changé, costume ajouté, coquille) s’appliquent d’un geste ; les vrais écarts s’intègrent entité par entité — « Fiche », puis « Intégrer » — ou partent avec la section Patch. Pas de « Confirmer l’extraction » : il réécrirait le fichier entier, persos non intégrés compris.',
+    );
+    // Les lignes gardent leur « Fiche ».
+    expect(page.all('#ex-rows [data-sheet]').length).toBeGreaterThan(0);
+    // Une cible ordinaire, avec des écarts : le bouton est là.
+    const item = await extractor({ hash: '#extractor/item' });
+    expect(item.el('ex-accept').hidden).toBe(false);
   });
 
   it('« Appliquer les retouches mineures » poste `minor` sans confirmation ; le bilan d’images se lit après', async () => {

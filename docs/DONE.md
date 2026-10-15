@@ -5,6 +5,49 @@
 > détail vit dans git. Le `CHANGELOG.md` racine est GELÉ depuis le 03/08 —
 > ce fichier et le log git SONT le journal du projet.
 
+## 2026-10-15
+
+- **« Confirmer l'extraction » refusé sur Personnages et Monstres (lot A53,
+  R20 du tri des revues du 15/10).** Dans quick, Données › Extraction, le
+  mode `all` d'`acceptExtraction` (`scripts/quick/actions.ts`) appelle
+  `acceptTarget`, qui réécrit `data/generated/<cible>.json` ENTIER avec le
+  frais : sur Personnages, ça contournait `stripUnintegratedCharacters` de
+  `datagen:promote` (le perso `2400015`, sans nom ni date, serait parti en
+  prod) ; sur Monstres, la rétention de `RETAIN_ENTITIES`. Décision de Sevih
+  (15/10) : refuser ce mode sur ces deux cibles. **Serveur** : une table
+  `WHOLE_ACCEPT_REFUSED` (id → pourquoi, ce qu'il faut faire à la place :
+  « Fiche », puis « Intégrer », ou la section Patch) ; `acceptExtraction`
+  rend `{ ok: false, log: ['Rien n’est écrit — …'] }` en tête, AVANT la
+  porte et toute écriture, pour `all` comme pour un `mode` absent ou inconnu
+  (qui valent `all`) ; `minor` passe toujours (il ne fusionne que des
+  entités déjà validées). `acceptTarget` n'a pas bougé. `extractorTarget`
+  sert un booléen `whole` (`acceptsWhole` : ni en lecture, ni dans la
+  table), comme `sheet`. **Page** (`scripts/quick/ui/tabs/extractor.js`) :
+  le bouton est caché quand `!tg.whole`, sans id en dur ; la note de
+  Personnages dit « les vrais écarts s'intègrent entité par entité —
+  « Fiche », puis « Intégrer » — ou partent avec la section Patch », celle des
+  Monstres renvoie le reste à « Promouvoir » (qui garde les monstres retirés
+  du jeu), et le `title` des lignes hors site ne cite plus « Confirmer ». Le
+  morceau monstre du plan de confirmation (« toute l'extraction, pas
+  seulement le périmètre du site… »), devenu inatteignable, est retiré.
+  `STYLE.md` § Extraction suit. **Vérification** : `actions.test.ts` — refus
+  sur `character` et `monster` en `all`/absent/inconnu sans appel au moteur
+  ni à git, `minor` accepté sur les deux, `whole` servi (faux sur les deux
+  et sur la cible en lecture, vrai sur `item` et `weapon`) ; les tests
+  heureux de `all` passent sur `item`. `ui-serve.test.ts` — pas de bouton
+  sur Personnages (malgré ses écarts) ni sur Monstres, présent sur Items, la
+  note de Personnages. `pnpm typecheck` et `pnpm lint` sans sortie d'erreur
+  (dernière ligne : la commande `tsc … -p scripts/tsconfig.json`, puis
+  `$ eslint`) ; `pnpm test` « Tests 3781 passed (3781) » ;
+  `NODE_ENV=development pnpm exec vitest run scripts/quick` « Tests 1146
+  passed (1146) ». Banc : quick isolé sur :4799 (clés vidées), GET seuls —
+  `/api/extractor/target` sert `whole: false` sur `character` (1 new,
+  `2400015`) et `monster`, `true` sur `item` ; capture de la cible
+  Personnages (`shot.mjs`, onglet `extractor`, hash
+  `extractor/character`) : la note neuve, la ligne avec « Fiche », pas de
+  « Confirmer l'extraction ». **Laissé** : O6 et O7 (item du TODO gardé
+  pour eux).
+
 ## 2026-10-14
 
 - **Relecture A52 (Opus) — restes d'A51 : messages vers quick, clés

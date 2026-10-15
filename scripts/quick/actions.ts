@@ -7621,6 +7621,8 @@ export async function extractorTarget(
     ...(target.readOnly ? { readOnly: true as const } : {}),
     /** Les entités de cette cible ont une fiche (`#extractor/<cible>/<clé>`). */
     sheet: isSheetTarget(id),
+    /** La cible accepte « Confirmer l'extraction » (cf. `WHOLE_ACCEPT_REFUSED`). */
+    whole: acceptsWhole(target),
   };
   if (!deps.tables())
     return {
@@ -7746,12 +7748,30 @@ async function extractorGate(
 }
 
 /**
+ * Les cibles où « Confirmer l'extraction » est REFUSÉ, et pourquoi : réécrire
+ * le fichier entier contournerait la garde de `datagen:promote` — les persos
+ * pas encore intégrés (`stripUnintegratedCharacters`), la rétention des
+ * monstres (`RETAIN_ENTITIES`). On y intègre par « Intégrer » sur la fiche de
+ * l'entité, ou par la section Patch ; les retouches mineures restent permises.
+ */
+const WHOLE_ACCEPT_REFUSED: Readonly<Record<string, string>> = {
+  character:
+    'Personnages : « Confirmer l’extraction » réécrirait le fichier entier, persos non intégrés compris. Intègre entité par entité (« Fiche », puis « Intégrer ») ou passe par la section Patch.',
+  monster:
+    'Monstres : « Confirmer l’extraction » réécrirait le fichier entier, sans la rétention des monstres que le jeu a retirés. Intègre entité par entité (« Fiche », puis « Intégrer ») ou passe par la section Patch.',
+};
+
+/** La cible accepte « Confirmer l'extraction » (ni en lecture, ni refusée). */
+const acceptsWhole = (target: ExtractorTargetInfo): boolean =>
+  !target.readOnly && !Object.hasOwn(WHOLE_ACCEPT_REFUSED, target.id);
+
+/**
  * « Confirmer l'extraction » (`all` : `acceptTarget`, le fichier ENTIER
  * réécrit — nouvelles et disparues comprises, tout-ou-rien) ou « Appliquer les
  * retouches mineures » (`minor` : `acceptMinor`, les seules entités typo ou
  * mineures fusionnées) d'une cible, puis UN commit du fichier. Refusé AVANT
- * d'écrire pour une cible en lecture, sans tables du jeu, ou si l'écran a vu
- * autre chose (`stale`). Les
+ * d'écrire pour une cible en lecture, sans tables du jeu, si l'écran a vu
+ * autre chose (`stale`), et en `all` sur les cibles de `WHOLE_ACCEPT_REFUSED`. Les
  * images des entités validées que l'écriture touche sont stagées par le
  * moteur ; le bilan va au journal, et la section Patch pousse le staging.
  */
@@ -7762,6 +7782,8 @@ export async function acceptExtraction(
   report?: Report,
 ): Promise<ExtractorOutcome> {
   const mode: ExtractorMode = body.mode === 'minor' ? 'minor' : 'all';
+  if (mode === 'all' && Object.hasOwn(WHOLE_ACCEPT_REFUSED, id))
+    return { ok: false, log: [`Rien n’est écrit — ${WHOLE_ACCEPT_REFUSED[id]}`] };
   const gate = await extractorGate(id, body.was, deps);
   if ('refused' in gate) return gate.refused;
   const { target } = gate;

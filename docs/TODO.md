@@ -23,12 +23,10 @@ ont été confrontées au code du 15/10 : tout est encore présent. Le détail,
 les preuves et les décisions vivent dans le tri consolidé de sevih-tool
 (`docs/revue/tri-2026-10-15.md`). Lots proposés, dans l'ordre :
 
-- [ ] **Garde perso de « Confirmer l'extraction » (R20, O6, O7) — R20 : lot
-      A53** : le mode `all` de quick sur Personnages et Monstres écrit tout
-      le frais sans écarter les persos non intégrés. D'ici A53, ne pas s'en
-      servir sur ces deux cibles. Décision du 15/10 : le refuser sur ces
-      deux cibles. Restent O6 (purge d'`integrate-equipment` sur JSON
-      cassé) et O7 (la garde ne couvre pas `skills.json`).
+- [ ] **Garde perso de « Confirmer l'extraction » (O6, O7)** : R20 FAIT
+      (A53, le mode `all` refusé sur Personnages et Monstres). Restent O6
+      (purge d'`integrate-equipment` sur JSON cassé) et O7 (la garde ne
+      couvre pas `skills.json`).
 - [ ] **Coupons et menus du site (A)** : date réelle dans `validatePeriod`,
       bannière servie le jour de sa fin, `/item` du bot, déblocage,
       quirks, `<color>` imbriqués, commentaires périmés.

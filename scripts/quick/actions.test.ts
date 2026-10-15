@@ -10183,6 +10183,7 @@ describe('Extraction — extractorOverview, extractorTarget, acceptExtraction, i
       file: 'characters.json',
       site: false,
       sheet: true,
+      whole: false,
       tables: false,
       reason: NO_GAME_DATA,
       buckets: EMPTY,
@@ -10200,19 +10201,57 @@ describe('Extraction — extractorOverview, extractorTarget, acceptExtraction, i
 
   it('« Confirmer l’extraction » : `acceptTarget` puis UN commit du fichier, le bilan d’images au journal', async () => {
     const { calls, git, fake } = deps({ assets: ASSETS });
-    const out = await acceptExtraction('character', { mode: 'all', was: 'sig:character:v1' }, fake);
+    const out = await acceptExtraction('item', { mode: 'all', was: 'sig:item:v1' }, fake);
     expect(out.ok).toBe(true);
     expect(out.assets).toEqual(ASSETS);
     expect(out.log).toEqual([
-      'Personnages : extraction confirmée — data/generated/characters.json réécrit en entier.',
+      'Items : extraction confirmée — data/generated/items.json réécrit en entier.',
       'images : 2 produites, 1 refaite, 3 déjà là, 1 manquante — le staging part avec « Committer » de la section Patch.',
       'image manquante : images/x.webp — absente du jeu',
       'git : fait',
     ]);
-    expect(calls).toEqual(['acceptTarget character', 'git']);
+    expect(calls).toEqual(['acceptTarget item', 'git']);
     expect(git).toEqual([
-      [['data/generated/characters.json'], 'chore(extractor): character — extraction confirmee'],
+      [['data/generated/items.json'], 'chore(extractor): item — extraction confirmee'],
     ]);
+  });
+
+  it('« Confirmer l’extraction » refusé sur Personnages et Monstres AVANT d’écrire ; leurs retouches mineures passent, la cible sert `whole`', async () => {
+    const refusals = {
+      character:
+        'Rien n’est écrit — Personnages : « Confirmer l’extraction » réécrirait le fichier entier, persos non intégrés compris. Intègre entité par entité (« Fiche », puis « Intégrer ») ou passe par la section Patch.',
+      monster:
+        'Rien n’est écrit — Monstres : « Confirmer l’extraction » réécrirait le fichier entier, sans la rétention des monstres que le jeu a retirés. Intègre entité par entité (« Fiche », puis « Intégrer ») ou passe par la section Patch.',
+    };
+    for (const [id, log] of Object.entries(refusals)) {
+      // Un `mode` absent ou inconnu vaut « tout » : refusé de même.
+      for (const mode of ['all', undefined, 'weird']) {
+        const { calls, git, fake } = deps({ assets: ASSETS });
+        const out = await acceptExtraction(id, { mode, was: `sig:${id}:v1` }, fake);
+        expect(out, `${id} ${mode}`).toEqual({ ok: false, log: [log] });
+        expect(calls, `${id} ${mode}`).toEqual([]);
+        expect(git, `${id} ${mode}`).toEqual([]);
+      }
+      // « Appliquer les retouches mineures » reste permis : seules les validées fusionnent.
+      const soft = deps({ minor: 1 });
+      const minor = await acceptExtraction(id, { mode: 'minor', was: `sig:${id}:v1` }, soft.fake);
+      expect(minor.ok, id).toBe(true);
+      expect(soft.calls, id).toEqual([`acceptMinor ${id}`, 'git']);
+    }
+    // Ce que la page lit pour proposer le bouton, ou non.
+    const { fake } = deps();
+    const whole = async (id: string) => {
+      const t = await extractorTarget(id, {}, fake);
+      if ('error' in t) throw new Error(t.error);
+      return t.whole;
+    };
+    expect(await whole('character')).toBe(false);
+    expect(await whole('monster')).toBe(false);
+    expect(await whole('item')).toBe(true);
+    expect(await whole('weapon')).toBe(true);
+    expect(await extractorTarget('monster-skill', {}, deps({ readOnly: true }).fake)).toMatchObject(
+      { whole: false },
+    );
   });
 
   it('« Appliquer les retouches mineures » : `acceptMinor`, le compte au commit ; rien à appliquer = pas de commit', async () => {
@@ -10249,15 +10288,11 @@ describe('Extraction — extractorOverview, extractorTarget, acceptExtraction, i
 
   it('refuse AVANT d’écrire : `was` qui a bougé (`stale`), tables absentes, cible inconnue', async () => {
     const stale = deps({ sig: 'v2' });
-    const out = await acceptExtraction(
-      'character',
-      { mode: 'all', was: 'sig:character:v1' },
-      stale.fake,
-    );
+    const out = await acceptExtraction('item', { mode: 'all', was: 'sig:item:v1' }, stale.fake);
     expect(out.ok).toBe(false);
     expect(out.stale).toBe(true);
     expect(out.log[0]).toMatch(
-      /^Rien n’est écrit — Personnages : les tables du jeu ou data\/generated\/characters\.json ont changé/,
+      /^Rien n’est écrit — Items : les tables du jeu ou data\/generated\/items\.json ont changé/,
     );
     expect(stale.calls).toEqual([]);
 
@@ -10325,7 +10360,7 @@ describe('Extraction — extractorOverview, extractorTarget, acceptExtraction, i
 
   it('un commit qui échoue : le geste est fait, l’issue le dit', async () => {
     const { fake } = deps({ git: { ok: false, log: ['git commit a échoué : x'] } });
-    const out = await acceptExtraction('character', { mode: 'all', was: 'sig:character:v1' }, fake);
+    const out = await acceptExtraction('item', { mode: 'all', was: 'sig:item:v1' }, fake);
     expect(out.ok).toBe(false);
     expect(out.log.at(-1)).toBe('git commit a échoué : x');
   });

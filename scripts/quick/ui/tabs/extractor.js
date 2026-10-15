@@ -51,7 +51,7 @@ const STATUSES = [
 const OFF_SITE = 'offsite';
 /** Pourquoi une ligne hors site n'a ni « Fiche » ni « Intégrer ». */
 const OFF_SITE_WHY =
-  'Hors périmètre du site : aucune page ne sert ce monstre — ni fiche, ni intégration ici. Il part avec « Promouvoir » de la section Patch, ou avec « Confirmer l’extraction », qui écrit le fichier entier.';
+  'Hors périmètre du site : aucune page ne sert ce monstre — ni fiche, ni intégration ici. Il part avec « Promouvoir » de la section Patch.';
 /** La teinte du badge d'un statut : les vrais écarts en rouge, le nouveau en accent, le reste discret. */
 const TONE = { new: 'edit', diff: 'ko', minor: 'off', typo: 'off', removed: 'ko' };
 
@@ -237,23 +237,26 @@ function renderHead() {
   if (tg.offSite) badges.push(`<span class="badge off">+${tg.offSite} hors site</span>`);
   $('ex-badges').innerHTML = badges.join('');
   const soft = b.minor + b.typo;
-  // Une cible en lecture n'a aucun geste : ni retouches, ni confirmation.
+  // Une cible en lecture n'a aucun geste : ni retouches, ni confirmation. Une
+  // cible sans `whole` (Personnages, Monstres) garde ses retouches, sans « Confirmer ».
   const minor = $('ex-minor');
   minor.hidden = !tg.tables || !soft || Boolean(tg.readOnly);
   minor.textContent = `Appliquer les retouches mineures (${soft})`;
   minor.disabled = busy;
   const accept = $('ex-accept');
-  accept.hidden = !tg.tables || !tg.total || Boolean(tg.readOnly);
+  accept.hidden = !tg.tables || !tg.total || Boolean(tg.readOnly) || !tg.whole;
   accept.disabled = busy;
   $('ex-note').textContent = tg.readOnly
     ? `À lire seulement : ce que l’extraction fraîche changerait à data/generated/${tg.file}. Rien ne se confirme ici — le fichier part avec ses monstres : « Promouvoir » de la section Patch (monsters, monster-skills et encounters, le trio à rétention), ou « Intégrer » d’un monstre, qui écrit ses skills avec lui.`
     : tg.site
-      ? `Les monstres sont comptés au périmètre du SITE (ceux qu’une page sert) ; « Confirmer l’extraction » écrit quand même le fichier entier, toute l’extraction. « Fiche » : les stats, les rencontres, les skills, les archives et « Intégrer » d’un monstre.${tg.offSite ? ` « hors site » : ${plural(tg.offSite, 'monstre')} que le diff porte en plus — à lire, sans fiche ni intégration.` : ''}`
+      ? `Les monstres sont comptés au périmètre du SITE (ceux qu’une page sert). « Fiche » : les stats, les rencontres, les skills, les archives et « Intégrer » d’un monstre ; le reste part avec « Promouvoir » de la section Patch, qui garde les monstres que le jeu a retirés — pas de « Confirmer l’extraction », qui réécrirait le fichier entier sans eux.${tg.offSite ? ` « hors site » : ${plural(tg.offSite, 'monstre')} que le diff porte en plus — à lire, sans fiche ni intégration.` : ''}`
       : isItem()
         ? 'Un item s’intègre ou se retire un par un, par sa ligne ; « Confirmer l’extraction » écrit tout le catalogue d’un coup.'
-        : tg.sheet
-          ? 'Les retouches mineures (texte reformulé sans nombre changé, costume ajouté, coquille) s’appliquent d’un geste ; les vrais écarts attendent « Confirmer l’extraction », tout ou rien par fichier — ou « Fiche », puis « Intégrer » : cette seule entité.'
-          : 'Les retouches mineures (texte reformulé sans nombre changé, costume ajouté, coquille) s’appliquent d’un geste ; les vrais écarts attendent « Confirmer l’extraction », tout ou rien par fichier.';
+        : tg.sheet && !tg.whole
+          ? 'Les retouches mineures (texte reformulé sans nombre changé, costume ajouté, coquille) s’appliquent d’un geste ; les vrais écarts s’intègrent entité par entité — « Fiche », puis « Intégrer » — ou partent avec la section Patch. Pas de « Confirmer l’extraction » : il réécrirait le fichier entier, persos non intégrés compris.'
+          : tg.sheet
+            ? 'Les retouches mineures (texte reformulé sans nombre changé, costume ajouté, coquille) s’appliquent d’un geste ; les vrais écarts attendent « Confirmer l’extraction », tout ou rien par fichier — ou « Fiche », puis « Intégrer » : cette seule entité.'
+            : 'Les retouches mineures (texte reformulé sans nombre changé, costume ajouté, coquille) s’appliquent d’un geste ; les vrais écarts attendent « Confirmer l’extraction », tout ou rien par fichier.';
   $('ex-plan').hidden = true;
   renderMode();
 }
@@ -461,7 +464,7 @@ $('ex-accept').onclick = () => {
       `${plural(bk().removed, 'entité retirée', 'entités retirées')} SUPPRIMÉE${bk().removed > 1 ? 'S' : ''}`,
     );
   $('ex-plan-text').textContent =
-    `Écrire l’extraction fraîche ENTIÈRE dans data/generated/${tg.file}${tg.site ? ` — toute l’extraction, pas seulement le périmètre du site${tg.offSite ? ` (${plural(tg.offSite, 'monstre')} hors site en plus)` : ''}` : ''} : ${parts.join(', ') || 'aucun écart'} — tout ou rien, puis un commit « chore(extractor): ${tg.id} — extraction confirmee ».`;
+    `Écrire l’extraction fraîche ENTIÈRE dans data/generated/${tg.file} : ${parts.join(', ') || 'aucun écart'} — tout ou rien, puis un commit « chore(extractor): ${tg.id} — extraction confirmee ».`;
   $('ex-plan').hidden = false;
   $('ex-plan-go').focus();
 };
