@@ -7,6 +7,27 @@
 
 ## 2026-10-15
 
+- **Relecture des lots B50 et C17 (Opus) — six tests-gardes et « certains
+  persos » pour la discussion des niveaux 30 et 70 ; échelle de
+  transcendance du jeu, étoile de base des Core Fusion, limit break du Hero
+  tracker : validés.** B50 `4d2634d4`, C17 `29c0f81c`, un commit chacun, ni
+  `package.json` ni lock. **Contrôles sur HEAD** : typecheck, lint,
+  format:check verts ; `pnpm test` 227 fichiers / 3879 tests ;
+  `pnpm damage:check` 42 lignes exactes, 0 en dérive. **Constaté** : B50
+  n'ajoute à la donnée que `affinityStatLevels` (`hero-growth.json`) et
+  `openDay` (`towers.json`, 1/8/15/22) ; `solver/version.json` intact. C17
+  change le contrat solver en valeurs seulement (`hash` `6b05386eb070`,
+  toutes les installations re-téléchargent au push) : les 1★/2★ perdent les
+  crans fantômes 5/7/8 de `transcendByStar` (lignes à 0 %), 2700003 et
+  2700005 passent à `star: 2`. Côté gear-solver, `star` sert de clé au
+  limit break (`charLevelMax["<star>|<step>"]`) : les lignes `2|n` et `3|n`
+  sont identiques (200/400/700), aucun chiffre ne bouge ; `data:sync` joué
+  (gear-solver `2e8982b`), typecheck et 80 + 77 + 368 tests verts. **À
+  contrôler par Sevih** : le Hero tracker avec une sauvegarde existante
+  (migration v2 → v3 des index de transcendance, couverte par
+  `stores.test.ts`) ; le curseur de transcendance d'une fiche 2★ et celle de
+  Snow fusionné. **Suite** : aucun lot ouvert ; release de gear-solver avant
+  tout changement de forme du contrat.
 - **Progression : échelle de transcendance du jeu (`UseTransStar`), étoile de
   base des Core Fusion, limit break du Hero tracker (lot C17, tri des revues du
   15/10 : H6, M5, M6 et § Duplication de la revue de logique, R7 de la revue de
