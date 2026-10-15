@@ -7,6 +7,24 @@
 
 ## 2026-10-15
 
+- **Relecture des lots A56 et A57 (Opus) — `schema` et `resVersion` dans
+  le contrat solver ; passes mortes d'`encounters.ts` et `IsDebuff` retirés :
+  validés.** A56 `8318632f` (code, `version.json` régénéré), A57 `83b82e2b`
+  ; les deux lots tournaient ensemble, et l'entrée DONE d'A56 et sa ligne
+  TODO sont parties dans le commit d'A57 (index partagé) : contenu juste,
+  rien à refaire. Ni `package.json` ni lock. **Contrôles sur HEAD** :
+  typecheck, lint, format:check verts ; `pnpm test` 224 fichiers / 3850
+  tests.
+  **Constaté** : `data/generated/solver/version.json` ne gagne que
+  `"schema": 1` et `"resVersion": "1.11.407"`, `hash` inchangé
+  (`e0d0b39edac2`) — aucune installation ne re-télécharge ; `buildSolver`
+  refuse d'écrire sans `resVersion`. A57 ne retire que du code sans entrée
+  (aucun donjon des trois modes ignorés n'atteint `encounters.json`, colonne
+  `IsDebuff` vide). **Suite de G1** : `npm run data:sync` de gear-solver
+  joué contre ce HEAD (`ed0d540` côté gear-solver) : seul `version.json` y
+  change, mêmes tables. Le TODO disait G1 restant : il est fait
+  (`ba7d2c0`), reste la release de gear-solver avant tout changement de
+  forme. **Suite** : B50 seul (`datagen:build`), puis C17 seul.
 - **Code mort de datagen : trois passes d'`encounters.ts` et `IsDebuff` de
   `classifyCategory` retirés (lot A57, constats J9 et J11 de la revue de
   génération des données).** Quoi : dans `datagen/generators/encounters.ts`,
