@@ -27,6 +27,14 @@ les preuves et les décisions vivent dans le tri consolidé de sevih-tool
       (A53, le mode `all` refusé sur Personnages et Monstres). Restent O6
       (purge d'`integrate-equipment` sur JSON cassé) et O7 (la garde ne
       couvre pas `skills.json`).
+- [ ] **Équipement et étages de tour rendus à chaque requête** (repéré par
+      A54, 15/10) : le build classe `equipment/[slug]` et
+      `guides/[category]/[slug]/[floor]` en `ƒ`, servis en
+      `Cache-Control: private, no-store`, alors que leurs commentaires
+      annoncent un rendu à la demande puis 24 h de cache (`revalidate`).
+      Trouver ce qui les rend dynamiques (un `headers()`, `cookies()` ou
+      `searchParams` lu en chemin) et décider : les mettre en cache, ou
+      corriger les commentaires.
 - [ ] **Coupons et menus du site (A)** : date réelle dans `validatePeriod`,
       bannière servie le jour de sa fin, `/item` du bot, déblocage,
       quirks, `<color>` imbriqués, commentaires périmés.

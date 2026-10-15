@@ -7,6 +7,31 @@
 
 ## 2026-10-15
 
+- **Relecture A53 / A54 (Opus) — « Confirmer l'extraction » refusé sur
+  Personnages et Monstres, cache ISR en mémoire, proxy et `dynamicParams`
+  resserrés : les deux validés.** Deux commits (`d7bbbcd0`, `62c2ae4c`),
+  lancés en même temps alors que le lot les voulait l'un après l'autre :
+  sans dommage, aucun fichier commun, chacun au périmètre de son lot, ni
+  `package.json` ni lock (A54 note deux échecs passagers des tests quick
+  d'A53 en cours d'écriture, verts au second passage). **Contrôles sur HEAD**
+  : typecheck, lint, format:check verts ; `pnpm test` 217 fichiers / 3781
+  tests ; `vitest run scripts/quick` 8 / 1146 ; `src/proxy.test.ts` 15 / 15.
+  **Rejeux** : A53, par `tsx` avec un moteur et un git piégés (toute écriture
+  ou tout commit lève) : `acceptExtraction` refuse `character` et `monster`
+  en `all`, en mode absent et en mode inconnu, sans rien appeler ;
+  `extractorTarget` sert `whole: false` sur Personnages et Monstres, `true`
+  sur Items et Armes. A54 : l'option `isrFlushToDisk` existe bien dans
+  `config-shared.d.ts` de next 16.4.0 ; le banc standalone de l'agent (20
+  URL inconnues → 20 × 404 et 0 fichier écrit, pages réelles en 200) n'a
+  pas été refait, il se contrôle en prod après le déploiement (ci-dessous).
+  `event/[slug]` laissé ouvert à raison : ses slugs viennent du runtime
+  (`events.json` publié sur R2 par quick). **Reste à Sevih** : relancer son
+  quick (la cible Personnages n'a plus « Confirmer l'extraction ») ; après
+  le push, une URL inconnue ne doit plus écrire dans
+  `/app/.next/server/app` du conteneur (je le vérifie au déploiement). **Au
+  TODO** : `equipment/[slug]` et `[floor]` rendus à chaque requête
+  (`Cache-Control: private, no-store`) alors que leurs commentaires
+  annoncent 24 h de cache, repéré par A54. **Suite** : aucun lot ouvert.
 - **Cache ISR en mémoire, exemptions du proxy resserrées, `dynamicParams`
   fermé (lot A54, tri des revues du 15/10).** Une URL inconnue rendait un 404
   que Next mettait en cache ISR et ÉCRIVAIT sur le disque du conteneur (prod
