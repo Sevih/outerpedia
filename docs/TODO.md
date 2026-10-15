@@ -51,8 +51,6 @@ les preuves et les décisions vivent dans le tri consolidé de sevih-tool
       vitesse en %, noyau par niveau, `stat-keys.json`). FAIT côté
       outerpedia (A56) et lu par gear-solver (G1, 15/10) ; reste la release
       de gear-solver, puis les changements de forme.
-- [ ] **Tests-gardes** : 7 règles recopiées sans test. Code mort FAIT
-      (A57, 15/10).
 
 ## 🧰 Outil quick
 

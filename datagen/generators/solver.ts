@@ -905,6 +905,17 @@ export function buildSolver(inputs: {
       const pct = o.ApplyingType === 'OAT_RATE';
       const key = pct ? keys.pct : keys.flat;
       const raw = Number(o.OptionValue);
+      // Le client (`CItemSubOptionData`) part d'`OptionValue` et ajoute `OptionFactor`
+      // par niveau : prendre `OptionValue` pour le pas d'un tick ne tient que tant
+      // que les deux sont égaux (vrai sur 105/106 au 15/10/2026). Un patch qui les
+      // sépare doit casser ICI, pas servir des ticks faux en silence.
+      if (Number(o.OptionFactor) !== raw) {
+        throw new Error(
+          `solver : sub-tick ${o.ID} (groupe ${groupId}, ${o.StatType} ${o.ApplyingType}) — ` +
+            `OptionFactor ${o.OptionFactor} ≠ OptionValue ${o.OptionValue} : le pas d'un tick ` +
+            `n'est plus OptionValue, revoir sub-ticks.json et sa lecture par gear-solver`,
+        );
+      }
       row[key] = { step: pct ? raw / 10 : raw, percent: pct };
     }
     if (Object.keys(row).length) subTicks[String(star)] = row;

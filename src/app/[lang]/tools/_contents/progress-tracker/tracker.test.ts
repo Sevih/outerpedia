@@ -5,6 +5,7 @@
  * ancien schéma — le contrat de migration est NON NÉGOCIABLE, épinglé ici.
  */
 import { describe, expect, it } from 'vitest';
+import { getTower } from '@/lib/data/towers';
 import {
   PROGRESS_SPEC,
   SETTINGS_SPEC,
@@ -25,6 +26,8 @@ import {
   normalizeSettings,
   reconcileProgress,
   syncProgressWithSettings,
+  VHT_PHASE_LABELS,
+  VHT_UNLOCK_DAYS,
   withCategoryToggled,
   withPreciseCraftDays,
   withPreciseCraftToggled,
@@ -231,6 +234,23 @@ describe('tour céleste very hard (déblocage progressif)', () => {
     expect(getNextVHTUnlockTime(Date.UTC(2026, 6, 10))).toBe(Date.UTC(2026, 6, 15));
     expect(getNextVHTUnlockTime(WED)).toBe(Date.UTC(2026, 6, 22));
     expect(getNextVHTUnlockTime(Date.UTC(2026, 6, 25))).toBeNull();
+  });
+
+  // GARDE-FOU : jours et plages recopiés à la main de `DungeonPVEGroupTemplet.OpenDayOfMonth`
+  // (lignes `DM_TOWER_VERY_HARD`), que `towers.json` émet en `openDay`. Un rouge ici après
+  // un patch = le calendrier du jeu a bougé : corriger `VHT_UNLOCK_DAYS` et
+  // `VHT_PHASE_LABELS` dans `tracker.ts`, pas ce test.
+  it('jours et plages d’étages : ceux de DungeonPVEGroupTemplet (towers.json)', () => {
+    const floors = getTower('tower_very_hard')?.floors ?? [];
+    const days = [...new Set(floors.flatMap((f) => (f.openDay ? [f.openDay] : [])))].sort(
+      (a, b) => a - b,
+    );
+    expect(VHT_UNLOCK_DAYS, 'jours d’ouverture').toEqual(days);
+    const ranges = days.map((day) => {
+      const opened = floors.filter((f) => f.openDay === day).map((f) => f.floor);
+      return `${Math.min(...opened)}-${Math.max(...opened)}`;
+    });
+    expect(VHT_PHASE_LABELS, 'plages d’étages par jour').toEqual(ranges);
   });
 });
 

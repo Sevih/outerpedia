@@ -300,19 +300,22 @@ export function getNextReset(type: TaskType, now: number): number {
 
 export const VHT_PHASE_LABELS = ['1-5', '6-10', '11-15', '16-20'];
 
+/**
+ * Jours du mois où s'ouvre chaque phase (`DungeonPVEGroupTemplet.OpenDayOfMonth`,
+ * recopié à la main ; `tracker.test.ts` le garde contre `towers.json`).
+ */
+export const VHT_UNLOCK_DAYS = [1, 8, 15, 22];
+
 /** Phases débloquées selon le jour du mois : 1er/8/15/22 → 1/2/3/4. */
 export function getVHTUnlockedPhase(now: number): number {
   const dayOfMonth = new Date(now).getUTCDate();
-  if (dayOfMonth >= 22) return 4;
-  if (dayOfMonth >= 15) return 3;
-  if (dayOfMonth >= 8) return 2;
-  return 1;
+  return Math.max(1, VHT_UNLOCK_DAYS.filter((day) => dayOfMonth >= day).length);
 }
 
 export function getNextVHTUnlockTime(now: number): number | null {
   const phase = getVHTUnlockedPhase(now);
-  if (phase >= 4) return null;
-  const unlockDay = [1, 8, 15, 22][phase];
+  if (phase >= VHT_UNLOCK_DAYS.length) return null;
+  const unlockDay = VHT_UNLOCK_DAYS[phase];
   const d = new Date(now);
   return Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), unlockDay);
 }

@@ -40,8 +40,10 @@
  * dupliquer la croissance des héros dans un second JSON en ferait diverger un.
  *
  * Le reste (bonus d'un cadeau PRÉFÉRÉ, paliers de récompense, effets de
- * transcendance…) N'A PAS ses chiffres dans la donnée → reste éditorial dans le
- * guide (`editorial.ts`).
+ * transcendance…) reste éditorial dans le guide (`editorial.ts`). Un seul champ
+ * de plus, `affinityStatLevels` (niveaux à `RewardBuffID` de `TrustRewardTemplet`),
+ * n'est lu par AUCUNE page : il sert aux tests qui gardent les paliers d'affinité
+ * recopiés à la main (cf. buildAffinityStatLevels).
  */
 import type { LangDict } from '../lib/lang';
 import { isMain } from '../lib/is-main';
@@ -135,6 +137,12 @@ export interface HeroGrowthData {
   affinityCurve: number[];
   gifts: GiftItem[];
   fusion: FusionEntry[];
+  /**
+   * Niveaux d'affinité (distincts, triés) où `TrustRewardTemplet` porte un
+   * `RewardBuffID` — 20/40/60/80/100 au 15/10/2026. Aucune page ne le lit : il
+   * garde `AFFINITY_REWARDS` (guide heroes-growth) et `AFFINITY_PRESETS` (hero tracker).
+   */
+  affinityStatLevels: number[];
 }
 
 /** Résout une réf d'item depuis le catalogue (jette si absent — SSG strict). */
@@ -347,6 +355,37 @@ function buildFusion(catalog: Record<string, CatalogEntry>): FusionEntry[] {
   return out.sort((a, b) => a.fusionId.localeCompare(b.fusionId));
 }
 
+/**
+ * Niveaux d'affinité à bonus de stat : ceux des lignes de `TrustRewardTemplet` dont
+ * `RewardBuffID` est renseigné. Le guide et le hero tracker les écrivent à la main
+ * pour TOUS les persos ; si les persos qui en ont ne partagent plus le même jeu de
+ * niveaux, on avertit (l'union reste émise, et la garde des tests dira quoi revoir)
+ * — rien de faux n'est servi par ce champ, que seuls les tests lisent.
+ */
+export function buildAffinityStatLevels(rows: Row[]): number[] {
+  const byChar = new Map<string, Set<number>>();
+  for (const r of rows) {
+    const buff = String(r.RewardBuffID ?? '').trim();
+    if (!buff || buff === '0') continue;
+    const levels = byChar.get(r.CharacterID) ?? new Set<number>();
+    levels.add(num(r.TrustLevel));
+    byChar.set(r.CharacterID, levels);
+  }
+  if (!byChar.size) throw new Error('hero-growth : aucun RewardBuffID dans TrustRewardTemplet');
+  const signatures = new Map<string, string[]>();
+  for (const [id, levels] of byChar) {
+    const sig = [...levels].sort((a, b) => a - b).join('/');
+    signatures.set(sig, [...(signatures.get(sig) ?? []), id]);
+  }
+  if (signatures.size > 1) {
+    console.warn(
+      `⚠ hero-growth : niveaux d'affinité à stats divergents entre persos — ` +
+        [...signatures].map(([sig, ids]) => `${sig} (${ids.length})`).join(' ; '),
+    );
+  }
+  return [...new Set([...byChar.values()].flatMap((s) => [...s]))].sort((a, b) => a - b);
+}
+
 /** `catalog` fourni par `datagen:build` (construit une fois) ; sinon reconstruit ici. */
 export function buildHeroGrowth(inputs?: {
   catalog?: Record<string, CatalogEntry>;
@@ -362,6 +401,7 @@ export function buildHeroGrowth(inputs?: {
     affinityCurve: cumulativeCurve(exp, 'TrustExp'),
     gifts: buildGifts(catalog),
     fusion: buildFusion(catalog),
+    affinityStatLevels: buildAffinityStatLevels(loadTable('TrustRewardTemplet')),
   };
 }
 
@@ -395,6 +435,7 @@ if (isMain(import.meta.url)) {
   console.log(
     `affinityCurve : ${d.affinityCurve.length} niveaux, max ${d.affinityCurve[d.affinityCurve.length - 1].toLocaleString('en')} pts`,
   );
+  console.log('affinityStatLevels :', d.affinityStatLevels.join('/'));
   console.log('gifts :', d.gifts.map((g) => `${g.name.en}=${g.points}`).join(', '));
   for (const f of d.fusion)
     console.log(

@@ -5605,7 +5605,8 @@
         "restrictions": [],
         "randomized": true,
         "power": 159710,
-        "level": 130
+        "level": 130,
+        "openDay": 1
       },
       {
         "floor": 2,
@@ -5791,7 +5792,8 @@
         "restrictions": [],
         "randomized": true,
         "power": 161660,
-        "level": 131
+        "level": 131,
+        "openDay": 1
       },
       {
         "floor": 3,
@@ -5857,7 +5859,8 @@
         "restrictions": [],
         "randomized": true,
         "power": 163610,
-        "level": 132
+        "level": 132,
+        "openDay": 1
       },
       {
         "floor": 4,
@@ -6043,7 +6046,8 @@
         "restrictions": [],
         "randomized": true,
         "power": 165560,
-        "level": 133
+        "level": 133,
+        "openDay": 1
       },
       {
         "floor": 5,
@@ -6090,7 +6094,8 @@
         ],
         "restrictions": [],
         "power": 167510,
-        "level": 134
+        "level": 134,
+        "openDay": 1
       },
       {
         "floor": 6,
@@ -6276,7 +6281,8 @@
         "restrictions": [],
         "randomized": true,
         "power": 169460,
-        "level": 135
+        "level": 135,
+        "openDay": 8
       },
       {
         "floor": 7,
@@ -6462,7 +6468,8 @@
         "restrictions": [],
         "randomized": true,
         "power": 171410,
-        "level": 136
+        "level": 136,
+        "openDay": 8
       },
       {
         "floor": 8,
@@ -6528,7 +6535,8 @@
         "restrictions": [],
         "randomized": true,
         "power": 173360,
-        "level": 137
+        "level": 137,
+        "openDay": 8
       },
       {
         "floor": 9,
@@ -6714,7 +6722,8 @@
         "restrictions": [],
         "randomized": true,
         "power": 175310,
-        "level": 138
+        "level": 138,
+        "openDay": 8
       },
       {
         "floor": 10,
@@ -6761,7 +6770,8 @@
         ],
         "restrictions": [],
         "power": 177260,
-        "level": 139
+        "level": 139,
+        "openDay": 8
       },
       {
         "floor": 11,
@@ -6947,7 +6957,8 @@
         "restrictions": [],
         "randomized": true,
         "power": 179210,
-        "level": 140
+        "level": 140,
+        "openDay": 15
       },
       {
         "floor": 12,
@@ -7133,7 +7144,8 @@
         "restrictions": [],
         "randomized": true,
         "power": 181160,
-        "level": 141
+        "level": 141,
+        "openDay": 15
       },
       {
         "floor": 13,
@@ -7199,7 +7211,8 @@
         "restrictions": [],
         "randomized": true,
         "power": 183110,
-        "level": 142
+        "level": 142,
+        "openDay": 15
       },
       {
         "floor": 14,
@@ -7385,7 +7398,8 @@
         "restrictions": [],
         "randomized": true,
         "power": 185060,
-        "level": 143
+        "level": 143,
+        "openDay": 15
       },
       {
         "floor": 15,
@@ -7432,7 +7446,8 @@
         ],
         "restrictions": [],
         "power": 187010,
-        "level": 144
+        "level": 144,
+        "openDay": 15
       },
       {
         "floor": 16,
@@ -7618,7 +7633,8 @@
         "restrictions": [],
         "randomized": true,
         "power": 188960,
-        "level": 145
+        "level": 145,
+        "openDay": 22
       },
       {
         "floor": 17,
@@ -7804,7 +7820,8 @@
         "restrictions": [],
         "randomized": true,
         "power": 190910,
-        "level": 146
+        "level": 146,
+        "openDay": 22
       },
       {
         "floor": 18,
@@ -7870,7 +7887,8 @@
         "restrictions": [],
         "randomized": true,
         "power": 192860,
-        "level": 147
+        "level": 147,
+        "openDay": 22
       },
       {
         "floor": 19,
@@ -8056,7 +8074,8 @@
         "restrictions": [],
         "randomized": true,
         "power": 194810,
-        "level": 148
+        "level": 148,
+        "openDay": 22
       },
       {
         "floor": 20,
@@ -8085,7 +8104,8 @@
         ],
         "restrictions": [],
         "power": 196760,
-        "level": 149
+        "level": 149,
+        "openDay": 22
       }
     ],
     "restrictionsPool": [

@@ -112,6 +112,18 @@ describe('recruit.json — les bannières du simulateur', () => {
     }
     expect(bad).toEqual([]);
   });
+
+  // GARDE-FOU : `bannerConfigOf` se replie en silence sur 200 quand la fiche n'a pas
+  // de `mileageCost` (lu de `RecruitGroupTemplet` par `datagen/generators/recruit.ts`),
+  // et le test ci-dessus passe par ce repli : il ne verrait pas le coût disparaître.
+  // Un rouge ici = le générateur ne trouve plus le mileage d'une bannière : réparer
+  // sa lecture dans recruit.ts, pas ce test (le simulateur afficherait un faux 200).
+  it('les quatre portent un mileageCost défini et positif, sans le repli', () => {
+    const bad = BANNER_TYPES.filter((type) => !((recruitOf(type).mileageCost ?? 0) > 0)).map(
+      (type) => `${type} : mileageCost ${recruitOf(type).mileageCost}`,
+    );
+    expect(bad).toEqual([]);
+  });
 });
 
 describe('garantie de recrutement (pity du 25/08)', () => {

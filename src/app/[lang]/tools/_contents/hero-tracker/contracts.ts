@@ -220,8 +220,9 @@ export const piecesApart = (limitedTags: string[]): { key: string; tags: string[
 
 /**
  * Paliers d'affinité où l'on s'arrête vraiment : 10 débloque l'équipement
- * exclusif, puis 20/40/60/80/100 donnent des stats. Aucune table ne les porte
- * (cf. le générateur hero-growth) — les paliers 30 et 70, qui n'ajoutent qu'une
- * conversation, ne sont une raison de viser pour personne.
+ * exclusif, puis 20/40/60/80/100 donnent des stats — recopiés de
+ * `TrustRewardTemplet` (niveaux à `RewardBuffID`) ; `contracts.test.ts` les garde
+ * contre `hero-growth.json`. Les paliers 30 et 70, qui n'ajoutent qu'une
+ * conversation (et pas à tous les persos), ne sont une raison de viser pour personne.
  */
 export const AFFINITY_PRESETS = [10, 20, 40, 60, 80, 100];

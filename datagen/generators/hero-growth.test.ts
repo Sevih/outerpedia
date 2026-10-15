@@ -19,7 +19,13 @@ import damageConfigData from '../../data/generated/damage/config.json';
 import itemsData from '../../data/generated/items.json';
 import type { Row } from '../lib/tables';
 import type { CatalogEntry } from './item-catalog';
-import { costsFrom, cumulativeCurve, itemRef, type HeroGrowthData } from './hero-growth';
+import {
+  buildAffinityStatLevels,
+  costsFrom,
+  cumulativeCurve,
+  itemRef,
+  type HeroGrowthData,
+} from './hero-growth';
 
 const dict = (en: string) => ({ ...emptyDict(), en });
 const catalog = {
@@ -110,6 +116,29 @@ describe('cumulativeCurve — courbes d’XP cumulé', () => {
       ),
     ).toThrow(/non monotone/);
     expect(() => cumulativeCurve(rows([['1', '42']]), 'TotalExp')).toThrow(/inexploitable/);
+  });
+});
+
+describe('buildAffinityStatLevels — niveaux à RewardBuffID', () => {
+  const row = (CharacterID: string, TrustLevel: number, RewardBuffID?: string): Row => ({
+    CharacterID,
+    TrustLevel: String(TrustLevel),
+    ...(RewardBuffID ? { RewardBuffID } : {}),
+  });
+
+  it('niveaux distincts et triés, lignes sans buff écartées', () => {
+    const rows = [
+      row('a', 40, '2'),
+      row('a', 20, '1'),
+      row('a', 30),
+      row('b', 20, '1'),
+      row('b', 40, '2'),
+    ];
+    expect(buildAffinityStatLevels(rows)).toEqual([20, 40]);
+  });
+
+  it('aucun buff → jette (table vidée ou colonne renommée)', () => {
+    expect(() => buildAffinityStatLevels([row('a', 20)])).toThrow(/aucun RewardBuffID/);
   });
 });
 

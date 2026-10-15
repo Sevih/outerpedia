@@ -1,7 +1,8 @@
 /**
- * Données ÉDITORIALES du guide heroes-growth — la part NON dérivable de la data
- * de jeu (vérifié : pas de table favor/present→points, pas de table de paliers
- * d'affinité, effets de transcendance non structurés). Transplant verbatim.
+ * Données ÉDITORIALES du guide heroes-growth — transplant verbatim. Les points
+ * des cadeaux, les paliers d'affinité à stats et les crans de transcendance sont
+ * des copies de tables du jeu : `editorial.test.ts` les garde contre
+ * `hero-growth.json` et `transcend.json`.
  */
 import type { LocalizedText } from '@contracts';
 

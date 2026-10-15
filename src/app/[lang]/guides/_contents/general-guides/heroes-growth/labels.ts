@@ -210,13 +210,15 @@ export const LABELS = {
     fr: 'Certaines stats augmentées',
     es: 'Algunas estadísticas aumentadas',
   },
+  // « Certains persos » et pas une liste ni un compte : 83 sur 129 au 15/10/2026,
+  // et le jeu en ajoute au fil des mises à jour.
   rewardChat: {
-    en: 'Chat added',
-    jp: 'チャット追加',
-    kr: '채팅 추가',
-    zh: '新增聊天',
-    fr: 'Chat ajouté',
-    es: 'Chat añadido',
+    en: 'Chat added (some heroes)',
+    jp: 'チャット追加（一部のヒーロー）',
+    kr: '채팅 추가 (일부 영웅)',
+    zh: '新增聊天（部分英雄）',
+    fr: 'Chat ajouté (certains Héros)',
+    es: 'Chat añadido (algunos héroes)',
   },
   bondChatTitle: {
     en: 'Bond & Chat',

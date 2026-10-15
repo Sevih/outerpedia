@@ -7,6 +7,85 @@
 
 ## 2026-10-15
 
+- **Tests-gardes : six règles du jeu recopiées à la main, gardées contre la
+  donnée générée ; la discussion des niveaux 30 et 70 dite « certains
+  persos » (lot B50, tri des revues du 15/10, section « Règles recopiées à
+  la main » de la revue de logique).** Pourquoi : six valeurs que portent les
+  tables du jeu étaient écrites en dur, justes au 15/10 mais sans test ; un
+  patch les aurait fait dériver en silence. Modèle suivi : le garde-fou des
+  constantes du moteur de `datagen/damage/damage-data.test.ts`, la valeur du
+  jeu est émise dans `data/generated/` et un test compare la copie ; un rouge
+  se corrige dans la copie, jamais dans le test (chaque garde le dit en
+  commentaire, avec sa table). Toutes tournent sans `.gamedata`.
+  **Comment**, une garde par règle : (1) `heroes-growth/editorial.test.ts`
+  compare les neuf crans de `TRANSCENDENCE_STEPS` à `transcend.json` (cran i
+  = `TransStar` i+1, crans 1-2 au barème 1★, 3-9 au 3★ : `stars`/`showStar`,
+  `color`/`starColor`, `step`/`stepLabel`) et place « Burst 2 », « +1 Chain
+  Passive Weakness Gauge Damage » et « Burst 3 » au premier cran où `burst2`,
+  `wgDmg`, `burst3` s'allument (3, 4, 6) ; le +25 AP du cran 9, sans colonne,
+  n'est pas gardé (commentaire). (2) Même fichier : paliers de points et
+  noms anglais d'`AFFINITY_GIFTS` contre `hero-growth.json`, et le `bonus` égal aux points fois `PREFERRED_GIFT_BONUS`. (3) `hero-growth.json` gagne
+  `affinityStatLevels` (`buildAffinityStatLevels`, niveaux distincts et triés
+  des lignes de `TrustRewardTemplet` à `RewardBuffID` ; avertit si les persos
+  divergent, jette s'il n'y en a aucun ; testé en synthétique dans
+  `hero-growth.test.ts`) : 20/40/60/80/100, partagés par les 126 persos qui en
+  ont sur 129. Les niveaux `stats` d'`AFFINITY_REWARDS` et, dans le nouveau
+  `hero-tracker/contracts.test.ts`, `AFFINITY_PRESETS` sans le 10 l'égalent ;
+  le 10 n'est pas gardé (commentaire : `PRESENT_TO_SPECIAL_EQUIP` vaut 10
+  mais rien ne prouve que c'est ce seuil). (4) `towers.json` gagne `openDay`
+  (`DungeonPVEGroupTemplet.OpenDayOfMonth`, via `pveByDungeon`) sur les 20
+  étages de `tower_very_hard` ; `tracker.ts` sort les jours dans
+  `VHT_UNLOCK_DAYS`, que `getVHTUnlockedPhase` et `getNextVHTUnlockTime`
+  lisent (même comportement, les tests existants passent inchangés), et
+  `tracker.test.ts` les compare aux jours distincts des étages, chaque
+  libellé de `VHT_PHASE_LABELS` à la plage ouverte ce jour-là (par
+  l'accesseur `getTower` : le lint refuse le JSON importé hors du data
+  layer). (5) Dans `datagen/generators/solver.ts`, une ligne de sub-tick
+  retenue dont `OptionFactor` diffère d'`OptionValue` fait jeter le build,
+  message qui renvoie à `sub-ticks.json` et à gear-solver ; forme et contenu
+  de `sub-ticks.json` inchangés. (6) `gacha.test.ts` exige un `mileageCost`
+  défini et positif dans `recruit.json` pour les quatre bannières, sans
+  passer par `bannerConfigOf` ; le repli de 200 et son test restent. (7)
+  `LABELS.rewardChat` dit « Chat added (some heroes) » dans les six langues
+  du guide (83 persos sur 129 en ont une, décision de Sevih : ni liste ni
+  compte) ; `chatDesc` ne prétendait rien pour tous, inchangé. Commentaires
+  d'en-tête d'`editorial.ts`, d'`AFFINITY_PRESETS` et du générateur
+  hero-growth remis d'accord (ils disaient qu'aucune table ne portait ces
+  paliers).
+  **Vérifié** : `pnpm datagen:build` passe (la garde des sub-ticks tient) ;
+  `pnpm datagen:promote` à blanc : « 63 identique(s), 2 différent(s) —
+  hero-growth.json +1 (affinityStatLevels), towers.json ~1 », diff réduit aux
+  20 `openDay` (et leurs virgules) et à `affinityStatLevels` (20, 40, 60, 80, 100) ; promu par `--apply --only towers.json hero-growth.json`,
+  `git status` ne montre que ces deux fichiers sous `data/`. Chaque garde
+  cassée une fois à la main puis remise : cran 4+ en `red` → « cran 5
+  (TransStar 5): expected { step: '4+', stars: 4, color: 'red' } to deeply
+  equal … » ; effet « Burst 3 » renommé → « crans qui portent l'effet:
+  expected [] to deeply equal [ 6 ] » ; « Berry » → « Cherry » → « palier
+  100: expected [ 'Cherry', … ] to deeply equal [ 'Berry', … ] » ; bonus 60
+  → « palier 100: expected 60 to be 50 » ; récompense stats 80 → 90 →
+  « expected [ 20, 40, 60, 90, 100 ] to deeply equal [ 20, 40, 60, 80, 100
+  ] » ; preset 60 → 50 → « expected [ 20, 40, 50, 80, 100 ] to deeply equal
+  [ 20, 40, 60, 80, 100 ] » ; jour 15 → 16 → « jours d'ouverture: expected [
+  1, 8, 16, 22 ] to deeply equal [ 1, 8, 15, 22 ] » ; plage « 11-16 » →
+  « plages d'étages par jour: expected [ '1-5', '6-10', '11-16', '16-20' ] …
+  » ; `mileageCost` du limited retiré d'une copie de `recruit.json` →
+  « expected [ 'limited : mileageCost undefined' ] to deeply equal [] »
+  (le test existant, lui, restait vert : le repli le masquait) ; sub-ticks,
+  `buildSolver` sur une copie des tables parsées où la ligne 160001 porte
+  `OptionFactor` 45 → « solver : sub-tick 160001 (groupe 106, ST_ATK
+  OAT_ADD) — OptionFactor 45 ≠ OptionValue 40 : le pas d'un tick n'est plus
+  OptionValue, revoir sub-ticks.json et sa lecture par gear-solver » (témoin
+  sur les vraies tables : pas de throw). `pnpm typecheck` (dernière ligne : les
+  trois `tsc --noEmit`, code 0), `pnpm lint` (`$ eslint`, code 0),
+  `pnpm test` (« Tests 3862 passed (3862) », 226 fichiers). Aucun changement
+  visuel hors le libellé demandé : les deux champs émis ne sont lus que par
+  les tests.
+  **Laissé** : le bonus du cadeau préféré côté jeu
+  (`TRUST_ENCHANT_INCREASE_VALUE`) et la source des points côté datagen
+  (`GIFT_POINTS_RE` plutôt qu'`ItemEnchantExpTemplet.ExpValue`), constat O10
+  du lot Persos ; `GUARANTEE_OF` (M7), `tier >= 4`, `DAMAGE_SET_IDS`,
+  `HP_SCALED_SET`, le motif `trust_level_${STAT}_${i}` (H1) : autres lots.
+  Le perso 2400015, non intégré, n'a pas été promu.
 - **Relecture des lots A56 et A57 (Opus) — `schema` et `resVersion` dans
   le contrat solver ; passes mortes d'`encounters.ts` et `IsDebuff` retirés :
   validés.** A56 `8318632f` (code, `version.json` régénéré), A57 `83b82e2b`

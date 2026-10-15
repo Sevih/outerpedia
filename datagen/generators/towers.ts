@@ -121,6 +121,12 @@ export interface TowerFloor {
    * sinon.
    */
   randomized?: boolean;
+  /**
+   * Jour du mois où l'étage s'ouvre (`DungeonPVEGroupTemplet.OpenDayOfMonth`,
+   * very hard seulement : 1/8/15/22, cinq étages par jour). Absent sinon. Lu par
+   * le seul test qui garde la copie du progress tracker (`VHT_UNLOCK_DAYS`).
+   */
+  openDay?: number;
 }
 
 /** Debuff des tours élémentaires (TowerElementalConfigTemplet). */
@@ -297,6 +303,8 @@ export function buildTowers(): TowersData {
     };
     if (num(d.RecommendBattlePower)) floor.power = num(d.RecommendBattlePower);
     if (num(d.RecommandLevel)) floor.level = num(d.RecommandLevel);
+    const openDay = num(pveByDungeon.get(d.ID)?.OpenDayOfMonth);
+    if (openDay) floor.openDay = openDay;
     if (!floor.waves?.length && !floor.encounters?.length)
       console.warn(`⚠ towers : étage ${d.ID} sans composition.`);
     tower.floors.push(floor);
