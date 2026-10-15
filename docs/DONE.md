@@ -7,6 +7,76 @@
 
 ## 2026-10-15
 
+- **Cache ISR en mémoire, exemptions du proxy resserrées, `dynamicParams`
+  fermé (lot A54, tri des revues du 15/10).** Une URL inconnue rendait un 404
+  que Next mettait en cache ISR et ÉCRIVAIT sur le disque du conteneur (prod
+  du 15/10 : `x-nextjs-cache: MISS`, `s-maxage=86400` sur une URL
+  inexistante, `/app/.next/server/app` à 2,1 Go, 12 300 fichiers écrits en
+  un jour), et le proxy laissait passer sans préfixe de langue tout chemin
+  qui COMMENÇAIT par `/api`, `/dev`, `/images`… : `/imagesX`, `/feedback` ou
+  `/dev<n'importe quoi>/characters` rendaient une vraie page anglaise sous
+  une infinité d'URL. Décisions de Sevih (15/10) : cache en mémoire
+  seulement, et `dynamicParams = false` là où c'est sûr. Une URL inconnue ne
+  doit rien écrire sur le disque. **`next.config.ts`** :
+  `experimental.isrFlushToDisk: false` (nom vérifié dans
+  `config-shared.d.ts` de next 16.4.0) ; le cache ISR reste en mémoire (LRU,
+  `cacheMaxMemorySize`, 50 Mo par défaut), repart de zéro à chaque
+  redémarrage du conteneur et se régénère au fil des visites — les pages du
+  build restent lues sur le disque. **`src/proxy.ts`** : les exemptions
+  exigent le `/` final (`/api/`, `/images/`, `/icons/`, `/audio/`, `/feed/`)
+  plus `/feed` exact ; `/_next` et `/s/` inchangés. Inventaire fait avant :
+  `src/app/api/*` n'a aucune route nue (`/api` seul n'existe pas) ;
+  `src/app/images/[...path]` et `src/app/audio/[...path]` sont des
+  catch-all `.dev.ts` (au moins un segment) ; `public/` ne porte que
+  `icons/*.png` ; `src/app/feed/route.ts` sert `/feed` (lien du footer) et
+  `feed/changelog/route.ts` `/feed/changelog` ; aucune route `/feed.xml`.
+  `/dev` et `/dev/…` sont sortis du bloc : `next()` en développement (`/dev`
+  nu est l'index des pages de test, lié par `HeaderClient`), 404 direct
+  sinon, par un `IS_DEV` local de même définition que `lib/admin/guard.ts`
+  (sans tirer `next/navigation` dans le proxy). Commentaire des assets de
+  `public/` mis aux nouveaux préfixes. **`dynamicParams = false`** sur
+  `characters/[slug]` (slugs du JSON généré, importé au build),
+  `[lang]/[slug]` (registre des outils, la langue vient du
+  `generateStaticParams` du layout), `guides/[category]` (catégories en
+  code) et `guides/[category]/[slug]` (`listGuideParams` = `getGuide`,
+  scan de `_contents/` figé dans l'image, guides cachés compris) : chaque
+  `generateStaticParams` couvre toutes les clés que la page accepte, dans
+  les six langues. **Laissé ouvert : `event/[slug]`** — ses slugs viennent
+  de `data/curated/events.json` lu au runtime (`runtime-json`), que quick
+  publie sur R2 : un événement paraît sans redéploiement, le fermer le
+  ferait disparaître jusqu'au build suivant. `equipment/[slug]` et
+  `[floor]` non touchés (pas de `generateStaticParams`, voulu).
+  **Vérification** : `src/proxy.test.ts` — `/imagesX`, `/apifoo`,
+  `/devtools`, `/feedback`, `/iconsX/a` réécrits en `/en/…` (307 vers
+  `/fr/…` avec le cookie) ; `/api/x`, `/images/x.webp`, `/icons/…`,
+  `/audio/…`, `/feed`, `/feed/changelog`, `/s/abc` passent ; `/dev`,
+  `/dev/`, `/dev/tokens` en 404 hors dev, `/dev` et `/dev/tokens` passent
+  en dev (`NODE_ENV` simulé), `/devtools` non. `pnpm typecheck` et
+  `pnpm lint` sans sortie d'erreur (dernières lignes : la commande
+  `tsc … -p scripts/tsconfig.json`, puis `$ eslint`), `pnpm test` :
+  « Tests 3781 passed (3781) » (un premier passage avait 2 échecs dans les
+  tests quick d'un lot parallèle en cours d'écriture, verts au second).
+  `pnpm build` vert (`.next/dev` mis de côté puis remis, `.next/types`
+  retiré et `next-env.d.ts` inchangé ensuite, typecheck repassé vert) ;
+  standalone sur :3917, `Host: outerpedia.com` et
+  `X-Forwarded-Proto: https` sur chaque requête : 20 URL inconnues
+  (`/characters/nexistepas-1…8`, `/imagesX/a`, `/fr/nexistepas`, `/apifoo`,
+  `/feedback`, `/devtools/characters`, `/dev`, `/dev/tokens`,
+  `/guides/nexistepas`, `/guides/adventure/nexistepas`, `/nexistepas`,
+  `/equipment/nexistepas`, `/guides/skyward-tower/normal-tower/999999`)
+  → 20 × 404, **0 fichier nouveau** sous `.next/standalone/.next/server/app`
+  (14 052 avant, 14 052 après, `find -newer`) ; `/characters/vera`,
+  `/guides/adventure/S1-8-5`, `/event/20260324-video`,
+  `/equipment/steel-sword`, `/guides/skyward-tower/normal-tower/1`, plus
+  `/feed`, `/feed/changelog`, `/guides/adventure`, `/tierlist` → 200, et
+  toujours 0 fichier écrit. Serveur arrêté par son PID, `.next/static`
+  copié retiré du standalone (`public/` y était déjà, posé par le build).
+  **Repéré, hors périmètre** : le build classe `equipment/[slug]` et
+  `[floor]` en `ƒ` (rendu à chaque requête, en-tête
+  `Cache-Control: private, no-store`), alors que leurs commentaires
+  annoncent un cache de 24 h — à vérifier à part. Le layout `[lang]` garde son `dynamicParams` par défaut
+  (le proxy ne lui passe plus que des langues valides).
+
 - **« Confirmer l'extraction » refusé sur Personnages et Monstres (lot A53,
   R20 du tri des revues du 15/10).** Dans quick, Données › Extraction, le
   mode `all` d'`acceptExtraction` (`scripts/quick/actions.ts`) appelle

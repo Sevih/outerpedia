@@ -34,18 +34,28 @@ import { LANG_ROUTING } from '@/lib/site';
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  // Assets statiques, API, outils locaux (dev) : on ne touche pas.
+  // Outils locaux : l'arbre `/dev` n'existe qu'en développement (fichiers
+  // `.dev.*`, cf. next.config.ts). En prod, 404 direct — passé aux pages, il
+  // deviendrait /en/dev/… et rendrait une page publique sous une fausse URL.
+  if (pathname === '/dev' || pathname.startsWith('/dev/')) {
+    return IS_DEV ? NextResponse.next() : new NextResponse(null, { status: 404 });
+  }
+
+  // Assets statiques, API : on ne touche pas. Le `/` final est EXIGÉ : sans
+  // lui, `/imagesX` ou `/feedback` passaient aussi, sans préfixe de langue, et
+  // rendaient une vraie page sous une infinité d'URL. `/feed` seul est le flux
+  // RSS (src/app/feed/route.ts), `/feed/changelog` le second.
   // `/s/` : le raccourcisseur (src/app/s/[id]) vit à la RACINE, hors langue —
   // le chemin stocké est sans préfixe, c'est le sous-domaine qui porte la
   // langue. Réécrit en /{lang}/s/…, la route ne serait jamais atteinte.
   if (
     pathname.startsWith('/_next') ||
-    pathname.startsWith('/api') ||
-    pathname.startsWith('/dev') ||
-    pathname.startsWith('/images') ||
-    pathname.startsWith('/icons') ||
-    pathname.startsWith('/audio') ||
-    pathname.startsWith('/feed') ||
+    pathname.startsWith('/api/') ||
+    pathname.startsWith('/images/') ||
+    pathname.startsWith('/icons/') ||
+    pathname.startsWith('/audio/') ||
+    pathname === '/feed' ||
+    pathname.startsWith('/feed/') ||
     pathname.startsWith('/s/')
   ) {
     return NextResponse.next();
@@ -64,7 +74,7 @@ export function proxy(request: NextRequest) {
   // ⚠️ CE GARDE-FOU TUE AUSSI LES FICHIERS STATIQUES DE `public/` posés à la
   // RACINE : `/apple-touch-icon.png` renvoyait 404 alors que le fichier existait
   // et que le <head> le référençait. Tout asset servi depuis `public/` doit donc
-  // vivre sous un préfixe AUTORISÉ ci-dessus (`/images`, `/icons`, `/audio`) —
+  // vivre sous un préfixe AUTORISÉ ci-dessus (`/images/`, `/icons/`, `/audio/`) —
   // c'est le cas des icônes, cf. `metadata.icons` dans src/app/[lang]/layout.tsx.
   // (`favicon.ico` échappe à tout : le `matcher` du proxy l'exclut nommément.)
   if (pathname.startsWith('/.') || pathname.includes('.')) {
@@ -141,6 +151,9 @@ export function proxy(request: NextRequest) {
   url.pathname = `/${DEFAULT_LANG}${pathname}`;
   return NextResponse.rewrite(url);
 }
+
+/** Même définition que `IS_DEV` de `src/lib/admin/guard.ts`, sans tirer `next/navigation`. */
+const IS_DEV = process.env.NODE_ENV === 'development';
 
 /** Langue retenue en mode `path` (cf. l'en-tête de `proxy`). */
 const LANG_COOKIE = 'lang';

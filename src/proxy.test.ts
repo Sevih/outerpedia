@@ -91,9 +91,54 @@ describe('proxy — mode path (défaut des tests)', () => {
   });
 
   it('chemins exclus : jamais redirigés, même avec un cookie', () => {
-    for (const path of ['/api/x', '/_next/data/x', '/images/a/b', '/s/abc', '/dev']) {
+    for (const path of [
+      '/api/x',
+      '/_next/data/x',
+      '/images/a/b',
+      '/images/x.webp',
+      '/icons/icon-192x192.png',
+      '/audio/bgm/a.mp3',
+      '/feed',
+      '/feed/changelog',
+      '/s/abc',
+    ]) {
       expect(outcome(proxy(req(path, { lang: 'fr' })))).toEqual({ next: true });
     }
+  });
+
+  it('faux préfixes (sans `/` final) : suivent le chemin des pages', () => {
+    for (const path of ['/imagesX', '/apifoo', '/devtools', '/feedback', '/iconsX/a']) {
+      expect(outcome(proxy(req(path)))).toEqual({ rewrite: `/en${path}` });
+      expect(outcome(proxy(req(path, { lang: 'fr' })))).toEqual({
+        status: 307,
+        to: `/fr${path}`,
+      });
+    }
+  });
+
+  it('/dev hors développement : 404 direct, sans réécriture', () => {
+    for (const path of ['/dev', '/dev/', '/dev/tokens']) {
+      const res = proxy(req(path, { lang: 'fr' }));
+      expect(res.status).toBe(404);
+      expect(outcome(res)).toEqual({ next: false });
+    }
+  });
+});
+
+describe('proxy — développement', () => {
+  afterEach(() => {
+    vi.unstubAllEnvs();
+    vi.resetModules();
+  });
+
+  it('/dev et /dev/… passent, /devtools non', async () => {
+    vi.stubEnv('NODE_ENV', 'development');
+    vi.resetModules();
+    const p = (await import('./proxy')).proxy;
+    for (const path of ['/dev', '/dev/tokens']) {
+      expect(outcome(p(req(path, { lang: 'fr' })))).toEqual({ next: true });
+    }
+    expect(outcome(p(req('/devtools')))).toEqual({ rewrite: '/en/devtools' });
   });
 });
 

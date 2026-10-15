@@ -98,6 +98,10 @@ export function generateStaticParams() {
 // cf. `runtime-json.ts`). Voulu : les avis sont la seule donnée vivante.
 export const revalidate = 86400;
 
+// Les slugs viennent du JSON généré, figé dans l'image : un perso arrive par un
+// déploiement. Un slug inconnu est un 404 de routage, sans rendu ni cache.
+export const dynamicParams = false;
+
 export async function generateMetadata({
   params,
 }: {

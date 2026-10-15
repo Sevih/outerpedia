@@ -113,6 +113,15 @@ const nextConfig: NextConfig = {
   typedRoutes: true,
   poweredByHeader: false,
 
+  // Cache ISR en MÉMOIRE seulement (LRU, borné par `cacheMaxMemorySize`) : par
+  // défaut Next écrit chaque rendu sur le disque du conteneur, 404 compris, et
+  // rien ne borne ce dossier. Une URL inconnue n'écrit plus rien sur le disque.
+  // Contrepartie : le cache repart de zéro à chaque redémarrage du conteneur et
+  // se régénère au fil des visites (les pages du build restent lues sur disque).
+  experimental: {
+    isrFlushToDisk: false,
+  },
+
   async headers() {
     return [
       { source: '/(.*)', headers: securityHeaders },

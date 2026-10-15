@@ -11,6 +11,10 @@ import { TOOL_COMPONENTS, PORTED_TOOL_SLUGS } from '../tools/registry';
 
 export const revalidate = 86400;
 
+// Le registre des outils est du code : un slug inconnu est un 404 de routage,
+// sans rendu ni cache (la langue vient du `generateStaticParams` du layout).
+export const dynamicParams = false;
+
 /**
  * Routeur À PLAT des outils : `/(slug)` sert le composant `_contents/<slug>`
  * (URLs de prod inchangées — pas de préfixe `/tools`). Seuls les slugs

@@ -23,6 +23,10 @@ export function generateStaticParams() {
 
 export const revalidate = 86400;
 
+// Les guides sont scannés dans `_contents/`, figé dans l'image : un guide arrive
+// par un déploiement. Un guide inconnu est un 404 de routage, sans rendu ni cache.
+export const dynamicParams = false;
+
 export async function generateMetadata({
   params,
 }: {

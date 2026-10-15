@@ -30,6 +30,9 @@ export function generateStaticParams() {
 
 export const revalidate = 86400;
 
+// Les catégories sont du code : une catégorie inconnue est un 404 de routage.
+export const dynamicParams = false;
+
 export async function generateMetadata({
   params,
 }: {
