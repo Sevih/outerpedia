@@ -49,6 +49,19 @@ les preuves et les décisions vivent dans le tri consolidé de sevih-tool
       vitesse en %, noyau par niveau, `stat-keys.json`). FAIT côté
       outerpedia (A56) et lu par gear-solver (G1, 15/10) ; reste la release
       de gear-solver, puis les changements de forme.
+- [ ] **Suites de la rédaction des lots du 15/10** (lots rédigés : C18 à
+      C25, B51, B53 à B57, A58 à A60, F27, G2 à G6, OB1, OB2, TW1) :
+      adversité absente du guide des tours (`TowerGuide.tsx` l.163 et 187 ne
+      la passent pas, 1 009 donjons de tour sur 1 010 en ont une ; lot à
+      rédiger) ; `stat-keys.json` (L6, décision du 15/10 : clés `ST_*` /
+      `OAT_*` vers la clé du contrat, nature « % » et abréviation, gear-solver
+      garde sa table contrat → moteur sous un test ; lot C après C22) ;
+      `guid` du flux RSS du journal sur l'id stable après B54 (décision du
+      15/10, l'historique remonte une fois chez les lecteurs) ; fiche du wiki
+      en vitesse en taux avec régénération de l'oracle, une fois que
+      gear-solver lit `corePassiveByFusion` (B56) ; nombre de stacks de
+      `BT_STACK_STAT` dans le calculateur (plus tard) ; J12 à joindre au lot
+      O6 / O7.
 
 ## 🧰 Outil quick
 
