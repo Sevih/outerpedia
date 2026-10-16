@@ -77,6 +77,15 @@ const enhance = enhanceData as {
   expCurves: Record<string, number[]>;
 };
 type StatEntry = { st: string; ap?: string; v: number };
+type CombatEffect = {
+  buffId: string;
+  type: string;
+  st?: string;
+  ap?: string;
+  v?: number;
+  target: string;
+  cond?: string;
+};
 const sets = setsData as Record<
   string,
   {
@@ -89,6 +98,7 @@ const sets = setsData as Record<
       p4_desc: string | null;
       breakLimitCounts: number[];
       ignoreLowSet: boolean;
+      combatEffects: { p2: CombatEffect[] | null; p4: CombatEffect[] | null };
     }[];
   }
 >;
@@ -299,6 +309,10 @@ type Shape =
   | { arr: Shape };
 
 const STAT: Shape = { obj: { st: '*', ap: '*', v: '*' } };
+const COMBAT_EFFECT: Shape = {
+  obj: { buffId: '*', type: '*', target: '*' },
+  opt: { st: '*', ap: '*', v: '*', cond: '*' },
+};
 const CONTRACT_SHAPE: Record<string, Shape> = {
   'archive-bonus.json': { arr: { obj: { requiredCount: '*', level: '*' } } },
   'buffs.json': {
@@ -398,6 +412,9 @@ const CONTRACT_SHAPE: Record<string, Shape> = {
               p4_desc: '*',
               breakLimitCounts: { arr: '*' },
               ignoreLowSet: '*',
+              combatEffects: {
+                obj: { p2: { arr: COMBAT_EFFECT }, p4: { arr: COMBAT_EFFECT } },
+              },
             },
           },
         },
@@ -513,6 +530,70 @@ describe('solver — sets : p2 / p4 = stats de fiche seulement', () => {
       }
     }
     expect(bad).toEqual([]);
+  });
+});
+
+// ---- B53 : effets de combat des sets (IOT_BUFF), pour l'affichage seulement ----
+describe('solver — sets : combatEffects (affichage, jamais la fiche)', () => {
+  const at = (id: string, level: number) => sets[id].levels.find((l) => l.level === level)!;
+
+  it('Pulverization niveau 2 : 2P et 4P BT_DMG_TARGET_BREAK 700 sur ME', () => {
+    for (const p of ['p2', 'p4'] as const) {
+      expect(at('17', 2).combatEffects[p], p).toEqual([
+        {
+          buffId: 'BID_ITEM_UO_SET_17',
+          type: 'BT_DMG_TARGET_BREAK',
+          ap: 'OAT_RATE',
+          v: 700,
+          target: 'ME',
+        },
+      ]);
+    }
+  });
+
+  it('Weakness niveau 2 : BT_DMG_REDUCE −350 sur ENEMY_TEAM (signe et cible bruts)', () => {
+    expect(at('20', 2).combatEffects.p2).toEqual([
+      {
+        buffId: 'BID_ITEM_UO_SET_20',
+        type: 'BT_DMG_REDUCE',
+        ap: 'OAT_RATE',
+        v: -350,
+        target: 'ENEMY_TEAM',
+        cond: 'OWNER_HAS_BUFF',
+      },
+    ]);
+    expect(at('20', 2).combatEffects.p4).toBeNull();
+  });
+
+  it('Revenge niveau 2 : 4P BT_STAT_OWNER_LOST_HP_RATE_HALF', () => {
+    expect(at('15', 2).combatEffects.p4?.map((e) => e.type)).toEqual([
+      'BT_STAT_OWNER_LOST_HP_RATE_HALF',
+    ]);
+  });
+
+  it('Immunity niveau 2 : 4P BID_ITEM_UO_SET_18_1 (ligne de niveau 2 seule) résolu', () => {
+    expect(at('18', 2).combatEffects.p4).toEqual([
+      {
+        buffId: 'BID_ITEM_UO_SET_18_1',
+        type: 'BT_DMG_REDUCE',
+        ap: 'OAT_RATE',
+        v: 300,
+        target: 'ME',
+      },
+    ]);
+  });
+
+  it('Attack (stats pures) : combatEffects à null des deux côtés', () => {
+    for (const l of sets['1'].levels) expect(l.combatEffects).toEqual({ p2: null, p4: null });
+  });
+
+  it('p2 / p4 et combatEffects ne se recouvrent jamais', () => {
+    const both: string[] = [];
+    for (const [id, s] of Object.entries(sets))
+      for (const l of s.levels)
+        for (const p of ['p2', 'p4'] as const)
+          if (l[p] && l.combatEffects[p]) both.push(`${id} L${l.level} ${p}`);
+    expect(both).toEqual([]);
   });
 });
 

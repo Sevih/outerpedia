@@ -45,6 +45,14 @@
  *     Ex. Speed [2,2,1,1] → 2P niveau 2 écarté par le 4P niveau 1 : 25 %, pas 38 %.
  * `p2` / `p4` ne portent que des stats de fiche (`IOT_STAT`) : un effet
  * `IOT_BUFF` de set n'entre jamais dans la fiche ni la CP (cf. `resolveSetEffectEntry`).
+ * `combatEffects.p2` / `.p4` (ajout B53) décrivent ces effets `IOT_BUFF`, pour
+ * l'AFFICHAGE seulement : à ne jamais compter dans la fiche ni la CP (le client
+ * les verse dans `m_ItemSetBuffTempletList`, hors fiche). `null` quand le palier
+ * n'a pas de buff ; un palier ne porte jamais à la fois une stat et un buff.
+ * Mêmes lignes de niveau que les stats ci-dessus, et même règle `ignoreLowSet`
+ * côté buffs : le 2P ne s'applique pas quand le 4P retenu a un buff et
+ * `ignoreLowSet`. Enums bruts, `v` = `Value` brut et signé (Weakness : −350 sur
+ * `ENEMY_TEAM`), un `BT_GROUP` déplié en ses enfants.
  * Règle d'évolution de `schema` :
  *   - il ne monte que pour un changement qu'une ancienne version de gear-solver
  *     lirait mal : champ ou fichier retiré ou renommé, sens d'un champ changé
@@ -62,7 +70,15 @@
 import { createHash } from 'node:crypto';
 import { existsSync, readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
-import { buffRowAtLevel, findBuff, formatRowValue, isStatSheetBuff } from '../lib/buff';
+import {
+  buffRowAtLevel,
+  findBuff,
+  formatRowValue,
+  isStatSheetBuff,
+  loadBuffGroups,
+  loadBuffIndex,
+  setBuffLevel,
+} from '../lib/buff';
 import { bool, loadTable, singleValue, type Row } from '../lib/tables';
 import { loadTextIndex } from '../lib/text';
 import { kitScaling, loadKitScalingTables } from '../lib/kit-scaling';
@@ -423,8 +439,8 @@ export function buildSolver(inputs: {
   // `GetStatPremiumBuffList` ne lit pas, et `CStatValue.SetSetItemValue` ignore
   // tout ce qui n'est pas `IOT_STAT`. Les effets de combat des sets
   // (Pulverization, Weakness, Augmentation, Immunity, Revenge…) n'ont donc
-  // aucun `p2` / `p4` ; ils reviendront, pour l'affichage seulement, dans
-  // `combatEffects` (lot B53). La prose `p2_desc` / `p4_desc` les décrit.
+  // aucun `p2` / `p4` ; ils sont dans `combatEffects`, pour l'affichage
+  // seulement. La prose `p2_desc` / `p4_desc` les décrit.
   function resolveSetEffectEntry(
     optionType: string | undefined,
     stat: string | undefined,
@@ -433,6 +449,57 @@ export function buildSolver(inputs: {
   ): { st: string; ap?: string; v: number } | null {
     if (optionType !== 'IOT_STAT' || !stat || stat === 'ST_NONE') return null;
     return { st: stat, ap, v: Number(value) };
+  }
+  // `combatEffects` : effets `IOT_BUFF` d'un palier, pour l'affichage seulement
+  // (cf. en-tête). Ligne du client : niveau = `BuffLevel_xP + 1`, ligne de plus
+  // haut `Level` ≤ ce niveau (à égalité, la dernière) ; `BT_GROUP` déplié comme
+  // `resolveBuffEffects` (equipment.ts).
+  interface CombatEffect {
+    buffId: string;
+    type: string;
+    st?: string;
+    ap?: string;
+    v?: number;
+    target: string;
+    cond?: string;
+  }
+  const setBuffRows = loadBuffIndex();
+  const setBuffGroups = loadBuffGroups();
+  function setBuffRowAt(buffId: string, level: number): Row | undefined {
+    let best: Row | undefined;
+    for (const r of setBuffRows.get(buffId) ?? []) {
+      const lv = Number(r.Level);
+      if (lv <= level && (!best || lv >= Number(best.Level))) best = r;
+    }
+    return best;
+  }
+  function combatEffectsOf(buffId: string, level: number, depth = 0): CombatEffect[] {
+    if (depth > 4) throw new Error(`solver : BT_GROUP trop profond sous ${buffId}`);
+    const b = setBuffRowAt(buffId, level);
+    if (!b) throw new Error(`solver : buff de set ${buffId} sans ligne de niveau ≤ ${level}`);
+    if (b.Type === 'BT_GROUP') {
+      const grp = setBuffGroups.get(b.Value ?? '');
+      if (!grp) throw new Error(`solver : groupe ${b.Value} du buff de set ${buffId} absent`);
+      return grp.kids.flatMap((kid) => combatEffectsOf(kid, level, depth + 1));
+    }
+    return [
+      {
+        buffId: b.BuffID,
+        type: b.Type,
+        ...(b.StatType && b.StatType !== 'ST_NONE' ? { st: b.StatType } : {}),
+        ...(b.ApplyingType ? { ap: b.ApplyingType } : {}),
+        ...(b.Value ? { v: Number(b.Value) } : {}),
+        target: b.TargetType,
+        ...(b.BuffConditionType && b.BuffConditionType !== 'NONE'
+          ? { cond: b.BuffConditionType }
+          : {}),
+      },
+    ];
+  }
+  function setCombatEffects(s: Row, piece: '2P' | '4P'): CombatEffect[] | null {
+    const buffId = s[`BuffID_${piece}`];
+    if (s[`OptionType_${piece}`] !== 'IOT_BUFF' || !buffId) return null;
+    return combatEffectsOf(buffId.trim(), setBuffLevel(s, piece));
   }
   // GroupIDs des EE : la 1re part de l'UniqueOptionID d'un item EXCLUSIVE.
   const eeGroupIds = new Set<string>();
@@ -452,6 +519,7 @@ export function buildSolver(inputs: {
       p4_desc: string | null;
       breakLimitCounts: number[];
       ignoreLowSet: boolean;
+      combatEffects: { p2: CombatEffect[] | null; p4: CombatEffect[] | null };
     }[];
   }
   const sets: Record<string, SetOut> = {};
@@ -494,6 +562,7 @@ export function buildSolver(inputs: {
         .filter(Boolean)
         .map(Number),
       ignoreLowSet: bool(s.IgnoreLowSet),
+      combatEffects: { p2: setCombatEffects(s, '2P'), p4: setCombatEffects(s, '4P') },
     });
     // Options Singularité (groupes 30000/31000) — TOUTES émises ; seules les
     // inconditionnelles BT_STAT_PREMIUM comptent hors combat (combatOnly sinon).

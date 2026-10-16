@@ -7,6 +7,43 @@
 
 ## 2026-10-16
 
+- **Contrat solver : `combatEffects` des sets, pour l'affichage seulement
+  (B53, second temps du constat C1 de la revue gear-solver d'octobre).**
+  Chaque entrée de `levels[]` de `solver/sets.json` gagne `combatEffects:
+{ p2, p4 }`, toujours présent : `null` quand le palier n'a pas d'effet
+  `IOT_BUFF`, sinon la liste `{ buffId, type, st?, ap?, v?, target, cond? }`
+  en enums bruts du jeu, `v` = `Value` brut et signé (Weakness −350 sur
+  `ENEMY_TEAM`), `st` sans `ST_NONE`, `cond` sans `NONE`. **Pourquoi** : C20
+  a sorti ces effets de `p2` / `p4` (le client les verse dans
+  `m_ItemSetBuffTempletList`, hors fiche) ; gear-solver n'en avait plus que
+  la prose. **Comment** (`datagen/generators/solver.ts`) : niveau du buff =
+  `setBuffLevel` (C18, `BuffLevel_xP + 1`), ligne de plus haut `Level` ≤ ce
+  niveau, la dernière à égalité (`setBuffRowAt`, local : `buffRowAtLevel`
+  prend la première et replie sur le plus bas niveau) ; un `BT_GROUP` est
+  déplié en ses enfants au même niveau par `loadBuffGroups`, comme
+  `resolveBuffEffects` ; un buff ou un groupe introuvable jette plutôt que
+  d'émettre une liste vide. L'en-tête du fichier dit le sens du champ
+  (affichage seulement, jamais la fiche ni la CP) et la règle `ignoreLowSet`
+  côté buffs. Ajout, étape (a) : `schema` reste à 1. **Sets et niveaux
+  servis** : Fortification (8) L1 et L2 2P (groupe déplié : `BT_DMG_REDUCE`
+  400 et `BT_STAT` SPD −300) ; Revenge (15) et Patience (16) L1 et L2 4P ;
+  Pulverization (17) L1 et L2, 2P et 4P (L2 : 700 des deux côtés, le 4P
+  pointe sur `BID_ITEM_UO_SET_17`) ; Immunity (18) L1 et L2 2P (`BT_IMMUNE`,
+  sans `v`), L2 4P (`BID_ITEM_UO_SET_18_1`, `BT_DMG_REDUCE` 300) ; Swiftness
+  (19), Weakness (20), Augmentation (21) L1 et L2 2P. **Vérification** :
+  `data/generated` propre avant, `pnpm datagen:sync-derived` ne change que
+  `solver/sets.json` et `solver/version.json` (hash `77bba3140a60`),
+  `damage/` intact ; un script jetable hors dépôt confirme `sets.json`
+  identique à l'avant une fois le champ retiré. `solver.test.ts` déclare la
+  clé dans `CONTRACT_SHAPE` et teste Pulverization L2, Weakness L2, Revenge
+  L2, Immunity L2, Attack à `null` et l'absence de recouvrement entre `p2` /
+  `p4` et `combatEffects`. typecheck : `tsc --noEmit -p
+scripts/tsconfig.json` sans erreur ; lint : `eslint` sans erreur ; test :
+  `Tests  3969 passed (3969)`. Aucun changement visuel : le site ne lit pas
+  ce champ. **Laissé** : `ap` est émis tel quel, `OAT_NONE` compris
+  (Immunity 2P) ; l'affichage côté gear-solver (lire
+  `sets[id].levels[i].combatEffects.p2` / `.p4` à côté de la prose, jamais
+  versé à la fiche) est un lot gear-solver, après `npm run data:sync`.
 - **Relecture des lots C19, G4 et OB1 (Opus) — fiches d'équipement (pools
   de main du palier max par union, secondaire des EE, main stat float32, pas
   des sous-stats, descriptions) ; Builder et Worklist de gear-solver (ΔCP
