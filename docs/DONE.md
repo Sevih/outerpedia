@@ -7,6 +7,30 @@
 
 ## 2026-10-16
 
+- **Relecture G7 (Opus) — gear-solver sans capture par émulateur ;
+  validé.** Périmètre conforme (gear-solver `0ef65f5`, 68 fichiers,
+  +606 / −3049) : `emulator-detect.ts`, `mitm-provision.ts`,
+  `capture-ca.ts`, `renderer/src/emulator.ts`, `tools/capture/` et leurs
+  tests partis ; le choix de source et `CAPTURE_SOURCE_KEY` retirés (une
+  préférence « emulator » sauvée n'est plus lue) ; `apps/desktop/package.json`
+  ne perd que les `extraResources` de `tools/capture/*` et `bin/adb`, ni
+  dépendance ni lockfile ; `fetch-binaries.mjs` garde le plugin Steam et
+  l'icône. `legacy-cleanup.ts`, appelé à chaque lancement par `main.ts`,
+  supprime de `userData` `capture-ca/` (clé privée), `bin/mitmproxy/`,
+  `manual-device.json` et les fichiers du pipeline dans `capture-out/`,
+  pas les snapshots (le plugin Steam y écrit) ; testé. Reste de
+  `git grep emulator|adb|mitm` : le nettoyage, la doc d'architecture
+  (FR et wiki) et la FAQ, tous justifiés. Notes de version : relues contre
+  l'ancien `bind_cert.sh` (bind mount) et `redir.sh` (iptables), deux
+  états perdus au redémarrage de l'émulateur, ce que les notes disent.
+  Contrôles : typecheck vert, tests 105 + 75 + 427, `desktop:build`
+  vert. **Reste à Sevih** : dans l'app, Settings sans choix de source,
+  une capture Steam qui aboutit, l'import manuel, `capture-ca/` disparu
+  de `%APPDATA%` ; en dev, déplacer `tools/capture/out/` vers
+  `.cache/capture-out/` et réinstaller le plugin (son `OutDir` pointe
+  l'ancien dossier). Hors périmètre, vu par le lot : le Wipe n'est pas
+  refusé quand le plugin Steam est actif. **Suite** : vague 6 (C21, A59,
+  I1).
 - **Relecture A61 (Opus) — note « Jouer à OUTERPLANE » de l'accueil, URL
   des stores partagées ; validé, et B55 constaté en prod.** Périmètre
   conforme (`cf43cb37`) : `src/lib/game-stores.ts` porte seul les trois
