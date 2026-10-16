@@ -7,6 +7,28 @@
 
 ## 2026-10-16
 
+- **Relecture des lots C20, F27 et G5 (Opus) — sets de combat hors de la
+  fiche, paliers par pièce, uniques de fiche ; enquête sur les clips joués ;
+  héros fusionnés et main stat en float32 dans gear-solver : validés.** C20
+  `deed4b16`, F27 `00c28d7d`, G5 gear-solver `23d4088`, un commit chacun, ni
+  `package.json` ni lock. **Contrôles** : outerpedia typecheck, lint,
+  format:check verts, `NODE_ENV=development pnpm test` 227 fichiers / 3910
+  tests ; gear-solver typecheck vert, 93 + 82 + 370 tests. **Contrat
+  (C20)** : ajouts seulement — `breakLimitCounts` et `ignoreLowSet` sur
+  chaque niveau de `sets.json`, `statsByTier` dans `equipment-passives.json`,
+  l'EE 2000078 dans `ee-passives.json` ; aucune clé retirée, `schema` 1 ; 9
+  `p2`/`p4` de plus à `null` (les 4P d'effet de combat), hash `57cd9f195e73`.
+  `data:sync` joué dans gear-solver (`1596168`), suite verte sur le nouveau
+  contrat ; et le conseil « 3/4 » du Builder lit aussi `p4_desc`, sinon il se
+  taisait pour Pulverization (`2943b49`, test ajouté). **F27** : doc seule
+  (`docs/specs/damage-clips-joues.md`) ; la règle du client tranche toutes
+  les variantes sauf deux questions (suite additionnelle d'un skill non
+  mesuré, burst à deux triggers), avec les mesures M1 et M2 de Sterope à
+  jouer par Sevih (liens et valeurs attendues au § 4). **G5** : composition
+  des fusionnés sur l'origine (`effectiveCharacter`), main stat par la chaîne
+  float32 du client, recopiée d'outerpedia (`src/lib/damage/item.ts`) — à
+  terme, dans l'esprit « outerpedia est la source », une valeur servie par
+  le contrat plutôt qu'une copie. **Suite** : vague 2 (C18, B54, G2).
 - **F27 · Enquête : quels clips d'animation joue une compétence (R14),
   règle du client et mesures à demander.** Documentation seule, nouveau
   `docs/specs/damage-clips-joues.md` ; ni code, ni données, ni
