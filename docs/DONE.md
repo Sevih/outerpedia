@@ -7,6 +7,24 @@
 
 ## 2026-10-16
 
+- **Relecture A61 (Opus) — note « Jouer à OUTERPLANE » de l'accueil, URL
+  des stores partagées ; validé, et B55 constaté en prod.** Périmètre
+  conforme (`cf43cb37`) : `src/lib/game-stores.ts` porte seul les trois
+  URL, lues par le guide « How to play » et le guide Linux (mêmes URL
+  qu'avant au caractère près) ; `PlayStores` sous `HomeHero`, icônes de
+  `react-icons` déjà en dépendance, lien vers le guide ; deux clés dans les
+  six locales ; les deux `meta.json` ne bougent que par le tampon
+  `updated` du hook `stamp-guides`. Contrôles : typecheck vert, tests de
+  l'accueil, des guides et `keys.test.ts` `Tests 17 passed (17)` ; la
+  suite entière était passée avec ces fichiers dans l'arbre (4014). Poussé
+  par Sevih avant la relecture, déploiement vert : l'accueil en ligne sert
+  « Play OUTERPLANE » (« Jouer à OUTERPLANE » sur `/fr`) et les trois
+  URL. **B55 en prod** : un GET sur un lien court inexistant a déclenché
+  `ensureTable` ; `short_links` et `tier_lists` ont `last_access` et
+  `idx_last_access`, 54 et 12 lignes, toutes au 16/10 12:41:56 UTC (heure
+  de la migration). **Reste à Sevih** : regarder la note à l'écran,
+  mobile et bureau, clair et sombre. **Suite** : G7 en cours ; vague 6
+  (C21, A59, I1).
 - **A61 — accueil : note « Jouer à OUTERPLANE » vers Steam, Google Play et
   l'App Store (idée de Sevih du 16/10).** Les URL des trois stores quittent
   le dossier du guide « How to play » pour une source unique,
