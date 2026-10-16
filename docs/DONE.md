@@ -7,6 +7,27 @@
 
 ## 2026-10-16
 
+- **Relecture des lots C18, B54 et G2 (Opus) — niveau de buff des sets du
+  jeu, butin au palier de base et recos enchantées ; liens, vignette, id
+  stable du journal et URL d'échange servis au bot ; gemmes complétées par la
+  stat utile et projection au plafond réel dans gear-solver : validés.** C18
+  `faa13836`, B54 `f6ed2e4b`, G2 gear-solver `d73e3ba`, un commit chacun,
+  ni `package.json` ni lock. **Contrôles** : outerpedia typecheck, lint,
+  format:check verts, `NODE_ENV=development pnpm test` 230 fichiers / 3939
+  tests, `vitest run scripts/quick` 8 / 1147, `damage:check` 42 lignes
+  exactes ; gear-solver typecheck vert, 93 + 82 + 388 tests. **Constaté** :
+  C18 ne touche pas au contrat solver (pas de `data:sync`) ; B54 n'ajoute à
+  `data/curated/changelog.json` que 150 `id` (8 hexadécimaux, posés une
+  fois, jamais recalculés), et `COUPON_REDEEM_URL` garde l'adresse sans port
+  vérifiée le 16/10. **Correctif de relecture** : la décision du 15/10 écrite
+  dans C18 (cartes de `/equipment` au palier enchanté marqué) n'avait pas été
+  faite ; `SetRow.enchantedTier` (« Breakthrough 4 », clé existante) est
+  posé par `src/app/[lang]/equipment/page.tsx` quand le set a plusieurs
+  paliers (les 21) et affiché par `SetCard` sous les lignes 2P/4P ; test
+  `src/components/equipment/cards.test.tsx`. **À voir par Sevih** : une
+  carte de set sur `/equipment`, et une reco de build sur une fiche perso
+  (ligne « Breakthrough 4 »). **Suite** : vague 3 (C19, G4, et OB1 une fois
+  B54 poussé).
 - **Bot : `href` et `icon` servis par `/api/bot/*`, id stable du journal,
   URL d'échange des codes en une constante, extraits du contrat (lot B54).**
   Revue d'outerbot du 09/10 (D1, D2, B8, B9), triée le 15/10 : le bot

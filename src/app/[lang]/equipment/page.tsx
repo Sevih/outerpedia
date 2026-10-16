@@ -164,6 +164,8 @@ export default async function EquipmentPage({ params }: { params: Promise<{ lang
       pieceIcons: Object.values(s.pieceIcons),
       p2: last?.p2 ?? s.tiers[0]?.p2,
       p4: last?.p4 ?? s.tiers[0]?.p4,
+      // Plusieurs paliers : le dernier est l'enchanté, la carte le dit.
+      ...(s.tiers.length > 1 ? { enchantedTier: `${t('equip.detail.breakthrough')} 4` } : {}),
       source: toRowSource(s.source, lang, t),
     };
   });
