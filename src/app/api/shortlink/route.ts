@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { getDbConnection } from '@/lib/db';
 import { createRateLimiter, createWriteQuota, clientIp } from '@/lib/rate-limit';
-import { ensureTable, isInternalPath, pathId, MAX_PATH } from '@/lib/short-links';
+import { ensureTable, isInternalPath, pathId, purgeIfDue, MAX_PATH } from '@/lib/short-links';
 
 export const dynamic = 'force-dynamic';
 
@@ -42,15 +42,19 @@ export async function POST(request: Request) {
   try {
     await ensureTable(conn);
     const id = pathId(path);
-    // Même chemin ⇒ même id ; l'upsert rend l'appel idempotent.
+    // Même chemin ⇒ même id ; l'upsert rend l'appel idempotent. Re-partager un
+    // lien existant, c'est qu'il circule encore : il repart pour 12 mois.
     await conn.execute(
-      'INSERT INTO short_links (id, path) VALUES (?, ?) ON DUPLICATE KEY UPDATE id = id',
+      'INSERT INTO short_links (id, path) VALUES (?, ?) ON DUPLICATE KEY UPDATE last_access = CURRENT_TIMESTAMP',
       [id, path],
     );
     return NextResponse.json({ id });
   } catch {
     return NextResponse.json({ error: 'storage_error' }, { status: 500 });
   } finally {
+    // La réponse est calculée : la purge du jour passe sur cette connexion
+    // avant de la rendre (sans effet si la table n'est pas prête).
+    await purgeIfDue(conn);
     await conn.end().catch(() => {});
   }
 }

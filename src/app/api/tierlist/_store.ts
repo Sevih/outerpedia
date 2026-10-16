@@ -28,5 +28,11 @@ const store = createHashStore({
 /** Crée la table `tier_lists` une fois par process (idempotent, mémoïsé). */
 export const ensureTable = store.ensureTable;
 
+/** Marque une tier-list lue (rétention, cf. `hash-store.ts`) ; échec avalé. */
+export const touch = store.touch;
+
+/** Efface les tier-lists non relues depuis 12 mois, au plus une fois par jour ; échec avalé. */
+export const purgeIfDue = store.purgeIfDue;
+
 /** Id court DÉTERMINISTE dérivé du payload — même liste ⇒ même id. */
 export const payloadId = store.id;

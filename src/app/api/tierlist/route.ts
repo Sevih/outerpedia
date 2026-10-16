@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { getDbConnection } from '@/lib/db';
 import { createRateLimiter, createWriteQuota, clientIp } from '@/lib/rate-limit';
-import { ensureTable, payloadId, MAX_PAYLOAD } from './_store';
+import { ensureTable, payloadId, purgeIfDue, MAX_PAYLOAD } from './_store';
 
 export const dynamic = 'force-dynamic';
 
@@ -53,15 +53,19 @@ export async function POST(request: Request) {
   try {
     await ensureTable(conn);
     const id = payloadId(z);
-    // Même payload ⇒ même id ; l'upsert rend l'appel idempotent.
+    // Même payload ⇒ même id ; l'upsert rend l'appel idempotent. Re-partager
+    // une liste existante, c'est qu'elle circule encore : elle repart pour 12 mois.
     await conn.execute(
-      'INSERT INTO tier_lists (id, payload) VALUES (?, ?) ON DUPLICATE KEY UPDATE id = id',
+      'INSERT INTO tier_lists (id, payload) VALUES (?, ?) ON DUPLICATE KEY UPDATE last_access = CURRENT_TIMESTAMP',
       [id, z],
     );
     return NextResponse.json({ id });
   } catch {
     return NextResponse.json({ error: 'storage_error' }, { status: 500 });
   } finally {
+    // La réponse est calculée : la purge du jour passe sur cette connexion
+    // avant de la rendre (sans effet si la table n'est pas prête).
+    await purgeIfDue(conn);
     await conn.end().catch(() => {});
   }
 }

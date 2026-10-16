@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import type { RowDataPacket } from 'mysql2';
 import { getDbConnection } from '@/lib/db';
-import { ensureTable, ID_RE } from '../_store';
+import { ensureTable, purgeIfDue, touch, ID_RE } from '../_store';
 
 export const dynamic = 'force-dynamic';
 
@@ -20,6 +20,7 @@ export async function GET(_request: Request, { params }: { params: Promise<{ id:
     );
     const row = rows[0];
     if (!row) return NextResponse.json({ error: 'not_found' }, { status: 404 });
+    await touch(conn, id);
     return NextResponse.json(
       { z: row.payload as string },
       { headers: { 'Cache-Control': 'public, max-age=300' } },
@@ -27,6 +28,9 @@ export async function GET(_request: Request, { params }: { params: Promise<{ id:
   } catch {
     return NextResponse.json({ error: 'storage_error' }, { status: 500 });
   } finally {
+    // La réponse est calculée : la purge du jour passe sur cette connexion
+    // avant de la rendre (sans effet si la table n'est pas prête).
+    await purgeIfDue(conn);
     await conn.end().catch(() => {});
   }
 }

@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import type { RowDataPacket } from 'mysql2';
 import { getDbConnection } from '@/lib/db';
-import { ensureTable, isInternalPath, ID_RE } from '@/lib/short-links';
+import { ensureTable, isInternalPath, purgeIfDue, touch, ID_RE } from '@/lib/short-links';
 
 export const dynamic = 'force-dynamic';
 
@@ -55,12 +55,16 @@ export async function GET(_request: Request, { params }: { params: Promise<{ id:
     // entré en base (ancienne ligne, écriture directe) partirait tel quel dans
     // `Location` et le navigateur le lirait comme un autre hôte.
     if (!isInternalPath(path)) return home();
+    await touch(conn, id);
     // L'id étant un hash du chemin, l'association ne change jamais : la
     // redirection peut se mettre en cache (Cloudflare est devant).
     return seeOther(path, true);
   } catch {
     return new NextResponse(null, { status: 500 });
   } finally {
+    // La réponse est calculée : la purge du jour passe sur cette connexion
+    // avant de la rendre (sans effet si la table n'est pas prête).
+    await purgeIfDue(conn);
     await conn.end().catch(() => {});
   }
 }

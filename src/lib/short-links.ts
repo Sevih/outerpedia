@@ -20,6 +20,12 @@ export const ID_RE = store.idPattern;
 /** Crée la table `short_links` une fois par process (idempotent, mémoïsé). */
 export const ensureTable = store.ensureTable;
 
+/** Marque un lien lu (rétention, cf. `hash-store.ts`) ; échec avalé. */
+export const touch = store.touch;
+
+/** Efface les liens non relus depuis 12 mois, au plus une fois par jour ; échec avalé. */
+export const purgeIfDue = store.purgeIfDue;
+
 /** Id court DÉTERMINISTE dérivé du chemin — même chemin ⇒ même id. */
 export const pathId = store.id;
 

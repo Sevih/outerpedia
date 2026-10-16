@@ -21,11 +21,12 @@
   `ALTER TABLE … ADD COLUMN …, ADD INDEX …` ; les lignes existantes y
   prennent l'heure de la migration, pas leur `created_at` (on ne sait pas si
   elles ont été relues, commentaire dans le code). `touch(conn, id)` fait
-  l'`UPDATE … WHERE id = ? AND last_access < CURRENT_TIMESTAMP - INTERVAL 1
-DAY`, échec avalé (commentaire sur le cache devant le site : une heure pour
-  `/s/`, 5 min pour la tier-list). `purgeIfDue(conn)` lance
-  `DELETE … WHERE last_access < CURRENT_TIMESTAMP - INTERVAL 12 MONTH LIMIT
-1000`, au plus une fois par 24 h et par store dans le process
+  l'`UPDATE` borné à un jour
+  (`last_access < CURRENT_TIMESTAMP - INTERVAL 1 DAY`), échec avalé
+  (commentaire sur le cache devant le site : une heure pour `/s/`, 5 min
+  pour la tier-list). `purgeIfDue(conn)` lance
+  le `DELETE` de ce qui est plus vieux que `INTERVAL 12 MONTH`, par
+  `LIMIT 1000`, au plus une fois par 24 h et par store dans le process
   (`PURGE_INTERVAL_MS`, échéance posée avant la requête : deux accès
   simultanés ne purgent pas deux fois, une purge ratée attend le lendemain),
   rien tant que la table n'est pas prête, échec avalé ; la durée est
