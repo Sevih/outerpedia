@@ -238,14 +238,20 @@ describe.skipIf(!HAS_GAME_TABLES)('manifest global — clés par entité inchang
   const sorted = (keys: Iterable<string>) => [...keys].sort();
   const manifestKeys = () => buildAssetManifest().map((r) => r.key);
 
-  it('vignettes de monstre `images/ui/boss/MT_<icon>` : la liste d’avant l’extraction', () => {
-    // `MT_<chiffres>` = vignette D'UN monstre ; les calques partagés de la
-    // vignette (`MT_Slot_*`, `MT_Element_*`, `MT_Class_*`) ne passent pas par
-    // `monsterAssetRequests` et ne sont pas comparés ici.
-    const actual = manifestKeys().filter((k) => /^images\/ui\/boss\/MT_\d+\.(webp|png)$/.test(k));
-    expect(actual.length).toBeGreaterThan(0);
-    expect(sorted(actual)).toEqual(sorted(monsterKeysBefore()));
-  });
+  it(
+    'vignettes de monstre `images/ui/boss/MT_<icon>` : la liste d’avant l’extraction',
+    // Parcourt le disque : ~2 s seul, plus de 5 s quand toute la suite tourne
+    // (pré-vol de `pnpm commit`, 16/10).
+    { timeout: 30_000 },
+    () => {
+      // `MT_<chiffres>` = vignette D'UN monstre ; les calques partagés de la
+      // vignette (`MT_Slot_*`, `MT_Element_*`, `MT_Class_*`) ne passent pas par
+      // `monsterAssetRequests` et ne sont pas comparés ici.
+      const actual = manifestKeys().filter((k) => /^images\/ui\/boss\/MT_\d+\.(webp|png)$/.test(k));
+      expect(actual.length).toBeGreaterThan(0);
+      expect(sorted(actual)).toEqual(sorted(monsterKeysBefore()));
+    },
+  );
 
   it('tuiles et icônes de passifs `images/equipment/*` : la liste d’avant l’extraction', () => {
     const actual = manifestKeys().filter((k) => k.startsWith('images/equipment/'));

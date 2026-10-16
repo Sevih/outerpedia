@@ -68,28 +68,34 @@ describe('locales — contrat des clés', () => {
     }
   });
 
-  it('chaque clé a un consommateur (littéral ou préfixe dynamique du code)', () => {
-    const corpus = sourceCorpus();
-    // Préfixes dynamiques réels : segment de template `xxx${` ou concat `'xxx' +`.
-    // AUCUNE contrainte sur le caractère final du préfixe : exiger un point a
-    // fait purger à tort `page.character.skill.target_mono` & co (consommées
-    // via `target_${key}` — préfixe en underscore). Un préfixe doit juste
-    // contenir un point pour compter (sinon `Lv.`-like trop courts matchent tout).
-    const dynamic = new Set<string>(
-      [
-        ...[...corpus.matchAll(/`([a-z][a-z0-9_.-]*)\$\{/gi)].map((m) => m[1]),
-        ...[...corpus.matchAll(/'([a-z][a-z0-9_.-]*)'\s*\+/gi)].map((m) => m[1]),
-      ].filter((p) => p.includes('.')),
-    );
-    const dead = enKeys.filter(
-      (k) =>
-        !corpus.includes(`'${k}'`) &&
-        !corpus.includes(`"${k}"`) &&
-        !corpus.includes(`\`${k}\``) &&
-        ![...dynamic].some((p) => k.startsWith(p)),
-    );
-    expect(dead, 'clés sans consommateur (vestige à purger, ou typo)').toEqual([]);
-  });
+  it(
+    'chaque clé a un consommateur (littéral ou préfixe dynamique du code)',
+    // Parcourt le disque : ~2 s seul, plus de 5 s quand toute la suite tourne
+    // (pré-vol de `pnpm commit`, 16/10).
+    { timeout: 30_000 },
+    () => {
+      const corpus = sourceCorpus();
+      // Préfixes dynamiques réels : segment de template `xxx${` ou concat `'xxx' +`.
+      // AUCUNE contrainte sur le caractère final du préfixe : exiger un point a
+      // fait purger à tort `page.character.skill.target_mono` & co (consommées
+      // via `target_${key}` — préfixe en underscore). Un préfixe doit juste
+      // contenir un point pour compter (sinon `Lv.`-like trop courts matchent tout).
+      const dynamic = new Set<string>(
+        [
+          ...[...corpus.matchAll(/`([a-z][a-z0-9_.-]*)\$\{/gi)].map((m) => m[1]),
+          ...[...corpus.matchAll(/'([a-z][a-z0-9_.-]*)'\s*\+/gi)].map((m) => m[1]),
+        ].filter((p) => p.includes('.')),
+      );
+      const dead = enKeys.filter(
+        (k) =>
+          !corpus.includes(`'${k}'`) &&
+          !corpus.includes(`"${k}"`) &&
+          !corpus.includes(`\`${k}\``) &&
+          ![...dynamic].some((p) => k.startsWith(p)),
+      );
+      expect(dead, 'clés sans consommateur (vestige à purger, ou typo)').toEqual([]);
+    },
+  );
 });
 
 /**

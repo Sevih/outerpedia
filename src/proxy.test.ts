@@ -116,11 +116,22 @@ describe('proxy — mode path (défaut des tests)', () => {
     }
   });
 
-  it('/dev hors développement : 404 direct, sans réécriture', () => {
-    for (const path of ['/dev', '/dev/', '/dev/tokens']) {
-      const res = proxy(req(path, { lang: 'fr' }));
-      expect(res.status).toBe(404);
-      expect(outcome(res)).toEqual({ next: false });
+  // `IS_DEV` se fige au chargement du module : on le recharge sous un
+  // `NODE_ENV` forcé, sans compter sur l'ambiant (`pnpm commit` lancé depuis
+  // quick hérite de `development`).
+  it('/dev hors développement : 404 direct, sans réécriture', async () => {
+    vi.stubEnv('NODE_ENV', 'production');
+    vi.resetModules();
+    const p = (await import('./proxy')).proxy;
+    try {
+      for (const path of ['/dev', '/dev/', '/dev/tokens']) {
+        const res = p(req(path, { lang: 'fr' }));
+        expect(res.status).toBe(404);
+        expect(outcome(res)).toEqual({ next: false });
+      }
+    } finally {
+      vi.unstubAllEnvs();
+      vi.resetModules();
     }
   });
 });
