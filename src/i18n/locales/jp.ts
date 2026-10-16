@@ -894,6 +894,8 @@ const jp: Record<TranslationKey, string> = {
   'home.codes.copy': 'コピー',
   'home.codes.empty': '現在有効なコードはありません。',
   'home.codes.view_all': '有効なコード{count}件をすべて見る',
+  'home.stores.title': 'OUTERPLANEをプレイ',
+  'home.stores.more': 'PC版Google Play Gamesなど：プレイ方法ガイド',
   'home.discord.title': 'Discordに参加しよう',
   'home.discord.description': '編成共有、質問、考察をコミュニティと一緒に楽しもう。',
   'home.discord.join': '参加',

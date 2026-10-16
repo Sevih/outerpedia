@@ -885,6 +885,8 @@ const kr: Record<TranslationKey, string> = {
   'home.codes.copy': '복사',
   'home.codes.empty': '현재 유효한 코드가 없습니다.',
   'home.codes.view_all': '유효한 코드 {count}개 모두 보기',
+  'home.stores.title': 'OUTERPLANE 플레이',
+  'home.stores.more': 'PC용 Google Play Games 등: 플레이 방법 가이드',
   'home.discord.title': 'Discord에 참여하세요',
   'home.discord.description': '팀 편성 공유, 질문, 공략 토론을 커뮤니티와 함께하세요.',
   'home.discord.join': '참여',

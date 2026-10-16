@@ -5,6 +5,7 @@ import { createPageMetadata } from '@/lib/seo';
 import { localePath } from '@/lib/navigation';
 import { getActiveCoupons, getBuffSchedule } from '@/lib/home';
 import { HomeHero } from '@/components/home/HomeHero';
+import { PlayStores } from '@/components/home/PlayStores';
 import { DiscordBanner } from '@/components/home/DiscordBanner';
 import { CurrentBanners } from '@/components/home/CurrentBanners';
 import { ServerResets } from '@/components/home/ServerResets';
@@ -73,6 +74,11 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
       />
 
       <div className="mx-auto max-w-7xl space-y-12 px-4 py-10 md:space-y-16 md:px-6">
+        <PlayStores
+          lang={lang}
+          strings={{ title: t('home.stores.title'), more: t('home.stores.more') }}
+        />
+
         <DiscordBanner
           strings={{
             title: t('home.discord.title'),

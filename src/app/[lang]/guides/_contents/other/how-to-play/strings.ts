@@ -6,6 +6,7 @@
  * dangerouslySetInnerHTML.
  */
 import type { LocalizedText } from '@contracts';
+import { GAME_STORE_URLS } from '@/lib/game-stores';
 
 type Text = LocalizedText & { en: string };
 
@@ -318,12 +319,15 @@ export const S = {
   },
 } as const satisfies Record<string, Text>;
 
-/** Liens externes — les URL localisées restent des LocalizedText. */
+/**
+ * Liens externes — les URL localisées restent des LocalizedText. Les trois
+ * stores viennent de `@/lib/game-stores` (partagés avec l'accueil).
+ */
 export const LINKS = {
-  playstore: 'https://play.google.com/store/apps/details?id=com.smilegate.outerplane.stove.google',
-  appstore: 'https://apps.apple.com/us/app/outerplane-strategy-anime/id1630880836',
+  playstore: GAME_STORE_URLS.playstore,
+  appstore: GAME_STORE_URLS.appstore,
   googleplaygames: 'https://play.google.com/googleplaygames',
-  steam: 'https://store.steampowered.com/app/4247320/OUTERPLANE/',
+  steam: GAME_STORE_URLS.steam,
   discord: 'https://discord.com/invite/77mVJcJByq',
   reddit: 'https://www.reddit.com/r/outerplane/',
   twitter: 'https://x.com/outerplane',

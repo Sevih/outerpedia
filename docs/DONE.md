@@ -7,6 +7,53 @@
 
 ## 2026-10-16
 
+- **A61 — accueil : note « Jouer à OUTERPLANE » vers Steam, Google Play et
+  l'App Store (idée de Sevih du 16/10).** Les URL des trois stores quittent
+  le dossier du guide « How to play » pour une source unique,
+  `src/lib/game-stores.ts` (`GAME_STORE_URLS`, sur le modèle de
+  `src/lib/discord.ts`, seul module du site qui range un lien externe
+  partagé) ; `LINKS` de `how-to-play/strings.ts` lit `steam`, `playstore`
+  et `appstore` de là et garde ses autres entrées (`googleplaygames`,
+  Discord, Reddit, X) telles quelles, `outerplane-on-linux/index.tsx` lit
+  `GAME_STORE_URLS.steam` au lieu de son URL recopiée. Nouveau composant
+  serveur `src/components/home/PlayStores.tsx`, posé dans
+  `src/app/[lang]/page.tsx` en tête du conteneur, juste sous `HomeHero` et
+  avant `DiscordBanner` : une carte `.card` p-4 comme l'encart Discord, un
+  `h2` court, trois liens externes (`target="_blank"`,
+  `rel="noopener noreferrer"`) en pastilles neutres `bg-surface-overlay`
+  (tokens du thème, donc justes en clair comme en sombre) avec l'icône
+  `react-icons` du store (`FaSteam`, `FaGooglePlay`, `FaApple` — la
+  bibliothèque est déjà celle des icônes de marque du Footer et de
+  `DiscordBanner`, aucune dépendance ajoutée ; décoratives, `aria-hidden`,
+  le nom est écrit à côté), puis un lien interne vers
+  `/guides/other/how-to-play` pour Google Play Games sur PC. En colonne sous
+  `md` (titre, pastilles qui passent à la ligne, lien), en ligne au-dessus
+  (lien poussé à droite). Deux clés dans les six locales, insérées avant
+  `home.discord.title` : `home.stores.title` (« Play OUTERPLANE », « Jouer
+  à OUTERPLANE »…) et `home.stores.more` (« Google Play Games on PC and
+  more: How to Play guide », le titre du guide repris de son `meta.json`
+  dans chaque langue, zh compris « 进行方法 ») ; jp/kr/zh en traduction
+  sobre, les noms de stores non traduits. Vérifié : typecheck et lint sans
+  sortie d'erreur (`$ eslint` dernière ligne), `format:check` « All matched
+  files use Prettier code style! », `pnpm test` `Tests 4014 passed (4014)`
+  dont le nouveau `PlayStores.test.tsx` (les trois URL dans l'ordre et leur
+  `rel`, les URL elles-mêmes figées sur les anciennes valeurs, le titre et le
+  `href` du guide). Rendus des guides inchangés : `LINKS` résolu par `tsx`
+  comparé à celui du `strings.ts` de `HEAD` (identiques, mêmes clés dans le
+  même ordre), et le diff de la page Linux ne remplace que le littéral Steam
+  par la constante de même valeur. Le hook `stamp-guides` a re-daté au 16/10
+  le `meta.json` des deux guides (règle du dépôt : un fichier pertinent
+  touché suffit), bien que leur rendu ne change pas. Captures non prises : rien n'écoutait sur
+  :3000. À regarder par Sevih sur l'accueil, en 360 px et 1280 px, clair et
+  sombre : la carte juste sous le héros, au-dessus de l'encart Discord, même
+  bordure et même fond ; en 360 px les trois pastilles tiennent sur une ou
+  deux lignes sans déborder et le lien du guide passe dessous ; en 1280 px
+  titre, pastilles et lien sur une ligne ; le survol des pastilles fonce le
+  fond dans les deux thèmes. Laissé : le `PlatformCard` du guide garde ses
+  propres badges SVG (hors périmètre), et `BeginnerGuides` garde un
+  `as Route` redondant après `localePath` (déjà typé `Route`), non repris
+  dans le nouveau composant.
+
 - **Relecture des lots B56, B55, G6 et TW1 (Opus) — noyau par niveau de
   fusion dans le contrat, rétention des liens de partage, gear-solver et
   outerplane-tweaks lisent `game-client.json` ; validés.** Contrôles

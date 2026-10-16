@@ -867,6 +867,8 @@ const zh: Record<TranslationKey, string> = {
   'home.codes.copy': '复制',
   'home.codes.empty': '当前没有有效兑换码。',
   'home.codes.view_all': '查看全部{count}个有效兑换码',
+  'home.stores.title': '游玩 OUTERPLANE',
+  'home.stores.more': 'PC 版 Google Play Games 等：进行方法指南',
   'home.discord.title': '加入我们的Discord',
   'home.discord.description': '与社区一起分享队伍搭配、提问或进行理论研究。',
   'home.discord.join': '加入',

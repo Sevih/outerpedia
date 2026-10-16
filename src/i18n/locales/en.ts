@@ -917,6 +917,8 @@ const en = {
   'home.codes.copy': 'Copy',
   'home.codes.empty': 'No active codes right now.',
   'home.codes.view_all': 'View all {count} active codes',
+  'home.stores.title': 'Play OUTERPLANE',
+  'home.stores.more': 'Google Play Games on PC and more: How to Play guide',
   'home.discord.title': 'Join our Discord',
   'home.discord.description':
     'Share team comps, ask questions, or theorycraft together with the community.',

@@ -924,6 +924,8 @@ const es: Record<TranslationKey, string> = {
   'home.codes.copy': 'Copiar',
   'home.codes.empty': 'Sin códigos activos en este momento.',
   'home.codes.view_all': 'Ver todos los {count} códigos activos',
+  'home.stores.title': 'Jugar a OUTERPLANE',
+  'home.stores.more': 'Google Play Games en PC y más: guía Cómo jugar',
   'home.discord.title': 'Únete a nuestro Discord',
   'home.discord.description':
     'Comparte composiciones de equipo, haz preguntas o teoriza junto con la comunidad.',

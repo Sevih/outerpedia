@@ -13,6 +13,7 @@
  * de contenu : le cadre actuel (guide-detail) n'a pas — à raison — de prop dédiée
  * pour un cas unique.
  */
+import { GAME_STORE_URLS } from '@/lib/game-stores';
 
 function Code({ children }: { children: string }) {
   return (
@@ -90,7 +91,7 @@ export default function OuterplaneOnLinuxGuide() {
             <p className="text-content-muted text-sm">
               Outerplane is available on{' '}
               <a
-                href="https://store.steampowered.com/app/4247320/OUTERPLANE/"
+                href={GAME_STORE_URLS.steam}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-ed-sky underline"
