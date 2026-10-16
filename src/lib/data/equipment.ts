@@ -316,15 +316,56 @@ export function optionStatLabel(o: Option): string | null {
  * `excludeFlatBase` : masque la stat de base garantie des armes (ATK flat) —
  * on ne liste que les mains INTÉRESSANTES.
  */
-function mainStatsOf(main: string[], excludeFlatBase = false): string[] {
+function mainStatsOf(options: Option[], excludeFlatBase = false): string[] {
   const out: string[] = [];
-  for (const g of main)
-    for (const o of POOLS[g] ?? []) {
-      if (excludeFlatBase && o.mode === 'flat' && ['atk', 'def', 'hp'].includes(o.stat)) continue;
-      const label = optionStatLabel(o);
-      if (label && !out.includes(label)) out.push(label);
-    }
+  for (const o of options) {
+    if (excludeFlatBase && o.mode === 'flat' && ['atk', 'def', 'hp'].includes(o.stat)) continue;
+    const label = optionStatLabel(o);
+    if (label && !out.includes(label)) out.push(label);
+  }
   return out;
+}
+
+/** Ce que `topMainSlots` lit d'un membre : étoiles et groupes de main. */
+interface MainCarrier {
+  star?: number;
+  main?: string[];
+  options?: string[];
+}
+
+/**
+ * Mains POSSIBLES d'une famille au palier d'étoile max, par SLOT — règle
+ * unique de la vue liste, de la fiche et des recos. On passe les ids de la
+ * famille, ou ceux d'UNE variante de classe (Briareos/Gorgon : chaque classe a
+ * son pool, l'union se fait dans la variante).
+ *
+ * Deux encodages coexistent au palier max :
+ *   - variantes PAR main stat (Steel Necklace : cinq lignes 6★, une main
+ *     chacune) ou ligne au pool orphelin (Winter of Hubris : 641 pointe vers
+ *     1504, absent d'`ItemOptionTemplet`, 999 vers 1054) → UNION des membres ;
+ *   - copies PRÉ-ROULÉES de la Singularité dimensionnelle (Dies Irae 93xxx :
+ *     main FIXE PEN%/SPD à 100 %) à CÔTÉ de la variante au pool roulé : seuls
+ *     les pools ROULÉS disent ce que l'objet peut porter, les mains figées de
+ *     ces loots ne sont pas des mains de la famille.
+ * L'union se fait PAR POSITION de slot (Winter of Hubris : slot 1 = groupe 24,
+ * slot 2 = 1504 ∪ 1054), options dédoublonnées sur (stat, mode) dans l'ordre
+ * des membres puis des pools.
+ */
+export function topMainSlots(ids: string[], table: Record<string, MainCarrier>): Option[][] {
+  const members = ids.filter((id) => table[id]);
+  const topStar = Math.max(...members.map((id) => table[id].star ?? 0));
+  const memberGroups = members
+    .filter((id) => (table[id].star ?? 0) === topStar)
+    .map((id) => table[id].options ?? table[id].main ?? []);
+  const rolled = memberGroups.filter((gs) => gs.some((g) => (POOLS[g] ?? []).length > 1));
+  const slots: Option[][] = [];
+  for (const gs of rolled.length ? rolled : memberGroups)
+    gs.forEach((g, i) => {
+      const slot = (slots[i] ??= []);
+      for (const o of POOLS[g] ?? [])
+        if (!slot.some((x) => x.stat === o.stat && x.mode === o.mode)) slot.push(o);
+    });
+  return slots;
 }
 
 /**
@@ -375,7 +416,7 @@ export function accessoryMainStats(id: string): { grade: string; stats: string[]
   const it: GearItem | SpecialItem | undefined = AMULETS[id] ?? TALISMANS[id];
   if (!it) return undefined;
   const groups = 'options' in it ? (it as SpecialItem).options : (it as GearItem).main;
-  return { grade: it.grade, stats: mainStatsOf(groups) };
+  return { grade: it.grade, stats: mainStatsOf(groups.flatMap((g) => POOLS[g] ?? [])) };
 }
 
 // --- Familles d'items (armes / amulettes / talismans) --------------------------
@@ -500,66 +541,45 @@ function materializeFamilies(
     .map((f) => {
       const top = table[f.topId];
       const entry = curated[f.id];
-      // Mains possibles = UNION des variantes au palier max. Deux encodages :
-      //   - famille à variante PAR main stat (Steel Necklace) : chaque membre
-      //     porte un pool FIXE d'une option → union de tous les membres ;
-      //   - variantes PRÉ-ROULÉES de la Singularité dimensionnelle (Dies Irae
-      //     93xxx : main FIXE PEN%/SPD à 100 %) à CÔTÉ de la variante
-      //     classique au pool roulé : seuls les pools ROULÉS disent ce que
-      //     l'objet peut porter — les mains figées de ces loots spéciaux ne
-      //     sont pas des mains de la famille.
+      // Mains possibles = UNION des variantes au palier max (`topMainSlots`).
       const topIds = f.ids.filter((id) => table[id].star === top.star);
-      const memberGroups = topIds.map((id) =>
-        'options' in table[id] ? (table[id] as SpecialItem).options : (table[id] as GearItem).main,
-      );
-      const rolled = memberGroups.filter((gs) => gs.some((g) => (POOLS[g] ?? []).length > 1));
-      const mains = (rolled.length ? rolled : memberGroups).flat();
+      const mains = topMainSlots(f.ids, table).flat();
       // Passifs PAR CLASSE quand les variantes du palier max en portent des
       // DIFFÉRENTS (Briareos/Gorgon : « Ambition: Aggression/Determination/… »).
-      // On collecte AUSSI les pools de chaque classe : chaque variante a SES
+      // On collecte AUSSI les membres de chaque classe : chaque variante a SES
       // mains (Ambition ranger ≠ striker) — la carte et la fiche ne doivent pas
       // afficher l'union de famille.
       const byClass = new Map<
         string,
-        { id: string; icon: string; passives: PassiveRef[]; groups: string[][] }
+        { id: string; icon: string; passives: PassiveRef[]; ids: string[] }
       >();
       for (const id of topIds) {
         const m = table[id];
         const cl = 'classLimit' in m ? ((m as GearItem).classLimit ?? '') : '';
         if (!cl) continue;
-        const groups = 'options' in m ? (m as SpecialItem).options : (m as GearItem).main;
         const e = byClass.get(cl);
         // Id canonique de la classe = le PLUS PETIT numériquement, donc l'objet
         // de base (1796) plutôt qu'une copie pré-roulée de la Singularité
         // (93xxx). Même règle « premier id numérique gagne » qu'ailleurs, et
         // surtout DÉTERMINISTE quel que soit l'ordre de `families.json`.
         if (e) {
-          e.groups.push(groups);
+          e.ids.push(id);
           if (Number(id) < Number(e.id)) e.id = id;
-        } else byClass.set(cl, { id, icon: m.icon, passives: m.passives, groups: [groups] });
+        } else byClass.set(cl, { id, icon: m.icon, passives: m.passives, ids: [id] });
       }
       const sig = (ps: PassiveRef[]) => ps.map((p) => p.id).join(',');
       const classPassives =
         byClass.size > 1 && new Set([...byClass.values()].map((v) => sig(v.passives))).size > 1
-          ? [...byClass].map(([classLimit, v]) => {
-              // Même règle que la famille : seuls les pools ROULÉS de la classe
-              // disent ce que SA variante peut porter (les mains figées des
-              // loots pré-roulés 93xxx sont écartées).
-              const rolledCl = v.groups.filter((gs) => gs.some((g) => (POOLS[g] ?? []).length > 1));
-              return {
-                classLimit,
-                id: v.id,
-                // Slug de LA variante (« briareoss-recklessness-striker ») — les
-                // anciennes URLs avaient le suffixe dans le nom, les liens survivent.
-                slug: slugifyEquipment(withClassSuffix(top.name, classLimit).en),
-                icon: v.icon,
-                passives: v.passives,
-                mainStats: mainStatsOf(
-                  (rolledCl.length ? rolledCl : v.groups).flat(),
-                  excludeFlatBase,
-                ),
-              };
-            })
+          ? [...byClass].map(([classLimit, v]) => ({
+              classLimit,
+              id: v.id,
+              // Slug de LA variante (« briareoss-recklessness-striker ») — les
+              // anciennes URLs avaient le suffixe dans le nom, les liens survivent.
+              slug: slugifyEquipment(withClassSuffix(top.name, classLimit).en),
+              icon: v.icon,
+              passives: v.passives,
+              mainStats: mainStatsOf(topMainSlots(v.ids, table).flat(), excludeFlatBase),
+            }))
           : undefined;
       return {
         id: f.id,
@@ -730,7 +750,9 @@ export function getEEViews(): EEView[] {
     grade: e.grade,
     // Le 2e slot d'un EE est une option spéciale (stat interne + buff, ex.
     // hit_ap) : son texte vient du passif — on ne garde que les stats connues.
-    mainStats: mainStatsOf(e.options).filter((l) => !l.includes('_')),
+    mainStats: mainStatsOf(e.options.flatMap((g) => POOLS[g] ?? [])).filter(
+      (l) => !l.includes('_'),
+    ),
     passives: e.passives,
     trustLevel: e.trustLevel,
     rank: curated[e.character]?.rank,

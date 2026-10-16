@@ -28,7 +28,7 @@ export interface AscensionMaterial {
   icon: string;
   /** Grade slug (cadre de rareté de la tuile). */
   grade: string;
-  /** Description officielle (tooltip) — absente si l'item n'a pas de _DESC. */
+  /** Description officielle (tooltip) — absente si le DescID de l'item n'a pas de texte. */
   desc?: LangDict;
 }
 
@@ -148,11 +148,9 @@ export function buildEnhanceRules(): EnhanceRules {
       const count = num(r[`MaterialCount${i}`]);
       if (!id || id === '0' || !count) continue;
       const it = items.get(id);
-      // Description : convention `_NAME` → `_DESC` (comme le catalogue items).
-      // Garde descKey !== NameID : sans elle, un NameID hors convention donnerait
-      // le nom en guise de description.
-      const descKey = it?.NameID?.replace(/_NAME$/, '_DESC');
-      const desc = descKey && descKey !== it?.NameID ? resolveText(textItem, descKey) : null;
+      // Description : la clé que le client lit (`ItemTemplet.DescID`), comme le
+      // catalogue items.
+      const desc = it?.DescID ? resolveText(textItem, it.DescID) : null;
       out.push({
         id,
         count,

@@ -10,6 +10,9 @@ import type { Lang } from '@/lib/i18n/config';
 import { lRec } from '@/lib/i18n/localize';
 import { statOptionView } from '@/lib/stats';
 import { PIECE_ORDER } from '@/lib/data/gear-order';
+import { getEnhanceRules } from '@/lib/data/equipment-enhance';
+import { getBreakLimits } from '@/lib/data/equipment-break-limits';
+import { mainOptionAt } from '@/lib/damage/item';
 import {
   equipmentEditorialStamp,
   getAmuletFamilies,
@@ -19,6 +22,7 @@ import {
   resolvePassives,
   setEffectText,
   slugifyEquipment,
+  topMainSlots,
   withClassSuffix,
   type GearFamily,
   type ResolvedSource,
@@ -48,6 +52,9 @@ const AMULETS = accessoryData as unknown as Record<string, EquipEntry>;
 const TALISMANS = talismanData as unknown as Record<string, EquipEntry>;
 const SETS = setsData as unknown as Record<string, SetEntry>;
 const POOLS = poolsData as unknown as Record<string, Option[]>;
+const ENHANCE = getEnhanceRules();
+// Dernier palier de percée (4) : nombre de facteurs de `breakLimits.json`.
+const MAX_TIER = Math.max(0, ...Object.values(getBreakLimits()).map((b) => b.factors.length));
 
 /** Tous les builds curés (clé = id de perso), bruts. */
 export function loadGearReco(): Record<string, GearBuild[]> {
@@ -160,31 +167,39 @@ function familyOf(slot: Slot, id: string): GearFamily | undefined {
   return famByMember.index[slot].get(id);
 }
 
-/** Membre le plus étoilé d'une famille (porte les pools de main stats). */
-function topEntry(table: Record<string, EquipEntry>, f: GearFamily): EquipEntry | undefined {
-  return f.ids.reduce<EquipEntry | undefined>((best, id) => {
-    const e = table[id];
-    return e && (!best || (e.star ?? 0) > (best.star ?? 0)) ? e : best;
-  }, undefined);
+/**
+ * Mains possibles d'un objet de reco ou de butin : celles de sa famille au
+ * palier max (`topMainSlots`), dans LA variante de classe quand la famille en
+ * décline (Briareos/Gorgon : chaque classe a son pool) ; hors famille, celles
+ * de la ligne elle-même.
+ */
+function mainOptionsOf(
+  table: Record<string, EquipEntry>,
+  f: GearFamily | undefined,
+  e: EquipEntry,
+  byClass: boolean,
+): Option[] {
+  if (!f) return (e.main ?? []).flatMap((g) => POOLS[g] ?? []);
+  const ids = byClass ? f.ids.filter((id) => table[id]?.classLimit === e.classLimit) : f.ids;
+  return topMainSlots(ids, table).flat();
 }
 
 /**
- * Valeurs max (+10 T4 : ×6, formules extraites) des main stats curées d'un
- * item — clé de chip → valeur affichée (« 60% » / « 1200 »).
+ * Valeurs max (+10 au dernier palier de percée, float32 tronqué du client) des
+ * main stats curées d'un item — clé de chip → valeur affichée (« 60% » / « 1200 »).
  */
-function mainStatMaxOf(entry: EquipEntry | undefined, mainStat?: string): Record<string, string> {
+function mainStatMaxOf(options: Option[], mainStat?: string): Record<string, string> {
   const out: Record<string, string> = {};
-  if (!entry?.main || !mainStat) return out;
+  if (!mainStat) return out;
   const wanted = new Set(mainStat.split('/').map((s) => s.trim().toUpperCase()));
-  for (const g of entry.main) {
-    for (const o of POOLS[g] ?? []) {
-      if (!o.stat || o.stat === 'none' || o.buff) continue;
-      const { key, percent } = statOptionView(o.stat, o.mode);
-      if (!wanted.has(key.toUpperCase()) || out[key]) continue;
-      const base = percent ? o.value / 10 : o.value;
-      const max = o.levels?.length ? o.levels[o.levels.length - 1] / (percent ? 10 : 1) : base * 6;
-      out[key] = percent ? `${Math.floor(max * 10) / 10}%` : String(Math.floor(max));
-    }
+  for (const o of options) {
+    if (!o.stat || o.stat === 'none' || o.buff) continue;
+    const { key, percent } = statOptionView(o.stat, o.mode);
+    if (!wanted.has(key.toUpperCase()) || out[key]) continue;
+    const raw = o.levels?.length
+      ? o.levels[o.levels.length - 1]
+      : mainOptionAt(o.value, ENHANCE, ENHANCE.maxEnhance, MAX_TIER);
+    out[key] = percent ? `${raw / 10}%` : String(raw);
   }
   return out;
 }
@@ -258,7 +273,8 @@ function resolveItem(
     : f
       ? effectAtMax(f, lang)
       : { texts: [] };
-  const maxes = slot === 'talismans' ? {} : mainStatMaxOf(f ? topEntry(table, f) : e, mainStat);
+  const maxes =
+    slot === 'talismans' ? {} : mainStatMaxOf(mainOptionsOf(table, f, e, !!variant), mainStat);
   const slug = variant ? variant.slug : f?.slug;
   const name = lRec(variant ? withClassSuffix(e.name, variant.classLimit) : e.name, lang);
   return {
@@ -434,20 +450,10 @@ export function resolveLootGear(id: string, lang: Lang): ResolvedGearItem | unde
   const mains = lootVariant ? lootVariant.mainStats : (f?.mainStats ?? []);
   const mainStat = mains.length ? mains.join('/') : undefined;
   const eff = effectAtMaxOf(lootVariant?.passives ?? f?.passives ?? [], lang);
-  // Les valeurs max se lisent sur le pool du MÊME objet : le top de SA classe
-  // pour une variante (le top de famille est d'une autre classe → autre pool).
-  const maxEntry =
-    f && lootVariant
-      ? (f.ids.reduce<EquipEntry | undefined>((best, id) => {
-          const x = table[id];
-          return x && x.classLimit === e.classLimit && (!best || (x.star ?? 0) > (best.star ?? 0))
-            ? x
-            : best;
-        }, undefined) ?? e)
-      : f
-        ? topEntry(table, f)
-        : e;
-  const maxes = slot === 'talismans' ? {} : mainStatMaxOf(maxEntry, mainStat);
+  // Les valeurs max se lisent sur le pool du MÊME objet : SA classe pour une
+  // variante (le top de famille est d'une autre classe → autre pool).
+  const maxes =
+    slot === 'talismans' ? {} : mainStatMaxOf(mainOptionsOf(table, f, e, !!lootVariant), mainStat);
   return {
     id,
     name: lRec(lootVariant ? withClassSuffix(e.name, lootVariant.classLimit) : e.name, lang),

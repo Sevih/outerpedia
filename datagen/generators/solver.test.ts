@@ -37,6 +37,8 @@ import trustCharacterData from '../../data/generated/solver/trust-character.json
 import versionData from '../../data/generated/solver/version.json';
 import heroGrowthData from '../../data/generated/hero-growth.json';
 import gameVersionData from '../../data/generated/game-version.json';
+import buffsData from '../../data/generated/solver/buffs.json';
+import poolsData from '../../data/generated/equipment/pools.json';
 import { singleValue } from '../lib/tables';
 import { SOLVER_SCHEMA } from './solver';
 
@@ -595,5 +597,30 @@ describe('solver — uniques de fiche (equipment-passives, ee-passives)', () => 
     expect(eePassives['2000078']).toEqual([
       { levelThreshold: 10, st: 'ST_CRITICAL_DMG_RATE', ap: 'OAT_ADD', v: 300 },
     ]);
+  });
+});
+
+describe('solver — libellés des mains d’EE (R12)', () => {
+  // Relation, pas une chaîne du jour : la fiche porte sur chaque option d'EE le
+  // libellé de `conditionalLabel` (élément de `BuffConditionValue`), le contrat
+  // doit dire le même.
+  const buffs = buffsData as unknown as Record<string, ({ name?: string } | null)[]>;
+  const pools = poolsData as unknown as Record<string, { buff?: string; label?: { en: string } }[]>;
+  const fiche = new Map<string, string>();
+  for (const rows of Object.values(pools))
+    for (const o of rows) if (o.buff && o.label?.en) fiche.set(o.buff, o.label.en);
+
+  it('BID_CEQUIP_MAIN_DMG_REDUCE_FIRE : le libellé du jeu, pas l’élément du suffixe', () => {
+    const bid = 'BID_CEQUIP_MAIN_DMG_REDUCE_FIRE';
+    expect(fiche.get(bid)).toBeTruthy();
+    expect(buffs[bid].find(Boolean)?.name).toBe(fiche.get(bid));
+    expect(fiche.get(bid)).not.toMatch(/Fire/);
+  });
+
+  it('chaque main d’EE conditionnée porte, à tous les niveaux, le libellé de la fiche', () => {
+    expect(fiche.size).toBeGreaterThan(0);
+    for (const [bid, label] of fiche)
+      if (bid.startsWith('BID_CEQUIP_MAIN_'))
+        for (const lv of buffs[bid] ?? []) if (lv) expect(lv.name, bid).toBe(label);
   });
 });

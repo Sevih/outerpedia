@@ -324,6 +324,22 @@ export function conditionalLabel(
   return undefined;
 }
 
+/**
+ * Un groupe d'option référencé par une pièce mais absent d'`ItemOptionTemplet`
+ * sort en pool VIDE (`[]`) : la fiche perdrait la main sans un mot (Winter of
+ * Hubris 641 → 1504). On avertit, avec les pièces qui le citent ; on ne jette
+ * pas — l'union des mains (`topMainSlots`) retombe sur les autres membres.
+ */
+export function warnMissingPools(
+  refs: Map<string, string[]>,
+  known: (group: string) => boolean,
+): void {
+  for (const [g, ids] of refs) {
+    if (!known(g))
+      console.warn(`⚠ groupe d'option ${g} absent d'ItemOptionTemplet (${ids.join(', ')})`);
+  }
+}
+
 function resolveGroup(
   byGroup: Map<string, Row[]>,
   buffsByID: ReturnType<typeof loadBuffIndex>,
@@ -623,8 +639,14 @@ export function buildEquipment(): EquipmentData {
     statDescs: {},
   };
 
-  const ensurePool = (g: string) => {
-    if (g && !(g in data.pools))
+  // Groupe référencé → pièces qui le citent, pour l'avertissement de fin de build.
+  const poolRefs = new Map<string, string[]>();
+  const ensurePool = (g: string, itemId: string) => {
+    if (!g) return;
+    const refs = poolRefs.get(g);
+    if (refs) refs.push(itemId);
+    else poolRefs.set(g, [itemId]);
+    if (!(g in data.pools))
       data.pools[g] = resolveGroup(optByGroup, buffsByID, resolveBuffEffects, system, g);
   };
 
@@ -737,7 +759,7 @@ export function buildEquipment(): EquipmentData {
     };
     ensureGrade(identity.grade);
     const main = splitCsv(r.MainOptionGroupID);
-    main.forEach(ensurePool);
+    for (const g of main) ensurePool(g, r.ID);
 
     if (slot === 'talisman') {
       const passives = resolvePassiveRefs(r);
@@ -757,7 +779,7 @@ export function buildEquipment(): EquipmentData {
     }
 
     const sub = splitCsv(r.SubOptionGroupID)[0] ?? null;
-    if (sub) ensurePool(sub);
+    if (sub) ensurePool(sub, r.ID);
 
     if (slot === 'weapon' || slot === 'accessory') {
       // Slug canonique de classe (l'enum jeu diffère : Attacker→striker, Priest→healer).
@@ -787,6 +809,8 @@ export function buildEquipment(): EquipmentData {
       };
     }
   }
+
+  warnMissingPools(poolRefs, (g) => optByGroup.has(g));
 
   // tri stable de chaque collection
   for (const k of Object.keys(data) as (keyof EquipmentData)[]) {

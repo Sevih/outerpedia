@@ -15,6 +15,7 @@ import Link from 'next/link';
 import type { Route } from 'next';
 import { img } from '@/lib/images';
 import { STAT_ICON } from '@/lib/stats';
+import { mainOptionAt } from '@/lib/damage/item';
 import { SkillDescription } from '@/components/character/SkillDescription';
 import { CharacterPortrait } from '@/components/character/CharacterPortrait';
 import { Thumbnail } from '@/components/ui/Thumbnail';
@@ -80,10 +81,7 @@ const SING = 'var(--color-singularity)';
 
 // --- maths live (formules extraites) -------------------------------------------
 
-const floorDisplay = (v: number, percent: boolean) =>
-  percent ? Math.floor(v * 10 + 1e-9) / 10 : Math.floor(v + 1e-9);
-
-function mainValue(
+export function mainValue(
   o: StatOption,
   enh: number,
   tier: number,
@@ -92,14 +90,9 @@ function mainValue(
 ): number {
   // Talisman/EE : table de niveaux du jeu (index = niveau, borné).
   if (o.levels?.length) return o.levels[Math.min(enh, o.levels.length - 1)];
-  const tierMult = 1 + rules.tierFactor * tier;
-  if (ascended && enh >= rules.maxEnhance) {
-    let mult = 1 + rules.enhanceFactor * rules.maxEnhance + rules.singularity.activation.factor;
-    for (const s of rules.singularity.steps) if (enh >= s.to) mult += s.factor;
-    return floorDisplay(o.base * mult * tierMult, o.percent);
-  }
-  const lv = Math.min(enh, rules.maxEnhance);
-  return floorDisplay(o.base * (1 + rules.enhanceFactor * lv) * tierMult, o.percent);
+  // Gear : float32 tronqué du client sur la valeur BRUTE, puis échelle d'affichage.
+  const v = mainOptionAt(o.raw, rules, enh, tier, ascended);
+  return o.percent ? v / 10 : v;
 }
 
 const fmt = (v: number, percent: boolean) => `${v}${percent ? '%' : ''}`;

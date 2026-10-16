@@ -7,6 +7,75 @@
 
 ## 2026-10-16
 
+- **Fiches d'équipement (C19) : mains au palier max par union des membres
+  (R13), stat secondaire des EE à 0 à +0 (M10), main stat en float32 du
+  client (B1), pas des sous-stats en `OptionFactor` (O11), descriptions
+  d'objets lues dans `DescID` (R11), libellés d'EE du contrat solver par
+  `conditionalLabel` (R12).** **R13** : `topMainSlots`
+  (`src/lib/data/equipment.ts`) est la règle unique (membres au palier
+  d'étoile max, pools roulés seuls quand il y en a, union PAR SLOT,
+  options dédoublonnées sur (stat, mode)) ; la vue liste, ses variantes de
+  classe, `gearModel` (nouveau `slotsOf`, `toSlots` le garde pour les
+  groupes) et les recos (`mainOptionsOf` de `gear-reco.ts`, `topEntry`
+  retiré) l'appellent ; le sous-stat suit la ligne top d'avant. Aucun
+  conflit de valeur sur une même (stat, mode). Copies vérifiées : les
+  99xxxxx roulées (9921795…9971795 Briareos's Ambition ranger,
+  9921801…9971801 Gorgon's Vanity mage) et les 95xxx des talismans
+  n'ajoutent aucune stat ; les 92xxx/93xxx figées sont écartées par la
+  règle des pools roulés (certaines portent une stat hors pool : 93162
+  SPD, 93231/93541 PEN%, 93251, 93252, 93261, 93263, 93282, 93283, 93291,
+  93293, 93331-93333) ; 9950001-9950004 (Settlement Support) forment leurs
+  propres familles. Au build, `warnMissingPools` (`equipment.ts`) avertit
+  sans jeter : « groupe d'option 1504 (641) », « 12004 (94004, 94104,
+  94204, 94304) », « 12010 (94010, 94110, 94210, 94310) ». **M10** :
+  `toStatOptions` de `equipment-detail.ts` donne
+  `n === 0 ? 0 : min(max, OptionValue + factor × n)`, docstring à la règle
+  du client. **B1** : `mainOptionAt` (`src/lib/damage/item.ts`) cumule les
+  facteurs dans l'ordre du client (`sumFactorsF32`) puis appelle
+  `itemMainOptionValue` ; `StatOption.raw` porte la valeur brute jusqu'au
+  composant ; `mainValue` (`EquipmentDetail.tsx`, exporté pour le test),
+  `mainStatMaxOf` (+10, dernière percée lue de `breakLimits.json`) et le
+  guide gear (lignes +10 et T4) l'appellent ; talismans et EE gardent
+  `o.levels`. **O11** : `toSubPool` prend `step = factor ?? value`.
+  **R11** : `items.ts` et `materialsOf` d'`enhance.ts` lisent `DescID`,
+  convention `_NAME → _DESC` et garde retirées. **R12** : `eeMainLabel`
+  (`solver.ts`) importe `conditionalLabel` pour les mains conditionnées à
+  un élément, chemin d'avant pour les autres. **Vérification** : typecheck
+  (dernière ligne `$ tsc --noEmit && … -p scripts/tsconfig.json`, sans
+  erreur), lint (`$ eslint`, sans erreur), test (3952 tests
+  passés sur 3952, 232 fichiers). Nouveaux tests : `src/lib/data/equipment-detail.test.ts`
+  (Winter of Hubris slot 2 = pool roulé avec ATK%/DEF%/HP%, Steel
+  Necklace un slot de choix à 12, variantes de classe à leurs mains, les
+  129 EE à 0 à +0 et au max à +10, `step` = `OptionFactor`, `mainValue` et
+  les max des recos contre `itemMainOptionValue`),
+  `equipment.test.ts` (avertissement) et `solver.test.ts` (`name` des
+  mains d'EE = `label` de la fiche dans `pools.json`). Rejeux copiés hors
+  du dépôt : page détail 35 → 0 écart sur 13 090 états
+  (`mainstat-ui.mts`) et 32 → 0 sur 10 080 (`mainvalue.mts`), recos
+  8 → 0 sur 101 options (`max6.mts`), guide 157 → 0 sur 430, EE
+  `[1…10, 10]` → `[0, 1…10]` (`ee-slots.mts`) ; libellés solver faux
+  25 → 0 sur 25 (`ee_label.py`) ; descriptions servies 0 → 100 sur 100
+  (`item_desc.py`), 30198 dit « x1 » ; `wpn_main.py` / `acc_main.py`
+  inchangés (1 et 3 familles : ils mesurent la donnée, la fiche est
+  vérifiée par le test). Instantané des modèles avant/après : vue liste
+  identique ; seules changent les fiches Winter of Hubris, Steel
+  Necklace, Steel Necklace [Settlement Support], les vues d'ensemble
+  Briareos's Ambition et Gorgon's Vanity (union de famille, 12 mains,
+  comme leur carte) et la secondaire des 129 EE ; sous-stats et sets
+  inchangés, une arme ordinaire (Surefire Greatsword) identique hors
+  `raw`. Pas de serveur sur :3000 : pas de comparaison au rendu.
+  **Données** : `datagen:build` (les trois avertissements ci-dessus),
+  promotion `--only` : `items.json` (100 descriptions ajoutées, 5
+  corrigées, et 10 gemmes DMG 15008… dont le `DescID` ne diffère qu'en
+  japonais, texte du client), `solver/buffs.json` (`name` des mains d'EE),
+  `solver/version.json` ; `equipment/enhance.json` ne change pas (les
+  matériaux d'ascension avaient déjà le bon texte), `damage/` non plus.
+  **Laissé** : le lot attendait « CHD 81 ‰ → 48,5 % » au test, c'est
+  l'ancienne valeur du site, le jeu dit 48,6 % (le test compare à
+  `itemMainOptionValue`) ; une reco de variante de classe lit désormais le
+  pool de sa classe, plus celui de la tête de famille. Sevih :
+  `npm run data:sync` dans gear-solver.
+
 - **Relecture des lots C18, B54 et G2 (Opus) — niveau de buff des sets du
   jeu, butin au palier de base et recos enchantées ; liens, vignette, id
   stable du journal et URL d'échange servis au bot ; gemmes complétées par la

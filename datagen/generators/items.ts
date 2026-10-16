@@ -20,7 +20,7 @@ import type { LangDict } from '../lib/lang';
 
 export interface Item {
   name: LangDict;
-  desc?: LangDict; // présent seulement si l'item a une _DESC
+  desc?: LangDict; // présent seulement si le DescID de l'item a un texte
   type: string; // dérivé de ItemType    (IT_GEM      → gem)
   subType: string; // dérivé de ItemSubType (ITS_GEM_ATK → gem_atk)
   grade: string; // dérivé de ItemGrade   (IG_NORMAL   → normal)
@@ -50,11 +50,9 @@ export function buildItems(): Record<string, Item> {
     };
     if (r.CharacterLimit) item.characterLimit = r.CharacterLimit;
 
-    // description : convention de clé `_NAME` → `_DESC`, ajoutée seulement si elle
-    // existe. Si NameID ne finit pas par `_NAME` (ex. SYS_REWARD_FARMING_GIFT_1),
-    // le replace ne change rien : descKey === NameID et la « desc » serait le nom.
-    const descKey = r.NameID?.replace(/_NAME$/, '_DESC');
-    const desc = descKey && descKey !== r.NameID ? resolveText(text, descKey) : null;
+    // description : la clé que le client lit (`ItemTemplet.DescID`, `CItem.Desc`),
+    // ajoutée seulement si elle a un texte.
+    const desc = r.DescID ? resolveText(text, r.DescID) : null;
     if (desc && hasText(desc)) item.desc = desc;
 
     out[id] = item;

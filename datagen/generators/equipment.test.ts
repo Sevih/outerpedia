@@ -16,7 +16,7 @@
  * La suite tourne SANS `.gamedata` (contrainte CI) : rien ici n'appelle
  * `buildEquipment()` ni `loadTable`.
  */
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import weaponData from '../../data/generated/equipment/weapon.json';
 import accessoryData from '../../data/generated/equipment/accessory.json';
 import helmetData from '../../data/generated/equipment/helmet.json';
@@ -38,6 +38,7 @@ import {
   optMode,
   sortByNumericKey,
   usedValueKeys,
+  warnMissingPools,
   type ArmorItem,
   type BreakLimit,
   type ExclusiveItem,
@@ -115,6 +116,42 @@ describe('conditionalLabel — libellé de buff conditionnel par élément', () 
     expect(conditionalLabel(new Map(), undefined, 'bid')).toBeUndefined();
     const b: Row = { BuffConditionType: 'OWNER_HAS_BUFF', Type: 'BT_DMG_REDUCE' };
     expect(conditionalLabel(new Map(), b, 'bid')).toBeUndefined();
+  });
+});
+
+describe('warnMissingPools — groupe de main absent d’ItemOptionTemplet', () => {
+  it('avertit pour chaque groupe absent, avec les pièces qui le citent, sans jeter', () => {
+    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
+    const refs = new Map([
+      ['24', ['641', '999']],
+      ['1504', ['641']],
+    ]);
+    expect(() => warnMissingPools(refs, (g) => g === '24')).not.toThrow();
+    expect(warn).toHaveBeenCalledTimes(1);
+    expect(warn.mock.calls[0][0]).toMatch(/1504.*641/);
+    warn.mockRestore();
+  });
+
+  it('donnée émise : les groupes avertis sont exactement les pools vides de pools.json', () => {
+    const pools = poolsData as unknown as Record<string, unknown[]>;
+    const refs = new Map<string, string[]>();
+    const tables = [weaponData, accessoryData, helmetData, armorData, glovesData, shoesData];
+    for (const t of [...tables, talismanData, eeData] as unknown as Record<
+      string,
+      { main?: string[]; options?: string[]; sub?: string | null }
+    >[])
+      for (const [id, it] of Object.entries(t))
+        for (const g of [...(it.main ?? it.options ?? []), ...(it.sub ? [it.sub] : [])])
+          refs.set(g, [...(refs.get(g) ?? []), id]);
+    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
+    warnMissingPools(refs, (g) => (pools[g] ?? []).length > 0);
+    const warned = warn.mock.calls.map((c) => String(c[0]).match(/groupe d'option (\d+)/)?.[1]);
+    warn.mockRestore();
+    const empty = [...refs.keys()].filter((g) => !(pools[g] ?? []).length);
+    expect(warned.sort()).toEqual(empty.sort());
+    expect(empty).toContain(
+      (weaponData as unknown as Record<string, { main: string[] }>)['641'].main[1],
+    );
   });
 });
 

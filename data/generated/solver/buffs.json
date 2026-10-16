@@ -5,77 +5,77 @@
       "ap": "OAT_RATE",
       "v": 200,
       "combatOnly": true,
-      "name": "DMG Reduction vs Fire"
+      "name": "Reduced DMG Taken vs Earth"
     },
     {
       "st": "ST_DMG_REDUCE_RATE",
       "ap": "OAT_RATE",
       "v": 207,
       "combatOnly": true,
-      "name": "DMG Reduction vs Fire"
+      "name": "Reduced DMG Taken vs Earth"
     },
     {
       "st": "ST_DMG_REDUCE_RATE",
       "ap": "OAT_RATE",
       "v": 214,
       "combatOnly": true,
-      "name": "DMG Reduction vs Fire"
+      "name": "Reduced DMG Taken vs Earth"
     },
     {
       "st": "ST_DMG_REDUCE_RATE",
       "ap": "OAT_RATE",
       "v": 221,
       "combatOnly": true,
-      "name": "DMG Reduction vs Fire"
+      "name": "Reduced DMG Taken vs Earth"
     },
     {
       "st": "ST_DMG_REDUCE_RATE",
       "ap": "OAT_RATE",
       "v": 228,
       "combatOnly": true,
-      "name": "DMG Reduction vs Fire"
+      "name": "Reduced DMG Taken vs Earth"
     },
     {
       "st": "ST_DMG_REDUCE_RATE",
       "ap": "OAT_RATE",
       "v": 235,
       "combatOnly": true,
-      "name": "DMG Reduction vs Fire"
+      "name": "Reduced DMG Taken vs Earth"
     },
     {
       "st": "ST_DMG_REDUCE_RATE",
       "ap": "OAT_RATE",
       "v": 242,
       "combatOnly": true,
-      "name": "DMG Reduction vs Fire"
+      "name": "Reduced DMG Taken vs Earth"
     },
     {
       "st": "ST_DMG_REDUCE_RATE",
       "ap": "OAT_RATE",
       "v": 249,
       "combatOnly": true,
-      "name": "DMG Reduction vs Fire"
+      "name": "Reduced DMG Taken vs Earth"
     },
     {
       "st": "ST_DMG_REDUCE_RATE",
       "ap": "OAT_RATE",
       "v": 256,
       "combatOnly": true,
-      "name": "DMG Reduction vs Fire"
+      "name": "Reduced DMG Taken vs Earth"
     },
     {
       "st": "ST_DMG_REDUCE_RATE",
       "ap": "OAT_RATE",
       "v": 263,
       "combatOnly": true,
-      "name": "DMG Reduction vs Fire"
+      "name": "Reduced DMG Taken vs Earth"
     },
     {
       "st": "ST_DMG_REDUCE_RATE",
       "ap": "OAT_RATE",
       "v": 270,
       "combatOnly": true,
-      "name": "DMG Reduction vs Fire"
+      "name": "Reduced DMG Taken vs Earth"
     }
   ],
   "BID_CEQUIP_MAIN_ACCURACY_FIRE": [
@@ -84,77 +84,77 @@
       "ap": "OAT_ADD",
       "v": -30,
       "combatOnly": true,
-      "name": "Accuracy (To: Water)"
+      "name": "Accuracy vs Earth"
     },
     {
       "st": "ST_AVOID",
       "ap": "OAT_ADD",
       "v": -31,
       "combatOnly": true,
-      "name": "Accuracy (To: Water)"
+      "name": "Accuracy vs Earth"
     },
     {
       "st": "ST_AVOID",
       "ap": "OAT_ADD",
       "v": -32,
       "combatOnly": true,
-      "name": "Accuracy (To: Water)"
+      "name": "Accuracy vs Earth"
     },
     {
       "st": "ST_AVOID",
       "ap": "OAT_ADD",
       "v": -33,
       "combatOnly": true,
-      "name": "Accuracy (To: Water)"
+      "name": "Accuracy vs Earth"
     },
     {
       "st": "ST_AVOID",
       "ap": "OAT_ADD",
       "v": -34,
       "combatOnly": true,
-      "name": "Accuracy (To: Water)"
+      "name": "Accuracy vs Earth"
     },
     {
       "st": "ST_AVOID",
       "ap": "OAT_ADD",
       "v": -35,
       "combatOnly": true,
-      "name": "Accuracy (To: Water)"
+      "name": "Accuracy vs Earth"
     },
     {
       "st": "ST_AVOID",
       "ap": "OAT_ADD",
       "v": -36,
       "combatOnly": true,
-      "name": "Accuracy (To: Water)"
+      "name": "Accuracy vs Earth"
     },
     {
       "st": "ST_AVOID",
       "ap": "OAT_ADD",
       "v": -37,
       "combatOnly": true,
-      "name": "Accuracy (To: Water)"
+      "name": "Accuracy vs Earth"
     },
     {
       "st": "ST_AVOID",
       "ap": "OAT_ADD",
       "v": -38,
       "combatOnly": true,
-      "name": "Accuracy (To: Water)"
+      "name": "Accuracy vs Earth"
     },
     {
       "st": "ST_AVOID",
       "ap": "OAT_ADD",
       "v": -39,
       "combatOnly": true,
-      "name": "Accuracy (To: Water)"
+      "name": "Accuracy vs Earth"
     },
     {
       "st": "ST_AVOID",
       "ap": "OAT_ADD",
       "v": -40,
       "combatOnly": true,
-      "name": "Accuracy (To: Water)"
+      "name": "Accuracy vs Earth"
     }
   ],
   "BID_CEQUIP_MAIN_BUFF_CHANCE_FIRE": [
@@ -163,77 +163,77 @@
       "ap": "OAT_ADD",
       "v": -30,
       "combatOnly": true,
-      "name": "Effectiveness (To: Water)"
+      "name": "Effectiveness vs Earth"
     },
     {
       "st": "ST_BUFF_RESIST",
       "ap": "OAT_ADD",
       "v": -31,
       "combatOnly": true,
-      "name": "Effectiveness (To: Water)"
+      "name": "Effectiveness vs Earth"
     },
     {
       "st": "ST_BUFF_RESIST",
       "ap": "OAT_ADD",
       "v": -32,
       "combatOnly": true,
-      "name": "Effectiveness (To: Water)"
+      "name": "Effectiveness vs Earth"
     },
     {
       "st": "ST_BUFF_RESIST",
       "ap": "OAT_ADD",
       "v": -33,
       "combatOnly": true,
-      "name": "Effectiveness (To: Water)"
+      "name": "Effectiveness vs Earth"
     },
     {
       "st": "ST_BUFF_RESIST",
       "ap": "OAT_ADD",
       "v": -34,
       "combatOnly": true,
-      "name": "Effectiveness (To: Water)"
+      "name": "Effectiveness vs Earth"
     },
     {
       "st": "ST_BUFF_RESIST",
       "ap": "OAT_ADD",
       "v": -35,
       "combatOnly": true,
-      "name": "Effectiveness (To: Water)"
+      "name": "Effectiveness vs Earth"
     },
     {
       "st": "ST_BUFF_RESIST",
       "ap": "OAT_ADD",
       "v": -36,
       "combatOnly": true,
-      "name": "Effectiveness (To: Water)"
+      "name": "Effectiveness vs Earth"
     },
     {
       "st": "ST_BUFF_RESIST",
       "ap": "OAT_ADD",
       "v": -37,
       "combatOnly": true,
-      "name": "Effectiveness (To: Water)"
+      "name": "Effectiveness vs Earth"
     },
     {
       "st": "ST_BUFF_RESIST",
       "ap": "OAT_ADD",
       "v": -38,
       "combatOnly": true,
-      "name": "Effectiveness (To: Water)"
+      "name": "Effectiveness vs Earth"
     },
     {
       "st": "ST_BUFF_RESIST",
       "ap": "OAT_ADD",
       "v": -39,
       "combatOnly": true,
-      "name": "Effectiveness (To: Water)"
+      "name": "Effectiveness vs Earth"
     },
     {
       "st": "ST_BUFF_RESIST",
       "ap": "OAT_ADD",
       "v": -40,
       "combatOnly": true,
-      "name": "Effectiveness (To: Water)"
+      "name": "Effectiveness vs Earth"
     }
   ],
   "BID_CEQUIP_MAIN_BUFF_CRITICAL_RATE_FIRE": [
@@ -242,77 +242,77 @@
       "ap": "OAT_ADD",
       "v": 150,
       "combatOnly": true,
-      "name": "Critical Hit Chance vs Fire"
+      "name": "Critical Hit Chance vs Earth"
     },
     {
       "st": "ST_CRITICAL_RATE",
       "ap": "OAT_ADD",
       "v": 155,
       "combatOnly": true,
-      "name": "Critical Hit Chance vs Fire"
+      "name": "Critical Hit Chance vs Earth"
     },
     {
       "st": "ST_CRITICAL_RATE",
       "ap": "OAT_ADD",
       "v": 160,
       "combatOnly": true,
-      "name": "Critical Hit Chance vs Fire"
+      "name": "Critical Hit Chance vs Earth"
     },
     {
       "st": "ST_CRITICAL_RATE",
       "ap": "OAT_ADD",
       "v": 165,
       "combatOnly": true,
-      "name": "Critical Hit Chance vs Fire"
+      "name": "Critical Hit Chance vs Earth"
     },
     {
       "st": "ST_CRITICAL_RATE",
       "ap": "OAT_ADD",
       "v": 170,
       "combatOnly": true,
-      "name": "Critical Hit Chance vs Fire"
+      "name": "Critical Hit Chance vs Earth"
     },
     {
       "st": "ST_CRITICAL_RATE",
       "ap": "OAT_ADD",
       "v": 175,
       "combatOnly": true,
-      "name": "Critical Hit Chance vs Fire"
+      "name": "Critical Hit Chance vs Earth"
     },
     {
       "st": "ST_CRITICAL_RATE",
       "ap": "OAT_ADD",
       "v": 180,
       "combatOnly": true,
-      "name": "Critical Hit Chance vs Fire"
+      "name": "Critical Hit Chance vs Earth"
     },
     {
       "st": "ST_CRITICAL_RATE",
       "ap": "OAT_ADD",
       "v": 185,
       "combatOnly": true,
-      "name": "Critical Hit Chance vs Fire"
+      "name": "Critical Hit Chance vs Earth"
     },
     {
       "st": "ST_CRITICAL_RATE",
       "ap": "OAT_ADD",
       "v": 190,
       "combatOnly": true,
-      "name": "Critical Hit Chance vs Fire"
+      "name": "Critical Hit Chance vs Earth"
     },
     {
       "st": "ST_CRITICAL_RATE",
       "ap": "OAT_ADD",
       "v": 195,
       "combatOnly": true,
-      "name": "Critical Hit Chance vs Fire"
+      "name": "Critical Hit Chance vs Earth"
     },
     {
       "st": "ST_CRITICAL_RATE",
       "ap": "OAT_ADD",
       "v": 200,
       "combatOnly": true,
-      "name": "Critical Hit Chance vs Fire"
+      "name": "Critical Hit Chance vs Earth"
     }
   ],
   "BID_CEQUIP_MAIN_DMG_REDUCE_EARTH": [
@@ -321,77 +321,77 @@
       "ap": "OAT_RATE",
       "v": 200,
       "combatOnly": true,
-      "name": "DMG Reduction vs Earth"
+      "name": "Reduced DMG Taken vs Water"
     },
     {
       "st": "ST_DMG_REDUCE_RATE",
       "ap": "OAT_RATE",
       "v": 207,
       "combatOnly": true,
-      "name": "DMG Reduction vs Earth"
+      "name": "Reduced DMG Taken vs Water"
     },
     {
       "st": "ST_DMG_REDUCE_RATE",
       "ap": "OAT_RATE",
       "v": 214,
       "combatOnly": true,
-      "name": "DMG Reduction vs Earth"
+      "name": "Reduced DMG Taken vs Water"
     },
     {
       "st": "ST_DMG_REDUCE_RATE",
       "ap": "OAT_RATE",
       "v": 221,
       "combatOnly": true,
-      "name": "DMG Reduction vs Earth"
+      "name": "Reduced DMG Taken vs Water"
     },
     {
       "st": "ST_DMG_REDUCE_RATE",
       "ap": "OAT_RATE",
       "v": 228,
       "combatOnly": true,
-      "name": "DMG Reduction vs Earth"
+      "name": "Reduced DMG Taken vs Water"
     },
     {
       "st": "ST_DMG_REDUCE_RATE",
       "ap": "OAT_RATE",
       "v": 235,
       "combatOnly": true,
-      "name": "DMG Reduction vs Earth"
+      "name": "Reduced DMG Taken vs Water"
     },
     {
       "st": "ST_DMG_REDUCE_RATE",
       "ap": "OAT_RATE",
       "v": 242,
       "combatOnly": true,
-      "name": "DMG Reduction vs Earth"
+      "name": "Reduced DMG Taken vs Water"
     },
     {
       "st": "ST_DMG_REDUCE_RATE",
       "ap": "OAT_RATE",
       "v": 249,
       "combatOnly": true,
-      "name": "DMG Reduction vs Earth"
+      "name": "Reduced DMG Taken vs Water"
     },
     {
       "st": "ST_DMG_REDUCE_RATE",
       "ap": "OAT_RATE",
       "v": 256,
       "combatOnly": true,
-      "name": "DMG Reduction vs Earth"
+      "name": "Reduced DMG Taken vs Water"
     },
     {
       "st": "ST_DMG_REDUCE_RATE",
       "ap": "OAT_RATE",
       "v": 263,
       "combatOnly": true,
-      "name": "DMG Reduction vs Earth"
+      "name": "Reduced DMG Taken vs Water"
     },
     {
       "st": "ST_DMG_REDUCE_RATE",
       "ap": "OAT_RATE",
       "v": 270,
       "combatOnly": true,
-      "name": "DMG Reduction vs Earth"
+      "name": "Reduced DMG Taken vs Water"
     }
   ],
   "BID_CEQUIP_MAIN_ACCURACY_EARTH": [
@@ -400,77 +400,77 @@
       "ap": "OAT_ADD",
       "v": -30,
       "combatOnly": true,
-      "name": "Accuracy (To: Earth)"
+      "name": "Accuracy vs Water"
     },
     {
       "st": "ST_AVOID",
       "ap": "OAT_ADD",
       "v": -31,
       "combatOnly": true,
-      "name": "Accuracy (To: Earth)"
+      "name": "Accuracy vs Water"
     },
     {
       "st": "ST_AVOID",
       "ap": "OAT_ADD",
       "v": -32,
       "combatOnly": true,
-      "name": "Accuracy (To: Earth)"
+      "name": "Accuracy vs Water"
     },
     {
       "st": "ST_AVOID",
       "ap": "OAT_ADD",
       "v": -33,
       "combatOnly": true,
-      "name": "Accuracy (To: Earth)"
+      "name": "Accuracy vs Water"
     },
     {
       "st": "ST_AVOID",
       "ap": "OAT_ADD",
       "v": -34,
       "combatOnly": true,
-      "name": "Accuracy (To: Earth)"
+      "name": "Accuracy vs Water"
     },
     {
       "st": "ST_AVOID",
       "ap": "OAT_ADD",
       "v": -35,
       "combatOnly": true,
-      "name": "Accuracy (To: Earth)"
+      "name": "Accuracy vs Water"
     },
     {
       "st": "ST_AVOID",
       "ap": "OAT_ADD",
       "v": -36,
       "combatOnly": true,
-      "name": "Accuracy (To: Earth)"
+      "name": "Accuracy vs Water"
     },
     {
       "st": "ST_AVOID",
       "ap": "OAT_ADD",
       "v": -37,
       "combatOnly": true,
-      "name": "Accuracy (To: Earth)"
+      "name": "Accuracy vs Water"
     },
     {
       "st": "ST_AVOID",
       "ap": "OAT_ADD",
       "v": -38,
       "combatOnly": true,
-      "name": "Accuracy (To: Earth)"
+      "name": "Accuracy vs Water"
     },
     {
       "st": "ST_AVOID",
       "ap": "OAT_ADD",
       "v": -39,
       "combatOnly": true,
-      "name": "Accuracy (To: Earth)"
+      "name": "Accuracy vs Water"
     },
     {
       "st": "ST_AVOID",
       "ap": "OAT_ADD",
       "v": -40,
       "combatOnly": true,
-      "name": "Accuracy (To: Earth)"
+      "name": "Accuracy vs Water"
     }
   ],
   "BID_CEQUIP_MAIN_BUFF_CHANCE_EARTH": [
@@ -479,77 +479,77 @@
       "ap": "OAT_ADD",
       "v": -30,
       "combatOnly": true,
-      "name": "Effectiveness vs Earth"
+      "name": "Effectiveness vs Water"
     },
     {
       "st": "ST_BUFF_RESIST",
       "ap": "OAT_ADD",
       "v": -31,
       "combatOnly": true,
-      "name": "Effectiveness vs Earth"
+      "name": "Effectiveness vs Water"
     },
     {
       "st": "ST_BUFF_RESIST",
       "ap": "OAT_ADD",
       "v": -32,
       "combatOnly": true,
-      "name": "Effectiveness vs Earth"
+      "name": "Effectiveness vs Water"
     },
     {
       "st": "ST_BUFF_RESIST",
       "ap": "OAT_ADD",
       "v": -33,
       "combatOnly": true,
-      "name": "Effectiveness vs Earth"
+      "name": "Effectiveness vs Water"
     },
     {
       "st": "ST_BUFF_RESIST",
       "ap": "OAT_ADD",
       "v": -34,
       "combatOnly": true,
-      "name": "Effectiveness vs Earth"
+      "name": "Effectiveness vs Water"
     },
     {
       "st": "ST_BUFF_RESIST",
       "ap": "OAT_ADD",
       "v": -35,
       "combatOnly": true,
-      "name": "Effectiveness vs Earth"
+      "name": "Effectiveness vs Water"
     },
     {
       "st": "ST_BUFF_RESIST",
       "ap": "OAT_ADD",
       "v": -36,
       "combatOnly": true,
-      "name": "Effectiveness vs Earth"
+      "name": "Effectiveness vs Water"
     },
     {
       "st": "ST_BUFF_RESIST",
       "ap": "OAT_ADD",
       "v": -37,
       "combatOnly": true,
-      "name": "Effectiveness vs Earth"
+      "name": "Effectiveness vs Water"
     },
     {
       "st": "ST_BUFF_RESIST",
       "ap": "OAT_ADD",
       "v": -38,
       "combatOnly": true,
-      "name": "Effectiveness vs Earth"
+      "name": "Effectiveness vs Water"
     },
     {
       "st": "ST_BUFF_RESIST",
       "ap": "OAT_ADD",
       "v": -39,
       "combatOnly": true,
-      "name": "Effectiveness vs Earth"
+      "name": "Effectiveness vs Water"
     },
     {
       "st": "ST_BUFF_RESIST",
       "ap": "OAT_ADD",
       "v": -40,
       "combatOnly": true,
-      "name": "Effectiveness vs Earth"
+      "name": "Effectiveness vs Water"
     }
   ],
   "BID_CEQUIP_MAIN_BUFF_CRITICAL_RATE_EARTH": [
@@ -558,77 +558,77 @@
       "ap": "OAT_ADD",
       "v": 150,
       "combatOnly": true,
-      "name": "Critical Hit Chance vs Earth"
+      "name": "Critical Hit Chance vs Water"
     },
     {
       "st": "ST_CRITICAL_RATE",
       "ap": "OAT_ADD",
       "v": 155,
       "combatOnly": true,
-      "name": "Critical Hit Chance vs Earth"
+      "name": "Critical Hit Chance vs Water"
     },
     {
       "st": "ST_CRITICAL_RATE",
       "ap": "OAT_ADD",
       "v": 160,
       "combatOnly": true,
-      "name": "Critical Hit Chance vs Earth"
+      "name": "Critical Hit Chance vs Water"
     },
     {
       "st": "ST_CRITICAL_RATE",
       "ap": "OAT_ADD",
       "v": 165,
       "combatOnly": true,
-      "name": "Critical Hit Chance vs Earth"
+      "name": "Critical Hit Chance vs Water"
     },
     {
       "st": "ST_CRITICAL_RATE",
       "ap": "OAT_ADD",
       "v": 170,
       "combatOnly": true,
-      "name": "Critical Hit Chance vs Earth"
+      "name": "Critical Hit Chance vs Water"
     },
     {
       "st": "ST_CRITICAL_RATE",
       "ap": "OAT_ADD",
       "v": 175,
       "combatOnly": true,
-      "name": "Critical Hit Chance vs Earth"
+      "name": "Critical Hit Chance vs Water"
     },
     {
       "st": "ST_CRITICAL_RATE",
       "ap": "OAT_ADD",
       "v": 180,
       "combatOnly": true,
-      "name": "Critical Hit Chance vs Earth"
+      "name": "Critical Hit Chance vs Water"
     },
     {
       "st": "ST_CRITICAL_RATE",
       "ap": "OAT_ADD",
       "v": 185,
       "combatOnly": true,
-      "name": "Critical Hit Chance vs Earth"
+      "name": "Critical Hit Chance vs Water"
     },
     {
       "st": "ST_CRITICAL_RATE",
       "ap": "OAT_ADD",
       "v": 190,
       "combatOnly": true,
-      "name": "Critical Hit Chance vs Earth"
+      "name": "Critical Hit Chance vs Water"
     },
     {
       "st": "ST_CRITICAL_RATE",
       "ap": "OAT_ADD",
       "v": 195,
       "combatOnly": true,
-      "name": "Critical Hit Chance vs Earth"
+      "name": "Critical Hit Chance vs Water"
     },
     {
       "st": "ST_CRITICAL_RATE",
       "ap": "OAT_ADD",
       "v": 200,
       "combatOnly": true,
-      "name": "Critical Hit Chance vs Earth"
+      "name": "Critical Hit Chance vs Water"
     }
   ],
   "BID_CEQUIP_MAIN_DMG_REDUCE_WATER": [
@@ -637,77 +637,77 @@
       "ap": "OAT_RATE",
       "v": 200,
       "combatOnly": true,
-      "name": "DMG Reduction vs Water"
+      "name": "Reduced DMG Taken vs Fire"
     },
     {
       "st": "ST_DMG_REDUCE_RATE",
       "ap": "OAT_RATE",
       "v": 207,
       "combatOnly": true,
-      "name": "DMG Reduction vs Water"
+      "name": "Reduced DMG Taken vs Fire"
     },
     {
       "st": "ST_DMG_REDUCE_RATE",
       "ap": "OAT_RATE",
       "v": 214,
       "combatOnly": true,
-      "name": "DMG Reduction vs Water"
+      "name": "Reduced DMG Taken vs Fire"
     },
     {
       "st": "ST_DMG_REDUCE_RATE",
       "ap": "OAT_RATE",
       "v": 221,
       "combatOnly": true,
-      "name": "DMG Reduction vs Water"
+      "name": "Reduced DMG Taken vs Fire"
     },
     {
       "st": "ST_DMG_REDUCE_RATE",
       "ap": "OAT_RATE",
       "v": 228,
       "combatOnly": true,
-      "name": "DMG Reduction vs Water"
+      "name": "Reduced DMG Taken vs Fire"
     },
     {
       "st": "ST_DMG_REDUCE_RATE",
       "ap": "OAT_RATE",
       "v": 235,
       "combatOnly": true,
-      "name": "DMG Reduction vs Water"
+      "name": "Reduced DMG Taken vs Fire"
     },
     {
       "st": "ST_DMG_REDUCE_RATE",
       "ap": "OAT_RATE",
       "v": 242,
       "combatOnly": true,
-      "name": "DMG Reduction vs Water"
+      "name": "Reduced DMG Taken vs Fire"
     },
     {
       "st": "ST_DMG_REDUCE_RATE",
       "ap": "OAT_RATE",
       "v": 249,
       "combatOnly": true,
-      "name": "DMG Reduction vs Water"
+      "name": "Reduced DMG Taken vs Fire"
     },
     {
       "st": "ST_DMG_REDUCE_RATE",
       "ap": "OAT_RATE",
       "v": 256,
       "combatOnly": true,
-      "name": "DMG Reduction vs Water"
+      "name": "Reduced DMG Taken vs Fire"
     },
     {
       "st": "ST_DMG_REDUCE_RATE",
       "ap": "OAT_RATE",
       "v": 263,
       "combatOnly": true,
-      "name": "DMG Reduction vs Water"
+      "name": "Reduced DMG Taken vs Fire"
     },
     {
       "st": "ST_DMG_REDUCE_RATE",
       "ap": "OAT_RATE",
       "v": 270,
       "combatOnly": true,
-      "name": "DMG Reduction vs Water"
+      "name": "Reduced DMG Taken vs Fire"
     }
   ],
   "BID_CEQUIP_MAIN_ACCURACY_WATER": [
@@ -716,77 +716,77 @@
       "ap": "OAT_ADD",
       "v": -30,
       "combatOnly": true,
-      "name": "Accuracy (To: Fire)"
+      "name": "Accuracy vs Fire"
     },
     {
       "st": "ST_AVOID",
       "ap": "OAT_ADD",
       "v": -31,
       "combatOnly": true,
-      "name": "Accuracy (To: Fire)"
+      "name": "Accuracy vs Fire"
     },
     {
       "st": "ST_AVOID",
       "ap": "OAT_ADD",
       "v": -32,
       "combatOnly": true,
-      "name": "Accuracy (To: Fire)"
+      "name": "Accuracy vs Fire"
     },
     {
       "st": "ST_AVOID",
       "ap": "OAT_ADD",
       "v": -33,
       "combatOnly": true,
-      "name": "Accuracy (To: Fire)"
+      "name": "Accuracy vs Fire"
     },
     {
       "st": "ST_AVOID",
       "ap": "OAT_ADD",
       "v": -34,
       "combatOnly": true,
-      "name": "Accuracy (To: Fire)"
+      "name": "Accuracy vs Fire"
     },
     {
       "st": "ST_AVOID",
       "ap": "OAT_ADD",
       "v": -35,
       "combatOnly": true,
-      "name": "Accuracy (To: Fire)"
+      "name": "Accuracy vs Fire"
     },
     {
       "st": "ST_AVOID",
       "ap": "OAT_ADD",
       "v": -36,
       "combatOnly": true,
-      "name": "Accuracy (To: Fire)"
+      "name": "Accuracy vs Fire"
     },
     {
       "st": "ST_AVOID",
       "ap": "OAT_ADD",
       "v": -37,
       "combatOnly": true,
-      "name": "Accuracy (To: Fire)"
+      "name": "Accuracy vs Fire"
     },
     {
       "st": "ST_AVOID",
       "ap": "OAT_ADD",
       "v": -38,
       "combatOnly": true,
-      "name": "Accuracy (To: Fire)"
+      "name": "Accuracy vs Fire"
     },
     {
       "st": "ST_AVOID",
       "ap": "OAT_ADD",
       "v": -39,
       "combatOnly": true,
-      "name": "Accuracy (To: Fire)"
+      "name": "Accuracy vs Fire"
     },
     {
       "st": "ST_AVOID",
       "ap": "OAT_ADD",
       "v": -40,
       "combatOnly": true,
-      "name": "Accuracy (To: Fire)"
+      "name": "Accuracy vs Fire"
     }
   ],
   "BID_CEQUIP_MAIN_BUFF_CHANCE_WATER": [
@@ -795,77 +795,77 @@
       "ap": "OAT_ADD",
       "v": -30,
       "combatOnly": true,
-      "name": "Effectiveness (To: Fire)"
+      "name": "Effectiveness vs Fire"
     },
     {
       "st": "ST_BUFF_RESIST",
       "ap": "OAT_ADD",
       "v": -31,
       "combatOnly": true,
-      "name": "Effectiveness (To: Fire)"
+      "name": "Effectiveness vs Fire"
     },
     {
       "st": "ST_BUFF_RESIST",
       "ap": "OAT_ADD",
       "v": -32,
       "combatOnly": true,
-      "name": "Effectiveness (To: Fire)"
+      "name": "Effectiveness vs Fire"
     },
     {
       "st": "ST_BUFF_RESIST",
       "ap": "OAT_ADD",
       "v": -33,
       "combatOnly": true,
-      "name": "Effectiveness (To: Fire)"
+      "name": "Effectiveness vs Fire"
     },
     {
       "st": "ST_BUFF_RESIST",
       "ap": "OAT_ADD",
       "v": -34,
       "combatOnly": true,
-      "name": "Effectiveness (To: Fire)"
+      "name": "Effectiveness vs Fire"
     },
     {
       "st": "ST_BUFF_RESIST",
       "ap": "OAT_ADD",
       "v": -35,
       "combatOnly": true,
-      "name": "Effectiveness (To: Fire)"
+      "name": "Effectiveness vs Fire"
     },
     {
       "st": "ST_BUFF_RESIST",
       "ap": "OAT_ADD",
       "v": -36,
       "combatOnly": true,
-      "name": "Effectiveness (To: Fire)"
+      "name": "Effectiveness vs Fire"
     },
     {
       "st": "ST_BUFF_RESIST",
       "ap": "OAT_ADD",
       "v": -37,
       "combatOnly": true,
-      "name": "Effectiveness (To: Fire)"
+      "name": "Effectiveness vs Fire"
     },
     {
       "st": "ST_BUFF_RESIST",
       "ap": "OAT_ADD",
       "v": -38,
       "combatOnly": true,
-      "name": "Effectiveness (To: Fire)"
+      "name": "Effectiveness vs Fire"
     },
     {
       "st": "ST_BUFF_RESIST",
       "ap": "OAT_ADD",
       "v": -39,
       "combatOnly": true,
-      "name": "Effectiveness (To: Fire)"
+      "name": "Effectiveness vs Fire"
     },
     {
       "st": "ST_BUFF_RESIST",
       "ap": "OAT_ADD",
       "v": -40,
       "combatOnly": true,
-      "name": "Effectiveness (To: Fire)"
+      "name": "Effectiveness vs Fire"
     }
   ],
   "BID_CEQUIP_MAIN_BUFF_CRITICAL_RATE_WATER": [
@@ -874,77 +874,77 @@
       "ap": "OAT_ADD",
       "v": 150,
       "combatOnly": true,
-      "name": "Critical Hit Chance vs Water"
+      "name": "Critical Hit Chance vs Fire"
     },
     {
       "st": "ST_CRITICAL_RATE",
       "ap": "OAT_ADD",
       "v": 155,
       "combatOnly": true,
-      "name": "Critical Hit Chance vs Water"
+      "name": "Critical Hit Chance vs Fire"
     },
     {
       "st": "ST_CRITICAL_RATE",
       "ap": "OAT_ADD",
       "v": 160,
       "combatOnly": true,
-      "name": "Critical Hit Chance vs Water"
+      "name": "Critical Hit Chance vs Fire"
     },
     {
       "st": "ST_CRITICAL_RATE",
       "ap": "OAT_ADD",
       "v": 165,
       "combatOnly": true,
-      "name": "Critical Hit Chance vs Water"
+      "name": "Critical Hit Chance vs Fire"
     },
     {
       "st": "ST_CRITICAL_RATE",
       "ap": "OAT_ADD",
       "v": 170,
       "combatOnly": true,
-      "name": "Critical Hit Chance vs Water"
+      "name": "Critical Hit Chance vs Fire"
     },
     {
       "st": "ST_CRITICAL_RATE",
       "ap": "OAT_ADD",
       "v": 175,
       "combatOnly": true,
-      "name": "Critical Hit Chance vs Water"
+      "name": "Critical Hit Chance vs Fire"
     },
     {
       "st": "ST_CRITICAL_RATE",
       "ap": "OAT_ADD",
       "v": 180,
       "combatOnly": true,
-      "name": "Critical Hit Chance vs Water"
+      "name": "Critical Hit Chance vs Fire"
     },
     {
       "st": "ST_CRITICAL_RATE",
       "ap": "OAT_ADD",
       "v": 185,
       "combatOnly": true,
-      "name": "Critical Hit Chance vs Water"
+      "name": "Critical Hit Chance vs Fire"
     },
     {
       "st": "ST_CRITICAL_RATE",
       "ap": "OAT_ADD",
       "v": 190,
       "combatOnly": true,
-      "name": "Critical Hit Chance vs Water"
+      "name": "Critical Hit Chance vs Fire"
     },
     {
       "st": "ST_CRITICAL_RATE",
       "ap": "OAT_ADD",
       "v": 195,
       "combatOnly": true,
-      "name": "Critical Hit Chance vs Water"
+      "name": "Critical Hit Chance vs Fire"
     },
     {
       "st": "ST_CRITICAL_RATE",
       "ap": "OAT_ADD",
       "v": 200,
       "combatOnly": true,
-      "name": "Critical Hit Chance vs Water"
+      "name": "Critical Hit Chance vs Fire"
     }
   ],
   "BID_CEQUIP_MAIN_DMG_REDUCE_LIGHT": [
@@ -953,77 +953,77 @@
       "ap": "OAT_RATE",
       "v": 200,
       "combatOnly": true,
-      "name": "DMG Reduction vs Light"
+      "name": "Reduced DMG Taken vs Dark"
     },
     {
       "st": "ST_DMG_REDUCE_RATE",
       "ap": "OAT_RATE",
       "v": 207,
       "combatOnly": true,
-      "name": "DMG Reduction vs Light"
+      "name": "Reduced DMG Taken vs Dark"
     },
     {
       "st": "ST_DMG_REDUCE_RATE",
       "ap": "OAT_RATE",
       "v": 214,
       "combatOnly": true,
-      "name": "DMG Reduction vs Light"
+      "name": "Reduced DMG Taken vs Dark"
     },
     {
       "st": "ST_DMG_REDUCE_RATE",
       "ap": "OAT_RATE",
       "v": 221,
       "combatOnly": true,
-      "name": "DMG Reduction vs Light"
+      "name": "Reduced DMG Taken vs Dark"
     },
     {
       "st": "ST_DMG_REDUCE_RATE",
       "ap": "OAT_RATE",
       "v": 228,
       "combatOnly": true,
-      "name": "DMG Reduction vs Light"
+      "name": "Reduced DMG Taken vs Dark"
     },
     {
       "st": "ST_DMG_REDUCE_RATE",
       "ap": "OAT_RATE",
       "v": 235,
       "combatOnly": true,
-      "name": "DMG Reduction vs Light"
+      "name": "Reduced DMG Taken vs Dark"
     },
     {
       "st": "ST_DMG_REDUCE_RATE",
       "ap": "OAT_RATE",
       "v": 242,
       "combatOnly": true,
-      "name": "DMG Reduction vs Light"
+      "name": "Reduced DMG Taken vs Dark"
     },
     {
       "st": "ST_DMG_REDUCE_RATE",
       "ap": "OAT_RATE",
       "v": 249,
       "combatOnly": true,
-      "name": "DMG Reduction vs Light"
+      "name": "Reduced DMG Taken vs Dark"
     },
     {
       "st": "ST_DMG_REDUCE_RATE",
       "ap": "OAT_RATE",
       "v": 256,
       "combatOnly": true,
-      "name": "DMG Reduction vs Light"
+      "name": "Reduced DMG Taken vs Dark"
     },
     {
       "st": "ST_DMG_REDUCE_RATE",
       "ap": "OAT_RATE",
       "v": 263,
       "combatOnly": true,
-      "name": "DMG Reduction vs Light"
+      "name": "Reduced DMG Taken vs Dark"
     },
     {
       "st": "ST_DMG_REDUCE_RATE",
       "ap": "OAT_RATE",
       "v": 270,
       "combatOnly": true,
-      "name": "DMG Reduction vs Light"
+      "name": "Reduced DMG Taken vs Dark"
     }
   ],
   "BID_CEQUIP_MAIN_ACCURACY_LIGHT": [
@@ -1032,77 +1032,77 @@
       "ap": "OAT_ADD",
       "v": -30,
       "combatOnly": true,
-      "name": "Accuracy (To: Light)"
+      "name": "Accuracy vs Dark"
     },
     {
       "st": "ST_AVOID",
       "ap": "OAT_ADD",
       "v": -31,
       "combatOnly": true,
-      "name": "Accuracy (To: Light)"
+      "name": "Accuracy vs Dark"
     },
     {
       "st": "ST_AVOID",
       "ap": "OAT_ADD",
       "v": -32,
       "combatOnly": true,
-      "name": "Accuracy (To: Light)"
+      "name": "Accuracy vs Dark"
     },
     {
       "st": "ST_AVOID",
       "ap": "OAT_ADD",
       "v": -33,
       "combatOnly": true,
-      "name": "Accuracy (To: Light)"
+      "name": "Accuracy vs Dark"
     },
     {
       "st": "ST_AVOID",
       "ap": "OAT_ADD",
       "v": -34,
       "combatOnly": true,
-      "name": "Accuracy (To: Light)"
+      "name": "Accuracy vs Dark"
     },
     {
       "st": "ST_AVOID",
       "ap": "OAT_ADD",
       "v": -35,
       "combatOnly": true,
-      "name": "Accuracy (To: Light)"
+      "name": "Accuracy vs Dark"
     },
     {
       "st": "ST_AVOID",
       "ap": "OAT_ADD",
       "v": -36,
       "combatOnly": true,
-      "name": "Accuracy (To: Light)"
+      "name": "Accuracy vs Dark"
     },
     {
       "st": "ST_AVOID",
       "ap": "OAT_ADD",
       "v": -37,
       "combatOnly": true,
-      "name": "Accuracy (To: Light)"
+      "name": "Accuracy vs Dark"
     },
     {
       "st": "ST_AVOID",
       "ap": "OAT_ADD",
       "v": -38,
       "combatOnly": true,
-      "name": "Accuracy (To: Light)"
+      "name": "Accuracy vs Dark"
     },
     {
       "st": "ST_AVOID",
       "ap": "OAT_ADD",
       "v": -39,
       "combatOnly": true,
-      "name": "Accuracy (To: Light)"
+      "name": "Accuracy vs Dark"
     },
     {
       "st": "ST_AVOID",
       "ap": "OAT_ADD",
       "v": -40,
       "combatOnly": true,
-      "name": "Accuracy (To: Light)"
+      "name": "Accuracy vs Dark"
     }
   ],
   "BID_CEQUIP_MAIN_BUFF_CHANCE_LIGHT": [
@@ -1111,77 +1111,77 @@
       "ap": "OAT_ADD",
       "v": -30,
       "combatOnly": true,
-      "name": "Effectiveness (To: Light)"
+      "name": "Effectiveness vs Dark"
     },
     {
       "st": "ST_BUFF_RESIST",
       "ap": "OAT_ADD",
       "v": -31,
       "combatOnly": true,
-      "name": "Effectiveness (To: Light)"
+      "name": "Effectiveness vs Dark"
     },
     {
       "st": "ST_BUFF_RESIST",
       "ap": "OAT_ADD",
       "v": -32,
       "combatOnly": true,
-      "name": "Effectiveness (To: Light)"
+      "name": "Effectiveness vs Dark"
     },
     {
       "st": "ST_BUFF_RESIST",
       "ap": "OAT_ADD",
       "v": -33,
       "combatOnly": true,
-      "name": "Effectiveness (To: Light)"
+      "name": "Effectiveness vs Dark"
     },
     {
       "st": "ST_BUFF_RESIST",
       "ap": "OAT_ADD",
       "v": -34,
       "combatOnly": true,
-      "name": "Effectiveness (To: Light)"
+      "name": "Effectiveness vs Dark"
     },
     {
       "st": "ST_BUFF_RESIST",
       "ap": "OAT_ADD",
       "v": -35,
       "combatOnly": true,
-      "name": "Effectiveness (To: Light)"
+      "name": "Effectiveness vs Dark"
     },
     {
       "st": "ST_BUFF_RESIST",
       "ap": "OAT_ADD",
       "v": -36,
       "combatOnly": true,
-      "name": "Effectiveness (To: Light)"
+      "name": "Effectiveness vs Dark"
     },
     {
       "st": "ST_BUFF_RESIST",
       "ap": "OAT_ADD",
       "v": -37,
       "combatOnly": true,
-      "name": "Effectiveness (To: Light)"
+      "name": "Effectiveness vs Dark"
     },
     {
       "st": "ST_BUFF_RESIST",
       "ap": "OAT_ADD",
       "v": -38,
       "combatOnly": true,
-      "name": "Effectiveness (To: Light)"
+      "name": "Effectiveness vs Dark"
     },
     {
       "st": "ST_BUFF_RESIST",
       "ap": "OAT_ADD",
       "v": -39,
       "combatOnly": true,
-      "name": "Effectiveness (To: Light)"
+      "name": "Effectiveness vs Dark"
     },
     {
       "st": "ST_BUFF_RESIST",
       "ap": "OAT_ADD",
       "v": -40,
       "combatOnly": true,
-      "name": "Effectiveness (To: Light)"
+      "name": "Effectiveness vs Dark"
     }
   ],
   "BID_CEQUIP_MAIN_BUFF_CRITICAL_RATE_LIGHT": [
@@ -1190,77 +1190,77 @@
       "ap": "OAT_ADD",
       "v": 150,
       "combatOnly": true,
-      "name": "Critical Hit Chance vs Light"
+      "name": "Critical Hit Chance vs Dark"
     },
     {
       "st": "ST_CRITICAL_RATE",
       "ap": "OAT_ADD",
       "v": 155,
       "combatOnly": true,
-      "name": "Critical Hit Chance vs Light"
+      "name": "Critical Hit Chance vs Dark"
     },
     {
       "st": "ST_CRITICAL_RATE",
       "ap": "OAT_ADD",
       "v": 160,
       "combatOnly": true,
-      "name": "Critical Hit Chance vs Light"
+      "name": "Critical Hit Chance vs Dark"
     },
     {
       "st": "ST_CRITICAL_RATE",
       "ap": "OAT_ADD",
       "v": 165,
       "combatOnly": true,
-      "name": "Critical Hit Chance vs Light"
+      "name": "Critical Hit Chance vs Dark"
     },
     {
       "st": "ST_CRITICAL_RATE",
       "ap": "OAT_ADD",
       "v": 170,
       "combatOnly": true,
-      "name": "Critical Hit Chance vs Light"
+      "name": "Critical Hit Chance vs Dark"
     },
     {
       "st": "ST_CRITICAL_RATE",
       "ap": "OAT_ADD",
       "v": 175,
       "combatOnly": true,
-      "name": "Critical Hit Chance vs Light"
+      "name": "Critical Hit Chance vs Dark"
     },
     {
       "st": "ST_CRITICAL_RATE",
       "ap": "OAT_ADD",
       "v": 180,
       "combatOnly": true,
-      "name": "Critical Hit Chance vs Light"
+      "name": "Critical Hit Chance vs Dark"
     },
     {
       "st": "ST_CRITICAL_RATE",
       "ap": "OAT_ADD",
       "v": 185,
       "combatOnly": true,
-      "name": "Critical Hit Chance vs Light"
+      "name": "Critical Hit Chance vs Dark"
     },
     {
       "st": "ST_CRITICAL_RATE",
       "ap": "OAT_ADD",
       "v": 190,
       "combatOnly": true,
-      "name": "Critical Hit Chance vs Light"
+      "name": "Critical Hit Chance vs Dark"
     },
     {
       "st": "ST_CRITICAL_RATE",
       "ap": "OAT_ADD",
       "v": 195,
       "combatOnly": true,
-      "name": "Critical Hit Chance vs Light"
+      "name": "Critical Hit Chance vs Dark"
     },
     {
       "st": "ST_CRITICAL_RATE",
       "ap": "OAT_ADD",
       "v": 200,
       "combatOnly": true,
-      "name": "Critical Hit Chance vs Light"
+      "name": "Critical Hit Chance vs Dark"
     }
   ],
   "BID_CEQUIP_MAIN_DMG_REDUCE_DARK": [
@@ -1269,77 +1269,77 @@
       "ap": "OAT_RATE",
       "v": 200,
       "combatOnly": true,
-      "name": "DMG Reduction vs Dark"
+      "name": "Reduced DMG Taken vs Light"
     },
     {
       "st": "ST_DMG_REDUCE_RATE",
       "ap": "OAT_RATE",
       "v": 207,
       "combatOnly": true,
-      "name": "DMG Reduction vs Dark"
+      "name": "Reduced DMG Taken vs Light"
     },
     {
       "st": "ST_DMG_REDUCE_RATE",
       "ap": "OAT_RATE",
       "v": 214,
       "combatOnly": true,
-      "name": "DMG Reduction vs Dark"
+      "name": "Reduced DMG Taken vs Light"
     },
     {
       "st": "ST_DMG_REDUCE_RATE",
       "ap": "OAT_RATE",
       "v": 221,
       "combatOnly": true,
-      "name": "DMG Reduction vs Dark"
+      "name": "Reduced DMG Taken vs Light"
     },
     {
       "st": "ST_DMG_REDUCE_RATE",
       "ap": "OAT_RATE",
       "v": 228,
       "combatOnly": true,
-      "name": "DMG Reduction vs Dark"
+      "name": "Reduced DMG Taken vs Light"
     },
     {
       "st": "ST_DMG_REDUCE_RATE",
       "ap": "OAT_RATE",
       "v": 235,
       "combatOnly": true,
-      "name": "DMG Reduction vs Dark"
+      "name": "Reduced DMG Taken vs Light"
     },
     {
       "st": "ST_DMG_REDUCE_RATE",
       "ap": "OAT_RATE",
       "v": 242,
       "combatOnly": true,
-      "name": "DMG Reduction vs Dark"
+      "name": "Reduced DMG Taken vs Light"
     },
     {
       "st": "ST_DMG_REDUCE_RATE",
       "ap": "OAT_RATE",
       "v": 249,
       "combatOnly": true,
-      "name": "DMG Reduction vs Dark"
+      "name": "Reduced DMG Taken vs Light"
     },
     {
       "st": "ST_DMG_REDUCE_RATE",
       "ap": "OAT_RATE",
       "v": 256,
       "combatOnly": true,
-      "name": "DMG Reduction vs Dark"
+      "name": "Reduced DMG Taken vs Light"
     },
     {
       "st": "ST_DMG_REDUCE_RATE",
       "ap": "OAT_RATE",
       "v": 263,
       "combatOnly": true,
-      "name": "DMG Reduction vs Dark"
+      "name": "Reduced DMG Taken vs Light"
     },
     {
       "st": "ST_DMG_REDUCE_RATE",
       "ap": "OAT_RATE",
       "v": 270,
       "combatOnly": true,
-      "name": "DMG Reduction vs Dark"
+      "name": "Reduced DMG Taken vs Light"
     }
   ],
   "BID_CEQUIP_MAIN_ACCURACY_DARK": [
@@ -1348,77 +1348,77 @@
       "ap": "OAT_ADD",
       "v": -30,
       "combatOnly": true,
-      "name": "Accuracy (To: Dark)"
+      "name": "Accuracy vs Light"
     },
     {
       "st": "ST_AVOID",
       "ap": "OAT_ADD",
       "v": -31,
       "combatOnly": true,
-      "name": "Accuracy (To: Dark)"
+      "name": "Accuracy vs Light"
     },
     {
       "st": "ST_AVOID",
       "ap": "OAT_ADD",
       "v": -32,
       "combatOnly": true,
-      "name": "Accuracy (To: Dark)"
+      "name": "Accuracy vs Light"
     },
     {
       "st": "ST_AVOID",
       "ap": "OAT_ADD",
       "v": -33,
       "combatOnly": true,
-      "name": "Accuracy (To: Dark)"
+      "name": "Accuracy vs Light"
     },
     {
       "st": "ST_AVOID",
       "ap": "OAT_ADD",
       "v": -34,
       "combatOnly": true,
-      "name": "Accuracy (To: Dark)"
+      "name": "Accuracy vs Light"
     },
     {
       "st": "ST_AVOID",
       "ap": "OAT_ADD",
       "v": -35,
       "combatOnly": true,
-      "name": "Accuracy (To: Dark)"
+      "name": "Accuracy vs Light"
     },
     {
       "st": "ST_AVOID",
       "ap": "OAT_ADD",
       "v": -36,
       "combatOnly": true,
-      "name": "Accuracy (To: Dark)"
+      "name": "Accuracy vs Light"
     },
     {
       "st": "ST_AVOID",
       "ap": "OAT_ADD",
       "v": -37,
       "combatOnly": true,
-      "name": "Accuracy (To: Dark)"
+      "name": "Accuracy vs Light"
     },
     {
       "st": "ST_AVOID",
       "ap": "OAT_ADD",
       "v": -38,
       "combatOnly": true,
-      "name": "Accuracy (To: Dark)"
+      "name": "Accuracy vs Light"
     },
     {
       "st": "ST_AVOID",
       "ap": "OAT_ADD",
       "v": -39,
       "combatOnly": true,
-      "name": "Accuracy (To: Dark)"
+      "name": "Accuracy vs Light"
     },
     {
       "st": "ST_AVOID",
       "ap": "OAT_ADD",
       "v": -40,
       "combatOnly": true,
-      "name": "Accuracy (To: Dark)"
+      "name": "Accuracy vs Light"
     }
   ],
   "BID_CEQUIP_MAIN_BUFF_CHANCE_DARK": [
@@ -1427,77 +1427,77 @@
       "ap": "OAT_ADD",
       "v": -30,
       "combatOnly": true,
-      "name": "Effectiveness (To: Dark)"
+      "name": "Effectiveness vs Light"
     },
     {
       "st": "ST_BUFF_RESIST",
       "ap": "OAT_ADD",
       "v": -31,
       "combatOnly": true,
-      "name": "Effectiveness (To: Dark)"
+      "name": "Effectiveness vs Light"
     },
     {
       "st": "ST_BUFF_RESIST",
       "ap": "OAT_ADD",
       "v": -32,
       "combatOnly": true,
-      "name": "Effectiveness (To: Dark)"
+      "name": "Effectiveness vs Light"
     },
     {
       "st": "ST_BUFF_RESIST",
       "ap": "OAT_ADD",
       "v": -33,
       "combatOnly": true,
-      "name": "Effectiveness (To: Dark)"
+      "name": "Effectiveness vs Light"
     },
     {
       "st": "ST_BUFF_RESIST",
       "ap": "OAT_ADD",
       "v": -34,
       "combatOnly": true,
-      "name": "Effectiveness (To: Dark)"
+      "name": "Effectiveness vs Light"
     },
     {
       "st": "ST_BUFF_RESIST",
       "ap": "OAT_ADD",
       "v": -35,
       "combatOnly": true,
-      "name": "Effectiveness (To: Dark)"
+      "name": "Effectiveness vs Light"
     },
     {
       "st": "ST_BUFF_RESIST",
       "ap": "OAT_ADD",
       "v": -36,
       "combatOnly": true,
-      "name": "Effectiveness (To: Dark)"
+      "name": "Effectiveness vs Light"
     },
     {
       "st": "ST_BUFF_RESIST",
       "ap": "OAT_ADD",
       "v": -37,
       "combatOnly": true,
-      "name": "Effectiveness (To: Dark)"
+      "name": "Effectiveness vs Light"
     },
     {
       "st": "ST_BUFF_RESIST",
       "ap": "OAT_ADD",
       "v": -38,
       "combatOnly": true,
-      "name": "Effectiveness (To: Dark)"
+      "name": "Effectiveness vs Light"
     },
     {
       "st": "ST_BUFF_RESIST",
       "ap": "OAT_ADD",
       "v": -39,
       "combatOnly": true,
-      "name": "Effectiveness (To: Dark)"
+      "name": "Effectiveness vs Light"
     },
     {
       "st": "ST_BUFF_RESIST",
       "ap": "OAT_ADD",
       "v": -40,
       "combatOnly": true,
-      "name": "Effectiveness (To: Dark)"
+      "name": "Effectiveness vs Light"
     }
   ],
   "BID_CEQUIP_MAIN_BUFF_CRITICAL_RATE_DARK": [
@@ -1506,77 +1506,77 @@
       "ap": "OAT_ADD",
       "v": 150,
       "combatOnly": true,
-      "name": "Critical Hit Chance vs Dark"
+      "name": "Critical Hit Chance vs Light"
     },
     {
       "st": "ST_CRITICAL_RATE",
       "ap": "OAT_ADD",
       "v": 155,
       "combatOnly": true,
-      "name": "Critical Hit Chance vs Dark"
+      "name": "Critical Hit Chance vs Light"
     },
     {
       "st": "ST_CRITICAL_RATE",
       "ap": "OAT_ADD",
       "v": 160,
       "combatOnly": true,
-      "name": "Critical Hit Chance vs Dark"
+      "name": "Critical Hit Chance vs Light"
     },
     {
       "st": "ST_CRITICAL_RATE",
       "ap": "OAT_ADD",
       "v": 165,
       "combatOnly": true,
-      "name": "Critical Hit Chance vs Dark"
+      "name": "Critical Hit Chance vs Light"
     },
     {
       "st": "ST_CRITICAL_RATE",
       "ap": "OAT_ADD",
       "v": 170,
       "combatOnly": true,
-      "name": "Critical Hit Chance vs Dark"
+      "name": "Critical Hit Chance vs Light"
     },
     {
       "st": "ST_CRITICAL_RATE",
       "ap": "OAT_ADD",
       "v": 175,
       "combatOnly": true,
-      "name": "Critical Hit Chance vs Dark"
+      "name": "Critical Hit Chance vs Light"
     },
     {
       "st": "ST_CRITICAL_RATE",
       "ap": "OAT_ADD",
       "v": 180,
       "combatOnly": true,
-      "name": "Critical Hit Chance vs Dark"
+      "name": "Critical Hit Chance vs Light"
     },
     {
       "st": "ST_CRITICAL_RATE",
       "ap": "OAT_ADD",
       "v": 185,
       "combatOnly": true,
-      "name": "Critical Hit Chance vs Dark"
+      "name": "Critical Hit Chance vs Light"
     },
     {
       "st": "ST_CRITICAL_RATE",
       "ap": "OAT_ADD",
       "v": 190,
       "combatOnly": true,
-      "name": "Critical Hit Chance vs Dark"
+      "name": "Critical Hit Chance vs Light"
     },
     {
       "st": "ST_CRITICAL_RATE",
       "ap": "OAT_ADD",
       "v": 195,
       "combatOnly": true,
-      "name": "Critical Hit Chance vs Dark"
+      "name": "Critical Hit Chance vs Light"
     },
     {
       "st": "ST_CRITICAL_RATE",
       "ap": "OAT_ADD",
       "v": 200,
       "combatOnly": true,
-      "name": "Critical Hit Chance vs Dark"
+      "name": "Critical Hit Chance vs Light"
     }
   ],
   "BID_CEQUIP_MAIN_DMG_REDUCE_CORE": [
@@ -1857,77 +1857,77 @@
       "ap": "OAT_RATE",
       "v": 170,
       "combatOnly": true,
-      "name": "DMG Increase vs Fire"
+      "name": "DMG Increase vs Earth"
     },
     {
       "st": "ST_DMG_BOOST",
       "ap": "OAT_RATE",
       "v": 175,
       "combatOnly": true,
-      "name": "DMG Increase vs Fire"
+      "name": "DMG Increase vs Earth"
     },
     {
       "st": "ST_DMG_BOOST",
       "ap": "OAT_RATE",
       "v": 180,
       "combatOnly": true,
-      "name": "DMG Increase vs Fire"
+      "name": "DMG Increase vs Earth"
     },
     {
       "st": "ST_DMG_BOOST",
       "ap": "OAT_RATE",
       "v": 185,
       "combatOnly": true,
-      "name": "DMG Increase vs Fire"
+      "name": "DMG Increase vs Earth"
     },
     {
       "st": "ST_DMG_BOOST",
       "ap": "OAT_RATE",
       "v": 191,
       "combatOnly": true,
-      "name": "DMG Increase vs Fire"
+      "name": "DMG Increase vs Earth"
     },
     {
       "st": "ST_DMG_BOOST",
       "ap": "OAT_RATE",
       "v": 197,
       "combatOnly": true,
-      "name": "DMG Increase vs Fire"
+      "name": "DMG Increase vs Earth"
     },
     {
       "st": "ST_DMG_BOOST",
       "ap": "OAT_RATE",
       "v": 203,
       "combatOnly": true,
-      "name": "DMG Increase vs Fire"
+      "name": "DMG Increase vs Earth"
     },
     {
       "st": "ST_DMG_BOOST",
       "ap": "OAT_RATE",
       "v": 209,
       "combatOnly": true,
-      "name": "DMG Increase vs Fire"
+      "name": "DMG Increase vs Earth"
     },
     {
       "st": "ST_DMG_BOOST",
       "ap": "OAT_RATE",
       "v": 216,
       "combatOnly": true,
-      "name": "DMG Increase vs Fire"
+      "name": "DMG Increase vs Earth"
     },
     {
       "st": "ST_DMG_BOOST",
       "ap": "OAT_RATE",
       "v": 223,
       "combatOnly": true,
-      "name": "DMG Increase vs Fire"
+      "name": "DMG Increase vs Earth"
     },
     {
       "st": "ST_DMG_BOOST",
       "ap": "OAT_RATE",
       "v": 230,
       "combatOnly": true,
-      "name": "DMG Increase vs Fire"
+      "name": "DMG Increase vs Earth"
     }
   ],
   "BID_CEQUIP_MAIN_DMG_EARTH": [
@@ -1936,77 +1936,77 @@
       "ap": "OAT_RATE",
       "v": 170,
       "combatOnly": true,
-      "name": "DMG Increase vs Earth"
+      "name": "DMG Increase vs Water"
     },
     {
       "st": "ST_DMG_BOOST",
       "ap": "OAT_RATE",
       "v": 175,
       "combatOnly": true,
-      "name": "DMG Increase vs Earth"
+      "name": "DMG Increase vs Water"
     },
     {
       "st": "ST_DMG_BOOST",
       "ap": "OAT_RATE",
       "v": 180,
       "combatOnly": true,
-      "name": "DMG Increase vs Earth"
+      "name": "DMG Increase vs Water"
     },
     {
       "st": "ST_DMG_BOOST",
       "ap": "OAT_RATE",
       "v": 185,
       "combatOnly": true,
-      "name": "DMG Increase vs Earth"
+      "name": "DMG Increase vs Water"
     },
     {
       "st": "ST_DMG_BOOST",
       "ap": "OAT_RATE",
       "v": 191,
       "combatOnly": true,
-      "name": "DMG Increase vs Earth"
+      "name": "DMG Increase vs Water"
     },
     {
       "st": "ST_DMG_BOOST",
       "ap": "OAT_RATE",
       "v": 197,
       "combatOnly": true,
-      "name": "DMG Increase vs Earth"
+      "name": "DMG Increase vs Water"
     },
     {
       "st": "ST_DMG_BOOST",
       "ap": "OAT_RATE",
       "v": 203,
       "combatOnly": true,
-      "name": "DMG Increase vs Earth"
+      "name": "DMG Increase vs Water"
     },
     {
       "st": "ST_DMG_BOOST",
       "ap": "OAT_RATE",
       "v": 209,
       "combatOnly": true,
-      "name": "DMG Increase vs Earth"
+      "name": "DMG Increase vs Water"
     },
     {
       "st": "ST_DMG_BOOST",
       "ap": "OAT_RATE",
       "v": 216,
       "combatOnly": true,
-      "name": "DMG Increase vs Earth"
+      "name": "DMG Increase vs Water"
     },
     {
       "st": "ST_DMG_BOOST",
       "ap": "OAT_RATE",
       "v": 223,
       "combatOnly": true,
-      "name": "DMG Increase vs Earth"
+      "name": "DMG Increase vs Water"
     },
     {
       "st": "ST_DMG_BOOST",
       "ap": "OAT_RATE",
       "v": 230,
       "combatOnly": true,
-      "name": "DMG Increase vs Earth"
+      "name": "DMG Increase vs Water"
     }
   ],
   "BID_CEQUIP_MAIN_DMG_WATER": [
@@ -2015,77 +2015,77 @@
       "ap": "OAT_RATE",
       "v": 170,
       "combatOnly": true,
-      "name": "DMG Increase vs Water"
+      "name": "DMG Increase vs Fire"
     },
     {
       "st": "ST_DMG_BOOST",
       "ap": "OAT_RATE",
       "v": 175,
       "combatOnly": true,
-      "name": "DMG Increase vs Water"
+      "name": "DMG Increase vs Fire"
     },
     {
       "st": "ST_DMG_BOOST",
       "ap": "OAT_RATE",
       "v": 180,
       "combatOnly": true,
-      "name": "DMG Increase vs Water"
+      "name": "DMG Increase vs Fire"
     },
     {
       "st": "ST_DMG_BOOST",
       "ap": "OAT_RATE",
       "v": 185,
       "combatOnly": true,
-      "name": "DMG Increase vs Water"
+      "name": "DMG Increase vs Fire"
     },
     {
       "st": "ST_DMG_BOOST",
       "ap": "OAT_RATE",
       "v": 191,
       "combatOnly": true,
-      "name": "DMG Increase vs Water"
+      "name": "DMG Increase vs Fire"
     },
     {
       "st": "ST_DMG_BOOST",
       "ap": "OAT_RATE",
       "v": 197,
       "combatOnly": true,
-      "name": "DMG Increase vs Water"
+      "name": "DMG Increase vs Fire"
     },
     {
       "st": "ST_DMG_BOOST",
       "ap": "OAT_RATE",
       "v": 203,
       "combatOnly": true,
-      "name": "DMG Increase vs Water"
+      "name": "DMG Increase vs Fire"
     },
     {
       "st": "ST_DMG_BOOST",
       "ap": "OAT_RATE",
       "v": 209,
       "combatOnly": true,
-      "name": "DMG Increase vs Water"
+      "name": "DMG Increase vs Fire"
     },
     {
       "st": "ST_DMG_BOOST",
       "ap": "OAT_RATE",
       "v": 216,
       "combatOnly": true,
-      "name": "DMG Increase vs Water"
+      "name": "DMG Increase vs Fire"
     },
     {
       "st": "ST_DMG_BOOST",
       "ap": "OAT_RATE",
       "v": 223,
       "combatOnly": true,
-      "name": "DMG Increase vs Water"
+      "name": "DMG Increase vs Fire"
     },
     {
       "st": "ST_DMG_BOOST",
       "ap": "OAT_RATE",
       "v": 230,
       "combatOnly": true,
-      "name": "DMG Increase vs Water"
+      "name": "DMG Increase vs Fire"
     }
   ],
   "BID_CEQUIP_MAIN_DMG_LIGHT": [
@@ -2094,77 +2094,77 @@
       "ap": "OAT_RATE",
       "v": 170,
       "combatOnly": true,
-      "name": "DMG Increase vs Light"
+      "name": "DMG Increase vs Dark"
     },
     {
       "st": "ST_DMG_BOOST",
       "ap": "OAT_RATE",
       "v": 175,
       "combatOnly": true,
-      "name": "DMG Increase vs Light"
+      "name": "DMG Increase vs Dark"
     },
     {
       "st": "ST_DMG_BOOST",
       "ap": "OAT_RATE",
       "v": 180,
       "combatOnly": true,
-      "name": "DMG Increase vs Light"
+      "name": "DMG Increase vs Dark"
     },
     {
       "st": "ST_DMG_BOOST",
       "ap": "OAT_RATE",
       "v": 185,
       "combatOnly": true,
-      "name": "DMG Increase vs Light"
+      "name": "DMG Increase vs Dark"
     },
     {
       "st": "ST_DMG_BOOST",
       "ap": "OAT_RATE",
       "v": 191,
       "combatOnly": true,
-      "name": "DMG Increase vs Light"
+      "name": "DMG Increase vs Dark"
     },
     {
       "st": "ST_DMG_BOOST",
       "ap": "OAT_RATE",
       "v": 197,
       "combatOnly": true,
-      "name": "DMG Increase vs Light"
+      "name": "DMG Increase vs Dark"
     },
     {
       "st": "ST_DMG_BOOST",
       "ap": "OAT_RATE",
       "v": 203,
       "combatOnly": true,
-      "name": "DMG Increase vs Light"
+      "name": "DMG Increase vs Dark"
     },
     {
       "st": "ST_DMG_BOOST",
       "ap": "OAT_RATE",
       "v": 209,
       "combatOnly": true,
-      "name": "DMG Increase vs Light"
+      "name": "DMG Increase vs Dark"
     },
     {
       "st": "ST_DMG_BOOST",
       "ap": "OAT_RATE",
       "v": 216,
       "combatOnly": true,
-      "name": "DMG Increase vs Light"
+      "name": "DMG Increase vs Dark"
     },
     {
       "st": "ST_DMG_BOOST",
       "ap": "OAT_RATE",
       "v": 223,
       "combatOnly": true,
-      "name": "DMG Increase vs Light"
+      "name": "DMG Increase vs Dark"
     },
     {
       "st": "ST_DMG_BOOST",
       "ap": "OAT_RATE",
       "v": 230,
       "combatOnly": true,
-      "name": "DMG Increase vs Light"
+      "name": "DMG Increase vs Dark"
     }
   ],
   "BID_CEQUIP_MAIN_DMG_DARK": [
@@ -2173,77 +2173,77 @@
       "ap": "OAT_RATE",
       "v": 170,
       "combatOnly": true,
-      "name": "DMG Increase vs Dark"
+      "name": "DMG Increase vs Light"
     },
     {
       "st": "ST_DMG_BOOST",
       "ap": "OAT_RATE",
       "v": 175,
       "combatOnly": true,
-      "name": "DMG Increase vs Dark"
+      "name": "DMG Increase vs Light"
     },
     {
       "st": "ST_DMG_BOOST",
       "ap": "OAT_RATE",
       "v": 180,
       "combatOnly": true,
-      "name": "DMG Increase vs Dark"
+      "name": "DMG Increase vs Light"
     },
     {
       "st": "ST_DMG_BOOST",
       "ap": "OAT_RATE",
       "v": 185,
       "combatOnly": true,
-      "name": "DMG Increase vs Dark"
+      "name": "DMG Increase vs Light"
     },
     {
       "st": "ST_DMG_BOOST",
       "ap": "OAT_RATE",
       "v": 191,
       "combatOnly": true,
-      "name": "DMG Increase vs Dark"
+      "name": "DMG Increase vs Light"
     },
     {
       "st": "ST_DMG_BOOST",
       "ap": "OAT_RATE",
       "v": 197,
       "combatOnly": true,
-      "name": "DMG Increase vs Dark"
+      "name": "DMG Increase vs Light"
     },
     {
       "st": "ST_DMG_BOOST",
       "ap": "OAT_RATE",
       "v": 203,
       "combatOnly": true,
-      "name": "DMG Increase vs Dark"
+      "name": "DMG Increase vs Light"
     },
     {
       "st": "ST_DMG_BOOST",
       "ap": "OAT_RATE",
       "v": 209,
       "combatOnly": true,
-      "name": "DMG Increase vs Dark"
+      "name": "DMG Increase vs Light"
     },
     {
       "st": "ST_DMG_BOOST",
       "ap": "OAT_RATE",
       "v": 216,
       "combatOnly": true,
-      "name": "DMG Increase vs Dark"
+      "name": "DMG Increase vs Light"
     },
     {
       "st": "ST_DMG_BOOST",
       "ap": "OAT_RATE",
       "v": 223,
       "combatOnly": true,
-      "name": "DMG Increase vs Dark"
+      "name": "DMG Increase vs Light"
     },
     {
       "st": "ST_DMG_BOOST",
       "ap": "OAT_RATE",
       "v": 230,
       "combatOnly": true,
-      "name": "DMG Increase vs Dark"
+      "name": "DMG Increase vs Light"
     }
   ],
   "BID_ITEM_STAT_OOPARTS_ATK_4": [

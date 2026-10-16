@@ -37,3 +37,41 @@ export function itemMainOptionValue(
   t = f32(t * f32(f32(breakLimitFactor) + 1));
   return Math.trunc(t);
 }
+
+/** Ce que `mainOptionAt` lit des règles d'amélioration (`equipment/enhance.json`). */
+export interface MainOptionRules {
+  enhanceFactor: number;
+  maxEnhance: number;
+  tierFactor: number;
+  singularity: { activation: { factor: number }; steps: readonly { to: number; factor: number }[] };
+}
+
+/**
+ * Valeur d'une option principale à +`enh` / percée `tier` (ascension comprise
+ * à partir de +10 quand `ascended`) : facteurs cumulés comme le client —
+ * enchant 1..min(enh, max), paliers de percée 1..tier, activation puis pas
+ * atteints de la Singularité — puis `itemMainOptionValue`. Valeur BRUTE
+ * (per-mille pour les %), à diviser pour l'affichage.
+ */
+export function mainOptionAt(
+  optionValue: number,
+  rules: MainOptionRules,
+  enh: number,
+  tier: number,
+  ascended = false,
+): number {
+  const lv = Math.min(enh, rules.maxEnhance);
+  const sing =
+    ascended && enh >= rules.maxEnhance
+      ? [
+          rules.singularity.activation.factor,
+          ...rules.singularity.steps.filter((s) => enh >= s.to).map((s) => s.factor),
+        ]
+      : [];
+  return itemMainOptionValue(
+    optionValue,
+    sumFactorsF32(Array<number>(lv).fill(rules.enhanceFactor)),
+    sumFactorsF32(Array<number>(tier).fill(rules.tierFactor)),
+    sumFactorsF32(sing),
+  );
+}

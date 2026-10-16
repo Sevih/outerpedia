@@ -3,7 +3,7 @@
  * Obtaining, FAQ).
  *
  * Les tables NUMÉRIQUES DÉRIVENT des données de jeu, pas de hardcode :
- *   - comparaison d'enhancement → `enhance.json` `examples` (base × ×5 au +10) ;
+ *   - comparaison d'enhancement → `enhance.json` `examples` (base au +10 par `mainOptionAt`, float32 du client) ;
  *   - exemples de breakthrough → `getEquipmentDetail` (arme + sets, T0 vs T4) ;
  *   - ascension (activation, steps +11→+15, bonus +15, reroll) → `getAscensionView`
  *     (source `enhance.json`, générique par groupe arme/armure).
@@ -37,6 +37,7 @@ import { getAscensionView, getEquipmentDetail } from '@/lib/data/equipment-detai
 import { GRADE_RANK } from '@/lib/data/gear-order';
 import type { LocalizedText } from '@contracts';
 import { getEnhanceRules } from '@/lib/data/equipment-enhance';
+import { mainOptionAt } from '@/lib/damage/item';
 import { getBreakLimits } from '@/lib/data/equipment-break-limits';
 import { LABELS } from './labels';
 import { PropertyDiagram } from './PropertyDiagram';
@@ -298,7 +299,7 @@ export default async function GearGuide({ lang }: { lang: Lang }) {
                   size={60}
                 />
                 <span className="text-success font-mono text-sm font-semibold">
-                  {ex.statKey} {fmt(Math.round(ex.base * enhanceMult))}
+                  {ex.statKey} {fmt(mainOptionAt(ex.base, rules, rules.maxEnhance, 0))}
                 </span>
               </div>
             ))}
@@ -353,11 +354,7 @@ export default async function GearGuide({ lang }: { lang: Lang }) {
                   <span className="font-mono">{fmt(surefire.slots[0].options[0].base)}</span>
                   <span className="text-content-subtle">→ T{MAX_TIER}</span>
                   <span className="text-success font-mono font-semibold">
-                    {fmt(
-                      Math.round(
-                        surefire.slots[0].options[0].base * (1 + rules.tierFactor * MAX_TIER),
-                      ),
-                    )}
+                    {fmt(mainOptionAt(surefire.slots[0].options[0].raw, rules, 0, MAX_TIER))}
                   </span>
                 </div>
               )}

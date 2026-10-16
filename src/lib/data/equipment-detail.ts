@@ -30,6 +30,7 @@ import {
   passiveTextAtLevel,
   resolvePassives,
   slugifyEquipment,
+  topMainSlots,
   withClassSuffix,
   type EEView,
   type GearFamily,
@@ -106,6 +107,9 @@ export interface StatOption {
   percent: boolean;
   /** Valeur de base au +0 (déjà à l'échelle d'affichage : rate/per-mille ÷10). */
   base: number;
+  /** Valeur BRUTE du jeu (`OptionValue`, per-mille pour les %) : la main stat
+   * se calcule dessus, en float32 comme le client (`mainOptionAt`). */
+  raw: number;
   /** Talisman/EE : valeur par NIVEAU (déjà à l'échelle) — remplace la formule. */
   levels?: number[];
 }
@@ -211,7 +215,7 @@ const scale = (o: Option, v: number) => (isPercent(o) ? v / 10 : v);
 function simpleStatOption(
   statSlug: string,
   percent: boolean,
-  base: number,
+  raw: number,
   lang: Lang,
   levels?: number[],
   labelOverride?: string,
@@ -224,7 +228,8 @@ function simpleStatOption(
     // quand il n'existe pas d'abréviation propre (« Gains AP when hit »).
     ...(label ? { label } : {}),
     percent,
-    base,
+    base: percent ? raw / 10 : raw,
+    raw,
     ...(levels ? { levels } : {}),
   };
 }
@@ -233,8 +238,10 @@ function simpleStatOption(
  * Options prêtes au calcul d'UNE ligne de pool. Cas général : une option.
  * Option spéciale EE (buff + stat propre) : DEUX options — la stat
  * CONDITIONNELLE portée par le buff (dmg_reduce 200 = 20 %, niveaux du buff)
- * ET la stat SECONDAIRE flat de la ligne (hit_ap : min(max, factor×(niv+1)),
- * formule du client — validée contre l'oracle hérité : 1..10 puis plafond).
+ * ET la stat SECONDAIRE flat de la ligne (hit_ap). Règle du client pour la
+ * secondaire : l'option n'est créée qu'à partir de +1 (`CItem.InitializeOptionData`)
+ * et vaut `min(OptionValue + n × OptionFactor, OptionMaxValue)` à +n
+ * (`CItemSubOptionData`) ; à +0, `CUISpecialEnchantGrowth` affiche 0.
  */
 function toStatOptions(o: Option, lang: Lang): StatOption[] {
   if (!o.stat || o.stat === 'none') return [];
@@ -242,17 +249,17 @@ function toStatOptions(o: Option, lang: Lang): StatOption[] {
   if (!eff) {
     const percent = isPercent(o);
     const sc = (v: number) => (percent ? v / 10 : v);
-    return [simpleStatOption(o.stat, percent, sc(o.value), lang, o.levels?.map(sc))];
+    return [simpleStatOption(o.stat, percent, o.value, lang, o.levels?.map(sc))];
   }
   const out: StatOption[] = [];
   const statSlug = eff.stat ?? eff.type;
   const percent = eff.mode === 'rate' || PERCENT_STATS.has(statSlug);
   const sc = (v: number) => (percent ? v / 10 : v);
   const condLabel = o.label ? lRec(o.label, lang) || o.label.en : undefined;
-  out.push(simpleStatOption(statSlug, percent, sc(eff.value), lang, o.levels?.map(sc), condLabel));
+  out.push(simpleStatOption(statSlug, percent, eff.value, lang, o.levels?.map(sc), condLabel));
   if (o.factor && o.max) {
     const levels = Array.from({ length: ENHANCE.maxEnhance + 1 }, (_, n) =>
-      Math.min(o.max ?? 0, (o.factor ?? 0) * (n + 1)),
+      n === 0 ? 0 : Math.min(o.max ?? 0, o.value + (o.factor ?? 0) * n),
     );
     out.push(simpleStatOption(o.stat, PERCENT_STATS.has(o.stat), levels[0], lang, levels));
   }
@@ -260,9 +267,17 @@ function toStatOptions(o: Option, lang: Lang): StatOption[] {
 }
 
 function toSlots(mainGroups: string[], lang: Lang): StatSlot[] {
+  return slotsOf(
+    mainGroups.map((g) => POOLS[g] ?? []),
+    lang,
+  );
+}
+
+/** Slots d'affichage depuis les options de chaque slot (une ligne de pool ou
+ * l'union de `topMainSlots`) : une option = slot fixe, plusieurs = au choix. */
+function slotsOf(slotRows: Option[][], lang: Lang): StatSlot[] {
   const out: StatSlot[] = [];
-  for (const g of mainGroups) {
-    const rows = POOLS[g] ?? [];
+  for (const rows of slotRows) {
     if (rows.length === 1) {
       // Ligne unique : chaque option dérivée (EE : conditionnelle + flat)
       // devient un slot FIXE distinct.
@@ -285,7 +300,9 @@ function toSubPool(sub: string | null): SubstatPool | undefined {
     .filter((o) => o.stat && o.stat !== 'none')
     .map((o) => ({
       ...statOptionView(o.stat, o.mode),
-      step: scale(o, o.value),
+      // Le client avance un sous-stat d'`OptionFactor` par proc
+      // (`CItemSubOptionData`) ; `OptionValue` n'est que la valeur de départ.
+      step: scale(o, o.factor ?? o.value),
       max: scale(o, o.max ?? o.value),
     }));
   if (!pool.length) return undefined;
@@ -498,10 +515,11 @@ function gearModel(
     ? f.ids.filter((id) => table[id].classLimit === variant.classLimit)
     : f.ids;
   const idSet = new Set(variantIds);
-  // Les stats (main/sub) viennent de la ligne top de LA variante, pas du top de
-  // famille : sur les irregular (Briareos's Ambition, Gorgon's Vanity), les pools
-  // de main stat DIFFÈRENT par classe — le top de famille (striker) faisait
-  // afficher à la fiche [Ranger] des mains qu'elle ne peut pas avoir en jeu.
+  // Les mains sont celles de LA variante, pas de la famille : sur les irregular
+  // (Briareos's Ambition, Gorgon's Vanity), les pools de main stat DIFFÈRENT par
+  // classe — le top de famille (striker) faisait afficher à la fiche [Ranger]
+  // des mains qu'elle ne peut pas avoir en jeu. Union des membres du palier
+  // max (`topMainSlots`) ; le sous-stat suit la ligne top de la variante.
   const statRow = variant
     ? table[variantIds.reduce((m, id) => (table[id].star > table[m].star ? id : m), variantIds[0])]
     : top;
@@ -514,7 +532,7 @@ function gearModel(
     grade: f.grade,
     star: top.star,
     classLimits: variant ? [variant.classLimit] : f.classLimits,
-    slots: toSlots(statRow.main, lang),
+    slots: slotsOf(topMainSlots(variantIds, table), lang),
     sub: toSubPool(statRow.sub),
     // Famille à passif PAR CLASSE : un palier par variante, tagué de sa classe
     // (vue d'ensemble) — la fiche d'UNE variante ne porte que le sien.

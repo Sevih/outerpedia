@@ -64,9 +64,11 @@ import { existsSync, readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { buffRowAtLevel, findBuff, formatRowValue, isStatSheetBuff } from '../lib/buff';
 import { bool, loadTable, singleValue, type Row } from '../lib/tables';
+import { loadTextIndex } from '../lib/text';
 import { kitScaling, loadKitScalingTables } from '../lib/kit-scaling';
 import { buildDamageCharacters } from '../damage/characters';
 import { bestSkillOf } from './solver-best-skill';
+import { conditionalLabel } from './equipment';
 import {
   computeCharacterIngredients,
   type CharacterIngredients,
@@ -224,14 +226,18 @@ export function buildSolver(inputs: {
 
   // ---- buffs : BID_ITEM_STAT_OOPARTS_* / BID_CEQUIP_MAIN_* par niveau ----
   const buffTemplet = loadTable('BuffTemplet');
-  const eeCondByBuffId = new Map<string, string>();
+  const eeRowByBuffId = new Map<string, Row>();
   for (const b of buffTemplet) {
     const bid = b.BuffID;
     if (!bid || !bid.startsWith('BID_CEQUIP_MAIN_')) continue;
-    if (!eeCondByBuffId.has(bid)) eeCondByBuffId.set(bid, b.BuffConditionType ?? 'NONE');
+    if (!eeRowByBuffId.has(bid)) eeRowByBuffId.set(bid, b);
   }
-  // Libellé façon jeu d'une main EE — préfère la clé par élément du jeu
-  // (`SYS_STAT_<…>_TARGET_<ELEMENT>`), sinon compose « <Stat> vs <Élément> ».
+  const systemDict = loadTextIndex('TextSystem');
+  // Libellé façon jeu d'une main EE. Conditionnée à un élément : celui de
+  // `BuffConditionValue`, par la règle de la fiche (`conditionalLabel`) — le
+  // suffixe du `BuffID` est l'élément du PORTEUR, pas celui que le jeu affiche.
+  // Sans condition d'élément (`_CORE`, sans suffixe) : la clé de stat du jeu
+  // (`SYS_STAT_<…>_TARGET_<ELEMENT>`), sinon « <Stat> vs <Élément> ».
   const EE_BUFF_PREFIX_STAT_KEY: Record<string, string> = {
     DMG: 'SYS_STAT_DMG_BOOST',
     DMG_REDUCE: 'SYS_STAT_DMG_REDUCE_RATE',
@@ -242,6 +248,10 @@ export function buildSolver(inputs: {
   const EE_TRAILING_MODIFIERS = ['FIRE', 'WATER', 'EARTH', 'LIGHT', 'DARK', 'CORE'];
   function eeMainLabel(buffId: string): string | null {
     if (!buffId.startsWith('BID_CEQUIP_MAIN_')) return null;
+    const row = eeRowByBuffId.get(buffId);
+    const cond = row?.BuffConditionType;
+    if (cond === 'TARGET_ELEMENT' || cond === 'OWNER_ELEMENT')
+      return conditionalLabel(systemDict, row, buffId)?.en || null;
     const rest = buffId.slice('BID_CEQUIP_MAIN_'.length);
     let modifier: string | null = null;
     let statPrefix = rest;
@@ -278,7 +288,9 @@ export function buildSolver(inputs: {
     if (!b.StatType || b.StatType === 'ST_NONE') continue;
     const lv = Number(b.Level);
     if (!Number.isFinite(lv) || lv < 1) continue;
-    const combatOnly = bid.startsWith('BID_CEQUIP_MAIN_') && eeCondByBuffId.get(bid) !== 'NONE';
+    const combatOnly =
+      bid.startsWith('BID_CEQUIP_MAIN_') &&
+      (eeRowByBuffId.get(bid)?.BuffConditionType ?? 'NONE') !== 'NONE';
     const entry: { st: string; ap?: string; v: number; combatOnly?: true; name?: string } = {
       st: b.StatType,
       ap: b.ApplyingType,
