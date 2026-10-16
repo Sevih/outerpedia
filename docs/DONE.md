@@ -7,6 +7,15 @@
 
 ## 2026-10-16
 
+- **Mention « Breakthrough 4 » retirée** (décision de Sevih du 16/10, après
+  contrôle à l'écran : « je ne vois pas l'intérêt »). Les recos de build et
+  les cartes de `/equipment` gardent le palier enchanté, le butin des guides
+  le palier de base, mais plus aucune ligne ne le dit : retirés
+  `enchantedTier` (labels de la fiche perso, de l'aperçu de quick et de
+  `SetRow`), `enchanted` de `GearRecoSetEffect` et son rendu dans
+  `GearRecoSection`, et `src/components/equipment/cards.test.tsx`.
+  Typecheck, lint verts ; `NODE_ENV=development pnpm test` 231 / 3950,
+  `vitest run scripts/quick` 1147.
 - **Fiches d'équipement (C19) : mains au palier max par union des membres
   (R13), stat secondaire des EE à 0 à +0 (M10), main stat en float32 du
   client (B1), pas des sous-stats en `OptionFactor` (O11), descriptions

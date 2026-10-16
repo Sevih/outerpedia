@@ -18,7 +18,7 @@ const text = (id: string, piece: '2p' | '4p', at: 0 | -1): string | undefined =>
 };
 
 describe('gear-reco — palier des bonus de set', () => {
-  it('butin : palier de base (Speed sans 2P, Attack 30/20), sans mention', () => {
+  it('butin : palier de base (Speed sans 2P, Attack 30/20)', () => {
     const speed = resolveLootSet('13', 'en')!;
     expect(text('13', '2p', 0)).toBeUndefined();
     expect(speed.effect.effect2).toBeUndefined();
@@ -27,10 +27,9 @@ describe('gear-reco — palier des bonus de set', () => {
     expect(attack.effect.effect2).toBe(text('1', '2p', 0)); // Attack +30%
     expect(attack.effect.effect4).toBe(text('1', '4p', 0)); // Attack +20%
     expect(text('1', '2p', 0)).not.toBe(text('1', '2p', -1));
-    expect(attack.effect.enchanted).toBeUndefined();
   });
 
-  it('reco : palier enchanté, marqué', () => {
+  it('reco : palier enchanté', () => {
     const [build] = resolveGearBuilds(
       [{ name: 'test', sets: [{ pieces: [{ set: '1', count: 4 }] }] }],
       loadGearPresets(),
@@ -39,6 +38,5 @@ describe('gear-reco — palier des bonus de set', () => {
     const [attack] = build.setEffects;
     expect(attack.effect2).toBe(text('1', '2p', -1)); // Attack +35%
     expect(attack.effect4).toBe(text('1', '4p', -1)); // Attack +25%
-    expect(attack.enchanted).toBe(true);
   });
 });

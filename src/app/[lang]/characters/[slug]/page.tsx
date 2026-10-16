@@ -563,7 +563,6 @@ export default async function CharacterDetail({
             note: t('page.character.gear.note'),
             piece2: t('equip.set.2piece'),
             piece4: t('equip.set.4piece'),
-            enchantedTier: `${t('equip.detail.breakthrough')} 4`,
             source: t('equip.detail.source'),
           }}
         />

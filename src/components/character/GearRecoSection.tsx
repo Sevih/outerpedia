@@ -63,8 +63,6 @@ export interface GearSetEffect {
   maxCount: number;
   effect2?: string;
   effect4?: string;
-  /** Bonus au palier enchanté (recos seulement) : mention sous les lignes 2P/4P. */
-  enchanted?: true;
   source?: GearItem['source'];
 }
 
@@ -90,15 +88,11 @@ export interface GearRecoLabels {
   note: string;
   piece2: string;
   piece4: string;
-  /** Mention du palier enchanté des bonus de set (« Breakthrough 4 »). */
-  enchantedTier: string;
   source: string;
 }
 
-/** Libellés des bonus de set, partagés avec le butin des guides (qui n'a pas
- *  de palier enchanté, donc pas de mention). */
-type SetEffectLabels = Pick<GearRecoLabels, 'piece2' | 'piece4'> &
-  Partial<Pick<GearRecoLabels, 'enchantedTier'>>;
+/** Libellés des bonus de set, partagés avec le butin des guides. */
+type SetEffectLabels = Pick<GearRecoLabels, 'piece2' | 'piece4'>;
 
 /**
  * Tuile d'un slot : label, puis N lignes séparées par des filets.
@@ -336,9 +330,6 @@ function setTooltip(
               <span className="text-zinc-300">{eff.effect4}</span>
             </div>
           )}
-          {eff.enchanted && labels.enchantedTier && (
-            <div className="mt-0.5 text-zinc-400">{labels.enchantedTier}</div>
-          )}
         </div>
       )}
       {eff?.source && (eff.source.bosses.length > 0 || eff.source.label) && (
@@ -567,9 +558,6 @@ function SetEffectLines({
         <p className="text-xs leading-relaxed text-zinc-300">
           <span className="text-buff font-semibold">{labels.piece4}</span> {eff.effect4}
         </p>
-      )}
-      {eff.enchanted && labels.enchantedTier && (
-        <p className="text-xs leading-relaxed text-zinc-400">{labels.enchantedTier}</p>
       )}
     </>
   );

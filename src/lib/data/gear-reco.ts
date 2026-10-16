@@ -124,9 +124,6 @@ export interface ResolvedSetEffect {
   maxCount: number;
   effect2?: string;
   effect4?: string;
-  /** Bonus lus au palier ENCHANTÉ (percée 4) : posé par les recos seulement,
-   *  la carte le dit sous les lignes 2P/4P ; le butin reste au palier de base. */
-  enchanted?: true;
   source?: ResolvedItemSource;
 }
 
@@ -366,7 +363,6 @@ export function resolveGearBuilds(
             maxCount: p.count,
             effect2: setBonus(entry, '2p', 'enchanted', lang),
             effect4: setBonus(entry, '4p', 'enchanted', lang),
-            enchanted: true,
             source: toItemSource(setViews.get(p.set)?.source, lang),
           });
       }

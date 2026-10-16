@@ -75,9 +75,6 @@ export interface SetRow {
   /** Bonus du DERNIER tier connu (enchanté si existant). */
   p2?: string;
   p4?: string;
-  /** Mention du palier enchanté (« Breakthrough 4 ») quand p2/p4 le sont,
-   *  comme sous les recos de build (décision de Sevih du 15/10/2026). */
-  enchantedTier?: string;
   source?: RowSource;
 }
 
@@ -314,9 +311,6 @@ export function SetCard({ row, sourceTitle }: { row: SetRow; sourceTitle: string
             <span className="text-content-strong font-semibold">4P </span>
             <SkillDescription desc={row.p4} className="text-content-muted inline text-xs" />
           </div>
-        )}
-        {row.enchantedTier && (row.p2 || row.p4) && (
-          <div className="text-content-muted">{row.enchantedTier}</div>
         )}
       </div>
       <SourceLine source={row.source} title={sourceTitle} />
