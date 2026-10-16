@@ -7,6 +7,51 @@
 
 ## 2026-10-16
 
+- **F27 · Enquête : quels clips d'animation joue une compétence (R14),
+  règle du client et mesures à demander.** Documentation seule, nouveau
+  `docs/specs/damage-clips-joues.md` ; ni code, ni données, ni
+  `damage-formula.md`. **Règle**, lue dans le client décompilé 1.11.404 : un
+  lancer joue UN trigger, choisi par son index dans `TriggerNameList` (0 par
+  défaut, 1 sous `BT_SECOND_TRIGGER` après tirage, 1 ou 2 sous
+  `BT_2000065_A/B` pour Ame, skip `i` si l'animation est passée,
+  `CCharacterBattle.GetUseTriggerName`), mis en cache pour tout le lancer. Le
+  seul enchaînement d'un deuxième clip est la frappe additionnelle : l'event
+  `EventAdditiveAttack` du clip pose `TriggerNameSecond` si un buff
+  `BT_ADDITIVE_ATTACK_ON_EVENT` passe sa condition. Ce n'est pas une
+  transition d'animator, contrairement à l'hypothèse de la revue. Francesca S2
+  en est la preuve mesurée : son saignement est posé par le premier hit, et
+  ses deux cascades (10 202 / 22 028) restent exactes. Le scan § 8.1 ne lit
+  que l'état courant : si le clip additionnel était scanné pendant le fondu,
+  le lancer vaudrait deux fois le premier clip (compensation de
+  `CompensateMissedDamage`), ce que Francesca exclut. Le second paramètre des
+  `EventAttackStart` est `fHitRotation`. **Cas** : 16 skills à plusieurs
+  triggers ou clips, dont les 12 du lot, chiffrés sous chaque règle par des
+  scripts jetables hors dépôt (moteur importé tel quel). Tranchés par le code
+  seul : Ame S1 (500 ‰, le site somme trois clips identiques, ×3),
+  Demiurge Astei, Ember, Ais (variantes déjà séparées). Tranchés par le code
+  et une mesure : Francesca S2, son burst et son S3. Non tranchés, faute de
+  l'event dans `anim-events.json` : Sterope S1 et ses trois bursts, Parti S2,
+  Luna S1. **Mesures demandées** : M1 (Sterope S1 avec un buff) et M2 (son
+  burst 1), prêtes à jouer, lien `?z=` et valeurs attendues sous chaque
+  règle. M3 et M4 (Parti, Luna) ne servent que si les `EventAdditiveAttack`
+  ne sont pas ré-extraits. **Correctif proposé**, non codé : `clips.ts` par
+  index et par kit, `DamageSkill.clips` en variantes (clip, porte, suite
+  additionnelle), états du rapport par variante, ce qui règle R16. Pour les
+  16 cellules, les valeurs sous la règle. `bestSkill` : seul Sterope bouge
+  (2 080 → burst 3 à 2 672 avec la suite, 2 055 sans) ; `damage:check`
+  inchangé si la suite de Francesca est comptée par défaut. Trois décisions
+  sont laissées au lot du correctif, avec une recommandation chacune.
+  **Lu** : `main` à `fe40b008`, C24 pas encore passé (les états fantômes de
+  R15 sont encore là ; le rejeu de `multistate.mts` donne toujours 42/16).
+  **Repéré hors périmètre**, cité au § 3.3 du document : templets de second
+  clip rattachés à un autre skill (Poolside Regina 8505/8506, Gnosis Dahlia
+  9002, Ame S3 6505), si bien que la suite ou la variante de Regina et de
+  Dahlia n'existe pas au site ; Lil Rafaga d'Ais (AoE, 30 % de DEF ignorée)
+  n'est pas modélisée. **Vérifié** : prettier `--check` par stdin sur les
+  trois fichiers ; `pnpm typecheck` (les trois `tsc --noEmit`, sans erreur),
+  `pnpm lint` (`eslint`, sans sortie), `pnpm test`
+  (`Tests 3910 passed (3910)`).
+
 - **C20 · Contrat solver, équipement : sets de combat hors de la fiche (C1),
   paliers par pièce et `ignoreLowSet` (O5), uniques de fiche (M2, M3), test
   de forme.** Étape (a) seulement : des champs AJOUTÉS, rien de retiré ni
