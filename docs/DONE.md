@@ -7,6 +7,64 @@
 
 ## 2026-10-16
 
+- **Référence commune du client Steam : `data/curated/game-client.json`
+  (A60, tri des revues du 15/10, L9).** Trois dépôts recopiaient ce qu'il
+  faut savoir du client Steam d'OUTERPLANE et les copies divergeaient déjà
+  (Flatpak en `.local/share/Steam` ici, en `data/Steam` dans tweaks ; client
+  1.4.17 dans le `RELEASE.md` de tweaks, build 24947556 dans le README de
+  capture de gear-solver) ; décision de Sevih du 15/10 : outerpedia est la
+  source. Le curé porte trois blocs, chacun sous son `_docXxx` (le `_doc`
+  dit qui le lit, son adresse `raw.githubusercontent.com/Sevih/outerpedia/main/…`
+  et que les voisins le COPIENT à leur build, sans téléchargement à
+  l'exécution) : `steam` (appid 4247320, `installDir`, `dataDir`, `exe`, clé
+  de registre `HKCU\Software\Valve\Steam` / `SteamPath`, racines candidates
+  en UNION des trois dépôts — Windows `C:/Program Files (x86)/Steam` puis
+  `C:/Program Files/Steam`, Linux relatives au dossier personnel
+  `.local/share/Steam`, `.steam/steam`, `.steam/root` et les deux formes
+  Flatpak) ; `client` (1.4.18, build 25744766, dump du 2026-10-06, lus de
+  `.dump-stamp.json` et de sa date) ; `bepinex` (5.4.23.5,
+  `BepInEx_win_x64_5.4.23.5.zip`, url de la release, sha256 `82f98785…`) —
+  valeurs IDENTIQUES dans `pack.sh`, `pack.ps1` de tweaks et
+  `steam-capture.ts` de gear-solver, vérifiées une à une. Lecture par un
+  module neuf, `datagen/extract/game-client.ts` (types, `readGameClient` sur
+  `readCuratedJson`, qui lève en nommant le fichier s'il manque) :
+  `steam.ts` n'écrit plus ni appid (`STEAM_APPID` gardé en export, lu du
+  curé), ni racine, ni clé de registre (la regex de `reg query` se bâtit sur
+  le nom de valeur), ni `OUTERPLANE_Data` ; le repli Windows passe de une à
+  deux racines et se filtre par existence comme celui de Linux, qui gagne
+  la seconde forme Flatpak. `dump-steam.ts`, après l'empreinte, reporte le
+  client lu : la décision est `nextGameClient` (PURE : fichier + version +
+  build + date → nouveau contenu ou `null` ; `null` sur version `inconnue`,
+  build absent hors Steam, ou version et build déjà ceux du fichier — la
+  date seule ne fait pas un diff), l'écriture passe par `writeJson` et ne
+  remplace que le bloc `client` (ordre des clés et `_doc*` gardés), le
+  journal dit « client 1.4.18 → 1.4.19, build … → … — à committer avec le
+  patch », ou pourquoi il n'écrit rien. `dumpSteam` devient `async` (seul
+  appelant : son propre point d'entrée, `await` au niveau module comme
+  `sync-derived.ts`). Item ajouté à « À jouer au prochain patch » de
+  `docs/TODO.md` : vérifier que le fichier a suivi le dump. Vérification :
+  `datagen/extract/game-client.test.ts` (13 tests) garde la forme (appid
+  entier, sha256 en 64 hex minuscules, url qui contient la version et finit
+  par l'asset, `x.y.z`, build en chiffres, racines non vides et relatives
+  sous Linux, `_doc*` présents), relit `steam.ts` commentaires ôtés (ni
+  appid, ni racine, ni clé de registre, ni `'OUTERPLANE_Data'` — joué contre
+  l'ancien `steam.ts` : deux échecs, comme attendu) et couvre
+  `nextGameClient` (inchangé, nouvelle version, nouveau build seul,
+  inconnue, build absent, entrée non mutée) ; `steam.test.ts` vert sans
+  changement ; le curé est déjà au format canonique (`formatJson` du fichier
+  = ses octets). `findSteamInstall()` sur ce poste, avant et après : root
+  `/home/sevih/.local/share/Steam/steamapps/common/OUTERPLANE`, buildId
+  `25744766`. Dump non relancé (il décompile tout le client) : la
+  réécriture se prouve par sa fonction pure. `pnpm typecheck` : les trois
+  `tsc --noEmit` (racine, `datagen`, `scripts`) sans erreur ; `pnpm lint` :
+  `eslint` sans sortie ; `pnpm test` : « Tests 3969 passed (3969) » ;
+  `pnpm format:check` : « All matched files use Prettier
+  code style! ». Laissé : les lecteurs voisins (TW1 pour tweaks, G6 pour
+  gear-solver), un avertissement au chargement des plugins, `adb.ts` et
+  `pull-steam.ts` (hors périmètre) ; `installDir` et `exe` ne sont pas lus
+  ici (`steam.ts` prend `installdir` de l'appmanifest, et ne lance pas le
+  jeu) — ils servent aux voisins.
+
 - **Contrat solver : `combatEffects` des sets, pour l'affichage seulement
   (B53, second temps du constat C1 de la revue gear-solver d'octobre).**
   Chaque entrée de `levels[]` de `solver/sets.json` gagne `combatEffects:

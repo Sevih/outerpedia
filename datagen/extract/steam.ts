@@ -21,6 +21,10 @@
  *     dans un fichier texte : c'est `PlayerSettings.bundleVersion` de
  *     `globalgamemanagers` — `dump-steam.ts` la lit via UnityPy.
  *
+ * Les constantes (appid, racines candidates, clé de registre, `OUTERPLANE_Data`)
+ * viennent de `data/curated/game-client.json`, la référence partagée avec
+ * gear-solver et outerplane-tweaks (`game-client.ts`) — aucune n'est écrite ici.
+ *
  * Le jeu se PATCHE EN PLACE dans `StreamingAssets/bundles` (constaté 2026-08-26 :
  * `Loxodon BundleUtil` y pose storable = readOnly ; 1 705 bundles réécrits au
  * premier lancement). Il n'y a donc qu'un dossier à lire, toujours à jour dès
@@ -31,9 +35,12 @@ import { existsSync, readFileSync } from 'node:fs';
 import { homedir } from 'node:os';
 import { join, resolve } from 'node:path';
 import { isMain } from '../lib/is-main';
+import { readGameClient } from './game-client';
+
+const GAME = readGameClient().steam;
 
 /** AppID Steam d'OUTERPLANE. */
-export const STEAM_APPID = 4247320;
+export const STEAM_APPID = GAME.appId;
 
 /** Ce que les scripts ont besoin de savoir de l'install. */
 export type SteamInstall = {
@@ -97,11 +104,12 @@ export function parseAppManifest(acf: string): { installdir: string; buildid: st
 /** `SteamPath` du registre utilisateur, ou null (Steam absent, pas Windows…). */
 function steamPathFromRegistry(): string | null {
   try {
-    const out = execFileSync('reg', ['query', 'HKCU\\Software\\Valve\\Steam', '/v', 'SteamPath'], {
+    const { key, value } = GAME.registry;
+    const out = execFileSync('reg', ['query', key, '/v', value], {
       encoding: 'utf-8',
       stdio: ['ignore', 'pipe', 'ignore'],
     });
-    const m = /SteamPath\s+REG_SZ\s+(.+)$/m.exec(out);
+    const m = new RegExp(`${value}\\s+REG_SZ\\s+(.+)$`, 'm').exec(out);
     return m ? m[1].trim() : null;
   } catch {
     return null;
@@ -111,11 +119,12 @@ function steamPathFromRegistry(): string | null {
 /**
  * Racines Steam CANDIDATES, par ordre de préférence.
  *
- * Windows : le registre, sinon l'emplacement par défaut.
+ * Windows : le registre, sinon les emplacements par défaut (`roots.windows`).
  * Linux   : pas de registre — Steam vit sous `~/.local/share/Steam`
  *           (`~/.steam/steam` et `~/.steam/root` y pointent selon les distributions),
- *           ou sous `~/.var/app/…` en Flatpak. On retient TOUTES celles qui existent :
- *           `findSteamInstall` balaiera ensuite leurs bibliothèques.
+ *           ou sous `~/.var/app/…` en Flatpak (`roots.linux`, relatives au dossier
+ *           personnel). On retient TOUTES celles qui existent : `findSteamInstall`
+ *           balaiera ensuite leurs bibliothèques.
  *
  * Ne JAMAIS retomber sur le chemin Windows hors Windows : c'est ce qui masquait
  * l'install réelle et faisait échouer la détection sous Linux (constaté 28/08/2026,
@@ -124,18 +133,15 @@ function steamPathFromRegistry(): string | null {
 function steamRoots(): string[] {
   const fromRegistry = steamPathFromRegistry();
   if (fromRegistry) return [fromRegistry];
-  if (process.platform === 'win32') return ['C:\\Program Files (x86)\\Steam'];
-  const home = homedir();
-  return [
-    join(home, '.local', 'share', 'Steam'),
-    join(home, '.steam', 'steam'),
-    join(home, '.steam', 'root'),
-    join(home, '.var', 'app', 'com.valvesoftware.Steam', '.local', 'share', 'Steam'),
-  ].filter((dir) => existsSync(dir));
+  const candidates =
+    process.platform === 'win32'
+      ? GAME.roots.windows.map((dir) => resolve(dir))
+      : GAME.roots.linux.map((dir) => join(homedir(), dir));
+  return candidates.filter((dir) => existsSync(dir));
 }
 
 function fromRoot(root: string, buildId: string | null): SteamInstall {
-  const data = join(root, 'OUTERPLANE_Data');
+  const data = join(root, GAME.dataDir);
   return {
     root,
     bundlesDir: join(data, 'StreamingAssets', 'bundles'),
@@ -154,7 +160,7 @@ export function findSteamInstall(): SteamInstall | null {
   const override = process.env.OUTERPLANE_STEAM_DIR;
   if (override) {
     const root = resolve(override);
-    return existsSync(join(root, 'OUTERPLANE_Data')) ? fromRoot(root, null) : null;
+    return existsSync(join(root, GAME.dataDir)) ? fromRoot(root, null) : null;
   }
   const libraries = new Set<string>();
   for (const steam of steamRoots()) {
@@ -170,7 +176,7 @@ export function findSteamInstall(): SteamInstall | null {
     const app = parseAppManifest(readFileSync(acf, 'utf-8'));
     if (!app) continue;
     const root = join(lib, 'steamapps', 'common', app.installdir);
-    if (existsSync(join(root, 'OUTERPLANE_Data'))) return fromRoot(root, app.buildid);
+    if (existsSync(join(root, GAME.dataDir))) return fromRoot(root, app.buildid);
   }
   return null;
 }

@@ -21,6 +21,10 @@
  *                        build Steam, sha256 du DLL. `refresh` la compare au DLL
  *                        tiré pour décider d'un re-dump ; `extract-cs` la vérifie.
  *
+ * Et hors `.gamedata` : le bloc `client` de `data/curated/game-client.json`
+ * (version + build lus, date du dump), réécrit seul quand ils changent — la
+ * référence que lisent gear-solver et outerplane-tweaks, à committer avec le patch.
+ *
  * Prérequis : runtime .NET 10 (`dotnet --list-runtimes`), le jeu Steam installé.
  * Python + UnityPy pour la version applicative (sinon « inconnue », jamais devinée).
  * Chemin d'ilspycmd surchargeable via ILSPYCMD (le .dll du paquet).
@@ -39,9 +43,11 @@ import {
 import { resolve } from 'node:path';
 import { walkFiles } from '../lib/fs';
 import { isMain } from '../lib/is-main';
+import { writeJson } from '../lib/json';
 import { gamedata } from '../lib/paths';
 import { pythonToolingMissing } from '../lib/python';
 import { extractListings } from './extract-cs';
+import { GAME_CLIENT_PATH, nextGameClient, readGameClient } from './game-client';
 import { requireSteamInstall, type SteamInstall } from './steam';
 import { ILSPYCMD, ensureTool } from './tools';
 
@@ -98,7 +104,37 @@ function concatenate(srcDir: string, dest: string): number {
   return n;
 }
 
-export function dumpSteam(install: SteamInstall = requireSteamInstall()): void {
+/**
+ * Reporte le client lu dans `game-client.json` (bloc `client` seul, format
+ * canonique) et le dit ; la décision est `nextGameClient`, testée à part.
+ */
+async function recordGameClient(version: string, buildId: string | null): Promise<void> {
+  if (version === 'inconnue') {
+    console.warn(`  ⚠ ${GAME_CLIENT_PATH} non mis à jour — version applicative inconnue.`);
+    return;
+  }
+  if (!buildId) {
+    console.warn(
+      `  ⚠ ${GAME_CLIENT_PATH} non mis à jour — build Steam inconnu (install hors Steam).`,
+    );
+    return;
+  }
+  const file = readGameClient();
+  // Date LOCALE du dump (`sv-SE` = AAAA-MM-JJ), pas celle d'UTC.
+  const next = nextGameClient(file, version, buildId, new Date().toLocaleDateString('sv-SE'));
+  if (!next) {
+    console.log(`✓ ${GAME_CLIENT_PATH} : client ${version}, build ${buildId} — inchangé.`);
+    return;
+  }
+  await writeJson(GAME_CLIENT_PATH, next);
+  const was = file.client;
+  console.log(
+    `✏ ${GAME_CLIENT_PATH} : client ${was.version} → ${version}, build ${was.buildId} → ${buildId}` +
+      ' — à committer avec le patch.',
+  );
+}
+
+export async function dumpSteam(install: SteamInstall = requireSteamInstall()): Promise<void> {
   console.log(`🎮 Steam : ${install.root}${install.buildId ? ` (build ${install.buildId})` : ''}`);
   mkdirSync(APK_DIR, { recursive: true });
   copyFileSync(install.assemblyDll, DLL);
@@ -132,6 +168,7 @@ export function dumpSteam(install: SteamInstall = requireSteamInstall()): void {
     ) + '\n',
   );
   console.log(`✅ dump généré dans ${OUT}`);
+  await recordGameClient(version, install.buildId);
 
   // Les listings C# des specs damage suivent le dump à chaque patch. Un échec
   // ici doit se VOIR (méthode renommée) ; le dump
@@ -145,7 +182,7 @@ if (isMain(import.meta.url)) {
     if (!existsSync(resolve('datagen/extract/listings.json'))) {
       throw new Error('datagen/extract/listings.json introuvable.');
     }
-    dumpSteam();
+    await dumpSteam();
   } catch (e) {
     console.error('\n✗ datagen:dump a échoué :', e instanceof Error ? e.message : e);
     process.exit(1);

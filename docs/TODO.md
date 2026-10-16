@@ -701,6 +701,15 @@ les preuves et les décisions vivent dans le tri consolidé de sevih-tool
 
 ## 🧪 À jouer au prochain patch
 
+- [ ] **`game-client.json` a suivi le dump (lot A60)** : après le
+      `datagen:dump` du patch, le journal dit « data/curated/game-client.json :
+      client 1.4.18 → 1.4.x, build … → … — à committer avec le patch » (ou
+      « inchangé » si version et build n'ont pas bougé) ; son `git diff` ne
+      touche que le bloc `client` (version, `buildId`, `dumpedAt`), et le
+      fichier part dans le commit du patch — gear-solver et
+      outerplane-tweaks le recopient de `main`. « Version applicative
+      inconnue » au journal = UnityPy absent : rien d'écrit, poser le bloc à
+      la main d'après `.dump-stamp.json`.
 - [ ] **quick, section « Patch » — « Arrêter », à essayer une fois (lot
       C10)** : le cycle complet (Lancer, Dry-run, Promouvoir, Committer,
       Pousser) a été joué au patch du 14/10. Reste : « Arrêter » pendant le
