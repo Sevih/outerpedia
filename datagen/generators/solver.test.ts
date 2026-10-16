@@ -339,6 +339,8 @@ const CONTRACT_SHAPE: Record<string, Shape> = {
             s3ByLevel: '*',
             corePassive: '*',
           },
+          // B56, étape (a) : fusionnés seulement, à côté de `corePassive`.
+          opt: { corePassiveByFusion: '*' },
         },
         recommendSetId: '*',
       },

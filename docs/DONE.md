@@ -7,6 +7,125 @@
 
 ## 2026-10-16
 
+- **B55 — rétention des liens de partage : `last_access` sur `short_links`
+  et `tier_lists`, purge de ce qui n'a pas été relu depuis 12 mois.** Quoi :
+  les deux tables de partage ne perdaient jamais une ligne (audit
+  `docs/audit/plateforme.md` § S7, `created_at` jamais lu) ; décision de
+  Sevih du 15/10, un lien qu'on lit encore ne meurt pas. Comment, tout dans
+  `src/lib/hash-store.ts` (en-tête mis à jour) : `ensureTable` (toujours
+  mémoïsé, toujours remis à zéro sur échec) crée la table avec
+  `last_access TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP` et
+  `INDEX idx_last_access`, puis lit `information_schema.COLUMNS`
+  (`TABLE_SCHEMA = DATABASE()`, la table en paramètre lié) et, si la colonne
+  manque — cas des deux tables de prod, nées sans elle —, lance une fois
+  `ALTER TABLE … ADD COLUMN …, ADD INDEX …` ; les lignes existantes y
+  prennent l'heure de la migration, pas leur `created_at` (on ne sait pas si
+  elles ont été relues, commentaire dans le code). `touch(conn, id)` fait
+  l'`UPDATE … WHERE id = ? AND last_access < CURRENT_TIMESTAMP - INTERVAL 1
+DAY`, échec avalé (commentaire sur le cache devant le site : une heure pour
+  `/s/`, 5 min pour la tier-list). `purgeIfDue(conn)` lance
+  `DELETE … WHERE last_access < CURRENT_TIMESTAMP - INTERVAL 12 MONTH LIMIT
+1000`, au plus une fois par 24 h et par store dans le process
+  (`PURGE_INTERVAL_MS`, échéance posée avant la requête : deux accès
+  simultanés ne purgent pas deux fois, une purge ratée attend le lendemain),
+  rien tant que la table n'est pas prête, échec avalé ; la durée est
+  `RETENTION_MONTHS`, commentée « décision de Sevih, 15/10/2026 ».
+  `short-links.ts` et `tierlist/_store.ts` ré-exportent `touch` et
+  `purgeIfDue`. Les deux GET (`src/app/s/[id]/route.ts`,
+  `src/app/api/tierlist/[id]/route.ts`) marquent la ligne une fois la
+  réponse trouvée (pas sur un lien mort, pas sur un chemin refusé) ; les deux
+  POST (`api/shortlink`, `api/tierlist`) passent l'upsert à
+  `ON DUPLICATE KEY UPDATE last_access = CURRENT_TIMESTAMP` ; les quatre
+  appellent `purgeIfDue(conn)` dans leur `finally`, avant `conn.end()` :
+  réponse calculée, purge sur la connexion de la requête, puis rendu.
+  Vérification : `src/lib/hash-store.test.ts` (connexion factice qui note le
+  SQL : création avec colonne et index, `ALTER` une fois sans la colonne,
+  aucun avec, `ALTER` qui lève remet à zéro, `touch` et sa borne d'un jour,
+  purge seule sur deux accès du même jour puis de nouveau après 24 h en faux
+  minuteurs, échéances par store, purge qui lève avalée) ;
+  `src/app/s/[id]/route.test.ts` étendu et trois nouveaux
+  (`api/shortlink/route.test.ts`, `api/tierlist/route.test.ts`,
+  `api/tierlist/[id]/route.test.ts`) : GET → `UPDATE` avec la borne d'un
+  jour, un `UPDATE` qui lève ne change ni la redirection ni le `{ z }` (ni
+  leur `Cache-Control`) ; POST → upsert qui rafraîchit ; purge une fois par
+  jour, et une purge qui lève ne change pas la réponse. `pnpm typecheck` et
+  `pnpm lint` sans sortie après leur commande (`$ eslint`), `pnpm test`
+  `Tests 4011 passed (4011)` — un premier passage avait un test rouge hors de
+  ces fichiers, pendant qu'un lot parallèle modifiait le solver ; deux
+  passages suivants verts, et les 41 tests du lot verts trois fois de suite.
+  Aucun changement visible (réponses, statuts et en-têtes identiques, tenus
+  par les tests). Il n'y a pas de MySQL ici : la migration n'est vérifiée
+  qu'en SQL émis. Après le déploiement, Sevih regarde
+  `SHOW CREATE TABLE short_links` et `SHOW CREATE TABLE tier_lists`
+  (colonne `last_access` et clé `idx_last_access`), puis
+  `SELECT COUNT(*), MIN(last_access)` sur les deux (le `MIN` doit être
+  l'heure de la migration). Laissé : deux process qui migrent en même temps
+  — le second `ALTER` lèverait (colonne en double), sa requête rendrait 500
+  et la suivante relirait le schéma ; la prod n'a qu'un process.
+
+- **Contrat solver, persos : noyau par niveau de fusion avec la vitesse en
+  taux, filtre des passifs de compétence (B56).** Quoi : chaque fusionné
+  (ligne de `CharacterFusionTemplet`) reçoit dans ses `ingredients` un
+  champ `corePassiveByFusion`, après `corePassive` : un bloc par niveau de
+  fusion, clés `"1"` à `"5"` toutes présentes, au niveau de `Skill_23` que
+  donne `CharacterFusionLevelTemplet.Skill_23_Level` (1 aux fusions 1 à 4,
+  2 à la fusion 5), bloc à zéro quand le niveau n'a pas de buff de fiche,
+  jamais de repli. Forme `StatBlock` plus `spdPct` : la vitesse
+  `OAT_RATE` y va en taux brut (4,3 pour Snow et Lisha), `spd` n'y porte
+  que du plat. `corePassive` reste tel quel (niveau max, vitesse cuite :
+  Snow `spd` 6), les versions installées le lisent ; `schema` reste à 1,
+  étape (a) de la règle d'évolution. Pourquoi : le client prend `Skill_23`
+  au niveau du palier de fusion (`CSkillManager.Create`, audit des formules
+  § 3) — Notia n'a EFF +50 % qu'à la fusion 5, gear-solver le lui donnait
+  partout — et met la vitesse en % dans `m_nBuffValueRate`, appliqué à la
+  stat courante entière, équipement compris, avec troncature
+  (`CFormula.CalcFinalStat`, § 5 ; revue de cloisonnement § 3.1). Une fois
+  le taux lu par gear-solver, Snow fusionné sans équipement donnera
+  `trunc(blanc × 1043 / 1000)` = 138 / 141 / 144 aux lv1 / 20 / 40 (139 /
+  142 / 145 aujourd'hui), et 197 avec +40 de vitesse plate (200
+  aujourd'hui). Comment, dans `datagen/generators/solver-ingredients.ts` :
+  le prédicat de C20, `isStatSheetBuff`, remplace les filtres de
+  `extractSkillPassiveByLevel` (qui exigeait `ME`, condition `NONE`,
+  `TurnDuration -1`) et de `applyPremiumBuff` (classe et Skill_8 : type et
+  condition) ; les geas gardent leur filtre. `applyStatBonus` reçoit un
+  mode pour la vitesse en taux : `bake` (le plat cuit de `corePassive`),
+  `rate` (`spdPct` de `corePassiveByFusion`), `reject` partout ailleurs
+  (classe, S1-S3, Skill_8, geas) : le générateur jette, au modèle de la
+  garde des sub-ticks, avec un message qui demande d'abord un champ en
+  taux pour ce bloc. Les évolutions n'ont pas de colonne d'`ApplyingType`
+  (plates par construction), un commentaire le dit. La table de fusion
+  passe par `IngredientsTables.fusionLevelTemplet` (appelant `solver.ts`) ;
+  `CharacterIngredients` gagne le champ facultatif, `char-progression.ts`
+  compile sans changement ; l'en-tête du module dit les deux encodages et
+  lequel est l'ancien. Vérifié : `data/generated` propre avant,
+  `pnpm datagen:sync-derived` ne change que `solver/characters.json` (les
+  six fusionnés gagnent le champ) et `solver/version.json` (hash
+  `6eaf3ea360b7`), `damage/` intact, aucune garde déclenchée ; script
+  jetable hors dépôt : `characters.json` sans `corePassiveByFusion`
+  comparé à l'ancien, « identique sans le champ : True » — zéro changement
+  du nouveau filtre. Valeurs : Notia fusions 1 à 4 à zéro, fusion 5
+  `effRate` 50 ; Snow et Lisha `atkPct` 10,2, `defPct` 2,7, `hpPct` 12,5,
+  `spdPct` 4,3, `spd` 0 aux cinq niveaux ; Veronica, Eternal, Epsilon cinq
+  blocs à zéro. Tests sans `.gamedata` : dans `solver-ingredients.test.ts`,
+  tables fabriquées (palier de Notia, taux de Snow et plat cuit 6, fusionné
+  sans buff, `MY_TEAM` et buff conditionnel gardés, `ON_SPAWN` écarté,
+  garde qui jette en S2 et en classe) et lecture du `characters.json`
+  committé ; `solver.test.ts` déclare la clé dans `CONTRACT_SHAPE`
+  (facultative). `pnpm typecheck` sans erreur (dernière ligne, les trois
+  `tsc --noEmit` enchaînés), `pnpm lint` sans sortie (`$ eslint`),
+  `pnpm test` `Tests 4011 passed (4011)` ; l'oracle passe sans être
+  régénéré, aucun changement visuel (la fiche lit toujours `corePassive`).
+  Laissé : la fiche du wiki (`sheetPassives`, `blockToParts`) et
+  l'oracle, à basculer quand gear-solver lira le champ ; le retrait de
+  `corePassive` (étape (c), `schema` 2) ; les niveaux S1-S3 d'un fusionné.
+  Signalé sans y toucher : `extractSkill8ByLevel` prend le plus haut niveau
+  de buff, le client le plus haut `Level ≤` niveau de la compétence —
+  sans effet sur les tables (aucun buff de Skill_8 n'a de niveau au-delà
+  de celui de sa ligne). Pour gear-solver (lot à part) : lire
+  `ingredients.corePassiveByFusion[<fusion>]` (niveau de fusion capturé)
+  à la place de `corePassive`, `spdPct` appliqué en taux de buff dans
+  `calcFinalStat` ; Sevih : `npm run data:sync` dans gear-solver.
+
 - **Relecture des lots B53, A60, G3 et OB2 (Opus) — effets de combat des
   sets dans le contrat, référence commune du client Steam, niveau de set
   lu du contrat dans gear-solver, reviews du bot indexées par id ; validés,

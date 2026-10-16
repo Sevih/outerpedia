@@ -877,6 +877,7 @@ export function buildSolver(inputs: {
     awakLevels: loadTable('CharacterAwakeningLevelTemplet'),
     awakNodes: loadTable('CharacterAwakeningNodeTemplet'),
     fusionTemplet,
+    fusionLevelTemplet: loadTable('CharacterFusionLevelTemplet'),
   });
   emit('codex-curve.json', ingredientsResult.codexByLevel satisfies CodexLevel[]);
 

@@ -9,12 +9,25 @@
  * les blocs BRUTS par source. Règles d'encodage (contrat, NE PAS « corriger ») :
  *   - CHC/CHD/PEN/DMG± : per-mille ÷10 → points de %
  *   - ATK/DEF/HP OAT_RATE → atkPct/defPct/hpPct ; OAT_ADD → flat
- *   - SPD OAT_RATE → flat PRÉ-CUIT contre `baseForRate.spd` (baseline constante
- *     par perso, l'approximation est exacte) ; EFF/RES OAT_RATE → effRate/resRate
- *     (le composeur les applique via BuffValueRate — cf. le cas Notia +50% EFF)
+ *   - SPD OAT_RATE, deux encodages (seul le noyau d'un Core Fusion en porte) :
+ *       · ANCIEN, `corePassive` : flat PRÉ-CUIT contre `baseForRate.spd` (vitesse
+ *         lv100 + évos max). Faux sous lv60 et avec de la vitesse d'équipement :
+ *         le client met ce taux dans `m_nBuffValueRate`, qui multiplie la stat
+ *         courante ENTIÈRE, équipement compris, avec troncature
+ *         (`CFormula.CalcFinalStat`). Gardé tel quel : les versions installées
+ *         de gear-solver le lisent (étape (a), en-tête de `solver.ts`) ;
+ *       · NOUVEAU, `corePassiveByFusion` : taux brut en points de % dans
+ *         `spdPct`, `spd` n'y porte que du plat.
+ *     Dans tout autre bloc, un SPD OAT_RATE de fiche fait JETER le générateur :
+ *     il y serait cuit, il lui faut d'abord un champ en taux ;
+ *   - EFF/RES OAT_RATE → effRate/resRate (le composeur les applique via
+ *     BuffValueRate — cf. le cas Notia +50% EFF)
+ *   - buffs de compétence (classe, S1-S3, Skill_8, noyau) : le filtre du client,
+ *     `isStatSheetBuff` (ni condition ni durée regardées)
  *
  * ⚠ Sortie pour l'app externe : enums moteur bruts, AUCUN slug wiki.
  */
+import { isStatSheetBuff } from '../lib/buff';
 import { bool, type Row } from '../lib/tables';
 
 const ELEMENT_INDEX: Record<string, number> = {
@@ -95,10 +108,25 @@ function zeroStats(): StatBlock {
     hpPct: 0,
   };
 }
-function isEmpty(s: StatBlock): boolean {
-  for (const k of Object.keys(s) as (keyof StatBlock)[]) if (s[k] !== 0) return false;
+/** Bloc du noyau par niveau de fusion : `spdPct` = SPD OAT_RATE en taux brut (points de %). */
+export interface RateStatBlock extends StatBlock {
+  spdPct: number;
+}
+/** Bloc en cours de remplissage : `spdPct` n'y apparaît qu'en mode `rate`. */
+type WorkBlock = StatBlock & { spdPct?: number };
+function isEmpty(s: WorkBlock): boolean {
+  for (const k of Object.keys(s) as (keyof WorkBlock)[]) if (s[k] !== 0) return false;
   return true;
 }
+
+/**
+ * Sort d'un SPD OAT_RATE selon le bloc qui le reçoit (cf. en-tête) :
+ * `bake` = ancien encodage, cuit en plat contre `spd` (`corePassive` seul) ;
+ * `rate` = taux brut dans `spdPct` (`corePassiveByFusion`) ; `reject` = tout
+ * autre bloc, le générateur jette.
+ */
+type SpdRateMode =
+  { kind: 'bake'; spd: number } | { kind: 'rate' } | { kind: 'reject'; block: string };
 
 /** Index par clé (tri optionnel) — évite les `.filter()` par perso sur des tables à milliers de lignes. */
 function indexBy(rows: Row[], keyField: string, sortField?: string): Map<string, Row[]> {
@@ -164,6 +192,8 @@ function extractBase(row: Row): BaseStats {
 }
 
 // Ajouts d'évolution par EvolutionLevel (cumulés côté app selon le TransStar capturé).
+// La table n'a pas d'ApplyingType : un apport d'évolution est plat par construction,
+// aucun SPD OAT_RATE ne peut y arriver.
 function extractEvoByLevel(evoRows: Row[] | undefined): Record<string, StatBlock> {
   const out: Record<string, StatBlock> = {};
   if (!evoRows) return out;
@@ -257,11 +287,11 @@ function extractTranscendByStar(
  * Partagé buffs/geas — mêmes règles d'encodage (cf. en-tête).
  */
 function applyStatBonus(
-  dest: StatBlock,
+  dest: WorkBlock,
   statType: string | undefined,
   applying: string | undefined,
   value: number,
-  baseForRate: { spd: number },
+  spdRate: SpdRateMode,
 ): void {
   const rate = applying === 'OAT_RATE';
   const add = applying === 'OAT_ADD';
@@ -295,8 +325,19 @@ function applyStatBonus(
       else dest.hp += value;
       return;
     case 'ST_SPEED':
-      if (rate) dest.spd += Math.floor((baseForRate.spd * value) / 1000);
-      else dest.spd += value;
+      if (!rate) dest.spd += value;
+      else if (spdRate.kind === 'bake') dest.spd += Math.floor((spdRate.spd * value) / 1000);
+      else if (spdRate.kind === 'rate') dest.spdPct = (dest.spdPct ?? 0) + value / 10;
+      else {
+        // Le client applique ce taux à la stat courante entière (`CalcFinalStat`) :
+        // cuit ici, il serait faux sous lv100 et avec l'équipement. Il doit casser
+        // ICI, pas partir cuit en silence chez gear-solver.
+        throw new Error(
+          `solver : SPD OAT_RATE ${value} ‰ dans ${spdRate.block} — seul le noyau ` +
+            `(corePassiveByFusion.spdPct) porte la vitesse en taux : ajouter d'abord un champ ` +
+            `en taux pour ce bloc (étape (a), en-tête de datagen/generators/solver.ts)`,
+        );
+      }
       return;
     case 'ST_BUFF_CHANCE':
       if (rate) dest.effRate += value / 10;
@@ -309,17 +350,16 @@ function applyStatBonus(
   }
 }
 
-function applyPremiumBuff(dest: StatBlock, buff: Row, baseForRate: { spd: number }): void {
-  if (buff.Type !== 'BT_STAT_PREMIUM') return;
-  if ((buff.BuffConditionType ?? 'NONE') !== 'NONE') return;
-  applyStatBonus(dest, buff.StatType, buff.ApplyingType, num(buff.Value), baseForRate);
+/** Buff de compétence : versé à la fiche s'il en est un (`isStatSheetBuff`, filtre du client). */
+function applyPremiumBuff(dest: WorkBlock, buff: Row, spdRate: SpdRateMode): void {
+  if (!isStatSheetBuff(buff)) return;
+  applyStatBonus(dest, buff.StatType, buff.ApplyingType, num(buff.Value), spdRate);
 }
 
 function extractClassPassive(
   row: Row,
   skillsByID: Map<string, Row[]>,
   buffsByID: Map<string, Row[]>,
-  baseForRate: { spd: number },
 ): StatBlock {
   const out = zeroStats();
   const skillId = row.Skill_22;
@@ -327,30 +367,29 @@ function extractClassPassive(
   const levelRow = pickSkillLevelRow(skillsByID.get(String(skillId)));
   for (const bid of splitCsv(levelRow?.BuffID)) {
     const b = pickMaxBuff(buffsByID.get(bid));
-    if (b) applyPremiumBuff(out, b, baseForRate);
+    if (b) applyPremiumBuff(out, b, { kind: 'reject', block: `classPassive (${skillId})` });
   }
   return out;
 }
 
 /**
- * Un StatBlock par SkillLevel : la contribution PASSIVE PERMANENTE self au
- * niveau donné. Convention plancher : plus haut BuffLevel ≤ SkillLv (Ame S2
- * Lv5 → BuffLv4). Filtre STRICT : BT_STAT_PREMIUM + ME + PASSIVE + Cond NONE
- * + TurnDuration=-1 (les modificateurs de combat ne touchent pas la fiche).
+ * Un bloc par SkillLevel : la contribution des buffs de fiche au niveau donné.
+ * Convention plancher : plus haut BuffLevel ≤ SkillLv (Ame S2 Lv5 → BuffLv4).
+ * Filtre du client (`isStatSheetBuff`) : ni condition ni durée regardées.
  */
 function extractSkillPassiveByLevel(
   skillId: string | undefined,
   skillsByID: Map<string, Row[]>,
   buffsByID: Map<string, Row[]>,
-  baseForRate: { spd: number },
-): Record<string, StatBlock> {
+  spdRate: SpdRateMode,
+): Record<string, WorkBlock> {
   if (!skillId) return {};
   const rows = skillsByID.get(String(skillId));
   if (!rows || rows.length === 0) return {};
-  const out: Record<string, StatBlock> = {};
+  const out: Record<string, WorkBlock> = {};
   for (const row of rows) {
     const skillLv = num(row.SkillLevel);
-    const dest = zeroStats();
+    const dest: WorkBlock = zeroStats();
     for (const bid of splitCsv(row.BuffID)) {
       const bRows = buffsByID.get(bid);
       if (!bRows || bRows.length === 0) continue;
@@ -359,13 +398,7 @@ function extractSkillPassiveByLevel(
         if (num(b.Level) <= skillLv) chosen = b;
         else break;
       }
-      const ok =
-        chosen.Type === 'BT_STAT_PREMIUM' &&
-        chosen.TargetType === 'ME' &&
-        chosen.BuffCreateType === 'PASSIVE' &&
-        (chosen.BuffConditionType ?? 'NONE') === 'NONE' &&
-        chosen.TurnDuration === '-1';
-      if (ok) applyPremiumBuff(dest, chosen, baseForRate);
+      applyPremiumBuff(dest, chosen, spdRate);
     }
     if (!isEmpty(dest)) out[String(skillLv)] = dest;
   }
@@ -378,7 +411,6 @@ function extractSkill8ByLevel(
   skillsByID: Map<string, Row[]>,
   buffsByID: Map<string, Row[]>,
   transcendByStar: Record<string, TranscendStar>,
-  baseForRate: { spd: number },
 ): Record<string, StatBlock> {
   const out: Record<string, StatBlock> = {};
   const skillId = row.Skill_8;
@@ -395,19 +427,14 @@ function extractSkill8ByLevel(
     const dest = zeroStats();
     for (const bid of splitCsv(levelRow.BuffID)) {
       const b = pickMaxBuff(buffsByID.get(bid));
-      if (b) applyPremiumBuff(dest, b, baseForRate);
+      if (b) applyPremiumBuff(dest, b, { kind: 'reject', block: `skill8ByLevel (${skillId})` });
     }
     if (!isEmpty(dest)) out[String(lvl)] = dest;
   }
   return out;
 }
 
-function accumulateGeasBonus(
-  dest: StatBlock,
-  levelRow: Row,
-  buffsByID: Map<string, Row[]>,
-  baseForRate: { spd: number },
-): void {
+function accumulateGeasBonus(dest: StatBlock, levelRow: Row, buffsByID: Map<string, Row[]>): void {
   let statType = levelRow.StatType ?? 'ST_NONE';
   let applying = levelRow.ApplyingType ?? 'OAT_NONE';
   let value = num(levelRow.OptionValue);
@@ -422,7 +449,10 @@ function accumulateGeasBonus(
     condition = b.BuffConditionType ?? 'NONE';
   }
   if (condition !== 'NONE') return;
-  applyStatBonus(dest, statType, applying, value, baseForRate);
+  applyStatBonus(dest, statType, applying, value, {
+    kind: 'reject',
+    block: `geasByNode (niveau ${levelRow.ID})`,
+  });
 }
 
 export interface GeasNode {
@@ -436,7 +466,6 @@ function extractGeasByNode(
   awakNodes: Row[],
   awakLevelsByGroup: Map<string, Map<number, Row>>,
   buffsByID: Map<string, Row[]>,
-  baseForRate: { spd: number },
 ): Record<string, GeasNode> {
   const elemIdx = ELEMENT_INDEX[row.Element ?? ''] ?? -1;
   const classIdx = CLASS_INDEX[row.Class ?? ''] ?? -1;
@@ -457,7 +486,7 @@ function extractGeasByNode(
     let source: 'stat' | 'buff' | null = null;
     for (const [lvl, lvlRow] of inner) {
       const dest = zeroStats();
-      accumulateGeasBonus(dest, lvlRow, buffsByID, baseForRate);
+      accumulateGeasBonus(dest, lvlRow, buffsByID);
       if (!isEmpty(dest)) {
         perLevel[String(lvl)] = dest;
         if (source === null) source = lvlRow.OptionType === 'IOT_BUFF' ? 'buff' : 'stat';
@@ -480,6 +509,8 @@ export interface CharacterIngredients {
   s2ByLevel: Record<string, StatBlock>;
   s3ByLevel: Record<string, StatBlock>;
   corePassive: StatBlock | null;
+  /** Fusionnés seulement : noyau (`Skill_23`) au niveau de chaque niveau de fusion, clés `"1"`…`"5"`. */
+  corePassiveByFusion?: Record<string, RateStatBlock>;
 }
 
 export interface IngredientsTables {
@@ -492,6 +523,7 @@ export interface IngredientsTables {
   awakLevels: Row[];
   awakNodes: Row[];
   fusionTemplet: Row[];
+  fusionLevelTemplet: Row[];
 }
 
 /** Bundles d'ingrédients par perso + la courbe codex globale. */
@@ -509,6 +541,7 @@ export function computeCharacterIngredients(tables: IngredientsTables): {
     awakLevels,
     awakNodes,
     fusionTemplet,
+    fusionLevelTemplet,
   } = tables;
 
   const codexByLevel = extractCodexCurve(archiveStats);
@@ -517,6 +550,7 @@ export function computeCharacterIngredients(tables: IngredientsTables): {
   const skillsByID = indexBy(skillLevels, 'SkillID', 'SkillLevel');
   const evosByCharId = indexBy(evoStats, 'CharacterID');
   const transcendByCharId = indexBy(transcendent, 'CharacterID');
+  const fusionLevelsByGroup = indexBy(fusionLevelTemplet, 'FusionGroupID', 'FusionLevel');
   const awakLevelsByGroup = new Map<string, Map<number, Row>>();
   for (const r of awakLevels) {
     const gid = r.AwakeningLevelGroupID;
@@ -546,12 +580,13 @@ export function computeCharacterIngredients(tables: IngredientsTables): {
     // (Snow, Lisha, Veronica, lv100, 09/10/2026).
     const base = extractBase(templetById.get(evoCharId) ?? row);
     const evoByLevel = extractEvoByLevel(evosByCharId.get(evoCharId));
-    // Seul `spd` est encore consommé (SPD OAT_RATE pré-cuit sur lv100 max + évo max).
+    // Seul `spd` est encore consommé (SPD OAT_RATE pré-cuit de `corePassive`, sur
+    // lv100 max + évo max).
     const evoMax = zeroStats();
     for (const k of Object.keys(evoByLevel)) {
       for (const f of Object.keys(evoMax) as (keyof StatBlock)[]) evoMax[f] += evoByLevel[k][f];
     }
-    const baseForRate = { spd: base.spd.max + evoMax.spd };
+    const bakeSpd: SpdRateMode = { kind: 'bake', spd: base.spd.max + evoMax.spd };
     // Transcendance d'un fusionné : échelle de l'origine, à partir de sa propre étoile.
     const transcendByStar = fusionRow
       ? extractTranscendByStar(
@@ -561,24 +596,38 @@ export function computeCharacterIngredients(tables: IngredientsTables): {
           basicStar,
         )
       : extractTranscendByStar(transcendByCharId, basicStar, id);
-    const classPassive = extractClassPassive(row, skillsByID, buffsByID, baseForRate);
-    const skill8ByLevel = extractSkill8ByLevel(
-      row,
-      skillsByID,
-      buffsByID,
-      transcendByStar,
-      baseForRate,
-    );
-    const geasByNode = extractGeasByNode(row, awakNodes, awakLevelsByGroup, buffsByID, baseForRate);
-    const s1ByLevel = extractSkillPassiveByLevel(row.Skill_1, skillsByID, buffsByID, baseForRate);
-    const s2ByLevel = extractSkillPassiveByLevel(row.Skill_2, skillsByID, buffsByID, baseForRate);
-    const s3ByLevel = extractSkillPassiveByLevel(row.Skill_3, skillsByID, buffsByID, baseForRate);
-    // Core fusion (2700xxx) : passif Skill_23 émis en un bloc au niveau max.
+    const classPassive = extractClassPassive(row, skillsByID, buffsByID);
+    const skill8ByLevel = extractSkill8ByLevel(row, skillsByID, buffsByID, transcendByStar);
+    const geasByNode = extractGeasByNode(row, awakNodes, awakLevelsByGroup, buffsByID);
+    const skillByLevel = (slot: 'Skill_1' | 'Skill_2' | 'Skill_3') =>
+      extractSkillPassiveByLevel(row[slot], skillsByID, buffsByID, {
+        kind: 'reject',
+        block: `${slot} (${row[slot]})`,
+      });
+    const s1ByLevel = skillByLevel('Skill_1');
+    const s2ByLevel = skillByLevel('Skill_2');
+    const s3ByLevel = skillByLevel('Skill_3');
+    // Core fusion (2700xxx) : passif Skill_23 émis en un bloc au niveau max
+    // (ancien encodage, SPD cuite — cf. en-tête).
     let corePassive: StatBlock | null = null;
     if (/^2700\d{3}$/.test(id) && row.Skill_23) {
-      const byLv = extractSkillPassiveByLevel(row.Skill_23, skillsByID, buffsByID, baseForRate);
+      const byLv = extractSkillPassiveByLevel(row.Skill_23, skillsByID, buffsByID, bakeSpd);
       const levels = Object.keys(byLv).map(Number);
       if (levels.length) corePassive = byLv[String(Math.max(...levels))];
+    }
+    // Le client prend Skill_23 au niveau `Skill_23_Level` du niveau de fusion
+    // (`CSkillManager.Create`) : un bloc par ligne de `CharacterFusionLevelTemplet`
+    // du groupe. Un niveau sans buff de fiche vaut zéro, jamais de repli.
+    let corePassiveByFusion: Record<string, RateStatBlock> | undefined;
+    if (fusionRow) {
+      const byLv = extractSkillPassiveByLevel(row.Skill_23, skillsByID, buffsByID, {
+        kind: 'rate',
+      });
+      corePassiveByFusion = {};
+      for (const lv of fusionLevelsByGroup.get(fusionRow.FusionGroupID ?? '') ?? []) {
+        const block = byLv[String(num(lv.Skill_23_Level))] ?? zeroStats();
+        corePassiveByFusion[String(num(lv.FusionLevel))] = { ...block, spdPct: block.spdPct ?? 0 };
+      }
     }
     characters[id] = {
       base,
@@ -591,6 +640,7 @@ export function computeCharacterIngredients(tables: IngredientsTables): {
       s2ByLevel,
       s3ByLevel,
       corePassive,
+      ...(corePassiveByFusion ? { corePassiveByFusion } : {}),
     };
   }
   return { codexByLevel, characters };

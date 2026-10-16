@@ -51,8 +51,11 @@ les preuves et les décisions vivent dans le tri consolidé de sevih-tool
       outerpedia (A56) et lu par gear-solver (G1, 15/10) ; reste la release
       de gear-solver. C1, M2, M3 et O5 FAITS côté outerpedia (C20, 16/10),
       lecture côté gear-solver à publier ; `combatEffects` FAIT côté
-      outerpedia (B53, 16/10), affichage côté gear-solver à faire ; restent le
-      noyau par niveau et la vitesse en % (B56), `stat-keys.json`.
+      outerpedia (B53, 16/10), affichage côté gear-solver à faire ; noyau
+      par niveau et vitesse en % FAITS côté contrat (B56, 16/10,
+      `corePassiveByFusion`), restent sa lecture par gear-solver, puis la
+      fiche du wiki avec l'oracle, puis le retrait de `corePassive` ;
+      `stat-keys.json`.
 - [ ] **Suites de la rédaction des lots du 15/10** (lots rédigés : C18 à
       C25, B51, B53 à B57, A58 à A60, F27, G2 à G6, OB1, OB2, TW1) :
       adversité absente du guide des tours (`TowerGuide.tsx` l.163 et 187 ne
