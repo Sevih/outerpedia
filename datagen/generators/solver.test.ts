@@ -11,12 +11,21 @@
  *      `{schema, resVersion, hash, builtAt}` : `schema` = `SOLVER_SCHEMA`,
  *      `resVersion` = celle de `game-version.json`, `hash` une clé
  *      d'invalidation valide (12 hexa).
+ *   3. CLÉS : `CONTRACT_SHAPE` décrit chaque fichier émis (clés obligatoires et
+ *      facultatives d'une entrée et des blocs imbriqués connus) ; un fichier ou
+ *      une clé en plus ou en moins casse le test. Règle (en-tête de `solver.ts`) :
+ *      un AJOUT se déclare dans `CONTRACT_SHAPE`, `schema` inchangé ; un retrait,
+ *      un renommage ou un changement de sens monte `SOLVER_SCHEMA` et attend
+ *      qu'une version de gear-solver qui le lit soit publiée — (a) → (b) → (c).
  *
  * Tourne SANS `.gamedata` (contrainte CI) : rien n'appelle `buildSolver()`.
  */
+import { readdirSync, readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import charactersData from '../../data/generated/solver/characters.json';
 import eePassivesData from '../../data/generated/solver/ee-passives.json';
+import equipmentPassivesData from '../../data/generated/solver/equipment-passives.json';
 import enhanceData from '../../data/generated/solver/enhance.json';
 import equipmentData from '../../data/generated/solver/equipment.json';
 import expCharacterData from '../../data/generated/solver/exp-character.json';
@@ -65,14 +74,30 @@ const enhance = enhanceData as {
   singularity: { activation: number; steps: number[] };
   expCurves: Record<string, number[]>;
 };
+type StatEntry = { st: string; ap?: string; v: number };
 const sets = setsData as Record<
   string,
   {
     name: string | null;
-    levels: { level: number; p2_desc: string | null; p4_desc: string | null }[];
+    levels: {
+      level: number;
+      p2: StatEntry | null;
+      p4: StatEntry | null;
+      p2_desc: string | null;
+      p4_desc: string | null;
+      breakLimitCounts: number[];
+      ignoreLowSet: boolean;
+    }[];
   }
 >;
-const eePassives = eePassivesData as Record<string, { levelThreshold: number; v: number }[]>;
+const eePassives = eePassivesData as Record<
+  string,
+  { levelThreshold: number; st?: string; ap?: string; v: number }[]
+>;
+const equipmentPassives = equipmentPassivesData as Record<
+  string,
+  { name: string | null; textByTier: string[]; statsByTier?: StatEntry[][] }
+>;
 const heroGrowth = heroGrowthData as { xpCurve: number[]; affinityCurve: number[] };
 
 const SLOTS = new Set([
@@ -256,5 +281,319 @@ describe('singleValue (constantes lues des tables)', () => {
   it('jette sur une colonne vide ou non numérique', () => {
     expect(() => singleValue([], 'x')).toThrow();
     expect(() => singleValue([Number.NaN], 'x')).toThrow();
+  });
+});
+
+// ---- forme du contrat : chaque clé émise est déclarée ici -----------------------
+/**
+ * `'*'` = feuille non décrite (nombre, chaîne, booléen, null) ; `obj` = clés
+ * fixes (`opt` : facultatives) ; `rec` = `Record<id, …>` ; `arr` = tableau.
+ * `null` est accepté à toute place (`p2: null`, `ingredients: null`…).
+ */
+type Shape =
+  | '*'
+  | { obj: Record<string, Shape>; opt?: Record<string, Shape> }
+  | { rec: Shape }
+  | { arr: Shape };
+
+const STAT: Shape = { obj: { st: '*', ap: '*', v: '*' } };
+const CONTRACT_SHAPE: Record<string, Shape> = {
+  'archive-bonus.json': { arr: { obj: { requiredCount: '*', level: '*' } } },
+  'buffs.json': {
+    rec: { arr: { obj: { st: '*', ap: '*', v: '*' }, opt: { combatOnly: '*', name: '*' } } },
+  },
+  'characters.json': {
+    rec: {
+      obj: {
+        name: '*',
+        nickname: '*',
+        cls: '*',
+        element: '*',
+        star: '*',
+        ingredients: {
+          obj: {
+            base: '*',
+            evoByLevel: '*',
+            transcendByStar: '*',
+            classPassive: '*',
+            skill8ByLevel: '*',
+            geasByNode: '*',
+            s1ByLevel: '*',
+            s2ByLevel: '*',
+            s3ByLevel: '*',
+            corePassive: '*',
+          },
+        },
+        recommendSetId: '*',
+      },
+      opt: {
+        dmgStat: '*',
+        dmgSec: '*',
+        noCrit: '*',
+        bestSkill: { obj: { slot: '*', factor: '*' }, opt: { burst: '*', unresolvedHits: '*' } },
+      },
+    },
+  },
+  'char-level-max.json': {
+    rec: { obj: { requireLevel: '*', maxLevel: '*', statModifierAfter100: '*' } },
+  },
+  'codex-curve.json': { arr: { obj: { atkPct: '*', defPct: '*', hpPct: '*' } } },
+  'ee-passives.json': { rec: { arr: { obj: { levelThreshold: '*', st: '*', ap: '*', v: '*' } } } },
+  'enhance.json': {
+    obj: {
+      enhanceFactor: '*',
+      tierFactor: '*',
+      maxEnhanceLevel: '*',
+      singularity: { obj: { activation: '*', steps: { arr: '*' } } },
+      expCurves: { rec: { arr: '*' } },
+    },
+  },
+  'equipment.json': {
+    rec: {
+      obj: {
+        slot: '*',
+        grade: '*',
+        star: '*',
+        classLimit: '*',
+        setId: '*',
+        armorSetId: '*',
+        name: '*',
+        mainGroup: '*',
+        subGroup: '*',
+        image: '*',
+        effectIcon: '*',
+        armorSetIcon: '*',
+        class: '*',
+      },
+    },
+  },
+  'equipment-passives.json': {
+    rec: {
+      obj: { name: '*', textByTier: { arr: '*' } },
+      opt: { statsByTier: { arr: { arr: STAT } } },
+    },
+  },
+  'exp-character.json': { arr: '*' },
+  'gems.json': { rec: { obj: { type: '*', level: '*', st: '*', ap: '*', v: '*' } } },
+  'multi-tier-passives.json': {
+    rec: {
+      obj: { name: '*', tiers: { arr: { obj: { unlockLevel: '*', isAdd: '*', desc: '*' } } } },
+    },
+  },
+  'options.json': { rec: { obj: {}, opt: { st: '*', ap: '*', v: '*', buffId: '*' } } },
+  'sets.json': {
+    rec: {
+      obj: {
+        name: '*',
+        desc: '*',
+        levels: {
+          arr: {
+            obj: {
+              level: '*',
+              p2: STAT,
+              p4: STAT,
+              p2_desc: '*',
+              p4_desc: '*',
+              breakLimitCounts: { arr: '*' },
+              ignoreLowSet: '*',
+            },
+          },
+        },
+      },
+    },
+  },
+  'singularity-options.json': {
+    rec: { obj: { st: '*', ap: '*', v: '*', name: '*', desc: '*', combatOnly: '*' } },
+  },
+  'sub-ticks.json': {
+    rec: {
+      obj: {},
+      opt: Object.fromEntries(
+        ['atk', 'atkPct', 'def', 'defPct', 'hp', 'hpPct'].map((k) => [
+          k,
+          { obj: { step: '*', percent: '*' } },
+        ]),
+      ),
+    },
+  },
+  'trust-buffs.json': {
+    arr: { obj: { tier: '*', buffId: '*', stat: '*', apply: '*', value: '*' } },
+  },
+  'trust-character.json': { arr: '*' },
+  'version.json': { obj: { schema: '*', resVersion: '*', hash: '*', builtAt: '*' } },
+};
+
+/** Écarts de forme, un par chemin générique (`*` = un id, `[]` = un élément). */
+function shapeErrors(value: unknown, shape: Shape, path: string, out: Set<string>): void {
+  if (shape === '*' || value === null) return;
+  if ('arr' in shape) {
+    if (!Array.isArray(value)) out.add(`${path} : tableau attendu`);
+    else for (const v of value) shapeErrors(v, shape.arr, `${path}[]`, out);
+    return;
+  }
+  if (typeof value !== 'object' || Array.isArray(value)) {
+    out.add(`${path} : objet attendu`);
+    return;
+  }
+  const o = value as Record<string, unknown>;
+  if ('rec' in shape) {
+    for (const v of Object.values(o)) shapeErrors(v, shape.rec, `${path} › *`, out);
+    return;
+  }
+  const opt = shape.opt ?? {};
+  for (const k of Object.keys(shape.obj))
+    if (!(k in o)) out.add(`${path} : clé obligatoire « ${k} » absente`);
+  for (const [k, v] of Object.entries(o)) {
+    const sub = shape.obj[k] ?? opt[k];
+    if (sub === undefined) out.add(`${path} : clé « ${k} » non déclarée`);
+    else shapeErrors(v, sub, `${path}.${k}`, out);
+  }
+}
+
+const SHAPE_RULE =
+  'Forme du contrat solver changée. Un AJOUT se déclare dans CONTRACT_SHAPE ' +
+  '(solver.test.ts), `schema` inchangé. Un retrait, un renommage ou un changement ' +
+  'de sens monte SOLVER_SCHEMA et attend la release de gear-solver qui le lit : ' +
+  '(a) → (b) → (c), en-tête de datagen/generators/solver.ts.';
+
+describe('solver — forme du contrat (clés déclarées, règle (a) → (b) → (c))', () => {
+  const dir = resolve('data/generated/solver');
+
+  it('les fichiers émis sont exactement ceux de CONTRACT_SHAPE', () => {
+    const files = readdirSync(dir)
+      .filter((f) => f.endsWith('.json'))
+      .sort();
+    expect(files, SHAPE_RULE).toEqual(Object.keys(CONTRACT_SHAPE).sort());
+  });
+
+  it.each(Object.keys(CONTRACT_SHAPE))('%s : ni clé en plus ni clé en moins', (file) => {
+    const data: unknown = JSON.parse(readFileSync(resolve(dir, file), 'utf8'));
+    const errors = new Set<string>();
+    shapeErrors(data, CONTRACT_SHAPE[file], file, errors);
+    expect([...errors], SHAPE_RULE).toEqual([]);
+  });
+});
+
+// ---- C1 : un effet de combat de set (IOT_BUFF) n'est pas une stat de fiche -------
+describe('solver — sets : p2 / p4 = stats de fiche seulement', () => {
+  it('les neuf effets IOT_BUFF autrefois convertis en stat sont à null', () => {
+    const at = (id: string, level: number) => sets[id].levels.find((l) => l.level === level)!;
+    const nulls: [string, number, 'p2' | 'p4'][] = [
+      ['17', 1, 'p2'],
+      ['17', 1, 'p4'],
+      ['17', 2, 'p2'],
+      ['17', 2, 'p4'],
+      ['20', 1, 'p2'],
+      ['20', 2, 'p2'],
+      ['21', 1, 'p2'],
+      ['21', 2, 'p2'],
+      ['18', 2, 'p4'],
+    ];
+    for (const [id, level, p] of nulls) expect(at(id, level)[p], `${id} L${level} ${p}`).toBeNull();
+  });
+
+  it('aucun p2 / p4 ne vient d’un IOT_BUFF : prose du jeu ⇒ null, et ni DMG ni réduction', () => {
+    // La prose d'un palier `IOT_STAT` est la synthèse « <Libellé> +<valeur> » ;
+    // celle d'un palier à buff est la description du jeu (cf. `setProse`).
+    const SYNTH = /^[A-Za-z ]+ \+[\d.]+%?$/;
+    const bad: string[] = [];
+    for (const [id, s] of Object.entries(sets)) {
+      for (const l of s.levels) {
+        for (const p of ['p2', 'p4'] as const) {
+          const e = l[p];
+          const desc = l[`${p}_desc`];
+          if (!e) continue;
+          if (e.st === 'ST_DMG_BOOST' || e.st === 'ST_DMG_REDUCE_RATE')
+            bad.push(`${id} L${l.level} ${p} ${e.st}`);
+          if (desc && !SYNTH.test(desc))
+            bad.push(`${id} L${l.level} ${p} prose du jeu « ${desc} »`);
+        }
+      }
+    }
+    expect(bad).toEqual([]);
+  });
+});
+
+// ---- O5 : niveau par pièce et ignoreLowSet, rejoués comme l'en-tête de solver.ts --
+/** Bonus de set sur `stat` (valeur brute) pour des pièces aux breakthroughs donnés. */
+function setBonus(setId: string, breakthroughs: number[], stat: string): number {
+  const levels = sets[setId].levels;
+  const pieceLevel = (bt: number) => levels.find((l) => l.breakLimitCounts.includes(bt))!.level;
+  const lv = breakthroughs.map(pieceLevel).sort((a, b) => b - a);
+  const row = (n: number) => levels.find((l) => l.level === Math.min(...lv.slice(0, n)))!;
+  const r2 = lv.length >= 2 ? row(2) : null;
+  const r4 = lv.length >= 4 ? row(4) : null;
+  const p2 = r2?.p2?.st === stat ? r2.p2 : null;
+  const p4 = r4?.p4?.st === stat ? r4.p4 : null;
+  return (p2 && !(p4 && r4!.ignoreLowSet) ? p2.v : 0) + (p4 ? p4.v : 0);
+}
+
+describe('solver — sets : paliers par pièce et ignoreLowSet (O5)', () => {
+  it('chaque niveau d’un set d’armure porte ses breakthroughs, disjoints d’un niveau à l’autre', () => {
+    for (const id of ['1', '13']) {
+      const all = sets[id].levels.flatMap((l) => l.breakLimitCounts).sort();
+      expect(all, id).toEqual([0, 1, 2, 3, 4]);
+    }
+  });
+
+  it('Attack niveaux [2,2,1,1] → 55 % (35 + 20)', () => {
+    expect(setBonus('1', [4, 4, 3, 3], 'ST_ATK')).toBe(550);
+  });
+
+  it('Speed : [2,2,1,1] → 25 %, [2,2,2,2] → 25 %, [2,2,1] → 13 %', () => {
+    // [2,2,1,1] : le 2P de niveau 2 (13 %) est écarté par l'ignoreLowSet du 4P de niveau 1.
+    expect(setBonus('13', [4, 4, 3, 3], 'ST_SPEED')).toBe(250);
+    expect(setBonus('13', [4, 4, 4, 4], 'ST_SPEED')).toBe(250);
+    expect(setBonus('13', [4, 4, 3], 'ST_SPEED')).toBe(130);
+  });
+});
+
+// ---- M2 / M3 : uniques qui touchent la fiche ----------------------------------------
+describe('solver — uniques de fiche (equipment-passives, ee-passives)', () => {
+  const PHANTASM = [
+    '24',
+    '174',
+    '324',
+    '474',
+    '624',
+    '774',
+    '92201',
+    '92202',
+    '92203',
+    '93391',
+    '93392',
+    '93393',
+  ];
+  const BRIAREOS = ['1797', '93291', '93292', '93293'];
+
+  it('statsByTier sur Phantasm Necrosis et Ambition de Briaréos, et nulle part ailleurs', () => {
+    const withStats = Object.keys(equipmentPassives).filter(
+      (id) => equipmentPassives[id].statsByTier,
+    );
+    expect(withStats.sort()).toEqual([...PHANTASM, ...BRIAREOS].sort());
+  });
+
+  it('Phantasm Necrosis : SPD −300 OAT_RATE aux cinq paliers ; Briaréos : RES 200 → 400', () => {
+    for (const id of PHANTASM) {
+      expect(equipmentPassives[id].statsByTier, id).toEqual(
+        Array.from({ length: 5 }, () => [{ st: 'ST_SPEED', ap: 'OAT_RATE', v: -300 }]),
+      );
+    }
+    for (const id of BRIAREOS) {
+      expect(equipmentPassives[id].statsByTier, id).toEqual(
+        [200, 250, 300, 350, 400].map((v) => [{ st: 'ST_BUFF_RESIST', ap: 'OAT_RATE', v }]),
+      );
+    }
+  });
+
+  it('statsByTier suit textByTier, palier par palier', () => {
+    for (const [id, e] of Object.entries(equipmentPassives))
+      if (e.statsByTier) expect(e.statsByTier.length, id).toBe(e.textByTier.length);
+  });
+
+  it('EE de Fatal (2000078) : l’option unique IOT_STAT CHD +300 OAT_ADD à +10', () => {
+    expect(eePassives['2000078']).toEqual([
+      { levelThreshold: 10, st: 'ST_CRITICAL_DMG_RATE', ap: 'OAT_ADD', v: 300 },
+    ]);
   });
 });

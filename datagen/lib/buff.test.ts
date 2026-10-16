@@ -3,6 +3,7 @@ import {
   buffRowAtLevel,
   buffValuesAt,
   fillPlaceholders,
+  isStatSheetBuff,
   resolveSkillPlaceholders,
   skillBuffVars,
 } from './buff';
@@ -114,6 +115,25 @@ describe('buffRowAtLevel', () => {
   });
   it('buff inconnu → undefined', () => {
     expect(buffRowAtLevel(skillIndex, 'NOPE', 1)).toBeUndefined();
+  });
+});
+
+describe('isStatSheetBuff', () => {
+  const premium: Row = {
+    Type: 'BT_STAT_PREMIUM',
+    BuffCreateType: 'PASSIVE',
+    TargetType: 'ME',
+    BuffConditionType: 'OWNER_HAS_BUFF',
+    TurnDuration: '2',
+  };
+  it('BT_STAT_PREMIUM PASSIVE sur ME ou MY_TEAM, condition et durée ignorées', () => {
+    expect(isStatSheetBuff(premium)).toBe(true);
+    expect(isStatSheetBuff({ ...premium, TargetType: 'MY_TEAM' })).toBe(true);
+  });
+  it('autre type, autre création (PASSIVE2 compris) ou autre cible → non', () => {
+    expect(isStatSheetBuff({ ...premium, Type: 'BT_DMG' })).toBe(false);
+    expect(isStatSheetBuff({ ...premium, BuffCreateType: 'PASSIVE2' })).toBe(false);
+    expect(isStatSheetBuff({ ...premium, TargetType: 'ENEMY_TEAM' })).toBe(false);
   });
 });
 

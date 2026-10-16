@@ -74,6 +74,25 @@ export function findBuff(
   return buffsByID.get(targetId)?.find((r) => r.Level === String(level));
 }
 
+/**
+ * Buff « de fiche » : versé aux stats du personnage hors combat, donc compté
+ * dans la fiche et la CP. Règle du client : `CSkillManager.GetStatPremiumBuffList`
+ * garde les `BT_STAT_PREMIUM` dont `IsBuffCreateType(PASSIVE)` (égalité
+ * stricte : ni `PASSIVE2` ni `ON_SPAWN`) et `IsCallerSkillType(SKT_ALL)`
+ * (toujours vrai), puis `CCharacterData.InitStatPremiumBuff` ne retient que
+ * `TargetType` `ME` ou `MY_TEAM`. Ni la condition (`BuffConditionType`) ni la
+ * durée ne sont regardées, et un buff caché passe comme un autre. Mêmes
+ * sources côté client : compétences, uniques d'objet (`m_ItemBuffTempletList`),
+ * nœuds d'éveil, Infiltration, Monad Gate, cadeau du jour.
+ */
+export function isStatSheetBuff(buff: Row): boolean {
+  return (
+    buff.Type === 'BT_STAT_PREMIUM' &&
+    buff.BuffCreateType === 'PASSIVE' &&
+    (buff.TargetType === 'ME' || buff.TargetType === 'MY_TEAM')
+  );
+}
+
 /** Valeurs formatées d'un buff à un niveau, prêtes à remplir un template (clés absentes si non applicables). */
 export interface BuffValues {
   value?: string;

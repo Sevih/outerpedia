@@ -5,6 +5,78 @@
 > détail vit dans git. Le `CHANGELOG.md` racine est GELÉ depuis le 03/08 —
 > ce fichier et le log git SONT le journal du projet.
 
+## 2026-10-16
+
+- **C20 · Contrat solver, équipement : sets de combat hors de la fiche (C1),
+  paliers par pièce et `ignoreLowSet` (O5), uniques de fiche (M2, M3), test
+  de forme.** Étape (a) seulement : des champs AJOUTÉS, rien de retiré ni
+  renommé, `schema` reste à 1. **Prédicat** : `isStatSheetBuff`
+  (`datagen/lib/buff.ts`, testé dans `buff.test.ts`) = `BT_STAT_PREMIUM`,
+  `BuffCreateType === 'PASSIVE'` (égalité stricte du client), cible `ME` ou
+  `MY_TEAM`, ni condition ni durée (`CSkillManager.GetStatPremiumBuffList`
+  puis `CCharacterData.InitStatPremiumBuff`, vérifiés dans le client
+  décompilé) ; B56 le reprendra pour les passifs de compétence.
+  `ee-passives` l'utilise à la place de son filtre : les 34 groupes / 37
+  entrées d'avant sont identiques. **C1** : `resolveSetEffectEntry` ne rend
+  une stat que si `OptionType_xP === 'IOT_STAT'` ; `BUFF_TYPE_TO_STAT`,
+  `CONDITIONAL_OWNER_BUFF_TYPES`, le `Math.abs` et l'index `buffByIDLevel`
+  (devenu inutile) disparaissent, un commentaire cite
+  `CreateBuffSetItem` / `SetSetItemValue` et renvoie à `combatEffects` (B53).
+  Exactement neuf effets passent à `null` : Pulverization (17) L1 et L2,
+  2P et 4P ; Immunity (18) L2 4P ; Weakness (20) L1 et L2 2P ; Augmentation
+  (21) L1 et L2 2P. Prose inchangée. **O5** : chaque `levels[]` de
+  `sets.json` gagne `breakLimitCounts` (`[0,1,2,3]` ×21, `[4]` ×21, `[]` ×654
+  pour les groupes d'options uniques) et `ignoreLowSet` (vrai sur Fortification
+  L2, Penetration L1, Speed L1, Bursting (14) L1) ; la règle d'agrégation
+  (minimum des 2 / 4 meilleures pièces, 2P écarté stat par stat par
+  l'`ignoreLowSet` du 4P retenu, côté buffs quand le 4P a un buff) est écrite
+  dans l'en-tête de `datagen/generators/solver.ts` avec les fonctions du
+  client : c'est la référence que gear-solver recopie. **M2** :
+  `equipment-passives.json` gagne `statsByTier` (indexé comme `textByTier`,
+  ligne de buff de plus haut niveau ≤ palier + 1 via `buffRowAtLevel`, valeurs
+  brutes) sur exactement 16 objets : Phantasm Necrosis (24, 174, 324, 474,
+  624, 774, 92201-92203, 93391-93393 ; SPD −300 `OAT_RATE` aux cinq paliers,
+  seul `BID_ITEM_UO_WEAPON_21` des cinq buffs de l'option passe) et Ambition
+  de Briaréos (1797, 93291-93293 ; RES 200 à 400). **M3** : `ee-passives`
+  émet les options uniques `IOT_STAT` des EE ; `ee-passives["2000078"]` =
+  `{ levelThreshold: 10, st: ST_CRITICAL_DMG_RATE, ap: OAT_ADD, v: 300 }`,
+  et le générateur jette sur une telle option hors `OAT_ADD` (gear-solver la
+  lirait dans le canal buff). **Test de forme** : `CONTRACT_SHAPE` dans
+  `datagen/generators/solver.test.ts` déclare les 19 fichiers et les clés
+  obligatoires / facultatives de leurs entrées et blocs imbriqués (`levels[]`,
+  `ingredients`, `bestSkill`, `statsByTier`, `tiers`, `version.json`…) ; un
+  fichier ou une clé en plus ou en moins casse, en-tête du fichier mis à
+  jour. Échec forcé à la main (`ignoreLowSet` renommé dans la déclaration,
+  puis remis) : « Forme du contrat solver changée. Un AJOUT se déclare dans
+  CONTRACT_SHAPE (solver.test.ts), `schema` inchangé. Un retrait, un
+  renommage ou un changement de sens monte SOLVER_SCHEMA et attend la release
+  de gear-solver qui le lit : (a) → (b) → (c), en-tête de
+  datagen/generators/solver.ts. », suivi de deux lignes : clé obligatoire
+  « ignoreLowSetX » absente, clé « ignoreLowSet » non déclarée (chemin
+  `sets.json › *.levels[]`). Le même fichier affirme les neuf `null`, qu'aucun `p2` / `p4`
+  n'est `ST_DMG_BOOST` / `ST_DMG_REDUCE_RATE` ni accompagné d'une prose du
+  jeu, la règle O5 rejouée sur `sets.json` (Attack [2,2,1,1] → 55 %, Speed
+  [2,2,1,1] → 25, [2,2,2,2] → 25, [2,2,1] → 13, par breakthroughs et
+  `breakLimitCounts`), les `statsByTier` des 16 objets et l'entrée 2000078.
+  **Vérifié** : `data/generated` propre avant ; `pnpm datagen:sync-derived`
+  (42 lignes exactes, 0 en dérive) ne change que `solver/sets.json`,
+  `equipment-passives.json`, `ee-passives.json` et `version.json` (`hash`
+  `6b05386eb070` → `57cd9f195e73`, `schema` 1) ; comparaison par script
+  jetable hors du dépôt : `sets` 306 groupes / 696 niveaux, 9 `p2`/`p4`
+  changés, 0 autre écart ; `equipment-passives` 647 entrées, 0 écart hors
+  `statsByTier` ; les 15 autres fichiers identiques. `pnpm typecheck` (tsc
+  sans sortie), `pnpm lint` (`$ eslint`, sans sortie), `pnpm test` « Tests
+  3910 passed (3910) ». Aucun changement visuel : ces champs ne sont lus que
+  par gear-solver. **Push** : C1 change des valeurs chez toutes les
+  installations (CP gonflée retirée, voulu). **Laissé** : la lecture côté
+  gear-solver (lots gear-solver ; Sevih : `npm run data:sync`) —
+  `levels[i].breakLimitCounts` / `.ignoreLowSet` (fonction de niveau de set,
+  M1), `equipmentPassives[id].statsByTier[bt]` (canal buff), l'entrée
+  2000078 lue telle quelle, et `buildAdvice.ts:119` dont le conseil « 3/4 —
+  one more piece » ne lit que `p4` et se taira pour Pulverization ;
+  `combatEffects` (B53) ; noyau et vitesse en % (B56) ; `stat-keys.json` ;
+  les 289 groupes non-sets de `sets.json` (étape (c)).
+
 ## 2026-10-15
 
 - **Relecture des lots B50 et C17 (Opus) — six tests-gardes et « certains

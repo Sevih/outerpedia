@@ -30,6 +30,21 @@
  * `version.json` = `{schema, resVersion, hash, builtAt}` : `schema` = forme du
  * contrat (`SOLVER_SCHEMA`), `resVersion` = version des tables du jeu, `hash` =
  * clé d'invalidation (les 18 tables seules), `builtAt` = dernier vrai changement.
+ * Niveau d'un set porté (`sets.json`, outerpedia est la source, gear-solver
+ * recopie cette règle ; client : `CStatValue.SetSetItemValue`,
+ * `CCharacterData.CalcSetItem` / `CreateBuffSetItem`, `CItem.SetOptionLevel`) :
+ *   - niveau d'une pièce = `level` de l'entrée de `levels[]` dont
+ *     `breakLimitCounts` contient son breakthrough (aujourd'hui niveau 1 : 0-3,
+ *     niveau 2 : 4) ;
+ *   - à N pièces du set : le 2P (N ≥ 2) prend la ligne du niveau MINIMUM des
+ *     2 meilleures pièces, le 4P (N ≥ 4) celle du minimum des 4 meilleures —
+ *     deux lignes qui peuvent différer ;
+ *   - le 2P n'est PAS versé si la ligne 4P retenue a `ignoreLowSet` et la même
+ *     stat (`SetSetItemValue` compare stat par stat) ; côté buffs, il ne l'est
+ *     pas si la ligne 4P retenue a un buff et `ignoreLowSet` (`CreateBuffSetItem`).
+ *     Ex. Speed [2,2,1,1] → 2P niveau 2 écarté par le 4P niveau 1 : 25 %, pas 38 %.
+ * `p2` / `p4` ne portent que des stats de fiche (`IOT_STAT`) : un effet
+ * `IOT_BUFF` de set n'entre jamais dans la fiche ni la CP (cf. `resolveSetEffectEntry`).
  * Règle d'évolution de `schema` :
  *   - il ne monte que pour un changement qu'une ancienne version de gear-solver
  *     lirait mal : champ ou fichier retiré ou renommé, sens d'un champ changé
@@ -47,8 +62,8 @@
 import { createHash } from 'node:crypto';
 import { existsSync, readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
-import { findBuff, formatRowValue } from '../lib/buff';
-import { loadTable, singleValue, type Row } from '../lib/tables';
+import { buffRowAtLevel, findBuff, formatRowValue, isStatSheetBuff } from '../lib/buff';
+import { bool, loadTable, singleValue, type Row } from '../lib/tables';
 import { kitScaling, loadKitScalingTables } from '../lib/kit-scaling';
 import { buildDamageCharacters } from '../damage/characters';
 import { bestSkillOf } from './solver-best-skill';
@@ -386,43 +401,26 @@ export function buildSolver(inputs: {
 
   // ---- sets + singularity-options + ee-passives (une passe ItemSpecialOption) ----
   const buffByID = new Map<string, Row>();
-  const buffByIDLevel = new Map<string, Row>();
   for (const b of buffTemplet) {
     const cur = buffByID.get(b.BuffID ?? '');
     if (!cur || Number(b.Level) > Number(cur.Level)) buffByID.set(b.BuffID ?? '', b);
-    buffByIDLevel.set(`${b.BuffID}|${b.Level}`, b);
   }
-  const BUFF_TYPE_TO_STAT: Record<string, string> = {
-    BT_DMG: 'ST_DMG_BOOST',
-    BT_DMG_TARGET_BREAK: 'ST_DMG_BOOST',
-    BT_DMG_REDUCE: 'ST_DMG_REDUCE_RATE',
-  };
-  // Sets « comeback » (Revenge/Patience/Swiftness) : Value = MAXIMUM à PV
-  // manquants pleins — pas une stat de fiche → aucun bonus numérique émis,
-  // la prose porte le sens.
-  const CONDITIONAL_OWNER_BUFF_TYPES = new Set([
-    'BT_STAT_OWNER_LOST_HP_RATE',
-    'BT_STAT_OWNER_LOST_HP_RATE_HALF',
-  ]);
+  // `p2` / `p4` = stat de FICHE du palier, `null` quand il n'en a pas. Seul un
+  // effet `IOT_STAT` en est une : le client verse les `IOT_BUFF` de set dans
+  // `m_ItemSetBuffTempletList` (`CCharacterData.CreateBuffSetItem`), que
+  // `GetStatPremiumBuffList` ne lit pas, et `CStatValue.SetSetItemValue` ignore
+  // tout ce qui n'est pas `IOT_STAT`. Les effets de combat des sets
+  // (Pulverization, Weakness, Augmentation, Immunity, Revenge…) n'ont donc
+  // aucun `p2` / `p4` ; ils reviendront, pour l'affichage seulement, dans
+  // `combatEffects` (lot B53). La prose `p2_desc` / `p4_desc` les décrit.
   function resolveSetEffectEntry(
+    optionType: string | undefined,
     stat: string | undefined,
     ap: string | undefined,
     value: string | undefined,
-    buffId: string | undefined,
-    setLevel: number,
   ): { st: string; ap?: string; v: number } | null {
-    if (stat && stat !== 'ST_NONE') return { st: stat, ap, v: Number(value) };
-    if (!buffId) return null;
-    const b = buffByIDLevel.get(`${buffId}|${setLevel}`);
-    if (!b) return null;
-    if (CONDITIONAL_OWNER_BUFF_TYPES.has(b.Type ?? '')) return null;
-    if (b.StatType && b.StatType !== 'ST_NONE')
-      return { st: b.StatType, ap: b.ApplyingType, v: Number(b.Value) };
-    const mapped = BUFF_TYPE_TO_STAT[b.Type ?? ''];
-    // BT_DMG_REDUCE sur ENEMY_TEAM stocke un négatif — on émet la magnitude.
-    if (mapped && b.Value != null)
-      return { st: mapped, ap: b.ApplyingType ?? 'OAT_RATE', v: Math.abs(Number(b.Value)) };
-    return null;
+    if (optionType !== 'IOT_STAT' || !stat || stat === 'ST_NONE') return null;
+    return { st: stat, ap, v: Number(value) };
   }
   // GroupIDs des EE : la 1re part de l'UniqueOptionID d'un item EXCLUSIVE.
   const eeGroupIds = new Set<string>();
@@ -440,6 +438,8 @@ export function buildSolver(inputs: {
       p4: { st: string; ap?: string; v: number } | null;
       p2_desc: string | null;
       p4_desc: string | null;
+      breakLimitCounts: number[];
+      ignoreLowSet: boolean;
     }[];
   }
   const sets: Record<string, SetOut> = {};
@@ -462,21 +462,26 @@ export function buildSolver(inputs: {
     g.levels.push({
       level: setLevel,
       p2: resolveSetEffectEntry(
+        s.OptionType_2P,
         s.StatType_2P,
         s.ApplyingType_2P,
         s.OptionValue_2P,
-        s.BuffID_2P,
-        setLevel,
       ),
       p4: resolveSetEffectEntry(
+        s.OptionType_4P,
         s.StatType_4P,
         s.ApplyingType_4P,
         s.OptionValue_4P,
-        s.BuffID_4P,
-        setLevel,
       ),
       p2_desc: setProse(tierView?.['2p']),
       p4_desc: setProse(tierView?.['4p']),
+      // Règle d'agrégation par pièce : en-tête du fichier (outerpedia est la source).
+      breakLimitCounts: String(s.BreakLimitCount ?? '')
+        .split(',')
+        .map((x) => x.trim())
+        .filter(Boolean)
+        .map(Number),
+      ignoreLowSet: bool(s.IgnoreLowSet),
     });
     // Options Singularité (groupes 30000/31000) — TOUTES émises ; seules les
     // inconditionnelles BT_STAT_PREMIUM comptent hors combat (combatOnly sinon).
@@ -502,18 +507,12 @@ export function buildSolver(inputs: {
     }
     // Passif EE à palier de niveau — split des BuffID à VIRGULES (bug Eris :
     // le lookup de la chaîne entière perdait aussi le passif SELF ; 7 EE touchés).
+    // Filtre = celui du client (`isStatSheetBuff`), pas de condition ni de durée.
     if (s.BuffID && eeGroupIds.has(s.GroupID ?? '')) {
       for (const bid of String(s.BuffID).split(',')) {
         if (!bid) continue;
         const buff = buffByID.get(bid);
-        const ok =
-          buff &&
-          buff.Type === 'BT_STAT_PREMIUM' &&
-          buff.TargetType === 'ME' &&
-          buff.BuffCreateType === 'PASSIVE' &&
-          (buff.BuffConditionType ?? 'NONE') === 'NONE' &&
-          buff.TurnDuration === '-1';
-        if (ok) {
+        if (buff && isStatSheetBuff(buff)) {
           (eePassives[s.GroupID ?? ''] ??= []).push({
             levelThreshold: Number(s.Level),
             st: buff.StatType,
@@ -522,6 +521,32 @@ export function buildSolver(inputs: {
           });
         }
       }
+    }
+    // Option unique `IOT_STAT` d'un EE (seul cas au 15/10 : 2100078, Fatal, CHD
+    // +300 à +10) : le client la verse par `CStatValue.SetItemOptionsValue`
+    // (branche `ITS_EQUIP_EXCLUSIVE`) dans `m_nItemOptionValue`, pas en buff.
+    // gear-solver range toute entrée d'`ee-passives` dans le canal buff ; pour
+    // un `OAT_ADD` les deux canaux s'additionnent au même endroit de
+    // `CFormula.CalcFinalStat`, pas pour un `OAT_RATE`.
+    if (
+      eeGroupIds.has(s.GroupID ?? '') &&
+      s.OptionType === 'IOT_STAT' &&
+      s.StatType &&
+      s.StatType !== 'ST_NONE'
+    ) {
+      if (s.ApplyingType !== 'OAT_ADD') {
+        throw new Error(
+          `solver : option unique IOT_STAT ${s.ID} de l'EE ${s.GroupID} en ${s.ApplyingType} — ` +
+            `une version installée de gear-solver la lirait dans le canal buff, faux hors ` +
+            `OAT_ADD : il faut d'abord un champ qui dise le canal (étape (a) de l'en-tête)`,
+        );
+      }
+      (eePassives[s.GroupID ?? ''] ??= []).push({
+        levelThreshold: Number(s.Level),
+        st: s.StatType,
+        ap: s.ApplyingType,
+        v: Number(s.OptionValue),
+      });
     }
   }
   emit('sets.json', sets);
@@ -588,7 +613,11 @@ export function buildSolver(inputs: {
 
   // Talisman + EE passent par la table multi-tier ci-dessous, pas ici.
   const MULTI_TIER_SUBTYPES = new Set(['ITS_EQUIP_OOPARTS', 'ITS_EQUIP_EXCLUSIVE']);
-  const equipmentPassives: Record<string, { name: string | null; textByTier: string[] }> = {};
+  type StatEntry = { st: string; ap?: string; v: number };
+  const equipmentPassives: Record<
+    string,
+    { name: string | null; textByTier: string[]; statsByTier?: StatEntry[][] }
+  > = {};
   for (const it of itemTemplet) {
     if (!SLOT[it.ItemSubType ?? '']) continue;
     if (MULTI_TIER_SUBTYPES.has(it.ItemSubType ?? '')) continue;
@@ -607,6 +636,24 @@ export function buildSolver(inputs: {
     for (let lv = 1; lv <= maxLv; lv++)
       textByTier.push(substitute(desc, tokenValues(buffIdStr, lv)));
     equipmentPassives[it.ID] = { name: textSkill.get(opt.NameID ?? '') ?? null, textByTier };
+    // Buffs uniques qui touchent la fiche (`isStatSheetBuff`, cachés compris) :
+    // le client les prend dans `m_ItemBuffTempletList` au niveau de buff
+    // 1 + breakthrough (spec damage-formula § 17.5). Indexé comme `textByTier`,
+    // valeurs brutes (OAT_RATE en per-mille, signe gardé).
+    const sheetBuffIds = buffIdStr
+      .split(',')
+      .map((b) => b.trim())
+      .filter((b) => (buffLevelsByID.get(b) ?? []).some(isStatSheetBuff));
+    if (sheetBuffIds.length) {
+      equipmentPassives[it.ID].statsByTier = textByTier.map((_, i) =>
+        sheetBuffIds.flatMap((bid) => {
+          const b = buffRowAtLevel(buffLevelsByID, bid, i + 1);
+          return b && isStatSheetBuff(b)
+            ? [{ st: b.StatType ?? '', ap: b.ApplyingType, v: Number(b.Value) }]
+            : [];
+        }),
+      );
+    }
   }
   emit('equipment-passives.json', equipmentPassives);
 

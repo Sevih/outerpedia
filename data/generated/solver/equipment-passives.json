@@ -207,6 +207,43 @@
       "Reduces Speed of the wielder by <color=#28d9ed>30%</color>, and reduces damage taken / increases Counterattack chance proportional to missing Health (Max: <color=#28d9ed>20%</color>/<color=#28d9ed>20%</color>)",
       "Reduces Speed of the wielder by <color=#28d9ed>30%</color>, and reduces damage taken / increases Counterattack chance proportional to missing Health (Max: <color=#28d9ed>22.5%</color>/<color=#28d9ed>22.5%</color>)",
       "Reduces Speed of the wielder by <color=#28d9ed>30%</color>, and reduces damage taken / increases Counterattack chance proportional to missing Health (Max: <color=#28d9ed>25%</color>/<color=#28d9ed>25%</color>)"
+    ],
+    "statsByTier": [
+      [
+        {
+          "st": "ST_SPEED",
+          "ap": "OAT_RATE",
+          "v": -300
+        }
+      ],
+      [
+        {
+          "st": "ST_SPEED",
+          "ap": "OAT_RATE",
+          "v": -300
+        }
+      ],
+      [
+        {
+          "st": "ST_SPEED",
+          "ap": "OAT_RATE",
+          "v": -300
+        }
+      ],
+      [
+        {
+          "st": "ST_SPEED",
+          "ap": "OAT_RATE",
+          "v": -300
+        }
+      ],
+      [
+        {
+          "st": "ST_SPEED",
+          "ap": "OAT_RATE",
+          "v": -300
+        }
+      ]
     ]
   },
   "25": {
@@ -457,6 +494,43 @@
       "Reduces Speed of the wielder by <color=#28d9ed>30%</color>, and reduces damage taken / increases Counterattack chance proportional to missing Health (Max: <color=#28d9ed>20%</color>/<color=#28d9ed>20%</color>)",
       "Reduces Speed of the wielder by <color=#28d9ed>30%</color>, and reduces damage taken / increases Counterattack chance proportional to missing Health (Max: <color=#28d9ed>22.5%</color>/<color=#28d9ed>22.5%</color>)",
       "Reduces Speed of the wielder by <color=#28d9ed>30%</color>, and reduces damage taken / increases Counterattack chance proportional to missing Health (Max: <color=#28d9ed>25%</color>/<color=#28d9ed>25%</color>)"
+    ],
+    "statsByTier": [
+      [
+        {
+          "st": "ST_SPEED",
+          "ap": "OAT_RATE",
+          "v": -300
+        }
+      ],
+      [
+        {
+          "st": "ST_SPEED",
+          "ap": "OAT_RATE",
+          "v": -300
+        }
+      ],
+      [
+        {
+          "st": "ST_SPEED",
+          "ap": "OAT_RATE",
+          "v": -300
+        }
+      ],
+      [
+        {
+          "st": "ST_SPEED",
+          "ap": "OAT_RATE",
+          "v": -300
+        }
+      ],
+      [
+        {
+          "st": "ST_SPEED",
+          "ap": "OAT_RATE",
+          "v": -300
+        }
+      ]
     ]
   },
   "175": {
@@ -707,6 +781,43 @@
       "Reduces Speed of the wielder by <color=#28d9ed>30%</color>, and reduces damage taken / increases Counterattack chance proportional to missing Health (Max: <color=#28d9ed>20%</color>/<color=#28d9ed>20%</color>)",
       "Reduces Speed of the wielder by <color=#28d9ed>30%</color>, and reduces damage taken / increases Counterattack chance proportional to missing Health (Max: <color=#28d9ed>22.5%</color>/<color=#28d9ed>22.5%</color>)",
       "Reduces Speed of the wielder by <color=#28d9ed>30%</color>, and reduces damage taken / increases Counterattack chance proportional to missing Health (Max: <color=#28d9ed>25%</color>/<color=#28d9ed>25%</color>)"
+    ],
+    "statsByTier": [
+      [
+        {
+          "st": "ST_SPEED",
+          "ap": "OAT_RATE",
+          "v": -300
+        }
+      ],
+      [
+        {
+          "st": "ST_SPEED",
+          "ap": "OAT_RATE",
+          "v": -300
+        }
+      ],
+      [
+        {
+          "st": "ST_SPEED",
+          "ap": "OAT_RATE",
+          "v": -300
+        }
+      ],
+      [
+        {
+          "st": "ST_SPEED",
+          "ap": "OAT_RATE",
+          "v": -300
+        }
+      ],
+      [
+        {
+          "st": "ST_SPEED",
+          "ap": "OAT_RATE",
+          "v": -300
+        }
+      ]
     ]
   },
   "325": {
@@ -957,6 +1068,43 @@
       "Reduces Speed of the wielder by <color=#28d9ed>30%</color>, and reduces damage taken / increases Counterattack chance proportional to missing Health (Max: <color=#28d9ed>20%</color>/<color=#28d9ed>20%</color>)",
       "Reduces Speed of the wielder by <color=#28d9ed>30%</color>, and reduces damage taken / increases Counterattack chance proportional to missing Health (Max: <color=#28d9ed>22.5%</color>/<color=#28d9ed>22.5%</color>)",
       "Reduces Speed of the wielder by <color=#28d9ed>30%</color>, and reduces damage taken / increases Counterattack chance proportional to missing Health (Max: <color=#28d9ed>25%</color>/<color=#28d9ed>25%</color>)"
+    ],
+    "statsByTier": [
+      [
+        {
+          "st": "ST_SPEED",
+          "ap": "OAT_RATE",
+          "v": -300
+        }
+      ],
+      [
+        {
+          "st": "ST_SPEED",
+          "ap": "OAT_RATE",
+          "v": -300
+        }
+      ],
+      [
+        {
+          "st": "ST_SPEED",
+          "ap": "OAT_RATE",
+          "v": -300
+        }
+      ],
+      [
+        {
+          "st": "ST_SPEED",
+          "ap": "OAT_RATE",
+          "v": -300
+        }
+      ],
+      [
+        {
+          "st": "ST_SPEED",
+          "ap": "OAT_RATE",
+          "v": -300
+        }
+      ]
     ]
   },
   "475": {
@@ -1217,6 +1365,43 @@
       "Reduces Speed of the wielder by <color=#28d9ed>30%</color>, and reduces damage taken / increases Counterattack chance proportional to missing Health (Max: <color=#28d9ed>20%</color>/<color=#28d9ed>20%</color>)",
       "Reduces Speed of the wielder by <color=#28d9ed>30%</color>, and reduces damage taken / increases Counterattack chance proportional to missing Health (Max: <color=#28d9ed>22.5%</color>/<color=#28d9ed>22.5%</color>)",
       "Reduces Speed of the wielder by <color=#28d9ed>30%</color>, and reduces damage taken / increases Counterattack chance proportional to missing Health (Max: <color=#28d9ed>25%</color>/<color=#28d9ed>25%</color>)"
+    ],
+    "statsByTier": [
+      [
+        {
+          "st": "ST_SPEED",
+          "ap": "OAT_RATE",
+          "v": -300
+        }
+      ],
+      [
+        {
+          "st": "ST_SPEED",
+          "ap": "OAT_RATE",
+          "v": -300
+        }
+      ],
+      [
+        {
+          "st": "ST_SPEED",
+          "ap": "OAT_RATE",
+          "v": -300
+        }
+      ],
+      [
+        {
+          "st": "ST_SPEED",
+          "ap": "OAT_RATE",
+          "v": -300
+        }
+      ],
+      [
+        {
+          "st": "ST_SPEED",
+          "ap": "OAT_RATE",
+          "v": -300
+        }
+      ]
     ]
   },
   "625": {
@@ -1697,6 +1882,43 @@
       "Reduces Speed of the wielder by <color=#28d9ed>30%</color>, and reduces damage taken / increases Counterattack chance proportional to missing Health (Max: <color=#28d9ed>20%</color>/<color=#28d9ed>20%</color>)",
       "Reduces Speed of the wielder by <color=#28d9ed>30%</color>, and reduces damage taken / increases Counterattack chance proportional to missing Health (Max: <color=#28d9ed>22.5%</color>/<color=#28d9ed>22.5%</color>)",
       "Reduces Speed of the wielder by <color=#28d9ed>30%</color>, and reduces damage taken / increases Counterattack chance proportional to missing Health (Max: <color=#28d9ed>25%</color>/<color=#28d9ed>25%</color>)"
+    ],
+    "statsByTier": [
+      [
+        {
+          "st": "ST_SPEED",
+          "ap": "OAT_RATE",
+          "v": -300
+        }
+      ],
+      [
+        {
+          "st": "ST_SPEED",
+          "ap": "OAT_RATE",
+          "v": -300
+        }
+      ],
+      [
+        {
+          "st": "ST_SPEED",
+          "ap": "OAT_RATE",
+          "v": -300
+        }
+      ],
+      [
+        {
+          "st": "ST_SPEED",
+          "ap": "OAT_RATE",
+          "v": -300
+        }
+      ],
+      [
+        {
+          "st": "ST_SPEED",
+          "ap": "OAT_RATE",
+          "v": -300
+        }
+      ]
     ]
   },
   "775": {
@@ -3627,6 +3849,43 @@
       "Increases Resilience of the wearer by <color=#28d9ed>30%</color>",
       "Increases Resilience of the wearer by <color=#28d9ed>35%</color>",
       "Increases Resilience of the wearer by <color=#28d9ed>40%</color>"
+    ],
+    "statsByTier": [
+      [
+        {
+          "st": "ST_BUFF_RESIST",
+          "ap": "OAT_RATE",
+          "v": 200
+        }
+      ],
+      [
+        {
+          "st": "ST_BUFF_RESIST",
+          "ap": "OAT_RATE",
+          "v": 250
+        }
+      ],
+      [
+        {
+          "st": "ST_BUFF_RESIST",
+          "ap": "OAT_RATE",
+          "v": 300
+        }
+      ],
+      [
+        {
+          "st": "ST_BUFF_RESIST",
+          "ap": "OAT_RATE",
+          "v": 350
+        }
+      ],
+      [
+        {
+          "st": "ST_BUFF_RESIST",
+          "ap": "OAT_RATE",
+          "v": 400
+        }
+      ]
     ]
   },
   "1798": {
@@ -4287,6 +4546,43 @@
       "Reduces Speed of the wielder by <color=#28d9ed>30%</color>, and reduces damage taken / increases Counterattack chance proportional to missing Health (Max: <color=#28d9ed>20%</color>/<color=#28d9ed>20%</color>)",
       "Reduces Speed of the wielder by <color=#28d9ed>30%</color>, and reduces damage taken / increases Counterattack chance proportional to missing Health (Max: <color=#28d9ed>22.5%</color>/<color=#28d9ed>22.5%</color>)",
       "Reduces Speed of the wielder by <color=#28d9ed>30%</color>, and reduces damage taken / increases Counterattack chance proportional to missing Health (Max: <color=#28d9ed>25%</color>/<color=#28d9ed>25%</color>)"
+    ],
+    "statsByTier": [
+      [
+        {
+          "st": "ST_SPEED",
+          "ap": "OAT_RATE",
+          "v": -300
+        }
+      ],
+      [
+        {
+          "st": "ST_SPEED",
+          "ap": "OAT_RATE",
+          "v": -300
+        }
+      ],
+      [
+        {
+          "st": "ST_SPEED",
+          "ap": "OAT_RATE",
+          "v": -300
+        }
+      ],
+      [
+        {
+          "st": "ST_SPEED",
+          "ap": "OAT_RATE",
+          "v": -300
+        }
+      ],
+      [
+        {
+          "st": "ST_SPEED",
+          "ap": "OAT_RATE",
+          "v": -300
+        }
+      ]
     ]
   },
   "92202": {
@@ -4297,6 +4593,43 @@
       "Reduces Speed of the wielder by <color=#28d9ed>30%</color>, and reduces damage taken / increases Counterattack chance proportional to missing Health (Max: <color=#28d9ed>20%</color>/<color=#28d9ed>20%</color>)",
       "Reduces Speed of the wielder by <color=#28d9ed>30%</color>, and reduces damage taken / increases Counterattack chance proportional to missing Health (Max: <color=#28d9ed>22.5%</color>/<color=#28d9ed>22.5%</color>)",
       "Reduces Speed of the wielder by <color=#28d9ed>30%</color>, and reduces damage taken / increases Counterattack chance proportional to missing Health (Max: <color=#28d9ed>25%</color>/<color=#28d9ed>25%</color>)"
+    ],
+    "statsByTier": [
+      [
+        {
+          "st": "ST_SPEED",
+          "ap": "OAT_RATE",
+          "v": -300
+        }
+      ],
+      [
+        {
+          "st": "ST_SPEED",
+          "ap": "OAT_RATE",
+          "v": -300
+        }
+      ],
+      [
+        {
+          "st": "ST_SPEED",
+          "ap": "OAT_RATE",
+          "v": -300
+        }
+      ],
+      [
+        {
+          "st": "ST_SPEED",
+          "ap": "OAT_RATE",
+          "v": -300
+        }
+      ],
+      [
+        {
+          "st": "ST_SPEED",
+          "ap": "OAT_RATE",
+          "v": -300
+        }
+      ]
     ]
   },
   "92203": {
@@ -4307,6 +4640,43 @@
       "Reduces Speed of the wielder by <color=#28d9ed>30%</color>, and reduces damage taken / increases Counterattack chance proportional to missing Health (Max: <color=#28d9ed>20%</color>/<color=#28d9ed>20%</color>)",
       "Reduces Speed of the wielder by <color=#28d9ed>30%</color>, and reduces damage taken / increases Counterattack chance proportional to missing Health (Max: <color=#28d9ed>22.5%</color>/<color=#28d9ed>22.5%</color>)",
       "Reduces Speed of the wielder by <color=#28d9ed>30%</color>, and reduces damage taken / increases Counterattack chance proportional to missing Health (Max: <color=#28d9ed>25%</color>/<color=#28d9ed>25%</color>)"
+    ],
+    "statsByTier": [
+      [
+        {
+          "st": "ST_SPEED",
+          "ap": "OAT_RATE",
+          "v": -300
+        }
+      ],
+      [
+        {
+          "st": "ST_SPEED",
+          "ap": "OAT_RATE",
+          "v": -300
+        }
+      ],
+      [
+        {
+          "st": "ST_SPEED",
+          "ap": "OAT_RATE",
+          "v": -300
+        }
+      ],
+      [
+        {
+          "st": "ST_SPEED",
+          "ap": "OAT_RATE",
+          "v": -300
+        }
+      ],
+      [
+        {
+          "st": "ST_SPEED",
+          "ap": "OAT_RATE",
+          "v": -300
+        }
+      ]
     ]
   },
   "92211": {
@@ -5607,6 +5977,43 @@
       "Increases Resilience of the wearer by <color=#28d9ed>30%</color>",
       "Increases Resilience of the wearer by <color=#28d9ed>35%</color>",
       "Increases Resilience of the wearer by <color=#28d9ed>40%</color>"
+    ],
+    "statsByTier": [
+      [
+        {
+          "st": "ST_BUFF_RESIST",
+          "ap": "OAT_RATE",
+          "v": 200
+        }
+      ],
+      [
+        {
+          "st": "ST_BUFF_RESIST",
+          "ap": "OAT_RATE",
+          "v": 250
+        }
+      ],
+      [
+        {
+          "st": "ST_BUFF_RESIST",
+          "ap": "OAT_RATE",
+          "v": 300
+        }
+      ],
+      [
+        {
+          "st": "ST_BUFF_RESIST",
+          "ap": "OAT_RATE",
+          "v": 350
+        }
+      ],
+      [
+        {
+          "st": "ST_BUFF_RESIST",
+          "ap": "OAT_RATE",
+          "v": 400
+        }
+      ]
     ]
   },
   "93292": {
@@ -5617,6 +6024,43 @@
       "Increases Resilience of the wearer by <color=#28d9ed>30%</color>",
       "Increases Resilience of the wearer by <color=#28d9ed>35%</color>",
       "Increases Resilience of the wearer by <color=#28d9ed>40%</color>"
+    ],
+    "statsByTier": [
+      [
+        {
+          "st": "ST_BUFF_RESIST",
+          "ap": "OAT_RATE",
+          "v": 200
+        }
+      ],
+      [
+        {
+          "st": "ST_BUFF_RESIST",
+          "ap": "OAT_RATE",
+          "v": 250
+        }
+      ],
+      [
+        {
+          "st": "ST_BUFF_RESIST",
+          "ap": "OAT_RATE",
+          "v": 300
+        }
+      ],
+      [
+        {
+          "st": "ST_BUFF_RESIST",
+          "ap": "OAT_RATE",
+          "v": 350
+        }
+      ],
+      [
+        {
+          "st": "ST_BUFF_RESIST",
+          "ap": "OAT_RATE",
+          "v": 400
+        }
+      ]
     ]
   },
   "93293": {
@@ -5627,6 +6071,43 @@
       "Increases Resilience of the wearer by <color=#28d9ed>30%</color>",
       "Increases Resilience of the wearer by <color=#28d9ed>35%</color>",
       "Increases Resilience of the wearer by <color=#28d9ed>40%</color>"
+    ],
+    "statsByTier": [
+      [
+        {
+          "st": "ST_BUFF_RESIST",
+          "ap": "OAT_RATE",
+          "v": 200
+        }
+      ],
+      [
+        {
+          "st": "ST_BUFF_RESIST",
+          "ap": "OAT_RATE",
+          "v": 250
+        }
+      ],
+      [
+        {
+          "st": "ST_BUFF_RESIST",
+          "ap": "OAT_RATE",
+          "v": 300
+        }
+      ],
+      [
+        {
+          "st": "ST_BUFF_RESIST",
+          "ap": "OAT_RATE",
+          "v": 350
+        }
+      ],
+      [
+        {
+          "st": "ST_BUFF_RESIST",
+          "ap": "OAT_RATE",
+          "v": 400
+        }
+      ]
     ]
   },
   "93301": {
@@ -5907,6 +6388,43 @@
       "Reduces Speed of the wielder by <color=#28d9ed>30%</color>, and reduces damage taken / increases Counterattack chance proportional to missing Health (Max: <color=#28d9ed>20%</color>/<color=#28d9ed>20%</color>)",
       "Reduces Speed of the wielder by <color=#28d9ed>30%</color>, and reduces damage taken / increases Counterattack chance proportional to missing Health (Max: <color=#28d9ed>22.5%</color>/<color=#28d9ed>22.5%</color>)",
       "Reduces Speed of the wielder by <color=#28d9ed>30%</color>, and reduces damage taken / increases Counterattack chance proportional to missing Health (Max: <color=#28d9ed>25%</color>/<color=#28d9ed>25%</color>)"
+    ],
+    "statsByTier": [
+      [
+        {
+          "st": "ST_SPEED",
+          "ap": "OAT_RATE",
+          "v": -300
+        }
+      ],
+      [
+        {
+          "st": "ST_SPEED",
+          "ap": "OAT_RATE",
+          "v": -300
+        }
+      ],
+      [
+        {
+          "st": "ST_SPEED",
+          "ap": "OAT_RATE",
+          "v": -300
+        }
+      ],
+      [
+        {
+          "st": "ST_SPEED",
+          "ap": "OAT_RATE",
+          "v": -300
+        }
+      ],
+      [
+        {
+          "st": "ST_SPEED",
+          "ap": "OAT_RATE",
+          "v": -300
+        }
+      ]
     ]
   },
   "93392": {
@@ -5917,6 +6435,43 @@
       "Reduces Speed of the wielder by <color=#28d9ed>30%</color>, and reduces damage taken / increases Counterattack chance proportional to missing Health (Max: <color=#28d9ed>20%</color>/<color=#28d9ed>20%</color>)",
       "Reduces Speed of the wielder by <color=#28d9ed>30%</color>, and reduces damage taken / increases Counterattack chance proportional to missing Health (Max: <color=#28d9ed>22.5%</color>/<color=#28d9ed>22.5%</color>)",
       "Reduces Speed of the wielder by <color=#28d9ed>30%</color>, and reduces damage taken / increases Counterattack chance proportional to missing Health (Max: <color=#28d9ed>25%</color>/<color=#28d9ed>25%</color>)"
+    ],
+    "statsByTier": [
+      [
+        {
+          "st": "ST_SPEED",
+          "ap": "OAT_RATE",
+          "v": -300
+        }
+      ],
+      [
+        {
+          "st": "ST_SPEED",
+          "ap": "OAT_RATE",
+          "v": -300
+        }
+      ],
+      [
+        {
+          "st": "ST_SPEED",
+          "ap": "OAT_RATE",
+          "v": -300
+        }
+      ],
+      [
+        {
+          "st": "ST_SPEED",
+          "ap": "OAT_RATE",
+          "v": -300
+        }
+      ],
+      [
+        {
+          "st": "ST_SPEED",
+          "ap": "OAT_RATE",
+          "v": -300
+        }
+      ]
     ]
   },
   "93393": {
@@ -5927,6 +6482,43 @@
       "Reduces Speed of the wielder by <color=#28d9ed>30%</color>, and reduces damage taken / increases Counterattack chance proportional to missing Health (Max: <color=#28d9ed>20%</color>/<color=#28d9ed>20%</color>)",
       "Reduces Speed of the wielder by <color=#28d9ed>30%</color>, and reduces damage taken / increases Counterattack chance proportional to missing Health (Max: <color=#28d9ed>22.5%</color>/<color=#28d9ed>22.5%</color>)",
       "Reduces Speed of the wielder by <color=#28d9ed>30%</color>, and reduces damage taken / increases Counterattack chance proportional to missing Health (Max: <color=#28d9ed>25%</color>/<color=#28d9ed>25%</color>)"
+    ],
+    "statsByTier": [
+      [
+        {
+          "st": "ST_SPEED",
+          "ap": "OAT_RATE",
+          "v": -300
+        }
+      ],
+      [
+        {
+          "st": "ST_SPEED",
+          "ap": "OAT_RATE",
+          "v": -300
+        }
+      ],
+      [
+        {
+          "st": "ST_SPEED",
+          "ap": "OAT_RATE",
+          "v": -300
+        }
+      ],
+      [
+        {
+          "st": "ST_SPEED",
+          "ap": "OAT_RATE",
+          "v": -300
+        }
+      ],
+      [
+        {
+          "st": "ST_SPEED",
+          "ap": "OAT_RATE",
+          "v": -300
+        }
+      ]
     ]
   },
   "93401": {
