@@ -846,7 +846,7 @@ const zh: Record<TranslationKey, string> = {
   'coupons.validity': '{start} — {end}',
   'coupons.redeem_android': 'Android: 菜单 → 设置 → 优惠券',
   'coupons.redeem_ios':
-    'iOS: <a href="https://coupon.outerplane.major7.kr/coupon?lang=en" target="_blank" rel="noopener noreferrer" class="underline text-cyan-400">在官网兑换</a>',
+    'iOS: <a href="{url}" target="_blank" rel="noopener noreferrer" class="underline text-cyan-400">在官网兑换</a>',
   // Coupon one-click redeem
 
   // Homepage sections

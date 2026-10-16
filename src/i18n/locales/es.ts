@@ -903,7 +903,7 @@ const es: Record<TranslationKey, string> = {
   'coupons.validity': '{start} — {end}',
   'coupons.redeem_android': 'Android: Menú → Configuración → Cupón',
   'coupons.redeem_ios':
-    'iOS: <a href="https://coupon.outerplane.major7.kr/coupon?lang=en" target="_blank" rel="noopener noreferrer" class="underline text-cyan-400">Canjea en el sitio oficial</a>',
+    'iOS: <a href="{url}" target="_blank" rel="noopener noreferrer" class="underline text-cyan-400">Canjea en el sitio oficial</a>',
   // Coupon one-click redeem
 
   // Homepage sections

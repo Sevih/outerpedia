@@ -79,7 +79,7 @@ import {
   eventStatus,
   type EventEntry,
 } from '@/lib/data/events';
-import { loadChangelog, saveChangelog } from '@/lib/admin/changelog-store';
+import { CHANGELOG_ID_RE, loadChangelog, saveChangelog } from '@/lib/admin/changelog-store';
 import { HIDDEN_LANG_COLUMNS } from '@/lib/admin/gamedata-columns';
 import {
   PAGE_SIZE,
@@ -280,6 +280,7 @@ import {
   type ChangelogEntry,
   type ChangelogLink,
   type ChangelogType,
+  type UnsavedChangelogEntry,
 } from '@/lib/data/changelog';
 import {
   characterDisplayName,
@@ -1215,10 +1216,12 @@ function cleanChangelogLink(raw: unknown): ChangelogLink | undefined {
  * l'éditeur de l'admin (`toEntry`) : les clés du fichier et elles seules, dans
  * son ordre ; un titre vide ou une langue sans puce ne s'écrivent pas ; `draft`
  * seulement s'il est vrai. L'ordre des langues reçu est gardé : une entrée du
- * disque renvoyée intacte se réécrit à l'identique (aucun diff sur ce que la
- * page n'a pas touché). `image`, que l'éditeur de l'admin perdait, est gardée.
+ * disque renvoyée intacte se réécrit à l'identique, id compris (aucun diff sur
+ * ce que la page n'a pas touché). `image`, que l'éditeur de l'admin perdait,
+ * est gardée. Un `id` bien formé est gardé ; une entrée de gabarit n'en a pas,
+ * `saveChangelog` le lui attribue.
  */
-function cleanChangelogEntry(raw: unknown): ChangelogEntry {
+function cleanChangelogEntry(raw: unknown): UnsavedChangelogEntry {
   const e = (raw && typeof raw === 'object' ? raw : {}) as Record<string, unknown>;
   const perKnownLang = <T>(map: unknown, keep: (v: unknown) => T | undefined) => {
     const out: Partial<Record<Lang, T>> = {};
@@ -1237,7 +1240,9 @@ function cleanChangelogEntry(raw: unknown): ChangelogEntry {
   };
   const link = cleanChangelogLink(e.link);
   const image = text(e.image);
+  const id = typeof e.id === 'string' && CHANGELOG_ID_RE.test(e.id) ? e.id : undefined;
   return {
+    ...(id && { id }),
     date: String(e.date ?? ''),
     type: String(e.type ?? '') as ChangelogType,
     title: perKnownLang(e.title, text),
@@ -1262,7 +1267,7 @@ function locateChangelogError(error: string): ChangelogIssue {
 
 /** Les deux écritures de `saveChangelogList`, injectées : le store, git. */
 export interface ChangelogDeps {
-  saveChangelog: (list: ChangelogEntry[]) => Promise<string[]>;
+  saveChangelog: (list: UnsavedChangelogEntry[]) => Promise<string[]>;
   commitPaths: (paths: string[], message: string, report?: Report) => Outcome;
 }
 
@@ -1375,7 +1380,8 @@ export async function previewChangelogEntry(
   try {
     const l = normalizeLang(typeof lang === 'string' ? lang : DEFAULT_LANG);
     const t = await getT(l);
-    const resolved = resolveChangelogEntry(clean, l);
+    // L'id ne s'affiche pas : une entrée de gabarit, qui n'en a pas encore, s'aperçoit pareil.
+    const resolved = resolveChangelogEntry({ id: '', ...clean }, l);
     const href = changelogHref(resolved.link);
     const dated = ISO_DAY.test(resolved.date) && !Number.isNaN(Date.parse(resolved.date));
     return {

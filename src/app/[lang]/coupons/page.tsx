@@ -3,6 +3,7 @@ import { normalizeLang } from '@/lib/i18n/config';
 import { getT } from '@/i18n';
 import { createPageMetadata } from '@/lib/seo';
 import { getAllCoupons } from '@/lib/home';
+import { COUPON_REDEEM_URL } from '@/lib/data/promo-rules';
 import { CouponsList } from '@/components/coupons/CouponsList';
 
 export const revalidate = 86400;
@@ -49,7 +50,10 @@ export default async function CouponsPage({ params }: { params: Promise<{ lang: 
       <div className="border-line-subtle bg-surface-raised text-content-muted mb-8 rounded-lg border p-4 text-sm">
         <p>{t('coupons.redeem_android')}</p>
         {/* Contenu i18n propre (lien officiel) — HTML de confiance. */}
-        <p className="mt-1" dangerouslySetInnerHTML={{ __html: t('coupons.redeem_ios') }} />
+        <p
+          className="mt-1"
+          dangerouslySetInnerHTML={{ __html: t('coupons.redeem_ios', { url: COUPON_REDEEM_URL }) }}
+        />
       </div>
 
       <CouponsList

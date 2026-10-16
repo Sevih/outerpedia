@@ -172,7 +172,7 @@ import type { KitCurationPatch } from '@/lib/admin/monster-skill-curated-store';
 import { committedMonsterSkills, committedMonsters } from '@/lib/admin/monster-store';
 import { loadChangelog } from '@/lib/admin/changelog-store';
 import { buildInlineRefs } from '@/lib/admin/inline-refs';
-import type { ChangelogEntry } from '@/lib/data/changelog';
+import type { ChangelogEntry, UnsavedChangelogEntry } from '@/lib/data/changelog';
 import { characterDisplayName, getCharacterListItems, slugForId } from '@/lib/data/characters';
 import type { EffectSources } from '@/lib/data/effects';
 import { getEEViews } from '@/lib/data/equipment';
@@ -4917,13 +4917,14 @@ describe('saveEventList — écritures injectées', () => {
 describe('changelogState — le fichier, le roster, les gabarits et les libellés servis', () => {
   const ENTRIES: ChangelogEntry[] = [
     {
+      id: '0a1b2c3d',
       date: '2026-10-06',
       type: 'character',
       title: { en: 'Demiurge Lambda' },
       content: { en: ['Added.'] },
       link: { kind: 'character', slug: 'demiurge-lambda' },
     },
-    { date: '2026-09-23', type: 'news', title: { en: 'Old news' }, content: {} },
+    { id: '4e5f6a7b', date: '2026-09-23', type: 'news', title: { en: 'Old news' }, content: {} },
   ];
   const disk: ChangelogDisk = { loadChangelog: () => ENTRIES, today: () => '2026-10-08' };
 
@@ -5133,14 +5134,17 @@ describe('fillChangelogTemplate — un gabarit rempli par le serveur', () => {
 });
 
 describe('saveChangelogList — écritures injectées', () => {
+  /** Une entrée du disque : elle porte son id. */
   const LAMBDA: ChangelogEntry = {
+    id: '0a1b2c3d',
     date: '2026-10-06',
     type: 'character',
     title: { en: 'Demiurge Lambda', fr: 'Démiurge Lambda' },
     content: { en: ['Demiurge Lambda has been added.'], fr: ['Démiurge Lambda est là.'] },
     link: { kind: 'character', slug: 'demiurge-lambda' },
   };
-  const NEWS: ChangelogEntry = {
+  /** Une entrée posée par un gabarit : pas encore d'id, le store l'attribue. */
+  const NEWS: UnsavedChangelogEntry = {
     date: '2026-09-23',
     type: 'news',
     title: { en: 'Outerpedia in French and Spanish' },
@@ -5155,7 +5159,7 @@ describe('saveChangelogList — écritures injectées', () => {
     const calls = {
       order: [] as string[],
       asked: 0,
-      written: [] as ChangelogEntry[][],
+      written: [] as UnsavedChangelogEntry[][],
       git: [] as [string[], string][],
     };
     const fake: ChangelogDeps = {
@@ -5248,9 +5252,32 @@ describe('saveChangelogList — écritures injectées', () => {
     ]);
   });
 
-  it('le fichier réel, renvoyé intact, se réécrit à l’identique — clés et langues dans leur ordre', async () => {
+  it('l’id : celui du disque part intact, en tête ; un id mal formé est retiré ; une entrée de gabarit part sans', async () => {
+    const { calls, fake } = deps();
+    await saveChangelogList(
+      [
+        { ...LAMBDA, title: { en: 'Lambda, renamed' } },
+        NEWS,
+        { ...NEWS, id: 'PAS-UN-ID' },
+        { ...NEWS, id: 12 },
+      ],
+      [],
+      fake,
+    );
+    expect(calls.written[0]).toEqual([
+      { ...LAMBDA, title: { en: 'Lambda, renamed' } },
+      NEWS,
+      NEWS,
+      NEWS,
+    ]);
+    expect(Object.keys(calls.written[0][0])[0]).toBe('id');
+    expect(calls.written[0].slice(1).map((e) => 'id' in e)).toEqual([false, false, false]);
+  });
+
+  it('le fichier réel, renvoyé intact, se réécrit à l’identique — id, clés et langues dans leur ordre', async () => {
     const real = loadChangelog();
     expect(real.length).toBeGreaterThan(100);
+    expect(real.every((e) => /^[0-9a-f]{8}$/.test(e.id))).toBe(true);
     const { calls, fake } = deps();
     const out = await saveChangelogList(structuredClone(real), [], fake);
     expect(out.ok).toBe(true);

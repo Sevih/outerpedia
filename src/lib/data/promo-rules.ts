@@ -7,6 +7,17 @@
  * liste vivante est sur R2 (cf. `lib/data/live-coupons`).
  */
 
+/**
+ * Page OFFICIELLE d'échange des codes — le seul endroit à changer : la page
+ * `/coupons` (lien iOS, `coupons.redeem_ios` des six langues, par `{url}`) et
+ * le bot Discord (`redeemUrl` de `/api/bot/coupons`) la lisent ici.
+ *
+ * Le client Steam 1.4.18 ouvre `https://coupon.outerplane.major7.kr:39009/coupon` ;
+ * les deux adresses rendent la même page (vérifié le 16/10/2026 : 200, même
+ * contenu au sha256 près), l'adresse sans port est donc gardée.
+ */
+export const COUPON_REDEEM_URL = 'https://coupon.outerplane.major7.kr/coupon?lang=en';
+
 export interface PromoCode {
   code: string;
   /** nom de récompense → quantité (texte). */

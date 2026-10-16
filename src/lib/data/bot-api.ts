@@ -2,11 +2,18 @@
  * Payloads de l'API INTERNE du bot Discord (outerbot) — servis par
  * `src/app/api/bot/*`. Contrat volontairement MINCE et PRÉ-FORMATÉ : le bot ne
  * connaît ni LangDict, ni familles, ni passifs — il affiche des chaînes EN
- * telles quelles dans ses embeds (miroir des interfaces `Wiki*` de
- * outerbot/src/wiki/client.ts — toute évolution se fait des deux côtés).
+ * telles quelles dans ses embeds (interfaces `Wiki*` de outerbot/src/wiki/client.ts).
+ *
+ * Le contrat est ÉCRIT dans `src/lib/data/fixtures/bot-api/*.json` : un extrait
+ * réel de chaque route, dont `bot-api.contract.test.ts` vérifie la forme contre
+ * le payload complet. Un champ ajouté, retiré ou renommé ici fait échouer ce
+ * test : on régénère les extraits (commande en tête du test), et le bot les
+ * recopie dans son `test/fixtures/bot-api/`.
  *
  * Les chemins d'images sont RELATIFS (`/images/...`) : le bot préfixe sa
- * propre base (IMG_BASE_URL → R2), comme le site préfixe la sienne.
+ * propre base (IMG_BASE_URL → R2), comme le site préfixe la sienne. Les liens
+ * (`href`) sont des chemins sans préfixe de langue : le bot préfixe l'adresse
+ * du site.
  */
 import type { PassiveRef } from '@contracts';
 import type { TFunction } from '@/i18n';
@@ -19,6 +26,8 @@ import {
 import { listGuides } from '@/lib/data/guides';
 import { getChangelog, type ChangelogType } from '@/lib/data/changelog';
 import { getActiveCoupons } from '@/lib/home';
+import { img } from '@/lib/images';
+import { COUPON_REDEEM_URL } from '@/lib/data/promo-rules';
 import { changelogHref, changelogThumb } from '@/components/changelog/presentation';
 import { gameLineBreaks } from '@/components/ui/GameText';
 import {
@@ -44,13 +53,19 @@ export interface BotCharacter {
   class: string;
   rarity: number;
   id: string;
+  /** Fiche du perso, chemin sans préfixe de langue (`/characters/<slug>`). */
+  href: string;
+  /** Face icon, chemin relatif comme les autres images. */
+  icon: string;
 }
 
-/** Un guide pour /guide — le lien se reconstruit en `/guides/<category>/<slug>`. */
+/** Un guide pour /guide. */
 export interface BotGuide {
   category: string;
   slug: string;
   title: string;
+  /** Page du guide, chemin sans préfixe de langue (`/guides/<category>/<slug>`). */
+  href: string;
 }
 
 /** Un code promo ACTIF pour les annonces Discord — récompenses en texte EN. */
@@ -59,10 +74,16 @@ export interface BotCoupon {
   start: string;
   end: string;
   rewards: { name: string; qty: string }[];
+  /** Page des codes du site (`/coupons`), sans préfixe de langue. */
+  href: string;
+  /** Page officielle d'échange (`COUPON_REDEEM_URL`), adresse absolue. */
+  redeemUrl: string;
 }
 
 /** Une entrée PUBLIÉE du journal du site pour les annonces Discord. */
 export interface BotChangelogEntry {
+  /** Identité stable (8 hex) : ni le titre ni la date ne la changent — la clé « déjà annoncée ». */
+  id: string;
   date: string;
   type: ChangelogType;
   title: string;
@@ -85,6 +106,8 @@ export interface BotItem {
   effectTiers?: string[];
   source?: string;
   characterName?: string;
+  /** Page détail, chemin sans préfixe de langue (`/equipment/<slug>`). */
+  href: string;
 }
 
 /** Persos PUBLIÉS (ceux qui ont une fiche), nom d'affichage EN, triés par nom. */
@@ -101,6 +124,8 @@ export function buildBotCharacters(): BotCharacter[] {
           class: c.class,
           rarity: c.rarity,
           id: c.id,
+          href: `/characters/${slug}`,
+          icon: relativeImg(img.face(c.id)),
         },
       ];
     })
@@ -111,7 +136,12 @@ export function buildBotCharacters(): BotCharacter[] {
 export function buildBotGuides(): BotGuide[] {
   return listGuides()
     .filter((g) => !g.hidden)
-    .map((g) => ({ category: g.category, slug: g.slug, title: g.title.en }));
+    .map((g) => ({
+      category: g.category,
+      slug: g.slug,
+      title: g.title.en,
+      href: `/guides/${g.category}/${g.slug}`,
+    }));
 }
 
 /**
@@ -126,6 +156,8 @@ export async function buildBotCoupons(): Promise<BotCoupon[]> {
     start: c.start,
     end: c.end,
     rewards: c.rewards.map((r) => ({ name: r.item.name, qty: r.qty })),
+    href: '/coupons',
+    redeemUrl: COUPON_REDEEM_URL,
   }));
 }
 
@@ -143,6 +175,7 @@ export function buildBotChangelog(): BotChangelogEntry[] {
     const src = changelogThumb(e);
     const thumb = src && relativeImg(src);
     return {
+      id: e.id,
       date: e.date,
       type: e.type,
       title: e.title,
@@ -152,6 +185,8 @@ export function buildBotChangelog(): BotChangelogEntry[] {
     };
   });
 }
+
+const equipmentHref = (slug: string): string => `/equipment/${slug}`;
 
 const cap = (s: string): string => (s ? s[0]!.toUpperCase() + s.slice(1) : s);
 
@@ -215,6 +250,7 @@ function familyItems(
         classLimit: cap(v.classLimit),
         ...passiveView(v.passives, byLevel),
         ...(source ? { source } : {}),
+        href: equipmentHref(v.slug),
       }));
     }
     return [
@@ -226,6 +262,7 @@ function familyItems(
         ...(f.classLimits.length ? { classLimit: f.classLimits.map(cap).join(' / ') } : {}),
         ...passiveView(f.passives, byLevel),
         ...(source ? { source } : {}),
+        href: equipmentHref(f.slug),
       },
     ];
   });
@@ -250,19 +287,22 @@ export function buildBotItems(t: TFunction): BotItem[] {
         ];
       }),
       ...(source ? { source } : {}),
+      href: equipmentHref(s.slug),
     };
   });
 
   const ee: BotItem[] = getEEViews().map((e) => {
     const owner = getCharacter(e.characterId);
+    const slug = slugifyEquipment(e.name.en);
     return {
       type: 'ee',
-      slug: slugifyEquipment(e.name.en),
+      slug,
       name: e.name.en,
       icon: `/images/characters/ee/${e.characterId}.webp`,
       ...(owner ? { classLimit: cap(owner.class) } : {}),
       ...passiveView(e.passives, true),
       ...(owner ? { characterName: characterDisplayName(owner, 'en') } : {}),
+      href: equipmentHref(slug),
     };
   });
 

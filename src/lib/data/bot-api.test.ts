@@ -1,7 +1,34 @@
-import { describe, expect, it } from 'vitest';
-import type { TFunction } from '@/i18n';
-import { buildBotCharacters, buildBotGuides, buildBotItems } from '@/lib/data/bot-api';
+import { describe, expect, it, vi } from 'vitest';
+import { loadMessages, makeT, type TFunction } from '@/i18n';
+import {
+  buildBotChangelog,
+  buildBotCharacters,
+  buildBotCoupons,
+  buildBotGuides,
+  buildBotItems,
+} from '@/lib/data/bot-api';
+import { getCharacterBySlug } from '@/lib/data/characters';
 import { getEquipmentDetail } from '@/lib/data/equipment-detail';
+import { getGuide } from '@/lib/data/guides';
+import { COUPON_REDEEM_URL } from '@/lib/data/promo-rules';
+import { LANGS } from '@/lib/i18n/config';
+import type { CouponVM } from '@/lib/home';
+
+// Les coupons actifs viennent de R2 : une liste figée à la place, aucun appel réseau.
+vi.mock('@/lib/home', async (importOriginal) => ({
+  ...(await importOriginal<typeof import('@/lib/home')>()),
+  getActiveCoupons: async () => ({
+    codes: [
+      {
+        code: 'OUTER2026',
+        start: '2026-10-01',
+        end: '2026-10-31',
+        rewards: [{ item: { name: 'Gold' }, qty: '100000' }],
+      },
+    ] as unknown as CouponVM[],
+    activeCount: 1,
+  }),
+}));
 
 /**
  * L'API du bot Discord est un CONTRAT INTER-REPOS : outerbot (wiki/client.ts)
@@ -27,6 +54,24 @@ describe('/api/bot/characters — un post de forum par perso publié', () => {
     // Un slug dupliqué ferait créer deux posts de reviews pour le même perso.
     expect(new Set(characters.map((c) => c.slug)).size).toBe(characters.length);
   });
+
+  it('`href` mène à la fiche, `icon` est la face icon en chemin relatif', () => {
+    for (const c of buildBotCharacters()) {
+      expect(c.href, c.name).toBe(`/characters/${c.slug}`);
+      expect(getCharacterBySlug(c.slug)?.id, c.name).toBe(c.id);
+      expect(c.icon, c.name).toBe(`/images/characters/faceicon/FI_${c.id}.webp`);
+    }
+  });
+
+  it('aucun slug n’est fait que de chiffres : le bot distingue id et slug par la forme', () => {
+    // `/reviews/<id>` et `/reviews/<slug>` (lot suivant du bot) : les ids sont
+    // tous numériques, un slug numérique serait pris pour un id.
+    const characters = buildBotCharacters();
+    for (const c of characters) {
+      expect(c.slug, c.name).not.toMatch(/^\d+$/);
+      expect(c.id, c.name).toMatch(/^\d+$/);
+    }
+  });
 });
 
 describe('/api/bot/guides', () => {
@@ -38,6 +83,43 @@ describe('/api/bot/guides', () => {
       expect(g.slug).toBeTruthy();
       expect(g.title, `${g.category}/${g.slug}`).toBeTruthy();
     }
+  });
+
+  it('`href` mène à une page de guide qui existe', () => {
+    for (const g of buildBotGuides()) {
+      expect(g.href).toBe(`/guides/${g.category}/${g.slug}`);
+      expect(getGuide(g.category, g.slug), g.href).toBeDefined();
+    }
+  });
+});
+
+describe('/api/bot/coupons', () => {
+  it('chaque code porte le lien de la page des codes et l’adresse d’échange officielle', async () => {
+    const coupons = await buildBotCoupons();
+    expect(coupons).toHaveLength(1);
+    for (const c of coupons) {
+      expect(c.href).toBe('/coupons');
+      expect(c.redeemUrl).toBe(COUPON_REDEEM_URL);
+    }
+  });
+
+  it('le lien iOS de la page `/coupons` est la même constante, dans les six langues', async () => {
+    for (const lang of LANGS) {
+      const html = makeT(await loadMessages(lang))('coupons.redeem_ios', {
+        url: COUPON_REDEEM_URL,
+      });
+      expect(html, lang).toContain(`href="${COUPON_REDEEM_URL}"`);
+      expect(html, lang).not.toContain('{url}');
+    }
+  });
+});
+
+describe('/api/bot/changelog', () => {
+  it('chaque entrée porte son id stable (8 hex), unique', () => {
+    const entries = buildBotChangelog();
+    expect(entries.length).toBeGreaterThan(0);
+    for (const e of entries) expect(e.id, e.title).toMatch(/^[0-9a-f]{8}$/);
+    expect(new Set(entries.map((e) => e.id)).size).toBe(entries.length);
   });
 });
 
@@ -82,6 +164,13 @@ describe('/api/bot/items — catalogue pré-formaté pour les embeds', () => {
     const ee = items.filter((i) => i.type === 'ee');
     expect(ee.length).toBeGreaterThan(50);
     for (const i of ee) expect(i.characterName, i.name).toBeTruthy();
+  });
+
+  it('`href` mène à la page détail de l’item (variantes multi-classes et EE comprises)', () => {
+    for (const i of items) {
+      expect(i.href, i.name).toBe(`/equipment/${i.slug}`);
+      expect(getEquipmentDetail(i.slug, 'en'), i.href).toBeDefined();
+    }
   });
 
   it('slugs uniques par type (la recherche du bot et les URLs en dépendent)', () => {

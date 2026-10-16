@@ -9507,6 +9507,7 @@ describe('Journal du site — la page, sur le vrai markup', () => {
   const TODAY = '2026-10-08';
   type Link = { kind: 'character'; slug: string } | { kind: string; href: string };
   interface Entry {
+    id?: string;
     date: string;
     type: string;
     title: Record<string, string>;
@@ -9534,6 +9535,7 @@ describe('Journal du site — la page, sur le vrai markup', () => {
   }
 
   const LAMBDA: Entry = {
+    id: '0a1b2c3d',
     date: '2026-10-06',
     type: 'character',
     title: { en: 'Demiurge Lambda', fr: 'Démiurge Lambda' },
@@ -9541,6 +9543,7 @@ describe('Journal du site — la page, sur le vrai markup', () => {
     link: { kind: 'character', slug: 'demiurge-lambda' },
   };
   const TOWER: Entry = {
+    id: '4e5f6a7b',
     date: '2026-10-06',
     type: 'guide',
     title: { en: 'Universal Tower' },
@@ -9548,6 +9551,7 @@ describe('Journal du site — la page, sur le vrai markup', () => {
     link: { kind: 'guide', href: '/guides/skyward-tower/universal-tower' },
   };
   const NEWS: Entry = {
+    id: '8c9d0e1f',
     date: '2026-09-23',
     type: 'news',
     title: { en: 'Outerpedia in French' },
@@ -10119,6 +10123,7 @@ describe('Journal du site — la page, sur le vrai markup', () => {
           // La liste entière, récent → ancien ; les entrées intactes telles que le disque.
           list: [
             {
+              id: TOWER.id,
               date: '2026-10-20',
               type: 'guide',
               title: { en: 'Tower, universal' },
@@ -10132,6 +10137,9 @@ describe('Journal du site — la page, sur le vrai markup', () => {
         },
       },
     ]);
+    // L'entrée modifiée garde l'id du disque, en tête comme dans le fichier.
+    const sent = page.calls[0].body as { list: Entry[] };
+    expect(Object.keys(sent.list[0])[0]).toBe('id');
     // L'état est relu : plus rien en attente, les fiches repliées.
     expect(page.served.reads).toBe(2);
     expect(page.el('j-count').textContent).toBe('aucune modification');
@@ -10394,7 +10402,8 @@ describe('Journal du site — la page, sur le vrai markup', () => {
     const sent = page.calls[0].body as { list: Entry[]; changed: string[] };
     expect(sent.changed).toEqual(['Summer Anna']);
     expect(sent.list).toHaveLength(4);
-    // Les langues dans l'ordre du fichier, pas celui de l'écran.
+    // Les langues dans l'ordre du fichier, pas celui de l'écran ; pas d'id, le
+    // serveur l'attribue à l'enregistrement.
     expect(JSON.stringify(sent.list[0])).toBe(
       JSON.stringify({
         date: '2026-10-08',

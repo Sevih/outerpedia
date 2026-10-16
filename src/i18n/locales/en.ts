@@ -896,7 +896,7 @@ const en = {
   'coupons.validity': '{start} — {end}',
   'coupons.redeem_android': 'Android: Menu → Settings → Coupon',
   'coupons.redeem_ios':
-    'iOS: <a href="https://coupon.outerplane.major7.kr/coupon?lang=en" target="_blank" rel="noopener noreferrer" class="underline text-cyan-400">Redeem on the official website</a>',
+    'iOS: <a href="{url}" target="_blank" rel="noopener noreferrer" class="underline text-cyan-400">Redeem on the official website</a>',
   // Coupon one-click redeem
 
   // Homepage sections

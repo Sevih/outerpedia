@@ -66,7 +66,11 @@ const linesOf = (text) =>
 const typeLabel = (type) => data.types.find((t) => t.value === type)?.label ?? type;
 
 // ------------------------------------------------------ le modèle
-/** L'entrée que la ligne enverrait : la forme du fichier, langues dans son ordre. */
+/**
+ * L'entrée que la ligne enverrait : la forme du fichier, langues dans son ordre.
+ * L'id d'une ligne venue du disque part avec elle ; une ligne de gabarit n'en a
+ * pas, le serveur le lui attribue à l'enregistrement.
+ */
 function toEntry(r) {
   const title = {};
   const content = {};
@@ -85,6 +89,7 @@ function toEntry(r) {
       : null;
   const image = r.image.trim();
   return {
+    ...(r.id && { id: r.id }),
     date: r.date,
     type: r.type,
     title,
@@ -101,6 +106,7 @@ const enOf = (r) => JSON.stringify([(r.title[def()] ?? '').trim(), ...linesOf(r.
 function fromEntry(e, was = e) {
   const r = {
     key: ++seq,
+    id: e.id ?? '',
     date: e.date ?? '',
     type: e.type ?? '',
     draft: e.draft === true,

@@ -8,23 +8,32 @@
  *
  * Écritures réelles dans un tmp via `sandbox()` (cf. `store-fixture`).
  */
+import { readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
 import { afterAll, beforeEach, describe, expect, it } from 'vitest';
 import { sandbox } from './store-fixture';
-import type { ChangelogEntry } from '@/lib/data/changelog';
+import type { ChangelogEntry, UnsavedChangelogEntry } from '@/lib/data/changelog';
 
 const box = sandbox('changelog-');
 // ⚠ APRÈS `sandbox()` : le store fige son chemin au chargement.
-const { saveChangelog, loadChangelog } = await import('./changelog-store');
+const { saveChangelog, loadChangelog, CHANGELOG_ID_RE } = await import('./changelog-store');
 
 const FILE = 'data/curated/changelog.json';
 
-const ok = (over: Partial<ChangelogEntry> = {}): ChangelogEntry =>
+/** Une entrée valide SANS id : celle qu'un gabarit pose, l'id vient à l'écriture. */
+const ok = (over: Partial<UnsavedChangelogEntry> = {}): UnsavedChangelogEntry =>
   ({
     title: { en: 'Nouveau guide' },
     type: 'guide',
     date: '2026-07-26',
     ...over,
-  }) as ChangelogEntry;
+  }) as UnsavedChangelogEntry;
+
+/** `entry` telle que le fichier la porte : un id attribué en tête. */
+const withId = (entry: UnsavedChangelogEntry) => ({
+  id: expect.stringMatching(CHANGELOG_ID_RE),
+  ...entry,
+});
 
 beforeEach(() => box.reset());
 afterAll(() => box.dispose());
@@ -32,7 +41,7 @@ afterAll(() => box.dispose());
 describe('saveChangelog — validation', () => {
   it('accepte une entrée complète et l’écrit', async () => {
     expect(await saveChangelog([ok()])).toEqual([]);
-    expect(box.read<ChangelogEntry[]>(FILE)).toEqual([ok()]);
+    expect(box.read<ChangelogEntry[]>(FILE)).toEqual([withId(ok())]);
   });
 
   it('exige le titre EN (les autres langues sont un repli)', async () => {
@@ -108,11 +117,59 @@ describe('saveChangelog — écriture tout-ou-rien', () => {
   it('`loadChangelog` relit ce qui vient d’être écrit ; [] si absent', async () => {
     expect(loadChangelog()).toEqual([]);
     await saveChangelog([ok()]);
-    expect(loadChangelog()).toEqual([ok()]);
+    expect(loadChangelog()).toEqual([withId(ok())]);
   });
 
   it('ne laisse aucun temporaire derrière lui', async () => {
     await saveChangelog([ok()]);
     expect(box.leftovers()).toEqual([]);
+  });
+});
+
+describe('saveChangelog — id stable des entrées', () => {
+  it('attribue un id (8 hex, en PREMIÈRE clé) à chaque entrée qui n’en a pas, distinct des autres', async () => {
+    expect(await saveChangelog([ok(), ok(), ok({ id: 'abcdef01' })])).toEqual([]);
+    const list = box.read<ChangelogEntry[]>(FILE);
+    for (const e of list.slice(0, 2)) {
+      expect(e.id).toMatch(CHANGELOG_ID_RE);
+      expect(Object.keys(e)[0]).toBe('id');
+    }
+    // L'entrée qui en avait un le garde, à sa place.
+    expect(list[2]).toEqual(ok({ id: 'abcdef01' }));
+    expect(new Set(list.map((e) => e.id)).size).toBe(3);
+  });
+
+  it('garde l’id existant, même quand le titre et la date changent', async () => {
+    await saveChangelog([ok({ id: '0123abcd' })]);
+    await saveChangelog([
+      ok({ id: '0123abcd', title: { en: 'Titre corrigé' }, date: '2026-07-27' }),
+    ]);
+    expect(box.read<ChangelogEntry[]>(FILE)).toEqual([
+      { id: '0123abcd', title: { en: 'Titre corrigé' }, type: 'guide', date: '2026-07-27' },
+    ]);
+  });
+
+  it('refuse un id mal formé ou en double, situé, sans rien écrire', async () => {
+    await box.put(FILE, [ok({ id: '0123abcd' })]);
+    const before = box.raw(FILE);
+    for (const id of ['ABCDEF01', '0123abc', '0123abcde', 'zzzzzzzz', '', 12 as never]) {
+      const errors = await saveChangelog([ok(), ok({ id })]);
+      expect(errors, String(id)).toEqual([
+        `Entrée 2 : id invalide (« ${id} », attendu 8 caractères hexadécimaux).`,
+      ]);
+    }
+    expect(await saveChangelog([ok({ id: '0123abcd' }), ok({ id: '0123abcd' })])).toEqual([
+      'Entrée 2 : id en double (« 0123abcd »).',
+    ]);
+    expect(box.raw(FILE)).toBe(before);
+  });
+
+  it('le fichier réel : chaque entrée porte un id bien formé, unique', () => {
+    // Le vrai fichier, pas celui du bac à sable.
+    const path = resolve(import.meta.dirname, '../../../data/curated/changelog.json');
+    const ids = (JSON.parse(readFileSync(path, 'utf8')) as { id?: string }[]).map((e) => e.id);
+    expect(ids.length).toBeGreaterThan(100);
+    for (const id of ids) expect(id).toMatch(CHANGELOG_ID_RE);
+    expect(new Set(ids).size).toBe(ids.length);
   });
 });

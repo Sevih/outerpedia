@@ -38,6 +38,12 @@ export type ChangelogLink =
 
 /** Forme brute stockée dans le JSON curé. */
 export interface ChangelogEntry {
+  /**
+   * Identité STABLE de l'entrée (8 caractères hexadécimaux) : posée une fois par
+   * `saveChangelog`, jamais recalculée — ni le titre ni la date ne la changent.
+   * Le bot Discord reconnaît par elle une entrée déjà annoncée.
+   */
+  id: string;
   /** 'YYYY-MM-DD' — affichage ET date de mise en ligne. */
   date: string;
   type: ChangelogType;
@@ -50,8 +56,12 @@ export interface ChangelogEntry {
   draft?: boolean;
 }
 
+/** Une entrée pas encore enregistrée (posée par un gabarit de quick) : `saveChangelog` lui attribue son id. */
+export type UnsavedChangelogEntry = Omit<ChangelogEntry, 'id'> & { id?: string };
+
 /** Entrée résolue pour une langue (ce que consomme la page). */
 export interface ResolvedChangelogEntry {
+  id: string;
   date: string;
   type: ChangelogType;
   title: string;
@@ -82,6 +92,7 @@ function resolveLines(map: LocalizedLines, lang: Lang): string[] {
  */
 export function resolveChangelogEntry(e: ChangelogEntry, lang: Lang): ResolvedChangelogEntry {
   return {
+    id: e.id,
     date: e.date,
     type: e.type,
     title: resolveText(e.title, lang),

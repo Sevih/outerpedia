@@ -7,6 +7,67 @@
 
 ## 2026-10-16
 
+- **Bot : `href` et `icon` servis par `/api/bot/*`, id stable du journal,
+  URL d'échange des codes en une constante, extraits du contrat (lot B54).**
+  Revue d'outerbot du 09/10 (D1, D2, B8, B9), triée le 15/10 : le bot
+  reconstruisait ses liens et la face icon à la main, reconnaissait une
+  entrée du journal à `date|titre` (un titre corrigé la faisait reposter),
+  recopiait l'URL d'échange, et le contrat des deux dépôts n'était écrit
+  nulle part. Le lot n'AJOUTE que des champs : rien de retiré ni de renommé,
+  le bot en production lit la forme actuelle (il lira les nouveaux à OB1).
+  **Liens (D2)** : `href` sans préfixe de langue sur `BotCharacter`
+  (`/characters/<slug>`), `BotGuide` (`/guides/<cat>/<slug>`), `BotItem`
+  (`/equipment/<slug>`, variantes multi-classes et EE avec le slug qu'elles
+  servaient déjà) et `BotCoupon` (`/coupons`) ; `icon` sur `BotCharacter` =
+  `relativeImg(img.face(id))`. **Id du journal (B8)** : `ChangelogEntry`,
+  `ResolvedChangelogEntry`, `resolveChangelogEntry` et `BotChangelogEntry`
+  portent `id` (8 hex) ; `UnsavedChangelogEntry` (id optionnel) est la forme
+  d'avant enregistrement. `src/lib/admin/changelog-store.ts` gagne
+  `CHANGELOG_ID_RE` et `assignChangelogIds` (`randomBytes(4)`, unique dans
+  la liste, posé en première clé, jamais recalculé) ; `saveChangelog` refuse
+  un id mal formé ou en double (« Entrée n : id invalide / id en double »,
+  rien d'écrit) puis attribue les manquants. Quick : `cleanChangelogEntry`
+  garde un id bien formé (un id mal formé venu de la page est retiré, le
+  store en attribue un neuf), l'aperçu résout avec `id: ''` ; `toEntry` et
+  `fromEntry` (`scripts/quick/ui/tabs/changelog.js`) portent l'id d'une ligne
+  du disque, une ligne de gabarit part sans. Les 150 entrées ont reçu leur id
+  par `saveChangelog(loadChangelog())`, depuis un script jetable du
+  scratchpad (non committé) : `git diff --numstat` = `150 0`,
+  `grep -c '"id"'` = 150, et aucune ligne du diff autre que
+  `+    "id": "…",`. **URL d'échange (B9)** : `COUPON_REDEEM_URL` dans
+  `src/lib/data/promo-rules.ts` (valeur actuelle, commentaire sur
+  l'adresse `:39009` du client Steam 1.4.18 et la vérification du 16/10) ;
+  `coupons.redeem_ios` des six locales passe à `href="{url}"`, la page
+  `/coupons` passe `{ url: COUPON_REDEEM_URL }`, `BotCoupon` gagne
+  `redeemUrl`. Aucune clé i18n nouvelle. **Contrat (D1)** :
+  `src/lib/data/fixtures/bot-api/{characters,guides,items,coupons,changelog}.json`,
+  extraits réels choisis par le test (items : un par type, la variante
+  Briareos `[Defender]`, un EE ; journal : une entrée avec `thumb`, une
+  sans ; coupons : deux codes figés, `getActiveCoupons` bouchonné, aucun
+  R2) ; `src/lib/data/bot-api.contract.test.ts` compare la forme (chemin,
+  `rewards[].name` compris → types, présent partout ou pas) du payload
+  complet à celle de l'extrait, et un cas retouche la forme en mémoire
+  (renommé, retiré partout ou d'une entrée, ajouté, retypé : échec ; valeur
+  changée, entrée en moins : même forme). Régénération en tête du test
+  (`BOT_API_FIXTURES=write …`), le bot recopie les fichiers dans son
+  `test/fixtures/bot-api/` ; l'en-tête de `bot-api.ts` y renvoie.
+  **Garde (lot suivant du bot)** : `bot-api.test.ts` vérifie qu'aucun slug de
+  perso n'est fait que de chiffres (les ids le sont tous). Tests ajoutés :
+  chaque `href` mène à une page qui existe (`getCharacterBySlug`,
+  `getEquipmentDetail`, `getGuide`), `icon` relatif ; `saveChangelog` (id
+  attribué, gardé malgré un titre et une date changés, mal formé ou en
+  double refusé octet pour octet, ids du vrai fichier uniques et bien
+  formés) ; quick (id du disque gardé en tête, gabarit sans id, fichier réel
+  réécrit à l'identique, id compris ; page : la ligne modifiée garde l'id) ;
+  `buildBotCoupons` (`href`, `redeemUrl === COUPON_REDEEM_URL`) et
+  `t('coupons.redeem_ios', { url })` dans les six langues (l'URL, plus de
+  `{url}`). Aucun changement visuel : `/coupons` et `/changelog` rendus en
+  `renderToStaticMarkup` dans les six langues avec les fichiers de `HEAD`
+  puis avec les miens (coupons de `coupons.json` en bouchon) : 12 HTML
+  identiques à l'octet. Vérifié : `pnpm typecheck` (les trois `tsc --noEmit` sans erreur), `pnpm lint` (`$ eslint`, sans erreur), `pnpm test` (`Tests 3939 passed (3939)`), les tests de quick sous `NODE_ENV=development` (`Tests 1147 passed (1147)`) ; `pnpm format:check` ne signale que deux fichiers d'un autre lot en cours (`datagen/damage/damage-data.test.ts`, `damage-sets.test.ts`), les miens passent `prettier --check`. Laissé : tout fichier d'outerbot (lot OB1), la
+  lecture des reviews par id (A59), les liens d'index nus du bot, le `guid`
+  du flux RSS, la valeur de l'URL d'échange.
+
 - **Sets : niveau de buff du jeu (H2/R9), ligne de buff du client (R17),
   butin au palier de base et recos au palier enchanté marqué (M9), latents
   des sets (lot C18).** **Niveau de buff** : le client (constructeur de
