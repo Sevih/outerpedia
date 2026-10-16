@@ -28,6 +28,19 @@ export function loadBuffIndex(): Map<string, Row[]> {
   return withCaseInsensitiveGet(idx);
 }
 
+/**
+ * Niveau de buff d'un effet de SET (2P/4P d'une ligne `ItemSpecialOptionTemplet`)
+ * = colonne `BuffLevel_xP` + 1. Client : le constructeur de `CItemSpecialOption`
+ * (cas d'un set) prend `BuffLevel_2P + 1` (resp. `_4P`) et le passe à
+ * `CBuffTempletContainer.GetBuffTemplet`. Les lignes de base n'ont pas la
+ * colonne (→ niveau 1), les lignes enchantées (`BreakLimitCount 4`) ont `1`
+ * (→ niveau 2). Les options UNIQUES (arme, accessoire, EE) ne passent PAS par
+ * ici : le client y passe le niveau tel quel.
+ */
+export function setBuffLevel(row: Row, piece: '2P' | '4P'): number {
+  return num(row[`BuffLevel_${piece}`]) + 1;
+}
+
 /** Vrai si la valeur du buff est en per-mille (à diviser par 10 pour un %). */
 function isPermille(buff: Row): boolean {
   if (buff.ApplyingType === 'OAT_RATE') return true;

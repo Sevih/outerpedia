@@ -1847,6 +1847,16 @@ passent par `× 1000f / 1000f`, sans effet),
   celui du templet, retenu seulement si `≤ max(enchant, 1)`, et une ligne
   `IsAdd = false` retire les niveaux inférieurs de son groupe, `IsAdd = true`
   s'ajoute.
+- Effet 2P/4P d'un **set** (constructeur de `CItemSpecialOption`, cas d'un set) :
+  le buff est résolu au **niveau `BuffLevel_2P + 1`** (resp. `_4P`). La ligne de
+  base n'a pas la colonne (niveau 1), la ligne enchantée (`BreakLimitCount 4`)
+  porte `1` (niveau 2). Les options uniques (arme, accessoire, EE) passent leur
+  niveau tel quel. Quand la ligne 4P retenue porte un buff 4P et `IgnoreLowSet`,
+  les buffs du 2P ne sont pas posés (`CCharacterData.CreateBuffSetItem`).
+- Ligne de buff à un niveau donné (`CBuffTempletContainer.GetBuffTemplet`) : la
+  liste du `BuffID` parcourue depuis la fin, la première ligne de niveau ≤
+  demandé — la plus haute ≤ demandé, la **dernière** de la table à égalité de
+  niveau, et rien (`null`) sous la première ligne.
 
 ### 17.6 Pénalités PvP (UpdatePvpTurnPenalty)
 

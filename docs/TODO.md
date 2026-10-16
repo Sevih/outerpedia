@@ -35,8 +35,8 @@ les preuves et les décisions vivent dans le tri consolidé de sevih-tool
       Trouver ce qui les rend dynamiques (un `headers()`, `cookies()` ou
       `searchParams` lu en chemin) et décider : les mettre en cache, ou
       corriger les commentaires.
-- [ ] **Sets et équipement (C, build)** : H2, M8, M9, M10, B1, R11, R12,
-      R13, O11, R17.
+- [ ] **Sets et équipement (C, build)** : M8, M10, B1, R11, R12, R13, O11
+      (H2, M9, R17 : FAIT, C18).
 - [ ] **Rencontres (C, build)** : R1, R2, R3, O8, O9 ; côté site R4, R5,
       R21.
 - [ ] **Primitives texte et pourcentage (C, build)** : R6, O3, O4, O14,

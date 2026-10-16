@@ -31,7 +31,11 @@
  *     `IsAdd=true` s'ajoute (EE Lv10 `_ADD`/`_CHANGE`) ;
  *   - SETS : la ligne dont `breakLimitCounts` contient le nombre de break de
  *     la pièce (0 = base, 4 = enchantée) ; 1 set choisi = 4 pièces (2P + 4P),
- *     2 sets = 2P chacun (convention UI) ;
+ *     2 sets = 2P chacun (convention UI). Niveau de buff de l'effet 2P/4P =
+ *     colonne `BuffLevel_xP` + 1 (constructeur de `CItemSpecialOption`),
+ *     résolu par datagen (`setBuffLevel`) : 1 à la base, 2 à l'enchanté ;
+ *   - ligne de buff (`pickBuffRow`, comme `CBuffTempletContainer.GetBuffTemplet`) :
+ *     la DERNIÈRE ligne de niveau ≤ demandé, rien sous la première ligne ;
  *   - arme/accessoire : le buff unique porte 5 niveaux = breakthrough T0..T4
  *     → niveau `tier + 1` (convention validée par l'affichage wiki) ;
  *   - Rogue's Charm : interrupteur « +10 » (seul état damage-pertinent — la
@@ -390,13 +394,17 @@ export function gearConditionMet(
 
 // ── Sélections de niveau (§ 17.5) ───────────────────────────────────────────
 
-/** La ligne de buff du niveau demandé — sinon la plus haute ligne ≤ demandé,
- *  sinon la première (un buff mono-niveau sert tous les paliers). Exportée :
- *  la sélection des lignes DoT (inputs.ts) suit la MÊME règle. */
+/** La ligne de buff au niveau demandé, comme `CBuffTempletContainer.GetBuffTemplet` :
+ *  la liste parcourue DEPUIS LA FIN, la première ligne de niveau ≤ demandé —
+ *  donc la plus haute ≤ demandé (un buff mono-niveau sert tous les paliers
+ *  au-dessus), la DERNIÈRE de la table à égalité de niveau (Sigma
+ *  `2000052_u_3` : `SKILL_START` puis `SKILL_FINISH`), et `undefined` sous la
+ *  première ligne (le client rend `null`). Les lignes arrivent dans l'ordre de
+ *  la table (`buffs.json`, tri stable par niveau). Exportée : la main de
+ *  talisman et la sélection des lignes DoT (inputs.ts) suivent la MÊME règle. */
 export function pickBuffRow(rows: DataBuffLevel[], level: number): DataBuffLevel | undefined {
-  let best: DataBuffLevel | undefined;
-  for (const r of rows) if (r.level <= level && (!best || r.level > best.level)) best = r;
-  return best ?? rows[0];
+  for (let i = rows.length - 1; i >= 0; i--) if (rows[i].level <= level) return rows[i];
+  return undefined;
 }
 
 /** Lignes spéciales actives au niveau donné : la plus haute `IsAdd=false`
@@ -907,11 +915,31 @@ export function resolveGearPassives(
       });
       continue;
     }
-    const effects = [row.twoPiece, ...(s.pieces === 4 ? [row.fourPiece] : [])];
+    // `IgnoreLowSet` (client : `CCharacterData.CreateBuffSetItem`) : quand la
+    // ligne 4P retenue porte un buff 4P et le drapeau, les buffs du 2P ne
+    // sont pas posés. Aucune ligne du jeu ne combine les deux au 15/10/2026
+    // (Penetration, Speed, set 14 : 4P en stat ; Fortification : 4P vide).
+    const fourBuff = s.pieces === 4 && row.fourPiece?.optionType === 'IOT_BUFF';
+    const skipTwo = fourBuff && !!row.fourPiece?.buffId && row.ignoreLowSet === true;
+    const effects = [
+      ...(skipTwo ? [] : [row.twoPiece]),
+      ...(s.pieces === 4 ? [row.fourPiece] : []),
+    ];
     for (const e of effects) {
       // IOT_STAT (ATK %…) : canal 1 du § 15 — déjà dans la fiche SAISIE.
       if (!e || e.optionType !== 'IOT_BUFF' || !e.buffId) continue;
-      feedBuff('set', s.groupId, e.buffId, e.buffLevel ?? 1);
+      // `buffLevel` RÉSOLU par datagen (`BuffLevel_xP` + 1, cf. l'en-tête) :
+      // présent sur toute ligne à buff, une absence est une donnée cassée.
+      if (e.buffLevel === undefined) {
+        info.unresolved.push({
+          source: 'set',
+          sourceId: s.groupId,
+          buffId: e.buffId,
+          reason: 'buffLevel absent de equipment.json',
+        });
+        continue;
+      }
+      feedBuff('set', s.groupId, e.buffId, e.buffLevel);
     }
   }
 

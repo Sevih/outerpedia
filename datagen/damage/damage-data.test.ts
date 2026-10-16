@@ -405,14 +405,35 @@ describe('damage/growth.json — canaux de CalcFinalStat', () => {
     for (const b of equipment.breakLimits) expect(b.factors).toHaveLength(4);
     // Témoin : le set ATK (groupe 1) — niveau 1 pour 0..3 break, niveau 2 à 4.
     const atkSet = equipment.specialGroups['1'];
-    expect(atkSet[0].breakLimitCounts).toEqual([0, 1, 2, 3]);
     expect(atkSet[0].twoPiece).toEqual({
       optionType: 'IOT_STAT',
       stat: 'ST_ATK',
       applyingType: 'OAT_RATE',
       value: 300,
     });
-    expect(atkSet[1].breakLimitCounts).toEqual([4]);
+    // GARDE de la règle recopiée « palier enchanté = 4 break » : TOUS les
+    // groupes de sets ont deux niveaux, base à 0..3 break, enchanté à 4. Le
+    // seuil est écrit à la main en quatre endroits : `EquipmentDetail.tsx`
+    // (`tier >= 4`, effets 2P et 4P), `damage-calculator/target-pickers.tsx`
+    // (`pick.tier >= 4` → état 1), `src/lib/damage/scenario.ts` (état 1 →
+    // `enchanted`, que `gear.ts` traduit en 4 break). Si un patch change ces
+    // paliers, ce test casse : revoir ces quatre lectures, puis l'attendu.
+    const setGroups = Object.entries(equipment.specialGroups).filter(([, rows]) =>
+      rows.some((r) => r.twoPiece || r.fourPiece),
+    );
+    expect(setGroups.length).toBeGreaterThanOrEqual(20);
+    for (const [gid, rows] of setGroups)
+      expect(
+        rows.map((r) => r.breakLimitCounts),
+        `set ${gid}`,
+      ).toEqual([[0, 1, 2, 3], [4]]);
+    // Niveau de buff des effets de set RÉSOLU par datagen (`setBuffLevel`) :
+    // présent sur toute ligne à buff, base comprise (gear.ts le lit sans repli).
+    for (const [gid, rows] of setGroups)
+      for (const r of rows)
+        for (const e of [r.twoPiece, r.fourPiece])
+          if (e?.buffId)
+            expect(e.buffLevel, `set ${gid} niveau ${r.level}`).toBeGreaterThanOrEqual(1);
     // Témoin : facteur d'enchant arme = 0.4 par niveau (float brut du templet).
     expect(
       equipment.enchant.find((e) => e.subType === 'ITS_EQUIP_WEAPON' && e.level === 10)?.factor,

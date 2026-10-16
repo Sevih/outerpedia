@@ -117,6 +117,9 @@ export interface ResolvedSetEffect {
   maxCount: number;
   effect2?: string;
   effect4?: string;
+  /** Bonus lus au palier ENCHANTÉ (percée 4) : posé par les recos seulement,
+   *  la carte le dit sous les lignes 2P/4P ; le butin reste au palier de base. */
+  enchanted?: true;
   source?: ResolvedItemSource;
 }
 
@@ -282,13 +285,20 @@ function resolveItem(
 }
 
 /**
- * Texte d'un bonus de set, dernier palier connu : nom OFFICIEL de la stat
+ * Texte d'un bonus de set au palier demandé : `'base'` = premier palier (celui
+ * qu'on farme), `'enchanted'` = dernier (percée 4). Nom OFFICIEL de la stat
  * (« Attack +35% ») ou description officielle pour les bonus riches
  * (Immunity, Revenge…) — même rendu que la page /equipment.
  */
-function setBonus(entry: SetEntry, piece: '2p' | '4p', lang: Lang): string | undefined {
-  const tier = entry.tiers?.[entry.tiers.length - 1]?.[piece];
-  return setEffectText(tier ?? null, lang);
+function setBonus(
+  entry: SetEntry,
+  piece: '2p' | '4p',
+  tier: 'base' | 'enchanted',
+  lang: Lang,
+): string | undefined {
+  const tiers = entry.tiers ?? [];
+  const row = tier === 'base' ? tiers[0] : tiers[tiers.length - 1];
+  return setEffectText(row?.[piece] ?? null, lang);
 }
 
 /** Builds d'un perso, presets résolus et équipements matérialisés. */
@@ -321,7 +331,9 @@ export function resolveGearBuilds(
       ? presets.substats[b.substats.slice(1)]
       : b.substats;
 
-    // Sets distincts du build (bonus 4p seulement si un combo le joue à 4).
+    // Sets distincts du build (bonus 4p seulement si un combo le joue à 4),
+    // au palier ENCHANTÉ, celui d'un build fini, et marqués comme tels
+    // (décision de Sevih du 15/10/2026 ; le butin, lui, montre la base).
     const legend = new Map<string, ResolvedSetEffect>();
     for (const combo of combos)
       for (const p of combo) {
@@ -336,8 +348,9 @@ export function resolveGearBuilds(
             slug: slugifyEquipment(entry.name.en),
             icon: entry.icon,
             maxCount: p.count,
-            effect2: setBonus(entry, '2p', lang),
-            effect4: setBonus(entry, '4p', lang),
+            effect2: setBonus(entry, '2p', 'enchanted', lang),
+            effect4: setBonus(entry, '4p', 'enchanted', lang),
+            enchanted: true,
             source: toItemSource(setViews.get(p.set)?.source, lang),
           });
       }
@@ -479,8 +492,8 @@ export function resolveLootSet(
       slug: view.slug,
       icon: entry.icon,
       maxCount: 4,
-      effect2: setBonus(entry, '2p', lang),
-      effect4: setBonus(entry, '4p', lang),
+      effect2: setBonus(entry, '2p', 'base', lang),
+      effect4: setBonus(entry, '4p', 'base', lang),
     },
   };
 }

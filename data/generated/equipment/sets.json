@@ -525,7 +525,7 @@
           "buff": "BID_ITEM_UO_SET_15",
           "effects": [
             {
-              "type": "stat_owner_lost_hp_rate",
+              "type": "stat_owner_lost_hp_rate_half",
               "stat": "atk",
               "mode": "rate",
               "value": 1600
@@ -582,7 +582,7 @@
           "buff": "BID_ITEM_UO_SET_16",
           "effects": [
             {
-              "type": "stat_owner_lost_hp_rate",
+              "type": "stat_owner_lost_hp_rate_half",
               "stat": "def",
               "mode": "rate",
               "value": 1600
@@ -656,7 +656,7 @@
             {
               "type": "dmg_target_break",
               "mode": "rate",
-              "value": 350
+              "value": 700
             }
           ],
           "desc": {
@@ -674,7 +674,7 @@
             {
               "type": "dmg_target_break",
               "mode": "rate",
-              "value": 350
+              "value": 700
             }
           ],
           "desc": {
@@ -799,7 +799,7 @@
           "buff": "BID_ITEM_UO_SET_19",
           "effects": [
             {
-              "type": "stat_owner_lost_hp_rate",
+              "type": "stat_owner_lost_hp_rate_half",
               "stat": "speed",
               "mode": "rate",
               "value": 1000
@@ -857,7 +857,7 @@
             {
               "type": "dmg_reduce",
               "mode": "rate",
-              "value": -250
+              "value": -350
             }
           ],
           "desc": {
@@ -912,7 +912,7 @@
             {
               "type": "dmg",
               "mode": "rate",
-              "value": 200
+              "value": 300
             }
           ],
           "desc": {

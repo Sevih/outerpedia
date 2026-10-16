@@ -113,17 +113,18 @@ interface PoolRow {
 const EE_RAW: Record<string, { options: string[] }> = getEquipmentEe();
 const POOLS: Record<string, PoolRow[]> = getEquipmentPools();
 
-// Sets bruts : la CLASSIFICATION (« proportional to missing Health ») se fait
-// sur le texte EN — l'affichage reste localisé via getSetViews.
+// Sets bruts : la CLASSIFICATION (effet fonction des PV manquants) se lit sur
+// le TYPE des effets de buff — l'affichage reste localisé via getSetViews.
 interface SetEffectRaw {
-  desc?: LangDict;
+  effects?: { type: string }[];
 }
 const SETS_RAW: Record<
   string,
   { tiers: { '2p'?: SetEffectRaw | null; '4p'?: SetEffectRaw | null }[] }
 > = getEquipmentSets();
-/** Effet de set fonction des PV manquants → l'UI demande les PV actuels. */
-const HP_SCALED_SET = /missing Health/i;
+/** Types (slugs de `sets.json`) d'un effet fonction des PV manquants
+ *  (`BT_STAT_OWNER_LOST_HP_RATE*`) → l'UI demande les PV actuels. */
+const HP_SCALED_TYPES = new Set(['stat_owner_lost_hp_rate', 'stat_owner_lost_hp_rate_half']);
 
 // Glossaire des effets : les buffs/débuffs STANDARDISÉS du jeu (nom, desc à
 // magnitude fixe, icône IG_Buff_*).
@@ -244,7 +245,7 @@ function statKeysFor(id: string): string[] {
  * 26/07/2026). Ids de `sets.json` : Revenge, Patience, Pulverization,
  * Swiftness, Weakness, Augmentation.
  */
-const DAMAGE_SET_IDS = new Set(['15', '16', '17', '19', '20', '21']);
+export const DAMAGE_SET_IDS = new Set(['15', '16', '17', '19', '20', '21']);
 
 /**
  * Les SKIRMISH du Monad Gate restent hors périmètre ; les boss « Dimensional
@@ -403,7 +404,7 @@ export default async function DamageCalculator({ lang }: { lang: Lang }) {
       // Effet fonction des PV manquants (Revenge/Patience/Swiftness) → l'UI
       // demande les PV actuels, qui pèsent sur les stats finales.
       ...(SETS_RAW[s.id]?.tiers.some((t) =>
-        [t['2p'], t['4p']].some((e) => e?.desc?.en && HP_SCALED_SET.test(e.desc.en)),
+        [t['2p'], t['4p']].some((e) => e?.effects?.some((x) => HP_SCALED_TYPES.has(x.type))),
       )
         ? { hpScaled: true }
         : {}),

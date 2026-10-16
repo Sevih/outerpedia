@@ -27,6 +27,7 @@ import equipmentData from '../../../data/generated/damage/equipment.json';
 import {
   conditionBuffRef,
   gearConditionMet,
+  pickBuffRow,
   resolveGearPassives,
   resolveKitPassives,
   resolveQuirkPassives,
@@ -38,6 +39,8 @@ import {
   buildDamageReport,
   type AttackerBuildInput,
   type DamageData,
+  type DataBuffLevel,
+  type DataSpecialOption,
   type TargetBuildInput,
 } from './inputs';
 import { sheetToCombatStat } from './sheet';
@@ -261,6 +264,116 @@ describe('gear — arme, accessoire, talisman, sets (donnée réelle)', () => {
       data,
     );
     expect(two.combatStats.atk).toBe(10000);
+  });
+});
+
+describe('gear — sets ENCHANTÉS : niveau de buff = BuffLevel_xP + 1 (client)', () => {
+  /** Entrées collectées pour un set (4 pièces), sur cible eau hors boss. */
+  const setPassives = (groupId: string, enchanted: boolean, pieces: 2 | 4 = 4) =>
+    resolveGearPassives(
+      DIANNE,
+      { sets: [{ groupId, enchanted, pieces }] },
+      equipment,
+      buffs,
+      Element.Fire,
+      Element.Water,
+    );
+  /** La ligne de la table au niveau `level` (l'attendu, lu, jamais recopié). */
+  const row = (id: string, level: number): DataBuffLevel => {
+    const r = buffs.buffs[id]?.find((l) => l.level === level);
+    expect(r, `${id} niveau ${level} absent de buffs.json`).toBeDefined();
+    return r!;
+  };
+
+  it('Pulverization (17) enchanté : 2P et 4P au niveau 2 (700 ‰), la base au niveau 1', () => {
+    const enchanted = setPassives('17', true).entries;
+    expect(enchanted.length).toBeGreaterThan(0);
+    for (const e of enchanted) expect(e.buff.value).toBe(lv(e.buffId, 2));
+    expect(lv('BID_ITEM_UO_SET_17', 2)).not.toBe(lv('BID_ITEM_UO_SET_17', 1)); // 700 contre 350
+    // Base inchangée : chaque effet au niveau 1.
+    const base = setPassives('17', false).entries;
+    expect(base.length).toBeGreaterThan(0);
+    for (const e of base) expect(e.buff.value).toBe(lv(e.buffId, 1));
+  });
+
+  it('Revenge (15) enchanté : la ligne de niveau 2 (…_RATE_HALF), plein effet à 50 % de PV', () => {
+    const half = row('BID_ITEM_UO_SET_15', 2);
+    expect(half.type).toBe('BT_STAT_OWNER_LOST_HP_RATE_HALF');
+    expect(setPassives('15', true).entries.map((e) => e.buff.type)).toEqual([half.type]);
+    expect(setPassives('15', false).entries.map((e) => e.buff.type)).toEqual([
+      row('BID_ITEM_UO_SET_15', 1).type,
+    ]);
+    // Bout en bout à 50 % de PV : l'enchanté donne le taux plein, la base la moitié.
+    const atkAt50 = (enchanted: boolean): number =>
+      buildDamageReport(
+        attacker({ sets: [{ groupId: '15', enchanted, pieces: 4 }] }, 50),
+        target(),
+        data,
+      ).combatStats.atk;
+    const combat = (rate: number): number =>
+      sheetToCombatStat({
+        sheetValue: 10000,
+        baseValue: 0,
+        archiveRatePermille: 0,
+        buffValue: 0,
+        buffValueRate: rate,
+      });
+    expect(atkAt50(true)).toBe(combat(half.value ?? 0));
+    expect(atkAt50(false)).toBe(combat((row('BID_ITEM_UO_SET_15', 1).value ?? 0) / 2));
+  });
+
+  it('Immunity (18) 4P enchanté : sa seule ligne (niveau 2) est trouvée, sans repli', () => {
+    const only = buffs.buffs['BID_ITEM_UO_SET_18_1'];
+    expect(Math.min(...only.map((r) => r.level))).toBe(2);
+    const info = setPassives('18', true);
+    // Réduction des dégâts SUBIS : signalée hors pipeline, mais bien LUE — une
+    // ligne introuvable ne laisserait aucune trace.
+    const seen = [...info.entries, ...info.unresolved, ...info.dynamic].map((e) => e.buffId);
+    expect(seen).toContain('BID_ITEM_UO_SET_18_1');
+  });
+
+  it('IgnoreLowSet (ligne fabriquée) : un buff 4P posé retire le 2P ; à 2 pièces le 2P reste', () => {
+    const fake: DataSpecialOption = {
+      level: 1,
+      isAdd: false,
+      breakLimitCounts: [0, 1, 2, 3],
+      ignoreLowSet: true,
+      twoPiece: { optionType: 'IOT_BUFF', buffId: 'BID_ITEM_UO_SET_21', buffLevel: 1 },
+      fourPiece: { optionType: 'IOT_BUFF', buffId: 'BID_ITEM_UO_SET_17', buffLevel: 1 },
+    };
+    const ids = (pieces: 2 | 4, ignoreLowSet: boolean): string[] =>
+      resolveGearPassives(
+        DIANNE,
+        { sets: [{ groupId: 'fake', enchanted: false, pieces }] },
+        { ...equipment, specialGroups: { fake: [{ ...fake, ignoreLowSet }] } },
+        buffs,
+        Element.Fire,
+        Element.Water,
+      ).entries.map((e) => e.buffId);
+    expect(ids(4, true)).toEqual(['BID_ITEM_UO_SET_17']);
+    expect(ids(4, false)).toEqual(['BID_ITEM_UO_SET_21', 'BID_ITEM_UO_SET_17']);
+    expect(ids(2, true)).toEqual(['BID_ITEM_UO_SET_21']);
+  });
+});
+
+describe('pickBuffRow — règle de CBuffTempletContainer.GetBuffTemplet', () => {
+  const r = (level: number, value: number): DataBuffLevel =>
+    ({ level, type: 'BT_STAT', value }) as DataBuffLevel;
+
+  it('plus haute ligne ≤ demandé ; à égalité de niveau, la DERNIÈRE de la table', () => {
+    const rows = [r(1, 10), r(1, 11), r(3, 30)];
+    expect(pickBuffRow(rows, 2)).toBe(rows[1]);
+    expect(pickBuffRow(rows, 5)).toBe(rows[2]);
+    // Donnée réelle : Sigma `2000052_u_3` a deux lignes de niveau 1
+    // (SKILL_START puis SKILL_FINISH) — le client prend la seconde.
+    const sigma = buffs.buffs['2000052_u_3'];
+    expect(sigma.filter((l) => l.level === sigma[0].level).length).toBeGreaterThan(1);
+    expect(pickBuffRow(sigma, sigma[0].level)).toBe(sigma[sigma.length - 1]);
+  });
+
+  it('sous la première ligne : undefined (le client rend null), plus de repli rows[0]', () => {
+    expect(pickBuffRow([r(2, 20), r(3, 30)], 1)).toBeUndefined();
+    expect(pickBuffRow([], 1)).toBeUndefined();
   });
 });
 

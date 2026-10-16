@@ -7,6 +7,81 @@
 
 ## 2026-10-16
 
+- **Sets : niveau de buff du jeu (H2/R9), ligne de buff du client (R17),
+  butin au palier de base et recos au palier enchanté marqué (M9), latents
+  des sets (lot C18).** **Niveau de buff** : le client (constructeur de
+  `CItemSpecialOption`, cas d'un set) prend `BuffLevel_xP + 1` ; un helper
+  `setBuffLevel` dans `datagen/lib/buff.ts`, appelé par
+  `datagen/generators/equipment.ts` (les `effects` de `sets.json`) et par
+  `datagen/damage/equipment.ts`, qui émet `buffLevel` RÉSOLU sur toute ligne
+  à buff, base comprise (1 à la base, 2 à l'enchanté) ; `gear.ts` le lit sans
+  repli (une absence remonte en « non résolu »). Les options uniques ne
+  bougent pas. En-tête de `gear.ts` et spec `docs/specs/damage-formula.md`
+  § 17.5 disent la règle des sets, d'`IgnoreLowSet` et de la ligne de buff.
+  **`pickBuffRow`** : la dernière ligne de niveau ≤ demandé (parcours depuis
+  la fin, comme `GetBuffTemplet`), `undefined` sous la première ligne ;
+  avant le changement, un script jetable hors du dépôt a énuméré les 31 294
+  appels possibles (kits porteur et allié à tous niveaux, DoT, options
+  uniques, mains, sets, quirks) : 1 appel sous la première ligne sur la
+  donnée d'avant (Immunity 4P enchanté, `BID_ITEM_UO_SET_18_1` demandé au
+  niveau 1), 0 une fois le niveau résolu ; les niveaux de `BuffTemplet` sont
+  croissants dans la table (0 exception), donc « dernière ≤ » = « plus
+  haute ≤ ». **M9** : `setBonus` prend le palier (`'base'` = `tiers[0]`,
+  `'enchanted'` = dernier) ; `resolveLootSet` la base, `resolveGearBuilds`
+  l'enchanté avec `enchanted: true` (`ResolvedSetEffect`, `GearSetEffect`),
+  que `setTooltip` et `SetEffectLines` affichent sous les lignes 2P/4P avec
+  le libellé `enchantedTier` (clé existante `equip.detail.breakthrough` + « 4 »,
+  passé par la page perso et par `gear-preview-actions.ts` ; aucune clé
+  i18n ajoutée) ; le butin n'a pas le champ, donc pas de mention.
+  **Latents** : `ignoreLowSet` lu dans `DataSpecialOption` et appliqué dans
+  la boucle des sets de `gear.ts` (4 pièces, 4P à buff et drapeau → pas de
+  2P) ; `HP_SCALED_SET` (regex sur la desc anglaise) remplacé par les types
+  `stat_owner_lost_hp_rate(_half)` des effets de `sets.json`, même liste
+  (15, 16, 19) ; gardes : `damage-data.test.ts` étend le témoin du set ATK à
+  tous les groupes de sets (`[0,1,2,3]` puis `[4]`, commentaire nommant les
+  quatre lectures de `tier >= 4`) et vérifie le `buffLevel` résolu ;
+  `damage-calculator/damage-sets.test.ts` classe tout set à buff dans
+  `DAMAGE_SET_IDS` (exporté) ou dans une liste nommée (Fortification 8,
+  Immunity 18, avec la raison). **Rejeu** (copies hors du dépôt des scripts
+  de la revue) : Rhona S1, set 15 4P enchanté, 50 % de PV 4 263 → 6 113
+  (crit 5 892 → 8 449), 75 % 3 339 → 4 263 ; les sept effets enchantés
+  alignés sur le client (Augmentation 2P `BT_DMG` 200 → 300, Pulverization
+  2P et 4P 350 → 700, Weakness −250 → −350, Revenge 4P, Patience 4P,
+  Swiftness 2P en `…_RATE_HALF`), Immunity 4P inchangé (niveau 2) ; Sigma B3
+  9 492 → 7 119 ; cartes de butin Attack « 35 % | 25 % » → « 30 % | 20 % »,
+  Penetration « +11 % | +9 % » → « — | 20 % », Speed « +13 % | +12 % » →
+  « — | 25 % ». **Données** : `datagen:build` puis promotion à blanc
+  (« 64 identique(s), 1 différent(s) : equipment/sets.json ~6 », les sept
+  effets et rien d'autre ; 2400015 non intégré, jamais promu), appliquée :
+  `sync-derived` réécrit `damage/equipment.json` (les `buffLevel`), le
+  contrat solver ne change pas (hash `57cd9f195e73`, aucun fichier de
+  `solver/` modifié, `bestSkill` compris : pas de `data:sync` à faire).
+  **Vérifié** : `pnpm typecheck` (sortie vide, code 0) ; `pnpm test`
+  « Tests 3939 passed (3939) » (avec les lots en cours à côté) ; `pnpm lint`
+  « ✖ 1 problem (1 error, 0 warnings) », l'erreur dans
+  `src/lib/admin/changelog-store.test.ts` d'un autre lot en cours, mes
+  fichiers passés à eslint seuls sans erreur ; `pnpm damage:check` « 42
+  ligne(s) exacte(s), 0 en dérive, 0 sautée(s) », `fixtures.test.ts` vert
+  sans fixture touchée. Tests ajoutés, en relation : set 17 enchanté au
+  niveau 2, base au niveau 1 ; set 15 enchanté en `…_RATE_HALF` et ATK de
+  combat à 50 % de PV (plein contre moitié) ; Immunity 4P enchanté lu ;
+  `IgnoreLowSet` sur une ligne fabriquée ; `pickBuffRow` égalité et sous la
+  première ligne (Sigma réel) ; `gear-reco.test.ts` butin à la base (Speed
+  sans 2P, Attack 30/20) et reco enchantée marquée. **Visuel** (pas de
+  serveur de dev : rendu `react-dom/server` de `GearRecoSection` sur la
+  fiche de Rhona, avec et sans le champ) : une seule ligne ajoutée,
+  « Breakthrough 4 », aucun montant changé ; sur les guides, seuls les
+  textes des cartes de butin (rejeu ci-dessus) ; au calculateur, seuls les
+  montants avec un set enchanté. **Laissé** : les cartes de `/equipment`
+  (`src/app/[lang]/equipment/page.tsx:158-166`) montrent aussi le dernier
+  palier sans mention, hors décision ; l'aperçu de quick rend la légende
+  par `scripts/quick/ui/gear-view.mjs`, qui reçoit le champ `enchanted`
+  mais ne l'affiche pas (le lot ne touchait que la logique de l'aperçu) ;
+  `buffRowAtLevel` de datagen (`datagen/lib/buff.ts`) prend toujours la
+  PREMIÈRE ligne à égalité et replie sous le premier niveau, contrairement
+  au client (descriptions de compétences, hors lot) ; la question du set 17
+  (une ou deux instances du même buff 2P/4P, capture requise) reste ouverte.
+
 - **Relecture des lots C20, F27 et G5 (Opus) — sets de combat hors de la
   fiche, paliers par pièce, uniques de fiche ; enquête sur les clips joués ;
   héros fusionnés et main stat en float32 dans gear-solver : validés.** C20

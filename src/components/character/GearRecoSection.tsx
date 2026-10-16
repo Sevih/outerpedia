@@ -63,6 +63,8 @@ export interface GearSetEffect {
   maxCount: number;
   effect2?: string;
   effect4?: string;
+  /** Bonus au palier enchanté (recos seulement) : mention sous les lignes 2P/4P. */
+  enchanted?: true;
   source?: GearItem['source'];
 }
 
@@ -88,8 +90,15 @@ export interface GearRecoLabels {
   note: string;
   piece2: string;
   piece4: string;
+  /** Mention du palier enchanté des bonus de set (« Breakthrough 4 »). */
+  enchantedTier: string;
   source: string;
 }
+
+/** Libellés des bonus de set, partagés avec le butin des guides (qui n'a pas
+ *  de palier enchanté, donc pas de mention). */
+type SetEffectLabels = Pick<GearRecoLabels, 'piece2' | 'piece4'> &
+  Partial<Pick<GearRecoLabels, 'enchantedTier'>>;
 
 /**
  * Tuile d'un slot : label, puis N lignes séparées par des filets.
@@ -296,7 +305,7 @@ function shownPieceIdx(piece: GearSetPiece, idx: number): number[] {
 function setTooltip(
   piece: GearSetPiece,
   eff: GearSetEffect | undefined,
-  labels: Pick<GearRecoLabels, 'piece2' | 'piece4'>,
+  labels: SetEffectLabels,
 ): ReactNode {
   return (
     <div className="flex max-w-72 flex-col gap-1.5">
@@ -326,6 +335,9 @@ function setTooltip(
               <span className="text-buff">{labels.piece4} </span>
               <span className="text-zinc-300">{eff.effect4}</span>
             </div>
+          )}
+          {eff.enchanted && labels.enchantedTier && (
+            <div className="mt-0.5 text-zinc-400">{labels.enchantedTier}</div>
           )}
         </div>
       )}
@@ -366,7 +378,7 @@ export function SetPieceGroup({
   piece: GearSetPiece;
   idx: number;
   effects: GearSetEffect[];
-  labels: Pick<GearRecoLabels, 'piece2' | 'piece4'>;
+  labels: SetEffectLabels;
 }) {
   const icons = piece.pieceIcons ?? [];
   const shown = shownPieceIdx(piece, idx)
@@ -447,7 +459,7 @@ function SetName({
 }: {
   piece: GearSetPiece;
   effects: GearSetEffect[];
-  labels: Pick<GearRecoLabels, 'piece2' | 'piece4'>;
+  labels: SetEffectLabels;
   /** Icône d'enchantement du set devant le nom (chips des seconds sets). */
   icon?: boolean;
 }) {
@@ -500,7 +512,7 @@ function ComboLineView({
 }: {
   line: ComboLine;
   effects: GearSetEffect[];
-  labels: Pick<GearRecoLabels, 'piece2' | 'piece4'>;
+  labels: SetEffectLabels;
 }) {
   const { head, tails } = line;
   return (
@@ -540,7 +552,7 @@ function SetEffectLines({
   showCount = true,
 }: {
   eff: GearSetEffect;
-  labels: Pick<GearRecoLabels, 'piece2' | 'piece4'>;
+  labels: SetEffectLabels;
   showCount?: boolean;
 }) {
   return (
@@ -555,6 +567,9 @@ function SetEffectLines({
         <p className="text-xs leading-relaxed text-zinc-300">
           <span className="text-buff font-semibold">{labels.piece4}</span> {eff.effect4}
         </p>
+      )}
+      {eff.enchanted && labels.enchantedTier && (
+        <p className="text-xs leading-relaxed text-zinc-400">{labels.enchantedTier}</p>
       )}
     </>
   );

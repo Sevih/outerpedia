@@ -32,6 +32,7 @@
  * n'est émise que si le perso est au roster validé (cf. `roster.ts`).
  */
 import { groupBy, loadTable, num, numf, bool, splitCsv, type Row } from '../lib/tables';
+import { setBuffLevel } from '../lib/buff';
 import { integratedIds } from './roster';
 
 /** Une option d'item (`ItemOptionTemplet`) — main (Rate 10000) ou sub (tirée). */
@@ -57,6 +58,8 @@ export interface DamageSetEffect {
   applyingType?: string;
   value?: number;
   buffId?: string;
+  /** Niveau de buff RÉSOLU (`BuffLevel_xP` + 1, cf. `setBuffLevel`), posé sur
+   *  toute ligne à buff, base comprise : 1 au palier de base, 2 à l'enchanté. */
   buffLevel?: number;
 }
 
@@ -154,9 +157,10 @@ function setEffect(r: Row, suffix: '2P' | '4P'): DamageSetEffect | undefined {
   if (applying && applying !== 'OAT_NONE') out.applyingType = applying;
   const value = r[`OptionValue_${suffix}`];
   if (value) out.value = num(value);
-  if (buffId) out.buffId = buffId;
-  const buffLevel = r[`BuffLevel_${suffix}`];
-  if (buffLevel) out.buffLevel = num(buffLevel);
+  if (buffId) {
+    out.buffId = buffId;
+    out.buffLevel = setBuffLevel(r, suffix);
+  }
   return out;
 }
 

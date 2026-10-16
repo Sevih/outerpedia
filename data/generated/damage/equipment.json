@@ -46796,7 +46796,8 @@
         "ignoreLowSet": false,
         "twoPiece": {
           "optionType": "IOT_BUFF",
-          "buffId": "BID_ITEM_UO_SET_23_GROUP_1"
+          "buffId": "BID_ITEM_UO_SET_23_GROUP_1",
+          "buffLevel": 1
         }
       },
       {
@@ -46806,7 +46807,8 @@
         "ignoreLowSet": true,
         "twoPiece": {
           "optionType": "IOT_BUFF",
-          "buffId": "BID_ITEM_UO_SET_23_GROUP_2"
+          "buffId": "BID_ITEM_UO_SET_23_GROUP_2",
+          "buffLevel": 1
         }
       }
     ],
@@ -47028,7 +47030,8 @@
         "ignoreLowSet": false,
         "fourPiece": {
           "optionType": "IOT_BUFF",
-          "buffId": "BID_ITEM_UO_SET_15"
+          "buffId": "BID_ITEM_UO_SET_15",
+          "buffLevel": 1
         }
       },
       {
@@ -47039,7 +47042,7 @@
         "fourPiece": {
           "optionType": "IOT_BUFF",
           "buffId": "BID_ITEM_UO_SET_15",
-          "buffLevel": 1
+          "buffLevel": 2
         }
       }
     ],
@@ -47051,7 +47054,8 @@
         "ignoreLowSet": false,
         "fourPiece": {
           "optionType": "IOT_BUFF",
-          "buffId": "BID_ITEM_UO_SET_16"
+          "buffId": "BID_ITEM_UO_SET_16",
+          "buffLevel": 1
         }
       },
       {
@@ -47062,7 +47066,7 @@
         "fourPiece": {
           "optionType": "IOT_BUFF",
           "buffId": "BID_ITEM_UO_SET_16",
-          "buffLevel": 1
+          "buffLevel": 2
         }
       }
     ],
@@ -47074,11 +47078,13 @@
         "ignoreLowSet": false,
         "twoPiece": {
           "optionType": "IOT_BUFF",
-          "buffId": "BID_ITEM_UO_SET_17"
+          "buffId": "BID_ITEM_UO_SET_17",
+          "buffLevel": 1
         },
         "fourPiece": {
           "optionType": "IOT_BUFF",
-          "buffId": "BID_ITEM_UO_SET_17_1"
+          "buffId": "BID_ITEM_UO_SET_17_1",
+          "buffLevel": 1
         }
       },
       {
@@ -47089,12 +47095,12 @@
         "twoPiece": {
           "optionType": "IOT_BUFF",
           "buffId": "BID_ITEM_UO_SET_17",
-          "buffLevel": 1
+          "buffLevel": 2
         },
         "fourPiece": {
           "optionType": "IOT_BUFF",
           "buffId": "BID_ITEM_UO_SET_17",
-          "buffLevel": 1
+          "buffLevel": 2
         }
       }
     ],
@@ -47106,7 +47112,8 @@
         "ignoreLowSet": false,
         "twoPiece": {
           "optionType": "IOT_BUFF",
-          "buffId": "BID_ITEM_UO_SET_18"
+          "buffId": "BID_ITEM_UO_SET_18",
+          "buffLevel": 1
         }
       },
       {
@@ -47116,12 +47123,13 @@
         "ignoreLowSet": false,
         "twoPiece": {
           "optionType": "IOT_BUFF",
-          "buffId": "BID_ITEM_UO_SET_18"
+          "buffId": "BID_ITEM_UO_SET_18",
+          "buffLevel": 1
         },
         "fourPiece": {
           "optionType": "IOT_BUFF",
           "buffId": "BID_ITEM_UO_SET_18_1",
-          "buffLevel": 1
+          "buffLevel": 2
         }
       }
     ],
@@ -47133,7 +47141,8 @@
         "ignoreLowSet": false,
         "twoPiece": {
           "optionType": "IOT_BUFF",
-          "buffId": "BID_ITEM_UO_SET_19"
+          "buffId": "BID_ITEM_UO_SET_19",
+          "buffLevel": 1
         }
       },
       {
@@ -47144,7 +47153,7 @@
         "twoPiece": {
           "optionType": "IOT_BUFF",
           "buffId": "BID_ITEM_UO_SET_19",
-          "buffLevel": 1
+          "buffLevel": 2
         }
       }
     ],
@@ -47156,7 +47165,8 @@
         "ignoreLowSet": false,
         "twoPiece": {
           "optionType": "IOT_BUFF",
-          "buffId": "BID_ITEM_UO_SET_20"
+          "buffId": "BID_ITEM_UO_SET_20",
+          "buffLevel": 1
         }
       },
       {
@@ -47167,7 +47177,7 @@
         "twoPiece": {
           "optionType": "IOT_BUFF",
           "buffId": "BID_ITEM_UO_SET_20",
-          "buffLevel": 1
+          "buffLevel": 2
         }
       }
     ],
@@ -47179,7 +47189,8 @@
         "ignoreLowSet": false,
         "twoPiece": {
           "optionType": "IOT_BUFF",
-          "buffId": "BID_ITEM_UO_SET_21"
+          "buffId": "BID_ITEM_UO_SET_21",
+          "buffLevel": 1
         }
       },
       {
@@ -47190,7 +47201,7 @@
         "twoPiece": {
           "optionType": "IOT_BUFF",
           "buffId": "BID_ITEM_UO_SET_21",
-          "buffLevel": 1
+          "buffLevel": 2
         }
       }
     ],

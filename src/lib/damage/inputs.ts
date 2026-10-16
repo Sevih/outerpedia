@@ -221,6 +221,8 @@ export interface DataSpecialOption {
   level: number;
   isAdd: boolean;
   breakLimitCounts: number[];
+  /** `IgnoreLowSet` : un buff 4P posé retire les buffs du 2P (sets, cf. gear.ts). */
+  ignoreLowSet?: boolean;
   twoPiece?: DataSetEffect;
   fourPiece?: DataSetEffect;
   buffIds?: string[];
