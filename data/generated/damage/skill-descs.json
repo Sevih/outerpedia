@@ -1,5 +1,5 @@
 {
-  "resVersion": "1.11.407",
+  "resVersion": "1.11.408",
   "skills": {
     "101": {
       "desc": {
@@ -19156,7 +19156,7 @@
     },
     "12401": {
       "desc": {
-        "en": "Attacks an enemy and has a <color=#28d9ed>[Buff_C_2000124_1_1]</color> chance for the caster to gain <color=#28d9ed>1 Light of the Deep Sea</color>. After attacking, if the caster's Health is <color=#28d9ed>40%</color> or less of Max Health, restores <color=#28d9ed>10%</color> of the caster's Health.",
+        "en": "Attacks an enemy and has a <color=#28d9ed>[Buff_C_2000124_1_1]</color> chance to gain <color=#28d9ed>1 Light of the Deep Sea</color>. After attacking, if the caster's Health is <color=#28d9ed>40%</color> or less of Max Health, restores <color=#28d9ed>10%</color> of the caster's Health.",
         "jp": "敵単体にダメージを与え、<color=#28d9ed>[Buff_C_2000124_1_1]</color>の確率で<color=#28d9ed>【深海の光】</color>を<color=#28d9ed>1個</color>獲得する。攻撃後、自分のHPが最大HPの<color=#28d9ed>40%</color>以下の場合、自分のHPを <color=#28d9ed>10%</color>回復する。",
         "kr": "적을 공격하고 <color=#28d9ed>[Buff_C_2000124_1_1]</color> 확률로 <color=#28d9ed>심해의 빛</color>을 <color=#28d9ed>1 개</color> 획득합니다. 공격 후 자신의 체력이 최대 체력의 <color=#28d9ed>40%</color> 이하라면 자신의 체력을 <color=#28d9ed>10%</color> 회복시킵니다.",
         "zh": "攻击敌人，并有<color=#28d9ed>[Buff_C_2000124_1_1]</color>几率获得<color=#28d9ed>1个深海之光</color>。攻击后，若自身生命值低于等于最大生命值的<color=#28d9ed>40%</color>，恢复自身<color=#28d9ed>10%</color>生命值。",
@@ -19195,7 +19195,7 @@
     },
     "12402": {
       "desc": {
-        "en": "(Passive Effect) Reduces Continuous Damage taken by 50% and attacks against <color=#28d9ed>Light</color> targets are treated as having a <color=#28d9ed>favorable attribute</color>.\\nAt the start of battle, gains <color=#28d9ed>[Buff_V_2000124_2_1] Light of the Deep Sea</color> and gains <color=#28d9ed>1</color> additional stack when hit by an AoE attack.\\n\\n(Triggered Effect) When hit by an AoE attack, uses <color=#28d9ed>Ramming Operation</color>.\\n\\n<color=#ffd732>Ramming Operation</color>: Attacks all enemies. Gains <color=#28d9ed>1 Light of the Deep Sea</color> and increases the caster's Priority by <color=#28d9ed>10%</color>.\\nAdditional effects are triggered based on the number of <color=#28d9ed>Unique Resource: Light of the Deep Sea</color> held.\\n5: All enemies' Priority -20% (Ignores Resilience)\\n10: Caster's Priority +20%",
+        "en": "(Passive Effect) Reduces damage taken from Continuous Damage by 50% and attacks against <color=#28d9ed>Light</color> targets are treated as having a <color=#28d9ed>favorable attribute</color>.\\nAt the start of battle, gains <color=#28d9ed>[Buff_V_2000124_2_1] Light of the Deep Sea</color> and gains <color=#28d9ed>1</color> additional stack when hit by an AoE attack.\\n\\n(Triggered Effect) When hit by an AoE attack, uses <color=#28d9ed>Ramming Operation</color>.\\n\\n<color=#ffd732>Ramming Operation</color>: Attacks all enemies. Gains <color=#28d9ed>1 Light of the Deep Sea</color> and increases the caster's Priority by <color=#28d9ed>10%</color>.\\nAdditional effects are triggered based on the number of <color=#28d9ed>Light of the Deep Sea</color> held.\\n5: All enemies' Priority -20% (Ignores Resilience)\\n10: Caster's Priority +20%",
         "jp": "(パッシブ効果)受ける持続ダメージが50%DOWNし、<color=#28d9ed>光属性</color>の敵を攻撃する時、<color=#28d9ed>有利属性</color>として扱われる。 \\n戦闘開始時、<color=#28d9ed>【深海の光】</color>を<color=#28d9ed>[Buff_V_2000124_2_1]個</color>獲得し、全体攻撃を受けた時、さらに<color=#28d9ed>1個</color>獲得する。\\n(発動効果)全体攻撃を受けた時、【衝角作戦】を使用する。\\n\\n<color=#ffd732>【衝角作戦】</color>: 敵全体にダメージを与える。<color=#28d9ed>【深海の光】</color>を<color=#28d9ed>1個</color>増加させ、自分の行動ゲージを<color=#28d9ed>10%</color>UPさせる。\\n<color=#28d9ed>【深海の光】</color>の所持数に応じて追加効果が発生する。\\n5個：敵全体の行動ゲージ-20%(効果抵抗無視)\\n10個：自分の行動ゲージ+20%",
         "kr": "(패시브 효과) 받는 지속 피해가 50% 감소하고 <color=#28d9ed>명속성</color> 대상 공격시 <color=#28d9ed>유리한 상성</color>으로 적용됩니다.\\n전투 시작 시, <color=#28d9ed>심해의 빛</color>을 <color=#28d9ed>[Buff_V_2000124_2_1] 개</color> 획득하고 전체 공격 피격 시<color=#28d9ed>1개</color> 를 추가로 획득합니다.\\n\\n(발동 효과) 전체 공격 피격 시 <color=#28d9ed>충각 작전</color>을 사용합니다.\\n\\n<color=#ffd732>충각 작전</color> : 적 전체를 공격합니다. <color=#28d9ed>심해의 빛</color>을 <color=#28d9ed>1개</color> 획득하고 자신의 행동 게이지를 <color=#28d9ed>10%</color> 증가시킵니다.\\n<color=#28d9ed>고유 자원: 심해의 빛</color> 보유 개수에 따라 추가 효과가 발생합니다.\\n5개 : 적 전체 행동 게이지 -20%(효과 저항 무시)\\n10개 : 자신 행동 게이지 +20%",
         "zh": "（被动效果）受到的持续伤害减少50%，攻击<color=#28d9ed>光属性</color>目标时以<color=#28d9ed>有利属性</color>进行判定。\\n战斗开始时，获得<color=#28d9ed>[Buff_V_2000124_2_1]个深海之光</color>，受到全体攻击时额外获得<color=#28d9ed>1个</color>。\\n\\n（触发效果）受到全体攻击时，使用<color=#28d9ed>冲角作战</color>。\\n\\n<color=#ffd732>冲角作战</color>：攻击全体敌人。获得<color=#28d9ed>1个深海之光</color>，并使自身行动值提升<color=#28d9ed>10%</color>。\\n根据持有的<color=#28d9ed>固有资源：深海之光</color>数量触发追加效果。\\n5个：全体敌人行动值 -20%（无视效果抵抗）\\n10个：自身行动值 +20%",
@@ -19225,7 +19225,7 @@
     },
     "12403": {
       "desc": {
-        "en": "Attacks all enemies.\\nDeals Fixed Damage equal to <color=#28d9ed>[Buff_V_2000124_3_1]</color> of the target's Max Health and inflicts <color=#28d9ed>Stunned</color> for <color=#28d9ed>1 turn</color> on targets with <color=#28d9ed>lower Attack</color> than the caster. (Ignores Resilience)\\n\\nAdditional effects are granted based on the number of <color=#28d9ed>Light of the Deep Sea</color> held.\\n\\n5: Before attacking, steals 2 Buffs from the enemy with the highest Attack. (Ignores Resilience)\\n10: Gains an Extra Turn after attacking.",
+        "en": "Attacks all enemies. After attacking, deals Fixed Damage equal to <color=#28d9ed>[Buff_V_2000124_3_1]</color> of the target's Max Health and causes targets with <color=#28d9ed>lower Attack</color> than the caster to become <color=#28d9ed>Stunned</color> for <color=#28d9ed>1 turn</color>. (Ignores Resilience)",
         "jp": "敵全体にダメージを与える。\\n攻撃後、対象の最大HPの<color=#28d9ed>[Buff_V_2000124_3_1]</color>の固定ダメージを与え、自分より<color=#28d9ed>攻撃力が低い</color>対象に<color=#28d9ed>スタン</color>を<color=#28d9ed>1ターン</color>の間付与する。(効果抵抗無視) \\n\\n<color=#28d9ed>【深海の光】</color>の所持数に応じて以下の効果が追加される。\\n\\n5個：攻撃前、攻撃力が最も高い敵の強化効果を2個奪う(効果抵抗無視)\\n10個：攻撃後、追加ターン獲得",
         "kr": "적 전체를 공격합니다.\\n대상 최대 체력의 <color=#28d9ed>[Buff_V_2000124_3_1]</color> 만큼 고정 피해를 입히고 자신보다 <color=#28d9ed>공격력이 낮은</color> 대상에게 <color=#28d9ed>스턴</color>을 <color=#28d9ed>1턴</color> 부여합니다.(효과 저항 무시)\\n\\n<color=#28d9ed>심해의 빛</color> 보유 개수에 따라 아래 효과가 추가됩니다.\\n\\n5개 : 공격 전 가장 공격력이 높은 적 강화 효과 2개 강탈(효과 저항 무시)\\n10개 : 공격 후 추가 턴 획득",
         "zh": "攻击全体敌人。\\n造成相当于目标最大生命值<color=#28d9ed>[Buff_V_2000124_3_1]</color>的固定伤害，并对<color=#28d9ed>攻击力低于自身</color>的目标赋予<color=#28d9ed>1回合</color><color=#28d9ed>晕眩</color>。（无视效果抵抗）\\n\\n根据持有的<color=#28d9ed>深海之光</color>数量追加以下效果。\\n\\n5个：攻击前，夺取攻击力最高的敌人2个强化效果。（无视效果抵抗）\\n10个：攻击后获得额外回合。",

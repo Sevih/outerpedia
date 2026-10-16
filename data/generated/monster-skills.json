@@ -265429,12 +265429,12 @@
       }
     ],
     "desc": {
-      "en": "자신이 <color=#28d9ed>방어력 증가</color> 보유 중이면 적 전체의 <color=#28d9ed>강화 효과</color>를 <color=#28d9ed>2개</color> 해제하고 적 전체를 공격합니다.\\n공격 후 적 전체에게 대상 최대 체력의 <color=#28d9ed>30%</color>만큼 고정 피해를 입힙니다.",
-      "jp": "자신이 <color=#28d9ed>방어력 증가</color> 보유 중이면 적 전체의 <color=#28d9ed>강화 효과</color>를 <color=#28d9ed>2개</color> 해제하고 적 전체를 공격합니다.\\n공격 후 적 전체에게 대상 최대 체력의 <color=#28d9ed>30%</color>만큼 고정 피해를 입힙니다.",
+      "en": "If the caster has <color=#28d9ed>Increased Defense</color>, removes <color=#28d9ed>2 buffs</color> from all enemies and attacks all enemies.\\nAfter attacking, deals Fixed Damage equal to <color=#28d9ed>30%</color> of each target's max Health to all enemies.",
+      "jp": "自分が<color=#28d9ed>防御力UP</color>を持っている場合、敵全体の<color=#28d9ed>強化効果</color>を<color=#28d9ed>2個</color>解除し、敵全体にダメージを与える。\\n攻撃後、敵全体に対象の最大HPの<color=#28d9ed>30%</color>分の固定ダメージを与える。",
       "kr": "자신이 <color=#28d9ed>방어력 증가</color> 보유 중이면 적 전체의 <color=#28d9ed>강화 효과</color>를 <color=#28d9ed>2개</color> 해제하고 적 전체를 공격합니다.\\n공격 후 적 전체에게 대상 최대 체력의 <color=#28d9ed>30%</color>만큼 고정 피해를 입힙니다.",
-      "zh": "자신이 <color=#28d9ed>방어력 증가</color> 보유 중이면 적 전체의 <color=#28d9ed>강화 효과</color>를 <color=#28d9ed>2개</color> 해제하고 적 전체를 공격합니다.\\n공격 후 적 전체에게 대상 최대 체력의 <color=#28d9ed>30%</color>만큼 고정 피해를 입힙니다.",
-      "fr": "자신이 <color=#28d9ed>방어력 증가</color> 보유 중이면 적 전체의 <color=#28d9ed>강화 효과</color>를 <color=#28d9ed>2개</color> 해제하고 적 전체를 공격합니다.\\n공격 후 적 전체에게 대상 최대 체력의 <color=#28d9ed>30%</color>만큼 고정 피해를 입힙니다.",
-      "es": "자신이 <color=#28d9ed>방어력 증가</color> 보유 중이면 적 전체의 <color=#28d9ed>강화 효과</color>를 <color=#28d9ed>2개</color> 해제하고 적 전체를 공격합니다.\\n공격 후 적 전체에게 대상 최대 체력의 <color=#28d9ed>30%</color>만큼 고정 피해를 입힙니다."
+      "zh": "自身持有<color=#28d9ed>防御力提升</color>时，驱散全体敌人<color=#28d9ed>2个</color><color=#28d9ed>增益效果</color>并攻击全体敌人。\\n攻击后，对全体敌人造成相当于各目标最大生命值<color=#28d9ed>30%</color>的固定伤害。",
+      "fr": "Si le lanceur possède <color=#28d9ed>DÉF augmentée</color>, supprime <color=#28d9ed>2 bonus</color> de tous les ennemis et les attaque.\\nAprès l'attaque, inflige à tous les ennemis des Dégâts fixes équivalant à <color=#28d9ed>30 %</color> des PV max de chaque cible.",
+      "es": "Si el lanzador tiene <color=#28d9ed>Defensa Aumentada</color>, elimina <color=#28d9ed>2 mejoras</color> de todos los enemigos y los ataca.\\nTras atacar, inflige a todos los enemigos Daño Fijo equivalente al <color=#28d9ed>30%</color> de la Salud máx. de cada objetivo."
     },
     "target": "enemy",
     "range": "all",
@@ -265464,12 +265464,12 @@
   "1120924": {
     "id": "1120924",
     "name": {
-      "en": "의태한 암종룡",
-      "jp": "의태한 암종룡",
+      "en": "Dragon of Death Mimic",
+      "jp": "臨終の竜の模倣体",
       "kr": "의태한 암종룡",
-      "zh": "의태한 암종룡",
-      "fr": "의태한 암종룡",
-      "es": "의태한 암종룡"
+      "zh": "死亡龙拟态体",
+      "fr": "Simulacre du Dragon de la Mort",
+      "es": "Réplica del Dragón de la Muerte"
     },
     "type": "monster_1",
     "subType": "passive",
@@ -265495,12 +265495,12 @@
       }
     ],
     "desc": {
-      "en": "(패시브 효과) <color=#28d9ed>저주/고정 피해</color>의 피해는 <color=#28d9ed>50000</color>을 초과하지 않습니다.\\n적 행동 종료 후 자신이 <color=#28d9ed>방여력 증가</color> 보유 중이면 <color=#28d9ed>선고하는 데스트로이</color>의 쿨타임이 <color=#28d9ed>1턴</color> 감소합니다.",
-      "jp": "(패시브 효과) <color=#28d9ed>저주/고정 피해</color>의 피해는 <color=#28d9ed>50000</color>을 초과하지 않습니다.\\n적 행동 종료 후 자신이 <color=#28d9ed>방여력 증가</color> 보유 중이면 <color=#28d9ed>선고하는 데스트로이</color>의 쿨타임이 <color=#28d9ed>1턴</color> 감소합니다.",
+      "en": "(Passive Effect) Damage from <color=#28d9ed>Cursed/Fixed Damage</color> cannot exceed <color=#28d9ed>50000</color>.\\nAt the end of an enemy's action, if the caster has <color=#28d9ed>Increased Defense</color>, decreases the cooldown of <color=#28d9ed>Proclaimed Deathstroy</color> by <color=#28d9ed>1 turn</color>.",
+      "jp": "(パッシブ効果)<color=#28d9ed>呪い/固定ダメージ</color>によるダメージは<color=#28d9ed>50000</color>を超えない。\\n敵の行動終了後、自分が<color=#28d9ed>防御力UP</color>を持っている場合、<color=#28d9ed>宣告デストロイ</color>のスキルターンを<color=#28d9ed>1ターン</color>短縮する。",
       "kr": "(패시브 효과) <color=#28d9ed>저주/고정 피해</color>의 피해는 <color=#28d9ed>50000</color>을 초과하지 않습니다.\\n적 행동 종료 후 자신이 <color=#28d9ed>방여력 증가</color> 보유 중이면 <color=#28d9ed>선고하는 데스트로이</color>의 쿨타임이 <color=#28d9ed>1턴</color> 감소합니다.",
-      "zh": "(패시브 효과) <color=#28d9ed>저주/고정 피해</color>의 피해는 <color=#28d9ed>50000</color>을 초과하지 않습니다.\\n적 행동 종료 후 자신이 <color=#28d9ed>방여력 증가</color> 보유 중이면 <color=#28d9ed>선고하는 데스트로이</color>의 쿨타임이 <color=#28d9ed>1턴</color> 감소합니다.",
-      "fr": "(패시브 효과) <color=#28d9ed>저주/고정 피해</color>의 피해는 <color=#28d9ed>50000</color>을 초과하지 않습니다.\\n적 행동 종료 후 자신이 <color=#28d9ed>방여력 증가</color> 보유 중이면 <color=#28d9ed>선고하는 데스트로이</color>의 쿨타임이 <color=#28d9ed>1턴</color> 감소합니다.",
-      "es": "(패시브 효과) <color=#28d9ed>저주/고정 피해</color>의 피해는 <color=#28d9ed>50000</color>을 초과하지 않습니다.\\n적 행동 종료 후 자신이 <color=#28d9ed>방여력 증가</color> 보유 중이면 <color=#28d9ed>선고하는 데스트로이</color>의 쿨타임이 <color=#28d9ed>1턴</color> 감소합니다."
+      "zh": "（被动效果）<color=#28d9ed>诅咒/固定伤害</color>造成的伤害不会超过<color=#28d9ed>50000</color>。\\n敌人行动结束后，若自身持有<color=#28d9ed>防御力提升</color>，则<color=#28d9ed>宣判之死亡毁灭</color>的冷却时间减少<color=#28d9ed>1回合</color>。",
+      "fr": "(Effet passif) Les dégâts de <color=#28d9ed>Malédiction/Dégâts fixes</color> ne peuvent pas dépasser <color=#28d9ed>50000</color>.\\nÀ la fin de l'action d'un ennemi, si le lanceur possède <color=#28d9ed>DÉF augmentée</color>, réduit le temps de recharge de <color=#28d9ed>Proclaimed Deathstroy</color> de <color=#28d9ed>1 tour</color>.",
+      "es": "(Efecto pasivo) El daño de <color=#28d9ed>Maldición/Daño Fijo</color> no puede superar <color=#28d9ed>50000</color>.\\nAl finalizar la acción de un enemigo, si el lanzador tiene <color=#28d9ed>Defensa Aumentada</color>, reduce el tiempo de recarga de <color=#28d9ed>Proclamada Deathstroy</color> en <color=#28d9ed>1 turno</color>."
     },
     "icon": "MT_Passive_1_Dark",
     "effects": [
