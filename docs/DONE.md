@@ -7,6 +7,29 @@
 
 ## 2026-10-16
 
+- **Relecture des lots C19, G4 et OB1 (Opus) — fiches d'équipement (pools
+  de main du palier max par union, secondaire des EE, main stat float32, pas
+  des sous-stats, descriptions) ; Builder et Worklist de gear-solver (ΔCP
+  dit « projeté contre réel », build le plus récent gagne, talisman préféré) ;
+  le bot lit liens, vignette, URL d'échange et id du journal servis par le
+  site : validés.** C19 `987e141e`, G4 gear-solver `b356bca`, OB1 outerbot
+  `5a96e91`, un commit chacun, ni `package.json` ni lock ; les trois déjà
+  poussés par Sevih avant la relecture. **Contrôles** : outerpedia
+  typecheck, lint, format:check verts, `NODE_ENV=development pnpm test` 231
+  / 3950, `damage:check` 42 lignes exactes ; gear-solver typecheck vert,
+  93 + 82 + 409 tests ; outerbot typecheck, lint, format verts, 101 tests.
+  **Contrat** : C19 ne change que des valeurs de `solver/buffs.json`
+  (libellés d'EE), aucune clé ajoutée ni retirée ; `data:sync` joué dans
+  gear-solver (`f7c9f2d`). **OB1 en prod** : la clé d'annonce du journal
+  passe à l'id, et une entrée déjà annoncée sous l'ancienne clé date|titre
+  est reconnue (`newsSeen`) — rien ne repart ; déploiement vert, bot sain et
+  reconnecté, aucune annonce dans ses journaux après le démarrage.
+  **À voir par Sevih** : dans gear-solver, le libellé du ΔCP en +10R6 et en
+  Off, une carte Worklist écartée, le groupe Talismans après un Get preset ;
+  sur Discord, la prochaine annonce de coupon (bouton d'échange et lien
+  servis par le site). **Laissé** (G4) : un talisman 5★ d'une famille
+  conseillée n'est pas reconnu comme préféré (même règle que les armes).
+  **Suite** : vague 4 (B53, A60, G3, OB2).
 - **Mention « Breakthrough 4 » retirée** (décision de Sevih du 16/10, après
   contrôle à l'écran : « je ne vois pas l'intérêt »). Les recos de build et
   les cartes de `/equipment` gardent le palier enchanté, le butin des guides
