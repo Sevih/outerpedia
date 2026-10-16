@@ -7,6 +7,43 @@
 
 ## 2026-10-16
 
+- **Relecture des lots B53, A60, G3 et OB2 (Opus) — effets de combat des
+  sets dans le contrat, référence commune du client Steam, niveau de set
+  lu du contrat dans gear-solver, reviews du bot indexées par id ; validés,
+  OB2 avec un correctif.** Périmètres conformes, un commit chacun, ni
+  `package.json` ni lockfile. Contrôles outerpedia : typecheck, lint et
+  `format:check` verts, `NODE_ENV=development pnpm test`
+  `Tests 3969 passed (3969)`, `damage:check` 42 lignes exactes. **B53**
+  (`c01d4e7e`) : `sets.json` sans `combatEffects` identique à l'avant
+  (script hors dépôt), 16 paliers servis (sets 8, 15 à 21), `schema` 1 ;
+  `data:sync` de gear-solver (`aa34473`). **A60** (`f2a66b84`) :
+  `findSteamInstall()` rend la même racine et le même build (`25744766`)
+  avant et après ; sha256 de BepInEx identique dans gear-solver,
+  `pack.sh` et `pack.ps1` ; quick n'appelle pas `dumpSteam`, devenu
+  asynchrone. Petit écart laissé : `_docClient` dit « ne pas l'éditer à la
+  main », le TODO du patch dit de le poser à la main quand la version est
+  inconnue. **G3** (gear-solver `605b6fb`) : typecheck vert, tests
+  105 + 82 + 427 ; la règle de `wornSetRows` suit l'en-tête de
+  `solver.ts` (le 2P n'est effacé que pour la même stat, ou côté buffs
+  quand le 4P est un effet) ; le côté buffs lit `p4_desc` faute du champ
+  `combatEffects`, ce qui ne touche que l'affichage. **OB2** (outerbot
+  `eb7c091`) : typecheck, lint, `format:check` et build verts, 114 tests.
+  Rejeu de la migration v3 et du remplissage sur une copie de la base de
+  prod, avec la liste de persos du site : 129 posts sur 135 et 94 reviews
+  sur 101 reçoivent leur id, les 74 liens de build aussi, aucun perso sans
+  post (aucun post créé au premier forum-sync). Restent sans id six anciens
+  posts V2 en slug `-2` des Core Fusion (Epsilon, Eternal, Lisha, Notia,
+  Snow, Veronica, 7 reviews), à côté de leurs posts `core-fusion-*` : déjà
+  invisibles sur le site aujourd'hui, `/status` les listera. Le rejeu a
+  trouvé un défaut, corrigé (`a793af4`, test rouge sur le code d'avant,
+  115 tests) : au resync, un post connu de la base mais encore sans id
+  retombait sur son nom de thread et pouvait prendre l'id du post courant
+  du même perso, et l'index unique faisait échouer tout `/admin resync`.
+  **Reste à Sevih** : après le déploiement d'OB2, `/status` (les six slugs
+  `-2` attendus, rien d'autre) et une fiche du site qui montre toujours ses
+  reviews ; décider du sort des six anciens posts (les garder, ou y
+  reporter les reviews à la main). **Suite** : vague 5 (B56, B55, G6, TW1),
+  et la release de gear-solver qui porte G3.
 - **Référence commune du client Steam : `data/curated/game-client.json`
   (A60, tri des revues du 15/10, L9).** Trois dépôts recopiaient ce qu'il
   faut savoir du client Steam d'OUTERPLANE et les copies divergeaient déjà
