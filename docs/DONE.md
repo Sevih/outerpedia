@@ -7,6 +7,42 @@
 
 ## 2026-10-16
 
+- **Relecture des lots B56, B55, G6 et TW1 (Opus) — noyau par niveau de
+  fusion dans le contrat, rétention des liens de partage, gear-solver et
+  outerplane-tweaks lisent `game-client.json` ; validés.** Contrôles
+  outerpedia (arbre portant les fichiers d'A61 en cours) : typecheck, lint
+  et `format:check` verts, `NODE_ENV=development pnpm test`
+  `Tests 4014 passed (4014)`, `damage:check` 42 lignes exactes. **B56**
+  (`feae32fe`, l'entrée DONE de B55 y est partie, `e6f30169` y recolle deux
+  code spans) : `characters.json` ne gagne que
+  `ingredients.corePassiveByFusion`, rien de retiré ni de changé (script
+  hors dépôt), donc le filtre du client ne change aucune sortie ; les six
+  fusionnés ont les clés `1` à `5`, Notia à zéro jusqu'à la fusion 4 puis
+  `effRate` 50, Snow et Lisha `spdPct` 4,3 aux cinq niveaux, Veronica,
+  Eternal et Epsilon à zéro ; `corePassive` inchangé (Snow `spd` 6). La
+  garde de la vitesse en taux couvre aussi les geas, comme le demandait le
+  point 3. Ces données sont déjà dans l'installeur de gear-solver 1.9.0 (le
+  `data:sync` de la release a lu ce checkout avant la relecture) : sans
+  effet, la 1.9.0 ignore le champ et retélécharge le contrat de `main`.
+  **B55** (`e6f30169`) : le SQL émis rejoué sur une table temporaire de
+  session du MySQL de prod (8.4.11) : l'`ALTER` remplit les lignes
+  existantes à l'heure de la migration, la borne d'un jour bloque une
+  seconde écriture, l'upsert rafraîchit, la purge n'efface que ce qui a
+  plus de 12 mois ; l'utilisateur de l'app a `ALTER` et `INDEX`
+  (`mysql/init/01-init.sh` de sevih-tool). État avant déploiement :
+  `short_links` 54 lignes (depuis le 05/08), `tier_lists` 12 (depuis le
+  17/05), sans `last_access`. **G6** (gear-solver `40faa8b`, parti dans la
+  release 1.9.0 avant sa relecture) : valeurs identiques aux anciennes
+  constantes, copie identique à `data/curated/game-client.json`, le JSON
+  est dans l'`app.asar` et le module se charge ; typecheck vert, tests
+  105 + 84 + 427. **TW1** (outerplane-tweaks `88f855f`) : `bash -n` ;
+  `./pack.sh --pins` rend les valeurs de la référence et le build installé
+  25744766 ; `OUTERPEDIA_PATH=/nulle-part` refusé, rc 1, rien téléchargé ;
+  `pack.ps1` relu (`param` en tête, variables posées avant usage).
+  **Reste à Sevih** : après le déploiement de B55, `SHOW CREATE TABLE` des
+  deux tables et `SELECT COUNT(*), MIN(last_access)` ; sous Windows,
+  `.\pack.ps1 -Pins` puis un pack complet (corps du commit de TW1).
+  **Suite** : A61 et G7 en cours ; puis C21, A59 (OB2 déployé), I1.
 - **B55 — rétention des liens de partage : `last_access` sur `short_links`
   et `tier_lists`, purge de ce qui n'a pas été relu depuis 12 mois.** Quoi :
   les deux tables de partage ne perdaient jamais une ligne (audit
