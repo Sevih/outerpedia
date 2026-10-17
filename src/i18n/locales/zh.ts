@@ -256,7 +256,7 @@ const zh: Record<TranslationKey, string> = {
   'tools.pull-simulator.desc': '模拟各卡池的抽卡。包含指定招募系统。',
   'tools.pull-simulator.meta_description':
     '模拟异域战记的概率提升招募、创世之神招募和限定卡池：选择目标角色，单抽或十连，并查看指定招募进度、以太消耗和抽卡结果。',
-  'tools.pull-simulator.banner.custom': '全角色',
+  'tools.pull-simulator.banner.custom': '自定义招募',
   'tools.pull-simulator.banner.rateup': '概率提升招募',
   'tools.pull-simulator.banner.premium': '创世之神招募',
   'tools.pull-simulator.banner.limited': '其他限定池',

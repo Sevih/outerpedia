@@ -274,7 +274,7 @@ const es: Record<TranslationKey, string> = {
     'Simula invocaciones de gacha para todos los banners. Prueba tu suerte con el sistema de millaje incluido.',
   'tools.pull-simulator.meta_description':
     'Simula el reclutamiento de Outerplane en banners Aumento de Tasa, Premium y Limitado: elige héroes de enfoque, tira x1 o x10 y sigue millaje, éter y resultados.',
-  'tools.pull-simulator.banner.custom': 'Todos los Héroes',
+  'tools.pull-simulator.banner.custom': 'Recluta person.',
   'tools.pull-simulator.banner.rateup': 'Aumento de Tasa',
   'tools.pull-simulator.banner.premium': 'Premium',
   'tools.pull-simulator.banner.limited': 'Limitado',

@@ -1,10 +1,11 @@
 /**
  * Moteur de GACHA du pull simulator : session immuable, tirages avec garantie
- * 2★ du x10 et mileage. Logique PURE — aucune donnée de perso (le client
- * résout qui sort) et aucun import de JSON : la config d'une bannière se
- * DÉRIVE de `recruit.json` (`bannerConfigOf`), que l'appelant SERVEUR lit et
- * passe en props. Les taux et coûts vivaient ici en dur ; ils se sont
- * périmés dès la refonte du 25/08 (le Demiurge a gagné la garantie du x10).
+ * 2★ du x10, garantie du 3★ vedette (pity) et mileage. Logique PURE — aucune
+ * donnée de perso (le client résout qui sort) et aucun import de JSON : la
+ * config d'une bannière se DÉRIVE de `recruit.json` (`bannerConfigOf`), que
+ * l'appelant SERVEUR lit et passe en props. Les taux, coûts et garanties
+ * vivaient ici en dur ; ils se sont périmés dès la refonte du 25/08 (le
+ * Demiurge a gagné la garantie du x10).
  */
 import type { RecruitKindInfo } from '@contracts';
 
@@ -17,19 +18,6 @@ export interface GuaranteeRule {
   /** Nombre de garanties utilisables ; `null` = sans plafond. */
   max: number | null;
 }
-
-/**
- * La garantie du 25/08 par bannière — ÉDITORIAL : aucune table du jeu ne la
- * porte (vérifié en montant le guide banner-mileage), elle vient des notes de
- * patch. `custom` est la fausse bannière « All Heroes » du simulateur, qui
- * n'existe pas dans le jeu : rien à y garantir.
- */
-const GUARANTEE_OF: Record<BannerType, GuaranteeRule | null> = {
-  custom: null,
-  rateup: { at: 100, max: 2 },
-  premium: { at: 100, max: 1 },
-  limited: { at: 100, max: 2 },
-};
 
 /** Ordre d'affichage des bannières du simulateur. */
 export const BANNER_TYPES: BannerType[] = ['custom', 'rateup', 'premium', 'limited'];
@@ -62,23 +50,26 @@ export interface BannerConfig {
   freePull: boolean;
 }
 
-/** Taux d'un palier par suffixe de clé TextSystem (absent = 0). */
+/** Taux d'un palier HORS vedette par suffixe de clé TextSystem (absent = 0). */
 function rateOf(info: RecruitKindInfo, suffix: string): number {
-  return info.rates.find((r) => r.titleKey.endsWith(suffix))?.percent ?? 0;
+  return info.rates.find((r) => !r.featured && r.titleKey.endsWith(suffix))?.percent ?? 0;
 }
 
 /**
- * Config d'une bannière DÉRIVÉE de sa fiche générée. Le Custom n'a pas de
- * palier pickup (`_TITLE_05`) : son taux vedette est 0, et le simulateur ne
- * modélise donc pas ses 3 persos choisis.
+ * Config d'une bannière DÉRIVÉE de sa fiche générée. Le taux vedette est
+ * celui de la ligne `featured` (le `Grade` 4 du jeu), pas d'un titre : au
+ * Custom, c'est le palier « 3★ » tout entier — ses 3★ sortent tous parmi les
+ * 3 héros choisis, il n'a pas de 3★ hors focus.
  *
- * La garantie du x10 se lit comme partout ailleurs : une ligne à 0 % sur le
- * slot garanti = un tirage remonté.
+ * La garantie du 3★ vedette vient de la fiche (`pity`, colonnes
+ * `MaxPityRecruitCount` / `MaxPityCount` du groupe). Celle du x10 se lit
+ * comme partout ailleurs : une ligne à 0 % sur le slot garanti = un tirage
+ * remonté.
  */
 export function bannerConfigOf(type: BannerType, info: RecruitKindInfo): BannerConfig {
   return {
     type,
-    focus3Rate: rateOf(info, '_TITLE_05'),
+    focus3Rate: info.rates.find((r) => r.featured)?.percent ?? 0,
     offFocus3Rate: rateOf(info, '_TITLE_03'),
     rate2: rateOf(info, '_TITLE_02'),
     rate1: rateOf(info, '_TITLE_01'),
@@ -86,7 +77,7 @@ export function bannerConfigOf(type: BannerType, info: RecruitKindInfo): BannerC
     etherCost: info.price1,
     tenPullGuarantee: info.rates.some((r) => r.percent > 0 && r.confirmPercent === 0),
     freePull: info.freeCount > 0,
-    guarantee: GUARANTEE_OF[type],
+    guarantee: info.pity ? { at: info.pity.every, max: info.pity.max } : null,
   };
 }
 

@@ -26,15 +26,18 @@ import {
  *     localisés, recherche multilingue) : les 3★ hors core-fusion — elles ne se
  *     tirent pas, elles se fusionnent —, catégorisés par tags : `premium`, la
  *     FAMILLE `limited` du glossaire (festival/seasonal/collab — la bannière
- *     limitée les tire tous les trois), puis le reste ;
- *   - le pool HORS FOCUS de chaque bannière (3★, 2★, 1★) vient des tables du
- *     jeu (`recruit.json`, `getRecruitPool`), avec le poids de chaque perso
- *     dans son palier — 1 pour tous quand le jeu n'en publie pas.
+ *     limitée les tire tous les trois), puis le reste. Le Custom Recruit, lui,
+ *     choisit ses 3 vedettes dans la liste du jeu (`recruit.json`, son palier
+ *     vedette : `selectable`) ;
+ *   - le pool HORS FOCUS de chaque bannière (3★, 2★, 1★ ; 2★ et 1★ au Custom,
+ *     dont tous les 3★ sont des vedettes) vient des tables du jeu
+ *     (`recruit.json`, `getRecruitPool`), avec le poids de chaque perso dans
+ *     son palier — 1 pour tous quand le jeu n'en publie pas.
  *
  * Les tirages eux-mêmes vivent dans `@/lib/gacha`. Les configs de bannière
- * (taux, coûts, mileage, garantie du x10) se DÉRIVENT ici de `recruit.json` et
- * descendent en props, comme les pools : le moteur reste pur, et le bundle
- * client n'embarque pas la donnée générée.
+ * (taux, coûts, mileage, garantie du x10 et du 3★ vedette) se DÉRIVENT ici de
+ * `recruit.json` et descendent en props, comme les pools : le moteur reste
+ * pur, et le bundle client n'embarque pas la donnée générée.
  */
 export default async function PullSimulator({ lang }: { lang: Lang }) {
   const t = await getT(lang);
@@ -132,6 +135,7 @@ export default async function PullSimulator({ lang }: { lang: Lang }) {
       characters={characters}
       others={others}
       pools={pools}
+      customSelectable={getRecruitKind('custom').selectable ?? []}
       labels={labels}
       configs={configs}
     />

@@ -262,7 +262,7 @@ const kr: Record<TranslationKey, string> = {
   'tools.pull-simulator.desc': '모든 배너의 가챠를 시뮬레이션하세요. 마일리지 시스템 포함.',
   'tools.pull-simulator.meta_description':
     '아우터플레인 뽑기를 픽업, 프리미엄, 한정 배너에서 시뮬레이션하세요. 픽업 캐릭터를 고르고 1회 또는 10연 뽑기를 돌리며 마일리지, 소모 에테르, 결과를 확인하세요.',
-  'tools.pull-simulator.banner.custom': '전체 영웅',
+  'tools.pull-simulator.banner.custom': '커스텀 동료 영입',
   'tools.pull-simulator.banner.rateup': '픽업',
   'tools.pull-simulator.banner.premium': '프리미엄',
   'tools.pull-simulator.banner.limited': '한정',

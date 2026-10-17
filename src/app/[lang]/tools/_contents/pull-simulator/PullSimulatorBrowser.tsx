@@ -78,7 +78,10 @@ export interface PullSimLabels {
   batch: string;
 }
 
-/** Catégorie sélectionnable comme focus par bannière (null = pas de focus). */
+/**
+ * Catégorie sélectionnable comme focus par bannière. `null` : le Custom
+ * choisit dans la liste du jeu (`customSelectable`), pas par tags.
+ */
 const BANNER_FOCUS_CATEGORY: Record<BannerType, GachaCategory | null> = {
   custom: null,
   rateup: 'normal',
@@ -86,9 +89,13 @@ const BANNER_FOCUS_CATEGORY: Record<BannerType, GachaCategory | null> = {
   limited: 'limited',
 };
 
-/** Nombre de focus autorisés par bannière. */
+/**
+ * Nombre de focus par bannière — tous requis avant de tirer (le jeu refuse un
+ * Custom Recruit tant que ses 3 slots ne sont pas remplis :
+ * `CRecruitCustomPickup.MAX_SLOT_COUNT`).
+ */
 const BANNER_FOCUS_COUNT: Record<BannerType, number> = {
-  custom: 0,
+  custom: 3,
   rateup: 1,
   premium: 1,
   limited: 1,
@@ -131,14 +138,16 @@ type ResolvedPull = PullResult & { charId: string | null };
 
 /**
  * Simulateur de gacha (porté tel quel) : 4 bannières aux taux officiels, choix du
- * focus (combobox multilingue), tirages x1/x10 avec garantie 2★, mileage,
- * résultats en cartes, statistiques de session et historique par batch. Tout
- * est local et éphémère — on tire pour voir, rien n'est persisté.
+ * focus (combobox multilingue), tirages x1/x10 avec garantie 2★, garantie du
+ * 3★ vedette, mileage, résultats en cartes, statistiques de session et
+ * historique par batch. Tout est local et éphémère — on tire pour voir, rien
+ * n'est persisté.
  */
 export function PullSimulatorBrowser({
   characters,
   others,
   pools,
+  customSelectable,
   labels,
   configs,
 }: {
@@ -148,6 +157,8 @@ export function PullSimulatorBrowser({
   others: GachaMinor[];
   /** Pool hors focus de chaque bannière, LU dans `recruit.json`. */
   pools: Record<BannerType, GachaPool>;
+  /** Héros que le Custom Recruit laisse choisir (ids, `recruit.json`). */
+  customSelectable: string[];
   labels: PullSimLabels;
   /** Taux et coûts DÉRIVÉS de `recruit.json` par le wrapper serveur. */
   configs: Record<BannerType, BannerConfig>;
@@ -164,10 +175,11 @@ export function PullSimulatorBrowser({
   const focusCategory = BANNER_FOCUS_CATEGORY[bannerType];
   const pool = pools[bannerType];
 
-  const focusPool = useMemo(
-    () => (focusCategory === null ? [] : characters.filter((c) => c.category === focusCategory)),
-    [characters, focusCategory],
-  );
+  const focusPool = useMemo(() => {
+    if (focusCategory !== null) return characters.filter((c) => c.category === focusCategory);
+    const selectable = new Set(customSelectable);
+    return characters.filter((c) => selectable.has(c.id));
+  }, [characters, focusCategory, customSelectable]);
   const focusChars = useMemo(
     () =>
       selectedIds
@@ -182,8 +194,12 @@ export function PullSimulatorBrowser({
     return m;
   }, [characters, others]);
 
-  // La bannière custom n'a pas de focus ; les autres en exigent au moins un.
-  const canPull = maxFocus === 0 || focusChars.length > 0;
+  // Pas de tirage tant que tous les focus ne sont pas choisis (3 au Custom).
+  const canPull = focusChars.length === maxFocus;
+  // Le mileage du Custom reste caché tant qu'une capture en jeu n'en dit pas
+  // la règle (décision du 15/10) ; au Custom, tout 3★ est une vedette, et les
+  // statistiques « focus » doubleraient celles du 3★.
+  const isCustom = bannerType === 'custom';
 
   const handleBannerChange = useCallback((type: BannerType) => {
     setBannerType(type);
@@ -245,10 +261,10 @@ export function PullSimulatorBrowser({
     setLastResults(null);
   }, [bannerType]);
 
-  const mileageReady = maxFocus > 0 && canUseMileage(session, config);
+  const mileageReady = !isCustom && canUseMileage(session, config);
   const mileagePercent = Math.min((session.mileage / config.mileageCap) * 100, 100);
-  // Compteur de garantie (pity du 25/08). `null` sur « All Heroes », qui
-  // n'existe pas dans le jeu.
+  // Compteur de garantie (pity), lu du groupe de la bannière ; `null` si le
+  // jeu n'en déclare pas.
   const pity = config.guarantee;
   const pityLeft = guaranteeLeft(session, config);
   const pityPercent = pity ? Math.min((session.pullsSinceGuarantee / pity.at) * 100, 100) : 0;
@@ -280,9 +296,12 @@ export function PullSimulatorBrowser({
               <span className="font-semibold text-red-400">{config.focus3Rate}%</span>
             </span>
           )}
-          <span>
-            3★: <span className="font-semibold text-yellow-400">{config.offFocus3Rate}%</span>
-          </span>
+          {/* Le Custom n'a pas de 3★ hors focus. */}
+          {config.offFocus3Rate > 0 && (
+            <span>
+              3★: <span className="font-semibold text-yellow-400">{config.offFocus3Rate}%</span>
+            </span>
+          )}
           <span>
             2★: <span className="font-semibold text-blue-400">{config.rate2}%</span>
           </span>
@@ -304,7 +323,7 @@ export function PullSimulatorBrowser({
         </div>
       </div>
 
-      {/* Choix du focus (absent de la bannière custom) */}
+      {/* Choix du focus */}
       {maxFocus > 0 && (
         <div>
           <h2 className="text-content-muted mb-2 text-sm font-semibold">{labels.selectFocus}</h2>
@@ -450,7 +469,7 @@ export function PullSimulatorBrowser({
           </div>
         )}
 
-        {maxFocus > 0 && (
+        {!isCustom && (
           <div className="flex min-w-0 flex-1 items-center gap-3 sm:max-w-xs">
             <div className="flex-1">
               <div className="mb-1 flex items-center justify-between text-xs">
@@ -558,11 +577,9 @@ export function PullSimulatorBrowser({
       {session.totalPulls > 0 && (
         <div>
           <h2 className="text-content-muted mb-3 text-sm font-semibold">{labels.stats}</h2>
-          <div
-            className={`grid gap-2 ${maxFocus > 0 ? 'grid-cols-2 sm:grid-cols-4' : 'grid-cols-2'}`}
-          >
+          <div className={`grid gap-2 ${!isCustom ? 'grid-cols-2 sm:grid-cols-4' : 'grid-cols-2'}`}>
             <StatCard label={labels.totalPulls} value={session.totalPulls} />
-            {maxFocus > 0 && (
+            {!isCustom && (
               <StatCard label={labels.totalEther} value={session.totalEther.toLocaleString()} />
             )}
             <StatCard
@@ -570,7 +587,7 @@ export function PullSimulatorBrowser({
               value={session.pullsToFirst3Star ?? labels.never}
               highlight={session.pullsToFirst3Star !== null ? 'text-yellow-300' : undefined}
             />
-            {maxFocus > 0 && (
+            {!isCustom && (
               <StatCard
                 label={labels.firstFocus}
                 value={session.pullsToFocus ?? labels.never}
@@ -579,7 +596,7 @@ export function PullSimulatorBrowser({
             )}
           </div>
 
-          <div className={`mt-3 grid gap-2 ${maxFocus > 0 ? 'grid-cols-4' : 'grid-cols-3'}`}>
+          <div className={`mt-3 grid gap-2 ${!isCustom ? 'grid-cols-4' : 'grid-cols-3'}`}>
             <RarityBar
               label="1★"
               count={session.counts.star1}
@@ -598,7 +615,7 @@ export function PullSimulatorBrowser({
               total={session.totalPulls}
               color="bg-yellow-400"
             />
-            {maxFocus > 0 && (
+            {!isCustom && (
               <RarityBar
                 label={`3★ ${labels.focus}`}
                 count={session.counts.star3Focus}

@@ -7,6 +7,78 @@
 
 ## 2026-10-17
 
+- **C23 — Simulateur de tirages : le Custom Recruit, sa garantie tous les
+  100 tirages et le choix des 3 héros.** Constat M7 de la revue de la
+  logique du site (09/10), rejoué le 15/10 ; décision de Sevih du 15/10 :
+  la garantie ET le choix des 3 héros, le mileage du Custom restant caché
+  jusqu'à une capture en jeu. Le simulateur traitait le Custom comme une
+  fausse bannière « All Heroes » (chaque 3★ parmi 57, sans garantie : 7,95 %
+  des séries de 100 sans 3★, impossible en jeu). **Génération**
+  (`datagen/generators/recruit.ts`) : chaque type de persos émet
+  `pity: { every, max }` lu de `UsePity` / `MaxPityRecruitCount` /
+  `MaxPityCount` (`pityOf`, 0 → `null`, `UsePity` faux → absent, donc rien
+  sur `equipment`) ; le palier vedette se reconnaît au `Grade` 4
+  (`RG_GRADE_4`, `isFeatured`) et plus au titre `_TITLE_05` : sa ligne de
+  taux porte `featured: true` (recettes CHARACTER seulement, l'ITEM de la
+  Dimensional Supply a aussi des `Grade` 4), `poolOf` l'exclut, et
+  `featuredTierOf` jette sur un groupe de référence sans palier de `Grade`
+  4, avec deux, ou dont une ligne `_TITLE_05` n'est pas au `Grade` 4 ; le
+  Custom émet `selectable` (les 57 `CharacterID` de son palier vedette,
+  ligne 200091, `tierCharacters`, même contrôle d'id inconnu que `pool`).
+  Type `RecruitPity` exporté par `datagen/contracts`. Les `titleKey` ne
+  bougent pas, le guide « Banners & Mileage » rend à l'identique.
+  **Moteur** (`src/lib/gacha.ts`) : `GUARANTEE_OF` disparaît,
+  `bannerConfigOf` lit `info.pity` et le taux vedette sur la ligne
+  `featured` (`rateOf` ignore désormais cette ligne) : le Custom a
+  `focus3Rate` 2,5, `offFocus3Rate` 0 et `{ at: 100, max: null }`,
+  `pullMulti` inchangé. **Interface** : `index.tsx` passe
+  `customSelectable` ; au Custom, `BANNER_FOCUS_COUNT` vaut 3, la
+  combobox propose les sélectionnables (filtrés dans `characters`),
+  `canPull` exige `focusChars.length === maxFocus` (équivalent à l'ancien
+  « au moins un » sur les bannières à 1 focus), la barre de garantie
+  s'affiche (`n / 100`, sans compteur puisque `max` est `null`) ; le
+  mileage et les statistiques « focus » (éther, premier focus, barre 3★
+  focus) tiennent à `isCustom` et non plus à `maxFocus > 0`, donc restent
+  cachés comme avant ; le taux « 3★ » hors focus ne s'affiche plus quand
+  il vaut 0 (le Custom seul). Onglet `tools.pull-simulator.banner.custom`
+  renommé du `SYS_RECRUIT_TITLE_CUSTOM` du jeu dans les six locales (en
+  « Custom Recruit », fr « Recrut. perso. », es « Recluta person. », jp
+  « カスタムスカウト », kr « 커스텀 동료 영입 », zh « 自定义招募 ») ; aucune
+  autre clé. En-têtes et commentaires qui disaient « aucune table ne porte
+  la garantie » ou « All Heroes » suivent (`gacha.ts`,
+  `PullSimulatorBrowser.tsx`, `pull-simulator/index.tsx`, guide
+  `banner-mileage/index.tsx`). **Données** : `data/` propre avant ;
+  `datagen:build` puis `datagen:promote` à blanc : `recruit.json` ~1 (les
+  quatre `pity`, les quatre `featured`, les 57 `selectable` du Custom —
+  identiques à son ancien palier 3★ —, son `pool` sans palier 3★) et
+  `characters.json` ~7, qui est l'écart laissé exprès par B51 (les 7
+  `buffImmune` à intégrer depuis quick, vérifié champ par champ : rien
+  d'autre) ; promotion appliquée avec `--only recruit.json`.
+  **Vérification** : `recruit.test.ts` (`pityOf` sur les trois colonnes,
+  `featuredTierOf` au `Grade` 4 y compris au titre `_TITLE_03`, les trois
+  cas qui jettent, `featured` de `ratesOf`, `poolOf` qui sort le 3★ du
+  Custom ; sur la donnée : une ligne vedette par bannière de persos,
+  sélectionnables triés et tous 3★ hors core-fusion de `characters.json`,
+  `customPool` = sélectionnables + hors focus, une garantie sur les quatre
+  bannières de persos) ; `gacha.test.ts` (Custom synthétique et lu de
+  `recruit.json` : 2,5 et `{ 100, null }`, règle de chaque bannière égale à
+  son `pity` et aux valeurs des notes de patch, `Math.random` figé : vedette
+  forcée aux 100e, 200e et 300e tirages, un 3★ naturel au 40e remet le
+  compteur — prochaine au 140e ; le test `mileageCost` de B50 non touché,
+  vert). Onglets Rate Up, Premium et Limited : `bannerConfigOf` de l'ancien
+  moteur sur l'ancien `recruit.json` contre le nouveau sur le nouveau, et
+  leurs `pool` : identiques (script jetable) ; le rendu tient aux mêmes
+  conditions (`isCustom` faux = l'ancien `maxFocus > 0`, taux 3★ hors focus
+  non nul). `pnpm typecheck` (dernière ligne : la commande
+  `tsc --noEmit -p scripts/tsconfig.json` sans erreur derrière),
+  `pnpm lint` (`$ eslint`, sans erreur), `pnpm test`
+  (`Tests 4131 passed (4131)`). **Laissé** : le mileage du Custom
+  (décision à part) ; les commentaires de `BannerBlocks.tsx`
+  (`BannerRates`, prop `guarantee`) disent encore que le pity « ne vit dans
+  aucune table » et `jackpotKeyOf` y lit la vedette par titre — hors
+  périmètre, rendu juste ; le `maxFocus > 0` qui garde le choix du focus est
+  désormais toujours vrai, laissé tel quel.
+
 - **B51 — Persos : immunités sur la fiche, formes de combat dans le
   scaling (Demiurge Saeran), points de cadeau lus dans les tables.**
   Constats O1, O2 et O10 de la revue « génération des données » (09/10),

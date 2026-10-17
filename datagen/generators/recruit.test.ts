@@ -4,7 +4,9 @@
  *   1. CŒURS PURS en synthétique : `ratesOf` (la vraie logique — des POIDS
  *      bruts normalisés en %, filtrés par groupe et par type de recette),
  *      `poolOf` (le pool hors focus d'un groupe : vedette exclue, un palier
- *      par rareté, poids émis seulement s'ils départagent), `isoDate`
+ *      par rareté, poids émis seulement s'ils départagent), `featuredTierOf`
+ *      (le palier vedette au `Grade` 4, et ce qui jette), `pityOf` (la
+ *      garantie lue des trois colonnes du groupe), `isoDate`
  *      (troncature de la date du jeu) et `recruitWindows` (toutes les fenêtres
  *      à vedette, pour l'onglet « Bannières » de quick). Aucune table requise.
  *
@@ -24,10 +26,13 @@ import itemsData from '../../data/generated/items.json';
 import type { LangDict } from '../lib/lang';
 import type { Row } from '../lib/tables';
 import {
+  featuredTierOf,
   isoDate,
+  pityOf,
   poolOf,
   ratesOf,
   recruitWindows,
+  tierCharacters,
   type RecruitData,
   type RecruitKind,
 } from './recruit';
@@ -235,6 +240,16 @@ describe('ratesOf — poids normalisés en %', () => {
     expect(ratesOf(rows, 'g', tsys)[0].drops).toBeUndefined();
   });
 
+  it('featured : sur la ligne CHARACTER de Grade 4 seulement, quel que soit son titre', () => {
+    const rows: Row[] = [
+      { GroupID: 'g', RecipeType: 'CHARACTER', Grade: '4', Title: 'T3', NormalRate: '25' },
+      { GroupID: 'g', RecipeType: 'CHARACTER', Grade: '2', Title: 'T2', NormalRate: '975' },
+      { GroupID: 'h', RecipeType: 'ITEM', Grade: '4', Title: 'GEAR', NormalRate: '100' },
+    ];
+    expect(ratesOf(rows, 'g', tsys).map((r) => r.featured)).toEqual([true, undefined]);
+    expect(ratesOf(rows, 'h', tsys, { recipeType: 'ITEM' })[0].featured).toBeUndefined();
+  });
+
   it('groupe sans recette du type demandé → jette (pas de division par 0)', () => {
     expect(() => ratesOf([], 'g', tsys)).toThrow();
     expect(() =>
@@ -243,19 +258,101 @@ describe('ratesOf — poids normalisés en %', () => {
   });
 });
 
-describe('poolOf — pool hors focus d’un groupe', () => {
-  const tier = (ID: string, Title: string, RecipeType = 'CHARACTER', GroupID = 'g'): Row => ({
-    ID,
-    GroupID,
-    RecipeType,
-    Title,
+/** Une ligne de `RecruitGradeRecipeTemplet` (palier). */
+const tier = (
+  ID: string,
+  Title: string,
+  Grade: string,
+  RecipeType = 'CHARACTER',
+  GroupID = 'g',
+): Row => ({ ID, GroupID, RecipeType, Title, Grade });
+
+describe('pityOf — la garantie d’un groupe', () => {
+  const group = (UsePity: string, every: string, max: string): Row => ({
+    ID: 'g',
+    UsePity,
+    MaxPityRecruitCount: every,
+    MaxPityCount: max,
   });
+
+  it('UsePity vrai : tous les MaxPityRecruitCount, au plus MaxPityCount', () => {
+    expect(pityOf(group('True', '100', '2'))).toEqual({ every: 100, max: 2 });
+    expect(pityOf(group('True', '100', '1'))).toEqual({ every: 100, max: 1 });
+  });
+
+  it('MaxPityCount 0 → sans plafond (`null`), comme le Custom Recruit', () => {
+    expect(pityOf(group('True', '100', '0'))).toEqual({ every: 100, max: null });
+  });
+
+  it('UsePity faux → absent, quelles que soient les deux autres colonnes', () => {
+    expect(pityOf(group('False', '0', '0'))).toBeUndefined();
+    expect(pityOf(group('False', '100', '2'))).toBeUndefined();
+  });
+});
+
+describe('featuredTierOf — le palier vedette d’un groupe de référence', () => {
+  it('le Grade 4, au titre pickup', () => {
+    const grades = [
+      tier('focus', 'SYS_RECRUIT_RATEINFO_TITLE_05', '4'),
+      tier('three', 'SYS_RECRUIT_RATEINFO_TITLE_03', '3'),
+    ];
+    expect(featuredTierOf(grades, 'g').ID).toBe('focus');
+  });
+
+  it('le Grade 4 même au titre 3★ (le Custom), et ses persos triés', () => {
+    const grades = [
+      tier('custom3', 'SYS_RECRUIT_RATEINFO_TITLE_03', '4'),
+      tier('two', 'SYS_RECRUIT_RATEINFO_TITLE_02', '2'),
+      tier('other', 'SYS_RECRUIT_RATEINFO_TITLE_03', '4', 'CHARACTER', 'h'),
+    ];
+    const featured = featuredTierOf(grades, 'g');
+    expect(featured.ID).toBe('custom3');
+    const recipes: Row[] = [
+      { GradeGroupID: 'custom3', CharacterID: 'c2' },
+      { GradeGroupID: 'custom3', CharacterID: 'c1' },
+      { GradeGroupID: 'two', CharacterID: 'c9' },
+    ];
+    expect(tierCharacters(recipes, featured)).toEqual(['c1', 'c2']);
+  });
+
+  it('jette : aucun palier de Grade 4', () => {
+    expect(() =>
+      featuredTierOf([tier('three', 'SYS_RECRUIT_RATEINFO_TITLE_03', '3')], 'g'),
+    ).toThrow(/aucun palier\(s\) vedette/);
+  });
+
+  it('jette : deux paliers de Grade 4', () => {
+    expect(() =>
+      featuredTierOf(
+        [
+          tier('a', 'SYS_RECRUIT_RATEINFO_TITLE_05', '4'),
+          tier('b', 'SYS_RECRUIT_RATEINFO_TITLE_03', '4'),
+        ],
+        'g',
+      ),
+    ).toThrow(/2 palier\(s\) vedette/);
+  });
+
+  it('jette : une ligne pickup hors du Grade 4 (vieux pickup au Grade 0)', () => {
+    expect(() =>
+      featuredTierOf(
+        [
+          tier('focus', 'SYS_RECRUIT_RATEINFO_TITLE_03', '4'),
+          tier('old', 'SYS_RECRUIT_RATEINFO_TITLE_05', '0'),
+        ],
+        'g',
+      ),
+    ).toThrow(/palier pickup old au Grade 0/);
+  });
+});
+
+describe('poolOf — pool hors focus d’un groupe', () => {
   const grades: Row[] = [
-    tier('focus', 'SYS_RECRUIT_RATEINFO_TITLE_05'),
-    tier('one', 'SYS_RECRUIT_RATEINFO_TITLE_01'),
-    tier('three', 'SYS_RECRUIT_RATEINFO_TITLE_03'),
-    tier('asset', 'SYS_RECRUIT_RATEINFO_TITLE_03', 'ASSET'),
-    tier('elsewhere', 'SYS_RECRUIT_RATEINFO_TITLE_03', 'CHARACTER', 'other'),
+    tier('focus', 'SYS_RECRUIT_RATEINFO_TITLE_05', '4'),
+    tier('one', 'SYS_RECRUIT_RATEINFO_TITLE_01', '1'),
+    tier('three', 'SYS_RECRUIT_RATEINFO_TITLE_03', '3'),
+    tier('asset', 'SYS_RECRUIT_RATEINFO_TITLE_03', '3', 'ASSET'),
+    tier('elsewhere', 'SYS_RECRUIT_RATEINFO_TITLE_03', '3', 'CHARACTER', 'other'),
   ];
   const row = (GradeGroupID: string, CharacterID: string, BasicStar: string, Rate = '1'): Row => ({
     GradeGroupID,
@@ -291,6 +388,15 @@ describe('poolOf — pool hors focus d’un groupe', () => {
     expect(one.weights).toBeUndefined();
   });
 
+  it('la vedette s’exclut au Grade 4, pas au titre : le palier 3★ du Custom sort du pool', () => {
+    const custom: Row[] = [
+      tier('custom3', 'SYS_RECRUIT_RATEINFO_TITLE_03', '4'),
+      tier('one', 'SYS_RECRUIT_RATEINFO_TITLE_01', '1'),
+    ];
+    const recipes: Row[] = [row('custom3', 'c1', '3'), row('one', 'c5', '1')];
+    expect(poolOf(custom, recipes, 'g')).toEqual([{ rarity: 1, characterIds: ['c5'] }]);
+  });
+
   it('palier illisible → jette (vide, raretés mêlées, doublon, deux paliers de même rareté)', () => {
     expect(() => poolOf(grades, [row('three', 'c1', '3')], 'g')).toThrow(/rareté illisible/); // « one » est vide
     const base = [row('one', 'c5', '1')];
@@ -324,10 +430,12 @@ describe('recruit.json — pool hors focus par type', () => {
   const characters = charactersData as unknown as Record<string, { rarity: number }>;
   const poolOfKind = (kind: RecruitKind) => recruit.kinds.find((k) => k.kind === kind)?.pool;
 
-  it('un palier 3★/2★/1★ par bannière de persos, aucun pour equipment', () => {
-    for (const kind of ['custom', 'pickup', 'premium', 'limited'] as const) {
+  it('un palier 3★/2★/1★ par bannière de persos (2★/1★ au Custom), aucun pour equipment', () => {
+    for (const kind of ['pickup', 'premium', 'limited'] as const) {
       expect(poolOfKind(kind)?.map((t) => t.rarity)).toEqual([3, 2, 1]);
     }
+    // Les 3★ du Custom sont ses vedettes (`selectable`), pas un pool hors focus.
+    expect(poolOfKind('custom')?.map((t) => t.rarity)).toEqual([2, 1]);
     expect(poolOfKind('equipment')).toBeUndefined();
   });
 
@@ -365,9 +473,56 @@ describe('recruit.json — pool hors focus par type', () => {
     expect(bad).toEqual([]);
   });
 
-  it('le pool du Custom Recruit est `customPool`, palier par palier', () => {
-    const ids = (poolOfKind('custom') ?? []).flatMap((t) => t.characterIds);
+  it('le pool du Custom Recruit est `customPool` : ses sélectionnables plus son hors focus', () => {
+    const custom = recruit.kinds.find((k) => k.kind === 'custom');
+    const ids = [
+      ...(custom?.selectable ?? []),
+      ...(poolOfKind('custom') ?? []).flatMap((t) => t.characterIds),
+    ];
     expect([...ids].sort((a, b) => a.localeCompare(b))).toEqual(recruit.customPool);
+  });
+});
+
+describe('recruit.json — vedettes et garanties', () => {
+  const characters = charactersData as unknown as Record<
+    string,
+    { rarity: number; originalCharacter?: string }
+  >;
+
+  it('chaque bannière de persos a UNE ligne de taux vedette, equipment aucune', () => {
+    for (const k of recruit.kinds) {
+      expect(k.rates.filter((r) => r.featured).length, k.kind).toBe(k.kind === 'equipment' ? 0 : 1);
+    }
+  });
+
+  it('seul le Custom porte des sélectionnables : triés, sans doublon', () => {
+    for (const k of recruit.kinds) {
+      if (k.kind !== 'custom') expect(k.selectable, k.kind).toBeUndefined();
+    }
+    const ids = recruit.kinds.find((k) => k.kind === 'custom')?.selectable ?? [];
+    expect(ids.length).toBeGreaterThanOrEqual(3);
+    expect([...ids].sort((a, b) => a.localeCompare(b))).toEqual(ids);
+    expect(new Set(ids).size).toBe(ids.length);
+  });
+
+  // Le simulateur ne propose que les 3★ hors core-fusion du catalogue : un
+  // sélectionnable qui n'en serait pas disparaîtrait du choix sans bruit.
+  it('chaque sélectionnable du Custom est un 3★ du catalogue, hors core-fusion', () => {
+    const ids = recruit.kinds.find((k) => k.kind === 'custom')?.selectable ?? [];
+    const bad = ids.filter(
+      (id) => characters[id]?.rarity !== 3 || characters[id].originalCharacter,
+    );
+    expect(bad).toEqual([]);
+  });
+
+  it('une garantie sur les quatre bannières de persos, aucune sur equipment', () => {
+    for (const k of recruit.kinds) {
+      if (k.kind === 'equipment') expect(k.pity).toBeUndefined();
+      else {
+        expect(k.pity?.every, k.kind).toBeGreaterThan(0);
+        expect(k.pity?.max === null || (k.pity?.max ?? 0) > 0, k.kind).toBe(true);
+      }
+    }
   });
 });
 

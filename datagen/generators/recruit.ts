@@ -23,11 +23,20 @@
  *                 Les bannières de persos portent en plus leur POOL HORS
  *                 FOCUS (`pool`) : qui peut sortir à chaque rareté, par le
  *                 même chemin que customPool (palier CHARACTER →
- *                 RecruitRecipeTemplet.CharacterID), palier vedette
- *                 (`_TITLE_05`) exclu. La colonne `Rate` (poids du perso DANS
- *                 son palier) n'est émise que là où elle départage : au
- *                 Demiurge, les premium pèsent 1 contre 2 pour les autres ;
- *                 partout ailleurs elle vaut 1 pour tous, donc tirage uniforme.
+ *                 RecruitRecipeTemplet.CharacterID), palier vedette exclu.
+ *                 La colonne `Rate` (poids du perso DANS son palier) n'est
+ *                 émise que là où elle départage : au Demiurge, les premium
+ *                 pèsent 1 contre 2 pour les autres ; partout ailleurs elle
+ *                 vaut 1 pour tous, donc tirage uniforme.
+ *                 Le palier VEDETTE est celui de `Grade` 4 (`RG_GRADE_4`) —
+ *                 pas un titre : le Custom l'affiche « 3★ » (`_TITLE_03`), les
+ *                 autres « pickup » (`_TITLE_05`). Sa ligne de taux porte
+ *                 `featured`, et le Custom émet ses persos (`selectable`) :
+ *                 ce sont les héros que le joueur choisit, 3 par 3.
+ *                 La GARANTIE (pity : un 3★ vedette tous les N tirages, au
+ *                 plus M fois) se lit dans RecruitGroupTemplet (`UsePity`,
+ *                 `MaxPityRecruitCount`, `MaxPityCount`, comme
+ *                 CUIRecruitPityInfo du client).
  *   banners     — TOUTES les apparitions bannière à pickup de perso
  *                 (SEASONAL/OUTER_FES + leurs SELECTION) : release/rerun des
  *                 limited se DÉRIVENT (data/banner.json était maintenu à la
@@ -72,6 +81,11 @@ export interface RecruitRate {
   /** Taux sur le slot garanti du x10 (%). */
   confirmPercent: number;
   /**
+   * Palier VEDETTE (`Grade` 4) d'une bannière de persos — ce que la garantie
+   * force. Absent ailleurs, et de toute recette ITEM.
+   */
+  featured?: true;
+  /**
    * Ce que le palier contient, quand c'est une liste FINIE d'objets (les
    * paliers « sac de butin » de la Dimensional Supply). Absent quand le palier
    * rend une pièce d'ÉQUIPEMENT : ses 154 lignes sont le catalogue entier,
@@ -100,6 +114,14 @@ export interface RecruitPoolTier {
  */
 export type RecruitKind = 'custom' | 'pickup' | 'premium' | 'limited' | 'equipment';
 
+/** Garantie d'un groupe (pity) : un 3★ vedette forcé tous les `every` tirages. */
+export interface RecruitPity {
+  /** Tirages au bout desquels la vedette est forcée (`MaxPityRecruitCount`). */
+  every: number;
+  /** Garanties utilisables (`MaxPityCount`) ; `null` = sans plafond (0 en table). */
+  max: number | null;
+}
+
 export interface RecruitKindInfo {
   kind: RecruitKind;
   /** Groupe de référence (le plus récent du type) — pour audit. */
@@ -110,6 +132,13 @@ export interface RecruitKindInfo {
    * de `equipment`, qui ne tire pas de persos.
    */
   pool?: RecruitPoolTier[];
+  /**
+   * Custom seulement : les héros du palier vedette, parmi lesquels le joueur
+   * en choisit 3 (`CRecruitCustomPickup.MAX_SLOT_COUNT`). Ids triés.
+   */
+  selectable?: string[];
+  /** Garantie du groupe — absente quand `UsePity` est faux. */
+  pity?: RecruitPity;
   /** Prix éther d'un tirage / de dix. */
   price1: number;
   price10: number;
@@ -287,8 +316,56 @@ function buildCustomPool(groups: Row[], gradeRecipes: Row[]): string[] {
   return [...pool].sort((a, b) => a.localeCompare(b));
 }
 
-/** Palier VEDETTE d'une bannière (le pickup) — il n'est pas du pool hors focus. */
-const FEATURED_TITLE = 'SYS_RECRUIT_RATEINFO_TITLE_05';
+/**
+ * Palier VEDETTE d'une bannière : le `Grade` 4 (`RG_GRADE_4`) — il n'est pas
+ * du pool hors focus. Le titre ne le dit pas : `_TITLE_05` (« pickup ») sur
+ * les bannières à vedette imposée, `_TITLE_03` sur le Custom, dont les 3
+ * vedettes sont choisies par le joueur.
+ */
+const FEATURED_GRADE = 4;
+/** Titre du palier pickup — vedette quand il est porté, cf. `featuredTierOf`. */
+const PICKUP_TITLE = 'SYS_RECRUIT_RATEINFO_TITLE_05';
+
+const isFeatured = (grade: Row): boolean =>
+  grade.RecipeType === 'CHARACTER' && num(grade.Grade) === FEATURED_GRADE;
+
+/**
+ * Le palier vedette d'un groupe de RÉFÉRENCE de persos — exactement un, au
+ * `Grade` 4, et aucune ligne pickup ailleurs : sans quoi la garantie et le
+ * pool hors focus se liraient de travers, on jette. Les vieux pickups (palier
+ * `_TITLE_05` au `Grade` 0) ne sont jamais des groupes de référence.
+ */
+export function featuredTierOf(gradeRecipes: Row[], groupId: string): Row {
+  const rows = gradeRecipes.filter((r) => r.GroupID === groupId && r.RecipeType === 'CHARACTER');
+  const featured = rows.filter(isFeatured);
+  if (featured.length !== 1) {
+    throw new Error(
+      `recruit : groupe ${groupId} — ${featured.length || 'aucun'} palier(s) vedette au Grade ${FEATURED_GRADE}, il en faut un`,
+    );
+  }
+  const stray = rows.find((r) => r.Title === PICKUP_TITLE && !isFeatured(r));
+  if (stray) {
+    throw new Error(
+      `recruit : groupe ${groupId} — palier pickup ${stray.ID} au Grade ${stray.Grade}, pas au Grade ${FEATURED_GRADE}`,
+    );
+  }
+  return featured[0];
+}
+
+/** Persos d'un palier (`RecruitRecipeTemplet`), triés. */
+export function tierCharacters(recipes: Row[], tier: Row): string[] {
+  return recipes
+    .filter((r) => r.GradeGroupID === tier.ID)
+    .map((r) => r.CharacterID)
+    .sort((a, b) => a.localeCompare(b));
+}
+
+/** Garantie d'un groupe (`UsePity`) — `undefined` quand il n'en a pas. */
+export function pityOf(group: Row): RecruitPity | undefined {
+  if (group.UsePity !== 'True') return undefined;
+  const max = num(group.MaxPityCount);
+  return { every: num(group.MaxPityRecruitCount), max: max > 0 ? max : null };
+}
 
 /**
  * Pool hors focus d'un groupe : ses paliers CHARACTER sauf la vedette, chacun
@@ -300,7 +377,7 @@ export function poolOf(gradeRecipes: Row[], recipes: Row[], groupId: string): Re
   const tiers: RecruitPoolTier[] = [];
   for (const grade of gradeRecipes) {
     if (grade.GroupID !== groupId || grade.RecipeType !== 'CHARACTER') continue;
-    if (grade.Title === FEATURED_TITLE) continue;
+    if (isFeatured(grade)) continue;
     const rows = recipes
       .filter((r) => r.GradeGroupID === grade.ID)
       .sort((a, b) => a.CharacterID.localeCompare(b.CharacterID));
@@ -393,6 +470,7 @@ export function ratesOf(
       title: resolveText(tsys, r.Title),
       percent,
       confirmPercent: pct(num(r.ConfirmRate), totalConfirm),
+      ...(isFeatured(r) ? { featured: true as const } : {}),
       ...(drops ? { drops } : {}),
     };
   });
@@ -518,15 +596,23 @@ export function buildRecruit(): RecruitData {
       .sort((a, b) => (a.StartDate ?? '').localeCompare(b.StartDate ?? ''));
     const ref = candidates[candidates.length - 1];
     if (!ref) throw new Error(`recruit : aucun groupe pour le type « ${kind} »`);
+    const featured = kind === 'equipment' ? undefined : featuredTierOf(gradeRecipes, ref.ID);
     const pool = kind === 'equipment' ? undefined : poolOf(gradeRecipes, recipes, ref.ID);
-    const unknownInPool = (pool ?? [])
-      .flatMap((t) => t.characterIds)
-      .filter((id) => !knownChars.has(id));
+    const selectable =
+      kind === 'custom' && featured ? tierCharacters(recipes, featured) : undefined;
+    if (selectable && !selectable.length) {
+      throw new Error(`recruit : groupe ${ref.ID} — palier vedette du Custom sans perso`);
+    }
+    const unknownInPool = [
+      ...(pool ?? []).flatMap((t) => t.characterIds),
+      ...(selectable ?? []),
+    ].filter((id) => !knownChars.has(id));
     if (unknownInPool.length) {
       throw new Error(
         `recruit : CharacterID inconnus dans le pool « ${kind} » (groupe ${ref.ID}) — ${unknownInPool.join(', ')}`,
       );
     }
+    const pity = pityOf(ref);
     kinds.push({
       kind,
       groupId: ref.ID,
@@ -536,6 +622,8 @@ export function buildRecruit(): RecruitData {
         isEquip,
       }),
       ...(pool ? { pool } : {}),
+      ...(selectable ? { selectable } : {}),
+      ...(pity ? { pity } : {}),
       price1: num(ref.Price_1),
       price10: num(ref.Price_10),
       ...(ticketIdOf(ref, 'RecruitTicketID')

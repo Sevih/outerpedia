@@ -9,7 +9,7 @@
  *   2. INVARIANT RÉFÉRENTIEL sur la donnée committée : les quatre bannières du
  *      simulateur existent, et leurs taux somment à 100 %.
  */
-import { describe, expect, it } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import { uniformDict } from '@datagen/lib/lang';
 import type { RecruitKindInfo } from '@contracts';
 import recruitData from '../../data/generated/recruit.json';
@@ -24,13 +24,14 @@ import {
   type BannerConfig,
 } from './gacha';
 
-const rate = (titleKey: string, percent: number, confirmPercent = percent) => ({
+const rate = (titleKey: string, percent: number, confirmPercent = percent, featured = false) => ({
   titleKey,
   // `LangDict` veut toutes les langues du jeu : le libellé ne sert à rien ici, seul le
   // titleKey compte pour la dérivation.
   title: uniformDict(titleKey),
   percent,
   confirmPercent,
+  ...(featured ? { featured: true as const } : {}),
 });
 
 describe('bannerConfigOf — la config se dérive de la fiche générée', () => {
@@ -38,11 +39,12 @@ describe('bannerConfigOf — la config se dérive de la fiche générée', () =>
     kind: 'pickup',
     groupId: 'g',
     rates: [
-      rate('SYS_RECRUIT_RATEINFO_TITLE_05', 1.25),
+      rate('SYS_RECRUIT_RATEINFO_TITLE_05', 1.25, 1.25, true),
       rate('SYS_RECRUIT_RATEINFO_TITLE_03', 1.25),
       rate('SYS_RECRUIT_RATEINFO_TITLE_02', 19, 97.5),
       rate('SYS_RECRUIT_RATEINFO_TITLE_01', 78.5, 0),
     ],
+    pity: { every: 100, max: 2 },
     price1: 150,
     price10: 1500,
     ticketCost: 1,
@@ -65,15 +67,34 @@ describe('bannerConfigOf — la config se dérive de la fiche générée', () =>
     });
   });
 
-  it('sans palier pickup (le Custom), le taux vedette est 0', () => {
+  it('le Custom : son palier 3★ est la vedette, sans 3★ hors focus, garantie sans plafond', () => {
     const custom: RecruitKindInfo = {
       ...base,
-      rates: base.rates.filter((r) => !r.titleKey.endsWith('_TITLE_05')),
+      kind: 'custom',
+      rates: [
+        rate('SYS_RECRUIT_RATEINFO_TITLE_03', 2.5, 2.5, true),
+        rate('SYS_RECRUIT_RATEINFO_TITLE_02', 19, 97.5),
+        rate('SYS_RECRUIT_RATEINFO_TITLE_01', 78.5, 0),
+      ],
+      pity: { every: 100, max: null },
       freeCount: 1,
     };
     const config = bannerConfigOf('custom', custom);
-    expect(config.focus3Rate).toBe(0);
+    expect(config.focus3Rate).toBe(2.5);
+    expect(config.offFocus3Rate).toBe(0);
+    expect(config.guarantee).toEqual({ at: 100, max: null });
     expect(config.freePull).toBe(true);
+  });
+
+  it('la vedette se lit au drapeau, pas au titre ; sans `pity`, pas de garantie', () => {
+    const sansDrapeau: RecruitKindInfo = {
+      ...base,
+      rates: base.rates.map((r) => ({ ...r, featured: undefined })),
+    };
+    delete sansDrapeau.pity;
+    const config = bannerConfigOf('rateup', sansDrapeau);
+    expect(config.focus3Rate).toBe(0);
+    expect(config.guarantee).toBeNull();
   });
 
   it('la garantie du x10 se lit sur le slot garanti, pas sur une table', () => {
@@ -187,13 +208,59 @@ describe('garantie de recrutement (pity du 25/08)', () => {
     expect(session.guaranteesUsed).toBe(2);
   });
 
-  it('les vraies bannières ont la règle des notes de patch', () => {
+  it('les vraies bannières ont la règle de leur groupe (celle des notes de patch)', () => {
     const rule = (type: (typeof BANNER_TYPES)[number]) =>
       bannerConfigOf(type, recruitOf(type)).guarantee;
+    // La règle EST la fiche : `MaxPityRecruitCount` / `MaxPityCount` du groupe.
+    for (const type of BANNER_TYPES) {
+      const pity = recruitOf(type).pity;
+      expect(pity, type).toBeDefined();
+      expect(rule(type), type).toEqual({ at: pity?.every, max: pity?.max });
+    }
+    // Et la fiche dit ce que disent les notes de patch du 25/08.
     expect(rule('rateup')).toEqual({ at: 100, max: 2 });
     expect(rule('limited')).toEqual({ at: 100, max: 2 });
     expect(rule('premium')).toEqual({ at: 100, max: 1 });
-    // « All Heroes » n'existe pas dans le jeu : rien à y garantir.
-    expect(rule('custom')).toBeNull();
+    // Custom Recruit : un des 3 héros choisis en 100 tirages, sans plafond.
+    expect(rule('custom')).toEqual({ at: 100, max: null });
+  });
+
+  describe('le Custom lu de recruit.json', () => {
+    const config = bannerConfigOf('custom', recruitOf('custom'));
+
+    afterEach(() => vi.restoreAllMocks());
+
+    /** `n` tirages x1 ; `random(i)` rend le `Math.random` du i-ème appel (1-indexé). */
+    const pullOnes = (n: number, random: (call: number) => number) => {
+      let call = 0;
+      vi.spyOn(Math, 'random').mockImplementation(() => random(++call));
+      let session = createSession('custom');
+      const focusAt: number[] = [];
+      for (let i = 1; i <= n; i++) {
+        const { results, session: next } = performPulls(session, 1, config);
+        session = next;
+        if (results[0].isFocus) focusAt.push(i);
+      }
+      return { session, focusAt };
+    };
+
+    it('taux vedette 2,5 %, aucun 3★ hors focus', () => {
+      expect(config.focus3Rate).toBe(2.5);
+      expect(config.offFocus3Rate).toBe(0);
+    });
+
+    it('sans 3★ naturel, la vedette est forcée au 100e, au 200e, au 300e (pas de plafond)', () => {
+      const { session, focusAt } = pullOnes(300, () => 0.99);
+      expect(focusAt).toEqual([100, 200, 300]);
+      expect(session.counts.star3).toBe(3);
+      expect(guaranteeLeft(session, config)).toBe(true);
+    });
+
+    it('un 3★ naturel au 40e remet le compteur à zéro', () => {
+      // Un appel de `Math.random` par tirage tant que rien n'est forcé : le 40e
+      // tirage est le 40e appel, roulé à 0 (< 2,5 % : 3★ vedette).
+      const { focusAt } = pullOnes(140, (call) => (call === 40 ? 0 : 0.99));
+      expect(focusAt).toEqual([40, 140]);
+    });
   });
 });

@@ -266,7 +266,7 @@ const jp: Record<TranslationKey, string> = {
   'tools.pull-simulator.desc': '全バナーのガチャをシミュレート。マイレージシステム対応。',
   'tools.pull-simulator.meta_description':
     'アウタープレーンのガチャをピックアップ、プレミアム、限定バナーでシミュレート。ピックアップキャラを選んで単発か10連を引き、マイレージ、消費エーテル、結果を確認。',
-  'tools.pull-simulator.banner.custom': '全英雄',
+  'tools.pull-simulator.banner.custom': 'カスタムスカウト',
   'tools.pull-simulator.banner.rateup': 'ピックアップ',
   'tools.pull-simulator.banner.premium': 'プレミアム',
   'tools.pull-simulator.banner.limited': '限定',

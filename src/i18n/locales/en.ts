@@ -279,7 +279,7 @@ const en = {
     'Simulate gacha pulls for all banners. Test your luck with mileage system included.',
   'tools.pull-simulator.meta_description':
     'Simulate Outerplane recruitment on Rate Up, Premium and Limited banners: pick your focus heroes, pull x1 or x10, and follow mileage, ether spent and results.',
-  'tools.pull-simulator.banner.custom': 'All Heroes',
+  'tools.pull-simulator.banner.custom': 'Custom Recruit',
   'tools.pull-simulator.banner.rateup': 'Rate Up',
   'tools.pull-simulator.banner.premium': 'Premium',
   'tools.pull-simulator.banner.limited': 'Limited',

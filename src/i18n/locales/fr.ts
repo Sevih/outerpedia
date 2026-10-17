@@ -274,7 +274,7 @@ const fr: Record<TranslationKey, string> = {
     'Simulez les pulls Gacha pour toutes les banners. Testez votre chance avec le système de Mileage inclus.',
   'tools.pull-simulator.meta_description':
     "Simulez le recrutement d'Outerplane en banner Rate Up, Premium ou Limité : choisissez vos héros focus, tirez x1 ou x10, suivez Mileage, ether et résultats.",
-  'tools.pull-simulator.banner.custom': 'Tous les héros',
+  'tools.pull-simulator.banner.custom': 'Recrut. perso.',
   'tools.pull-simulator.banner.rateup': 'Rate Up',
   'tools.pull-simulator.banner.premium': 'Premium',
   'tools.pull-simulator.banner.limited': 'Limité',

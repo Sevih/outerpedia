@@ -98,6 +98,7 @@ export type {
   RecruitDrop,
   RecruitKind,
   RecruitKindInfo,
+  RecruitPity,
   RecruitPoolTier,
   RecruitRate,
 } from '../generators/recruit';

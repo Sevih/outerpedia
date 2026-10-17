@@ -7,10 +7,12 @@
  * Server Component. Ce qui était codé en dur est GÉNÉRÉ (`recruit.json`) :
  * taux par palier, prix, tickets, pulls gratuits, coût mileage, et la liste
  * des héros limited avec release/rerun (`banner.json` était maintenu à la
- * main). Ne reste éditorial que le texte (labels.ts, verbatim), le mapping
- * bannière → monnaie de mileage (aucune table ne le porte) et le SYSTÈME DE
- * GARANTIE du 25/08/2026 — le pity ne vit dans aucune colonne des tables
- * (`OpenRecruitCount` en est une autre : le déblocage de la bannière).
+ * main). Ne reste éditorial que le texte (labels.ts, verbatim) et le mapping
+ * bannière → monnaie de mileage (aucune table ne le porte). Le SYSTÈME DE
+ * GARANTIE du 25/08/2026 s'y raconte en prose (`LABELS.<onglet>.pity`), mais
+ * ses chiffres sont dans les tables : `RecruitKindInfo.pity`, lu de
+ * `UsePity` / `MaxPityRecruitCount` / `MaxPityCount` (`OpenRecruitCount` est
+ * autre chose : le déblocage de la bannière).
  */
 import type { ReactNode } from 'react';
 import type { LocalizedText } from '@contracts';
