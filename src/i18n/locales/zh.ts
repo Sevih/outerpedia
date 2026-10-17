@@ -764,6 +764,7 @@ const zh: Record<TranslationKey, string> = {
   'guides.season.live': '进行至 {date}',
   'guides.season.next': '{date} 回归',
   'guides.season.last': '上次开放 {date}',
+  'guides.mode.world-boss': '世界首领',
 
   'guides.tips.tactical': '战术提示',
   // Gabarits de titre de section : le SUJET (perso / élément / effet) vient de
@@ -1292,7 +1293,7 @@ const zh: Record<TranslationKey, string> = {
   'progress.task.guild-security-area': '公会警备区域',
   'progress.task.joint-challenge': '联合挑战',
   'progress.task.guild-raid': '公会联合战',
-  'progress.task.world-boss': '世界首领',
+  'progress.task.world-boss': '世界首领 (每日奖励)',
   'progress.task.terminus-isle': '探索灭亡之岛',
   'progress.task.hypnotic-frog-hall': '催眠青蛙殿堂',
   'progress.task.ark-raid': '方舟强袭',

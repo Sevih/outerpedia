@@ -8,7 +8,12 @@
 import { describe, expect, it } from 'vitest';
 import { getEquipmentSets } from '@/lib/data/equipment-sets';
 import { setEffectText } from '@/lib/data/equipment';
-import { loadGearPresets, resolveGearBuilds, resolveLootSet } from '@/lib/data/gear-reco';
+import {
+  loadGearPresets,
+  loadGearReco,
+  resolveGearBuilds,
+  resolveLootSet,
+} from '@/lib/data/gear-reco';
 
 const SETS = getEquipmentSets();
 /** Texte d'un bonus au premier (`0`) ou au dernier (`-1`) palier. */
@@ -38,5 +43,30 @@ describe('gear-reco — palier des bonus de set', () => {
     const [attack] = build.setEffects;
     expect(attack.effect2).toBe(text('1', '2p', -1)); // Attack +35%
     expect(attack.effect4).toBe(text('1', '4p', -1)); // Attack +25%
+  });
+});
+
+describe('gear-reco — mains curées EFF / RES', () => {
+  // EFF et RES se distinguent de EFF% / RES% (A58) ; les mains EFF/RES du jeu
+  // sont toutes PLATES (gants, bottes, accessoires), donc les `mainStat` curés
+  // « EFF » / « RES » trouvent toujours leur valeur max.
+  it('chaque main curée EFF ou RES a sa valeur max', () => {
+    const presets = loadGearPresets();
+    const missing: string[] = [];
+    let checked = 0;
+    for (const [charId, builds] of Object.entries(loadGearReco())) {
+      for (const b of resolveGearBuilds(builds, presets, 'en')) {
+        for (const item of [...b.weapons, ...b.amulets]) {
+          if (item.unresolved) continue;
+          const wanted = (item.mainStat ?? '').split('/').map((s) => s.trim());
+          for (const k of wanted.filter((s) => s === 'EFF' || s === 'RES')) {
+            checked++;
+            if (!item.mainStatMax?.[k]) missing.push(`${charId} ${b.name} ${item.id} ${k}`);
+          }
+        }
+      }
+    }
+    expect(checked).toBeGreaterThan(0);
+    expect(missing).toEqual([]);
   });
 });

@@ -145,13 +145,18 @@ function groupAtWeek(weekIndex: number): SingularityGroup {
  * Le boss de CHAQUE jour de combat, dans l'ordre `order` — toujours
  * `battleDays` entrées, pour qu'aucun jour de combat ne reste sans boss.
  *
- * Quand le groupe porte moins de boss que la semaine n'a de jours de combat, le
- * DERNIER tient les jours restants. C'est ce que la note du patch du
- * 06/10/2026 annonce en passant de 4 à 5 jours : « Earth on Wednesday, Water on
- * Thursday, Fire on Friday, and Light or Dark on Saturday and Sunday » — le
- * boss lumière/ténèbres du groupe, déjà le dernier, fait le samedi ET le
- * dimanche. Si les tables livrent un cinquième boss par groupe, il prend son
- * jour tout seul et cette règle ne joue plus.
+ * Quand le groupe porte moins de boss que la semaine n'a de jours de combat,
+ * deux règles s'opposent. La note du patch du 06/10/2026 fait tenir le DERNIER
+ * les jours restants, en passant de 4 à 5 jours : « Earth on Wednesday, Water
+ * on Thursday, Fire on Friday, and Light or Dark on Saturday and Sunday » — le
+ * boss lumière/ténèbres, déjà le dernier, fait le samedi ET le dimanche. Le
+ * client, lui, prend le boss « jour modulo nombre de boss du groupe »
+ * (`CTempletManager.GetSingularityDungeonGroupTemplet`) : il reboucle sur le
+ * PREMIER. Le site suit la note, par décision de Sevih (15/10/2026). Les deux
+ * règles donnent la même chose tant que chaque groupe a un boss par jour de
+ * combat (5 pour 5 au 15/10) ; sinon le build l'annonce (`singularityWarnings`,
+ * `datagen/generators/singularity.ts`), et c'est là qu'une capture en jeu
+ * tranche.
  */
 export function bossesByDay(bosses: SingularityBoss[], battleDays: number): SingularityBoss[] {
   const ordered = [...bosses].sort((a, b) => a.order - b.order);

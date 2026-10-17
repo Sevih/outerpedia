@@ -141,11 +141,11 @@ const FRESH = {
     p_atk: [{ stat: 'atk', mode: 'flat', value: 100, weight: 100 }],
     p_roll: [
       { stat: 'atk', mode: 'rate', value: 10, weight: 50 },
-      { stat: 'critical_rate', mode: 'rate', value: 5, weight: 50 },
+      { stat: 'critical_rate', mode: 'flat', value: 5, weight: 50 },
     ],
     p_roll_mage: [
       { stat: 'speed', mode: 'flat', value: 10, weight: 50 },
-      { stat: 'effectiveness', mode: 'rate', value: 5, weight: 50 },
+      { stat: 'buff_chance', mode: 'rate', value: 5, weight: 50 },
     ],
     p_sub: [{ stat: 'def', mode: 'flat', value: 1, weight: 100 }],
     p_ee: [{ stat: 'hit_ap', mode: 'none', value: 0, weight: 100 }],
@@ -232,7 +232,7 @@ describe('gearSheet — une famille', () => {
     });
     // Les mains : l'union des pools ROULÉS des membres au palier max, l'ATK
     // flat de base d'une arme écartée.
-    expect(sheet?.mainStats).toEqual(['ATK%', 'CHC%', 'SPD', 'EFF%']);
+    expect(sheet?.mainStats).toEqual(['ATK%', 'CHC', 'SPD', 'EFF%']);
     expect(sheet?.passives).toEqual([
       {
         level: 1,
@@ -253,7 +253,7 @@ describe('gearSheet — une famille', () => {
         v.passives[0].name,
       ]),
     ).toEqual([
-      ['striker', '1002', 'TI_W_1002', ['ATK%', 'CHC%'], 'Fury'],
+      ['striker', '1002', 'TI_W_1002', ['ATK%', 'CHC'], 'Fury'],
       ['mage', '1003', 'TI_W_1003', ['SPD', 'EFF%'], 'Wisdom'],
     ]);
     expect(sheet?.mode).toBeUndefined();
@@ -261,7 +261,7 @@ describe('gearSheet — une famille', () => {
 
   it('un talisman porte son type de points ; une famille inconnue n’a pas de fiche', () => {
     const t = gearSheet(FRESH, 'talisman', 't1');
-    expect(t).toMatchObject({ kind: 'family', id: 't1', mode: 'AP', mainStats: ['ATK%', 'CHC%'] });
+    expect(t).toMatchObject({ kind: 'family', id: 't1', mode: 'AP', mainStats: ['ATK%', 'CHC'] });
     expect(t).not.toHaveProperty('classVariants');
     expect(t?.passives.map((p) => [p.level, p.isAdd, p.name, p.first, p.levels])).toEqual([
       [1, false, 'Fury', 'ATK +<color=#28d9ed>10%</color> for <color=#28d9ed>2</color> turns', 2],
@@ -282,7 +282,7 @@ describe('gearSheet — un EE, un set', () => {
       grade: 'unique',
       stars: [5],
       classLimits: [],
-      mainStats: ['ATK%', 'CHC%'],
+      mainStats: ['ATK%', 'CHC'],
       passives: [
         {
           level: 1,

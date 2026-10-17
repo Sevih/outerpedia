@@ -8,10 +8,12 @@
  *   SingularityTemplet             6 groupes de rotation ; chacun porte thème
  *     (Name/Desc via TextSystem), jour de départ (`SingularityStartDOW`),
  *     durée de combat (`SingularityPeriodDate`, jours) et durée de récompense
- *     (`SingularityRewardDate`, jours). Actuel : mercredi, 4 + 3 = cycle de
- *     7 jours → un groupe par semaine.
- *   SingularityDungeonGroupTemplet GroupID → 4 donjons ordonnés (`Order`),
- *     avec vignette/bannière du boss (sprites `MT_/T_Singularity_<modelId>`).
+ *     (`SingularityRewardDate`, jours). Le site suppose que combat +
+ *     récompense font 7 jours (un groupe par semaine) : `singularityWarnings`
+ *     le signale au build sinon.
+ *   SingularityDungeonGroupTemplet GroupID → donjons ordonnés (`Order`), un
+ *     par jour de combat, avec vignette/bannière du boss (sprites
+ *     `MT_/T_Singularity_<modelId>`).
  *   DungeonTemplet → DungeonSpawnTemplet   boss RÉEL de chaque donjon : les
  *     donjons 750001xx spawnent des entités DÉDIÉES `600000xx`
  *     (CT_AREA_BOSS_MONSTER, kit Monad Gate propre, ModelID = boss source) —
@@ -37,7 +39,7 @@ import { dungeonSpawnedMonsters } from './encounters';
 
 /** Un combat de boss d'un groupe de rotation. */
 export interface SingularityBoss {
-  /** Position dans le groupe (0..3, colonne `Order`). */
+  /** Position dans le groupe (à partir de 0, colonne `Order`). */
   order: number;
   /** DungeonID du combat (réf `encounters.json` : nom, paliers E…SSS). */
   dungeon: string;
@@ -118,6 +120,40 @@ function loadAnchor(groupIds: Set<number>, startDow: string): SingularityAnchor 
   return anchor;
 }
 
+/**
+ * Alertes de cadence d'une rotation : ce que les tables pourraient livrer et
+ * que le site ne sait pas rendre fidèlement. Pure (testée sans `.gamedata`).
+ *
+ * - Un groupe a moins de boss que de jours de combat : le site fait tenir le
+ *   DERNIER boss les jours restants (règle de la note de patch,
+ *   `bossesByDay`), le client reboucle sur le PREMIER (jour modulo nombre de
+ *   boss, `CTempletManager.GetSingularityDungeonGroupTemplet`). Les deux
+ *   divergent alors : à trancher par une capture en jeu.
+ * - Combat + récompense ≠ 7 jours : le site déroule une rotation par semaine
+ *   (`% 7`, `/ 7`, `* 7` de `src/lib/data/singularity.ts`).
+ */
+export function singularityWarnings({
+  schedule,
+  groups,
+}: Pick<SingularityData, 'schedule' | 'groups'>): string[] {
+  const warnings: string[] = [];
+  for (const g of groups)
+    if (g.bosses.length && g.bosses.length < schedule.battleDays)
+      warnings.push(
+        `⚠ singularity : groupe ${g.id} à ${g.bosses.length} boss pour ${schedule.battleDays} ` +
+          'jours de combat — le site fait tenir le dernier boss, le client reboucle sur le ' +
+          'premier : à trancher par une capture en jeu.',
+      );
+  const cycle = schedule.battleDays + schedule.rewardDays;
+  if (cycle !== 7)
+    warnings.push(
+      `⚠ singularity : cycle de ${cycle} jours (${schedule.battleDays} combat + ` +
+        `${schedule.rewardDays} récompense) — le site suppose 7 jours ` +
+        '(src/lib/data/singularity.ts : % 7, / 7, * 7).',
+    );
+  return warnings;
+}
+
 export function buildSingularity(): SingularityData {
   const tsys = loadTextIndex('TextSystem');
   const dungeonById = indexBy(loadTable('DungeonTemplet'));
@@ -170,6 +206,7 @@ export function buildSingularity(): SingularityData {
   const schedule: SingularitySchedule = { startDow, battleDays, rewardDays };
   const anchor = loadAnchor(new Set(groups.map((g) => g.id)), startDow);
   if (anchor) schedule.anchor = anchor;
+  for (const w of singularityWarnings({ schedule, groups })) console.warn(w);
   return { schedule, groups };
 }
 

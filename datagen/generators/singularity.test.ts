@@ -10,7 +10,12 @@ import { describe, expect, it } from 'vitest';
 import singularityData from '../../data/generated/singularity.json';
 import encountersData from '../../data/generated/encounters.json';
 import monstersData from '../../data/generated/monsters.json';
-import type { SingularityData } from './singularity';
+import {
+  singularityWarnings,
+  type SingularityBoss,
+  type SingularityData,
+  type SingularityGroup,
+} from './singularity';
 import type { DungeonRef } from './encounters';
 
 const sing = singularityData as unknown as SingularityData;
@@ -61,5 +66,47 @@ describe('singularity.json — invariants structurels', () => {
         `groupe ${g.id}`,
       ).toEqual(orders);
     }
+  });
+});
+
+describe('singularityWarnings — ce que le site ne sait pas rendre fidèlement', () => {
+  const boss = (order: number): SingularityBoss => ({
+    order,
+    dungeon: `d${order}`,
+    monsters: [],
+  });
+  const group = (id: number, n: number): SingularityGroup => ({
+    id,
+    name: {} as SingularityGroup['name'],
+    desc: {} as SingularityGroup['desc'],
+    bosses: Array.from({ length: n }, (_, i) => boss(i)),
+  });
+  const schedule = (battleDays: number, rewardDays: number) => ({
+    startDow: 'wed',
+    battleDays,
+    rewardDays,
+  });
+
+  it('5 boss pour 5 jours, cycle 5 + 2 : aucune alerte', () => {
+    expect(singularityWarnings({ schedule: schedule(5, 2), groups: [group(1, 5)] })).toEqual([]);
+  });
+
+  it('un groupe à 4 boss pour 5 jours de combat : alerte sur CE groupe', () => {
+    const w = singularityWarnings({
+      schedule: schedule(5, 2),
+      groups: [group(1, 5), group(2, 4)],
+    });
+    expect(w).toHaveLength(1);
+    expect(w[0]).toContain('groupe 2 à 4 boss pour 5 jours');
+  });
+
+  it('un cycle 5 + 3 : alerte, le site suppose 7 jours', () => {
+    const w = singularityWarnings({ schedule: schedule(5, 3), groups: [group(1, 5)] });
+    expect(w).toHaveLength(1);
+    expect(w[0]).toContain('cycle de 8 jours');
+  });
+
+  it('la donnée committée ne déclenche aucune alerte', () => {
+    expect(singularityWarnings(sing)).toEqual([]);
   });
 });

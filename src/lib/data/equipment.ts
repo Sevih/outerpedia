@@ -37,7 +37,7 @@ import type {
 import type { Lang } from '@/lib/i18n/config';
 import type { TFunction } from '@/i18n';
 import { lRec } from '@/lib/i18n/localize';
-import { statAbbr } from '@/lib/stats';
+import { statOptionView } from '@/lib/stats';
 import { statName } from '@/lib/data/stat-glossary';
 import { GRADE_RANK } from '@/lib/data/gear-order';
 import weaponData from '@data/generated/equipment/weapon.json';
@@ -302,13 +302,12 @@ export function resolvePassives(refs: PassiveRef[], lang: Lang): ResolvedPassive
 
 /**
  * Libellé d'une option de stat (« ATK% », « EFF »…) — null si option de buff
- * pur. Le mode `rate` porte un suffixe `%` (EFF/RES/ATK… existent en flat ET
- * en %), sauf si l'abréviation en porte déjà un (PEN%, DMG RED%…).
+ * pur. Même règle que la page détail et les recos (`statOptionView`) : la
+ * variante `rate` d'une stat à double nature (ATK, EFF, RES…) porte le `%`.
  */
 export function optionStatLabel(o: Option): string | null {
   if (!o.stat || o.stat === 'none') return null;
-  const abbr = statAbbr(o.stat);
-  return o.mode === 'rate' && !abbr.endsWith('%') ? `${abbr}%` : abbr;
+  return statOptionView(o.stat, o.mode).key;
 }
 
 /**

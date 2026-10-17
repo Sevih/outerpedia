@@ -814,6 +814,7 @@ const es: Record<TranslationKey, string> = {
   'guides.season.live': 'Activo hasta {date}',
   'guides.season.next': 'Regresa el {date}',
   'guides.season.last': 'Última temporada: {date}',
+  'guides.mode.world-boss': 'Jefe Mundial',
 
   'guides.tips.tactical': 'Consejos Tácticos',
   // Gabarits de titre de section : le SUJET (perso / élément / effet) vient de
@@ -1376,7 +1377,7 @@ const es: Record<TranslationKey, string> = {
   'progress.task.guild-security-area': 'Área de Seguridad de Gremio',
   'progress.task.joint-challenge': 'Desafío Conjunto',
   'progress.task.guild-raid': 'Incursión de Gremio',
-  'progress.task.world-boss': 'Jefe Mundial',
+  'progress.task.world-boss': 'Jefe Mundial (recompensa diaria)',
   'progress.task.terminus-isle': 'Exploración de Isla Terminal',
   'progress.task.hypnotic-frog-hall': 'Salón de Ranas Hipnóticas',
   'progress.task.ark-raid': 'Raid Ark',

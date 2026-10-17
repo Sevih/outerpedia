@@ -789,6 +789,7 @@ const jp: Record<TranslationKey, string> = {
   'guides.season.live': '{date}まで開催中',
   'guides.season.next': '{date}に再開催',
   'guides.season.last': '前回開催 {date}',
+  'guides.mode.world-boss': 'ワールドボス',
 
   'guides.tips.tactical': '戦術のヒント',
   // Gabarits de titre de section : le SUJET (perso / élément / effet) vient de
@@ -1333,7 +1334,7 @@ const jp: Record<TranslationKey, string> = {
   'progress.task.guild-security-area': 'ギルド警備エリア',
   'progress.task.joint-challenge': '共同作戦',
   'progress.task.guild-raid': 'ギルド連合戦',
-  'progress.task.world-boss': 'ワールドボス',
+  'progress.task.world-boss': 'ワールドボス (日次報酬)',
   'progress.task.terminus-isle': 'テルミナス島探査',
   'progress.task.hypnotic-frog-hall': '催眠カエルの殿堂',
   'progress.task.ark-raid': 'アーク強襲',

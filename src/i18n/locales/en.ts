@@ -807,6 +807,7 @@ const en = {
   'guides.season.live': 'Live until {date}',
   'guides.season.next': 'Returns {date}',
   'guides.season.last': 'Last season {date}',
+  'guides.mode.world-boss': 'World Boss',
 
   'guides.tips.tactical': 'Tactical Tips',
   // Gabarits de titre de section : le SUJET (perso / élément / effet) vient de
@@ -1363,7 +1364,7 @@ const en = {
   'progress.task.guild-security-area': 'Guild Security Area',
   'progress.task.joint-challenge': 'Joint Challenge',
   'progress.task.guild-raid': 'Guild Raid',
-  'progress.task.world-boss': 'World Boss',
+  'progress.task.world-boss': 'World Boss (daily reward)',
   'progress.task.terminus-isle': 'Terminus Isle Exploration',
   'progress.task.hypnotic-frog-hall': 'Hypnotic Frog Hall',
   'progress.task.ark-raid': 'Ark Raid',

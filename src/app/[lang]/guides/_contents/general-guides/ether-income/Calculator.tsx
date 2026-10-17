@@ -3,11 +3,12 @@
 /**
  * Calculateur de revenus d'Ether (porté puis re-stylé) — tout le TEXTE et
  * toutes les DONNÉES arrivent déjà localisés/résolus du serveur (index.tsx) :
- * ce composant ne fait que l'état des sélecteurs et l'arithmétique d'origine
- * (totaux quotidiens/hebdo/mensuels + projection jusqu'à une date).
+ * ce composant ne fait que l'état des sélecteurs ; l'arithmétique (totaux
+ * quotidiens/hebdo/mensuels + projection jusqu'à une date) vit dans `calc.ts`.
  */
 import { useCallback, useMemo, useState } from 'react';
 import { cn } from '@/lib/cn';
+import { etherProjection, etherTotals, monthlyFromWeekly, monthlyOf as monthlyAvg } from './calc';
 
 export interface LadderOption {
   label: string;
@@ -194,10 +195,7 @@ export function EtherCalculator({ model }: { model: CalculatorModel }) {
     [picked],
   );
   /** Contribution MENSUELLE (moyenne si la source n'a pas lieu chaque mois). */
-  const monthlyOf = useCallback(
-    (s: SourceRow): number => Math.round(amountOf(s) / (s.monthsPerCycle ?? 1)),
-    [amountOf],
-  );
+  const monthlyOf = useCallback((s: SourceRow): number => monthlyAvg(s, amountOf(s)), [amountOf]);
   /** Libellé effectif (palier sélectionné entre parenthèses, inchangé). */
   const labelOf = (s: SourceRow): string => {
     if (!s.ranked) return s.label;
@@ -207,44 +205,12 @@ export function EtherCalculator({ model }: { model: CalculatorModel }) {
     return `${s.label} (${tier})`;
   };
 
-  const totals = useMemo(() => {
-    const dailyBase = model.daily.reduce((acc, s) => acc + amountOf(s), 0);
-    const weeklyFromDaily = model.daily.reduce(
-      (acc, s) => acc + amountOf(s) * (s.daysPerWeek ?? 7),
-      0,
-    );
-    const weeklySpike = model.weekly.reduce((acc, s) => acc + amountOf(s), 0);
-    const monthlySpike = model.monthly.reduce((acc, s) => acc + monthlyOf(s), 0);
-    return {
-      dailyBase,
-      weeklyFromDaily,
-      weeklySpike,
-      monthlySpike,
-      weeklyTotal: weeklyFromDaily + weeklySpike,
-      monthlyTotal: Math.round((weeklyFromDaily * 30) / 7) + weeklySpike * 4 + monthlySpike,
-    };
-  }, [model, amountOf, monthlyOf]);
+  const totals = useMemo(() => etherTotals(model, amountOf), [model, amountOf]);
 
-  const projection = useMemo(() => {
-    if (!target) return undefined;
-    const end = new Date(`${target}T23:59:59`);
-    const ms = end.getTime() - Date.now();
-    const days = Math.max(0, Math.floor(ms / 86400000) + 1);
-    const weeks = Math.floor(days / 7);
-    const months = Math.floor(days / 30);
-    const fromDaily = Math.round((totals.weeklyFromDaily * days) / 7);
-    const fromWeekly = totals.weeklySpike * weeks;
-    const fromMonthly = totals.monthlySpike * months;
-    return {
-      days,
-      weeks,
-      months,
-      fromDaily,
-      fromWeekly,
-      fromMonthly,
-      total: stock + fromDaily + fromWeekly + fromMonthly,
-    };
-  }, [target, stock, totals]);
+  const projection = useMemo(
+    () => (target ? etherProjection(totals, target, stock, Date.now()) : undefined),
+    [target, stock, totals],
+  );
 
   const rankedSummary = [
     `${L.arena}: ${picked.arena?.label}`,
@@ -379,7 +345,7 @@ export function EtherCalculator({ model }: { model: CalculatorModel }) {
             labelOf(s),
             fmt(amount),
             fmt(amount * dpw),
-            fmt(Math.round((amount * dpw * 30) / 7)),
+            fmt(monthlyFromWeekly(amount * dpw)),
             s.note,
           ];
         })}
@@ -387,15 +353,20 @@ export function EtherCalculator({ model }: { model: CalculatorModel }) {
         footerValues={[
           fmt(totals.dailyBase),
           fmt(totals.weeklyFromDaily),
-          fmt(Math.round((totals.weeklyFromDaily * 30) / 7)),
+          fmt(monthlyFromWeekly(totals.weeklyFromDaily)),
         ]}
       />
       <SectionTable
         title={L.tableWeekly}
         head={[L.source, L.weekly, L.monthlyApprox4, L.notes]}
-        rows={model.weekly.map((s) => [labelOf(s), fmt(amountOf(s)), fmt(amountOf(s) * 4), s.note])}
+        rows={model.weekly.map((s) => [
+          labelOf(s),
+          fmt(amountOf(s)),
+          fmt(monthlyFromWeekly(amountOf(s))),
+          s.note,
+        ])}
         footerLabel={L.weeklySubtotal}
-        footerValues={[fmt(totals.weeklySpike), fmt(totals.weeklySpike * 4)]}
+        footerValues={[fmt(totals.weeklySpike), fmt(monthlyFromWeekly(totals.weeklySpike))]}
       />
       <SectionTable
         title={L.tableMonthly}

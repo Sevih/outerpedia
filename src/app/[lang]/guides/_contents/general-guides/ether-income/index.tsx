@@ -7,6 +7,7 @@
  * (dont guild raid et world boss étaient périmés — doublés depuis).
  */
 import { getEtherRankings } from '@/lib/data/ether-rankings';
+import { singularityBattleDays } from '@/lib/data/singularity';
 import type { EtherRankTier, LocalizedText } from '@contracts';
 import type { Lang } from '@/lib/i18n/config';
 import { getT } from '@/i18n';
@@ -124,12 +125,14 @@ export default async function EtherIncomeGuide({ lang }: { lang: Lang }) {
         : SOURCE_NOTES[s.id]
           ? tpl(SOURCE_NOTES[s.id], noteVars[s.id] ?? {})
           : '–';
+    // Singularity : ses jours de combat par semaine sont ceux des tables.
+    const daysPerWeek = s.ranked === 'singularity' ? singularityBattleDays() : s.daysPerWeek;
     return {
       id: s.id,
       label: L(SOURCE_LABELS[s.id]),
       note,
       amount: s.amount,
-      ...(s.daysPerWeek !== undefined ? { daysPerWeek: s.daysPerWeek } : {}),
+      ...(daysPerWeek !== undefined ? { daysPerWeek } : {}),
       ...(s.monthsPerCycle !== undefined ? { monthsPerCycle: s.monthsPerCycle } : {}),
       ...(s.ranked ? { ranked: s.ranked } : {}),
     };
@@ -177,7 +180,9 @@ export default async function EtherIncomeGuide({ lang }: { lang: Lang }) {
         string
       >),
       // Chrome partagé avec le reste du site : clés i18n, pas de libellé local.
-      worldBoss: t('progress.task.world-boss'),
+      // Le nom seul du mode : la clé de la tâche du suivi dit « (récompense
+      // du jour) ».
+      worldBoss: t('guides.mode.world-boss'),
       source: t('equip.detail.source'),
       daily: t('home.resets.daily'),
       weekly: t('home.resets.weekly'),

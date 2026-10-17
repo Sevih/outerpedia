@@ -141,12 +141,12 @@ export const LABELS = {
     es: 'Mensual ≈×30',
   },
   monthlyApprox4: {
-    en: 'Monthly ≈×4',
-    jp: '月≈×4',
-    kr: '월≈×4',
-    zh: '月≈×4',
-    fr: 'Mensuel ≈×4',
-    es: 'Mensual ≈×4',
+    en: 'Monthly ≈×4.3',
+    jp: '月≈×4.3',
+    kr: '월≈×4.3',
+    zh: '月≈×4.3',
+    fr: 'Mensuel ≈×4.3',
+    es: 'Mensual ≈×4.3',
   },
   dailySubtotal: {
     en: 'Daily subtotal',

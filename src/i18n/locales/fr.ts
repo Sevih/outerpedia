@@ -814,6 +814,7 @@ const fr: Record<TranslationKey, string> = {
   'guides.season.live': 'En cours jusqu’au {date}',
   'guides.season.next': 'Retour le {date}',
   'guides.season.last': 'Dernière saison {date}',
+  'guides.mode.world-boss': 'World Boss',
 
   'guides.tips.tactical': 'Conseils tactiques',
   // Gabarits de titre de section : le SUJET (perso / élément / effet) vient de
@@ -1372,7 +1373,7 @@ const fr: Record<TranslationKey, string> = {
   'progress.task.guild-security-area': 'Guild Security Area',
   'progress.task.joint-challenge': 'Joint Challenge',
   'progress.task.guild-raid': 'Guild Raid',
-  'progress.task.world-boss': 'World Boss',
+  'progress.task.world-boss': 'World Boss (récompense du jour)',
   'progress.task.terminus-isle': 'Terminus Isle Exploration',
   'progress.task.hypnotic-frog-hall': 'Hypnotic Frog Hall',
   'progress.task.ark-raid': 'Ark Raid',

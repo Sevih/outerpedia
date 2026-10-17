@@ -30,7 +30,10 @@ export const DAILY_SOURCES: EtherSource[] = [
   { id: 'daily.freePack', amount: 15 },
   { id: 'daily.missionEvent', amount: 30 },
   { id: 'daily.antiparticle', amount: 78 },
-  { id: 'daily.singularityRanking', amount: 5, daysPerWeek: 5, ranked: 'singularity' },
+  // Pas de `daysPerWeek` ici : les jours de combat de la Singularity viennent
+  // des tables (`singularityBattleDays()`), posés côté serveur par `toRow`
+  // (index.tsx).
+  { id: 'daily.singularityRanking', amount: 5, ranked: 'singularity' },
 ];
 
 export const WEEKLY_SOURCES: EtherSource[] = [

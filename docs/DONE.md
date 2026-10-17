@@ -7,6 +7,81 @@
 
 ## 2026-10-17
 
+- **A58 — Menus : Singularity (note gardée, alerte au build), calculateur
+  d'Ether, World Boss « récompense du jour », EFF% / RES%, `[+Turn]`.**
+  Constats B5, B7, B8 et § « Cosmétique » de la revue « logique du site »,
+  J11 de la revue « génération des données », décisions de Sevih du 15/10.
+  B5 : `singularityWarnings({ schedule, groups })`, pure et exportée de
+  `datagen/generators/singularity.ts`, dit quel groupe a moins de boss que
+  `battleDays` (le site fait tenir le dernier, le client reboucle sur le
+  premier : capture à faire) et si combat + récompense ≠ 7 jours ;
+  `buildSingularity` les imprime en `console.warn` (« ⚠ singularity : … »),
+  la sortie ne bouge pas. Le commentaire de `bossesByDay`
+  (`src/lib/data/singularity.ts`) dit les deux règles (note de patch contre
+  `CTempletManager.GetSingularityDungeonGroupTemplet`, jour modulo nombre de
+  boss), le choix de la note par décision de Sevih et le renvoi à l'alerte ;
+  l'en-tête du générateur ne fige plus « 4 + 3 » ni « 4 donjons » (et
+  `SingularityBoss.order` ne dit plus « 0..3 ») ; `tasks.ts` dit mercredi →
+  dimanche. B7 : l'arithmétique du calculateur sort dans `calc.ts` (même
+  dossier, sans import, le composant est client) : `etherTotals`,
+  `etherProjection`, `monthlyFromWeekly`, `monthlyOf` ; `Calculator.tsx` les
+  appelle, rendu inchangé hors du mois. L'hebdo passe au mois par × 30 / 7
+  arrondi, comme le quotidien (table hebdo, sous-total et total mensuel) ;
+  en-tête `monthlyApprox4` « ≈×4.3 » dans les six langues de `labels.ts`,
+  aucun autre « ×4 » mensuel dans le fichier (les « ×2 », « 2×12h » et
+  « 5×10 » sont d'autres choses). La date cible se lit en UTC
+  (`${target}T23:59:59Z`), le jour en cours compte toujours. `data.ts` perd
+  le `daysPerWeek: 5` de `daily.singularityRanking` (commentaire vers
+  `index.tsx`), `toRow` pose `singularityBattleDays()` pour la ligne
+  `ranked: 'singularity'` ; le libellé « (Wed–Sun) » de la source reste codé
+  dans les six langues, comme convenu. B8 : commentaire de `'world-boss'`
+  (`WORLD_BOSS_ENTRANCE_LIMIT` = 10 dans `GameConfigTemplet`, la tâche compte
+  la récompense du jour) ; `progress.task.world-boss` devient « World Boss
+  (daily reward) » / « World Boss (récompense du jour) » / « Jefe Mundial
+  (recompensa diaria) » / « ワールドボス (日次報酬) » / « 월드 보스 (일일
+  보상) » / « 世界首领 (每日奖励) » (jp/kr/zh : traduction sobre). Le guide
+  Ether lit une clé NOUVELLE, `guides.mode.world-boss`, aux valeurs d'avant
+  dans les six langues : aucune clé i18n ne disait le nom seul, et le
+  `label` de `GUIDE_CATEGORIES['world-boss']` (un `LocalizedText`, pas une
+  clé) écrit « 世界Boss » et « Jefe mundial », ce qui aurait changé le
+  guide en zh et en es. EFF / RES : `PCT_SUFFIX` (`src/lib/stats.ts`) prend
+  `buff_chance` et `buff_resist`, `optionStatLabel` rend
+  `statOptionView(...).key`. Vérifié d'abord par un script jetable sur les
+  1 218 options de `pools.json` (19 couples stat/mode) : avant, seuls
+  `buff_chance/rate` (16) et `buff_resist/rate` (14) divergeaient ; après,
+  aucune divergence, et les libellés des cartes `/equipment` sont
+  identiques avant/après sur les 19 couples. Lecteurs cherchés par `grep` :
+  `stat-compose.ts` compare des clés d'étape (`STEP_STAT_KEYS`), pas
+  d'options ; `EquipmentDetail.tsx` et `equipment-detail.ts` (signature
+  `key|percent`) prennent la même clé pour la main et le sous-stat ;
+  `gear-sheet.ts` ne compare rien. `gear-sheet.test.ts` avait deux fixtures
+  synthétiques absentes des vrais pools (`critical_rate` en `rate`,
+  `effectiveness` en `rate`) qui donnaient « CHC% » et « EFF% » par l'ancienne
+  règle : alignées sur les pools (`critical_rate` plat, `buff_chance` en
+  `rate`), « CHC% » attendu devient « CHC ». `[+Turn]` : le commentaire de
+  `fillPlaceholders` (`datagen/lib/buff.ts`) dit que le jeu affiche « +N »
+  (`CUtilUI.GetUniqueNameOptionDescReplaceText`, 3 options) et que l'omission
+  est un écart de lisibilité assumé ; code inchangé. Vérification : un
+  script jetable hors du dépôt (`pnpm exec tsx`) a écrit le JSON de
+  `buildSingularity()` avant et après, `cmp` identique (10 145 octets),
+  aucun `console.warn`, `singularityWarnings` vide sur la donnée réelle ;
+  `datagen:build` non lancé. Tests : alerte (groupe à 4 boss pour 5 jours,
+  cycle 5 + 3, donnée committée muette) ; `calc.test.ts` (hebdo × 30/7,
+  écart du total mensuel par défaut = `weeklySpike` × 2/7 = 1 025 × 2/7 →
+  293, la valeur de la revue ; projection UTC, jour en cours compté, date
+  passée, 30 jours ; `daysPerWeek` de la Singularity =
+  `singularityBattleDays()` sur le modèle rendu par le serveur ; libellé de
+  la tâche World Boss dans les six locales, guide sur le nom seul) ;
+  `statOptionView` EFF%/RES% et EFF/RES ; `optionStatLabel` =
+  `statOptionView(...).key` sur tout `pools.json` ; mains curées EFF / RES
+  de `gear-reco.json` toujours avec leur valeur max. `pnpm typecheck` et
+  `pnpm lint` sans erreur (dernières lignes : l'écho
+  `$ tsc --noEmit && …` des trois projets, puis `$ eslint`), `pnpm test`
+  `Tests 4073 passed (4073)`. Changements visuels attendus : « EFF% » / « RES% » sur la page
+  détail et dans les recos pour la variante en % ; la tâche World Boss ; la
+  colonne mensuelle et l'en-tête de la table hebdo d'Ether, et le total
+  mensuel (+293 par défaut). Laissé : rien hors périmètre repéré.
+
 - **Relecture B57 (Opus) — Very Hard au niveau recommandé, jours du
   débuff, phase 2 des World Boss, monnaies non lues, renforts, quirks,
   troncature ; validé.** Périmètre conforme (`8a3c904b`) : sous `data/`,

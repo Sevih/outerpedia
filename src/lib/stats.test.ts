@@ -1,6 +1,8 @@
 import { describe, expect, it } from 'vitest';
 import { statAbbr, statIconSprite, statOptionView } from '@/lib/stats';
 import { statName } from '@/lib/data/stat-glossary';
+import { optionStatLabel } from '@/lib/data/equipment';
+import { getEquipmentPools } from '@/lib/data/equipment-pools';
 
 describe('statAbbr', () => {
   it('rend l’abréviation canonique d’un slug connu', () => {
@@ -32,6 +34,30 @@ describe('statOptionView', () => {
 
   it('stat % pure (vampiric/LS) : percent true, clé sans suffixe', () => {
     expect(statOptionView('vampiric', 'none')).toEqual({ key: 'LS', percent: true });
+  });
+
+  it('EFF/RES en RATE : % + suffixe (EFF%, RES%), distincts de la variante plate', () => {
+    expect(statOptionView('buff_chance', 'rate')).toEqual({ key: 'EFF%', percent: true });
+    expect(statOptionView('buff_resist', 'rate')).toEqual({ key: 'RES%', percent: true });
+    expect(statOptionView('buff_resist', 'flat')).toEqual({ key: 'RES', percent: false });
+  });
+});
+
+describe('optionStatLabel — même règle que statOptionView', () => {
+  const options = Object.values(getEquipmentPools()).flat();
+
+  it('cartes /equipment et page détail donnent la même clé sur tout pools.json', () => {
+    const diffs = options
+      .filter((o) => o.stat && o.stat !== 'none')
+      .filter((o) => optionStatLabel(o) !== statOptionView(o.stat, o.mode).key)
+      .map((o) => `${o.stat}/${o.mode}`);
+    expect(options.length).toBeGreaterThan(0);
+    expect([...new Set(diffs)]).toEqual([]);
+  });
+
+  it('les cartes gardent EFF% / RES% sur la variante en %', () => {
+    const labels = new Set(options.map(optionStatLabel));
+    for (const k of ['EFF', 'EFF%', 'RES', 'RES%']) expect(labels.has(k), k).toBe(true);
   });
 });
 

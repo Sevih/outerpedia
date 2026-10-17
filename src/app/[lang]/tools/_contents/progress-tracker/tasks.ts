@@ -76,6 +76,9 @@ export const DAILY_TASK_DEFINITIONS: Record<string, TaskDefinition> = stamp('dai
   // Contenu événementiel (opt-in)
   'joint-challenge': { category: 'task', permanent: false, maxCount: 2 },
   'guild-raid': { category: 'task', permanent: false, maxCount: 2 },
+  // Le jeu autorise 10 entrées par jour (`GameConfigTemplet`
+  // `WORLD_BOSS_ENTRANCE_LIMIT` = 10) ; la tâche compte la RÉCOMPENSE du jour,
+  // d'où 1 — et le libellé le dit (décision de Sevih, 15/10/2026).
   'world-boss': { category: 'task', permanent: false, maxCount: 1 },
   // 1 → 2 avec le pack de soutien Terminus (réglage)
   'terminus-isle': { category: 'task', permanent: true, maxCount: 1 },
@@ -94,7 +97,8 @@ export const DAILY_TASK_DEFINITIONS: Record<string, TaskDefinition> = stamp('dai
   // 10 pubs × 18 stamina = 180 stamina/jour — masquée avec le pack premium
   // Veronica (la stamina est alors réclamée automatiquement, sans pub)
   'ad-stamina': { category: 'task', permanent: true, maxCount: 10 },
-  // 1 entrée/jour, ouvert mercredi → samedi seulement (filtré à la synchro).
+  // 1 entrée/jour, ouvert mercredi → dimanche seulement, les jours de combat
+  // des tables (filtré à la synchro).
   // Les 2 entrées ont fusionné en une seule au patch du 12/08/2026, récompense
   // combinée — le nombre de passages baisse, pas le gain quotidien.
   'dimensional-singularity': { category: 'task', permanent: true, maxCount: 1 },

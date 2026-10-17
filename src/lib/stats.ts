@@ -88,10 +88,12 @@ export function statIconSprite(slug: string): string | undefined {
 
 /**
  * Seules les stats à DOUBLE nature (flat + %) prennent le suffixe « % » sur
- * leur variante rate (ATK/ATK%…) ; les stats intrinsèquement % gardent leur
- * abréviation nue (CHD, CHC…), comme en jeu.
+ * leur variante rate (ATK/ATK%, EFF/EFF%…) ; les stats intrinsèquement % gardent
+ * leur abréviation nue (CHD, CHC…), comme en jeu. EFF et RES existent dans les
+ * pools en plat ET en % : le libellé les distingue partout (décision de Sevih,
+ * 15/10/2026).
  */
-const PCT_SUFFIX = new Set(['atk', 'def', 'hp']);
+const PCT_SUFFIX = new Set(['atk', 'def', 'hp', 'buff_chance', 'buff_resist']);
 
 /**
  * Vue d'affichage d'une option de stat des pools d'équipement : clé (abréviation,

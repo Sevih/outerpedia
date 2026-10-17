@@ -168,13 +168,14 @@ export function fillPlaceholders(template: string, v: BuffValues, color = false)
       .replace(/\[\+Value\]/gi, fs(v.value, '+'))
       .replace(/\[-Value\]/gi, fs(v.value, '-'))
       .replace(/\[Value\]/gi, f(v.value))
-      // `[+Turn]` SANS signe, volontairement (vérifié 2026-07-21 sur les 22
-      // usages réels + l'ancien code, qui fait pareil) : contrairement à `[+Value]` qui
-      // est un DELTA (« ATK +15 % »), celui-ci est une DURÉE — les gabarits du
-      // jeu disent « [+Turn]ターンの間 » / « [+Turn]턴 » / « [+Turn]回合 », soit
-      // « pendant N tours ». Un signe donnerait « pendant +2 tours ». Le « + » du
-      // nom ne désigne donc pas le signe. (`[-Turn]` n'apparaît nulle part dans
-      // les tables : défensif.)
+      // `[+Turn]` SANS signe, volontairement. Le jeu, lui, affiche « +N » : le
+      // « + » est bien un signe pour le client, qui le remet
+      // (`CUtilUI.GetUniqueNameOptionDescReplaceText` : « for +1 turns », 3
+      // options touchées). On l'omet parce que c'est une DURÉE — les gabarits
+      // disent « [+Turn]ターンの間 » / « [+Turn]턴 » / « [+Turn]回合 », soit
+      // « pendant N tours », et « pendant +2 tours » se lit mal. Écart de
+      // lisibilité assumé (décision de Sevih, 15/10/2026). (`[-Turn]`
+      // n'apparaît nulle part dans les tables : défensif.)
       .replace(/\[\+Turn1?\]/gi, f(v.turn))
       .replace(/\[-Turn\]/gi, fs(v.turn, '-'))
       .replace(/\[Turn2\]/gi, f(v.turn2))

@@ -780,6 +780,7 @@ const kr: Record<TranslationKey, string> = {
   'guides.season.live': '{date}까지 진행 중',
   'guides.season.next': '{date} 재개',
   'guides.season.last': '지난 시즌 {date}',
+  'guides.mode.world-boss': '월드 보스',
 
   'guides.tips.tactical': '전술 팁',
   // Gabarits de titre de section : le SUJET (perso / élément / effet) vient de
@@ -1318,7 +1319,7 @@ const kr: Record<TranslationKey, string> = {
   'progress.task.guild-security-area': '길드 경비 구역',
   'progress.task.joint-challenge': '합동 챌린지',
   'progress.task.guild-raid': '길드 연합전',
-  'progress.task.world-boss': '월드 보스',
+  'progress.task.world-boss': '월드 보스 (일일 보상)',
   'progress.task.terminus-isle': '멸망의 섬 탐사',
   'progress.task.hypnotic-frog-hall': '최면 개구리의 전당',
   'progress.task.ark-raid': '방주 습격',
