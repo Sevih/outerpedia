@@ -7,6 +7,24 @@
 
 ## 2026-10-17
 
+- **Relecture C22 (Opus) — un seul résolveur de placeholders, signe et
+  « % » de `[Buff_V]` du client, liste `IsPercentStat` ; validé.** Question
+  du lot tranchée le 17/10 (signe du client, retiré derrière « by » sauf
+  « increase(s) / raise(s) … by », par id pour les six langues ; ids listés
+  et règle épinglée par un test). Périmètre conforme (`f0a59ab0`) : sous
+  `data/`, les fichiers annoncés ; contrat solver intact (`hash`
+  `6eaf3ea360b7`). Contrôles : typecheck, lint et `format:check` verts,
+  `NODE_ENV=development pnpm test` `Tests 4094 passed (4094)`,
+  `scripts/quick` 1148, `damage:check` 42 lignes exactes. Rendu rejoué par
+  `resolveSkillText` sur `monster-skills.json` : 152072 « heals the caster
+  by 10% », 110842 « decreases all enemies' AP by 20 », 132309
+  « Core Overdrive: -15 », et 160039 « Increases the cooldown of Darkness
+  Domination by -1 turn(s) » (signe gardé, comme le client). **Reste à
+  Sevih** : ce dernier texte se lit mal mais c'est celui du jeu ; le
+  laisser ou le passer en absolu par une exception est à décider. Sur le
+  site : une fiche monstre de la tour élémentaire (Tidal Wave) affiche ses
+  valeurs, plus de `[buff_v_…]` brut ; Glacial Bow montre `RES 30 … 40` ;
+  les filtres AP de `/characters`. **Suite** : B51.
 - **C22 — Primitives texte et pourcentage : un seul résolveur de
   placeholders, la liste « % » du client, le signe de `[Buff_V]`,
   `{B/BT_AP_CHARGE}`.** Constats R6, O3, O4, O14, O15, R8, R19 (revue
