@@ -7,6 +7,16 @@
 
 ## 2026-10-17
 
+- **Relecture A59 (Opus) — la fiche demande ses reviews au bot par id ;
+  validé.** Périmètre conforme (`578081b2`) : `getReviewsForCharacter(characterId)`,
+  la fiche passe `char.id`, contrat et en-tête de `src/lib/data/reviews.ts`
+  suivis, `reviews.test.ts` (4 : URL par id, non-OK, exception, délai →
+  `[]`). Contrôles : typecheck, lint et format verts sur les fichiers du lot,
+  4 tests. Rejeu sur le bot de prod (OB2 déployé) : pour les 129 persos de
+  `/api/bot/characters`, `/reviews/<id>` rend exactement la même réponse que
+  `/reviews/<slug>` (94 reviews) ; les 7 reviews des anciens posts `-2`
+  restent hors des fiches, comme avant. Aucun changement visible.
+  **Suite** : C21 (question tranchée), puis B57.
 - **A59 — reviews d'une fiche perso demandées au bot par id.** La fiche
   appelait `GET /reviews/<slug>` ; or le slug suit le nom anglais affiché,
   et un renommage du jeu aurait détaché les reviews de leur fiche. Le bot
