@@ -906,8 +906,10 @@ export function buildSolver(inputs: {
   // dmgStat/dmgSec : la règle vit dans lib/kit-scaling.ts, PARTAGÉE avec
   // damage-scaling (kit principal, buffs posés sur soi) ; ici on ne fait que
   // projeter dans les clés du contrat — une stat hors de SCALING_STAT_TO_KEY
-  // n'a pas de clé chez gear-solver, elle tombe. noCrit, lui, se cherche sur
-  // TOUS les Skill_* (le `_passive` de Rhona vit hors S1-S3).
+  // n'a pas de clé chez gear-solver, elle tombe. kitScaling lit aussi les
+  // FORMES de combat (Demiurge Saeran). noCrit, lui, se cherche sur TOUS les
+  // Skill_* (le `_passive` de Rhona vit hors S1-S3), de la ligne de base
+  // seulement : les formes n'y sont pas lues.
   const kitTables = loadKitScalingTables();
   const ALL_SKILL_COLS = Array.from({ length: 23 }, (_, i) => `Skill_${i + 1}`);
   function deriveDmgScaling(c: Row): {

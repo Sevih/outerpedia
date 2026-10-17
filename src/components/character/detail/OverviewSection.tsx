@@ -2,6 +2,8 @@ import type { Lang } from '@/lib/i18n/config';
 import { getT } from '@/i18n';
 import { ShareButtons } from '@/components/ui/ShareButtons';
 import { GameText } from '@/components/ui/GameText';
+import { ImmunityBadges } from '@/components/character/EffectChips';
+import type { BossImmunityView } from '@/lib/data/boss-view';
 import { FullArtCarousel, type FullArt } from './FullArtCarousel';
 
 export interface OverviewBadge {
@@ -34,7 +36,32 @@ export interface OverviewProps {
   /** Paires label → valeur (VA, anniversaire, taille, poids). */
   meta: Array<[string, string]>;
   story: string | null;
+  /** Immunités propres du perso (`resolveImmunities`) — vide pour la plupart. */
+  immunities: BossImmunityView[];
   lang: Lang;
+}
+
+/**
+ * Ligne « Immunités » du header : les icônes des boss (`ImmunityBadges`), sous
+ * rareté/élément/classe. Rien quand le perso n'en a pas — le cas de presque tout
+ * le roster.
+ */
+export function OverviewImmunities({
+  label,
+  immunities,
+  lang,
+}: {
+  label: string;
+  immunities: BossImmunityView[];
+  lang: Lang;
+}) {
+  if (!immunities.length) return null;
+  return (
+    <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5">
+      <span className="text-2xs font-mono tracking-[0.14em] text-zinc-200 uppercase">{label}</span>
+      <ImmunityBadges immunities={immunities} lang={lang} />
+    </div>
+  );
 }
 
 /**
@@ -142,6 +169,12 @@ export async function OverviewSection(p: OverviewProps) {
               </span>
             )}
           </div>
+
+          <OverviewImmunities
+            label={t('guides.boss_display.immunities')}
+            immunities={p.immunities}
+            lang={p.lang}
+          />
 
           {p.meta.length > 0 && (
             <div className="flex flex-wrap gap-x-8 gap-y-3 border-y border-white/6 py-3.5">

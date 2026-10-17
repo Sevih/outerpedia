@@ -21,6 +21,8 @@ import type { Row } from '../lib/tables';
 import type { CatalogEntry } from './item-catalog';
 import {
   buildAffinityStatLevels,
+  buildGifts,
+  buildPreferredGiftBonus,
   costsFrom,
   cumulativeCurve,
   itemRef,
@@ -142,6 +144,65 @@ describe('buildAffinityStatLevels — niveaux à RewardBuffID', () => {
   });
 });
 
+describe('buildGifts — points lus dans ItemEnchantExpTemplet', () => {
+  const present = {
+    kind: 'item',
+    name: dict('Gift'),
+    // Le texte dit 100 : il ne compte plus, seule la table fait foi.
+    desc: dict('Use to increase their Affinity level by 100.'),
+    icon: 'ic_gift',
+    grade: 'normal',
+    type: 'present',
+    subType: 'present_01',
+    star: 0,
+  } as unknown as CatalogEntry;
+  const items: Row[] = [{ ID: '23001', ItemSubType: 'ITS_PRESENT_01', ItemGrade: 'IG_NORMAL' }];
+  const exp = (ExpValue: string, BasicStar = '0'): Row => ({
+    ItemSubType: 'ITS_PRESENT_01',
+    ItemGrade: 'IG_NORMAL',
+    BasicStar,
+    ExpValue,
+  });
+
+  it('points = ExpValue de (sous-type, grade, BasicStar 0), sans lire le texte', () => {
+    const out = buildGifts({ '23001': present }, { items, enchantExp: [exp('300')] });
+    expect(out.map((g) => [g.id, g.points, g.presentType])).toEqual([['23001', 300, 'present_01']]);
+  });
+
+  it('ligne manquante (ou seulement à BasicStar ≠ 0) → jette', () => {
+    expect(() =>
+      buildGifts({ '23001': present }, { items, enchantExp: [exp('300', '1')] }),
+    ).toThrow(/ItemEnchantExpTemplet/);
+  });
+
+  it('cadeau réservé à un héros : écarté', () => {
+    const own = { ...present, characterLimit: '2000001' } as CatalogEntry;
+    expect(() => buildGifts({ '23001': own }, { items, enchantExp: [exp('300')] })).toThrow(
+      /aucun cadeau/,
+    );
+  });
+});
+
+describe('buildPreferredGiftBonus — GameConfig TRUST_ENCHANT_INCREASE_VALUE', () => {
+  const cfg = (ValueString?: string): Row[] => [
+    { ID: 'OTHER', ValueString: '7' },
+    { ID: 'TRUST_ENCHANT_INCREASE_VALUE', ...(ValueString !== undefined ? { ValueString } : {}) },
+  ];
+
+  it('Value × 0,01 (50 → 0,5)', () => {
+    expect(buildPreferredGiftBonus(cfg('50'))).toBe(0.5);
+    expect(buildPreferredGiftBonus(cfg('30'))).toBe(0.3);
+  });
+
+  it('absent ou non numérique → jette', () => {
+    expect(() => buildPreferredGiftBonus(cfg())).toThrow(/TRUST_ENCHANT_INCREASE_VALUE/);
+    expect(() => buildPreferredGiftBonus(cfg('abc'))).toThrow(/TRUST_ENCHANT_INCREASE_VALUE/);
+    expect(() => buildPreferredGiftBonus([{ ID: 'OTHER', ValueString: '7' }])).toThrow(
+      /TRUST_ENCHANT_INCREASE_VALUE/,
+    );
+  });
+});
+
 // ─── 2. Invariants sur la donnée committée ───────────────────────────────────
 
 const h = heroGrowthData as unknown as HeroGrowthData;
@@ -235,6 +296,11 @@ describe('hero-growth.json — invariants', () => {
     const ladder = GRADES.filter((g) => byGrade.has(g)).map((g) => [...byGrade.get(g)!]);
     for (const pts of ladder) expect(pts).toHaveLength(1);
     for (let i = 1; i < ladder.length; i++) expect(ladder[i][0]).toBeGreaterThan(ladder[i - 1][0]);
+  });
+
+  it('bonus du cadeau préféré : une fraction positive', () => {
+    expect(h.preferredGiftBonus).toBeGreaterThan(0);
+    expect(h.preferredGiftBonus).toBeLessThan(10);
   });
 
   it('fusion : paliers 1→5 continus, coût > 0, couple base ≠ fusionné', () => {

@@ -11,11 +11,12 @@ import type { BuffGroup } from './buff';
 import { kitScaling, type KitScalingTables } from './kit-scaling';
 import type { Row } from './tables';
 
-/** Tables réduites : skill → CSV de buffs (un niveau), buffs → lignes. */
+/** Tables réduites : skill → CSV de buffs (un niveau), buffs → lignes, base → formes. */
 function tables(
   skills: Record<string, string>,
   buffRows: Row[],
   groups: Record<string, BuffGroup> = {},
+  forms: Record<string, Row[]> = {},
 ): KitScalingTables {
   const buffs = new Map<string, Row[]>();
   for (const b of buffRows) buffs.set(b.BuffID, [...(buffs.get(b.BuffID) ?? []), b]);
@@ -28,6 +29,7 @@ function tables(
     ),
     buffs,
     groups: new Map(Object.entries(groups)),
+    formsByBase: new Map(Object.entries(forms)),
   };
 }
 
@@ -142,6 +144,41 @@ describe('kitScaling — ce qui compte', () => {
     );
     expect(kitScaling({ ID: 'X', Skill_2: '2' }, t)).toEqual({
       bonus: [{ stat: 'ST_SPEED', ratio: 0.25 }],
+    });
+  });
+});
+
+describe('kitScaling — formes de combat', () => {
+  it('une forme qui pose BT_DMG_OWNER_STAT compte pour sa base (Demiurge Saeran)', () => {
+    // 2000129 → 2000130 (ON_DIE) : la VIT ne vient que du kit de la forme.
+    const t = tables(
+      { '12901': 'base_dot', '13002': '2000130_2_3' },
+      [
+        { BuffID: 'base_dot', Level: '1', Type: 'BT_DOT_POISON', TargetType: 'ENEMY' },
+        ownerStat('2000130_2_3', 'ST_SPEED', '2500'),
+      ],
+      {},
+      { '2000129': [{ ID: '2000130', Skill_2: '13002' }] },
+    );
+    expect(kitScaling({ ID: '2000129', Skill_1: '12901' }, t)).toEqual({
+      bonus: [{ stat: 'ST_SPEED', ratio: 2.5 }],
+    });
+  });
+
+  it('union base + forme : même stat → le plus haut ratio, mêmes colonnes filtrées', () => {
+    const t = tables(
+      { '1': 'b_hp', '2': 'f_hp', '10': 'f_backup' },
+      [
+        ownerStat('b_hp', 'ST_HP', '20'),
+        ownerStat('f_hp', 'ST_HP', '40'),
+        ownerStat('f_backup', 'ST_DEF', '200', BACKUP),
+      ],
+      {},
+      { X: [{ ID: 'XF', Skill_1: '2', Skill_10: '10' }] },
+    );
+    // Le soutien de la forme (Skill_10) reste hors du kit principal.
+    expect(kitScaling({ ID: 'X', Skill_1: '1' }, t)).toEqual({
+      bonus: [{ stat: 'ST_HP', ratio: 0.04 }],
     });
   });
 });

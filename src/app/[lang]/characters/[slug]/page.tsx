@@ -23,8 +23,10 @@ import {
   buildStatusMap,
   cardEffects,
   dedupSkills,
+  liveKitSources,
   mainSkills,
 } from '@/lib/skill-view';
+import { resolveImmunities } from '@/lib/data/boss-view';
 import { mergeStatusEffects } from '@/lib/data/effects';
 import { GearRecoSection } from '@/components/character/GearRecoSection';
 import { getCharacterGearReco } from '@/lib/data/gear-reco';
@@ -682,6 +684,7 @@ export default async function CharacterDetail({
         starSrc={img.star()}
         meta={meta}
         story={char.profile?.story ? lRec(char.profile.story, lang) : null}
+        immunities={resolveImmunities(char, liveKitSources())}
         lang={lang}
       />
 

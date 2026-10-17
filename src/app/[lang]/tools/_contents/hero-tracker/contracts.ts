@@ -193,12 +193,6 @@ export const SKILL_SLOTS = 4;
 export const MAX_SKILL = 5;
 /** Un héros se recrute au niveau 5 : rien en dessous n'existe en jeu. */
 export const START_LEVEL = 5;
-/**
- * Bonus du cadeau préféré (curé dans le guide heroes-growth, aucune table).
- * TOUJOURS appliqué : offrir autre chose que son cadeau préféré à un héros qu'on
- * monte n'a aucune raison d'arriver — le compter serait un majorant pour rien.
- */
-export const PREFERRED_GIFT_BONUS = 0.5;
 /** Au-delà, l'appui devient « je vise » plutôt que « j'en suis là ». */
 export const LONG_PRESS_MS = 450;
 /**

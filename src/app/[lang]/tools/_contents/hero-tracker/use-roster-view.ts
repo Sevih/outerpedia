@@ -11,7 +11,6 @@
 import { useCallback, useMemo } from 'react';
 import { normalizeSearchText } from '@/lib/search-text';
 import {
-  PREFERRED_GIFT_BONUS,
   type HeroRow,
   type HeroTrackerData,
   type RosterFilters,
@@ -80,11 +79,11 @@ export function useRosterView({
             n.affinityPoints,
             rules.gifts,
             heroById.get(n.heroId)?.gift,
-            PREFERRED_GIFT_BONUS,
+            rules.preferredGiftBonus,
           ),
         ),
       ),
-    [total.heroes, rules.gifts, heroById],
+    [total.heroes, rules.gifts, rules.preferredGiftBonus, heroById],
   );
 
   /** La liste de courses : items des barèmes + conversions, filtrée par axe. */

@@ -93723,6 +93723,12 @@
       "corePassive": null
     },
     "recommendSetId": "13,3,5",
+    "dmgSec": [
+      {
+        "stat": "spd",
+        "ratio": 2.5
+      }
+    ],
     "bestSkill": {
       "slot": "S1",
       "burst": 3,

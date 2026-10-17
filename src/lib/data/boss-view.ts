@@ -159,6 +159,26 @@ function toStatus(e: MergedEffect): StatusI18n {
 }
 
 /**
+ * Immunités d'un combattant (boss ou perso jouable) : tooltips affichés en jeu +
+ * TYPES de mécanique, résolus vers les effets canoniques. Une réf non résolue
+ * reste NUE — la carte la signale en rouge, comme une erreur de contenu. PURE :
+ * la carte de boss et la fiche perso résolvent par ici.
+ */
+export function resolveImmunities(
+  m: Parameters<typeof immunityChipEffects>[0],
+  src: KitSources,
+): BossImmunityView[] {
+  const { effects: refs, unresolved } = immunityChipEffects(m, src);
+  return [
+    ...refs.map((e) => {
+      const eff = effectForTooltip(e.tooltip!, src.fx) ?? getMergedEffect(e.tooltip!, src.fx);
+      return { tid: e.tooltip!, ...(eff ? { effect: toStatus(eff) } : {}) };
+    }),
+    ...unresolved.map((tid) => ({ tid })),
+  ];
+}
+
+/**
  * Construit la vue d'un boss. FONCTION PURE : tout vient de `src`, rien du
  * disque — c'est ce qui permet de la rendre depuis une archive aussi bien que
  * depuis le live, et de la tester à sec.
@@ -204,17 +224,7 @@ export function buildBossView(
     src.fx,
   );
 
-  // Immunités : tooltips affichés en jeu + TYPES de mécanique, résolus vers les
-  // effets canoniques. Une réf non résolue reste NUE — la carte la signale en
-  // rouge, comme une erreur de contenu.
-  const { effects: refs, unresolved } = immunityChipEffects(monster, src);
-  const immunities: BossImmunityView[] = [
-    ...refs.map((e) => {
-      const eff = effectForTooltip(e.tooltip!, src.fx) ?? getMergedEffect(e.tooltip!, src.fx);
-      return { tid: e.tooltip!, ...(eff ? { effect: toStatus(eff) } : {}) };
-    }),
-    ...unresolved.map((tid) => ({ tid })),
-  ];
+  const immunities = resolveImmunities(monster, src);
 
   // Donjons RESTREINTS aux spawns du monstre : la vue doit pouvoir être figée
   // seule, pas traîner tout `encounters.json` derrière elle.

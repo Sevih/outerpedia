@@ -7,6 +7,84 @@
 
 ## 2026-10-17
 
+- **B51 — Persos : immunités sur la fiche, formes de combat dans le
+  scaling (Demiurge Saeran), points de cadeau lus dans les tables.**
+  Constats O1, O2 et O10 de la revue « génération des données » (09/10),
+  rejoués le 15/10, décision de Sevih du 15/10 pour O1. **O1** : les trois
+  colonnes `BuffImmune` / `StatBuffImmune` / `BuffImmuneToolTip` que le
+  client lit pour tout combattant (`CCharacterData.IsImmune` /
+  `IsImmuneStat`) sont lues par UNE fonction, `readImmunities`, et le
+  filtre des tooltips (sentinelle `SYS_IMMUNE_EMPTY`, ids hors
+  `BuffToolTipTemplet`) par `loadImmuneTooltipIds`, sortis du spec monstre
+  dans `datagen/lib/immunities.ts` (un module de `lib/` plutôt qu'un
+  import croisé : `monster.ts` importe déjà `character.ts` au chargement) ;
+  le spec monstre les appelle (`monsters.json` identique, la promotion le
+  compte parmi les 60 identiques), le spec perso aussi — `Character`
+  gagne `buffImmune` / `statBuffImmune` / `immuneTooltips` optionnels
+  (type, schéma, `map`). Affichage : la résolution de `buildBossView`
+  devient `resolveImmunities` (`src/lib/data/boss-view.ts`), que la carte
+  de boss et la fiche appellent ; le rendu des icônes devient
+  `ImmunityBadges` (`EffectChips.tsx`), que `BossPanel` appelle (même
+  balisage, même classes : aucun changement visuel sur les boss) ; la
+  fiche pose `OverviewImmunities` dans le header (`OverviewSection.tsx`),
+  sous rareté/élément/classe, libellé `guides.boss_display.immunities`
+  (pas de nouvelle clé), en `span` et non en `h3` (pas de titre de
+  niveau 3 sous le `h1` sans `h2`), absente sans immunité. `characters.json`
+  n'est PAS promu : la revue (`entityReview('character', id)`, script
+  jetable) montre les 7 persos attendus — 2000039, 2000053, 2000084,
+  2000088, 2000110, 2000114, 2700035 — en `changed` sur le seul champ
+  `buffImmune`, aucun autre perso changé, 2400015 toujours seul ajout.
+  **O2** : la correspondance base → formes sort du spec dans
+  `datagen/lib/character-forms.ts` (`formsByBaseFrom`, pur, et
+  `loadFormsByBase`), avec `ownIdentity` (réexporté par le spec, où la
+  sélection et ses tests le lisent) ; le « retour » d'un aller-retour
+  (2000120 → 2000119) n'y est pas une forme. Le spec en déduit ses skills
+  comme avant ; `kitScaling` lit la base et ses formes (`kitRows`, mêmes
+  colonnes, mêmes filtres, union) ; `buildDamageScaling` devient une
+  boucle sur `damageScalingOf` (pur) qui parcourt aussi `Skill_1..23` des
+  formes. Résultat : `damage-scaling.json` gagne 2000129 (`bonusStats`
+  `speed`, `dot` par `DOT_RE` inchangé) ; `solver/characters.json`
+  gagne pour 2000129 `dmgSec: [{ stat: 'spd', ratio: 2.5 }]`, seul champ
+  changé ; `solver/version.json` change de `hash` (`6eaf3ea360b7` →
+  `79508390003b`) et de `builtAt`, forme du contrat inchangée. **O10** :
+  `buildGifts` lit `ItemEnchantExpTemplet.ExpValue` par (`ItemSubType`,
+  `ItemGrade` bruts d'`ItemTemplet`, `BasicStar` 0), comme
+  `GetEnchantExpAcquire`, et jette sur une ligne manquante ;
+  `GIFT_POINTS_RE` disparaît, `gifts` identique. `hero-growth.json` gagne
+  `preferredGiftBonus: 0.5` (`buildPreferredGiftBonus`,
+  `TRUST_ENCHANT_INCREASE_VALUE` / 100, jette si absent ou non
+  numérique) ; `GrowthRules.preferredGiftBonus` le porte du `index.tsx`
+  du Hero tracker à `HeroCard` et `use-roster-view`, la constante
+  `PREFERRED_GIFT_BONUS` disparaît (comportement identique) ; le test du
+  guide (`editorial.test.ts`) compare `bonus` à
+  `points × preferredGiftBonus`. Commentaires alignés (en-tête de `hero-growth.ts`,
+  `GiftItem.points`, `kit-scaling.ts`, `damage-scaling.ts`, `solver.ts`).
+  **Tests** : `character.test.ts` (`characterSpec.map` sur une ligne
+  synthétique, avec et sans colonnes, tooltip hors table filtré),
+  `character-forms.test.ts` (base → forme, skin → forme de sa base,
+  aller-retour, ligne absente), `kit-scaling.test.ts` et
+  `damage-scaling.test.ts` (une forme à `BT_DMG_OWNER_STAT` compte pour
+  sa base ; donnée réelle : 2000129 a `speed`), `hero-growth.test.ts`
+  (une ligne à 300 → 300 sans toucher au texte, ligne à `BasicStar` ≠ 0
+  ignorée, bonus du GameConfig), `OverviewSection.test.tsx` (ligne rendue
+  sur une fiche synthétique, réf inconnue en rouge ; rien sans
+  immunité). **Données** : `data/` propre avant ; `datagen:build` puis
+  `datagen:promote` à blanc : `characters.json` ~7, `damage-scaling.json`
+  +1 (2000129), `hero-growth.json` +1 (`preferredGiftBonus`),
+  `solver/characters.json` ~1, `solver/version.json` ~2 — rien d'autre ;
+  promotion appliquée sur les quatre derniers seulement. **Vérification** :
+  `pnpm typecheck` (dernière ligne, la commande
+  `tsc --noEmit -p scripts/tsconfig.json` sans erreur derrière),
+  `pnpm lint` (`$ eslint`, sans erreur), `pnpm test`
+  (`Tests 4113 passed (4113)`). **Laissé** : `noCrit` et `bestSkill` du solver
+  ne lisent toujours que la ligne de base (hors lot) ; `formIdsFrom` du
+  spec garde sa propre lecture de `CharacterChangeTemplet` pour la
+  sélection des entités (elle ne sert pas le kit, non touchée) ; que
+  `BT_DOT_PUNISH` compte pour `DOT_RE` n'est pas tranché ici. Sevih :
+  intégrer les 7 persos depuis quick, Données › Extraction › Personnages
+  (la ligne « Immunités » apparaîtra alors sur leurs fiches), puis
+  `npm run data:sync` dans gear-solver.
+
 - **Relecture C22 (Opus) — un seul résolveur de placeholders, signe et
   « % » de `[Buff_V]` du client, liste `IsPercentStat` ; validé.** Question
   du lot tranchée le 17/10 (signe du client, retiré derrière « by » sauf

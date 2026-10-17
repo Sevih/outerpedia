@@ -24,7 +24,7 @@ import { localizeStatuses } from '@/lib/data/effects';
 import { getBossView } from '@/lib/data/monsters';
 import { bossRankOptionLabels, bossSpawnContexts, type BossSkillView } from '@/lib/data/boss-view';
 import type { CardSkill } from '@/components/character/SkillCard';
-import { EffectIconBadge } from '@/components/character/EffectChips';
+import { ImmunityBadges } from '@/components/character/EffectChips';
 import { Thumbnail } from '@/components/ui/Thumbnail';
 import { statIconSprite, statAbbr } from '@/lib/stats';
 import { statName } from '@/lib/data/stat-glossary';
@@ -211,38 +211,13 @@ export async function BossCard({
 
         {/* Juste sous l'en-tête : ce contre quoi le boss est INSENSIBLE. C'est la
           suite de la même question — « à quoi j'ai affaire » — et ça se lit avant
-          d'aller regarder ses chiffres.
-          ICÔNES SEULES : une immunité se reconnaît à son symbole ; une rangée de
-          pastilles nommées mangerait la ligne. Le nom vient au survol, au tap, et
-          pour les lecteurs d'écran. Une réf non résolue s'affiche en ROUGE
-          (signal d'erreur de contenu, comme parse-text). */}
+          d'aller regarder ses chiffres. Icônes seules (cf. `ImmunityBadges`). */}
         {immunities.length > 0 && (
           <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5">
             <h3 className="text-content text-2xs font-mono font-semibold tracking-[0.14em] uppercase">
               {t('guides.boss_display.immunities')}
             </h3>
-            <div className="flex flex-wrap items-center gap-1.5">
-              {immunities.map(({ tid, effect }) =>
-                effect ? (
-                  <EffectIconBadge
-                    key={tid}
-                    // Plus discret que les chips de skill (h-7) : une rangée
-                    // d'immunités est un rappel, pas le sujet de la carte.
-                    className="h-5 w-5"
-                    effect={{
-                      name: lRec(effect.name, lang) || effect.name.en,
-                      icon: effect.icon,
-                      isDebuff: effect.isDebuff,
-                      desc: effect.desc ? lRec(effect.desc, lang) : undefined,
-                    }}
-                  />
-                ) : (
-                  <span key={tid} className="text-danger-strong text-xs">
-                    {tid}
-                  </span>
-                ),
-              )}
-            </div>
+            <ImmunityBadges immunities={immunities} lang={lang} />
           </div>
         )}
 

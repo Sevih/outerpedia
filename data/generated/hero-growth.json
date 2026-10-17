@@ -1655,6 +1655,7 @@
       "presentType": "present_05"
     }
   ],
+  "preferredGiftBonus": 0.5,
   "fusion": [
     {
       "baseId": "2000003",

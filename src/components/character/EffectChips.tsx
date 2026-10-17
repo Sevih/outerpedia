@@ -2,6 +2,9 @@ import { img } from '@/lib/images';
 import { statAbbr } from '@/lib/stats';
 import { InlineTooltip } from '@/components/inline/InlineTooltip';
 import { renderGameColors } from '@/components/ui/GameText';
+import type { Lang } from '@/lib/i18n/config';
+import { lRec } from '@/lib/i18n/localize';
+import type { StatusI18n } from '@/lib/data/effects';
 
 /** Effet structuré (forme invariante ; les nombres viennent des `vars` du niveau). */
 export interface ClientEffect {
@@ -186,6 +189,46 @@ export function EffectIconBadge({
         <EffectIconTile icon={effect.icon} isDebuff={effect.isDebuff} className={className} />
       </button>
     </InlineTooltip>
+  );
+}
+
+/**
+ * Rangée d'IMMUNITÉS (carte de boss, fiche perso) : ICÔNES SEULES — une immunité
+ * se reconnaît à son symbole ; une rangée de pastilles nommées mangerait la
+ * ligne. Le nom vient au survol, au tap, et pour les lecteurs d'écran. Une réf
+ * non résolue s'affiche en ROUGE (signal d'erreur de contenu, comme parse-text).
+ * Les entrées viennent de `resolveImmunities` (`lib/data/boss-view.ts`).
+ */
+export function ImmunityBadges({
+  immunities,
+  lang,
+}: {
+  immunities: { tid: string; effect?: StatusI18n }[];
+  lang: Lang;
+}) {
+  return (
+    <div className="flex flex-wrap items-center gap-1.5">
+      {immunities.map(({ tid, effect }) =>
+        effect ? (
+          <EffectIconBadge
+            key={tid}
+            // Plus discret que les chips de skill (h-7) : une rangée
+            // d'immunités est un rappel, pas le sujet de la carte.
+            className="h-5 w-5"
+            effect={{
+              name: lRec(effect.name, lang) || effect.name.en,
+              icon: effect.icon,
+              isDebuff: effect.isDebuff,
+              desc: effect.desc ? lRec(effect.desc, lang) : undefined,
+            }}
+          />
+        ) : (
+          <span key={tid} className="text-danger-strong text-xs">
+            {tid}
+          </span>
+        ),
+      )}
+    </div>
   );
 }
 

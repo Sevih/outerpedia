@@ -11,7 +11,6 @@ import type { TranscendStep as GameStep } from '@contracts';
 import { getHeroGrowth } from '@/lib/data/hero-growth';
 import { getTranscend } from '@/lib/data/transcend';
 import { stepLabel } from '@/lib/transcendence';
-import { PREFERRED_GIFT_BONUS } from '@/app/[lang]/tools/_contents/hero-tracker/contracts';
 import { AFFINITY_GIFTS, AFFINITY_REWARDS, TRANSCENDENCE_STEPS } from './editorial';
 
 const growth = getHeroGrowth();
@@ -64,12 +63,11 @@ describe('AFFINITY_GIFTS — copie des cadeaux de hero-growth.json', () => {
     }
   });
 
-  // Les deux copies du bonus du cadeau préféré (le `bonus` du guide et
-  // `PREFERRED_GIFT_BONUS` du hero tracker) se tiennent entre elles ; la valeur du
-  // jeu (`GameConfigTemplet.TRUST_ENCHANT_INCREASE_VALUE`) n'est pas émise.
-  it('bonus = points × PREFERRED_GIFT_BONUS', () => {
+  // Le `bonus` du guide est une copie du bonus du jeu
+  // (`GameConfigTemplet.TRUST_ENCHANT_INCREASE_VALUE`, émis en `preferredGiftBonus`).
+  it('bonus = points × preferredGiftBonus', () => {
     for (const tier of AFFINITY_GIFTS)
-      expect(tier.bonus, `palier ${tier.points}`).toBe(tier.points * PREFERRED_GIFT_BONUS);
+      expect(tier.bonus, `palier ${tier.points}`).toBe(tier.points * growth.preferredGiftBonus);
   });
 });
 

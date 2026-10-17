@@ -10,11 +10,14 @@
  *     ce qui écarte skins, formes de combat et clones NPC (K niv. 99) dont
  *     l'héritage de kit fantôme était le bug de la session ;
  *   - `extractStats` : le cœur de stats partagé avec la spec monstre (valeurs
- *     BRUTES, stats de cœur toujours émises).
+ *     BRUTES, stats de cœur toujours émises) ;
+ *   - les IMMUNITÉS propres (`BuffImmune`…) : `characterSpec.map` sur une ligne
+ *     synthétique, contexte vide.
  */
 import { describe, expect, it } from 'vitest';
 import type { Row } from '../../lib/tables';
 import {
+  characterSpec,
   extractStats,
   formIdsFrom,
   isInnatePierce,
@@ -192,5 +195,43 @@ describe('extractStats', () => {
     });
     expect(out.hp).toEqual({ min: 100, max: 9999 });
     expect(out.critical_rate).toEqual({ min: 500, max: 1200 }); // PAS ÷10
+  });
+});
+
+describe('characterSpec.map — immunités propres', () => {
+  // Contexte VIDE : seules les immunités sont lues ici (tooltip 34 affichable).
+  type Aux = Parameters<typeof characterSpec.map>[1];
+  const empty = new Proxy({ immuneTooltipOk: new Set(['34']) } as Record<string, unknown>, {
+    get: (t, k) => (k in t ? t[k as string] : new Map()),
+  }) as unknown as Aux;
+  const row = (over: Row = {}): Row => ({
+    ID: '2000039',
+    NameID: '2000039_Name',
+    Type: 'CT_PC',
+    Skill_1: '3901',
+    ...over,
+  });
+
+  it('BuffImmune / StatBuffImmune / BuffImmuneToolTip → champs, tooltip hors table filtré', () => {
+    const c = characterSpec.map(
+      row({
+        BuffImmune: 'BT_STUN,BT_STONE,BT_FREEZE',
+        StatBuffImmune: 'ST_ATK',
+        BuffImmuneToolTip: '34,4103',
+      }),
+      empty,
+    );
+    expect(c).toMatchObject({
+      buffImmune: ['BT_STUN', 'BT_STONE', 'BT_FREEZE'],
+      statBuffImmune: ['ST_ATK'],
+      immuneTooltips: ['34'],
+    });
+  });
+
+  it('sans colonne : aucun champ', () => {
+    const c = characterSpec.map(row(), empty);
+    expect(c).not.toHaveProperty('buffImmune');
+    expect(c).not.toHaveProperty('statBuffImmune');
+    expect(c).not.toHaveProperty('immuneTooltips');
   });
 });

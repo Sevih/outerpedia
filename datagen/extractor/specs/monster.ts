@@ -33,7 +33,8 @@ import type { LangDict } from '../../lib/lang';
 import { resolveClass } from '../../lib/class';
 import { slugEnum } from '../../lib/enums';
 import { loadTextIndex, resolveText } from '../../lib/text';
-import { bool, loadTable, num, splitCsv } from '../../lib/tables';
+import { bool, loadTable, num } from '../../lib/tables';
+import { loadImmuneTooltipIds, readImmunities } from '../../lib/immunities';
 import {
   buildEncounters,
   type EncountersData,
@@ -260,16 +261,7 @@ export const monsterSpec: ExtractorSpec<Monster, MonsterAux> = {
       if (steps.length) rageById.set(r.ID, { trigger: slugEnum(r.TriggerType, 0), steps });
     }
 
-    // Réfs d'immunité AFFICHABLES : les ids de BuffToolTipTemplet, SANS la
-    // sentinelle « No Immunities » (SYS_IMMUNE_EMPTY — le marqueur du panneau
-    // vide, porté par ~2600 monstres : pas un statut). Un id hors table est une
-    // réf MORTE que le jeu ne peut pas rendre non plus (cas unique : 4103 chez
-    // Akari 4500090, un id de ligne BuffTemplet glissé dans la colonne — il
-    // contredit même son BuffImmune déclaré).
-    const immuneTooltipOk = new Set<string>();
-    for (const t of loadTable('BuffToolTipTemplet')) {
-      if (t.ID && t.NameID !== 'SYS_IMMUNE_EMPTY') immuneTooltipOk.add(t.ID);
-    }
+    const immuneTooltipOk = loadImmuneTooltipIds();
 
     return {
       tchar,
@@ -306,14 +298,7 @@ export const monsterSpec: ExtractorSpec<Monster, MonsterAux> = {
     if (pushBack !== undefined) monster.pushBack = pushBack;
     const pushUp = boolCol(r.PushUp);
     if (pushUp !== undefined) monster.pushUp = pushUp;
-    const buffImmune = splitCsv(r.BuffImmune ?? '');
-    if (buffImmune.length) monster.buffImmune = buffImmune;
-    const statBuffImmune = splitCsv(r.StatBuffImmune ?? '');
-    if (statBuffImmune.length) monster.statBuffImmune = statBuffImmune;
-    const immuneTooltips = splitCsv(r.BuffImmuneToolTip ?? '').filter((t) =>
-      aux.immuneTooltipOk.has(t),
-    );
-    if (immuneTooltips.length) monster.immuneTooltips = immuneTooltips;
+    Object.assign(monster, readImmunities(r, aux.immuneTooltipOk));
 
     // COPIES à l'embarquement : `enc` sort du cache mémoïsé PARTAGÉ de
     // buildEncounters — aliasser ses tableaux ferait qu'une mutation de

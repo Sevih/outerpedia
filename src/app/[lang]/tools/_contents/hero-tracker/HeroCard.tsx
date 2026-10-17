@@ -13,7 +13,6 @@ import { img, STAR_SPRITE } from '@/lib/images';
 import {
   AFFINITY_PRESETS,
   MAX_SKILL,
-  PREFERRED_GIFT_BONUS,
   SKILL_SLOTS,
   START_LEVEL,
   type HeroRow,
@@ -445,7 +444,7 @@ export function HeroCard({
                   need.affinityPoints,
                   rules.gifts,
                   hero.gift,
-                  PREFERRED_GIFT_BONUS,
+                  rules.preferredGiftBonus,
                 ).map((b) => (
                   <NeedChip
                     key={b.entry.id}

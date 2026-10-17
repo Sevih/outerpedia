@@ -227,6 +227,7 @@ export default async function HeroTracker({ lang }: { lang: Lang }) {
         xpCurve: growth.xpCurve,
         affinityCurve: growth.affinityCurve,
         gifts: growth.gifts,
+        preferredGiftBonus: growth.preferredGiftBonus,
         xpFood: growth.xpFood,
         skillUpgrade: growth.skillUpgrade,
         limitBreak,

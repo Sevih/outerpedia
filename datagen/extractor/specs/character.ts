@@ -15,6 +15,8 @@ import { resolveClass } from '../../lib/class';
 import { expandBuffIds, loadBuffGroups, loadBuffIndex } from '../../lib/buff';
 import { hasText, loadTextIndex, resolveText } from '../../lib/text';
 import { bool, loadTable, num, splitCsv, type Row } from '../../lib/tables';
+import { loadFormsByBase, ownIdentity } from '../../lib/character-forms';
+import { loadImmuneTooltipIds, readImmunities } from '../../lib/immunities';
 import { buildImageIndex } from '../../assets/source';
 import { costumeCore } from '../../generators/costumes';
 import { runSpec } from '../core/runner';
@@ -253,6 +255,16 @@ export interface Character {
   recommendedSets?: string[];
   /** Stats de base par slug (valeurs brutes ; échelle dans `statScales`). */
   stats: Record<string, StatRange>;
+  /**
+   * Immunités PROPRES au perso, mêmes colonnes et même lecture que les monstres
+   * (`CCharacterData.IsImmune` / `IsImmuneStat` les lisent pour tout perso) :
+   * types de buff (`BT_*`, réf `effectByKey`).
+   */
+  buffImmune?: string[];
+  /** Immunités aux baisses de stats (`ST_*`). */
+  statBuffImmune?: string[];
+  /** Immunités AFFICHÉES en jeu : réfs glossaire (BuffToolTipTemplet). */
+  immuneTooltips?: string[];
   /** Ids des apparences (modèles alternés) qui empruntent l'identité de ce perso. */
   appearances?: string[];
   /** Costumes/skins obtenables (CostumeTemplet), avec nom et icône. */
@@ -315,6 +327,8 @@ interface CharacterAux {
   pierceBySkill: Map<string, Set<IgnoreDefenseSource>>;
   /** ids des persos dont l'ÉQUIPEMENT EXCLUSIF accorde une pénétration. */
   eePierceIds: Set<string>;
+  /** Réfs d'immunité affichables (BuffToolTipTemplet, cf. `lib/immunities.ts`). */
+  immuneTooltipOk: Set<string>;
   glossaries: CharacterGlossaries;
 }
 
@@ -324,14 +338,9 @@ function slugAfter(v: string | undefined, prefix: string): string {
   return (v.startsWith(prefix) ? v.slice(prefix.length) : v).toLowerCase();
 }
 
-/**
- * Identité propre : le `NameID` d'une ligne est `<ID>_Name`. Les apparences
- * (skins) empruntent au contraire le `NameID` de leur base (`2000005_Name` sur
- * l'id `2010005`) → c'est ce qui les distingue d'un vrai perso/évolution.
- */
-export function ownIdentity(r: Row): boolean {
-  return r.NameID === `${r.ID}_Name`;
-}
+// Identité propre (`NameID` = `<ID>_Name`) : la règle vit avec les formes de
+// combat, qui en ont besoin aussi ; réexportée ici, où la sélection la lit.
+export { ownIdentity };
 
 /**
  * Une ligne `CharacterTemplet` est une ENTITÉ RÉELLE (à extraire) — c'est LA
@@ -482,6 +491,9 @@ const characterSchema: Schema = {
     ee: { kind: 'string', optional: true },
     recommendedSets: { kind: 'array', of: { kind: 'string' }, optional: true },
     stats: { kind: 'record', of: statRangeSchema },
+    buffImmune: { kind: 'array', of: { kind: 'string' }, optional: true },
+    statBuffImmune: { kind: 'array', of: { kind: 'string' }, optional: true },
+    immuneTooltips: { kind: 'array', of: { kind: 'string' }, optional: true },
     appearances: { kind: 'array', of: { kind: 'string' }, optional: true },
     costumes: {
       kind: 'array',
@@ -718,18 +730,14 @@ export const characterSpec: ExtractorSpec<Character, CharacterAux> = {
     // JOUEUR, qui héritait de skills qu'il ne joue jamais (K : « Raging Storm »,
     // « Sliding Uppercut »…). Une déclaration explicite du jeu, pas une
     // ressemblance.
-    const rowById = new Map(loadTable('CharacterTemplet').map((r) => [r.ID, r]));
+    // La correspondance base → formes (skins ramenés à leur base) est PARTAGÉE
+    // avec le scaling des dégâts : `lib/character-forms.ts`.
     const formSkillsByBase = new Map<string, string[]>();
-    for (const chg of loadTable('CharacterChangeTemplet')) {
-      const source = rowById.get(chg.ID);
-      const form = rowById.get(chg.ChangeCharacterID);
-      if (!source || !form) continue;
-      // La transformation est déclarée aussi pour les SKINS (2010119 → 2010120) :
-      // on ramène toujours à l'identité de base.
-      const baseId = ownIdentity(source) ? source.ID : source.NameID.replace(/_Name$/, '');
+    for (const [baseId, forms] of loadFormsByBase()) {
       const skills: string[] = [];
-      for (let i = 1; i <= 23; i++) if (form[`Skill_${i}`]) skills.push(form[`Skill_${i}`]);
-      formSkillsByBase.set(baseId, [...(formSkillsByBase.get(baseId) ?? []), ...skills]);
+      for (const form of forms)
+        for (let i = 1; i <= 23; i++) if (form[`Skill_${i}`]) skills.push(form[`Skill_${i}`]);
+      formSkillsByBase.set(baseId, skills);
     }
 
     // ACQUISITION (premium/festival/seasonal/collab) : la BANNIÈRE fait foi.
@@ -815,6 +823,7 @@ export const characterSpec: ExtractorSpec<Character, CharacterAux> = {
       recruitTagById,
       pierceBySkill,
       eePierceIds,
+      immuneTooltipOk: loadImmuneTooltipIds(),
       glossaries: {
         elements,
         classes,
@@ -843,6 +852,8 @@ export const characterSpec: ExtractorSpec<Character, CharacterAux> = {
       skills,
       stats: extractStats(r),
     };
+    // Immunités propres (Stella, Monad Eva…) : même lecture que les monstres.
+    Object.assign(char, readImmunities(r, aux.immuneTooltipOk));
     const nick = resolveText(aux.tchar, r.NickNameID);
     if (nick.en) char.nickname = nick;
     if (aux.showNickNameIds.has(r.ID)) char.showNickName = true;

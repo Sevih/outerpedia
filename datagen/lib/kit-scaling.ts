@@ -26,12 +26,17 @@
  *     (MY_TEAM) lit `ST_GET_GOLD_RATE`, que `2000079_2_9` incrémente par stack
  *     — le « +10 % de dégâts, 3 stacks max » de sa description ;
  *   - les groupes `BT_GROUP` sont expansés : leurs enfants sont les buffs
- *     réellement posés (aucun cas sur le roster à ce jour).
+ *     réellement posés (aucun cas sur le roster à ce jour) ;
+ *   - la base ET ses FORMES de combat (`lib/character-forms.ts`) : le jeu
+ *     remplace le perso par sa forme, dont le kit se lit avec les mêmes
+ *     colonnes et les mêmes filtres — union des résultats. Demiurge Saeran
+ *     2000129 ne pose son `BT_DMG_OWNER_STAT` VIT que sous sa forme 2000130.
  *
  * Sortie en enums moteur BRUTS (`ST_*`) : chaque consommateur projette dans
  * son vocabulaire (slugs du wiki, clés de gear-solver).
  */
 import { expandBuffIds, loadBuffGroups, loadBuffIndex, type BuffGroup } from './buff';
+import { loadFormsByBase } from './character-forms';
 import { groupBy, loadTable, splitCsv, type Row } from './tables';
 
 /** Colonnes `CharacterTemplet` du kit principal (cf. en-tête). */
@@ -51,6 +56,8 @@ export interface KitScalingTables {
   /** `BuffTemplet` par `BuffID` (une ligne par niveau). */
   buffs: Map<string, Row[]>;
   groups: Map<string, BuffGroup>;
+  /** Id de base → lignes `CharacterTemplet` de ses formes de combat. */
+  formsByBase: Map<string, Row[]>;
 }
 
 export function loadKitScalingTables(): KitScalingTables {
@@ -58,7 +65,13 @@ export function loadKitScalingTables(): KitScalingTables {
     levelsBySkill: groupBy(loadTable('CharacterSkillLevelTemplet'), 'SkillID'),
     buffs: loadBuffIndex(),
     groups: loadBuffGroups(),
+    formsByBase: loadFormsByBase(),
   };
+}
+
+/** La ligne d'un perso puis celles de ses formes de combat — le kit qu'il joue. */
+export function kitRows(c: Row, tables: Pick<KitScalingTables, 'formsByBase'>): Row[] {
+  return [c, ...(tables.formsByBase.get(c.ID) ?? [])];
 }
 
 export interface KitScaling {
@@ -68,33 +81,34 @@ export interface KitScaling {
   bonus: { stat: string; ratio: number }[];
 }
 
-/** Faits de scaling du kit principal d'UNE ligne `CharacterTemplet`. */
+/** Faits de scaling du kit principal d'UN perso (ligne de base + ses formes). */
 export function kitScaling(c: Row, tables: KitScalingTables): KitScaling {
   const { levelsBySkill, buffs, groups } = tables;
   let attackStat: string | undefined;
   const ratios = new Map<string, number>();
 
-  for (const col of KIT_SCALING_SKILL_COLS) {
-    const sid = c[col];
-    if (!sid) continue;
-    const seen = new Set<string>();
-    for (const lvl of levelsBySkill.get(sid) ?? []) {
-      for (const { id } of expandBuffIds(splitCsv(lvl.BuffID), buffs, groups, 1)) {
-        if (seen.has(id)) continue;
-        seen.add(id);
-        // Tous les niveaux du buff : le type et la stat n'en dépendent pas,
-        // la magnitude si (on garde la plus haute).
-        for (const b of buffs.get(id) ?? []) {
-          if (b.TargetType !== 'ME' || !b.StatType || b.StatType === 'ST_NONE') continue;
-          if (b.Type === 'BT_SWAP_STAT_ATTACK') attackStat = b.StatType;
-          else if (b.Type === 'BT_DMG_OWNER_STAT') {
-            const ratio = Number(b.Value) / 1000;
-            if (ratio > 0) ratios.set(b.StatType, Math.max(ratios.get(b.StatType) ?? 0, ratio));
+  for (const row of kitRows(c, tables))
+    for (const col of KIT_SCALING_SKILL_COLS) {
+      const sid = row[col];
+      if (!sid) continue;
+      const seen = new Set<string>();
+      for (const lvl of levelsBySkill.get(sid) ?? []) {
+        for (const { id } of expandBuffIds(splitCsv(lvl.BuffID), buffs, groups, 1)) {
+          if (seen.has(id)) continue;
+          seen.add(id);
+          // Tous les niveaux du buff : le type et la stat n'en dépendent pas,
+          // la magnitude si (on garde la plus haute).
+          for (const b of buffs.get(id) ?? []) {
+            if (b.TargetType !== 'ME' || !b.StatType || b.StatType === 'ST_NONE') continue;
+            if (b.Type === 'BT_SWAP_STAT_ATTACK') attackStat = b.StatType;
+            else if (b.Type === 'BT_DMG_OWNER_STAT') {
+              const ratio = Number(b.Value) / 1000;
+              if (ratio > 0) ratios.set(b.StatType, Math.max(ratios.get(b.StatType) ?? 0, ratio));
+            }
           }
         }
       }
     }
-  }
 
   return {
     ...(attackStat ? { attackStat } : {}),

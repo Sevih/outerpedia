@@ -36,6 +36,7 @@ const RULES: GrowthRules = {
     { ...item('g500', 'Big gift'), points: 500, presentType: 'present_01' },
     { ...item('g100b', 'Other small'), points: 100, presentType: 'present_02' },
   ],
+  preferredGiftBonus: 0.5,
   xpFood: [
     { ...item('food250', 'Sandwich'), xp: 250 },
     { ...item('food1000', 'Steak'), xp: 1000 },
@@ -334,6 +335,7 @@ describe('barèmes réels — limit break et transcendance chiffrés contre le j
     xpCurve: growth.xpCurve,
     affinityCurve: growth.affinityCurve,
     gifts: growth.gifts,
+    preferredGiftBonus: growth.preferredGiftBonus,
     xpFood: growth.xpFood,
     skillUpgrade: growth.skillUpgrade,
     limitBreak,

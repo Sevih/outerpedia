@@ -38,7 +38,7 @@ les preuves et les décisions vivent dans le tri consolidé de sevih-tool
 - [ ] **Calculateur (C, build)** : H1, H3, M2, M4, B6, R15, R18, O12 ;
       R14 et R16 : enquête faite (F27), mesures demandées
       (`docs/specs/damage-clips-joues.md` § 4).
-- [ ] **Persos (B, build)** : O1, O2, O10. **Gacha (C)** : M7.
+- [ ] **Gacha (C)** : M7.
 - [ ] **Contrat solver, L1 d'abord** : `schema` et `resVersion` dans
       `solver/version.json` avant tout changement de forme (C1, M2, M3,
       vitesse en %, noyau par niveau, `stat-keys.json`). FAIT côté

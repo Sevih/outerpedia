@@ -5,11 +5,15 @@
  * fichier vide ou des slugs invalides sans autre symptôme, et le damage
  * calculator masquerait des champs de saisie NÉCESSAIRES.
  *
+ * Plus la règle elle-même (`damageScalingOf`) sur des tables synthétiques.
+ *
  * Tourne SANS `.gamedata` (rien n'appelle buildDamageScaling).
  */
 import { describe, expect, it } from 'vitest';
 import scalingData from '../../data/generated/damage-scaling.json';
-import type { DamageScalingFile } from './damage-scaling';
+import type { KitScalingTables } from '../lib/kit-scaling';
+import type { Row } from '../lib/tables';
+import { damageScalingOf, type DamageScalingFile } from './damage-scaling';
 
 const scaling = scalingData as unknown as DamageScalingFile;
 const entries = Object.entries(scaling);
@@ -55,5 +59,45 @@ describe('damage-scaling.json — représentativité', () => {
     // Ordre de grandeur : ~la moitié du roster porte un fait (67 au 26/07/2026).
     // Un effondrement (< 30) signale une jointure cassée, pas un patch.
     expect(entries.length).toBeGreaterThanOrEqual(30);
+  });
+});
+
+describe('damageScalingOf — formes de combat', () => {
+  // Demiurge Saeran 2000129 → 2000130 : la VIT et le DoT ne sont posés que par
+  // le kit de la forme.
+  const buffRows: Row[] = [
+    {
+      BuffID: 'f_spd',
+      Level: '1',
+      Type: 'BT_DMG_OWNER_STAT',
+      TargetType: 'ME',
+      StatType: 'ST_SPEED',
+      Value: '2500',
+    },
+    { BuffID: 'f_dot', Level: '1', Type: 'BT_DOT_BURN', TargetType: 'ENEMY' },
+  ];
+  const kit: KitScalingTables = {
+    levelsBySkill: new Map([
+      ['13002', [{ SkillID: '13002', SkillLevel: '1', BuffID: 'f_spd' }]],
+      ['13004', [{ SkillID: '13004', SkillLevel: '1', BuffID: 'f_dot' }]],
+    ]),
+    buffs: new Map(buffRows.map((b) => [b.BuffID, [b]])),
+    groups: new Map(),
+    formsByBase: new Map([['2000129', [{ ID: '2000130', Skill_2: '13002', Skill_4: '13004' }]]]),
+  };
+
+  it('une forme qui porte BT_DMG_OWNER_STAT (et un DoT) compte pour sa base', () => {
+    expect(damageScalingOf({ ID: '2000129', Skill_1: '12901' }, kit)).toEqual({
+      bonusStats: ['speed'],
+      dot: true,
+    });
+  });
+
+  it('sans forme déclarée, la ligne seule', () => {
+    expect(damageScalingOf({ ID: '2000001', Skill_1: '12901' }, kit)).toEqual({});
+  });
+
+  it('donnée réelle : Demiurge Saeran (2000129) scale sur la VIT de sa forme', () => {
+    expect(scaling['2000129']?.bonusStats).toContain('speed');
   });
 });

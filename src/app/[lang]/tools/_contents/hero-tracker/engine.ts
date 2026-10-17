@@ -82,6 +82,13 @@ export interface GrowthRules {
   /** Points d'affinité CUMULÉS par niveau (index = niveau − 1). */
   affinityCurve: number[];
   gifts: GiftItem[];
+  /**
+   * Bonus du cadeau préféré (0,5 = +50 %), lu du jeu (`hero-growth.json`,
+   * `TRUST_ENCHANT_INCREASE_VALUE`). TOUJOURS appliqué : offrir autre chose que
+   * son cadeau préféré à un héros qu'on monte n'a aucune raison d'arriver — le
+   * compter serait un majorant pour rien.
+   */
+  preferredGiftBonus: number;
   xpFood: XpFoodItem[];
   /** Barème d'amélioration de skill par rareté de base. */
   skillUpgrade: Record<string, SkillUpgradeRow[]>;

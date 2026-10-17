@@ -22,26 +22,28 @@
  *  • `xpCurve` / `affinityCurve` — courbes d'XP CUMULÉ par niveau de héros
  *    (1→120) et par niveau d'affinité (1→100) : `ExpCharacterTemplet`
  *    (`TotalExp` / `TrustExp`, tous deux vérifiés monotones = cumulés).
- *  • `gifts` — cadeaux d'affinité et leurs points. Le jeu les chiffre dans
- *    `ItemEnchantExpTemplet.ExpValue` (100/200/500/1000 par grade, sous-types
- *    `ITS_PRESENT_*` ; `MaterialValue` est vide sur les présents), mais ce
- *    générateur les lit ENCORE dans le TEXTE localisé de l'item (« …increase
- *    their Affinity level by 100 ») : on les dérive de la description ANGLAISE
- *    avec un motif strict — et on jette si le motif ne matche plus, plutôt que
- *    de servir un barème muet et faux.
+ *  • `gifts` — cadeaux d'affinité et leurs points, lus où le jeu les lit :
+ *    `ItemEnchantExpTemplet.ExpValue` par (`ItemSubType`, `ItemGrade`,
+ *    `BasicStar` 0) — `CTempletManager.GetEnchantExpAcquire`, 100/200/500/1000
+ *    par grade sur les sous-types `ITS_PRESENT_*` (`MaterialValue` est vide sur
+ *    les présents). Une ligne manquante pour un cadeau retenu jette.
+ *  • `preferredGiftBonus` — bonus du cadeau PRÉFÉRÉ, `GameConfigTemplet.
+ *    TRUST_ENCHANT_INCREASE_VALUE` (50, appliqué `× (Value × 0,01 + 1)`) →
+ *    0,5 ; absent ou non numérique → jette.
  *  • `fusion` — Core Fusion : couple (base → fusionné), étoile de transcendance
  *    exigée sur la base, et coût de chaque palier en Fusion-Type Core
  *    (`CharacterFusionTemplet` + `CharacterFusionLevelTemplet`). Le déblocage est
  *    le palier 1 ; au-delà, TOUS les skills montent ENSEMBLE d'un cran — la table
  *    le dit colonne par colonne et le générateur le VÉRIFIE (cf. buildFusion).
  *
- * Les trois derniers servent l'outil de suivi de compte (`hero-tracker`), les
+ * Les quatre derniers servent l'outil de suivi de compte (`hero-tracker`), les
  * quatre premiers le guide « Growth Systems » — même domaine, même fichier :
  * dupliquer la croissance des héros dans un second JSON en ferait diverger un.
+ * Le guide garde sa propre copie des cadeaux (`AFFINITY_GIFTS`, `editorial.ts`),
+ * que ses tests gardent contre `gifts` et `preferredGiftBonus`.
  *
- * Le reste (bonus d'un cadeau PRÉFÉRÉ, paliers de récompense, effets de
- * transcendance…) reste éditorial dans le guide (`editorial.ts`). Un seul champ
- * de plus, `affinityStatLevels` (niveaux à `RewardBuffID` de `TrustRewardTemplet`),
+ * Le reste (paliers de récompense, effets de transcendance…) reste éditorial
+ * dans le guide (`editorial.ts`). Un seul champ de plus, `affinityStatLevels` (niveaux à `RewardBuffID` de `TrustRewardTemplet`),
  * n'est lu par AUCUNE page : il sert aux tests qui gardent les paliers d'affinité
  * recopiés à la main (cf. buildAffinityStatLevels).
  */
@@ -96,10 +98,9 @@ export interface XpFoodItem extends ItemRef {
 /** Un cadeau d'affinité. */
 export interface GiftItem extends ItemRef {
   /**
-   * Points d'affinité accordés. Bonus « cadeau PRÉFÉRÉ » NON inclus ici : le
-   * texte dit seulement « you will gain a bonus », le jeu le chiffre dans
-   * GameConfig (`TRUST_ENCHANT_INCREASE_VALUE` = 50, soit +50 %) et l'outil
-   * l'applique de son côté (`PREFERRED_GIFT_BONUS` du hero tracker).
+   * Points d'affinité accordés (`ItemEnchantExpTemplet.ExpValue`). Bonus
+   * « cadeau PRÉFÉRÉ » NON inclus ici : il est à part, `preferredGiftBonus`,
+   * que le hero tracker applique de son côté.
    */
   points: number;
   /** Type de présent (`present_01`…), à comparer au `gift` préféré du héros. */
@@ -136,6 +137,11 @@ export interface HeroGrowthData {
   /** Points d'affinité CUMULÉS pour le niveau n : index `n - 1` (niveau 1 = 0). */
   affinityCurve: number[];
   gifts: GiftItem[];
+  /**
+   * Bonus du cadeau préféré, en fraction des points (0,5 = +50 %) :
+   * `GameConfigTemplet.TRUST_ENCHANT_INCREASE_VALUE` × 0,01.
+   */
+  preferredGiftBonus: number;
   fusion: FusionEntry[];
   /**
    * Niveaux d'affinité (distincts, triés) où `TrustRewardTemplet` porte un
@@ -275,34 +281,60 @@ export function cumulativeCurve(rows: Row[], column: 'TotalExp' | 'TrustExp'): n
   return out;
 }
 
-/** « …increase their Affinity level by 1,000. » → 1000. */
-const GIFT_POINTS_RE = /Affinity(?: level)? by ([\d,]+)/i;
-
 /**
- * Cadeaux d'affinité génériques (`present_01`…`present_05`), points dérivés de
- * la description anglaise. Les `present_max` (item unique « à tel niveau
- * d'affinité d'un coup ») et les présents réservés à UN héros sont écartés : ce
- * ne sont pas des monnaies de farm, ils fausseraient un barème par grade.
+ * Cadeaux d'affinité génériques (`present_01`…`present_05`), points lus comme le
+ * client (`GetEnchantExpAcquire`) : `ItemEnchantExpTemplet.ExpValue` de la ligne
+ * (`ItemSubType`, `ItemGrade`, `BasicStar` 0) de l'item — sous-type et grade BRUTS
+ * d'`ItemTemplet`, pas ceux du catalogue (que la curation peut retoucher). Les
+ * `present_max` (item unique « à tel niveau d'affinité d'un coup ») et les
+ * présents réservés à UN héros sont écartés : ce ne sont pas des monnaies de
+ * farm, ils fausseraient un barème par grade.
  */
-function buildGifts(catalog: Record<string, CatalogEntry>): GiftItem[] {
+export function buildGifts(
+  catalog: Record<string, CatalogEntry>,
+  tables: { items: Row[]; enchantExp: Row[] },
+): GiftItem[] {
+  const itemById = new Map(tables.items.map((r) => [r.ID, r]));
+  const expByKey = new Map<string, number>();
+  for (const r of tables.enchantExp) {
+    if (num(r.BasicStar) !== 0) continue;
+    expByKey.set(`${r.ItemSubType}|${r.ItemGrade}`, num(r.ExpValue));
+  }
   const out: GiftItem[] = [];
   for (const [id, e] of Object.entries(catalog)) {
     if (!/^present_0\d$/.test(e.subType ?? '') || e.characterLimit) continue;
-    const desc = e.desc?.en ?? '';
-    const m = GIFT_POINTS_RE.exec(desc);
-    if (!m) {
+    const item = itemById.get(id);
+    const points = item ? expByKey.get(`${item.ItemSubType}|${item.ItemGrade}`) : undefined;
+    if (!points) {
       throw new Error(
-        `hero-growth : cadeau ${id} (${e.name.en}) — points d'affinité introuvables dans « ${desc.slice(0, 80)} »`,
+        `hero-growth : cadeau ${id} (${e.name.en}) — aucune ligne ItemEnchantExpTemplet pour ` +
+          `(${item?.ItemSubType ?? '?'}, ${item?.ItemGrade ?? '?'}, BasicStar 0)`,
       );
     }
     out.push({
       ...itemRef(id, catalog),
-      points: Number(m[1].replace(/,/g, '')),
+      points,
       presentType: e.subType as string,
     });
   }
   if (!out.length) throw new Error('hero-growth : aucun cadeau d’affinité trouvé');
   return out.sort((a, b) => a.points - b.points || a.id.localeCompare(b.id));
+}
+
+/**
+ * Bonus du cadeau préféré : `TRUST_ENCHANT_INCREASE_VALUE` de `GameConfigTemplet`
+ * (50), que le client applique `× (Value × 0,01 + 1)` → 0,5. Absent ou non
+ * numérique → jette : un bonus muet fausserait tout le compte d'affinité.
+ */
+export function buildPreferredGiftBonus(gameConfig: Row[]): number {
+  const raw = gameConfig.find((r) => r.ID === 'TRUST_ENCHANT_INCREASE_VALUE')?.ValueString;
+  const value = Number(raw);
+  if (raw === undefined || raw.trim() === '' || !Number.isFinite(value)) {
+    throw new Error(
+      `hero-growth : GameConfigTemplet.TRUST_ENCHANT_INCREASE_VALUE inexploitable (« ${raw ?? 'absent'} »)`,
+    );
+  }
+  return value / 100;
 }
 
 /** Slots de skill qu'un palier de fusion monte SOLIDAIREMENT (le 23 = passif de fusion). */
@@ -399,7 +431,11 @@ export function buildHeroGrowth(inputs?: {
     xpFood: buildXpFood(catalog),
     xpCurve: cumulativeCurve(exp, 'TotalExp'),
     affinityCurve: cumulativeCurve(exp, 'TrustExp'),
-    gifts: buildGifts(catalog),
+    gifts: buildGifts(catalog, {
+      items: loadTable('ItemTemplet'),
+      enchantExp: loadTable('ItemEnchantExpTemplet'),
+    }),
+    preferredGiftBonus: buildPreferredGiftBonus(loadTable('GameConfigTemplet')),
     fusion: buildFusion(catalog),
     affinityStatLevels: buildAffinityStatLevels(loadTable('TrustRewardTemplet')),
   };

@@ -176,6 +176,10 @@
   "2000121": {
     "bonusStats": ["speed"]
   },
+  "2000129": {
+    "bonusStats": ["speed"],
+    "dot": true
+  },
   "2700003": {
     "bonusStats": ["speed"]
   },
