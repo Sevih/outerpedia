@@ -7,6 +7,28 @@
 
 ## 2026-10-17
 
+- **Relecture C21 (Opus) — Monad Gate au niveau et à l'adversité du nœud,
+  adversité de base de l'Infiltration ; validé.** Question du lot tranchée
+  par les tables et le client (événements `MGET_BATTLE` inclus, rattachés
+  par `EventGroupID` ; cubes `MGCT_BATTLE` signalés, leur lien vient du
+  serveur). Périmètre conforme (`021d0c6e`) : sous `data/`, seul
+  `encounters.json` ; aucun fichier de B57. Contrôles : typecheck, lint et
+  `format:check` verts, `NODE_ENV=development pnpm test`
+  `Tests 4026 passed (4026)`, `scripts/quick` 1148, `damage:check` 42 lignes
+  exactes. Rejeu indépendant sur `.gamedata/parsed` : les contextes
+  (`MonadGateStageLevel`, quatre `SpawnAdvantageRate_*`) des nœuds,
+  rejoints par `Row1..Row10` → `MonadGateNodeStageTemplet` en `groupBy`,
+  donnent 255 donjons atteints dont 196 extraits ; pour chacun, l'ensemble
+  des `ranks` est exactement celui des nœuds, sauf les cinq donjons
+  d'événement annoncés (74000021 +5, 74000501 +7, 74000502 +6, 74000504 +4,
+  74000507 +4), soit 200 donjons et 3 728 paliers comme l'entrée du lot.
+  Infiltration : les 45 donjons à nœud portent l'adv du nœud, `advLinked`
+  vaut exactement « un nœud de `LinkNode` a une adv » (33). La note
+  « Plus forte tant que des nœuds liés restent à nettoyer » ne se rend que
+  pour une cible qui porte le champ. **Reste à Sevih** : dans le
+  calculateur, une cible d'infiltration « Floor N » montre ses stats avec
+  l'adv et la note sous le sélecteur ; une autre cible ne bouge pas.
+  **Suite** : B57 (seul : `datagen:build`), puis A58.
 - **C21 — Monad Gate au niveau et à l'adversité du nœud, adversité de base
   de l'Infiltration (R1, R3).** Deux modes prennent le niveau et l'adv d'un
   NŒUD de leur carte, pas du donjon : le site sortait les 269 donjons
