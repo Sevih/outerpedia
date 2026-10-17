@@ -14,7 +14,7 @@
  *
  * Toute nouvelle correspondance de stat se déclare ICI, nulle part ailleurs.
  */
-import { PERCENT_STATS, RAW_FLAT_STATS } from '@/../datagen/lib/stats';
+import { PERCENT_STAT_SLUGS } from '@/../datagen/lib/stats';
 
 /** Slug de stat (perso OU buff) → abréviation canonique. */
 export const STAT_ABBR: Record<string, string> = {
@@ -98,13 +98,15 @@ const PCT_SUFFIX = new Set(['atk', 'def', 'hp', 'buff_chance', 'buff_resist']);
 /**
  * Vue d'affichage d'une option de stat des pools d'équipement : clé (abréviation,
  * suffixée « % » pour la variante rate des stats flat) + nature % (affichage et
- * échelle per-mille ÷10). EFF/RES en flat = valeurs brutes (cf. RAW_FLAT_STATS).
+ * échelle per-mille ÷10) : variante rate, ou stat de la liste du client
+ * (`IsPercentStat`, cf. PERCENT_STAT_TYPES). EFF/RES en flat n'y sont pas :
+ * valeurs brutes.
  */
 export function statOptionView(
   stat: string,
   mode: 'flat' | 'rate' | 'none',
 ): { key: string; percent: boolean } {
-  const percent = mode === 'rate' || (PERCENT_STATS.has(stat) && !RAW_FLAT_STATS.has(stat));
+  const percent = mode === 'rate' || PERCENT_STAT_SLUGS.has(stat);
   const abbr = statAbbr(stat);
   return { key: percent && PCT_SUFFIX.has(stat) ? `${abbr}%` : abbr, percent };
 }

@@ -29,6 +29,7 @@
  */
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
+import { skillPlaceholderIds } from '../lib/placeholders';
 import { integratedIds } from './roster';
 
 /** Miroir minimal d'un skill du catalogue wiki (les champs consommés). */
@@ -66,11 +67,7 @@ const POPOVER_TYPES = new Set(['first', 'second', 'ultimate']);
  *  langues confondues — les gabarits partagent leurs placeholders, l'union
  *  est une sécurité, pas un pari). */
 function referencedIds(desc: Record<string, string>): Set<string> {
-  const out = new Set<string>();
-  for (const text of Object.values(desc)) {
-    for (const m of text.matchAll(/\[Buff_[CVT]_(.+?)\]/g)) out.add(m[1]);
-  }
-  return out;
+  return skillPlaceholderIds(Object.values(desc));
 }
 
 /** Le validé : la source des artefacts wiki hors chaîne refresh en dry. */

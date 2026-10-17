@@ -37,6 +37,7 @@ import type {
 import type { Lang } from '@/lib/i18n/config';
 import type { TFunction } from '@/i18n';
 import { lRec } from '@/lib/i18n/localize';
+import { fillValuePlaceholders } from '@/../datagen/lib/placeholders';
 import { statOptionView } from '@/lib/stats';
 import { statName } from '@/lib/data/stat-glossary';
 import { GRADE_RANK } from '@/lib/data/gear-order';
@@ -143,36 +144,16 @@ export function slugifyEquipment(name: string): string {
     .replace(/^-+|-+$/g, '');
 }
 
-// --- Placeholders des passifs (miroir client de datagen/lib/buff.ts) ----------
+// --- Placeholders des passifs (règle de datagen/lib/placeholders.ts) ----------
 
 /**
  * Remplit un template de passif (`[Value]`, `[Rate]`, `[Turn]` + variantes)
  * avec les valeurs d'un palier. `color` enrobe chaque valeur de
  * `<color=#28d9ed>` (rendue par `renderGameColors`, src/components/ui/GameText.tsx).
+ * Règle unique dans `datagen/lib/placeholders.ts` ; ici, couleur activée par défaut.
  */
 export function fillPlaceholders(template: string, v: BuffValues, color = true): string {
-  const w = (s: string) => (color ? `<color=#28d9ed>${s}</color>` : s);
-  const f = (s: string | undefined) => (s == null ? '?' : w(s));
-  const fs = (s: string | undefined, sign: '+' | '-') => (s == null ? '?' : w(`${sign}${s}`));
-  return template
-    .replace(/\[\+Value5\]/gi, fs(v.value5, '+'))
-    .replace(/\[-Value5\]/gi, fs(v.value5, '-'))
-    .replace(/\[Value5\]/gi, f(v.value5))
-    .replace(/\[\+Value4\]/gi, fs(v.value4, '+'))
-    .replace(/\[-Value4\]/gi, fs(v.value4, '-'))
-    .replace(/\[Value4\]/gi, f(v.value4))
-    .replace(/\[\+Value2\]/gi, fs(v.value2, '+'))
-    .replace(/\[-Value2\]/gi, fs(v.value2, '-'))
-    .replace(/\[Value2\]/gi, f(v.value2))
-    .replace(/\[RATE\]/gi, f(v.rate))
-    .replace(/\[Rate1?\]/g, f(v.rate))
-    .replace(/\[\+Value\]/gi, fs(v.value, '+'))
-    .replace(/\[-Value\]/gi, fs(v.value, '-'))
-    .replace(/\[Value\]/gi, f(v.value))
-    .replace(/\[\+Turn1?\]/gi, f(v.turn))
-    .replace(/\[-Turn\]/gi, fs(v.turn, '-'))
-    .replace(/\[Turn2\]/gi, f(v.turn2))
-    .replace(/\[Turn\]/gi, f(v.turn));
+  return fillValuePlaceholders(template, v, color);
 }
 
 /** Un palier de passif résolu pour l'affichage. */

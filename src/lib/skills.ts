@@ -1,4 +1,5 @@
 import type { SkillBuffVars } from '@contracts';
+import { fillSkillPlaceholders } from '@/../datagen/lib/placeholders';
 
 /**
  * Raccourci de skill ÉDITORIAL → type de skill canonique (clé `Skill.type`).
@@ -58,18 +59,14 @@ export function splitChainDual(desc: string): { chain: string; dual: string } {
  * Résout les placeholders `[Buff_C/V/T_<id>]` d'une description de compétence
  * avec les valeurs déjà extraites du niveau (`levels[i].vars`).
  *
- * Même logique que la primitive datagen `resolveSkillPlaceholders`, mais côté
- * APP : les valeurs viennent de la donnée committée, pas des tables de jeu.
- *   C = chance · V = valeur · T = tours. Valeur absente → « ? ».
+ * La règle est celle du datagen (`fillSkillPlaceholders`, module pur partagé) :
+ * crochet insensible à la casse comme dans le client (`[buff_v_…]` des skills
+ * de monstres), C = chance · V = valeur · T = tours, valeur absente → « ? ».
  * Les balises `<color=…>` du template sont conservées (le rendu les stylise).
  */
 export function resolveSkillText(
   template: string,
   vars: Record<string, SkillBuffVars> = {},
 ): string {
-  return template.replace(/\[Buff_([CVT])_(.+?)\]/g, (_m, kind: string, buffId: string) => {
-    const v = vars[buffId];
-    const val = kind === 'C' ? v?.c : kind === 'T' ? v?.t : v?.v;
-    return val ?? '?';
-  });
+  return fillSkillPlaceholders(template, (buffId) => vars[buffId]);
 }

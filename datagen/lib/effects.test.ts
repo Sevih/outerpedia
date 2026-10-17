@@ -203,7 +203,7 @@ describe('resolveKeyWinners — vote croisé (non-régression c9ce852)', () => {
       ['debuff|BT_AGGRO', [['taunted', 10]]],
       ['debuff|BT_SEALED_RESURRECTION', [['taunted', 1]]],
     ]);
-    const claims = new Map([['BT_SEALED_RESURRECTION', 'EXTINCTION']]);
+    const claims = new Map([['debuff|BT_SEALED_RESURRECTION', 'EXTINCTION']]);
     const byKey = resolveKeyWinners(votes, claims);
     // La clé volée est RÉASSIGNÉE à la création ; le foyer réel ne bouge pas.
     expect(byKey.debuff.get('BT_SEALED_RESURRECTION')).toBe('EXTINCTION');
@@ -222,7 +222,7 @@ describe('resolveKeyWinners — vote croisé (non-régression c9ce852)', () => {
   it('pas de vol quand le vote n’est PAS croisé : la clé est le foyer du gagnant', () => {
     // L'effet gagne SON propre foyer — la création curée ne prime pas.
     const votes = votesOf([['buff|BT_COOL_CHARGE', [['cooldown_up', 3]]]]);
-    const claims = new Map([['BT_COOL_CHARGE', 'CREATION_CUREE']]);
+    const claims = new Map([['buff|BT_COOL_CHARGE', 'CREATION_CUREE']]);
     const byKey = resolveKeyWinners(votes, claims);
     expect(byKey.buff.get('BT_COOL_CHARGE')).toBe('cooldown_up');
   });
@@ -238,6 +238,31 @@ describe('resolveKeyWinners — vote croisé (non-régression c9ce852)', () => {
       ],
     ]);
     expect(resolveKeyWinners(votes, new Map()).buff.get('BT_STAT|ST_ATK')).toBe('atk_up');
+  });
+
+  it('réclamant compté PAR CÔTÉ (cas réel BT_AP_CHARGE) : un buff seul, deux débuffs', () => {
+    // Côté buff, le vote croisé de SYS_BUFF_CHARGE_CP (foyer BT_CP_CHARGE) perd
+    // devant le seul réclamant buff ; côté débuff, deux réclamants : pas de
+    // réclamant unique, le vote reste.
+    const votes = votesOf([
+      ['buff|BT_CP_CHARGE', [['SYS_BUFF_CHARGE_CP', 40]]],
+      ['buff|BT_AP_CHARGE', [['SYS_BUFF_CHARGE_CP', 4]]],
+      ['debuff|BT_AP_CHARGE', [['SYS_BUFF_REDUCE_AP', 6]]],
+    ]);
+    const claims = new Map([['buff|BT_AP_CHARGE', 'SYS_BUFF_CHARGE_AP']]);
+    const byKey = resolveKeyWinners(votes, claims);
+    expect(byKey.buff.get('BT_AP_CHARGE')).toBe('SYS_BUFF_CHARGE_AP');
+    expect(byKey.debuff.get('BT_AP_CHARGE')).toBe('SYS_BUFF_REDUCE_AP');
+    expect(byKey.buff.get('BT_CP_CHARGE')).toBe('SYS_BUFF_CHARGE_CP');
+  });
+
+  it('une réclamation d’un côté ne vole pas le slot de l’autre côté', () => {
+    const votes = votesOf([
+      ['debuff|BT_AGGRO', [['taunted', 10]]],
+      ['debuff|BT_SEALED_RESURRECTION', [['taunted', 1]]],
+    ]);
+    const claims = new Map([['buff|BT_SEALED_RESURRECTION', 'EXTINCTION']]);
+    expect(resolveKeyWinners(votes, claims).debuff.get('BT_SEALED_RESURRECTION')).toBe('taunted');
   });
 
   it('déclinaison numérotée : BT_COOL2_CHARGE hérite de BT_COOL_CHARGE côté par côté', () => {

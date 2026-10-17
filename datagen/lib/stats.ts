@@ -11,41 +11,40 @@
  * Échelles confirmées par une logique éprouvée (sets : Crit +15%,
  * Counter +12%, Bursting AP +25…).
  */
-
-/** Stats de nature POURCENT : valeurs per-mille quel que soit l'ApplyingType. */
-export const PERCENT_STATS = new Set([
-  'critical_rate',
-  'critical_dmg',
-  'critical_dmg_rate',
-  'counter_rate',
-  'vampiric',
-  'e_cri_dmg_reduce',
-  'enemy_critical_dmg_reduce',
-  'pierce_power_rate',
-  'buff_chance',
-  'buff_resist',
-  'effectiveness',
-  'resilience',
-  'dmg_reduce',
-  'dmg_reduce_rate',
-  'dmg_boost',
-  'damage_boost',
-  'get_gold_rate',
-  'avoid_add_cap',
-  'avoid_subtract_cap',
-]);
+import { slugEnum } from './enums';
 
 /**
- * Stats % dont les valeurs FLAT des pools d'équipement (`ItemOptionTemplet`,
- * OAT_ADD) sont BRUTES et sans signe % : EFF/RES en main stat d'accessoire
- * (« EFF 21 », oracle hérité `percent:false`). Leurs valeurs de SET
- * (`ItemSpecialOptionTemplet`) restent per-mille (180 → 18 %) — deux échelles
- * selon le contexte, confirmées ligne à ligne contre l'oracle.
+ * Stats que le client affiche en POURCENT quel que soit l'`ApplyingType` :
+ * la liste de `CUtilUI.IsPercentStat` (13 `ST_*`, recopiée telle quelle).
+ * Hors liste, une valeur `OAT_ADD` est brute — EFF/RES plats (« EFF 21 ») le
+ * sont parce que le client ne les classe pas en %, pas par une exception.
  */
-export const RAW_FLAT_STATS = new Set(['buff_chance', 'buff_resist']);
+export const PERCENT_STAT_TYPES: ReadonlySet<string> = new Set([
+  'ST_DMG_REDUCE_RATE',
+  'ST_CRITICAL_RATE',
+  'ST_CRITICAL_DMG_RATE',
+  'ST_PIERCE_POWER_RATE',
+  'ST_VAMPIRIC',
+  'ST_HIT_HP_RECOVERY',
+  'ST_GET_GOLD_RATE',
+  'ST_GET_CHARACTER_EXP_RATE',
+  'ST_COUNTER_RATE',
+  'ST_AVOID_ADD_CAP',
+  'ST_AVOID_SUBTRACT_CAP',
+  'ST_DMG_BOOST',
+  'ST_E_CRI_DMG_REDUCE',
+]);
 
-/** Formate une valeur de stat selon son type d'application et sa nature. */
+/** La même liste en slugs (`slugEnum`), la forme que portent les données. */
+export const PERCENT_STAT_SLUGS: ReadonlySet<string> = new Set(
+  [...PERCENT_STAT_TYPES].map((t) => slugEnum(t)),
+);
+
+/** Formate une valeur de stat selon son type d'application et sa nature : la
+ *  règle de `CUtilUI.GetStatValue` (`OAT_RATE` ou stat de la liste → valeur/10
+ *  en %, sinon la valeur). */
 export function formatStatValue(applyingType: string, value: number, stat?: string): string {
-  if (applyingType === 'OAT_RATE' || (stat && PERCENT_STATS.has(stat))) return `${value / 10}%`;
+  if (applyingType === 'OAT_RATE' || (stat && PERCENT_STAT_SLUGS.has(stat)))
+    return `${value / 10}%`;
   return String(value);
 }

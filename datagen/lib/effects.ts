@@ -325,10 +325,13 @@ interface EffectGlossary {
  * COMPOSITE a fait fuiter son tooltip dans un Type qui n'est pas le sien (le
  * buff de boss Q18, typé BT_SEALED_RESURRECTION, porte le tooltip « Taunted »
  * → clé BT_SEALED_RESURRECTION résolue en Taunted). Quand ce Type est par
- * ailleurs réclamé par UNE SEULE création curée (mécanique sans texte, via
- * `keys`), c'est ELLE l'intention : on réassigne la clé à la création (on ne
- * se contente pas de retirer le vote — resolveEffectKey basculerait sinon sur
- * le côté opposé avant d'atteindre la création, cf. BT_COOL_CHARGE).
+ * ailleurs réclamé, DU CÔTÉ DU SLOT, par UNE SEULE création curée (mécanique
+ * sans texte, via `keys` ; `soleCuratedClaimant` est indexé `côté|clé`),
+ * c'est ELLE l'intention : on réassigne la clé à la création (on ne se
+ * contente pas de retirer le vote — resolveEffectKey basculerait sinon sur le
+ * côté opposé avant d'atteindre la création, cf. BT_COOL_CHARGE). Le compte
+ * se fait par côté : `BT_AP_CHARGE` a un réclamant buff (SYS_BUFF_CHARGE_AP)
+ * et deux débuff — le buff prend la clé, le débuff garde le vote.
  *
  * Puis : les déclinaisons NUMÉROTÉES d'un type (`BT_COOL2_CHARGE` = le CD du
  * skill 2, même mécanique que `BT_COOL_CHARGE`) héritent, côté par côté, de la
@@ -353,7 +356,7 @@ export function resolveKeyWinners(
   for (const [slot, m] of votes) {
     const [side, key] = [slot.slice(0, slot.indexOf('|')), slot.slice(slot.indexOf('|') + 1)];
     const winner = [...m.entries()].sort((a, b) => b[1] - a[1])[0][0];
-    const claimant = soleCuratedClaimant.get(key);
+    const claimant = soleCuratedClaimant.get(slot);
     const crossVote = dominantSlot(winner) !== slot;
     byKey[side as EffectSide].set(key, claimant && crossVote ? claimant : winner);
   }
@@ -587,29 +590,40 @@ export function buildEffectGlossary(): EffectGlossary {
     m.set(effId, (m.get(effId) ?? 0) + 1);
     votes.set(slot, m);
   }
-  // Réclamations curées : clé type → l'UNIQUE création curée qui la réclame
-  // (via `keys`). La règle de résolution vit dans `resolveKeyWinners` (pure,
-  // testée sans tables) ; la lecture passe par le loader partagé du curé.
-  const soleCuratedClaimant = new Map<string, string>();
-  {
-    const cur = loadCuratedEffects();
-    const claimCount = new Map<string, number>();
-    for (const c of Object.values(cur))
-      for (const k of c.keys ?? []) claimCount.set(k, (claimCount.get(k) ?? 0) + 1);
-    for (const [id, c] of Object.entries(cur))
-      for (const k of c.keys ?? []) if (claimCount.get(k) === 1) soleCuratedClaimant.set(k, id);
-  }
-  const byKey = resolveKeyWinners(votes, soleCuratedClaimant);
   // Nature RÉELLE des effets mécaniques : leur ligne de définition ne porte
   // pas IsDebuff (SYS_BUFF_EXTEND_DEBUFF_UP « Debuff Duration Increase » est
   // un DEBUFF — il allonge les debuffs de l'ennemi) → nature majoritaire des
   // buffs qui les utilisent. Les statuts nommés (tooltip) gardent l'IsDebuff
-  // du jeu, qui fait foi.
+  // du jeu, qui fait foi. Posée AVANT les réclamations, qui lisent la nature.
   for (const eff of effects.values()) {
     if (eff.origin !== 'type') continue;
     const nv = natureVotes.get(eff.id);
     if (nv && nv.buff !== nv.debuff) eff.isDebuff = nv.debuff > nv.buff;
   }
+  // Réclamations curées, PAR CÔTÉ : slot `côté|clé` → l'UNIQUE création curée
+  // de ce côté qui la réclame (via `keys`). Nature d'une entrée : son
+  // `isDebuff`, sinon celle de l'effet du glossaire, sinon buff — la règle de
+  // `curatedKeyMap` (générateur d'équipement) et de `curatedKeyIndex` (site).
+  // Compter toutes natures confondues noyait le seul réclamant buff de
+  // `BT_AP_CHARGE` (SYS_BUFF_CHARGE_AP) sous les deux réclamants débuff : le
+  // vote croisé gagnait et `{B/BT_AP_CHARGE}` disait « Gain Chain Points ».
+  // La règle de résolution vit dans `resolveKeyWinners` (pure, testée sans
+  // tables) ; la lecture passe par le loader partagé du curé.
+  const soleCuratedClaimant = new Map<string, string>();
+  {
+    const cur = loadCuratedEffects();
+    const sideOf = (id: string, isDebuff?: boolean): EffectSide =>
+      (isDebuff ?? effects.get(id)?.isDebuff) ? 'debuff' : 'buff';
+    const claimCount = new Map<string, number>();
+    const slotsOf = (id: string, c: (typeof cur)[string]) =>
+      (c.keys ?? []).map((k) => `${sideOf(id, c.isDebuff)}|${k}`);
+    for (const [id, c] of Object.entries(cur))
+      for (const slot of slotsOf(id, c)) claimCount.set(slot, (claimCount.get(slot) ?? 0) + 1);
+    for (const [id, c] of Object.entries(cur))
+      for (const slot of slotsOf(id, c))
+        if (claimCount.get(slot) === 1) soleCuratedClaimant.set(slot, id);
+  }
+  const byKey = resolveKeyWinners(votes, soleCuratedClaimant);
   // 2) Clés NOM : chaque effet est adressable par son nom EN normalisé
   //    (`RUSH`, `POLAR_NIGHT`, `AGILE_RESPONSE`…) — sans écraser une clé type.
   for (const [id, eff] of effects) {

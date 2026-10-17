@@ -18,7 +18,7 @@ import type { Lang } from '@/lib/i18n/config';
 import { lRec } from '@/lib/i18n/localize';
 import { STAT_ABBR, statOptionView } from '@/lib/stats';
 import { statName } from '@/lib/data/stat-glossary';
-import { PERCENT_STATS } from '@/../datagen/lib/stats';
+import { PERCENT_STAT_SLUGS } from '@/../datagen/lib/stats';
 import {
   getAmuletFamilies,
   getEEViews,
@@ -253,15 +253,20 @@ function toStatOptions(o: Option, lang: Lang): StatOption[] {
   }
   const out: StatOption[] = [];
   const statSlug = eff.stat ?? eff.type;
-  const percent = eff.mode === 'rate' || PERCENT_STATS.has(statSlug);
-  const sc = (v: number) => (percent ? v / 10 : v);
+  // Stat portée par un buff : le client l'affiche par `GetStatBuffValue`, soit
+  // la valeur ABSOLUE (« Effectiveness vs Fire 30 », pas « −3 % ») et la
+  // nature % de `GetStatValue`.
+  const percent = statOptionView(statSlug, eff.mode).percent;
+  const sc = (v: number) => (percent ? Math.abs(v) / 10 : Math.abs(v));
   const condLabel = o.label ? lRec(o.label, lang) || o.label.en : undefined;
-  out.push(simpleStatOption(statSlug, percent, eff.value, lang, o.levels?.map(sc), condLabel));
+  out.push(
+    simpleStatOption(statSlug, percent, Math.abs(eff.value), lang, o.levels?.map(sc), condLabel),
+  );
   if (o.factor && o.max) {
     const levels = Array.from({ length: ENHANCE.maxEnhance + 1 }, (_, n) =>
       n === 0 ? 0 : Math.min(o.max ?? 0, o.value + (o.factor ?? 0) * n),
     );
-    out.push(simpleStatOption(o.stat, PERCENT_STATS.has(o.stat), levels[0], lang, levels));
+    out.push(simpleStatOption(o.stat, PERCENT_STAT_SLUGS.has(o.stat), levels[0], lang, levels));
   }
   return out;
 }

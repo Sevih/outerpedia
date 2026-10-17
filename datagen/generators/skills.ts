@@ -28,6 +28,7 @@ import {
   type SkillBuffVars,
 } from '../lib/buff';
 import { effectShape, type EffectShape } from '../lib/effects';
+import { skillPlaceholderIds, unsignedValueIds } from '../lib/placeholders';
 import { slugEnum } from '../lib/enums';
 import { isMain } from '../lib/is-main';
 import type { LangDict } from '../lib/lang';
@@ -222,16 +223,19 @@ export function assembleSkill(
   // Vars des buffs référencés par la DESC mais portés par un AUTRE skill
   // (formes de combat : le S1 de Demiurge Luna cite `[Buff_T_2000120_1_1]`,
   // buff du kit jumeau) — résolution GLOBALE par id de buff, niveau à niveau.
-  // Balaie aussi les desc PAR NIVEAU (leurs placeholders doivent être résolus).
+  // Balaie aussi les desc PAR NIVEAU (leurs placeholders doivent être résolus),
+  // dans les SIX langues (le JP de 9101 cite un id que l'anglais ne cite pas).
+  // Le signe d'un `[Buff_V]` tombe derrière « by » (`unsignedValueIds`, sur
+  // l'anglais) : ces ids sont recalculés en absolu, vars du niveau comprises.
   if (skill.desc || skill.levels.some((l) => l.desc)) {
-    const refsOf = (t?: string): string[] =>
-      t ? [...t.matchAll(/\[Buff_[CVT]_(.+?)\]/g)].map((m) => m[1]) : [];
-    const baseRefs = refsOf(skill.desc?.en);
+    const unsigned = unsignedValueIds([skill.desc?.en, ...skill.levels.map((l) => l.desc?.en)]);
+    const baseTexts = Object.values(skill.desc ?? {});
     for (const lv of skill.levels) {
-      const refIds = new Set([...baseRefs, ...refsOf(lv.desc?.en)]);
+      const refIds = skillPlaceholderIds([...baseTexts, ...Object.values(lv.desc ?? {})]);
       for (const refId of refIds) {
-        if (lv.vars?.[refId]) continue;
-        const v = skillBuffVars(buffs, refId, lv.level);
+        const absolute = unsigned.has(refId);
+        if (lv.vars?.[refId] && !absolute) continue;
+        const v = skillBuffVars(buffs, refId, lv.level, { absolute });
         if (v.c || v.v || v.t) (lv.vars ??= {})[refId] = v;
       }
     }

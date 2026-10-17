@@ -34,6 +34,7 @@
  */
 import type { LangDict } from '../lib/lang';
 import { loadBuffIndex, skillBuffVars } from '../lib/buff';
+import { fillSkillPlaceholders, unsignedValueIds } from '../lib/placeholders';
 import { readCuratedJson } from '../lib/json';
 import { statSlug } from '../lib/effects';
 import { slugEnum } from '../lib/enums';
@@ -1726,14 +1727,10 @@ export function buildEncounters(): EncountersData {
   const geas: Record<string, GuildRaidGeas> = {};
   const fillGeasPlaceholders = (dict: LangDict): LangDict => {
     const out = { ...dict };
+    const unsigned = unsignedValueIds([dict.en]);
     for (const lang of Object.keys(out) as Array<keyof LangDict>) {
-      out[lang] = (out[lang] ?? '').replace(
-        /\[buff_([cvt])_(.+?)\]/gi,
-        (_m, kind: string, bid: string) => {
-          const vars = skillBuffVars(buffs, bid, 1);
-          const k = kind.toLowerCase();
-          return (k === 'c' ? vars.c : k === 't' ? vars.t : vars.v) ?? '?';
-        },
+      out[lang] = fillSkillPlaceholders(out[lang] ?? '', (bid) =>
+        skillBuffVars(buffs, bid, 1, { absolute: unsigned.has(bid) }),
       );
     }
     return out;

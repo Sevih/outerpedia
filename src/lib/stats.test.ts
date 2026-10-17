@@ -1,7 +1,8 @@
 import { describe, expect, it } from 'vitest';
 import { statAbbr, statIconSprite, statOptionView } from '@/lib/stats';
 import { statName } from '@/lib/data/stat-glossary';
-import { optionStatLabel } from '@/lib/data/equipment';
+import { fillPlaceholders, optionStatLabel } from '@/lib/data/equipment';
+import { fillValuePlaceholders } from '@/../datagen/lib/placeholders';
 import { getEquipmentPools } from '@/lib/data/equipment-pools';
 
 describe('statAbbr', () => {
@@ -28,7 +29,7 @@ describe('statOptionView', () => {
     expect(statOptionView('critical_rate', 'none')).toEqual({ key: 'CHC', percent: true });
   });
 
-  it('EFF/RES flat sont BRUTS (RAW_FLAT_STATS) : pas de %', () => {
+  it('EFF/RES flat sont BRUTS : le client ne les classe pas en % (IsPercentStat)', () => {
     expect(statOptionView('buff_chance', 'flat')).toEqual({ key: 'EFF', percent: false });
   });
 
@@ -78,5 +79,14 @@ describe('statName', () => {
 
   it('replie sur l’entrée telle quelle pour un slug inconnu', () => {
     expect(statName('__inconnu__', 'en')).toBe('__inconnu__');
+  });
+});
+
+describe('fillPlaceholders (site) — la règle du module partagé, couleur par défaut', () => {
+  it('identique à fillValuePlaceholders avec couleur, et sans couleur sur demande', () => {
+    const v = { value: '2%', rate: '50%', turn: '1', value2: '3', turn2: '2' };
+    const tpl = '[Value] [+Value] [-Value] [Rate] [Turn] [+Turn] [Value2] [Turn2] [Value4]';
+    expect(fillPlaceholders(tpl, v)).toBe(fillValuePlaceholders(tpl, v, true));
+    expect(fillPlaceholders(tpl, v, false)).toBe(fillValuePlaceholders(tpl, v, false));
   });
 });

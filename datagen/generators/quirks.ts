@@ -115,7 +115,9 @@ export function buildQuirks(): QuirksData {
       const bf = r.BuffID ? buffIndex.get(r.BuffID) : undefined;
       if (bf) {
         const stat = bf.StatType && bf.StatType !== 'ST_NONE' ? slugEnum(bf.StatType) : undefined;
-        return formatStatValue(bf.ApplyingType ?? '', num(bf.Value), stat);
+        // `GetStatBuffValue` du client : valeur ABSOLUE (le texte du nœud dit
+        // déjà « Reduces … by »), nature % de `GetStatValue`.
+        return formatStatValue(bf.ApplyingType ?? '', Math.abs(num(bf.Value)), stat);
       }
       // Buffs de compte (EBT_*) : magnitude brute, le `%` éventuel est déjà
       // dans le texte de description.

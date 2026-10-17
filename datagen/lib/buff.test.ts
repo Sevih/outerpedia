@@ -166,3 +166,44 @@ describe('skillBuffVars', () => {
     expect(skillBuffVars(skillIndex, 'NOPE', 1)).toEqual({});
   });
 });
+
+describe('[Buff_V] : signe et « % » du client (décision du 17/10)', () => {
+  const row = (BuffID: string, ApplyingType: string, StatType: string, Value: string): Row => ({
+    BuffID,
+    Level: '1',
+    ApplyingType,
+    StatType,
+    Value,
+    CreateRate: '1000',
+    TurnDuration: '1',
+  });
+  const idx = new Map<string, Row[]>([
+    ['ap_down', [row('ap_down', 'OAT_ADD', 'ST_NONE', '-20')]],
+    ['res_down', [row('res_down', 'OAT_ADD', 'ST_BUFF_RESIST', '-50')]],
+    ['cool_up', [row('cool_up', 'OAT_ADD', 'ST_NONE', '-1')]],
+    ['crit', [row('crit', 'OAT_ADD', 'ST_CRITICAL_RATE', '80')]],
+    ['atk_down', [row('atk_down', 'OAT_RATE', 'ST_ATK', '-300')]],
+  ]);
+
+  it('« by » + valeur négative → absolu', () => {
+    expect(resolveSkillPlaceholders('decreases AP by [Buff_V_ap_down]', idx, 1)).toBe(
+      'decreases AP by 20',
+    );
+  });
+  it('sans « by » → signe du client gardé', () => {
+    expect(resolveSkillPlaceholders('[buff_v_res_down] boss Resilience', idx, 1)).toBe(
+      '-50 boss Resilience',
+    );
+  });
+  it('« increases … by » + valeur négative → signe gardé', () => {
+    expect(
+      resolveSkillPlaceholders('Increases the cooldown by [Buff_V_cool_up] turn', idx, 1),
+    ).toBe('Increases the cooldown by -1 turn');
+  });
+  it('« % » par IsPercentStat (pas « 80 » pour 8 % de CHC) ; OAT_RATE toujours en magnitude', () => {
+    expect(skillBuffVars(idx, 'crit', 1).v).toBe('8%');
+    expect(skillBuffVars(idx, 'res_down', 1).v).toBe('-50');
+    expect(skillBuffVars(idx, 'atk_down', 1).v).toBe('30%');
+    expect(skillBuffVars(idx, 'res_down', 1, { absolute: true }).v).toBe('50');
+  });
+});

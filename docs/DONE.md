@@ -7,6 +7,117 @@
 
 ## 2026-10-17
 
+- **C22 — Primitives texte et pourcentage : un seul résolveur de
+  placeholders, la liste « % » du client, le signe de `[Buff_V]`,
+  `{B/BT_AP_CHARGE}`.** Constats R6, O3, O4, O14, O15, R8, R19 (revue
+  « génération des données ») et M8 (revue « logique du site »), décisions
+  de Sevih du 15/10 (R19 par côté) et du 17/10 (O3 et la règle `[Buff_V]`
+  d'O4 dans le lot : signe du client, « % » par `IsPercentStat`, signe
+  retiré derrière « by » sauf « increase(s) / raise(s) … by »).
+  **Résolveur** : nouveau module pur `datagen/lib/placeholders.ts` (ni
+  `node:fs` ni tables, importé par le site comme `datagen/lib/stats`) —
+  `fillValuePlaceholders` (la famille `[Value]` / `[Rate]` / `[Turn]`,
+  couleur en paramètre, commentaire `[+Turn]` d'A58 repris tel quel),
+  `fillSkillPlaceholders` (`[Buff_C/V/T_<id>]` par une fonction de lecture,
+  crochet insensible à la casse comme `GetSkillDescReplaceText`, l'id gardé
+  tel qu'écrit), `skillPlaceholderIds` (relevé des ids sur toutes les
+  langues) et `unsignedValueIds` (la règle « by »), plus les types
+  `BuffValues` / `SkillBuffVars`, réexportés de `buff.ts`.
+  `resolveSkillPlaceholders` (`buff.ts`), `resolveSkillText`
+  (`src/lib/skills.ts`), `fillGeasPlaceholders` (`encounters.ts`), `refsOf`
+  (`generators/skills.ts`) et `referencedIds` (`damage/skill-descs.ts`)
+  passent par lui ; `fillPlaceholders` reste exporté de `buff.ts` (sans
+  couleur) et de `src/lib/data/equipment.ts` (avec), en simples délégations.
+  Un gabarit qui écrit déjà le « - » devant le placeholder (deux geas en
+  chinois, « 效果抵抗-[buff_v_…] ») ne le voit pas doublé en « --50 » :
+  repéré au premier build, corrigé dans le module. **`[Buff_V]`**
+  (`skillValue` de `buff.ts`) : `OAT_RATE` → magnitude/10 en %, sinon valeur
+  signée, « % » par `formatStatValue` (règle de `GetStatValue`) ;
+  `skillBuffVars` prend `{ absolute }`, posé par le générateur de skills et
+  les geas d'après le texte anglais (décision par id, valable pour les six
+  langues). `isPermille` / `fmtValue` ne servent plus que `[Value]`,
+  `formatRowValue` (chips) et le contrat solver, inchangés. **Ids dont la
+  règle « by » retire le signe** (anglais, signe du client → affiché) :
+  `common_monster_buff_186` (monstre 110842) « decreases all enemies' AP by
+  -20 » → « … by 20 » ; `geis_res_down_3` (geas 14) « Reduces the
+  Resilience of boss monsters by -200 » → « … by 200 » ;
+  `geis_turn_reduce_cp_3` (geas 26) « Reduces Chain Points by -30 at the end
+  of a boss monster's turn » → « … by 30 … » ; `geis_turn_reduce_cp_1`
+  (geas 86) « … reduces Chain Points of allies by -10 » → « … by 10 ».
+  Comme ces quatre textes s'affichaient déjà sans signe, ils ne changent
+  pas. **« increase … by » + valeur négative, signe gardé (cas à part)** :
+  `roguelight_060` (monstre 160039) « Increases the cooldown of Darkness
+  Domination by 1 turn(s) » → « … by -1 turn(s) », comme le client.
+  **Signe gardé sans « by »** : « -50 boss Resilience » (geas 40),
+  « -225 ally Effectiveness » (geas 41), « Core Overdrive: -15 Chain Points
+  for enemy upon death » (monstre 132309). **R6** : les 77 skills de
+  monstres à `[buff_v/c/t_…]` en minuscules sont résolus par le site
+  (152072 « heals the caster by 10% »), `monster-skills.json` garde son
+  texte brut. **O15** : 9101 (JP, chance de 30 % à 50 % selon le niveau) et 10004 (JP,
+  13 %) gagnent leurs `vars` ; le même assembleur résout aussi 10 textes JP
+  et 4 ZH de monstres qui affichaient « ? » (110431-110433, 131661, 132113,
+  134010, 151022, 153803, 160601, 160602). **Textes rendus qui changent**
+  (skill × niveau, plus les geas) : en 81, jp 99, kr 81, zh 81, fr 81,
+  es 81 — persos jp 10 ; monstres jp 87, zh 81, en/kr/fr/es 79 chacun (dont
+  77 par R6) ; geas 2 par langue hors zh. **Liste « % »** (O4, R8, M8) :
+  `PERCENT_STAT_TYPES` (13 `ST_*` d'`IsPercentStat`) et sa vue
+  `PERCENT_STAT_SLUGS` calculée par `slugEnum` dans `datagen/lib/stats.ts`,
+  `formatStatValue` = `GetStatValue` ; `PERCENT_STATS` et `RAW_FLAT_STATS`
+  disparaissent. `statOptionView` et `toStatOptions` la lisent ; l'option
+  principale d'EE portée par un buff passe par `statOptionView(stat, mode)`
+  et la valeur absolue (`GetStatBuffValue`). `levelValue` des quirks prend
+  la valeur absolue sur `IOT_BUFF`. **R19** : dans `buildEffectGlossary`,
+  la correction de nature par `natureVotes` passe avant les réclamations,
+  comptées par slot `côté|clé` (nature : `isDebuff` de l'entrée, sinon
+  l'effet du glossaire, sinon buff) ; `resolveKeyWinners` lit le réclamant
+  du slot. **Vérification** : `pnpm typecheck` et `pnpm lint` sans sortie
+  (exit 0), `pnpm test` `Tests 4094 passed (4094)`. Nouveaux tests :
+  `placeholders.test.ts` (casse, ids multilingues, « - » non doublé, règle
+  « by » sur fixture : « by » + négatif → absolu, sans « by » → signe,
+  « increases by » + négatif → signe), `buff.test.ts` (la même règle de bout
+  en bout, CHC 80 → 8 %), `stats.test.ts` des deux côtés,
+  `effects.test.ts` (cas réel `BT_AP_CHARGE`), `src/lib/skills.test.ts` sur
+  la donnée réelle (aucun placeholder bien formé brut dans
+  `monster-skills.json`, aucun placeholder sans valeur dans `skills.json`,
+  toutes langues). Rejeux du 09/10 (avant → après) : `unresolved.mjs`
+  teste l'ancienne regex sur la donnée et dit toujours 138 ; par
+  `resolveSkillText`, 0 placeholder bien formé brut. `quirks-values.mts`
+  14 → 4 : sa copie de `levelValue` n'a pas la valeur absolue, et
+  `quirks.json` porte bien 4 % / 6 % sur les 4 nœuds de boss et 5 … 50 sur
+  `RANGER_PASSIVE_3_1..10`. `placeholders.mts` : skills 50 → 10 (70702 CHC
+  8 % contre 80 et 25014 PEN 30 % contre 300 côté client, voulus ; le
+  rejeu lit `skillBuffVars` sans `absolute`, donc les 4 ids « by » × 5
+  niveaux sont aussi des écarts voulus face au client) ; passifs
+  d'équipement 11 → 11, tous `[+Turn]`. `apcharge.mts` :
+  `buff.BT_AP_CHARGE` « Gain Chain Points » → `SYS_BUFF_CHARGE_AP`
+  « Gain Action Points », `debuff.BT_CP_CHARGE` → `DISCHARGE_CP`,
+  `debuff.BT_AP_CHARGE`, `buff.BT_CP_CHARGE`, `BT_EXTEND_DEBUFF` et
+  `BT_STAT|ST_AVOID` inchangés. `ee-slots.mts` : Glacial Bow `RES%` −3 …
+  −4 % → `RES` 30 … 40, Monomolecular Blade identique ; sur les 289
+  équipements de `getEquipmentDetail`, seules ces 32 options d'EE bougent.
+  **Données** : `data/` propre avant ; `datagen:build`, promote à blanc :
+  `glossaries.json` (les deux clés d'`effectByKey` et les geas 40 / 41 dans
+  cinq langues), `quirks.json` (les 14 lignes), `skills.json` (600 vars,
+  dont 10 `vars` de 9101 / 10004 visibles : les autres sont les `v`
+  signés ou en « % » du client d'ids que la desc ne cite pas en V,
+  invisibles), `monster-skills.json` (371 vars, mêmes raisons) et
+  `characters-list.json` (seulement `GAIN_ACTION_POINTS` → `BT_AP_CHARGE`
+  côté buff, 93 listes ; aucun filtre `BT_CP_CHARGE` débuff, aucun kit ne
+  le porte). `monster-skills.json` et les vars invisibles de `skills.json`
+  sortent de l'attendu d'avant la décision du 17/10 : ce sont ses effets
+  directs, je les ai promus. `characters.json`, `encounters.json` et le
+  reste sont identiques. Promote `--apply --only` de ces cinq fichiers :
+  `solver/version.json` garde le hash `6eaf3ea360b7`, `damage:check` 42
+  lignes exactes, `damage/skill-descs.json` change sur 10 skills, dont un
+  seul rendu (9101 JP, 3 niveaux dédupliqués). Second build et promote à
+  blanc : 65 identiques. **Laissé** : `RAW_FLAT` de
+  `src/lib/monster-stats.ts` (quatrième règle « % », avec les slugs
+  `effectiveness` / `resilience`) ; la copie du résolveur dans
+  `solver.ts` ; les placeholders mal formés du jeu (crochet non fermé :
+  110561, 110802, 110736, 110741, 125263 ; id faux en ZH : 131588) et les
+  buffs sans valeur ou sans durée (113165, 113166, 131622, 150142, 121721,
+  121722, 152622, 155091), qui restent bruts ou à « ? » comme avant ; J3,
+  J10.
 - **Relecture A58 (Opus) — Singularity (alerte au build), calculateur
   d'Ether, World Boss « récompense du jour », EFF% / RES%, `[+Turn]` ;
   validé.** Périmètre conforme (`25a142c9`), pas de `datagen:build`.

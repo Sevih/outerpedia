@@ -13,7 +13,18 @@
  * NOTE : on ne met PAS l'ancien wrap couleur `<color=#28d9ed>` ici — c'est
  * de la présentation, pas de la donnée canonique. Le front stylise s'il veut.
  */
+import {
+  fillSkillPlaceholders,
+  fillValuePlaceholders,
+  unsignedValueIds,
+  type BuffValues,
+  type SkillBuffVars,
+} from './placeholders';
+import { formatStatValue } from './stats';
+import { slugEnum } from './enums';
 import { bool, loadTable, num, tablesStamp, withCaseInsensitiveGet, type Row } from './tables';
+
+export type { BuffValues, SkillBuffVars } from './placeholders';
 
 /** Index BuffTemplet : BuffID → lignes (une par niveau). Lookup insensible à la casse. */
 export function loadBuffIndex(): Map<string, Row[]> {
@@ -106,17 +117,6 @@ export function isStatSheetBuff(buff: Row): boolean {
   );
 }
 
-/** Valeurs formatées d'un buff à un niveau, prêtes à remplir un template (clés absentes si non applicables). */
-export interface BuffValues {
-  value?: string;
-  rate?: string;
-  turn?: string;
-  value2?: string;
-  turn2?: string;
-  value4?: string;
-  value5?: string;
-}
-
 /** Extrait les valeurs formatées d'un buff (et de ses buffs CSV) à un niveau donné. */
 export function buffValuesAt(
   buffsByID: Map<string, Row[]>,
@@ -147,47 +147,17 @@ export function buffValuesAt(
  * Remplit un template (`[Value]`, `[Rate]`, `[Turn]` + variantes) avec des valeurs.
  * C'est LA méthode de résolution à la demande : `fillPlaceholders(passive.desc, passive.values[reforge], { color })`.
  * `color` enrobe chaque valeur de `<color=#28d9ed>` (présentation) ; valeur absente → `?`.
+ * La règle vit dans `placeholders.ts` (partagée avec le site) ; ici, sans couleur par défaut.
  */
 export function fillPlaceholders(template: string, v: BuffValues, color = false): string {
-  const w = (s: string) => (color ? `<color=#28d9ed>${s}</color>` : s);
-  const f = (s: string | undefined) => (s == null ? '?' : w(s));
-  const fs = (s: string | undefined, sign: '+' | '-') => (s == null ? '?' : w(`${sign}${s}`));
-  return (
-    template
-      .replace(/\[\+Value5\]/gi, fs(v.value5, '+'))
-      .replace(/\[-Value5\]/gi, fs(v.value5, '-'))
-      .replace(/\[Value5\]/gi, f(v.value5))
-      .replace(/\[\+Value4\]/gi, fs(v.value4, '+'))
-      .replace(/\[-Value4\]/gi, fs(v.value4, '-'))
-      .replace(/\[Value4\]/gi, f(v.value4))
-      .replace(/\[\+Value2\]/gi, fs(v.value2, '+'))
-      .replace(/\[-Value2\]/gi, fs(v.value2, '-'))
-      .replace(/\[Value2\]/gi, f(v.value2))
-      .replace(/\[RATE\]/gi, f(v.rate))
-      .replace(/\[Rate1?\]/g, f(v.rate))
-      .replace(/\[\+Value\]/gi, fs(v.value, '+'))
-      .replace(/\[-Value\]/gi, fs(v.value, '-'))
-      .replace(/\[Value\]/gi, f(v.value))
-      // `[+Turn]` SANS signe, volontairement. Le jeu, lui, affiche « +N » : le
-      // « + » est bien un signe pour le client, qui le remet
-      // (`CUtilUI.GetUniqueNameOptionDescReplaceText` : « for +1 turns », 3
-      // options touchées). On l'omet parce que c'est une DURÉE — les gabarits
-      // disent « [+Turn]ターンの間 » / « [+Turn]턴 » / « [+Turn]回合 », soit
-      // « pendant N tours », et « pendant +2 tours » se lit mal. Écart de
-      // lisibilité assumé (décision de Sevih, 15/10/2026). (`[-Turn]`
-      // n'apparaît nulle part dans les tables : défensif.)
-      .replace(/\[\+Turn1?\]/gi, f(v.turn))
-      .replace(/\[-Turn\]/gi, fs(v.turn, '-'))
-      .replace(/\[Turn2\]/gi, f(v.turn2))
-      .replace(/\[Turn\]/gi, f(v.turn))
-  );
+  return fillValuePlaceholders(template, v, color);
 }
 
 // --- placeholders de COMPÉTENCE (primitive #5) -------------------------------
 // Les descriptions de skills utilisent un format distinct de l'équipement :
 // chaque placeholder embarque l'id COMPLET du buff visé —
 //   [Buff_C_<id>] = chance d'application (CreateRate, %)
-//   [Buff_V_<id>] = valeur (per-mille /10 si applicable, sinon entier absolu)
+//   [Buff_V_<id>] = valeur (règle du client, cf. `skillValue`)
 //   [Buff_T_<id>] = durée en tours (TurnDuration)
 // Les niveaux d'un buff de skill sont creux (1,3,5…) : on retombe sur le niveau
 // défini le plus proche INFÉRIEUR ou égal à celui demandé.
@@ -215,51 +185,56 @@ export function buffRowAtLevel(
   );
 }
 
-/** Valeurs de placeholder d'un buff de skill à un niveau : chance / valeur / tours. */
-export interface SkillBuffVars {
-  /** Chance d'application (CreateRate/10, incl. 100%) — `[Buff_C_<id>]`. */
-  c?: string;
-  /** Valeur (magnitude absolue, per-mille /10 si applicable) — `[Buff_V_<id>]`. */
-  v?: string;
-  /** Durée en tours (TurnDuration) — `[Buff_T_<id>]`. */
-  t?: string;
+/**
+ * Valeur d'un `[Buff_V_<id>]` : la règle du client (`GetSkillDescReplaceText`,
+ * branche `v`) — `OAT_RATE` → magnitude/10 en %, sinon la valeur SIGNÉE — avec
+ * le « % » décidé par `GetStatValue` (`IsPercentStat`) : pas de « 80 » pour
+ * 8 % de CHC (décision de Sevih, 17/10/2026). `absolute` retire le signe
+ * (texte « … by [Buff_V] », cf. `unsignedValueIds`).
+ */
+function skillValue(buff: Row, absolute: boolean): string {
+  const v = num(buff.Value);
+  const at = buff.ApplyingType ?? '';
+  const stat = buff.StatType && buff.StatType !== 'ST_NONE' ? slugEnum(buff.StatType) : undefined;
+  return formatStatValue(at, at === 'OAT_RATE' || absolute ? Math.abs(v) : v, stat);
 }
 
 /**
  * Valeurs résolues d'un buff de skill au niveau demandé (clés absentes si nulles).
  * Sert À LA FOIS la desc (`[Buff_C/V/T_<id>]`) et les nombres des chips d'effet —
- * une seule source par niveau, pas de duplication.
+ * une seule source par niveau, pas de duplication. `absolute` : valeur sans signe (cf. `skillValue`).
  */
 export function skillBuffVars(
   buffsByID: Map<string, Row[]>,
   buffId: string,
   level: number,
+  { absolute = false }: { absolute?: boolean } = {},
 ): SkillBuffVars {
   const b = buffRowAtLevel(buffsByID, buffId, level);
   if (!b) return {};
   const out: SkillBuffVars = {};
   if (num(b.CreateRate) > 0) out.c = `${num(b.CreateRate) / 10}%`;
-  if (num(b.Value) !== 0) out.v = fmtValue(b);
+  if (num(b.Value) !== 0) out.v = skillValue(b, absolute);
   if (fmtTurn(b) !== '?') out.t = fmtTurn(b);
   return out;
 }
 
 /**
  * Remplit les placeholders `[Buff_C/V/T_<id>]` d'une description de compétence,
- * avec les valeurs des buffs visés AU NIVEAU demandé. Les balises `<color=…>`
- * du template source sont conservées telles quelles (donnée canonique).
- * `?` si la valeur n'existe pas.
+ * avec les valeurs des buffs visés AU NIVEAU demandé (règle de `placeholders.ts`,
+ * signe retiré selon le template lui-même — à lui passer en anglais). Les
+ * balises `<color=…>` du template source sont conservées telles quelles
+ * (donnée canonique). `?` si la valeur n'existe pas.
  */
 export function resolveSkillPlaceholders(
   template: string,
   buffsByID: Map<string, Row[]>,
   level: number,
 ): string {
-  return template.replace(/\[Buff_([CVT])_(.+?)\]/g, (_m, kind: string, buffId: string) => {
-    const vars = skillBuffVars(buffsByID, buffId, level);
-    const val = kind === 'C' ? vars.c : kind === 'T' ? vars.t : vars.v;
-    return val ?? '?';
-  });
+  const unsigned = unsignedValueIds([template]);
+  return fillSkillPlaceholders(template, (buffId) =>
+    skillBuffVars(buffsByID, buffId, level, { absolute: unsigned.has(buffId) }),
+  );
 }
 
 // --- groupes de buffs (BT_GROUP) ----------------------------------------------

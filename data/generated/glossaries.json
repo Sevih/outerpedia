@@ -5664,7 +5664,7 @@
       "BT_RUN_FIRST_SKILL_TO_HIGHEST_ATK_ON_TURN_END_TEAM": "42",
       "BT_UNDEAD": "90",
       "BT_CP_CHARGE": "SYS_BUFF_CHARGE_CP",
-      "BT_AP_CHARGE": "SYS_BUFF_CHARGE_CP",
+      "BT_AP_CHARGE": "SYS_BUFF_CHARGE_AP",
       "BT_DMG_TARGET_BREAK": "80",
       "BT_SHIELD_BASED_CASTER": "29",
       "BT_STAT|ST_CRITICAL_RATE": "11",
@@ -5937,7 +5937,7 @@
       "BT_STAT|ST_AVOID_SUBTRACT_CAP": "2000102",
       "BT_DOT_POISON": "4",
       "BT_NONE": "4089001",
-      "BT_CP_CHARGE": "SYS_BUFF_CHARGE_CP",
+      "BT_CP_CHARGE": "DISCHARGE_CP",
       "BT_SEAL_BT_CALL_BACKUP": "1099",
       "BT_AGGRO": "32",
       "BT_FREEZE": "33",
@@ -8021,12 +8021,12 @@
     },
     "40": {
       "desc": {
-        "en": "50 boss Resilience",
-        "jp": "ボスモンスターの効果抵抗50",
-        "kr": "보스 몬스터의 효과 저항 50",
+        "en": "-50 boss Resilience",
+        "jp": "ボスモンスターの効果抵抗-50",
+        "kr": "보스 몬스터의 효과 저항 -50",
         "zh": "首领怪物的效果抵抗-50",
-        "fr": "50 boss résistance",
-        "es": "Resistencia 50 del jefe"
+        "fr": "-50 boss résistance",
+        "es": "Resistencia -50 del jefe"
       },
       "icon": "GD_Geis_Boss",
       "positive": true,
@@ -8037,12 +8037,12 @@
     },
     "41": {
       "desc": {
-        "en": "225 ally Effectiveness",
-        "jp": "味方の効果命中225",
-        "kr": "아군의 효과 적중 225",
+        "en": "-225 ally Effectiveness",
+        "jp": "味方の効果命中-225",
+        "kr": "아군의 효과 적중 -225",
         "zh": "友军效果命中-225",
-        "fr": "225 allié Efficacité",
-        "es": "Efectividad aliada 225"
+        "fr": "-225 allié Efficacité",
+        "es": "Efectividad aliada -225"
       },
       "icon": "GD_Geis_special",
       "positive": false,
