@@ -100,6 +100,7 @@ export function monsterStatContexts(
         level: s.level,
         label: `${modeLabel(src, s.ref.mode)} · ${s.ref.name.en || s.dungeon}`,
         adv: s.ref.adv,
+        ...(s.ref.advLinked ? { advLinked: true as const } : {}),
         bossHp: s.ref.bossHp,
         ...(s.hpLines ? { hpLines: s.hpLines } : {}),
       },
@@ -178,6 +179,8 @@ export function monsterStatsSheet(
             .map(([k, v]) => `${k.toUpperCase()} ${signed(v)}`)
             .join(', ')}`,
         );
+      if (ctx.advLinked)
+        mods.push('adversité plus forte tant que des nœuds liés restent à nettoyer');
       if (quirks.length)
         mods.push(
           `quirks de compte : ${quirks.map(([s, v]) => `${statAbbr(s)} ${signed(v)}`).join(', ')}`,

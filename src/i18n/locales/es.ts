@@ -585,6 +585,8 @@ const es: Record<TranslationKey, string> = {
   'tools.damage-calculator.target.stage': 'Fase',
   'tools.damage-calculator.target.rank': 'Rango',
   'tools.damage-calculator.target.floor': 'Piso',
+  'tools.damage-calculator.target.adv_linked':
+    'Mayor mientras queden nodos vinculados sin despejar',
   'tools.damage-calculator.target.fight': 'Combate {n}',
   'tools.damage-calculator.target.boss_flag': 'Jefe',
   'tools.damage-calculator.target.break_flag':

@@ -842,6 +842,7 @@ export default async function DamageCalculator({ lang }: { lang: Lang }) {
             }
           : {}),
         ...(ranked ? { ranked: true } : {}),
+        ...(isFloor && ref.advLinked ? { advLinked: true as const } : {}),
         ...(monsterHasRage(mon.id) ? { hasRage: true } : {}),
         ...(passives.length ? { passives } : {}),
         // Navigation du picker visuel story — cf. `DcTarget.story`. Les vagues
@@ -1009,6 +1010,7 @@ export default async function DamageCalculator({ lang }: { lang: Lang }) {
       stage: t(k('target.stage')),
       rank: t(k('target.rank')),
       floor: t(k('target.floor')),
+      advLinked: t(k('target.adv_linked')),
       fight: t(k('target.fight')),
       bossFlag: t(k('target.boss_flag')),
       breakFlag: t(k('target.break_flag')),

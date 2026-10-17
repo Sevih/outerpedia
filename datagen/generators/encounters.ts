@@ -104,11 +104,13 @@ export interface RankOption {
 }
 
 /**
- * Un PALIER de rencontre d'un mode à progression (world boss, singularity/Monad
- * Gate, adventure ; guild dungeon, event challenge et exploration sont ignorés à
- * l'extraction, cf. `buildEncounters`) : ces modes
+ * Un PALIER de rencontre d'un mode à progression (world boss, singularity,
+ * Monad Gate, adventure ; guild dungeon, event challenge et exploration sont
+ * ignorés à l'extraction, cf. `buildEncounters`) : ces modes
  * REDÉFINISSENT la rencontre par rang/palier — niveau du boss, PV, advantage
  * rates propres (REMPLACENT ceux du donjon) et passifs additionnels.
+ * Monad Gate (`monad_battle_1`) : un palier par CONTEXTE de nœud de la carte
+ * (niveau + adv du nœud), sans nom, ni stage, ni PV — le nœud n'en a pas.
  */
 export interface DungeonRank {
   /** Nom du rang quand le jeu en a un (« D »…« SSS », « E+ »…). */
@@ -330,8 +332,12 @@ export interface DungeonRef {
    * (l'intro de la story refondue).
    */
   stage?: number;
-  /** Modificateurs de stats du donjon (cf. `DungeonAdv`). */
+  /** Modificateurs de stats du donjon (cf. `DungeonAdv`). Infiltration : l'adv
+   * de BASE du nœud qui lance le donjon (`IrregularInfiltrateNodeTemplet`). */
   adv?: DungeonAdv;
+  /** Infiltration : un nœud lié (`LinkNode`) porte une adv, qui s'ajoute à
+   * `adv` tant que ce nœud n'est pas nettoyé (état du joueur). */
+  advLinked?: true;
   /**
    * PV RÉELS du boss dans ce donjon. Sources : `EventBossDungeonTemplet.
    * BossMonsterHP` (CSV aligné au CSV `DungeonID` — joint challenge :
@@ -1354,6 +1360,83 @@ export function buildEncounters(): EncountersData {
     for (const g of singuGroups.get(r.SingularityDungeonGroupID ?? '') ?? []) {
       const d = dungeons[g.DungeonID ?? ''];
       if (d) d.ranks = ranks.map(rankOf);
+    }
+  }
+
+  // 6bis) Monad Gate (`monad_battle_1`) : le client joue le combat au niveau
+  // (`MonadGateStageLevel`) et à l'adv du NŒUD de la carte, jamais à ceux du
+  // spawn ni du donjon (`CMonadGateBattleSpawnData.GetCharacterData`). Deux
+  // chemins mènent d'un nœud à un donjon : ses `Row1..Row10` (un GroupID
+  // chacun) → `MonadGateNodeStageTemplet.DungeonID`, et, pour un nœud
+  // d'événement, son `EventGroupID` → les événements `MGET_BATTLE` de
+  // `MonadGateEventTemplet` (le combat garde le nœud hôte). Le GroupID n'est
+  // PAS unique dans la table des stages (le client tire une ligne au hasard
+  // dans le groupe) : `groupBy`, pas `indexBy`. Un palier par couple (niveau,
+  // adv) distinct ; les combats de cube (`MGCT_BATTLE`) n'y entrent pas, leur
+  // lien au nœud vient du serveur.
+  {
+    const stagesByGroup = groupBy(loadTable('MonadGateNodeStageTemplet'), 'GroupID');
+    const eventsByGroup = groupBy(loadTable('MonadGateEventTemplet'), 'EventGroupID');
+    const contexts = new Map<string, Map<string, DungeonRank>>();
+    const reach = (did: string | undefined, key: string, rank: DungeonRank): void => {
+      if (!did || did === '0' || dungeons[did]?.mode !== 'monad_battle_1') return;
+      let m = contexts.get(did);
+      if (!m) contexts.set(did, (m = new Map()));
+      if (!m.has(key)) m.set(key, rank);
+    };
+    for (const n of loadTable('MonadGateNodeTemplet')) {
+      const level = num(n.MonadGateStageLevel);
+      const adv = advOf(n);
+      const key = `${level}|${adv?.hp ?? 0}|${adv?.atk ?? 0}|${adv?.def ?? 0}|${adv?.spd ?? 0}`;
+      const rank: DungeonRank = { level, ...(adv ? { adv } : {}) };
+      for (let i = 1; i <= 10; i++) {
+        for (const s of stagesByGroup.get(n[`Row${i}`] ?? '') ?? []) {
+          reach(s.DungeonID, key, rank);
+          if (s.NodeType !== 'MGNT_EVENT' || !s.EventGroupID) continue;
+          for (const ev of eventsByGroup.get(s.EventGroupID) ?? [])
+            if (ev.EventType === 'MGET_BATTLE') reach(ev.DungeonID, key, rank);
+        }
+      }
+    }
+    // Trié par niveau puis par adv (PV, ATK, DEF, VIT) : un diff stable.
+    const order = (r: DungeonRank): number[] => [
+      r.level ?? 0,
+      r.adv?.hp ?? 0,
+      r.adv?.atk ?? 0,
+      r.adv?.def ?? 0,
+      r.adv?.spd ?? 0,
+    ];
+    for (const [did, m] of contexts) {
+      dungeons[did].ranks = [...m.values()]
+        .map((r) => ({ ...r }))
+        .sort((a, b) => {
+          const oa = order(a);
+          const ob = order(b);
+          const i = oa.findIndex((v, j) => v !== ob[j]);
+          return i < 0 ? 0 : oa[i] - ob[i];
+        });
+    }
+  }
+
+  // 6ter) Infiltration (`irregular_infiltrate`) : l'adv vient du NŒUD choisi
+  // (`IrregularInfiltrateNodeTemplet.NodeDungeonID`), le `DungeonTemplet` n'en
+  // porte pas. On émet l'adv de BASE, celle du nœud seul : le client y ajoute
+  // celle de chaque nœud de `LinkNode` pas encore nettoyé (état du joueur) et
+  // retire celle d'un objet de sanctuaire de même élément
+  // (`CInfiltrate.GetSpawnAdventageRates`) — `advLinked` dit la première.
+  {
+    const nodes = loadTable('IrregularInfiltrateNodeTemplet');
+    const nodeById = indexBy(nodes);
+    for (const n of nodes) {
+      const d = dungeons[n.NodeDungeonID ?? ''];
+      if (d?.mode !== 'irregular_infiltrate') continue;
+      const adv = advOf(n);
+      if (adv) d.adv = adv;
+      const linked = splitCsv(n.LinkNode ?? '').some((id) => {
+        const l = nodeById.get(id);
+        return l ? advOf(l) !== undefined : false;
+      });
+      if (linked) d.advLinked = true;
     }
   }
 

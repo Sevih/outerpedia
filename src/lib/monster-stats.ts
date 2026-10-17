@@ -54,6 +54,9 @@ export interface SpawnContext {
   /** Le stage, LOCALISÉ (« Stage 8 ») — posé par le rendu, seul à avoir le `t`. */
   stageLabel?: string;
   adv?: DungeonAdv;
+  /** Infiltration : l'adv monte tant que des nœuds liés restent à nettoyer
+   *  (`DungeonRef.advLinked`) — `adv` est celle du nœud seul. */
+  advLinked?: true;
   /** PV RÉELS du boss dans ce mode — remplacent l'interpolation du templet. */
   bossHp?: number;
   /** BARRE d'un palier à score : largeur de la tranche de dégâts, PAS des PV. */
@@ -221,7 +224,7 @@ export function dedupSpawnContexts(spawns: SpawnContext[]): SpawnContext[] {
   const seen = new Set<string>();
   return spawns
     .filter((s) => {
-      const key = `${s.level}|${s.rank ?? ''}|${s.stage ?? ''}|${JSON.stringify(s.adv ?? {})}|${s.bossHp ?? ''}|${s.bar ?? ''}`;
+      const key = `${s.level}|${s.rank ?? ''}|${s.stage ?? ''}|${JSON.stringify(s.adv ?? {})}|${s.advLinked ? 1 : ''}|${s.bossHp ?? ''}|${s.bar ?? ''}`;
       if (seen.has(key)) return false;
       seen.add(key);
       return true;

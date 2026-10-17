@@ -258,6 +258,30 @@ describe('world boss — quatre ligues, une échelle de rangs qui ENJAMBE les bo
   });
 });
 
+describe('Monad Gate — chaque monstre reçoit l’échelle entière de ses nœuds', () => {
+  const MONAD = Object.entries(encountersData as unknown as Record<string, DungeonRef>).filter(
+    ([, d]) => d.mode === 'monad_battle_1' && d.ranks?.length && d.monsters?.length,
+  );
+
+  it('aucun découpage `ranksOfMonster` : un contexte par palier, pour chaque monstre', () => {
+    // La règle des world boss (le niveau de spawn de chaque boss ouvre SON
+    // segment de l'échelle) ne vaut pas ici : les paliers sont les contextes
+    // de nœud de la carte, chacun joue tout le combat.
+    expect(MONAD.length).toBeGreaterThan(0);
+    const cut: string[] = [];
+    for (const [id, ref] of MONAD) {
+      const e = { id, ref, monsters: ref.monsters ?? [] };
+      for (const m of e.monsters) {
+        const ctxs = encounterSpawnContexts(e, m, 'en');
+        const got = ctxs.map((c) => `${c.level}|${JSON.stringify(c.adv ?? {})}`);
+        const want = (ref.ranks ?? []).map((r) => `${r.level}|${JSON.stringify(r.adv ?? {})}`);
+        if (JSON.stringify(got) !== JSON.stringify(want)) cut.push(`${id} → ${m.id}`);
+      }
+    }
+    expect(cut).toEqual([]);
+  });
+});
+
 describe('formations alternatives — la tour very hard se lit une formation à la fois', () => {
   const pooled = Object.entries(encountersData as unknown as Record<string, DungeonRef>)
     .filter(([, d]) => d.monsters?.some((m) => m.formation !== undefined))

@@ -7,6 +7,81 @@
 
 ## 2026-10-17
 
+- **C21 — Monad Gate au niveau et à l'adversité du nœud, adversité de base
+  de l'Infiltration (R1, R3).** Deux modes prennent le niveau et l'adv d'un
+  NŒUD de leur carte, pas du donjon : le site sortait les 269 donjons
+  `monad_battle_1` au niveau du spawn (30 pour l'essentiel), sans adv, et
+  aucune adv d'infiltration. Monad Gate : une passe « 6bis » de
+  `buildEncounters` (`datagen/generators/encounters.ts`) pose `d.ranks` = un
+  palier `{ level, adv? }` par couple (`MonadGateStageLevel`, adv du nœud)
+  distinct, trié par niveau puis PV/ATK/DEF/VIT, sans nom, stage ni PV ;
+  l'adv du palier remplace celle du donjon (`expandRankContexts`), comme dans
+  le client (`CMonadGateBattleSpawnData.GetCharacterData`). Jointures :
+  `Row1..Row10` → `MonadGateNodeStageTemplet` par `groupBy` (GroupID non
+  unique, le client tire une ligne du groupe au hasard) → `DungeonID` ; et,
+  décision de Sevih après la question du lot, les combats d'événement
+  `MGET_BATTLE` (`MonadGateEventTemplet.DungeonID`, rattachés au nœud
+  d'événement par `EventGroupID`, `CUIMonadGateChoiceNodePopup.cs` ~l.403 :
+  le combat garde le nœud hôte). Les combats de cube `MGCT_BATTLE`
+  (`MonadGateCubeTemplet.Value`, `CUIMonadGateCubePopup.cs:110`) n'y entrent
+  pas, leur lien au nœud vient du serveur : 40 lignes, 5 donjons (74000101,
+  74000123, 74000127, 74000131, tous déjà atteints par un nœud, et 74000120,
+  non extrait). Aucun autre chemin : les
+  `DepthMonsterLevel*` de `MonadGateDepthTemplet` ne sont qu'un libellé d'UI. Chiffres recalés : 200 donjons avec
+  `ranks` (196 par les nœuds + 74000501/502/504/507 par les événements),
+  3 728 paliers (+26 sur les 3 702 de la rédaction : 74000021 gagne 5
+  contextes, les quatre donjons d'événement 7, 6, 4 et 4), au plus 89 par
+  donjon (74000002, 74000026, 74000031) ; 69 donjons extraits jamais
+  atteints restent au niveau du spawn, sans avertissement ; les 59 donjons
+  de scénario atteints sans spawn restent absents. Doc de `DungeonRank`
+  suivie. Infiltration : une passe « 6ter » pose sur les 45 donjons à nœud
+  (`IrregularInfiltrateNodeTemplet.NodeDungeonID`, un nœud chacun, aucune
+  adv au `DungeonTemplet`, vérifié) `d.adv` = l'adv du nœud seul, et le champ
+  nouveau `DungeonRef.advLinked?: true` sur les 33 dont un nœud de `LinkNode`
+  (CSV) porte une adv. Note de R3 : clé `tools.damage-calculator.target.adv_linked`
+  dans les six locales (texte de Sevih, sans sujet comme demandé ; jp/kr/zh
+  en traduction sobre), portée par `DcTarget.advLinked` (`index.tsx`, cibles
+  « Floor N ») et rendue par `AdvLinkedNote` (`ui.tsx`) en une ligne
+  discrète sous le sélecteur du panneau cible, sans changer la mise en page
+  des autres cibles ; fiche de quick : `SpawnContext.advLinked`, posé par
+  `monsterStatContexts`, compté dans la clé de `dedupSpawnContexts`, et une
+  mention « adversité plus forte tant que des nœuds liés restent à
+  nettoyer » à côté des modificateurs du donjon. Non dit par la note,
+  volontairement : la baisse par objet de sanctuaire de même élément
+  (`CInfiltrate.GetSpawnAdventageRates`). Côté site, aucun donjon de Monad
+  Gate n'aligne deux boss à des niveaux différents : `ranksOfMonster` ne
+  découpe rien, chaque monstre reçoit l'échelle entière (testé). `BossStats`
+  inchangé : une échelle sans `rank` ni `stage` y tomberait dans les boutons
+  de niveau (l.171-190), avec des doublons, mais aucune page publique ne
+  montre un monstre de Monad Gate (calculateur : `EXCLUDED_MODES`).
+  Vérification : `pnpm typecheck` (dernière ligne, la commande
+  `$ tsc --noEmit && …`, sans erreur), `pnpm lint` (`$ eslint`, sans avertissement), `pnpm test`
+  (`Tests  4026 passed (4026)`), le vitest de
+  `scripts/quick` (`Tests  1148 passed (1148)`) ; `src/lib/damage/fixtures.test.ts`
+  passe sans fixture touchée. `datagen:build` puis `datagen:promote` à
+  blanc : « 64 identique(s), 1 différent(s) », `encounters.json` seul
+  (`monsters.json` et `monster-skills.json` identiques), promu par
+  `--apply --only encounters.json` ; sous `data/`, seul `data/generated/encounters.json`
+  bouge (`damage/` et `solver/` re-dérivés à l'identique). Script hors dépôt,
+  avant → après : donjons Monad Gate avec `ranks` 0 → 200, paliers 0 →
+  3 728, max 0 → 89 ; infiltration avec `adv` 0 → 45, avec `advLinked` 0 →
+  33 ; taille 2 464 285 → 3 021 269 octets. `presetSpawnStats` de toutes
+  les cibles du calculateur (6 830 couples donjon/monstre) avant et après :
+  seuls 125 couples d'infiltration bougent, aucun autre. Fiche de quick :
+  les 204 monstres de Monad Gate ont un contexte par couple (niveau, adv)
+  distinct ; le maximum est 161 (74301702), soit 160 contextes de nœud plus
+  le contexte de spawn de 74000029, un donjon jamais atteint. Rejeu de
+  `r2_monad_levels.py` (adapté aux `ranks`, au `groupBy` et aux événements)
+  et `r9_infiltrate_adv.py`, copiés hors dépôt : 0 donjon sur 200 dont
+  l'ensemble des contextes diffère du client ; 45 infiltrations liées à un
+  nœud, 0 sans adv. Tests en relation : `datagen/generators/encounters.test.ts`
+  (paliers de Monad Gate = contextes distincts rejoints aux tables du jeu,
+  sautés sans `.gamedata`, et sans nom/stage/PV ni doublon ; adv
+  d'infiltration = celle du nœud, `advLinked` si et seulement si un nœud lié
+  a une adv), `src/lib/data/encounters.test.ts` (pas de découpage en Monad
+  Gate), `ui.test.tsx` (note rendue avec le champ, absente sans). Laissé :
+  B57 (R2, O8, O9, B12, R4, R5, R21), les cubes, la Singularity, le contrat
+  solver.
 - **Relecture A59 (Opus) — la fiche demande ses reviews au bot par id ;
   validé.** Périmètre conforme (`578081b2`) : `getReviewsForCharacter(characterId)`,
   la fiche passe `char.id`, contrat et en-tête de `src/lib/data/reviews.ts`

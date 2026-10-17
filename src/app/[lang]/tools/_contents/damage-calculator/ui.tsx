@@ -245,6 +245,18 @@ export function MonsterPortrait({
   );
 }
 
+/** Note d'une cible d'infiltration dont l'adv monte tant que des nœuds liés
+ *  restent à nettoyer (cf. `DcTarget.advLinked`) — rien pour une autre cible. */
+export function AdvLinkedNote({
+  target,
+  label,
+}: {
+  target: Pick<DcTarget, 'advLinked'>;
+  label: string;
+}) {
+  return target.advLinked ? <p className="text-content-subtle text-xs">{label}</p> : null;
+}
+
 export const ROW_CLASS =
   'hover:bg-surface-raised/80 flex w-full cursor-pointer items-center gap-2 rounded-md px-2 py-1.5 text-left text-sm transition';
 export const SELECT_CLASS =

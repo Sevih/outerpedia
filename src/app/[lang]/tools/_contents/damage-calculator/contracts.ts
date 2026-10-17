@@ -219,6 +219,9 @@ export interface DcTarget {
    *  PENDANT le combat) : le sélecteur du panneau titre « Rank », pas
    *  « Stage ». */
   ranked?: boolean;
+  /** Infiltration : l'adv appliquée est celle du nœud seul, elle monte tant
+   *  que des nœuds liés restent à nettoyer (`DungeonRef.advLinked`). */
+  advLinked?: true;
   /** Le boss a un skill d'ENRAGE (`SKT_RAGE_ENTER*`) — la coche « Enragé »
    *  du contexte n'apparaît que là. */
   hasRage?: boolean;
@@ -327,6 +330,8 @@ export interface DcLabels {
     rank: string;
     /** Titre du sélecteur d'une ligne de TOUR (un monstre, ses étages). */
     floor: string;
+    /** Note d'une cible d'infiltration à nœuds liés (cf. `DcTarget.advLinked`). */
+    advLinked: string;
     fight: string;
     bossFlag: string;
     breakFlag: string;

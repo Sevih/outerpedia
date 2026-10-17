@@ -13,7 +13,9 @@
  *      visible sinon (page qui rend un trou, jointure qui rate en silence).
  *
  * La suite tourne SANS `.gamedata` (contrainte CI) : rien ici n'appelle
- * `buildEncounters()` ni `loadTable`.
+ * `buildEncounters()`, et le seul bloc qui lit des tables du jeu (`loadTable`,
+ * contextes de Monad Gate et d'infiltration rejoints au client) se saute
+ * quand elles sont absentes.
  */
 import { describe, expect, it } from 'vitest';
 import encountersData from '../../data/generated/encounters.json';
@@ -21,7 +23,7 @@ import glossariesData from '../../data/generated/glossaries.json';
 import rewardTablesData from '../../data/generated/reward-tables.json';
 import monstersData from '../../data/generated/monsters.json';
 import towersData from '../../data/generated/towers.json';
-import type { Row } from '../lib/tables';
+import { loadTable, splitCsv, tablesStamp, type Row } from '../lib/tables';
 import type { TowersData } from './towers';
 import {
   dungeonSpawnedMonsters,
@@ -303,5 +305,106 @@ describe('encounters.json — invariants référentiels', () => {
       if (families.size > 1) mixed.push(`${g} : ${[...families].join(', ')}`);
     }
     expect(mixed).toEqual([]);
+  });
+});
+
+// ─── 3. Contextes de nœud (Monad Gate, infiltration) ─────────────────────────
+
+/** Clé d'un contexte de combat : niveau + adv (PV, ATK, DEF, VIT). */
+const ctxKey = (level: number | undefined, adv: DungeonRef['adv']): string =>
+  `${level ?? 0}|${adv?.hp ?? 0}|${adv?.atk ?? 0}|${adv?.def ?? 0}|${adv?.spd ?? 0}`;
+
+describe('encounters.json — paliers de Monad Gate et adv d’infiltration', () => {
+  it('un palier de Monad Gate a un niveau, ni nom, ni stage, ni PV, et aucun doublon', () => {
+    const bad: string[] = [];
+    for (const [id, d] of dungeonEntries) {
+      if (d.mode !== 'monad_battle_1' || !d.ranks) continue;
+      const keys = d.ranks.map((r) => ctxKey(r.level, r.adv));
+      if (new Set(keys).size !== keys.length) bad.push(`${id} : doublon`);
+      for (const r of d.ranks)
+        if (!r.level || r.name !== undefined || r.stage !== undefined || r.hp !== undefined)
+          bad.push(`${id} : ${JSON.stringify(r)}`);
+    }
+    expect(bad).toEqual([]);
+  });
+
+  it('`advLinked` ne se pose que sur un donjon d’infiltration qui a une adv', () => {
+    const bad = dungeonEntries
+      .filter(([, d]) => d.advLinked && (d.mode !== 'irregular_infiltrate' || !d.adv))
+      .map(([id]) => id);
+    expect(bad).toEqual([]);
+  });
+});
+
+const HAS_GAME_TABLES = !tablesStamp([
+  'MonadGateNodeTemplet',
+  'IrregularInfiltrateNodeTemplet',
+]).includes('absent');
+
+/** Adv d'une ligne de nœud, au format de `DungeonAdv` (zéros absents). */
+const advOfRow = (r: Row): DungeonRef['adv'] => {
+  const adv: NonNullable<DungeonRef['adv']> = {};
+  const n = (k: string) => Number(r[`SpawnAdvantageRate_${k}`] ?? 0);
+  if (n('HP')) adv.hp = n('HP');
+  if (n('Atk')) adv.atk = n('Atk');
+  if (n('Def')) adv.def = n('Def');
+  if (n('Spd')) adv.spd = n('Spd');
+  return Object.keys(adv).length ? adv : undefined;
+};
+
+describe.skipIf(!HAS_GAME_TABLES)('contextes de nœud — rejoints aux tables du jeu', () => {
+  it('Monad Gate : un palier par couple (niveau, adv) distinct des nœuds qui mènent au donjon', () => {
+    // Les deux chemins du client : Row1..Row10 → stage → DungeonID, et nœud
+    // d'événement → événement MGET_BATTLE (le combat garde le nœud hôte).
+    const stages = new Map<string, Row[]>();
+    for (const r of loadTable('MonadGateNodeStageTemplet'))
+      stages.set(r.GroupID ?? '', [...(stages.get(r.GroupID ?? '') ?? []), r]);
+    const events = new Map<string, Row[]>();
+    for (const r of loadTable('MonadGateEventTemplet'))
+      events.set(r.EventGroupID ?? '', [...(events.get(r.EventGroupID ?? '') ?? []), r]);
+    const expected = new Map<string, Set<string>>();
+    const add = (did: string | undefined, key: string) => {
+      if (!did || dungeons[did]?.mode !== 'monad_battle_1') return;
+      expected.set(did, (expected.get(did) ?? new Set()).add(key));
+    };
+    for (const n of loadTable('MonadGateNodeTemplet')) {
+      const key = ctxKey(Number(n.MonadGateStageLevel ?? 0), advOfRow(n));
+      for (let i = 1; i <= 10; i++)
+        for (const s of stages.get(n[`Row${i}`] ?? '') ?? []) {
+          add(s.DungeonID, key);
+          if (s.NodeType === 'MGNT_EVENT')
+            for (const ev of events.get(s.EventGroupID ?? '') ?? [])
+              if (ev.EventType === 'MGET_BATTLE') add(ev.DungeonID, key);
+        }
+    }
+    expect(expected.size).toBeGreaterThan(0);
+    const diff: string[] = [];
+    for (const [id, d] of dungeonEntries) {
+      if (d.mode !== 'monad_battle_1') continue;
+      const want = [...(expected.get(id) ?? [])].sort();
+      const got = (d.ranks ?? []).map((r) => ctxKey(r.level, r.adv)).sort();
+      if (JSON.stringify(want) !== JSON.stringify(got)) diff.push(id);
+    }
+    expect(diff).toEqual([]);
+  });
+
+  it('infiltration : l’adv du nœud seul, `advLinked` si et seulement si un nœud lié a une adv', () => {
+    const nodes = loadTable('IrregularInfiltrateNodeTemplet');
+    const byId = new Map(nodes.map((n) => [n.ID, n]));
+    const node = new Map(nodes.filter((n) => n.NodeDungeonID).map((n) => [n.NodeDungeonID, n]));
+    expect(node.size).toBeGreaterThan(0);
+    const bad: string[] = [];
+    for (const [id, d] of dungeonEntries) {
+      if (d.mode !== 'irregular_infiltrate') continue;
+      const n = node.get(id);
+      if (!n) continue;
+      if (ctxKey(0, d.adv) !== ctxKey(0, advOfRow(n))) bad.push(`${id} : adv`);
+      const linked = splitCsv(n.LinkNode ?? '').some((l) => {
+        const ln = byId.get(l);
+        return ln !== undefined && advOfRow(ln) !== undefined;
+      });
+      if (Boolean(d.advLinked) !== linked) bad.push(`${id} : advLinked`);
+    }
+    expect(bad).toEqual([]);
   });
 });

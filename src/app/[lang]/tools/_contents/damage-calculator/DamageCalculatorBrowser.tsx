@@ -72,6 +72,7 @@ import {
 } from './contracts';
 import { DEV_BUILD, SCENARIOS_STORE, scnKey, type SavedScenario } from './stores';
 import {
+  AdvLinkedNote,
   Card,
   CharPicker,
   CharPortrait,
@@ -1318,6 +1319,7 @@ export function DamageCalculatorBrowser({
                           </label>
                         )
                       )}
+                      <AdvLinkedNote target={target} label={L.target.advLinked} />
                       {spawn && (
                         // Stats défensives EFFECTIVES du spawn (adv/bossHp déjà
                         // appliqués) — celles qui pèsent sur les dégâts, en

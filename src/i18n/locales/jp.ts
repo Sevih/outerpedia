@@ -571,6 +571,7 @@ const jp: Record<TranslationKey, string> = {
   'tools.damage-calculator.target.stage': 'ステージ',
   'tools.damage-calculator.target.rank': 'ランク',
   'tools.damage-calculator.target.floor': '階',
+  'tools.damage-calculator.target.adv_linked': '連結ノードが未クリアの間は上昇',
   'tools.damage-calculator.target.fight': '戦闘 {n}',
   'tools.damage-calculator.target.boss_flag': 'ボス',
   'tools.damage-calculator.target.break_flag': '対象がブレイク状態（弱点ゲージ破壊）',
