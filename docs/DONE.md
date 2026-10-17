@@ -7,6 +7,26 @@
 
 ## 2026-10-17
 
+- **Relecture B57 (Opus) — Very Hard au niveau recommandé, jours du
+  débuff, phase 2 des World Boss, monnaies non lues, renforts, quirks,
+  troncature ; validé.** Périmètre conforme (`8a3c904b`) : sous `data/`,
+  les quatre fichiers attendus. Contrôles : typecheck, lint et
+  `format:check` verts, `NODE_ENV=development pnpm test`
+  `Tests 4046 passed (4046)`, `scripts/quick` 1148, `damage:check` 42 lignes
+  exactes. Rejeu indépendant sur les fichiers avant / après le commit et
+  `.gamedata/parsed` : `encounters.json` ne change que sur les 20 donjons
+  `DM_TOWER_VERY_HARD` (aucun ajouté ni retiré), dont toutes les unités
+  sont au `RecommandLevel` (130 à 149) ; `monsters.json` ne change que les
+  `spawns` de 57 monstres ; `towers.json` n'a plus de `days`, six
+  `debuffDays` ; la saison 25 (Ragnakeus) liste ses six monstres, phase 2
+  comprise (4086040, 4086042). Le relevé B12 compte 52 tables et non 16 :
+  les 36 lignes de tour qui ne rendent rien sortent par le
+  `return undefined`, comme le lot le demandait. Vu par le lot et ajouté au
+  `docs/TODO.md` : `bossSpawnContexts` et `monsterStatContexts` donnent
+  encore l'échelle entière à chaque monstre. **Reste à Sevih** : un guide
+  de tour Very Hard montre ses monstres au niveau 130-149 ; une carte de
+  renfort n'a plus le −20 % d'EFF/RES. **Suite** : A58 (seul : six
+  locales).
 - **B57 — Rencontres, suite : Very Hard au niveau recommandé, jours du
   débuff, phase 2 des World Boss, monnaies non lues, renforts, quirks,
   troncature (R2, O8/B13, O9, B12, R4, R5, R21/B2).** Générateur. R2 : le
