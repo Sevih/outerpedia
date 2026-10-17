@@ -7,6 +7,22 @@
 
 ## 2026-10-17
 
+- **Relecture A58 (Opus) — Singularity (alerte au build), calculateur
+  d'Ether, World Boss « récompense du jour », EFF% / RES%, `[+Turn]` ;
+  validé.** Périmètre conforme (`25a142c9`), pas de `datagen:build`.
+  Contrôles : typecheck, lint et `format:check` verts,
+  `NODE_ENV=development pnpm test` `Tests 4073 passed (4073)`,
+  `damage:check` 42 lignes exactes. Rejeu : `buildSingularity()` rend
+  exactement `data/generated/singularity.json`, `singularityWarnings` ne dit
+  rien sur la donnée réelle ; sur les 21 options distinctes de
+  `equipment/pools.json`, l'ancienne règle des cartes et `statOptionView`
+  donnent la même clé (aucune carte de `/equipment` ne change), avec
+  `EFF%` / `RES%` en `rate` et `EFF` / `RES` en `flat`. Le guide Ether lit
+  une clé nouvelle, `guides.mode.world-boss` (aucune clé existante ne
+  disait le nom seul). **Reste à Sevih** : la page détail d'un équipement
+  et une reco montrent `EFF%` / `RES%` pour la variante en % ; la tâche
+  World Boss du suivi dit « (récompense du jour) » ; le calculateur d'Ether
+  affiche « ≈×4.3 » dans la table hebdo. **Suite** : C22.
 - **A58 — Menus : Singularity (note gardée, alerte au build), calculateur
   d'Ether, World Boss « récompense du jour », EFF% / RES%, `[+Turn]`.**
   Constats B5, B7, B8 et § « Cosmétique » de la revue « logique du site »,
