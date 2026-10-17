@@ -153,7 +153,7 @@ export default async function CharacterDetail({
   const t = await getT(lang);
   // Seule donnée VIVANTE de la fiche : l'API du bot Discord (revalidate 60 s ;
   // bot injoignable → [] → pas de section, la page se rend quand même).
-  const reviews = await getReviewsForCharacter(slug);
+  const reviews = await getReviewsForCharacter(char.id);
   const name = characterDisplayName(char, lang);
   const curated = getCharacterCurated(char.id);
   const hex = elementHex(char.element);

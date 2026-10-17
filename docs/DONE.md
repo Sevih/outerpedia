@@ -5,6 +5,26 @@
 > détail vit dans git. Le `CHANGELOG.md` racine est GELÉ depuis le 03/08 —
 > ce fichier et le log git SONT le journal du projet.
 
+## 2026-10-17
+
+- **A59 — reviews d'une fiche perso demandées au bot par id.** La fiche
+  appelait `GET /reviews/<slug>` ; or le slug suit le nom anglais affiché,
+  et un renommage du jeu aurait détaché les reviews de leur fiche. Le bot
+  indexe désormais par id de perso (son lot OB2) et répond sur les deux :
+  `getReviewsForCharacter(characterId)` (`src/lib/data/reviews.ts`) appelle
+  `${BOT_API_URL}/reviews/${encodeURIComponent(characterId)}`, l'en-tête dit
+  pourquoi l'id et le commentaire du contrat devient `GET /reviews/:id` ; la
+  fiche (`src/app/[lang]/characters/[slug]/page.tsx`) passe `char.id`. Délai
+  (2 s), revalidation (60 s) et `ReviewsSection` inchangés. Nouveau
+  `src/lib/data/reviews.test.ts`, `fetch` bouchonné par `vi.stubGlobal` :
+  l'URL appelée finit par `/reviews/<id>`, et réponse 500, exception de
+  `fetch` ou bot qui accepte sans répondre (bouchon libéré par le seul
+  signal du délai, ~2 s réelles) rendent `[]`. Aucun changement visuel :
+  la donnée est la même. Contrôles : `pnpm typecheck` vert (les trois
+  `tsc --noEmit`, sans erreur), `pnpm lint` vert (`$ eslint`, sans sortie),
+  `pnpm test` « Tests 4019 passed (4019) ». Laissé : la prod non
+  vérifiée (le lot suppose OB2 déployé, c'est Sevih qui le constate).
+
 ## 2026-10-16
 
 - **Relecture G7 (Opus) — gear-solver sans capture par émulateur ;

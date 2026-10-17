@@ -1,6 +1,8 @@
 /**
  * Reviews communautaires — lues sur l'API du bot Discord (outerbot), qui
  * indexe le forum #hero-reviews du serveur EvaMains dans sa base SQLite.
+ * Demandées par ID de perso, pas par slug : le slug suit le nom anglais
+ * affiché, et un renommage du jeu détacherait les reviews de la fiche.
  *
  * `BOT_API_URL` = réseau Docker interne en prod (http://outerbot:3001) ;
  * absent en dev et au build CI. Toute erreur (bot injoignable, réponse non-OK)
@@ -9,7 +11,7 @@
  * la fiche qui bouge sans redéploiement.
  */
 
-/** Contrat HTTP du bot (`GET /reviews/:slug`) — inchangé depuis l'ancien bot. */
+/** Contrat HTTP du bot (`GET /reviews/:id`, le bot répond aussi par slug). */
 export interface Review {
   id: string;
   userId: string;
@@ -37,9 +39,9 @@ const BOT_API_URL = (process.env.BOT_API_URL ?? 'http://localhost:3001').replace
  * indisponibilité du bot suspendrait la régénération de toutes les fiches.
  * 2 s : les reviews sont un complément, la fiche se rend très bien sans.
  */
-export async function getReviewsForCharacter(slug: string): Promise<Review[]> {
+export async function getReviewsForCharacter(characterId: string): Promise<Review[]> {
   try {
-    const res = await fetch(`${BOT_API_URL}/reviews/${encodeURIComponent(slug)}`, {
+    const res = await fetch(`${BOT_API_URL}/reviews/${encodeURIComponent(characterId)}`, {
       next: { revalidate: 60 },
       signal: AbortSignal.timeout(2000),
     });
