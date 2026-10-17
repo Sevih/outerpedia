@@ -55,16 +55,6 @@ const KNOWN_DIVERGENCES: ReadonlyArray<{ file: string; path: string; why: string
   },
   // — Une balise que jp/kr/zh ajoutent là où `en` ne nomme rien —
   {
-    file: `${GUIDES}/dimensional-singularity/skuld-dark/content.json`,
-    path: 'intro',
-    why: 'en « heroes slower than Skuld » ; jp/kr/zh « dont la {S/SPD} est plus lente »',
-  },
-  {
-    file: `${GUIDES}/dimensional-singularity/skuld-light/content.json`,
-    path: 'intro',
-    why: 'même phrase que skuld-dark : {S/SPD} en plus dans jp/kr/zh',
-  },
-  {
     file: `${GUIDES}/joint-challenge/deep-sea-guardian/versions/2026-01/recommended.json`,
     path: '[3].reason',
     why: 'en « …COUNTER_RATE buff » ; jp/kr/zh « un {C/Striker} qui a …COUNTER_RATE »',
