@@ -7,6 +7,26 @@
 
 ## 2026-10-17
 
+- **Relecture B51 et C23 (Opus) — immunités et formes de combat des persos,
+  points de cadeau lus des tables ; Custom Recruit au simulateur ; validés.**
+  Contrôles (les deux lots dans l'arbre) : typecheck, lint et
+  `format:check` verts, `NODE_ENV=development pnpm test`
+  `Tests 4131 passed (4131)`, `scripts/quick` 1148, `damage:check` 42
+  lignes exactes. **B51** (`7993cdb0`) : sous `data/`, `damage-scaling.json`
+  (+2000129), `hero-growth.json` (+`preferredGiftBonus` 0,5, `gifts`
+  inchangé), `solver/characters.json` (2000129 gagne `dmgSec` VIT ×2,5,
+  ajout seul, `schema` 1) ; `characters.json` pas promu, comme le lot le
+  voulait. `data:sync` de gear-solver fait (`7733858`, tests 105 + 75 +
+  427). **C23** (`99314d99`) : `recruit.json` rejoué avant / après — le
+  Custom gagne `pity` `{ every: 100, max: null }`, 57 `selectable`, sa
+  ligne 3★ (2,5 %) marquée vedette et sort de son `pool` ; Rate Up, Premium
+  et Limited ne gagnent que `pity` (100/2, 100/1, 100/2) et le drapeau
+  vedette de leur ligne, pools inchangés ; `banners` et `customPool`
+  identiques. **Reste à Sevih** : intégrer les 7 persos à immunités depuis
+  quick (Données › Extraction › Personnages), puis vérifier la ligne
+  « Immunités » d'une de leurs fiches ; au simulateur, l'onglet « Custom
+  Recruit » demande 3 héros avant de tirer et montre la barre `n / 100`.
+  **Suite** : C24 (question tranchée), puis C25.
 - **C23 — Simulateur de tirages : le Custom Recruit, sa garantie tous les
   100 tirages et le choix des 3 héros.** Constat M7 de la revue de la
   logique du site (09/10), rejoué le 15/10 ; décision de Sevih du 15/10 :
