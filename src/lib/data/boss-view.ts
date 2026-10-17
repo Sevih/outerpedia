@@ -35,7 +35,13 @@ import type { Lang } from '@/lib/i18n/config';
 import { lRec } from '@/lib/i18n/localize';
 import type { MonsterThumb } from '@/components/ui/Thumbnail';
 import type { ClientEffect } from '@/components/character/EffectChips';
-import { expandRankContexts, monsterPanelStats, type SpawnContext } from '@/lib/monster-stats';
+import {
+  expandRankContexts,
+  monsterPanelStats,
+  monsterQuirkMods,
+  roleInDungeon,
+  type SpawnContext,
+} from '@/lib/monster-stats';
 import type { StatRange } from '@/lib/monster-stats';
 import {
   buildStatusMapI18n,
@@ -235,7 +241,7 @@ export function buildBossView(
     },
     stats: monsterPanelStats(monster.stats),
     statScales: g.statScales,
-    quirkMods: g.bossQuirkMods ?? {},
+    quirkMods: monsterQuirkMods(monster.type, g.bossQuirkMods),
     rankOptions: g.rankOptions ?? {},
     immunities,
     skills: bossSkills,
@@ -268,6 +274,8 @@ export function bossSpawnContexts(view: BossView, lang: Lang): SpawnContext[] {
         ...(s.hpLines ? { hpLines: s.hpLines } : {}),
       },
       d.ranks,
+      // L'id de la vue peut être épinglé (`<id>@<n>`) : le donjon liste l'id nu.
+      roleInDungeon(d, view.id.split('@')[0]),
     );
   });
 }

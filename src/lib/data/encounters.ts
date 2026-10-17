@@ -510,13 +510,14 @@ export function encounterSpawnContexts(
       level: m.level,
       label: `${modeLabel(d, lang)} · ${lRec(d.name, lang) || d.name.en}`,
       ...(d.adv ? { adv: d.adv } : {}),
-      // `bossHp` (BossMonsterHP du donjon) = les PV du BOSS : ne le coller qu'à
-      // lui, jamais aux renforts — sinon l'add affiche les PV du boss (le core
-      // « Spare Core » du guild raid montrait 6,2 M de PV comme son boss).
-      ...(d.bossHp && m.role !== 'add' ? { bossHp: d.bossHp } : {}),
+      // `bossHp` (BossMonsterHP du donjon) = les PV du BOSS : `expandRankContexts`
+      // ne le laisse qu'à lui, jamais aux renforts (le core « Spare Core » du
+      // guild raid montrait 6,2 M de PV comme son boss).
+      ...(d.bossHp ? { bossHp: d.bossHp } : {}),
       ...(m.hpLines ? { hpLines: m.hpLines } : {}),
     },
     ranksOfMonster(e, m),
+    m.role,
   );
   if (opts?.overgrade && d.overgrade && m.role === 'boss' && contexts.length === 1) {
     const lastStage = Number(/^stage_(\d+)$/.exec(d.difficulty?.key ?? '')?.[1] ?? 0);

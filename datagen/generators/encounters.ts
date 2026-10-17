@@ -14,7 +14,9 @@
  *   DungeonTemplet.SpawnID_Pos0..2  (= GroupID — CSV possible, courant dans
  *     les tours : « 401010011, 401010012 »)
  *     → DungeonSpawnTemplet.ID0..ID3 (ids de monstres, CSV possible)
- *       + Level0..3 (LE niveau réel du monstre — jamais RecommandLevel)
+ *       + Level0..3 (LE niveau réel du monstre — jamais RecommandLevel, SAUF
+ *       la tour very hard, où le client impose `RecommandLevel` à toutes les
+ *       unités : cf. `forcedUnitLevel`)
  *   DungeonTemplet.DungeonMode (type de contenu) · NameID (titre du stage,
  *   difficulté incluse) · AreaID → AreaTemplet.NameID (région/chapitre)
  *
@@ -157,7 +159,8 @@ export interface DungeonRank {
  */
 export interface DungeonMonster {
   id: string;
-  /** Niveau RÉEL à cette rencontre (DungeonSpawnTemplet.LevelN). */
+  /** Niveau RÉEL à cette rencontre (DungeonSpawnTemplet.LevelN, ou le niveau
+   *  imposé par le mode : cf. `forcedUnitLevel`). */
   level: number;
   /** Barres de vie (HPLineCount), si > 1. */
   hpLines?: number;
@@ -601,6 +604,19 @@ export function isFormationPool(rows: Row[]): boolean {
 }
 
 /**
+ * Niveau IMPOSÉ à toutes les unités d'un donjon, quand son mode en impose un :
+ * la tour very hard, où le client remplace le `Level<i>` du spawn par
+ * `DungeonTemplet.RecommandLevel` (`CSpawnPack.InitializeTowerVeryHard`) — ses
+ * 20 étages sortaient au niveau 100 au lieu de 130 à 149. LA règle, partagée
+ * par la passe donjon d'ici et par `towers.ts`. `undefined` = le niveau du
+ * spawn fait foi (tous les autres modes).
+ */
+export function forcedUnitLevel(d: Row): number | undefined {
+  if (d.DungeonMode !== 'DM_TOWER_VERY_HARD') return undefined;
+  return num(d.RecommandLevel) || undefined;
+}
+
+/**
  * Monstres d'un GROUPE de spawn (lignes `DungeonSpawnTemplet` du groupe) :
  * colonnes `ID0..ID3` (CSV possible), dédupliqués dans l'ordre des tables.
  * Toujours passer par ici, jamais lire `ID0` seul — les monstres des slots
@@ -636,6 +652,103 @@ export function dungeonSpawnedMonsters(
     }
   }
   return into;
+}
+
+/**
+ * Groupes de spawn d'une ligne de LIGUE de world boss (`WorldBossLeagueTemplet`) :
+ * ceux de son donjon (qui ne référence que le PREMIER boss), puis la chaîne
+ * `ChangeSpawnGroupID` de la ligne — tuer un boss fait apparaître le suivant.
+ * La chaîne est celle de CETTE ligne : une saison passée garde la sienne, même
+ * quand une rotation plus récente réutilise le donjon. LA règle, partagée par
+ * `buildEncounters` et content-schedule (qui perdait les boss de phase 2).
+ */
+export function leagueSpawnGroupIds(league: Row, dungeon: Row | undefined): string[] {
+  return [
+    ...new Set([
+      ...(dungeon ? spawnGroupIds(dungeon) : []),
+      ...splitCsv(league.ChangeSpawnGroupID ?? ''),
+    ]),
+  ];
+}
+
+/**
+ * Monstres d'une ligne de ligue de world boss (dédupliqués, ordre des groupes
+ * puis des tables) — `leagueSpawnGroupIds` → `spawnUnits`. `into` accumule,
+ * comme `dungeonSpawnedMonsters`.
+ */
+export function leagueSpawnedMonsters(
+  league: Row,
+  dungeon: Row | undefined,
+  spawnsByGroup: Map<string, Row[]>,
+  into: string[] = [],
+): string[] {
+  for (const g of leagueSpawnGroupIds(league, dungeon)) {
+    for (const mid of spawnUnits(spawnsByGroup.get(g) ?? [])) {
+      if (!into.includes(mid)) into.push(mid);
+    }
+  }
+  return into;
+}
+
+/** Une ligne de `RewardTemplet` lue : sa table, et ce qu'elle a laissé de côté. */
+export interface RewardRowRead {
+  table: RewardTable;
+  /** Groupes de `RewardGroupTemplet` dont une ligne n'a pas de `TypeID`. */
+  typeless: string[];
+  /**
+   * Colonnes NON VIDES de la ligne que la lecture n'a pas touchées
+   * (`ResearchCoin`, `EventCoin_*`…) : le butin qu'elles portent disparaît.
+   * Relevées par la lecture elle-même, jamais listées à la main — une colonne
+   * qu'on se met à lire sort du relevé sans y penser.
+   */
+  unread: string[];
+}
+
+/**
+ * Une ligne de `RewardTemplet` → sa table de butin (cristaux, crédits, XP,
+ * groupes fixes et aléatoires). Pur : `rewardGroups` =
+ * `groupBy(loadTable('RewardGroupTemplet'), 'GroupID')`. Une table vide
+ * (`{}`) = la ligne ne rend rien de ce qu'on sait lire.
+ */
+export function readRewardRow(row: Row, rewardGroups: Map<string, Row[]>): RewardRowRead {
+  // L'ID est la clé d'index : lu par construction.
+  const read = new Set<string>(['ID']);
+  const r = new Proxy(row, {
+    get(target, key) {
+      if (typeof key === 'string') read.add(key);
+      return target[key as string];
+    },
+  });
+  const table: RewardTable = {};
+  if (num(r.Crystal)) table.crystal = num(r.Crystal);
+  if (num(r.CreditMin) || num(r.CreditMax))
+    table.credit = { min: num(r.CreditMin), max: num(r.CreditMax) };
+  if (num(r.CharacterEXP)) table.charExp = num(r.CharacterEXP);
+  if (num(r.AccountEXP)) table.accountExp = num(r.AccountEXP);
+  const typeless: string[] = [];
+  const entries: RewardEntry[] = [];
+  const collect = (groupCsv: string | undefined, random: boolean) => {
+    for (const gid of splitCsv(groupCsv ?? '')) {
+      for (const g of rewardGroups.get(gid) ?? []) {
+        if (!g.TypeID) {
+          if (!typeless.includes(gid)) typeless.push(gid);
+          continue;
+        }
+        entries.push({
+          kind: slugEnum(g.Type),
+          id: g.TypeID,
+          min: num(g.MinCount),
+          max: num(g.MaxCount),
+          ...(random ? { random: true } : {}),
+        });
+      }
+    }
+  };
+  collect(r.StaticGroupID, false);
+  collect(r.RandomGroupID, true);
+  if (entries.length) table.entries = entries;
+  const unread = Object.keys(row).filter((k) => !read.has(k) && (row[k] ?? '').trim() !== '');
+  return { table, typeless, unread };
 }
 
 /** Remplit le placeholder `{0}` d'un titre, dans toutes les langues. */
@@ -845,7 +958,7 @@ export function buildEncounters(): EncountersData {
     }
   }
   const deadWbDungeons = new Set<string>();
-  const wbLeague = new Map<string, { chain: string[]; league?: string; level: number }>();
+  const wbLeague = new Map<string, { row: Row; league?: string; level: number }>();
   for (const r of leagueRows) {
     if (!r.DungeonID) continue;
     if (!currentWbDungeons.has(r.DungeonID)) {
@@ -854,7 +967,7 @@ export function buildEncounters(): EncountersData {
     }
     // Lignes croissantes → la rotation la plus récente l'emporte.
     wbLeague.set(r.DungeonID, {
-      chain: splitCsv(r.ChangeSpawnGroupID ?? ''),
+      row: r,
       level: num(r.Level),
       ...(r.LeagueName ? { league: r.LeagueName } : {}),
     });
@@ -954,6 +1067,9 @@ export function buildEncounters(): EncountersData {
   // groupe incomplète) sans invalider le reste du build.
   const missingRewardIds = new Set<string>();
   const typelessGroups = new Set<string>();
+  // Colonne de RewardTemplet non lue → tables qui la remplissent (cf.
+  // `readRewardRow`) : rien n'est émis, l'avertissement agrégé le dit.
+  const unreadRewardCols = new Map<string, Set<string>>();
   const resolveReward = (id: string | undefined): string | undefined => {
     if (!id) return undefined;
     if (rewardTables[id]) return id;
@@ -962,33 +1078,13 @@ export function buildEncounters(): EncountersData {
       missingRewardIds.add(id);
       return undefined;
     }
-    const table: RewardTable = {};
-    if (num(r.Crystal)) table.crystal = num(r.Crystal);
-    if (num(r.CreditMin) || num(r.CreditMax))
-      table.credit = { min: num(r.CreditMin), max: num(r.CreditMax) };
-    if (num(r.CharacterEXP)) table.charExp = num(r.CharacterEXP);
-    if (num(r.AccountEXP)) table.accountExp = num(r.AccountEXP);
-    const entries: RewardEntry[] = [];
-    const collect = (groupCsv: string | undefined, random: boolean) => {
-      for (const gid of splitCsv(groupCsv ?? '')) {
-        for (const g of rewardGroups.get(gid) ?? []) {
-          if (!g.TypeID) {
-            typelessGroups.add(gid);
-            continue;
-          }
-          entries.push({
-            kind: slugEnum(g.Type),
-            id: g.TypeID,
-            min: num(g.MinCount),
-            max: num(g.MaxCount),
-            ...(random ? { random: true } : {}),
-          });
-        }
-      }
-    };
-    collect(r.StaticGroupID, false);
-    collect(r.RandomGroupID, true);
-    if (entries.length) table.entries = entries;
+    const { table, typeless, unread } = readRewardRow(r, rewardGroups);
+    for (const gid of typeless) typelessGroups.add(gid);
+    for (const col of unread) {
+      let ids = unreadRewardCols.get(col);
+      if (!ids) unreadRewardCols.set(col, (ids = new Set()));
+      ids.add(id);
+    }
     if (!Object.keys(table).length) return undefined;
     rewardTables[id] = table;
     return id;
@@ -1001,7 +1097,10 @@ export function buildEncounters(): EncountersData {
   for (const d of loadTable('DungeonTemplet')) {
     if (deadWbDungeons.has(d.ID)) continue;
     if ((d.DungeonMode ?? '').startsWith('DM_GUILD_RAID') && !grCurrent.has(d.ID)) continue;
-    const groupIds = [...new Set([...spawnGroupIds(d), ...(wbLeague.get(d.ID)?.chain ?? [])])];
+    const leagueRow = wbLeague.get(d.ID)?.row;
+    // Dédupliqués : une position peut répéter le groupe d'une autre (story
+    // 200102 : Pos0 = Pos1), il n'engage qu'une vague.
+    const groupIds = leagueRow ? leagueSpawnGroupIds(leagueRow, d) : [...new Set(spawnGroupIds(d))];
     if (!groupIds.length) continue;
 
     // Monstres du donjon, dédupliqués par (VAGUE, FORMATION, monstre, niveau) :
@@ -1024,6 +1123,7 @@ export function buildEncounters(): EncountersData {
     };
     const seen = new Map<string, Found>();
     const found: Found[] = [];
+    const forcedLevel = forcedUnitLevel(d);
     let wave = 0;
     let pooled = false;
     for (const g of groupIds) {
@@ -1043,7 +1143,7 @@ export function buildEncounters(): EncountersData {
               formation++;
               counted = true;
             }
-            const level = num(w[`Level${i}`]);
+            const level = forcedLevel ?? num(w[`Level${i}`]);
             const key = `${wave}|${formation}|${mid}|${level}`;
             const prev = seen.get(key);
             if (prev) {
@@ -1657,8 +1757,11 @@ export function buildEncounters(): EncountersData {
   // de niveaux → BuffID → BuffTemplet. On retient les MALUS inconditionnels
   // portés par la cible (BT_STAT_PREMIUM, Target=ME, valeur négative) — les
   // nœuds héros sont des BONUS ou des buffs conditionnels (élémentaires).
-  // Aujourd'hui : Awakening_Boss_{Avoid,Buff_RESIST}_Down_1/2 → EFF −10 %,
-  // RES −10 %.
+  // Aujourd'hui : Awakening_Boss_{Avoid,Buff_RESIST}_Down_1/2 → −10 % par
+  // nœud, deux nœuds (`_1`, `_2`, que le client ne dédoublonne pas), donc EFF
+  // −20 % et RES −20 % au total — sur les BOSS seulement : le client n'applique
+  // ces nœuds qu'à un type ≥ `CT_BOSS_MONSTER` (`CCharacterData.CheckNodeApply`),
+  // le site les filtre par `monsterQuirkMods` (src/lib/monster-stats.ts).
   const bossQuirkMods: Record<string, number> = {};
   const quirkLevels = groupBy(loadTable('CharacterAwakeningLevelTemplet'), 'AwakeningLevelGroupID');
   for (const n of loadTable('CharacterAwakeningNodeTemplet')) {
@@ -1678,10 +1781,24 @@ export function buildEncounters(): EncountersData {
   }
 
   // Lacunes de butin : UNE ligne agrégée, seulement quand la liste change.
+  const unreadCols = [...unreadRewardCols.keys()].sort();
   const gapsSig =
-    [...missingRewardIds].sort().join(',') + '§' + [...typelessGroups].sort().join(',');
-  if (gapsSig !== '§' && gapsSig !== lastRewardGapsSig) {
+    [...missingRewardIds].sort().join(',') +
+    '§' +
+    [...typelessGroups].sort().join(',') +
+    '§' +
+    unreadCols.map((c) => `${c}:${[...unreadRewardCols.get(c)!].sort().join(',')}`).join(';');
+  if (gapsSig !== '§§' && gapsSig !== lastRewardGapsSig) {
     const parts: string[] = [];
+    if (unreadCols.length)
+      parts.push(
+        `colonne(s) de RewardTemplet non lue(s) : ${unreadCols
+          .map((c) => {
+            const ids = unreadRewardCols.get(c)!;
+            return `${c} (${ids.size} table${ids.size > 1 ? 's' : ''} : ${idSpan(ids)})`;
+          })
+          .join(', ')}`,
+      );
     if (typelessGroups.size)
       parts.push(
         `${typelessGroups.size} ligne(s) de RewardGroup sans TypeID (${idSpan(typelessGroups)})`,

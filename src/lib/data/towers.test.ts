@@ -138,12 +138,14 @@ describe('tours élémentaires — contre-élément requis', () => {
     });
   }
 
-  it('portent leurs jours d’ouverture (sam+dim + le jour propre) et leur debuff', () => {
+  it('portent les jours de leur débuff (sam+dim + le jour propre) et leur debuff', () => {
+    // `debuffDays` = calendrier du DÉBUFF (`TowerElementalConfigTemplet.DayOfWeek`),
+    // pas l'ouverture (`DungeonPVEGroupTemplet.DayList`, vide pour ces tours).
     for (const el of Object.keys(COUNTER)) {
       const t = tower(`${TOWER_ELEMENT_MODE}_${el}`);
-      expect(t.days, el).toHaveLength(3);
-      expect(t.days, el).toContain('sun');
-      expect(t.days, el).toContain('sat');
+      expect(t.debuffDays, el).toHaveLength(3);
+      expect(t.debuffDays, el).toContain('sun');
+      expect(t.debuffDays, el).toContain('sat');
       expect(t.debuff?.title.en, el).toBeTruthy();
       expect(t.debuff?.buffs.length, el).toBeGreaterThan(0);
     }

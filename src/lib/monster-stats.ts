@@ -8,7 +8,8 @@
  *   - `adv` (per-mille signés, `SpawnAdvantageRate_*`) sur ATK/DEF/HP/SPD :
  *     `stat × (1000 + adv) / 1000` arrondi bas (10754 × 0,465 = 5000 exact) ;
  *   - `bossHp` (`EventBossDungeonTemplet.BossMonsterHP`) : PV réels du boss,
- *     REMPLACE l'interpolation (2 000 000 en very hard).
+ *     REMPLACE l'interpolation (2 000 000 en very hard) — sur le BOSS seul,
+ *     jamais sur un renfort (cf. `expandRankContexts`).
  *
  * PIÈGE — `DungeonRank.hp` a DEUX sens selon le mode, et les confondre ment :
  * dans un mode à SCORE, ce n'est PAS les PV du boss mais la LARGEUR de la
@@ -17,7 +18,8 @@
  * PV mentait d'un facteur 7,5. Le discriminant est `damage` : avec tranche, la
  * valeur est une barre (`bar`) ; sans tranche (adventure), de vrais PV.
  */
-import type { DungeonAdv, DungeonRank, RankDamage } from '@contracts';
+import type { DungeonAdv, DungeonMonster, DungeonRank, DungeonRef, RankDamage } from '@contracts';
+import { calcStatByLevel } from '@/lib/damage/formula';
 
 export interface StatRange {
   min: number;
@@ -75,19 +77,43 @@ export interface SpawnContext {
   options?: string[];
 }
 
+/** Rôle d'un monstre dans un donjon (`DungeonRef.monsters[].role`) ; introuvable → `undefined`. */
+export function roleInDungeon(
+  d: Pick<DungeonRef, 'monsters'>,
+  monsterId: string,
+): DungeonMonster['role'] | undefined {
+  return d.monsters?.find((m) => m.id === monsterId)?.role;
+}
+
 /**
  * Déplie un spawn en contextes : sans palier, le spawn tel quel ; avec paliers
  * (modes à progression : guild dungeon, world boss, singularity, event
  * challenge, adventure, exploration), UN contexte PAR palier — le palier
  * redéfinit la rencontre (niveau, PV, et ses adv REMPLACENT ceux du donjon).
+ *
+ * `role` = rôle du monstre dans la rencontre (`roleInDungeon`). LA règle : les
+ * PV de BOSS d'une rencontre (`bossHp` du donjon, ou `hp` d'un palier sans
+ * tranche de dégâts) ne vont qu'au boss, jamais à un renfort — le client ne
+ * pose `BossHP` que si `Templet.IsBoss()` (`CDungeonScene`), et
+ * `CAdventureLicenseSpawnData` laisse au renfort ses PV interpolés (les 80
+ * contextes de renfort de l'Adventure License affichaient les PV du boss).
+ * Rôle inconnu → traité comme aujourd'hui, sans rien deviner. Un palier SCORÉ
+ * garde sa règle (`bar`, PV de base) quel que soit le rôle.
  */
-export function expandRankContexts(base: SpawnContext, ranks?: DungeonRank[]): SpawnContext[] {
-  if (!ranks?.length) return [base];
+export function expandRankContexts(
+  base: SpawnContext,
+  ranks?: DungeonRank[],
+  role?: DungeonMonster['role'],
+): SpawnContext[] {
+  const add = role === 'add';
+  const own: SpawnContext = { ...base };
+  if (add) delete own.bossHp;
+  if (!ranks?.length) return [own];
   return ranks.map((r) => {
     // Une tranche de dégâts = mode à SCORE = `r.hp` est une BARRE, pas des PV.
     const scored = r.damage !== undefined;
     return {
-      ...base,
+      ...own,
       level: r.level ?? base.level,
       // Le palier porte le nom que le JEU lui donne — ou rien. Un « #3 » de
       // repli était un faux grade : il partait dans le sprite du badge
@@ -97,7 +123,7 @@ export function expandRankContexts(base: SpawnContext, ranks?: DungeonRank[]): S
       rank: r.name,
       ...(r.stage ? { stage: r.stage } : {}),
       adv: r.adv,
-      bossHp: scored ? base.bossHp : (r.hp ?? base.bossHp),
+      bossHp: scored || add ? own.bossHp : (r.hp ?? own.bossHp),
       ...(scored && r.hp !== undefined ? { bar: r.hp } : {}),
       ...(r.transLevel ? { transLevel: r.transLevel } : {}),
       ...(r.damage ? { damage: r.damage } : {}),
@@ -136,11 +162,29 @@ const ADV_OF: Record<string, keyof DungeonAdv> = {
   speed: 'spd',
 };
 
+/** Types de monstre ≥ `CT_BOSS_MONSTER` : ceux à qui le client applique les quirks de compte. */
+const QUIRK_BOSS_TYPES = new Set(['boss', 'area_boss', 'season_boss']);
+
+/**
+ * Quirks de compte qui s'appliquent à un monstre, selon son TYPE : ceux du
+ * glossaire (`glossaries.bossQuirkMods`) pour `boss`, `area_boss` et
+ * `season_boss`, rien sinon — le client n'applique les nœuds d'éveil 198 à 201
+ * qu'à un type ≥ `CT_BOSS_MONSTER` (`CCharacterData.CheckNodeApply`) ; 1 180
+ * monstres `monster` / `named` des rencontres perdaient 20 % d'EFF et de RES.
+ */
+export function monsterQuirkMods(
+  type: string | undefined,
+  bossQuirkMods: Record<string, number> | undefined,
+): Record<string, number> {
+  return type && QUIRK_BOSS_TYPES.has(type) ? (bossQuirkMods ?? {}) : {};
+}
+
 /**
  * Valeur EFFECTIVE d'une stat dans le contexte d'une rencontre. `quirkMods` =
- * réductions PERMANENTES des quirks de compte (`glossaries.bossQuirkMods`,
- * per-mille signés — EFF/RES −10 %) : le jeu les applique aux stats affichées
- * du boss, nous aussi.
+ * réductions PERMANENTES des quirks de compte (`monsterQuirkMods`, per-mille
+ * signés — EFF/RES −10 % par nœud, deux nœuds, −20 % au total, boss seulement :
+ * `CheckNodeApply`) : le jeu les applique aux stats affichées du boss, nous
+ * aussi.
  */
 export function statAt(
   slug: string,
@@ -148,7 +192,9 @@ export function statAt(
   ctx: SpawnContext,
   quirkMods?: Record<string, number>,
 ): number {
-  let v = r.min + Math.floor(((r.max - r.min) * (ctx.level - 1)) / 99);
+  // Interpolation tronquée VERS ZÉRO, comme le client (`CFormula.CalcStat`) :
+  // sur une plage décroissante, `Math.floor` sortait 1 de moins.
+  let v = calcStatByLevel(r.min, r.max, ctx.level);
   const og = ctx.overGrade ?? 0;
   // Overgrade ATK/DEF = canal addRate (§ 3.2) : sur la BASE, avant adv.
   if (og && (slug === 'atk' || slug === 'def'))

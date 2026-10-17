@@ -11,12 +11,14 @@
  * L'élément d'une tour élémentaire n'est PAS une colonne du donjon : il se lit
  * dans le token du `NameID` (`SYS_INFINITE_DUNGEON_FIRE_01`), confronté aux
  * éléments déclarés par TowerElementalConfigTemplet (`DSM_FIRE`…) — aucun
- * mapping en dur. La même table donne les JOURS D'OUVERTURE par élément et le
- * texte du debuff de tour.
+ * mapping en dur. La même table donne les JOURS DU DÉBUFF par élément
+ * (`DayOfWeek`, « Debuff Schedule » du jeu — pas l'ouverture, que le jeu porte
+ * dans `DungeonPVEGroupTemplet.DayList`, vide pour ces tours) et le texte du
+ * debuff de tour.
  *
  * Composition d'un étage = la chaîne spawn universelle (cf. encounters) :
  * `SpawnID_Pos0..2` (CSV possible !) → DungeonSpawnTemplet, monstres
- * `ID0..3`/`Level0..3`. DEUX régimes, discriminés par la FORME des groupes
+ * `ID0..3`/`Level0..3` (very hard : niveau imposé, cf. `forcedUnitLevel`). DEUX régimes, discriminés par la FORME des groupes
  * (constaté en jeu par Sevih, confirmé sur les 660 étages — aucun mixte) :
  *   - groupes à UNE ligne chacun → `waves`, formations jouées À LA SUITE
  *     (normale/hard/élémentaires, 1 à 6 vagues) ;
@@ -48,7 +50,7 @@ import { slugEnum } from '../lib/enums';
 import { isMain } from '../lib/is-main';
 import { loadTextIndex, resolveText } from '../lib/text';
 import { groupBy, indexBy, loadTable, num, splitCsv, type Row } from '../lib/tables';
-import { isFormationPool, spawnGroupIds } from './encounters';
+import { forcedUnitLevel, isFormationPool, spawnGroupIds } from './encounters';
 
 /**
  * Le jeton qui distingue une tour dans son `NameID` — le mot juste avant le
@@ -59,7 +61,11 @@ export function towerNameToken(nameId: string): string | undefined {
   return /_([A-Za-z]+)_\d+\s*$/.exec(nameId)?.[1]?.toLowerCase();
 }
 
-/** Un monstre d'une vague (niveau RÉEL de la rencontre). */
+/**
+ * Un monstre d'une vague, au niveau RÉEL de la rencontre : le `Level<i>` du
+ * spawn, ou le niveau que le mode impose (very hard : `RecommandLevel` de
+ * l'étage, cf. `forcedUnitLevel`).
+ */
 export interface TowerUnit {
   id: string;
   level: number;
@@ -68,13 +74,15 @@ export interface TowerUnit {
 /**
  * Une ligne de groupe de spawn (`DungeonSpawnTemplet`) → une formation : les 4
  * slots `ID0..3`, chacun pouvant être un CSV de plusieurs monstres qui
- * PARTAGENT le `Level<i>` de leur slot. Pur (aucune table), cœur testable.
+ * PARTAGENT le `Level<i>` de leur slot — ou `level`, le niveau imposé par le
+ * mode (`forcedUnitLevel`), passé par l'appelant. Pur (aucune table), cœur
+ * testable.
  */
-export function formationOf(w: Row): TowerUnit[] {
+export function formationOf(w: Row, level?: number): TowerUnit[] {
   const units: TowerUnit[] = [];
   for (let i = 0; i < 4; i++) {
     for (const mid of splitCsv(w[`ID${i}`] ?? '')) {
-      units.push({ id: mid, level: num(w[`Level${i}`]) });
+      units.push({ id: mid, level: level ?? num(w[`Level${i}`]) });
     }
   }
   return units;
@@ -144,8 +152,12 @@ export interface Tower {
   mode: string;
   /** Élément (`fire`…), tours élémentaires uniquement. */
   element?: string;
-  /** Jours d'ouverture (slugs `sun`/`mon`/…), tours élémentaires uniquement. */
-  days?: string[];
+  /**
+   * Jours du DÉBUFF de tour (`TowerElementalConfigTemplet.DayOfWeek`, slugs
+   * `sun`/`mon`/…), pas l'ouverture, que le jeu porte dans
+   * `DungeonPVEGroupTemplet.DayList`, vide. Tours élémentaires uniquement.
+   */
+  debuffDays?: string[];
   /** Debuff de tour, tours élémentaires uniquement. */
   debuff?: TowerDebuff;
   /**
@@ -215,13 +227,13 @@ export function buildTowers(): TowersData {
     return randomized ? { restrictions: fixed, randomized: true } : { restrictions: fixed };
   };
 
-  // Config élémentaire : élément (DSM_*) → jours + debuff.
-  const elemConfig = new Map<string, { days: string[]; debuff: TowerDebuff }>();
+  // Config élémentaire : élément (DSM_*) → jours du débuff + debuff.
+  const elemConfig = new Map<string, { debuffDays: string[]; debuff: TowerDebuff }>();
   for (const r of loadTable('TowerElementalConfigTemplet')) {
     const element = slugEnum(r.DungeonSubMode);
     if (!element) continue;
     elemConfig.set(element, {
-      days: splitCsv(r.DayOfWeek).map((d) => slugEnum(d)),
+      debuffDays: splitCsv(r.DayOfWeek).map((d) => slugEnum(d)),
       debuff: {
         title: resolveText(tsys, r.TitleText),
         tooltip: resolveText(tsys, r.ToolTipText),
@@ -241,9 +253,10 @@ export function buildTowers(): TowersData {
   /** Composition d'un étage — `waves` OU `encounters` selon la forme (cf. en-tête). */
   const compositionOf = (d: Row): Pick<TowerFloor, 'waves' | 'encounters'> => {
     const groups = spawnGroupIds(d).map((g) => spawnsByGroup.get(g) ?? []);
+    const level = forcedUnitLevel(d);
     const formations = groups
       .flat()
-      .map(formationOf)
+      .map((w) => formationOf(w, level))
       .filter((f) => f.length);
     if (groups.some(isFormationPool)) {
       if (groups.length > 1)
@@ -286,7 +299,7 @@ export function buildTowers(): TowersData {
         tower.element = element;
         const cfg = elemConfig.get(element);
         if (cfg) {
-          tower.days = cfg.days;
+          tower.debuffDays = cfg.debuffDays;
           tower.debuff = cfg.debuff;
         }
       }
@@ -329,7 +342,7 @@ if (isMain(import.meta.url)) {
     const restricted = t.floors.filter((f) => f.restrictions.length).length;
     const random = t.floors.filter((f) => f.randomized).length;
     const bits = [`${t.floors.length} étages`];
-    if (t.days) bits.push(`jours ${t.days.join(',')}`);
+    if (t.debuffDays) bits.push(`débuff ${t.debuffDays.join(',')}`);
     if (restricted) bits.push(`${restricted} avec restriction fixe`);
     if (random) bits.push(`${random} randomisés (pool ${t.restrictionsPool?.length ?? 0})`);
     console.log(`${k}: ${bits.join(' — ')}`);

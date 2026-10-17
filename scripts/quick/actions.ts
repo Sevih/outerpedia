@@ -126,6 +126,7 @@ import {
   type DungeonSources,
   type MonsterStatsSheet,
 } from '@/lib/admin/monster-sheet';
+import { monsterQuirkMods } from '@/lib/monster-stats';
 import {
   SPRITE_ROUTE,
   monsterBossBadgeSrc,
@@ -8234,7 +8235,7 @@ export async function extractorEntity(
         m.stats,
         contexts,
         deps.statScales(),
-        enc.bossQuirkMods,
+        monsterQuirkMods(m.type, enc.bossQuirkMods),
         optionLabels,
       ),
       encounters: monsterEncounters(m, src),

@@ -37,8 +37,6 @@ les preuves et les décisions vivent dans le tri consolidé de sevih-tool
       corriger les commentaires.
 - [ ] **Sets et équipement (C, build)** : M8 (H2, M9, R17 : FAIT, C18 ;
       M10, B1, R11, R12, R13, O11 : FAIT, C19).
-- [ ] **Rencontres (C, build)** : R2, O8, O9 ; côté site R4, R5, R21
-      (R1, R3 : FAIT, C21).
 - [ ] **Primitives texte et pourcentage (C, build)** : R6, O3, O4, O14,
       O15, R8, R19.
 - [ ] **Calculateur (C, build)** : H1, H3, M2, M4, B6, R15, R18, O12 ;

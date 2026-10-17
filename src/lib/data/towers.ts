@@ -3,7 +3,8 @@
  *
  * Une tour est soit une tour de DIFFICULTÉ (`tower` / `tower_hard` /
  * `tower_very_hard`), soit une tour ÉLÉMENTAIRE (`tower_element`, qui porte
- * alors `element` + son debuff + ses jours d'ouverture). Un guide de la
+ * alors `element` + son debuff + les jours du débuff, `debuffDays` — pas ses
+ * jours d'ouverture, que les tables ne donnent pas). Un guide de la
  * catégorie `skyward-tower` DÉSIGNE sa tour par sa clé (`meta.tower`) — la vue
  * en tire la section (difficulté / élémentaire), l'élément et l'ordre, là où la
  * tout ça se lisait dans le SLUG du guide (`fire-tower`, `normal-tower`).

@@ -7,6 +7,97 @@
 
 ## 2026-10-17
 
+- **B57 — Rencontres, suite : Very Hard au niveau recommandé, jours du
+  débuff, phase 2 des World Boss, monnaies non lues, renforts, quirks,
+  troncature (R2, O8/B13, O9, B12, R4, R5, R21/B2).** Générateur. R2 : le
+  client impose `DungeonTemplet.RecommandLevel` à toutes les unités de la
+  tour very hard (`CSpawnPack.InitializeTowerVeryHard`) ; la règle vit dans
+  `forcedUnitLevel` (`datagen/generators/encounters.ts`), lue par la passe
+  donjon et par `towers.ts`, où `formationOf(w, level?)` reste pur et reçoit
+  le niveau de l'appelant. En-tête d'`encounters.ts` (« jamais
+  RecommandLevel » sauf very hard), docs de `DungeonMonster.level` et de
+  `TowerUnit` suivies. O8 : `Tower.days` devient `debuffDays`, documenté
+  comme le calendrier du débuff (`TowerElementalConfigTemplet.DayOfWeek`),
+  pas l'ouverture (`DungeonPVEGroupTemplet.DayList`, vide) ; en-tête, log
+  d'exécution directe, `src/lib/data/towers.ts` et le test suivis, aucun
+  autre lecteur (`grep` sur `src/`, `scripts/quick/`, `datagen/`). O9 :
+  `leagueSpawnGroupIds` / `leagueSpawnedMonsters`, exportés d'`encounters.ts`
+  (groupes du donjon puis `ChangeSpawnGroupID` de la LIGNE, donc la chaîne
+  historique de la saison), appelés par `buildEncounters` (`wbLeague` garde
+  la ligne au lieu de la chaîne) et par `content-schedule.ts`, qui suit
+  chaque ligne de ligue de la saison. B12 : `readRewardRow`, pur, lit une
+  ligne de `RewardTemplet` à travers un `Proxy` qui note les colonnes lues ;
+  le reste des colonnes non vides (l'`ID`, clé d'index, compte comme lu)
+  forme le relevé, sans liste écrite à la main, y compris pour une ligne qui
+  ne rend rien. Il rejoint la ligne agrégée et sa signature `gapsSig` :
+  « ⚠ encounters : butin partiellement ignoré — colonne(s) de RewardTemplet
+  non lue(s) : ResearchCoin (52 tables : 110505…40701020) ; 36 ligne(s) de
+  RewardGroup sans TypeID (40501001…40701019). » 52 et non 16 : les 16
+  tables émises plus 36 lignes de tours (40501001…40701019) qui ne portent
+  que `ResearchCoin` et un groupe sans `TypeID`, donc ne rendent rien et
+  sortent par le `return undefined`, comme le lot le demandait. Rien n'est
+  émis. Site. R4 : `expandRankContexts(base, ranks, role?)`
+  (`src/lib/monster-stats.ts`) porte LA règle : les PV de boss (`bossHp` du
+  donjon ou `hp` d'un palier sans tranche) ne vont qu'au boss ; un renfort
+  les perd, avec ou sans palier ; rôle inconnu = comportement d'avant ;
+  palier scoré inchangé (`bar`). `roleInDungeon` lit
+  `DungeonRef.monsters[].role` ; `encounterSpawnContexts` passe `m.role` (sa
+  garde locale part dans la règle), `bossSpawnContexts` passe le rôle de
+  l'id nu de la vue (un id épinglé `<id>@<n>` est coupé),
+  `monsterStatContexts` reçoit `Pick<Monster, 'id' | 'spawns'>`. R5 :
+  `monsterQuirkMods(type, bossQuirkMods)` rend les quirks pour `boss`,
+  `area_boss`, `season_boss`, rien sinon ; appelé par `boss-view.ts` et
+  `scripts/quick/actions.ts` ; commentaires d'`encounters.ts` et de `statAt`
+  à jour (−10 % par nœud, deux nœuds, −20 %, boss seulement,
+  `CheckNodeApply`). R21 : `statAt` réutilise `calcStatByLevel`
+  (`src/lib/damage/formula.ts` n'importe qu'un type de `harness` et des
+  constantes de `types.ts`, sans import : sûr côté client ; les 4 848
+  monstres ont des stats entières, le `BigInt` ne lève pas). Tests, en
+  relation : `forcedUnitLevel`, `formationOf` à niveau imposé, very hard au
+  niveau de l'étage dans `encounters.json` et `towers.json`, chaîne WB
+  (synthétique, dernière saison contre encounters, et toutes les saisons
+  rejointes aux tables, bloc sauté sans `.gamedata`), `readRewardRow` sur
+  fixture (colonne inconnue avec butin, ligne qui ne porte qu'elle, ligne
+  entièrement lue), `debuffDays` des cinq tours, et dans
+  `monster-stats.test.ts` renfort / boss sous palier non scoré, `bossHp` du
+  donjon, rôle inconnu, palier scoré, quirks par type, troncature
+  (−0,4 → 0). Avant promotion, les cinq tests de donnée échouaient sur
+  l'ancien `data/generated/` (ils mordent). Correctif en cours de lot : le
+  premier build sortait une vague de trop à la story 200102 (`SpawnID_Pos0`
+  = `Pos1`) ; l'ancienne ligne dédupliquait les groupes de TOUT donjon par
+  `Set`, la dédup est remise hors WB. Vérification : `pnpm typecheck` et
+  `pnpm lint` sans sortie après la commande (`$ eslint`), `pnpm test`
+  `Tests 4046 passed (4046)`, la suite `scripts/quick` (vitest,
+  `NODE_ENV=development`) `Tests 1148 passed (1148)`, `fixtures.test.ts` vert sans
+  toucher une fixture. `datagen:promote` à blanc : `content-schedule.json`
+  ~1 (`worldBoss[].monsters` des 25 saisons, ajouts seuls), `encounters.json`
+  ~20 (`monsters[].level` des 20 étages very hard, plus les 7 retenus),
+  `monsters.json` ~57 (`spawns[].level` des seuls donjons very hard),
+  `towers.json` ~7 (`level` des unités very hard, `days` → `debuffDays` sur
+  six tours élémentaires dont `tower_element_none`) ; `monster-skills.json`
+  et `reward-tables.json` identiques. Promotion `--only` du trio, puis
+  `sync-derived` : sous `data/`, seuls les quatre fichiers ; `damage/` et
+  `solver/` intacts. Calculateur : les 18 028 cibles
+  (`presetSpawnStats`, donjon × monstre × contexte), recalculées sur une
+  copie `git archive` de HEAD et sur l'arbre final : 524 changent (very
+  hard) et 80 (PV des renforts de l'Adventure License), aucune autre.
+  Rejeux de la revue (copies hors dépôt) : `r5_tower_vh_level.py` 20 → 0,
+  `r4_wb_chain.py` 24 → 0, `r3_adv_adds.mts` 80 → 0 (la copie passe
+  `m.role` comme le site, calcul « client » gardé ; l'original sans rôle
+  reste à 80), `r8_negative_interp.py` 5 → 0 rejoué avec le vrai `statAt`
+  (l'original recopie l'ancien `Math.floor` en python : il passe à 910
+  écarts parce que les very hard montent à 130-149, autant de ±1 que la
+  troncature évite), `r10_quirks.py` 1 180 monstres `monster` / `named` en
+  rencontre, complété : 1 180 → 0 recevant encore des quirks, 1 565 boss
+  les gardent. Laissé, hors périmètre : `TowerGuide.tsx` ne passe pas
+  l'`adv` du donjon aux cartes (`spawns={[{ level }]}`, l.163 et l.187),
+  constat nouveau ; `bossSpawnContexts` et `monsterStatContexts` donnent
+  encore l'échelle entière (`d.ranks`) à chaque monstre, pas celle de
+  `ranksOfMonster` ; `resolveRewardTable` (`rewards.ts`) toujours sans
+  appelant ; R1, R3 (C21), l'ouverture des tours élémentaires, le PV
+  d'overgrade en float32 et le contrat solver. **Reste à Sevih** : un guide
+  de tour very hard montre ses monstres au niveau 130-149 ; une carte de
+  renfort (adds de `TowerGuide`) n'a plus le −20 % d'EFF/RES.
 - **Relecture C21 (Opus) — Monad Gate au niveau et à l'adversité du nœud,
   adversité de base de l'Infiltration ; validé.** Question du lot tranchée
   par les tables et le client (événements `MGET_BATTLE` inclus, rattachés

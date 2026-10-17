@@ -52,6 +52,14 @@ describe('formationOf — slots ID0..3 → unités', () => {
     ]);
   });
 
+  it('un niveau IMPOSÉ (very hard, `forcedUnitLevel`) remplace celui de chaque slot', () => {
+    const w: Row = { ID0: 'a', Level0: '100', ID1: 'b', Level1: '100' };
+    expect(formationOf(w, 137)).toEqual([
+      { id: 'a', level: 137 },
+      { id: 'b', level: 137 },
+    ]);
+  });
+
   it('slots vides ignorés, niveau absent → 0', () => {
     const w: Row = { ID0: 'x', ID2: 'y' };
     expect(formationOf(w)).toEqual([
@@ -107,6 +115,18 @@ describe('towers.json — structure des tours', () => {
       }
     }
     expect(orphans).toEqual([]);
+  });
+});
+
+describe('towers.json — niveau imposé (very hard)', () => {
+  it('chaque unité de chaque formation est au niveau de son étage', () => {
+    const bad: string[] = [];
+    for (const f of towers.tower_very_hard.floors) {
+      for (const grp of [...(f.waves ?? []), ...(f.encounters ?? [])]) {
+        for (const u of grp) if (u.level !== f.level) bad.push(`${f.floor} → ${u.id}@${u.level}`);
+      }
+    }
+    expect(bad).toEqual([]);
   });
 });
 

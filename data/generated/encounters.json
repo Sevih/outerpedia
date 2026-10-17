@@ -51266,266 +51266,266 @@
     "monsters": [
       {
         "id": "40103022",
-        "level": 100,
+        "level": 130,
         "hpLines": 30,
         "role": "add",
         "formation": 1
       },
       {
         "id": "40103001",
-        "level": 100,
+        "level": 130,
         "hpLines": 30,
         "role": "boss",
         "formation": 1
       },
       {
         "id": "40103002",
-        "level": 100,
+        "level": 130,
         "hpLines": 30,
         "role": "boss",
         "formation": 2
       },
       {
         "id": "40103003",
-        "level": 100,
+        "level": 130,
         "hpLines": 30,
         "role": "boss",
         "formation": 3
       },
       {
         "id": "40103026",
-        "level": 100,
+        "level": 130,
         "hpLines": 30,
         "role": "add",
         "formation": 3
       },
       {
         "id": "40103027",
-        "level": 100,
+        "level": 130,
         "hpLines": 30,
         "role": "add",
         "formation": 3
       },
       {
         "id": "40103028",
-        "level": 100,
+        "level": 130,
         "hpLines": 30,
         "role": "add",
         "formation": 3
       },
       {
         "id": "40103031",
-        "level": 100,
+        "level": 130,
         "hpLines": 30,
         "role": "add",
         "formation": 4
       },
       {
         "id": "40103029",
-        "level": 100,
+        "level": 130,
         "hpLines": 30,
         "role": "add",
         "formation": 4
       },
       {
         "id": "40103030",
-        "level": 100,
+        "level": 130,
         "hpLines": 30,
         "role": "add",
         "formation": 4
       },
       {
         "id": "40103004",
-        "level": 100,
+        "level": 130,
         "hpLines": 30,
         "role": "boss",
         "formation": 4
       },
       {
         "id": "40103005",
-        "level": 100,
+        "level": 130,
         "hpLines": 30,
         "role": "boss",
         "formation": 5
       },
       {
         "id": "40103032",
-        "level": 100,
+        "level": 130,
         "hpLines": 30,
         "role": "add",
         "formation": 5
       },
       {
         "id": "40103033",
-        "level": 100,
+        "level": 130,
         "hpLines": 30,
         "role": "add",
         "formation": 5
       },
       {
         "id": "40103028",
-        "level": 100,
+        "level": 130,
         "hpLines": 30,
         "role": "add",
         "formation": 5
       },
       {
         "id": "40103036",
-        "level": 100,
+        "level": 130,
         "hpLines": 30,
         "role": "add",
         "formation": 6
       },
       {
         "id": "40103034",
-        "level": 100,
+        "level": 130,
         "hpLines": 30,
         "role": "add",
         "formation": 6
       },
       {
         "id": "40103035",
-        "level": 100,
+        "level": 130,
         "hpLines": 30,
         "role": "add",
         "formation": 6
       },
       {
         "id": "40103006",
-        "level": 100,
+        "level": 130,
         "hpLines": 30,
         "role": "boss",
         "formation": 6
       },
       {
         "id": "40103058",
-        "level": 100,
+        "level": 130,
         "hpLines": 30,
         "role": "add",
         "formation": 7
       },
       {
         "id": "40103027",
-        "level": 100,
+        "level": 130,
         "hpLines": 30,
         "role": "add",
         "formation": 7
       },
       {
         "id": "40103007",
-        "level": 100,
+        "level": 130,
         "hpLines": 30,
         "role": "boss",
         "formation": 7
       },
       {
         "id": "40103026",
-        "level": 100,
+        "level": 130,
         "hpLines": 30,
         "role": "add",
         "formation": 8
       },
       {
         "id": "40103037",
-        "level": 100,
+        "level": 130,
         "hpLines": 30,
         "role": "add",
         "formation": 8
       },
       {
         "id": "40103008",
-        "level": 100,
+        "level": 130,
         "hpLines": 30,
         "role": "boss",
         "formation": 8
       },
       {
         "id": "40103009",
-        "level": 100,
+        "level": 130,
         "hpLines": 30,
         "role": "boss",
         "formation": 9
       },
       {
         "id": "40103039",
-        "level": 100,
+        "level": 130,
         "hpLines": 30,
         "role": "add",
         "formation": 9
       },
       {
         "id": "40103040",
-        "level": 100,
+        "level": 130,
         "hpLines": 30,
         "role": "add",
         "formation": 9
       },
       {
         "id": "40103038",
-        "level": 100,
+        "level": 130,
         "hpLines": 30,
         "role": "add",
         "formation": 9
       },
       {
         "id": "40103042",
-        "level": 100,
+        "level": 130,
         "hpLines": 30,
         "role": "add",
         "formation": 10
       },
       {
         "id": "40103041",
-        "level": 100,
+        "level": 130,
         "hpLines": 30,
         "role": "add",
         "formation": 10
       },
       {
         "id": "40103043",
-        "level": 100,
+        "level": 130,
         "hpLines": 30,
         "role": "add",
         "formation": 10
       },
       {
         "id": "40103010",
-        "level": 100,
+        "level": 130,
         "hpLines": 30,
         "role": "boss",
         "formation": 10
       },
       {
         "id": "40103012",
-        "level": 100,
+        "level": 130,
         "hpLines": 30,
         "role": "boss",
         "formation": 11
       },
       {
         "id": "40103045",
-        "level": 100,
+        "level": 130,
         "hpLines": 30,
         "role": "add",
         "formation": 11
       },
       {
         "id": "40103013",
-        "level": 100,
+        "level": 130,
         "hpLines": 30,
         "role": "boss",
         "formation": 12
       },
       {
         "id": "40103046",
-        "level": 100,
+        "level": 130,
         "hpLines": 30,
         "role": "add",
         "formation": 12
       },
       {
         "id": "40103047",
-        "level": 100,
+        "level": 130,
         "hpLines": 30,
         "role": "add",
         "formation": 12
@@ -51552,266 +51552,266 @@
     "monsters": [
       {
         "id": "40103022",
-        "level": 100,
+        "level": 131,
         "hpLines": 30,
         "role": "add",
         "formation": 1
       },
       {
         "id": "40103001",
-        "level": 100,
+        "level": 131,
         "hpLines": 30,
         "role": "boss",
         "formation": 1
       },
       {
         "id": "40103002",
-        "level": 100,
+        "level": 131,
         "hpLines": 30,
         "role": "boss",
         "formation": 2
       },
       {
         "id": "40103003",
-        "level": 100,
+        "level": 131,
         "hpLines": 30,
         "role": "boss",
         "formation": 3
       },
       {
         "id": "40103026",
-        "level": 100,
+        "level": 131,
         "hpLines": 30,
         "role": "add",
         "formation": 3
       },
       {
         "id": "40103027",
-        "level": 100,
+        "level": 131,
         "hpLines": 30,
         "role": "add",
         "formation": 3
       },
       {
         "id": "40103028",
-        "level": 100,
+        "level": 131,
         "hpLines": 30,
         "role": "add",
         "formation": 3
       },
       {
         "id": "40103031",
-        "level": 100,
+        "level": 131,
         "hpLines": 30,
         "role": "add",
         "formation": 4
       },
       {
         "id": "40103029",
-        "level": 100,
+        "level": 131,
         "hpLines": 30,
         "role": "add",
         "formation": 4
       },
       {
         "id": "40103030",
-        "level": 100,
+        "level": 131,
         "hpLines": 30,
         "role": "add",
         "formation": 4
       },
       {
         "id": "40103004",
-        "level": 100,
+        "level": 131,
         "hpLines": 30,
         "role": "boss",
         "formation": 4
       },
       {
         "id": "40103005",
-        "level": 100,
+        "level": 131,
         "hpLines": 30,
         "role": "boss",
         "formation": 5
       },
       {
         "id": "40103032",
-        "level": 100,
+        "level": 131,
         "hpLines": 30,
         "role": "add",
         "formation": 5
       },
       {
         "id": "40103033",
-        "level": 100,
+        "level": 131,
         "hpLines": 30,
         "role": "add",
         "formation": 5
       },
       {
         "id": "40103028",
-        "level": 100,
+        "level": 131,
         "hpLines": 30,
         "role": "add",
         "formation": 5
       },
       {
         "id": "40103036",
-        "level": 100,
+        "level": 131,
         "hpLines": 30,
         "role": "add",
         "formation": 6
       },
       {
         "id": "40103034",
-        "level": 100,
+        "level": 131,
         "hpLines": 30,
         "role": "add",
         "formation": 6
       },
       {
         "id": "40103035",
-        "level": 100,
+        "level": 131,
         "hpLines": 30,
         "role": "add",
         "formation": 6
       },
       {
         "id": "40103006",
-        "level": 100,
+        "level": 131,
         "hpLines": 30,
         "role": "boss",
         "formation": 6
       },
       {
         "id": "40103058",
-        "level": 100,
+        "level": 131,
         "hpLines": 30,
         "role": "add",
         "formation": 7
       },
       {
         "id": "40103027",
-        "level": 100,
+        "level": 131,
         "hpLines": 30,
         "role": "add",
         "formation": 7
       },
       {
         "id": "40103007",
-        "level": 100,
+        "level": 131,
         "hpLines": 30,
         "role": "boss",
         "formation": 7
       },
       {
         "id": "40103026",
-        "level": 100,
+        "level": 131,
         "hpLines": 30,
         "role": "add",
         "formation": 8
       },
       {
         "id": "40103037",
-        "level": 100,
+        "level": 131,
         "hpLines": 30,
         "role": "add",
         "formation": 8
       },
       {
         "id": "40103008",
-        "level": 100,
+        "level": 131,
         "hpLines": 30,
         "role": "boss",
         "formation": 8
       },
       {
         "id": "40103009",
-        "level": 100,
+        "level": 131,
         "hpLines": 30,
         "role": "boss",
         "formation": 9
       },
       {
         "id": "40103039",
-        "level": 100,
+        "level": 131,
         "hpLines": 30,
         "role": "add",
         "formation": 9
       },
       {
         "id": "40103040",
-        "level": 100,
+        "level": 131,
         "hpLines": 30,
         "role": "add",
         "formation": 9
       },
       {
         "id": "40103038",
-        "level": 100,
+        "level": 131,
         "hpLines": 30,
         "role": "add",
         "formation": 9
       },
       {
         "id": "40103042",
-        "level": 100,
+        "level": 131,
         "hpLines": 30,
         "role": "add",
         "formation": 10
       },
       {
         "id": "40103041",
-        "level": 100,
+        "level": 131,
         "hpLines": 30,
         "role": "add",
         "formation": 10
       },
       {
         "id": "40103043",
-        "level": 100,
+        "level": 131,
         "hpLines": 30,
         "role": "add",
         "formation": 10
       },
       {
         "id": "40103010",
-        "level": 100,
+        "level": 131,
         "hpLines": 30,
         "role": "boss",
         "formation": 10
       },
       {
         "id": "40103012",
-        "level": 100,
+        "level": 131,
         "hpLines": 30,
         "role": "boss",
         "formation": 11
       },
       {
         "id": "40103045",
-        "level": 100,
+        "level": 131,
         "hpLines": 30,
         "role": "add",
         "formation": 11
       },
       {
         "id": "40103013",
-        "level": 100,
+        "level": 131,
         "hpLines": 30,
         "role": "boss",
         "formation": 12
       },
       {
         "id": "40103046",
-        "level": 100,
+        "level": 131,
         "hpLines": 30,
         "role": "add",
         "formation": 12
       },
       {
         "id": "40103047",
-        "level": 100,
+        "level": 131,
         "hpLines": 30,
         "role": "add",
         "formation": 12
@@ -51838,56 +51838,56 @@
     "monsters": [
       {
         "id": "40103050",
-        "level": 100,
+        "level": 132,
         "hpLines": 30,
         "role": "add",
         "formation": 1
       },
       {
         "id": "40103048",
-        "level": 100,
+        "level": 132,
         "hpLines": 30,
         "role": "add",
         "formation": 1
       },
       {
         "id": "40103049",
-        "level": 100,
+        "level": 132,
         "hpLines": 30,
         "role": "add",
         "formation": 1
       },
       {
         "id": "40103014",
-        "level": 100,
+        "level": 132,
         "hpLines": 30,
         "role": "boss",
         "formation": 1
       },
       {
         "id": "40103051",
-        "level": 100,
+        "level": 132,
         "hpLines": 30,
         "role": "add",
         "formation": 2
       },
       {
         "id": "40103015",
-        "level": 100,
+        "level": 132,
         "hpLines": 30,
         "role": "boss",
         "formation": 2
       },
       {
         "id": "40103016",
-        "level": 100,
+        "level": 132,
         "hpLines": 30,
         "role": "boss",
         "formation": 3
       },
       {
         "id": "40103052",
-        "level": 100,
+        "level": 132,
         "hpLines": 30,
         "role": "add",
         "formation": 3,
@@ -51895,14 +51895,14 @@
       },
       {
         "id": "40103011",
-        "level": 100,
+        "level": 132,
         "hpLines": 30,
         "role": "boss",
         "formation": 4
       },
       {
         "id": "40103044",
-        "level": 100,
+        "level": 132,
         "hpLines": 30,
         "role": "add",
         "formation": 4
@@ -51929,266 +51929,266 @@
     "monsters": [
       {
         "id": "40103022",
-        "level": 100,
+        "level": 133,
         "hpLines": 30,
         "role": "add",
         "formation": 1
       },
       {
         "id": "40103001",
-        "level": 100,
+        "level": 133,
         "hpLines": 30,
         "role": "boss",
         "formation": 1
       },
       {
         "id": "40103002",
-        "level": 100,
+        "level": 133,
         "hpLines": 30,
         "role": "boss",
         "formation": 2
       },
       {
         "id": "40103003",
-        "level": 100,
+        "level": 133,
         "hpLines": 30,
         "role": "boss",
         "formation": 3
       },
       {
         "id": "40103026",
-        "level": 100,
+        "level": 133,
         "hpLines": 30,
         "role": "add",
         "formation": 3
       },
       {
         "id": "40103027",
-        "level": 100,
+        "level": 133,
         "hpLines": 30,
         "role": "add",
         "formation": 3
       },
       {
         "id": "40103028",
-        "level": 100,
+        "level": 133,
         "hpLines": 30,
         "role": "add",
         "formation": 3
       },
       {
         "id": "40103031",
-        "level": 100,
+        "level": 133,
         "hpLines": 30,
         "role": "add",
         "formation": 4
       },
       {
         "id": "40103029",
-        "level": 100,
+        "level": 133,
         "hpLines": 30,
         "role": "add",
         "formation": 4
       },
       {
         "id": "40103030",
-        "level": 100,
+        "level": 133,
         "hpLines": 30,
         "role": "add",
         "formation": 4
       },
       {
         "id": "40103004",
-        "level": 100,
+        "level": 133,
         "hpLines": 30,
         "role": "boss",
         "formation": 4
       },
       {
         "id": "40103005",
-        "level": 100,
+        "level": 133,
         "hpLines": 30,
         "role": "boss",
         "formation": 5
       },
       {
         "id": "40103032",
-        "level": 100,
+        "level": 133,
         "hpLines": 30,
         "role": "add",
         "formation": 5
       },
       {
         "id": "40103033",
-        "level": 100,
+        "level": 133,
         "hpLines": 30,
         "role": "add",
         "formation": 5
       },
       {
         "id": "40103028",
-        "level": 100,
+        "level": 133,
         "hpLines": 30,
         "role": "add",
         "formation": 5
       },
       {
         "id": "40103036",
-        "level": 100,
+        "level": 133,
         "hpLines": 30,
         "role": "add",
         "formation": 6
       },
       {
         "id": "40103034",
-        "level": 100,
+        "level": 133,
         "hpLines": 30,
         "role": "add",
         "formation": 6
       },
       {
         "id": "40103035",
-        "level": 100,
+        "level": 133,
         "hpLines": 30,
         "role": "add",
         "formation": 6
       },
       {
         "id": "40103006",
-        "level": 100,
+        "level": 133,
         "hpLines": 30,
         "role": "boss",
         "formation": 6
       },
       {
         "id": "40103058",
-        "level": 100,
+        "level": 133,
         "hpLines": 30,
         "role": "add",
         "formation": 7
       },
       {
         "id": "40103027",
-        "level": 100,
+        "level": 133,
         "hpLines": 30,
         "role": "add",
         "formation": 7
       },
       {
         "id": "40103007",
-        "level": 100,
+        "level": 133,
         "hpLines": 30,
         "role": "boss",
         "formation": 7
       },
       {
         "id": "40103026",
-        "level": 100,
+        "level": 133,
         "hpLines": 30,
         "role": "add",
         "formation": 8
       },
       {
         "id": "40103037",
-        "level": 100,
+        "level": 133,
         "hpLines": 30,
         "role": "add",
         "formation": 8
       },
       {
         "id": "40103008",
-        "level": 100,
+        "level": 133,
         "hpLines": 30,
         "role": "boss",
         "formation": 8
       },
       {
         "id": "40103009",
-        "level": 100,
+        "level": 133,
         "hpLines": 30,
         "role": "boss",
         "formation": 9
       },
       {
         "id": "40103039",
-        "level": 100,
+        "level": 133,
         "hpLines": 30,
         "role": "add",
         "formation": 9
       },
       {
         "id": "40103040",
-        "level": 100,
+        "level": 133,
         "hpLines": 30,
         "role": "add",
         "formation": 9
       },
       {
         "id": "40103038",
-        "level": 100,
+        "level": 133,
         "hpLines": 30,
         "role": "add",
         "formation": 9
       },
       {
         "id": "40103042",
-        "level": 100,
+        "level": 133,
         "hpLines": 30,
         "role": "add",
         "formation": 10
       },
       {
         "id": "40103041",
-        "level": 100,
+        "level": 133,
         "hpLines": 30,
         "role": "add",
         "formation": 10
       },
       {
         "id": "40103043",
-        "level": 100,
+        "level": 133,
         "hpLines": 30,
         "role": "add",
         "formation": 10
       },
       {
         "id": "40103010",
-        "level": 100,
+        "level": 133,
         "hpLines": 30,
         "role": "boss",
         "formation": 10
       },
       {
         "id": "40103012",
-        "level": 100,
+        "level": 133,
         "hpLines": 30,
         "role": "boss",
         "formation": 11
       },
       {
         "id": "40103045",
-        "level": 100,
+        "level": 133,
         "hpLines": 30,
         "role": "add",
         "formation": 11
       },
       {
         "id": "40103013",
-        "level": 100,
+        "level": 133,
         "hpLines": 30,
         "role": "boss",
         "formation": 12
       },
       {
         "id": "40103046",
-        "level": 100,
+        "level": 133,
         "hpLines": 30,
         "role": "add",
         "formation": 12
       },
       {
         "id": "40103047",
-        "level": 100,
+        "level": 133,
         "hpLines": 30,
         "role": "add",
         "formation": 12
@@ -52215,56 +52215,56 @@
     "monsters": [
       {
         "id": "40103017",
-        "level": 100,
+        "level": 134,
         "hpLines": 30,
         "role": "boss",
         "formation": 1
       },
       {
         "id": "40103053",
-        "level": 100,
+        "level": 134,
         "hpLines": 30,
         "role": "add",
         "formation": 1
       },
       {
         "id": "40103019",
-        "level": 100,
+        "level": 134,
         "hpLines": 30,
         "role": "boss",
         "formation": 2
       },
       {
         "id": "40103054",
-        "level": 100,
+        "level": 134,
         "hpLines": 30,
         "role": "add",
         "formation": 2
       },
       {
         "id": "40103059",
-        "level": 100,
+        "level": 134,
         "hpLines": 30,
         "role": "add",
         "formation": 2
       },
       {
         "id": "40103018",
-        "level": 100,
+        "level": 134,
         "hpLines": 30,
         "role": "boss",
         "formation": 3
       },
       {
         "id": "40103055",
-        "level": 100,
+        "level": 134,
         "hpLines": 30,
         "role": "add",
         "formation": 3
       },
       {
         "id": "40103060",
-        "level": 100,
+        "level": 134,
         "hpLines": 30,
         "role": "add",
         "formation": 3
@@ -52291,266 +52291,266 @@
     "monsters": [
       {
         "id": "40103022",
-        "level": 100,
+        "level": 135,
         "hpLines": 30,
         "role": "add",
         "formation": 1
       },
       {
         "id": "40103001",
-        "level": 100,
+        "level": 135,
         "hpLines": 30,
         "role": "boss",
         "formation": 1
       },
       {
         "id": "40103002",
-        "level": 100,
+        "level": 135,
         "hpLines": 30,
         "role": "boss",
         "formation": 2
       },
       {
         "id": "40103003",
-        "level": 100,
+        "level": 135,
         "hpLines": 30,
         "role": "boss",
         "formation": 3
       },
       {
         "id": "40103026",
-        "level": 100,
+        "level": 135,
         "hpLines": 30,
         "role": "add",
         "formation": 3
       },
       {
         "id": "40103027",
-        "level": 100,
+        "level": 135,
         "hpLines": 30,
         "role": "add",
         "formation": 3
       },
       {
         "id": "40103028",
-        "level": 100,
+        "level": 135,
         "hpLines": 30,
         "role": "add",
         "formation": 3
       },
       {
         "id": "40103031",
-        "level": 100,
+        "level": 135,
         "hpLines": 30,
         "role": "add",
         "formation": 4
       },
       {
         "id": "40103029",
-        "level": 100,
+        "level": 135,
         "hpLines": 30,
         "role": "add",
         "formation": 4
       },
       {
         "id": "40103030",
-        "level": 100,
+        "level": 135,
         "hpLines": 30,
         "role": "add",
         "formation": 4
       },
       {
         "id": "40103004",
-        "level": 100,
+        "level": 135,
         "hpLines": 30,
         "role": "boss",
         "formation": 4
       },
       {
         "id": "40103005",
-        "level": 100,
+        "level": 135,
         "hpLines": 30,
         "role": "boss",
         "formation": 5
       },
       {
         "id": "40103032",
-        "level": 100,
+        "level": 135,
         "hpLines": 30,
         "role": "add",
         "formation": 5
       },
       {
         "id": "40103033",
-        "level": 100,
+        "level": 135,
         "hpLines": 30,
         "role": "add",
         "formation": 5
       },
       {
         "id": "40103028",
-        "level": 100,
+        "level": 135,
         "hpLines": 30,
         "role": "add",
         "formation": 5
       },
       {
         "id": "40103036",
-        "level": 100,
+        "level": 135,
         "hpLines": 30,
         "role": "add",
         "formation": 6
       },
       {
         "id": "40103034",
-        "level": 100,
+        "level": 135,
         "hpLines": 30,
         "role": "add",
         "formation": 6
       },
       {
         "id": "40103035",
-        "level": 100,
+        "level": 135,
         "hpLines": 30,
         "role": "add",
         "formation": 6
       },
       {
         "id": "40103006",
-        "level": 100,
+        "level": 135,
         "hpLines": 30,
         "role": "boss",
         "formation": 6
       },
       {
         "id": "40103058",
-        "level": 100,
+        "level": 135,
         "hpLines": 30,
         "role": "add",
         "formation": 7
       },
       {
         "id": "40103027",
-        "level": 100,
+        "level": 135,
         "hpLines": 30,
         "role": "add",
         "formation": 7
       },
       {
         "id": "40103007",
-        "level": 100,
+        "level": 135,
         "hpLines": 30,
         "role": "boss",
         "formation": 7
       },
       {
         "id": "40103026",
-        "level": 100,
+        "level": 135,
         "hpLines": 30,
         "role": "add",
         "formation": 8
       },
       {
         "id": "40103037",
-        "level": 100,
+        "level": 135,
         "hpLines": 30,
         "role": "add",
         "formation": 8
       },
       {
         "id": "40103008",
-        "level": 100,
+        "level": 135,
         "hpLines": 30,
         "role": "boss",
         "formation": 8
       },
       {
         "id": "40103009",
-        "level": 100,
+        "level": 135,
         "hpLines": 30,
         "role": "boss",
         "formation": 9
       },
       {
         "id": "40103039",
-        "level": 100,
+        "level": 135,
         "hpLines": 30,
         "role": "add",
         "formation": 9
       },
       {
         "id": "40103040",
-        "level": 100,
+        "level": 135,
         "hpLines": 30,
         "role": "add",
         "formation": 9
       },
       {
         "id": "40103038",
-        "level": 100,
+        "level": 135,
         "hpLines": 30,
         "role": "add",
         "formation": 9
       },
       {
         "id": "40103042",
-        "level": 100,
+        "level": 135,
         "hpLines": 30,
         "role": "add",
         "formation": 10
       },
       {
         "id": "40103041",
-        "level": 100,
+        "level": 135,
         "hpLines": 30,
         "role": "add",
         "formation": 10
       },
       {
         "id": "40103043",
-        "level": 100,
+        "level": 135,
         "hpLines": 30,
         "role": "add",
         "formation": 10
       },
       {
         "id": "40103010",
-        "level": 100,
+        "level": 135,
         "hpLines": 30,
         "role": "boss",
         "formation": 10
       },
       {
         "id": "40103012",
-        "level": 100,
+        "level": 135,
         "hpLines": 30,
         "role": "boss",
         "formation": 11
       },
       {
         "id": "40103045",
-        "level": 100,
+        "level": 135,
         "hpLines": 30,
         "role": "add",
         "formation": 11
       },
       {
         "id": "40103013",
-        "level": 100,
+        "level": 135,
         "hpLines": 30,
         "role": "boss",
         "formation": 12
       },
       {
         "id": "40103046",
-        "level": 100,
+        "level": 135,
         "hpLines": 30,
         "role": "add",
         "formation": 12
       },
       {
         "id": "40103047",
-        "level": 100,
+        "level": 135,
         "hpLines": 30,
         "role": "add",
         "formation": 12
@@ -52577,266 +52577,266 @@
     "monsters": [
       {
         "id": "40103022",
-        "level": 100,
+        "level": 136,
         "hpLines": 30,
         "role": "add",
         "formation": 1
       },
       {
         "id": "40103001",
-        "level": 100,
+        "level": 136,
         "hpLines": 30,
         "role": "boss",
         "formation": 1
       },
       {
         "id": "40103002",
-        "level": 100,
+        "level": 136,
         "hpLines": 30,
         "role": "boss",
         "formation": 2
       },
       {
         "id": "40103003",
-        "level": 100,
+        "level": 136,
         "hpLines": 30,
         "role": "boss",
         "formation": 3
       },
       {
         "id": "40103026",
-        "level": 100,
+        "level": 136,
         "hpLines": 30,
         "role": "add",
         "formation": 3
       },
       {
         "id": "40103027",
-        "level": 100,
+        "level": 136,
         "hpLines": 30,
         "role": "add",
         "formation": 3
       },
       {
         "id": "40103028",
-        "level": 100,
+        "level": 136,
         "hpLines": 30,
         "role": "add",
         "formation": 3
       },
       {
         "id": "40103031",
-        "level": 100,
+        "level": 136,
         "hpLines": 30,
         "role": "add",
         "formation": 4
       },
       {
         "id": "40103029",
-        "level": 100,
+        "level": 136,
         "hpLines": 30,
         "role": "add",
         "formation": 4
       },
       {
         "id": "40103030",
-        "level": 100,
+        "level": 136,
         "hpLines": 30,
         "role": "add",
         "formation": 4
       },
       {
         "id": "40103004",
-        "level": 100,
+        "level": 136,
         "hpLines": 30,
         "role": "boss",
         "formation": 4
       },
       {
         "id": "40103005",
-        "level": 100,
+        "level": 136,
         "hpLines": 30,
         "role": "boss",
         "formation": 5
       },
       {
         "id": "40103032",
-        "level": 100,
+        "level": 136,
         "hpLines": 30,
         "role": "add",
         "formation": 5
       },
       {
         "id": "40103033",
-        "level": 100,
+        "level": 136,
         "hpLines": 30,
         "role": "add",
         "formation": 5
       },
       {
         "id": "40103028",
-        "level": 100,
+        "level": 136,
         "hpLines": 30,
         "role": "add",
         "formation": 5
       },
       {
         "id": "40103036",
-        "level": 100,
+        "level": 136,
         "hpLines": 30,
         "role": "add",
         "formation": 6
       },
       {
         "id": "40103034",
-        "level": 100,
+        "level": 136,
         "hpLines": 30,
         "role": "add",
         "formation": 6
       },
       {
         "id": "40103035",
-        "level": 100,
+        "level": 136,
         "hpLines": 30,
         "role": "add",
         "formation": 6
       },
       {
         "id": "40103006",
-        "level": 100,
+        "level": 136,
         "hpLines": 30,
         "role": "boss",
         "formation": 6
       },
       {
         "id": "40103058",
-        "level": 100,
+        "level": 136,
         "hpLines": 30,
         "role": "add",
         "formation": 7
       },
       {
         "id": "40103027",
-        "level": 100,
+        "level": 136,
         "hpLines": 30,
         "role": "add",
         "formation": 7
       },
       {
         "id": "40103007",
-        "level": 100,
+        "level": 136,
         "hpLines": 30,
         "role": "boss",
         "formation": 7
       },
       {
         "id": "40103026",
-        "level": 100,
+        "level": 136,
         "hpLines": 30,
         "role": "add",
         "formation": 8
       },
       {
         "id": "40103037",
-        "level": 100,
+        "level": 136,
         "hpLines": 30,
         "role": "add",
         "formation": 8
       },
       {
         "id": "40103008",
-        "level": 100,
+        "level": 136,
         "hpLines": 30,
         "role": "boss",
         "formation": 8
       },
       {
         "id": "40103009",
-        "level": 100,
+        "level": 136,
         "hpLines": 30,
         "role": "boss",
         "formation": 9
       },
       {
         "id": "40103039",
-        "level": 100,
+        "level": 136,
         "hpLines": 30,
         "role": "add",
         "formation": 9
       },
       {
         "id": "40103040",
-        "level": 100,
+        "level": 136,
         "hpLines": 30,
         "role": "add",
         "formation": 9
       },
       {
         "id": "40103038",
-        "level": 100,
+        "level": 136,
         "hpLines": 30,
         "role": "add",
         "formation": 9
       },
       {
         "id": "40103042",
-        "level": 100,
+        "level": 136,
         "hpLines": 30,
         "role": "add",
         "formation": 10
       },
       {
         "id": "40103041",
-        "level": 100,
+        "level": 136,
         "hpLines": 30,
         "role": "add",
         "formation": 10
       },
       {
         "id": "40103043",
-        "level": 100,
+        "level": 136,
         "hpLines": 30,
         "role": "add",
         "formation": 10
       },
       {
         "id": "40103010",
-        "level": 100,
+        "level": 136,
         "hpLines": 30,
         "role": "boss",
         "formation": 10
       },
       {
         "id": "40103012",
-        "level": 100,
+        "level": 136,
         "hpLines": 30,
         "role": "boss",
         "formation": 11
       },
       {
         "id": "40103045",
-        "level": 100,
+        "level": 136,
         "hpLines": 30,
         "role": "add",
         "formation": 11
       },
       {
         "id": "40103013",
-        "level": 100,
+        "level": 136,
         "hpLines": 30,
         "role": "boss",
         "formation": 12
       },
       {
         "id": "40103046",
-        "level": 100,
+        "level": 136,
         "hpLines": 30,
         "role": "add",
         "formation": 12
       },
       {
         "id": "40103047",
-        "level": 100,
+        "level": 136,
         "hpLines": 30,
         "role": "add",
         "formation": 12
@@ -52863,56 +52863,56 @@
     "monsters": [
       {
         "id": "40103050",
-        "level": 100,
+        "level": 137,
         "hpLines": 30,
         "role": "add",
         "formation": 1
       },
       {
         "id": "40103048",
-        "level": 100,
+        "level": 137,
         "hpLines": 30,
         "role": "add",
         "formation": 1
       },
       {
         "id": "40103049",
-        "level": 100,
+        "level": 137,
         "hpLines": 30,
         "role": "add",
         "formation": 1
       },
       {
         "id": "40103014",
-        "level": 100,
+        "level": 137,
         "hpLines": 30,
         "role": "boss",
         "formation": 1
       },
       {
         "id": "40103051",
-        "level": 100,
+        "level": 137,
         "hpLines": 30,
         "role": "add",
         "formation": 2
       },
       {
         "id": "40103015",
-        "level": 100,
+        "level": 137,
         "hpLines": 30,
         "role": "boss",
         "formation": 2
       },
       {
         "id": "40103016",
-        "level": 100,
+        "level": 137,
         "hpLines": 30,
         "role": "boss",
         "formation": 3
       },
       {
         "id": "40103052",
-        "level": 100,
+        "level": 137,
         "hpLines": 30,
         "role": "add",
         "formation": 3,
@@ -52920,14 +52920,14 @@
       },
       {
         "id": "40103011",
-        "level": 100,
+        "level": 137,
         "hpLines": 30,
         "role": "boss",
         "formation": 4
       },
       {
         "id": "40103044",
-        "level": 100,
+        "level": 137,
         "hpLines": 30,
         "role": "add",
         "formation": 4
@@ -52954,266 +52954,266 @@
     "monsters": [
       {
         "id": "40103022",
-        "level": 100,
+        "level": 138,
         "hpLines": 30,
         "role": "add",
         "formation": 1
       },
       {
         "id": "40103001",
-        "level": 100,
+        "level": 138,
         "hpLines": 30,
         "role": "boss",
         "formation": 1
       },
       {
         "id": "40103002",
-        "level": 100,
+        "level": 138,
         "hpLines": 30,
         "role": "boss",
         "formation": 2
       },
       {
         "id": "40103003",
-        "level": 100,
+        "level": 138,
         "hpLines": 30,
         "role": "boss",
         "formation": 3
       },
       {
         "id": "40103026",
-        "level": 100,
+        "level": 138,
         "hpLines": 30,
         "role": "add",
         "formation": 3
       },
       {
         "id": "40103027",
-        "level": 100,
+        "level": 138,
         "hpLines": 30,
         "role": "add",
         "formation": 3
       },
       {
         "id": "40103028",
-        "level": 100,
+        "level": 138,
         "hpLines": 30,
         "role": "add",
         "formation": 3
       },
       {
         "id": "40103031",
-        "level": 100,
+        "level": 138,
         "hpLines": 30,
         "role": "add",
         "formation": 4
       },
       {
         "id": "40103029",
-        "level": 100,
+        "level": 138,
         "hpLines": 30,
         "role": "add",
         "formation": 4
       },
       {
         "id": "40103030",
-        "level": 100,
+        "level": 138,
         "hpLines": 30,
         "role": "add",
         "formation": 4
       },
       {
         "id": "40103004",
-        "level": 100,
+        "level": 138,
         "hpLines": 30,
         "role": "boss",
         "formation": 4
       },
       {
         "id": "40103005",
-        "level": 100,
+        "level": 138,
         "hpLines": 30,
         "role": "boss",
         "formation": 5
       },
       {
         "id": "40103032",
-        "level": 100,
+        "level": 138,
         "hpLines": 30,
         "role": "add",
         "formation": 5
       },
       {
         "id": "40103033",
-        "level": 100,
+        "level": 138,
         "hpLines": 30,
         "role": "add",
         "formation": 5
       },
       {
         "id": "40103028",
-        "level": 100,
+        "level": 138,
         "hpLines": 30,
         "role": "add",
         "formation": 5
       },
       {
         "id": "40103036",
-        "level": 100,
+        "level": 138,
         "hpLines": 30,
         "role": "add",
         "formation": 6
       },
       {
         "id": "40103034",
-        "level": 100,
+        "level": 138,
         "hpLines": 30,
         "role": "add",
         "formation": 6
       },
       {
         "id": "40103035",
-        "level": 100,
+        "level": 138,
         "hpLines": 30,
         "role": "add",
         "formation": 6
       },
       {
         "id": "40103006",
-        "level": 100,
+        "level": 138,
         "hpLines": 30,
         "role": "boss",
         "formation": 6
       },
       {
         "id": "40103058",
-        "level": 100,
+        "level": 138,
         "hpLines": 30,
         "role": "add",
         "formation": 7
       },
       {
         "id": "40103027",
-        "level": 100,
+        "level": 138,
         "hpLines": 30,
         "role": "add",
         "formation": 7
       },
       {
         "id": "40103007",
-        "level": 100,
+        "level": 138,
         "hpLines": 30,
         "role": "boss",
         "formation": 7
       },
       {
         "id": "40103026",
-        "level": 100,
+        "level": 138,
         "hpLines": 30,
         "role": "add",
         "formation": 8
       },
       {
         "id": "40103037",
-        "level": 100,
+        "level": 138,
         "hpLines": 30,
         "role": "add",
         "formation": 8
       },
       {
         "id": "40103008",
-        "level": 100,
+        "level": 138,
         "hpLines": 30,
         "role": "boss",
         "formation": 8
       },
       {
         "id": "40103009",
-        "level": 100,
+        "level": 138,
         "hpLines": 30,
         "role": "boss",
         "formation": 9
       },
       {
         "id": "40103039",
-        "level": 100,
+        "level": 138,
         "hpLines": 30,
         "role": "add",
         "formation": 9
       },
       {
         "id": "40103040",
-        "level": 100,
+        "level": 138,
         "hpLines": 30,
         "role": "add",
         "formation": 9
       },
       {
         "id": "40103038",
-        "level": 100,
+        "level": 138,
         "hpLines": 30,
         "role": "add",
         "formation": 9
       },
       {
         "id": "40103042",
-        "level": 100,
+        "level": 138,
         "hpLines": 30,
         "role": "add",
         "formation": 10
       },
       {
         "id": "40103041",
-        "level": 100,
+        "level": 138,
         "hpLines": 30,
         "role": "add",
         "formation": 10
       },
       {
         "id": "40103043",
-        "level": 100,
+        "level": 138,
         "hpLines": 30,
         "role": "add",
         "formation": 10
       },
       {
         "id": "40103010",
-        "level": 100,
+        "level": 138,
         "hpLines": 30,
         "role": "boss",
         "formation": 10
       },
       {
         "id": "40103012",
-        "level": 100,
+        "level": 138,
         "hpLines": 30,
         "role": "boss",
         "formation": 11
       },
       {
         "id": "40103045",
-        "level": 100,
+        "level": 138,
         "hpLines": 30,
         "role": "add",
         "formation": 11
       },
       {
         "id": "40103013",
-        "level": 100,
+        "level": 138,
         "hpLines": 30,
         "role": "boss",
         "formation": 12
       },
       {
         "id": "40103046",
-        "level": 100,
+        "level": 138,
         "hpLines": 30,
         "role": "add",
         "formation": 12
       },
       {
         "id": "40103047",
-        "level": 100,
+        "level": 138,
         "hpLines": 30,
         "role": "add",
         "formation": 12
@@ -53240,56 +53240,56 @@
     "monsters": [
       {
         "id": "40103017",
-        "level": 100,
+        "level": 139,
         "hpLines": 30,
         "role": "boss",
         "formation": 1
       },
       {
         "id": "40103053",
-        "level": 100,
+        "level": 139,
         "hpLines": 30,
         "role": "add",
         "formation": 1
       },
       {
         "id": "40103019",
-        "level": 100,
+        "level": 139,
         "hpLines": 30,
         "role": "boss",
         "formation": 2
       },
       {
         "id": "40103054",
-        "level": 100,
+        "level": 139,
         "hpLines": 30,
         "role": "add",
         "formation": 2
       },
       {
         "id": "40103059",
-        "level": 100,
+        "level": 139,
         "hpLines": 30,
         "role": "add",
         "formation": 2
       },
       {
         "id": "40103018",
-        "level": 100,
+        "level": 139,
         "hpLines": 30,
         "role": "boss",
         "formation": 3
       },
       {
         "id": "40103055",
-        "level": 100,
+        "level": 139,
         "hpLines": 30,
         "role": "add",
         "formation": 3
       },
       {
         "id": "40103060",
-        "level": 100,
+        "level": 139,
         "hpLines": 30,
         "role": "add",
         "formation": 3
@@ -53317,266 +53317,266 @@
     "monsters": [
       {
         "id": "40103022",
-        "level": 100,
+        "level": 140,
         "hpLines": 30,
         "role": "add",
         "formation": 1
       },
       {
         "id": "40103001",
-        "level": 100,
+        "level": 140,
         "hpLines": 30,
         "role": "boss",
         "formation": 1
       },
       {
         "id": "40103002",
-        "level": 100,
+        "level": 140,
         "hpLines": 30,
         "role": "boss",
         "formation": 2
       },
       {
         "id": "40103003",
-        "level": 100,
+        "level": 140,
         "hpLines": 30,
         "role": "boss",
         "formation": 3
       },
       {
         "id": "40103026",
-        "level": 100,
+        "level": 140,
         "hpLines": 30,
         "role": "add",
         "formation": 3
       },
       {
         "id": "40103027",
-        "level": 100,
+        "level": 140,
         "hpLines": 30,
         "role": "add",
         "formation": 3
       },
       {
         "id": "40103028",
-        "level": 100,
+        "level": 140,
         "hpLines": 30,
         "role": "add",
         "formation": 3
       },
       {
         "id": "40103031",
-        "level": 100,
+        "level": 140,
         "hpLines": 30,
         "role": "add",
         "formation": 4
       },
       {
         "id": "40103029",
-        "level": 100,
+        "level": 140,
         "hpLines": 30,
         "role": "add",
         "formation": 4
       },
       {
         "id": "40103030",
-        "level": 100,
+        "level": 140,
         "hpLines": 30,
         "role": "add",
         "formation": 4
       },
       {
         "id": "40103004",
-        "level": 100,
+        "level": 140,
         "hpLines": 30,
         "role": "boss",
         "formation": 4
       },
       {
         "id": "40103005",
-        "level": 100,
+        "level": 140,
         "hpLines": 30,
         "role": "boss",
         "formation": 5
       },
       {
         "id": "40103032",
-        "level": 100,
+        "level": 140,
         "hpLines": 30,
         "role": "add",
         "formation": 5
       },
       {
         "id": "40103033",
-        "level": 100,
+        "level": 140,
         "hpLines": 30,
         "role": "add",
         "formation": 5
       },
       {
         "id": "40103028",
-        "level": 100,
+        "level": 140,
         "hpLines": 30,
         "role": "add",
         "formation": 5
       },
       {
         "id": "40103036",
-        "level": 100,
+        "level": 140,
         "hpLines": 30,
         "role": "add",
         "formation": 6
       },
       {
         "id": "40103034",
-        "level": 100,
+        "level": 140,
         "hpLines": 30,
         "role": "add",
         "formation": 6
       },
       {
         "id": "40103035",
-        "level": 100,
+        "level": 140,
         "hpLines": 30,
         "role": "add",
         "formation": 6
       },
       {
         "id": "40103006",
-        "level": 100,
+        "level": 140,
         "hpLines": 30,
         "role": "boss",
         "formation": 6
       },
       {
         "id": "40103058",
-        "level": 100,
+        "level": 140,
         "hpLines": 30,
         "role": "add",
         "formation": 7
       },
       {
         "id": "40103027",
-        "level": 100,
+        "level": 140,
         "hpLines": 30,
         "role": "add",
         "formation": 7
       },
       {
         "id": "40103007",
-        "level": 100,
+        "level": 140,
         "hpLines": 30,
         "role": "boss",
         "formation": 7
       },
       {
         "id": "40103026",
-        "level": 100,
+        "level": 140,
         "hpLines": 30,
         "role": "add",
         "formation": 8
       },
       {
         "id": "40103037",
-        "level": 100,
+        "level": 140,
         "hpLines": 30,
         "role": "add",
         "formation": 8
       },
       {
         "id": "40103008",
-        "level": 100,
+        "level": 140,
         "hpLines": 30,
         "role": "boss",
         "formation": 8
       },
       {
         "id": "40103009",
-        "level": 100,
+        "level": 140,
         "hpLines": 30,
         "role": "boss",
         "formation": 9
       },
       {
         "id": "40103039",
-        "level": 100,
+        "level": 140,
         "hpLines": 30,
         "role": "add",
         "formation": 9
       },
       {
         "id": "40103040",
-        "level": 100,
+        "level": 140,
         "hpLines": 30,
         "role": "add",
         "formation": 9
       },
       {
         "id": "40103038",
-        "level": 100,
+        "level": 140,
         "hpLines": 30,
         "role": "add",
         "formation": 9
       },
       {
         "id": "40103042",
-        "level": 100,
+        "level": 140,
         "hpLines": 30,
         "role": "add",
         "formation": 10
       },
       {
         "id": "40103041",
-        "level": 100,
+        "level": 140,
         "hpLines": 30,
         "role": "add",
         "formation": 10
       },
       {
         "id": "40103043",
-        "level": 100,
+        "level": 140,
         "hpLines": 30,
         "role": "add",
         "formation": 10
       },
       {
         "id": "40103010",
-        "level": 100,
+        "level": 140,
         "hpLines": 30,
         "role": "boss",
         "formation": 10
       },
       {
         "id": "40103012",
-        "level": 100,
+        "level": 140,
         "hpLines": 30,
         "role": "boss",
         "formation": 11
       },
       {
         "id": "40103045",
-        "level": 100,
+        "level": 140,
         "hpLines": 30,
         "role": "add",
         "formation": 11
       },
       {
         "id": "40103013",
-        "level": 100,
+        "level": 140,
         "hpLines": 30,
         "role": "boss",
         "formation": 12
       },
       {
         "id": "40103046",
-        "level": 100,
+        "level": 140,
         "hpLines": 30,
         "role": "add",
         "formation": 12
       },
       {
         "id": "40103047",
-        "level": 100,
+        "level": 140,
         "hpLines": 30,
         "role": "add",
         "formation": 12
@@ -53603,266 +53603,266 @@
     "monsters": [
       {
         "id": "40103022",
-        "level": 100,
+        "level": 141,
         "hpLines": 30,
         "role": "add",
         "formation": 1
       },
       {
         "id": "40103001",
-        "level": 100,
+        "level": 141,
         "hpLines": 30,
         "role": "boss",
         "formation": 1
       },
       {
         "id": "40103002",
-        "level": 100,
+        "level": 141,
         "hpLines": 30,
         "role": "boss",
         "formation": 2
       },
       {
         "id": "40103003",
-        "level": 100,
+        "level": 141,
         "hpLines": 30,
         "role": "boss",
         "formation": 3
       },
       {
         "id": "40103026",
-        "level": 100,
+        "level": 141,
         "hpLines": 30,
         "role": "add",
         "formation": 3
       },
       {
         "id": "40103027",
-        "level": 100,
+        "level": 141,
         "hpLines": 30,
         "role": "add",
         "formation": 3
       },
       {
         "id": "40103028",
-        "level": 100,
+        "level": 141,
         "hpLines": 30,
         "role": "add",
         "formation": 3
       },
       {
         "id": "40103031",
-        "level": 100,
+        "level": 141,
         "hpLines": 30,
         "role": "add",
         "formation": 4
       },
       {
         "id": "40103029",
-        "level": 100,
+        "level": 141,
         "hpLines": 30,
         "role": "add",
         "formation": 4
       },
       {
         "id": "40103030",
-        "level": 100,
+        "level": 141,
         "hpLines": 30,
         "role": "add",
         "formation": 4
       },
       {
         "id": "40103004",
-        "level": 100,
+        "level": 141,
         "hpLines": 30,
         "role": "boss",
         "formation": 4
       },
       {
         "id": "40103005",
-        "level": 100,
+        "level": 141,
         "hpLines": 30,
         "role": "boss",
         "formation": 5
       },
       {
         "id": "40103032",
-        "level": 100,
+        "level": 141,
         "hpLines": 30,
         "role": "add",
         "formation": 5
       },
       {
         "id": "40103033",
-        "level": 100,
+        "level": 141,
         "hpLines": 30,
         "role": "add",
         "formation": 5
       },
       {
         "id": "40103028",
-        "level": 100,
+        "level": 141,
         "hpLines": 30,
         "role": "add",
         "formation": 5
       },
       {
         "id": "40103036",
-        "level": 100,
+        "level": 141,
         "hpLines": 30,
         "role": "add",
         "formation": 6
       },
       {
         "id": "40103034",
-        "level": 100,
+        "level": 141,
         "hpLines": 30,
         "role": "add",
         "formation": 6
       },
       {
         "id": "40103035",
-        "level": 100,
+        "level": 141,
         "hpLines": 30,
         "role": "add",
         "formation": 6
       },
       {
         "id": "40103006",
-        "level": 100,
+        "level": 141,
         "hpLines": 30,
         "role": "boss",
         "formation": 6
       },
       {
         "id": "40103058",
-        "level": 100,
+        "level": 141,
         "hpLines": 30,
         "role": "add",
         "formation": 7
       },
       {
         "id": "40103027",
-        "level": 100,
+        "level": 141,
         "hpLines": 30,
         "role": "add",
         "formation": 7
       },
       {
         "id": "40103007",
-        "level": 100,
+        "level": 141,
         "hpLines": 30,
         "role": "boss",
         "formation": 7
       },
       {
         "id": "40103026",
-        "level": 100,
+        "level": 141,
         "hpLines": 30,
         "role": "add",
         "formation": 8
       },
       {
         "id": "40103037",
-        "level": 100,
+        "level": 141,
         "hpLines": 30,
         "role": "add",
         "formation": 8
       },
       {
         "id": "40103008",
-        "level": 100,
+        "level": 141,
         "hpLines": 30,
         "role": "boss",
         "formation": 8
       },
       {
         "id": "40103009",
-        "level": 100,
+        "level": 141,
         "hpLines": 30,
         "role": "boss",
         "formation": 9
       },
       {
         "id": "40103039",
-        "level": 100,
+        "level": 141,
         "hpLines": 30,
         "role": "add",
         "formation": 9
       },
       {
         "id": "40103040",
-        "level": 100,
+        "level": 141,
         "hpLines": 30,
         "role": "add",
         "formation": 9
       },
       {
         "id": "40103038",
-        "level": 100,
+        "level": 141,
         "hpLines": 30,
         "role": "add",
         "formation": 9
       },
       {
         "id": "40103042",
-        "level": 100,
+        "level": 141,
         "hpLines": 30,
         "role": "add",
         "formation": 10
       },
       {
         "id": "40103041",
-        "level": 100,
+        "level": 141,
         "hpLines": 30,
         "role": "add",
         "formation": 10
       },
       {
         "id": "40103043",
-        "level": 100,
+        "level": 141,
         "hpLines": 30,
         "role": "add",
         "formation": 10
       },
       {
         "id": "40103010",
-        "level": 100,
+        "level": 141,
         "hpLines": 30,
         "role": "boss",
         "formation": 10
       },
       {
         "id": "40103012",
-        "level": 100,
+        "level": 141,
         "hpLines": 30,
         "role": "boss",
         "formation": 11
       },
       {
         "id": "40103045",
-        "level": 100,
+        "level": 141,
         "hpLines": 30,
         "role": "add",
         "formation": 11
       },
       {
         "id": "40103013",
-        "level": 100,
+        "level": 141,
         "hpLines": 30,
         "role": "boss",
         "formation": 12
       },
       {
         "id": "40103046",
-        "level": 100,
+        "level": 141,
         "hpLines": 30,
         "role": "add",
         "formation": 12
       },
       {
         "id": "40103047",
-        "level": 100,
+        "level": 141,
         "hpLines": 30,
         "role": "add",
         "formation": 12
@@ -53889,56 +53889,56 @@
     "monsters": [
       {
         "id": "40103050",
-        "level": 100,
+        "level": 142,
         "hpLines": 30,
         "role": "add",
         "formation": 1
       },
       {
         "id": "40103048",
-        "level": 100,
+        "level": 142,
         "hpLines": 30,
         "role": "add",
         "formation": 1
       },
       {
         "id": "40103049",
-        "level": 100,
+        "level": 142,
         "hpLines": 30,
         "role": "add",
         "formation": 1
       },
       {
         "id": "40103014",
-        "level": 100,
+        "level": 142,
         "hpLines": 30,
         "role": "boss",
         "formation": 1
       },
       {
         "id": "40103051",
-        "level": 100,
+        "level": 142,
         "hpLines": 30,
         "role": "add",
         "formation": 2
       },
       {
         "id": "40103015",
-        "level": 100,
+        "level": 142,
         "hpLines": 30,
         "role": "boss",
         "formation": 2
       },
       {
         "id": "40103016",
-        "level": 100,
+        "level": 142,
         "hpLines": 30,
         "role": "boss",
         "formation": 3
       },
       {
         "id": "40103052",
-        "level": 100,
+        "level": 142,
         "hpLines": 30,
         "role": "add",
         "formation": 3,
@@ -53946,14 +53946,14 @@
       },
       {
         "id": "40103011",
-        "level": 100,
+        "level": 142,
         "hpLines": 30,
         "role": "boss",
         "formation": 4
       },
       {
         "id": "40103044",
-        "level": 100,
+        "level": 142,
         "hpLines": 30,
         "role": "add",
         "formation": 4
@@ -53980,266 +53980,266 @@
     "monsters": [
       {
         "id": "40103022",
-        "level": 100,
+        "level": 143,
         "hpLines": 30,
         "role": "add",
         "formation": 1
       },
       {
         "id": "40103001",
-        "level": 100,
+        "level": 143,
         "hpLines": 30,
         "role": "boss",
         "formation": 1
       },
       {
         "id": "40103002",
-        "level": 100,
+        "level": 143,
         "hpLines": 30,
         "role": "boss",
         "formation": 2
       },
       {
         "id": "40103003",
-        "level": 100,
+        "level": 143,
         "hpLines": 30,
         "role": "boss",
         "formation": 3
       },
       {
         "id": "40103026",
-        "level": 100,
+        "level": 143,
         "hpLines": 30,
         "role": "add",
         "formation": 3
       },
       {
         "id": "40103027",
-        "level": 100,
+        "level": 143,
         "hpLines": 30,
         "role": "add",
         "formation": 3
       },
       {
         "id": "40103028",
-        "level": 100,
+        "level": 143,
         "hpLines": 30,
         "role": "add",
         "formation": 3
       },
       {
         "id": "40103031",
-        "level": 100,
+        "level": 143,
         "hpLines": 30,
         "role": "add",
         "formation": 4
       },
       {
         "id": "40103029",
-        "level": 100,
+        "level": 143,
         "hpLines": 30,
         "role": "add",
         "formation": 4
       },
       {
         "id": "40103030",
-        "level": 100,
+        "level": 143,
         "hpLines": 30,
         "role": "add",
         "formation": 4
       },
       {
         "id": "40103004",
-        "level": 100,
+        "level": 143,
         "hpLines": 30,
         "role": "boss",
         "formation": 4
       },
       {
         "id": "40103005",
-        "level": 100,
+        "level": 143,
         "hpLines": 30,
         "role": "boss",
         "formation": 5
       },
       {
         "id": "40103032",
-        "level": 100,
+        "level": 143,
         "hpLines": 30,
         "role": "add",
         "formation": 5
       },
       {
         "id": "40103033",
-        "level": 100,
+        "level": 143,
         "hpLines": 30,
         "role": "add",
         "formation": 5
       },
       {
         "id": "40103028",
-        "level": 100,
+        "level": 143,
         "hpLines": 30,
         "role": "add",
         "formation": 5
       },
       {
         "id": "40103036",
-        "level": 100,
+        "level": 143,
         "hpLines": 30,
         "role": "add",
         "formation": 6
       },
       {
         "id": "40103034",
-        "level": 100,
+        "level": 143,
         "hpLines": 30,
         "role": "add",
         "formation": 6
       },
       {
         "id": "40103035",
-        "level": 100,
+        "level": 143,
         "hpLines": 30,
         "role": "add",
         "formation": 6
       },
       {
         "id": "40103006",
-        "level": 100,
+        "level": 143,
         "hpLines": 30,
         "role": "boss",
         "formation": 6
       },
       {
         "id": "40103058",
-        "level": 100,
+        "level": 143,
         "hpLines": 30,
         "role": "add",
         "formation": 7
       },
       {
         "id": "40103027",
-        "level": 100,
+        "level": 143,
         "hpLines": 30,
         "role": "add",
         "formation": 7
       },
       {
         "id": "40103007",
-        "level": 100,
+        "level": 143,
         "hpLines": 30,
         "role": "boss",
         "formation": 7
       },
       {
         "id": "40103026",
-        "level": 100,
+        "level": 143,
         "hpLines": 30,
         "role": "add",
         "formation": 8
       },
       {
         "id": "40103037",
-        "level": 100,
+        "level": 143,
         "hpLines": 30,
         "role": "add",
         "formation": 8
       },
       {
         "id": "40103008",
-        "level": 100,
+        "level": 143,
         "hpLines": 30,
         "role": "boss",
         "formation": 8
       },
       {
         "id": "40103009",
-        "level": 100,
+        "level": 143,
         "hpLines": 30,
         "role": "boss",
         "formation": 9
       },
       {
         "id": "40103039",
-        "level": 100,
+        "level": 143,
         "hpLines": 30,
         "role": "add",
         "formation": 9
       },
       {
         "id": "40103040",
-        "level": 100,
+        "level": 143,
         "hpLines": 30,
         "role": "add",
         "formation": 9
       },
       {
         "id": "40103038",
-        "level": 100,
+        "level": 143,
         "hpLines": 30,
         "role": "add",
         "formation": 9
       },
       {
         "id": "40103042",
-        "level": 100,
+        "level": 143,
         "hpLines": 30,
         "role": "add",
         "formation": 10
       },
       {
         "id": "40103041",
-        "level": 100,
+        "level": 143,
         "hpLines": 30,
         "role": "add",
         "formation": 10
       },
       {
         "id": "40103043",
-        "level": 100,
+        "level": 143,
         "hpLines": 30,
         "role": "add",
         "formation": 10
       },
       {
         "id": "40103010",
-        "level": 100,
+        "level": 143,
         "hpLines": 30,
         "role": "boss",
         "formation": 10
       },
       {
         "id": "40103012",
-        "level": 100,
+        "level": 143,
         "hpLines": 30,
         "role": "boss",
         "formation": 11
       },
       {
         "id": "40103045",
-        "level": 100,
+        "level": 143,
         "hpLines": 30,
         "role": "add",
         "formation": 11
       },
       {
         "id": "40103013",
-        "level": 100,
+        "level": 143,
         "hpLines": 30,
         "role": "boss",
         "formation": 12
       },
       {
         "id": "40103046",
-        "level": 100,
+        "level": 143,
         "hpLines": 30,
         "role": "add",
         "formation": 12
       },
       {
         "id": "40103047",
-        "level": 100,
+        "level": 143,
         "hpLines": 30,
         "role": "add",
         "formation": 12
@@ -54266,56 +54266,56 @@
     "monsters": [
       {
         "id": "40103017",
-        "level": 100,
+        "level": 144,
         "hpLines": 30,
         "role": "boss",
         "formation": 1
       },
       {
         "id": "40103053",
-        "level": 100,
+        "level": 144,
         "hpLines": 30,
         "role": "add",
         "formation": 1
       },
       {
         "id": "40103019",
-        "level": 100,
+        "level": 144,
         "hpLines": 30,
         "role": "boss",
         "formation": 2
       },
       {
         "id": "40103054",
-        "level": 100,
+        "level": 144,
         "hpLines": 30,
         "role": "add",
         "formation": 2
       },
       {
         "id": "40103059",
-        "level": 100,
+        "level": 144,
         "hpLines": 30,
         "role": "add",
         "formation": 2
       },
       {
         "id": "40103018",
-        "level": 100,
+        "level": 144,
         "hpLines": 30,
         "role": "boss",
         "formation": 3
       },
       {
         "id": "40103055",
-        "level": 100,
+        "level": 144,
         "hpLines": 30,
         "role": "add",
         "formation": 3
       },
       {
         "id": "40103060",
-        "level": 100,
+        "level": 144,
         "hpLines": 30,
         "role": "add",
         "formation": 3
@@ -54342,266 +54342,266 @@
     "monsters": [
       {
         "id": "40103022",
-        "level": 100,
+        "level": 145,
         "hpLines": 30,
         "role": "add",
         "formation": 1
       },
       {
         "id": "40103001",
-        "level": 100,
+        "level": 145,
         "hpLines": 30,
         "role": "boss",
         "formation": 1
       },
       {
         "id": "40103002",
-        "level": 100,
+        "level": 145,
         "hpLines": 30,
         "role": "boss",
         "formation": 2
       },
       {
         "id": "40103003",
-        "level": 100,
+        "level": 145,
         "hpLines": 30,
         "role": "boss",
         "formation": 3
       },
       {
         "id": "40103026",
-        "level": 100,
+        "level": 145,
         "hpLines": 30,
         "role": "add",
         "formation": 3
       },
       {
         "id": "40103027",
-        "level": 100,
+        "level": 145,
         "hpLines": 30,
         "role": "add",
         "formation": 3
       },
       {
         "id": "40103028",
-        "level": 100,
+        "level": 145,
         "hpLines": 30,
         "role": "add",
         "formation": 3
       },
       {
         "id": "40103031",
-        "level": 100,
+        "level": 145,
         "hpLines": 30,
         "role": "add",
         "formation": 4
       },
       {
         "id": "40103029",
-        "level": 100,
+        "level": 145,
         "hpLines": 30,
         "role": "add",
         "formation": 4
       },
       {
         "id": "40103030",
-        "level": 100,
+        "level": 145,
         "hpLines": 30,
         "role": "add",
         "formation": 4
       },
       {
         "id": "40103004",
-        "level": 100,
+        "level": 145,
         "hpLines": 30,
         "role": "boss",
         "formation": 4
       },
       {
         "id": "40103005",
-        "level": 100,
+        "level": 145,
         "hpLines": 30,
         "role": "boss",
         "formation": 5
       },
       {
         "id": "40103032",
-        "level": 100,
+        "level": 145,
         "hpLines": 30,
         "role": "add",
         "formation": 5
       },
       {
         "id": "40103033",
-        "level": 100,
+        "level": 145,
         "hpLines": 30,
         "role": "add",
         "formation": 5
       },
       {
         "id": "40103028",
-        "level": 100,
+        "level": 145,
         "hpLines": 30,
         "role": "add",
         "formation": 5
       },
       {
         "id": "40103036",
-        "level": 100,
+        "level": 145,
         "hpLines": 30,
         "role": "add",
         "formation": 6
       },
       {
         "id": "40103034",
-        "level": 100,
+        "level": 145,
         "hpLines": 30,
         "role": "add",
         "formation": 6
       },
       {
         "id": "40103035",
-        "level": 100,
+        "level": 145,
         "hpLines": 30,
         "role": "add",
         "formation": 6
       },
       {
         "id": "40103006",
-        "level": 100,
+        "level": 145,
         "hpLines": 30,
         "role": "boss",
         "formation": 6
       },
       {
         "id": "40103058",
-        "level": 100,
+        "level": 145,
         "hpLines": 30,
         "role": "add",
         "formation": 7
       },
       {
         "id": "40103027",
-        "level": 100,
+        "level": 145,
         "hpLines": 30,
         "role": "add",
         "formation": 7
       },
       {
         "id": "40103007",
-        "level": 100,
+        "level": 145,
         "hpLines": 30,
         "role": "boss",
         "formation": 7
       },
       {
         "id": "40103026",
-        "level": 100,
+        "level": 145,
         "hpLines": 30,
         "role": "add",
         "formation": 8
       },
       {
         "id": "40103037",
-        "level": 100,
+        "level": 145,
         "hpLines": 30,
         "role": "add",
         "formation": 8
       },
       {
         "id": "40103008",
-        "level": 100,
+        "level": 145,
         "hpLines": 30,
         "role": "boss",
         "formation": 8
       },
       {
         "id": "40103009",
-        "level": 100,
+        "level": 145,
         "hpLines": 30,
         "role": "boss",
         "formation": 9
       },
       {
         "id": "40103039",
-        "level": 100,
+        "level": 145,
         "hpLines": 30,
         "role": "add",
         "formation": 9
       },
       {
         "id": "40103040",
-        "level": 100,
+        "level": 145,
         "hpLines": 30,
         "role": "add",
         "formation": 9
       },
       {
         "id": "40103038",
-        "level": 100,
+        "level": 145,
         "hpLines": 30,
         "role": "add",
         "formation": 9
       },
       {
         "id": "40103042",
-        "level": 100,
+        "level": 145,
         "hpLines": 30,
         "role": "add",
         "formation": 10
       },
       {
         "id": "40103041",
-        "level": 100,
+        "level": 145,
         "hpLines": 30,
         "role": "add",
         "formation": 10
       },
       {
         "id": "40103043",
-        "level": 100,
+        "level": 145,
         "hpLines": 30,
         "role": "add",
         "formation": 10
       },
       {
         "id": "40103010",
-        "level": 100,
+        "level": 145,
         "hpLines": 30,
         "role": "boss",
         "formation": 10
       },
       {
         "id": "40103012",
-        "level": 100,
+        "level": 145,
         "hpLines": 30,
         "role": "boss",
         "formation": 11
       },
       {
         "id": "40103045",
-        "level": 100,
+        "level": 145,
         "hpLines": 30,
         "role": "add",
         "formation": 11
       },
       {
         "id": "40103013",
-        "level": 100,
+        "level": 145,
         "hpLines": 30,
         "role": "boss",
         "formation": 12
       },
       {
         "id": "40103046",
-        "level": 100,
+        "level": 145,
         "hpLines": 30,
         "role": "add",
         "formation": 12
       },
       {
         "id": "40103047",
-        "level": 100,
+        "level": 145,
         "hpLines": 30,
         "role": "add",
         "formation": 12
@@ -54628,266 +54628,266 @@
     "monsters": [
       {
         "id": "40103022",
-        "level": 100,
+        "level": 146,
         "hpLines": 30,
         "role": "add",
         "formation": 1
       },
       {
         "id": "40103001",
-        "level": 100,
+        "level": 146,
         "hpLines": 30,
         "role": "boss",
         "formation": 1
       },
       {
         "id": "40103002",
-        "level": 100,
+        "level": 146,
         "hpLines": 30,
         "role": "boss",
         "formation": 2
       },
       {
         "id": "40103003",
-        "level": 100,
+        "level": 146,
         "hpLines": 30,
         "role": "boss",
         "formation": 3
       },
       {
         "id": "40103026",
-        "level": 100,
+        "level": 146,
         "hpLines": 30,
         "role": "add",
         "formation": 3
       },
       {
         "id": "40103027",
-        "level": 100,
+        "level": 146,
         "hpLines": 30,
         "role": "add",
         "formation": 3
       },
       {
         "id": "40103028",
-        "level": 100,
+        "level": 146,
         "hpLines": 30,
         "role": "add",
         "formation": 3
       },
       {
         "id": "40103031",
-        "level": 100,
+        "level": 146,
         "hpLines": 30,
         "role": "add",
         "formation": 4
       },
       {
         "id": "40103029",
-        "level": 100,
+        "level": 146,
         "hpLines": 30,
         "role": "add",
         "formation": 4
       },
       {
         "id": "40103030",
-        "level": 100,
+        "level": 146,
         "hpLines": 30,
         "role": "add",
         "formation": 4
       },
       {
         "id": "40103004",
-        "level": 100,
+        "level": 146,
         "hpLines": 30,
         "role": "boss",
         "formation": 4
       },
       {
         "id": "40103005",
-        "level": 100,
+        "level": 146,
         "hpLines": 30,
         "role": "boss",
         "formation": 5
       },
       {
         "id": "40103032",
-        "level": 100,
+        "level": 146,
         "hpLines": 30,
         "role": "add",
         "formation": 5
       },
       {
         "id": "40103033",
-        "level": 100,
+        "level": 146,
         "hpLines": 30,
         "role": "add",
         "formation": 5
       },
       {
         "id": "40103028",
-        "level": 100,
+        "level": 146,
         "hpLines": 30,
         "role": "add",
         "formation": 5
       },
       {
         "id": "40103036",
-        "level": 100,
+        "level": 146,
         "hpLines": 30,
         "role": "add",
         "formation": 6
       },
       {
         "id": "40103034",
-        "level": 100,
+        "level": 146,
         "hpLines": 30,
         "role": "add",
         "formation": 6
       },
       {
         "id": "40103035",
-        "level": 100,
+        "level": 146,
         "hpLines": 30,
         "role": "add",
         "formation": 6
       },
       {
         "id": "40103006",
-        "level": 100,
+        "level": 146,
         "hpLines": 30,
         "role": "boss",
         "formation": 6
       },
       {
         "id": "40103058",
-        "level": 100,
+        "level": 146,
         "hpLines": 30,
         "role": "add",
         "formation": 7
       },
       {
         "id": "40103027",
-        "level": 100,
+        "level": 146,
         "hpLines": 30,
         "role": "add",
         "formation": 7
       },
       {
         "id": "40103007",
-        "level": 100,
+        "level": 146,
         "hpLines": 30,
         "role": "boss",
         "formation": 7
       },
       {
         "id": "40103026",
-        "level": 100,
+        "level": 146,
         "hpLines": 30,
         "role": "add",
         "formation": 8
       },
       {
         "id": "40103037",
-        "level": 100,
+        "level": 146,
         "hpLines": 30,
         "role": "add",
         "formation": 8
       },
       {
         "id": "40103008",
-        "level": 100,
+        "level": 146,
         "hpLines": 30,
         "role": "boss",
         "formation": 8
       },
       {
         "id": "40103009",
-        "level": 100,
+        "level": 146,
         "hpLines": 30,
         "role": "boss",
         "formation": 9
       },
       {
         "id": "40103039",
-        "level": 100,
+        "level": 146,
         "hpLines": 30,
         "role": "add",
         "formation": 9
       },
       {
         "id": "40103040",
-        "level": 100,
+        "level": 146,
         "hpLines": 30,
         "role": "add",
         "formation": 9
       },
       {
         "id": "40103038",
-        "level": 100,
+        "level": 146,
         "hpLines": 30,
         "role": "add",
         "formation": 9
       },
       {
         "id": "40103042",
-        "level": 100,
+        "level": 146,
         "hpLines": 30,
         "role": "add",
         "formation": 10
       },
       {
         "id": "40103041",
-        "level": 100,
+        "level": 146,
         "hpLines": 30,
         "role": "add",
         "formation": 10
       },
       {
         "id": "40103043",
-        "level": 100,
+        "level": 146,
         "hpLines": 30,
         "role": "add",
         "formation": 10
       },
       {
         "id": "40103010",
-        "level": 100,
+        "level": 146,
         "hpLines": 30,
         "role": "boss",
         "formation": 10
       },
       {
         "id": "40103012",
-        "level": 100,
+        "level": 146,
         "hpLines": 30,
         "role": "boss",
         "formation": 11
       },
       {
         "id": "40103045",
-        "level": 100,
+        "level": 146,
         "hpLines": 30,
         "role": "add",
         "formation": 11
       },
       {
         "id": "40103013",
-        "level": 100,
+        "level": 146,
         "hpLines": 30,
         "role": "boss",
         "formation": 12
       },
       {
         "id": "40103046",
-        "level": 100,
+        "level": 146,
         "hpLines": 30,
         "role": "add",
         "formation": 12
       },
       {
         "id": "40103047",
-        "level": 100,
+        "level": 146,
         "hpLines": 30,
         "role": "add",
         "formation": 12
@@ -54914,56 +54914,56 @@
     "monsters": [
       {
         "id": "40103050",
-        "level": 100,
+        "level": 147,
         "hpLines": 30,
         "role": "add",
         "formation": 1
       },
       {
         "id": "40103048",
-        "level": 100,
+        "level": 147,
         "hpLines": 30,
         "role": "add",
         "formation": 1
       },
       {
         "id": "40103049",
-        "level": 100,
+        "level": 147,
         "hpLines": 30,
         "role": "add",
         "formation": 1
       },
       {
         "id": "40103014",
-        "level": 100,
+        "level": 147,
         "hpLines": 30,
         "role": "boss",
         "formation": 1
       },
       {
         "id": "40103051",
-        "level": 100,
+        "level": 147,
         "hpLines": 30,
         "role": "add",
         "formation": 2
       },
       {
         "id": "40103015",
-        "level": 100,
+        "level": 147,
         "hpLines": 30,
         "role": "boss",
         "formation": 2
       },
       {
         "id": "40103016",
-        "level": 100,
+        "level": 147,
         "hpLines": 30,
         "role": "boss",
         "formation": 3
       },
       {
         "id": "40103052",
-        "level": 100,
+        "level": 147,
         "hpLines": 30,
         "role": "add",
         "formation": 3,
@@ -54971,14 +54971,14 @@
       },
       {
         "id": "40103011",
-        "level": 100,
+        "level": 147,
         "hpLines": 30,
         "role": "boss",
         "formation": 4
       },
       {
         "id": "40103044",
-        "level": 100,
+        "level": 147,
         "hpLines": 30,
         "role": "add",
         "formation": 4
@@ -55005,266 +55005,266 @@
     "monsters": [
       {
         "id": "40103022",
-        "level": 100,
+        "level": 148,
         "hpLines": 30,
         "role": "add",
         "formation": 1
       },
       {
         "id": "40103001",
-        "level": 100,
+        "level": 148,
         "hpLines": 30,
         "role": "boss",
         "formation": 1
       },
       {
         "id": "40103002",
-        "level": 100,
+        "level": 148,
         "hpLines": 30,
         "role": "boss",
         "formation": 2
       },
       {
         "id": "40103003",
-        "level": 100,
+        "level": 148,
         "hpLines": 30,
         "role": "boss",
         "formation": 3
       },
       {
         "id": "40103026",
-        "level": 100,
+        "level": 148,
         "hpLines": 30,
         "role": "add",
         "formation": 3
       },
       {
         "id": "40103027",
-        "level": 100,
+        "level": 148,
         "hpLines": 30,
         "role": "add",
         "formation": 3
       },
       {
         "id": "40103028",
-        "level": 100,
+        "level": 148,
         "hpLines": 30,
         "role": "add",
         "formation": 3
       },
       {
         "id": "40103031",
-        "level": 100,
+        "level": 148,
         "hpLines": 30,
         "role": "add",
         "formation": 4
       },
       {
         "id": "40103029",
-        "level": 100,
+        "level": 148,
         "hpLines": 30,
         "role": "add",
         "formation": 4
       },
       {
         "id": "40103030",
-        "level": 100,
+        "level": 148,
         "hpLines": 30,
         "role": "add",
         "formation": 4
       },
       {
         "id": "40103004",
-        "level": 100,
+        "level": 148,
         "hpLines": 30,
         "role": "boss",
         "formation": 4
       },
       {
         "id": "40103005",
-        "level": 100,
+        "level": 148,
         "hpLines": 30,
         "role": "boss",
         "formation": 5
       },
       {
         "id": "40103032",
-        "level": 100,
+        "level": 148,
         "hpLines": 30,
         "role": "add",
         "formation": 5
       },
       {
         "id": "40103033",
-        "level": 100,
+        "level": 148,
         "hpLines": 30,
         "role": "add",
         "formation": 5
       },
       {
         "id": "40103028",
-        "level": 100,
+        "level": 148,
         "hpLines": 30,
         "role": "add",
         "formation": 5
       },
       {
         "id": "40103036",
-        "level": 100,
+        "level": 148,
         "hpLines": 30,
         "role": "add",
         "formation": 6
       },
       {
         "id": "40103034",
-        "level": 100,
+        "level": 148,
         "hpLines": 30,
         "role": "add",
         "formation": 6
       },
       {
         "id": "40103035",
-        "level": 100,
+        "level": 148,
         "hpLines": 30,
         "role": "add",
         "formation": 6
       },
       {
         "id": "40103006",
-        "level": 100,
+        "level": 148,
         "hpLines": 30,
         "role": "boss",
         "formation": 6
       },
       {
         "id": "40103058",
-        "level": 100,
+        "level": 148,
         "hpLines": 30,
         "role": "add",
         "formation": 7
       },
       {
         "id": "40103027",
-        "level": 100,
+        "level": 148,
         "hpLines": 30,
         "role": "add",
         "formation": 7
       },
       {
         "id": "40103007",
-        "level": 100,
+        "level": 148,
         "hpLines": 30,
         "role": "boss",
         "formation": 7
       },
       {
         "id": "40103026",
-        "level": 100,
+        "level": 148,
         "hpLines": 30,
         "role": "add",
         "formation": 8
       },
       {
         "id": "40103037",
-        "level": 100,
+        "level": 148,
         "hpLines": 30,
         "role": "add",
         "formation": 8
       },
       {
         "id": "40103008",
-        "level": 100,
+        "level": 148,
         "hpLines": 30,
         "role": "boss",
         "formation": 8
       },
       {
         "id": "40103009",
-        "level": 100,
+        "level": 148,
         "hpLines": 30,
         "role": "boss",
         "formation": 9
       },
       {
         "id": "40103039",
-        "level": 100,
+        "level": 148,
         "hpLines": 30,
         "role": "add",
         "formation": 9
       },
       {
         "id": "40103040",
-        "level": 100,
+        "level": 148,
         "hpLines": 30,
         "role": "add",
         "formation": 9
       },
       {
         "id": "40103038",
-        "level": 100,
+        "level": 148,
         "hpLines": 30,
         "role": "add",
         "formation": 9
       },
       {
         "id": "40103042",
-        "level": 100,
+        "level": 148,
         "hpLines": 30,
         "role": "add",
         "formation": 10
       },
       {
         "id": "40103041",
-        "level": 100,
+        "level": 148,
         "hpLines": 30,
         "role": "add",
         "formation": 10
       },
       {
         "id": "40103043",
-        "level": 100,
+        "level": 148,
         "hpLines": 30,
         "role": "add",
         "formation": 10
       },
       {
         "id": "40103010",
-        "level": 100,
+        "level": 148,
         "hpLines": 30,
         "role": "boss",
         "formation": 10
       },
       {
         "id": "40103012",
-        "level": 100,
+        "level": 148,
         "hpLines": 30,
         "role": "boss",
         "formation": 11
       },
       {
         "id": "40103045",
-        "level": 100,
+        "level": 148,
         "hpLines": 30,
         "role": "add",
         "formation": 11
       },
       {
         "id": "40103013",
-        "level": 100,
+        "level": 148,
         "hpLines": 30,
         "role": "boss",
         "formation": 12
       },
       {
         "id": "40103046",
-        "level": 100,
+        "level": 148,
         "hpLines": 30,
         "role": "add",
         "formation": 12
       },
       {
         "id": "40103047",
-        "level": 100,
+        "level": 148,
         "hpLines": 30,
         "role": "add",
         "formation": 12
@@ -55291,28 +55291,28 @@
     "monsters": [
       {
         "id": "40103056",
-        "level": 100,
+        "level": 149,
         "hpLines": 30,
         "role": "add",
         "formation": 1
       },
       {
         "id": "40103020",
-        "level": 100,
+        "level": 149,
         "hpLines": 30,
         "role": "boss",
         "formation": 1
       },
       {
         "id": "40103057",
-        "level": 100,
+        "level": 149,
         "hpLines": 30,
         "role": "add",
         "formation": 2
       },
       {
         "id": "40103021",
-        "level": 100,
+        "level": 149,
         "hpLines": 30,
         "role": "boss",
         "formation": 2

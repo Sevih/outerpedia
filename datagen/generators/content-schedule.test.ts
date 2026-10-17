@@ -11,14 +11,17 @@
  *      content-schedule.test.ts) suppose que `monsters` liste des entités
  *      réelles ; si le générateur dérive, la jointure rate en silence.
  *
- * Tourne SANS `.gamedata` (rien n'appelle buildContentSchedule).
+ * Tourne SANS `.gamedata` (rien n'appelle buildContentSchedule) ; le seul bloc
+ * qui lit des tables du jeu (chaîne des phases des world boss) se saute quand
+ * elles sont absentes.
  */
 import { describe, expect, it } from 'vitest';
 import scheduleData from '../../data/generated/content-schedule.json';
 import encountersData from '../../data/generated/encounters.json';
 import monstersData from '../../data/generated/monsters.json';
+import { groupBy, indexBy, loadTable, splitCsv, tablesStamp } from '../lib/tables';
 import { isoUtc, type ContentScheduleData } from './content-schedule';
-import type { DungeonRef } from './encounters';
+import { spawnGroupIds, spawnUnits, type DungeonRef } from './encounters';
 
 const schedule = scheduleData as unknown as ContentScheduleData;
 // encounters.json committé = le dict `dungeons` d'EncountersData (éclaté au build).
@@ -113,6 +116,17 @@ describe('content-schedule.json — invariants structurels', () => {
     expect(orphans).toEqual([]);
   });
 
+  it('la DERNIÈRE saison WB porte tous les monstres de ses donjons dans encounters.json', () => {
+    // La dernière saison est la rotation courante, celle dont encounters suit
+    // la chaîne `ChangeSpawnGroupID` : son boss de phase 2 doit y être aussi.
+    const s = schedule.worldBoss.at(-1);
+    expect(s).toBeDefined();
+    const lack = s!.dungeons
+      .flatMap((d) => (dungeons[d]?.monsters ?? []).map((m) => m.id))
+      .filter((m) => !s!.monsters.includes(m));
+    expect(lack).toEqual([]);
+  });
+
   it('le boss CANONIQUE (affichage) de la DERNIÈRE saison existe dans monsters.json', () => {
     // Les boss d'affichage des VIEILLES saisons peuvent être purgés de
     // monsters.json (extraction à la demande) — c'est la saison courante que
@@ -133,5 +147,34 @@ describe('content-schedule.json — invariants structurels', () => {
       expect(s.id).toBeTruthy();
       expect(s.start).toBeTruthy();
     }
+  });
+});
+
+// ─── 3. Rejoint aux tables du jeu (sauté sans `.gamedata`) ───────────────────
+
+const HAS_WB_TABLES = !tablesStamp([
+  'WorldBossLeagueTemplet',
+  'DungeonTemplet',
+  'DungeonSpawnTemplet',
+]).includes('absent');
+
+describe.skipIf(!HAS_WB_TABLES)('world boss — chaîne des phases rejointe aux tables', () => {
+  it('chaque saison porte les monstres de TOUTE la chaîne de chacune de ses lignes de ligue', () => {
+    // Relation, pas valeur du jour : groupes du donjon + `ChangeSpawnGroupID`
+    // de la LIGNE (historique de la saison), relus ici dans les tables.
+    const dungeonById = indexBy(loadTable('DungeonTemplet'));
+    const spawnsByGroup = groupBy(loadTable('DungeonSpawnTemplet'), 'GroupID');
+    const leaguesByBoss = groupBy(loadTable('WorldBossLeagueTemplet'), 'WorldBossID');
+    const lack: string[] = [];
+    for (const s of schedule.worldBoss) {
+      for (const l of leaguesByBoss.get(s.id) ?? []) {
+        const d = dungeonById.get(l.DungeonID ?? '');
+        const groups = [...(d ? spawnGroupIds(d) : []), ...splitCsv(l.ChangeSpawnGroupID)];
+        for (const g of groups)
+          for (const m of spawnUnits(spawnsByGroup.get(g) ?? []))
+            if (!s.monsters.includes(m)) lack.push(`${s.id} (ligue ${l.ID}) → ${m}`);
+      }
+    }
+    expect(lack).toEqual([]);
   });
 });

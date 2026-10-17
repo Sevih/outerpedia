@@ -42,7 +42,7 @@ import type { LangDict } from '../lib/lang';
 import { isMain } from '../lib/is-main';
 import { loadTextIndex, resolveText } from '../lib/text';
 import { groupBy, indexBy, loadTable, num, splitCsv } from '../lib/tables';
-import { dungeonSpawnedMonsters } from './encounters';
+import { dungeonSpawnedMonsters, leagueSpawnedMonsters } from './encounters';
 
 /** Une saison de World Boss. */
 export interface WorldBossSeason {
@@ -52,7 +52,8 @@ export interface WorldBossSeason {
   boss?: string;
   /** Donjons des ligues de la saison (WorldBossLeagueTemplet, niveau croissant). */
   dungeons: string[];
-  /** Monstres réellement spawnés dans ces donjons. */
+  /** Monstres réellement spawnés dans ces donjons, boss de phase 2 compris
+   *  (chaîne `ChangeSpawnGroupID` de chaque ligne de ligue). */
   monsters: string[];
   /** Ouverture de la saison (jour de maintenance — le combat ouvre APRÈS elle). */
   start: string;
@@ -161,8 +162,15 @@ export function buildContentSchedule(): ContentScheduleData {
     for (const l of leagues)
       if (l.DungeonID && !dungeons.includes(l.DungeonID)) dungeons.push(l.DungeonID);
     if (r.DungeonID && !dungeons.includes(r.DungeonID)) dungeons.push(r.DungeonID);
+    // Monstres de CHAQUE ligne de ligue, chaîne `ChangeSpawnGroupID` comprise
+    // (boss de phase 2) — celle de la ligne de la saison, pas de la rotation
+    // courante ; le donjon propre de la saison hors ligue, par son spawn seul.
     const monsters: string[] = [];
-    for (const did of dungeons) monstersOf(did, monsters);
+    for (const l of leagues)
+      if (l.DungeonID)
+        leagueSpawnedMonsters(l, dungeonById.get(l.DungeonID), spawnsByGroup, monsters);
+    for (const did of dungeons)
+      if (!leagues.some((l) => l.DungeonID === did)) monstersOf(did, monsters);
     const season: WorldBossSeason = {
       id: r.ID,
       name: resolveText(tsys, r.Name),

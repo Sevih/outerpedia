@@ -27,7 +27,11 @@ import { loadTable, splitCsv, tablesStamp, type Row } from '../lib/tables';
 import type { TowersData } from './towers';
 import {
   dungeonSpawnedMonsters,
+  forcedUnitLevel,
   isFormationPool,
+  leagueSpawnedMonsters,
+  leagueSpawnGroupIds,
+  readRewardRow,
   spawnGroupIds,
   spawnUnits,
   type DungeonMonster,
@@ -95,6 +99,64 @@ describe('dungeonSpawnedMonsters — traversée complète', () => {
 
   it('groupe inconnu du donjon → ignoré sans bruit', () => {
     expect(dungeonSpawnedMonsters({ SpawnID_Pos0: 'inconnu' }, spawnsByGroup)).toEqual([]);
+  });
+});
+
+describe('forcedUnitLevel — niveau imposé par le mode', () => {
+  it('tour very hard : `RecommandLevel` du donjon, pour toutes les unités', () => {
+    expect(forcedUnitLevel({ DungeonMode: 'DM_TOWER_VERY_HARD', RecommandLevel: '137' })).toBe(137);
+  });
+
+  it('tout autre mode, ou un very hard sans niveau : le spawn fait foi', () => {
+    expect(forcedUnitLevel({ DungeonMode: 'DM_TOWER_HARD', RecommandLevel: '90' })).toBeUndefined();
+    expect(forcedUnitLevel({ DungeonMode: 'DM_TOWER_VERY_HARD' })).toBeUndefined();
+  });
+});
+
+describe('leagueSpawnGroupIds / leagueSpawnedMonsters — chaîne des world boss', () => {
+  const spawnsByGroup = new Map<string, Row[]>([
+    ['g1', [{ ID0: 'p1' }]],
+    ['g2', [{ ID0: 'p2', ID1: 'p1' }]],
+  ]);
+  const dungeon: Row = { SpawnID_Pos0: 'g1' };
+
+  it('groupes du donjon, puis la chaîne `ChangeSpawnGroupID` de la ligne, dédupliqués', () => {
+    expect(leagueSpawnGroupIds({ ChangeSpawnGroupID: 'g1, g2' }, dungeon)).toEqual(['g1', 'g2']);
+    expect(leagueSpawnGroupIds({}, dungeon)).toEqual(['g1']);
+  });
+
+  it('les monstres de TOUTE la chaîne, boss de phase 2 compris', () => {
+    const acc = leagueSpawnedMonsters({ ChangeSpawnGroupID: 'g2' }, dungeon, spawnsByGroup);
+    expect(acc).toEqual(['p1', 'p2']);
+    // Le donjon seul ne voit que la phase 1 : c'est ce que content-schedule perdait.
+    expect(dungeonSpawnedMonsters(dungeon, spawnsByGroup)).toEqual(['p1']);
+  });
+});
+
+describe('readRewardRow — relevé des colonnes de RewardTemplet non lues', () => {
+  const groups = new Map<string, Row[]>([
+    ['s1', [{ Type: 'RT_ITEM', TypeID: 'it1', MinCount: '1', MaxCount: '2' }]],
+  ]);
+
+  it('une colonne inconnue non vide est relevée, la table lue reste entière', () => {
+    const { table, unread, typeless } = readRewardRow(
+      { ID: 'r1', Crystal: '50', StaticGroupID: 's1', ResearchCoin: '5' },
+      groups,
+    );
+    expect(unread).toEqual(['ResearchCoin']);
+    expect(typeless).toEqual([]);
+    expect(table.crystal).toBe(50);
+    expect(table.entries).toHaveLength(1);
+  });
+
+  it('une ligne qui ne porte QUE la colonne inconnue : table vide, colonne relevée', () => {
+    const { table, unread } = readRewardRow({ ID: 'r2', GuildCoin: '20' }, groups);
+    expect(table).toEqual({});
+    expect(unread).toEqual(['GuildCoin']);
+  });
+
+  it('une ligne entièrement lue ne relève rien (l’ID est la clé, lu par construction)', () => {
+    expect(readRewardRow({ ID: 'r3', CreditMin: '1', CreditMax: '3' }, groups).unread).toEqual([]);
   });
 });
 
@@ -247,6 +309,19 @@ describe('encounters.json — invariants référentiels', () => {
           if (n !== prev && n !== prev + 1) bad.push(`${id} : formation ${prev} → ${n}`);
           prev = n;
         }
+      }
+      expect(bad).toEqual([]);
+    });
+
+    it('niveau des unités = niveau de l’étage (`RecommandLevel`, imposé par le client)', () => {
+      // `CSpawnPack.InitializeTowerVeryHard` : le `Level<i>` du spawn ne compte
+      // pas. Relation, pas valeur du jour : chaque monstre au `level` de SON étage.
+      const floors = (towersData as unknown as TowersData).tower_very_hard.floors;
+      const bad: string[] = [];
+      for (const f of floors) {
+        if (!f.level) bad.push(`${f.dungeon} : étage sans niveau`);
+        for (const m of dungeons[f.dungeon]?.monsters ?? [])
+          if (m.level !== f.level) bad.push(`${f.dungeon} : ${m.id} Lv${m.level} ≠ ${f.level}`);
       }
       expect(bad).toEqual([]);
     });

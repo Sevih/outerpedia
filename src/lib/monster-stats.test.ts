@@ -1,6 +1,11 @@
 import { describe, expect, it } from 'vitest';
 import { getEncounters } from '@/lib/data/encounters';
-import { expandRankContexts, statAt, type SpawnContext } from '@/lib/monster-stats';
+import {
+  expandRankContexts,
+  monsterQuirkMods,
+  statAt,
+  type SpawnContext,
+} from '@/lib/monster-stats';
 import type { DungeonRank } from '@contracts';
 
 /**
@@ -52,6 +57,73 @@ describe('expandRankContexts — barre de palier vs PV de boss', () => {
 
     expect(ctx.bossHp).toBe(2_000_000);
     expect(statAt('hp', RANGE, ctx)).toBe(2_000_000);
+  });
+});
+
+describe('expandRankContexts — les PV de boss ne vont qu’au boss', () => {
+  const plain: DungeonRank = { level: 100, hp: 560_480 };
+
+  it('palier NON scoré : le boss prend `r.hp`, le renfort garde ses PV interpolés', () => {
+    const [boss] = expandRankContexts({ level: 100 }, [plain], 'boss');
+    const [add] = expandRankContexts({ level: 100 }, [plain], 'add');
+
+    expect(statAt('hp', RANGE, boss)).toBe(plain.hp);
+    expect(add.bossHp).toBeUndefined();
+    expect(statAt('hp', RANGE, add)).toBe(statAt('hp', RANGE, { level: plain.level! }));
+  });
+
+  it('les PV du donjon (`bossHp`) ne collent pas au renfort, avec ou sans palier', () => {
+    const base: SpawnContext = { level: 120, bossHp: 2_000_000 };
+    expect(expandRankContexts(base, undefined, 'add')[0].bossHp).toBeUndefined();
+    expect(expandRankContexts(base, [plain], 'add')[0].bossHp).toBeUndefined();
+    expect(expandRankContexts(base, undefined, 'boss')[0].bossHp).toBe(base.bossHp);
+  });
+
+  it('rôle inconnu : la règle d’avant (le palier pose ses PV)', () => {
+    expect(expandRankContexts({ level: 100 }, [plain])[0].bossHp).toBe(plain.hp);
+  });
+
+  it('palier SCORÉ : sa barre, quel que soit le rôle', () => {
+    const scored: DungeonRank = { level: 100, hp: 1000, damage: { min: 1, max: 1000 } };
+    for (const role of ['boss', 'add'] as const) {
+      const [ctx] = expandRankContexts({ level: 100 }, [scored], role);
+      expect(ctx.bar, role).toBe(scored.hp);
+      expect(ctx.bossHp, role).toBeUndefined();
+    }
+  });
+});
+
+describe('monsterQuirkMods — quirks de compte, boss seulement (`CheckNodeApply`)', () => {
+  const mods = { buff_chance: -200, buff_resist: -200 };
+  const EFF = { min: 100, max: 300 };
+
+  it('appliqués à `boss`, `area_boss`, `season_boss`', () => {
+    for (const type of ['boss', 'area_boss', 'season_boss']) {
+      const q = monsterQuirkMods(type, mods);
+      expect(q, type).toEqual(mods);
+      expect(statAt('buff_chance', EFF, { level: 100 }, q), type).toBeLessThan(EFF.max);
+    }
+  });
+
+  it('nuls pour `monster` et `named` : la stat reste celle du templet', () => {
+    for (const type of ['monster', 'named']) {
+      const q = monsterQuirkMods(type, mods);
+      expect(q, type).toEqual({});
+      expect(statAt('buff_chance', EFF, { level: 100 }, q), type).toBe(EFF.max);
+    }
+  });
+});
+
+describe('statAt — interpolation tronquée vers zéro (`CFormula.CalcStat`)', () => {
+  it('plage décroissante : −0,4 sort 0, pas −1', () => {
+    // (90 − 100) × (5 − 1) / 99 = −0,40… → tronqué à 0, donc min.
+    expect(statAt('speed', { min: 100, max: 90 }, { level: 5 })).toBe(100);
+  });
+
+  it('plage croissante : inchangée (tronquer et arrondir bas y coïncident)', () => {
+    expect(statAt('atk', { min: 100, max: 1000 }, { level: 50 })).toBe(
+      100 + Math.floor((900 * 49) / 99),
+    );
   });
 });
 

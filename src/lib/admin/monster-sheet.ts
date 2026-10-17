@@ -15,6 +15,7 @@ import {
   expandRankContexts,
   formatMonsterStat,
   orderedStats,
+  roleInDungeon,
   statAt,
   type SpawnContext,
   type StatRange,
@@ -91,7 +92,7 @@ export function monsterEncounters(
  * dépliée par palier (`expandRankContexts`) — le libellé « Mode · Stage ».
  */
 export function monsterStatContexts(
-  m: Pick<Monster, 'spawns'>,
+  m: Pick<Monster, 'id' | 'spawns'>,
   src: DungeonSources,
 ): SpawnContext[] {
   return resolvedSpawns(m, src).flatMap((s) =>
@@ -105,6 +106,7 @@ export function monsterStatContexts(
         ...(s.hpLines ? { hpLines: s.hpLines } : {}),
       },
       s.ref.ranks,
+      roleInDungeon(s.ref, m.id),
     ),
   );
 }
