@@ -228,6 +228,7 @@ import {
   checkGearBuilds,
   comicLangOf,
   commitPaths,
+  gitDirtyFiles,
   dashboardState,
   effectNewId,
   effectsSearch,
@@ -7662,6 +7663,21 @@ describe('commitPaths, pushMain, gitState — sur un dépôt jetable', () => {
       'committé — 2 commits à pousser (bouton « Pousser »).',
     );
     expect(head(bare)).toBe(start);
+  });
+
+  it('les chemins modifiés d’un dossier gardent leur premier caractère (` M` en tête)', () => {
+    const { work } = repo();
+    mkdirSync(join(work, 'src', 'guide'), { recursive: true });
+    write(work, 'src/guide/content.json', '{"a":1}\n');
+    sh(work, 'add', '--', 'src/guide/content.json');
+    sh(work, 'commit', '-q', '-m', 'guide');
+    // Suivi et modifié, non indexé : `git status -z` le rend en ` M src/…`, en tête.
+    write(work, 'src/guide/content.json', '{"a":2}\n');
+    write(work, 'src/guide/neuf.json', '{}\n');
+    expect(gitDirtyFiles('src/guide', work).sort()).toEqual([
+      'src/guide/content.json',
+      'src/guide/neuf.json',
+    ]);
   });
 
   it('ne committe que les chemins donnés, et rien quand ils n’ont pas changé', () => {

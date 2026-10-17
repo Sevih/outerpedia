@@ -476,6 +476,16 @@ function git(args: string[], cwd?: string): { ok: boolean; out: string } {
   return { ok: r.status === 0, out: `${r.stdout ?? ''}${r.stderr ?? ''}`.trim() };
 }
 
+/**
+ * `git` dont la sortie standard reste BRUTE : pour `status --porcelain -z`, où
+ * le `trim()` de `git()` mangerait l'espace de tête du premier enregistrement
+ * (` M src/…` → `M src/…`, puis `slice(3)` → `rc/…`).
+ */
+function gitRaw(args: string[], cwd?: string): { ok: boolean; out: string } {
+  const r = spawnSync('git', args, { cwd, encoding: 'utf8' });
+  return { ok: r.status === 0, out: r.stdout ?? '' };
+}
+
 const commits = (n: number): string => `${n} commit${n > 1 ? 's' : ''}`;
 
 /**
@@ -5629,8 +5639,8 @@ const guideDirOf = (category: string, slug: string): string =>
  * `git status` du dossier, comme `scripts/stamp-guides.ts` le lit du dépôt
  * entier. Les renommages sortent en deux chemins (cf. le script).
  */
-function gitDirtyFiles(dir: string, cwd?: string): string[] {
-  const r = git(['status', '--porcelain', '-z', '--untracked-files=all', '--', dir], cwd);
+export function gitDirtyFiles(dir: string, cwd?: string): string[] {
+  const r = gitRaw(['status', '--porcelain', '-z', '--untracked-files=all', '--', dir], cwd);
   if (!r.ok) return [];
   const files: string[] = [];
   const recs = r.out.split('\0');
@@ -8576,7 +8586,7 @@ export const FREEZE_DEPS: FreezeDeps = {
     };
   },
   dirty: (paths) => {
-    const r = git(['status', '--porcelain', '-z', '--', ...paths]);
+    const r = gitRaw(['status', '--porcelain', '-z', '--', ...paths]);
     if (!r.ok) return [];
     return r.out
       .split('\0')
