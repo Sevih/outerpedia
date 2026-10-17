@@ -31,19 +31,19 @@ describe('parseStatInput', () => {
 describe('buildInputsFromZ — attaquant', () => {
   const z: CalculatorUrlState = {
     a: '2000001',
-    af: 47, // niveau 0..100 → palier 2 (tous les 20)
+    af: 47, // niveau 0..100, servi tel quel (comparé au niveau requis des lignes)
     k: { S1: 5, S2: 7, S3: 6, chain: 4 }, // chain : slot UI hors moteur
     v: { atk: '10000', critical_rate: '50.5', dmg_boost: '', speed: 'abc' },
     h: '75',
     b: ['atk', 't_marked'],
   };
 
-  it('défauts UI (niveau 120, palier 0), conversions ‰, slots filtrés', () => {
+  it('défauts UI (niveau 120), affinité au niveau saisi, conversions ‰, slots filtrés', () => {
     const { attacker } = buildInputsFromZ(z);
     expect(attacker).toEqual({
       id: '2000001',
       level: 120,
-      affinityTier: 2,
+      affinityLevel: 47,
       codexLevel: 0,
       skillLevels: { S1: 5, S2: 7, S3: 6 },
       // Vide ('') omis ; invalide ('abc') saisi → 0 explicite.

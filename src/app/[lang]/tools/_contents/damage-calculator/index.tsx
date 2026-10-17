@@ -597,6 +597,16 @@ export default async function DamageCalculator({ lang }: { lang: Lang }) {
       return `${label} ${b.applyingType === 'OAT_RATE' || percent ? pct(v) : `${v > 0 ? '+' : ''}${v}`}`;
     }
     if (b.type === 'BT_DMG_REDUCE') return `${statName('dmg_reduce_rate', lang)} ${pct(v)}`;
+    // Renfort ENHANCE (§ 14.1) : le nom de l'effet du glossaire (« Buff
+    // Enhancement » 1092, « Debuff Enhancement » 1094), l'enum brut en repli.
+    const enhanceEffect =
+      b.type === 'BT_STAT_BUFF_ENHANCE'
+        ? '1092'
+        : b.type === 'BT_STAT_DEBUFF_ENHANCE'
+          ? '1094'
+          : '';
+    const enhanceName = enhanceEffect ? GLOSS.effects[enhanceEffect]?.name : undefined;
+    if (enhanceName) return `${lRec(enhanceName, lang) || enhanceName.en} ${pct(v)}`;
     return `${b.type} ${pct(v)}`;
   };
   // Libellés LISIBLES des conditions (Sevih 17/08/2026 — « histoire de

@@ -179,6 +179,9 @@ export interface ReportSkillInput {
   isFirstSkill?: boolean;
   /** Skill mono-cible (`SkillRangeType == 1`) — STEALTHED ne joue pas (§ 9.2). */
   monoTarget?: boolean;
+  /** Skill de portée `ALL` — seul à recevoir BT_DMG_ENEMY_TEAM_DECREASE (§ 7 :
+   *  `CCharacterBattle`, boucle des cibles d'un skill ALL). Absent = pas ALL. */
+  rangeAll?: boolean;
   /** Les états du skill — cf. `groupHitsByChain`. Vide = rien à rapporter. */
   states: ReportState[];
 }
@@ -531,7 +534,14 @@ export function buildSkillReport(
       },
       rateTrace,
     );
-    if (scenario.decreaseTargetCount !== undefined && flags.enemyTeamDecreaseValue !== 0) {
+    // Client : skill de portée ALL seulement, moins de 4 ennemis (porté par
+    // `decreaseTargetCount` = 4 − cibles, 0 à 4 cibles), résultats normal,
+    // critique et manqué — les trois branches du rapport.
+    if (
+      skill.rangeAll === true &&
+      scenario.decreaseTargetCount !== undefined &&
+      flags.enemyTeamDecreaseValue !== 0
+    ) {
       rate = addCheckEnemyTeamDecreaseDamageRate(
         rate,
         flags.enemyTeamDecreaseValue,

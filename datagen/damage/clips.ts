@@ -16,7 +16,19 @@
  *    (« Skill2,Skill2_2 » = deux clips successifs chez Francesca) ;
  *  - `anim-events.json` (extract-anim-events.py) porte, par personnage, le
  *    mapping trigger → clips du controller de combat ET la séquence des
- *    `EventAttackStart` de chaque clip.
+ *    `EventAttackStart` de chaque clip ;
+ *  - l'animator scanné est celui du PERSO QUI PORTE le skill, par son
+ *    `ModelID` (`CharacterTemplet`) : `CFormula.CalcDamage` lit l'animator de
+ *    l'ATTAQUANT (spec § 8.1). La jointure `SkillID` de
+ *    `CharacterDamageTemplet` rattache aussi à un skill des templets d'AUTRES
+ *    persos (2700019, 2700070, 2000088, 2000071, 2000062… — elle ne sert
+ *    qu'au simulateur, `CCharacterBattle.SkillSimulation`) : un hit au
+ *    templet préfixé d'un autre perso ET absent des clips du porteur sort des
+ *    états du skill (`carrierTemplets`, appliqué par characters.ts). Un clip
+ *    sans event extrait ne prouve rien : un hit du porteur lui-même reste,
+ *    au fallback § 12.4 s'il le faut. Avant le 17/10/2026, l'animator était
+ *    déduit du préfixe du PREMIER templet : le S1 d'Akari était résolu sur
+ *    celui de Drakhan (revue R15).
  *
  * JAMAIS de devinette — une chaîne est listée `clipsUnresolvedChains` (et le
  * moteur retombe sur l'heuristique § 12.4) quand :
@@ -85,19 +97,34 @@ export function buildClipIndex(): ClipIndex {
 }
 
 /**
+ * Tous les templets joués par un clip de l'animator `modelId` (vide quand le
+ * perso n'a pas d'entrée dans anim-events.json).
+ */
+export function carrierTemplets(index: ClipIndex, modelId: string): Set<string> {
+  const out = new Set<string>();
+  for (const seq of Object.values(index.chars.get(modelId)?.clips ?? {}))
+    for (const e of seq) {
+      const id = e.split(',')[0].trim();
+      if (id) out.add(id);
+    }
+  return out;
+}
+
+/**
  * Résout les clips d'un skill depuis ses triggers d'animator et ses hits.
- * `triggerCsv`/`triggerSkipCsv` = colonnes `TriggerName`/`TriggerNameSkip` du
- * `CharacterSkillTemplet` (CSV ordonné).
+ * `modelId` = `ModelID` du perso qui PORTE le skill (son animator, cf.
+ * l'en-tête) ; `triggerCsv`/`triggerSkipCsv` = colonnes
+ * `TriggerName`/`TriggerNameSkip` du `CharacterSkillTemplet` (CSV ordonné).
  */
 export function resolveSkillClips(
   index: ClipIndex,
+  modelId: string,
   triggerCsv: string | undefined,
   triggerSkipCsv: string | undefined,
   hits: { id: string; chain: string }[],
 ): SkillClipsResult {
   if (!hits.length) return {};
-  const charId = hits[0].chain.split('_')[0] ?? '';
-  const entry = /^\d+$/.test(charId) ? index.chars.get(charId) : undefined;
+  const entry = index.chars.get(modelId);
   if (!entry) return {};
 
   const chains = new Map<string, Set<string>>();

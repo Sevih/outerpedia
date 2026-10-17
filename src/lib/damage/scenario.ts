@@ -226,8 +226,9 @@ export function buildInputsFromZ(
       // Index du palier de transcendance (absent = max, défaut UI) — le
       // moteur en dérive transStar pour le passif UNIQUE du kit.
       ...(typeof st.x === 'number' ? { transcendIndex: clamp(st.x, 0, 12) } : {}),
-      // Le palier 0..5 est LA valeur de calcul ; `af` porte le niveau 0..100.
-      affinityTier: Math.floor(clamp(st.af ?? 0, 0, 100) / 20),
+      // Niveau d'affinité 0..100 (`af`) : le moteur le compare au niveau
+      // requis de chaque ligne de la chaîne du perso, comme le client.
+      affinityLevel: clamp(st.af ?? 0, 0, 100),
       codexLevel: opts.codexLevel ?? 0,
       skillLevels,
       sheet,

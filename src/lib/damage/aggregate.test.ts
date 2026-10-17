@@ -6,6 +6,7 @@
  */
 import { describe, expect, it } from 'vitest';
 import {
+  applyStatEnhance,
   collectStatChannels,
   collectCombatFlags,
   effectiveValue,
@@ -177,5 +178,51 @@ describe('aggregate — canaux et familles § 9', () => {
     expect(flags.elementDamageRateBonus).toBe(100);
     expect(flags.swapAttack).toEqual({ stat: 'ST_HP', applyingType: 'OAT_RATE', value: 120 });
     expect(flags.forcedSuperiority).toBe(false);
+  });
+});
+
+describe('aggregate — renfort STAT_BUFF/DEBUFF_ENHANCE (§ 14.1, revue M4)', () => {
+  const chip = (over: Partial<ActiveBuff>): ActiveBuff =>
+    B({ stat: 'ST_ATK', applyingType: 'OAT_RATE', value: 300, tooltipId: 7, ...over });
+  const buffEnh = (value: number): ActiveBuff => ({ type: 'BT_STAT_BUFF_ENHANCE', value });
+  const debuffEnh = (value: number): ActiveBuff => ({ type: 'BT_STAT_DEBUFF_ENHANCE', value });
+
+  it('un buff visible sous BUFF_ENHANCE +1000 vaut le double', () => {
+    const atk = chip({});
+    const [out] = applyStatEnhance([atk], [atk, buffEnh(1000)]);
+    expect(out.value).toBe(2 * atk.value!);
+  });
+
+  it('un débuff visible sous DEBUFF_ENHANCE +1000 vaut le double ; BUFF_ENHANCE ne le touche pas', () => {
+    const down = chip({ stat: 'ST_DEF', value: -500, tooltipId: 17, debuff: true });
+    expect(applyStatEnhance([down], [debuffEnh(1000)])[0].value).toBe(2 * down.value!);
+    expect(applyStatEnhance([down], [buffEnh(1000)])[0]).toBe(down);
+  });
+
+  it('−3000 INVERSE le buff : ApplyRate(v, −3000) = −2 v', () => {
+    const up = chip({ stat: 'ST_DEF', value: 500, tooltipId: 6 });
+    expect(applyStatEnhance([up], [buffEnh(-3000)])[0].value).toBe(-2 * up.value!);
+  });
+
+  it('jamais renforcés : sans tooltip, BT_STAT_PREMIUM, autres familles', () => {
+    const noTip = chip({ tooltipId: undefined });
+    const premium: ActiveBuff = { ...chip({}), type: 'BT_STAT_PREMIUM' };
+    const dmg: ActiveBuff = { type: 'BT_DMG', value: 200, tooltipId: 7 };
+    const out = applyStatEnhance([noTip, premium, dmg], [buffEnh(1000)]);
+    expect(out[0]).toBe(noTip);
+    expect(out[1]).toBe(premium);
+    expect(out[2]).toBe(dmg);
+  });
+
+  it('le PREMIER ENHANCE trouvé, pas une somme ; stacks portés par la valeur', () => {
+    const stacked = chip({ value: 100, stacks: 3 });
+    const [out] = applyStatEnhance([stacked], [buffEnh(500), buffEnh(1000)]);
+    expect(effectiveValue(out)).toBe(Math.trunc((effectiveValue(stacked) * 1500) / 1000));
+  });
+
+  it('collectStatChannels renforce les BT_STAT du porteur par ses propres ENHANCE', () => {
+    const atk = chip({});
+    expect(collectStatChannels([atk, buffEnh(1000)]).ST_ATK.rate).toBe(2 * atk.value!);
+    expect(collectStatChannels([atk]).ST_ATK.rate).toBe(atk.value);
   });
 });

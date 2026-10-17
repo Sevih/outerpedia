@@ -69,7 +69,7 @@ const DIANNE = '2000093';
 const attacker = (gear: AttackerBuildInput['gear'], hpPct = 100): AttackerBuildInput => ({
   id: DIANNE,
   level: 120,
-  affinityTier: 0,
+  affinityLevel: 0,
   codexLevel: 0,
   skillLevels: {},
   // Les PV font partie de la fiche : le contexte des familles « PV perdus »
@@ -883,7 +883,7 @@ describe('buffs restreints par slot — Noa (donnée réelle, fixture 10/08/2026
     const noa: AttackerBuildInput = {
       id: NOA,
       level: 100,
-      affinityTier: 0,
+      affinityLevel: 0,
       codexLevel: 0,
       skillLevels: { S1: 5, S2: 5, S3: 5 },
       sheet: { atk: 2034, critical_dmg: 1880 },

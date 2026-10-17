@@ -6,8 +6,10 @@
  * Étapes couvertes (report-inputs § 2) :
  *  - fiche saisie → stats de COMBAT par stat (identité § 16.1 via
  *    `sheetToCombatStat` : base au niveau, terme Codex, canaux de buffs) ;
- *  - affinité (Trust) : les buffs plats `trust_level_*` de buffs.json sont
- *    RÉSOLUS (jamais codés en dur) et versés au canal `buffValue` ;
+ *  - affinité (Trust) : la chaîne PROPRE au perso (`trust` de
+ *    characters.json — PV, ATK ou DEF), lignes dont le niveau requis est
+ *    atteint, buffs plats RÉSOLUS dans buffs.json (jamais codés en dur) et
+ *    versés au canal `buffValue` ;
  *  - chips de scénario → `ActiveBuff` via le catalogue FX (magnitudes
  *    STANDARD du jeu, doublement sourcées : desc officielle du glossaire +
  *    valeur dominante des occurrences réelles de buffs.json — cf. FX_CATALOG) ;
@@ -26,7 +28,12 @@
  * (stats chiffrées main/sub/sets %) reste dans la fiche SAISIE.
  */
 
-import { collectStatChannels, type ActiveBuff } from './aggregate';
+import {
+  applyStatEnhance,
+  collectStatChannels,
+  STAT_ENHANCE_TYPES,
+  type ActiveBuff,
+} from './aggregate';
 import { calcBaseStat } from './formula';
 import {
   burstableSlotOf,
@@ -34,6 +41,7 @@ import {
   resolveGearPassives,
   resolveKitPassives,
   resolveQuirkPassives,
+  type GearDynamicEntry,
   type GearPassivesInfo,
   type GearSelection,
 } from './gear';
@@ -106,6 +114,9 @@ export interface DataCharacter {
   subClass?: string;
   baseStats: Record<string, DataStatPair>;
   skills: { slot: number; id: string }[];
+  /** Chaîne d'affinité du perso (`TrustRewardTemplet` → `TrustBuffTemplet`,
+   *  origine pour un fusionné sans lignes) — absente : aucun bonus. */
+  trust?: { level: number; buffId: string }[];
 }
 
 export interface DamageCharactersData {
@@ -181,7 +192,8 @@ export interface DataBuffLevel {
   /** `IsIDOverlap` — deux poses du même `BuffID` coexistent ; sinon la
    *  seconde retrouve la première (`CBuff`, `FindBuff(BuffID)`). */
   isIdOverlap?: boolean;
-  /** `DEBUFF_IGNORE_RESIST` = pose sans jet de résistance § 5. */
+  /** `DEBUFF_IGNORE_RESIST` = pose sans jet de résistance § 5 ; ≥ DEBUFF =
+   *  débuff (`IsDebuff`, polarité du renfort ENHANCE § 14.1). */
   buffDebuffType?: string;
   /** Tours de présence (`-1` = permanent) — affichage des lignes DoT. */
   turnDuration?: number;
@@ -411,27 +423,113 @@ export function modifierAfter100For(
  * occurrences réelles de buffs.json (ex. ST_ATK OAT_RATE : 300 ‰ sur 183/244
  * lignes). `null` = magnitude non standardisée par le jeu (« a certain
  * percentage ») : le chip est remonté `unresolvedFx`, contribution 0.
+ *
+ * Chaque chip est un buff VISIBLE : il porte le `ToolTipID` de l'effet du
+ * glossaire qu'elle affiche (clé `effectByKey` de l'UI — index.tsx ; aussi
+ * le tooltip dominant des lignes de même magnitude de buffs.json, 17/10/2026)
+ * et sa polarité — le renfort STAT_BUFF/DEBUFF_ENHANCE du porteur s'y
+ * applique (§ 14.1).
  */
 export const FX_CATALOG: Record<string, ActiveBuff | null> = {
   // Attaquant — buffs.
-  atk: { type: 'BT_STAT', stat: 'ST_ATK', applyingType: 'OAT_RATE', value: 300 },
-  def: { type: 'BT_STAT', stat: 'ST_DEF', applyingType: 'OAT_RATE', value: 500 },
-  chd: { type: 'BT_STAT', stat: 'ST_CRITICAL_DMG_RATE', applyingType: 'OAT_ADD', value: 500 },
-  pen: { type: 'BT_STAT', stat: 'ST_PIERCE_POWER_RATE', applyingType: 'OAT_ADD', value: 300 },
-  spd: { type: 'BT_STAT', stat: 'ST_SPEED', applyingType: 'OAT_RATE', value: 300 },
-  eff: { type: 'BT_STAT', stat: 'ST_BUFF_CHANCE', applyingType: 'OAT_RATE', value: 1000 },
+  atk: { type: 'BT_STAT', stat: 'ST_ATK', applyingType: 'OAT_RATE', value: 300, tooltipId: 7 },
+  def: { type: 'BT_STAT', stat: 'ST_DEF', applyingType: 'OAT_RATE', value: 500, tooltipId: 6 },
+  chd: {
+    type: 'BT_STAT',
+    stat: 'ST_CRITICAL_DMG_RATE',
+    applyingType: 'OAT_ADD',
+    value: 500,
+    tooltipId: 12,
+  },
+  pen: {
+    type: 'BT_STAT',
+    stat: 'ST_PIERCE_POWER_RATE',
+    applyingType: 'OAT_ADD',
+    value: 300,
+    tooltipId: 8,
+  },
+  spd: { type: 'BT_STAT', stat: 'ST_SPEED', applyingType: 'OAT_RATE', value: 300, tooltipId: 15 },
+  eff: {
+    type: 'BT_STAT',
+    stat: 'ST_BUFF_CHANCE',
+    applyingType: 'OAT_RATE',
+    value: 1000,
+    tooltipId: 9,
+  },
   // Attaquant — débuffs (miroir).
-  atk_down: { type: 'BT_STAT', stat: 'ST_ATK', applyingType: 'OAT_RATE', value: -300 },
-  def_down: { type: 'BT_STAT', stat: 'ST_DEF', applyingType: 'OAT_RATE', value: -500 },
-  chd_down: { type: 'BT_STAT', stat: 'ST_CRITICAL_DMG_RATE', applyingType: 'OAT_ADD', value: -500 },
-  pen_down: { type: 'BT_STAT', stat: 'ST_PIERCE_POWER_RATE', applyingType: 'OAT_ADD', value: -300 },
-  spd_down: { type: 'BT_STAT', stat: 'ST_SPEED', applyingType: 'OAT_RATE', value: -300 },
-  eff_down: { type: 'BT_STAT', stat: 'ST_BUFF_CHANCE', applyingType: 'OAT_RATE', value: -1000 },
+  atk_down: {
+    type: 'BT_STAT',
+    stat: 'ST_ATK',
+    applyingType: 'OAT_RATE',
+    value: -300,
+    tooltipId: 18,
+    debuff: true,
+  },
+  def_down: {
+    type: 'BT_STAT',
+    stat: 'ST_DEF',
+    applyingType: 'OAT_RATE',
+    value: -500,
+    tooltipId: 17,
+    debuff: true,
+  },
+  chd_down: {
+    type: 'BT_STAT',
+    stat: 'ST_CRITICAL_DMG_RATE',
+    applyingType: 'OAT_ADD',
+    value: -500,
+    tooltipId: 23,
+    debuff: true,
+  },
+  pen_down: {
+    type: 'BT_STAT',
+    stat: 'ST_PIERCE_POWER_RATE',
+    applyingType: 'OAT_ADD',
+    value: -300,
+    tooltipId: 19,
+    debuff: true,
+  },
+  spd_down: {
+    type: 'BT_STAT',
+    stat: 'ST_SPEED',
+    applyingType: 'OAT_RATE',
+    value: -300,
+    tooltipId: 26,
+    debuff: true,
+  },
+  eff_down: {
+    type: 'BT_STAT',
+    stat: 'ST_BUFF_CHANCE',
+    applyingType: 'OAT_RATE',
+    value: -1000,
+    tooltipId: 20,
+    debuff: true,
+  },
   // Cible.
-  t_def: { type: 'BT_STAT', stat: 'ST_DEF', applyingType: 'OAT_RATE', value: 500 },
-  t_def_down: { type: 'BT_STAT', stat: 'ST_DEF', applyingType: 'OAT_RATE', value: -500 },
-  t_res: { type: 'BT_STAT', stat: 'ST_BUFF_RESIST', applyingType: 'OAT_RATE', value: 1000 },
-  t_res_down: { type: 'BT_STAT', stat: 'ST_BUFF_RESIST', applyingType: 'OAT_RATE', value: -1000 },
+  t_def: { type: 'BT_STAT', stat: 'ST_DEF', applyingType: 'OAT_RATE', value: 500, tooltipId: 6 },
+  t_def_down: {
+    type: 'BT_STAT',
+    stat: 'ST_DEF',
+    applyingType: 'OAT_RATE',
+    value: -500,
+    tooltipId: 17,
+    debuff: true,
+  },
+  t_res: {
+    type: 'BT_STAT',
+    stat: 'ST_BUFF_RESIST',
+    applyingType: 'OAT_RATE',
+    value: 1000,
+    tooltipId: 10,
+  },
+  t_res_down: {
+    type: 'BT_STAT',
+    stat: 'ST_BUFF_RESIST',
+    applyingType: 'OAT_RATE',
+    value: -1000,
+    tooltipId: 21,
+    debuff: true,
+  },
   t_marked: { type: 'BT_MARKING' },
   // Magnitude non standardisée par le jeu — jamais devinée.
   t_dmg_red: null,
@@ -471,19 +569,28 @@ export function resolveFx(keys: string[]): { buffs: ActiveBuff[]; unresolved: st
 }
 
 /**
- * Buffs plats d'affinité (Trust) au palier donné : les `trust_level_{STAT}_{i}`
- * de buffs.json pour i ≤ palier — résolus depuis la DONNÉE (report-inputs
- * § 3.1 : +60 ATK / +40 DEF / +300 HP par palier, vérifié binaire 27/07).
+ * Buffs plats d'affinité (Trust), comme `CDungeonScene.CreateTrustBuff` : la
+ * chaîne PROPRE au perso (`trust` de characters.json — une stat par perso,
+ * PV, ATK ou DEF), lignes dont le `TrustLevel` ≤ niveau d'affinité saisi
+ * (0..100), chaque buff lu au niveau 1 dans buffs.json (report-inputs § 3.1 —
+ * +60 ATK, +40 DEF ou +300 PV par ligne au 15/10/2026). Rien en Monad Gate
+ * (`IsMonadGate` = `DM_MONAD_BATTLE_1` seul : la Singularity,
+ * `monad_battle_2`, garde l'affinité) ; le client n'en pose pas non plus en
+ * PvP, que le calculateur ne propose pas comme cible.
  */
-export function trustBuffs(tier: number, buffs: DamageBuffsData): ActiveBuff[] {
+export function trustBuffs(
+  level: number,
+  char: Pick<DataCharacter, 'trust'>,
+  buffs: DamageBuffsData,
+  targetMode?: string,
+): ActiveBuff[] {
+  if (targetMode !== undefined && dungeonModeOf(targetMode) === 'DM_MONAD_BATTLE_1') return [];
   const out: ActiveBuff[] = [];
-  for (const stat of ['ATK', 'DEF', 'HP']) {
-    for (let i = 1; i <= tier; i++) {
-      const levels = buffs.buffs[`trust_level_${stat}_${i}`];
-      const l = levels?.[0];
-      if (l?.type === 'BT_STAT' && l.stat && l.value !== undefined) {
-        out.push({ type: l.type, stat: l.stat, applyingType: l.applyingType, value: l.value });
-      }
+  for (const line of char.trust ?? []) {
+    if (line.level > level) continue;
+    const l = pickBuffRow(buffs.buffs[line.buffId] ?? [], 1);
+    if (l?.type === 'BT_STAT' && l.stat && l.value !== undefined) {
+      out.push({ type: l.type, stat: l.stat, applyingType: l.applyingType, value: l.value });
     }
   }
   return out;
@@ -498,8 +605,9 @@ export interface AttackerBuildInput {
   /** INDEX du palier de transcendance (z `x`) — transStar = basicStar + index ;
    *  absent = palier MAX (défaut UI). Sert au passif UNIQUE du kit. */
   transcendIndex?: number;
-  /** Palier d'affinité 0..5 (dérivé du niveau 0..100 côté UI). */
-  affinityTier: number;
+  /** Niveau d'affinité 0..100 (saisie UI, z `af`) — comparé au `TrustLevel`
+   *  de chaque ligne de la chaîne du perso, comme le client. */
+  affinityLevel: number;
   /** Niveau du Codex du COMPTE (0..11). */
   codexLevel: number;
   /** Niveaux de skill par slot. */
@@ -550,7 +658,9 @@ export interface AttackerBuildInput {
  *  des lignes `MY_TEAM*` (ex. `BID_ITEM_UO_ACC_25` : +10 % vs boss aux
  *  alliés ; `BID_ITEM_UO_WEAPON_22` : dégâts d'équipe basés sur la DEF du
  *  porteur). Les stats du PORTEUR allié restent non capturées : les lignes
- *  qui en dépendent (`BT_DMG_CASTER_*`) sortent signalées, contribution 0. */
+ *  qui en dépendent (`BT_DMG_CASTER_STAT`, `BT_DMG_CASTER_LOST_HP_RATE` —
+ *  le client lit le POSEUR, `buff.Caster`) sortent signalées, contribution 0
+ *  (gear.ts, mode allié). */
 export interface AllyBuildInput {
   id: string;
   /** INDEX du palier de transcendance — absent = palier MAX (défaut UI). */
@@ -719,14 +829,16 @@ const BURST_TYPES = ['SKT_BURST_1', 'SKT_BURST_2', 'SKT_BURST_3'];
  * effectives par l'identité § 16.1 avec A = 0 (un monstre n'a pas de terme
  * d'archive) : `stat' = trunc((stat + val) × (1000 + taux) / 1000)`. Les
  * stacks ne sont pas simulés (lignes damage-pertinentes mono-stack en
- * donnée).
+ * donnée). `holder` = tous les buffs de la cible : ses ENHANCE renforcent
+ * ses BT_STAT visibles (§ 14.1, `applyStatEnhance`).
  */
 function applyTargetStatChannel(
   base: TargetBuildInput['stats'],
   buffs: ActiveBuff[],
+  holder: ActiveBuff[],
 ): TargetBuildInput['stats'] {
   const acc: Partial<Record<keyof TargetBuildInput['stats'], { add: number; rate: number }>> = {};
-  for (const b of buffs) {
+  for (const b of applyStatEnhance(buffs, holder)) {
     if (b.type !== 'BT_STAT') continue;
     const key = b.stat !== undefined ? TARGET_STAT_MAP[b.stat] : undefined;
     if (key === undefined) continue;
@@ -1060,6 +1172,9 @@ export function buildDamageReport(
   // NB : cette collecte lit gearPassives/kitPassives/quirkPassives déclarés
   // PLUS HAUT — allyPassives ferme la liste.
   const declaredDynamicBuffs: ActiveBuff[] = [];
+  // Provenance de chaque proc déclaré — le conflit d'ENHANCE (plus bas) le
+  // renvoie dans les non-résolus de SA source.
+  const declaredFrom = new Map<ActiveBuff, { info: GearPassivesInfo; d: GearDynamicEntry }>();
   if (attacker.buffStacks) {
     const served = new Set<string>();
     for (const i of [kitPassives, gearPassives, quirkPassives, allyPassives]) {
@@ -1068,7 +1183,9 @@ export function buildDamageReport(
         const n = attacker.buffStacks[d.buffId] ?? 0;
         if (n < 1) continue;
         served.add(d.buffId);
-        declaredDynamicBuffs.push({ ...d.buff, stacks: Math.min(n, d.maxStacks ?? 1) });
+        const b = { ...d.buff, stacks: Math.min(n, d.maxStacks ?? 1) };
+        declaredDynamicBuffs.push(b);
+        declaredFrom.set(b, { info: i!, d });
       }
     }
   }
@@ -1084,12 +1201,60 @@ export function buildDamageReport(
         .map((e) => e.buff),
     );
 
+  // Renfort ENHANCE (§ 14.1) : le client prend le PREMIER
+  // STAT_BUFF/DEBUFF_ENHANCE trouvé chez le porteur. Deux de même polarité
+  // sur un même porteur (ex. le T8 de Bell Cranel et le S3 déclaré de
+  // Demiurge Saeran alliée) : l'ordre de pose n'est pas connu — les lignes
+  // partent en non-résolu, contribution 0, jamais un choix silencieux. Les
+  // entrées de boss restent à leur index (les chips de l'UI s'y joignent),
+  // éteintes.
+  const ENHANCE_CONFLICT =
+    'deux ENHANCE de même polarité sur le même porteur — ordre de pose inconnu, contribution 0';
+  for (const side of ['attacker', 'defender'] as const) {
+    for (const type of STAT_ENHANCE_TYPES) {
+      const isIt = (e: { side: string; active: boolean; buff: ActiveBuff; callers?: string[] }) =>
+        e.side === side && e.active && !e.callers && e.buff.type === type;
+      const boss = (bossPassives?.entries ?? []).filter(isIt);
+      const owned = gatedInfos().flatMap((i) =>
+        i ? i.entries.filter(isIt).map((e) => ({ info: i, e })) : [],
+      );
+      const declared =
+        side === 'attacker' ? declaredDynamicBuffs.filter((b) => b.type === type) : [];
+      if (boss.length + owned.length + declared.length < 2) continue;
+      for (const e of boss) {
+        e.active = false;
+        bossPassives!.unresolved.push({ buffId: e.buffId, reason: ENHANCE_CONFLICT });
+      }
+      for (const { info, e } of owned) {
+        info.entries.splice(info.entries.indexOf(e), 1);
+        info.unresolved.push({
+          source: e.source,
+          sourceId: e.sourceId,
+          buffId: e.buffId,
+          reason: ENHANCE_CONFLICT,
+          ...(e.ally !== undefined ? { ally: e.ally } : {}),
+        });
+      }
+      for (const b of declared) {
+        declaredDynamicBuffs.splice(declaredDynamicBuffs.indexOf(b), 1);
+        const { info, d } = declaredFrom.get(b)!;
+        info.unresolved.push({
+          source: d.source,
+          sourceId: d.sourceId,
+          buffId: d.buffId,
+          reason: ENHANCE_CONFLICT,
+          ...(d.ally !== undefined ? { ally: d.ally } : {}),
+        });
+      }
+    }
+  }
+
   // Buffs actifs des deux côtés : affinité (donnée) + chips (catalogue) +
   // passifs de boss et d'équipement (donnée, évalués ci-dessus).
   const atkFx = resolveFx(attacker.fx ?? []);
   const tgtFx = resolveFx(target.fx ?? []);
   const buildAttackerBuffs = (): ActiveBuff[] => [
-    ...trustBuffs(attacker.affinityTier, data.buffs),
+    ...trustBuffs(attacker.affinityLevel, char, data.buffs, target.mode),
     ...atkFx.buffs,
     ...passiveBuffs('attacker'),
     ...gearBuffs('attacker'),
@@ -1169,7 +1334,7 @@ export function buildDamageReport(
         .map((e) => e.buff),
     ),
   ];
-  const tgtStats = applyTargetStatChannel(target.stats, defenderStatBuffs);
+  const tgtStats = applyTargetStatChannel(target.stats, defenderStatBuffs, defenderBuffs);
 
   // Stats de l'attaquant qui pèsent un MONTANT dans CE scénario (filtre des
   // chips de passifs de boss, cf. passives.ts) : la base § 8/§ 7.5/§ 9, plus
@@ -1593,9 +1758,10 @@ export function buildDamageReport(
           ? applyTargetStatChannel(
               target.stats,
               defenderStatBuffs.filter((b) => !removed.has(b)),
+              baseDef,
             )
           : tgtStats;
-        const ts = applyTargetStatChannel(base, statDef);
+        const ts = applyTargetStatChannel(base, statDef, [...baseDef, ...gatedDef]);
         slotDefender = {
           ...scenario.defender,
           defense: ts.def ?? 0,
@@ -1631,6 +1797,8 @@ export function buildDamageReport(
         wgReduce: lv.wgReduce,
         isFirstSkill: slot === 'S1',
         monoTarget: sk.rangeType === 'SINGLE',
+        // BT_DMG_ENEMY_TEAM_DECREASE ne vaut que pour la portée ALL (§ 7).
+        rangeAll: sk.rangeType === 'ALL',
         // § 8.1 par clip quand l'affectation est résolue (sinon fallback § 12.4).
         states: attachChainClips(groupHitsByChain(sk.hits), sk.clips, sk.clipsUnresolvedChains),
       },

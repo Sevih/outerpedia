@@ -54,9 +54,10 @@ export function useScenarioState({
   // Niveau d'enchant de l'EE (+0..+10) — ne sert qu'aux mains « dégâts vs élément ».
   const [eeLevel, setEeLevel] = useState(10);
   // Affinité (Trust) : la SAISIE est le niveau 0..100 (paliers tous les 20 —
-  // Sevih 03/08/2026), le palier 0..5 dérivé sert seul aux calculs. Buffs
-  // passifs plats ABSENTS de la fiche affichée (canal buffValue, binaire
-  // 27/07/2026) : le moteur les ajoute.
+  // Sevih 03/08/2026), servi tel quel au moteur (z `af`) qui le compare au
+  // niveau requis de chaque ligne de la chaîne du perso ; le palier 0..5
+  // n'est qu'un affichage. Buffs passifs plats ABSENTS de la fiche affichée
+  // (canal buffValue, binaire 27/07/2026) : le moteur les ajoute.
   const [affinityLvl, setAffinityLvl] = useState(0);
   const affinityTier = Math.floor(affinityLvl / 20);
   // Niveau du perso (1..120, défaut 120) : le terme Codex de la reconstruction

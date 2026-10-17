@@ -21,6 +21,10 @@
  *   - `ME`/`MY_TEAM` = le boss → côté DÉFENSEUR (ex. réductions de dégâts
  *     conditionnées à l'élément de l'attaquant, `BT_WG_DMG_REDUCE` lu par la
  *     jauge — CalcDamageWG, spec § 11).
+ *   - `BT_STAT_BUFF/DEBUFF_ENHANCE` (§ 14.1) : du côté de leur PORTEUR, comme
+ *     un BT_STAT — sur `ME`, ils renforcent les BT_STAT visibles du boss
+ *     (`4086032_4_2` à −3000 les INVERSE) ; sur `ENEMY_TEAM`, ceux de
+ *     l'attaquant (`4500347_4_2` : ses débuffs +100 %).
  *
  * Conditions ÉVALUABLES statiquement : les trois élémentaires
  * (`ATTACKER_ELEMENT_WIN/EQUAL/LOSE`) et `TARGET_ELEMENT`, par
@@ -51,7 +55,7 @@
  *     échappent à ce filtre (posées AU CAST de l'enrage, cf. `rage`).
  */
 
-import type { ActiveBuff } from './aggregate';
+import { isDebuffType, STAT_ENHANCE_TYPES, type ActiveBuff } from './aggregate';
 import { getElementSuperiority } from './formula';
 import { Element, ElementSuperiority } from './types';
 import type { DamageBuffsData, DamageTargetsData } from './inputs';
@@ -249,9 +253,10 @@ export function staticBossPassives(
       targetClass?: string;
     } => {
       if (target.startsWith('ENEMY_TEAM')) {
-        // Équipe du JOUEUR : seuls les canaux de stats § 16.1 jouent sur
-        // les dégâts — soins/CP/boucliers sur l'équipe : hors périmètre.
-        if (row.type !== 'BT_STAT') return {};
+        // Équipe du JOUEUR : seuls les canaux de stats § 16.1 (et leur
+        // renfort ENHANCE § 14.1) jouent sur les dégâts — soins/CP/boucliers
+        // sur l'équipe : hors périmètre.
+        if (row.type !== 'BT_STAT' && !STAT_ENHANCE_TYPES.has(row.type)) return {};
         if (target === 'ENEMY_TEAM') return { side: 'attacker' };
         // ENEMY_TEAM_<CLASSE> : l'attaquant seulement s'il est de la classe.
         const targetClass = teamClassOf(target);
@@ -259,7 +264,8 @@ export function staticBossPassives(
         return { reason: `cible ${target} — sélection d'équipe situationnelle, non attribuable` };
       }
       if (target === 'ME' || target === 'MY_TEAM') {
-        if (DEFENDER_TYPES.has(row.type)) return { side: 'defender' };
+        if (DEFENDER_TYPES.has(row.type) || STAT_ENHANCE_TYPES.has(row.type))
+          return { side: 'defender' };
         // ENRAGE : un BT_STAT sur une stat que le rapport consomme côté cible
         // devient une entrée (inputs.ts l'applique par l'identité § 16.1).
         if (rage && row.type === 'BT_STAT' && row.stat !== undefined)
@@ -294,6 +300,9 @@ export function staticBossPassives(
         ...(row.stat !== undefined ? { stat: row.stat } : {}),
         ...(row.applyingType !== undefined ? { applyingType: row.applyingType } : {}),
         ...(row.value !== undefined ? { value: row.value } : {}),
+        // Buff VISIBLE et polarité : ce que lit le renfort ENHANCE (§ 14.1).
+        ...(row.tooltipId ? { tooltipId: row.tooltipId } : {}),
+        ...(isDebuffType(row.buffDebuffType) ? { debuff: true } : {}),
       },
       ...(condition !== undefined ? { condition } : {}),
       ...(row.conditionValue !== undefined ? { conditionValue: row.conditionValue } : {}),

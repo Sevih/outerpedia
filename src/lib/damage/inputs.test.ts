@@ -10,11 +10,15 @@ import charactersData from '../../../data/generated/damage/characters.json';
 import growthData from '../../../data/generated/damage/growth.json';
 import buffsData from '../../../data/generated/damage/buffs.json';
 import equipmentData from '../../../data/generated/damage/equipment.json';
+import targetsData from '../../../data/generated/damage/targets.json';
+import { applyStatEnhance, collectStatChannels } from './aggregate';
+import { staticBossPassives } from './passives';
 import { calcBaseStat } from './formula';
 import {
   buildCombatStats,
   buildDamageReport,
   distinctDots,
+  FX_CATALOG,
   dungeonModeOf,
   elementOf,
   eventMaxHpRate,
@@ -45,18 +49,28 @@ const lv = (id: string, level = 1): number => {
   return v!;
 };
 
-/** Somme des plats d'affinité d'une stat jusqu'au palier `tier`, lue dans buffs.json
- * (+60 ATK / +40 DEF / +300 PV par palier en 1.4.9). */
-const trustSum = (stat: string, tier: number): number => {
-  let sum = 0;
-  for (let i = 1; i <= tier; i++) sum += data.buffs.buffs[`trust_level_${stat}_${i}`]![0].value!;
-  return sum;
+/** Somme des plats de la chaîne d'affinité d'un perso jusqu'au niveau `level`,
+ * lue dans characters.json et buffs.json (+60 ATK / +40 DEF / +300 PV par
+ * ligne au 15/10/2026). */
+const trustSum = (charId: string, level: number): number =>
+  (data.characters.characters[charId].trust ?? [])
+    .filter((l) => l.level <= level)
+    .reduce((s, l) => s + data.buffs.buffs[l.buffId]![0].value!, 0);
+
+/** Stat de la chaîne d'affinité d'un perso (`ST_HP`, `ST_ATK`, `ST_DEF`). */
+const trustStatOf = (charId: string): string | undefined => {
+  const first = data.characters.characters[charId].trust?.[0];
+  return first ? data.buffs.buffs[first.buffId]![0].stat : undefined;
 };
+
+/** Premier perso dont la chaîne d'affinité porte `stat`. */
+const charWithTrust = (stat: string): string =>
+  Object.keys(data.characters.characters).find((id) => trustStatOf(id) === stat)!;
 
 const attackerBase = (): AttackerBuildInput => ({
   id: CHAR_ID,
   level: 120,
-  affinityTier: 0,
+  affinityLevel: 0,
   codexLevel: 0,
   skillLevels: {},
   sheet: { atk: 10000, critical_dmg: 1500 },
@@ -80,26 +94,61 @@ describe('inputs — référentiels', () => {
 });
 
 describe('inputs — affinité et chips', () => {
-  it('trustBuffs : plats RÉSOLUS depuis buffs.json, cumulés par palier', () => {
-    expect(trustBuffs(0, data.buffs)).toEqual([]);
-    const t5 = trustBuffs(5, data.buffs);
-    expect(t5).toHaveLength(15); // 3 stats × 5 paliers
-    const sum = (st: string) =>
-      t5.filter((b) => b.stat === st).reduce((s, b) => s + (b.value ?? 0), 0);
-    // Cumul des paliers 1..5 ; les plats eux-mêmes sont ceux de la table.
-    for (const stat of ['ATK', 'DEF', 'HP']) {
-      expect(sum(`ST_${stat}`), stat).toBe(trustSum(stat, 5));
-      expect(sum(`ST_${stat}`), stat).toBeGreaterThan(0);
-    }
-    expect(t5.every((b) => b.applyingType === 'OAT_ADD')).toBe(true);
+  // Affinité (revue H1, 15/10/2026) : le client (`CreateTrustBuff`) ne pose
+  // que la chaîne DU perso, lignes de niveau requis ≤ niveau d'affinité.
+  const chars = data.characters.characters;
+  const trustOf = (id: string, level: number, mode?: string) =>
+    trustBuffs(level, chars[id], data.buffs, mode);
+
+  it('trustBuffs : la chaîne du perso seule, une stat, plats RÉSOLUS depuis buffs.json', () => {
+    // Rhona (2000008) : chaîne PV — ni ATK ni DEF.
+    const rhona = trustOf('2000008', 100);
+    expect(rhona.length).toBe(chars['2000008'].trust!.length);
+    expect(new Set(rhona.map((b) => b.stat))).toEqual(new Set(['ST_HP']));
+    expect(rhona.reduce((s, b) => s + (b.value ?? 0), 0)).toBe(trustSum('2000008', 100));
+    expect(rhona.every((b) => b.applyingType === 'OAT_ADD')).toBe(true);
+    expect(trustOf('2000008', 0)).toEqual([]);
+  });
+
+  it('trustBuffs : Snow PV, Snow fusionné ATK — chacun sa chaîne', () => {
+    expect(trustStatOf('2000003')).toBe('ST_HP');
+    expect(trustStatOf('2700003')).toBe('ST_ATK');
+    expect(new Set(trustOf('2700003', 100).map((b) => b.stat))).toEqual(new Set(['ST_ATK']));
+  });
+
+  it('trustBuffs : un perso sans ligne d’affinité ne reçoit rien', () => {
+    // Bell Cranel, Ais Wallenstein, Ryu Lion : aucune ligne au 15/10/2026.
+    const none = Object.keys(chars).find((id) => !chars[id].trust?.length)!;
+    expect(none).toBeDefined();
+    expect(trustOf(none, 100)).toEqual([]);
+  });
+
+  it('trustBuffs : niveau requis comparé au NIVEAU saisi (59 = les lignes 20 et 40)', () => {
+    const lines = chars['2000008'].trust!;
+    expect(trustOf('2000008', 59)).toHaveLength(lines.filter((l) => l.level <= 59).length);
+    expect(trustOf('2000008', 59)).toHaveLength(2);
+    expect(trustOf('2000008', 19)).toHaveLength(0);
+  });
+
+  it('trustBuffs : rien en Monad Gate (monad_battle_1), la chaîne en Singularity', () => {
+    expect(trustOf('2000008', 100, 'monad_battle_1')).toEqual([]);
+    expect(trustOf('2000008', 100, 'monad_battle_2')).toEqual(trustOf('2000008', 100));
+    expect(trustOf('2000008', 100, 'monad_battle_2').length).toBeGreaterThan(0);
   });
 
   it('resolveFx : magnitudes standard ; sans standard → unresolved, jamais deviné', () => {
     const { buffs, unresolved } = resolveFx(['atk', 't_marked', 't_dmg_taken', 'def_down']);
     expect(buffs).toEqual([
-      { type: 'BT_STAT', stat: 'ST_ATK', applyingType: 'OAT_RATE', value: 300 },
+      { type: 'BT_STAT', stat: 'ST_ATK', applyingType: 'OAT_RATE', value: 300, tooltipId: 7 },
       { type: 'BT_MARKING' },
-      { type: 'BT_STAT', stat: 'ST_DEF', applyingType: 'OAT_RATE', value: -500 },
+      {
+        type: 'BT_STAT',
+        stat: 'ST_DEF',
+        applyingType: 'OAT_RATE',
+        value: -500,
+        tooltipId: 17,
+        debuff: true,
+      },
     ]);
     expect(unresolved).toEqual(['t_dmg_taken']);
   });
@@ -116,9 +165,12 @@ describe('inputs — stats de combat (§ 16.1)', () => {
   it('l’affinité s’ajoute en plat AVANT le multiplicateur ; le Codex reste hors multiplicateur', () => {
     const a = attackerBase();
     a.codexLevel = 11;
-    const trust = trustBuffs(5, data.buffs);
+    // Chaîne ATK d'un perso qui la porte (les plats ne dépendent que de la
+    // chaîne ; la fiche et la base restent celles du témoin).
+    const atkChar = charWithTrust('ST_ATK');
+    const trust = trustBuffs(100, data.characters.characters[atkChar], data.buffs);
     // Plats seuls : +300 ATK (5 × 60), indépendant du terme Codex.
-    const flat = trustSum('ATK', 5);
+    const flat = trustSum(atkChar, 100);
     expect(buildCombatStats(a, char, data.growth, trust).atk).toBe(10000 + flat);
     // Avec un chip +30 % : l'identité § 16.1 exacte, A recalculé de la donnée.
     const chip = resolveFx(['atk']).buffs;
@@ -831,5 +883,134 @@ describe('inputs — équipement d’ÉQUIPE (talisman / arme / accessoire, 24/0
     expect(actives?.[0]).toMatchObject({ ally: '2000117', buff: { value: lv(TAL_ATK, 11) } });
     const oneAlly = withTal(undefined, [{ id: '2000117', enchant: 10 }]);
     expect(twoAllies.combatStats.atk).toBe(oneAlly.combatStats.atk);
+  });
+});
+
+describe('inputs — renfort ENHANCE (§ 14.1, revue M4)', () => {
+  const dataAll = {
+    ...data,
+    equipment: equipmentData,
+    targets: targetsData,
+  } as unknown as DamageData;
+  const BELL = '2000095'; // T8 `trancendent_8_buff_enhance_up` (ME, +1000)
+  const SAERAN = '2000129'; // S3 `2000129_3_3` (MY_TEAM_WITHOUT_ME, au lancement)
+  const tgt = () => ({ element: 'CET_WATER', stats: { hp: 1000000, def: 1000 } });
+  const bossEntry = (monsterId: string, buffId: string) =>
+    staticBossPassives(monsterId, dataAll.targets!, data.buffs)!.entries.find(
+      (e) => e.buffId === buffId,
+    )!;
+
+  it('chip ATK sous le T8 de Bell Cranel : 2 × 300 ‰ sur le canal de stat', () => {
+    const r = buildDamageReport({ ...attackerBase(), id: BELL, fx: ['atk'] }, tgt(), dataAll);
+    const t8 = r.kitPassives!.entries.find((e) => e.buffId === 'trancendent_8_buff_enhance_up');
+    expect(t8).toMatchObject({ side: 'attacker', active: true });
+    const chip = FX_CATALOG.atk!;
+    expect(collectStatChannels([chip, t8!.buff]).ST_ATK.rate).toBe(2 * chip.value!);
+  });
+
+  it('t_def_down contre un boss à DEBUFF_ENHANCE +1000 : 2 × −500 ‰', () => {
+    // 40103013 : passif 125124 → 4500153_4_2 (ME, DEBUFF_ENHANCE +1000).
+    const enh = bossEntry('40103013', '4500153_4_2');
+    expect(enh.side).toBe('defender');
+    const down = FX_CATALOG.t_def_down!;
+    expect(applyStatEnhance([down], [enh.buff])[0].value).toBe(2 * down.value!);
+  });
+
+  it('BUFF_ENHANCE −3000 d’un boss (4086032_4_2) INVERSE ses buffs visibles', () => {
+    const enh = bossEntry('4086036', '4086032_4_2');
+    expect(enh).toMatchObject({ side: 'defender', buff: { value: -3000 } });
+    const up = FX_CATALOG.t_def!;
+    expect(applyStatEnhance([up], [enh.buff])[0].value).toBe(-2 * up.value!);
+  });
+
+  it('ENHANCE d’un boss sur ENEMY_TEAM (4500347_4_2) : côté attaquant ; OWNER_ELEMENT non résolu', () => {
+    expect(bossEntry('4500347', '4500347_4_2').side).toBe('attacker');
+    const st = staticBossPassives('4086031', dataAll.targets!, data.buffs)!;
+    expect(st.unresolved.some((u) => u.buffId === '4086031_6_3')).toBe(true);
+  });
+
+  it('S3 de Demiurge Saeran alliée, coché : les buffs visibles de l’attaquant doublent', () => {
+    const run = (fx: string[], declared: boolean) =>
+      buildDamageReport(
+        {
+          ...attackerBase(),
+          fx,
+          allies: [{ id: SAERAN }],
+          ...(declared ? { buffStacks: { '2000129_3_3': 1 } } : {}),
+        },
+        tgt(),
+        dataAll,
+      );
+    const proc = run([], false).allyPassives!.dynamic.find((d) => d.buffId === '2000129_3_3');
+    expect(proc).toMatchObject({ side: 'attacker', buff: { type: 'BT_STAT_BUFF_ENHANCE' } });
+    const gain = (declared: boolean) =>
+      run(['atk'], declared).combatStats.atk - run([], declared).combatStats.atk;
+    expect(Math.abs(gain(true) - 2 * gain(false))).toBeLessThanOrEqual(1);
+  });
+
+  it('deux ENHANCE de même polarité sur l’attaquant : non résolus, contribution 0', () => {
+    const r = buildDamageReport(
+      {
+        ...attackerBase(),
+        id: BELL,
+        fx: ['atk'],
+        allies: [{ id: SAERAN }],
+        buffStacks: { '2000129_3_3': 1 },
+      },
+      tgt(),
+      dataAll,
+    );
+    const reasons = [...r.kitPassives!.unresolved, ...r.allyPassives!.unresolved]
+      .filter((u) => u.buffId === 'trancendent_8_buff_enhance_up' || u.buffId === '2000129_3_3')
+      .map((u) => u.reason);
+    expect(reasons).toHaveLength(2);
+    expect(reasons.every((x) => x.includes('ordre de pose inconnu'))).toBe(true);
+    expect(r.kitPassives!.entries.some((e) => e.buff.type === 'BT_STAT_BUFF_ENHANCE')).toBe(false);
+    // Sans renfort : la chip compte pour sa valeur, comme chez un perso sans ENHANCE.
+    const bare = buildDamageReport(
+      { ...attackerBase(), id: BELL, fx: ['atk'], transcendIndex: 0 },
+      tgt(),
+      dataAll,
+    );
+    expect(
+      bare.kitPassives!.entries.some((e) => e.buffId === 'trancendent_8_buff_enhance_up'),
+    ).toBe(false);
+  });
+});
+
+describe('inputs — familles CASTER posées par un allié (§ 9.1, revue R18)', () => {
+  const dataEq = { ...data, equipment: equipmentData } as unknown as DamageData;
+  const W22 = 'BID_ITEM_UO_WEAPON_22'; // DEF du porteur, MY_TEAM_WITHOUT_ME
+  const run = (def: number, ally: boolean) =>
+    buildDamageReport(
+      {
+        ...attackerBase(),
+        id: '2000015',
+        sheet: { atk: 5000, critical_dmg: 1500, def },
+        ...(ally ? { allies: [{ id: '2000008', weapon: { groups: ['1022'], tier: 4 } }] } : {}),
+      },
+      { element: 'CET_WATER', stats: { hp: 1000000, def: 1000 } },
+      dataEq,
+    );
+  const total = (r: ReturnType<typeof run>) => r.slots[0].report.states[0].branches[0].totalDamage;
+
+  it('allié porteur : non résolu, contribution 0 — la DEF de l’attaquant ne pèse plus', () => {
+    const r = run(500, true);
+    expect(r.allyPassives!.entries.some((e) => e.buffId === W22)).toBe(false);
+    expect(r.allyPassives!.unresolved.find((u) => u.buffId === W22)?.reason).toContain(
+      'poseur allié',
+    );
+    expect(total(run(500, true))).toBe(total(run(5000, true)));
+    expect(total(run(500, true))).toBe(total(run(500, false)));
+  });
+
+  it('la même ligne portée par l’attaquant reste une entrée', () => {
+    const r = buildDamageReport(
+      { ...attackerBase(), id: '2000008', gear: { weapon: { groups: ['1022'], tier: 4 } } },
+      { element: 'CET_WATER', stats: { hp: 1000000, def: 1000 } },
+      dataEq,
+    );
+    expect(r.gearPassives!.entries.some((e) => e.buffId === W22)).toBe(true);
+    expect(r.gearPassives!.unresolved.some((u) => u.buffId === W22)).toBe(false);
   });
 });

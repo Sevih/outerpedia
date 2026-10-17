@@ -238,10 +238,28 @@ describe('report — buildSkillReport', () => {
     scenario.attackerBuffs = [{ type: 'BT_DMG_ENEMY_TEAM_DECREASE', value: 60 }];
     scenario.decreaseTargetCount = 3;
     const [state] = buildSkillReport(
-      { skillFactor: 1000, states: [{ chain: 'S1', hits: [{ id: 'h1', damageFactor: 1000 }] }] },
+      {
+        skillFactor: 1000,
+        rangeAll: true,
+        states: [{ chain: 'S1', hits: [{ id: 'h1', damageFactor: 1000 }] }],
+      },
       scenario,
     ).states;
     expect(state.branches[0].damageRate).toBe(1000 + 60 * 3);
+  });
+
+  it('BT_DMG_ENEMY_TEAM_DECREASE : un skill hors portée ALL (SINGLE) ne reçoit rien', () => {
+    // Client (CCharacterBattle) : le bonus n'est ajouté que dans la boucle des
+    // cibles d'un skill ALL — revue O12.
+    const scenario = baseScenario();
+    scenario.attackerBuffs = [{ type: 'BT_DMG_ENEMY_TEAM_DECREASE', value: 60 }];
+    scenario.decreaseTargetCount = 3;
+    const states = [{ chain: 'S1', hits: [{ id: 'h1', damageFactor: 1000 }] }];
+    const single = buildSkillReport({ skillFactor: 1000, monoTarget: true, states }, scenario);
+    const all = buildSkillReport({ skillFactor: 1000, rangeAll: true, states }, scenario);
+    expect(single.states[0].branches[0].damageRate).toBe(
+      all.states[0].branches[0].damageRate - 60 * 3,
+    );
   });
 });
 

@@ -16,6 +16,7 @@ import equipmentData from '../../data/generated/damage/equipment.json';
 import targetsData from '../../data/generated/damage/targets.json';
 import buffsData from '../../data/generated/damage/buffs.json';
 import configData from '../../data/generated/damage/config.json';
+import animEventsData from './anim-events.json';
 import { chainOf, type DamageCharactersData } from './characters';
 import type { SkillDescsData } from './skill-descs';
 import { levelAt, resolveSkillText } from '../../src/lib/skills';
@@ -225,6 +226,74 @@ describe('damage/characters.json — témoins vérifiés sur les tables (27/07-0
       s.levels.some((l) => l.damageFactor > 0),
     );
     expect(withFactor.length).toBeGreaterThan(300);
+  });
+});
+
+describe('damage/characters.json — affinité par perso (revue H1, 15/10/2026)', () => {
+  const statOf = (id: string): Set<string | undefined> =>
+    new Set((characters[id].trust ?? []).map((l) => buffsFile.buffs[l.buffId]?.[0]?.stat));
+
+  it('une chaîne par perso, une seule stat, chaque buff résolu dans buffs.json', () => {
+    const bad: string[] = [];
+    for (const [id, c] of Object.entries(characters)) {
+      for (const l of c.trust ?? [])
+        if (!buffsFile.buffs[l.buffId]?.length) bad.push(`${id} : ${l.buffId} absent`);
+      if (c.trust && statOf(id).size !== 1) bad.push(`${id} : plusieurs stats`);
+    }
+    expect(bad).toEqual([]);
+  });
+
+  it('Snow PV, Snow fusionné ATK ; les fusionnés du calculateur ont leur chaîne', () => {
+    expect(statOf('2000003')).toEqual(new Set(['ST_HP']));
+    expect(statOf('2700003')).toEqual(new Set(['ST_ATK']));
+    const fused = Object.keys(characters).filter((id) => id.startsWith('27'));
+    expect(fused.length).toBeGreaterThan(0);
+    for (const id of fused) expect(characters[id].trust?.length, id).toBeGreaterThan(0);
+  });
+});
+
+describe('damage/characters.json — clips chez le porteur (revue R15, 17/10/2026)', () => {
+  const anim = animEventsData as unknown as Record<string, { clips: Record<string, string[]> }>;
+  const carrierOf = new Map<string, string>();
+  for (const [id, c] of Object.entries(characters))
+    for (const r of c.skills) if (!carrierOf.has(r.id)) carrierOf.set(r.id, id);
+  const played = (id: string): Set<string> =>
+    new Set(
+      Object.values(anim[id]?.clips ?? {}).flatMap((seq) => seq.map((e) => e.split(',')[0].trim())),
+    );
+
+  it('tout clip d’un skill vient de l’animator de son PORTEUR', () => {
+    const bad: string[] = [];
+    for (const [sid, s] of Object.entries(skills)) {
+      const carrier = carrierOf.get(sid);
+      for (const c of s.clips ?? [])
+        if (!carrier || !anim[carrier]?.clips[c.name]) bad.push(`${sid} : ${c.name}`);
+    }
+    expect(bad).toEqual([]);
+  });
+
+  it('plus d’état fantôme : un templet d’un autre perso n’est gardé que si le porteur le joue', () => {
+    const bad: string[] = [];
+    for (const [sid, s] of Object.entries(skills)) {
+      const carrier = carrierOf.get(sid);
+      if (!carrier) continue;
+      const own = played(carrier);
+      for (const h of s.hits)
+        if (h.chain.split('_')[0] !== carrier && !own.has(h.id)) bad.push(`${sid} : ${h.id}`);
+    }
+    expect(bad).toEqual([]);
+  });
+
+  it('les 15 skills de Rin, Epsilon, Rey et Akari n’ont plus que les chaînes du porteur', () => {
+    const ids = ['1901', '1902', '1903', '1919', '1920', '1921', '6401'];
+    ids.push('7001', '7002', '7003', '7019', '7020', '7021', '8703', '8721');
+    for (const sid of ids) {
+      const carrier = carrierOf.get(sid)!;
+      const chains = new Set(skills[sid].hits.map((h) => h.chain.split('_')[0]));
+      expect([...chains], sid).toEqual([carrier]);
+    }
+    // S1 d'Akari : résolu sur SON animator (plus celui de Drakhan, 2000062).
+    expect(skills['6401'].clips?.map((c) => c.name.split('_')[0])).toEqual(['2000064']);
   });
 });
 

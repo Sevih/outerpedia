@@ -51,7 +51,7 @@
  * drapeau dépend des entrées collectées ici).
  */
 
-import { LIMIT_FAMILIES, type ActiveBuff } from './aggregate';
+import { isDebuffType, LIMIT_FAMILIES, STAT_ENHANCE_TYPES, type ActiveBuff } from './aggregate';
 import { elementConditionMet, TEAM_CLASS_TARGETS } from './passives';
 import { Element } from './types';
 import type {
@@ -246,6 +246,9 @@ const ATTACKER_TYPES = new Set([
   'BT_SWAP_STAT_ATTACK',
   // Jauge (CalcDamageWG § 11) : ajouté aux dégâts de jauge du coup.
   'BT_WG_DMG',
+  // Renfort des BT_STAT visibles du porteur (§ 14.1 — aggregate.ts,
+  // `applyStatEnhance`) : T8 de Bell Cranel, S3 de Demiurge Saeran (allié).
+  ...STAT_ENHANCE_TYPES,
 ]);
 
 /** Types côté DÉFENSEUR consommés (mêmes que passives.ts § 9.2/9.3). */
@@ -430,6 +433,9 @@ function toActiveBuff(row: DataBuffLevel, buffId: string): ActiveBuff {
     ...(row.stat !== undefined ? { stat: row.stat } : {}),
     ...(row.applyingType !== undefined ? { applyingType: row.applyingType } : {}),
     ...(row.value !== undefined ? { value: row.value } : {}),
+    // Buff VISIBLE et polarité : ce que lit le renfort ENHANCE (§ 14.1).
+    ...(row.tooltipId ? { tooltipId: row.tooltipId } : {}),
+    ...(isDebuffType(row.buffDebuffType) ? { debuff: true } : {}),
     // Familles plafonnées par BuffID (§ 9.1, 164/165) : l'id fait la clé du
     // cumul, `LimitValue` le plafond (absent = 0).
     ...(LIMIT_FAMILIES.has(row.type)
@@ -517,6 +523,19 @@ function makeCollector(
         allyTarget = tgt; // aura sur l'ennemi : même classement que le porteur
       } else {
         return; // ME/self de l'allié : sans effet sur le hit de l'attaquant
+      }
+      // Familles CASTER (§ 9.1) : le client lit les stats du POSEUR
+      // (`buff.Caster`) — ici l'allié, dont les stats ne sont pas saisies.
+      // Contribution 0 signalée, jamais les stats de l'attaquant à sa place
+      // (revue R18 : +27,5 % à 5 000 DEF pour BID_ITEM_UO_WEAPON_22).
+      if (row.type === 'BT_DMG_CASTER_STAT' || row.type === 'BT_DMG_CASTER_LOST_HP_RATE') {
+        info.unresolved.push({
+          source,
+          sourceId,
+          buffId,
+          reason: 'stats du poseur allié non saisies — contribution 0',
+        });
+        return;
       }
       // Créations DYNAMIQUES (SKILL_START inclus : le proc part d'un skill de
       // l'ALLIÉ, pas d'une ligne du rapport) : jamais simulées d'office — mais
@@ -690,7 +709,12 @@ function makeCollector(
       // ×1,5 sans — la lecture « jamais posé » du même jour était l'autre
       // branche d'une ambiguïté numérique 2 poses × 1,0 ≡ 1 pose × 2,0,
       // levée par cette mesure).
-      if (DEFENDER_TYPES.has(row.type) || row.type === 'BT_STAT' || DOT_ENHANCE_TYPES.has(row.type))
+      if (
+        DEFENDER_TYPES.has(row.type) ||
+        row.type === 'BT_STAT' ||
+        DOT_ENHANCE_TYPES.has(row.type) ||
+        STAT_ENHANCE_TYPES.has(row.type)
+      )
         side = 'defender';
       else return;
     } else return;

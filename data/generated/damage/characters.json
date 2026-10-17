@@ -237,6 +237,28 @@
           "slot": 22,
           "id": "1"
         }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_HP_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_HP_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_HP_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_HP_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_HP_5"
+        }
       ]
     },
     "2000002": {
@@ -474,6 +496,28 @@
         {
           "slot": 22,
           "id": "2"
+        }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_HP_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_HP_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_HP_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_HP_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_HP_5"
         }
       ]
     },
@@ -713,6 +757,28 @@
           "slot": 22,
           "id": "3"
         }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_HP_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_HP_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_HP_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_HP_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_HP_5"
+        }
       ]
     },
     "2000004": {
@@ -946,6 +1012,28 @@
         {
           "slot": 22,
           "id": "4"
+        }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_HP_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_HP_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_HP_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_HP_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_HP_5"
         }
       ]
     },
@@ -1181,6 +1269,28 @@
           "slot": 22,
           "id": "4"
         }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_HP_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_HP_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_HP_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_HP_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_HP_5"
+        }
       ]
     },
     "2000006": {
@@ -1414,6 +1524,28 @@
         {
           "slot": 22,
           "id": "2"
+        }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_HP_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_HP_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_HP_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_HP_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_HP_5"
         }
       ]
     },
@@ -1649,6 +1781,28 @@
           "slot": 22,
           "id": "4"
         }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_HP_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_HP_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_HP_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_HP_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_HP_5"
+        }
       ]
     },
     "2000008": {
@@ -1882,6 +2036,28 @@
         {
           "slot": 22,
           "id": "7"
+        }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_HP_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_HP_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_HP_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_HP_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_HP_5"
         }
       ]
     },
@@ -2121,6 +2297,28 @@
           "slot": 22,
           "id": "5"
         }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_HP_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_HP_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_HP_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_HP_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_HP_5"
+        }
       ]
     },
     "2000010": {
@@ -2355,6 +2553,28 @@
           "slot": 22,
           "id": "2"
         }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_HP_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_HP_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_HP_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_HP_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_HP_5"
+        }
       ]
     },
     "2000011": {
@@ -2588,6 +2808,28 @@
         {
           "slot": 22,
           "id": "3"
+        }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_HP_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_HP_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_HP_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_HP_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_HP_5"
         }
       ]
     },
@@ -2827,6 +3069,28 @@
           "slot": 22,
           "id": "3"
         }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_ATK_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_ATK_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_ATK_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_ATK_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_ATK_5"
+        }
       ]
     },
     "2000013": {
@@ -3061,6 +3325,28 @@
           "slot": 22,
           "id": "4"
         }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_HP_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_HP_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_HP_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_HP_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_HP_5"
+        }
       ]
     },
     "2000014": {
@@ -3294,6 +3580,28 @@
         {
           "slot": 22,
           "id": "4"
+        }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_HP_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_HP_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_HP_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_HP_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_HP_5"
         }
       ]
     },
@@ -3533,6 +3841,28 @@
           "slot": 22,
           "id": "2"
         }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_ATK_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_ATK_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_ATK_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_ATK_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_ATK_5"
+        }
       ]
     },
     "2000016": {
@@ -3766,6 +4096,28 @@
         {
           "slot": 22,
           "id": "2"
+        }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_HP_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_HP_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_HP_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_HP_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_HP_5"
         }
       ]
     },
@@ -4001,6 +4353,28 @@
           "slot": 22,
           "id": "5"
         }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_HP_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_HP_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_HP_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_HP_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_HP_5"
+        }
       ]
     },
     "2000018": {
@@ -4234,6 +4608,28 @@
         {
           "slot": 22,
           "id": "4"
+        }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_HP_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_HP_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_HP_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_HP_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_HP_5"
         }
       ]
     },
@@ -4469,6 +4865,28 @@
           "slot": 22,
           "id": "2"
         }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_ATK_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_ATK_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_ATK_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_ATK_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_ATK_5"
+        }
       ]
     },
     "2000020": {
@@ -4702,6 +5120,28 @@
         {
           "slot": 22,
           "id": "4"
+        }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_ATK_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_ATK_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_ATK_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_ATK_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_ATK_5"
         }
       ]
     },
@@ -4941,6 +5381,28 @@
           "slot": 22,
           "id": "1"
         }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_DEF_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_DEF_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_DEF_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_DEF_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_DEF_5"
+        }
       ]
     },
     "2000022": {
@@ -5178,6 +5640,28 @@
         {
           "slot": 22,
           "id": "2"
+        }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_ATK_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_ATK_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_ATK_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_ATK_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_ATK_5"
         }
       ]
     },
@@ -5417,6 +5901,28 @@
           "slot": 22,
           "id": "5"
         }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_HP_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_HP_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_HP_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_HP_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_HP_5"
+        }
       ]
     },
     "2000024": {
@@ -5650,6 +6156,28 @@
         {
           "slot": 22,
           "id": "1"
+        }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_HP_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_HP_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_HP_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_HP_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_HP_5"
         }
       ]
     },
@@ -5885,6 +6413,28 @@
           "slot": 22,
           "id": "2"
         }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_ATK_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_ATK_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_ATK_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_ATK_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_ATK_5"
+        }
       ]
     },
     "2000026": {
@@ -6118,6 +6668,28 @@
         {
           "slot": 22,
           "id": "1"
+        }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_HP_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_HP_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_HP_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_HP_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_HP_5"
         }
       ]
     },
@@ -6353,6 +6925,28 @@
           "slot": 22,
           "id": "5"
         }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_HP_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_HP_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_HP_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_HP_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_HP_5"
+        }
       ]
     },
     "2000028": {
@@ -6586,6 +7180,28 @@
         {
           "slot": 22,
           "id": "4"
+        }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_ATK_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_ATK_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_ATK_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_ATK_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_ATK_5"
         }
       ]
     },
@@ -6821,6 +7437,28 @@
           "slot": 22,
           "id": "3"
         }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_HP_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_HP_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_HP_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_HP_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_HP_5"
+        }
       ]
     },
     "2000030": {
@@ -7054,6 +7692,28 @@
         {
           "slot": 22,
           "id": "1"
+        }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_HP_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_HP_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_HP_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_HP_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_HP_5"
         }
       ]
     },
@@ -7289,6 +7949,28 @@
           "slot": 22,
           "id": "3"
         }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_HP_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_HP_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_HP_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_HP_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_HP_5"
+        }
       ]
     },
     "2000032": {
@@ -7522,6 +8204,28 @@
         {
           "slot": 22,
           "id": "2"
+        }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_HP_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_HP_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_HP_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_HP_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_HP_5"
         }
       ]
     },
@@ -7757,6 +8461,28 @@
           "slot": 22,
           "id": "2"
         }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_HP_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_HP_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_HP_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_HP_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_HP_5"
+        }
       ]
     },
     "2000034": {
@@ -7990,6 +8716,28 @@
         {
           "slot": 22,
           "id": "2"
+        }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_HP_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_HP_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_HP_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_HP_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_HP_5"
         }
       ]
     },
@@ -8225,6 +8973,28 @@
           "slot": 22,
           "id": "6"
         }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_ATK_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_ATK_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_ATK_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_ATK_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_ATK_5"
+        }
       ]
     },
     "2000036": {
@@ -8458,6 +9228,28 @@
         {
           "slot": 22,
           "id": "5"
+        }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_HP_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_HP_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_HP_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_HP_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_HP_5"
         }
       ]
     },
@@ -8697,6 +9489,28 @@
           "slot": 22,
           "id": "1"
         }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_HP_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_HP_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_HP_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_HP_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_HP_5"
+        }
       ]
     },
     "2000038": {
@@ -8930,6 +9744,28 @@
         {
           "slot": 22,
           "id": "5"
+        }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_HP_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_HP_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_HP_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_HP_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_HP_5"
         }
       ]
     },
@@ -9165,6 +10001,28 @@
           "slot": 22,
           "id": "3"
         }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_ATK_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_ATK_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_ATK_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_ATK_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_ATK_5"
+        }
       ]
     },
     "2000040": {
@@ -9398,6 +10256,28 @@
         {
           "slot": 22,
           "id": "8"
+        }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_ATK_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_ATK_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_ATK_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_ATK_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_ATK_5"
         }
       ]
     },
@@ -9633,6 +10513,28 @@
           "slot": 22,
           "id": "3"
         }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_HP_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_HP_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_HP_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_HP_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_HP_5"
+        }
       ]
     },
     "2000042": {
@@ -9867,6 +10769,28 @@
           "slot": 22,
           "id": "1"
         }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_DEF_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_DEF_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_DEF_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_DEF_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_DEF_5"
+        }
       ]
     },
     "2000043": {
@@ -10100,6 +11024,28 @@
         {
           "slot": 22,
           "id": "4"
+        }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_ATK_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_ATK_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_ATK_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_ATK_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_ATK_5"
         }
       ]
     },
@@ -10339,6 +11285,28 @@
           "slot": 22,
           "id": "4"
         }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_ATK_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_ATK_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_ATK_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_ATK_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_ATK_5"
+        }
       ]
     },
     "2000045": {
@@ -10572,6 +11540,28 @@
         {
           "slot": 22,
           "id": "4"
+        }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_HP_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_HP_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_HP_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_HP_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_HP_5"
         }
       ]
     },
@@ -10807,6 +11797,28 @@
           "slot": 22,
           "id": "3"
         }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_HP_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_HP_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_HP_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_HP_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_HP_5"
+        }
       ]
     },
     "2000047": {
@@ -11040,6 +12052,28 @@
         {
           "slot": 22,
           "id": "5"
+        }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_HP_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_HP_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_HP_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_HP_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_HP_5"
         }
       ]
     },
@@ -11275,6 +12309,28 @@
           "slot": 22,
           "id": "1"
         }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_HP_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_HP_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_HP_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_HP_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_HP_5"
+        }
       ]
     },
     "2000049": {
@@ -11508,6 +12564,28 @@
         {
           "slot": 22,
           "id": "2"
+        }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_HP_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_HP_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_HP_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_HP_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_HP_5"
         }
       ]
     },
@@ -11743,6 +12821,28 @@
           "slot": 22,
           "id": "5"
         }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_HP_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_HP_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_HP_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_HP_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_HP_5"
+        }
       ]
     },
     "2000051": {
@@ -11977,6 +13077,28 @@
           "slot": 22,
           "id": "2"
         }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_HP_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_HP_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_HP_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_HP_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_HP_5"
+        }
       ]
     },
     "2000052": {
@@ -12210,6 +13332,28 @@
         {
           "slot": 22,
           "id": "3"
+        }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_ATK_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_ATK_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_ATK_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_ATK_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_ATK_5"
         }
       ]
     },
@@ -12449,6 +13593,28 @@
           "slot": 22,
           "id": "2"
         }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_HP_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_HP_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_HP_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_HP_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_HP_5"
+        }
       ]
     },
     "2000054": {
@@ -12682,6 +13848,28 @@
         {
           "slot": 22,
           "id": "5"
+        }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_ATK_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_ATK_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_ATK_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_ATK_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_ATK_5"
         }
       ]
     },
@@ -12917,6 +14105,28 @@
           "slot": 22,
           "id": "2"
         }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_ATK_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_ATK_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_ATK_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_ATK_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_ATK_5"
+        }
       ]
     },
     "2000056": {
@@ -13150,6 +14360,28 @@
         {
           "slot": 22,
           "id": "3"
+        }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_ATK_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_ATK_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_ATK_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_ATK_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_ATK_5"
         }
       ]
     },
@@ -13385,6 +14617,28 @@
           "slot": 22,
           "id": "1"
         }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_DEF_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_DEF_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_DEF_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_DEF_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_DEF_5"
+        }
       ]
     },
     "2000058": {
@@ -13618,6 +14872,28 @@
         {
           "slot": 22,
           "id": "5"
+        }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_HP_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_HP_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_HP_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_HP_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_HP_5"
         }
       ]
     },
@@ -13853,6 +15129,28 @@
           "slot": 22,
           "id": "4"
         }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_ATK_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_ATK_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_ATK_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_ATK_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_ATK_5"
+        }
       ]
     },
     "2000060": {
@@ -14086,6 +15384,28 @@
         {
           "slot": 22,
           "id": "3"
+        }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_ATK_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_ATK_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_ATK_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_ATK_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_ATK_5"
         }
       ]
     },
@@ -14325,6 +15645,28 @@
           "slot": 22,
           "id": "1"
         }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_ATK_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_ATK_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_ATK_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_ATK_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_ATK_5"
+        }
       ]
     },
     "2000062": {
@@ -14558,6 +15900,28 @@
         {
           "slot": 22,
           "id": "2"
+        }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_ATK_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_ATK_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_ATK_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_ATK_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_ATK_5"
         }
       ]
     },
@@ -14793,6 +16157,28 @@
           "slot": 22,
           "id": "1"
         }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_HP_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_HP_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_HP_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_HP_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_HP_5"
+        }
       ]
     },
     "2000064": {
@@ -15026,6 +16412,28 @@
         {
           "slot": 22,
           "id": "3"
+        }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_ATK_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_ATK_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_ATK_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_ATK_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_ATK_5"
         }
       ]
     },
@@ -15265,6 +16673,28 @@
           "slot": 22,
           "id": "4"
         }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_ATK_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_ATK_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_ATK_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_ATK_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_ATK_5"
+        }
       ]
     },
     "2000066": {
@@ -15502,6 +16932,28 @@
         {
           "slot": 22,
           "id": "3"
+        }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_ATK_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_ATK_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_ATK_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_ATK_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_ATK_5"
         }
       ]
     },
@@ -15741,6 +17193,28 @@
           "slot": 22,
           "id": "4"
         }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_ATK_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_ATK_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_ATK_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_ATK_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_ATK_5"
+        }
       ]
     },
     "2000068": {
@@ -15974,6 +17448,28 @@
         {
           "slot": 22,
           "id": "4"
+        }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_ATK_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_ATK_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_ATK_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_ATK_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_ATK_5"
         }
       ]
     },
@@ -16213,6 +17709,28 @@
           "slot": 22,
           "id": "4"
         }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_HP_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_HP_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_HP_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_HP_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_HP_5"
+        }
       ]
     },
     "2000070": {
@@ -16446,6 +17964,28 @@
         {
           "slot": 22,
           "id": "2"
+        }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_ATK_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_ATK_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_ATK_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_ATK_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_ATK_5"
         }
       ]
     },
@@ -16681,6 +18221,28 @@
           "slot": 22,
           "id": "2"
         }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_DEF_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_DEF_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_DEF_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_DEF_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_DEF_5"
+        }
       ]
     },
     "2000072": {
@@ -16914,6 +18476,28 @@
         {
           "slot": 22,
           "id": "3"
+        }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_HP_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_HP_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_HP_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_HP_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_HP_5"
         }
       ]
     },
@@ -17149,6 +18733,28 @@
           "slot": 22,
           "id": "2"
         }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_ATK_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_ATK_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_ATK_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_ATK_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_ATK_5"
+        }
       ]
     },
     "2000074": {
@@ -17382,6 +18988,28 @@
         {
           "slot": 22,
           "id": "5"
+        }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_HP_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_HP_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_HP_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_HP_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_HP_5"
         }
       ]
     },
@@ -17617,6 +19245,28 @@
           "slot": 22,
           "id": "3"
         }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_ATK_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_ATK_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_ATK_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_ATK_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_ATK_5"
+        }
       ]
     },
     "2000076": {
@@ -17851,6 +19501,28 @@
           "slot": 22,
           "id": "9"
         }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_ATK_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_ATK_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_ATK_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_ATK_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_ATK_5"
+        }
       ]
     },
     "2000077": {
@@ -18084,6 +19756,28 @@
         {
           "slot": 22,
           "id": "1"
+        }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_DEF_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_DEF_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_DEF_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_DEF_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_DEF_5"
         }
       ]
     },
@@ -18323,6 +20017,28 @@
           "slot": 22,
           "id": "3"
         }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_ATK_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_ATK_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_ATK_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_ATK_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_ATK_5"
+        }
       ]
     },
     "2000079": {
@@ -18561,6 +20277,28 @@
           "slot": 22,
           "id": "4"
         }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_ATK_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_ATK_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_ATK_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_ATK_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_ATK_5"
+        }
       ]
     },
     "2000080": {
@@ -18794,6 +20532,28 @@
         {
           "slot": 22,
           "id": "4"
+        }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_HP_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_HP_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_HP_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_HP_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_HP_5"
         }
       ]
     },
@@ -19033,6 +20793,28 @@
           "slot": 22,
           "id": "3"
         }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_ATK_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_ATK_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_ATK_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_ATK_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_ATK_5"
+        }
       ]
     },
     "2000082": {
@@ -19266,6 +21048,28 @@
         {
           "slot": 22,
           "id": "4"
+        }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_ATK_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_ATK_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_ATK_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_ATK_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_ATK_5"
         }
       ]
     },
@@ -19501,6 +21305,28 @@
           "slot": 22,
           "id": "5"
         }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_HP_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_HP_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_HP_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_HP_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_HP_5"
+        }
       ]
     },
     "2000084": {
@@ -19734,6 +21560,28 @@
         {
           "slot": 22,
           "id": "5"
+        }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_HP_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_HP_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_HP_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_HP_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_HP_5"
         }
       ]
     },
@@ -19973,6 +21821,28 @@
           "slot": 22,
           "id": "2"
         }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_ATK_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_ATK_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_ATK_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_ATK_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_ATK_5"
+        }
       ]
     },
     "2000086": {
@@ -20207,6 +22077,28 @@
           "slot": 22,
           "id": "11"
         }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_HP_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_HP_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_HP_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_HP_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_HP_5"
+        }
       ]
     },
     "2000087": {
@@ -20440,6 +22332,28 @@
         {
           "slot": 22,
           "id": "2"
+        }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_ATK_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_ATK_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_ATK_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_ATK_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_ATK_5"
         }
       ]
     },
@@ -20679,6 +22593,28 @@
           "slot": 22,
           "id": "1"
         }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_HP_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_HP_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_HP_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_HP_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_HP_5"
+        }
       ]
     },
     "2000089": {
@@ -20912,6 +22848,28 @@
         {
           "slot": 22,
           "id": "2"
+        }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_DEF_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_DEF_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_DEF_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_DEF_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_DEF_5"
         }
       ]
     },
@@ -21151,6 +23109,28 @@
           "slot": 22,
           "id": "2"
         }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_ATK_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_ATK_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_ATK_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_ATK_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_ATK_5"
+        }
       ]
     },
     "2000091": {
@@ -21384,6 +23364,28 @@
         {
           "slot": 22,
           "id": "10"
+        }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_HP_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_HP_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_HP_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_HP_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_HP_5"
         }
       ]
     },
@@ -21619,6 +23621,28 @@
           "slot": 22,
           "id": "13"
         }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_ATK_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_ATK_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_ATK_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_ATK_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_ATK_5"
+        }
       ]
     },
     "2000093": {
@@ -21852,6 +23876,28 @@
         {
           "slot": 22,
           "id": "12"
+        }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_ATK_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_ATK_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_ATK_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_ATK_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_ATK_5"
         }
       ]
     },
@@ -22090,6 +24136,28 @@
         {
           "slot": 22,
           "id": "1"
+        }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_ATK_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_ATK_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_ATK_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_ATK_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_ATK_5"
         }
       ]
     },
@@ -23035,6 +25103,28 @@
           "slot": 22,
           "id": "5"
         }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_HP_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_HP_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_HP_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_HP_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_HP_5"
+        }
       ]
     },
     "2000099": {
@@ -23268,6 +25358,28 @@
         {
           "slot": 22,
           "id": "2"
+        }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_HP_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_HP_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_HP_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_HP_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_HP_5"
         }
       ]
     },
@@ -23507,6 +25619,28 @@
           "slot": 22,
           "id": "5"
         }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_HP_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_HP_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_HP_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_HP_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_HP_5"
+        }
       ]
     },
     "2000101": {
@@ -23745,6 +25879,28 @@
           "slot": 22,
           "id": "3"
         }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_ATK_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_ATK_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_ATK_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_ATK_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_ATK_5"
+        }
       ]
     },
     "2000102": {
@@ -23978,6 +26134,28 @@
         {
           "slot": 22,
           "id": "1"
+        }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_HP_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_HP_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_HP_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_HP_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_HP_5"
         }
       ]
     },
@@ -24217,6 +26395,28 @@
           "slot": 22,
           "id": "1"
         }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_HP_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_HP_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_HP_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_HP_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_HP_5"
+        }
       ]
     },
     "2000105": {
@@ -24450,6 +26650,28 @@
         {
           "slot": 22,
           "id": "3"
+        }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_ATK_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_ATK_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_ATK_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_ATK_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_ATK_5"
         }
       ]
     },
@@ -24685,6 +26907,28 @@
           "slot": 22,
           "id": "1"
         }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_HP_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_HP_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_HP_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_HP_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_HP_5"
+        }
       ]
     },
     "2000107": {
@@ -24918,6 +27162,28 @@
         {
           "slot": 22,
           "id": "4"
+        }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_ATK_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_ATK_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_ATK_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_ATK_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_ATK_5"
         }
       ]
     },
@@ -25153,6 +27419,28 @@
           "slot": 22,
           "id": "5"
         }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_HP_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_HP_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_HP_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_HP_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_HP_5"
+        }
       ]
     },
     "2000109": {
@@ -25386,6 +27674,28 @@
         {
           "slot": 22,
           "id": "2"
+        }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_HP_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_HP_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_HP_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_HP_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_HP_5"
         }
       ]
     },
@@ -25625,6 +27935,28 @@
           "slot": 22,
           "id": "3"
         }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_ATK_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_ATK_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_ATK_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_ATK_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_ATK_5"
+        }
       ]
     },
     "2000111": {
@@ -25858,6 +28190,28 @@
         {
           "slot": 22,
           "id": "3"
+        }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_ATK_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_ATK_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_ATK_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_ATK_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_ATK_5"
         }
       ]
     },
@@ -26093,6 +28447,28 @@
           "slot": 22,
           "id": "15"
         }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_DEF_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_DEF_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_DEF_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_DEF_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_DEF_5"
+        }
       ]
     },
     "2000113": {
@@ -26326,6 +28702,28 @@
         {
           "slot": 22,
           "id": "5"
+        }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_HP_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_HP_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_HP_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_HP_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_HP_5"
         }
       ]
     },
@@ -26561,6 +28959,28 @@
           "slot": 22,
           "id": "16"
         }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_HP_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_HP_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_HP_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_HP_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_HP_5"
+        }
       ]
     },
     "2000116": {
@@ -26794,6 +29214,28 @@
         {
           "slot": 22,
           "id": "17"
+        }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_DEF_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_DEF_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_DEF_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_DEF_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_DEF_5"
         }
       ]
     },
@@ -27029,6 +29471,28 @@
           "slot": 22,
           "id": "14"
         }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_ATK_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_ATK_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_ATK_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_ATK_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_ATK_5"
+        }
       ]
     },
     "2000118": {
@@ -27262,6 +29726,28 @@
         {
           "slot": 22,
           "id": "4"
+        }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_ATK_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_ATK_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_ATK_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_ATK_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_ATK_5"
         }
       ]
     },
@@ -27497,6 +29983,28 @@
           "slot": 22,
           "id": "4"
         }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_ATK_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_ATK_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_ATK_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_ATK_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_ATK_5"
+        }
       ]
     },
     "2000121": {
@@ -27730,6 +30238,28 @@
         {
           "slot": 22,
           "id": "3"
+        }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_ATK_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_ATK_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_ATK_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_ATK_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_ATK_5"
         }
       ]
     },
@@ -27965,6 +30495,28 @@
           "slot": 22,
           "id": "4"
         }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_ATK_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_ATK_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_ATK_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_ATK_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_ATK_5"
+        }
       ]
     },
     "2000124": {
@@ -28198,6 +30750,28 @@
         {
           "slot": 22,
           "id": "2"
+        }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_ATK_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_ATK_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_ATK_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_ATK_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_ATK_5"
         }
       ]
     },
@@ -28433,6 +31007,28 @@
           "slot": 22,
           "id": "3"
         }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_ATK_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_ATK_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_ATK_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_ATK_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_ATK_5"
+        }
       ]
     },
     "2700003": {
@@ -28534,6 +31130,28 @@
           "slot": 23,
           "id": "372"
         }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_ATK_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_ATK_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_ATK_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_ATK_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_ATK_5"
+        }
       ]
     },
     "2700005": {
@@ -28634,6 +31252,28 @@
         {
           "slot": 23,
           "id": "572"
+        }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_ATK_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_ATK_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_ATK_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_ATK_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_ATK_5"
         }
       ]
     },
@@ -28873,6 +31513,28 @@
           "slot": 22,
           "id": "2"
         }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_ATK_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_ATK_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_ATK_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_ATK_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_ATK_5"
+        }
       ]
     },
     "2700035": {
@@ -29107,6 +31769,28 @@
           "slot": 22,
           "id": "18"
         }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_ATK_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_ATK_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_ATK_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_ATK_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_ATK_5"
+        }
       ]
     },
     "2700037": {
@@ -29212,6 +31896,28 @@
           "slot": 23,
           "id": "3772"
         }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_HP_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_HP_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_HP_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_HP_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_HP_5"
+        }
       ]
     },
     "2700043": {
@@ -29312,6 +32018,28 @@
         {
           "slot": 23,
           "id": "4372"
+        }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_ATK_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_ATK_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_ATK_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_ATK_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_ATK_5"
         }
       ]
     },
@@ -29414,6 +32142,28 @@
           "slot": 23,
           "id": "5672"
         }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_ATK_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_ATK_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_ATK_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_ATK_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_ATK_5"
+        }
       ]
     },
     "2700070": {
@@ -29514,6 +32264,28 @@
         {
           "slot": 23,
           "id": "7072"
+        }
+      ],
+      "trust": [
+        {
+          "level": 20,
+          "buffId": "trust_level_DEF_1"
+        },
+        {
+          "level": 40,
+          "buffId": "trust_level_DEF_2"
+        },
+        {
+          "level": 60,
+          "buffId": "trust_level_DEF_3"
+        },
+        {
+          "level": 80,
+          "buffId": "trust_level_DEF_4"
+        },
+        {
+          "level": 100,
+          "buffId": "trust_level_DEF_5"
         }
       ]
     }
@@ -50256,46 +53028,6 @@
           "multiHit": true,
           "maxHitCount": 6,
           "isAdditive": false
-        },
-        {
-          "id": "2700019_Skill_1_1",
-          "chain": "2700019_Skill_1",
-          "hit": 1,
-          "damageFactor": 120,
-          "damageType": "DT_CUT",
-          "multiHit": false,
-          "maxHitCount": 0,
-          "isAdditive": false
-        },
-        {
-          "id": "2700019_Skill_1_2",
-          "chain": "2700019_Skill_1",
-          "hit": 2,
-          "damageFactor": 120,
-          "damageType": "DT_CUT",
-          "multiHit": false,
-          "maxHitCount": 0,
-          "isAdditive": false
-        },
-        {
-          "id": "2700019_Skill_1_3",
-          "chain": "2700019_Skill_1",
-          "hit": 3,
-          "damageFactor": 160,
-          "damageType": "DT_CUT",
-          "multiHit": false,
-          "maxHitCount": 0,
-          "isAdditive": false
-        },
-        {
-          "id": "2700019_Skill_1_4",
-          "chain": "2700019_Skill_1",
-          "hit": 4,
-          "damageFactor": 100,
-          "damageType": "DT_CUT_RANDOM",
-          "multiHit": true,
-          "maxHitCount": 6,
-          "isAdditive": false
         }
       ],
       "clips": [
@@ -50389,26 +53121,6 @@
         {
           "id": "2000019_Skill_2_2",
           "chain": "2000019_Skill_2",
-          "hit": 2,
-          "damageFactor": 600,
-          "damageType": "DT_CUT_RANDOM",
-          "multiHit": false,
-          "maxHitCount": 0,
-          "isAdditive": false
-        },
-        {
-          "id": "2700019_Skill_2_1",
-          "chain": "2700019_Skill_2",
-          "hit": 1,
-          "damageFactor": 400,
-          "damageType": "DT_CUT_KEEP_BIG",
-          "multiHit": false,
-          "maxHitCount": 0,
-          "isAdditive": false
-        },
-        {
-          "id": "2700019_Skill_2_2",
-          "chain": "2700019_Skill_2",
           "hit": 2,
           "damageFactor": 600,
           "damageType": "DT_CUT_RANDOM",
@@ -50512,66 +53224,6 @@
           "damageType": "DT_FIRE_HIT",
           "multiHit": true,
           "maxHitCount": 4,
-          "isAdditive": false
-        },
-        {
-          "id": "2700019_Skill_3_1",
-          "chain": "2700019_Skill_3",
-          "hit": 1,
-          "damageFactor": 100,
-          "damageType": "DT_CUT",
-          "multiHit": true,
-          "maxHitCount": 2,
-          "isAdditive": false
-        },
-        {
-          "id": "2700019_Skill_3_2",
-          "chain": "2700019_Skill_3",
-          "hit": 2,
-          "damageFactor": 100,
-          "damageType": "DT_CUT",
-          "multiHit": true,
-          "maxHitCount": 2,
-          "isAdditive": false
-        },
-        {
-          "id": "2700019_Skill_3_3",
-          "chain": "2700019_Skill_3",
-          "hit": 3,
-          "damageFactor": 100,
-          "damageType": "DT_CUT",
-          "multiHit": true,
-          "maxHitCount": 2,
-          "isAdditive": false
-        },
-        {
-          "id": "2700019_Skill_3_4",
-          "chain": "2700019_Skill_3",
-          "hit": 4,
-          "damageFactor": 50,
-          "damageType": "DT_CUT_RANDOM",
-          "multiHit": true,
-          "maxHitCount": 4,
-          "isAdditive": false
-        },
-        {
-          "id": "2700019_Skill_3_5",
-          "chain": "2700019_Skill_3",
-          "hit": 5,
-          "damageFactor": 100,
-          "damageType": "DT_CUT_RANDOM",
-          "multiHit": false,
-          "maxHitCount": 0,
-          "isAdditive": false
-        },
-        {
-          "id": "2700019_Skill_3_6",
-          "chain": "2700019_Skill_3",
-          "hit": 6,
-          "damageFactor": 100,
-          "damageType": "DT_CUT",
-          "multiHit": false,
-          "maxHitCount": 0,
           "isAdditive": false
         }
       ],
@@ -50737,46 +53389,6 @@
           "multiHit": false,
           "maxHitCount": 0,
           "isAdditive": false
-        },
-        {
-          "id": "2700019_Skill_4_1",
-          "chain": "2700019_Skill_4",
-          "hit": 1,
-          "damageFactor": 200,
-          "damageType": "DT_CUT",
-          "multiHit": false,
-          "maxHitCount": 0,
-          "isAdditive": false
-        },
-        {
-          "id": "2700019_Skill_4_2",
-          "chain": "2700019_Skill_4",
-          "hit": 2,
-          "damageFactor": 250,
-          "damageType": "DT_CUT",
-          "multiHit": false,
-          "maxHitCount": 0,
-          "isAdditive": false
-        },
-        {
-          "id": "2700019_Skill_4_3",
-          "chain": "2700019_Skill_4",
-          "hit": 3,
-          "damageFactor": 250,
-          "damageType": "DT_CUT",
-          "multiHit": false,
-          "maxHitCount": 0,
-          "isAdditive": false
-        },
-        {
-          "id": "2700019_Skill_4_4",
-          "chain": "2700019_Skill_4",
-          "hit": 4,
-          "damageFactor": 300,
-          "damageType": "DT_CUT",
-          "multiHit": false,
-          "maxHitCount": 0,
-          "isAdditive": false
         }
       ],
       "clips": [
@@ -50869,26 +53481,6 @@
         {
           "id": "2000019_Skill_5_2",
           "chain": "2000019_Skill_5",
-          "hit": 2,
-          "damageFactor": 150,
-          "damageType": "DT_CUT_RANDOM",
-          "multiHit": true,
-          "maxHitCount": 4,
-          "isAdditive": false
-        },
-        {
-          "id": "2700019_Skill_5_1",
-          "chain": "2700019_Skill_5",
-          "hit": 1,
-          "damageFactor": 400,
-          "damageType": "DT_CUT",
-          "multiHit": false,
-          "maxHitCount": 0,
-          "isAdditive": false
-        },
-        {
-          "id": "2700019_Skill_5_2",
-          "chain": "2700019_Skill_5",
           "hit": 2,
           "damageFactor": 150,
           "damageType": "DT_CUT_RANDOM",
@@ -51045,46 +53637,6 @@
           "multiHit": false,
           "maxHitCount": 0,
           "isAdditive": false
-        },
-        {
-          "id": "2700019_Skill_4_1",
-          "chain": "2700019_Skill_4",
-          "hit": 1,
-          "damageFactor": 200,
-          "damageType": "DT_CUT",
-          "multiHit": false,
-          "maxHitCount": 0,
-          "isAdditive": false
-        },
-        {
-          "id": "2700019_Skill_4_2",
-          "chain": "2700019_Skill_4",
-          "hit": 2,
-          "damageFactor": 250,
-          "damageType": "DT_CUT",
-          "multiHit": false,
-          "maxHitCount": 0,
-          "isAdditive": false
-        },
-        {
-          "id": "2700019_Skill_4_3",
-          "chain": "2700019_Skill_4",
-          "hit": 3,
-          "damageFactor": 250,
-          "damageType": "DT_CUT",
-          "multiHit": false,
-          "maxHitCount": 0,
-          "isAdditive": false
-        },
-        {
-          "id": "2700019_Skill_4_4",
-          "chain": "2700019_Skill_4",
-          "hit": 4,
-          "damageFactor": 300,
-          "damageType": "DT_CUT",
-          "multiHit": false,
-          "maxHitCount": 0,
-          "isAdditive": false
         }
       ],
       "clips": [
@@ -51183,26 +53735,6 @@
           "multiHit": true,
           "maxHitCount": 4,
           "isAdditive": false
-        },
-        {
-          "id": "2700019_Skill_5_1",
-          "chain": "2700019_Skill_5",
-          "hit": 1,
-          "damageFactor": 400,
-          "damageType": "DT_CUT",
-          "multiHit": false,
-          "maxHitCount": 0,
-          "isAdditive": false
-        },
-        {
-          "id": "2700019_Skill_5_2",
-          "chain": "2700019_Skill_5",
-          "hit": 2,
-          "damageFactor": 150,
-          "damageType": "DT_CUT_RANDOM",
-          "multiHit": true,
-          "maxHitCount": 4,
-          "isAdditive": false
         }
       ],
       "clips": [
@@ -51291,26 +53823,6 @@
           "multiHit": false,
           "maxHitCount": 0,
           "isAdditive": false
-        },
-        {
-          "id": "2700019_Skill_2_1_Upgrade",
-          "chain": "2700019_Skill_2_1_Upgrade",
-          "hit": 1,
-          "damageFactor": 300,
-          "damageType": "DT_CUT_KEEP_BIG",
-          "multiHit": false,
-          "maxHitCount": 0,
-          "isAdditive": false
-        },
-        {
-          "id": "2700019_Skill_2_2_Upgrade",
-          "chain": "2700019_Skill_2_2_Upgrade",
-          "hit": 1,
-          "damageFactor": 700,
-          "damageType": "DT_CUT_RANDOM",
-          "multiHit": false,
-          "maxHitCount": 0,
-          "isAdditive": false
         }
       ],
       "clips": [
@@ -51393,26 +53905,6 @@
         {
           "id": "2000019_Skill_2_2_Upgrade",
           "chain": "2000019_Skill_2_2_Upgrade",
-          "hit": 1,
-          "damageFactor": 700,
-          "damageType": "DT_CUT_RANDOM",
-          "multiHit": false,
-          "maxHitCount": 0,
-          "isAdditive": false
-        },
-        {
-          "id": "2700019_Skill_2_1_Upgrade",
-          "chain": "2700019_Skill_2_1_Upgrade",
-          "hit": 1,
-          "damageFactor": 300,
-          "damageType": "DT_CUT_KEEP_BIG",
-          "multiHit": false,
-          "maxHitCount": 0,
-          "isAdditive": false
-        },
-        {
-          "id": "2700019_Skill_2_2_Upgrade",
-          "chain": "2700019_Skill_2_2_Upgrade",
           "hit": 1,
           "damageFactor": 700,
           "damageType": "DT_CUT_RANDOM",
@@ -51531,26 +54023,6 @@
         {
           "id": "2000019_Skill_6_2",
           "chain": "2000019_Skill_6",
-          "hit": 2,
-          "damageFactor": 700,
-          "damageType": "DT_CUT_RANDOM",
-          "multiHit": false,
-          "maxHitCount": 0,
-          "isAdditive": false
-        },
-        {
-          "id": "2700019_Skill_6_1",
-          "chain": "2700019_Skill_6",
-          "hit": 1,
-          "damageFactor": 300,
-          "damageType": "DT_CUT",
-          "multiHit": false,
-          "maxHitCount": 0,
-          "isAdditive": false
-        },
-        {
-          "id": "2700019_Skill_6_2",
-          "chain": "2700019_Skill_6",
           "hit": 2,
           "damageFactor": 700,
           "damageType": "DT_CUT_RANDOM",
@@ -99411,16 +101883,6 @@
       ],
       "hits": [
         {
-          "id": "2000062_Skill_1_5",
-          "chain": "2000062_Skill_1",
-          "hit": 5,
-          "damageFactor": 300,
-          "damageType": "DT_BIG_DAMAGE",
-          "multiHit": false,
-          "maxHitCount": 0,
-          "isAdditive": false
-        },
-        {
           "id": "2000064_Skill_1_2",
           "chain": "2000064_Skill_1",
           "hit": 2,
@@ -99453,31 +101915,26 @@
       ],
       "clips": [
         {
-          "name": "2000062_Skill_1",
+          "name": "2000064_Skill_1",
           "events": [
             {
-              "id": "2000062_Skill_1_1",
-              "factor": 150,
+              "id": "2000064_Skill_1_2",
+              "factor": 125,
               "count": 1
             },
             {
-              "id": "2000062_Skill_1_2",
-              "factor": 150,
+              "id": "2000064_Skill_1_2",
+              "factor": 125,
               "count": 1
             },
             {
-              "id": "2000062_Skill_1_3",
-              "factor": 200,
+              "id": "2000064_Skill_1_3",
+              "factor": 250,
               "count": 1
             },
             {
-              "id": "2000062_Skill_1_4",
-              "factor": 200,
-              "count": 1
-            },
-            {
-              "id": "2000062_Skill_1_5",
-              "factor": 300,
+              "id": "2000064_Skill_1_4",
+              "factor": 500,
               "count": 1
             }
           ]
@@ -105629,36 +108086,6 @@
           "multiHit": false,
           "maxHitCount": 0,
           "isAdditive": false
-        },
-        {
-          "id": "2700070_Skill_1_1",
-          "chain": "2700070_Skill_1",
-          "hit": 1,
-          "damageFactor": 200,
-          "damageType": "DT_CUT",
-          "multiHit": false,
-          "maxHitCount": 0,
-          "isAdditive": false
-        },
-        {
-          "id": "2700070_Skill_1_2",
-          "chain": "2700070_Skill_1",
-          "hit": 2,
-          "damageFactor": 300,
-          "damageType": "DT_CUT_KEEP_BIG",
-          "multiHit": false,
-          "maxHitCount": 0,
-          "isAdditive": false
-        },
-        {
-          "id": "2700070_Skill_1_3",
-          "chain": "2700070_Skill_1",
-          "hit": 3,
-          "damageFactor": 500,
-          "damageType": "DT_BIG_DAMAGE",
-          "multiHit": false,
-          "maxHitCount": 0,
-          "isAdditive": false
         }
       ],
       "clips": [
@@ -105763,36 +108190,6 @@
           "multiHit": false,
           "maxHitCount": 0,
           "isAdditive": false
-        },
-        {
-          "id": "2700070_Skill_2_1",
-          "chain": "2700070_Skill_2",
-          "hit": 1,
-          "damageFactor": 100,
-          "damageType": "DT_HIT",
-          "multiHit": true,
-          "maxHitCount": 5,
-          "isAdditive": false
-        },
-        {
-          "id": "2700070_Skill_2_2",
-          "chain": "2700070_Skill_2",
-          "hit": 2,
-          "damageFactor": 200,
-          "damageType": "DT_HIT",
-          "multiHit": false,
-          "maxHitCount": 0,
-          "isAdditive": false
-        },
-        {
-          "id": "2700070_Skill_2_3",
-          "chain": "2700070_Skill_2",
-          "hit": 3,
-          "damageFactor": 300,
-          "damageType": "DT_BIG_DAMAGE",
-          "multiHit": false,
-          "maxHitCount": 0,
-          "isAdditive": false
         }
       ],
       "clips": [
@@ -105885,46 +108282,6 @@
           "damageType": "DT_BIG_DAMAGE",
           "multiHit": false,
           "maxHitCount": 0,
-          "isAdditive": false
-        },
-        {
-          "id": "2700070_Skill_3_1",
-          "chain": "2700070_Skill_3",
-          "hit": 1,
-          "damageFactor": 50,
-          "damageType": "DT_DARK_HIT",
-          "multiHit": true,
-          "maxHitCount": 10,
-          "isAdditive": false
-        },
-        {
-          "id": "2700070_Skill_3_2",
-          "chain": "2700070_Skill_3",
-          "hit": 2,
-          "damageFactor": 70,
-          "damageType": "DT_BIG_DAMAGE",
-          "multiHit": true,
-          "maxHitCount": 2,
-          "isAdditive": false
-        },
-        {
-          "id": "2700070_Skill_3_3",
-          "chain": "2700070_Skill_3",
-          "hit": 3,
-          "damageFactor": 60,
-          "damageType": "DT_BIG_DAMAGE",
-          "multiHit": true,
-          "maxHitCount": 3,
-          "isAdditive": false
-        },
-        {
-          "id": "2700070_Skill_3_4",
-          "chain": "2700070_Skill_3",
-          "hit": 4,
-          "damageFactor": 60,
-          "damageType": "DT_BIG_DAMAGE",
-          "multiHit": true,
-          "maxHitCount": 3,
           "isAdditive": false
         }
       ],
@@ -106065,26 +108422,6 @@
           "multiHit": true,
           "maxHitCount": 5,
           "isAdditive": false
-        },
-        {
-          "id": "2700070_Skill_5_1",
-          "chain": "2700070_Skill_5",
-          "hit": 1,
-          "damageFactor": 500,
-          "damageType": "DT_LIGHTNING_BLUE_CUT",
-          "multiHit": false,
-          "maxHitCount": 0,
-          "isAdditive": false
-        },
-        {
-          "id": "2700070_Skill_5_2",
-          "chain": "2700070_Skill_5",
-          "hit": 2,
-          "damageFactor": 100,
-          "damageType": "DT_LIGHTNING_BLUE_CUT",
-          "multiHit": true,
-          "maxHitCount": 5,
-          "isAdditive": false
         }
       ],
       "clips": [
@@ -106167,26 +108504,6 @@
         {
           "id": "2000070_Skill_5_2",
           "chain": "2000070_Skill_5",
-          "hit": 2,
-          "damageFactor": 100,
-          "damageType": "DT_LIGHTNING_BLUE_CUT",
-          "multiHit": true,
-          "maxHitCount": 5,
-          "isAdditive": false
-        },
-        {
-          "id": "2700070_Skill_5_1",
-          "chain": "2700070_Skill_5",
-          "hit": 1,
-          "damageFactor": 500,
-          "damageType": "DT_LIGHTNING_BLUE_CUT",
-          "multiHit": false,
-          "maxHitCount": 0,
-          "isAdditive": false
-        },
-        {
-          "id": "2700070_Skill_5_2",
-          "chain": "2700070_Skill_5",
           "hit": 2,
           "damageFactor": 100,
           "damageType": "DT_LIGHTNING_BLUE_CUT",
@@ -106435,56 +108752,6 @@
           "multiHit": false,
           "maxHitCount": 0,
           "isAdditive": false
-        },
-        {
-          "id": "2000071_Skill_Burst1_1",
-          "chain": "2000071_Skill_Burst1",
-          "hit": 1,
-          "damageFactor": 400,
-          "damageType": "DT_FIRE_PIERCE",
-          "multiHit": false,
-          "maxHitCount": 0,
-          "isAdditive": true
-        },
-        {
-          "id": "2000071_Skill_Burst1_2",
-          "chain": "2000071_Skill_Burst1",
-          "hit": 2,
-          "damageFactor": 100,
-          "damageType": "DT_FIRE_HIT",
-          "multiHit": true,
-          "maxHitCount": 6,
-          "isAdditive": true
-        },
-        {
-          "id": "2700070_Skill_2_1",
-          "chain": "2700070_Skill_2",
-          "hit": 1,
-          "damageFactor": 100,
-          "damageType": "DT_HIT",
-          "multiHit": true,
-          "maxHitCount": 5,
-          "isAdditive": false
-        },
-        {
-          "id": "2700070_Skill_2_2",
-          "chain": "2700070_Skill_2",
-          "hit": 2,
-          "damageFactor": 200,
-          "damageType": "DT_HIT",
-          "multiHit": false,
-          "maxHitCount": 0,
-          "isAdditive": false
-        },
-        {
-          "id": "2700070_Skill_2_3",
-          "chain": "2700070_Skill_2",
-          "hit": 3,
-          "damageFactor": 300,
-          "damageType": "DT_BIG_DAMAGE",
-          "multiHit": false,
-          "maxHitCount": 0,
-          "isAdditive": false
         }
       ],
       "clips": [
@@ -106588,56 +108855,6 @@
           "multiHit": false,
           "maxHitCount": 0,
           "isAdditive": false
-        },
-        {
-          "id": "2000071_Skill_Burst1_1",
-          "chain": "2000071_Skill_Burst1",
-          "hit": 1,
-          "damageFactor": 400,
-          "damageType": "DT_FIRE_PIERCE",
-          "multiHit": false,
-          "maxHitCount": 0,
-          "isAdditive": true
-        },
-        {
-          "id": "2000071_Skill_Burst1_2",
-          "chain": "2000071_Skill_Burst1",
-          "hit": 2,
-          "damageFactor": 100,
-          "damageType": "DT_FIRE_HIT",
-          "multiHit": true,
-          "maxHitCount": 6,
-          "isAdditive": true
-        },
-        {
-          "id": "2700070_Skill_2_1",
-          "chain": "2700070_Skill_2",
-          "hit": 1,
-          "damageFactor": 100,
-          "damageType": "DT_HIT",
-          "multiHit": true,
-          "maxHitCount": 5,
-          "isAdditive": false
-        },
-        {
-          "id": "2700070_Skill_2_2",
-          "chain": "2700070_Skill_2",
-          "hit": 2,
-          "damageFactor": 200,
-          "damageType": "DT_HIT",
-          "multiHit": false,
-          "maxHitCount": 0,
-          "isAdditive": false
-        },
-        {
-          "id": "2700070_Skill_2_3",
-          "chain": "2700070_Skill_2",
-          "hit": 3,
-          "damageFactor": 300,
-          "damageType": "DT_BIG_DAMAGE",
-          "multiHit": false,
-          "maxHitCount": 0,
-          "isAdditive": false
         }
       ],
       "clips": [
@@ -106725,26 +108942,6 @@
         {
           "id": "2000070_Skill_Burst3_2",
           "chain": "2000070_Skill_Burst3",
-          "hit": 2,
-          "damageFactor": 400,
-          "damageType": "DT_HIT",
-          "multiHit": false,
-          "maxHitCount": 0,
-          "isAdditive": false
-        },
-        {
-          "id": "2700070_Skill_Burst3_1",
-          "chain": "2700070_Skill_Burst3",
-          "hit": 1,
-          "damageFactor": 100,
-          "damageType": "DT_HIT",
-          "multiHit": true,
-          "maxHitCount": 6,
-          "isAdditive": false
-        },
-        {
-          "id": "2700070_Skill_Burst3_2",
-          "chain": "2700070_Skill_Burst3",
           "hit": 2,
           "damageFactor": 400,
           "damageType": "DT_HIT",
@@ -123725,36 +125922,6 @@
           "multiHit": true,
           "maxHitCount": 4,
           "isAdditive": false
-        },
-        {
-          "id": "2000088_Skill_3_1",
-          "chain": "2000088_Skill_3",
-          "hit": 1,
-          "damageFactor": 100,
-          "damageType": "DT_DARK_CUT",
-          "multiHit": false,
-          "maxHitCount": 0,
-          "isAdditive": false
-        },
-        {
-          "id": "2000088_Skill_3_2",
-          "chain": "2000088_Skill_3",
-          "hit": 2,
-          "damageFactor": 100,
-          "damageType": "DT_DARK_CUT",
-          "multiHit": false,
-          "maxHitCount": 0,
-          "isAdditive": false
-        },
-        {
-          "id": "2000088_Skill_3_3",
-          "chain": "2000088_Skill_3",
-          "hit": 3,
-          "damageFactor": 40,
-          "damageType": "DT_BIG_DAMAGE",
-          "multiHit": true,
-          "maxHitCount": 5,
-          "isAdditive": false
         }
       ],
       "clips": [
@@ -123919,26 +126086,6 @@
           "multiHit": true,
           "maxHitCount": 10,
           "isAdditive": false
-        },
-        {
-          "id": "2000088_Skill_5_1",
-          "chain": "2000088_Skill_5",
-          "hit": 1,
-          "damageFactor": 200,
-          "damageType": "DT_HIT",
-          "multiHit": false,
-          "maxHitCount": 0,
-          "isAdditive": false
-        },
-        {
-          "id": "2000088_Skill_5_2",
-          "chain": "2000088_Skill_5",
-          "hit": 2,
-          "damageFactor": 200,
-          "damageType": "DT_DARK_HIT",
-          "multiHit": true,
-          "maxHitCount": 4,
-          "isAdditive": false
         }
       ],
       "clips": [
@@ -124026,26 +126173,6 @@
           "damageType": "DT_HIT",
           "multiHit": true,
           "maxHitCount": 10,
-          "isAdditive": false
-        },
-        {
-          "id": "2000088_Skill_5_1",
-          "chain": "2000088_Skill_5",
-          "hit": 1,
-          "damageFactor": 200,
-          "damageType": "DT_HIT",
-          "multiHit": false,
-          "maxHitCount": 0,
-          "isAdditive": false
-        },
-        {
-          "id": "2000088_Skill_5_2",
-          "chain": "2000088_Skill_5",
-          "hit": 2,
-          "damageFactor": 200,
-          "damageType": "DT_DARK_HIT",
-          "multiHit": true,
-          "maxHitCount": 4,
           "isAdditive": false
         }
       ],
@@ -124574,26 +126701,6 @@
           "damageType": "DT_LIGHTNING_BLUE_CUT",
           "multiHit": false,
           "maxHitCount": 0,
-          "isAdditive": false
-        },
-        {
-          "id": "2000088_Skill_7_1",
-          "chain": "2000088_Skill_7",
-          "hit": 1,
-          "damageFactor": 300,
-          "damageType": "DT_DARK_HIT",
-          "multiHit": false,
-          "maxHitCount": 0,
-          "isAdditive": false
-        },
-        {
-          "id": "2000088_Skill_7_2",
-          "chain": "2000088_Skill_7",
-          "hit": 2,
-          "damageFactor": 100,
-          "damageType": "DT_DARK_HIT",
-          "multiHit": true,
-          "maxHitCount": 7,
           "isAdditive": false
         }
       ],
@@ -142899,36 +145006,6 @@
           "multiHit": false,
           "maxHitCount": 0,
           "isAdditive": false
-        },
-        {
-          "id": "2000116_Skill_5_1",
-          "chain": "2000116_Skill_5",
-          "hit": 1,
-          "damageFactor": 200,
-          "damageType": "DT_HOLY_HIT",
-          "multiHit": true,
-          "maxHitCount": 2,
-          "isAdditive": false
-        },
-        {
-          "id": "2000116_Skill_5_2",
-          "chain": "2000116_Skill_5",
-          "hit": 2,
-          "damageFactor": 200,
-          "damageType": "DT_HOLY_HIT",
-          "multiHit": false,
-          "maxHitCount": 0,
-          "isAdditive": false
-        },
-        {
-          "id": "2000116_Skill_5_3",
-          "chain": "2000116_Skill_5",
-          "hit": 3,
-          "damageFactor": 400,
-          "damageType": "DT_BIG_DAMAGE",
-          "multiHit": false,
-          "maxHitCount": 0,
-          "isAdditive": false
         }
       ],
       "clips": [
@@ -143012,36 +145089,6 @@
           "id": "2000106_Skill_5_2",
           "chain": "2000106_Skill_5",
           "hit": 2,
-          "damageFactor": 400,
-          "damageType": "DT_BIG_DAMAGE",
-          "multiHit": false,
-          "maxHitCount": 0,
-          "isAdditive": false
-        },
-        {
-          "id": "2000116_Skill_5_1",
-          "chain": "2000116_Skill_5",
-          "hit": 1,
-          "damageFactor": 200,
-          "damageType": "DT_HOLY_HIT",
-          "multiHit": true,
-          "maxHitCount": 2,
-          "isAdditive": false
-        },
-        {
-          "id": "2000116_Skill_5_2",
-          "chain": "2000116_Skill_5",
-          "hit": 2,
-          "damageFactor": 200,
-          "damageType": "DT_HOLY_HIT",
-          "multiHit": false,
-          "maxHitCount": 0,
-          "isAdditive": false
-        },
-        {
-          "id": "2000116_Skill_5_3",
-          "chain": "2000116_Skill_5",
-          "hit": 3,
           "damageFactor": 400,
           "damageType": "DT_BIG_DAMAGE",
           "multiHit": false,
@@ -155687,16 +157734,6 @@
           "multiHit": false,
           "maxHitCount": 0,
           "isAdditive": false
-        },
-        {
-          "id": "2000120_Skill_5_1",
-          "chain": "2000120_Skill_5",
-          "hit": 1,
-          "damageFactor": 250,
-          "damageType": "DT_LIGHTNING_HIT",
-          "multiHit": true,
-          "maxHitCount": 4,
-          "isAdditive": false
         }
       ],
       "clips": [
@@ -155784,16 +157821,6 @@
           "damageType": "DT_LIGHTNING_BLUE_CUT",
           "multiHit": false,
           "maxHitCount": 0,
-          "isAdditive": false
-        },
-        {
-          "id": "2000120_Skill_5_1",
-          "chain": "2000120_Skill_5",
-          "hit": 1,
-          "damageFactor": 250,
-          "damageType": "DT_LIGHTNING_HIT",
-          "multiHit": true,
-          "maxHitCount": 4,
           "isAdditive": false
         }
       ],
@@ -155935,16 +157962,6 @@
           "multiHit": false,
           "maxHitCount": 0,
           "isAdditive": false
-        },
-        {
-          "id": "2000120_Skill_5_1",
-          "chain": "2000120_Skill_5",
-          "hit": 1,
-          "damageFactor": 250,
-          "damageType": "DT_LIGHTNING_HIT",
-          "multiHit": true,
-          "maxHitCount": 4,
-          "isAdditive": false
         }
       ],
       "clips": [
@@ -156032,16 +158049,6 @@
           "damageType": "DT_LIGHTNING_BLUE_CUT",
           "multiHit": false,
           "maxHitCount": 0,
-          "isAdditive": false
-        },
-        {
-          "id": "2000120_Skill_5_1",
-          "chain": "2000120_Skill_5",
-          "hit": 1,
-          "damageFactor": 250,
-          "damageType": "DT_LIGHTNING_HIT",
-          "multiHit": true,
-          "maxHitCount": 4,
           "isAdditive": false
         }
       ],

@@ -87,13 +87,13 @@ Quatre origines. C'est CETTE classification qui borne les extracteurs.
 | **Équipement**       | pièces équipables, groupes d'options main/sub (valeurs), facteurs d'enchant par sous-type, break limit, sets 2P/4P, EE (buff/niveau), artefacts (buff)                                                                                                              | `ItemTemplet`, `ItemOptionTemplet`, `ItemEnchantTemplet`, `ItemSpecialOptionTemplet`, `ArtifactTemplet`                                                                    |
 | **Cibles PvE**       | stats Min/Max monstres + immunités (`BuffImmune`/`StatBuffImmune`) + kit (pour les passifs défensifs) + break/enrage (`RageTemplet`) ; spawns : niveau réel + `SpawnAdvantageRate_*` par contenu — déjà en BRUT dans `encounters.json`, NON ré-extraits (cf. § 6.4) | `MonsterTemplet`, `MonsterSkill*`, `RageTemplet` (spawns : `encounters.json` existant)                                                                                     |
 | **Config**           | le sous-ensemble GameConfig du § 7 du mapping (déjà en constantes dans `types.ts` — l'extracteur les VÉRIFIE à chaque patch au lieu de les figer)                                                                                                                   | `GameConfigTemplet`                                                                                                                                                        |
-| **Affinité (Trust)** | 5 paliers = 5 buffs passifs permanents PLATS (`BT_STAT`/`OAT_ADD`, self) : +60 ATK, +40 DEF, +300 HP par palier — canal `buffValue`, donc ABSENTS de la fiche affichée et multipliés par `buffRate` en combat (vérifié binaire 27/07/2026)                          | `TrustBuffTemplet` → `BuffTemplet` (ids `trust_level_*`)                                                                                                                   |
+| **Affinité (Trust)** | UNE chaîne par perso (revue H1) : 5 lignes (niv. 20..100) d'UNE stat, +60 ATK, +40 DEF OU +300 PV par ligne, PLATS (`BT_STAT`/`OAT_ADD`) ; rien en Monad Gate ni PvP — canal `buffValue`, ABSENTS de la fiche, multipliés par `buffRate` (binaire 27/07/2026)       | `TrustRewardTemplet` → `TrustBuffTemplet` → `BuffTemplet` (champ `trust` de characters.json)                                                                               |
 
 ### 3.2 🧑 Build utilisateur (saisie, jamais extraite)
 
 Niveau (1-120), évolution, transcendance, niveau de skill, nœuds d'éveil
 débloqués, nœuds monad, niveau d'archive (Codex, réglage de COMPTE — 0..11),
-palier d'affinité (Trust, 0..5), 6 pièces (item + enchant + main +
+niveau d'affinité (Trust, 0..100), 6 pièces (item + enchant + main +
 subs effectives + break limit + singularité), EE + niveau, artefact + niveau.
 → Les sub-options sont saisies **telles quelles** (les tirages n'existent pas
 dans le rapport) ; l'extracteur fournit seulement les bornes/choix possibles.

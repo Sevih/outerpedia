@@ -49,6 +49,7 @@ import {
   sheetSlugOfStat,
   type DamageReportResult,
 } from '@/lib/damage/inputs';
+import { STAT_ENHANCE_TYPES } from '@/lib/damage/aggregate';
 import { BASE_AMOUNT_STATS } from '@/lib/damage/passives';
 import { conditionBuffRef } from '@/lib/damage/gear';
 import { ENGINE_GAME_VERSION, type DamageBranch, type DamageFixture } from '@/lib/damage/harness';
@@ -774,8 +775,9 @@ export function DamageCalculatorBrowser({
           id: attacker.id,
           level,
           transcend: attacker.transcend[transcend]?.label ?? null,
-          // Le palier 0..5 est LA valeur de calcul ; le niveau saisi ne sert
-          // qu'à l'UI (paliers tous les 20 — Sevih 03/08/2026).
+          // Le NIVEAU 0..100 est la valeur de calcul (comparé au niveau
+          // requis de chaque ligne de la chaîne du perso) ; le palier n'est
+          // qu'un affichage (« n/5 »).
           affinity: { level: affinityLvl, tier: affinityTier },
           skills: skillLvls,
           weapon: weapon ? { slug: weapon.slug, tier: weaponTier } : null,
@@ -1751,7 +1753,9 @@ export function DamageCalculatorBrowser({
                     stepper déclare les stacks posés EN JEU (z `ab`, plafond
                     = StackCount de la ligne). Prouvé 23/08/2026 : 1 S2
                     d'Eris = 1 stack du +20 % Strikers, S1 de Francesca
-                    exact. */}
+                    exact. Un renfort ENHANCE (S3 de Demiurge Saeran
+                    alliée, § 14.1) n'a rien à empiler : une case à cocher
+                    (décision Sevih 15/10/2026), même déclaration z `ab`. */}
                   {stackableDynamics.length > 0 && (
                     <div className="space-y-1">
                       <span className="text-content-subtle font-mono text-[9px] tracking-wide uppercase">
@@ -1761,6 +1765,16 @@ export function DamageCalculatorBrowser({
                       {stackableDynamics.map((d) => {
                         const n = stackDecls[d.buffId] ?? 0;
                         const max = d.maxStacks ?? 1;
+                        const toggle = STAT_ENHANCE_TYPES.has(d.buff.type);
+                        const declare = (next: number): void =>
+                          setStackDecls((all) => {
+                            if (next === 0) {
+                              const rest = { ...all };
+                              delete rest[d.buffId];
+                              return rest;
+                            }
+                            return { ...all, [d.buffId]: next };
+                          });
                         const m = dynLabel(d);
                         const eff = dynEffect(d);
                         return (
@@ -1786,28 +1800,31 @@ export function DamageCalculatorBrowser({
                                 {max > 1 ? vars(L.context.stackMax, { n: max }) : ''}
                               </span>
                             </span>
-                            <span className="border-line-subtle bg-surface-sunken/70 focus-within:border-accent flex h-7 w-16 items-center rounded-lg border px-2">
+                            {toggle ? (
                               <input
-                                type="text"
-                                inputMode="numeric"
-                                value={String(n)}
-                                onChange={(e) => {
-                                  const v = Number(e.target.value);
-                                  const next = Number.isFinite(v)
-                                    ? Math.min(Math.max(Math.round(v), 0), max)
-                                    : 0;
-                                  setStackDecls((all) => {
-                                    if (next === 0) {
-                                      const rest = { ...all };
-                                      delete rest[d.buffId];
-                                      return rest;
-                                    }
-                                    return { ...all, [d.buffId]: next };
-                                  });
-                                }}
-                                className="text-content w-full min-w-0 bg-transparent text-right font-mono text-sm font-bold tabular-nums outline-none"
+                                type="checkbox"
+                                checked={n > 0}
+                                onChange={() => declare(n > 0 ? 0 : 1)}
+                                className="accent-accent"
                               />
-                            </span>
+                            ) : (
+                              <span className="border-line-subtle bg-surface-sunken/70 focus-within:border-accent flex h-7 w-16 items-center rounded-lg border px-2">
+                                <input
+                                  type="text"
+                                  inputMode="numeric"
+                                  value={String(n)}
+                                  onChange={(e) => {
+                                    const v = Number(e.target.value);
+                                    declare(
+                                      Number.isFinite(v)
+                                        ? Math.min(Math.max(Math.round(v), 0), max)
+                                        : 0,
+                                    );
+                                  }}
+                                  className="text-content w-full min-w-0 bg-transparent text-right font-mono text-sm font-bold tabular-nums outline-none"
+                                />
+                              </span>
+                            )}
                           </label>
                         );
                       })}

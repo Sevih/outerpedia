@@ -327,6 +327,15 @@ d'équipe, `CCommonDefine.MAX_USER_TEAM_MEMBER = 4`, `const` de `CCommonDefine.c
 1 ennemi → ×3 → +450 ‰). Le moteur applique ce décompte via
 `BuildReportOptions.targetsHit` (z `n`, défaut 1) ; le buff arrive gaté par
 son `CallerSkillType` (application par slot, gear.ts).
+**Portée `ALL` seulement** (revue O12, lu le 15/10/2026 dans `CCharacterBattle`,
+vers la l. 2773) : l'appel n'existe que dans la boucle des cibles d'un skill
+`SkillRangeType == ALL`, quand l'équipe ennemie compte moins de 4 membres, et
+seulement sur les résultats NORMAL, CRITICAL et MISSED — les trois branches du
+rapport. Le moteur ne l'ajoute qu'aux skills `rangeType === 'ALL'`
+(`ReportSkillInput.rangeAll`, report.ts) ; « moins de 4 » est porté par
+`decreaseTargetCount = 4 − cibles` (0 à 4 cibles). Les buffs qui changent la
+portée en combat (`BT_SKILL_RANGE_ALL`/`_SINGLE`) ne sont pas simulés. Aucun
+porteur jouable hors `ALL` au 15/10/2026 : aucun chiffre n'a bougé.
 
 ## 8. CalcDamage
 
@@ -393,7 +402,15 @@ triggers du skill DANS L'ORDRE (« Skill2,Skill2_2 » = deux clips chez
 Francesca ; « Burst1 » → clip `Skill_2_Upgrade` : le burst du S2 refait la
 même chaîne en UNE cascade de 1000 ‰), `TriggerNameSkip` porte l'état SKIP.
 `datagen/damage/clips.ts` assemble le tout dans `characters.json`
-(`DamageSkill.clips`) ; le moteur (`report.ts`) fait une cascade § 8.2 + § 8.3
+(`DamageSkill.clips`). L'animator scanné est celui de l'ATTAQUANT, donc du
+perso qui PORTE le skill (son `ModelID`, `CharacterTemplet`) — pas le préfixe
+des templets que la jointure `SkillID` lui rattache (elle ne sert qu'au
+simulateur et sert aussi des templets d'autres persos : le fusionné, un
+partenaire). Un hit préfixé d'un autre perso ET absent des clips du porteur
+sort des états du skill ; un clip sans event extrait ne prouve rien (le hit du
+porteur reste, au repli § 12.4). Corrigé le 17/10/2026 (revue R15 : 15 skills
+de Rin, Epsilon, Rey et Akari avaient des états fantômes, le S1 d'Akari était
+résolu sur l'animator de Drakhan) ; le moteur (`report.ts`) fait une cascade § 8.2 + § 8.3
 par clip — les events d'une AUTRE chaîne présents dans le clip comptent dans
 son facteur et consomment leur part, chaque chaîne n'affiche que ses hits.
 ⚠ L'extracteur ne garde que les `EventAttackStart` : le « facteur littéral » du jeu
@@ -552,6 +569,14 @@ un AoE.
 | 113 | DMG_TOWER_CONTENT       | `+Value` si `scene.DungeonTemplet.DungeonMode.IsTowerModes()`                                                  |
 
 Puis, en PvP temps réel : `+ CurrentMatchInfo.FieldSkillDmg`.
+
+Familles CASTER (107, 108) : les stats lues sont celles du **POSEUR**
+(`buff.Caster`). Posée par l'attaquant lui-même, la ligne lit ses stats ; posée
+par un ALLIÉ déclaré (mode allié de gear.ts, passifs de kit et équipement
+d'alliés), elle sort **non résolue, contribution 0** — les stats de l'allié ne
+sont pas saisies (revue R18, 15/10/2026 : `BID_ITEM_UO_WEAPON_22` suivait la
+DEF de l'attaquant, +2,7 % à 500 DEF, +27,5 % à 5 000). Porteurs :
+`BID_ITEM_UO_WEAPON_22`, `BID_CEQUIP_2000040` (Mero), `BID_FESTIVAL_UO_WEAPON_2`.
 
 Plafond par ID (164/165) : `cumul[ID] = min(cumul[ID] + GetBuffCount(·) × Value, LimitValue)`
 (dictionnaire local à l'appel), la contribution ajoutée est `cumul − ancien cumul` —
@@ -1023,7 +1048,28 @@ reverse heal, DoT § 11), appliqués via `CCharacterBattle.AddHP`. Listings :
   un `BT_STAT_BUFF_ENHANCE` (29 — pour un buff) ou `BT_STAT_DEBUFF_ENHANCE` (30 — pour
   un débuff), la valeur effective devient `InstanceValue = ApplyRate(Value, enhance.Value)`
   = `trunc(Value × (1000 + enhance) / 1000)`. Les autres familles de stat
-  (`BT_STAT_PREMIUM` 32, `_TOWER_CONTENT`…) ne sont PAS enhancées.
+  (`BT_STAT_PREMIUM` 32, `_TOWER_CONTENT`…) ne sont PAS enhancées. L'ENHANCE est
+  le PREMIER trouvé (`FindBuffByType`), jamais une somme ; `IsDebuff` =
+  `BuffDebuffType ≥ DEBUFF` (NEUTRAL compte comme buff). Un ENHANCE négatif
+  INVERSE : −3000 donne `−2 × Value`.
+  **Branché le 17/10/2026** (revue M4) : `applyStatEnhance` (aggregate.ts), appliqué
+  par `collectStatChannels` (stats de l'attaquant) et `applyTargetStatChannel`
+  (stats de la cible), sur les buffs du même porteur ; `ActiveBuff` porte le
+  `tooltipId` et la polarité (`debuff`) — lignes de kit, d'équipement et de boss
+  depuis buffs.json, chips de scénario depuis l'effet du glossaire qu'elles
+  affichent (`FX_CATALOG`). Sources, versées du côté de leur porteur : le kit de
+  l'attaquant (T8 de Bell Cranel, `trancendent_8_buff_enhance_up`, ME, +1000) ;
+  les passifs de boss sur `ME` (`4500153_4_1`/`_4_2`, `4500152_4_2`,
+  `4034003_4_2`/`_4_4`, `4076009_4_5`, `singularity_passive_ks_b_1`,
+  `4086032_4_2` à −3000) et sur `ENEMY_TEAM` (`4500347_4_2`, débuffs +1000 ;
+  `4086031_6_3` sous `OWNER_ELEMENT` → non résolu ; `4086032_6_3_1` n'est
+  atteint que par le `BT_GROUP` `4086032_6_3`, non déplié) ; le S3 de Demiurge
+  Saeran alliée (`2000129_3_3`, posé au lancement : case à cocher, z `ab`).
+  **Deux ENHANCE de même polarité sur un même porteur** : l'ordre de pose n'est
+  pas connu — les lignes sortent non résolues, contribution 0. Non branchés :
+  les ENHANCE posés au spawn d'un monstre (`common_monster_passive_33`, boss de
+  tour very hard, `event_monster_buff_193`) et les modificateurs de contenu
+  (`licence_week_*`, `irregular_25`).
 - BT 33 STAT_OWNER_LOST_HP_RATE : `InstanceValue = owner.GetLostHPRateValue(Value)`.
 - BT 34 …_HALF : `hpEff = clamp(2×HP − MaxHP, 0, MaxHP)` (calcul `long`) puis
   `InstanceValue = owner.GetLostHPRateValue(hpEff, Value)` — le bonus croît deux fois

@@ -7,6 +7,130 @@
 
 ## 2026-10-17
 
+- **C24 — Calculateur (1/2) : affinité par perso, renfort
+  `STAT_BUFF/DEBUFF_ENHANCE`, clips chez le porteur du skill, bonus CASTER
+  d'un allié, portée de `ENEMY_TEAM_DECREASE`.** Constats H1, M4 (revue
+  logique du site) et R15, R18, O12 (revue génération), revérifiés le 15/10 ;
+  les formules concordaient, les ENTRÉES étaient fausses. **H1 — affinité**
+  (décision Sevih 15/10 : le site seul, contrat solver intact) :
+  `datagen/damage/characters.ts` émet `trust: { level, buffId }[]` par perso
+  (`TrustRewardTemplet` → `TrustBuffTemplet`, un `RewardBuffID` non résolu
+  jette ; fusionné sans lignes → celles de l'origine par
+  `CharacterFusionTemplet`, comme `CTrustData.GetRewardTempletList`) : 126
+  persos, 60 PV, 57 ATK, 9 DEF, Snow 2000003 PV et 2700003 ATK, rien pour
+  2000095-2000097. `trustBuffs(niveau, perso, buffs, mode)` (`inputs.ts`) ne
+  verse que cette chaîne, lignes de `TrustLevel` ≤ NIVEAU saisi 0..100
+  (`AttackerBuildInput.affinityTier` devient `affinityLevel`, `scenario.ts`
+  sert `af` tel quel ; le palier « n/5 » reste un affichage), rien sous
+  `monad_battle_1` (un lien `?z=` peut en porter un), la Singularity garde la
+  chaîne, PvP en commentaire. Rejeu `A2/trust100.mts` : Rhona af 100, S1
+  contre Meteos, **2 814 → 2 458** (= le « jeu » du script) ; `A2/trust.mts`
+  : les 28 lignes site = jeu, inchangées. Spec `damage-report-inputs.md`
+  (§ 3.1 et § 3.2), en-tête et commentaire de `inputs.ts`, test
+  `inputs.test.ts` réécrits ; `damage-data.test.ts:496` (plats des buffs)
+  gardé. **Sevih — gear-solver, `docs/todo.md` : si l'affinité y est
+  appliquée un jour, il lui faut la chaîne par perso, que `trust-buffs.json`
+  ne porte pas.** **M4 — ENHANCE** : `applyStatEnhance` (`aggregate.ts`) —
+  un `BT_STAT` à `tooltipId` non nul prend `ApplyRate(valeur, enhance)` du
+  PREMIER ENHANCE de sa polarité chez son porteur (`CBuff`, l. 2016-2036 ;
+  `IsDebuff` = `BuffDebuffType` ≥ DEBUFF), jamais `BT_STAT_PREMIUM` ;
+  branché dans `collectStatChannels` (attaquant) et `applyTargetStatChannel`
+  (cible, `holder` = buffs de la cible). `ActiveBuff` porte `tooltipId` et
+  `debuff` (lignes de kit, d'équipement, de boss ; chips de `FX_CATALOG` par
+  l'effet du glossaire qu'elles affichent, aussi tooltip dominant de
+  buffs.json : atk 7, def 6, chd 12, pen 8, spd 15, eff 9, atk_down 18,
+  def_down 17, chd_down 23, pen_down 19, spd_down 26, eff_down 20, t_def 6,
+  t_def_down 17, t_res 10, t_res_down 21 — toutes sûres). Sources (script
+  jetable sur buffs.json) : T8 de Bell Cranel (kit, `ATTACKER_TYPES`) ;
+  passifs de boss sur `ME` côté défenseur (`4500153_4_1`/`_4_2`,
+  `4500152_4_2`, `4034003_4_2`/`_4_4`, `4076009_4_5`,
+  `singularity_passive_ks_b_1`, `4086032_4_2` à −3000 qui inverse) et sur
+  `ENEMY_TEAM` côté attaquant (`4500347_4_2` ; `4086031_6_3` sous
+  `OWNER_ELEMENT` → non résolu ; `4086032_6_3_1` n'est atteint que par le
+  `BT_GROUP` `4086032_6_3`, non déplié, donc pas branché) ; S3 de Demiurge
+  Saeran alliée (`2000129_3_3`, décision Sevih 15/10 : case à cocher dans
+  « buffs à stacks », même déclaration z `ab`). Deux ENHANCE de même
+  polarité sur un porteur (ex. Bell + Saeran cochée) : les lignes passent en
+  non résolu, contribution 0 (entrée de boss éteinte à son index, les chips
+  s'y joignent). Les chips de boss ENHANCE s'affichent sous le nom du
+  glossaire (« Buff Enhancement +100% », `index.tsx`). Témoins : Bell, chip
+  ATK 7 144 au lieu de 6 072 sans renfort ; Rhona S3 contre 40103013
+  (DEBUFF_ENHANCE +1000 : son DEF −50 % au lancement devient −100 %) 18 184
+  → 24 549. **R15 — clips** (décision Sevih 17/10, après ma question : la
+  règle littérale « hit absent des clips du porteur » vidait 46 skills) :
+  `resolveSkillClips` prend le `ModelID` du porteur (`CharacterTemplet`, égal
+  à l'ID pour les 129) ; un hit préfixé d'un AUTRE perso ET absent des clips
+  du porteur sort du skill (`carrierTemplets`, `clips.ts`) ; un skill à hits
+  porté par des animators différents ou vidé jetterait (aucun). 29 skills
+  touchés : Rin 2000019 — 1901 (2700019_Skill_1_1..4), 1902
+  (2700019_Skill_2_1/2), 1903 (2700019_Skill_3_1..6), 1905 et 1909
+  (2700019_Skill_4_1..4), 1906 et 1910 (2700019_Skill_5_1/2), 1919 et 1920
+  (2700019_Skill_2_1_Upgrade, 2700019_Skill_2_2_Upgrade), 1921
+  (2700019_Skill_6_1/2) ; Akari 2000064 — 6401 (2000062_Skill_1_5, et ses
+  clips passent de `2000062_Skill_1` à `2000064_Skill_1`) ; Epsilon 2000070
+  — 7001 (2700070_Skill_1_1..3), 7002 (2700070_Skill_2_1..3), 7003
+  (2700070_Skill_3_1..4), 7005 et 7006 (2700070_Skill_5_1/2), 7019 et 7020
+  (2000071_Skill_Burst1_1/2, 2700070_Skill_2_1..3), 7021
+  (2700070_Skill_Burst3_1/2) ; Rey 2000087 — 8703 (2000088_Skill_3_1..3),
+  8705 et 8706 (2000088_Skill_5_1/2), 8721 (2000088_Skill_7_1/2) ; Ember
+  2000106 — 10609 et 10610 (2000116_Skill_5_1..3) ; Luna 2000119 — 11905,
+  11906, 11909, 11910 (2000120_Skill_5_1). Rejeu `degats/phantom.mts` : S1
+  d'Akari **1 126 → 3 750** (un seul état), plus aucun état fantôme ;
+  `foreign_chains.py` : 15 skills → 0. Meilleure compétence du contrat
+  solver (`bestSkillOf`, script jetable sur les nouvelles données) :
+  **inchangée pour tous** (Rin S1 2000, Akari S1 1500, Epsilon S2b3 1582,
+  Rey S2b3 2965 — l'état fantôme n'était jamais le plus fort) : C25 ne
+  verra pas bouger `bestSkill`, et `solver/` n'est pas touché ici.
+  **Trou d'extraction, à part** (ligne ajoutée au TODO) : 46 skills dont
+  aucun hit n'est joué par un clip extrait de `anim-events.json` — Lisha
+  2000005 : 502, 505, 506, 519, 520 ; Lily 2000011 : 1101, 1106 ; Laine
+  2000029 : 2901 ; Cindy 2000031 : 3101 ; Ame 2000065 : 6502, 6503 ;
+  2700003 : 352 ; 2700005 : 551, 552, 553, 555, 569, 570, 571 ; 2700035 :
+  3551, 3552, 3555, 3556, 3559, 3560, 3569, 3570, 3571 ; 2700037 : 3751,
+  3753, 3755, 3756, 3757, 3759, 3760, 3769, 3770 ; 2700043 : 4351, 4352,
+  4355, 4356, 4359, 4360, 4369, 4370, 4371 (dans ma question je disais
+  « Snow 502-520 » : c'est Lisha). **R18 — familles CASTER** (décision Sevih
+  15/10) : en mode allié (`gear.ts`, kit et équipement d'alliés),
+  `BT_DMG_CASTER_STAT` et `BT_DMG_CASTER_LOST_HP_RATE` partent en non résolu
+  « stats du poseur allié non saisies — contribution 0 » ; portées par
+  l'attaquant, elles restent des entrées. Rejeu `degats/caster.mts`
+  (Francesca + allié à `BID_ITEM_UO_WEAPON_22`) : à 500 DEF **4 621 →
+  4 500**, à 5 000 DEF **5 737 → 4 500** (= sans allié). **O12** :
+  `ReportSkillInput.rangeAll` (`report.ts`) — le bonus n'est ajouté qu'aux
+  skills `ALL` ; `decreaseTargetCount` (4 − cibles) et les trois branches
+  normal/critique/manqué vérifiés conformes au client, non réécrits ; aucun
+  chiffre ne bouge. **Données** : `pnpm damage:build --skip-anim`, seul
+  `damage/characters.json` diffère (champ `trust` et les 29 skills),
+  `resVersion` 1.11.408 inchangé (le lot disait 1.11.407 : le patch du 16/10
+  l'avait déjà monté). **Spec** `damage-formula.md` § 7, § 8.1, § 9.1,
+  § 14.1 ; en-têtes de `clips.ts` et `characters.ts`. **Vérifié** :
+  `pnpm typecheck` (`$ tsc --noEmit && tsc --noEmit -p datagen/tsconfig.json
+&& tsc --noEmit -p scripts/tsconfig.json`, sans erreur), `pnpm lint`
+  (`$ eslint`, sans erreur), `pnpm test` `Tests 4155 passed (4155)`,
+  `pnpm damage:check` 42 lignes exactes, 0 en dérive ; `fixtures.test.ts`
+  passe sans toucher une fixture. Tests en relation (T5) : chaîne
+  d'affinité (Rhona PV seuls, 2000003 PV / 2700003 ATK, perso sans ligne,
+  niveau 59 = deux lignes, `monad_battle_1` rien, `monad_battle_2` la
+  chaîne), ENHANCE (2 × 300 ‰ sous le T8, `t_def_down` 2 × −500 ‰ contre
+  `4500153_4_2`, −3000 inverse, PREMIUM jamais, premier trouvé, deux ENHANCE
+  non résolus, Saeran cochée double), R15 (tout clip vient de l'animator du
+  porteur, plus d'état fantôme, les 15 skills), R18 (allié non résolu et
+  indépendant de la DEF de l'attaquant, porteur = entrée), O12 (SINGLE ne
+  reçoit rien). Les copies de `phantom.mts` et `caster.mts` passaient
+  `affinityTier: 0` : adaptées en `affinityLevel: 0` (sinon toute la chaîne
+  s'appliquait). Changement visuel : montants dépendant de l'affinité
+  (chaînes PV et DEF), des ENHANCE et des 29 skills, lignes « non résolu »
+  ajoutées, chips ENHANCE des boss, case du S3 de Saeran alliée. **Laissé**
+  (hors périmètre) : `BT_STACK_STAT`, `BT_STAT_TOWER_CONTENT`, les ENHANCE
+  posés au spawn (`common_monster_passive_33`,
+  `tower_very_hard_boss_2000020_4_3`, `event_monster_buff_193`) et les
+  modificateurs de contenu (`licence_week_65`/`66`, `irregular_25`), le
+  `BT_GROUP` `4086032_6_3`, les buffs de portée `BT_SKILL_RANGE_*` ; et un
+  constat : les chips de CIBLE `t_def`, `t_def_down`, `t_res`, `t_res_down`
+  n'atteignent aucune stat (elles vont dans `defenderBuffs`, que le rapport
+  ne lit que pour ses familles § 9.2/9.3 ; `TARGET_STAT_MAP` n'a pas de
+  RES) — cocher « DEF de la cible −50 % » ne change rien au calcul
+  aujourd'hui, à trancher dans un lot à part.
 - **Relecture B51 et C23 (Opus) — immunités et formes de combat des persos,
   points de cadeau lus des tables ; Custom Recruit au simulateur ; validés.**
   Contrôles (les deux lots dans l'arbre) : typecheck, lint et

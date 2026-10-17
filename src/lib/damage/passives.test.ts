@@ -57,7 +57,7 @@ const EARTH = '2000008';
 const attacker = (id: string): AttackerBuildInput => ({
   id,
   level: 120,
-  affinityTier: 0,
+  affinityLevel: 0,
   codexLevel: 0,
   skillLevels: {},
   sheet: { atk: 10000, critical_rate: 500, critical_dmg: 1500 },

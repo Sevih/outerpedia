@@ -1,7 +1,8 @@
 /**
  * AMONT du moteur — AGRÉGATION des buffs actifs vers les canaux des formules.
  * Réf : docs/specs/damage-formula.md § 9 (familles exactes du binaire),
- * § 14.1 (valeur effective = Value × stacks), § 10.1 (swap d'attaque).
+ * § 14.1 (valeur effective = Value × stacks, renfort STAT_BUFF/DEBUFF_ENHANCE),
+ * § 10.1 (swap d'attaque).
  *
  * Entrée : les buffs ACTIFS du scénario sous leur forme brute (mêmes champs
  * que `data/generated/damage/buffs.json` — enums `BT_*`/`ST_*`/`OAT_*` non
@@ -16,7 +17,7 @@
  * propose que des buffs actifs, donc disponibles.
  */
 
-import { getLostHPRateValue, getStatValuePermille } from './formula';
+import { applyRate, getLostHPRateValue, getStatValuePermille } from './formula';
 import { PUNISH_DMG_REDUCE_VALUE_PERMILLE } from './types';
 
 /** Un buff ACTIF du scénario (forme brute de `buffs.json` + stacks courants). */
@@ -41,6 +42,48 @@ export interface ActiveBuff {
   /** `LimitValue` — plafond du cumul par `BuffID` des familles `*_LIMIT`
    *  (absent = 0 : le jeu plafonne alors à 0). */
   limitValue?: number;
+  /** `ToolTipID` de la ligne (buff VISIBLE) — un `BT_STAT` n'est renforcé
+   *  par STAT_BUFF/DEBUFF_ENHANCE que s'il en porte un non nul (§ 14.1). */
+  tooltipId?: number;
+  /** `IsDebuff` du templet (`BuffDebuffType` ≥ DEBUFF) — choisit l'ENHANCE
+   *  qui le renforce : DEBUFF_ENHANCE pour un débuff, BUFF_ENHANCE sinon. */
+  debuff?: boolean;
+}
+
+/** `CBuffTemplet.IsDebuff` : `BuffDebuffType` ≥ DEBUFF (DEBUFF, DEBUFF_IGNORE_IMMUNE,
+ *  _RESIST, _ALL) — NEUTRAL, NEUTRAL2 et BUFF comptent comme buffs. */
+export function isDebuffType(buffDebuffType: string | undefined): boolean {
+  return buffDebuffType !== undefined && buffDebuffType.startsWith('DEBUFF');
+}
+
+/** Les deux familles qui RENFORCENT les `BT_STAT` visibles de leur porteur
+ *  (BT 29/30, § 14.1). */
+export const STAT_ENHANCE_TYPES: ReadonlySet<string> = new Set([
+  'BT_STAT_BUFF_ENHANCE',
+  'BT_STAT_DEBUFF_ENHANCE',
+]);
+
+/**
+ * § 14.1 — un `BT_STAT` à `ToolTipID` non nul prend, à sa pose,
+ * `ApplyRate(Value, enhance.Value)` si son PORTEUR a un
+ * `BT_STAT_BUFF_ENHANCE` (buff) ou un `BT_STAT_DEBUFF_ENHANCE` (débuff) — le
+ * PREMIER trouvé (`CBuff`, `FindBuffByType`), jamais une somme. Ni
+ * `BT_STAT_PREMIUM`, ni les autres familles. `holder` = tous les buffs du
+ * porteur (les ENHANCE y sont cherchés) ; deux ENHANCE de même polarité ont
+ * été écartés en amont (ordre de pose inconnu — inputs.ts). Un buff renforcé
+ * sort neuf avec `stacks: 1` (la valeur porte déjà Value × stacks) ; les
+ * autres gardent leur identité.
+ */
+export function applyStatEnhance(buffs: ActiveBuff[], holder: ActiveBuff[]): ActiveBuff[] {
+  const buffEnh = holder.find((b) => b.type === 'BT_STAT_BUFF_ENHANCE');
+  const debuffEnh = holder.find((b) => b.type === 'BT_STAT_DEBUFF_ENHANCE');
+  if (!buffEnh && !debuffEnh) return buffs;
+  return buffs.map((b) => {
+    if (b.type !== 'BT_STAT' || !b.tooltipId) return b;
+    const enh = b.debuff ? debuffEnh : buffEnh;
+    if (!enh) return b;
+    return { ...b, value: applyRate(effectiveValue(b), effectiveValue(enh)), stacks: 1 };
+  });
 }
 
 /** Familles § 9.1 au cumul PLAFONNÉ par `BuffID` (164/165, 1.4.15). */
@@ -70,13 +113,14 @@ export interface StatChannelContext {
 
 /** Buffs `BT_STAT` (+ familles « PV perdus » § 14 : BT 33 OWNER_LOST_HP_RATE,
  *  BT 34 `_HALF` — `InstanceValue = GetLostHPRateValue`) → canaux plat/taux
- *  PAR stat (`ST_*`). */
+ *  PAR stat (`ST_*`). `buffs` = TOUS les buffs du porteur : ses ENHANCE
+ *  renforcent ses BT_STAT visibles (§ 14.1, `applyStatEnhance`). */
 export function collectStatChannels(
   buffs: ActiveBuff[],
   ctx?: StatChannelContext,
 ): Record<string, StatChannel> {
   const channels: Record<string, StatChannel> = {};
-  for (const b of buffs) {
+  for (const b of applyStatEnhance(buffs, buffs)) {
     if (!b.stat) continue;
     let v: number;
     // BT_STAT_PREMIUM n'arrive ici QUE posé par un ALLIÉ (resolveAllyPassives) :

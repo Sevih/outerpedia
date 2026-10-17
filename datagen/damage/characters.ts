@@ -19,12 +19,24 @@
  * (`<charId>_Skill_<n>[_<variante>]_<hit>`) : c'est une indication, l'ID brut
  * fait foi et reste porté par chaque ligne.
  *
+ * Cette jointure rattache aussi des templets d'AUTRES persos (le fusionné,
+ * un partenaire de skill commun) : un hit préfixé d'un autre perso que le
+ * porteur ET absent des clips de son animator sort des états du skill
+ * (clips.ts, `carrierTemplets` — décision Sevih 17/10/2026 : un clip sans
+ * event extrait ne prouve rien, il ne vide aucun skill).
+ *
+ * Affinité (`trust`) : la chaîne PROPRE au perso, comme le client
+ * (`CDungeonScene.CreateTrustBuff`) — lignes `TrustRewardTemplet` du perso,
+ * `RewardBuffID` résolu par `TrustBuffTemplet` ; un fusionné (`27xxxxx`)
+ * prend les siennes, celles de son origine (`CharacterFusionTemplet`) s'il
+ * n'en a pas. Une chaîne par perso au 15/10/2026 : PV, ATK OU DEF.
+ *
  * GARDE DE SORTIE : seuls les persos du roster validé sont émis — cf.
  * `roster.ts` (commun aux extracteurs damage).
  */
 import { burstAPCosts } from '../lib/burst';
 import { groupBy, indexBy, loadTable, num, bool, splitCsv, type Row } from '../lib/tables';
-import { buildClipIndex, resolveSkillClips, type DamageSkillClip } from './clips';
+import { buildClipIndex, carrierTemplets, resolveSkillClips, type DamageSkillClip } from './clips';
 import { integratedIds } from './roster';
 
 /** Paire Min/Max d'une stat du templet (colonnes brutes, niveau 1 → max). */
@@ -102,6 +114,14 @@ export interface DamageSkill {
   clipsUnresolvedChains?: string[];
 }
 
+/** Une ligne d'affinité : buff posé au combat dès `level` (0..100) atteint. */
+export interface DamageTrustLine {
+  /** `TrustLevel` de la ligne `TrustRewardTemplet` (20/40/60/80/100). */
+  level: number;
+  /** `BuffID` de `BuffTemplet` (via `TrustBuffTemplet`) — ligne de niveau 1. */
+  buffId: string;
+}
+
 /** Un personnage jouable (`Type == CT_PC`). */
 export interface DamageCharacter {
   id: string;
@@ -115,6 +135,8 @@ export interface DamageCharacter {
   evolution: DamageEvolutionLine[];
   /** Slot templet (`Skill_<n>`) → ID de skill. */
   skills: { slot: number; id: string }[];
+  /** Chaîne d'affinité du perso (cf. l'en-tête) — absente : aucune ligne. */
+  trust?: DamageTrustLine[];
 }
 
 export interface DamageCharactersData {
@@ -200,6 +222,52 @@ export function buildDamageCharacters(): DamageCharactersData {
   }
 
   const clipIndex = buildClipIndex();
+  // Tri ORDINAL (pas localeCompare) : la sortie est canonique et committée —
+  // elle ne doit pas dépendre de la locale de la machine qui la régénère.
+  const ord = (x: string, y: string): number => (x < y ? -1 : x > y ? 1 : 0);
+
+  // Affinité : `TrustBuffTemplet` (ID → BuffID), lignes par perso, origine
+  // des fusionnés (cf. l'en-tête).
+  const trustBuffId = new Map(loadTable('TrustBuffTemplet').map((t) => [t.ID, t.BuffID ?? '']));
+  const trustRowsBy = groupBy(loadTable('TrustRewardTemplet'), 'CharacterID');
+  const fusionOrigin = new Map(
+    loadTable('CharacterFusionTemplet').map((f) => [f.ChangeCharID, f.CharacterID]),
+  );
+  const trustLinesOf = (charId: string): DamageTrustLine[] => {
+    const lines: DamageTrustLine[] = [];
+    for (const r of trustRowsBy.get(charId) ?? []) {
+      for (const rid of splitCsv(r.RewardBuffID)) {
+        if (rid === '0') continue;
+        const buffId = trustBuffId.get(rid);
+        if (!buffId) {
+          throw new Error(
+            `damage/characters: RewardBuffID ${rid} (TrustRewardTemplet ${r.ID}, perso ${charId}) absent de TrustBuffTemplet`,
+          );
+        }
+        lines.push({ level: num(r.TrustLevel), buffId });
+      }
+    }
+    return lines.sort((a, b) => a.level - b.level || ord(a.buffId, b.buffId));
+  };
+
+  // PORTEUR de chaque skill (id + `ModelID`, cf. clips.ts) : un skill à hits
+  // porté par des persos d'animators différents n'a pas d'animator unique —
+  // la donnée le dira, jamais un choix silencieux.
+  const carrierBySkill = new Map<string, { id: string; model: string }>();
+  for (const c of templet) {
+    for (let slot = 1; slot <= MAX_SKILL_SLOTS; slot++) {
+      const sid = c[`Skill_${slot}`];
+      if (!sid || sid === '0') continue;
+      const model = c.ModelID || c.ID;
+      const prev = carrierBySkill.get(sid);
+      if (prev === undefined) carrierBySkill.set(sid, { id: c.ID, model });
+      else if (prev.model !== model && hitsBySkill.has(sid)) {
+        throw new Error(
+          `damage/characters: skill ${sid} porté par des animators différents (${prev.model}, ${model})`,
+        );
+      }
+    }
+  }
 
   const buildSkill = (id: string): DamageSkill => {
     const s = skillTemplet.get(id);
@@ -213,12 +281,19 @@ export function buildDamageCharacters(): DamageCharactersData {
         startCool: num(l.StartCool),
       }))
       .sort((a, b) => a.level - b.level);
-    // Tri ORDINAL (pas localeCompare) : la sortie est canonique et committée —
-    // elle ne doit pas dépendre de la locale de la machine qui la régénère.
-    const ord = (x: string, y: string): number => (x < y ? -1 : x > y ? 1 : 0);
-    const hits = (hitsBySkill.get(id) ?? [])
-      .slice()
+    const carrier = carrierBySkill.get(id) ?? { id: '', model: '' };
+    const joined = hitsBySkill.get(id) ?? [];
+    // Templets d'un AUTRE perso que l'animator du porteur ne joue pas : servis
+    // par la jointure SkillID seulement (cf. l'en-tête) — hors des états.
+    const played = carrierTemplets(clipIndex, carrier.model);
+    const hits = joined
+      .filter((h) => h.chain.split('_')[0] === carrier.id || played.has(h.id))
       .sort((a, b) => ord(a.chain, b.chain) || a.hit - b.hit || ord(a.id, b.id));
+    if (joined.length && !hits.length) {
+      throw new Error(
+        `damage/characters: skill ${id} — aucun de ses hits n'est joué par l'animator ${carrier.model}`,
+      );
+    }
     const offensive = levels.some((l) => l.damageFactor > 0);
     // Burstable : règle PARTAGÉE avec le générateur skills (datagen/lib/burst)
     // — les deux artefacts doivent porter le même marqueur (garde croisée).
@@ -233,7 +308,7 @@ export function buildDamageCharacters(): DamageCharactersData {
       ...(burstCosts ? { burstAP: burstCosts } : {}),
       hits,
       ...(offensive && !hits.length ? { hitsUnresolved: true } : {}),
-      ...resolveSkillClips(clipIndex, s?.TriggerName, s?.TriggerNameSkip, hits),
+      ...resolveSkillClips(clipIndex, carrier.model, s?.TriggerName, s?.TriggerNameSkip, hits),
     };
   };
 
@@ -266,6 +341,12 @@ export function buildDamageCharacters(): DamageCharactersData {
       if (!skills[sid]) skills[sid] = buildSkill(sid);
     }
 
+    // Fusionné sans lignes propres : celles de son origine (client :
+    // `CTrustData.GetRewardTempletList(_bFusion)`).
+    let trust = trustLinesOf(c.ID);
+    const origin = fusionOrigin.get(c.ID);
+    if (!trust.length && origin !== undefined) trust = trustLinesOf(origin);
+
     characters[c.ID] = {
       id: c.ID,
       element: c.Element ?? '',
@@ -276,6 +357,7 @@ export function buildDamageCharacters(): DamageCharactersData {
       baseStats,
       evolution,
       skills: charSkills,
+      ...(trust.length ? { trust } : {}),
     };
   }
 
