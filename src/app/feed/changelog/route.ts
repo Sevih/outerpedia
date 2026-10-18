@@ -34,14 +34,14 @@ export async function GET() {
   const entries = getChangelog(DEFAULT_LANG, { limit: LIMIT });
 
   const items = entries
-    .map((e, i) => {
+    .map((e) => {
       const href = changelogHref(e.link);
       const link = href ? buildUrl(DEFAULT_LANG, href) : page;
       return [
         '    <item>',
         `      <title>${esc(e.title)}</title>`,
         `      <link>${esc(link)}</link>`,
-        `      <guid isPermaLink="false">changelog-${e.date}-${i}</guid>`,
+        `      <guid isPermaLink="false">changelog-${e.id}</guid>`,
         `      <category>${esc(e.type)}</category>`,
         `      <description>${esc(describe(e.content))}</description>`,
         `      <pubDate>${rfc822(e.date)}</pubDate>`,

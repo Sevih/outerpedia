@@ -7,6 +7,62 @@
 
 ## 2026-10-18
 
+- **Journal du site : `guid` du flux RSS sur l'id stable, liens markdown
+  bruts retirés des puces (A65).** Le `guid` des items de `/feed/changelog`
+  valait `changelog-<date>-<rang>`, le rang dans les 30 dernières entrées :
+  chaque entrée nouvelle renumérotait toutes les autres et un lecteur revoyait
+  le flux entier. Il passe sur l'id stable posé par B54
+  (`src/app/feed/changelog/route.ts`, `changelog-${e.id}`, l'index du `map`
+  retiré ; rien d'autre ne bouge dans le flux) — décision du 15/10,
+  l'historique remonte une fois chez les lecteurs, le bot n'est pas touché
+  (`newsKey` lit déjà l'id). Côté données, 7 entrées (du 13/04 au 09/08/2025)
+  affichaient 10 liens `[texte](url)` par langue, crochets et URL compris :
+  `bulletSegments` ne rend que le gras, et ces cartes n'étaient pas des liens
+  (des `<article>` inertes, la note du TODO le disait à tort). Décision du
+  18/10 : le lien intérieur sort, le texte reste ; les trois entrées qui ne
+  citaient qu'une cible interne reçoivent un `link` et toute leur carte
+  devient ce lien — `84601da9` → guide `/guides/other/service-transfer`,
+  `4a036ba3` → page `/coupons` (même `kind` que `/ost`, `/wallpapers`…),
+  `a1fbaff6` → guide `/guides/adventure` (une page de catégorie, comme le
+  `/guides/skyward-tower` de `3fe47cd5`) ; les trois cibles répondent 200 sur
+  le dev ; les quatre autres (`ebf64632`, `9e7c961f`, `af3218bb`, `47289e51`,
+  l'invitation Discord) gardent le texte seul. Les 18 `<strong>` bruts de
+  `84601da9` (trois par langue) passent en `**…**`, gardés tels quels jusqu'à
+  l'espace intérieure de `kr` et `fr`. Réécriture par un script jetable hors
+  du dépôt, `data/curated/changelog.json` relu puis récrit par `writeJson`
+  (format de `saveChangelog`). Garde : `src/lib/admin/changelog-store.test.ts`,
+  à côté du test du fichier réel, refuse un `[…](…)` dans un titre ou une puce
+  de n'importe quelle langue et nomme l'id, la langue et le champ ; rouge sur
+  le fichier d'avant (rejoué en remettant l'ancien JSON, non commité), verte
+  sur le nouveau. Flux : `src/app/feed/changelog/route.test.ts` appelle
+  `GET()` avec `getChangelog` bouchonné — le `guid` est `changelog-<id>`, et
+  une entrée plus récente en tête ne change pas celui des autres (rouge sur
+  l'ancienne route, vert sur la nouvelle). Comparaison du JSON parsé avant et
+  après par un script jetable : hors des sept ids rien ne bouge, ni id, ni
+  date, ni titre, ni ordre des clés ; 66 puces diffèrent, chacune exactement
+  par le retrait de `[` et `](url)` (60 liens) ou par `<strong>` → `**` (18,
+  sur 6 puces de `84601da9`), et trois `link` s'ajoutent après `content`.
+  `git diff --stat data/curated/changelog.json` : `147 ++++----`, 75
+  insertions et 72 suppressions, pas 60 et 60 comme le lot l'annonçait : aux
+  60 lignes de lien s'ajoutent les 6 puces du gras, les 12 lignes des trois
+  `link` (et le `}` de `content` qui prend sa virgule), et `writeJson` replie
+  sur une ligne les tableaux `en`, `kr` et `zh` de `af3218bb`, devenus assez
+  courts pour tenir dans les 100 colonnes (prettier le ferait au premier
+  enregistrement de quick ; `prettier --check` vert). À l'écran : `/changelog`
+  du dev ne contient plus aucun `](/`, « Explore now: Adventure Guides » sans
+  crochets, le gras de `84601da9` en `<strong>`, la carte de `a1fbaff6` en lien
+  ; le flux sert des `changelog-<id>`. `docs/TODO.md` : la phrase du `guid`
+  sort des suites du 15/10, le point (b) des « À juger » du lot B37 aussi.
+  `pnpm typecheck` (`tsc --noEmit && … -p scripts/tsconfig.json`, sans
+  erreur), `pnpm lint` (`eslint`, sans sortie), `pnpm test` `Tests 4203
+passed (4203)`, `NODE_ENV=development pnpm exec vitest run scripts/quick`
+  `Tests 1148 passed (1148)`. Laissé : le motif du gras recopié dans
+  `describe` de la route (point (c) de B37) ; refuser un lien à la saisie
+  dans l'éditeur de quick ; et le commentaire d'en-tête de
+  `src/lib/changelog-bullets.ts`, qui dit encore « la carte entière est déjà
+  un lien » pour justifier qu'un `[texte](url)` reste du texte — inexact pour
+  une entrée sans `link`, hors périmètre.
+
 - **Relecture A62, B59, A64, G8, OB3, TW2 (Opus) ; validés.** Contrôles
   outerpedia sur l'arbre des trois lots : typecheck, lint et `format:check`
   verts, `NODE_ENV=development pnpm test` `Tests 4200 passed (4200)`,

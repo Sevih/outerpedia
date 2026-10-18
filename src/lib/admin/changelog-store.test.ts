@@ -172,4 +172,20 @@ describe('saveChangelog — id stable des entrées', () => {
     for (const id of ids) expect(id).toMatch(CHANGELOG_ID_RE);
     expect(new Set(ids).size).toBe(ids.length);
   });
+
+  it('le fichier réel : aucun lien markdown `[…](…)` dans un titre ni une puce', () => {
+    // La carte ne rend que le gras (`bulletSegments`) : un lien s'y affichait
+    // brut, crochets et URL compris (A65). Le lien d'une entrée est son `link`.
+    const path = resolve(import.meta.dirname, '../../../data/curated/changelog.json');
+    const entries = JSON.parse(readFileSync(path, 'utf8')) as ChangelogEntry[];
+    const LINK = /\[[^\]]*\]\([^)]*\)/;
+    const found: string[] = [];
+    for (const e of entries) {
+      for (const [lang, title] of Object.entries(e.title))
+        if (LINK.test(title ?? '')) found.push(`${e.id} (${lang}, titre)`);
+      for (const [lang, lines] of Object.entries(e.content ?? {}))
+        if (lines?.some((l) => LINK.test(l))) found.push(`${e.id} (${lang}, puces)`);
+    }
+    expect(found).toEqual([]);
+  });
 });

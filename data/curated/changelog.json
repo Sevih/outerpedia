@@ -3107,35 +3107,39 @@
     },
     "content": {
       "en": [
-        "📢 <strong>Service Transfer Incoming:</strong> OUTERPLANE will transfer to <strong>VAGAMES</strong> on <strong>September 23, 2025</strong>.",
+        "📢 **Service Transfer Incoming:** OUTERPLANE will transfer to **VAGAMES** on **September 23, 2025**.",
         "Make sure to complete the transfer process to keep your account and data.",
-        "[View Transfer Procedure](/guides/other/service-transfer)"
+        "View Transfer Procedure"
       ],
       "jp": [
-        "📢 <strong>サービス移管のお知らせ：</strong> OUTERPLANEは、<strong>2025年9月23日</strong>に<strong>VAGAMES</strong>へ移管されます。",
+        "📢 **サービス移管のお知らせ：** OUTERPLANEは、**2025年9月23日**に**VAGAMES**へ移管されます。",
         "アカウントとデータを維持するためには、必ず移行手続きを完了させてください。",
-        "[移転手続きを見る](/guides/other/service-transfer)"
+        "移転手続きを見る"
       ],
       "kr": [
-        "📢 <strong>서비스 이전 안내: </strong> OUTERPLANE은 <strong>2025년 9월 23일</strong>에 <strong>VAGAMES</strong>로 이전됩니다.",
+        "📢 **서비스 이전 안내: ** OUTERPLANE은 **2025년 9월 23일**에 **VAGAMES**로 이전됩니다.",
         "계정과 데이터를 유지하려면 반드시 이전 절차를 완료해 주세요.",
-        "[이전 절차 보기](/guides/other/service-transfer)"
+        "이전 절차 보기"
       ],
       "zh": [
-        "📢 <strong>服务转移通知：</strong> OUTERPLANE 将于 <strong>2025年9月23日</strong> 转移至 <strong>VAGAMES</strong>。",
+        "📢 **服务转移通知：** OUTERPLANE 将于 **2025年9月23日** 转移至 **VAGAMES**。",
         "请务必完成转移流程，以确保您的账户和数据得以保留。",
-        "[查看转移流程](/guides/other/service-transfer)"
+        "查看转移流程"
       ],
       "fr": [
-        "📢 <strong>Transfert de service à venir : </strong> OUTERPLANE sera transféré vers <strong>VAGAMES</strong> le <strong>23 septembre 2025</strong>.",
+        "📢 **Transfert de service à venir : ** OUTERPLANE sera transféré vers **VAGAMES** le **23 septembre 2025**.",
         "Veillez à mener à bien la procédure de transfert afin de conserver votre compte et vos données.",
-        "[Consulter la procédure de transfert](/guides/other/service-transfer)"
+        "Consulter la procédure de transfert"
       ],
       "es": [
-        "📢 <strong>Transferencia de servicio próxima:</strong> OUTERPLANE se transferirá a <strong>VAGAMES</strong> el <strong>23 de septiembre de 2025</strong>.",
+        "📢 **Transferencia de servicio próxima:** OUTERPLANE se transferirá a **VAGAMES** el **23 de septiembre de 2025**.",
         "Asegúrate de completar el proceso de transferencia para conservar tu cuenta y tus datos.",
-        "[Ver Procedimiento de Transferencia](/guides/other/service-transfer)"
+        "Ver Procedimiento de Transferencia"
       ]
+    },
+    "link": {
+      "kind": "guide",
+      "href": "/guides/other/service-transfer"
     }
   },
   {
@@ -3514,33 +3518,37 @@
       "en": [
         "-Character pages now display base stats",
         "-Gift preferences are now shown on character pages and can be used as a filter in the character list",
-        "-Promo codes are now visible on the homepage (only valid ones) and fully listed on the [/coupons](/coupons) page"
+        "-Promo codes are now visible on the homepage (only valid ones) and fully listed on the /coupons page"
       ],
       "jp": [
         "-キャラクターページに基本ステータスが表示されるようになりました",
         "-キャラクターページに「プレゼントの希望」が表示されるようになり、キャラクター一覧ではこれをフィルタとして利用できるようになりました",
-        "- プロモーションコードがホームページに表示されるようになりました（有効なもののみ）。また、[/coupons](/coupons)ページにはすべてのコードが一覧表示されています。"
+        "- プロモーションコードがホームページに表示されるようになりました（有効なもののみ）。また、/couponsページにはすべてのコードが一覧表示されています。"
       ],
       "kr": [
         "-캐릭터 페이지에 이제 기본 능력치가 표시됩니다",
         "-이제 캐릭터 페이지에 선물 선호도가 표시되며, 캐릭터 목록에서 필터로 사용할 수 있습니다.",
-        "-프로모션 코드가 이제 홈페이지에 표시되며(유효한 코드만), [/coupons](/coupons) 페이지에 전체 목록이 게재되어 있습니다."
+        "-프로모션 코드가 이제 홈페이지에 표시되며(유효한 코드만), /coupons 페이지에 전체 목록이 게재되어 있습니다."
       ],
       "zh": [
         "-角色页面现可显示基础属性",
         "-角色页面现已显示礼物偏好，且可在角色列表中将其用作筛选条件",
-        "- 优惠码现已在首页显示（仅显示有效的优惠码），并在 [/coupons](/coupons) 页面上完整列出"
+        "- 优惠码现已在首页显示（仅显示有效的优惠码），并在 /coupons 页面上完整列出"
       ],
       "fr": [
         "- Les fiches de personnages affichent désormais les statistiques de base",
         "- Les préférences en matière de cadeaux apparaissent désormais sur les fiches des personnages et peuvent servir de filtre dans la liste des personnages",
-        "- Les codes promotionnels sont désormais visibles sur la page d'accueil (uniquement ceux qui sont valides) et répertoriés dans leur intégralité sur la page [/coupons](/coupons)"
+        "- Les codes promotionnels sont désormais visibles sur la page d'accueil (uniquement ceux qui sont valides) et répertoriés dans leur intégralité sur la page /coupons"
       ],
       "es": [
         "-Las páginas de personaje ahora muestran las estadísticas base",
         "-Las preferencias de regalo ahora se muestran en las páginas de personaje y se pueden usar como filtro en la lista de personajes",
-        "-Los códigos promocionales ahora son visibles en la página de inicio (solo los válidos) y están listados completamente en la página [/coupons](/coupons)"
+        "-Los códigos promocionales ahora son visibles en la página de inicio (solo los válidos) y están listados completamente en la página /coupons"
       ]
+    },
+    "link": {
+      "kind": "page",
+      "href": "/coupons"
     }
   },
   {
@@ -3557,28 +3565,28 @@
     },
     "content": {
       "en": [
-        "[Statistics & Combat Basics](/guides/general-guides/stats) : Fundamental systems, mechanics, and beginner-friendly guides that apply to the entire game.",
-        "[Promotion Monad Eva](/guides/adventure-license/promote-meva) : Boss strategy guide."
+        "Statistics & Combat Basics : Fundamental systems, mechanics, and beginner-friendly guides that apply to the entire game.",
+        "Promotion Monad Eva : Boss strategy guide."
       ],
       "jp": [
-        "[ステータスと戦闘の基本](/guides/general-guides/stats) ：ゲーム全体に共通する基本的なシステムや仕組み、初心者向けのガイドを掲載しています。",
-        "[プロモーション・モナド・エヴァ](/guides/adventure-license/promote-meva) ：ボス攻略ガイド。"
+        "ステータスと戦闘の基本 ：ゲーム全体に共通する基本的なシステムや仕組み、初心者向けのガイドを掲載しています。",
+        "プロモーション・モナド・エヴァ ：ボス攻略ガイド。"
       ],
       "kr": [
-        "[통계 및 전투 기초](/guides/general-guides/stats) : 게임 전반에 적용되는 기본 시스템, 메커니즘 및 초보자를 위한 가이드.",
-        "[모나드 에바 승급](/guides/adventure-license/promote-meva) : 보스 공략 가이드."
+        "통계 및 전투 기초 : 게임 전반에 적용되는 기본 시스템, 메커니즘 및 초보자를 위한 가이드.",
+        "모나드 에바 승급 : 보스 공략 가이드."
       ],
       "zh": [
-        "[属性与战斗基础](/guides/general-guides/stats)：适用于整个游戏的基础系统、机制以及面向新手的指南。",
-        "[莫纳德·伊娃的晋升](/guides/adventure-license/promote-meva)：BOSS攻略指南。"
+        "属性与战斗基础：适用于整个游戏的基础系统、机制以及面向新手的指南。",
+        "莫纳德·伊娃的晋升：BOSS攻略指南。"
       ],
       "fr": [
-        "[Statistiques et principes de base du combat](/guides/general-guides/stats) : Systèmes fondamentaux, mécanismes de jeu et guides destinés aux débutants, applicables à l'ensemble du jeu.",
-        "[Promotion Monad Eva](/guides/adventure-license/promote-meva) : Guide stratégique pour le boss."
+        "Statistiques et principes de base du combat : Systèmes fondamentaux, mécanismes de jeu et guides destinés aux débutants, applicables à l'ensemble du jeu.",
+        "Promotion Monad Eva : Guide stratégique pour le boss."
       ],
       "es": [
-        "[Estadísticas y Fundamentos de Combate](/guides/general-guides/stats): Sistemas fundamentales, mecánicas y guías para principiantes aplicables a todo el juego.",
-        "[Ascenso Monad Eva](/guides/adventure-license/promote-meva): Guía de estrategia contra el jefe."
+        "Estadísticas y Fundamentos de Combate: Sistemas fundamentales, mecánicas y guías para principiantes aplicables a todo el juego.",
+        "Ascenso Monad Eva: Guía de estrategia contra el jefe."
       ]
     }
   },
@@ -3621,28 +3629,28 @@
     },
     "content": {
       "en": [
-        "[Hero Growth guide](/guides/general-guides/heroes-growth) : A complete breakdown of how to power up your heroes efficiently.",
-        "[Gear guide](/guides/general-guides/gear) : A guide to gear types, upgrades, and how to make your equipment stronger."
+        "Hero Growth guide : A complete breakdown of how to power up your heroes efficiently.",
+        "Gear guide : A guide to gear types, upgrades, and how to make your equipment stronger."
       ],
       "jp": [
-        "[ヒーロー育成ガイド](/guides/general-guides/heroes-growth) ：ヒーローを効率的に強化する方法について、詳しく解説しています。",
-        "[装備ガイド](/guides/general-guides/gear) ：装備の種類、強化方法、そして装備をより強力にする方法についてのガイドです。"
+        "ヒーロー育成ガイド ：ヒーローを効率的に強化する方法について、詳しく解説しています。",
+        "装備ガイド ：装備の種類、強化方法、そして装備をより強力にする方法についてのガイドです。"
       ],
       "kr": [
-        "[영웅 육성 가이드](/guides/general-guides/heroes-growth) : 영웅을 효율적으로 육성하는 방법에 대한 상세한 안내.",
-        "[장비 가이드](/guides/general-guides/gear) : 장비 종류, 업그레이드 방법, 그리고 장비를 더 강력하게 만드는 방법에 대한 안내입니다."
+        "영웅 육성 가이드 : 영웅을 효율적으로 육성하는 방법에 대한 상세한 안내.",
+        "장비 가이드 : 장비 종류, 업그레이드 방법, 그리고 장비를 더 강력하게 만드는 방법에 대한 안내입니다."
       ],
       "zh": [
-        "[英雄培养指南](/guides/general-guides/heroes-growth)：全面详解如何高效提升英雄实力。",
-        "[装备指南](/guides/general-guides/gear)：关于装备类型、升级以及如何增强装备的指南。"
+        "英雄培养指南：全面详解如何高效提升英雄实力。",
+        "装备指南：关于装备类型、升级以及如何增强装备的指南。"
       ],
       "fr": [
-        "[Guide de progression des héros](/guides/general-guides/heroes-growth) : un guide complet pour savoir comment faire progresser efficacement vos héros.",
-        "[Guide de l'équipement](/guides/general-guides/gear) : un guide sur les différents types d'équipement, les améliorations possibles et les moyens de renforcer votre équipement."
+        "Guide de progression des héros : un guide complet pour savoir comment faire progresser efficacement vos héros.",
+        "Guide de l'équipement : un guide sur les différents types d'équipement, les améliorations possibles et les moyens de renforcer votre équipement."
       ],
       "es": [
-        "[Guía de Crecimiento de Héroes](/guides/general-guides/heroes-growth): Un desglose completo de cómo potenciar a tus héroes de manera eficiente.",
-        "[Guía de Equipo](/guides/general-guides/gear): Una guía sobre tipos de equipo, mejoras y cómo hacer tu equipo más fuerte."
+        "Guía de Crecimiento de Héroes: Un desglose completo de cómo potenciar a tus héroes de manera eficiente.",
+        "Guía de Equipo: Una guía sobre tipos de equipo, mejoras y cómo hacer tu equipo más fuerte."
       ]
     }
   },
@@ -3688,38 +3696,42 @@
         "Guides are grouped by season (S1, S2, S3...) and follow the in-game progression",
         "Spoiler-Free mode is enabled by default",
         "You can reveal boss names and details by disabling Spoiler-Free mode",
-        "Explore now: [Adventure Guides](/guides/adventure)"
+        "Explore now: Adventure Guides"
       ],
       "jp": [
         "ガイドはシーズン（S1、S2、S3…）ごとに分類されており、ゲーム内の進行状況に沿って構成されています。",
         "「ネタバレ防止モード」はデフォルトで有効になっています",
         "「ネタバレ防止モード」をオフにすることで、ボスの名前や詳細情報を表示できます",
-        "今すぐチェック：[アドベンチャーガイド](/guides/adventure)"
+        "今すぐチェック：アドベンチャーガイド"
       ],
       "kr": [
         "가이드는 시즌(S1, S2, S3...)별로 분류되어 있으며, 게임 내 진행 상황을 따릅니다.",
         "스포일러 차단 모드는 기본적으로 활성화되어 있습니다.",
         "‘스포일러 방지’ 모드를 해제하면 보스의 이름과 세부 정보를 확인할 수 있습니다.",
-        "지금 바로 살펴보세요: [모험 가이드](/guides/adventure)"
+        "지금 바로 살펴보세요: 모험 가이드"
       ],
       "zh": [
         "指南按赛季（S1、S2、S3……）分组，并遵循游戏内的进度",
         "默认启用“无剧透”模式",
         "您可以通过关闭“无剧透模式”来查看BOSS的名称和详细信息",
-        "立即探索：[探险指南](/guides/adventure)"
+        "立即探索：探险指南"
       ],
       "fr": [
         "Les guides sont classés par saison (S1, S2, S3…) et suivent la progression dans le jeu.",
         "Le mode « sans spoilers » est activé par défaut",
         "Vous pouvez dévoiler les noms et les informations concernant les boss en désactivant le mode « Sans spoilers ».",
-        "Découvrez dès maintenant : [Guides d'aventure](/guides/adventure)"
+        "Découvrez dès maintenant : Guides d'aventure"
       ],
       "es": [
         "Las guías están agrupadas por temporada (S1, S2, S3...) y siguen la progresión del juego",
         "El modo Sin Spoilers está activado por defecto",
         "Puedes revelar los nombres y detalles de los jefes desactivando el modo Sin Spoilers",
-        "Explora ahora: [Guías de Aventura](/guides/adventure)"
+        "Explora ahora: Guías de Aventura"
       ]
+    },
+    "link": {
+      "kind": "guide",
+      "href": "/guides/adventure"
     }
   },
   {
@@ -3735,29 +3747,20 @@
       "es": "Guías actualizadas: Nuevas entradas en la sección General"
     },
     "content": {
-      "en": [
-        "[Banners & Mileage System](/guides/general-guides/banner-mileage) guide release.",
-        "[Daily Stamina Burn](/guides/general-guides/daily-stamina) guide release."
-      ],
+      "en": ["Banners & Mileage System guide release.", "Daily Stamina Burn guide release."],
       "jp": [
-        "[バナーとマイルシステム](/guides/general-guides/banner-mileage) ガイドを公開しました。",
-        "「[デイリースタミナ消費](/guides/general-guides/daily-stamina)」ガイドを公開しました。"
+        "バナーとマイルシステム ガイドを公開しました。",
+        "「デイリースタミナ消費」ガイドを公開しました。"
       ],
-      "kr": [
-        "[배너 및 마일리지 시스템](/guides/general-guides/banner-mileage) 가이드 공개.",
-        "[일일 스태미나 소모](/guides/general-guides/daily-stamina) 가이드 공개."
-      ],
-      "zh": [
-        "[横幅与里程系统](/guides/general-guides/banner-mileage) 指南发布。",
-        "《[每日耐力消耗](/guides/general-guides/daily-stamina)》攻略发布。"
-      ],
+      "kr": ["배너 및 마일리지 시스템 가이드 공개.", "일일 스태미나 소모 가이드 공개."],
+      "zh": ["横幅与里程系统 指南发布。", "《每日耐力消耗》攻略发布。"],
       "fr": [
-        "Publication du guide [Bannières et système de points de fidélité](/guides/general-guides/banner-mileage).",
-        "Publication du guide « [Consommation quotidienne d'endurance](/guides/general-guides/daily-stamina) »."
+        "Publication du guide Bannières et système de points de fidélité.",
+        "Publication du guide « Consommation quotidienne d'endurance »."
       ],
       "es": [
-        "Publicación de la guía [Banners & Sistema de Millaje](/guides/general-guides/banner-mileage).",
-        "Publicación de la guía [Gasto Diario de Vigor](/guides/general-guides/daily-stamina)."
+        "Publicación de la guía Banners & Sistema de Millaje.",
+        "Publicación de la guía Gasto Diario de Vigor."
       ]
     }
   },
@@ -4911,22 +4914,22 @@
     },
     "content": {
       "en": [
-        "The official Outerpedia Discord server is now live! [Join the community](https://discord.com/invite/PNMd5mkAV8) to discuss builds, report issues, suggest improvements, and receive update notifications."
+        "The official Outerpedia Discord server is now live! Join the community to discuss builds, report issues, suggest improvements, and receive update notifications."
       ],
       "jp": [
-        "Outerpediaの公式Discordサーバーが開設されました！[コミュニティに参加する](https://discord.com/invite/PNMd5mkAV8)して、ビルドについて話し合ったり、不具合を報告したり、改善案を提案したり、アップデート通知を受け取ったりしましょう。"
+        "Outerpediaの公式Discordサーバーが開設されました！コミュニティに参加するして、ビルドについて話し合ったり、不具合を報告したり、改善案を提案したり、アップデート通知を受け取ったりしましょう。"
       ],
       "kr": [
-        "Outerpedia 공식 디스코드 서버가 오픈되었습니다! [커뮤니티에 참여하세요](https://discord.com/invite/PNMd5mkAV8) 빌드에 대해 논의하고, 문제를 신고하며, 개선 사항을 제안하고, 업데이트 알림을 받아보세요."
+        "Outerpedia 공식 디스코드 서버가 오픈되었습니다! 커뮤니티에 참여하세요 빌드에 대해 논의하고, 문제를 신고하며, 개선 사항을 제안하고, 업데이트 알림을 받아보세요."
       ],
       "zh": [
-        "Outerpedia 官方 Discord 服务器现已上线！[加入社区](https://discord.com/invite/PNMd5mkAV8)，讨论配置方案、报告问题、提出改进建议，并接收更新通知。"
+        "Outerpedia 官方 Discord 服务器现已上线！加入社区，讨论配置方案、报告问题、提出改进建议，并接收更新通知。"
       ],
       "fr": [
-        "Le serveur Discord officiel d'Outerpedia est désormais disponible ! [Rejoignez la communauté](https://discord.com/invite/PNMd5mkAV8) pour discuter des configurations, signaler des problèmes, proposer des améliorations et recevoir des notifications de mise à jour."
+        "Le serveur Discord officiel d'Outerpedia est désormais disponible ! Rejoignez la communauté pour discuter des configurations, signaler des problèmes, proposer des améliorations et recevoir des notifications de mise à jour."
       ],
       "es": [
-        "¡El servidor oficial de Discord de Outerpedia ya está activo! [Únete a la comunidad](https://discord.com/invite/PNMd5mkAV8) para hablar sobre builds, reportar problemas, sugerir mejoras y recibir notificaciones de actualizaciones."
+        "¡El servidor oficial de Discord de Outerpedia ya está activo! Únete a la comunidad para hablar sobre builds, reportar problemas, sugerir mejoras y recibir notificaciones de actualizaciones."
       ]
     }
   },

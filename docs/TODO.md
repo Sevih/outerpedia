@@ -67,9 +67,7 @@ les preuves et les décisions vivent dans le tri consolidé de sevih-tool
       18/10) ; `stat-keys.json` (L6, décision du 15/10 : clés `ST_*` /
       `OAT_*` vers la clé du contrat, nature « % » et abréviation, gear-solver
       garde sa table contrat → moteur sous un test ; lot C après C22) ;
-      `guid` du flux RSS du journal sur l'id stable après B54 (décision du
-      15/10, l'historique remonte une fois chez les lecteurs) ; fiche du wiki
-      en vitesse en taux avec régénération de l'oracle, une fois que
+      fiche du wiki en vitesse en taux avec régénération de l'oracle, une fois que
       gear-solver lit `corePassiveByFusion` (B56) ; nombre de stacks de
       `BT_STACK_STAT` dans le calculateur (plus tard) ; restes de J12, deux
       latents sans effet aujourd'hui : `datagen/lib/burst.ts:15` (« > 1
@@ -663,9 +661,7 @@ les preuves et les décisions vivent dans le tri consolidé de sevih-tool
       astérisques. À juger : (a) le gabarit Guide ne connaît que la
       Singularité dimensionnelle, et « Mise à jour » demande le slug à la
       main — un lot A servirait la liste des guides (`listGuides()`) en
-      suggestions, nom, mode et chemin déduits ; (b) 7 entrées portent un
-      lien markdown `[texte](url)` que la carte affiche brut (elle est déjà
-      un lien entier) ; (c) le flux RSS garde sa propre copie du motif du
+      suggestions, nom, mode et chemin déduits ; (c) le flux RSS garde sa propre copie du motif du
       gras (`src/app/feed/changelog/route.ts`) au lieu de `bulletSegments`.
 - [ ] **« Tableau de bord » — contrôles à l'écran (lot B36)** : le banc ne
       clique pas. (1) La version du client : « site 1.11.404 · client
