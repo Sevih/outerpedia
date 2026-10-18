@@ -80,6 +80,42 @@ les preuves et les décisions vivent dans le tri consolidé de sevih-tool
       `BT_STACK_STAT` dans le calculateur (plus tard) ; J12 à joindre au lot
       O6 / O7.
 
+## 🧹 Suites de la rédaction du 18/10 (lots A62 à C26, G8 à G30, F28, OB3, TW2)
+
+- [ ] **Talismans à +5 : 5 emplacements de gemme pour tous**
+      (`gemSlotsOf`, `gear-solver/packages/core/src/gems.ts`) : si les
+      talismans 4★/5★ n'en ont que 4 dans le jeu, le solveur leur pose une
+      gemme de trop et surestime la CP. À émettre par outerpedia (`GemSlot`),
+      avec les autres règles recopiées à la main dans gear-solver
+      (`REFORGE_PER_SUB_CAP` ← `OptionMaxValue`, budgets 6/9 ←
+      `AddSmeltingCount`, `EVO_UNLOCK_LEVEL`, filtre d'`ee-passives`, 5e
+      emplacement de `buildAdvice`, `combatOnly` des mains d'EE décidé par le
+      nom dans `datagen/generators/solver.ts`) : une paire de lots
+      outerpedia + gear-solver après la série contrat, `GemSlot` d'abord.
+- [ ] **Suites de L6 (après C26 et G30)** : les lecteurs du wiki
+      (`BLOCK_KEY`, `BONUS_KEY` de `char-progression.ts`, `STAT_KEY` de
+      `reco-api.ts`) et `RAW_FLAT` / `statScales` de `monster-stats.ts` lisent
+      la table de clés ; côté gear-solver, les mains d'EE `ST_AVOID` sortent
+      du panneau au lieu d'y être « combat-only ».
+- [ ] **Suites de G8** : fiche du wiki en vitesse en taux avec régénération
+      de l'oracle (`char-progression.ts`), puis retrait de `corePassive`
+      (`schema` 2), seulement après la release de gear-solver qui porte G8.
+- [ ] **quick, petits lots A** : cible de revue « Armures » qui ne couvre que
+      `armor.json` (casques, gants, bottes sans cible ; reco : une cible sur
+      les quatre fichiers, après A62) ; liens des 21 colonnes `*BuffID` des
+      Tables du jeu vers `BuffTemplet.BuffID` (après B60, qui retire le lien
+      faux).
+- [ ] **`resolveRewardTable`** (`src/lib/data/rewards.ts`) : sans appelant
+      hors des tests, qui s'en servent comme garde ; reco : le garder, avec un
+      commentaire qui le dit.
+- [ ] **outerbot** : liens d'index nus `/characters` et `/guides`
+      (`src/commands/char.ts`, `guide.ts`), à servir par le site ; review
+      déposée entre le démarrage et le premier forum-sync, ignorée
+      (comportement à décider) ; Dependabot `npm` (et `docker` pour l'image
+      de base) à décider, chaque PR redéploie le bot.
+- [ ] **gear-solver, CI** : ni `dependabot.yml`, ni actions épinglées par SHA
+      (`actions/checkout@v4`…), comme outerbot avant le 15/10.
+
 ## 🧰 Outil quick
 
 - [ ] **Migration de l'admin vers quick** (décision du 08/10) : inventaire,
