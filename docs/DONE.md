@@ -5,6 +5,26 @@
 > détail vit dans git. Le `CHANGELOG.md` racine est GELÉ depuis le 03/08 —
 > ce fichier et le log git SONT le journal du projet.
 
+## 2026-10-18
+
+- **Relecture C24 (Opus) — affinité par perso, `STAT_BUFF/DEBUFF_ENHANCE`,
+  clips chez le porteur, bonus `CASTER` d'un allié, portée de
+  `ENEMY_TEAM_DECREASE` ; validé.** Question du lot tranchée le 17/10 (un
+  hit n'est écarté que si son templet porte le préfixe d'un autre perso et
+  manque aux clips du porteur ; les 46 skills sans event extrait au TODO).
+  Périmètre conforme (`1702388c`). Contrôles : typecheck, lint et
+  `format:check` verts, `NODE_ENV=development pnpm test`
+  `Tests 4155 passed (4155)` (mesures en jeu de `fixtures.test.ts`
+  comprises, aucune fixture touchée), `damage:check` 42 lignes exactes.
+  Rejeu de `data/generated/damage/characters.json` avant / après :
+  `resVersion` inchangé ; `characters` ne gagne que `trust` (126 persos),
+  rien d'autre ; `skills` ne change que les `hits` de 29 skills (Rin,
+  Epsilon, Rey, Akari, 2000106 et 2000119), le nombre annoncé.
+  `bestSkill` du contrat solver inchangé pour tous (script du lot) : rien à
+  synchroniser dans gear-solver. **Reste à Sevih** : au calculateur, le S1
+  d'Akari sort sur un seul état ; l'affinité ne donne plus que la stat de
+  la chaîne du perso (Rhona : PV seuls). **Suite** : C25.
+
 ## 2026-10-17
 
 - **C24 — Calculateur (1/2) : affinité par perso, renfort
