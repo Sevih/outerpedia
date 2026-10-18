@@ -7,6 +7,37 @@
 
 ## 2026-10-18
 
+- **Relecture A65, G9, G10, A63, B60, A66, C26 (Opus) ; validés.** Contrôles
+  sur HEAD (`f391a76e`) : typecheck, lint et `format:check` verts,
+  `NODE_ENV=development pnpm test` `Tests 4284 passed (4284)`,
+  `damage:check` 42 lignes exactes. **A65** (`2023e665`) : rejoué sur
+  `changelog.json` — 150 entrées, mêmes ids, 7 changées, 0 lien markdown et
+  0 `<strong>` restants, les trois `link` posés (`/guides/other/service-transfer`,
+  `/coupons`, `/guides/adventure`, en 200 sur la prod) ; `guid` en
+  `changelog-<id>`. **A63** (`cb5eeb8f`) : `generateStaticParams` vide sur
+  les deux routes ; banc standalone de l'agent : `MISS` puis `HIT`,
+  `s-maxage=86400`, 404 sur un slug inconnu, cache en mémoire. **B60**
+  (`5f8b3659`) : relu par un agent sur un quick isolé (clés vides
+  vérifiées), `scripts/quick` 1157 ; aucune colonne `*BuffID` liée sur les
+  258 tables, flux RSS identique sur 900 descriptions, `guid` d'A65 intact.
+  **A66** (`70739916`) : résolveur `[Value]` unique, contrat solver
+  inchangé à l'octet (hash `79508390003b`), vedette des bannières lue de
+  `featured`. **C26** (`f391a76e`) : relu par un agent — 24 paires `ST_*` /
+  `OAT_*` relevées dans les 18 tables, toutes dans `stat-keys.json`, aucune
+  clé inventée, nature « % » = `IsPercentStat` du client (13 stats), hash
+  recalculé `fa3314543175`, `schema` 1. **G9** (gear-solver `de4eb91`) :
+  96 pièces bougent sur 18 924 (Phantasm −30 % SPD, Briareos RES +20 à +40),
+  le reste identique ; **G10** (`f5a3d5d`) : 50 490 builds, 0 écart de fiche
+  ni de CP, 19 paliers portent la pastille « combat ». Tests gear-solver :
+  core 125, desktop 79, renderer 450. **Reste à Sevih** : dans quick, un vrai
+  « Tout retraduire » de Gear reco, le compte de « Pousser » après un commit
+  au terminal, une coupure pendant un envoi (le bouton se rallume), le
+  gabarit « Mise à jour » au clavier, « Ouvrir » sur un tag mort ; sur le
+  site, une fiche d'équipement et un étage de tour servis en cache, les
+  trois cartes du journal cliquables ; dans gear-solver, une arme Phantasm
+  (−30 % SPD), le panneau Effects d'un build Pulverization 4P et le détail
+  d'une pièce Weakness. Suites au TODO. **Suite** : gear-solver G11, puis
+  G12, G13, G30 (après le push d'outerpedia), et la release.
 - **Contrat solver, L6 : `stat-keys.json`, table `ST_*` / `OAT_*` vers la
   clé du contrat, nature « % » et abréviation, garde au build (C26).**
   Quoi : un module pur `datagen/lib/stat-keys.ts` (ni `node:fs` ni

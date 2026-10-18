@@ -106,6 +106,20 @@ les preuves et les décisions vivent dans le tri consolidé de sevih-tool
       (comportement à décider) ; Dependabot `npm` (et `docker` pour l'image
       de base) : PLUS TARD (décision de Sevih du 18/10, chaque PR redéploie
       le bot ; OB3 ne couvre que les actions GitHub).
+- [ ] **Effets de combat des sets, donnée douteuse (vu par la relecture de
+      G10)** : Pulverization L2 4P reprend `BID_ITEM_UO_SET_17` à 700 alors
+      que le L1 lit `_17_1` et que la prose dit 50 % ; Fortification émet
+      « SPD −30% », absent de sa prose ; Weakness, prose et donnée divergent.
+      À vérifier dans `combatEffects` (B53, `datagen/generators/solver.ts`)
+      contre les tables du jeu.
+- [ ] **gear-solver, petits suivis de G9 et G10** : le pré-tri du mode Score
+      (`priorityScoreOf`, `magnitudeScoreOf`) compte le −30 % de Phantasm
+      comme −30 SPD plats ; dans l'onglet Builds, l'infobulle de la pastille
+      « combat » ne se survole pas (`RichTooltip` en `pointer-events-none`,
+      `BuildsScreen.tsx`) ; notes publiques `docs/release-notes.md`
+      [Unreleased] à remplir avant la release (G8, G9, G10).
+- [ ] **Tables du jeu (quick)** : `TrustRewardTemplet.RewardBuffID` visait
+      sans doute `TrustBuffTemplet` ; la règle `*BuffID` de B60 coupe son lien.
 - [ ] **gear-solver, CI** : ni `dependabot.yml`, ni actions épinglées par SHA
       (`actions/checkout@v4`…), comme outerbot avant le 15/10.
 
