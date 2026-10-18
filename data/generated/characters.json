@@ -9678,6 +9678,7 @@
         "max": 150
       }
     },
+    "buffImmune": ["BT_SILENCE", "BT_FREEZE"],
     "nickname": {
       "en": "Monad",
       "jp": "モナド",
