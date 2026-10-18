@@ -29,7 +29,11 @@
  * livre le contrat à toutes les installations, pas le déploiement du site.
  * `version.json` = `{schema, resVersion, hash, builtAt}` : `schema` = forme du
  * contrat (`SOLVER_SCHEMA`), `resVersion` = version des tables du jeu, `hash` =
- * clé d'invalidation (les 18 tables seules), `builtAt` = dernier vrai changement.
+ * clé d'invalidation (les 19 tables seules), `builtAt` = dernier vrai changement.
+ * `stat-keys.json` (ajout C26) = la table `ST_*` / `OAT_*` → clé du vocabulaire
+ * du contrat (`atk`, `atkPct`, `chc`, `res`, `resRate`…), nature « % » et
+ * abréviation du wiki (`datagen/lib/stat-keys.ts`) ; le build jette sur toute
+ * paire émise qui n'y a pas sa ligne.
  * Niveau d'un set porté (`sets.json`, outerpedia est la source, gear-solver
  * recopie cette règle ; client : `CStatValue.SetSetItemValue`,
  * `CCharacterData.CalcSetItem` / `CreateBuffSetItem`, `CItem.SetOptionLevel`) :
@@ -83,6 +87,7 @@ import { fillValuePlaceholders, type BuffValues } from '../lib/placeholders';
 import { bool, loadTable, singleValue, type Row } from '../lib/tables';
 import { loadTextIndex } from '../lib/text';
 import { kitScaling, loadKitScalingTables } from '../lib/kit-scaling';
+import { missingStatKeys, statKeysFile } from '../lib/stat-keys';
 import { buildDamageCharacters } from '../damage/characters';
 import { bestSkillOf } from './solver-best-skill';
 import { conditionalLabel } from './equipment';
@@ -1037,6 +1042,17 @@ export function buildSolver(inputs: {
     if (Object.keys(row).length) subTicks[String(star)] = row;
   }
   emit('sub-ticks.json', subTicks);
+
+  // ---- stat-keys : vocabulaire des stats du contrat (L6), garde avant le hash --
+  emit('stat-keys.json', statKeysFile());
+  const untranslated = missingStatKeys(files);
+  if (untranslated.length) {
+    throw new Error(
+      `solver : paire(s) sans clé du contrat — ` +
+        untranslated.map((m) => `${m.st} / ${m.ap ?? '(sans OAT)'} dans ${m.file}`).join(', ') +
+        ` : ajouter la ligne dans datagen/lib/stat-keys.ts (un ajout, schema inchangé)`,
+    );
+  }
 
   // ---- version.json : hash de contenu + builtAt idempotent contre le COMMITTÉ ----
   // Hash = sha256 cumulé `nom + JSON compact` dans l'ordre d'émission ci-dessus

@@ -6,7 +6,13 @@
  */
 import { describe, expect, it } from 'vitest';
 import solverCharacters from '../../data/generated/solver/characters.json';
-import { computeCharacterIngredients, type IngredientsTables } from './solver-ingredients';
+import { STAT_KEYS } from '../lib/stat-keys';
+import {
+  applyStatBonus,
+  computeCharacterIngredients,
+  type IngredientsTables,
+  type StatBlock,
+} from './solver-ingredients';
 
 type Row = Record<string, string>;
 
@@ -297,4 +303,54 @@ describe('solver/characters.json — corePassiveByFusion des six fusionnés', ()
     expect(ing('2700003').corePassive?.spd).toBe(6);
     expect(ing('2700003').corePassive).not.toHaveProperty('spdPct');
   });
+});
+
+describe('applyStatBonus tenu contre stat-keys (L6)', () => {
+  const ZERO: StatBlock = {
+    atk: 0,
+    def: 0,
+    hp: 0,
+    spd: 0,
+    chc: 0,
+    chd: 0,
+    pen: 0,
+    dmgInc: 0,
+    dmgRed: 0,
+    eff: 0,
+    res: 0,
+    effRate: 0,
+    resRate: 0,
+    atkPct: 0,
+    defPct: 0,
+    hpPct: 0,
+  };
+  const BLOCK_KEYS = new Set([...Object.keys(ZERO), 'spdPct']);
+  const pairs = Object.entries(STAT_KEYS).flatMap(([st, byAp]) =>
+    Object.entries(byAp).map(([ap, key]) => ({ st, ap, key })),
+  );
+  const pour = (st: string, ap: string) => {
+    const dest: StatBlock & { spdPct?: number } = { ...ZERO };
+    const rate = st === 'ST_SPEED' && ap === 'OAT_RATE';
+    applyStatBonus(dest, st, ap, 100, rate ? { kind: 'rate' } : { kind: 'reject', block: 'test' });
+    return Object.fromEntries(Object.entries(dest).filter(([, v]) => v !== 0));
+  };
+
+  it('les clés hors bloc sont les cinq clés nouvelles du contrat', () => {
+    const outside = [...new Set(pairs.map((p) => p.key).filter((k) => !BLOCK_KEYS.has(k)))];
+    expect(outside.sort()).toEqual(['avoid', 'cdmgRed', 'counter', 'enterAp', 'lifesteal']);
+  });
+
+  it.each(pairs.filter((p) => BLOCK_KEYS.has(p.key)))(
+    '$st / $ap : la valeur va dans $key et nulle part ailleurs',
+    ({ st, ap, key }) => {
+      expect(Object.keys(pour(st, ap))).toEqual([key]);
+    },
+  );
+
+  it.each(pairs.filter((p) => !BLOCK_KEYS.has(p.key)))(
+    '$st / $ap ($key) : rien n’est versé',
+    ({ st, ap }) => {
+      expect(pour(st, ap)).toEqual({});
+    },
+  );
 });

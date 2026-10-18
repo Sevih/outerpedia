@@ -17,6 +17,10 @@
  *      un AJOUT se déclare dans `CONTRACT_SHAPE`, `schema` inchangé ; un retrait,
  *      un renommage ou un changement de sens monte `SOLVER_SCHEMA` et attend
  *      qu'une version de gear-solver qui le lit soit publiée — (a) → (b) → (c).
+ *   4. VOCABULAIRE (L6) : `stat-keys.json` = la table `ST_*` / `OAT_*` → clé du
+ *      contrat de `datagen/lib/stat-keys.ts` ; toute paire des fichiers
+ *      committés y a sa ligne (la garde de `buildSolver`, rejouée), et
+ *      `percent` suit `formatStatValue`.
  *
  * Tourne SANS `.gamedata` (contrainte CI) : rien n'appelle `buildSolver()`.
  */
@@ -33,6 +37,7 @@ import gemsData from '../../data/generated/solver/gems.json';
 import optionsData from '../../data/generated/solver/options.json';
 import setsData from '../../data/generated/solver/sets.json';
 import subTicksData from '../../data/generated/solver/sub-ticks.json';
+import statKeysData from '../../data/generated/solver/stat-keys.json';
 import trustCharacterData from '../../data/generated/solver/trust-character.json';
 import versionData from '../../data/generated/solver/version.json';
 import heroGrowthData from '../../data/generated/hero-growth.json';
@@ -40,6 +45,9 @@ import gameVersionData from '../../data/generated/game-version.json';
 import buffsData from '../../data/generated/solver/buffs.json';
 import poolsData from '../../data/generated/equipment/pools.json';
 import { singleValue } from '../lib/tables';
+import { slugEnum } from '../lib/enums';
+import { missingStatKeys, statKeysFile } from '../lib/stat-keys';
+import { formatStatValue } from '../lib/stats';
 import { SOLVER_SCHEMA } from './solver';
 
 const characters = charactersData as Record<
@@ -437,6 +445,7 @@ const CONTRACT_SHAPE: Record<string, Shape> = {
       ),
     },
   },
+  'stat-keys.json': { rec: { rec: { obj: { key: '*', percent: '*', abbr: '*' } } } },
   'trust-buffs.json': {
     arr: { obj: { tier: '*', buffId: '*', stat: '*', apply: '*', value: '*' } },
   },
@@ -705,5 +714,73 @@ describe('solver — libellés des mains d’EE (R12)', () => {
     for (const [bid, label] of fiche)
       if (bid.startsWith('BID_CEQUIP_MAIN_'))
         for (const lv of buffs[bid] ?? []) if (lv) expect(lv.name, bid).toBe(label);
+  });
+});
+
+describe('solver — stat-keys (L6) : ST_* / OAT_* vers la clé du contrat', () => {
+  const statKeys = statKeysData as Record<
+    string,
+    Record<string, { key: string; percent: boolean; abbr: string | null }>
+  >;
+  const lines = Object.entries(statKeys).flatMap(([st, byAp]) =>
+    Object.entries(byAp).map(([ap, l]) => [st, ap, l.key, l.percent, l.abbr] as const),
+  );
+
+  it('le fichier committé est la table de datagen/lib/stat-keys.ts', () => {
+    expect(statKeys).toEqual(statKeysFile());
+  });
+
+  it('toute paire des fichiers committés a sa ligne (la garde de buildSolver)', () => {
+    const dir = resolve('data/generated/solver');
+    const files = readdirSync(dir)
+      .filter((f) => f.endsWith('.json'))
+      .map((f) => [f, JSON.parse(readFileSync(resolve(dir, f), 'utf8'))] as [string, unknown]);
+    expect(missingStatKeys(files)).toEqual([]);
+  });
+
+  it('la garde voit une paire inconnue, en st/ap comme en stat/apply', () => {
+    expect(
+      missingStatKeys([
+        ['a.json', { x: [{ st: 'ST_WG', ap: 'OAT_ADD', v: 1 }] }],
+        ['b.json', [{ stat: 'ST_ATK', apply: 'OAT_NONE', value: 1 }]],
+        ['c.json', { dmgSec: [{ stat: 'def', ratio: 1 }] }],
+      ]),
+    ).toEqual([
+      { st: 'ST_WG', ap: 'OAT_ADD', file: 'a.json' },
+      { st: 'ST_ATK', ap: 'OAT_NONE', file: 'b.json' },
+    ]);
+  });
+
+  it('les 24 lignes : clé, nature « % », abréviation du wiki', () => {
+    expect(lines).toEqual([
+      ['ST_HP', 'OAT_ADD', 'hp', false, 'HP'],
+      ['ST_HP', 'OAT_RATE', 'hpPct', true, 'HP%'],
+      ['ST_SPEED', 'OAT_ADD', 'spd', false, 'SPD'],
+      ['ST_SPEED', 'OAT_RATE', 'spdPct', true, 'SPD'],
+      ['ST_ATK', 'OAT_ADD', 'atk', false, 'ATK'],
+      ['ST_ATK', 'OAT_RATE', 'atkPct', true, 'ATK%'],
+      ['ST_DEF', 'OAT_ADD', 'def', false, 'DEF'],
+      ['ST_DEF', 'OAT_RATE', 'defPct', true, 'DEF%'],
+      ['ST_DMG_REDUCE_RATE', 'OAT_ADD', 'dmgRed', true, 'DMG RED%'],
+      ['ST_DMG_REDUCE_RATE', 'OAT_RATE', 'dmgRed', true, 'DMG RED%'],
+      ['ST_CRITICAL_RATE', 'OAT_ADD', 'chc', true, 'CHC'],
+      ['ST_CRITICAL_DMG_RATE', 'OAT_ADD', 'chd', true, 'CHD'],
+      ['ST_PIERCE_POWER_RATE', 'OAT_ADD', 'pen', true, 'PEN%'],
+      ['ST_VAMPIRIC', 'OAT_ADD', 'lifesteal', true, 'LS'],
+      ['ST_AVOID', 'OAT_ADD', 'avoid', false, null],
+      ['ST_BUFF_CHANCE', 'OAT_ADD', 'eff', false, 'EFF'],
+      ['ST_BUFF_CHANCE', 'OAT_RATE', 'effRate', true, 'EFF%'],
+      ['ST_BUFF_RESIST', 'OAT_ADD', 'res', false, 'RES'],
+      ['ST_BUFF_RESIST', 'OAT_RATE', 'resRate', true, 'RES%'],
+      ['ST_ENTER_AP', 'OAT_ADD', 'enterAp', false, null],
+      ['ST_COUNTER_RATE', 'OAT_ADD', 'counter', true, null],
+      ['ST_DMG_BOOST', 'OAT_ADD', 'dmgInc', true, 'DMG UP%'],
+      ['ST_DMG_BOOST', 'OAT_RATE', 'dmgInc', true, 'DMG UP%'],
+      ['ST_E_CRI_DMG_REDUCE', 'OAT_ADD', 'cdmgRed', true, 'CDMG RED%'],
+    ]);
+  });
+
+  it.each(lines)('%s / %s : percent d’accord avec formatStatValue', (st, ap, _key, percent) => {
+    expect(formatStatValue(ap, 100, slugEnum(st)).endsWith('%')).toBe(percent);
   });
 });

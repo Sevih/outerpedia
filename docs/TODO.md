@@ -57,13 +57,13 @@ les preuves et les décisions vivent dans le tri consolidé de sevih-tool
       encore publié. Noyau par niveau et vitesse en % FAITS côté contrat
       (B56, 16/10, `corePassiveByFusion`), lus sur le `main` de gear-solver
       (`76c37f3`, 18/10), pas encore publiés ; restent la fiche du wiki avec
-      l'oracle, puis le retrait de `corePassive` ; `stat-keys.json`.
+      l'oracle, puis le retrait de `corePassive`. `stat-keys.json` FAIT
+      côté outerpedia (C26, 18/10), lecture par gear-solver à faire (G30).
 - [ ] **Suites de la rédaction des lots du 15/10** (lots rédigés : C18 à
       C25, B51, B53 à B57, A58 à A60, F27, G2 à G6, OB1, OB2, TW1) :
       adversité du guide des tours et Very Hard étage par étage FAITS (B58,
-      18/10) ; `stat-keys.json` (L6, décision du 15/10 : clés `ST_*` /
-      `OAT_*` vers la clé du contrat, nature « % » et abréviation, gear-solver
-      garde sa table contrat → moteur sous un test ; lot C après C22) ;
+      18/10) ; `stat-keys.json` (L6) FAIT côté contrat (C26), reste G30 et
+      les lecteurs du wiki ;
       fiche du wiki en vitesse en taux avec régénération de l'oracle, une fois que
       gear-solver lit `corePassiveByFusion` (B56) ; nombre de stacks de
       `BT_STACK_STAT` dans le calculateur (plus tard) ; restes de J12, deux

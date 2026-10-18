@@ -286,7 +286,7 @@ function extractTranscendByStar(
  * Route un triplet (StatType, ApplyingType, Value) vers le bon champ du bloc.
  * Partagé buffs/geas — mêmes règles d'encodage (cf. en-tête).
  */
-function applyStatBonus(
+export function applyStatBonus(
   dest: WorkBlock,
   statType: string | undefined,
   applying: string | undefined,

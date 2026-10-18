@@ -7,6 +7,64 @@
 
 ## 2026-10-18
 
+- **Contrat solver, L6 : `stat-keys.json`, table `ST_*` / `OAT_*` vers la
+  clé du contrat, nature « % » et abréviation, garde au build (C26).**
+  Quoi : un module pur `datagen/lib/stat-keys.ts` (ni `node:fs` ni
+  tables) porte `STAT_KEYS`, une ligne par paire que les fichiers du
+  contrat portent, dans l'ordre du `STAT_TYPE` du client (`dump.cs`) ;
+  `statKeyLine` rend `{ key, percent, abbr }`, `statKeysFile` le fichier
+  entier, `missingStatKeys` les paires émises sans ligne. `buildSolver`
+  émet `stat-keys.json` après `sub-ticks.json` et, avant le hash, jette
+  sur toute paire (`st`/`ap`, ou `stat`/`apply` de `trust-buffs.json` ; un
+  `stat` sans `apply`, le `dmgSec` de `characters.json`, n'en est pas
+  une) sans ligne. Pourquoi : six tables traduisaient les stats sur deux
+  dépôts sans que le vocabulaire du contrat soit publié nulle part, et
+  rien n'empêchait un `ST_*` nouveau d'entrer non traduit (revue de
+  cloisonnement § 3.3, décision du 15/10). Les 24 lignes : `hp`/`hpPct`
+  (`HP`/`HP%`), `spd`/`spdPct` (`SPD` des deux côtés, `PCT_SUFFIX`),
+  `atk`/`atkPct`, `def`/`defPct`, `dmgRed` (deux `OAT`, `DMG RED%`),
+  `chc` (`CHC`), `chd` (`CHD`), `pen` (`PEN%`), `lifesteal` (`LS`),
+  `avoid` (`null`), `eff`/`effRate` (`EFF`/`EFF%`), `res`/`resRate`
+  (`RES`/`RES%`), `enterAp` (`null`), `counter` (`null`), `dmgInc` (deux
+  `OAT`, `DMG UP%`), `cdmgRed` (`CDMG RED%`) ; `percent` faux pour les
+  `OAT_ADD` d'ATK, DEF, HP, SPEED, BUFF_CHANCE, BUFF_RESIST, ENTER_AP et
+  AVOID, vrai partout ailleurs — la liste du lot, sans écart. `abbr` vient
+  de `statOptionView` (`src/lib/stats.ts`, import relatif, accepté par
+  `tsx` et `tsc -p datagen/tsconfig.json` comme celui de
+  `datagen/assets/manifest.ts`) quand `STAT_ABBR` connaît le slug, `null`
+  sinon. `SOLVER_SCHEMA` reste à 1 (un fichier ajouté) ; l'en-tête de
+  `solver.ts` décrit le fichier et passe à « les 19 tables », celui de
+  `solver.test.ts` gagne un point 4. `applyStatBonus` est seulement
+  exporté (corps inchangé) pour le test croisé de
+  `solver-ingredients.test.ts` : chaque paire dont la clé est un champ de
+  `StatBlock` ou `spdPct` (mode `rate` pour la vitesse en taux) verse
+  dans ce champ seul, les cinq clés nouvelles (`avoid`, `cdmgRed`,
+  `counter`, `enterAp`, `lifesteal`) ne versent rien. Vérifié :
+  `data/generated` propre avant ; `pnpm datagen:build` puis promote à
+  blanc : sous `solver/`, `stat-keys.json` NOUVEAU et `version.json` ~2,
+  rien d'autre, hors de `solver/` seulement 2400015 écarté (perso non
+  intégré, pas à moi) ; puis promotion ciblée des deux fichiers
+  (`--apply --only`) ; hash `79508390003b` → `fa3314543175`, `schema` 1,
+  `resVersion` 1.11.408 inchangé ;
+  `git status --short data/generated` : les deux chemins seuls ; second
+  build et promote à blanc : 66 identiques, `builtAt` repris. Garde
+  déclenchée à la main (ligne `ST_AVOID` retirée, build) : « solver :
+  paire(s) sans clé du contrat — ST_AVOID / OAT_ADD dans buffs.json :
+  ajouter la ligne dans datagen/lib/stat-keys.ts (un ajout, schema
+  inchangé) », ligne remise. Tests sans `.gamedata` dans `solver.test.ts`
+  : `CONTRACT_SHAPE` déclare le fichier, le committé égale
+  `statKeysFile()`, la garde rejouée sur le committé ne trouve rien, une
+  paire inconnue est vue en `st`/`ap` comme en `stat`/`apply`, les 24
+  lignes attendues, `percent` d'accord avec `formatStatValue` ligne à
+  ligne. `pnpm typecheck` (dernière ligne, les trois `tsc --noEmit`
+  enchaînés, sans erreur), `pnpm lint` sans sortie (`$ eslint`),
+  `pnpm test` `Tests 4284 passed (4284)`. Aucun changement visuel : le
+  fichier n'est lu par aucune page. Laissé : les lecteurs du wiki
+  (`BLOCK_KEY`, `BONUS_KEY`, `STAT_KEY`, `COLUMN_KEY`), hors périmètre.
+  Pour Sevih : après le push, G30 dans gear-solver (son `data:sync` lit
+  ce checkout) ; chaque installation re-télécharge une fois (hash
+  changé), les versions publiées ignorent le fichier.
+
 - **Restes « Laissé » : vedette des bannières lue de la donnée, résolveur
   `[Value]` unique dans le contrat solver, ligne « Contrat solver » du TODO
   (A66).** Trois restes de C23 et C22 (17/10). **Bannières** :
