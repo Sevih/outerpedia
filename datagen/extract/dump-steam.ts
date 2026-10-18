@@ -177,14 +177,16 @@ export async function dumpSteam(install: SteamInstall = requireSteamInstall()): 
   extractListings();
 }
 
+// Pas de `await` au niveau du module : tsx compile en CJS (pas de
+// `"type": "module"`) et `refresh.ts` importe ce fichier.
 if (isMain(import.meta.url)) {
-  try {
+  (async () => {
     if (!existsSync(resolve('datagen/extract/listings.json'))) {
       throw new Error('datagen/extract/listings.json introuvable.');
     }
     await dumpSteam();
-  } catch (e) {
+  })().catch((e) => {
     console.error('\n✗ datagen:dump a échoué :', e instanceof Error ? e.message : e);
     process.exit(1);
-  }
+  });
 }
