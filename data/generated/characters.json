@@ -12580,6 +12580,7 @@
         "max": 110
       }
     },
+    "buffImmune": ["BT_STUN"],
     "nickname": {
       "en": "Mystic Sage",
       "jp": "三蔵法師",
