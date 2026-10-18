@@ -68,8 +68,8 @@ les preuves et les décisions vivent dans le tri consolidé de sevih-tool
 - [ ] **Suites de la rédaction des lots du 15/10** (lots rédigés : C18 à
       C25, B51, B53 à B57, A58 à A60, F27, G2 à G6, OB1, OB2, TW1) :
       adversité absente du guide des tours (`TowerGuide.tsx` l.163 et 187 ne
-      la passent pas, 1 009 donjons de tour sur 1 010 en ont une ; lot à
-      rédiger) ; `bossSpawnContexts` (`boss-view.ts`) et `monsterStatContexts`
+      la passent pas, 1 009 donjons de tour sur 1 010 en ont une ; lot B58
+      rédigé le 18/10, avec le Very Hard étage par étage) ; `bossSpawnContexts` (`boss-view.ts`) et `monsterStatContexts`
       (`monster-sheet.ts`) donnent encore l'échelle entière `d.ranks` à
       chaque monstre au lieu de celle de `ranksOfMonster` (vu par B57) ; `stat-keys.json` (L6, décision du 15/10 : clés `ST_*` /
       `OAT_*` vers la clé du contrat, nature « % » et abréviation, gear-solver
