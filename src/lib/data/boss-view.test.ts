@@ -12,12 +12,13 @@
  */
 import { describe, expect, it } from 'vitest';
 import { ARCHIVED_GLOSSARY_KEYS } from '@contracts';
-import type { EffectCurated, Monster } from '@contracts';
+import type { DungeonRef, EffectCurated, Monster } from '@contracts';
 import { loadDataJson } from '@/lib/data/disk';
 import { liveKitSources } from '@/lib/skill-view';
 import { localizeStatuses } from '@/lib/data/effects';
 import { getMonster, getMonsterSkills } from '@/lib/data/monsters';
 import { bossSpawnContexts, buildBossView, type BossViewSources } from '@/lib/data/boss-view';
+import { ranksOfMonster } from '@/lib/monster-stats';
 
 const monsters = loadDataJson<Record<string, Monster>>('generated/monsters.json');
 const dungeons = loadDataJson<Record<string, unknown>>('generated/encounters.json');
@@ -98,6 +99,42 @@ describe('buildBossView', () => {
     expect(ctx).toHaveLength(1);
     expect(ctx[0].level).toBe(42);
     expect(ctx[0].label).toContain('Donjon figé');
+  });
+
+  it('chaque boss reçoit SA tranche de l’échelle de rangs (`ranksOfMonster`)', () => {
+    // Un world boss à deux phases : l'échelle ENJAMBE les boss au lieu de se
+    // répéter. La vue d'un boss sur un tel donjon ne lui donne que sa tranche ;
+    // la réunion des tranches est l'échelle entière, sans recouvrement. Un
+    // donjon non découpé : l'échelle entière à chacun, comme avant.
+    const ranked = Object.entries(dungeons as Record<string, DungeonRef>).filter(
+      ([, d]) => d.ranks?.length && d.monsters?.some((m) => m.role !== 'add' && monsters[m.id]),
+    );
+    let cut = 0;
+    for (const [dId, d] of ranked) {
+      const bosses = d.monsters!.filter((m) => m.role !== 'add' && monsters[m.id]);
+      const slices = bosses.map((b) => ranksOfMonster(d, b.id)!);
+      const split = slices.some((r) => r.length < d.ranks!.length);
+      if (split) {
+        cut++;
+        expect(slices.flat(), dId).toEqual(d.ranks);
+      } else {
+        expect(
+          slices.every((r) => r === d.ranks),
+          dId,
+        ).toBe(true);
+      }
+      bosses.forEach((b, i) => {
+        const m = { ...monsters[b.id], spawns: [{ dungeon: dId, level: b.level }] };
+        const v = buildBossView(b.id, m, getMonsterSkills(m, b.id), sources());
+        const ctx = bossSpawnContexts(v, 'en');
+        expect(
+          ctx.map((c) => c.rank),
+          `${dId} · ${b.id}`,
+        ).toEqual(slices[i].map((r) => r.name));
+      });
+    }
+    // Sans donjon découpé, la moitié de ce test ne testerait rien.
+    expect(cut).toBeGreaterThan(0);
   });
 
   it('la vue n’embarque QUE les donjons de ses propres spawns', () => {

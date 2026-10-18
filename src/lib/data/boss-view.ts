@@ -39,6 +39,7 @@ import {
   expandRankContexts,
   monsterPanelStats,
   monsterQuirkMods,
+  ranksOfMonster,
   roleInDungeon,
   type SpawnContext,
 } from '@/lib/monster-stats';
@@ -269,12 +270,15 @@ export function buildBossView(
 
 /**
  * Rencontres propres du monstre, avec les MODIFICATEURS du donjon et un libellé
- * « Mode · Stage » localisé. Même contrat que `monsterSpawnContexts`, mais lu
- * dans la VUE : c'est ce qui fait qu'un boss épinglé garde ses contextes de
- * stats même si le donjon a disparu du live (événement retiré, stage
- * re-niveauté) — l'archive fige ses donjons exprès depuis toujours.
+ * « Mode · Stage » localisé. Même contrat qu'`encounterSpawnContexts` (les
+ * paliers du monstre, `ranksOfMonster`), mais lu dans la VUE : c'est ce qui
+ * fait qu'un boss épinglé garde ses contextes de stats même si le donjon a
+ * disparu du live (événement retiré, stage re-niveauté) — l'archive fige ses
+ * donjons exprès depuis toujours.
  */
 export function bossSpawnContexts(view: BossView, lang: Lang): SpawnContext[] {
+  // L'id de la vue peut être épinglé (`<id>@<n>`) : le donjon liste l'id nu.
+  const id = view.id.split('@')[0];
   return view.spawns.flatMap((s) => {
     const d = view.dungeons[s.dungeon];
     if (!d) return [];
@@ -287,9 +291,8 @@ export function bossSpawnContexts(view: BossView, lang: Lang): SpawnContext[] {
         ...(d.bossHp ? { bossHp: d.bossHp } : {}),
         ...(s.hpLines ? { hpLines: s.hpLines } : {}),
       },
-      d.ranks,
-      // L'id de la vue peut être épinglé (`<id>@<n>`) : le donjon liste l'id nu.
-      roleInDungeon(d, view.id.split('@')[0]),
+      ranksOfMonster(d, id),
+      roleInDungeon(d, id),
     );
   });
 }

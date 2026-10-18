@@ -100,6 +100,37 @@ export function roleInDungeon(
 }
 
 /**
+ * Les paliers qui appartiennent À CE MONSTRE.
+ *
+ * Quand un donjon à échelle de rangs aligne PLUSIEURS boss, l'échelle les
+ * ENJAMBE au lieu de se répéter : au world boss, le boss 1 se joue de D à A,
+ * et ATTEINDRE S (le seuil de dégâts du palier) le fait transitionner en
+ * boss 2, qui porte S→SSS. Donner les sept rangs aux deux cartes mentirait
+ * deux fois — chaque boss afficherait des rangs où il n'existe pas.
+ *
+ * Le découpage se LIT dans la donnée, il ne se décrète pas : le niveau de base
+ * de chaque boss est exactement le niveau de son premier palier (vérifié sur
+ * les six world boss — 60 = rang D, 90 = rang S en ligue 3). Si les niveaux ne
+ * dessinent pas cette partition (autre mode, autre convention), l'échelle
+ * entière reste à chacun — le comportement d'avant. Un donjon sans `monsters`
+ * (archive d'avant l'extraction) compte moins de deux boss : l'échelle entière.
+ */
+export function ranksOfMonster(
+  d: Pick<DungeonRef, 'ranks' | 'monsters'>,
+  monsterId: string,
+): DungeonRank[] | undefined {
+  const ranks = d.ranks;
+  const bosses = (d.monsters ?? []).filter((x) => x.role !== 'add');
+  if (!ranks?.length || bosses.length < 2 || roleInDungeon(d, monsterId) === 'add') return ranks;
+
+  const starts = bosses.map((b) => ranks.findIndex((r) => r.level === b.level));
+  const partitioned = starts.every((s, i) => (i === 0 ? s === 0 : s > starts[i - 1]));
+  const k = bosses.findIndex((b) => b.id === monsterId);
+  if (!partitioned || k < 0) return ranks;
+  return ranks.slice(starts[k], k + 1 < starts.length ? starts[k + 1] : undefined);
+}
+
+/**
  * Déplie un spawn en contextes : sans palier, le spawn tel quel ; avec paliers
  * (modes à progression : guild dungeon, world boss, singularity, event
  * challenge, adventure, exploration), UN contexte PAR palier — le palier

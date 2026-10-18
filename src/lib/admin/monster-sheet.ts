@@ -16,6 +16,7 @@ import {
   expandRankContexts,
   formatMonsterStat,
   orderedStats,
+  ranksOfMonster,
   roleInDungeon,
   type SpawnContext,
   type StatRange,
@@ -89,7 +90,8 @@ export function monsterEncounters(
 
 /**
  * Les contextes de stats d'un monstre : une rencontre réelle par spawn,
- * dépliée par palier (`expandRankContexts`) — le libellé « Mode · Stage ».
+ * dépliée par SES paliers (`ranksOfMonster`, `expandRankContexts`) — le libellé
+ * « Mode · Stage ».
  */
 export function monsterStatContexts(
   m: Pick<Monster, 'id' | 'spawns'>,
@@ -105,7 +107,7 @@ export function monsterStatContexts(
         bossHp: s.ref.bossHp,
         ...(s.hpLines ? { hpLines: s.hpLines } : {}),
       },
-      s.ref.ranks,
+      ranksOfMonster(s.ref, m.id),
       roleInDungeon(s.ref, m.id),
     ),
   );

@@ -6,6 +6,8 @@
  */
 import { describe, expect, it } from 'vitest';
 import type { DungeonRef, Monster } from '@contracts';
+import { loadDataJson } from '@/lib/data/disk';
+import { ranksOfMonster } from '@/lib/monster-stats';
 import {
   ENCOUNTERS_SHOWN,
   monsterEncounters,
@@ -97,6 +99,41 @@ describe('monsterStatContexts — une rencontre par spawn, dépliée par palier'
     // Un mode à score : `hp` est une BARRE, pas des PV.
     expect(ctx[3]).toMatchObject({ bar: 750_000, damage: { min: 4_250_001, max: 5_000_000 } });
     expect(ctx[3].bossHp).toBeUndefined();
+  });
+
+  it('chaque boss d’un donjon découpé ne propose que SA tranche de rangs (`ranksOfMonster`)', () => {
+    // Les world boss à deux phases : l'échelle enjambe les boss. La réunion des
+    // tranches est l'échelle entière, sans recouvrement ; un donjon non découpé
+    // garde l'échelle entière à chacun, comme avant.
+    const enc = loadDataJson<Record<string, DungeonRef>>('generated/encounters.json');
+    const src: DungeonSources = { dungeons: enc, modes: {} };
+    let cut = 0;
+    for (const [dId, d] of Object.entries(enc)) {
+      if (!d.ranks?.length || !d.monsters?.length) continue;
+      const bosses = d.monsters.filter((m) => m.role !== 'add');
+      const slices = bosses.map((b) => ranksOfMonster(d, b.id)!);
+      if (slices.some((r) => r.length < d.ranks!.length)) {
+        cut++;
+        expect(slices.flat(), dId).toEqual(d.ranks);
+      } else {
+        expect(
+          slices.every((r) => r === d.ranks),
+          dId,
+        ).toBe(true);
+      }
+      bosses.forEach((b, i) => {
+        const ctx = monsterStatContexts(
+          { id: b.id, spawns: [{ dungeon: dId, level: b.level }] } as Monster,
+          src,
+        );
+        expect(
+          ctx.map((c) => c.rank),
+          `${dId} · ${b.id}`,
+        ).toEqual(slices[i].map((r) => r.name));
+      });
+    }
+    // Sans donjon découpé, la moitié de ce test ne testerait rien.
+    expect(cut).toBeGreaterThan(0);
   });
 });
 

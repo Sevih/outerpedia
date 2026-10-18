@@ -43,13 +43,15 @@
   (4086009-4086012, 4086015-4086018, 4086021-4086024, 4086027-4086030,
   4086033-4086036, 4086039-4086042), 168 → 84 contextes dans
   `bossSpawnContexts` comme dans `monsterStatContexts` ; 4086041 : 7 → 4,
-  4086042 : 7 → 3. Vérifié : `pnpm typecheck` (`tsc --noEmit -p
-  scripts/tsconfig.json` sans erreur), `pnpm lint` (`eslint` sans sortie),
-  `pnpm test` `Tests 4195 passed (4195)`, `NODE_ENV=development pnpm exec
-  vitest run scripts/quick` `Tests 1148 passed (1148)`. Aucun changement
+  4086042 : 7 → 3. Vérifié : `pnpm typecheck` (dernière ligne, le tsc de
+  `scripts/tsconfig.json`, sans erreur), `pnpm lint` (`eslint` sans sortie),
+  `pnpm test` `Tests 4195 passed (4195)`, la suite de quick
+  (`NODE_ENV=development`, `scripts/quick`) `Tests 1148 passed (1148)`. Aucun changement
   visible sur le site. **Reste à Sevih** : dans quick, la fiche monstre de
   4086041 (Ragnakeus, ligue 4, phase 1) ne propose plus que ses 4 rangs, et
-  4086042 (phase 2) ses 3. Laissé : rien.
+  4086042 (phase 2) ses 3. Laissé : rien. Note : une première version de
+  cette entrée est partie dans le commit de B59 (`571970c8`, indexée par lui
+  pendant ma session) ; le commit d'A64 porte le code et sa retouche.
 - **Fiche d'un Core Fusion : les crans de transcendance sous l'étoile exigée par
   la fusion masqués (B59)** : un fusionné lit l'échelle de son ORIGINE
   (`transcend.json`, `overrides`), mais la fusion exige l'origine au `TransStar`

@@ -15,14 +15,7 @@
  */
 import encountersData from '@data/generated/encounters.json';
 import glossariesData from '@data/generated/glossaries.json';
-import type {
-  DungeonMonster,
-  DungeonRank,
-  DungeonRef,
-  EncountersFile,
-  Glossaries,
-  Monster,
-} from '@contracts';
+import type { DungeonMonster, DungeonRef, EncountersFile, Glossaries, Monster } from '@contracts';
 import type { TFunction, TranslationKey } from '@/i18n';
 import type { Lang } from '@/lib/i18n/config';
 import { lRec } from '@/lib/i18n/localize';
@@ -30,6 +23,7 @@ import { getMonster, monsterIconSrc } from '@/lib/data/monsters';
 import {
   GUILD_RAID_MAIN_BOSS_MAX_GRADE,
   expandRankContexts,
+  ranksOfMonster,
   type SpawnContext,
 } from '@/lib/monster-stats';
 
@@ -452,39 +446,13 @@ export function groupCombatants(group: string, lang: Lang): GroupCombatant[] {
 }
 
 /**
- * Les paliers qui appartiennent À CE MONSTRE.
- *
- * Quand un donjon à échelle de rangs aligne PLUSIEURS boss, l'échelle les
- * ENJAMBE au lieu de se répéter : au world boss, le boss 1 se joue de D à A,
- * et ATTEINDRE S (le seuil de dégâts du palier) le fait transitionner en
- * boss 2, qui porte S→SSS. Donner les sept rangs aux deux cartes mentirait
- * deux fois — chaque boss afficherait des rangs où il n'existe pas.
- *
- * Le découpage se LIT dans la donnée, il ne se décrète pas : le niveau de base
- * de chaque boss est exactement le niveau de son premier palier (vérifié sur
- * les six world boss — 60 = rang D, 90 = rang S en ligue 3). Si les niveaux ne
- * dessinent pas cette partition (autre mode, autre convention), l'échelle
- * entière reste à chacun — le comportement d'avant.
- */
-function ranksOfMonster(e: Encounter, m: DungeonMonster): DungeonRank[] | undefined {
-  const ranks = e.ref.ranks;
-  const bosses = e.monsters.filter((x) => x.role !== 'add');
-  if (!ranks?.length || bosses.length < 2 || m.role === 'add') return ranks;
-
-  const starts = bosses.map((b) => ranks.findIndex((r) => r.level === b.level));
-  const partitioned = starts.every((s, i) => (i === 0 ? s === 0 : s > starts[i - 1]));
-  const k = bosses.findIndex((b) => b.id === m.id);
-  if (!partitioned || k < 0) return ranks;
-  return ranks.slice(starts[k], k + 1 < starts.length ? starts[k + 1] : undefined);
-}
-
-/**
  * Contextes de calcul de stats d'un MONSTRE dans UN donjon donné.
  *
- * Variante « je sais dans quel combat je suis » de `monsterSpawnContexts`, qui
- * lui part du monstre et ramasse TOUTES ses rencontres. Ici le donjon est
- * connu : ses `adv`, ses `bossHp` et SES paliers s'appliquent — ceux du
- * monstre, pas ceux du donjon entier (cf. `ranksOfMonster`).
+ * Variante « je sais dans quel combat je suis » : `bossSpawnContexts` (la vue
+ * d'un boss) et `monsterStatContexts` (la fiche de quick) partent du monstre et
+ * ramassent TOUTES ses rencontres. Ici le donjon est connu : ses `adv`, ses
+ * `bossHp` et SES paliers s'appliquent — ceux du monstre, pas ceux du donjon
+ * entier (cf. `ranksOfMonster`, la même règle chez les trois).
  */
 export function encounterSpawnContexts(
   e: Encounter,
@@ -516,7 +484,7 @@ export function encounterSpawnContexts(
       ...(d.bossHp ? { bossHp: d.bossHp } : {}),
       ...(m.hpLines ? { hpLines: m.hpLines } : {}),
     },
-    ranksOfMonster(e, m),
+    ranksOfMonster(e.ref, m.id),
     m.role,
   );
   if (opts?.overgrade && d.overgrade && m.role === 'boss' && contexts.length === 1) {

@@ -68,9 +68,7 @@ les preuves et les décisions vivent dans le tri consolidé de sevih-tool
 - [ ] **Suites de la rédaction des lots du 15/10** (lots rédigés : C18 à
       C25, B51, B53 à B57, A58 à A60, F27, G2 à G6, OB1, OB2, TW1) :
       adversité du guide des tours et Very Hard étage par étage FAITS (B58,
-      18/10) ; `bossSpawnContexts` (`boss-view.ts`) et `monsterStatContexts`
-      (`monster-sheet.ts`) donnent encore l'échelle entière `d.ranks` à
-      chaque monstre au lieu de celle de `ranksOfMonster` (vu par B57) ; `stat-keys.json` (L6, décision du 15/10 : clés `ST_*` /
+      18/10) ; `stat-keys.json` (L6, décision du 15/10 : clés `ST_*` /
       `OAT_*` vers la clé du contrat, nature « % » et abréviation, gear-solver
       garde sa table contrat → moteur sous un test ; lot C après C22) ;
       `guid` du flux RSS du journal sur l'id stable après B54 (décision du
