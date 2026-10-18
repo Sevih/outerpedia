@@ -106,12 +106,14 @@ les preuves et les décisions vivent dans le tri consolidé de sevih-tool
       (comportement à décider) ; Dependabot `npm` (et `docker` pour l'image
       de base) : PLUS TARD (décision de Sevih du 18/10, chaque PR redéploie
       le bot ; OB3 ne couvre que les actions GitHub).
-- [ ] **Effets de combat des sets, donnée douteuse (vu par la relecture de
-      G10)** : Pulverization L2 4P reprend `BID_ITEM_UO_SET_17` à 700 alors
-      que le L1 lit `_17_1` et que la prose dit 50 % ; Fortification émet
-      « SPD −30% », absent de sa prose ; Weakness, prose et donnée divergent.
-      À vérifier dans `combatEffects` (B53, `datagen/generators/solver.ts`)
-      contre les tables du jeu.
+- [ ] **Pulverization niveau 2, 4 pièces : coquille probable du jeu (vu par
+      la relecture de G10)** : `ItemSpecialOptionTemplet` ligne 117 fait
+      pointer `BuffID_4P` vers `BID_ITEM_UO_SET_17` (le buff du 2 pièces, 700)
+      alors que le texte dit 50 % et que `BID_ITEM_UO_SET_17_1` niveau 2 vaut
+      500 ; le contrat recopie la table. À MESURER en jeu (4 pièces BT4 contre
+      une cible en Break) avant de toucher quoi que ce soit ; affiché
+      seulement, jamais dans la fiche ni la CP. (Fortification : fausse
+      alerte, le −30 % de vitesse est dans la donnée, le texte le tait.)
 - [ ] **gear-solver, petits suivis de G9 et G10** : le pré-tri du mode Score
       (`priorityScoreOf`, `magnitudeScoreOf`) compte le −30 % de Phantasm
       comme −30 SPD plats ; dans l'onglet Builds, l'infobulle de la pastille
