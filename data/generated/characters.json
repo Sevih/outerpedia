@@ -14659,6 +14659,7 @@
         "max": 110
       }
     },
+    "buffImmune": ["BT_SILENCE"],
     "nickname": {
       "en": "Resonance",
       "jp": "レゾナンス",
