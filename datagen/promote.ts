@@ -350,8 +350,9 @@ export function stripUnintegratedCharacters(data: unknown, ids: ReadonlySet<stri
  * référence que `integrateCharacter` (`pickSkills(char.skills, …)`) : un perso
  * intégré par quick emporte exactement les skills que cette garde laisse
  * passer. Une clé déjà validée n'est JAMAIS retirée, même si plus personne ne
- * la liste (publiée, elle le reste). Sans `characters.json` des deux côtés ou
- * hors du lot promu (bootstrap, `--only` sans lui), `promote` ne l'appelle pas.
+ * la liste (publiée, elle le reste). `characters.json` hors du lot promu
+ * (`--only skills.json`) : `listed` vient du validé. Sans `characters.json`
+ * des deux côtés (bootstrap), `promote` ne l'appelle pas.
  * Mutation en place ; retourne les ids écartés.
  */
 export function stripUnlistedSkills(
@@ -488,17 +489,19 @@ export async function promote(opts: PromoteOptions = {}): Promise<PromoteResult>
   const unintegrated = new Set(
     srcChars && dstChars ? [...srcChars].filter((id) => !dstChars.has(id)) : [],
   );
-  // Garde skills : les skills listés par les persos promus (la proposition sans
-  // les non intégrés) et les clés déjà validées. `null` = pas de garde (sans les
-  // deux `characters.json`, ou `--only` sans lui).
+  // Garde skills : les skills listés par les persos qui seront PUBLIÉS et les
+  // clés déjà validées. Avec `characters.json` dans le lot, ces persos sont la
+  // proposition sans les non intégrés ; hors du lot (`--only skills.json`,
+  // l'usage courant), ceux du validé, qui reste tel quel. `null` = pas de garde
+  // (sans les deux `characters.json` : bootstrap).
   let skillGuard: { listed: Set<string>; validated: Set<string> } | null = null;
-  if (srcChars && dstChars && files.includes('characters.json')) {
-    const proposed = JSON.parse(readFileSync(join(src, 'characters.json'), 'utf8')) as Record<
-      string,
-      { skills?: unknown[] }
-    >;
+  if (srcChars && dstChars) {
+    const charsPromoted = files.includes('characters.json');
+    const published = JSON.parse(
+      readFileSync(join(charsPromoted ? src : dst, 'characters.json'), 'utf8'),
+    ) as Record<string, { skills?: unknown[] }>;
     const listed = new Set<string>();
-    for (const [cid, c] of Object.entries(proposed))
+    for (const [cid, c] of Object.entries(published))
       if (!unintegrated.has(cid)) for (const sid of c.skills ?? []) listed.add(String(sid));
     const dstSkills = join(dst, 'skills.json');
     const validated = new Set(

@@ -7,6 +7,45 @@
 
 ## 2026-10-18
 
+- **Relecture A62, B59, A64, G8, OB3, TW2 (Opus) ; validés.** Contrôles
+  outerpedia sur l'arbre des trois lots : typecheck, lint et `format:check`
+  verts, `NODE_ENV=development pnpm test` `Tests 4200 passed (4200)`,
+  `scripts/quick` 1148. **A62** (`759ca68b`) : `integrate-equipment` lève
+  sur un JSON cassé (`readCuratedJson`) et lit tout avant la première
+  écriture, un set emporte ses pièces, garde skills dans `promote`.
+  **Corrigé à la relecture** : la garde ne jouait pas en `--only skills.json`
+  (l'usage courant, `characters.json` jamais promu par un lot), comme le
+  prompt le demandait par erreur ; elle lit alors les persos du `characters.json`
+  VALIDÉ (`datagen/promote.ts`, test réécrit : 102, 901 et 999 écartés) ;
+  `promote.test.ts` 47 verts, promotion à blanc `--only skills.json` sur la
+  vraie donnée : 0 écart, rien d'écarté. **B59** (`571970c8`, qui porte aussi
+  la première version de l'entrée d'A64) : `sheetLadder` filtre l'échelle
+  à `star ≥ fusion.transStar` pour la table et le curseur de la fiche ;
+  `transStar` vaut 6 pour les six fusionnés ; le calculateur garde l'échelle
+  entière (`getTranscendTiers`, liens partagés). **A64** (`c652806c`) :
+  rejoué sur `encounters.json` — 13 donjons à rangs et au moins deux boss,
+  24 boss coupés (somme des rangs 180 → 96), World Boss seulement ;
+  `encounterSpawnContexts` inchangé (ses `monsters` sont `ref.monsters`
+  dans toutes les constructions). **G8** (gear-solver `76c37f3`) : relu par
+  un agent, 18 fichiers, `typecheck` vert, tests core 116, desktop 79,
+  renderer 432 ; rejeu avant/après sur 8 127 cas (129 fiches × 9 niveaux ×
+  7 paliers) : seuls Snow, Lisha et Notia fusionnées bougent (Snow lv100
+  équipée 214 → 216 SPD, Notia EFF 255 → 170 aux paliers 1 à 4), ancien cache
+  et format 2 sans écart, oracle : 3 lignes de vitesse de Snow. **OB3**
+  (outerbot `1e9938c`) : `dependabot.yml` `github-actions` hebdomadaire,
+  mineures et correctives groupées, 115 tests. **TW2** (tweaks `5cd82dc`) :
+  0.11.3, `ClientCheck.cs` dans un try/catch avant les patchs, build
+  rejoué (référence absente, factice, normale). **Reste à Sevih** : la
+  fiche d'un Core Fusion sans les crans sous le palier 6 ; dans quick, la
+  fiche d'un boss de World Boss limitée à ses rangs ; gear-solver, la
+  vitesse de Snow fusionnée équipée (+1 à +3) ; outerbot, après le push,
+  Insights › Dependabot sans erreur et la première PR groupée verte ; en
+  jeu, la ligne « client 1.4.18 (build 25744766) : celui pour lequel ce plugin a été construit. » dans `BepInEx/LogOutput.log`. Vu hors périmètre
+  (G8) : la vitesse de set se calcule sur la vitesse avant le taux du noyau,
+  à juger avec les mineurs de fiche de gear-solver (G26). A65 amendé avant
+  lancement (décision de Sevih : un `link` aux trois entrées à cible
+  unique, `<strong>` en gras). **Suite** : A65, puis A63 seul, B60, A66,
+  C26 ; gear-solver G9.
 - **Garde de « Confirmer l'extraction », suite : `integrate-equipment` sur
   un JSON cassé, skills d'un perso non intégré, pièces d'un set (A62, O6,
   O7 et J12 de la revue « génération des données » d'octobre).** Trois

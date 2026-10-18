@@ -109,7 +109,8 @@ les preuves et les décisions vivent dans le tri consolidé de sevih-tool
       (`src/commands/char.ts`, `guide.ts`), à servir par le site ; review
       déposée entre le démarrage et le premier forum-sync, ignorée
       (comportement à décider) ; Dependabot `npm` (et `docker` pour l'image
-      de base) à décider, chaque PR redéploie le bot.
+      de base) : PLUS TARD (décision de Sevih du 18/10, chaque PR redéploie
+      le bot ; OB3 ne couvre que les actions GitHub).
 - [ ] **gear-solver, CI** : ni `dependabot.yml`, ni actions épinglées par SHA
       (`actions/checkout@v4`…), comme outerbot avant le 15/10.
 

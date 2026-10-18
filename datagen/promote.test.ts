@@ -548,11 +548,14 @@ describe('promote — garde skills', () => {
     expect(Object.keys(read(dst, 'skills.json'))).toEqual(['101', '102', '500', '901', '999']);
   });
 
-  it('--only skills.json (characters.json hors du lot), aucun filtrage', async () => {
+  it('--only skills.json (characters.json hors du lot) : la garde lit les persos VALIDÉS', async () => {
     await seed();
     const res = await promote({ src, dst, apply: true, only: new Set(['skills.json']) });
-    expect(res.strippedSkills).toEqual([]);
-    expect(Object.keys(read(dst, 'skills.json'))).toEqual(['101', '102', '500', '901', '999']);
+    // 102 n'est listé que par la proposition de 2000001, qui n'est pas promue :
+    // il attend la promotion (ou l'intégration) de son perso, comme 901 et 999.
+    expect(res.strippedSkills).toEqual(['102', '901', '999']);
+    expect(Object.keys(read(dst, 'skills.json'))).toEqual(['101', '500']);
+    expect(read(dst, 'characters.json')).toEqual({ '2000001': { name: 'K', skills: ['101'] } });
   });
 });
 
