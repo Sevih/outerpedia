@@ -7,6 +7,26 @@
 
 ## 2026-10-18
 
+- **Relecture B58 (Opus) — adversité de chaque étage des guides de tour,
+  Very Hard étage par étage ; validé.** Périmètre conforme (`eb3f4078`) :
+  `TowerGuide.tsx`, `towers.ts` et son test, deux clés (`tower.floor_prev`,
+  `tower.floor_next`) dans les six locales, DONE et TODO ; rien sous `data/`.
+  Contrôles : typecheck, lint et `format:check` verts,
+  `NODE_ENV=development pnpm test` `Tests 4185 passed (4185)`. Rejeu
+  indépendant (tsx, depuis `encounters.json` et non `getTowerCombats`) : les
+  boss de chaque donjon Very Hard donnent 21 combats, les mêmes étages que
+  `floors` pour chacun (12 boss sur 1, 2, 4, 6, 7, 9, 11, 12, 14, 16, 17,
+  19 ; 4 sur 3, 8, 13, 18 ; 3 Demiurges sur 5, 10, 15 ; 2 au 20), 0 écart
+  d'`adv` ou de niveau, adds compris (toutes les unités d'une formation sont
+  au niveau du boss) ; ATK de 40103001 5 009 au 1F, 5 834 au 19F, comme
+  annoncé. Mode suiveur vérifié dans `BossRankProvider` (index tels quels,
+  sans dédup). Pages du dev de :3000 en 200 : `/very-hard-tower/40103001`
+  (crans Floor 1 à 19, « Floor 19 — Lv. 148 »), `/very-hard-tower/40103014`
+  (Floor 3, 8, 13, 18), `/very-hard-tower`, `normal-tower/1`,
+  `fire-tower/1`. **Reste à Sevih** : sur un combat du Very Hard, la
+  glissière d'étage change les stats du boss et des adds ensemble ; un étage
+  de Skyward normal montre des stats bien plus basses qu'avant (ATK ≈ −76 %).
+  **Suite** : aucun lot ouvert.
 - **Guides de tour : l'adversité de chaque étage, et le Very Hard étage par
   étage (B58).** Aucun des huit guides `skyward-tower` ne passait l'`adv` du
   donjon aux cartes (`spawns={[{ level }]}` seul, alors que 1 009 donjons de
