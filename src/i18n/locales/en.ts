@@ -1449,6 +1449,8 @@ const en = {
   'tower.strategy': 'Strategy',
   'tower.level': 'Lv. {n}',
   'tower.power': 'Power {n}',
+  'tower.floor_prev': 'Previous floor',
+  'tower.floor_next': 'Next floor',
   'tower.adds': 'Adds',
   'tower.restr_element': 'Element',
   'tower.restr_class': 'Class',

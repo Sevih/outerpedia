@@ -10,7 +10,12 @@ import {
   getTowerCombats,
   getTowerFloor,
   isTowerKey,
+  towerCombatSpawns,
+  towerFloorSpawn,
 } from '@/lib/data/towers';
+import { getEncounter } from '@/lib/data/encounters';
+import { getMonster } from '@/lib/data/monsters';
+import { statAt } from '@/lib/monster-stats';
 
 /**
  * Les compositions et RESTRICTIONS des tours sont un dérivé silencieux des
@@ -214,5 +219,77 @@ describe('getTowerCombats — combats very hard', () => {
 
   it('une tour à vagues n’a aucun combat (le modèle est propre au very hard)', () => {
     expect(getTowerCombats(tower('tower'))).toEqual([]);
+  });
+});
+
+describe('getTowerCombats — un combat, plusieurs étages (B58)', () => {
+  const vh = tower('tower_very_hard');
+  const combats = getTowerCombats(vh);
+  const combat = (bossId: string) => {
+    const c = combats.find((x) => x.boss.id === bossId);
+    expect(c, bossId).toBeDefined();
+    return c!;
+  };
+
+  it('le combat de 40103001 tombe sur les 12 étages de son pool, niveaux 130 à 148', () => {
+    const c = combat('40103001');
+    expect(c.floors.map((f) => f.floor)).toEqual([1, 2, 4, 6, 7, 9, 11, 12, 14, 16, 17, 19]);
+    expect(c.floors[0].level).toBe(130);
+    expect(c.floors.at(-1)!.level).toBe(148);
+  });
+
+  it('un Demiurge tombe sur 5, 10 et 15', () => {
+    const demiurges = combats.filter((c) => c.group === 'demiurge');
+    expect(demiurges.length).toBeGreaterThan(0);
+    for (const c of demiurges) expect(c.floors.map((f) => f.floor)).toEqual([5, 10, 15]);
+  });
+
+  it('chaque étage porte son niveau et l’`adv` de SON donjon', () => {
+    for (const c of combats) {
+      for (const f of c.floors) {
+        const floor = getTowerFloor(vh, f.floor)!;
+        expect(f.level, `${c.boss.id} @${f.floor}F`).toBe(floor.level);
+        expect(f.adv, `${c.boss.id} @${f.floor}F`).toEqual(getEncounter(floor.dungeon)?.adv);
+      }
+    }
+  });
+});
+
+describe('contextes de spawn des cartes de tour — l’adv change les stats (B58)', () => {
+  const stats = (id: string) => {
+    const m = getMonster(id);
+    expect(m, id).toBeDefined();
+    return m!.stats;
+  };
+
+  it('very hard 19F : niveau 148, adv +280 ‰ sur ATK/DEF/PV/SPD', () => {
+    const c = getTowerCombats(tower('tower_very_hard')).find((x) => x.boss.id === '40103001')!;
+    const spawns = towerCombatSpawns(c);
+    const at19 = spawns[c.floors.findIndex((f) => f.floor === 19)];
+    expect(at19).toEqual({ level: 148, adv: { atk: 280, def: 280, hp: 280, spd: 280 } });
+    const s = stats('40103001');
+    for (const slug of ['atk', 'def', 'hp', 'speed']) {
+      const without = statAt(slug, s[slug], { level: 148 });
+      expect(statAt(slug, s[slug], at19), slug).toBe(Math.floor((without * 1280) / 1000));
+      expect(statAt(slug, s[slug], at19), slug).toBeGreaterThan(without);
+    }
+  });
+
+  it('Skyward normal 1F : l’adv négative du donjon baisse ATK et PV', () => {
+    const t = tower('tower');
+    const floor = getTowerFloor(t, 1)!;
+    const ref = getEncounter(floor.dungeon)!;
+    const boss = ref.monsters!.find((m) => m.role === 'boss')!;
+    const ctx = towerFloorSpawn(floor, boss.level);
+    expect(ctx.adv).toEqual(ref.adv);
+    expect(ctx.adv?.atk).toBeLessThan(0);
+    expect(ctx.adv?.hp).toBeLessThan(0);
+    const s = stats(boss.id);
+    for (const slug of ['atk', 'hp'] as const) {
+      const without = statAt(slug, s[slug], { level: boss.level });
+      const adv = ctx.adv![slug]!;
+      expect(statAt(slug, s[slug], ctx), slug).toBe(Math.floor((without * (1000 + adv)) / 1000));
+      expect(statAt(slug, s[slug], ctx), slug).toBeLessThan(without);
+    }
   });
 });

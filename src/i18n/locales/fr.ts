@@ -1462,6 +1462,8 @@ const fr: Record<TranslationKey, string> = {
   'tower.strategy': 'Stratégie',
   'tower.level': 'Niv. {n}',
   'tower.power': 'Puissance {n}',
+  'tower.floor_prev': 'Étage précédent',
+  'tower.floor_next': 'Étage suivant',
   'tower.adds': 'Renforts',
   'tower.restr_element': 'Élément',
   'tower.restr_class': 'Classe',

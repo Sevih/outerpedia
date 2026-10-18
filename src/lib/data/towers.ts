@@ -10,8 +10,17 @@
  * tout ça se lisait dans le SLUG du guide (`fire-tower`, `normal-tower`).
  */
 import towersData from '@data/generated/towers.json';
-import type { Tower, TowerFloor, TowerRestriction, TowerUnit, TowersData } from '@contracts';
+import type {
+  DungeonAdv,
+  Tower,
+  TowerFloor,
+  TowerRestriction,
+  TowerUnit,
+  TowersData,
+} from '@contracts';
 import type { Lang } from '@/lib/i18n/config';
+import type { SpawnContext } from '@/lib/monster-stats';
+import { getEncounter } from './encounters';
 import { getMonster } from './monsters';
 
 const TOWERS = towersData as unknown as TowersData;
@@ -45,6 +54,15 @@ export function getTowerFloor(tower: Tower, floor: number): TowerFloor | undefin
 }
 
 /**
+ * Contexte de spawn d'une unité d'un étage STANDARD : son niveau, et
+ * l'adversité (`adv`) du donjon de l'étage — sans elle, les stats affichées
+ * ignoraient les −76 % d'ATK du normal ou la SPD positive des élémentaires.
+ */
+export function towerFloorSpawn(floor: TowerFloor, level: number): SpawnContext {
+  return { level, adv: getEncounter(floor.dungeon)?.adv };
+}
+
+/**
  * Libellé LOCALISÉ d'une restriction, gabarit résolu.
  *
  * `desc` est un gabarit du jeu (`« {0} Water hero(es) must be deployed »`) où
@@ -73,28 +91,45 @@ export type TowerCombatGroup = 'floor20' | 'demiurge' | 'random';
 
 const COMBAT_GROUP_ORDER: TowerCombatGroup[] = ['floor20', 'demiurge', 'random'];
 
-/** Un combat very hard : le boss (unité `type:boss`) et ses adds. */
+/**
+ * Un étage où un combat very hard peut tomber : chaque étage a son NIVEAU
+ * (`RecommandLevel`, porté par les unités de la formation) et l'ADVERSITÉ de
+ * son donjon (`adv`, pour-mille signés) — les stats du combat en dépendent.
+ */
+export interface TowerCombatFloor {
+  floor: number;
+  level: number;
+  adv?: DungeonAdv;
+}
+
+/** Un combat very hard : le boss (unité `type:boss`), ses adds, et ses étages. */
 export interface TowerCombat {
   group: TowerCombatGroup;
   /** Le boss (unité `type:boss`) — son `id` identifie le combat (segment d'URL). */
   boss: TowerUnit;
   /** Les autres unités de la formation (`type:monster`). */
   adds: TowerUnit[];
+  /** Les étages où le combat apparaît, dans l'ordre des étages. */
+  floors: TowerCombatFloor[];
 }
+
+/** Types de monstre qui tiennent le rôle de BOSS d'une formation.
+ * PAS le même set que `BOSS_BADGE_TYPES` (admin/monster-icon) : le badge admin
+ * inclut `season_boss`, qui ne mène jamais une formation de tour. */
+const FORMATION_BOSS_TYPES = new Set(['boss', 'area_boss']);
 
 /**
  * Les combats d'une tour very hard, dérivés des FORMATIONS de ses étages.
  *
  * Chaque `floor.encounters[i]` est une formation, et le jeu y marque exactement
  * une unité `type:boss` — c'est LE boss du combat, les autres sont ses adds.
- * On déduplique par boss (les étages 5/10/15 rejouent les mêmes trois Demiurges,
- * les étages aléatoires piochent dans le même pool) et on range par groupe.
+ * Un combat = PLUSIEURS étages : les étages 5/10/15 rejouent les mêmes trois
+ * Demiurges, les étages aléatoires piochent dans un même pool. On déduplique
+ * donc par boss (le groupe et les adds sont ceux du premier étage), mais chaque
+ * étage où le combat tombe est gardé, avec son niveau et l'`adv` de son donjon :
+ * en jeu, les stats d'un combat changent selon l'étage où on le tire. Les pools
+ * se lisent dans la donnée, rien n'est recomposé ici. Rangés par groupe.
  */
-/** Types de monstre qui tiennent le rôle de BOSS d'une formation.
- * PAS le même set que `BOSS_BADGE_TYPES` (admin/monster-icon) : le badge admin
- * inclut `season_boss`, qui ne mène jamais une formation de tour. */
-const FORMATION_BOSS_TYPES = new Set(['boss', 'area_boss']);
-
 export function getTowerCombats(tower: Tower): TowerCombat[] {
   const seen = new Map<string, TowerCombat>();
   for (const floor of tower.floors) {
@@ -108,15 +143,36 @@ export function getTowerCombats(tower: Tower): TowerCombat[] {
         const type = getMonster(u.id)?.type;
         return type != null && FORMATION_BOSS_TYPES.has(type);
       });
-      if (!boss || seen.has(boss.id)) continue;
+      if (!boss) continue;
+      const at: TowerCombatFloor = {
+        floor: floor.floor,
+        level: boss.level,
+        adv: getEncounter(floor.dungeon)?.adv,
+      };
+      const known = seen.get(boss.id);
+      if (known) {
+        known.floors.push(at);
+        continue;
+      }
       seen.set(boss.id, {
         group,
         boss,
         adds: formation.filter((u) => u.id !== boss.id),
+        floors: [at],
       });
     }
   }
   return [...seen.values()].sort(
     (a, b) => COMBAT_GROUP_ORDER.indexOf(a.group) - COMBAT_GROUP_ORDER.indexOf(b.group),
   );
+}
+
+/**
+ * Les contextes de spawn d'un combat very hard : UN par étage où il apparaît,
+ * dans l'ordre des étages (niveau de l'étage, `adv` de son donjon). Toutes les
+ * unités d'une formation very hard partagent le niveau de l'étage
+ * (`RecommandLevel`) : boss et adds reçoivent la même échelle.
+ */
+export function towerCombatSpawns(combat: TowerCombat): SpawnContext[] {
+  return combat.floors.map((f) => ({ level: f.level, adv: f.adv }));
 }

@@ -1376,6 +1376,8 @@ const zh: Record<TranslationKey, string> = {
   'tower.strategy': '攻略',
   'tower.level': '等级{n}',
   'tower.power': '战力{n}',
+  'tower.floor_prev': '上一层',
+  'tower.floor_next': '下一层',
   'tower.adds': '小怪',
   'tower.restr_element': '属性',
   'tower.restr_class': '职业',

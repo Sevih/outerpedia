@@ -5,14 +5,19 @@
  *
  *   - STANDARD (normal / hard / élémentaires) : une suite d'ÉTAGES fixes. Le
  *     menu liste les étages ; le détail montre le combat de l'étage (boss +
- *     adds en cartes COMPACTES), sa restriction FIXE, puis l'éditorial. On ne
- *     montre qu'un étage à la fois (sous-route `[floor]`).
+ *     adds en cartes COMPACTES, au niveau ET à l'adversité `adv` du donjon de
+ *     l'étage), sa restriction FIXE, puis l'éditorial. On ne montre qu'un étage
+ *     à la fois (sous-route `[floor]`).
  *
  *   - VERY HARD : la restriction ET le boss sont TIRÉS AU HASARD à chaque
- *     tentative — la notion d'étage n'a plus de sens. On navigue donc par
- *     COMBAT (les formations : un boss + ses adds), groupés comme le menu du
- *     jeu (Floor 20 / Demiurges / Random), et la roster se filtre en direct par
- *     la restriction choisie (cf. `TowerCombatRoster`).
+ *     tentative. On navigue donc par COMBAT (les formations : un boss + ses
+ *     adds), groupés comme le menu du jeu (Floor 20 / Demiurges / Random), et
+ *     la roster se filtre en direct par la restriction choisie (cf.
+ *     `TowerCombatRoster`). Mais un combat tombe sur PLUSIEURS étages, et ses
+ *     stats changent avec l'étage (niveau + `adv` du donjon) : les cartes
+ *     reçoivent un contexte de spawn par étage, et une glissière d'étage
+ *     (premier étage par défaut) les pilote toutes, boss et adds, en mode
+ *     suiveur (`EncounterSelection` + `followStages`).
  *
  * La SEULE différence de rendu est là : le very hard filtre sa roster (aléa des
  * restrictions), le standard l'affiche telle quelle (restriction fixe). Tout le
@@ -36,15 +41,19 @@ import {
   getTower,
   getTowerFloor,
   getTowerCombats,
+  towerCombatSpawns,
+  towerFloorSpawn,
   formatRestriction,
   TOWER_ELEMENT_MODE,
   type TowerCombatGroup,
 } from '@/lib/data/towers';
+import type { SpawnContext } from '@/lib/monster-stats';
 import { getEncounter, bossWaveMonsters } from '@/lib/data/encounters';
 import { getMonster, monsterThumb } from '@/lib/data/monsters';
 import { resolveGuideCharacter } from '@/lib/data/characters';
 import { renderGameText } from '@/components/inline/GameTokens';
 import { BossCard } from './BossPanel';
+import { EncounterSelection, EncounterSlider } from './EncounterSelection';
 import { TowerFloorMenu, type TowerMenuSection } from './TowerFloorMenu';
 import { TowerAddsSelector } from './TowerAddsSelector';
 import { TowerCombatRoster, type RosterGroup } from './TowerCombatRoster';
@@ -82,6 +91,16 @@ interface TowerContent {
 interface CombatUnit {
   id: string;
   level: number;
+}
+
+/** Comment les cartes d'un combat se calculent : leurs rencontres, et qui les choisit. */
+interface CombatScale {
+  /** Les contextes de spawn d'une unité (un par étage en very hard). */
+  spawnsOf: (unit: CombatUnit) => SpawnContext[];
+  /** Mode SUIVEUR : sélection d'étage → index dans les spawns (cf. BossRank). */
+  followStages?: Record<number, number>;
+  /** Le sélecteur d'étage, posé dans la carte du boss (entre stats et compétences). */
+  selector?: ReactNode;
 }
 
 /** Nom d'affichage d'un monstre (repli EN). */
@@ -154,13 +173,15 @@ export async function TowerGuide({ lang, guide, floor }: GuideContentProps & { f
     }));
 
   /** La vue d'un combat : le boss en carte compacte, puis ses adds au sélecteur. */
-  const combatView = (boss: CombatUnit, adds: readonly CombatUnit[]) => (
+  const combatView = (boss: CombatUnit, adds: readonly CombatUnit[], scale: CombatScale) => (
     <>
       <section className="space-y-3">
         <h2 className="text-content-strong text-2xl font-bold">{monsterName(boss.id, lang)}</h2>
         <BossCard
           monsterId={boss.id}
-          spawns={[{ level: boss.level }]}
+          spawns={scale.spawnsOf(boss)}
+          followStages={scale.followStages}
+          afterStats={scale.selector}
           lang={lang}
           role="boss"
           compact
@@ -184,7 +205,8 @@ export async function TowerGuide({ lang, guide, floor }: GuideContentProps & { f
                   card: (
                     <BossCard
                       monsterId={a.id}
-                      spawns={[{ level: a.level }]}
+                      spawns={scale.spawnsOf(a)}
+                      followStages={scale.followStages}
                       lang={lang}
                       role="add"
                       compact
@@ -256,6 +278,30 @@ export async function TowerGuide({ lang, guide, floor }: GuideContentProps & { f
 
     const editorial = content?.combats?.[current.boss.id];
 
+    // Un contexte de spawn PAR ÉTAGE du combat (`towerCombatSpawns`). Plusieurs
+    // étages → une glissière d'étage, et toutes les cartes du combat la suivent
+    // (mode suiveur, index tels quels) : boss et adds montrent le MÊME étage.
+    const floorSpawns = towerCombatSpawns(current);
+    const multiFloor = current.floors.length > 1;
+    const scale: CombatScale = {
+      spawnsOf: () => floorSpawns,
+      ...(multiFloor && {
+        followStages: Object.fromEntries(current.floors.map((_, i) => [i, i])),
+        selector: (
+          <EncounterSlider
+            label={t('tools.damage-calculator.target.floor')}
+            ticks={current.floors.map((f) => String(f.floor))}
+            titles={current.floors.map(
+              (f) => `${t('tower.floor', { n: f.floor })} — ${t('tower.level', { n: f.level })}`,
+            )}
+            prevLabel={t('tower.floor_prev')}
+            nextLabel={t('tower.floor_next')}
+          />
+        ),
+      }),
+    };
+    const combat = combatView(current.boss, current.adds, scale);
+
     return (
       <div className="flex flex-col gap-6 md:flex-row md:items-start">
         {menu(sections, current.boss.id)}
@@ -266,7 +312,14 @@ export async function TowerGuide({ lang, guide, floor }: GuideContentProps & { f
             </p>
           )}
 
-          {combatView(current.boss, current.adds)}
+          {multiFloor ? (
+            // Premier étage du combat par défaut : c'est le premier où on le tire.
+            <EncounterSelection count={current.floors.length} defaultIndex={0}>
+              {combat}
+            </EncounterSelection>
+          ) : (
+            combat
+          )}
           {adviceSection(editorial)}
 
           <TowerCombatRoster
@@ -366,7 +419,11 @@ export async function TowerGuide({ lang, guide, floor }: GuideContentProps & { f
           </section>
         )}
 
-        {boss && combatView(boss, adds)}
+        {boss &&
+          combatView(boss, adds, {
+            // Le niveau de chaque unité, et l'adversité du donjon de l'étage.
+            spawnsOf: (u) => [towerFloorSpawn(floorData, u.level)],
+          })}
 
         {floorData.restrictions.length > 0 && (
           <section className="space-y-2">

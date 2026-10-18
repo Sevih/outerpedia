@@ -1419,6 +1419,8 @@ const jp: Record<TranslationKey, string> = {
   'tower.strategy': '攻略',
   'tower.level': 'Lv.{n}',
   'tower.power': '戦闘力{n}',
+  'tower.floor_prev': '前の階',
+  'tower.floor_next': '次の階',
   'tower.adds': '雑魚',
   'tower.restr_element': '属性',
   'tower.restr_class': 'クラス',

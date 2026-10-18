@@ -7,6 +7,51 @@
 
 ## 2026-10-18
 
+- **Guides de tour : l'adversité de chaque étage, et le Very Hard étage par
+  étage (B58).** Aucun des huit guides `skyward-tower` ne passait l'`adv` du
+  donjon aux cartes (`spawns={[{ level }]}` seul, alors que 1 009 donjons de
+  tour sur 1 010 en ont une) : stats fausses partout, ATK ≈ −76 % et PV
+  ≈ −68 % ignorés en normal, +10 % à +29 % en Very Hard. Et le Very Hard
+  gardait le PREMIER étage d'un combat, quand chaque étage a son niveau
+  (130 au 1F à 149 au 20F) et son adversité. `getTowerCombats`
+  (`src/lib/data/towers.ts`) garde désormais pour chaque combat la liste
+  `floors` des étages où il tombe (étage, niveau du boss dans la formation,
+  `getEncounter(floor.dungeon).adv`), dans l'ordre des étages et lue dans la
+  donnée (pools 12 / 4 / 3 Demiurges / 2 au 20, rien de recomposé) ; deux
+  aides, `towerFloorSpawn` (standard : niveau de l'unité + `adv` du donjon de
+  l'étage) et `towerCombatSpawns` (Very Hard : un contexte par étage),
+  alimentent `TowerGuide.tsx`, dont `combatView` prend maintenant l'échelle
+  de ses cartes (`CombatScale`). Very Hard multi-étages : le boss et ses adds
+  reçoivent le même contexte par étage et SUIVENT une seule glissière
+  d'étage, par le mécanisme existant (`EncounterSelection` +
+  `followStages`, index tels quels, comme le Special Request) ; la
+  glissière (`EncounterSlider`) vit dans la carte du boss entre stats et
+  compétences (`afterStats`), ouvre sur le premier étage du combat, crans
+  = numéros d'étage, entrée « Floor N — Lv. X » (`tower.floor` +
+  `tower.level`), titre « Floor » (`tools.damage-calculator.target.floor`,
+  existante) ; deux clés ajoutées dans les six locales pour le pas-à-pas,
+  `tower.floor_prev` / `tower.floor_next`. Le sélecteur interne de
+  `BossCard` n'a donc pas reçu de libellé d'étage : en mode suiveur il se
+  masque, et le Floor 20 (un étage par combat) garde la ligne « Level 149 ».
+  En-têtes de `TowerGuide.tsx` et de `getTowerCombats` réécrits (un combat =
+  plusieurs étages, des stats par étage). Tests (`towers.test.ts`) : le
+  combat de 40103001 liste 1, 2, 4, 6, 7, 9, 11, 12, 14, 16, 17, 19 (niveaux
+  130 à 148), chaque Demiurge 5, 10, 15, chaque étage porte niveau et `adv`
+  de son donjon ; par `statAt`, le boss 40103001 au 19F (148, +280 ‰) et le
+  boss du normal 1F (adv −767 / −693) diffèrent bien des valeurs sans adv.
+  Rendu lu par `curl` sur le dev de :3000 : les stats sont repliées
+  (compact), donc comparées par les props sérialisées — normal 1F, boss
+  411200190 `{"level":20,"adv":{"atk":-767,"hp":-693}}` (fiche ATK 933 → 217,
+  PV 4 720 → 1 449 par le calcul) ; `/very-hard-tower/40103001`, 12
+  contextes de 130 (+100 ‰) à 148, glissière « Floor 1 — Lv. 130 » (fiche
+  ATK 5 009 au 1F, 5 834 au 19F) ; `/very-hard-tower` (Floor 20) un
+  contexte à 149, +290 ‰. Pas de `pnpm build`. Pour Sevih, à regarder :
+  `/guides/skyward-tower/very-hard-tower/40103001`, déplier les stats,
+  glissière sur Floor 1 puis Floor 19, les stats du boss et de ses adds
+  changent ensemble. `pnpm typecheck` et `pnpm lint` sans sortie d'erreur
+  (`tsc --noEmit && …`, `eslint`), `Tests 4185 passed (4185)`.
+  Hors périmètre, laissé : `bossSpawnContexts` / `monsterStatContexts`
+  (ligne du TODO), l'éditorial `content.json`.
 - **Suivi de progression : Joint Challenge = la récompense du jour
   (retour de Sevih du 18/10, comme le World Boss d'A58).** Le jeu autorise
   deux entrées par jour (`EVENT_BOSS_ENTRANCE_LIMIT` = 2) ; la tâche

@@ -1405,6 +1405,8 @@ const kr: Record<TranslationKey, string> = {
   'tower.strategy': '공략',
   'tower.level': 'Lv.{n}',
   'tower.power': '전투력 {n}',
+  'tower.floor_prev': '이전 층',
+  'tower.floor_next': '다음 층',
   'tower.adds': '쫄',
   'tower.restr_element': '속성',
   'tower.restr_class': '클래스',
