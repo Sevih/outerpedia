@@ -635,6 +635,8 @@ const kr: Record<TranslationKey, string> = {
   // Attacker panel labels
   'tools.damage-calculator.attacker.pick': '딜러를 선택하세요…',
   'tools.damage-calculator.attacker.affinity': '호감도',
+  'tools.damage-calculator.attacker.level_breakthrough_hint':
+    'Lv 105와 110에서는 다음 한계 돌파를 하지 않은 것으로 가정합니다.',
   'tools.damage-calculator.attacker.crit': '치명',
   'tools.damage-calculator.attacker.burst_label': '버스트',
   'tools.damage-calculator.attacker.burst_off': '끄기',
@@ -810,6 +812,7 @@ const kr: Record<TranslationKey, string> = {
   'guides.boss_display.rank_options': '등급 패시브',
   'guides.boss_display.rank_prev': '이전 등급',
   'guides.boss_display.rank_next': '다음 등급',
+  'guides.boss_display.sheet_stat': '기본 수치: {value} (패시브 적용 전)',
   'guides.boss_display.add': '부하 몬스터',
   'guides.boss_display.archived': '보관된 보스',
   'guides.boss_display.archived_version':

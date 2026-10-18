@@ -8237,6 +8237,7 @@ export async function extractorEntity(
         deps.statScales(),
         monsterQuirkMods(m.type, enc.bossQuirkMods),
         optionLabels,
+        m.statPremium,
       ),
       encounters: monsterEncounters(m, src),
       relations: monsterRelations(m, allFresh),

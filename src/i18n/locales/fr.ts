@@ -666,6 +666,8 @@ const fr: Record<TranslationKey, string> = {
   // Attacker panel labels
   'tools.damage-calculator.attacker.pick': 'Choisir un DPS…',
   'tools.damage-calculator.attacker.affinity': 'Affinité',
+  'tools.damage-calculator.attacker.level_breakthrough_hint':
+    'Aux Lv 105 et 110, la percée suivante est supposée non franchie.',
   'tools.damage-calculator.attacker.crit': 'Crit',
   'tools.damage-calculator.attacker.burst_label': 'Burst',
   'tools.damage-calculator.attacker.burst_off': 'Désactivé',
@@ -844,6 +846,7 @@ const fr: Record<TranslationKey, string> = {
   'guides.boss_display.rank_options': 'Passifs du palier',
   'guides.boss_display.rank_prev': 'Palier précédent',
   'guides.boss_display.rank_next': 'Palier suivant',
+  'guides.boss_display.sheet_stat': 'Valeur de fiche : {value} (avant passifs)',
   'guides.boss_display.add': 'Renfort',
   'guides.boss_display.archived': 'Boss archivé',
   'guides.boss_display.archived_version':

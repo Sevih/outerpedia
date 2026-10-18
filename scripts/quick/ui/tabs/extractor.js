@@ -612,12 +612,13 @@ const trait = (file, slug) =>
 const stars = (n) =>
   `<span class="ex-stars" title="${n}★">${`<img src="${src('ui/star/CM_icon_star_y')}" alt="" aria-hidden="true" />`.repeat(n)}</span>`;
 
-/** La grille des stats : une cellule par stat, son abréviation puis sa valeur. */
+/** La grille des stats : une cellule par stat, son abréviation puis sa valeur
+ *  de combat ; la fiche en infobulle quand elle diffère. */
 const gridHtml = (cells) =>
   `<div class="ex-grid">${cells
     .map(
       (c) =>
-        `<div class="ex-cell"><span class="ex-cell-k">${esc(c.abbr)}</span><span class="ex-cell-v">${esc(c.value)}${
+        `<div class="ex-cell"${c.sheet ? ` title="fiche : ${esc(c.sheet)}"` : ''}><span class="ex-cell-k">${esc(c.abbr)}</span><span class="ex-cell-v">${esc(c.value)}${
           c.bars ? `<span class="lbl"> × ${c.bars} barres</span>` : ''
         }</span></div>`,
     )

@@ -11,6 +11,13 @@
  *     REMPLACE l'interpolation (2 000 000 en very hard) — sur le BOSS seul,
  *     jamais sur un renfort (cf. `expandRankContexts`).
  *
+ * Stat de FICHE (`statAt`) et stat de COMBAT (`combatStatAt`) : le jeu verse
+ * au TAUX DE BUFF de la stat (`CalcFinalStat`, spec damage § 3) les passifs de
+ * fiche du kit (`Monster.statPremium`) et les quirks « boss » du compte
+ * (`monsterQuirkMods`, même canal : `GetStatPremiumBuffList` lit les buffs des
+ * nœuds d'éveil), taux SOMMÉS puis une troncature. Les pages de boss et le
+ * calculateur montrent la stat de combat, la fiche en infobulle.
+ *
  * PIÈGE — `DungeonRank.hp` a DEUX sens selon le mode, et les confondre ment :
  * dans un mode à SCORE, ce n'est PAS les PV du boss mais la LARGEUR de la
  * tranche de dégâts du palier (`max − min + 1`). Vérifié sur toute l'échelle :
@@ -18,7 +25,14 @@
  * PV mentait d'un facteur 7,5. Le discriminant est `damage` : avec tranche, la
  * valeur est une barre (`bar`) ; sans tranche (adventure), de vrais PV.
  */
-import type { DungeonAdv, DungeonMonster, DungeonRank, DungeonRef, RankDamage } from '@contracts';
+import type {
+  DungeonAdv,
+  DungeonMonster,
+  DungeonRank,
+  DungeonRef,
+  Monster,
+  RankDamage,
+} from '@contracts';
 import { calcStatByLevel } from '@/lib/damage/formula';
 
 export interface StatRange {
@@ -165,33 +179,32 @@ const ADV_OF: Record<string, keyof DungeonAdv> = {
 /** Types de monstre ≥ `CT_BOSS_MONSTER` : ceux à qui le client applique les quirks de compte. */
 const QUIRK_BOSS_TYPES = new Set(['boss', 'area_boss', 'season_boss']);
 
+/** Le client applique-t-il les quirks « boss » du compte à ce type de monstre ? */
+export function quirkBossType(type: string | undefined): boolean {
+  return type !== undefined && QUIRK_BOSS_TYPES.has(type);
+}
+
 /**
  * Quirks de compte qui s'appliquent à un monstre, selon son TYPE : ceux du
  * glossaire (`glossaries.bossQuirkMods`) pour `boss`, `area_boss` et
  * `season_boss`, rien sinon — le client n'applique les nœuds d'éveil 198 à 201
  * qu'à un type ≥ `CT_BOSS_MONSTER` (`CCharacterData.CheckNodeApply`) ; 1 180
  * monstres `monster` / `named` des rencontres perdaient 20 % d'EFF et de RES.
+ * Ce sont des taux du canal de buff (`monsterStatChannel`), pas une passe à part.
  */
 export function monsterQuirkMods(
   type: string | undefined,
   bossQuirkMods: Record<string, number> | undefined,
 ): Record<string, number> {
-  return type && QUIRK_BOSS_TYPES.has(type) ? (bossQuirkMods ?? {}) : {};
+  return quirkBossType(type) ? (bossQuirkMods ?? {}) : {};
 }
 
 /**
- * Valeur EFFECTIVE d'une stat dans le contexte d'une rencontre. `quirkMods` =
- * réductions PERMANENTES des quirks de compte (`monsterQuirkMods`, per-mille
- * signés — EFF/RES −10 % par nœud, deux nœuds, −20 % au total, boss seulement :
- * `CheckNodeApply`) : le jeu les applique aux stats affichées du boss, nous
- * aussi.
+ * Stat de FICHE d'un monstre dans le contexte d'une rencontre : interpolation,
+ * overgrade, avantage de spawn, PV de boss — ce que le templet et le donjon
+ * posent, AVANT le canal de buff (passifs de fiche, quirks : `combatStatAt`).
  */
-export function statAt(
-  slug: string,
-  r: StatRange,
-  ctx: SpawnContext,
-  quirkMods?: Record<string, number>,
-): number {
+export function statAt(slug: string, r: StatRange, ctx: SpawnContext): number {
   // Interpolation tronquée VERS ZÉRO, comme le client (`CFormula.CalcStat`) :
   // sur une plage décroissante, `Math.floor` sortait 1 de moins.
   let v = calcStatByLevel(r.min, r.max, ctx.level);
@@ -202,12 +215,71 @@ export function statAt(
   const adv = ctx.adv?.[ADV_OF[slug]];
   if (adv) v = Math.floor((v * (1000 + adv)) / 1000);
   if (slug === 'hp' && ctx.bossHp) v = ctx.bossHp;
-  // Overgrade PV : le binaire multiplie en FLOAT32 puis tronque (§ 12.13).
-  if (og && slug === 'hp')
-    v = Math.floor(Math.fround(1 + (og * GUILD_RAID_OVERGRADE_RATES.hp) / 1000) * Math.fround(v));
-  const q = quirkMods?.[slug];
-  if (q) v = Math.floor((v * (1000 + q)) / 1000);
+  // Overgrade PV : l'expression du client telle quelle, en FLOAT32 à chaque
+  // opération (`0.001f` compris) — `CGuildRaidSpawnData.GetCharacterData`,
+  // `FloorToInt((float)PV × (1f + (float)(taux × og) × 0.001f))` (§ 12.13).
+  if (og && slug === 'hp') {
+    const f = Math.fround;
+    const factor = f(1 + f(f(GUILD_RAID_OVERGRADE_RATES.hp * og) * f(0.001)));
+    v = Math.floor(f(f(v) * factor));
+  }
   return v;
+}
+
+/** Canal de buff d'une stat : plats (`buffValue`) et taux ‰ (`buffValueRate`) sommés. */
+export interface StatBuffChannel {
+  flat: number;
+  rate: number;
+}
+
+/**
+ * Le canal de buff PERMANENT d'une stat de monstre : son passif de fiche
+ * (`Monster.statPremium`) et les quirks « boss » du compte (`monsterQuirkMods`,
+ * taux ‰) — un seul canal, les taux s'additionnent avant la troncature.
+ */
+export function monsterStatChannel(
+  slug: string,
+  premium: Monster['statPremium'],
+  quirkMods?: Record<string, number>,
+): StatBuffChannel {
+  const p = premium?.[slug];
+  return { flat: p?.flat ?? 0, rate: (p?.rate ?? 0) + (quirkMods?.[slug] ?? 0) };
+}
+
+/**
+ * Stat de COMBAT depuis la stat de fiche et son canal de buff :
+ * `div1000((fiche + plats) × (1000 + Σ taux))`, tronqué vers zéro, plancher 0
+ * (`CFormula.CalcFinalStat`, A = 0 pour un monstre — spec damage § 3).
+ */
+export function combatStat(sheet: number, channel: StatBuffChannel): number {
+  return Math.max(0, Math.trunc(((sheet + channel.flat) * (1000 + channel.rate)) / 1000));
+}
+
+/** Stat de fiche et stat de combat d'un monstre à une rencontre. */
+export interface MonsterStatValue {
+  sheet: number;
+  combat: number;
+}
+
+/**
+ * Stat d'un monstre à une rencontre, FICHE et COMBAT (`combatStat` du canal
+ * de `monsterStatChannel`). Deux exceptions du client :
+ *   - PV REMPLACÉS (`bossHp`, overgrade) : le jeu les pose par
+ *     `CCharacterData.MaxHP = …` → `CStatValue.SetTempMaxValue`, que
+ *     `GetFinalValue` rend TEL QUEL — le taux de buff ne s'y applique pas ;
+ *   - CRIT : `SetFinalValue` borne le taux critique à [0, 1000].
+ */
+export function combatStatAt(
+  slug: string,
+  r: StatRange,
+  ctx: SpawnContext,
+  premium?: Monster['statPremium'],
+  quirkMods?: Record<string, number>,
+): MonsterStatValue {
+  const sheet = statAt(slug, r, ctx);
+  if (slug === 'hp' && (ctx.bossHp || ctx.overGrade)) return { sheet, combat: sheet };
+  const combat = combatStat(sheet, monsterStatChannel(slug, premium, quirkMods));
+  return { sheet, combat: slug === 'critical_rate' ? Math.min(combat, 1000) : combat };
 }
 
 /**

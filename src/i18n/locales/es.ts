@@ -666,6 +666,8 @@ const es: Record<TranslationKey, string> = {
   // Attacker panel labels
   'tools.damage-calculator.attacker.pick': 'Elige un atacante…',
   'tools.damage-calculator.attacker.affinity': 'Afinidad',
+  'tools.damage-calculator.attacker.level_breakthrough_hint':
+    'En Nv. 105 y 110, se asume que la siguiente superación de límite aún no se ha hecho.',
   'tools.damage-calculator.attacker.crit': 'CRIT',
   'tools.damage-calculator.attacker.burst_label': 'Ráfaga',
   'tools.damage-calculator.attacker.burst_off': 'Desactivado',
@@ -844,6 +846,7 @@ const es: Record<TranslationKey, string> = {
   'guides.boss_display.rank_options': 'Pasivas de rango',
   'guides.boss_display.rank_prev': 'Rango anterior',
   'guides.boss_display.rank_next': 'Siguiente rango',
+  'guides.boss_display.sheet_stat': 'Valor de ficha: {value} (antes de pasivas)',
   'guides.boss_display.add': 'Añadir',
   // BOSS FIGÉ — la phrase entière par cas, jamais des fragments recollés : une
   // langue qui place la date avant la version n'aurait aucun moyen de le dire.

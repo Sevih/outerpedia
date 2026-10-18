@@ -3,10 +3,11 @@
 import { img } from '@/lib/images';
 import { rankBadgeSprite } from '@/lib/ranks';
 import { HeatSlider } from './HeatSlider';
+import type { Monster } from '@contracts';
 import {
+  combatStatAt,
   formatMonsterStat,
   orderedStats,
-  statAt,
   type SpawnContext,
   type StatRange,
 } from '@/lib/monster-stats';
@@ -71,12 +72,16 @@ export interface BossStatsLabels {
   rankPrev: string;
   /** « Palier suivant » — aria du pas-à-pas. */
   rankNext: string;
+  /** Infobulle de la stat de fiche quand elle diffère du combat (`{value}`). */
+  sheetStat: string;
 }
 
 /**
  * Stats d'un boss À LA RENCONTRE — calcul partagé avec la carte admin
  * (src/lib/monster-stats) : ordre de l'écran du jeu, EFF/RES en valeur brute,
- * modificateurs du donjon appliqués, quirks de compte déduits.
+ * modificateurs du donjon appliqués. La valeur est la stat de COMBAT (passifs
+ * de fiche et quirks de compte au taux de buff, `combatStatAt`) ; quand elle
+ * diffère de la fiche, l'infobulle de la case donne la fiche.
  *
  * DEUX RÉGIMES :
  *  - rencontre simple → les stats au niveau du spawn ;
@@ -91,6 +96,7 @@ export function BossStats({
   stats,
   scales,
   quirkMods,
+  premium,
   statLabels,
   labels,
   locale,
@@ -102,6 +108,8 @@ export function BossStats({
   scales: Record<string, string>;
   /** Quirks de compte réduisant les stats du boss (`glossaries.bossQuirkMods`). */
   quirkMods?: Record<string, number>;
+  /** Passifs de fiche du monstre (`Monster.statPremium`). */
+  premium?: Monster['statPremium'];
   /** Icône + nom de chaque stat, par slug (préparés côté serveur). */
   statLabels: Record<string, StatLabel>;
   labels: BossStatsLabels;
@@ -200,10 +208,18 @@ export function BossStats({
           <div className="grid grid-cols-2 gap-1.5 @md:grid-cols-3 @2xl:grid-cols-4">
             {grid.map(([slug, r]) => {
               const label = statLabels[slug];
+              const { sheet, combat } = combatStatAt(slug, r, ctx, premium, quirkMods);
+              const sheetNote =
+                sheet !== combat
+                  ? labels.sheetStat.replace(
+                      '{value}',
+                      formatMonsterStat(slug, sheet, scales, locale),
+                    )
+                  : undefined;
               return (
                 <div
                   key={slug}
-                  title={label?.name}
+                  title={[label?.name, sheetNote].filter(Boolean).join('\n') || undefined}
                   className="border-line-subtle bg-surface-raised flex items-center gap-1.5 rounded-md border px-2 py-1"
                 >
                   {label?.icon ? (
@@ -226,9 +242,12 @@ export function BossStats({
                       lui qui désigne le boss PRINCIPAL d'un combat — et la carte
                       admin continue de l'afficher, là où il sert à contrôler. */}
                   <span className="text-content-strong min-w-0 truncate text-sm font-semibold tabular-nums">
-                    {formatMonsterStat(slug, statAt(slug, r, ctx, quirkMods), scales, locale)}
+                    {formatMonsterStat(slug, combat, scales, locale)}
                   </span>
-                  <span className="sr-only">{label?.name ?? slug}</span>
+                  <span className="sr-only">
+                    {label?.name ?? slug}
+                    {sheetNote ? ` — ${sheetNote}` : ''}
+                  </span>
                 </div>
               );
             })}

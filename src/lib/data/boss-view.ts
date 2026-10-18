@@ -97,6 +97,9 @@ export interface BossView {
   stats: Record<string, StatRange>;
   statScales: Record<string, string>;
   quirkMods: Record<string, number>;
+  /** Passifs de fiche du monstre (`Monster.statPremium`) — absents d'une
+   *  archive antérieure : la grille montre alors la fiche. */
+  statPremium?: Monster['statPremium'];
   rankOptions: Record<string, RankOption>;
   immunities: BossImmunityView[];
   skills: BossSkillView[];
@@ -252,6 +255,7 @@ export function buildBossView(
     stats: monsterPanelStats(monster.stats),
     statScales: g.statScales,
     quirkMods: monsterQuirkMods(monster.type, g.bossQuirkMods),
+    ...(monster.statPremium ? { statPremium: monster.statPremium } : {}),
     rankOptions: g.rankOptions ?? {},
     immunities,
     skills: bossSkills,

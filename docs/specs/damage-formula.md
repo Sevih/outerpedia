@@ -218,6 +218,16 @@ de vrais artefacts d'arrondi : diff=900 donne 899 (et non 900) — valeurs véri
 contre une référence float32 exacte (rationnels) sur diff ∈ [0, 20000], ancrées par
 somme de contrôle dans `src/lib/damage/formula.test.ts`.
 
+**Qui passe le jet** : `CBuff` ne teste la pose par `CheckResist` que si
+`!CBuffTemplet.IsIgnoreResist`, vrai pour `NEUTRAL`, `NEUTRAL2`, `BUFF`,
+`DEBUFF_IGNORE_RESIST` **et** `DEBUFF_IGNORE_ALL` (EE de Philia et d'Eliza, T8
+de Gnosis Beth, 18 lignes DoT) — seuls `DEBUFF` et `DEBUFF_IGNORE_IMMUNE` le
+passent (`isIgnoreResist`, inputs.ts, 18/10/2026). `resist` est la RES de la
+cible du scénario : celle du preset (fiche, passif de fiche et quirks « boss »
+du compte au canal de buff, § 16.3) ou la saisie manuelle ; avant le
+18/10/2026 elle n'atteignait pas le moteur (0) et la probabilité de pose
+était surestimée (EFF 0 contre RES 160 : 99 % affiché, 38,5 % en jeu).
+
 ## 6. Élément — GetElementSuperiority & GetElementeryDamageRate
 
 Listings : [`GetElementSuperiority.cs`](./damage-formula-cs/GetElementSuperiority.cs),
@@ -928,8 +938,14 @@ return restant
     la SEULE source combat est `CGuildRaidSpawnData.GetCharacterData` — le scaling du BOSS de guild raid en **overgrade**. Au-delà du
     grade 10, avec `GameConfig.GUILD_RAID_AFTER_10_BOSS_STAT` (enum 149) =
     `[300, 300, 10]` :
-    `MaxHP = floor(float32((1 + overGrade × 300 × 0.001f)) × float32(BossMonsterHP))`
-    (+30 %/overgrade), `AddRateAtk = overGrade × 300` (‰, +30 %/overgrade),
+    `MaxHP = FloorToInt((float)BossMonsterHP × (1f + (float)(overGrade × 300) × 0.001f))`
+    (+30 %/overgrade) — porté opération par opération en float32 par `statAt`
+    (`Math.fround` à chaque pas, `0.001f` compris, 18/10/2026 : le produit
+    non arrondi sortait 1 de moins sur 1 339 combinaisons sur 2 070, 55 000 ×
+    1,3 = 71 499 au lieu de 71 500). Ces PV sont posés par `MaxHP = …` →
+    `SetTempMaxValue`, que `GetFinalValue` rend tel quel : le taux de buff
+    (passif de fiche § 16.3) ne s'y applique pas, comme aux PV de boss d'un
+    mode (`bossHp`, `CCharacterBattle.Initialize`), `AddRateAtk = overGrade × 300` (‰, +30 %/overgrade),
     `AddRateDef = overGrade × 10` (‰, +1 %/overgrade) — le canal addRate § 3.2.
     L'overgrade est un état SERVEUR (progression de la guilde pendant le raid) :
     le calculateur ne le devine jamais — depuis le 17/08/2026 il l'EXPOSE en
@@ -1722,6 +1738,32 @@ mesure dark contredit un jour, chercher une ligne jumelle, pas élargir le case.
 Toute autre condition (`OWNER_HAS_BUFF` — le WG reduce sous bouclier de rage —,
 `OWNER_RAGE`…) dépend de l'état du combat : non évaluable statiquement.
 
+> RÉVISÉ le 18/10/2026 (revue du 09/10, H3) : le passif de FICHE d'un
+> monstre n'est plus `unresolved`. Le client traite un monstre comme un perso
+> (`CCharacterData.Initialize` → `SkillManager.Create` sans liste, skills au
+> niveau 1 → `InitStatPremiumBuff` → `CalcStat`) : les lignes
+> `BT_STAT_PREMIUM` de création `PASSIVE` visant `ME`/`MY_TEAM`
+> (`CSkillManager.GetStatPremiumBuffList`, tous les skills du kit) vont au
+> taux de buff de leur stat (`SetBuffPremiumValue` → § 3, taux sommés, une
+> troncature, plancher 0), avec les quirks « boss » du compte (nœuds d'éveil
+> PVE, lignes 198 à 201 de `CharacterAwakeningLevelTemplet`, boss seulement
+> par `CheckNodeApply` — MÊME liste `GetStatPremiumBuffList`). Datagen émet
+> `Monster.statPremium` (plats et taux sommés par stat ; 153 monstres, dont
+> 115 cibles preset sur 2 745) ; `combatStatAt` (src/lib/monster-stats.ts)
+> rend la stat de combat des pages de boss, la fiche en infobulle ; le
+> calculateur sert la fiche et, à part, le passif (preset-target.ts), que le
+> moteur verse au canal de stat de la cible avec les quirks « boss » réglés,
+> les chips de cible et l'enrage. Les PV REMPLACÉS (`bossHp`, overgrade) n'en
+> prennent pas (`SetTempMaxValue`, § 12.13) ; le CRIT d'un monstre reste
+> borné à 1000 (`SetFinalValue`). `SetBuffPremiumValue` ne lit ni condition
+> ni durée : une ligne `ME` conditionnelle s'appliquerait telle quelle ; une
+> `MY_TEAM` revient en `CBuff` au combat (`RemoveStatPremiumTeamBuff`), sa
+> condition y est lue — aucune ligne conditionnelle en donnée au 18/10/2026.
+> Restent hors du champ : les listes de Monad Gate et d'infiltration
+> (adversités du contenu), les `MY_TEAM*` posés par un autre monstre de la
+> vague, et un `BT_STAT_PREMIUM` d'enrage (création dynamique) — ce dernier
+> toujours `unresolved`.
+>
 > RÉVISÉ le 15/10/2026 (revue du 09/10, H4/H5/M1/B9) : une seule fonction de
 > condition, `elementConditionMet` (passives.ts), appelée par les passifs de
 > boss, l'équipement, le kit et — via le moteur — les chips du calculateur ;
@@ -1730,8 +1772,8 @@ Toute autre condition (`OWNER_HAS_BUFF` — le WG reduce sous bouclier de rage �
 > skills, ex. Ame : réévaluée par ligne dans inputs.ts, `bySkill` exposé) ;
 > `PASSIVE2` et `ENEMY_TEAM_<CLASSE>` acceptés ; `BT_WG_DMG_REDUCE` du boss et
 > `BT_WG_DMG` du porteur deviennent des entrées de jauge ; `BT_LIMIT_DMG_TURN`
-> (plafond par tour) et `BT_STAT_PREMIUM` du boss (passif de fiche) restent
-> `unresolved`, contribution 0. Sous `BT_INVINCIBLE`, la jauge vaut 0 (le jeu
+> (plafond par tour) et `BT_STAT_PREMIUM` du boss (passif de fiche — versé
+> depuis le 18/10, ci-dessus) restent `unresolved`, contribution 0. Sous `BT_INVINCIBLE`, la jauge vaut 0 (le jeu
 > ne la réduit que dans la branche « dégâts > 0 » de `ProcessDamageSimulator`).
 >
 > RÉALISÉ (05/08/2026) : `src/lib/damage/passives.ts` —

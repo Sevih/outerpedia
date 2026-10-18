@@ -13,6 +13,10 @@ import equipmentData from '../../../data/generated/damage/equipment.json';
 import targetsData from '../../../data/generated/damage/targets.json';
 import { applyStatEnhance, collectStatChannels } from './aggregate';
 import { staticBossPassives } from './passives';
+import { bossQuirkRates } from './gear';
+import { resolvePresetTarget } from './preset-target';
+import { buildDotLine, resistProbability } from './report';
+import { getMonster } from '@/lib/data/monsters';
 import { calcBaseStat } from './formula';
 import {
   buildCombatStats,
@@ -22,6 +26,7 @@ import {
   dungeonModeOf,
   elementOf,
   eventMaxHpRate,
+  isIgnoreResist,
   modifierAfter100For,
   resolveFx,
   trustBuffs,
@@ -1012,5 +1017,108 @@ describe('inputs — familles CASTER posées par un allié (§ 9.1, revue R18)',
     );
     expect(r.gearPassives!.entries.some((e) => e.buffId === W22)).toBe(true);
     expect(r.gearPassives!.unresolved.some((u) => u.buffId === W22)).toBe(false);
+  });
+});
+
+describe('inputs — cible : passif de fiche, RES, quirks « boss », IsIgnoreResist (revue H3/M2)', () => {
+  const dataAll = {
+    ...data,
+    equipment: equipmentData,
+    targets: targetsData,
+  } as unknown as DamageData;
+  // Vladi Max, Monad Gate route 3 : skill 165301 (DEF +1000 %, RES −90 %).
+  const VLADI = '74000313:4244004';
+
+  it('preset à passif de fiche : DEF de combat = fiche au canal du passif, aucun double compte', () => {
+    const preset = resolvePresetTarget(VLADI, 0)!;
+    const rate = getMonster('4244004')!.statPremium!.def!.rate!;
+    expect(preset.premium?.def?.rate).toBe(rate);
+    const target = {
+      element: preset.element,
+      stats: preset.stats,
+      premium: preset.premium,
+      monsterId: preset.monsterId,
+      boss: true,
+    };
+    const r = buildDamageReport(attackerBase(), target, dataAll);
+    expect(r.targetStats.def).toBe(Math.trunc((preset.stats.def! * (1000 + rate)) / 1000));
+    // Le passif n'est ni une entrée ni un non-résolu des passifs de boss.
+    const ids = [...r.bossPassives!.entries, ...r.bossPassives!.unresolved].map((e) => e.buffId);
+    expect(ids).not.toContain('monad_gate_new_route_3_1');
+    // Sans le champ, le moteur lit la fiche telle quelle.
+    const bare = buildDamageReport(attackerBase(), { ...target, premium: undefined }, dataAll);
+    expect(bare.targetStats.def).toBe(preset.stats.def);
+    // Un DEF ×11 baisse les dégâts.
+    const dmg = (x: typeof r) => x.slots[0].report.states[0].branches[0].totalDamage;
+    expect(dmg(r)).toBeLessThan(dmg(bare));
+  });
+
+  it('quirks « boss » réglés : au canal de RES de la cible boss, rien sinon', () => {
+    const quirks = { '233': 1, '237': 1 };
+    const rate = bossQuirkRates(quirks, data.growth.awakening, data.buffs).ST_BUFF_RESIST!;
+    expect(rate).toBeLessThan(0);
+    const tgt = { element: 'earth', stats: { def: 1000, res: 160 } };
+    const run = (quirkBoss: boolean) =>
+      buildDamageReport({ ...attackerBase(), quirks }, { ...tgt, quirkBoss }, dataAll).targetStats;
+    expect(run(true).res).toBe(Math.trunc((160 * (1000 + rate)) / 1000));
+    expect(run(false).res).toBe(160);
+  });
+
+  it('chips de cible au canal : `t_res_down` annule la RES, `t_def_down` la DEF de moitié', () => {
+    const tgt = { element: 'earth', stats: { def: 1000, res: 160 } };
+    const r = buildDamageReport(attackerBase(), { ...tgt, fx: ['t_res_down', 't_def_down'] }, data);
+    expect(r.targetStats.res).toBe(
+      Math.trunc((160 * (1000 + FX_CATALOG.t_res_down!.value!)) / 1000),
+    );
+    expect(r.targetStats.def).toBe(
+      Math.trunc((1000 * (1000 + FX_CATALOG.t_def_down!.value!)) / 1000),
+    );
+  });
+
+  it('RES de la cible au jet de pose : EFF 0 contre RES 160 → 38,5 % de la pose', () => {
+    const atk = { ...attackerBase(), id: '2000004', sheet: { atk: 3000, buff_chance: 0 } };
+    const dot = (res: number) =>
+      buildDamageReport(atk, { element: 'earth', stats: { def: 1000, res } }, data).slots[0]
+        .dots![0];
+    const d0 = dot(0);
+    const d160 = dot(160);
+    expect(data.buffs.buffs[d0.buffId]![0].buffDebuffType).toBe('DEBUFF');
+    expect(1 - resistProbability(0, 160)).toBeCloseTo(0.385, 3);
+    expect(d160.applyProbability).toBeCloseTo(
+      (d0.applyProbability / (1 - resistProbability(0, 0))) * (1 - resistProbability(0, 160)),
+      9,
+    );
+  });
+
+  it('`IsIgnoreResist` : seuls DEBUFF et DEBUFF_IGNORE_IMMUNE passent le jet', () => {
+    for (const t of ['NEUTRAL', 'NEUTRAL2', 'BUFF', 'DEBUFF_IGNORE_RESIST', 'DEBUFF_IGNORE_ALL'])
+      expect(isIgnoreResist(t), t).toBe(true);
+    for (const t of ['DEBUFF', 'DEBUFF_IGNORE_IMMUNE']) expect(isIgnoreResist(t), t).toBe(false);
+    // T8 de Gnosis Beth : un DoT DEBUFF_IGNORE_ALL.
+    expect(data.buffs.buffs['trancendent_8_2000092_4']![0].buffDebuffType).toBe(
+      'DEBUFF_IGNORE_ALL',
+    );
+  });
+
+  it('Francesca (EFF 180) contre Ars Nova (RES 223) : 0,699 hors drapeau, 1 avec, pose sûre en IGNORE_ALL', () => {
+    const base = {
+      attackRate: 755,
+      statValue: 4000,
+      defense: 1500,
+      piercePowerRate: 0,
+      piercePower: 0,
+      dmgReduceRate: 0,
+      createRatePermille: 1000,
+      buffChancePermille: 180,
+      buffResistPermille: 223,
+    };
+    expect(buildDotLine(base).applyProbability).toBeCloseTo(0.699, 3);
+    const flagged = isIgnoreResist('DEBUFF_IGNORE_RESIST');
+    expect(buildDotLine({ ...base, ignoreResist: flagged }).applyProbability).toBe(1);
+    const all = isIgnoreResist('DEBUFF_IGNORE_ALL');
+    expect(
+      buildDotLine({ ...base, buffChancePermille: 0, buffResistPermille: 1000, ignoreResist: all })
+        .applyProbability,
+    ).toBe(1);
   });
 });

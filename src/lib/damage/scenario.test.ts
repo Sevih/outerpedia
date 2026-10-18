@@ -93,6 +93,32 @@ describe('buildInputsFromZ — cible', () => {
     });
   });
 
+  it('RES manuelle : un ancien lien sans elle se lit (absente = 0), un nouveau la porte', () => {
+    const old = buildInputsFromZ({ g: 1, te: 'fire', tv: { hp: '1000', def: '500' } }).target;
+    expect(old?.stats).toEqual({ hp: 1000, def: 500 });
+    const neu = buildInputsFromZ({ g: 1, te: 'fire', tv: { def: '500', res: '160' } }).target;
+    expect(neu?.stats).toEqual({ def: 500, res: 160 });
+    // Saisie manuelle = stats effectives : ni passif de fiche ni quirks « boss ».
+    expect(neu?.premium).toBeUndefined();
+    expect(neu?.quirkBoss).toBeUndefined();
+  });
+
+  it('preset : passif de fiche et quirks « boss » transitent depuis le resolver', () => {
+    const { target } = buildInputsFromZ(
+      { ti: 'dg:1', si: 0 },
+      {
+        resolvePreset: () => ({
+          element: 'CET_DARK',
+          stats: { def: 161, res: 100 },
+          premium: { def: { rate: 10000 } },
+          quirkBoss: true,
+        }),
+      },
+    );
+    expect(target?.premium).toEqual({ def: { rate: 10000 } });
+    expect(target?.quirkBoss).toBe(true);
+  });
+
   it('manuelle sans élément → pas de cible', () => {
     expect(buildInputsFromZ({ g: 1, tv: { def: '2000' } }).target).toBeUndefined();
   });
@@ -301,6 +327,7 @@ describe('flattenReport', () => {
   it('clés stables : burst en suffixe, état non-base en #chaîne', () => {
     const result: DamageReportResult = {
       combatStats: {},
+      targetStats: {},
       unresolvedFx: [],
       attackerAmountStats: [],
       slots: [

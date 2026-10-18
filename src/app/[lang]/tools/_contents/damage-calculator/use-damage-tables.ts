@@ -53,6 +53,8 @@ export function useDamageTables({
       ? {
           element: tg.element,
           stats: sp.stats,
+          ...(sp.premium ? { premium: sp.premium } : {}),
+          ...(tg.quirkBoss ? { quirkBoss: true as const } : {}),
           mode: tg.modeSlug,
           // `id` = `${encounterId}:${bossId}` — même découpe que le resolver
           // node (preset-target.ts).

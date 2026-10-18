@@ -1089,6 +1089,51 @@ const SUBCLASS_ENUM: Record<string, number> = {
 };
 
 /**
+ * Buffs des nœuds d'éveil « boss » — lignes 198 à 201 de
+ * `CharacterAwakeningLevelTemplet`, portées par les nœuds PVE 233 à 247 :
+ * `CCharacterData.CheckNodeApply` ne les applique qu'à un monstre de type
+ * ≥ `CT_BOSS_MONSTER`, JAMAIS au héros. Des `BT_STAT_PREMIUM` `ME` qui baissent
+ * la RES (`…_Buff_RESIST_Down_*`) et l'EFF (`…_Avoid_Down_*`) de la CIBLE boss,
+ * au canal de buff de sa stat (`bossQuirkRates`, même canal que son passif de
+ * fiche) ; `resolveQuirkPassives` les écarte de l'attaquant.
+ */
+export const BOSS_QUIRK_BUFFS: ReadonlySet<string> = new Set([
+  'Awakening_Boss_Buff_RESIST_Down_1',
+  'Awakening_Boss_Buff_RESIST_Down_2',
+  'Awakening_Boss_Avoid_Down_1',
+  'Awakening_Boss_Avoid_Down_2',
+]);
+
+/** La ligne de niveau d'un nœud au niveau saisi (le niveau REMPLACE les inférieurs). */
+function quirkLevelRow(node: QuirkNode, level: number): QuirkNode['levels'][number] | undefined {
+  return node.levels.find((l) => l.level === level) ?? node.levels[node.levels.length - 1];
+}
+
+/**
+ * Taux ‰ par `ST_*` que les quirks « boss » du compte (`BOSS_QUIRK_BUFFS`,
+ * arbre PVE) posent sur une cible boss — le canal de buff de sa stat, sommé
+ * avec son passif de fiche (spec § 16.3).
+ */
+export function bossQuirkRates(
+  quirks: Record<string, number>,
+  awakening: QuirkNode[],
+  buffs: DamageBuffsData,
+): Record<string, number> {
+  const out: Record<string, number> = {};
+  for (const [nodeId, level] of Object.entries(quirks)) {
+    if (level < 1) continue;
+    const node = awakening.find((n) => n.id === nodeId);
+    if (node?.groupType !== 'PVE') continue;
+    const row = quirkLevelRow(node, level);
+    if (!row?.buffId || !BOSS_QUIRK_BUFFS.has(row.buffId)) continue;
+    const b = pickBuffRow(buffs.buffs[row.buffId] ?? [], 1);
+    if (b?.type !== 'BT_STAT_PREMIUM' || b.applyingType !== 'OAT_RATE' || !b.stat) continue;
+    out[b.stat] = (out[b.stat] ?? 0) + (b.value ?? 0);
+  }
+  return out;
+}
+
+/**
  * Les QUIRKS actifs du compte (réglage UI, hors z — comme le Codex), niveau
  * par nœud → buff du niveau (les nœuds `IOT_STAT` sont dans la fiche
  * AFFICHÉE via le paramètre éveil de CalcFinalStat § 17.4 — jamais recomptés,
@@ -1159,8 +1204,10 @@ export function resolveQuirkPassives(
       continue;
     }
     // Le niveau saisi REMPLACE les inférieurs (un buff par niveau).
-    const row = node.levels.find((l) => l.level === level) ?? node.levels[node.levels.length - 1];
+    const row = quirkLevelRow(node, level);
     if (row?.optionType !== 'IOT_BUFF' || !row.buffId) continue; // stat : déjà en fiche
+    // Nœud « boss » : la CIBLE seule le reçoit (`bossQuirkRates`).
+    if (BOSS_QUIRK_BUFFS.has(row.buffId)) continue;
     feedBuff('quirk', nodeId, row.buffId, 1);
   }
   return info;

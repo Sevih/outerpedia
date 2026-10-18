@@ -4629,7 +4629,12 @@
     },
     "aiType": "attack",
     "pushBack": true,
-    "pushUp": true
+    "pushUp": true,
+    "statPremium": {
+      "critical_rate": {
+        "flat": 150
+      }
+    }
   },
   "402903": {
     "id": "402903",
@@ -85285,7 +85290,15 @@
         "level": 30,
         "hpLines": 10
       }
-    ]
+    ],
+    "statPremium": {
+      "hp": {
+        "rate": 1000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
+    }
   },
   "4234004": {
     "id": "4234004",
@@ -86024,6 +86037,14 @@
           "duration": 4
         }
       ]
+    },
+    "statPremium": {
+      "def": {
+        "rate": 10000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
     }
   },
   "4244006": {
@@ -86111,7 +86132,15 @@
         "level": 50,
         "hpLines": 10
       }
-    ]
+    ],
+    "statPremium": {
+      "def": {
+        "rate": 10000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
+    }
   },
   "4244007": {
     "id": "4244007",
@@ -86985,6 +87014,14 @@
           "duration": 4
         }
       ]
+    },
+    "statPremium": {
+      "def": {
+        "rate": 10000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
     }
   },
   "4264004": {
@@ -87075,6 +87112,14 @@
           "duration": 4
         }
       ]
+    },
+    "statPremium": {
+      "def": {
+        "rate": 10000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
     }
   },
   "4274004": {
@@ -87165,6 +87210,14 @@
           "duration": 4
         }
       ]
+    },
+    "statPremium": {
+      "def": {
+        "rate": 10000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
     }
   },
   "4276001": {
@@ -87415,6 +87468,14 @@
           "duration": 4
         }
       ]
+    },
+    "statPremium": {
+      "def": {
+        "rate": 10000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
     }
   },
   "4286025": {
@@ -87681,6 +87742,14 @@
           "duration": 4
         }
       ]
+    },
+    "statPremium": {
+      "def": {
+        "rate": 10000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
     }
   },
   "4301021": {
@@ -91326,6 +91395,14 @@
           "duration": 4
         }
       ]
+    },
+    "statPremium": {
+      "def": {
+        "rate": 10000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
     }
   },
   "4344006": {
@@ -92117,6 +92194,14 @@
           "duration": 4
         }
       ]
+    },
+    "statPremium": {
+      "def": {
+        "rate": 10000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
     }
   },
   "4364004": {
@@ -92207,6 +92292,14 @@
           "duration": 4
         }
       ]
+    },
+    "statPremium": {
+      "def": {
+        "rate": 10000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
     }
   },
   "4374004": {
@@ -92297,6 +92390,14 @@
           "duration": 4
         }
       ]
+    },
+    "statPremium": {
+      "def": {
+        "rate": 10000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
     }
   },
   "4376001": {
@@ -92462,7 +92563,15 @@
         "level": 60,
         "hpLines": 10
       }
-    ]
+    ],
+    "statPremium": {
+      "hp": {
+        "rate": 1000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
+    }
   },
   "4384004": {
     "id": "4384004",
@@ -92552,6 +92661,14 @@
           "duration": 4
         }
       ]
+    },
+    "statPremium": {
+      "def": {
+        "rate": 10000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
     }
   },
   "4386026": {
@@ -92630,7 +92747,15 @@
         "level": 30,
         "hpLines": 10
       }
-    ]
+    ],
+    "statPremium": {
+      "hp": {
+        "rate": 1000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
+    }
   },
   "4394004": {
     "id": "4394004",
@@ -92720,6 +92845,14 @@
           "duration": 4
         }
       ]
+    },
+    "statPremium": {
+      "def": {
+        "rate": 10000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
     }
   },
   "4401021": {
@@ -94009,6 +94142,14 @@
           "duration": 4
         }
       ]
+    },
+    "statPremium": {
+      "def": {
+        "rate": 10000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
     }
   },
   "4444006": {
@@ -94465,6 +94606,14 @@
           "duration": 4
         }
       ]
+    },
+    "statPremium": {
+      "def": {
+        "rate": 10000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
     }
   },
   "4464004": {
@@ -94555,6 +94704,14 @@
           "duration": 4
         }
       ]
+    },
+    "statPremium": {
+      "def": {
+        "rate": 10000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
     }
   },
   "4474004": {
@@ -94645,6 +94802,14 @@
           "duration": 4
         }
       ]
+    },
+    "statPremium": {
+      "def": {
+        "rate": 10000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
     }
   },
   "4476001": {
@@ -94825,6 +94990,14 @@
           "duration": 4
         }
       ]
+    },
+    "statPremium": {
+      "def": {
+        "rate": 10000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
     }
   },
   "4494004": {
@@ -94915,6 +95088,14 @@
           "duration": 4
         }
       ]
+    },
+    "statPremium": {
+      "def": {
+        "rate": 10000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
     }
   },
   "4500000": {
@@ -100683,7 +100864,12 @@
     "pushBack": true,
     "pushUp": true,
     "buffImmune": ["BT_GOLDEN_CURSE", "BT_STUN", "BT_FREEZE", "BT_STONE"],
-    "immuneTooltips": ["104", "34", "33", "35"]
+    "immuneTooltips": ["104", "34", "33", "35"],
+    "statPremium": {
+      "critical_rate": {
+        "flat": 150
+      }
+    }
   },
   "4500082": {
     "id": "4500082",
@@ -100827,6 +101013,11 @@
           "duration": 4
         }
       ]
+    },
+    "statPremium": {
+      "critical_rate": {
+        "flat": 150
+      }
     }
   },
   "4500084": {
@@ -101190,7 +101381,12 @@
     "subClass": "wizard",
     "aiType": "attack",
     "pushBack": true,
-    "pushUp": true
+    "pushUp": true,
+    "statPremium": {
+      "critical_rate": {
+        "flat": 150
+      }
+    }
   },
   "4500090": {
     "id": "4500090",
@@ -102161,7 +102357,12 @@
     "subClass": "wizard",
     "aiType": "attack",
     "pushBack": true,
-    "pushUp": true
+    "pushUp": true,
+    "statPremium": {
+      "critical_rate": {
+        "flat": 150
+      }
+    }
   },
   "4500105": {
     "id": "4500105",
@@ -106083,7 +106284,12 @@
     "subClass": "wizard",
     "aiType": "attack",
     "pushBack": true,
-    "pushUp": true
+    "pushUp": true,
+    "statPremium": {
+      "critical_rate": {
+        "flat": 150
+      }
+    }
   },
   "4500160": {
     "id": "4500160",
@@ -106437,7 +106643,12 @@
     "pushUp": true,
     "buffImmune": ["BT_GOLDEN_CURSE", "BT_FREEZE", "BT_STONE", "BT_STUN", "BT_SILENCE"],
     "statBuffImmune": ["ST_SPEED"],
-    "immuneTooltips": ["104", "33", "34", "35", "37", "26"]
+    "immuneTooltips": ["104", "33", "34", "35", "37", "26"],
+    "statPremium": {
+      "critical_rate": {
+        "flat": 150
+      }
+    }
   },
   "4500165": {
     "id": "4500165",
@@ -106614,7 +106825,12 @@
     "subClass": "wizard",
     "aiType": "attack",
     "pushBack": true,
-    "pushUp": true
+    "pushUp": true,
+    "statPremium": {
+      "critical_rate": {
+        "flat": 150
+      }
+    }
   },
   "4500168": {
     "id": "4500168",
@@ -108133,6 +108349,11 @@
           "duration": 4
         }
       ]
+    },
+    "statPremium": {
+      "critical_rate": {
+        "flat": 150
+      }
     }
   },
   "4500187": {
@@ -108262,7 +108483,12 @@
     "subClass": "wizard",
     "aiType": "attack",
     "pushBack": true,
-    "pushUp": true
+    "pushUp": true,
+    "statPremium": {
+      "critical_rate": {
+        "flat": 150
+      }
+    }
   },
   "4500189": {
     "id": "4500189",
@@ -117303,7 +117529,15 @@
         "level": 30,
         "hpLines": 10
       }
-    ]
+    ],
+    "statPremium": {
+      "hp": {
+        "rate": 1000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
+    }
   },
   "4500317": {
     "id": "4500317",
@@ -117377,7 +117611,15 @@
     "pushBack": true,
     "pushUp": true,
     "buffImmune": ["BT_GOLDEN_CURSE", "BT_FREEZE", "BT_STONE", "BT_STUN"],
-    "immuneTooltips": ["104", "34", "33", "35"]
+    "immuneTooltips": ["104", "34", "33", "35"],
+    "statPremium": {
+      "hp": {
+        "rate": 1000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
+    }
   },
   "4500318": {
     "id": "4500318",
@@ -117466,6 +117708,14 @@
           "value": 4
         }
       ]
+    },
+    "statPremium": {
+      "hp": {
+        "rate": 1000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
     }
   },
   "4500319": {
@@ -117555,6 +117805,14 @@
           "value": 4
         }
       ]
+    },
+    "statPremium": {
+      "hp": {
+        "rate": 1000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
     }
   },
   "4500320": {
@@ -117644,6 +117902,14 @@
           "value": 4
         }
       ]
+    },
+    "statPremium": {
+      "hp": {
+        "rate": 1000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
     }
   },
   "4500321": {
@@ -118475,7 +118741,15 @@
         "level": 30,
         "hpLines": 10
       }
-    ]
+    ],
+    "statPremium": {
+      "hp": {
+        "rate": 1000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
+    }
   },
   "4500331": {
     "id": "4500331",
@@ -118556,7 +118830,15 @@
         "level": 30,
         "hpLines": 10
       }
-    ]
+    ],
+    "statPremium": {
+      "hp": {
+        "rate": 1000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
+    }
   },
   "4500332": {
     "id": "4500332",
@@ -118637,7 +118919,15 @@
         "level": 30,
         "hpLines": 10
       }
-    ]
+    ],
+    "statPremium": {
+      "hp": {
+        "rate": 1000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
+    }
   },
   "4500333": {
     "id": "4500333",
@@ -118722,7 +119012,15 @@
         "level": 30,
         "hpLines": 10
       }
-    ]
+    ],
+    "statPremium": {
+      "hp": {
+        "rate": 1000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
+    }
   },
   "4500334": {
     "id": "4500334",
@@ -118807,7 +119105,15 @@
         "level": 30,
         "hpLines": 10
       }
-    ]
+    ],
+    "statPremium": {
+      "hp": {
+        "rate": 1000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
+    }
   },
   "4500335": {
     "id": "4500335",
@@ -118871,7 +119177,15 @@
     "subClass": "enchanter",
     "aiType": "attack",
     "pushBack": true,
-    "pushUp": true
+    "pushUp": true,
+    "statPremium": {
+      "hp": {
+        "rate": 1000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
+    }
   },
   "4500336": {
     "id": "4500336",
@@ -118960,7 +119274,15 @@
         "level": 30,
         "hpLines": 10
       }
-    ]
+    ],
+    "statPremium": {
+      "hp": {
+        "rate": 1000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
+    }
   },
   "4500337": {
     "id": "4500337",
@@ -119045,7 +119367,15 @@
         "level": 30,
         "hpLines": 10
       }
-    ]
+    ],
+    "statPremium": {
+      "hp": {
+        "rate": 1000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
+    }
   },
   "4500338": {
     "id": "4500338",
@@ -119128,7 +119458,15 @@
         "level": 30,
         "hpLines": 10
       }
-    ]
+    ],
+    "statPremium": {
+      "def": {
+        "rate": 10000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
+    }
   },
   "4500339": {
     "id": "4500339",
@@ -119207,7 +119545,15 @@
         "level": 30,
         "hpLines": 10
       }
-    ]
+    ],
+    "statPremium": {
+      "def": {
+        "rate": 10000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
+    }
   },
   "4500340": {
     "id": "4500340",
@@ -122351,7 +122697,12 @@
         "level": 79,
         "hpLines": 10
       }
-    ]
+    ],
+    "statPremium": {
+      "dmg_reduce": {
+        "flat": 1000
+      }
+    }
   },
   "4510000": {
     "id": "4510000",
@@ -122728,6 +123079,14 @@
           "value": 4
         }
       ]
+    },
+    "statPremium": {
+      "hp": {
+        "rate": 1000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
     }
   },
   "4510319": {
@@ -122817,6 +123176,14 @@
           "value": 4
         }
       ]
+    },
+    "statPremium": {
+      "hp": {
+        "rate": 1000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
     }
   },
   "4510320": {
@@ -122906,6 +123273,14 @@
           "value": 4
         }
       ]
+    },
+    "statPremium": {
+      "hp": {
+        "rate": 1000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
     }
   },
   "4510321": {
@@ -123737,7 +124112,15 @@
         "level": 30,
         "hpLines": 10
       }
-    ]
+    ],
+    "statPremium": {
+      "hp": {
+        "rate": 1000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
+    }
   },
   "4510331": {
     "id": "4510331",
@@ -123818,7 +124201,15 @@
         "level": 30,
         "hpLines": 10
       }
-    ]
+    ],
+    "statPremium": {
+      "hp": {
+        "rate": 1000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
+    }
   },
   "4510332": {
     "id": "4510332",
@@ -123899,7 +124290,15 @@
         "level": 30,
         "hpLines": 10
       }
-    ]
+    ],
+    "statPremium": {
+      "hp": {
+        "rate": 1000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
+    }
   },
   "4510333": {
     "id": "4510333",
@@ -123984,7 +124383,15 @@
         "level": 30,
         "hpLines": 10
       }
-    ]
+    ],
+    "statPremium": {
+      "hp": {
+        "rate": 1000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
+    }
   },
   "4510334": {
     "id": "4510334",
@@ -124069,7 +124476,15 @@
         "level": 30,
         "hpLines": 10
       }
-    ]
+    ],
+    "statPremium": {
+      "hp": {
+        "rate": 1000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
+    }
   },
   "4511022": {
     "id": "4511022",
@@ -124581,6 +124996,14 @@
           "value": 4
         }
       ]
+    },
+    "statPremium": {
+      "hp": {
+        "rate": 1000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
     }
   },
   "4520319": {
@@ -124670,6 +125093,14 @@
           "value": 4
         }
       ]
+    },
+    "statPremium": {
+      "hp": {
+        "rate": 1000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
     }
   },
   "4520320": {
@@ -124759,6 +125190,14 @@
           "value": 4
         }
       ]
+    },
+    "statPremium": {
+      "hp": {
+        "rate": 1000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
     }
   },
   "4520321": {
@@ -125590,7 +126029,15 @@
         "level": 30,
         "hpLines": 10
       }
-    ]
+    ],
+    "statPremium": {
+      "hp": {
+        "rate": 1000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
+    }
   },
   "4520331": {
     "id": "4520331",
@@ -125671,7 +126118,15 @@
         "level": 30,
         "hpLines": 10
       }
-    ]
+    ],
+    "statPremium": {
+      "hp": {
+        "rate": 1000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
+    }
   },
   "4520332": {
     "id": "4520332",
@@ -125752,7 +126207,15 @@
         "level": 30,
         "hpLines": 10
       }
-    ]
+    ],
+    "statPremium": {
+      "hp": {
+        "rate": 1000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
+    }
   },
   "4520333": {
     "id": "4520333",
@@ -125837,7 +126300,15 @@
         "level": 30,
         "hpLines": 10
       }
-    ]
+    ],
+    "statPremium": {
+      "hp": {
+        "rate": 1000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
+    }
   },
   "4520334": {
     "id": "4520334",
@@ -125922,7 +126393,15 @@
         "level": 30,
         "hpLines": 10
       }
-    ]
+    ],
+    "statPremium": {
+      "hp": {
+        "rate": 1000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
+    }
   },
   "4530318": {
     "id": "4530318",
@@ -126011,6 +126490,14 @@
           "value": 4
         }
       ]
+    },
+    "statPremium": {
+      "hp": {
+        "rate": 1000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
     }
   },
   "4530319": {
@@ -126100,6 +126587,14 @@
           "value": 4
         }
       ]
+    },
+    "statPremium": {
+      "hp": {
+        "rate": 1000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
     }
   },
   "4530320": {
@@ -126189,6 +126684,14 @@
           "value": 4
         }
       ]
+    },
+    "statPremium": {
+      "hp": {
+        "rate": 1000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
     }
   },
   "4530321": {
@@ -127020,7 +127523,15 @@
         "level": 30,
         "hpLines": 10
       }
-    ]
+    ],
+    "statPremium": {
+      "hp": {
+        "rate": 1000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
+    }
   },
   "4530331": {
     "id": "4530331",
@@ -127101,7 +127612,15 @@
         "level": 30,
         "hpLines": 10
       }
-    ]
+    ],
+    "statPremium": {
+      "hp": {
+        "rate": 1000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
+    }
   },
   "4530332": {
     "id": "4530332",
@@ -127182,7 +127701,15 @@
         "level": 30,
         "hpLines": 10
       }
-    ]
+    ],
+    "statPremium": {
+      "hp": {
+        "rate": 1000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
+    }
   },
   "4530333": {
     "id": "4530333",
@@ -127267,7 +127794,15 @@
         "level": 30,
         "hpLines": 10
       }
-    ]
+    ],
+    "statPremium": {
+      "hp": {
+        "rate": 1000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
+    }
   },
   "4530334": {
     "id": "4530334",
@@ -127352,7 +127887,15 @@
         "level": 30,
         "hpLines": 10
       }
-    ]
+    ],
+    "statPremium": {
+      "hp": {
+        "rate": 1000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
+    }
   },
   "4534004": {
     "id": "4534004",
@@ -127565,6 +128108,14 @@
           "value": 4
         }
       ]
+    },
+    "statPremium": {
+      "hp": {
+        "rate": 1000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
     }
   },
   "4540319": {
@@ -127654,6 +128205,14 @@
           "value": 4
         }
       ]
+    },
+    "statPremium": {
+      "hp": {
+        "rate": 1000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
     }
   },
   "4540320": {
@@ -127743,6 +128302,14 @@
           "value": 4
         }
       ]
+    },
+    "statPremium": {
+      "hp": {
+        "rate": 1000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
     }
   },
   "4540321": {
@@ -128574,7 +129141,15 @@
         "level": 30,
         "hpLines": 10
       }
-    ]
+    ],
+    "statPremium": {
+      "hp": {
+        "rate": 1000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
+    }
   },
   "4540331": {
     "id": "4540331",
@@ -128655,7 +129230,15 @@
         "level": 30,
         "hpLines": 10
       }
-    ]
+    ],
+    "statPremium": {
+      "hp": {
+        "rate": 1000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
+    }
   },
   "4540332": {
     "id": "4540332",
@@ -128736,7 +129319,15 @@
         "level": 30,
         "hpLines": 10
       }
-    ]
+    ],
+    "statPremium": {
+      "hp": {
+        "rate": 1000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
+    }
   },
   "4540333": {
     "id": "4540333",
@@ -128821,7 +129412,15 @@
         "level": 30,
         "hpLines": 10
       }
-    ]
+    ],
+    "statPremium": {
+      "hp": {
+        "rate": 1000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
+    }
   },
   "4540334": {
     "id": "4540334",
@@ -128906,7 +129505,15 @@
         "level": 30,
         "hpLines": 10
       }
-    ]
+    ],
+    "statPremium": {
+      "hp": {
+        "rate": 1000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
+    }
   },
   "4541001": {
     "id": "4541001",
@@ -130441,6 +131048,14 @@
           "value": 4
         }
       ]
+    },
+    "statPremium": {
+      "hp": {
+        "rate": 1000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
     }
   },
   "4550319": {
@@ -130530,6 +131145,14 @@
           "value": 4
         }
       ]
+    },
+    "statPremium": {
+      "hp": {
+        "rate": 1000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
     }
   },
   "4550320": {
@@ -130619,6 +131242,14 @@
           "value": 4
         }
       ]
+    },
+    "statPremium": {
+      "hp": {
+        "rate": 1000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
     }
   },
   "4550321": {
@@ -131450,7 +132081,15 @@
         "level": 30,
         "hpLines": 10
       }
-    ]
+    ],
+    "statPremium": {
+      "hp": {
+        "rate": 1000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
+    }
   },
   "4550331": {
     "id": "4550331",
@@ -131531,7 +132170,15 @@
         "level": 30,
         "hpLines": 10
       }
-    ]
+    ],
+    "statPremium": {
+      "hp": {
+        "rate": 1000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
+    }
   },
   "4550332": {
     "id": "4550332",
@@ -131612,7 +132259,15 @@
         "level": 30,
         "hpLines": 10
       }
-    ]
+    ],
+    "statPremium": {
+      "hp": {
+        "rate": 1000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
+    }
   },
   "4550333": {
     "id": "4550333",
@@ -131697,7 +132352,15 @@
         "level": 30,
         "hpLines": 10
       }
-    ]
+    ],
+    "statPremium": {
+      "hp": {
+        "rate": 1000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
+    }
   },
   "4550334": {
     "id": "4550334",
@@ -131782,7 +132445,15 @@
         "level": 30,
         "hpLines": 10
       }
-    ]
+    ],
+    "statPremium": {
+      "hp": {
+        "rate": 1000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
+    }
   },
   "4551011": {
     "id": "4551011",
@@ -163599,7 +164270,15 @@
         "level": 152,
         "hpLines": 30
       }
-    ]
+    ],
+    "statPremium": {
+      "atk": {
+        "rate": 300
+      },
+      "def": {
+        "rate": 300
+      }
+    }
   },
   "5050100": {
     "id": "5050100",
@@ -163682,7 +164361,15 @@
         "level": 162,
         "hpLines": 30
       }
-    ]
+    ],
+    "statPremium": {
+      "atk": {
+        "rate": 300
+      },
+      "def": {
+        "rate": 300
+      }
+    }
   },
   "5050101": {
     "id": "5050101",
@@ -163765,7 +164452,15 @@
         "level": 172,
         "hpLines": 30
       }
-    ]
+    ],
+    "statPremium": {
+      "atk": {
+        "rate": 300
+      },
+      "def": {
+        "rate": 300
+      }
+    }
   },
   "5050102": {
     "id": "5050102",
@@ -171948,7 +172643,12 @@
         "level": 148,
         "hpLines": 30
       }
-    ]
+    ],
+    "statPremium": {
+      "critical_rate": {
+        "flat": 150
+      }
+    }
   },
   "40103014": {
     "id": "40103014",
@@ -192627,7 +193327,12 @@
     "subClass": "wizard",
     "aiType": "attack",
     "pushBack": true,
-    "pushUp": true
+    "pushUp": true,
+    "statPremium": {
+      "critical_rate": {
+        "flat": 150
+      }
+    }
   },
   "53000006": {
     "id": "53000006",
@@ -193102,7 +193807,12 @@
     "subClass": "wizard",
     "aiType": "attack",
     "pushBack": true,
-    "pushUp": true
+    "pushUp": true,
+    "statPremium": {
+      "critical_rate": {
+        "flat": 150
+      }
+    }
   },
   "53000014": {
     "id": "53000014",
@@ -193862,7 +194572,12 @@
     "subClass": "wizard",
     "aiType": "attack",
     "pushBack": true,
-    "pushUp": true
+    "pushUp": true,
+    "statPremium": {
+      "critical_rate": {
+        "flat": 150
+      }
+    }
   },
   "53000025": {
     "id": "53000025",
@@ -203857,7 +204572,12 @@
     "pushBack": true,
     "pushUp": true,
     "statBuffImmune": ["ST_SPEED"],
-    "immuneTooltips": ["26"]
+    "immuneTooltips": ["26"],
+    "statPremium": {
+      "critical_rate": {
+        "flat": 150
+      }
+    }
   },
   "54300007": {
     "id": "54300007",
@@ -204654,7 +205374,12 @@
     "subClass": "wizard",
     "aiType": "attack",
     "pushBack": true,
-    "pushUp": true
+    "pushUp": true,
+    "statPremium": {
+      "critical_rate": {
+        "flat": 150
+      }
+    }
   },
   "54300019": {
     "id": "54300019",
@@ -205172,7 +205897,12 @@
     "pushBack": true,
     "pushUp": true,
     "statBuffImmune": ["ST_SPEED"],
-    "immuneTooltips": ["26"]
+    "immuneTooltips": ["26"],
+    "statPremium": {
+      "critical_rate": {
+        "flat": 150
+      }
+    }
   },
   "54300027": {
     "id": "54300027",
@@ -205500,7 +206230,12 @@
     "pushUp": true,
     "buffImmune": ["BT_GOLDEN_CURSE", "BT_FREEZE", "BT_STONE", "BT_STUN", "BT_SILENCE"],
     "statBuffImmune": ["ST_SPEED"],
-    "immuneTooltips": ["104", "33", "34", "35", "37", "26"]
+    "immuneTooltips": ["104", "33", "34", "35", "37", "26"],
+    "statPremium": {
+      "critical_rate": {
+        "flat": 150
+      }
+    }
   },
   "54300032": {
     "id": "54300032",
@@ -205845,7 +206580,12 @@
     "subClass": "wizard",
     "aiType": "attack",
     "pushBack": true,
-    "pushUp": true
+    "pushUp": true,
+    "statPremium": {
+      "critical_rate": {
+        "flat": 150
+      }
+    }
   },
   "54300037": {
     "id": "54300037",
@@ -205909,7 +206649,12 @@
     "subClass": "wizard",
     "aiType": "attack",
     "pushBack": true,
-    "pushUp": true
+    "pushUp": true,
+    "statPremium": {
+      "critical_rate": {
+        "flat": 150
+      }
+    }
   },
   "54300038": {
     "id": "54300038",
@@ -206258,7 +207003,12 @@
       "BT_COOL3_CHARGE"
     ],
     "statBuffImmune": ["ST_SPEED"],
-    "immuneTooltips": ["104", "34", "33", "35", "37", "32", "64", "26"]
+    "immuneTooltips": ["104", "34", "33", "35", "37", "32", "64", "26"],
+    "statPremium": {
+      "critical_rate": {
+        "flat": 150
+      }
+    }
   },
   "54300043": {
     "id": "54300043",
@@ -206335,7 +207085,12 @@
       "BT_COOL3_CHARGE"
     ],
     "statBuffImmune": ["ST_SPEED"],
-    "immuneTooltips": ["104", "34", "33", "35", "37", "32", "64", "26"]
+    "immuneTooltips": ["104", "34", "33", "35", "37", "32", "64", "26"],
+    "statPremium": {
+      "critical_rate": {
+        "flat": 150
+      }
+    }
   },
   "54300044": {
     "id": "54300044",
@@ -207112,7 +207867,12 @@
     "subClass": "wizard",
     "aiType": "attack",
     "pushBack": true,
-    "pushUp": true
+    "pushUp": true,
+    "statPremium": {
+      "critical_rate": {
+        "flat": 150
+      }
+    }
   },
   "54400007": {
     "id": "54400007",
@@ -207176,7 +207936,12 @@
     "subClass": "wizard",
     "aiType": "attack",
     "pushBack": true,
-    "pushUp": true
+    "pushUp": true,
+    "statPremium": {
+      "critical_rate": {
+        "flat": 150
+      }
+    }
   },
   "54500001": {
     "id": "54500001",
@@ -216212,7 +216977,12 @@
         "level": 137,
         "hpLines": 30
       }
-    ]
+    ],
+    "statPremium": {
+      "atk": {
+        "rate": 50
+      }
+    }
   },
   "62000019": {
     "id": "62000019",
@@ -219616,7 +220386,12 @@
         "level": 157,
         "hpLines": 30
       }
-    ]
+    ],
+    "statPremium": {
+      "atk": {
+        "rate": 50
+      }
+    }
   },
   "62001020": {
     "id": "62001020",
@@ -226550,7 +227325,12 @@
         "level": 140,
         "hpLines": 30
       }
-    ]
+    ],
+    "statPremium": {
+      "critical_rate": {
+        "flat": 150
+      }
+    }
   },
   "62005206": {
     "id": "62005206",
@@ -237400,7 +238180,12 @@
         "level": 136,
         "hpLines": 10
       }
-    ]
+    ],
+    "statPremium": {
+      "critical_rate": {
+        "flat": 150
+      }
+    }
   },
   "62101048": {
     "id": "62101048",
@@ -241481,7 +242266,12 @@
         "level": 191,
         "hpLines": 30
       }
-    ]
+    ],
+    "statPremium": {
+      "atk": {
+        "rate": 50
+      }
+    }
   },
   "62201025": {
     "id": "62201025",
@@ -245205,7 +245995,12 @@
         "level": 210,
         "hpLines": 30
       }
-    ]
+    ],
+    "statPremium": {
+      "critical_rate": {
+        "flat": 150
+      }
+    }
   },
   "62401004": {
     "id": "62401004",
@@ -247149,7 +247944,12 @@
     "pushBack": true,
     "pushUp": true,
     "statBuffImmune": ["ST_SPEED"],
-    "immuneTooltips": ["26"]
+    "immuneTooltips": ["26"],
+    "statPremium": {
+      "critical_rate": {
+        "flat": 150
+      }
+    }
   },
   "62401028": {
     "id": "62401028",
@@ -267577,7 +268377,15 @@
         "level": 30,
         "hpLines": 10
       }
-    ]
+    ],
+    "statPremium": {
+      "def": {
+        "rate": 10000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
+    }
   },
   "74001094": {
     "id": "74001094",
@@ -267658,7 +268466,15 @@
         "level": 30,
         "hpLines": 10
       }
-    ]
+    ],
+    "statPremium": {
+      "def": {
+        "rate": 10000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
+    }
   },
   "74001202": {
     "id": "74001202",
@@ -267769,7 +268585,15 @@
         "level": 30,
         "hpLines": 10
       }
-    ]
+    ],
+    "statPremium": {
+      "hp": {
+        "rate": 1000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
+    }
   },
   "74001203": {
     "id": "74001203",
@@ -267870,7 +268694,15 @@
         "level": 30,
         "hpLines": 10
       }
-    ]
+    ],
+    "statPremium": {
+      "hp": {
+        "rate": 1000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
+    }
   },
   "74001301": {
     "id": "74001301",
@@ -267951,7 +268783,15 @@
         "level": 30,
         "hpLines": 10
       }
-    ]
+    ],
+    "statPremium": {
+      "hp": {
+        "rate": 1000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
+    }
   },
   "74001303": {
     "id": "74001303",
@@ -268042,7 +268882,15 @@
         "level": 30,
         "hpLines": 10
       }
-    ]
+    ],
+    "statPremium": {
+      "hp": {
+        "rate": 1000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
+    }
   },
   "74001401": {
     "id": "74001401",
@@ -269428,7 +270276,15 @@
         "level": 30,
         "hpLines": 10
       }
-    ]
+    ],
+    "statPremium": {
+      "def": {
+        "rate": 10000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
+    }
   },
   "74002202": {
     "id": "74002202",
@@ -269503,7 +270359,15 @@
         "level": 30,
         "hpLines": 10
       }
-    ]
+    ],
+    "statPremium": {
+      "hp": {
+        "rate": 1000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
+    }
   },
   "74002302": {
     "id": "74002302",
@@ -269566,7 +270430,15 @@
     },
     "aiType": "attack",
     "pushBack": true,
-    "pushUp": true
+    "pushUp": true,
+    "statPremium": {
+      "hp": {
+        "rate": 1000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
+    }
   },
   "74002401": {
     "id": "74002401",
@@ -270254,7 +271126,15 @@
     },
     "aiType": "attack",
     "pushBack": true,
-    "pushUp": true
+    "pushUp": true,
+    "statPremium": {
+      "def": {
+        "rate": 10000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
+    }
   },
   "74003092": {
     "id": "74003092",
@@ -270325,7 +271205,15 @@
         "level": 25,
         "hpLines": 10
       }
-    ]
+    ],
+    "statPremium": {
+      "hp": {
+        "rate": 1000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
+    }
   },
   "74003202": {
     "id": "74003202",
@@ -270410,7 +271298,15 @@
         "level": 30,
         "hpLines": 10
       }
-    ]
+    ],
+    "statPremium": {
+      "hp": {
+        "rate": 1000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
+    }
   },
   "74003302": {
     "id": "74003302",
@@ -270473,7 +271369,15 @@
     },
     "aiType": "attack",
     "pushBack": true,
-    "pushUp": true
+    "pushUp": true,
+    "statPremium": {
+      "hp": {
+        "rate": 1000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
+    }
   },
   "74003401": {
     "id": "74003401",
@@ -270879,7 +271783,15 @@
         "level": 30,
         "hpLines": 10
       }
-    ]
+    ],
+    "statPremium": {
+      "def": {
+        "rate": 10000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
+    }
   },
   "74011064": {
     "id": "74011064",
@@ -270970,7 +271882,15 @@
         "level": 30,
         "hpLines": 10
       }
-    ]
+    ],
+    "statPremium": {
+      "def": {
+        "rate": 10000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
+    }
   },
   "74012062": {
     "id": "74012062",
@@ -271045,7 +271965,15 @@
         "level": 30,
         "hpLines": 10
       }
-    ]
+    ],
+    "statPremium": {
+      "def": {
+        "rate": 10000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
+    }
   },
   "74013062": {
     "id": "74013062",
@@ -271108,7 +272036,15 @@
     },
     "aiType": "attack",
     "pushBack": true,
-    "pushUp": true
+    "pushUp": true,
+    "statPremium": {
+      "def": {
+        "rate": 10000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
+    }
   },
   "74041041": {
     "id": "74041041",
@@ -271189,7 +272125,15 @@
         "level": 30,
         "hpLines": 10
       }
-    ]
+    ],
+    "statPremium": {
+      "hp": {
+        "rate": 1000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
+    }
   },
   "74041042": {
     "id": "74041042",
@@ -271248,7 +272192,15 @@
     },
     "aiType": "attack",
     "pushBack": true,
-    "pushUp": true
+    "pushUp": true,
+    "statPremium": {
+      "hp": {
+        "rate": 1000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
+    }
   },
   "74042041": {
     "id": "74042041",
@@ -271323,7 +272275,15 @@
         "level": 30,
         "hpLines": 10
       }
-    ]
+    ],
+    "statPremium": {
+      "hp": {
+        "rate": 1000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
+    }
   },
   "74043042": {
     "id": "74043042",
@@ -271398,7 +272358,15 @@
         "level": 30,
         "hpLines": 10
       }
-    ]
+    ],
+    "statPremium": {
+      "hp": {
+        "rate": 1000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
+    }
   },
   "74051001": {
     "id": "74051001",
@@ -271469,7 +272437,15 @@
         "level": 30,
         "hpLines": 10
       }
-    ]
+    ],
+    "statPremium": {
+      "hp": {
+        "rate": 1000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
+    }
   },
   "74051003": {
     "id": "74051003",
@@ -271540,7 +272516,15 @@
         "level": 30,
         "hpLines": 10
       }
-    ]
+    ],
+    "statPremium": {
+      "hp": {
+        "rate": 1000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
+    }
   },
   "74052001": {
     "id": "74052001",
@@ -271603,7 +272587,15 @@
     },
     "aiType": "attack",
     "pushBack": true,
-    "pushUp": true
+    "pushUp": true,
+    "statPremium": {
+      "hp": {
+        "rate": 1000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
+    }
   },
   "74053001": {
     "id": "74053001",
@@ -271666,7 +272658,15 @@
     },
     "aiType": "attack",
     "pushBack": true,
-    "pushUp": true
+    "pushUp": true,
+    "statPremium": {
+      "hp": {
+        "rate": 1000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
+    }
   },
   "74054001": {
     "id": "74054001",
@@ -272473,7 +273473,15 @@
         "level": 60,
         "hpLines": 10
       }
-    ]
+    ],
+    "statPremium": {
+      "def": {
+        "rate": 10000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
+    }
   },
   "74201702": {
     "id": "74201702",
@@ -272569,7 +273577,15 @@
         "level": 30,
         "hpLines": 10
       }
-    ]
+    ],
+    "statPremium": {
+      "def": {
+        "rate": 10000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
+    }
   },
   "74201703": {
     "id": "74201703",
@@ -272660,7 +273676,15 @@
         "level": 30,
         "hpLines": 10
       }
-    ]
+    ],
+    "statPremium": {
+      "def": {
+        "rate": 10000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
+    }
   },
   "74201704": {
     "id": "74201704",
@@ -272726,7 +273750,15 @@
         "level": 60,
         "hpLines": 10
       }
-    ]
+    ],
+    "statPremium": {
+      "def": {
+        "rate": 10000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
+    }
   },
   "74202701": {
     "id": "74202701",
@@ -272801,7 +273833,15 @@
         "level": 30,
         "hpLines": 10
       }
-    ]
+    ],
+    "statPremium": {
+      "def": {
+        "rate": 10000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
+    }
   },
   "74202702": {
     "id": "74202702",
@@ -272864,7 +273904,15 @@
     },
     "aiType": "attack",
     "pushBack": true,
-    "pushUp": true
+    "pushUp": true,
+    "statPremium": {
+      "def": {
+        "rate": 10000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
+    }
   },
   "74203701": {
     "id": "74203701",
@@ -272927,7 +273975,15 @@
     },
     "aiType": "attack",
     "pushBack": true,
-    "pushUp": true
+    "pushUp": true,
+    "statPremium": {
+      "def": {
+        "rate": 10000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
+    }
   },
   "74203702": {
     "id": "74203702",
@@ -273002,7 +274058,15 @@
         "level": 30,
         "hpLines": 10
       }
-    ]
+    ],
+    "statPremium": {
+      "def": {
+        "rate": 10000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
+    }
   },
   "74301701": {
     "id": "74301701",
@@ -273073,7 +274137,15 @@
         "level": 30,
         "hpLines": 10
       }
-    ]
+    ],
+    "statPremium": {
+      "hp": {
+        "rate": 1000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
+    }
   },
   "74301702": {
     "id": "74301702",
@@ -273184,7 +274256,15 @@
         "level": 30,
         "hpLines": 10
       }
-    ]
+    ],
+    "statPremium": {
+      "hp": {
+        "rate": 1000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
+    }
   },
   "74301703": {
     "id": "74301703",
@@ -273270,7 +274350,15 @@
         "level": 30,
         "hpLines": 10
       }
-    ]
+    ],
+    "statPremium": {
+      "hp": {
+        "rate": 1000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
+    }
   },
   "74301704": {
     "id": "74301704",
@@ -273329,7 +274417,15 @@
     },
     "aiType": "attack",
     "pushBack": true,
-    "pushUp": true
+    "pushUp": true,
+    "statPremium": {
+      "hp": {
+        "rate": 1000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
+    }
   },
   "74302701": {
     "id": "74302701",
@@ -273409,7 +274505,15 @@
         "level": 30,
         "hpLines": 10
       }
-    ]
+    ],
+    "statPremium": {
+      "hp": {
+        "rate": 1000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
+    }
   },
   "74302702": {
     "id": "74302702",
@@ -273472,7 +274576,15 @@
     },
     "aiType": "attack",
     "pushBack": true,
-    "pushUp": true
+    "pushUp": true,
+    "statPremium": {
+      "hp": {
+        "rate": 1000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
+    }
   },
   "74303701": {
     "id": "74303701",
@@ -273535,7 +274647,15 @@
     },
     "aiType": "attack",
     "pushBack": true,
-    "pushUp": true
+    "pushUp": true,
+    "statPremium": {
+      "hp": {
+        "rate": 1000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
+    }
   },
   "74303702": {
     "id": "74303702",
@@ -273615,7 +274735,15 @@
         "level": 30,
         "hpLines": 10
       }
-    ]
+    ],
+    "statPremium": {
+      "hp": {
+        "rate": 1000
+      },
+      "buff_resist": {
+        "rate": -900
+      }
+    }
   },
   "74401701": {
     "id": "74401701",

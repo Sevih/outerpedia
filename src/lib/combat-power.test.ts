@@ -115,3 +115,60 @@ describe('calcNoGearBattlePower — snapshots de régression (profils réalistes
     expect(cp({ ...BASE, atk: 2200, critRate: 130, critDmg: 300, dmgUp: 50, pen: 30 })).toBe(25497);
   });
 });
+
+describe('calcNoGearBattlePower — float32 du client (`CFormula.CalcBattlePower`)', () => {
+  // Réimplémentation À PART, terme à terme depuis le C# (entrées raw entières).
+  const f = Math.fround;
+  const client = (s: NoGearCpInput): number => {
+    const crc = Math.min(Math.round(s.critRate * 10), 1000);
+    const chd = Math.round(s.critDmg * 10);
+    const pen = Math.round((s.pen ?? 0) * 10);
+    const up = Math.round((s.dmgUp ?? 0) * 10);
+    const red = Math.round((s.dmgReduce ?? 0) * 10) + Math.round((s.critDmgReduce ?? 0) * 10);
+    const n5 = f(chd + up);
+    const n6 =
+      n5 <= 2000
+        ? f(n5 / 1000)
+        : f(2.5 + f(2 * f(1 - f(Math.pow(f(1 - Math.min(1, f(f(n5 - 2000) / 2500))), 2)))));
+    let x = f(s.atk * f(f(1000 + crc) * f(0.001)));
+    x = f(x * n6);
+    x = f(x * f(f(1000 + f(pen * 1.5)) * f(0.001)));
+    x = f(x * f(1 + f(s.spd / 50)));
+    x = f(x * f(1 + f(f(1.7) * f(s.eff / f(s.eff + 130)))));
+    const n7 = f(f(s.atk + x) / 8);
+    const hd = f(s.hp + s.def);
+    let y = f(hd * f(f(1.05) + f(f(0.15) * f(44000 / f(hd + 44000)))));
+    y = f(y * f(1 + f(f(0.25) * f(red / f(red + 200)))));
+    y = f(y * f(1 + f(f(0.25) * f(s.effRes / f(s.effRes + 200)))));
+    const lv = s.skills.first + s.skills.second + s.skills.ultimate + s.skills.chainPassive;
+    const n9 = f(f(f(s.showUIStar * 500) + f(s.starPlus * 120)) + f(f(lv - 4) * 100));
+    return Math.floor(f(f(f(f(f(n7 + y) + n9) + 0) + 0) + (s.fused ? 5000 : 0)));
+  };
+
+  it('égal au client sur 20 000 tirages (le double sortait ±1 sur ~0,75 %)', () => {
+    let seed = 12345;
+    const rnd = () => (seed = (seed * 1103515245 + 12345) % 2147483648) / 2147483648;
+    const ri = (a: number, b: number) => Math.floor(a + rnd() * (b - a + 1));
+    for (let i = 0; i < 20_000; i++) {
+      const s: NoGearCpInput = {
+        atk: ri(400, 6000),
+        def: ri(300, 4000),
+        hp: ri(3000, 30000),
+        spd: ri(100, 320),
+        critRate: ri(0, 1000) / 10,
+        critDmg: ri(1500, 3800) / 10,
+        eff: ri(0, 450),
+        effRes: ri(0, 450),
+        pen: ri(0, 600) / 10,
+        dmgUp: ri(0, 500) / 10,
+        dmgReduce: ri(0, 400) / 10,
+        critDmgReduce: ri(0, 500) / 10,
+        showUIStar: ri(3, 6),
+        starPlus: ri(0, 3),
+        skills: { first: 5, second: 5, ultimate: 5, chainPassive: 5 },
+        fused: rnd() < 0.1,
+      };
+      expect(calcNoGearBattlePower(s), JSON.stringify(s)).toBe(client(s));
+    }
+  });
+});

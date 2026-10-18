@@ -28,12 +28,15 @@
  *     déclencheurs réels 70 % puis 30 %). Le palier i correspond au jeu de
  *     skills rage_enter/finish(i+1). Colonnes moteur ignorées : BreakBuffID,
  *     ServiceTurnLimit*, ServiceChargeCp*.
+ *   - `statPremium` : passifs de FICHE du kit (`BT_STAT_PREMIUM`), sommés par
+ *     stat — cf. `statPremiumOf`.
  */
 import type { LangDict } from '../../lib/lang';
 import { resolveClass } from '../../lib/class';
 import { slugEnum } from '../../lib/enums';
 import { loadTextIndex, resolveText } from '../../lib/text';
-import { bool, loadTable, num } from '../../lib/tables';
+import { loadBuffIndex } from '../../lib/buff';
+import { bool, loadTable, num, splitCsv, type Row } from '../../lib/tables';
 import { loadImmuneTooltipIds, readImmunities } from '../../lib/immunities';
 import {
   buildEncounters,
@@ -57,6 +60,12 @@ export interface MonsterRage {
   trigger: string;
   /** Palier i ↔ skills rage_enter/finish(i+1). */
   steps: RageStep[];
+}
+
+/** Passif de fiche d'une stat : plats (`OAT_ADD`) et taux ‰ (`OAT_RATE`) sommés. */
+export interface MonsterStatPremium {
+  flat?: number;
+  rate?: number;
 }
 
 /** Un monstre (mob, élite, boss…) — source unique, skills référencés par id. */
@@ -104,6 +113,12 @@ export interface Monster {
   linkedTo?: string[];
   /** Déclencheurs d'enrage réels (RageTemplet) — cf. en-tête du fichier. */
   rage?: MonsterRage;
+  /**
+   * Passifs de FICHE du kit, par slug de `stats` (cf. `statPremiumOf`) : le
+   * jeu les verse au taux de buff de la stat (`CalcFinalStat`), le site aussi
+   * (`combatStatAt`, src/lib/monster-stats.ts). Absent = aucun.
+   */
+  statPremium?: Record<string, MonsterStatPremium>;
   /** Posé par la rétention de promote, entité retirée du jeu. */
   retired?: boolean;
 }
@@ -129,6 +144,10 @@ interface MonsterAux {
   rageById: Map<string, MonsterRage>;
   /** Ids de tooltips d'immunité AFFICHABLES (hors sentinelle « No Immunities »). */
   immuneTooltipOk: Set<string>;
+  /** BuffIDs du niveau 1 de chaque skill (monstre ou perso), par SkillID. */
+  skillBuffIds: Map<string, string[]>;
+  /** BuffTemplet : BuffID → lignes (une par niveau). */
+  buffIndex: Map<string, Row[]>;
 }
 
 /**
@@ -138,6 +157,77 @@ interface MonsterAux {
 export function monsterType(v: string | undefined): string {
   const slug = slugEnum(v ?? '');
   return slug === 'monster' ? slug : slug.replace(/_monster$/, '');
+}
+
+/** `STAT_TYPE` du client → slug de `stats` (colonnes de `MonsterTemplet`). */
+const PREMIUM_STAT_SLUG: Record<string, string> = {
+  ST_HP: 'hp',
+  ST_WG: 'guard',
+  ST_SPEED: 'speed',
+  ST_ATK: 'atk',
+  ST_DEF: 'def',
+  ST_DMG_REDUCE_RATE: 'dmg_reduce',
+  ST_CRITICAL_RATE: 'critical_rate',
+  ST_CRITICAL_DMG_RATE: 'critical_dmg',
+  ST_PIERCE_POWER: 'pierce_power',
+  ST_PIERCE_POWER_RATE: 'pierce_power_rate',
+  ST_VAMPIRIC: 'vampiric',
+  ST_HIT_HP_RECOVERY: 'hit_hp_recovery',
+  ST_ACCURACY: 'effectiveness',
+  ST_AVOID: 'resilience',
+  ST_BUFF_CHANCE: 'buff_chance',
+  ST_BUFF_RESIST: 'buff_resist',
+  ST_COUNTER_RATE: 'counter_rate',
+  ST_DMG_BOOST: 'damage_boost',
+  ST_E_CRI_DMG_REDUCE: 'enemy_critical_dmg_reduce',
+};
+
+/**
+ * Passifs de FICHE d'un monstre — la règle du client, qui traite un monstre
+ * comme un perso (`CCharacterData.Initialize` → `SkillManager.Create` →
+ * `InitStatPremiumBuff` → `CalcStat`) :
+ *   - skills du kit au NIVEAU 1 (`SkillManager.Create` sans liste de niveaux)
+ *     — la première ligne du skill, chaque buff lu au niveau ≤ 1
+ *     (`CBuffTempletContainer.GetBuffTemplet`) ; un skill listé deux fois
+ *     compterait deux fois (une `CSkill` par slot), aucun cas en donnée ;
+ *   - lignes `BT_STAT_PREMIUM` de création `PASSIVE` (pas `PASSIVE2`), toute
+ *     cible de skill (`SKT_ALL`), visant `ME` ou `MY_TEAM`
+ *     (`CSkillManager.GetStatPremiumBuffList`) ;
+ *   - par stat, la somme des plats et la somme des taux. `SetBuffPremiumValue`
+ *     ne lit NI la condition NI la durée de la ligne : une ligne `ME`
+ *     conditionnelle s'applique telle quelle. Une ligne `MY_TEAM`, elle,
+ *     quitte la liste au combat (`RemoveStatPremiumTeamBuff`) et revient en
+ *     `CBuff` sur l'équipe, porteur compris (`GetPassiveBuffList`) : sa
+ *     condition y est évaluée, donc une `MY_TEAM` conditionnelle reste hors
+ *     du champ (aucune ligne conditionnelle en donnée au 18/10/2026).
+ * Hors du champ : les listes d'infiltration et de Monad Gate (modificateurs
+ * du contenu, pas du kit), les nœuds d'éveil du compte (`bossQuirkMods`), les
+ * `MY_TEAM*` posés par un autre monstre de la vague. Un `STAT_TYPE` sans
+ * colonne connue JETTE : une stat nouvelle se range ici, jamais en silence.
+ */
+export function statPremiumOf(
+  skills: string[],
+  skillBuffIds: (skillId: string) => string[] | undefined,
+  buffRows: (buffId: string) => Row[] | undefined,
+): Record<string, MonsterStatPremium> | undefined {
+  const out: Record<string, MonsterStatPremium> = {};
+  for (const skill of skills) {
+    for (const buffId of skillBuffIds(skill) ?? []) {
+      const row = (buffRows(buffId) ?? []).filter((r) => num(r.Level) <= 1).at(-1);
+      if (!row || row.Type !== 'BT_STAT_PREMIUM' || row.BuffCreateType !== 'PASSIVE') continue;
+      if (row.TargetType !== 'ME' && row.TargetType !== 'MY_TEAM') continue;
+      if (row.TargetType === 'MY_TEAM' && (row.BuffConditionType ?? 'NONE') !== 'NONE') continue;
+      const slug = PREMIUM_STAT_SLUG[row.StatType ?? ''];
+      if (!slug) throw new Error(`statPremium : ${buffId} vise ${row.StatType}, stat sans colonne`);
+      const v = num(row.Value);
+      if (!v) continue;
+      const acc = (out[slug] ??= {});
+      if (row.ApplyingType === 'OAT_RATE') acc.rate = (acc.rate ?? 0) + v;
+      else if (row.ApplyingType === 'OAT_ADD') acc.flat = (acc.flat ?? 0) + v;
+    }
+  }
+  for (const [slug, p] of Object.entries(out)) if (!p.flat && !p.rate) delete out[slug];
+  return Object.keys(out).length ? out : undefined;
 }
 
 /** Booléen de table (`true`/`True`/`False`), `undefined` si colonne absente.
@@ -187,6 +277,17 @@ const monsterSchema: Schema = {
     },
     summonedBy: { kind: 'array', of: { kind: 'string' }, minItems: 1, optional: true },
     linkedTo: { kind: 'array', of: { kind: 'string' }, minItems: 1, optional: true },
+    statPremium: {
+      kind: 'record',
+      optional: true,
+      of: {
+        kind: 'object',
+        fields: {
+          flat: { kind: 'number', int: true, optional: true },
+          rate: { kind: 'number', int: true, optional: true },
+        },
+      },
+    },
     rage: {
       kind: 'object',
       optional: true,
@@ -263,6 +364,15 @@ export const monsterSpec: ExtractorSpec<Monster, MonsterAux> = {
 
     const immuneTooltipOk = loadImmuneTooltipIds();
 
+    // Niveau 1 de chaque skill : la PREMIÈRE ligne du skill dans la table
+    // (`CSkillLevelTempletContainer`, index `niveau − 1`) ; un monstre peut
+    // porter des skills de perso (même conteneur côté client).
+    const skillBuffIds = new Map<string, string[]>();
+    for (const t of ['MonsterSkillLevelTemplet', 'CharacterSkillLevelTemplet'])
+      for (const r of loadTable(t))
+        if (r.SkillID && !skillBuffIds.has(r.SkillID))
+          skillBuffIds.set(r.SkillID, splitCsv(r.BuffID));
+
     return {
       tchar,
       classOf,
@@ -270,6 +380,8 @@ export const monsterSpec: ExtractorSpec<Monster, MonsterAux> = {
       enc: buildEncounters(),
       rageById,
       immuneTooltipOk,
+      skillBuffIds,
+      buffIndex: loadBuffIndex(),
     };
   },
 
@@ -311,6 +423,13 @@ export const monsterSpec: ExtractorSpec<Monster, MonsterAux> = {
 
     const rage = aux.rageById.get(r.ID);
     if (rage) monster.rage = rage;
+
+    const premium = statPremiumOf(
+      skills,
+      (id) => aux.skillBuffIds.get(id),
+      (id) => aux.buffIndex.get(id),
+    );
+    if (premium) monster.statPremium = premium;
 
     return monster;
   },

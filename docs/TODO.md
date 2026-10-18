@@ -35,9 +35,8 @@ les preuves et les décisions vivent dans le tri consolidé de sevih-tool
       Trouver ce qui les rend dynamiques (un `headers()`, `cookies()` ou
       `searchParams` lu en chemin) et décider : les mettre en cache, ou
       corriger les commentaires.
-- [ ] **Calculateur (C, build)** : H3, M2, B6 ;
-      R14 et R16 : enquête faite (F27), mesures demandées
-      (`docs/specs/damage-clips-joues.md` § 4).
+- [ ] **Calculateur (C, build)** : R14 et R16 : enquête faite (F27),
+      mesures demandées (`docs/specs/damage-clips-joues.md` § 4).
 - [ ] **Anim-events : 46 skills sans aucun event extrait** (repéré par C24,
       17/10) — Lisha (2000005) 502-520, S1 de Lily, Laine et Cindy, Ame,
       fusionnés 2700003/2700005/2700035/2700037/2700043 : extraire les

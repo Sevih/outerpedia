@@ -7,6 +7,114 @@
 
 ## 2026-10-18
 
+- **C25 — Calculateur (2/2) : stat de combat des boss (passif de fiche),
+  RES de la cible, `IsIgnoreResist`, PV d'overgrade et CP en float32.**
+  Constats H3, M2 et deux « ±1 » cosmétiques de la revue logique du site,
+  plus la décision B6 du 15/10. **Client relu** : un monstre est un
+  `CCharacterData` ; `InitStatPremiumBuff` garde, parmi
+  `GetStatPremiumBuffList` (tous les skills du kit au niveau 1, buffs lus au
+  niveau ≤ 1, création `PASSIVE` seule, `BT_STAT_PREMIUM`), les lignes `ME`
+  et `MY_TEAM`, versées au taux de buff de `CalcFinalStat`.
+  `SetBuffPremiumValue` ne lit ni condition ni durée : une `ME`
+  conditionnelle s'appliquerait telle quelle ; une `MY_TEAM` quitte la liste
+  au combat (`RemoveStatPremiumTeamBuff`) et revient en `CBuff`, condition
+  lue — donc hors du champ si conditionnelle (aucune ligne conditionnelle en
+  donnée). Les nœuds d'éveil « boss » (lignes 198 à 201,
+  `Awakening_Boss_Buff_RESIST_Down_*` / `_Avoid_Down_*`, nœuds PVE 233 à 247) passent par la MÊME liste (`SetAwakeningNodes` →
+  `InitStatPremiumBuff`). PV remplacés (`bossHp`, overgrade) : posés par
+  `MaxHP = …` → `SetTempMaxValue`, que `GetFinalValue` rend tel quel — le
+  taux ne s'y applique pas, tranché sans question. CRIT d'un monstre borné à
+  1000 (`SetFinalValue`). **① Émission** : `Monster.statPremium` (slug de
+  `stats` → plats et taux sommés, `statPremiumOf`,
+  `datagen/extractor/specs/monster.ts` ; un `STAT_TYPE` sans colonne jette ;
+  skills monstre et perso, `MonsterSkillLevelTemplet` et
+  `CharacterSkillLevelTemplet`) : 153 monstres, dont 115 cibles preset sur
+  2 745 (les 108 de la revue — 33 × 165301, 71 × 165401, 3 × 155209,
+  1 × 155330 — plus 113332, 1116502 et 152168 : crit, crit dmg). 0 ligne
+  conditionnelle ; hors du champ : listes Monad Gate et infiltration (R1/R3)
+  et `MY_TEAM*` d'un voisin de vague (lignes `PASSIVE2`
+  `MY_TEAM_WITHOUT_ME` de Maxwell 5050099-5050101 : 1 cible preset touchée,
+  5050151). **② Une composition** (`src/lib/monster-stats.ts`) : `statAt`
+  rend la FICHE et n'applique plus les quirks à part ; `monsterStatChannel`
+  (passif + quirks, un taux), `combatStat` (plancher 0 de la troncature de `(fiche + plats) × (1000 + Σ taux) / 1000`), `combatStatAt` (fiche et combat, PV remplacés
+  et crit à part), `quirkBossType`. **③ Pages de boss** : `BossStats` montre
+  le combat et, s'il diffère, la fiche en infobulle (`title` et `sr-only`,
+  clé `guides.boss_display.sheet_stat` dans les six locales) ; `BossView`
+  porte `statPremium` (absent d'une archive : la fiche) ; la fiche monstre de
+  quick (`monster-sheet.ts`, `extractor.js`) aussi, avec une ligne « passifs
+  de fiche ». Vladi Max (4244004) lv30 : DEF **161 → 1 771** (lv100, niveau
+  du nœud depuis C21 : 494 → 5 434), RES 86 → 0 avec tous les quirks (−90 %
+  −20 % : plancher) ; Maxwell (5050099) lv152 : DEF **2 168 → 2 818**, ATK
+  8 019 → 10 424. **④ Calculateur** : `presetSpawnStats` sert la fiche (RES
+  comprise), `presetSpawnPremium` le passif (sans les PV remplacés),
+  `ResolvedPresetTarget`/`TargetBuildInput` gagnent `premium` et `quirkBoss`
+  (type ≥ boss), `DcSpawn` `premium` et `combat` (affichage, celui de la
+  page : quirks au complet), `DcTarget` `quirkBoss`. Le moteur verse au canal
+  de stat de la cible (`applyTargetStatChannel`, taux sommés, une
+  troncature, plancher 0) le passif, les quirks « boss » RÉGLÉS
+  (`bossQuirkRates`, gear.ts) et l'existant. Double compte : les quirks
+  « boss » étaient versés à l'ATTAQUANT par `resolveQuirkPassives` (taux
+  premium de sa RES/EFF, sans effet visible) — écartés de lui
+  (`BOSS_QUIRK_BUFFS`) ; `passives.ts` tait les lignes couvertes
+  (`statPremiumCovered`, niveaux > 1 d'un même buff compris), seules restent
+  `unresolved` les `MY_TEAM` conditionnelles et l'enrage. **Constat** : les
+  chips de stat de CIBLE (`t_def`, `t_def_down`, `t_res`, `t_res_down`)
+  n'entraient pas au canal (`defenderStatBuffs` ne les lisait pas : dégâts
+  identiques avec ou sans, vérifié) alors que la tâche le donnait pour
+  acquis — branchées, sans fixture concernée (aucune ne porte de chip de
+  cible). Cible preset affichée en combat avec la fiche en infobulle ;
+  « Copier depuis la sélection » copie le combat (une cible manuelle porte
+  des stats effectives : ni passif ni quirks ajoutés) ; le panneau « stats
+  finales » lit `report.targetStats` (nouveau). **⑤ RES (M2)** :
+  `TARGET_STAT_MAP`, `PRESET_STAT_SLUGS`, `TargetBuildInput.stats` et
+  `TARGET_FIELDS` gagnent `res` (en dernier : un `?z=` sans elle se lit) ;
+  `isIgnoreResist` suit `CBuffTemplet.IsIgnoreResist` (`DEBUFF_IGNORE_ALL`
+  compris). **⑥ PV d'overgrade** : l'expression du client en `Math.fround`
+  à chaque pas. **⑦ CP** : `calcNoGearBattlePower` porté terme à terme en
+  float32 ; plafond du CHC (le client borne la stat elle-même,
+  `SetFinalValue`) et seuil `< 2001` (`<= 2000f` côté client) inchangés,
+  équivalents sur des raw entiers ; `(Σ niveaux − 4) × 100` = l'ancien
+  `Σ max(0, niveau − 1)` dès que chaque niveau ≥ 1. **⑧ B6** (décision du
+  15/10) : aux plafonds 105 et 110 la percée suivante reste supposée NON
+  franchie, calcul inchangé — écrit en tête de `modifierAfter100For` et en
+  infobulle du curseur de niveau (clé
+  `tools.damage-calculator.attacker.level_breakthrough_hint`, six locales).
+  Commentaires et spec : en-têtes de `passives.ts`, `monster-stats.ts`,
+  `preset-target.ts`, `inputs.ts` (canal cible) ; `damage-formula.md` § 5
+  (`IsIgnoreResist`, RES de la cible), § 12.13 (float32, PV hors taux),
+  § 16.3 (révision du 18/10) ; `damage-calculator-ui.md` ne décrit pas les
+  champs de la cible, inchangée. **Vérifié** : `pnpm typecheck` (les trois
+  `tsc --noEmit`, sans erreur), `pnpm lint` (`$ eslint`, 0 problème),
+  `pnpm test` (`Tests  4181 passed (4181)`), `pnpm damage:check` (42 lignes exactes, 0 en dérive), `fixtures.test.ts` sans fixture
+  touchée. `datagen:build` puis promote à blanc : `monsters.json` ~153 (le
+  seul champ ajouté, script de comparaison : 153 monstres, 0 autre
+  différence), `solver/` identique (le `bestSkill` n'a pas bougé, C24
+  l'annonçait) ; `characters.json` ~7 (perso 2400015 non intégré) NON
+  promu : `--apply --only monsters.json`. Tests en relation : composition
+  (DEF +1000 % et quirk, RES −90 % et quirks : un taux, plancher),
+  Vladi Max (combat = 11 × fiche), monstre sans passif, PV remplacés, crit,
+  PV d'overgrade et CP contre des réimplémentations float32 écrites à part,
+  pas de double compte (`passives.test.ts` sur toutes les cibles preset,
+  `inputs.test.ts` sur Vladi Max), quirks « boss » = `bossQuirkMods` au
+  complet, RES (EFF 0 / RES 160 : 38,5 % ; Francesca/Ars Nova 0,699 hors
+  drapeau ; `DEBUFF_IGNORE_ALL` sûr), ancien `?z=` sans RES,
+  `statPremiumOf` synthétique. Rejeux (copies hors dépôt) : `bossprem.mts`
+  (adapté au contexte de C16) unresolved 2/2/1/2 → **0/0/0/0**, entrées 0 ;
+  `og.mts` **1 339/2 070 → 0/2 070** ; `cp.mts` **1 490/200 000 →
+  0/200 000** ; `dotres.mts` et `dotp.mts` identiques avant/après (leurs
+  colonnes sont calculées par le script — Bleed de Francesca
+  `DEBUFF_IGNORE_RESIST`, Gnosis Beth EFF > RES), le moteur est couvert par
+  `inputs.test.ts`. **Laissé** : `passives.ts` lit toutes les lignes de
+  niveau d'un buff alors qu'un monstre est au niveau 1 (2000065_2_2,
+  niveaux 1/3/4, chez 62005205 — hors premium) ; le canal par ligne de
+  `pushSlot` enchaîne deux troncatures (base puis débuffs au lancement),
+  existant ; plafonds de stat du donjon (`m_StatCapDic`) non modélisés ; la
+  carte du preset montre la stat de la page (quirks au complet), le moteur et
+  les stats finales ceux réglés. Pas de serveur de dev : rendu non vu en
+  page. **Reste à Sevih** : une page de boss Monad Gate route 3 (DEF ×11,
+  infobulle de fiche) et le calculateur (champ RES de la cible manuelle,
+  probabilité de pose contre un boss résistant).
+
 - **Relecture C24 (Opus) — affinité par perso, `STAT_BUFF/DEBUFF_ENHANCE`,
   clips chez le porteur, bonus `CASTER` d'un allié, portée de
   `ENEMY_TEAM_DECREASE` ; validé.** Question du lot tranchée le 17/10 (un

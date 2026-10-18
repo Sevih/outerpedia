@@ -27,8 +27,10 @@ import {
   passiveAffectsDamageAmount,
   resolveBossPassives,
   staticBossPassives,
+  statPremiumCovered,
   type ElementConditionContext,
 } from './passives';
+import { getMonster } from '@/lib/data/monsters';
 import { Element } from './types';
 
 const data = {
@@ -369,19 +371,60 @@ describe('passives — conditions et cibles sur la donnée réelle (revue du 09/
     expect(activeFor('CCT_MAGE')).toBe(true);
   });
 
-  it('BT_LIMIT_DMG_TURN et BT_STAT_PREMIUM du boss : signalés, jamais tus', () => {
+  it('BT_LIMIT_DMG_TURN du boss : signalé, jamais tu', () => {
     // 50000010 : plafond de dégâts par tour (licence_upgrade64).
     const limit = staticBossPassives('50000010', data.targets!, data.buffs)!;
     expect(limit.unresolved.find((u) => u.buffId === 'licence_upgrade64')?.reason).toContain(
       'plafond',
     );
     expect(limit.entries.some((e) => e.buffId === 'licence_upgrade64')).toBe(false);
+  });
+
+  it('passif de FICHE (BT_STAT_PREMIUM) : porté par `Monster.statPremium`, ni entrée ni unresolved', () => {
     // 4244004 : Monad Gate route 3, DEF +1000 % de fiche (skill 165301).
     const premium = staticBossPassives('4244004', data.targets!, data.buffs)!;
-    expect(
-      premium.unresolved.find((u) => u.buffId === 'monad_gate_new_route_3_1')?.reason,
-    ).toContain('fiche');
+    const row = data.buffs.buffs['monad_gate_new_route_3_1']![0];
+    expect(statPremiumCovered(row)).toBe(true);
+    expect(premium.unresolved.some((u) => u.buffId === 'monad_gate_new_route_3_1')).toBe(false);
     expect(premium.entries.some((e) => e.buffId === 'monad_gate_new_route_3_1')).toBe(false);
+    expect(getMonster('4244004')!.statPremium!.def!.rate).toBe(row.value);
+  });
+
+  it('pas de double compte sur la donnée réelle : chaque ligne couverte est dans `statPremium`, jamais ailleurs', () => {
+    let covered = 0;
+    for (const id of Object.keys(data.targets!.targets)) {
+      const st = staticBossPassives(id, data.targets!, data.buffs)!;
+      for (const ref of data.targets!.targets[id]!.skills) {
+        const skill = data.targets!.skills[ref.id];
+        if (skill?.subType !== 'PASSIVE') continue;
+        for (const buffId of skill.levels[0]?.buffIds ?? []) {
+          for (const row of data.buffs.buffs[buffId] ?? []) {
+            if (!statPremiumCovered(row)) continue;
+            covered++;
+            expect(
+              st.entries.some((e) => e.buffId === buffId),
+              `${id} ${buffId}`,
+            ).toBe(false);
+            expect(
+              st.unresolved.some((u) => u.buffId === buffId),
+              `${id} ${buffId}`,
+            ).toBe(false);
+            // Le champ porte la stat, du même signe (plusieurs lignes peuvent s'y sommer).
+            const p = Object.values(getMonster(id)?.statPremium ?? {});
+            const v = row.value ?? 0;
+            expect(
+              p.some(
+                (x) =>
+                  Math.sign((row.applyingType === 'OAT_RATE' ? x.rate : x.flat) ?? 0) ===
+                  Math.sign(v),
+              ),
+              `${id} ${buffId}`,
+            ).toBe(true);
+          }
+        }
+      }
+    }
+    expect(covered).toBeGreaterThan(100);
   });
 
   it('un BuffID listé deux fois sans IsIDOverlap ne compte qu’une fois', () => {

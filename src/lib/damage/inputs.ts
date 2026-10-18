@@ -36,6 +36,7 @@ import {
 } from './aggregate';
 import { calcBaseStat } from './formula';
 import {
+  bossQuirkRates,
   burstableSlotOf,
   pickBuffRow,
   resolveGearPassives,
@@ -192,8 +193,9 @@ export interface DataBuffLevel {
   /** `IsIDOverlap` — deux poses du même `BuffID` coexistent ; sinon la
    *  seconde retrouve la première (`CBuff`, `FindBuff(BuffID)`). */
   isIdOverlap?: boolean;
-  /** `DEBUFF_IGNORE_RESIST` = pose sans jet de résistance § 5 ; ≥ DEBUFF =
-   *  débuff (`IsDebuff`, polarité du renfort ENHANCE § 14.1). */
+  /** Pose sans jet de résistance § 5 si `isIgnoreResist` (dont
+   *  `DEBUFF_IGNORE_RESIST`, `DEBUFF_IGNORE_ALL`) ; ≥ DEBUFF = débuff
+   *  (`IsDebuff`, polarité du renfort ENHANCE § 14.1). */
   buffDebuffType?: string;
   /** Tours de présence (`-1` = permanent) — affichage des lignes DoT. */
   turnDuration?: number;
@@ -328,11 +330,13 @@ export function sheetSlugOfStat(st: string): string | undefined {
 /** Enum `ST_*` → clé des stats de CIBLE du scénario (famille TARGET_STAT
  *  § 9.1) — pendant défenseur de SHEET_STAT_MAP : les seules stats que la
  *  cible du scénario porte (preset ou saisie), le reste contribue 0. */
-const TARGET_STAT_MAP: Record<string, keyof TargetBuildInput['stats']> = {
+const TARGET_STAT_MAP: Record<string, TargetStatKey> = {
   ST_HP: 'hp',
   ST_DEF: 'def',
   ST_DMG_REDUCE_RATE: 'dmgRed',
   ST_E_CRI_DMG_REDUCE: 'cdmgRed',
+  // RES : le jet de pose des débuffs (§ 5, `CFormula.CheckResist`).
+  ST_BUFF_RESIST: 'res',
 };
 
 /** Taux Codex par stat (‰ CUMULÉS au niveau du compte) — seuls ATK/DEF/HP. */
@@ -398,7 +402,16 @@ export interface MaxHpBuffInfo {
   hpAfter: number;
 }
 
-/** Palier post-100 applicable au niveau donné (spec § 3.2) — 0 sinon. */
+/**
+ * Palier post-100 applicable au niveau donné (spec § 3.2) — 0 sinon. Le jeu
+ * filtre les lignes sur le step de niveau max COURANT du perso
+ * (`CCharacterData`) : à un plafond de percée (lv 105, lv 110), un perso qui a
+ * DÉJÀ franchi la percée suivante (step 2, step 3) n'a pas encore le palier du
+ * step suivant (0), alors que celui qui ne l'a pas franchie garde celui de son
+ * step (200, 400 ‰ selon la ligne). Le calculateur ne demande pas le step :
+ * il suppose la percée suivante NON franchie, comme toujours (décision Sevih
+ * du 15/10/2026, revue B6) — dit en infobulle du niveau dans l'UI.
+ */
 export function modifierAfter100For(
   char: Pick<DataCharacter, 'element'> & { basicStar?: number },
   level: number,
@@ -676,11 +689,26 @@ export interface AllyBuildInput {
   amulet?: { groups: string[]; tier: number };
 }
 
+/** Clés des stats de la cible du scénario. */
+export type TargetStatKey = 'hp' | 'def' | 'dmgRed' | 'cdmgRed' | 'res';
+
+/** Canal de buff PERMANENT d'une stat de la cible : plats et taux ‰ sommés. */
+export type TargetStatChannel = Partial<Record<TargetStatKey, { flat?: number; rate?: number }>>;
+
 export interface TargetBuildInput {
   /** Élément (`CET_*` ou slug UI). */
   element: string;
-  /** Stats défensives effectives (preset résolu par l'UI, ou saisie manuelle). */
-  stats: { hp?: number; def?: number; dmgRed?: number; cdmgRed?: number };
+  /** Stats de la cible : de FICHE pour un preset (son passif de fiche est
+   *  dans `premium`, versé par le moteur), effectives pour une saisie
+   *  manuelle. RES (`res`) : celle du jet de pose des débuffs (§ 5). */
+  stats: Partial<Record<TargetStatKey, number>>;
+  /** Passif de FICHE du monstre preset (`Monster.statPremium`), par clé —
+   *  versé au canal de stat de la cible avec ses autres buffs (§ 16.3). */
+  premium?: TargetStatChannel;
+  /** Le jeu applique les quirks « boss » du compte à cette cible (monstre
+   *  preset de type ≥ `CT_BOSS_MONSTER`, `CheckNodeApply`) — leurs taux
+   *  entrent au même canal (`bossQuirkRates`). */
+  quirkBoss?: boolean;
   /** Cible boss (presets : toujours vrai). */
   boss?: boolean;
   /** Cible en BREAK (jauge détruite) — contexte § 9.1 (BT_DMG_TARGET_BREAK :
@@ -732,8 +760,9 @@ export interface SlotDotLine {
    *  poses multiples d'un même skill ne le multiplient PAS (mesure
    *  discriminante EE on/off du 24/08/2026 — Eternal Bleeding). */
   damagePerTick: number;
-  /** P(pose) = P‰(CreateRate) × (1 − P(résist § 5)) — résistance sautée si
-   *  `DEBUFF_IGNORE_RESIST` (ex. le Bleed de Francesca). */
+  /** P(pose) = P‰(CreateRate) × (1 − P(résist § 5)), RES de la cible
+   *  comprise — résistance sautée si `isIgnoreResist` (ex. le Bleed de
+   *  Francesca, `DEBUFF_IGNORE_RESIST` ; `DEBUFF_IGNORE_ALL`). */
   applyProbability: number;
   /** Tours de présence (`TurnDuration`). */
   turnDuration?: number;
@@ -782,6 +811,10 @@ export interface DamageReportResult {
   /** Stats de COMBAT reconstruites (par slug UI saisi) — § 16.1, buff de
    *  guilde § 16.2 déjà appliqué au HP quand actif. */
   combatStats: Record<string, number>;
+  /** Stats de la CIBLE que le moteur consomme (canal § 16.1 : passif de
+   *  fiche, quirks « boss », chips, enrage, passifs du porteur) — hors
+   *  débuffs au lancement d'un skill (par ligne). */
+  targetStats: TargetBuildInput['stats'];
   slots: SlotReport[];
   /** Chips actifs SANS magnitude standard — contribution 0, à afficher. */
   unresolvedFx: string[];
@@ -823,21 +856,33 @@ const SLOT_TYPES: { slot: 'S1' | 'S2' | 'S3'; type: string }[] = [
 const BURST_TYPES = ['SKT_BURST_1', 'SKT_BURST_2', 'SKT_BURST_3'];
 
 /**
- * Canal de STAT du DÉFENSEUR : les `BT_STAT` posés sur la cible (enrage du
- * boss, débuffs permanents d'équipement, débuffs au LANCEMENT d'un skill —
- * ex. Rhona 2000008_3_3 : DEF -50 % au début du S3) s'appliquent aux stats
- * effectives par l'identité § 16.1 avec A = 0 (un monstre n'a pas de terme
- * d'archive) : `stat' = trunc((stat + val) × (1000 + taux) / 1000)`. Les
- * stacks ne sont pas simulés (lignes damage-pertinentes mono-stack en
- * donnée). `holder` = tous les buffs de la cible : ses ENHANCE renforcent
- * ses BT_STAT visibles (§ 14.1, `applyStatEnhance`).
+ * Canal de STAT du DÉFENSEUR : les `BT_STAT` posés sur la cible (chips de
+ * cible, enrage du boss, débuffs permanents d'équipement, débuffs au
+ * LANCEMENT d'un skill — ex. Rhona 2000008_3_3 : DEF -50 % au début du S3) et
+ * son canal PERMANENT (passif de fiche du preset et quirks « boss » du compte,
+ * `permanent`) s'appliquent aux stats par l'identité § 16.1 avec A = 0 (un
+ * monstre n'a pas de terme d'archive) : `stat' = max(0, trunc((stat + plats)
+ * × (1000 + Σ taux) / 1000))`, tous les taux d'une stat SOMMÉS avant l'unique
+ * troncature (`CFormula.CalcFinalStat`). Les stacks ne sont pas simulés
+ * (lignes damage-pertinentes mono-stack en donnée). `holder` = tous les buffs
+ * de la cible : ses ENHANCE renforcent ses BT_STAT visibles (§ 14.1,
+ * `applyStatEnhance`) — jamais le canal permanent, qui n'est pas un buff.
  */
 function applyTargetStatChannel(
   base: TargetBuildInput['stats'],
   buffs: ActiveBuff[],
   holder: ActiveBuff[],
+  permanent?: TargetStatChannel,
 ): TargetBuildInput['stats'] {
-  const acc: Partial<Record<keyof TargetBuildInput['stats'], { add: number; rate: number }>> = {};
+  const acc: Partial<Record<TargetStatKey, { add: number; rate: number }>> = {};
+  for (const [key, p] of Object.entries(permanent ?? {}) as [
+    TargetStatKey,
+    { flat?: number; rate?: number },
+  ][]) {
+    const slot = (acc[key] ??= { add: 0, rate: 0 });
+    slot.add += p.flat ?? 0;
+    slot.rate += p.rate ?? 0;
+  }
   for (const b of applyStatEnhance(buffs, holder)) {
     if (b.type !== 'BT_STAT') continue;
     const key = b.stat !== undefined ? TARGET_STAT_MAP[b.stat] : undefined;
@@ -848,13 +893,30 @@ function applyTargetStatChannel(
   }
   const out = { ...base };
   for (const [key, agg] of Object.entries(acc) as [
-    keyof TargetBuildInput['stats'],
+    TargetStatKey,
     { add: number; rate: number },
   ][]) {
+    if (!agg.add && !agg.rate) continue;
     const value = out[key] ?? 0;
-    out[key] = Math.trunc(((value + agg.add) * (1000 + agg.rate)) / 1000);
+    out[key] = Math.max(0, Math.trunc(((value + agg.add) * (1000 + agg.rate)) / 1000));
   }
   return out;
+}
+
+/**
+ * Le jet de résistance de la pose est-il SAUTÉ ? `CBuffTemplet.IsIgnoreResist`
+ * (lu par `CBuff`, § 5) : vrai pour `NEUTRAL`, `NEUTRAL2`, `BUFF`,
+ * `DEBUFF_IGNORE_RESIST` et `DEBUFF_IGNORE_ALL` — seuls `DEBUFF` et
+ * `DEBUFF_IGNORE_IMMUNE` passent `CFormula.CheckResist`.
+ */
+export function isIgnoreResist(buffDebuffType: string | undefined): boolean {
+  return (
+    buffDebuffType === 'NEUTRAL' ||
+    buffDebuffType === 'NEUTRAL2' ||
+    buffDebuffType === 'BUFF' ||
+    buffDebuffType === 'DEBUFF_IGNORE_RESIST' ||
+    buffDebuffType === 'DEBUFF_IGNORE_ALL'
+  );
 }
 
 /**
@@ -1320,11 +1382,14 @@ export function buildDamageReport(
     ...allyBuffs('defender'),
   ];
 
-  // Stats effectives de la CIBLE (canal § 16.1, A = 0) : BT_STAT actifs posés
-  // sur elle par le boss lui-même (enrage) ou par le kit/équipement/quirks du
-  // porteur — hors callers (les débuffs AU LANCEMENT d'un skill passent par
-  // le canal PAR SLOT de pushSlot, 18/08/2026).
+  // Stats effectives de la CIBLE (canal § 16.1, A = 0) : chips de cible et
+  // BT_STAT actifs posés sur elle par le boss lui-même (enrage) ou par le
+  // kit/équipement/quirks du porteur — hors callers (les débuffs AU LANCEMENT
+  // d'un skill passent par le canal PAR SLOT de pushSlot, 18/08/2026) — plus
+  // son canal PERMANENT : passif de fiche du preset et quirks « boss » du
+  // compte (`bossQuirkRates`), mêmes taux sommés.
   const defenderStatBuffs = [
+    ...tgtFx.buffs.filter((b) => b.type === 'BT_STAT'),
     ...(bossPassives?.entries ?? [])
       .filter((e) => e.side === 'defender' && e.active && e.buff.type === 'BT_STAT')
       .map((e) => e.buff),
@@ -1334,7 +1399,27 @@ export function buildDamageReport(
         .map((e) => e.buff),
     ),
   ];
-  const tgtStats = applyTargetStatChannel(target.stats, defenderStatBuffs, defenderBuffs);
+  const tgtPermanent: TargetStatChannel = {};
+  for (const [key, p] of Object.entries(target.premium ?? {}) as [
+    TargetStatKey,
+    { flat?: number; rate?: number },
+  ][])
+    tgtPermanent[key] = { ...p };
+  if (target.quirkBoss && attacker.quirks)
+    for (const [st, rate] of Object.entries(
+      bossQuirkRates(attacker.quirks, data.growth.awakening, data.buffs),
+    )) {
+      const key = TARGET_STAT_MAP[st];
+      if (key === undefined) continue; // EFF du boss : sans lecture côté cible
+      const slot = (tgtPermanent[key] ??= {});
+      slot.rate = (slot.rate ?? 0) + rate;
+    }
+  const tgtStats = applyTargetStatChannel(
+    target.stats,
+    defenderStatBuffs,
+    defenderBuffs,
+    tgtPermanent,
+  );
 
   // Stats de l'attaquant qui pèsent un MONTANT dans CE scénario (filtre des
   // chips de passifs de boss, cf. passives.ts) : la base § 8/§ 7.5/§ 9, plus
@@ -1658,7 +1743,7 @@ export function buildDamageReport(
         // La POSE, elle, a lieu PENDANT le skill : buff chance de la ligne.
         buffChancePermille: slotScenario.additionalContext?.attackerStat?.('ST_BUFF_CHANCE') ?? 0,
         buffResistPermille: slotScenario.additionalContext?.defenderStat?.('ST_BUFF_RESIST') ?? 0,
-        ignoreResist: row.buffDebuffType === 'DEBUFF_IGNORE_RESIST',
+        ignoreResist: isIgnoreResist(row.buffDebuffType),
       });
       // Poses MULTIPLES du même effet par le même skill (ex. les 2 lignes
       // d'Eternal Bleeding du S1 de Beth) : le tick observé ne les cumule
@@ -1759,6 +1844,7 @@ export function buildDamageReport(
               target.stats,
               defenderStatBuffs.filter((b) => !removed.has(b)),
               baseDef,
+              tgtPermanent,
             )
           : tgtStats;
         const ts = applyTargetStatChannel(base, statDef, [...baseDef, ...gatedDef]);
@@ -1840,6 +1926,7 @@ export function buildDamageReport(
 
   return {
     combatStats,
+    targetStats: tgtStats,
     slots,
     unresolvedFx: [...atkFx.unresolved, ...tgtFx.unresolved],
     ...(maxHpBuff ? { maxHpBuff } : {}),

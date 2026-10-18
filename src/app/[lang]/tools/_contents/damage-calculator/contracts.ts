@@ -5,6 +5,7 @@
  * 25/08/2026 (découpage mécanique, contenu inchangé).
  */
 import type { Lang } from '@/lib/i18n/config';
+import type { TargetStatChannel, TargetStatKey } from '@/lib/damage/inputs';
 
 /** Palier de transcendance (forme compacte de `TranscendTierView`) — la rangée
  *  d'étoiles se reconstruit via `transcendStarRow` de `@/lib/images`. */
@@ -136,9 +137,16 @@ export interface DcSpawn {
   /** Absent quand le jeu ne nomme pas le spawn (repli « Fight N » à l'affichage). */
   label?: string;
   level: number;
-  /** Stats défensives EFFECTIVES au spawn (niveau + adv + bossHp appliqués).
-   *  Un champ ABSENT vaut 0 — les zéros sont omis du payload. */
-  stats: { hp?: number; def?: number; dmgRed?: number; cdmgRed?: number };
+  /** Stats de FICHE au spawn (niveau + adv + bossHp appliqués) — l'entrée du
+   *  moteur. Un champ ABSENT vaut 0 — les zéros sont omis du payload. */
+  stats: Partial<Record<TargetStatKey, number>>;
+  /** Passif de fiche du monstre (`presetSpawnPremium`) — le moteur le verse
+   *  au canal de stat de la cible. */
+  premium?: TargetStatChannel;
+  /** Stats de COMBAT AFFICHÉES, celles de la page du boss (`combatStatAt` :
+   *  passif de fiche et quirks « boss » au complet) — seulement les clés qui
+   *  diffèrent de `stats`, dont l'infobulle donne alors la fiche. */
+  combat?: Partial<Record<TargetStatKey, number>>;
 }
 
 /** Passif de BOSS (lib passives.ts) — chip AUTO de la section buff/débuff :
@@ -225,6 +233,9 @@ export interface DcTarget {
   /** Le boss a un skill d'ENRAGE (`SKT_RAGE_ENTER*`) — la coche « Enragé »
    *  du contexte n'apparaît que là. */
   hasRage?: boolean;
+  /** Monstre de type ≥ boss : les quirks « boss » du compte réglés dans le
+   *  calculateur s'y appliquent (`CheckNodeApply`). */
+  quirkBoss?: true;
   /** Passifs de boss à impact sur les dégâts — chips auto, jamais togglables. */
   passives?: DcBossPassive[];
   /**
@@ -291,6 +302,9 @@ export interface DcLabels {
   title: string;
   pick: string;
   affinity: string;
+  /** Infobulle du niveau : aux plafonds 105 et 110, la percée suivante est
+   *  supposée non franchie (palier post-100, `modifierAfter100For`). */
+  levelBreakthroughHint: string;
   skills: { title: string; dmg: string; support: string };
   settings: {
     title: string;
@@ -324,6 +338,8 @@ export interface DcLabels {
     manual: string;
     element: string;
     copyFromSelected: string;
+    /** Infobulle d'une stat dont la fiche diffère du combat (`{value}`). */
+    sheetStat: string;
     lv: string;
     stage: string;
     /** Titre du sélecteur des échelles par RANGS (world boss, Singularité). */

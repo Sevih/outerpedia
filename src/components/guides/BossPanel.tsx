@@ -227,6 +227,7 @@ export async function BossCard({
               stats={panelStats}
               scales={view.statScales}
               quirkMods={view.quirkMods}
+              premium={view.statPremium}
               statLabels={statLabels}
               locale={LANGUAGES[lang].htmlLang}
               rankOptionLabels={bossRankOptionLabels(view, spawns, lang)}
@@ -237,6 +238,7 @@ export async function BossCard({
                 options: t('guides.boss_display.rank_options'),
                 rankPrev: t('guides.boss_display.rank_prev'),
                 rankNext: t('guides.boss_display.rank_next'),
+                sheetStat: t('guides.boss_display.sheet_stat'),
               }}
             />
           );

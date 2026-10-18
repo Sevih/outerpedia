@@ -626,6 +626,8 @@ const zh: Record<TranslationKey, string> = {
   // Attacker panel labels
   'tools.damage-calculator.attacker.pick': '选择输出角色…',
   'tools.damage-calculator.attacker.affinity': '好感度',
+  'tools.damage-calculator.attacker.level_breakthrough_hint':
+    '在 Lv 105 和 110 时，视为尚未进行下一次突破。',
   'tools.damage-calculator.attacker.crit': '暴击',
   'tools.damage-calculator.attacker.burst_label': '爆发',
   'tools.damage-calculator.attacker.burst_off': '关闭',
@@ -794,6 +796,7 @@ const zh: Record<TranslationKey, string> = {
   'guides.boss_display.rank_options': '评级被动',
   'guides.boss_display.rank_prev': '上一评级',
   'guides.boss_display.rank_next': '下一评级',
+  'guides.boss_display.sheet_stat': '面板数值：{value}（被动生效前）',
   'guides.boss_display.add': '随从',
   'guides.boss_display.archived': '已归档的首领',
   'guides.boss_display.archived_version':

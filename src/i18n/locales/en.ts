@@ -660,6 +660,8 @@ const en = {
   // Attacker panel labels
   'tools.damage-calculator.attacker.pick': 'Pick a damage dealer…',
   'tools.damage-calculator.attacker.affinity': 'Affinity',
+  'tools.damage-calculator.attacker.level_breakthrough_hint':
+    'At Lv 105 and 110, the next limit break is assumed not yet done.',
   'tools.damage-calculator.attacker.crit': 'Crit',
   'tools.damage-calculator.attacker.burst_label': 'Burst',
   'tools.damage-calculator.attacker.burst_off': 'Off',
@@ -837,6 +839,7 @@ const en = {
   'guides.boss_display.rank_options': 'Rank passives',
   'guides.boss_display.rank_prev': 'Previous rank',
   'guides.boss_display.rank_next': 'Next rank',
+  'guides.boss_display.sheet_stat': 'Sheet value: {value} (before passives)',
   'guides.boss_display.add': 'Add',
   // BOSS FIGÉ — la phrase entière par cas, jamais des fragments recollés : une
   // langue qui place la date avant la version n'aurait aucun moyen de le dire.

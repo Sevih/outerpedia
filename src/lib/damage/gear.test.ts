@@ -24,7 +24,10 @@ import charactersData from '../../../data/generated/damage/characters.json';
 import growthData from '../../../data/generated/damage/growth.json';
 import buffsData from '../../../data/generated/damage/buffs.json';
 import equipmentData from '../../../data/generated/damage/equipment.json';
+import glossariesData from '../../../data/generated/glossaries.json';
 import {
+  BOSS_QUIRK_BUFFS,
+  bossQuirkRates,
   conditionBuffRef,
   gearConditionMet,
   pickBuffRow,
@@ -958,5 +961,43 @@ describe('quirks — nœuds MAÎTRES de classe BT_STAT_PREMIUM (mesuré 24/08/20
       Element.Earth,
     );
     expect(info.premium.some((p) => p.stat === 'ST_BUFF_CHANCE')).toBe(false);
+  });
+});
+
+describe('quirks « boss » (lignes 198 à 201, `CheckNodeApply`) : la CIBLE seule', () => {
+  const awakening = data.growth.awakening;
+  /** Les nœuds dont une ligne porte un buff « boss ». */
+  const bossNodes = awakening
+    .filter((n) => n.levels.some((l) => l.buffId && BOSS_QUIRK_BUFFS.has(l.buffId)))
+    .map((n) => n.id);
+
+  it('les nœuds « boss » sont de l’arbre PVE, et jamais versés à l’attaquant', () => {
+    expect(bossNodes.length).toBeGreaterThan(0);
+    for (const id of bossNodes)
+      expect(awakening.find((n) => n.id === id)?.groupType, id).toBe('PVE');
+    const info = resolveQuirkPassives(
+      Object.fromEntries(bossNodes.map((id) => [id, 1])),
+      awakening,
+      { element: Element.Fire, class: 'CCT_ATTACKER', subClass: 'ATTACKER' },
+      buffs,
+      Element.Earth,
+    );
+    expect(info.entries).toEqual([]);
+    expect(info.premium).toEqual([]);
+  });
+
+  it('tous les nœuds « boss » = `glossaries.bossQuirkMods` de la page (même canal, même somme)', () => {
+    const rates = bossQuirkRates(
+      Object.fromEntries(bossNodes.map((id) => [id, 1])),
+      awakening,
+      buffs,
+    );
+    const mods = (glossariesData as { bossQuirkMods?: Record<string, number> }).bossQuirkMods!;
+    expect(rates.ST_BUFF_RESIST).toBe(mods.buff_resist);
+    expect(rates.ST_BUFF_CHANCE).toBe(mods.buff_chance);
+  });
+
+  it('niveau 0 ou nœud hors « boss » : aucun taux', () => {
+    expect(bossQuirkRates({ [bossNodes[0]]: 0, '101': 10 }, awakening, buffs)).toEqual({});
   });
 });

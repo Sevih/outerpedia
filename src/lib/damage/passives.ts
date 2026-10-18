@@ -39,9 +39,12 @@
  * HORS périmètre (documenté, jamais tu quand c'est damage-pertinent) :
  *   - `BT_LIMIT_DMG_TURN` (plafond de dégâts par tour) : non simulé →
  *     unresolved ;
- *   - `BT_STAT_PREMIUM` sur `ME`/`MY_TEAM` : passif de FICHE du monstre, non
- *     versé aux stats (les stats de la cible sont celles du spawn) →
- *     unresolved ;
+ *   - `BT_STAT_PREMIUM` sur `ME`/`MY_TEAM` de création `PASSIVE` : passif de
+ *     FICHE du monstre, émis par datagen (`Monster.statPremium`, même règle
+ *     que `CSkillManager.GetStatPremiumBuffList`) et versé par le moteur au
+ *     canal de stat de la cible (preset-target.ts → inputs.ts) → ni entrée
+ *     ni unresolved ici (`statPremiumCovered`). Les autres (`MY_TEAM`
+ *     conditionnelle, création d'enrage) → unresolved ;
  *   - `BT_DMG*` sur `ME` : les dégâts SORTANTS du boss — le rapport ne
  *     calcule jamais les dégâts de la cible (report-inputs § 1) → ignoré
  *     silencieusement ;
@@ -167,8 +170,29 @@ const DEFENDER_TYPES = new Set([
 /** Types damage-pertinents SANS chemin d'application → unresolved, par raison. */
 const UNRESOLVED_REASONS: Record<string, string> = {
   BT_LIMIT_DMG_TURN: 'plafond de dégâts par tour non simulé — contribution 0',
-  BT_STAT_PREMIUM: 'passif de fiche du monstre, non versé aux stats — contribution 0',
+  BT_STAT_PREMIUM: 'stat premium hors passif de fiche (conditionnelle, enrage) — contribution 0',
 };
+
+/**
+ * La ligne est-elle un passif de FICHE, donc portée par `Monster.statPremium`
+ * (datagen, spec monstre `statPremiumOf`) ? `BT_STAT_PREMIUM` de création
+ * `PASSIVE`, sur `ME`, ou sur `MY_TEAM` sans condition (une `MY_TEAM` revient
+ * en `CBuff` au combat, sa condition y est lue). Le moteur la verse au canal
+ * de stat de la cible : la compter ici serait un double. Les lignes de
+ * niveau > 1 d'un même buff (ex. `2000065_2_2`, niveaux 1, 3 et 4, chez
+ * 62005205) ne sont jamais posées sur un monstre, dont les skills sont au
+ * niveau 1 : tues aussi.
+ */
+export function statPremiumCovered(
+  row: Pick<
+    NonNullable<DamageBuffsData['buffs'][string]>[number],
+    'type' | 'targetType' | 'createType' | 'conditionType'
+  >,
+): boolean {
+  if (row.type !== 'BT_STAT_PREMIUM' || row.createType !== 'PASSIVE') return false;
+  if (row.targetType === 'ME') return true;
+  return row.targetType === 'MY_TEAM' && row.conditionType === undefined;
+}
 
 /**
  * Stats du DÉFENSEUR que le pipeline consomme (les 4 entrées cibles du
@@ -264,6 +288,8 @@ export function staticBossPassives(
         return { reason: `cible ${target} — sélection d'équipe situationnelle, non attribuable` };
       }
       if (target === 'ME' || target === 'MY_TEAM') {
+        // Passif de fiche : versé par le moteur depuis `Monster.statPremium`.
+        if (statPremiumCovered(row)) return {};
         if (DEFENDER_TYPES.has(row.type) || STAT_ENHANCE_TYPES.has(row.type))
           return { side: 'defender' };
         // ENRAGE : un BT_STAT sur une stat que le rapport consomme côté cible

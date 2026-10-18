@@ -916,9 +916,12 @@ export function DamageCalculatorBrowser({
               />
 
               {/* Niveau (1..120, défaut 120) : requis par le terme Codex de la
-                reconstruction fiche → combat (spec § 16.1 — Sevih 03/08/2026). */}
+                reconstruction fiche → combat (spec § 16.1 — Sevih 03/08/2026).
+                Aux plafonds 105 et 110, la percée suivante est supposée NON
+                franchie (`modifierAfter100For`, décision Sevih 15/10) : dit
+                en infobulle. */}
               {attacker && (
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2" title={L.levelBreakthroughHint}>
                   <span className="text-content-subtle font-mono text-[9px] tracking-wide uppercase">
                     {L.target.lv}
                   </span>
@@ -1323,24 +1326,36 @@ export function DamageCalculatorBrowser({
                       )}
                       <AdvLinkedNote target={target} label={L.target.advLinked} />
                       {spawn && (
-                        // Stats défensives EFFECTIVES du spawn (adv/bossHp déjà
-                        // appliqués) — celles qui pèsent sur les dégâts, en
-                        // clair et SANS troncature (demande Sevih 27/07/2026).
+                        // Stats de COMBAT du spawn (adv/bossHp appliqués, passif
+                        // de fiche et quirks « boss » comme la page du boss) —
+                        // celles qui pèsent sur les dégâts et la RES de la pose,
+                        // en clair et SANS troncature (demande Sevih
+                        // 27/07/2026). La fiche, quand elle diffère, en infobulle.
                         <div className="grid grid-cols-2 gap-1.5">
-                          {targetStatFields.map((f) => (
-                            <div key={f.key} className={`${wellClass} min-w-0 px-2.5 py-1.5`}>
-                              <span className="text-content-subtle block font-mono text-[9px] tracking-wide uppercase">
-                                {f.label}
-                              </span>
-                              <span className="text-content block font-mono text-sm font-bold tabular-nums">
-                                {f.percent
-                                  ? `${(spawn.stats[f.key as keyof DcSpawn['stats']] ?? 0) / 10}%`
-                                  : (
-                                      spawn.stats[f.key as keyof DcSpawn['stats']] ?? 0
-                                    ).toLocaleString()}
-                              </span>
-                            </div>
-                          ))}
+                          {targetStatFields.map((f) => {
+                            const key = f.key as keyof DcSpawn['stats'];
+                            const sheet = spawn.stats[key] ?? 0;
+                            const combat = spawn.combat?.[key];
+                            const sheetNote =
+                              combat !== undefined
+                                ? vars(L.target.sheetStat, { value: fmtStat(sheet, f.percent) })
+                                : undefined;
+                            return (
+                              <div
+                                key={f.key}
+                                title={sheetNote}
+                                className={`${wellClass} min-w-0 px-2.5 py-1.5`}
+                              >
+                                <span className="text-content-subtle block font-mono text-[9px] tracking-wide uppercase">
+                                  {f.label}
+                                </span>
+                                <span className="text-content block font-mono text-sm font-bold tabular-nums">
+                                  {fmtStat(combat ?? sheet, f.percent)}
+                                </span>
+                                {sheetNote && <span className="sr-only">{sheetNote}</span>}
+                              </div>
+                            );
+                          })}
                         </div>
                       )}
                     </>
@@ -1433,7 +1448,10 @@ export function DamageCalculatorBrowser({
                       setTgtStats(
                         Object.fromEntries(
                           targetStatFields.map((f) => {
-                            const v = spawn.stats[f.key as keyof DcSpawn['stats']] ?? 0;
+                            // La stat AFFICHÉE (combat) : une cible manuelle
+                            // porte des stats effectives.
+                            const key = f.key as keyof DcSpawn['stats'];
+                            const v = spawn.combat?.[key] ?? spawn.stats[key] ?? 0;
                             return [f.key, String(f.percent ? v / 10 : v)];
                           }),
                         ),
@@ -2032,8 +2050,9 @@ export function DamageCalculatorBrowser({
 
                   {/* Stats FINALES des deux combattants — SORTIE du moteur :
                     attaquant = combatStats § 16.1 (affinité, chips, passifs de
-                    boss, MAX_HP § 16.2 appliqués) ; cible = les entrées
-                    effectives que le moteur consomme (spawn ou saisie). */}
+                    boss, MAX_HP § 16.2 appliqués) ; cible = les stats que le
+                    moteur consomme (`targetStats` : fiche du spawn ou saisie,
+                    passif de fiche, quirks « boss », chips, enrage). */}
                   <div className={`${wellClass} space-y-1.5 p-2.5`}>
                     <div className="flex items-baseline gap-2">
                       <span className="text-accent text-2xs font-mono font-bold tracking-wide uppercase">
@@ -2055,10 +2074,9 @@ export function DamageCalculatorBrowser({
                           {
                             title: L.panels.target,
                             fields: targetStatFields,
-                            values: (scenarioInputs.target?.stats ?? {}) as Record<
-                              string,
-                              number | undefined
-                            >,
+                            values: (report?.targetStats ??
+                              scenarioInputs.target?.stats ??
+                              {}) as Record<string, number | undefined>,
                           },
                         ] as const
                       ).map((col) => (

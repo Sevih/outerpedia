@@ -827,8 +827,10 @@ export interface DotLineInput {
   buffChancePermille?: number;
   /** BUFF_RESIST du défenseur (‰). Défaut 0 (stat neutre). */
   buffResistPermille?: number;
-  /** `BuffDebuffType == DEBUFF_IGNORE_RESIST` : la pose saute le CheckResist
-   *  § 5 — P(pose) = P‰(CreateRate) seul (ex. le Bleed de Francesca). */
+  /** `CBuffTemplet.IsIgnoreResist` (`isIgnoreResist`, inputs.ts — dont
+   *  `DEBUFF_IGNORE_RESIST` et `DEBUFF_IGNORE_ALL`) : la pose saute le
+   *  CheckResist § 5 — P(pose) = P‰(CreateRate) seul (ex. le Bleed de
+   *  Francesca). */
   ignoreResist?: boolean;
 }
 

@@ -1,12 +1,17 @@
 import { describe, expect, it } from 'vitest';
 import { getEncounters } from '@/lib/data/encounters';
+import { getMonster } from '@/lib/data/monsters';
+import monstersData from '../../data/generated/monsters.json';
 import {
+  combatStat,
+  combatStatAt,
   expandRankContexts,
+  GUILD_RAID_OVERGRADE_RATES,
   monsterQuirkMods,
   statAt,
   type SpawnContext,
 } from '@/lib/monster-stats';
-import type { DungeonRank } from '@contracts';
+import type { DungeonRank, MonstersFile } from '@contracts';
 
 /**
  * LE PIÈGE : `DungeonRank.hp` a deux sens selon le mode.
@@ -101,7 +106,10 @@ describe('monsterQuirkMods — quirks de compte, boss seulement (`CheckNodeApply
     for (const type of ['boss', 'area_boss', 'season_boss']) {
       const q = monsterQuirkMods(type, mods);
       expect(q, type).toEqual(mods);
-      expect(statAt('buff_chance', EFF, { level: 100 }, q), type).toBeLessThan(EFF.max);
+      expect(
+        combatStatAt('buff_chance', EFF, { level: 100 }, undefined, q).combat,
+        type,
+      ).toBeLessThan(EFF.max);
     }
   });
 
@@ -109,7 +117,9 @@ describe('monsterQuirkMods — quirks de compte, boss seulement (`CheckNodeApply
     for (const type of ['monster', 'named']) {
       const q = monsterQuirkMods(type, mods);
       expect(q, type).toEqual({});
-      expect(statAt('buff_chance', EFF, { level: 100 }, q), type).toBe(EFF.max);
+      expect(combatStatAt('buff_chance', EFF, { level: 100 }, undefined, q).combat, type).toBe(
+        EFF.max,
+      );
     }
   });
 });
@@ -147,5 +157,107 @@ describe('encounters.json — le contrat de `DungeonRank.hp` tient sur TOUTE la 
       const [ctx] = expandRankContexts({ level: 100 }, [r]);
       expect(ctx.bossHp, `donjon ${id} palier ${r.name}`).toBeUndefined();
     }
+  });
+});
+
+describe('combatStatAt — passif de fiche et quirks au taux de buff (`CalcFinalStat`)', () => {
+  const DEF = { min: 50, max: 430 };
+  const RES = { min: 100, max: 300 };
+
+  it('DEF +1000 % et un quirk sur la même stat : UN taux sommé, une troncature', () => {
+    const { sheet, combat } = combatStatAt(
+      'def',
+      DEF,
+      { level: 30 },
+      { def: { rate: 10000 } },
+      { def: -100 },
+    );
+    expect(combat).toBe(Math.trunc((sheet * (1000 + 10000 - 100)) / 1000));
+    // Deux passes (l'ancienne application à part des quirks) donneraient autre chose.
+    expect(combat).not.toBe(Math.trunc((Math.trunc((sheet * 11000) / 1000) * 900) / 1000));
+  });
+
+  it('RES −90 % et la réduction des quirks : un seul taux, plancher 0', () => {
+    const { sheet, combat } = combatStatAt(
+      'buff_resist',
+      RES,
+      { level: 100 },
+      { buff_resist: { rate: -900 } },
+      { buff_resist: -200 },
+    );
+    expect(sheet).toBeGreaterThan(0);
+    expect(combat).toBe(Math.max(0, Math.trunc((sheet * (1000 - 900 - 200)) / 1000)));
+    expect(combat).toBe(0);
+  });
+
+  it('plats et taux : `div1000((fiche + plats) × (1000 + taux))`', () => {
+    expect(combatStat(1000, { flat: 50, rate: 300 })).toBe(Math.trunc((1050 * 1300) / 1000));
+    expect(combatStat(1000, { flat: 0, rate: 0 })).toBe(1000);
+  });
+
+  it('porteur de 165301 (Vladi Max) : DEF de combat = 11 × fiche, la fiche en infobulle', () => {
+    const m = getMonster('4244004')!;
+    expect(m.statPremium?.def?.rate).toBe(10000);
+    const ctx = { level: m.spawns![0].level };
+    const { sheet, combat } = combatStatAt('def', m.stats.def, ctx, m.statPremium);
+    expect(combat).toBe(Math.trunc(sheet * 11));
+    expect(sheet).not.toBe(combat);
+  });
+
+  it('monstre sans passif ni quirk : combat = fiche (pas d’infobulle)', () => {
+    const monsters = monstersData as unknown as MonstersFile;
+    const plain = Object.values(monsters).find((m) => !m.statPremium && m.type === 'monster')!;
+    for (const [slug, r] of Object.entries(plain.stats)) {
+      const v = combatStatAt(slug, r, { level: 80 }, plain.statPremium, {});
+      expect(v.combat, slug).toBe(v.sheet);
+    }
+  });
+
+  it('PV REMPLACÉS (bossHp, overgrade) : le taux de buff ne s’y applique pas (`SetTempMaxValue`)', () => {
+    const HP = { min: 1000, max: 100_000 };
+    const premium = { hp: { rate: 1000 } };
+    const own = combatStatAt('hp', HP, { level: 50 }, premium);
+    expect(own.combat).toBe(own.sheet * 2);
+    const boss = combatStatAt('hp', HP, { level: 50, bossHp: 2_000_000 }, premium);
+    expect(boss).toEqual({ sheet: 2_000_000, combat: 2_000_000 });
+    const og = combatStatAt('hp', HP, { level: 50, bossHp: 55_000, overGrade: 1 }, premium);
+    expect(og.combat).toBe(og.sheet);
+  });
+
+  it('CRIT d’un monstre borné à 1000 (`SetFinalValue`)', () => {
+    const v = combatStatAt(
+      'critical_rate',
+      { min: 900, max: 900 },
+      { level: 1 },
+      {
+        critical_rate: { flat: 300 },
+      },
+    );
+    expect(v.combat).toBe(1000);
+  });
+});
+
+describe('statAt — PV d’overgrade en float32 (`CGuildRaidSpawnData.GetCharacterData`)', () => {
+  // Réimplémentation À PART de l'expression du client :
+  // FloorToInt((float)PV × (1f + (float)(300 × og) × 0.001f)).
+  const f = Math.fround;
+  const client = (hp: number, og: number): number =>
+    Math.floor(f(f(hp) * f(1 + f(f(GUILD_RAID_OVERGRADE_RATES.hp * og) * f(0.001)))));
+
+  it('égale au client sur toute une plage de PV × overgrade', () => {
+    for (const hp of [55_000, 71_500, 123_457, 999_999, 4_500_000])
+      for (let og = 1; og <= 90; og++)
+        expect(
+          statAt('hp', { min: 0, max: 0 }, { level: 1, bossHp: hp, overGrade: og }),
+          `${hp}/${og}`,
+        ).toBe(client(hp, og));
+  });
+
+  it('55 000 × 1,3 : le produit non arrondi de l’ancienne expression sortait 1 de moins', () => {
+    expect(statAt('hp', { min: 0, max: 0 }, { level: 1, bossHp: 55_000, overGrade: 1 })).toBe(
+      client(55_000, 1),
+    );
+    const before = Math.floor(f(1 + (1 * GUILD_RAID_OVERGRADE_RATES.hp) / 1000) * f(55_000));
+    expect(client(55_000, 1) - before).toBe(1);
   });
 });

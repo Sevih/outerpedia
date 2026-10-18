@@ -11,12 +11,12 @@
  */
 import type { DungeonRef, LangDict, Monster } from '@contracts';
 import {
+  combatStatAt,
   dedupSpawnContexts,
   expandRankContexts,
   formatMonsterStat,
   orderedStats,
   roleInDungeon,
-  statAt,
   type SpawnContext,
   type StatRange,
 } from '@/lib/monster-stats';
@@ -114,7 +114,10 @@ export function monsterStatContexts(
 export interface MonsterStatCell {
   slug: string;
   abbr: string;
+  /** La stat de COMBAT (passifs de fiche et quirks compris, `combatStatAt`). */
   value: string;
+  /** La stat de FICHE, quand elle diffère du combat — l'infobulle de la case. */
+  sheet?: string;
   /** « × n barres » sur les PV d'une rencontre à plusieurs barres. */
   bars?: number;
 }
@@ -147,9 +150,10 @@ const signed = (v: number): string => `${v > 0 ? '+' : v < 0 ? '−' : ''}${Math
 
 /**
  * Les stats d'un monstre à chacune de ses rencontres — le calcul de
- * `MonsterStatsCard` (`statAt`, l'ordre de l'écran du jeu, le format du jeu,
- * les quirks de compte) rendu en options prêtes à poser dans un `select` :
- * la page ne calcule rien, elle montre l'option choisie.
+ * `MonsterStatsCard` (`combatStatAt`, l'ordre de l'écran du jeu, le format du
+ * jeu, les passifs de fiche et les quirks de compte) rendu en options prêtes
+ * à poser dans un `select` : la page ne calcule rien, elle montre l'option
+ * choisie.
  */
 export function monsterStatsSheet(
   stats: Record<string, StatRange>,
@@ -157,6 +161,7 @@ export function monsterStatsSheet(
   scales: Record<string, string>,
   quirkMods: Record<string, number> = {},
   optionLabels: Record<string, string> = {},
+  premium?: Monster['statPremium'],
 ): MonsterStatsSheet {
   const deduped = dedupSpawnContexts(contexts);
   const template = deduped.length === 0;
@@ -164,12 +169,16 @@ export function monsterStatsSheet(
   const quirks = Object.entries(quirkMods).filter(([, v]) => v);
   const options = shown.map((ctx): MonsterStatsOption => {
     const modified = Boolean(ctx.adv || ctx.bossHp || ctx.bar);
-    const cells = orderedStats(stats).map(([slug, r]): MonsterStatCell => ({
-      slug,
-      abbr: statAbbr(slug),
-      value: formatMonsterStat(slug, statAt(slug, r, ctx, quirkMods), scales),
-      ...(slug === 'hp' && ctx.hpLines ? { bars: ctx.hpLines } : {}),
-    }));
+    const cells = orderedStats(stats).map(([slug, r]): MonsterStatCell => {
+      const { sheet, combat } = combatStatAt(slug, r, ctx, premium, quirkMods);
+      return {
+        slug,
+        abbr: statAbbr(slug),
+        value: formatMonsterStat(slug, combat, scales),
+        ...(sheet !== combat ? { sheet: formatMonsterStat(slug, sheet, scales) } : {}),
+        ...(slug === 'hp' && ctx.hpLines ? { bars: ctx.hpLines } : {}),
+      };
+    });
     const context: string[] = [];
     if (template) context.push(`Aucune rencontre connue — valeurs du templet au Lv ${ctx.level}.`);
     else {
@@ -186,6 +195,21 @@ export function monsterStatsSheet(
       if (quirks.length)
         mods.push(
           `quirks de compte : ${quirks.map(([s, v]) => `${statAbbr(s)} ${signed(v)}`).join(', ')}`,
+        );
+      const passives = Object.entries(premium ?? {});
+      if (passives.length)
+        mods.push(
+          `passifs de fiche : ${passives
+            .map(([s, p]) =>
+              [
+                p.rate ? signed(p.rate) : '',
+                p.flat ? `${p.flat > 0 ? '+' : ''}${formatMonsterStat(s, p.flat, scales)}` : '',
+              ]
+                .filter(Boolean)
+                .map((v) => `${statAbbr(s)} ${v}`)
+                .join(', '),
+            )
+            .join(', ')}`,
         );
       if (!modified) mods.push('valeurs du templet, interpolées');
       if (mods.length) context.push(mods.join(' · '));

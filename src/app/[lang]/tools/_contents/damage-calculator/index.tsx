@@ -28,7 +28,12 @@ import { getProgression } from '@/lib/data/progression';
 import { getDamageGrowth } from '@/lib/data/damage-growth';
 import { statName } from '@/lib/data/stat-glossary';
 import { SHEET_FIELDS, TARGET_FIELDS } from '@/lib/damage/scenario';
-import { presetSpawnStats } from '@/lib/damage/preset-target';
+import {
+  presetSpawnCombat,
+  presetSpawnPremium,
+  presetSpawnStats,
+} from '@/lib/damage/preset-target';
+import { monsterQuirkMods, quirkBossType } from '@/lib/monster-stats';
 import { familyMembersFor, talismanMainBuffs, uniqueGroupsOf } from '@/lib/damage/preset-gear';
 import { staticBossPassives } from '@/lib/damage/passives';
 import { buildEffectRefs } from './cond-names';
@@ -144,6 +149,9 @@ const GLOSS: {
   guildRaidSeasons?: Record<string, LangDict>;
   /** Titres localisés des modes (repli si une famille manquait au glossaire). */
   modes?: Record<string, LangDict>;
+  /** Quirks « boss » du compte au complet — la stat de COMBAT affichée, comme
+   *  la page du boss (`combatStatAt`). */
+  bossQuirkMods?: Record<string, number>;
 } = getGlossaries();
 
 /**
@@ -795,7 +803,22 @@ export default async function DamageCalculator({ lang }: { lang: Lang }) {
             : (s.stageLabel ??
               (s.rank ? `Rank ${s.rank}` : s.stage ? `#${s.stage}` : i ? `#${i + 1}` : ''));
         const stats: DcSpawn['stats'] = presetSpawnStats(monster, s);
-        return { ...(label ? { label } : {}), level: s.level, stats };
+        const premium = presetSpawnPremium(monster, s);
+        // Stat de COMBAT affichée, celle de la page du boss (passif de fiche
+        // et quirks « boss » au complet) — le moteur, lui, compose la fiche,
+        // le passif et les quirks RÉGLÉS dans le calculateur.
+        const combat = presetSpawnCombat(
+          monster,
+          s,
+          monsterQuirkMods(monster.type, GLOSS.bossQuirkMods),
+        );
+        return {
+          ...(label ? { label } : {}),
+          level: s.level,
+          stats,
+          ...(premium ? { premium } : {}),
+          ...(combat ? { combat } : {}),
+        };
       });
       if (!spawns.length) continue;
       const path = cascadeOf(ref, posterName, dungeonName, diff);
@@ -854,6 +877,7 @@ export default async function DamageCalculator({ lang }: { lang: Lang }) {
         ...(ranked ? { ranked: true } : {}),
         ...(isFloor && ref.advLinked ? { advLinked: true as const } : {}),
         ...(monsterHasRage(mon.id) ? { hasRage: true } : {}),
+        ...(quirkBossType(monster.type) ? { quirkBoss: true as const } : {}),
         ...(passives.length ? { passives } : {}),
         // Navigation du picker visuel story — cf. `DcTarget.story`. Les vagues
         // viennent de TOUTES les occurrences du monstre dans le donjon (la
@@ -974,6 +998,7 @@ export default async function DamageCalculator({ lang }: { lang: Lang }) {
     // Affinité (Trust) : 5 paliers de buffs passifs plats, ABSENTS de la fiche
     // affichée (canal buffValue — vérifié binaire 27/07/2026).
     affinity: t(k('attacker.affinity')),
+    levelBreakthroughHint: t(k('attacker.level_breakthrough_hint')),
     skills: {
       title: t(k('attacker.skill_levels')),
       dmg: t(k('attacker.tag_dmg')),
@@ -1016,6 +1041,7 @@ export default async function DamageCalculator({ lang }: { lang: Lang }) {
       manual: t(k('target.tab.manual')),
       element: t(k('target.manual.element')),
       copyFromSelected: t(k('target.manual.copy_from_selected')),
+      sheetStat: t('guides.boss_display.sheet_stat'),
       lv: t(k('target.lv_prefix')),
       stage: t(k('target.stage')),
       rank: t(k('target.rank')),

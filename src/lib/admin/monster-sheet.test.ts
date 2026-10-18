@@ -131,12 +131,13 @@ describe('monsterStatsSheet — les stats à la rencontre, prêtes pour un selec
       'Joint Challenge · Defeat the Annihilator Very Hard',
       'Singularity · Urd (dark) (palier SSS)',
     ]);
-    // Lv 90, ATK +10 % : 100 + floor(990 × 89 / 99) = 990 → × 1,1 = 1089 ; RES −10 % : 180.
+    // Lv 90, ATK +10 % : 100 + floor(990 × 89 / 99) = 990 → × 1,1 = 1089 ; RES −10 % : 180,
+    // la fiche (200) en infobulle.
     const jc = sheet.options[2];
     expect(jc.cells).toEqual([
       { slug: 'atk', abbr: 'ATK', value: '1089' },
       { slug: 'hp', abbr: 'HP', value: '9900', bars: 3 },
-      { slug: 'buff_resist', abbr: 'RES', value: '180' },
+      { slug: 'buff_resist', abbr: 'RES', value: '180', sheet: '200' },
     ]);
     expect(jc.context).toEqual([
       'Lv 90',

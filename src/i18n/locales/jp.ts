@@ -645,6 +645,8 @@ const jp: Record<TranslationKey, string> = {
   // Attacker panel labels
   'tools.damage-calculator.attacker.pick': 'ダメージディーラーを選択…',
   'tools.damage-calculator.attacker.affinity': '好感度',
+  'tools.damage-calculator.attacker.level_breakthrough_hint':
+    'Lv105と110では、次の限界突破は未実施とみなします。',
   'tools.damage-calculator.attacker.crit': 'クリティカル',
   'tools.damage-calculator.attacker.burst_label': 'バースト',
   'tools.damage-calculator.attacker.burst_off': 'オフ',
@@ -819,6 +821,7 @@ const jp: Record<TranslationKey, string> = {
   'guides.boss_display.rank_options': 'ランクのパッシブ',
   'guides.boss_display.rank_prev': '前のランク',
   'guides.boss_display.rank_next': '次のランク',
+  'guides.boss_display.sheet_stat': 'ステータス画面の値：{value}（パッシブ適用前）',
   'guides.boss_display.add': '取り巻き',
   'guides.boss_display.archived': 'アーカイブ済みのボス',
   'guides.boss_display.archived_version':

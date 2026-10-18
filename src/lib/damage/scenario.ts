@@ -15,6 +15,7 @@ import {
   type AttackerBuildInput,
   type DamageReportResult,
   type TargetBuildInput,
+  type TargetStatKey,
 } from './inputs';
 import { MAX_USER_TEAM_MEMBER } from './types';
 
@@ -40,9 +41,10 @@ export const SHEET_FIELDS: SheetField[] = [
   { slug: 'buff_chance', percent: false },
 ];
 
-/** Stats défensives de la cible (mêmes clés que `DcSpawn['stats']`). */
+/** Stats de la cible (mêmes clés que `DcSpawn['stats']`) — la RES s'ajoute
+ *  en dernier : un ancien lien `?z=` sans elle se lit, RES absente = 0. */
 export const TARGET_FIELDS: {
-  key: 'hp' | 'def' | 'dmgRed' | 'cdmgRed';
+  key: TargetStatKey;
   /** Slug du glossaire des stats (libellé localisé côté UI). */
   statSlug: string;
   percent: boolean;
@@ -51,6 +53,7 @@ export const TARGET_FIELDS: {
   { key: 'def', statSlug: 'def', percent: false },
   { key: 'dmgRed', statSlug: 'dmg_reduce_rate', percent: true },
   { key: 'cdmgRed', statSlug: 'e_cri_dmg_reduce', percent: true },
+  { key: 'res', statSlug: 'buff_resist', percent: false },
 ];
 
 /** Saisie texte → valeur moteur : `%` saisi → ‰ (×10), vide/invalide → 0. */
@@ -140,7 +143,12 @@ export interface CalculatorUrlState {
  *  unités moteur — l'UI les tient du wrapper, le test du même resolver node). */
 export interface ResolvedPresetTarget {
   element: string;
+  /** Stats de FICHE au spawn (le passif est dans `premium`). */
   stats: TargetBuildInput['stats'];
+  /** Passif de fiche du monstre, versé par le moteur au canal de la cible. */
+  premium?: TargetBuildInput['premium'];
+  /** Monstre de type ≥ boss : les quirks « boss » du compte s'y appliquent. */
+  quirkBoss?: true;
   /** Slug de mode d'encounters (`normal`, `raid_1`…) — décide le buff de
    *  guilde § 16.2 pour ce contenu. */
   mode?: string;
@@ -352,7 +360,8 @@ export function buildInputsFromZ(
     ...(typeof st.dd === 'number' && st.dd > 0 ? { debuffCount: clamp(st.dd, 0, 20) } : {}),
   };
   if (st.g) {
-    // Cible MANUELLE : élément requis, stats saisies (percent → ‰).
+    // Cible MANUELLE : élément requis, stats saisies (percent → ‰) — des
+    // stats EFFECTIVES : ni passif de fiche ni quirks « boss » ajoutés.
     if (st.te) {
       const stats: TargetBuildInput['stats'] = {};
       for (const f of TARGET_FIELDS) {
@@ -371,9 +380,10 @@ export function buildInputsFromZ(
       };
     }
   } else if (st.ti && opts.resolvePreset) {
-    // Preset : stats effectives au spawn, résolues par l'appelant — les
-    // presets sont TOUS des boss (décision produit) ; le MODE porte
-    // l'éligibilité du buff de guilde (§ 16.2), jamais une coche.
+    // Preset : stats de fiche au spawn et passif de fiche, résolus par
+    // l'appelant — les presets sont TOUS des boss pour les conditions « vs
+    // boss » (décision produit), les quirks « boss » suivent le TYPE du
+    // monstre ; le MODE porte l'éligibilité du buff de guilde (§ 16.2).
     const resolved = opts.resolvePreset(st.ti, st.si ?? 0);
     if (resolved)
       target = {
@@ -382,6 +392,8 @@ export function buildInputsFromZ(
         boss: true,
         ...(resolved.mode !== undefined ? { mode: resolved.mode } : {}),
         ...(resolved.monsterId !== undefined ? { monsterId: resolved.monsterId } : {}),
+        ...(resolved.premium ? { premium: resolved.premium } : {}),
+        ...(resolved.quirkBoss ? { quirkBoss: true } : {}),
         ...tgtCommon,
       };
   }
