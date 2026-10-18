@@ -8303,6 +8303,9 @@ export async function extractorEntity(
     files: [
       `equipment/${kind === 'accessory' ? 'accessory' : kind === 'set' ? 'sets' : kind}.json${familyKey ? ' (toute la famille)' : ''}`,
       ...(familyKey ? ['equipment/families.json'] : []),
+      ...(kind === 'set'
+        ? ['equipment/helmet.json, armor.json, gloves.json, shoes.json (ses pièces)']
+        : []),
       'equipment/pools.json, passives.json, breakLimits.json (les records référencés)',
       'les icônes de la famille et de ses passifs, stagées',
     ],
@@ -8334,7 +8337,7 @@ const integratedPaths = (files: string[], deps: ExtractorDeps, derived: boolean)
  * (`integrateCharacter` — entité, skills, slugs, dates de sortie, images,
  * `syncDerived`), le monstre (`integrateMonster` — entité, skills, donjons,
  * `syncDerived`), l'équipement (`integrateEquipment` — la famille entière,
- * `families.json`, les records référencés, les icônes). Même porte que les
+ * `families.json`, ou le set et ses pièces, les records référencés, les icônes). Même porte que les
  * gestes de F20 : tables du jeu, signature `was`. Un perso dont la date de
  * sortie manque est REFUSÉ avant d'écrire, avec la clé à ajouter au curé —
  * la garde de `releasesFor`, rendue sans exception. Les fichiers de
@@ -8404,7 +8407,7 @@ export async function integrateEntity(
   const name = sheet.name.en || sheet.id;
   const { kind } = GEAR_TARGETS[target];
   j.doing(
-    `${name} (${sheet.id}) : intégration dans ${GENERATED_DIR}/equipment (${sheet.kind === 'family' ? 'la famille entière, families.json' : sheet.kind}, les records référencés), icônes`,
+    `${name} (${sheet.id}) : intégration dans ${GENERATED_DIR}/equipment (${sheet.kind === 'family' ? 'la famille entière, families.json' : sheet.kind === 'set' ? 'le set et ses pièces' : sheet.kind}, les records référencés), icônes`,
   );
   const r = await deps.integrateEquipment(kind, sheet.id);
   j.done(`${name} (${sheet.id}) : intégré — ${r.files.join(', ')}.`);

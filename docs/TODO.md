@@ -23,10 +23,6 @@ ont été confrontées au code du 15/10 : tout est encore présent. Le détail,
 les preuves et les décisions vivent dans le tri consolidé de sevih-tool
 (`docs/revue/tri-2026-10-15.md`). Lots proposés, dans l'ordre :
 
-- [ ] **Garde perso de « Confirmer l'extraction » (O6, O7)** : R20 FAIT
-      (A53, le mode `all` refusé sur Personnages et Monstres). Restent O6
-      (purge d'`integrate-equipment` sur JSON cassé) et O7 (la garde ne
-      couvre pas `skills.json`).
 - [ ] **Équipement et étages de tour rendus à chaque requête** (repéré par
       A54, 15/10) : le build classe `equipment/[slug]` et
       `guides/[category]/[slug]/[floor]` en `ƒ`, servis en
@@ -75,8 +71,11 @@ les preuves et les décisions vivent dans le tri consolidé de sevih-tool
       15/10, l'historique remonte une fois chez les lecteurs) ; fiche du wiki
       en vitesse en taux avec régénération de l'oracle, une fois que
       gear-solver lit `corePassiveByFusion` (B56) ; nombre de stacks de
-      `BT_STACK_STAT` dans le calculateur (plus tard) ; J12 à joindre au lot
-      O6 / O7.
+      `BT_STACK_STAT` dans le calculateur (plus tard) ; restes de J12, deux
+      latents sans effet aujourd'hui : `datagen/lib/burst.ts:15` (« > 1
+      coût » contre `Count > 0` du client, équivalent sur les 136 skills) et
+      `timegate-resources` qui ignore `ProductGoodsValue` (aucun produit
+      courant > 1).
 
 ## 🧹 Suites de la rédaction du 18/10 (lots A62 à C26, G8 à G30, F28, OB3, TW2)
 

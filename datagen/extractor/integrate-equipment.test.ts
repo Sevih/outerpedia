@@ -7,13 +7,23 @@
  *     bons fichiers ;
  *   - le RESTE de chaque fichier est préservé (les autres familles, pools…) ;
  *   - seuls les records RÉFÉRENCÉS entrent (pas de pool/passif voisin) ;
- *   - ré-intégrer est idempotent (octet à octet).
+ *   - ré-intégrer est idempotent (octet à octet) ;
+ *   - un fichier présent mais CASSÉ lève et ne laisse AUCUN fichier modifié ;
+ *   - un set emporte ses pièces d'armure et ce qu'elles référencent.
  *
  * On teste `integrateEquipmentData` sur un dossier temporaire injecté — le
  * wrapper public n'y branche que l'extraction fraîche (`buildEquipment`, qui
  * exige `.gamedata`) et le staging d'images.
  */
-import { mkdirSync, mkdtempSync, readFileSync, rmSync } from 'node:fs';
+import {
+  existsSync,
+  mkdirSync,
+  mkdtempSync,
+  readFileSync,
+  readdirSync,
+  rmSync,
+  writeFileSync,
+} from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
@@ -35,6 +45,13 @@ afterEach(() => {
 const read = (rel: string): Record<string, unknown> =>
   JSON.parse(readFileSync(join(dir, rel), 'utf8')) as Record<string, unknown>;
 const bytes = (rel: string): string => readFileSync(join(dir, rel), 'utf8');
+/** Octets de tout le dossier `equipment/` (nom → contenu). */
+const snapshot = (): Record<string, string> =>
+  Object.fromEntries(
+    readdirSync(join(dir, 'equipment'))
+      .sort()
+      .map((f) => [f, bytes(`equipment/${f}`)]),
+  );
 
 /** Extraction fraîche minimale : une famille d'armes, un EE, un set + records partagés. */
 const fresh = {
@@ -44,10 +61,15 @@ const fresh = {
     '99': { icon: 'other', main: ['pZ'], passives: [{ id: 'psvZ' }] }, // AUTRE famille : ne doit pas entrer
   },
   accessory: {},
-  helmet: {},
-  armor: {},
-  gloves: {},
-  shoes: {},
+  // Pièces du set 700 (une par emplacement, deux en casque) et une du set 800.
+  helmet: {
+    h1: { icon: 'h_ico', main: ['pH'], sub: 'pB', breakLimit: 'blA', set: '700' },
+    h2: { icon: 'h_ico2', main: ['pH'], sub: 'pB', breakLimit: 'blA', set: '700' },
+    h9: { icon: 'h_other', main: ['pZ'], breakLimit: 'blOther', set: '800' },
+  },
+  armor: { a1: { icon: 'a_ico', main: ['pAr'], breakLimit: 'blA', set: '700' } },
+  gloves: { g1: { icon: 'g_ico', main: ['pG'], breakLimit: 'blA', set: '700' } },
+  shoes: { s1: { icon: 'sh_ico', main: ['pS'], breakLimit: 'blA', set: '700' } },
   talisman: {},
   ee: { '500': { icon: 'ee_ico', options: ['pC'], passives: [{ id: 'psv2' }] } },
   families: {
@@ -57,10 +79,23 @@ const fresh = {
     accessory: [],
     talisman: [],
   },
-  pools: { pA: { v: 1 }, pB: { v: 2 }, pC: { v: 3 }, pZ: { v: 9 }, pUnused: { v: 0 } },
+  pools: {
+    pA: { v: 1 },
+    pB: { v: 2 },
+    pC: { v: 3 },
+    pZ: { v: 9 },
+    pUnused: { v: 0 },
+    pH: { v: 4 },
+    pAr: { v: 5 },
+    pG: { v: 6 },
+    pS: { v: 7 },
+  },
   passives: { psv1: { icon: 'p1' }, psv2: { icon: 'p2' }, psvZ: { icon: 'pz' } },
-  breakLimits: { bl1: { f: 1 }, blOther: { f: 9 } },
-  sets: { '700': { name: { en: 'Aria' }, icon: 's_ico', tiers: [] } },
+  breakLimits: { bl1: { f: 1 }, blA: { f: 2 }, blOther: { f: 9 } },
+  sets: {
+    '700': { name: { en: 'Aria' }, icon: 's_ico', tiers: [] },
+    '800': { name: { en: 'Other' }, icon: 's_other', tiers: [] },
+  },
   grades: {},
   classes: {},
   statNames: {},
@@ -153,10 +188,78 @@ describe('integrateEquipmentData — entité simple (EE, set)', () => {
     expect(Object.keys(read('equipment/passives.json'))).toEqual(['psv2']);
   });
 
-  it('Set : merge la seule entrée sets.json (aucun record partagé)', async () => {
+  it('Set : son entrée de sets.json, ses pièces des quatre emplacements, leurs pools et paliers, leurs icônes', async () => {
     await writeJson(join(dir, 'equipment/sets.json'), { '600': { name: { en: 'Old' } } });
-    const { files } = await integrateEquipmentData(dir, fresh, 'set', '700');
-    expect(files).toEqual(['equipment/sets.json']);
+    await writeJson(join(dir, 'equipment/helmet.json'), { h0: { icon: 'old', set: '600' } });
+    await writeJson(join(dir, 'equipment/pools.json'), { pExisting: { v: -1 } });
+    const { files, icons } = await integrateEquipmentData(dir, fresh, 'set', '700');
+    expect(files).toEqual([
+      'equipment/sets.json',
+      'equipment/helmet.json',
+      'equipment/armor.json',
+      'equipment/gloves.json',
+      'equipment/shoes.json',
+      'equipment/pools.json',
+      'equipment/breakLimits.json',
+    ]);
     expect(Object.keys(read('equipment/sets.json'))).toEqual(['600', '700']);
+    // Toutes les pièces du set, en fin ; aucune de l'autre set (h9).
+    expect(Object.keys(read('equipment/helmet.json'))).toEqual(['h0', 'h1', 'h2']);
+    expect(Object.keys(read('equipment/armor.json'))).toEqual(['a1']);
+    expect(Object.keys(read('equipment/gloves.json'))).toEqual(['g1']);
+    expect(Object.keys(read('equipment/shoes.json'))).toEqual(['s1']);
+    // Records des pièces seulement (pas pZ ni blOther, ceux de h9).
+    expect(Object.keys(read('equipment/pools.json')).sort()).toEqual([
+      'pAr',
+      'pB',
+      'pExisting',
+      'pG',
+      'pH',
+      'pS',
+    ]);
+    expect(Object.keys(read('equipment/breakLimits.json'))).toEqual(['blA']);
+    expect(existsSync(join(dir, 'equipment/passives.json'))).toBe(false);
+    expect(icons.sort()).toEqual(['a_ico', 'g_ico', 'h_ico', 'h_ico2', 's_ico', 'sh_ico']);
+  });
+
+  it('Set : ré-intégrer produit les mêmes octets', async () => {
+    await writeJson(join(dir, 'equipment/sets.json'), { '600': { name: { en: 'Old' } } });
+    await integrateEquipmentData(dir, fresh, 'set', '700');
+    const snap = snapshot();
+    await integrateEquipmentData(dir, fresh, 'set', '700');
+    expect(snapshot()).toEqual(snap);
+  });
+});
+
+describe('integrateEquipmentData — fichier présent mais cassé', () => {
+  const CONFLICT = '<<<<<<< HEAD\n{ "1": { "icon": "old" } }\n=======\n{}\n>>>>>>> theirs\n';
+
+  it('weapon.json au marqueur de conflit : lève en le nommant, AUCUN fichier ne change', async () => {
+    await seed();
+    writeFileSync(join(dir, 'equipment/weapon.json'), CONFLICT);
+    const before = snapshot();
+    await expect(integrateEquipmentData(dir, fresh, 'weapon', '10')).rejects.toThrow(
+      /equipment\/weapon\.json : JSON invalide/,
+    );
+    expect(snapshot()).toEqual(before);
+  });
+
+  it('pools.json cassé : lève, le slot et families.json restent intacts', async () => {
+    await seed();
+    writeFileSync(join(dir, 'equipment/pools.json'), '{ "pExisting": { "v": -1 ');
+    const before = snapshot();
+    await expect(integrateEquipmentData(dir, fresh, 'weapon', '10')).rejects.toThrow(
+      /equipment\/pools\.json : JSON invalide/,
+    );
+    expect(snapshot()).toEqual(before);
+  });
+
+  it('fichiers absents (1re intégration) : créés', async () => {
+    const { files } = await integrateEquipmentData(dir, fresh, 'weapon', '10');
+    for (const f of files) expect(existsSync(join(dir, f))).toBe(true);
+    expect(Object.keys(read('equipment/weapon.json'))).toEqual(['10', '11']);
+    expect((read('equipment/families.json').weapon as { id: string }[]).map((f) => f.id)).toEqual([
+      '10',
+    ]);
   });
 });

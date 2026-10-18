@@ -13,6 +13,13 @@
  *      (comme `integrateCharacter` embarque les skills : sans ça, réfs pendantes
  *      côté site pour une famille neuve) ;
  *   4. stager SES images (icônes d'items + de passifs) depuis les assets du jeu.
+ * Un SET emporte aussi ses PIÈCES : toutes les lignes de `helmet.json`,
+ * `armor.json`, `gloves.json`, `shoes.json` dont `set` vaut son id (le site les
+ * trouve par `piece.set`), avec leurs records partagés et leurs icônes — sans
+ * elles, un set neuf s'afficherait vide jusqu'au `promote` suivant.
+ *
+ * TOUS les fichiers à écrire sont lus AVANT la première écriture : un fichier
+ * cassé, quel qu'il soit, lève et laisse les autres intacts à l'octet.
  *
  * Les glossaires transverses (grades, classes, noms de stats) restent, comme pour
  * le perso, du ressort de la revue globale (`datagen:build`) : une famille neuve
@@ -23,9 +30,8 @@
  * (`integrate-equipment.test.ts`). Le wrapper public y branche l'extraction
  * fraîche et le staging d'images.
  */
-import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
-import { writeJson as writeCanonicalJson } from '../lib/json';
+import { readCuratedJson, writeJson as writeCanonicalJson } from '../lib/json';
 import { buildImageIndex } from '../assets/source';
 import { stageAssets } from '../assets/stage';
 import type { AssetRequest } from '../assets/manifest';
@@ -38,13 +44,12 @@ type Dict = Record<string, unknown>;
 // `dir` injectable : les tests travaillent sur un dossier temporaire, jamais sur
 // le vrai `data/generated` (écritures destructives). Mêmes helpers que
 // `integrate.ts` — volontairement locaux pour ne pas coupler les deux cœurs.
-const readJsonOr = (dir: string, rel: string): Dict => {
-  try {
-    return JSON.parse(readFileSync(resolve(dir, rel), 'utf8')) as Dict;
-  } catch {
-    return {}; // fichier absent (1re intégration) : on part d'un dictionnaire vide
-  }
-};
+// `{}` si le fichier n'existe pas ENCORE (1re intégration) ; présent mais CASSÉ
+// (conflit git, JSON tronqué), `readCuratedJson` LÈVE en nommant le fichier —
+// jamais un `{}` silencieux, sur lequel le merge d'une famille réécrirait le
+// fichier sans toutes les autres (revue O6 : `weapon.json` 345 → 6 entrées).
+const readJsonOr = (dir: string, rel: string): Dict =>
+  readCuratedJson<Dict>(resolve(dir, rel)) ?? {};
 const writeJson = async (dir: string, rel: string, data: unknown): Promise<void> =>
   writeCanonicalJson(resolve(dir, rel), data);
 
@@ -63,9 +68,13 @@ const KIND: Record<
   set: { slot: 'sets', file: 'sets', familyKey: null },
 };
 
+/** Emplacements d'armure : les pièces d'un set, rattachées par leur `set`. */
+const ARMOR_SLOTS = ['helmet', 'armor', 'gloves', 'shoes'] as const;
+
 /** Forme lâche d'un item construit : seuls les champs de RÉFÉRENCE nous intéressent. */
 interface GearRefs {
   icon?: string;
+  set?: string;
   main?: string[];
   sub?: string | null;
   options?: string[];
@@ -92,19 +101,11 @@ function refsOf(items: GearRefs[]): {
   return { pools, passives, breaks };
 }
 
-/** Merge dans `rel` les seules clés `keys` prises dans `fresh` ; ne touche rien d'autre. */
-async function mergeShared(
-  dir: string,
-  rel: string,
-  fresh: Dict,
-  keys: Set<string>,
-  files: string[],
-): Promise<void> {
-  if (!keys.size) return;
-  const committed = readJsonOr(dir, `equipment/${rel}.json`);
+/** Le committé de `rel` avec les seules clés `keys` prises dans `fresh` ; rien d'autre ne bouge. */
+function mergeShared(dir: string, rel: string, fresh: Dict, keys: Set<string>): Dict {
+  const committed = readJsonOr(dir, rel);
   for (const k of keys) if (k in fresh) committed[k] = fresh[k];
-  await writeJson(dir, `equipment/${rel}.json`, committed);
-  files.push(`equipment/${rel}.json`);
+  return committed;
 }
 
 /** Upsert d'une famille dans le tableau du slot : remplace en place, sinon ajoute en fin. */
@@ -132,8 +133,10 @@ export async function integrateEquipmentData(
 ): Promise<{ files: string[]; icons: string[] }> {
   const { slot, file, familyKey } = KIND[kind];
   const slotData = fresh[slot] as Dict;
-  const files: string[] = [];
   const icons = new Set<string>();
+  // Tout est lu et mergé en mémoire d'abord, écrit ensuite (ordre d'insertion
+  // = ordre du rapport) : une lecture qui lève n'a encore rien écrit.
+  const writes = new Map<string, Dict>();
 
   // 1) Ids membres : la famille couvre plusieurs paliers ; ee/set = un seul id.
   let memberIds: string[];
@@ -157,15 +160,31 @@ export async function integrateEquipmentData(
     members.push(item);
     if (item.icon) icons.add(item.icon);
   }
-  await writeJson(dir, `equipment/${file}.json`, committedSlot);
-  files.push(`equipment/${file}.json`);
+  writes.set(`equipment/${file}.json`, committedSlot);
+
+  // Pièces du set : chaque ligne d'armure dont `set` vaut l'id, même règle de
+  // merge ; un emplacement sans pièce de ce set n'est pas réécrit.
+  if (kind === 'set') {
+    for (const armorSlot of ARMOR_SLOTS) {
+      const pieces = Object.entries(fresh[armorSlot] as Record<string, GearRefs>).filter(
+        ([, p]) => p.set === id,
+      );
+      if (!pieces.length) continue;
+      const committed = readJsonOr(dir, `equipment/${armorSlot}.json`);
+      for (const [pid, piece] of pieces) {
+        committed[pid] = piece;
+        members.push(piece);
+        if (piece.icon) icons.add(piece.icon);
+      }
+      writes.set(`equipment/${armorSlot}.json`, committed);
+    }
+  }
 
   // 2) Entrée de famille (armes/amulettes/talismans).
   if (family && familyKey) {
     const famFile = readJsonOr(dir, 'equipment/families.json') as Record<string, Family[]>;
     famFile[familyKey] = upsertFamily(famFile[familyKey] ?? [], family);
-    await writeJson(dir, 'equipment/families.json', famFile);
-    files.push('equipment/families.json');
+    writes.set('equipment/families.json', famFile);
   }
 
   // 3) Records partagés référencés (pools / passifs / paliers de casse).
@@ -174,11 +193,17 @@ export async function integrateEquipmentData(
     const p = fresh.passives[pid] as { icon?: string } | undefined;
     if (p?.icon) icons.add(p.icon);
   }
-  await mergeShared(dir, 'pools', fresh.pools as Dict, pools, files);
-  await mergeShared(dir, 'passives', fresh.passives as Dict, passives, files);
-  await mergeShared(dir, 'breakLimits', fresh.breakLimits as Dict, breaks, files);
+  for (const [rel, freshRecs, keys] of [
+    ['pools', fresh.pools, pools],
+    ['passives', fresh.passives, passives],
+    ['breakLimits', fresh.breakLimits, breaks],
+  ] as const) {
+    const path = `equipment/${rel}.json`;
+    if (keys.size) writes.set(path, mergeShared(dir, path, freshRecs as Dict, keys));
+  }
 
-  return { files, icons: [...icons] };
+  for (const [rel, data] of writes) await writeJson(dir, rel, data);
+  return { files: [...writes.keys()], icons: [...icons] };
 }
 
 /** Demande de staging d'une icône d'équipement (+ variante PNG pour l'og:image). */

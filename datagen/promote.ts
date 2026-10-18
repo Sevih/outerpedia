@@ -14,7 +14,8 @@
  * reste, passer par l'intégration ciblée de l'admin (`integrateCharacter`).
  * GARDE PERSO : la réciproque est VERROUILLÉE — un perso que l'admin n'a pas
  * intégré ne part JAMAIS avec une promotion, même globale (cf.
- * `stripUnintegratedCharacters`).
+ * `stripUnintegratedCharacters`) — ni ses SKILLS : un skill neuf qu'aucun perso
+ * promu ne liste reste dehors (cf. `stripUnlistedSkills`).
  *
  * Exception : `--only <fichier> [...]` promeut uniquement les fichiers cités
  * (chemins relatifs à data/extracted). Réservé aux fichiers AUTONOMES (sans
@@ -315,6 +316,10 @@ export function completeLangDicts(v: unknown): unknown {
  * se promeut : le « jamais publié » est garanti à l'octet près sans qu'un perso
  * datamined avant sa sortie bloque toute promotion (décision Sevih 2026-08-12).
  * Mutation en place ; retourne les ids effectivement écartés.
+ *
+ * Les clés de `skills.json` sont des ids de SKILL, sans lien textuel avec l'id
+ * du perso qui les liste (`characters.json[id].skills`) : ce retrait-ci ne les
+ * voit pas, `stripUnlistedSkills` les garde.
  */
 export function stripUnintegratedCharacters(data: unknown, ids: ReadonlySet<string>): string[] {
   const removed = new Set<string>();
@@ -334,6 +339,33 @@ export function stripUnintegratedCharacters(data: unknown, ids: ReadonlySet<stri
   };
   visit(data);
   return [...removed].sort();
+}
+
+/**
+ * GARDE SKILLS — pendant de la garde perso pour `skills.json`, dont les clés
+ * (ids de skill) ne nomment pas le perso : le générateur émet tout
+ * `CharacterSkillTemplet`, donc le kit d'un perso à venir. Une clé ABSENTE du
+ * validé (`validated`) qu'aucun perso du `characters.json` promu ne liste
+ * (`listed` : la proposition, persos non intégrés retirés) est écartée. Même
+ * référence que `integrateCharacter` (`pickSkills(char.skills, …)`) : un perso
+ * intégré par quick emporte exactement les skills que cette garde laisse
+ * passer. Une clé déjà validée n'est JAMAIS retirée, même si plus personne ne
+ * la liste (publiée, elle le reste). Sans `characters.json` des deux côtés ou
+ * hors du lot promu (bootstrap, `--only` sans lui), `promote` ne l'appelle pas.
+ * Mutation en place ; retourne les ids écartés.
+ */
+export function stripUnlistedSkills(
+  skills: Record<string, unknown>,
+  validated: ReadonlySet<string>,
+  listed: ReadonlySet<string>,
+): string[] {
+  const removed: string[] = [];
+  for (const sid of Object.keys(skills)) {
+    if (validated.has(sid) || listed.has(sid)) continue;
+    delete skills[sid];
+    removed.push(sid);
+  }
+  return removed.sort();
 }
 
 /** Clés du `characters.json` d'un dossier, ou `null` s'il n'y en a pas. */
@@ -379,6 +411,11 @@ export interface PromoteResult {
   orphans: string[];
   /** Ids de persos non intégrés écartés de la promotion (garde perso). */
   strippedCharacters: string[];
+  /**
+   * Ids de skills NEUFS écartés de `skills.json` : listés par aucun perso du
+   * `characters.json` promu, persos non intégrés retirés (cf. `stripUnlistedSkills`).
+   */
+  strippedSkills: string[];
   /**
    * Réfs de persos non intégrés SURVIVANT à l'écartement (`fichier : ids`).
    * Ces fichiers sont RETENUS (jamais écrits par l'apply, listés `⛔`) pendant
@@ -451,6 +488,27 @@ export async function promote(opts: PromoteOptions = {}): Promise<PromoteResult>
   const unintegrated = new Set(
     srcChars && dstChars ? [...srcChars].filter((id) => !dstChars.has(id)) : [],
   );
+  // Garde skills : les skills listés par les persos promus (la proposition sans
+  // les non intégrés) et les clés déjà validées. `null` = pas de garde (sans les
+  // deux `characters.json`, ou `--only` sans lui).
+  let skillGuard: { listed: Set<string>; validated: Set<string> } | null = null;
+  if (srcChars && dstChars && files.includes('characters.json')) {
+    const proposed = JSON.parse(readFileSync(join(src, 'characters.json'), 'utf8')) as Record<
+      string,
+      { skills?: unknown[] }
+    >;
+    const listed = new Set<string>();
+    for (const [cid, c] of Object.entries(proposed))
+      if (!unintegrated.has(cid)) for (const sid of c.skills ?? []) listed.add(String(sid));
+    const dstSkills = join(dst, 'skills.json');
+    const validated = new Set(
+      existsSync(dstSkills)
+        ? Object.keys(JSON.parse(readFileSync(dstSkills, 'utf8')) as Record<string, unknown>)
+        : [],
+    );
+    skillGuard = { listed, validated };
+  }
+  let strippedSkills: string[] = [];
 
   let identical = 0;
   const diffs: string[] = [];
@@ -509,6 +567,16 @@ export async function promote(opts: PromoteOptions = {}): Promise<PromoteResult>
         if (stripped.length) out = await formatJson(data);
         for (const id of stripped) strippedAll.add(id);
       }
+    }
+    // Garde skills, AVANT le verrou : un skill écarté n'y laisse pas de réf.
+    let strippedSk: string[] = [];
+    if (rel === 'skills.json' && skillGuard) {
+      const data = JSON.parse(out) as Record<string, unknown>;
+      strippedSk = stripUnlistedSkills(data, skillGuard.validated, skillGuard.listed);
+      if (strippedSk.length) out = await formatJson(data);
+      strippedSkills = strippedSk;
+    }
+    if (unintegrated.size) {
       residue = [...unintegrated].filter((id) => new RegExp(`(?<!\\d)${id}(?!\\d)`).test(out));
       if (residue.length) violations.push(`${rel} : ${residue.join(', ')}`);
     }
@@ -536,6 +604,9 @@ export async function promote(opts: PromoteOptions = {}): Promise<PromoteResult>
         : '') +
       (stripped.length
         ? ` · ${stripped.length} perso(s) non intégré(s) écarté(s) : ${stripped.join(', ')}`
+        : '') +
+      (strippedSk.length
+        ? ` · ${strippedSk.length} skill(s) sans perso promu écarté(s) : ${strippedSk.join(', ')}`
         : '');
     const label =
       dstText === undefined
@@ -623,6 +694,10 @@ export async function promote(opts: PromoteOptions = {}): Promise<PromoteResult>
     console.log(
       `  ⛔ perso(s) non intégré(s), jamais promu(s) : ${[...strippedAll].sort().join(', ')} — intégration depuis quick uniquement`,
     );
+  if (strippedSkills.length)
+    console.log(
+      `  ⛔ skill(s) sans perso promu, jamais promu(s) : ${strippedSkills.join(', ')} — ils partent avec l'intégration de leur perso`,
+    );
 
   if (diffs.length) {
     console.log(
@@ -636,6 +711,7 @@ export async function promote(opts: PromoteOptions = {}): Promise<PromoteResult>
     diffs,
     orphans,
     strippedCharacters: [...strippedAll].sort(),
+    strippedSkills,
     violations,
     changedCharacters,
     assets,

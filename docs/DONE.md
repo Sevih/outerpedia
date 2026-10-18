@@ -7,6 +7,81 @@
 
 ## 2026-10-18
 
+- **Garde de « Confirmer l'extraction », suite : `integrate-equipment` sur
+  un JSON cassé, skills d'un perso non intégré, pièces d'un set (A62, O6,
+  O7 et J12 de la revue « génération des données » d'octobre).** Trois
+  chemins écrivaient la donnée validée sans la garde que les autres ont
+  déjà. O6 : le `readJsonOr` d'`integrate-equipment.ts` avalait toute
+  erreur et rendait `{}`, si bien qu'un `weapon.json` au marqueur de
+  conflit était lu vide puis réécrit avec la seule famille intégrée (345 →
+  6 au rejeu de la revue) ; il devient celui d'`integrate.ts`,
+  `readCuratedJson<Dict>(…) ?? {}` (absent → `{}`, cassé → lève en nommant
+  le fichier), commentaire à l'appui. Second défaut du même cœur, chaque
+  fichier écrit juste après sa lecture : `integrateEquipmentData` merge
+  désormais tout en mémoire dans une `Map` ordonnée (slot, pièces,
+  `families.json`, puis `pools` / `passives` / `breakLimits`, `mergeShared`
+  devenu pur) et n'écrit qu'après la dernière lecture — un fichier cassé,
+  quel qu'il soit, laisse les autres intacts à l'octet ; l'ordre des
+  `files` rendus est inchangé pour les familles et l'EE. O7 : la garde
+  perso de `promote` retirait clés et valeurs égales à l'id d'un perso non
+  intégré, mais les clés de `skills.json` sont des ids de skill ; nouvelle
+  `stripUnlistedSkills` (exportée, pure, mutation en place) appelée sur
+  `skills.json` après l'écartement des persos et AVANT le verrou : une clé
+  absente du `skills.json` validé qu'aucun perso du `characters.json`
+  proposé, non intégrés retirés, ne liste dans `skills` est écartée,
+  comptée et nommée dans la ligne de diff (« N skill(s) sans perso promu
+  écarté(s) : … »), dans une ligne `⛔` toujours affichée comme celle des
+  persos, et dans le nouveau champ `strippedSkills` de `PromoteResult`
+  (documenté) ; une clé déjà validée n'est jamais retirée, donc les 22
+  skills publiés que plus aucun perso intégré ne liste restent. Référence
+  identique à `integrateCharacter` (`pickSkills(char.skills, …)`). Pas de
+  garde sans `characters.json` des deux côtés ni quand il est hors du lot
+  promu (`--only` sans lui). En-tête « GARDE PERSO » et commentaire de
+  `stripUnintegratedCharacters` complétés. Avant d'écrire, `grep` des
+  lecteurs de `skills.json` : `damage/skill-descs.ts`,
+  `assets/manifest.ts` (`skillIconsOf`), `src/lib/data/skills.ts`,
+  `char-progression.ts` et `core-fusion.ts`, `parse-text.tsx`, fiche perso, team
+  planner, hero tracker et calculateur passent tous par
+  `characters[].skills` ; `sync-derived.ts`, `damage/characters.ts` et
+  `targets.ts` lisent les tables du jeu, le contrat solver n'y touche pas —
+  aucun lecteur hors liste, rien à demander. J12 : le kind `set` intègre
+  aussi ses pièces, toutes les lignes de `helmet` / `armor` / `gloves` /
+  `shoes` dont `set` vaut l'id (champ `set` ajouté à `GearRefs`, liste
+  `ARMOR_SLOTS`), leurs pools et paliers de casse par `refsOf` et leurs
+  icônes ; nouvelle clé en fin, existante remplacée en place, un
+  emplacement sans pièce du set n'est pas réécrit. `EquipmentEntityKind`
+  ne change pas (quick ne s'en sert que comme type, par `review-types`,
+  `review-store` et `gear-sheet.ts`). Quick (`actions.ts`) : le journal
+  d'« Intégrer » dit « le set et ses pièces », le docstring
+  d'`integrateEntity` aussi, et le plan affiché avant le clic ajoute
+  « equipment/helmet.json, armor.json, gloves.json, shoes.json (ses
+  pièces) » pour un set — hors de la lettre du lot, mais sans quoi le plan
+  mentirait sur ce qu'écrit le bouton. Tests : `integrate-equipment.test.ts`
+  (10, +5) — `weapon.json` au marqueur de conflit et `pools.json` tronqué
+  lèvent en nommant le fichier, octets de tout `equipment/` comparés avant
+  et après, fichiers absents créés ; le test du set (ex-« aucun record
+  partagé ») vérifie l'entrée de `sets.json`, les pièces des quatre
+  emplacements sans celle d'un autre set, leurs pools et paliers seuls,
+  leurs icônes, puis la ré-intégration à l'octet près ; `promote.test.ts`
+  — cœur pur, skill d'un perso non intégré et skill de personne écartés et
+  nommés, skill neuf d'un perso intégré promu, skill validé que personne ne
+  liste gardé, 2e apply sans diff, et aucun filtrage sans `characters.json`
+  validé, sans `characters.json` proposé, ou en `--only skills.json`. Le
+  test « id embarqué dans un nombre plus long » fait lister son skill
+  `24000151` par le perso intégré, sans quoi la garde l'écartait.
+  Vérification : dry-run `pnpm datagen:promote` sur la donnée réelle,
+  avant et après, même résumé « 65 identique(s), 0 différent(s) » et
+  « ⛔ perso(s) non intégré(s), jamais promu(s) : 2400015 », aucun skill
+  écarté ; `pnpm typecheck` (`tsc --noEmit && … -p scripts/tsconfig.json`,
+  sortie 0), `pnpm lint` (`eslint`, rien), `pnpm test` (« Tests 4200 passed
+  (4200) »), `NODE_ENV=development pnpm exec vitest run scripts/quick`
+  (« Tests 1148 passed (1148) »). Aucun changement visuel. Laissé : la
+  cible de revue « Armures » de quick ne couvre que `armor.json`, ni
+  casques, ni gants, ni bottes (déjà au TODO, petits lots A) ;
+  `version-monster.ts` (`readJsonAt` avale aussi une erreur, sans écrire le
+  validé) ; les deux latents de J12 (`burst.ts:15`, `ProductGoodsValue`),
+  reportés au TODO ; le retrait des 22 skills déjà publiés.
+
 - **Contextes de stats des World Boss : chaque boss sur SA tranche de rangs,
   dans les trois constructeurs (A64).** `encounterSpawnContexts` dépliait les
   paliers par `ranksOfMonster` (vu par B57), mais `bossSpawnContexts`

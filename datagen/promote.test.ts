@@ -5,6 +5,7 @@
  *   - RÉTENTION : une entité déjà validée n'est JAMAIS supprimée par l'apply ;
  *   - GARDE PERSO : un perso non intégré (clé absente du `characters.json`
  *     validé) ne part JAMAIS avec une promotion — écarté, ou promotion refusée ;
+ *     ni un skill NEUF qu'aucun perso promu ne liste (garde skills) ;
  *   - STABILITÉ : re-lancer l'apply ne produit aucun diff (idempotence) ;
  *   - `--only` : rien d'autre que les fichiers cités n'est touché ;
  *   - ORPHELINS : signalés (jamais supprimés), archive de boss exclue.
@@ -24,6 +25,7 @@ import {
   completeLangDicts,
   promote,
   stripUnintegratedCharacters,
+  stripUnlistedSkills,
 } from './promote';
 import { emptyDict } from './lib/lang';
 
@@ -457,7 +459,12 @@ describe('promote — garde perso à l’apply', () => {
   it('un id embarqué dans un nombre plus long ne déclenche PAS le verrou', async () => {
     await seed();
     // `24000151` est un id DISTINCT qui contient `2400015` en préfixe — les
-    // bornes non-chiffre du verrou doivent l'ignorer.
+    // bornes non-chiffre du verrou doivent l'ignorer. Listé par le perso
+    // intégré, pour que la garde skills le laisse passer.
+    await put(src, 'characters.json', {
+      '2000001': { name: 'K', hp: 2, skills: ['24000151'] },
+      '2400015': { name: '' },
+    });
     await put(src, 'skills.json', { '24000151': { power: 1 } });
 
     const res = await promote({ src, dst, apply: true });
@@ -478,6 +485,74 @@ describe('promote — garde perso à l’apply', () => {
     expect(second.diffs).toHaveLength(0);
     // L'écarté reste signalé à chaque run (l'écran de revue doit le dire).
     expect(second.strippedCharacters).toEqual(['2400015']);
+  });
+});
+
+describe('stripUnlistedSkills — cœur pur de la garde skills', () => {
+  it('écarte une clé neuve non listée ; garde la listée et la déjà validée', () => {
+    const skills = { '1': { a: 1 }, '2': { a: 2 }, '3': { a: 3 } };
+    expect(stripUnlistedSkills(skills, new Set(['1']), new Set(['2']))).toEqual(['3']);
+    expect(Object.keys(skills)).toEqual(['1', '2']);
+  });
+});
+
+describe('promote — garde skills', () => {
+  /**
+   * `2000001` intégré (liste 101 et 102, nouveau), `2400015` non intégré (liste
+   * 901, neuf, et 101) ; 500 déjà validé, listé par personne ; 999 neuf, listé
+   * par personne.
+   */
+  async function seed(): Promise<void> {
+    await put(dst, 'characters.json', { '2000001': { name: 'K', skills: ['101'] } });
+    await put(dst, 'skills.json', { '101': { p: 1 }, '500': { p: 5 } });
+    await put(src, 'characters.json', {
+      '2000001': { name: 'K', skills: ['101', '102'] },
+      '2400015': { name: '', skills: ['901', '101'] },
+    });
+    await put(src, 'skills.json', {
+      '101': { p: 1 },
+      '102': { p: 2 },
+      '500': { p: 5 },
+      '901': { p: 9 },
+      '999': { p: 99 },
+    });
+  }
+
+  it('écarte et nomme le skill d’un perso non intégré et le skill de personne ; promeut le reste', async () => {
+    await seed();
+    const res = await promote({ src, dst, apply: true });
+
+    expect(res.strippedSkills).toEqual(['901', '999']);
+    // 102 (perso intégré) promu, 500 (déjà validé, plus listé) gardé.
+    expect(Object.keys(read(dst, 'skills.json'))).toEqual(['101', '102', '500']);
+    expect(res.diffs.join('\n')).toContain('2 skill(s) sans perso promu écarté(s) : 901, 999');
+    // Un 2e apply : plus de diff, l'écart toujours signalé.
+    const again = await promote({ src, dst, apply: true });
+    expect(again.diffs).toEqual([]);
+    expect(again.strippedSkills).toEqual(['901', '999']);
+  });
+
+  it('sans characters.json validé (bootstrap), aucun filtrage', async () => {
+    await seed();
+    rmSync(join(dst, 'characters.json'));
+    const res = await promote({ src, dst, apply: true });
+    expect(res.strippedSkills).toEqual([]);
+    expect(Object.keys(read(dst, 'skills.json'))).toEqual(['101', '102', '500', '901', '999']);
+  });
+
+  it('sans characters.json proposé, aucun filtrage', async () => {
+    await seed();
+    rmSync(join(src, 'characters.json'));
+    const res = await promote({ src, dst, apply: true });
+    expect(res.strippedSkills).toEqual([]);
+    expect(Object.keys(read(dst, 'skills.json'))).toEqual(['101', '102', '500', '901', '999']);
+  });
+
+  it('--only skills.json (characters.json hors du lot), aucun filtrage', async () => {
+    await seed();
+    const res = await promote({ src, dst, apply: true, only: new Set(['skills.json']) });
+    expect(res.strippedSkills).toEqual([]);
+    expect(Object.keys(read(dst, 'skills.json'))).toEqual(['101', '102', '500', '901', '999']);
   });
 });
 
