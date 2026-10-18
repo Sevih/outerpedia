@@ -44,15 +44,20 @@ les preuves et les décisions vivent dans le tri consolidé de sevih-tool
       rédiger ; liste complète dans l'entrée C24 de DONE.
 - [ ] **Contrat solver, L1 d'abord** : `schema` et `resVersion` dans
       `solver/version.json` avant tout changement de forme (C1, M2, M3,
-      vitesse en %, noyau par niveau, `stat-keys.json`). FAIT côté
-      outerpedia (A56) et lu par gear-solver (G1, 15/10) ; reste la release
-      de gear-solver. C1, M2, M3 et O5 FAITS côté outerpedia (C20, 16/10),
-      lecture côté gear-solver à publier ; `combatEffects` FAIT côté
-      outerpedia (B53, 16/10), affichage côté gear-solver à faire ; noyau
-      par niveau et vitesse en % FAITS côté contrat (B56, 16/10,
-      `corePassiveByFusion`), restent sa lecture par gear-solver, puis la
-      fiche du wiki avec l'oracle, puis le retrait de `corePassive` ;
-      `stat-keys.json`.
+      vitesse en %, noyau par niveau, `stat-keys.json`). L1 FAIT des deux
+      côtés (A56 ; G1, `ba7d2c0`, publié dans gear-solver 1.9.0 du 16/10).
+      C1 et O5 FAITS et lus (C20 ; G3, `605b6fb`, 1.9.0). M2 et M3 émis par
+      C20 : M2 (`statsByTier`) lu sur le `main` de gear-solver (`de4eb91`,
+      18/10), pas encore publié (la dernière release est la 1.10.0 du
+      17/10) ; M3 (`ee-passives["2000078"]`) est dans la donnée de la 1.9.0
+      et passe par la boucle générique des passifs d'EE
+      (`packages/core/src/parse.ts`), mais aucun code ni test ne le cite :
+      lecture à vérifier. `combatEffects` FAIT côté outerpedia (B53,
+      16/10), affiché sur le `main` de gear-solver (`f5a3d5d`, 18/10), pas
+      encore publié. Noyau par niveau et vitesse en % FAITS côté contrat
+      (B56, 16/10, `corePassiveByFusion`), lus sur le `main` de gear-solver
+      (`76c37f3`, 18/10), pas encore publiés ; restent la fiche du wiki avec
+      l'oracle, puis le retrait de `corePassive` ; `stat-keys.json`.
 - [ ] **Suites de la rédaction des lots du 15/10** (lots rédigés : C18 à
       C25, B51, B53 à B57, A58 à A60, F27, G2 à G6, OB1, OB2, TW1) :
       adversité du guide des tours et Very Hard étage par étage FAITS (B58,

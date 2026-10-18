@@ -7,6 +7,60 @@
 
 ## 2026-10-18
 
+- **Restes « Laissé » : vedette des bannières lue de la donnée, résolveur
+  `[Value]` unique dans le contrat solver, ligne « Contrat solver » du TODO
+  (A66).** Trois restes de C23 et C22 (17/10). **Bannières** :
+  `jackpotKeyOf` (`src/components/guides/editorial/banner/BannerBlocks.tsx`)
+  lit d'abord la ligne `featured` de `recruit.json` (posée par C23 sur les
+  quatre bannières de persos) ; le repli par titre (`*_TITLE_05`, sinon
+  `*_TITLE_03`) reste pour une bannière sans ligne vedette, aujourd'hui la
+  Dimensional Supply seule, et le commentaire le dit. Les commentaires
+  périmés sont réécrits : le pity est une donnée depuis C23
+  (`info.pity`), la prop `guarantee` reste le TEXTE éditorial
+  (`LABELS.<onglet>.pity` du guide `banner-mileage`), qui n'en est pas
+  dérivé. `jackpotKeyOf` est exporté pour le test
+  `BannerBlocks.test.ts` : mêmes lignes vedettes qu'avant sur les cinq
+  bannières de `recruit.json` (custom `SYS_RECRUIT_RATEINFO_TITLE_03`,
+  pickup, premium et limited `SYS_RECRUIT_RATEINFO_TITLE_05`, équipement
+  `SYS_RECRUIT_EQUIP_TITLE_05`), `featured` présent sur les quatre de persos
+  et absent de l'équipement, `featured` prioritaire sur le titre, repli
+  `_TITLE_05` puis `_TITLE_03` sur des bannières synthétiques. Rendu
+  identique : seule la clé vedette décide de la classe, et le test montre
+  la même clé sur les cinq ; pas de serveur sur :3000 pour comparer la page,
+  aucune classe ni balise touchée. **Contrat solver** :
+  `datagen/generators/solver.ts` passe par `fillValuePlaceholders`
+  (`datagen/lib/placeholders.ts`, non modifié) avec la couleur à vrai ;
+  `tokenValues` rend désormais un `BuffValues` construit comme avant
+  (`fmtValue`, `fmtTurn`, `CreateRate`/10), un buff manquant y arrivant en
+  « ? » écrit, donc coloré comme le faisait la copie ; `substitute` n'est
+  plus qu'un appel au module, `TOKEN_RE` retiré (plus d'usage). Mesure :
+  `git status --short data/generated` propre avant, `pnpm datagen:sync-derived`
+  après (42 lignes exactes du banc damage), AUCUN
+  fichier ne change, `solver/version.json` garde son `hash` `79508390003b`.
+  Les écarts lus (`[Turn1]` inconnu du module, casse, `[±Value4]` /
+  `[±Value5]`) ne touchent donc aucun texte du contrat aujourd'hui.
+  **TODO** : vérifications refaites en lecture seule dans gear-solver.
+  `ba7d2c0` (G1) et `605b6fb` (G3) sont bien ancêtres de `v1.9.0` (16/10),
+  la `v1.10.0` (17/10) est la dernière release. En revanche trois points de
+  l'énoncé ne tenaient plus le 18/10 au soir : `statsByTier` (M2) est lu
+  par `de4eb91`, `combatEffects` affiché par `f5a3d5d` et
+  `corePassiveByFusion` lu par `76c37f3`, tous trois commits du 18/10 sur le
+  `main` de gear-solver, absents des deux releases (`git grep` sur
+  `v1.9.0` et `v1.10.0` hors tests : rien). M3 : aucun code ni test ne cite
+  `2000078`, mais l'entrée est dans `data/derived/ee-passives.json` dès la
+  1.9.0 (`1596168`) et la boucle générique des passifs d'EE de
+  `packages/core/src/parse.ts` lit toutes les entrées. La ligne « Contrat
+  solver, L1 d'abord » dit donc : L1 FAIT des deux côtés, C1 et O5 FAITS et
+  lus (1.9.0), M2, `combatEffects` et noyau par niveau / vitesse en % lus
+  sur `main` mais pas encore publiés, M3 dans la donnée et la boucle
+  générique, lecture à vérifier, `stat-keys.json` inchangé. Vérification :
+  `pnpm typecheck` (les trois `tsc --noEmit`, sans erreur), `pnpm lint`
+  (`eslint`, sans sortie), `pnpm test` (`Tests  4230 passed (4230)`).
+  Laissé : `resolveRewardTable`, `RAW_FLAT` de `src/lib/monster-stats.ts`
+  et le texte `guarantee` dérivé de `info.pity` (hors périmètre) ; l'item
+  « Suites de la rédaction des lots du 15/10 » dit encore « une fois que
+  gear-solver lit `corePassiveByFusion` (B56) », alors que c'est fait sur
+  `main` (`76c37f3`), pas publié : à reprendre au tri.
 - **quick : tout retraduire dans Gear reco, « Pousser » relu au retour, `post()`
   coupé sans bouton grisé, liens faux des Tables du jeu, tags morts des guides,
   guides du gabarit « Mise à jour », RSS par `bulletSegments` (B60).** Six

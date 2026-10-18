@@ -79,6 +79,7 @@ import {
   loadBuffIndex,
   setBuffLevel,
 } from '../lib/buff';
+import { fillValuePlaceholders, type BuffValues } from '../lib/placeholders';
 import { bool, loadTable, singleValue, type Row } from '../lib/tables';
 import { loadTextIndex } from '../lib/text';
 import { kitScaling, loadKitScalingTables } from '../lib/kit-scaling';
@@ -172,8 +173,6 @@ const CLASS_NAME: Record<string, string> = {
   CCT_DEFENDER: 'Defender',
   CCT_PRIEST: 'Healer',
 };
-
-const TOKEN_RE = /\[[^\]]+\]/g;
 
 function textMap(table: string): Map<string, string | null> {
   return new Map(loadTable(table).map((t) => [t.ID, t[lang] ?? null]));
@@ -651,46 +650,26 @@ export function buildSolver(inputs: {
     const rows = buffLevelsByID.get(first) ?? [];
     return rows.length ? Math.max(...rows.map((b) => Number(b.Level) || 1)) : 1;
   }
-  function tokenValues(buffIdStr: string, level: number): Record<string, string> {
+  // Valeurs d'un palier pour `fillValuePlaceholders`, le résolveur unique de la
+  // famille `[Value]` / `[Rate]` / `[Turn]` : un buff manquant y arrive en
+  // « ? » écrit (`fmtValue`, `fmtTurn`), donc coloré comme une valeur.
+  function tokenValues(buffIdStr: string, level: number): BuffValues {
     const b0 = findBuff(buffLevelsByID, buffIdStr, level, 0);
     const b2 = findBuff(buffLevelsByID, buffIdStr, level, 1);
     const b4 = findBuff(buffLevelsByID, buffIdStr, level, 3);
     const b5 = findBuff(buffLevelsByID, buffIdStr, level, 4);
-    const rate = b0 && b0.CreateRate ? `${jsNum(Number(b0.CreateRate) / 10)}%` : '?';
-    const val = fmtValue(b0);
-    const turn = fmtTurn(b0);
-    const val2 = fmtValue(b2);
-    const turn2 = fmtTurn(b2);
-    const val4 = fmtValue(b4);
-    const val5 = fmtValue(b5);
     return {
-      '[Value]': val,
-      '[+Value]': `+${val}`,
-      '[-Value]': `-${val}`,
-      '[Value2]': val2,
-      '[+Value2]': `+${val2}`,
-      '[-Value2]': `-${val2}`,
-      '[Value4]': val4,
-      '[Value5]': val5,
-      '[Rate]': rate,
-      '[RATE]': rate,
-      '[Rate1]': rate,
-      '[Turn]': turn,
-      '[Turn1]': turn,
-      '[+Turn]': turn,
-      '[+Turn1]': turn,
-      '[-Turn]': `-${turn}`,
-      '[Turn2]': turn2,
+      value: fmtValue(b0),
+      rate: b0 && b0.CreateRate ? `${jsNum(Number(b0.CreateRate) / 10)}%` : '?',
+      turn: fmtTurn(b0),
+      value2: fmtValue(b2),
+      turn2: fmtTurn(b2),
+      value4: fmtValue(b4),
+      value5: fmtValue(b5),
     };
   }
-  const substitute = (tpl: string, vals: Record<string, string>): string => {
-    let text = tpl;
-    for (const tok of new Set(tpl.match(TOKEN_RE) ?? [])) {
-      if (vals[tok] !== undefined)
-        text = text.split(tok).join(`<color=#28d9ed>${vals[tok]}</color>`);
-    }
-    return text;
-  };
+  const substitute = (tpl: string, vals: BuffValues): string =>
+    fillValuePlaceholders(tpl, vals, true);
 
   // Talisman + EE passent par la table multi-tier ci-dessous, pas ici.
   const MULTI_TIER_SUBTYPES = new Set(['ITS_EQUIP_OOPARTS', 'ITS_EQUIP_EXCLUSIVE']);

@@ -162,13 +162,18 @@ const TITLE_EN_OVERRIDE: Record<string, string> = {
 };
 
 /**
- * Le palier VEDETTE — ce pour quoi on tire sur la bannière. C'est le palier
- * pickup (`*_TITLE_05`) quand il existe, sinon le 3★ (`*_TITLE_03`) : le
- * Custom Rate Up n'a pas de ligne pickup, ses 3 persos choisis sortent du
- * palier 3★. Dérivé des clés, donc juste sur les cinq bannières sans table à
- * tenir.
+ * Le palier VEDETTE — ce pour quoi on tire sur la bannière : la ligne
+ * `featured` de `recruit.json` (le `Grade` 4 du jeu), posée sur les quatre
+ * bannières de persos — au Custom Rate Up, c'est le palier 3★ tout entier, ses
+ * 3★ sortent parmi les 3 persos choisis.
+ *
+ * Repli par TITRE pour une bannière sans ligne `featured` (aujourd'hui la
+ * Dimensional Supply seule, recette ITEM) : le palier `*_TITLE_05` quand il
+ * existe, sinon le `*_TITLE_03`.
  */
-function jackpotKeyOf(rates: RecruitRate[]): string | undefined {
+export function jackpotKeyOf(rates: RecruitRate[]): string | undefined {
+  const featured = rates.find((r) => r.featured)?.titleKey;
+  if (featured) return featured;
   const find = (suffix: string) => rates.find((r) => r.titleKey.endsWith(suffix))?.titleKey;
   return find('_TITLE_05') ?? find('_TITLE_03');
 }
@@ -177,8 +182,8 @@ function jackpotKeyOf(rates: RecruitRate[]): string | undefined {
  * Taux d'une bannière — GÉNÉRÉS (`RecruitKindInfo.rates`, libellés du jeu).
  * La garantie du x10 se DÉRIVE des taux du slot garanti (une ligne à 0 % en
  * confirm = tirage garanti remonté) ; le pull gratuit de `freeCount`. Le
- * compteur de garantie (pity) arrive en revanche du dehors (`guarantee`) : il
- * ne vit dans aucune table.
+ * compteur de garantie (pity) est une donnée depuis C23 (`info.pity`) ; le
+ * bloc n'en affiche que la règle ÉDITORIALE reçue en `guarantee`.
  */
 export function BannerRates({
   info,
@@ -191,9 +196,10 @@ export function BannerRates({
   /** Note éditoriale sous la grille (ex. taux réel des Demiurge). */
   subtext?: string;
   /**
-   * Règle du COMPTEUR DE GARANTIE de la bannière (déjà localisée) — le pity
-   * introduit le 25/08/2026, distinct du mileage. Éditorial : aucune colonne
-   * des tables ne le porte (`OpenRecruitCount` est un déblocage, pas ça).
+   * Règle du COMPTEUR DE GARANTIE de la bannière, en TEXTE éditorial déjà
+   * localisé (les `LABELS.*.pity` du guide `banner-mileage`) — le pity
+   * introduit le 25/08/2026, distinct du mileage. Ses chiffres sont dans
+   * `info.pity` (C23) ; ce texte n'en est pas dérivé.
    */
   guarantee?: string;
 }) {
