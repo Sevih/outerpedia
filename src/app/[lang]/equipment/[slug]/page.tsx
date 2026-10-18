@@ -14,10 +14,22 @@ import {
 import { getEquipmentDetail } from '@/lib/data/equipment-detail';
 import { shopSourceLabel } from '@/lib/data/equipment';
 
-// Pas de `generateStaticParams` : les fiches se rendent À LA DEMANDE puis sont
-// cachées 24 h (`revalidate`, `dynamicParams` à true) — choix de build assumé,
-// c'est le modèle qu'ont suivi les étages de tour (commit c38561f). Le sitemap
-// et /llms.txt les listent quand même : le crawl déclenche la 1re génération.
+// Aucune fiche rendue au build : elles se rendent À LA DEMANDE au premier hit
+// puis sont cachées 24 h (`revalidate`) — choix de build assumé, c'est le
+// modèle qu'ont suivi les étages de tour (commit c38561f). Le sitemap et
+// /llms.txt les listent quand même : le crawl déclenche la 1re génération.
+// `generateStaticParams` vide est la condition de Next pour cet ISR à la
+// demande (doc de `generateStaticParams`, « paths at runtime ») : SANS lui, la
+// route est dynamique, rendue à chaque requête en `private, no-store`. Préféré
+// à `dynamic = 'force-static'`, qui rendrait vide un `headers()` ajouté plus
+// tard au lieu de faire basculer la route (visible au build). `dynamicParams`
+// reste à true : un slug jamais visité se génère au premier hit, un slug
+// inconnu tombe sur `notFound()`. Le cache vit en mémoire
+// (`isrFlushToDisk: false`, `next.config.ts`) et repart à chaque redémarrage.
+export function generateStaticParams() {
+  return [];
+}
+
 export const revalidate = 86400;
 
 export async function generateMetadata({

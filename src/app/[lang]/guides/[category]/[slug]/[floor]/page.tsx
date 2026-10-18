@@ -6,10 +6,16 @@
  * est mutualisé avec la route de base (`GuideDetail`) ; ici on ne fait que
  * résoudre l'étage et le canonicaliser vers son guide de tour.
  *
- * Pas de `generateStaticParams` : les ~3297 étages (× 5 langues) dominaient le
- * build. On les rend À LA DEMANDE puis on les cache 24 h (`revalidate`), comme
- * les pages d'équipement. `dynamicParams` restant à `true`, un étage jamais
- * visité se génère au premier hit au lieu de peser sur le build.
+ * Aucun étage rendu au build : les ~3297 étages (× 5 langues) dominaient le
+ * build (commit c38561f). On les rend À LA DEMANDE au premier hit puis on les
+ * cache 24 h (`revalidate`), comme les pages d'équipement. `dynamicParams`
+ * restant à `true`, un étage jamais visité se génère au premier hit au lieu de
+ * peser sur le build. Le `generateStaticParams` VIDE est la condition de Next
+ * pour cet ISR à la demande (doc de `generateStaticParams`, « paths at
+ * runtime ») : sans lui, la route est dynamique, rendue à chaque requête en
+ * `private, no-store`. Préféré à `dynamic = 'force-static'`, qui rendrait vide
+ * un `headers()` ajouté plus tard au lieu de faire basculer la route. Le cache
+ * vit en mémoire (`isrFlushToDisk: false`, `next.config.ts`).
  */
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
@@ -21,6 +27,10 @@ import { getGuide, guideOgImage } from '@/lib/data/guides';
 import { getTower } from '@/lib/data/towers';
 import { getMonster } from '@/lib/data/monsters';
 import { GuideDetail } from '../guide-detail';
+
+export function generateStaticParams() {
+  return [];
+}
 
 export const revalidate = 86400;
 

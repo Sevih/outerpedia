@@ -23,14 +23,6 @@ ont été confrontées au code du 15/10 : tout est encore présent. Le détail,
 les preuves et les décisions vivent dans le tri consolidé de sevih-tool
 (`docs/revue/tri-2026-10-15.md`). Lots proposés, dans l'ordre :
 
-- [ ] **Équipement et étages de tour rendus à chaque requête** (repéré par
-      A54, 15/10) : le build classe `equipment/[slug]` et
-      `guides/[category]/[slug]/[floor]` en `ƒ`, servis en
-      `Cache-Control: private, no-store`, alors que leurs commentaires
-      annoncent un rendu à la demande puis 24 h de cache (`revalidate`).
-      Trouver ce qui les rend dynamiques (un `headers()`, `cookies()` ou
-      `searchParams` lu en chemin) et décider : les mettre en cache, ou
-      corriger les commentaires.
 - [ ] **Calculateur (C, build)** : R14 et R16 : enquête faite (F27),
       M1 et M2 mesurées le 18/10 (Sterope : suite sous buff, deux
       cascades, bursts compris ; `docs/specs/damage-clips-joues.md` § 4) :

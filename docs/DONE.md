@@ -7,6 +7,57 @@
 
 ## 2026-10-18
 
+- **Fiches d'équipement et étages de tour remis en cache : rendu au premier
+  hit puis 24 h (A63).** Le build classait `equipment/[slug]` et
+  `guides/[category]/[slug]/[floor]` en `ƒ` (rendues à chaque requête, en
+  `Cache-Control: private, no-store`, relevé par A54) alors que leurs
+  commentaires annonçaient un rendu à la demande puis 24 h de cache.
+  Décision de Sevih du 18/10 : les remettre en cache plutôt que corriger les
+  commentaires. Cause : la règle de Next 16.4.0 (doc de
+  `generate-static-params.md` l.58 et § « All paths at runtime » l.293-306) —
+  sans `generateStaticParams`, une route à segment dynamique n'a pas d'ISR à
+  la demande ; c'est le retrait de `generateStaticParams` par `c38561f` qui
+  avait fait passer `[floor]` en dynamique, et la fiche d'équipement n'en a
+  jamais eu. Les deux pages exportent maintenant un `generateStaticParams`
+  qui rend `[]` (préféré à `dynamic = 'force-static'`, qui rendrait vide un
+  `headers()` ajouté plus tard au lieu de faire basculer la route) ;
+  `revalidate = 86400` et `dynamicParams` (défaut `true`) ne bougent pas.
+  Leurs commentaires disent ce qui est vrai : `generateStaticParams` vide et
+  pourquoi, 24 h, `dynamicParams` à `true`, cache en mémoire
+  (`isrFlushToDisk: false`, A54) ; ce que `c38561f` dit du temps de build
+  reste. Aucune autre cause à chercher : les deux routes sortent du build en
+  `├ ● /[lang]/equipment/[slug]` et `├ ● /[lang]/guides/[category]/[slug]/[floor]`
+  sans chemin listé ni colonne Revalidate (aucune page rendue au build :
+  1 964 pages générées, `prerender-manifest.json` les porte en
+  `dynamicRoutes`, `fallback: null`, `compute: "blocking"`, 0 route
+  pré-rendue d'équipement ou d'étage). Banc standalone
+  (`HOSTNAME=0.0.0.0 PORT=3917`, `Host: outerpedia.com`,
+  `X-Forwarded-Proto: https`) :
+  `/equipment/steel-sword` puis `/guides/skyward-tower/normal-tower/1`,
+  deux fois chacun, `200`, `x-nextjs-cache: MISS` puis `HIT`,
+  `Cache-Control: s-maxage=86400, stale-while-revalidate=31449600` (plus de
+  `private, no-store`) ; `/equipment/nexistepas` et
+  `/guides/skyward-tower/normal-tower/999999` en `404` ; 14 052 fichiers
+  sous `.next/standalone/.next/server/app` avant et après, 0 plus récent
+  que le départ (`find -newer`) : le cache reste en mémoire. Serveur arrêté
+  par son PID, `.next/static` copié retiré ; `.next/dev` remis,
+  `.next/types` supprimé, `next-env.d.ts` remis à l'identique (`cmp`).
+  Rendu des pages inchangé : seul l'export s'ajoute, le corps des deux
+  pages n'est pas touché. `pnpm typecheck` vert (sortie vide après
+  `tsc --noEmit && … -p scripts/tsconfig.json`), `pnpm lint` vert
+  (`$ eslint`, rien après), `pnpm test` : `Tests  4203 passed (4203)`.
+  **Incident** : à la première tentative, le `next dev` de Sevih tournait
+  (le contrôle `curl -sI` sur :3000 avait expiré en 3 s pendant une
+  compilation, pris à tort pour « rien n'écoute ») ; déplacer `.next/dev`
+  l'a fait redémarrer et le build est tombé au typecheck (« '/dev' is not
+  assignable to '/[lang]' ») ; état remis, Sevih a arrêté son dev, build
+  relancé. Le `.next/dev` d'avant ce redémarrage reste dans le scratchpad de
+  la session, celui que le dev venait de recréer est remis en place.
+  **Repéré, hors périmètre** : un 404 de ces deux routes est lui aussi
+  mis en cache (`s-maxage=86400`, une entrée en mémoire par URL inconnue,
+  bornée par `cacheMaxMemorySize`) — le comportement que A54 a accepté
+  pour le disque. Le commentaire de `[floor]` dit « × 5 langues » alors que
+  le site en a six (non touché, chiffre repris de `c38561f`).
 - **Journal du site : `guid` du flux RSS sur l'id stable, liens markdown
   bruts retirés des puces (A65).** Le `guid` des items de `/feed/changelog`
   valait `changelog-<date>-<rang>`, le rang dans les 30 dernières entrées :
