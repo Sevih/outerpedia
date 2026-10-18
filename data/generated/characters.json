@@ -10209,6 +10209,7 @@
         "max": 160
       }
     },
+    "buffImmune": ["BT_STUN"],
     "nickname": {
       "en": "Shy Battle Maid",
       "jp": "内気な戦闘メイド",
