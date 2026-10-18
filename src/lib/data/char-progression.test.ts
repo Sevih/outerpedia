@@ -10,10 +10,12 @@ import { transcendStarRow } from '@/lib/images';
 import { getTranscend } from './transcend';
 import {
   computeStatSteps,
+  getSheetTranscendTiers,
   getStatLayers,
   getSubstatFlatProfile,
   getTranscendTiers,
 } from './char-progression';
+import { stepLabel, transcendLadder } from '@/lib/transcendence';
 import { getSubstatTicks } from './sub-ticks';
 import { judgeSubstat, SUBSTAT_AXES, sumFlatAt } from '@/lib/substat-verdict';
 import charactersData from '@data/generated/characters.json';
@@ -306,13 +308,9 @@ describe('1★/2★ et Core Fusion d’origine 2★ — échelle et limit break 
     t.slice(1).forEach((x, i) => expect(x.atkPM).toBeGreaterThan(t[i].atkPM));
   });
 
-  it('Snow fusionné : paliers 3, 4, 6, 9 de son origine 2★, limit break 2★', () => {
-    expect(getStatLayers(CHARS['2700003']).transcend.map((x) => x.label)).toEqual([
-      '3',
-      '4',
-      '5',
-      '6',
-    ]);
+  it('Snow fusionné : paliers 6 et 9 de son origine 2★ (3 et 4 masqués), limit break 2★', () => {
+    // L'échelle d'origine est 3, 4, 6, 9 ; la fusion exige le palier 6.
+    expect(getStatLayers(CHARS['2700003']).transcend.map((x) => x.label)).toEqual(['5', '6']);
     const lb = computeStatSteps(CHARS['2700003']).steps.flatMap((s) =>
       s.limitBreak ? [[s.limitBreak.pieces, s.limitBreak.price]] : [],
     );
@@ -323,14 +321,75 @@ describe('1★/2★ et Core Fusion d’origine 2★ — échelle et limit break 
     ]);
   });
 
-  it('Veronica fusionnée (origine 3★) garde l’échelle et le limit break 3★', () => {
+  it('Veronica fusionnée (origine 3★) garde l’échelle 3★ dès le palier 6, et le limit break 3★', () => {
     const v = CHARS['2700037'];
+    expect(getStatLayers(v).transcend.map((x) => x.label)).toEqual(['5', '5+', '5++', '6']);
     expect(getStatLayers(v).transcend.map((x) => x.label)).toEqual(
-      getStatLayers(CHARS['2000073']).transcend.map((x) => x.label),
+      getStatLayers(CHARS['2000073'])
+        .transcend.slice(-4)
+        .map((x) => x.label),
     );
     expect(computeStatSteps(v).steps.flatMap((s) => s.limitBreak?.pieces ?? [])).toEqual([
       50, 100, 250,
     ]);
+  });
+});
+
+describe('paliers de fiche — un Core Fusion commence à `fusion.transStar`', () => {
+  const all = Object.values(CHARS);
+  const fused = all.filter((c) => c.fusion);
+
+  it('six fusionnés, chacun avec un palier exigé', () => {
+    expect(fused.map((c) => c.id).sort()).toEqual([
+      '2700003',
+      '2700005',
+      '2700037',
+      '2700043',
+      '2700056',
+      '2700070',
+    ]);
+  });
+
+  it('fusionné : couches et curseur = l’échelle à `star ≥ transStar`, dans l’ordre', () => {
+    for (const c of fused) {
+      const min = c.fusion!.transStar;
+      const expected = transcendLadder(c.rarity, c.id).filter((s) => s.star >= min);
+      const layers = getStatLayers(c).transcend;
+      const tiers = getSheetTranscendTiers(c, 'en');
+      expect(layers.length, c.id).toBe(tiers.length);
+      expect(expected[0]?.star, c.id).toBe(min);
+      expect(
+        layers.map((l) => [l.label, l.atkPM]),
+        c.id,
+      ).toEqual(expected.map((s) => [stepLabel(s), s.atk]));
+      expect(
+        tiers.map((t) => t.label),
+        c.id,
+      ).toEqual(expected.map(stepLabel));
+    }
+  });
+
+  it('sans fusion : couches et curseur = l’échelle entière', () => {
+    for (const c of all.filter((x) => !x.fusion)) {
+      const expected = transcendLadder(c.rarity, c.id).map(stepLabel);
+      expect(
+        getStatLayers(c).transcend.map((l) => l.label),
+        c.id,
+      ).toEqual(expected);
+      expect(
+        getSheetTranscendTiers(c, 'en').map((t) => t.label),
+        c.id,
+      ).toEqual(expected);
+    }
+  });
+
+  it('le damage calculator garde l’échelle entière, fusionnés compris', () => {
+    for (const c of all) {
+      expect(
+        getTranscendTiers(c, 'en').map((t) => t.label),
+        c.id,
+      ).toEqual(transcendLadder(c.rarity, c.id).map(stepLabel));
+    }
   });
 });
 

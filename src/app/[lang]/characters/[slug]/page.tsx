@@ -64,7 +64,7 @@ import {
   getGiftItems,
   getRecallItem,
   getSubstatFlatProfile,
-  getTranscendTiers,
+  getSheetTranscendTiers,
   type GiftView,
 } from '@/lib/data/char-progression';
 import { getSubstatTicks } from '@/lib/data/sub-ticks';
@@ -400,7 +400,7 @@ export default async function CharacterDetail({
   }
   // EE + Transcendance (côte à côte).
   {
-    const transcendTiers = getTranscendTiers(char, lang);
+    const transcendTiers = getSheetTranscendTiers(char, lang);
     let eeCard: EeCardView | undefined;
     if (ee && char.ee) {
       const slug = slugifyEquipment(ee.name.en);

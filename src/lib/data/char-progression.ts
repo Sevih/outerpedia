@@ -225,13 +225,28 @@ function addBonus(parts: LayerParts, b: StatBonus): void {
 }
 
 /**
+ * LES PALIERS DE FICHE d'un perso : son échelle (`transcendLadder`), sans les crans
+ * qu'il ne peut pas porter. Un Core Fusion lit l'échelle de son ORIGINE, or la
+ * fusion exige l'origine au palier `fusion.transStar` (`CharacterTransStar`, 6 pour
+ * les six) : les paliers en dessous n'existent pas pour le fusionné, la fiche les
+ * masque (décision du 18/10). Une seule règle pour les deux lectures de la fiche —
+ * `getStatLayers` (table Base Stats) et `getSheetTranscendTiers` (curseur) — qui
+ * partagent UN index (`TranscendTierContext`) et doivent donc rester alignées.
+ */
+function sheetLadder(char: Character): TranscendStep[] {
+  const steps = transcendLadder(char.rarity, char.id);
+  const min = char.fusion?.transStar;
+  return min === undefined ? steps : steps.filter((s) => s.star >= min);
+}
+
+/**
  * Couches optionnelles de la fiche pour les contrôles de la section Stats :
  * paliers de transcendance (% ATK/DEF/HP + buffs du passif au niveau lié),
  * courbe du codex, quirks applicables (arbre élémentaire + classe +
  * sous-classe, niveau max) et passifs de fiche (`sheetPassives`).
  */
 export function getStatLayers(char: Character): StatLayersView {
-  const steps = transcendLadder(char.rarity, char.id);
+  const steps = sheetLadder(char);
   const uniqueId = char.skills.find((id) => SKILLS[id]?.type === 'unique_passive');
   const s8 = uniqueId ? PROGRESSION.skill8[uniqueId] : undefined;
   const transcend = steps.map((s) => {
@@ -466,11 +481,23 @@ function toTier(s: TranscendStep, unique: Skill | undefined, lang: Lang): Transc
   };
 }
 
-/** Paliers de transcendance d'un perso (overrides > barème de sa rareté). */
-export function getTranscendTiers(char: Character, lang: Lang): TranscendTierView[] {
-  const steps = transcendLadder(char.rarity, char.id);
+function tiersOf(char: Character, steps: TranscendStep[], lang: Lang): TranscendTierView[] {
   const unique = char.skills.map((id) => SKILLS[id]).find((s) => s?.type === 'unique_passive');
   return steps.map((s) => toTier(s, unique, lang));
+}
+
+/**
+ * Paliers de transcendance d'un perso (overrides > barème de sa rareté), échelle
+ * ENTIÈRE : celle du damage calculator, dont les liens partagés l'indexent telle
+ * quelle. La fiche lit `getSheetTranscendTiers`.
+ */
+export function getTranscendTiers(char: Character, lang: Lang): TranscendTierView[] {
+  return tiersOf(char, transcendLadder(char.rarity, char.id), lang);
+}
+
+/** Paliers de transcendance de la FICHE perso (`sheetLadder`), alignés sur `getStatLayers`. */
+export function getSheetTranscendTiers(char: Character, lang: Lang): TranscendTierView[] {
+  return tiersOf(char, sheetLadder(char), lang);
 }
 
 /** Un « sweetspot » de transcendance : ce que le palier APPORTE (delta). */

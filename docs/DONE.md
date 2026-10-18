@@ -7,6 +7,89 @@
 
 ## 2026-10-18
 
+- **Contextes de stats des World Boss : chaque boss sur SA tranche de rangs,
+  dans les trois constructeurs (A64).** `encounterSpawnContexts` dépliait les
+  paliers par `ranksOfMonster` (vu par B57), mais `bossSpawnContexts`
+  (`boss-view.ts`) et `monsterStatContexts` (`monster-sheet.ts`) passaient
+  l'échelle ENTIÈRE du donjon à `expandRankContexts` : sur les 12 donjons
+  découpés (World Boss de ligue 3 et 4, sept rangs, quatre au boss de
+  phase 1, trois à celui de phase 2), chacun des 24 monstres recevait 7
+  contextes, le boss de phase 1 « aux rangs S à SSS » où il n'existe pas, et
+  l'inverse. Latent sur le site (aucun guide `BossGuide` n'a ces boss, les
+  six guides World Boss passent par `encounterSpawnContexts`), visible dans
+  le sélecteur de rencontre de la fiche monstre de quick. Une seule règle
+  désormais : `ranksOfMonster` sort d'`encounters.ts` et devient une fonction
+  pure exportée de `src/lib/monster-stats.ts`, à côté de `roleInDungeon`, sur
+  `(d: Pick<DungeonRef, 'ranks' | 'monsters'>, monsterId)` — corps et
+  commentaire inchangés sur le fond, le rôle lu par `roleInDungeon`, un
+  donjon sans `monsters` (archive) garde l'échelle entière ; le module
+  n'importe toujours que des types et `@/lib/damage/formula`. Les trois
+  appelants l'appellent : `encounterSpawnContexts` sur `e.ref` (ses
+  `monsters` sont `ref.monsters` dans les cinq constructions d'`Encounter`,
+  vérifié), `bossSpawnContexts` sur l'id nu de la vue (`view.id.split('@')[0]`,
+  sorti en tête de fonction pour servir aussi à `roleInDungeon`),
+  `monsterStatContexts` sur `m.id`. Les commentaires de `boss-view.ts` et
+  d'`encounters.ts` qui citaient `monsterSpawnContexts` (parti, cf.
+  `monsters.ts`) nomment les constructeurs vivants. Tests en relation :
+  `boss-view.test.ts` et `monster-sheet.test.ts` parcourent chaque donjon
+  classé d'`encounters.json` — sur un donjon découpé, la réunion des tranches
+  des boss est l'échelle entière sans recouvrement, sinon chaque boss a
+  l'échelle entière ; la vue (resp. la fiche) d'un boss limitée à ce donjon
+  rend exactement les rangs de sa tranche ; au moins un donjon découpé exigé.
+  Le bloc « world boss — quatre ligues » d'`encounters.test.ts` reste vert
+  sans retouche. Script jetable hors du dépôt (`pnpm exec tsx`, les 4 848
+  monstres de `monsters.json`, vue construite par `buildBossView`, fiche sur
+  `encounters.json` committé) : seuls les 24 monstres attendus changent
+  (4086009-4086012, 4086015-4086018, 4086021-4086024, 4086027-4086030,
+  4086033-4086036, 4086039-4086042), 168 → 84 contextes dans
+  `bossSpawnContexts` comme dans `monsterStatContexts` ; 4086041 : 7 → 4,
+  4086042 : 7 → 3. Vérifié : `pnpm typecheck` (`tsc --noEmit -p
+  scripts/tsconfig.json` sans erreur), `pnpm lint` (`eslint` sans sortie),
+  `pnpm test` `Tests 4195 passed (4195)`, `NODE_ENV=development pnpm exec
+  vitest run scripts/quick` `Tests 1148 passed (1148)`. Aucun changement
+  visible sur le site. **Reste à Sevih** : dans quick, la fiche monstre de
+  4086041 (Ragnakeus, ligue 4, phase 1) ne propose plus que ses 4 rangs, et
+  4086042 (phase 2) ses 3. Laissé : rien.
+- **Fiche d'un Core Fusion : les crans de transcendance sous l'étoile exigée par
+  la fusion masqués (B59)** : un fusionné lit l'échelle de son ORIGINE
+  (`transcend.json`, `overrides`), mais la fusion exige l'origine au `TransStar`
+  `fusion.transStar` (6 pour les six) ; sa fiche proposait donc des crans qui
+  n'existent pas pour lui (3★ et 4★ pour Snow et Lisha, 3★ à 4★+ pour Veronica,
+  Eternal, Notia et Epsilon). Décision de Sevih du 18/10 : masqués sur la fiche.
+  Une seule règle, `sheetLadder` (privée, `src/lib/data/char-progression.ts`) :
+  `transcendLadder(char.rarity, char.id)` sans les paliers
+  `star < char.fusion.transStar` quand le perso porte `fusion`. `getStatLayers`
+  la lit, et la fiche passe par une FONCTION à elle, `getSheetTranscendTiers` (choisie
+  plutôt qu'une option : l'appel du damage calculator reste
+  `getTranscendTiers(c, lang)` mot pour mot, échelle entière, ses liens
+  partagés l'indexant telle quelle) ; les deux partagent `tiersOf`, et
+  `src/app/[lang]/characters/[slug]/page.tsx` appelle `getSheetTranscendTiers`.
+  Le curseur d'`EeTranscendSection` et la table Base Stats gardent le même
+  index (`TranscendTierContext`), donc deux listes de même longueur ; le palier
+  par défaut reste le dernier (6★), rien n'est touché côté composants. Résultat :
+  Snow et Lisha à 2 crans (5★, 6★), les quatre autres à 4 (5★, 5★+, 5★++, 6★).
+  Tests (`char-progression.test.ts`) : nouveau bloc relationnel — les six
+  fusionnés ont couches et curseur de même longueur, égaux à l'échelle filtrée
+  `star ≥ transStar` dans l'ordre, premier palier à `transStar` ; tout perso
+  sans `fusion` a l'échelle entière ; `getTranscendTiers` rend l'échelle entière
+  pour les 129. Deux tests de C17 retouchés parce qu'ils comptaient les crans de
+  fiche d'un fusionné : Snow (`['3','4','5','6']` → `['5','6']`) et Veronica
+  (égale à l'échelle de Vlada → égale à ses quatre derniers crans,
+  `['5','5+','5++','6']`) ; leurs assertions de limit break sont inchangées.
+  `gear-solver-oracle.test.ts` vert sans retouche. Script jetable hors du dépôt
+  (`tsx` sur une copie `git archive` de HEAD et sur l'arbre de travail) :
+  `getStatLayers(c).transcend` et les paliers de fiche des 129 persos ne
+  diffèrent que pour les six fusionnés, par le seul retrait des premiers crans
+  (2700003 et 2700005 : 4 → 2 ; 2700037, 2700043, 2700056, 2700070 : 7 → 4) ;
+  `getTranscendTiers` tel que l'appelle le calculateur est identique pour
+  tous. `pnpm typecheck` (trois `tsc --noEmit`, sans erreur), `pnpm lint`
+  (`eslint`, sans erreur), `pnpm test` (`Tests 4191 passed (4191)`). Changement
+  visible attendu, à regarder par Sevih : sur `/characters/core-fusion-snow`,
+  `-lisha`, `-veronica`, `-eternal`, `-notia` et `-epsilon`, curseur de
+  transcendance et table Base Stats ne proposent que les crans à partir de 5★.
+  Laissé (hors périmètre) : le calculateur de dégâts, le Hero tracker et les
+  sweetspots des guides proposent toujours les crans sous 6 pour un fusionné.
+
 - **Confirmations de Sevih (18/10)** : premier envoi réel d'un 4-comics en
   plusieurs langues (B30) et premier clic réel sur « Pousser » (B33) faits,
   liste vivante des coupons saine ; les deux lignes du TODO ne gardent que
