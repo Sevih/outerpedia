@@ -36,7 +36,19 @@ les preuves et les décisions vivent dans le tri consolidé de sevih-tool
       `searchParams` lu en chemin) et décider : les mettre en cache, ou
       corriger les commentaires.
 - [ ] **Calculateur (C, build)** : R14 et R16 : enquête faite (F27),
-      mesures demandées (`docs/specs/damage-clips-joues.md` § 4).
+      M1 et M2 mesurées le 18/10 (Sterope : suite sous buff, deux
+      cascades, bursts compris ; `docs/specs/damage-clips-joues.md` § 4) :
+      lot du correctif à rédiger (§ 5).
+- [ ] **Calculateur : EFF de l'attaquant face à la RES de la cible**
+      (retour de Sevih, 18/10, après C25) : le champ EFF de l'attaquant
+      n'apparaît que pour un kit à DOT (`statKeysFor`, `s?.dot`), et la
+      probabilité de pose ne sert qu'aux lignes DOT, alors que le champ RES
+      de la cible manuelle est toujours là. Montrer les deux ensemble, ou
+      étendre la probabilité de pose aux autres débuffs du kit : à trancher.
+- [ ] **Calculateur : infiltration par zone** (retour de Sevih, 18/10) :
+      les cibles d'Infiltration Operation sont rangées par « Floor N »,
+      alors que chaque infiltration a 3 zones, chacune avec ses combats.
+      Ranger infiltration → zone → combat, depuis la donnée du jeu.
 - [ ] **Anim-events : 46 skills sans aucun event extrait** (repéré par C24,
       17/10) — Lisha (2000005) 502-520, S1 de Lily, Laine et Cindy, Ame,
       fusionnés 2700003/2700005/2700035/2700037/2700043 : extraire les

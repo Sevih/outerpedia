@@ -1294,7 +1294,7 @@ const zh: Record<TranslationKey, string> = {
   'progress.task.free-recruit-custom': '免费自定义招募',
   'progress.task.free-recruit-demiurge': '免费创世之神招募',
   'progress.task.guild-security-area': '公会警备区域',
-  'progress.task.joint-challenge': '联合挑战',
+  'progress.task.joint-challenge': '联合挑战 (每日奖励)',
   'progress.task.guild-raid': '公会联合战',
   'progress.task.world-boss': '世界首领 (每日奖励)',
   'progress.task.terminus-isle': '探索灭亡之岛',

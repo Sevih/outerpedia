@@ -1320,7 +1320,7 @@ const kr: Record<TranslationKey, string> = {
   'progress.task.free-recruit-custom': '무료 커스텀 동료 영입',
   'progress.task.free-recruit-demiurge': '무료 데미우르고스 동료 영입',
   'progress.task.guild-security-area': '길드 경비 구역',
-  'progress.task.joint-challenge': '합동 챌린지',
+  'progress.task.joint-challenge': '합동 챌린지 (일일 보상)',
   'progress.task.guild-raid': '길드 연합전',
   'progress.task.world-boss': '월드 보스 (일일 보상)',
   'progress.task.terminus-isle': '멸망의 섬 탐사',

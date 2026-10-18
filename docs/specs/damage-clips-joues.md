@@ -150,6 +150,8 @@ Témoin facultatif dans un autre combat : S1 sans aucun buff sur Sterope, 3 nomb
 
 Le burst 3 (`Burst3,Skill1_3`) suit M2 par analogie ; une capture de plus seulement si M2 surprend.
 
+**Résultat de M1 et M2 (Sevih, 18/10/2026).** Sans buff sur Sterope, le S1 fait 3 hits. Avec un buff, il fait 3 hits, puis Divine Retribution part et ajoute 6 hits (3 + 6) ; aucun nombre de compensation en fin de skill n'a été relevé. Les bursts suivent la même règle : la suite ne dépend que de la condition (un buff sur Sterope), pas du burst. Q1 et Q2 sont tranchées pour Sterope : l'event est dans le clip, la condition est lue sur le lanceur, et la suite tombe en nombres séparés, donc pas de fondu ; la règle « deux cascades » est retenue. Le rapport des nombres (30 %) n'a pas été mesuré : les hits sont trop rapides à compter.
+
 **M3, M4 (facultatives, sans ré-extraction).** Parti S2 sur une cible Brûlée (S1 de Parti d'abord, qui brûle au tirage) : 9 638 sans suite, 12 529 en deux cascades, 19 276 sous fondu (critique 15 191, 19 748, 30 382). Luna S1 sous Barrière (S2 de Luna d'abord) : 2 404, 3 125, 4 808 (critique 4 349, 5 653, 8 698). Même cible, liens :
 
 ```text

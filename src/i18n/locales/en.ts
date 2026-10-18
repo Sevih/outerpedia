@@ -1365,7 +1365,7 @@ const en = {
   'progress.task.free-recruit-custom': 'Free Custom Recruit',
   'progress.task.free-recruit-demiurge': 'Free Demiurge Recruit',
   'progress.task.guild-security-area': 'Guild Security Area',
-  'progress.task.joint-challenge': 'Joint Challenge',
+  'progress.task.joint-challenge': 'Joint Challenge (daily reward)',
   'progress.task.guild-raid': 'Guild Raid',
   'progress.task.world-boss': 'World Boss (daily reward)',
   'progress.task.terminus-isle': 'Terminus Isle Exploration',

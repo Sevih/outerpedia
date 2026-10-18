@@ -74,7 +74,9 @@ export const DAILY_TASK_DEFINITIONS: Record<string, TaskDefinition> = stamp('dai
   'free-recruit-demiurge': { category: 'task', permanent: true, maxCount: 1 },
   'guild-security-area': { category: 'task', permanent: true, maxCount: 1 },
   // Contenu événementiel (opt-in)
-  'joint-challenge': { category: 'task', permanent: false, maxCount: 2 },
+  // Deux entrées par jour (`EVENT_BOSS_ENTRANCE_LIMIT` = 2) ; comme le World
+  // Boss, la tâche compte la RÉCOMPENSE du jour (décision de Sevih, 18/10/2026).
+  'joint-challenge': { category: 'task', permanent: false, maxCount: 1 },
   'guild-raid': { category: 'task', permanent: false, maxCount: 2 },
   // Le jeu autorise 10 entrées par jour (`GameConfigTemplet`
   // `WORLD_BOSS_ENTRANCE_LIMIT` = 10) ; la tâche compte la RÉCOMPENSE du jour,

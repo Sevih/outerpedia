@@ -1335,7 +1335,7 @@ const jp: Record<TranslationKey, string> = {
   'progress.task.free-recruit-custom': '無料カスタムスカウト',
   'progress.task.free-recruit-demiurge': '無料デミウルゴススカウト',
   'progress.task.guild-security-area': 'ギルド警備エリア',
-  'progress.task.joint-challenge': '共同作戦',
+  'progress.task.joint-challenge': '共同作戦 (日次報酬)',
   'progress.task.guild-raid': 'ギルド連合戦',
   'progress.task.world-boss': 'ワールドボス (日次報酬)',
   'progress.task.terminus-isle': 'テルミナス島探査',

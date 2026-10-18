@@ -1378,7 +1378,7 @@ const es: Record<TranslationKey, string> = {
   'progress.task.free-recruit-custom': 'Recluta Exclusivo Gratis',
   'progress.task.free-recruit-demiurge': 'Recluta Demiurge Gratis',
   'progress.task.guild-security-area': 'Área de Seguridad de Gremio',
-  'progress.task.joint-challenge': 'Desafío Conjunto',
+  'progress.task.joint-challenge': 'Desafío Conjunto (recompensa diaria)',
   'progress.task.guild-raid': 'Incursión de Gremio',
   'progress.task.world-boss': 'Jefe Mundial (recompensa diaria)',
   'progress.task.terminus-isle': 'Exploración de Isla Terminal',

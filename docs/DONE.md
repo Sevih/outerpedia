@@ -7,6 +7,17 @@
 
 ## 2026-10-18
 
+- **Suivi de progression : Joint Challenge = la récompense du jour
+  (retour de Sevih du 18/10, comme le World Boss d'A58).** Le jeu autorise
+  deux entrées par jour (`EVENT_BOSS_ENTRANCE_LIMIT` = 2) ; la tâche
+  `joint-challenge` passe à `maxCount` 1 et son libellé dit « (daily
+  reward) » dans les six locales. Contrôles écran de Sevih sur les lots du
+  15 au 18/10 : accueil, renforts sans −20 %, World Boss, ether, vidéo de
+  Skuld, EE de Snow, EFF%/RES%, Rhona, Custom Recruit et immunités
+  confirmés. Monad Gate est un mode retiré et masqué : on n'y touche plus.
+  Mesures de Sterope (M1, M2) consignées dans
+  `docs/specs/damage-clips-joues.md` § 4. Nouveaux points au TODO : EFF de
+  l'attaquant face à la RES de la cible, infiltration par zone.
 - **`[Buff_V]` derrière « by » toujours en valeur absolue (décision de
   Sevih du 18/10, suite de C22).** L'exception « increase(s) / raise(s) … by
   » de `unsignedValueIds` (`datagen/lib/placeholders.ts`) tombe : seul
