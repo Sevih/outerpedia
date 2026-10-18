@@ -4228,6 +4228,7 @@
         "max": 110
       }
     },
+    "buffImmune": ["BT_STUN", "BT_STONE", "BT_FREEZE"],
     "nickname": {
       "en": "Gifted with Dazzling Brilliance",
       "jp": "慈愛に満ちた王国の王女",
