@@ -681,23 +681,18 @@ les preuves et les décisions vivent dans le tri consolidé de sevih-tool
       au chargement, donc une note corrigée en anglais puis ENREGISTRÉE ne
       repart plus au traducteur (seules les langues manquantes). Ajouter le
       geste forcé (tout retraduire) dans `tabs/gear.js` (lot A, fichier libre).
-- [ ] **« Pousser », restes de B33** : le compte de l'en-tête ne se relit
+- [ ] **« Pousser », restes de B33** (premier clic réel fait par Sevih,
+      confirmé le 18/10) : le compte de l'en-tête ne se relit
       qu'au chargement, après un enregistrement et, depuis B36, à chaque
       lecture du tableau de bord (y revenir, ou « Actualiser ») — après un
       `git pull --rebase` ou un commit au terminal, passer par l'accueil
       (relire `/api/git` au retour de focus serait un lot A). À jouer par
-      Sevih : le premier clic réel sur « Pousser » (des commits non JSON
-      attendent : le journal annonce le typecheck, puis « poussé ») ; et,
-      depuis A33, un fichier indexé au terminal (`git add`) puis un
+      Sevih, depuis A33 : un fichier indexé au terminal (`git add`) puis un
       enregistrement dans quick — `git show --stat` ne le cite pas,
       `git status` le montre toujours indexé.
-- [ ] **4-comics, premier envoi réel multi-langues (lot B30)** : glisser d'un
-      coup les trois fichiers d'une nouvelle BD (`…_EN`, `…_JP`, `…_KR`),
-      vérifier la ligne à trois cases, publier — attendu : trois « déposé »,
-      UNE conversion, UN push R2, UN commit `chore(assets): 4-comics comicNN (EN, JP, KR)`
-      local, que « Pousser » envoie (B33). Si une connexion coupe, le bouton reste grisé
-      (`post()` de `lib.js`, signalé par l'agent : à reprendre un jour, hors
-      série UI).
+- [ ] **4-comics, bouton grisé après une coupure (lot B30)** : premier envoi
+      réel multi-langues fait par Sevih (confirmé le 18/10). Reste : si une
+      connexion coupe, le bouton reste grisé (`post()` de `lib.js`), lot A.
 - [ ] **Refonte de l'UI — contrôles à l'écran** (la série est close le 07/10,
       le banc ne joue pas ces états) : survol des ✕ et des boutons fantômes,
       anneau de focus, journal en haut pendant un vrai enregistrement (lot

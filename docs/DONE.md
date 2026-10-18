@@ -7,6 +7,11 @@
 
 ## 2026-10-18
 
+- **Confirmations de Sevih (18/10)** : premier envoi réel d'un 4-comics en
+  plusieurs langues (B30) et premier clic réel sur « Pousser » (B33) faits,
+  liste vivante des coupons saine ; les deux lignes du TODO ne gardent que
+  leurs restes de code (bouton grisé après une coupure, relecture de
+  `/api/git` au retour de focus) et le contrôle d'A33.
 - **Relecture B58 (Opus) — adversité de chaque étage des guides de tour,
   Very Hard étage par étage ; validé.** Périmètre conforme (`eb3f4078`) :
   `TowerGuide.tsx`, `towers.ts` et son test, deux clés (`tower.floor_prev`,
