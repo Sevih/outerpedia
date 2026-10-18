@@ -51,18 +51,20 @@ describe('unsignedValueIds — signe de [Buff_V] (décision du 17/10)', () => {
     expect(unsignedValueIds(['Core Overdrive: [Buff_V_a] Chain Points'])).toEqual(new Set());
   });
 
-  it('« increase(s) / raise(s) … by » → signe gardé (le retirer inverserait le sens)', () => {
+  it('« increase(s) / raise(s) … by » → absolu aussi (décision du 18/10, 160039)', () => {
     const t =
       'Increases the cooldown of <color=#28d9ed>X</color> by <color=#28d9ed>[Buff_V_a] turn(s)</color>';
-    expect(unsignedValueIds([t])).toEqual(new Set());
-    expect(unsignedValueIds(['Raises SPD by [Buff_V_a]'])).toEqual(new Set());
+    expect(unsignedValueIds([t])).toEqual(new Set(['a']));
+    expect(unsignedValueIds(['Raises SPD by [Buff_V_a]'])).toEqual(new Set(['a']));
   });
 
-  it('le verbe compté est le dernier de la phrase : « increases X and reduces Y by » → absolu', () => {
+  it('seul « by » décide, pas le verbe', () => {
     expect(unsignedValueIds(['Increases ATK and reduces DEF by [Buff_V_a]'])).toEqual(
       new Set(['a']),
     );
-    expect(unsignedValueIds(['Reduces DEF.\\nIncreases ATK by [Buff_V_a]'])).toEqual(new Set());
+    expect(unsignedValueIds(['Reduces DEF.\\nIncreases ATK by [Buff_V_a]'])).toEqual(
+      new Set(['a']),
+    );
   });
 
   it('[Buff_C] / [Buff_T] ne comptent pas ; un id cité sans « by » ailleurs garde son signe', () => {

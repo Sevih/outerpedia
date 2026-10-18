@@ -7,6 +7,15 @@
 
 ## 2026-10-18
 
+- **`[Buff_V]` derrière « by » toujours en valeur absolue (décision de
+  Sevih du 18/10, suite de C22).** L'exception « increase(s) / raise(s) … by
+  » de `unsignedValueIds` (`datagen/lib/placeholders.ts`) tombe : seul
+  « by » décide. Seul texte touché, 160039 (`roguelight_060`) : « Increases
+  the cooldown of Darkness Domination by 1 turn(s) » au lieu de « by -1 » ;
+  `datagen:build`, promote à blanc (`monster-skills.json` ~1, et
+  `characters.json` ~7 = les 7 persos à immunités de B51, laissés à
+  l'intégration depuis quick), puis `--apply --only monster-skills.json`.
+  Tests de la règle réécrits ; `Tests 4180 passed (4180)`.
 - **Relecture C25 (Opus) — stat de combat des boss (passif de fiche), RES
   de la cible, `IsIgnoreResist`, PV d'overgrade et CP en float32 ;
   validé.** Périmètre conforme (`b11ecbaf`) : sous `data/`, seul

@@ -195,11 +195,7 @@ describe('[Buff_V] : signe et « % » du client (décision du 17/10)', () => {
       '-50 boss Resilience',
     );
   });
-  it('« increases … by » + valeur négative → signe gardé', () => {
-    expect(
-      resolveSkillPlaceholders('Increases the cooldown by [Buff_V_cool_up] turn', idx, 1),
-    ).toBe('Increases the cooldown by -1 turn');
-  });
+
   it('« % » par IsPercentStat (pas « 80 » pour 8 % de CHC) ; OAT_RATE toujours en magnitude', () => {
     expect(skillBuffVars(idx, 'crit', 1).v).toBe('8%');
     expect(skillBuffVars(idx, 'res_down', 1).v).toBe('-50');

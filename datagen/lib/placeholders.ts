@@ -122,9 +122,9 @@ export function skillPlaceholderIds(texts: Iterable<string | undefined>): Set<st
  * 17/10/2026). Le client garde le signe hors `OAT_RATE` — c'est lui qui dit
  * « -50 boss Resilience » — mais il écrit aussi « decreases AP by -20 » : quand
  * le texte ANGLAIS met « by » juste devant le placeholder, le verbe porte déjà
- * le sens et la valeur passe en absolu. Exception : si le verbe de la phrase
- * est « increase(s) / raise(s) », retirer le signe d'une valeur négative en
- * inverserait le sens (« Increases the cooldown … by -1 ») : le signe reste.
+ * le sens et la valeur passe en absolu, quel que soit le verbe : « Increases the
+ * cooldown … by -1 » du jeu s'affiche « by 1 » (décision de Sevih du
+ * 18/10/2026, après relecture de C22 : 160039, `roguelight_060`).
  * Un id cité plusieurs fois ne perd son signe que si TOUTES ses occurrences le
  * demandent. La décision vaut pour les six langues (les `vars` sont communes).
  */
@@ -136,12 +136,8 @@ export function unsignedValueIds(enTexts: Iterable<string | undefined>): Set<str
     for (const m of t.matchAll(SKILL_PLACEHOLDER)) {
       if (m[1].toLowerCase() !== 'v') continue;
       const before = t.slice(0, m.index).replace(/<\/?color[^>]*>/gi, '');
-      const clause = before.split(/\\n|\n|[.;:!?]/).pop() ?? '';
-      const verbs = [...clause.matchAll(/\b(increase|raise|reduce|decrease|lower)[sd]?\b/gi)];
-      const verb = verbs[verbs.length - 1]?.[1].toLowerCase();
       const byContext = /\bby\s*$/i.test(before);
-      const keepsSign = !byContext || verb === 'increase' || verb === 'raise';
-      (keepsSign ? signed : unsigned).add(m[2]);
+      (byContext ? unsigned : signed).add(m[2]);
     }
   }
   for (const id of signed) unsigned.delete(id);
