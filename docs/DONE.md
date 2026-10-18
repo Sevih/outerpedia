@@ -7,6 +7,22 @@
 
 ## 2026-10-18
 
+- **Relecture C25 (Opus) — stat de combat des boss (passif de fiche), RES
+  de la cible, `IsIgnoreResist`, PV d'overgrade et CP en float32 ;
+  validé.** Périmètre conforme (`b11ecbaf`) : sous `data/`, seul
+  `monsters.json`, qui ne gagne que `statPremium` sur 153 monstres (rejoué
+  avant / après : aucun autre champ ne bouge) ; contrat solver intact,
+  comme C24 le prévoyait (`bestSkill` inchangé), donc rien à synchroniser
+  dans gear-solver. Les PV remplacés (`bossHp`, overgrade) restent hors du
+  taux de buff, tranché par le lot sur le client (`SetTempMaxValue`).
+  Contrôles : typecheck, lint et `format:check` verts,
+  `NODE_ENV=development pnpm test` `Tests 4181 passed (4181)` (mesures en
+  jeu de `fixtures.test.ts` comprises, aucune fixture touchée),
+  `scripts/quick` 1148, `damage:check` 42 lignes exactes. **Reste à
+  Sevih** : une page de boss à passif de fiche (Monad Gate route 3, DEF
+  ×11) montre la stat de combat, la fiche en infobulle ; au calculateur, le
+  champ RES de la cible manuelle et la probabilité de pose contre un boss
+  résistant. **Suite** : plus aucun lot ouvert de la série du 15/10.
 - **C25 — Calculateur (2/2) : stat de combat des boss (passif de fiche),
   RES de la cible, `IsIgnoreResist`, PV d'overgrade et CP en float32.**
   Constats H3, M2 et deux « ±1 » cosmétiques de la revue logique du site,
