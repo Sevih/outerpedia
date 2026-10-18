@@ -4,6 +4,7 @@ import { buildUrl } from '@/lib/site';
 import { getChangelog } from '@/lib/data/changelog';
 import { changelogHref } from '@/components/changelog/presentation';
 import { esc, rfc822 } from '@/lib/rss';
+import { bulletSegments } from '@/lib/changelog-bullets';
 
 /**
  * Flux RSS du JOURNAL DU SITE (page `/changelog`). Route à la RACINE, sous
@@ -20,9 +21,15 @@ export const dynamic = 'force-static';
 
 const LIMIT = 30;
 
-/** Puces → une description plate (markdown gras `**x**` aplati). */
+/** Une puce à plat : le texte de ses segments (`bulletSegments`, la règle de la carte du site). */
+const flat = (line: string) =>
+  bulletSegments(line)
+    .map((s) => s.text)
+    .join('');
+
+/** Puces → une description plate (le gras `**x**` aplati), jointes par « — ». */
 function describe(lines: string[]): string {
-  return lines.map((l) => l.replace(/\*\*(.+?)\*\*/g, '$1')).join(' — ');
+  return lines.map(flat).join(' — ');
 }
 
 export async function GET() {

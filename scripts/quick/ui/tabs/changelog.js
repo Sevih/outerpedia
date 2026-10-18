@@ -5,13 +5,15 @@ import { $, esc, getJson, heroRoster, log, post, sections, state, stateLoaded } 
 import { heroTile } from '../hero-tile.mjs';
 
 // `/api/changelog/state` : le fichier curé dans son ordre, le jour UTC, le
-// roster (id, nom anglais, slug), les gabarits et leurs champs préremplis, les
+// roster (id, nom anglais, slug), les guides du gabarit « Mise à jour » (nom,
+// mode, catégorie, slug, caché), les gabarits et leurs champs préremplis, les
 // libellés des types et des sortes de lien, les langues (`file` : l'ordre du
 // fichier ; `shown` : celui de l'écran).
 let data = {
   entries: [],
   today: '',
   roster: [],
+  guides: [],
   templates: [],
   types: [],
   linkKinds: [],
@@ -482,6 +484,50 @@ function suggest(input, on = true) {
 }
 
 /**
+ * Les guides du gabarit « Mise à jour » dont un mot du nom (ou du slug)
+ * commence par la saisie, ceux dont le nom commence par elle d'abord.
+ */
+function guideHits(q) {
+  const starts = (g) => Number(!g.name.toLowerCase().startsWith(q));
+  const words = (g) => [...g.name.toLowerCase().split(/[\s'’-]+/), ...g.slug.split('-')];
+  return q
+    ? data.guides
+        .filter((g) => words(g).some((w) => w.startsWith(q)) || g.name.toLowerCase().startsWith(q))
+        .sort((a, b) => starts(a) - starts(b))
+        .slice(0, MAX_HITS)
+    : [];
+}
+
+/** La liste de suggestions sous le champ Guide du gabarit « Mise à jour ». */
+function suggestGuides(input, on = true) {
+  const box = input.parentElement.querySelector('.results');
+  const hits = on ? guideHits(input.value.trim().toLowerCase()) : [];
+  box.innerHTML = hits
+    .map(
+      (g) =>
+        `<div data-g="${esc(data.guides.indexOf(g))}"><span>${esc(g.name)}</span><span class="lbl">${esc(g.mode)}</span>${g.hidden ? '<span class="badge off">caché</span>' : ''}<span class="lbl mono">${esc(g.slug)}</span></div>`,
+    )
+    .join('');
+  box.hidden = !hits.length;
+}
+
+/** Un guide choisi : il pose nom, mode et slug ; le mois garde sa valeur. */
+function pickGuide(g) {
+  const set = (key, value) => {
+    const el = $('j-form').querySelector(`[data-v="${key}"]`);
+    if (el) el.value = value;
+  };
+  set('guide', g.name);
+  set('mode', g.mode);
+  set('slug', g.slug);
+  // Le focus revient au champ : Entrée pose alors l'entrée.
+  const input = $('j-form').querySelector('[data-guide]');
+  if (!input) return;
+  suggestGuides(input, false);
+  input.focus();
+}
+
+/**
  * Une saisie est entrée dans le modèle : la ligne, ses badges, le compte et
  * l'aperçu suivent. La fiche n'est PAS redessinée — le champ garde le curseur.
  */
@@ -634,7 +680,9 @@ async function translate(r) {
 /**
  * Le formulaire du gabarit choisi, sous les boutons : la recherche du roster
  * pour Perso (le choix pose l'entrée), sinon un champ par champ du gabarit,
- * préremplis par le serveur, et « Poser l'entrée ».
+ * préremplis par le serveur, et « Poser l'entrée ». Un champ `guide` (« Mise à
+ * jour ») propose sous lui les guides servis : un choix pose nom, mode et slug,
+ * une saisie libre reste possible.
  */
 function renderForm() {
   for (const b of $('j-templates').children)
@@ -652,7 +700,9 @@ function renderForm() {
         .map((f) =>
           f.kind === 'choice'
             ? `<div class="field"><label for="j-new-${esc(f.key)}">${esc(f.label)}</label><select id="j-new-${esc(f.key)}" data-v="${esc(f.key)}">${options(f.options, f.value)}</select></div>`
-            : `<div class="field"><label for="j-new-${esc(f.key)}">${esc(f.label)}</label><input class="${f.kind === 'month' ? 'w-text' : 'w-search'}" id="j-new-${esc(f.key)}" data-v="${esc(f.key)}" value="${esc(f.value)}" placeholder="${esc(f.placeholder)}" autocomplete="off" /></div>`,
+            : f.kind === 'guide'
+              ? `<div class="field picker"><label for="j-new-${esc(f.key)}">${esc(f.label)}</label><input class="w-search" id="j-new-${esc(f.key)}" data-v="${esc(f.key)}" data-guide value="${esc(f.value)}" placeholder="${esc(f.placeholder)}" autocomplete="off" /><div class="results" hidden></div></div>`
+              : `<div class="field"><label for="j-new-${esc(f.key)}">${esc(f.label)}</label><input class="${f.kind === 'month' ? 'w-text' : 'w-search'}" id="j-new-${esc(f.key)}" data-v="${esc(f.key)}" value="${esc(f.value)}" placeholder="${esc(f.placeholder)}" autocomplete="off" /></div>`,
         )
         .join(
           '',
@@ -719,13 +769,21 @@ const poseForm = () =>
 
 $('j-form').oninput = (e) => {
   if (e.target.hasAttribute('data-pick')) suggest(e.target);
+  if (e.target.hasAttribute('data-guide')) suggestGuides(e.target);
 };
 $('j-form').onkeydown = (e) => {
   if (e.key !== 'Enter' || e.isComposing || !form) return;
-  // Entrée : la première suggestion du roster, ou l'entrée posée.
+  // Entrée : la première suggestion du roster, ou l'entrée posée. Dans le
+  // champ Guide, la première suggestion tant qu'il y en a, puis l'entrée posée.
+  const guide = e.target.hasAttribute('data-guide')
+    ? $('j-form').querySelector('.results:not([hidden]) [data-g]')
+    : null;
   if (e.target.hasAttribute('data-pick')) {
     e.preventDefault();
     $('j-form').querySelector('.results [data-id]')?.click();
+  } else if (guide) {
+    e.preventDefault();
+    guide.click();
   } else if (e.target.dataset?.v && e.target.tagName === 'INPUT') {
     e.preventDefault();
     poseForm();
@@ -734,7 +792,9 @@ $('j-form').onkeydown = (e) => {
 $('j-form').onclick = (e) => {
   if (!form) return;
   const hit = e.target.closest('.results [data-id]');
+  const guide = e.target.closest('.results [data-g]');
   if (hit) pose(form.id, { character: hit.dataset.id });
+  else if (guide) pickGuide(data.guides[Number(guide.dataset.g)]);
   else if (e.target.closest('[data-act="pose"]')) poseForm();
 };
 

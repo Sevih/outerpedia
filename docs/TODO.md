@@ -363,10 +363,8 @@ les preuves et les décisions vivent dans le tri consolidé de sevih-tool
       site. Hors périmètre vu en portant : le gabarit « Mise à jour » du
       Journal ne connaît que Joint Challenge, Guild Raid et World Boss (pas
       de mode pour un Special Request re-versionné — ils sont plats, c'est
-      normal) ; `tagSourceSheet` (l'inbox des tags morts) ne situe pas un
-      tag mort DANS UN GUIDE alors que quick l'édite désormais (depuis C14
-      l'item n'a alors pas de geste, son détail nomme la provenance) : un
-      lot A pour l'envoyer sur `#guides/<cat>/<slug>`.
+      normal) ; `tagSourceSheet` situe un tag mort dans un guide : FAIT
+      (B60).
 - [ ] **« Monstres » — contrôles à l'écran (lot C12)** : le banc ne clique
       pas, et aucun enregistrement réel n'a été joué. Relancer quick d'abord
       (Ctrl-C puis `pnpm quick` : trois routes nouvelles — sans ça l'onglet
@@ -623,14 +621,7 @@ les preuves et les décisions vivent dans le tri consolidé de sevih-tool
       « Assets » du tableau de bord renvoie toujours à
       `/admin/tools/gamedata`, dont le lien de menu est retiré — le rapport
       d'assets n'est pas porté, et cette page ne le montre pas non plus ;
-      (d) la déduction par le NOM pose aussi des liens FAUX, relevés par A32 :
-      les 21 colonnes `*BuffID` visent `BuffTemplet` mais portent un nom de
-      buff (0 % retrouvés), `RewardVoiceID` de `TrustRewardTemplet` →
-      `VoiceTemplet` (0/5577), `ArtifactID` de `MonadGateArtifactGroupTemplet`
-      → `ArtifactTemplet` (0/164), `ClearMissionID` de `DungeonTemplet` →
-      `MissionTemplet` (2/33), et une cellule `0` reste un lien vers `ID = 0`
-      — lot A : une liste d'exclusions dans `gamedata-store.ts` (ou un alias
-      par `Table.Colonne`), et pas de lien sur `0`.
+      (d) les liens FAUX de la déduction par le nom : FAIT (B60).
 - [ ] **« Journal du site » — contrôles à l'écran (lot B37)** : le banc ne
       clique pas, et rien n'a été enregistré. (1) Un gabarit Perso sur un
       perso réel : « ＋ Perso », deux lettres, Entrée — attendu : l'entrée en
@@ -650,11 +641,10 @@ les preuves et les décisions vivent dans le tri consolidé de sevih-tool
       refusé (« champ de gabarit non rempli — {slug} »), rien d'écrit. (5)
       Le site, une fois poussé : `/changelog` et la home rendent le gras
       des puces (15 entrées, dont « Universal Tower » en home) au lieu des
-      astérisques. À juger : (a) le gabarit Guide ne connaît que la
-      Singularité dimensionnelle, et « Mise à jour » demande le slug à la
-      main — un lot A servirait la liste des guides (`listGuides()`) en
-      suggestions, nom, mode et chemin déduits ; (c) le flux RSS garde sa propre copie du motif du
-      gras (`src/app/feed/changelog/route.ts`) au lieu de `bulletSegments`.
+      astérisques. À juger : (a) les guides proposés sous le champ Guide de
+      « Mise à jour » et (c) le flux RSS par `bulletSegments` : FAITS (B60) ;
+      le gabarit Guide ne connaît toujours que la Singularité
+      dimensionnelle.
 - [ ] **« Tableau de bord » — contrôles à l'écran (lot B36)** : le banc ne
       clique pas. (1) La version du client : « site 1.11.404 · client
       1.11.404 » en vert aujourd'hui ; après une mise à jour Steam du jeu,
@@ -698,23 +688,12 @@ les preuves et les décisions vivent dans le tri consolidé de sevih-tool
       commit nomme aussi une bannière RETIRÉE ; (3) une fenêtre du jeu sans
       date lisible (les SEASONAL_SELECTION n'ont pas de fin en table, les
       DEMIURGE aucune date) n'est ni proposée ni comparée.
-- [ ] **Gear reco, « Traduire » après un enregistrement** (même limite que
-      l'admin, corrigée le 07/10 par « Retranslate all ») : `noteAt` est l'EN
-      au chargement, donc une note corrigée en anglais puis ENREGISTRÉE ne
-      repart plus au traducteur (seules les langues manquantes). Ajouter le
-      geste forcé (tout retraduire) dans `tabs/gear.js` (lot A, fichier libre).
 - [ ] **« Pousser », restes de B33** (premier clic réel fait par Sevih,
-      confirmé le 18/10) : le compte de l'en-tête ne se relit
-      qu'au chargement, après un enregistrement et, depuis B36, à chaque
-      lecture du tableau de bord (y revenir, ou « Actualiser ») — après un
-      `git pull --rebase` ou un commit au terminal, passer par l'accueil
-      (relire `/api/git` au retour de focus serait un lot A). À jouer par
+      confirmé le 18/10) : la relecture de `/api/git` au retour sur la page
+      (focus, onglet du navigateur redevenu visible) est FAITE (B60). À jouer par
       Sevih, depuis A33 : un fichier indexé au terminal (`git add`) puis un
       enregistrement dans quick — `git show --stat` ne le cite pas,
       `git status` le montre toujours indexé.
-- [ ] **4-comics, bouton grisé après une coupure (lot B30)** : premier envoi
-      réel multi-langues fait par Sevih (confirmé le 18/10). Reste : si une
-      connexion coupe, le bouton reste grisé (`post()` de `lib.js`), lot A.
 - [ ] **Refonte de l'UI — contrôles à l'écran** (la série est close le 07/10,
       le banc ne joue pas ces états) : survol des ✕ et des boutons fantômes,
       anneau de focus, journal en haut pendant un vrai enregistrement (lot

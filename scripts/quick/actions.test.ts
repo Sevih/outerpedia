@@ -161,7 +161,7 @@ import type {
 } from '@/lib/admin/general-guide-store';
 import type { ShopPrioritiesEditData } from '@/lib/admin/shop-priorities-store';
 import type { InlineRefs } from '@/lib/admin/inline-refs';
-import type { Guide } from '@/lib/data/guides';
+import { listGuides, type Guide } from '@/lib/data/guides';
 import {
   monsterKitCards,
   pickMonsterKit,
@@ -3983,31 +3983,63 @@ describe('dashboardState — l’accueil de quick, toutes lectures injectées', 
       disk({ inbox: () => [item({ tab: 'extractor/character/2000012' }), { ...tags, tab: null }] }),
     );
     expect(others.inbox?.map((i) => i.sheet)).toEqual([undefined, undefined]);
+    // Les tags morts d'UN guide : son adresse dans Guides, « Ouvrir » — pas une fiche.
+    const guide = await dashboardState(
+      disk({ inbox: () => [{ ...tags, tab: 'guides/joint-challenge/annihilator' }] }),
+    );
+    expect(guide.inbox?.map((i) => [i.tab, i.sheet])).toEqual([
+      ['guides/joint-challenge/annihilator', undefined],
+    ]);
   });
 
   it('`tagSourceSheet` lit les provenances RÉELLES de `collectTagOccurrences`', () => {
     // Le format de `source` est celui de `tag-control.ts` : s'il change, c'est
     // ici que ça se voit. Chaque texte d'un perso mène à un perso du roster.
     const ids = new Set(getCharacterListItems().map((c) => c.id));
+    const guides = new Set(listGuides().map((g) => `guides/${g.category}/${g.slug}`));
     const seen = new Set<string>();
     for (const { source } of collectTagOccurrences()) {
       const where = tagSourceSheet(source);
-      const kind = /^(curated pros-cons|synergies|gear-reco\.json)/.exec(source)?.[1];
+      const kind = /^(curated pros-cons|synergies|gear-reco\.json|guides)\b/.exec(source)?.[1];
       if (!kind) {
         expect(where, source).toBeNull();
         continue;
       }
-      expect(where && ids.has(where.id), source).toBe(true);
-      expect(where?.sub, source).toBe(
+      seen.add(kind);
+      if (kind === 'guides') {
+        // Un texte de guide mène à un guide servi, l'adresse que Guides ouvre.
+        expect(where && guides.has(where.place), source).toBe(true);
+        expect(where?.tab, source).toBe(where?.place);
+        continue;
+      }
+      const [, id, sub] = where?.tab.split('/') ?? [];
+      expect(where?.place, source).toBe(`character/${id}`);
+      expect(ids.has(id), source).toBe(true);
+      expect(sub, source).toBe(
         { 'curated pros-cons': 'pros-cons', synergies: 'synergies', 'gear-reco.json': 'gear' }[
           kind
         ],
       );
-      seen.add(kind);
     }
-    expect([...seen].sort()).toEqual(['curated pros-cons', 'gear-reco.json', 'synergies']);
+    expect([...seen].sort()).toEqual([
+      'curated pros-cons',
+      'gear-reco.json',
+      'guides',
+      'synergies',
+    ]);
     // Un perso hors du roster n'a pas de nom dans sa provenance : pas de fiche.
     expect(tagSourceSheet('curated pros-cons · 2999999.pros[0].en')).toBeNull();
+    // Un guide versionné : le guide, pas sa version.
+    expect(
+      tagSourceSheet(
+        'guides · joint-challenge/annihilator · versions/2026-10/content.json.tips[0].en',
+      ),
+    ).toEqual({
+      place: 'guides/joint-challenge/annihilator',
+      tab: 'guides/joint-challenge/annihilator',
+    });
+    // Un preset : quick ne l'édite pas.
+    expect(tagSourceSheet('gear-presets.json.substats.dps')).toBeNull();
   });
 
   it('`DEV_SITE_BASE_DEFAULT` : le site de dev de Caddy', () => {
@@ -4962,10 +4994,11 @@ describe('changelogState — le fichier, le roster, les gabarits et les libellé
     ]);
     const update = templates.find((t) => t.id === 'update');
     expect(update?.fields).toEqual([
+      // Saisi, ou pris parmi `guides` : la page propose sous lui.
       {
         key: 'guide',
         label: 'Guide',
-        kind: 'text',
+        kind: 'guide',
         value: '',
         placeholder: 'Annihilator',
         options: [],
@@ -5005,6 +5038,47 @@ describe('changelogState — le fichier, le roster, les gabarits et les libellé
         .templates.find((t) => t.id === 'update')
         ?.fields.find((f) => f.key === 'month')?.value,
     ).toBe('January 2027');
+  });
+
+  it('les guides du gabarit « Mise à jour » : ceux des trois modes, nom sans le suffixe, cachés compris', () => {
+    const { guides } = changelogState(disk);
+    const served = listGuides().filter((g) =>
+      ['joint-challenge', 'guild-raid', 'world-boss'].includes(g.category),
+    );
+    expect(guides).toHaveLength(served.length);
+    expect(guides.length).toBeGreaterThanOrEqual(16); // 5 + 5 + 6 au 18/10
+    // Dans l'ordre du champ Mode, puis par nom.
+    expect([...new Set(guides.map((g) => g.mode))]).toEqual([
+      'Joint Challenge',
+      'Guild Raid',
+      'World Boss',
+    ]);
+    for (const mode of ['Joint Challenge', 'Guild Raid', 'World Boss']) {
+      const names = guides.filter((g) => g.mode === mode).map((g) => g.name);
+      expect(names).toEqual([...names].sort((a, b) => a.localeCompare(b)));
+    }
+    expect(guides.find((g) => g.slug === 'frost-legion')).toEqual({
+      name: 'Frost Legion',
+      mode: 'Guild Raid',
+      category: 'guild-raid',
+      slug: 'frost-legion',
+      hidden: false,
+    });
+    expect(guides.find((g) => g.slug === 'annihilator')?.name).toBe('Annihilator');
+    expect(guides.find((g) => g.slug === 'dahlia')?.name).toBe('Dahlia');
+    // Aucun nom ne garde le suffixe d'un mode ; un guide caché est servi, marqué.
+    expect(guides.filter((g) => /(Challenge|Raid|Boss) Guide$/.test(g.name))).toEqual([]);
+    expect(
+      guides
+        .filter((g) => g.hidden)
+        .map((g) => g.slug)
+        .sort(),
+    ).toEqual(
+      served
+        .filter((g) => g.hidden)
+        .map((g) => g.slug)
+        .sort(),
+    );
   });
 
   it('les libellés des types et des sortes de lien, et les langues dans leurs deux ordres', () => {
@@ -5812,7 +5886,7 @@ describe('queryGameTable, gameTableSchema — le store de l’admin, factice', (
       links: { DissolveRewardID: 'RewardTemplet' },
     });
     expect(d.describeTable).toHaveBeenCalledWith('ItemTemplet');
-    expect(d.linkTargets).toHaveBeenCalledWith(schema.columns);
+    expect(d.linkTargets).toHaveBeenCalledWith('ItemTemplet', schema.columns);
     expect(d.queryTable).not.toHaveBeenCalled();
   });
 });

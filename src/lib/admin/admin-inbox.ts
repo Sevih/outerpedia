@@ -243,8 +243,9 @@ export interface InboxItem {
   detail: string;
   /**
    * Où ça se traite dans quick : une section (`gamedata`) ou un chemin qu'elle
-   * sait ouvrir (`extractor/<cible>`, `character/<id>/<sous-onglet>`) ;
-   * `null` quand quick ne sait pas situer le travail — le `detail` dit alors où.
+   * sait ouvrir (`extractor/<cible>`, `character/<id>/<sous-onglet>`,
+   * `guides/<cat>/<slug>`) ; `null` quand quick ne sait pas situer le travail
+   * — le `detail` dit alors où.
    */
   tab: string | null;
   tone: InboxTone;
@@ -271,29 +272,40 @@ export function readAssetsReport(): {
 
 /**
  * Où un tag mort se corrige dans quick, d'après sa provenance (le `source` de
- * `collectTagOccurrences`, `tag-control.ts`) : le sous-onglet de la « Fiche
- * perso » qui porte le texte — pros / cons, synergies, note d'un build. `null`
- * pour ce que quick n'édite pas : un guide, un preset, un perso hors du roster
- * (sa provenance porte son id nu, sans nom).
+ * `collectTagOccurrences`, `tag-control.ts`) : `place` est le perso
+ * (`character/<id>`) ou le guide (`guides/<cat>/<slug>`) qui porte le texte,
+ * `tab` l'adresse que quick ouvre — pour un perso, le sous-onglet de la
+ * « Fiche perso » (pros / cons, synergies, note d'un build) ; pour un guide,
+ * le guide lui-même, que la section Guides édite. `null` pour ce que quick
+ * n'édite pas : un preset (`gear-presets.json`), un perso hors du roster (sa
+ * provenance porte son id nu, sans nom).
  */
-export function tagSourceSheet(source: string): { id: string; sub: string } | null {
+export function tagSourceSheet(source: string): { place: string; tab: string } | null {
+  const perso = (id: string, sub: string) => ({
+    place: `character/${id}`,
+    tab: `character/${id}/${sub}`,
+  });
   const text = /^(curated pros-cons|synergies) · .* \((\d+)\)(?=[.[]|$)/.exec(source);
-  if (text) return { id: text[2], sub: text[1] === 'synergies' ? 'synergies' : 'pros-cons' };
+  if (text) return perso(text[2], text[1] === 'synergies' ? 'synergies' : 'pros-cons');
   const build = /^gear-reco\.json\.(\d+)\[/.exec(source);
-  return build ? { id: build[1], sub: 'gear' } : null;
+  if (build) return perso(build[1], 'gear');
+  const guide = /^guides · ([^/\s]+\/\S+) · /.exec(source);
+  return guide ? { place: `guides/${guide[1]}`, tab: `guides/${guide[1]}` } : null;
 }
 
 /**
- * La fiche où renvoyer l'item « tags » : `character/<id>/<sous-onglet>` quand
- * TOUS les tags morts viennent d'un même perso (le sous-onglet du premier),
- * `null` sinon — un guide, un preset ou plusieurs persos : aucune section de
- * quick ne les réunit, c'est le `detail` qui nomme les provenances.
+ * Où renvoyer l'item « tags » : quand TOUS les tags morts sont au même
+ * endroit, l'adresse du premier — `character/<id>/<sous-onglet>` pour un perso
+ * (le sous-onglet du premier texte), `guides/<cat>/<slug>` pour un guide ;
+ * `null` sinon — un preset, plusieurs persos ou guides, un perso et un guide :
+ * aucune section de quick ne les réunit, c'est le `detail` qui nomme les
+ * provenances.
  */
 function deadTagSheet(sources: readonly string[]): string | null {
   const where = sources.map(tagSourceSheet);
   const [first] = where;
-  if (!first || where.some((w) => w?.id !== first.id)) return null;
-  return `character/${first.id}/${first.sub}`;
+  if (!first || where.some((w) => w?.place !== first.place)) return null;
+  return first.tab;
 }
 
 /** Combien de provenances le `detail` de l'item « tags » nomme, au plus. */
@@ -317,8 +329,8 @@ function namedTagSources(sources: readonly string[]): string {
  *
  * Chaque item est ADRESSÉ À QUICK (`tab`), plus à l'admin (lot C14) : une
  * entité à sa cible d'Extraction, les assets aux Tables du jeu, les tags morts
- * à la fiche du perso quand ils viennent tous de lui — sinon nulle part, et
- * leur `detail` nomme les provenances.
+ * à la fiche du perso, ou au guide, quand ils viennent tous de lui — sinon
+ * nulle part, et leur `detail` nomme les provenances.
  */
 export function buildInbox(): InboxItem[] {
   const items: InboxItem[] = [];

@@ -100,6 +100,8 @@ import {
   CHARACTER_SCOPE,
   fillTemplate,
   templateDefaults,
+  UPDATE_MODES,
+  updateGuideName,
   unfilledFields,
   type FilledTemplate,
   type TemplateValue,
@@ -1121,11 +1123,36 @@ export const CHANGELOG_DISK: ChangelogDisk = {
 };
 
 /**
+ * Les guides que le gabarit « Mise à jour » propose sous son champ Guide : ceux
+ * des catégories de son champ Mode (`UPDATE_MODES`), cachés compris et
+ * marqués, dans l'ordre des modes puis par nom. Le nom est le titre anglais du
+ * `meta.json` sans « <Mode> Guide » (`updateGuideName`) ; un choix pose nom,
+ * mode et slug.
+ */
+function updateGuides() {
+  const rank = new Map<string, number>(UPDATE_MODES.map((m, i) => [m.category, i]));
+  return listGuides()
+    .filter((g) => rank.has(g.category))
+    .map((g) => ({
+      name: updateGuideName(g.title[DEFAULT_LANG] ?? ''),
+      mode: UPDATE_MODES[rank.get(g.category) ?? 0].mode,
+      category: g.category,
+      slug: g.slug,
+      hidden: Boolean(g.hidden),
+    }))
+    .sort(
+      (a, b) =>
+        (rank.get(a.category) ?? 0) - (rank.get(b.category) ?? 0) || a.name.localeCompare(b.name),
+    );
+}
+
+/**
  * L'onglet « Journal du site » : `changelog.json` tel que le disque le porte,
  * dans l'ordre du fichier, le jour UTC, le roster (id, nom complet anglais,
- * slug — la recherche du gabarit Perso et du lien d'une entrée), les gabarits
- * avec leurs champs préremplis au jour, et les libellés des types et des sortes
- * de lien : la page n'en recopie aucun.
+ * slug — la recherche du gabarit Perso et du lien d'une entrée), les guides du
+ * gabarit « Mise à jour » (`updateGuides`), les gabarits avec leurs champs
+ * préremplis au jour, et les libellés des types et des sortes de lien : la
+ * page n'en recopie aucun.
  *
  * `langs.file` est l'ordre des langues dans le fichier (celui de `LANGS`),
  * `langs.shown` celui de l'écran, comme Gear reco : l'anglais, puis le français
@@ -1139,6 +1166,7 @@ export function changelogState(disk: ChangelogDisk = CHANGELOG_DISK) {
     roster: getCharacterListItems()
       .map((c) => ({ id: c.id, name: characterDisplayName(c), slug: slugForId(c.id) ?? '' }))
       .sort((a, b) => a.name.localeCompare(b.name)),
+    guides: updateGuides(),
     templates: CHANGELOG_TEMPLATES.map((t) => {
       const defaults = templateDefaults(t, today);
       return {
@@ -1560,13 +1588,15 @@ type InboxDisk = Pick<DashboardDisk, 'inbox'>;
  * l'adresse qu'elle lui donne dans quick (`tab`, `null` quand rien ne le
  * situe — son `detail` dit alors où). L'item des tags morts d'un seul perso
  * porte en plus `sheet`, la même adresse : c'est une FICHE, que la page ouvre
- * dans un nouvel onglet. UNE lecture pour le tableau de bord et pour les
- * pastilles du menu : les deux comptent la même chose.
+ * dans un nouvel onglet. Ceux d'un seul guide (`guides/<cat>/<slug>`) n'en
+ * sont pas : « Ouvrir » y mène, comme pour les autres items. UNE lecture pour
+ * le tableau de bord et pour les pastilles du menu : les deux comptent la
+ * même chose.
  */
 async function quickInbox(disk: InboxDisk) {
   return (await disk.inbox()).map((item) => ({
     ...item,
-    ...(item.key === 'tags' && item.tab ? { sheet: item.tab } : {}),
+    ...(item.key === 'tags' && item.tab?.startsWith('character/') ? { sheet: item.tab } : {}),
   }));
 }
 
@@ -1653,7 +1683,8 @@ export async function badgesState(disk: BadgesDisk = DASHBOARD_DISK) {
  *   - `inbox` : l'inbox (`buildInbox`, `admin-inbox.ts`), TELLE QUELLE, chaque
  *     item avec son adresse dans quick (`tab`, `null` quand rien ne le
  *     situe) ; l'item des tags morts porte en plus `sheet`, la fiche du perso,
- *     quand ils viennent tous de lui (`deadTagSheet`) ;
+ *     quand ils viennent tous de lui (`deadTagSheet` ; ceux d'un seul guide
+ *     n'ont que `tab`) ;
  *   - `git` : `gitState` (le compte de « Pousser »), le dernier commit et le
  *     nombre de fichiers modifiés ou non suivis (`dirty`) ;
  *   - `game` : la version du site contre celle du client installé (`client` :
@@ -5566,7 +5597,7 @@ export interface GameTableDeps {
   listTables: () => TableInfo[];
   queryTable: (name: string, query: TableQuery) => TablePage;
   describeTable: (name: string) => TableSchema;
-  linkTargets: (columns: string[]) => Record<string, string>;
+  linkTargets: (table: string, columns: string[]) => Record<string, string>;
 }
 
 /** Celles de la route : `gamedata-store.ts`. */
@@ -5624,7 +5655,7 @@ export function gameTableSchema(
   const refusal = refuseTable(name, deps);
   if (refusal) return refusal;
   const schema = deps.describeTable(name);
-  return { ...schema, links: deps.linkTargets(schema.columns) };
+  return { ...schema, links: deps.linkTargets(name, schema.columns) };
 }
 
 // ----------------------------------------------------------------- guides ----

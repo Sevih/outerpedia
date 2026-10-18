@@ -214,14 +214,16 @@ function cell(row, column) {
   const target = value ? own(page.links, column) : undefined;
   const text = own(page.texts, value);
   // Les colonnes `*IDs` portent une LISTE CSV : un lien par id, sinon on
-  // filtrerait la cible sur « 1,2,3 ».
+  // filtrerait la cible sur « 1,2,3 ». `0` est le « rien » du jeu : du texte,
+  // pas un lien vers `ID = 0`.
   const shown = target
     ? value
         .split(',')
         .map((id) => id.trim())
-        .map(
-          (id) =>
-            `<a href="${esc(linkHash(target, id))}" data-table="${esc(target)}" data-id="${esc(id)}">${esc(id)}</a>`,
+        .map((id) =>
+          id === '0'
+            ? esc(id)
+            : `<a href="${esc(linkHash(target, id))}" data-table="${esc(target)}" data-id="${esc(id)}">${esc(id)}</a>`,
         )
         .join('<span class="t-sep">, </span>')
     : esc(value);

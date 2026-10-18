@@ -71,12 +71,15 @@ export interface TemplateOption {
  *   - `choice`    : pris dans `options`, la première d'office ;
  *   - `month`     : saisi, prérempli du mois courant (« October 2026 ») ;
  *   - `character` : un perso du roster — l'appelant en tire le nom par langue,
- *     le slug, et la présence d'un équipement exclusif.
+ *     le slug, et la présence d'un équipement exclusif ;
+ *   - `guide`     : saisi comme un `text`, ou pris parmi les guides des modes
+ *     du gabarit (`UPDATE_MODES`) que l'appelant propose — le choix pose
+ *     aussi le mode et le slug.
  */
 export interface TemplateField {
   key: string;
   label: string;
-  kind: 'text' | 'choice' | 'month' | 'character';
+  kind: 'text' | 'choice' | 'month' | 'character' | 'guide';
   options?: readonly TemplateOption[];
   placeholder?: string;
 }
@@ -93,6 +96,32 @@ export interface ChangelogTemplate {
   /** La sorte de lien, et sa valeur avec ses champs (slug du perso, chemin du guide). */
   link: { kind: ChangelogLinkKind; value: string };
   fields: readonly TemplateField[];
+}
+
+/**
+ * Les modes du gabarit « Mise à jour » : le mot que la puce et le titre
+ * anglais d'un guide portent, et le dossier de ses guides. Le champ Mode en
+ * est fait, et la liste des guides que quick propose sous le champ Guide.
+ */
+export const UPDATE_MODES = [
+  { mode: 'Joint Challenge', category: 'joint-challenge' },
+  { mode: 'Guild Raid', category: 'guild-raid' },
+  { mode: 'World Boss', category: 'world-boss' },
+] as const;
+
+/** « <Mode> Guide » en fin de titre, pour l'un des modes du gabarit. */
+const UPDATE_SUFFIX = new RegExp(
+  `\\s+(?:${UPDATE_MODES.map((m) => m.mode).join('|')})\\s+Guide$`,
+  'i',
+);
+
+/**
+ * Le nom d'un guide dans une entrée « Mise à jour » : son titre anglais sans
+ * le suffixe du mode (« Frost Legion Guild Raid Guide » → « Frost Legion ») ;
+ * un titre qui n'en porte pas reste tel quel (« Dahlia »).
+ */
+export function updateGuideName(title: string): string {
+  return title.trim().replace(UPDATE_SUFFIX, '');
 }
 
 /** Ce que dit la puce d'une fiche perso, selon que son équipement exclusif est là. */
@@ -143,16 +172,12 @@ export const CHANGELOG_TEMPLATES: readonly ChangelogTemplate[] = [
     content: ['{guide} {mode} Guide updated for {month} version.'],
     link: { kind: 'guide', value: '/guides/{category}/{slug}' },
     fields: [
-      { key: 'guide', label: 'Guide', kind: 'text', placeholder: 'Annihilator' },
+      { key: 'guide', label: 'Guide', kind: 'guide', placeholder: 'Annihilator' },
       {
         key: 'mode',
         label: 'Mode',
         kind: 'choice',
-        options: [
-          { value: 'Joint Challenge', set: { category: 'joint-challenge' } },
-          { value: 'Guild Raid', set: { category: 'guild-raid' } },
-          { value: 'World Boss', set: { category: 'world-boss' } },
-        ],
+        options: UPDATE_MODES.map((m) => ({ value: m.mode, set: { category: m.category } })),
       },
       { key: 'month', label: 'Mois', kind: 'month' },
       { key: 'slug', label: 'Slug du guide', kind: 'text', placeholder: 'annihilator' },

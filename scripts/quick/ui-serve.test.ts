@@ -548,6 +548,214 @@ describe('gitBar — le bouton « Pousser » de l’en-tête', () => {
   });
 });
 
+describe('« Pousser » relu au retour sur la page, `post()` coupé', () => {
+  afterEach(() => vi.unstubAllGlobals());
+
+  /**
+   * La VRAIE coquille et le vrai `lib.js`, démarrés par `sections.start()`, sans
+   * section. `fetch` est factice : `/api/state` pose « Pousser » à 1, `/api/git`
+   * répond ce que le test lui fait répondre (`git`), un POST passe par `posted`.
+   */
+  async function quick(
+    opts: {
+      git?: () => Promise<unknown>;
+      posted?: (path: string) => Promise<unknown>;
+    } = {},
+  ) {
+    vi.resetModules();
+    const window = openWindow({ url: 'http://localhost:4747/' });
+    const { document } = window;
+    document.body.innerHTML = (
+      /<body>([\s\S]*)<\/body>/.exec(assemblePage(shell(), readTab))?.[1] ?? ''
+    ).replace(/<script[\s\S]*?<\/script>/g, '');
+    const answer = (data: unknown, status = 200) => ({
+      ok: status < 400,
+      status,
+      json: async () => data,
+    });
+    const reads: string[] = [];
+    const fetch = vi.fn(async (path: string, init?: unknown) => {
+      if (path === '/api/state')
+        return answer({
+          imgBase: 'https://img.test',
+          git: { branch: 'main', ahead: 1, behind: 0 },
+        });
+      if (path === '/api/git') {
+        reads.push(path);
+        return opts.git ? opts.git() : answer({ branch: 'main', ahead: 1, behind: 0 });
+      }
+      if (init) return opts.posted ? opts.posted(path) : answer({ ok: true });
+      return answer({});
+    });
+    vi.stubGlobal('window', window);
+    vi.stubGlobal('document', document);
+    vi.stubGlobal('location', window.location);
+    vi.stubGlobal('history', window.history);
+    vi.stubGlobal('fetch', fetch);
+    const lib = (await import(/* @vite-ignore */ resolve(UI, 'lib.js'))) as {
+      sections: { start: () => void };
+      post: (path: string, payload: unknown) => Promise<{ ok: boolean; log?: string[] }>;
+    };
+    lib.sections.start();
+    const settle = async () => {
+      for (let i = 0; i < 6; i++) await new Promise((done) => setTimeout(done, 0));
+    };
+    await settle();
+    const el = (id: string) => document.getElementById(id) as unknown as HTMLButtonElement;
+    return {
+      window,
+      lib,
+      reads,
+      settle,
+      count: () => el('push-count').textContent,
+      button: () => el('push'),
+      log: () => el('log').textContent,
+      state: () => el('journal').dataset.state,
+      focus: () => window.dispatchEvent(new window.Event('focus')),
+      visible: () => document.dispatchEvent(new window.Event('visibilitychange')),
+      answer,
+    };
+  }
+  /** Une réponse tenue : `release` la lâche. */
+  const held = () => {
+    let release: (v: unknown) => void = () => {};
+    const promise = new Promise((done) => (release = done));
+    return { promise, release };
+  };
+
+  it('le retour sur la page (`focus`, puis `visibilitychange`) relit `/api/git` et repose le compte', async () => {
+    let ahead = 1;
+    const page = await quick({
+      git: async () => ({
+        ok: true,
+        status: 200,
+        json: async () => ({ branch: 'main', ahead, behind: 0 }),
+      }),
+    });
+    expect(page.count()).toBe('1');
+    expect(page.reads).toEqual([]);
+
+    // Un commit au terminal entre-temps : le compte monte sans passer par l'accueil.
+    ahead = 2;
+    page.focus();
+    await page.settle();
+    expect(page.reads).toHaveLength(1);
+    expect(page.count()).toBe('2');
+
+    ahead = 3;
+    page.visible();
+    await page.settle();
+    expect(page.reads).toHaveLength(2);
+    expect(page.count()).toBe('3');
+    expect(page.button().disabled).toBe(false);
+  });
+
+  it('deux retours rapprochés font UNE lecture ; une lecture refusée garde le compte', async () => {
+    const answer = held();
+    let refuse = false;
+    const page = await quick({
+      git: async () => {
+        if (refuse) throw new TypeError('Failed to fetch');
+        await answer.promise;
+        return {
+          ok: true,
+          status: 200,
+          json: async () => ({ branch: 'main', ahead: 4, behind: 0 }),
+        };
+      },
+    });
+    page.focus();
+    page.visible();
+    page.focus();
+    await page.settle();
+    expect(page.reads).toHaveLength(1);
+    answer.release(null);
+    await page.settle();
+    expect(page.count()).toBe('4');
+
+    // Quick arrêté : rien ne se dit, le dernier état reste.
+    refuse = true;
+    page.focus();
+    await page.settle();
+    expect(page.reads).toHaveLength(2);
+    expect(page.count()).toBe('4');
+    expect(page.state()).toBe('idle');
+
+    // Un quick lancé avant ce code (404) : pareil.
+    refuse = false;
+    const page2 = await quick({ git: async () => page.answer({ error: 'introuvable' }, 404) });
+    page2.focus();
+    await page2.settle();
+    expect(page2.reads).toHaveLength(1);
+    expect(page2.count()).toBe('1');
+  });
+
+  it('pendant un push, le compte suit mais « Pousser » reste éteint', async () => {
+    const page = await quick({
+      git: async () => page.answer({ branch: 'main', ahead: 5, behind: 0 }),
+    });
+    page.button().classList.add('busy');
+    page.button().disabled = true;
+    page.focus();
+    await page.settle();
+    expect(page.count()).toBe('5');
+    expect(page.button().disabled).toBe(true);
+  });
+
+  it('un `fetch` qui rejette : `post()` résout `{ ok: false }`, le journal en échec, `/api/git` relu', async () => {
+    const page = await quick({
+      posted: async () => {
+        throw new TypeError('Failed to fetch');
+      },
+      git: async () => page.answer({ branch: 'main', ahead: 2, behind: 0 }),
+    });
+    const out = await page.lib.post('/api/comics', { batches: [] });
+    expect(out.ok).toBe(false);
+    expect(out.log).toEqual([
+      'connexion coupée : Failed to fetch — l’enregistrement a pu passer, relis l’état avant de recommencer',
+    ]);
+    expect(page.state()).toBe('ko');
+    expect(page.log()).toContain('connexion coupée : Failed to fetch');
+    // Le serveur a pu committer avant la coupure : « Pousser » est relu.
+    await page.settle();
+    expect(page.reads).toEqual(['/api/git']);
+    expect(page.count()).toBe('2');
+  });
+
+  it('une réponse coupée en cours de lecture : `{ ok: false }` aussi, les étapes reçues gardées', async () => {
+    const step = new TextEncoder().encode(`${JSON.stringify({ step: 'upload des planches' })}\n`);
+    let reads = 0;
+    const page = await quick({
+      posted: async () => ({
+        ok: true,
+        status: 200,
+        body: {
+          getReader: () => ({
+            read: async () => {
+              reads += 1;
+              if (reads === 1) return { value: step };
+              throw new TypeError('network error');
+            },
+          }),
+        },
+      }),
+    });
+    // `post()` résout : un appelant sans `finally` (« Publier » des 4-comics,
+    // `c-add` des codes promo) passe à la ligne qui rallume son bouton.
+    const out = await page.lib.post('/api/comics', { batches: [] });
+    expect(out).toEqual({
+      ok: false,
+      log: [
+        'connexion coupée : network error — l’enregistrement a pu passer, relis l’état avant de recommencer',
+      ],
+    });
+    expect(page.log()).toContain('upload des planches');
+    expect(page.state()).toBe('ko');
+    await page.settle();
+    expect(page.reads).toEqual(['/api/git']);
+  });
+});
+
 describe('log — le journal en haut de la page', () => {
   afterEach(() => {
     vi.useRealTimers();
@@ -3054,6 +3262,13 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
       }
       if (url.pathname.startsWith('/api/gear-reco'))
         gearCalls.push(body ? { path, body } : { path });
+      // « Traduire » de Gear reco : sa route sert le même traducteur (`server.ts`).
+      if (url.pathname === '/api/gear-reco/translate') {
+        const out = opts.translated?.((body as { texts: string[] }).texts) ?? {
+          error: 'Pas de clé DEEPL_API_KEY ni ANTHROPIC_API_KEY dans .env.local',
+        };
+        return answer(out, 'error' in (out as object) ? 500 : 200);
+      }
       if (url.pathname === '/api/gear-reco/state') {
         const id = url.searchParams.get('id') ?? '';
         const row = ROSTER.find((c) => c.id === id);
@@ -3281,6 +3496,8 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
       gearPreviews: () =>
         gearCalls.filter((c) => c.path === '/api/gear-reco/preview').map((c) => c.body),
       gearPosted: () => gearCalls.filter((c) => c.path === '/api/gear-reco').map((c) => c.body),
+      gearTranslations: () =>
+        gearCalls.filter((c) => c.path === '/api/gear-reco/translate').map((c) => c.body),
       /** Les onglets de builds : leur nom, s'il est montré, son point. */
       builds: () =>
         all('#g-tabs [role="tab"]').map((b) => [
@@ -6366,6 +6583,64 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
     ]);
     expect(page.subs()[5][3]).toBe('');
     expect(page.posted()).toHaveLength(1);
+  });
+
+  it('Gear reco : un anglais corrigé puis ENREGISTRÉ — « Traduire » n’a rien à faire, « Tout retraduire » réécrit ses cinq langues', async () => {
+    const page = await character({
+      hash: `#character/${AER}`,
+      translated: (texts) => ({
+        results: texts.map((t) =>
+          Object.fromEntries(['fr', 'es', 'jp', 'kr', 'zh'].map((l) => [l, `${l}: ${t}`])),
+        ),
+        provider: 'deepl',
+      }),
+    });
+    // « High Crit » traduit partout sur le disque, contre l'ancien anglais.
+    page.disk.gear[AER][1].note = {
+      en: 'Crit first.',
+      fr: 'Le crit d’abord.',
+      es: 'Crítico primero.',
+      jp: 'クリ優先。',
+      kr: '치명 우선.',
+      zh: '暴击优先。',
+    };
+    await page.gear();
+    page.all('#g-tabs [role="tab"]')[1].click();
+    page.type(page.note(), 'Crit first, then speed.');
+    await page.gearSave();
+    expect(page.disk.gear[AER][1].note).toEqual({
+      en: 'Crit first, then speed.',
+      fr: 'Le crit d’abord.',
+      es: 'Crítico primero.',
+      jp: 'クリ優先。',
+      kr: '치명 우선.',
+      zh: '暴击优先。',
+    });
+    expect(page.gearCount()).toBe('aucune modification');
+    const text = (lang: string) => page.note(lang).value.replace(/^\n/, '');
+
+    // Le disque relu : son anglais fait foi, « Traduire » ne renvoie plus rien.
+    page.act('translate', page.card()).click();
+    for (let i = 0; i < 4; i++) await page.settle();
+    expect(page.gearTranslations()).toEqual([]);
+    expect(page.el('log').textContent).toContain('Rien à traduire');
+
+    // « Tout retraduire » : la note part, d'un appel, et ses cinq langues sont réécrites.
+    const again = page.act('retranslate', page.card());
+    expect(again.textContent).toBe('Tout retraduire');
+    expect(again.title).toContain('ÉCRASE les 5 langues');
+    again.click();
+    for (let i = 0; i < 4; i++) await page.settle();
+    expect(page.gearTranslations()).toEqual([{ texts: ['Crit first, then speed.'] }]);
+    expect(['fr', 'es', 'jp', 'kr', 'zh'].map(text)).toEqual(
+      ['fr', 'es', 'jp', 'kr', 'zh'].map((l) => `${l}: Crit first, then speed.`),
+    );
+    expect(text('en')).toBe('Crit first, then speed.');
+    // Rien n'est écrit avant « Enregistrer » : le build compte, le disque n'a pas bougé.
+    expect(page.gearCount()).toBe('1 changement');
+    expect(page.disk.gear[AER][1].note?.fr).toBe('Le crit d’abord.');
+    expect(page.act('translate', page.card()).disabled).toBe(false);
+    expect(page.act('retranslate', page.card()).disabled).toBe(false);
   });
 
   it('Gear reco : un refus du serveur se pose sur son build, rien n’est relu ; une erreur retient l’envoi', async () => {
@@ -9528,6 +9803,7 @@ describe('Journal du site — la page, sur le vrai markup', () => {
     entries: Entry[];
     today: string;
     roster: { id: string; name: string; slug: string }[];
+    guides: { name: string; mode: string; category: string; slug: string; hidden: boolean }[];
     templates: { id: string; label: string; type: string; fields: Field[] }[];
     types: { value: string; label: string }[];
     linkKinds: { value: string; label: string }[];
@@ -9573,6 +9849,29 @@ describe('Journal du site — la page, sur le vrai markup', () => {
       { id: '4', name: 'Dana', slug: 'dana' },
       { id: '5', name: 'Summer Anna', slug: 'summer-anna' },
     ],
+    guides: [
+      {
+        name: 'Annihilator',
+        mode: 'Joint Challenge',
+        category: 'joint-challenge',
+        slug: 'annihilator',
+        hidden: false,
+      },
+      {
+        name: 'Frost Legion',
+        mode: 'Guild Raid',
+        category: 'guild-raid',
+        slug: 'frost-legion',
+        hidden: false,
+      },
+      {
+        name: 'Planetary Control Unit',
+        mode: 'Guild Raid',
+        category: 'guild-raid',
+        slug: 'planetary-control-unit',
+        hidden: true,
+      },
+    ],
     templates: [
       {
         id: 'character',
@@ -9593,7 +9892,7 @@ describe('Journal du site — la page, sur le vrai markup', () => {
         label: 'Mise à jour',
         type: 'update',
         fields: [
-          field({ key: 'guide', label: 'Guide', placeholder: 'Annihilator' }),
+          field({ key: 'guide', label: 'Guide', kind: 'guide', placeholder: 'Annihilator' }),
           field({
             key: 'mode',
             label: 'Mode',
@@ -10360,6 +10659,66 @@ describe('Journal du site — la page, sur le vrai markup', () => {
     expect(page.fills).toHaveLength(1);
   });
 
+  it('le gabarit « Mise à jour » : les guides servis sous le champ Guide, Entrée pose nom, mode et slug', async () => {
+    const page = await journal();
+    page.template('Mise à jour').click();
+    const guide = page.all('#j-form [data-v="guide"]')[0] as HTMLInputElement;
+    const results = page.el('j-form').querySelector('.results') as HTMLElement;
+    const enter = () =>
+      guide.dispatchEvent(
+        new (guide.ownerDocument.defaultView as unknown as typeof globalThis).KeyboardEvent(
+          'keydown',
+          { key: 'Enter', bubbles: true, cancelable: true },
+        ),
+      );
+    expect(results.hidden).toBe(true);
+
+    // Par début de mot : « le » trouve Frost Legion, pas Annihilator ; un caché est marqué.
+    page.type(guide, 'le');
+    expect(results.hidden).toBe(false);
+    expect(page.texts(results, '[data-g] > span:first-child')).toEqual(['Frost Legion']);
+    page.type(guide, 'pla');
+    expect(page.texts(results, '[data-g]')).toEqual([
+      'Planetary Control UnitGuild Raidcachéplanetary-control-unit',
+    ]);
+    page.type(guide, 'zz');
+    expect(results.hidden).toBe(true);
+
+    // Entrée prend la première : nom, mode et slug posés, le mois gardé.
+    page.el('j-new-month').value = 'November 2026';
+    page.type(guide, 'fro');
+    enter();
+    expect(results.hidden).toBe(true);
+    expect(
+      page.all('#j-form [data-v]').map((f) => [f.dataset.v, (f as HTMLInputElement).value]),
+    ).toEqual([
+      ['guide', 'Frost Legion'],
+      ['mode', 'Guild Raid'],
+      ['month', 'November 2026'],
+      ['slug', 'frost-legion'],
+    ]);
+    expect(page.fills).toEqual([]);
+
+    // Plus de suggestion : Entrée pose l'entrée.
+    enter();
+    await page.settle();
+    await page.settle();
+    expect(page.fills).toEqual([
+      'template=update&guide=Frost Legion&mode=Guild Raid&month=November 2026&slug=frost-legion',
+    ]);
+
+    // Une saisie libre reste possible.
+    page.template('Mise à jour').click();
+    const free = page.all('#j-form [data-v="guide"]')[0] as HTMLInputElement;
+    page.type(free, 'Nouveau boss');
+    (page.el('j-form').querySelector('[data-act="pose"]') as HTMLElement).click();
+    await page.settle();
+    await page.settle();
+    expect(page.fills.at(-1)).toBe(
+      'template=update&guide=Nouveau boss&mode=Joint Challenge&month=October 2026&slug=',
+    );
+  });
+
   it('le gabarit « Perso » : la recherche du roster, puis le titre en six langues, la puce et le slug', async () => {
     const page = await journal();
     page.template('Perso').click();
@@ -11078,6 +11437,27 @@ describe('Tables du jeu — la page, sur le vrai markup', () => {
       page: '1',
       resolve: '1',
     });
+  });
+
+  it('une cellule `0` reste du texte, seule ou dans une liste : pas de lien vers `ID = 0`', async () => {
+    const page = await gamedata({
+      hash: '#gamedata/RecruitGroupTemplet',
+      rows: (q) =>
+        q.name === 'RecruitGroupTemplet'
+          ? recruit({
+              rows: [
+                { ...NORMAL, CharacterIDs: '0' },
+                { ...SEASONAL, CharacterIDs: '0, 2000085' },
+              ],
+            })
+          : null,
+    });
+    expect(page.all('#t-rows tr[data-i="0"] a')).toEqual([]);
+    expect(page.cells(0)[2]).toBe('0');
+    expect(page.all('#t-rows tr[data-i="1"] a').map((a) => a.getAttribute('href'))).toEqual([
+      '#gamedata/CharacterTemplet?col=ID&exact=1&q=2000085',
+    ]);
+    expect(page.cells(1)[2]).toBe('0, 2000085');
   });
 
   it('cliquer une ligne ouvre la LIGNE BRUTE : toutes les colonnes, toutes les langues — et « Copier »', async () => {

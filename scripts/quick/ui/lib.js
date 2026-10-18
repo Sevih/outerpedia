@@ -126,6 +126,31 @@ export const gitBar = (git) => {
         : 'Rien à pousser';
 };
 
+let gitReading = null; // la relecture de `/api/git` en cours : une seule à la fois
+
+/**
+ * Relit `GET /api/git` (sans réseau, sans attendre R2) et repose « Pousser » :
+ * au retour sur la page — un commit ou un `git pull --rebase` au terminal
+ * entre-temps — et après un `post()` coupé, le serveur ayant pu committer
+ * avant la coupure. Une seule lecture à la fois ; un échec (quick arrêté, ou
+ * lancé avant ce code) ne dit rien et garde le dernier état. Pendant un push,
+ * le compte suit mais le bouton reste éteint : pas de second push par-dessus.
+ */
+export function refreshGit() {
+  gitReading ??= fetch('/api/git')
+    .then((res) => (res.ok ? res.json() : null))
+    .then((git) => {
+      if (!git || !('ahead' in git)) return;
+      gitBar(git);
+      if ($('push').classList.contains('busy')) $('push').disabled = true;
+    })
+    .catch(() => {})
+    .finally(() => {
+      gitReading = null;
+    });
+  return gitReading;
+}
+
 async function loadState() {
   Object.assign(state, await (await fetch('/api/state')).json());
   if (state.git) gitBar(state.git);
@@ -294,14 +319,34 @@ const committed = (before, after, ok) =>
 export async function post(path, payload, onStep) {
   // Ce que l'en-tête montre AVANT le geste : la réponse dira s'il a committé.
   const before = lastGit;
-  const res = await fetch(path, {
-    method: 'POST',
-    headers: { 'content-type': 'application/json' },
-    body: JSON.stringify(payload),
-  });
+  const steps = [];
+  // Connexion coupée (quick arrêté pendant l'envoi, réseau) : pas de rejet,
+  // l'appelant rallume son bouton comme après un refus. Le serveur a pu
+  // écrire et committer avant la coupure : le journal le dit, et « Pousser »
+  // se relit — `gitBar` n'a ici aucune réponse à poser.
+  const cut = (e) => {
+    const data = {
+      ok: false,
+      log: [
+        `connexion coupée : ${e instanceof Error ? e.message : String(e)} — l’enregistrement a pu passer, relis l’état avant de recommencer`,
+      ],
+    };
+    log([...steps, ...data.log], false);
+    refreshGit();
+    return data;
+  };
+  let res;
+  try {
+    res = await fetch(path, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
+  } catch (e) {
+    return cut(e);
+  }
   const reader = res.body.getReader();
   const dec = new TextDecoder();
-  const steps = [];
   let doing = null;
   let done = null;
   let buf = '';
@@ -323,7 +368,13 @@ export async function post(path, payload, onStep) {
   };
 
   for (;;) {
-    const { value, done: end } = await reader.read();
+    let chunk;
+    try {
+      chunk = await reader.read();
+    } catch (e) {
+      return cut(e);
+    }
+    const { value, done: end } = chunk;
     if (end) break;
     buf += dec.decode(value, { stream: true });
     const parts = buf.split('\n');
@@ -591,5 +642,12 @@ export const sections = {
     menu = $('groups');
     loadBadges();
     document.addEventListener('quick:changed', badgesSoon);
+
+    // « Pousser » se relit au retour sur la page : un commit au terminal entre-
+    // temps monte le compte sans passer par l'accueil.
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'visible') refreshGit();
+    });
+    window.addEventListener('focus', refreshGit);
   },
 };

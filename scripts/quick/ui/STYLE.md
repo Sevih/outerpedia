@@ -494,7 +494,7 @@ Lecture seule : ni savebar ni `canLeave`, que des GET. Croquis du rendu :
    .t-cols — le tableau, et à sa droite la ligne brute (380 px ; dessous sous 1000 px)
      .scroll > table : il défile dans son cadre, dans les deux sens, en-tête collant ; en-têtes et cellules en chasse fixe, sans repli
         colonnes jamais remplies masquées (« colonnes vides » les montre), colonnes de langue masquées sauf l'anglais (`HIDDEN_LANG_COLUMNS`, la règle de l'admin, servie par l'état)
-        une colonne `*ID` qui mène à une table : ↗ accent dans l'en-tête (`title` = la cible), et dans la cellule un lien PAR id (une liste CSV en porte plusieurs)
+        une colonne `*ID` qui mène à une table : ↗ accent dans l'en-tête (`title` = la cible), et dans la cellule un lien PAR id (une liste CSV en porte plusieurs) ; un `0` reste du texte (B60)
         une clé de texte : son anglais dessous, en italique atténué (40 ch au plus) ; une valeur longue est coupée à 60 ch (`title` = la valeur)
         une ligne se clique (ou Entrée) : fond `surface-overlay`, et sa LIGNE BRUTE s'ouvre
      aside.t-raw  card-head : « Ligne brute » · « 32 champs » … [Copier] ✕
@@ -904,6 +904,7 @@ montrera. Croquis du rendu :
    un gabarit sans champ (Page / outil, News, Correctif, Manuel) pose son entrée d'un clic
    Perso : .form — [Chercher un perso…] et ses suggestions du roster (.picker + .results, deux lettres, Entrée prend la première) ; le choix POSE l'entrée : titre dans les six langues, puce en anglais, slug en lien
    Guide, Mise à jour : .form — un champ par champ du gabarit, préremplis par le serveur ([Guide 30ch] [Mode ▾] [Mois 22ch « October 2026 »] [Slug du guide 30ch]) puis [Poser l'entrée] (Entrée aussi) ; un second clic sur le gabarit referme
+   Mise à jour (B60) : le champ Guide est une recherche (.picker + .results) parmi les guides des trois modes que l'état sert (`guides` : Joint Challenge, Guild Raid, World Boss, cachés compris) — par début de mot du nom ou du slug ; une suggestion = le nom · le mode · badge « caché » · le slug (chasse fixe) ; un clic ou Entrée (la première) pose nom, mode et slug, le mois garde sa valeur, puis Entrée pose l'entrée ; une saisie libre reste possible
    l'entrée posée arrive en tête, dépliée, datée du jour ; un champ laissé vide reste ÉCRIT dedans ({guide}, {slug}) et l'enregistrement la refuse tant qu'il y est
 .card  card-head : « 150 entrées » · badges « 1 brouillon » · « 2 programmées » … [Filtrer : titre, contenu, slug… 30ch] [Tous les types ▾]
    ul.j-list, récent → ancien — 40 lignes dessinées à la fois ; card-foot : « 40 entrées montrées sur 150 » … [Afficher plus (40)]
@@ -925,7 +926,8 @@ le hash (une entrée pour un lien ou le banc ; la page ne l'écrit pas) : `#chan
 ```
 
 Tout ce qui se lit vient de `GET /api/changelog/state` (les entrées dans
-l'ordre du fichier, le jour UTC, le roster, les gabarits et leurs champs
+l'ordre du fichier, le jour UTC, le roster, les guides du gabarit « Mise à
+jour » — nom sans « <Mode> Guide », mode, slug —, les gabarits et leurs champs
 préremplis, les libellés des types et des sortes de lien — la page n'en
 recopie aucun). Un gabarit se remplit AU SERVEUR (`GET /api/changelog/fill`,
 `fillTemplate`) : la page n'a ni les noms du roster dans six langues ni la
@@ -1266,7 +1268,7 @@ p.hint     « Les builds ont leur barre et leur commit à eux : « Enregistrer �
    clavier : ← → (les bouts se rejoignent), Début, Fin — l'onglet est montré aussitôt et prend le focus (`tabindex` 0 sur l'actif, -1 ailleurs)
    « ＋ build » et « Dupliquer » activent le nouveau, « Monter » / « Descendre » emmènent l'onglet, « Supprimer » active le voisin précédent, « Annuler » et « Enregistrer » (ceux de SA barre) gardent l'onglet, un autre perso revient au premier
 .card (LE build montré — un seul à la fois, `#g-list` est le `tabpanel`)  card-head : « Build » [nom 24ch] badge « modifié » · dupliquer ↑ ↓ ✕ (btn icon)
-   grille 2 colonnes, 18 × 28 px : Armes | Talismans (badge preset $slug, ou « sans preset ») | Amulettes | Sets | Substats (le seul menu de preset, + « régler à la pièce ») | Note (pleine largeur : UNE textarea, l'anglais ; dessous [Traduire] badge error · « 212 caractères » à droite ; puis « Traductions (5) » replié, badge warn « à retraduire », 5 textarea fr · es · jp · kr · zh, trois par rangée)
+   grille 2 colonnes, 18 × 28 px : Armes | Talismans (badge preset $slug, ou « sans preset ») | Amulettes | Sets | Substats (le seul menu de preset, + « régler à la pièce ») | Note (pleine largeur : UNE textarea, l'anglais ; dessous [Traduire] [Tout retraduire] badge error · « 212 caractères » à droite — « Tout retraduire » (B60) envoie toute note anglaise non vide du perso et ÉCRASE ses cinq langues, pour une note corrigée puis enregistrée que « Traduire » ne renvoie plus ; puis « Traductions (5) » replié, badge warn « à retraduire », 5 textarea fr · es · jp · kr · zh, trois par rangée)
    une arme, une amulette = [bouton 240px : tuile d'item 44 px + nom coloré par le grade, un clic ouvre le picker du slot] [ses stats principales en bascules, aria-pressed] ✕ ; « ＋ arme » (.btn.ghost.sm) ouvre le même picker
    talismans = une rangée de tuiles (tuile d'item 44 px + nom + ✕), « ＋ talisman » ouvre le picker
    sets = une rangée par combo : [tuiles helmet + armor du premier set, 32 px] nom « 2p » + [tuiles gloves + shoes du second] nom « 2p » … badge $slug ou « sans preset » ✕ (un set joué à 4 : ses quatre tuiles, « 4p ») ; « Composer un mix… » est la seule façon de les éditer (un principal, des secondaires)

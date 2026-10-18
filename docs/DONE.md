@@ -7,6 +7,113 @@
 
 ## 2026-10-18
 
+- **quick : tout retraduire dans Gear reco, « Pousser » relu au retour, `post()`
+  coupé sans bouton grisé, liens faux des Tables du jeu, tags morts des guides,
+  guides du gabarit « Mise à jour », RSS par `bulletSegments` (B60).** Six
+  restes du TODO, vérifiés ouverts sur `5a1466c`. (a) Gear reco : une note
+  corrigée en anglais puis ENREGISTRÉE rechargeait `noteAt` sur le nouvel
+  anglais, ses traductions faites sur l'ancien ne repartaient plus. À côté de
+  « Traduire », un `btn ghost` « Tout retraduire » (`title` : il ÉCRASE les
+  5 langues de toutes les notes du perso qui ont un anglais) : `gTranslate(true)`
+  envoie TOUS les builds à note anglaise non vide d'un seul appel à
+  `/api/gear-reco/translate`, et `gApply(…, force)` réécrit chaque langue
+  rendue (un mode forcé, pas une copie) ; même `busy` sur les deux boutons,
+  même journal, rien n'est écrit avant « Enregistrer » ; « Traduire » ne
+  change pas. (b) `refreshGit()` de `lib.js` relit `GET /api/git` et passe la
+  réponse à `gitBar` (donc à `lastGit`) au `focus` de la fenêtre et à un
+  `visibilitychange` vers visible, branchés dans `start()` ; une seule lecture
+  à la fois (`gitReading`), un échec (quick arrêté, 404 d'un quick plus
+  vieux) ne dit rien et garde le dernier état ; pendant un push le compte
+  suit mais le bouton reste éteint (pas de second push par-dessus). (c)
+  `post()` ne rejette plus sur une coupure (`fetch` ou `reader.read()` qui
+  lève) : il rend `{ ok: false }` et pour `log` une ligne, « connexion
+  coupée : <raison> — l’enregistrement a pu passer, relis l’état avant de
+  recommencer », l'écrit au journal en échec (les étapes déjà reçues devant), ne touche pas
+  à `gitBar` et relance `refreshGit()` ; « réponse interrompue » garde son
+  texte, les appelants et leurs `catch` ne changent pas. (d)
+  `gamedata-store.ts` : `LINK_OVERRIDES` par `Table.Colonne`, consulté avant
+  `LINK_ALIASES` (valeur = la cible ou `null`, même garde du disque), et une
+  règle : une colonne `*BuffID` n'a jamais de lien (elle porte un nom de
+  buff) ; `linkTargetFor` prend la table (3e argument, et les exceptions en
+  4e pour le test), `linkTargets(table, columns)` aussi, et ses deux
+  appelants (`queryTable`, `gameTableSchema` et le type de
+  `deps.linkTargets`) la passent ; `gamedata.js` affiche un `0` en texte,
+  seul ou dans une liste. Recomptés le 18/10 sur `.gamedata/parsed` (valeurs
+  distinctes, une liste CSV comptée valeur par valeur) :
+  `TrustRewardTemplet.RewardVoiceID` → `VoiceTemplet` 0/5 577 (0/774 lignes)
+  → `null` ; `DungeonTemplet.ClearMissionID` → `MissionTemplet` 2/33 (« 1 »
+  et « 2 ») mais aucune cellule entière (0/13 valeurs de cellule) → `null` ;
+  `MonadGateArtifactGroupTemplet.ArtifactID` → `ArtifactTemplet` 0/164,
+  `MonadGateArtifactTemplet` 164/164 (468/468 lignes) → celle-ci, la même
+  colonne de `SkipArtifactRewardTemplet` gardant `ArtifactTemplet` (34/34,
+  135/135 lignes) ; `*BuffID` : 22 colonnes portent ce suffixe (les 21 du
+  relevé et `BuffTemplet.BuffID` elle-même), toutes visaient `BuffTemplet` ;
+  `CharacterSkillLevelTemplet.BuffID` 0/2 054 sur `ID`, 2 054/2 054 sur la
+  colonne `BuffID` (6 747/6 747 lignes). Vu en recomptant, pas ajouté :
+  `TrustRewardTemplet.RewardBuffID` (1 à 15) retombait sur `BuffTemplet.ID`
+  par coïncidence (15/15) et vise sans doute `TrustBuffTemplet` (15 lignes,
+  `ID` 1 à 15) — la règle `*BuffID` coupe son lien, un alias ou une
+  exception le rendrait ; 10 733 cellules `0` dans 54 colonnes `*ID`. (e)
+  `tagSourceSheet` rend `{ place, tab }` : un perso (`character/<id>`, le tab
+  au sous-onglet) ou, nouveau, un guide d'après sa provenance
+  (`guides · <cat>/<slug> · …` → `guides/<cat>/<slug>`, le guide et pas sa
+  version) ;
+  `deadTagSheet` garde sa règle (tous au même `place`, sinon `null`), un
+  preset reste sans cible ; les docstrings de `InboxItem.tab`, des deux
+  fonctions et de `buildInbox` suivent. Conséquence côté tableau de bord :
+  `quickInbox` (`actions.ts`) ne pose plus `sheet` que sur une adresse
+  `character/…` — sinon un guide se serait ouvert sous « fiche du perso ↗ » ;
+  un guide a « Ouvrir » (`sections.go`), comme les autres items. (f) B37 (a) :
+  `UPDATE_MODES` et `updateGuideName` (`changelog-templates.ts`, testée :
+  « Frost Legion Guild Raid Guide » → « Frost Legion », « Dahlia » →
+  « Dahlia ») ; le champ Mode en est fait, et le champ Guide du gabarit
+  passe en `kind: 'guide'` (saisi comme un texte, `fillTemplate` n'en fait
+  rien de plus) ; `changelogState` sert `guides` (`updateGuides` sur
+  `listGuides()` : `{ name, mode, category, slug, hidden }`, 16 au 18/10, 5 +
+  5 + 6, aucun caché aujourd'hui) ; dans `changelog.js` ce champ est un
+  `.field.picker` / `.results` : par début de mot du nom ou du slug, une
+  suggestion = nom · mode · « caché » · slug, un clic ou Entrée (la première)
+  pose nom, mode et slug, le mois garde sa valeur, Entrée suivante pose
+  l'entrée ; saisie libre possible, `openTemplate` inchangé. `changelogLink`
+  et `UPDATE_MODE` de `guides.js` portent la même règle et restent tels
+  quels (et ce dernier ne connaît toujours pas `guild-raid`). B37 (c) :
+  `describe` du flux aplatit par `bulletSegments` (le texte des segments
+  bout à bout, puces jointes par « — ») ; ancienne et nouvelle fonction
+  comparées par un script jetable sur `data/curated/changelog.json` : 900
+  descriptions (150 entrées × 6 langues, 96 portent du gras), 0 différence ;
+  l'en-tête de `changelog-bullets.ts` nomme le flux parmi ses lecteurs.
+  `STYLE.md` : croquis Gear reco (le bouton) et Journal du site (le picker,
+  `guides` dans l'état), et le `0` sans lien des Tables du jeu. Aucune clé
+  i18n. Tests : Fiche perso (le harnais sert `/api/gear-reco/translate` :
+  anglais retouché puis enregistré → « Rien à traduire », « Tout
+  retraduire » envoie la note d'un appel et réécrit ses cinq langues, rien
+  sur le disque) ; un `describe` « Pousser relu au retour, `post()` coupé »
+  sur la vraie coquille (`focus` puis `visibilitychange` relisent, trois
+  événements rapprochés font une lecture, un rejet et un 404 gardent le
+  compte, push en cours ; `fetch` rejeté et `reader.read()` qui lève :
+  `{ ok: false }`, journal ko, `/api/git` relu — la page des 4-comics n'a pas
+  de harnais, le test de `post()` suffit) ; `gamedata-store.test.ts`
+  (exception devant le nom et devant l'alias, `null`, cible absente, même
+  colonne ailleurs, `*BuffID`) et une cellule `0` dans Tables du jeu ;
+  `admin-inbox.test.ts` (un guide, un versionné, deux guides, perso + guide)
+  et `actions.test.ts` (provenances réelles des guides, `sheet` absent pour
+  un guide) ; `changelogState` sert les guides, le formulaire « Mise à
+  jour » propose et Entrée pose les trois champs. `pnpm typecheck` (sortie
+  vide après `tsc --noEmit && … -p scripts/tsconfig.json`), `pnpm lint`
+  (`$ eslint`, sortie vide), `pnpm test` : « Tests 4222 passed (4222) » ;
+  `NODE_ENV=development pnpm exec vitest run scripts/quick` : « Tests 1157
+  passed (1157) ». Captures avant / après sur un quick isolé (:4791, clés
+  vidées ; « avant » = les fichiers du lot remis à `HEAD` le temps du banc),
+  comparées au pixel : `changelog?template=update` identique (le picker ne
+  sort qu'à la frappe, que le banc ne fait pas), `gamedata/RecruitGroupTemplet`
+  ne diffère que sur les deux `0` des lignes 1-2 (`PickupID`,
+  `RecruitTicketID`), Gear reco (`character/2000008/gear/build/1`) que sur le
+  bouton. Laissé à Sevih : un vrai « Tout retraduire » avec les clés ; un
+  commit au terminal puis retour sur quick (le compte monte sans passer par
+  l'accueil) ; quick arrêté pendant un envoi (le journal dit la coupure, le
+  bouton se rallume) ; un tag mort posé à la main dans un guide (l'accueil
+  propose « Ouvrir » sur ce guide), puis retiré.
+
 - **Fiches d'équipement et étages de tour remis en cache : rendu au premier
   hit puis 24 h (A63).** Le build classait `equipment/[slug]` et
   `guides/[category]/[slug]/[floor]` en `ƒ` (rendues à chaque requête, en

@@ -7,10 +7,10 @@
  * reste du texte tel quel : la carte entière est déjà un lien, elle ne peut pas
  * en contenir un autre.
  *
- * Une seule implémentation pour les deux lecteurs : `ChangelogEntryCard` (la
- * page et la home) et l'aperçu de quick (`previewChangelogEntry`), qui montre
- * donc ce que le site montrera. Le motif est celui que le flux RSS aplatit
- * (`src/app/feed/changelog/route.ts`).
+ * Une seule implémentation pour les trois lecteurs : `ChangelogEntryCard` (la
+ * page et la home), l'aperçu de quick (`previewChangelogEntry`), qui montre
+ * donc ce que le site montrera, et le flux RSS (`src/app/feed/changelog/route.ts`),
+ * qui en aplatit les segments.
  */
 
 /** Un morceau de puce : du texte, en gras ou non. */

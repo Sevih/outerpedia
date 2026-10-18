@@ -1,7 +1,8 @@
 /**
  * Tests de `gamedata-store` (explorateur ADMIN des tables brutes, dev-only) —
  * ses CŒURS PURS : `isValidTableName` (garde anti-chemin) et `linkTargetFor`
- * (déduction de la table cible d'une colonne `*ID` — alias d'abord, puis retrait
+ * (déduction de la table cible d'une colonne `*ID` — exception `Table.Colonne`,
+ * puis alias, puis retrait
  * du suffixe, suffixes de mots longs→courts, préférence `<X>Templet`). Le reste
  * (describeTable/queryTable/textIndex) lit `.gamedata/parsed` et n'est pas
  * testable sans le jeu.
@@ -9,7 +10,7 @@
  * Tourne SANS `.gamedata` : ces deux fonctions sont pures.
  */
 import { describe, expect, it } from 'vitest';
-import { isValidTableName, LINK_ALIASES, linkTargetFor } from './gamedata-store';
+import { isValidTableName, LINK_ALIASES, LINK_OVERRIDES, linkTargetFor } from './gamedata-store';
 
 describe('isValidTableName — garde anti-chemin', () => {
   it('accepte un basename alphanumérique/underscore', () => {
@@ -80,5 +81,63 @@ describe('linkTargetFor — alias (`LINK_ALIASES`)', () => {
     expect(linkTargetFor('ShareCharacterID', tables)).toBe('CharacterTemplet');
     expect(linkTargetFor('ChangeCharacterCostumeID', tables)).toBe('CostumeTemplet');
     expect(linkTargetFor('toString', tables)).toBeUndefined(); // clé du prototype, pas un alias
+  });
+});
+
+describe('linkTargetFor — exceptions par `Table.Colonne` (`LINK_OVERRIDES`)', () => {
+  const tables = new Set([
+    'ArtifactTemplet',
+    'MonadGateArtifactTemplet',
+    'VoiceTemplet',
+    'MissionTemplet',
+    'BuffTemplet',
+    'CharacterTemplet',
+    'ItemTemplet',
+  ]);
+
+  it('passe devant le nom, pour CETTE table seulement', () => {
+    expect(linkTargetFor('ArtifactID', tables, 'MonadGateArtifactGroupTemplet')).toBe(
+      'MonadGateArtifactTemplet',
+    );
+    // La même colonne d'une autre table garde sa déduction.
+    expect(linkTargetFor('ArtifactID', tables, 'SkipArtifactRewardTemplet')).toBe(
+      'ArtifactTemplet',
+    );
+  });
+
+  it('passe devant l’alias', () => {
+    const overrides = { 'RecruitGroupTemplet.PickupID': 'ItemTemplet' };
+    expect(linkTargetFor('PickupID', tables, 'RecruitGroupTemplet', overrides)).toBe('ItemTemplet');
+    expect(linkTargetFor('PickupID', tables, 'OtherTemplet', overrides)).toBe('CharacterTemplet');
+  });
+
+  it('`null` coupe le lien, sans retomber sur le nom', () => {
+    expect(linkTargetFor('RewardVoiceID', tables, 'TrustRewardTemplet')).toBeUndefined();
+    expect(linkTargetFor('ClearMissionID', tables, 'DungeonTemplet')).toBeUndefined();
+    expect(linkTargetFor('RewardVoiceID', tables)).toBe('VoiceTemplet'); // ailleurs, le nom
+  });
+
+  it('une cible absente du disque : pas de lien', () => {
+    expect(
+      linkTargetFor('ArtifactID', new Set(['ArtifactTemplet']), 'MonadGateArtifactGroupTemplet'),
+    ).toBeUndefined();
+  });
+
+  it('chaque exception nomme une colonne `*ID` sous `Table.Colonne`', () => {
+    for (const key of Object.keys(LINK_OVERRIDES)) expect(key).toMatch(/^\w+\.\w*I[Dd]s?$/);
+  });
+});
+
+describe('linkTargetFor — `*BuffID` : un nom de buff, jamais de lien', () => {
+  const tables = new Set(['BuffTemplet', 'RageTemplet']);
+
+  it('aucune colonne `*BuffID` ne mène à `BuffTemplet`', () => {
+    expect(linkTargetFor('BuffID', tables, 'CharacterSkillLevelTemplet')).toBeUndefined();
+    expect(linkTargetFor('BreakBuffID', tables, 'RageTemplet')).toBeUndefined();
+    expect(linkTargetFor('SatelliteUserBuffID', tables)).toBeUndefined();
+  });
+
+  it('les autres colonnes gardent la déduction', () => {
+    expect(linkTargetFor('RageID', tables)).toBe('RageTemplet');
   });
 });

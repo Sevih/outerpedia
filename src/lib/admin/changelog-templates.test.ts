@@ -15,6 +15,8 @@ import {
   monthLabel,
   templateDefaults,
   unfilledFields,
+  UPDATE_MODES,
+  updateGuideName,
   type ChangelogTemplate,
 } from './changelog-templates';
 
@@ -107,6 +109,28 @@ describe('templateDefaults — ce que le formulaire montre prérempli', () => {
     });
     expect(templateDefaults(template('guide'), TODAY)).toEqual({});
     expect(templateDefaults(template('manual'), TODAY)).toEqual({});
+  });
+});
+
+describe('updateGuideName — le nom d’un guide dans une « Mise à jour »', () => {
+  it('le titre anglais sans le suffixe de son mode', () => {
+    expect(updateGuideName('Frost Legion Guild Raid Guide')).toBe('Frost Legion');
+    expect(updateGuideName('Annihilator Joint Challenge Guide')).toBe('Annihilator');
+    expect(updateGuideName('Some Boss World Boss Guide')).toBe('Some Boss');
+  });
+
+  it('un titre sans suffixe de mode reste tel quel', () => {
+    expect(updateGuideName('Dahlia')).toBe('Dahlia');
+    expect(updateGuideName('Prototype EX-78')).toBe('Prototype EX-78');
+    // « Guide » seul, ou un autre mode, n'est pas un suffixe du gabarit.
+    expect(updateGuideName('Beginner Guide')).toBe('Beginner Guide');
+  });
+
+  it('les modes du champ Mode sont ceux de `UPDATE_MODES`', () => {
+    const mode = template('update').fields.find((f) => f.key === 'mode');
+    expect(mode?.options).toEqual(
+      UPDATE_MODES.map((m) => ({ value: m.mode, set: { category: m.category } })),
+    );
   });
 });
 

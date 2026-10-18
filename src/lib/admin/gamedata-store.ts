@@ -243,6 +243,27 @@ export const LINK_ALIASES: Readonly<Record<string, string>> = {
 };
 
 /**
+ * EXCEPTIONS par `Table.Colonne` : là où ni le nom ni l'alias (qui vaut pour
+ * TOUTES les tables qui portent la colonne) ne mènent à la bonne table. Valeur
+ * = la table cible, ou `null` : pas de lien. Consultées AVANT les alias, et
+ * avec la même garde (cible absente du disque : pas de lien). Même doctrine
+ * que les alias : chaque ligne nomme une valeur réelle et son compte, recompté
+ * sur `.gamedata/parsed` (valeurs distinctes de la colonne, une liste CSV
+ * comptée valeur par valeur).
+ */
+export const LINK_OVERRIDES: Readonly<Record<string, string | null>> = {
+  // `VoiceTemplet` par le nom : « 101, 102, … » ne s'y retrouve pas (0/5 577 ; 0/774 lignes).
+  'TrustRewardTemplet.RewardVoiceID': null,
+  // `MissionTemplet` par le nom : « 1001,1002,1029 » n'y est pas ; 2/33 valeurs
+  // seulement (« 1 », « 2 », de petits entiers), aucune cellule entière (0/13).
+  'DungeonTemplet.ClearMissionID': null,
+  // `ArtifactTemplet` par le nom : 0/164 ; 1000101 est dans `MonadGateArtifactTemplet`
+  // (164/164 ; 468/468 lignes). La même colonne de `SkipArtifactRewardTemplet`
+  // garde sa déduction (11 → `ArtifactTemplet`, 34/34 ; 135/135 lignes).
+  'MonadGateArtifactGroupTemplet.ArtifactID': 'MonadGateArtifactTemplet',
+};
+
+/**
  * Colonne → table cible, déduit du NOM de colonne. La colonne porte un RÔLE
  * devant l'entité (`ClearDungeonID`, `FirstRewardID`) : on retire `ID`, puis on
  * essaie les suffixes de mots du plus long au plus court (`ClearDungeon`, puis
@@ -256,15 +277,30 @@ export const LINK_ALIASES: Readonly<Record<string, string>> = {
  * lisibles. La cible se filtre sur sa clé primaire `ID`.
  */
 /**
- * Table cible d'UNE colonne (pur, testable). Un alias (`LINK_ALIASES`) passe
- * d'abord, et tranche seul : sa cible absente du disque, la colonne n'a pas de
- * lien — on ne retombe pas sur le nom, que l'alias est là pour contredire.
- * Sinon : retire le suffixe `ID(s)`, puis essaie les suffixes de mots du plus
- * long au plus court (`ClearDungeon`, puis `Dungeon`), en préférant
- * `<X>Templet` à `<X>`. `undefined` si aucune table candidate n'existe
- * (conservateur), ou si la colonne n'est pas un `*ID`.
+ * Table cible d'UNE colonne de la table `table` (pur, testable). Une exception
+ * `Table.Colonne` (`LINK_OVERRIDES`) passe d'abord, puis un alias
+ * (`LINK_ALIASES`) ; l'un comme l'autre tranche seul : sa cible absente du
+ * disque (ou `null`), la colonne n'a pas de lien — on ne retombe pas sur le
+ * nom, qu'ils sont là pour contredire. Sinon : retire le suffixe `ID(s)`, puis
+ * essaie les suffixes de mots du plus long au plus court (`ClearDungeon`, puis
+ * `Dungeon`), en préférant `<X>Templet` à `<X>`. `undefined` si aucune table
+ * candidate n'existe (conservateur), ou si la colonne n'est pas un `*ID`.
  */
-export function linkTargetFor(col: string, tables: Set<string>): string | undefined {
+export function linkTargetFor(
+  col: string,
+  tables: Set<string>,
+  table = '',
+  overrides: Readonly<Record<string, string | null>> = LINK_OVERRIDES,
+): string | undefined {
+  const key = `${table}.${col}`;
+  if (Object.hasOwn(overrides, key)) {
+    const target = overrides[key];
+    return target && tables.has(target) ? target : undefined;
+  }
+  // Une colonne `*BuffID` porte un NOM de buff (« COMMON_CLASS_PASSIVE », la
+  // colonne `BuffID` de `BuffTemplet`), pas son `ID`, qui est un numéro : un
+  // lien sur `ID` ne trouve rien (`CharacterSkillLevelTemplet` : 0/2 054).
+  if (col.endsWith('BuffID')) return undefined;
   if (Object.hasOwn(LINK_ALIASES, col)) {
     const alias = LINK_ALIASES[col];
     return alias && tables.has(alias) ? alias : undefined;
@@ -280,11 +316,11 @@ export function linkTargetFor(col: string, tables: Set<string>): string | undefi
   return undefined;
 }
 
-export function linkTargets(columns: string[]): Record<string, string> {
+export function linkTargets(table: string, columns: string[]): Record<string, string> {
   const tables = new Set(listTableNames());
   const out: Record<string, string> = {};
   for (const col of columns) {
-    const target = linkTargetFor(col, tables);
+    const target = linkTargetFor(col, tables, table);
     if (target) out[col] = target;
   }
   return out;
@@ -325,6 +361,6 @@ export function queryTable(name: string, query: TableQuery = {}): TablePage {
     page: current,
     pageSize,
     texts: resolve ? resolveCells(rows) : {},
-    links: linkTargets(schema.columns),
+    links: linkTargets(name, schema.columns),
   };
 }

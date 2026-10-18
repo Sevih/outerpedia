@@ -351,7 +351,7 @@ describe('buildInbox — ce qu’il rend, pour un seul calcul', () => {
     expect(buildInbox()).toEqual([]);
   });
 
-  it('les tags morts : la fiche d’UN perso, sinon aucune adresse et un détail qui nomme les provenances', async () => {
+  it('les tags morts : la fiche d’UN perso ou UN guide, sinon aucune adresse et un détail qui nomme les provenances', async () => {
     engineReturns({});
     const { buildInbox } = await load();
     const tagsOf = (sources: string[]) => {
@@ -365,12 +365,31 @@ describe('buildInbox — ce qu’il rend, pour un seul calcul', () => {
       'character/2000008/gear',
       '1 tag(s) resolve to nothing',
     ]);
-    // Deux persos, un guide, un preset : quick ne les réunit nulle part.
-    const MARIAN = 'synergies · Marian (2000014)[0]';
+    // Un guide : le guide dans Guides, versionné ou non (le guide, pas sa version).
     const GUIDE = 'guides · adventure/S1-9-5 · content.json.tips[0].en';
+    const VERSIONED =
+      'guides · joint-challenge/annihilator · versions/2026-10/content.json.tips[0].en';
+    expect(tagsOf([GUIDE, GUIDE])).toEqual([
+      'guides/adventure/S1-9-5',
+      '2 tag(s) resolve to nothing',
+    ]);
+    expect(tagsOf([VERSIONED])).toEqual([
+      'guides/joint-challenge/annihilator',
+      '1 tag(s) resolve to nothing',
+    ]);
+    // Deux persos, deux guides, un perso et un guide, un preset : quick ne les réunit nulle part.
+    const MARIAN = 'synergies · Marian (2000014)[0]';
     expect(tagsOf([PROS, MARIAN])).toEqual([
       null,
       `2 tag(s) resolve to nothing — ${PROS} ; ${MARIAN}`,
+    ]);
+    expect(tagsOf([GUIDE, VERSIONED])).toEqual([
+      null,
+      `2 tag(s) resolve to nothing — ${GUIDE} ; ${VERSIONED}`,
+    ]);
+    expect(tagsOf([PROS, GUIDE])).toEqual([
+      null,
+      `2 tag(s) resolve to nothing — ${PROS} ; ${GUIDE}`,
     ]);
     expect(tagsOf(['gear-presets.json.substats.dps'])).toEqual([
       null,

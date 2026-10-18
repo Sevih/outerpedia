@@ -29,7 +29,7 @@ let gActive = 0; // le build montré (son onglet) : un index, le temps de la pag
 let gBase = new Map(); // clé de build → ce qui partirait sans y toucher
 let gOrder = []; // les clés dans l'ordre du disque
 let gServer = []; // erreurs du dernier enregistrement, par clé de build
-let gTr = { busy: false, error: '' }; // « Traduire » : en cours, son dernier refus
+let gTr = { busy: false, error: '' }; // « Traduire » / « Tout retraduire » : en cours, son dernier refus
 const gTrOpen = new Set(); // les « Traductions » dépliées, par clé de build
 let gSeq = 0;
 // L'aperçu : ce que la fiche perso fera des builds, résolu par le serveur
@@ -172,10 +172,13 @@ const gTally = (b) =>
  * Pose une traduction reçue pour l'anglais `sent`. Anglais retouché : il fait
  * foi, toutes les langues sont réécrites. Anglais inchangé : seules les langues
  * VIDES sont remplies — celles en place ont été relues contre ce même texte
- * (en vider une la fait regénérer). Rend le nombre de langues posées.
+ * (en vider une la fait regénérer). `force` (« Tout retraduire ») réécrit
+ * toutes les langues rendues, comme un anglais retouché : `noteAt` ne dit plus
+ * contre quel anglais une traduction ENREGISTRÉE a été faite. Rend le nombre
+ * de langues posées.
  */
-function gApply(b, sent, tr) {
-  const moved = sent.trim() !== b.noteAt.trim();
+function gApply(b, sent, tr, force = false) {
+  const moved = force || sent.trim() !== b.noteAt.trim();
   let n = 0;
   for (const lang of gTrLangs()) {
     const next = tr[lang]?.trim();
@@ -485,7 +488,7 @@ function gCard(b) {
   // L'anglais seul se saisit ; « Traduire » vaut pour TOUS les builds du perso.
   const note = `<div class="${slotClass('note', true)}"><h3>${G_SLOTS.note}<span class="badge off">${def}</span>${iss('note')}</h3>
     ${area(def, 'aria-label="Note, en anglais"')}
-    <div class="g-tr"><button class="btn ghost${gTr.busy ? ' busy' : ''}" data-act="translate"${gTr.busy ? ' disabled' : ''} title="Traduit les notes de tous les builds du perso : les langues qui manquent, ou toutes quand l’anglais a changé (DeepL, puis Claude Haiku). Rien ne s’écrit avant « Enregistrer ».">Traduire</button><span class="badge error" data-tr-error>${esc(gTr.error)}</span><span class="lbl g-push" data-len>${gLen(b)}</span></div>
+    <div class="g-tr"><button class="btn ghost${gTr.busy ? ' busy' : ''}" data-act="translate"${gTr.busy ? ' disabled' : ''} title="Traduit les notes de tous les builds du perso : les langues qui manquent, ou toutes quand l’anglais a changé (DeepL, puis Claude Haiku). Rien ne s’écrit avant « Enregistrer ».">Traduire</button><button class="btn ghost${gTr.busy ? ' busy' : ''}" data-act="retranslate"${gTr.busy ? ' disabled' : ''} title="ÉCRASE les ${gTrLangs().length} langues de toutes les notes du perso qui ont un anglais, remplies ou non — pour une note corrigée en anglais puis enregistrée, que « Traduire » ne renvoie plus (DeepL, puis Claude Haiku). Rien ne s’écrit avant « Enregistrer ».">Tout retraduire</button><span class="badge error" data-tr-error>${esc(gTr.error)}</span><span class="lbl g-push" data-len>${gLen(b)}</span></div>
     <details${gTrOpen.has(b.k) ? ' open' : ''}>
       <summary><span class="btn ghost sm">Traductions (${gTrLangs().length})</span><span class="badge warn" data-stale>${gStale(b) ? 'à retraduire' : ''}</span><span class="lbl" data-tally>${gTally(b)}</span></summary>
       <div class="g-notes">${gTrLangs()
@@ -799,26 +802,33 @@ function gOnInput(e) {
  * « Traduire » : les notes anglaises de TOUS les builds du perso, d'un seul
  * appel. Le résultat se pose dans le modèle de la page — il compte dans la
  * savebar et ne part au disque qu'à « Enregistrer », où le serveur contrôle
- * les tags des traductions comme ceux de l'anglais.
+ * les tags des traductions comme ceux de l'anglais. `force` (« Tout
+ * retraduire ») envoie toute note anglaise non vide et réécrit ses langues.
  */
-async function gTranslate() {
+async function gTranslate(force = false) {
   if (gTr.busy) return;
   const todo = gBuilds
-    .filter(gToTranslate)
+    .filter(force ? (b) => Boolean(gEn(b)) : gToTranslate)
     .map((b) => ({ k: b.k, en: b.note[gear.langs.default] }));
   gTr = { busy: Boolean(todo.length), error: '' };
-  for (const el of $('g-list').querySelectorAll('[data-act="translate"]')) {
+  for (const el of $('g-list').querySelectorAll(
+    '[data-act="translate"], [data-act="retranslate"]',
+  )) {
     el.disabled = gTr.busy;
     el.classList.toggle('busy', gTr.busy);
   }
   for (const el of $('g-list').querySelectorAll('[data-tr-error]')) el.textContent = '';
   if (!todo.length)
     return log(
-      ['Rien à traduire : pas de note anglaise retouchée, ni de langue qui manque.'],
+      [
+        force
+          ? 'Rien à retraduire : aucune note anglaise.'
+          : 'Rien à traduire : pas de note anglaise retouchée, ni de langue qui manque.',
+      ],
       true,
     );
 
-  log([], undefined, `traduction de ${gPlural(todo.length, 'note')}`);
+  log([], undefined, `${force ? 'retraduction' : 'traduction'} de ${gPlural(todo.length, 'note')}`);
   const done = [];
   try {
     const res = await fetch('/api/gear-reco/translate', {
@@ -833,7 +843,7 @@ async function gTranslate() {
       // Un build supprimé pendant l'appel n'attend plus rien.
       const b = gBuilds.find((y) => y.k === x.k);
       if (!b) return;
-      const n = gApply(b, x.en, r.results[i] ?? {});
+      const n = gApply(b, x.en, r.results[i] ?? {}, force);
       if (!n) return;
       filled += n;
       gTouched(b);
@@ -886,6 +896,7 @@ function gOnClick(e) {
   const at = gBuilds.indexOf(b);
 
   if (act === 'translate') return gTranslate();
+  if (act === 'retranslate') return gTranslate(true);
   // « Aperçu » : replie ou déplie le bloc, sans toucher au build.
   if (act === 'pv') {
     const open = gPv.shut.delete(b.k);
