@@ -426,7 +426,7 @@ describe('buildInbox — ce qu’il rend, pour un seul calcul', () => {
 });
 
 describe('adminExtractorMenu — les cibles que le menu de l’admin propose encore', () => {
-  it('écarte les cibles portées dans quick ; l’inbox et les buckets gardent les dix', async () => {
+  it('écarte les cibles portées dans quick ; l’inbox et les buckets gardent les treize', async () => {
     engineReturns({ effect: buckets({ diff: 1 }), armor: buckets({ new: 1 }), item: buckets() });
     const { EXTRACTOR_ENTITIES, EXTRACTOR_IN_QUICK, adminExtractorMenu, bucketsOf, buildInbox } =
       await load();
@@ -436,9 +436,12 @@ describe('adminExtractorMenu — les cibles que le menu de l’admin propose enc
       'character',
       'ee',
       'effect',
+      'gloves',
+      'helmet',
       'item',
       'monster',
       'set',
+      'shoes',
       'talisman',
       'weapon',
     ]);
@@ -449,12 +452,15 @@ describe('adminExtractorMenu — les cibles que le menu de l’admin propose enc
       'weapon',
       'amulet',
       'armor',
+      'helmet',
+      'gloves',
+      'shoes',
       'talisman',
       'set',
       'monster',
       'item',
     ]);
-    // Le menu : plus aucune — les dix cibles sont dans quick (F22), le groupe en sort.
+    // Le menu : plus aucune — les treize cibles sont dans quick (F22), le groupe en sort.
     expect(adminExtractorMenu()).toEqual([]);
     // L'inbox et `bucketsOf` ne filtrent pas : une cible portée reste comptée.
     expect(buildInbox().map((i) => i.key)).toEqual(['extract:effect', 'extract:armor']);

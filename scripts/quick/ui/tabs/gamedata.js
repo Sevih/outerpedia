@@ -60,10 +60,23 @@ const code = (text) => esc(text).replace(/`([^`]+)`/g, '<code>$1</code>');
 const tableHash = (name) => `#gamedata/${encodeURIComponent(name)}`;
 
 /**
- * Le lien croisé filtre la table cible sur sa clé primaire (`ID` partout), en
- * égalité STRICTE — en sous-chaîne, `ID=101` ramènerait aussi `1011` et `2101`.
+ * La cible d'un lien (`links`) : `Table`, filtrée sur sa clé primaire `ID`, ou
+ * `Table.Colonne`, filtrée sur cette colonne (`BuffTemplet.BuffID` : les
+ * `*BuffID` portent un nom de buff, pas son `ID`).
  */
-const linkHash = (target, id) => `${tableHash(target)}?col=ID&exact=1&q=${encodeURIComponent(id)}`;
+const linkOf = (target) => {
+  const [table, col = 'ID'] = target.split('.');
+  return { table, col };
+};
+
+/**
+ * Le lien croisé filtre la table cible sur sa colonne, en égalité STRICTE — en
+ * sous-chaîne, `ID=101` ramènerait aussi `1011` et `2101`.
+ */
+const linkHash = (target, id) => {
+  const { table, col } = linkOf(target);
+  return `${tableHash(table)}?col=${encodeURIComponent(col)}&exact=1&q=${encodeURIComponent(id)}`;
+};
 
 /**
  * `#gamedata/<Table>` et son filtre facultatif (`?col=&exact=1&q=`), ou `null`.
@@ -212,6 +225,7 @@ const shownColumns = () =>
 function cell(row, column) {
   const value = row[column] ?? '';
   const target = value ? own(page.links, column) : undefined;
+  const link = target && linkOf(target);
   const text = own(page.texts, value);
   // Les colonnes `*IDs` portent une LISTE CSV : un lien par id, sinon on
   // filtrerait la cible sur « 1,2,3 ». `0` est le « rien » du jeu : du texte,
@@ -223,7 +237,7 @@ function cell(row, column) {
         .map((id) =>
           id === '0'
             ? esc(id)
-            : `<a href="${esc(linkHash(target, id))}" data-table="${esc(target)}" data-id="${esc(id)}">${esc(id)}</a>`,
+            : `<a href="${esc(linkHash(target, id))}" data-table="${esc(link.table)}" data-col="${esc(link.col)}" data-id="${esc(id)}">${esc(id)}</a>`,
         )
         .join('<span class="t-sep">, </span>')
     : esc(value);
@@ -291,8 +305,9 @@ $('t-rows').onclick = (e) => {
     if (e.ctrlKey || e.metaKey || e.shiftKey || e.button) return;
     e.preventDefault();
     // Une entrée d'historique par lien suivi : « Précédent » revient à la table quittée.
-    history.pushState(null, '', linkHash(link.dataset.table, link.dataset.id));
-    show(link.dataset.table, { col: 'ID', exact: true, q: link.dataset.id });
+    const { table, col, id } = link.dataset;
+    history.pushState(null, '', linkHash(`${table}.${col}`, id));
+    show(table, { col, exact: true, q: id });
     return;
   }
   const tr = e.target.closest('tr[data-i]');

@@ -649,10 +649,11 @@ describe('promoteReview — la revue du dry-run, lue de sa sortie', () => {
 
   it('les cibles sont celles qu’Extraction montre : le vrai registre', async () => {
     const out = [
-      'promotion extrait → validé : 0 identique(s), 6 différent(s)',
+      'promotion extrait → validé : 0 identique(s), 7 différent(s)',
       row('characters.json', '~1'),
       row('glossaries.json', '~1'),
       row('equipment/accessory.json', '~1'),
+      row('equipment/gloves.json', '~1'),
       row('items.json', '~1'),
       row('monster-skills.json', '~1'),
       row('encounters.json', '~1'),
@@ -662,6 +663,8 @@ describe('promoteReview — la revue du dry-run, lue de sa sortie', () => {
       ['characters.json', 'character'],
       ['glossaries.json', 'effect'],
       ['equipment/accessory.json', 'amulet'],
+      // Une pièce d'armure hors du plastron depuis A70 : son « voir » manquait.
+      ['equipment/gloves.json', 'gloves'],
       ['items.json', 'item'],
       // Une cible en lecture depuis A40 : « voir » y mène, rien ne s'y écrit.
       ['monster-skills.json', 'monster-skill'],

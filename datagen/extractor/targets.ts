@@ -157,6 +157,9 @@ export const TARGETS: GeneratedTarget[] = [
   equipTarget('weapon', 'Armes', 'weapon'),
   equipTarget('amulet', 'Amulettes', 'accessory'),
   equipTarget('armor', 'Armures', 'armor'),
+  equipTarget('helmet', 'Casques', 'helmet'),
+  equipTarget('gloves', 'Gants', 'gloves'),
+  equipTarget('shoes', 'Bottes', 'shoes'),
   equipTarget('talisman', 'Talismans', 'talisman'),
   equipTarget('set', 'Sets', 'sets'),
   {

@@ -48,9 +48,8 @@ type Passives = NonNullable<EquipmentAssetOptions['passives']>;
 /**
  * Fichiers validés (relatifs à `data/generated/`) dont les entités portent des
  * images PROPRES, et leur sorte. Les cibles de revue `monster`, `ee`, `weapon`,
- * `amulet`, `armor`, `talisman` et `set` s'y retrouvent par leur `file` ; les
- * trois autres pièces d'armure n'ont pas de cible de revue mais partent avec
- * `promote`.
+ * `amulet`, `armor`, `helmet`, `gloves`, `shoes`, `talisman` et `set` s'y
+ * retrouvent par leur `file`.
  */
 const ENTITY_FILES: Record<string, 'monster' | 'equipment'> = {
   'monsters.json': 'monster',

@@ -52,7 +52,7 @@ export interface TablePage extends TableSchema {
   pageSize: number;
   /** Clé de texte → anglais, pour les cellules de la page (si `resolve`). */
   texts: Record<string, string>;
-  /** Colonne → table cible, pour les liens croisés (cf. `linkTargets`). */
+  /** Colonne → cible (`Table` ou `Table.Colonne`), pour les liens croisés (cf. `linkTargetFor`). */
   links: Record<string, string>;
 }
 
@@ -261,7 +261,21 @@ export const LINK_OVERRIDES: Readonly<Record<string, string | null>> = {
   // (164/164 ; 468/468 lignes). La même colonne de `SkipArtifactRewardTemplet`
   // garde sa déduction (11 → `ArtifactTemplet`, 34/34 ; 135/135 lignes).
   'MonadGateArtifactGroupTemplet.ArtifactID': 'MonadGateArtifactTemplet',
+  // Un NUMÉRO, pas un nom de buff (la règle `*BuffID` de `linkTargetFor`) :
+  // 1 à 15, tous dans `TrustBuffTemplet.ID` (15/15 ; 630 lignes), dont le
+  // `BuffID` est `trust_level_ATK_1`…
+  'TrustRewardTemplet.RewardBuffID': 'TrustBuffTemplet',
 };
+
+/**
+ * La cible des colonnes `*BuffID` : elles portent un NOM de buff
+ * (« COMMON_CLASS_PASSIVE »), celui de la colonne `BuffID` de `BuffTemplet`,
+ * pas son `ID`, qui est un numéro. Relevé du 19/10 : les vingt colonnes
+ * `*BuffID` des tables (`CharacterSkillLevelTemplet.BuffID` 2 054/2 054,
+ * `MonsterSkillLevelTemplet.BuffID` 5 124/5 124, `RageTemplet.BreakBuffID`
+ * 19/19…) sont toutes dans `BuffTemplet.BuffID`.
+ */
+export const BUFF_NAME_LINK = 'BuffTemplet.BuffID';
 
 /**
  * Colonne → table cible, déduit du NOM de colonne. La colonne porte un RÔLE
@@ -274,17 +288,20 @@ export const LINK_OVERRIDES: Readonly<Record<string, string | null>> = {
  * (un faux lien coûte plus cher qu'un lien absent). Les `NameID`/`DescID` ne
  * désignent d'ailleurs pas des tables mais des clés de texte — ils tombent
  * naturellement dans ce trou, et c'est la résolution de texte qui les rend
- * lisibles. La cible se filtre sur sa clé primaire `ID`.
+ * lisibles. La cible se filtre sur sa clé primaire `ID`, sauf celle des
+ * `*BuffID` (`BUFF_NAME_LINK`).
  */
 /**
- * Table cible d'UNE colonne de la table `table` (pur, testable). Une exception
- * `Table.Colonne` (`LINK_OVERRIDES`) passe d'abord, puis un alias
- * (`LINK_ALIASES`) ; l'un comme l'autre tranche seul : sa cible absente du
- * disque (ou `null`), la colonne n'a pas de lien — on ne retombe pas sur le
- * nom, qu'ils sont là pour contredire. Sinon : retire le suffixe `ID(s)`, puis
- * essaie les suffixes de mots du plus long au plus court (`ClearDungeon`, puis
- * `Dungeon`), en préférant `<X>Templet` à `<X>`. `undefined` si aucune table
- * candidate n'existe (conservateur), ou si la colonne n'est pas un `*ID`.
+ * Cible d'UNE colonne de la table `table` (pur, testable) : `Table`, filtrée
+ * sur son `ID`, ou `Table.Colonne`, filtrée sur cette colonne
+ * (`BUFF_NAME_LINK`). Une exception `Table.Colonne` (`LINK_OVERRIDES`) passe
+ * d'abord, puis la règle `*BuffID`, puis un alias (`LINK_ALIASES`) ; chacun
+ * tranche seul : sa table absente du disque (ou `null`), la colonne n'a pas de
+ * lien — on ne retombe pas sur le nom, qu'ils sont là pour contredire. Sinon :
+ * retire le suffixe `ID(s)`, puis essaie les suffixes de mots du plus long au
+ * plus court (`ClearDungeon`, puis `Dungeon`), en préférant `<X>Templet` à
+ * `<X>`. `undefined` si aucune table candidate n'existe (conservateur), ou si
+ * la colonne n'est pas un `*ID`.
  */
 export function linkTargetFor(
   col: string,
@@ -297,10 +314,10 @@ export function linkTargetFor(
     const target = overrides[key];
     return target && tables.has(target) ? target : undefined;
   }
-  // Une colonne `*BuffID` porte un NOM de buff (« COMMON_CLASS_PASSIVE », la
-  // colonne `BuffID` de `BuffTemplet`), pas son `ID`, qui est un numéro : un
-  // lien sur `ID` ne trouve rien (`CharacterSkillLevelTemplet` : 0/2 054).
-  if (col.endsWith('BuffID')) return undefined;
+  // Une colonne `*BuffID` porte un NOM de buff, pas l'`ID` de `BuffTemplet`
+  // (`CharacterSkillLevelTemplet` : 0/2 054 sur `ID`) : le lien filtre sa
+  // colonne `BuffID` (`BUFF_NAME_LINK`).
+  if (col.endsWith('BuffID')) return tables.has('BuffTemplet') ? BUFF_NAME_LINK : undefined;
   if (Object.hasOwn(LINK_ALIASES, col)) {
     const alias = LINK_ALIASES[col];
     return alias && tables.has(alias) ? alias : undefined;

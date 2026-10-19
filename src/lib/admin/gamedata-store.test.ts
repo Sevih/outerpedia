@@ -10,7 +10,13 @@
  * Tourne SANS `.gamedata` : ces deux fonctions sont pures.
  */
 import { describe, expect, it } from 'vitest';
-import { isValidTableName, LINK_ALIASES, LINK_OVERRIDES, linkTargetFor } from './gamedata-store';
+import {
+  BUFF_NAME_LINK,
+  isValidTableName,
+  LINK_ALIASES,
+  LINK_OVERRIDES,
+  linkTargetFor,
+} from './gamedata-store';
 
 describe('isValidTableName — garde anti-chemin', () => {
   it('accepte un basename alphanumérique/underscore', () => {
@@ -128,13 +134,28 @@ describe('linkTargetFor — exceptions par `Table.Colonne` (`LINK_OVERRIDES`)', 
   });
 });
 
-describe('linkTargetFor — `*BuffID` : un nom de buff, jamais de lien', () => {
-  const tables = new Set(['BuffTemplet', 'RageTemplet']);
+describe('linkTargetFor — `*BuffID` : un nom de buff, filtré sur `BuffTemplet.BuffID`', () => {
+  const tables = new Set(['BuffTemplet', 'RageTemplet', 'TrustBuffTemplet']);
 
-  it('aucune colonne `*BuffID` ne mène à `BuffTemplet`', () => {
-    expect(linkTargetFor('BuffID', tables, 'CharacterSkillLevelTemplet')).toBeUndefined();
-    expect(linkTargetFor('BreakBuffID', tables, 'RageTemplet')).toBeUndefined();
-    expect(linkTargetFor('SatelliteUserBuffID', tables)).toBeUndefined();
+  it('une colonne `*BuffID` mène à la colonne `BuffID` de `BuffTemplet`, pas à son `ID`', () => {
+    expect(BUFF_NAME_LINK).toBe('BuffTemplet.BuffID');
+    expect(linkTargetFor('BuffID', tables, 'CharacterSkillLevelTemplet')).toBe(BUFF_NAME_LINK);
+    expect(linkTargetFor('BreakBuffID', tables, 'RageTemplet')).toBe(BUFF_NAME_LINK);
+    expect(linkTargetFor('SatelliteUserBuffID', tables)).toBe(BUFF_NAME_LINK);
+  });
+
+  it('sans `BuffTemplet` sur le disque : pas de lien', () => {
+    const bare = new Set(['RageTemplet']);
+    expect(linkTargetFor('BuffID', bare, 'CharacterSkillLevelTemplet')).toBeUndefined();
+    expect(linkTargetFor('BreakBuffID', bare, 'RageTemplet')).toBeUndefined();
+    expect(linkTargetFor('SatelliteUserBuffID', bare)).toBeUndefined();
+  });
+
+  it('`TrustRewardTemplet.RewardBuffID` porte un numéro : l’exception passe avant la règle', () => {
+    expect(linkTargetFor('RewardBuffID', tables, 'TrustRewardTemplet')).toBe('TrustBuffTemplet');
+    expect(
+      linkTargetFor('RewardBuffID', new Set(['BuffTemplet']), 'TrustRewardTemplet'),
+    ).toBeUndefined();
   });
 
   it('les autres colonnes gardent la déduction', () => {

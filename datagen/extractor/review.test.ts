@@ -228,6 +228,9 @@ describe('stageChangedEntities — branchement des images par cible', () => {
       ['weapon', 'equipment/weapon.json'],
       ['amulet', 'equipment/accessory.json'],
       ['armor', 'equipment/armor.json'],
+      ['helmet', 'equipment/helmet.json'],
+      ['gloves', 'equipment/gloves.json'],
+      ['shoes', 'equipment/shoes.json'],
       ['talisman', 'equipment/talisman.json'],
       ['set', 'equipment/sets.json'],
     ];

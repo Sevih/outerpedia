@@ -92,14 +92,6 @@ les preuves et les décisions vivent dans le tri consolidé de sevih-tool
 - [ ] **Suites de G8** : fiche du wiki en vitesse en taux avec régénération
       de l'oracle (`char-progression.ts`), puis retrait de `corePassive`
       (`schema` 2), seulement après la release de gear-solver qui porte G8.
-- [ ] **quick, petits lots A** : cible de revue « Armures » qui ne couvre que
-      `armor.json` (casques, gants, bottes sans cible ; reco : une cible sur
-      les quatre fichiers, après A62) ; liens des 21 colonnes `*BuffID` des
-      Tables du jeu vers `BuffTemplet.BuffID` (après B60, qui retire le lien
-      faux).
-- [ ] **`resolveRewardTable`** (`src/lib/data/rewards.ts`) : sans appelant
-      hors des tests, qui s'en servent comme garde ; reco : le garder, avec un
-      commentaire qui le dit.
 - [ ] **outerbot** : liens d'index nus `/characters` et `/guides`
       (`src/commands/char.ts`, `guide.ts`) : FAIT (OB4, laissés nus,
       documentés et gardés par le contrat) ; review déposée entre le
@@ -126,8 +118,6 @@ les preuves et les décisions vivent dans le tri consolidé de sevih-tool
       `docs/todo.md` (« octets non JSON écrits tels quels ») ne vaut plus
       qu'en mode REPO ; le script de rejeu des EE ne compte pas l'`IOT_STAT`
       (1 écart faux, 2000078 à +10).
-- [ ] **Tables du jeu (quick)** : `TrustRewardTemplet.RewardBuffID` visait
-      sans doute `TrustBuffTemplet` ; la règle `*BuffID` de B60 coupe son lien.
 - [ ] **gear-solver, CI** : ni `dependabot.yml`, ni actions épinglées par SHA
       (`actions/checkout@v4`…), comme outerbot avant le 15/10.
 

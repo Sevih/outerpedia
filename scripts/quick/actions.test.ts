@@ -10273,7 +10273,7 @@ describe('Extraction — extractorOverview, extractorTarget, acceptExtraction, i
     }
   });
 
-  it('les cibles de la route : les dix de l’admin dans leur ordre, « Skills de monstres » en lecture sous les monstres', async () => {
+  it('les cibles de la route : les treize de l’admin dans leur ordre, « Skills de monstres » en lecture sous les monstres', async () => {
     const targets = await EXTRACTOR_DEPS.targets();
     expect(targets.map((t) => t.id)).toEqual([
       'character',
@@ -10282,6 +10282,9 @@ describe('Extraction — extractorOverview, extractorTarget, acceptExtraction, i
       'weapon',
       'amulet',
       'armor',
+      'helmet',
+      'gloves',
+      'shoes',
       'talisman',
       'set',
       'monster',

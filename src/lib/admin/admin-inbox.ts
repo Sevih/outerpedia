@@ -52,6 +52,9 @@ export const EXTRACTOR_ENTITIES: readonly ExtractorEntity[] = [
   { id: 'weapon', label: 'Weapons', tab: 'extractor/weapon' },
   { id: 'amulet', label: 'Amulet', tab: 'extractor/amulet' },
   { id: 'armor', label: 'Armor', tab: 'extractor/armor' },
+  { id: 'helmet', label: 'Helmet', tab: 'extractor/helmet' },
+  { id: 'gloves', label: 'Gloves', tab: 'extractor/gloves' },
+  { id: 'shoes', label: 'Shoes', tab: 'extractor/shoes' },
   { id: 'talisman', label: 'Talisman', tab: 'extractor/talisman' },
   { id: 'set', label: 'Sets', tab: 'extractor/set' },
   { id: 'monster', label: 'Monster', tab: 'extractor/monster' },
@@ -64,9 +67,10 @@ export const EXTRACTOR_ENTITIES: readonly ExtractorEntity[] = [
  * fiches par entité et l'intégration (lot F21, migration 20 : character, ee,
  * weapon, amulet, talisman, set), puis le versionnage du monstre (lot F22 :
  * « Figer et ré-épingler » sur sa fiche) : leur lien sort du menu de l'admin
- * (`adminExtractorMenu`). Les DIX y sont depuis le 12/10 : le groupe
- * « Extractor » a quitté le menu (`layout.dev.tsx`). L'inbox et `bucketsOf`
- * gardent les dix.
+ * (`adminExtractorMenu`). Les dix y sont depuis le 12/10 : le groupe
+ * « Extractor » a quitté le menu (`layout.dev.tsx`). Casques, gants et bottes
+ * les ont rejointes le 19/10 (A70 : revue et acceptation, sans fiche par
+ * entité) : les TREIZE, que l'inbox et `bucketsOf` gardent aussi.
  */
 export const EXTRACTOR_IN_QUICK: ReadonlySet<string> = new Set([
   'character',
@@ -75,6 +79,9 @@ export const EXTRACTOR_IN_QUICK: ReadonlySet<string> = new Set([
   'weapon',
   'amulet',
   'armor',
+  'helmet',
+  'gloves',
+  'shoes',
   'talisman',
   'set',
   'monster',

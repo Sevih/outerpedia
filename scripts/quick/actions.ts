@@ -7236,7 +7236,7 @@ export interface ExtractorDeps {
   /** Les tables du jeu sont sur ce poste (sans elles, rien ne se lit ni ne s'écrit). */
   tables: () => boolean;
   /**
-   * Les dix cibles, dans l'ordre de l'admin (`EXTRACTOR_ENTITIES`), et les
+   * Les treize cibles, dans l'ordre de l'admin (`EXTRACTOR_ENTITIES`), et les
    * cibles en lecture du registre, chacune à la suite de celle qu'elle y suit
    * (« Skills de monstres » sous « Monstres »).
    */

@@ -7,6 +7,77 @@
 
 ## 2026-10-19
 
+- **A70 — quick : cibles de revue « Casques », « Gants », « Bottes » à côté
+  des « Armures » ; liens des colonnes `*BuffID` des Tables du jeu vers
+  `BuffTemplet.BuffID`, et `TrustRewardTemplet.RewardBuffID` vers
+  `TrustBuffTemplet` ; `resolveRewardTable` gardé avec sa garde dite.** Trois
+  items du TODO (section « 🧹 Suites de la rédaction du 18/10 ») partis
+  entiers : « quick, petits lots A », « `resolveRewardTable` », « Tables du
+  jeu (quick) ». (a) Pourquoi : la cible « Armures » ne couvrait que
+  `equipment/armor.json` ; un changement du jeu sur `helmet.json`,
+  `gloves.json` ou `shoes.json` ne se voyait ni dans Extraction ni dans
+  l'inbox, et la revue de « Patch » (`promoteReview`) n'avait pas de bouton
+  « voir » pour ces fichiers. Comment : pas une cible à quatre fichiers (elle
+  casserait le modèle une cible = un fichier de `review.ts`, `actions.ts`,
+  `patch.ts`), mais trois `equipTarget` de plus dans
+  `datagen/extractor/targets.ts`, juste après `armor` (`helmet` « Casques »,
+  `gloves` « Gants », `shoes` « Bottes »), trois entités dans
+  `EXTRACTOR_ENTITIES` (`Helmet`, `Gloves`, `Shoes`, après `Armor`) et trois
+  ids dans `EXTRACTOR_IN_QUICK` (`src/lib/admin/admin-inbox.ts`). Ce sont des
+  cibles entières (revue, « Confirmer l'extraction »), sans fiche par entité
+  (`isGearTarget` les ignore comme `armor`) ni entrée dans
+  `WHOLE_ACCEPT_REFUSED` ; aucun cas particulier par id dans le moteur de
+  revue. Commentaires : `ENTITY_FILES` de `datagen/assets/stage-entities.ts`
+  ne dit plus que les trois pièces n'ont pas de cible ; « les dix » devient
+  treize dans `admin-inbox.ts` et `ExtractorDeps.targets` (`actions.ts`).
+  (b) Pourquoi : B60 avait coupé le lien des `*BuffID` (faux sur `ID`, la
+  colonne porte un NOM de buff) ; le lien juste filtre `BuffTemplet` sur sa
+  colonne `BuffID`. Comment : la valeur d'un lien reste une chaîne, `Table`
+  (filtrée sur `ID`) ou `Table.Colonne` (filtrée sur cette colonne) ;
+  `BUFF_NAME_LINK = 'BuffTemplet.BuffID'` dans
+  `src/lib/admin/gamedata-store.ts`, la règle de `linkTargetFor` rend cette
+  cible quand `BuffTemplet` est sur le disque (toujours après
+  `LINK_OVERRIDES`), et son doc décrit les deux formes. Côté page
+  (`scripts/quick/ui/tabs/gamedata.js`), `linkOf(target)` sépare table et
+  colonne (`ID` par défaut) ; `linkHash` écrit
+  `#gamedata/<table>?col=<col>&exact=1&q=<id>`, le lien porte `data-table` (la
+  table seule) et `data-col`, le clic interroge cette colonne, et l'en-tête
+  dit `→ BuffTemplet.BuffID` sans changement de code. (c) Pourquoi :
+  `TrustRewardTemplet.RewardBuffID` porte des NUMÉROS (1 à 15, tous dans
+  `TrustBuffTemplet.ID`, 15/15 ; 630 lignes), pas un nom. Comment : l'exception
+  `'TrustRewardTemplet.RewardBuffID': 'TrustBuffTemplet'` dans
+  `LINK_OVERRIDES`, avec son compte, passe avant la règle. (d)
+  `resolveRewardTable` (`src/lib/data/rewards.ts`) reste ; son commentaire dit
+  que son seul usage est la garde de `encounters.test.ts`, voulue (une table
+  qu'un patch rend irrésoluble casse `pnpm test` plutôt que l'écran), et que
+  la supprimer supprimerait la garde. Vérification : `review.test.ts` (staging
+  par entité des trois fichiers), `admin-inbox.test.ts` (les treize, dans
+  l'ordre), `actions.test.ts` (les ids de `EXTRACTOR_DEPS.targets()`),
+  `patch.test.ts` (`equipment/gloves.json` → `gloves`, le « voir » qui
+  manquait), `gamedata-store.test.ts` réécrit (les trois `*BuffID` →
+  `BuffTemplet.BuffID`, `undefined` sans `BuffTemplet` ; `RewardBuffID` →
+  `TrustBuffTemplet`, `undefined` sans elle ; `RageID` garde sa déduction),
+  `ui-serve.test.ts` (un cas `Table.Colonne` : `href`
+  `#gamedata/BuffTemplet?col=BuffID&exact=1&q=COMMON_CLASS_PASSIVE`, en-tête
+  `→ BuffTemplet.BuffID`, la requête sur `col: 'BuffID'`, le hash qui suit ;
+  le cas sur `ID` inchangé). Relevé après coup (script jetable, non committé,
+  `linkTargets` sur les vraies tables du poste) : les vingt colonnes
+  `*BuffID` rendent `BuffTemplet.BuffID` et `TrustRewardTemplet.RewardBuffID`
+  rend `TrustBuffTemplet`. Quick isolé (port 4791, GET seulement) :
+  `GET /api/extractor` montre Casques, Gants, Bottes après Armures ;
+  `GET /api/gamedata/schema?name=CharacterSkillLevelTemplet` rend
+  `links.BuffID === 'BuffTemplet.BuffID'`, celle de `TrustRewardTemplet`
+  `links.RewardBuffID === 'TrustBuffTemplet'`. `pnpm typecheck` (dernière
+  ligne : la commande des trois `tsc --noEmit`, sans erreur), `pnpm lint`
+  (`eslint`, sans erreur), `pnpm test` (« Tests 4304 passed (4304) »). Visuel : trois
+  lignes de plus dans Extraction et l'inbox, des flèches `↗` sur les colonnes
+  `*BuffID` ; rien d'autre. Laissé : `BuffTemplet.BuffID` elle-même tombe sous
+  la règle et se lie à sa propre colonne (le relevé la compte, 22 lignes en
+  tout) — un clic filtre la table sur la ligne, sans dommage, mais c'est un
+  lien vers soi que le lot n'a pas tranché ; le commentaire du mémo de
+  `admin-inbox.ts` (« ~0,2 s l'un, dix entités ») garde son « dix », hors des
+  commentaires que le lot nomme.
+
 - **A69 — quick : « réponse interrompue » à l'envoi Discord, `post()` dit le
   statut HTTP et le début du corps, et quick garde ses connexions plus
   longtemps que Caddy.** Item « « réponse interrompue » à l'envoi Discord » du

@@ -11487,6 +11487,69 @@ describe('Tables du jeu — la page, sur le vrai markup', () => {
     });
   });
 
+  it('une cible `Table.Colonne` : le lien filtre cette colonne (`*BuffID` → `BuffTemplet.BuffID`)', async () => {
+    const page = await gamedata({
+      hash: '#gamedata/CharacterSkillLevelTemplet',
+      catalog: catalog({
+        tables: [table('CharacterSkillLevelTemplet', 4_096), table('BuffTemplet', 4_096)],
+      }),
+      rows: (q): Rows | null =>
+        q.name === 'CharacterSkillLevelTemplet'
+          ? {
+              table: 'CharacterSkillLevelTemplet',
+              columns: ['ID', 'BuffID'],
+              filled: ['ID', 'BuffID'],
+              rowCount: 1,
+              rows: [{ ID: '1', BuffID: 'COMMON_CLASS_PASSIVE' }],
+              matched: 1,
+              page: 1,
+              pageSize: 50,
+              texts: {},
+              links: { BuffID: 'BuffTemplet.BuffID' },
+            }
+          : q.name === 'BuffTemplet'
+            ? {
+                table: 'BuffTemplet',
+                columns: ['ID', 'BuffID'],
+                filled: ['ID', 'BuffID'],
+                rowCount: 1,
+                rows: [{ ID: '1070', BuffID: 'COMMON_CLASS_PASSIVE' }],
+                matched: 1,
+                page: 1,
+                pageSize: 50,
+                texts: {},
+                links: {},
+              }
+            : null,
+    });
+    // L'en-tête dit la colonne visée, pas seulement la table.
+    expect(page.all('#t-head .t-arrow').map((a) => a.getAttribute('title'))).toEqual([
+      '→ BuffTemplet.BuffID',
+    ]);
+    const links = page.all('#t-rows tr[data-i="0"] a');
+    expect(links.map((a) => a.getAttribute('href'))).toEqual([
+      '#gamedata/BuffTemplet?col=BuffID&exact=1&q=COMMON_CLASS_PASSIVE',
+    ]);
+
+    links[0].click();
+    await page.settle();
+    expect(page.queries.at(-1)).toEqual({
+      name: 'BuffTemplet',
+      q: 'COMMON_CLASS_PASSIVE',
+      col: 'BuffID',
+      exact: '1',
+      page: '1',
+      resolve: '1',
+    });
+    expect(page.window.location.hash).toBe(
+      '#gamedata/BuffTemplet?col=BuffID&exact=1&q=COMMON_CLASS_PASSIVE',
+    );
+    expect(page.el('t-pick').value).toBe('BuffTemplet');
+    expect(page.el('t-col').value).toBe('BuffID');
+    expect(page.el('t-exact').checked).toBe(true);
+    expect(page.cells(0)).toEqual(['1070', 'COMMON_CLASS_PASSIVE']);
+  });
+
   it('une cellule `0` reste du texte, seule ou dans une liste : pas de lien vers `ID = 0`', async () => {
     const page = await gamedata({
       hash: '#gamedata/RecruitGroupTemplet',
