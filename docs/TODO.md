@@ -73,6 +73,11 @@ les preuves et les décisions vivent dans le tri consolidé de sevih-tool
 
 ## 🧹 Restes de la relecture du 19/10 (A68 à B64, OB4, G13)
 
+- [ ] **`bossRankOptionLabels` affiche des valeurs brutes** (vu par A73,
+      19/10) : les options de rang des boss portent `dmg_boost` et
+      `dmg_reduce_rate`, absents de `statScales` (qui connaît
+      `damage_boost` et `dmg_reduce`), d'où « +100 » pour 10 % ; aligner
+      les slugs ou ajouter les deux clés au glossaire.
 - [ ] **Après F29** : `bestSkill` promu et committé par Sevih le 19/10
       (`2b7762a0`, 4 entrées : Sterope, Luna, Poolside Regina, Gnosis
       Dahlia) ; au
@@ -82,7 +87,6 @@ les preuves et les décisions vivent dans le tri consolidé de sevih-tool
 - [ ] **Après B65** : `/tools/ost` sur mobile (en-tête réduit à la case
       « tout », barre sur deux lignes) ; en prod, un zip de deux pistes depuis
       `outerpedia.com` : la CSP `connect-src` vient de s'élargir.
-- [ ] **gear-solver** : `docs/release-notes.md` [Unreleased] à remplir avant la release (G8 à G32).
 
 ## 🧰 Outil quick
 

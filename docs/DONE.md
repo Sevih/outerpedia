@@ -7,6 +7,38 @@
 
 ## 2026-10-19
 
+- **Relecture A72, A73, G31, G33, G32 (Fable) — la vague de clôture, cinq
+  lots validés.** Outerpedia `2f610d23`, `e74cacb7` (+ docs `35ce870c`,
+  `a7ae5c69`, `2f469aad`) ; gear-solver `abb7da2`, `4d02ef3`, `1f763e0`.
+  Sur HEAD : outerpedia typecheck, lint, format verts, `Tests 4353 passed`,
+  1764 en mode développement ; gear-solver typecheck vert, 162 + 159 + 579
+  tests, lint 0 erreur et 15 warnings (28 avant G32). Un relecteur par
+  dépôt, banc par moi. A72 : « Get news » en `.btn ghost` à côté de
+  « Lancer », en-tête d'Extraction « 14 cibles, 1 en lecture » compté
+  depuis `/api/extractor` (quatorze, pas treize : le registre en porte 14
+  avec `monster-skill`), lignes `[getNews] <lang> · page N` sans toucher la
+  ligne finale ni le commit automatique. A73 : les 26 `st` de `STAT_DEFS`
+  dans l'enum `STAT_TYPE` du client, échelle = `IsPercentStat`,
+  `glossaries.json` seul fichier promu, exactement cinq natures changent
+  (EFF, RES, `effectiveness`, `resilience` → plat ; `hit_hp_recovery` →
+  pourcentage), `formatMonsterStat` rejoué 504 cas : 18 différences, toutes
+  sur `hit_hp_recovery` qu'aucune entité ne porte. G31 : `gameRulesOf` =
+  `DEFAULT_RULES` sur le contrat du jour (test de garde), repli sans jet,
+  21 tables synchronisées identiques à outerpedia (hash `66681131bd9f`),
+  `ST_AVOID` en `StatType` affiché combat-only, 24 paires du contrat sans
+  null. G33 : SHA des deux actions vérifiés contre leurs tags v4.4.0,
+  `dependabot.yml` parsé. G32 : les 15 warnings restants listés et
+  justifiés, élagage qui réveille le Builder (test), pièce réservée par un
+  AUTRE héros non libre (test), `upg` vivant, pré-tri Score sans le −30 %
+  de Phantasm, test img-cache joué 5 fois vert. Notes de release
+  complétées (`2d0079e`). Vu en route par A73, laissé au TODO :
+  `bossRankOptionLabels` affiche `dmg_boost`/`dmg_reduce_rate` bruts
+  (« +100 » pour 10 %) car ces slugs ne sont pas dans `statScales`.
+  **Reste à Sevih** : push d'outerpedia et de gear-solver, `npm ci` sur le
+  fixe (le lock a changé avec G14), release de gear-solver, première série
+  de PR Dependabot à trier ; à l'écran : Get news à côté de Lancer, Settings
+  de gear-solver avec son message en pied, Advices avec une pièce réservée.
+  **Suite** : AUCUN lot ouvert, l'en-cours est soldé côté code.
 - **A73 — datagen : `statScales` dérivé de `IsPercentStat` du client,
   EFF/RES plats à la source, rustine `RAW_FLAT` de B61 retirée.** Item du
   TODO « `statScales` dit EFF/RES en pourcentage ». La table `STAT_DEFS` de
