@@ -224,7 +224,8 @@ rangée des boutons d'un formulaire.
 ```
 
 `primary` = l'action de l'onglet, une par formulaire ; `ghost` = le reste ;
-`danger` = ce qui détruit (texte rouge, bord rouge au survol). 34 px, `sm` 28 px.
+`warn` = l'action secondaire à distinguer d'un coup d'œil (texte et bord ambre, un seul par
+onglet : « Get news » de Patch, demande de Sevih du 19/10) ; `danger` = ce qui détruit (texte rouge, bord rouge au survol). 34 px, `sm` 28 px.
 `icon` (30 × 30) = l'action d'une ligne : gris, **rouge au survol seulement**,
 toujours avec `aria-label`. États : `disabled` (55 %) et `busy` (sablier qui
 bat devant le libellé, curseur « progress » — à poser pendant un `post()`).
@@ -756,7 +757,7 @@ fois, et un cinquième à part, « Get news » (`pnpm getNews`). Croquis du rend
 .head  Patch — La chaîne des données à chaque patch du jeu, étape par étape…
 quatre .card empilées, dans l'ordre du flux ; chacune : card-head = « n · titre » · ce que fait le geste (.lbl) … son ÉTAT poussé à droite (.p-state : atténué, ok, warn, ko), puis .p-body = le geste
   .card « 1 · Rafraîchir depuis le jeu »      … « client 1.11.404 · site 1.11.402 — un patch attend » (warn ; sans écart, atténué ; « pas de client Steam · site … », `title` : l'Android reste possible)
-     .form : Source [Steam | Android] (.p-seg, deux radios ; défaut = `DATAGEN_SOURCE`, sinon Steam) [☐ forcer] [☐ sans pull] [☑ collecter les images] [☑ notes de patch] [Lancer] [Get news] (.btn.ghost) · « notes de patch seules (pnpm getNews) — committe posts.json / buff-events.json s’ils changent » (.lbl)
+     .form : Source [Steam | Android] (.p-seg, deux radios ; défaut = `DATAGEN_SOURCE`, sinon Steam) [☐ forcer] [☐ sans pull] [☑ collecter les images] [☑ notes de patch] [Lancer] [Get news] (.btn.warn, ambre) · « notes de patch seules (pnpm getNews) — committe posts.json / buff-events.json s’ils changent » (.lbl)
      .p-note.warn « une reprise attend (checkpoint du 08/10 14:30) : « Lancer » reprend où la chaîne a cassé, « forcer » repart de zéro. » — seulement s'il y en a un pour la source choisie
   .card « 2 · Revue de la promotion »         … « pas encore de dry-run » · « dry-run en cours… » · « dry-run réussi à 14:32 » (ok) · « dry-run en échec à 14:32 » (ko) · « dry-run à refaire : la proposition a pu changer » (warn)
      [Dry-run]

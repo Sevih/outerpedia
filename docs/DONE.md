@@ -7,6 +7,22 @@
 
 ## 2026-10-19
 
+- **Clôtures du 19/10 soir (Sevih à l'écran, Fable au clavier).** Confirmés
+  par Sevih dans gear-solver 1.11.0 : Settings, Builder, Builds, fiche
+  (Claire 133 SPD, Pulverization 70 % + 50 %, CHC à 100), Inventory, Home ;
+  quick : Get news ; site : `/tools/ost` sur PC et mobile. En jeu :
+  Pulverization 4 pièces = +120 % (2P + 4P cumulés, décision d'A67
+  confirmée) ; Fortification = −30 % de vitesse pendant 1 tour,
+  irremovable. Demiurge Lambda et Sigma ne sont pas gérés par Sevih :
+  items clos. Sur demande : « Get news » passe en ambre — variante
+  `.btn.warn` ajoutée à `quick.css` (texte et bord `--warn`, fond ambre
+  léger au survol), charte `STYLE.md` (« un seul par onglet »), test
+  d'`ui-serve` retourné (390 verts). Release 1.11.0 de gear-solver
+  publiée par moi (`GH_TOKEN` fourni par `gh auth token`, jamais affiché),
+  PR Dependabot concurrently 9 → 10 fusionnée (`0452968`). Restent de
+  Dependabot : le groupe mineurs/patch (#35, verte) et quatre majeures
+  (electron 44, vitest 5, @types/node 26, checkout 7 ; setup-node 7 (#33)
+  rouge), à décider par Sevih.
 - **Relecture A72, A73, G31, G33, G32 (Fable) — la vague de clôture, cinq
   lots validés.** Outerpedia `2f610d23`, `e74cacb7` (+ docs `35ce870c`,
   `a7ae5c69`, `2f469aad`) ; gear-solver `abb7da2`, `4d02ef3`, `1f763e0`.

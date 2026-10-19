@@ -12672,10 +12672,10 @@ describe('Patch — la page, sur le vrai markup', () => {
     expect(page.el('push').disabled).toBe(true);
   });
 
-  it('« Get news » est un bouton fantôme de la rangée de « Lancer »', async () => {
+  it('« Get news » est un bouton ambre de la rangée de « Lancer »', async () => {
     const page = await patch();
     const news = page.el('p-get-news');
-    expect(news.classList.contains('ghost')).toBe(true);
+    expect(news.classList.contains('warn')).toBe(true);
     expect(news.classList.contains('primary')).toBe(false);
     expect(news.previousElementSibling?.id).toBe('p-refresh');
     expect(news.closest('.form')).toBe(page.el('p-refresh').closest('.form'));

@@ -7,12 +7,6 @@
 
 ## 🎮 Suites du patch du 06/10 (entrée DONE du 06/10)
 
-- [ ] **Demiurge Lambda, fiche curée** : pros/cons et synergies (rangs,
-      priorité des skills et EE faits le 14/10 ; rôle DPS posé, tag
-      `premium` automatique, ligne de `premium-limited` présente).
-- [ ] **Sigma, après équilibrage** : curé à revoir (rang, pros/cons) ; et
-      décider si le `damage-calculator` modélise [Tower Administrator]
-      (+150 % de dégâts en Skyward Tower, les cibles de tour existent).
 - [ ] **Revue d'extraction (suite de F14)** : le flag `art` qui apparaît sur
       un costume existant reste un écart — à trancher au premier cas.
 
@@ -65,11 +59,6 @@ les preuves et les décisions vivent dans le tri consolidé de sevih-tool
       remplie au forum-sync suivant) ; Dependabot `npm` (et `docker` pour
       l'image de base) : PLUS TARD (décision de Sevih du 18/10, chaque PR
       redéploie le bot ; OB3 ne couvre que les actions GitHub).
-- [ ] **Pulverization T4, 4 pièces** : correction de la table du jeu FAITE
-      (A67, le 4P T4 lit `BID_ITEM_UO_SET_17_1` à 500, tenue dans
-      `datagen/lib/buff.ts`). Reste à Sevih : la mesure en jeu (4 pièces T4
-      contre une cible en Break, +120 % attendus) ; Fortification (−30 % de
-      vitesse, normal) à vérifier en jeu aussi ; le `data:sync` de gear-solver.
 
 ## 🧹 Restes de la relecture du 19/10 (A68 à B64, OB4, G13)
 
@@ -78,15 +67,8 @@ les preuves et les décisions vivent dans le tri consolidé de sevih-tool
       `dmg_reduce_rate`, absents de `statScales` (qui connaît
       `damage_boost` et `dmg_reduce`), d'où « +100 » pour 10 % ; aligner
       les slugs ou ajouter les deux clés au glossaire.
-- [ ] **Après F29** : `bestSkill` promu et committé par Sevih le 19/10
-      (`2b7762a0`, 4 entrées : Sterope, Luna, Poolside Regina, Gnosis
-      Dahlia) ; au
-      calculateur, Ame S1, Francesca S3, Sterope S1 avec la condition
-      cochée ; les 16 clips de base `*_Upgrade`/`*_Burst` laissés en repli
-      (liste dans l'entrée DONE de F29) à trancher.
-- [ ] **Après B65** : `/tools/ost` sur mobile (en-tête réduit à la case
-      « tout », barre sur deux lignes) ; en prod, un zip de deux pistes depuis
-      `outerpedia.com` : la CSP `connect-src` vient de s'élargir.
+- [ ] **Après F29** : les 16 clips de base `*_Upgrade`/`*_Burst` laissés en
+      repli (liste dans l'entrée DONE de F29) à trancher.
 
 ## 🧰 Outil quick
 

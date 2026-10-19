@@ -505,6 +505,13 @@ textarea {
 .btn.ghost:hover {
   background: var(--surface-overlay);
 }
+.btn.warn {
+  border-color: var(--warn);
+  color: var(--warn);
+}
+.btn.warn:hover {
+  background: color-mix(in srgb, var(--warn) 12%, transparent);
+}
 .btn.danger {
   border-color: var(--line);
   color: var(--danger);
