@@ -29,11 +29,25 @@
  * livre le contrat à toutes les installations, pas le déploiement du site.
  * `version.json` = `{schema, resVersion, hash, builtAt}` : `schema` = forme du
  * contrat (`SOLVER_SCHEMA`), `resVersion` = version des tables du jeu, `hash` =
- * clé d'invalidation (les 19 tables seules), `builtAt` = dernier vrai changement.
+ * clé d'invalidation (les 20 tables seules), `builtAt` = dernier vrai changement.
  * `stat-keys.json` (ajout C26) = la table `ST_*` / `OAT_*` → clé du vocabulaire
  * du contrat (`atk`, `atkPct`, `chc`, `res`, `resRate`…), nature « % » et
  * abréviation du wiki (`datagen/lib/stat-keys.ts`) ; le build jette sur toute
  * paire émise qui n'y a pas sa ligne.
+ * Règles que gear-solver recopiait à la main, émises depuis B62 (ajouts, `schema`
+ * inchangé ; le build jette quand la table ne porte plus ce qu'elles supposent) :
+ *   - `enhance.json` › `gemSlots` = emplacements de gemme d'un talisman ou d'un
+ *     EE : `baseByGrade[grade]` + Σ `slots` des `unlocks[slot]` dont
+ *     `enhanceLevel` ≤ niveau d'enchantement (`gemSlotRules`) ;
+ *   - `enhance.json` › `reforge.maxTicksPerSub` = paliers d'une sous-stat, ligne
+ *     de base comprise (`reforgeMaxTicks`) ;
+ *   - `enhance.json` › `reforge.countByStar` / `ascendedBonus` = reforges d'une
+ *     pièce par étoile de base, + `ascendedBonus` pour un 6★ en Singularité
+ *     (`reforgeBudgets`) ;
+ *   - `progression.json` › `evoUnlockLevel` = niveau du perso qui débloque chaque
+ *     palier d'évolution (`evoUnlockLevels`) ;
+ *   - `buffs.json` › `combatOnly` = `!isStatSheetBuff` de la ligne elle-même
+ *     (règle de la fiche du client, comme `singularity-options` et `ee-passives`).
  * Niveau d'un set porté (`sets.json`, outerpedia est la source, gear-solver
  * recopie cette règle ; client : `CStatValue.SetSetItemValue`,
  * `CCharacterData.CalcSetItem` / `CreateBuffSetItem`, `CItem.SetOptionLevel`) :
@@ -199,6 +213,187 @@ function fmtTurn(buff: Row | undefined): string {
   return /^\d+$/.test(td) ? td : '?';
 }
 
+// ---- règles lues des tables (B62) : jamais une valeur devinée -------------------
+// Emplacements de gemme d'un grade, EN DUR dans le client : `CItem.GetGemSlotCount`
+// rend `ItemGrade + 1` (enum `ITEM_GRADE` : NORMAL 0 … UNIQUE 3), puis y ajoute
+// `CTempletManager.GetSpecialEquipEnchantGemSlotCount` (cf. `gemSlotRules`).
+const GEM_SLOTS_BY_GRADE: Record<string, number> = { normal: 1, magic: 2, rare: 3, unique: 4 };
+/** Les deux slots que `SpecialEquipEnchantTemplet` enchante (talisman, EE). */
+const GEM_SLOT_SUBTYPES = ['ITS_EQUIP_EXCLUSIVE', 'ITS_EQUIP_OOPARTS'];
+
+/**
+ * Emplacements de gemme d'un talisman ou d'un EE. Client :
+ * `GetSpecialEquipEnchantGemSlotCount(ItemSubType, EnchantLevel)` somme les
+ * `GemSlot` des lignes de son `ItemSubType` dont `EnchantLevel` ≤ niveau ;
+ * `unlocks` = ces lignes à `GemSlot > 0`, par slot du contrat, triées. Jette
+ * sur un `ItemSubType` hors des deux slots, et sur un slot sans aucune ligne
+ * (une table vide donnerait 4 emplacements à vie, en silence).
+ */
+export function gemSlotRules(rows: Row[]): {
+  baseByGrade: Record<string, number>;
+  unlocks: Record<string, { enhanceLevel: number; slots: number }[]>;
+} {
+  const unlocks: Record<string, { enhanceLevel: number; slots: number }[]> = {};
+  for (const sub of GEM_SLOT_SUBTYPES) unlocks[SLOT[sub]] = [];
+  const seen = new Set<string>();
+  for (const r of rows) {
+    const sub = r.ItemSubType ?? '';
+    if (!GEM_SLOT_SUBTYPES.includes(sub)) {
+      throw new Error(
+        `SpecialEquipEnchantTemplet ${r.ID} : ItemSubType « ${sub} » hors des slots ` +
+          `exclusive / ooparts du contrat — revoir enhance.json › gemSlots`,
+      );
+    }
+    seen.add(sub);
+    const enhanceLevel = Number(r.EnchantLevel);
+    const slots = Number(r.GemSlot);
+    if (!Number.isInteger(enhanceLevel) || !Number.isInteger(slots) || slots < 0) {
+      throw new Error(
+        `SpecialEquipEnchantTemplet ${r.ID} : EnchantLevel « ${r.EnchantLevel} » / ` +
+          `GemSlot « ${r.GemSlot} » illisibles`,
+      );
+    }
+    if (slots > 0) unlocks[SLOT[sub]].push({ enhanceLevel, slots });
+  }
+  for (const sub of GEM_SLOT_SUBTYPES) {
+    if (!seen.has(sub)) {
+      throw new Error(
+        `SpecialEquipEnchantTemplet : aucune ligne ${sub} — les emplacements de gemme ` +
+          `de ce slot ne se lisent plus (4 à vie en silence)`,
+      );
+    }
+  }
+  for (const list of Object.values(unlocks)) list.sort((a, b) => a.enhanceLevel - b.enhanceLevel);
+  return { baseByGrade: { ...GEM_SLOTS_BY_GRADE }, unlocks };
+}
+
+/**
+ * Paliers d'une sous-stat, ligne de base comprise. Client (`CItemSubOptionData`) :
+ * valeur = min(OptionValue + niveau × OptionFactor, OptionMaxValue), d'où
+ * 1 + (OptionMaxValue − OptionValue) / OptionFactor paliers. Une sous-stat
+ * FIGÉE (`OptionFactor` vide, `OptionMaxValue` = `OptionValue` : les gears à
+ * sous-stats imposées, 92xxx / 93xxx) n'a pas de palier à lire et ne compte pas.
+ * Jette sur un quotient non entier, sur deux lignes qui divergent (le contrat
+ * n'en porte qu'un) et sur une table sans ligne à paliers.
+ */
+export function reforgeMaxTicks(rows: Row[]): number {
+  const ticks: number[] = [];
+  for (const o of rows) {
+    if (o.OptionType !== 'IOT_STAT') continue;
+    const value = Number(o.OptionValue);
+    const factor = Number(o.OptionFactor ?? 0);
+    const max = Number(o.OptionMaxValue);
+    if (factor === 0 && max === value) continue;
+    const steps = (max - value) / factor;
+    if (!Number.isInteger(steps) || steps < 0) {
+      throw new Error(
+        `ItemOptionTemplet ${o.ID} (groupe ${o.GroupID}, ${o.StatType} ${o.ApplyingType}) : ` +
+          `(OptionMaxValue ${o.OptionMaxValue} − OptionValue ${o.OptionValue}) / OptionFactor ` +
+          `${o.OptionFactor} n'est pas un nombre entier de paliers — revoir reforge.maxTicksPerSub`,
+      );
+    }
+    ticks.push(1 + steps);
+  }
+  return singleValue(
+    ticks,
+    'ItemOptionTemplet : paliers par sous-stat (1 + (OptionMaxValue − OptionValue) / OptionFactor)',
+  );
+}
+
+// Reforges d'une pièce par étoile de base, EN DUR dans le client :
+// `CUIItemSmelting` prend `BasicStar` sous 6★, et `CCommonDefine.GetMaxSmeltingCount`
+// en 6★, soit 6 sans Singularité (+ `AddSmeltingCount`, cf. `reforgeBudgets`).
+const REFORGE_COUNT_BY_STAR: Record<string, number> = {
+  '1': 1,
+  '2': 2,
+  '3': 3,
+  '4': 4,
+  '5': 5,
+  '6': 6,
+};
+
+/**
+ * Budgets de reforge : `countByStar` (en dur, ci-dessus) et `ascendedBonus` =
+ * `AddSmeltingCount` des lignes `SET_ENCHANT` de `SingularityEquipEnchantTemplet`
+ * (`GetMaxSmeltingCount` lit celle de l'arme ; jette si elles divergent).
+ * Garde : la ligne `IG_UNIQUE` de chaque étoile d'`ItemSmeltingTemplet` porte
+ * autant de `MaterialCountN` non nuls que de reforges (+ `ascendedBonus` en 6★) ;
+ * sinon le build jette en nommant l'étoile.
+ */
+export function reforgeBudgets(
+  smeltingRows: Row[],
+  singularityRows: Row[],
+): { countByStar: Record<string, number>; ascendedBonus: number } {
+  const ascendedBonus = singleValue(
+    singularityRows
+      .filter((r) => r.EnchantType === 'SET_ENCHANT')
+      .map((r) => Number(r.AddSmeltingCount)),
+    'SingularityEquipEnchantTemplet.AddSmeltingCount (SET_ENCHANT)',
+  );
+  const unique = smeltingRows.filter((r) => r.ItemGrade === 'IG_UNIQUE');
+  for (const r of unique) {
+    if (!(String(Number(r.BasicStar)) in REFORGE_COUNT_BY_STAR)) {
+      throw new Error(
+        `ItemSmeltingTemplet ${r.ID} : étoile ${r.BasicStar} hors de reforge.countByStar — ` +
+          `revoir le nombre de reforges`,
+      );
+    }
+  }
+  for (const [star, count] of Object.entries(REFORGE_COUNT_BY_STAR)) {
+    const row = unique.find((r) => String(Number(r.BasicStar)) === star);
+    const expected = count + (star === '6' ? ascendedBonus : 0);
+    const found = row
+      ? Object.keys(row).filter((k) => /^MaterialCount\d+$/.test(k) && Number(row[k]) > 0).length
+      : null;
+    if (found !== expected) {
+      throw new Error(
+        `ItemSmeltingTemplet ${star}★ IG_UNIQUE : ` +
+          `${row ? `${found} MaterialCountN non nuls` : 'ligne absente'}, ${expected} attendus ` +
+          `(countByStar ${count}${star === '6' ? ` + ascendedBonus ${ascendedBonus}` : ''}) — ` +
+          `le nombre de reforges a changé, revoir enhance.json › reforge`,
+      );
+    }
+  }
+  return { countByStar: { ...REFORGE_COUNT_BY_STAR }, ascendedBonus };
+}
+
+/**
+ * Niveau du perso qui débloque chaque palier d'évolution. Client :
+ * `CTempletManager.GetCharacterEvolutionLevelCurrentLevel(Element, BasicStar, Level)`
+ * retient, parmi les lignes de `CharacterEvolutionTemplet` de (élément, étoile
+ * de base), la plus haute `RequireLevel` ≤ niveau (palier 1 sinon). Le contrat
+ * n'en porte qu'une par palier : jette si un élément ou une étoile diverge, ou
+ * sur une table vide.
+ */
+export function evoUnlockLevels(rows: Row[]): Record<string, number> {
+  const byLevel = new Map<number, number[]>();
+  for (const r of rows) {
+    const lv = Number(r.EvolutionLevel);
+    if (!Number.isInteger(lv)) {
+      throw new Error(
+        `CharacterEvolutionTemplet ${r.ID} : EvolutionLevel « ${r.EvolutionLevel} » illisible`,
+      );
+    }
+    const list = byLevel.get(lv) ?? [];
+    list.push(Number(r.RequireLevel));
+    byLevel.set(lv, list);
+  }
+  if (!byLevel.size) {
+    throw new Error('CharacterEvolutionTemplet vide : progression.json › evoUnlockLevel illisible');
+  }
+  return Object.fromEntries(
+    [...byLevel]
+      .sort((a, b) => a[0] - b[0])
+      .map(([lv, req]) => [
+        String(lv),
+        singleValue(
+          req,
+          `CharacterEvolutionTemplet.RequireLevel (EvolutionLevel ${lv}, tous éléments et étoiles)`,
+        ),
+      ]),
+  );
+}
+
 export interface SolverFiles {
   /** nom de fichier (sans dossier) → contenu, dans l'ORDRE d'émission de l'ancien build.mjs. */
   files: [string, unknown][];
@@ -309,9 +504,10 @@ export function buildSolver(inputs: {
     if (!b.StatType || b.StatType === 'ST_NONE') continue;
     const lv = Number(b.Level);
     if (!Number.isFinite(lv) || lv < 1) continue;
-    const combatOnly =
-      bid.startsWith('BID_CEQUIP_MAIN_') &&
-      (eeRowByBuffId.get(bid)?.BuffConditionType ?? 'NONE') !== 'NONE';
+    // Hors fiche = tout ce que `InitStatPremiumBuff` ne verse pas (cf.
+    // `isStatSheetBuff`), lu sur la ligne elle-même : une main conditionnée à un
+    // élément, mais aussi un `BT_DMG_REDUCE` sans condition.
+    const combatOnly = !isStatSheetBuff(b);
     const entry: { st: string; ap?: string; v: number; combatOnly?: true; name?: string } = {
       st: b.StatType,
       ap: b.ApplyingType,
@@ -424,12 +620,28 @@ export function buildSolver(inputs: {
   const singularitySteps = Object.keys(slotSteps)
     .sort((a, b) => Number(a) - Number(b))
     .map((k) => slotSteps[Number(k)]);
+  // Sous-stats de TOUS les groupes référencés par un gear (pas seulement les
+  // pools majoritaires de sub-ticks) : un groupe qui divergerait casse ici.
+  const gearSubGroups = new Set(
+    itemTemplet
+      .filter((it) => GEAR_SUBTYPES.has(it.ItemSubType ?? '') && it.SubOptionGroupID)
+      .map((it) => it.SubOptionGroupID),
+  );
+  const itemOptionRows = loadTable('ItemOptionTemplet');
   emit('enhance.json', {
     enhanceFactor,
     tierFactor,
     maxEnhanceLevel,
     singularity: { activation, steps: singularitySteps },
     expCurves,
+    gemSlots: gemSlotRules(loadTable('SpecialEquipEnchantTemplet')),
+    reforge: {
+      maxTicksPerSub: reforgeMaxTicks(itemOptionRows.filter((o) => gearSubGroups.has(o.GroupID))),
+      ...reforgeBudgets(
+        loadTable('ItemSmeltingTemplet'),
+        loadTable('SingularityEquipEnchantTemplet'),
+      ),
+    },
   });
 
   // ---- sets + singularity-options + ee-passives (une passe ItemSpecialOption) ----
@@ -841,6 +1053,11 @@ export function buildSolver(inputs: {
     };
   }
   emit('char-level-max.json', charLevelMax);
+
+  // ---- progression : niveau de déblocage des paliers d'évolution ----
+  emit('progression.json', {
+    evoUnlockLevel: evoUnlockLevels(loadTable('CharacterEvolutionTemplet')),
+  });
 
   // ---- archive-bonus ----
   const archiveBonusCurve = loadTable('ArchiveBonusTemplet')

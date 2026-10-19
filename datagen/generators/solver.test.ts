@@ -44,11 +44,18 @@ import heroGrowthData from '../../data/generated/hero-growth.json';
 import gameVersionData from '../../data/generated/game-version.json';
 import buffsData from '../../data/generated/solver/buffs.json';
 import poolsData from '../../data/generated/equipment/pools.json';
-import { singleValue } from '../lib/tables';
+import progressionData from '../../data/generated/solver/progression.json';
+import { singleValue, type Row } from '../lib/tables';
 import { slugEnum } from '../lib/enums';
 import { missingStatKeys, statKeysFile } from '../lib/stat-keys';
 import { formatStatValue } from '../lib/stats';
-import { SOLVER_SCHEMA } from './solver';
+import {
+  evoUnlockLevels,
+  gemSlotRules,
+  reforgeBudgets,
+  reforgeMaxTicks,
+  SOLVER_SCHEMA,
+} from './solver';
 
 const characters = charactersData as Record<
   string,
@@ -83,6 +90,11 @@ const enhance = enhanceData as {
   maxEnhanceLevel: number;
   singularity: { activation: number; steps: number[] };
   expCurves: Record<string, number[]>;
+  gemSlots: {
+    baseByGrade: Record<string, number>;
+    unlocks: Record<string, { enhanceLevel: number; slots: number }[]>;
+  };
+  reforge: { maxTicksPerSub: number; countByStar: Record<string, number>; ascendedBonus: number };
 };
 type StatEntry = { st: string; ap?: string; v: number };
 type CombatEffect = {
@@ -372,6 +384,19 @@ const CONTRACT_SHAPE: Record<string, Shape> = {
       maxEnhanceLevel: '*',
       singularity: { obj: { activation: '*', steps: { arr: '*' } } },
       expCurves: { rec: { arr: '*' } },
+      // B62 (ajouts) : emplacements de gemme, cap et budgets de reforge.
+      gemSlots: {
+        obj: {
+          baseByGrade: { obj: { normal: '*', magic: '*', rare: '*', unique: '*' } },
+          unlocks: {
+            obj: {
+              exclusive: { arr: { obj: { enhanceLevel: '*', slots: '*' } } },
+              ooparts: { arr: { obj: { enhanceLevel: '*', slots: '*' } } },
+            },
+          },
+        },
+      },
+      reforge: { obj: { maxTicksPerSub: '*', countByStar: { rec: '*' }, ascendedBonus: '*' } },
     },
   },
   'equipment.json': {
@@ -407,6 +432,7 @@ const CONTRACT_SHAPE: Record<string, Shape> = {
     },
   },
   'options.json': { rec: { obj: {}, opt: { st: '*', ap: '*', v: '*', buffId: '*' } } },
+  'progression.json': { obj: { evoUnlockLevel: { rec: '*' } } },
   'sets.json': {
     rec: {
       obj: {
@@ -777,5 +803,161 @@ describe('solver — stat-keys (L6) : ST_* / OAT_* vers la clé du contrat', () 
 
   it.each(lines)('%s / %s : percent d’accord avec formatStatValue', (st, ap, _key, percent) => {
     expect(formatStatValue(ap, 100, slugEnum(st)).endsWith('%')).toBe(percent);
+  });
+});
+
+// ---- B62 : règles recopiées par gear-solver, émises par le contrat ---------------
+describe('solver — règles émises (B62) : gemmes, reforge, évolution, combatOnly', () => {
+  const buffs = buffsData as unknown as Record<string, ({ combatOnly?: true } | null)[]>;
+  const progression = progressionData as { evoUnlockLevel: Record<string, number> };
+
+  it('enhance.gemSlots : 4 en unique, un emplacement de plus à +5 sur exclusive et ooparts', () => {
+    expect(enhance.gemSlots).toEqual({
+      baseByGrade: { normal: 1, magic: 2, rare: 3, unique: 4 },
+      unlocks: {
+        exclusive: [{ enhanceLevel: 5, slots: 1 }],
+        ooparts: [{ enhanceLevel: 5, slots: 1 }],
+      },
+    });
+  });
+
+  it('enhance.reforge : 6 paliers par sous-stat, 1 à 6 reforges par étoile, +3 en Singularité', () => {
+    expect(enhance.reforge).toEqual({
+      maxTicksPerSub: 6,
+      countByStar: { '1': 1, '2': 2, '3': 3, '4': 4, '5': 5, '6': 6 },
+      ascendedBonus: 3,
+    });
+  });
+
+  it('progression.evoUnlockLevel : les huit paliers', () => {
+    expect(progression.evoUnlockLevel).toEqual({
+      '2': 20,
+      '3': 40,
+      '4': 60,
+      '5': 80,
+      '6': 100,
+      '7': 105,
+      '8': 110,
+      '9': 120,
+    });
+  });
+
+  it('buffs.combatOnly : par le prédicat de fiche, pas par le nom', () => {
+    const flags = (bid: string) => buffs[bid].map((e) => e?.combatOnly ?? false);
+    expect(flags('BID_CEQUIP_MAIN_DMG_REDUCE_CORE')).toEqual(Array(11).fill(true));
+    expect(flags('BID_CEQUIP_MAIN_DMG_FIRE').every(Boolean)).toBe(true);
+    for (const bid of ['BID_CEQUIP_MAIN_BUFF_CHANCE_CORE', 'BID_ITEM_STAT_OOPARTS_ATK_6']) {
+      expect(buffs[bid].length, bid).toBeGreaterThan(0);
+      expect(flags(bid).some(Boolean), bid).toBe(false);
+    }
+  });
+
+  const gemRow = (ID: string, ItemSubType: string, EnchantLevel: string, GemSlot: string): Row => ({
+    ID,
+    ItemSubType,
+    EnchantLevel,
+    GemSlot,
+  });
+  it('gemSlotRules : unlocks triés par slot, jette sur table vide, slot absent ou inconnu', () => {
+    const rows = [
+      gemRow('1', 'ITS_EQUIP_EXCLUSIVE', '5', '1'),
+      gemRow('2', 'ITS_EQUIP_EXCLUSIVE', '3', '0'),
+      gemRow('3', 'ITS_EQUIP_OOPARTS', '8', '1'),
+      gemRow('4', 'ITS_EQUIP_OOPARTS', '2', '1'),
+    ];
+    expect(gemSlotRules(rows).unlocks).toEqual({
+      exclusive: [{ enhanceLevel: 5, slots: 1 }],
+      ooparts: [
+        { enhanceLevel: 2, slots: 1 },
+        { enhanceLevel: 8, slots: 1 },
+      ],
+    });
+    expect(() => gemSlotRules([])).toThrow(/aucune ligne ITS_EQUIP_EXCLUSIVE/);
+    expect(() => gemSlotRules(rows.slice(0, 2))).toThrow(/aucune ligne ITS_EQUIP_OOPARTS/);
+    expect(() => gemSlotRules([...rows, gemRow('5', 'ITS_EQUIP_WEAPON', '5', '1')])).toThrow(
+      /ITS_EQUIP_WEAPON » hors des slots/,
+    );
+  });
+
+  const optRow = (ID: string, GroupID: string, v: string, f: string | null, max: string): Row => ({
+    ID,
+    GroupID,
+    OptionType: 'IOT_STAT',
+    StatType: 'ST_ATK',
+    ApplyingType: 'OAT_ADD',
+    OptionValue: v,
+    ...(f === null ? {} : { OptionFactor: f }),
+    OptionMaxValue: max,
+  });
+  it('reforgeMaxTicks : 1 + (max − base) / pas, sous-stats figées ignorées ; jette sinon', () => {
+    const rows = [optRow('1', '105', '30', '30', '180'), optRow('2', '101', '9', '9', '54')];
+    const fixed = optRow('3', '12001', '120', null, '120');
+    expect(reforgeMaxTicks([...rows, fixed])).toBe(6);
+    expect(() => reforgeMaxTicks([])).toThrow(/une valeur unique attendue, trouvé \[\]/);
+    expect(() => reforgeMaxTicks([fixed])).toThrow(/trouvé \[\]/);
+    expect(() => reforgeMaxTicks([optRow('4', '105', '30', '40', '180')])).toThrow(
+      /pas un nombre entier de paliers/,
+    );
+    expect(() => reforgeMaxTicks([optRow('5', '105', '30', null, '180')])).toThrow(
+      /pas un nombre entier de paliers/,
+    );
+    expect(() => reforgeMaxTicks([...rows, optRow('6', '104', '18', '18', '126')])).toThrow(
+      /trouvé \[6, 7\]/,
+    );
+  });
+
+  const smeltRow = (star: number, n: number): Row => ({
+    ID: String(star * 4),
+    BasicStar: String(star),
+    ItemGrade: 'IG_UNIQUE',
+    ...Object.fromEntries(
+      Array.from({ length: 9 }, (_, i) => [`MaterialCount${i + 1}`, i < n ? '5' : '0']),
+    ),
+  });
+  const singRow = (ItemSubType: string, EnchantType: string, AddSmeltingCount: string): Row => ({
+    ItemSubType,
+    EnchantType,
+    AddSmeltingCount,
+  });
+  it('reforgeBudgets : étoile et bonus de Singularité, gardés par ItemSmeltingTemplet', () => {
+    const smelting = [1, 2, 3, 4, 5].map((s) => smeltRow(s, s)).concat(smeltRow(6, 9));
+    const sing = [
+      singRow('ITS_EQUIP_WEAPON', 'SET_ENCHANT', '3'),
+      singRow('ITS_EQUIP_SHOES', 'SET_ENCHANT', '3'),
+      singRow('ITS_EQUIP_WEAPON', 'SET_EQUIP_ENHANCE', '0'),
+    ];
+    expect(reforgeBudgets(smelting, sing)).toEqual({
+      countByStar: { '1': 1, '2': 2, '3': 3, '4': 4, '5': 5, '6': 6 },
+      ascendedBonus: 3,
+    });
+    expect(() => reforgeBudgets(smelting, [])).toThrow(/AddSmeltingCount/);
+    expect(() =>
+      reforgeBudgets(smelting, [...sing, singRow('ITS_EQUIP_ARMOR', 'SET_ENCHANT', '4')]),
+    ).toThrow(/trouvé \[3, 4\]/);
+    expect(() => reforgeBudgets([...smelting.slice(0, 5), smeltRow(6, 8)], sing)).toThrow(
+      /6★ IG_UNIQUE : 8 MaterialCountN non nuls, 9 attendus/,
+    );
+    expect(() => reforgeBudgets(smelting.slice(1), sing)).toThrow(/1★ IG_UNIQUE : ligne absente/);
+    expect(() => reforgeBudgets([...smelting, smeltRow(7, 7)], sing)).toThrow(/étoile 7/);
+  });
+
+  const evoRow = (Element: string, BasicStar: string, lv: string, req: string): Row => ({
+    ID: `${Element}${BasicStar}${lv}`,
+    Element,
+    BasicStar,
+    EvolutionLevel: lv,
+    RequireLevel: req,
+  });
+  it('evoUnlockLevels : un niveau par palier ; jette sur table vide ou divergence', () => {
+    const rows = [
+      evoRow('FIRE', '3', '3', '40'),
+      evoRow('FIRE', '3', '2', '20'),
+      evoRow('WATER', '1', '2', '20'),
+    ];
+    expect(evoUnlockLevels(rows)).toEqual({ '2': 20, '3': 40 });
+    expect(() => evoUnlockLevels([])).toThrow(/vide/);
+    expect(() => evoUnlockLevels([...rows, evoRow('DARK', '3', '2', '25')])).toThrow(
+      /EvolutionLevel 2.*trouvé \[20, 25\]/,
+    );
   });
 });

@@ -203,5 +203,39 @@
     "ooparts|unique|6": [
       0, 100000, 250000, 480000, 830000, 1360000, 2160000, 3360000, 5160000, 7860000, 11910000
     ]
+  },
+  "gemSlots": {
+    "baseByGrade": {
+      "normal": 1,
+      "magic": 2,
+      "rare": 3,
+      "unique": 4
+    },
+    "unlocks": {
+      "exclusive": [
+        {
+          "enhanceLevel": 5,
+          "slots": 1
+        }
+      ],
+      "ooparts": [
+        {
+          "enhanceLevel": 5,
+          "slots": 1
+        }
+      ]
+    }
+  },
+  "reforge": {
+    "maxTicksPerSub": 6,
+    "countByStar": {
+      "1": 1,
+      "2": 2,
+      "3": 3,
+      "4": 4,
+      "5": 5,
+      "6": 6
+    },
+    "ascendedBonus": 3
   }
 }

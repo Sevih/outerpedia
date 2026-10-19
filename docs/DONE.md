@@ -7,6 +7,66 @@
 
 ## 2026-10-19
 
+- **B62 — Contrat solver : les règles recopiées à la main dans gear-solver
+  émises par outerpedia (emplacements de gemme, cap et budgets de reforge,
+  paliers d'évolution, `combatOnly` par le prédicat de fiche).** Item du TODO
+  « Talismans à +5 : 5 emplacements de gemme pour tous » marqué FAIT côté
+  outerpedia, le lot gear-solver qui lit les clés restant dans la ligne
+  (après la série G). Quoi et comment, dans `datagen/generators/solver.ts`,
+  quatre lectures exportées qui jettent quand la table ne porte plus ce que
+  le contrat suppose : (1) `gemSlotRules` lit `SpecialEquipEnchantTemplet`
+  (`GetSpecialEquipEnchantGemSlotCount`), `baseByGrade` en dur
+  (`CItem.GetGemSlotCount` = `ItemGrade + 1`) ; jette sur un `ItemSubType`
+  hors exclusive / ooparts et sur un slot sans ligne ; (2) `reforgeMaxTicks`
+  = `1 + (OptionMaxValue − OptionValue) / OptionFactor` sur TOUS les groupes
+  de sous-stats référencés par un gear, par `singleValue` — écart au texte du
+  lot : ces groupes comptent 32 groupes à sous-stats FIGÉES (11121…12019, gears
+  92xxx / 93xxx : `OptionFactor` vide, `OptionMaxValue` = `OptionValue`), qui
+  auraient fait jeter le build ; elles sont écartées ligne par ligne (pas de
+  palier à lire), et toute autre forme (pas nul avec un max différent,
+  quotient non entier) jette ; (3) `reforgeBudgets` : `countByStar` en dur
+  (`CUIItemSmelting` l.187 et `CCommonDefine.GetMaxSmeltingCount`),
+  `ascendedBonus` = `singleValue` des `AddSmeltingCount` `SET_ENCHANT`, gardés
+  par les `MaterialCountN` non nuls de chaque ligne `IG_UNIQUE`
+  d'`ItemSmeltingTemplet` (1…5, puis 9 = 6 + 3 en 6★) ; (4) `evoUnlockLevels`
+  = `singleValue` de `RequireLevel` par `EvolutionLevel` sur les 120 lignes de
+  `CharacterEvolutionTemplet`. `enhance.json` gagne `gemSlots` et `reforge`,
+  un nouveau `progression.json` (après `char-level-max.json`) porte
+  `evoUnlockLevel`, et `combatOnly` de `buffs.json` vaut
+  `!isStatSheetBuff(b)` sur la ligne elle-même au lieu du préfixe du nom et
+  de la condition de la première ligne. Aucune clé existante ne bouge,
+  `SOLVER_SCHEMA` reste 1 (règle (a)) ; l'en-tête dit les cinq règles et
+  passe à « les 20 tables » (`sync-derived.ts` n'affiche aucun nombre).
+  Pourquoi : gear-solver recopiait ces règles à la main (`gemSlotsOf`,
+  `REFORGE_PER_SUB_CAP` « observé en captures », `REFORGE_PLANS` /
+  `maxReforgesOf`, `EVO_UNLOCK_LEVEL`, le « 5 : 4 » de `buildAdvice`) ; un
+  patch qui les change casse maintenant ici. Rejeu : `pnpm datagen:build`,
+  promotion à blanc = `solver/buffs.json` ~1, `solver/enhance.json` +2
+  (`gemSlots`, `reforge`), `solver/progression.json` nouveau,
+  `solver/version.json` ~2 (et 2400015 non intégré, jamais promu), puis
+  `--apply --only` sur ces quatre ; `git diff --stat data/generated/solver/`
+  = ces fichiers seuls. `enhance.json` : `gemSlots.baseByGrade` normal 1, magic 2, rare 3,
+  unique 4, `gemSlots.unlocks` = `[{ enhanceLevel: 5, slots: 1 }]` sur
+  `exclusive` comme sur `ooparts` ; `reforge.maxTicksPerSub` 6,
+  `reforge.countByStar` 1 → 1 … 6 → 6, `reforge.ascendedBonus` 3 ; `progression.json` : 2 → 20, 3 → 40, 4 → 60, 5 → 80, 6 → 100,
+  7 → 105, 8 → 110, 9 → 120 ; `buffs.json` : le diff n'ajoute que onze
+  `"combatOnly": true` sous `BID_CEQUIP_MAIN_DMG_REDUCE_CORE` (seul id hors
+  `_FIRE/_WATER/_EARTH/_LIGHT/_DARK` désormais hors fiche) ; hash
+  `5d0c024e8bdf` → `b550b1ed16a5`. Vérifié : `solver.test.ts` déclare les
+  clés et le fichier dans `CONTRACT_SHAPE`, teste les valeurs émises et les
+  quatre lectures sur des lignes factices (valeur, table vide, slot inconnu
+  ou absent, quotient non entier, groupes divergents, `MaterialCountN` qui ne
+  suit plus, étoile hors table, `RequireLevel` différent entre éléments) ;
+  `pnpm typecheck` (`tsc --noEmit … -p scripts/tsconfig.json`, sortie 0),
+  `pnpm lint` (`eslint`, sortie 0), `pnpm test` (« Tests 4316 passed
+  (4316) »). Pour Sevih : (a) les talismans 4★/5★ ont bien 5 emplacements à
+  +5 dans le client, gear-solver n'a rien à corriger, seulement à lire ;
+  (b) après le lot G et son `data:sync`, un EE à main « DMG Reduction » core
+  sort de la fiche et de la CP (`composeBuild.ts` saute `combatOnly`), comme
+  dans le client ; (c) `progression.json` n'est lu par aucune installation
+  avant ce lot G (absent de `solver-files.json`). Laissé : tout gear-solver
+  (lecture, `data:sync`, `solver-files.json`), `sub-ticks.json`.
+
 - **B64 — Anim-events : ré-extraction (bundles de fusion, états d'approche,
   `EventAdditiveAttack`), les 46 skills de C24 extraits ou justifiés.** Item
   du TODO « Anim-events : 46 skills sans aucun event extrait » (section

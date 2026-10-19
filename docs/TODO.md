@@ -69,16 +69,19 @@ les preuves et les décisions vivent dans le tri consolidé de sevih-tool
 
 ## 🧹 Suites de la rédaction du 18/10 (lots A62 à C26, G8 à G30, F28, OB3, TW2)
 
-- [ ] **Talismans à +5 : 5 emplacements de gemme pour tous**
-      (`gemSlotsOf`, `gear-solver/packages/core/src/gems.ts`) : si les
-      talismans 4★/5★ n'en ont que 4 dans le jeu, le solveur leur pose une
-      gemme de trop et surestime la CP. À émettre par outerpedia (`GemSlot`),
-      avec les autres règles recopiées à la main dans gear-solver
-      (`REFORGE_PER_SUB_CAP` ← `OptionMaxValue`, budgets 6/9 ←
-      `AddSmeltingCount`, `EVO_UNLOCK_LEVEL`, filtre d'`ee-passives`, 5e
-      emplacement de `buildAdvice`, `combatOnly` des mains d'EE décidé par le
-      nom dans `datagen/generators/solver.ts`) : une paire de lots
-      outerpedia + gear-solver après la série contrat, `GemSlot` d'abord.
+- [ ] **Talismans à +5 : 5 emplacements de gemme pour tous** — FAIT côté
+      outerpedia (B62) : le client donne 5 emplacements à +5 à TOUS les
+      talismans et EE (tous `IG_UNIQUE`, l'étoile n'entre pas dans la règle),
+      `gemSlotsOf` est juste ; le contrat émet `enhance.json` › `gemSlots` et
+      `reforge` (`maxTicksPerSub`, `countByStar`, `ascendedBonus`),
+      `progression.json` › `evoUnlockLevel`, et `combatOnly` de `buffs.json`
+      par `isStatSheetBuff`. Reste, après la série G, le lot gear-solver qui
+      lit ces clés : `gemSlotsOf` (`apps/renderer/src/lib/solver/gems.ts`
+      l.182-186), `REFORGE_PER_SUB_CAP` (l.845), `REFORGE_PLANS` (l.72-75) et
+      `maxReforgesOf` (l.854-857) d'`apps/renderer/src/lib/solver/engine.ts`,
+      `EVO_UNLOCK_LEVEL` (`packages/core/src/compose-stats.ts` l.224-229), le
+      « 5 : 4 » de `buildAdvice.ts` (l.152), et `progression.json` ajouté à
+      `apps/desktop/src/solver-files.json`.
 - [ ] **Suites de L6 (après C26 et G30)** : les lecteurs du wiki
       (`BLOCK_KEY`, `BONUS_KEY` de `char-progression.ts`, `STAT_KEY` de
       `reco-api.ts`) et `RAW_FLAT` / `statScales` de `monster-stats.ts` lisent

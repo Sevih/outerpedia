@@ -1584,66 +1584,77 @@
       "st": "ST_DMG_REDUCE_RATE",
       "ap": "OAT_RATE",
       "v": 200,
+      "combatOnly": true,
       "name": "DMG Reduction"
     },
     {
       "st": "ST_DMG_REDUCE_RATE",
       "ap": "OAT_RATE",
       "v": 207,
+      "combatOnly": true,
       "name": "DMG Reduction"
     },
     {
       "st": "ST_DMG_REDUCE_RATE",
       "ap": "OAT_RATE",
       "v": 214,
+      "combatOnly": true,
       "name": "DMG Reduction"
     },
     {
       "st": "ST_DMG_REDUCE_RATE",
       "ap": "OAT_RATE",
       "v": 221,
+      "combatOnly": true,
       "name": "DMG Reduction"
     },
     {
       "st": "ST_DMG_REDUCE_RATE",
       "ap": "OAT_RATE",
       "v": 228,
+      "combatOnly": true,
       "name": "DMG Reduction"
     },
     {
       "st": "ST_DMG_REDUCE_RATE",
       "ap": "OAT_RATE",
       "v": 235,
+      "combatOnly": true,
       "name": "DMG Reduction"
     },
     {
       "st": "ST_DMG_REDUCE_RATE",
       "ap": "OAT_RATE",
       "v": 242,
+      "combatOnly": true,
       "name": "DMG Reduction"
     },
     {
       "st": "ST_DMG_REDUCE_RATE",
       "ap": "OAT_RATE",
       "v": 249,
+      "combatOnly": true,
       "name": "DMG Reduction"
     },
     {
       "st": "ST_DMG_REDUCE_RATE",
       "ap": "OAT_RATE",
       "v": 256,
+      "combatOnly": true,
       "name": "DMG Reduction"
     },
     {
       "st": "ST_DMG_REDUCE_RATE",
       "ap": "OAT_RATE",
       "v": 263,
+      "combatOnly": true,
       "name": "DMG Reduction"
     },
     {
       "st": "ST_DMG_REDUCE_RATE",
       "ap": "OAT_RATE",
       "v": 270,
+      "combatOnly": true,
       "name": "DMG Reduction"
     }
   ],
