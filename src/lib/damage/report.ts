@@ -1,8 +1,10 @@
 /**
  * AMONT du moteur — LIGNES DE RAPPORT : pour un skill de l'attaquant et
- * chacun de ses ÉTATS (une chaîne de hits = un état : base, burst 1/2/3,
- * upgrade… — décision Sevih 03/08, report-inputs § 5.4 : chaque état est une
- * sous-ligne), énumère les TROIS branches (normal / critique / esquivé) avec
+ * chacun de ses ÉTATS — une VARIANTE de lancer (le clip de l'index retenu,
+ * spec damage-clips-joues § 5.3) quand le skill est résolu par ses clips,
+ * une chaîne de hits en repli § 12.4 (décision Sevih 03/08, report-inputs
+ * § 5.4 : chaque état est une sous-ligne) —, énumère les TROIS branches
+ * (normal / critique / esquivé) avec
  * leur probabilité EXACTE (§ 4 : P = (v+1)/1001), calcule chaque hit dans
  * l'ordre du binaire avec le rattrapage d'arrondi du dernier hit (§ 8.3), et
  * pondère l'espérance. Les tirages n'existent pas ici : chaque aléa devient
@@ -117,35 +119,103 @@ export interface ReportClipInput {
   events: { id: string; factor: number; count: number }[];
 }
 
-/** Un état du skill (une chaîne de hits) — devient une sous-ligne du rapport. */
+/**
+ * Une VARIANTE de lancer du skill (`DamageSkill.variants` du datagen, spec
+ * damage-clips-joues § 5.2) : le clip de l'index retenu, le buff du kit qui
+ * le choisit (`gate`, absent pour la base) et la suite additionnelle
+ * enchaînée par `EventAdditiveAttack` quand un de ses buffs passe.
+ */
+export interface ReportVariantInput {
+  /** `base`, `second`, `third`, suffixe `-skip` pour l'état passé. */
+  key: string;
+  trigger: string;
+  gate?: { type: string; buffIds: string[] };
+  clip: ReportClipInput;
+  /** `selfMet` : le clip de base pose lui-même la condition — comptée par
+   *  défaut ; sinon comptée quand le scénario déclare un des `buffIds`. */
+  additive?: { clip: ReportClipInput; buffIds: string[]; selfMet?: true };
+}
+
+/** Ce que l'état retient de sa variante (détail d'affichage, pas de calcul). */
+export interface StateVariantInfo {
+  key: string;
+  trigger: string;
+  gate?: { type: string; buffIds: string[] };
+  /** Suite additionnelle du clip de base et son sort dans CET état. */
+  additive?: { buffIds: string[]; selfMet?: true; counted: boolean };
+}
+
+/** Un état du skill — devient une sous-ligne du rapport. */
 export interface ReportState {
-  /** Clé de chaîne (dérivée de la convention d'ID — l'ID brut fait foi). */
+  /** Clé de l'état : la clé de la VARIANTE (`base`, `second`, `base-skip`…)
+   *  quand le skill est résolu par ses clips, la clé de chaîne (dérivée de la
+   *  convention d'ID — l'ID brut fait foi) pour un état de repli § 12.4. */
   chain: string;
+  /** Lignes de hits de l'état : la chaîne en repli ; pour une variante, les
+   *  hits du skill que ses clips jouent (détail des chaînes — le calcul lit
+   *  les events des clips, pas ces lignes). */
   hits: ReportHitInput[];
-  /** Clips jouant cette chaîne (≥ 1 event de ses templets) — présents quand
+  /** Cascades de l'état (§ 8.2 + § 8.3 chacune) : le clip de la variante,
+   *  puis celui de la suite quand elle est comptée — présents quand
    *  l'affectation est RÉSOLUE par les AnimationEvents ; absents → le moteur
    *  retombe sur l'heuristique § 12.4 (seuil 990). */
   clips?: ReportClipInput[];
+  /** Variante dont l'état est la ligne (absent en repli). */
+  variant?: StateVariantInfo;
 }
 
 /**
- * Attache aux états leurs clips résolus (`DamageSkill.clips` du datagen) :
- * un clip appartient à l'état dont il joue ≥ 1 templet ; une chaîne listée
- * `clipsUnresolvedChains` reste SANS clips (fallback heuristique § 12.4).
+ * Les états d'un skill (`ReportSkillInput.states`) depuis ses hits extraits
+ * et ses variantes (spec damage-clips-joues § 5.3) : UN état par variante —
+ * sa cascade, plus celle de la suite additionnelle quand `selfMet` ou quand
+ * `additiveMet(buffIds)` dit que le scénario la déclare remplie —, puis les
+ * états de repli § 12.4 : les chaînes listées `unresolvedChains` et celles
+ * qu'aucun clip ne joue (une chaîne sans event garde son repli, comme
+ * avant). La chaîne d'une suite NON comptée est jouée par un clip (celui de
+ * la suite, conditionnel) : pas de repli pour elle. Sans variantes : un état
+ * par chaîne (repli pur).
  */
-export function attachChainClips(
-  states: ReportState[],
-  clips?: ReportClipInput[],
+export function buildReportStates(
+  hits: { chain: string; hit: number; id: string; damageFactor: number; maxHitCount?: number }[],
+  variants?: ReportVariantInput[],
   unresolvedChains?: string[],
+  additiveMet: (buffIds: string[]) => boolean = () => false,
 ): ReportState[] {
-  if (!clips?.length) return states;
+  const byChain = groupHitsByChain(hits);
+  if (!variants?.length) return byChain;
   const unresolved = new Set(unresolvedChains ?? []);
-  return states.map((s) => {
-    if (unresolved.has(s.chain)) return s;
-    const ids = new Set(s.hits.map((h) => h.id));
-    const own = clips.filter((c) => c.events.some((e) => ids.has(e.id)));
-    return own.length ? { ...s, clips: own } : s;
+  const played = new Set<string>();
+  for (const v of variants)
+    for (const c of [v.clip, v.additive?.clip]) for (const e of c?.events ?? []) played.add(e.id);
+  const states: ReportState[] = variants.map((v) => {
+    const counted =
+      v.additive !== undefined && (v.additive.selfMet === true || additiveMet(v.additive.buffIds));
+    const clips = counted && v.additive ? [v.clip, v.additive.clip] : [v.clip];
+    const ids = new Set(clips.flatMap((c) => c.events.map((e) => e.id)));
+    return {
+      chain: v.key,
+      hits: byChain.flatMap((s) => s.hits.filter((h) => ids.has(h.id))),
+      clips,
+      variant: {
+        key: v.key,
+        trigger: v.trigger,
+        ...(v.gate ? { gate: v.gate } : {}),
+        ...(v.additive
+          ? {
+              additive: {
+                buffIds: v.additive.buffIds,
+                ...(v.additive.selfMet ? { selfMet: true as const } : {}),
+                counted,
+              },
+            }
+          : {}),
+      },
+    };
   });
+  for (const s of byChain) {
+    if (unresolved.has(s.chain) || !s.hits.some((h) => played.has(h.id))) states.push(s);
+  }
+  return states;
 }
 
 /**
@@ -281,8 +351,14 @@ export interface BranchLine {
 }
 
 export interface StateLine {
+  /** Clé de l'état — la clé de la variante, ou la chaîne en repli (cf. `ReportState.chain`). */
   chain: string;
-  /** Facteur total § 8.1. Chaîne RÉSOLUE par les AnimationEvents : Σ des
+  /** Variante dont la ligne est l'état (absent en repli § 12.4). */
+  variant?: StateVariantInfo;
+  /** Chaînes d'id du skill que les clips de l'état jouent — un DÉTAIL
+   *  (tooltip), plus des lignes : tous les hits du clip forment sa ligne. */
+  chains?: string[];
+  /** Facteur total § 8.1. État RÉSOLU par les AnimationEvents : Σ des
    *  facteurs des clips joués (chaque clip fait SA cascade § 8.2 + § 8.3 —
    *  détail dans `clips`) ; le clip peut rejouer un templet ou mêler d'autres
    *  chaînes, sa somme fait foi. Fallback (chaîne sans clips extraits) :
@@ -296,9 +372,10 @@ export interface StateLine {
    *  frappe 1000 ‰ en jeu (18/08/2026 — comblé) ; le S2 de Noa somme 999 ‰
    *  (3×333) et frappe 999 ‰ EXACT (22/08/2026 — brut). Seuil : 990. */
   factorFilled?: true;
-  /** Détail § 8.1 par clip — présent quand la chaîne est résolue par les
-   *  AnimationEvents (une cascade § 8.2/8.3 par clip, mesures Francesca S2
-   *  22/08/2026 : cascade(700) + cascade(300), les deux captures exactes). */
+  /** Détail § 8.1 par clip — présent quand l'état est résolu par les
+   *  AnimationEvents : le clip de la variante, puis la suite additionnelle
+   *  quand elle est comptée (mesures Francesca S2 22/08/2026 : cascade(700)
+   *  + cascade(300), les deux captures exactes). */
   clips?: { name: string; totalFactor: number }[];
   /** Branches à probabilité > 0 uniquement (une branche impossible n'existe pas). */
   branches: BranchLine[];
@@ -422,6 +499,7 @@ export function buildSkillReport(
         const factor = stateTotalFactor(s);
         return {
           chain: s.chain,
+          ...stateDetail(s),
           totalFactor: factor.totalFactor,
           ...(factor.factorFilled ? { factorFilled: true as const } : {}),
           ...(factor.clips ? { clips: factor.clips } : {}),
@@ -567,12 +645,13 @@ export function buildSkillReport(
     const factor = stateTotalFactor(state);
     // ── Chemin RÉSOLU : cascade § 8.2 + rattrapage § 8.3 PAR CLIP ──────────
     // (le binaire recalcule ReceiveMaxDamage à chaque scan § 8.1, donc à
-    // chaque clip — S2 de Francesca : cascade(700) + cascade(300), mesures
-    // exactes 22/08/2026). Les events étrangers à la chaîne comptent dans le
-    // facteur du clip et consomment leur part de la cascade, mais seuls les
-    // hits de LA chaîne alimentent sa ligne (les autres ont la leur).
+    // chaque clip — S2 de Francesca : clip de base puis suite additionnelle,
+    // cascade(700) + cascade(300), mesures exactes 22/08/2026). TOUS les
+    // `EventAttackStart` du clip forment la ligne, quelle que soit leur
+    // chaîne d'id : `CFormula.CalcDamage` fait une seule cascade du clip
+    // (revue R16 — avant le 19/10/2026, chaque chaîne n'affichait que ses
+    // hits et le clip partagé était compté en plusieurs lignes).
     if (state.clips?.length && factor.clips) {
-      const chainIds = new Set(state.hits.map((h) => h.id));
       const clipFactors = factor.clips;
       const branchLines = branchRates.map(
         ({ branch, probability, rate, rateTrace }): BranchLine => {
@@ -612,18 +691,16 @@ export function buildSkillReport(
                 ? adjustLastHitDamage(clipTotal, accumulated, r.damage)
                 : r.damage;
               accumulated += damage;
-              if (chainIds.has(occ.id)) {
-                index += 1;
-                hits.push({
-                  id: occ.id,
-                  index,
-                  damage,
-                  vampiric: r.vampiric,
-                  hitRecovery: r.hitRecovery,
-                  adjusted: damage !== r.damage,
-                });
-                stateTotal += damage;
-              }
+              index += 1;
+              hits.push({
+                id: occ.id,
+                index,
+                damage,
+                vampiric: r.vampiric,
+                hitRecovery: r.hitRecovery,
+                adjusted: damage !== r.damage,
+              });
+              stateTotal += damage;
             });
             trace?.push({
               ref: '§ 8.3',
@@ -645,6 +722,7 @@ export function buildSkillReport(
       const expectedDamage = branchLines.reduce((e, b) => e + b.probability * b.totalDamage, 0);
       return {
         chain: state.chain,
+        ...stateDetail(state),
         totalFactor: factor.totalFactor,
         clips: clipFactors,
         branches: branchLines,
@@ -740,6 +818,20 @@ export function buildSkillReport(
   };
 }
 
+/** Variante et chaînes jouées d'un état résolu — portées telles quelles à la ligne. */
+function stateDetail(state: ReportState): Pick<StateLine, 'variant' | 'chains'> {
+  if (!state.variant) return {};
+  const chains = [...new Set(state.hits.map((h) => chainOfHit(h.id)))];
+  return { variant: state.variant, ...(chains.length ? { chains } : {}) };
+}
+
+/** Clé de chaîne d'un id de hit — même dérivation que `chainOf` du datagen
+ *  (l'index `_<n>` final, sans manger le numéro de skill). */
+function chainOfHit(id: string): string {
+  const m = id.match(/^(.*)_(\d+)$/);
+  return !m || /^\d+_Skill$/.test(m[1]) ? id : m[1];
+}
+
 function totalFactorOf(hits: ReportHitInput[]): number {
   return hits.reduce(
     (sum, h) => sum + (h.maxHitCount && h.maxHitCount > 0 ? h.maxHitCount : 1) * h.damageFactor,
@@ -765,9 +857,11 @@ export interface StateTotalFactor {
  * et le générateur solver d'outerpedia (« meilleur hit » d'un perso pour la
  * colonne Damage de gear-solver) la consomme telle quelle, sans recoder.
  *
- * Chaîne RÉSOLUE par les AnimationEvents : Σ des events (factor × count) de
- * chaque clip joué — chaque clip fait SA cascade § 8.2/8.3, sa somme fait foi
- * (rejeux et events d'autres chaînes compris). Fallback (pas de clips) :
+ * État RÉSOLU par les AnimationEvents : Σ des events (factor × count) de
+ * chaque clip de l'état — le clip de la variante, plus la suite additionnelle
+ * quand elle est comptée (`buildReportStates`) ; chaque clip fait SA cascade
+ * § 8.2/8.3, sa somme fait foi (rejeux et events d'autres chaînes compris).
+ * Fallback (pas de clips) :
  * Σ tables (MaxHitCount||1) × DamageFactor, comblée à 1000 ‰ sous 990
  * (heuristique § 12.4 bornée par Caren S1 700 → 1000 et Noa S2 999 servi brut).
  */

@@ -78,18 +78,72 @@ describe('skillMaxFactor — facteur d’UN skill au niveau max', () => {
       [1840],
       [hit('X_Skill_2_1', 700), hit('X_Skill_2_2', 300)],
       {
-        clips: [
+        variants: [
           {
-            name: 'X_Skill_2_Upgrade',
-            events: [
-              { id: 'X_Skill_2_1', factor: 700, count: 1 },
-              { id: 'X_Skill_2_2', factor: 300, count: 2 },
-            ],
+            key: 'base',
+            trigger: 'Burst1',
+            clip: {
+              name: 'X_Skill_2_Upgrade',
+              events: [
+                { id: 'X_Skill_2_1', factor: 700, count: 1 },
+                { id: 'X_Skill_2_2', factor: 300, count: 2 },
+              ],
+            },
           },
         ],
       },
     );
     expect(skillMaxFactor(sk)).toEqual({ factor: Math.round((1840 * 1300) / 1000) });
+  });
+
+  it('variantes : le max sur les variantes, suite additionnelle COMPTÉE (meilleur cas, comme les bursts)', () => {
+    // Sterope S1 : base 1000 ‰ + suite déclarée 300 ‰ (non selfMet) → 1300 ;
+    // Demiurge Astei S1 : base 1000, second 1300 → 1300.
+    const sterope = skill(
+      '5701',
+      'SKT_FIRST',
+      [1600],
+      [hit('S_Skill_1_1', 1000), hit('S_Skill_1_4', 300)],
+      {
+        variants: [
+          {
+            key: 'base',
+            trigger: 'Skill1',
+            clip: { name: 'S_Skill_1', events: [{ id: 'S_Skill_1_1', factor: 1000, count: 1 }] },
+            additive: {
+              clip: { name: 'S_Skill_1_2', events: [{ id: 'S_Skill_1_4', factor: 300, count: 1 }] },
+              buffIds: ['S_1_1'],
+            },
+          },
+        ],
+      },
+    );
+    expect(skillMaxFactor(sterope)).toEqual({ factor: Math.round((1600 * 1300) / 1000) });
+    const astei = skill(
+      '5901',
+      'SKT_FIRST',
+      [1500],
+      [hit('A_Skill_1_1', 1000), hit('A_Skill_extra_1', 1300)],
+      {
+        variants: [
+          {
+            key: 'base',
+            trigger: 'Skill1',
+            clip: { name: 'A_Skill_1', events: [{ id: 'A_Skill_1_1', factor: 1000, count: 1 }] },
+          },
+          {
+            key: 'second',
+            trigger: 'Skill1_1',
+            gate: { type: 'BT_SECOND_TRIGGER', buffIds: ['A_1_1'] },
+            clip: {
+              name: 'A_Skill_Extra',
+              events: [{ id: 'A_Skill_extra_1', factor: 1300, count: 1 }],
+            },
+          },
+        ],
+      },
+    );
+    expect(skillMaxFactor(astei)).toEqual({ factor: 1950 });
   });
 
   it('fallback tables : Σ < 990 comblée à 1000 (Caren S1), Σ ∈ [990, 1000) servie brute (Noa S2)', () => {

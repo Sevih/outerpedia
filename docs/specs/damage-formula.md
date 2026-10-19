@@ -393,26 +393,39 @@ hits servis bruts, compteurs remis à zéro à chaque hit. L'heuristique du mote
 les chaînes irrésolues (§ 12.4 : « Σ tables, comblée à 1000 sous 990 ») est donc un
 repli du CALCULATEUR borné par les mesures, pas un comportement du jeu.
 
-**Le scan ne voit que le(s) clip(s) COURANT(S) — un skill joué en plusieurs clips fait
+**Le scan ne voit que le(s) clip(s) COURANT(S) — un lancer joué en plusieurs clips fait
 plusieurs cascades** (le rattrapage § 8.3 remet les compteurs à zéro à la fin
 de chaque clip, le clip suivant re-scanne). Prouvé le 22/08/2026 par la paire
 de mesures du S2 de Francesca (10202 normal / 22028 crit, exacts UNIQUEMENT en
-`cascade(700) + cascade(300)` — ses deux clips) et validé par l'extraction des
-events (voir ci-dessous) : le S1 de Caren joue son hit 300 ‰ DEUX fois (+400 =
-1000, le « comblement » mesuré du 18/08 était un rejeu absent des tables), les
-clips uniques d'Eris S2 (1000) et Noa S2 (999, servi brut) restent exacts.
+`cascade(700) + cascade(300)` — son clip de base, puis sa FRAPPE ADDITIONNELLE
+conditionnelle : l'`EventAdditiveAttack` du clip de base enchaîne le clip de
+l'index 1 quand le buff `BT_ADDITIVE_ATTACK_ON_EVENT` passe, ici parce que le
+premier hit a posé le Saignement — [damage-clips-joues.md](./damage-clips-joues.md)
+§ 1.2 et § 2) et validé par l'extraction des events (voir ci-dessous) : le S1
+de Caren joue son hit 300 ‰ DEUX fois (+400 = 1000, le « comblement » mesuré du
+18/08 était un rejeu absent des tables), les clips uniques d'Eris S2 (1000) et
+Noa S2 (999, servi brut) restent exacts.
 
 **Source de la donnée (22/08/2026)** : les bundles Unity ne sont pas chiffrés —
 `datagen/damage/extract-anim-events.py` (UnityPy) extrait les
 `EventAttackStart` de chaque clip (param `<templetId>,<valeur>` — seul `[0]` est lu
-par `CalcDamage`, la valeur après la virgule n'est PAS un facteur) ET le mapping
-trigger → clips du controller compilé `AC_<charId>`. La liaison skill → clips
-est de la donnée aussi : `CharacterSkillTemplet.TriggerName` liste les
-triggers du skill DANS L'ORDRE (« Skill2,Skill2_2 » = deux clips chez
-Francesca ; « Burst1 » → clip `Skill_2_Upgrade` : le burst du S2 refait la
-même chaîne en UNE cascade de 1000 ‰), `TriggerNameSkip` porte l'état SKIP.
-`datagen/damage/clips.ts` assemble le tout dans `characters.json`
-(`DamageSkill.clips`). L'animator scanné est celui de l'ATTAQUANT, donc du
+par `CalcDamage` ; la valeur après la virgule n'est pas un facteur : c'est la
+rotation du hit, lue en `fHitRotation` par `CCharacter.EventAttackStart`), les
+`EventAdditiveAttack` (la frappe additionnelle, depuis le 19/10/2026) ET le
+mapping trigger → clips du controller compilé `AC_<charId>`. La liaison skill
+→ clips est de la donnée aussi : `CharacterSkillTemplet.TriggerName` liste des
+VARIANTES de lancer choisies par leur INDEX (`CCharacterBattle.GetUseTriggerName`,
+[damage-clips-joues.md](./damage-clips-joues.md) § 1.1) — l'index 0 par
+défaut, l'index 1 sous un buff `BT_SECOND_TRIGGER` du kit (Demiurge Astei,
+Ember, Ais, Gnosis Dahlia), les index 1 et 2 d'Ame sous `BT_2000065_A` / `_B` ;
+chez un kit à `BT_ADDITIVE_ATTACK_ON_EVENT` (Francesca, Parti, Sterope, Poolside
+Regina, Luna), l'index 1 est la suite additionnelle enchaînée par l'event du
+clip de base, pas une variante. « Skill2,Skill2_2 » chez Francesca = le clip de
+base et sa suite ; « Burst1 » → clip `Skill_2_Upgrade` : le burst du S2 refait
+la même chaîne en UNE cascade de 1000 ‰ ; `TriggerNameSkip[i]` remplace
+l'index i dans l'état SKIP. `datagen/damage/clips.ts` assemble le tout dans
+`characters.json` (`DamageSkill.variants` : une variante = son clip, le buff
+qui la choisit, sa suite conditionnelle). L'animator scanné est celui de l'ATTAQUANT, donc du
 perso qui PORTE le skill (son `ModelID`, `CharacterTemplet`) — pas le préfixe
 des templets que la jointure `SkillID` lui rattache (elle ne sert qu'au
 simulateur et sert aussi des templets d'autres persos : le fusionné, un
@@ -420,9 +433,14 @@ partenaire). Un hit préfixé d'un autre perso ET absent des clips du porteur
 sort des états du skill ; un clip sans event extrait ne prouve rien (le hit du
 porteur reste, au repli § 12.4). Corrigé le 17/10/2026 (revue R15 : 15 skills
 de Rin, Epsilon, Rey et Akari avaient des états fantômes, le S1 d'Akari était
-résolu sur l'animator de Drakhan) ; le moteur (`report.ts`) fait une cascade § 8.2 + § 8.3
-par clip — les events d'une AUTRE chaîne présents dans le clip comptent dans
-son facteur et consomment leur part, chaque chaîne n'affiche que ses hits.
+résolu sur l'animator de Drakhan) ; le moteur (`report.ts`) fait UNE LIGNE PAR
+VARIANTE : une cascade § 8.2 + § 8.3 du clip de la variante, plus celle de la
+suite additionnelle quand elle est comptée (prouvée par les tables — Francesca,
+le clip de base pose le Saignement — ou déclarée par le scénario, z `cs`), et
+TOUS les `EventAttackStart` du clip forment la ligne, quelle que soit leur chaîne
+d'id (`CalcDamage` fait une seule cascade du clip — revue R16 ; avant le
+19/10/2026 chaque chaîne n'affichait que ses hits, et un clip à deux chaînes
+faisait deux lignes). Les chaînes d'id sont un détail (tooltip).
 ⚠ L'extracteur ne garde que les `EventAttackStart` : le « facteur littéral » du jeu
 est l'event `EventEffect` (2ᵉ paramètre entier > 0 — nom lu en C# le 26/08/2026).
 SONDÉ le 26/08/2026 sur les 241 bundles `character/pc/` du miroir Steam 1.4.15 :

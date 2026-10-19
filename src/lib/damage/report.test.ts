@@ -9,6 +9,7 @@ import { describe, expect, it } from 'vitest';
 import { calcDamageCore } from './formula';
 import {
   buildDotLine,
+  buildReportStates,
   buildSkillReport,
   enumerateBranches,
   groupHitsByChain,
@@ -354,6 +355,128 @@ describe('report — ligne DOT (§ 11 + § 5)', () => {
       buildDotLine({ ...base, attackRate: 700, statValue: 10000, enhancePermille: 500 })
         .damagePerTick,
     ).toBe(4725);
+  });
+});
+
+describe('report — buildReportStates : un état par VARIANTE, suite additionnelle (F29)', () => {
+  const clipA = { name: 'F_Skill_2_1', events: [{ id: 'F_Skill_2_1', factor: 700, count: 1 }] };
+  const clipB = { name: 'F_Skill_2_2', events: [{ id: 'F_Skill_2_3', factor: 150, count: 2 }] };
+  const hits = [
+    { chain: 'F_Skill_2', hit: 1, id: 'F_Skill_2_1', damageFactor: 700 },
+    { chain: 'F_Skill_2', hit: 3, id: 'F_Skill_2_3', damageFactor: 150, maxHitCount: 2 },
+    { chain: 'F_Skill_2_UP', hit: 1, id: 'F_Skill_2_UP_1', damageFactor: 1000 },
+  ];
+
+  it('sans variantes : un état par chaîne (repli pur, comme avant)', () => {
+    expect(buildReportStates(hits).map((s) => s.chain)).toEqual(['F_Skill_2', 'F_Skill_2_UP']);
+  });
+
+  it('suite selfMet : comptée sans déclaration ; la chaîne non jouée reste en repli', () => {
+    const states = buildReportStates(hits, [
+      {
+        key: 'base',
+        trigger: 'Skill2',
+        clip: clipA,
+        additive: { clip: clipB, buffIds: ['F_2_2'], selfMet: true },
+      },
+    ]);
+    expect(states.map((s) => s.chain)).toEqual(['base', 'F_Skill_2_UP']);
+    expect(states[0].clips?.map((c) => c.name)).toEqual(['F_Skill_2_1', 'F_Skill_2_2']);
+    expect(states[0].variant).toEqual({
+      key: 'base',
+      trigger: 'Skill2',
+      additive: { buffIds: ['F_2_2'], selfMet: true, counted: true },
+    });
+    expect(stateTotalFactor(states[0]).totalFactor).toBe(1000);
+    expect(states[1].clips).toBeUndefined();
+  });
+
+  it('suite déclarée : comptée si metConditions porte un buffId, sinon non — et sa chaîne n’a PAS de repli', () => {
+    const variants = [
+      {
+        key: 'base',
+        trigger: 'Skill2',
+        clip: clipA,
+        additive: { clip: clipB, buffIds: ['P_2_1'] },
+      },
+    ];
+    const met = new Set(['P_2_1']);
+    const on = buildReportStates(hits, variants, undefined, (ids) => ids.some((i) => met.has(i)));
+    expect(on[0].clips?.map((c) => c.name)).toEqual(['F_Skill_2_1', 'F_Skill_2_2']);
+    expect(on[0].variant?.additive?.counted).toBe(true);
+    expect(stateTotalFactor(on[0]).totalFactor).toBe(1000);
+    const off = buildReportStates(hits, variants, undefined, () => false);
+    expect(off[0].clips?.map((c) => c.name)).toEqual(['F_Skill_2_1']);
+    expect(off[0].variant?.additive?.counted).toBe(false);
+    expect(stateTotalFactor(off[0]).totalFactor).toBe(700);
+    // La chaîne F_Skill_2 est jouée (base + suite conditionnelle) : jamais en repli.
+    expect(off.map((s) => s.chain)).toEqual(['base', 'F_Skill_2_UP']);
+  });
+
+  it('plusieurs variantes (gate) : une ligne chacune, chaîne irrésolue en repli', () => {
+    const states = buildReportStates(
+      hits,
+      [
+        { key: 'base', trigger: 'Skill2', clip: clipA },
+        {
+          key: 'second',
+          trigger: 'Skill2_1',
+          gate: { type: 'BT_SECOND_TRIGGER', buffIds: ['X'] },
+          clip: clipB,
+        },
+      ],
+      ['F_Skill_2_UP'],
+    );
+    expect(states.map((s) => [s.chain, s.variant?.gate?.buffIds, s.clips?.length])).toEqual([
+      ['base', undefined, 1],
+      ['second', ['X'], 1],
+      ['F_Skill_2_UP', undefined, undefined],
+    ]);
+  });
+
+  it('buildSkillReport : TOUS les hits du clip forment la ligne, variante et chaînes portées', () => {
+    const scenario = {
+      attacker: {
+        attackStat: 1000,
+        criticalRate: 0,
+        criticalDmgRate: 1500,
+        dmgBoost: 0,
+        piercePowerRate: 0,
+        piercePower: 0,
+        element: Element.Fire,
+      },
+      defender: {
+        defense: 0,
+        avoid: 0,
+        dmgReduceRate: 0,
+        enemyCriticalDamageReduce: 0,
+        element: Element.Fire,
+      },
+    };
+    // Le clip mêle deux chaînes (S3 de Francesca : 800 + 200) — une cascade, une ligne.
+    const clip = {
+      name: 'F_Skill_3',
+      events: [
+        { id: 'F_Skill_3_1_1', factor: 800, count: 1 },
+        { id: 'F_Skill_3_2', factor: 200, count: 1 },
+      ],
+    };
+    const states = buildReportStates(
+      [
+        { chain: 'F_Skill_3_1', hit: 1, id: 'F_Skill_3_1_1', damageFactor: 800 },
+        { chain: 'F_Skill_3', hit: 2, id: 'F_Skill_3_2', damageFactor: 200 },
+      ],
+      [{ key: 'base', trigger: 'Skill3', clip }],
+    );
+    const report = buildSkillReport({ skillFactor: 1000, states }, scenario);
+    expect(report.states).toHaveLength(1);
+    expect(report.states[0].branches[0].hits.map((h) => h.id)).toEqual([
+      'F_Skill_3_1_1',
+      'F_Skill_3_2',
+    ]);
+    expect(report.states[0].variant?.key).toBe('base');
+    expect(report.states[0].chains).toEqual(['F_Skill_3_1', 'F_Skill_3']);
+    expect(report.states[0].totalFactor).toBe(1000);
   });
 });
 

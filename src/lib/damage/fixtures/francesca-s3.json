@@ -41,7 +41,7 @@
   "gameVersion": "1.4.14",
   "observed": [
     {
-      "slot": "S3#2000015_SKIP",
+      "slot": "S3#base-skip",
       "branch": "critical",
       "damage": 36798
     }

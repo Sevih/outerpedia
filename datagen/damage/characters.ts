@@ -36,7 +36,12 @@
  */
 import { burstAPCosts } from '../lib/burst';
 import { groupBy, indexBy, loadTable, num, bool, splitCsv, type Row } from '../lib/tables';
-import { buildClipIndex, carrierTemplets, resolveSkillClips, type DamageSkillClip } from './clips';
+import {
+  buildClipIndex,
+  carrierTemplets,
+  resolveSkillClips,
+  type DamageClipVariant,
+} from './clips';
 import { integratedIds } from './roster';
 
 /** Paire Min/Max d'une stat du templet (colonnes brutes, niveau 1 → max). */
@@ -104,13 +109,15 @@ export interface DamageSkill {
    */
   hitsUnresolved?: boolean;
   /**
-   * Clips d'animation jouant les chaînes de ce skill (spec § 8.1 : le facteur
-   * total et le rattrapage § 8.3 se calculent PAR CLIP) — séquence réelle des
+   * VARIANTES de lancer du skill (spec damage-clips-joues § 5.2) : le clip de
+   * chaque index de `TriggerName` (une cascade § 8.2 + § 8.3 par clip),
+   * choisi par un buff du kit pour les index ≥ 1, plus la suite additionnelle
+   * conditionnelle (`additive`) sur la base. Séquences réelles des
    * `EventAttackStart`, facteurs résolus globalement. Cf. clips.ts.
    */
-  clips?: DamageSkillClip[];
-  /** Chaînes aux clips candidats AMBIGUS (règle 3 de clips.ts) — le moteur
-   *  retombe sur l'heuristique § 12.4 pour ces états. */
+  variants?: DamageClipVariant[];
+  /** Chaînes à l'affectation de clips NON résolue (en-tête de clips.ts) — le
+   *  moteur retombe sur l'heuristique § 12.4 pour ces états. */
   clipsUnresolvedChains?: string[];
 }
 
@@ -254,10 +261,17 @@ export function buildDamageCharacters(): DamageCharactersData {
   // porté par des persos d'animators différents n'a pas d'animator unique —
   // la donnée le dira, jamais un choix silencieux.
   const carrierBySkill = new Map<string, { id: string; model: string }>();
+  // `BuffID` des niveaux de TOUS les skills d'un perso : le kit qui classe
+  // l'index 1 d'un skill (clips.ts — le buff additif des bursts de Sterope
+  // vit sur son S1).
+  const kitBuffIdsByChar = new Map<string, Set<string>>();
   for (const c of templet) {
+    const kit = new Set<string>();
+    kitBuffIdsByChar.set(c.ID, kit);
     for (let slot = 1; slot <= MAX_SKILL_SLOTS; slot++) {
       const sid = c[`Skill_${slot}`];
       if (!sid || sid === '0') continue;
+      for (const l of levelsBySkill.get(sid) ?? []) for (const b of splitCsv(l.BuffID)) kit.add(b);
       const model = c.ModelID || c.ID;
       const prev = carrierBySkill.get(sid);
       if (prev === undefined) carrierBySkill.set(sid, { id: c.ID, model });
@@ -308,7 +322,19 @@ export function buildDamageCharacters(): DamageCharactersData {
       ...(burstCosts ? { burstAP: burstCosts } : {}),
       hits,
       ...(offensive && !hits.length ? { hitsUnresolved: true } : {}),
-      ...resolveSkillClips(clipIndex, carrier.model, s?.TriggerName, s?.TriggerNameSkip, hits),
+      ...resolveSkillClips(
+        clipIndex,
+        { id: carrier.id, model: carrier.model, originId: fusionOrigin.get(carrier.id) },
+        {
+          id,
+          type: s?.SkillType ?? '',
+          triggerCsv: s?.TriggerName,
+          triggerSkipCsv: s?.TriggerNameSkip,
+          buffIds: [...new Set(levels.flatMap((l) => l.buffIds))],
+        },
+        kitBuffIdsByChar.get(carrier.id) ?? [],
+        hits,
+      ),
     };
   };
 
@@ -361,5 +387,33 @@ export function buildDamageCharacters(): DamageCharactersData {
     };
   }
 
+  guardAdditiveSuites(skills);
   return { characters, skills };
+}
+
+/**
+ * GARDE : la suite additionnelle comptée PAR DÉFAUT (`selfMet`, clips.ts)
+ * n'est prouvée que pour le S2 de Francesca (1502 — le clip de base pose le
+ * Saignement, mesures du 22/08/2026) ; Parti S2 (3202), Sterope S1 (5701) et
+ * ses bursts, Poolside Regina S2 (8502) et Luna S1 (10301) portent une suite
+ * DÉCLARÉE. Une dérivation qui dirait autre chose est une régression des
+ * tables ou du code, jamais une découverte silencieuse (lot F29, 19/10/2026).
+ */
+function guardAdditiveSuites(skills: Record<string, DamageSkill>): void {
+  const selfMet = Object.values(skills)
+    .filter((s) => s.variants?.some((v) => v.additive?.selfMet))
+    .map((s) => s.id)
+    .sort();
+  if (selfMet.join(',') !== '1502') {
+    throw new Error(
+      `damage/characters: suite additionnelle selfMet attendue sur le seul skill 1502, trouvée sur [${selfMet.join(', ')}]`,
+    );
+  }
+  for (const id of ['3202', '5701', '8502', '10301']) {
+    const sk = skills[id];
+    if (!sk) continue; // hors roster validé
+    if (!sk.variants?.some((v) => v.additive && !v.additive.selfMet)) {
+      throw new Error(`damage/characters: skill ${id} — suite additionnelle déclarée attendue`);
+    }
+  }
 }

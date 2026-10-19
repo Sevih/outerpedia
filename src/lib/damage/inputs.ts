@@ -36,6 +36,7 @@ import {
 } from './aggregate';
 import { calcBaseStat } from './formula';
 import {
+  ADDITIVE_ATTACK_TYPE,
   bossQuirkRates,
   burstableSlotOf,
   pickBuffRow,
@@ -56,11 +57,11 @@ import {
   type BossPassivesInfo,
 } from './passives';
 import {
-  attachChainClips,
   buildDotLine,
+  buildReportStates,
   buildSkillReport,
-  groupHitsByChain,
   type ReportScenario,
+  type ReportVariantInput,
   type SkillReport,
   type SkillReportOptions,
 } from './report';
@@ -100,8 +101,9 @@ export interface DataSkill {
   burstAP?: number[];
   hits: DataHit[];
   hitsUnresolved?: boolean;
-  /** Clips d'animation du skill (§ 8.1 par clip — datagen/damage/clips.ts). */
-  clips?: { name: string; events: { id: string; factor: number; count: number }[] }[];
+  /** Variantes de lancer du skill (un clip par index de trigger, suite
+   *  additionnelle conditionnelle — datagen/damage/clips.ts, § 8.1 par clip). */
+  variants?: ReportVariantInput[];
   /** Chaînes à l'affectation de clips NON résolue — fallback § 12.4. */
   clipsUnresolvedChains?: string[];
 }
@@ -1097,6 +1099,17 @@ export function buildDamageReport(
     metConditions,
     target.boss === true,
   );
+  // Suites additionnelles (`BT_ADDITIVE_ATTACK_ON_EVENT`, gear.ts) : comptées
+  // dans la ligne quand leur buff est déclaré rempli (z `cs`) ou évalué
+  // actif par le scénario (condition statique — cible boss pour Poolside
+  // Regina) ; le lanceur (`callers`) est déjà encodé dans les variantes.
+  const additiveActive = new Set(
+    kitPassives.entries
+      .filter((e) => e.buff.type === ADDITIVE_ATTACK_TYPE && e.active)
+      .map((e) => e.buffId),
+  );
+  const additiveMet = (buffIds: string[]): boolean =>
+    buffIds.some((id) => metConditions?.has(id) === true || additiveActive.has(id));
   const kitBuffs = (side: 'attacker' | 'defender'): ActiveBuff[] =>
     kitPassives.entries
       .filter((e) => scenarioSide(e, side) && e.active && !e.callers)
@@ -1885,8 +1898,9 @@ export function buildDamageReport(
         monoTarget: sk.rangeType === 'SINGLE',
         // BT_DMG_ENEMY_TEAM_DECREASE ne vaut que pour la portée ALL (§ 7).
         rangeAll: sk.rangeType === 'ALL',
-        // § 8.1 par clip quand l'affectation est résolue (sinon fallback § 12.4).
-        states: attachChainClips(groupHitsByChain(sk.hits), sk.clips, sk.clipsUnresolvedChains),
+        // Un état par VARIANTE quand l'affectation est résolue (suite
+        // additionnelle comptée si prouvée ou déclarée), repli § 12.4 sinon.
+        states: buildReportStates(sk.hits, sk.variants, sk.clipsUnresolvedChains, additiveMet),
       },
       slotScenario,
       options,

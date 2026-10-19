@@ -23,10 +23,6 @@ ont été confrontées au code du 15/10 : tout est encore présent. Le détail,
 les preuves et les décisions vivent dans le tri consolidé de sevih-tool
 (`docs/revue/tri-2026-10-15.md`). Lots proposés, dans l'ordre :
 
-- [ ] **Calculateur (C, build)** : R14 et R16 : enquête faite (F27),
-      M1 et M2 mesurées le 18/10 (Sterope : suite sous buff, deux
-      cascades, bursts compris ; `docs/specs/damage-clips-joues.md` § 4) :
-      lot du correctif à rédiger (§ 5).
 - [ ] **Contrat solver, L1 d'abord** : `schema` et `resVersion` dans
       `solver/version.json` avant tout changement de forme (C1, M2, M3,
       vitesse en %, noyau par niveau, `stat-keys.json`). L1 FAIT des deux

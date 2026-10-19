@@ -7,6 +7,142 @@
 
 ## 2026-10-19
 
+- **F29 — Calculateur : clips joués par VARIANTE d'index, suite
+  additionnelle conditionnelle, une ligne par variante (R14, R16 — spec
+  `docs/specs/damage-clips-joues.md` § 5).** Item du TODO « Calculateur (C,
+  build) : R14 et R16… lot du correctif à rédiger » (section « 🔎 Revues
+  d'octobre ») retiré. Pourquoi : `TriggerName` ne liste pas des clips joués
+  à la suite mais des VARIANTES choisies par l'index du trigger (§ 1.1 : index
+  0 par défaut, 1 sous `BT_SECOND_TRIGGER`, A/B chez Ame), et l'index 1 d'un
+  kit à `BT_ADDITIVE_ATTACK_ON_EVENT` est une SUITE enchaînée par
+  l'`EventAdditiveAttack` du clip de base quand le buff passe (§ 1.2, mesures
+  M1/M2 de Sterope du 18/10) ; le site sommait tout (Ame S1 ×3) et coupait un
+  clip en autant de lignes que de chaînes d'id (R16). Comment : (a)
+  `datagen/damage/clips.ts` — `resolveSkillClips` parcourt les INDEX : pour
+  chaque i, le clip de `TriggerName[i]` et celui de `TriggerNameSkip[i]`
+  (`base`, `base-skip`, `second`, `third`…) ; l'index 1 est classé par les
+  buffs du kit du porteur (`BuffTemplet` lu dans `ClipIndex` : type et
+  `CallerSkillType` croisé avec le `SkillType` — le buff additif des bursts de
+  Sterope vit sur son S1, d'où `kitBuffIdsByChar` dans `characters.ts`) ;
+  Ame (`AME_CHARACTER_ID`, origine de fusion comprise) lit A → `second`, B →
+  `third` ; la suite s'attache aux variantes d'index 0 dont le clip porte
+  l'`EventAdditiveAttack` de B64 (`entry.additive`), sinon chaîne irrésolue et
+  `console.warn` nommé ; les deux types sur un même skill, ou un index ≥ 1
+  qu'aucun buff ne choisit : irrésolu, warn. Forme émise § 5.2 telle quelle
+  (`DamageClipVariant { key, trigger, gate?, clip, additive? }`), champ
+  renommé `DamageSkill.variants` (une variante n'est pas un clip) — appliqué à
+  `characters.ts`, `inputs.ts`, `report.ts`, `solver-best-skill.ts`. Suite
+  comptée PAR DÉFAUT (`selfMet`) dérivée des tables, la chaîne se ferme :
+  buff du skill créé sur `DAMAGE` par un templet du clip de base
+  (`BuffTemplet.CallerDamageID` — `CharacterDamageTemplet` n'a pas de
+  `BuffID`, c'est le buff qui pointe le templet), `ToolTipID` membre du
+  `ToolTipGroupTemplet` de la condition `TARGET_HAS_BUFF`/`OWNER_HAS_BUFF`
+  du buff additif, côté cohérent (ENEMY/ME) ; Francesca S2 ressort seule
+  `selfMet` (`2000015_Skill_2_1` → Saignement `2000015_2_1`, tooltip 3 ∈
+  groupe 3), GARDE `guardAdditiveSuites` au build (1502 seul `selfMet` ;
+  3202, 5701, 8502, 10301 à suite déclarée, sinon jette). Appartenance : un
+  clip atteint par un index ≥ 1 appartient au skill même si ses templets
+  sont rattachés ailleurs (Regina S2 → suite `2000085_Skill_2_2`, Dahlia S1
+  → `second` `2000090_Skill_1-1`, Ame S3 → `second`/`third` depuis 6505 :
+  1 000 / 1 200 ‰, les valeurs de `SKIP_A`/`_B`) ; un clip de templets
+  COMMUNS seuls (`Skip_Finish_<Élément>`, sans `SkillID`) n'est à personne ;
+  le clip d'index 0 garde la règle d'avant (sans aucun templet du skill =
+  trigger partagé). ÉCART CONSTATÉ ET LAISSÉ : relâchée aussi à l'index 0,
+  la règle donnait un clip de base à 16 bursts/skills de plus (1210,
+  3019-3021, 4819-4821, 5221, 5919-5920, 9019-9021, 9319-9320, 10721 — clips
+  `*_Upgrade`/`*_Burst` ne portant que des templets du skill de base), ce qui
+  changeait des lignes hors périmètre (H. Dianne S2b1 en fixture) : restreint
+  aux index ≥ 1, ces 16 restent en repli comme avant, à trancher à part (les
+  clips font foi, R15). (b) `src/lib/damage/report.ts` — `attachChainClips`
+  remplacé par `buildReportStates` (hits, variantes, chaînes irrésolues,
+  `additiveMet`) : un état par variante (`chain` = la clé de variante, `clips`
+  = le clip puis la suite si `selfMet` ou `additiveMet(buffIds)`, `variant`
+  porté à la `StateLine` avec `counted`, `chains` = chaînes jouées pour le
+  tooltip), puis les chaînes irrésolues et celles qu'aucun clip ne joue en
+  repli § 12.4 — la chaîne d'une suite NON comptée n'a pas de repli (sinon
+  Sterope B3 montrait une ligne `2000057_Skill_1` comblée à 1 000 ‰) ; le
+  chemin résolu verse TOUS les events du clip dans la ligne (plus de filtre
+  par chaîne) ; `stateTotalFactor` inchangé (Σ des clips de l'état = base +
+  suite comptée). (c) `inputs.ts` — `additiveMet` = buffId dans
+  `metConditions` (z `cs`) OU entrée du kit active (condition statique :
+  `TARGET_IS_BOSS` de Regina lue du preset) ; `gear.ts` — le type
+  `BT_ADDITIVE_ATTACK_ON_EVENT` (`ADDITIVE_ATTACK_TYPE`) devient une entrée
+  du kit côté porteur pour sa CONDITION seule (hors `ATTACKER_TYPES` : ni
+  proc déclarable ni apport d'allié ; `aggregate` ignore le type) : la
+  condition apparaît dans « Mécaniques du kit » avec le libellé existant
+  (`context.conds`/`condsRef`, tag du buff — aucune clé i18n ajoutée) et se
+  coche comme les autres `stateful`. (d) `ResultTable.tsx` — la cellule
+  montre `states[0]` (variante de base, suite selon sa condition), le
+  tooltip les variantes (clé, trigger, buffs de gate, buffs de suite avec ✓
+  si comptée, total, chaînes jouées) ; `lineSlot` `#<clé>` inchangé dans sa
+  forme. (e) `solver-best-skill.ts` — max sur les états de
+  `buildReportStates(…, () => true)` (suite comptée). (f) Docs : § 8.1 de
+  `damage-formula.md` (variantes par index, paire de Francesca = base +
+  frappe additionnelle, une ligne par variante, `fHitRotation`), en-tête de
+  `clips.ts`, commentaires de `report.ts`, note de tête du § 5 de la spec
+  des clips (le hash est inconnu à l'écriture : le message de commit y tient
+  lieu, cf. CONVENTIONS). Fixtures : `francesca-s3.json` `S3#2000015_SKIP` →
+  `S3#base-skip` et, non prévu par le lot mais même règle, `noa-rhona.json`
+  `S1#2000022_Skill_1` → `S1#base` (le S1 de Noa a une variante et une
+  chaîne `_UP` en repli : deux états) — valeurs exactes dans les deux cas.
+  Vérifié : tests unitaires `datagen/damage/clips.test.ts` (8 cas : index 0
+  seul, `BT_SECOND_TRIGGER`, suite `selfMet` et déclarée, suite sans event →
+  irrésolu + warn, skip aligné et skip générique écarté, Ame A/B, deux types
+  et index sans buff → irrésolu, clip étranger à l'index 1), `report.test.ts`
+  (`buildReportStates` : repli pur, `selfMet`, déclarée on/off sans repli de
+  la chaîne de suite, gate, `buildSkillReport` tous les hits du clip + chaînes
+  portées), `solver-best-skill.test.ts` (max sur variantes, suite comptée) ;
+  `pnpm damage:build` (extraction UnityPy rejouée : `anim-events.json`
+  identique) puis `--skip-anim`, `pnpm damage:check` : « Bilan : 42 ligne(s)
+  exacte(s), 0 en dérive, 0 sautée(s) » (Francesca S2 10 202 / 22 028, S3
+  36 798 en `S3#base-skip`, burst 2 30 476). Cellules de R16 (script
+  jetable, niveau 100, skills 5, ATK 5 000, DC 150 %, 1 000 000 PV, DEF
+  1 000, normal, cible EAU), avant → après : K S3 2 250 → 3 000 ; Naru Kang
+  S1 1 890 → 2 520 ; Demiurge Drakhan S1 3 150 → 4 500 (la revue annonçait
+  « 2 → 9 », autre échelle ; ici la fusion des deux chaînes du clip) ; Luna
+  B1/B2/B3 3 622 → 4 712 ; Rin B1 6 201 et B2 7 155 après (attendus 1 860 →
+  6 201 et 2 146 → 7 155 : mes bursts de Rin sont sur S2, le script d'avant
+  cherchait S1 — valeurs « après » exactes) ; Ember B1/B2/B3 2 800 → 3 640 ;
+  Sterope B3 1 772 → 5 908, 7 680 avec `cs` = `2000057_1_1` ; Demiurge Astei
+  S1 10 500, Ember S1 2 800 (eau), Ame S3 9 660, Akari S1 3 750 inchangés.
+  Les douze du § 3.2 (cible neutre) : Ame S1 6 111 → 2 037 ; Francesca S2
+  5 500 ; Francesca S3 7 000 (une ligne, `base-skip` 7 000 au tooltip) ;
+  Parti S2 6 955, 9 041 avec `cs` ; Sterope S1 5 200 → 4 000 (5 200 avec
+  `cs`), B1/B2 5 980 → 4 600 (5 980), B3 1 772 → 5 908 (7 680) ; Demiurge
+  Astei S1 10 500 (`second` 13 650) ; Ember S1 3 500 (`second` 4 550) ; Ais
+  S3 4 325 ; Luna S1 3 625, 4 712 avec `cs` = `2000103_1_1`. Tout conforme à
+  la liste du lot. `bestSkill` (`pnpm datagen:build` puis `datagen:promote` à
+  blanc, `solver/characters.json` ~4, NON appliqué) : Sterope 2000057 `S1`
+  2 080 → `burst: 3` 2 672 ; Luna 2000103 `{S1, burst 1}` → `{S1}` à 1 885 —
+  attendus ; ET deux changements de FORME à valeur égale, non prévus par le
+  lot mais conséquences directes de ses décisions : Poolside Regina 2000085
+  `{S2, burst 1}` → `{S2}` à 3 237 (sa suite, désormais acceptée et comptée,
+  rejoint le burst : la base l'emporte à égalité) et Gnosis Dahlia 2000090
+  `{S2}` → `{S1}` à 2 220 (la variante `second` du S1 joue le clip du S2 :
+  égalité, S1 premier). Ame S3 3 864, Francesca, Parti, Demiurge Astei,
+  Ember, Ais inchangés. Je n'ai pas arrêté le lot sur ces deux-là : aucune
+  valeur ne bouge, et la promotion reste à Sevih (`pnpm datagen:promote`
+  avec `--apply --only solver/characters.json solver/version.json`, après sa
+  relecture). `pnpm typecheck` : dernière ligne « $ tsc --noEmit && tsc
+  --noEmit -p datagen/tsconfig.json && tsc --noEmit -p scripts/tsconfig.json »
+  (vert) ; `pnpm lint` : « $ eslint » (vert) ; `pnpm test` : « Tests 4347
+  passed (4347) »
+  (`fixtures.test.ts` avec les clés migrées, `damage-data.test.ts` : 6503
+  sort des « justifiés » de B64, il porte ses variantes A/B). **Pour Sevih au
+  calculateur** : Ame S1 vaut un tiers d'avant ; Francesca S3 n'a plus qu'une
+  ligne (variante skip au tooltip) ; Sterope S1 montre 3 hits, 9 avec la
+  condition « a un buff » cochée dans Mécaniques du kit ; Parti, Luna, Regina
+  se cochent de même (Regina : aussi automatique sur cible boss). Laissé :
+  le statut « vérifié » des suites non mesurées — Parti (M3), Luna (M4),
+  Regina (boss ou cible sans buff) ; les durées de fondu hors Francesca et
+  Sterope ; Lil Rafaga d'Ais (AoE −30 % DEF) ; Vera S1 (toujours irrésolu,
+  templets absents de la table) ; Ame S3 : les chaînes `2000065_SKIP_A`/`_B`
+  restent en repli à côté des variantes A/B (mêmes valeurs — le clip SKIP
+  générique est remplacé en jeu par `CBattleManager`, non modélisé) ; Ame S1 :
+  les chaînes fantômes `2000065_Skill_1_5_B` et `2000065_Skill_Burst3` (C24) ;
+  les 16 clips de base hors périmètre ci-dessus ; la promotion de
+  `solver/characters.json`.
+
 - **OST : télécharger une sélection de pistes en un seul zip (B65).** Demande
   d'un joueur (Jaego Sun, Discord, 18-19/10) : prendre plusieurs pistes d'un
   coup, au choix. `src/lib/zip-store.ts` (122 lignes, commentaires compris) écrit

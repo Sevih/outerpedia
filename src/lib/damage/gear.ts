@@ -255,6 +255,17 @@ const ATTACKER_TYPES = new Set([
   ...STAT_ENHANCE_TYPES,
 ]);
 
+/**
+ * Suite additionnelle d'un skill (`CCharacterBattle.EventAdditiveAttack`,
+ * spec damage-clips-joues § 1.2) : le buff ne pèse sur AUCUN montant — il
+ * décide si le clip d'index 1 s'enchaîne. Collecté comme une entrée du kit
+ * pour sa CONDITION (état de combat déclaré par z `cs`, ou évaluée
+ * statiquement : cible boss) ; `inputs.ts` en lit `active` pour compter la
+ * suite de la variante (`buildReportStates`). Hors `ATTACKER_TYPES` : ni
+ * proc déclarable, ni apport d'allié.
+ */
+export const ADDITIVE_ATTACK_TYPE = 'BT_ADDITIVE_ATTACK_ON_EVENT';
+
 /** Types côté DÉFENSEUR consommés (mêmes que passives.ts § 9.2/9.3). */
 const DEFENDER_TYPES = new Set([
   'BT_DMG_REDUCE',
@@ -679,7 +690,14 @@ function makeCollector(
     if (target === 'MY_TEAM_WITHOUT_ME') side = 'allies';
     else if (target === 'ME' || target === 'MY_TEAM' || target === '') {
       // BT_STAT_PREMIUM n'arrive ici qu'en mode allié (canal buff, cf. supra).
-      if (ATTACKER_TYPES.has(row.type) || row.type === 'BT_STAT_PREMIUM') side = 'attacker';
+      // La suite additionnelle (ADDITIVE_ATTACK_TYPE) : côté porteur seulement,
+      // pour sa condition (cf. la constante).
+      if (
+        ATTACKER_TYPES.has(row.type) ||
+        row.type === 'BT_STAT_PREMIUM' ||
+        (row.type === ADDITIVE_ATTACK_TYPE && !allyReceiver)
+      )
+        side = 'attacker';
       else if (row.type.startsWith('BT_WG_')) {
         info.unresolved.push({
           source,

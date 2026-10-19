@@ -164,24 +164,36 @@ export function ResultTable({
                       const unsupported =
                         sr !== null && sr.hitsUnresolved === true && states.length === 0;
                       const branch = states[0]?.branches.find((b) => b.branch === br);
-                      // Plusieurs états de chaîne : la cellule montre la
-                      // chaîne de BASE, le détail passe en tooltip.
+                      // Plusieurs états : la cellule montre le PREMIER — la
+                      // variante de base (avec ou sans sa suite additionnelle
+                      // selon sa condition), ou la chaîne de base en repli —,
+                      // le tooltip les autres : clé, trigger, condition
+                      // (buffs qui choisissent l'index ou enchaînent la
+                      // suite, ✓ comptée), total, et les chaînes jouées.
                       const detail =
                         states.length > 1
                           ? states
-                              .map(
-                                (st) =>
-                                  `${st.chain}: ${
-                                    st.branches
-                                      .find((b) => b.branch === br)
-                                      ?.totalDamage.toLocaleString() ?? '—'
-                                  }`,
-                              )
+                              .map((st) => {
+                                const total =
+                                  st.branches
+                                    .find((b) => b.branch === br)
+                                    ?.totalDamage.toLocaleString() ?? '—';
+                                const v = st.variant;
+                                if (!v) return `${st.chain}: ${total}`;
+                                const gate = v.gate ? ` · ${v.gate.buffIds.join(', ')}` : '';
+                                const add = v.additive
+                                  ? ` + ${v.additive.buffIds.join(', ')}${v.additive.counted ? ' ✓' : ''}`
+                                  : '';
+                                const chains = st.chains?.length
+                                  ? ` (${st.chains.join(', ')})`
+                                  : '';
+                                return `${v.key} [${v.trigger}]${gate}${add}: ${total}${chains}`;
+                              })
                               .join('\n')
                           : undefined;
                       // Harnais : clé de saisie « en jeu » — la MÊME que
-                      // flattenReport (l'état de base quand il y a
-                      // plusieurs chaînes).
+                      // flattenReport (`#<clé>` de l'état de base quand il y
+                      // a plusieurs états : clé de variante ou chaîne).
                       const lineSlot = sr
                         ? `${sr.slot}${sr.burst !== undefined ? `b${sr.burst}` : ''}${
                             states.length > 1 ? `#${states[0].chain}` : ''

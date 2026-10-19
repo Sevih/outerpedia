@@ -266,8 +266,9 @@ describe('damage/characters.json — clips chez le porteur (revue R15, 17/10/202
     const bad: string[] = [];
     for (const [sid, s] of Object.entries(skills)) {
       const carrier = carrierOf.get(sid);
-      for (const c of s.clips ?? [])
-        if (!carrier || !anim[carrier]?.clips[c.name]) bad.push(`${sid} : ${c.name}`);
+      for (const v of s.variants ?? [])
+        for (const c of [v.clip, v.additive?.clip])
+          if (c && (!carrier || !anim[carrier]?.clips[c.name])) bad.push(`${sid} : ${c.name}`);
     }
     expect(bad).toEqual([]);
   });
@@ -293,7 +294,7 @@ describe('damage/characters.json — clips chez le porteur (revue R15, 17/10/202
       expect([...chains], sid).toEqual([carrier]);
     }
     // S1 d'Akari : résolu sur SON animator (plus celui de Drakhan, 2000062).
-    expect(skills['6401'].clips?.map((c) => c.name.split('_')[0])).toEqual(['2000064']);
+    expect(skills['6401'].variants?.map((v) => v.clip.name.split('_')[0])).toEqual(['2000064']);
   });
 });
 
@@ -306,7 +307,7 @@ describe('anim-events — bundles de fusion et états d’approche (B64)', () =>
     }
   >;
   const placed = (sid: string): boolean =>
-    Boolean(skills[sid]?.clips?.length || skills[sid]?.clipsUnresolvedChains?.length);
+    Boolean(skills[sid]?.variants?.length || skills[sid]?.clipsUnresolvedChains?.length);
   // Cause 1 : clips dans le bundle de base (dépendance du manifeste) ; cause 2 : 352,
   // `Skill2` → état d'approche → `2700003_Skill_2`.
   const fixed = ['352', '551', '552', '553', '555', '569', '570', '571'];
@@ -314,19 +315,26 @@ describe('anim-events — bundles de fusion et états d’approche (B64)', () =>
   fixed.push('3751', '3753', '3755', '3756', '3757', '3759', '3760', '3769', '3770');
   fixed.push('4351', '4352', '4355', '4356', '4359', '4360', '4369', '4370', '4371');
   // Aucun EventAttackStart dans leurs clips (Lisha, Lily, Laine, Cindy), passif
-  // sans trigger ou hits SKIP d'Ame : repli § 12.4.
+  // sans trigger ou S2 d'Ame : repli § 12.4.
   const justified = ['502', '505', '506', '519', '520', '1101', '1106', '2901', '3101'];
-  justified.push('6502', '6503');
+  justified.push('6502');
+  // S3 d'Ame : sans clip à B64 (hits SKIP seuls), placé par F29 — les clips
+  // de ses index 1 et 2 (templets de 6505) sont ses variantes A et B.
+  const variantsF29 = ['6503'];
 
   it('les 35 skills des causes 1 et 2 portent clips ou clipsUnresolvedChains', () => {
     expect(fixed).toHaveLength(35);
     expect(fixed.filter((sid) => !placed(sid))).toEqual([]);
   });
 
-  it('des 46 skills de C24, seuls les 11 justifiés restent sans clip', () => {
-    const c24 = [...fixed, ...justified];
+  it('des 46 skills de C24, seuls les 10 justifiés restent sans clip', () => {
+    const c24 = [...fixed, ...justified, ...variantsF29];
     expect(c24).toHaveLength(46);
     expect(c24.filter((sid) => !placed(sid)).sort()).toEqual([...justified].sort());
+    expect(skills['6503'].variants?.map((v) => [v.key, v.gate?.type])).toEqual([
+      ['second', 'BT_2000065_A'],
+      ['third', 'BT_2000065_B'],
+    ]);
   });
 
   it('les fusionnés ont leurs clips, les EventAdditiveAttack sont gardés', () => {

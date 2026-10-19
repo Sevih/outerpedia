@@ -41,12 +41,12 @@
   "gameVersion": "1.4.9",
   "observed": [
     {
-      "slot": "S1#2000022_Skill_1",
+      "slot": "S1#base",
       "branch": "normal",
       "damage": 3859
     },
     {
-      "slot": "S1#2000022_Skill_1",
+      "slot": "S1#base",
       "branch": "critical",
       "damage": 6239
     },

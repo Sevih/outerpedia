@@ -15,8 +15,11 @@
  *           × facteur total de l'état / 1000
  * où le facteur total de l'état est la règle UNIQUE du moteur
  * (`stateTotalFactor`, report.ts) : Σ des events des clips résolus, sinon
- * Σ tables comblée à 1000 ‰ sous 990. Un skill à plusieurs états (chaîne de
- * base, upgrade…) prend son état le plus fort. Multi-hit = SOMME des hits
+ * Σ tables comblée à 1000 ‰ sous 990. Un skill à plusieurs états — ses
+ * VARIANTES de lancer (base, second trigger, skip…) et ses chaînes en repli —
+ * prend l'état le plus fort ; la suite additionnelle conditionnelle est
+ * COMPTÉE (meilleur cas, comme les bursts — décision du lot F29, 19/10/2026 :
+ * Sterope passe de S1 2 080 à burst 3 2 672). Multi-hit = SOMME des hits
  * (c'est le total de la cascade, pas le plus gros hit isolé).
  *
  * Exclusions : passifs (jamais dans les slots S1/S2/S3 ni burst), skills à
@@ -27,7 +30,7 @@
  * est un DoT — Gnosis Beth — est sous-estimé, assumé côté gear-solver).
  */
 import { burstableSlotOf } from '../../src/lib/damage/gear';
-import { attachChainClips, groupHitsByChain, stateTotalFactor } from '../../src/lib/damage/report';
+import { buildReportStates, stateTotalFactor } from '../../src/lib/damage/report';
 import type { DamageCharacter, DamageSkill } from '../damage/characters';
 
 export type BestSkillSlot = 'S1' | 'S2' | 'S3';
@@ -59,7 +62,7 @@ export function skillMaxFactor(
 ): { factor: number; unresolvedHits?: true } | undefined {
   const lv = sk.levels[sk.levels.length - 1];
   if (!lv || lv.damageFactor <= 0) return undefined;
-  const states = attachChainClips(groupHitsByChain(sk.hits), sk.clips, sk.clipsUnresolvedChains);
+  const states = buildReportStates(sk.hits, sk.variants, sk.clipsUnresolvedChains, () => true);
   if (states.length === 0) {
     return { factor: lv.damageFactor, unresolvedHits: true };
   }
