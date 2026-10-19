@@ -7,6 +7,34 @@
 
 ## 2026-10-19
 
+- **Relecture A67 et G12 (Opus) ; validés.** Relus chacun par un agent.
+  **A67** (`c905ef7f`) : un commit, 14 fichiers ; `src/lib/damage/gear.ts`
+  ne gagne qu'un commentaire (demandé), `damage/equipment.json` est la
+  sortie de `damage:build` ; `characters.json` intact. typecheck, lint et
+  `format:check` verts, `Tests 4287 passed (4287)` (+3, `setBuffId`),
+  `damage:check` 42 lignes exactes. Rejoué sur `ItemSpecialOptionTemplet`
+  (696 lignes) : une seule cellule corrigée (117, 4P, `_17` → `_17_1`),
+  aucune autre ligne au 4P égal au 2P ; une ligne déjà corrigée ou autre
+  fait jeter ; plus aucun lecteur des `BuffID_2P/4P` hors `setBuffId`. JSON
+  avant/après : seul le 4P T4 de Pulverization bouge (700 → 500) dans les
+  trois fichiers, `version.json` hash et `builtAt` seuls. Calculateur : T0
+  350 / 350 + 250, T4 700 / 700 + 500 (+120 %, au lieu de +140 %).
+  **G12** (gear-solver `55798f5`) : un commit, 11 fichiers, ni
+  `package.json` ni lock ; tests core 128, desktop 129, renderer 467.
+  Rejoué sur un faux checkout : table absente, non JSON, illisible →
+  erreur qui nomme le fichier, 0 fichier écrit, cache gardé ; complet →
+  « synced 19 tables » ; `data/sync.mjs` sort 1 sans rien écrire.
+  `solver-files.json` seule liste (lue par `data-sync.ts` et `sync.mjs`).
+  Test de forme croisé : chaque mutation des deux `characters.json` le fait
+  rougir. M3 : le script de rejeu des EE rend 1 écart (2000078 à +10)
+  parce qu'il ne compte pas l'`IOT_STAT` (écrit avant C20) ; compté, 0
+  écart. **Reste à Sevih** : au calculateur, Pulverization 4 pièces T4
+  sur une cible en Break → +120 % ; en jeu, comparer 4 pièces T4 et 2
+  pièces T4 sur la même cible ; dans gear-solver en dev, Settings › Data ›
+  Sync → « synced 19 tables (checkout …) » ou « data already up to date ».
+  **G30 amendé** : `stat-keys.json` va dans `solver-files.json` (plus de
+  deux listes), les « 19 » des tests, docs et commentaires passent à 20, le
+  `data:sync` emporte le 4P d'A67. **Suite** : G13, puis G30.
 - **A67 — Sets : le 4 pièces de Pulverization en T4 lit son propre buff
   (50 %), correction de la table du jeu en un seul endroit.**
   `ItemSpecialOptionTemplet` ligne `ID` 117 (set 17, `Level` 2,

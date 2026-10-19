@@ -117,6 +117,14 @@ les preuves et les décisions vivent dans le tri consolidé de sevih-tool
       « combat » ne se survole pas (`RichTooltip` en `pointer-events-none`,
       `BuildsScreen.tsx`) ; notes publiques `docs/release-notes.md`
       [Unreleased] à remplir avant la release (G8, G9, G10).
+- [ ] **gear-solver, petits suivis de G12** : `wiki/Engine-Reference.md` dit
+      encore « a list of known local paths » pour `data/sync.mjs` (c'est
+      `.env.local` puis `../outerpedia`) ; `docs/roadmap.md` (M8) et
+      `docs/STATUS.md` donnent encore le packaging « à vérifier », à
+      requalifier comme `docs/todo.md` ; l'item « data-sync » de
+      `docs/todo.md` (« octets non JSON écrits tels quels ») ne vaut plus
+      qu'en mode REPO ; le script de rejeu des EE ne compte pas l'`IOT_STAT`
+      (1 écart faux, 2000078 à +10).
 - [ ] **Tables du jeu (quick)** : `TrustRewardTemplet.RewardBuffID` visait
       sans doute `TrustBuffTemplet` ; la règle `*BuffID` de B60 coupe son lien.
 - [ ] **gear-solver, CI** : ni `dependabot.yml`, ni actions épinglées par SHA
