@@ -133,7 +133,7 @@ les preuves et les décisions vivent dans le tri consolidé de sevih-tool
       `posts.json` et `buff-events.json` quand ils changent ; au démarrage, ce
       serait un commit sans geste.
 - [ ] **« réponse interrompue » à l'envoi Discord** (19/10, par
-      quick.outerpedia.local ; passé au second essai) : `post()` de
+      quick.outerpedia.local ; passé au second essai, sans doublon) : `post()` de
       `scripts/quick/ui/lib.js` ne lit pas le statut HTTP — un corps vide
       (502 de Caddy) donne ce seul message. Deux suites : (1) afficher le
       statut et le début du corps quand le flux finit sans `done` ; (2) piste
