@@ -994,7 +994,7 @@ async function route(req: IncomingMessage, res: ServerResponse): Promise<void> {
   }
 
   if (req.method === 'GET' && url.pathname === '/api/extractor') {
-    // La vue d'ensemble de l'extraction : les dix cibles et leurs comptes (ceux
+    // La vue d'ensemble de l'extraction : les cibles du registre (`TARGETS`) et leurs comptes (ceux
     // de l'inbox, mémoïsés), le fichier committé de chacune, ce que les
     // monstres portent hors du site, et « Skills de monstres », en lecture ;
     // sans tables du jeu, des zéros et la raison. Rien ne s'écrit.

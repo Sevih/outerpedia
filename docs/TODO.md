@@ -124,11 +124,6 @@ les preuves et les décisions vivent dans le tri consolidé de sevih-tool
       dans la Worklist compte comme libre pour « 4P disponible » (G28) ;
       colonne `upg` et entrée Worklist lisent encore l'`upg` du solve (G25) ;
       `docs/release-notes.md` [Unreleased] à remplir avant la release.
-- [ ] **quick, trois libellés** : l'en-tête d'Extraction dit « Dix cibles,
-      une en lecture » (`scripts/quick/ui/tabs/extractor.html` l.19 et
-      `STYLE.md` l.529) alors qu'A70 en fait treize ; le commentaire de
-      `tabs/patch.js` l.11 dit « Les quatre gestes » depuis `NEWS` (A68) ;
-      à prendre dans le prochain lot A de quick.
 - [ ] **`statScales` dit EFF/RES en pourcentage** (glossaires générés) alors
       que `stat-keys.json` les dit plats : B61 corrige à la lecture
       (`RAW_FLAT`), la source reste à corriger dans le générateur des

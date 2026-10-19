@@ -7,6 +7,56 @@
 
 ## 2026-10-19
 
+- **A72 — quick, clôture d'A68 et d'A70 : « Get news » en bouton fantôme
+  à côté de « Lancer », `getNews` ligne par langue et par page, l'en-tête
+  d'Extraction compté depuis le serveur, « cinq gestes ».** Quatre restes de
+  la relecture du 19/10, aucune fonctionnalité nouvelle. (1) « Get news »
+  était un `.btn` nu (ni bord ni fond, `quick.css`) dans une rangée
+  `.actions` sous le `.form` de la carte 1 : il devient un `.btn ghost` posé
+  dans le `.form`, juste après « Lancer » (la charte : un seul `primary` par
+  formulaire, un bouton à côté de son champ), suivi de son `.lbl` raccourci
+  (« notes de patch seules (pnpm getNews) — committe posts.json /
+  buff-events.json s’ils changent ») ; la rangée `.actions` disparaît,
+  `id="p-get-news"` inchangé ; croquis de Patch de `STYLE.md` complété
+  (« [Get news] (.btn.ghost) · … (.lbl) », jamais écrit par A68), « quatre
+  gestes, … et un cinquième à part, « Get news » », « les cinq boutons »
+  éteints pendant un travail. (2) `scripts/get-news.ts` imprime une ligne
+  par langue et par page après la boucle des posts —
+  `[getNews] en · page 1 : 3 posts (1 new, 0 updated)`, deux compteurs
+  locaux à la page, une page vide dite aussi (une page au-delà de la
+  dernière, le 400 de WP, sort avant et ne s'imprime pas) ; les globaux et
+  la ligne finale restent tels quels (rien ne la parse : `patch.ts`,
+  `refresh.ts`, `dev-refresh.ts` ne lisent que le code de sortie). (3)
+  L'en-tête « Dix cibles, une en lecture » devient
+  `<strong id="ex-ov-title">Cibles</strong>`, que `renderOverview()` de
+  `extractor.js` remplit depuis `targets[]` : `plural(n, 'cible')` puis
+  « , k en lecture » si `k > 0` ; « Cibles » tant qu'aucune réponse n'est
+  lue (un échec ne rend pas). Commentaires « les dix cibles » de
+  `extractor.html` et `server.ts` → « les cibles du registre (`TARGETS`) »,
+  `STYLE.md` l.529 et l.569 suivent. Le registre en porte QUATORZE et non
+  treize comme le disait le lot (treize écrivables, celles du commentaire
+  « Les treize cibles » d'`actions.ts`, plus « Skills de monstres » en
+  lecture) : `STYLE.md` dit « 14 cibles, 1 en lecture » et « quatorze au
+  19/10, dont une en lecture ». (4) `tabs/patch.js` : « Les cinq gestes ».
+  Tests (`ui-serve.test.ts`) : Patch, « « Get news » est un bouton fantôme
+  de la rangée de « Lancer » » (`ghost`, pas `primary`, frère suivant de
+  `p-refresh`, même `.form`) ; Extraction, l'en-tête vaut « 4 cibles » sur
+  la fixture, « 4 cibles » sans tables (cibles servies à zéro), « 5 cibles,
+  1 en lecture » avec `offSite` (`SKILL_TARGET`), et « Cibles » dans un
+  nouveau cas où `GET /api/extractor` répond 500 (option `overviewFails` du
+  helper). `get-news.ts` n'a pas de test (il lance `main()` au chargement) :
+  preuve par `pnpm getNews --limit=1 --no-commit` — « [getNews] en · page 1 : 1 posts (0 new, 0 updated) », idem `kr` et `jp`, puis la ligne finale
+  inchangée « 1115 posts (0 new, 0 updated), 0 images, 293 buff days — aucun changement » (aucun fichier de `data/` touché). Banc sur un quick isolé
+  (:4799, clés vidées), rien cliqué : avant
+  `/tmp/claude-1000/-home-sevih-Documents-Projet-perso-sevih-tool/e5b0c3cd-e1be-4678-8793-41b4b2707c10/scratchpad/quick-shots/A72-avant/patch.png` (« Get news » sans bord sous la rangée) et
+  `/tmp/claude-1000/-home-sevih-Documents-Projet-perso-sevih-tool/e5b0c3cd-e1be-4678-8793-41b4b2707c10/scratchpad/quick-shots/A72-avant/extractor.png` (« Dix cibles, une en lecture ») ; après
+  `/tmp/claude-1000/-home-sevih-Documents-Projet-perso-sevih-tool/e5b0c3cd-e1be-4678-8793-41b4b2707c10/scratchpad/quick-shots/A72-apres/patch.png` (bouton bordé à droite de « Lancer », même
+  hauteur ; le `.lbl` passe à la ligne faute de largeur, `quick.css` hors
+  périmètre) et `/tmp/claude-1000/-home-sevih-Documents-Projet-perso-sevih-tool/e5b0c3cd-e1be-4678-8793-41b4b2707c10/scratchpad/quick-shots/A72-apres/extractor.png` (« 14 cibles, 1 en lecture »,
+  la réponse de `GET /api/extractor` par curl : n = 14, 1 `readOnly`).
+  `pnpm typecheck` : `tsc --noEmit && … -p scripts/tsconfig.json` sans
+  erreur ; `pnpm lint` : `eslint` sans sortie ; `pnpm test` : « Tests 4349 passed (4349) ». Laissé : rien.
+
 - **Relecture F28 (Fable) — gear-solver : découpage de BuilderScreen,
   SettingsModal, InventoryScreen et HomeScreen, sans changement de
   comportement ; validé.** Cinq commits `041d3a1`, `7ec25e8`, `7bb058f`,

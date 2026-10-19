@@ -526,7 +526,7 @@ rendu :
 ```
 .head  Extraction — Le jeu a bougé : ce que l'extraction fraîche… changerait à ce que le site committe… Un geste écrit le fichier et committe ; les images… attendent dans le staging, que « Committer » de la section Patch pousse…
 LA VUE D'ENSEMBLE (#ex-overview, `#extractor`)
-.card  card-head : « Dix cibles, une en lecture » · badge ok « tables du jeu présentes » (ou badge warn, la raison du serveur) … [Actualiser]
+.card  card-head : « 14 cibles, 1 en lecture » (compté depuis `targets[]` de la réponse : n cibles, k en lecture ; « Cibles » avant la réponse) · badge ok « tables du jeu présentes » (ou badge warn, la raison du serveur) … [Actualiser]
    table : Cible (le libellé ; dessous, en .ex-scope : « périmètre du site » sous Monstres, suivi de « · +3 hors site » (span.ex-quiet, discret, `title` : ce que c'est et où le lire) quand le diff complet en porte — les comptes de la ligne restent ceux du site ; « en lecture — promu avec Monstres » sous Skills de monstres, la onzième ligne, rangée sous Monstres ; A40) | Fichier committé (chasse fixe) | Nouvelles | Écarts | Mineures | Coquilles | Retirées | Committées | « rien à revoir » atténué … [Ouvrir]
      les comptes à droite, en chiffres tabulaires : nouveau en accent, écart et retirée en rouge, mineure et coquille atténuées, un zéro à 55 % ; une cible sans rien à revoir est atténuée (.ex-quiet) ; la ligne entière ouvre la cible
 LA CIBLE (#ex-target, `#extractor/<cible>` ; la vue d'ensemble se cache)
@@ -566,7 +566,7 @@ le bilan d'images (.ex-assets) vit au niveau de la section : il suit le dernier 
 ```
 
 Tout ce qui se lit vient du serveur. `GET /api/extractor` (`extractorOverview`)
-rend les dix cibles — l'ordre de l'admin, `EXTRACTOR_ENTITIES` —, chacune
+rend les cibles de `TARGETS` (quatorze au 19/10, dont une en lecture) — l'ordre de l'admin, `EXTRACTOR_ENTITIES` —, chacune
 avec les comptes de l'inbox (`bucketsOf`, mémoïsés ; les monstres au
 périmètre du site), son fichier et le nombre d'entités committées ; sans
 `.gamedata`, `tables: false` et la raison. `GET
@@ -750,13 +750,13 @@ prend la teinte de la pastille), les teintes `.dot.warn`, `.dot.danger`,
 
 La chaîne des données à chaque patch du jeu : quatre gestes, chacun une
 commande du dépôt lancée par le serveur (`patch.ts`), un seul travail à la
-fois. Croquis du rendu :
+fois, et un cinquième à part, « Get news » (`pnpm getNews`). Croquis du rendu :
 
 ```
 .head  Patch — La chaîne des données à chaque patch du jeu, étape par étape…
 quatre .card empilées, dans l'ordre du flux ; chacune : card-head = « n · titre » · ce que fait le geste (.lbl) … son ÉTAT poussé à droite (.p-state : atténué, ok, warn, ko), puis .p-body = le geste
   .card « 1 · Rafraîchir depuis le jeu »      … « client 1.11.404 · site 1.11.402 — un patch attend » (warn ; sans écart, atténué ; « pas de client Steam · site … », `title` : l'Android reste possible)
-     .form : Source [Steam | Android] (.p-seg, deux radios ; défaut = `DATAGEN_SOURCE`, sinon Steam) [☐ forcer] [☐ sans pull] [☑ collecter les images] [☑ notes de patch] [Lancer]
+     .form : Source [Steam | Android] (.p-seg, deux radios ; défaut = `DATAGEN_SOURCE`, sinon Steam) [☐ forcer] [☐ sans pull] [☑ collecter les images] [☑ notes de patch] [Lancer] [Get news] (.btn.ghost) · « notes de patch seules (pnpm getNews) — committe posts.json / buff-events.json s’ils changent » (.lbl)
      .p-note.warn « une reprise attend (checkpoint du 08/10 14:30) : « Lancer » reprend où la chaîne a cassé, « forcer » repart de zéro. » — seulement s'il y en a un pour la source choisie
   .card « 2 · Revue de la promotion »         … « pas encore de dry-run » · « dry-run en cours… » · « dry-run réussi à 14:32 » (ok) · « dry-run en échec à 14:32 » (ko) · « dry-run à refaire : la proposition a pu changer » (warn)
      [Dry-run]
@@ -781,7 +781,7 @@ quatre .card empilées, dans l'ordre du flux ; chacune : card-head = « n · tit
    pre.p-out#p-console (chasse fixe 12 px, fond de la page, 40 vh) : toute la sortie, ligne à ligne ; elle défile avec la sortie tant qu'on n'est pas remonté ; au-delà de 5 000 lignes seule la fin reste affichée, « Copier » rend tout
 ```
 
-Pendant un travail : les quatre boutons et « Pousser » sont éteints (le 409
+Pendant un travail : les cinq boutons et « Pousser » sont éteints (le 409
 du serveur reste la vraie garde), celui du geste est `busy`, le journal de
 l'en-tête montre la ligne en cours puis l'issue — une ligne quand ça passe,
 les quinze dernières lignes de la sortie et le verdict quand ça casse.

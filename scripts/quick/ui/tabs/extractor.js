@@ -96,6 +96,11 @@ const cell = (n, kind) => `<td class="ex-n ${kind}${n ? '' : ' zero'}">${n}</td>
 
 function renderOverview() {
   const rows = ov?.targets ?? [];
+  // L'en-tête se compte sur la réponse : le registre grandit (A70), le texte suit.
+  const k = rows.filter((t) => t.readOnly).length;
+  $('ex-ov-title').textContent = ov
+    ? `${plural(rows.length, 'cible')}${k ? `, ${k} en lecture` : ''}`
+    : 'Cibles';
   $('ex-tables').innerHTML = ov
     ? ov.tables
       ? '<span class="badge ok">tables du jeu présentes</span>'

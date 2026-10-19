@@ -8,7 +8,7 @@
 import { $, esc, gitBar, log, post, sections } from '../lib.js';
 
 /**
- * Les quatre gestes : leur nom dans le journal, leur route, et `writes` pour
+ * Les cinq gestes : leur nom dans le journal, leur route, et `writes` pour
  * ceux qui écrivent dans le dépôt — le dry-run ne fait que lire.
  */
 const REFRESH = {

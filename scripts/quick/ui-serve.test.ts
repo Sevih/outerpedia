@@ -12672,6 +12672,15 @@ describe('Patch — la page, sur le vrai markup', () => {
     expect(page.el('push').disabled).toBe(true);
   });
 
+  it('« Get news » est un bouton fantôme de la rangée de « Lancer »', async () => {
+    const page = await patch();
+    const news = page.el('p-get-news');
+    expect(news.classList.contains('ghost')).toBe(true);
+    expect(news.classList.contains('primary')).toBe(false);
+    expect(news.previousElementSibling?.id).toBe('p-refresh');
+    expect(news.closest('.form')).toBe(page.el('p-refresh').closest('.form'));
+  });
+
   it('l’état du poste : sans client Steam, source Android, reprise, dépôt', async () => {
     const none = await patch({
       state: { steam: false, client: null, source: 'android', site: '1.11.404' },
@@ -16706,6 +16715,8 @@ describe('Extraction — la page, sur le vrai markup', () => {
        * site » (et la cible sa bascule), « Skills de monstres » suit, en lecture.
        */
       offSite?: number;
+      /** `GET /api/extractor` répond en échec. */
+      overviewFails?: boolean;
     } = {},
   ) {
     vi.resetModules();
@@ -16808,6 +16819,8 @@ describe('Extraction — la page, sur le vrai markup', () => {
               },
         );
       }
+      if (url.pathname === '/api/extractor' && opts.overviewFails)
+        return { ok: false, status: 500, json: async () => ({ error: 'tables illisibles' }) };
       if (url.pathname === '/api/extractor')
         return answer({
           tables,
@@ -17069,6 +17082,8 @@ describe('Extraction — la page, sur le vrai markup', () => {
     expect(page.el('ex-target').hidden).toBe(true);
     expect(page.calls).toEqual([{ path: '/api/extractor' }]);
     expect(page.el('ex-tables').textContent).toBe('tables du jeu présentes');
+    // L'en-tête se compte sur la réponse : quatre cibles, aucune en lecture.
+    expect(page.el('ex-ov-title').textContent).toBe('4 cibles');
     expect(page.overview()).toEqual([
       {
         id: 'character',
@@ -17119,6 +17134,8 @@ describe('Extraction — la page, sur le vrai markup', () => {
     expect(page.el('ex-tables').textContent).toBe(
       'Pas de données du jeu : lancer un patch (pull) d’abord.',
     );
+    // Les cibles sont servies à zéro : l'en-tête les compte quand même.
+    expect(page.el('ex-ov-title').textContent).toBe('4 cibles');
     expect(page.overview().map((r) => r.quiet)).toEqual([true, true, true, true]);
     // Pas de « rien à revoir » quand rien n'a pu être lu.
     expect(page.overview()[1].cells.at(-1)).toBe('Ouvrir');
@@ -17134,6 +17151,12 @@ describe('Extraction — la page, sur le vrai markup', () => {
     expect(page.el('ex-empty').textContent).toBe(
       'Pas de données du jeu : lancer un patch (pull) d’abord.',
     );
+  });
+
+  it('la vue d’ensemble en échec : l’en-tête reste « Cibles »', async () => {
+    const page = await extractor({ hash: '#extractor', overviewFails: true });
+    expect(page.calls).toEqual([{ path: '/api/extractor' }]);
+    expect(page.el('ex-ov-title').textContent).toBe('Cibles');
   });
 
   it('une cible : l’en-tête, ses gestes, les statuts comptés, les entités repliées, l’adresse', async () => {
@@ -17185,6 +17208,7 @@ describe('Extraction — la page, sur le vrai markup', () => {
 
   it('la vue d’ensemble dit le hors-site des monstres, et range « Skills de monstres » dessous, en lecture', async () => {
     const page = await extractor({ hash: '#extractor', offSite: 2 });
+    expect(page.el('ex-ov-title').textContent).toBe('5 cibles, 1 en lecture');
     const rows = page.overview();
     expect(rows.map((r) => r.id)).toEqual([
       'character',

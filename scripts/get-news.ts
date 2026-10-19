@@ -350,6 +350,8 @@ async function main(): Promise<void> {
     let page = 1;
     let hasMore = true;
     while (hasMore) {
+      let pageNew = 0;
+      let pageUpdated = 0;
       const url = `${WP_API}?categories=${parentCategoryId}&per_page=${perPage}&page=${page}${queryFilter}&_fields=id,date,modified,slug,title,content,categories`;
       let posts: WPPost[];
       try {
@@ -383,9 +385,19 @@ async function main(): Promise<void> {
           title: decodeEntities(post.title.rendered),
           content: html,
         });
-        if (known) updatedCount++;
-        else newCount++;
+        if (known) {
+          updatedCount++;
+          pageUpdated++;
+        } else {
+          newCount++;
+          pageNew++;
+        }
       }
+      // Une ligne par page : la console de « Patch » suit le scrape au lieu de
+      // rester muette jusqu'à la ligne finale (une page vide se dit aussi).
+      console.log(
+        `[getNews] ${lang} · page ${page} : ${posts.length} posts (${pageNew} new, ${pageUpdated} updated)`,
+      );
 
       const oldestMs = posts.length ? Date.parse(posts[posts.length - 1].modified) : Infinity;
       if (posts.length < perPage || oldestMs < cutoffMs || DEV_LIMIT > 0) hasMore = false;
