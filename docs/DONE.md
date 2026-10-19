@@ -5,6 +5,23 @@
 > détail vit dans git. Le `CHANGELOG.md` racine est GELÉ depuis le 03/08 —
 > ce fichier et le log git SONT le journal du projet.
 
+## 2026-10-19
+
+- **Relecture G11 (Opus) — restes des lots G1 à G7 dans gear-solver ;
+  validé.** gear-solver `32e0dd1`, relu par un agent : un commit, 26
+  fichiers (code des sept points, deux tests neufs, docs et wiki), ni
+  `package.json` ni lock ; `typecheck` vert, tests core 125, desktop 87,
+  renderer 461. Rejoué sur `data/derived` réel : `resVersion` seul réécrit
+  à hash égal ; `pickSetLevel` 0 écart sur les 21 sets d'armure de BT0 à
+  BT5 ; famille du talisman conseillé, les 11 familles 4/5/6★ rendent leurs
+  trois sets ; portrait et nom du fusionné dans le Builder ; avertissement
+  du client de référence (égal, différent, inconnu) ; Wipe refusé en 409
+  plugin actif, dossier intact. **Reste à Sevih** : Settings › Data (ligne
+  « game 1.11.408 · … »), Settings › Steam (référence et avertissement), un
+  fusionné dans le Builder, un Wipe jeu lancé (« Steam capture plugin live
+  — close the game first »). **Suite** : A67 et G12 en parallèle, puis G13,
+  puis G30 (après A67).
+
 ## 2026-10-18
 
 - **Relecture A65, G9, G10, A63, B60, A66, C26 (Opus) ; validés.** Contrôles
