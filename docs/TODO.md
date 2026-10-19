@@ -107,9 +107,9 @@ les preuves et les décisions vivent dans le tri consolidé de sevih-tool
 
 ## 🧹 Restes de la relecture du 19/10 (A68 à B64, OB4, G13)
 
-- [ ] **Après F29** : promouvoir `bestSkill` (`pnpm datagen:promote --apply
---only solver/characters.json solver/version.json`, 4 entrées :
-      Sterope, Luna, Poolside Regina, Gnosis Dahlia) et le committer ; au
+- [ ] **Après F29** : `bestSkill` promu et committé par Sevih le 19/10
+      (`2b7762a0`, 4 entrées : Sterope, Luna, Poolside Regina, Gnosis
+      Dahlia) ; au
       calculateur, Ame S1, Francesca S3, Sterope S1 avec la condition
       cochée ; les 16 clips de base `*_Upgrade`/`*_Burst` laissés en repli
       (liste dans l'entrée DONE de F29) à trancher.
