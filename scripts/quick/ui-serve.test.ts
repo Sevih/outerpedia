@@ -401,6 +401,7 @@ describe('shot — la page que le banc de captures photographie', () => {
       '/api/patch/refresh',
       '/api/patch/promote',
       '/api/patch/commit',
+      '/api/patch/news',
       '/api/patch/stop',
       '/api/coupons',
       '/api/banners',
@@ -12416,7 +12417,7 @@ describe('Patch — la page, sur le vrai markup', () => {
       [...document.querySelectorAll(selector)] as unknown as HTMLElement[];
     const text = (node: Element | null | undefined) =>
       (node?.textContent ?? '').replace(/\s+/g, ' ').trim();
-    const BUTTONS = ['p-refresh', 'p-dry', 'p-apply', 'p-commit'];
+    const BUTTONS = ['p-refresh', 'p-dry', 'p-apply', 'p-commit', 'p-get-news'];
     return {
       el,
       all,
@@ -12439,7 +12440,7 @@ describe('Patch — la page, sur le vrai markup', () => {
         held.close();
         await settle();
       },
-      /** Éteints ? Les quatre gestes, dans l'ordre du flux. */
+      /** Éteints ? Les quatre gestes, dans l'ordre du flux, puis « Get news ». */
       disabled: () => BUTTONS.map((id) => el(id).disabled),
       /** L'état de chaque étape, à droite de sa tête. */
       states: () =>
@@ -12518,7 +12519,7 @@ describe('Patch — la page, sur le vrai markup', () => {
     expect(
       ['p-refresh', 'p-dry', 'p-apply', 'p-commit'].map((id) => page.text(page.el(id))),
     ).toEqual(['Lancer', 'Dry-run', 'Promouvoir (--apply)', 'Committer (pnpm commit)']);
-    expect(page.disabled()).toEqual([false, false, true, false]);
+    expect(page.disabled()).toEqual([false, false, true, false, false]);
     // Les options de « Rafraîchir », comme `pnpm dev` : images et notes cochées.
     expect(['p-force', 'p-nopull', 'p-collect', 'p-news'].map((id) => page.el(id).checked)).toEqual(
       [false, false, true, true],
@@ -12598,7 +12599,7 @@ describe('Patch — la page, sur le vrai markup', () => {
     expect(clean.states()[3]).toBe(
       'aucun fichier modifié · 2 commits à pousser — « Pousser », dans l’en-tête',
     );
-    expect(clean.disabled()).toEqual([false, false, true, true]);
+    expect(clean.disabled()).toEqual([false, false, true, true, false]);
     expect(clean.el('p-commit').title).toBe('Aucun fichier modifié : rien à committer');
     expect(clean.el('push').disabled).toBe(false);
     expect(clean.text(clean.el('push-count'))).toBe('2');
@@ -12623,7 +12624,7 @@ describe('Patch — la page, sur le vrai markup', () => {
     ]);
 
     // Pendant le travail : les quatre gestes et « Pousser » éteints, « Arrêter » là.
-    expect(page.disabled()).toEqual([true, true, true, true]);
+    expect(page.disabled()).toEqual([true, true, true, true, true]);
     expect(page.el('push').disabled).toBe(true);
     expect(page.el('p-stop').hidden).toBe(false);
     expect(page.el('p-refresh').classList.contains('busy')).toBe(true);
@@ -12645,7 +12646,7 @@ describe('Patch — la page, sur le vrai markup', () => {
     page.stream().send({ step: '' });
     await page.settle();
     expect(page.text(page.el('journal-last'))).toBe('▶ pull (client Steam → .gamedata)');
-    expect(page.disabled()).toEqual([true, true, true, true]);
+    expect(page.disabled()).toEqual([true, true, true, true, true]);
 
     page.served.state = idle({ client: '1.11.404', site: '1.11.402' });
     await page.finish(OK('rafraîchissement depuis le jeu (Steam)'), ['✅ refresh terminé.']);
@@ -12658,7 +12659,7 @@ describe('Patch — la page, sur le vrai markup', () => {
     );
     // Fini : l'état est relu, les boutons reviennent, « Arrêter » repart.
     expect(page.served.reads).toBe(2);
-    expect(page.disabled()).toEqual([false, false, true, false]);
+    expect(page.disabled()).toEqual([false, false, true, false, false]);
     expect(page.el('p-stop').hidden).toBe(true);
     expect(page.el('p-refresh').classList.contains('busy')).toBe(false);
     expect(page.text(page.el('p-console-state'))).toBe('4 lignes');
@@ -12688,7 +12689,7 @@ describe('Patch — la page, sur le vrai markup', () => {
     expect(page.console()).toBe(review);
     expect(page.states()[1]).toMatch(/^dry-run réussi à \d\d:\d\d$/);
     expect(page.states()[2]).toBe('prêt : la revue est au-dessus');
-    expect(page.disabled()).toEqual([false, false, false, false]);
+    expect(page.disabled()).toEqual([false, false, false, false, false]);
 
     // Un dry-run en échec : la revue repart de zéro, « Promouvoir » s'éteint.
     page.el('p-dry').click();
@@ -12698,7 +12699,7 @@ describe('Patch — la page, sur le vrai markup', () => {
     expect(page.el('p-review').textContent).toBe('✗ data/extracted absent\n');
     expect(page.states()[1]).toMatch(/^dry-run en échec à \d\d:\d\d$/);
     expect(page.el('p-review-state').className).toBe('p-state ko');
-    expect(page.disabled()).toEqual([false, false, true, false]);
+    expect(page.disabled()).toEqual([false, false, true, false, false]);
     // L'échec : la fin de la sortie et le verdict, au journal déplié.
     expect(page.el('journal').dataset.state).toBe('ko');
     expect([...page.el('log').children].map((d) => d.textContent)).toEqual([
@@ -13010,7 +13011,7 @@ describe('Patch — la page, sur le vrai markup', () => {
         body: { message: 'chore(data): patch 1.11.404', bump: 'minor' },
       },
     ]);
-    expect(page.disabled()).toEqual([true, true, true, true]);
+    expect(page.disabled()).toEqual([true, true, true, true, true]);
 
     // Le commit est fait : plus rien de modifié, un commit à pousser.
     page.served.state = idle({ git: { branch: 'main', ahead: 1, behind: 0, dirty: 0 } });
@@ -13024,7 +13025,44 @@ describe('Patch — la page, sur le vrai markup', () => {
     );
     expect(page.text(page.el('push-count'))).toBe('1');
     expect(page.el('push').disabled).toBe(false);
-    expect(page.disabled()).toEqual([false, false, true, true]);
+    expect(page.disabled()).toEqual([false, false, true, true, false]);
+  });
+
+  it('« Get news » : `pnpm getNews` seul, sous le verrou, « Pousser » suit son commit', async () => {
+    const page = await patch();
+    expect(page.text(page.el('p-get-news'))).toBe('Get news');
+    expect(page.el('p-get-news').classList.contains('primary')).toBe(false);
+    expect(page.text(page.el('p-get-news').parentElement)).toContain(
+      'notes de patch seules (pnpm getNews)',
+    );
+
+    page.el('p-get-news').click();
+    await page.settle();
+    expect(page.calls).toEqual([{ path: '/api/patch/news', body: {} }]);
+    // Pendant le travail : tous les gestes éteints, celui-ci compris.
+    expect(page.disabled()).toEqual([true, true, true, true, true]);
+    expect(page.el('p-get-news').classList.contains('busy')).toBe(true);
+    expect(page.text(page.el('p-console-state'))).toBe('en cours : notes de patch (getNews)');
+
+    page.stream().send({ step: '$ pnpm getNews' });
+    page.stream().send({ step: '✓ 2 nouveau(x) post(s)' });
+    await page.settle();
+    expect(page.console()).toBe('$ pnpm getNews\n✓ 2 nouveau(x) post(s)\n');
+
+    // Les notes ont changé : `get-news.ts` les a committées, deux commits à pousser.
+    page.served.state = idle({ git: { branch: 'main', ahead: 2, behind: 0, dirty: 3 } });
+    await page.finish({
+      ok: true,
+      code: 0,
+      log: ['notes de patch (getNews) : terminé.'],
+      git: { branch: 'main', ahead: 2, behind: 0 },
+    });
+    expect(page.el('journal').dataset.state).toBe('ok');
+    expect(page.text(page.el('journal-last'))).toBe('notes de patch (getNews) : terminé.');
+    expect(page.text(page.el('push-count'))).toBe('2');
+    expect(page.el('push').disabled).toBe(false);
+    expect(page.el('p-get-news').classList.contains('busy')).toBe(false);
+    expect(page.disabled()).toEqual([false, false, true, false, false]);
   });
 
   it('un refus du serveur (message, 409) passe par le journal, rien ne tourne', async () => {
@@ -13051,7 +13089,7 @@ describe('Patch — la page, sur le vrai markup', () => {
     expect(page.text(page.el('log'))).toBe(
       'préfixe conventionnel exigé — ex. « chore(data): patch du 06/10 ».',
     );
-    expect(page.disabled()).toEqual([false, false, true, false]);
+    expect(page.disabled()).toEqual([false, false, true, false, false]);
   });
 
   it('« Arrêter » : visible pendant un travail, sa réponse dans la console', async () => {
@@ -13152,7 +13190,7 @@ describe('Patch — la page, sur le vrai markup', () => {
       'un travail tourne : commit des données — lancé avant, sa sortie n’est pas ici',
     );
     expect(page.console()).toBe('');
-    expect(page.disabled()).toEqual([true, true, true, true]);
+    expect(page.disabled()).toEqual([true, true, true, true, true]);
     // « Pousser » aussi, malgré deux commits en attente ; « Arrêter » est là.
     expect(page.text(page.el('push-count'))).toBe('2');
     expect(page.el('push').disabled).toBe(true);
@@ -13162,12 +13200,12 @@ describe('Patch — la page, sur le vrai markup', () => {
     // L'état est relu toutes les trois secondes tant que le travail tient.
     await vi.advanceTimersByTimeAsync(3000);
     expect(page.served.reads).toBe(2);
-    expect(page.disabled()).toEqual([true, true, true, true]);
+    expect(page.disabled()).toEqual([true, true, true, true, true]);
 
     page.served.state = idle({ git: { branch: 'main', ahead: 3, behind: 0, dirty: 0 } });
     await vi.advanceTimersByTimeAsync(3000);
     expect(page.served.reads).toBe(3);
-    expect(page.disabled()).toEqual([false, false, true, true]);
+    expect(page.disabled()).toEqual([false, false, true, true, false]);
     expect(page.el('push').disabled).toBe(false);
     expect(page.text(page.el('push-count'))).toBe('3');
     expect(page.el('p-stop').hidden).toBe(true);

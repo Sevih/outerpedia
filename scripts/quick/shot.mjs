@@ -58,7 +58,9 @@ const PIXEL = Buffer.from('R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBR
  * lecture aussi, qui coûte du quota (`YOUTUBE_API_KEY=` vide au banc).
  * Sans eux l'onglet Discord serait photographié sur une erreur, et les
  * cartes de Gear reco, la fiche d'une entrée du journal ou les lignes d'une
- * fiche de perso sur un aperçu refusé.
+ * fiche de perso sur un aperçu refusé. Aucune route `/api/patch/*` n'y est :
+ * chacune est un vrai geste — `/api/patch/news` compris (réseau sortant vers le
+ * site officiel, et un commit des notes de patch s'il y a du neuf).
  */
 export const READ_ONLY_POSTS = new Set([
   '/api/discord/preview',

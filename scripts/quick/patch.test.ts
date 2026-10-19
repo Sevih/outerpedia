@@ -18,6 +18,7 @@ import {
   busyRefusal,
   commitPlan,
   displayCommand,
+  newsPlan,
   parsePromoteOutput,
   patchState,
   promotePlan,
@@ -347,6 +348,12 @@ describe('les plans — ce que chaque geste lance', () => {
     expect(commitPlan(null)).toEqual({ error: 'objet JSON attendu.' });
   });
 
+  it('notes de patch : `pnpm getNews` seul, sans corps ni revue', () => {
+    expect(newsPlan()).toEqual({ label: 'notes de patch (getNews)', args: ['getNews'] });
+    expect(newsPlan().review).toBeUndefined();
+    expect(displayCommand(newsPlan().args)).toBe('pnpm getNews');
+  });
+
   it('displayCommand : la commande comme on la taperait', () => {
     expect(displayCommand(['datagen:promote', '--apply'])).toBe('pnpm datagen:promote --apply');
     expect(displayCommand(['commit', '--msg', 'chore(data): patch du 08/10', '--yes'])).toBe(
@@ -396,6 +403,32 @@ describe('runGesture — un plan, de la commande à l’issue', () => {
     expect(done.log[15]).toBe(
       'promotion de l’extraction : échec (code 1) — toute la sortie est dans la console de « Patch ».',
     );
+  });
+
+  it('notes de patch : `pnpm getNews`, terminé ou en échec quand le scrape rate', async () => {
+    const { spawned, spawnFn } = fakeSpawn((child) => child.exit(0, '✓ 3 post(s)\n'));
+    const { said, report } = reporter();
+    expect(await runGesture(newsPlan(), report, { spawn: spawnFn, pnpm: PNPM })).toEqual({
+      ok: true,
+      code: 0,
+      log: ['notes de patch (getNews) : terminé.'],
+    });
+    expect(spawned.map((s) => [s.command, ...s.args])).toEqual([
+      ['/usr/bin/node', '/x/pnpm.cjs', 'getNews'],
+    ]);
+    expect(said).toEqual(['$ pnpm getNews', '✓ 3 post(s)']);
+
+    // `get-news.ts` sort en 1 quand le scrape rate : c'est là qu'on veut le voir.
+    const failed = fakeSpawn((child) => child.exit(1, 'fetch failed\nscrape impossible\n'));
+    expect(await runGesture(newsPlan(), () => {}, { spawn: failed.spawnFn, pnpm: PNPM })).toEqual({
+      ok: false,
+      code: 1,
+      log: [
+        'fetch failed',
+        'scrape impossible',
+        'notes de patch (getNews) : échec (code 1) — toute la sortie est dans la console de « Patch ».',
+      ],
+    });
   });
 
   it('arrêté : une ligne, et ce n’est pas un succès', async () => {

@@ -172,6 +172,7 @@ import {
   busyError,
   busyRefusal,
   commitPlan,
+  newsPlan,
   patchState,
   promotePlan,
   refreshPlan,
@@ -522,6 +523,13 @@ async function route(req: IncomingMessage, res: ServerResponse): Promise<void> {
   if (req.method === 'POST' && url.pathname === '/api/patch/commit') {
     // `pnpm commit --no-push` : contrôles, bump, images sur R2, commit LOCAL.
     await patchGesture(res, commitPlan(await body<unknown>(req).catch(() => null)), true);
+    return;
+  }
+
+  if (req.method === 'POST' && url.pathname === '/api/patch/news') {
+    // « Get news » : `pnpm getNews` seul, corps non lu. Le script peut committer
+    // les notes de patch : l'état de git suit, pour le compte de « Pousser ».
+    await patchGesture(res, newsPlan(), true);
     return;
   }
 

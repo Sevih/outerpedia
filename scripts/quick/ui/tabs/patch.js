@@ -3,7 +3,8 @@
 // Chacun lance UNE commande du dépôt côté serveur (`patch.ts`), un seul travail
 // à la fois ; sa sortie arrive ligne à ligne dans la console du bas. Le
 // dry-run rend en plus sa revue, lue de sa sortie par le serveur : une ligne
-// par fichier différent, et ce que « Promouvoir » écrira.
+// par fichier différent, et ce que « Promouvoir » écrira. Un cinquième, à part :
+// « Get news », les notes de patch seules (`pnpm getNews`, qui peut committer).
 import { $, esc, gitBar, log, post, sections } from '../lib.js';
 
 /**
@@ -18,6 +19,8 @@ const REFRESH = {
 const DRY = { label: 'dry-run de la promotion', path: '/api/patch/promote' };
 const APPLY = { label: 'promotion de l’extraction', path: '/api/patch/promote', writes: true };
 const COMMIT = { label: 'commit des données', path: '/api/patch/commit', writes: true };
+/** Le cinquième : `posts.json` / `buff-events.json`, committés s'ils changent. */
+const NEWS = { label: 'notes de patch (getNews)', path: '/api/patch/news', writes: true };
 
 /** Le dernier `/api/patch/state` : travail en cours, versions, reprise, dépôt. */
 let st = null;
@@ -239,6 +242,7 @@ function render() {
   const job = busy();
   const locked = Boolean(job);
   $('p-refresh').disabled = locked;
+  $('p-get-news').disabled = locked;
   $('p-dry').disabled = locked;
   $('p-apply').disabled = locked || review !== 'ok';
   // Rien de modifié : rien à committer. Dépôt illisible : on laisse tenter.
@@ -348,6 +352,9 @@ $('p-refresh').onclick = () => {
     },
   });
 };
+
+// Pas de `outdated()` : le scrape ne touche pas la proposition d'extraction.
+$('p-get-news').onclick = () => run({ ...NEWS, button: $('p-get-news'), payload: {} });
 
 $('p-dry').onclick = () => {
   const box = $('p-review');

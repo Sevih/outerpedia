@@ -5,7 +5,8 @@
  * jeu, en quatre gestes : rafraîchir depuis le client (`pnpm datagen:patch`,
  * la chaîne de `datagen/refresh.ts`, promote en DRY), relire la promotion
  * (`pnpm datagen:promote`), promouvoir (`--apply`), committer
- * (`pnpm commit --no-push`). Le push reste « Pousser », dans l'en-tête.
+ * (`pnpm commit --no-push`). Le push reste « Pousser », dans l'en-tête. Un
+ * cinquième, à part : les notes de patch seules (`pnpm getNews`, « Get news »).
  *
  * Ce module CÂBLE, il ne réécrit rien : le lancement est celui de l'admin
  * (`spawnLauncher`, `pnpmInvocation`, `acquirePatchJob` de `patch-runner.ts`),
@@ -238,6 +239,18 @@ export function commitPlan(body: unknown): Planned {
   const parsed = parsePublishRequest(body);
   if (!parsed.ok) return { error: parsed.error };
   return { label: 'commit des données', args: publishArgs(parsed.request) };
+}
+
+/**
+ * `POST /api/patch/news` : `pnpm getNews` seul, sans corps à valider. Le script
+ * scrape le WordPress officiel et committe de lui-même `posts.json` /
+ * `buff-events.json` s'ils changent (`commitPatchNotes` de
+ * `scripts/get-news.ts`) — le comportement voulu, celui de « Rafraîchir » avec
+ * « notes de patch » coché. D'où un BOUTON et non un lancement au démarrage
+ * de quick : un commit sans geste n'est pas voulu.
+ */
+export function newsPlan(): Plan {
+  return { label: 'notes de patch (getNews)', args: ['getNews'] };
 }
 
 /** La commande telle qu'on la taperait : un argument à espaces entre guillemets. */
