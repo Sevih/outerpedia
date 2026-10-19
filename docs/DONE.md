@@ -7,6 +7,34 @@
 
 ## 2026-10-19
 
+- **Relecture F29 et B65 (Fable) — clips joués par variante, zip de
+  l'OST ; validés.** Un relecteur par lot, contrôles par moi sur HEAD
+  (`598db2d5`) : typecheck, lint verts, `Tests 4347 passed (4347)`,
+  `damage:check` 42 exactes. **F29** (`b97c20da`) : 18 fichiers de la tâche,
+  forme § 5.2 telle quelle (+ `selfMet`), index par index, suite greffée sur
+  l'`EventAdditiveAttack` de B64 ; `characters.json` 129 persos et 1 604
+  skills inchangés, 1 050 `clips` → 1 051 `variants` (+ Ame S3), 16 chaînes
+  irrésolues identiques ; les cellules de R16 recalculées depuis la donnée
+  (K S3 750 → 1 000 ‰, Naru Kang, Luna, Rin 300 → 1 000, Ember, Sterope B3
+  300 → 1 000 / 1 300 avec `cs`, Ame S1 1 500 → 500) ; `bestSkill` recalculé
+  : quatre entrées bougent, Sterope S1 → burst 3 (2 672) et trois formes à
+  valeur égale (Luna, Poolside Regina, Gnosis Dahlia). Coquille dans
+  l'entrée DONE : l'« avant » de Demiurge Drakhan S1 (3 150) ne se
+  reproduit pas, la donnée dit 100 ‰ / 2 hits → 1 000 ‰ / 9 hits ; l'après
+  est juste. **B65** (`598db2d5`) : zip STORE rejoué par
+  `python3 -m zipfile -t` et `-e` puis `cmp` sur trois entrées (accent,
+  kanji, vide) et sur 93 × 1,4 Mo (290 ms, 130 Mo, mémoire ≈ 2× la
+  sélection en pointe) ; téléchargement séquentiel, `AbortController` au
+  démontage et au changement d'onglet, sélection par playlist, CSP :
+  `connect-src` seule élargie. Écart assumé : « Selected: n · X MB » au lieu
+  de « n pistes » (pas de pluriel ICU côté client) ; l'en-tête de table
+  s'affiche maintenant sous md avec la seule case « tout ». **Reste à
+  Sevih** : promouvoir `bestSkill` — `pnpm datagen:promote --apply --only
+solver/characters.json solver/version.json` (promotion à blanc faite par
+  l'agent, 4 entrées) puis commit ; au calculateur, Ame S1 au tiers,
+  Francesca S3 sur une ligne, Sterope S1 à 3 hits puis 9 avec la condition
+  cochée ; `/tools/ost` sur mobile et, en prod, un zip de deux pistes depuis
+  `outerpedia.com` (la CSP). **Suite** : G30 après le push, puis G14.
 - **F29 — Calculateur : clips joués par VARIANTE d'index, suite
   additionnelle conditionnelle, une ligne par variante (R14, R16 — spec
   `docs/specs/damage-clips-joues.md` § 5).** Item du TODO « Calculateur (C,
