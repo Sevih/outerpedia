@@ -107,16 +107,18 @@ les preuves et les décisions vivent dans le tri consolidé de sevih-tool
       de base) : PLUS TARD (décision de Sevih du 18/10, chaque PR redéploie
       le bot ; OB3 ne couvre que les actions GitHub).
 - [ ] **Pulverization niveau 2, 4 pièces : coquille probable du jeu (vu par
-      la relecture de G10)** : `ItemSpecialOptionTemplet` ligne 117 fait
-      pointer `BuffID_4P` vers `BID_ITEM_UO_SET_17` (le buff du 2 pièces, 700)
-      alors que le texte dit 50 % et que `BID_ITEM_UO_SET_17_1` niveau 2 vaut
-      500 ; le contrat recopie la table. À MESURER en jeu (4 pièces BT4 contre
-      une cible en Break) avant de toucher quoi que ce soit ; affiché
-      seulement, jamais dans la fiche ni la CP. (Fortification : fausse
-      alerte, le −30 % de vitesse est dans la donnée, le texte le tait.)
+      la relecture de G10)** : valeurs attendues par Sevih (19/10) T0 2p 35 %
+      / 4p 25 %, T4 2p 70 % / 4p 50 %, à vérifier en jeu.
+      `ItemSpecialOptionTemplet` ligne 117 fait pointer `BuffID_4P` du T4 vers
+      `BID_ITEM_UO_SET_17` (le buff du 2 pièces, 700) alors que
+      `BID_ITEM_UO_SET_17_1` niveau 2 vaut 500 ; le contrat recopie la table et
+      affiche 70 % au 4 pièces T4. Mesure en jeu (4 pièces T4 contre une cible
+      en Break), puis décider si le contrat suit le texte. Affiché seulement,
+      jamais dans la fiche ni la CP. Fortification : le −30 % de vitesse est
+      normal (Sevih), à vérifier en jeu aussi.
 - [ ] **gear-solver, petits suivis de G9 et G10** : le pré-tri du mode Score
-      (`priorityScoreOf`, `magnitudeScoreOf`) compte le −30 % de Phantasm
-      comme −30 SPD plats ; dans l'onglet Builds, l'infobulle de la pastille
+      (`priorityScoreOf`, `magnitudeScoreOf`) compte le −30 % de vitesse de
+      Phantasm (écrit dans sa description, pas caché) comme −30 SPD plats ; dans l'onglet Builds, l'infobulle de la pastille
       « combat » ne se survole pas (`RichTooltip` en `pointer-events-none`,
       `BuildsScreen.tsx`) ; notes publiques `docs/release-notes.md`
       [Unreleased] à remplir avant la release (G8, G9, G10).
