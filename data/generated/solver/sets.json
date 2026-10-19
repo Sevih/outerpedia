@@ -828,10 +828,10 @@
           ],
           "p4": [
             {
-              "buffId": "BID_ITEM_UO_SET_17",
+              "buffId": "BID_ITEM_UO_SET_17_1",
               "type": "BT_DMG_TARGET_BREAK",
               "ap": "OAT_RATE",
-              "v": 700,
+              "v": 500,
               "target": "ME"
             }
           ]

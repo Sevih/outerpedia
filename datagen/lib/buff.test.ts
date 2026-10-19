@@ -5,6 +5,7 @@ import {
   fillPlaceholders,
   isStatSheetBuff,
   resolveSkillPlaceholders,
+  setBuffId,
   skillBuffVars,
 } from './buff';
 import type { Row } from './tables';
@@ -201,5 +202,39 @@ describe('[Buff_V] : signe et « % » du client (décision du 17/10)', () => {
     expect(skillBuffVars(idx, 'res_down', 1).v).toBe('-50');
     expect(skillBuffVars(idx, 'atk_down', 1).v).toBe('30%');
     expect(skillBuffVars(idx, 'res_down', 1, { absolute: true }).v).toBe('50');
+  });
+});
+
+describe('setBuffId', () => {
+  const row = (id: string, b2: string, b4: string): Row => ({
+    ID: id,
+    BuffID_2P: b2,
+    BuffID_4P: b4,
+  });
+
+  it('rend la colonne telle quelle hors table de corrections, undefined si vide', () => {
+    expect(setBuffId(row('17', 'BID_ITEM_UO_SET_17', 'BID_ITEM_UO_SET_17_1'), '4P')).toBe(
+      'BID_ITEM_UO_SET_17_1',
+    );
+    expect(setBuffId(row('18', 'BID_X', ''), '4P')).toBeUndefined();
+    // La ligne corrigée garde son 2P tel quel.
+    expect(setBuffId(row('117', 'BID_ITEM_UO_SET_17', 'BID_ITEM_UO_SET_17'), '2P')).toBe(
+      'BID_ITEM_UO_SET_17',
+    );
+  });
+
+  it('corrige le 4P de la ligne 117 (Pulverization enchanté) quand la table porte la valeur fautive', () => {
+    expect(setBuffId(row('117', 'BID_ITEM_UO_SET_17', 'BID_ITEM_UO_SET_17'), '4P')).toBe(
+      'BID_ITEM_UO_SET_17_1',
+    );
+  });
+
+  it('jette si la valeur fautive attendue a disparu (le jeu a changé sa table)', () => {
+    expect(() => setBuffId(row('117', 'BID_ITEM_UO_SET_17', 'BID_ITEM_UO_SET_17_1'), '4P')).toThrow(
+      /retirer la correction/,
+    );
+    expect(() => setBuffId(row('117', 'BID_ITEM_UO_SET_17', ''), '4P')).toThrow(
+      /retirer la correction/,
+    );
   });
 });

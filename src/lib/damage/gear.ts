@@ -34,6 +34,10 @@
  *     2 sets = 2P chacun (convention UI). Niveau de buff de l'effet 2P/4P =
  *     colonne `BuffLevel_xP` + 1 (constructeur de `CItemSpecialOption`),
  *     résolu par datagen (`setBuffLevel`) : 1 à la base, 2 à l'enchanté ;
+ *     le BUFF lui-même passe par la table de corrections de datagen
+ *     (`setBuffId`, `datagen/lib/buff.ts`) : le 4P de Pulverization enchanté
+ *     y lit `BID_ITEM_UO_SET_17_1` (50 %), que la table du jeu remplace par
+ *     le buff du 2P ;
  *   - ligne de buff (`pickBuffRow`, comme `CBuffTempletContainer.GetBuffTemplet`) :
  *     la DERNIÈRE ligne de niveau ≤ demandé, rien sous la première ligne ;
  *   - arme/accessoire : le buff unique porte 5 niveaux = breakthrough T0..T4

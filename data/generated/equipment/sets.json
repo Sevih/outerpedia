@@ -669,12 +669,12 @@
           }
         },
         "4p": {
-          "buff": "BID_ITEM_UO_SET_17",
+          "buff": "BID_ITEM_UO_SET_17_1",
           "effects": [
             {
               "type": "dmg_target_break",
               "mode": "rate",
-              "value": 700
+              "value": 500
             }
           ],
           "desc": {

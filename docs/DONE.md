@@ -7,6 +7,54 @@
 
 ## 2026-10-19
 
+- **A67 — Sets : le 4 pièces de Pulverization en T4 lit son propre buff
+  (50 %), correction de la table du jeu en un seul endroit.**
+  `ItemSpecialOptionTemplet` ligne `ID` 117 (set 17, `Level` 2,
+  `BreakLimitCount 4`) porte `BuffID_4P = BID_ITEM_UO_SET_17`, le buff du
+  2P, alors que la base (`ID` 17) pose `_17_1` au 4P, que `BuffTemplet` a
+  `BID_ITEM_UO_SET_17_1` au niveau 2 à 500 (`ID` 1428) et que le texte de la
+  ligne (`UO_SET_17_2_DESC_1`) dit « by 50% » ; décision de Sevih du 19/10 :
+  2P et 4P se cumulent, T0 +35 % / +25 %, T4 +70 % / +50 %. Nos trois
+  lecteurs recopiaient la faute (calculateur +140 % au lieu de +120 %,
+  `equipment/sets.json` et `solver/sets.json` à 700 au 4P T4). Comment :
+  `setBuffId(row, piece)` dans `datagen/lib/buff.ts`, à côté de
+  `setBuffLevel`, rend `BuffID_xP` tel quel sauf pour la table nommée
+  `SET_BUFF_CORRECTIONS` (ligne, pièce, valeur fautive ATTENDUE, valeur
+  corrigée, source) ; une seule entrée, `117`/`4P`
+  `BID_ITEM_UO_SET_17` → `BID_ITEM_UO_SET_17_1`, qui ne s'applique que si la
+  cellule porte encore la valeur fautive : sinon le build jette en disant de
+  retirer la correction. `datagen/damage/equipment.ts`,
+  `datagen/generators/equipment.ts` et `datagen/generators/solver.ts` y
+  passent ; le niveau reste `setBuffLevel` (2 à l'enchanté, d'où 500) ;
+  en-têtes de `setBuffLevel` et de `src/lib/damage/gear.ts` (règle des
+  SETS) mis à jour. Tests : `setBuffId` sur lignes factices (tel quel, vide,
+  correction, jet si la valeur fautive a disparu ou si la cellule est vide) ;
+  `gear.test.ts` réécrit (T4 4P = `_17` à 700 puis `_17_1` à 500, T4 2P =
+  700, T0 350 puis 350 + 250) ; `solver.test.ts` figeait aussi l'erreur
+  (« Pulverization niveau 2 : 2P et 4P … 700 »), réécrit : p2 `_17` à 700,
+  p4 `_17_1` à 500. Relevé des autres sets (script jetable sur
+  `.gamedata/parsed`, toutes les lignes à effet de set) :
+  `BuffID_4P === BuffID_2P` sur la seule ligne 117 ; aucun autre set à
+  signaler.
+  `datagen:build`, `damage:build` (`damage/equipment.json` : le seul
+  `fourPiece.buffId` du set 17 enchanté), `datagen:promote` à blanc :
+  `equipment/sets.json` ~1, `solver/sets.json` ~1, `solver/version.json` ~2,
+  rien d'autre (2400015 non intégré, jamais promu), puis `--apply --only`
+  de ces trois fichiers. `damage:check` : 42 lignes exactes, 0 en dérive.
+  Rejeu par `resolveGearPassives` (Dianne, set 17) : T4 4P
+  `_17=700 + _17_1=500`, T4 2P `_17=700`, T0 2P `_17=350`, T0 4P
+  `_17=350 + _17_1=250`. `pnpm typecheck` (dernière ligne : la commande
+  `tsc --noEmit && … scripts/tsconfig.json`) et `pnpm lint` (`eslint`)
+  verts, `pnpm test`
+  `Tests 4287 passed (4287)`. **Pour Sevih** : au calculateur, Pulverization
+  4 pièces T4 contre une cible en Break donne +120 % ; après le prochain
+  `data:sync` de gear-solver (G30 passe après A67), sa pastille dit 50 % au
+  4P T4 ; la mesure en jeu qui confirmera la décision : un perso en
+  4 pièces T4 puis 2 pièces T4 sur la même cible en Break, l'écart des
+  dégâts doit valoir le rapport 2,2 / 1,7 sur la part des dégâts concernée
+  (+120 % contre +70 %). Laissé : gear-solver (son `data:sync`, lot à part),
+  le texte des sets, le `schema` du contrat (inchangé).
+
 - **Relecture G11 (Opus) — restes des lots G1 à G7 dans gear-solver ;
   validé.** gear-solver `32e0dd1`, relu par un agent : un commit, 26
   fichiers (code des sept points, deux tests neufs, docs et wiki), ni

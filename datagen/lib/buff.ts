@@ -47,9 +47,65 @@ export function loadBuffIndex(): Map<string, Row[]> {
  * colonne (→ niveau 1), les lignes enchantées (`BreakLimitCount 4`) ont `1`
  * (→ niveau 2). Les options UNIQUES (arme, accessoire, EE) ne passent PAS par
  * ici : le client y passe le niveau tel quel.
+ *
+ * Le BUFF de l'effet se lit par `setBuffId`, qui tient une table de
+ * corrections de la colonne `BuffID_xP` (`SET_BUFF_CORRECTIONS`) ; le niveau,
+ * lui, n'est jamais corrigé.
  */
 export function setBuffLevel(row: Row, piece: '2P' | '4P'): number {
   return num(row[`BuffLevel_${piece}`]) + 1;
+}
+
+/** Correction d'une cellule `BuffID_xP` de `ItemSpecialOptionTemplet`. */
+interface SetBuffCorrection {
+  /** `ID` de la ligne (pas le `GroupID`). */
+  rowId: string;
+  piece: '2P' | '4P';
+  /** Valeur fautive ATTENDUE dans la table du jeu. */
+  expected: string;
+  corrected: string;
+  /** Ce qui fonde la correction. */
+  source: string;
+}
+
+/**
+ * Corrections de la table du jeu, lues par les trois lecteurs des effets de set
+ * (calculateur `datagen/damage/equipment.ts`, `generators/equipment.ts`,
+ * `generators/solver.ts`). Une correction ne s'applique que si la cellule porte
+ * encore la valeur fautive attendue : si le jeu la change, `setBuffId` jette
+ * pour qu'on retire la correction, jamais de remplacement silencieux.
+ */
+const SET_BUFF_CORRECTIONS: readonly SetBuffCorrection[] = [
+  {
+    // Pulverization enchanté (set 17, Level 2, BreakLimitCount 4) : le 4P y
+    // recopie le buff du 2P (700 ‰ au niveau 2), alors que la ligne de base
+    // (ID 17) pose `_17_1` au 4P et que `BuffTemplet` a `_17_1` au niveau 2
+    // à 500 ‰.
+    rowId: '117',
+    piece: '4P',
+    expected: 'BID_ITEM_UO_SET_17',
+    corrected: 'BID_ITEM_UO_SET_17_1',
+    source:
+      'texte UO_SET_17_2_DESC_1 de la ligne (« +50% » contre une cible en Break) ; décision de Sevih du 19/10/2026 : 2P et 4P se cumulent, T4 = +70 % puis +50 %',
+  },
+];
+
+/**
+ * Buff d'un effet de SET (colonne `BuffID_2P` / `BuffID_4P` d'une ligne
+ * `ItemSpecialOptionTemplet`), tel quel sauf correction de
+ * `SET_BUFF_CORRECTIONS`. `undefined` si la cellule est vide.
+ */
+export function setBuffId(row: Row, piece: '2P' | '4P'): string | undefined {
+  const raw = row[`BuffID_${piece}`] || undefined;
+  const fix = SET_BUFF_CORRECTIONS.find((c) => c.rowId === row.ID && c.piece === piece);
+  if (!fix) return raw;
+  if (raw?.trim() !== fix.expected)
+    throw new Error(
+      `setBuffId : ItemSpecialOptionTemplet ID ${fix.rowId}, BuffID_${piece} vaut « ${raw ?? ''} » ` +
+        `au lieu de « ${fix.expected} » attendu — le jeu a changé sa table : retirer la correction ` +
+        `de SET_BUFF_CORRECTIONS (datagen/lib/buff.ts) après vérification.`,
+    );
+  return fix.corrected;
 }
 
 /** Vrai si la valeur du buff est en per-mille (à diviser par 10 pour un %). */

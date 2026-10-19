@@ -288,15 +288,23 @@ describe('gear — sets ENCHANTÉS : niveau de buff = BuffLevel_xP + 1 (client)'
     return r!;
   };
 
-  it('Pulverization (17) enchanté : 2P et 4P au niveau 2 (700 ‰), la base au niveau 1', () => {
-    const enchanted = setPassives('17', true).entries;
-    expect(enchanted.length).toBeGreaterThan(0);
-    for (const e of enchanted) expect(e.buff.value).toBe(lv(e.buffId, 2));
-    expect(lv('BID_ITEM_UO_SET_17', 2)).not.toBe(lv('BID_ITEM_UO_SET_17', 1)); // 700 contre 350
+  it('Pulverization (17) enchanté : le 4P lit son propre buff (_17_1) au niveau 2, la base au niveau 1', () => {
+    /** (buffId, valeur) des entrées collectées, dans l'ordre 2P puis 4P. */
+    const pairs = (enchanted: boolean, pieces: 2 | 4) =>
+      setPassives('17', enchanted, pieces).entries.map((e) => [e.buffId, e.buff.value]);
+    // T4 : 2P `_17` puis 4P `_17_1` (correction de la table du jeu, `setBuffId`).
+    expect(pairs(true, 4)).toEqual([
+      ['BID_ITEM_UO_SET_17', lv('BID_ITEM_UO_SET_17', 2)],
+      ['BID_ITEM_UO_SET_17_1', lv('BID_ITEM_UO_SET_17_1', 2)],
+    ]);
+    expect(pairs(true, 2)).toEqual([['BID_ITEM_UO_SET_17', lv('BID_ITEM_UO_SET_17', 2)]]);
+    expect(lv('BID_ITEM_UO_SET_17_1', 2)).not.toBe(lv('BID_ITEM_UO_SET_17', 2)); // 500 contre 700
     // Base inchangée : chaque effet au niveau 1.
-    const base = setPassives('17', false).entries;
-    expect(base.length).toBeGreaterThan(0);
-    for (const e of base) expect(e.buff.value).toBe(lv(e.buffId, 1));
+    expect(pairs(false, 2)).toEqual([['BID_ITEM_UO_SET_17', lv('BID_ITEM_UO_SET_17', 1)]]);
+    expect(pairs(false, 4)).toEqual([
+      ['BID_ITEM_UO_SET_17', lv('BID_ITEM_UO_SET_17', 1)],
+      ['BID_ITEM_UO_SET_17_1', lv('BID_ITEM_UO_SET_17_1', 1)],
+    ]);
   });
 
   it('Revenge (15) enchanté : la ligne de niveau 2 (…_RATE_HALF), plein effet à 50 % de PV', () => {

@@ -81,6 +81,7 @@ import {
   isStatSheetBuff,
   loadBuffGroups,
   loadBuffIndex,
+  setBuffId,
   setBuffLevel,
 } from '../lib/buff';
 import { fillValuePlaceholders, type BuffValues } from '../lib/placeholders';
@@ -501,7 +502,7 @@ export function buildSolver(inputs: {
     ];
   }
   function setCombatEffects(s: Row, piece: '2P' | '4P'): CombatEffect[] | null {
-    const buffId = s[`BuffID_${piece}`];
+    const buffId = setBuffId(s, piece);
     if (s[`OptionType_${piece}`] !== 'IOT_BUFF' || !buffId) return null;
     return combatEffectsOf(buffId.trim(), setBuffLevel(s, piece));
   }

@@ -47099,7 +47099,7 @@
         },
         "fourPiece": {
           "optionType": "IOT_BUFF",
-          "buffId": "BID_ITEM_UO_SET_17",
+          "buffId": "BID_ITEM_UO_SET_17_1",
           "buffLevel": 2
         }
       }

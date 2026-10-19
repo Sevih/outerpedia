@@ -40,6 +40,7 @@ import {
   fillPlaceholders,
   loadBuffGroups,
   loadBuffIndex,
+  setBuffId,
   setBuffLevel,
   type BuffValues,
 } from '../lib/buff';
@@ -418,7 +419,7 @@ function setEffect(
       ),
     };
   }
-  const buff = row[`BuffID_${piece}`];
+  const buff = setBuffId(row, piece);
   if (buff) return { buff, effects: resolveBuffEffects(buff, setBuffLevel(row, piece)) };
   return null;
 }

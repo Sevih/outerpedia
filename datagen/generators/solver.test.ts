@@ -548,18 +548,13 @@ describe('solver — sets : p2 / p4 = stats de fiche seulement', () => {
 describe('solver — sets : combatEffects (affichage, jamais la fiche)', () => {
   const at = (id: string, level: number) => sets[id].levels.find((l) => l.level === level)!;
 
-  it('Pulverization niveau 2 : 2P et 4P BT_DMG_TARGET_BREAK 700 sur ME', () => {
-    for (const p of ['p2', 'p4'] as const) {
-      expect(at('17', 2).combatEffects[p], p).toEqual([
-        {
-          buffId: 'BID_ITEM_UO_SET_17',
-          type: 'BT_DMG_TARGET_BREAK',
-          ap: 'OAT_RATE',
-          v: 700,
-          target: 'ME',
-        },
-      ]);
-    }
+  it('Pulverization niveau 2 : 2P BT_DMG_TARGET_BREAK 700, 4P son propre buff (_17_1) à 500, sur ME', () => {
+    // Le 4P passe par la correction de `setBuffId` (la table du jeu y recopie le 2P).
+    const effect = (buffId: string, v: number) => [
+      { buffId, type: 'BT_DMG_TARGET_BREAK', ap: 'OAT_RATE', v, target: 'ME' },
+    ];
+    expect(at('17', 2).combatEffects.p2).toEqual(effect('BID_ITEM_UO_SET_17', 700));
+    expect(at('17', 2).combatEffects.p4).toEqual(effect('BID_ITEM_UO_SET_17_1', 500));
   });
 
   it('Weakness niveau 2 : BT_DMG_REDUCE −350 sur ENEMY_TEAM (signe et cible bruts)', () => {

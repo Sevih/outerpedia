@@ -106,12 +106,11 @@ les preuves et les décisions vivent dans le tri consolidé de sevih-tool
       (comportement à décider) ; Dependabot `npm` (et `docker` pour l'image
       de base) : PLUS TARD (décision de Sevih du 18/10, chaque PR redéploie
       le bot ; OB3 ne couvre que les actions GitHub).
-- [ ] **Pulverization T4, 4 pièces** : décision de Sevih du 19/10, 2P et 4P se
-      cumulent et le 4P T4 vaut 50 % (texte du jeu), alors que la table du jeu
-      (`ItemSpecialOptionTemplet` 117) lui donne le buff du 2P (700) : lot A67
-      rédigé (correction tenue dans `datagen/lib/buff.ts`). Reste à Sevih : la
-      mesure en jeu (4 pièces T4 contre une cible en Break, +120 % attendus) ;
-      Fortification (−30 % de vitesse, normal) à vérifier en jeu aussi.
+- [ ] **Pulverization T4, 4 pièces** : correction de la table du jeu FAITE
+      (A67, le 4P T4 lit `BID_ITEM_UO_SET_17_1` à 500, tenue dans
+      `datagen/lib/buff.ts`). Reste à Sevih : la mesure en jeu (4 pièces T4
+      contre une cible en Break, +120 % attendus) ; Fortification (−30 % de
+      vitesse, normal) à vérifier en jeu aussi ; le `data:sync` de gear-solver.
 - [ ] **gear-solver, petits suivis de G9 et G10** : le pré-tri du mode Score
       (`priorityScoreOf`, `magnitudeScoreOf`) compte le −30 % de vitesse de
       Phantasm (écrit dans sa description, pas caché) comme −30 SPD plats ; dans l'onglet Builds, l'infobulle de la pastille

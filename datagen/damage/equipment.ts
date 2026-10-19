@@ -32,7 +32,7 @@
  * n'est émise que si le perso est au roster validé (cf. `roster.ts`).
  */
 import { groupBy, loadTable, num, numf, bool, splitCsv, type Row } from '../lib/tables';
-import { setBuffLevel } from '../lib/buff';
+import { setBuffId, setBuffLevel } from '../lib/buff';
 import { integratedIds } from './roster';
 
 /** Une option d'item (`ItemOptionTemplet`) — main (Rate 10000) ou sub (tirée). */
@@ -148,7 +148,7 @@ export interface DamageEquipmentData {
 function setEffect(r: Row, suffix: '2P' | '4P'): DamageSetEffect | undefined {
   const optionType = r[`OptionType_${suffix}`];
   const stat = r[`StatType_${suffix}`];
-  const buffId = r[`BuffID_${suffix}`];
+  const buffId = setBuffId(r, suffix);
   if (!optionType || (optionType === 'IOT_STAT' && (!stat || stat === 'ST_NONE') && !buffId))
     return undefined;
   const out: DamageSetEffect = { optionType };
