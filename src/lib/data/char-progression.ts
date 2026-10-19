@@ -45,6 +45,7 @@ import {
   type StepStatKey,
 } from '@/lib/stat-compose';
 import { SUBSTAT_AXES, type SubstatAxis, type SubstatFlatProfile } from '@/lib/substat-verdict';
+import { contractKeyToAbbr, statSlugToAbbr } from '@/lib/data/stat-keys';
 import progressionData from '@data/generated/progression.json';
 import itemsData from '@data/generated/items.json';
 import skillsData from '@data/generated/skills.json';
@@ -75,20 +76,11 @@ export type { StatStepView, StepStatKey, StatLayersView };
 
 /** Champ du contrat solver (`StatBlock`, unités d'affichage : entiers pour
  * ATK…RES, % pour CHC/CHD/PEN/DMG) → clé d'affichage. Les taux (`*Pct`,
- * `effRate`, `resRate`) sont traités à part (`blockToParts`). */
-const BLOCK_KEY: Partial<Record<keyof SolverStatBlock, StepStatKey>> = {
-  atk: 'ATK',
-  def: 'DEF',
-  hp: 'HP',
-  spd: 'SPD',
-  chc: 'CHC',
-  chd: 'CHD',
-  pen: 'PEN%',
-  dmgInc: 'DMG UP%',
-  dmgRed: 'DMG RED%',
-  eff: 'EFF',
-  res: 'RES',
-};
+ * `effRate`, `resRate`) sont traités à part (`blockToParts`). DÉRIVÉE de
+ * `solver/stat-keys.json` (lignes `OAT_ADD`, `contractKeyToAbbr`) ; le cast
+ * couvre `cdmgRed`, paire du contrat qu'aucun `StatBlock` ne porte : les
+ * lecteurs (`if (block[field])`) sautent le champ absent. */
+const BLOCK_KEY = contractKeyToAbbr() as Partial<Record<keyof SolverStatBlock, StepStatKey>>;
 
 /** Stat interpolée → plage min/max du contrat. */
 const BASE_KEY = {
@@ -194,21 +186,9 @@ export function computeStatSteps(char: Character): StatStepsView {
 
 // --- Couches optionnelles (quirks / codex / transcendance) -------------------------
 
-/** Slug de bonus (quirks / skill_8) → clé d'affichage. */
-const BONUS_KEY: Record<string, StepStatKey> = {
-  atk: 'ATK',
-  def: 'DEF',
-  hp: 'HP',
-  speed: 'SPD',
-  critical_rate: 'CHC',
-  critical_dmg_rate: 'CHD',
-  dmg_boost: 'DMG UP%',
-  dmg_reduce_rate: 'DMG RED%',
-  pierce_power_rate: 'PEN%',
-  e_cri_dmg_reduce: 'CDMG RED%',
-  buff_chance: 'EFF',
-  buff_resist: 'RES',
-};
+/** Slug de bonus (quirks / skill_8) → clé d'affichage. DÉRIVÉE de
+ * `solver/stat-keys.json` (`slugEnum(ST_*)` des lignes `OAT_ADD`, `statSlugToAbbr`). */
+const BONUS_KEY: Record<string, StepStatKey> = statSlugToAbbr();
 
 /** Accumule un bonus brut dans une couche (unités d'affichage / per-mille). */
 function addBonus(parts: LayerParts, b: StatBonus): void {

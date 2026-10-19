@@ -7,6 +7,93 @@
 
 ## 2026-10-19
 
+- **A68 — quick : bouton « Get news » dans la section « Patch », `pnpm getNews`
+  seul sous le verrou de la section, sa sortie dans la console.** Item
+  « Récupérer les news depuis quick » du TODO (section « 🧰 Outil quick »),
+  parti entier. Pourquoi : `pnpm dev` relit les notes de patch à chaque
+  lancement (`scripts/dev-refresh.ts`, `news: true`), quick ne le faisait que
+  par « Rafraîchir », qui rejoue toute la chaîne (pull, dump, extract, build,
+  promote en dry-run). Décision de Sevih (19/10) : un BOUTON, pas un lancement
+  au démarrage — `scripts/get-news.ts` committe lui-même `posts.json` /
+  `buff-events.json` quand ils changent (`commitPatchNotes`), et un commit sans
+  geste n'est pas voulu ; on ne passe PAS `--no-commit`, le commit est le
+  comportement voulu, le même que « Rafraîchir » avec « notes de patch » coché.
+  Comment : un cinquième plan pur `newsPlan()` dans `scripts/quick/patch.ts`
+  (`{ label: 'notes de patch (getNews)', args: ['getNews'] }`, sans corps ni
+  revue ; l'en-tête du module dit le cinquième geste, à part) ; la route
+  `POST /api/patch/news` de `scripts/quick/server.ts`, à la suite de
+  `/api/patch/commit`, par `patchGesture(res, newsPlan(), true)` — même 409
+  qu'un autre geste si un travail tourne, et `withGit` parce que le script peut
+  committer : le compte de « Pousser » suit ; le corps n'est pas lu. Côté page,
+  une rangée `.actions` sous le `.form` de la carte « 1 · Rafraîchir depuis le
+  jeu » (`scripts/quick/ui/tabs/patch.html`, bouton `#p-get-news` sans
+  `primary` : « Lancer » reste le geste principal de la carte), et dans
+  `tabs/patch.js` le geste `NEWS` (`writes: true` : `quick:changed` à la fin),
+  son `onclick` par `run(...)` avec `payload: {}`, éteint par `render()` sous
+  le verrou avec les autres ; pas de `outdated()`, le scrape ne touche pas la
+  proposition d'extraction. `scripts/quick/shot.mjs` : rien dans
+  `READ_ONLY_POSTS`, son commentaire dit qu'aucune route `/api/patch/*` n'y est,
+  `/api/patch/news` compris (réseau sortant et commit possible). Vérifié :
+  `patch.test.ts` (le plan, `displayCommand` → `pnpm getNews`, `runGesture` sur
+  un spawn factice en 0 puis en 1 — `$ pnpm getNews` en première ligne, la fin
+  de la sortie au journal sur l'échec du scrape) ; `ui-serve.test.ts`
+  (`p-get-news` ajouté en fin de `BUTTONS`, les treize assertions `disabled()`
+  du describe « Patch » étendues d'une cinquième valeur — celle de « Lancer »,
+  même règle `locked` ; un cas « Get news » : POST `/api/patch/news` avec `{}`,
+  bouton `busy`, lignes à `#p-console`, un `done` avec `git` qui rallume le
+  bouton, pose le journal en `ok` et « Pousser » à 2 ; `/api/patch/news` dans
+  la liste des POST que le banc refuse). `pnpm typecheck` (les trois `tsc`,
+  sans erreur), `pnpm lint` (`$ eslint`, sans sortie), `pnpm test` (« Tests
+  4298 passed (4298) »). Aucun `curl` sur la route
+  (vrai geste) ni quick isolé lancé : le markup de la carte est lu par les
+  tests de la page. Aucun changement visuel hors la rangée ajoutée dans la
+  carte 1. Laissé : rien ; l'onglet « Rafraîchir » et sa case « notes de
+  patch », `get-news.ts` et `refresh.ts` sont inchangés (hors périmètre).
+
+- **B61 — Suites de L6 côté wiki : `BLOCK_KEY`, `BONUS_KEY` et `RAW_FLAT`
+  dérivés de `solver/stat-keys.json`, `STAT_KEY` de `reco-api.ts` gardé par la
+  table.** Item « **Suites de L6** » des suites du 18/10, partie wiki. Le wiki
+  tenait quatre tables de clés de stats recopiées à la main alors que C26 émet
+  le vocabulaire du contrat (une ligne `{ key, percent, abbr }` par paire
+  `ST_*`/`OAT_*`, `abbr` = abréviation du wiki) : une ligne qui bouge les aurait
+  fait dériver en silence. Nouveau module `src/lib/data/stat-keys.ts` (lit le
+  JSON, en-tête : toute table de clés de stats du wiki se dérive d'ici ou se
+  justifie dans un test) : `contractKeyToAbbr()` et `statSlugToAbbr()` (lignes
+  `OAT_ADD` dont l'`abbr` est une `STEP_STAT_KEYS`, clé du contrat ou
+  `slugEnum(ST_*)`), `contractAbbrs()` (toutes les `abbr` non nulles),
+  `flatContractSlugs()` (`OAT_ADD.percent === false`). `char-progression.ts` :
+  `BLOCK_KEY = contractKeyToAbbr()` (cast documenté en
+  `Partial<Record<keyof SolverStatBlock, …>>` : la dérivation ajoute
+  `cdmgRed → CDMG RED%`, absent de `StatBlock`, que les deux boucles
+  `if (block[field])` sautent — aucun chiffre ne bouge) et
+  `BONUS_KEY = statSlugToAbbr()` (les 12 slugs d'avant, exactement).
+  `reco-api.ts` : `STAT_KEY` inchangé (sa partie droite est le vocabulaire
+  `GAME_STAT` de gear-solver, pas celui du contrat, et le contrat public de
+  `/api/reco/:id` est figé) ; le commentaire le dit, et `RECO_STAT_LABELS` (ses
+  clés) est exporté pour la garde. `monster-stats.ts` : `RAW_FLAT` devient
+  `RAW_FLAT_ALIASES` (`effectiveness`, `resilience`, alias de l'extracteur
+  monstres absents du fichier) et `formatMonsterStat` rend brut quand le slug
+  est un alias ou est plat au contrat ET `percent` au glossaire — soit
+  `buff_chance`/`buff_resist` ; hp/atk/def/speed, plats des deux côtés, gardent
+  le groupement des milliers. Sortie identique sur tout `GAME_ORDER` (seuls les
+  quatre EFF/RES sortent bruts, comme avant). Vérifié : `stat-keys.test.ts`
+  (nouveau) fige les 11 + 1 paires de `BLOCK_KEY`, les 12 de `BONUS_KEY`, que
+  tout champ plat d'un `evoByLevel` réel de `solver/characters.json` est
+  couvert, que `RECO_STAT_LABELS ⊂ contractAbbrs()`, et que
+  `formatMonsterStat('hp', 47850000, …, 'fr')` garde ses espaces ;
+  `monster-stats.test.ts` gagne les cas `buff_chance`/`effectiveness` → `'210'`
+  et `critical_rate` 350 → `'35%'` ; `char-progression.test.ts` (fiche lv100 des
+  captures en jeu) et `reco-api.test.ts` passent sans changement.
+  `pnpm typecheck` (sortie 0, les trois `tsc` muets), `pnpm lint` (muet),
+  `pnpm test` : « Tests 4298 passed (4298) ». Laissé : `BASE_KEY`, `statScales`
+  et l'extracteur, la partie gear-solver (mains d'EE `ST_AVOID`, item du TODO).
+  Pistes : `statScales` (glossaire, extracteur `character.ts`) dit EFF/RES
+  `percent` quand le contrat les dit plats — c'est cette contradiction que
+  `formatMonsterStat` corrige encore à la lecture, la corriger à la source
+  rendrait la règle inutile ; `BossStats.tsx` est un composant client, il
+  emporte désormais `stat-keys.json` (~2 Ko) dans son graphe via
+  `monster-stats.ts`.
+
 - **OB4 — outerbot : liens d'index `/characters` et `/guides` laissés nus,
   documentés et gardés par le contrat ; une review déposée sur un post sans
   id gardée par slug (outerbot `6382257`).** Item « **outerbot** » des

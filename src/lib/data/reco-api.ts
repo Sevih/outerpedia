@@ -105,9 +105,14 @@ const TABLES: Record<Slot, Record<string, EquipEntry>> = {
 };
 
 /**
- * Libellé de stat du wiki → clé moteur du solveur (sa table `GAME_STAT`,
- * `gear-solver/packages/core/src/stats.ts`). Les alias historiques (crc, chd,
- * res, dmgRed) ne sont PAS acceptés en face : la traduction se fait ici.
+ * Libellé de stat du wiki → clé moteur du solveur. La partie GAUCHE est le
+ * vocabulaire `abbr` de `solver/stat-keys.json` (L6) — garde en test
+ * (`stat-keys.test.ts`, `RECO_STAT_LABELS ⊂ contractAbbrs()`) ; la partie
+ * DROITE est celui de `GAME_STAT` de gear-solver
+ * (`gear-solver/packages/core/src/stats.ts`), pas celui du contrat (`chc`,
+ * `res`, `dmgInc`) : la table reste donc locale, et le contrat public de
+ * `/api/reco/:id` ne bouge pas. Les alias historiques (crc, chd, res, dmgRed)
+ * ne sont PAS acceptés en face : la traduction se fait ici.
  */
 const STAT_KEY: Record<string, string> = {
   ATK: 'atk',
@@ -126,6 +131,9 @@ const STAT_KEY: Record<string, string> = {
   'DMG RED%': 'dmgReduce', // ST_DMG_REDUCE_RATE
   'CDMG RED%': 'critDmgReduce', // ST_E_CRI_DMG_REDUCE
 };
+
+/** Libellés que `STAT_KEY` traduit (garde de `stat-keys.test.ts`). */
+export const RECO_STAT_LABELS: readonly string[] = Object.keys(STAT_KEY);
 
 /** Libellé → clé moteur ; le libellé brut est conservé s'il est inconnu (le
  *  solveur le rejettera bruyamment plutôt que de filtrer sur du faux). */

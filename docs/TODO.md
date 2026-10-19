@@ -87,8 +87,8 @@ les preuves et les décisions vivent dans le tri consolidé de sevih-tool
 - [ ] **Suites de L6 (après C26 et G30)** : les lecteurs du wiki
       (`BLOCK_KEY`, `BONUS_KEY` de `char-progression.ts`, `STAT_KEY` de
       `reco-api.ts`) et `RAW_FLAT` / `statScales` de `monster-stats.ts` lisent
-      la table de clés ; côté gear-solver, les mains d'EE `ST_AVOID` sortent
-      du panneau au lieu d'y être « combat-only ».
+      la table de clés — FAIT côté wiki (B61) ; reste, côté gear-solver, les
+      mains d'EE `ST_AVOID` sortent du panneau au lieu d'y être « combat-only ».
 - [ ] **Suites de G8** : fiche du wiki en vitesse en taux avec régénération
       de l'oracle (`char-progression.ts`), puis retrait de `corePassive`
       (`schema` 2), seulement après la release de gear-solver qui porte G8.
@@ -133,14 +133,6 @@ les preuves et les décisions vivent dans le tri consolidé de sevih-tool
 
 ## 🧰 Outil quick
 
-- [ ] **Récupérer les news depuis quick** (demande de Sevih, 19/10) : `pnpm dev`
-      les récupère à chaque lancement (`scripts/dev-refresh.ts`, `news: true`) ;
-      quick ne le fait que par « Rafraîchir » de l'onglet « Patch », case news
-      cochée, qui rejoue toute la chaîne (pull, build, collect). Au choix :
-      lancer `pnpm getNews` au démarrage de quick, comme dev, ou un bouton
-      « Get news » seul. Attention : `get-news.ts` committe lui-même
-      `posts.json` et `buff-events.json` quand ils changent ; au démarrage, ce
-      serait un commit sans geste.
 - [ ] **« réponse interrompue » à l'envoi Discord** (19/10, par
       quick.outerpedia.local ; passé au second essai, sans doublon) : `post()` de
       `scripts/quick/ui/lib.js` ne lit pas le statut HTTP — un corps vide

@@ -34,6 +34,7 @@ import type {
   RankDamage,
 } from '@contracts';
 import { calcStatByLevel } from '@/lib/damage/formula';
+import { flatContractSlugs } from '@/lib/data/stat-keys';
 
 export interface StatRange {
   min: number;
@@ -196,8 +197,16 @@ const GAME_ORDER = [
   'resilience',
 ];
 
-/** EFF/RES : le jeu les affiche en VALEUR BRUTE (« 210 »), jamais en %. */
-const RAW_FLAT = new Set(['buff_chance', 'buff_resist', 'effectiveness', 'resilience']);
+/**
+ * EFF/RES : le jeu les affiche en VALEUR BRUTE (« 210 »), jamais en %. Pour
+ * `buff_chance`/`buff_resist`, c'est DÉRIVÉ : leur ligne `OAT_ADD` de
+ * `solver/stat-keys.json` est `percent: false` alors que `statScales` les dit
+ * `percent` (cf. `formatMonsterStat`). `effectiveness`/`resilience` sont les
+ * ALIAS de l'extracteur monstres (`STAT_ABBR`, `src/lib/stats.ts`), absents du
+ * fichier : ils restent ici.
+ */
+const RAW_FLAT_ALIASES = new Set(['effectiveness', 'resilience']);
+const FLAT_CONTRACT_SLUGS = flatContractSlugs();
 
 /** Stat → clé de modificateur de donjon correspondante. */
 const ADV_OF: Record<string, keyof DungeonAdv> = {
@@ -326,7 +335,10 @@ export function formatMonsterStat(
   scales: Record<string, string>,
   locale?: string,
 ): string {
-  if (RAW_FLAT.has(slug)) return String(v);
+  // Brut : `percent` au glossaire mais plat au client. hp/atk/def/speed sont
+  // plats des deux côtés et gardent le groupement des milliers.
+  if (RAW_FLAT_ALIASES.has(slug) || (FLAT_CONTRACT_SLUGS.has(slug) && scales[slug] === 'percent'))
+    return String(v);
   if (scales[slug] === 'percent') return `${v / 10}%`;
   return locale ? v.toLocaleString(locale) : String(v);
 }

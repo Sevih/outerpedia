@@ -6,6 +6,7 @@ import {
   combatStat,
   combatStatAt,
   expandRankContexts,
+  formatMonsterStat,
   GUILD_RAID_OVERGRADE_RATES,
   monsterQuirkMods,
   statAt,
@@ -259,5 +260,16 @@ describe('statAt — PV d’overgrade en float32 (`CGuildRaidSpawnData.GetCharac
     );
     const before = Math.floor(f(1 + (1 * GUILD_RAID_OVERGRADE_RATES.hp) / 1000) * f(55_000));
     expect(client(55_000, 1) - before).toBe(1);
+  });
+});
+
+describe('formatMonsterStat — EFF/RES bruts, le reste selon l’échelle', () => {
+  it('EFF/RES (et leurs alias de l’extracteur) en valeur brute, jamais en %', () => {
+    expect(formatMonsterStat('buff_chance', 210, { buff_chance: 'percent' })).toBe('210');
+    expect(formatMonsterStat('effectiveness', 210, { effectiveness: 'percent' })).toBe('210');
+  });
+
+  it('un taux du contrat reste en %', () => {
+    expect(formatMonsterStat('critical_rate', 350, { critical_rate: 'percent' })).toBe('35%');
   });
 });
