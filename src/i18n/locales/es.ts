@@ -634,6 +634,8 @@ const es: Record<TranslationKey, string> = {
   'tools.damage-calculator.toolbar.copy_link': 'Copiar enlace',
   'tools.damage-calculator.toolbar.copied': '¡Copiado!',
   'tools.damage-calculator.target.floor_label': 'Piso {n}',
+  'tools.damage-calculator.target.zone_label': 'Zona {n}',
+  'tools.damage-calculator.target.infiltration_events': 'Eventos',
   'tools.damage-calculator.target.boss_mechanics': 'Mecánicas del jefe',
   'tools.damage-calculator.target.boss_enrage_badge': 'Enfurecimiento',
   'tools.damage-calculator.target.lv_prefix': 'Nv.',

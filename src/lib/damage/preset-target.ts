@@ -24,6 +24,18 @@ import type { ResolvedPresetTarget } from './scenario';
 
 const dungeons = (): EncountersFile => loadDataJson<EncountersFile>('generated/encounters.json');
 
+/**
+ * Clé de tri d'une cible d'Infiltration Operation (`DungeonRef.infiltration`),
+ * comparable terme à terme : étage, puis zone (un combat d'événement, sans
+ * zone, passe après les zones de son étage), puis nœud (ordre des combats
+ * d'une zone ; 0 pour un événement : un tri stable garde entre eux l'ordre
+ * d'`encounters.json`).
+ */
+export function infiltrationOrder(ref: EncountersFile[string]): [number, number, number] {
+  const i = ref.infiltration;
+  return [i?.floor ?? Infinity, i?.zone ?? Infinity, i?.node ?? 0];
+}
+
 /** Clés du calculateur → slugs des tables monstre (les MÊMES stats). */
 const PRESET_STAT_SLUGS: readonly (readonly [TargetStatKey, string])[] = [
   ['hp', 'hp'],

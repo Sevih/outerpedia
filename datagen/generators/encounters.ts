@@ -343,6 +343,17 @@ export interface DungeonRef {
    * `adv` tant que ce nœud n'est pas nettoyé (état du joueur). */
   advLinked?: true;
   /**
+   * Infiltration Operation : place du combat dans le contenu, lue des tables
+   * (`CInfiltrate`), jamais du nom (« Search Coordinates: F01_A01_S08 » est
+   * écrit main et peut contredire la table). Nœud de combat : `floor`
+   * (`IrregularInfiltrateNodeTemplet.FloorID`), `zone` = rang 1..n de son
+   * `AreaID` parmi les zones de l'étage (`IrregularInfiltrateAreaTemplet`,
+   * ordre de la table), `node` = ID du nœud (ordre des combats d'une zone).
+   * Combat d'événement (`IrregularInfiltrateEventTemplet`, `EventType`
+   * BATTLE) : `floor` et `event` (texte `NameID` de la ligne), sans zone.
+   */
+  infiltration?: { floor: number; zone?: number; node?: number; event?: LangDict };
+  /**
    * PV RÉELS du boss dans ce donjon. Sources : `EventBossDungeonTemplet.
    * BossMonsterHP` (CSV aligné au CSV `DungeonID` — joint challenge :
    * 2 000 000 en very hard), `GuildRaidGradeTemplet.BossMonsterHP` (guild raid
@@ -1275,15 +1286,6 @@ export function buildEncounters(): EncountersData {
         if (m[1]) ref.element = m[1].toLowerCase();
       }
     }
-    // Infiltration : l'étage vit AUSSI dans la clé du nom
-    // (SYS_IRR_INFILTREATE_DUNGEON_<étage>, « INFILTREATE » sic — faute du
-    // jeu comprise). Tous les donjons partagent le même libellé (« Search
-    // Coordinates: Unknown ») : sans l'étage, 60+ entrées indiscernables.
-    // L'ID ne le porte PAS (73000001 = étage 46) — seule la clé fait foi.
-    if (mode === 'irregular_infiltrate') {
-      const m = /^SYS_IRR_INFILTREATE_DUNGEON_(\d+)$/.exec((d.NameID ?? '').replace(/\s+/g, ''));
-      if (m) ref.floor = Number(m[1]);
-    }
     // Butin répétable du donjon (table mutualisée, cf. rewardTables).
     const reward = resolveReward(d.RewardID);
     if (reward) ref.reward = reward;
@@ -1539,6 +1541,44 @@ export function buildEncounters(): EncountersData {
       });
       if (linked) d.advLinked = true;
     }
+  }
+
+  // 6quater) Infiltration Operation : étage → zone → combat, depuis les tables
+  // (le numéro de la clé du nom, `SYS_IRR_INFILTREATE_DUNGEON_<n>`, n'est
+  // qu'un index des combats, pas un étage). Les zones d'un étage se
+  // numérotent par leur rang dans `IrregularInfiltrateAreaTemplet` (ID 1-3,
+  // 11-15, 21-28 : 3, 5 et 8 zones) — ses textes `AreaName` sont des
+  // brouillons (« F1_Area 1 », « Zone F1_2 »), jamais affichés. Un combat
+  // d'événement n'a pas de zone : il garde le texte de sa ligne BATTLE (la
+  // première si plusieurs lignes mènent au même donjon).
+  {
+    const zoneRank = new Map<string, number>();
+    const perFloor = new Map<string, number>();
+    for (const a of loadTable('IrregularInfiltrateAreaTemplet')) {
+      const f = a.FloorID ?? '';
+      const rank = (perFloor.get(f) ?? 0) + 1;
+      perFloor.set(f, rank);
+      zoneRank.set(`${f}|${a.ID}`, rank);
+    }
+    for (const n of loadTable('IrregularInfiltrateNodeTemplet')) {
+      const d = dungeons[n.NodeDungeonID ?? ''];
+      if (d?.mode !== 'irregular_infiltrate' || d.infiltration) continue;
+      const zone = zoneRank.get(`${n.FloorID}|${n.AreaID}`);
+      if (zone === undefined)
+        throw new Error(
+          `encounters : nœud d'infiltration ${n.ID} — zone ${n.AreaID} absente de l'étage ${n.FloorID}`,
+        );
+      d.infiltration = { floor: Number(n.FloorID), zone, node: Number(n.ID) };
+    }
+    for (const ev of loadTable('IrregularInfiltrateEventTemplet')) {
+      if (ev.EventType !== 'BATTLE') continue;
+      const d = dungeons[ev.DungeonID ?? ''];
+      if (d?.mode !== 'irregular_infiltrate' || d.infiltration) continue;
+      d.infiltration = { floor: Number(ev.FloorID), event: resolveText(tsys, ev.NameID) };
+    }
+    for (const [id, d] of Object.entries(dungeons))
+      if (d.mode === 'irregular_infiltrate' && !d.infiltration)
+        throw new Error(`encounters : donjon d'infiltration ${id} sans nœud ni événement`);
   }
 
   // 7) Adventure (licences) : la ligne redéfinit ENTIÈREMENT la rencontre du

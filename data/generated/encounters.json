@@ -100977,8 +100977,18 @@
         "count": 2
       }
     ],
-    "floor": 46,
-    "reward": "720403"
+    "reward": "720403",
+    "infiltration": {
+      "floor": 1,
+      "event": {
+        "en": "This is our chance! Attack!",
+        "jp": "今こそチャンス、攻撃をしかける。",
+        "kr": "지금이야말로 기회, 공격한다.",
+        "zh": "时机正好，发起攻击。",
+        "fr": "C'est notre chance! Attaquez!",
+        "es": "¡Esta es nuestra oportunidad! ¡Ataquemos!"
+      }
+    }
   },
   "73000002": {
     "mode": "irregular_infiltrate",
@@ -101019,8 +101029,18 @@
         "count": 2
       }
     ],
-    "floor": 46,
-    "reward": "720402"
+    "reward": "720402",
+    "infiltration": {
+      "floor": 1,
+      "event": {
+        "en": "Offer suggestions to entice some of them.",
+        "jp": "群れの一部を誘き出そうと提案する。",
+        "kr": "일부를 유인하자고 제안한다.",
+        "zh": "提议引诱部分敌人。",
+        "fr": "Proposez des suggestions pour en séduire certains",
+        "es": "Proponer sugerencias para atraerlos."
+      }
+    }
   },
   "73000003": {
     "mode": "irregular_infiltrate",
@@ -101061,8 +101081,18 @@
         "count": 2
       }
     ],
-    "floor": 46,
-    "reward": "720403"
+    "reward": "720403",
+    "infiltration": {
+      "floor": 1,
+      "event": {
+        "en": "Leave Luna alone.",
+        "jp": "ルナをそのままにしておく。",
+        "kr": "루나를 가만 놔둔다.",
+        "zh": "随露娜去。",
+        "fr": "Laissez Luna tranquille",
+        "es": "Deja a Luna en paz"
+      }
+    }
   },
   "73000004": {
     "mode": "irregular_infiltrate",
@@ -101103,8 +101133,18 @@
         "count": 2
       }
     ],
-    "floor": 46,
-    "reward": "720401"
+    "reward": "720401",
+    "infiltration": {
+      "floor": 1,
+      "event": {
+        "en": "Fulfill Delta's request.",
+        "jp": "デルタの頼みを聞く。",
+        "kr": "델타의 부탁을 들어준다.",
+        "zh": "接受德尔塔的请求。",
+        "fr": "Répondre à la requête de Delta",
+        "es": "Cumple con la petición de Delta"
+      }
+    }
   },
   "73000005": {
     "mode": "irregular_infiltrate",
@@ -101131,8 +101171,18 @@
         "count": 2
       }
     ],
-    "floor": 46,
-    "reward": "720402"
+    "reward": "720402",
+    "infiltration": {
+      "floor": 1,
+      "event": {
+        "en": "I found an even stranger specimen. Let's collect this.",
+        "jp": "より特異な個体を発見した。これを採取するとしよう。",
+        "kr": "더 특이한 개체를 발견하였다. 이걸 포집하자.",
+        "zh": "我发现了更特殊的个体，采集这个组织吧。",
+        "fr": "J'ai trouvé un spécimen encore plus étrange. Ramassons-le",
+        "es": "Encontré un espécimen aún más extraño. Recolectémoslo."
+      }
+    }
   },
   "73010101": {
     "mode": "irregular_infiltrate",
@@ -101187,13 +101237,17 @@
         "count": 2
       }
     ],
-    "floor": 1,
     "reward": "720001",
     "adv": {
       "atk": 125,
       "def": 250,
       "hp": 250,
       "spd": 25
+    },
+    "infiltration": {
+      "floor": 1,
+      "zone": 1,
+      "node": 1101
     }
   },
   "73010102": {
@@ -101243,13 +101297,17 @@
         "count": 2
       }
     ],
-    "floor": 2,
     "reward": "720002",
     "adv": {
       "atk": 125,
       "def": 250,
       "hp": 250,
       "spd": 25
+    },
+    "infiltration": {
+      "floor": 1,
+      "zone": 1,
+      "node": 1104
     }
   },
   "73010103": {
@@ -101306,13 +101364,17 @@
         "count": 2
       }
     ],
-    "floor": 3,
     "reward": "720003",
     "adv": {
       "atk": 125,
       "def": 250,
       "hp": 250,
       "spd": 25
+    },
+    "infiltration": {
+      "floor": 1,
+      "zone": 1,
+      "node": 1103
     }
   },
   "73010104": {
@@ -101356,13 +101418,17 @@
         "count": 2
       }
     ],
-    "floor": 4,
     "reward": "720004",
     "adv": {
       "atk": 250,
       "def": 500,
       "hp": 500,
       "spd": 50
+    },
+    "infiltration": {
+      "floor": 1,
+      "zone": 2,
+      "node": 1202
     }
   },
   "73010111": {
@@ -101390,13 +101456,17 @@
         "count": 2
       }
     ],
-    "floor": 5,
     "reward": "720101",
     "adv": {
       "atk": 350,
       "def": 700,
       "hp": 700,
       "spd": 100
+    },
+    "infiltration": {
+      "floor": 1,
+      "zone": 1,
+      "node": 1105
     }
   },
   "73010112": {
@@ -101424,13 +101494,17 @@
         "count": 2
       }
     ],
-    "floor": 6,
     "reward": "720102",
     "adv": {
       "atk": 350,
       "def": 700,
       "hp": 700,
       "spd": 100
+    },
+    "infiltration": {
+      "floor": 1,
+      "zone": 2,
+      "node": 1203
     }
   },
   "73010121": {
@@ -101451,13 +101525,17 @@
         "role": "boss"
       }
     ],
-    "floor": 7,
     "reward": "720201",
     "adv": {
       "atk": 500,
       "def": 1000,
       "hp": 1000,
       "spd": 150
+    },
+    "infiltration": {
+      "floor": 1,
+      "zone": 3,
+      "node": 1302
     }
   },
   "73020101": {
@@ -101506,7 +101584,6 @@
         "count": 2
       }
     ],
-    "floor": 8,
     "reward": "721001",
     "adv": {
       "atk": 250,
@@ -101514,7 +101591,12 @@
       "hp": 500,
       "spd": 50
     },
-    "advLinked": true
+    "advLinked": true,
+    "infiltration": {
+      "floor": 2,
+      "zone": 1,
+      "node": 2102
+    }
   },
   "73020102": {
     "mode": "irregular_infiltrate",
@@ -101568,7 +101650,6 @@
         "count": 2
       }
     ],
-    "floor": 9,
     "reward": "721002",
     "adv": {
       "atk": 250,
@@ -101576,7 +101657,12 @@
       "hp": 500,
       "spd": 50
     },
-    "advLinked": true
+    "advLinked": true,
+    "infiltration": {
+      "floor": 2,
+      "zone": 1,
+      "node": 2105
+    }
   },
   "73020103": {
     "mode": "irregular_infiltrate",
@@ -101618,13 +101704,17 @@
         "count": 2
       }
     ],
-    "floor": 10,
     "reward": "721003",
     "adv": {
       "atk": 250,
       "def": 500,
       "hp": 500,
       "spd": 50
+    },
+    "infiltration": {
+      "floor": 2,
+      "zone": 3,
+      "node": 2303
     }
   },
   "73020104": {
@@ -101667,13 +101757,17 @@
         "count": 2
       }
     ],
-    "floor": 11,
     "reward": "721004",
     "adv": {
       "atk": 250,
       "def": 500,
       "hp": 500,
       "spd": 50
+    },
+    "infiltration": {
+      "floor": 2,
+      "zone": 3,
+      "node": 2304
     }
   },
   "73020105": {
@@ -101716,13 +101810,17 @@
         "count": 2
       }
     ],
-    "floor": 12,
     "reward": "721005",
     "adv": {
       "atk": 250,
       "def": 500,
       "hp": 500,
       "spd": 50
+    },
+    "infiltration": {
+      "floor": 2,
+      "zone": 3,
+      "node": 2305
     }
   },
   "73020106": {
@@ -101771,7 +101869,6 @@
         "count": 2
       }
     ],
-    "floor": 13,
     "reward": "721006",
     "adv": {
       "atk": 250,
@@ -101779,7 +101876,12 @@
       "hp": 500,
       "spd": 50
     },
-    "advLinked": true
+    "advLinked": true,
+    "infiltration": {
+      "floor": 2,
+      "zone": 3,
+      "node": 2309
+    }
   },
   "73020107": {
     "mode": "irregular_infiltrate",
@@ -101834,7 +101936,6 @@
         "count": 2
       }
     ],
-    "floor": 14,
     "reward": "721007",
     "adv": {
       "atk": 250,
@@ -101842,7 +101943,12 @@
       "hp": 500,
       "spd": 50
     },
-    "advLinked": true
+    "advLinked": true,
+    "infiltration": {
+      "floor": 2,
+      "zone": 4,
+      "node": 2402
+    }
   },
   "73020201": {
     "mode": "irregular_infiltrate",
@@ -101874,7 +101980,6 @@
         "role": "add"
       }
     ],
-    "floor": 15,
     "reward": "721101",
     "adv": {
       "atk": 350,
@@ -101882,7 +101987,12 @@
       "hp": 700,
       "spd": 100
     },
-    "advLinked": true
+    "advLinked": true,
+    "infiltration": {
+      "floor": 2,
+      "zone": 1,
+      "node": 2103
+    }
   },
   "73020202": {
     "mode": "irregular_infiltrate",
@@ -101909,7 +102019,6 @@
         "count": 2
       }
     ],
-    "floor": 16,
     "reward": "721102",
     "adv": {
       "atk": 350,
@@ -101917,7 +102026,12 @@
       "hp": 700,
       "spd": 100
     },
-    "advLinked": true
+    "advLinked": true,
+    "infiltration": {
+      "floor": 2,
+      "zone": 1,
+      "node": 2106
+    }
   },
   "73020203": {
     "mode": "irregular_infiltrate",
@@ -101944,13 +102058,17 @@
         "count": 2
       }
     ],
-    "floor": 17,
     "reward": "721103",
     "adv": {
       "atk": 350,
       "def": 700,
       "hp": 700,
       "spd": 100
+    },
+    "infiltration": {
+      "floor": 2,
+      "zone": 3,
+      "node": 2308
     }
   },
   "73020204": {
@@ -101978,7 +102096,6 @@
         "count": 2
       }
     ],
-    "floor": 18,
     "reward": "721104",
     "adv": {
       "atk": 350,
@@ -101986,7 +102103,12 @@
       "hp": 700,
       "spd": 100
     },
-    "advLinked": true
+    "advLinked": true,
+    "infiltration": {
+      "floor": 2,
+      "zone": 5,
+      "node": 2501
+    }
   },
   "73020301": {
     "mode": "irregular_infiltrate",
@@ -102006,7 +102128,6 @@
         "role": "boss"
       }
     ],
-    "floor": 19,
     "reward": "721201",
     "adv": {
       "atk": 500,
@@ -102014,7 +102135,12 @@
       "hp": 1000,
       "spd": 150
     },
-    "advLinked": true
+    "advLinked": true,
+    "infiltration": {
+      "floor": 2,
+      "zone": 3,
+      "node": 2310
+    }
   },
   "73020302": {
     "mode": "irregular_infiltrate",
@@ -102034,7 +102160,6 @@
         "role": "boss"
       }
     ],
-    "floor": 20,
     "reward": "721202",
     "adv": {
       "atk": 500,
@@ -102042,7 +102167,12 @@
       "hp": 1000,
       "spd": 150
     },
-    "advLinked": true
+    "advLinked": true,
+    "infiltration": {
+      "floor": 2,
+      "zone": 4,
+      "node": 2403
+    }
   },
   "73020303": {
     "mode": "irregular_infiltrate",
@@ -102062,7 +102192,6 @@
         "role": "boss"
       }
     ],
-    "floor": 21,
     "reward": "721203",
     "adv": {
       "atk": 650,
@@ -102070,7 +102199,12 @@
       "hp": 1300,
       "spd": 200
     },
-    "advLinked": true
+    "advLinked": true,
+    "infiltration": {
+      "floor": 2,
+      "zone": 5,
+      "node": 2502
+    }
   },
   "73030101": {
     "mode": "irregular_infiltrate",
@@ -102113,7 +102247,6 @@
         "count": 2
       }
     ],
-    "floor": 22,
     "reward": "722001",
     "adv": {
       "atk": 250,
@@ -102121,7 +102254,12 @@
       "hp": 500,
       "spd": 50
     },
-    "advLinked": true
+    "advLinked": true,
+    "infiltration": {
+      "floor": 3,
+      "zone": 1,
+      "node": 3101
+    }
   },
   "73030102": {
     "mode": "irregular_infiltrate",
@@ -102176,7 +102314,6 @@
         "count": 2
       }
     ],
-    "floor": 23,
     "reward": "722002",
     "adv": {
       "atk": 250,
@@ -102184,7 +102321,12 @@
       "hp": 500,
       "spd": 50
     },
-    "advLinked": true
+    "advLinked": true,
+    "infiltration": {
+      "floor": 3,
+      "zone": 1,
+      "node": 3102
+    }
   },
   "73030103": {
     "mode": "irregular_infiltrate",
@@ -102233,7 +102375,6 @@
         "count": 2
       }
     ],
-    "floor": 24,
     "reward": "722003",
     "adv": {
       "atk": 250,
@@ -102241,7 +102382,12 @@
       "hp": 500,
       "spd": 50
     },
-    "advLinked": true
+    "advLinked": true,
+    "infiltration": {
+      "floor": 3,
+      "zone": 1,
+      "node": 3105
+    }
   },
   "73030104": {
     "mode": "irregular_infiltrate",
@@ -102283,7 +102429,6 @@
         "count": 2
       }
     ],
-    "floor": 25,
     "reward": "722004",
     "adv": {
       "atk": 250,
@@ -102291,7 +102436,12 @@
       "hp": 500,
       "spd": 50
     },
-    "advLinked": true
+    "advLinked": true,
+    "infiltration": {
+      "floor": 3,
+      "zone": 1,
+      "node": 3106
+    }
   },
   "73030105": {
     "mode": "irregular_infiltrate",
@@ -102345,7 +102495,6 @@
         "count": 2
       }
     ],
-    "floor": 26,
     "reward": "722005",
     "adv": {
       "atk": 250,
@@ -102353,7 +102502,12 @@
       "hp": 500,
       "spd": 50
     },
-    "advLinked": true
+    "advLinked": true,
+    "infiltration": {
+      "floor": 3,
+      "zone": 2,
+      "node": 3203
+    }
   },
   "73030106": {
     "mode": "irregular_infiltrate",
@@ -102389,7 +102543,6 @@
         "count": 2
       }
     ],
-    "floor": 27,
     "reward": "722006",
     "adv": {
       "atk": 250,
@@ -102397,7 +102550,12 @@
       "hp": 500,
       "spd": 50
     },
-    "advLinked": true
+    "advLinked": true,
+    "infiltration": {
+      "floor": 3,
+      "zone": 2,
+      "node": 3204
+    }
   },
   "73030107": {
     "mode": "irregular_infiltrate",
@@ -102445,7 +102603,6 @@
         "wave": 2
       }
     ],
-    "floor": 28,
     "reward": "722007",
     "adv": {
       "atk": 250,
@@ -102453,7 +102610,12 @@
       "hp": 500,
       "spd": 50
     },
-    "advLinked": true
+    "advLinked": true,
+    "infiltration": {
+      "floor": 3,
+      "zone": 3,
+      "node": 3302
+    }
   },
   "73030108": {
     "mode": "irregular_infiltrate",
@@ -102489,7 +102651,6 @@
         "count": 2
       }
     ],
-    "floor": 29,
     "reward": "722008",
     "adv": {
       "atk": 250,
@@ -102497,7 +102658,12 @@
       "hp": 500,
       "spd": 50
     },
-    "advLinked": true
+    "advLinked": true,
+    "infiltration": {
+      "floor": 3,
+      "zone": 3,
+      "node": 3303
+    }
   },
   "73030109": {
     "mode": "irregular_infiltrate",
@@ -102569,13 +102735,17 @@
         "count": 2
       }
     ],
-    "floor": 30,
     "reward": "722009",
     "adv": {
       "atk": 250,
       "def": 500,
       "hp": 500,
       "spd": 50
+    },
+    "infiltration": {
+      "floor": 3,
+      "zone": 4,
+      "node": 3403
     }
   },
   "73030110": {
@@ -102631,7 +102801,6 @@
         "wave": 3
       }
     ],
-    "floor": 31,
     "reward": "722010",
     "adv": {
       "atk": 250,
@@ -102639,7 +102808,12 @@
       "hp": 500,
       "spd": 50
     },
-    "advLinked": true
+    "advLinked": true,
+    "infiltration": {
+      "floor": 3,
+      "zone": 4,
+      "node": 3405
+    }
   },
   "73030111": {
     "mode": "irregular_infiltrate",
@@ -102680,7 +102854,6 @@
         "count": 2
       }
     ],
-    "floor": 32,
     "reward": "722011",
     "adv": {
       "atk": 250,
@@ -102688,7 +102861,12 @@
       "hp": 500,
       "spd": 50
     },
-    "advLinked": true
+    "advLinked": true,
+    "infiltration": {
+      "floor": 3,
+      "zone": 4,
+      "node": 3406
+    }
   },
   "73030112": {
     "mode": "irregular_infiltrate",
@@ -102742,7 +102920,6 @@
         "count": 2
       }
     ],
-    "floor": 33,
     "reward": "722012",
     "adv": {
       "atk": 250,
@@ -102750,7 +102927,12 @@
       "hp": 500,
       "spd": 50
     },
-    "advLinked": true
+    "advLinked": true,
+    "infiltration": {
+      "floor": 3,
+      "zone": 4,
+      "node": 3407
+    }
   },
   "73030201": {
     "mode": "irregular_infiltrate",
@@ -102777,7 +102959,6 @@
         "count": 2
       }
     ],
-    "floor": 34,
     "reward": "722101",
     "adv": {
       "atk": 350,
@@ -102785,7 +102966,12 @@
       "hp": 700,
       "spd": 100
     },
-    "advLinked": true
+    "advLinked": true,
+    "infiltration": {
+      "floor": 3,
+      "zone": 1,
+      "node": 3103
+    }
   },
   "73030202": {
     "mode": "irregular_infiltrate",
@@ -102812,7 +102998,6 @@
         "count": 2
       }
     ],
-    "floor": 35,
     "reward": "722102",
     "adv": {
       "atk": 350,
@@ -102820,7 +103005,12 @@
       "hp": 700,
       "spd": 100
     },
-    "advLinked": true
+    "advLinked": true,
+    "infiltration": {
+      "floor": 3,
+      "zone": 1,
+      "node": 3107
+    }
   },
   "73030203": {
     "mode": "irregular_infiltrate",
@@ -102847,7 +103037,6 @@
         "count": 2
       }
     ],
-    "floor": 36,
     "reward": "722103",
     "adv": {
       "atk": 350,
@@ -102855,7 +103044,12 @@
       "hp": 700,
       "spd": 100
     },
-    "advLinked": true
+    "advLinked": true,
+    "infiltration": {
+      "floor": 3,
+      "zone": 2,
+      "node": 3205
+    }
   },
   "73030204": {
     "mode": "irregular_infiltrate",
@@ -102882,7 +103076,6 @@
         "count": 2
       }
     ],
-    "floor": 37,
     "reward": "722104",
     "adv": {
       "atk": 350,
@@ -102890,7 +103083,12 @@
       "hp": 700,
       "spd": 100
     },
-    "advLinked": true
+    "advLinked": true,
+    "infiltration": {
+      "floor": 3,
+      "zone": 3,
+      "node": 3304
+    }
   },
   "73030205": {
     "mode": "irregular_infiltrate",
@@ -102917,7 +103115,6 @@
         "count": 2
       }
     ],
-    "floor": 38,
     "reward": "722105",
     "adv": {
       "atk": 350,
@@ -102925,7 +103122,12 @@
       "hp": 700,
       "spd": 100
     },
-    "advLinked": true
+    "advLinked": true,
+    "infiltration": {
+      "floor": 3,
+      "zone": 6,
+      "node": 3604
+    }
   },
   "73030206": {
     "mode": "irregular_infiltrate",
@@ -102952,7 +103154,6 @@
         "count": 2
       }
     ],
-    "floor": 39,
     "reward": "722106",
     "adv": {
       "atk": 350,
@@ -102960,7 +103161,12 @@
       "hp": 700,
       "spd": 100
     },
-    "advLinked": true
+    "advLinked": true,
+    "infiltration": {
+      "floor": 3,
+      "zone": 6,
+      "node": 3605
+    }
   },
   "73030301": {
     "mode": "irregular_infiltrate",
@@ -102980,7 +103186,6 @@
         "role": "boss"
       }
     ],
-    "floor": 40,
     "reward": "722201",
     "adv": {
       "atk": 500,
@@ -102988,7 +103193,12 @@
       "hp": 1000,
       "spd": 150
     },
-    "advLinked": true
+    "advLinked": true,
+    "infiltration": {
+      "floor": 3,
+      "zone": 3,
+      "node": 3306
+    }
   },
   "73030302": {
     "mode": "irregular_infiltrate",
@@ -103008,7 +103218,6 @@
         "role": "boss"
       }
     ],
-    "floor": 41,
     "reward": "722202",
     "adv": {
       "atk": 500,
@@ -103016,7 +103225,12 @@
       "hp": 1000,
       "spd": 150
     },
-    "advLinked": true
+    "advLinked": true,
+    "infiltration": {
+      "floor": 3,
+      "zone": 4,
+      "node": 3408
+    }
   },
   "73030303": {
     "mode": "irregular_infiltrate",
@@ -103036,7 +103250,6 @@
         "role": "boss"
       }
     ],
-    "floor": 42,
     "reward": "722203",
     "adv": {
       "atk": 650,
@@ -103044,7 +103257,12 @@
       "hp": 1300,
       "spd": 200
     },
-    "advLinked": true
+    "advLinked": true,
+    "infiltration": {
+      "floor": 3,
+      "zone": 6,
+      "node": 3606
+    }
   },
   "73030304": {
     "mode": "irregular_infiltrate",
@@ -103064,7 +103282,6 @@
         "role": "boss"
       }
     ],
-    "floor": 43,
     "reward": "722204",
     "adv": {
       "atk": 500,
@@ -103072,7 +103289,12 @@
       "hp": 1000,
       "spd": 150
     },
-    "advLinked": true
+    "advLinked": true,
+    "infiltration": {
+      "floor": 3,
+      "zone": 8,
+      "node": 3804
+    }
   },
   "73030305": {
     "mode": "irregular_infiltrate",
@@ -103092,7 +103314,6 @@
         "role": "boss"
       }
     ],
-    "floor": 44,
     "reward": "722205",
     "adv": {
       "atk": 500,
@@ -103100,7 +103321,12 @@
       "hp": 1000,
       "spd": 150
     },
-    "advLinked": true
+    "advLinked": true,
+    "infiltration": {
+      "floor": 3,
+      "zone": 8,
+      "node": 3805
+    }
   },
   "73030306": {
     "mode": "irregular_infiltrate",
@@ -103120,7 +103346,6 @@
         "role": "boss"
       }
     ],
-    "floor": 45,
     "reward": "722206",
     "adv": {
       "atk": 750,
@@ -103128,7 +103353,12 @@
       "hp": 1500,
       "spd": 300
     },
-    "advLinked": true
+    "advLinked": true,
+    "infiltration": {
+      "floor": 3,
+      "zone": 8,
+      "node": 3806
+    }
   },
   "73100001": {
     "mode": "irregular_infiltrate",
@@ -103169,8 +103399,18 @@
         "count": 2
       }
     ],
-    "floor": 46,
-    "reward": "721403"
+    "reward": "721403",
+    "infiltration": {
+      "floor": 2,
+      "event": {
+        "en": "This is our chance! Attack!",
+        "jp": "今こそチャンス、攻撃をしかける。",
+        "kr": "지금이야말로 기회, 공격한다.",
+        "zh": "时机正好，发起攻击。",
+        "fr": "C'est notre chance! Attaquez!",
+        "es": "¡Esta es nuestra oportunidad! ¡Ataquemos!"
+      }
+    }
   },
   "73100002": {
     "mode": "irregular_infiltrate",
@@ -103211,8 +103451,18 @@
         "count": 2
       }
     ],
-    "floor": 46,
-    "reward": "721402"
+    "reward": "721402",
+    "infiltration": {
+      "floor": 2,
+      "event": {
+        "en": "Offer suggestions to entice some of them.",
+        "jp": "群れの一部を誘き出そうと提案する。",
+        "kr": "일부를 유인하자고 제안한다.",
+        "zh": "提议引诱部分敌人。",
+        "fr": "Proposez des suggestions pour en séduire certains",
+        "es": "Proponer sugerencias para atraerlos."
+      }
+    }
   },
   "73100003": {
     "mode": "irregular_infiltrate",
@@ -103253,8 +103503,18 @@
         "count": 2
       }
     ],
-    "floor": 46,
-    "reward": "721403"
+    "reward": "721403",
+    "infiltration": {
+      "floor": 2,
+      "event": {
+        "en": "Leave Luna alone.",
+        "jp": "ルナをそのままにしておく。",
+        "kr": "루나를 가만 놔둔다.",
+        "zh": "随露娜去。",
+        "fr": "Laissez Luna tranquille",
+        "es": "Deja a Luna en paz"
+      }
+    }
   },
   "73100004": {
     "mode": "irregular_infiltrate",
@@ -103295,8 +103555,18 @@
         "count": 2
       }
     ],
-    "floor": 46,
-    "reward": "721401"
+    "reward": "721401",
+    "infiltration": {
+      "floor": 2,
+      "event": {
+        "en": "Fulfill Delta's request.",
+        "jp": "デルタの頼みを聞く。",
+        "kr": "델타의 부탁을 들어준다.",
+        "zh": "接受德尔塔的请求。",
+        "fr": "Répondre à la requête de Delta",
+        "es": "Cumple con la petición de Delta"
+      }
+    }
   },
   "73100005": {
     "mode": "irregular_infiltrate",
@@ -103323,8 +103593,18 @@
         "count": 2
       }
     ],
-    "floor": 46,
-    "reward": "721402"
+    "reward": "721402",
+    "infiltration": {
+      "floor": 2,
+      "event": {
+        "en": "I found an even stranger specimen. Let's collect this.",
+        "jp": "より特異な個体を発見した。これを採取するとしよう。",
+        "kr": "더 특이한 개체를 발견하였다. 이걸 포집하자.",
+        "zh": "我发现了更特殊的个体，采集这个组织吧。",
+        "fr": "J'ai trouvé un spécimen encore plus étrange. Ramassons-le",
+        "es": "Encontré un espécimen aún más extraño. Recolectémoslo."
+      }
+    }
   },
   "73100006": {
     "mode": "irregular_infiltrate",
@@ -103344,8 +103624,18 @@
         "role": "boss"
       }
     ],
-    "floor": 46,
-    "reward": "721401"
+    "reward": "721401",
+    "infiltration": {
+      "floor": 2,
+      "event": {
+        "en": "Looks like a strange bug — ignore it.",
+        "jp": "変なバグみたいだから無視する。",
+        "kr": "이상한 버그 같은데 무시한다.",
+        "zh": "看起来像奇怪的虫子，无视它。",
+        "fr": "On dirait un bug étrange — ignorez-le",
+        "es": "Parece un bug extraño; ignóralo."
+      }
+    }
   },
   "73200001": {
     "mode": "irregular_infiltrate",
@@ -103386,8 +103676,18 @@
         "count": 2
       }
     ],
-    "floor": 46,
-    "reward": "722403"
+    "reward": "722403",
+    "infiltration": {
+      "floor": 3,
+      "event": {
+        "en": "This is our chance! Attack!",
+        "jp": "今こそチャンス、攻撃をしかける。",
+        "kr": "지금이야말로 기회, 공격한다.",
+        "zh": "时机正好，发起攻击。",
+        "fr": "C'est notre chance! Attaquez!",
+        "es": "¡Esta es nuestra oportunidad! ¡Ataquemos!"
+      }
+    }
   },
   "73200002": {
     "mode": "irregular_infiltrate",
@@ -103428,8 +103728,18 @@
         "count": 2
       }
     ],
-    "floor": 46,
-    "reward": "722402"
+    "reward": "722402",
+    "infiltration": {
+      "floor": 3,
+      "event": {
+        "en": "Offer suggestions to entice some of them.",
+        "jp": "群れの一部を誘き出そうと提案する。",
+        "kr": "일부를 유인하자고 제안한다.",
+        "zh": "提议引诱部分敌人。",
+        "fr": "Proposez des suggestions pour en séduire certains",
+        "es": "Proponer sugerencias para atraerlos."
+      }
+    }
   },
   "73200003": {
     "mode": "irregular_infiltrate",
@@ -103470,8 +103780,18 @@
         "count": 2
       }
     ],
-    "floor": 46,
-    "reward": "722403"
+    "reward": "722403",
+    "infiltration": {
+      "floor": 3,
+      "event": {
+        "en": "Leave Luna alone.",
+        "jp": "ルナをそのままにしておく。",
+        "kr": "루나를 가만 놔둔다.",
+        "zh": "随露娜去。",
+        "fr": "Laissez Luna tranquille",
+        "es": "Deja a Luna en paz"
+      }
+    }
   },
   "73200004": {
     "mode": "irregular_infiltrate",
@@ -103512,8 +103832,18 @@
         "count": 2
       }
     ],
-    "floor": 46,
-    "reward": "722401"
+    "reward": "722401",
+    "infiltration": {
+      "floor": 3,
+      "event": {
+        "en": "Fulfill Delta's request.",
+        "jp": "デルタの頼みを聞く。",
+        "kr": "델타의 부탁을 들어준다.",
+        "zh": "接受德尔塔的请求。",
+        "fr": "Répondre à la requête de Delta",
+        "es": "Cumple con la petición de Delta"
+      }
+    }
   },
   "73200005": {
     "mode": "irregular_infiltrate",
@@ -103540,8 +103870,18 @@
         "count": 2
       }
     ],
-    "floor": 46,
-    "reward": "722402"
+    "reward": "722402",
+    "infiltration": {
+      "floor": 3,
+      "event": {
+        "en": "I found an even stranger specimen. Let's collect this.",
+        "jp": "より特異な個体を発見した。これを採取するとしよう。",
+        "kr": "더 특이한 개체를 발견하였다. 이걸 포집하자.",
+        "zh": "我发现了更特殊的个体，采集这个组织吧。",
+        "fr": "J'ai trouvé un spécimen encore plus étrange. Ramassons-le",
+        "es": "Encontré un espécimen aún más extraño. Recolectémoslo."
+      }
+    }
   },
   "73200006": {
     "mode": "irregular_infiltrate",
@@ -103561,8 +103901,18 @@
         "role": "boss"
       }
     ],
-    "floor": 46,
-    "reward": "722401"
+    "reward": "722401",
+    "infiltration": {
+      "floor": 3,
+      "event": {
+        "en": "Looks like a strange bug — ignore it.",
+        "jp": "変なバグみたいだから無視する。",
+        "kr": "이상한 버그 같은데 무시한다.",
+        "zh": "看起来像奇怪的虫子，无视它。",
+        "fr": "On dirait un bug étrange — ignorez-le",
+        "es": "Parece un bug extraño; ignóralo."
+      }
+    }
   },
   "74000001": {
     "mode": "monad_battle_1",

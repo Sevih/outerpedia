@@ -628,6 +628,8 @@ const en = {
   'tools.damage-calculator.toolbar.copy_link': 'Copy link',
   'tools.damage-calculator.toolbar.copied': 'Copied!',
   'tools.damage-calculator.target.floor_label': 'Floor {n}',
+  'tools.damage-calculator.target.zone_label': 'Zone {n}',
+  'tools.damage-calculator.target.infiltration_events': 'Events',
   'tools.damage-calculator.target.boss_mechanics': 'Boss mechanics',
   'tools.damage-calculator.target.boss_enrage_badge': 'Enrage',
   'tools.damage-calculator.target.lv_prefix': 'Lv',

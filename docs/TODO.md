@@ -27,10 +27,6 @@ les preuves et les décisions vivent dans le tri consolidé de sevih-tool
       M1 et M2 mesurées le 18/10 (Sterope : suite sous buff, deux
       cascades, bursts compris ; `docs/specs/damage-clips-joues.md` § 4) :
       lot du correctif à rédiger (§ 5).
-- [ ] **Calculateur : infiltration par zone** (retour de Sevih, 18/10) :
-      les cibles d'Infiltration Operation sont rangées par « Floor N »,
-      alors que chaque infiltration a 3 zones, chacune avec ses combats.
-      Ranger infiltration → zone → combat, depuis la donnée du jeu.
 - [ ] **Contrat solver, L1 d'abord** : `schema` et `resVersion` dans
       `solver/version.json` avant tout changement de forme (C1, M2, M3,
       vitesse en %, noyau par niveau, `stat-keys.json`). L1 FAIT des deux

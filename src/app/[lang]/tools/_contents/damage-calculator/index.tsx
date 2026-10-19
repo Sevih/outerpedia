@@ -29,6 +29,7 @@ import { getDamageGrowth } from '@/lib/data/damage-growth';
 import { statName } from '@/lib/data/stat-glossary';
 import { SHEET_FIELDS, TARGET_FIELDS } from '@/lib/damage/scenario';
 import {
+  infiltrationOrder,
   presetSpawnCombat,
   presetSpawnPremium,
   presetSpawnStats,
@@ -528,13 +529,16 @@ export default async function DamageCalculator({ lang }: { lang: Lang }) {
   //     le panneau cible, overgrade > 10 inclus pour le main) — Sevih
   //     17/08/2026, l'axe Main/Sub disparaît
   //   Tours            → Difficulté (Skyward) ou Élément (Elemental)
-  //   Weekly Conquest / Promotion Challenge / Infiltration / Dimensional
-  //   Singularity → à plat
-  //     (l'échelle vit dans les rangs du spawn ; les étages d'infiltration
-  //     nomment les ENTRÉES, cf. `floor` extrait de la clé du nom du jeu).
+  //   Infiltration Operation → Étage, puis Zone (ou « Événements » pour les
+  //     combats d'événement, sans zone) — `DungeonRef.infiltration`, lu des
+  //     tables du jeu
+  //   Weekly Conquest / Promotion Challenge / Dimensional Singularity → à plat
+  //     (l'échelle vit dans les rangs du spawn).
   const seasonTpl = t(k('target.season_label'));
   const episodeLbl = t(k('target.episode'));
   const floorTpl = t(k('target.floor_label'));
+  const zoneTpl = t(k('target.zone_label'));
+  const infiltrationEvents = t(k('target.infiltration_events'));
   /** Titre officiel d'une famille de modes (glossaire `modeFamilies`), repli
    *  sur le titre d'un mode membre — jamais de texte écrit main. */
   const famLabel = (family: string, modeSlug: string): string => {
@@ -585,6 +589,14 @@ export default async function DamageCalculator({ lang }: { lang: Lang }) {
     if (ref.mode === 'event_boss') return [posterName];
     if (ref.mode.startsWith('tower'))
       return [ref.element ? elemName(ref.element) : (TOWER_DIFF[ref.mode] ?? ref.mode)];
+    // Étage, puis zone ; les combats d'événement d'un étage sous une carte.
+    if (ref.infiltration) {
+      const { floor, zone } = ref.infiltration;
+      return [
+        floorTpl.replace('{n}', String(floor)),
+        zone != null ? zoneTpl.replace('{n}', String(zone)) : infiltrationEvents,
+      ];
+    }
     // Difficulté de la poursuite.
     if (diff) return [diff];
     return undefined;
@@ -731,7 +743,9 @@ export default async function DamageCalculator({ lang }: { lang: Lang }) {
     );
 
   const targets: DcTarget[] = [];
-  const floorOf = new Map<string, number>();
+  /** Cible d'Infiltration Operation → clé de tri (étage, zone, nœud) : l'ID
+   *  de donjon ne suit pas cet ordre, on remet les cartes en ordre après. */
+  const infilOrder = new Map<string, [number, number, number]>();
   /** Cible guild raid → n° de saison : l'ID de donjon ne suit pas les saisons
    *  (70401=S4, 70801=S1), on remet les cartes en ordre après la boucle. */
   const grOrder = new Map<string, number>();
@@ -824,8 +838,8 @@ export default async function DamageCalculator({ lang }: { lang: Lang }) {
       });
       if (!spawns.length) continue;
       const path = cascadeOf(ref, posterName, dungeonName, diff);
-      const isFloor = ref.mode === 'irregular_infiltrate' && ref.floor != null;
-      if (isFloor) floorOf.set(`${id}:${mon.id}`, ref.floor as number);
+      const infil = ref.mode === 'irregular_infiltrate' ? ref.infiltration : undefined;
+      if (infil) infilOrder.set(`${id}:${mon.id}`, infiltrationOrder(ref));
       if (ref.mode === 'guild_raid_main_boss' || ref.mode === 'guild_raid_sub_boss')
         grOrder.set(`${id}:${mon.id}`, grSeasonOf(ref) ?? Number.MAX_SAFE_INTEGER);
       const passives = bossPassiveChips(mon.id);
@@ -849,9 +863,9 @@ export default async function DamageCalculator({ lang }: { lang: Lang }) {
         modeSlug: ref.mode,
         ...(path ? { path } : {}),
         // Le nom du donjon porte déjà stage/étage/difficulté quand le jeu les
-        // nomme ; en infiltration tous les étages partagent le même libellé
-        // (« Search Coordinates: Unknown ») → « Floor N » (extrait de la clé).
-        label: isFloor ? floorTpl.replace('{n}', String(ref.floor)) : storyLabel,
+        // nomme ; un combat d'événement d'Infiltration Operation partage le
+        // libellé « Search Coordinates: Unknown » → le texte de l'événement.
+        label: infil?.event ? lRec(infil.event, lang) || infil.event.en : storyLabel,
         name: lRec(monster.name, lang) || monster.name.en,
         cls: monster.class,
         // Nom BRUT : l'URL est dérivée côté client (`monsterIcon`) — inutile
@@ -877,7 +891,7 @@ export default async function DamageCalculator({ lang }: { lang: Lang }) {
             }
           : {}),
         ...(ranked ? { ranked: true } : {}),
-        ...(isFloor && ref.advLinked ? { advLinked: true as const } : {}),
+        ...(infil && ref.advLinked ? { advLinked: true as const } : {}),
         ...(monsterHasRage(mon.id) ? { hasRage: true } : {}),
         ...(quirkBossType(monster.type) ? { quirkBoss: true as const } : {}),
         ...(passives.length ? { passives } : {}),
@@ -908,16 +922,23 @@ export default async function DamageCalculator({ lang }: { lang: Lang }) {
       });
     }
   }
-  // L'ID d'infiltration ne suit PAS l'étage (73000001 = étage 46) : remettre
-  // ce bloc (contigu) en ordre d'étage, sans toucher au reste.
-  if (floorOf.size) {
-    const first = targets.findIndex((tg) => floorOf.has(tg.id));
-    const floors = targets
-      .filter((tg) => floorOf.has(tg.id))
-      .sort((a, b) => (floorOf.get(a.id) ?? 0) - (floorOf.get(b.id) ?? 0));
-    const others = targets.filter((tg) => !floorOf.has(tg.id));
+  // L'ID d'Infiltration Operation ne suit ni l'étage ni la zone (73000001 est
+  // un combat d'événement de l'étage 1) : remettre ce bloc (contigu) en ordre
+  // étage → zone → nœud, les événements d'un étage après ses zones. Tri
+  // STABLE : les événements gardent entre eux l'ordre d'`encounters.json`.
+  if (infilOrder.size) {
+    const first = targets.findIndex((tg) => infilOrder.has(tg.id));
+    const infils = targets
+      .filter((tg) => infilOrder.has(tg.id))
+      .sort((a, b) => {
+        const oa = infilOrder.get(a.id) ?? [];
+        const ob = infilOrder.get(b.id) ?? [];
+        const i = oa.findIndex((v, j) => v !== ob[j]);
+        return i < 0 ? 0 : oa[i] - ob[i];
+      });
+    const others = targets.filter((tg) => !infilOrder.has(tg.id));
     targets.length = 0;
-    targets.push(...others.slice(0, first), ...floors, ...others.slice(first));
+    targets.push(...others.slice(0, first), ...infils, ...others.slice(first));
   }
   // Même remise en ordre pour le guild raid : cartes de saison croissantes
   // (l'ID de donjon donne S4, S5, S2, S3, S1). Tri STABLE — dans une saison,
@@ -1070,6 +1091,8 @@ export default async function DamageCalculator({ lang }: { lang: Lang }) {
       back: t(k('target.back')),
       seasonTpl,
       episode: episodeLbl,
+      zoneTpl,
+      infiltrationEvents,
       waveTpl: t(k('target.wave_label')),
       monstersTpl: t(k('target.monster_count')),
     },

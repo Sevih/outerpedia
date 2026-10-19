@@ -191,9 +191,11 @@ export interface DcTarget {
    *  de guilde § 16.2, jamais parsé du libellé localisé. */
   modeSlug: string;
   /** CASCADE de selects sous le mode quand la donnée la porte (Saison puis
-   *  Épisode en histoire, ligue de world boss, phase de guild raid…). */
+   *  Épisode en histoire, ligue de world boss, phase de guild raid, étage puis
+   *  zone en Infiltration Operation…). */
   path?: string[];
-  /** Entrée de la liste : le donjon (« Floor N » en infiltration). */
+  /** Entrée de la liste : le donjon, ou le nom de l'événement en
+   *  Infiltration Operation. */
   label: string;
   /** Classe du boss (overlay de portrait, comme les persos). */
   cls: string;
@@ -370,6 +372,10 @@ export interface DcLabels {
     /** Gabarit « Saison {n} ». */
     seasonTpl: string;
     episode: string;
+    /** Gabarit « Zone {n} » et carte des combats d'événement (Infiltration
+     *  Operation) — niveau 2 de la cascade, construit côté serveur. */
+    zoneTpl: string;
+    infiltrationEvents: string;
     /** Gabarit « Vague {n} ». */
     waveTpl: string;
     /** Gabarit « {n} monstres » — cartes de modes de l'accueil du picker. */

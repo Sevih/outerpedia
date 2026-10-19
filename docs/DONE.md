@@ -7,6 +7,72 @@
 
 ## 2026-10-19
 
+- **B63 — Calculateur : les cibles d'Infiltration Operation rangées étage →
+  zone → combat, depuis les tables du jeu.** Item du TODO « Calculateur :
+  infiltration par zone » retiré. Pourquoi : le « Floor N » du picker
+  n'était pas un étage mais le numéro de la clé du nom
+  (`SYS_IRR_INFILTREATE_DUNGEON_<n>`), un simple index 1..45 des combats de
+  nœud, et 46 pour les 17 combats d'événement. Le TODO disait « 3 zones par
+  infiltration » : la donnée du jeu en porte 3 à l'étage 1, 5 à l'étage 2 et
+  8 à l'étage 3 (`IrregularInfiltrateAreaTemplet`, 16 lignes) ; c'est elle
+  qui fait foi, le lot range ce que les tables portent. Comment :
+  `datagen/generators/encounters.ts` n'émet plus `floor` en
+  `irregular_infiltrate` (il reste aux tours) ; un bloc 6quater, à côté du
+  6ter, pose `DungeonRef.infiltration` (documenté) : pour un nœud de combat,
+  `floor` = `FloorID`, `zone` = rang de l'`AreaID` parmi les zones de
+  l'étage dans l'ordre de la table, `node` = ID du nœud ; c'est la TABLE qui
+  place le nœud, le nom écrit main peut la contredire (`73010104`, « F01_A01
+  _S08 », nœud `1202` en zone 2) et reste le libellé. Pour un combat
+  d'événement (ligne `EventType = BATTLE` d'`IrregularInfiltrateEventTemplet`),
+  `floor` et `event` = texte `NameID` de la ligne, sans zone ni nœud ; la
+  première ligne gagne quand deux mènent au même donjon (`73200006`, lignes
+  62 et 71, même texte). Un donjon d'infiltration sans nœud ni événement
+  jette (aucun aujourd'hui). À noter : le `NameID` d'une ligne BATTLE est le
+  texte du CHOIX qui lance le combat (« This is our chance! Attack! »), le
+  nom de l'événement (« Mission of Precision ») vivant sur sa ligne START ;
+  il distingue les deux combats d'un même événement, et c'est lui que
+  l'entrée affiche, comme le lot le demandait. Côté site, `infiltrationOrder`
+  (`src/lib/damage/preset-target.ts`, fonction pure) donne la clé
+  `[floor, zone ?? Infinity, node ?? 0]` ; `index.tsx` construit `path` =
+  « Floor N » puis « Zone N » (ou « Events » pour les combats d'événement
+  de l'étage) dans `cascadeOf`, le libellé d'un combat d'événement est le
+  texte de l'événement (le nom du donjon sinon, plus de « Floor N »), et la
+  remise en ordre du bloc trie terme à terme sur cette clé, de façon stable
+  (les événements gardent entre eux l'ordre d'`encounters.json`) ; `advLinked`
+  suit `infiltration` au lieu de `floor`. `contracts.ts` : commentaires de
+  `DcTarget.path` et `label`, et `labels.target.zoneTpl` /
+  `infiltrationEvents`. Deux clés dans les six locales, à côté de
+  `target.floor_label` : `target.zone_label` (Zone / Zone / Zona / エリア /
+  구역 / 区域 {n}) et `target.infiltration_events` (Events / Événements /
+  Eventos / イベント / 이벤트 / 事件). Données : `pnpm datagen:build`, promote
+  à blanc (« 66 identique(s), 1 différent(s) » : `encounters.json` seul), puis
+  `--apply --only encounters.json` ; les ids de cible ne changent pas.
+  Vérification : `encounters.test.ts` gagne un bloc d'invariants (étage 1..3,
+  plus de `floor`, zone et nœud ensemble, `event` exactement sans zone ; 45
+  combats de nœud, 17 d'événement ; zones max 3, 5, 8) et, dans le bloc
+  `HAS_GAME_TABLES` (qui compte désormais `IrregularInfiltrateAreaTemplet` et
+  `IrregularInfiltrateEventTemplet`), la jointure aux tables des 62 donjons ;
+  `preset-target.test.ts` teste `infiltrationOrder` (nœuds d'une zone, zones,
+  événements après les zones, étages croissants). Rendu, faute de serveur
+  sur :3000, par un test jetable qui appelle le composant serveur et lit les
+  cibles passées au client (non commité) : mode « Infiltration Operation »,
+  64 cibles en un bloc contigu, 3 cartes de niveau 1 (« Floor 1/2/3 », en fr
+  « Étage 1/2/3 »), puis « Zone 1, 2, 3, Events » / « Zone 1, 3, 4, 5,
+  Events » / « Zone 1, 2, 3, 4, 6, 8, Events » : les zones sans nœud de
+  combat (étage 2 zone 2, étage 3 zones 5 et 7) n'ont pas de carte, la
+  numérotation suit la table ; les combats sont nommés par le jeu
+  (« Search Coordinates: F01_A01_S01 »…), un combat d'événement par son
+  texte. Lien `?z=` rejoué avant/après (`ti` = `73010104:51100016` et
+  `73000001:51100013`, `si` = 0, via `resolvePresetTarget` contre les stats
+  calculées sur l'`encounters.json` de HEAD) : même cible, mêmes stats (PV
+  82 800, DEF 1 800, DMG RED 100, RES 160 ; PV 60 738, DEF 1 316, DMG RED
+  110, RES 170). `pnpm damage:check` : 42 ligne(s) exacte(s), 0 en dérive.
+  `pnpm typecheck` (`tsc --noEmit -p scripts/tsconfig.json`, sans erreur),
+  `pnpm lint` (`eslint`, sans sortie), `pnpm test` (« Tests 4325 passed
+  (4325) »). Laissé : les textes « Irregular Infiltration Operation » du
+  guide timegate-resource (`labels.ts` l.176) et des tâches
+  `progress.task.irregular-floor-3` (hors périmètre, textes éditoriaux).
+
 - **A71 — Calculateur : l'EFF de l'attaquant et la RES de la cible montrées
   ensemble, dans la carte cible, toujours visibles.** Item du TODO
   « Calculateur : EFF de l'attaquant face à la RES de la cible » retiré

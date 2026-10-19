@@ -24,6 +24,7 @@ import rewardTablesData from '../../data/generated/reward-tables.json';
 import monstersData from '../../data/generated/monsters.json';
 import towersData from '../../data/generated/towers.json';
 import { loadTable, splitCsv, tablesStamp, type Row } from '../lib/tables';
+import { loadTextIndex, resolveText } from '../lib/text';
 import type { TowersData } from './towers';
 import {
   dungeonSpawnedMonsters,
@@ -411,9 +412,42 @@ describe('encounters.json — paliers de Monad Gate et adv d’infiltration', ()
   });
 });
 
+describe('encounters.json — Infiltration Operation rangée étage → zone → combat', () => {
+  const infil = dungeonEntries.filter(([, d]) => d.mode === 'irregular_infiltrate');
+
+  it('chaque combat porte un étage 1..3, plus de `floor` ; zone et nœud ensemble, l’événement sinon', () => {
+    expect(infil.length).toBeGreaterThan(0);
+    const bad: string[] = [];
+    for (const [id, d] of infil) {
+      const i = d.infiltration;
+      if (d.floor !== undefined) bad.push(`${id} : floor`);
+      if (!i || ![1, 2, 3].includes(i.floor)) {
+        bad.push(`${id} : étage`);
+        continue;
+      }
+      if ((i.zone === undefined) !== (i.node === undefined)) bad.push(`${id} : zone/nœud`);
+      if ((i.event !== undefined) !== (i.zone === undefined)) bad.push(`${id} : événement`);
+    }
+    expect(bad).toEqual([]);
+  });
+
+  it('45 combats de nœud, 17 combats d’événement ; 3, 5 et 8 zones aux étages 1, 2, 3', () => {
+    expect(infil.filter(([, d]) => d.infiltration?.zone !== undefined)).toHaveLength(45);
+    expect(infil.filter(([, d]) => d.infiltration?.event !== undefined)).toHaveLength(17);
+    const maxZone = new Map<number, number>();
+    for (const [, d] of infil) {
+      const i = d.infiltration;
+      if (i?.zone !== undefined) maxZone.set(i.floor, Math.max(maxZone.get(i.floor) ?? 0, i.zone));
+    }
+    expect([1, 2, 3].map((f) => maxZone.get(f))).toEqual([3, 5, 8]);
+  });
+});
+
 const HAS_GAME_TABLES = !tablesStamp([
   'MonadGateNodeTemplet',
   'IrregularInfiltrateNodeTemplet',
+  'IrregularInfiltrateAreaTemplet',
+  'IrregularInfiltrateEventTemplet',
 ]).includes('absent');
 
 /** Adv d'une ligne de nœud, au format de `DungeonAdv` (zéros absents). */
@@ -480,6 +514,47 @@ describe.skipIf(!HAS_GAME_TABLES)('contextes de nœud — rejoints aux tables du
       });
       if (Boolean(d.advLinked) !== linked) bad.push(`${id} : advLinked`);
     }
+    expect(bad).toEqual([]);
+  });
+
+  it('Infiltration Operation : étage, zone et nœud d’un combat de nœud, étage et texte d’un événement', () => {
+    // Rang de la zone dans son étage, dans l'ordre de la table des zones.
+    const rank = new Map<string, number>();
+    const count = new Map<string, number>();
+    for (const a of loadTable('IrregularInfiltrateAreaTemplet')) {
+      const n = (count.get(a.FloorID ?? '') ?? 0) + 1;
+      count.set(a.FloorID ?? '', n);
+      rank.set(`${a.FloorID}|${a.ID}`, n);
+    }
+    const node = new Map<string, Row>();
+    for (const n of loadTable('IrregularInfiltrateNodeTemplet'))
+      if (n.NodeDungeonID && !node.has(n.NodeDungeonID)) node.set(n.NodeDungeonID, n);
+    const event = new Map<string, Row>();
+    for (const e of loadTable('IrregularInfiltrateEventTemplet'))
+      if (e.EventType === 'BATTLE' && e.DungeonID && !event.has(e.DungeonID))
+        event.set(e.DungeonID, e);
+    const tsys = loadTextIndex('TextSystem');
+    const bad: string[] = [];
+    let seen = 0;
+    for (const [id, d] of dungeonEntries) {
+      if (d.mode !== 'irregular_infiltrate') continue;
+      seen++;
+      const n = node.get(id);
+      const e = event.get(id);
+      const want = n
+        ? {
+            floor: Number(n.FloorID),
+            zone: rank.get(`${n.FloorID}|${n.AreaID}`),
+            node: Number(n.ID),
+          }
+        : e
+          ? { floor: Number(e.FloorID), event: resolveText(tsys, e.NameID).en }
+          : undefined;
+      const i = d.infiltration;
+      const got = i && (i.event ? { floor: i.floor, event: i.event.en } : i);
+      if (JSON.stringify(got) !== JSON.stringify(want)) bad.push(id);
+    }
+    expect(seen).toBe(62);
     expect(bad).toEqual([]);
   });
 });

@@ -613,6 +613,8 @@ const jp: Record<TranslationKey, string> = {
   'tools.damage-calculator.toolbar.copy_link': 'リンクをコピー',
   'tools.damage-calculator.toolbar.copied': 'コピーしました',
   'tools.damage-calculator.target.floor_label': '{n}階',
+  'tools.damage-calculator.target.zone_label': 'エリア {n}',
+  'tools.damage-calculator.target.infiltration_events': 'イベント',
   'tools.damage-calculator.target.boss_mechanics': 'ボスメカニクス',
   'tools.damage-calculator.target.boss_enrage_badge': '激怒',
   'tools.damage-calculator.target.lv_prefix': 'Lv',

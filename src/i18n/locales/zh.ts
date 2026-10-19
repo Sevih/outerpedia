@@ -594,6 +594,8 @@ const zh: Record<TranslationKey, string> = {
   'tools.damage-calculator.toolbar.copy_link': '复制链接',
   'tools.damage-calculator.toolbar.copied': '已复制!',
   'tools.damage-calculator.target.floor_label': '第{n}层',
+  'tools.damage-calculator.target.zone_label': '区域 {n}',
+  'tools.damage-calculator.target.infiltration_events': '事件',
   'tools.damage-calculator.target.boss_mechanics': '首领机制',
   'tools.damage-calculator.target.boss_enrage_badge': '狂暴',
   'tools.damage-calculator.target.lv_prefix': 'Lv',

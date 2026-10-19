@@ -603,6 +603,8 @@ const kr: Record<TranslationKey, string> = {
   'tools.damage-calculator.toolbar.copy_link': '링크 복사',
   'tools.damage-calculator.toolbar.copied': '복사됨!',
   'tools.damage-calculator.target.floor_label': '{n}층',
+  'tools.damage-calculator.target.zone_label': '구역 {n}',
+  'tools.damage-calculator.target.infiltration_events': '이벤트',
   'tools.damage-calculator.target.boss_mechanics': '보스 메커닉',
   'tools.damage-calculator.target.boss_enrage_badge': '광폭화',
   'tools.damage-calculator.target.lv_prefix': 'Lv',
