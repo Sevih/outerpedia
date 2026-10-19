@@ -76,8 +76,6 @@ les preuves et les décisions vivent dans le tri consolidé de sevih-tool
       « combat » ne se survole pas (`RichTooltip` en `pointer-events-none`,
       `BuildsScreen.tsx`) ; notes publiques `docs/release-notes.md`
       [Unreleased] à remplir avant la release (G8, G9, G10).
-- [ ] **gear-solver, CI** : ni `dependabot.yml`, ni actions épinglées par SHA
-      (`actions/checkout@v4`…), comme outerbot avant le 15/10.
 
 ## 🧹 Restes de la relecture du 19/10 (A68 à B64, OB4, G13)
 
