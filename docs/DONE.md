@@ -7,6 +7,30 @@
 
 ## 2026-10-19
 
+- **Relecture F28 (Fable) — gear-solver : découpage de BuilderScreen,
+  SettingsModal, InventoryScreen et HomeScreen, sans changement de
+  comportement ; validé.** Cinq commits `041d3a1`, `7ec25e8`, `7bb058f`,
+  `31b8b5a`, `b6cf219` (le dernier = changelog et todo). Sur HEAD :
+  typecheck vert, 156 + 157 + 569 tests, lint 0 erreur et 28 warnings
+  (le même compte qu'avant le lot) ; `docs/architecture.md` et son miroir
+  wiki suivis dans chacun des quatre refactors. Deux relecteurs ont prouvé
+  le « déplacement seul » par multiset des lignes normalisées (indentation,
+  `export`) et diff par déclaration : Builder 4 435 → 4 748 lignes en 30
+  fichiers, 111 corps identiques sur 112, le seul qui diffère est
+  `BuilderScreen` dont le bloc parti dans `useSolverSession` est remplacé
+  par l'appel du hook, tableaux de dépendances et ordre des effets
+  identiques ; Settings 908 → 954 en 8 fichiers, 35 corps identiques sur
+  35 ; Inventory 1 340 → 1 386 en 7 fichiers, 35 sur 35 ; Home 1 178 →
+  1 230 en 9 fichiers plus `lib/homeStats.ts`, 46 sur 46, et `computeStats`
+  rejoué avant/après sur les tables réelles et un inventaire synthétique de
+  2 509 pièces : sortie JSON identique dans quatre cas. Ni barrel ni
+  contexte ajouté, un dossier par écran. **Reste à Sevih** : gear-solver en
+  dev, chaque onglet une fois — Builder (solve, filtres, presets, Equip,
+  Worklist), Inventory, Home, Settings. Vu en route par l'agent :
+  `img-cache-revalidate.test.ts` instable une fois, une directive
+  `eslint-disable` inutile `App.tsx:256`. **Suite** : AUCUN lot ouvert ;
+  release de gear-solver (G8 à F28) quand Sevih le décide, notes
+  [Unreleased] à remplir.
 - **Relecture G15 à G29 (Fable) — les quinze lots du ménage de gear-solver,
   tous validés.** Commits `3a31e1d` → `edc18fe` (G15 à G29 dans l'ordre),
   quatre relecteurs en lecture seule par groupe (G15-G18, G19-G22, G23-G26,
