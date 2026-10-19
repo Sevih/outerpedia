@@ -133,17 +133,6 @@ les preuves et les décisions vivent dans le tri consolidé de sevih-tool
 
 ## 🧰 Outil quick
 
-- [ ] **« réponse interrompue » à l'envoi Discord** (19/10, par
-      quick.outerpedia.local ; passé au second essai, sans doublon) : `post()` de
-      `scripts/quick/ui/lib.js` ne lit pas le statut HTTP — un corps vide
-      (502 de Caddy) donne ce seul message. Deux suites : (1) afficher le
-      statut et le début du corps quand le flux finit sans `done` ; (2) piste
-      de la cause, à confirmer : quick garde le `keepAliveTimeout` de Node
-      (5 s) et Caddy garde ses connexions plus longtemps ; un POST sur une
-      connexion que quick vient de fermer rend un 502, et Caddy ne rejoue que
-      les GET. Remède : `keepAliveTimeout` plus long côté quick, ou
-      `keepalive` plus court dans le `transport http` de `(bascule)`
-      (`Caddyfile.dev`). Le même 502 menace les POST de l'admin.
 - [ ] **Migration de l'admin vers quick** (décision du 08/10) : inventaire,
       ordre et règles dans `docs/quick-migration.md`. FAIT : Short names et
       Search aliases (onglet « Noms », lot B34), Banner (onglet

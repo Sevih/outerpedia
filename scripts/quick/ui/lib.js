@@ -279,6 +279,15 @@ export const journalWire = () => {
  * d'une commande longue, des milliers de lignes, va dans sa console (« Patch »).
  * Chaque `step` lui est alors remis au lieu d'être empilé ici : le journal ne
  * montre que la ligne en cours, puis le résultat, comme pour tout geste.
+ *
+ * Une réponse sans `done` dit son statut HTTP et le début de son corps : un
+ * « réponse interrompue » nu ne distinguait pas quick tombé en plein geste
+ * (« HTTP 200 — réponse interrompue (flux clos sans issue) ») d'un proxy qui
+ * répond à sa place. « HTTP 502 — corps vide » est le signe d'un POST que
+ * Caddy n'a pas pu rejouer sur une connexion morte (cf. le commentaire de
+ * `server.listen`, server.ts) : rien n'est parti, le geste se relance. Une
+ * ligne qui n'est pas du JSON (une page d'erreur) ne fait pas lever : elle
+ * est gardée, plafonnée, pour ce message.
  */
 /**
  * Un GET en JSON, ou une erreur LISIBLE. L'état d'une section lu sur un
@@ -350,10 +359,21 @@ export async function post(path, payload, onStep) {
   let doing = null;
   let done = null;
   let buf = '';
+  // Ce que le corps porte HORS JSON (la page d'erreur d'un proxy) : son début.
+  let raw = '';
 
-  const eat = (raw) => {
-    if (!raw.trim()) return;
-    const m = JSON.parse(raw);
+  const eat = (line) => {
+    if (!line.trim()) return;
+    let m;
+    try {
+      m = JSON.parse(line);
+    } catch {
+      m = null;
+    }
+    if (m === null || typeof m !== 'object') {
+      raw = `${raw} ${line}`.trim().slice(0, 200);
+      return;
+    }
     if (m.done) done = m.done;
     else if (m.doing) doing = m.step;
     else if (m.step !== undefined && onStep) {
@@ -383,8 +403,14 @@ export async function post(path, payload, onStep) {
   }
   eat(buf); // réponse sans saut de ligne final (JSON d'une seule pièce)
 
-  const data = done ?? { ok: false, log: ['réponse interrompue'] };
-  log(data.log ?? [data.error ?? 'erreur'], data.ok);
+  const data = done ?? {
+    ok: false,
+    log: [
+      `HTTP ${res.status} — ${raw.trim() || (res.ok ? 'réponse interrompue (flux clos sans issue)' : 'corps vide')}`,
+    ],
+  };
+  // Sans `done`, les étapes reçues restent au journal, comme après une coupure.
+  log(done ? (data.log ?? [data.error ?? 'erreur']) : [...steps, ...data.log], data.ok);
   if (data.git) {
     gitBar(data.git);
     if (data.ok) document.dispatchEvent(new Event('quick:saved'));

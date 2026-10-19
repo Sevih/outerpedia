@@ -7,6 +7,59 @@
 
 ## 2026-10-19
 
+- **A69 — quick : « réponse interrompue » à l'envoi Discord, `post()` dit le
+  statut HTTP et le début du corps, et quick garde ses connexions plus
+  longtemps que Caddy.** Item « « réponse interrompue » à l'envoi Discord » du
+  TODO (section « 🧰 Outil quick »), parti entier. Pourquoi : le 19/10, un
+  envoi Discord par `quick.outerpedia.local` a rendu ce seul message, passé au
+  second essai sans doublon. Deux causes. (1) `post()` de
+  `scripts/quick/ui/lib.js` ne lisait jamais `res.status` : un 502 de Caddy au
+  corps vide ne disait rien d'autre, et un corps NON JSON (page d'erreur en
+  texte ou HTML) faisait lever `JSON.parse` dans `eat`, donc `post()` rejetait
+  au lieu de résoudre `{ ok: false }` comme ses appelants l'attendent. (2) Quick
+  fermait ses connexions oisives à 5 s (`keepAliveTimeout` par défaut de
+  Node), Caddy (`Caddyfile.dev`, `(bascule)`) les garde 2 min : une requête
+  envoyée sur une connexion que quick vient de fermer rend un 502 au corps
+  vide, et Caddy ne rejoue que les GET — un POST lancé quelques secondes après
+  une lecture n'est rejoué par personne. Comment : dans `post()`, `eat` ne lève
+  plus — une ligne qui n'est pas un objet JSON est gardée, concaténée, dans un
+  `raw` plafonné à 200 caractères ; les lignes JSON gardent leur lecture
+  (`done`, `doing`, `step`, résultat d'une seule pièce : un 409 d'etag reste
+  lu tel quel). Le repli sans `done` devient `HTTP <statut> — <raw>`, ou à
+  défaut « corps vide » (statut d'échec) / « réponse interrompue (flux clos
+  sans issue) » (statut 200 : quick arrêté net). Écart au plan : sans `done`,
+  le journal montre aussi les étapes reçues avant le message
+  (`[...steps, ...data.log]`, comme `cut`) — le `log(data.log …)` d'avant les effaçait, et
+  le cas « flux 200 clos » exige l'étape au journal ; avec `done`, rien ne
+  change. Le commentaire de `post()` gagne un paragraphe (le statut, et
+  « HTTP 502 — corps vide » = un POST que Caddy n'a pas pu rejouer, renvoi à
+  `server.listen`). Dans `scripts/quick/server.ts`, juste avant
+  `server.listen` : `keepAliveTimeout = 125_000`, `headersTimeout = 130_000`
+  (au-dessus du premier, sous `requestTimeout`, 300 s, intouché), avec le
+  commentaire du 502 : quick ferme APRÈS Caddy, la connexion oisive est
+  toujours fermée côté Caddy. `Caddyfile.dev` inchangé (décision : c'est quick
+  qui était trop court). Vérification : trois cas nouveaux dans
+  `scripts/quick/ui-serve.test.ts` (`describe` « `post()` coupé », un helper
+  `streamed(status, chunks)`) — corps vide 502 →
+  `{ ok: false, log: ['HTTP 502 — corps vide'] }`, journal `ko` ; `<html><body>502 Bad Gateway</body></html>`
+  en 502 → ce texte dans le message, sans rejet ; flux 200 avec un `step` puis
+  clos → « HTTP 200 — réponse interrompue (flux clos sans issue) », l'étape au
+  journal ; les deux cas « coupé » d'avant restent verts tels quels. À la main,
+  sur un quick ISOLÉ (clés vidées, `QUICK_PORT=4791`, `--no-open`, seulement
+  des GET) : une socket keep-alive brute, `GET /api/state`, 10 s d'attente,
+  second GET sur la même socket → `200` puis `200`, « PASSE » ; le même script
+  contre un `http.createServer` nu (défauts de Node, l'état de quick avant ce
+  lot) → socket fermée par le serveur à 6,0 s, seconde requête « TOMBE ».
+  `pnpm typecheck` (`tsc --noEmit && … -p scripts/tsconfig.json`, sans
+  erreur), `pnpm lint` (`eslint`, sans sortie), `pnpm test`
+  (`Tests  4301 passed (4301)`). Aucun changement visuel : le journal garde sa forme, seul
+  le texte du repli change. Laissé : les POST de l'admin sur
+  `outerpedia.local` — le TODO disait que le même 502 les menace, mais ils
+  passent par le serveur de Next, pas par quick (hors périmètre, à examiner à
+  part si le symptôme y paraît) ; `getJson`, le `transport http` de Caddy, et
+  tout rejeu automatique d'un POST côté page (un envoi Discord rejoué serait
+  un doublon : c'est le message qui dit quoi faire).
+
 - **A68 — quick : bouton « Get news » dans la section « Patch », `pnpm getNews`
   seul sous le verrou de la section, sa sortie dans la console.** Item
   « Récupérer les news depuis quick » du TODO (section « 🧰 Outil quick »),

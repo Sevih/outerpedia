@@ -755,6 +755,53 @@ describe('« Pousser » relu au retour sur la page, `post()` coupé', () => {
     await page.settle();
     expect(page.reads).toEqual(['/api/git']);
   });
+
+  /** Une réponse dont le corps rend `chunks`, un par lecture, puis se clôt. */
+  const streamed = (status: number, chunks: string[]) => {
+    const left = chunks.map((c) => new TextEncoder().encode(c));
+    return async () => ({
+      ok: status < 400,
+      status,
+      body: {
+        getReader: () => ({
+          read: async () => {
+            const value = left.shift();
+            return value ? { value } : { done: true };
+          },
+        }),
+      },
+    });
+  };
+
+  it('corps vide, statut 502 (le POST que Caddy n’a pas rejoué) : le statut dit pourquoi', async () => {
+    const page = await quick({ posted: streamed(502, []) });
+    const out = await page.lib.post('/api/discord/send', { content: 'x' });
+    expect(out).toEqual({ ok: false, log: ['HTTP 502 — corps vide'] });
+    expect(page.state()).toBe('ko');
+    expect(page.log()).toContain('HTTP 502 — corps vide');
+  });
+
+  it('corps non JSON, statut 502 : `post()` résout avec le début de la page d’erreur', async () => {
+    const html = '<html><body>502 Bad Gateway</body></html>';
+    const page = await quick({ posted: streamed(502, [html]) });
+    const out = await page.lib.post('/api/discord/send', { content: 'x' });
+    expect(out).toEqual({ ok: false, log: [`HTTP 502 — ${html}`] });
+    expect(page.state()).toBe('ko');
+  });
+
+  it('flux 200 clos sans `done` : « réponse interrompue », l’étape reçue gardée', async () => {
+    const page = await quick({
+      posted: streamed(200, [`${JSON.stringify({ step: 'envoi du message' })}\n`]),
+    });
+    const out = await page.lib.post('/api/discord/send', { content: 'x' });
+    expect(out).toEqual({
+      ok: false,
+      log: ['HTTP 200 — réponse interrompue (flux clos sans issue)'],
+    });
+    expect(page.state()).toBe('ko');
+    expect(page.log()).toContain('envoi du message');
+    expect(page.log()).toContain('HTTP 200 — réponse interrompue (flux clos sans issue)');
+  });
 });
 
 describe('log — le journal en haut de la page', () => {

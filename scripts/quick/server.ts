@@ -1356,6 +1356,19 @@ server.on('error', (e: NodeJS.ErrnoException) => {
   throw e;
 });
 
+// Le 502 de « réponse interrompue » : Caddy (`Caddyfile.dev`, `(bascule)`)
+// garde ses connexions oisives vers quick 2 min (son défaut), quick les fermait
+// à 5 s (celui de Node). Une requête envoyée sur une connexion que quick vient
+// de fermer rend un 502 au corps vide, et Caddy ne rejoue que les GET : un POST
+// (un envoi Discord, un enregistrement) n'est rejoué par personne. Quick ferme
+// donc APRÈS Caddy — la connexion oisive est toujours fermée côté Caddy, jamais
+// réutilisée morte. `headersTimeout` doit dépasser `keepAliveTimeout` (sinon
+// une connexion oisive peut être coupée pendant la lecture des en-têtes) et
+// reste sous `requestTimeout` (300 s, inchangé). En accès direct
+// (`localhost:4747`), le navigateur gère ses connexions : rien ne change.
+server.keepAliveTimeout = 125_000;
+server.headersTimeout = 130_000;
+
 server.listen(PORT, PEERS.length ? '0.0.0.0' : '127.0.0.1', () => {
   console.log(`quick → http://localhost:${PORT}/`);
   if (PEERS.length)
