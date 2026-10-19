@@ -7,6 +7,44 @@
 
 ## 2026-10-19
 
+- **Relecture A68, A69, A70, A71, B61, B62, B63, B64, OB4 et G13 (Fable)
+  — dix lots du 19/10, tous validés.** Trois relecteurs en lecture seule
+  (quick ; données ; calculateur, gear-solver, outerbot), rejeux et banc par
+  moi. Sur HEAD d'outerpedia (`27394728`) : typecheck, lint verts,
+  `Tests 4325 passed (4325)`, et `1762 passed` en `NODE_ENV=development` sur
+  `scripts/quick` + `src/lib/admin` ; gear-solver `d521a5f` : typecheck vert,
+  128 + 129 + 472 tests ; outerbot `6382257` : typecheck, lint, 127 tests,
+  format verts. Banc sur un quick isolé (:3123, clés vidées) : Patch porte
+  « Get news » sous la carte 1 (A68), Tables du jeu lie `RewardBuffID` vers
+  `TrustBuffTemplet` (A70), Extraction liste treize cibles dont Casques,
+  Gants, Bottes (A70). Rejoué par les relecteurs : A70, les 22 colonnes
+  `*BuffID` de `.gamedata/parsed` (20 de noms, toutes dans
+  `BuffTemplet.BuffID` ; `RewardBuffID` 630/630 dans `TrustBuffTemplet.ID`) ;
+  B61, `BLOCK_KEY`/`BONUS_KEY` dérivés = les anciennes tables (+ `cdmgRed`,
+  inoffensif), `formatMonsterStat` 504 cas sans écart ; B62, valeurs émises =
+  tables (`GemSlot` 1 à +5 pour EXCLUSIVE et OOPARTS, 6 paliers de sous-stat
+  sur 84 lignes vivantes, budgets 1..5 puis 9, `RequireLevel` 20→120),
+  diff des 20 fichiers solver = ajouts seuls, `buffs.json` : seul
+  `BID_CEQUIP_MAIN_DMG_REDUCE_CORE` passe `combatOnly`, `schema` 1 ; B64,
+  `anim-events.json` 260 persos, clips à events 1 545 → 1 760 sans aucun
+  event, ordre ni trigger perdu, `additive` sur 5 porteurs, `characters.json`
+  37 skills gagnent des clips et aucun facteur résolu ne bouge, 64 → 27 hits
+  sans clips (11 justifiés rejoués sur les bundles), `damage:check` 42
+  exactes ; B63, 62 donjons d'infiltration avant/après aux mêmes ids et
+  stats, zones par étage 3/5/8 = la table, la précision de Sevih (3 étages,
+  N zones, N nœuds) est exactement le rangement du lot — les « Events » de
+  `IrregularInfiltrateEventTemplet` n'ont aucune zone en table, rangés sous
+  l'étage ; A71, `buff_chance` pour tous, `res` une seule fois, `?z=`
+  inchangé ; G13, les cas du contrat contre `pieceReforgePlan` et un pool de
+  bout en bout ; OB4, listener = resync, regex des liens vérifiée. Entrées
+  DONE d'A68 et de B61 dans le même commit (index partagé, sans perte).
+  **Reste à Sevih** : calculateur, EFF et RES côte à côte en preset et en
+  manuel (A71), une cible d'infiltration par étage › zone › combat et la
+  carte Events (B63) ; quick, « Get news » une fois pour de vrai (A68) et
+  un envoi Discord qui ne dit plus « réponse interrompue » (A69) ; en prod,
+  après le push, les liens du bot vers `/characters` et `/guides` (OB4).
+  Restes au TODO. **Suite** : B65 (zip OST), F29 (agent Fable, B64 relu),
+  G30 après le push.
 - **B63 — Calculateur : les cibles d'Infiltration Operation rangées étage →
   zone → combat, depuis les tables du jeu.** Item du TODO « Calculateur :
   infiltration par zone » retiré. Pourquoi : le « Floor N » du picker

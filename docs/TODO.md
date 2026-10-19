@@ -109,6 +109,26 @@ les preuves et les décisions vivent dans le tri consolidé de sevih-tool
 - [ ] **gear-solver, CI** : ni `dependabot.yml`, ni actions épinglées par SHA
       (`actions/checkout@v4`…), comme outerbot avant le 15/10.
 
+## 🧹 Restes de la relecture du 19/10 (A68 à B64, OB4, G13)
+
+- [ ] **quick, trois libellés** : l'en-tête d'Extraction dit « Dix cibles,
+      une en lecture » (`scripts/quick/ui/tabs/extractor.html` l.19 et
+      `STYLE.md` l.529) alors qu'A70 en fait treize ; le commentaire de
+      `tabs/patch.js` l.11 dit « Les quatre gestes » depuis `NEWS` (A68) ;
+      à prendre dans le prochain lot A de quick.
+- [ ] **`statScales` dit EFF/RES en pourcentage** (glossaires générés) alors
+      que `stat-keys.json` les dit plats : B61 corrige à la lecture
+      (`RAW_FLAT`), la source reste à corriger dans le générateur des
+      glossaires.
+- [ ] **gear-solver, après B62** : lire `enhance.json › gemSlots` et
+      `reforge`, `progression.json › evoUnlockLevel`, ajouter
+      `progression.json` à `solver-files.json` (les cinq endroits recopiés à
+      la main cités dans l'entrée DONE de B62) ; le `data:sync` emporte aussi
+      A67 et le `combatOnly` de `BID_CEQUIP_MAIN_DMG_REDUCE_CORE` (un EE à
+      main DMG Reduction core sort de la fiche). Après G30. Et le tableau de
+      `docs/reference.md` / `wiki/Engine-Reference.md` dit « 95 tests » pour
+      `solver.test.ts`, périmé.
+
 ## 🧰 Outil quick
 
 - [ ] **Migration de l'admin vers quick** (décision du 08/10) : inventaire,
