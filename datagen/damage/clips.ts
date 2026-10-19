@@ -74,6 +74,10 @@ const EVENTS_PATH = resolve('datagen/damage/anim-events.json');
 interface CharAnimEntry {
   clips: Record<string, string[]>;
   triggers: Record<string, string[]>;
+  /** `EventAdditiveAttack` par clip (instant en s, nombre d'EventAttackStart
+   *  avant lui) — porté par anim-events.json depuis le 19/10/2026, NON LU ici :
+   *  le lot du correctif (variantes, spec damage-clips-joues § 5.2) le branchera. */
+  additive?: Record<string, { time: number; after: number }[]>;
 }
 
 /** Index construit une fois par build. */

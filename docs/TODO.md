@@ -37,11 +37,6 @@ les preuves et les décisions vivent dans le tri consolidé de sevih-tool
       les cibles d'Infiltration Operation sont rangées par « Floor N »,
       alors que chaque infiltration a 3 zones, chacune avec ses combats.
       Ranger infiltration → zone → combat, depuis la donnée du jeu.
-- [ ] **Anim-events : 46 skills sans aucun event extrait** (repéré par C24,
-      17/10) — Lisha (2000005) 502-520, S1 de Lily, Laine et Cindy, Ame,
-      fusionnés 2700003/2700005/2700035/2700037/2700043 : extraire les
-      `EventAttackStart` de ces clips (`extract-anim-events.py`), lot à
-      rédiger ; liste complète dans l'entrée C24 de DONE.
 - [ ] **Contrat solver, L1 d'abord** : `schema` et `resVersion` dans
       `solver/version.json` avant tout changement de forme (C1, M2, M3,
       vitesse en %, noyau par niveau, `stat-keys.json`). L1 FAIT des deux

@@ -35603,6 +35603,18 @@
           "maxHitCount": 0,
           "isAdditive": false
         }
+      ],
+      "clips": [
+        {
+          "name": "2000003_Skill_2",
+          "events": [
+            {
+              "id": "2000003_Skill_2",
+              "factor": 1000,
+              "count": 1
+            }
+          ]
+        }
       ]
     },
     "303": {
@@ -36647,6 +36659,23 @@
           "multiHit": true,
           "maxHitCount": 5,
           "isAdditive": false
+        }
+      ],
+      "clips": [
+        {
+          "name": "2700003_Skill_2",
+          "events": [
+            {
+              "id": "2700003_Skill_2_1",
+              "factor": 200,
+              "count": 1
+            },
+            {
+              "id": "2700003_Skill_2_2",
+              "factor": 160,
+              "count": 5
+            }
+          ]
         }
       ]
     },
@@ -39451,7 +39480,8 @@
           "maxHitCount": 0,
           "isAdditive": false
         }
-      ]
+      ],
+      "clipsUnresolvedChains": ["2700005_Skill_1"]
     },
     "552": {
       "id": "552",
@@ -39533,6 +39563,28 @@
           "maxHitCount": 3,
           "isAdditive": false
         }
+      ],
+      "clips": [
+        {
+          "name": "2700005_Skill_2",
+          "events": [
+            {
+              "id": "2700005_Skill_2_1",
+              "factor": 200,
+              "count": 1
+            },
+            {
+              "id": "2700005_Skill_2_2",
+              "factor": 200,
+              "count": 1
+            },
+            {
+              "id": "2700005_Skill_2_3",
+              "factor": 200,
+              "count": 3
+            }
+          ]
+        }
       ]
     },
     "553": {
@@ -39613,6 +39665,28 @@
           "multiHit": true,
           "maxHitCount": 6,
           "isAdditive": false
+        }
+      ],
+      "clips": [
+        {
+          "name": "2700005_Skill_3",
+          "events": [
+            {
+              "id": "2700005_Skill_3_1",
+              "factor": 250,
+              "count": 1
+            },
+            {
+              "id": "2700005_Skill_3_2",
+              "factor": 75,
+              "count": 4
+            },
+            {
+              "id": "2700005_Skill_3_3",
+              "factor": 75,
+              "count": 6
+            }
+          ]
         }
       ]
     },
@@ -39736,7 +39810,8 @@
           "maxHitCount": 0,
           "isAdditive": false
         }
-      ]
+      ],
+      "clipsUnresolvedChains": ["2700005_Skill_5"]
     },
     "556": {
       "id": "556",
@@ -40012,6 +40087,28 @@
           "maxHitCount": 3,
           "isAdditive": false
         }
+      ],
+      "clips": [
+        {
+          "name": "2700005_Skill_2_Burst_1",
+          "events": [
+            {
+              "id": "2700005_Skill_2_1",
+              "factor": 200,
+              "count": 1
+            },
+            {
+              "id": "2700005_Skill_2_2",
+              "factor": 200,
+              "count": 1
+            },
+            {
+              "id": "2700005_Skill_2_3",
+              "factor": 200,
+              "count": 3
+            }
+          ]
+        }
       ]
     },
     "570": {
@@ -40128,6 +40225,28 @@
           "maxHitCount": 3,
           "isAdditive": false
         }
+      ],
+      "clips": [
+        {
+          "name": "2700005_Skill_2_Burst_1",
+          "events": [
+            {
+              "id": "2700005_Skill_2_1",
+              "factor": 200,
+              "count": 1
+            },
+            {
+              "id": "2700005_Skill_2_2",
+              "factor": 200,
+              "count": 1
+            },
+            {
+              "id": "2700005_Skill_2_3",
+              "factor": 200,
+              "count": 3
+            }
+          ]
+        }
       ]
     },
     "571": {
@@ -40228,6 +40347,18 @@
           "multiHit": true,
           "maxHitCount": 5,
           "isAdditive": false
+        }
+      ],
+      "clips": [
+        {
+          "name": "2700005_Skill_2_Burst_3",
+          "events": [
+            {
+              "id": "2700005_Skill_Burst3_1",
+              "factor": 200,
+              "count": 5
+            }
+          ]
         }
       ]
     },
@@ -69982,6 +70113,23 @@
           "maxHitCount": 0,
           "isAdditive": false
         }
+      ],
+      "clips": [
+        {
+          "name": "2700035_Skill_1",
+          "events": [
+            {
+              "id": "2700035_Skill_1_1",
+              "factor": 120,
+              "count": 5
+            },
+            {
+              "id": "2700035_Skill_1_2",
+              "factor": 400,
+              "count": 1
+            }
+          ]
+        }
       ]
     },
     "3552": {
@@ -70063,6 +70211,28 @@
           "multiHit": false,
           "maxHitCount": 0,
           "isAdditive": false
+        }
+      ],
+      "clips": [
+        {
+          "name": "2700035_Skill_2",
+          "events": [
+            {
+              "id": "2700035_Skill_2_1",
+              "factor": 100,
+              "count": 5
+            },
+            {
+              "id": "2700035_Skill_2_2",
+              "factor": 150,
+              "count": 2
+            },
+            {
+              "id": "2700035_Skill_2_3",
+              "factor": 200,
+              "count": 1
+            }
+          ]
         }
       ]
     },
@@ -70319,6 +70489,23 @@
           "maxHitCount": 0,
           "isAdditive": false
         }
+      ],
+      "clips": [
+        {
+          "name": "2700035_Skill_5",
+          "events": [
+            {
+              "id": "2700035_Skill_5_1",
+              "factor": 400,
+              "count": 1
+            },
+            {
+              "id": "2700035_Skill_5_2",
+              "factor": 600,
+              "count": 1
+            }
+          ]
+        }
       ]
     },
     "3556": {
@@ -70389,6 +70576,23 @@
           "multiHit": false,
           "maxHitCount": 0,
           "isAdditive": false
+        }
+      ],
+      "clips": [
+        {
+          "name": "2700035_Skill_6",
+          "events": [
+            {
+              "id": "2700035_Skill_6_1",
+              "factor": 200,
+              "count": 4
+            },
+            {
+              "id": "2700035_Skill_6_2",
+              "factor": 200,
+              "count": 1
+            }
+          ]
         }
       ]
     },
@@ -70508,6 +70712,23 @@
           "maxHitCount": 0,
           "isAdditive": false
         }
+      ],
+      "clips": [
+        {
+          "name": "2700035_Skill_5",
+          "events": [
+            {
+              "id": "2700035_Skill_5_1",
+              "factor": 400,
+              "count": 1
+            },
+            {
+              "id": "2700035_Skill_5_2",
+              "factor": 600,
+              "count": 1
+            }
+          ]
+        }
       ]
     },
     "3560": {
@@ -70578,6 +70799,23 @@
           "multiHit": false,
           "maxHitCount": 0,
           "isAdditive": false
+        }
+      ],
+      "clips": [
+        {
+          "name": "2700035_Skill_6",
+          "events": [
+            {
+              "id": "2700035_Skill_6_1",
+              "factor": 200,
+              "count": 4
+            },
+            {
+              "id": "2700035_Skill_6_2",
+              "factor": 200,
+              "count": 1
+            }
+          ]
         }
       ]
     },
@@ -70660,6 +70898,28 @@
           "maxHitCount": 0,
           "isAdditive": false
         }
+      ],
+      "clips": [
+        {
+          "name": "2700035_Skill_2_Upgrade",
+          "events": [
+            {
+              "id": "2700035_Skill_2_1",
+              "factor": 100,
+              "count": 5
+            },
+            {
+              "id": "2700035_Skill_2_2",
+              "factor": 150,
+              "count": 2
+            },
+            {
+              "id": "2700035_Skill_2_3",
+              "factor": 200,
+              "count": 1
+            }
+          ]
+        }
       ]
     },
     "3570": {
@@ -70740,6 +71000,28 @@
           "multiHit": false,
           "maxHitCount": 0,
           "isAdditive": false
+        }
+      ],
+      "clips": [
+        {
+          "name": "2700035_Skill_2_Upgrade",
+          "events": [
+            {
+              "id": "2700035_Skill_2_1",
+              "factor": 100,
+              "count": 5
+            },
+            {
+              "id": "2700035_Skill_2_2",
+              "factor": 150,
+              "count": 2
+            },
+            {
+              "id": "2700035_Skill_2_3",
+              "factor": 200,
+              "count": 1
+            }
+          ]
         }
       ]
     },
@@ -70846,6 +71128,23 @@
           "multiHit": true,
           "maxHitCount": 4,
           "isAdditive": false
+        }
+      ],
+      "clips": [
+        {
+          "name": "2700035_Skill_7",
+          "events": [
+            {
+              "id": "2700035_Skill_Burst_3_1",
+              "factor": 600,
+              "count": 1
+            },
+            {
+              "id": "2700035_Skill_Burst_3_2",
+              "factor": 100,
+              "count": 4
+            }
+          ]
         }
       ]
     },
@@ -72800,6 +73099,33 @@
           "maxHitCount": 5,
           "isAdditive": false
         }
+      ],
+      "clips": [
+        {
+          "name": "2700037_Skill_1",
+          "events": [
+            {
+              "id": "2700037_Skill_1_1",
+              "factor": 250,
+              "count": 1
+            },
+            {
+              "id": "2700037_Skill_1_2",
+              "factor": 75,
+              "count": 2
+            },
+            {
+              "id": "2700037_Skill_1_3",
+              "factor": 100,
+              "count": 1
+            },
+            {
+              "id": "2700037_Skill_1_4",
+              "factor": 100,
+              "count": 5
+            }
+          ]
+        }
       ]
     },
     "3752": {
@@ -72967,6 +73293,28 @@
           "maxHitCount": 8,
           "isAdditive": false
         }
+      ],
+      "clips": [
+        {
+          "name": "2700037_Skill_3",
+          "events": [
+            {
+              "id": "2700037_Skill_3_1",
+              "factor": 200,
+              "count": 1
+            },
+            {
+              "id": "2700037_Skill_3_2",
+              "factor": 100,
+              "count": 4
+            },
+            {
+              "id": "2700037_Skill_3_3",
+              "factor": 50,
+              "count": 8
+            }
+          ]
+        }
       ]
     },
     "3754": {
@@ -73089,6 +73437,23 @@
           "maxHitCount": 0,
           "isAdditive": false
         }
+      ],
+      "clips": [
+        {
+          "name": "2700037_Skill_5",
+          "events": [
+            {
+              "id": "2700037_Skill_5_1",
+              "factor": 100,
+              "count": 4
+            },
+            {
+              "id": "2700037_Skill_5_2",
+              "factor": 600,
+              "count": 1
+            }
+          ]
+        }
       ]
     },
     "3756": {
@@ -73169,6 +73534,28 @@
           "multiHit": false,
           "maxHitCount": 0,
           "isAdditive": false
+        }
+      ],
+      "clips": [
+        {
+          "name": "2700037_Skill_6",
+          "events": [
+            {
+              "id": "2700037_Skill_6_1",
+              "factor": 200,
+              "count": 1
+            },
+            {
+              "id": "2700037_Skill_6_2",
+              "factor": 150,
+              "count": 3
+            },
+            {
+              "id": "2700037_Skill_6_3",
+              "factor": 350,
+              "count": 1
+            }
+          ]
         }
       ]
     },
@@ -73260,6 +73647,33 @@
           "multiHit": false,
           "maxHitCount": 0,
           "isAdditive": false
+        }
+      ],
+      "clips": [
+        {
+          "name": "2700037_Skill_7",
+          "events": [
+            {
+              "id": "2700037_Skill_7_1",
+              "factor": 200,
+              "count": 1
+            },
+            {
+              "id": "2700037_Skill_7_2",
+              "factor": 60,
+              "count": 6
+            },
+            {
+              "id": "2700037_Skill_7_3",
+              "factor": 100,
+              "count": 1
+            },
+            {
+              "id": "2700037_Skill_7_4",
+              "factor": 340,
+              "count": 1
+            }
+          ]
         }
       ]
     },
@@ -73374,6 +73788,23 @@
           "maxHitCount": 0,
           "isAdditive": false
         }
+      ],
+      "clips": [
+        {
+          "name": "2700037_Skill_5",
+          "events": [
+            {
+              "id": "2700037_Skill_5_1",
+              "factor": 100,
+              "count": 4
+            },
+            {
+              "id": "2700037_Skill_5_2",
+              "factor": 600,
+              "count": 1
+            }
+          ]
+        }
       ]
     },
     "3760": {
@@ -73454,6 +73885,28 @@
           "multiHit": false,
           "maxHitCount": 0,
           "isAdditive": false
+        }
+      ],
+      "clips": [
+        {
+          "name": "2700037_Skill_6",
+          "events": [
+            {
+              "id": "2700037_Skill_6_1",
+              "factor": 200,
+              "count": 1
+            },
+            {
+              "id": "2700037_Skill_6_2",
+              "factor": 150,
+              "count": 3
+            },
+            {
+              "id": "2700037_Skill_6_3",
+              "factor": 350,
+              "count": 1
+            }
+          ]
         }
       ]
     },
@@ -73546,6 +73999,33 @@
           "maxHitCount": 5,
           "isAdditive": false
         }
+      ],
+      "clips": [
+        {
+          "name": "2700037_Skill_1_Upgrade",
+          "events": [
+            {
+              "id": "2700037_Skill_1_1",
+              "factor": 250,
+              "count": 1
+            },
+            {
+              "id": "2700037_Skill_1_2",
+              "factor": 75,
+              "count": 2
+            },
+            {
+              "id": "2700037_Skill_1_3",
+              "factor": 100,
+              "count": 1
+            },
+            {
+              "id": "2700037_Skill_1_4",
+              "factor": 100,
+              "count": 5
+            }
+          ]
+        }
       ]
     },
     "3770": {
@@ -73636,6 +74116,33 @@
           "multiHit": true,
           "maxHitCount": 5,
           "isAdditive": false
+        }
+      ],
+      "clips": [
+        {
+          "name": "2700037_Skill_1_Upgrade",
+          "events": [
+            {
+              "id": "2700037_Skill_1_1",
+              "factor": 250,
+              "count": 1
+            },
+            {
+              "id": "2700037_Skill_1_2",
+              "factor": 75,
+              "count": 2
+            },
+            {
+              "id": "2700037_Skill_1_3",
+              "factor": 100,
+              "count": 1
+            },
+            {
+              "id": "2700037_Skill_1_4",
+              "factor": 100,
+              "count": 5
+            }
+          ]
         }
       ]
     },
@@ -80048,7 +80555,8 @@
           "maxHitCount": 0,
           "isAdditive": false
         }
-      ]
+      ],
+      "clipsUnresolvedChains": ["2700043_Skill_1"]
     },
     "4352": {
       "id": "4352",
@@ -80119,6 +80627,23 @@
           "multiHit": false,
           "maxHitCount": 0,
           "isAdditive": false
+        }
+      ],
+      "clips": [
+        {
+          "name": "2700043_Skill_2",
+          "events": [
+            {
+              "id": "2700043_Skill_2_1",
+              "factor": 450,
+              "count": 1
+            },
+            {
+              "id": "2700043_Skill_2_2",
+              "factor": 550,
+              "count": 1
+            }
+          ]
         }
       ]
     },
@@ -80375,6 +80900,23 @@
           "maxHitCount": 0,
           "isAdditive": false
         }
+      ],
+      "clips": [
+        {
+          "name": "2700043_Skill_5",
+          "events": [
+            {
+              "id": "2700043_Skill_5_1",
+              "factor": 100,
+              "count": 4
+            },
+            {
+              "id": "2700043_Skill_5_2",
+              "factor": 600,
+              "count": 1
+            }
+          ]
+        }
       ]
     },
     "4356": {
@@ -80455,6 +80997,28 @@
           "multiHit": false,
           "maxHitCount": 0,
           "isAdditive": false
+        }
+      ],
+      "clips": [
+        {
+          "name": "2700043_Skill_6",
+          "events": [
+            {
+              "id": "2700043_Skill_6_1",
+              "factor": 300,
+              "count": 1
+            },
+            {
+              "id": "2700043_Skill_6_2",
+              "factor": 100,
+              "count": 5
+            },
+            {
+              "id": "2700043_Skill_6_3",
+              "factor": 200,
+              "count": 1
+            }
+          ]
         }
       ]
     },
@@ -80573,6 +81137,23 @@
           "maxHitCount": 0,
           "isAdditive": false
         }
+      ],
+      "clips": [
+        {
+          "name": "2700043_Skill_5",
+          "events": [
+            {
+              "id": "2700043_Skill_5_1",
+              "factor": 100,
+              "count": 4
+            },
+            {
+              "id": "2700043_Skill_5_2",
+              "factor": 600,
+              "count": 1
+            }
+          ]
+        }
       ]
     },
     "4360": {
@@ -80653,6 +81234,28 @@
           "multiHit": false,
           "maxHitCount": 0,
           "isAdditive": false
+        }
+      ],
+      "clips": [
+        {
+          "name": "2700043_Skill_6",
+          "events": [
+            {
+              "id": "2700043_Skill_6_1",
+              "factor": 300,
+              "count": 1
+            },
+            {
+              "id": "2700043_Skill_6_2",
+              "factor": 100,
+              "count": 5
+            },
+            {
+              "id": "2700043_Skill_6_3",
+              "factor": 200,
+              "count": 1
+            }
+          ]
         }
       ]
     },
@@ -80764,6 +81367,23 @@
           "multiHit": false,
           "maxHitCount": 0,
           "isAdditive": false
+        }
+      ],
+      "clips": [
+        {
+          "name": "2700043_Skill_2_Upgrade",
+          "events": [
+            {
+              "id": "2700043_Skill_2_1",
+              "factor": 450,
+              "count": 1
+            },
+            {
+              "id": "2700043_Skill_2_2",
+              "factor": 550,
+              "count": 1
+            }
+          ]
         }
       ]
     },
@@ -80886,6 +81506,23 @@
           "maxHitCount": 0,
           "isAdditive": false
         }
+      ],
+      "clips": [
+        {
+          "name": "2700043_Skill_2_Upgrade",
+          "events": [
+            {
+              "id": "2700043_Skill_2_1",
+              "factor": 450,
+              "count": 1
+            },
+            {
+              "id": "2700043_Skill_2_2",
+              "factor": 550,
+              "count": 1
+            }
+          ]
+        }
       ]
     },
     "4371": {
@@ -80996,6 +81633,18 @@
           "multiHit": false,
           "maxHitCount": 0,
           "isAdditive": false
+        }
+      ],
+      "clips": [
+        {
+          "name": "2700043_Skill_7",
+          "events": [
+            {
+              "id": "2700043_Skill_2_Burst_3_1",
+              "factor": 1000,
+              "count": 1
+            }
+          ]
         }
       ]
     },
@@ -154222,6 +154871,28 @@
           "multiHit": false,
           "maxHitCount": 0,
           "isAdditive": false
+        }
+      ],
+      "clips": [
+        {
+          "name": "2000116_Skill_1",
+          "events": [
+            {
+              "id": "2000116_Skill_1_1",
+              "factor": 200,
+              "count": 3
+            },
+            {
+              "id": "2000116_Skill_1_2",
+              "factor": 200,
+              "count": 1
+            },
+            {
+              "id": "2000116_Skill_1_3",
+              "factor": 200,
+              "count": 1
+            }
+          ]
         }
       ]
     },

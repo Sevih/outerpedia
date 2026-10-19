@@ -297,6 +297,54 @@ describe('damage/characters.json — clips chez le porteur (revue R15, 17/10/202
   });
 });
 
+describe('anim-events — bundles de fusion et états d’approche (B64)', () => {
+  const anim = animEventsData as unknown as Record<
+    string,
+    {
+      clips: Record<string, string[]>;
+      additive?: Record<string, { time: number; after: number }[]>;
+    }
+  >;
+  const placed = (sid: string): boolean =>
+    Boolean(skills[sid]?.clips?.length || skills[sid]?.clipsUnresolvedChains?.length);
+  // Cause 1 : clips dans le bundle de base (dépendance du manifeste) ; cause 2 : 352,
+  // `Skill2` → état d'approche → `2700003_Skill_2`.
+  const fixed = ['352', '551', '552', '553', '555', '569', '570', '571'];
+  fixed.push('3551', '3552', '3555', '3556', '3559', '3560', '3569', '3570', '3571');
+  fixed.push('3751', '3753', '3755', '3756', '3757', '3759', '3760', '3769', '3770');
+  fixed.push('4351', '4352', '4355', '4356', '4359', '4360', '4369', '4370', '4371');
+  // Aucun EventAttackStart dans leurs clips (Lisha, Lily, Laine, Cindy), passif
+  // sans trigger ou hits SKIP d'Ame : repli § 12.4.
+  const justified = ['502', '505', '506', '519', '520', '1101', '1106', '2901', '3101'];
+  justified.push('6502', '6503');
+
+  it('les 35 skills des causes 1 et 2 portent clips ou clipsUnresolvedChains', () => {
+    expect(fixed).toHaveLength(35);
+    expect(fixed.filter((sid) => !placed(sid))).toEqual([]);
+  });
+
+  it('des 46 skills de C24, seuls les 11 justifiés restent sans clip', () => {
+    const c24 = [...fixed, ...justified];
+    expect(c24).toHaveLength(46);
+    expect(c24.filter((sid) => !placed(sid)).sort()).toEqual([...justified].sort());
+  });
+
+  it('les fusionnés ont leurs clips, les EventAdditiveAttack sont gardés', () => {
+    for (const id of ['2700005', '2700035', '2700037', '2700043'])
+      expect(Object.keys(anim[id]?.clips ?? {}).length, id).toBeGreaterThan(0);
+    for (const [id, e] of Object.entries(anim))
+      for (const [clip, list] of Object.entries(e.additive ?? {}))
+        for (const a of list) {
+          expect(a.time, `${id} ${clip}`).toBeGreaterThanOrEqual(0);
+          expect(a.after, `${id} ${clip}`).toBeGreaterThanOrEqual(0);
+        }
+    // Francesca, Parti, Sterope, Poolside Regina, Luna (spec damage-clips-joues § 5.1).
+    const carriers = Object.keys(anim).filter((id) => anim[id].additive);
+    expect(carriers).toEqual(['2000015', '2000032', '2000057', '2000085', '2000103']);
+    expect(anim['2000015'].additive).toEqual({ '2000015_Skill_2_1': [{ time: 1.533, after: 2 }] });
+  });
+});
+
 describe('damage/skill-descs.json — projection des descs du popover', () => {
   const MAIN_TYPES = new Set(['first', 'second', 'ultimate']);
 

@@ -143,6 +143,10 @@
  },
  "2000002": {
   "clips": {
+   "2000002_Skill_1": [
+    "2000002_Skill_1_1,-38.7",
+    "2000002_Skill_1_2,18.431"
+   ],
    "2000002_Skill_1_2": [
     "2000002_Skill_1_1,-45",
     "2000002_Skill_1_2,-45",
@@ -246,7 +250,8 @@
     "2000002_Battle_Return"
    ],
    "Skill1": [
-    "2000002_Battle_Approach"
+    "2000002_Battle_Approach",
+    "2000002_Skill_1"
    ],
    "Skill11": [
     "2000002_Skill_Extra"
@@ -281,6 +286,9 @@
     "2000003_Skill_1_1,0",
     "2000003_Skill_1_2,0",
     "2000003_Skill_1_3,0"
+   ],
+   "2000003_Skill_2": [
+    "2000003_Skill_2,0"
    ],
    "2000003_Skill_2_Upgrade": [
     "2000003_Skill_2,0"
@@ -377,7 +385,8 @@
     "2000003_Skill_1"
    ],
    "Skill2": [
-    "2000003_Battle_Approach"
+    "2000003_Battle_Approach",
+    "2000003_Skill_2"
    ],
    "Skill3": [
     "2000003_Skill_3"
@@ -1907,6 +1916,14 @@
     "2000015_Hit_Air_Fall",
     "2000015_Hit_Air_Up"
    ]
+  },
+  "additive": {
+   "2000015_Skill_2_1": [
+    {
+     "time": 1.533,
+     "after": 2
+    }
+   ]
   }
  },
  "2000016": {
@@ -2544,6 +2561,9 @@
    ]
   },
   "triggers": {
+   "Approach": [
+    "2000003_Battle_Approach"
+   ],
    "BattleEntry": [
     "2000021_Battle_Entry"
    ],
@@ -2829,6 +2849,10 @@
     "2000023_Death_2",
     "2000023_Hit_Air_Fall"
    ],
+   "IsLobbySit": [
+    "2000023_Lobby_Sit",
+    "2000023_Lobby_Stand"
+   ],
    "IsRunning": [
     "2000023_Battle_Run",
     "2000023_Battle_Stand"
@@ -2841,8 +2865,20 @@
     "2000023_Battle_Stand",
     "2000023_Battle_Turn"
    ],
+   "LobbyEntry": [
+    "2000023_Lobby_Entry"
+   ],
    "LobbyGachaEntry": [
     "2000023_Lobby_GachaEntry"
+   ],
+   "LobbyLVUP": [
+    "2000023_Lobby_LVUP"
+   ],
+   "LobbyTouch01": [
+    "2000023_Lobby_Touch_01"
+   ],
+   "LobbyTouch02": [
+    "2000023_Lobby_Touch_02"
    ],
    "Return": [
     "2000023_Battle_Return"
@@ -3880,6 +3916,14 @@
     "2000032_Hit_Air_Fall",
     "2000032_Hit_Air_Up"
    ]
+  },
+  "additive": {
+   "2000032_Skill_2_1": [
+    {
+     "time": 1.833,
+     "after": 2
+    }
+   ]
   }
  },
  "2000033": {
@@ -4757,6 +4801,10 @@
     "2000039_Death_2",
     "2000039_Hit_Air_Fall"
    ],
+   "IsLobbySit": [
+    "2000039_Lobby_Sit",
+    "2000039_Lobby_Stand"
+   ],
    "IsRunning": [
     "2000039_Battle_Run",
     "2000039_Battle_Stand"
@@ -4768,6 +4816,21 @@
    "IsTurn": [
     "2000039_Battle_Stand",
     "2000039_Battle_Turn"
+   ],
+   "LobbyEntry": [
+    "2000039_Lobby_Entry"
+   ],
+   "LobbyGachaEntry": [
+    "2000039_Lobby_GachaEntry"
+   ],
+   "LobbyLVUP": [
+    "2000039_Lobby_LVUP"
+   ],
+   "LobbyTouch01": [
+    "2000039_Lobby_Touch_01"
+   ],
+   "LobbyTouch02": [
+    "2000039_Lobby_Touch_02"
    ],
    "Return": [
     "2000039_Battle_Return"
@@ -4925,6 +4988,9 @@
    ]
   },
   "triggers": {
+   "Approach": [
+    "2000020_Battle_Approach"
+   ],
    "BattleEntry": [
     "2000040_Battle_Entry"
    ],
@@ -6415,6 +6481,9 @@
    ]
   },
   "triggers": {
+   "Approach": [
+    "4004002_Battle_Run"
+   ],
    "BattleEntry": [
     "2000052_Battle_Entry"
    ],
@@ -7233,6 +7302,26 @@
     "2000057_Hit_Air_Fall",
     "2000057_Hit_Air_Up"
    ]
+  },
+  "additive": {
+   "2000057_Skill_1": [
+    {
+     "time": 1.667,
+     "after": 3
+    }
+   ],
+   "2000057_Skill_1_Upgrade": [
+    {
+     "time": 4.065,
+     "after": 3
+    }
+   ],
+   "2000057_Skill_7": [
+    {
+     "time": 3.903,
+     "after": 2
+    }
+   ]
   }
  },
  "2000058": {
@@ -7312,6 +7401,9 @@
    "IsTurn": [
     "2000058_Battle_Stand",
     "2000058_Battle_Turn"
+   ],
+   "Return": [
+    "2000058_Battle_Return"
    ],
    "Skill1": [
     "2000058_Skill_1"
@@ -10788,6 +10880,14 @@
     "2000085_Hit_Air_Fall",
     "2000085_Hit_Air_Up"
    ]
+  },
+  "additive": {
+   "2000085_Skill_2": [
+    {
+     "time": 3.567,
+     "after": 4
+    }
+   ]
   }
  },
  "2000086": {
@@ -11989,24 +12089,53 @@
    "Burst3": [
     "2000095_Skill_Burst_3"
    ],
+   "HitBig": [
+    "2000095_Hit_Big"
+   ],
+   "HitDown": [
+    "2000095_Hit_Down"
+   ],
+   "HitFly": [
+    "2000095_Hit_Fly"
+   ],
+   "HitSmall1": [
+    "2000095_Hit_Small_1"
+   ],
+   "HitSmall2": [
+    "2000095_Hit_Small_2"
+   ],
+   "HitUp": [
+    "2000095_Hit_Air_Up"
+   ],
+   "IsAir": [
+    "2000095_Hit_Air_Fall",
+    "2000095_Hit_Air_Landing"
+   ],
    "IsBackView": [
     "2000095_Battle_Stand",
     "2000095_Battle_Turn",
     "2000095_Battle_Turn_Stand"
    ],
    "IsBreak": [
-    "2000095_Battle_Stand"
+    "2000095_Battle_Stand",
+    "2000095_Hit_Stun_Loop"
    ],
    "IsChainReady": [
     "2000095_Battle_Turn_Stand",
     "2000095_Skill_6_Cast"
+   ],
+   "IsDead": [
+    "2000095_Death_1",
+    "2000095_Death_2",
+    "2000095_Hit_Air_Fall"
    ],
    "IsRunning": [
     "2000095_Battle_Run",
     "2000095_Battle_Stand"
    ],
    "IsStun": [
-    "2000095_Battle_Stand"
+    "2000095_Battle_Stand",
+    "2000095_Hit_Stun_Loop"
    ],
    "IsTurn": [
     "2000095_Battle_Stand",
@@ -12032,6 +12161,10 @@
    ],
    "Skill6": [
     "2000095_Skill_5"
+   ],
+   "VerticalSpeed": [
+    "2000095_Hit_Air_Fall",
+    "2000095_Hit_Air_Up"
    ]
   }
  },
@@ -13011,6 +13144,14 @@
     "2000103_Hit_Air_Fall",
     "2000103_Hit_Air_Up"
    ]
+  },
+  "additive": {
+   "2000103_Skill_1": [
+    {
+     "time": 1.733,
+     "after": 3
+    }
+   ]
   }
  },
  "2000105": {
@@ -13177,24 +13318,53 @@
    "Burst3": [
     "2000106_Skill_7"
    ],
+   "HitBig": [
+    "2000106_Hit_Big"
+   ],
+   "HitDown": [
+    "2000106_Hit_Down"
+   ],
+   "HitFly": [
+    "2000106_Hit_Fly"
+   ],
+   "HitSmall1": [
+    "2000106_Hit_Small_1"
+   ],
+   "HitSmall2": [
+    "2000106_Hit_Small_2"
+   ],
+   "HitUp": [
+    "2000106_Hit_Air_Up"
+   ],
+   "IsAir": [
+    "2000106_Hit_Air_Fall",
+    "2000106_Hit_Air_Landing"
+   ],
    "IsBackView": [
     "2000106_Battle_Stand",
     "2000106_Battle_Turn",
     "2000106_Battle_Turn_Stand"
    ],
    "IsBreak": [
-    "2000106_Battle_Stand"
+    "2000106_Battle_Stand",
+    "2000106_Hit_Stun_Loop"
    ],
    "IsChainReady": [
     "2000106_Battle_Turn_Stand",
     "2000106_Skill_6_Cast"
+   ],
+   "IsDead": [
+    "2000106_Death_1",
+    "2000106_Death_2",
+    "2000106_Hit_Air_Fall"
    ],
    "IsRunning": [
     "2000106_Battle_Run",
     "2000106_Battle_Stand"
    ],
    "IsStun": [
-    "2000106_Battle_Stand"
+    "2000106_Battle_Stand",
+    "2000106_Hit_Stun_Loop"
    ],
    "IsTurn": [
     "2000106_Battle_Stand",
@@ -13220,6 +13390,10 @@
    ],
    "Skill6": [
     "2000106_Skill_5"
+   ],
+   "VerticalSpeed": [
+    "2000106_Hit_Air_Fall",
+    "2000106_Hit_Air_Up"
    ]
   }
  },
@@ -14208,6 +14382,11 @@
  },
  "2000116": {
   "clips": {
+   "2000116_Skill_1": [
+    "2000116_Skill_1_1,0",
+    "2000116_Skill_1_2,-15",
+    "2000116_Skill_1_3,-15"
+   ],
    "2000116_Skill_1_Burst_1": [
     "2000116_Skill_1_1,0",
     "2000116_Skill_1_2,-15",
@@ -14306,6 +14485,7 @@
     "2000116_Battle_Return"
    ],
    "Skill1": [
+    "2000116_Skill_1",
     "2000116_Skill_1_Cast"
    ],
    "Skill2": [
@@ -15467,9 +15647,18 @@
    "2000010_Skill_6": [
     "2000010_Skill_5_1,70",
     "2000010_Skill_5_2,10"
+   ],
+   "2000999_Skill_1_Chain_Test": [
+    "2000010_Skill_1_3_Chain_Test,-70"
+   ],
+   "2000999_Skill_2_Chain_Test": [
+    "2000010_Skill_2_1,0"
    ]
   },
   "triggers": {
+   "Approach": [
+    "2000002_Battle_Approach"
+   ],
    "BattleEntry": [
     "2000010_Battle_Entry"
    ],
@@ -15526,6 +15715,12 @@
    "Return": [
     "2000010_Battle_Return"
    ],
+   "Skill1": [
+    "2000999_Skill_1_Chain_Test"
+   ],
+   "Skill2": [
+    "2000999_Skill_2_Chain_Test"
+   ],
    "Skill3": [
     "2000010_Skill_3"
    ],
@@ -15546,34 +15741,272 @@
    "2010001_Rage_Finish": [
     "2000001_Skill_6,45",
     "2000001_Skill_6_2,45"
+   ],
+   "2010001_Skill_1": [
+    "2000001_Skill_1_1,215",
+    "2000001_Skill_1_2,28.853",
+    "2000001_Skill_1_3,-45"
+   ],
+   "2010001_Skill_2": [
+    "2000001_Skill_2_1,-45",
+    "2000001_Skill_2_2,-338.384",
+    "2000001_Skill_2_3,-45"
+   ],
+   "2010001_Skill_2_Upgrade": [
+    "2000001_Skill_2_Upgrade_1,-45",
+    "2000001_Skill_2_Upgrade_2,-338.384",
+    "2000001_Skill_2_Upgrade_3,-45"
+   ],
+   "2010001_Skill_3": [
+    "2000001_Skill_3_New_1,45",
+    "2000001_Skill_3_New_2_SWORD_1,34",
+    "2000001_Skill_3_New_2_SWORD_2,-32",
+    "2000001_Skill_3_New_2_KICK_1,45",
+    "2000001_Skill_3_New_2_KICK_2,45",
+    "2000001_Skill_3_New_2_KICK_3,45",
+    "2000001_Skill_3_New_3,-12",
+    "2000001_Skill_3_New_4,45",
+    "2000001_Skill_3_New_5,45"
+   ],
+   "2010001_Skill_3_Skip": [
+    "Skip_Finish_Fire ,0"
+   ],
+   "2010001_Skill_5": [
+    "2000001_Skill_4_1,45",
+    "2000001_Skill_4_2,45"
+   ],
+   "2010001_Skill_6": [
+    "2000001_Skill_5,45"
+   ],
+   "2010001_Skill_7": [
+    "2000001_Skill_6,45",
+    "2000001_Skill_6_2,45"
    ]
   },
   "triggers": {
+   "BattleEntry": [
+    "2010001_Battle_Entry"
+   ],
+   "BattleResultWin": [
+    "2010001_Battle_Result_Win"
+   ],
+   "Burst1": [
+    "2010001_Skill_2_Upgrade"
+   ],
+   "HitBig": [
+    "2010001_Hit_Big"
+   ],
+   "HitDown": [
+    "2010001_Hit_Down"
+   ],
+   "HitFly": [
+    "2010001_Hit_Fly"
+   ],
+   "HitSmall1": [
+    "2010001_Hit_Small_01"
+   ],
+   "HitSmall2": [
+    "2010001_Hit_Small_02"
+   ],
+   "HitUp": [
+    "2010001_Hit_Air_Up"
+   ],
+   "IsAir": [
+    "2010001_Hit_Air_Fall",
+    "2010001_Hit_Air_Landing"
+   ],
+   "IsBackView": [
+    "2010001_Battle_Stand",
+    "2010001_Battle_Turn",
+    "2010001_Battle_Turn_Stand"
+   ],
+   "IsBreak": [
+    "2000001_Hit_Stun_Loop",
+    "2010001_Battle_Stand"
+   ],
+   "IsChainReady": [
+    "2010001_Battle_Turn_Stand",
+    "2010001_Skill_6_Cast"
+   ],
+   "IsDead": [
+    "2010001_Death_1",
+    "2010001_Death_2",
+    "2010001_Hit_Air_Fall"
+   ],
+   "IsRunning": [
+    "2010001_Battle_Run",
+    "2010001_Battle_Stand"
+   ],
+   "IsStun": [
+    "2010001_Battle_Stand",
+    "2010001_Hit_Stun_Loop"
+   ],
+   "IsTurn": [
+    "2010001_Battle_Stand",
+    "2010001_Battle_Turn"
+   ],
+   "Return": [
+    "2010001_Battle_Return"
+   ],
+   "Skill1": [
+    "2010001_Skill_1"
+   ],
    "Skill16": [
     "2010001_Rage_Finish"
+   ],
+   "Skill2": [
+    "2010001_Skill_2"
+   ],
+   "Skill3": [
+    "2010001_Skill_3"
+   ],
+   "Skill3Skip": [
+    "2010001_Skill_3_Skip"
+   ],
+   "Skill5": [
+    "2010001_Skill_5"
+   ],
+   "Skill6": [
+    "2010001_Skill_6"
+   ],
+   "Skill7": [
+    "2010001_Skill_7"
+   ],
+   "VerticalSpeed": [
+    "2010001_Hit_Air_Fall",
+    "2010001_Hit_Air_Up"
    ]
   }
  },
  "2010004": {
   "clips": {
+   "2010004_Skill_1": [
+    "2000004_Skill_1_1,0",
+    "2000004_Skill_1_2,0"
+   ],
+   "2010004_Skill_2": [
+    "2000004_Skill_2_1 ,0",
+    "2000004_Skill_2_2 ,45",
+    "2000004_Skill_2_3 ,45",
+    "2000004_Skill_2_4 ,45"
+   ],
+   "2010004_Skill_3": [
+    "2000004_Skill_3_1,-45",
+    "2000004_Skill_3_2,45",
+    "2000004_Skill_3_3,45"
+   ],
    "2010004_Skill_3_Skip": [
     "Skip_Finish_Fire ,0"
+   ],
+   "2010004_Skill_5": [
+    "2000004_Skill_5_1,0",
+    "2000004_Skill_5_2,45"
+   ],
+   "2010004_Skill_6": [
+    "2000004_Skill_6_2 ,45",
+    "2000004_Skill_6_3 ,45",
+    "2000004_Skill_6_1 ,0",
+    "2000004_Skill_6_4 ,45"
    ]
   },
   "triggers": {
+   "BattleEntry": [
+    "2010004_Battle_Entry"
+   ],
+   "BattleResultWin": [
+    "2010004_Battle_Result_Win"
+   ],
+   "HitBig": [
+    "2010004_Hit_Big"
+   ],
+   "HitDown": [
+    "2010004_Hit_Down"
+   ],
+   "HitFly": [
+    "2010004_Hit_Fly"
+   ],
+   "HitSmall1": [
+    "2010004_Hit_Small_1"
+   ],
+   "HitSmall2": [
+    "2010004_Hit_Small_2"
+   ],
+   "HitUp": [
+    "2010004_Hit_Air_Up"
+   ],
+   "IsAir": [
+    "2010004_Hit_Air_Fall",
+    "2010004_Hit_Air_Landing"
+   ],
+   "IsBackView": [
+    "2010004_Battle_Stand",
+    "2010004_Battle_Turn",
+    "2010004_Battle_Turn_Stand"
+   ],
    "IsBreak": [
+    "2010004_Battle_Stand",
     "2010004_Hit_Stun_Loop"
    ],
+   "IsChainReady": [
+    "2010004_Battle_Turn_Stand",
+    "2010004_Skill_6_Cast"
+   ],
+   "IsDead": [
+    "2010004_Death_1",
+    "2010004_Death_2",
+    "2010004_Hit_Air_Fall"
+   ],
+   "IsRunning": [
+    "2010004_Battle_Run",
+    "2010004_Battle_Stand"
+   ],
    "IsStun": [
+    "2010004_Battle_Stand",
     "2010004_Hit_Stun_Loop"
+   ],
+   "IsTurn": [
+    "2010004_Battle_Stand",
+    "2010004_Battle_Turn"
+   ],
+   "Return": [
+    "2010004_Battle_Return"
+   ],
+   "Skill1": [
+    "2010004_Skill_1"
+   ],
+   "Skill2": [
+    "2010004_Skill_2"
+   ],
+   "Skill3": [
+    "2010004_Skill_3"
    ],
    "Skill3Skip": [
     "2010004_Skill_3_Skip"
+   ],
+   "Skill5": [
+    "2010004_Skill_5"
+   ],
+   "Skill6": [
+    "2010004_Skill_6"
+   ],
+   "VerticalSpeed": [
+    "2010004_Hit_Air_Fall",
+    "2010004_Hit_Air_Up"
    ]
   }
  },
  "2010005": {
   "clips": {
+   "2010005_Skill_1": [
+    "2000005_Skill_1,-45"
+   ],
+   "2010005_Skill_2_Burst_3": [
+    "2000005_Skill_6,45"
+   ],
+   "2010005_Skill_3": [
+    "2000005_Skill_3_NEW_1,45",
+    "2000005_Skill_3_NEW_2,45"
+   ],
    "2010005_Skill_3_For_Mob": [
     "2000005_Skill_3_NEW_1,45",
     "2000005_Skill_3_NEW_2,45"
@@ -15583,42 +16016,260 @@
    ]
   },
   "triggers": {
+   "BattleEntry": [
+    "2010005_Battle_Entry"
+   ],
+   "BattleResultWin": [
+    "2010005_Battle_Result_Win"
+   ],
+   "Burst1": [
+    "2010005_Skill_2_Burst_1"
+   ],
+   "Burst3": [
+    "2010005_Skill_2_Burst_3"
+   ],
+   "HitBig": [
+    "2010005_Hit_Big"
+   ],
+   "HitDown": [
+    "2010005_Hit_Down"
+   ],
+   "HitFly": [
+    "2010005_Hit_Fly"
+   ],
+   "HitSmall1": [
+    "2010005_Hit_Small_1"
+   ],
+   "HitSmall2": [
+    "2010005_Hit_Small_2"
+   ],
+   "HitUp": [
+    "2010005_Hit_Air_up"
+   ],
+   "IsAir": [
+    "2010005_Hit_Air_Fall",
+    "2010005_Hit_Air_Landing"
+   ],
+   "IsBackView": [
+    "2010005_Battle_Stand",
+    "2010005_Battle_Turn",
+    "2010005_Battle_Turn_Stand"
+   ],
    "IsBreak": [
+    "2010005_Battle_Stand",
     "2010005_Hit_Stun_Loop"
    ],
+   "IsChainReady": [
+    "2010005_Battle_Turn_Stand",
+    "2010005_Skill_6_Cast"
+   ],
+   "IsDead": [
+    "2010005_Death_1",
+    "2010005_Death_2",
+    "2010005_Hit_Air_Fall"
+   ],
+   "IsRunning": [
+    "2010005_Battle_Run",
+    "2010005_Battle_Stand"
+   ],
    "IsStun": [
+    "2010005_Battle_Stand",
     "2010005_Hit_Stun_Loop"
+   ],
+   "IsTurn": [
+    "2010005_Battle_Stand",
+    "2010005_Battle_Turn"
+   ],
+   "Return": [
+    "2010005_Battle_Return"
+   ],
+   "Skill1": [
+    "2010005_Skill_1"
    ],
    "Skill15": [
     "2010005_Skill_3_For_Mob"
    ],
+   "Skill2": [
+    "2010005_Skill_2"
+   ],
+   "Skill3": [
+    "2010005_Skill_3"
+   ],
    "Skill3Skip": [
     "2010005_Skill_3_Skip"
+   ],
+   "Skill5": [
+    "2010005_Skill_5"
+   ],
+   "Skill6": [
+    "2010005_Skill_6"
+   ],
+   "VerticalSpeed": [
+    "2010005_Hit_Air_Fall",
+    "2010005_Hit_Air_up"
    ]
   }
  },
  "2010007": {
   "clips": {
+   "2000007_Skill_1": [
+    "2000007_Skill_1_1,-15",
+    "2000007_Skill_1_2,0"
+   ],
+   "2000007_Skill_2": [
+    "2000007_Skill_2,45"
+   ],
+   "2000007_Skill_3": [
+    "2000007_Skill_3_1,45",
+    "2000007_Skill_3_2,45"
+   ],
    "2000007_Skill_3_Skip": [
     "Skip_Finish_Water ,0"
+   ],
+   "2000007_Skill_5": [
+    "2000007_Skill_4_1,45",
+    "2000007_Skill_4_2,45",
+    "2000007_Skill_4_3,45"
+   ],
+   "2000007_Skill_6": [
+    "2000007_Skill_5,45"
    ]
   },
   "triggers": {
+   "BattleEntry": [
+    "2000007_Battle_Entry"
+   ],
+   "BattleResultWin": [
+    "2000007_Battle_Result_Win"
+   ],
+   "HitBig": [
+    "2000007_Hit_Big"
+   ],
+   "HitDown": [
+    "2000007_Hit_Down"
+   ],
+   "HitFly": [
+    "2000007_Hit_Fly"
+   ],
+   "HitSmall1": [
+    "2000007_Hit_Small_01"
+   ],
+   "HitSmall2": [
+    "2000007_Hit_Small_02"
+   ],
+   "HitUp": [
+    "2000007_Hit_Air_Up"
+   ],
+   "IsAir": [
+    "2000007_Hit_Air_Fall",
+    "2000007_Hit_Air_Landing"
+   ],
+   "IsBackView": [
+    "2000007_Battle_Stand",
+    "2000007_Battle_Turn",
+    "2000007_Battle_Turn_Stand"
+   ],
    "IsBreak": [
+    "2000007_Battle_Stand",
     "2000007_Hit_Stun_Loop"
    ],
+   "IsChainReady": [
+    "2000007_Battle_Turn_Stand",
+    "2000007_Skill_6_Cast"
+   ],
+   "IsDead": [
+    "2000007_Death_1",
+    "2000007_Death_2",
+    "2000007_Hit_Air_Fall"
+   ],
+   "IsRunning": [
+    "2000007_Battle_Run",
+    "2000007_Battle_Stand"
+   ],
    "IsStun": [
+    "2000007_Battle_Stand",
     "2000007_Hit_Stun_Loop"
+   ],
+   "IsTurn": [
+    "2000007_Battle_Stand",
+    "2000007_Battle_Turn"
+   ],
+   "Return": [
+    "2000007_Battle_Return"
+   ],
+   "Skill1": [
+    "2000007_Skill_1"
+   ],
+   "Skill2": [
+    "2000007_Skill_2"
+   ],
+   "Skill3": [
+    "2000007_Skill_3"
    ],
    "Skill3Skip": [
     "2000007_Skill_3_Skip"
+   ],
+   "Skill5": [
+    "2000007_Skill_5"
+   ],
+   "Skill6": [
+    "2000007_Skill_6"
+   ],
+   "VerticalSpeed": [
+    "2000007_Hit_Air_Fall",
+    "2000007_Hit_Air_Up"
    ]
   }
  },
  "2010009": {
-  "clips": {},
+  "clips": {
+   "2000009_Skill_1": [
+    "2000009_Skill_1,45"
+   ],
+   "2000009_Skill_5": [
+    "2000009_Skill_4,45"
+   ],
+   "2000009_Skill_6": [
+    "2000009_Skill_5,45"
+   ],
+   "2000009_Skill_7": [
+    "2000009_Skill_6,0"
+   ]
+  },
   "triggers": {
+   "BattleEntry": [
+    "2000009_Battle_Entry"
+   ],
+   "BattleResultWin": [
+    "2000009_Battle_Result_Win"
+   ],
+   "Burst1": [
+    "2000009_Skill_2_Upgrade"
+   ],
+   "HitBig": [
+    "2000009_Hit_Big"
+   ],
+   "HitDown": [
+    "2000009_Hit_Down"
+   ],
+   "HitFly": [
+    "2000009_Hit_Fly"
+   ],
+   "HitSmall1": [
+    "2000009_Hit_Small_01"
+   ],
+   "HitSmall2": [
+    "2000009_Hit_Small_02"
+   ],
+   "HitUp": [
+    "2000009_Hit_Air_Up"
+   ],
+   "IsAir": [
+    "2000009_Hit_Air_Fall",
+    "2000009_Hit_Air_Landing"
+   ],
    "IsBackView": [
+    "2000009_Battle_Turn_Stand",
     "2010009_Battle_Stand",
     "2010009_Battle_Turn"
    ],
@@ -15626,7 +16277,17 @@
     "2000009_Hit_Loop_Stun",
     "2010009_Battle_Stand"
    ],
+   "IsChainReady": [
+    "2000009_Battle_Turn_Stand",
+    "2000009_Skill_6_Cast"
+   ],
+   "IsDead": [
+    "2000009_Death_1",
+    "2000009_Death_2",
+    "2000009_Hit_Air_Fall"
+   ],
    "IsRunning": [
+    "2000009_Battle_Run",
     "2010009_Battle_Stand"
    ],
    "IsStun": [
@@ -15637,33 +16298,195 @@
     "2010009_Battle_Stand",
     "2010009_Battle_Turn"
    ],
+   "Return": [
+    "2000009_Battle_Return"
+   ],
+   "Skill1": [
+    "2000009_Skill_1"
+   ],
+   "Skill2": [
+    "2000009_Skill_2"
+   ],
    "Skill3": [
     "2010009_Skill_3"
+   ],
+   "Skill3Skip": [
+    "2000009_Skill_3_Skip"
+   ],
+   "Skill5": [
+    "2000009_Skill_5"
+   ],
+   "Skill6": [
+    "2000009_Skill_6"
+   ],
+   "Skill7": [
+    "2000009_Skill_7"
+   ],
+   "VerticalSpeed": [
+    "2000009_Hit_Air_Fall",
+    "2000009_Hit_Air_Up"
    ]
   }
  },
  "2010012": {
   "clips": {
+   "2000012_Skill_1": [
+    "2000012_Skill_1_1,0"
+   ],
+   "2000012_Skill_1_Upgrade": [
+    "2000012_Skill_1_1,0"
+   ],
+   "2000012_Skill_3": [
+    "2000012_Skill_3_1,45",
+    "2000012_Skill_3_2,45",
+    "2000012_Skill_3_3,45"
+   ],
    "2000012_Skill_3_Skip": [
     "Skip_Finish_Fire ,0"
+   ],
+   "2000012_Skill_5": [
+    "2000012_Skill_4_1,45"
+   ],
+   "2000012_Skill_6": [
+    "2000012_Skill_5_1,180.7",
+    "2000012_Skill_5_2,0"
+   ],
+   "2000012_Skill_7": [
+    "2000012_Skill_6_1,45"
    ]
   },
   "triggers": {
+   "Approach": [
+    "2000012_Battle_Approach"
+   ],
+   "BattleEntry": [
+    "2000012_Battle_Entry"
+   ],
+   "BattleResultWin": [
+    "2000012_Battle_Result_Win"
+   ],
+   "Burst1": [
+    "2000012_Skill_1_Upgrade"
+   ],
+   "HitBig": [
+    "2000012_Hit_Big"
+   ],
+   "HitDown": [
+    "2000012_Hit_Down"
+   ],
+   "HitFly": [
+    "2000012_Hit_Fly"
+   ],
+   "HitSmall1": [
+    "2000012_Hit_Small_01"
+   ],
+   "HitSmall2": [
+    "2000012_Hit_Small_02"
+   ],
+   "HitUp": [
+    "2000012_Hit_Air_Up"
+   ],
+   "IsAir": [
+    "2000012_Hit_Air_Fall",
+    "2000012_Hit_Air_Landing"
+   ],
+   "IsBackView": [
+    "2000012_Battle_Stand",
+    "2000012_Battle_Turn",
+    "2000012_Battle_Turn_Stand"
+   ],
    "IsBreak": [
+    "2000012_Battle_Stand",
     "2000012_Hit_Stun_Loop"
    ],
+   "IsChainReady": [
+    "2000012_Battle_Turn_Stand",
+    "2000012_Skill_6_Cast"
+   ],
+   "IsDead": [
+    "2000012_Death_1",
+    "2000012_Death_2",
+    "2000012_Hit_Air_Fall"
+   ],
+   "IsRunning": [
+    "2000012_Battle_Run",
+    "2000012_Battle_Stand"
+   ],
    "IsStun": [
+    "2000012_Battle_Stand",
     "2000012_Hit_Stun_Loop"
+   ],
+   "IsTurn": [
+    "2000012_Battle_Stand",
+    "2000012_Battle_Turn"
+   ],
+   "Return": [
+    "2000012_Battle_Return"
+   ],
+   "Skill1": [
+    "2000012_Skill_1"
+   ],
+   "Skill2": [
+    "2000012_Skill_2"
+   ],
+   "Skill3": [
+    "2000012_Skill_3"
    ],
    "Skill3Skip": [
     "2000012_Skill_3_Skip"
+   ],
+   "Skill5": [
+    "2000012_Skill_5"
+   ],
+   "Skill6": [
+    "2000012_Skill_6"
+   ],
+   "Skill7": [
+    "2000012_Skill_7"
+   ],
+   "VerticalSpeed": [
+    "2000012_Hit_Air_Fall",
+    "2000012_Hit_Air_Up"
    ]
   }
  },
  "2010019": {
   "clips": {
+   "2000019_Skill_1": [
+    "2000019_Skill_1_1,-15",
+    "2000019_Skill_1_2,15",
+    "2000019_Skill_1_3,-15",
+    "2000019_Skill_1_4,0"
+   ],
+   "2000019_Skill_2": [
+    "2000019_Skill_2_1,5",
+    "2000019_Skill_2_2,180.9"
+   ],
+   "2000019_Skill_2_Upgrade": [
+    "2000019_Skill_2_1_Upgrade,0",
+    "2000019_Skill_2_2_Upgrade,-30"
+   ],
+   "2000019_Skill_3": [
+    "2000019_Skill_3_1,0",
+    "2000019_Skill_3_2,45",
+    "2000019_Skill_3_3,45"
+   ],
    "2000019_Skill_3_Skip": [
     "Skip_Finish_Water ,0"
+   ],
+   "2000019_Skill_5": [
+    "2000019_Skill_4_1,346",
+    "2000019_Skill_4_2,20",
+    "2000019_Skill_4_3,-5",
+    "2000019_Skill_4_4,335"
+   ],
+   "2000019_Skill_6": [
+    "2000019_Skill_5_1,0",
+    "2000019_Skill_5_2,0"
+   ],
+   "2000019_Skill_7": [
+    "2000019_Skill_6_1,45",
+    "2000019_Skill_6_2,45"
    ],
    "2000019_Skill_7_For_Mob1": [
     "2000019_Skill_6_1,45",
@@ -15678,11 +16501,72 @@
    "BattleEntry": [
     "2000019_Battle_Entry"
    ],
+   "BattleResultWin": [
+    "2000019_Battle_Result_Win"
+   ],
+   "Burst1": [
+    "2000019_Skill_2_Upgrade"
+   ],
+   "Burst3": [
+    "2000019_Skill_7"
+   ],
+   "HitBig": [
+    "2000019_Hit_Big"
+   ],
+   "HitDown": [
+    "2000019_Hit_Down"
+   ],
+   "HitFly": [
+    "2000019_Hit_Fly"
+   ],
+   "HitSmall1": [
+    "2000019_Hit_Small_1"
+   ],
+   "HitSmall2": [
+    "2000019_Hit_Small_2"
+   ],
+   "HitUp": [
+    "2000019_Hit_Air_Up"
+   ],
+   "IsAir": [
+    "2000019_Hit_Air_Fall",
+    "2000019_Hit_Air_Landing"
+   ],
+   "IsBackView": [
+    "2000019_Battle_Stand",
+    "2000019_Battle_Turn",
+    "2000019_Battle_Turn_Stand"
+   ],
    "IsBreak": [
+    "2000019_Battle_Stand",
     "2000019_Hit_Loop_Stun"
    ],
+   "IsChainReady": [
+    "2000019_Battle_Turn_Stand",
+    "2000019_Skill_6_Cast"
+   ],
+   "IsDead": [
+    "2000019_Death_1",
+    "2000019_Death_2",
+    "2000019_Hit_Air_Fall"
+   ],
+   "IsRunning": [
+    "2000019_Battle_Run",
+    "2000019_Battle_Stand"
+   ],
    "IsStun": [
+    "2000019_Battle_Stand",
     "2000019_Hit_Stun_Loop"
+   ],
+   "IsTurn": [
+    "2000019_Battle_Stand",
+    "2000019_Battle_Turn"
+   ],
+   "Return": [
+    "2000019_Battle_Return"
+   ],
+   "Skill1": [
+    "2000019_Skill_1"
    ],
    "Skill15": [
     "2000019_Skill_7_For_Mob1"
@@ -15690,29 +16574,153 @@
    "Skill17": [
     "2000019_Skill_7_For_Mob2"
    ],
+   "Skill2": [
+    "2000019_Skill_2"
+   ],
+   "Skill3": [
+    "2000019_Skill_3"
+   ],
    "Skill3Skip": [
     "2000019_Skill_3_Skip"
+   ],
+   "Skill5": [
+    "2000019_Skill_5"
+   ],
+   "Skill6": [
+    "2000019_Skill_6"
+   ],
+   "Skill7": [
+    "2000019_Skill_7"
+   ],
+   "VerticalSpeed": [
+    "2000019_Hit_Air_Fall",
+    "2000019_Hit_Air_Up"
    ]
   }
  },
  "2010022": {
   "clips": {
+   "2000022_Skill_1": [
+    "2000022_Skill_1_1,45",
+    "2000022_Skill_1_2,45"
+   ],
+   "2000022_Skill_1_Upgrade": [
+    "2000022_Skill_1_UP_1,45",
+    "2000022_Skill_1_2,45"
+   ],
+   "2000022_Skill_2": [
+    "2000022_Skill_2_1,45",
+    "2000022_Skill_2_2,45"
+   ],
+   "2000022_Skill_3": [
+    "2000022_Skill_3_1,45",
+    "2000022_Skill_3_2,45"
+   ],
    "2000022_Skill_3_Skip": [
     "Skip_Finish_Earth ,0"
+   ],
+   "2000022_Skill_5": [
+    "2000022_Skill_4_1,45",
+    "2000022_Skill_4_2,45"
+   ],
+   "2000022_Skill_6": [
+    "2000022_Skill_5_1,45",
+    "2000022_Skill_5_2,45"
+   ],
+   "2000022_Skill_7": [
+    "2000022_Skill_6_1,45",
+    "2000022_Skill_6_2,45"
    ]
   },
   "triggers": {
+   "BattleEntry": [
+    "2000022_Battle_Entry"
+   ],
    "BattleResultWin": [
     "2010022_Battle_Result_Win"
    ],
+   "Burst1": [
+    "2000022_Skill_1_Upgrade"
+   ],
+   "HitBig": [
+    "2000022_Hit_Big"
+   ],
+   "HitDown": [
+    "2000022_Hit_Down"
+   ],
+   "HitFly": [
+    "2000022_Hit_Fly"
+   ],
+   "HitSmall1": [
+    "2000022_Hit_Small_1"
+   ],
+   "HitSmall2": [
+    "2000022_Hit_Small_2"
+   ],
+   "HitUp": [
+    "2000022_Hit_Air_Up"
+   ],
+   "IsAir": [
+    "2000022_Hit_Air_Fall",
+    "2000022_Hit_Air_Landing"
+   ],
+   "IsBackView": [
+    "2000022_Battle_Stand",
+    "2000022_Battle_Turn",
+    "2000022_Battle_Turn_Stand"
+   ],
    "IsBreak": [
+    "2000022_Battle_Stand",
     "2000022_Hit_Stun_Loop"
    ],
+   "IsChainReady": [
+    "2000022_Battle_Turn_Stand",
+    "2000022_Skill_6_Cast"
+   ],
+   "IsDead": [
+    "2000022_Death_1",
+    "2000022_Death_2",
+    "2000022_Hit_Air_Fall"
+   ],
+   "IsRunning": [
+    "2000022_Battle_Run",
+    "2000022_Battle_Stand"
+   ],
    "IsStun": [
+    "2000022_Battle_Stand",
     "2000022_Hit_Stun_Loop"
+   ],
+   "IsTurn": [
+    "2000022_Battle_Stand",
+    "2000022_Battle_Turn"
+   ],
+   "Return": [
+    "2000022_Battle_Return"
+   ],
+   "Skill1": [
+    "2000022_Skill_1"
+   ],
+   "Skill2": [
+    "2000022_Skill_2"
+   ],
+   "Skill3": [
+    "2000022_Skill_3"
    ],
    "Skill3Skip": [
     "2000022_Skill_3_Skip"
+   ],
+   "Skill5": [
+    "2000022_Skill_5"
+   ],
+   "Skill6": [
+    "2000022_Skill_6"
+   ],
+   "Skill7": [
+    "2000022_Skill_7"
+   ],
+   "VerticalSpeed": [
+    "2000022_Hit_Air_Fall",
+    "2000022_Hit_Air_Up"
    ]
   }
  },
@@ -15781,6 +16789,7 @@
    ],
    "IsDead": [
     "2010023_Death_1",
+    "2010023_Death_2",
     "2010023_Hit_Air_Fall"
    ],
    "IsRunning": [
@@ -15794,6 +16803,9 @@
    "IsTurn": [
     "2010023_Battle_Stand",
     "2010023_Battle_Turn"
+   ],
+   "Return": [
+    "2010023_Battle_Return"
    ],
    "Skill1": [
     "2010023_Skill_1"
@@ -15824,42 +16836,267 @@
  },
  "2010025": {
   "clips": {
+   "2010025_Skill_1": [
+    "2000025_Skill_1_1,0",
+    "2000025_Skill_1_2,350",
+    "2000025_Skill_1_3,355"
+   ],
+   "2010025_Skill_2": [
+    "2000025_Skill_2_1,0",
+    "2000025_Skill_2_2,45",
+    "2000025_Skill_2_3,-28.8"
+   ],
+   "2010025_Skill_2_Upgrade": [
+    "2000025_Skill_2_1,0",
+    "2000025_Skill_2_2,45",
+    "2000025_Skill_2_3,45"
+   ],
+   "2010025_Skill_3": [
+    "2000025_Skill_3_1,45",
+    "2000025_Skill_3_2,45"
+   ],
    "2010025_Skill_3_Skip": [
     "Skip_Finish_Water ,0"
+   ],
+   "2010025_Skill_5": [
+    "2000025_Skill_5_1,25"
+   ],
+   "2010025_Skill_6": [
+    "2000025_Skill_6_1,75",
+    "2000025_Skill_6_2,200.4"
+   ],
+   "2010025_Skill_7": [
+    "2000025_Skill_2_Burst_3_1,45",
+    "2000025_Skill_2_Burst_3_2,45"
    ]
   },
   "triggers": {
+   "BattleEntry": [
+    "2010025_Battle_Entry"
+   ],
+   "BattleResultWin": [
+    "2010025_Battle_Result_Win"
+   ],
+   "Burst1": [
+    "2010025_Skill_2_Upgrade"
+   ],
+   "Burst3": [
+    "2010025_Skill_7"
+   ],
+   "HitBig": [
+    "2010025_Hit_Big"
+   ],
+   "HitDown": [
+    "2010025_Hit_Down"
+   ],
+   "HitFly": [
+    "2010025_Hit_Fly"
+   ],
+   "HitSmall1": [
+    "2010025_Hit_Small_1"
+   ],
+   "HitSmall2": [
+    "2010025_Hit_Small_2"
+   ],
+   "HitUp": [
+    "2010025_Hit_Air_Up"
+   ],
+   "IsAir": [
+    "2010025_Hit_Air_Fall",
+    "2010025_Hit_Air_Landing"
+   ],
+   "IsBackView": [
+    "2010025_Battle_Stand",
+    "2010025_Battle_Turn",
+    "2010025_Battle_Turn_Stand"
+   ],
    "IsBreak": [
+    "2010025_Battle_Stand",
     "2010025_Hit_Stun_Loop"
    ],
+   "IsChainReady": [
+    "2010025_Battle_Turn_Stand",
+    "2010025_Skill_6_Cast"
+   ],
+   "IsDead": [
+    "2010025_Death_1",
+    "2010025_Death_2",
+    "2010025_Hit_Air_Fall"
+   ],
+   "IsRunning": [
+    "2010025_Battle_Run",
+    "2010025_Battle_Stand"
+   ],
    "IsStun": [
+    "2010025_Battle_Stand",
     "2010025_Hit_Stun_Loop"
+   ],
+   "IsTurn": [
+    "2010025_Battle_Stand",
+    "2010025_Battle_Turn"
+   ],
+   "Return": [
+    "2010025_Battle_Return"
+   ],
+   "Skill1": [
+    "2010025_Skill_1"
+   ],
+   "Skill2": [
+    "2010025_Skill_2"
+   ],
+   "Skill3": [
+    "2010025_Skill_3"
    ],
    "Skill3Skip": [
     "2010025_Skill_3_Skip"
+   ],
+   "Skill5": [
+    "2010025_Skill_5"
+   ],
+   "Skill6": [
+    "2010025_Skill_6"
+   ],
+   "VerticalSpeed": [
+    "2010025_Hit_Air_Fall",
+    "2010025_Hit_Air_Up"
    ]
   }
  },
  "2010035": {
   "clips": {
+   "2010035_Skill_1": [
+    "2000035_Skill_1_1,24",
+    "2000035_Skill_1_2,0"
+   ],
+   "2010035_Skill_2": [
+    "2000035_Skill_2_1,0",
+    "2000035_Skill_2_2,0",
+    "2000035_Skill_2_3,0"
+   ],
+   "2010035_Skill_2_Upgrade": [
+    "2000035_Skill_2_1,0",
+    "2000035_Skill_2_2,0",
+    "2000035_Skill_2_3,0"
+   ],
+   "2010035_Skill_3": [
+    "2000035_Skill_3_1,0",
+    "2000035_Skill_3_2,315",
+    "2000035_Skill_3_3,225",
+    "2000035_Skill_3_4,315"
+   ],
    "2010035_Skill_3_Skip": [
     "Skip_Finish_Dark ,0"
+   ],
+   "2010035_Skill_5": [
+    "2000035_Skill_5_1,24",
+    "2000035_Skill_5_2,12"
+   ],
+   "2010035_Skill_6": [
+    "2000035_Skill_6_1,45",
+    "2000035_Skill_6_2,45"
+   ],
+   "2010035_Skill_7": [
+    "2000035_Skill_Burst_3_1,4.8",
+    "2000035_Skill_Burst_3_2,0"
    ]
   },
   "triggers": {
+   "BattleEntry": [
+    "2010035_Battle_Entry"
+   ],
+   "BattleResultWin": [
+    "2010035_Battle_Result_Win"
+   ],
+   "Burst1": [
+    "2010035_Skill_2_Upgrade"
+   ],
+   "Burst3": [
+    "2010035_Skill_7"
+   ],
+   "HitBig": [
+    "2010035_Hit_Big"
+   ],
+   "HitDown": [
+    "2010035_Hit_Down"
+   ],
+   "HitFly": [
+    "2010035_Hit_Fly"
+   ],
+   "HitSmall1": [
+    "2010035_Hit_Small_1"
+   ],
+   "HitSmall2": [
+    "2010035_Hit_Small_2"
+   ],
+   "HitUp": [
+    "2010035_Hit_Air_Up"
+   ],
+   "IsAir": [
+    "2010035_Hit_Air_Fall",
+    "2010035_Hit_Air_Landing"
+   ],
+   "IsBackView": [
+    "2010035_Battle_Stand",
+    "2010035_Battle_Turn",
+    "2010035_Battle_Turn_Stand"
+   ],
    "IsBreak": [
+    "2010035_Battle_Stand",
     "2010035_Hit_Stun_Loop"
    ],
+   "IsChainReady": [
+    "2010035_Battle_Turn_Stand",
+    "2010035_Skill_6_Cast"
+   ],
+   "IsDead": [
+    "2010035_Death_1",
+    "2010035_Death_2",
+    "2010035_Hit_Air_Fall"
+   ],
+   "IsRunning": [
+    "2010035_Battle_Run",
+    "2010035_Battle_Stand"
+   ],
    "IsStun": [
+    "2010035_Battle_Stand",
     "2010035_Hit_Stun_Loop"
+   ],
+   "IsTurn": [
+    "2010035_Battle_Stand",
+    "2010035_Battle_Turn"
+   ],
+   "Return": [
+    "2010035_Battle_Return"
+   ],
+   "Skill1": [
+    "2010035_Skill_1"
+   ],
+   "Skill2": [
+    "2010035_Skill_2"
+   ],
+   "Skill3": [
+    "2010035_Skill_3"
    ],
    "Skill3Skip": [
     "2010035_Skill_3_Skip"
+   ],
+   "Skill5": [
+    "2010035_Skill_5"
+   ],
+   "Skill6": [
+    "2010035_Skill_6"
+   ],
+   "VerticalSpeed": [
+    "2010035_Hit_Air_Fall",
+    "2010035_Hit_Air_Up"
    ]
   }
  },
  "2010037": {
   "clips": {
+   "2000037_Skill_3": [
+    "2000037_Skill_3,45"
+   ],
    "2010037_Skill_1": [
     "2000037_Skill_1_1,330",
     "2000037_Skill_1_2,303",
@@ -15898,23 +17135,78 @@
    ]
   },
   "triggers": {
+   "BattleEntry": [
+    "2000037_Battle_Entry"
+   ],
    "BattleResultWin": [
     "2010037_Battle_Result_Win"
    ],
    "Burst1": [
     "2010037_Skill_1_Upgrade"
    ],
+   "HitBig": [
+    "2000037_Hit_Big"
+   ],
+   "HitDown": [
+    "2000037_Hit_Down"
+   ],
+   "HitFly": [
+    "2000037_Hit_Fly"
+   ],
+   "HitSmall1": [
+    "2000037_Hit_Small_1"
+   ],
+   "HitSmall2": [
+    "2000037_Hit_Small_2"
+   ],
+   "HitUp": [
+    "2000037_Hit_Air_Up"
+   ],
+   "IsAir": [
+    "2000037_Hit_Air_Fall",
+    "2000037_Hit_Air_Landing"
+   ],
+   "IsBackView": [
+    "2000037_Battle_Stand",
+    "2000037_Battle_Turn",
+    "2000037_Battle_Turn_Stand"
+   ],
    "IsBreak": [
+    "2000037_Battle_Stand",
     "2000037_Hit_Stun_Loop"
    ],
+   "IsChainReady": [
+    "2000037_Battle_Turn_Stand",
+    "2000037_Skill_6_Cast"
+   ],
+   "IsDead": [
+    "2000037_Death_1",
+    "2000037_Death_2",
+    "2000037_Hit_Air_Fall"
+   ],
+   "IsRunning": [
+    "2000037_Battle_Run",
+    "2000037_Battle_Stand"
+   ],
    "IsStun": [
+    "2000037_Battle_Stand",
     "2000037_Hit_Stun_Loop"
+   ],
+   "IsTurn": [
+    "2000037_Battle_Stand",
+    "2000037_Battle_Turn"
+   ],
+   "Return": [
+    "2000037_Battle_Return"
    ],
    "Skill1": [
     "2010037_Skill_1"
    ],
    "Skill11": [
     "2010037_Skill_7_for_tower"
+   ],
+   "Skill3": [
+    "2000037_Skill_3"
    ],
    "Skill3Skip": [
     "2010037_Skill_3_Skip"
@@ -15927,6 +17219,10 @@
    ],
    "Skill7": [
     "2010037_Skill_7"
+   ],
+   "VerticalSpeed": [
+    "2000037_Hit_Air_Fall",
+    "2000037_Hit_Air_Up"
    ]
   }
  },
@@ -16064,29 +17360,167 @@
  },
  "2010043": {
   "clips": {
+   "2010043_Skill_1": [
+    "2000043_Skill_1_1,0",
+    "2000043_Skill_1_2,-204",
+    "2000043_Skill_1_3,-24"
+   ],
+   "2010043_Skill_2": [
+    "2000043_Skill_2_1,0",
+    "2000043_Skill_2_2,-145"
+   ],
+   "2010043_Skill_2_Upgrade": [
+    "2000043_Skill_2_1,0",
+    "2000043_Skill_2_2,-145"
+   ],
+   "2010043_Skill_3": [
+    "2000043_Skill_3_1,0",
+    "2000043_Skill_3_2,0",
+    "2000043_Skill_3_3,0",
+    "2000043_Skill_3_4,0"
+   ],
    "2010043_Skill_3_Skip": [
     "Skip_Finish_Fire ,0"
+   ],
+   "2010043_Skill_5": [
+    "2000043_Skill_5_1,0",
+    "2000043_Skill_5_2,-145"
+   ],
+   "2010043_Skill_6": [
+    "2000043_Skill_6_1,0",
+    "2000043_Skill_6_2,0",
+    "2000043_Skill_6_3,0"
+   ],
+   "2010043_Skill_7": [
+    "2000043_Skill_2_Burst_3_1,-106.709"
    ]
   },
   "triggers": {
+   "BattleEntry": [
+    "2010043_Battle_Entry"
+   ],
+   "BattleResultWin": [
+    "2010043_Battle_Result_Win"
+   ],
+   "Burst1": [
+    "2010043_Skill_2_Upgrade"
+   ],
+   "Burst3": [
+    "2010043_Skill_7"
+   ],
+   "HitBig": [
+    "2010043_Hit_Big"
+   ],
+   "HitDown": [
+    "2010043_Hit_Down"
+   ],
+   "HitFly": [
+    "2010043_Hit_Fly"
+   ],
+   "HitSmall1": [
+    "2010043_Hit_Small_1"
+   ],
+   "HitSmall2": [
+    "2010043_Hit_Small_2"
+   ],
+   "HitUp": [
+    "2010043_Hit_Air_Up"
+   ],
+   "IsAir": [
+    "2010043_Hit_Air_Fall",
+    "2010043_Hit_Air_Landing"
+   ],
+   "IsBackView": [
+    "2010043_Battle_Stand",
+    "2010043_Battle_Turn",
+    "2010043_Battle_Turn_Stand"
+   ],
    "IsBreak": [
+    "2010043_Battle_Stand",
     "2010043_Hit_Stun_Loop"
+   ],
+   "IsChainReady": [
+    "2010043_Battle_Turn_Stand",
+    "2010043_Skill_6_Cast"
    ],
    "IsDead": [
-    "2010043_Death_1"
+    "2010043_Death_1",
+    "2010043_Death_2",
+    "2010043_Hit_Air_Fall"
+   ],
+   "IsRunning": [
+    "2010043_Battle_Run",
+    "2010043_Battle_Stand"
    ],
    "IsStun": [
+    "2010043_Battle_Stand",
     "2010043_Hit_Stun_Loop"
+   ],
+   "IsTurn": [
+    "2010043_Battle_Stand",
+    "2010043_Battle_Turn"
+   ],
+   "Return": [
+    "2010043_Battle_Return"
+   ],
+   "Skill1": [
+    "2010043_Skill_1"
+   ],
+   "Skill2": [
+    "2010043_Skill_2"
+   ],
+   "Skill3": [
+    "2010043_Skill_3"
    ],
    "Skill3Skip": [
     "2010043_Skill_3_Skip"
+   ],
+   "Skill5": [
+    "2010043_Skill_5"
+   ],
+   "Skill6": [
+    "2010043_Skill_6"
+   ],
+   "VerticalSpeed": [
+    "2010043_Hit_Air_Fall",
+    "2010043_Hit_Air_Up"
    ]
   }
  },
  "2010044": {
   "clips": {
+   "2010044_Skill_1": [
+    "2000044_Skill_1_1,45",
+    "2000044_Skill_1_2,45",
+    "2000044_Skill_1_3,0"
+   ],
+   "2010044_Skill_2": [
+    "2000044_Skill_2_1,45",
+    "2000044_Skill_2_2,45",
+    "2000044_Skill_2_3,180"
+   ],
+   "2010044_Skill_2_Upgrade": [
+    "2000044_Skill_2_1,0",
+    "2000044_Skill_2_2,0",
+    "2000044_Skill_2_3,0"
+   ],
+   "2010044_Skill_3": [
+    "2000044_Skill_3_1,45",
+    "2000044_Skill_3_2,0"
+   ],
    "2010044_Skill_3_Skip": [
     "Skip_Finish_Water ,0"
+   ],
+   "2010044_Skill_5": [
+    "2000044_Skill_5_1,45",
+    "2000044_Skill_5_2,45"
+   ],
+   "2010044_Skill_6": [
+    "2000044_Skill_6_1,45",
+    "2000044_Skill_6_2,45"
+   ],
+   "2010044_Skill_7": [
+    "2000044_Skill_7_1,45"
    ],
    "2010044_Skill_7_For_Mob": [
     "2000044_Skill_7_1,45"
@@ -16096,32 +17530,223 @@
    "BattleEntry": [
     "2010044_Battle_Entry"
    ],
+   "BattleResultWin": [
+    "2010044_Battle_Result_Win"
+   ],
+   "Burst1": [
+    "2010044_Skill_2_Upgrade"
+   ],
+   "HitBig": [
+    "2010044_Hit_Big"
+   ],
+   "HitDown": [
+    "2010044_Hit_Down"
+   ],
    "HitFly": [
     "2010044_Hit_Fly"
    ],
+   "HitSmall1": [
+    "2010044_Hit_Small_1"
+   ],
+   "HitSmall2": [
+    "2010044_Hit_Small_2"
+   ],
+   "HitUp": [
+    "2010044_Hit_Air_Up"
+   ],
+   "IsAir": [
+    "2010044_Hit_Air_Fall",
+    "2010044_Hit_Air_Landing"
+   ],
+   "IsBackView": [
+    "2010044_Battle_Stand",
+    "2010044_Battle_Turn",
+    "2010044_Battle_Turn_Stand"
+   ],
    "IsBreak": [
-    "2000044_Hit_Stun_Loop"
+    "2000044_Hit_Stun_Loop",
+    "2010044_Battle_Stand"
+   ],
+   "IsChainReady": [
+    "2010044_Battle_Turn_Stand",
+    "2010044_Skill_6_Cast"
+   ],
+   "IsDead": [
+    "2010044_Death_1",
+    "2010044_Death_2",
+    "2010044_Hit_Air_Fall"
+   ],
+   "IsRunning": [
+    "2010044_Battle_Run",
+    "2010044_Battle_Stand"
    ],
    "IsStun": [
+    "2010044_Battle_Stand",
     "2010044_Hit_Stun_Loop"
+   ],
+   "IsTurn": [
+    "2010044_Battle_Stand",
+    "2010044_Battle_Turn"
+   ],
+   "Return": [
+    "2010044_Battle_Return"
+   ],
+   "Skill1": [
+    "2010044_Skill_1"
+   ],
+   "Skill2": [
+    "2010044_Skill_2"
+   ],
+   "Skill3": [
+    "2010044_Skill_3"
    ],
    "Skill3Skip": [
     "2010044_Skill_3_Skip"
    ],
+   "Skill5": [
+    "2010044_Skill_5"
+   ],
+   "Skill6": [
+    "2010044_Skill_6"
+   ],
+   "Skill7": [
+    "2010044_Skill_7"
+   ],
    "Skill7_Mob": [
     "2010044_Skill_7_For_Mob"
+   ],
+   "VerticalSpeed": [
+    "2010044_Hit_Air_Fall",
+    "2010044_Hit_Air_Up"
    ]
   }
  },
  "2010053": {
   "clips": {
+   "2010053_Skill_1": [
+    "2000053_Skill_1_1,-25",
+    "2000053_Skill_1_2,22",
+    "2000053_Skill_1_3,0"
+   ],
+   "2010053_Skill_1_Upgrade": [
+    "2000053_Skill_1_1,-25",
+    "2000053_Skill_1_2,22",
+    "2000053_Skill_1_3,0"
+   ],
+   "2010053_Skill_2": [
+    "2000053_Skill_2_1,-30",
+    "2000053_Skill_2_2,0",
+    "2000053_Skill_2_3,0"
+   ],
+   "2010053_Skill_3": [
+    "2000053_Skill_3_1,45",
+    "2000053_Skill_3_2,0",
+    "2000053_Skill_3_3,0"
+   ],
    "2010053_Skill_3_Skip": [
     "Skip_Finish_Light ,0"
+   ],
+   "2010053_Skill_5": [
+    "2000053_Skill_5_1,0",
+    "2000053_Skill_5_2,0"
+   ],
+   "2010053_Skill_6": [
+    "2000053_Skill_6_1,0"
+   ],
+   "2010053_Skill_7": [
+    "2000053_Skill_7_1,0",
+    "2000053_Skill_7_2,0"
    ]
   },
   "triggers": {
+   "BattleEntry": [
+    "2010053_Battle_Entry"
+   ],
+   "BattleResultWin": [
+    "2010053_Battle_Result_Win"
+   ],
+   "Burst1": [
+    "2010053_Skill_1_Upgrade"
+   ],
+   "HitBig": [
+    "2010053_Hit_Big"
+   ],
+   "HitDown": [
+    "2010053_Hit_Down"
+   ],
+   "HitFly": [
+    "2010053_Hit_Fly"
+   ],
+   "HitSmall1": [
+    "2010053_Hit_Small_1"
+   ],
+   "HitSmall2": [
+    "2010053_Hit_Small_2"
+   ],
+   "HitUp": [
+    "2010053_Hit_Air_Up"
+   ],
+   "IsAir": [
+    "2010053_Hit_Air_Fall",
+    "2010053_Hit_Air_Landing"
+   ],
+   "IsBackView": [
+    "2010053_Battle_Stand",
+    "2010053_Battle_Turn",
+    "2010053_Battle_Turn_Stand"
+   ],
+   "IsBreak": [
+    "2010053_Battle_Stand",
+    "2010053_Hit_Stun_Loop"
+   ],
+   "IsChainReady": [
+    "2010053_Battle_Turn_Stand",
+    "2010053_Skill_6_Cast"
+   ],
+   "IsDead": [
+    "2010053_Death_1",
+    "2010053_Death_2",
+    "2010053_Hit_Air_Fall"
+   ],
+   "IsRunning": [
+    "2010053_Battle_Run",
+    "2010053_Battle_Stand"
+   ],
+   "IsStun": [
+    "2010053_Battle_Stand",
+    "2010053_Hit_Stun_Loop"
+   ],
+   "IsTurn": [
+    "2010053_Battle_Stand",
+    "2010053_Battle_Turn"
+   ],
+   "Return": [
+    "2010053_Battle_Return"
+   ],
+   "Skill1": [
+    "2010053_Skill_1"
+   ],
+   "Skill2": [
+    "2010053_Skill_2"
+   ],
+   "Skill3": [
+    "2010053_Skill_3"
+   ],
    "Skill3Skip": [
     "2010053_Skill_3_Skip"
+   ],
+   "Skill5": [
+    "2010053_Skill_5"
+   ],
+   "Skill6": [
+    "2010053_Skill_6"
+   ],
+   "Skill7": [
+    "2010053_Skill_7"
+   ],
+   "VerticalSpeed": [
+    "2010053_Hit_Air_Fall",
+    "2010053_Hit_Air_Up"
    ]
   }
  },
@@ -16582,6 +18207,9 @@
    "IsTurn": [
     "2000058_Battle_Stand",
     "2000058_Battle_Turn"
+   ],
+   "Return": [
+    "2000058_Battle_Return"
    ],
    "Skill1": [
     "2000058_Skill_1"
@@ -17191,11 +18819,13 @@
     "2010064_Hit_Air_Landing"
    ],
    "IsBackView": [
+    "2010064_Battle_Stand",
     "2010064_Battle_Turn",
     "2010064_Battle_Turn_Stand"
    ],
    "IsBreak": [
-    "2000064_Hit_Stun_Loop"
+    "2000064_Hit_Stun_Loop",
+    "2010064_Battle_Stand"
    ],
    "IsChainReady": [
     "2010064_Battle_Turn_Stand",
@@ -17207,12 +18837,15 @@
     "2010064_Hit_Air_Fall"
    ],
    "IsRunning": [
-    "2010064_Battle_Run"
+    "2010064_Battle_Run",
+    "2010064_Battle_Stand"
    ],
    "IsStun": [
+    "2010064_Battle_Stand",
     "2010064_Hit_Stun_Loop"
    ],
    "IsTurn": [
+    "2010064_Battle_Stand",
     "2010064_Battle_Turn"
    ],
    "Return": [
@@ -21524,6 +23157,11 @@
  },
  "2010116": {
   "clips": {
+   "2010116_Skill_1": [
+    "2000116_Skill_1_1,0",
+    "2000116_Skill_1_2,-15",
+    "2000116_Skill_1_3,-15"
+   ],
    "2010116_Skill_1_Burst_1": [
     "2000116_Skill_1_1,0",
     "2000116_Skill_1_2,-15",
@@ -21622,6 +23260,7 @@
     "2010116_Battle_Return"
    ],
    "Skill1": [
+    "2010116_Skill_1",
     "2010116_Skill_1_Cast"
    ],
    "Skill2": [
@@ -22769,8 +24408,41 @@
  },
  "2020019": {
   "clips": {
+   "2020019_Skill_1": [
+    "2000019_Skill_1_1,-15",
+    "2000019_Skill_1_2,15",
+    "2000019_Skill_1_3,-15",
+    "2000019_Skill_1_4,0"
+   ],
+   "2020019_Skill_2": [
+    "2000019_Skill_2_1,5",
+    "2000019_Skill_2_2,180.9"
+   ],
+   "2020019_Skill_2_Upgrade": [
+    "2000019_Skill_2_1_Upgrade,0",
+    "2000019_Skill_2_2_Upgrade,-30"
+   ],
+   "2020019_Skill_3": [
+    "2000019_Skill_3_1,0",
+    "2000019_Skill_3_2,45",
+    "2000019_Skill_3_3,45"
+   ],
    "2020019_Skill_3_Skip": [
     "Skip_Finish_Water ,0"
+   ],
+   "2020019_Skill_5": [
+    "2000019_Skill_4_1,346",
+    "2000019_Skill_4_2,20",
+    "2000019_Skill_4_3,-5",
+    "2000019_Skill_4_4,335"
+   ],
+   "2020019_Skill_6": [
+    "2000019_Skill_5_1,0",
+    "2000019_Skill_5_2,0"
+   ],
+   "2020019_Skill_7": [
+    "2000019_Skill_6_1,45",
+    "2000019_Skill_6_2,45"
    ],
    "2020019_Skill_7_For_Mob1": [
     "2000019_Skill_6_1,45",
@@ -22785,11 +24457,72 @@
    "BattleEntry": [
     "2020019_Battle_Entry"
    ],
+   "BattleResultWin": [
+    "2020019_Battle_Result_Win"
+   ],
+   "Burst1": [
+    "2020019_Skill_2_Upgrade"
+   ],
+   "Burst3": [
+    "2020019_Skill_7"
+   ],
+   "HitBig": [
+    "2020019_Hit_Big"
+   ],
+   "HitDown": [
+    "2020019_Hit_Down"
+   ],
+   "HitFly": [
+    "2020019_Hit_Fly"
+   ],
+   "HitSmall1": [
+    "2020019_Hit_Small_1"
+   ],
+   "HitSmall2": [
+    "2020019_Hit_Small_2"
+   ],
+   "HitUp": [
+    "2020019_Hit_Air_Up"
+   ],
+   "IsAir": [
+    "2020019_Hit_Air_Fall",
+    "2020019_Hit_Air_Landing"
+   ],
+   "IsBackView": [
+    "2020019_Battle_Stand",
+    "2020019_Battle_Turn",
+    "2020019_Battle_Turn_Stand"
+   ],
    "IsBreak": [
+    "2020019_Battle_Stand",
     "2020019_Hit_Loop_Stun"
    ],
+   "IsChainReady": [
+    "2020019_Battle_Turn_Stand",
+    "2020019_Skill_6_Cast"
+   ],
+   "IsDead": [
+    "2020019_Death_1",
+    "2020019_Death_2",
+    "2020019_Hit_Air_Fall"
+   ],
+   "IsRunning": [
+    "2020019_Battle_Run",
+    "2020019_Battle_Stand"
+   ],
    "IsStun": [
+    "2020019_Battle_Stand",
     "2020019_Hit_Stun_Loop"
+   ],
+   "IsTurn": [
+    "2020019_Battle_Stand",
+    "2020019_Battle_Turn"
+   ],
+   "Return": [
+    "2020019_Battle_Return"
+   ],
+   "Skill1": [
+    "2020019_Skill_1"
    ],
    "Skill15": [
     "2020019_Skill_7_For_Mob1"
@@ -22797,65 +24530,414 @@
    "Skill17": [
     "2020019_Skill_7_For_Mob2"
    ],
+   "Skill2": [
+    "2020019_Skill_2"
+   ],
+   "Skill3": [
+    "2020019_Skill_3"
+   ],
    "Skill3Skip": [
     "2020019_Skill_3_Skip"
+   ],
+   "Skill5": [
+    "2020019_Skill_5"
+   ],
+   "Skill6": [
+    "2020019_Skill_6"
+   ],
+   "Skill7": [
+    "2020019_Skill_7"
+   ],
+   "VerticalSpeed": [
+    "2020019_Hit_Air_Fall",
+    "2020019_Hit_Air_Up"
    ]
   }
  },
  "2020022": {
   "clips": {
+   "2000022_Skill_3": [
+    "2000022_Skill_3_1,45",
+    "2000022_Skill_3_2,45"
+   ],
+   "2020022_Skill_1": [
+    "2000022_Skill_1_1,45",
+    "2000022_Skill_1_2,45"
+   ],
+   "2020022_Skill_1_Upgrade": [
+    "2000022_Skill_1_UP_1,45",
+    "2000022_Skill_1_2,45"
+   ],
+   "2020022_Skill_2": [
+    "2000022_Skill_2_1,45",
+    "2000022_Skill_2_2,45"
+   ],
    "2020022_Skill_3_Skip": [
     "Skip_Finish_Earth ,0"
+   ],
+   "2020022_Skill_5": [
+    "2000022_Skill_4_1,45",
+    "2000022_Skill_4_2,45"
+   ],
+   "2020022_Skill_6": [
+    "2000022_Skill_5_1,45",
+    "2000022_Skill_5_2,45"
+   ],
+   "2020022_Skill_7": [
+    "2000022_Skill_6_1,45",
+    "2000022_Skill_6_2,45"
    ]
   },
   "triggers": {
+   "BattleEntry": [
+    "2020022_Battle_Entry"
+   ],
+   "BattleResultWin": [
+    "2000022_Battle_Result_Win"
+   ],
+   "Burst1": [
+    "2020022_Skill_1_Upgrade"
+   ],
+   "HitBig": [
+    "2020022_Hit_Big"
+   ],
+   "HitDown": [
+    "2020022_Hit_Down"
+   ],
+   "HitFly": [
+    "2020022_Hit_Fly"
+   ],
+   "HitSmall1": [
+    "2020022_Hit_Small_1"
+   ],
+   "HitSmall2": [
+    "2020022_Hit_Small_2"
+   ],
+   "HitUp": [
+    "2020022_Hit_Air_Up"
+   ],
+   "IsAir": [
+    "2020022_Hit_Air_Fall",
+    "2020022_Hit_Air_Landing"
+   ],
+   "IsBackView": [
+    "2020022_Battle_Stand",
+    "2020022_Battle_Turn",
+    "2020022_Battle_Turn_Stand"
+   ],
    "IsBreak": [
+    "2020022_Battle_Stand",
     "2020022_Hit_Stun_Loop"
    ],
+   "IsChainReady": [
+    "2020022_Battle_Turn_Stand",
+    "2020022_Skill_6_Cast"
+   ],
+   "IsDead": [
+    "2000022_Death_2",
+    "2020022_Death_1",
+    "2020022_Hit_Air_Fall"
+   ],
+   "IsRunning": [
+    "2000022_Battle_Run",
+    "2020022_Battle_Stand"
+   ],
    "IsStun": [
+    "2020022_Battle_Stand",
     "2020022_Hit_Stun_Loop"
+   ],
+   "IsTurn": [
+    "2020022_Battle_Stand",
+    "2020022_Battle_Turn"
+   ],
+   "Return": [
+    "2020022_Battle_Return"
+   ],
+   "Skill1": [
+    "2020022_Skill_1"
+   ],
+   "Skill2": [
+    "2020022_Skill_2"
+   ],
+   "Skill3": [
+    "2000022_Skill_3"
    ],
    "Skill3Skip": [
     "2020022_Skill_3_Skip"
+   ],
+   "Skill5": [
+    "2020022_Skill_5"
+   ],
+   "Skill6": [
+    "2020022_Skill_6"
+   ],
+   "Skill7": [
+    "2020022_Skill_7"
+   ],
+   "VerticalSpeed": [
+    "2020022_Hit_Air_Fall",
+    "2020022_Hit_Air_Up"
    ]
   }
  },
  "2020025": {
   "clips": {
+   "2000025_Skill_1": [
+    "2000025_Skill_1_1,0",
+    "2000025_Skill_1_2,350",
+    "2000025_Skill_1_3,355"
+   ],
+   "2000025_Skill_2": [
+    "2000025_Skill_2_1,0",
+    "2000025_Skill_2_2,45",
+    "2000025_Skill_2_3,-28.8"
+   ],
+   "2000025_Skill_2_Upgrade": [
+    "2000025_Skill_2_1,0",
+    "2000025_Skill_2_2,45",
+    "2000025_Skill_2_3,45"
+   ],
+   "2000025_Skill_3": [
+    "2000025_Skill_3_1,45",
+    "2000025_Skill_3_2,45"
+   ],
    "2000025_Skill_3_Skip": [
     "Skip_Finish_Water ,0"
+   ],
+   "2000025_Skill_5": [
+    "2000025_Skill_5_1,25"
+   ],
+   "2000025_Skill_6": [
+    "2000025_Skill_6_1,75",
+    "2000025_Skill_6_2,200.4"
+   ],
+   "2000025_Skill_7": [
+    "2000025_Skill_2_Burst_3_1,45",
+    "2000025_Skill_2_Burst_3_2,45"
    ]
   },
   "triggers": {
+   "BattleEntry": [
+    "2000025_Battle_Entry"
+   ],
+   "BattleResultWin": [
+    "2000025_Battle_Result_Win"
+   ],
+   "Burst1": [
+    "2000025_Skill_2_Upgrade"
+   ],
+   "Burst3": [
+    "2000025_Skill_7"
+   ],
+   "HitBig": [
+    "2000025_Hit_Big"
+   ],
+   "HitDown": [
+    "2000025_Hit_Down"
+   ],
+   "HitFly": [
+    "2000025_Hit_Fly"
+   ],
+   "HitSmall1": [
+    "2000025_Hit_Small_1"
+   ],
+   "HitSmall2": [
+    "2000025_Hit_Small_2"
+   ],
+   "HitUp": [
+    "2000025_Hit_Air_Up"
+   ],
+   "IsAir": [
+    "2000025_Hit_Air_Fall",
+    "2000025_Hit_Air_Landing"
+   ],
+   "IsBackView": [
+    "2000025_Battle_Stand",
+    "2000025_Battle_Turn",
+    "2000025_Battle_Turn_Stand"
+   ],
    "IsBreak": [
+    "2000025_Battle_Stand",
     "2000025_Hit_Stun_Loop"
    ],
+   "IsChainReady": [
+    "2000025_Battle_Turn_Stand",
+    "2000025_Skill_6_Cast"
+   ],
+   "IsDead": [
+    "2000025_Death_1",
+    "2000025_Death_2",
+    "2000025_Hit_Air_Fall"
+   ],
+   "IsRunning": [
+    "2000025_Battle_Run",
+    "2000025_Battle_Stand"
+   ],
    "IsStun": [
+    "2000025_Battle_Stand",
     "2000025_Hit_Stun_Loop"
+   ],
+   "IsTurn": [
+    "2000025_Battle_Stand",
+    "2000025_Battle_Turn"
+   ],
+   "Return": [
+    "2000025_Battle_Return"
+   ],
+   "Skill1": [
+    "2000025_Skill_1"
+   ],
+   "Skill2": [
+    "2000025_Skill_2"
+   ],
+   "Skill3": [
+    "2000025_Skill_3"
    ],
    "Skill3Skip": [
     "2000025_Skill_3_Skip"
+   ],
+   "Skill5": [
+    "2000025_Skill_5"
+   ],
+   "Skill6": [
+    "2000025_Skill_6"
+   ],
+   "VerticalSpeed": [
+    "2000025_Hit_Air_Fall",
+    "2000025_Hit_Air_Up"
    ]
   }
  },
  "2020037": {
   "clips": {
+   "2000037_Skill_7_For_Mob": [
+    "2000037_Skill_6_1,120",
+    "2000037_Skill_6_2,45",
+    "2000037_Skill_6_3,45"
+   ],
+   "2020037_Skill_1": [
+    "2000037_Skill_1_1,330",
+    "2000037_Skill_1_2,303",
+    "2000037_Skill_1_3,303",
+    "2000037_Skill_1_4,0"
+   ],
+   "2020037_Skill_1_Upgrade": [
+    "2000037_Skill_1_1,330",
+    "2000037_Skill_1_2,303",
+    "2000037_Skill_1_3,303",
+    "2000037_Skill_1_4,45"
+   ],
+   "2020037_Skill_3": [
+    "2000037_Skill_3,45"
+   ],
    "2020037_Skill_3_Skip": [
     "Skip_Finish_Water ,0"
+   ],
+   "2020037_Skill_5": [
+    "2000037_Skill_4_1,0",
+    "2000037_Skill_4_2,0"
+   ],
+   "2020037_Skill_6": [
+    "2000037_Skill_5_1,310",
+    "2000037_Skill_5_2,45",
+    "2000037_Skill_5_3,45"
+   ],
+   "2020037_Skill_7": [
+    "2000037_Skill_6_1,250",
+    "2000037_Skill_6_2,45",
+    "2000037_Skill_6_3,0",
+    "2000037_Skill_6_4,45"
    ]
   },
   "triggers": {
+   "BattleEntry": [
+    "2020037_Battle_Entry"
+   ],
+   "BattleResultWin": [
+    "2020037_Battle_Result_Win"
+   ],
+   "Burst1": [
+    "2020037_Skill_1_Upgrade"
+   ],
+   "HitBig": [
+    "2020037_Hit_Big"
+   ],
+   "HitDown": [
+    "2020037_Hit_Down"
+   ],
+   "HitFly": [
+    "2020037_Hit_Fly"
+   ],
+   "HitSmall1": [
+    "2020037_Hit_Small_1"
+   ],
+   "HitSmall2": [
+    "2020037_Hit_Small_2"
+   ],
+   "HitUp": [
+    "2020037_Hit_Air_Up"
+   ],
+   "IsAir": [
+    "2020037_Hit_Air_Fall",
+    "2020037_Hit_Air_Landing"
+   ],
+   "IsBackView": [
+    "2020037_Battle_Stand",
+    "2020037_Battle_Turn",
+    "2020037_Battle_Turn_Stand"
+   ],
    "IsBreak": [
+    "2020037_Battle_Stand",
     "2020037_Hit_Stun_Loop"
+   ],
+   "IsChainReady": [
+    "2020037_Battle_Turn_Stand",
+    "2020037_Skill_6_Cast"
    ],
    "IsDead": [
-    "2020037_Death_1"
+    "2020037_Death_1",
+    "2020037_Death_2",
+    "2020037_Hit_Air_Fall"
+   ],
+   "IsRunning": [
+    "2020037_Battle_Run",
+    "2020037_Battle_Stand"
    ],
    "IsStun": [
+    "2020037_Battle_Stand",
     "2020037_Hit_Stun_Loop"
+   ],
+   "IsTurn": [
+    "2020037_Battle_Stand",
+    "2020037_Battle_Turn"
+   ],
+   "Return": [
+    "2020037_Battle_Return"
+   ],
+   "Skill1": [
+    "2020037_Skill_1"
+   ],
+   "Skill11": [
+    "2000037_Skill_7_For_Mob"
+   ],
+   "Skill3": [
+    "2020037_Skill_3"
    ],
    "Skill3Skip": [
     "2020037_Skill_3_Skip"
+   ],
+   "Skill5": [
+    "2020037_Skill_5"
+   ],
+   "Skill6": [
+    "2020037_Skill_6"
+   ],
+   "Skill7": [
+    "2020037_Skill_7"
+   ],
+   "VerticalSpeed": [
+    "2020037_Hit_Air_Fall",
+    "2020037_Hit_Air_Up"
    ]
   }
  },
@@ -22874,6 +24956,12 @@
    ],
    "2000037_Skill_3": [
     "2000037_Skill_3,45"
+   ],
+   "2020037_Skill_7_For_Mob": [
+    "2000037_Skill_6_1,250",
+    "2000037_Skill_6_2,45",
+    "2000037_Skill_6_3,0",
+    "2000037_Skill_6_4,45"
    ]
   },
   "triggers": {
@@ -22927,6 +25015,9 @@
    ],
    "Skill1": [
     "2000037_Skill_1"
+   ],
+   "Skill15": [
+    "2020037_Skill_7_For_Mob"
    ],
    "Skill2": [
     "200003701_Skill_2"
@@ -23529,10 +25620,12 @@
     "2020064_Hit_Air_Landing"
    ],
    "IsBackView": [
+    "2020064_Battle_Stand",
     "2020064_Battle_Turn",
     "2020064_Battle_Turn_Stand"
    ],
    "IsBreak": [
+    "2020064_Battle_Stand",
     "2020064_Hit_Stun_Loop"
    ],
    "IsChainReady": [
@@ -23545,12 +25638,15 @@
     "2020064_Hit_Air_Fall"
    ],
    "IsRunning": [
-    "2020064_Battle_Run"
+    "2020064_Battle_Run",
+    "2020064_Battle_Stand"
    ],
    "IsStun": [
+    "2020064_Battle_Stand",
     "2020064_Hit_Stun_Loop"
    ],
    "IsTurn": [
+    "2020064_Battle_Stand",
     "2020064_Battle_Turn"
    ],
    "Return": [
@@ -25850,26 +27946,163 @@
  },
  "2030012": {
   "clips": {
+   "2000012_Skill_1": [
+    "2000012_Skill_1_1,0"
+   ],
+   "2000012_Skill_1_Upgrade": [
+    "2000012_Skill_1_1,0"
+   ],
+   "2000012_Skill_3": [
+    "2000012_Skill_3_1,45",
+    "2000012_Skill_3_2,45",
+    "2000012_Skill_3_3,45"
+   ],
    "2000012_Skill_3_Skip": [
     "Skip_Finish_Fire ,0"
+   ],
+   "2000012_Skill_5": [
+    "2000012_Skill_4_1,45"
+   ],
+   "2000012_Skill_6": [
+    "2000012_Skill_5_1,180.7",
+    "2000012_Skill_5_2,0"
+   ],
+   "2000012_Skill_7": [
+    "2000012_Skill_6_1,45"
    ]
   },
   "triggers": {
+   "Approach": [
+    "2000012_Battle_Approach"
+   ],
+   "BattleEntry": [
+    "2000012_Battle_Entry"
+   ],
+   "BattleResultWin": [
+    "2000012_Battle_Result_Win"
+   ],
+   "Burst1": [
+    "2000012_Skill_1_Upgrade"
+   ],
+   "HitBig": [
+    "2000012_Hit_Big"
+   ],
+   "HitDown": [
+    "2000012_Hit_Down"
+   ],
+   "HitFly": [
+    "2000012_Hit_Fly"
+   ],
+   "HitSmall1": [
+    "2000012_Hit_Small_01"
+   ],
+   "HitSmall2": [
+    "2000012_Hit_Small_02"
+   ],
+   "HitUp": [
+    "2000012_Hit_Air_Up"
+   ],
+   "IsAir": [
+    "2000012_Hit_Air_Fall",
+    "2000012_Hit_Air_Landing"
+   ],
+   "IsBackView": [
+    "2000012_Battle_Stand",
+    "2000012_Battle_Turn",
+    "2000012_Battle_Turn_Stand"
+   ],
    "IsBreak": [
+    "2000012_Battle_Stand",
     "2000012_Hit_Stun_Loop"
    ],
+   "IsChainReady": [
+    "2000012_Battle_Turn_Stand",
+    "2000012_Skill_6_Cast"
+   ],
+   "IsDead": [
+    "2000012_Death_1",
+    "2000012_Death_2",
+    "2000012_Hit_Air_Fall"
+   ],
+   "IsRunning": [
+    "2000012_Battle_Run",
+    "2000012_Battle_Stand"
+   ],
    "IsStun": [
+    "2000012_Battle_Stand",
     "2000012_Hit_Stun_Loop"
+   ],
+   "IsTurn": [
+    "2000012_Battle_Stand",
+    "2000012_Battle_Turn"
+   ],
+   "Return": [
+    "2000012_Battle_Return"
+   ],
+   "Skill1": [
+    "2000012_Skill_1"
+   ],
+   "Skill2": [
+    "2000012_Skill_2"
+   ],
+   "Skill3": [
+    "2000012_Skill_3"
    ],
    "Skill3Skip": [
     "2000012_Skill_3_Skip"
+   ],
+   "Skill5": [
+    "2000012_Skill_5"
+   ],
+   "Skill6": [
+    "2000012_Skill_6"
+   ],
+   "Skill7": [
+    "2000012_Skill_7"
+   ],
+   "VerticalSpeed": [
+    "2000012_Hit_Air_Fall",
+    "2000012_Hit_Air_Up"
    ]
   }
  },
  "2030019": {
   "clips": {
+   "2030019_Skill_1": [
+    "2000019_Skill_1_1,-15",
+    "2000019_Skill_1_2,15",
+    "2000019_Skill_1_3,-15",
+    "2000019_Skill_1_4,0"
+   ],
+   "2030019_Skill_2": [
+    "2000019_Skill_2_1,5",
+    "2000019_Skill_2_2,180.9"
+   ],
+   "2030019_Skill_2_Upgrade": [
+    "2000019_Skill_2_1_Upgrade,0",
+    "2000019_Skill_2_2_Upgrade,-30"
+   ],
+   "2030019_Skill_3": [
+    "2000019_Skill_3_1,0",
+    "2000019_Skill_3_2,45",
+    "2000019_Skill_3_3,45"
+   ],
    "2030019_Skill_3_Skip": [
     "Skip_Finish_Water ,0"
+   ],
+   "2030019_Skill_5": [
+    "2000019_Skill_4_1,346",
+    "2000019_Skill_4_2,20",
+    "2000019_Skill_4_3,-5",
+    "2000019_Skill_4_4,335"
+   ],
+   "2030019_Skill_6": [
+    "2000019_Skill_5_1,0",
+    "2000019_Skill_5_2,0"
+   ],
+   "2030019_Skill_7": [
+    "2000019_Skill_6_1,45",
+    "2000019_Skill_6_2,45"
    ],
    "2030019_Skill_7_For_Mob1": [
     "2000019_Skill_6_1,45",
@@ -25884,11 +28117,72 @@
    "BattleEntry": [
     "2030019_Battle_Entry"
    ],
+   "BattleResultWin": [
+    "2030019_Battle_Result_Win"
+   ],
+   "Burst1": [
+    "2030019_Skill_2_Upgrade"
+   ],
+   "Burst3": [
+    "2030019_Skill_7"
+   ],
+   "HitBig": [
+    "2030019_Hit_Big"
+   ],
+   "HitDown": [
+    "2030019_Hit_Down"
+   ],
+   "HitFly": [
+    "2030019_Hit_Fly"
+   ],
+   "HitSmall1": [
+    "2030019_Hit_Small_1"
+   ],
+   "HitSmall2": [
+    "2030019_Hit_Small_2"
+   ],
+   "HitUp": [
+    "2030019_Hit_Air_Up"
+   ],
+   "IsAir": [
+    "2030019_Hit_Air_Fall",
+    "2030019_Hit_Air_Landing"
+   ],
+   "IsBackView": [
+    "2030019_Battle_Stand",
+    "2030019_Battle_Turn",
+    "2030019_Battle_Turn_Stand"
+   ],
    "IsBreak": [
+    "2030019_Battle_Stand",
     "2030019_Hit_Stun_Loop"
    ],
+   "IsChainReady": [
+    "2030019_Battle_Turn_Stand",
+    "2030019_Skill_6_Cast"
+   ],
+   "IsDead": [
+    "2030019_Death_1",
+    "2030019_Death_2",
+    "2030019_Hit_Air_Fall"
+   ],
+   "IsRunning": [
+    "2030019_Battle_Run",
+    "2030019_Battle_Stand"
+   ],
    "IsStun": [
+    "2030019_Battle_Stand",
     "2030019_Hit_Stun_Loop"
+   ],
+   "IsTurn": [
+    "2030019_Battle_Stand",
+    "2030019_Battle_Turn"
+   ],
+   "Return": [
+    "2030019_Battle_Return"
+   ],
+   "Skill1": [
+    "2030019_Skill_1"
    ],
    "Skill15": [
     "2030019_Skill_7_For_Mob1"
@@ -25896,26 +28190,152 @@
    "Skill17": [
     "2030019_Skill_7_For_Mob2"
    ],
+   "Skill2": [
+    "2030019_Skill_2"
+   ],
+   "Skill3": [
+    "2030019_Skill_3"
+   ],
    "Skill3Skip": [
     "2030019_Skill_3_Skip"
+   ],
+   "Skill5": [
+    "2030019_Skill_5"
+   ],
+   "Skill6": [
+    "2030019_Skill_6"
+   ],
+   "Skill7": [
+    "2030019_Skill_7"
+   ],
+   "VerticalSpeed": [
+    "2030019_Hit_Air_Fall",
+    "2030019_Hit_Air_Up"
    ]
   }
  },
  "2030037": {
   "clips": {
+   "2030037_Skill_1": [
+    "2000037_Skill_1_1,330",
+    "2000037_Skill_1_2,303",
+    "2000037_Skill_1_3,303",
+    "2000037_Skill_1_4,0"
+   ],
+   "2030037_Skill_1_Upgrade": [
+    "2000037_Skill_1_1,330",
+    "2000037_Skill_1_2,303",
+    "2000037_Skill_1_3,303",
+    "2000037_Skill_1_4,45"
+   ],
+   "2030037_Skill_3": [
+    "2000037_Skill_3,45"
+   ],
    "2030037_Skill_3_Skip": [
     "Skip_Finish_Water ,0"
+   ],
+   "2030037_Skill_5": [
+    "2000037_Skill_4_1,0",
+    "2000037_Skill_4_2,0"
+   ],
+   "2030037_Skill_6": [
+    "2000037_Skill_5_1,310",
+    "2000037_Skill_5_2,45",
+    "2000037_Skill_5_3,45"
+   ],
+   "2030037_Skill_7": [
+    "2000037_Skill_6_1,250",
+    "2000037_Skill_6_2,45",
+    "2000037_Skill_6_3,0",
+    "2000037_Skill_6_4,45"
    ]
   },
   "triggers": {
+   "BattleEntry": [
+    "2030037_Battle_Entry"
+   ],
+   "BattleResultWin": [
+    "2030037_Battle_Result_Win"
+   ],
+   "Burst1": [
+    "2030037_Skill_1_Upgrade"
+   ],
+   "HitBig": [
+    "2030037_Hit_Big"
+   ],
+   "HitDown": [
+    "2030037_Hit_Down"
+   ],
+   "HitFly": [
+    "2030037_Hit_Fly"
+   ],
+   "HitSmall1": [
+    "2030037_Hit_Small_1"
+   ],
+   "HitSmall2": [
+    "2030037_Hit_Small_2"
+   ],
+   "HitUp": [
+    "2030037_Hit_Air_Up"
+   ],
+   "IsAir": [
+    "2030037_Hit_Air_Fall",
+    "2030037_Hit_Air_Landing"
+   ],
+   "IsBackView": [
+    "2030037_Battle_Stand",
+    "2030037_Battle_Turn",
+    "2030037_Battle_Turn_Stand"
+   ],
    "IsBreak": [
+    "2030037_Battle_Stand",
     "2030037_Hit_Stun_Loop"
    ],
+   "IsChainReady": [
+    "2030037_Battle_Turn_Stand",
+    "2030037_Skill_6_Cast"
+   ],
+   "IsDead": [
+    "2030037_Death_1",
+    "2030037_Death_2",
+    "2030037_Hit_Air_Fall"
+   ],
+   "IsRunning": [
+    "2030037_Battle_Run",
+    "2030037_Battle_Stand"
+   ],
    "IsStun": [
+    "2030037_Battle_Stand",
     "2030037_Hit_Stun_Loop"
+   ],
+   "IsTurn": [
+    "2030037_Battle_Stand",
+    "2030037_Battle_Turn"
+   ],
+   "Return": [
+    "2030037_Battle_Return"
+   ],
+   "Skill1": [
+    "2030037_Skill_1"
+   ],
+   "Skill3": [
+    "2030037_Skill_3"
    ],
    "Skill3Skip": [
     "2030037_Skill_3_Skip"
+   ],
+   "Skill5": [
+    "2030037_Skill_5"
+   ],
+   "Skill6": [
+    "2030037_Skill_6"
+   ],
+   "Skill7": [
+    "2030037_Skill_7"
+   ],
+   "VerticalSpeed": [
+    "2030037_Hit_Air_Fall",
+    "2030037_Hit_Air_Up"
    ]
   }
  },
@@ -27383,6 +29803,10 @@
     "2700003_Skill_1_3,0",
     "2700003_Skill_1_4,0"
    ],
+   "2700003_Skill_2": [
+    "2700003_Skill_2_1,0",
+    "2700003_Skill_2_2,0"
+   ],
    "2700003_Skill_2_Upgrade": [
     "2700003_Skill_Burst1_1,0"
    ],
@@ -27482,7 +29906,8 @@
     "2700003_Skill_1"
    ],
    "Skill2": [
-    "2700003_Battle_Approach"
+    "2700003_Battle_Approach",
+    "2700003_Skill_2"
    ],
    "Skill3": [
     "2700003_Skill_3"
@@ -27503,13 +29928,127 @@
   }
  },
  "2700005": {
-  "clips": {},
+  "clips": {
+   "2700005_Skill_1": [
+    "2700005_Skill_1_1,-45"
+   ],
+   "2700005_Skill_2": [
+    "2700005_Skill_2_1,0",
+    "2700005_Skill_2_2,0",
+    "2700005_Skill_2_3,0"
+   ],
+   "2700005_Skill_2_Burst_1": [
+    "2700005_Skill_2_1,0",
+    "2700005_Skill_2_2,0",
+    "2700005_Skill_2_3,0"
+   ],
+   "2700005_Skill_2_Burst_3": [
+    "2700005_Skill_Burst3_1,45"
+   ],
+   "2700005_Skill_3": [
+    "2700005_Skill_3_1,0",
+    "2700005_Skill_3_2,0",
+    "2700005_Skill_3_3,0"
+   ],
+   "2700005_Skill_3_Skip": [
+    "Skip_Finish_Fire ,0"
+   ],
+   "2700005_Skill_5": [
+    "2700005_Skill_5_2,0"
+   ],
+   "2700005_Skill_6": [
+    "2700005_Skill_5_2,0"
+   ]
+  },
   "triggers": {
+   "BattleEntry": [
+    "2700005_Battle_Entry"
+   ],
+   "BattleResultWin": [
+    "2700005_Battle_Result_Win"
+   ],
+   "Burst1": [
+    "2700005_Skill_2_Burst_1"
+   ],
+   "Burst3": [
+    "2700005_Skill_2_Burst_3"
+   ],
+   "HitBig": [
+    "2700005_Hit_Big"
+   ],
+   "HitDown": [
+    "2700005_Hit_Down"
+   ],
+   "HitFly": [
+    "2700005_Hit_Fly"
+   ],
+   "HitSmall1": [
+    "2700005_Hit_Small_1"
+   ],
+   "HitSmall2": [
+    "2700005_Hit_Small_2"
+   ],
+   "HitUp": [
+    "2700005_Hit_Air_Up"
+   ],
+   "IsAir": [
+    "2700005_Hit_Air_Fall",
+    "2700005_Hit_Air_Landing"
+   ],
+   "IsBackView": [
+    "2700005_Battle_Stand",
+    "2700005_Battle_Turn",
+    "2700005_Battle_Turn_Stand"
+   ],
    "IsBreak": [
+    "2700005_Battle_Stand",
     "2700005_Hit_Stun_Loop"
    ],
+   "IsChainReady": [
+    "2700005_Battle_Turn_Stand",
+    "2700005_Skill_6_Cast"
+   ],
+   "IsDead": [
+    "2700005_Death_1",
+    "2700005_Death_2",
+    "2700005_Hit_Air_Fall"
+   ],
+   "IsRunning": [
+    "2700005_Battle_Run",
+    "2700005_Battle_Stand"
+   ],
    "IsStun": [
+    "2700005_Battle_Stand",
     "2700005_Hit_Stun_Loop"
+   ],
+   "IsTurn": [
+    "2700005_Battle_Stand",
+    "2700005_Battle_Turn"
+   ],
+   "Return": [
+    "2700005_Battle_Return"
+   ],
+   "Skill1": [
+    "2700005_Skill_1"
+   ],
+   "Skill2": [
+    "2700005_Skill_2"
+   ],
+   "Skill3": [
+    "2700005_Skill_3"
+   ],
+   "Skill3Skip": [
+    "2700005_Skill_3_Skip"
+   ],
+   "Skill5": [
+    "2700005_Skill_5"
+   ],
+   "Skill6": [
+    "2700005_Skill_6"
+   ],
+   "VerticalSpeed": [
+    "2700005_Hit_Air_Fall",
+    "2700005_Hit_Air_Up"
    ]
   }
  },
@@ -27660,6 +30199,20 @@
  },
  "2700035": {
   "clips": {
+   "2700035_Skill_1": [
+    "2700035_Skill_1_1,24",
+    "2700035_Skill_1_2,0"
+   ],
+   "2700035_Skill_2": [
+    "2700035_Skill_2_1,0",
+    "2700035_Skill_2_2,0",
+    "2700035_Skill_2_3,0"
+   ],
+   "2700035_Skill_2_Upgrade": [
+    "2700035_Skill_2_1,0",
+    "2700035_Skill_2_2,0",
+    "2700035_Skill_2_3,0"
+   ],
    "2700035_Skill_3": [
     "2700035_Skill_3_1,0",
     "2700035_Skill_3_2,0",
@@ -27669,49 +30222,262 @@
    ],
    "2700035_Skill_3_Skip": [
     "Skip_Finish_Dark ,0"
+   ],
+   "2700035_Skill_5": [
+    "2700035_Skill_5_1,24",
+    "2700035_Skill_5_2,12"
+   ],
+   "2700035_Skill_6": [
+    "2700035_Skill_6_1,45",
+    "2700035_Skill_6_2,45"
+   ],
+   "2700035_Skill_7": [
+    "2700035_Skill_Burst_3_1,4.8",
+    "2700035_Skill_Burst_3_2,0"
    ]
   },
   "triggers": {
+   "BattleEntry": [
+    "2700035_Battle_Entry"
+   ],
+   "BattleResultWin": [
+    "2700035_Battle_Result_Win"
+   ],
+   "Burst1": [
+    "2700035_Skill_2_Upgrade"
+   ],
+   "Burst3": [
+    "2700035_Skill_7"
+   ],
+   "HitBig": [
+    "2700035_Hit_Big"
+   ],
+   "HitDown": [
+    "2700035_Hit_Down"
+   ],
+   "HitFly": [
+    "2700035_Hit_Fly"
+   ],
+   "HitSmall1": [
+    "2700035_Hit_Small_1"
+   ],
+   "HitSmall2": [
+    "2700035_Hit_Small_2"
+   ],
+   "HitUp": [
+    "2700035_Hit_Air_Up"
+   ],
+   "IsAir": [
+    "2700035_Hit_Air_Fall",
+    "2700035_Hit_Air_Landing"
+   ],
+   "IsBackView": [
+    "2700035_Battle_Stand",
+    "2700035_Battle_Turn",
+    "2700035_Battle_Turn_Stand"
+   ],
    "IsBreak": [
+    "2700035_Battle_Stand",
     "2700035_Hit_Stun_Loop"
    ],
+   "IsChainReady": [
+    "2700035_Battle_Turn_Stand",
+    "2700035_Skill_6_Cast"
+   ],
+   "IsDead": [
+    "2700035_Death_1",
+    "2700035_Death_2",
+    "2700035_Hit_Air_Fall"
+   ],
+   "IsRunning": [
+    "2700035_Battle_Run",
+    "2700035_Battle_Stand"
+   ],
    "IsStun": [
+    "2700035_Battle_Stand",
     "2700035_Hit_Stun_Loop"
+   ],
+   "IsTurn": [
+    "2700035_Battle_Stand",
+    "2700035_Battle_Turn"
+   ],
+   "Return": [
+    "2700035_Battle_Return"
+   ],
+   "Skill1": [
+    "2700035_Skill_1"
+   ],
+   "Skill2": [
+    "2700035_Skill_2"
    ],
    "Skill3": [
     "2700035_Skill_3"
    ],
    "Skill3Skip": [
     "2700035_Skill_3_Skip"
+   ],
+   "Skill5": [
+    "2700035_Skill_5"
+   ],
+   "Skill6": [
+    "2700035_Skill_6"
+   ],
+   "VerticalSpeed": [
+    "2700035_Hit_Air_Fall",
+    "2700035_Hit_Air_Up"
    ]
   }
  },
  "2700037": {
   "clips": {
+   "2700037_Skill_1": [
+    "2700037_Skill_1_1,330",
+    "2700037_Skill_1_2,303",
+    "2700037_Skill_1_3,303",
+    "2700037_Skill_1_4,0"
+   ],
+   "2700037_Skill_1_Upgrade": [
+    "2700037_Skill_1_1,330",
+    "2700037_Skill_1_2,303",
+    "2700037_Skill_1_3,303",
+    "2700037_Skill_1_4,0"
+   ],
+   "2700037_Skill_3": [
+    "2700037_Skill_3_1,0",
+    "2700037_Skill_3_2,0",
+    "2700037_Skill_3_3,0"
+   ],
    "2700037_Skill_3_Skip": [
     "Skip_Finish_Water ,0"
+   ],
+   "2700037_Skill_5": [
+    "2700037_Skill_5_1,0",
+    "2700037_Skill_5_2,0"
+   ],
+   "2700037_Skill_6": [
+    "2700037_Skill_6_1,310",
+    "2700037_Skill_6_2,45",
+    "2700037_Skill_6_3,45"
+   ],
+   "2700037_Skill_7": [
+    "2700037_Skill_7_1,250",
+    "2700037_Skill_7_2,45",
+    "2700037_Skill_7_3,0",
+    "2700037_Skill_7_4,45"
+   ],
+   "2700037_Skill_Extra": [
+    "2700037_Skill_Extra_1,0",
+    "2700037_Skill_Extra_2,0"
    ]
   },
   "triggers": {
    "BattleEntry": [
     "2700037_Battle_Entry"
    ],
+   "BattleResultWin": [
+    "2700037_Battle_Result_Win"
+   ],
+   "Burst1": [
+    "2700037_Skill_1_Upgrade"
+   ],
+   "HitBig": [
+    "2700037_Hit_Big"
+   ],
+   "HitDown": [
+    "2700037_Hit_Down"
+   ],
+   "HitFly": [
+    "2700037_Hit_Fly"
+   ],
+   "HitSmall1": [
+    "2700037_Hit_Small_1"
+   ],
+   "HitSmall2": [
+    "2700037_Hit_Small_2"
+   ],
+   "HitUp": [
+    "2700037_Hit_Air_Up"
+   ],
+   "IsAir": [
+    "2700037_Hit_Air_Fall",
+    "2700037_Hit_Air_Landing"
+   ],
+   "IsBackView": [
+    "2700037_Battle_Stand",
+    "2700037_Battle_Turn",
+    "2700037_Battle_Turn_Stand"
+   ],
    "IsBreak": [
+    "2700037_Battle_Stand",
     "2700037_Hit_Stun_Loop"
+   ],
+   "IsChainReady": [
+    "2700037_Battle_Turn_Stand",
+    "2700037_Skill_6_Cast"
+   ],
+   "IsDead": [
+    "2700037_Death_1",
+    "2700037_Death_2",
+    "2700037_Hit_Air_Fall"
+   ],
+   "IsRunning": [
+    "2700037_Battle_Run",
+    "2700037_Battle_Stand"
    ],
    "IsStun": [
+    "2700037_Battle_Stand",
     "2700037_Hit_Stun_Loop"
    ],
+   "IsTurn": [
+    "2700037_Battle_Stand",
+    "2700037_Battle_Turn"
+   ],
+   "Return": [
+    "2700037_Battle_Return"
+   ],
+   "Skill1": [
+    "2700037_Skill_1"
+   ],
    "Skill2": [
+    "2700037_Skill_Extra",
     "2700037_Skill_Extra_Ready"
+   ],
+   "Skill3": [
+    "2700037_Skill_3"
    ],
    "Skill3Skip": [
     "2700037_Skill_3_Skip"
+   ],
+   "Skill5": [
+    "2700037_Skill_5"
+   ],
+   "Skill6": [
+    "2700037_Skill_6"
+   ],
+   "Skill7": [
+    "2700037_Skill_7"
+   ],
+   "VerticalSpeed": [
+    "2700037_Hit_Air_Fall",
+    "2700037_Hit_Air_Up"
    ]
   }
  },
  "2700043": {
   "clips": {
+   "2700043_Skill_1": [
+    "2700043_Skill_1_1,0",
+    "2700043_Skill_1_2,-204",
+    "2000043_Skill_1_3,-24"
+   ],
+   "2700043_Skill_2": [
+    "2700043_Skill_2_1,0",
+    "2700043_Skill_2_2,-145"
+   ],
+   "2700043_Skill_2_Upgrade": [
+    "2700043_Skill_2_1,0",
+    "2700043_Skill_2_2,-145"
+   ],
    "2700043_Skill_3": [
     "2700043_Skill_3_1,0",
     "2700043_Skill_3_2,0",
@@ -27721,20 +30487,109 @@
    ],
    "2700043_Skill_3_Skip": [
     "2000043_SKIP ,0"
+   ],
+   "2700043_Skill_5": [
+    "2700043_Skill_5_1,0",
+    "2700043_Skill_5_2,-145"
+   ],
+   "2700043_Skill_6": [
+    "2700043_Skill_6_1,0",
+    "2700043_Skill_6_2,0",
+    "2700043_Skill_6_3,0"
+   ],
+   "2700043_Skill_7": [
+    "2700043_Skill_2_Burst_3_1,-106.709"
    ]
   },
   "triggers": {
+   "BattleEntry": [
+    "2700043_Battle_Entry"
+   ],
+   "BattleResultWin": [
+    "2700043_Battle_Result_Win"
+   ],
+   "Burst1": [
+    "2700043_Skill_2_Upgrade"
+   ],
+   "Burst3": [
+    "2700043_Skill_7"
+   ],
+   "HitBig": [
+    "2700043_Hit_Big"
+   ],
+   "HitDown": [
+    "2700043_Hit_Down"
+   ],
+   "HitFly": [
+    "2700043_Hit_Fly"
+   ],
+   "HitSmall1": [
+    "2700043_Hit_Small_1"
+   ],
+   "HitSmall2": [
+    "2700043_Hit_Small_2"
+   ],
+   "HitUp": [
+    "2700043_Hit_Air_Up"
+   ],
+   "IsAir": [
+    "2700043_Hit_Air_Fall",
+    "2700043_Hit_Air_Landing"
+   ],
+   "IsBackView": [
+    "2700043_Battle_Stand",
+    "2700043_Battle_Turn",
+    "2700043_Battle_Turn_Stand"
+   ],
    "IsBreak": [
+    "2700043_Battle_Stand",
     "2700043_Hit_Stun_Loop"
    ],
+   "IsChainReady": [
+    "2700043_Battle_Turn_Stand",
+    "2700043_Skill_6_Cast"
+   ],
+   "IsDead": [
+    "2700043_Death_1",
+    "2700043_Death_2",
+    "2700043_Hit_Air_Fall"
+   ],
+   "IsRunning": [
+    "2700043_Battle_Run",
+    "2700043_Battle_Stand"
+   ],
    "IsStun": [
+    "2700043_Battle_Stand",
     "2700043_Hit_Stun_Loop"
+   ],
+   "IsTurn": [
+    "2700043_Battle_Stand",
+    "2700043_Battle_Turn"
+   ],
+   "Return": [
+    "2700043_Battle_Return"
+   ],
+   "Skill1": [
+    "2700043_Skill_1"
+   ],
+   "Skill2": [
+    "2700043_Skill_2"
    ],
    "Skill3": [
     "2700043_Skill_3"
    ],
    "Skill3Skip": [
     "2700043_Skill_3_Skip"
+   ],
+   "Skill5": [
+    "2700043_Skill_5"
+   ],
+   "Skill6": [
+    "2700043_Skill_6"
+   ],
+   "VerticalSpeed": [
+    "2700043_Hit_Air_Fall",
+    "2700043_Hit_Air_Up"
    ]
   }
  },
@@ -28014,6 +30869,11 @@
     "2700005_Skill_2_2,0",
     "2700005_Skill_2_3,0"
    ],
+   "2710005_Skill_2_Burst_1": [
+    "2700005_Skill_2_1,0",
+    "2700005_Skill_2_2,0",
+    "2700005_Skill_2_3,0"
+   ],
    "2710005_Skill_2_Burst_3": [
     "2700005_Skill_Burst3_1,45"
    ],
@@ -28021,6 +30881,12 @@
     "2700005_Skill_3_1,0",
     "2700005_Skill_3_2,0",
     "2700005_Skill_3_3,0"
+   ],
+   "2710005_Skill_5": [
+    "2700005_Skill_5_2,0"
+   ],
+   "2710005_Skill_6": [
+    "2700005_Skill_5_2,0"
    ]
   },
   "triggers": {
@@ -28030,14 +30896,66 @@
    "BattleResultWin": [
     "2710005_Battle_Result_Win"
    ],
+   "Burst1": [
+    "2710005_Skill_2_Burst_1"
+   ],
    "Burst3": [
     "2710005_Skill_2_Burst_3"
    ],
+   "HitBig": [
+    "2010005_Hit_Big"
+   ],
+   "HitDown": [
+    "2010005_Hit_Down"
+   ],
+   "HitFly": [
+    "2010005_Hit_Fly"
+   ],
+   "HitSmall1": [
+    "2010005_Hit_Small_1"
+   ],
+   "HitSmall2": [
+    "2010005_Hit_Small_2"
+   ],
+   "HitUp": [
+    "2010005_Hit_Air_up"
+   ],
+   "IsAir": [
+    "2010005_Hit_Air_Fall",
+    "2010005_Hit_Air_Landing"
+   ],
+   "IsBackView": [
+    "2010005_Battle_Stand",
+    "2010005_Battle_Turn",
+    "2010005_Battle_Turn_Stand"
+   ],
    "IsBreak": [
+    "2010005_Battle_Stand",
     "2010005_Hit_Stun_Loop"
    ],
+   "IsChainReady": [
+    "2010005_Battle_Turn_Stand",
+    "2010005_Skill_6_Cast"
+   ],
+   "IsDead": [
+    "2010005_Death_1",
+    "2010005_Death_2",
+    "2010005_Hit_Air_Fall"
+   ],
+   "IsRunning": [
+    "2010005_Battle_Run",
+    "2010005_Battle_Stand"
+   ],
    "IsStun": [
+    "2010005_Battle_Stand",
     "2010005_Hit_Stun_Loop"
+   ],
+   "IsTurn": [
+    "2010005_Battle_Stand",
+    "2010005_Battle_Turn"
+   ],
+   "Return": [
+    "2010005_Battle_Return"
    ],
    "Skill1": [
     "2710005_Skill_1"
@@ -28053,11 +30971,35 @@
    ],
    "Skill3Skip": [
     "2010005_Skill_3_Skip"
+   ],
+   "Skill5": [
+    "2710005_Skill_5"
+   ],
+   "Skill6": [
+    "2710005_Skill_6"
+   ],
+   "VerticalSpeed": [
+    "2010005_Hit_Air_Fall",
+    "2010005_Hit_Air_up"
    ]
   }
  },
  "2710019": {
   "clips": {
+   "2710019_Skill_1": [
+    "2700019_Skill_1_1,-15",
+    "2700019_Skill_1_2,15",
+    "2700019_Skill_1_3,-15",
+    "2700019_Skill_1_4,0"
+   ],
+   "2710019_Skill_2": [
+    "2700019_Skill_2_1,5",
+    "2700019_Skill_2_2,180.9"
+   ],
+   "2710019_Skill_2_Upgrade": [
+    "2700019_Skill_2_1_Upgrade,0",
+    "2700019_Skill_2_2_Upgrade,-30"
+   ],
    "2710019_Skill_3": [
     "2700019_Skill_3_1,0",
     "2700019_Skill_3_2,200",
@@ -28069,6 +31011,20 @@
    ],
    "2710019_Skill_3_Skip": [
     "Skip_Finish_Water ,0"
+   ],
+   "2710019_Skill_5": [
+    "2700019_Skill_4_1,346",
+    "2700019_Skill_4_2,20",
+    "2700019_Skill_4_3,-5",
+    "2700019_Skill_4_4,335"
+   ],
+   "2710019_Skill_6": [
+    "2700019_Skill_5_1,0",
+    "2700019_Skill_5_2,0"
+   ],
+   "2710019_Skill_7": [
+    "2700019_Skill_6_1,45",
+    "2700019_Skill_6_2,45"
    ],
    "2710019_Skill_Extra": [
     "2700019_Skill_Extra_1,0",
@@ -28082,25 +31038,112 @@
    "BattleResultWin": [
     "2710019_Battle_Result_Win"
    ],
+   "Burst1": [
+    "2710019_Skill_2_Upgrade"
+   ],
+   "Burst3": [
+    "2710019_Skill_7"
+   ],
+   "HitBig": [
+    "2000019_Hit_Big"
+   ],
+   "HitDown": [
+    "2000019_Hit_Down"
+   ],
+   "HitFly": [
+    "2000019_Hit_Fly"
+   ],
+   "HitSmall1": [
+    "2000019_Hit_Small_1"
+   ],
+   "HitSmall2": [
+    "2000019_Hit_Small_2"
+   ],
+   "HitUp": [
+    "2000019_Hit_Air_Up"
+   ],
+   "IsAir": [
+    "2000019_Hit_Air_Fall",
+    "2000019_Hit_Air_Landing"
+   ],
+   "IsBackView": [
+    "2000019_Battle_Stand",
+    "2000019_Battle_Turn_Stand",
+    "2710019_Battle_Turn"
+   ],
    "IsBreak": [
+    "2000019_Battle_Stand",
     "2000019_Hit_Stun_Loop"
    ],
+   "IsChainReady": [
+    "2000019_Battle_Turn_Stand"
+   ],
+   "IsDead": [
+    "2000019_Death_1",
+    "2000019_Death_2",
+    "2000019_Hit_Air_Fall"
+   ],
+   "IsRunning": [
+    "2000019_Battle_Run",
+    "2000019_Battle_Stand"
+   ],
    "IsStun": [
+    "2000019_Battle_Stand",
     "2000019_Hit_Stun_Loop"
+   ],
+   "IsTurn": [
+    "2000019_Battle_Stand",
+    "2710019_Battle_Turn"
+   ],
+   "Return": [
+    "2000019_Battle_Return"
+   ],
+   "Skill1": [
+    "2710019_Skill_1"
    ],
    "Skill11": [
     "2710019_Skill_Extra"
+   ],
+   "Skill2": [
+    "2710019_Skill_2"
    ],
    "Skill3": [
     "2710019_Skill_3"
    ],
    "Skill3Skip": [
     "2710019_Skill_3_Skip"
+   ],
+   "Skill5": [
+    "2710019_Skill_5"
+   ],
+   "Skill6": [
+    "2710019_Skill_6"
+   ],
+   "Skill7": [
+    "2710019_Skill_7"
+   ],
+   "VerticalSpeed": [
+    "2000019_Hit_Air_Fall",
+    "2000019_Hit_Air_Up"
    ]
   }
  },
  "2710035": {
   "clips": {
+   "2710035_Skill_1": [
+    "2700035_Skill_1_1,24",
+    "2700035_Skill_1_2,0"
+   ],
+   "2710035_Skill_2": [
+    "2700035_Skill_2_1,0",
+    "2700035_Skill_2_2,0",
+    "2700035_Skill_2_3,0"
+   ],
+   "2710035_Skill_2_Upgrade": [
+    "2700035_Skill_2_1,0",
+    "2700035_Skill_2_2,0",
+    "2700035_Skill_2_3,0"
+   ],
    "2710035_Skill_3": [
     "2700035_Skill_3_1,0",
     "2700035_Skill_3_2,0",
@@ -28110,6 +31153,18 @@
    ],
    "2710035_Skill_3_Skip": [
     "Skip_Finish_Dark ,0"
+   ],
+   "2710035_Skill_5": [
+    "2700035_Skill_5_1,24",
+    "2700035_Skill_5_2,12"
+   ],
+   "2710035_Skill_6": [
+    "2700035_Skill_6_1,45",
+    "2700035_Skill_6_2,45"
+   ],
+   "2710035_Skill_7": [
+    "2700035_Skill_Burst_3_1,4.8",
+    "2700035_Skill_Burst_3_2,0"
    ]
   },
   "triggers": {
@@ -28119,17 +31174,88 @@
    "BattleResultWin": [
     "2710035_Battle_Result_Win"
    ],
+   "Burst1": [
+    "2710035_Skill_2_Upgrade"
+   ],
+   "Burst3": [
+    "2710035_Skill_7"
+   ],
+   "HitBig": [
+    "2710035_Hit_Big"
+   ],
+   "HitDown": [
+    "2710035_Hit_Down"
+   ],
+   "HitFly": [
+    "2710035_Hit_Fly"
+   ],
+   "HitSmall1": [
+    "2710035_Hit_Small_1"
+   ],
+   "HitSmall2": [
+    "2710035_Hit_Small_2"
+   ],
+   "HitUp": [
+    "2710035_Hit_Air_Up"
+   ],
+   "IsAir": [
+    "2710035_Hit_Air_Fall",
+    "2710035_Hit_Air_Landing"
+   ],
+   "IsBackView": [
+    "2710035_Battle_Stand",
+    "2710035_Battle_Turn",
+    "2710035_Battle_Turn_Stand"
+   ],
    "IsBreak": [
+    "2710035_Battle_Stand",
     "2710035_Hit_Stun_Loop"
    ],
+   "IsChainReady": [
+    "2710035_Battle_Turn_Stand",
+    "2710035_Skill_6_Cast"
+   ],
+   "IsDead": [
+    "2710035_Death_1",
+    "2710035_Death_2",
+    "2710035_Hit_Air_Fall"
+   ],
+   "IsRunning": [
+    "2710035_Battle_Run",
+    "2710035_Battle_Stand"
+   ],
    "IsStun": [
+    "2710035_Battle_Stand",
     "2710035_Hit_Stun_Loop"
+   ],
+   "IsTurn": [
+    "2710035_Battle_Stand",
+    "2710035_Battle_Turn"
+   ],
+   "Return": [
+    "2710035_Battle_Return"
+   ],
+   "Skill1": [
+    "2710035_Skill_1"
+   ],
+   "Skill2": [
+    "2710035_Skill_2"
    ],
    "Skill3": [
     "2710035_Skill_3"
    ],
    "Skill3Skip": [
     "2710035_Skill_3_Skip"
+   ],
+   "Skill5": [
+    "2710035_Skill_5"
+   ],
+   "Skill6": [
+    "2710035_Skill_6"
+   ],
+   "VerticalSpeed": [
+    "2710035_Hit_Air_Fall",
+    "2710035_Hit_Air_Up"
    ]
   }
  },
@@ -28137,44 +31263,264 @@
   "clips": {
    "2010037_Skill_3_Skip": [
     "Skip_Finish_Water ,0"
+   ],
+   "2710037_Skill_1": [
+    "2700037_Skill_1_1,330",
+    "2700037_Skill_1_2,303",
+    "2700037_Skill_1_3,303",
+    "2700037_Skill_1_4,0"
+   ],
+   "2710037_Skill_1_Upgrade": [
+    "2700037_Skill_1_1,330",
+    "2700037_Skill_1_2,303",
+    "2700037_Skill_1_3,303",
+    "2700037_Skill_1_4,0"
+   ],
+   "2710037_Skill_3": [
+    "2700037_Skill_3_1,0",
+    "2700037_Skill_3_2,0",
+    "2700037_Skill_3_3,0"
+   ],
+   "2710037_Skill_5": [
+    "2700037_Skill_5_1,0",
+    "2700037_Skill_5_2,0"
+   ],
+   "2710037_Skill_6": [
+    "2700037_Skill_6_1,310",
+    "2700037_Skill_6_2,45",
+    "2700037_Skill_6_3,45"
+   ],
+   "2710037_Skill_7": [
+    "2700037_Skill_7_1,250",
+    "2700037_Skill_7_2,45",
+    "2700037_Skill_7_3,0",
+    "2700037_Skill_7_4,45"
+   ],
+   "2710037_Skill_Extra": [
+    "2700037_Skill_Extra_1,0",
+    "2700037_Skill_Extra_2,0"
    ]
   },
   "triggers": {
    "BattleEntry": [
     "2710037_Battle_Entry"
    ],
+   "BattleResultWin": [
+    "2710037_Battle_Result_Win"
+   ],
+   "Burst1": [
+    "2710037_Skill_1_Upgrade"
+   ],
+   "HitBig": [
+    "2000037_Hit_Big"
+   ],
+   "HitDown": [
+    "2000037_Hit_Down"
+   ],
+   "HitFly": [
+    "2000037_Hit_Fly"
+   ],
+   "HitSmall1": [
+    "2000037_Hit_Small_1"
+   ],
+   "HitSmall2": [
+    "2000037_Hit_Small_2"
+   ],
+   "HitUp": [
+    "2000037_Hit_Air_Up"
+   ],
+   "IsAir": [
+    "2000037_Hit_Air_Fall",
+    "2000037_Hit_Air_Landing"
+   ],
+   "IsBackView": [
+    "2000037_Battle_Stand",
+    "2000037_Battle_Turn_Stand",
+    "2710037_Battle_Turn"
+   ],
    "IsBreak": [
+    "2000037_Battle_Stand",
     "2000037_Hit_Stun_Loop"
+   ],
+   "IsChainReady": [
+    "2000037_Battle_Turn_Stand",
+    "2000037_Skill_6_Cast"
+   ],
+   "IsDead": [
+    "2000037_Death_1",
+    "2000037_Death_2",
+    "2000037_Hit_Air_Fall"
+   ],
+   "IsRunning": [
+    "2000037_Battle_Run",
+    "2000037_Battle_Stand"
    ],
    "IsStun": [
+    "2000037_Battle_Stand",
     "2000037_Hit_Stun_Loop"
    ],
+   "IsTurn": [
+    "2000037_Battle_Stand",
+    "2710037_Battle_Turn"
+   ],
+   "Return": [
+    "2000037_Battle_Return"
+   ],
+   "Skill1": [
+    "2710037_Skill_1"
+   ],
    "Skill2": [
-    "2700037_Skill_Extra_Ready"
+    "2700037_Skill_Extra_Ready",
+    "2710037_Skill_Extra"
+   ],
+   "Skill3": [
+    "2710037_Skill_3"
    ],
    "Skill3Skip": [
     "2010037_Skill_3_Skip"
+   ],
+   "Skill5": [
+    "2710037_Skill_5"
+   ],
+   "Skill6": [
+    "2710037_Skill_6"
+   ],
+   "Skill7": [
+    "2710037_Skill_7"
+   ],
+   "VerticalSpeed": [
+    "2000037_Hit_Air_Fall",
+    "2000037_Hit_Air_Up"
    ]
   }
  },
  "2710043": {
   "clips": {
+   "2710043_Skill_1": [
+    "2700043_Skill_1_1,0",
+    "2700043_Skill_1_2,-204",
+    "2000043_Skill_1_3,-24"
+   ],
+   "2710043_Skill_2": [
+    "2700043_Skill_2_1,0",
+    "2700043_Skill_2_2,-145"
+   ],
+   "2710043_Skill_2_Upgrade": [
+    "2700043_Skill_2_1,0",
+    "2700043_Skill_2_2,-145"
+   ],
+   "2710043_Skill_3": [
+    "2700043_Skill_3_1,0",
+    "2700043_Skill_3_2,0",
+    "2700043_Skill_3_3,0",
+    "2700043_Skill_3_4,0",
+    "2700043_Skill_3_5,0"
+   ],
    "2710043_Skill_3_Skip": [
     "2000043_SKIP ,0"
+   ],
+   "2710043_Skill_5": [
+    "2700043_Skill_5_1,0",
+    "2700043_Skill_5_2,-145"
+   ],
+   "2710043_Skill_6": [
+    "2700043_Skill_6_1,0",
+    "2700043_Skill_6_2,0",
+    "2700043_Skill_6_3,0"
+   ],
+   "2710043_Skill_7": [
+    "2700043_Skill_2_Burst_3_1,-106.709"
    ]
   },
   "triggers": {
+   "BattleEntry": [
+    "2710043_Battle_Entry"
+   ],
+   "BattleResultWin": [
+    "2710043_Battle_Result_Win"
+   ],
+   "Burst1": [
+    "2710043_Skill_2_Upgrade"
+   ],
+   "Burst3": [
+    "2710043_Skill_7"
+   ],
+   "HitBig": [
+    "2010043_Hit_Big"
+   ],
+   "HitDown": [
+    "2010043_Hit_Down"
+   ],
+   "HitFly": [
+    "2010043_Hit_Fly"
+   ],
+   "HitSmall1": [
+    "2010043_Hit_Small_1"
+   ],
+   "HitSmall2": [
+    "2010043_Hit_Small_2"
+   ],
+   "HitUp": [
+    "2010043_Hit_Air_Up"
+   ],
+   "IsAir": [
+    "2010043_Hit_Air_Fall",
+    "2010043_Hit_Air_Landing"
+   ],
+   "IsBackView": [
+    "2010043_Battle_Stand",
+    "2010043_Battle_Turn_Stand",
+    "2710043_Battle_Turn"
+   ],
    "IsBreak": [
+    "2010043_Battle_Stand",
     "2010043_Hit_Stun_Loop"
+   ],
+   "IsChainReady": [
+    "2010043_Battle_Turn_Stand",
+    "2710043_Skill_6_Cast"
    ],
    "IsDead": [
-    "2010043_Death_1"
+    "2010043_Death_1",
+    "2010043_Death_2",
+    "2010043_Hit_Air_Fall"
+   ],
+   "IsRunning": [
+    "2010043_Battle_Run",
+    "2010043_Battle_Stand"
    ],
    "IsStun": [
+    "2010043_Battle_Stand",
     "2010043_Hit_Stun_Loop"
+   ],
+   "IsTurn": [
+    "2010043_Battle_Stand",
+    "2710043_Battle_Turn"
+   ],
+   "Return": [
+    "2710043_Battle_Return"
+   ],
+   "Skill1": [
+    "2710043_Skill_1"
+   ],
+   "Skill2": [
+    "2710043_Skill_2"
+   ],
+   "Skill3": [
+    "2710043_Skill_3"
    ],
    "Skill3Skip": [
     "2710043_Skill_3_Skip"
+   ],
+   "Skill5": [
+    "2710043_Skill_5"
+   ],
+   "Skill6": [
+    "2710043_Skill_6"
+   ],
+   "VerticalSpeed": [
+    "2010043_Hit_Air_Fall",
+    "2010043_Hit_Air_Up"
    ]
   }
  },
@@ -28321,8 +31667,36 @@
     "2700019_Skill_3_6,30",
     "Sound_Mute,0"
    ],
+   "2720019_Skill_1": [
+    "2700019_Skill_1_1,-15",
+    "2700019_Skill_1_2,15",
+    "2700019_Skill_1_3,-15",
+    "2700019_Skill_1_4,0"
+   ],
+   "2720019_Skill_2": [
+    "2700019_Skill_2_1,5",
+    "2700019_Skill_2_2,180.9"
+   ],
+   "2720019_Skill_2_Upgrade": [
+    "2700019_Skill_2_1_Upgrade,0",
+    "2700019_Skill_2_2_Upgrade,-30"
+   ],
    "2720019_Skill_3_Skip": [
     "Skip_Finish_Water ,0"
+   ],
+   "2720019_Skill_5": [
+    "2700019_Skill_4_1,346",
+    "2700019_Skill_4_2,20",
+    "2700019_Skill_4_3,-5",
+    "2700019_Skill_4_4,335"
+   ],
+   "2720019_Skill_6": [
+    "2700019_Skill_5_1,0",
+    "2700019_Skill_5_2,0"
+   ],
+   "2720019_Skill_7": [
+    "2700019_Skill_6_1,45",
+    "2700019_Skill_6_2,45"
    ],
    "2720019_Skill_Extra": [
     "2700019_Skill_Extra_1,0",
@@ -28336,20 +31710,94 @@
    "BattleResultWin": [
     "2720019_Battle_Result_Win"
    ],
+   "Burst1": [
+    "2720019_Skill_2_Upgrade"
+   ],
+   "Burst3": [
+    "2720019_Skill_7"
+   ],
+   "HitBig": [
+    "2020019_Hit_Big"
+   ],
+   "HitDown": [
+    "2020019_Hit_Down"
+   ],
+   "HitFly": [
+    "2020019_Hit_Fly"
+   ],
+   "HitSmall1": [
+    "2020019_Hit_Small_1"
+   ],
+   "HitSmall2": [
+    "2020019_Hit_Small_2"
+   ],
+   "HitUp": [
+    "2020019_Hit_Air_Up"
+   ],
+   "IsAir": [
+    "2020019_Hit_Air_Fall",
+    "2020019_Hit_Air_Landing"
+   ],
+   "IsBackView": [
+    "2020019_Battle_Stand",
+    "2020019_Battle_Turn_Stand",
+    "2720019_Battle_Turn"
+   ],
    "IsBreak": [
+    "2020019_Battle_Stand",
     "2020019_Hit_Stun_Loop"
    ],
+   "IsChainReady": [
+    "2020019_Battle_Turn_Stand",
+    "2720019_Skill_6_Cast"
+   ],
+   "IsDead": [
+    "2020019_Death_1",
+    "2020019_Death_2",
+    "2020019_Hit_Air_Fall"
+   ],
+   "IsRunning": [
+    "2020019_Battle_Run",
+    "2020019_Battle_Stand"
+   ],
    "IsStun": [
+    "2020019_Battle_Stand",
     "2020019_Hit_Stun_Loop"
+   ],
+   "IsTurn": [
+    "2020019_Battle_Stand",
+    "2720019_Battle_Turn"
+   ],
+   "Return": [
+    "2020019_Battle_Return"
+   ],
+   "Skill1": [
+    "2720019_Skill_1"
    ],
    "Skill11": [
     "2720019_Skill_Extra"
+   ],
+   "Skill2": [
+    "2720019_Skill_2"
    ],
    "Skill3": [
     "2710019_Skill_3"
    ],
    "Skill3Skip": [
     "2720019_Skill_3_Skip"
+   ],
+   "Skill5": [
+    "2720019_Skill_5"
+   ],
+   "Skill6": [
+    "2720019_Skill_6"
+   ],
+   "Skill7": [
+    "2720019_Skill_7"
+   ],
+   "VerticalSpeed": [
+    "2020019_Hit_Air_Fall",
+    "2020019_Hit_Air_Up"
    ]
   }
  },
@@ -28357,6 +31805,24 @@
   "clips": {
    "2020037_Skill_3_Skip": [
     "Skip_Finish_Water ,0"
+   ],
+   "2020037_Skill_7": [
+    "2000037_Skill_6_1,250",
+    "2000037_Skill_6_2,45",
+    "2000037_Skill_6_3,0",
+    "2000037_Skill_6_4,45"
+   ],
+   "2720037_Skill_1": [
+    "2700037_Skill_1_1,330",
+    "2700037_Skill_1_2,303",
+    "2700037_Skill_1_3,303",
+    "2700037_Skill_1_4,0"
+   ],
+   "2720037_Skill_1_Upgrade": [
+    "2700037_Skill_1_1,330",
+    "2700037_Skill_1_2,303",
+    "2700037_Skill_1_3,303",
+    "2700037_Skill_1_4,0"
    ],
    "2720037_Skill_3": [
     "2700037_Skill_3_1,0",
@@ -28371,23 +31837,83 @@
     "2700037_Skill_6_1,310",
     "2700037_Skill_6_2,45",
     "2700037_Skill_6_3,45"
+   ],
+   "2720037_Skill_Extra": [
+    "2700037_Skill_Extra_1,0",
+    "2700037_Skill_Extra_2,0"
    ]
   },
   "triggers": {
    "BattleEntry": [
     "2720037_Battle_Entry"
    ],
+   "BattleResultWin": [
+    "2720037_Battle_Result_Win"
+   ],
+   "Burst1": [
+    "2720037_Skill_1_Upgrade"
+   ],
+   "HitBig": [
+    "2020037_Hit_Big"
+   ],
+   "HitDown": [
+    "2020037_Hit_Down"
+   ],
+   "HitFly": [
+    "2020037_Hit_Fly"
+   ],
+   "HitSmall1": [
+    "2020037_Hit_Small_1"
+   ],
+   "HitSmall2": [
+    "2020037_Hit_Small_2"
+   ],
+   "HitUp": [
+    "2020037_Hit_Air_Up"
+   ],
+   "IsAir": [
+    "2020037_Hit_Air_Fall",
+    "2020037_Hit_Air_Landing"
+   ],
+   "IsBackView": [
+    "2020037_Battle_Stand",
+    "2020037_Battle_Turn_Stand",
+    "2720037_Battle_Turn"
+   ],
    "IsBreak": [
+    "2020037_Battle_Stand",
     "2020037_Hit_Stun_Loop"
+   ],
+   "IsChainReady": [
+    "2020037_Battle_Turn_Stand",
+    "2020037_Skill_6_Cast"
    ],
    "IsDead": [
-    "2020037_Death_1"
+    "2020037_Death_1",
+    "2020037_Death_2",
+    "2020037_Hit_Air_Fall"
+   ],
+   "IsRunning": [
+    "2020037_Battle_Run",
+    "2020037_Battle_Stand"
    ],
    "IsStun": [
+    "2020037_Battle_Stand",
     "2020037_Hit_Stun_Loop"
    ],
+   "IsTurn": [
+    "2020037_Battle_Stand",
+    "2720037_Battle_Turn"
+   ],
+   "Return": [
+    "2020037_Battle_Return"
+   ],
+   "Skill1": [
+    "2720037_Skill_1"
+   ],
    "Skill2": [
-    "2700037_Skill_Extra_Ready"
+    "2700037_Skill_Extra_Ready",
+    "2720037_Skill_Extra"
    ],
    "Skill3": [
     "2720037_Skill_3"
@@ -28400,6 +31926,13 @@
    ],
    "Skill6": [
     "2720037_Skill_6"
+   ],
+   "Skill7": [
+    "2020037_Skill_7"
+   ],
+   "VerticalSpeed": [
+    "2020037_Hit_Air_Fall",
+    "2020037_Hit_Air_Up"
    ]
   }
  },
@@ -28537,6 +32070,20 @@
  },
  "2730019": {
   "clips": {
+   "2730019_Skill_1": [
+    "2700019_Skill_1_1,-15",
+    "2700019_Skill_1_2,15",
+    "2700019_Skill_1_3,-15",
+    "2700019_Skill_1_4,0"
+   ],
+   "2730019_Skill_2": [
+    "2700019_Skill_2_1,5",
+    "2700019_Skill_2_2,180.9"
+   ],
+   "2730019_Skill_2_Upgrade": [
+    "2700019_Skill_2_1_Upgrade,0",
+    "2700019_Skill_2_2_Upgrade,-30"
+   ],
    "2730019_Skill_3": [
     "2700019_Skill_3_1,0",
     "2700019_Skill_3_2,200",
@@ -28548,6 +32095,20 @@
    ],
    "2730019_Skill_3_Skip": [
     "Skip_Finish_Water ,0"
+   ],
+   "2730019_Skill_5": [
+    "2700019_Skill_4_1,346",
+    "2700019_Skill_4_2,20",
+    "2700019_Skill_4_3,-5",
+    "2700019_Skill_4_4,335"
+   ],
+   "2730019_Skill_6": [
+    "2700019_Skill_5_1,0",
+    "2700019_Skill_5_2,0"
+   ],
+   "2730019_Skill_7": [
+    "2700019_Skill_6_1,45",
+    "2700019_Skill_6_2,45"
    ],
    "2730019_Skill_Extra": [
     "2700019_Skill_Extra_1,0",
@@ -28561,20 +32122,94 @@
    "BattleResultWin": [
     "2730019_Battle_Result_Win"
    ],
+   "Burst1": [
+    "2730019_Skill_2_Upgrade"
+   ],
+   "Burst3": [
+    "2730019_Skill_7"
+   ],
+   "HitBig": [
+    "2030019_Hit_Big"
+   ],
+   "HitDown": [
+    "2030019_Hit_Down"
+   ],
+   "HitFly": [
+    "2030019_Hit_Fly"
+   ],
+   "HitSmall1": [
+    "2030019_Hit_Small_1"
+   ],
+   "HitSmall2": [
+    "2030019_Hit_Small_2"
+   ],
+   "HitUp": [
+    "2030019_Hit_Air_Up"
+   ],
+   "IsAir": [
+    "2030019_Hit_Air_Fall",
+    "2030019_Hit_Air_Landing"
+   ],
+   "IsBackView": [
+    "2020019_Battle_Stand",
+    "2030019_Battle_Turn_Stand",
+    "2730019_Battle_Turn"
+   ],
    "IsBreak": [
+    "2020019_Battle_Stand",
     "2030019_Hit_Stun_Loop"
    ],
+   "IsChainReady": [
+    "2030019_Battle_Turn_Stand",
+    "2730019_Skill_6_Cast"
+   ],
+   "IsDead": [
+    "2030019_Death_1",
+    "2030019_Death_2",
+    "2030019_Hit_Air_Fall"
+   ],
+   "IsRunning": [
+    "2020019_Battle_Stand",
+    "2030019_Battle_Run"
+   ],
    "IsStun": [
+    "2020019_Battle_Stand",
     "2030019_Hit_Stun_Loop"
+   ],
+   "IsTurn": [
+    "2020019_Battle_Stand",
+    "2730019_Battle_Turn"
+   ],
+   "Return": [
+    "2030019_Battle_Return"
+   ],
+   "Skill1": [
+    "2730019_Skill_1"
    ],
    "Skill11": [
     "2730019_Skill_Extra"
+   ],
+   "Skill2": [
+    "2730019_Skill_2"
    ],
    "Skill3": [
     "2730019_Skill_3"
    ],
    "Skill3Skip": [
     "2730019_Skill_3_Skip"
+   ],
+   "Skill5": [
+    "2730019_Skill_5"
+   ],
+   "Skill6": [
+    "2730019_Skill_6"
+   ],
+   "Skill7": [
+    "2730019_Skill_7"
+   ],
+   "VerticalSpeed": [
+    "2030019_Hit_Air_Fall",
+    "2030019_Hit_Air_Up"
    ]
   }
  },
@@ -28582,23 +32217,134 @@
   "clips": {
    "2030037_Skill_3_Skip": [
     "Skip_Finish_Water ,0"
+   ],
+   "2730037_Skill_1": [
+    "2700037_Skill_1_1,330",
+    "2700037_Skill_1_2,303",
+    "2700037_Skill_1_3,303",
+    "2700037_Skill_1_4,0"
+   ],
+   "2730037_Skill_1_Upgrade": [
+    "2700037_Skill_1_1,330",
+    "2700037_Skill_1_2,303",
+    "2700037_Skill_1_3,303",
+    "2700037_Skill_1_4,0"
+   ],
+   "2730037_Skill_3": [
+    "2700037_Skill_3_1,0",
+    "2700037_Skill_3_2,0",
+    "2700037_Skill_3_3,0"
+   ],
+   "2730037_Skill_5": [
+    "2700037_Skill_5_1,0",
+    "2700037_Skill_5_2,0"
+   ],
+   "2730037_Skill_6": [
+    "2700037_Skill_6_1,310",
+    "2700037_Skill_6_2,45",
+    "2700037_Skill_6_3,45"
+   ],
+   "2730037_Skill_7": [
+    "2700037_Skill_7_1,250",
+    "2700037_Skill_7_2,45",
+    "2700037_Skill_7_3,0",
+    "2700037_Skill_7_4,45"
+   ],
+   "2730037_Skill_Extra": [
+    "2700037_Skill_Extra_1,0",
+    "2700037_Skill_Extra_2,0"
    ]
   },
   "triggers": {
    "BattleEntry": [
     "2730037_Battle_Entry"
    ],
+   "BattleResultWin": [
+    "2730037_Battle_Result_Win"
+   ],
+   "Burst1": [
+    "2730037_Skill_1_Upgrade"
+   ],
+   "HitBig": [
+    "2030037_Hit_Big"
+   ],
+   "HitDown": [
+    "2030037_Hit_Down"
+   ],
+   "HitFly": [
+    "2030037_Hit_Fly"
+   ],
+   "HitSmall1": [
+    "2030037_Hit_Small_1"
+   ],
+   "HitSmall2": [
+    "2030037_Hit_Small_2"
+   ],
+   "HitUp": [
+    "2030037_Hit_Air_Up"
+   ],
+   "IsAir": [
+    "2030037_Hit_Air_Fall",
+    "2030037_Hit_Air_Landing"
+   ],
+   "IsBackView": [
+    "2030037_Battle_Stand",
+    "2030037_Battle_Turn_Stand",
+    "2730037_Battle_Turn"
+   ],
    "IsBreak": [
+    "2030037_Battle_Stand",
     "2030037_Hit_Stun_Loop"
+   ],
+   "IsChainReady": [
+    "2030037_Battle_Turn_Stand",
+    "2030037_Skill_6_Cast"
+   ],
+   "IsDead": [
+    "2030037_Death_1",
+    "2030037_Death_2",
+    "2030037_Hit_Air_Fall"
+   ],
+   "IsRunning": [
+    "2030037_Battle_Run",
+    "2030037_Battle_Stand"
    ],
    "IsStun": [
+    "2030037_Battle_Stand",
     "2030037_Hit_Stun_Loop"
    ],
+   "IsTurn": [
+    "2030037_Battle_Stand",
+    "2730037_Battle_Turn"
+   ],
+   "Return": [
+    "2030037_Battle_Return"
+   ],
+   "Skill1": [
+    "2730037_Skill_1"
+   ],
    "Skill2": [
-    "2700037_Skill_Extra_Ready"
+    "2700037_Skill_Extra_Ready",
+    "2730037_Skill_Extra"
+   ],
+   "Skill3": [
+    "2730037_Skill_3"
    ],
    "Skill3Skip": [
     "2030037_Skill_3_Skip"
+   ],
+   "Skill5": [
+    "2730037_Skill_5"
+   ],
+   "Skill6": [
+    "2730037_Skill_6"
+   ],
+   "Skill7": [
+    "2730037_Skill_7"
+   ],
+   "VerticalSpeed": [
+    "2030037_Hit_Air_Fall",
+    "2030037_Hit_Air_Up"
    ]
   }
  },

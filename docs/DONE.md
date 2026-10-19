@@ -7,6 +7,102 @@
 
 ## 2026-10-19
 
+- **B64 — Anim-events : ré-extraction (bundles de fusion, états d'approche,
+  `EventAdditiveAttack`), les 46 skills de C24 extraits ou justifiés.** Item
+  du TODO « Anim-events : 46 skills sans aucun event extrait » (section
+  « 🔎 Revues d'octobre ») retiré. (a) **Clips hors bundle** (cause 1, 34
+  skills) : `extract-anim-events.py` construisait la table des clips dans le
+  SEUL bundle courant ; un fusionné (`character/pc/2700005`…) ne porte que
+  ses controllers, ses clips sont dans le bundle de base, pointés par
+  `m_FileID ≥ 1` — les PPtr ne résolvaient rien, et le trigger partait en
+  silence. Le script charge maintenant chaque bundle AVEC ses dépendances
+  du manifeste dans un seul `UnityPy.load`, indexe les `AnimationClip` par
+  (fichier sérialisé, `path_id`), résout chaque PPtr de `m_AnimationClips`
+  par `m_FileID` (`external_key`, même nettoyage que `PPtr.deref`) et ne
+  traite que les controllers du bundle principal ; GARDE : un `AC_<id>` à
+  clip irrésolu lève avec son nom et le nombre manquant. Rejoué :
+  `AC_2700005` 32/32 (29 externes), `AC_2700035` 31/31 (26), `AC_2700037`
+  32/32 (26), `AC_2700043` 31/31 (27). **Écart à la tâche, dit ici** : le
+  prompt demandait les dépendances `character/pc/` ; la garde a levé au
+  premier passage sur `AC_2000052` (Sigma), 1/32 irrésolu —
+  `4004002_Battle_Run`, dans `character/monster/4004002`. Le préfixe chargé
+  est donc `character/` (`DEP_PREFIX`) ; aucun autre controller ne lève.
+  (b) **États d'approche** (cause 2) : quand l'état destination d'un trigger
+  n'a aucun clip à `EventAttackStart`, `approach_clips` suit ses transitions
+  SANS condition (`m_ConditionConstantArray` vide) vers un état réel, au
+  plus 2 sauts, et ajoute les clips du premier état qui en a ; plusieurs
+  candidats au même saut → rien. Neuf controllers la prennent, tous au
+  premier saut, AUCUN cas ambigu : `2700003` `Skill2` → `2700003_Skill_2`
+  (attendu), Vera `2000002` `Skill1` → `2000002_Skill_1`, Snow `2000003`
+  `Skill2` → `2000003_Skill_2`, Anarky `2000116` et `2010116` `Skill1`
+  (état `*_Skill_1_Cast`) → `*_Skill_1`, et `2700037`/`2710037`/`2720037`/
+  `2730037` `Skill2` (`2700037_Skill_Extra_Ready`) → `*_Skill_Extra`. Effet
+  dans `characters.json` : 352, Snow 302 et Anarky 11601 gagnent leur clip ;
+  Vera 201 ne bouge PAS (`clipsUnresolvedChains` `2000002_Skill_1` avant
+  comme après : ses deux triggers `Skill1,Skill1_2` donnent maintenant deux
+  clips à events, que `resolveSkillClips` lit encore en séquence — c'est le
+  lot des variantes, § 5.2) ; aucun skill de `2700037` ne joue `Skill2`.
+  (c) **`EventAdditiveAttack`** : nouvelle clé `additive` par personnage,
+  `{ "<clip>": [{ "time", "after" }] }`, pour les clips référencés par
+  `AC_<id>` qui en portent (absente sinon) ; `clips` et `triggers` gardent
+  leur forme. Cinq persos, un event chacun, toujours dans le clip d'index 0
+  et après TOUS ses `EventAttackStart` : Francesca `2000015_Skill_2_1`
+  (1,533 s, after 2), Parti `2000032_Skill_2_1` (1,833, 2), Sterope
+  `2000057_Skill_1` (1,667, 3), `2000057_Skill_1_Upgrade` (bursts 1-2,
+  4,065, 3) et `2000057_Skill_7` (burst 3, 3,903, 2), Poolside Regina
+  `2000085_Skill_2` (3,567, 4), Luna `2000103_Skill_1` (1,733, 3) ; rien
+  dans les bursts de Luna ni de Kanon. Docstring : la clé décrite, « deux
+  clips successifs » → variantes par index (spec § 1.1), « non élucidé » →
+  `fHitRotation` (§ 1.3), plus les deux règles ci-dessus. `clips.ts` :
+  `CharAnimEntry.additive?` commenté, NON lu (`buildClipIndex` et
+  `resolveSkillClips` inchangés). Spec `damage-clips-joues.md` § 5.1,
+  première puce réécrite au fait (forme, porteurs, absences). (d) **Ce qui
+  bouge** : `pnpm damage:build` (ré-extraction + build), `resVersion`
+  1.11.408 inchangé, `data/generated/damage/characters.json` SEUL (37
+  skills, `clips`/`clipsUnresolvedChains` uniquement, `characters` et tout
+  autre champ identiques — comparé au JSON d'avant). `anim-events.json` :
+  260 persos (inchangé), clips à events 1 545 → 1 760 (+215 sur 41 persos :
+  les quatre fusionnés 2700005 +8, 2700035 +6, 2700037 +7, 2700043 +6, les
+  costumes et variantes 201xxxx/202xxxx/203xxxx/27x00xx dont les clips
+  vivent dans le bundle de base, 2700003/2000002/2000003/2000116/2010116 +1
+  par l'approche, le perso de test 2000999 +2), triggers 5 956 → 6 735 (53
+  persos ; des triggers hors skill aussi — `Approach`, `Lobby*`, `Hit*` de
+  2000095/2000106 — qui pointaient déjà des clips externes), aucun clip ni
+  event perdu ou modifié (diff `--histogram` : 3 766 insertions, 20
+  suppressions, toutes des virgules de fin de liste). 551, 555 et 4351
+  sortent en `clipsUnresolvedChains` (un hit de leur chaîne, `2700005_Skill_1_2`,
+  `2700005_Skill_5_1`, `2700043_Skill_1_3`, n'est joué par aucun clip :
+  couverture partielle, jamais servie). (e) **Métrique** (script jetable,
+  hits sans `clips` ni `clipsUnresolvedChains`) : 64 avant, **27 après**.
+  Les 27, classés : 11 justifiés de C24, rejoués par UnityPy (aucun
+  `EventAttackStart` dans `2000005_Skill_2`, `_Skill_2_Burst_1`, `_Skill_5`,
+  `_Skill_6`, `2000011_Skill_1`, `_Skill_6`, `2000029_Skill_1`,
+  `2000031_Skill_1` — `EventCallStriker` seul chez Lisha et Lily ; Ame 6502
+  passif sans `TriggerName`, 6503 hits `SKIP_A/B` joués par aucun clip) ;
+  16 hors C24, une **troisième cause** ni 1 ni 2 : le clip du trigger est
+  extrait mais joue les templets d'un AUTRE skill, et `resolveSkillClips`
+  l'écarte (« aucun templet du skill ») — Valentine 1210 (`Skill6` →
+  `2000012_Skill_6`, events `Skill_5_*`), Kate 3019-3021 (`Skill3`, hits
+  `2000030_Skill_1`), Ritri 4819-4821 (`Skill3`, hits `Skill_1_*`), Sigma
+  5221 (`Skill7`, hit `Skill_2`), Demiurge Astei 5919-5920 et Gnosis Dahlia
+  9019-9021 (`Burst1` → `*_Skill_extra_*`, hits `Skill_1_*`), Dianne
+  9319-9320 (`Burst1` → `Skill_2_1`, hit `Skill_1_1`), Fortuna 10721
+  (`Burst3` → `Skill_7_*`, hits `Skill_1_*`) : c'est le rattachement « un
+  clip atteint par un index appartient au skill » du lot du correctif
+  (§ 5.1, comme Ame 6503), pas celui-ci. Les 2 autres des 18 (302, 11601)
+  sont attrapés par la cause 2. (f) **Vérifié** : nouveau bloc de
+  `damage-data.test.ts`, « anim-events — bundles de fusion et états
+  d'approche (B64) » (35 skills placés ; parmi les 46 de C24, exactement les
+  11 justifiés sans clip ; clips des quatre fusionnés ; `time`/`after` ≥ 0 ;
+  porteurs `additive` = Francesca, Parti, Sterope, Poolside Regina, Luna, et
+  la valeur de Francesca) ; `pnpm damage:check` : « Bilan : 42 ligne(s)
+  exacte(s), 0 en dérive, 0 sautée(s) », aucune ligne n'a bougé ;
+  `pnpm typecheck` : les trois `tsc --noEmit` (racine, `datagen/`,
+  `scripts/`) sans erreur ; `pnpm lint` : `eslint` sans sortie ; `pnpm test` : « Tests 4307 passed (4307) ».
+  Extraction complète en ~30 s. **Laissé** : les variantes (§ 5.2, F29), la
+  troisième cause ci-dessus, Vera 201, les durées de transition d'index 1
+  (option de § 5.1).
+
 - **A70 — quick : cibles de revue « Casques », « Gants », « Bottes » à côté
   des « Armures » ; liens des colonnes `*BuffID` des Tables du jeu vers
   `BuffTemplet.BuffID`, et `TrustRewardTemplet.RewardBuffID` vers
