@@ -55,24 +55,6 @@ les preuves et les décisions vivent dans le tri consolidé de sevih-tool
 
 ## 🧹 Suites de la rédaction du 18/10 (lots A62 à C26, G8 à G30, F28, OB3, TW2)
 
-- [ ] **Talismans à +5 : 5 emplacements de gemme pour tous** — FAIT côté
-      outerpedia (B62) : le client donne 5 emplacements à +5 à TOUS les
-      talismans et EE (tous `IG_UNIQUE`, l'étoile n'entre pas dans la règle),
-      `gemSlotsOf` est juste ; le contrat émet `enhance.json` › `gemSlots` et
-      `reforge` (`maxTicksPerSub`, `countByStar`, `ascendedBonus`),
-      `progression.json` › `evoUnlockLevel`, et `combatOnly` de `buffs.json`
-      par `isStatSheetBuff`. Reste, après la série G, le lot gear-solver qui
-      lit ces clés : `gemSlotsOf` (`apps/renderer/src/lib/solver/gems.ts`
-      l.182-186), `REFORGE_PER_SUB_CAP` (l.845), `REFORGE_PLANS` (l.72-75) et
-      `maxReforgesOf` (l.854-857) d'`apps/renderer/src/lib/solver/engine.ts`,
-      `EVO_UNLOCK_LEVEL` (`packages/core/src/compose-stats.ts` l.224-229), le
-      « 5 : 4 » de `buildAdvice.ts` (l.152), et `progression.json` ajouté à
-      `apps/desktop/src/solver-files.json`.
-- [ ] **Suites de L6 (après C26 et G30)** : les lecteurs du wiki
-      (`BLOCK_KEY`, `BONUS_KEY` de `char-progression.ts`, `STAT_KEY` de
-      `reco-api.ts`) et `RAW_FLAT` / `statScales` de `monster-stats.ts` lisent
-      la table de clés — FAIT côté wiki (B61) ; reste, côté gear-solver, les
-      mains d'EE `ST_AVOID` sortent du panneau au lieu d'y être « combat-only ».
 - [ ] **Suites de G8** : fiche du wiki en vitesse en taux avec régénération
       de l'oracle (`char-progression.ts`), puis retrait de `corePassive`
       (`schema` 2), seulement après la release de gear-solver qui porte G8.
@@ -94,14 +76,6 @@ les preuves et les décisions vivent dans le tri consolidé de sevih-tool
       « combat » ne se survole pas (`RichTooltip` en `pointer-events-none`,
       `BuildsScreen.tsx`) ; notes publiques `docs/release-notes.md`
       [Unreleased] à remplir avant la release (G8, G9, G10).
-- [ ] **gear-solver, petits suivis de G12** : `wiki/Engine-Reference.md` dit
-      encore « a list of known local paths » pour `data/sync.mjs` (c'est
-      `.env.local` puis `../outerpedia`) ; `docs/roadmap.md` (M8) et
-      `docs/STATUS.md` donnent encore le packaging « à vérifier », à
-      requalifier comme `docs/todo.md` ; l'item « data-sync » de
-      `docs/todo.md` (« octets non JSON écrits tels quels ») ne vaut plus
-      qu'en mode REPO ; le script de rejeu des EE ne compte pas l'`IOT_STAT`
-      (1 écart faux, 2000078 à +10).
 - [ ] **gear-solver, CI** : ni `dependabot.yml`, ni actions épinglées par SHA
       (`actions/checkout@v4`…), comme outerbot avant le 15/10.
 
@@ -124,14 +98,6 @@ les preuves et les décisions vivent dans le tri consolidé de sevih-tool
       dans la Worklist compte comme libre pour « 4P disponible » (G28) ;
       colonne `upg` et entrée Worklist lisent encore l'`upg` du solve (G25) ;
       `docs/release-notes.md` [Unreleased] à remplir avant la release.
-- [ ] **gear-solver, après B62** : lire `enhance.json › gemSlots` et
-      `reforge`, `progression.json › evoUnlockLevel`, ajouter
-      `progression.json` à `solver-files.json` (les cinq endroits recopiés à
-      la main cités dans l'entrée DONE de B62) ; le `data:sync` emporte aussi
-      A67 et le `combatOnly` de `BID_CEQUIP_MAIN_DMG_REDUCE_CORE` (un EE à
-      main DMG Reduction core sort de la fiche). Après G30. Et le tableau de
-      `docs/reference.md` / `wiki/Engine-Reference.md` dit « 95 tests » pour
-      `solver.test.ts`, périmé.
 
 ## 🧰 Outil quick
 
