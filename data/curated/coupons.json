@@ -1,5 +1,13 @@
 [
   {
+    "code": "OUTERLETTEROCT",
+    "start": "2026-10-19",
+    "end": "2026-11-30",
+    "description": {
+      "SYS_ASSET_FREE_CRYSTAL": "500"
+    }
+  },
+  {
     "code": "ILLUSTARFES14",
     "start": "2026-10-12",
     "end": "2026-11-30",

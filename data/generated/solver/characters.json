@@ -44181,7 +44181,8 @@
     "recommendSetId": "3,2,7",
     "bestSkill": {
       "slot": "S1",
-      "factor": 2080
+      "burst": 3,
+      "factor": 2672
     }
   },
   "2000058": {
@@ -65780,7 +65781,6 @@
     "recommendSetId": "1,12,13",
     "bestSkill": {
       "slot": "S2",
-      "burst": 1,
       "factor": 3237
     }
   },
@@ -69772,7 +69772,7 @@
     },
     "recommendSetId": "1,12,13",
     "bestSkill": {
-      "slot": "S2",
+      "slot": "S1",
       "factor": 2220
     }
   },
@@ -79844,7 +79844,6 @@
     "recommendSetId": "3,2,13",
     "bestSkill": {
       "slot": "S1",
-      "burst": 1,
       "factor": 1885
     }
   },
