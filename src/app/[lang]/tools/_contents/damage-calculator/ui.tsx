@@ -257,6 +257,100 @@ export function AdvLinkedNote({
   return target.advLinked ? <p className="text-content-subtle text-xs">{label}</p> : null;
 }
 
+/** RES de la cible dans `ApplyChancePair` : saisie en manuel, valeur de combat
+ *  du spawn en preset (la fiche, quand elle diffère, en infobulle). */
+export type ApplyChanceRes =
+  | { mode: 'input'; value: string; set: (v: string) => void }
+  | { mode: 'value'; text: string; title?: string };
+
+// Libellé de la stat, puis le camp qui la porte (attaquant / cible) dessous.
+function ApplyLabel({ stat, side }: { stat: string; side: string }) {
+  return (
+    <span className="block min-w-0">
+      <span className="text-content-subtle block truncate font-mono text-[9px] tracking-wide uppercase">
+        {stat}
+      </span>
+      <span className="text-content-subtle/70 text-2xs block truncate">{side}</span>
+    </span>
+  );
+}
+const APPLY_INPUT_WRAP =
+  'border-line-subtle bg-surface-sunken/70 focus-within:border-accent flex h-8 w-full min-w-0 items-center gap-1 rounded-lg border px-2';
+const APPLY_INPUT =
+  'text-content w-full min-w-0 flex-1 bg-transparent font-mono text-sm font-bold tabular-nums outline-none';
+
+/**
+ * Pose des débuffs : l'EFF de l'attaquant et la RES de la cible côte à côte,
+ * dans la carte cible, toujours visibles (décision Sevih 19/10/2026). Seules
+ * les lignes DOT lisent la proba de pose aujourd'hui (la note le dit). L'EFF
+ * est `disabled` et vide sans attaquant.
+ */
+export function ApplyChancePair({
+  title,
+  note,
+  attackerLabel,
+  targetLabel,
+  effLabel,
+  resLabel,
+  eff,
+  res,
+}: {
+  title: string;
+  note: string;
+  attackerLabel: string;
+  targetLabel: string;
+  effLabel: string;
+  resLabel: string;
+  eff: { value: string; set: (v: string) => void; disabled: boolean };
+  res: ApplyChanceRes;
+}) {
+  return (
+    <div className="border-line-subtle bg-surface-sunken/70 space-y-1.5 rounded-lg border p-2">
+      <span className="text-content-subtle block font-mono text-[9px] tracking-wide uppercase">
+        {title}
+      </span>
+      <div className="grid grid-cols-2 gap-2">
+        <label className="min-w-0 space-y-1">
+          <ApplyLabel stat={effLabel} side={attackerLabel} />
+          <span className={APPLY_INPUT_WRAP}>
+            <input
+              type="text"
+              inputMode="decimal"
+              disabled={eff.disabled}
+              value={eff.disabled ? '' : eff.value}
+              onChange={(e) => eff.set(e.target.value)}
+              className={`${APPLY_INPUT} disabled:opacity-40`}
+            />
+          </span>
+        </label>
+        {res.mode === 'input' ? (
+          <label className="min-w-0 space-y-1">
+            <ApplyLabel stat={resLabel} side={targetLabel} />
+            <span className={APPLY_INPUT_WRAP}>
+              <input
+                type="text"
+                inputMode="decimal"
+                value={res.value}
+                onChange={(e) => res.set(e.target.value)}
+                className={APPLY_INPUT}
+              />
+            </span>
+          </label>
+        ) : (
+          <div title={res.title} className="min-w-0 space-y-1">
+            <ApplyLabel stat={resLabel} side={targetLabel} />
+            <span className="text-content flex h-8 items-center px-2 font-mono text-sm font-bold tabular-nums">
+              {res.text}
+            </span>
+            {res.title && <span className="sr-only">{res.title}</span>}
+          </div>
+        )}
+      </div>
+      <p className="text-content-subtle text-2xs">{note}</p>
+    </div>
+  );
+}
+
 export const ROW_CLASS =
   'hover:bg-surface-raised/80 flex w-full cursor-pointer items-center gap-2 rounded-md px-2 py-1.5 text-left text-sm transition';
 export const SELECT_CLASS =

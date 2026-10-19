@@ -626,6 +626,8 @@ const jp: Record<TranslationKey, string> = {
   'tools.damage-calculator.target.tab.manual': 'マニュアル',
   'tools.damage-calculator.target.manual.element': '属性',
   'tools.damage-calculator.target.manual.copy_from_selected': '選択中からコピー',
+  'tools.damage-calculator.target.apply_title': 'デバフ付与：EFF 対 RES',
+  'tools.damage-calculator.target.apply_note': '現在は DOT 行のみが使用します。',
   // Stat labels (shared across panels)
   'tools.damage-calculator.stat.HP': 'HP',
   'tools.damage-calculator.stat.ATK': 'ATK',

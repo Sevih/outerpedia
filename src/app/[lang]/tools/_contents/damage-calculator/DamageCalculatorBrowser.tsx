@@ -74,6 +74,8 @@ import {
 import { DEV_BUILD, SCENARIOS_STORE, scnKey, type SavedScenario } from './stores';
 import {
   AdvLinkedNote,
+  ApplyChancePair,
+  type ApplyChanceRes,
   Card,
   CharPicker,
   CharPortrait,
@@ -767,6 +769,28 @@ export function DamageCalculatorBrowser({
 
   const wellClass = 'border-line-subtle bg-surface-sunken/70 rounded-lg border';
 
+  // Pose des débuffs (décision Sevih 19/10/2026) : l'EFF de l'attaquant et la
+  // RES de la cible groupées dans la carte cible, en preset comme en manuel —
+  // la RES quitte donc les grilles de la cible, l'EFF la carte « Stats ».
+  const effLabel = statFields.find((f) => f.key === 'buff_chance')?.label ?? '';
+  const resLabel = targetStatFields.find((f) => f.key === 'res')?.label ?? '';
+  const applyPair = (res: ApplyChanceRes) => (
+    <ApplyChancePair
+      title={L.target.applyTitle}
+      note={L.target.applyNote}
+      attackerLabel={L.panels.attacker}
+      targetLabel={L.panels.target}
+      effLabel={effLabel}
+      resLabel={resLabel}
+      eff={{
+        value: statVals.buff_chance ?? '',
+        set: (v) => setStatVals((s) => ({ ...s, buff_chance: v })),
+        disabled: !attacker,
+      }}
+      res={res}
+    />
+  );
+
   // Cadre de DEBUG (Sevih 27/07/2026) : l'état exact que le moteur consommera
   // — savoir ce qu'on a et ce qui est actif pendant le branchement du rapport.
   const debugState = {
@@ -972,23 +996,27 @@ export function DamageCalculatorBrowser({
                 right={<span className="text-content-subtle text-2xs">{L.stats.sheetNote}</span>}
               >
                 <div className="grid grid-cols-2 gap-2">
-                  {sheetFields.map((f) => (
-                    <label key={f.key} className="min-w-0 space-y-1">
-                      <span className="text-content-subtle block truncate font-mono text-[9px] tracking-wide uppercase">
-                        {f.label}
-                      </span>
-                      <span className="border-line-subtle bg-surface-sunken/70 focus-within:border-accent flex h-8 w-full min-w-0 items-center gap-1 rounded-lg border px-2">
-                        <input
-                          type="text"
-                          inputMode="decimal"
-                          value={statVals[f.key] ?? ''}
-                          onChange={(e) => setStatVals((s) => ({ ...s, [f.key]: e.target.value }))}
-                          className="text-content w-full min-w-0 flex-1 bg-transparent font-mono text-sm font-bold tabular-nums outline-none"
-                        />
-                        {f.percent && <span className="text-content-subtle text-xs">%</span>}
-                      </span>
-                    </label>
-                  ))}
+                  {sheetFields
+                    .filter((f) => f.key !== 'buff_chance')
+                    .map((f) => (
+                      <label key={f.key} className="min-w-0 space-y-1">
+                        <span className="text-content-subtle block truncate font-mono text-[9px] tracking-wide uppercase">
+                          {f.label}
+                        </span>
+                        <span className="border-line-subtle bg-surface-sunken/70 focus-within:border-accent flex h-8 w-full min-w-0 items-center gap-1 rounded-lg border px-2">
+                          <input
+                            type="text"
+                            inputMode="decimal"
+                            value={statVals[f.key] ?? ''}
+                            onChange={(e) =>
+                              setStatVals((s) => ({ ...s, [f.key]: e.target.value }))
+                            }
+                            className="text-content w-full min-w-0 flex-1 bg-transparent font-mono text-sm font-bold tabular-nums outline-none"
+                          />
+                          {f.percent && <span className="text-content-subtle text-xs">%</span>}
+                        </span>
+                      </label>
+                    ))}
                 </div>
               </Card>
             )}
@@ -1331,32 +1359,47 @@ export function DamageCalculatorBrowser({
                         // celles qui pèsent sur les dégâts et la RES de la pose,
                         // en clair et SANS troncature (demande Sevih
                         // 27/07/2026). La fiche, quand elle diffère, en infobulle.
-                        <div className="grid grid-cols-2 gap-1.5">
-                          {targetStatFields.map((f) => {
-                            const key = f.key as keyof DcSpawn['stats'];
-                            const sheet = spawn.stats[key] ?? 0;
-                            const combat = spawn.combat?.[key];
-                            const sheetNote =
-                              combat !== undefined
-                                ? vars(L.target.sheetStat, { value: fmtStat(sheet, f.percent) })
-                                : undefined;
-                            return (
-                              <div
-                                key={f.key}
-                                title={sheetNote}
-                                className={`${wellClass} min-w-0 px-2.5 py-1.5`}
-                              >
-                                <span className="text-content-subtle block font-mono text-[9px] tracking-wide uppercase">
-                                  {f.label}
-                                </span>
-                                <span className="text-content block font-mono text-sm font-bold tabular-nums">
-                                  {fmtStat(combat ?? sheet, f.percent)}
-                                </span>
-                                {sheetNote && <span className="sr-only">{sheetNote}</span>}
-                              </div>
-                            );
+                        // La RES vit dans le groupe de pose, sous la grille.
+                        <>
+                          <div className="grid grid-cols-2 gap-1.5">
+                            {targetStatFields
+                              .filter((f) => f.key !== 'res')
+                              .map((f) => {
+                                const key = f.key as keyof DcSpawn['stats'];
+                                const sheet = spawn.stats[key] ?? 0;
+                                const combat = spawn.combat?.[key];
+                                const sheetNote =
+                                  combat !== undefined
+                                    ? vars(L.target.sheetStat, { value: fmtStat(sheet, f.percent) })
+                                    : undefined;
+                                return (
+                                  <div
+                                    key={f.key}
+                                    title={sheetNote}
+                                    className={`${wellClass} min-w-0 px-2.5 py-1.5`}
+                                  >
+                                    <span className="text-content-subtle block font-mono text-[9px] tracking-wide uppercase">
+                                      {f.label}
+                                    </span>
+                                    <span className="text-content block font-mono text-sm font-bold tabular-nums">
+                                      {fmtStat(combat ?? sheet, f.percent)}
+                                    </span>
+                                    {sheetNote && <span className="sr-only">{sheetNote}</span>}
+                                  </div>
+                                );
+                              })}
+                          </div>
+                          {applyPair({
+                            mode: 'value',
+                            text: fmtStat(spawn.combat?.res ?? spawn.stats.res ?? 0, false),
+                            title:
+                              spawn.combat?.res !== undefined
+                                ? vars(L.target.sheetStat, {
+                                    value: fmtStat(spawn.stats.res ?? 0, false),
+                                  })
+                                : undefined,
                           })}
-                        </div>
+                        </>
                       )}
                     </>
                   )}
@@ -1417,26 +1460,34 @@ export function DamageCalculatorBrowser({
                   )}
 
                   <div className="grid grid-cols-2 gap-2">
-                    {targetStatFields.map((f) => (
-                      <label key={f.key} className="min-w-0 space-y-1">
-                        <span className="text-content-subtle block truncate font-mono text-[9px] tracking-wide uppercase">
-                          {f.label}
-                        </span>
-                        <span className="border-line-subtle bg-surface-sunken/70 focus-within:border-accent flex h-8 w-full min-w-0 items-center gap-1 rounded-lg border px-2">
-                          <input
-                            type="text"
-                            inputMode="decimal"
-                            value={tgtStats[f.key] ?? ''}
-                            onChange={(e) =>
-                              setTgtStats((s) => ({ ...s, [f.key]: e.target.value }))
-                            }
-                            className="text-content w-full min-w-0 flex-1 bg-transparent font-mono text-sm font-bold tabular-nums outline-none"
-                          />
-                          {f.percent && <span className="text-content-subtle text-xs">%</span>}
-                        </span>
-                      </label>
-                    ))}
+                    {targetStatFields
+                      .filter((f) => f.key !== 'res')
+                      .map((f) => (
+                        <label key={f.key} className="min-w-0 space-y-1">
+                          <span className="text-content-subtle block truncate font-mono text-[9px] tracking-wide uppercase">
+                            {f.label}
+                          </span>
+                          <span className="border-line-subtle bg-surface-sunken/70 focus-within:border-accent flex h-8 w-full min-w-0 items-center gap-1 rounded-lg border px-2">
+                            <input
+                              type="text"
+                              inputMode="decimal"
+                              value={tgtStats[f.key] ?? ''}
+                              onChange={(e) =>
+                                setTgtStats((s) => ({ ...s, [f.key]: e.target.value }))
+                              }
+                              className="text-content w-full min-w-0 flex-1 bg-transparent font-mono text-sm font-bold tabular-nums outline-none"
+                            />
+                            {f.percent && <span className="text-content-subtle text-xs">%</span>}
+                          </span>
+                        </label>
+                      ))}
                   </div>
+
+                  {applyPair({
+                    mode: 'input',
+                    value: tgtStats.res ?? '',
+                    set: (v) => setTgtStats((s) => ({ ...s, res: v })),
+                  })}
 
                   {/* Pré-remplit depuis le preset sélectionné (spawn courant). */}
                   <button

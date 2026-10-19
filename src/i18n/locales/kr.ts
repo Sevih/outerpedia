@@ -616,6 +616,8 @@ const kr: Record<TranslationKey, string> = {
   'tools.damage-calculator.target.tab.manual': '수동',
   'tools.damage-calculator.target.manual.element': '속성',
   'tools.damage-calculator.target.manual.copy_from_selected': '선택에서 복사',
+  'tools.damage-calculator.target.apply_title': '디버프 부여: EFF 대 RES',
+  'tools.damage-calculator.target.apply_note': '현재 DOT 행에서만 사용됩니다.',
   // Stat labels (shared across panels)
   'tools.damage-calculator.stat.HP': 'HP',
   'tools.damage-calculator.stat.ATK': 'ATK',

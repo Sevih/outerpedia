@@ -27,12 +27,6 @@ les preuves et les décisions vivent dans le tri consolidé de sevih-tool
       M1 et M2 mesurées le 18/10 (Sterope : suite sous buff, deux
       cascades, bursts compris ; `docs/specs/damage-clips-joues.md` § 4) :
       lot du correctif à rédiger (§ 5).
-- [ ] **Calculateur : EFF de l'attaquant face à la RES de la cible**
-      (retour de Sevih, 18/10, après C25) : le champ EFF de l'attaquant
-      n'apparaît que pour un kit à DOT (`statKeysFor`, `s?.dot`), et la
-      probabilité de pose ne sert qu'aux lignes DOT, alors que le champ RES
-      de la cible manuelle est toujours là. Montrer les deux ensemble, ou
-      étendre la probabilité de pose aux autres débuffs du kit : à trancher.
 - [ ] **Calculateur : infiltration par zone** (retour de Sevih, 18/10) :
       les cibles d'Infiltration Operation sont rangées par « Floor N »,
       alors que chaque infiltration a 3 zones, chacune avec ses combats.

@@ -230,7 +230,9 @@ const SHEET_STATS = SHEET_FIELDS;
  * son kit la swap), les multiplicateurs universels (CHD, PEN %, DMG UP %), et
  * les scalings annexes dérivés de son kit (`damage-scaling.json`). La CHC n'est
  * demandée que si le kit scale dessus : le crit du rapport est un interrupteur,
- * pas un tirage. La RES ne sert jamais à l'attaquant.
+ * pas un tirage. La RES ne sert jamais à l'attaquant. L'EFF est demandée à
+ * TOUS depuis le 19/10/2026 (pose des DOT) : elle est montrée face à la RES
+ * de la cible, dans la carte cible.
  */
 function statKeysFor(id: string): string[] {
   const s = SCALING[id];
@@ -242,7 +244,7 @@ function statKeysFor(id: string): string[] {
   ]);
   for (const b of s?.bonusStats ?? []) keys.add(b);
   if (s?.lostHpDmg) keys.add('hp');
-  if (s?.dot) keys.add('buff_chance');
+  keys.add('buff_chance');
   // Intersection avec la fiche, dans son ordre (écarte p. ex. `get_gold_rate`).
   return SHEET_STATS.filter((f) => keys.has(f.slug)).map((f) => f.slug);
 }
@@ -1041,6 +1043,8 @@ export default async function DamageCalculator({ lang }: { lang: Lang }) {
       manual: t(k('target.tab.manual')),
       element: t(k('target.manual.element')),
       copyFromSelected: t(k('target.manual.copy_from_selected')),
+      applyTitle: t(k('target.apply_title')),
+      applyNote: t(k('target.apply_note')),
       sheetStat: t('guides.boss_display.sheet_stat'),
       lv: t(k('target.lv_prefix')),
       stage: t(k('target.stage')),

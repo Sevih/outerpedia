@@ -57,7 +57,9 @@ plus que ce qui y est listé.
 - Détail repliable « par hit » : la chaîne des hits avec le rattrapage du
   dernier hit visible (les arrondis sont VRAIS, pas cosmétiques).
 - Lignes annexes conditionnelles : WG, vampirique, récup on-hit du défenseur,
-  DOT (dégâts/tick + proba de pose), soins/shields posés.
+  DOT (dégâts/tick + proba de pose), soins/shields posés. La proba de pose du
+  DOT lit l'EFF de l'attaquant et la RES de la cible, saisies côte à côte dans
+  la carte cible (19/10/2026).
 - Cas particuliers : cible INVINCIBLE → carte grisée « 0 (invincible) » ;
   MISS impossible en PvE monstre sans Avoid → colonne Esquivé masquée.
 
@@ -98,6 +100,7 @@ Reset button.
 
 ### Column 2 — SCENARIO
 - TARGET card with a radio segmented control: "Monster" (default) / "Character".
+  EFF (attacker) / RES (target) pair under the target stats, always visible.
   - Monster mode: two selects (Content, then Boss/Stage) + a read-only line
     showing the resolved spawn: "Lv 90 · spawn bonus +15% ATK/DEF".
   - Character mode: compact summary of an enemy build + "Edit build" button

@@ -641,6 +641,8 @@ const en = {
   'tools.damage-calculator.target.tab.manual': 'Manual',
   'tools.damage-calculator.target.manual.element': 'Element',
   'tools.damage-calculator.target.manual.copy_from_selected': 'Copy from selected',
+  'tools.damage-calculator.target.apply_title': 'Debuff landing: EFF vs RES',
+  'tools.damage-calculator.target.apply_note': 'Only the DOT lines use it today.',
   // Stat labels (shared across panels)
   'tools.damage-calculator.stat.HP': 'HP',
   'tools.damage-calculator.stat.ATK': 'ATK',

@@ -21,7 +21,9 @@ export interface DcChar {
   element: string;
   cls: string;
   rarity: number;
-  /** Stats de la fiche à SAISIR pour ce perso (slugs, ordre de la fiche). */
+  /** Stats de la fiche à SAISIR pour ce perso (slugs, ordre de la fiche).
+   *  L'EFF (`buff_chance`) y est pour tous depuis le 19/10/2026 (pose des
+   *  DOT, montrée face à la RES de la cible). */
   statKeys: string[];
   /** Paliers de transcendance réels (barème de la rareté ou override). */
   transcend: DcTranscendTier[];
@@ -338,6 +340,9 @@ export interface DcLabels {
     manual: string;
     element: string;
     copyFromSelected: string;
+    /** Titre et note du groupe EFF de l'attaquant / RES de la cible. */
+    applyTitle: string;
+    applyNote: string;
     /** Infobulle d'une stat dont la fiche diffère du combat (`{value}`). */
     sheetStat: string;
     lv: string;

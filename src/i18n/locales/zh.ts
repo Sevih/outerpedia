@@ -607,6 +607,8 @@ const zh: Record<TranslationKey, string> = {
   'tools.damage-calculator.target.tab.manual': '手动设置',
   'tools.damage-calculator.target.manual.element': '属性',
   'tools.damage-calculator.target.manual.copy_from_selected': '从选中复制',
+  'tools.damage-calculator.target.apply_title': '减益命中：EFF 对 RES',
+  'tools.damage-calculator.target.apply_note': '目前仅 DOT 行使用。',
   // Stat labels (shared across panels)
   'tools.damage-calculator.stat.HP': '生命值',
   'tools.damage-calculator.stat.ATK': '攻击力',

@@ -7,6 +7,48 @@
 
 ## 2026-10-19
 
+- **A71 — Calculateur : l'EFF de l'attaquant et la RES de la cible montrées
+  ensemble, dans la carte cible, toujours visibles.** Item du TODO
+  « Calculateur : EFF de l'attaquant face à la RES de la cible » retiré
+  (décision de Sevih du 19/10 : grouper les deux champs, sans étendre la
+  proba de pose aux débuffs non-DOT). Pourquoi : l'EFF n'était demandée
+  qu'aux kits à DOT (`statKeysFor`, `if (s?.dot)`) et vivait dans la carte
+  « Stats » de l'attaquant, loin de la RES de la cible, toujours présente.
+  Comment : `statKeysFor` (`index.tsx`) ajoute `buff_chance` pour tous (son
+  commentaire et celui de `DcChar.statKeys` dans `contracts.ts` le disent),
+  donc les chips `eff`, `eff_down`, `t_res`, `t_res_down` sont proposés à
+  tous par le même `relevantFx`, sans autre changement ; nouveau composant
+  pur `ApplyChancePair` dans `ui.tsx` (puits, titre `L.target.applyTitle`,
+  grille à deux colonnes EFF sous-libellé `L.panels.attacker` | RES
+  sous-libellé `L.panels.target`, mêmes classes d'input que la saisie
+  manuelle, note `L.target.applyNote` ; EFF `disabled` et vide sans
+  attaquant ; RES en saisie `{ mode: 'input' }` ou en valeur
+  `{ mode: 'value', text, title }`) ; dans `DamageCalculatorBrowser.tsx`, un
+  `applyPair` le rend dans la carte cible après la grille des stats, en
+  preset (dans le bloc `spawn`, valeur de combat du spawn avec l'infobulle
+  `sheetStat` de la grille) et en manuel (avant « Copy from selected ») ;
+  `res` est filtré des deux grilles et `buff_chance` de la carte « Stats »
+  seulement (`targetStatFields` et `sheetFields` intacts : le cadre debug et
+  le bouton de copie les gardent entiers). L'EFF lit/écrit
+  `statVals.buff_chance`, la RES `tgtStats.res` : aucune clé `?z=` ne
+  change, un lien qui porte `v.buff_chance` et `tv.res` remplit les deux
+  champs du groupe (vérifié à la lecture de `use-scenario-state.ts`, même
+  état aller-retour). Clés `tools.damage-calculator.target.apply_title` et
+  `apply_note` dans les six locales (textes du lot). Spec
+  `docs/specs/damage-calculator-ui.md` : § 3 (la proba de pose lit l'EFF et
+  la RES, côte à côte dans la carte cible) et § 4 (puce « TARGET card »).
+  Vérification : `ui.test.tsx` (libellés et note rendus, EFF désactivée et
+  vide sans attaquant, RES en `<input>` en manuel, en texte avec `title` en
+  preset), `keys.test.ts` vert ; `pnpm typecheck` (les trois `tsc --noEmit`,
+  sans erreur), `pnpm lint` (`eslint`, sans erreur), `pnpm test`
+  (« Tests 4319 passed (4319) »). Laissé : le contrôle
+  au rendu (preset/manuel, Beth, Francesca et un perso sans DOT, chips
+  `eff`/`t_res` désormais proposés à ce dernier) n'a pas pu se faire — rien
+  n'écoutait sur :3000 ni derrière `outerpedia.local` (502), `pnpm dev` est
+  interdit et quick ne sert pas le site : à regarder par Sevih. Le
+  commentaire de `TARGET_BUFFS` (« la Résilience ne sert qu'aux kits qui
+  posent des debuffs ») reste exact sur le fond, non retouché.
+
 - **B62 — Contrat solver : les règles recopiées à la main dans gear-solver
   émises par outerpedia (emplacements de gemme, cap et budgets de reforge,
   paliers d'évolution, `combatOnly` par le prédicat de fiche).** Item du TODO

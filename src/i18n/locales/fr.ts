@@ -647,6 +647,8 @@ const fr: Record<TranslationKey, string> = {
   'tools.damage-calculator.target.tab.manual': 'Manuel',
   'tools.damage-calculator.target.manual.element': 'Élément',
   'tools.damage-calculator.target.manual.copy_from_selected': 'Copier depuis la sélection',
+  'tools.damage-calculator.target.apply_title': 'Pose des débuffs : EFF contre RES',
+  'tools.damage-calculator.target.apply_note': "Seules les lignes DOT s'en servent aujourd'hui.",
   // Stat labels (shared across panels)
   'tools.damage-calculator.stat.HP': 'HP',
   'tools.damage-calculator.stat.ATK': 'ATK',
