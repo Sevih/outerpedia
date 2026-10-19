@@ -106,20 +106,12 @@ les preuves et les décisions vivent dans le tri consolidé de sevih-tool
       (comportement à décider) ; Dependabot `npm` (et `docker` pour l'image
       de base) : PLUS TARD (décision de Sevih du 18/10, chaque PR redéploie
       le bot ; OB3 ne couvre que les actions GitHub).
-- [ ] **Pulverization niveau 2, 4 pièces : coquille probable du jeu (vu par
-      la relecture de G10)** : valeurs attendues par Sevih (19/10) T0 2p 35 %
-      / 4p 25 %, T4 2p 70 % / 4p 50 %, à vérifier en jeu.
-      `ItemSpecialOptionTemplet` ligne 117 fait pointer `BuffID_4P` du T4 vers
-      `BID_ITEM_UO_SET_17` (le buff du 2 pièces, 700) alors que
-      `BID_ITEM_UO_SET_17_1` niveau 2 vaut 500 ; le contrat recopie la table et
-      affiche 70 % au 4 pièces T4 ; le CALCULATEUR pose deux fois ce buff de
-      700 (2P + 4P) : +140 % contre une cible en Break, au lieu des 120 % du
-      texte (rejoué le 19/10, `resolveGearPassives`). En jeu, trois issues :
-      120 % (le texte), 70 % (même buff, `StackCount` 1, le 4P n'apporte rien),
-      140 % (cumul). Mesure : 4 pièces T4, puis 2 pièces T4, contre une cible
-      en Break ; puis décider (contrat, calculateur). Dans gear-solver,
-      affiché seulement, jamais dans la fiche ni la CP. Fortification : le −30 % de vitesse est
-      normal (Sevih), à vérifier en jeu aussi.
+- [ ] **Pulverization T4, 4 pièces** : décision de Sevih du 19/10, 2P et 4P se
+      cumulent et le 4P T4 vaut 50 % (texte du jeu), alors que la table du jeu
+      (`ItemSpecialOptionTemplet` 117) lui donne le buff du 2P (700) : lot A67
+      rédigé (correction tenue dans `datagen/lib/buff.ts`). Reste à Sevih : la
+      mesure en jeu (4 pièces T4 contre une cible en Break, +120 % attendus) ;
+      Fortification (−30 % de vitesse, normal) à vérifier en jeu aussi.
 - [ ] **gear-solver, petits suivis de G9 et G10** : le pré-tri du mode Score
       (`priorityScoreOf`, `magnitudeScoreOf`) compte le −30 % de vitesse de
       Phantasm (écrit dans sa description, pas caché) comme −30 SPD plats ; dans l'onglet Builds, l'infobulle de la pastille
