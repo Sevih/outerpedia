@@ -1,16 +1,18 @@
 import { describe, expect, it } from 'vitest';
 import type { CharacterIngredients } from '@contracts';
-import { contractAbbrs, contractKeyToAbbr, flatContractSlugs, statSlugToAbbr } from './stat-keys';
+import { contractAbbrs, contractKeyToAbbr, statSlugToAbbr } from './stat-keys';
 import { RECO_STAT_LABELS } from './reco-api';
-import { formatMonsterStat } from '@/lib/monster-stats';
+import { slugEnum } from '@/../datagen/lib/enums';
 import glossariesData from '@data/generated/glossaries.json';
 import solverCharactersData from '@data/generated/solver/characters.json';
+import statKeysData from '@data/generated/solver/stat-keys.json';
 
 const SOLVER = solverCharactersData as unknown as Record<
   string,
   { ingredients: CharacterIngredients }
 >;
 const SCALES = (glossariesData as unknown as { statScales: Record<string, string> }).statScales;
+const STAT_KEYS = statKeysData as unknown as Record<string, Record<string, { percent: boolean }>>;
 
 /**
  * `stat-keys.ts` — les tables de clés de stats du wiki DÉRIVÉES de
@@ -74,24 +76,17 @@ describe('contractAbbrs — `STAT_KEY` de reco-api reste local, sa partie gauche
   });
 });
 
-describe('flatContractSlugs — `RAW_FLAT` des monstres', () => {
-  it('porte EFF/RES (`percent: false` au contrat, `percent` au glossaire)', () => {
-    const flat = flatContractSlugs();
-    for (const slug of ['buff_chance', 'buff_resist']) {
-      expect(flat.has(slug), slug).toBe(true);
-      expect(SCALES[slug], slug).toBe('percent');
-    }
+describe('stat-keys.json et statScales disent la même nature', () => {
+  it('la ligne `OAT_ADD` est en % ssi le glossaire dit `percent` (même source : `IsPercentStat`)', () => {
+    const common = Object.entries(STAT_KEYS).flatMap(([st, byAp]) =>
+      byAp.OAT_ADD && slugEnum(st) in SCALES ? [[slugEnum(st), byAp.OAT_ADD.percent] as const] : [],
+    );
+    expect(common.length).toBeGreaterThanOrEqual(8);
+    for (const [slug, percent] of common) expect(SCALES[slug] === 'percent', slug).toBe(percent);
   });
 
-  it('hp/atk/def/speed y sont aussi, mais `flat` au glossaire : ils gardent le groupement', () => {
-    const flat = flatContractSlugs();
-    for (const slug of ['hp', 'atk', 'def', 'speed']) {
-      expect(flat.has(slug), slug).toBe(true);
-      expect(SCALES[slug], slug).toBe('flat');
-    }
-    expect(formatMonsterStat('hp', 47_850_000, SCALES, 'fr')).toBe(
-      (47_850_000).toLocaleString('fr'),
-    );
-    expect(formatMonsterStat('hp', 47_850_000, SCALES, 'fr')).toMatch(/^47\s850\s000$/);
+  it('EFF/RES plats au glossaire', () => {
+    expect(SCALES.buff_chance).toBe('flat');
+    expect(SCALES.buff_resist).toBe('flat');
   });
 });

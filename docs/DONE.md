@@ -7,6 +7,61 @@
 
 ## 2026-10-19
 
+- **A73 — datagen : `statScales` dérivé de `IsPercentStat` du client,
+  EFF/RES plats à la source, rustine `RAW_FLAT` de B61 retirée.** Item du
+  TODO « `statScales` dit EFF/RES en pourcentage ». La table `STAT_DEFS` de
+  `datagen/extractor/specs/character.ts` portait une colonne `scale` écrite à
+  la main qui disait `percent` pour `buff_chance`/`buff_resist` et leurs
+  alias monstres `effectiveness` (`ST_ACCURACY`) / `resilience` (`ST_AVOID`),
+  et `flat` pour `hit_hp_recovery`, contre le client (`CUtilUI.IsPercentStat`,
+  déjà recopié dans `PERCENT_STAT_TYPES` de `datagen/lib/stats.ts` et lu par
+  `stat-keys.json`) ; B61 corrigeait à la lecture. Désormais `STAT_DEFS`
+  (exporté) porte pour chaque colonne son membre `st` de l'enum `STAT_TYPE`
+  (ordre des colonnes conservé : l'ordre des clés de `stats` dans les
+  fichiers générés ne bouge pas), et la nouvelle `statScales()` exportée
+  dérive l'échelle par `PERCENT_STAT_TYPES.has(st)` ; le glossaire l'emploie
+  (`statScales: statScales()`), la boucle sur `d.scale` disparaît. Côté wiki,
+  `formatMonsterStat` (`src/lib/monster-stats.ts`) ne lit plus que `scales`
+  (`percent` → `v/10 %`, sinon brut groupé si `locale`) ; `RAW_FLAT_ALIASES`,
+  `FLAT_CONTRACT_SLUGS`, l'import et leur commentaire partent, et
+  `flatContractSlugs()` sort de `src/lib/data/stat-keys.ts` (plus aucun
+  consommateur ; l'en-tête RÈGLE reste). Données : `pnpm datagen:build`
+  (130 persos, 4848 monstres), `datagen:promote` à blanc = `glossaries.json`
+  seul différent (66 identiques), `diff` des `statScales` = exactement les
+  cinq clés (`hit_hp_recovery` `flat`→`percent`, `effectiveness`,
+  `resilience`, `buff_chance`, `buff_resist` `percent`→`flat`), puis
+  `--apply --only glossaries.json` ; `git diff --stat data/generated/` =
+  `glossaries.json` seul, 5+/5−. Aucune option de rang en EFF/RES :
+  `glossaries.rankOptions` compte 31 options, `stat` ∈ {`dmg_boost` (13),
+  `dmg_reduce_rate` (13), `pierce_power_rate` (1), `null` (4)} — rien ne
+  bascule de « +20% » à « +200 » dans `bossRankOptionLabels`. Pour Sevih :
+  sur une fiche de boss (`BossStats`), EFF/RES s'affichent comme avant
+  (« 440 », « 380 », brut) ; `hit_hp_recovery` passerait en %, mais aucune
+  entité générée ne la porte. Tests : `character.test.ts` gagne « statScales
+  — dérivé de IsPercentStat » (les 26 `st` couvrent exactement les 27
+  membres de `STAT_TYPE` recopiés moins `ST_NONE` ; chaque échelle =
+  `PERCENT_STAT_TYPES` ; les cinq clés nommées plus les témoins
+  `critical_rate`/`hp`) ; `stat-keys.test.ts` retourne son describe B61 en
+  « stat-keys.json et statScales disent la même nature » (pour chaque ligne
+  `OAT_ADD` dont `slugEnum(st)` est au glossaire, `percent` ⇔ `percent` ;
+  intersection ≥ 8 exigée ; `buff_chance`/`buff_resist` `flat` nommément) ;
+  `monster-stats.test.ts` : « EFF/RES plats au glossaire, en valeur brute »
+  (`{ buff_chance: 'flat' }` avec et sans `fr` → `'210'`, le vrai glossaire
+  `buff_resist` 380 → `'380'`) et le cas du groupement des PV (déplacé de
+  `stat-keys.test.ts`) — le glossaire y est lu par `getGlossaries()`, la
+  règle `no-restricted-imports` refusant l'import JSON hors du data layer.
+  `pnpm typecheck` (dernière ligne : les trois `tsc --noEmit` (racine, `datagen`, `scripts`), code 0),
+  `pnpm lint` (`$ eslint`, aucun problème), `pnpm test` (4353 tests passés, 248 fichiers). Laissé, hors périmètre : `PREMIUM_STAT_SLUG`
+  de `specs/monster.ts` porte la même correspondance `ST_*` → slug que
+  `STAT_DEFS` (deux tables à fusionner un jour) ; les slugs `effectiveness`/
+  `resilience` restent les alias de `ST_ACCURACY`/`ST_AVOID` (`STAT_ABBR`,
+  `PREMIUM_STAT_SLUG`) malgré la confusion possible avec EFF/RES ; les
+  `rankOptions` portent des slugs `slugEnum` (`dmg_boost`, `dmg_reduce_rate`)
+  absents de `statScales` (`damage_boost`, `dmg_reduce`), si bien que
+  `bossRankOptionLabels` les affiche brutes (« +100 » pour 10 %) — à vérifier
+  à part ; le perso 2400015 extrait mais jamais intégré (promote le
+  signale, intégration depuis quick).
+
 - **A72 — quick, clôture d'A68 et d'A70 : « Get news » en bouton fantôme
   à côté de « Lancer », `getNews` ligne par langue et par page, l'en-tête
   d'Extraction compté depuis le serveur, « cinq gestes ».** Quatre restes de

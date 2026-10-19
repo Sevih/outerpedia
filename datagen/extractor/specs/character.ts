@@ -17,6 +17,7 @@ import { hasText, loadTextIndex, resolveText } from '../../lib/text';
 import { bool, loadTable, num, splitCsv, type Row } from '../../lib/tables';
 import { loadFormsByBase, ownIdentity } from '../../lib/character-forms';
 import { loadImmuneTooltipIds, readImmunities } from '../../lib/immunities';
+import { PERCENT_STAT_TYPES } from '../../lib/stats';
 import { buildImageIndex } from '../../assets/source';
 import { costumeCore } from '../../generators/costumes';
 import { runSpec } from '../core/runner';
@@ -121,37 +122,54 @@ export function isInnatePierce(b: Row): boolean {
 }
 
 /**
- * Colonnes de stats de CharacterTemplet (paires _Min/_Max) → slug + échelle.
- * `percent` = valeur per-mille (÷10 pour un %) ; `flat` = entier brut.
+ * Colonnes de stats de CharacterTemplet (paires _Min/_Max) → slug + `STAT_TYPE`.
+ * `st` = le membre de l'enum `STAT_TYPE` du client (`.gamedata/apk/dumped/src/STAT_TYPE.cs`)
+ * que porte la colonne ; l'échelle s'en DÉRIVE (`statScales`) par la règle du
+ * client, `CUtilUI.IsPercentStat` via `PERCENT_STAT_TYPES` — plus de colonne
+ * `scale` écrite à la main (A73 : elle disait EFF/RES en % et `hit_hp_recovery`
+ * plat). `PREMIUM_STAT_SLUG` de `specs/monster.ts` porte la même correspondance
+ * `ST_*` → slug (deux tables, pas encore fusionnées).
  */
-const STAT_DEFS: Array<{ col: string; slug: string; scale: StatScale }> = [
-  { col: 'HP', slug: 'hp', scale: 'flat' },
-  { col: 'Atk', slug: 'atk', scale: 'flat' },
-  { col: 'Def', slug: 'def', scale: 'flat' },
-  { col: 'Speed', slug: 'speed', scale: 'flat' },
-  { col: 'WG', slug: 'guard', scale: 'flat' },
-  { col: 'CriticalRate', slug: 'critical_rate', scale: 'percent' },
-  { col: 'CriticalDMGRate', slug: 'critical_dmg', scale: 'percent' },
-  { col: 'DMGReduceRate', slug: 'dmg_reduce', scale: 'percent' },
-  { col: 'DamageBoost', slug: 'damage_boost', scale: 'percent' },
-  { col: 'PiercePower', slug: 'pierce_power', scale: 'flat' },
-  { col: 'PiercePowerRate', slug: 'pierce_power_rate', scale: 'percent' },
-  { col: 'Vampiric', slug: 'vampiric', scale: 'percent' },
-  { col: 'HitHPRecovery', slug: 'hit_hp_recovery', scale: 'flat' },
-  { col: 'Accuracy', slug: 'effectiveness', scale: 'percent' },
-  { col: 'Avoid', slug: 'resilience', scale: 'percent' },
-  { col: 'BuffChance', slug: 'buff_chance', scale: 'percent' },
-  { col: 'BuffResist', slug: 'buff_resist', scale: 'percent' },
-  { col: 'CounterRate', slug: 'counter_rate', scale: 'percent' },
-  { col: 'EnemyCriticalDamageReduce', slug: 'enemy_critical_dmg_reduce', scale: 'percent' },
-  { col: 'HitBP', slug: 'hit_bp', scale: 'flat' },
-  { col: 'EnterBP', slug: 'enter_bp', scale: 'flat' },
-  { col: 'KillBP', slug: 'kill_bp', scale: 'flat' },
-  { col: 'GetGoldRate', slug: 'get_gold_rate', scale: 'percent' },
-  { col: 'GetCharExpRate', slug: 'get_char_exp_rate', scale: 'percent' },
-  { col: 'AvoidAddCap', slug: 'avoid_add_cap', scale: 'percent' },
-  { col: 'AvoidSubtractCap', slug: 'avoid_subtract_cap', scale: 'percent' },
+export const STAT_DEFS: Array<{ col: string; slug: string; st: string }> = [
+  { col: 'HP', slug: 'hp', st: 'ST_HP' },
+  { col: 'Atk', slug: 'atk', st: 'ST_ATK' },
+  { col: 'Def', slug: 'def', st: 'ST_DEF' },
+  { col: 'Speed', slug: 'speed', st: 'ST_SPEED' },
+  { col: 'WG', slug: 'guard', st: 'ST_WG' },
+  { col: 'CriticalRate', slug: 'critical_rate', st: 'ST_CRITICAL_RATE' },
+  { col: 'CriticalDMGRate', slug: 'critical_dmg', st: 'ST_CRITICAL_DMG_RATE' },
+  { col: 'DMGReduceRate', slug: 'dmg_reduce', st: 'ST_DMG_REDUCE_RATE' },
+  { col: 'DamageBoost', slug: 'damage_boost', st: 'ST_DMG_BOOST' },
+  { col: 'PiercePower', slug: 'pierce_power', st: 'ST_PIERCE_POWER' },
+  { col: 'PiercePowerRate', slug: 'pierce_power_rate', st: 'ST_PIERCE_POWER_RATE' },
+  { col: 'Vampiric', slug: 'vampiric', st: 'ST_VAMPIRIC' },
+  { col: 'HitHPRecovery', slug: 'hit_hp_recovery', st: 'ST_HIT_HP_RECOVERY' },
+  { col: 'Accuracy', slug: 'effectiveness', st: 'ST_ACCURACY' },
+  { col: 'Avoid', slug: 'resilience', st: 'ST_AVOID' },
+  { col: 'BuffChance', slug: 'buff_chance', st: 'ST_BUFF_CHANCE' },
+  { col: 'BuffResist', slug: 'buff_resist', st: 'ST_BUFF_RESIST' },
+  { col: 'CounterRate', slug: 'counter_rate', st: 'ST_COUNTER_RATE' },
+  {
+    col: 'EnemyCriticalDamageReduce',
+    slug: 'enemy_critical_dmg_reduce',
+    st: 'ST_E_CRI_DMG_REDUCE',
+  },
+  { col: 'HitBP', slug: 'hit_bp', st: 'ST_HIT_AP' },
+  { col: 'EnterBP', slug: 'enter_bp', st: 'ST_ENTER_AP' },
+  { col: 'KillBP', slug: 'kill_bp', st: 'ST_KILL_AP' },
+  { col: 'GetGoldRate', slug: 'get_gold_rate', st: 'ST_GET_GOLD_RATE' },
+  { col: 'GetCharExpRate', slug: 'get_char_exp_rate', st: 'ST_GET_CHARACTER_EXP_RATE' },
+  { col: 'AvoidAddCap', slug: 'avoid_add_cap', st: 'ST_AVOID_ADD_CAP' },
+  { col: 'AvoidSubtractCap', slug: 'avoid_subtract_cap', st: 'ST_AVOID_SUBTRACT_CAP' },
 ];
+
+/** `statScales` du glossaire : slug → `percent` (per-mille, ÷10 pour un %) si le
+ * client classe sa `STAT_TYPE` en % (`PERCENT_STAT_TYPES`), sinon `flat` (brut). */
+export function statScales(): Record<string, StatScale> {
+  const out: Record<string, StatScale> = {};
+  for (const d of STAT_DEFS) out[d.slug] = PERCENT_STAT_TYPES.has(d.st) ? 'percent' : 'flat';
+  return out;
+}
 
 /** Fourchette d'une stat (niveau 1 → niveau max), valeurs brutes. */
 export interface StatRange {
@@ -597,9 +615,6 @@ export const characterSpec: ExtractorSpec<Character, CharacterAux> = {
       }
     }
 
-    const statScales: Record<string, StatScale> = {};
-    for (const d of STAT_DEFS) statScales[d.slug] = d.scale;
-
     // Attaque en chaîne : le buff `<id>_chain*` porte le rôle dans BuffCreateType
     // (CHAIN_STARTER/STRIKER/FINISHER). Source fiable (≠ ChainCombination.Sequence).
     const chainTypeById = new Map<string, ChainType>();
@@ -828,7 +843,7 @@ export const characterSpec: ExtractorSpec<Character, CharacterAux> = {
         elements,
         classes,
         subClasses,
-        statScales,
+        statScales: statScales(),
         gifts,
         fusionTitle: resolveText(tsys, 'SYS_CHARACTER_FUSION_TITLE'),
       },

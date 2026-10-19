@@ -11,11 +11,14 @@
  *     l'héritage de kit fantôme était le bug de la session ;
  *   - `extractStats` : le cœur de stats partagé avec la spec monstre (valeurs
  *     BRUTES, stats de cœur toujours émises) ;
+ *   - `statScales` : l'échelle du glossaire DÉRIVÉE de `STAT_TYPE` et de
+ *     `CUtilUI.IsPercentStat` (A73), plus de table écrite à la main ;
  *   - les IMMUNITÉS propres (`BuffImmune`…) : `characterSpec.map` sur une ligne
  *     synthétique, contexte vide.
  */
 import { describe, expect, it } from 'vitest';
 import type { Row } from '../../lib/tables';
+import { PERCENT_STAT_TYPES } from '../../lib/stats';
 import {
   characterSpec,
   extractStats,
@@ -23,6 +26,8 @@ import {
   isInnatePierce,
   isRealCharacterRow,
   ownIdentity,
+  STAT_DEFS,
+  statScales,
 } from './character';
 
 /** Ligne de buff minimale : seuls les champs lus par `isInnatePierce`. */
@@ -195,6 +200,63 @@ describe('extractStats', () => {
     });
     expect(out.hp).toEqual({ min: 100, max: 9999 });
     expect(out.critical_rate).toEqual({ min: 500, max: 1200 }); // PAS ÷10
+  });
+});
+
+describe('statScales — dérivé de IsPercentStat', () => {
+  /** L'enum `STAT_TYPE` du client (`.gamedata/apk/dumped/src/STAT_TYPE.cs`), recopié. */
+  const STAT_TYPE = [
+    'ST_NONE',
+    'ST_HP',
+    'ST_WG',
+    'ST_SPEED',
+    'ST_ATK',
+    'ST_DEF',
+    'ST_DMG_REDUCE_RATE',
+    'ST_CRITICAL_RATE',
+    'ST_CRITICAL_DMG_RATE',
+    'ST_PIERCE_POWER',
+    'ST_PIERCE_POWER_RATE',
+    'ST_VAMPIRIC',
+    'ST_HIT_HP_RECOVERY',
+    'ST_ACCURACY',
+    'ST_AVOID',
+    'ST_BUFF_CHANCE',
+    'ST_BUFF_RESIST',
+    'ST_HIT_AP',
+    'ST_ENTER_AP',
+    'ST_KILL_AP',
+    'ST_GET_GOLD_RATE',
+    'ST_GET_CHARACTER_EXP_RATE',
+    'ST_COUNTER_RATE',
+    'ST_AVOID_ADD_CAP',
+    'ST_AVOID_SUBTRACT_CAP',
+    'ST_DMG_BOOST',
+    'ST_E_CRI_DMG_REDUCE',
+  ];
+
+  it('les 26 colonnes portent chacune un membre de `STAT_TYPE`, et tous y sont (hors ST_NONE)', () => {
+    expect(STAT_TYPE).toHaveLength(27);
+    expect(STAT_DEFS).toHaveLength(26);
+    const sts = STAT_DEFS.map((d) => d.st);
+    for (const st of sts) expect(STAT_TYPE, st).toContain(st);
+    expect(new Set(sts)).toEqual(new Set(STAT_TYPE.filter((st) => st !== 'ST_NONE')));
+  });
+
+  it('chaque échelle est celle de `PERCENT_STAT_TYPES` (la liste du client)', () => {
+    const scales = statScales();
+    expect(Object.keys(scales)).toHaveLength(STAT_DEFS.length);
+    for (const d of STAT_DEFS)
+      expect(scales[d.slug], d.slug).toBe(PERCENT_STAT_TYPES.has(d.st) ? 'percent' : 'flat');
+  });
+
+  it('EFF/RES (et leurs alias de l’extracteur monstres) plats, `hit_hp_recovery` en %', () => {
+    const scales = statScales();
+    for (const slug of ['buff_chance', 'buff_resist', 'effectiveness', 'resilience'])
+      expect(scales[slug], slug).toBe('flat');
+    expect(scales.hit_hp_recovery).toBe('percent');
+    expect(scales.critical_rate).toBe('percent');
+    expect(scales.hp).toBe('flat');
   });
 });
 

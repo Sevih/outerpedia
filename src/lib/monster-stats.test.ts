@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { getEncounters } from '@/lib/data/encounters';
+import { getGlossaries } from '@/lib/data/glossaries';
 import { getMonster } from '@/lib/data/monsters';
 import monstersData from '../../data/generated/monsters.json';
 import {
@@ -13,6 +14,8 @@ import {
   type SpawnContext,
 } from '@/lib/monster-stats';
 import type { DungeonRank, MonstersFile } from '@contracts';
+
+const SCALES = getGlossaries().statScales;
 
 /**
  * LE PIÈGE : `DungeonRank.hp` a deux sens selon le mode.
@@ -263,13 +266,21 @@ describe('statAt — PV d’overgrade en float32 (`CGuildRaidSpawnData.GetCharac
   });
 });
 
-describe('formatMonsterStat — EFF/RES bruts, le reste selon l’échelle', () => {
-  it('EFF/RES (et leurs alias de l’extracteur) en valeur brute, jamais en %', () => {
-    expect(formatMonsterStat('buff_chance', 210, { buff_chance: 'percent' })).toBe('210');
-    expect(formatMonsterStat('effectiveness', 210, { effectiveness: 'percent' })).toBe('210');
+describe('formatMonsterStat — l’échelle du glossaire, seule', () => {
+  it('EFF/RES plats au glossaire, en valeur brute', () => {
+    expect(formatMonsterStat('buff_chance', 210, { buff_chance: 'flat' })).toBe('210');
+    expect(formatMonsterStat('buff_chance', 210, { buff_chance: 'flat' }, 'fr')).toBe('210');
+    expect(formatMonsterStat('buff_resist', 380, SCALES)).toBe('380');
   });
 
   it('un taux du contrat reste en %', () => {
     expect(formatMonsterStat('critical_rate', 350, { critical_rate: 'percent' })).toBe('35%');
+  });
+
+  it('hp/atk/def/speed plats : groupement des milliers selon la langue', () => {
+    expect(formatMonsterStat('hp', 47_850_000, SCALES, 'fr')).toBe(
+      (47_850_000).toLocaleString('fr'),
+    );
+    expect(formatMonsterStat('hp', 47_850_000, SCALES, 'fr')).toMatch(/^47\s850\s000$/);
   });
 });

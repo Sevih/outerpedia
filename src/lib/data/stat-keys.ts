@@ -50,10 +50,3 @@ export function contractAbbrs(): Set<string> {
     for (const line of Object.values(byAp)) if (line.abbr !== null) out.add(line.abbr);
   return out;
 }
-
-/** Slugs (`slugEnum(ST_*)`) dont la valeur plate n'est PAS un pourcentage au client. */
-export function flatContractSlugs(): Set<string> {
-  const out = new Set<string>();
-  for (const [st, line] of addLines()) if (!line.percent) out.add(slugEnum(st));
-  return out;
-}
