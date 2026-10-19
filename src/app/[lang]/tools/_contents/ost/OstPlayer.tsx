@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
 import type { Lang } from '@/lib/i18n/config';
 import { audio as audioUrl } from '@/lib/audio';
+import { buildZip, type ZipEntry } from '@/lib/zip-store';
 
 /** Une piste de l'OST (schéma de `data/generated/bgm_mapping.json`). */
 export interface BgmTrack {
@@ -39,11 +40,26 @@ export interface OstStrings {
   pause: string;
   previous: string;
   next: string;
+  /** Sélection pour le zip. Placeholders laissés bruts par le serveur. */
+  selectAll: string;
+  /** `{n}` pistes, `{mb}` Mo. */
+  selectedCount: string;
+  downloadZip: string;
+  clearSelection: string;
+  /** `{done}` / `{total}`. */
+  zipProgress: string;
+  zipCancel: string;
+  zipTooBig: string;
+  /** `{name}` = la piste en échec. */
+  zipFailed: string;
 }
 
 type Repeat = 'off' | 'one' | 'all';
 /** Les deux playlists : l'OST courante du jeu, et les pistes qu'il a retirées. */
 type Playlist = 'live' | 'archived';
+
+/** Au-delà, le zip (construit en mémoire) mérite un avertissement, pas un blocage. */
+const ZIP_WARN_MB = 100;
 
 function formatTime(seconds: number): string {
   if (!isFinite(seconds) || isNaN(seconds)) return '0:00';
@@ -100,9 +116,82 @@ export function OstPlayer({
 
   const currentTrack = currentTrackIndex !== null ? tracks[currentTrackIndex] : null;
 
+  // Sélection pour le zip : propre à la playlist affichée (vidée au changement
+  // d'onglet), jamais persistée. Clé = `file`.
+  const [selected, setSelected] = useState<ReadonlySet<string>>(() => new Set());
+  const [zipProgress, setZipProgress] = useState<{
+    done: number;
+    total: number;
+    name: string;
+  } | null>(null);
+  const [zipError, setZipError] = useState<string | null>(null);
+  const zipAbortRef = useRef<AbortController | null>(null);
+
+  const selectedTracks = tracks.filter((x) => selected.has(x.file));
+  const selectedMb = selectedTracks.reduce((n, x) => n + x.size, 0);
+  const allSelected = tracks.length > 0 && selectedTracks.length === tracks.length;
+
+  const toggleTrack = useCallback((file: string) => {
+    setSelected((prev) => {
+      const next = new Set(prev);
+      if (!next.delete(file)) next.add(file);
+      return next;
+    });
+  }, []);
+
+  const toggleAll = useCallback(() => {
+    setSelected(allSelected ? new Set() : new Set(tracks.map((x) => x.file)));
+  }, [allSelected, tracks]);
+
+  const clearSelection = useCallback(() => {
+    setSelected(new Set());
+    setZipError(null);
+  }, []);
+
+  // Démontage pendant un zip : on coupe les fetch en cours.
+  useEffect(() => () => zipAbortRef.current?.abort(), []);
+
+  const downloadSelection = async () => {
+    if (zipAbortRef.current || selectedTracks.length === 0) return;
+    const ctrl = new AbortController();
+    zipAbortRef.current = ctrl;
+    setZipError(null);
+    const picked = selectedTracks;
+    const entries: ZipEntry[] = [];
+    let current = picked[0];
+    try {
+      // Une piste à la fois : 93 requêtes parallèles sur mobile, non.
+      for (const [i, track] of picked.entries()) {
+        current = track;
+        setZipProgress({ done: i + 1, total: picked.length, name: trackName(track, lang) });
+        const res = await fetch(audioUrl.bgm(track.file), { signal: ctrl.signal });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        entries.push({ name: `${track.file}.mp3`, data: new Uint8Array(await res.arrayBuffer()) });
+      }
+      const url = URL.createObjectURL(buildZip(entries));
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'outerplane-ost.zip';
+      a.click();
+      // Révocation différée : un Blob de 100 Mo+ révoqué dans la foulée du
+      // clic peut couper le téléchargement avant que le navigateur l'ait pris.
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+    } catch {
+      // Annulation (bouton ou démontage) : rien à dire. Sinon la sélection reste.
+      if (!ctrl.signal.aborted)
+        setZipError(strings.zipFailed.replace('{name}', trackName(current, lang)));
+    } finally {
+      zipAbortRef.current = null;
+      setZipProgress(null);
+    }
+  };
+
   const switchPlaylist = useCallback(
     (next: Playlist) => {
       if (next === playlist) return;
+      zipAbortRef.current?.abort();
+      setSelected(new Set());
+      setZipError(null);
       const el = audioRef.current;
       if (el) {
         el.pause();
@@ -388,12 +477,73 @@ export function OstPlayer({
 
       {/* Liste des pistes */}
       <div className="mt-4">
-        <div className="border-line text-content-subtle hidden grid-cols-[40px_1fr_70px_70px_50px] gap-4 border-b px-4 py-2 text-xs tracking-wider uppercase md:grid">
-          <span>#</span>
-          <span>{strings.colTitle}</span>
-          <span className="text-right">{strings.colDuration}</span>
-          <span className="text-right">{strings.colSize}</span>
-          <span />
+        {/* Barre de sélection (au moins une piste cochée) — deux lignes sous 640 px */}
+        {selected.size > 0 && (
+          <div className="mb-3 rounded-lg border border-sky-500/40 bg-sky-500/10 p-3 text-sm">
+            <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+              <p className="text-content-strong min-w-0 truncate">
+                {zipProgress
+                  ? `${strings.zipProgress
+                      .replace('{done}', String(zipProgress.done))
+                      .replace('{total}', String(zipProgress.total))} · ${zipProgress.name}`
+                  : strings.selectedCount
+                      .replace('{n}', String(selectedTracks.length))
+                      .replace('{mb}', selectedMb.toFixed(1))}
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {zipProgress ? (
+                  <button
+                    type="button"
+                    onClick={() => zipAbortRef.current?.abort()}
+                    className="border-line-subtle text-content-muted hover:text-content-strong inline-flex h-9 items-center rounded-lg border px-3 transition"
+                  >
+                    {strings.zipCancel}
+                  </button>
+                ) : (
+                  <>
+                    <button
+                      type="button"
+                      onClick={downloadSelection}
+                      className="inline-flex h-9 items-center gap-2 rounded-lg border border-sky-500/60 bg-sky-500/20 px-3 font-medium text-sky-300 transition hover:bg-sky-500/30"
+                    >
+                      <DownloadGlyph className="size-4" />
+                      {strings.downloadZip}
+                    </button>
+                    <button
+                      type="button"
+                      onClick={clearSelection}
+                      className="border-line-subtle text-content-muted hover:text-content-strong inline-flex h-9 items-center rounded-lg border px-3 transition"
+                    >
+                      {strings.clearSelection}
+                    </button>
+                  </>
+                )}
+              </div>
+            </div>
+            {selectedMb > ZIP_WARN_MB && (
+              <p className="mt-2 text-xs text-amber-300">{strings.zipTooBig}</p>
+            )}
+            {zipError && (
+              <p role="alert" className="mt-2 text-xs text-red-400">
+                {zipError}
+              </p>
+            )}
+          </div>
+        )}
+
+        {/* En-tête : sous md, seule la case « tout » reste visible */}
+        <div className="border-line text-content-subtle grid grid-cols-[40px_1fr] gap-2 border-b px-2 py-2 text-xs tracking-wider uppercase md:grid-cols-[40px_40px_1fr_70px_70px_50px] md:gap-4 md:px-4">
+          <CheckCell
+            checked={allSelected}
+            indeterminate={selected.size > 0 && !allSelected}
+            onToggle={toggleAll}
+            label={strings.selectAll}
+          />
+          <span className="hidden self-center md:block">#</span>
+          <span className="hidden self-center md:block">{strings.colTitle}</span>
+          <span className="hidden self-center text-right md:block">{strings.colDuration}</span>
+          <span className="hidden self-center text-right md:block">{strings.colSize}</span>
+          <span className="hidden md:block" />
         </div>
 
         <div className="divide-line-subtle divide-y">
@@ -403,11 +553,17 @@ export function OstPlayer({
             return (
               <div
                 key={track.file}
-                className={`group grid cursor-pointer grid-cols-[32px_1fr_50px] items-center gap-2 rounded-md px-2 py-3 transition-colors md:grid-cols-[40px_1fr_70px_70px_50px] md:gap-4 md:px-4 ${
+                className={`group grid cursor-pointer grid-cols-[40px_32px_1fr_50px] items-center gap-2 rounded-md px-2 py-3 transition-colors md:grid-cols-[40px_40px_1fr_70px_70px_50px] md:gap-4 md:px-4 ${
                   isActive ? 'bg-sky-500/10' : 'hover:bg-surface-overlay'
                 }`}
                 onClick={() => playTrack(index)}
               >
+                <CheckCell
+                  checked={selected.has(track.file)}
+                  onToggle={() => toggleTrack(track.file)}
+                  label={trackName(track, lang)}
+                />
+
                 {/* Numéro / indicateur */}
                 <div className="flex items-center justify-center">
                   {isActive && isLoading ? (
@@ -637,6 +793,41 @@ export function OstPlayer({
         </div>
       </div>
     </div>
+  );
+}
+
+/**
+ * Case à cocher d'une ligne (ou « tout » dans l'en-tête). Le `<label>` donne
+ * une zone de 40 px au doigt ; `-my-1` la garde dans la hauteur de ligne
+ * existante. Le clic s'arrête ici : cocher ne lance pas la lecture.
+ */
+function CheckCell({
+  checked,
+  indeterminate = false,
+  onToggle,
+  label,
+}: {
+  checked: boolean;
+  indeterminate?: boolean;
+  onToggle: () => void;
+  label: string;
+}) {
+  return (
+    <label
+      className="-my-1 flex size-10 cursor-pointer items-center justify-center"
+      onClick={(e) => e.stopPropagation()}
+    >
+      <input
+        type="checkbox"
+        checked={checked}
+        ref={(el) => {
+          if (el) el.indeterminate = indeterminate;
+        }}
+        onChange={onToggle}
+        aria-label={label}
+        className="size-4 cursor-pointer accent-sky-500"
+      />
+    </label>
   );
 }
 

@@ -1304,6 +1304,15 @@ const en = {
   'ost.pause': 'Pause',
   'ost.archivedNote':
     'These tracks were removed from the game in a later update. They are kept here as an archive.',
+  'ost.select_all': 'Select all tracks',
+  'ost.selected_count': 'Selected: {n} · {mb} MB',
+  'ost.download_zip': 'Download selection (.zip)',
+  'ost.clear_selection': 'Clear selection',
+  'ost.zip_progress': 'Downloading {done} / {total}',
+  'ost.zip_cancel': 'Cancel',
+  'ost.zip_too_big':
+    'Over 100 MB: the zip is built in your browser’s memory and may fail on low-memory devices.',
+  'ost.zip_failed': 'Download failed on {name}. Your selection is kept, try again.',
   // Wallpapers
   'wallpapers.description':
     'Browse and download official Outerplane artworks. Click on any image to preview and download.',

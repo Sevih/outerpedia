@@ -1309,6 +1309,15 @@ const fr: Record<TranslationKey, string> = {
   'ost.pause': 'Pause',
   'ost.archivedNote':
     'Ces pistes ont été retirées du jeu lors d’une mise à jour ultérieure. Elles sont conservées ici à titre d’archive.',
+  'ost.select_all': 'Sélectionner toutes les pistes',
+  'ost.selected_count': 'Sélection : {n} · {mb} Mo',
+  'ost.download_zip': 'Télécharger la sélection (.zip)',
+  'ost.clear_selection': 'Tout désélectionner',
+  'ost.zip_progress': 'Téléchargement {done} / {total}',
+  'ost.zip_cancel': 'Annuler',
+  'ost.zip_too_big':
+    'Plus de 100 Mo : le zip est construit dans la mémoire du navigateur et peut échouer sur un appareil qui en manque.',
+  'ost.zip_failed': 'Échec sur {name}. La sélection est conservée, réessayez.',
   // Wallpapers
   'wallpapers.description':
     "Parcourez et téléchargez les illustrations officielles d'Outerplane. Cliquez sur une image pour prévisualiser et télécharger.",

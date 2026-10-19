@@ -7,6 +7,57 @@
 
 ## 2026-10-19
 
+- **OST : télécharger une sélection de pistes en un seul zip (B65).** Demande
+  d'un joueur (Jaego Sun, Discord, 18-19/10) : prendre plusieurs pistes d'un
+  coup, au choix. `src/lib/zip-store.ts` (122 lignes, commentaires compris) écrit
+  le zip à la main, aucune dépendance permise : méthode STORE (les mp3 ne
+  gagnent rien à la compression), CRC-32 sur une table calculée une fois, noms
+  UTF-8 annoncés par le bit 11, en-têtes locaux + répertoire central + fin de
+  répertoire, date fixe 1980-01-01. Le module rend un `Blob` assemblé par
+  morceaux, sans recopier les mp3 dans un tampon unique. Pas de zip64 (4 Gio et
+  65 535 entrées, contre ~127 Mo et 93 pistes) : au-delà, il lève au lieu
+  d'écrire une archive corrompue. Dans `OstPlayer.tsx`, une case par ligne
+  devant le numéro (`aria-label` = nom de la piste ; le `<label>` de 40 px
+  arrête le clic, cocher ne lance pas la lecture, `-my-1` garde la hauteur de
+  ligne) et une case « tout » dans l'en-tête (indéterminée en sélection
+  partielle) qui ne coche que la playlist affichée. Sous md, l'en-tête,
+  jusque-là caché, s'affiche avec cette seule case : sans elle, pas de « tout »
+  au doigt. Au-dessus de la table, dès qu'une piste est cochée, une barre (en
+  colonne sous 640 px) affiche « Selected: n · X MB », « Download selection
+  (.zip) » et « Clear selection ». Les pistes se chargent une par une
+  (`fetch` séquentiel), avec une progression « 3 / 12 · nom » et un bouton
+  « Cancel » ; un `AbortController` coupe aussi au démontage et au changement
+  d'onglet. Ensuite `buildZip` (entrées `<file>.mp3`), un `<a>` qui télécharge
+  `outerplane-ost.zip` comme l'export du tier-list-maker, et
+  `revokeObjectURL` différé d'une seconde (un Blob de 100 Mo+ révoqué dans la
+  foulée du clic peut couper le téléchargement). Une piste en échec (réseau
+  ou 404) arrête tout, affiche `ost.zip_failed` avec son nom et garde la
+  sélection. Au-delà de 100 Mo, une ligne d'avertissement sans blocage. La
+  sélection se vide au changement de playlist et ne se persiste pas. **La CSP
+  a changé** : `connect-src` gagne `https://img.outerpedia.com` dans
+  `next.config.ts`, commenté sur le modèle de `media-src`. En local le fetch
+  est same-origin, il ne prouve rien pour la prod. **À contrôler en prod :
+  un zip de deux pistes depuis `outerpedia.com`.** Huit clés `ost.*` dans les
+  six locales, passées par `OstStrings` depuis `index.tsx`. Les placeholders
+  `{n}`, `{mb}`, `{done}`, `{total}` et `{name}` sont remplis côté client par
+  `.replace`, comme dans hero-tracker. Écart à la consigne : le compte s'écrit
+  « Selected: {n} » et non « n pistes », parce que le client n'a pas de
+  résolveur de pluriel ICU et que « 1 tracks » serait faux. jp/kr/zh
+  traduits sobrement. Vérifié : `zip-store.test.ts` (CRC-32 de « 123456789 »
+  = `0xCBF43926` ; deux entrées relues par un parseur du test, signatures,
+  offsets, tailles, noms UTF-8 ; archive vide ; `python3 -m zipfile -t` dans
+  `os.tmpdir()`, lancé ici et non sauté, CI sur `ubuntu-latest` qui embarque
+  python3). `OstPlayer.test.tsx` (happy-dom) : deux cases donnent « 2 tracks
+  · 2.9 MB » sans appel à `play` ; « tout » coche la playlist affichée
+  seulement et se vide au changement d'onglet ; le fetch factice se joue dans
+  l'ordre de la playlist et donne un zip `Battle_01.mp3`, `Battle_02.mp3` ;
+  un 404 laisse la sélection et le message. `pnpm typecheck` : les trois
+  `tsc --noEmit` sans erreur ; `pnpm lint` : `eslint` sans
+  sortie ; `pnpm test` : `Tests 4333 passed (4333)`. Laissé : aucun contrôle
+  visuel, faute de serveur sur :3000 (le diff ne touche la table que par la
+  colonne des cases, l'en-tête mobile réduit à la case et la barre) ; à voir
+  au navigateur, mobile compris.
+
 - **Relecture A68, A69, A70, A71, B61, B62, B63, B64, OB4 et G13 (Fable)
   — dix lots du 19/10, tous validés.** Trois relecteurs en lecture seule
   (quick ; données ; calculateur, gear-solver, outerbot), rejeux et banc par

@@ -1274,6 +1274,15 @@ const jp: Record<TranslationKey, string> = {
   'ost.pause': '一時停止',
   'ost.archivedNote':
     'これらのトラックはその後のアップデートでゲームから削除されました。アーカイブとしてここに保存しています。',
+  'ost.select_all': 'すべてのトラックを選択',
+  'ost.selected_count': '選択中: {n} · {mb} MB',
+  'ost.download_zip': '選択したトラックをダウンロード (.zip)',
+  'ost.clear_selection': '選択を解除',
+  'ost.zip_progress': 'ダウンロード中 {done} / {total}',
+  'ost.zip_cancel': 'キャンセル',
+  'ost.zip_too_big':
+    '100 MBを超えています：zipはブラウザのメモリ上で作成されるため、メモリの少ない端末では失敗することがあります。',
+  'ost.zip_failed': '{name} のダウンロードに失敗しました。選択は保持されています。',
   // Wallpapers
   'wallpapers.description':
     'アウタープレインの公式アートワークを閲覧・ダウンロードできます。画像をクリックしてプレビューとダウンロードができます。',

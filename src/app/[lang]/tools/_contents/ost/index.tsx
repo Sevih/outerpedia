@@ -46,6 +46,14 @@ export default async function Ost({ lang }: { lang: Lang }) {
         pause: t('ost.pause'),
         previous: t('common.previous'),
         next: t('common.next'),
+        selectAll: t('ost.select_all'),
+        selectedCount: t('ost.selected_count'),
+        downloadZip: t('ost.download_zip'),
+        clearSelection: t('ost.clear_selection'),
+        zipProgress: t('ost.zip_progress'),
+        zipCancel: t('ost.zip_cancel'),
+        zipTooBig: t('ost.zip_too_big'),
+        zipFailed: t('ost.zip_failed'),
       }}
     />
   );

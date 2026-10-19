@@ -41,7 +41,11 @@ const securityHeaders = [
       // = placeholders/SVG inline ; `blob:` = export client (tier-list-maker).
       "img-src 'self' data: blob: https://img.outerpedia.com https://cdn.discordapp.com https://i.ytimg.com https://img.youtube.com",
       "font-src 'self' data:",
-      "connect-src 'self' https://cloudflareinsights.com",
+      // img.outerpedia.com : le zip d'une sélection de pistes de /ost lit les mp3
+      // par `fetch` (R2 répond `access-control-allow-origin: *`). En local l'URL
+      // est same-origin (`/audio/…`), couverte par 'self' — sans cet hôte, le
+      // même « marche en local, casse en prod » que media-src ci-dessous.
+      "connect-src 'self' https://cloudflareinsights.com https://img.outerpedia.com",
       // img.outerpedia.com = host R2 des assets (NEXT_PUBLIC_IMG_BASE) : sans lui,
       // le jukebox /ost charge ses mp3 en cross-origin et la CSP les BLOQUE (les
       // images passent par le `https:` large d'img-src, pas le média). En local

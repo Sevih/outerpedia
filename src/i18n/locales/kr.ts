@@ -1260,6 +1260,15 @@ const kr: Record<TranslationKey, string> = {
   'ost.pause': '일시정지',
   'ost.archivedNote':
     '이 트랙은 이후 업데이트에서 게임에서 삭제되었습니다. 보관용으로 여기에 남겨 두었습니다.',
+  'ost.select_all': '모든 트랙 선택',
+  'ost.selected_count': '선택: {n} · {mb} MB',
+  'ost.download_zip': '선택 항목 다운로드 (.zip)',
+  'ost.clear_selection': '선택 해제',
+  'ost.zip_progress': '다운로드 중 {done} / {total}',
+  'ost.zip_cancel': '취소',
+  'ost.zip_too_big':
+    '100MB 초과: zip은 브라우저 메모리에서 만들어지므로 메모리가 적은 기기에서는 실패할 수 있습니다.',
+  'ost.zip_failed': '{name} 다운로드에 실패했습니다. 선택은 유지됩니다.',
   // Wallpapers
   'wallpapers.description':
     '아우터플레인 공식 아트워크를 탐색하고 다운로드하세요. 이미지를 클릭하면 미리보기 및 다운로드가 가능합니다.',
