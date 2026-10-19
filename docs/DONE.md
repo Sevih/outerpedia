@@ -7,6 +7,66 @@
 
 ## 2026-10-19
 
+- **OB4 — outerbot : liens d'index `/characters` et `/guides` laissés nus,
+  documentés et gardés par le contrat ; une review déposée sur un post sans
+  id gardée par slug (outerbot `6382257`).** Item « **outerbot** » des
+  suites du 18/10. **(1) Liens d'index** : `/char` et `/guide` sans argument
+  répondent `${siteBaseUrl}/characters` et `/guides`, seuls chemins du site
+  que le bot écrit lui-même. Ils restent SANS préfixe de langue : le proxy du
+  site (`src/proxy.ts`) réécrit `/characters` vers `/en/characters` en
+  interne (200, sans redirection), `jp.outerpedia.com/characters` vers
+  `/jp/characters`, et redirige `/en/…` en 308 vers `/…` — préfixer
+  ajouterait une 308 à chaque clic et casserait les sous-domaines ; les
+  `href` du contrat ont déjà cette forme nue. Les deux lignes de
+  `src/commands/char.ts` et `guide.ts` sont inchangées, chacune gagne un
+  commentaire de deux lignes qui le dit. `test/contract.test.ts`, section
+  (b) : un test par extrait (cinq) exige que tout `href` commence par `/`
+  sans `/en/`, `/fr/`, `/es/`, `/jp/`, `/kr/`, `/zh/` (commentaire : le proxy
+  ajoute la langue, un `href` préfixé serait redirigé). Essai local non
+  committé : `guides.json` passé à `/en/guides/adventure/S1-8-5`, le test
+  échoue (`expected [ '/en/guides/adventure/S1-8-5' ] to deeply equal []`),
+  fichier restauré par `git checkout`. Le README, puce « Aucune donnée wiki
+  dans le repo », gagne la parenthèse des deux exceptions. **(2) Review sur
+  un post sans id** : `tryAddReview` (`src/reviews/listener.ts`) passait par
+  `characterForThread`, qui filtre `character_id IS NOT NULL` : un post connu
+  mais pas encore rempli (base d'avant v3, entre le démarrage et le premier
+  forum-sync, ou à vie pour un slug resté sans id) passait pour inconnu, et
+  la review était ignorée en silence (ni ✅ ni explication), rattrapée
+  seulement par un `/admin resync`. `src/db/store.ts` gagne `threadOf` (la
+  ligne de `threads` telle quelle, id NULL compris ; `characterForThread`
+  reste, ses appelants ne bougent pas) et `hasReviewBySlug`
+  (`character_id IS NULL AND slug = ? AND user_id = ?` : l'index unique
+  (perso, utilisateur) ne couvre pas les NULL). Le listener fait comme le resync :
+  un post connu sans id reçoit la review avec `characterId: null` et le slug
+  du post, doublon vu par `hasReview` sur l'id quand il est connu, sinon par
+  `hasReviewBySlug` ; le `fillCharacterIds` du forum-sync suivant (ou du
+  resync) la remplit. `unknown_thread` ne reste que pour un thread absent de
+  la base ; le chemin par id est le même (mêmes appels, même ordre, mêmes
+  champs écrits et loggés). Le commentaire faux (« un resync rattrape ») est
+  réécrit, le doc de `NewReview.characterId` cite aussi le listener. Tests :
+  `test/store.test.ts` (`threadOf` NULL et inconnu, `hasReviewBySlug` par
+  utilisateur, `backfillCharacterIds` puis `reviewsFor('2000009')` et
+  `hasReview`), nouveau `test/listener.test.ts` (six cas : post rempli par
+  id, post sans id servi par `reviewsFor('x', 'ghost')` et `reviewsForSlug`,
+  doublon sur post sans id et sur post rempli, thread absent, mauvais format
+  refusé avant écriture). Un test existant de `test/resync.test.ts` figeait
+  l'ancien comportement (« post pas encore rempli : ignoré comme un fil
+  inconnu ») : retourné, il attend la review gardée par slug. Vérifié :
+  `pnpm typecheck` (`$ tsc --noEmit`, sans erreur), `pnpm lint`
+  (`$ eslint src test`, sans erreur), `pnpm test` (`Tests 127 passed (127)`,
+  115 avant), `pnpm format:check`
+  (`All matched files use Prettier code style!`). **Pour Sevih** : au prochain redémarrage sur une base d'avant v3,
+  une review déposée avant le premier forum-sync apparaît sur le site dès que
+  le sync a rempli les ids (quelques secondes), et `/status` la compte ; rien
+  à rejouer à la main. **Laissé** : Dependabot `npm` / `docker` (PLUS TARD,
+  décision du 18/10) ; le HTTP, `/reviews/<id numérique>` sert
+  `reviewsFor(key)` sans slug — une review encore NULL n'y apparaît qu'une
+  fois remplie, ou dès maintenant par `/reviews/<slug>` (comportement
+  existant du resync, inchangé) ; un `indexHref` dans le contrat
+  `/api/bot/*` serait la vraie fin de l'exception du README (suite possible,
+  pas faite) ; `/status` et les extraits `test/fixtures/bot-api/` non
+  touchés.
+
 - **Relecture A67 et G12 (Opus) ; validés.** Relus chacun par un agent.
   **A67** (`c905ef7f`) : un commit, 14 fichiers ; `src/lib/damage/gear.ts`
   ne gagne qu'un commentaire (demandé), `damage/equipment.json` est la

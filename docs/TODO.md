@@ -101,11 +101,12 @@ les preuves et les décisions vivent dans le tri consolidé de sevih-tool
       hors des tests, qui s'en servent comme garde ; reco : le garder, avec un
       commentaire qui le dit.
 - [ ] **outerbot** : liens d'index nus `/characters` et `/guides`
-      (`src/commands/char.ts`, `guide.ts`), à servir par le site ; review
-      déposée entre le démarrage et le premier forum-sync, ignorée
-      (comportement à décider) ; Dependabot `npm` (et `docker` pour l'image
-      de base) : PLUS TARD (décision de Sevih du 18/10, chaque PR redéploie
-      le bot ; OB3 ne couvre que les actions GitHub).
+      (`src/commands/char.ts`, `guide.ts`) : FAIT (OB4, laissés nus,
+      documentés et gardés par le contrat) ; review déposée entre le
+      démarrage et le premier forum-sync : FAIT (OB4, gardée par slug,
+      remplie au forum-sync suivant) ; Dependabot `npm` (et `docker` pour
+      l'image de base) : PLUS TARD (décision de Sevih du 18/10, chaque PR
+      redéploie le bot ; OB3 ne couvre que les actions GitHub).
 - [ ] **Pulverization T4, 4 pièces** : correction de la table du jeu FAITE
       (A67, le 4P T4 lit `BID_ITEM_UO_SET_17_1` à 500, tenue dans
       `datagen/lib/buff.ts`). Reste à Sevih : la mesure en jeu (4 pièces T4
