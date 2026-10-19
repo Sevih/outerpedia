@@ -116,6 +116,14 @@ les preuves et les décisions vivent dans le tri consolidé de sevih-tool
 - [ ] **Après B65** : `/tools/ost` sur mobile (en-tête réduit à la case
       « tout », barre sur deux lignes) ; en prod, un zip de deux pistes depuis
       `outerpedia.com` : la CSP `connect-src` vient de s'élargir.
+- [ ] **gear-solver, restes de G15 à G29** : lint à 28 warnings (G18 en a
+      révélé 8 sur `App.tsx`, refs lues au rendu) ; un Builder déjà monté
+      pendant une synchro garde ses presets en mémoire et peut réécrire une
+      référence morte (G29, crochet `onBackupImported`) ; la barre de statut
+      reste derrière le flou de la modale Settings (G19) ; une pièce réservée
+      dans la Worklist compte comme libre pour « 4P disponible » (G28) ;
+      colonne `upg` et entrée Worklist lisent encore l'`upg` du solve (G25) ;
+      `docs/release-notes.md` [Unreleased] à remplir avant la release.
 - [ ] **quick, trois libellés** : l'en-tête d'Extraction dit « Dix cibles,
       une en lecture » (`scripts/quick/ui/tabs/extractor.html` l.19 et
       `STYLE.md` l.529) alors qu'A70 en fait treize ; le commentaire de

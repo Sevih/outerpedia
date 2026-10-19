@@ -7,6 +7,34 @@
 
 ## 2026-10-19
 
+- **Relecture G15 à G29 (Fable) — les quinze lots du ménage de gear-solver,
+  tous validés.** Commits `3a31e1d` → `edc18fe` (G15 à G29 dans l'ordre),
+  quatre relecteurs en lecture seule par groupe (G15-G18, G19-G22, G23-G26,
+  G27-G29), contrôles par moi sur HEAD : typecheck vert, 156 + 157 + 569
+  tests, lint 0 erreur et 28 warnings, aucun commit ne touche un
+  `package.json`. Rejoués par les relecteurs : G16, les 300 lignes
+  déplacées de `BuilderScreen.tsx` vers `builderFilters.ts` comparées
+  triées (seules les deux retouches annoncées diffèrent) ; G20, qualité
+  unifiée égale sur tout `equipment.json` × 20 dispositions, filtre
+  d'Inventaire ×8 plus rapide ; G21, `GiftList` seul à la profondeur 1 dans
+  `CWebRES_GiftInfo` et `CWebRES_PVPStart` du client décompilé ; G22, 404
+  après toutes les routes, revalidation d'images après 7 jours seulement ;
+  G24, allocateur de gemmes rejoué sur un cas à trois gemmes (ordre par CP
+  marginal tenu), CP = max des 462 multiensembles d'Ame ; G25, tas Top-K
+  fuzzé 300 tours contre le tri complet, Tarjan sur deux cycles ; G26,
+  `calcFinalStat` 928 800 cas sans écart, CP float32 égal à
+  `calcNoGearBattlePower` d'outerpedia sur 19 350 fiches ; G27 à G29,
+  mutations du code hors dépôt : chaque garde fait rougir un test (un seul
+  mutant équivalent, documenté). Fiches qui CHANGENT, voulues par le contrat
+  (G26) : SPD des huit héros à Skill_8 SPD en 4P Vitesse (−2/−3, Claire
+  136 → 133…), CP ±1 sur 0,3 % des builds, CHC affichée plafonnée à 100.
+  Restes au TODO. **Reste à Sevih** : gear-solver en dev — Settings sans
+  `alert` (message dans la barre de statut, « Click again to confirm » sur
+  Wipe), Builder « No build passes the current filter », Builds › Advices
+  « 4P disponible » et basse qualité, une fiche de Claire en 4P Vitesse à
+  133 SPD ; et `docs/release-notes.md` [Unreleased] à remplir avant la
+  release qui embarquera G8 à G30. **Suite** : F28 (Fable), dernier lot
+  ouvert.
 - **Relecture G14 (Fable) — gear-solver : la release vérifie avant de
   publier, ESLint posé, `vite` retiré de `packages/core` ; validé.**
   gear-solver `f0fe40f`, 16 fichiers, le seul lot autorisé à toucher
