@@ -112,9 +112,13 @@ les preuves et les décisions vivent dans le tri consolidé de sevih-tool
       `ItemSpecialOptionTemplet` ligne 117 fait pointer `BuffID_4P` du T4 vers
       `BID_ITEM_UO_SET_17` (le buff du 2 pièces, 700) alors que
       `BID_ITEM_UO_SET_17_1` niveau 2 vaut 500 ; le contrat recopie la table et
-      affiche 70 % au 4 pièces T4. Mesure en jeu (4 pièces T4 contre une cible
-      en Break), puis décider si le contrat suit le texte. Affiché seulement,
-      jamais dans la fiche ni la CP. Fortification : le −30 % de vitesse est
+      affiche 70 % au 4 pièces T4 ; le CALCULATEUR pose deux fois ce buff de
+      700 (2P + 4P) : +140 % contre une cible en Break, au lieu des 120 % du
+      texte (rejoué le 19/10, `resolveGearPassives`). En jeu, trois issues :
+      120 % (le texte), 70 % (même buff, `StackCount` 1, le 4P n'apporte rien),
+      140 % (cumul). Mesure : 4 pièces T4, puis 2 pièces T4, contre une cible
+      en Break ; puis décider (contrat, calculateur). Dans gear-solver,
+      affiché seulement, jamais dans la fiche ni la CP. Fortification : le −30 % de vitesse est
       normal (Sevih), à vérifier en jeu aussi.
 - [ ] **gear-solver, petits suivis de G9 et G10** : le pré-tri du mode Score
       (`priorityScoreOf`, `magnitudeScoreOf`) compte le −30 % de vitesse de
