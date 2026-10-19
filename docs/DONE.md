@@ -7,6 +7,24 @@
 
 ## 2026-10-19
 
+- **Relecture G30 (Fable) — gear-solver : `GAME_STAT` tenu contre
+  `stat-keys.json` (L6), `data:sync` après C26 ; validé avec un complément
+  de docs.** gear-solver `fcd9334`, parti sur origin avant relecture (poussé
+  dans le « push tout » de 13:30 ; leçon : relire `git log` des quatre dépôts
+  avant un push groupé). Typecheck vert, 154 + 131 + 472 tests. Relu par un
+  agent : `CONTRACT_STAT_TO_ENGINE` (21 clés + `avoid: null`), 26 cas, les
+  mutations (clé retirée, `percent` divergent, `ST_*` inconnu) font échouer
+  le test ; `solver-files.json` à 20 noms ; `data:sync` byte-identique à
+  `data/generated/solver/` de `2b7762a0` (hash `66681131bd9f`) : Pulverization
+  4P niveau 2 à 500 (A67), `combatOnly` de `BID_CEQUIP_MAIN_DMG_REDUCE_CORE`
+  (B62), `gemSlots`/`reforge` (B62), `bestSkill` de Sterope, Luna, Regina,
+  Dahlia (F29) ; `progression.json` (B62) NON synchronisé, absent de
+  `solver-files.json` — reste de l'item gear-solver après B62 au TODO.
+  Quatre « 19 » résiduels (`docs/architecture.md`, `wiki/Architecture.md`,
+  `data/README.md`, `docs/STATUS.md`) corrigés par moi (`25c293f`, poussé).
+  **Reste à Sevih** : gear-solver en dev, Settings › Data › Sync « synced 20
+  tables » ; dans le Builder, Pulverization 4 pièces T4 en 2-pc 70 % et 4-pc
+  50 %. **Suite** : G14, un par un.
 - **Relecture F29 et B65 (Fable) — clips joués par variante, zip de
   l'OST ; validés.** Un relecteur par lot, contrôles par moi sur HEAD
   (`598db2d5`) : typecheck, lint verts, `Tests 4347 passed (4347)`,
