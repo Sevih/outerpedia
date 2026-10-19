@@ -125,6 +125,14 @@ les preuves et les décisions vivent dans le tri consolidé de sevih-tool
 
 ## 🧰 Outil quick
 
+- [ ] **Récupérer les news depuis quick** (demande de Sevih, 19/10) : `pnpm dev`
+      les récupère à chaque lancement (`scripts/dev-refresh.ts`, `news: true`) ;
+      quick ne le fait que par « Rafraîchir » de l'onglet « Patch », case news
+      cochée, qui rejoue toute la chaîne (pull, build, collect). Au choix :
+      lancer `pnpm getNews` au démarrage de quick, comme dev, ou un bouton
+      « Get news » seul. Attention : `get-news.ts` committe lui-même
+      `posts.json` et `buff-events.json` quand ils changent ; au démarrage, ce
+      serait un commit sans geste.
 - [ ] **Migration de l'admin vers quick** (décision du 08/10) : inventaire,
       ordre et règles dans `docs/quick-migration.md`. FAIT : Short names et
       Search aliases (onglet « Noms », lot B34), Banner (onglet
