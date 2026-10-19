@@ -7,6 +7,26 @@
 
 ## 2026-10-19
 
+- **Relecture G14 (Fable) — gear-solver : la release vérifie avant de
+  publier, ESLint posé, `vite` retiré de `packages/core` ; validé.**
+  gear-solver `f0fe40f`, 16 fichiers, le seul lot autorisé à toucher
+  `package.json` et le lock. Sur HEAD : typecheck vert, 154 + 131 + 472
+  tests, `npm run lint` 0 erreur et 24 warnings (sortie 0),
+  `node --check scripts/release.mjs` vert. Lock contrôlé par script contre
+  `f0fe40f^` : 79 entrées ajoutées (la chaîne ESLint aux versions exactes
+  du contrat : eslint 10.12.0, typescript-eslint 8.71.0, react-hooks 7.1.1),
+  aucune version tierce changée, `vite` reste 6.4.3, `packages/core` sans
+  `dependencies` ; deux restes d'un lock en retard remis d'aplomb
+  (`apps/desktop` 0.5.0 → 1.10.0, entrée fantôme `apps/web` retirée), tous
+  deux dits dans le changelog. `release.mjs` : étape 4 « Checks » entre le
+  `data:sync` et le build, `restoreJournals` appelé dans le `catch` à côté
+  de `restoreVersion` (l.455-456), huit étapes renumérotées. Config plate
+  conforme (pas de `parserOptions.project`, règles compilateur React en
+  `warn`, `rules-of-hooks` en `error`), quatre retouches de source
+  mécaniques, CI avec `npm run lint`, README, architecture et son miroir
+  wiki. `docs/todo.md` : les trois items et la puce `release.mjs` sortis.
+  **Reste à Sevih** : rien à l'écran ; la prochaine release passera par
+  l'étape Checks. **Suite** : G15, puis G16 à G29 un par un.
 - **Relecture G30 (Fable) — gear-solver : `GAME_STAT` tenu contre
   `stat-keys.json` (L6), `data:sync` après C26 ; validé avec un complément
   de docs.** gear-solver `fcd9334`, parti sur origin avant relecture (poussé
