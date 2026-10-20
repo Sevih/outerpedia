@@ -72,6 +72,20 @@ les preuves et les décisions vivent dans le tri consolidé de sevih-tool
 
 ## 🧰 Outil quick
 
+- [ ] **« Fiche perso » › Skills : les bursts et la transcendance invisibles
+      (vu par Sevih au patch du 20/10)** : le sous-onglet ne montre que les
+      cartes éditables (`characterKitCards` : trois skills principaux,
+      fusion_passive, extra, chaîne, duo). Les déclinaisons burst_1..3 et les
+      paliers de transcendance, que la page publique affiche (`burstSkills`,
+      `EeTranscendSection`), n'y sont pas — alors que les chips du skill
+      burstable HÉRITENT des effets de ses bursts (`cardEffects`, skill-view
+      l.722) et que les upgrades de transcendance en sont filtrés
+      (`isTranscendUpgrade`). On édite donc des chips sans voir d'où elles
+      viennent. À faire (un lot, après A74 et F30) : sous la carte du skill
+      burstable, ses trois bursts EN LECTURE (texte résolu, coût AP, les chips
+      qu'ils apportent marquées « via burst n ») ; une carte « Transcendance »
+      en lecture avec ses paliers, comme sur le site ; aucune chip nouvelle à
+      éditer là (l'héritage reste la règle du site).
 - [ ] **Migration de l'admin vers quick** (décision du 08/10) : inventaire,
       ordre et règles dans `docs/quick-migration.md`. FAIT : Short names et
       Search aliases (onglet « Noms », lot B34), Banner (onglet
@@ -676,7 +690,7 @@ les preuves et les décisions vivent dans le tri consolidé de sevih-tool
 
 ## 🧪 À jouer au prochain patch
 
-- [ ] **`game-client.json` a suivi le dump (lot A60)** : après le
+- [x] **`game-client.json` a suivi le dump (lot A60)** — VALIDÉ au patch du 20/10 (1.4.18 → 1.4.19, build 25744766 → 26049499, la ligne au journal, le bloc `client` seul dans le diff) ; reste le texte pour mémoire : : après le
       `datagen:dump` du patch, le journal dit « data/curated/game-client.json :
       client 1.4.18 → 1.4.x, build … → … — à committer avec le patch » (ou
       « inchangé » si version et build n'ont pas bougé) ; son `git diff` ne
@@ -685,8 +699,8 @@ les preuves et les décisions vivent dans le tri consolidé de sevih-tool
       outerplane-tweaks le recopient de `main`. « Version applicative
       inconnue » au journal = UnityPy absent : rien d'écrit, poser le bloc à
       la main d'après `.dump-stamp.json`.
-- [ ] **quick, section « Patch » — « Arrêter », à essayer une fois (lot
-      C10)** : le cycle complet (Lancer, Dry-run, Promouvoir, Committer,
+- [x] **quick, section « Patch » — « Arrêter », à essayer une fois (lot
+      C10)** — VALIDÉ au patch du 20/10 (« arrêt demandé », code 143, `pgrep -f datagen` vide, « Lancer » a repris) ; reste le texte pour mémoire : : le cycle complet (Lancer, Dry-run, Promouvoir, Committer,
       Pousser) a été joué au patch du 14/10. Reste : « Arrêter » pendant le
       rafraîchissement (rien ne doit continuer derrière : `pgrep -f datagen`
       vide ; « Lancer » reprend ensuite au checkpoint). À NE PAS arrêter :
