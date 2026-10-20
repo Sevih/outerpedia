@@ -296,6 +296,24 @@ describe('damage/characters.json — clips chez le porteur (revue R15, 17/10/202
     // S1 d'Akari : résolu sur SON animator (plus celui de Drakhan, 2000062).
     expect(skills['6401'].variants?.map((v) => v.clip.name.split('_')[0])).toEqual(['2000064']);
   });
+
+  it('les 16 clips de base étrangers à la jointure font foi : une variante, les hits du clip (F30)', () => {
+    const ids = ['1210', '3019', '3020', '3021', '4819', '4820', '4821', '5221'];
+    ids.push('5919', '5920', '9019', '9020', '9021', '9319', '9320', '10721');
+    for (const sid of ids) {
+      const s = skills[sid];
+      expect(
+        s.variants?.map((v) => v.key),
+        sid,
+      ).toEqual(['base']);
+      const played = new Set(s.variants![0].clip.events.map((e) => e.id));
+      expect([...new Set(s.hits.map((h) => h.id))].sort(), sid).toEqual([...played].sort());
+    }
+    // H. Dianne S2b1 : `Burst1` → 5 × 200 ‰ du templet du S2 (fixture exacte).
+    expect(skills['9319'].variants![0].clip.events).toEqual([
+      { id: '2000093_Skill_2_1', factor: 200, count: 5 },
+    ]);
+  });
 });
 
 describe('anim-events — bundles de fusion et états d’approche (B64)', () => {

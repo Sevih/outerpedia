@@ -55,11 +55,6 @@ les preuves et les décisions vivent dans le tri consolidé de sevih-tool
       l'image de base) : PLUS TARD (décision de Sevih du 18/10, chaque PR
       redéploie le bot ; OB3 ne couvre que les actions GitHub).
 
-## 🧹 Restes de la relecture du 19/10 (A68 à B64, OB4, G13)
-
-- [ ] **Après F29** : les 16 clips de base `*_Upgrade`/`*_Burst` laissés en
-      repli (liste dans l'entrée DONE de F29) à trancher.
-
 ## 🧰 Outil quick
 
 - [ ] **Migration de l'admin vers quick** (décision du 08/10) : inventaire,

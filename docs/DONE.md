@@ -7,6 +7,97 @@
 
 ## 2026-10-20
 
+- **F30 — Calculateur : le clip de base des 16 bursts et upgrades fait foi,
+  la jointure `SkillID` n'y sert qu'au simulateur.** Item du TODO « Après
+  F29 : les 16 clips de base `*_Upgrade`/`*_Burst` laissés en repli » retiré.
+  Pourquoi : F29 gardait à l'index 0 la règle d'avant (clip sans aucun
+  templet de la jointure = écarté) parce que la relâcher faisait rougir la
+  fixture de H. Dianne S2b1 (6 356 mesurés). Il ne manquait rien à la
+  formule : rejouée sur un banc jetable (données injectées en mémoire, moteur
+  tel quel), la cellule vaut 6 356 au repli ET au clip — `Burst1` joue
+  `2000093_Skill_2_Burst`, 5 × 200 ‰ du templet du S2, la jointure sert
+  4 × 250 ‰ de `2000093_Skill_1_1` (le S1), même facteur total, même
+  cascade § 8.2 + § 8.3. Ce qui rougissait, c'est la FORME : la chaîne de la
+  jointure, qu'aucun clip du burst ne joue, gardait son repli § 12.4 à côté
+  de la variante — deux lignes `S2b1#base` et `S2b1#2000093_Skill_1`, plus de
+  clé `S2b1`, d'où « ligne absente ». Hypothèses du lot, tranchées par le
+  client 1.4.19 (`.gamedata/apk/dumped/src/`) : (a) non — sous burst,
+  `UseSkill` pose `UsingSkill = SkillManager.GetCurrentSkill()`
+  (`CCharacterBattle.cs` l.2694, `CSkillManager.cs` l.357), le burst
+  lui-même, et `GetUseTriggerName` (l.5158) lit l'index 0 de SON
+  `TriggerName` (`CSkill.cs` l.95), sans suffixe, index ni table de burst ;
+  le `BT_SECOND_TRIGGER` d'Astei et de Dahlia (`CallerSkillType` SKT_FIRST)
+  ne passe pas `CBuff.CheckAvailable` (l.526, `ReservedSkillType`) sous
+  burst — un index 1 sur une liste d'un trigger lèverait d'ailleurs ; (b)
+  pour moitié — le burst rejoue bien l'animation du skill d'entrée (ou de sa
+  variante renforcée), mais aucune table ne remplace les facteurs des hits :
+  chaque `EventAttackStart` frappe avec SON `CDamageTemplet`
+  (`CCharacter.EventAttackStart` l.1363-1381), seul le facteur du skill
+  vient du burst (`SkillLevelTemplet.DamageFactor`, `CSkill.cs` l.123, au
+  niveau du skill d'entrée, `CSkillManager.cs` l.82-89) ; la jointure
+  `SkillID` n'est lue que par `GetDamageTempletBySkillID`
+  (`CTempletManager.cs` l.2978) dans `SkillSimulation` (l.2910, appelée en
+  `IsYSLSimulator` seul, l.2882) ; (c) non — `fHitRotation` (l.1369) part à
+  `BeginAllRangeAttack`, le scan ne lit que `[0]` ; (d) non — le scan et le
+  rattrapage de `CFormula.CalcDamage` (l.286-322, l.332-341) ne
+  distinguent aucun type de skill. Comment : `datagen/damage/clips.ts` — le
+  clip de tout index, 0 compris, appartient au skill dès qu'il porte un
+  templet de skill (`owned`) ; un clip de templets communs seuls reste à
+  personne ; quand le clip de base ne porte AUCUN templet de la jointure
+  (« étranger ») et qu'aucune chaîne n'est irrésolue, `resolveSkillClips`
+  rend `clipHitTemplets` (templets joués par les clips du skill) ;
+  `characters.ts` en refait les hits du skill (`hitById`, toutes les lignes
+  de `CharacterDamageTemplet`), le champ ne sort pas dans `characters.json`.
+  Forme inchangée, `report.ts` non touché : une variante, une ligne, plus de
+  repli fantôme. Règle écrite dans l'en-tête de `clips.ts`, celui de
+  `characters.ts` (et la doc de `DamageSkill.hits`) et la spec
+  `docs/specs/damage-clips-joues.md` § 5 (encadré F30). Les seize, le clip
+  contre le repli (facteur total ‰ ; dégâts sur un scénario de référence :
+  ATK 5 000, skill au niveau 5, DEF 1 000, branche normale, cible neutre) :
+
+  | Skill                          | Entrée → trigger → clip (events, ‰)                                                        | Repli (jointure)                       | Clip ‰ | Repli ‰     | Clip / repli  |
+  | ------------------------------ | ------------------------------------------------------------------------------------------ | -------------------------------------- | ------ | ----------- | ------------- |
+  | 1210 Valentine, backup sol     | (pas un burst) `Skill6` → `2000012_Skill_6` : `_5_1` 300 + `_5_2` 100 × 7                  | `2000012_Skill_6_1` 1 000              | 1 000  | 1 000       | 3 000 / 3 000 |
+  | 3019-3021 Kate B1-B3           | S3 → `Skill3` → `2000030_Skill_3` : 200, 200, 600 (`,45`)                                  | `2000030_Skill_1` 1 000 (S1)           | 1 000  | 1 000       | 6 225 / 6 225 |
+  | 4819-4821 Ritri B1-B3          | S3 → `Skill3` → `2000048_Skill_3` : 100 × 3, 700                                           | `2000048_Skill_1_*` 200, 200, 600 (S1) | 1 000  | 1 000       | 3 225 / 3 225 |
+  | 5221 Sigma B3                  | S2 → `Skill7` → `2000052_Skill_7` : 130 × 6, 220 (SkillID 5207, sans skill)                | `2000052_Skill_2` 200 × 5 (S2)         | 1 000  | 1 000       | 4 475 / 4 475 |
+  | 5919-5920 Demiurge Astei B1-B2 | S1 → `Burst1` → `2000059_Skill_1_Upgrade` : `extra_1` 200 × 4, `extra_2` 500               | `2000059_Skill_1_*` 200, 100 × 4, 400  | 1 300  | 1 000       | 6 825 / 5 250 |
+  | 9019-9021 Gnosis Dahlia B1-B3  | S1 → `Burst1` → `2000090_Skill_1_Burst1` : `extra_1` 75 × 8, `extra_2` 75 × 8, `extra_3` 0 | `2000090_Skill_1_*` 80, 100 × 5, 100   | 1 200  | 680 → 1 000 | 5 550 / 4 625 |
+  | 9319-9320 H. Dianne B1-B2      | S2 → `Burst1` → `2000093_Skill_2_Burst` : 200 × 5                                          | `2000093_Skill_1_1` 250 × 4 (S1)       | 1 000  | 1 000       | 5 900 / 5 900 |
+  | 10721 Fortuna B3               | S1 → `Burst3` → `2000107_Skill_7` : 100 × 3, 500, 50 × 4 (SkillID 10707, sans skill)       | `2000107_Skill_1_*` 250, 250, 500      | 1 000  | 1 000       | 4 625 / 4 625 |
+
+  Deux familles changent de valeur, +30 % pour Demiurge Astei B1/B2 et
+  +20 % pour Gnosis Dahlia B1-B3 : leur clip de burst joue les templets de
+  la variante renforcée de leur S1 (`second`, 1 300 et 1 200 ‰, déjà au
+  site sous Doll Garden's Caretaker / tirage de Hubris), sans condition ; les
+  douze autres gardent leur valeur, seul le découpage des hits change (Dianne
+  5 hits au lieu de 4, Kate 3 au lieu de 1…). Diff de `characters.json` en
+  mémoire avant écriture : exactement ces 16 skills (variante `base` + hits
+  du clip), aucun perso, aucun `console.warn`. `bestSkill` recalculé pour les
+  huit persos (`bestSkillOf` sur la donnée régénérée) : inchangé (Astei S1
+  2 730 et Dahlia S1 2 220 portent déjà leur variante renforcée, le skill de
+  base l'emporte à égalité) — rien à promouvoir côté solver. Vérification :
+  `datagen/damage/clips.test.ts` + 2 cas (clip de base étranger →
+  `base` + `clipHitTemplets` ; clip qui joue la jointure inchangé, clip de
+  communs seuls à personne), `damage-data.test.ts` + 1 invariant (les 16 :
+  une variante `base`, hits = templets du clip, Dianne 5 × 200 ‰) ;
+  `pnpm damage:build` (après le commit d'A74 ; `anim-events.json` ré-extrait identique, seul `characters.json` change, les 16 skills) puis `damage:check` : « Bilan : 42 ligne(s) exacte(s), 0 en dérive, 0 sautée(s) » ; `pnpm typecheck`
+  : les trois `tsc --noEmit` sans erreur ; `pnpm lint` : `eslint` sans message ; `pnpm test` : « Tests 4370 passed (4370) ». Aucune fixture touchée.
+  Laissé, hors périmètre : la même maladie de jointure chez 14 skills qui
+  ONT un clip de base propre et gardent une ligne de repli fantôme pour une
+  chaîne qu'aucun de leurs clips ne joue (1205, 1206, 1209, 2201, 4021,
+  6501, 6503, 6505, 7601, 8505, 8506, 9419-9421 — Ember B1-B3 entre autres)
+  : la cellule (`states[0]`) y est juste, le tooltip montre une ligne de
+  trop ; à trancher dans un lot à part, Ame S3 SKIP compris. Vu aussi :
+  `2000090_Skill_extra_3` (facteur 0) est le dernier event des clips de
+  Dahlia ; le client sort de `CalcDamage` avant le rattrapage pour un
+  facteur 0 (le rehaussement tombe sur le dernier `extra_2`), le moteur le
+  verse sur l'event à 0 — total identique, répartition par hit fausse d'un
+  cran (S1 `second`, S2 et bursts). Mesure facultative pour Sevih (aucune
+  ne manque pour trancher) : un burst 1 de Demiurge Astei sans Doll
+  Garden's Caretaker : 5 nombres attendus (`extra_1` × 4 puis `extra_2`)
+  et la valeur de la ligne `S1b1` du calculateur, contre 6 au repli d'avant.
+
 - **Fiche perso de quick › Skills : les bursts et la transcendance en lecture
   sous les cartes, les chips héritées marquées « via burst n » (F31).** Vu par
   Sevih au patch du 20/10 : le sous-onglet ne montrait que les cartes

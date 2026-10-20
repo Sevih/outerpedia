@@ -38,16 +38,28 @@
  *    au fallback § 12.4 s'il le faut. Avant le 17/10/2026, l'animator était
  *    déduit du préfixe du PREMIER templet : le S1 d'Akari était résolu sur
  *    celui de Drakhan (revue R15) ;
- *  - un clip atteint par un index ≥ 1 du skill (choisi par un buff de son
- *    kit) lui APPARTIENT, même quand ses templets sont rattachés par
- *    `SkillID` à un autre skill (Poolside Regina S2 → 8505/8506, Dahlia S1 →
- *    9002, Ame S3 → 6505 : les clips font foi, R15) ; seul un clip fait de
- *    templets COMMUNS (sans `SkillID` : `Skip_Finish_<Élément>`, `DT_*`)
- *    n'appartient à aucun skill. Le clip de l'index 0 garde la règle
- *    d'avant : sans AUCUN templet du skill, c'est un trigger partagé avec un
- *    autre état (le `Burst1` des bursts 1 et 2, un `Skill6` de passif) et il
- *    est écarté — 16 bursts dont le clip ne porte que des templets du skill
- *    de base restent ainsi en repli (constat du 19/10/2026, hors de ce lot).
+ *  - un clip atteint par un index du skill — l'index 0 compris — lui
+ *    APPARTIENT, même quand ses templets sont rattachés par `SkillID` à un
+ *    autre skill (Poolside Regina S2 → 8505/8506, Dahlia S1 → 9002, Ame S3 →
+ *    6505 : les clips font foi, R15) ; seul un clip fait de templets COMMUNS
+ *    (sans `SkillID` : `Skip_Finish_<Élément>`, `DT_*`) n'appartient à aucun
+ *    skill ;
+ *  - clip de base ÉTRANGER à la jointure (lot F30, 20/10/2026) : sous burst,
+ *    `UseSkill` pose `UsingSkill = GetCurrentSkill()`, le burst lui-même, et
+ *    `GetUseTriggerName` lit l'index 0 de SON `TriggerName` (un
+ *    `BT_SECOND_TRIGGER` à `CallerSkillType` SKT_FIRST n'y passe pas
+ *    `CheckAvailable`). 16 bursts et skills (1210, 3019-3021, 4819-4821,
+ *    5221, 5919-5920, 9019-9021, 9319-9320, 10721) y jouent un clip qui ne
+ *    porte AUCUN templet que `SkillID` leur rattache : celui du skill
+ *    d'entrée du burst ou de sa variante renforcée (`Burst1` de H. Dianne →
+ *    `2000093_Skill_2_Burst`, 5 × 200 ‰ de `2000093_Skill_2_1`, quand la
+ *    jointure sert 4 × 250 ‰ de `2000093_Skill_1_1`, le S1). La jointure ne
+ *    sert qu'au simulateur (`SkillSimulation`) : fausse au combat pour ces
+ *    skills, elle cède la place aux templets de leurs clips
+ *    (`clipHitTemplets`, appliqué par characters.ts) — sans quoi sa chaîne
+ *    garderait, à côté de la variante, un repli § 12.4 fantôme (la fixture
+ *    de H. Dianne S2b1 rougissait ainsi sous F29 : deux lignes, plus de clé
+ *    `S2b1`, alors que le clip rend les 6 356 mesurés).
  *
  * Suite additionnelle, condition : comptée PAR DÉFAUT (`selfMet`) seulement
  * quand le clip de base pose LUI-MÊME la condition du buff additif — dérivé
@@ -127,6 +139,10 @@ export interface SkillClipsResult {
   /** Chaînes dont l'affectation n'est pas résolue (cf. en-tête) — le moteur
    *  retombe sur l'heuristique § 12.4 pour ces états. */
   clipsUnresolvedChains?: string[];
+  /** Clip de base ÉTRANGER à la jointure `SkillID` (cf. l'en-tête) : les
+   *  templets joués par les clips du skill, dans l'ordre — characters.ts en
+   *  refait les hits du skill (pas un champ de `characters.json`). */
+  clipHitTemplets?: string[];
 }
 
 const EVENTS_PATH = resolve('datagen/damage/anim-events.json');
@@ -284,10 +300,9 @@ export function resolveSkillClips(
   };
 
   // Le clip à events d'un trigger : aucun (undefined), un, ou plusieurs
-  // (états alternatifs : on ne choisit pas, chaînes marquées). `chosen` :
-  // index ≥ 1, choisi par le kit — le clip appartient au skill sans condition
-  // de templet (cf. l'en-tête).
-  const clipOf = (trigger: string, chosen: boolean): DamageSkillClip | undefined => {
+  // (états alternatifs : on ne choisit pas, chaînes marquées). Le clip d'un
+  // index du skill lui appartient sans condition de templet (cf. l'en-tête).
+  const clipOf = (trigger: string): DamageSkillClip | undefined => {
     const withEvents = (entry.triggers[trigger] ?? []).filter((n) => entry.clips[n]?.length);
     if (withEvents.length > 1) {
       flagChainsOf(withEvents.flatMap((n) => entry.clips[n].map((e) => e.split(',')[0].trim())));
@@ -302,10 +317,8 @@ export function resolveSkillClips(
       return undefined;
     }
     // Templets COMMUNS seulement (sans SkillID) : état SKIP générique, à
-    // aucun skill ; un clip de BASE sans aucun templet du skill : trigger
-    // partagé avec un autre état (cf. l'en-tête).
-    if (!seq.some((t) => (chosen ? index.templet.get(t)!.owned : chainOfId.has(t))))
-      return undefined;
+    // aucun skill.
+    if (!seq.some((t) => index.templet.get(t)!.owned)) return undefined;
     return {
       name,
       events: seq.map((tid) => {
@@ -353,9 +366,9 @@ export function resolveSkillClips(
   const variants: DamageClipVariant[] = [];
   for (let i = 0; i < triggers.length; i++) {
     const trigger = triggers[i];
-    const clip = clipOf(trigger, i > 0);
+    const clip = clipOf(trigger);
     const skipTrigger = skips[i];
-    const skipClip = skipTrigger !== undefined ? clipOf(skipTrigger, i > 0) : undefined;
+    const skipClip = skipTrigger !== undefined ? clipOf(skipTrigger) : undefined;
     if (!clip && !skipClip) continue; // index sans clip à events (Ame S3, index 0)
 
     let gate: DamageClipVariant['gate'];
@@ -452,8 +465,24 @@ export function resolveSkillClips(
         : { key: v.key, trigger: v.trigger, ...(v.gate ? { gate: v.gate } : {}), clip: v.clip },
     );
 
+  // Clip de base étranger à la jointure (cf. l'en-tête) : les hits du skill
+  // sont les templets que ses clips jouent.
+  const base = resolved.find((v) => v.key === VARIANT_KEYS[0]);
+  const foreign =
+    base !== undefined && !unresolved.size && !base.clip.events.some((e) => chainOfId.has(e.id));
+  const clipHitTemplets = foreign
+    ? [
+        ...new Set(
+          resolved.flatMap((v) =>
+            [v.clip, v.additive?.clip].flatMap((c) => c?.events.map((e) => e.id) ?? []),
+          ),
+        ),
+      ]
+    : undefined;
+
   return {
     ...(resolved.length ? { variants: resolved } : {}),
     ...(unresolved.size ? { clipsUnresolvedChains: [...unresolved].sort(ord) } : {}),
+    ...(clipHitTemplets ? { clipHitTemplets } : {}),
   };
 }

@@ -47511,14 +47511,45 @@
       ],
       "hits": [
         {
-          "id": "2000012_Skill_6_1",
-          "chain": "2000012_Skill_6",
+          "id": "2000012_Skill_5_1",
+          "chain": "2000012_Skill_5",
           "hit": 1,
-          "damageFactor": 1000,
+          "damageFactor": 300,
           "damageType": "DT_FIRE_HIT",
           "multiHit": false,
           "maxHitCount": 0,
           "isAdditive": false
+        },
+        {
+          "id": "2000012_Skill_5_2",
+          "chain": "2000012_Skill_5",
+          "hit": 2,
+          "damageFactor": 100,
+          "damageType": "DT_PIERCE",
+          "multiHit": true,
+          "maxHitCount": 7,
+          "isAdditive": false
+        }
+      ],
+      "variants": [
+        {
+          "key": "base",
+          "trigger": "Skill6",
+          "clip": {
+            "name": "2000012_Skill_6",
+            "events": [
+              {
+                "id": "2000012_Skill_5_1",
+                "factor": 300,
+                "count": 1
+              },
+              {
+                "id": "2000012_Skill_5_2",
+                "factor": 100,
+                "count": 7
+              }
+            ]
+          }
         }
       ]
     },
@@ -66023,14 +66054,60 @@
       ],
       "hits": [
         {
-          "id": "2000030_Skill_1",
-          "chain": "2000030_Skill_1",
+          "id": "2000030_Skill_3_1",
+          "chain": "2000030_Skill_3",
           "hit": 1,
-          "damageFactor": 1000,
+          "damageFactor": 200,
           "damageType": "DT_FIRE_HIT",
           "multiHit": false,
           "maxHitCount": 0,
           "isAdditive": false
+        },
+        {
+          "id": "2000030_Skill_3_2",
+          "chain": "2000030_Skill_3",
+          "hit": 2,
+          "damageFactor": 200,
+          "damageType": "DT_FIRE_HIT",
+          "multiHit": false,
+          "maxHitCount": 0,
+          "isAdditive": false
+        },
+        {
+          "id": "2000030_Skill_3_3",
+          "chain": "2000030_Skill_3",
+          "hit": 3,
+          "damageFactor": 600,
+          "damageType": "DT_NONE",
+          "multiHit": false,
+          "maxHitCount": 0,
+          "isAdditive": false
+        }
+      ],
+      "variants": [
+        {
+          "key": "base",
+          "trigger": "Skill3",
+          "clip": {
+            "name": "2000030_Skill_3",
+            "events": [
+              {
+                "id": "2000030_Skill_3_1",
+                "factor": 200,
+                "count": 1
+              },
+              {
+                "id": "2000030_Skill_3_2",
+                "factor": 200,
+                "count": 1
+              },
+              {
+                "id": "2000030_Skill_3_3",
+                "factor": 600,
+                "count": 1
+              }
+            ]
+          }
         }
       ]
     },
@@ -66084,14 +66161,60 @@
       ],
       "hits": [
         {
-          "id": "2000030_Skill_1",
-          "chain": "2000030_Skill_1",
+          "id": "2000030_Skill_3_1",
+          "chain": "2000030_Skill_3",
           "hit": 1,
-          "damageFactor": 1000,
+          "damageFactor": 200,
           "damageType": "DT_FIRE_HIT",
           "multiHit": false,
           "maxHitCount": 0,
           "isAdditive": false
+        },
+        {
+          "id": "2000030_Skill_3_2",
+          "chain": "2000030_Skill_3",
+          "hit": 2,
+          "damageFactor": 200,
+          "damageType": "DT_FIRE_HIT",
+          "multiHit": false,
+          "maxHitCount": 0,
+          "isAdditive": false
+        },
+        {
+          "id": "2000030_Skill_3_3",
+          "chain": "2000030_Skill_3",
+          "hit": 3,
+          "damageFactor": 600,
+          "damageType": "DT_NONE",
+          "multiHit": false,
+          "maxHitCount": 0,
+          "isAdditive": false
+        }
+      ],
+      "variants": [
+        {
+          "key": "base",
+          "trigger": "Skill3",
+          "clip": {
+            "name": "2000030_Skill_3",
+            "events": [
+              {
+                "id": "2000030_Skill_3_1",
+                "factor": 200,
+                "count": 1
+              },
+              {
+                "id": "2000030_Skill_3_2",
+                "factor": 200,
+                "count": 1
+              },
+              {
+                "id": "2000030_Skill_3_3",
+                "factor": 600,
+                "count": 1
+              }
+            ]
+          }
         }
       ]
     },
@@ -66145,14 +66268,60 @@
       ],
       "hits": [
         {
-          "id": "2000030_Skill_1",
-          "chain": "2000030_Skill_1",
+          "id": "2000030_Skill_3_1",
+          "chain": "2000030_Skill_3",
           "hit": 1,
-          "damageFactor": 1000,
+          "damageFactor": 200,
           "damageType": "DT_FIRE_HIT",
           "multiHit": false,
           "maxHitCount": 0,
           "isAdditive": false
+        },
+        {
+          "id": "2000030_Skill_3_2",
+          "chain": "2000030_Skill_3",
+          "hit": 2,
+          "damageFactor": 200,
+          "damageType": "DT_FIRE_HIT",
+          "multiHit": false,
+          "maxHitCount": 0,
+          "isAdditive": false
+        },
+        {
+          "id": "2000030_Skill_3_3",
+          "chain": "2000030_Skill_3",
+          "hit": 3,
+          "damageFactor": 600,
+          "damageType": "DT_NONE",
+          "multiHit": false,
+          "maxHitCount": 0,
+          "isAdditive": false
+        }
+      ],
+      "variants": [
+        {
+          "key": "base",
+          "trigger": "Skill3",
+          "clip": {
+            "name": "2000030_Skill_3",
+            "events": [
+              {
+                "id": "2000030_Skill_3_1",
+                "factor": 200,
+                "count": 1
+              },
+              {
+                "id": "2000030_Skill_3_2",
+                "factor": 200,
+                "count": 1
+              },
+              {
+                "id": "2000030_Skill_3_3",
+                "factor": 600,
+                "count": 1
+              }
+            ]
+          }
         }
       ]
     },
@@ -88188,34 +88357,75 @@
       ],
       "hits": [
         {
-          "id": "2000048_Skill_1_1",
-          "chain": "2000048_Skill_1",
+          "id": "2000048_Skill_3_1",
+          "chain": "2000048_Skill_3",
           "hit": 1,
-          "damageFactor": 200,
+          "damageFactor": 100,
           "damageType": "DT_HIT",
           "multiHit": false,
           "maxHitCount": 0,
           "isAdditive": false
         },
         {
-          "id": "2000048_Skill_1_2",
-          "chain": "2000048_Skill_1",
+          "id": "2000048_Skill_3_2",
+          "chain": "2000048_Skill_3",
           "hit": 2,
-          "damageFactor": 200,
+          "damageFactor": 100,
           "damageType": "DT_HIT",
           "multiHit": false,
           "maxHitCount": 0,
           "isAdditive": false
         },
         {
-          "id": "2000048_Skill_1_3",
-          "chain": "2000048_Skill_1",
+          "id": "2000048_Skill_3_3",
+          "chain": "2000048_Skill_3",
           "hit": 3,
-          "damageFactor": 600,
+          "damageFactor": 100,
+          "damageType": "DT_HIT",
+          "multiHit": false,
+          "maxHitCount": 0,
+          "isAdditive": false
+        },
+        {
+          "id": "2000048_Skill_3_4",
+          "chain": "2000048_Skill_3",
+          "hit": 4,
+          "damageFactor": 700,
           "damageType": "DT_BIG_DAMAGE",
           "multiHit": false,
           "maxHitCount": 0,
           "isAdditive": false
+        }
+      ],
+      "variants": [
+        {
+          "key": "base",
+          "trigger": "Skill3",
+          "clip": {
+            "name": "2000048_Skill_3",
+            "events": [
+              {
+                "id": "2000048_Skill_3_1",
+                "factor": 100,
+                "count": 1
+              },
+              {
+                "id": "2000048_Skill_3_2",
+                "factor": 100,
+                "count": 1
+              },
+              {
+                "id": "2000048_Skill_3_3",
+                "factor": 100,
+                "count": 1
+              },
+              {
+                "id": "2000048_Skill_3_4",
+                "factor": 700,
+                "count": 1
+              }
+            ]
+          }
         }
       ]
     },
@@ -88269,34 +88479,75 @@
       ],
       "hits": [
         {
-          "id": "2000048_Skill_1_1",
-          "chain": "2000048_Skill_1",
+          "id": "2000048_Skill_3_1",
+          "chain": "2000048_Skill_3",
           "hit": 1,
-          "damageFactor": 200,
+          "damageFactor": 100,
           "damageType": "DT_HIT",
           "multiHit": false,
           "maxHitCount": 0,
           "isAdditive": false
         },
         {
-          "id": "2000048_Skill_1_2",
-          "chain": "2000048_Skill_1",
+          "id": "2000048_Skill_3_2",
+          "chain": "2000048_Skill_3",
           "hit": 2,
-          "damageFactor": 200,
+          "damageFactor": 100,
           "damageType": "DT_HIT",
           "multiHit": false,
           "maxHitCount": 0,
           "isAdditive": false
         },
         {
-          "id": "2000048_Skill_1_3",
-          "chain": "2000048_Skill_1",
+          "id": "2000048_Skill_3_3",
+          "chain": "2000048_Skill_3",
           "hit": 3,
-          "damageFactor": 600,
+          "damageFactor": 100,
+          "damageType": "DT_HIT",
+          "multiHit": false,
+          "maxHitCount": 0,
+          "isAdditive": false
+        },
+        {
+          "id": "2000048_Skill_3_4",
+          "chain": "2000048_Skill_3",
+          "hit": 4,
+          "damageFactor": 700,
           "damageType": "DT_BIG_DAMAGE",
           "multiHit": false,
           "maxHitCount": 0,
           "isAdditive": false
+        }
+      ],
+      "variants": [
+        {
+          "key": "base",
+          "trigger": "Skill3",
+          "clip": {
+            "name": "2000048_Skill_3",
+            "events": [
+              {
+                "id": "2000048_Skill_3_1",
+                "factor": 100,
+                "count": 1
+              },
+              {
+                "id": "2000048_Skill_3_2",
+                "factor": 100,
+                "count": 1
+              },
+              {
+                "id": "2000048_Skill_3_3",
+                "factor": 100,
+                "count": 1
+              },
+              {
+                "id": "2000048_Skill_3_4",
+                "factor": 700,
+                "count": 1
+              }
+            ]
+          }
         }
       ]
     },
@@ -88350,34 +88601,75 @@
       ],
       "hits": [
         {
-          "id": "2000048_Skill_1_1",
-          "chain": "2000048_Skill_1",
+          "id": "2000048_Skill_3_1",
+          "chain": "2000048_Skill_3",
           "hit": 1,
-          "damageFactor": 200,
+          "damageFactor": 100,
           "damageType": "DT_HIT",
           "multiHit": false,
           "maxHitCount": 0,
           "isAdditive": false
         },
         {
-          "id": "2000048_Skill_1_2",
-          "chain": "2000048_Skill_1",
+          "id": "2000048_Skill_3_2",
+          "chain": "2000048_Skill_3",
           "hit": 2,
-          "damageFactor": 200,
+          "damageFactor": 100,
           "damageType": "DT_HIT",
           "multiHit": false,
           "maxHitCount": 0,
           "isAdditive": false
         },
         {
-          "id": "2000048_Skill_1_3",
-          "chain": "2000048_Skill_1",
+          "id": "2000048_Skill_3_3",
+          "chain": "2000048_Skill_3",
           "hit": 3,
-          "damageFactor": 600,
+          "damageFactor": 100,
+          "damageType": "DT_HIT",
+          "multiHit": false,
+          "maxHitCount": 0,
+          "isAdditive": false
+        },
+        {
+          "id": "2000048_Skill_3_4",
+          "chain": "2000048_Skill_3",
+          "hit": 4,
+          "damageFactor": 700,
           "damageType": "DT_BIG_DAMAGE",
           "multiHit": false,
           "maxHitCount": 0,
           "isAdditive": false
+        }
+      ],
+      "variants": [
+        {
+          "key": "base",
+          "trigger": "Skill3",
+          "clip": {
+            "name": "2000048_Skill_3",
+            "events": [
+              {
+                "id": "2000048_Skill_3_1",
+                "factor": 100,
+                "count": 1
+              },
+              {
+                "id": "2000048_Skill_3_2",
+                "factor": 100,
+                "count": 1
+              },
+              {
+                "id": "2000048_Skill_3_3",
+                "factor": 100,
+                "count": 1
+              },
+              {
+                "id": "2000048_Skill_3_4",
+                "factor": 700,
+                "count": 1
+              }
+            ]
+          }
         }
       ]
     },
@@ -92266,14 +92558,45 @@
       ],
       "hits": [
         {
-          "id": "2000052_Skill_2",
-          "chain": "2000052_Skill_2",
+          "id": "2000052_Skill_7_1",
+          "chain": "2000052_Skill_7",
           "hit": 1,
-          "damageFactor": 200,
+          "damageFactor": 130,
           "damageType": "DT_FIRE_HIT",
           "multiHit": true,
-          "maxHitCount": 5,
+          "maxHitCount": 6,
           "isAdditive": false
+        },
+        {
+          "id": "2000052_Skill_7_2",
+          "chain": "2000052_Skill_7",
+          "hit": 2,
+          "damageFactor": 220,
+          "damageType": "DT_BIG_DAMAGE",
+          "multiHit": false,
+          "maxHitCount": 0,
+          "isAdditive": false
+        }
+      ],
+      "variants": [
+        {
+          "key": "base",
+          "trigger": "Skill7",
+          "clip": {
+            "name": "2000052_Skill_7",
+            "events": [
+              {
+                "id": "2000052_Skill_7_1",
+                "factor": 130,
+                "count": 6
+              },
+              {
+                "id": "2000052_Skill_7_2",
+                "factor": 220,
+                "count": 1
+              }
+            ]
+          }
         }
       ]
     },
@@ -100624,34 +100947,45 @@
       ],
       "hits": [
         {
-          "id": "2000059_Skill_1_1",
-          "chain": "2000059_Skill_1",
+          "id": "2000059_Skill_extra_1",
+          "chain": "2000059_Skill_extra",
           "hit": 1,
           "damageFactor": 200,
-          "damageType": "DT_DARK_HIT",
-          "multiHit": false,
-          "maxHitCount": 0,
-          "isAdditive": false
-        },
-        {
-          "id": "2000059_Skill_1_2",
-          "chain": "2000059_Skill_1",
-          "hit": 2,
-          "damageFactor": 100,
           "damageType": "DT_DARK_HIT",
           "multiHit": true,
           "maxHitCount": 4,
           "isAdditive": false
         },
         {
-          "id": "2000059_Skill_1_3",
-          "chain": "2000059_Skill_1",
-          "hit": 3,
-          "damageFactor": 400,
+          "id": "2000059_Skill_extra_2",
+          "chain": "2000059_Skill_extra",
+          "hit": 2,
+          "damageFactor": 500,
           "damageType": "DT_DARK_HIT",
           "multiHit": false,
           "maxHitCount": 0,
           "isAdditive": false
+        }
+      ],
+      "variants": [
+        {
+          "key": "base",
+          "trigger": "Burst1",
+          "clip": {
+            "name": "2000059_Skill_1_Upgrade",
+            "events": [
+              {
+                "id": "2000059_Skill_extra_1",
+                "factor": 200,
+                "count": 4
+              },
+              {
+                "id": "2000059_Skill_extra_2",
+                "factor": 500,
+                "count": 1
+              }
+            ]
+          }
         }
       ]
     },
@@ -100705,34 +101039,45 @@
       ],
       "hits": [
         {
-          "id": "2000059_Skill_1_1",
-          "chain": "2000059_Skill_1",
+          "id": "2000059_Skill_extra_1",
+          "chain": "2000059_Skill_extra",
           "hit": 1,
           "damageFactor": 200,
-          "damageType": "DT_DARK_HIT",
-          "multiHit": false,
-          "maxHitCount": 0,
-          "isAdditive": false
-        },
-        {
-          "id": "2000059_Skill_1_2",
-          "chain": "2000059_Skill_1",
-          "hit": 2,
-          "damageFactor": 100,
           "damageType": "DT_DARK_HIT",
           "multiHit": true,
           "maxHitCount": 4,
           "isAdditive": false
         },
         {
-          "id": "2000059_Skill_1_3",
-          "chain": "2000059_Skill_1",
-          "hit": 3,
-          "damageFactor": 400,
+          "id": "2000059_Skill_extra_2",
+          "chain": "2000059_Skill_extra",
+          "hit": 2,
+          "damageFactor": 500,
           "damageType": "DT_DARK_HIT",
           "multiHit": false,
           "maxHitCount": 0,
           "isAdditive": false
+        }
+      ],
+      "variants": [
+        {
+          "key": "base",
+          "trigger": "Burst1",
+          "clip": {
+            "name": "2000059_Skill_1_Upgrade",
+            "events": [
+              {
+                "id": "2000059_Skill_extra_1",
+                "factor": 200,
+                "count": 4
+              },
+              {
+                "id": "2000059_Skill_extra_2",
+                "factor": 500,
+                "count": 1
+              }
+            ]
+          }
         }
       ]
     },
@@ -133315,34 +133660,60 @@
       ],
       "hits": [
         {
-          "id": "2000090_Skill_1_1",
-          "chain": "2000090_Skill_1",
+          "id": "2000090_Skill_extra_1",
+          "chain": "2000090_Skill_extra",
           "hit": 1,
-          "damageFactor": 80,
-          "damageType": "DT_ICE_HIT",
-          "multiHit": false,
-          "maxHitCount": 0,
-          "isAdditive": false
-        },
-        {
-          "id": "2000090_Skill_1_2",
-          "chain": "2000090_Skill_1",
-          "hit": 2,
-          "damageFactor": 100,
+          "damageFactor": 75,
           "damageType": "DT_ICE_HIT",
           "multiHit": true,
-          "maxHitCount": 5,
+          "maxHitCount": 8,
           "isAdditive": false
         },
         {
-          "id": "2000090_Skill_1_3",
-          "chain": "2000090_Skill_1",
+          "id": "2000090_Skill_extra_2",
+          "chain": "2000090_Skill_extra",
+          "hit": 2,
+          "damageFactor": 75,
+          "damageType": "DT_FIRE_HIT",
+          "multiHit": true,
+          "maxHitCount": 8,
+          "isAdditive": false
+        },
+        {
+          "id": "2000090_Skill_extra_3",
+          "chain": "2000090_Skill_extra",
           "hit": 3,
-          "damageFactor": 100,
-          "damageType": "DT_BIG_DAMAGE",
+          "damageFactor": 0,
+          "damageType": "DT_NONE",
           "multiHit": false,
           "maxHitCount": 0,
           "isAdditive": false
+        }
+      ],
+      "variants": [
+        {
+          "key": "base",
+          "trigger": "Burst1",
+          "clip": {
+            "name": "2000090_Skill_1_Burst1",
+            "events": [
+              {
+                "id": "2000090_Skill_extra_1",
+                "factor": 75,
+                "count": 8
+              },
+              {
+                "id": "2000090_Skill_extra_2",
+                "factor": 75,
+                "count": 8
+              },
+              {
+                "id": "2000090_Skill_extra_3",
+                "factor": 0,
+                "count": 1
+              }
+            ]
+          }
         }
       ]
     },
@@ -133396,34 +133767,60 @@
       ],
       "hits": [
         {
-          "id": "2000090_Skill_1_1",
-          "chain": "2000090_Skill_1",
+          "id": "2000090_Skill_extra_1",
+          "chain": "2000090_Skill_extra",
           "hit": 1,
-          "damageFactor": 80,
-          "damageType": "DT_ICE_HIT",
-          "multiHit": false,
-          "maxHitCount": 0,
-          "isAdditive": false
-        },
-        {
-          "id": "2000090_Skill_1_2",
-          "chain": "2000090_Skill_1",
-          "hit": 2,
-          "damageFactor": 100,
+          "damageFactor": 75,
           "damageType": "DT_ICE_HIT",
           "multiHit": true,
-          "maxHitCount": 5,
+          "maxHitCount": 8,
           "isAdditive": false
         },
         {
-          "id": "2000090_Skill_1_3",
-          "chain": "2000090_Skill_1",
+          "id": "2000090_Skill_extra_2",
+          "chain": "2000090_Skill_extra",
+          "hit": 2,
+          "damageFactor": 75,
+          "damageType": "DT_FIRE_HIT",
+          "multiHit": true,
+          "maxHitCount": 8,
+          "isAdditive": false
+        },
+        {
+          "id": "2000090_Skill_extra_3",
+          "chain": "2000090_Skill_extra",
           "hit": 3,
-          "damageFactor": 100,
-          "damageType": "DT_BIG_DAMAGE",
+          "damageFactor": 0,
+          "damageType": "DT_NONE",
           "multiHit": false,
           "maxHitCount": 0,
           "isAdditive": false
+        }
+      ],
+      "variants": [
+        {
+          "key": "base",
+          "trigger": "Burst1",
+          "clip": {
+            "name": "2000090_Skill_1_Burst1",
+            "events": [
+              {
+                "id": "2000090_Skill_extra_1",
+                "factor": 75,
+                "count": 8
+              },
+              {
+                "id": "2000090_Skill_extra_2",
+                "factor": 75,
+                "count": 8
+              },
+              {
+                "id": "2000090_Skill_extra_3",
+                "factor": 0,
+                "count": 1
+              }
+            ]
+          }
         }
       ]
     },
@@ -133477,34 +133874,60 @@
       ],
       "hits": [
         {
-          "id": "2000090_Skill_1_1",
-          "chain": "2000090_Skill_1",
+          "id": "2000090_Skill_extra_1",
+          "chain": "2000090_Skill_extra",
           "hit": 1,
-          "damageFactor": 80,
-          "damageType": "DT_ICE_HIT",
-          "multiHit": false,
-          "maxHitCount": 0,
-          "isAdditive": false
-        },
-        {
-          "id": "2000090_Skill_1_2",
-          "chain": "2000090_Skill_1",
-          "hit": 2,
-          "damageFactor": 100,
+          "damageFactor": 75,
           "damageType": "DT_ICE_HIT",
           "multiHit": true,
-          "maxHitCount": 5,
+          "maxHitCount": 8,
           "isAdditive": false
         },
         {
-          "id": "2000090_Skill_1_3",
-          "chain": "2000090_Skill_1",
+          "id": "2000090_Skill_extra_2",
+          "chain": "2000090_Skill_extra",
+          "hit": 2,
+          "damageFactor": 75,
+          "damageType": "DT_FIRE_HIT",
+          "multiHit": true,
+          "maxHitCount": 8,
+          "isAdditive": false
+        },
+        {
+          "id": "2000090_Skill_extra_3",
+          "chain": "2000090_Skill_extra",
           "hit": 3,
-          "damageFactor": 100,
-          "damageType": "DT_BIG_DAMAGE",
+          "damageFactor": 0,
+          "damageType": "DT_NONE",
           "multiHit": false,
           "maxHitCount": 0,
           "isAdditive": false
+        }
+      ],
+      "variants": [
+        {
+          "key": "base",
+          "trigger": "Burst1",
+          "clip": {
+            "name": "2000090_Skill_1_Burst1",
+            "events": [
+              {
+                "id": "2000090_Skill_extra_1",
+                "factor": 75,
+                "count": 8
+              },
+              {
+                "id": "2000090_Skill_extra_2",
+                "factor": 75,
+                "count": 8
+              },
+              {
+                "id": "2000090_Skill_extra_3",
+                "factor": 0,
+                "count": 1
+              }
+            ]
+          }
         }
       ]
     },
@@ -136249,14 +136672,30 @@
       ],
       "hits": [
         {
-          "id": "2000093_Skill_1_1",
-          "chain": "2000093_Skill_1",
+          "id": "2000093_Skill_2_1",
+          "chain": "2000093_Skill_2",
           "hit": 1,
-          "damageFactor": 250,
-          "damageType": "DT_FIRE_HIT",
+          "damageFactor": 200,
+          "damageType": "DT_HIT",
           "multiHit": true,
-          "maxHitCount": 4,
+          "maxHitCount": 5,
           "isAdditive": false
+        }
+      ],
+      "variants": [
+        {
+          "key": "base",
+          "trigger": "Burst1",
+          "clip": {
+            "name": "2000093_Skill_2_Burst",
+            "events": [
+              {
+                "id": "2000093_Skill_2_1",
+                "factor": 200,
+                "count": 5
+              }
+            ]
+          }
         }
       ]
     },
@@ -136310,14 +136749,30 @@
       ],
       "hits": [
         {
-          "id": "2000093_Skill_1_1",
-          "chain": "2000093_Skill_1",
+          "id": "2000093_Skill_2_1",
+          "chain": "2000093_Skill_2",
           "hit": 1,
-          "damageFactor": 250,
-          "damageType": "DT_FIRE_HIT",
+          "damageFactor": 200,
+          "damageType": "DT_HIT",
           "multiHit": true,
-          "maxHitCount": 4,
+          "maxHitCount": 5,
           "isAdditive": false
+        }
+      ],
+      "variants": [
+        {
+          "key": "base",
+          "trigger": "Burst1",
+          "clip": {
+            "name": "2000093_Skill_2_Burst",
+            "events": [
+              {
+                "id": "2000093_Skill_2_1",
+                "factor": 200,
+                "count": 5
+              }
+            ]
+          }
         }
       ]
     },
@@ -150929,34 +151384,60 @@
       ],
       "hits": [
         {
-          "id": "2000107_Skill_1_1",
-          "chain": "2000107_Skill_1",
+          "id": "2000107_Skill_7_1",
+          "chain": "2000107_Skill_7",
           "hit": 1,
-          "damageFactor": 250,
+          "damageFactor": 100,
           "damageType": "DT_ICE_HIT",
-          "multiHit": false,
-          "maxHitCount": 0,
+          "multiHit": true,
+          "maxHitCount": 3,
           "isAdditive": false
         },
         {
-          "id": "2000107_Skill_1_2",
-          "chain": "2000107_Skill_1",
+          "id": "2000107_Skill_7_2",
+          "chain": "2000107_Skill_7",
           "hit": 2,
-          "damageFactor": 250,
-          "damageType": "DT_ICE_HIT",
+          "damageFactor": 500,
+          "damageType": "DT_BIG_DAMAGE",
           "multiHit": false,
           "maxHitCount": 0,
           "isAdditive": false
         },
         {
-          "id": "2000107_Skill_1_3",
-          "chain": "2000107_Skill_1",
+          "id": "2000107_Skill_7_3",
+          "chain": "2000107_Skill_7",
           "hit": 3,
-          "damageFactor": 500,
+          "damageFactor": 50,
           "damageType": "DT_ICE_HIT",
-          "multiHit": false,
-          "maxHitCount": 0,
+          "multiHit": true,
+          "maxHitCount": 4,
           "isAdditive": false
+        }
+      ],
+      "variants": [
+        {
+          "key": "base",
+          "trigger": "Burst3",
+          "clip": {
+            "name": "2000107_Skill_7",
+            "events": [
+              {
+                "id": "2000107_Skill_7_1",
+                "factor": 100,
+                "count": 3
+              },
+              {
+                "id": "2000107_Skill_7_2",
+                "factor": 500,
+                "count": 1
+              },
+              {
+                "id": "2000107_Skill_7_3",
+                "factor": 50,
+                "count": 4
+              }
+            ]
+          }
         }
       ]
     },

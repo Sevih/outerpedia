@@ -379,3 +379,65 @@ describe('resolveSkillClips — variantes par index (F29)', () => {
     expect(r.variants?.[0].additive?.selfMet).toBeUndefined();
   });
 });
+
+describe('resolveSkillClips — clip de base étranger à la jointure (F30)', () => {
+  // H. Dianne S2b1 : `Burst1` joue 5 × 200 ‰ du templet du S2, la jointure
+  // SkillID sert 4 × 250 ‰ de celui du S1.
+  const index = makeIndex({
+    chars: {
+      C: {
+        clips: {
+          C_Skill_1: ['C_Skill_1_1 ,0'],
+          C_Skill_2_Burst: ['C_Skill_2_1,0'],
+          C_Skill_5: ['Skip_Finish_Fire ,0'],
+        },
+        triggers: { Skill1: ['C_Skill_1'], Burst1: ['C_Skill_2_Burst'], Skill5: ['C_Skill_5'] },
+      },
+    },
+    templets: {
+      C_Skill_1_1: { factor: 250, count: 4 },
+      C_Skill_2_1: { factor: 200, count: 5 },
+      Skip_Finish_Fire: { factor: 1000, owned: false },
+    },
+  });
+
+  it('le clip de l’index 0 fait foi : variante `base`, et les hits du skill sont ses templets', () => {
+    const r = resolveSkillClips(
+      index,
+      carrier,
+      skill({ type: 'SKT_BURST_1', triggerCsv: 'Burst1' }),
+      [],
+      hitsOf('C_Skill_1', 1),
+    );
+    expect(r).toEqual({
+      variants: [
+        {
+          key: 'base',
+          trigger: 'Burst1',
+          clip: { name: 'C_Skill_2_Burst', events: [{ id: 'C_Skill_2_1', factor: 200, count: 5 }] },
+        },
+      ],
+      clipHitTemplets: ['C_Skill_2_1'],
+    });
+  });
+
+  it('un clip de base qui joue la jointure ne la remplace pas ; un clip de templets communs reste à personne', () => {
+    const own = resolveSkillClips(
+      index,
+      carrier,
+      skill({ triggerCsv: 'Skill1' }),
+      [],
+      hitsOf('C_Skill_1', 1),
+    );
+    expect(own.variants?.map((v) => v.clip.name)).toEqual(['C_Skill_1']);
+    expect(own.clipHitTemplets).toBeUndefined();
+    const common = resolveSkillClips(
+      index,
+      carrier,
+      skill({ type: 'SKT_STRIKE_AERIAL', triggerCsv: 'Skill5' }),
+      [],
+      hitsOf('C_Skill_5', 1),
+    );
+    expect(common).toEqual({});
+  });
+});

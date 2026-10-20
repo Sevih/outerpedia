@@ -23,7 +23,10 @@
  * un partenaire de skill commun) : un hit préfixé d'un autre perso que le
  * porteur ET absent des clips de son animator sort des états du skill
  * (clips.ts, `carrierTemplets` — décision Sevih 17/10/2026 : un clip sans
- * event extrait ne prouve rien, il ne vide aucun skill).
+ * event extrait ne prouve rien, il ne vide aucun skill). Et quand le clip de
+ * l'index 0 du skill ne joue AUCUN templet de sa jointure (16 bursts et
+ * skills, clips.ts `clipHitTemplets`, lot F30), ses hits sont les templets
+ * de ses clips : la jointure n'y sert qu'au simulateur.
  *
  * Affinité (`trust`) : la chaîne PROPRE au perso, comme le client
  * (`CDungeonScene.CreateTrustBuff`) — lignes `TrustRewardTemplet` du perso,
@@ -100,7 +103,9 @@ export interface DamageSkill {
    * Caren/Valentine, S2 chez la plupart), pas à un slot supposé.
    */
   burstAP?: number[];
-  /** Lignes de `CharacterDamageTemplet` dont `SkillID` référence ce skill. */
+  /** Lignes de `CharacterDamageTemplet` dont `SkillID` référence ce skill —
+   *  ou, clip de base étranger à cette jointure, celles que ses clips jouent
+   *  (cf. l'en-tête). */
   hits: DamageHit[];
   /**
    * `DamageFactor > 0` à au moins un niveau mais AUCUNE ligne de hits par la
@@ -207,9 +212,11 @@ export function buildDamageCharacters(): DamageCharactersData {
   // Hits par skill : une ligne CSV `SkillID=5502,5519,5520` sert la MÊME chaîne
   // à plusieurs skills (base + états burst) — elle est rattachée à chacun.
   const hitsBySkill = new Map<string, DamageHit[]>();
+  // Toutes les lignes par ID : les hits d'un skill au clip de base étranger
+  // à sa jointure sont les templets de ses clips (clips.ts, lot F30).
+  const hitById = new Map<string, DamageHit>();
   for (const d of loadTable('CharacterDamageTemplet')) {
     const skillIds = splitCsv(d.SkillID);
-    if (!skillIds.length) continue; // templets communs/skip → AnimationEvents (§ 12.4)
     const { chain, hit } = chainOf(d.ID);
     const row: DamageHit = {
       id: d.ID,
@@ -221,6 +228,8 @@ export function buildDamageCharacters(): DamageCharactersData {
       maxHitCount: num(d.MaxHitCount),
       isAdditive: bool(d.IsAdditiveAttack),
     };
+    hitById.set(d.ID, row);
+    // Sans SkillID : templets communs/skip → AnimationEvents (§ 12.4).
     for (const sid of skillIds) {
       const bucket = hitsBySkill.get(sid);
       if (bucket) bucket.push(row);
@@ -300,14 +309,34 @@ export function buildDamageCharacters(): DamageCharactersData {
     // Templets d'un AUTRE perso que l'animator du porteur ne joue pas : servis
     // par la jointure SkillID seulement (cf. l'en-tête) — hors des états.
     const played = carrierTemplets(clipIndex, carrier.model);
-    const hits = joined
+    const byHitOrder = (a: DamageHit, b: DamageHit): number =>
+      ord(a.chain, b.chain) || a.hit - b.hit || ord(a.id, b.id);
+    const joinedHits = joined
       .filter((h) => h.chain.split('_')[0] === carrier.id || played.has(h.id))
-      .sort((a, b) => ord(a.chain, b.chain) || a.hit - b.hit || ord(a.id, b.id));
-    if (joined.length && !hits.length) {
+      .sort(byHitOrder);
+    if (joined.length && !joinedHits.length) {
       throw new Error(
         `damage/characters: skill ${id} — aucun de ses hits n'est joué par l'animator ${carrier.model}`,
       );
     }
+    const { clipHitTemplets, ...clips } = resolveSkillClips(
+      clipIndex,
+      { id: carrier.id, model: carrier.model, originId: fusionOrigin.get(carrier.id) },
+      {
+        id,
+        type: s?.SkillType ?? '',
+        triggerCsv: s?.TriggerName,
+        triggerSkipCsv: s?.TriggerNameSkip,
+        buffIds: [...new Set(levels.flatMap((l) => l.buffIds))],
+      },
+      kitBuffIdsByChar.get(carrier.id) ?? [],
+      joinedHits,
+    );
+    // Clip de base étranger à la jointure `SkillID` (clips.ts) : les hits du
+    // skill sont les templets que ses clips jouent.
+    const hits = clipHitTemplets
+      ? clipHitTemplets.map((t) => hitById.get(t)!).sort(byHitOrder)
+      : joinedHits;
     const offensive = levels.some((l) => l.damageFactor > 0);
     // Burstable : règle PARTAGÉE avec le générateur skills (datagen/lib/burst)
     // — les deux artefacts doivent porter le même marqueur (garde croisée).
@@ -322,19 +351,7 @@ export function buildDamageCharacters(): DamageCharactersData {
       ...(burstCosts ? { burstAP: burstCosts } : {}),
       hits,
       ...(offensive && !hits.length ? { hitsUnresolved: true } : {}),
-      ...resolveSkillClips(
-        clipIndex,
-        { id: carrier.id, model: carrier.model, originId: fusionOrigin.get(carrier.id) },
-        {
-          id,
-          type: s?.SkillType ?? '',
-          triggerCsv: s?.TriggerName,
-          triggerSkipCsv: s?.TriggerNameSkip,
-          buffIds: [...new Set(levels.flatMap((l) => l.buffIds))],
-        },
-        kitBuffIdsByChar.get(carrier.id) ?? [],
-        hits,
-      ),
+      ...clips,
     };
   };
 
