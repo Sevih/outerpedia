@@ -7,6 +7,46 @@
 
 ## 2026-10-20
 
+- **Relecture A74, F30, F31 et G34 (Fable 5.1, avec trois relecteurs) —
+  validés.** Contrôles sur HEAD `6231375f` (les trois commits d'outerpedia) :
+  `pnpm typecheck` 0, `pnpm lint` 0, `pnpm test` 248 fichiers / 4 370 verts,
+  `vitest run scripts/quick` 1 170 verts, `pnpm damage:check` 42 exactes ;
+  gear-solver sur `5c0393d` : typecheck 0, tests 162 + 159 + 579, lint 15
+  avertissements / 0 erreur. **A74** (`1bd04608`) : le contrat se trompait de
+  fichier, les `rankOptions` vivent dans `glossaries.json` (31 options :
+  13 `dmg_boost` → `damage_boost`, 13 `dmg_reduce_rate` → `dmg_reduce`,
+  `pierce_power_rate` déjà canonique) ; les 26 paires `ST_*` → slug de
+  `STAT_TYPE_SLUGS` sont celles de l'ancien `STAT_DEFS`, zéro différence,
+  `PREMIUM_STAT_SLUG` (19, sous-ensemble) supprimé, `statSlug()` intact
+  (amendement accepté en cours de lot : l'espace des slugs de buff, ~1 460
+  effets, reste pour un lot à part) ; rejeu de `bossRankOptionLabels` : une
+  option nommée rend « +10 % » là où l'ancien glossaire rendait « +100 », mais
+  le correctif est LATENT — 30 des 31 options n'ont ni nom ni tooltip et la
+  fonction les omet ; `art` d'un costume existant mineur, retiré/icon/grade
+  écarts, tests verts (54). **F30** (`6231375f`) : règle prouvée dans le client
+  (`CCharacterBattle.UseSkill` l.2694, `GetUseTriggerName` l.5158,
+  `CSkill.TriggerName = TriggerNameList[0]`, `GetDamageTempletBySkillID` n'a
+  qu'un appelant, `SkillSimulation` sous `IsYSLSimulator`) ; diff sémantique
+  de `characters.json` : exactement 16 skills changent, rien d'autre ; rejeu
+  Dianne S2b1 6 356, Caren S1b1 13 357, Francesca S2b2 30 476 ; dégâts
+  affichés qui bougent : Astei B1/B2 1 000 → 1 300 ‰ et Gnosis Dahlia B1-B3
+  1 000 → 1 200 ‰ (templets de la variante renforcée du S1), les 14 autres
+  changent de découpage seulement. **F31** (`a1bd7437`) : page publique
+  inchangée (un `export` et un paramètre optionnel à défaut) ; cartes
+  « Bursts » et « Transcendance » sans `button`/`data-act`/`data-kit`/
+  `data-ref`, hors `sheet.kit.cards`, picker inchangé ; `via` rejoué sur
+  Tamamo (Extra Turn et Cooldown Reduction via burst 3, Weakness Gauge Damage
+  via 1, 2, 3, Cursed et Heavy Strike sans badge), Francesca et K — conformes
+  à `skills.json` ; paliers = totaux cumulés, la carte le dit ; banc sur quick
+  isolé :4877, captures sous `scratchpad/review-f31/{tamamo,k}/character.png`.
+  **G34** (`5c0393d`, gear-solver) : YAML parsé, mêmes SHA que `ci.yml`,
+  cas « à jour » et « déjà proposé » (branche `data-sync/<res>-<hash7>`),
+  typecheck + tests avant `gh pr create`, PR anciennes fermées après ; rejeu
+  local documenté. Suites au TODO : options de rang sans nom (décision
+  d'affichage), slugs de buff à unifier, 14 skills à repli fantôme (F30),
+  `c-read` inerte et double chargement de `extractedBundle` (F31), réglage
+  GitHub et premier `gh workflow run` (G34), `bestSkill` d'Astei et Dahlia à
+  revoir au prochain `datagen:build`.
 - **F30 — Calculateur : le clip de base des 16 bursts et upgrades fait foi,
   la jointure `SkillID` n'y sert qu'au simulateur.** Item du TODO « Après
   F29 : les 16 clips de base `*_Upgrade`/`*_Burst` laissés en repli » retiré.

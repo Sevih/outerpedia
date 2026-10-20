@@ -42,6 +42,41 @@ les preuves et les décisions vivent dans le tri consolidé de sevih-tool
       `timegate-resources` qui ignore `ProductGoodsValue` (aucun produit
       courant > 1).
 
+## 🧹 Restes de la relecture du 20/10 (A74, F30, F31, G34)
+
+- [ ] **Options de rang des boss sans nom (A74)** : 30 des 31 `rankOptions`
+      de `glossaries.json` n'ont ni nom ni tooltip, `bossRankOptionLabels`
+      les omet : le « +10 % » corrigé ne s'affiche nulle part. Décision de
+      Sevih : les montrer avec un nom tiré de `statNames` (« DMG Increase
+      +10% ») ou les laisser cachées.
+- [ ] **Espace des slugs de buff (suite d'A74)** : `statSlug()`
+      (`datagen/lib/effects.ts`) garde ses slugs mécaniques (`dmg_boost`,
+      `dmg_reduce_rate`, `critical_dmg_rate`, `e_cri_dmg_reduce`,
+      `enter_ap`/`hit_ap`/`kill_ap`, `accuracy`/`avoid`…) sur ~1 460 effets
+      (skills, monster-skills, passives, pools, sets, progression, solver) et
+      ses lecteurs (`PERCENT_STAT_SLUGS`, `STAT_ABBR`,
+      `src/lib/damage/scenario.ts`, `equipment-detail.ts`, gear-solver). Les
+      unifier sur `STAT_TYPE_SLUGS` est un lot C avec contrat solver à bumper.
+      Les trois archives `monster-archive/4548161@1`, `4548171@1`, `4548181@1`
+      gardent l'ancien slug (figées).
+- [ ] **14 skills à repli fantôme (suite de F30)** : 1205, 1206, 1209, 2201,
+      4021, 6501, 6503, 6505, 7601, 8505, 8506, 9419-9421 — cellule juste,
+      une ligne de tooltip en trop. Un lot A.
+- [ ] **`bestSkill` d'Astei et de Gnosis Dahlia (F30)** : leurs bursts passent
+      à 1 300 ‰ et 1 200 ‰ ; au prochain `pnpm datagen:build` + promote
+      `solver/`, vérifier si `bestSkill` change (puis `data-sync.yml` le
+      propose à gear-solver).
+- [ ] **Fiche perso › Skills, restes de F31** : la classe `c-read` des deux
+      cartes de lecture n'a pas de règle CSS (marqueur inerte) ; `kitExtras`
+      recharge `extractedBundle` (~180 ms) une seconde fois par lecture de la
+      fiche. À l'écran par Sevih : Tamamo-no-Mae › Skills (badges « via
+      burst 3 » sur Extra Turn et Cooldown Reduction, cartes Bursts et
+      Transcendance sans bouton).
+- [ ] **G34, à faire par Sevih sur GitHub** : activer « Allow GitHub Actions
+      to create and approve pull requests » (Settings › Actions › General de
+      gear-solver), pousser, puis `gh workflow run data-sync.yml` une fois
+      pour voir « up to date » ; la première PR arrivera au prochain patch.
+
 ## 🧹 Suites de la rédaction du 18/10 (lots A62 à C26, G8 à G30, F28, OB3, TW2)
 
 - [ ] **Suites de G8** : fiche du wiki en vitesse en taux avec régénération
