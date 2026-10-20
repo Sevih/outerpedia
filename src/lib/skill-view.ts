@@ -593,7 +593,7 @@ const WG_TEXT = /weakness gauge|\bwg\b/i;
  * (Astei, Christina, Luna) ont un WGReduce de burst supérieur dans les tables
  * sans que le jeu ne l'affiche — vérifié en jeu, ils n'étaient pas listés.
  */
-function syntheticBurstEffects(skills: Skill[]): ClientEffect[] {
+export function syntheticBurstEffects(skills: Skill[]): ClientEffect[] {
   const bursts = skills.filter((b) => b.type.startsWith('burst_'));
   // \n littéraux normalisés : « …\nWG » n'offre pas de frontière de mot.
   if (bursts.some((b) => WG_TEXT.test((b.desc?.en ?? '').replace(/\\n/g, ' ')))) {

@@ -148,7 +148,7 @@ import type {
   Monster,
   Skill,
 } from '@contracts';
-import type { EffectOption, KitEditorCard } from '@/lib/admin/character-kit';
+import type { EffectOption, KitEditorCard, KitExtras } from '@/lib/admin/character-kit';
 import { HUMAN_TAGS } from '@/components/tierlist/tiers';
 import type { CharacterKitPatch } from '@/lib/admin/character-skill-curated-store';
 import { collapseBuild, expandBuild } from '@/lib/admin/gear-preset-resolve';
@@ -613,6 +613,21 @@ const KIT_CARDS: KitEditorCard[] = [
   },
   { id: '5504::dual', name: 'Dual', type: 'dual', chips: [] },
 ];
+/** Ce que la fiche en montre en lecture, factice : un burst, un palier de transcendance. */
+const KIT_EXTRAS: KitExtras = {
+  bursts: [
+    {
+      level: 1,
+      id: '5519',
+      cost: 100,
+      desc: 'Extra Turn',
+      chips: [{ ref: 'SYS_BUFF_ADDITIVE_TURN', name: 'Extra Turn', isDebuff: false }],
+    },
+  ],
+  transcend: [
+    { label: '4+', atkPct: 19, defPct: 19, hpPct: 19, passives: ['+100% Effectiveness'] },
+  ],
+};
 const KIT_CATALOG: Record<string, EffectOption> = {
   '1': { id: '1', name: 'Burned', icon: 'IG_Buff_Dot_Burn', isDebuff: true },
   '7': { id: '7', name: 'Increased Attack', isDebuff: false },
@@ -852,10 +867,13 @@ describe('characterRoster, characterSheetState — la fiche lue, disque injecté
   const aer = getCharacterListItems().find((c) => c.id === AER)!;
   const sheetDisk = (
     curated: Record<string, CharacterCurated> = { [AER]: DIANNE },
-    kit: Partial<Pick<CharacterSheetDeps, 'disk' | 'kitCards' | 'kitSections' | 'eeItem'>> = {},
+    kit: Partial<
+      Pick<CharacterSheetDeps, 'disk' | 'kitCards' | 'kitExtras' | 'kitSections' | 'eeItem'>
+    > = {},
   ) => ({
     disk: () => disk({ curated, roster: new Set([AER]), eeOwners: new Set([AER]) }),
     kitCards: async () => KIT_CARDS,
+    kitExtras: async () => KIT_EXTRAS,
     kitSections: () => ({ chipHide: {}, chipAdd: {} }),
     kitCatalog: () => KIT_CATALOG,
     eeItem: (): SheetEeItem | null => EE_ITEM,
@@ -960,7 +978,7 @@ describe('characterRoster, characterSheetState — la fiche lue, disque injecté
     expect(state.videos).toEqual([]);
   });
 
-  it('`kit` : les cartes de skills, la curation du disque sur CES cartes, le catalogue des effets', async () => {
+  it('`kit` : les cartes de skills, la curation du disque sur CES cartes, le catalogue des effets ; bursts et transcendance à part', async () => {
     const state = await characterSheetState(
       AER,
       sheetDisk(undefined, {
@@ -974,6 +992,9 @@ describe('characterRoster, characterSheetState — la fiche lue, disque injecté
     if ('error' in state) throw new Error(state.error);
     expect(state.kit).toEqual({
       cards: KIT_CARDS,
+      // En lecture, hors de `cards` : le routage `…/skills/picker/<n>` compte les cartes éditables.
+      bursts: KIT_EXTRAS.bursts,
+      transcend: KIT_EXTRAS.transcend,
       chipHide: { '5502': ['SYS_BUFF_REMOVE_BUFF'] },
       chipAdd: { '5504::dual': ['7'] },
       catalog: KIT_CATALOG,
@@ -994,6 +1015,8 @@ describe('characterRoster, characterSheetState — la fiche lue, disque injecté
     if ('error' in state) throw new Error(state.error);
     expect(state.kit).toEqual({
       cards: [],
+      bursts: [],
+      transcend: [],
       chipHide: {},
       chipAdd: {},
       catalog: KIT_CATALOG,
@@ -1001,6 +1024,24 @@ describe('characterRoster, characterSheetState — la fiche lue, disque injecté
       error: 'tables du jeu absentes',
     });
     expect(state.curated).toEqual(DIANNE);
+  });
+
+  it('les bursts ou la transcendance illisibles : le kit entier l’est, cartes comprises', async () => {
+    const state = await characterSheetState(
+      AER,
+      sheetDisk(undefined, {
+        kitExtras: async () => {
+          throw new Error('progression illisible');
+        },
+      }),
+    );
+    if ('error' in state) throw new Error(state.error);
+    expect(state.kit).toMatchObject({
+      cards: [],
+      bursts: [],
+      transcend: [],
+      error: 'progression illisible',
+    });
   });
 
   it('`ee` : l’item du jeu, ce que le disque en cure — vides compris —, le catalogue ; l’échelle à part', async () => {
@@ -1165,6 +1206,7 @@ describe('saveCharacterSheet — disque, stores et git injectés', () => {
           eeOwners: new Set([AER]),
         }),
       kitCards: over.kitCards ?? (async () => KIT_CARDS),
+      kitExtras: async () => KIT_EXTRAS,
       kitSections: () => ({ chipHide: {}, chipAdd: {}, ...over.kit }),
       kitCatalog: () => KIT_CATALOG,
       eeItem: () => (over.noEe ? null : EE_ITEM),

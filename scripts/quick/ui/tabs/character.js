@@ -1186,6 +1186,8 @@ const eeAt = { now: eeNow, base: eeBase };
  * Une chip d'une carte (`at` : ses listes). Celle que le kit pose (`auto`) : ✕
  * la masque — barrée et atténuée, « rétablir » la rend. Un effet ajouté (`add`) :
  * son badge, et ✕ le retire. Le bord accent : son état n'est pas celui du disque.
+ * Sur la carte du skill burstable, une chip que seuls ses bursts apportent
+ * (`via`) le dit : « via burst 1, 2 ».
  */
 function chipHtml(at, c, kind) {
   const add = kind === 'add';
@@ -1193,8 +1195,8 @@ function chipHtml(at, c, kind) {
   const off = !add && now;
   const moved = now !== at.base(add ? 'add' : 'hide').includes(c.ref);
   return `<span class="chip c-chip${off ? ' off' : ''}${moved ? ' dirty' : ''}" data-kind="${kind}" data-ref="${esc(c.ref)}" title="${esc(c.ref)}">${fxTile(c.icon, c.isDebuff)}<span class="c-chn">${esc(c.name)}</span>${
-    add ? '<span class="badge edit">ajoutée</span>' : ''
-  }${
+    c.via?.length ? `<span class="badge off c-via">via burst ${esc(c.via.join(', '))}</span>` : ''
+  }${add ? '<span class="badge edit">ajoutée</span>' : ''}${
     off
       ? `<button class="btn ghost sm" type="button" data-act="show-chip" aria-label="Rétablir ${esc(c.name)}">rétablir</button>`
       : `<button class="btn icon" type="button" data-act="${add ? 'del-chip' : 'hide-chip'}" title="${
@@ -1232,14 +1234,78 @@ function skillInner(card) {
 }
 const skillClass = (card) => `card c-card c-skill${refused.has(`kit:${card.id}`) ? ' ko' : ''}`;
 
-/** Une carte par skill, comme la fiche du site : mains, passifs, chaîne, duo. */
+/** Un pourcentage tel que la fiche l'écrit en français : « 2,5 ». */
+const pct = (n) => esc(String(n).replace('.', ','));
+
+/**
+ * Les bursts du skill burstable, EN LECTURE : une colonne par burst — son coût,
+ * son texte, ses chips propres en tuiles, sans geste (ni ✕, ni « ＋ effet », ni
+ * `data-kit` : rien n'y compte dans la savebar). Rien sans burst.
+ */
+function burstsHtml() {
+  const bursts = sheet.kit.bursts ?? [];
+  if (!bursts.length) return '';
+  return `<div class="card c-card c-wide c-read" data-read="bursts">
+      <div class="card-head"><strong>Bursts</strong><span class="lbl">en lecture — sur la carte du skill, « via burst n » marque les chips qu’ils lui apportent</span></div>
+      <div class="c-body c-bursts">${bursts
+        .map(
+          (b) => `<div class="c-burst">
+          <strong>Burst ${esc(b.level)}${b.cost !== undefined ? ` · ${esc(b.cost)} AP` : ''}</strong>
+          ${b.desc ? `<p class="c-desc">${gameText(viewEnv(), skillDesc(b.desc))}</p>` : ''}
+          <div class="c-chips">${b.chips
+            .map(
+              (c) =>
+                `<span class="chip c-chip" title="${esc(c.ref)}">${fxTile(c.icon, c.isDebuff)}<span class="c-chn">${esc(c.name)}</span></span>`,
+            )
+            .join('')}</div>
+        </div>`,
+        )
+        .join('')}</div>
+    </div>`;
+}
+
+/**
+ * Les paliers de transcendance, EN LECTURE (la section du site) : une ligne par
+ * palier — son libellé, ses bonus d'ATK, DEF, HP (cumulés : des totaux, comme
+ * la table du jeu), les lignes de son passif unique. Rien sans palier.
+ */
+function transcendHtml() {
+  const tiers = sheet.kit.transcend ?? [];
+  if (!tiers.length) return '';
+  return `<div class="card c-card c-wide c-read" data-read="transcend">
+      <div class="card-head"><strong>Transcendance</strong><span class="lbl">en lecture — bonus cumulés à chaque palier</span></div>
+      <div class="c-body"><div class="scroll"><table class="c-trans">
+        <thead><tr><th>Palier</th><th>Bonus</th><th>Passif</th></tr></thead>
+        <tbody>${tiers
+          .map(
+            (t) => `<tr>
+          <td class="c-step">${esc(t.label)}</td>
+          <td class="c-trb">+${pct(t.atkPct)} % ATK · +${pct(t.defPct)} % DEF · +${pct(t.hpPct)} % HP</td>
+          <td>${
+            t.passives.length
+              ? t.passives.map((l) => `<p class="c-desc">${gameText(viewEnv(), l)}</p>`).join('')
+              : '<span class="lbl">—</span>'
+          }</td>
+        </tr>`,
+          )
+          .join('')}</tbody>
+      </table></div></div>
+    </div>`;
+}
+
+/**
+ * Une carte par skill, comme la fiche du site : mains, passifs, chaîne, duo ;
+ * dessous, en lecture, les bursts et la transcendance.
+ */
 function skillsHtml() {
   const { cards, error } = sheet.kit;
   if (error) return `<div class="empty">Kit illisible : ${esc(error)}.</div>`;
   if (!cards.length) return '<div class="empty">Aucune carte de skill.</div>';
   return `<div class="c-cols">${cards
     .map((c) => `<div class="${skillClass(c)}" data-kit="${esc(c.id)}">${skillInner(c)}</div>`)
-    .join('')}<div class="c-wide c-foot">${err('kit')}</div></div>`;
+    .join(
+      '',
+    )}<div class="c-wide c-foot">${err('kit')}</div>${burstsHtml()}${transcendHtml()}</div>`;
 }
 
 /** La carte d'un skill à l'écran, par son id (`…::dual` : pas un sélecteur sûr). */

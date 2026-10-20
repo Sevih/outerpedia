@@ -461,8 +461,13 @@ function toTier(s: TranscendStep, unique: Skill | undefined, lang: Lang): Transc
   };
 }
 
-function tiersOf(char: Character, steps: TranscendStep[], lang: Lang): TranscendTierView[] {
-  const unique = char.skills.map((id) => SKILLS[id]).find((s) => s?.type === 'unique_passive');
+function tiersOf(
+  char: Character,
+  steps: TranscendStep[],
+  lang: Lang,
+  skills: Record<string, Skill> = SKILLS,
+): TranscendTierView[] {
+  const unique = char.skills.map((id) => skills[id]).find((s) => s?.type === 'unique_passive');
   return steps.map((s) => toTier(s, unique, lang));
 }
 
@@ -475,9 +480,17 @@ export function getTranscendTiers(char: Character, lang: Lang): TranscendTierVie
   return tiersOf(char, transcendLadder(char.rarity, char.id), lang);
 }
 
-/** Paliers de transcendance de la FICHE perso (`sheetLadder`), alignés sur `getStatLayers`. */
-export function getSheetTranscendTiers(char: Character, lang: Lang): TranscendTierView[] {
-  return tiersOf(char, sheetLadder(char), lang);
+/**
+ * Paliers de transcendance de la FICHE perso (`sheetLadder`), alignés sur `getStatLayers`.
+ * `skills` : d'où lire le passif unique — les skills committés d'office ; quick
+ * passe ceux de l'extraction, la source de ses cartes de skills.
+ */
+export function getSheetTranscendTiers(
+  char: Character,
+  lang: Lang,
+  skills: Record<string, Skill> = SKILLS,
+): TranscendTierView[] {
+  return tiersOf(char, sheetLadder(char), lang, skills);
 }
 
 /** Un « sweetspot » de transcendance : ce que le palier APPORTE (delta). */

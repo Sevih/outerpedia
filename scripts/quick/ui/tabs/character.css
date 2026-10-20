@@ -636,6 +636,33 @@
   padding: 0 8px;
   font-size: 12px;
 }
+/* En lecture sous les cartes : les bursts, une colonne chacun (une pile sous
+   1000 px), puis la transcendance, une ligne par palier. */
+#tab-character .c-bursts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 14px 18px;
+}
+#tab-character .c-burst {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+@media (max-width: 1000px) {
+  #tab-character .c-bursts {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+#tab-character .c-trans td {
+  vertical-align: top;
+}
+#tab-character .c-trans .c-desc + .c-desc {
+  margin-top: 2px;
+}
+#tab-character .c-trb {
+  white-space: nowrap;
+}
 
 /* -------------------------------------------------------------------- « EE »
    L'équipement exclusif du perso : sa tuile d'item et son nom en tête, puis

@@ -7,6 +7,88 @@
 
 ## 2026-10-20
 
+- **Fiche perso de quick › Skills : les bursts et la transcendance en lecture
+  sous les cartes, les chips héritées marquées « via burst n » (F31).** Vu par
+  Sevih au patch du 20/10 : le sous-onglet ne montrait que les cartes
+  éditables, alors que les chips du skill burstable héritent des effets de
+  ses `burst_*` et des effets synthétiques de burst (`cardEffects`) — on
+  éditait des chips sans voir d'où elles venaient. Serveur
+  (`src/lib/admin/character-kit.ts`) : `KitEditorCard` gagne `burst?: true`
+  (la carte du skill à `burstAP`) et `CardChip` `via?: (1 | 2 | 3)[]`, posé
+  par `burstVia` seulement sur une chip du burstable dont aucune variante du
+  skill (`toClientEffects` hors bursts) ne porte la ref : les niveaux des
+  bursts qui la portent (rang dans `burstSkills`), sinon `[1, 2, 3]` pour un
+  effet synthétique (le bonus WG, tiré du texte de l'ensemble des bursts — le
+  commentaire le dit) ; une ref que seuls des passifs ou des statuts de niveau
+  apportent n'en a pas. `toChips` sort en `chipsOf(statuses, effects)`,
+  partagé avec la nouvelle `characterKitExtras(bundle)` →
+  `{ bursts: KitBurstCard[]; transcend: KitTranscendTier[] }` : les bursts de
+  `buildBurstViews` (aucun sans `burstAP`), texte EN résolu par
+  `resolveSkillText` aux vars du dernier niveau, chips propres au burst ; les
+  paliers de `getSheetTranscendTiers(char, 'en', …)`. `syntheticBurstEffects`
+  est exporté de `skill-view.ts` pour ça. Source des paliers : le helper lit
+  les tables COMMITTÉES (`SKILLS`, `PROGRESSION`) alors que la Fiche perso
+  bâtit ses cartes sur le bundle de l'EXTRACTION (`extractedBundle`) — pas la
+  même source. Il prend donc un troisième paramètre optionnel `skills`
+  (`char-progression.ts`, défaut `SKILLS`, la page publique inchangée) et
+  `characterKitExtras` lui passe `bundle.skills` : le passif unique vient de
+  l'extraction comme les cartes ; l'échelle des paliers (`sheetLadder`) reste
+  celle de la progression committée, que le bundle ne porte pas. Les bonus
+  ATK/DEF/HP sont des TOTAUX cumulés (`TranscendTierView` : « déjà des
+  totaux dans la table »), les lignes de passif aussi cumulées, comme sur la
+  fiche publique. Quick (`scripts/quick/actions.ts`) : `SheetKit` gagne
+  `bursts` et `transcend`, lus par une nouvelle dépendance `kitExtras` de
+  `CharacterSheetDisk` (patron de `kitCards`) ; les deux lus ou aucun — un
+  `kitError` laisse cartes, bursts et paliers vides. Ils restent hors de
+  `cards` : le routage `…/skills/picker/<n>`, `kitChanges`, `cardChanges`,
+  `kitOut` et la savebar n'en voient rien. Client (`character.js`,
+  `character.css`) : sur la carte burstable, le badge `off` « via burst 1, 2 »
+  (`.c-via`) suit le nom de la chip, qui se masque comme avant ; sous les
+  cartes, deux `.card.c-wide` en lecture (`data-read`, ni `data-kit`, ni
+  `data-act`, ni `data-ref`, aucun bouton) : « Bursts », une colonne `.c-burst`
+  par burst (« Burst n · <coût> AP », `.c-desc` par `gameText`, ses chips en
+  tuiles sans ✕ ; une pile sous 1000 px) et « Transcendance », une table
+  palier · « +x % ATK · +y % DEF · +z % HP » · lignes du passif ; absentes
+  sans burst, sans palier. Une ligne au croquis Skills de `STYLE.md`, aucune
+  couleur ni variante de bouton nouvelle. Hors périmètre, inchangée : la
+  fiche perso d'« Extraction », qui partage `characterKitCards` mais pas
+  `characterKitExtras` — ses cartes portent désormais `via`/`burst` dans la
+  réponse, son interface les ignore. Coût : `kitExtras` refait
+  `extractedBundle` (~180 ms à chaud mesurés sur Tamamo) en plus de celui de
+  `kitCards` à chaque lecture de la fiche — laissé, le patron le veut ; un
+  bundle partagé entre les deux dépendances serait le correctif si la fiche
+  paraît lente. Vérifié : `character-kit.test.ts` (un kit synthétique bâti du
+  S1 de Tamamo, de son burst 1 et de son burst 3 rangé en burst 2 : Extra
+  Turn et Cooldown Reduction `via: [2]`, Cursed sans `via`, le bonus WG
+  `[1, 2, 3]`, seule la carte burstable marquée ; `characterKitExtras` rend
+  2 bursts — niveau, coût, chips — et les paliers de `getSheetTranscendTiers` ;
+  le kit d'Aer sans `burstAP` ni `burst_*` → `bursts: []`, aucun perso du jeu
+  n'étant sans burst) ; `actions.test.ts` (`kitExtras` stubée : `bursts` et
+  `transcend` rendus ; vides sur `kitError` et quand `kitExtras` lève) ;
+  `ui-serve.test.ts` (fixture d'Aer : 5501 burstable avec une chip
+  « Extra Turn » `via: [2]`, deux bursts, deux paliers ; les deux cartes
+  rendues après les cartes éditables sans `button`, `[data-act]`, `[data-kit]`
+  ni `[data-ref]` ; le badge sur la bonne chip ; la masquer marque la carte
+  « modifié » et compte 1 changement ; `noBursts` : aucune carte en lecture ;
+  six attentes existantes sur les chips de 5501 complétées de la chip
+  nouvelle). `pnpm typecheck` et `pnpm lint` sans sortie (`$ eslint`
+  dernière ligne) ; `NODE_ENV=development pnpm exec vitest run scripts/quick` :
+  « Tests 1170 passed (1170) » ; `pnpm test` : « Tests 1 failed | 4369 passed
+  (4370) » — le seul rouge est `datagen/damage/damage-data.test.ts` « les 16
+  clips de base étrangers… (F30) », le travail en cours de F30 dans
+  l'arborescence, hors de mes fichiers. Banc sur un quick isolé (port 4831,
+  clés vidées, GET seuls) : `/tmp/claude-1000/-home-sevih-Documents-Projet-perso-sevih-tool/e23a2e07-0abd-4300-9916-55cf6b862f0a/scratchpad/shots/tamamo-full/character.png`
+  (Tamamo-no-Mae, 1440 × 2600) — sur la carte Kitsunebi (8601) « via burst 3 »
+  sur Extra Turn et Cooldown Reduction, que seul son burst 3 apporte, et « via
+  burst 1, 2, 3 » sur Weakness Gauge Damage (le synthétique) ; Cursed et Heavy
+  Strike, portés par le S1, sans badge ; dessous, Bursts 1 · 100 AP, 2 · 150
+  AP, 3 · 200 AP avec leurs chips, et sept paliers de 3 à 6 ;
+  `…/shots/k-full/character.png` (K, 2★) — Sliding Uppercut (102) burstable :
+  Dual Attack « via burst 1 », Barrier « via burst 2, 3 », Dual Attack (x2)
+  « via burst 3 », Taunted sans badge ; cinq paliers de 2 à 6 ;
+  `…/shots/k-800/character.png` : à 800 px, les bursts s'empilent. Laissé : rien
+  d'autre.
+
 - **Une table `ST_*` → slug, options de rang des boss au slug de
   `statScales` ; full art d'un costume existant mineur (A74).** Deux restes
   de la relecture du 19/10. (1) Les slugs de stat de la fiche venaient de

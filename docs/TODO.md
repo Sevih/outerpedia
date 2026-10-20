@@ -62,20 +62,6 @@ les preuves et les décisions vivent dans le tri consolidé de sevih-tool
 
 ## 🧰 Outil quick
 
-- [ ] **« Fiche perso » › Skills : les bursts et la transcendance invisibles
-      (vu par Sevih au patch du 20/10)** : le sous-onglet ne montre que les
-      cartes éditables (`characterKitCards` : trois skills principaux,
-      fusion_passive, extra, chaîne, duo). Les déclinaisons burst_1..3 et les
-      paliers de transcendance, que la page publique affiche (`burstSkills`,
-      `EeTranscendSection`), n'y sont pas — alors que les chips du skill
-      burstable HÉRITENT des effets de ses bursts (`cardEffects`, skill-view
-      l.722) et que les upgrades de transcendance en sont filtrés
-      (`isTranscendUpgrade`). On édite donc des chips sans voir d'où elles
-      viennent. À faire (un lot, après A74 et F30) : sous la carte du skill
-      burstable, ses trois bursts EN LECTURE (texte résolu, coût AP, les chips
-      qu'ils apportent marquées « via burst n ») ; une carte « Transcendance »
-      en lecture avec ses paliers, comme sur le site ; aucune chip nouvelle à
-      éditer là (l'héritage reste la règle du site).
 - [ ] **Migration de l'admin vers quick** (décision du 08/10) : inventaire,
       ordre et règles dans `docs/quick-migration.md`. FAIT : Short names et
       Search aliases (onglet « Noms », lot B34), Banner (onglet

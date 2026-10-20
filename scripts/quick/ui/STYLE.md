@@ -1065,6 +1065,7 @@ du rendu :
      .c-err    le refus de la carte, en rouge
   [＋ effet] ouvre le picker partagé sur le catalogue des effets : « Ajouter un effet — <skill> », la recherche sur le nom, [Tous | Buffs | Debuffs], des tuiles en lignes (tuile 28 px + nom) ; les homonymes sont départagés (« Barrier (buff) », « Barrier (irremovable, buff) ») ; un effet déjà ajouté à la carte n'est plus proposé
   sous les cartes : le refus du champ entier (cartes illisibles au serveur) ; .empty « Kit illisible : … » / « Aucune carte de skill. »
+  puis, EN LECTURE (F31 — aucun bouton, hors savebar) : .card.c-wide « Bursts » (une colonne .c-burst par burst : « Burst n · <coût> AP », .c-desc, ses chips sans ✕) et .card.c-wide « Transcendance » (table : palier · « +x % ATK · +y % DEF · +z % HP » cumulés · lignes du passif) ; absentes sans burst, sans palier ; sur la carte burstable, une chip que seuls ses bursts apportent porte le badge off « via burst 1, 2 »
 #c-panel — EE : .c-cols — l'en-tête en pleine largeur, puis Rangs | Passifs côte à côte, puis Chips en pleine largeur (une colonne sous 1000 px)
   .card.pad.c-ee  l'en-tête : la tuile d'item 56 px (`itemTile` de `gear-view.mjs` — cadre de rareté, icône, étoiles) · le nom dans la couleur du grade · « porté aussi par <perso> » en .lbl quand le site montre un second porteur
   .card « Rangs »    card-head : titre · badge edit « modifié » · badge ko « refusé »

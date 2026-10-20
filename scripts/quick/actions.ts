@@ -110,7 +110,12 @@ import { catalogOptions, listItemEntries } from '@/lib/data/item-catalog';
 import { rankItemMatches } from '@/lib/data/item-search';
 import { isVideoPlatform, resolveVideo } from '@/lib/admin/video-add';
 import { fetchMeta, searchOfficial } from '@/lib/admin/youtube';
-import { characterKitCards, kitEffectCatalog, pickKitCards } from '@/lib/admin/character-kit';
+import {
+  characterKitCards,
+  characterKitExtras,
+  kitEffectCatalog,
+  pickKitCards,
+} from '@/lib/admin/character-kit';
 import {
   GEAR_TARGETS,
   gearSheet,
@@ -332,7 +337,7 @@ import { localePath } from '@/lib/navigation';
 import { TAG_REGEX, checkText, type InlineSegment } from '@/lib/parse-text';
 import { STAT_ICON, statAbbr } from '@/lib/stats';
 import { transcendenceFullSteps, transcendenceLabel } from '@/lib/transcendence';
-import type { EffectOption, KitEditorCard } from '@/lib/admin/character-kit';
+import type { EffectOption, KitEditorCard, KitExtras } from '@/lib/admin/character-kit';
 import type { KitChip } from '@/lib/admin/monster-kit';
 import { fitsOnTwoLines } from '@/components/character/CharacterPortrait';
 import {
@@ -2560,13 +2565,15 @@ export interface SheetEeItem {
 /**
  * La lecture de la fiche : le disque de Rangs (curé des persos, EE, roster) ;
  * pour le sous-onglet Skills, les cartes de skills du perso (lève s'il n'a pas
- * de kit lisible), le curé des chips et le catalogue des effets ; pour le
+ * de kit lisible), ses bursts et ses paliers de transcendance (en lecture), le
+ * curé des chips et le catalogue des effets ; pour le
  * sous-onglet EE, l'EE du perso (`null` : il n'en a pas) et le catalogue de
  * son « ＋ effet » — celui de Skills, chaque effet avec sa description.
  */
 export interface CharacterSheetDisk {
   disk: () => RankDisk;
   kitCards: (id: string) => Promise<KitEditorCard[]>;
+  kitExtras: (id: string) => Promise<KitExtras>;
   kitSections: () => KitSections;
   kitCatalog: () => Record<string, EffectOption>;
   eeItem: (id: string) => SheetEeItem | null;
@@ -2630,6 +2637,12 @@ export const CHARACTER_SHEET_DEPS: CharacterSheetDeps = {
     if (!bundle) throw new Error('perso absent de l’extraction du jeu');
     return characterKitCards(bundle, img.skill);
   },
+  kitExtras: async (id) => {
+    const { extractedBundle } = await import('@/lib/admin/review-store');
+    const bundle = extractedBundle(id);
+    if (!bundle) throw new Error('perso absent de l’extraction du jeu');
+    return characterKitExtras(bundle);
+  },
   kitSections: loadCharacterKitSections,
   kitCatalog: () => kitEffectCatalog(),
   eeItem: sheetEeItem,
@@ -2645,10 +2658,13 @@ export const CHARACTER_SHEET_DEPS: CharacterSheetDeps = {
  * Le kit d'un perso, pour le sous-onglet Skills : ses cartes de skills et leurs
  * chips AUTO, ce que le disque masque (`chipHide`) et ajoute (`chipAdd`) sur
  * ces cartes, le catalogue des effets que « ＋ effet » propose et le dossier de
- * leurs icônes. `error` : les cartes sont illisibles (pas de tables du jeu sur
- * ce poste) — le reste de la fiche se lit quand même.
+ * leurs icônes ; en LECTURE, hors des cartes éditables (le routage
+ * `…/skills/picker/<n>` compte celles-là seules), les bursts du skill
+ * burstable et les paliers de transcendance. `error` : le kit est illisible
+ * (pas de tables du jeu sur ce poste), cartes et lecture vides — le reste de
+ * la fiche se lit quand même.
  */
-export interface SheetKit extends KitSections {
+export interface SheetKit extends KitSections, KitExtras {
   cards: KitEditorCard[];
   catalog: Record<string, EffectOption>;
   sprite: string;
@@ -2657,15 +2673,20 @@ export interface SheetKit extends KitSections {
 
 async function sheetKit(id: string, disk: CharacterSheetDisk): Promise<SheetKit> {
   let cards: KitEditorCard[] = [];
+  let extras: KitExtras = { bursts: [], transcend: [] };
   let error = '';
   try {
-    cards = await disk.kitCards(id);
+    // Les deux lus, ou aucun : un kit à moitié lu se dit illisible.
+    const read = await disk.kitCards(id);
+    extras = await disk.kitExtras(id);
+    cards = read;
   } catch (e: unknown) {
     error = e instanceof Error ? e.message : String(e);
   }
   const sections = disk.kitSections();
   return {
     cards,
+    ...extras,
     chipHide: pickKitCards(sections.chipHide, cards),
     chipAdd: pickKitCards(sections.chipAdd, cards),
     catalog: disk.kitCatalog(),

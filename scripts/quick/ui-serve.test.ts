@@ -2897,7 +2897,11 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
     },
   });
 
-  /** Le kit d'Aer, tel que le serveur le sert : deux cartes de skill, la chaîne, le duo. */
+  /**
+   * Le kit d'Aer, tel que le serveur le sert : deux cartes de skill — la
+   * première burstable, une chip héritée de son burst 2 —, la chaîne, le duo ;
+   * puis, en lecture, deux bursts et deux paliers de transcendance.
+   */
   type Chips = Record<string, string[]>;
   const KIT_CARDS = [
     {
@@ -2906,8 +2910,16 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
       type: 'first',
       desc: 'Attacks with a <color=#28d9ed>40%</color> chance.\\nSecond line.',
       iconSrc: '/images/characters/skills/Skill_First_2000055.webp',
+      burst: true,
       chips: [
         { ref: '11', name: 'Increased Crit Hit Chance', icon: 'IG_Buff_Crit', isDebuff: false },
+        {
+          ref: 'SYS_BUFF_ADDITIVE_TURN',
+          name: 'Extra Turn',
+          icon: 'SC_Buff_Effect_Extra_Turn',
+          isDebuff: false,
+          via: [2],
+        },
       ],
     },
     {
@@ -2933,6 +2945,41 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
       chips: [],
     },
     { id: '5504::dual', name: 'Dual', type: 'dual', chips: [] },
+  ];
+  const KIT_BURSTS = [
+    {
+      level: 1,
+      id: '5519',
+      cost: 100,
+      desc: 'Inflicts <color=#28d9ed>1</color> more stack\\nWG Reduction +1',
+      chips: [
+        { ref: '11', name: 'Increased Crit Hit Chance', icon: 'IG_Buff_Crit', isDebuff: false },
+      ],
+    },
+    {
+      level: 2,
+      id: '5520',
+      cost: 150,
+      chips: [
+        { ref: '11', name: 'Increased Crit Hit Chance', icon: 'IG_Buff_Crit', isDebuff: false },
+        {
+          ref: 'SYS_BUFF_ADDITIVE_TURN',
+          name: 'Extra Turn',
+          icon: 'SC_Buff_Effect_Extra_Turn',
+          isDebuff: false,
+        },
+      ],
+    },
+  ];
+  const KIT_TRANSCEND = [
+    { label: '4', atkPct: 16, defPct: 16, hpPct: 16, passives: [] },
+    {
+      label: '5+',
+      atkPct: 25,
+      defPct: 25,
+      hpPct: 22.5,
+      passives: ['+100% Effectiveness', 'Burst Level 3 Unlocked'],
+    },
   ];
   const KIT_CATALOG = {
     '1': { id: '1', name: 'Burned', icon: 'IG_Buff_Dot_Burn', isDebuff: true },
@@ -3142,6 +3189,8 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
       /** Le curé des chips de skills du disque (Aer), et un kit illisible. */
       chips?: { chipHide?: Chips; chipAdd?: Chips };
       kitError?: string;
+      /** Aer sans burst ni palier de transcendance. */
+      noBursts?: boolean;
       /** Le curé de l'EE d'Aer sur le disque, et son second porteur — les autres persos n'ont pas d'EE. */
       ee?: Partial<EeDisk>;
       companion?: { id: string; name: string };
@@ -3248,6 +3297,8 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
           // Seul Aer a des cartes ; un autre perso, un kit vide.
           kit: {
             cards: id === AER && !opts.kitError ? KIT_CARDS : [],
+            bursts: id === AER && !opts.kitError && !opts.noBursts ? KIT_BURSTS : [],
+            transcend: id === AER && !opts.kitError && !opts.noBursts ? KIT_TRANSCEND : [],
             chipHide: id === AER ? disk.chips.chipHide : {},
             chipAdd: id === AER ? disk.chips.chipAdd : {},
             catalog: KIT_CATALOG,
@@ -5618,7 +5669,10 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
     );
     expect(second.querySelector('.c-desc')).toBeNull();
 
-    expect(chips(first)).toEqual([['Increased Crit Hit Chance', '', '✕']]);
+    expect(chips(first)).toEqual([
+      ['Increased Crit Hit Chance', '', '✕'],
+      ['Extra Turn', '', '✕'],
+    ]);
     expect(chips(second)).toEqual([
       ['Buff Removal', '', '✕'],
       ['Priority Increase', '', '✕'],
@@ -5687,6 +5741,7 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
     // Un effet ajouté par le disque : son badge ; hors du catalogue, sa ref pour nom.
     expect(chips(kitCard(page, '5501'))).toEqual([
       ['Increased Crit Hit Chance', '', '✕'],
+      ['Extra Turn', '', '✕'],
       ['Increased Attack', '', '✕'],
       ['404', '', '✕'],
     ]);
@@ -5694,7 +5749,7 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
       [...kitCard(page, '5501').querySelectorAll('.c-chip')].map(
         (c) => c.querySelector('.badge')?.textContent ?? '',
       ),
-    ).toEqual(['', 'ajoutée', 'ajoutée']);
+    ).toEqual(['', 'via burst 2', 'ajoutée', 'ajoutée']);
     expect(page.count()).toBe('aucune modification');
 
     chip(second(), 'SYS_NO_ICON').querySelector('button')!.click();
@@ -5763,6 +5818,7 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
     expect(page.el('hp-modal').hidden).toBe(true);
     expect(chips(first())).toEqual([
       ['Increased Crit Hit Chance', '', '✕'],
+      ['Extra Turn', '', '✕'],
       ['Increased Attack', '', '✕'],
       ['Immunity', 'dirty', '✕'],
     ]);
@@ -5789,7 +5845,10 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
     chip(first(), '9', 'add').querySelector('button')!.click();
     expect(page.count()).toBe('aucune modification');
     chip(first(), '7', 'add').querySelector('button')!.click();
-    expect(chips(first())).toEqual([['Increased Crit Hit Chance', '', '✕']]);
+    expect(chips(first())).toEqual([
+      ['Increased Crit Hit Chance', '', '✕'],
+      ['Extra Turn', '', '✕'],
+    ]);
     expect(page.count()).toBe('1 changement');
   });
 
@@ -5874,7 +5933,10 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
     page.sub('fiche');
     expect(page.subs()[3][3]).toBe('dot edit');
     page.sub('skills');
-    expect(chips(kitCard(page, '5501'))).toEqual([['Increased Crit Hit Chance', 'dirty', '✕']]);
+    expect(chips(kitCard(page, '5501'))).toEqual([
+      ['Increased Crit Hit Chance', 'dirty', '✕'],
+      ['Extra Turn', '', '✕'],
+    ]);
     expect(chips(kitCard(page, '5504'))).toEqual([['Immunity', 'dirty', '✕']]);
 
     page.el('c-reset').click();
@@ -5883,6 +5945,7 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
     expect(page.count()).toBe('aucune modification');
     expect(chips(kitCard(page, '5501'))).toEqual([
       ['Increased Crit Hit Chance', 'off', 'rétablir'],
+      ['Extra Turn', '', '✕'],
     ]);
     expect(chips(kitCard(page, '5504'))).toEqual([]);
     expect(page.posted()).toEqual([]);
@@ -5897,6 +5960,78 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
     const none = await character({ hash: `${SKILLS}/picker/9` });
     expect(none.el('hp-modal')).toBeNull();
     expect(kitCards(none)).toHaveLength(4);
+  });
+
+  /** Les cartes en lecture sous les skills, par ce qu'elles montrent. */
+  const readCard = (page: Page, what: 'bursts' | 'transcend') =>
+    page.all(`#c-panel [data-read="${what}"]`)[0];
+
+  it('sous les cartes, en lecture : « Bursts » (coût, texte, chips) et « Transcendance » (une ligne par palier) — sans aucun geste', async () => {
+    const page = await character({ hash: SKILLS });
+    const bursts = readCard(page, 'bursts');
+    const trans = readCard(page, 'transcend');
+    // Après les cartes éditables, sur toute la largeur.
+    expect(
+      page.all('#c-panel .c-cols > .card').map((c) => c.dataset.kit ?? c.dataset.read),
+    ).toEqual(['5501', '5502', '5504', '5504::dual', 'bursts', 'transcend']);
+    for (const card of [bursts, trans]) {
+      expect(card.classList.contains('c-wide')).toBe(true);
+      expect(card.querySelectorAll('button, [data-act], [data-kit], [data-ref]').length).toBe(0);
+    }
+    expect(page.text(bursts, '.card-head strong')).toBe('Bursts');
+    const cols = [...bursts.querySelectorAll('.c-burst')] as unknown as HTMLElement[];
+    expect(cols.map((c) => page.text(c, 'strong'))).toEqual([
+      'Burst 1 · 100 AP',
+      'Burst 2 · 150 AP',
+    ]);
+    expect(cols[0].querySelector('.c-desc')?.innerHTML).toBe(
+      'Inflicts <span style="color:#28d9ed">1</span> more stack<br>WG Reduction +1',
+    );
+    expect(cols[1].querySelector('.c-desc')).toBeNull();
+    expect(chips(cols[1])).toEqual([
+      ['Increased Crit Hit Chance', '', undefined],
+      ['Extra Turn', '', undefined],
+    ]);
+    expect(cols[1].querySelector('.pv-fx')?.className).toBe('pv-fx buff');
+
+    expect(page.text(trans, '.card-head strong')).toBe('Transcendance');
+    const rows = [...trans.querySelectorAll('tbody tr')] as unknown as HTMLElement[];
+    expect(
+      rows.map((r) => [...r.querySelectorAll('td')].map((td) => td.textContent?.trim())),
+    ).toEqual([
+      ['4', '+16 % ATK · +16 % DEF · +16 % HP', '—'],
+      ['5+', '+25 % ATK · +25 % DEF · +22,5 % HP', '+100% EffectivenessBurst Level 3 Unlocked'],
+    ]);
+    expect(rows[1].querySelectorAll('.c-desc').length).toBe(2);
+    expect(page.count()).toBe('aucune modification');
+  });
+
+  it('« via burst 2 » sur la chip que le burst apporte au skill burstable ; la masquer compte comme avant', async () => {
+    const page = await character({ hash: SKILLS });
+    const first = () => kitCard(page, '5501');
+    const via = (card: HTMLElement) =>
+      ([...card.querySelectorAll('.c-chip')] as unknown as HTMLElement[]).map(
+        (c) => c.querySelector('.c-via')?.textContent ?? '',
+      );
+    expect(via(first())).toEqual(['', 'via burst 2']);
+    expect(via(kitCard(page, '5502'))).toEqual(['', '']);
+    // Le badge suit le nom de la chip.
+    expect(chip(first(), 'SYS_BUFF_ADDITIVE_TURN').querySelector('.c-chn + .c-via')).not.toBeNull();
+
+    chip(first(), 'SYS_BUFF_ADDITIVE_TURN').querySelector('button')!.click();
+    expect(chips(first())[1]).toEqual(['Extra Turn', 'off dirty', 'rétablir']);
+    expect(via(first())).toEqual(['', 'via burst 2']);
+    expect(page.text(first(), '.card-head .badge.edit')).toBe('modifié');
+    expect(page.count()).toBe('1 changement');
+    // Les cartes en lecture, redessinées ou non, ne bougent pas.
+    expect(readCard(page, 'bursts')).toBeDefined();
+    expect(readCard(page, 'transcend')).toBeDefined();
+  });
+
+  it('un perso sans burst ni palier : ni carte « Bursts » ni carte « Transcendance »', async () => {
+    const page = await character({ hash: SKILLS, noBursts: true });
+    expect(kitCards(page)).toHaveLength(4);
+    expect(page.all('#c-panel [data-read]')).toEqual([]);
   });
 
   it('un kit illisible, un perso sans carte : la page le dit, le reste de la fiche se lit', async () => {
