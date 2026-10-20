@@ -51,11 +51,12 @@ const writeConfig = (key: string, cfg: unknown) => {
  * Brouillon minimal mais VALIDE : une version, un combat, un conseil.
  * `pinned` omis par défaut — c'est l'état « l'écran n'en parle pas ».
  */
-const draft = (key: string, pinned?: string[]): GuideDraft => ({
+const draft = (key: string, pinned?: string[], hidden?: boolean): GuideDraft => ({
   intro: { en: 'intro' },
   versions: [
     {
       key,
+      ...(hidden ? { hidden } : {}),
       group: GROUP,
       ...(pinned === undefined ? {} : { pinned }),
       tipSections: [{ tips: [{ en: 'un conseil' }] }],
@@ -137,5 +138,41 @@ describe('dupliquer une version — le pin RESTE derrière', () => {
   it('la version SOURCE garde le sien', async () => {
     await addGuideVersion(CAT, SLUG, '2026-08', '2026-03');
     expect(readConfig('2026-03').pinned).toEqual(PINS);
+  });
+});
+
+/**
+ * Une version CACHÉE (B66) : `hidden` vit dans son `version.json`, que le store
+ * écrit à côté des quatre fichiers de contenu — le `label` qui y est déjà
+ * reste, et un `version.json` vidé de sa dernière clé disparaît.
+ */
+describe('sauvegarder un guide — la version cachée dans `version.json`', () => {
+  const vjson = (key: string) => join(versions, key, 'version.json');
+  const readVersion = (key: string): Record<string, unknown> =>
+    JSON.parse(readFileSync(vjson(key), 'utf8')) as Record<string, unknown>;
+  beforeEach(() => {
+    writeConfig('2026-03', { group: GROUP });
+    rmSync(vjson('2026-03'), { force: true });
+  });
+
+  it('cochée : `version.json { hidden: true }` naît ; décochée, il disparaît', async () => {
+    expect(await saveGuideDraft(CAT, SLUG, draft('2026-03', undefined, true))).toEqual([]);
+    expect(readVersion('2026-03')).toEqual({ hidden: true });
+    expect(await saveGuideDraft(CAT, SLUG, draft('2026-03'))).toEqual([]);
+    expect(existsSync(vjson('2026-03'))).toBe(false);
+  });
+
+  it('un `label` existant est conservé, dans les deux sens', async () => {
+    const label = { en: 'Season 3', fr: 'Saison 3' };
+    writeFileSync(vjson('2026-03'), JSON.stringify({ label }, null, 2), 'utf8');
+    expect(await saveGuideDraft(CAT, SLUG, draft('2026-03', undefined, true))).toEqual([]);
+    expect(readVersion('2026-03')).toEqual({ label, hidden: true });
+    expect(await saveGuideDraft(CAT, SLUG, draft('2026-03'))).toEqual([]);
+    expect(readVersion('2026-03')).toEqual({ label });
+  });
+
+  it('jamais cachée : aucun `version.json` n’est créé', async () => {
+    expect(await saveGuideDraft(CAT, SLUG, draft('2026-03'))).toEqual([]);
+    expect(existsSync(vjson('2026-03'))).toBe(false);
   });
 });

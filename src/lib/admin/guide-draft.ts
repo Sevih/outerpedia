@@ -187,6 +187,12 @@ export interface VersionDraft {
   /** Clé `versions/YYYY-MM` ; `''` pour un guide plat (version unique implicite). */
   key: string;
   labelOverride?: LocalizedText;
+  /**
+   * Version cachée (`version.json { hidden: true }`) : hors du sélecteur du
+   * site, joignable par `#version=`. Absent = visible — le store retire alors
+   * la clé du `version.json` (le `label` y reste).
+   */
+  hidden?: boolean;
   /** Le combat désigné : `group` (group-*), ids de donjons ou id de boss. */
   group?: string;
   /**
@@ -424,10 +430,12 @@ export function toVersionDraft(
   key: string,
   files: RawVersionFiles,
   labelOverride?: LocalizedText,
+  hidden?: boolean,
 ): VersionDraft {
   return {
     key,
     ...(labelOverride ? { labelOverride } : {}),
+    ...(hidden ? { hidden: true } : {}),
     ...(files.config?.group ? { group: files.config.group } : {}),
     // Seules les catégories VERSIONNÉES portent un épinglage ; ailleurs le champ
     // reste `undefined`, donc l'écriture n'y touchera pas (cf. `VersionDraft`).

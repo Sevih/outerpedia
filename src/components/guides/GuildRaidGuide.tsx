@@ -29,7 +29,7 @@ import { lRec } from '@/lib/i18n/localize';
 import { parseText, type ParseCtx } from '@/lib/parse-text';
 import {
   groupBossMonster,
-  guideVersionLabel,
+  guideVersionHeads,
   readGuideFile,
   readGuideVersionFile,
   type GuideContentProps,
@@ -129,9 +129,9 @@ export async function GuildRaidGuide({ lang, guide }: GuideContentProps) {
   const strings = readGuideFile<GuideStrings>(guide, 'strings.json');
   if (!strings) throw new Error(`${at} : strings.json manquant (intro du guide).`);
 
-  const newestLabel = guide.versions.length
-    ? guideVersionLabel(guide.versions[0], lang)
-    : undefined;
+  const heads = guideVersionHeads(guide.versions, lang, (currentVersion, newestVersion) =>
+    t('page.guide.older_version_warning', { currentVersion, newestVersion }),
+  );
 
   const teamLabels = {
     prev: t('guides.team.prev_option'),
@@ -310,7 +310,6 @@ export async function GuildRaidGuide({ lang, guide }: GuideContentProps) {
     const subA = readGuideVersionFile<SubBossData>(guide, v.key, 'subA.json');
     const subB = readGuideVersionFile<SubBossData>(guide, v.key, 'subB.json');
     const main = readGuideVersionFile<MainData>(guide, v.key, 'main.json');
-    const label = guideVersionLabel(v, lang);
 
     // Phase 1 : un onglet par sous-boss présent.
     const subBossTabs: TabItem[] = [];
@@ -395,16 +394,7 @@ export async function GuildRaidGuide({ lang, guide }: GuideContentProps) {
     }
 
     return {
-      key: v.key,
-      label,
-      ...(i > 0 && newestLabel
-        ? {
-            warning: t('page.guide.older_version_warning', {
-              currentVersion: label,
-              newestVersion: newestLabel,
-            }),
-          }
-        : {}),
+      ...heads[i],
       content: (
         <div className="space-y-6">
           <SegmentedTabs

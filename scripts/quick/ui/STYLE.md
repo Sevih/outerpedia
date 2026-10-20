@@ -1544,20 +1544,22 @@ LA VUE D'ENSEMBLE (#gd-overview, `#guides/<cat>`) — UNE catégorie à la fois 
    UNE .card.gd-cat sous la rangée : la catégorie dépliée — celle du hash, sinon la dernière montrée (`localStorage` `quick.guides.cat`), sinon la première éditable ; ← → Home End passent d'une catégorie éditable à l'autre
    la recherche non vide traverse TOUTES les catégories : la rangée reste (aucun onglet actif), la liste montre une .card.gd-cat par catégorie qui a une correspondance, celles en code comprises ; un clic sur une catégorie lève la recherche et l'ouvre ; vide : une seule catégorie
      card-head : le libellé anglais · le slug (chasse fixe) · badge « N guides » · badge « N cachés » · badge warn « contenu en code » (une catégorie dont quick n'édite AUCUN guide : guild raid, tour, monad, autres)
-     table : Guide (titre = un bouton pour un guide éditable — `editable` de la LIGNE : les sept catégories de `GUIDE_SPECS`, et trois généraux sur quatorze —, son slug dessous en chasse fixe) | Boss / combat (en clair) | Mis à jour (chasse fixe) | Versions (badge « 5 · 2026-10 », ou « plat ») | État (badges « caché », « contenu en code ») | « site ↗ » (le site de dev du poste, nouvel onglet)
+     table : Guide (titre = un bouton pour un guide éditable — `editable` de la LIGNE : les sept catégories de `GUIDE_SPECS`, et trois généraux sur quatorze —, son slug dessous en chasse fixe) | Boss / combat (en clair) | Mis à jour (chasse fixe) | Versions (badge « 5 · 2026-10 », suivi de « dont 1 cachée » quand des versions le sont — B66 ; ou « plat ») | État (badges « caché », « en mise à jour », « contenu en code ») | « site ↗ » (le site de dev du poste, nouvel onglet)
      une ligne « contenu en code » est atténuée (pas de bouton) ; une ligne cachée l'est davantage
      General Guides : ses guides rangés par PALIER (`tier` de la ligne) — un tbody.gd-tier par palier servi (`tiers`, l'ordre de lecture du site) qui en a, ouvert par un sous-titre en travers de la table (tr.gd-tier-head : « First Steps » · sa clé en chasse fixe), puis Banners & Pulls, Resources & Daily Loop, Heroes & Gear ; dans un palier, l'ordre du serveur
    .empty « Aucun guide ne correspond. »
 LE GUIDE (#gd-guide, `#guides/<cat>/<slug>` ; la vue d'ensemble se cache)
-.card.pad.gd-head  [← Guides] titre anglais (celui de Méta, en direct) ; dessous badge off de la catégorie · cat/slug (chasse fixe) · le boss ou le combat · « mis à jour le … » · badge « N versions » · badge « caché » … [ouvrir sur le site ↗]
+.card.pad.gd-head  [← Guides] titre anglais (celui de Méta, en direct) ; dessous badge off de la catégorie · cat/slug (chasse fixe) · le boss ou le combat · « mis à jour le … » · badge « N versions » · badge « caché » · badge « en mise à jour » (B66) … [ouvrir sur le site ↗]
 .savebar   2 onglets modifiés · 1 refus   Aperçu [en|fr|es|jp|kr|zh]   [Annuler] [Enregistrer]   (TOUT le guide part : brouillon, meta, `was` ; un commit) — « Aperçu » absent de Combat et Vidéos
 .gd-tabs (role tablist, le `.tab` de 32 px de la Fiche perso)  [Méta] [Combat] [Intro] [Tips] [Notes] [Persos] [Équipe] [Vidéos] — Notes, Équipe, Vidéos selon la spec de la catégorie ; un point accent = l'onglet diffère du disque, rouge = un refus
 .gd-versions (versionné seulement)  [2026-10 récente] [2026-05] [2025-12] … [＋ version]  « Méta, Combat et Intro valent pour tout le guide ; l'état du boss, Tips, Notes, Persos, Équipe et Vidéos sont ceux de la version. »
-   un point sur l'onglet d'une version : accent = modifiée, rouge = refusée ; « ＋ version » déplie .gd-addv : [Nouvelle version AAAA-MM] [Dupliquer depuis ▾] [Créer la version] annuler · « Écrit le dossier sans committer : « Enregistrer » l'emportera. »
+   un onglet de version cachée porte « cachée » après sa clé ; sous la rangée, la case de la version MONTRÉE (B66) : [☐ Cachée — hors du sélecteur du site, joignable par #version=2026-10] (`version.json { hidden }`, sa tranche propre `version` dans le compte de la savebar)
+   un point sur l'onglet d'une version : accent = modifiée (contenu ou case « Cachée »), rouge = refusée ; « ＋ version » déplie .gd-addv : [Nouvelle version AAAA-MM] [Dupliquer depuis ▾] [Créer la version] annuler · « Écrit le dossier sans committer : « Enregistrer » l'emportera. »
    après la création : p.gd-note « Version 2026-11 posée sur le disque, pas encore committée… [Ouvrir le Journal du site prérempli ↗] » (le gabarit « Mise à jour » du Journal, guide · mode · mois · slug)
 #gd-panel — Méta : .gd-cols, deux .card (Titre | Description), puis la carte des drapeaux en pleine largeur, puis [Traduire]
    LE TEXTE (.gd-text, celui de la Fiche perso) : [l'anglais — un champ d'une ligne pour un titre, une textarea de deux lignes qui grandit sinon] · .gd-pv l'aperçu (les segments que le site rendra, une balise inconnue en ROUGE) · .gd-err son refus · ▸ [Traductions (5)] badge warn « à retraduire » « 3 / 5 » — déplié : cinq champs fr · es · jp · kr · zh, trois par rangée, placeholder = l'anglais
    [☐ Caché — hors des listes du site, joignable par son URL]  « icône … · auteur … · mis à jour le … (posé au commit) »
+   dessous : [☐ En cours de mise à jour — le guide reste listé, sa page porte un avertissement] (`meta.updating`, B66)
 #gd-panel — Combat : .card « Combat » (group) : icône 36 px · nom · mode · group (chasse fixe) [Changer…] (le picker partagé en LIGNES : icône, nom, id ; recherche par début de mot) — versionné : « un seul pour tout le guide : changer ici vaut pour toutes les versions qui en portent un »
    adventure : .card « Donjons » — ol : nom · id · ↑ ↓ ✕ par donjon, [＋ donjon] (picker en lignes) ; « Au moins un donjon est requis. » en rouge
    dimensional-singularity : .card « Boss » — nom · id [Changer…] (picker en lignes sur tous les monstres)
@@ -1619,8 +1621,9 @@ le disque (`stale` : relu tel quel), chaque texte contrôlé (tags inline par
 la résolution du site, l'anglais), les noms de persos contre le roster, ce que
 le store exigerait (intro, combat, clé de version), un écart SITUÉ (version,
 onglet, ligne, champ : la saisie reste, la ligne cerclée, le point rouge) ;
-puis `saveGuideDraft` (toutes les versions), `patchGuideMetaFields` (titre,
-description, `hidden`), ce qui a bougé lu de git, le stamp de `meta.updated`
+puis `saveGuideDraft` (toutes les versions, et le `hidden` de chacune dans son
+`version.json`), `patchGuideMetaFields` (titre, description, `hidden`,
+`updating`), ce qui a bougé lu de git, le stamp de `meta.updated`
 si un fichier hors archive a bougé, UN commit `chore(guides): <cat>/<slug>`
 du dossier modifié et du meta ; rien n'a bougé : rien n'est committé. « ＋
 version » (`POST /api/guides/version`) écrit le dossier SANS committer, refuse

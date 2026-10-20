@@ -785,6 +785,9 @@ const en = {
   'page.guide.updated': 'Updated {date}',
   'page.guide.older_version_warning':
     'Note: This is an older strategy ({currentVersion}). While the core mechanics remain similar, we recommend checking the updated {newestVersion} version for the latest strategies and character recommendations.',
+  'page.guide.updating_warning':
+    'This guide is being updated: content may change in the coming days.',
+  'page.guide.updating_badge': 'Updating',
 
   // Catégories de guides : libellés + descriptions dans guide-categories.ts
   // (source unique, LocalizedText) — plus de clés de locale par catégorie.

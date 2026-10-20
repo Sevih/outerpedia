@@ -5719,7 +5719,11 @@ export interface GuideOverviewRow {
   versions: number;
   /** La version la plus récente (`YYYY-MM`), pour un guide versionné. */
   newest?: string;
+  /** Les versions cachées (`version.json { hidden }`), comptées dans `versions`. */
+  hiddenVersions: number;
   hidden: boolean;
+  /** « En cours de mise à jour » (`meta.updating`). */
+  updating: boolean;
   /** Le boss ou le combat, en clair ; vide quand le guide n'en désigne pas. */
   battle: string;
   /**
@@ -5745,11 +5749,12 @@ export interface GuideOverviewCategory {
   guides: GuideOverviewRow[];
 }
 
-/** Les textes éditables de `meta.json` : le titre, la description, `hidden`. */
+/** Les champs éditables de `meta.json` : le titre, la description, `hidden`, `updating`. */
 export interface GuideMetaState {
   title: LocalizedText & { en: string };
   description: LocalizedText & { en: string };
   hidden: boolean;
+  updating: boolean;
 }
 
 /** Les lectures de la section « Guides » : le scan, les stores, les listes des pickers. */
@@ -5858,7 +5863,9 @@ export function guidesOverview(disk: GuidesDisk = GUIDES_DEPS, withHidden = fals
     updated: guideUpdatedDate(g),
     versions: g.versions.length,
     ...(g.versions[0] ? { newest: g.versions[0].key } : {}),
+    hiddenVersions: g.versions.filter((v) => v.hidden).length,
     hidden: Boolean(g.hidden),
+    updating: Boolean(g.updating),
     battle: battleOf(g),
     editable: editableRow(g),
     ...(g.tier ? { tier: g.tier } : {}),
@@ -5898,6 +5905,7 @@ const guideMetaState = (g: Guide): GuideMetaState => ({
   title: g.title,
   description: g.description,
   hidden: Boolean(g.hidden),
+  updating: Boolean(g.updating),
 });
 
 /**
@@ -6098,6 +6106,7 @@ function cleanGuideVersion(
     ...(v.labelOverride && typeof v.labelOverride === 'object'
       ? { labelOverride: v.labelOverride as LocalizedText }
       : {}),
+    ...(v.hidden === true ? { hidden: true } : {}),
     ...(typeof v.group === 'string' && v.group ? { group: v.group } : {}),
     ...(typeof v.bossId === 'string' && v.bossId ? { bossId: v.bossId } : {}),
     tipSections: list(v.tipSections, 'tips', { tab: 'tips' }).map((s, i) => {
@@ -6188,8 +6197,8 @@ function cleanGuideVersion(
 
 /**
  * Les textes de meta venus de la page : le titre et la description (l'anglais
- * requis, les autres langues écrites gardées), `hidden`. Un écart est un refus
- * situé à l'onglet Méta.
+ * requis, les autres langues écrites gardées), `hidden`, `updating`. Un écart
+ * est un refus situé à l'onglet Méta.
  */
 function cleanGuideMeta(raw: unknown, refuse: (r: GuideRefusal) => void): GuideMetaPatch | null {
   if (!raw || typeof raw !== 'object' || Array.isArray(raw)) {
@@ -6210,6 +6219,7 @@ function cleanGuideMeta(raw: unknown, refuse: (r: GuideRefusal) => void): GuideM
     } else out[key] = text;
   }
   out.hidden = m.hidden === true;
+  out.updating = m.updating === true;
   return ok ? out : null;
 }
 
@@ -6223,9 +6233,10 @@ function cleanGuideMeta(raw: unknown, refuse: (r: GuideRefusal) => void): GuideM
  * et le meta sont CONTRÔLÉS avant toute écriture (textes, tags inline par la
  * résolution du site, noms de persos dans le roster, ce que le store exigerait
  * — l'intro, le combat, les clés de version), chaque écart SITUÉ à sa
- * version, son onglet, sa ligne ; puis le store écrit le brouillon, ses refus
- * rendus situés eux aussi ; puis `patchGuideMetaFields` (titre, description,
- * `hidden`) en une écriture ; puis ce qui a BOUGÉ dans le dossier du guide se
+ * version, son onglet, sa ligne ; puis le store écrit le brouillon (le
+ * `hidden` d'une version dans son `version.json` compris), ses refus rendus
+ * situés eux aussi ; puis `patchGuideMetaFields` (titre, description,
+ * `hidden`, `updating`) en une écriture ; puis ce qui a BOUGÉ dans le dossier du guide se
  * lit de git — rien : rien à committer, ni stamp — et, si un fichier PERTINENT
  * a bougé (hors archives de version : la règle de `scripts/stamp-guides.ts`,
  * partagée), `meta.updated` passe à aujourd'hui, le `meta.json` re-daté

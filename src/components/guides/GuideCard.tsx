@@ -10,12 +10,15 @@ export function GuideCard({
   guide,
   lang,
   updatedText,
+  updatingText,
   iconSrc,
 }: {
   guide: Guide;
   lang: Lang;
   /** Ligne méta déjà localisée (« Updated Mar 24, 2026 · Sevih »). */
   updatedText: string;
+  /** Badge « en mise à jour », déjà localisé — rendu seulement si `guide.updating`. */
+  updatingText: string;
   /**
    * Vignette de REMPLACEMENT (URL complète) — pour une vue qui montre autre
    * chose que l'icône du meta (le portrait du boss, déjà servi sous son
@@ -40,10 +43,17 @@ export function GuideCard({
         height={48}
       />
       <div className="min-w-0">
-        {/* `static pb-0 after:hidden` : neutralise le trait de titre global. */}
-        <h2 className="text-content-strong group-hover:text-accent static pb-0 text-sm font-semibold transition-colors after:hidden">
-          {lRec(guide.title, lang)}
-        </h2>
+        <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
+          {/* `static pb-0 after:hidden` : neutralise le trait de titre global. */}
+          <h2 className="text-content-strong group-hover:text-accent static pb-0 text-sm font-semibold transition-colors after:hidden">
+            {lRec(guide.title, lang)}
+          </h2>
+          {guide.updating && (
+            <span className="border-line-subtle text-content-muted shrink-0 rounded-full border px-2 py-0.5 text-xs">
+              {updatingText}
+            </span>
+          )}
+        </div>
         <p className="text-content-muted mt-1 line-clamp-2 text-xs">
           {lRec(guide.description, lang)}
         </p>

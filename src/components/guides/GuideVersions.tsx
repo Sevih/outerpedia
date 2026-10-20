@@ -11,6 +11,12 @@ export interface GuideVersionEntry {
   content: ReactNode;
   /** Bandeau « ancienne version » (déjà localisé) — absent sur la plus récente. */
   warning?: string;
+  /**
+   * Cachée (`version.json`) : le sélecteur ne la propose pas et le défaut
+   * l'ignore, mais `#version=<clé>` l'affiche — passée quand même pour rester
+   * joignable par son URL.
+   */
+  hidden?: boolean;
 }
 
 // Le hash est la SOURCE DE VÉRITÉ de la version affichée (cf. useUrlSlice) :
@@ -24,7 +30,9 @@ export interface GuideVersionEntry {
  * distance). Les contenus sont RENDUS CÔTÉ SERVEUR (passés en ReactNode) ; le
  * client ne fait que basculer l'affichage. La version active se synchronise
  * avec `#version=<clé>` (liens partageables) ; le défaut est la première
- * entrée (la plus récente).
+ * entrée VISIBLE (la plus récente non cachée). Une version cachée n'entre au
+ * menu que le temps où elle est affichée par son lien — sinon le menu, sans
+ * option à sa valeur, montrerait le libellé d'une autre.
  */
 export function GuideVersions({
   versions,
@@ -44,16 +52,18 @@ export function GuideVersions({
   shared?: ReactNode;
 }) {
   const hashKey = useUrlSlice('hashchange', () => readHashParam('version'));
-  const active = hashKey && versions.some((v) => v.key === hashKey) ? hashKey : versions[0]?.key;
+  // Toutes cachées : la première reste le défaut, plutôt qu'une page vide.
+  const fallback = versions.find((v) => !v.hidden) ?? versions[0];
+  const current = versions.find((v) => v.key === hashKey) ?? fallback;
 
   const select = (key: string) => writeHashParam('version', key);
 
-  const current = versions.find((v) => v.key === active) ?? versions[0];
   if (!current) return null;
+  const options = versions.filter((v) => !v.hidden || v.key === current.key);
 
   return (
     <div className="space-y-6">
-      {versions.length > 1 && (
+      {options.length > 1 && (
         <label className="flex items-center gap-2 text-sm">
           <span className="text-content-muted">{label}</span>
           <select
@@ -61,7 +71,7 @@ export function GuideVersions({
             onChange={(e) => select(e.target.value)}
             className="border-line-subtle bg-surface-raised text-content-strong hover:border-line focus:border-accent rounded-md border px-3 py-1.5 font-medium outline-none"
           >
-            {versions.map((v) => (
+            {options.map((v) => (
               <option key={v.key} value={v.key}>
                 {v.label}
               </option>

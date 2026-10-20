@@ -156,6 +156,12 @@ export interface GuideMeta {
   ogImage?: string;
   /** Exclu des listes/compteurs, accessible en URL directe (comportement conservé). */
   hidden?: boolean;
+  /**
+   * « En cours de mise à jour » : le guide reste listé, mais sa page porte un
+   * avertissement en tête (toutes versions) et sa carte de liste un badge. Posé
+   * et retiré à la main dans quick (Méta) — aucune date de fin.
+   */
+  updating?: boolean;
 }
 
 /** Une version datée d'un guide (dossier `versions/YYYY-MM/`). */
@@ -164,6 +170,13 @@ export interface GuideVersion {
   key: string;
   /** Libellé override (`version.json`) ; sinon dérivé de la date. */
   label?: LocalizedText;
+  /**
+   * Cachée (`version.json { hidden: true }`) : hors du sélecteur de versions et
+   * jamais la version par défaut, mais joignable par `#version=<clé>` — l'esprit
+   * de `hidden` d'un guide. Une saison en cours de rédaction, ou retirée sans
+   * supprimer son dossier.
+   */
+  hidden?: boolean;
 }
 
 export interface Guide extends GuideMeta {
@@ -184,6 +197,7 @@ const META_KEYS = new Set([
   'mapPos',
   'ogImage',
   'hidden',
+  'updating',
   'tier',
   'group',
   'dungeons',
@@ -246,6 +260,10 @@ function parseMeta(raw: unknown, at: string, issues: string[]): GuideMeta | null
   // scan (un guide plat sans `updated` ni version → erreur).
   if (m.updated !== undefined && (typeof m.updated !== 'string' || !DATE_RE.test(m.updated))) {
     issues.push(`${at} : « updated » doit être une date ISO YYYY-MM-DD`);
+    ok = false;
+  }
+  if (m.updating !== undefined && typeof m.updating !== 'boolean') {
+    issues.push(`${at} : « updating » doit être un booléen`);
     ok = false;
   }
   if (m.order !== undefined && typeof m.order !== 'number') {
@@ -333,12 +351,18 @@ function scanVersions(guideDir: string, at: string, issues: string[]): GuideVers
       continue;
     }
     let label: LocalizedText | undefined;
+    let hidden = false;
     const vjson = resolve(dir, entry.name, 'version.json');
     if (existsSync(vjson)) {
-      const raw = readJson(vjson, issues) as { label?: LocalizedText } | null;
+      const raw = readJson(vjson, issues) as { label?: LocalizedText; hidden?: unknown } | null;
       if (raw?.label && typeof raw.label === 'object') label = raw.label;
+      hidden = raw?.hidden === true;
     }
-    versions.push({ key: entry.name, ...(label ? { label } : {}) });
+    versions.push({
+      key: entry.name,
+      ...(label ? { label } : {}),
+      ...(hidden ? { hidden: true } : {}),
+    });
   }
   // Clés ISO YYYY-MM : le tri lexical inverse = ordre chronologique inverse.
   return versions.sort((a, b) => b.key.localeCompare(a.key));
@@ -572,6 +596,44 @@ export function formatGuideDate(iso: string, lang: Lang): string {
     month: 'short',
     day: 'numeric',
     timeZone: 'UTC',
+  });
+}
+
+/** L'en-tête d'une entrée du sélecteur de versions (`GuideVersionEntry` sans son contenu). */
+export interface GuideVersionHead {
+  key: string;
+  label: string;
+  hidden?: true;
+  warning?: string;
+}
+
+/**
+ * Les en-têtes des entrées de `GuideVersions`, dans l'ordre du scan (la plus
+ * récente d'abord) — partagés par les constructeurs de guides versionnés.
+ *
+ * La référence est la plus récente VISIBLE : une version cachée n'est jamais
+ * celle qu'on ouvre, et ne compte pas comme « la dernière » du bandeau
+ * « ancienne version ». Toute autre version porte ce bandeau — une cachée
+ * comprise, quand on l'ouvre par `#version=` (elle n'est pas la version du
+ * site). Aucune visible (toutes cachées) : pas de bandeau.
+ */
+export function guideVersionHeads(
+  versions: readonly GuideVersion[],
+  lang: Lang,
+  olderWarning: (current: string, newest: string) => string,
+): GuideVersionHead[] {
+  const newest = versions.find((v) => !v.hidden);
+  const newestLabel = newest ? guideVersionLabel(newest, lang) : undefined;
+  return versions.map((v) => {
+    const label = guideVersionLabel(v, lang);
+    return {
+      key: v.key,
+      label,
+      ...(v.hidden ? { hidden: true as const } : {}),
+      ...(newestLabel && v.key !== newest?.key
+        ? { warning: olderWarning(label, newestLabel) }
+        : {}),
+    };
   });
 }
 

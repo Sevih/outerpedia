@@ -3,7 +3,7 @@ import { getT } from '@/i18n';
 import { lRec } from '@/lib/i18n/localize';
 import { parseText, type ParseCtx } from '@/lib/parse-text';
 import {
-  guideVersionLabel,
+  guideVersionHeads,
   readGuideFile,
   readGuideVersionFile,
   type GuideContentProps,
@@ -132,11 +132,12 @@ export async function VersionedBossGuide({ lang, guide }: GuideContentProps) {
   const strings = readGuideFile<GuideStrings>(guide, 'strings.json');
   if (!strings) throw new Error(`${at} : strings.json manquant (intro du guide).`);
 
-  // La plus récente d'abord (cf. `scanVersions`) : c'est celle qu'on ouvre, les
-  // autres portent l'avertissement « version datée ».
-  const newestLabel = guide.versions.length
-    ? guideVersionLabel(guide.versions[0], lang)
-    : undefined;
+  // La plus récente d'abord (cf. `scanVersions`) : la plus récente VISIBLE est
+  // celle qu'on ouvre, les autres portent l'avertissement « version datée » —
+  // une version cachée reste hors du sélecteur (cf. `guideVersionHeads`).
+  const heads = guideVersionHeads(guide.versions, lang, (currentVersion, newestVersion) =>
+    t('page.guide.older_version_warning', { currentVersion, newestVersion }),
+  );
 
   /**
    * LE BOSS NE CHANGE PAS DE SAISON EN SAISON — il ne descend donc pas dans la
@@ -177,19 +178,9 @@ export async function VersionedBossGuide({ lang, guide }: GuideContentProps) {
       readGuideVersionFile<VersionRecommended>(guide, v.key, 'recommended.json'),
     );
     const teams = teamSections(readGuideVersionFile<VersionTeams>(guide, v.key, 'teams.json'));
-    const label = guideVersionLabel(v, lang);
 
     return {
-      key: v.key,
-      label,
-      ...(i > 0 && newestLabel
-        ? {
-            warning: t('page.guide.older_version_warning', {
-              currentVersion: label,
-              newestVersion: newestLabel,
-            }),
-          }
-        : {}),
+      ...heads[i],
       content: (
         <>
           {/* Le panneau ne redescend ici que si les saisons jouent des combats

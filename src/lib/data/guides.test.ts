@@ -1,4 +1,7 @@
-import { describe, expect, it } from 'vitest';
+import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import {
   getGuide,
   guideUpdatedDate,
@@ -58,6 +61,75 @@ describe('guideUpdatedDate — résolution de la date de mise à jour', () => {
     for (const g of listGuides()) {
       expect(guideUpdatedDate(g), `${g.category}/${g.slug}`).toMatch(/^\d{4}-\d{2}-\d{2}$/);
     }
+  });
+});
+
+/**
+ * Un dossier de contenus JETABLE (`GUIDES_CONTENTS_DIR`, lu à l'import du
+ * module) : un guide world-boss à trois versions, de quoi lire `version.json`
+ * et `meta.json` sans toucher aux guides réels.
+ */
+async function scanFixture(meta: Record<string, unknown>, versionJson: Record<string, unknown>) {
+  const root = mkdtempSync(join(tmpdir(), 'guides-scan-'));
+  const dir = join(root, 'world-boss', 'fixture');
+  for (const key of ['2026-01', '2026-05', '2026-09'])
+    mkdirSync(join(dir, 'versions', key), { recursive: true });
+  writeFileSync(join(dir, 'index.tsx'), 'export default null;\n');
+  writeFileSync(
+    join(dir, 'meta.json'),
+    JSON.stringify({
+      title: { en: 'Fixture' },
+      description: { en: 'Fixture' },
+      icon: 'x',
+      author: 'Sevih',
+      ...meta,
+    }),
+  );
+  writeFileSync(join(dir, 'versions', '2026-09', 'version.json'), JSON.stringify(versionJson));
+  vi.stubEnv('GUIDES_CONTENTS_DIR', root);
+  vi.resetModules();
+  const mod = await import('@/lib/data/guides');
+  return { root, mod };
+}
+
+describe('meta.updating et version.json { hidden } — lus au scan', () => {
+  let root = '';
+  afterEach(() => {
+    vi.unstubAllEnvs();
+    vi.resetModules();
+    if (root) rmSync(root, { recursive: true, force: true });
+    root = '';
+  });
+
+  it('`version.json { hidden: true }` donne `hidden` sur la version, le label conservé', async () => {
+    const fx = await scanFixture({}, { hidden: true, label: { en: 'Draft season' } });
+    root = fx.root;
+    const g = fx.mod.getGuide('world-boss', 'fixture')!;
+    expect(g.versions).toEqual([
+      { key: '2026-09', label: { en: 'Draft season' }, hidden: true },
+      { key: '2026-05' },
+      { key: '2026-01' },
+    ]);
+    // La date suit toujours le dossier le plus récent, caché ou non.
+    expect(fx.mod.guideUpdatedDate(g)).toBe('2026-09-01');
+  });
+
+  it('`hidden` faux ou absent : rien sur la version', async () => {
+    const fx = await scanFixture({}, { hidden: false });
+    root = fx.root;
+    expect(fx.mod.getGuide('world-boss', 'fixture')!.versions[0]).toEqual({ key: '2026-09' });
+  });
+
+  it('`updating` est accepté par META_KEYS et lu sur le guide', async () => {
+    const fx = await scanFixture({ updating: true }, {});
+    root = fx.root;
+    expect(fx.mod.getGuide('world-boss', 'fixture')!.updating).toBe(true);
+  });
+
+  it('`updating` qui n’est pas un booléen casse le scan', async () => {
+    const fx = await scanFixture({ updating: 'yes' }, {});
+    root = fx.root;
+    expect(() => fx.mod.listGuides()).toThrow(/« updating » doit être un booléen/);
   });
 });
 

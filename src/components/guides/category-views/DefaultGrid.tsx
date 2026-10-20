@@ -22,6 +22,7 @@ export default async function DefaultGrid({ lang, guides }: CategoryViewProps) {
           updatedText={`${t('page.guide.updated', {
             date: formatGuideDate(guideUpdatedDate(g), lang),
           })} · ${g.author}`}
+          updatingText={t('page.guide.updating_badge')}
         />
       ))}
     </div>

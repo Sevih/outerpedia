@@ -13966,6 +13966,7 @@ describe('Guides — la page, sur le vrai markup', () => {
   type Text = Record<string, string>;
   interface Version {
     key: string;
+    hidden?: boolean;
     group?: string;
     pinned?: string[];
     dungeons?: string[];
@@ -14060,6 +14061,7 @@ describe('Guides — la page, sur le vrai markup', () => {
         title: { en: 'Annihilator Joint Challenge Guide' },
         description: { en: 'JC desc' },
         hidden: false,
+        updating: false,
       },
     },
     'special-request/amadeus': {
@@ -14078,6 +14080,7 @@ describe('Guides — la page, sur le vrai markup', () => {
         title: { en: 'Amadeus Special Request Guide' },
         description: { en: 'SR desc' },
         hidden: false,
+        updating: false,
       },
     },
   });
@@ -14343,7 +14346,7 @@ describe('Guides — la page, sur le vrai markup', () => {
     category: string;
     slug: string;
     draft: Draft;
-    meta: { title: Text; description: Text; hidden: boolean };
+    meta: { title: Text; description: Text; hidden: boolean; updating: boolean };
     was: unknown;
   }
   type Saved = { ok: boolean; log: string[]; [more: string]: unknown };
@@ -15276,6 +15279,7 @@ describe('Guides — la page, sur le vrai markup', () => {
       title: { en: 'Renamed' },
       description: { en: 'JC desc' },
       hidden: true,
+      updating: false,
     });
     page.all('#gd-head [data-act="back"]')[0].click();
     await page.settle();
@@ -15285,6 +15289,95 @@ describe('Guides — la page, sur le vrai markup', () => {
     expect(page.shown()).toEqual(['joint-challenge']);
     expect(page.stored()).toBe('joint-challenge');
     expect(page.confirm).toHaveBeenCalledTimes(2);
+  });
+
+  it('B66 — Méta : « En cours de mise à jour » sous « Caché », le badge de l’en-tête, la savebar, l’envoi', async () => {
+    const page = await guides({ hash: `${JC}/meta` });
+    const flags = page.all('#gd-panel [data-card="flags"] input[type="checkbox"]');
+    expect(flags.map((b) => b.dataset.meta)).toEqual(['hidden', 'updating']);
+    const box = flags[1] as unknown as HTMLInputElement;
+    expect(box.closest('label')?.textContent?.trim()).toBe(
+      'En cours de mise à jour — le guide reste listé, sa page porte un avertissement',
+    );
+    expect(page.all('#gd-head [data-updating]')[0].textContent).toBe('');
+    box.checked = true;
+    box.dispatchEvent(new page.window.Event('change', { bubbles: true }) as unknown as Event);
+    expect(page.count()).toBe('1 onglet modifié');
+    expect(page.all('#gd-head [data-updating]')[0].textContent).toBe('en mise à jour');
+    expect(page.all('#gd-head [data-hidden]')[0].textContent).toBe('');
+    // Décochée : plus rien en attente.
+    box.checked = false;
+    box.dispatchEvent(new page.window.Event('change', { bubbles: true }) as unknown as Event);
+    expect(page.count()).toBe('aucune modification');
+    box.checked = true;
+    box.dispatchEvent(new page.window.Event('change', { bubbles: true }) as unknown as Event);
+    await page.save();
+    expect(page.posted()[0].meta).toEqual({
+      title: { en: 'Annihilator Joint Challenge Guide' },
+      description: { en: 'JC desc' },
+      hidden: false,
+      updating: true,
+    });
+  });
+
+  it('B66 — Versions : la case « Cachée » de la version MONTRÉE, son point, la savebar, le brouillon envoyé', async () => {
+    const page = await guides({ hash: JC });
+    const box = () =>
+      page.all('#gd-versions input[data-vhidden]')[0] as unknown as HTMLInputElement;
+    const tick = (on: boolean) => {
+      box().checked = on;
+      box().dispatchEvent(new page.window.Event('change', { bubbles: true }) as unknown as Event);
+    };
+    expect(box().closest('label')?.textContent?.trim()).toBe(
+      'Cachée — hors du sélecteur du site, joignable par #version=2026-10',
+    );
+    expect(box().checked).toBe(false);
+    tick(true);
+    expect(page.count()).toBe('1 onglet modifié');
+    const tab0 = () => page.all('#gd-versions [data-ver="0"]')[0];
+    expect(tab0().textContent).toBe('2026-10récentecachée');
+    expect(tab0().querySelector('.dot')?.className).toBe('dot edit');
+    expect(box().checked).toBe(true); // redessinée, la case garde son état
+    // Une autre version : SA case, décochée.
+    page.all('#gd-versions [data-ver="1"]')[0].click();
+    await page.settle();
+    expect(box().closest('label')?.textContent).toContain('#version=2026-05');
+    expect(box().checked).toBe(false);
+    // Revenue sur la première, décochée : plus rien en attente.
+    tab0().click();
+    await page.settle();
+    tick(false);
+    expect(page.count()).toBe('aucune modification');
+    expect(tab0().textContent).toBe('2026-10récente');
+    tick(true);
+    await page.save();
+    expect(page.posted()[0].draft.versions.map((v) => v.hidden)).toEqual([true, undefined]);
+  });
+
+  it('B66 — vue d’ensemble : badge « en mise à jour », et « dont k cachée(s) » au compte des versions', async () => {
+    const row = OVERVIEW.categories.find((c) => c.slug === 'joint-challenge')!.guides[0] as Record<
+      string,
+      unknown
+    >;
+    Object.assign(row, { updating: true, hiddenVersions: 1 });
+    try {
+      const page = await guides({ hash: '#guides/joint-challenge' });
+      const ann = page.all('#gd-list .gd-row[data-slug="annihilator"]')[0];
+      const cells = [...ann.querySelectorAll('td')].map((t) => t.textContent);
+      expect(cells[3]).toBe('2 · 2026-10 dont 1 cachée');
+      expect([...ann.querySelectorAll('.gd-state .badge')].map((b) => b.textContent)).toEqual([
+        'en mise à jour',
+      ]);
+      row.hiddenVersions = 2;
+      const again = await guides({ hash: '#guides/joint-challenge' });
+      expect(
+        [...again.all('#gd-list .gd-row[data-slug="annihilator"]')[0].querySelectorAll('td')][3]
+          .textContent,
+      ).toBe('2 · 2026-10 dont 2 cachées');
+    } finally {
+      delete row.updating;
+      delete row.hiddenVersions;
+    }
   });
 
   it("une venue par un chemin (`sections.go('guides/<cat>/<slug>')`, « ouvrir dans Guides » de l’Extraction), la page déjà chargée : ce guide, sa version, son sous-onglet", async () => {

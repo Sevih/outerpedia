@@ -70,6 +70,14 @@ describe('patchGuideMetaFields — titre, description, hidden', () => {
     expect(readMeta()).not.toHaveProperty('hidden');
   });
 
+  it('`updating: true` s’écrit, `updating: false` retire la clé (B66)', async () => {
+    expect(await patchGuideMetaFields(CAT, SLUG, { updating: true })).toBe(true);
+    expect(readMeta().updating).toBe(true);
+    expect(await patchGuideMetaFields(CAT, SLUG, { updating: false })).toBe(true);
+    expect(readMeta()).not.toHaveProperty('updating');
+    expect(readMeta()).toEqual(META);
+  });
+
   it('plusieurs champs en UNE écriture — le combat et les textes ensemble', async () => {
     expect(
       await patchGuideMetaFields(CAT, SLUG, {

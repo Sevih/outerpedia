@@ -758,6 +758,8 @@ const kr: Record<TranslationKey, string> = {
   'page.guide.updated': '{date} 업데이트',
   'page.guide.older_version_warning':
     '참고: 이 공략은 이전 버전입니다 ({currentVersion}). 기본 메커니즘은 유사하지만, 최신 전략과 캐릭터 추천은 {newestVersion} 버전을 확인해 주세요.',
+  'page.guide.updating_warning': '이 공략은 업데이트 중입니다. 며칠 내에 내용이 바뀔 수 있습니다.',
+  'page.guide.updating_badge': '업데이트 중',
 
   // Catégories de guides : libellés + descriptions dans guide-categories.ts
   // (source unique, LocalizedText) — plus de clés de locale par catégorie.

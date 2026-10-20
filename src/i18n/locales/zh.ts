@@ -744,6 +744,8 @@ const zh: Record<TranslationKey, string> = {
   'page.guide.updated': '{date} 更新',
   'page.guide.older_version_warning':
     '注意：这是旧版攻略（{currentVersion}）。虽然核心机制相似，但建议查看最新的{newestVersion}版本以获取最新策略和角色推荐。',
+  'page.guide.updating_warning': '本攻略正在更新中：内容可能会在近几天内变动。',
+  'page.guide.updating_badge': '更新中',
 
   // Catégories de guides : libellés + descriptions dans guide-categories.ts
   // (source unique, LocalizedText) — plus de clés de locale par catégorie.

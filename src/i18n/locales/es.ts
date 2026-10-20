@@ -792,6 +792,9 @@ const es: Record<TranslationKey, string> = {
   'page.guide.updated': 'Actualizado {date}',
   'page.guide.older_version_warning':
     'Nota: Esta es una estrategia más antigua ({currentVersion}). Aunque la mecánica central se mantiene similar, recomendamos revisar la versión actualizada {newestVersion} para las estrategias y recomendaciones de personajes más recientes.',
+  'page.guide.updating_warning':
+    'Esta guía se está actualizando: el contenido puede cambiar en los próximos días.',
+  'page.guide.updating_badge': 'Actualizándose',
 
   // Catégories de guides : libellés + descriptions dans guide-categories.ts
   // (source unique, LocalizedText) — plus de clés de locale par catégorie.

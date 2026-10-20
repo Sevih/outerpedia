@@ -146,6 +146,11 @@ export async function GuideDetail({
         <span className="text-content-strong">{title}</span>
       </nav>
       {header}
+      {/* « En cours de mise à jour » (meta.updating) : en tête, toutes versions —
+          le rendu du bandeau « ancienne version » de `GuideVersions`. */}
+      {guide.updating && (
+        <div className="panel-warning px-4 py-3 text-sm">{t('page.guide.updating_warning')}</div>
+      )}
       <article className="space-y-6">
         <GuideContent lang={lang} guide={guide} floor={floor} />
       </article>

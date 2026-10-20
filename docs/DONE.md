@@ -7,6 +7,91 @@
 
 ## 2026-10-20
 
+- **Guides : « en cours de mise à jour » et version cachée, édités dans quick
+  (B66).** Demande de Sevih du 20/10 : deux interrupteurs de plus à côté de
+  `hidden`. (1) `updating` sur le GUIDE (`GuideMeta.updating`, accepté par
+  `META_KEYS`, refusé au scan s'il n'est pas booléen) : le guide reste listé,
+  `guide-detail.tsx` pose sous l'en-tête un bandeau `page.guide.updating_warning`
+  (toutes versions, les classes `panel-warning px-4 py-3 text-sm` du bandeau
+  « ancienne version » de `GuideVersions`), et `GuideCard` un petit badge
+  `page.guide.updating_badge` à côté du titre (la carte n'avait aucun badge :
+  un `span` sobre en `rounded-full border`, le libellé passé par `DefaultGrid`
+  et `SingularityRotation`, les deux seuls appelants). Deux clés dans les six
+  locales (jp/kr/zh traduites sobrement). (2) `hidden` sur une VERSION
+  (`version.json { hidden: true }`, lu par `scanVersions` dans
+  `GuideVersion.hidden`) : hors du sélecteur, jamais le défaut, joignable par
+  `#version=<clé>`. Les en-têtes des entrées viennent d'un helper commun,
+  `guideVersionHeads` (`src/lib/data/guides.ts`), que `VersionedBossGuide` et
+  `GuildRaidGuide` (les deux seuls constructeurs de `GuideVersionEntry`)
+  appellent au lieu de calculer chacun `newestLabel`/`i > 0` : la référence
+  est la plus récente VISIBLE, toute autre version porte le bandeau « ancienne
+  version » — une cachée comprise quand on l'ouvre par son lien —, toutes
+  cachées : pas de bandeau. Les entrées cachées sont passées avec `hidden: true` ; `GuideVersions` prend pour défaut la première visible (la première
+  tout court si toutes le sont) et n'ajoute une cachée au `<select>` que le
+  temps où elle est affichée (sans option à sa valeur, le menu aurait montré
+  le libellé d'une autre). Le `shared` (panneau du boss) ne change pas : sa
+  signature compte toujours toutes les versions. `guideUpdatedDate` lit
+  toujours `versions[0]`, le dossier le plus récent, caché ou non ;
+  `guideBossMonster` aussi (laissé tel quel). Côté quick : Méta porte sous
+  « Caché » la case « En cours de mise à jour — le guide reste listé, sa page
+  porte un avertissement » (`data-meta="updating"`, dans `cleanMeta`,
+  `GuideMetaState`, `cleanGuideMeta`, `GuideMetaPatch`/`GuideMetaKey` de
+  `patchGuideMetaFields` — écrit `true`, retiré quand faux comme `hidden`) ;
+  l'en-tête du guide a le badge « en mise à jour » à côté de « caché », la
+  ligne de la vue d'ensemble aussi, et son compte de versions dit « dont k
+  cachée(s) » (`GuideOverviewRow.updating`, `hiddenVersions`). Sous la rangée
+  des versions, la case « Cachée — hors du sélecteur du site, joignable par
+  #version=<clé> » de la version MONTRÉE (redessinée à chaque coche, elle
+  garde le focus) ; l'onglet d'une version cachée porte « cachée ».
+  `VersionDraft.hidden` (`toVersionDraft` le reçoit du scan via
+  `loadGuideDraft`, `versionOut` et `cleanGuideVersion` le gardent seulement à
+  `true`) ; `saveGuideDraft` écrit `version.json` en plus des quatre fichiers
+  (`writeVersionHidden` : `hidden: true` posé ou retiré, le `label` et le reste
+  conservés, rien d'écrit si rien ne change — une version jamais cachée n'a
+  pas de `version.json` qui naît —, un fichier vidé de sa dernière clé
+  supprimé). La savebar compte une tranche propre `version` par version (plus
+  lisible que de faire clignoter « Combat ») ; `GET /api/guides/state` sert
+  `meta.updating`, `guide.versions[].hidden` et `draft.versions[].hidden`. Le
+  croquis de STYLE.md suit. Vérifié, hors périmètre : ni le sitemap ni la
+  recherche (`search-index.ts`) ne listent de versions (une URL par guide), un
+  guide `updating` y reste ; RSS, journal du site, `stamp-guides.ts` et les
+  guides généraux non touchés. La règle du stamp (`hasRelevantChange`,
+  `guide-stamp.ts`) : tout fichier du dossier du guide hors archives compte —
+  cacher la version la plus récente (son `version.json`) RE-DATE le guide,
+  cacher une archive non ; et cocher « en mise à jour » touche `meta.json`,
+  donc re-date aussi. Tests : `guides.test.ts` (un `_contents` jetable par
+  `GUIDES_CONTENTS_DIR` : `version.json { hidden }` lu, `label` gardé,
+  `updating` accepté, non booléen refusé), `GuideVersions.test.tsx` (nouveau,
+  happy-dom : trois versions dont la plus récente cachée — deux options, le
+  défaut est la plus récente visible sans bandeau, `#version=<clé cachée>`
+  l'affiche avec le sien), `guide-store.meta.test.ts` (`updating` écrit puis
+  retiré), `guide-store.pinned.test.ts` (`version.json` né, retiré, `label`
+  conservé dans les deux sens), `actions.test.ts` (vue d'ensemble, état,
+  `meta.updating` posé puis retiré, version cachée envoyée au store, re-datage
+  de la récente et pas d'une archive), `ui-serve.test.ts` (les deux cases,
+  la savebar qui passe à « 1 onglet modifié » puis revient, le point de
+  l'onglet, les badges, le compte « dont 1 cachée / 2 cachées »). `pnpm typecheck` et `pnpm lint` muets (derniers lignes : `tsc --noEmit … -p scripts/tsconfig.json`, `eslint`) ; `pnpm test` : « Tests 4391 passed
+  (4391) » — un premier passage avait donné un échec unique, non reproduit en
+  cinq passages suivants (fichier non identifié : la sortie du passage rouge
+  n'a pas été gardée) ; `NODE_ENV=development pnpm exec vitest run scripts/quick` : « Tests 1177 passed (1177) ». Banc sur un quick isolé
+  (:4796, clés vidées, GET seulement) : `shot.mjs --tabs guides --hash guides/world-boss/drakhan` (et `…/2026-10/meta`) — la case « Cachée » de la
+  version 2026-10 sous la rangée des trois versions, la case « En cours de
+  mise à jour » sous « Caché » dans la carte des drapeaux, rien d'autre ne
+  bouge. Visuel : une carte de guide sans `updating` rend comme avant (le
+  titre seul dans un conteneur flex). POUR SEVIH : quick › Guides › un guide ›
+  Méta, case « En cours de mise à jour » → sur le site, le bandeau ambre sous
+  l'en-tête du guide et le badge « Updating » sur sa carte (vues en grille :
+  catégories par défaut et dimensional-singularity ; les vues à bannière —
+  world boss, guild raid, joint challenge — et les autres vues dédiées ne
+  rendent pas `GuideCard`, donc pas de badge : à décider si besoin). Pour une
+  version : ouvrir l'onglet de la version, case « Cachée » sous la rangée →
+  sur le site, elle sort du menu « Versions », la plus récente visible
+  s'ouvre sans bandeau, et `#version=<clé>` montre la cachée avec le bandeau
+  « ancienne version ». Laissé : « ＋ version » duplique `version.json` tel
+  quel (son `label`, et désormais son `hidden`) — une copie d'une version
+  cachée naît cachée. AUCUN guide réel n'est modifié : ni `updating` ni
+  version cachée posés, c'est à Sevih.
+
 - **Passifs de palier dédoublonnés (suite d'A75).** Vu par Sevih sur le guide
   de Belial : « Encountered two children with the same key, `Final DMG
 Reduction 70%` » — `BossStats.tsx` rend les passifs de palier avec

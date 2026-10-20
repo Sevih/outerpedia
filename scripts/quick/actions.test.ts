@@ -8067,6 +8067,7 @@ describe('guidesOverview, guideDraftState, saveGuide, addGuideVersionAction — 
     title: g.title,
     description: g.description,
     hidden: Boolean(g.hidden),
+    updating: Boolean(g.updating),
   });
   const wasOf = (g: Guide) => ({
     draft: clone(DRAFTS[`${g.category}/${g.slug}`]),
@@ -8192,7 +8193,9 @@ describe('guidesOverview, guideDraftState, saveGuide, addGuideVersionAction — 
           updated: '2026-10-07',
           versions: 2,
           newest: '2026-10',
+          hiddenVersions: 0,
           hidden: false,
+          updating: false,
           battle: 'Annihilator', // `bossId` : le nom du monstre
           editable: true,
         },
@@ -8252,6 +8255,21 @@ describe('guidesOverview, guideDraftState, saveGuide, addGuideVersionAction — 
       ]);
       expect(by['joint-challenge'].guides[0]).not.toHaveProperty('tier');
     });
+
+    it('B66 : `updating` et le compte des versions cachées, par ligne', () => {
+      const { fake } = deps();
+      fake.guides = () => [
+        { ...JC, updating: true, versions: [{ key: '2026-10', hidden: true }, { key: '2026-05' }] },
+      ];
+      const jc = guidesOverview(fake).categories.find((c) => c.slug === 'joint-challenge');
+      expect(jc?.guides[0]).toMatchObject({
+        versions: 2,
+        newest: '2026-10',
+        hiddenVersions: 1,
+        updating: true,
+        hidden: false,
+      });
+    });
   });
 
   describe('guideDraftState', () => {
@@ -8280,7 +8298,12 @@ describe('guidesOverview, guideDraftState, saveGuide, addGuideVersionAction — 
       });
       expect(out.spec.versioned).toBe(true);
       expect(out.draft).toEqual(JC_DRAFT);
-      expect(out.meta).toEqual({ title: JC.title, description: JC.description, hidden: false });
+      expect(out.meta).toEqual({
+        title: JC.title,
+        description: JC.description,
+        hidden: false,
+        updating: false,
+      });
       expect(calls.groups).toEqual([['event_boss']]);
       expect(out.options.groups.length).toBe(5);
       expect(out.options.dungeons).toEqual([]);
@@ -8306,6 +8329,21 @@ describe('guidesOverview, guideDraftState, saveGuide, addGuideVersionAction — 
       expect(adv.options.groups).toEqual([]);
       expect(adv.options.dungeons.map((d) => d.id)).toEqual(['100805', '100806']);
       expect(adv.guide.hidden).toBe(false);
+    });
+
+    it('B66 : sert `meta.updating` et `versions[].hidden` — le scan et le brouillon', async () => {
+      const { fake } = deps();
+      fake.guides = () => [
+        { ...JC, updating: true, versions: [{ key: '2026-10', hidden: true }, { key: '2026-05' }] },
+      ];
+      const d = clone(JC_DRAFT);
+      d.versions[0].hidden = true;
+      fake.draft = () => clone(d);
+      const out = await guideDraftState('joint-challenge', 'annihilator', fake);
+      if ('error' in out) throw new Error(out.error);
+      expect(out.meta.updating).toBe(true);
+      expect(out.guide.versions).toEqual([{ key: '2026-10', hidden: true }, { key: '2026-05' }]);
+      expect(out.draft.versions.map((v) => v.hidden)).toEqual([true, undefined]);
     });
   });
 
@@ -8571,6 +8609,7 @@ describe('guidesOverview, guideDraftState, saveGuide, addGuideVersionAction — 
           title: { en: 'Annihilator', fr: 'Annihilateur' },
           description: JC.description,
           hidden: true,
+          updating: false,
         },
       ]);
       // Le meta est pertinent : re-daté ; déjà dans les fichiers qui bougent, il ne part qu'une fois.
@@ -8605,6 +8644,70 @@ describe('guidesOverview, guideDraftState, saveGuide, addGuideVersionAction — 
       );
       expect(r2.refused).toEqual([{ tab: 'meta', reason: 'meta.json refusé par le store' }]);
       expect(bad.calls.git).toEqual([]);
+    });
+
+    it('B66 : `meta.updating` part au store — posé, puis retiré quand la page le décoche', async () => {
+      const { calls, fake } = deps({ dirty: [`${BASE}meta.json`] });
+      const r = await saveGuide(
+        CAT,
+        SLUG,
+        { draft: clone(JC_DRAFT), meta: { ...metaOf(JC), updating: true }, was: wasOf(JC) },
+        fake,
+      );
+      expect(r.ok).toBe(true);
+      expect(calls.meta).toEqual([
+        { title: JC.title, description: JC.description, hidden: false, updating: true },
+      ]);
+
+      // Le disque le porte : décoché, le store reçoit `false` et retire la clé
+      // (`emptyMetaValue`, cf. guide-store.meta.test.ts).
+      const on = { ...JC, updating: true };
+      const off = deps({ dirty: [`${BASE}meta.json`] });
+      off.fake.guides = () => [on];
+      const r2 = await saveGuide(
+        CAT,
+        SLUG,
+        { draft: clone(JC_DRAFT), meta: metaOf(JC), was: wasOf(on) },
+        off.fake,
+      );
+      expect(r2.ok).toBe(true);
+      expect(off.calls.meta).toEqual([
+        { title: JC.title, description: JC.description, hidden: false, updating: false },
+      ]);
+    });
+
+    it('B66 : une version cochée « cachée » part au store avec `hidden` ; la récente re-date, une archive non', async () => {
+      const { calls, fake } = deps({ dirty: [`${BASE}versions/2026-10/version.json`] });
+      const d = clone(JC_DRAFT);
+      d.versions[0].hidden = true;
+      const r = await saveGuide(CAT, SLUG, { draft: d, meta: metaOf(JC), was: wasOf(JC) }, fake);
+      expect(r.ok).toBe(true);
+      expect(calls.save[0].versions.map((v) => v.hidden)).toEqual([true, undefined]);
+      expect(calls.meta).toEqual([]); // le meta n'a pas bougé
+      // `version.json` de la version la plus récente : pertinent (la règle du stamp).
+      expect(calls.stamp).toHaveLength(1);
+
+      // Une ARCHIVE cachée : écrite et committée, le guide n'est pas re-daté.
+      const old = deps({ dirty: [`${BASE}versions/2026-05/version.json`] });
+      const d2 = clone(JC_DRAFT);
+      d2.versions[1].hidden = true;
+      const r2 = await saveGuide(
+        CAT,
+        SLUG,
+        { draft: d2, meta: metaOf(JC), was: wasOf(JC) },
+        old.fake,
+      );
+      expect(r2.ok).toBe(true);
+      expect(old.calls.save[0].versions.map((v) => v.hidden)).toEqual([undefined, true]);
+      expect(old.calls.stamp).toEqual([]);
+      expect(old.calls.git[0][0]).toEqual([`${BASE}versions/2026-05/version.json`]);
+
+      // Autre chose que `true` : la version reste visible.
+      const loose = deps();
+      const d3 = clone(JC_DRAFT) as unknown as { versions: Record<string, unknown>[] };
+      d3.versions[0].hidden = 'yes';
+      await saveGuide(CAT, SLUG, { draft: d3, meta: metaOf(JC), was: wasOf(JC) }, loose.fake);
+      expect(loose.calls.save[0].versions[0]).not.toHaveProperty('hidden');
     });
 
     it('un guide inconnu ou une catégorie non éditable : refusés sans rien lire', async () => {

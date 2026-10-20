@@ -122,6 +122,7 @@ function versionOut(x) {
   return {
     key: x.key,
     ...(x.labelOverride ? { labelOverride: x.labelOverride } : {}),
+    ...(x.hidden ? { hidden: true } : {}),
     ...(x.group ? { group: x.group } : {}),
     ...(pinTouched.has(x.key) && x.pinned ? { pinned: x.pinned } : {}),
     ...(x.dungeons?.length ? { dungeons: x.dungeons } : {}),
@@ -161,6 +162,7 @@ const cleanMeta = (m) => ({
   title: textOut(m.title),
   description: textOut(m.description),
   hidden: Boolean(m.hidden),
+  updating: Boolean(m.updating),
 });
 const draftOut = () => cleanDraft(draft);
 const metaOut = () => cleanMeta(meta);
@@ -168,7 +170,9 @@ const metaOut = () => cleanMeta(meta);
 /**
  * La TRANCHE d'un sous-onglet, dans un brouillon : ce que la savebar compare au
  * disque. `meta` et `intro` valent pour tout le guide ; `battle`, pour un
- * versionné, c'est le combat (partagé) et les pins de la version.
+ * versionné, c'est le combat (partagé) et les pins de la version ; `version`
+ * (une tranche sans sous-onglet), ce que la barre des versions édite — sa case
+ * « Cachée ».
  */
 function sliceOf(d, m, tab, vi) {
   const x = d.versions[vi];
@@ -192,6 +196,8 @@ function sliceOf(d, m, tab, vi) {
       return x?.teams;
     case 'videos':
       return x?.videos;
+    case 'version':
+      return x ? { hidden: Boolean(x.hidden) } : null;
     default:
       return null;
   }
@@ -208,11 +214,14 @@ function slices() {
   if (!sheet) return [];
   const shared = subsOn().filter((s) => !s.scoped && s.id !== 'battle');
   const scoped = subsOn().filter((s) => s.scoped || s.id === 'battle');
+  const own = spec().versioned ? ['version'] : [];
   return [
     ...shared.map((s) => [s.id, 0]),
     ...draft.versions.flatMap((x, vi) =>
       // Une version du disque disparue (jamais : la page n'en retire pas) ne compte pas.
-      was.draft.versions[vi] ? scoped.map((s) => [s.id, vi]) : [['guide', vi]],
+      was.draft.versions[vi]
+        ? [...scoped.map((s) => s.id), ...own].map((id) => [id, vi])
+        : [['guide', vi]],
     ),
   ];
 }
@@ -305,8 +314,11 @@ function rowHtml(cat, g) {
   // généraux trois sur quatorze (`editable` de la ligne ; absent : celui de la catégorie).
   const editable = g.editable ?? cat.editable;
   const badges = `${g.hidden ? '<span class="badge off">caché</span>' : ''}${
-    editable ? '' : '<span class="badge off">contenu en code</span>'
-  }`;
+    g.updating ? '<span class="badge off">en mise à jour</span>' : ''
+  }${editable ? '' : '<span class="badge off">contenu en code</span>'}`;
+  const shy = g.hiddenVersions
+    ? ` <span class="lbl">dont ${g.hiddenVersions} cachée${g.hiddenVersions > 1 ? 's' : ''}</span>`
+    : '';
   const title = editable
     ? `<button class="gd-open" type="button" data-cat="${esc(cat.slug)}" data-slug="${esc(g.slug)}">${esc(g.title)}</button>`
     : `<span class="gd-name">${esc(g.title)}</span>`;
@@ -314,7 +326,7 @@ function rowHtml(cat, g) {
     <td>${title}<span class="lbl gd-slug">${esc(g.slug)}</span></td>
     <td class="dim">${esc(g.battle || '—')}</td>
     <td class="code">${esc(dateOf(g.updated))}</td>
-    <td>${g.versions ? `<span class="badge off">${g.versions} · ${esc(g.newest)}</span>` : '<span class="lbl">plat</span>'}</td>
+    <td>${g.versions ? `<span class="badge off">${g.versions} · ${esc(g.newest)}</span>${shy}` : '<span class="lbl">plat</span>'}</td>
     <td class="gd-state">${badges}</td>
     <td class="gd-site"><a href="${site}" target="_blank" rel="noopener" title="Ouvrir sur le site de dev">site ↗</a></td>
   </tr>`;
@@ -521,7 +533,9 @@ function head() {
           g.versions.length
             ? `<span class="badge off">${plural(g.versions.length, 'version')}</span>`
             : ''
-        }<span class="badge off" data-hidden>${meta?.hidden ? 'caché' : ''}</span></span>
+        }<span class="badge off" data-hidden>${meta?.hidden ? 'caché' : ''}</span><span class="badge off" data-updating>${
+          meta?.updating ? 'en mise à jour' : ''
+        }</span></span>
       </div>
       <a class="btn ghost sm gd-site-link" href="${esc(sheet.siteBase)}/${esc(g.category)}/${esc(g.slug)}" target="_blank" rel="noopener">ouvrir sur le site ↗</a>`
     : '';
@@ -621,12 +635,14 @@ function versionsBar() {
   const tabs = draft.versions
     .map((x, i) => {
       const bad = refused.some((r) => r.version === x.key);
-      const moved = subsOn()
-        .filter((s) => s.scoped || s.id === 'battle')
-        .some((s) => tabMoved(s.id, i));
+      const moved =
+        tabMoved('version', i) ||
+        subsOn()
+          .filter((s) => s.scoped || s.id === 'battle')
+          .some((s) => tabMoved(s.id, i));
       return `<button class="tab" type="button" data-ver="${i}" aria-selected="${i === ver}">${esc(x.key)}${
         i === 0 ? '<span class="lbl">récente</span>' : ''
-      }${bad ? '<span class="dot ko" title="refusé"></span>' : moved ? '<span class="dot edit" title="modifiée"></span>' : ''}</button>`;
+      }${x.hidden ? '<span class="lbl">cachée</span>' : ''}${bad ? '<span class="dot ko" title="refusé"></span>' : moved ? '<span class="dot edit" title="modifiée"></span>' : ''}</button>`;
     })
     .join('');
   const form = adding
@@ -647,7 +663,14 @@ function versionsBar() {
   const note = created
     ? `<p class="lbl gd-note">Version ${esc(created)} posée sur le disque, pas encore committée : « Enregistrer » l’emportera. <a href="${esc(changelogLink(created))}" data-act="changelog">Ouvrir le Journal du site prérempli ↗</a></p>`
     : '';
-  el.innerHTML = `<div class="gd-vtabs" role="tablist" aria-label="Versions">${tabs}<button class="btn ghost sm" type="button" data-act="add-version" aria-expanded="${adding}">＋ version</button><span class="lbl">Méta, Combat et Intro valent pour tout le guide ; l’état du boss, Tips, Notes, Persos, Équipe et Vidéos sont ceux de la version.</span></div>${form}${note}`;
+  // La case de la version MONTRÉE ; redessinée à chaque coche, elle garde le focus.
+  const x = v();
+  const hide = x
+    ? `<label class="check"><input type="checkbox" data-vhidden${x.hidden ? ' checked' : ''} /> Cachée — hors du sélecteur du site, joignable par <span class="mono">#version=${esc(x.key)}</span></label>`
+    : '';
+  const focused = document.activeElement?.matches?.('[data-vhidden]');
+  el.innerHTML = `<div class="gd-vtabs" role="tablist" aria-label="Versions">${tabs}<button class="btn ghost sm" type="button" data-act="add-version" aria-expanded="${adding}">＋ version</button><span class="lbl">Méta, Combat et Intro valent pour tout le guide ; l’état du boss, Tips, Notes, Persos, Équipe et Vidéos sont ceux de la version.</span></div>${hide}${form}${note}`;
+  if (focused) el.querySelector('[data-vhidden]')?.focus();
 }
 
 // ------------------------------------------------------ les textes
@@ -759,6 +782,9 @@ function metaHtml() {
         <div class="form">
           <label class="check"><input type="checkbox" data-meta="hidden"${meta.hidden ? ' checked' : ''} /> Caché — hors des listes du site, joignable par son URL</label>
           <span class="lbl">icône <span class="mono">${esc(g.icon)}</span> · auteur ${esc(g.author)} · mis à jour le ${esc(g.updated || '—')} (posé au commit)</span>
+        </div>
+        <div class="form">
+          <label class="check"><input type="checkbox" data-meta="updating"${meta.updating ? ' checked' : ''} /> En cours de mise à jour — le guide reste listé, sa page porte un avertissement</label>
         </div>
         ${tabErr('meta')}
       </div>
@@ -2154,6 +2180,8 @@ function marks() {
     if (strong) strong.textContent = meta.title[def()] || sheet.guide.title;
     const hidden = $('gd-head').querySelector('[data-hidden]');
     if (hidden) hidden.textContent = meta.hidden ? 'caché' : '';
+    const updating = $('gd-head').querySelector('[data-updating]');
+    if (updating) updating.textContent = meta.updating ? 'en mise à jour' : '';
   }
   subTabs();
   versionsBar();
@@ -2273,9 +2301,9 @@ $('gd-panel').onchange = (e) => {
   // Un `select` ou une case d'un guide général : `change` seulement, pas `input`.
   const nude = e.target.closest('select[data-gen], input[type="checkbox"][data-gen]');
   if (nude) return genInput(nude);
-  const box = e.target.closest('input[data-meta="hidden"]');
+  const box = e.target.closest('input[data-meta="hidden"], input[data-meta="updating"]');
   if (box) {
-    meta.hidden = box.checked;
+    meta[box.dataset.meta] = box.checked;
     forgive('meta');
     marks();
   }
@@ -2544,6 +2572,13 @@ $('gd-versions').onclick = (e) => {
         );
     }
   }
+};
+$('gd-versions').onchange = (e) => {
+  const box = e.target.closest('input[data-vhidden]');
+  if (!box || !v()) return;
+  if (box.checked) v().hidden = true;
+  else delete v().hidden;
+  marks();
 };
 $('gd-versions').onkeydown = (e) => {
   if (e.key === 'Enter' && e.target.id === 'gd-newkey') {

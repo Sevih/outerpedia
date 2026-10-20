@@ -768,6 +768,9 @@ const jp: Record<TranslationKey, string> = {
   'page.guide.updated': '{date} 更新',
   'page.guide.older_version_warning':
     '注意: これは古い攻略情報です（{currentVersion}）。基本的な仕組みは同じですが、最新の攻略やキャラクター推奨については、{newestVersion}版をご確認ください。',
+  'page.guide.updating_warning':
+    'このガイドは更新中です。内容は数日のうちに変わる可能性があります。',
+  'page.guide.updating_badge': '更新中',
 
   // Catégories de guides : libellés + descriptions dans guide-categories.ts
   // (source unique, LocalizedText) — plus de clés de locale par catégorie.

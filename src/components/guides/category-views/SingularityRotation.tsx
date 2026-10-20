@@ -200,6 +200,7 @@ export default async function SingularityRotation({ lang, guides }: CategoryView
               updatedText={`${t('page.guide.updated', {
                 date: formatGuideDate(guideUpdatedDate(g), lang),
               })} · ${g.author}`}
+              updatingText={t('page.guide.updating_badge')}
             />
           ))}
         </section>

@@ -89,6 +89,7 @@ export function loadGuideDraft(category: string, slug: string): GuideDraft {
           teams: readGuideVersionFile<RawTeams>(guide, v.key, 'teams.json'),
         },
         v.label,
+        v.hidden,
       ),
     );
     return { intro: strings?.intro ?? { en: '' }, versions };
@@ -115,14 +116,15 @@ export function loadGuideDraft(category: string, slug: string): GuideDraft {
 
 /** Champs de `meta.json` que l'admin et quick savent fusionner. */
 export type GuideMetaKey =
-  'group' | 'bossId' | 'dungeons' | 'monsters' | 'title' | 'description' | 'hidden';
+  'group' | 'bossId' | 'dungeons' | 'monsters' | 'title' | 'description' | 'hidden' | 'updating';
 
 /**
  * Ce qu'une fusion de `meta.json` peut poser : le combat (`group`, `bossId`,
  * `dungeons`, `monsters` — l'admin et le ré-épinglage) et, depuis quick (lot
- * F18), le titre et la description dans les six langues, et `hidden`. Une
- * valeur VIDE (`undefined`, `[]`, `''`, `false`) supprime la clé : `hidden`
- * n'est jamais écrit à `false`, et un guide sans `group` n'en porte pas.
+ * F18), le titre et la description dans les six langues, `hidden` et
+ * `updating` (B66). Une valeur VIDE (`undefined`, `[]`, `''`, `false`)
+ * supprime la clé : `hidden` et `updating` ne sont jamais écrits à `false`, et
+ * un guide sans `group` n'en porte pas.
  * Les clés sont celles de `META_KEYS` (`src/lib/data/guides.ts`) : une clé
  * inconnue casserait le build au scan, le type l'interdit ici.
  */
@@ -134,6 +136,7 @@ export interface GuideMetaPatch {
   title?: LocalizedText & { en: string };
   description?: LocalizedText & { en: string };
   hidden?: boolean;
+  updating?: boolean;
 }
 
 /** Une valeur de patch qui veut dire « retire la clé ». */
@@ -281,6 +284,7 @@ export async function saveGuideDraft(
       if (v.pinned === undefined)
         payload['config.json'] = withKeptPin(vdir, payload['config.json']);
       for (const file of VERSION_FILES) await writeOrRemove(resolve(vdir, file), payload[file]);
+      await writeVersionHidden(resolve(vdir, 'version.json'), v.hidden === true);
     }
     return [];
   }
@@ -311,6 +315,31 @@ export async function saveGuideDraft(
   for (const [file, data] of Object.entries(payload))
     await writeOrRemove(resolve(base, file), data);
   return [];
+}
+
+/**
+ * Pose ou retire `hidden` dans le `version.json` d'une version, le reste du
+ * fichier (son `label`) tel quel. Rien ne change : rien n'est écrit — le
+ * fichier d'une version jamais cachée ne naît pas. Vidé de sa dernière clé, il
+ * disparaît, comme les autres fichiers d'une version (`writeOrRemove`).
+ */
+async function writeVersionHidden(path: string, hidden: boolean): Promise<void> {
+  let raw: Record<string, unknown> = {};
+  if (existsSync(path)) {
+    try {
+      const parsed: unknown = JSON.parse(readFileSync(path, 'utf8'));
+      if (parsed && typeof parsed === 'object' && !Array.isArray(parsed))
+        raw = parsed as Record<string, unknown>;
+    } catch {
+      // Illisible : le scan du site le signale déjà ; on n'écrase pas ce qu'on ne lit pas.
+      return;
+    }
+  }
+  if ((raw.hidden === true) === hidden) return;
+  const next = { ...raw };
+  if (hidden) next.hidden = true;
+  else delete next.hidden;
+  await writeOrRemove(path, Object.keys(next).length ? next : null);
 }
 
 /**
