@@ -5,6 +5,105 @@
 > détail vit dans git. Le `CHANGELOG.md` racine est GELÉ depuis le 03/08 —
 > ce fichier et le log git SONT le journal du projet.
 
+## 2026-10-20
+
+- **Une table `ST_*` → slug, options de rang des boss au slug de
+  `statScales` ; full art d'un costume existant mineur (A74).** Deux restes
+  de la relecture du 19/10. (1) Les slugs de stat de la fiche venaient de
+  deux tables recopiées (`STAT_DEFS` de `specs/character.ts`,
+  `PREMIUM_STAT_SLUG` de `specs/monster.ts`), et les options de rang du
+  `statSlug()` mécanique (`dmg_boost`, `dmg_reduce_rate`), absent de
+  `statScales` : `bossRankOptionLabels` (`src/lib/data/boss-view.ts`) ne
+  trouvait pas l'échelle. Fait : `STAT_TYPE_SLUGS` (26 `ST_*`, relevés sur
+  `STAT_DEFS`) et `canonicalStatSlug()` dans `datagen/lib/stats.ts`, à côté
+  de `PERCENT_STAT_TYPES` (repli mécanique et `console.warn` qui nomme le
+  type pour un `ST_*` hors table, `null` pour `ST_NONE`). `STAT_DEFS` ne
+  liste plus que `col` et `st`, le slug se dérive de la table (même ordre,
+  mêmes slugs) ; `PREMIUM_STAT_SLUG` disparaît, `statPremiumOf` lit la table
+  et jette toujours hors table. Elle couvre 26 types au lieu de 19 :
+  `MonsterTemplet` a bien les 26 colonnes (`HitBP_Min`… relevés par
+  `loadColumns`), et aucun passif de fiche actuel ne vise les 7 nouveaux
+  (le build aurait jeté), donc `monsters.json` ne bouge pas. Le test
+  `monster.test.ts` « stat sans colonne » prenait `ST_HIT_AP`, qui a une
+  colonne : il prend désormais un `ST_FUTURE_STAT` fictif. Les
+  `rankOptions` de `generators/encounters.ts` lisent `canonicalStatSlug` ;
+  `statSlug()` ne change pas (décision de Sevih du 20/10, après le blocage
+  du lot), ni aucun slug de buff, ni `bossQuirkMods`. Données :
+  `pnpm datagen:build`, puis `pnpm datagen:promote` à blanc (65
+  identiques, `glossaries.json` ~1 et `wallpapers.json` ~2 : ce dernier
+  n'est pas à moi et n'est pas promu), puis
+  `--apply --only glossaries.json`. Diff : les options de rang vivent dans
+  `glossaries.json` (pas dans `encounters.json`), 26 lignes sur 31
+  options, `stat` passe de `dmg_boost` à `damage_boost` (13) et de
+  `dmg_reduce_rate` à `dmg_reduce` (13) ; `pierce_power_rate` (1) garde son slug, aucune
+  valeur ne bouge, aucune autre clé du fichier non plus. Lecteurs de
+  `rankOptions[].stat` vérifiés : `bossRankOptionLabels` (lit
+  `statScales`, les deux slugs y sont, en `percent`) et
+  `rankOptionAdminLabels` de `src/lib/admin/monster-store.ts` (passe par
+  `statAbbr`, qui rend « DMG UP% » et « DMG RED% » pour les deux formes :
+  libellé de quick inchangé). L'amorce du glossaire `statNames`
+  (`datagen/generators/equipment.ts` l.873) N'EST PAS changée : sa clé
+  construit l'id de texte `SYS_STAT_<SLUG>`, et `SYS_STAT_DAMAGE_BOOST` ou
+  `SYS_STAT_DMG_REDUCE` n'existent pas (vide), alors que
+  `SYS_STAT_DMG_BOOST` = « DMG Increase » ; `statName('damage_boost')`
+  rejoint déjà ce nom par `STAT_ABBR` → `ABBR_TO_SLUG` ; les options de
+  rang ne lisent pas `statNames`. ATTENTION au résultat visible annoncé
+  (« Increased Damage +10% » au lieu de « +100 ») : les 26 options
+  `Singularity_Passive_Dmg_up_*`/`_down_*` n'ont ni tooltip ni nom
+  (`{ type: 'BT_STAT_PREMIUM', stat, value, irremovable }`), et
+  `bossRankOptionLabels` OMET toute option sans nom : elles n'étaient pas
+  affichées en « +100 » sur le site public et ne le sont pas plus
+  maintenant. Le correctif est latent (bonne échelle le jour où une option
+  de ces stats aura un nom) ; les afficher (nom tiré de `statNames`, par
+  exemple « DMG Increase +10% ») est un changement visible à décider à
+  part. Les trois archives de boss épinglés
+  (`data/generated/monster-archive/4548161@1.json`, `4548171@1`,
+  `4548181@1`) figent l'ancien slug dans `sources.glossary.rankOptions` :
+  laissées telles quelles (données figées, et les options en cause n'y
+  sont pas affichées non plus). Laissé, pour un lot à part :
+  l'unification de l'espace des slugs de BUFF (mécanique) avec l'espace
+  canonique. Lecteurs relevés : `resolveEffect` (`datagen/lib/effects.ts`
+  l.792, `stat` des effets : ~1 460 occurrences dans `skills.json`,
+  `monster-skills.json`, `passives.json`, `pools.json`, `sets.json`,
+  `progression.json` et les archives de boss — `dmg_boost`,
+  `dmg_reduce_rate`, `critical_dmg_rate`, `e_cri_dmg_reduce`, `enter_ap`,
+  `hit_ap`, `kill_ap`, `accuracy`, `avoid`, `get_character_exp_rate`),
+  `bossQuirkMods` (`encounters.ts` l.1814, `avoid` → lu par
+  `src/lib/monster-stats.ts`), les slugs `slugEnum` des pools et quirks
+  (`equipment.ts`, `quirks.ts` l.113), `PERCENT_STAT_SLUGS` (lu par
+  `formatStatValue`, `statOptionView` de `src/lib/stats.ts`,
+  `src/lib/data/equipment-detail.ts`), les doublons de `STAT_ABBR`
+  (`critical_dmg_rate`, `dmg_reduce_rate`, `dmg_boost`,
+  `e_cri_dmg_reduce`), `TARGET_FIELDS` de `src/lib/damage/scenario.ts`
+  l.54-55, `solver.test.ts` l.805, l'amorce `statNames` (mécanique par
+  construction), et gear-solver, qui lit les fichiers `solver/`. (2)
+  `isMinorField` (`datagen/extractor/core/changes.ts`) : le full art
+  (`costumes[#id].art`) qui apparaît ou change sur un costume existant est
+  une retouche MINEURE, comme `sort` et `source` (décision de Sevih du
+  19/10) ; un `art` qui DISPARAÎT reste un écart (même raison qu'un costume
+  retiré, non décidé, donc pas mineur), `icon` et `grade` aussi. En-tête de
+  section et commentaire mis à jour. Staging : `acceptMinor`
+  (`datagen/extractor/review.ts`) passe les entités appliquées à
+  `stageCharacterAssets`, dont `characterAssetRequests`
+  (`datagen/assets/manifest.ts` l.315) demande le full art de tout costume
+  à `art` : l'image est mise en place, rien à ajouter. Tests :
+  `datagen/lib/stats.test.ts` (les 26 `ST_*` = ceux de `STAT_DEFS`, slugs
+  distincts, `canonicalStatSlug('ST_DMG_BOOST') === 'damage_boost'`,
+  inconnu → repli + warn nommant le type, `statSlug('ST_DMG_BOOST')` reste
+  `dmg_boost`), `changes.test.ts` (art apparu = mineur, art disparu =
+  écart, `icon` seul = écart, `grade` seul = écart),
+  `src/lib/data/boss-view.test.ts` (option `damage_boost` à 100 →
+  « Increased Damage +10% » ; toute option de rang à stat du glossaire a
+  son échelle dans `statScales`). `pnpm typecheck` : sortie vide après les
+  trois `tsc --noEmit`, code 0 ; `pnpm lint` : `eslint` sans message ;
+  `pnpm test` : « Tests 1 failed | 4366 passed (4367) ». Le seul échec est
+  `datagen/damage/damage-data.test.ts` « les 16 clips de base étrangers à
+  la jointure font foi… (F30) », un test du lot F30 qui tourne en parallèle
+  (ses fichiers `datagen/damage/` modifiés, non commités, attendent son
+  `damage:build`) : il est étranger à ce lot, qui ne touche ni
+  `datagen/damage/` ni `data/generated/damage/`. Aucun changement visuel
+  (cf. plus haut : les options en cause restent omises).
+
 ## 2026-10-19
 
 - **Clôtures du 19/10 soir (Sevih à l'écran, Fable au clavier).** Confirmés

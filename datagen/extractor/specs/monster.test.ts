@@ -67,7 +67,7 @@ describe('statPremiumOf — passifs de fiche (`GetStatPremiumBuffList`)', () => 
     teamCond: [line({ TargetType: 'MY_TEAM', BuffConditionType: 'OWNER_RAGE' })],
     team: [line({ TargetType: 'MY_TEAM', StatType: 'ST_HP', Value: '1000' })],
     meCond: [line({ StatType: 'ST_ATK', BuffConditionType: 'OWNER_RAGE' })],
-    unknown: [line({ StatType: 'ST_HIT_AP' })],
+    unknown: [line({ StatType: 'ST_FUTURE_STAT' })],
   };
   const SKILLS: Record<string, string[]> = {
     a: ['def', 'res', 'passive2', 'enemy', 'stat'],
@@ -96,8 +96,8 @@ describe('statPremiumOf — passifs de fiche (`GetStatPremiumBuffList`)', () => 
     expect(of(['a'])).toEqual({ def: { rate: 10000 }, buff_resist: { rate: -900 } });
   });
 
-  it('aucun passif → undefined ; une stat sans colonne jette', () => {
+  it('aucun passif → undefined ; une stat hors de la table ST_* → slug jette', () => {
     expect(of([])).toBeUndefined();
-    expect(() => of(['bad'])).toThrow(/ST_HIT_AP/);
+    expect(() => of(['bad'])).toThrow(/ST_FUTURE_STAT/);
   });
 });

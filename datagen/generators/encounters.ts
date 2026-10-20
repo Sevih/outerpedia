@@ -37,6 +37,7 @@ import { loadBuffIndex, skillBuffVars } from '../lib/buff';
 import { fillSkillPlaceholders, unsignedValueIds } from '../lib/placeholders';
 import { readCuratedJson } from '../lib/json';
 import { statSlug } from '../lib/effects';
+import { canonicalStatSlug } from '../lib/stats';
 import { slugEnum } from '../lib/enums';
 import { loadTextIndex, resolveText } from '../lib/text';
 import {
@@ -99,7 +100,7 @@ export interface RankOption {
   name?: LangDict;
   /** Réf tooltip (`BuffToolTipTemplet`) — résoluble en chip (glossaire d'effets). */
   tooltip?: string;
-  /** Stat visée (slug), pour les buffs de stat sans tooltip. */
+  /** Stat visée (slug canonique, clé de `statScales`), pour les buffs de stat sans tooltip. */
   stat?: string;
   /** Valeur brute (per-mille pour les taux). */
   value?: number;
@@ -1739,7 +1740,8 @@ export function buildEncounters(): EncountersData {
           continue;
         }
         const opt: RankOption = { type: row.Type ?? '' };
-        const stat = statSlug(row.StatType);
+        // Slug CANONIQUE (celui de `statScales`) : l'échelle de la valeur s'y lit.
+        const stat = canonicalStatSlug(row.StatType);
         if (stat) opt.stat = stat;
         const v = num(row.Value);
         if (v) opt.value = v;

@@ -17,7 +17,7 @@ import { hasText, loadTextIndex, resolveText } from '../../lib/text';
 import { bool, loadTable, num, splitCsv, type Row } from '../../lib/tables';
 import { loadFormsByBase, ownIdentity } from '../../lib/character-forms';
 import { loadImmuneTooltipIds, readImmunities } from '../../lib/immunities';
-import { PERCENT_STAT_TYPES } from '../../lib/stats';
+import { PERCENT_STAT_TYPES, STAT_TYPE_SLUGS } from '../../lib/stats';
 import { buildImageIndex } from '../../assets/source';
 import { costumeCore } from '../../generators/costumes';
 import { runSpec } from '../core/runner';
@@ -127,41 +127,41 @@ export function isInnatePierce(b: Row): boolean {
  * que porte la colonne ; l'échelle s'en DÉRIVE (`statScales`) par la règle du
  * client, `CUtilUI.IsPercentStat` via `PERCENT_STAT_TYPES` — plus de colonne
  * `scale` écrite à la main (A73 : elle disait EFF/RES en % et `hit_hp_recovery`
- * plat). `PREMIUM_STAT_SLUG` de `specs/monster.ts` porte la même correspondance
- * `ST_*` → slug (deux tables, pas encore fusionnées).
+ * plat). Le slug se DÉRIVE aussi de `st`, par `STAT_TYPE_SLUGS` (`lib/stats`), la
+ * table unique `ST_*` → slug que lisent aussi les monstres et les options de rang.
  */
-export const STAT_DEFS: Array<{ col: string; slug: string; st: string }> = [
-  { col: 'HP', slug: 'hp', st: 'ST_HP' },
-  { col: 'Atk', slug: 'atk', st: 'ST_ATK' },
-  { col: 'Def', slug: 'def', st: 'ST_DEF' },
-  { col: 'Speed', slug: 'speed', st: 'ST_SPEED' },
-  { col: 'WG', slug: 'guard', st: 'ST_WG' },
-  { col: 'CriticalRate', slug: 'critical_rate', st: 'ST_CRITICAL_RATE' },
-  { col: 'CriticalDMGRate', slug: 'critical_dmg', st: 'ST_CRITICAL_DMG_RATE' },
-  { col: 'DMGReduceRate', slug: 'dmg_reduce', st: 'ST_DMG_REDUCE_RATE' },
-  { col: 'DamageBoost', slug: 'damage_boost', st: 'ST_DMG_BOOST' },
-  { col: 'PiercePower', slug: 'pierce_power', st: 'ST_PIERCE_POWER' },
-  { col: 'PiercePowerRate', slug: 'pierce_power_rate', st: 'ST_PIERCE_POWER_RATE' },
-  { col: 'Vampiric', slug: 'vampiric', st: 'ST_VAMPIRIC' },
-  { col: 'HitHPRecovery', slug: 'hit_hp_recovery', st: 'ST_HIT_HP_RECOVERY' },
-  { col: 'Accuracy', slug: 'effectiveness', st: 'ST_ACCURACY' },
-  { col: 'Avoid', slug: 'resilience', st: 'ST_AVOID' },
-  { col: 'BuffChance', slug: 'buff_chance', st: 'ST_BUFF_CHANCE' },
-  { col: 'BuffResist', slug: 'buff_resist', st: 'ST_BUFF_RESIST' },
-  { col: 'CounterRate', slug: 'counter_rate', st: 'ST_COUNTER_RATE' },
-  {
-    col: 'EnemyCriticalDamageReduce',
-    slug: 'enemy_critical_dmg_reduce',
-    st: 'ST_E_CRI_DMG_REDUCE',
-  },
-  { col: 'HitBP', slug: 'hit_bp', st: 'ST_HIT_AP' },
-  { col: 'EnterBP', slug: 'enter_bp', st: 'ST_ENTER_AP' },
-  { col: 'KillBP', slug: 'kill_bp', st: 'ST_KILL_AP' },
-  { col: 'GetGoldRate', slug: 'get_gold_rate', st: 'ST_GET_GOLD_RATE' },
-  { col: 'GetCharExpRate', slug: 'get_char_exp_rate', st: 'ST_GET_CHARACTER_EXP_RATE' },
-  { col: 'AvoidAddCap', slug: 'avoid_add_cap', st: 'ST_AVOID_ADD_CAP' },
-  { col: 'AvoidSubtractCap', slug: 'avoid_subtract_cap', st: 'ST_AVOID_SUBTRACT_CAP' },
+const STAT_COLUMNS: Array<{ col: string; st: string }> = [
+  { col: 'HP', st: 'ST_HP' },
+  { col: 'Atk', st: 'ST_ATK' },
+  { col: 'Def', st: 'ST_DEF' },
+  { col: 'Speed', st: 'ST_SPEED' },
+  { col: 'WG', st: 'ST_WG' },
+  { col: 'CriticalRate', st: 'ST_CRITICAL_RATE' },
+  { col: 'CriticalDMGRate', st: 'ST_CRITICAL_DMG_RATE' },
+  { col: 'DMGReduceRate', st: 'ST_DMG_REDUCE_RATE' },
+  { col: 'DamageBoost', st: 'ST_DMG_BOOST' },
+  { col: 'PiercePower', st: 'ST_PIERCE_POWER' },
+  { col: 'PiercePowerRate', st: 'ST_PIERCE_POWER_RATE' },
+  { col: 'Vampiric', st: 'ST_VAMPIRIC' },
+  { col: 'HitHPRecovery', st: 'ST_HIT_HP_RECOVERY' },
+  { col: 'Accuracy', st: 'ST_ACCURACY' },
+  { col: 'Avoid', st: 'ST_AVOID' },
+  { col: 'BuffChance', st: 'ST_BUFF_CHANCE' },
+  { col: 'BuffResist', st: 'ST_BUFF_RESIST' },
+  { col: 'CounterRate', st: 'ST_COUNTER_RATE' },
+  { col: 'EnemyCriticalDamageReduce', st: 'ST_E_CRI_DMG_REDUCE' },
+  { col: 'HitBP', st: 'ST_HIT_AP' },
+  { col: 'EnterBP', st: 'ST_ENTER_AP' },
+  { col: 'KillBP', st: 'ST_KILL_AP' },
+  { col: 'GetGoldRate', st: 'ST_GET_GOLD_RATE' },
+  { col: 'GetCharExpRate', st: 'ST_GET_CHARACTER_EXP_RATE' },
+  { col: 'AvoidAddCap', st: 'ST_AVOID_ADD_CAP' },
+  { col: 'AvoidSubtractCap', st: 'ST_AVOID_SUBTRACT_CAP' },
 ];
+
+export const STAT_DEFS: Array<{ col: string; slug: string; st: string }> = STAT_COLUMNS.map(
+  (d) => ({ ...d, slug: STAT_TYPE_SLUGS[d.st] }),
+);
 
 /** `statScales` du glossaire : slug → `percent` (per-mille, ÷10 pour un %) si le
  * client classe sa `STAT_TYPE` en % (`PERCENT_STAT_TYPES`), sinon `flat` (brut). */

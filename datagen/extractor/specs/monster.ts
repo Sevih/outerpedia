@@ -38,6 +38,7 @@ import { loadTextIndex, resolveText } from '../../lib/text';
 import { loadBuffIndex } from '../../lib/buff';
 import { bool, loadTable, num, splitCsv, type Row } from '../../lib/tables';
 import { loadImmuneTooltipIds, readImmunities } from '../../lib/immunities';
+import { STAT_TYPE_SLUGS } from '../../lib/stats';
 import {
   buildEncounters,
   type EncountersData,
@@ -159,29 +160,6 @@ export function monsterType(v: string | undefined): string {
   return slug === 'monster' ? slug : slug.replace(/_monster$/, '');
 }
 
-/** `STAT_TYPE` du client → slug de `stats` (colonnes de `MonsterTemplet`). */
-const PREMIUM_STAT_SLUG: Record<string, string> = {
-  ST_HP: 'hp',
-  ST_WG: 'guard',
-  ST_SPEED: 'speed',
-  ST_ATK: 'atk',
-  ST_DEF: 'def',
-  ST_DMG_REDUCE_RATE: 'dmg_reduce',
-  ST_CRITICAL_RATE: 'critical_rate',
-  ST_CRITICAL_DMG_RATE: 'critical_dmg',
-  ST_PIERCE_POWER: 'pierce_power',
-  ST_PIERCE_POWER_RATE: 'pierce_power_rate',
-  ST_VAMPIRIC: 'vampiric',
-  ST_HIT_HP_RECOVERY: 'hit_hp_recovery',
-  ST_ACCURACY: 'effectiveness',
-  ST_AVOID: 'resilience',
-  ST_BUFF_CHANCE: 'buff_chance',
-  ST_BUFF_RESIST: 'buff_resist',
-  ST_COUNTER_RATE: 'counter_rate',
-  ST_DMG_BOOST: 'damage_boost',
-  ST_E_CRI_DMG_REDUCE: 'enemy_critical_dmg_reduce',
-};
-
 /**
  * Passifs de FICHE d'un monstre — la règle du client, qui traite un monstre
  * comme un perso (`CCharacterData.Initialize` → `SkillManager.Create` →
@@ -217,7 +195,8 @@ export function statPremiumOf(
       if (!row || row.Type !== 'BT_STAT_PREMIUM' || row.BuffCreateType !== 'PASSIVE') continue;
       if (row.TargetType !== 'ME' && row.TargetType !== 'MY_TEAM') continue;
       if (row.TargetType === 'MY_TEAM' && (row.BuffConditionType ?? 'NONE') !== 'NONE') continue;
-      const slug = PREMIUM_STAT_SLUG[row.StatType ?? ''];
+      // Slug de `stats` par la table unique `ST_*` → slug (celle de `STAT_DEFS`).
+      const slug = STAT_TYPE_SLUGS[row.StatType ?? ''];
       if (!slug) throw new Error(`statPremium : ${buffId} vise ${row.StatType}, stat sans colonne`);
       const v = num(row.Value);
       if (!v) continue;

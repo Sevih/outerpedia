@@ -17,8 +17,14 @@ import { loadDataJson } from '@/lib/data/disk';
 import { liveKitSources } from '@/lib/skill-view';
 import { localizeStatuses } from '@/lib/data/effects';
 import { getMonster, getMonsterSkills } from '@/lib/data/monsters';
-import { bossSpawnContexts, buildBossView, type BossViewSources } from '@/lib/data/boss-view';
-import { ranksOfMonster } from '@/lib/monster-stats';
+import {
+  bossRankOptionLabels,
+  bossSpawnContexts,
+  buildBossView,
+  type BossView,
+  type BossViewSources,
+} from '@/lib/data/boss-view';
+import { ranksOfMonster, type SpawnContext } from '@/lib/monster-stats';
 
 const monsters = loadDataJson<Record<string, Monster>>('generated/monsters.json');
 const dungeons = loadDataJson<Record<string, unknown>>('generated/encounters.json');
@@ -187,5 +193,30 @@ describe('buildBossView', () => {
     const skills = getMonsterSkills(m, richId);
     const doubled = buildBossView(richId, m, [...skills, ...skills], sources());
     expect(doubled.skills).toEqual(viewOf(richId).skills);
+  });
+});
+
+describe('bossRankOptionLabels', () => {
+  it('une option de stat en % rend sa valeur per-mille en pourcentage', () => {
+    const view = {
+      rankOptions: {
+        up: { type: 'BT_STAT', stat: 'damage_boost', value: 100, name: { en: 'Increased Damage' } },
+      },
+      statScales: { damage_boost: 'percent' },
+    } as unknown as BossView;
+    const contexts = [{ level: 1, options: ['up'] }] as SpawnContext[];
+    expect(bossRankOptionLabels(view, contexts, 'en')).toEqual({ up: 'Increased Damage +10%' });
+  });
+
+  it('toute option de rang à stat du glossaire a son échelle dans `statScales`', () => {
+    // Le slug des options doit être celui de `statScales` (table unique ST_* →
+    // slug) : sinon la valeur s'affiche brute (« +100 » pour +10 %).
+    const g = loadDataJson<{
+      rankOptions: Record<string, { stat?: string }>;
+      statScales: Record<string, string>;
+    }>('generated/glossaries.json');
+    const stats = Object.values(g.rankOptions).flatMap((o) => (o.stat ? [o.stat] : []));
+    expect(stats.length).toBeGreaterThan(0);
+    expect(stats.filter((s) => !g.statScales[s])).toEqual([]);
   });
 });

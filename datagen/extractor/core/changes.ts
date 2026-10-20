@@ -198,12 +198,14 @@ export function isTypoEntity(e: EntityDiff): boolean {
 //     change dit un équilibrage, même si la table des valeurs n'est pas dans
 //     l'entité, donc un vrai écart ;
 //   - sous `costumes` d'un perso : un costume AJOUTÉ, son ordre (`sort`), son
-//     texte (`name`) ; et l'apparence (`appearances[n]`) qui n'est que le modèle
-//     d'un costume ajouté dans le même écart. Un costume RETIRÉ reste un vrai
-//     écart (le jeu retire rarement, et un visuel disparaît).
+//     texte (`name`), sa provenance (`source`), son full art (`art`, apparu ou
+//     changé : une image à mettre en place, rien de sémantique — décision de
+//     Sevih du 19/10/2026) ; et l'apparence (`appearances[n]`) qui n'est que le
+//     modèle d'un costume ajouté dans le même écart. Un costume RETIRÉ reste un
+//     vrai écart (le jeu retire rarement, et un visuel disparaît).
 // Rien d'autre n'est mineur : stats, valeurs de compétence, buffs, équipement
-// exclusif, éléments, classes, tags, dates, ids, provenance d'un costume
-// (`source`), apparition d'un full art (`art`) — en cas de doute, pas mineur.
+// exclusif, éléments, classes, tags, dates, ids, icône (`icon`) ou rareté
+// (`grade`) d'un costume — en cas de doute, pas mineur.
 
 /**
  * Clés de TEXTE des entités générées — les seuls champs dont une reformulation
@@ -302,11 +304,15 @@ export function isMinorField(f: FieldDiff, newModels: ReadonlySet<string> = new 
     // ajoutée) ; `costumes[#id]` : un costume ajouté — jamais un retiré.
     if (seg.length === 1) return f.existing === undefined && Array.isArray(f.extracted);
     if (seg.length === 2) return f.existing === undefined && isPlainObject(f.extracted);
-    // Champ D'UN costume : son ordre, son texte, ou sa PROVENANCE (`source` :
+    // Champ D'UN costume : son ordre, son texte, sa PROVENANCE (`source` :
     // un costume qui passe du pack ou du battle pass à la boutique ne touche
-    // ni buffs ni dégâts — décision de Sevih du 06/10/2026) — toujours mineur ;
-    // tout autre champ (`icon`, `grade`, `model`, `art`…) reste un vrai écart.
+    // ni buffs ni dégâts — décision de Sevih du 06/10/2026) ou son FULL ART
+    // (`art` qui apparaît ou change : une image que `acceptMinor` met en place,
+    // décision du 19/10/2026 ; un full art qui DISPARAÎT reste un écart, comme
+    // un costume retiré) — mineur ; tout autre champ (`icon`, `grade`,
+    // `model`…) reste un vrai écart.
     if (seg[2] === 'sort' || seg[2] === 'source') return true;
+    if (seg[2] === 'art') return f.extracted !== undefined;
     return textKeyOf(seg) !== undefined;
   }
   // L'apparence d'un costume ajouté : son modèle APPENDU aux `appearances`

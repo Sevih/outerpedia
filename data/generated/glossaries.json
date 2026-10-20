@@ -7191,25 +7191,25 @@
   "rankOptions": {
     "Singularity_Passive_Dmg_up_d": {
       "type": "BT_STAT_PREMIUM",
-      "stat": "dmg_boost",
+      "stat": "damage_boost",
       "value": 100,
       "irremovable": true
     },
     "Singularity_Passive_Dmg_down_d": {
       "type": "BT_STAT_PREMIUM",
-      "stat": "dmg_reduce_rate",
+      "stat": "dmg_reduce",
       "value": 50,
       "irremovable": true
     },
     "Singularity_Passive_Dmg_up_c": {
       "type": "BT_STAT_PREMIUM",
-      "stat": "dmg_boost",
+      "stat": "damage_boost",
       "value": 300,
       "irremovable": true
     },
     "Singularity_Passive_Dmg_down_c": {
       "type": "BT_STAT_PREMIUM",
-      "stat": "dmg_reduce_rate",
+      "stat": "dmg_reduce",
       "value": 150,
       "irremovable": true
     },
@@ -7233,61 +7233,61 @@
     },
     "Singularity_Passive_Dmg_up_a": {
       "type": "BT_STAT_PREMIUM",
-      "stat": "dmg_boost",
+      "stat": "damage_boost",
       "value": 500,
       "irremovable": true
     },
     "Singularity_Passive_Dmg_down_a": {
       "type": "BT_STAT_PREMIUM",
-      "stat": "dmg_reduce_rate",
+      "stat": "dmg_reduce",
       "value": 250,
       "irremovable": true
     },
     "Singularity_Passive_Dmg_up_aa": {
       "type": "BT_STAT_PREMIUM",
-      "stat": "dmg_boost",
+      "stat": "damage_boost",
       "value": 600,
       "irremovable": true
     },
     "Singularity_Passive_Dmg_down_aa": {
       "type": "BT_STAT_PREMIUM",
-      "stat": "dmg_reduce_rate",
+      "stat": "dmg_reduce",
       "value": 300,
       "irremovable": true
     },
     "Singularity_Passive_Dmg_up_aaa": {
       "type": "BT_STAT_PREMIUM",
-      "stat": "dmg_boost",
+      "stat": "damage_boost",
       "value": 800,
       "irremovable": true
     },
     "Singularity_Passive_Dmg_down_aaa": {
       "type": "BT_STAT_PREMIUM",
-      "stat": "dmg_reduce_rate",
+      "stat": "dmg_reduce",
       "value": 400,
       "irremovable": true
     },
     "Singularity_Passive_Dmg_up_aaa_2": {
       "type": "BT_STAT_PREMIUM",
-      "stat": "dmg_boost",
+      "stat": "damage_boost",
       "value": 1000,
       "irremovable": true
     },
     "Singularity_Passive_Dmg_down_aaa_2": {
       "type": "BT_STAT_PREMIUM",
-      "stat": "dmg_reduce_rate",
+      "stat": "dmg_reduce",
       "value": 500,
       "irremovable": true
     },
     "Singularity_Passive_Dmg_up_aaa_3": {
       "type": "BT_STAT_PREMIUM",
-      "stat": "dmg_boost",
+      "stat": "damage_boost",
       "value": 1200,
       "irremovable": true
     },
     "Singularity_Passive_Dmg_down_aaa_3": {
       "type": "BT_STAT_PREMIUM",
-      "stat": "dmg_reduce_rate",
+      "stat": "dmg_reduce",
       "value": 700,
       "irremovable": true
     },
@@ -7308,73 +7308,73 @@
     },
     "Singularity_Passive_Dmg_up_s_2": {
       "type": "BT_STAT_PREMIUM",
-      "stat": "dmg_boost",
+      "stat": "damage_boost",
       "value": 1400,
       "irremovable": true
     },
     "Singularity_Passive_Dmg_down_s_2": {
       "type": "BT_STAT_PREMIUM",
-      "stat": "dmg_reduce_rate",
+      "stat": "dmg_reduce",
       "value": 900,
       "irremovable": true
     },
     "Singularity_Passive_Dmg_up_s_3": {
       "type": "BT_STAT_PREMIUM",
-      "stat": "dmg_boost",
+      "stat": "damage_boost",
       "value": 1700,
       "irremovable": true
     },
     "Singularity_Passive_Dmg_down_s_3": {
       "type": "BT_STAT_PREMIUM",
-      "stat": "dmg_reduce_rate",
+      "stat": "dmg_reduce",
       "value": 1100,
       "irremovable": true
     },
     "Singularity_Passive_Dmg_up_ss": {
       "type": "BT_STAT_PREMIUM",
-      "stat": "dmg_boost",
+      "stat": "damage_boost",
       "value": 2000,
       "irremovable": true
     },
     "Singularity_Passive_Dmg_down_ss": {
       "type": "BT_STAT_PREMIUM",
-      "stat": "dmg_reduce_rate",
+      "stat": "dmg_reduce",
       "value": 1300,
       "irremovable": true
     },
     "Singularity_Passive_Dmg_up_ss_2": {
       "type": "BT_STAT_PREMIUM",
-      "stat": "dmg_boost",
+      "stat": "damage_boost",
       "value": 2300,
       "irremovable": true
     },
     "Singularity_Passive_Dmg_down_ss_2": {
       "type": "BT_STAT_PREMIUM",
-      "stat": "dmg_reduce_rate",
+      "stat": "dmg_reduce",
       "value": 1500,
       "irremovable": true
     },
     "Singularity_Passive_Dmg_up_ss_3": {
       "type": "BT_STAT_PREMIUM",
-      "stat": "dmg_boost",
+      "stat": "damage_boost",
       "value": 2600,
       "irremovable": true
     },
     "Singularity_Passive_Dmg_down_ss_3": {
       "type": "BT_STAT_PREMIUM",
-      "stat": "dmg_reduce_rate",
+      "stat": "dmg_reduce",
       "value": 1700,
       "irremovable": true
     },
     "Singularity_Passive_Dmg_up_sss": {
       "type": "BT_STAT_PREMIUM",
-      "stat": "dmg_boost",
+      "stat": "damage_boost",
       "value": 3000,
       "irremovable": true
     },
     "Singularity_Passive_Dmg_down_sss": {
       "type": "BT_STAT_PREMIUM",
-      "stat": "dmg_reduce_rate",
+      "stat": "dmg_reduce",
       "value": 2000,
       "irremovable": true
     }

@@ -321,11 +321,31 @@ describe('classification MINEURE', () => {
         fields: [{ path: 'costumes[#2].source', existing: 'package_shop', extracted: 'shop' }],
       }),
     ).toBe(true);
-    // …les autres champs d'un costume restent de vrais écarts.
+    // Le full art qui apparaît sur un costume existant aussi (décision du 19/10/2026)…
     expect(
       isMinorEntity({
         key: 'c',
         fields: [{ path: 'costumes[#2].art', existing: undefined, extracted: true }],
+      }),
+    ).toBe(true);
+    // …mais un full art qui disparaît reste un écart (un visuel disparaît)…
+    expect(
+      isMinorEntity({
+        key: 'c',
+        fields: [{ path: 'costumes[#2].art', existing: true, extracted: undefined }],
+      }),
+    ).toBe(false);
+    // …et les autres champs d'un costume restent de vrais écarts.
+    expect(
+      isMinorEntity({
+        key: 'c',
+        fields: [{ path: 'costumes[#2].icon', existing: 'A', extracted: 'B' }],
+      }),
+    ).toBe(false);
+    expect(
+      isMinorEntity({
+        key: 'c',
+        fields: [{ path: 'costumes[#2].grade', existing: 'rare', extracted: 'magic' }],
       }),
     ).toBe(false);
   });

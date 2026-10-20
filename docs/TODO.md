@@ -5,11 +5,6 @@
 
 ---
 
-## 🎮 Suites du patch du 06/10 (entrée DONE du 06/10)
-
-- [ ] **Revue d'extraction (suite de F14)** : le flag `art` qui apparaît sur
-      un costume existant reste un écart — à trancher au premier cas.
-
 ## 🔎 Revues d'octobre (tri du 15/10)
 
 Les revues de la logique du site et de la génération de données (09-12/10)
@@ -62,11 +57,6 @@ les preuves et les décisions vivent dans le tri consolidé de sevih-tool
 
 ## 🧹 Restes de la relecture du 19/10 (A68 à B64, OB4, G13)
 
-- [ ] **`bossRankOptionLabels` affiche des valeurs brutes** (vu par A73,
-      19/10) : les options de rang des boss portent `dmg_boost` et
-      `dmg_reduce_rate`, absents de `statScales` (qui connaît
-      `damage_boost` et `dmg_reduce`), d'où « +100 » pour 10 % ; aligner
-      les slugs ou ajouter les deux clés au glossaire.
 - [ ] **Après F29** : les 16 clips de base `*_Upgrade`/`*_Burst` laissés en
       repli (liste dans l'entrée DONE de F29) à trancher.
 
