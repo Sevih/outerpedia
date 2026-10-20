@@ -7,6 +7,22 @@
 
 ## 2026-10-20
 
+- **Relecture A75 (Fable 5.1) — options de rang des boss sans nom, libellé
+  construit, validé.** Commit `e1d333d8` (poussé avant relecture), message
+  attendu, 11 fichiers tous au périmètre (boss-view, BossPanel, six locales,
+  test, DONE, TODO). Contrôles : `pnpm typecheck` 0, `pnpm lint` 0,
+  `pnpm test` 248 fichiers / 4 372 verts, tests ciblés `boss-view.test.ts` et
+  `src/i18n` 21 verts. Rejeu sur les 31 `rankOptions` réelles : 31/31
+  libellées en en et fr, aucune omise (« DMG Increase +10% », « DMG Reduction
+  +5% », « Final DMG Reduction 70% », « Weakness Gauge DMG Reduction 50% »,
+  « Increased Penetration +30% » ; fr « Dégâts + 10% », « Dégâts reçus - 5% »,
+  sans double signe). Les deux libellés d'interface passent par `BossPanel`
+  (paramètre `labels`), le repli `statName` fait le pont canonique → `statNames`
+  comme prévu. Reste à Sevih : la page
+  `/en/guides/dimensional-singularity/abomination-hunter-belial`, curseur sur D
+  puis B. Laissé au TODO : les réductions finale et de jauge apparaissent deux
+  fois (deux options distinctes de même effet), dédoublonner serait une
+  décision de rendu.
 - **A75 — Options de rang des boss sans nom : un libellé construit.** Le
   bloc « Rank passives » du panneau de boss des guides n'affichait des options
   de palier que celles qui ont un nom : 30 des 31 `rankOptions` de

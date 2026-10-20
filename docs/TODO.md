@@ -44,6 +44,13 @@ les preuves et les décisions vivent dans le tri consolidé de sevih-tool
 
 ## 🧹 Restes de la relecture du 20/10 (A74, F30, F31, G34)
 
+- [ ] **Passifs de palier en double (A75)** : sur un boss de Dimensional
+      Singularity dès le rang B, « Final DMG Reduction 70% » et « Weakness
+      Gauge DMG Reduction 50% » s'affichent deux fois (`Normal_1_1`/`1_2`,
+      `Normal_2_1`/`2_2` : deux options distinctes de même effet). Décision de
+      rendu : dédoublonner dans `BossStats.tsx` ou laisser fidèle à la donnée.
+      À voir : `/en/guides/dimensional-singularity/abomination-hunter-belial`,
+      curseur sur D puis B.
 - [ ] **Espace des slugs de buff (suite d'A74)** : `statSlug()`
       (`datagen/lib/effects.ts`) garde ses slugs mécaniques (`dmg_boost`,
       `dmg_reduce_rate`, `critical_dmg_rate`, `e_cri_dmg_reduce`,
