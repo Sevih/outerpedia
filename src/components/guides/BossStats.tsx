@@ -142,9 +142,16 @@ export function BossStats({
   // `bossHp` : ils affichent leurs PV, et c'est la même grille qui s'en charge.
   const scoreMode = Boolean(ctx.damage);
   const grid = orderedStats(stats).filter(([slug]) => !(scoreMode && slug === 'hp'));
-  const passives = (ctx.options ?? [])
-    .map((id) => rankOptionLabels?.[id])
-    .filter((l): l is string => Boolean(l));
+  // Dédoublonné par libellé : le jeu porte deux options distinctes de même
+  // effet (`Singularity_Passive_Normal_1_1`/`1_2`…), le lecteur n'a besoin de
+  // la ligne qu'une fois — et `key={label}` l'exige.
+  const passives = [
+    ...new Set(
+      (ctx.options ?? [])
+        .map((id) => rankOptionLabels?.[id])
+        .filter((l): l is string => Boolean(l)),
+    ),
+  ];
 
   // Une échelle graduée — par GRADES (badges E…SSS) ou par STAGES (numéros).
   // Les deux se parcourent à la glissière ; ce qui les sépare est ce qu'on pose

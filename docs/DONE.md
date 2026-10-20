@@ -7,6 +7,14 @@
 
 ## 2026-10-20
 
+- **Passifs de palier dédoublonnés (suite d'A75).** Vu par Sevih sur le guide
+  de Belial : « Encountered two children with the same key, `Final DMG
+Reduction 70%` » — `BossStats.tsx` rend les passifs de palier avec
+  `key={label}` et le jeu porte deux options distinctes de même effet
+  (`Normal_1_1`/`1_2`, `Normal_2_1`/`2_2`). La liste est désormais
+  dédoublonnée par libellé (`Set`), ce qui tranche l'item « Passifs de palier
+  en double » du TODO : une ligne par effet. `pnpm typecheck`, `pnpm lint`,
+  tests des guides verts.
 - **Relecture A75 (Fable 5.1) — options de rang des boss sans nom, libellé
   construit, validé.** Commit `e1d333d8` (poussé avant relecture), message
   attendu, 11 fichiers tous au périmètre (boss-view, BossPanel, six locales,
