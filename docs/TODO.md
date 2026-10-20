@@ -46,9 +46,8 @@ les preuves et les décisions vivent dans le tri consolidé de sevih-tool
 
 - [ ] **Options de rang des boss sans nom (A74)** : 30 des 31 `rankOptions`
       de `glossaries.json` n'ont ni nom ni tooltip, `bossRankOptionLabels`
-      les omet : le « +10 % » corrigé ne s'affiche nulle part. Décision de
-      Sevih : les montrer avec un nom tiré de `statNames` (« DMG Increase
-      +10% ») ou les laisser cachées.
+      les omet : le « +10 % » corrigé ne s'affiche nulle part. DÉCIDÉ le
+      20/10 : les montrer — lot A75.
 - [ ] **Espace des slugs de buff (suite d'A74)** : `statSlug()`
       (`datagen/lib/effects.ts`) garde ses slugs mécaniques (`dmg_boost`,
       `dmg_reduce_rate`, `critical_dmg_rate`, `e_cri_dmg_reduce`,
