@@ -67,10 +67,6 @@ les preuves et les décisions vivent dans le tri consolidé de sevih-tool
       fiche. À l'écran par Sevih : Tamamo-no-Mae › Skills (badges « via
       burst 3 » sur Extra Turn et Cooldown Reduction, cartes Bursts et
       Transcendance sans bouton).
-- [ ] **G34, à faire par Sevih sur GitHub** : activer « Allow GitHub Actions
-      to create and approve pull requests » (Settings › Actions › General de
-      gear-solver), pousser, puis `gh workflow run data-sync.yml` une fois
-      pour voir « up to date » ; la première PR arrivera au prochain patch.
 
 ## 🧹 Suites de la rédaction du 18/10 (lots A62 à C26, G8 à G30, F28, OB3, TW2)
 
