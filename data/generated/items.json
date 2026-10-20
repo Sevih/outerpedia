@@ -15708,12 +15708,12 @@
       "es": "Boleto de selección de Héroe Demiurge"
     },
     "desc": {
-      "en": "Select and obtain one Hero among the following Demiurge members:\\n- Demiurge Stella, Demiurge Astei, Demiurge Drakhan, Demiurge Vlada, Monad Eva\\nIf already owned, obtain 150 of their Pieces.\\n\\nIf all included heroes are fully transcended, the ticket can be sold for 1,000 Free Ether.",
-      "jp": "デミウルゴス・ステラ、デミウルゴス・アステ、デミウルゴス・ドレイカーン、デミウルゴス・ヴラダ、モナド・エヴァの中から1名の仲間を選択して獲得する。重複して選択した場合、その仲間のピースを150個獲得する。\\n\\n選択チケットに含まれるすべての仲間の超越を完了した場合、選択チケットを1,000エーテル(無償)で売却できる。",
-      "kr": "아래 데미우르고스 동료 중, 1종을 선택하여 획득할 수 있습니다.\\n- 데미우르고스 스텔라, 데미우르고스 아스테, 데미우르고스 드레이칸, 데미우르고스 블라다, 모나드 에바\\n중복으로 선택하신 경우, 해당 동료의 조각을 150개 얻습니다.\\n\\n선택권에 포함된 모든 동료의 초월을 완료하신 경우, 선택권을 1000 무료 에테르로 판매하실 수 있습니다.",
-      "zh": "可从以下创世之神同伴中选择一名获得：- 创世之神·斯黛拉、创世之神·奥斯黛、创世之神·德雷坎、创世之神·布拉达、莫纳德·艾娃若已拥有，则获得其碎片×150。若所含同伴皆已超越，则可将选择券售出换取1,000无偿以太。",
-      "fr": "Sélectionner et obtenir un héros parmi les membres suivants de Demiurge:\\n- Demiurge Stella, Demiurge Astei, Demiurge Drakhan, Demiurge Vlada, Monad Eva\\nSi vous possédez déjà, obtenez 150 de leurs pièces.\\n\\nSi tous les héros inclus sont entièrement transcendé, le billet peut être vendu pour 1,000 Gratuit Éther.. Gratuit Éther..",
-      "es": "Selecciona y obtén un Héroe entre los siguientes miembros de Demiurge:\n- Demiurge Stella, Demiurge Astei, Demiurge Drakhan, Demiurge Vlada, Monad Eva Si ya los\nposees, obtén 150 de sus Piezas.\n\nSi todos los héroes incluidos están completamente trascendidos, el ticket se puede vender por 1.000 Éter Gratis."
+      "en": "Select and recruit one Demiurge Hero.\\nIf all Heroes included in the Selection Ticket are fully transcended, you will obtain the following alternative rewards.\\nDemiurge Lambda\\n1,000 Free Ether\\n500,000 Gold\\nBasic Skill Manual x10\\nIf Demiurge Lambda is also fully transcended, an additional 1,000 Free Ether will be granted.\\n※ Additional Demiurge Heroes will be added to the alternative rewards over time.",
+      "jp": "デミウルゴスの仲間から1名を選択して仲間にします。\\n選択チケットに含まれるすべての仲間の超越を完了している場合、以下の代替報酬を獲得します。\\nデミウルゴス・ラムダ\\n無償エーテル1,000個\\nゴールド500,000\\nスキル教本：はじまり編 x10\\nデミウルゴス・ラムダの超越も完了している場合、追加で無償エーテル1,000個が支給されます。\\n※代替報酬に含まれるデミウルゴスの仲間は、今後も順次追加される予定です。",
+      "kr": "데미우르고스 동료 중 한명을 선택하여 영입합니다.\\n선택권에 포함된 모든 동료의 초월을 완료하신 경우, 아래의 대체 보상을 얻습니다.\\n데미우르고스 람다\\n무료 에테르 1,000\\n골드 500,000\\n초급 스킬 교본 x10\\n만약 데미우르고스 람다까지 초월이 완료되신 경우, 추가적으로 무료 에테르 1,000개가 지급됩니다.\\n※ 대체 보상에 포함된 데미우르고스 동료는 지속적으로 추가될 예정입니다.",
+      "zh": "从创世之神同伴中选择1名并招募。\\n若已完成选择券内所有同伴的超越，将获得以下替代奖励。\\n创世之神·拉姆达\\n免费以太1,000\\n金币500,000\\n初级技能教材 x10\\n若创世之神·拉姆达也已完成超越，将额外发放免费以太1,000。\\n※ 替代奖励中将持续追加创世之神同伴。",
+      "fr": "Sélectionnez et recrutez un Héros Démiurge.\\nSi vous avez terminé la Transcendance de tous les Héros inclus dans le ticket de sélection, vous obtiendrez les récompenses de remplacement suivantes.\\nDémiurge Lambda\\n1 000 Éthers gratuits\\n500 000 Or\\nBasic comp. manuel x10\\nSi vous avez également terminé la Transcendance de Démiurge Lambda, vous recevrez 1 000 Éthers gratuits supplémentaires.\\n※ D'autres Héros Démiurges seront ajoutés aux récompenses de remplacement au fil du temps.",
+      "es": "Selecciona y recluta a un Héroe Demiurgo.\\nSi has completado la Trascendencia de todos los Héroes incluidos en el Boleto de selección, obtendrás las siguientes recompensas alternativas.\\nDemiurgo Lambda\\n1.000 de Éter gratis\\n500.000 de Oro\\nManual de Habilidades x10\\nSi también has completado la Trascendencia de Demiurgo Lambda, recibirás 1.000 de Éter gratis adicionales.\\n※ Se seguirán añadiendo Héroes Demiurgo a las recompensas alternativas."
     },
     "icon": "TI_CharacterCard_05",
     "grade": "unique",
@@ -15732,12 +15732,12 @@
       "es": "Boleto de selección de Pieza de Héroe 3★"
     },
     "desc": {
-      "en": "Select and obtain 150 Pieces of one 3★ Hero.\\n\\nIf all included allies are fully transcended, the ticket can be sold for 500 Aether.",
-      "jp": "★3仲間の中から1人を選び、そのピース×150を獲得。\\n\\n全対象仲間が超越済みの場合、チケットはエーテル500で売却可能。",
-      "kr": "3성 동료 중 한 명의 조각 150개를 선택하여 획득합니다.\\n\\n선택권에 포함된 모든 동료의 초월을 완료하신 경우, 선택권을 500에테르로 판매하실 수 있습니다.",
-      "zh": "可选择并获得一名3★同伴的碎片×150。\\n\\n若所含同伴皆已超越，则可将选择券售出换取500以太。",
-      "fr": "Sélectionnez et obtenir 150 Pièces d'un 3★ Héro.\\n\\nSi les alliés inclus sont entièrement transcendés, le billet peut être vendu pour 500 Aether. Aether.",
-      "es": "Elige y obtén 150 Piezas de un Héroe 3★.\\n\\nSi todos los héroes ya tienen la Trascendencia máxima, puedes vender el ticket por 500 Éter."
+      "en": "Select one type of 3★ Hero Piece and obtain 150 pieces.\\nIf all Heroes included in the Selection Ticket are fully transcended, you will obtain the following alternative rewards.\\n1,000 Free Ether\\n500,000 Gold\\nBasic Skill Manual x10",
+      "jp": "★3仲間のピースから1種類を選択し、150個獲得します。\\n選択チケットに含まれるすべての仲間の超越を完了している場合、以下の代替報酬を獲得します。\\n無償エーテル1,000個\\nゴールド500,000\\nスキル教本：はじまり編 x10",
+      "kr": "3성 동료 조각 중 한가지를 선택하여 150개 얻습니다.\\n선택권에 포함된 모든 동료의 초월을 완료하신 경우, 아래의 대체 보상을 얻습니다.\\n무료 에테르 1,000\\n골드 500,000\\n초급 스킬 교본 x10",
+      "zh": "从3星同伴碎片中选择1种，获得150个。\\n若已完成选择券内所有同伴的超越，将获得以下替代奖励。\\n免费以太1,000\\n金币500,000\\n初级技能教材 x10",
+      "fr": "Sélectionnez un type de Pièce de Héros 3★ et obtenez-en 150.\\nSi vous avez terminé la Transcendance de tous les Héros inclus dans le ticket de sélection, vous obtiendrez les récompenses de remplacement suivantes.\\n1 000 Éthers gratuits\\n500 000 Or\\nBasic comp. manuel x10",
+      "es": "Selecciona un tipo de Pieza de Héroe 3★ y obtén 150.\\nSi has completado la Trascendencia de todos los Héroes incluidos en el Boleto de selección, obtendrás las siguientes recompensas alternativas.\\n1.000 de Éter gratis\\n500.000 de Oro\\nManual de Habilidades x10"
     },
     "icon": "TI_CharacterCard_05",
     "grade": "unique",
@@ -17004,12 +17004,12 @@
       "es": "Boleto de selección de Héroe Demiurge"
     },
     "desc": {
-      "en": "You can select and obtain 1 of the following Demiurge heroes.\\n- Demiurge Luna, Demiurge Delta, Demiurge Stella, Demiurge Astei, Demiurge Drakhan, Demiurge Vlada, Monad Eva\\nIf you select a duplicate, you will obtain 150 Pieces of that hero.\\n\\nIf you have completed the Transcendence of all heroes included in the Selection Ticket, it can be sold for 1,000 Free Ether.",
-      "jp": "以下のデミウルゴス仲間の中から1種を選択して獲得できる。\\n- デミウルゴス・ルナ、デミウルゴス・デルタ、デミウルゴス・ステラ、デミウルゴス・アステ、デミウルゴス・ドレイカーン、デミウルゴス・ヴラダ、モナド・エヴァ\\n重複して選択した場合、該当仲間のピースを150個獲得する。\\n\\n選択チケットに含まれるすべての仲間の超越を完了した場合、選択チケットを1000無償エーテルで売却できる。",
-      "kr": "아래 데미우르고스 동료 중, 1종을 선택하여 획득할 수 있습니다.\\n- 데미우르고스 루나, 데미우르고스 델타, 데미우르고스 스텔라, 데미우르고스 아스테, 데미우르고스 드레이칸, 데미우르고스 블라다, 모나드 에바\\n중복으로 선택하신 경우, 해당 동료의 조각을 150개 얻습니다.\\n\\n선택권에 포함된 모든 동료의 초월을 완료하신 경우, 선택권을 1000 무료 에테르로 판매하실 수 있습니다.",
-      "zh": "可从以下创世之神同伴中选择1种获得。\\n- 创世之神·露娜、创世之神·德尔塔、创世之神·斯黛拉、创世之神·奥斯黛、创世之神·德雷坎、创世之神·布拉达、单子·艾娃\\n若重复选择，将获得该同伴的150个碎片。\\n\\n若已完成选择券内所有同伴的超越，可将选择券以1000无偿以太出售。",
-      "fr": "Vous pouvez sélectionner et obtenir 1 des héros suivants de Demiurge.\\n- Demiurge Luna, Demiurge Delta, Demiurge Stella, Demiurge Astai, Demiurge Drakhan, Demiurge Vlada, Monad Eva\\nSi vous sélectionnez un double, vous obtiendrez 150 pièces de ce héros.\\n\\nSi vous avez terminé la Transcendence de tous les héros inclus dans le ticket de sélection, elle peut être vendue pour 1,000 Éther gratuit.",
-      "es": "Puede seleccionar y obtener 1 de los siguientes héroes Demiurge.\\n- Demiurge Luna, Demiurge Delta, Demiurge Stella, Demiurge Astei, Demiurge Drakhan, Demiurge Vlada, Monad Eva\\nSi selecciona un duplicado, obtendrá 150 Piezas de ese héroe.\\n\\nSi ha completado la Trascendencia de todos los héroes incluidos en el Boleto de Selección, puede venderlo por 1.000 Éter Gratis."
+      "en": "Select and recruit one Demiurge Hero.\\nIf all Heroes included in the Selection Ticket are fully transcended, you will obtain the following alternative rewards.\\nDemiurge Lambda\\n1,000 Free Ether\\n500,000 Gold\\nBasic Skill Manual x10\\nIf Demiurge Lambda is also fully transcended, an additional 1,000 Free Ether will be granted.\\n※ Additional Demiurge Heroes will be added to the alternative rewards over time.",
+      "jp": "デミウルゴスの仲間から1名を選択して仲間にします。\\n選択チケットに含まれるすべての仲間の超越を完了している場合、以下の代替報酬を獲得します。\\nデミウルゴス・ラムダ\\n無償エーテル1,000個\\nゴールド500,000\\nスキル教本：はじまり編 x10\\nデミウルゴス・ラムダの超越も完了している場合、追加で無償エーテル1,000個が支給されます。\\n※代替報酬に含まれるデミウルゴスの仲間は、今後も順次追加される予定です。",
+      "kr": "데미우르고스 동료 중 한명을 선택하여 영입합니다.\\n선택권에 포함된 모든 동료의 초월을 완료하신 경우, 아래의 대체 보상을 얻습니다.\\n데미우르고스 람다\\n무료 에테르 1,000\\n골드 500,000\\n초급 스킬 교본 x10\\n만약 데미우르고스 람다까지 초월이 완료되신 경우, 추가적으로 무료 에테르 1,000개가 지급됩니다.\\n※ 대체 보상에 포함된 데미우르고스 동료는 지속적으로 추가될 예정입니다.",
+      "zh": "从创世之神同伴中选择1名并招募。\\n若已完成选择券内所有同伴的超越，将获得以下替代奖励。\\n创世之神·拉姆达\\n免费以太1,000\\n金币500,000\\n初级技能教材 x10\\n若创世之神·拉姆达也已完成超越，将额外发放免费以太1,000。\\n※ 替代奖励中将持续追加创世之神同伴。",
+      "fr": "Sélectionnez et recrutez un Héros Démiurge.\\nSi vous avez terminé la Transcendance de tous les Héros inclus dans le ticket de sélection, vous obtiendrez les récompenses de remplacement suivantes.\\nDémiurge Lambda\\n1 000 Éthers gratuits\\n500 000 Or\\nBasic comp. manuel x10\\nSi vous avez également terminé la Transcendance de Démiurge Lambda, vous recevrez 1 000 Éthers gratuits supplémentaires.\\n※ D'autres Héros Démiurges seront ajoutés aux récompenses de remplacement au fil du temps.",
+      "es": "Selecciona y recluta a un Héroe Demiurgo.\\nSi has completado la Trascendencia de todos los Héroes incluidos en el Boleto de selección, obtendrás las siguientes recompensas alternativas.\\nDemiurgo Lambda\\n1.000 de Éter gratis\\n500.000 de Oro\\nManual de Habilidades x10\\nSi también has completado la Trascendencia de Demiurgo Lambda, recibirás 1.000 de Éter gratis adicionales.\\n※ Se seguirán añadiendo Héroes Demiurgo a las recompensas alternativas."
     },
     "icon": "TI_CharacterCard_05",
     "grade": "unique",
@@ -17676,12 +17676,12 @@
       "es": "Boleto de selección de Héroe 3★"
     },
     "desc": {
-      "en": "Select and obtain a 3★ Hero of your choice. If you select a Hero you already own, you will obtain 150 Pieces of that Hero. If you have completed Transcendence for all Heroes, you can sell the selection ticket for 1,000 Free Ether.",
-      "jp": "希望する★3仲間を選択して獲得する。すでに保有している仲間を選択した場合、その仲間のピース150個を獲得する。すべての仲間の超越が完了している場合、選択チケットを1,000無償エーテルで売却できます。",
-      "kr": "원하시는 3성 동료를 선택하여 얻습니다. 이미 보유하신 동료를 선택하실 경우, 해당 동료의 조각 150개를 얻습니다. 모든 동료의 초월이 완료되신 경우, 선택권을 1,000 무료 에테르로 판매하실 수 있습니다.",
-      "zh": "选择并获得心仪的3★同伴。若选择已拥有的同伴，将获得该同伴的碎片150个。若所有同伴的超越均已完成，可将选择券以1,000免费以太出售。",
-      "fr": "Choisissez et obtenez un héros 3★. Si vous possédez déjà ce héros, vous recevrez 150 de ses fragments. Si tous les héros ont atteint la Transcendance max., le ticket de sélection peut être vendu pour 1 000 Éthers gratuits.",
-      "es": "Elige y obtén un Héroe 3★ a tu elección. Si eliges uno que ya tienes, obtienes 150 Piezas de ese Héroe. Si completaste la Trascendencia de todos los Héroes, puedes vender el boleto de selección por 1,000 Éter Gratis."
+      "en": "Select and recruit one 3★ Hero.\\nIf all Heroes included in the Selection Ticket are fully transcended, you will obtain the following alternative rewards.\\n1,000 Free Ether\\n500,000 Gold\\nBasic Skill Manual x10",
+      "jp": "★3仲間の中から1名を選択して仲間にします。\\n選択チケットに含まれるすべての仲間の超越を完了している場合、以下の代替報酬を獲得します。\\n無償エーテル1,000個\\nゴールド500,000\\nスキル教本：はじまり編 x10",
+      "kr": "3성 동료 중 한명을 선택하여 영입합니다.\\n선택권에 포함된 모든 동료의 초월을 완료하신 경우, 아래의 대체 보상을 얻습니다.\\n무료 에테르 1,000\\n골드 500,000\\n초급 스킬 교본 x10",
+      "zh": "从3星同伴中选择1名并招募。\\n若已完成选择券内所有同伴的超越，将获得以下替代奖励。\\n免费以太1,000\\n金币500,000\\n初级技能教材 x10",
+      "fr": "Sélectionnez et recrutez un Héros 3★.\\nSi vous avez terminé la Transcendance de tous les Héros inclus dans le ticket de sélection, vous obtiendrez les récompenses de remplacement suivantes.\\n1 000 Éthers gratuits\\n500 000 Or\\nBasic comp. manuel x10",
+      "es": "Selecciona y recluta a un Héroe 3★.\\nSi has completado la Trascendencia de todos los Héroes incluidos en el Boleto de selección, obtendrás las siguientes recompensas alternativas.\\n1.000 de Éter gratis\\n500.000 de Oro\\nManual de Habilidades x10"
     },
     "icon": "TI_CharacterCard_05",
     "grade": "unique",
@@ -17905,6 +17905,30 @@
     "subType": "box_type_random",
     "star": 0
   },
+  "30557": {
+    "kind": "item",
+    "name": {
+      "en": "6★ Legendary Weapon Selection Chest",
+      "jp": "★6武器選択ボックス【レジェンド】",
+      "kr": "6성 전설 무기 선택 상자",
+      "zh": "6星传说武器选择箱",
+      "fr": "Coffre de sélection d'arme légendaire 6★",
+      "es": "Cofre de Selección de Arma Legendaria 6★"
+    },
+    "desc": {
+      "en": "Select and obtain one 6★ Legendary Weapon. The equipment provided by this chest has fixed stats.",
+      "jp": "★6レジェンド武器の中から1つを選択して獲得する。このボックスから獲得する装備のオプションは固定されている。",
+      "kr": "6성 전설 무기 중 한가지를 선택하여 얻습니다. 장비의 옵션이 고정되어 지급됩니다.",
+      "zh": "选择并获得1件6星传说武器。该箱子提供的装备附带固定属性。",
+      "fr": "Sélectionnez et obtenez une arme légendaire 6★. L'équipement fourni par ce coffre possède des statistiques fixes.",
+      "es": "Selecciona y obtén un Arma Legendaria 6★. El equipo de este cofre tiene estadísticas fijas."
+    },
+    "icon": "TI_Weapon_Box02",
+    "grade": "unique",
+    "type": "box",
+    "subType": "box_type_choice_item",
+    "star": 0
+  },
   "30558": {
     "kind": "item",
     "name": {
@@ -17916,12 +17940,12 @@
       "es": "Boleto de selección de héroe Demiurge I"
     },
     "desc": {
-      "en": "Select and obtain the Demiurge Hero of your choice. If you select a Hero you already own, you will obtain 150 Pieces of that Hero instead. Once Transcendence is complete for all Heroes, this ticket can be sold for 1,000 Ether.",
-      "jp": "お好みのデミウルゴスの仲間を選択して獲得します。すでに保有している仲間を選択した場合、該当仲間のピースを150個獲得します。すべての仲間の超越が完了している場合、選択券を1,000エーテルで売却できます。",
-      "kr": "원하시는 데미우르고스 동료를 선택하여 얻습니다. 이미 보유하신 동료를 선택하실 경우, 해당 동료의 조각 150개를 얻습니다. 모든 동료의 초월이 완료되신 경우, 선택권을 1,000에테르로 판매하실 수 있습니다.",
-      "zh": "可选择并获得心仪的德米乌尔戈斯伙伴。若选择已持有的伙伴，则可获得该伙伴的碎片150个。若所有伙伴均已完成超越，则可将选择券以1,000以太出售。",
-      "fr": "Sélectionnez et obtenez le héros Demiurge de votre choix. Si vous sélectionnez un héros que vous possédez déjà, vous obtiendrez 150 pièces de ce héros à la place. Une fois Transcendence terminée pour tous les héros, ce billet peut être vendu pour 1,000 Éther.",
-      "es": "Selecciona y obtén al héroe Demiurge de tu elección. Si seleccionas un héroe que ya posees, obtendrás 150 fragmentos de ese héroe en su lugar. Una vez completada la Trascendencia de todos los héroes, este boleto podrá venderse por 1,000 Éter."
+      "en": "Select and recruit one Demiurge Hero.\\nIf all Heroes included in the Selection Ticket are fully transcended, you will obtain the following alternative rewards.\\nDemiurge Lambda\\n1,000 Free Ether\\n500,000 Gold\\nBasic Skill Manual x10\\nIf Demiurge Lambda is also fully transcended, an additional 1,000 Free Ether will be granted.\\n※ Additional Demiurge Heroes will be added to the alternative rewards over time.",
+      "jp": "デミウルゴスの仲間から1名を選択して仲間にします。\\n選択チケットに含まれるすべての仲間の超越を完了している場合、以下の代替報酬を獲得します。\\nデミウルゴス・ラムダ\\n無償エーテル1,000個\\nゴールド500,000\\nスキル教本：はじまり編 x10\\nデミウルゴス・ラムダの超越も完了している場合、追加で無償エーテル1,000個が支給されます。\\n※代替報酬に含まれるデミウルゴスの仲間は、今後も順次追加される予定です。",
+      "kr": "데미우르고스 동료 중 한명을 선택하여 영입합니다.\\n선택권에 포함된 모든 동료의 초월을 완료하신 경우, 아래의 대체 보상을 얻습니다.\\n데미우르고스 람다\\n무료 에테르 1,000\\n골드 500,000\\n초급 스킬 교본 x10\\n만약 데미우르고스 람다까지 초월이 완료되신 경우, 추가적으로 무료 에테르 1,000개가 지급됩니다.\\n※ 대체 보상에 포함된 데미우르고스 동료는 지속적으로 추가될 예정입니다.",
+      "zh": "从创世之神同伴中选择1名并招募。\\n若已完成选择券内所有同伴的超越，将获得以下替代奖励。\\n创世之神·拉姆达\\n免费以太1,000\\n金币500,000\\n初级技能教材 x10\\n若创世之神·拉姆达也已完成超越，将额外发放免费以太1,000。\\n※ 替代奖励中将持续追加创世之神同伴。",
+      "fr": "Sélectionnez et recrutez un Héros Démiurge.\\nSi vous avez terminé la Transcendance de tous les Héros inclus dans le ticket de sélection, vous obtiendrez les récompenses de remplacement suivantes.\\nDémiurge Lambda\\n1 000 Éthers gratuits\\n500 000 Or\\nBasic comp. manuel x10\\nSi vous avez également terminé la Transcendance de Démiurge Lambda, vous recevrez 1 000 Éthers gratuits supplémentaires.\\n※ D'autres Héros Démiurges seront ajoutés aux récompenses de remplacement au fil du temps.",
+      "es": "Selecciona y recluta a un Héroe Demiurgo.\\nSi has completado la Trascendencia de todos los Héroes incluidos en el Boleto de selección, obtendrás las siguientes recompensas alternativas.\\nDemiurgo Lambda\\n1.000 de Éter gratis\\n500.000 de Oro\\nManual de Habilidades x10\\nSi también has completado la Trascendencia de Demiurgo Lambda, recibirás 1.000 de Éter gratis adicionales.\\n※ Se seguirán añadiendo Héroes Demiurgo a las recompensas alternativas."
     },
     "icon": "TI_CharacterCard_05",
     "grade": "unique",
@@ -17940,12 +17964,12 @@
       "es": "Boleto de selección de héroe Demiurge II"
     },
     "desc": {
-      "en": "Select and obtain the Demiurge Hero of your choice. If you select a Hero you already own, you will obtain 150 Pieces of that Hero instead. Once Transcendence is complete for all Heroes, this ticket can be sold for 1,000 Ether.",
-      "jp": "お好みのデミウルゴスの仲間を選択して獲得します。すでに保有している仲間を選択した場合、該当仲間のピースを150個獲得します。すべての仲間の超越が完了している場合、選択券を1,000エーテルで売却できます。",
-      "kr": "원하시는 데미우르고스 동료를 선택하여 얻습니다. 이미 보유하신 동료를 선택하실 경우, 해당 동료의 조각 150개를 얻습니다. 모든 동료의 초월이 완료되신 경우, 선택권을 1,000에테르로 판매하실 수 있습니다.",
-      "zh": "可选择并获得心仪的德米乌尔戈斯伙伴。若选择已持有的伙伴，则可获得该伙伴的碎片150个。若所有伙伴均已完成超越，则可将选择券以1,000以太出售。",
-      "fr": "Sélectionnez et obtenez le héros Demiurge de votre choix. Si vous sélectionnez un héros que vous possédez déjà, vous obtiendrez 150 pièces de ce héros à la place. Une fois Transcendence terminée pour tous les héros, ce billet peut être vendu pour 1,000 Éther.",
-      "es": "Selecciona y obtén al héroe Demiurge de tu elección. Si seleccionas un héroe que ya posees, obtendrás 150 fragmentos de ese héroe en su lugar. Una vez completada la Trascendencia de todos los héroes, este boleto podrá venderse por 1,000 Éter."
+      "en": "Select and recruit one Demiurge Hero.\\nIf all Heroes included in the Selection Ticket are fully transcended, you will obtain the following alternative rewards.\\nDemiurge Lambda\\n1,000 Free Ether\\n500,000 Gold\\nBasic Skill Manual x10\\nIf Demiurge Lambda is also fully transcended, an additional 1,000 Free Ether will be granted.\\n※ Additional Demiurge Heroes will be added to the alternative rewards over time.",
+      "jp": "デミウルゴスの仲間から1名を選択して仲間にします。\\n選択チケットに含まれるすべての仲間の超越を完了している場合、以下の代替報酬を獲得します。\\nデミウルゴス・ラムダ\\n無償エーテル1,000個\\nゴールド500,000\\nスキル教本：はじまり編 x10\\nデミウルゴス・ラムダの超越も完了している場合、追加で無償エーテル1,000個が支給されます。\\n※代替報酬に含まれるデミウルゴスの仲間は、今後も順次追加される予定です。",
+      "kr": "데미우르고스 동료 중 한명을 선택하여 영입합니다.\\n선택권에 포함된 모든 동료의 초월을 완료하신 경우, 아래의 대체 보상을 얻습니다.\\n데미우르고스 람다\\n무료 에테르 1,000\\n골드 500,000\\n초급 스킬 교본 x10\\n만약 데미우르고스 람다까지 초월이 완료되신 경우, 추가적으로 무료 에테르 1,000개가 지급됩니다.\\n※ 대체 보상에 포함된 데미우르고스 동료는 지속적으로 추가될 예정입니다.",
+      "zh": "从创世之神同伴中选择1名并招募。\\n若已完成选择券内所有同伴的超越，将获得以下替代奖励。\\n创世之神·拉姆达\\n免费以太1,000\\n金币500,000\\n初级技能教材 x10\\n若创世之神·拉姆达也已完成超越，将额外发放免费以太1,000。\\n※ 替代奖励中将持续追加创世之神同伴。",
+      "fr": "Sélectionnez et recrutez un Héros Démiurge.\\nSi vous avez terminé la Transcendance de tous les Héros inclus dans le ticket de sélection, vous obtiendrez les récompenses de remplacement suivantes.\\nDémiurge Lambda\\n1 000 Éthers gratuits\\n500 000 Or\\nBasic comp. manuel x10\\nSi vous avez également terminé la Transcendance de Démiurge Lambda, vous recevrez 1 000 Éthers gratuits supplémentaires.\\n※ D'autres Héros Démiurges seront ajoutés aux récompenses de remplacement au fil du temps.",
+      "es": "Selecciona y recluta a un Héroe Demiurgo.\\nSi has completado la Trascendencia de todos los Héroes incluidos en el Boleto de selección, obtendrás las siguientes recompensas alternativas.\\nDemiurgo Lambda\\n1.000 de Éter gratis\\n500.000 de Oro\\nManual de Habilidades x10\\nSi también has completado la Trascendencia de Demiurgo Lambda, recibirás 1.000 de Éter gratis adicionales.\\n※ Se seguirán añadiendo Héroes Demiurgo a las recompensas alternativas."
     },
     "icon": "TI_CharacterCard_05",
     "grade": "unique",
@@ -18095,6 +18119,30 @@
     "grade": "unique",
     "type": "box",
     "subType": "box_type_random",
+    "star": 0
+  },
+  "30566": {
+    "kind": "item",
+    "name": {
+      "en": "Demiurge Hero Selection Ticket",
+      "jp": "デミウルゴス仲間選択チケット",
+      "kr": "데미우르고스 동료 선택권",
+      "zh": "创世之神同伴选择券",
+      "fr": "Demiurge Hero sélection Ticket",
+      "es": "Boleto de selección de Héroe Demiurge"
+    },
+    "desc": {
+      "en": "Select and recruit one Demiurge Hero.\\nIf all Heroes included in the Selection Ticket are fully transcended, you will obtain the following alternative rewards.\\nDemiurge Lambda\\n1,000 Free Ether\\n500,000 Gold\\nBasic Skill Manual x10\\nIf Demiurge Lambda is also fully transcended, an additional 1,000 Free Ether will be granted.\\n※ Additional Demiurge Heroes will be added to the alternative rewards over time.",
+      "jp": "デミウルゴスの仲間から1名を選択して仲間にします。\\n選択チケットに含まれるすべての仲間の超越を完了している場合、以下の代替報酬を獲得します。\\nデミウルゴス・ラムダ\\n無償エーテル1,000個\\nゴールド500,000\\nスキル教本：はじまり編 x10\\nデミウルゴス・ラムダの超越も完了している場合、追加で無償エーテル1,000個が支給されます。\\n※代替報酬に含まれるデミウルゴスの仲間は、今後も順次追加される予定です。",
+      "kr": "데미우르고스 동료 중 한명을 선택하여 영입합니다.\\n선택권에 포함된 모든 동료의 초월을 완료하신 경우, 아래의 대체 보상을 얻습니다.\\n데미우르고스 람다\\n무료 에테르 1,000\\n골드 500,000\\n초급 스킬 교본 x10\\n만약 데미우르고스 람다까지 초월이 완료되신 경우, 추가적으로 무료 에테르 1,000개가 지급됩니다.\\n※ 대체 보상에 포함된 데미우르고스 동료는 지속적으로 추가될 예정입니다.",
+      "zh": "从创世之神同伴中选择1名并招募。\\n若已完成选择券内所有同伴的超越，将获得以下替代奖励。\\n创世之神·拉姆达\\n免费以太1,000\\n金币500,000\\n初级技能教材 x10\\n若创世之神·拉姆达也已完成超越，将额外发放免费以太1,000。\\n※ 替代奖励中将持续追加创世之神同伴。",
+      "fr": "Sélectionnez et recrutez un Héros Démiurge.\\nSi vous avez terminé la Transcendance de tous les Héros inclus dans le ticket de sélection, vous obtiendrez les récompenses de remplacement suivantes.\\nDémiurge Lambda\\n1 000 Éthers gratuits\\n500 000 Or\\nBasic comp. manuel x10\\nSi vous avez également terminé la Transcendance de Démiurge Lambda, vous recevrez 1 000 Éthers gratuits supplémentaires.\\n※ D'autres Héros Démiurges seront ajoutés aux récompenses de remplacement au fil du temps.",
+      "es": "Selecciona y recluta a un Héroe Demiurgo.\\nSi has completado la Trascendencia de todos los Héroes incluidos en el Boleto de selección, obtendrás las siguientes recompensas alternativas.\\nDemiurgo Lambda\\n1.000 de Éter gratis\\n500.000 de Oro\\nManual de Habilidades x10\\nSi también has completado la Trascendencia de Demiurgo Lambda, recibirás 1.000 de Éter gratis adicionales.\\n※ Se seguirán añadiendo Héroes Demiurgo a las recompensas alternativas."
+    },
+    "icon": "TI_CharacterCard_05",
+    "grade": "unique",
+    "type": "box",
+    "subType": "box_type_choice_char",
     "star": 0
   },
   "30567": {
@@ -18263,6 +18311,54 @@
     "grade": "unique",
     "type": "box",
     "subType": "box_type_choice_char",
+    "star": 0
+  },
+  "30574": {
+    "kind": "item",
+    "name": {
+      "en": "Lobby: Wish Under the Moonlight",
+      "jp": "ロビー背景 - 月明かりの下の願い",
+      "kr": "로비 - 달빛 아래의 소원",
+      "zh": "大厅 - 月光下的愿望",
+      "fr": "Lobby : Vœu au clair de lune",
+      "es": "Vestíbulo: Deseo bajo la luz de la luna"
+    },
+    "desc": {
+      "en": "Obtain the exclusive replacement lobby [Wish Beneath the Moonlight].\\nAfter using the lobby item in [Inventory], you can change it under [Lobby Settings] - [Exclusive Background].",
+      "jp": "【月明かりの下の願い】の交換用専用ロビーを獲得します。\\n専用ロビーは【バッグ】内でロビーアイテムを使用した後、【ロビー設定】 - 【専用背景】項目で変更できます。",
+      "kr": "[달빛 아래의 소원] 컨셉의 교체용 전용 로비를 얻습니다.\\n전용 로비는 [소지품] 내에서 로비 아이템을 사용하신 후, [로비 설정] - [전용 배경] 항목에서 변경하실 수 있습니다.",
+      "zh": "获得【月光下的愿望】概念的替换专属大厅。\\n在【背包】内使用大厅道具后，可在【大厅设置】 - 【专属背景】项目中进行更换。",
+      "fr": "Obtenez un lobby exclusif de remplacement sur le thème [Vœu au clair de lune].\\nAprès avoir utilisé l'objet de lobby dans [Inventaire], vous pouvez le modifier dans [Param. de hall] - [Exclusif Contexte].",
+      "es": "Obtén un vestíbulo exclusivo de reemplazo con el concepto [Deseo bajo la luz de la luna].\\nTras usar el objeto de vestíbulo en [Inventario], puedes cambiarlo en [Ajustes de vest.] - [Fondo exclusivo]."
+    },
+    "icon": "TI_BOX_LOBBY_SEASONAL_09",
+    "grade": "unique",
+    "type": "box",
+    "subType": "box_type_random",
+    "star": 0
+  },
+  "30575": {
+    "kind": "item",
+    "name": {
+      "en": "[Thump, Thump! Moon Bunny's Mill] All-Clear Reward",
+      "jp": "【ぺったんぺったん！ 月ウサギの餅つき場】オールクリア報酬",
+      "kr": "[쿵덕쿵! 달토끼의 방앗간] 올클리어 보상",
+      "zh": "【咚咚锵！ 月兔的磨坊】全通关奖励",
+      "fr": "Récompense de complétion [Boum, bam, boum ! Le moulin du Lapin lunaire]",
+      "es": "Recompensa por completar [¡Pum, pam, pum! El molino del Conejo Lunar]"
+    },
+    "desc": {
+      "en": "Obtain the following rewards.\\n1,500 Free Ether\\nProfile Frame [Thump, Thump!]",
+      "jp": "以下の報酬を獲得します。\\n無料エーテル1,500個\\nプロフィールフレーム【ぺったんぺったん！】",
+      "kr": "아래의 보상을 얻습니다.\\n무료 에테르 1,500\\n프로필 테두리 [쿵떡쿵!]",
+      "zh": "获得以下奖励。\\n免费以太1,500\\n头像边框【咚咚锵！】",
+      "fr": "Obtenez les récompenses suivantes.\\n1500 Éthers gratuits\\nCadre de profil [Boum, bam, boum !]",
+      "es": "Obtén las siguientes recompensas.\\n1,500 de Éter gratis\\nMarco de perfil [¡Pum, pam, pum!]"
+    },
+    "icon": "TI_Common_Box05",
+    "grade": "unique",
+    "type": "box",
+    "subType": "box_type_random",
     "star": 0
   },
   "40001": {
@@ -25062,30 +25158,6 @@
     "star": 0,
     "characterId": "2000119"
   },
-  "COSTUME_107": {
-    "kind": "costume",
-    "name": {
-      "en": "Cheeky Moon Bunny Luna",
-      "jp": "生意気な月ウサギ・ルナ",
-      "kr": "발칙한 달토끼 루나",
-      "zh": "淘气月兔露娜",
-      "fr": "Luna, Lapine lunaire effrontée",
-      "es": "Luna, Conejita Lunar Descarada"
-    },
-    "desc": {
-      "en": "A costume that [Demiurge Luna] can equip.",
-      "jp": "【デミウルゴス・ルナ】のスキンです。\\nスキンは【仲間】→【スキン】で装備できます。",
-      "kr": "[데미우르고스 루나]가 착용할 수 있는 코스튬입니다.",
-      "zh": "【創世之神·露娜】可穿戴的皮肤。",
-      "fr": "Un costume que [Demiurge Luna] peut équiper",
-      "es": "Un aspecto que [Demiurge Luna] puede equipar"
-    },
-    "icon": "TI_Costume_Clothes_2000120_03",
-    "grade": "rare",
-    "type": "costume",
-    "star": 0,
-    "characterId": "2000120"
-  },
   "COSTUME_108": {
     "kind": "costume",
     "name": {
@@ -25184,29 +25256,53 @@
     "star": 0,
     "characterId": "2000119"
   },
-  "COSTUME_111": {
+  "COSTUME_112": {
     "kind": "costume",
     "name": {
-      "en": "Naughty Moon Bunny Luna",
-      "jp": "小悪魔な月ウサギ・ルナ",
-      "kr": "응큼한 달토끼 루나",
-      "zh": "小恶魔月兔露娜",
-      "fr": "Luna, Petite Diablesse lunaire",
-      "es": "Luna, Conejita Lunar Traviesa"
+      "en": "Gentle Moon Bunny Delta",
+      "jp": "優しい月ウサギ・デルタ",
+      "kr": "상냥한 달토끼 델타",
+      "zh": "温柔月兔德尔塔",
+      "fr": "Delta, Douce Lapine lunaire",
+      "es": "Delta, Conejita Lunar Amable"
     },
     "desc": {
-      "en": "A costume that [Demiurge Luna] can equip.",
-      "jp": "【デミウルゴス・ルナ】のスキンです。\\nスキンは【仲間】→【スキン】で装備できます。",
-      "kr": "[데미우르고스 루나]가 착용할 수 있는 코스튬입니다.",
-      "zh": "【創世之神·露娜】可穿戴的皮肤。",
-      "fr": "Un costume que [Demiurge Luna] peut équiper",
-      "es": "Un aspecto que [Demiurge Luna] puede equipar"
+      "en": "A costume that [Demiurge Delta] can equip.",
+      "jp": "[デミウルゴス・デルタ]が着用できるスキンです。",
+      "kr": "[데미우르고스 델타]가 착용할 수 있는 코스튬입니다.",
+      "zh": "可由[创世之神·德尔塔]穿戴的皮肤。",
+      "fr": "Costume pouvant être équipé par [Démiurge Delta].",
+      "es": "Aspecto que puede equipar [Demiurgo Delta]."
     },
-    "icon": "TI_Costume_Clothes_2000120_03",
+    "icon": "TI_Costume_Clothes_2000100_02",
     "grade": "rare",
     "type": "costume",
     "star": 0,
-    "characterId": "2000120"
+    "characterId": "2000100"
+  },
+  "COSTUME_113": {
+    "kind": "costume",
+    "name": {
+      "en": "Haughty Moon Bunny Beth",
+      "jp": "気高い月ウサギ・ベス",
+      "kr": "도도한 달토끼 베스",
+      "zh": "高傲月兔贝斯",
+      "fr": "Beth, Lapine lunaire hautaine",
+      "es": "Beth, Conejita Lunar Altiva"
+    },
+    "desc": {
+      "en": "A costume that [Gnosis Beth] can equip.",
+      "jp": "[グノーシス・ベス]が着用できるスキンです。",
+      "kr": "[그노시스 베스]가 착용할 수 있는 코스튬입니다.",
+      "zh": "可由[诺希斯·贝丝]穿戴的皮肤。",
+      "fr": "Costume pouvant être équipé par [Gnose Beth].",
+      "es": "Aspecto que puede equipar [Gnosis Beth]."
+    },
+    "icon": "TI_Costume_Clothes_2000092_02",
+    "grade": "rare",
+    "type": "costume",
+    "star": 0,
+    "characterId": "2000092"
   },
   "COSTUME_12": {
     "kind": "costume",
