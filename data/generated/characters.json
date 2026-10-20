@@ -11614,7 +11614,26 @@
     },
     "ee": "2000100",
     "recommendedSets": ["3", "13", "9"],
-    "tags": ["premium"]
+    "tags": ["premium"],
+    "appearances": ["2010100"],
+    "costumes": [
+      {
+        "id": "112",
+        "model": "2010100",
+        "name": {
+          "en": "Gentle Moon Bunny Delta",
+          "jp": "優しい月ウサギ・デルタ",
+          "kr": "상냥한 달토끼 델타",
+          "zh": "温柔月兔德尔塔",
+          "fr": "Delta, Douce Lapine lunaire",
+          "es": "Delta, Conejita Lunar Amable"
+        },
+        "icon": "TI_Costume_Clothes_2000100_02",
+        "grade": "rare",
+        "sort": 1,
+        "art": true
+      }
+    ]
   },
   "2000101": {
     "id": "2000101",
