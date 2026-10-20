@@ -10749,7 +10749,26 @@
     },
     "ee": "2000092",
     "recommendedSets": ["13", "5", "20"],
-    "tags": ["premium"]
+    "tags": ["premium"],
+    "appearances": ["2010092"],
+    "costumes": [
+      {
+        "id": "113",
+        "model": "2010092",
+        "name": {
+          "en": "Haughty Moon Bunny Beth",
+          "jp": "気高い月ウサギ・ベス",
+          "kr": "도도한 달토끼 베스",
+          "zh": "高傲月兔贝斯",
+          "fr": "Beth, Lapine lunaire hautaine",
+          "es": "Beth, Conejita Lunar Altiva"
+        },
+        "icon": "TI_Costume_Clothes_2000092_02",
+        "grade": "rare",
+        "sort": 1,
+        "art": true
+      }
+    ]
   },
   "2000093": {
     "id": "2000093",
