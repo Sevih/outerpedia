@@ -38312,6 +38312,88 @@
       "spd": 840
     }
   },
+  "140305": {
+    "mode": "origin",
+    "name": {
+      "en": "Caught Off Guard",
+      "jp": "不意を突かれる",
+      "kr": "허를 찔리다",
+      "zh": "出其不意",
+      "fr": "Pris au dépourvu",
+      "es": "Tomados por sorpresa"
+    },
+    "area": {
+      "en": "Confusion",
+      "jp": "混乱",
+      "kr": "혼란",
+      "zh": "混乱",
+      "fr": "Confusion",
+      "es": "Confusión"
+    },
+    "monsters": [
+      {
+        "id": "4011081",
+        "level": 182,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1
+      },
+      {
+        "id": "4011082",
+        "level": 182,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1,
+        "count": 2
+      },
+      {
+        "id": "4011083",
+        "level": 182,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1
+      },
+      {
+        "id": "4012082",
+        "level": 182,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 2
+      },
+      {
+        "id": "4011081",
+        "level": 182,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 2,
+        "count": 2
+      },
+      {
+        "id": "4013081",
+        "level": 182,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 3
+      },
+      {
+        "id": "4011083",
+        "level": 182,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 3,
+        "count": 2
+      }
+    ],
+    "season": 4,
+    "episode": 3,
+    "stage": 5,
+    "reward": "154105",
+    "adv": {
+      "atk": -535,
+      "hp": 250,
+      "spd": 840
+    }
+  },
   "141101": {
     "mode": "origin_hard",
     "name": {
@@ -39838,6 +39920,766 @@
     "episode": 2,
     "stage": 10,
     "reward": "153110",
+    "adv": {
+      "atk": -535,
+      "hp": -175,
+      "spd": 910
+    }
+  },
+  "141301": {
+    "mode": "origin_hard",
+    "name": {
+      "en": "I Don't Believe You",
+      "jp": "信じない",
+      "kr": "믿지 않는다",
+      "zh": "我不相信",
+      "fr": "Je ne te crois pas",
+      "es": "No te creo"
+    },
+    "area": {
+      "en": "Confusion",
+      "jp": "混乱",
+      "kr": "혼란",
+      "zh": "混乱",
+      "fr": "Confusion",
+      "es": "Confusión"
+    },
+    "monsters": [
+      {
+        "id": "4111081",
+        "level": 200,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1,
+        "count": 3
+      },
+      {
+        "id": "4111082",
+        "level": 200,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 2
+      },
+      {
+        "id": "4111084",
+        "level": 200,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 2,
+        "count": 2
+      },
+      {
+        "id": "4113081",
+        "level": 200,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 3
+      },
+      {
+        "id": "4111081",
+        "level": 200,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 3,
+        "count": 2
+      }
+    ],
+    "season": 4,
+    "episode": 3,
+    "stage": 1,
+    "reward": "155101",
+    "adv": {
+      "atk": -535,
+      "hp": 800,
+      "spd": 910
+    }
+  },
+  "141302": {
+    "mode": "origin_hard",
+    "name": {
+      "en": "Securing a Mana Sample",
+      "jp": "魔力サンプルの確保",
+      "kr": "마력 샘플 확보",
+      "zh": "确保魔力样本",
+      "fr": "Sécuriser un échantillon de mana",
+      "es": "Asegurar una muestra de maná"
+    },
+    "area": {
+      "en": "Confusion",
+      "jp": "混乱",
+      "kr": "혼란",
+      "zh": "混乱",
+      "fr": "Confusion",
+      "es": "Confusión"
+    },
+    "monsters": [
+      {
+        "id": "4111073",
+        "level": 200,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1,
+        "count": 2
+      },
+      {
+        "id": "4111072",
+        "level": 200,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1
+      },
+      {
+        "id": "4111073",
+        "level": 200,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 2,
+        "count": 2
+      },
+      {
+        "id": "4212072",
+        "level": 200,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 2
+      },
+      {
+        "id": "4512071",
+        "level": 200,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 3
+      },
+      {
+        "id": "4111072",
+        "level": 200,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 3,
+        "count": 2
+      }
+    ],
+    "season": 4,
+    "episode": 3,
+    "stage": 2,
+    "reward": "155102",
+    "adv": {
+      "atk": -535,
+      "hp": 100,
+      "spd": 910
+    }
+  },
+  "141303": {
+    "mode": "origin_hard",
+    "name": {
+      "en": "Irregular Eggs",
+      "jp": "イレギュラーの卵",
+      "kr": "이레귤러 알",
+      "zh": "异型怪蛋",
+      "fr": "Œufs d'Irréguliers",
+      "es": "Huevos de Irregular"
+    },
+    "area": {
+      "en": "Confusion",
+      "jp": "混乱",
+      "kr": "혼란",
+      "zh": "混乱",
+      "fr": "Confusion",
+      "es": "Confusión"
+    },
+    "monsters": [
+      {
+        "id": "4111082",
+        "level": 201,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1
+      },
+      {
+        "id": "4111081",
+        "level": 201,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1,
+        "count": 2
+      },
+      {
+        "id": "4112081",
+        "level": 201,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 2
+      },
+      {
+        "id": "4111083",
+        "level": 201,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 2,
+        "count": 2
+      },
+      {
+        "id": "4113082",
+        "level": 201,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 3
+      },
+      {
+        "id": "4111083",
+        "level": 201,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 3,
+        "count": 2
+      }
+    ],
+    "season": 4,
+    "episode": 3,
+    "stage": 3,
+    "reward": "155103",
+    "adv": {
+      "atk": -535,
+      "hp": 800,
+      "spd": 910
+    }
+  },
+  "141304": {
+    "mode": "origin_hard",
+    "name": {
+      "en": "The Wrong Direction",
+      "jp": "間違った方向",
+      "kr": "잘못된 방향",
+      "zh": "错误的方向",
+      "fr": "La mauvaise direction",
+      "es": "El rumbo equivocado"
+    },
+    "area": {
+      "en": "Confusion",
+      "jp": "混乱",
+      "kr": "혼란",
+      "zh": "混乱",
+      "fr": "Confusion",
+      "es": "Confusión"
+    },
+    "monsters": [
+      {
+        "id": "4111074",
+        "level": 201,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1,
+        "count": 2
+      },
+      {
+        "id": "4111072",
+        "level": 201,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1
+      },
+      {
+        "id": "4212071",
+        "level": 201,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 2
+      },
+      {
+        "id": "4111072",
+        "level": 201,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 2,
+        "count": 2
+      },
+      {
+        "id": "4111074",
+        "level": 201,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 3
+      },
+      {
+        "id": "4111073",
+        "level": 201,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 3
+      },
+      {
+        "id": "4512072",
+        "level": 201,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 3
+      }
+    ],
+    "season": 4,
+    "episode": 3,
+    "stage": 4,
+    "reward": "155104",
+    "adv": {
+      "atk": -535,
+      "hp": 100,
+      "spd": 910
+    }
+  },
+  "141305": {
+    "mode": "origin_hard",
+    "name": {
+      "en": "Caught Off Guard",
+      "jp": "不意を突かれる",
+      "kr": "허를 찔리다",
+      "zh": "出其不意",
+      "fr": "Pris au dépourvu",
+      "es": "Tomados por sorpresa"
+    },
+    "area": {
+      "en": "Confusion",
+      "jp": "混乱",
+      "kr": "혼란",
+      "zh": "混乱",
+      "fr": "Confusion",
+      "es": "Confusión"
+    },
+    "monsters": [
+      {
+        "id": "4111081",
+        "level": 202,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1
+      },
+      {
+        "id": "4111082",
+        "level": 202,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1,
+        "count": 2
+      },
+      {
+        "id": "4111083",
+        "level": 202,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1
+      },
+      {
+        "id": "4112082",
+        "level": 202,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 2
+      },
+      {
+        "id": "4111081",
+        "level": 202,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 2,
+        "count": 2
+      },
+      {
+        "id": "4113081",
+        "level": 202,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 3
+      },
+      {
+        "id": "4111083",
+        "level": 202,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 3,
+        "count": 2
+      }
+    ],
+    "season": 4,
+    "episode": 3,
+    "stage": 5,
+    "reward": "155105",
+    "adv": {
+      "atk": -535,
+      "hp": 800,
+      "spd": 910
+    }
+  },
+  "141306": {
+    "mode": "origin_hard",
+    "name": {
+      "en": "Why Are You Here?",
+      "jp": "なぜあなたが？",
+      "kr": "어째서 당신이?",
+      "zh": "为什么是你？",
+      "fr": "Pourquoi vous ?",
+      "es": "¿Por qué tú?"
+    },
+    "area": {
+      "en": "Confusion",
+      "jp": "混乱",
+      "kr": "혼란",
+      "zh": "混乱",
+      "fr": "Confusion",
+      "es": "Confusión"
+    },
+    "monsters": [
+      {
+        "id": "4111074",
+        "level": 202,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1
+      },
+      {
+        "id": "4111073",
+        "level": 202,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1
+      },
+      {
+        "id": "4111072",
+        "level": 202,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1
+      },
+      {
+        "id": "4212072",
+        "level": 202,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 2
+      },
+      {
+        "id": "4111072",
+        "level": 202,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 2,
+        "count": 2
+      },
+      {
+        "id": "4111073",
+        "level": 202,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 3
+      },
+      {
+        "id": "4111074",
+        "level": 202,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 3
+      },
+      {
+        "id": "4512071",
+        "level": 202,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 3
+      }
+    ],
+    "season": 4,
+    "episode": 3,
+    "stage": 6,
+    "reward": "155106",
+    "adv": {
+      "atk": -535,
+      "hp": 100,
+      "spd": 910
+    }
+  },
+  "141307": {
+    "mode": "origin_hard",
+    "name": {
+      "en": "The Voice Inside the Egg",
+      "jp": "卵の中の声",
+      "kr": "알 속의 목소리",
+      "zh": "蛋中的声音",
+      "fr": "La voix dans l'œuf",
+      "es": "La voz dentro del huevo"
+    },
+    "area": {
+      "en": "Confusion",
+      "jp": "混乱",
+      "kr": "혼란",
+      "zh": "混乱",
+      "fr": "Confusion",
+      "es": "Confusión"
+    },
+    "monsters": [
+      {
+        "id": "4212071",
+        "level": 203,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 1
+      },
+      {
+        "id": "4111074",
+        "level": 203,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1,
+        "count": 2
+      },
+      {
+        "id": "4111073",
+        "level": 203,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 2,
+        "count": 2
+      },
+      {
+        "id": "4212071",
+        "level": 203,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 2
+      },
+      {
+        "id": "4512072",
+        "level": 203,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 3
+      },
+      {
+        "id": "4111072",
+        "level": 203,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 3,
+        "count": 2
+      }
+    ],
+    "season": 4,
+    "episode": 3,
+    "stage": 7,
+    "reward": "155107",
+    "adv": {
+      "atk": -535,
+      "hp": 100,
+      "spd": 910
+    }
+  },
+  "141308": {
+    "mode": "origin_hard",
+    "name": {
+      "en": "The End of the Hunt",
+      "jp": "狩りの終わり",
+      "kr": "사냥의 끝",
+      "zh": "狩猎的终结",
+      "fr": "La fin de la chasse",
+      "es": "El fin de la cacería"
+    },
+    "area": {
+      "en": "Confusion",
+      "jp": "混乱",
+      "kr": "혼란",
+      "zh": "混乱",
+      "fr": "Confusion",
+      "es": "Confusión"
+    },
+    "monsters": [
+      {
+        "id": "4111074",
+        "level": 203,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1,
+        "count": 2
+      },
+      {
+        "id": "4212072",
+        "level": 203,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 1
+      },
+      {
+        "id": "4212071",
+        "level": 203,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 2
+      },
+      {
+        "id": "4111073",
+        "level": 203,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 2,
+        "count": 2
+      },
+      {
+        "id": "4113071",
+        "level": 203,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 3
+      },
+      {
+        "id": "4111072",
+        "level": 203,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 3,
+        "count": 2
+      }
+    ],
+    "season": 4,
+    "episode": 3,
+    "stage": 8,
+    "reward": "155108",
+    "adv": {
+      "atk": -535,
+      "hp": 800,
+      "spd": 910
+    }
+  },
+  "141309": {
+    "mode": "origin_hard",
+    "name": {
+      "en": "The Old Man's Scheme",
+      "jp": "老人の策略",
+      "kr": "노인의 계략",
+      "zh": "老人的计谋",
+      "fr": "Le stratagème du vieil homme",
+      "es": "La estratagema del anciano"
+    },
+    "area": {
+      "en": "Confusion",
+      "jp": "混乱",
+      "kr": "혼란",
+      "zh": "混乱",
+      "fr": "Confusion",
+      "es": "Confusión"
+    },
+    "monsters": [
+      {
+        "id": "4212071",
+        "level": 204,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 1
+      },
+      {
+        "id": "4111074",
+        "level": 204,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1,
+        "count": 2
+      },
+      {
+        "id": "4111073",
+        "level": 204,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 2,
+        "count": 2
+      },
+      {
+        "id": "4212072",
+        "level": 204,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 2
+      },
+      {
+        "id": "4113072",
+        "level": 204,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 3
+      },
+      {
+        "id": "4111072",
+        "level": 204,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 3,
+        "count": 2
+      }
+    ],
+    "season": 4,
+    "episode": 3,
+    "stage": 9,
+    "reward": "155109",
+    "adv": {
+      "atk": -535,
+      "hp": 800,
+      "spd": 910
+    }
+  },
+  "141310": {
+    "mode": "origin_hard",
+    "name": {
+      "en": "Mounting Confusion",
+      "jp": "深まる混乱",
+      "kr": "가중되는 혼란",
+      "zh": "愈发混乱",
+      "fr": "Une confusion croissante",
+      "es": "Confusión creciente"
+    },
+    "area": {
+      "en": "Confusion",
+      "jp": "混乱",
+      "kr": "혼란",
+      "zh": "混乱",
+      "fr": "Confusion",
+      "es": "Confusión"
+    },
+    "monsters": [
+      {
+        "id": "4111073",
+        "level": 205,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1,
+        "count": 2
+      },
+      {
+        "id": "4111072",
+        "level": 205,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1
+      },
+      {
+        "id": "4111074",
+        "level": 205,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 2
+      },
+      {
+        "id": "4111073",
+        "level": 205,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 2,
+        "count": 2
+      },
+      {
+        "id": "4289001",
+        "level": 205,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 3
+      }
+    ],
+    "season": 4,
+    "episode": 3,
+    "stage": 10,
+    "reward": "155110",
     "adv": {
       "atk": -535,
       "hp": -175,

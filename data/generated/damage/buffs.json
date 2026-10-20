@@ -219,6 +219,40 @@
         "additiveAttack": true
       }
     ],
+    "4086029": [
+      {
+        "level": 1,
+        "type": "BT_KILL_UNDER_HP_RATE",
+        "targetType": "ME",
+        "createRate": 1000,
+        "stackCount": 1,
+        "buffDebuffType": "BUFF",
+        "applyingType": "OAT_RATE",
+        "value": 9999,
+        "callerSkillType": "SKT_RAGE_FINISH1,SKT_RAGE_FINISH2",
+        "createType": "PASSIVE",
+        "turnDuration": -1,
+        "isTypeOverlap": true,
+        "additiveAttack": true
+      }
+    ],
+    "4086030": [
+      {
+        "level": 1,
+        "type": "BT_REVERSE_HEAL_CAP",
+        "targetType": "ME",
+        "createRate": 1000,
+        "stackCount": 1,
+        "buffDebuffType": "BUFF",
+        "value": 100000,
+        "callerSkillType": "SKT_ALL",
+        "createType": "PASSIVE",
+        "turnDuration": -1,
+        "isTypeOverlap": true,
+        "additiveAttack": true,
+        "removeOnCasterDie": true
+      }
+    ],
     "1033801_1_1": [
       {
         "level": 1,
@@ -62236,6 +62270,118 @@
         "additiveAttack": true,
         "removeOnCasterDie": true,
         "tooltipId": 40860259
+      }
+    ],
+    "4086027_1": [
+      {
+        "level": 1,
+        "type": "BT_COOL_CHARGE",
+        "targetType": "ME",
+        "createRate": 1000,
+        "stackCount": 1,
+        "buffDebuffType": "BUFF",
+        "applyingType": "OAT_ADD",
+        "value": 1,
+        "callerSkillType": "SKT_ALL",
+        "createType": "ON_TURN_END_DEFENDER",
+        "conditionType": "CASTER_HAS_NOT_BUFF",
+        "conditionValue": 2,
+        "removeType": "IMMEDIATELY",
+        "additiveAttack": true
+      }
+    ],
+    "4086027_2": [
+      {
+        "level": 1,
+        "type": "BT_ACTION_GAUGE",
+        "targetType": "ME",
+        "createRate": 1000,
+        "stackCount": 1,
+        "buffDebuffType": "BUFF",
+        "applyingType": "OAT_RATE",
+        "value": 50,
+        "callerSkillType": "SKT_ALL",
+        "createType": "ON_TURN_END_DEFENDER",
+        "conditionType": "CASTER_DAMAGED",
+        "removeType": "IMMEDIATELY",
+        "additiveAttack": true
+      }
+    ],
+    "4086028_1": [
+      {
+        "level": 1,
+        "type": "BT_STAT_PREMIUM",
+        "targetType": "ME",
+        "createRate": 1000,
+        "stackCount": 1,
+        "buffDebuffType": "BUFF",
+        "stat": "ST_HP",
+        "applyingType": "OAT_ADD",
+        "value": 1000000,
+        "callerSkillType": "SKT_ALL",
+        "createType": "PASSIVE",
+        "turnDuration": -1,
+        "isIdOverlap": true,
+        "isTypeOverlap": true,
+        "additiveAttack": true
+      }
+    ],
+    "4086028_2": [
+      {
+        "level": 1,
+        "type": "BT_CURSE_ENHANCE",
+        "targetType": "ME",
+        "createRate": 1000,
+        "stackCount": 1,
+        "buffDebuffType": "DEBUFF_IGNORE_ALL",
+        "applyingType": "OAT_RATE",
+        "value": 500,
+        "callerSkillType": "SKT_ALL",
+        "createType": "PASSIVE",
+        "turnDuration": -1,
+        "isIdOverlap": true,
+        "isTypeOverlap": true,
+        "additiveAttack": true
+      }
+    ],
+    "4086028_3": [
+      {
+        "level": 1,
+        "type": "BT_STAT",
+        "targetType": "ENEMY_TEAM",
+        "createRate": 1000,
+        "stackCount": 1,
+        "buffDebuffType": "DEBUFF",
+        "stat": "ST_CRITICAL_DMG_RATE",
+        "applyingType": "OAT_ADD",
+        "value": -500,
+        "callerSkillType": "SKT_ALL",
+        "createType": "ON_TURN_END_DEFENDER",
+        "conditionType": "CASTER_DAMAGED_CRITICAL",
+        "turnDuration": 2,
+        "removeType": "ON_TURN_END",
+        "additiveAttack": true,
+        "tooltipId": 23
+      }
+    ],
+    "4086028_4": [
+      {
+        "level": 1,
+        "type": "BT_STAT",
+        "targetType": "ENEMY_TEAM",
+        "createRate": 1000,
+        "stackCount": 1,
+        "buffDebuffType": "DEBUFF",
+        "stat": "ST_PIERCE_POWER_RATE",
+        "applyingType": "OAT_RATE",
+        "value": -300,
+        "callerSkillType": "SKT_ALL",
+        "createType": "ON_TURN_END_DEFENDER",
+        "conditionType": "CASTER_DAMAGED_CRITICAL",
+        "turnDuration": 2,
+        "removeType": "ON_TURN_END",
+        "additiveAttack": true,
+        "tooltipId": 19
       }
     ],
     "4086031_1_1": [

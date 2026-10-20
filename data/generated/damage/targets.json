@@ -17118,6 +17118,83 @@
         }
       ]
     },
+    "4013081": {
+      "id": "4013081",
+      "element": "CET_DARK",
+      "class": "CCT_DEFENDER",
+      "subClass": "NONE",
+      "race": "CRT_ALIEN",
+      "basicStar": 2,
+      "baseStats": {
+        "HP": {
+          "min": 372,
+          "max": 55200
+        },
+        "WG": {
+          "min": 10,
+          "max": 35
+        },
+        "Speed": {
+          "min": 105,
+          "max": 160
+        },
+        "Atk": {
+          "min": 120,
+          "max": 5176
+        },
+        "Def": {
+          "min": 44,
+          "max": 1200
+        },
+        "DMGReduceRate": {
+          "min": 0,
+          "max": 100
+        },
+        "CriticalRate": {
+          "min": 100,
+          "max": 100
+        },
+        "CriticalDMGRate": {
+          "min": 1500,
+          "max": 1500
+        },
+        "BuffChance": {
+          "min": 26,
+          "max": 80
+        },
+        "BuffResist": {
+          "min": 53,
+          "max": 160
+        }
+      },
+      "rage": {
+        "trigger": "NONE",
+        "steps": [],
+        "breakBuffIds": ["BID_BREAK_1", "BID_BREAK_2", "BID_BREAK_3"]
+      },
+      "skills": [
+        {
+          "slot": 1,
+          "id": "110721"
+        },
+        {
+          "slot": 2,
+          "id": "110722"
+        },
+        {
+          "slot": 3,
+          "id": "110723"
+        },
+        {
+          "slot": 12,
+          "id": "120460"
+        },
+        {
+          "slot": 22,
+          "id": "110767"
+        }
+      ]
+    },
     "4013091": {
       "id": "4013091",
       "element": "CET_DARK",
@@ -34110,6 +34187,58 @@
         }
       ]
     },
+    "4111084": {
+      "id": "4111084",
+      "element": "CET_FIRE",
+      "class": "CCT_MAGE",
+      "subClass": "NONE",
+      "race": "CRT_ALIEN",
+      "basicStar": 1,
+      "baseStats": {
+        "HP": {
+          "min": 62,
+          "max": 9200
+        },
+        "Speed": {
+          "min": 79,
+          "max": 79
+        },
+        "Atk": {
+          "min": 49,
+          "max": 4500
+        },
+        "Def": {
+          "min": 37,
+          "max": 1000
+        },
+        "CriticalRate": {
+          "min": 100,
+          "max": 100
+        },
+        "CriticalDMGRate": {
+          "min": 1500,
+          "max": 1500
+        },
+        "BuffChance": {
+          "min": 16,
+          "max": 50
+        },
+        "BuffResist": {
+          "min": 20,
+          "max": 60
+        }
+      },
+      "skills": [
+        {
+          "slot": 1,
+          "id": "110716"
+        },
+        {
+          "slot": 22,
+          "id": "110767"
+        }
+      ]
+    },
     "4111091": {
       "id": "4111091",
       "element": "CET_EARTH",
@@ -35030,6 +35159,322 @@
         {
           "slot": 12,
           "id": "120434"
+        }
+      ]
+    },
+    "4113071": {
+      "id": "4113071",
+      "element": "CET_DARK",
+      "class": "CCT_DEFENDER",
+      "subClass": "NONE",
+      "race": "CRT_ALIEN",
+      "basicStar": 2,
+      "baseStats": {
+        "HP": {
+          "min": 372,
+          "max": 55200
+        },
+        "WG": {
+          "min": 10,
+          "max": 35
+        },
+        "Speed": {
+          "min": 105,
+          "max": 160
+        },
+        "Atk": {
+          "min": 120,
+          "max": 5176
+        },
+        "Def": {
+          "min": 44,
+          "max": 1200
+        },
+        "DMGReduceRate": {
+          "min": 0,
+          "max": 100
+        },
+        "CriticalRate": {
+          "min": 100,
+          "max": 100
+        },
+        "CriticalDMGRate": {
+          "min": 1500,
+          "max": 1500
+        },
+        "BuffChance": {
+          "min": 26,
+          "max": 80
+        },
+        "BuffResist": {
+          "min": 53,
+          "max": 160
+        },
+        "DamageBoost": {
+          "min": 0,
+          "max": 150
+        }
+      },
+      "rage": {
+        "trigger": "NONE",
+        "steps": [],
+        "breakBuffIds": ["BID_BREAK_1", "BID_BREAK_2", "BID_BREAK_3"]
+      },
+      "skills": [
+        {
+          "slot": 1,
+          "id": "110673"
+        },
+        {
+          "slot": 2,
+          "id": "110625"
+        },
+        {
+          "slot": 3,
+          "id": "110626"
+        },
+        {
+          "slot": 12,
+          "id": "120460"
+        },
+        {
+          "slot": 22,
+          "id": "110767"
+        }
+      ]
+    },
+    "4113072": {
+      "id": "4113072",
+      "element": "CET_FIRE",
+      "class": "CCT_MAGE",
+      "subClass": "NONE",
+      "race": "CRT_ALIEN",
+      "basicStar": 2,
+      "baseStats": {
+        "HP": {
+          "min": 372,
+          "max": 55200
+        },
+        "WG": {
+          "min": 10,
+          "max": 35
+        },
+        "Speed": {
+          "min": 105,
+          "max": 160
+        },
+        "Atk": {
+          "min": 120,
+          "max": 5176
+        },
+        "Def": {
+          "min": 44,
+          "max": 1200
+        },
+        "DMGReduceRate": {
+          "min": 0,
+          "max": 100
+        },
+        "CriticalRate": {
+          "min": 100,
+          "max": 100
+        },
+        "CriticalDMGRate": {
+          "min": 1500,
+          "max": 1500
+        },
+        "BuffChance": {
+          "min": 26,
+          "max": 80
+        },
+        "BuffResist": {
+          "min": 53,
+          "max": 160
+        },
+        "DamageBoost": {
+          "min": 0,
+          "max": 150
+        }
+      },
+      "rage": {
+        "trigger": "NONE",
+        "steps": [],
+        "breakBuffIds": ["BID_BREAK_1", "BID_BREAK_2", "BID_BREAK_3"]
+      },
+      "skills": [
+        {
+          "slot": 1,
+          "id": "110622"
+        },
+        {
+          "slot": 2,
+          "id": "110627"
+        },
+        {
+          "slot": 3,
+          "id": "110628"
+        },
+        {
+          "slot": 12,
+          "id": "120460"
+        },
+        {
+          "slot": 22,
+          "id": "110767"
+        }
+      ]
+    },
+    "4113081": {
+      "id": "4113081",
+      "element": "CET_DARK",
+      "class": "CCT_DEFENDER",
+      "subClass": "NONE",
+      "race": "CRT_ALIEN",
+      "basicStar": 2,
+      "baseStats": {
+        "HP": {
+          "min": 372,
+          "max": 55200
+        },
+        "WG": {
+          "min": 10,
+          "max": 35
+        },
+        "Speed": {
+          "min": 105,
+          "max": 160
+        },
+        "Atk": {
+          "min": 120,
+          "max": 5176
+        },
+        "Def": {
+          "min": 44,
+          "max": 1200
+        },
+        "DMGReduceRate": {
+          "min": 0,
+          "max": 100
+        },
+        "CriticalRate": {
+          "min": 100,
+          "max": 100
+        },
+        "CriticalDMGRate": {
+          "min": 1500,
+          "max": 1500
+        },
+        "BuffChance": {
+          "min": 26,
+          "max": 80
+        },
+        "BuffResist": {
+          "min": 53,
+          "max": 160
+        }
+      },
+      "rage": {
+        "trigger": "NONE",
+        "steps": [],
+        "breakBuffIds": ["BID_BREAK_1", "BID_BREAK_2", "BID_BREAK_3"]
+      },
+      "skills": [
+        {
+          "slot": 1,
+          "id": "110721"
+        },
+        {
+          "slot": 2,
+          "id": "110722"
+        },
+        {
+          "slot": 3,
+          "id": "110723"
+        },
+        {
+          "slot": 12,
+          "id": "120460"
+        },
+        {
+          "slot": 22,
+          "id": "110767"
+        }
+      ]
+    },
+    "4113082": {
+      "id": "4113082",
+      "element": "CET_FIRE",
+      "class": "CCT_MAGE",
+      "subClass": "NONE",
+      "race": "CRT_ALIEN",
+      "basicStar": 2,
+      "baseStats": {
+        "HP": {
+          "min": 372,
+          "max": 55200
+        },
+        "WG": {
+          "min": 10,
+          "max": 35
+        },
+        "Speed": {
+          "min": 105,
+          "max": 160
+        },
+        "Atk": {
+          "min": 120,
+          "max": 5176
+        },
+        "Def": {
+          "min": 44,
+          "max": 1200
+        },
+        "DMGReduceRate": {
+          "min": 0,
+          "max": 100
+        },
+        "CriticalRate": {
+          "min": 100,
+          "max": 100
+        },
+        "CriticalDMGRate": {
+          "min": 1500,
+          "max": 1500
+        },
+        "BuffChance": {
+          "min": 26,
+          "max": 80
+        },
+        "BuffResist": {
+          "min": 53,
+          "max": 160
+        }
+      },
+      "rage": {
+        "trigger": "NONE",
+        "steps": [],
+        "breakBuffIds": ["BID_BREAK_1", "BID_BREAK_2", "BID_BREAK_3"]
+      },
+      "skills": [
+        {
+          "slot": 1,
+          "id": "110724"
+        },
+        {
+          "slot": 2,
+          "id": "110725"
+        },
+        {
+          "slot": 3,
+          "id": "110726"
+        },
+        {
+          "slot": 12,
+          "id": "120460"
+        },
+        {
+          "slot": 22,
+          "id": "110767"
         }
       ]
     },
@@ -42469,6 +42914,108 @@
         {
           "slot": 15,
           "id": "131577"
+        }
+      ]
+    },
+    "4289001": {
+      "id": "4289001",
+      "element": "CET_DARK",
+      "class": "CCT_MAGE",
+      "subClass": "NONE",
+      "race": "CRT_ALIEN",
+      "basicStar": 3,
+      "baseStats": {
+        "HP": {
+          "min": 4340,
+          "max": 279680
+        },
+        "WG": {
+          "min": 30,
+          "max": 60
+        },
+        "Speed": {
+          "min": 55,
+          "max": 99
+        },
+        "Atk": {
+          "min": 185,
+          "max": 8186
+        },
+        "Def": {
+          "min": 123,
+          "max": 1300
+        },
+        "DMGReduceRate": {
+          "min": 1000,
+          "max": 1000
+        },
+        "CriticalDMGRate": {
+          "min": 1500,
+          "max": 1500
+        },
+        "BuffChance": {
+          "min": 63,
+          "max": 190
+        },
+        "BuffResist": {
+          "min": 200,
+          "max": 250
+        },
+        "DamageBoost": {
+          "min": 100,
+          "max": 500
+        }
+      },
+      "buffImmune": [
+        "BT_GOLDEN_CURSE",
+        "BT_FREEZE",
+        "BT_STONE",
+        "BT_STUN",
+        "BT_SILENCE",
+        "BT_AGGRO"
+      ],
+      "rage": {
+        "trigger": "TURN_COUNT",
+        "steps": [
+          {
+            "value": 4,
+            "duration": 7
+          }
+        ],
+        "breakBuffIds": ["BID_BREAK_1", "BID_BREAK_2", "BID_BREAK_3"]
+      },
+      "skills": [
+        {
+          "slot": 1,
+          "id": "110760"
+        },
+        {
+          "slot": 2,
+          "id": "1107611"
+        },
+        {
+          "slot": 3,
+          "id": "110762"
+        },
+        {
+          "slot": 12,
+          "id": "111029"
+        },
+        {
+          "slot": 13,
+          "id": "111030"
+        },
+        {
+          "slot": 15,
+          "id": "111031"
+        },
+        {
+          "slot": 16,
+          "id": "111032"
+        },
+        {
+          "slot": 22,
+          "id": "110767"
         }
       ]
     },
@@ -206915,6 +207462,74 @@
         }
       ]
     },
+    "110625": {
+      "id": "110625",
+      "type": "SKT_SECOND",
+      "subType": "ACTIVE",
+      "targetTeamType": "ENEMY",
+      "rangeType": "SINGLE",
+      "levels": [
+        {
+          "level": 1,
+          "damageFactor": 1200,
+          "wgReduce": 0,
+          "buffIds": ["common_monster_buff_72"],
+          "cool": 3,
+          "startCool": 1
+        }
+      ]
+    },
+    "110626": {
+      "id": "110626",
+      "type": "SKT_ULTIMATE",
+      "subType": "ACTIVE",
+      "targetTeamType": "ENEMY",
+      "rangeType": "ALL",
+      "levels": [
+        {
+          "level": 1,
+          "damageFactor": 1300,
+          "wgReduce": 0,
+          "buffIds": ["common_monster_buff_74"],
+          "cool": 3,
+          "startCool": 0
+        }
+      ]
+    },
+    "110627": {
+      "id": "110627",
+      "type": "SKT_SECOND",
+      "subType": "ACTIVE",
+      "targetTeamType": "ENEMY",
+      "rangeType": "SINGLE",
+      "levels": [
+        {
+          "level": 1,
+          "damageFactor": 1200,
+          "wgReduce": 0,
+          "buffIds": ["common_monster_buff_73"],
+          "cool": 3,
+          "startCool": 1
+        }
+      ]
+    },
+    "110628": {
+      "id": "110628",
+      "type": "SKT_ULTIMATE",
+      "subType": "ACTIVE",
+      "targetTeamType": "ENEMY",
+      "rangeType": "ALL",
+      "levels": [
+        {
+          "level": 1,
+          "damageFactor": 1300,
+          "wgReduce": 0,
+          "buffIds": ["common_monster_buff_75"],
+          "cool": 3,
+          "startCool": 0
+        }
+      ]
+    },
     "110633": {
       "id": "110633",
       "type": "SKT_FIRST",
@@ -207604,6 +208219,23 @@
             "common_monster_buff_107"
           ],
           "cool": 3,
+          "startCool": 0
+        }
+      ]
+    },
+    "110673": {
+      "id": "110673",
+      "type": "SKT_FIRST",
+      "subType": "ACTIVE",
+      "targetTeamType": "ENEMY",
+      "rangeType": "SINGLE",
+      "levels": [
+        {
+          "level": 1,
+          "damageFactor": 1000,
+          "wgReduce": 0,
+          "buffIds": [],
+          "cool": 0,
           "startCool": 0
         }
       ]
@@ -210171,6 +210803,81 @@
           "wgReduce": 0,
           "buffIds": [],
           "cool": 3,
+          "startCool": 0
+        }
+      ]
+    },
+    "111029": {
+      "id": "111029",
+      "type": "SKT_MONSTER_1",
+      "subType": "PASSIVE",
+      "targetTeamType": "ENEMY",
+      "rangeType": "ALL",
+      "levels": [
+        {
+          "level": 1,
+          "damageFactor": 1200,
+          "wgReduce": 0,
+          "buffIds": [
+            "4086027_1",
+            "4086027_2",
+            "irregular_33",
+            "irregular_37",
+            "irregular_35",
+            "4086030"
+          ],
+          "cool": 0,
+          "startCool": 0
+        }
+      ]
+    },
+    "111030": {
+      "id": "111030",
+      "type": "SKT_MONSTER_2",
+      "subType": "PASSIVE",
+      "targetTeamType": "NONE",
+      "rangeType": "NONE",
+      "levels": [
+        {
+          "level": 1,
+          "damageFactor": 0,
+          "wgReduce": 0,
+          "buffIds": ["4086028_1", "4086028_2", "4086028_3", "4086028_4"],
+          "cool": 0,
+          "startCool": 0
+        }
+      ]
+    },
+    "111031": {
+      "id": "111031",
+      "type": "SKT_RAGE_ENTER1",
+      "subType": "ACTIVE",
+      "targetTeamType": "ENEMY",
+      "rangeType": "SINGLE",
+      "levels": [
+        {
+          "level": 1,
+          "damageFactor": 0,
+          "wgReduce": 0,
+          "buffIds": ["Common_Rage_Buff_1_6"],
+          "cool": 0,
+          "startCool": 0
+        }
+      ]
+    },
+    "111032": {
+      "id": "111032",
+      "type": "SKT_RAGE_FINISH1",
+      "subType": "ACTIVE",
+      "targetTeamType": "ENEMY",
+      "rangeType": "ALL",
+      "levels": [
+        {
+          "level": 1,
+          "damageFactor": 7000,
+          "wgReduce": 0,
+          "buffIds": ["4500347_5_1", "4086029"],
+          "cool": 0,
           "startCool": 0
         }
       ]
@@ -253651,6 +254358,23 @@
           "buffIds": ["tower_hard_mob_40_03"],
           "cool": 0,
           "startCool": 0
+        }
+      ]
+    },
+    "1107611": {
+      "id": "1107611",
+      "type": "SKT_SECOND",
+      "subType": "ACTIVE",
+      "targetTeamType": "ENEMY",
+      "rangeType": "ALL",
+      "levels": [
+        {
+          "level": 1,
+          "damageFactor": 1200,
+          "wgReduce": 0,
+          "buffIds": [],
+          "cool": 4,
+          "startCool": 1
         }
       ]
     },

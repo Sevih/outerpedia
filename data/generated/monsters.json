@@ -30221,6 +30221,11 @@
         "hpLines": 10
       },
       {
+        "dungeon": "140305",
+        "level": 182,
+        "hpLines": 10
+      },
+      {
         "dungeon": "141103",
         "level": 191,
         "hpLines": 10
@@ -68335,6 +68340,41 @@
         "dungeon": "141205",
         "level": 197,
         "hpLines": 10
+      },
+      {
+        "dungeon": "141302",
+        "level": 200,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "141304",
+        "level": 201,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "141306",
+        "level": 202,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "141307",
+        "level": 203,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "141308",
+        "level": 203,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "141309",
+        "level": 204,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "141310",
+        "level": 205,
+        "hpLines": 10
       }
     ]
   },
@@ -68427,6 +68467,41 @@
         "dungeon": "141210",
         "level": 200,
         "hpLines": 10
+      },
+      {
+        "dungeon": "141302",
+        "level": 200,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "141304",
+        "level": 201,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "141306",
+        "level": 202,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "141307",
+        "level": 203,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "141308",
+        "level": 203,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "141309",
+        "level": 204,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "141310",
+        "level": 205,
+        "hpLines": 10
       }
     ]
   },
@@ -68508,6 +68583,36 @@
       {
         "dungeon": "141210",
         "level": 200,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "141304",
+        "level": 201,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "141306",
+        "level": 202,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "141307",
+        "level": 203,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "141308",
+        "level": 203,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "141309",
+        "level": 204,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "141310",
+        "level": 205,
         "hpLines": 10
       }
     ]
@@ -68596,6 +68701,21 @@
         "dungeon": "141208",
         "level": 198,
         "hpLines": 10
+      },
+      {
+        "dungeon": "141301",
+        "level": 200,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "141303",
+        "level": 201,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "141305",
+        "level": 202,
+        "hpLines": 10
       }
     ]
   },
@@ -68678,6 +68798,21 @@
         "dungeon": "141208",
         "level": 198,
         "hpLines": 10
+      },
+      {
+        "dungeon": "141301",
+        "level": 200,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "141303",
+        "level": 201,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "141305",
+        "level": 202,
+        "hpLines": 10
       }
     ]
   },
@@ -68750,6 +68885,16 @@
         "dungeon": "141202",
         "level": 195,
         "hpLines": 10
+      },
+      {
+        "dungeon": "141303",
+        "level": 201,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "141305",
+        "level": 202,
+        "hpLines": 10
       }
     ]
   },
@@ -68806,7 +68951,14 @@
     },
     "aiType": "attack",
     "pushBack": true,
-    "pushUp": true
+    "pushUp": true,
+    "spawns": [
+      {
+        "dungeon": "141301",
+        "level": 200,
+        "hpLines": 10
+      }
+    ]
   },
   "4111091": {
     "id": "4111091",
@@ -70061,6 +70213,11 @@
         "dungeon": "141208",
         "level": 198,
         "hpLines": 10
+      },
+      {
+        "dungeon": "141303",
+        "level": 201,
+        "hpLines": 10
       }
     ]
   },
@@ -70140,6 +70297,11 @@
       {
         "dungeon": "141208",
         "level": 198,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "141305",
+        "level": 202,
         "hpLines": 10
       }
     ]
@@ -71254,7 +71416,7 @@
     "element": "dark",
     "rarity": 2,
     "icon": "4013071",
-    "skills": ["110673", "110625", "110626", "120460", "110629", "110630", "110767"],
+    "skills": ["110673", "110625", "110626", "120460", "110767"],
     "stats": {
       "hp": {
         "min": 372,
@@ -71303,7 +71465,14 @@
     },
     "aiType": "attack",
     "pushBack": true,
-    "pushUp": true
+    "pushUp": true,
+    "spawns": [
+      {
+        "dungeon": "141308",
+        "level": 203,
+        "hpLines": 10
+      }
+    ]
   },
   "4113072": {
     "id": "4113072",
@@ -71321,7 +71490,7 @@
     "element": "fire",
     "rarity": 2,
     "icon": "4013072",
-    "skills": ["110622", "110627", "110628", "120460", "110631", "110632", "110767"],
+    "skills": ["110622", "110627", "110628", "120460", "110767"],
     "stats": {
       "hp": {
         "min": 372,
@@ -71370,7 +71539,14 @@
     },
     "aiType": "attack",
     "pushBack": true,
-    "pushUp": true
+    "pushUp": true,
+    "spawns": [
+      {
+        "dungeon": "141309",
+        "level": 204,
+        "hpLines": 10
+      }
+    ]
   },
   "4113081": {
     "id": "4113081",
@@ -71433,7 +71609,19 @@
     },
     "aiType": "attack",
     "pushBack": true,
-    "pushUp": true
+    "pushUp": true,
+    "spawns": [
+      {
+        "dungeon": "141301",
+        "level": 200,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "141305",
+        "level": 202,
+        "hpLines": 10
+      }
+    ]
   },
   "4113082": {
     "id": "4113082",
@@ -71496,7 +71684,14 @@
     },
     "aiType": "attack",
     "pushBack": true,
-    "pushUp": true
+    "pushUp": true,
+    "spawns": [
+      {
+        "dungeon": "141303",
+        "level": 201,
+        "hpLines": 10
+      }
+    ]
   },
   "4113091": {
     "id": "4113091",
@@ -84069,6 +84264,26 @@
         "dungeon": "141210",
         "level": 200,
         "hpLines": 10
+      },
+      {
+        "dungeon": "141304",
+        "level": 201,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "141307",
+        "level": 203,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "141308",
+        "level": 203,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "141309",
+        "level": 204,
+        "hpLines": 10
       }
     ]
   },
@@ -84163,6 +84378,26 @@
       {
         "dungeon": "141210",
         "level": 200,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "141302",
+        "level": 200,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "141306",
+        "level": 202,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "141308",
+        "level": 203,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "141309",
+        "level": 204,
         "hpLines": 10
       }
     ]
@@ -87652,6 +87887,98 @@
           "value": 10
         }
       ]
+    }
+  },
+  "4289001": {
+    "id": "4289001",
+    "name": {
+      "en": "Irregular Queen",
+      "jp": "イレギュラークイーン",
+      "kr": "이레귤러 퀸",
+      "zh": "异型怪女王",
+      "fr": "Reine irrégulière",
+      "es": "Reina Irregular"
+    },
+    "type": "area_boss",
+    "race": "alien",
+    "class": "mage",
+    "element": "dark",
+    "rarity": 3,
+    "icon": "4089001",
+    "skills": ["110760", "1107611", "110762", "111029", "111030", "111031", "111032", "110767"],
+    "stats": {
+      "hp": {
+        "min": 4340,
+        "max": 279680
+      },
+      "atk": {
+        "min": 185,
+        "max": 8186
+      },
+      "def": {
+        "min": 123,
+        "max": 1300
+      },
+      "speed": {
+        "min": 55,
+        "max": 99
+      },
+      "guard": {
+        "min": 30,
+        "max": 60
+      },
+      "critical_dmg": {
+        "min": 1500,
+        "max": 1500
+      },
+      "dmg_reduce": {
+        "min": 1000,
+        "max": 1000
+      },
+      "damage_boost": {
+        "min": 100,
+        "max": 500
+      },
+      "buff_chance": {
+        "min": 63,
+        "max": 190
+      },
+      "buff_resist": {
+        "min": 200,
+        "max": 250
+      }
+    },
+    "nickname": {
+      "en": "Emblem of Evolution",
+      "jp": "進化の化身",
+      "kr": "진화의 상징",
+      "zh": "进化象征",
+      "fr": "Emblème de Évolution",
+      "es": "Emblema Evolutivo"
+    },
+    "aiType": "attack",
+    "buffImmune": ["BT_GOLDEN_CURSE", "BT_FREEZE", "BT_STONE", "BT_STUN", "BT_SILENCE", "BT_AGGRO"],
+    "immuneTooltips": ["104", "34", "33", "35", "37", "32", "48"],
+    "spawns": [
+      {
+        "dungeon": "141310",
+        "level": 205,
+        "hpLines": 10
+      }
+    ],
+    "rage": {
+      "trigger": "turn_count",
+      "steps": [
+        {
+          "value": 4,
+          "duration": 7
+        }
+      ]
+    },
+    "statPremium": {
+      "hp": {
+        "flat": 1000000
+      }
     }
   },
   "4294004": {
@@ -114805,8 +115132,8 @@
         "max": 2160
       },
       "speed": {
-        "min": 81,
-        "max": 123
+        "min": 100,
+        "max": 100
       },
       "critical_rate": {
         "min": 50,
@@ -114876,8 +115203,8 @@
         "max": 2160
       },
       "speed": {
-        "min": 76,
-        "max": 115
+        "min": 100,
+        "max": 100
       },
       "critical_rate": {
         "min": 50,
@@ -124684,6 +125011,16 @@
         "dungeon": "141109",
         "level": 194,
         "hpLines": 10
+      },
+      {
+        "dungeon": "141302",
+        "level": 200,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "141306",
+        "level": 202,
+        "hpLines": 10
       }
     ]
   },
@@ -124762,6 +125099,16 @@
       {
         "dungeon": "141108",
         "level": 193,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "141304",
+        "level": 201,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "141307",
+        "level": 203,
         "hpLines": 10
       }
     ]

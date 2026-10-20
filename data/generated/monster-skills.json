@@ -24827,9 +24827,9 @@
       {
         "level": 1,
         "vars": {
-          "common_monster_passive_27": {
+          "common_monster_passive_47": {
             "c": "100%",
-            "t": "1"
+            "v": "5%"
           },
           "common_monster_passive_cp": {
             "c": "100%",
@@ -24844,26 +24844,28 @@
             "v": "50"
           }
         },
-        "tooltips": ["27"]
+        "tooltips": ["29"]
       }
     ],
     "desc": {
-      "en": "(Passive Effect)\\n<color=#ffd732>Upon death, grants [Buff_V_common_monster_passive_AP] Action Points and [Buff_V_common_monster_passive_cp] Chain Points for each enemy.</color>\\n\\nAt the start of battle, grants <color=#28d9ed>Invulnerability</color> for <color=#28d9ed>[Buff_T_common_monster_passive_27] turn(s)</color>.",
-      "jp": "(パッシブ効果)\\n<color=#ffd732>倒れた時、敵全体にAPを[Buff_V_common_monster_passive_AP]、CPを[Buff_V_common_monster_passive_cp]ずつ獲得させる。</color>\\n\\n戦闘開始時、自分に<color=#28d9ed>無敵</color>を<color=#28d9ed>[Buff_T_common_monster_passive_27]ターン</color>の間付与する。",
-      "kr": "(패시브 효과)\\n<color=#ffd732>사망 시 적 한 명당 AP [Buff_V_common_monster_passive_AP], CP [Buff_V_common_monster_passive_cp] 씩 회복시킵니다.</color>\\n\\n전투 시작 시 <color=#28d9ed>[Buff_T_common_monster_passive_27]턴</color> 동안 <color=#28d9ed>무적</color>을 얻습니다.",
-      "zh": "(被动效果)\\n<color=#ffd732>死亡时使每名敌人的AP恢复[Buff_V_common_monster_passive_AP]、CP恢复[Buff_V_common_monster_passive_cp]。</color>\\n\\n战斗开始时，获得<color=#28d9ed>无敌</color>效果，持续<color=#28d9ed>[Buff_T_common_monster_passive_27]回合</color>。",
-      "fr": "(effet passif)\\n<color=#ffd732> À la mort, accorde [Buff_V_common_monster_passive_AP] des PA et [Buff_V_common_monster_passive_cp] des points d'enchaînement pour chaque ennemi.</color>.\\n\\nAu début de la bataille, il accorde <color=#28d9ed>Invulnérabilité</color> pour <color=#28d9ed>[Buff_T_common_monster_passive_27] tour(s)</color>.",
-      "es": "(Efecto Pasivo)\\n<color=#ffd732>Al morir, otorga [Buff_V_common_monster_passive_AP] de AP y [Buff_V_common_monster_passive_cp] de CP por cada enemigo.</color>\\n\\nAl inicio del combate, se otorga a sí mismo <color=#28d9ed>Invulnerabilidad</color> durante <color=#28d9ed>[Buff_T_common_monster_passive_27] turno(s)</color>"
+      "en": "(Passive Effect)\\n<color=#ffd732>Upon death, grants [Buff_V_common_monster_passive_AP] Action Points and [Buff_V_common_monster_passive_cp] Chain Points for each enemy.</color>\\n\\nAt the start of battle, grants a <color=#28d9ed>Barrier</color>. Barrier strength is proportional to the caster's max Health.",
+      "jp": "(パッシブ効果)\\n<color=#ffd732>倒れた時、敵1体につきAPを[Buff_V_common_monster_passive_AP]、CPを[Buff_V_common_monster_passive_cp]ずつ回復する。</color>\\n\\n戦闘開始時、<color=#28d9ed>シールド</color>を獲得する。自分の最大HPが高いほどシールド量がUPする。",
+      "kr": "(패시브 효과)\\n<color=#ffd732>사망 시 적 한 명당 AP [Buff_V_common_monster_passive_AP], CP [Buff_V_common_monster_passive_cp] 씩 회복시킵니다.</color>\\n\\n전투 시작 시 <color=#28d9ed>실드</color>을 얻습니다. 실드량은 자신의 최대 체력에 비례합니다.",
+      "zh": "（被动效果）\\n<color=#ffd732>死亡时，每名敌人使AP恢复[Buff_V_common_monster_passive_AP]、CP恢复[Buff_V_common_monster_passive_cp]。</color>\\n\\n战斗开始时，获得<color=#28d9ed>护盾</color>。护盾量与自身最大生命值成正比。",
+      "fr": "(Effet passif)\\n<color=#ffd732>À sa mort, accorde [Buff_V_common_monster_passive_AP] PA et [Buff_V_common_monster_passive_cp] points de chaîne pour chaque ennemi.</color>\\n\\nAu début du combat, obtient une <color=#28d9ed>Barrière</color>. Sa puissance est proportionnelle aux PV max du lanceur.",
+      "es": "(Efecto pasivo)\\n<color=#ffd732>Al morir, otorga [Buff_V_common_monster_passive_AP] Puntos de Acción y [Buff_V_common_monster_passive_cp] Puntos de Cadena por cada enemigo.</color>\\n\\nAl inicio del combate, obtiene un <color=#28d9ed>Escudo</color>. La fuerza del Escudo es proporcional a su Salud máx."
     },
     "icon": "MT_Passive_1_Light",
     "effects": [
       {
-        "family": "protect",
+        "family": "shield",
         "category": "buff",
-        "type": "BT_INVINCIBLE",
+        "type": "BT_SHIELD_BASED_CASTER",
         "target": "me",
-        "buff": "common_monster_passive_27",
-        "tooltip": "27"
+        "buff": "common_monster_passive_47",
+        "stat": "hp",
+        "mode": "up",
+        "tooltip": "1029"
       },
       {
         "family": "resource",
@@ -42333,6 +42335,306 @@
     "target": "enemy",
     "range": "single",
     "icon": "MT_Attack_Hammer_1_Fire"
+  },
+  "111029": {
+    "id": "111029",
+    "name": {
+      "en": "Incomplete Reproduction: Omega",
+      "jp": "不完全再現：オメガ",
+      "kr": "불완전 재현 : 오메가",
+      "zh": "不完全再现：奥米伽",
+      "fr": "Reproduction incomplète: Omega",
+      "es": "Reproducción Incompleta: Omega"
+    },
+    "type": "monster_1",
+    "subType": "passive",
+    "offensive": true,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "damageFactor": 1200,
+        "vars": {
+          "4086030": {
+            "c": "100%",
+            "v": "100000"
+          },
+          "4086027_1": {
+            "c": "100%",
+            "v": "1"
+          },
+          "4086027_2": {
+            "c": "100%",
+            "v": "5%"
+          },
+          "irregular_33": {
+            "c": "100%",
+            "v": "100%",
+            "t": "1"
+          },
+          "irregular_37": {
+            "c": "100%"
+          },
+          "irregular_35": {
+            "c": "100%",
+            "t": "3"
+          }
+        }
+      }
+    ],
+    "desc": {
+      "en": "(Passive Effect) Fixed Damage taken cannot exceed <color=#28d9ed>100000</color>.\\nWhen hit, increases the caster's Priority by <color=#28d9ed>5%</color>, and when an enemy ends its action while the caster is not affected by <color=#28d9ed>Cursed</color>, decreases Skill Cooldown by <color=#28d9ed>1 turn</color>.\\nIf the caster has no debuffs, takes no WG damage.",
+      "jp": "(パッシブ効果)受ける固定ダメージは最大<color=#28d9ed>100000</color>を超えない。\\n攻撃を受けると自分の行動ゲージが<color=#28d9ed>5%</color>UPし、<color=#28d9ed>呪い</color>がない状態で敵の行動終了時、スキルクールタイムが<color=#28d9ed>1ターン</color>短縮する。\\n弱体効果がない場合、WGダメージを受けない。",
+      "kr": "(패시브 효과) 고정 피해로 받는 피해는 최대 <color=#28d9ed>100000</color>을 초과하지 않습니다.\\n피격 시 자신의 행동 게이지를 <color=#28d9ed>5%</color> 증가시키고 <color=#28d9ed>저주</color> 미 보유 상태에서 적 행동 종료 시 스킬 쿨타임을 <color=#28d9ed>1턴</color> 감소시킵니다.\\n약화 효과가 없다면 WG 피해를 받지 않습니다.",
+      "zh": "（被动效果）受到的固定伤害不会超过<color=#28d9ed>100000</color>。\\n受到攻击时，自身行动值提升<color=#28d9ed>5%</color>；未持有<color=#28d9ed>诅咒</color>时，敌方行动结束后技能冷却时间减少<color=#28d9ed>1回合</color>。\\n若没有弱化效果，则不会受到WG伤害。",
+      "fr": "(Effet passif) Les Dégâts fixes subis ne peuvent pas dépasser <color=#28d9ed>100000</color>.\\nLorsqu'il est touché, augmente la Priorité du lanceur de <color=#28d9ed>5 %</color>. Lorsqu'un ennemi termine son action alors que le lanceur n'est pas affecté par <color=#28d9ed>Malédiction</color>, réduit le temps de recharge de compétence de <color=#28d9ed>1 tour</color>.\\nSans malus, ne subit aucun dégât de WG.",
+      "es": "(Efecto pasivo) El Daño fijo recibido no puede superar <color=#28d9ed>100000</color>.\\nAl recibir un ataque, aumenta la Prioridad propia un <color=#28d9ed>5%</color>. Cuando un enemigo termina su acción mientras el lanzador no tiene <color=#28d9ed>Maldición</color>, reduce el Tiempo de recarga de habilidad en <color=#28d9ed>1 turno</color>.\\nSi no tiene efectos negativos, no recibe daño de WG."
+    },
+    "target": "enemy",
+    "range": "all",
+    "icon": "MT_Passive_1_Dark",
+    "effects": [
+      {
+        "family": "cooldown",
+        "category": "buff",
+        "type": "BT_COOL_CHARGE",
+        "target": "me",
+        "buff": "4086027_1",
+        "label": "SYS_BUFF_COOLTIME_REDUCE"
+      },
+      {
+        "family": "gauge",
+        "category": "buff",
+        "type": "BT_ACTION_GAUGE",
+        "target": "me",
+        "buff": "4086027_2",
+        "label": "SYS_BUFF_ACTION_GAUGE_UP"
+      },
+      {
+        "family": "stat",
+        "category": "neutral",
+        "type": "BT_STAT",
+        "target": "me",
+        "buff": "irregular_33",
+        "stat": "critical_rate",
+        "mode": "up",
+        "label": "SYS_BUFF_CRITICAL_RATE_UP"
+      },
+      {
+        "family": "protect",
+        "category": "buff",
+        "type": "BT_WG_INVINCIBLE",
+        "target": "me",
+        "buff": "irregular_37",
+        "label": "SYS_BUFF_WG_INVINCIBLE"
+      },
+      {
+        "family": "cc",
+        "category": "debuff",
+        "type": "BT_AGGRO",
+        "target": "enemy_team",
+        "buff": "irregular_35",
+        "tooltip": "32",
+        "caller": "second"
+      },
+      {
+        "family": "anti_heal",
+        "category": "buff",
+        "type": "BT_REVERSE_HEAL_CAP",
+        "target": "me",
+        "buff": "4086030"
+      }
+    ]
+  },
+  "111030": {
+    "id": "111030",
+    "name": {
+      "en": "Evolution: Favorite of the Legion",
+      "jp": "進化：軍団の寵児",
+      "kr": "진화 : 군단의 총아",
+      "zh": "进化：军团的宠儿",
+      "fr": "Evolution: Favori de la Légion",
+      "es": "Evolución: Favorita de la Legión"
+    },
+    "type": "monster_2",
+    "subType": "passive",
+    "offensive": false,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "vars": {
+          "4086028_1": {
+            "c": "100%",
+            "v": "1000000"
+          },
+          "4086028_2": {
+            "c": "100%",
+            "v": "50%"
+          },
+          "4086028_3": {
+            "c": "100%",
+            "v": "-50%",
+            "t": "2"
+          },
+          "4086028_4": {
+            "c": "100%",
+            "v": "30%",
+            "t": "2"
+          }
+        }
+      }
+    ],
+    "desc": {
+      "en": "(Passive Effect) Increases the caster's Health by <color=#28d9ed>1000000</color> and Cursed damage taken by <color=#28d9ed>50%</color>.\\nWhen hit by a Critical Hit, decreases all enemies' <color=#28d9ed>Critical Damage</color> and <color=#28d9ed>Penetration</color> for <color=#28d9ed>2 turns</color>.",
+      "jp": "(パッシブ効果)自分のHPが<color=#28d9ed>1000000</color>UPし、受ける呪いダメージが<color=#28d9ed>50%</color>UPする。\\n会心攻撃を受けた時、敵全体の<color=#28d9ed>会心ダメージ</color>と<color=#28d9ed>貫通力</color>を<color=#28d9ed>2ターン</color>の間DOWNさせる。",
+      "kr": "(패시브 효과) 자신의 체력이 <color=#28d9ed>1000000</color> 증가하고 받는 저주 피해가 <color=#28d9ed>50%</color> 증가합니다.\\n치명 공격 피격 시 적 전체의 <color=#28d9ed>치명 피해</color>와 <color=#28d9ed>관통력</color>을 <color=#28d9ed>2턴</color> 동안 감소시킵니다.",
+      "zh": "（被动效果）自身生命值提升<color=#28d9ed>1000000</color>，受到的诅咒伤害提升<color=#28d9ed>50%</color>。\\n受到暴击时，使全体敌人的<color=#28d9ed>暴击伤害</color>与<color=#28d9ed>穿透力</color>降低<color=#28d9ed>2回合</color>。",
+      "fr": "(Effet passif) Augmente les PV du lanceur de <color=#28d9ed>1000000</color> et les dégâts de Malédiction subis de <color=#28d9ed>50 %</color>.\\nLorsqu'il subit un Coup critique, réduit les <color=#28d9ed>Dégâts critiques</color> et la <color=#28d9ed>Pénétration</color> de tous les ennemis pendant <color=#28d9ed>2 tours</color>.",
+      "es": "(Efecto pasivo) Aumenta la Salud propia en <color=#28d9ed>1000000</color> y el daño de Maldición recibido un <color=#28d9ed>50%</color>.\\nAl recibir un Golpe Crítico, reduce el <color=#28d9ed>Daño Crítico</color> y la <color=#28d9ed>Penetración</color> de todos los enemigos durante <color=#28d9ed>2 turnos</color>."
+    },
+    "icon": "MT_Passive_1_Dark",
+    "effects": [
+      {
+        "family": "stat",
+        "category": "buff",
+        "type": "BT_STAT_PREMIUM",
+        "target": "me",
+        "buff": "4086028_1",
+        "stat": "hp",
+        "mode": "up"
+      },
+      {
+        "family": "dot",
+        "category": "debuff",
+        "type": "BT_CURSE_ENHANCE",
+        "target": "me",
+        "buff": "4086028_2"
+      },
+      {
+        "family": "stat",
+        "category": "debuff",
+        "type": "BT_STAT",
+        "target": "enemy_team",
+        "buff": "4086028_3",
+        "stat": "critical_dmg_rate",
+        "mode": "down",
+        "tooltip": "23"
+      },
+      {
+        "family": "stat",
+        "category": "debuff",
+        "type": "BT_STAT",
+        "target": "enemy_team",
+        "buff": "4086028_4",
+        "stat": "pierce_power_rate",
+        "mode": "down",
+        "tooltip": "19"
+      }
+    ]
+  },
+  "111031": {
+    "id": "111031",
+    "name": {
+      "en": "Enraged",
+      "jp": "狂暴化",
+      "kr": "광폭화",
+      "zh": "狂暴化",
+      "fr": "Rage",
+      "es": "Furia"
+    },
+    "type": "rage_enter1",
+    "subType": "active",
+    "offensive": false,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "vars": {
+          "Common_Rage_Buff_1_6": {
+            "c": "100%",
+            "v": "40%",
+            "t": "6"
+          }
+        },
+        "tooltips": ["1069"]
+      }
+    ],
+    "desc": {
+      "en": "Every 4 turns, enters the <color=#28d9ed>Berserk</color> state.\\n\\n<color=#28d9ed>Berserk Entry</color>: Grants the caster an undispellable Damage Reduction effect for 6 turns. Berserk lasts 6 turns.\\n\\n<color=#28d9ed>Berserk Finisher</color>: Used when Berserk ends.\\nInflicts <color=#28d9ed>Instant Death</color> on all enemies.",
+      "jp": "4ターンごとに<color=#28d9ed>【狂暴化】</color>状態に移行する。\\n\\n<color=#28d9ed>【狂暴化】</color>：自分に解除不可の被ダメージ減少効果を6ターン付与する。狂暴化は6ターンの間持続する。\\n\\n<color=#28d9ed>【必殺スキル】</color>：狂暴化終了時に使用。\\n敵全体を<color=#28d9ed>即死</color>させる。",
+      "kr": "4턴마다 <color=#28d9ed>광폭화</color> 상태로 전환합니다.\\n\\n<color=#28d9ed>광폭화 돌입</color> : 자신에게 해제되지 않는 피해 감소 효과를 6턴 동안 부여합니다. 광폭화는 6턴 동안 유지됩니다.\\n\\n<color=#28d9ed>광폭화 필살기</color> : 광폭화 종료 시 사용.\\n적 전체를 <color=#28d9ed>즉사</color> 시킵니다.",
+      "zh": "每4回合进入<color=#28d9ed>狂暴化</color>状态。\\n\\n<color=#28d9ed>狂暴化进入</color>：赋予自身6回合无法解除的伤害减少效果。狂暴化持续6回合。\\n\\n<color=#28d9ed>狂暴化终结技</color>：狂暴化结束时使用。\\n使全体敌人<color=#28d9ed>即死</color>。",
+      "fr": "Tous les 4 tours, entre en état de <color=#28d9ed>Furie</color>.\\n\\n<color=#28d9ed>Entrée en Furie</color> : accorde au lanceur un effet ineffaçable de Réduction des dégâts pendant 6 tours. La Furie dure 6 tours.\\n\\n<color=#28d9ed>Final de Furie</color> : utilisé à la fin de la Furie.\\nInflige <color=#28d9ed>Mort instantanée</color> à tous les ennemis.",
+      "es": "Cada 4 turnos, entra en estado de <color=#28d9ed>Furia</color>.\\n\\n<color=#28d9ed>Entrada en Furia</color>: Se otorga un efecto irremovible de Reducción de Daño durante 6 turnos. La Furia dura 6 turnos.\\n\\n<color=#28d9ed>Remate de Furia</color>: Se usa cuando termina la Furia.\\nInflige <color=#28d9ed>Muerte instantánea</color> a todos los enemigos."
+    },
+    "target": "enemy",
+    "range": "single",
+    "icon": "MT_Boss_Rage_Common_1",
+    "effects": [
+      {
+        "family": "stat",
+        "category": "buff",
+        "type": "BT_STAT",
+        "target": "me",
+        "buff": "Common_Rage_Buff_1_6",
+        "stat": "dmg_reduce_rate",
+        "mode": "up",
+        "tooltip": "1069"
+      }
+    ]
+  },
+  "111032": {
+    "id": "111032",
+    "name": {
+      "en": "",
+      "jp": "",
+      "kr": "",
+      "zh": "",
+      "fr": "",
+      "es": ""
+    },
+    "type": "rage_finish1",
+    "subType": "active",
+    "offensive": true,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "damageFactor": 7000,
+        "vars": {
+          "4086029": {
+            "c": "100%",
+            "v": "999.9%"
+          },
+          "4500347_5_1": {
+            "c": "100%",
+            "v": "999.9%"
+          }
+        }
+      }
+    ],
+    "target": "enemy",
+    "range": "all",
+    "icon": "MT_Boss_Rage_Common_1",
+    "effects": [
+      {
+        "family": "revive",
+        "category": "buff",
+        "type": "BT_KILL_UNDER_HP_RATE",
+        "target": "me",
+        "buff": "4500347_5_1",
+        "label": "SYS_BUFF_KILL_UNDER_HP_RATE"
+      },
+      {
+        "family": "revive",
+        "category": "buff",
+        "type": "BT_KILL_UNDER_HP_RATE",
+        "target": "me",
+        "buff": "4086029",
+        "label": "SYS_BUFF_KILL_UNDER_HP_RATE"
+      }
+    ]
   },
   "112531": {
     "id": "112531",
@@ -82491,31 +82793,33 @@
       {
         "level": 1,
         "vars": {
-          "common_monster_passive_27": {
+          "common_monster_passive_47": {
             "c": "100%",
-            "t": "1"
+            "v": "5%"
           }
         },
-        "tooltips": ["27"]
+        "tooltips": ["29"]
       }
     ],
     "desc": {
-      "en": "(Passive Effect)\\nAt the start of battle, grants <color=#28d9ed>Invulnerability</color> for <color=#28d9ed>[Buff_T_common_monster_passive_27] turn(s)</color>.",
-      "jp": "(パッシブ効果)\\n戦闘開始時、自分に<color=#28d9ed>無敵</color>を<color=#28d9ed>[Buff_T_common_monster_passive_27]ターン</color>の間付与する。",
-      "kr": "(패시브 효과)\\n전투 시작 시 <color=#28d9ed>[Buff_T_common_monster_passive_27]턴</color> 동안 <color=#28d9ed>무적</color>을 얻습니다.",
-      "zh": "(被动效果)\\n战斗开始时，获得<color=#28d9ed>无敌</color>效果，持续<color=#28d9ed>[Buff_T_common_monster_passive_27]回合</color>。",
-      "fr": "(effet passif)\\nAu début de la bataille, il accorde <color=#28d9ed>Invulnérabilité</color> pour <color=#28d9ed>[Buff_T_common_monster_passive_27] tour(s)</color>.",
-      "es": "(Efecto pasivo)\\nAl inicio batalla, otorga <color=#28d9ed>Invulnerabilidad</color> por <color=#28d9ed>[Buff_T_common_monster_passive_27] turno(s)</color>."
+      "en": "(Passive Effect)\\nAt the start of battle, grants a <color=#28d9ed>Barrier</color>. Barrier strength increases in proportion to the caster's max Health.",
+      "jp": "(パッシブ効果)\\n戦闘開始時、<color=#28d9ed>シールド</color>を獲得する。自分の最大HPが高いほどシールド量がUPする。",
+      "kr": "(패시브 효과)\\n전투 시작 시 <color=#28d9ed>실드</color>을 얻습니다. 실드량은 자신의 최대 체력에 비례하여 증가합니다.",
+      "zh": "（被动效果）\\n战斗开始时，获得<color=#28d9ed>护盾</color>。护盾量随自身最大生命值成比例增加。",
+      "fr": "(Effet passif)\\nAu début du combat, obtient une <color=#28d9ed>Barrière</color>. Sa puissance augmente proportionnellement aux PV max du lanceur.",
+      "es": "(Efecto pasivo)\\nAl inicio del combate, obtiene un <color=#28d9ed>Escudo</color>. La fuerza del Escudo aumenta en proporción a su Salud máx."
     },
     "icon": "MT_Passive_1_Light",
     "effects": [
       {
-        "family": "protect",
+        "family": "shield",
         "category": "buff",
-        "type": "BT_INVINCIBLE",
+        "type": "BT_SHIELD_BASED_CASTER",
         "target": "me",
-        "buff": "common_monster_passive_27",
-        "tooltip": "27"
+        "buff": "common_monster_passive_47",
+        "stat": "hp",
+        "mode": "up",
+        "tooltip": "1029"
       }
     ]
   },
@@ -129779,8 +130083,7 @@
           },
           "4084001_3_2": {
             "c": "100%",
-            "v": "75.5%",
-            "t": "4"
+            "v": "50%"
           },
           "4084001_3_3": {
             "c": "100%",
@@ -129791,12 +130094,12 @@
       }
     ],
     "desc": {
-      "en": "Attacks all enemies. Grants an irremovable <color=#28d9ed>Poisoned</color> for <color=#28d9ed>[Buff_T_4084001_3_1] turns</color>. Ignores Immunity on enemies without Increased Resilience.\n\\nRight after using this skill, does not trigger an enemy's Counterattack, Revenge, or Agile Response.",
-      "jp": "敵全体にダメージを与える。攻撃後、<color=#28d9ed>[Buff_T_4084001_3_1]ターン</color>の間、解除できない<color=#28d9ed>中毒</color>を付与する。効果抵抗がUPしていない敵の免疫を無視し、中毒効果を付与する。\\nこのスキルでは敵の反撃、復讐、迅速対応が発動しない。",
-      "kr": "적 전체를 공격합니다. 공격 후 대상 전체에게 <color=#28d9ed>[Buff_T_4084001_3_1]턴</color>동안 해제되지 않는 <color=#28d9ed>중독</color>을 부여합니다. 효과 저항이 증가하지 않은 적에게는 면역을 무시하고 해당 효과를 부여합니다. \\n이 스킬 직후에는 적의 반격, 복수, 신속 대응이 발동하지 않습니다.",
-      "zh": "攻击全体敌人。攻击后施加无法被解除的<color=#28d9ed>中毒</color>状态，持续<color=#28d9ed>[Buff_T_4084001_3_1]回合</color>。对效果抵抗未提升的敌人将无视免疫直接施加此效果。\\n此技能发动后，不会触发敌人的反击、复仇、迅速应对效果。",
-      "fr": "Attaque tous les ennemis. Octroie un irrémovible <color=#28d9ed>Poisonné</color> pour <color=#28d9ed>[Buff_T_4084001_3_1] tour(s)</color>. Ignore l'immunité sur les ennemis sans une résilience accrue.\n Juste après avoir utilisé cette comp., ne déclenche pas la contre-attaque, la vengeance ou la réponse agile d'un ennemi.",
-      "es": "Ataca a los enemigos y les inflige <color=#28d9ed>Envenenado</color> irremovible por <color=#28d9ed>[Buff_T_4084001_3_1] turno</color>, ignorando la Inmunidad si su Resistencia + no ha subedo.\\nJusto después de usar esta hab., no activa el Contraataque, la Venganza ni la Respuesta Ágil del enemigo."
+      "en": "Attacks all enemies. After attacking, inflicts irremovable <color=#28d9ed>Poisoned</color> on all targets for <color=#28d9ed>[Buff_T_4084001_3_1] turns</color>. Damage dealt to <color=#28d9ed>Poisoned</color> targets increases by <color=#28d9ed>50%</color>.\\nRight after using this skill, enemies cannot trigger Counterattack, Revenge, or Agile Response.",
+      "jp": "敵全体にダメージを与える。攻撃後、対象全体に解除不可の<color=#28d9ed>中毒</color>を<color=#28d9ed>[Buff_T_4084001_3_1]ターン</color>の間付与する。<color=#28d9ed>中毒</color>状態の対象に与えるダメージが<color=#28d9ed>50%</color>UPする。\\nこのスキルの直後、敵の反撃、復讐、迅速対応は発動しない。",
+      "kr": "적 전체를 공격합니다. 공격 후 대상 전체에게 <color=#28d9ed>[Buff_T_4084001_3_1]턴</color>동안 해제되지 않는 <color=#28d9ed>중독</color>을 부여합니다.<color=#28d9ed>중독</color> 보유 대상에게 주는 피해가 <color=#28d9ed>50%</color> 증가합니다.\\n이 스킬 직후에는 적의 반격, 복수, 신속 대응이 발동하지 않습니다.",
+      "zh": "攻击全体敌人。攻击后赋予全体目标无法解除的<color=#28d9ed>中毒</color>，持续<color=#28d9ed>[Buff_T_4084001_3_1]回合</color>。对持有<color=#28d9ed>中毒</color>的目标造成的伤害提升<color=#28d9ed>50%</color>。\\n使用此技能后，敌人无法触发反击、复仇或迅速应对。",
+      "fr": "Attaque tous les ennemis. Après l'attaque, inflige <color=#28d9ed>Poison</color> ineffaçable à toutes les cibles pendant <color=#28d9ed>[Buff_T_4084001_3_1] tours</color>. Les dégâts infligés aux cibles <color=#28d9ed>Empoisonnées</color> augmentent de <color=#28d9ed>50 %</color>.\\nJuste après cette compétence, les ennemis ne peuvent pas déclencher Contre-attaque, Vengeance ou Réaction agile.",
+      "es": "Ataca a todos los enemigos. Tras atacar, inflige <color=#28d9ed>Envenenado</color> irremovible a todos los objetivos durante <color=#28d9ed>[Buff_T_4084001_3_1] turnos</color>. El daño infligido a objetivos <color=#28d9ed>Envenenados</color> aumenta un <color=#28d9ed>50%</color>.\\nJusto después de usar esta habilidad, los enemigos no pueden activar Contraataque, Venganza ni Respuesta Ágil."
     },
     "target": "enemy",
     "range": "all",
@@ -129814,14 +130117,11 @@
         "caller": "ultimate"
       },
       {
-        "family": "dot",
-        "category": "debuff",
-        "type": "BT_DOT_POISON",
-        "target": "enemy_skill_target",
+        "family": "damage",
+        "category": "buff",
+        "type": "BT_DMG",
+        "target": "me",
         "buff": "4084001_3_2",
-        "stat": "atk",
-        "mode": "up",
-        "tooltip": "1004",
         "caller": "ultimate"
       },
       {
@@ -130249,12 +130549,12 @@
       }
     ],
     "desc": {
-      "en": "(Passive Effect)\\nAt the start of battle, increases the caster's <color=#28d9ed>Priority</color> by <color=#28d9ed>100%</color>, and inflicts 2 irremovable <color=#28d9ed>Burned</color> on all enemies for <color=#28d9ed>[Buff_T_4014005_4_3]turns</color>. (Ignores the target's Resilience and Immunity)\\n\\nIf Health is greater than <color=#28d9ed>80%</color>, does not take Weakness Gauge damage.\\n\\nAt the end of a Non-Defender enemy's turn, inflicts <color=#28d9ed>Burned</color> on the target for <color=#28d9ed>[Buff_T_4014005_4_6]</color> turns.\\n\\nIncreases Burned damage dealt by the caster by <color=#28d9ed>[Buff_V_4014005_4_5]</color>.",
-      "jp": "(パッシブ効果)\\n戦闘開始時、自分の<color=#28d9ed>行動ゲージ</color>が<color=#28d9ed>100%</color>UPし、敵全体に<color=#28d9ed>[Buff_T_4014005_4_3]ターン</color>の間、解除不可能な<color=#28d9ed>火傷</color>2個を付与する。(対象の効果抵抗及び免疫無視)\\n\\nHPが<color=#28d9ed>80%</color>を超えると、WGダメージを受けない。\\n\\n防御型ではない敵のターン終了時、対象に<color=#28d9ed>[Buff_T_4014005_4_6]ターン</color>の間、火傷を付与する。\\n\\n自分が与える火傷のダメージが<color=#28d9ed>[Buff_V_4014005_4_5]</color>UPする。",
-      "kr": "(패시브 효과)\\n전투 개시 시점에 자신의 <color=#28d9ed>행동 게이지</color>가 <color=#28d9ed>100%</color> 증가하고, 적 전체에게는 <color=#28d9ed>[Buff_T_4014005_4_3]턴</color> 동안 해제 불가능한 <color=#28d9ed>화상</color> 2개를 부여합니다. (대상의 효과저항 및 면역 무시)\\n\\n체력이 <color=#28d9ed>80%</color>를 초과한다면 WG 피해를 받지 않습니다.\\n\\n방어형이 아닌 적 턴 종료 시 대상에게 <color=#28d9ed>[Buff_T_4014005_4_6]턴</color> 동안 화상을 부여합니다.\\n\\n자신이 입히는 화상의 피해가 <color=#28d9ed>[Buff_V_4014005_4_5]</color> 증가합니다.",
-      "zh": "（被动效果）\\n战斗开始时，赋予全体敌人2层无法解除的<color=#28d9ed>烧伤</color>效果，持续<color=#28d9ed>[Buff_T_4014005_4_3]回合</color>（无视目标的效果抵抗与免疫）。\\n\\n若生命值超过<color=#28d9ed>90%</color>，则不会受到WG伤害。\\n\\n每当非防御型敌人结束回合时，赋予全体敌人<color=#28d9ed>[Buff_T_4014005_4_6_1]回合</color>的烧伤效果。\\n\\n自身造成的烧伤伤害提升<color=#28d9ed>[Buff_V_4014005_4_5]</color>。",
-      "fr": "(effet passif)\\nAu début de la bataille, accroît la couleur <color=#28d9ed>Prior.</color> par <color=#28d9ed>100%</color> et inflige 2 tour irrémovibles <color=#28d9ed>Brûlure</color> sur tous les ennemis pour <color=#28d9ed>[Buff_T_4014005_4_3]tours</color>. (Ignore la résilience et l'immunité de la cible)\\n\\nSi PV est supérieure à <color=#28d9ed>80%</color>, ne prend pas de lésions du gauge de faiblesse.\\n\\nÀ la fin d'un tour ennemi non-défendeur, inflige <color=#28d9ed>Brûlure</color> sur la cible pour <color=#28d9ed>[Buff_T_4014005_4_6]</color> tour(s).\\n\\nAccroît les DGT brûlés causés par l'utilisateur par <color=#28d9ed>[Buff_V_4014005_4_5]</color>.",
-      "es": "(Efecto Pasivo)\nAl inicio del combate, aumenta la <color=#28d9ed>Prior.</color> propio en <color=#28d9ed>100%</color>, e inflige 2 <color=#28d9ed>Quemadura</color> irremovibles a los enemigos por <color=#28d9ed>[Buff_T_4014005_4_3]turnos</color>. (Ignora la Resistencia y Inmunidad del objetivo)\n\nSi la Salud es mayor que <color=#28d9ed>80%</color>, no recibe daño de Gauge de Debilidad.\n\nAl final del turno de un enemigo No-Defensor, inflige <color=#28d9ed>Quemadura</color> al objetivo por <color=#28d9ed>[Buff_T_4014005_4_6]</color> turnos.\n\nAumenta el daño de Quemado infligido por el lanzador en <color=#28d9ed>[Buff_V_4014005_4_5]</color>."
+      "en": "(Passive Effect)\\nAt the start of battle, increases the caster's <color=#28d9ed>Priority</color> by <color=#28d9ed>100%</color> and inflicts 2 irremovable <color=#28d9ed>Burned</color> effects on all enemies for <color=#28d9ed>[Buff_T_4014005_4_3] turns</color>. (Ignores the targets' Resilience)\\n\\nIf Health is above <color=#28d9ed>80%</color>, takes no Weakness Gauge damage.\\n\\nAt the end of a non-Defender enemy's turn, inflicts Burned on that enemy for <color=#28d9ed>[Buff_T_4014005_4_6] turns</color>.\\n\\nIncreases Burned damage dealt by the caster by <color=#28d9ed>[Buff_V_4014005_4_5]</color>.",
+      "jp": "(パッシブ効果)\\n戦闘開始時、自分の<color=#28d9ed>行動ゲージ</color>が<color=#28d9ed>100%</color>UPし、敵全体に<color=#28d9ed>[Buff_T_4014005_4_3]ターン</color>の間、解除不可能な<color=#28d9ed>火傷</color>を2個付与する。(対象の効果抵抗を無視)\\n\\nHPが<color=#28d9ed>80%</color>を超えると、WGダメージを受けない。\\n\\n防御型ではない敵のターン終了時、対象に<color=#28d9ed>[Buff_T_4014005_4_6]ターン</color>の間、火傷を付与する。\\n\\n自分が与える火傷ダメージが<color=#28d9ed>[Buff_V_4014005_4_5]</color>UPする。",
+      "kr": "(패시브 효과)\\n전투 개시 시점에 자신의 <color=#28d9ed>행동 게이지</color>가 <color=#28d9ed>100%</color> 증가하고, 적 전체에게는 <color=#28d9ed>[Buff_T_4014005_4_3]턴</color> 동안 해제 불가능한 <color=#28d9ed>화상</color> 2개를 부여합니다. (대상의 효과저항 무시)\\n\\n체력이 <color=#28d9ed>80%</color>를 초과한다면 WG 피해를 받지 않습니다.\\n\\n방어형이 아닌 적 턴 종료 시 대상에게 <color=#28d9ed>[Buff_T_4014005_4_6]턴</color> 동안 화상을 부여합니다.\\n\\n자신이 입히는 화상의 피해가 <color=#28d9ed>[Buff_V_4014005_4_5]</color> 증가합니다.",
+      "zh": "（被动效果）\\n战斗开始时，自身<color=#28d9ed>行动值</color>提升<color=#28d9ed>100%</color>，并赋予全体敌人2层无法解除的<color=#28d9ed>烧伤</color>，持续<color=#28d9ed>[Buff_T_4014005_4_3]回合</color>。（无视目标的效果抵抗）\\n\\n若生命值超过<color=#28d9ed>80%</color>，则不会受到WG伤害。\\n\\n非防御型敌人回合结束时，赋予该目标<color=#28d9ed>[Buff_T_4014005_4_6]回合</color>的烧伤。\\n\\n自身造成的烧伤伤害提升<color=#28d9ed>[Buff_V_4014005_4_5]</color>。",
+      "fr": "(Effet passif)\\nAu début du combat, augmente la <color=#28d9ed>Priorité</color> du lanceur de <color=#28d9ed>100 %</color> et inflige 2 <color=#28d9ed>Brûlures</color> ineffaçables à tous les ennemis pendant <color=#28d9ed>[Buff_T_4014005_4_3] tours</color>. (Ignore la RÉS de la cible)\\n\\nSi les PV dépassent <color=#28d9ed>80 %</color>, ne subit aucun dégât de WG.\\n\\nÀ la fin du tour d'un ennemi autre qu'un Défenseur, inflige Brûlure à la cible pendant <color=#28d9ed>[Buff_T_4014005_4_6] tours</color>.\\n\\nAugmente les dégâts de Brûlure infligés par le lanceur de <color=#28d9ed>[Buff_V_4014005_4_5]</color>.",
+      "es": "(Efecto pasivo)\\nAl inicio del combate, aumenta la <color=#28d9ed>Prioridad</color> propia un <color=#28d9ed>100%</color> e inflige 2 <color=#28d9ed>Quemaduras</color> irremovibles a todos los enemigos durante <color=#28d9ed>[Buff_T_4014005_4_3] turnos</color>. (Ignora la Resistencia del objetivo)\\n\\nSi la Salud supera el <color=#28d9ed>80%</color>, no recibe daño de WG.\\n\\nAl final del turno de un enemigo que no sea Defensor, inflige Quemadura al objetivo durante <color=#28d9ed>[Buff_T_4014005_4_6] turnos</color>.\\n\\nAumenta el daño de Quemadura infligido por el lanzador en <color=#28d9ed>[Buff_V_4014005_4_5]</color>."
     },
     "icon": "MT_Passive_1_Fire",
     "effects": [
@@ -130532,19 +130832,20 @@
           },
           "4500265_2_3": {
             "c": "100%",
-            "t": "2"
+            "v": "5%",
+            "t": "3"
           }
         },
         "tooltips": ["98", "27"]
       }
     ],
     "desc": {
-      "en": "Removes <color=#28d9ed>all</color> debuffs from the caster and attacks the enemy.\\nAfter attacking, grants <color=#28d9ed>Stealth</color> to the caster and <color=#28d9ed>Invincibility</color> to all allies except the caster for <color=#28d9ed>[Buff_T_4500265_2_2]</color> turn(s).",
-      "jp": "自身に付与された弱体効果を<color=#28d9ed>すべて</color>解除し、敵に攻撃する。\\n攻撃後、<color=#28d9ed>[Buff_T_4500265_2_2]ターン</color>の間、\\n自身には<color=#28d9ed>隠れ身</color>を、自身を除く味方全体には<color=#28d9ed>無敵</color>を付与する。",
-      "kr": "자신에게 걸려 있는 약화 효과를 <color=#28d9ed>모두</color> 제거하고 적을 공격합니다.\\n공격 후 <color=#28d9ed>[Buff_T_4500265_2_2]턴</color> 동안 자신은 <color=#28d9ed>은신</color>, 자신을 제외한 아군 전체는 <color=#28d9ed>무적</color>을 획득합니다.",
-      "zh": "解除自身附带的<color=#28d9ed>所有</color>弱化效果，并攻击敌人。\\n攻击后，自身获得<color=#28d9ed>隐身</color>效果，除自身之外的全体友军获得<color=#28d9ed>无敌</color>效果，持续<color=#28d9ed>[Buff_T_4500265_2_2]</color>回合。",
-      "fr": "Supprime <color=#28d9ed>all</color> les débuffs du lanceur et attaque l'ennemi.\\nAprès avoir attaqué, accorde <color=#28d9ed>Furtivité</color> au lanceur et <color=#28d9ed>Invincibilité</color> à tous les alliés, sauf le lanceur pour <color=#28d9ed>[Buff_T_4500265_2_2]</color> tour(s).",
-      "es": "Elimina <color=#28d9ed>all</color> los efectos negativos propio y ataca al enemigo. Tras atacar,\\notorga <color=#28d9ed>Sigilo</color> al lanzador y <color=#28d9ed>Invincibility</color> a los aliados excepto el lanzador por <color=#28d9ed>[Buff_T_4500265_2_2]</color> turno(s)."
+      "en": "Removes <color=#28d9ed>all</color> debuffs from the caster and attacks the enemy.\\nAfter attacking, grants <color=#28d9ed>Stealth</color> to the caster and a <color=#28d9ed>Barrier</color> to all allies except the caster for <color=#28d9ed>[Buff_T_4500265_2_2] turns</color>. Barrier strength is proportional to Fatal's max Health.",
+      "jp": "自分に付与された弱体効果を<color=#28d9ed>すべて</color>解除し、敵にダメージを与える。\\n攻撃後、<color=#28d9ed>[Buff_T_4500265_2_2]ターン</color>の間、自分に<color=#28d9ed>隠れ身</color>を、自分を除く味方全体に<color=#28d9ed>シールド</color>を付与する。フェータルの最大HPが高いほどシールド量がUPする。",
+      "kr": "자신에게 걸려 있는 약화 효과를 <color=#28d9ed>모두</color> 제거하고 적을 공격합니다.\\n공격 후 <color=#28d9ed>[Buff_T_4500265_2_2]턴</color> 동안 자신은 <color=#28d9ed>은신</color>, 자신을 제외한 아군 전체는 <color=#28d9ed>실드</color>을 획득합니다. 실드량은 페이탈의 최대 체력에 비례합니다.",
+      "zh": "解除自身的<color=#28d9ed>所有</color>弱化效果，并攻击敌人。\\n攻击后，自身获得<color=#28d9ed>隐身</color>，除自身外的全体友军获得<color=#28d9ed>护盾</color>，持续<color=#28d9ed>[Buff_T_4500265_2_2]回合</color>。护盾量与法塔尔的最大生命值成正比。",
+      "fr": "Supprime <color=#28d9ed>tous</color> les malus du lanceur et attaque l'ennemi.\\nAprès l'attaque, accorde <color=#28d9ed>Furtivité</color> au lanceur et une <color=#28d9ed>Barrière</color> à tous les alliés sauf lui pendant <color=#28d9ed>[Buff_T_4500265_2_2] tours</color>. La puissance de la Barrière est proportionnelle aux PV max de Fatal.",
+      "es": "Elimina <color=#28d9ed>todos</color> los efectos negativos propios y ataca al enemigo.\\nTras atacar, otorga <color=#28d9ed>Sigilo</color> al lanzador y un <color=#28d9ed>Escudo</color> a todos los aliados excepto al lanzador durante <color=#28d9ed>[Buff_T_4500265_2_2] turnos</color>. La fuerza del Escudo es proporcional a la Salud máx. de Fatal."
     },
     "target": "enemy",
     "range": "single",
@@ -130568,12 +130869,15 @@
         "label": "SYS_BUFF_STEALTHED"
       },
       {
-        "family": "protect",
+        "family": "shield",
         "category": "buff",
-        "type": "BT_INVINCIBLE",
+        "type": "BT_SHIELD_BASED_CASTER",
         "target": "my_team_without_me",
         "buff": "4500265_2_3",
-        "tooltip": "27"
+        "stat": "atk",
+        "mode": "up",
+        "tooltip": "29",
+        "caller": "first"
       }
     ]
   },
@@ -131847,12 +132151,12 @@
       }
     ],
     "desc": {
-      "en": "Attacks the enemy. On hit, triggers a <color=#28d9ed>Critical Hit</color>. This attack ignores <color=#28d9ed>100%</color> of the target's Defense, but also reduces all of the target's <color=#28d9ed>Skill Cooldowns</color>.",
-      "jp": "敵単体にダメージを与える。命中時、<color=#28d9ed>会心ダメージ</color>が発生する。この攻撃は対象の防御力を<color=#28d9ed>100％</color>無視するが、攻撃された対象の<color=#28d9ed>スキルターン</color>を初期化させる。",
-      "kr": "적을 공격합니다. 명중 시 <color=#28d9ed>치명 공격</color>이 발생합니다. 이 공격은 대상의 방어력을 <color=#28d9ed>100%</color> 무시하지만, 공격 받은 대상의 <color=#28d9ed>스킬 쿨타임</color>을 모두 감소시킵니다.",
-      "zh": "攻击敌人。命中时，触发<color=#28d9ed>暴击</color>。该攻击无视目标<color=#28d9ed>100%</color>的防御力，但会减少受到攻击目标的所有<color=#28d9ed>技能冷却时间</color>。",
-      "fr": "ATQ l'ennemi. Au toucher, déclenche un <color=#28d9ed>Critique Hit</color>. Cette attaque ignore <color=#28d9ed>100%</color> de la DÉF de la cible, mais réduit aussi toutes les cibles <color=#28d9ed>temps de recharge des compétences</color>.",
-      "es": "Ataque al enemigo. Al golpear, activa <color=#28d9ed>Golpe Crítico</color>. Ignora el <color=#28d9ed>100%</color> de Defensa del objetivo y reduce sus <color=#28d9ed>tiempos de recarga de las habilidades</color>."
+      "en": "Attacks the enemy. On hit, triggers a <color=#28d9ed>Critical Hit</color>. This attack ignores <color=#28d9ed>100%</color> of the target's Defense, but resets all of the target's <color=#28d9ed>Skill Cooldowns</color>.",
+      "jp": "敵単体にダメージを与える。命中時、<color=#28d9ed>会心</color>が発生する。この攻撃は対象の防御力を<color=#28d9ed>100％</color>無視するが、攻撃された対象の<color=#28d9ed>スキルターン</color>を初期化する。",
+      "kr": "적을 공격합니다. 명중 시 <color=#28d9ed>치명 공격</color>이 발생합니다. 이 공격은 대상의 방어력을 <color=#28d9ed>100%</color> 무시하지만, 공격 받은 대상의 <color=#28d9ed>스킬 쿨타임</color>을 초기화 시킵니다.",
+      "zh": "攻击敌人。命中时触发<color=#28d9ed>暴击</color>。该攻击无视目标<color=#28d9ed>100%</color>的防御力，但会重置受到攻击目标的所有<color=#28d9ed>技能冷却时间</color>。",
+      "fr": "Attaque l'ennemi. À l'impact, déclenche un <color=#28d9ed>Coup critique</color>. Cette attaque ignore <color=#28d9ed>100 %</color> de la DÉF de la cible, mais réinitialise tous ses <color=#28d9ed>temps de recharge des compétences</color>.",
+      "es": "Ataca al enemigo. Al golpear, activa un <color=#28d9ed>Golpe Crítico</color>. Este ataque ignora el <color=#28d9ed>100%</color> de la Defensa del objetivo, pero reinicia todos sus <color=#28d9ed>tiempos de recarga de habilidades</color>."
     },
     "target": "enemy",
     "range": "single",
@@ -182138,10 +182442,6 @@
             "v": "1000",
             "t": "1"
           },
-          "2000081_2_2": {
-            "c": "100%",
-            "v": "25%"
-          },
           "2000081_2_3": {
             "c": "100%",
             "v": "25"
@@ -182154,12 +182454,12 @@
       }
     ],
     "desc": {
-      "en": "(Triggered Effect) When an ally <color=#28d9ed>Mage</color> attacks, activates an additional attack on the enemy with the highest Attack. After attacking, increases Priority of the caster by <color=#28d9ed>[Buff_V_2000081_2_2]</color>.",
-      "jp": "(発動効果)<color=#28d9ed>魔法型</color>の味方が攻撃時、攻撃力が最も高い敵単体に追加攻撃を与える。攻撃後、自分の行動ゲージが<color=#28d9ed>[Buff_V_2000081_2_2]</color>UPする。",
-      "kr": "(발동 효과) 아군의 <color=#28d9ed>마법형</color> 캐릭터가 공격했을 때 공격력이 가장 높은 적에게 추가 공격을 합니다. 공격 후 자신의 행동 게이지가 <color=#28d9ed>[Buff_V_2000081_2_2]</color> 증가합니다.",
-      "zh": "(触发效果)友军中<color=#28d9ed>魔法型</color>角色攻击时，对攻击力最高的敌人发动额外攻击。攻击后，自身行动值提升<color=#28d9ed>[Buff_V_2000081_2_2]</color>。",
-      "fr": "(Triggered Effect) Lorsqu'un allié <color=#28d9ed>Mage</color> attaque, active une attaque suppl. contre l'ennemi avec la plus haute ATQ. Après l'attaque, accroît la priorité propre par <color=#28d9ed>[Buff_V_2000081_2_2]</color>.",
-      "es": "(Efecto Activado) Cuando un aliado <color=#28d9ed>Mago</color> ataca, activa un ataque adicional al enemigo con el Ataque más alto. Después de atacar, aumenta la Prioridad del lanzador en <color=#28d9ed>[Buff_V_2000081_2_2]</color>."
+      "en": "(Triggered Effect) When an allied <color=#28d9ed>Mage</color> attacks, performs an additional attack on the enemy with the highest Attack.",
+      "jp": "(発動効果)味方の<color=#28d9ed>魔法型</color>キャラが攻撃時、攻撃力が最も高い敵に追加攻撃する。",
+      "kr": "(발동 효과) 아군의 <color=#28d9ed>마법형</color> 캐릭터가 공격했을 때 공격력이 가장 높은 적에게 추가 공격을 합니다.",
+      "zh": "（触发效果）我方<color=#28d9ed>魔法型</color>角色攻击时，对攻击力最高的敌人发动额外攻击。",
+      "fr": "(Effet déclenché) Lorsqu'un allié <color=#28d9ed>Mage</color> attaque, effectue une attaque supplémentaire contre l'ennemi ayant l'ATQ la plus élevée.",
+      "es": "(Efecto activado) Cuando un aliado <color=#28d9ed>Mago</color> ataca, realiza un ataque adicional contra el enemigo con el Ataque más alto."
     },
     "target": "enemy",
     "range": "single",
@@ -182179,15 +182479,6 @@
         "target": "me",
         "buff": "2000081_2_1_1",
         "label": "SYS_BUFF_ADDITIVE_ATTACK"
-      },
-      {
-        "family": "gauge",
-        "category": "buff",
-        "type": "BT_ACTION_GAUGE",
-        "target": "me",
-        "buff": "2000081_2_2",
-        "label": "SYS_BUFF_ACTION_GAUGE_UP",
-        "caller": "second"
       },
       {
         "family": "gauge",
@@ -182389,10 +182680,6 @@
             "v": "1000",
             "t": "1"
           },
-          "2000082_2_2": {
-            "c": "100%",
-            "v": "25%"
-          },
           "2000082_2_3": {
             "c": "100%",
             "v": "100%",
@@ -182408,12 +182695,12 @@
       }
     ],
     "desc": {
-      "en": "(Triggered Effect) When an ally <color=#28d9ed>Ranger</color> attacks, activates an additional attack on the enemy with the highest Speed. After attacking, increases Priority of the caster by <color=#28d9ed>[Buff_V_2000082_2_2]</color>, and grants increased Effectiveness to ally <color=#28d9ed>Mages</color> and <color=#28d9ed>Rangers</color> for <color=#28d9ed>[Buff_T_2000082_2_3] turn(s)</color>.",
-      "jp": "(発動効果)<color=#28d9ed>スピード型</color>の味方が攻撃時、スピードが最も高い敵単体に追加攻撃を与える。攻撃後、自分の行動ゲージが<color=#28d9ed>[Buff_V_2000082_2_2]</color>UPし、<color=#28d9ed>魔法型</color>と<color=#28d9ed>スピード型</color>の味方の効果命中を<color=#28d9ed>[Buff_T_2000082_2_3]ターン</color>の間UPさせる。",
-      "kr": "(발동 효과) 아군의 <color=#28d9ed>속도형</color> 캐릭터가 공격했을 때 속도가 가장 높은 적에게 추가 공격을 합니다. 공격 후 자신의 행동 게이지가 <color=#28d9ed>[Buff_V_2000082_2_2]</color> 증가하며, 아군의 <color=#28d9ed>마법형</color>과 <color=#28d9ed>속도형</color> 캐릭터의 효과 적중을 <color=#28d9ed>[Buff_T_2000082_2_3]턴</color> 동안 증가시킵니다.",
-      "zh": "(触发效果)友军中<color=#28d9ed>速度型</color>角色攻击时，对速度最高的敌人发动额外攻击。攻击后，自身行动值提升<color=#28d9ed>[Buff_V_2000082_2_2]</color>，并使友军中<color=#28d9ed>魔法型</color>和<color=#28d9ed>速度型</color>角色的效果命中提升，持续<color=#28d9ed>[Buff_T_2000082_2_3]回合</color>。",
-      "fr": "(effet déclenchement) lorsqu'un allye est un allye<color=#28d9ed>Rangers,</color>attaque, active une attaque supplémentaire contre l'ennemi avec la vitesse la plus élevée. Après attaque, augmente la priorité du lanceur par le lanceur par priorité du lanceur par la vitesse la plus élevée.<color=#28d9ed>[Buff_V_2000082_2_2]</color>, et subventions accrue Efficacité à l'égard des alliés<color=#28d9ed>- Des sages</color>et<color=#28d9ed>Rangers</color>- Oui, mais il y a un peu de temps.<color=#28d9ed>[Buff_T_2000082_2_3]Tour(s)</color>.",
-      "es": "(Efecto activado) Cuando un aliado <color=#28d9ed>Ranger</color> ataca, activa un ataque adicional contra el enemigo con la Velocidad más alta. Tras atacar, aumenta la Prioridad del lanzador en <color=#28d9ed>[Buff_V_2000082_2_2]</color> y otorga mayor Eficacia a los aliados <color=#28d9ed>Mages</color> y <color=#28d9ed>Rangers</color> durante <color=#28d9ed>[Buff_T_2000082_2_3] turno(s)</color>."
+      "en": "(Triggered Effect) When an allied <color=#28d9ed>Ranger</color> attacks, performs an additional attack on the enemy with the highest Speed. Increases the Effectiveness of allied <color=#28d9ed>Mages</color> and <color=#28d9ed>Rangers</color> for <color=#28d9ed>[Buff_T_2000082_2_3] turns</color>.",
+      "jp": "(発動効果)<color=#28d9ed>スピード型</color>の味方が攻撃時、スピードが最も高い敵単体に追加攻撃を与える。<color=#28d9ed>魔法型</color>と<color=#28d9ed>スピード型</color>の味方の効果命中を<color=#28d9ed>[Buff_T_2000082_2_3]ターン</color>の間UPさせる。",
+      "kr": "(발동 효과) 아군의 <color=#28d9ed>속도형</color> 캐릭터가 공격했을 때 속도가 가장 높은 적에게 추가 공격을 합니다.아군의 <color=#28d9ed>마법형</color>과 <color=#28d9ed>속도형</color> 캐릭터의 효과 적중을 <color=#28d9ed>[Buff_T_2000082_2_3]턴</color> 동안 증가시킵니다.",
+      "zh": "（触发效果）我方<color=#28d9ed>速度型</color>角色攻击时，对速度最高的敌人发动额外攻击。使我方<color=#28d9ed>魔法型</color>与<color=#28d9ed>速度型</color>角色的效果命中提升，持续<color=#28d9ed>[Buff_T_2000082_2_3]回合</color>。",
+      "fr": "(Effet déclenché) Lorsqu'un allié <color=#28d9ed>Ranger</color> attaque, effectue une attaque supplémentaire contre l'ennemi ayant la VIT la plus élevée. Augmente l'Efficacité des alliés <color=#28d9ed>Mages</color> et <color=#28d9ed>Rangers</color> pendant <color=#28d9ed>[Buff_T_2000082_2_3] tours</color>.",
+      "es": "(Efecto activado) Cuando un aliado <color=#28d9ed>Explorador</color> ataca, realiza un ataque adicional contra el enemigo con mayor Velocidad. Aumenta la Efectividad de los aliados <color=#28d9ed>Magos</color> y <color=#28d9ed>Exploradores</color> durante <color=#28d9ed>[Buff_T_2000082_2_3] turnos</color>."
     },
     "target": "enemy",
     "range": "single",
@@ -182433,15 +182720,6 @@
         "target": "me",
         "buff": "2000082_2_1_1",
         "label": "SYS_BUFF_ADDITIVE_ATTACK"
-      },
-      {
-        "family": "gauge",
-        "category": "buff",
-        "type": "BT_ACTION_GAUGE",
-        "target": "me",
-        "buff": "2000082_2_2",
-        "label": "SYS_BUFF_ACTION_GAUGE_UP",
-        "caller": "second"
       },
       {
         "family": "stat",
@@ -260757,6 +261035,47 @@
         "tooltip": "1027"
       }
     ]
+  },
+  "1107611": {
+    "id": "1107611",
+    "name": {
+      "en": "Completion: Mutation Spread",
+      "jp": "完成：変異体拡散",
+      "kr": "완성 : 변이체 확산",
+      "zh": "完成：变异体扩散",
+      "fr": "Completion: Mutation Spread",
+      "es": "Completación: Propagación de la Mutación"
+    },
+    "type": "second",
+    "subType": "active",
+    "offensive": true,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "damageFactor": 1200,
+        "cool": 4,
+        "startCool": 1,
+        "tooltips": ["32"],
+        "vars": {
+          "irregular_35": {
+            "c": "100%",
+            "t": "3"
+          }
+        }
+      }
+    ],
+    "desc": {
+      "en": "Attacks all enemies.\\nRemoves all <color=#28d9ed>buffs</color> from all enemies, and inflicts <color=#28d9ed>Taunted</color> for <color=#28d9ed>[Buff_T_irregular_35] turn(s)</color>.\\nIf this attack scores a critical hit, removes all <color=#28d9ed>debuffs</color> from the caster.",
+      "jp": "敵全体にダメージを与える。\\n敵全体の<color=#28d9ed>強化効果</color>をすべて解除し、<color=#28d9ed>[Buff_T_irregular_35]ターン</color>の間<color=#28d9ed>挑発</color>する。\\nこのスキルで会心が発生した場合、自分の<color=#28d9ed>弱体効果</color>をすべて解除する。",
+      "kr": "적 전체를 공격합니다.\\n적 전체의 <color=#28d9ed>강화 효과</color>를 모두 해제하고, <color=#28d9ed>[Buff_T_irregular_35]턴</color> 동안 <color=#28d9ed>도발</color>을 부여합니다.\\n이 공격이 치명 공격으로 적중할 경우 자신의 <color=#28d9ed>약화 효과</color>를 모두 해제합니다.",
+      "zh": "攻击全体敌人。\\n解除全体敌人的所有<color=#28d9ed>强化效果</color>，并造成<color=#28d9ed>挑衅</color>效果，持续<color=#28d9ed>[Buff_T_irregular_35]回合</color>。\\n当该攻击以暴击命中时，解除自身所有<color=#28d9ed>弱化效果</color>。",
+      "fr": "Attaque tous les ennemis.\\nSupprime tous les <color=#28d9ed>Bonus</color> de tous les ennemis et inflige <color=#28d9ed>Provoqué</color> pour <color=#28d9ed>[Buff_T_irregular_35] tour(s)</color>.\\nSi cette attaque marque un coup critique, enlève tous les <color=#28d9ed>malus</color> propre.",
+      "es": "Ataca a los enemigos.\nElimina todas las <color=#28d9ed>mejoras</color> de los enemigos e inflige <color=#28d9ed>Provocado</color> por <color=#28d9ed>[Buff_T_irregular_35] turno(s)</color>.\nSi este ataque es un golpe crítico, elimina todas las <color=#28d9ed>efectos negativos</color> propio."
+    },
+    "target": "enemy",
+    "range": "all",
+    "icon": "Skill_Second_4089001"
   },
   "1110171": {
     "id": "1110171",
