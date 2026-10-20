@@ -1,5 +1,5 @@
 {
-  "resVersion": "1.11.408",
+  "resVersion": "1.11.500",
   "characters": {
     "2000001": {
       "id": "2000001",
@@ -32522,7 +32522,9 @@
             "MAGE_PASSIVE_2",
             "2000086_passive",
             "2000086_passive_2",
-            "2000086_passive_3"
+            "2000086_passive_3",
+            "2000086_2_4",
+            "2000086_2_5"
           ],
           "cool": 0,
           "startCool": 0
@@ -128353,41 +128355,41 @@
       "levels": [
         {
           "level": 1,
-          "damageFactor": 1080,
+          "damageFactor": 1480,
           "wgReduce": 1,
-          "buffIds": ["2000086_2_1", "2000086_2_2", "2000086_2_3"],
+          "buffIds": ["2000086_2_1", "2000086_2_2", "2000086_2_3", "2000086_2_6"],
           "cool": 4,
           "startCool": 4
         },
         {
           "level": 2,
-          "damageFactor": 1180,
+          "damageFactor": 1580,
           "wgReduce": 2,
-          "buffIds": ["2000086_2_1", "2000086_2_2", "2000086_2_3"],
+          "buffIds": ["2000086_2_1", "2000086_2_2", "2000086_2_3", "2000086_2_6"],
           "cool": 4,
           "startCool": 4
         },
         {
           "level": 3,
-          "damageFactor": 1180,
+          "damageFactor": 1580,
           "wgReduce": 2,
-          "buffIds": ["2000086_2_1", "2000086_2_2", "2000086_2_3"],
+          "buffIds": ["2000086_2_1", "2000086_2_2", "2000086_2_3", "2000086_2_6"],
           "cool": 3,
           "startCool": 3
         },
         {
           "level": 4,
-          "damageFactor": 1180,
+          "damageFactor": 1680,
           "wgReduce": 3,
-          "buffIds": ["2000086_2_1", "2000086_2_2", "2000086_2_3"],
+          "buffIds": ["2000086_2_1", "2000086_2_2", "2000086_2_3", "2000086_2_6"],
           "cool": 3,
           "startCool": 3
         },
         {
           "level": 5,
-          "damageFactor": 1380,
+          "damageFactor": 1880,
           "wgReduce": 3,
-          "buffIds": ["2000086_2_1", "2000086_2_2", "2000086_2_3"],
+          "buffIds": ["2000086_2_1", "2000086_2_2", "2000086_2_3", "2000086_2_6"],
           "cool": 3,
           "startCool": 3
         }
@@ -128445,41 +128447,41 @@
       "levels": [
         {
           "level": 1,
-          "damageFactor": 1590,
+          "damageFactor": 1990,
           "wgReduce": 2,
-          "buffIds": ["2000086_3_1", "2000086_3_2", "2000086_3_3", "2000086_3_4"],
+          "buffIds": ["2000086_3_1", "2000086_3_2", "2000086_3_3", "2000086_3_4", "2000086_3_5"],
           "cool": 5,
           "startCool": 5
         },
         {
           "level": 2,
-          "damageFactor": 1690,
+          "damageFactor": 2090,
           "wgReduce": 3,
-          "buffIds": ["2000086_3_1", "2000086_3_2", "2000086_3_3", "2000086_3_4"],
+          "buffIds": ["2000086_3_1", "2000086_3_2", "2000086_3_3", "2000086_3_4", "2000086_3_5"],
           "cool": 5,
           "startCool": 5
         },
         {
           "level": 3,
-          "damageFactor": 1690,
+          "damageFactor": 2090,
           "wgReduce": 3,
-          "buffIds": ["2000086_3_1", "2000086_3_2", "2000086_3_3", "2000086_3_4"],
+          "buffIds": ["2000086_3_1", "2000086_3_2", "2000086_3_3", "2000086_3_4", "2000086_3_5"],
           "cool": 4,
           "startCool": 4
         },
         {
           "level": 4,
-          "damageFactor": 1890,
+          "damageFactor": 2290,
           "wgReduce": 3,
-          "buffIds": ["2000086_3_1", "2000086_3_2", "2000086_3_3", "2000086_3_4"],
+          "buffIds": ["2000086_3_1", "2000086_3_2", "2000086_3_3", "2000086_3_4", "2000086_3_5"],
           "cool": 4,
           "startCool": 4
         },
         {
           "level": 5,
-          "damageFactor": 2090,
+          "damageFactor": 2490,
           "wgReduce": 4,
-          "buffIds": ["2000086_3_1", "2000086_3_2", "2000086_3_3", "2000086_3_4"],
+          "buffIds": ["2000086_3_1", "2000086_3_2", "2000086_3_3", "2000086_3_4", "2000086_3_5"],
           "cool": 4,
           "startCool": 4
         }
@@ -128745,7 +128747,7 @@
           "buffIds": [
             "trancendent_8_random_curse_1",
             "trancendent_8_random_curse_2",
-            "trancendent_8_ap"
+            "trancendent_8_buff_chance_100%"
           ],
           "cool": 0,
           "startCool": 0
@@ -128757,9 +128759,9 @@
           "buffIds": [
             "trancendent_8_random_curse_1",
             "trancendent_8_random_curse_2",
-            "trancendent_8_ap",
             "trancendent_8_buff_chance_100%",
-            "trancendent_8_seal_counter"
+            "trancendent_8_seal_counter",
+            "trancendent_8_2000086_1"
           ],
           "cool": 0,
           "startCool": 0
@@ -128771,9 +128773,8 @@
           "buffIds": [
             "trancendent_8_random_curse_1",
             "trancendent_8_random_curse_2",
-            "trancendent_8_ap",
-            "trancendent_8_seal_counter",
             "trancendent_8_buff_chance_100%",
+            "trancendent_8_seal_counter",
             "trancendent_8_2000086_1",
             "trancendent_8_2000086_2",
             "trancendent_8_2000086_3"
@@ -128896,7 +128897,7 @@
         {
           "level": 1,
           "damageFactor": 1300,
-          "wgReduce": 1,
+          "wgReduce": 2,
           "buffIds": ["2000086_u_1", "2000086_u_1"],
           "cool": 4,
           "startCool": 4
@@ -128904,7 +128905,7 @@
         {
           "level": 2,
           "damageFactor": 1400,
-          "wgReduce": 2,
+          "wgReduce": 3,
           "buffIds": ["2000086_u_1", "2000086_u_1"],
           "cool": 4,
           "startCool": 4
@@ -128912,7 +128913,7 @@
         {
           "level": 3,
           "damageFactor": 1400,
-          "wgReduce": 2,
+          "wgReduce": 3,
           "buffIds": ["2000086_u_1", "2000086_u_1"],
           "cool": 3,
           "startCool": 3
@@ -128920,7 +128921,7 @@
         {
           "level": 4,
           "damageFactor": 1500,
-          "wgReduce": 3,
+          "wgReduce": 4,
           "buffIds": ["2000086_u_1", "2000086_u_1"],
           "cool": 3,
           "startCool": 3
@@ -128928,7 +128929,7 @@
         {
           "level": 5,
           "damageFactor": 1500,
-          "wgReduce": 3,
+          "wgReduce": 4,
           "buffIds": ["2000086_u_1", "2000086_u_1"],
           "cool": 3,
           "startCool": 3
@@ -129003,7 +129004,7 @@
         {
           "level": 1,
           "damageFactor": 1300,
-          "wgReduce": 1,
+          "wgReduce": 2,
           "buffIds": ["2000086_u_1", "2000086_u_1", "2000086_u_1"],
           "cool": 4,
           "startCool": 4
@@ -129011,7 +129012,7 @@
         {
           "level": 2,
           "damageFactor": 1400,
-          "wgReduce": 2,
+          "wgReduce": 3,
           "buffIds": ["2000086_u_1", "2000086_u_1", "2000086_u_1"],
           "cool": 4,
           "startCool": 4
@@ -129019,7 +129020,7 @@
         {
           "level": 3,
           "damageFactor": 1400,
-          "wgReduce": 2,
+          "wgReduce": 3,
           "buffIds": ["2000086_u_1", "2000086_u_1", "2000086_u_1"],
           "cool": 3,
           "startCool": 3
@@ -129027,7 +129028,7 @@
         {
           "level": 4,
           "damageFactor": 1500,
-          "wgReduce": 3,
+          "wgReduce": 4,
           "buffIds": ["2000086_u_1", "2000086_u_1", "2000086_u_1"],
           "cool": 3,
           "startCool": 3
@@ -129035,7 +129036,7 @@
         {
           "level": 5,
           "damageFactor": 1500,
-          "wgReduce": 3,
+          "wgReduce": 4,
           "buffIds": ["2000086_u_1", "2000086_u_1", "2000086_u_1"],
           "cool": 3,
           "startCool": 3
@@ -129110,7 +129111,7 @@
         {
           "level": 1,
           "damageFactor": 1755,
-          "wgReduce": 1,
+          "wgReduce": 2,
           "buffIds": [
             "2000086_u_1",
             "2000086_u_1",
@@ -129124,7 +129125,7 @@
         {
           "level": 2,
           "damageFactor": 1855,
-          "wgReduce": 2,
+          "wgReduce": 3,
           "buffIds": [
             "2000086_u_1",
             "2000086_u_1",
@@ -129138,7 +129139,7 @@
         {
           "level": 3,
           "damageFactor": 1855,
-          "wgReduce": 2,
+          "wgReduce": 3,
           "buffIds": [
             "2000086_u_1",
             "2000086_u_1",
@@ -129152,7 +129153,7 @@
         {
           "level": 4,
           "damageFactor": 1955,
-          "wgReduce": 3,
+          "wgReduce": 4,
           "buffIds": [
             "2000086_u_1",
             "2000086_u_1",
@@ -129166,7 +129167,7 @@
         {
           "level": 5,
           "damageFactor": 1955,
-          "wgReduce": 3,
+          "wgReduce": 4,
           "buffIds": [
             "2000086_u_1",
             "2000086_u_1",

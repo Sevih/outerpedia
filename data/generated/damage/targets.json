@@ -1,5 +1,5 @@
 {
-  "resVersion": "1.11.408",
+  "resVersion": "1.11.500",
   "targets": {
     "400101": {
       "id": "400101",
@@ -51834,8 +51834,8 @@
           "max": 108192
         },
         "Speed": {
-          "min": 81,
-          "max": 123
+          "min": 90,
+          "max": 90
         },
         "Atk": {
           "min": 132,
@@ -51894,8 +51894,8 @@
           "max": 108192
         },
         "Speed": {
-          "min": 76,
-          "max": 115
+          "min": 90,
+          "max": 90
         },
         "Atk": {
           "min": 144,
@@ -52239,8 +52239,8 @@
           "max": 108192
         },
         "Speed": {
-          "min": 81,
-          "max": 123
+          "min": 100,
+          "max": 100
         },
         "Atk": {
           "min": 132,
@@ -52303,8 +52303,8 @@
           "max": 108192
         },
         "Speed": {
-          "min": 76,
-          "max": 115
+          "min": 100,
+          "max": 100
         },
         "Atk": {
           "min": 144,
@@ -205255,7 +205255,7 @@
           "damageFactor": 0,
           "wgReduce": 0,
           "buffIds": [
-            "common_monster_passive_27",
+            "common_monster_passive_47",
             "common_monster_passive_cp",
             "common_monster_passive_ap"
           ],
@@ -215648,7 +215648,7 @@
           "level": 1,
           "damageFactor": 0,
           "wgReduce": 0,
-          "buffIds": ["common_monster_passive_27"],
+          "buffIds": ["common_monster_passive_47"],
           "cool": 0,
           "startCool": 0
         }
@@ -237468,7 +237468,7 @@
           "level": 1,
           "damageFactor": 1700,
           "wgReduce": 0,
-          "buffIds": ["2000081_2_1", "2000081_2_2", "2000081_2_3", "2000081_2_4"],
+          "buffIds": ["2000081_2_1", "2000081_2_3", "2000081_2_4"],
           "cool": 4,
           "startCool": 4
         }
@@ -237519,7 +237519,7 @@
           "level": 1,
           "damageFactor": 1800,
           "wgReduce": 0,
-          "buffIds": ["2000082_2_1", "2000082_2_2", "2000082_2_3", "2000082_2_4"],
+          "buffIds": ["2000082_2_1", "2000082_2_3", "2000082_2_4"],
           "cool": 4,
           "startCool": 4
         }

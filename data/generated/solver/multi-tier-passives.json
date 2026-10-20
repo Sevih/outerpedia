@@ -2380,7 +2380,7 @@
       {
         "unlockLevel": 10,
         "isAdd": true,
-        "desc": "All allies' DMG dealt to targets inflicted with Cursed increases by <color=#28d9ed>+50%</color>"
+        "desc": "When using Bite ‘Em, Kitsu!, inflicts Unbuffable on all enemies for 3 turns"
       }
     ]
   },

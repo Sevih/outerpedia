@@ -13626,7 +13626,7 @@
     "recommendedSets": ["1", "12", "13"],
     "ignoreDefense": ["kit", "transcend"],
     "tags": ["premium", "ignore-defense"],
-    "appearances": ["2010119", "2010120", "2020119", "2020120"],
+    "appearances": ["2010119", "2010120", "2020119", "2020120", "2030119", "2030120"],
     "costumes": [
       {
         "id": "96",
@@ -13662,7 +13662,7 @@
       },
       {
         "id": "110",
-        "model": "2020120",
+        "model": "2030119",
         "name": {
           "en": "Cheeky Moon Bunny Luna",
           "jp": "生意気な月ウサギ・ルナ",
