@@ -1019,6 +1019,12 @@
     "left": 2,
     "bottom": 2
   },
+  "at_thumbnailcharacterruntime/CT_2010100": {
+    "w": 180,
+    "h": 344,
+    "left": 2,
+    "bottom": 2
+  },
   "at_thumbnailcharacterruntime/CT_2010101": {
     "w": 180,
     "h": 344,
@@ -1666,6 +1672,12 @@
     "h": 116,
     "left": 5,
     "bottom": 3
+  },
+  "at_thumbnailcharacterruntime/CT_Account_Frame_Full_Moon": {
+    "w": 116,
+    "h": 116,
+    "left": 2,
+    "bottom": 1
   },
   "at_thumbnailcharacterruntime/CT_Account_Frame_Halo": {
     "w": 116,

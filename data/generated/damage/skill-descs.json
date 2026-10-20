@@ -13450,44 +13450,16 @@
     },
     "8602": {
       "desc": {
-        "en": "Attacks all enemies with Heavy Strike.\nFor each target damaged, increases Priority of the caster by <color=#28d9ed>[Buff_V_2000086_2_2]</color>, and has a <color=#28d9ed>[Buff_C_2000086_2_3]</color> chance to inflict Cursed on all targets for <color=#28d9ed>[Buff_T_2000086_2_3] turn(s)</color>. (Irremovable)",
-        "jp": "敵全体に強撃でダメージを与える。\nダメージを与えた対象の数に応じて自分の行動ゲージが<color=#28d9ed>[Buff_V_2000086_2_2]</color>UPし、対象全体に<color=#28d9ed>[Buff_C_2000086_2_3]</color>の確率で、呪いを<color=#28d9ed>[Buff_T_2000086_2_3]ターン</color>の間付与する。(解除不可)",
-        "kr": "적 전체를 강격으로 공격합니다. \n피해를 준 대상마다 자신의 행동 게이지가 <color=#28d9ed>[Buff_V_2000086_2_2]</color> 증가하고, 대상 전체에게 <color=#28d9ed>[Buff_C_2000086_2_3]</color> 확률로 <color=#28d9ed>[Buff_T_2000086_2_3]턴</color> 동안 저주를 부여합니다. (해제 불가)",
-        "zh": "强击全体敌人。\n每对1个目标造成伤害，自身的行动值提升<color=#28d9ed>[Buff_V_2000086_2_2]</color>，并有<color=#28d9ed>[Buff_C_2000086_2_3]</color>的几率对全体目标造成诅咒效果，持续<color=#28d9ed>[Buff_T_2000086_2_3]回合</color>。(无法解除)",
-        "fr": "Attaque tous les ennemis avec la lourde grève.\nPour chaque cible endommagée, accroît la priorité propre par <color=#28d9ed>[Buff_V_2000086_2_2]</color>, et a une <color=#28d9ed>[Buff_C_2000086_2_3]</color> chance d'infliger malins sur toutes les cibles pour <color=#28d9ed>[Buff_T_2000086_2_3] tour(s)</color>. (Irremovible) (Irremovible)",
-        "es": "Ataca a los enemigos con un Golpe Pesado.\\nPor cada objetivo dañado, sube la Prior. propio en <color=#28d9ed>[Buff_V_2000086_2_2]</color>, y tiene una <color=#28d9ed>[Buff_C_2000086_2_3]</color> probabilidad de infligir Maldición a todos los objetivos por <color=#28d9ed>[Buff_T_2000086_2_3] turno(s)</color>. (Irremovible)"
+        "en": "(Passive Effect) At the start of battle, inflicts <color=#28d9ed>Cursed</color> on all enemies for <color=#28d9ed>2 turns</color>. (Irremovable)\\nWhen a target affected by <color=#28d9ed>Cursed</color> ends its turn, increases the caster's Priority by <color=#28d9ed>10%</color>.\\n\\n(Active Effect) Attacks all enemies with Heavy Strike.\\nFor each target damaged, increases the caster's Priority by <color=#28d9ed>[Buff_V_2000086_2_2]</color> and inflicts <color=#28d9ed>Cursed</color> on all targets for <color=#28d9ed>[Buff_T_2000086_2_3] turns</color>. (Irremovable)\\nDecreases the <color=#28d9ed>Attack</color> of all <color=#28d9ed>Water</color> enemies for <color=#28d9ed>2 turns</color>.",
+        "jp": "(パッシブ効果)戦闘開始時、敵全体に<color=#28d9ed>呪い</color>を<color=#28d9ed>2ターン</color>の間付与する。(解除不可)\\n<color=#28d9ed>呪い</color>を持つ対象のターン終了時、自分の行動ゲージが<color=#28d9ed>10%</color>UPする。\\n\\n(アクティブ効果)敵全体に強撃でダメージを与える。\\nダメージを与えた対象の数に応じて自分の行動ゲージが<color=#28d9ed>[Buff_V_2000086_2_2]</color>UPし、対象全体に<color=#28d9ed>呪い</color>を<color=#28d9ed>[Buff_T_2000086_2_3]ターン</color>の間付与する。(解除不可)\\n<color=#28d9ed>水属性</color>の敵全体の<color=#28d9ed>攻撃力</color>を<color=#28d9ed>2ターン</color>の間DOWNさせる。",
+        "kr": "(패시브 효과) 전투 시작 시 적 전체에게 <color=#28d9ed>2턴</color> 동안 <color=#28d9ed>저주</color>를 부여하고 (해제 불가)\\n <color=#28d9ed>저주</color> 보유 대상 행동 종료 시 자신의 행동 게이지를 <color=#28d9ed>10%</color> 증가시킵니다.\\n\\n(엑티브 효과) 적 전체를 강격으로 공격합니다.\\n피해를 준 대상마다 자신의 행동 게이지가 <color=#28d9ed>[Buff_V_2000086_2_2]</color> 증가하고, 대상 전체에게 <color=#28d9ed>[Buff_T_2000086_2_3]턴</color> 동안 <color=#28d9ed>저주</color>를 부여합니다.(해제 불가)\\n<color=#28d9ed>수속성</color> 적 전체의 <color=#28d9ed>공격력</color>을 <color=#28d9ed>2턴</color> 동안 감소시킵니다.",
+        "zh": "（被动效果）战斗开始时，赋予全体敌人<color=#28d9ed>诅咒</color><color=#28d9ed>2回合</color>。（无法解除）\\n持有<color=#28d9ed>诅咒</color>的目标回合结束时，自身行动值提升<color=#28d9ed>10%</color>。\\n\\n（主动效果）强击全体敌人。\\n每对1个目标造成伤害，自身行动值提升<color=#28d9ed>[Buff_V_2000086_2_2]</color>，并赋予全体目标<color=#28d9ed>诅咒</color><color=#28d9ed>[Buff_T_2000086_2_3]回合</color>。（无法解除）\\n使全体<color=#28d9ed>水属性</color>敌人的<color=#28d9ed>攻击力</color>降低<color=#28d9ed>2回合</color>。",
+        "fr": "(Effet passif) Au début du combat, inflige <color=#28d9ed>Malédiction</color> à tous les ennemis pendant <color=#28d9ed>2 tours</color>. (Ineffaçable)\\nÀ la fin du tour d'une cible affectée par <color=#28d9ed>Malédiction</color>, augmente la Priorité du lanceur de <color=#28d9ed>10 %</color>.\\n\\n(Effet actif) Attaque tous les ennemis avec Frappe lourde.\\nPour chaque cible touchée, augmente la Priorité du lanceur de <color=#28d9ed>[Buff_V_2000086_2_2]</color> et inflige <color=#28d9ed>Malédiction</color> à toutes les cibles pendant <color=#28d9ed>[Buff_T_2000086_2_3] tours</color>. (Ineffaçable)\\nRéduit l'<color=#28d9ed>ATQ</color> de tous les ennemis de type <color=#28d9ed>Eau</color> pendant <color=#28d9ed>2 tours</color>.",
+        "es": "(Efecto pasivo) Al inicio del combate, inflige <color=#28d9ed>Maldición</color> a todos los enemigos durante <color=#28d9ed>2 turnos</color>. (Irremovible)\\nAl final del turno de un objetivo con <color=#28d9ed>Maldición</color>, aumenta la Prioridad propia un <color=#28d9ed>10%</color>.\\n\\n(Efecto activo) Ataca a todos los enemigos con Golpe Pesado.\\nPor cada objetivo dañado, aumenta la Prioridad propia en <color=#28d9ed>[Buff_V_2000086_2_2]</color> e inflige <color=#28d9ed>Maldición</color> a todos los objetivos durante <color=#28d9ed>[Buff_T_2000086_2_3] turnos</color>. (Irremovible)\\nReduce el <color=#28d9ed>ATQ</color> de todos los enemigos de tipo <color=#28d9ed>Agua</color> durante <color=#28d9ed>2 turnos</color>."
       },
       "levels": [
         {
           "level": 1,
-          "vars": {
-            "2000086_2_2": {
-              "c": "100%",
-              "v": "25%"
-            },
-            "2000086_2_3": {
-              "c": "70%",
-              "v": "3%",
-              "t": "2"
-            }
-          }
-        },
-        {
-          "level": 4,
-          "vars": {
-            "2000086_2_2": {
-              "c": "100%",
-              "v": "25%"
-            },
-            "2000086_2_3": {
-              "c": "85%",
-              "v": "3%",
-              "t": "2"
-            }
-          }
-        },
-        {
-          "level": 5,
           "vars": {
             "2000086_2_2": {
               "c": "100%",
@@ -13504,12 +13476,12 @@
     },
     "8603": {
       "desc": {
-        "en": "Before using this skill, inflicts <color=#28d9ed>Cursed</color> on all enemies for <color=#28d9ed>2 turns</color>.\\nAttacks all enemies with Heavy Strike and recovers Chain Points by <color=#28d9ed>[Buff_V_2000086_3_1]</color>. Then detonates all Cursed stacks on the targets and reduces their Action Points by <color=#28d9ed>80</color>.",
-        "jp": "スキル使用前、敵全体に<color=#28d9ed>呪い</color>を<color=#28d9ed>2ターン</color>の間付与する。\\n敵全体に強撃でダメージを与え、CPを<color=#28d9ed>[Buff_V_2000086_3_1]</color>獲得した後、対象の呪いをすべて破裂させ、APを<color=#28d9ed>80</color>DOWNさせる。",
-        "kr": "스킬 사용 전 적 전체에게 <color=#28d9ed>저주</color>를 <color=#28d9ed>2턴</color> 동안 부여합니다.\\n적 전체를 강격으로 공격하고 CP를 <color=#28d9ed>[Buff_V_2000086_3_1]</color> 회복 한뒤 대상의 저주를 모두 폭발시키고, AP를 <color=#28d9ed>80</color> 감소시킵니다.",
-        "zh": "使用技能前，对全体敌人附加<color=#28d9ed>2回合</color>的<color=#28d9ed>诅咒</color>。\\n强击全体敌人，恢复<color=#28d9ed>[Buff_V_2000086_3_1]</color>的CP。\\n攻击后，使目标受到的所有诅咒效果爆炸，AP减少<color=#28d9ed>80</color>。",
-        "fr": "Avant d'utiliser cette comp., inflige <color=#28d9ed>Maudit</color> sur tous les ennemis pour <color=#28d9ed>2 tour</color>.\\nATQ tous les ennemis avec Heavy Strike et récupère les points de chaîne par <color=#28d9ed>[Buff_V_2000086_3_1]</color>. Puis détonne toutes les piles malins sur les cibles et réduit leurs PA par <color=#28d9ed>80</color>.",
-        "es": "Antes de usar esta hab., inflige <color=#28d9ed>Maldición</color> a los enemigos por <color=#28d9ed>2 turnos</color>.\\nAtaca a los enemigos con Golpe pesado, recupera <color=#28d9ed>[Buff_V_2000086_3_1]</color> Puntos de Cadena, detona todas las maldiciones de los objetivos y reduce sus Puntos de Acción en <color=#28d9ed>80</color>."
+        "en": "Before using this skill, inflicts <color=#28d9ed>Cursed</color> on all enemies for <color=#28d9ed>3 turns</color>. If a target is a boss, additionally inflicts <color=#28d9ed>Cursed</color> for <color=#28d9ed>3 turns</color>.\\nAttacks all enemies with Heavy Strike and recovers <color=#28d9ed>[Buff_V_2000086_3_1]</color> Chain Points. Then detonates all Cursed stacks on the targets and reduces their Action Points by <color=#28d9ed>80</color>.",
+        "jp": "スキル使用前、敵全体に<color=#28d9ed>呪い</color>を<color=#28d9ed>3ターン</color>の間付与し、対象がボスの場合、<color=#28d9ed>呪い</color>をさらに<color=#28d9ed>3ターン</color>の間付与する。\\n敵全体に強撃でダメージを与え、CPを<color=#28d9ed>[Buff_V_2000086_3_1]</color>獲得した後、対象の呪いをすべて破裂させ、APを<color=#28d9ed>80</color>DOWNさせる。",
+        "kr": "스킬 사용 전 적 전체에게 <color=#28d9ed>저주</color>를 <color=#28d9ed>3턴</color> 동안 부여하고 대상이 보스인 경우 <color=#28d9ed>저주</color>를 <color=#28d9ed>3턴</color> 동안 추가로 부여합니다.\\n적 전체를 강격으로 공격하고 CP를 <color=#28d9ed>[Buff_V_2000086_3_1]</color> 회복 한뒤 대상의 저주를 모두 폭발시키고, AP를 <color=#28d9ed>80</color> 감소시킵니다.",
+        "zh": "使用技能前，赋予全体敌人<color=#28d9ed>诅咒</color><color=#28d9ed>3回合</color>；若目标为首领，则额外赋予<color=#28d9ed>诅咒</color><color=#28d9ed>3回合</color>。\\n强击全体敌人，恢复<color=#28d9ed>[Buff_V_2000086_3_1]</color>CP。随后引爆目标身上的所有诅咒，并使其AP减少<color=#28d9ed>80</color>。",
+        "fr": "Avant d'utiliser cette compétence, inflige <color=#28d9ed>Malédiction</color> à tous les ennemis pendant <color=#28d9ed>3 tours</color>. Si la cible est un boss, inflige en plus <color=#28d9ed>Malédiction</color> pendant <color=#28d9ed>3 tours</color>.\\nAttaque tous les ennemis avec Frappe lourde et récupère <color=#28d9ed>[Buff_V_2000086_3_1]</color> points de chaîne. Fait ensuite exploser toutes les Malédictions des cibles et réduit leurs PA de <color=#28d9ed>80</color>.",
+        "es": "Antes de usar esta habilidad, inflige <color=#28d9ed>Maldición</color> a todos los enemigos durante <color=#28d9ed>3 turnos</color>. Si el objetivo es un jefe, inflige además <color=#28d9ed>Maldición</color> durante <color=#28d9ed>3 turnos</color>.\\nAtaca a todos los enemigos con Golpe Pesado y recupera <color=#28d9ed>[Buff_V_2000086_3_1]</color> Puntos de Cadena. Después, detona todas las Maldiciones de los objetivos y reduce sus Puntos de Acción en <color=#28d9ed>80</color>."
       },
       "levels": [
         {

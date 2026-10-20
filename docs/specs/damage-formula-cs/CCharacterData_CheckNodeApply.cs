@@ -1,4 +1,4 @@
-// CCharacterData$$CheckNodeApply — client Steam 1.4.18 (Assembly-CSharp.dll, Mono)
+// CCharacterData$$CheckNodeApply — client Steam 1.4.19 (Assembly-CSharp.dll, Mono)
 // Régénéré par `pnpm datagen:extract-cs` — NE PAS ÉDITER. Source : CCharacterData.cs.
 
 	private bool CheckNodeApply(CAwakeningNodeData node)

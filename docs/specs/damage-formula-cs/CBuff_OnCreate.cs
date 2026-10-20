@@ -1,4 +1,4 @@
-// CBuff$$OnCreate — client Steam 1.4.18 (Assembly-CSharp.dll, Mono)
+// CBuff$$OnCreate — client Steam 1.4.19 (Assembly-CSharp.dll, Mono)
 // Régénéré par `pnpm datagen:extract-cs` — NE PAS ÉDITER. Source : CBuff.cs.
 
 	public bool OnCreate()

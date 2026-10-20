@@ -10701,9 +10701,9 @@
     },
     "desc": {
       "en": "Damage dealt increases proportional to the caster's Effectiveness (Max 100%)",
-      "jp": "自分の効果命中が高いほど、ダメージがUPする。\\n(最大100％までUP)",
+      "jp": "自分の効果命中が高いほど、ダメージがUPする。(最大100％までUP)",
       "kr": "자신의 효과 적중에 비례하여 피해 증가 (최대 100%)",
-      "zh": "根据自身的效果命中等比提升伤害\\n(最多100%)",
+      "zh": "根据自身的效果命中等比提升伤害 (最多100%)",
       "fr": "Hausse des DGT infligés proportionnelle à l'Efficacité propre (Max 100%)",
       "es": "El daño infligido sube proporcionalmente a la Efectividad propio (Máx 100%)"
     },
@@ -15050,28 +15050,27 @@
       "es": "Equipo exclusivo Kitsune of Eternity Tamamo-no-Mae"
     },
     "desc": {
-      "en": "All allies' DMG dealt to targets inflicted with Cursed increases by [+Value]",
-      "jp": "呪い付与対象に味方全体のダメージ[+Value]",
-      "kr": "저주 부여 대상 아군 전체 피해 증가 [+Value]",
-      "zh": "对目标附加诅咒时，我方全体伤害增加[+Value]",
-      "fr": "les alliés' DGT dealt to targets inflicted with Cursed augmente by [+Value]",
-      "es": "El daño de aliados contra objetivos con Maldición aumenta en [+Value]"
+      "en": "When using Bite 'Em, Kitsu!, inflicts Unbuffable on all enemies for 3 turns",
+      "jp": "【ポチ、好きにお食べ】使用時、敵全体に強化不可を3ターン付与",
+      "kr": "나비야, 물어! 사용시 적 전체 강화 불가 +3턴",
+      "zh": "使用蝴蝶啊，撕咬吧！时，赋予全体敌人强化不可3回合",
+      "fr": "Lors de l'utilisation de Mordeuse 'Em, Kitsu!, inflige Renforcement impossible à tous les ennemis pendant 3 tours",
+      "es": "Al usar Muerde, ¡Kitsu!, inflige No mejorable a todos los enemigos durante 3 turnos"
     },
-    "values": [
-      {
-        "value": "50%"
-      }
-    ],
+    "values": [{}],
     "levels": [1],
     "icon": "TI_Icon_UO_EXCLUSIVE",
     "buff": "BID_CEQUIP_2000086_ADD",
     "effects": [
       {
-        "family": "damage",
-        "category": "buff",
-        "type": "BT_DMG",
-        "target": "my_team",
-        "buff": "BID_CEQUIP_2000086_ADD"
+        "family": "cc",
+        "category": "debuff",
+        "type": "BT_SEALED",
+        "target": "enemy_team",
+        "buff": "BID_CEQUIP_2000086_ADD",
+        "tooltip": "39",
+        "label": "SYS_BUFF_SEALED",
+        "caller": "second"
       }
     ]
   },

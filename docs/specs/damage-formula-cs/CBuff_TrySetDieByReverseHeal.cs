@@ -1,4 +1,4 @@
-// CBuff$$TrySetDieByReverseHeal — client Steam 1.4.18 (Assembly-CSharp.dll, Mono)
+// CBuff$$TrySetDieByReverseHeal — client Steam 1.4.19 (Assembly-CSharp.dll, Mono)
 // Régénéré par `pnpm datagen:extract-cs` — NE PAS ÉDITER. Source : CBuff.cs.
 
 	private void TrySetDieByReverseHeal()

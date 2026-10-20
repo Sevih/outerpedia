@@ -941,9 +941,9 @@
       "isDebuff": false
     },
     {
-      "key": "type:BT_DMG",
-      "label": "DMG bonus",
-      "isDebuff": false
+      "key": "status:39",
+      "label": "Unbuffable",
+      "isDebuff": true
     }
   ],
   "2000087": [

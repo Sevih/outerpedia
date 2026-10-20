@@ -1,4 +1,4 @@
-// CFormula$$CalcDamage — client Steam 1.4.18 (Assembly-CSharp.dll, Mono)
+// CFormula$$CalcDamage — client Steam 1.4.19 (Assembly-CSharp.dll, Mono)
 // Régénéré par `pnpm datagen:extract-cs` — NE PAS ÉDITER. Source : CFormula.cs.
 // 2 surcharges, dans l'ordre du source.
 

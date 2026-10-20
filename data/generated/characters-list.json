@@ -2694,6 +2694,8 @@
       "BT_ADDITIVE_TURN",
       "BT_COOL_CHARGE",
       "BT_CP_CHARGE",
+      "BT_STAT|ST_CRITICAL_DMG_RATE_IR",
+      "DAMAGE_INCREASE",
       "HEAVY_STRIKE"
     ],
     "debuff": [
@@ -2710,8 +2712,8 @@
         "debuff": ["BT_DOT_CURSE", "WEAKNESS_GAUGE_DAMAGE"]
       },
       "s2": {
-        "buff": ["BT_ACTION_GAUGE", "HEAVY_STRIKE"],
-        "debuff": ["BT_DOT_CURSE", "BT_SEALED", "BT_STAT|ST_ATK"]
+        "buff": ["BT_ACTION_GAUGE", "BT_STAT|ST_CRITICAL_DMG_RATE_IR", "HEAVY_STRIKE"],
+        "debuff": ["BT_DOT_CURSE", "BT_STAT|ST_ATK"]
       },
       "ultimate": {
         "buff": ["BT_CP_CHARGE", "HEAVY_STRIKE"],
@@ -2724,9 +2726,13 @@
       "dualAttack": {
         "buff": [],
         "debuff": ["BT_DOT_CURSE"]
+      },
+      "exclusiveEquip": {
+        "buff": [],
+        "debuff": ["BT_SEALED"]
       }
     },
-    "teamBonuses": []
+    "teamBonuses": ["CHD"]
   },
   "2000087": {
     "buff": ["BT_ADDITIVE_TURN", "BT_AP_CHARGE", "BT_COOL_CHARGE"],
@@ -3592,7 +3598,7 @@
       "BT_ACTION_GAUGE",
       "BT_FIXED_DAMAGE",
       "BT_REDISTRIBUTE_BUFF",
-      "BT_STAT|ST_PIERCE_POWER_RATE"
+      "SPATIAL_DISTORTION_ENEMY"
     ],
     "effectsBySource": {
       "s1": {
@@ -3605,7 +3611,7 @@
       },
       "ultimate": {
         "buff": ["SPATIAL_DISTORTION_SELF", "UNCOUNTERABLE"],
-        "debuff": ["BT_FIXED_DAMAGE", "BT_REDISTRIBUTE_BUFF", "BT_STAT|ST_PIERCE_POWER_RATE"]
+        "debuff": ["BT_FIXED_DAMAGE", "BT_REDISTRIBUTE_BUFF", "SPATIAL_DISTORTION_ENEMY"]
       },
       "exclusiveEquip": {
         "buff": ["BT_ACTION_GAUGE"],
@@ -3693,7 +3699,7 @@
       "BT_STAT|ST_COUNTER_RATE",
       "BT_STAT|ST_DEF"
     ],
-    "debuff": ["BT_AGGRO", "REDUCED_PENETRATION", "WEAKNESS_GAUGE_DAMAGE"],
+    "debuff": ["BT_AGGRO", "BT_STAT|ST_PIERCE_POWER_RATE", "WEAKNESS_GAUGE_DAMAGE"],
     "effectsBySource": {
       "s1": {
         "buff": ["BT_CALL_BACKUP"],
