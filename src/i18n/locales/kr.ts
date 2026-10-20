@@ -814,6 +814,8 @@ const kr: Record<TranslationKey, string> = {
   'guides.boss_display.stats': '스탯',
   'guides.boss_display.rank': '등급',
   'guides.boss_display.rank_options': '등급 패시브',
+  'guides.boss_display.rank_option_final_dmg_reduce': '최종 받는 피해 감소',
+  'guides.boss_display.rank_option_wg_dmg_reduce': '약점 게이지 피해 감소',
   'guides.boss_display.rank_prev': '이전 등급',
   'guides.boss_display.rank_next': '다음 등급',
   'guides.boss_display.sheet_stat': '기본 수치: {value} (패시브 적용 전)',

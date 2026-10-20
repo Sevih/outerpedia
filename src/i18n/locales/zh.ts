@@ -798,6 +798,8 @@ const zh: Record<TranslationKey, string> = {
   'guides.boss_display.stats': '属性',
   'guides.boss_display.rank': '评级',
   'guides.boss_display.rank_options': '评级被动',
+  'guides.boss_display.rank_option_final_dmg_reduce': '最终伤害减免',
+  'guides.boss_display.rank_option_wg_dmg_reduce': '弱点槽伤害减免',
   'guides.boss_display.rank_prev': '上一评级',
   'guides.boss_display.rank_next': '下一评级',
   'guides.boss_display.sheet_stat': '面板数值：{value}（被动生效前）',

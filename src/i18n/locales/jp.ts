@@ -823,6 +823,8 @@ const jp: Record<TranslationKey, string> = {
   'guides.boss_display.stats': 'ステータス',
   'guides.boss_display.rank': 'ランク',
   'guides.boss_display.rank_options': 'ランクのパッシブ',
+  'guides.boss_display.rank_option_final_dmg_reduce': '最終被ダメージ軽減',
+  'guides.boss_display.rank_option_wg_dmg_reduce': '弱点ゲージダメージ軽減',
   'guides.boss_display.rank_prev': '前のランク',
   'guides.boss_display.rank_next': '次のランク',
   'guides.boss_display.sheet_stat': 'ステータス画面の値：{value}（パッシブ適用前）',

@@ -848,6 +848,8 @@ const fr: Record<TranslationKey, string> = {
   'guides.boss_display.stats': 'Stats',
   'guides.boss_display.rank': 'Palier',
   'guides.boss_display.rank_options': 'Passifs du palier',
+  'guides.boss_display.rank_option_final_dmg_reduce': 'Réduction finale des dégâts',
+  'guides.boss_display.rank_option_wg_dmg_reduce': 'Réduction des dégâts de jauge de faiblesse',
   'guides.boss_display.rank_prev': 'Palier précédent',
   'guides.boss_display.rank_next': 'Palier suivant',
   'guides.boss_display.sheet_stat': 'Valeur de fiche : {value} (avant passifs)',

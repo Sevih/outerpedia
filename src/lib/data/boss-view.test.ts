@@ -197,6 +197,11 @@ describe('buildBossView', () => {
 });
 
 describe('bossRankOptionLabels', () => {
+  const labels = {
+    finalDmgReduce: 'Final DMG Reduction',
+    wgDmgReduce: 'Weakness Gauge DMG Reduction',
+  };
+
   it('une option de stat en % rend sa valeur per-mille en pourcentage', () => {
     const view = {
       rankOptions: {
@@ -205,7 +210,56 @@ describe('bossRankOptionLabels', () => {
       statScales: { damage_boost: 'percent' },
     } as unknown as BossView;
     const contexts = [{ level: 1, options: ['up'] }] as SpawnContext[];
-    expect(bossRankOptionLabels(view, contexts, 'en')).toEqual({ up: 'Increased Damage +10%' });
+    expect(bossRankOptionLabels(view, contexts, 'en', labels)).toEqual({
+      up: 'Increased Damage +10%',
+    });
+  });
+
+  it('une option sans nom se nomme par sa stat ou son type, sinon elle est omise', () => {
+    const view = {
+      rankOptions: {
+        up: { type: 'BT_STAT_PREMIUM', stat: 'damage_boost', value: 100 },
+        down: { type: 'BT_STAT_PREMIUM', stat: 'dmg_reduce', value: 50 },
+        final: { type: 'BT_DMG_REDUCE_FINAL', value: 700 },
+        wg: { type: 'BT_WG_DMG_REDUCE', value: 500, irremovable: true },
+        odd: { type: 'BT_UNKNOWN', value: 100 },
+        named: { type: 'BT_UNKNOWN', name: { en: 'Named Passive' } },
+      },
+      statScales: { damage_boost: 'percent', dmg_reduce: 'percent' },
+    } as unknown as BossView;
+    const contexts = [
+      { level: 1, options: ['up', 'down', 'final', 'wg', 'odd', 'named'] },
+    ] as SpawnContext[];
+    expect(bossRankOptionLabels(view, contexts, 'en', labels)).toEqual({
+      up: 'DMG Increase +10%',
+      down: 'DMG Reduction +5%',
+      final: 'Final DMG Reduction 70%',
+      wg: 'Weakness Gauge DMG Reduction 50%',
+      named: 'Named Passive',
+    });
+    // Le nom fr porte déjà son signe (« Dégâts + ») : pas de « + » en double.
+    expect(bossRankOptionLabels(view, contexts, 'fr', labels).up).toBe('Dégâts + 10%');
+  });
+
+  it('toutes les options citées par les paliers des boss de Singularity ont un libellé', () => {
+    // `monad_battle_2` = Dimensional Singularity, seul mode dont les paliers
+    // citent des options (au 2026-10-20).
+    const ids = new Set(
+      Object.values(dungeons as Record<string, DungeonRef>).flatMap((d) =>
+        d.mode === 'monad_battle_2' && d.ranks?.some((r) => r.options?.length)
+          ? (d.monsters ?? []).filter((m) => m.role === 'boss').map((m) => m.id)
+          : [],
+      ),
+    );
+    expect(ids.size).toBeGreaterThan(0);
+    for (const id of ids) {
+      const view = viewOf(id);
+      const contexts = bossSpawnContexts(view, 'en');
+      const cited = new Set(contexts.flatMap((c) => c.options ?? []));
+      expect(cited.size).toBeGreaterThan(0);
+      const out = bossRankOptionLabels(view, contexts, 'en', labels);
+      expect([...cited].filter((o) => !out[o])).toEqual([]);
+    }
   });
 
   it('toute option de rang à stat du glossaire a son échelle dans `statScales`', () => {

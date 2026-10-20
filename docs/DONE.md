@@ -7,6 +7,49 @@
 
 ## 2026-10-20
 
+- **A75 — Options de rang des boss sans nom : un libellé construit.** Le
+  bloc « Rank passives » du panneau de boss des guides n'affichait des options
+  de palier que celles qui ont un nom : 30 des 31 `rankOptions` de
+  `glossaries.json` n'en ont pas, le lecteur de Dimensional Singularity ne
+  voyait que « Increased Penetration +30% » (décision de Sevih du 20/10 : les
+  montrer). `bossRankOptionLabels` (`src/lib/data/boss-view.ts`) construit
+  désormais le libellé : option à `stat` → `statName(stat, lang)` du glossaire
+  (`damage_boost` rend « DMG Increase », `dmg_reduce` « DMG Reduction », par
+  le pont `STAT_ABBR` → `ABBR_TO_SLUG`, vérifié dans les six langues avant de
+  coder) puis le montant per-mille en %, le signe n'étant écrit que si le nom
+  ne finit pas déjà par `+` ou `-` (fr « Dégâts + 10% », « Dégâts reçus -
+  5% ») ; `BT_DMG_REDUCE_FINAL` et `BT_WG_DMG_REDUCE` → deux clés nouvelles
+  `guides.boss_display.rank_option_final_dmg_reduce` / `…_wg_dmg_reduce` dans
+  les six locales, suivies du taux sans signe (« Final DMG Reduction 70% »,
+  « Weakness Gauge DMG Reduction 50% ») ; `irremovable` n'ajoute rien ; un
+  autre type sans nom ni stat reste omis, une option nommée garde son nom. Les
+  deux libellés traduits passent de `BossPanel.tsx` (paramètre `labels`, de
+  type `RankOptionLabels`) : aucun module de `src/lib/data/` ne lit les
+  locales, les voisins reçoivent un `TFunction`. Le montant vit dans un petit helper
+  `rankOptionAmount`, le commentaire de la règle est récrit. Traductions
+  jp/kr/zh sobres (最終被ダメージ軽減 / 弱点ゲージダメージ軽減, 최종 받는 피해
+  감소 / 약점 게이지 피해 감소, 最终伤害减免 / 弱点槽伤害减免), es « Reducción
+  final de daño » / « Reducción de daño al medidor de debilidad ». Rendu réel,
+  Abomination Hunter Belial (`60000001`, donjon `75000101`), rangs 3 à 6 :
+  E++ sans option, D, D+ et D++ « DMG Increase +10% ; DMG Reduction +5% »
+  (fr « Dégâts + 10% ; Dégâts reçus - 5% ») ; dès B : « Final DMG Reduction
+  70% » ×2, « Weakness Gauge DMG Reduction 50% » ×2, « DMG Increase +30% ;
+  DMG Reduction +15% ». À voir sur
+  `/en/guides/dimensional-singularity/abomination-hunter-belial`, curseur sur
+  D (bonus de dégâts) puis B (réductions finale et de jauge). Vérification :
+  `boss-view.test.ts` bloc `bossRankOptionLabels`, cas construits (les quatre
+  libellés, fr sans double signe, type inconnu omis, option nommée inchangée)
+  et données réelles (tous les boss `monad_battle_2` : 0 option citée sans
+  libellé) ; `pnpm typecheck` (`tsc --noEmit … -p scripts/tsconfig.json`, 0),
+  `pnpm lint` (`eslint`, 0), `pnpm test` « Tests 4372 passed (4372) ».
+  Laissé : `Normal_1_1`/`1_2` et `Normal_2_1`/`2_2` sont deux options
+  distinctes de même effet, la liste montre donc chaque réduction DEUX fois
+  (fidèle à la donnée ; dédupliquer serait une décision de rendu dans
+  `BossStats.tsx`, hors périmètre) ; « DMG Reduction +5% » se lit comme le
+  veut le contrat (le boss reçoit 5 % de dégâts en moins) ;
+  `rankOptionAdminLabels` de `src/lib/admin/monster-store.ts` et quick
+  gardent leur règle.
+
 - **Relecture A74, F30, F31 et G34 (Fable 5.1, avec trois relecteurs) —
   validés.** Contrôles sur HEAD `6231375f` (les trois commits d'outerpedia) :
   `pnpm typecheck` 0, `pnpm lint` 0, `pnpm test` 248 fichiers / 4 370 verts,

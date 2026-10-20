@@ -230,7 +230,10 @@ export async function BossCard({
               premium={view.statPremium}
               statLabels={statLabels}
               locale={LANGUAGES[lang].htmlLang}
-              rankOptionLabels={bossRankOptionLabels(view, spawns, lang)}
+              rankOptionLabels={bossRankOptionLabels(view, spawns, lang, {
+                finalDmgReduce: t('guides.boss_display.rank_option_final_dmg_reduce'),
+                wgDmgReduce: t('guides.boss_display.rank_option_wg_dmg_reduce'),
+              })}
               hideContextLabel={hideSpawnLabel}
               labels={{
                 level: t('page.character.skill.level'),

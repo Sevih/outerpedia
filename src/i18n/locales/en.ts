@@ -841,6 +841,8 @@ const en = {
   'guides.boss_display.stats': 'Stats',
   'guides.boss_display.rank': 'Rank',
   'guides.boss_display.rank_options': 'Rank passives',
+  'guides.boss_display.rank_option_final_dmg_reduce': 'Final DMG Reduction',
+  'guides.boss_display.rank_option_wg_dmg_reduce': 'Weakness Gauge DMG Reduction',
   'guides.boss_display.rank_prev': 'Previous rank',
   'guides.boss_display.rank_next': 'Next rank',
   'guides.boss_display.sheet_stat': 'Sheet value: {value} (before passives)',

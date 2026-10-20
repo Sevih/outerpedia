@@ -848,6 +848,8 @@ const es: Record<TranslationKey, string> = {
   'guides.boss_display.stats': 'Estadísticas',
   'guides.boss_display.rank': 'Rango',
   'guides.boss_display.rank_options': 'Pasivas de rango',
+  'guides.boss_display.rank_option_final_dmg_reduce': 'Reducción final de daño',
+  'guides.boss_display.rank_option_wg_dmg_reduce': 'Reducción de daño al medidor de debilidad',
   'guides.boss_display.rank_prev': 'Rango anterior',
   'guides.boss_display.rank_next': 'Siguiente rango',
   'guides.boss_display.sheet_stat': 'Valor de ficha: {value} (antes de pasivas)',

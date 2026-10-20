@@ -33,6 +33,7 @@ import type {
 } from '@contracts';
 import type { Lang } from '@/lib/i18n/config';
 import { lRec } from '@/lib/i18n/localize';
+import { statName } from '@/lib/data/stat-glossary';
 import type { MonsterThumb } from '@/components/ui/Thumbnail';
 import type { ClientEffect } from '@/components/character/EffectChips';
 import {
@@ -297,29 +298,56 @@ export function bossSpawnContexts(view: BossView, lang: Lang): SpawnContext[] {
   });
 }
 
+/** Libellés d'interface des options de palier sans nom, traduits par l'appelant. */
+export interface RankOptionLabels {
+  /** `BT_DMG_REDUCE_FINAL` (« Final DMG Reduction »). */
+  finalDmgReduce: string;
+  /** `BT_WG_DMG_REDUCE` (« Weakness Gauge DMG Reduction »). */
+  wgDmgReduce: string;
+}
+
+/** Montant d'une option : per-mille → % pour les taux (convention du jeu, cf. statScales). */
+function rankOptionAmount(o: RankOption, view: BossView, signed: boolean): string {
+  if (!o.value) return '';
+  const sign = signed && o.value > 0 ? '+' : '';
+  return o.stat && view.statScales?.[o.stat] === 'percent'
+    ? ` ${sign}${o.value / 10}%`
+    : ` ${sign}${o.value}`;
+}
+
 /**
  * Libellés des passifs de PALIER cités par des rencontres (« Increased
- * Penetration +30% »). Une option inconnue est OMISE : mieux vaut ne rien dire
- * qu'inventer. Même règle que `rankOptionLabels`, sur les options de la vue.
+ * Penetration +30% »). Le jeu ne nomme presque aucune option (30 des 31 de
+ * Dimensional Singularity) : à défaut de nom, le libellé se CONSTRUIT —
+ *   - option à `stat` : nom de la stat au glossaire (« DMG Increase +10% ») ;
+ *     le signe n'est écrit que si ce nom n'en porte pas déjà un (fr
+ *     « Dégâts + 10% », pas « Dégâts + +10% ») ;
+ *   - `BT_DMG_REDUCE_FINAL` / `BT_WG_DMG_REDUCE` : libellé d'interface
+ *     (`labels`) et le taux sans signe (« Final DMG Reduction 70% »).
+ * Une option d'un autre type, sans nom ni stat, reste OMISE : mieux vaut ne
+ * rien dire qu'inventer. Une option nommée garde son nom.
  */
 export function bossRankOptionLabels(
   view: BossView,
   contexts: SpawnContext[],
   lang: Lang,
+  labels: RankOptionLabels,
 ): Record<string, string> {
   const out: Record<string, string> = {};
   for (const id of new Set(contexts.flatMap((c) => c.options ?? []))) {
     const o = view.rankOptions[id];
-    const name = o?.name ? lRec(o.name, lang) : undefined;
-    if (!name) continue;
-    // `value` est un per-mille pour les taux (convention du jeu, cf. statScales).
-    const amount =
-      o.value && o.stat && view.statScales?.[o.stat] === 'percent'
-        ? ` ${o.value > 0 ? '+' : ''}${o.value / 10}%`
-        : o.value
-          ? ` ${o.value > 0 ? '+' : ''}${o.value}`
-          : '';
-    out[id] = `${name}${amount}`;
+    if (!o) continue;
+    const name = o.name ? lRec(o.name, lang) : undefined;
+    if (name) {
+      out[id] = `${name}${rankOptionAmount(o, view, true)}`;
+    } else if (o.stat) {
+      const stat = statName(o.stat, lang);
+      out[id] = `${stat}${rankOptionAmount(o, view, !/[+-]$/.test(stat))}`;
+    } else if (o.type === 'BT_DMG_REDUCE_FINAL' && o.value) {
+      out[id] = `${labels.finalDmgReduce} ${o.value / 10}%`;
+    } else if (o.type === 'BT_WG_DMG_REDUCE' && o.value) {
+      out[id] = `${labels.wgDmgReduce} ${o.value / 10}%`;
+    }
   }
   return out;
 }
