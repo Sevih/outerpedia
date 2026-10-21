@@ -16,8 +16,9 @@
   Tables du jeu (B38), Journal du site (B37), Tableau de bord (B36), Noms
   (B34), Bannières (B35). Restent : versionnage d'un boss qui change (F22),
   les suites du retrait de `/admin`, Événements (F23), Guides (F18), Pros /
-  Cons et Synergies, Vidéos, les restes de « Pousser » (B33) et la refonte
-  de l'UI.
+  Cons et Synergies, Vidéos, et la refonte de l'UI. Le 21/10 : Guides (F18),
+  Événements (F23) et les restes de « Pousser » (B33) vus aussi ; le dépliant
+  d'une entité nouvelle (B49) vu au patch.
 - **Guides : « en cours de mise à jour » et version cachée, édités dans quick
   (B66).** Demande de Sevih du 20/10 : deux interrupteurs de plus à côté de
   `hidden`. (1) `updating` sur le GUIDE (`GuideMeta.updating`, accepté par

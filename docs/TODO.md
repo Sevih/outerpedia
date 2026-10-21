@@ -163,71 +163,8 @@ les preuves et les décisions vivent dans le tri consolidé de sevih-tool
       l'écran ; les points 1 à 7 sont faits (A51), le point 8 aussi (B49)** :
       À l'écran, par Sevih : un vrai ajout Twitch ou Bilibili sur une fiche
       (A48), les pastilles qui ne bougent plus au dry-run ni au push (A50),
-      « Autres » dans l'en-tête d'un monstre d'event (A49), le dépliant d'une
-      entité nouvelle, sur une vraie entité ajoutée au prochain patch (B49).
-- [ ] **« Événements » — contrôles à l'écran (lot F23)** : le banc ne
-      clique pas, aucun enregistrement réel n'a été joué, `/api/translate`
-      jamais appelé avec des clés, `POST /api/events` jamais appelé (les
-      clés `R2_*` sont réelles sur ce poste). Relancer quick d'abord (Ctrl-C
-      puis `pnpm quick` : trois routes nouvelles — sans ça l'onglet dit
-      « quick lancé avant ce code »). (1) Publication › Événements : la liste
-      dans l'ordre du fichier, `20260324-video` « terminé », `_no-peaking`
-      « terminé · brouillon », les dates en UTC, la cover, « ouvrir sur le
-      site ». (2) Ouvrir `20260324-video` : Méta (l'heure de Paris à côté de
-      l'UTC), retoucher un texte EN (le titre), « à retraduire » apparaît,
-      « Traduire » (le seul texte périmé part, ses cinq langues réécrites ;
-      les « Traductions » se déplient), puis « Enregistrer » → le journal :
-      « 2 événements écrits dans data/curated/events.json », la ligne R2
-      « publié sur R2 + edge purgé » (ou « R2 NON PUBLIÉ … sautée » sans
-      clés), UN commit `chore(events): 20260324-video` (`git show --stat` :
-      le seul `events.json`), la savebar revient à « aucune modification ».
-      (3) Dix minutes plus tard au plus, la page `/event/20260324-video` du
-      site SANS déploiement porte le titre retouché (la copie R2). (4) Blocs :
-      « ＋ Liste à puces » → le bloc a son champ Titre, éditable ; une puce,
-      ↑ ↓ ✕ ; « Enregistrer » → le titre est dans le fichier. (5) Supprimer
-      un événement (✕ de la liste ou « Supprimer » de l'en-tête) : la boîte
-      de confirmation, « Annuler » le garde, confirmer le retire, la savebar
-      compte « 1 événement modifié » ; « Annuler » de la savebar le ramène.
-      (6) Le menu de l'admin : plus de groupe « Tools » ;
-      `/admin/tools/events` répond encore par son URL. (7) Une saisie fautive
-      (un bloc sans texte EN) : « Enregistrer » refuse, le message sous le
-      bloc, le point rouge sur « Blocs », « refusé » dans l'en-tête, rien
-      d'écrit ni committé. Notes de relecture (Fable, 12/10), pour la revue
-      de quick : le message de commit « chore(events): 2 événements » porte
-      des accents, alors que les autres messages de quick n'en ont pas
-      (« re-epingles ») ; un titre de bloc vide affiche « Traductions (5)
-      0 / 5 », un compte qui ne veut rien dire pour un texte facultatif
-      laissé vide.
-- [ ] **« Guides » — contrôles à l'écran (lot F18)** : le banc ne clique
-      pas, et aucun enregistrement réel n'a été joué ; `/api/translate` n'a
-      jamais été appelé avec des clés. Relancer quick d'abord (Ctrl-C puis
-      `pnpm quick` : cinq routes nouvelles — sans ça l'onglet dit « quick
-      lancé avant ce code »). (1) Guides › Guides : la vue d'ensemble liste
-      les catégories vivantes dans l'ordre du site ; « cachés » fait
-      apparaître Adventure License (26) et Monad Gate (31) avec leur badge ;
-      la recherche par début de mot (titre, slug). (2) Un guide PLAT
-      (Special Request) : Tips, un conseil ajouté en anglais en fin de bloc,
-      « Traduire » (les cinq langues posées, « Traductions » dépliées),
-      « Enregistrer » → UN commit `chore(guides): special-request/<slug>`
-      qui porte les JSON touchés ET le `meta.json` re-daté (contrôle : git show --stat) ; la savebar revient à « aucune modification ». (3) Un guide
-      VERSIONNÉ (Joint Challenge) : « ＋ version » avec une clé du mois
-      (dupliquée de la récente : elle s'ouvre, « pas encore committée »), la
-      proposition du Journal du site prérempli (gabarit « Mise à jour »,
-      guide · mode · mois · slug), puis dans Combat « Changer… » le combat
-      → toutes les versions qui en portent un suivent (vérifier les
-      `config.json`), « Enregistrer » → le dossier de la version nouvelle
-      part dans le commit. (4) Combat d'un versionné : un monstre épinglé
-      (aucun au 11/10 : en poser un par l'extractor d'abord) se lit avec
-      l'étiquette de son archive et se dépingle. (5) Le menu de l'admin :
-      plus de groupe « Guide editor » du tout depuis F19 (ni Adventure
-      License, ni les catégories de boss, ni Overview). (6) Caduc depuis B48 : le menu
-      Vidéos de quick a disparu avec sa section. (7) Après « Pousser » et le
-      déploiement : la page du guide retouché, sa date « Updated » sur le
-      site. Hors périmètre vu en portant : le gabarit « Mise à jour » du
-      Journal ne connaît que Joint Challenge, Guild Raid et World Boss (pas
-      de mode pour un Special Request re-versionné — ils sont plats, c'est
-      normal) ; `tagSourceSheet` situe un tag mort dans un guide : FAIT
-      (B60).
+      « Autres » dans l'en-tête d'un monstre d'event (A49). Le dépliant d'une
+      entité nouvelle (B49) a été vu au patch du 20/10.
 - [ ] **« Fiche perso » › Pros / Cons et Synergies — contrôles à l'écran
       (lot B42)** : le banc ne clique pas, aucun enregistrement réel n'a été
       joué et « Traduire » n'a jamais été appelé avec des clés. Relancer quick
@@ -288,12 +225,6 @@ les preuves et les décisions vivent dans le tri consolidé de sevih-tool
       (l'onglet du libellé). À juger aussi : la carte Vidéos en pleine
       largeur avec ses miniatures de 120 px — pas trop haute sur un perso à
       quatre ou cinq vidéos ?
-- [ ] **« Pousser », restes de B33** (premier clic réel fait par Sevih,
-      confirmé le 18/10) : la relecture de `/api/git` au retour sur la page
-      (focus, onglet du navigateur redevenu visible) est FAITE (B60). À jouer par
-      Sevih, depuis A33 : un fichier indexé au terminal (`git add`) puis un
-      enregistrement dans quick — `git show --stat` ne le cite pas,
-      `git status` le montre toujours indexé.
 - [ ] **Refonte de l'UI — contrôles à l'écran** (la série est close le 07/10,
       le banc ne joue pas ces états) : survol des ✕ et des boutons fantômes,
       anneau de focus, journal en haut pendant un vrai enregistrement (lot
