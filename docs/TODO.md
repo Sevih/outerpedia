@@ -159,12 +159,6 @@ les preuves et les décisions vivent dans le tri consolidé de sevih-tool
       actif, le journal redit la ligne avant l'archive, et
       git show --stat HEAD ne porte que l'archive et les guides (la
       promotion reste à committer, dans Patch).
-- [ ] **Après le retrait de `/admin` (relecture du 13/10) — contrôles à
-      l'écran ; les points 1 à 7 sont faits (A51), le point 8 aussi (B49)** :
-      À l'écran, par Sevih : un vrai ajout Twitch ou Bilibili sur une fiche
-      (A48), les pastilles qui ne bougent plus au dry-run ni au push (A50),
-      « Autres » dans l'en-tête d'un monstre d'event (A49). Le dépliant d'une
-      entité nouvelle (B49) a été vu au patch du 20/10.
 - [ ] **« Fiche perso » › Pros / Cons et Synergies — contrôles à l'écran
       (lot B42)** : le banc ne clique pas, aucun enregistrement réel n'a été
       joué et « Traduire » n'a jamais été appelé avec des clés. Relancer quick
@@ -225,19 +219,6 @@ les preuves et les décisions vivent dans le tri consolidé de sevih-tool
       (l'onglet du libellé). À juger aussi : la carte Vidéos en pleine
       largeur avec ses miniatures de 120 px — pas trop haute sur un perso à
       quatre ou cinq vidéos ?
-- [ ] **Refonte de l'UI — contrôles à l'écran** (la série est close le 07/10,
-      le banc ne joue pas ces états) : survol des ✕ et des boutons fantômes,
-      anneau de focus, journal en haut pendant un vrai enregistrement (lot
-      A30 : une ligne verte quand ça passe ; sur un refus réel tout le
-      journal, « Copier » et son collage ; la page qui remonte depuis le bas
-      de Gear reco, savebar comprise),
-      résultats de Récompense avec icônes, hash `#gear/<id>` (redirigé vers
-      la fiche depuis B40), fenêtre sous
-      1060 px ; Rangs : cellule modifiée, refus réel, dépliage, clavier dans
-      les menus de rang ; Discord AVEC le jeton : serveurs, salons,
-      emojis de serveur, un envoi d'essai sur le serveur perso, embed,
-      reprise d'envoi, presse-papiers (listes détaillées dans les entrées
-      DONE des lots F16, B28, B29, C6).
 
 ## 🧪 À jouer au prochain patch
 

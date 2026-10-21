@@ -18,7 +18,10 @@
   les suites du retrait de `/admin`, Événements (F23), Guides (F18), Pros /
   Cons et Synergies, Vidéos, et la refonte de l'UI. Le 21/10 : Guides (F18),
   Événements (F23) et les restes de « Pousser » (B33) vus aussi ; le dépliant
-  d'une entité nouvelle (B49) vu au patch.
+  d'une entité nouvelle (B49) vu au patch. Puis les suites du retrait de
+  `/admin` (A48, A49, A50) et la refonte de l'UI (F16, B28, B29, C6) vues
+  aussi : ne restent, en contrôles d'écran, que le versionnage d'un boss qui
+  change (F22), Pros / Cons et Synergies, et Vidéos.
 - **Guides : « en cours de mise à jour » et version cachée, édités dans quick
   (B66).** Demande de Sevih du 20/10 : deux interrupteurs de plus à côté de
   `hidden`. (1) `updating` sur le GUIDE (`GuideMeta.updating`, accepté par
