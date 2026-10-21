@@ -5,6 +5,22 @@
 > détail vit dans git. Le `CHANGELOG.md` racine est GELÉ depuis le 03/08 —
 > ce fichier et le log git SONT le journal du projet.
 
+## 2026-10-21
+
+- **Clôtures du 21/10 matin.** `bestSkill` d'Astei et de Gnosis Dahlia
+  après F30 : `pnpm datagen:build` puis `datagen:promote` à blanc sur les
+  tables 1.11.500 — `solver/characters.json` identique au promu (Astei S1
+  2 730, Dahlia S1 2 220 : leurs bursts à 1 300 ‰ et 1 200 ‰ restent sous le
+  S1), seul `wallpapers.json` ~2 au dry-run, rien promu : item retiré.
+  « Migration de l'admin vers quick » : les 22 étapes de
+  `docs/quick-migration.md` sont portées (3 à 21 faites, 14 non porté et 15
+  fait autrement par A34, 22 clôture le 13/10), l'item d'inventaire sort du
+  TODO ; le document reste la carte de la série. Décisions de Sevih : lots
+  C27 (slugs de buff), A76 (repli fantôme), A77 (restes de F31) et G35 (test
+  M3) rédigés ; reroll Transistone de gear-solver remis après le calculateur ;
+  F12 attend un perso limité (décembre). Suites de G8 : à expliquer avant
+  d'ouvrir.
+
 ## 2026-10-20
 
 - **Clôtures du 20/10 soir — contrôles à l'écran de quick vus par Sevih.**

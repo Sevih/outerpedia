@@ -40,10 +40,6 @@ les preuves et les décisions vivent dans le tri consolidé de sevih-tool
 - [ ] **14 skills à repli fantôme (suite de F30)** : 1205, 1206, 1209, 2201,
       4021, 6501, 6503, 6505, 7601, 8505, 8506, 9419-9421 — cellule juste,
       une ligne de tooltip en trop. Un lot A.
-- [ ] **`bestSkill` d'Astei et de Gnosis Dahlia (F30)** : leurs bursts passent
-      à 1 300 ‰ et 1 200 ‰ ; au prochain `pnpm datagen:build` + promote
-      `solver/`, vérifier si `bestSkill` change (puis `data-sync.yml` le
-      propose à gear-solver).
 - [ ] **Fiche perso › Skills, restes de F31** : la classe `c-read` des deux
       cartes de lecture n'a pas de règle CSS (marqueur inerte) ; `kitExtras`
       recharge `extractedBundle` (~180 ms) une seconde fois par lecture de la
@@ -59,47 +55,6 @@ les preuves et les décisions vivent dans le tri consolidé de sevih-tool
 
 ## 🧰 Outil quick
 
-- [ ] **Migration de l'admin vers quick** (décision du 08/10) : inventaire,
-      ordre et règles dans `docs/quick-migration.md`. FAIT : Short names et
-      Search aliases (onglet « Noms », lot B34), Banner (onglet
-      « Bannières », lot B35), la boîte de réception de la home (onglet
-      « Tableau de bord », lot B36), la chaîne des données (onglet
-      « Patch », lot C10), Changelog (onglet « Journal du site », lot B37),
-      Game data (onglet « Tables du jeu », lot B38), Effect (onglet
-      « Effets », lot B41), Synergy et Pro / Con (sous-onglets « Synergies »
-      et « Pros / Cons » de la « Fiche perso », lot B42), Character (section
-      « Fiche perso », lots C11, B42, B39 et B40 — la coquille, le picker de
-      héros partagé, les sous-onglets Fiche, Pros / Cons, Synergies, Skills et
-      Gear reco, qui a quitté les Données), EE (sous-onglet « EE » de la
-      « Fiche perso », lot B43), Monster (onglet « Monstres », lot C12 — le
-      câblage des chips ; ses stats, son intégration et ses versions sont de
-      l'extractor, étapes 19-20), Item (onglet « Items », lot B44 — le
-      dernier des Éditeurs), Guide editor › catégories de boss (section
-      « Guides », lot F18 — les sept catégories de `GUIDE_SPECS`, sans les
-      catégories mortes), Guide editor › General guides et Overview (la même
-      section, lot F19 — les trois guides généraux à fragment éditable sous
-      une même forme, et l'import de contribution ; le groupe « Guide
-      editor » quitte le menu de l'admin), Extractor › revue par cible et
-      acceptation (section « Extraction » des Données, lot F20 — les dix
-      cibles, leurs entités et un diff lisible, « Confirmer l'extraction »,
-      les retouches mineures, « Intégrer » / « Retirer » un item ; les liens
-      Effect, Armor et Item quittent le menu de l'admin), Extractor › fiches
-      et intégration (la même section, lot F21 — la fiche d'un perso, d'un
-      monstre, d'une famille d'équipement, « Intégrer », « Intégrer un
-      mode », les sprites du jeu ; les six liens quittent le menu de l'admin),
-      Extractor › versionnage (la même section, lot F22 — « Figer et
-      ré-épingler » sur la fiche monstre, le plan des guides avant de figer ;
-      le groupe « Extractor » quitte le menu de l'admin), Events (onglet
-      « Événements », lot F23 — la liste, l'éditeur à six langues en trois
-      sous-onglets, « Enregistrer » publie sur R2 et committe ; le groupe
-      « Tools » quitte le menu de l'admin), le retrait de `/admin` (22,
-      lots C14 et C15 — pages, routes et composants supprimés le 13/10 :
-      quick est le seul outil).
-      Clos sans portage (lot A34) : Gear presets
-      (non porté, le fichier s'édite à la main) et Tag control (le contrôle
-      est le test, bloquant dans `pnpm commit`).
-      À faire par Sevih : remplir
-      la colonne « Agacements » (en vrac) ; puis un lot par section.
 - [ ] **« Extraction » › versionnage — contrôles à l'écran (lot F22)** : le
       banc ne clique pas, et RIEN n'a été figé (`POST /api/extractor/freeze`
       n'est pas dans `READ_ONLY_POSTS`) ; ses refus sont testés. Relancer
