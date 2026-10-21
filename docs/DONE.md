@@ -7,6 +7,17 @@
 
 ## 2026-10-20
 
+- **Clôtures du 20/10 soir — contrôles à l'écran de quick vus par Sevih.**
+  Seize listes de contrôles de la migration quick retirées du TODO, jouées
+  au fil du patch du 20/10 et des mois précédents : Extraction vue
+  d'ensemble (F20), fiches et intégration (F21), guides généraux et import
+  (F19), Core Fusion (C13), Monstres (C12), Items (B44), Fiche perso › EE
+  (B43), Gear reco (B40), Skills (B39), Fiche perso (C11), Effets (B41),
+  Tables du jeu (B38), Journal du site (B37), Tableau de bord (B36), Noms
+  (B34), Bannières (B35). Restent : versionnage d'un boss qui change (F22),
+  les suites du retrait de `/admin`, Événements (F23), Guides (F18), Pros /
+  Cons et Synergies, Vidéos, les restes de « Pousser » (B33) et la refonte
+  de l'UI.
 - **Guides : « en cours de mise à jour » et version cachée, édités dans quick
   (B66).** Demande de Sevih du 20/10 : deux interrupteurs de plus à côté de
   `hidden`. (1) `updating` sur le GUIDE (`GuideMeta.updating`, accepté par
