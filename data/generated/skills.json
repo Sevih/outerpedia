@@ -374,7 +374,7 @@
         "type": "BT_STAT",
         "target": "my_team",
         "buff": "2000035_2_6",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up"
       },
       {
@@ -393,7 +393,7 @@
         "type": "BT_STAT",
         "target": "my_team",
         "buff": "2000035_2_8",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up",
         "label": "SYS_BUFF_CRITICAL_DAMAGE_UP"
       },
@@ -403,7 +403,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "2000035_2_9",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up"
       }
     ]
@@ -1006,7 +1006,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "2000093_passive_2",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up",
         "tooltip": "12",
         "choice": true
@@ -1275,7 +1275,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "2000112_2_5",
-        "stat": "dmg_boost",
+        "stat": "damage_boost",
         "mode": "up",
         "label": "SYS_BUFF_DMG"
       },
@@ -2564,7 +2564,7 @@
         "type": "BT_STAT_PREMIUM",
         "target": "me",
         "buff": "trancendent_8_dmg_reduce_rate",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up"
       },
       {
@@ -2573,7 +2573,7 @@
         "type": "BT_STAT_PREMIUM",
         "target": "me",
         "buff": "trancendent_8_dmg_reduce_rate_upgrade",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up"
       },
       {
@@ -2582,7 +2582,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       }
     ]
@@ -3906,7 +3906,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "2000002_3_1",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up",
         "caller": "ultimate"
       },
@@ -4352,7 +4352,7 @@
         "type": "BT_STAT_PREMIUM",
         "target": "me",
         "buff": "trancendent_8_cri_dmg",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up"
       },
       {
@@ -4361,7 +4361,7 @@
         "type": "BT_STAT_PREMIUM",
         "target": "me",
         "buff": "trancendent_8_cri_dmg_upgrade",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up"
       },
       {
@@ -4370,7 +4370,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       }
     ]
@@ -4722,7 +4722,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "2000002_3_1",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up",
         "caller": "ultimate"
       },
@@ -4877,7 +4877,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "2000002_3_1",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up",
         "caller": "ultimate"
       },
@@ -5017,7 +5017,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "2000002_3_1",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up",
         "caller": "ultimate"
       },
@@ -6016,7 +6016,7 @@
         "type": "BT_STAT_PREMIUM",
         "target": "me",
         "buff": "trancendent_8_dmg_boost",
-        "stat": "dmg_boost",
+        "stat": "damage_boost",
         "mode": "up"
       },
       {
@@ -6025,7 +6025,7 @@
         "type": "BT_STAT_PREMIUM",
         "target": "me",
         "buff": "trancendent_8_dmg_boost_upgrade",
-        "stat": "dmg_boost",
+        "stat": "damage_boost",
         "mode": "up"
       },
       {
@@ -6034,7 +6034,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       }
     ]
@@ -7624,7 +7624,7 @@
         "type": "BT_STAT_PREMIUM",
         "target": "me",
         "buff": "trancendent_8_dmg_boost",
-        "stat": "dmg_boost",
+        "stat": "damage_boost",
         "mode": "up"
       },
       {
@@ -7642,7 +7642,7 @@
         "type": "BT_STAT_PREMIUM",
         "target": "me",
         "buff": "trancendent_8_dmg_boost_upgrade",
-        "stat": "dmg_boost",
+        "stat": "damage_boost",
         "mode": "up"
       },
       {
@@ -7651,7 +7651,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       }
     ]
@@ -9443,7 +9443,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       }
     ]
@@ -11072,7 +11072,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       }
     ]
@@ -12244,7 +12244,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "2700005_3_1",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up",
         "tooltip": "12",
         "caller": "ultimate"
@@ -12726,7 +12726,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       }
     ]
@@ -14740,7 +14740,7 @@
         "type": "BT_STAT_PREMIUM",
         "target": "me",
         "buff": "trancendent_8_cri_dmg",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up"
       },
       {
@@ -14749,7 +14749,7 @@
         "type": "BT_STAT_PREMIUM",
         "target": "me",
         "buff": "trancendent_8_cri_dmg_upgrade",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up"
       },
       {
@@ -14758,7 +14758,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       }
     ]
@@ -16312,7 +16312,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       }
     ]
@@ -17911,7 +17911,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       }
     ]
@@ -19447,7 +19447,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       }
     ]
@@ -21040,7 +21040,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       }
     ]
@@ -22454,7 +22454,7 @@
         "type": "BT_STAT_PREMIUM",
         "target": "me",
         "buff": "trancendent_8_dmg_boost",
-        "stat": "dmg_boost",
+        "stat": "damage_boost",
         "mode": "up"
       },
       {
@@ -22463,7 +22463,7 @@
         "type": "BT_STAT_PREMIUM",
         "target": "me",
         "buff": "trancendent_8_dmg_boost_upgrade",
-        "stat": "dmg_boost",
+        "stat": "damage_boost",
         "mode": "up"
       },
       {
@@ -22472,7 +22472,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       }
     ]
@@ -23354,7 +23354,7 @@
         "type": "BT_STAT",
         "target": "my_team",
         "buff": "2000012_2_2",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up",
         "tooltip": "12",
         "caller": "second"
@@ -23945,7 +23945,7 @@
         "type": "BT_STAT",
         "target": "my_team",
         "buff": "2000012_chain_1_1",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up",
         "tooltip": "12"
       }
@@ -24048,7 +24048,7 @@
         "type": "BT_STAT_PREMIUM",
         "target": "my_team",
         "buff": "trancendent_8_dmg_boost_team",
-        "stat": "dmg_boost",
+        "stat": "damage_boost",
         "mode": "up"
       },
       {
@@ -24057,7 +24057,7 @@
         "type": "BT_STAT_PREMIUM",
         "target": "my_team",
         "buff": "trancendent_8_dmg_boost_team_upgrade",
-        "stat": "dmg_boost",
+        "stat": "damage_boost",
         "mode": "up"
       },
       {
@@ -24066,7 +24066,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       }
     ]
@@ -25721,7 +25721,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       }
     ]
@@ -27336,7 +27336,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       }
     ]
@@ -29089,7 +29089,7 @@
         "type": "BT_STAT_PREMIUM",
         "target": "my_team",
         "buff": "trancendent_8_cri_dmg_team",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up"
       },
       {
@@ -29098,7 +29098,7 @@
         "type": "BT_STAT_PREMIUM",
         "target": "my_team",
         "buff": "trancendent_8_cri_dmg_team_upgrade",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up"
       },
       {
@@ -29107,7 +29107,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       }
     ]
@@ -31310,7 +31310,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       }
     ]
@@ -33046,7 +33046,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       }
     ]
@@ -34635,7 +34635,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       }
     ]
@@ -35702,7 +35702,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "2000019_2_3",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up",
         "label": "SYS_BUFF_CRITICAL_DAMAGE_UP",
         "caller": "second"
@@ -36243,7 +36243,7 @@
         "type": "BT_STAT_PREMIUM",
         "target": "my_team",
         "buff": "trancendent_8_cri_dmg_team",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up"
       },
       {
@@ -36252,7 +36252,7 @@
         "type": "BT_STAT_PREMIUM",
         "target": "my_team",
         "buff": "trancendent_8_cri_dmg_team_upgrade",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up"
       },
       {
@@ -36261,7 +36261,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       }
     ]
@@ -36604,7 +36604,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "2000019_2_3",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up",
         "label": "SYS_BUFF_CRITICAL_DAMAGE_UP",
         "caller": "second"
@@ -36788,7 +36788,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "2000019_2_3",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up",
         "label": "SYS_BUFF_CRITICAL_DAMAGE_UP",
         "caller": "second"
@@ -36999,7 +36999,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "2000019_2_3",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up",
         "label": "SYS_BUFF_CRITICAL_DAMAGE_UP",
         "caller": "second"
@@ -37151,7 +37151,7 @@
         "type": "BT_STAT",
         "target": "my_team",
         "buff": "2700019_1_1",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up",
         "label": "SYS_BUFF_CRITICAL_DAMAGE_UP",
         "caller": "first"
@@ -38064,7 +38064,7 @@
         "type": "BT_STAT_PREMIUM",
         "target": "my_team",
         "buff": "trancendent_8_cri_dmg_team",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up"
       },
       {
@@ -38073,7 +38073,7 @@
         "type": "BT_STAT_PREMIUM",
         "target": "my_team",
         "buff": "trancendent_8_cri_dmg_team_upgrade",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up"
       },
       {
@@ -38089,7 +38089,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       },
       {
@@ -38187,7 +38187,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "2700019_backup_1_1",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up",
         "tooltip": "12"
       }
@@ -38277,7 +38277,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "2700019_backup_1_1",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up",
         "tooltip": "12"
       }
@@ -39002,7 +39002,7 @@
         "type": "BT_STAT",
         "target": "my_team",
         "buff": "2700019_1_1",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up",
         "label": "SYS_BUFF_CRITICAL_DAMAGE_UP",
         "caller": "first"
@@ -40125,7 +40125,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       }
     ]
@@ -42186,7 +42186,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       }
     ]
@@ -43965,7 +43965,7 @@
         "type": "BT_STAT_PREMIUM",
         "target": "my_team",
         "buff": "trancendent_8_cri_dmg_team",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up"
       },
       {
@@ -43974,7 +43974,7 @@
         "type": "BT_STAT_PREMIUM",
         "target": "my_team",
         "buff": "trancendent_8_cri_dmg_team_upgrade",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up"
       },
       {
@@ -43983,7 +43983,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       }
     ]
@@ -45683,7 +45683,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       }
     ]
@@ -47539,7 +47539,7 @@
         "type": "BT_STAT_PREMIUM",
         "target": "me",
         "buff": "trancendent_8_dmg_reduce_rate",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up"
       },
       {
@@ -47548,7 +47548,7 @@
         "type": "BT_STAT_PREMIUM",
         "target": "me",
         "buff": "trancendent_8_dmg_reduce_rate_upgrade",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up"
       },
       {
@@ -47557,7 +47557,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       }
     ]
@@ -49171,7 +49171,7 @@
         "type": "BT_STAT_PREMIUM",
         "target": "my_team",
         "buff": "trancendent_8_cri_dmg_team",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up"
       },
       {
@@ -49180,7 +49180,7 @@
         "type": "BT_STAT_PREMIUM",
         "target": "my_team",
         "buff": "trancendent_8_cri_dmg_team_upgrade",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up"
       },
       {
@@ -49189,7 +49189,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       }
     ]
@@ -50690,7 +50690,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       }
     ]
@@ -52103,7 +52103,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       }
     ]
@@ -53769,7 +53769,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       }
     ]
@@ -55352,7 +55352,7 @@
         "type": "BT_STAT_PREMIUM",
         "target": "me",
         "buff": "trancendent_8_dmg_boost",
-        "stat": "dmg_boost",
+        "stat": "damage_boost",
         "mode": "up"
       },
       {
@@ -55361,7 +55361,7 @@
         "type": "BT_STAT_PREMIUM",
         "target": "me",
         "buff": "trancendent_8_dmg_boost_upgrade",
-        "stat": "dmg_boost",
+        "stat": "damage_boost",
         "mode": "up"
       },
       {
@@ -55370,7 +55370,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       }
     ]
@@ -56914,7 +56914,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       }
     ]
@@ -58326,7 +58326,7 @@
         "type": "BT_STAT_PREMIUM",
         "target": "me",
         "buff": "trancendent_8_dmg_boost",
-        "stat": "dmg_boost",
+        "stat": "damage_boost",
         "mode": "up"
       },
       {
@@ -58335,7 +58335,7 @@
         "type": "BT_STAT_PREMIUM",
         "target": "me",
         "buff": "trancendent_8_dmg_boost_upgrade",
-        "stat": "dmg_boost",
+        "stat": "damage_boost",
         "mode": "up"
       },
       {
@@ -58344,7 +58344,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       }
     ]
@@ -59915,7 +59915,7 @@
         "type": "BT_STAT_PREMIUM",
         "target": "me",
         "buff": "trancendent_8_cri_dmg",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up"
       },
       {
@@ -59924,7 +59924,7 @@
         "type": "BT_STAT_PREMIUM",
         "target": "me",
         "buff": "trancendent_8_cri_dmg_upgrade",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up"
       },
       {
@@ -59933,7 +59933,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       }
     ]
@@ -61349,7 +61349,7 @@
         "type": "BT_STAT_PREMIUM",
         "target": "me",
         "buff": "trancendent_8_cri_dmg",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up"
       },
       {
@@ -61358,7 +61358,7 @@
         "type": "BT_STAT_PREMIUM",
         "target": "me",
         "buff": "trancendent_8_cri_dmg_upgrade",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up"
       },
       {
@@ -61367,7 +61367,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       }
     ]
@@ -62819,7 +62819,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       }
     ]
@@ -64362,7 +64362,7 @@
         "type": "BT_STAT_PREMIUM",
         "target": "my_team",
         "buff": "trancendent_8_dmg_boost_team",
-        "stat": "dmg_boost",
+        "stat": "damage_boost",
         "mode": "up"
       },
       {
@@ -64371,7 +64371,7 @@
         "type": "BT_STAT_PREMIUM",
         "target": "my_team",
         "buff": "trancendent_8_dmg_boost_team_upgrade",
-        "stat": "dmg_boost",
+        "stat": "damage_boost",
         "mode": "up"
       },
       {
@@ -64380,7 +64380,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       }
     ]
@@ -66102,7 +66102,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       },
       {
@@ -66455,7 +66455,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "2700035_u_1",
-        "stat": "dmg_boost",
+        "stat": "damage_boost",
         "mode": "up"
       }
     ]
@@ -66648,7 +66648,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "2700035_u_1",
-        "stat": "dmg_boost",
+        "stat": "damage_boost",
         "mode": "up"
       },
       {
@@ -66891,7 +66891,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "2700035_u_1",
-        "stat": "dmg_boost",
+        "stat": "damage_boost",
         "mode": "up"
       },
       {
@@ -67907,7 +67907,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       }
     ]
@@ -69716,7 +69716,7 @@
         "type": "BT_STAT_PREMIUM",
         "target": "my_team",
         "buff": "trancendent_8_dmg_reduce_rate_team",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up"
       },
       {
@@ -69725,7 +69725,7 @@
         "type": "BT_STAT_PREMIUM",
         "target": "my_team",
         "buff": "trancendent_8_dmg_reduce_rate_team_upgrade",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up"
       },
       {
@@ -69734,7 +69734,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       }
     ]
@@ -71649,7 +71649,7 @@
         "type": "BT_STAT_PREMIUM",
         "target": "my_team",
         "buff": "trancendent_8_dmg_reduce_rate_team",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up"
       },
       {
@@ -71658,7 +71658,7 @@
         "type": "BT_STAT_PREMIUM",
         "target": "my_team",
         "buff": "trancendent_8_dmg_reduce_rate_team_upgrade",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up"
       },
       {
@@ -71667,7 +71667,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       }
     ]
@@ -72417,7 +72417,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "core_passive_cri_dmg",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up",
         "tooltip": "12"
       },
@@ -73353,7 +73353,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       }
     ]
@@ -74921,7 +74921,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       }
     ]
@@ -76609,7 +76609,7 @@
         "type": "BT_STAT_PREMIUM",
         "target": "my_team",
         "buff": "trancendent_8_dmg_boost_team",
-        "stat": "dmg_boost",
+        "stat": "damage_boost",
         "mode": "up"
       },
       {
@@ -76618,7 +76618,7 @@
         "type": "BT_STAT_PREMIUM",
         "target": "my_team",
         "buff": "trancendent_8_dmg_boost_team_upgrade",
-        "stat": "dmg_boost",
+        "stat": "damage_boost",
         "mode": "up"
       },
       {
@@ -76627,7 +76627,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       }
     ]
@@ -78326,7 +78326,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       }
     ]
@@ -79912,7 +79912,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       }
     ]
@@ -81788,7 +81788,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       }
     ]
@@ -83169,7 +83169,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "2700043_2_4",
-        "stat": "avoid",
+        "stat": "resilience",
         "mode": "down"
       },
       {
@@ -83944,7 +83944,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       }
     ]
@@ -84407,7 +84407,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "2700043_2_4",
-        "stat": "avoid",
+        "stat": "resilience",
         "mode": "down"
       },
       {
@@ -84760,7 +84760,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "2700043_2_4",
-        "stat": "avoid",
+        "stat": "resilience",
         "mode": "down"
       },
       {
@@ -85121,7 +85121,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "2700043_2_4",
-        "stat": "avoid",
+        "stat": "resilience",
         "mode": "down"
       },
       {
@@ -86343,7 +86343,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       }
     ]
@@ -87919,7 +87919,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       }
     ]
@@ -89416,7 +89416,7 @@
         "type": "BT_STAT_PREMIUM",
         "target": "me",
         "buff": "trancendent_8_dmg_boost",
-        "stat": "dmg_boost",
+        "stat": "damage_boost",
         "mode": "up"
       },
       {
@@ -89425,7 +89425,7 @@
         "type": "BT_STAT_PREMIUM",
         "target": "me",
         "buff": "trancendent_8_dmg_boost_upgrade",
-        "stat": "dmg_boost",
+        "stat": "damage_boost",
         "mode": "up"
       },
       {
@@ -89434,7 +89434,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       }
     ]
@@ -90997,7 +90997,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       }
     ]
@@ -92650,7 +92650,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       }
     ]
@@ -94145,7 +94145,7 @@
         "type": "BT_STAT_PREMIUM",
         "target": "me",
         "buff": "trancendent_8_cri_dmg",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up"
       },
       {
@@ -94154,7 +94154,7 @@
         "type": "BT_STAT_PREMIUM",
         "target": "me",
         "buff": "trancendent_8_cri_dmg_upgrade",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up"
       },
       {
@@ -94163,7 +94163,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       }
     ]
@@ -95497,7 +95497,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       }
     ]
@@ -96977,7 +96977,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       }
     ]
@@ -97732,7 +97732,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "2000052_1_3",
-        "stat": "dmg_boost",
+        "stat": "damage_boost",
         "mode": "up",
         "caller": "first"
       },
@@ -98822,7 +98822,7 @@
         "type": "BT_STAT_TOWER_CONTENT",
         "target": "me",
         "buff": "2000052_trancendent_5",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up"
       },
       {
@@ -98849,7 +98849,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       }
     ]
@@ -101382,7 +101382,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       },
       {
@@ -101391,7 +101391,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap_upgrade",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       },
       {
@@ -103295,7 +103295,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       }
     ]
@@ -104876,7 +104876,7 @@
         "type": "BT_STAT_PREMIUM",
         "target": "my_team",
         "buff": "trancendent_8_cri_dmg_team",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up"
       },
       {
@@ -104885,7 +104885,7 @@
         "type": "BT_STAT_PREMIUM",
         "target": "my_team",
         "buff": "trancendent_8_cri_dmg_team_upgrade",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up"
       },
       {
@@ -104894,7 +104894,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       }
     ]
@@ -106879,7 +106879,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       }
     ]
@@ -109048,7 +109048,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       }
     ]
@@ -111137,7 +111137,7 @@
         "type": "BT_STAT_PREMIUM",
         "target": "my_team",
         "buff": "trancendent_8_dmg_reduce_rate_team",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up"
       },
       {
@@ -111146,7 +111146,7 @@
         "type": "BT_STAT_PREMIUM",
         "target": "my_team",
         "buff": "trancendent_8_dmg_reduce_rate_team_upgrade",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up"
       },
       {
@@ -111155,7 +111155,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       }
     ]
@@ -112981,7 +112981,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       }
     ]
@@ -114961,7 +114961,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap_upgrade",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       },
       {
@@ -116681,7 +116681,7 @@
         "type": "BT_STAT_PREMIUM",
         "target": "my_team",
         "buff": "trancendent_8_dmg_boost_team",
-        "stat": "dmg_boost",
+        "stat": "damage_boost",
         "mode": "up"
       },
       {
@@ -116690,7 +116690,7 @@
         "type": "BT_STAT_PREMIUM",
         "target": "my_team",
         "buff": "trancendent_8_dmg_boost_team_upgrade",
-        "stat": "dmg_boost",
+        "stat": "damage_boost",
         "mode": "up"
       },
       {
@@ -116699,7 +116699,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       }
     ]
@@ -117010,7 +117010,7 @@
         "type": "BT_STAT",
         "target": "my_team",
         "buff": "2000060_u_1",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up",
         "tooltip": "12"
       },
@@ -117204,7 +117204,7 @@
         "type": "BT_STAT",
         "target": "my_team",
         "buff": "2000060_u_1",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up",
         "tooltip": "12"
       },
@@ -117428,7 +117428,7 @@
         "type": "BT_STAT",
         "target": "my_team",
         "buff": "2000060_u_1",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up",
         "tooltip": "12"
       },
@@ -118715,7 +118715,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       }
     ]
@@ -120536,7 +120536,7 @@
         "type": "BT_STAT_PREMIUM",
         "target": "my_team",
         "buff": "trancendent_8_cri_dmg_team",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up"
       },
       {
@@ -120545,7 +120545,7 @@
         "type": "BT_STAT_PREMIUM",
         "target": "my_team",
         "buff": "trancendent_8_cri_dmg_team_upgrade",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up"
       },
       {
@@ -120554,7 +120554,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       }
     ]
@@ -122434,7 +122434,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap_upgrade",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       },
       {
@@ -124055,7 +124055,7 @@
         "type": "BT_STAT_PREMIUM",
         "target": "my_team",
         "buff": "trancendent_8_dmg_boost_team",
-        "stat": "dmg_boost",
+        "stat": "damage_boost",
         "mode": "up"
       },
       {
@@ -124064,7 +124064,7 @@
         "type": "BT_STAT_PREMIUM",
         "target": "my_team",
         "buff": "trancendent_8_dmg_boost_team_upgrade",
-        "stat": "dmg_boost",
+        "stat": "damage_boost",
         "mode": "up"
       },
       {
@@ -124073,7 +124073,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       }
     ]
@@ -126071,7 +126071,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       }
     ]
@@ -127339,7 +127339,7 @@
         "type": "BT_STAT",
         "target": "my_team",
         "buff": "2000066_3_2",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up",
         "tooltip": "12",
         "caller": "ultimate"
@@ -127795,7 +127795,7 @@
         "type": "BT_STAT_PREMIUM",
         "target": "my_team",
         "buff": "trancendent_8_dmg_boost_team",
-        "stat": "dmg_boost",
+        "stat": "damage_boost",
         "mode": "up"
       },
       {
@@ -127804,7 +127804,7 @@
         "type": "BT_STAT_PREMIUM",
         "target": "my_team",
         "buff": "trancendent_8_dmg_boost_team_upgrade",
-        "stat": "dmg_boost",
+        "stat": "damage_boost",
         "mode": "up"
       },
       {
@@ -127813,7 +127813,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       }
     ]
@@ -128865,7 +128865,7 @@
         "type": "BT_DMG_REDUCE",
         "target": "me",
         "buff": "2000067_2_5",
-        "stat": "accuracy",
+        "stat": "effectiveness",
         "mode": "up",
         "tooltip": "2000067"
       },
@@ -128884,7 +128884,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "2000067_2_3",
-        "stat": "avoid",
+        "stat": "resilience",
         "mode": "up",
         "tooltip": "14",
         "caller": "second"
@@ -129153,7 +129153,7 @@
         "type": "BT_DMG_REDUCE",
         "target": "me",
         "buff": "2000067_3_4",
-        "stat": "accuracy",
+        "stat": "effectiveness",
         "mode": "up",
         "tooltip": "2000067"
       }
@@ -129615,7 +129615,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       }
     ]
@@ -129958,7 +129958,7 @@
         "type": "BT_DMG_REDUCE",
         "target": "me",
         "buff": "2000067_u_1_3",
-        "stat": "accuracy",
+        "stat": "effectiveness",
         "mode": "up",
         "tooltip": "2000067"
       },
@@ -130143,7 +130143,7 @@
         "type": "BT_DMG_REDUCE",
         "target": "me",
         "buff": "2000067_u_1_3",
-        "stat": "accuracy",
+        "stat": "effectiveness",
         "mode": "up",
         "tooltip": "2000067"
       },
@@ -130375,7 +130375,7 @@
         "type": "BT_DMG_REDUCE",
         "target": "me",
         "buff": "2000067_u_1_3",
-        "stat": "accuracy",
+        "stat": "effectiveness",
         "mode": "up",
         "tooltip": "2000067"
       },
@@ -131485,7 +131485,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       }
     ]
@@ -133349,7 +133349,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       }
     ]
@@ -135242,7 +135242,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       }
     ]
@@ -136417,7 +136417,7 @@
         "type": "BT_STAT",
         "target": "my_team",
         "buff": "2700070_3_2",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up",
         "tooltip": "12",
         "caller": "ultimate"
@@ -136842,7 +136842,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       }
     ]
@@ -137231,7 +137231,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "2700070_u_2",
-        "stat": "dmg_boost",
+        "stat": "damage_boost",
         "mode": "up"
       }
     ]
@@ -137407,7 +137407,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "2700070_u_2",
-        "stat": "dmg_boost",
+        "stat": "damage_boost",
         "mode": "up"
       },
       {
@@ -137416,7 +137416,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "2700070_u_3_1",
-        "stat": "dmg_boost",
+        "stat": "damage_boost",
         "mode": "up"
       },
       {
@@ -137527,7 +137527,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "2700070_0_1",
-        "stat": "dmg_boost",
+        "stat": "damage_boost",
         "mode": "up"
       },
       {
@@ -138700,7 +138700,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       }
     ]
@@ -139726,7 +139726,7 @@
         "type": "BT_STAT",
         "target": "enemy",
         "buff": "2000072_2_7",
-        "stat": "avoid",
+        "stat": "resilience",
         "mode": "down",
         "caller": "second"
       }
@@ -140544,7 +140544,7 @@
         "type": "BT_STAT_PREMIUM",
         "target": "my_team",
         "buff": "trancendent_8_dmg_boost_team",
-        "stat": "dmg_boost",
+        "stat": "damage_boost",
         "mode": "up"
       },
       {
@@ -140553,7 +140553,7 @@
         "type": "BT_STAT_PREMIUM",
         "target": "my_team",
         "buff": "trancendent_8_dmg_boost_team_upgrade",
-        "stat": "dmg_boost",
+        "stat": "damage_boost",
         "mode": "up"
       },
       {
@@ -140562,7 +140562,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       }
     ]
@@ -142191,7 +142191,7 @@
         "type": "BT_STAT_PREMIUM",
         "target": "my_team",
         "buff": "trancendent_8_cri_dmg_team",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up"
       },
       {
@@ -142200,7 +142200,7 @@
         "type": "BT_STAT_PREMIUM",
         "target": "my_team",
         "buff": "trancendent_8_cri_dmg_team_upgrade",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up"
       },
       {
@@ -142209,7 +142209,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       }
     ]
@@ -144140,7 +144140,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       }
     ]
@@ -146337,7 +146337,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap_upgrade",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       },
       {
@@ -147740,7 +147740,7 @@
         "type": "BT_STAT",
         "target": "enemy_team",
         "buff": "2000076_3_4",
-        "stat": "avoid",
+        "stat": "resilience",
         "mode": "down",
         "caller": "ultimate"
       },
@@ -148160,7 +148160,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       }
     ]
@@ -150152,7 +150152,7 @@
         "type": "BT_STAT_PREMIUM",
         "target": "my_team",
         "buff": "trancendent_8_dmg_reduce_rate_team",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up"
       },
       {
@@ -150161,7 +150161,7 @@
         "type": "BT_STAT_PREMIUM",
         "target": "my_team",
         "buff": "trancendent_8_dmg_reduce_rate_team_upgrade",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up"
       },
       {
@@ -150170,7 +150170,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       }
     ]
@@ -151773,7 +151773,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       }
     ]
@@ -153182,7 +153182,7 @@
         "type": "BT_STAT",
         "target": "enemy",
         "buff": "2000079_2_5",
-        "stat": "avoid",
+        "stat": "resilience",
         "mode": "down",
         "caller": "second"
       },
@@ -153908,7 +153908,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       }
     ]
@@ -155906,7 +155906,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       }
     ]
@@ -157539,7 +157539,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       }
     ]
@@ -159417,7 +159417,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       }
     ]
@@ -161198,7 +161198,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       }
     ]
@@ -162878,7 +162878,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       }
     ]
@@ -164660,7 +164660,7 @@
         "type": "BT_STAT_PREMIUM",
         "target": "me",
         "buff": "trancendent_8_dmg_boost_30",
-        "stat": "dmg_boost",
+        "stat": "damage_boost",
         "mode": "up"
       },
       {
@@ -164669,7 +164669,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       },
       {
@@ -166537,7 +166537,7 @@
         "type": "BT_STAT",
         "target": "my_team",
         "buff": "trancendent_8_2000086_1",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up",
         "tooltip": "1012",
         "caller": "second"
@@ -166548,7 +166548,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_2000086_2",
-        "stat": "dmg_boost",
+        "stat": "damage_boost",
         "mode": "up",
         "label": "SYS_BUFF_DMG"
       },
@@ -168478,7 +168478,7 @@
         "type": "BT_STAT_PREMIUM",
         "target": "my_team",
         "buff": "trancendent_8_cri_dmg_team",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up"
       },
       {
@@ -168487,7 +168487,7 @@
         "type": "BT_STAT_PREMIUM",
         "target": "my_team",
         "buff": "trancendent_8_cri_dmg_team_upgrade",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up"
       },
       {
@@ -168496,7 +168496,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       }
     ]
@@ -170322,7 +170322,7 @@
         "type": "BT_STAT_PREMIUM",
         "target": "my_team",
         "buff": "trancendent_8_dmg_reduce_rate_team",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up"
       },
       {
@@ -170331,7 +170331,7 @@
         "type": "BT_STAT_PREMIUM",
         "target": "my_team",
         "buff": "trancendent_8_dmg_reduce_rate_team_upgrade",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up"
       },
       {
@@ -170340,7 +170340,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       }
     ]
@@ -171882,7 +171882,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       }
     ]
@@ -172115,7 +172115,7 @@
         "type": "BT_STAT",
         "target": "enemy_skill_target",
         "buff": "2000089_u_1_1",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "down",
         "tooltip": "23"
       },
@@ -172300,7 +172300,7 @@
         "type": "BT_STAT",
         "target": "enemy_skill_target",
         "buff": "2000089_u_1_1",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "down",
         "tooltip": "23"
       },
@@ -172514,7 +172514,7 @@
         "type": "BT_STAT",
         "target": "enemy_skill_target",
         "buff": "2000089_u_1_1",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "down",
         "tooltip": "23"
       },
@@ -173829,7 +173829,7 @@
         "type": "BT_STAT_PREMIUM",
         "target": "my_team",
         "buff": "trancendent_8_cri_dmg_team_upgrade",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up"
       },
       {
@@ -173838,7 +173838,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap_upgrade",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       },
       {
@@ -175816,7 +175816,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap_upgrade",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       },
       {
@@ -177771,7 +177771,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       },
       {
@@ -177780,7 +177780,7 @@
         "type": "BT_STAT_PREMIUM",
         "target": "my_team",
         "buff": "trancendent_8_dmg_boost_team_upgrade",
-        "stat": "dmg_boost",
+        "stat": "damage_boost",
         "mode": "up"
       },
       {
@@ -179593,7 +179593,7 @@
         "type": "BT_STAT_PREMIUM",
         "target": "me",
         "buff": "trancendent_8_dmg_boost_30",
-        "stat": "dmg_boost",
+        "stat": "damage_boost",
         "mode": "up"
       },
       {
@@ -179602,7 +179602,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       },
       {
@@ -179629,7 +179629,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "2000093_passive_2",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up",
         "tooltip": "12",
         "choice": true
@@ -181378,7 +181378,7 @@
         "type": "BT_STAT_PREMIUM",
         "target": "my_team",
         "buff": "trancendent_8_dmg_reduce_rate_team",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up"
       },
       {
@@ -181387,7 +181387,7 @@
         "type": "BT_STAT_PREMIUM",
         "target": "my_team",
         "buff": "trancendent_8_dmg_reduce_rate_team_upgrade",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up"
       },
       {
@@ -181396,7 +181396,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       }
     ]
@@ -183349,7 +183349,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       },
       {
@@ -183358,7 +183358,7 @@
         "type": "BT_STAT_PREMIUM",
         "target": "me",
         "buff": "trancendent_8_dmg_boost_30",
-        "stat": "dmg_boost",
+        "stat": "damage_boost",
         "mode": "up"
       },
       {
@@ -184871,7 +184871,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "2000096_chain_1_1",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up",
         "tooltip": "12"
       }
@@ -184962,7 +184962,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "2000096_chain_1_1",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up",
         "tooltip": "12"
       }
@@ -185094,7 +185094,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       },
       {
@@ -187006,7 +187006,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       },
       {
@@ -187015,7 +187015,7 @@
         "type": "BT_STAT_PREMIUM",
         "target": "me",
         "buff": "trancendent_8_dmg_boost_30",
-        "stat": "dmg_boost",
+        "stat": "damage_boost",
         "mode": "up"
       },
       {
@@ -188881,7 +188881,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       }
     ]
@@ -190598,7 +190598,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       }
     ]
@@ -192580,7 +192580,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       },
       {
@@ -193738,7 +193738,7 @@
         "type": "BT_STAT",
         "target": "my_team",
         "buff": "2000101_2_2",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up",
         "tooltip": "12"
       },
@@ -194417,7 +194417,7 @@
         "type": "BT_STAT_PREMIUM",
         "target": "my_team",
         "buff": "trancendent_8_dmg_boost_team",
-        "stat": "dmg_boost",
+        "stat": "damage_boost",
         "mode": "up"
       },
       {
@@ -194426,7 +194426,7 @@
         "type": "BT_STAT_PREMIUM",
         "target": "my_team",
         "buff": "trancendent_8_dmg_boost_team_upgrade",
-        "stat": "dmg_boost",
+        "stat": "damage_boost",
         "mode": "up"
       },
       {
@@ -194435,7 +194435,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       }
     ]
@@ -196522,7 +196522,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap_upgrade",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       },
       {
@@ -198350,7 +198350,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       }
     ]
@@ -199819,7 +199819,7 @@
         "type": "BT_STAT_PREMIUM",
         "target": "my_team",
         "buff": "trancendent_8_dmg_boost_team",
-        "stat": "dmg_boost",
+        "stat": "damage_boost",
         "mode": "up"
       },
       {
@@ -199828,7 +199828,7 @@
         "type": "BT_STAT_PREMIUM",
         "target": "my_team",
         "buff": "trancendent_8_dmg_boost_team_upgrade",
-        "stat": "dmg_boost",
+        "stat": "damage_boost",
         "mode": "up"
       },
       {
@@ -199837,7 +199837,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       }
     ]
@@ -201898,7 +201898,7 @@
         "type": "BT_STAT_PREMIUM",
         "target": "my_team",
         "buff": "trancendent_8_dmg_reduce_rate_team_upgrade",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up"
       },
       {
@@ -201914,7 +201914,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap_upgrade",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       },
       {
@@ -205713,7 +205713,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       }
     ]
@@ -207734,7 +207734,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap_upgrade",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       },
       {
@@ -210035,7 +210035,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap_upgrade",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       },
       {
@@ -211646,7 +211646,7 @@
         "type": "BT_STAT",
         "target": "my_team",
         "buff": "2000111_2_2",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up",
         "tooltip": "12",
         "caller": "second"
@@ -212101,7 +212101,7 @@
         "type": "BT_STAT",
         "target": "enemy",
         "buff": "2000111_3_2_1_4",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "down",
         "tooltip": "1023"
       },
@@ -212624,7 +212624,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap_upgrade",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       },
       {
@@ -212987,7 +212987,7 @@
         "type": "BT_STAT",
         "target": "my_team",
         "buff": "2000111_2_2",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up",
         "tooltip": "12",
         "caller": "second"
@@ -213216,7 +213216,7 @@
         "type": "BT_STAT",
         "target": "my_team",
         "buff": "2000111_2_2",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up",
         "tooltip": "12",
         "caller": "second"
@@ -213495,7 +213495,7 @@
         "type": "BT_STAT",
         "target": "my_team",
         "buff": "2000111_2_2",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up",
         "tooltip": "12",
         "caller": "second"
@@ -214854,7 +214854,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap_upgrade",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       },
       {
@@ -216816,7 +216816,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       }
     ]
@@ -218314,7 +218314,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "2000114_3_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "2000114",
         "caller": "ultimate"
@@ -218350,7 +218350,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "2000114_3_5",
-        "stat": "dmg_boost",
+        "stat": "damage_boost",
         "mode": "up",
         "caller": "ultimate"
       },
@@ -218360,7 +218360,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "2000114_3_6",
-        "stat": "dmg_boost",
+        "stat": "damage_boost",
         "mode": "up",
         "caller": "ultimate"
       },
@@ -218794,7 +218794,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       },
       {
@@ -218803,7 +218803,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_2000114_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "2000114"
       },
@@ -219186,7 +219186,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "2000114_U_1",
-        "stat": "dmg_boost",
+        "stat": "damage_boost",
         "mode": "up"
       },
       {
@@ -219470,7 +219470,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "2000114_U_1",
-        "stat": "dmg_boost",
+        "stat": "damage_boost",
         "mode": "up"
       },
       {
@@ -219511,7 +219511,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "2000114_U_2_1",
-        "stat": "dmg_boost",
+        "stat": "damage_boost",
         "mode": "up"
       },
       {
@@ -219812,7 +219812,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "2000114_U_1",
-        "stat": "dmg_boost",
+        "stat": "damage_boost",
         "mode": "up"
       },
       {
@@ -219853,7 +219853,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "2000114_U_2_1",
-        "stat": "dmg_boost",
+        "stat": "damage_boost",
         "mode": "up"
       },
       {
@@ -220899,7 +220899,7 @@
         "type": "BT_STAT_PREMIUM",
         "target": "me",
         "buff": "trancendent_8_dmg_reduce_rate",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up"
       },
       {
@@ -220908,7 +220908,7 @@
         "type": "BT_STAT_PREMIUM",
         "target": "me",
         "buff": "trancendent_8_dmg_reduce_rate_upgrade",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up"
       },
       {
@@ -220917,7 +220917,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       }
     ]
@@ -221244,7 +221244,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "2000116_u_1_1",
-        "stat": "dmg_boost",
+        "stat": "damage_boost",
         "mode": "up"
       },
       {
@@ -221429,7 +221429,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "2000116_u_1_1",
-        "stat": "dmg_boost",
+        "stat": "damage_boost",
         "mode": "up"
       },
       {
@@ -221446,7 +221446,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "2000116_u_2",
-        "stat": "dmg_boost",
+        "stat": "damage_boost",
         "mode": "up"
       }
     ]
@@ -221648,7 +221648,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "2000116_u_1_1",
-        "stat": "dmg_boost",
+        "stat": "damage_boost",
         "mode": "up"
       },
       {
@@ -221665,7 +221665,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "2000116_u_2",
-        "stat": "dmg_boost",
+        "stat": "damage_boost",
         "mode": "up"
       },
       {
@@ -222870,7 +222870,7 @@
         "type": "BT_STAT_PREMIUM",
         "target": "my_team",
         "buff": "trancendent_8_cri_dmg_team",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up"
       },
       {
@@ -222879,7 +222879,7 @@
         "type": "BT_STAT_PREMIUM",
         "target": "my_team",
         "buff": "trancendent_8_cri_dmg_team_upgrade",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up"
       },
       {
@@ -222888,7 +222888,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       }
     ]
@@ -224659,7 +224659,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       }
     ]
@@ -226640,7 +226640,7 @@
         "type": "BT_STAT_PREMIUM",
         "target": "me",
         "buff": "trancendent_8_cri_dmg_50%",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up"
       },
       {
@@ -226649,7 +226649,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       },
       {
@@ -228669,7 +228669,7 @@
         "type": "BT_STAT_PREMIUM",
         "target": "me",
         "buff": "trancendent_8_cri_dmg_50%",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up"
       },
       {
@@ -228678,7 +228678,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       },
       {
@@ -230060,7 +230060,7 @@
         "type": "BT_STAT",
         "target": "my_team",
         "buff": "2000121_2_7",
-        "stat": "dmg_boost",
+        "stat": "damage_boost",
         "mode": "up"
       }
     ]
@@ -230902,7 +230902,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       },
       {
@@ -230928,7 +230928,7 @@
         "type": "BT_STAT_PREMIUM",
         "target": "me",
         "buff": "trancendent_8_dmg_boost_30",
-        "stat": "dmg_boost",
+        "stat": "damage_boost",
         "mode": "up"
       },
       {
@@ -230944,7 +230944,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_2000121_3",
-        "stat": "dmg_boost",
+        "stat": "damage_boost",
         "mode": "up"
       }
     ]
@@ -232576,7 +232576,7 @@
         "type": "BT_STAT",
         "target": "enemy_skill_target",
         "buff": "2000122_3_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "down",
         "caller": "ultimate"
       },
@@ -233003,7 +233003,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       }
     ]
@@ -233303,7 +233303,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "2000122_U_1",
-        "stat": "dmg_boost",
+        "stat": "damage_boost",
         "mode": "up"
       }
     ]
@@ -233487,7 +233487,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "2000122_U_1",
-        "stat": "dmg_boost",
+        "stat": "damage_boost",
         "mode": "up"
       },
       {
@@ -233496,7 +233496,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "2000122_U_2",
-        "stat": "dmg_boost",
+        "stat": "damage_boost",
         "mode": "up"
       },
       {
@@ -233708,7 +233708,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "2000122_U_1",
-        "stat": "dmg_boost",
+        "stat": "damage_boost",
         "mode": "up"
       },
       {
@@ -233717,7 +233717,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "2000122_U_2",
-        "stat": "dmg_boost",
+        "stat": "damage_boost",
         "mode": "up"
       },
       {
@@ -234399,7 +234399,7 @@
         "type": "BT_STACK_STAT",
         "target": "me",
         "buff": "2000124_2_8",
-        "stat": "dmg_boost",
+        "stat": "damage_boost",
         "mode": "up"
       },
       {
@@ -234417,7 +234417,7 @@
         "type": "BT_STACK_STAT",
         "target": "me",
         "buff": "2000124_2_10",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up"
       },
       {
@@ -235159,7 +235159,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap_upgrade",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       },
       {
@@ -235525,7 +235525,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "2000124_U_1",
-        "stat": "dmg_boost",
+        "stat": "damage_boost",
         "mode": "up",
         "label": "SYS_BUFF_STACK_UP"
       }
@@ -235733,7 +235733,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "2000124_U_1",
-        "stat": "dmg_boost",
+        "stat": "damage_boost",
         "mode": "up",
         "label": "SYS_BUFF_STACK_UP"
       },
@@ -235999,7 +235999,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "2000124_U_1",
-        "stat": "dmg_boost",
+        "stat": "damage_boost",
         "mode": "up",
         "label": "SYS_BUFF_STACK_UP"
       },
@@ -236795,7 +236795,7 @@
         "type": "BT_STAT",
         "target": "my_team_without_me",
         "buff": "2000129_3_2",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up",
         "tooltip": "12",
         "caller": "ultimate"
@@ -237226,7 +237226,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap_upgrade",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       },
       {
@@ -239334,7 +239334,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "trancendent_8_ap_upgrade",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up"
       },
       {

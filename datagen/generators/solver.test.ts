@@ -46,9 +46,8 @@ import buffsData from '../../data/generated/solver/buffs.json';
 import poolsData from '../../data/generated/equipment/pools.json';
 import progressionData from '../../data/generated/solver/progression.json';
 import { singleValue, type Row } from '../lib/tables';
-import { slugEnum } from '../lib/enums';
 import { missingStatKeys, statKeysFile } from '../lib/stat-keys';
-import { formatStatValue } from '../lib/stats';
+import { formatStatValue, statSlug } from '../lib/stats';
 import {
   evoUnlockLevels,
   gemSlotRules,
@@ -802,7 +801,7 @@ describe('solver — stat-keys (L6) : ST_* / OAT_* vers la clé du contrat', () 
   });
 
   it.each(lines)('%s / %s : percent d’accord avec formatStatValue', (st, ap, _key, percent) => {
-    expect(formatStatValue(ap, 100, slugEnum(st)).endsWith('%')).toBe(percent);
+    expect(formatStatValue(ap, 100, statSlug(st)!).endsWith('%')).toBe(percent);
   });
 });
 

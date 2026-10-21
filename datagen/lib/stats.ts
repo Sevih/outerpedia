@@ -10,8 +10,13 @@
  *
  * Échelles confirmées par une logique éprouvée (sets : Crit +15%,
  * Counter +12%, Bursting AP +25…).
+ *
+ * Un seul espace de slugs de stat depuis C27 ; la table est `STAT_TYPE_SLUGS`.
+ * Fiches, options de rang, effets de buff, pools, sets et glossaire nomment une
+ * stat par le même slug (`statSlug`) ; l'ancien slug mécanique (`ST_X` → `x`)
+ * ne se lit plus que par la table de compatibilité de `src/lib/stats.ts`
+ * (archives de boss figées, liens `?z=` du calculateur).
  */
-import { slugEnum } from './enums';
 
 /**
  * Stats que le client affiche en POURCENT quel que soit l'`ApplyingType` :
@@ -39,10 +44,9 @@ export const PERCENT_STAT_TYPES: ReadonlySet<string> = new Set([
  * `STAT_TYPE` du client → slug CANONIQUE de stat : la table UNIQUE (A74), relevée
  * sur les 26 colonnes de `STAT_DEFS` (`specs/character.ts`, qui en dérive ses
  * slugs), lue aussi par les passifs de fiche des monstres (`specs/monster.ts`) et
- * les options de rang des boss (`generators/encounters.ts`). C'est l'espace des
- * clés de `statScales`. Les effets de buff, eux, gardent le slug MÉCANIQUE de
- * `statSlug` (`ST_DMG_BOOST` → `dmg_boost`) : les deux espaces ne sont pas
- * encore unifiés.
+ * les options de rang des boss (`generators/encounters.ts`), et, depuis C27, par
+ * TOUS les lecteurs de stat (`statSlug`) : effets de buff, pools, sets, quirks,
+ * glossaire des noms. C'est aussi l'espace des clés de `statScales`.
  */
 export const STAT_TYPE_SLUGS: Readonly<Record<string, string>> = {
   ST_HP: 'hp',
@@ -73,23 +77,36 @@ export const STAT_TYPE_SLUGS: Readonly<Record<string, string>> = {
   ST_AVOID_SUBTRACT_CAP: 'avoid_subtract_cap',
 };
 
+/** `ST_*` déjà signalés hors table : un avertissement par type, pas par ligne. */
+const warnedStatTypes = new Set<string>();
+
 /**
- * Slug canonique d'une `STAT_TYPE` (`ST_DMG_BOOST` → `damage_boost`), `null` si
- * aucune. Un `ST_*` absent de la table retombe sur le slug mécanique (préfixe
- * retiré, minuscules) avec un avertissement qui le nomme : un nouveau type du
- * client se voit au build au lieu de passer en silence.
+ * Slug d'une `STAT_TYPE` (`ST_DMG_BOOST` → `damage_boost`), `null` si aucune :
+ * la fonction UNIQUE (C27 a fusionné l'ancien `statSlug` mécanique des effets et
+ * `canonicalStatSlug`). Un `ST_*` absent de la table retombe sur le slug
+ * mécanique (préfixe retiré, minuscules) avec un avertissement qui le nomme : un
+ * nouveau type du client se voit au build au lieu de passer en silence.
  */
-export function canonicalStatSlug(statType: string | undefined): string | null {
+export function statSlug(statType: string | undefined): string | null {
   if (!statType || statType === 'ST_NONE') return null;
   const slug = STAT_TYPE_SLUGS[statType];
   if (slug) return slug;
-  console.warn(`⚠ STAT_TYPE hors de STAT_TYPE_SLUGS : ${statType} (slug mécanique)`);
+  if (!warnedStatTypes.has(statType)) {
+    warnedStatTypes.add(statType);
+    console.warn(`⚠ STAT_TYPE hors de STAT_TYPE_SLUGS : ${statType} (slug mécanique)`);
+  }
   return statType.replace(/^ST_/, '').toLowerCase();
 }
 
-/** La même liste en slugs (`slugEnum`), la forme que portent les données. */
+/** Slug → `STAT_TYPE` : l'inverse de la table (les clés de texte `SYS_STAT_*` du
+ *  jeu restent nommées d'après le `ST_*`, pas d'après le slug). */
+export const STAT_SLUG_TYPES: Readonly<Record<string, string>> = Object.fromEntries(
+  Object.entries(STAT_TYPE_SLUGS).map(([st, slug]) => [slug, st]),
+);
+
+/** La même liste en slugs (`statSlug`), la forme que portent les données. */
 export const PERCENT_STAT_SLUGS: ReadonlySet<string> = new Set(
-  [...PERCENT_STAT_TYPES].map((t) => slugEnum(t)),
+  [...PERCENT_STAT_TYPES].map((t) => statSlug(t)!),
 );
 
 /** Formate une valeur de stat selon son type d'application et sa nature : la

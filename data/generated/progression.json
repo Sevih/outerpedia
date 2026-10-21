@@ -607,7 +607,7 @@
       "earth": {
         "stat": [
           {
-            "stat": "critical_dmg_rate",
+            "stat": "critical_dmg",
             "applying": "add",
             "value": 100
           },
@@ -627,12 +627,12 @@
             "value": 40
           },
           {
-            "stat": "critical_dmg_rate",
+            "stat": "critical_dmg",
             "applying": "add",
             "value": 100
           },
           {
-            "stat": "critical_dmg_rate",
+            "stat": "critical_dmg",
             "applying": "add",
             "value": 100
           }
@@ -642,7 +642,7 @@
       "water": {
         "stat": [
           {
-            "stat": "critical_dmg_rate",
+            "stat": "critical_dmg",
             "applying": "add",
             "value": 100
           },
@@ -652,7 +652,7 @@
             "value": 30
           },
           {
-            "stat": "critical_dmg_rate",
+            "stat": "critical_dmg",
             "applying": "add",
             "value": 100
           },
@@ -667,7 +667,7 @@
             "value": 30
           },
           {
-            "stat": "critical_dmg_rate",
+            "stat": "critical_dmg",
             "applying": "add",
             "value": 100
           }
@@ -687,17 +687,17 @@
             "value": 30
           },
           {
-            "stat": "critical_dmg_rate",
+            "stat": "critical_dmg",
             "applying": "add",
             "value": 100
           },
           {
-            "stat": "critical_dmg_rate",
+            "stat": "critical_dmg",
             "applying": "add",
             "value": 100
           },
           {
-            "stat": "critical_dmg_rate",
+            "stat": "critical_dmg",
             "applying": "add",
             "value": 100
           },
@@ -712,7 +712,7 @@
       "light": {
         "stat": [
           {
-            "stat": "critical_dmg_rate",
+            "stat": "critical_dmg",
             "applying": "add",
             "value": 100
           },
@@ -732,12 +732,12 @@
             "value": 40
           },
           {
-            "stat": "critical_dmg_rate",
+            "stat": "critical_dmg",
             "applying": "add",
             "value": 100
           },
           {
-            "stat": "critical_dmg_rate",
+            "stat": "critical_dmg",
             "applying": "add",
             "value": 100
           }
@@ -752,7 +752,7 @@
             "value": 40
           },
           {
-            "stat": "critical_dmg_rate",
+            "stat": "critical_dmg",
             "applying": "add",
             "value": 100
           },
@@ -762,7 +762,7 @@
             "value": 30
           },
           {
-            "stat": "critical_dmg_rate",
+            "stat": "critical_dmg",
             "applying": "add",
             "value": 100
           },
@@ -772,7 +772,7 @@
             "value": 30
           },
           {
-            "stat": "critical_dmg_rate",
+            "stat": "critical_dmg",
             "applying": "add",
             "value": 100
           }
@@ -1259,21 +1259,21 @@
     "108": {
       "2": [
         {
-          "stat": "dmg_reduce_rate",
+          "stat": "dmg_reduce",
           "applying": "add",
           "value": 24
         }
       ],
       "3": [
         {
-          "stat": "dmg_reduce_rate",
+          "stat": "dmg_reduce",
           "applying": "add",
           "value": 24
         }
       ],
       "4": [
         {
-          "stat": "dmg_reduce_rate",
+          "stat": "dmg_reduce",
           "applying": "add",
           "value": 48
         }
@@ -1282,21 +1282,21 @@
     "208": {
       "2": [
         {
-          "stat": "critical_dmg_rate",
+          "stat": "critical_dmg",
           "applying": "add",
           "value": 40
         }
       ],
       "3": [
         {
-          "stat": "critical_dmg_rate",
+          "stat": "critical_dmg",
           "applying": "add",
           "value": 40
         }
       ],
       "4": [
         {
-          "stat": "critical_dmg_rate",
+          "stat": "critical_dmg",
           "applying": "add",
           "value": 80
         }
@@ -1305,21 +1305,21 @@
     "308": {
       "2": [
         {
-          "stat": "dmg_boost",
+          "stat": "damage_boost",
           "applying": "add",
           "value": 20
         }
       ],
       "3": [
         {
-          "stat": "dmg_boost",
+          "stat": "damage_boost",
           "applying": "add",
           "value": 20
         }
       ],
       "4": [
         {
-          "stat": "dmg_boost",
+          "stat": "damage_boost",
           "applying": "add",
           "value": 40
         }
@@ -1328,21 +1328,21 @@
     "358": {
       "2": [
         {
-          "stat": "dmg_boost",
+          "stat": "damage_boost",
           "applying": "add",
           "value": 20
         }
       ],
       "3": [
         {
-          "stat": "dmg_boost",
+          "stat": "damage_boost",
           "applying": "add",
           "value": 20
         }
       ],
       "4": [
         {
-          "stat": "dmg_boost",
+          "stat": "damage_boost",
           "applying": "add",
           "value": 40
         }
@@ -1420,21 +1420,21 @@
     "608": {
       "2": [
         {
-          "stat": "critical_dmg_rate",
+          "stat": "critical_dmg",
           "applying": "add",
           "value": 40
         }
       ],
       "3": [
         {
-          "stat": "critical_dmg_rate",
+          "stat": "critical_dmg",
           "applying": "add",
           "value": 40
         }
       ],
       "4": [
         {
-          "stat": "critical_dmg_rate",
+          "stat": "critical_dmg",
           "applying": "add",
           "value": 80
         }
@@ -1535,21 +1535,21 @@
     "1108": {
       "2": [
         {
-          "stat": "dmg_boost",
+          "stat": "damage_boost",
           "applying": "add",
           "value": 20
         }
       ],
       "3": [
         {
-          "stat": "dmg_boost",
+          "stat": "damage_boost",
           "applying": "add",
           "value": 20
         }
       ],
       "4": [
         {
-          "stat": "dmg_boost",
+          "stat": "damage_boost",
           "applying": "add",
           "value": 40
         }
@@ -1558,21 +1558,21 @@
     "1208": {
       "2": [
         {
-          "stat": "dmg_boost",
+          "stat": "damage_boost",
           "applying": "add",
           "value": 20
         }
       ],
       "3": [
         {
-          "stat": "dmg_boost",
+          "stat": "damage_boost",
           "applying": "add",
           "value": 20
         }
       ],
       "4": [
         {
-          "stat": "dmg_boost",
+          "stat": "damage_boost",
           "applying": "add",
           "value": 40
         }
@@ -1627,21 +1627,21 @@
     "1508": {
       "2": [
         {
-          "stat": "critical_dmg_rate",
+          "stat": "critical_dmg",
           "applying": "add",
           "value": 40
         }
       ],
       "3": [
         {
-          "stat": "critical_dmg_rate",
+          "stat": "critical_dmg",
           "applying": "add",
           "value": 40
         }
       ],
       "4": [
         {
-          "stat": "critical_dmg_rate",
+          "stat": "critical_dmg",
           "applying": "add",
           "value": 80
         }
@@ -1719,21 +1719,21 @@
     "1908": {
       "2": [
         {
-          "stat": "critical_dmg_rate",
+          "stat": "critical_dmg",
           "applying": "add",
           "value": 40
         }
       ],
       "3": [
         {
-          "stat": "critical_dmg_rate",
+          "stat": "critical_dmg",
           "applying": "add",
           "value": 40
         }
       ],
       "4": [
         {
-          "stat": "critical_dmg_rate",
+          "stat": "critical_dmg",
           "applying": "add",
           "value": 80
         }
@@ -1742,21 +1742,21 @@
     "1958": {
       "2": [
         {
-          "stat": "critical_dmg_rate",
+          "stat": "critical_dmg",
           "applying": "add",
           "value": 40
         }
       ],
       "3": [
         {
-          "stat": "critical_dmg_rate",
+          "stat": "critical_dmg",
           "applying": "add",
           "value": 80
         }
       ],
       "4": [
         {
-          "stat": "critical_dmg_rate",
+          "stat": "critical_dmg",
           "applying": "add",
           "value": 80
         }
@@ -1811,21 +1811,21 @@
     "2208": {
       "2": [
         {
-          "stat": "critical_dmg_rate",
+          "stat": "critical_dmg",
           "applying": "add",
           "value": 40
         }
       ],
       "3": [
         {
-          "stat": "critical_dmg_rate",
+          "stat": "critical_dmg",
           "applying": "add",
           "value": 40
         }
       ],
       "4": [
         {
-          "stat": "critical_dmg_rate",
+          "stat": "critical_dmg",
           "applying": "add",
           "value": 80
         }
@@ -1857,21 +1857,21 @@
     "2408": {
       "2": [
         {
-          "stat": "dmg_reduce_rate",
+          "stat": "dmg_reduce",
           "applying": "add",
           "value": 24
         }
       ],
       "3": [
         {
-          "stat": "dmg_reduce_rate",
+          "stat": "dmg_reduce",
           "applying": "add",
           "value": 24
         }
       ],
       "4": [
         {
-          "stat": "dmg_reduce_rate",
+          "stat": "dmg_reduce",
           "applying": "add",
           "value": 48
         }
@@ -1880,21 +1880,21 @@
     "2508": {
       "2": [
         {
-          "stat": "critical_dmg_rate",
+          "stat": "critical_dmg",
           "applying": "add",
           "value": 40
         }
       ],
       "3": [
         {
-          "stat": "critical_dmg_rate",
+          "stat": "critical_dmg",
           "applying": "add",
           "value": 40
         }
       ],
       "4": [
         {
-          "stat": "critical_dmg_rate",
+          "stat": "critical_dmg",
           "applying": "add",
           "value": 80
         }
@@ -1972,21 +1972,21 @@
     "2908": {
       "2": [
         {
-          "stat": "dmg_boost",
+          "stat": "damage_boost",
           "applying": "add",
           "value": 20
         }
       ],
       "3": [
         {
-          "stat": "dmg_boost",
+          "stat": "damage_boost",
           "applying": "add",
           "value": 20
         }
       ],
       "4": [
         {
-          "stat": "dmg_boost",
+          "stat": "damage_boost",
           "applying": "add",
           "value": 40
         }
@@ -2018,21 +2018,21 @@
     "3108": {
       "2": [
         {
-          "stat": "dmg_boost",
+          "stat": "damage_boost",
           "applying": "add",
           "value": 20
         }
       ],
       "3": [
         {
-          "stat": "dmg_boost",
+          "stat": "damage_boost",
           "applying": "add",
           "value": 20
         }
       ],
       "4": [
         {
-          "stat": "dmg_boost",
+          "stat": "damage_boost",
           "applying": "add",
           "value": 40
         }
@@ -2041,21 +2041,21 @@
     "3208": {
       "2": [
         {
-          "stat": "critical_dmg_rate",
+          "stat": "critical_dmg",
           "applying": "add",
           "value": 40
         }
       ],
       "3": [
         {
-          "stat": "critical_dmg_rate",
+          "stat": "critical_dmg",
           "applying": "add",
           "value": 40
         }
       ],
       "4": [
         {
-          "stat": "critical_dmg_rate",
+          "stat": "critical_dmg",
           "applying": "add",
           "value": 80
         }
@@ -2064,21 +2064,21 @@
     "3308": {
       "2": [
         {
-          "stat": "critical_dmg_rate",
+          "stat": "critical_dmg",
           "applying": "add",
           "value": 40
         }
       ],
       "3": [
         {
-          "stat": "critical_dmg_rate",
+          "stat": "critical_dmg",
           "applying": "add",
           "value": 40
         }
       ],
       "4": [
         {
-          "stat": "critical_dmg_rate",
+          "stat": "critical_dmg",
           "applying": "add",
           "value": 80
         }
@@ -2110,21 +2110,21 @@
     "3508": {
       "2": [
         {
-          "stat": "dmg_boost",
+          "stat": "damage_boost",
           "applying": "add",
           "value": 20
         }
       ],
       "3": [
         {
-          "stat": "dmg_boost",
+          "stat": "damage_boost",
           "applying": "add",
           "value": 20
         }
       ],
       "4": [
         {
-          "stat": "dmg_boost",
+          "stat": "damage_boost",
           "applying": "add",
           "value": 40
         }
@@ -2156,21 +2156,21 @@
     "3708": {
       "2": [
         {
-          "stat": "dmg_reduce_rate",
+          "stat": "dmg_reduce",
           "applying": "add",
           "value": 24
         }
       ],
       "3": [
         {
-          "stat": "dmg_reduce_rate",
+          "stat": "dmg_reduce",
           "applying": "add",
           "value": 24
         }
       ],
       "4": [
         {
-          "stat": "dmg_reduce_rate",
+          "stat": "dmg_reduce",
           "applying": "add",
           "value": 48
         }
@@ -2179,21 +2179,21 @@
     "3758": {
       "2": [
         {
-          "stat": "dmg_reduce_rate",
+          "stat": "dmg_reduce",
           "applying": "add",
           "value": 24
         }
       ],
       "3": [
         {
-          "stat": "dmg_reduce_rate",
+          "stat": "dmg_reduce",
           "applying": "add",
           "value": 24
         }
       ],
       "4": [
         {
-          "stat": "dmg_reduce_rate",
+          "stat": "dmg_reduce",
           "applying": "add",
           "value": 48
         }
@@ -2248,21 +2248,21 @@
     "4008": {
       "2": [
         {
-          "stat": "dmg_boost",
+          "stat": "damage_boost",
           "applying": "add",
           "value": 20
         }
       ],
       "3": [
         {
-          "stat": "dmg_boost",
+          "stat": "damage_boost",
           "applying": "add",
           "value": 20
         }
       ],
       "4": [
         {
-          "stat": "dmg_boost",
+          "stat": "damage_boost",
           "applying": "add",
           "value": 40
         }
@@ -2409,21 +2409,21 @@
     "4608": {
       "2": [
         {
-          "stat": "dmg_boost",
+          "stat": "damage_boost",
           "applying": "add",
           "value": 20
         }
       ],
       "3": [
         {
-          "stat": "dmg_boost",
+          "stat": "damage_boost",
           "applying": "add",
           "value": 20
         }
       ],
       "4": [
         {
-          "stat": "dmg_boost",
+          "stat": "damage_boost",
           "applying": "add",
           "value": 40
         }
@@ -2478,21 +2478,21 @@
     "4908": {
       "2": [
         {
-          "stat": "critical_dmg_rate",
+          "stat": "critical_dmg",
           "applying": "add",
           "value": 40
         }
       ],
       "3": [
         {
-          "stat": "critical_dmg_rate",
+          "stat": "critical_dmg",
           "applying": "add",
           "value": 40
         }
       ],
       "4": [
         {
-          "stat": "critical_dmg_rate",
+          "stat": "critical_dmg",
           "applying": "add",
           "value": 80
         }
@@ -2616,21 +2616,21 @@
     "5508": {
       "2": [
         {
-          "stat": "critical_dmg_rate",
+          "stat": "critical_dmg",
           "applying": "add",
           "value": 40
         }
       ],
       "3": [
         {
-          "stat": "critical_dmg_rate",
+          "stat": "critical_dmg",
           "applying": "add",
           "value": 40
         }
       ],
       "4": [
         {
-          "stat": "critical_dmg_rate",
+          "stat": "critical_dmg",
           "applying": "add",
           "value": 80
         }
@@ -2685,21 +2685,21 @@
     "5708": {
       "2": [
         {
-          "stat": "dmg_reduce_rate",
+          "stat": "dmg_reduce",
           "applying": "add",
           "value": 24
         }
       ],
       "3": [
         {
-          "stat": "dmg_reduce_rate",
+          "stat": "dmg_reduce",
           "applying": "add",
           "value": 24
         }
       ],
       "4": [
         {
-          "stat": "dmg_reduce_rate",
+          "stat": "dmg_reduce",
           "applying": "add",
           "value": 48
         }
@@ -2754,21 +2754,21 @@
     "6008": {
       "2": [
         {
-          "stat": "dmg_boost",
+          "stat": "damage_boost",
           "applying": "add",
           "value": 20
         }
       ],
       "3": [
         {
-          "stat": "dmg_boost",
+          "stat": "damage_boost",
           "applying": "add",
           "value": 20
         }
       ],
       "4": [
         {
-          "stat": "dmg_boost",
+          "stat": "damage_boost",
           "applying": "add",
           "value": 40
         }
@@ -2800,21 +2800,21 @@
     "6208": {
       "2": [
         {
-          "stat": "critical_dmg_rate",
+          "stat": "critical_dmg",
           "applying": "add",
           "value": 40
         }
       ],
       "3": [
         {
-          "stat": "critical_dmg_rate",
+          "stat": "critical_dmg",
           "applying": "add",
           "value": 40
         }
       ],
       "4": [
         {
-          "stat": "critical_dmg_rate",
+          "stat": "critical_dmg",
           "applying": "add",
           "value": 80
         }
@@ -2823,21 +2823,21 @@
     "6408": {
       "2": [
         {
-          "stat": "dmg_boost",
+          "stat": "damage_boost",
           "applying": "add",
           "value": 20
         }
       ],
       "3": [
         {
-          "stat": "dmg_boost",
+          "stat": "damage_boost",
           "applying": "add",
           "value": 20
         }
       ],
       "4": [
         {
-          "stat": "dmg_boost",
+          "stat": "damage_boost",
           "applying": "add",
           "value": 40
         }
@@ -2869,21 +2869,21 @@
     "6608": {
       "2": [
         {
-          "stat": "dmg_boost",
+          "stat": "damage_boost",
           "applying": "add",
           "value": 20
         }
       ],
       "3": [
         {
-          "stat": "dmg_boost",
+          "stat": "damage_boost",
           "applying": "add",
           "value": 20
         }
       ],
       "4": [
         {
-          "stat": "dmg_boost",
+          "stat": "damage_boost",
           "applying": "add",
           "value": 40
         }
@@ -3030,21 +3030,21 @@
     "7208": {
       "2": [
         {
-          "stat": "dmg_boost",
+          "stat": "damage_boost",
           "applying": "add",
           "value": 20
         }
       ],
       "3": [
         {
-          "stat": "dmg_boost",
+          "stat": "damage_boost",
           "applying": "add",
           "value": 20
         }
       ],
       "4": [
         {
-          "stat": "dmg_boost",
+          "stat": "damage_boost",
           "applying": "add",
           "value": 40
         }
@@ -3053,21 +3053,21 @@
     "7308": {
       "2": [
         {
-          "stat": "critical_dmg_rate",
+          "stat": "critical_dmg",
           "applying": "add",
           "value": 40
         }
       ],
       "3": [
         {
-          "stat": "critical_dmg_rate",
+          "stat": "critical_dmg",
           "applying": "add",
           "value": 40
         }
       ],
       "4": [
         {
-          "stat": "critical_dmg_rate",
+          "stat": "critical_dmg",
           "applying": "add",
           "value": 80
         }
@@ -3145,21 +3145,21 @@
     "7708": {
       "2": [
         {
-          "stat": "dmg_reduce_rate",
+          "stat": "dmg_reduce",
           "applying": "add",
           "value": 24
         }
       ],
       "3": [
         {
-          "stat": "dmg_reduce_rate",
+          "stat": "dmg_reduce",
           "applying": "add",
           "value": 24
         }
       ],
       "4": [
         {
-          "stat": "dmg_reduce_rate",
+          "stat": "dmg_reduce",
           "applying": "add",
           "value": 48
         }
@@ -3329,14 +3329,14 @@
     "8508": {
       "2": [
         {
-          "stat": "dmg_boost",
+          "stat": "damage_boost",
           "applying": "add",
           "value": 50
         }
       ],
       "3": [
         {
-          "stat": "dmg_boost",
+          "stat": "damage_boost",
           "applying": "add",
           "value": 50
         },
@@ -3348,7 +3348,7 @@
       ],
       "4": [
         {
-          "stat": "dmg_boost",
+          "stat": "damage_boost",
           "applying": "add",
           "value": 50
         },
@@ -3385,21 +3385,21 @@
     "8708": {
       "2": [
         {
-          "stat": "critical_dmg_rate",
+          "stat": "critical_dmg",
           "applying": "add",
           "value": 40
         }
       ],
       "3": [
         {
-          "stat": "critical_dmg_rate",
+          "stat": "critical_dmg",
           "applying": "add",
           "value": 40
         }
       ],
       "4": [
         {
-          "stat": "critical_dmg_rate",
+          "stat": "critical_dmg",
           "applying": "add",
           "value": 80
         }
@@ -3408,21 +3408,21 @@
     "8808": {
       "2": [
         {
-          "stat": "dmg_reduce_rate",
+          "stat": "dmg_reduce",
           "applying": "add",
           "value": 24
         }
       ],
       "3": [
         {
-          "stat": "dmg_reduce_rate",
+          "stat": "dmg_reduce",
           "applying": "add",
           "value": 24
         }
       ],
       "4": [
         {
-          "stat": "dmg_reduce_rate",
+          "stat": "dmg_reduce",
           "applying": "add",
           "value": 48
         }
@@ -3454,21 +3454,21 @@
     "9008": {
       "2": [
         {
-          "stat": "critical_dmg_rate",
+          "stat": "critical_dmg",
           "applying": "add",
           "value": 80
         }
       ],
       "3": [
         {
-          "stat": "critical_dmg_rate",
+          "stat": "critical_dmg",
           "applying": "add",
           "value": 80
         }
       ],
       "4": [
         {
-          "stat": "critical_dmg_rate",
+          "stat": "critical_dmg",
           "applying": "add",
           "value": 80
         }
@@ -3505,14 +3505,14 @@
     "9208": {
       "3": [
         {
-          "stat": "dmg_boost",
+          "stat": "damage_boost",
           "applying": "add",
           "value": 40
         }
       ],
       "4": [
         {
-          "stat": "dmg_boost",
+          "stat": "damage_boost",
           "applying": "add",
           "value": 40
         }
@@ -3521,21 +3521,21 @@
     "9308": {
       "2": [
         {
-          "stat": "dmg_boost",
+          "stat": "damage_boost",
           "applying": "add",
           "value": 50
         }
       ],
       "3": [
         {
-          "stat": "dmg_boost",
+          "stat": "damage_boost",
           "applying": "add",
           "value": 50
         }
       ],
       "4": [
         {
-          "stat": "dmg_boost",
+          "stat": "damage_boost",
           "applying": "add",
           "value": 50
         },
@@ -3549,21 +3549,21 @@
     "9408": {
       "2": [
         {
-          "stat": "dmg_reduce_rate",
+          "stat": "dmg_reduce",
           "applying": "add",
           "value": 24
         }
       ],
       "3": [
         {
-          "stat": "dmg_reduce_rate",
+          "stat": "dmg_reduce",
           "applying": "add",
           "value": 24
         }
       ],
       "4": [
         {
-          "stat": "dmg_reduce_rate",
+          "stat": "dmg_reduce",
           "applying": "add",
           "value": 48
         }
@@ -3572,7 +3572,7 @@
     "9508": {
       "4": [
         {
-          "stat": "dmg_boost",
+          "stat": "damage_boost",
           "applying": "add",
           "value": 50
         }
@@ -3597,7 +3597,7 @@
     "9708": {
       "4": [
         {
-          "stat": "dmg_boost",
+          "stat": "damage_boost",
           "applying": "add",
           "value": 50
         }
@@ -3668,21 +3668,21 @@
     "10108": {
       "2": [
         {
-          "stat": "dmg_boost",
+          "stat": "damage_boost",
           "applying": "add",
           "value": 20
         }
       ],
       "3": [
         {
-          "stat": "dmg_boost",
+          "stat": "damage_boost",
           "applying": "add",
           "value": 20
         }
       ],
       "4": [
         {
-          "stat": "dmg_boost",
+          "stat": "damage_boost",
           "applying": "add",
           "value": 40
         }
@@ -3747,21 +3747,21 @@
     "10508": {
       "2": [
         {
-          "stat": "dmg_boost",
+          "stat": "damage_boost",
           "applying": "add",
           "value": 20
         }
       ],
       "3": [
         {
-          "stat": "dmg_boost",
+          "stat": "damage_boost",
           "applying": "add",
           "value": 20
         }
       ],
       "4": [
         {
-          "stat": "dmg_boost",
+          "stat": "damage_boost",
           "applying": "add",
           "value": 40
         }
@@ -3775,7 +3775,7 @@
           "value": 350
         },
         {
-          "stat": "dmg_reduce_rate",
+          "stat": "dmg_reduce",
           "applying": "add",
           "value": 48
         }
@@ -3787,7 +3787,7 @@
           "value": 350
         },
         {
-          "stat": "dmg_reduce_rate",
+          "stat": "dmg_reduce",
           "applying": "add",
           "value": 48
         }
@@ -3799,7 +3799,7 @@
           "value": 350
         },
         {
-          "stat": "dmg_reduce_rate",
+          "stat": "dmg_reduce",
           "applying": "add",
           "value": 48
         }
@@ -3938,21 +3938,21 @@
     "11608": {
       "2": [
         {
-          "stat": "dmg_reduce_rate",
+          "stat": "dmg_reduce",
           "applying": "add",
           "value": 24
         }
       ],
       "3": [
         {
-          "stat": "dmg_reduce_rate",
+          "stat": "dmg_reduce",
           "applying": "add",
           "value": 24
         }
       ],
       "4": [
         {
-          "stat": "dmg_reduce_rate",
+          "stat": "dmg_reduce",
           "applying": "add",
           "value": 48
         }
@@ -3961,21 +3961,21 @@
     "11708": {
       "2": [
         {
-          "stat": "critical_dmg_rate",
+          "stat": "critical_dmg",
           "applying": "add",
           "value": 40
         }
       ],
       "3": [
         {
-          "stat": "critical_dmg_rate",
+          "stat": "critical_dmg",
           "applying": "add",
           "value": 40
         }
       ],
       "4": [
         {
-          "stat": "critical_dmg_rate",
+          "stat": "critical_dmg",
           "applying": "add",
           "value": 80
         }
@@ -4012,7 +4012,7 @@
           "value": 60
         },
         {
-          "stat": "critical_dmg_rate",
+          "stat": "critical_dmg",
           "applying": "add",
           "value": 500
         }
@@ -4024,7 +4024,7 @@
           "value": 60
         },
         {
-          "stat": "critical_dmg_rate",
+          "stat": "critical_dmg",
           "applying": "add",
           "value": 500
         }
@@ -4036,7 +4036,7 @@
           "value": 60
         },
         {
-          "stat": "critical_dmg_rate",
+          "stat": "critical_dmg",
           "applying": "add",
           "value": 500
         },
@@ -4055,7 +4055,7 @@
           "value": 60
         },
         {
-          "stat": "critical_dmg_rate",
+          "stat": "critical_dmg",
           "applying": "add",
           "value": 500
         }
@@ -4067,7 +4067,7 @@
           "value": 60
         },
         {
-          "stat": "critical_dmg_rate",
+          "stat": "critical_dmg",
           "applying": "add",
           "value": 500
         }
@@ -4079,7 +4079,7 @@
           "value": 60
         },
         {
-          "stat": "critical_dmg_rate",
+          "stat": "critical_dmg",
           "applying": "add",
           "value": 500
         },
@@ -4093,7 +4093,7 @@
     "12108": {
       "4": [
         {
-          "stat": "dmg_boost",
+          "stat": "damage_boost",
           "applying": "add",
           "value": 50
         }

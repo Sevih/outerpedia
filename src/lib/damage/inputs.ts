@@ -320,7 +320,7 @@ const SHEET_STAT_MAP: Record<string, { st: string; base?: string }> = {
   critical_rate: { st: 'ST_CRITICAL_RATE', base: 'CriticalRate' },
   critical_dmg: { st: 'ST_CRITICAL_DMG_RATE', base: 'CriticalDMGRate' },
   pierce_power_rate: { st: 'ST_PIERCE_POWER_RATE' },
-  dmg_boost: { st: 'ST_DMG_BOOST' },
+  damage_boost: { st: 'ST_DMG_BOOST' },
   buff_chance: { st: 'ST_BUFF_CHANCE', base: 'BuffChance' },
 };
 
@@ -1560,7 +1560,7 @@ export function buildDamageReport(
       attackStat: combatStats.atk ?? 0,
       criticalRate: combatStats.critical_rate ?? 0,
       criticalDmgRate: combatStats.critical_dmg ?? 0,
-      dmgBoost: combatStats.dmg_boost ?? 0,
+      dmgBoost: combatStats.damage_boost ?? 0,
       piercePowerRate: combatStats.pierce_power_rate ?? 0,
       piercePower: 0, // pas de ligne de fiche — contribution 0 (jamais devinée)
       element: attackerElement,
@@ -1837,7 +1837,7 @@ export function buildDamageReport(
           attackStat: sc.atk ?? 0,
           criticalRate: sc.critical_rate ?? 0,
           criticalDmgRate: sc.critical_dmg ?? 0,
-          dmgBoost: sc.dmg_boost ?? 0,
+          dmgBoost: sc.damage_boost ?? 0,
           piercePowerRate: sc.pierce_power_rate ?? 0,
         };
         slotStatOf = (st: string): number => {

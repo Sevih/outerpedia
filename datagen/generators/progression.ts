@@ -28,6 +28,7 @@
  */
 import { loadTable, num, splitCsv, type Row } from '../lib/tables';
 import { slugEnum } from '../lib/enums';
+import { statSlug } from '../lib/stats';
 
 /** Un cran de l'échelle d'évolution (niveau requis pour l'évolution N). */
 export interface EvolutionRung {
@@ -175,7 +176,7 @@ export function buildProgression(): ProgressionData {
       return {
         kind: 'buff',
         bonus: {
-          stat: slugEnum(b.StatType),
+          stat: statSlug(b.StatType) ?? slugEnum(b.StatType),
           applying: b.ApplyingType === 'OAT_RATE' ? 'rate' : 'add',
           value: num(b.Value),
         },
@@ -185,7 +186,7 @@ export function buildProgression(): ProgressionData {
       return {
         kind: 'stat',
         bonus: {
-          stat: slugEnum(row.StatType),
+          stat: statSlug(row.StatType)!,
           applying: row.ApplyingType === 'OAT_RATE' ? 'rate' : 'add',
           value: num(row.OptionValue),
         },
@@ -227,7 +228,7 @@ export function buildProgression(): ProgressionData {
         const b = buffMaxRows.get(bid);
         if (!b || (b.BuffConditionType ?? 'NONE') !== 'NONE') continue;
         bonuses.push({
-          stat: slugEnum(b.StatType),
+          stat: statSlug(b.StatType) ?? slugEnum(b.StatType),
           applying: b.ApplyingType === 'OAT_RATE' ? 'rate' : 'add',
           value: num(b.Value),
         });

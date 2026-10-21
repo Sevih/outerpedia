@@ -34,6 +34,7 @@ import type {
 import type { Lang } from '@/lib/i18n/config';
 import { lRec } from '@/lib/i18n/localize';
 import { statName } from '@/lib/data/stat-glossary';
+import { currentStatSlug } from '@/lib/stats';
 import type { MonsterThumb } from '@/components/ui/Thumbnail';
 import type { ClientEffect } from '@/components/character/EffectChips';
 import {
@@ -184,6 +185,42 @@ export function resolveImmunities(
 }
 
 /**
+ * Slugs de stat À JOUR dans les entrées d'une vue (C27) : une archive de boss
+ * épinglé est FIGÉE avec l'ancien slug mécanique (`dmg_reduce_rate`,
+ * `dmg_boost`…) dans les effets de ses skills, les clés `tooltipKinds` de son
+ * glossaire (`BT_STAT|dmg_boost`, dédup des chips) et ses options de rang —
+ * traduits ici (`currentStatSlug`), ensemble pour que la dédup reste cohérente.
+ * Appliqué aux seules vues d'archive (`archived`) : le live est déjà au slug courant.
+ */
+export function withCurrentStatSlugs(
+  rawSkills: Skill[],
+  src: BossViewSources,
+): { skills: Skill[]; src: BossViewSources } {
+  const kind = (k: string) => k.replace(/\|(.+)$/, (_, s: string) => `|${currentStatSlug(s)}`);
+  const skills = rawSkills.map((s) =>
+    s.effects?.some((e) => e.stat)
+      ? {
+          ...s,
+          effects: s.effects.map((e) => (e.stat ? { ...e, stat: currentStatSlug(e.stat) } : e)),
+        }
+      : s,
+  );
+  const g = src.g;
+  const tooltipKinds = g.tooltipKinds
+    ? Object.fromEntries(Object.entries(g.tooltipKinds).map(([t, ks]) => [t, ks.map(kind)]))
+    : g.tooltipKinds;
+  const rankOptions = g.rankOptions
+    ? Object.fromEntries(
+        Object.entries(g.rankOptions).map(([id, o]) => [
+          id,
+          o.stat ? { ...o, stat: currentStatSlug(o.stat) } : o,
+        ]),
+      )
+    : g.rankOptions;
+  return { skills, src: { ...src, g: { ...g, tooltipKinds, rankOptions } } };
+}
+
+/**
  * Construit la vue d'un boss. FONCTION PURE : tout vient de `src`, rien du
  * disque — c'est ce qui permet de la rendre depuis une archive aussi bien que
  * depuis le live, et de la tester à sec.
@@ -192,13 +229,19 @@ export function buildBossView(
   id: string,
   monster: Monster,
   rawSkills: Skill[],
-  src: BossViewSources,
+  sources: BossViewSources,
 ): BossView {
+  // Seule une ARCHIVE porte l'ancien slug : le live garde ses sources telles
+  // quelles (même identité, celle sur laquelle les caches de kit se mémoïsent).
+  const current = sources.archived
+    ? withCurrentStatSlugs(rawSkills, sources)
+    : { skills: rawSkills, src: sources };
+  const src = current.src;
   const g: Glossaries = src.g;
   // Dédup ICI, pas chez l'appelant : les listes de skills des monstres à formes
   // répètent des ids, et une vue qui compterait deux fois le même skill est un
   // bug qu'on ne veut pas dépendre de la discipline des quatre appelants.
-  const skills = dedupSkills(rawSkills);
+  const skills = dedupSkills(current.skills);
 
   // Vue « kit » : chips réattribuées par réf de desc, enrage fusionné (le
   // rage_finish sans nom disparaît, ses chips rejoignent la carte enter).

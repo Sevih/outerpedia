@@ -148,7 +148,7 @@ const FRESH = {
       { stat: 'buff_chance', mode: 'rate', value: 5, weight: 50 },
     ],
     p_sub: [{ stat: 'def', mode: 'flat', value: 1, weight: 100 }],
-    p_ee: [{ stat: 'hit_ap', mode: 'none', value: 0, weight: 100 }],
+    p_ee: [{ stat: 'hit_bp', mode: 'none', value: 0, weight: 100 }],
   },
   passives: {
     pa: {

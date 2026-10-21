@@ -112,7 +112,7 @@ describe('fiche EE — stat secondaire (M10)', () => {
     for (const v of views) {
       const row = EE[v.itemId].options.map((g) => POOLS[g]?.[0]).find((o) => o?.buff && o.factor);
       if (!row) continue;
-      // La secondaire (hit_ap / kill_ap) est la DERNIÈRE option de la fiche.
+      // La secondaire (hit_bp / kill_bp) est la DERNIÈRE option de la fiche.
       const sec = detail(slugifyEquipment(v.name.en)).slots.at(-1)!.options[0];
       expect(sec.levels![0], v.itemId).toBe(0);
       expect(sec.levels!.at(-1), v.itemId).toBe(row.max);
@@ -132,6 +132,17 @@ describe('fiche — pas des sous-stats (O11)', () => {
       const o = rows.find((r) => statOptionView(r.stat, r.mode).key === p.key)!;
       expect(p.step).toBe(p.percent ? o.factor! / 10 : o.factor);
     }
+  });
+
+  it('sous-stat DMG RED% : pool au slug de la table (`dmg_reduce`, C27), rendue en %', () => {
+    const f = family(getWeaponFamilies(), 'Winter of Hubris');
+    const sub = detail(f.slug).sub!;
+    const rows = POOLS[WEAPONS[f.ids.find((id) => WEAPONS[id].sub)!].sub!];
+    const row = rows.find((r) => r.stat === 'dmg_reduce')!;
+    expect(row).toBeDefined();
+    expect(rows.some((r) => r.stat === 'dmg_reduce_rate')).toBe(false);
+    const p = sub.pool.find((x) => x.key === 'DMG RED%')!;
+    expect(p).toMatchObject({ key: 'DMG RED%', percent: true, step: row.factor! / 10 });
   });
 });
 

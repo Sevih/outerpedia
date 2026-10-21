@@ -1,12 +1,12 @@
 /**
  * STATS — table de correspondance UNIQUE du domaine « stats » côté app.
  *
- * Deux espaces de clés coexistent dans la donnée générée :
- *  - slugs de stats de PERSONNAGE (datagen/extractor/specs/character.ts :
- *    `hp`, `buff_chance`, `effectiveness`…) ;
- *  - slugs de stats de BUFF (`ST_*` slugifié par datagen/lib/effects.ts :
- *    `atk`, `accuracy`, `resist`…).
- * Les deux convergent ici vers une ABRÉVIATION canonique (convention WIKI —
+ * Un seul espace de clés dans la donnée générée depuis C27 : le slug de
+ * `STAT_TYPE_SLUGS` (datagen/lib/stats.ts, `statSlug`), que portent fiches,
+ * effets de buff, pools, sets et glossaire (`hp`, `damage_boost`, `hit_bp`…).
+ * L'ancien slug mécanique des buffs (`dmg_boost`…) ne se lit plus que par
+ * `currentStatSlug` (données figées, liens `?z=`).
+ * Ce slug converge ici vers une ABRÉVIATION canonique (convention WIKI —
  * vérifié : le jeu n'a AUCUNE abréviation dans ses textes), qui est aussi le
  * token éditorial de `{S/…}` (parse-text).
  * Le nom complet localisé vient du JEU : glossaire `statNames` (SYS_STAT_*),
@@ -14,11 +14,10 @@
  *
  * Toute nouvelle correspondance de stat se déclare ICI, nulle part ailleurs.
  */
-import { PERCENT_STAT_SLUGS } from '@/../datagen/lib/stats';
+import { PERCENT_STAT_SLUGS, STAT_TYPE_SLUGS } from '@/../datagen/lib/stats';
 
-/** Slug de stat (perso OU buff) → abréviation canonique. */
+/** Slug de stat → abréviation canonique. */
 export const STAT_ABBR: Record<string, string> = {
-  // Stats de personnage (slugs de STAT_DEFS)
   hp: 'HP',
   atk: 'ATK',
   def: 'DEF',
@@ -36,15 +35,29 @@ export const STAT_ABBR: Record<string, string> = {
   pierce_power: 'PEN',
   pierce_power_rate: 'PEN%',
   enemy_critical_dmg_reduce: 'CDMG RED%',
-  // Stats des pools d'équipement (`ItemOptionTemplet`) non couvertes ci-dessus
-  critical_dmg_rate: 'CHD',
-  dmg_reduce_rate: 'DMG RED%',
-  dmg_boost: 'DMG UP%',
-  e_cri_dmg_reduce: 'CDMG RED%',
-  // PAS de mapping pour `accuracy`/`avoid` : stats RETIRÉES du jeu (l'ancien
-  // couple précision/esquive) — il n'en survit que les effets « Miss Rate »,
-  // résolus par leur nom, jamais par abréviation de stat.
+  // `effectiveness`/`resilience` sont les slugs de `ST_ACCURACY`/`ST_AVOID`,
+  // stats RETIRÉES du jeu (l'ancien couple précision/esquive) : leurs effets
+  // de buff (« Miss Rate »…) se nomment par leur statut, jamais par cette
+  // abréviation, qui ne sert qu'aux colonnes de fiche.
 };
+
+/**
+ * Slug MÉCANIQUE d'avant C27 (`ST_X` → `x`) → slug de stat, pour les seules
+ * entrées qui diffèrent (`dmg_boost` → `damage_boost`, `hit_ap` → `hit_bp`…),
+ * DÉRIVÉ de `STAT_TYPE_SLUGS`. Table de COMPATIBILITÉ en lecture : les archives
+ * de boss épinglés (données figées) et les liens `?z=` du calculateur portent
+ * encore l'ancien slug ; rien de neuf ne l'émet.
+ */
+export const LEGACY_STAT_SLUGS: Readonly<Record<string, string>> = Object.fromEntries(
+  Object.entries(STAT_TYPE_SLUGS)
+    .map(([st, slug]) => [st.replace(/^ST_/, '').toLowerCase(), slug])
+    .filter(([legacy, slug]) => legacy !== slug),
+);
+
+/** Slug de stat à jour : l'ancien slug mécanique traduit, tout autre inchangé. */
+export function currentStatSlug(slug: string): string {
+  return LEGACY_STAT_SLUGS[slug] ?? slug;
+}
 
 /** Abréviation canonique → sprite d'icône de stat du jeu (`CM_Stat_Icon_*`). */
 export const STAT_ICON: Record<string, string> = {

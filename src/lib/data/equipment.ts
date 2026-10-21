@@ -729,7 +729,7 @@ export function getEEViews(): EEView[] {
     star: e.star,
     grade: e.grade,
     // Le 2e slot d'un EE est une option spéciale (stat interne + buff, ex.
-    // hit_ap) : son texte vient du passif — on ne garde que les stats connues.
+    // hit_bp) : son texte vient du passif — on ne garde que les stats connues.
     mainStats: mainStatsOf(e.options.flatMap((g) => POOLS[g] ?? [])).filter(
       (l) => !l.includes('_'),
     ),

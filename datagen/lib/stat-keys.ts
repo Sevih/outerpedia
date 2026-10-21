@@ -18,8 +18,7 @@
  * permise.
  */
 import { statOptionView, STAT_ABBR } from '../../src/lib/stats';
-import { slugEnum } from './enums';
-import { PERCENT_STAT_TYPES } from './stats';
+import { PERCENT_STAT_TYPES, statSlug } from './stats';
 
 /** `ST_*` → `OAT_*` → clé du contrat. */
 export const STAT_KEYS: Readonly<Record<string, Readonly<Record<string, string>>>> = {
@@ -50,15 +49,26 @@ export interface StatKeyLine {
   abbr: string | null;
 }
 
+/**
+ * `ST_*` sans abréviation dans le contrat, quoi que dise `STAT_ABBR` : l'évasion
+ * (`ST_AVOID`, stat retirée du jeu) a pour slug `resilience`, que la colonne de
+ * fiche abrège RES ; le contrat l'a toujours émise à `null` et sa forme ne
+ * change pas sans un lot G qui bumpe le `schema` (C27).
+ */
+const NO_ABBR = new Set(['ST_AVOID']);
+
 /** Ligne d'une paire, `undefined` hors table. */
 export function statKeyLine(st: string, ap: string): StatKeyLine | undefined {
   const key = STAT_KEYS[st]?.[ap];
   if (key === undefined) return undefined;
-  const slug = slugEnum(st);
+  const slug = NO_ABBR.has(st) ? undefined : statSlug(st);
   return {
     key,
     percent: ap === 'OAT_RATE' || PERCENT_STAT_TYPES.has(st),
-    abbr: slug in STAT_ABBR ? statOptionView(slug, ap === 'OAT_RATE' ? 'rate' : 'flat').key : null,
+    abbr:
+      slug && slug in STAT_ABBR
+        ? statOptionView(slug, ap === 'OAT_RATE' ? 'rate' : 'flat').key
+        : null,
   };
 }
 

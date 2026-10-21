@@ -5663,7 +5663,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "common_monster_buff_20",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up",
         "tooltip": "12"
       }
@@ -10293,7 +10293,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "common_monster_buff_19",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up"
       }
     ]
@@ -10765,7 +10765,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "common_monster_buff_19",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up"
       }
     ]
@@ -10817,7 +10817,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "common_monster_buff_19",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up"
       }
     ]
@@ -10868,7 +10868,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "common_monster_buff_19",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up"
       }
     ]
@@ -16621,7 +16621,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -16770,7 +16770,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -16922,7 +16922,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -17072,7 +17072,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -17223,7 +17223,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -21630,7 +21630,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "common_monster_passive_11",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up",
         "tooltip": "12"
       },
@@ -27340,7 +27340,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "common_monster_buff_19",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up"
       }
     ]
@@ -30261,7 +30261,7 @@
         "type": "BT_STAT",
         "target": "my_team_highest_atk",
         "buff": "4037001_2_2",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up",
         "tooltip": "12"
       }
@@ -30523,7 +30523,7 @@
         "type": "BT_STAT",
         "target": "my_team_highest_atk",
         "buff": "4037001_2_2",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up",
         "tooltip": "12"
       }
@@ -31490,7 +31490,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "common_monster_buff_83",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up",
         "tooltip": "12"
       }
@@ -32995,7 +32995,7 @@
         "type": "BT_STAT",
         "target": "enemy_team",
         "buff": "common_monster_buff_102_2",
-        "stat": "avoid",
+        "stat": "resilience",
         "mode": "down"
       }
     ]
@@ -33211,7 +33211,7 @@
         "type": "BT_STAT",
         "target": "enemy_team",
         "buff": "common_monster_buff_102_2",
-        "stat": "avoid",
+        "stat": "resilience",
         "mode": "down"
       }
     ]
@@ -33334,7 +33334,7 @@
         "type": "BT_STAT",
         "target": "enemy_team",
         "buff": "common_monster_buff_102_2",
-        "stat": "avoid",
+        "stat": "resilience",
         "mode": "down"
       },
       {
@@ -33343,7 +33343,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "common_monster_buff_107",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up"
       }
     ]
@@ -33690,7 +33690,7 @@
         "type": "BT_STAT",
         "target": "enemy_skill_target",
         "buff": "common_monster_buff_147",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "down",
         "tooltip": "23"
       }
@@ -36700,7 +36700,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       }
@@ -37065,7 +37065,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "irregular_12_5",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up",
         "tooltip": "12",
         "choice": true
@@ -37117,7 +37117,7 @@
         "type": "BT_STAT",
         "target": "enemy_team",
         "buff": "irregular_14",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "down"
       }
     ]
@@ -37227,7 +37227,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       }
@@ -37373,7 +37373,7 @@
         "type": "BT_STAT",
         "target": "enemy_team",
         "buff": "irregular_17",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "down",
         "tooltip": "23"
       }
@@ -37686,7 +37686,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       }
@@ -37761,7 +37761,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "irregular_26",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up"
       }
     ]
@@ -37960,7 +37960,7 @@
         "type": "BT_STAT",
         "target": "enemy_team",
         "buff": "irregular_32",
-        "stat": "avoid",
+        "stat": "resilience",
         "mode": "down"
       },
       {
@@ -38129,7 +38129,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       }
@@ -39699,7 +39699,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       }
@@ -40146,7 +40146,7 @@
         "type": "BT_STAT",
         "target": "my_team",
         "buff": "common_monster_buff_152",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up",
         "tooltip": "12"
       }
@@ -40267,7 +40267,7 @@
         "type": "BT_STAT",
         "target": "enemy_team",
         "buff": "common_monster_buff_102_2",
-        "stat": "avoid",
+        "stat": "resilience",
         "mode": "down"
       },
       {
@@ -40989,7 +40989,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1_2",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -42517,7 +42517,7 @@
         "type": "BT_STAT",
         "target": "enemy_team",
         "buff": "4086028_3",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "down",
         "tooltip": "23"
       },
@@ -42578,7 +42578,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1_6",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       }
@@ -43888,7 +43888,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -46039,7 +46039,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -46769,7 +46769,7 @@
         "type": "BT_STAT",
         "target": "my_team",
         "buff": "event_monster_buff_63",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up",
         "tooltip": "12"
       }
@@ -47268,7 +47268,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_6_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -49794,7 +49794,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -50396,7 +50396,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -51071,7 +51071,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -51573,7 +51573,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -52011,7 +52011,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "tower_very_hard_boss_2000065_4_2_5",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up",
         "tooltip": "12",
         "choice": true
@@ -52070,7 +52070,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "event_monster_buff_337",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -52731,7 +52731,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -53347,7 +53347,7 @@
         "type": "BT_STAT",
         "target": "enemy_team",
         "buff": "2000076_3_4",
-        "stat": "avoid",
+        "stat": "resilience",
         "mode": "down",
         "caller": "ultimate"
       },
@@ -54154,7 +54154,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "tower_hard_core_p_02",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up",
         "label": "SYS_BUFF_CRITICAL_DAMAGE_UP"
       }
@@ -54376,7 +54376,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "tower_hard_core_p_02",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up",
         "label": "SYS_BUFF_CRITICAL_DAMAGE_UP"
       },
@@ -56338,7 +56338,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "tower_hard_core_p_02",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up",
         "label": "SYS_BUFF_CRITICAL_DAMAGE_UP"
       },
@@ -57277,7 +57277,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -58150,7 +58150,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -58702,7 +58702,7 @@
         "type": "BT_STAT",
         "target": "my_team",
         "buff": "2000012_2_2",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up",
         "tooltip": "12",
         "caller": "second"
@@ -60605,7 +60605,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -61449,7 +61449,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -61905,7 +61905,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -62424,7 +62424,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -62953,7 +62953,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -63536,7 +63536,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -64870,7 +64870,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_8",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -64953,7 +64953,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "4004001_5_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -65067,7 +65067,7 @@
         "type": "BT_STAT",
         "target": "my_team",
         "buff": "tower_hard_mob_24_03",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up",
         "tooltip": "12",
         "caller": "first"
@@ -66079,7 +66079,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "tower_hard_core_p_02",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up",
         "label": "SYS_BUFF_CRITICAL_DAMAGE_UP"
       },
@@ -66185,7 +66185,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "tower_hard_mob_25_03",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -68177,7 +68177,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -72582,7 +72582,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "doppelganger_rage_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -73425,7 +73425,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -73689,7 +73689,7 @@
         "type": "BT_STAT",
         "target": "enemy_team",
         "buff": "event_monster_buff_268",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "down",
         "tooltip": "23",
         "caller": "second"
@@ -73700,7 +73700,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "event_monster_buff_268_1",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "down",
         "tooltip": "23",
         "caller": "second"
@@ -74877,7 +74877,7 @@
         "type": "BT_STAT",
         "target": "my_team",
         "buff": "event_monster_buff_255",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up",
         "tooltip": "12",
         "caller": "second"
@@ -75374,7 +75374,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "event_monster_buff_337",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -76003,7 +76003,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "event_monster_buff_385",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up",
         "tooltip": "12",
         "caller": "second"
@@ -76411,7 +76411,7 @@
         "type": "BT_STAT",
         "target": "enemy_team",
         "buff": "event_monster_buff_497",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up",
         "label": "SYS_BUFF_CRITICAL_DAMAGE_UP"
       },
@@ -76752,7 +76752,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -76940,7 +76940,7 @@
         "type": "BT_STAT",
         "target": "enemy_team",
         "buff": "event_monster_buff_504",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "down",
         "tooltip": "23"
       },
@@ -77276,7 +77276,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -78123,7 +78123,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "event_monster_buff_471",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069",
         "caller": "first"
@@ -78208,7 +78208,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "event_monster_buff_385",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up",
         "tooltip": "12",
         "caller": "second"
@@ -78503,7 +78503,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -79015,7 +79015,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -79434,7 +79434,7 @@
         "type": "BT_STAT",
         "target": "enemy_team",
         "buff": "common_check_unique_class",
-        "stat": "get_character_exp_rate",
+        "stat": "get_char_exp_rate",
         "mode": "up"
       },
       {
@@ -79450,7 +79450,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "common_check_unique_class_1_1",
-        "stat": "get_character_exp_rate",
+        "stat": "get_char_exp_rate",
         "mode": "up"
       },
       {
@@ -79466,7 +79466,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "common_check_unique_class_2_1",
-        "stat": "get_character_exp_rate",
+        "stat": "get_char_exp_rate",
         "mode": "up"
       },
       {
@@ -79482,7 +79482,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "common_check_unique_class_3_1",
-        "stat": "get_character_exp_rate",
+        "stat": "get_char_exp_rate",
         "mode": "up"
       },
       {
@@ -79498,7 +79498,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "common_check_unique_class_4_1",
-        "stat": "get_character_exp_rate",
+        "stat": "get_char_exp_rate",
         "mode": "up"
       },
       {
@@ -79514,7 +79514,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "common_check_unique_class_5_1",
-        "stat": "get_character_exp_rate",
+        "stat": "get_char_exp_rate",
         "mode": "up"
       },
       {
@@ -80033,7 +80033,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -80421,7 +80421,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "event_monster_buff_471",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069",
         "caller": "first"
@@ -80506,7 +80506,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "event_monster_buff_385",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up",
         "tooltip": "12",
         "caller": "second"
@@ -80879,7 +80879,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -81778,7 +81778,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "common_boss_monster_passive_11",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up",
         "tooltip": "12"
       },
@@ -83768,7 +83768,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -84153,7 +84153,7 @@
         "type": "BT_DMG_REDUCE",
         "target": "me",
         "buff": "tower_very_hard_boss_2000068_4_3",
-        "stat": "accuracy",
+        "stat": "effectiveness",
         "mode": "up",
         "tooltip": "2000067"
       },
@@ -84312,7 +84312,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "2000067_2_3",
-        "stat": "avoid",
+        "stat": "resilience",
         "mode": "up",
         "tooltip": "14",
         "caller": "second"
@@ -84332,7 +84332,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "2000067_2_8",
-        "stat": "avoid",
+        "stat": "resilience",
         "mode": "up"
       },
       {
@@ -84341,7 +84341,7 @@
         "type": "BT_DMG_REDUCE",
         "target": "me",
         "buff": "tower_very_hard_monster_2000067_2_1",
-        "stat": "accuracy",
+        "stat": "effectiveness",
         "mode": "up",
         "tooltip": "2000067"
       },
@@ -84351,7 +84351,7 @@
         "type": "BT_DMG_REDUCE",
         "target": "my_team_highest_maxhp",
         "buff": "tower_very_hard_monster_2000067_2_2",
-        "stat": "accuracy",
+        "stat": "effectiveness",
         "mode": "up",
         "label": "SYS_BUFF_REMOVE_BUFF"
       }
@@ -84492,7 +84492,7 @@
         "type": "BT_DMG_REDUCE",
         "target": "me",
         "buff": "4500288_2_3",
-        "stat": "accuracy",
+        "stat": "effectiveness",
         "mode": "up",
         "tooltip": "2000067",
         "caller": "second"
@@ -84519,7 +84519,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "2000067_2_8",
-        "stat": "avoid",
+        "stat": "resilience",
         "mode": "up"
       }
     ]
@@ -84579,7 +84579,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -85559,7 +85559,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "tower_very_hard_common_dmg_reduce_single",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       }
@@ -86248,7 +86248,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "tower_very_hard_common_dmg_reduce_single",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       }
@@ -86854,7 +86854,7 @@
         "type": "BT_STAT",
         "target": "my_team",
         "buff": "tower_very_hard_common_dmg_reduce_all",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -87740,7 +87740,7 @@
         "type": "BT_STAT",
         "target": "my_team",
         "buff": "tower_very_hard_common_dmg_reduce_all",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -88042,7 +88042,7 @@
         "type": "BT_STAT",
         "target": "my_team",
         "buff": "tower_very_hard_boss_2000012_2_2",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up",
         "tooltip": "12",
         "caller": "second"
@@ -88202,7 +88202,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "tower_very_hard_common_dmg_reduce_single",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       }
@@ -88692,7 +88692,7 @@
         "type": "BT_STAT",
         "target": "my_team",
         "buff": "tower_very_hard_common_dmg_reduce_all",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       }
@@ -89366,7 +89366,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "tower_very_hard_boss_2000078_4_3",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up",
         "tooltip": "12"
       },
@@ -89926,7 +89926,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "tower_very_hard_boss_2000065_4_2_5",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up",
         "tooltip": "12",
         "choice": true
@@ -90711,7 +90711,7 @@
         "type": "BT_STAT",
         "target": "my_team",
         "buff": "tower_very_hard_common_dmg_reduce_all",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       }
@@ -90923,7 +90923,7 @@
         "type": "BT_STAT",
         "target": "my_team",
         "buff": "tower_very_hard_monster_2000066_3_2",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up",
         "tooltip": "12",
         "caller": "ultimate"
@@ -91785,7 +91785,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "tower_very_hard_common_dmg_reduce_single",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       }
@@ -92749,7 +92749,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "tower_very_hard_common_dmg_reduce_single",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       }
@@ -93225,7 +93225,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "tower_very_hard_boss_2000080_2_3",
-        "stat": "accuracy",
+        "stat": "effectiveness",
         "mode": "up",
         "caller": "second"
       },
@@ -93409,7 +93409,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "tower_very_hard_common_dmg_reduce_single",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       }
@@ -93563,7 +93563,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "tower_very_hard_monster_2000079_2_4",
-        "stat": "accuracy",
+        "stat": "effectiveness",
         "mode": "up",
         "caller": "second"
       },
@@ -93904,7 +93904,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "tower_very_hard_common_dmg_reduce_single",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -94484,7 +94484,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "tower_very_hard_common_dmg_reduce_single",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       }
@@ -94800,7 +94800,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "tower_very_hard_common_dmg_reduce_single",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -95207,7 +95207,7 @@
         "type": "BT_STAT",
         "target": "my_team_highest_maxhp",
         "buff": "tower_very_hard_monster_2000063a_1_3",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up",
         "tooltip": "12",
         "caller": "first"
@@ -97170,7 +97170,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -98138,7 +98138,7 @@
         "type": "BT_STAT",
         "target": "my_team_highest_maxhp",
         "buff": "tower_very_hard_monster_core_3_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -98263,7 +98263,7 @@
         "type": "BT_STAT",
         "target": "enemy_team",
         "buff": "tower_very_hard_monster_core_6_1",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "down",
         "tooltip": "23"
       },
@@ -98588,7 +98588,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -98729,7 +98729,7 @@
         "type": "BT_RUN_ACTIVE_SKILL_ON_TURN_END",
         "target": "me",
         "buff": "licence_upgrade14",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up",
         "label": "SYS_BUFF_ADDITIVE_ATTACK",
         "caller": "first"
@@ -98788,7 +98788,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "licence_upgrade15",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up",
         "tooltip": "12",
         "caller": "second"
@@ -98976,7 +98976,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -100489,7 +100489,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -101352,7 +101352,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -101796,7 +101796,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -102341,7 +102341,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -102811,7 +102811,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -103112,7 +103112,7 @@
         "type": "BT_STAT",
         "target": "all",
         "buff": "licence_week_50",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up",
         "tooltip": "12"
       }
@@ -103301,7 +103301,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -103800,7 +103800,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_3",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       }
@@ -104168,7 +104168,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -104320,7 +104320,7 @@
         "type": "BT_STAT",
         "target": "enemy_team",
         "buff": "licence_week_89",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "down",
         "tooltip": "23"
       }
@@ -104643,7 +104643,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -105133,7 +105133,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -105604,7 +105604,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -106727,7 +106727,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -106873,7 +106873,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -106977,7 +106977,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -107071,7 +107071,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -107236,7 +107236,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -107432,7 +107432,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -108130,7 +108130,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_8",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -108279,7 +108279,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -108458,7 +108458,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -108963,7 +108963,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -109077,7 +109077,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -109204,7 +109204,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1_2",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -109296,7 +109296,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -109398,7 +109398,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -109528,7 +109528,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -109796,7 +109796,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "4004001_5_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -109944,7 +109944,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "4004001_5_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -110029,7 +110029,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_8",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -110177,7 +110177,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_8",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -110902,7 +110902,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -111032,7 +111032,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -111122,7 +111122,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -111388,7 +111388,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_3",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -111791,7 +111791,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -112269,7 +112269,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_6",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -112416,7 +112416,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_6",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -113012,7 +113012,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_6",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -114842,7 +114842,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_7",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -114953,7 +114953,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_7",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -115150,7 +115150,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_7",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -115228,7 +115228,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_7",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -115686,7 +115686,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_7",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -119424,7 +119424,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_Earth_Effect_2",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -119573,7 +119573,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_Earth_Effect_2",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -119757,7 +119757,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_Earth_Effect_2",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -119955,7 +119955,7 @@
         "type": "BT_STAT",
         "target": "my_team",
         "buff": "4076004_11_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up"
       },
       {
@@ -119992,7 +119992,7 @@
         "type": "BT_STAT",
         "target": "my_team",
         "buff": "4076004_11_1_2",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up"
       }
     ]
@@ -120885,7 +120885,7 @@
         "type": "BT_STAT",
         "target": "enemy_team",
         "buff": "4076007_15_2",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "down",
         "tooltip": "1077"
       },
@@ -121057,7 +121057,7 @@
         "type": "BT_STAT",
         "target": "enemy_team",
         "buff": "4076007_15_2",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "down",
         "tooltip": "1077"
       },
@@ -121253,7 +121253,7 @@
         "type": "BT_STAT",
         "target": "enemy_team",
         "buff": "4076007_15_2",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "down",
         "tooltip": "1077"
       },
@@ -121486,7 +121486,7 @@
         "type": "BT_STAT",
         "target": "enemy_team",
         "buff": "4076007_15_2",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "down",
         "tooltip": "1077"
       },
@@ -121643,7 +121643,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_3",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -121810,7 +121810,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_3",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -121971,7 +121971,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_3",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -122092,7 +122092,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_6",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -126311,7 +126311,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -126429,7 +126429,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -126841,7 +126841,7 @@
         "type": "BT_STAT",
         "target": "enemy_team",
         "buff": "4004003_12_9",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "down",
         "tooltip": "1023"
       }
@@ -126909,7 +126909,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -127204,7 +127204,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -127369,7 +127369,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -128287,7 +128287,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_11",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -128633,7 +128633,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -128711,7 +128711,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "4500153_5_1",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up",
         "tooltip": "1012"
       }
@@ -129117,7 +129117,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -129630,7 +129630,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_13",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       }
@@ -129958,7 +129958,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -130301,7 +130301,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -130702,7 +130702,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_8",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -131119,7 +131119,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -131477,7 +131477,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -132095,7 +132095,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "event_monster_octopus_rage",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -132676,7 +132676,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_11",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -133156,7 +133156,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -133445,7 +133445,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -133850,7 +133850,7 @@
         "type": "BT_STAT",
         "target": "enemy_team",
         "buff": "new_guild_raid_33_0",
-        "stat": "get_character_exp_rate",
+        "stat": "get_char_exp_rate",
         "mode": "up"
       },
       {
@@ -133866,7 +133866,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "new_guild_raid_34_1",
-        "stat": "get_character_exp_rate",
+        "stat": "get_char_exp_rate",
         "mode": "up"
       },
       {
@@ -133882,7 +133882,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "new_guild_raid_34_2",
-        "stat": "get_character_exp_rate",
+        "stat": "get_char_exp_rate",
         "mode": "up"
       },
       {
@@ -133898,7 +133898,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "new_guild_raid_34_3",
-        "stat": "get_character_exp_rate",
+        "stat": "get_char_exp_rate",
         "mode": "up"
       },
       {
@@ -133914,7 +133914,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "new_guild_raid_34_4",
-        "stat": "get_character_exp_rate",
+        "stat": "get_char_exp_rate",
         "mode": "up"
       },
       {
@@ -133930,7 +133930,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "new_guild_raid_34_5",
-        "stat": "get_character_exp_rate",
+        "stat": "get_char_exp_rate",
         "mode": "up"
       },
       {
@@ -134006,7 +134006,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -135318,7 +135318,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -136088,7 +136088,7 @@
         "type": "BT_STAT",
         "target": "enemy_team",
         "buff": "4500351_2_3",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "down",
         "tooltip": "23",
         "caller": "second"
@@ -136196,7 +136196,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "4500351_3_3",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up",
         "tooltip": "12",
         "caller": "ultimate"
@@ -136524,7 +136524,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       }
@@ -136917,7 +136917,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -137853,7 +137853,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -137962,7 +137962,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -138512,7 +138512,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       }
@@ -139009,7 +139009,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -139823,7 +139823,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -140324,7 +140324,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -141789,7 +141789,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -144471,7 +144471,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1_7",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -144573,7 +144573,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1_7",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -145956,7 +145956,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "4076009_4_4_13",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up",
         "tooltip": "1012"
       }
@@ -146188,7 +146188,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "4076009_4_4_13",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up",
         "tooltip": "1012"
       },
@@ -146353,7 +146353,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1_6",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       }
@@ -146469,7 +146469,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1_6",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       }
@@ -146544,7 +146544,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1_4",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       }
@@ -146660,7 +146660,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1_4",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       }
@@ -146735,7 +146735,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       }
@@ -146810,7 +146810,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1_6",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       }
@@ -147099,7 +147099,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_3",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -147951,7 +147951,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -148058,7 +148058,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -148819,7 +148819,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -149145,7 +149145,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_11",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -149399,7 +149399,7 @@
         "type": "BT_STAT",
         "target": "enemy_team",
         "buff": "4086001_3_0",
-        "stat": "avoid",
+        "stat": "resilience",
         "mode": "down",
         "caller": "ultimate"
       },
@@ -150149,7 +150149,7 @@
         "type": "BT_STAT",
         "target": "enemy_team",
         "buff": "4086001_6_9",
-        "stat": "avoid",
+        "stat": "resilience",
         "mode": "down"
       },
       {
@@ -151003,7 +151003,7 @@
         "type": "BT_STAT",
         "target": "enemy_team",
         "buff": "4086001_6_9",
-        "stat": "avoid",
+        "stat": "resilience",
         "mode": "down"
       },
       {
@@ -151784,7 +151784,7 @@
         "type": "BT_STAT",
         "target": "enemy_team",
         "buff": "4086001_6_9",
-        "stat": "avoid",
+        "stat": "resilience",
         "mode": "down"
       },
       {
@@ -151988,7 +151988,7 @@
         "type": "BT_STAT",
         "target": "enemy_team",
         "buff": "4086001_3_0",
-        "stat": "avoid",
+        "stat": "resilience",
         "mode": "down",
         "caller": "ultimate"
       },
@@ -152793,7 +152793,7 @@
         "type": "BT_STAT",
         "target": "enemy_team",
         "buff": "4086001_6_9",
-        "stat": "avoid",
+        "stat": "resilience",
         "mode": "down"
       },
       {
@@ -153365,7 +153365,7 @@
         "type": "BT_STAT",
         "target": "enemy_team",
         "buff": "4086013_5_1_1",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up",
         "tooltip": "40860151"
       },
@@ -154110,7 +154110,7 @@
         "type": "BT_STAT",
         "target": "enemy_team",
         "buff": "4086001_6_9",
-        "stat": "avoid",
+        "stat": "resilience",
         "mode": "down"
       },
       {
@@ -154763,7 +154763,7 @@
         "type": "BT_STAT",
         "target": "enemy_team",
         "buff": "4086014_5_13",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up"
       },
       {
@@ -154802,7 +154802,7 @@
         "type": "BT_STAT",
         "target": "enemy_team",
         "buff": "4086014_5_1_1",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up",
         "tooltip": "40860161"
       },
@@ -155582,7 +155582,7 @@
         "type": "BT_STAT",
         "target": "enemy_team",
         "buff": "4086001_6_9",
-        "stat": "avoid",
+        "stat": "resilience",
         "mode": "down"
       },
       {
@@ -156269,7 +156269,7 @@
         "type": "BT_STAT",
         "target": "enemy_team",
         "buff": "4086001_6_9",
-        "stat": "avoid",
+        "stat": "resilience",
         "mode": "down"
       },
       {
@@ -156972,7 +156972,7 @@
         "type": "BT_STAT",
         "target": "enemy_team",
         "buff": "4086001_6_9",
-        "stat": "avoid",
+        "stat": "resilience",
         "mode": "down"
       },
       {
@@ -157228,7 +157228,7 @@
         "type": "BT_STAT",
         "target": "enemy_team",
         "buff": "4086031_6_1",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up"
       },
       {
@@ -157555,7 +157555,7 @@
         "type": "BT_STAT",
         "target": "enemy_team",
         "buff": "4086001_6_9",
-        "stat": "avoid",
+        "stat": "resilience",
         "mode": "down"
       },
       {
@@ -157824,7 +157824,7 @@
         "type": "BT_STAT",
         "target": "enemy_team",
         "buff": "4086032_6_1_1",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up"
       },
       {
@@ -158488,7 +158488,7 @@
         "type": "BT_STAT",
         "target": "enemy_team",
         "buff": "4086001_6_9",
-        "stat": "avoid",
+        "stat": "resilience",
         "mode": "down"
       },
       {
@@ -158705,7 +158705,7 @@
         "type": "BT_STAT",
         "target": "enemy_team_mage",
         "buff": "4086025_6_4",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up",
         "tooltip": "40860251"
       },
@@ -159121,7 +159121,7 @@
         "type": "BT_STAT",
         "target": "enemy_team",
         "buff": "4086001_6_9",
-        "stat": "avoid",
+        "stat": "resilience",
         "mode": "down"
       },
       {
@@ -159347,7 +159347,7 @@
         "type": "BT_STAT",
         "target": "enemy_team_mage",
         "buff": "4086026_6_4",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up",
         "tooltip": "40860256"
       },
@@ -159765,7 +159765,7 @@
         "type": "BT_STAT",
         "target": "enemy_team",
         "buff": "4086001_6_9",
-        "stat": "avoid",
+        "stat": "resilience",
         "mode": "down"
       },
       {
@@ -160301,7 +160301,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "4034001_2_2",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up",
         "tooltip": "12",
         "caller": "second"
@@ -160602,7 +160602,7 @@
         "type": "BT_DMG",
         "target": "me",
         "buff": "4038001_4_1",
-        "stat": "accuracy",
+        "stat": "effectiveness",
         "mode": "up"
       }
     ]
@@ -162776,7 +162776,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "2000002_3_1",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up",
         "caller": "ultimate"
       },
@@ -164086,7 +164086,7 @@
         "type": "BT_STAT",
         "target": "my_team",
         "buff": "tower_apc_45_3_3",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "down",
         "label": "SYS_BUFF_CRITICAL_RATE_DOWN"
       },
@@ -164198,7 +164198,7 @@
         "type": "BT_STAT",
         "target": "my_team",
         "buff": "tower_apc_45_3_3",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "down",
         "label": "SYS_BUFF_CRITICAL_RATE_DOWN"
       },
@@ -172408,7 +172408,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "2000019_2_3",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up",
         "label": "SYS_BUFF_CRITICAL_DAMAGE_UP",
         "caller": "second"
@@ -173634,7 +173634,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -173838,7 +173838,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "4500043_2_1",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up",
         "tooltip": "12",
         "caller": "second"
@@ -174022,7 +174022,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -174131,7 +174131,7 @@
         "type": "BT_RUN_ACTIVE_SKILL_ON_TURN_END",
         "target": "me",
         "buff": "4500043_1_3",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up",
         "label": "SYS_BUFF_ADDITIVE_ATTACK",
         "caller": "first"
@@ -174190,7 +174190,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "4500043_2_1",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up",
         "tooltip": "12",
         "caller": "second"
@@ -175877,7 +175877,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -177448,7 +177448,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -180261,7 +180261,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -180385,7 +180385,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -181474,7 +181474,7 @@
         "type": "BT_STAT",
         "target": "my_team",
         "buff": "tower_element_52112_2",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up",
         "tooltip": "12",
         "caller": "second"
@@ -181657,7 +181657,7 @@
         "type": "BT_STAT",
         "target": "my_team",
         "buff": "tower_element_52118_2",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up",
         "tooltip": "12",
         "caller": "second"
@@ -186408,7 +186408,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "tower_element_52960_1",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up",
         "tooltip": "1012"
       },
@@ -188724,7 +188724,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "tower_element_52326_1",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up",
         "tooltip": "12"
       },
@@ -190269,7 +190269,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "tower_element_52960_1",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up",
         "tooltip": "1012"
       },
@@ -198837,7 +198837,7 @@
         "type": "BT_DMG_REDUCE",
         "target": "me",
         "buff": "2000067_2_5",
-        "stat": "accuracy",
+        "stat": "effectiveness",
         "mode": "up",
         "tooltip": "2000067"
       },
@@ -198856,7 +198856,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "2000067_2_8",
-        "stat": "avoid",
+        "stat": "resilience",
         "mode": "up"
       }
     ]
@@ -198949,7 +198949,7 @@
         "type": "BT_DMG_REDUCE",
         "target": "me",
         "buff": "2000067_3_4",
-        "stat": "accuracy",
+        "stat": "effectiveness",
         "mode": "up",
         "tooltip": "2000067"
       }
@@ -199156,7 +199156,7 @@
         "type": "BT_STAT",
         "target": "my_team",
         "buff": "2000066_3_2",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up",
         "tooltip": "12",
         "caller": "ultimate"
@@ -200432,7 +200432,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "tower_element_52714_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -200790,7 +200790,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "tower_element_52724_2",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -203620,7 +203620,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_3",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       }
@@ -203740,7 +203740,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_3",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       }
@@ -206079,7 +206079,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "tower_element_52960_1",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up",
         "tooltip": "1012"
       }
@@ -207088,7 +207088,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -207434,7 +207434,7 @@
         "type": "BT_DMG",
         "target": "me",
         "buff": "4038001_4_1",
-        "stat": "accuracy",
+        "stat": "effectiveness",
         "mode": "up"
       }
     ]
@@ -211718,7 +211718,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_11",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -211798,7 +211798,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_11",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -211877,7 +211877,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_11",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -213094,7 +213094,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "2000002_3_1",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up",
         "caller": "ultimate"
       },
@@ -213779,7 +213779,7 @@
         "type": "BT_STAT",
         "target": "my_team",
         "buff": "2000101_2_2",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up",
         "tooltip": "12"
       },
@@ -214199,7 +214199,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "tower_very_hard_monster_2000079_2_4",
-        "stat": "accuracy",
+        "stat": "effectiveness",
         "mode": "up",
         "caller": "second"
       }
@@ -214423,7 +214423,7 @@
         "type": "BT_DMG_REDUCE",
         "target": "me",
         "buff": "2000067_2_5",
-        "stat": "accuracy",
+        "stat": "effectiveness",
         "mode": "up",
         "tooltip": "2000067"
       },
@@ -214442,7 +214442,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "2000067_2_8",
-        "stat": "avoid",
+        "stat": "resilience",
         "mode": "up"
       }
     ]
@@ -214535,7 +214535,7 @@
         "type": "BT_DMG_REDUCE",
         "target": "me",
         "buff": "2000067_3_4",
-        "stat": "accuracy",
+        "stat": "effectiveness",
         "mode": "up",
         "tooltip": "2000067"
       }
@@ -216891,7 +216891,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "tower_element_52731",
-        "stat": "avoid",
+        "stat": "resilience",
         "mode": "up",
         "tooltip": "1014"
       }
@@ -218077,7 +218077,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_11",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -218156,7 +218156,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_11",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -221294,7 +221294,7 @@
         "type": "BT_STAT",
         "target": "my_team",
         "buff": "2000101_2_2",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up",
         "tooltip": "12"
       },
@@ -221378,7 +221378,7 @@
         "type": "BT_STAT",
         "target": "my_team",
         "buff": "2000101_2_2",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up",
         "tooltip": "12"
       },
@@ -222361,7 +222361,7 @@
         "type": "BT_DMG_REDUCE",
         "target": "me",
         "buff": "2000067_2_5",
-        "stat": "accuracy",
+        "stat": "effectiveness",
         "mode": "up",
         "tooltip": "2000067"
       },
@@ -222380,7 +222380,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "2000067_2_8",
-        "stat": "avoid",
+        "stat": "resilience",
         "mode": "up"
       }
     ]
@@ -222473,7 +222473,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "2000067_2_3",
-        "stat": "avoid",
+        "stat": "resilience",
         "mode": "up",
         "tooltip": "14",
         "caller": "second"
@@ -222491,7 +222491,7 @@
         "type": "BT_DMG_REDUCE",
         "target": "me",
         "buff": "2000067_2_5",
-        "stat": "accuracy",
+        "stat": "effectiveness",
         "mode": "up",
         "tooltip": "2000067"
       },
@@ -222510,7 +222510,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "2000067_2_8",
-        "stat": "avoid",
+        "stat": "resilience",
         "mode": "up"
       }
     ]
@@ -222602,7 +222602,7 @@
         "type": "BT_DMG_REDUCE",
         "target": "me",
         "buff": "2000067_3_4",
-        "stat": "accuracy",
+        "stat": "effectiveness",
         "mode": "up",
         "tooltip": "2000067"
       }
@@ -222695,7 +222695,7 @@
         "type": "BT_DMG_REDUCE",
         "target": "me",
         "buff": "2000067_3_4",
-        "stat": "accuracy",
+        "stat": "effectiveness",
         "mode": "up",
         "tooltip": "2000067"
       }
@@ -231303,7 +231303,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "155323_1",
-        "stat": "dmg_boost",
+        "stat": "damage_boost",
         "mode": "up",
         "caller": "first"
       }
@@ -231501,7 +231501,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "155327_1",
-        "stat": "dmg_boost",
+        "stat": "damage_boost",
         "mode": "up",
         "caller": "first"
       }
@@ -231669,7 +231669,7 @@
         "type": "BT_STAT_PREMIUM",
         "target": "me",
         "buff": "155330_2",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up"
       }
     ]
@@ -232156,7 +232156,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "tower_element_dark_02",
-        "stat": "dmg_boost",
+        "stat": "damage_boost",
         "mode": "up"
       }
     ]
@@ -233033,7 +233033,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "tower_element_light_150_p1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up"
       }
     ]
@@ -235621,7 +235621,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "roguelight_065",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up",
         "tooltip": "12",
         "caller": "ultimate"
@@ -240351,7 +240351,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -240743,7 +240743,7 @@
         "type": "BT_STAT_OWNER_LOST_HP_RATE",
         "target": "me",
         "buff": "roguelight_591",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up"
       },
       {
@@ -241708,7 +241708,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "roguelight_686",
-        "stat": "avoid",
+        "stat": "resilience",
         "mode": "down",
         "tooltip": "25"
       },
@@ -241726,7 +241726,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "roguelight_688",
-        "stat": "accuracy",
+        "stat": "effectiveness",
         "mode": "up"
       },
       {
@@ -241735,7 +241735,7 @@
         "type": "BT_STAT",
         "target": "enemy_team",
         "buff": "roguelight_689",
-        "stat": "accuracy",
+        "stat": "effectiveness",
         "mode": "up"
       }
     ]
@@ -242215,7 +242215,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -242671,7 +242671,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -243033,7 +243033,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_3",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -244301,7 +244301,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_3",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -247387,7 +247387,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_3",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       }
@@ -247507,7 +247507,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_3",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       }
@@ -247627,7 +247627,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_3",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       }
@@ -248208,7 +248208,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -248420,7 +248420,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "guild_raid_sub_02_6",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up",
         "tooltip": "12",
         "caller": "ultimate"
@@ -248722,7 +248722,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "guild_raid_sub_02_6",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up",
         "tooltip": "12",
         "caller": "ultimate"
@@ -248741,7 +248741,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -249191,7 +249191,7 @@
         "type": "BT_STAT",
         "target": "enemy_team",
         "buff": "common_check_unify_element",
-        "stat": "get_character_exp_rate",
+        "stat": "get_char_exp_rate",
         "mode": "up"
       },
       {
@@ -249207,7 +249207,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "common_check_unique_element_1_1",
-        "stat": "get_character_exp_rate",
+        "stat": "get_char_exp_rate",
         "mode": "up"
       },
       {
@@ -249223,7 +249223,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "common_check_unique_element_2_1",
-        "stat": "get_character_exp_rate",
+        "stat": "get_char_exp_rate",
         "mode": "up"
       },
       {
@@ -249239,7 +249239,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "common_check_unique_element_3_1",
-        "stat": "get_character_exp_rate",
+        "stat": "get_char_exp_rate",
         "mode": "up"
       },
       {
@@ -249255,7 +249255,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "common_check_unique_element_4_1",
-        "stat": "get_character_exp_rate",
+        "stat": "get_char_exp_rate",
         "mode": "up"
       },
       {
@@ -249271,7 +249271,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "common_check_unique_element_5_1",
-        "stat": "get_character_exp_rate",
+        "stat": "get_char_exp_rate",
         "mode": "up"
       },
       {
@@ -249446,7 +249446,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -250494,7 +250494,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -250935,7 +250935,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -251410,7 +251410,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -252114,7 +252114,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_101",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -252546,7 +252546,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_101",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -252923,7 +252923,7 @@
         "type": "BT_STAT",
         "target": "enemy_team",
         "buff": "singularity_passive_dmg_earth4",
-        "stat": "dmg_boost",
+        "stat": "damage_boost",
         "mode": "up",
         "label": "SYS_BUFF_DMG"
       },
@@ -252933,7 +252933,7 @@
         "type": "BT_STAT",
         "target": "enemy_team",
         "buff": "singularity_passive_dmg_earth3",
-        "stat": "dmg_boost",
+        "stat": "damage_boost",
         "mode": "up",
         "label": "SYS_BUFF_DMG"
       }
@@ -253064,7 +253064,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_101",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -253487,7 +253487,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_101",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -253523,7 +253523,7 @@
         "type": "BT_STAT",
         "target": "enemy_team",
         "buff": "Singularity_RAGE_SP",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "down",
         "tooltip": "23"
       }
@@ -253957,7 +253957,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_101",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -254273,7 +254273,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Singularity_Passive_SPIDER_A_2",
-        "stat": "e_cri_dmg_reduce",
+        "stat": "enemy_critical_dmg_reduce",
         "mode": "up"
       }
     ]
@@ -254431,7 +254431,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_101",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -254715,7 +254715,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Singularity_OLD_SKILL03_1",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up",
         "tooltip": "12",
         "caller": "ultimate"
@@ -255353,7 +255353,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_101",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -255784,7 +255784,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_101",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -256068,7 +256068,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Singularity_OLD_SKILL03_1",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up",
         "tooltip": "12",
         "caller": "ultimate"
@@ -256706,7 +256706,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_101",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -257137,7 +257137,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_101",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -257365,7 +257365,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Singularity_CHI_SKILL03_1",
-        "stat": "dmg_boost",
+        "stat": "damage_boost",
         "mode": "up",
         "caller": "ultimate"
       },
@@ -257626,7 +257626,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -257971,7 +257971,7 @@
         "type": "BT_STAT",
         "target": "enemy_team",
         "buff": "singularity_passive_ks_a_2",
-        "stat": "dmg_boost",
+        "stat": "damage_boost",
         "mode": "up"
       },
       {
@@ -257980,7 +257980,7 @@
         "type": "BT_STAT",
         "target": "enemy_team",
         "buff": "singularity_passive_ks_a_3",
-        "stat": "dmg_boost",
+        "stat": "damage_boost",
         "mode": "up"
       },
       {
@@ -257989,7 +257989,7 @@
         "type": "BT_STAT",
         "target": "enemy_team",
         "buff": "singularity_passive_ks_a_4",
-        "stat": "dmg_boost",
+        "stat": "damage_boost",
         "mode": "up"
       },
       {
@@ -257998,7 +257998,7 @@
         "type": "BT_STAT",
         "target": "enemy_team",
         "buff": "singularity_passive_ks_a_5",
-        "stat": "dmg_boost",
+        "stat": "damage_boost",
         "mode": "up"
       },
       {
@@ -258228,7 +258228,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_101",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -258717,7 +258717,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_101",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -258839,7 +258839,7 @@
         "type": "BT_STAT",
         "target": "enemy_team_mage",
         "buff": "singularity_passive_enemy_1_attacker",
-        "stat": "dmg_boost",
+        "stat": "damage_boost",
         "mode": "up",
         "label": "SYS_BUFF_DMG"
       },
@@ -258849,7 +258849,7 @@
         "type": "BT_STAT",
         "target": "enemy_team",
         "buff": "singularity_passive_enemy_1_priest",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "label": "SYS_BUFF_DMG_REDUCE_RATE_UP"
       },
@@ -258878,7 +258878,7 @@
         "type": "BT_STAT",
         "target": "enemy_team_attacker",
         "buff": "singularity_passive_enemy_1_mage",
-        "stat": "dmg_boost",
+        "stat": "damage_boost",
         "mode": "up",
         "label": "SYS_BUFF_DMG"
       }
@@ -260026,7 +260026,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "tower_hard_mob_35_05",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up"
       },
       {
@@ -260345,7 +260345,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "tower_very_hard_boss_2000078_4_3",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up",
         "tooltip": "12"
       },
@@ -260620,7 +260620,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       },
@@ -262312,7 +262312,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "Common_Rage_Buff_1_4",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       }
@@ -262478,7 +262478,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "tower_hard_mob_40_08",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up",
         "tooltip": "1069"
       }

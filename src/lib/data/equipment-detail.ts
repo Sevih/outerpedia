@@ -101,7 +101,7 @@ const ARMOR_TABLES = {
 export interface StatOption {
   /** Abréviation affichée (« ATK% », « EFF »…). */
   key: string;
-  /** Nom complet du jeu quand il n'existe pas d'abréviation propre (hit_ap…). */
+  /** Nom complet du jeu quand il n'existe pas d'abréviation propre (hit_bp…). */
   label?: string;
   /** Valeur affichée en % (suffixe + arrondi 0.1). */
   percent: boolean;
@@ -238,7 +238,7 @@ function simpleStatOption(
  * Options prêtes au calcul d'UNE ligne de pool. Cas général : une option.
  * Option spéciale EE (buff + stat propre) : DEUX options — la stat
  * CONDITIONNELLE portée par le buff (dmg_reduce 200 = 20 %, niveaux du buff)
- * ET la stat SECONDAIRE flat de la ligne (hit_ap). Règle du client pour la
+ * ET la stat SECONDAIRE flat de la ligne (hit_bp). Règle du client pour la
  * secondaire : l'option n'est créée qu'à partir de +1 (`CItem.InitializeOptionData`)
  * et vaut `min(OptionValue + n × OptionFactor, OptionMaxValue)` à +n
  * (`CItemSubOptionData`) ; à +0, `CUISpecialEnchantGrowth` affiche 0.

@@ -825,11 +825,11 @@ describe('inputs — équipement d’ÉQUIPE (talisman / arme / accessoire, 24/0
   });
 
   it('stat NON saisie + buff d’équipe qui la vise : calculée sur base 0, jamais « hors calcul » (bug Sevih 24/08)', () => {
-    // Repro : fiche sans dmg_boost (champ vide) + talisman DMG d'équipe
+    // Repro : fiche sans damage_boost (champ vide) + talisman DMG d'équipe
     // (BID_ITEM_STAT_OOPARTS_DMG_6, ST_DMG_BOOST OAT_ADD, L11 = 120 ‰) —
     // la stat finale doit exister à 12 %, pas rester « — ».
     const without = buildDamageReport(attackerBase(), target(), dataEq);
-    expect(without.combatStats.dmg_boost).toBeUndefined();
+    expect(without.combatStats.damage_boost).toBeUndefined();
     const withAlly = buildDamageReport(
       {
         ...attackerBase(),
@@ -840,7 +840,7 @@ describe('inputs — équipement d’ÉQUIPE (talisman / arme / accessoire, 24/0
       target(),
       dataEq,
     );
-    expect(withAlly.combatStats.dmg_boost).toBe(lv('BID_ITEM_STAT_OOPARTS_DMG_6', 11)); // 120
+    expect(withAlly.combatStats.damage_boost).toBe(lv('BID_ITEM_STAT_OOPARTS_DMG_6', 11)); // 120
   });
 
   it('NON-CUMUL des mains par stat (mesure Sevih 24/08) : la plus forte l’emporte, l’allié ne verse que l’excédent', () => {

@@ -22,8 +22,7 @@
  */
 import { loadTable, num, splitCsv, type Row } from '../lib/tables';
 import { loadTextIndex, resolveText } from '../lib/text';
-import { formatStatValue } from '../lib/stats';
-import { slugEnum } from '../lib/enums';
+import { formatStatValue, statSlug } from '../lib/stats';
 import type { LangDict } from '../lib/lang';
 
 /** Coût + effet d'un niveau de nœud. */
@@ -110,11 +109,15 @@ export function buildQuirks(): QuirksData {
    *  compte EBT dont la magnitude est directement dans `BuffValue`). */
   const levelValue = (r: Row): string | undefined => {
     if (r.OptionType === 'IOT_STAT' && r.StatType && r.StatType !== 'ST_NONE')
-      return formatStatValue(r.ApplyingType ?? '', num(r.OptionValue), slugEnum(r.StatType));
+      return formatStatValue(
+        r.ApplyingType ?? '',
+        num(r.OptionValue),
+        statSlug(r.StatType) ?? undefined,
+      );
     if (r.OptionType === 'IOT_BUFF') {
       const bf = r.BuffID ? buffIndex.get(r.BuffID) : undefined;
       if (bf) {
-        const stat = bf.StatType && bf.StatType !== 'ST_NONE' ? slugEnum(bf.StatType) : undefined;
+        const stat = statSlug(bf.StatType) ?? undefined;
         // `GetStatBuffValue` du client : valeur ABSOLUE (le texte du nœud dit
         // déjà « Reduces … by »), nature % de `GetStatValue`.
         return formatStatValue(bf.ApplyingType ?? '', Math.abs(num(bf.Value)), stat);

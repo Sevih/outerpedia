@@ -662,7 +662,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "BID_ITEM_UO_WEAPON_13",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up"
       }
     ]
@@ -1079,7 +1079,7 @@
         "type": "BT_STAT_OWNER_LOST_HP_RATE_HALF",
         "target": "me",
         "buff": "BID_ITEM_UO_WEAPON_21_2",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "up"
       },
       {
@@ -2056,7 +2056,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "BID_FESTIVAL_UO_WEAPON_3",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up"
       }
     ]
@@ -2574,7 +2574,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "BID_ITEM_UO_ACC_06",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up",
         "tooltip": "12"
       }
@@ -2849,7 +2849,7 @@
         "type": "BT_STAT_OWNER_LOST_HP_RATE",
         "target": "me",
         "buff": "BID_ITEM_UO_ACC_11",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up"
       }
     ]
@@ -3188,7 +3188,7 @@
         "type": "BT_STAT",
         "target": "enemy_team",
         "buff": "BID_ITEM_UO_ACC_18",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "down",
         "tooltip": "23"
       }
@@ -3634,7 +3634,7 @@
         "type": "BT_STAT",
         "target": "enemy",
         "buff": "BID_IRREGULAR_UO_ACC_01",
-        "stat": "dmg_reduce_rate",
+        "stat": "dmg_reduce",
         "mode": "down"
       }
     ]
@@ -6070,7 +6070,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "BID_EVENTITEM_UO_WEAPON_06",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up",
         "tooltip": "12"
       }
@@ -7665,7 +7665,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "BID_CEQUIP_2000002",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up"
       }
     ]
@@ -9784,7 +9784,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "BID_CEQUIP_2000060",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up",
         "label": "SYS_BUFF_CHARGE_AP"
       }
@@ -10613,7 +10613,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "BID_CEQUIP_2000083",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up",
         "label": "SYS_BUFF_CHARGE_AP"
       }
@@ -10982,7 +10982,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "BID_CEQUIP_2000093",
-        "stat": "enter_ap",
+        "stat": "enter_bp",
         "mode": "up",
         "label": "SYS_BUFF_CHARGE_AP"
       }
@@ -11581,7 +11581,7 @@
         "type": "BT_STAT",
         "target": "my_team",
         "buff": "BID_CEQUIP_2000111",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up"
       }
     ]
@@ -11754,7 +11754,7 @@
         "type": "BT_STAT_PREMIUM",
         "target": "me",
         "buff": "BID_CEQUIP_2000117_1",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up"
       }
     ]
@@ -11891,7 +11891,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "BID_CEQUIP_2000122",
-        "stat": "dmg_boost",
+        "stat": "damage_boost",
         "mode": "up"
       }
     ]
@@ -12032,7 +12032,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "BID_CEQUIP_2000002_CHANGE",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up"
       }
     ]
@@ -15035,7 +15035,7 @@
         "type": "BT_STAT",
         "target": "me",
         "buff": "BID_CEQUIP_2000085_ADD",
-        "stat": "critical_dmg_rate",
+        "stat": "critical_dmg",
         "mode": "up"
       }
     ]
@@ -16246,7 +16246,7 @@
         "type": "BT_STAT",
         "target": "my_team_element_fire_all",
         "buff": "BID_CEQUIP_2000122_ADD",
-        "stat": "dmg_boost",
+        "stat": "damage_boost",
         "mode": "up"
       }
     ]

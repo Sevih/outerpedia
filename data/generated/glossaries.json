@@ -66,7 +66,7 @@
       "fr": "Chance de contre-ATQ",
       "es": "Prob. Contraataque"
     },
-    "critical_dmg_rate": {
+    "critical_dmg": {
       "en": "Crit DMG",
       "jp": "会心ダメージ",
       "kr": "치명 피해",
@@ -82,6 +82,14 @@
       "fr": "Taux CRIT",
       "es": "Tasa CRIT"
     },
+    "damage_boost": {
+      "en": "DMG Increase",
+      "jp": "与ダメUP",
+      "kr": "피해 증가",
+      "zh": "伤害提升",
+      "fr": "Dégâts +",
+      "es": "Daño +"
+    },
     "def": {
       "en": "Defense",
       "jp": "防御力",
@@ -90,15 +98,7 @@
       "fr": "Défense",
       "es": "Defensa"
     },
-    "dmg_boost": {
-      "en": "DMG Increase",
-      "jp": "与ダメUP",
-      "kr": "피해 증가",
-      "zh": "伤害提升",
-      "fr": "Dégâts +",
-      "es": "Daño +"
-    },
-    "dmg_reduce_rate": {
+    "dmg_reduce": {
       "en": "DMG Reduction",
       "jp": "被ダメDOWN",
       "kr": "받는 피해 감소",
@@ -106,7 +106,7 @@
       "fr": "Dégâts reçus -",
       "es": "Daño recibido -"
     },
-    "e_cri_dmg_reduce": {
+    "enemy_critical_dmg_reduce": {
       "en": "Crit DMG Reduc",
       "jp": "被会心ダメDOWN",
       "kr": "받는 치명 피해 감소",
@@ -114,7 +114,7 @@
       "fr": "Dégâts reçus - crit.",
       "es": "Red. de daño crítico reci."
     },
-    "enter_ap": {
+    "enter_bp": {
       "en": "Gains AP at the start of battle",
       "jp": "戦闘開始時、AP獲得",
       "kr": "입장 시 AP획득",
@@ -122,7 +122,7 @@
       "fr": "Gagne des PA au début du combat",
       "es": "Gana AP al iniciar la batalla."
     },
-    "hit_ap": {
+    "hit_bp": {
       "en": "Gains AP when hit",
       "jp": "ダメージを受けるとAP獲得",
       "kr": "피격 시 AP획득",
@@ -138,7 +138,7 @@
       "fr": "Santé",
       "es": "Vida"
     },
-    "kill_ap": {
+    "kill_bp": {
       "en": "Gains AP when an enemy dies",
       "jp": "敵が倒れた時、AP獲得",
       "kr": "적 사망 시 AP획득",
@@ -180,7 +180,7 @@
     }
   },
   "statDescs": {
-    "dmg_boost": {
+    "damage_boost": {
       "en": "Increases damage dealt when attacking.\\nThis effect is added to the user's Critical Damage (when a critical hit occurs) and calculated together with the enemy's Critical Damage Reduction and Damage Taken Reduction. (Additive)",
       "jp": "攻撃時に与えるダメージが増加します。\\nこの効果は自分の会心ダメージ（会心発生時）と加算され、敵の会心ダメージ減少および被ダメージ減少と共に計算されます。（加算）",
       "kr": "공격 시 주는 피해량이 증가합니다.\\n이 효과는 자신의 치명 피해 수치와 합산되어(치명 발생 시), 적의 치명 피해 감소 및 받는 피해 감소 수치와 함께 계산됩니다. (합연산)",
@@ -188,7 +188,7 @@
       "fr": "Hausse les dégâts infligés lors des attaques.\\nCet effet s'ajoute aux dégâts critiques de l'utilisateur (lorsqu'un coup critique est porté) & est calculé en tenant compte de la dégâts reçus - critiques & de la dégâts reçus - subis de l'ennemi. (Additif)",
       "es": "Aumenta el daño infligido al atacar. Este efecto se suma al Daño Crítico del usuario (cuando ocurre un golpe crítico) y se calcula junto con la Reducción de Daño Crítico y la Reducción\\nde Daño Recibido del enemigo. (Aditivo)"
     },
-    "dmg_reduce_rate": {
+    "dmg_reduce": {
       "en": "Reduces damage taken when hit.\\nThis effect is added to the user's Critical Damage Reduction (when critically hit) and calculated together with the enemy's Critical Damage and Damage Increase. (Additive)",
       "jp": "被弾時に受けるダメージが減少します。\\nこの効果は自分の会心ダメージ減少（会心被弾時）と加算され、敵の会心ダメージおよびダメージ増加と共に計算されます。（加算）\\n「被ダメDOWN」および「被会心ダメDOWN」効果で減少できるダメージは、最大70%までです。",
       "kr": "피격 시 받는 피해량이 감소합니다.\\n이 효과는 자신의 치명 피해 감소 수치와 합산되어(치명 피격 시), 적의 치명 피해 및 피해 증가 수치와 함께 계산됩니다. (합연산)\\n받는 피해 감소 및 받는 치명 피해 감소 효과로 감소시킬 수 있는 피해량은 최대 70%입니다.",
@@ -196,7 +196,7 @@
       "fr": "Baisse les dégâts subis lors d'un coup.\\nCet effet s'ajoute à la dégâts reçus - critiques de l'utilisateur (en cas de coup critique) & est calculé conjointement avec les dégâts critiques & l'dégâts+de l'ennemi. (Additif)",
       "es": "Baja el daño recibido al ser golpeado.\\nEste efecto se suma a la Red. de daño Crítico Recibido del lanzador (en golpes críticos) & se calcula junto al Daño Crítico & Daño+rivales. (Suma)\\nEl daño que se puede reducir mediante los efectos de Red. de daño Recibido & Red. de daño Crítico Recibido es de un máx. del 70%"
     },
-    "e_cri_dmg_reduce": {
+    "enemy_critical_dmg_reduce": {
       "en": "Reduces damage taken when hit.\\nWhen critically hit, this effect is added to the user's Critical Damage Reduction and is calculated together with the enemy's Critical Damage and Damage Increase. (Additive)\\nThe maximum total reduction from Damage Reduction and Enemy Critical Damage Reduction effects is 70%.",
       "jp": "会心発生時、受けるダメージが減少します。\\nこの効果は自分の被ダメージ減少と加算され、敵の会心ダメージおよびダメージ増加と共に計算されます。（加算）\\n「被ダメDOWN」および「被会心ダメDOWN」効果で減少できるダメージは、最大70%までです。",
       "kr": "치명 피격 시 받는 피해가 감소합니다.\\n이 효과는 자신의 받는 피해 감소 수치와 합산되어, 적의 치명 피해 및 피해 증가 수치와 함께 계산됩니다. (합연산)\\n받는 피해 감소 및 받는 치명 피해 감소 효과로 감소시킬 수 있는 피해량은 최대 70%입니다.",
@@ -6676,9 +6676,9 @@
     "9": ["BT_STAT|buff_chance"],
     "10": ["BT_STAT|buff_resist"],
     "11": ["BT_STAT|critical_rate"],
-    "12": ["BT_STAT|critical_dmg_rate"],
-    "13": ["BT_STAT|accuracy"],
-    "14": ["BT_STAT|avoid", "BT_STAT|buff_resist"],
+    "12": ["BT_STAT|critical_dmg"],
+    "13": ["BT_STAT|effectiveness"],
+    "14": ["BT_STAT|buff_resist", "BT_STAT|resilience"],
     "15": ["BT_STAT|speed"],
     "16": ["BT_STAT|hit_hp_recovery"],
     "17": ["BT_ADDITIVE_TURN", "BT_STAT|def"],
@@ -6687,8 +6687,8 @@
     "20": ["BT_STAT|buff_chance"],
     "21": ["BT_STAT|buff_resist"],
     "22": ["BT_STAT|critical_rate"],
-    "23": ["BT_STAT|critical_dmg_rate"],
-    "25": ["BT_STAT|avoid"],
+    "23": ["BT_STAT|critical_dmg"],
+    "25": ["BT_STAT|resilience"],
     "26": ["BT_STAT|def", "BT_STAT|speed"],
     "27": ["BT_INVINCIBLE"],
     "28": ["BT_HEAL_BASED_CASTER|hp", "BT_HEAL_BASED_TARGET|hp"],
@@ -6742,8 +6742,8 @@
     "1009": ["BT_STAT|buff_chance"],
     "1010": ["BT_STAT|buff_resist"],
     "1011": ["BT_STAT|critical_rate"],
-    "1012": ["BT_STAT|critical_dmg_rate"],
-    "1014": ["BT_STAT|avoid"],
+    "1012": ["BT_STAT|critical_dmg"],
+    "1014": ["BT_STAT|resilience"],
     "1015": ["BT_STAT|speed"],
     "1017": ["BT_RESOURCE_USE_SKILL|def", "BT_STAT|def"],
     "1018": ["BT_RESOURCE_USE_SKILL|atk", "BT_STAT|atk"],
@@ -6751,9 +6751,9 @@
     "1020": ["BT_STAT|buff_chance"],
     "1021": ["BT_STAT|buff_resist"],
     "1022": ["BT_STAT|critical_rate"],
-    "1023": ["BT_STAT|critical_dmg_rate"],
-    "1024": ["BT_STAT|accuracy"],
-    "1025": ["BT_STAT|avoid"],
+    "1023": ["BT_STAT|critical_dmg"],
+    "1024": ["BT_STAT|effectiveness"],
+    "1025": ["BT_STAT|resilience"],
     "1026": ["BT_STAT|speed"],
     "1027": ["BT_INVINCIBLE", "BT_INVINCIBLE|def"],
     "1028": ["BT_HEAL_BASED_TARGET|hp"],
@@ -6773,10 +6773,10 @@
     "1038": ["BT_SEALED_RECEIVE_HEAL"],
     "1039": ["BT_SEALED"],
     "1045": ["BT_STAT|counter_rate"],
-    "1069": ["BT_DMG_REDUCE", "BT_STAT|dmg_reduce_rate"],
+    "1069": ["BT_DMG_REDUCE", "BT_STAT|dmg_reduce"],
     "1070": ["BT_DMG_REDUCE"],
     "1076": ["BT_STAT|critical_rate"],
-    "1077": ["BT_STAT|critical_dmg_rate"],
+    "1077": ["BT_STAT|critical_dmg"],
     "1085": ["BT_DEATH"],
     "1092": ["BT_STAT_BUFF_ENHANCE"],
     "1094": ["BT_STAT_DEBUFF_ENHANCE"],
@@ -6815,7 +6815,7 @@
     "2000059": ["BT_STAT", "BT_STAT|get_gold_rate"],
     "2000063": ["BT_SHARE_DMG"],
     "2000065": ["BT_2000065_A"],
-    "2000067": ["BT_DMG_REDUCE|accuracy"],
+    "2000067": ["BT_DMG_REDUCE|effectiveness"],
     "2000072": ["BT_NONE"],
     "2000075": ["BT_NONE"],
     "2000076": ["BT_NONE"],
@@ -6835,7 +6835,7 @@
     "2000110": ["BT_STAT"],
     "2000111": ["BT_NONE"],
     "2000112": ["BT_DMG_REDUCE_FINAL_WITH_OUT_FIRST_SKILL"],
-    "2000114": ["BT_STAT|dmg_reduce_rate"],
+    "2000114": ["BT_STAT|dmg_reduce"],
     "2000119": ["BT_NONE"],
     "2000120": ["BT_NONE"],
     "2000121": ["BT_STAT"],
@@ -6923,10 +6923,10 @@
     "40860147": ["BT_NONE"],
     "40860148": ["BT_NONE"],
     "40860149": ["BT_NONE"],
-    "40860151": ["BT_STAT|critical_dmg_rate"],
+    "40860151": ["BT_STAT|critical_dmg"],
     "40860152": ["BT_STAT|atk"],
     "40860153": ["BT_DMG"],
-    "40860161": ["BT_STAT|critical_dmg_rate"],
+    "40860161": ["BT_STAT|critical_dmg"],
     "40860162": ["BT_STAT|atk"],
     "40860191": ["BT_STAT|atk"],
     "40860192": ["BT_DMG_TO_BOSS"],
@@ -6934,12 +6934,12 @@
     "40860195": ["BT_IMMUNE"],
     "40860196": ["BT_NONE"],
     "40860250": ["BT_STAT|atk"],
-    "40860251": ["BT_STAT|critical_dmg_rate"],
+    "40860251": ["BT_STAT|critical_dmg"],
     "40860252": ["BT_NONE"],
     "40860253": ["BT_NONE"],
     "40860254": ["BT_ACTION_GAUGE_ENHANCE"],
     "40860255": ["BT_STAT|atk"],
-    "40860256": ["BT_STAT|critical_dmg_rate"],
+    "40860256": ["BT_STAT|critical_dmg"],
     "40860257": ["BT_NONE"],
     "40860258": ["BT_STAT|buff_chance"],
     "40860259": ["BT_ACTION_GAUGE_ENHANCE"],

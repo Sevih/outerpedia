@@ -5,7 +5,6 @@ import {
   effectShape,
   resolveEffect,
   resolveKeyWinners,
-  statSlug,
   type EffectFamily,
 } from './effects';
 import type { Row } from './tables';
@@ -85,17 +84,6 @@ describe('classifyCategory', () => {
   });
 });
 
-describe('statSlug', () => {
-  it('strip ST_ et minuscule', () => {
-    expect(statSlug('ST_CRITICAL_RATE')).toBe('critical_rate');
-    expect(statSlug('ST_ATK')).toBe('atk');
-  });
-  it('ST_NONE / vide → null', () => {
-    expect(statSlug('ST_NONE')).toBeNull();
-    expect(statSlug(undefined)).toBeNull();
-  });
-});
-
 describe('resolveEffect', () => {
   it('stat buff (ATK +30%) → famille/cat/stat/mode/value + réf tooltip', () => {
     const eff = resolveEffect({
@@ -132,6 +120,18 @@ describe('resolveEffect', () => {
       BuffDebuffType: 'DEBUFF',
     } as Row);
     expect(eff).toMatchObject({ category: 'debuff', stat: 'def', mode: 'down', value: '50%' });
+  });
+
+  it('stat au slug de la table (C27) : DMG RED% → dmg_reduce, en %', () => {
+    const eff = resolveEffect({
+      Type: 'BT_STAT',
+      StatType: 'ST_DMG_REDUCE_RATE',
+      ApplyingType: 'OAT_ADD',
+      Value: '200',
+      TargetType: 'ME',
+      BuffDebuffType: 'BUFF',
+    } as Row);
+    expect(eff).toMatchObject({ stat: 'dmg_reduce', mode: 'up', value: '20%' });
   });
 
   it('sans tooltip → label depuis CreateText (symbole strippé)', () => {

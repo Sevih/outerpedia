@@ -20,7 +20,7 @@ import { useEffect, useRef, useState } from 'react';
 import LZString from 'lz-string';
 import { ELEMENT_ORDER } from '@/lib/images';
 import { useStoredState } from '@/lib/client-storage';
-import { type CalculatorUrlState as UrlState } from '@/lib/damage/scenario';
+import { type CalculatorUrlState as UrlState, upgradeUrlState } from '@/lib/damage/scenario';
 import { EMPTY_ALLY, type AllyPick, type Props, type SetPick } from './contracts';
 import { CODEX_STORE, DEV_BUILD, GUILD_STORE, PREMIUM_STORE, QUIRKS_STORE } from './stores';
 
@@ -191,7 +191,8 @@ export function useScenarioState({
   // complète (ids inconnus écartés, nombres bornés) : l'entrée vient de l'URL
   // ou d'un scénario sauvegardé, jamais fiable. Partagé entre l'hydratation au
   // mount et « Charger » du harnais (les deux chemins restent d'accord).
-  const applyZ = (st: UrlState) => {
+  const applyZ = (raw: UrlState) => {
+    const st = upgradeUrlState(raw);
     const char = st.a ? chars.find((c) => c.id === st.a) : undefined;
     if (char) {
       setAttackerId(char.id);

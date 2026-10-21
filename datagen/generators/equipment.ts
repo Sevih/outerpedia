@@ -50,7 +50,7 @@ import {
   mechanicLabelIndex,
   type EffectShape,
 } from '../lib/effects';
-import { formatStatValue } from '../lib/stats';
+import { formatStatValue, STAT_SLUG_TYPES, statSlug } from '../lib/stats';
 import { GAME_LANGS, type LangDict } from '../lib/lang';
 
 /** Une option résolue (stat ou buff) avec son poids de tirage. */
@@ -277,6 +277,10 @@ const SLOT: Record<string, keyof EquipmentData> = {
 export const optMode = (applying: string | undefined): Option['mode'] =>
   applying === 'OAT_RATE' ? 'rate' : applying === 'OAT_ADD' ? 'flat' : 'none';
 
+/** Stat d'une option de pool : le slug de stat, `none` (ST_NONE) ou vide sans type. */
+const optionStat = (statType: string | undefined): string =>
+  statSlug(statType) ?? slugEnum(statType);
+
 /**
  * Élément de CONDITION d'un buff (`BuffConditionValue`) → nom d'enum.
  * ATTENTION : le suffixe du BuffID (`BID_CEQUIP_MAIN_DMG_REDUCE_FIRE`) est
@@ -359,14 +363,14 @@ function resolveGroup(
       const levels = buffsByID.get(id) ?? [];
       const b = levels.find((r) => r.Level === '1') ?? levels[0];
       opt = {
-        stat: slugEnum(b?.StatType),
+        stat: optionStat(b?.StatType),
         mode: optMode(b?.ApplyingType),
         value: num(b?.Value),
         weight: num(o.Rate) / 100,
       };
     } else {
       opt = {
-        stat: slugEnum(o.StatType),
+        stat: optionStat(o.StatType),
         mode: optMode(o.ApplyingType),
         value: num(o.OptionValue),
         weight: num(o.Rate) / 100,
@@ -409,7 +413,7 @@ function setEffect(
 ): SetEffect | null {
   const stat = row[`StatType_${piece}`];
   if (stat && stat !== 'ST_NONE') {
-    const slug = slugEnum(stat);
+    const slug = statSlug(stat)!;
     return {
       stat: slug,
       value: formatStatValue(
@@ -520,7 +524,7 @@ function refineEquipShape(sh: EffectShape): EffectShape {
   if (sh.type === 'BT_NONE') return sh;
   // AP au début du combat (stat premium ENTER_AP) = la chip « AP » (héritée :
   // BT_AP_CHARGE) — seule stat permanente chipée.
-  if (sh.stat === 'enter_ap') {
+  if (sh.stat === 'enter_bp') {
     sh.label = 'SYS_BUFF_CHARGE_AP';
     return sh;
   }
@@ -608,7 +612,7 @@ export function buildEquipment(): EquipmentData {
     return [
       {
         type: slugEnum(b.Type),
-        ...(b.StatType && b.StatType !== 'ST_NONE' ? { stat: slugEnum(b.StatType) } : {}),
+        ...(b.StatType && b.StatType !== 'ST_NONE' ? { stat: statSlug(b.StatType)! } : {}),
         mode: optMode(b.ApplyingType),
         value: num(b.Value),
       },
@@ -870,8 +874,8 @@ export function buildEquipment(): EquipmentData {
   const statSlugs = new Set<string>([
     'pierce_power',
     'speed',
-    'dmg_boost',
-    'dmg_reduce_rate',
+    'damage_boost',
+    'dmg_reduce',
     'buff_chance',
     'buff_resist',
   ]);
@@ -886,11 +890,14 @@ export function buildEquipment(): EquipmentData {
         if (t[p]?.stat) statSlugs.add(t[p].stat);
         for (const e of t[p]?.effects ?? []) if (e.stat) statSlugs.add(e.stat);
       }
+  // Clé du glossaire = slug de stat ; clé de TEXTE = le `ST_*` (le jeu nomme
+  // `SYS_STAT_DMG_BOOST`, pas `SYS_STAT_DAMAGE_BOOST`).
   for (const slug of [...statSlugs].sort()) {
-    const name = resolveText(system, `SYS_STAT_${slug.toUpperCase()}`);
+    const text = (STAT_SLUG_TYPES[slug] ?? `ST_${slug}`).replace(/^ST_/, '').toUpperCase();
+    const name = resolveText(system, `SYS_STAT_${text}`);
     if (name.en) data.statNames[slug] = name;
-    else console.warn(`⚠ nom de stat introuvable : SYS_STAT_${slug.toUpperCase()}`);
-    const desc = resolveText(system, `SYS_STAT_DESC_${slug.toUpperCase()}`);
+    else console.warn(`⚠ nom de stat introuvable : SYS_STAT_${text}`);
+    const desc = resolveText(system, `SYS_STAT_DESC_${text}`);
     if (desc.en) data.statDescs[slug] = desc;
   }
 

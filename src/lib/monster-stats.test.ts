@@ -1,7 +1,8 @@
 import { describe, expect, it } from 'vitest';
 import { getEncounters } from '@/lib/data/encounters';
 import { getGlossaries } from '@/lib/data/glossaries';
-import { getMonster } from '@/lib/data/monsters';
+import { getBossView, getMonster } from '@/lib/data/monsters';
+import { STAT_TYPE_SLUGS } from '@/../datagen/lib/stats';
 import monstersData from '../../data/generated/monsters.json';
 import {
   combatStat,
@@ -124,6 +125,19 @@ describe('monsterQuirkMods — quirks de compte, boss seulement (`CheckNodeApply
       expect(combatStatAt('buff_chance', EFF, { level: 100 }, undefined, q).combat, type).toBe(
         EFF.max,
       );
+    }
+  });
+});
+
+describe('quirks et stats de monstre au slug de la table (C27)', () => {
+  it('bossQuirkMods du glossaire, live comme archives : des slugs de STAT_TYPE_SLUGS', () => {
+    const slugs = new Set(Object.values(STAT_TYPE_SLUGS));
+    for (const k of Object.keys(getGlossaries().bossQuirkMods ?? {}))
+      expect(slugs.has(k), k).toBe(true);
+    for (const id of ['4548161@1', '4548171@1', '4548181@1']) {
+      const view = getBossView(id)!;
+      for (const k of [...Object.keys(view.quirkMods), ...Object.keys(view.stats)])
+        expect(slugs.has(k), `${id} ${k}`).toBe(true);
     }
   });
 });

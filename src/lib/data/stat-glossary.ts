@@ -42,7 +42,7 @@ const ABBR_TO_SLUG: Record<string, { slug: string; pct?: boolean }> = {
   'HP%': { slug: 'hp', pct: true },
   SPD: { slug: 'speed' },
   CHC: { slug: 'critical_rate' },
-  CHD: { slug: 'critical_dmg_rate' },
+  CHD: { slug: 'critical_dmg' },
   EFF: { slug: 'buff_chance' },
   'EFF%': { slug: 'buff_chance', pct: true },
   RES: { slug: 'buff_resist' },
@@ -50,9 +50,9 @@ const ABBR_TO_SLUG: Record<string, { slug: string; pct?: boolean }> = {
   PEN: { slug: 'pierce_power' },
   'PEN%': { slug: 'pierce_power_rate' },
   LS: { slug: 'vampiric' },
-  'DMG UP%': { slug: 'dmg_boost' },
-  'DMG RED%': { slug: 'dmg_reduce_rate' },
-  'CDMG RED%': { slug: 'e_cri_dmg_reduce' },
+  'DMG UP%': { slug: 'damage_boost' },
+  'DMG RED%': { slug: 'dmg_reduce' },
+  'CDMG RED%': { slug: 'enemy_critical_dmg_reduce' },
 };
 
 /**

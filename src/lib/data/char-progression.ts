@@ -187,13 +187,13 @@ export function computeStatSteps(char: Character): StatStepsView {
 // --- Couches optionnelles (quirks / codex / transcendance) -------------------------
 
 /** Slug de bonus (quirks / skill_8) → clé d'affichage. DÉRIVÉE de
- * `solver/stat-keys.json` (`slugEnum(ST_*)` des lignes `OAT_ADD`, `statSlugToAbbr`). */
+ * `solver/stat-keys.json` (`statSlug(ST_*)` des lignes `OAT_ADD`, `statSlugToAbbr`). */
 const BONUS_KEY: Record<string, StepStatKey> = statSlugToAbbr();
 
 /** Accumule un bonus brut dans une couche (unités d'affichage / per-mille). */
 function addBonus(parts: LayerParts, b: StatBonus): void {
   const key = BONUS_KEY[b.stat];
-  if (!key) return; // stats hors fiche (enter_ap…)
+  if (!key) return; // stats hors fiche (enter_bp…)
   if (PERCENT_STEP_KEYS.has(key)) {
     // Stats intrinsèquement % : valeur per-mille → points d'affichage.
     (parts.flat ??= {})[key] = (parts.flat[key] ?? 0) + b.value / 10;

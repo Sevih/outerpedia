@@ -1,6 +1,14 @@
 import { describe, expect, it } from 'vitest';
-import { statAbbr, statIconSprite, statOptionView } from '@/lib/stats';
-import { statName } from '@/lib/data/stat-glossary';
+import {
+  currentStatSlug,
+  LEGACY_STAT_SLUGS,
+  STAT_ABBR,
+  statAbbr,
+  statIconSprite,
+  statOptionView,
+} from '@/lib/stats';
+import { statDesc, statName } from '@/lib/data/stat-glossary';
+import { STAT_TYPE_SLUGS } from '@/../datagen/lib/stats';
 import { fillPlaceholders, optionStatLabel } from '@/lib/data/equipment';
 import { fillValuePlaceholders } from '@/../datagen/lib/placeholders';
 import { getEquipmentPools } from '@/lib/data/equipment-pools';
@@ -59,6 +67,61 @@ describe('optionStatLabel — même règle que statOptionView', () => {
   it('les cartes gardent EFF% / RES% sur la variante en %', () => {
     const labels = new Set(options.map(optionStatLabel));
     for (const k of ['EFF', 'EFF%', 'RES', 'RES%']) expect(labels.has(k), k).toBe(true);
+  });
+});
+
+describe('un seul espace de slugs (C27)', () => {
+  it('STAT_ABBR ne connaît que des slugs de la table, sans doublon mécanique', () => {
+    const slugs = new Set(Object.values(STAT_TYPE_SLUGS));
+    for (const k of Object.keys(STAT_ABBR)) expect(slugs.has(k), k).toBe(true);
+    for (const old of Object.keys(LEGACY_STAT_SLUGS)) expect(STAT_ABBR[old], old).toBeUndefined();
+  });
+
+  it('l’ancien slug mécanique → slug de la table (et rien d’autre ne bouge)', () => {
+    expect(LEGACY_STAT_SLUGS).toEqual({
+      wg: 'guard',
+      critical_dmg_rate: 'critical_dmg',
+      dmg_reduce_rate: 'dmg_reduce',
+      dmg_boost: 'damage_boost',
+      accuracy: 'effectiveness',
+      avoid: 'resilience',
+      e_cri_dmg_reduce: 'enemy_critical_dmg_reduce',
+      hit_ap: 'hit_bp',
+      enter_ap: 'enter_bp',
+      kill_ap: 'kill_bp',
+      get_character_exp_rate: 'get_char_exp_rate',
+    });
+    expect(currentStatSlug('dmg_reduce_rate')).toBe('dmg_reduce');
+    expect(currentStatSlug('atk')).toBe('atk');
+    expect(currentStatSlug('damage_boost')).toBe('damage_boost');
+  });
+
+  it('pools au slug de la table : DMG RED% en %, abréviations inchangées', () => {
+    expect(statOptionView('dmg_reduce', 'flat')).toEqual({ key: 'DMG RED%', percent: true });
+    expect(statOptionView('critical_dmg', 'flat')).toEqual({ key: 'CHD', percent: true });
+    expect(statOptionView('damage_boost', 'flat')).toEqual({ key: 'DMG UP%', percent: true });
+    expect(statOptionView('enemy_critical_dmg_reduce', 'flat')).toEqual({
+      key: 'CDMG RED%',
+      percent: true,
+    });
+    // Sans abréviation : la secondaire d'EE reste brute, nommée par le glossaire.
+    expect(statOptionView('hit_bp', 'flat')).toEqual({ key: 'HIT_BP', percent: false });
+  });
+
+  it('glossaire des noms à clé de la table : nom direct = nom par abréviation', () => {
+    for (const [slug, abbr] of [
+      ['critical_dmg', 'CHD'],
+      ['damage_boost', 'DMG UP%'],
+      ['dmg_reduce', 'DMG RED%'],
+      ['enemy_critical_dmg_reduce', 'CDMG RED%'],
+    ]) {
+      expect(statName(slug, 'en'), slug).toBe(statName(abbr, 'en'));
+      expect(statName(slug, 'en'), slug).not.toBe(slug);
+      expect(statDesc(slug, 'en'), slug).toBe(statDesc(abbr, 'en'));
+    }
+    // Les compteurs AP (texte `SYS_STAT_HIT_AP`…) gardent le nom du jeu.
+    expect(statName('hit_bp', 'en')).not.toBe('hit_bp');
+    expect(statName('enter_bp', 'en')).not.toBe('enter_bp');
   });
 });
 

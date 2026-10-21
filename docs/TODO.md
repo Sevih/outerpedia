@@ -25,16 +25,6 @@ les preuves et les décisions vivent dans le tri consolidé de sevih-tool
 
 ## 🧹 Restes de la relecture du 20/10 (A74, F30, F31, G34)
 
-- [ ] **Espace des slugs de buff (suite d'A74)** : `statSlug()`
-      (`datagen/lib/effects.ts`) garde ses slugs mécaniques (`dmg_boost`,
-      `dmg_reduce_rate`, `critical_dmg_rate`, `e_cri_dmg_reduce`,
-      `enter_ap`/`hit_ap`/`kill_ap`, `accuracy`/`avoid`…) sur ~1 460 effets
-      (skills, monster-skills, passives, pools, sets, progression, solver) et
-      ses lecteurs (`PERCENT_STAT_SLUGS`, `STAT_ABBR`,
-      `src/lib/damage/scenario.ts`, `equipment-detail.ts`, gear-solver). Les
-      unifier sur `STAT_TYPE_SLUGS` est un lot C avec contrat solver à bumper.
-      Les trois archives `monster-archive/4548161@1`, `4548171@1`, `4548181@1`
-      gardent l'ancien slug (figées).
 - [ ] **Fiche perso › Skills, F31 à l'écran par Sevih** (restes de code
       faits par A77) : Tamamo-no-Mae › Skills (badges « via burst 3 » sur
       Extra Turn et Cooldown Reduction, cartes Bursts et Transcendance sans

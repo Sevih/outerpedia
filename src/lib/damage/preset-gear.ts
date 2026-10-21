@@ -80,9 +80,9 @@ export const TALIS_STAT_SLUG: Record<string, string> = {
   DEF: 'def',
   HP: 'hp',
   CRI: 'critical_rate',
-  CRI_DMG: 'critical_dmg_rate',
-  DMG_REDUCE: 'dmg_reduce_rate',
-  DMG: 'dmg_boost',
+  CRI_DMG: 'critical_dmg',
+  DMG_REDUCE: 'dmg_reduce',
+  DMG: 'damage_boost',
   BUFF_CHANCE: 'buff_chance',
   BUF_RESIST: 'buff_resist',
 };

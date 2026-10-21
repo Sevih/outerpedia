@@ -7,6 +7,102 @@
 
 ## 2026-10-21
 
+- **C27 — Un seul espace de slugs de stat : `statSlug()` lit la table
+  canonique, tous les lecteurs alignés (suite d'A74).** Item du TODO
+  « Espace des slugs de buff » retiré. Pourquoi : deux vocabulaires
+  nommaient une stat — la table `STAT_TYPE_SLUGS` (`datagen/lib/stats.ts`,
+  fiches, options de rang, `statScales`) et le slug mécanique de `statSlug()`
+  (`ST_X` → `x`) des effets de buff, pools, sets, quirks et du glossaire des
+  noms —, raccordés par des doublons (`STAT_ABBR`, `ABBR_TO_SLUG`). Inventaire
+  avant code (grep des dix slugs, plus `wg`, et de leurs formes composites) :
+  `skills.json` 308 lignes (`enter_ap` 130, `critical_dmg_rate` 70,
+  `dmg_boost` 69, `dmg_reduce_rate` 26, `avoid` 8, `accuracy` 5),
+  `monster-skills.json` 376 (`dmg_reduce_rate` 208, `critical_dmg_rate` 88,
+  `avoid` 30, `accuracy` 19, `get_character_exp_rate` 18, `dmg_boost` 12,
+  `e_cri_dmg_reduce` 1), `equipment/pools.json` 493 (`dmg_boost` 124,
+  `dmg_reduce_rate` 106, `kill_ap` 90, `critical_dmg_rate` 86,
+  `e_cri_dmg_reduce` 48, `hit_ap` 39), `progression.json` 155,
+  `equipment/passives.json` 18, `equipment/sets.json` 11, `glossaries.json`
+  35 (clés de `statNames`/`statDescs` et 18 clés composites `BT_STAT|<slug>`
+  de `tooltipKinds`), `ee-effects.json` 8 (clés composites
+  `stat:<slug>:up`, que le grep du slug nu ne voyait pas), les trois archives
+  épinglées 25 chacune plus 19 composites ; aucun `wg`. Contrat
+  `data/generated/solver/` : un seul `"avoid"`, dans `stat-keys.json`, qui
+  est la clé du contrat de `ST_AVOID` (`datagen/lib/stat-keys.ts`, comme
+  `cdmgRed`), pas un slug de `statSlug` — pas de blocage, contrat inchangé.
+  Lecteurs : `PERCENT_STAT_SLUGS`, `STAT_ABBR`, `ABBR_TO_SLUG`, l'amorce
+  `statNames`, `TARGET_FIELDS`, `SHEET_FIELDS`/`SHEET_STAT_MAP` et
+  `combatStats` du calculateur (`dmg_boost`), `TALIS_STAT_SLUG`
+  (`preset-gear.ts`), `statSlugToAbbr` (`src/lib/data/stat-keys.ts`), la
+  chip AP (`sh.stat === 'enter_ap'`), `SET_STAT_LABEL` du solver,
+  `statKeyLine`, `tooltipKinds` (`kindOf` de `skill-view.ts` y lit
+  `type|stat`), et les dérivations `slugEnum(StatType)` de `equipment.ts`,
+  `quirks.ts`, `progression.ts`, `buff.ts`, `damage-scaling.ts`.
+  `bossQuirkMods` portait déjà `buff_chance`/`buff_resist` (même slug dans
+  les deux espaces). Comment : `statSlug()` vit dans `datagen/lib/stats.ts`
+  et lit la table (repli mécanique + UN `console.warn` par `ST_*` inconnu) ;
+  `canonicalStatSlug` et l'ancien `statSlug` d'`effects.ts` fusionnent
+  (rien ne les distinguait plus). `STAT_SLUG_TYPES` (inverse) garde les clés
+  de texte du jeu (`SYS_STAT_DMG_BOOST` pour `damage_boost`) dans l'amorce
+  du glossaire. `STAT_ABBR` perd ses quatre doublons, `ABBR_TO_SLUG` et
+  `TARGET_FIELDS` passent au slug de la table, `SHEET_FIELDS` saisit
+  `damage_boost`. Compatibilité en lecture, une seule table DÉRIVÉE de
+  `STAT_TYPE_SLUGS` : `LEGACY_STAT_SLUGS`/`currentStatSlug`
+  (`src/lib/stats.ts`), lue par `upgradeUrlState` (`scenario.ts` : clés de
+  `v`, `tm`, 3e colonne de `al` des liens `?z=`, des fixtures et des
+  scénarios sauvegardés ; appelée par `buildInputsFromZ` et `applyZ`) et par
+  `withCurrentStatSlugs` (`boss-view.ts`, vues d'ARCHIVE seulement : effets
+  des skills, `tooltipKinds` et options de rang traduits ensemble, la dédup
+  des chips reste cohérente ; le live garde ses sources et leur identité).
+  `statKeyLine` lit le slug de la table, sauf `ST_AVOID` (`NO_ABBR`) : son
+  slug `resilience` prendrait l'abréviation RES de la colonne de fiche, et
+  le contrat l'a toujours émis à `null`. Note « un seul espace de slugs
+  depuis C27 » dans le docblock de `datagen/lib/stats.ts` (et de
+  `src/lib/stats.ts`). Vérification : `pnpm datagen:build` sans
+  avertissement de stat (ni `ST_*` hors table ni `SYS_STAT_*` introuvable) ;
+  `datagen:promote` à blanc : `ee-effects.json` ~8, `equipment/passives.json`
+  ~18, `equipment/pools.json` ~270, `equipment/sets.json` ~3,
+  `glossaries.json` ~3, `monster-skills.json` ~336, `progression.json` ~2,
+  `skills.json` ~201, plus `wallpapers.json` ~2 (images nouvelles, sans
+  rapport, non promu), puis `--apply --only` des huit ; `solver/` re-dérivé
+  sans un octet changé. Les huit fichiers, comparés à HEAD après traduction
+  des slugs, sont identiques (seul écart : l'ordre trié de `tooltipKinds`
+  14, `resilience` passe après `buff_resist`). Rejeu avant/après par un test
+  jetable (non commité) sur toute la donnée, en, fr et jp : fiches de tous
+  les équipements, vues de tous les monstres et des trois archives (stats,
+  libellés de rang, quirks, stats de combat), libellés du calculateur — mêmes
+  chaînes rendues. Winter of Hubris, sous-stat `DMG RED%` : `percent: true`,
+  pas 2.4, max 14.4 ; Belial (4014005) : `DMG RED%` « DMG Reduction » /
+  « Dégâts reçus - », `CDMG RED%` « Crit DMG Reduc », `DMG UP%` « DMG
+  Increase », quirks `buff_chance`/`buff_resist` −200 (EFF 248 → 198) ;
+  calculateur, cibles : « Health, Defense, DMG Reduction, Crit DMG Reduc,
+  Resilience » (fr « Santé, Défense, Dégâts reçus -, Dégâts reçus - crit.,
+  Résilience »). Seul écart des fiches : la `key` interne de 387 options
+  secondaires d'EE (`KILL_AP` → `KILL_BP`, `HIT_AP` → `HIT_BP`), qui portent
+  toutes leur `label` (le nom du jeu, inchangé) — c'est lui que
+  `EquipStatChip` affiche. Tests : `datagen/lib/stats.test.ts` (fusion,
+  repli + un seul warn, inverse), `effects.test.ts` (`resolveEffect` →
+  `dmg_reduce` en %), `src/lib/stats.test.ts` (pas de doublon, table de
+  compatibilité, noms et descriptions au slug de la table),
+  `equipment-detail.test.ts` (sous-stat `DMG RED%`), `scenario.test.ts`
+  (ancien lien = nouveau, `TARGET_FIELDS`), `boss-view.test.ts` et
+  `monster-stats.test.ts` (archives sans ancien slug, quirks au slug de la
+  table) ; `inputs`, `stat-keys`, `solver` et `gear-sheet` suivent.
+  `pnpm typecheck` et `pnpm lint` muets, `pnpm test` « Tests 4405 passed
+  (4405) », `pnpm damage:check` « Bilan : 42 ligne(s) exacte(s), 0 en
+  dérive, 0 sautée(s) » ; grep final : les dix slugs ne subsistent dans
+  `src/`, `datagen/` et `data/generated/` (hors archives et `solver/`) que
+  dans la table de compatibilité, ses commentaires et tests, et la prose des
+  descriptions. Laissé : les champs `avoid` du moteur de dégâts
+  (`Defender.Data.Avoid` du client, pas un slug) et la clé `avoid` du
+  contrat solver ; gear-solver ; les archives, intactes ; la prose de
+  `docs/specs/damage-formula.md` ; les quatre avertissements du build
+  (butin, groupes d'option 1504/12004/12010, 2400015), étrangers au lot. À
+  savoir : `statAbbr`/`statName` d'un effet `ST_ACCURACY`/`ST_AVOID` rendent
+  désormais EFF/RES (slugs `effectiveness`/`resilience`) au lieu de
+  `ACCURACY`/`AVOID` ; aucune page ne l'affiche (une chip se nomme par son
+  statut, et ces effets en ont un ou sont filtrés).
+
 - **A77 — Fiche perso de quick : un seul chargement du bundle pour les
   cartes et les extras ; classe `c-read` tranchée (restes de F31).** Item du
   TODO « Fiche perso › Skills, restes de F31 » réduit à son contrôle à

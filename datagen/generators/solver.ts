@@ -141,12 +141,12 @@ const SET_STAT_LABEL: Record<string, string> = {
   buff_chance: 'Effectiveness',
   buff_resist: 'Resilience',
   counter_rate: 'Counterattack Chance',
-  e_cri_dmg_reduce: 'Crit DMG Reduc',
+  enemy_critical_dmg_reduce: 'Crit DMG Reduc',
   vampiric: 'Lifesteal',
   pierce_power_rate: 'Penetration',
-  critical_dmg_rate: 'Crit DMG',
+  critical_dmg: 'Crit DMG',
   speed: 'Speed',
-  enter_ap: 'Gains AP at the start of battle',
+  enter_bp: 'Gains AP at the start of battle',
 };
 function setProse(e: SetsViewEffect | null | undefined): string | null {
   if (!e) return null;

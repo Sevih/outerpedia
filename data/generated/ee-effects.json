@@ -8,7 +8,7 @@
   ],
   "2000002": [
     {
-      "key": "stat:critical_dmg_rate:up",
+      "key": "stat:critical_dmg:up",
       "label": "Crit DMG up",
       "isDebuff": false
     }
@@ -629,7 +629,7 @@
   ],
   "2000060": [
     {
-      "key": "stat:enter_ap:up",
+      "key": "stat:enter_bp:up",
       "label": "Gains AP at the start of battle up",
       "isDebuff": false
     },
@@ -900,7 +900,7 @@
   ],
   "2000083": [
     {
-      "key": "stat:enter_ap:up",
+      "key": "stat:enter_bp:up",
       "label": "Gains AP at the start of battle up",
       "isDebuff": false
     },
@@ -929,7 +929,7 @@
       "isDebuff": false
     },
     {
-      "key": "stat:critical_dmg_rate:up",
+      "key": "stat:critical_dmg:up",
       "label": "Crit DMG up",
       "isDebuff": false
     }
@@ -1030,7 +1030,7 @@
   ],
   "2000093": [
     {
-      "key": "stat:enter_ap:up",
+      "key": "stat:enter_bp:up",
       "label": "Gains AP at the start of battle up",
       "isDebuff": false
     },
@@ -1224,7 +1224,7 @@
   ],
   "2000111": [
     {
-      "key": "stat:critical_dmg_rate:up",
+      "key": "stat:critical_dmg:up",
       "label": "Crit DMG up",
       "isDebuff": false
     },
@@ -1289,7 +1289,7 @@
   ],
   "2000117": [
     {
-      "key": "stat:critical_dmg_rate:up",
+      "key": "stat:critical_dmg:up",
       "label": "Crit DMG up",
       "isDebuff": false
     },
@@ -1337,7 +1337,7 @@
   ],
   "2000122": [
     {
-      "key": "stat:dmg_boost:up",
+      "key": "stat:damage_boost:up",
       "label": "DMG Increase up",
       "isDebuff": false
     }

@@ -12,6 +12,8 @@ import {
   flattenReport,
   parseStatInput,
   type CalculatorUrlState,
+  TARGET_FIELDS,
+  upgradeUrlState,
 } from './scenario';
 
 describe('parseStatInput', () => {
@@ -33,7 +35,7 @@ describe('buildInputsFromZ — attaquant', () => {
     a: '2000001',
     af: 47, // niveau 0..100, servi tel quel (comparé au niveau requis des lignes)
     k: { S1: 5, S2: 7, S3: 6, chain: 4 }, // chain : slot UI hors moteur
-    v: { atk: '10000', critical_rate: '50.5', dmg_boost: '', speed: 'abc' },
+    v: { atk: '10000', critical_rate: '50.5', damage_boost: '', speed: 'abc' },
     h: '75',
     b: ['atk', 't_marked'],
   };
@@ -252,12 +254,12 @@ describe('buildInputsFromZ — équipement § 15 et hors périmètre signalés',
       a: '2000001',
       tm: 'atk',
       tml: 7,
-      al: [['2000002', 0, 'critical_dmg_rate', 10, 1, 1, 'sword', 2, 'ring', 0]],
+      al: [['2000002', 0, 'critical_dmg', 10, 1, 1, 'sword', 2, 'ring', 0]],
     };
     const resolveTalismanMain = (slug: string) =>
       slug === 'atk'
         ? { buffId: 'BID_ITEM_STAT_OOPARTS_ATK_6' }
-        : slug === 'critical_dmg_rate'
+        : slug === 'critical_dmg'
           ? { buffId: 'BID_ITEM_STAT_OOPARTS_CRI_DMG_6' }
           : undefined;
     const ok = buildInputsFromZ(zz, {
@@ -308,6 +310,55 @@ describe('buildInputsFromZ — équipement § 15 et hors périmètre signalés',
       { groupId: '21', enchanted: true, pieces: 2 },
     ]);
     expect(r.target?.broken).toBe(true);
+  });
+});
+
+describe('liens `?z=` d’avant C27 — ancien slug de stat traduit', () => {
+  const old: CalculatorUrlState = {
+    a: '2000001',
+    v: { atk: '10000', dmg_boost: '12.5', critical_dmg_rate: '150' },
+    tm: 'dmg_boost',
+    al: [
+      ['2000002', 0, 'critical_dmg_rate', 10, 1, 1],
+      ['2000003', 0, '', 10, 1, 1],
+    ],
+  };
+
+  it('upgradeUrlState : clés de `v`, `tm` et 3e colonne de `al` au slug de la table', () => {
+    const up = upgradeUrlState(old);
+    expect(up.v).toEqual({ atk: '10000', damage_boost: '12.5', critical_dmg: '150' });
+    expect(up.tm).toBe('damage_boost');
+    expect(up.al?.[0][2]).toBe('critical_dmg');
+    expect(up.al?.[1]).toEqual(['2000003', 0, '', 10, 1, 1]);
+    // Entrée intacte, le reste tel quel.
+    expect(old.tm).toBe('dmg_boost');
+    expect(up.a).toBe('2000001');
+  });
+
+  it('buildInputsFromZ lit l’ancien lien comme le nouveau', () => {
+    const resolveTalismanMain = (slug: string) =>
+      slug === 'damage_boost'
+        ? { buffId: 'BID_ITEM_STAT_OOPARTS_DMG_6' }
+        : slug === 'critical_dmg'
+          ? { buffId: 'BID_ITEM_STAT_OOPARTS_CRI_DMG_6' }
+          : undefined;
+    const a = buildInputsFromZ(old, { resolveTalismanMain });
+    const b = buildInputsFromZ(upgradeUrlState(old), { resolveTalismanMain });
+    expect(a).toEqual(b);
+    expect(a.attacker?.sheet).toEqual({ atk: 10000, damage_boost: 125, critical_dmg: 1500 });
+    expect(a.attacker?.gear?.talismanMain?.buffId).toBe('BID_ITEM_STAT_OOPARTS_DMG_6');
+    expect(a.attacker?.allies?.[0]?.talisman?.buffId).toBe('BID_ITEM_STAT_OOPARTS_CRI_DMG_6');
+    expect(a.ignored.some((l) => l.includes('talisman'))).toBe(false);
+  });
+
+  it('TARGET_FIELDS nomme les stats de cible par le slug de la table', () => {
+    expect(TARGET_FIELDS.map((f) => f.statSlug)).toEqual([
+      'hp',
+      'def',
+      'dmg_reduce',
+      'enemy_critical_dmg_reduce',
+      'buff_resist',
+    ]);
   });
 });
 

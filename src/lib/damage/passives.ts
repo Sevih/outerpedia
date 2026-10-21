@@ -210,7 +210,7 @@ const DEFENDER_STAT_CHANNEL = new Set([
 
 /**
  * Stats ATTAQUANT que le pipeline consomme TOUJOURS pour un MONTANT : ATK
- * (facteurs § 8), CDMG (branche crit § 7.5), pierce/dmg_boost (agrégats § 9).
+ * (facteurs § 8), CDMG (branche crit § 7.5), pierce/damage_boost (agrégats § 9).
  * Les AUTRES stats ne pèsent un montant que si le SCÉNARIO les lit — swap
  * d'attaque § 10.1, familles `*_STAT` § 9.1 (ex. 2000067_2_6 : +50 % du taux
  * CRIT en dégâts), contexte PV § 14 — détecté par inputs.ts dans les buffs

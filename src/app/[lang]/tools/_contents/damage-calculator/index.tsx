@@ -216,7 +216,7 @@ const KIT_SLOTS: { type: string; slot: string }[] = [
  * RÉFÉRENTIEL des stats de la fiche personnage (ordre du panneau détaillé du
  * jeu, `STEP_STAT_KEYS`), moins ce qui ne sert JAMAIS aux dégâts de
  * l'attaquant : lignes défensives (DMG RED %, CDMG RED %) et RES (décision
- * Sevih 26/07/2026). `pierce_power_rate` et `dmg_boost` sont bien des lignes
+ * Sevih 26/07/2026). `pierce_power_rate` et `damage_boost` sont bien des lignes
  * de la fiche — le Penetration Set est donc capturé par la saisie, pas par un
  * passif (confirmé Sevih 26/07/2026). Le lifesteal est IGNORÉ : il ne touche
  * pas aux dégâts. Ce tableau fixe l'ordre et l'unité ; ce qui est réellement
@@ -241,7 +241,7 @@ function statKeysFor(id: string): string[] {
     s?.attackStat ?? 'atk',
     'critical_dmg',
     'pierce_power_rate',
-    'dmg_boost',
+    'damage_boost',
   ]);
   for (const b of s?.bonusStats ?? []) keys.add(b);
   if (s?.lostHpDmg) keys.add('hp');
@@ -618,7 +618,7 @@ export default async function DamageCalculator({ lang }: { lang: Lang }) {
       const percent = SHEET_FIELDS.find((f) => f.slug === slug)?.percent === true;
       return `${label} ${b.applyingType === 'OAT_RATE' || percent ? pct(v) : `${v > 0 ? '+' : ''}${v}`}`;
     }
-    if (b.type === 'BT_DMG_REDUCE') return `${statName('dmg_reduce_rate', lang)} ${pct(v)}`;
+    if (b.type === 'BT_DMG_REDUCE') return `${statName('dmg_reduce', lang)} ${pct(v)}`;
     // Renfort ENHANCE (§ 14.1) : le nom de l'effet du glossaire (« Buff
     // Enhancement » 1092, « Debuff Enhancement » 1094), l'enum brut en repli.
     const enhanceEffect =

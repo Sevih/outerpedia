@@ -81,7 +81,7 @@ export const FIXTURES: DamageFixture[] = [
   francescaErisAllyS2 as DamageFixture,
   francescaErisAllyS1 as DamageFixture,
   // Talismans d'ÉQUIPE (24/08/2026) — la main DMG d'Eris alliée atteint
-  // Francesca par le canal buff (S1 exact, fiche à dmg_boost 0 → combat
+  // Francesca par le canal buff (S1 exact, fiche à damage_boost 0 → combat
   // 120 ‰), et deux alliés portant la MÊME main ne se cumulent PAS (seule
   // la plus forte compte — un cumul aurait calculé trop haut).
   francescaErisTalDmg as DamageFixture,

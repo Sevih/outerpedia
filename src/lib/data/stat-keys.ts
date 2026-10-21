@@ -10,7 +10,7 @@
  * silence au premier `ST_*` qui bouge.
  */
 import { STEP_STAT_KEYS, type StepStatKey } from '@/lib/stat-compose';
-import { slugEnum } from '@/../datagen/lib/enums';
+import { statSlug } from '@/../datagen/lib/stats';
 import statKeysData from '@data/generated/solver/stat-keys.json';
 
 type StatKeyLine = { key: string; percent: boolean; abbr: string | null };
@@ -36,10 +36,10 @@ export function contractKeyToAbbr(): Record<string, StepStatKey> {
   return out;
 }
 
-/** Slug de stat (`slugEnum(ST_*)`, celui des bonus quirks/skill_8) → clé d'affichage. */
+/** Slug de stat (`statSlug(ST_*)`, celui des bonus quirks/skill_8) → clé d'affichage. */
 export function statSlugToAbbr(): Record<string, StepStatKey> {
   const out: Record<string, StepStatKey> = {};
-  for (const [st, line] of addLines()) if (isStepKey(line.abbr)) out[slugEnum(st)] = line.abbr;
+  for (const [st, line] of addLines()) if (isStepKey(line.abbr)) out[statSlug(st)!] = line.abbr;
   return out;
 }
 

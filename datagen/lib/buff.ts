@@ -20,8 +20,7 @@ import {
   type BuffValues,
   type SkillBuffVars,
 } from './placeholders';
-import { formatStatValue } from './stats';
-import { slugEnum } from './enums';
+import { formatStatValue, statSlug } from './stats';
 import { bool, loadTable, num, tablesStamp, withCaseInsensitiveGet, type Row } from './tables';
 
 export type { BuffValues, SkillBuffVars } from './placeholders';
@@ -251,7 +250,7 @@ export function buffRowAtLevel(
 function skillValue(buff: Row, absolute: boolean): string {
   const v = num(buff.Value);
   const at = buff.ApplyingType ?? '';
-  const stat = buff.StatType && buff.StatType !== 'ST_NONE' ? slugEnum(buff.StatType) : undefined;
+  const stat = statSlug(buff.StatType) ?? undefined;
   return formatStatValue(at, at === 'OAT_RATE' || absolute ? Math.abs(v) : v, stat);
 }
 

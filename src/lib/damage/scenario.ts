@@ -18,6 +18,7 @@ import {
   type TargetStatKey,
 } from './inputs';
 import { MAX_USER_TEAM_MEMBER } from './types';
+import { currentStatSlug } from '@/lib/stats';
 
 // ── Référentiels de saisie (l'UI et le pont lisent LA même table) ───────────
 
@@ -37,7 +38,7 @@ export const SHEET_FIELDS: SheetField[] = [
   { slug: 'critical_rate', percent: true },
   { slug: 'critical_dmg', percent: true },
   { slug: 'pierce_power_rate', percent: true },
-  { slug: 'dmg_boost', percent: true },
+  { slug: 'damage_boost', percent: true },
   { slug: 'buff_chance', percent: false },
 ];
 
@@ -51,8 +52,8 @@ export const TARGET_FIELDS: {
 }[] = [
   { key: 'hp', statSlug: 'hp', percent: false },
   { key: 'def', statSlug: 'def', percent: false },
-  { key: 'dmgRed', statSlug: 'dmg_reduce_rate', percent: true },
-  { key: 'cdmgRed', statSlug: 'e_cri_dmg_reduce', percent: true },
+  { key: 'dmgRed', statSlug: 'dmg_reduce', percent: true },
+  { key: 'cdmgRed', statSlug: 'enemy_critical_dmg_reduce', percent: true },
   { key: 'res', statSlug: 'buff_resist', percent: false },
 ];
 
@@ -205,14 +206,37 @@ function parseHpPct(raw: string | undefined): number | undefined {
 }
 
 /**
+ * Un état `?z=` aux slugs de stat À JOUR : les liens et scénarios d'avant C27
+ * portent l'ancien slug mécanique dans les clés de la fiche saisie (`v`,
+ * `dmg_boost`) et dans les mains de talisman (`tm`, 3e colonne de `al`,
+ * `critical_dmg_rate`…) — traduits ici (`currentStatSlug`), le reste tel quel.
+ * Les deux lecteurs (`buildInputsFromZ`, `applyZ` de l'UI) passent par ici.
+ */
+export function upgradeUrlState(st: CalculatorUrlState): CalculatorUrlState {
+  const out: CalculatorUrlState = { ...st };
+  if (st.v && typeof st.v === 'object')
+    out.v = Object.fromEntries(Object.entries(st.v).map(([k, v]) => [currentStatSlug(k), v]));
+  if (typeof st.tm === 'string') out.tm = currentStatSlug(st.tm);
+  if (Array.isArray(st.al))
+    out.al = st.al.map((row) => {
+      if (!Array.isArray(row) || typeof row[2] !== 'string') return row;
+      const next = [...row] as typeof row;
+      next[2] = currentStatSlug(row[2]);
+      return next;
+    });
+  return out;
+}
+
+/**
  * L'état `?z=` (décompressé) → entrées de `buildDamageReport`. Un champ
  * absent garde la valeur par défaut de l'UI (niveau 120, PV 100 %…) — les
  * deux consommateurs restent d'accord par construction.
  */
 export function buildInputsFromZ(
-  st: CalculatorUrlState,
+  raw: CalculatorUrlState,
   opts: ScenarioBuildOptions = {},
 ): ScenarioBuildResult {
+  const st = upgradeUrlState(raw);
   const ignored: string[] = [];
 
   let attacker: AttackerBuildInput | undefined;

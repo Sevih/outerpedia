@@ -37,6 +37,7 @@
 import { loadTable, splitCsv, type Row } from '../lib/tables';
 import { expandBuffIds, buffRowAtLevel } from '../lib/buff';
 import { slugEnum } from '../lib/enums';
+import { statSlug } from '../lib/stats';
 import {
   kitRows,
   kitScaling,
@@ -66,8 +67,8 @@ const DOT_RE = /^BT_(DOT|IMMEDIATELY)_/;
 export function damageScalingOf(c: Row, kit: KitScalingTables): DamageScaling {
   const { buffs, groups, levelsBySkill } = kit;
   const scaling = kitScaling(c, kit);
-  const attackStat = scaling.attackStat ? slugEnum(scaling.attackStat) : undefined;
-  const bonusStats = scaling.bonus.map((b) => slugEnum(b.stat)).sort();
+  const attackStat = statSlug(scaling.attackStat) ?? undefined;
+  const bonusStats = scaling.bonus.map((b) => statSlug(b.stat) ?? slugEnum(b.stat)).sort();
   let lostHpDmg = false;
   let dot = false;
 

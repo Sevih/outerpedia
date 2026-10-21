@@ -16,14 +16,16 @@ import type { DungeonRef, EffectCurated, Monster } from '@contracts';
 import { loadDataJson } from '@/lib/data/disk';
 import { liveKitSources } from '@/lib/skill-view';
 import { localizeStatuses } from '@/lib/data/effects';
-import { getMonster, getMonsterSkills } from '@/lib/data/monsters';
+import { getBossView, getMonster, getMonsterSkills } from '@/lib/data/monsters';
 import {
   bossRankOptionLabels,
   bossSpawnContexts,
   buildBossView,
   type BossView,
   type BossViewSources,
+  withCurrentStatSlugs,
 } from '@/lib/data/boss-view';
+import { LEGACY_STAT_SLUGS } from '@/lib/stats';
 import { ranksOfMonster, type SpawnContext } from '@/lib/monster-stats';
 
 const monsters = loadDataJson<Record<string, Monster>>('generated/monsters.json');
@@ -272,5 +274,57 @@ describe('bossRankOptionLabels', () => {
     const stats = Object.values(g.rankOptions).flatMap((o) => (o.stat ? [o.stat] : []));
     expect(stats.length).toBeGreaterThan(0);
     expect(stats.filter((s) => !g.statScales[s])).toEqual([]);
+  });
+});
+
+describe('archives figées : l’ancien slug mécanique lu par compatibilité (C27)', () => {
+  // Les trois boss épinglés de Dimensional Singularity (données FIGÉES avant C27).
+  const PINNED = ['4548161@1', '4548171@1', '4548181@1'];
+  const legacy = new Set(Object.keys(LEGACY_STAT_SLUGS));
+  const labels = { finalDmgReduce: 'F', wgDmgReduce: 'W' };
+
+  it('withCurrentStatSlugs traduit effets, tooltipKinds et options de rang ensemble', () => {
+    const src = sources();
+    const out = withCurrentStatSlugs(
+      [
+        { id: 's', effects: [{ type: 'BT_STAT', stat: 'dmg_boost' }, { type: 'BT_HEAL' }] },
+      ] as never,
+      {
+        ...src,
+        g: {
+          ...src.g,
+          tooltipKinds: { '7': ['BT_STAT|dmg_reduce_rate', 'BT_HEAL'] },
+          rankOptions: { up: { type: 'BT_STAT_PREMIUM', stat: 'dmg_boost', value: 100 } },
+        },
+      },
+    );
+    expect(out.skills[0].effects).toEqual([
+      { type: 'BT_STAT', stat: 'damage_boost' },
+      { type: 'BT_HEAL' },
+    ]);
+    expect(out.src.g.tooltipKinds['7']).toEqual(['BT_STAT|dmg_reduce', 'BT_HEAL']);
+    expect(out.src.g.rankOptions?.up.stat).toBe('damage_boost');
+  });
+
+  it('la vue d’une archive ne porte plus aucun ancien slug ; ses options de rang se nomment', () => {
+    for (const id of PINNED) {
+      const view = getBossView(id)!;
+      expect(view.archived, id).toBeDefined();
+      for (const o of Object.values(view.rankOptions))
+        if (o.stat) expect(legacy.has(o.stat), `${id} ${o.stat}`).toBe(false);
+      for (const sk of view.skills)
+        for (const e of sk.effects ?? [])
+          if (e.stat) expect(legacy.has(e.stat), `${id} ${e.stat}`).toBe(false);
+      const out = bossRankOptionLabels(view, bossSpawnContexts(view, 'en'), 'en', labels);
+      for (const label of Object.values(out))
+        for (const old of legacy) expect(label.includes(old), `${id} ${label}`).toBe(false);
+    }
+  });
+
+  it('le live est déjà au slug courant : ni options de rang ni effets à l’ancien slug', () => {
+    const view = viewOf(richId);
+    expect(view.archived).toBeUndefined();
+    for (const o of Object.values(view.rankOptions))
+      if (o.stat) expect(legacy.has(o.stat), o.stat).toBe(false);
   });
 });

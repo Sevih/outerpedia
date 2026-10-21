@@ -33,6 +33,7 @@ import { formatRowValue } from './buff';
 import { readCuratedJson } from './json';
 import type { LangDict } from './lang';
 import { loadTextIndex, resolveText } from './text';
+import { statSlug } from './stats';
 import { bool, fileStamp, loadTable, num, tablesStamp, type Row } from './tables';
 import { loadCuratedEffects } from '../curated/effects';
 import { buildImageIndex, findImage } from '../assets/source';
@@ -213,12 +214,6 @@ export function classifyCategory(row: Row): EffectCategory {
 
 /** Sens d'une stat : la valeur négative = baisse (debuff de stat). */
 export type EffectMode = 'up' | 'down';
-
-/** Slug stable d'une stat (`ST_CRITICAL_RATE` → `critical_rate`), `null` si aucune. */
-export function statSlug(statType: string | undefined): string | null {
-  if (!statType || statType === 'ST_NONE') return null;
-  return statType.replace(/^ST_/, '').toLowerCase();
-}
 
 /**
  * Un EFFET nommé du jeu : un statut affichable, ses variantes (base +
@@ -401,10 +396,8 @@ export function buildEffectGlossary(): EffectGlossary {
       // Type de mécanique appliquant ce tooltip (composite pour les stats —
       // BT_STAT seul serait bien trop large pour la dédup).
       if (b.Type) {
-        const stat =
-          b.StatType && b.StatType !== 'ST_NONE'
-            ? `|${b.StatType.replace(/^ST_/, '').toLowerCase()}`
-            : '';
+        const slug = statSlug(b.StatType);
+        const stat = slug ? `|${slug}` : '';
         const set = tooltipKindSets.get(t) ?? new Set<string>();
         set.add(`${b.Type}${stat}`);
         tooltipKindSets.set(t, set);

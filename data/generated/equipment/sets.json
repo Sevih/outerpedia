@@ -310,21 +310,21 @@
     "tiers": [
       {
         "2p": {
-          "stat": "e_cri_dmg_reduce",
+          "stat": "enemy_critical_dmg_reduce",
           "value": "25%"
         },
         "4p": {
-          "stat": "e_cri_dmg_reduce",
+          "stat": "enemy_critical_dmg_reduce",
           "value": "20%"
         }
       },
       {
         "2p": {
-          "stat": "e_cri_dmg_reduce",
+          "stat": "enemy_critical_dmg_reduce",
           "value": "38%"
         },
         "4p": {
-          "stat": "e_cri_dmg_reduce",
+          "stat": "enemy_critical_dmg_reduce",
           "value": "27%"
         }
       }
@@ -406,21 +406,21 @@
     "tiers": [
       {
         "2p": {
-          "stat": "critical_dmg_rate",
+          "stat": "critical_dmg",
           "value": "20%"
         },
         "4p": {
-          "stat": "critical_dmg_rate",
+          "stat": "critical_dmg",
           "value": "15%"
         }
       },
       {
         "2p": {
-          "stat": "critical_dmg_rate",
+          "stat": "critical_dmg",
           "value": "33%"
         },
         "4p": {
-          "stat": "critical_dmg_rate",
+          "stat": "critical_dmg",
           "value": "22%"
         }
       }
@@ -470,17 +470,17 @@
       {
         "2p": null,
         "4p": {
-          "stat": "enter_ap",
+          "stat": "enter_bp",
           "value": "25"
         }
       },
       {
         "2p": {
-          "stat": "enter_ap",
+          "stat": "enter_bp",
           "value": "15"
         },
         "4p": {
-          "stat": "enter_ap",
+          "stat": "enter_bp",
           "value": "10"
         }
       }

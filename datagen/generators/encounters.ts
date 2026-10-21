@@ -36,8 +36,7 @@ import type { LangDict } from '../lib/lang';
 import { loadBuffIndex, skillBuffVars } from '../lib/buff';
 import { fillSkillPlaceholders, unsignedValueIds } from '../lib/placeholders';
 import { readCuratedJson } from '../lib/json';
-import { statSlug } from '../lib/effects';
-import { canonicalStatSlug } from '../lib/stats';
+import { statSlug } from '../lib/stats';
 import { slugEnum } from '../lib/enums';
 import { loadTextIndex, resolveText } from '../lib/text';
 import {
@@ -1740,8 +1739,8 @@ export function buildEncounters(): EncountersData {
           continue;
         }
         const opt: RankOption = { type: row.Type ?? '' };
-        // Slug CANONIQUE (celui de `statScales`) : l'échelle de la valeur s'y lit.
-        const stat = canonicalStatSlug(row.StatType);
+        // Slug de stat (celui de `statScales`) : l'échelle de la valeur s'y lit.
+        const stat = statSlug(row.StatType);
         if (stat) opt.stat = stat;
         const v = num(row.Value);
         if (v) opt.value = v;
