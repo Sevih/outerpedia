@@ -2,7 +2,7 @@ import type { LocalizedText } from '@contracts';
 import { getT } from '@/i18n';
 import { lRec } from '@/lib/i18n/localize';
 import { parseText, type ParseCtx } from '@/lib/parse-text';
-import { readGuideFile, type GuideContentProps } from '@/lib/data/guides';
+import { guideShareImage, readGuideFile, type GuideContentProps } from '@/lib/data/guides';
 import { resolveSectionTitle, type SectionTitle } from '@/lib/data/guide-sections';
 import { BossPanel } from '@/components/guides/BossPanel';
 import { TacticalTips } from '@/components/guides/TacticalTips';
@@ -89,7 +89,7 @@ export async function BossGuide({ lang, guide }: GuideContentProps) {
         <section className="space-y-2">
           <h2 className="text-content-strong text-xl font-bold">{t('guides.combat_footage')}</h2>
           <MultiVideoEmbed byLabel={t('video.by')} videos={content.videos} />
-          <VideoJsonLd videos={content.videos} />
+          <VideoJsonLd videos={content.videos} thumbnail={guideShareImage(guide)} />
         </section>
       ) : null}
     </>

@@ -631,7 +631,7 @@ export default async function CharacterDetail({
       body: (
         <>
           <MultiVideoEmbed byLabel={t('video.by')} videos={videoItems} />
-          <VideoJsonLd videos={videoItems} />
+          <VideoJsonLd videos={videoItems} thumbnail={img.facePng(char.id)} />
         </>
       ),
     });

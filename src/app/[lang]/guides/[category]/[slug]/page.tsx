@@ -7,12 +7,10 @@ import { GUIDE_CATEGORIES, type GuideCategory } from '@/lib/data/guide-categorie
 import {
   getGuide,
   guideBossMonster,
-  guideOgImage,
+  guideShareImage,
   guideUpdatedDate,
   listGuideParams,
 } from '@/lib/data/guides';
-import { monsterOgImage } from '@/lib/data/monsters';
-import { img } from '@/lib/images';
 import { GuideDetail } from './guide-detail';
 
 export function generateStaticParams() {
@@ -39,23 +37,15 @@ export async function generateMetadata({
   const t = await getT(lang);
   const updated = guideUpdatedDate(guide);
 
-  // CARTE DE PARTAGE : le portrait du boss quand le guide en a un — c'est le
-  // visuel qui identifie le guide. `guideBossMonster` en est la source unique
-  // (`meta.bossId`, ou le boss de phase 2 dérivé pour un guild raid). `meta.ogImage`
-  // reste prioritaire : c'est l'échappatoire pour un guide qui veut son propre visuel.
-  // Les guides SANS boss (general-guides…) partagent leur ICÔNE de meta — le
-  // visuel qui les identifie déjà partout dans l'UI — en variante PNG collectée
-  // par le manifest pour EXACTEMENT ce sous-ensemble (les aperçus Discord/OG
-  // digèrent mal le WebP). Tailles d'icônes variables : l'indice par défaut de
-  // createPageMetadata suffit au crawler.
+  // CARTE DE PARTAGE : `guideShareImage` en est la source unique (partagée avec
+  // la miniature des VideoObject JSON-LD) — `meta.ogImage`, sinon le portrait
+  // du boss (`guideBossMonster` : `meta.bossId`, ou le boss de phase 2 dérivé
+  // pour un guild raid), sinon l'icône PNG du guide. Tailles d'icônes
+  // variables : l'indice par défaut de createPageMetadata suffit au crawler.
   const boss = guideBossMonster(guide);
-  const portrait = guide.ogImage
-    ? undefined
-    : boss
-      ? // Les sprites `MT_*` font 128×128 (21 des 24 extraits ; les 3 autres à
-        // quelques pixels près). La taille n'est qu'un indice pour le crawler.
-        { ogImage: monsterOgImage(boss), ogImageSize: { width: 128, height: 128 } }
-      : { ogImage: img.guideIconPng(guide.icon) };
+  // Les sprites `MT_*` font 128×128 (21 des 24 extraits ; les 3 autres à
+  // quelques pixels près). La taille n'est qu'un indice pour le crawler.
+  const ogImageSize = !guide.ogImage && boss ? { width: 128, height: 128 } : undefined;
 
   // Catégorie `bossTitle` : le SEO titre sur le boss, comme la page —
   // « Nom du boss — Special Request » et la description préfixée de son nom
@@ -85,8 +75,8 @@ export async function generateMetadata({
     description: bossName
       ? prefixedDescription(bossName, lRec(guide.description, lang))
       : lRec(guide.description, lang),
-    ...(guide.ogImage ? { ogImage: guideOgImage(guide) } : {}),
-    ...portrait,
+    ogImage: guideShareImage(guide),
+    ogImageSize,
     // og:type=article + dates (published = modified faute de date de création).
     article: { publishedTime: updated, modifiedTime: updated, authors: [guide.author] },
   });

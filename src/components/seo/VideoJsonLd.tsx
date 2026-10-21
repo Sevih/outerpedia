@@ -12,8 +12,13 @@ import { getVideoMeta } from '@/lib/data/video-meta';
  * (cache YouTube maintenu par `pnpm datagen:video-meta`, collecte data-driven).
  * Une vidéo sans meta (non-YouTube, id pas encore fetché, vidéo disparue)
  * n'émet RIEN — mieux vaut pas de schéma qu'un schéma invalide.
+ *
+ * `thumbnail` = l'IMAGE DE PARTAGE de la page (son og:image), pour CHAQUE
+ * vidéo, toutes plateformes : une miniature YouTube dans le JSON-LD passait
+ * devant l'og:image dans les aperçus Discord (décision du 21/10). Google n'en
+ * demande qu'une image valide d'au moins 60×30 px.
  */
-export function VideoJsonLd({ videos }: { videos: VideoItem[] }) {
+export function VideoJsonLd({ videos, thumbnail }: { videos: VideoItem[]; thumbnail: string }) {
   const nodes = videos.flatMap((v) => {
     const meta = getVideoMeta(v.id);
     const node = buildVideoObjectJsonLd({
@@ -22,6 +27,7 @@ export function VideoJsonLd({ videos }: { videos: VideoItem[] }) {
       title: v.title || meta?.title || '',
       author: v.author ?? meta?.author,
       uploadDate: meta?.uploadDate,
+      thumbnail,
     });
     return node ? [{ id: v.id, node }] : [];
   });

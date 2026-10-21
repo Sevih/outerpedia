@@ -7,6 +7,50 @@
 
 ## 2026-10-21
 
+- **A78 · La miniature des `VideoObject` JSON-LD est l'image de partage de
+  la page, plus la miniature YouTube.** Pourquoi : les aperçus Discord d'une
+  page à vidéos (Drakhan World Boss) montraient `i.ytimg.com/…/hqdefault.jpg`,
+  le `thumbnailUrl` par défaut de `buildVideoObjectJsonLd`, au lieu du petit
+  portrait de l'og:image ; décision de Sevih du 21/10 : la miniature de
+  chaque `VideoObject` devient l'og:image, le JSON-LD reste pour Google (une
+  image valide ≥ 60 × 30 px lui suffit). Comment : `guideShareImage(guide)`
+  dans `src/lib/data/guides.ts`, à côté de `guideOgImage` — les imports le
+  permettent (`guides.ts` importait déjà `monsters.ts` ; `seo.ts` aurait dû
+  importer la couche données) : `meta.ogImage`, sinon `monsterOgImage` du
+  boss de `guideBossMonster`, sinon `img.guideIconPng(icon)`.
+  `generateMetadata` de `src/app/[lang]/guides/[category]/[slug]/page.tsx`
+  la lit (le 128 × 128 reste posé pour un boss sans `ogImage`) ;
+  `VideoJsonLd` prend une prop `thumbnail: string` OBLIGATOIRE et la passe à
+  chaque vidéo, toutes plateformes ; les rendus `BossGuide`,
+  `StagedBossGuide`, `EncounterBossGuide`, `GuildRaidGuide` lui passent
+  `guideShareImage(guide)` (ils recevaient déjà `guide`, aucune prop
+  publique ne change), et un CINQUIÈME, `VersionedBossGuide` (absent de la
+  liste du lot, imposé par la prop obligatoire) aussi ; la fiche perso
+  passe `img.facePng(char.id)`, son og:image. Effet voulu : Twitch et
+  Bilibili, sans miniature, n'émettaient rien ; ils émettent désormais s'ils
+  ont une `uploadDate` — en pratique aucun aujourd'hui, `video-meta.json` ne
+  porte que des ids YouTube (241) et les deux vidéos Bilibili des guides n'y
+  sont pas. Vérification : métadonnées des guides inchangées, rejeu `tsx` de
+  `generateMetadata` (fr, base `img.outerpedia.com`) avant/après sur les 150
+  guides, `openGraph.images` + `twitter.images` identiques à l'octet (Drakhan
+  `FI_2000062.png` 128 × 128, beginner-faq son icône 150 × 150) ; tests :
+  `seo.test.ts` gagne « YouTube : `thumbnail` fourni prime » (le cas « Twitch
+  avec `thumbnail` et `uploadDate` → nœud » existait déjà, gardé),
+  `src/components/seo/VideoJsonLd.test.tsx` (nouveau, `getVideoMeta` stubé :
+  un nœud par vidéo datée sur les trois plateformes, `thumbnailUrl` = la prop,
+  jamais `ytimg`), `guides.test.ts` bloc `guideShareImage` (Drakhan →
+  `FI_2000062.png`, guild raid sans `bossId` → boss de phase 2, guide sans
+  boss → icône PNG, `ogImage` prime) ; `pnpm typecheck` et `pnpm lint`
+  muets (0), `pnpm test` « Tests 4413 passed (4413) » sur 250 fichiers. Pour
+  Sevih, après déploiement : coller dans Discord
+  `https://outerpedia.com/guides/world-boss/drakhan?v=2` (le `?v=2` force la
+  relecture du cache d'aperçu) et une fiche perso à vidéos — attendu, le
+  petit portrait, plus de miniature YouTube ; et
+  `curl -s <page> | grep -o '"thumbnailUrl":"[^"]*"'` ne doit montrer que
+  des `img.outerpedia.com`.
+  Laissé : `MultiVideoEmbed`, `video-meta` et la taille de l'og:image, hors
+  périmètre.
+
 - **Relecture B66, A76, A77, C27 et G35 (Fable 5.1, avec trois relecteurs)
   — validés.** Contrôles sur HEAD `093687ed` : `pnpm typecheck` 0, `pnpm lint`
   0, `pnpm test` 249 fichiers / 4 405 verts, `vitest run scripts/quick`

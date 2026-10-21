@@ -29,6 +29,7 @@ import { lRec } from '@/lib/i18n/localize';
 import { parseText, type ParseCtx } from '@/lib/parse-text';
 import {
   groupBossMonster,
+  guideShareImage,
   guideVersionHeads,
   readGuideFile,
   readGuideVersionFile,
@@ -274,7 +275,7 @@ export async function GuildRaidGuide({ lang, guide }: GuideContentProps) {
       {data?.video && (
         <>
           <MultiVideoEmbed byLabel={t('video.by')} videos={[data.video]} />
-          <VideoJsonLd videos={[data.video]} />
+          <VideoJsonLd videos={[data.video]} thumbnail={guideShareImage(guide)} />
         </>
       )}
     </div>

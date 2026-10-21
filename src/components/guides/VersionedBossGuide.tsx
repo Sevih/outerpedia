@@ -3,6 +3,7 @@ import { getT } from '@/i18n';
 import { lRec } from '@/lib/i18n/localize';
 import { parseText, type ParseCtx } from '@/lib/parse-text';
 import {
+  guideShareImage,
   guideVersionHeads,
   readGuideFile,
   readGuideVersionFile,
@@ -256,7 +257,7 @@ export async function VersionedBossGuide({ lang, guide }: GuideContentProps) {
                 {t('guides.combat_footage')}
               </h2>
               <MultiVideoEmbed byLabel={t('video.by')} videos={cfg.videos} />
-              <VideoJsonLd videos={cfg.videos} />
+              <VideoJsonLd videos={cfg.videos} thumbnail={guideShareImage(guide)} />
             </section>
           ) : null}
         </>

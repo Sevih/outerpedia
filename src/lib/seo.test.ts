@@ -618,6 +618,17 @@ describe('buildVideoObjectJsonLd', () => {
     });
   });
 
+  it('YouTube : `thumbnail` fourni prime sur la miniature dérivée', () => {
+    const node = buildVideoObjectJsonLd({
+      platform: 'youtube',
+      id: 'abc123',
+      title: 'V',
+      uploadDate: '2026-01-01',
+      thumbnail: 'https://cdn/share.png',
+    });
+    expect(node).toMatchObject({ thumbnailUrl: 'https://cdn/share.png' });
+  });
+
   it('champ requis Google manquant (uploadDate) → null', () => {
     expect(buildVideoObjectJsonLd({ platform: 'youtube', id: 'abc123', title: 'V' })).toBeNull();
   });

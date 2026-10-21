@@ -4,6 +4,8 @@ import { join } from 'node:path';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import {
   getGuide,
+  groupBossMonster,
+  guideShareImage,
   guideUpdatedDate,
   listGuides,
   listGuidesByCategory,
@@ -17,7 +19,8 @@ import {
 } from '@/lib/data/guide-categories';
 import { bossWaveMonsters, encountersOfGroup, encountersOfIds } from '@/lib/data/encounters';
 import { findCharacterByName } from '@/lib/data/characters';
-import { getMonster } from '@/lib/data/monsters';
+import { getMonster, monsterOgImage } from '@/lib/data/monsters';
+import { img } from '@/lib/images';
 import { checkText } from '@/lib/parse-text';
 
 /**
@@ -91,6 +94,31 @@ async function scanFixture(meta: Record<string, unknown>, versionJson: Record<st
   const mod = await import('@/lib/data/guides');
   return { root, mod };
 }
+
+describe('guideShareImage — l’image de partage d’un guide (og:image et miniature JSON-LD)', () => {
+  it('guide à boss : le portrait du boss (Drakhan → FI_2000062.png)', () => {
+    expect(guideShareImage(getGuide('world-boss', 'drakhan')!)).toBe(img.facePng('2000062'));
+  });
+
+  it('guild raid sans bossId : le boss de phase 2 de la version la plus récente', () => {
+    const g = getGuide('guild-raid', 'dignity-of-the-golden-kingdom')!;
+    expect(g.bossId).toBeUndefined();
+    const cfg = readGuideVersionFile<{ main: string }>(g, g.versions[0].key, 'config.json')!;
+    expect(guideShareImage(g)).toBe(monsterOgImage(groupBossMonster(cfg.main)!));
+    expect(guideShareImage(g)).toMatch(/\/images\/ui\/boss\/MT_\d+\.png$/);
+  });
+
+  it('guide sans boss : son icône de meta en PNG', () => {
+    const g = getGuide('general-guides', 'beginner-faq')!;
+    expect(guideShareImage(g)).toBe(img.guideIconPng(g.icon));
+    expect(guideShareImage(g)).toMatch(/\.png$/);
+  });
+
+  it('`meta.ogImage` prime sur le boss', () => {
+    const g = { ...getGuide('world-boss', 'drakhan')!, ogImage: '/images/x.png' };
+    expect(guideShareImage(g)).toBe(img.asset('/images/x.png'));
+  });
+});
 
 describe('meta.updating et version.json { hidden } — lus au scan', () => {
   let root = '';

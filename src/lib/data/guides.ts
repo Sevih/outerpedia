@@ -29,7 +29,7 @@ import {
   type GuideTierKey,
 } from '@/lib/data/guide-categories';
 import { isTowerKey, TOWER_KEYS } from '@/lib/data/towers';
-import { getMonster } from '@/lib/data/monsters';
+import { getMonster, monsterOgImage } from '@/lib/data/monsters';
 import { encountersOfGroup } from '@/lib/data/encounters';
 import { img } from '@/lib/images';
 
@@ -574,6 +574,25 @@ export function guideBossMonster(guide: Guide): Monster | undefined {
     }
   }
   return undefined;
+}
+
+/**
+ * L'IMAGE DE PARTAGE d'un guide (URL absolue, PNG/JPG) — SOURCE UNIQUE, lue par
+ * l'og:image de la page (`generateMetadata`) et par la miniature de ses
+ * `VideoObject` JSON-LD (`VideoJsonLd`) : une miniature YouTube dans le JSON-LD
+ * prenait le pas sur l'og:image dans les aperçus Discord (décision du 21/10).
+ *
+ * `meta.ogImage` prime — l'échappatoire d'un guide qui veut son propre visuel.
+ * Sinon le portrait du boss qui le représente (`guideBossMonster`). Un guide
+ * SANS boss (general-guides…) partage son ICÔNE de meta, en variante PNG
+ * collectée par le manifest pour exactement ce sous-ensemble (les aperçus
+ * Discord/OG digèrent mal le WebP).
+ */
+export function guideShareImage(guide: Guide): string {
+  const own = guideOgImage(guide);
+  if (own) return own;
+  const boss = guideBossMonster(guide);
+  return boss ? monsterOgImage(boss) : img.guideIconPng(guide.icon);
 }
 
 /** Props reçues par le composant de contenu d'un guide (`index.tsx`). */
