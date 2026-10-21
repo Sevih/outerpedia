@@ -7,6 +7,41 @@
 
 ## 2026-10-21
 
+- **Relecture B66, A76, A77, C27 et G35 (Fable 5.1, avec trois relecteurs)
+  — validés.** Contrôles sur HEAD `093687ed` : `pnpm typecheck` 0, `pnpm lint`
+  0, `pnpm test` 249 fichiers / 4 405 verts, `vitest run scripts/quick`
+  1 177 verts, `pnpm damage:check` 42 exactes ; gear-solver sur `fb5ca9e` :
+  typecheck 0, tests 166 + 159 + 579. **B66** (`40af4a73`) : `updating` et
+  `version.json { hidden }` lus (scan rejoué sur une copie de Drakhan : la
+  2026-10 cachée porte `hidden`, la référence du bandeau devient 2025-12),
+  `GuideVersions.test.tsx` couvre les quatre cas, cases Méta et version
+  vues au banc (quick isolé :4879), aucun guide réel touché ; le badge
+  « Updating » n'existe que sur les vues à cartes (grille par défaut,
+  Singularity), pas sur les vues à bannière ; « ＋ version » duplique
+  `version.json` tel quel (une copie d'une cachée naît cachée). **A76**
+  (`12423e53`) : règle « clip de base propre et aucune chaîne irrésolue →
+  les chaînes jamais jouées sortent des hits », diff sémantique = 13 skills
+  (le S3 d'Ame reste à dessein, sans clip d'index 0), `noa-rhona.json` ne
+  change que sa clé `S1#base` → `S1` (3 859 / 6 239 intacts), rejeu Francesca
+  `S3#base-skip` 36 798, Dianne 6 356, Noa 7 lignes exactes ; Ember B1 (9419)
+  est le skill à voir dans le calculateur. **A77** (`0d637f92`) : une
+  dépendance `kit(id)` remplace `kitCards` + `kitExtras`, lecture de la fiche
+  de Tamamo 355 → 197 ms, réponse identique à l'octet, `c-read` retirée ;
+  aucun stash ni checkout dans l'arbre (reflog). **C27** (`093687ed`) :
+  table de renommage à 11 entrées (`LEGACY_STAT_SLUGS`), 1 397 renommages
+  dans les huit fichiers générés, zéro valeur changée (diff sémantique
+  profond), `solver/` intact (promote à blanc : seul `wallpapers.json` ~2 ;
+  `stat-keys.json` rejoué identique), archives non réécrites et lues par
+  `withCurrentStatSlugs` / `upgradeUrlState`, `statName` juste sur 26 slugs
+  et 15 abréviations en et fr, trois pages rejouées aux mêmes chaînes,
+  fixtures exactes ; `ST_ACCURACY`/`ST_AVOID` rendent désormais EFF/RES,
+  invisible (ces effets se nomment par leur statut). **G35** (`fb5ca9e`,
+  gear-solver ; `a5684a36` TODO) : test sur la vraie donnée (Fatal +0 sans
+  main, +10 CHD 30 %, Edelweiss toujours actif, 35 clés toutes des EE),
+  `parse.test.ts` avait déjà un bloc Fatal (recouvrement, laissé). Suites au
+  TODO : badge « Updating » sur les vues à bannière, « ＋ version » qui
+  hérite de `hidden`, les deux restes d'A76 (clip de 1206, `_Skill_1_5_B`
+  d'Ame).
 - **C27 — Un seul espace de slugs de stat : `statSlug()` lit la table
   canonique, tous les lecteurs alignés (suite d'A74).** Item du TODO
   « Espace des slugs de buff » retiré. Pourquoi : deux vocabulaires

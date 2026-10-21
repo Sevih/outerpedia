@@ -23,6 +23,24 @@ les preuves et les décisions vivent dans le tri consolidé de sevih-tool
       `timegate-resources` qui ignore `ProductGoodsValue` (aucun produit
       courant > 1).
 
+## 🧹 Restes de la relecture du 21/10 (B66, A76, A77, C27, G35)
+
+- [ ] **Guides « en cours de mise à jour », deux restes de B66** : le badge
+      « Updating » n'apparaît que sur les vues à cartes (`GuideCard` :
+      grille par défaut, Dimensional Singularity), pas sur les vues à
+      bannière des world boss, raids de guilde et joint challenge — à
+      décider s'il y faut un marqueur ; « ＋ version » duplique
+      `version.json` tel quel, donc une copie d'une version cachée naît
+      cachée (décocher après). À l'écran par Sevih : quick › Guides ›
+      Drakhan, la case « En cours de mise à jour » (Méta) et la case
+      « Cachée » sous la rangée des versions ; sur le site, le bandeau en
+      tête du guide et le sélecteur sans la version cachée.
+- [ ] **Deux restes d'A76 (calculateur)** : le clip de Valentine 1206 joue
+      `2000012_Skill_5_1`, rattaché par la jointure à 1205/1209 et absent de
+      ses lignes de détail (total juste) ; `2000065_Skill_1_5_B` (1 100 ‰)
+      sorti du S1 d'Ame faute de clip qui le joue — possible variante sous
+      B, à prouver dans le client avant de la remettre.
+
 ## 🧹 Restes de la relecture du 20/10 (A74, F30, F31, G34)
 
 - [ ] **Fiche perso › Skills, F31 à l'écran par Sevih** (restes de code
