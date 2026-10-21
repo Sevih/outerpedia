@@ -12,33 +12,16 @@ ont été confrontées au code du 15/10 : tout est encore présent. Le détail,
 les preuves et les décisions vivent dans le tri consolidé de sevih-tool
 (`docs/revue/tri-2026-10-15.md`). Lots proposés, dans l'ordre :
 
-- [ ] **Contrat solver, L1 d'abord** : `schema` et `resVersion` dans
-      `solver/version.json` avant tout changement de forme (C1, M2, M3,
-      vitesse en %, noyau par niveau, `stat-keys.json`). L1 FAIT des deux
-      côtés (A56 ; G1, `ba7d2c0`, publié dans gear-solver 1.9.0 du 16/10).
-      C1 et O5 FAITS et lus (C20 ; G3, `605b6fb`, 1.9.0). M2 et M3 émis par
-      C20 : M2 (`statsByTier`) lu sur le `main` de gear-solver (`de4eb91`,
-      18/10), pas encore publié (la dernière release est la 1.10.0 du
-      17/10) ; M3 (`ee-passives["2000078"]`) est dans la donnée de la 1.9.0
-      et passe par la boucle générique des passifs d'EE
-      (`packages/core/src/parse.ts`), mais aucun code ni test ne le cite :
-      lecture à vérifier. `combatEffects` FAIT côté outerpedia (B53,
-      16/10), affiché sur le `main` de gear-solver (`f5a3d5d`, 18/10), pas
-      encore publié. Noyau par niveau et vitesse en % FAITS côté contrat
-      (B56, 16/10, `corePassiveByFusion`), lus sur le `main` de gear-solver
-      (`76c37f3`, 18/10), pas encore publiés ; restent la fiche du wiki avec
-      l'oracle, puis le retrait de `corePassive`. `stat-keys.json` FAIT
-      côté outerpedia (C26, 18/10), lecture par gear-solver à faire (G30).
-- [ ] **Suites de la rédaction des lots du 15/10** (lots rédigés : C18 à
-      C25, B51, B53 à B57, A58 à A60, F27, G2 à G6, OB1, OB2, TW1) :
-      adversité du guide des tours et Very Hard étage par étage FAITS (B58,
-      18/10) ; `stat-keys.json` (L6) FAIT côté contrat (C26), reste G30 et
-      les lecteurs du wiki ;
-      fiche du wiki en vitesse en taux avec régénération de l'oracle, une fois que
-      gear-solver lit `corePassiveByFusion` (B56) ; nombre de stacks de
-      `BT_STACK_STAT` dans le calculateur (plus tard) ; restes de J12, deux
-      latents sans effet aujourd'hui : `datagen/lib/burst.ts:15` (« > 1
-      coût » contre `Count > 0` du client, équivalent sur les 136 skills) et
+- [ ] **Contrat solver — ce qui reste après la 1.11.0/1.11.1 de gear-solver
+      (19-20/10)** : tout ce que le tri du 15/10 listait est publié (L1,
+      C1, O5, M2 `statsByTier`, `combatEffects`, `corePassiveByFusion`,
+      `stat-keys.json` lu par G30). Reste : (a) M3 — `ee-passives["2000078"]`
+      est dans la donnée et passe par la boucle générique des passifs d'EE
+      de gear-solver (`packages/core/src/parse.ts`), mais aucun test ne le
+      cite : un test qui le lit (lot G, une heure) ; (b) nombre de stacks de
+      `BT_STACK_STAT` dans le calculateur (plus tard) ; (c) deux latents de
+      J12 sans effet aujourd'hui : `datagen/lib/burst.ts:15` (« > 1 coût »
+      contre `Count > 0` du client, équivalent sur les 136 skills) et
       `timegate-resources` qui ignore `ProductGoodsValue` (aucun produit
       courant > 1).
 
@@ -73,13 +56,6 @@ les preuves et les décisions vivent dans le tri consolidé de sevih-tool
 - [ ] **Suites de G8** : fiche du wiki en vitesse en taux avec régénération
       de l'oracle (`char-progression.ts`), puis retrait de `corePassive`
       (`schema` 2), seulement après la release de gear-solver qui porte G8.
-- [ ] **outerbot** : liens d'index nus `/characters` et `/guides`
-      (`src/commands/char.ts`, `guide.ts`) : FAIT (OB4, laissés nus,
-      documentés et gardés par le contrat) ; review déposée entre le
-      démarrage et le premier forum-sync : FAIT (OB4, gardée par slug,
-      remplie au forum-sync suivant) ; Dependabot `npm` (et `docker` pour
-      l'image de base) : PLUS TARD (décision de Sevih du 18/10, chaque PR
-      redéploie le bot ; OB3 ne couvre que les actions GitHub).
 
 ## 🧰 Outil quick
 
@@ -222,22 +198,6 @@ les preuves et les décisions vivent dans le tri consolidé de sevih-tool
 
 ## 🧪 À jouer au prochain patch
 
-- [x] **`game-client.json` a suivi le dump (lot A60)** — VALIDÉ au patch du 20/10 (1.4.18 → 1.4.19, build 25744766 → 26049499, la ligne au journal, le bloc `client` seul dans le diff) ; reste le texte pour mémoire : : après le
-      `datagen:dump` du patch, le journal dit « data/curated/game-client.json :
-      client 1.4.18 → 1.4.x, build … → … — à committer avec le patch » (ou
-      « inchangé » si version et build n'ont pas bougé) ; son `git diff` ne
-      touche que le bloc `client` (version, `buildId`, `dumpedAt`), et le
-      fichier part dans le commit du patch — gear-solver et
-      outerplane-tweaks le recopient de `main`. « Version applicative
-      inconnue » au journal = UnityPy absent : rien d'écrit, poser le bloc à
-      la main d'après `.dump-stamp.json`.
-- [x] **quick, section « Patch » — « Arrêter », à essayer une fois (lot
-      C10)** — VALIDÉ au patch du 20/10 (« arrêt demandé », code 143, `pgrep -f datagen` vide, « Lancer » a repris) ; reste le texte pour mémoire : : le cycle complet (Lancer, Dry-run, Promouvoir, Committer,
-      Pousser) a été joué au patch du 14/10. Reste : « Arrêter » pendant le
-      rafraîchissement (rien ne doit continuer derrière : `pgrep -f datagen`
-      vide ; « Lancer » reprend ensuite au checkpoint). À NE PAS arrêter :
-      « Committer » une fois les images parties sur R2 (la prod les servirait
-      sans commit).
 - [ ] **Rapport des effets de portrait (lot F12)** : au premier patch qui
       apporte un effet, contrôler la dernière ligne du refresh (« ◆ Portraits
       animés — à lire ») — l'effet y est nommé avec ses porteurs, « servi tel
