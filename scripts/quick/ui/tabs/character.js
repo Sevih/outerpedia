@@ -1245,7 +1245,7 @@ const pct = (n) => esc(String(n).replace('.', ','));
 function burstsHtml() {
   const bursts = sheet.kit.bursts ?? [];
   if (!bursts.length) return '';
-  return `<div class="card c-card c-wide c-read" data-read="bursts">
+  return `<div class="card c-card c-wide" data-read="bursts">
       <div class="card-head"><strong>Bursts</strong><span class="lbl">en lecture — sur la carte du skill, « via burst n » marque les chips qu’ils lui apportent</span></div>
       <div class="c-body c-bursts">${bursts
         .map(
@@ -1272,7 +1272,7 @@ function burstsHtml() {
 function transcendHtml() {
   const tiers = sheet.kit.transcend ?? [];
   if (!tiers.length) return '';
-  return `<div class="card c-card c-wide c-read" data-read="transcend">
+  return `<div class="card c-card c-wide" data-read="transcend">
       <div class="card-head"><strong>Transcendance</strong><span class="lbl">en lecture — bonus cumulés à chaque palier</span></div>
       <div class="c-body"><div class="scroll"><table class="c-trans">
         <thead><tr><th>Palier</th><th>Bonus</th><th>Passif</th></tr></thead>

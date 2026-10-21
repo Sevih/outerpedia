@@ -867,13 +867,10 @@ describe('characterRoster, characterSheetState — la fiche lue, disque injecté
   const aer = getCharacterListItems().find((c) => c.id === AER)!;
   const sheetDisk = (
     curated: Record<string, CharacterCurated> = { [AER]: DIANNE },
-    kit: Partial<
-      Pick<CharacterSheetDeps, 'disk' | 'kitCards' | 'kitExtras' | 'kitSections' | 'eeItem'>
-    > = {},
+    kit: Partial<Pick<CharacterSheetDeps, 'disk' | 'kit' | 'kitSections' | 'eeItem'>> = {},
   ) => ({
     disk: () => disk({ curated, roster: new Set([AER]), eeOwners: new Set([AER]) }),
-    kitCards: async () => KIT_CARDS,
-    kitExtras: async () => KIT_EXTRAS,
+    kit: async () => ({ cards: KIT_CARDS, ...KIT_EXTRAS }),
     kitSections: () => ({ chipHide: {}, chipAdd: {} }),
     kitCatalog: () => KIT_CATALOG,
     eeItem: (): SheetEeItem | null => EE_ITEM,
@@ -1006,7 +1003,7 @@ describe('characterRoster, characterSheetState — la fiche lue, disque injecté
     const state = await characterSheetState(
       AER,
       sheetDisk(undefined, {
-        kitCards: async () => {
+        kit: async () => {
           throw new Error('tables du jeu absentes');
         },
         kitSections: () => ({ chipHide: { '5502': ['x'] }, chipAdd: {} }),
@@ -1026,22 +1023,20 @@ describe('characterRoster, characterSheetState — la fiche lue, disque injecté
     expect(state.curated).toEqual(DIANNE);
   });
 
-  it('les bursts ou la transcendance illisibles : le kit entier l’est, cartes comprises', async () => {
+  it('le kit lu une seule fois par lecture : cartes, bursts et paliers du même bundle', async () => {
+    const reads: string[] = [];
     const state = await characterSheetState(
       AER,
       sheetDisk(undefined, {
-        kitExtras: async () => {
-          throw new Error('progression illisible');
+        kit: async (id) => {
+          reads.push(id);
+          return { cards: KIT_CARDS, ...KIT_EXTRAS };
         },
       }),
     );
     if ('error' in state) throw new Error(state.error);
-    expect(state.kit).toMatchObject({
-      cards: [],
-      bursts: [],
-      transcend: [],
-      error: 'progression illisible',
-    });
+    expect(reads).toEqual([AER]);
+    expect(state.kit).toMatchObject({ cards: KIT_CARDS, ...KIT_EXTRAS });
   });
 
   it('`ee` : l’item du jeu, ce que le disque en cure — vides compris —, le catalogue ; l’échelle à part', async () => {
@@ -1181,7 +1176,7 @@ describe('saveCharacterSheet — disque, stores et git injectés', () => {
       /** Le curé des chips de skills, tel que le disque le porte. */
       kit?: Partial<Record<'chipHide' | 'chipAdd', Record<string, string[]>>>;
       kitErrors?: (patch: CharacterKitPatch) => string[];
-      kitCards?: CharacterSheetDeps['kitCards'];
+      kitRead?: CharacterSheetDeps['kit'];
       /** Un perso sans EE, et les refus du store des EE. */
       noEe?: boolean;
       eeErrors?: string[];
@@ -1205,8 +1200,7 @@ describe('saveCharacterSheet — disque, stores et git injectés', () => {
           roster: new Set([AER, ...(over.others ?? [])]),
           eeOwners: new Set([AER]),
         }),
-      kitCards: over.kitCards ?? (async () => KIT_CARDS),
-      kitExtras: async () => KIT_EXTRAS,
+      kit: over.kitRead ?? (async () => ({ cards: KIT_CARDS, ...KIT_EXTRAS })),
       kitSections: () => ({ chipHide: {}, chipAdd: {}, ...over.kit }),
       kitCatalog: () => KIT_CATALOG,
       eeItem: () => (over.noEe ? null : EE_ITEM),
@@ -2139,7 +2133,7 @@ describe('saveCharacterSheet — disque, stores et git injectés', () => {
     ).toEqual([{ field: 'kit', card: '5502', reason: 'chipAdd : une liste de refs attendue' }]);
 
     const blind = deps({
-      kitCards: async () => {
+      kitRead: async () => {
         throw new Error('tables du jeu absentes');
       },
     });

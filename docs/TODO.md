@@ -35,12 +35,10 @@ les preuves et les décisions vivent dans le tri consolidé de sevih-tool
       unifier sur `STAT_TYPE_SLUGS` est un lot C avec contrat solver à bumper.
       Les trois archives `monster-archive/4548161@1`, `4548171@1`, `4548181@1`
       gardent l'ancien slug (figées).
-- [ ] **Fiche perso › Skills, restes de F31** : la classe `c-read` des deux
-      cartes de lecture n'a pas de règle CSS (marqueur inerte) ; `kitExtras`
-      recharge `extractedBundle` (~180 ms) une seconde fois par lecture de la
-      fiche. À l'écran par Sevih : Tamamo-no-Mae › Skills (badges « via
-      burst 3 » sur Extra Turn et Cooldown Reduction, cartes Bursts et
-      Transcendance sans bouton).
+- [ ] **Fiche perso › Skills, F31 à l'écran par Sevih** (restes de code
+      faits par A77) : Tamamo-no-Mae › Skills (badges « via burst 3 » sur
+      Extra Turn et Cooldown Reduction, cartes Bursts et Transcendance sans
+      bouton).
 
 ## 🧹 Suites de la rédaction du 18/10 (lots A62 à C26, G8 à G30, F28, OB3, TW2)
 

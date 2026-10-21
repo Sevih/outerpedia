@@ -2563,17 +2563,23 @@ export interface SheetEeItem {
 }
 
 /**
+ * Le kit d'un perso tel que l'extraction le donne : ses cartes de skills
+ * éditables et, en lecture, ses bursts et ses paliers de transcendance.
+ */
+export interface KitRead extends KitExtras {
+  cards: KitEditorCard[];
+}
+
+/**
  * La lecture de la fiche : le disque de Rangs (curé des persos, EE, roster) ;
- * pour le sous-onglet Skills, les cartes de skills du perso (lève s'il n'a pas
- * de kit lisible), ses bursts et ses paliers de transcendance (en lecture), le
- * curé des chips et le catalogue des effets ; pour le
+ * pour le sous-onglet Skills, le kit du perso (`KitRead`, lève s'il n'a pas
+ * de kit lisible), le curé des chips et le catalogue des effets ; pour le
  * sous-onglet EE, l'EE du perso (`null` : il n'en a pas) et le catalogue de
  * son « ＋ effet » — celui de Skills, chaque effet avec sa description.
  */
 export interface CharacterSheetDisk {
   disk: () => RankDisk;
-  kitCards: (id: string) => Promise<KitEditorCard[]>;
-  kitExtras: (id: string) => Promise<KitExtras>;
+  kit: (id: string) => Promise<KitRead>;
   kitSections: () => KitSections;
   kitCatalog: () => Record<string, EffectOption>;
   eeItem: (id: string) => SheetEeItem | null;
@@ -2630,18 +2636,13 @@ function eeEffectCatalog(): Record<string, EffectOption> {
  */
 export const CHARACTER_SHEET_DEPS: CharacterSheetDeps = {
   disk: rankDisk,
-  kitCards: async (id) => {
+  kit: async (id) => {
     // À la demande : l'extraction pèse, et les autres routes ne la lisent pas.
+    // Un seul bundle pour les cartes et la lecture (~180 ms à le charger).
     const { extractedBundle } = await import('@/lib/admin/review-store');
     const bundle = extractedBundle(id);
     if (!bundle) throw new Error('perso absent de l’extraction du jeu');
-    return characterKitCards(bundle, img.skill);
-  },
-  kitExtras: async (id) => {
-    const { extractedBundle } = await import('@/lib/admin/review-store');
-    const bundle = extractedBundle(id);
-    if (!bundle) throw new Error('perso absent de l’extraction du jeu');
-    return characterKitExtras(bundle);
+    return { cards: characterKitCards(bundle, img.skill), ...characterKitExtras(bundle) };
   },
   kitSections: loadCharacterKitSections,
   kitCatalog: () => kitEffectCatalog(),
@@ -2664,31 +2665,26 @@ export const CHARACTER_SHEET_DEPS: CharacterSheetDeps = {
  * (pas de tables du jeu sur ce poste), cartes et lecture vides — le reste de
  * la fiche se lit quand même.
  */
-export interface SheetKit extends KitSections, KitExtras {
-  cards: KitEditorCard[];
+export interface SheetKit extends KitSections, KitRead {
   catalog: Record<string, EffectOption>;
   sprite: string;
   error?: string;
 }
 
 async function sheetKit(id: string, disk: CharacterSheetDisk): Promise<SheetKit> {
-  let cards: KitEditorCard[] = [];
-  let extras: KitExtras = { bursts: [], transcend: [] };
+  // Tout le kit lu, ou rien : un kit à moitié lu se dit illisible.
+  let kit: KitRead = { cards: [], bursts: [], transcend: [] };
   let error = '';
   try {
-    // Les deux lus, ou aucun : un kit à moitié lu se dit illisible.
-    const read = await disk.kitCards(id);
-    extras = await disk.kitExtras(id);
-    cards = read;
+    kit = await disk.kit(id);
   } catch (e: unknown) {
     error = e instanceof Error ? e.message : String(e);
   }
   const sections = disk.kitSections();
   return {
-    cards,
-    ...extras,
-    chipHide: pickKitCards(sections.chipHide, cards),
-    chipAdd: pickKitCards(sections.chipAdd, cards),
+    ...kit,
+    chipHide: pickKitCards(sections.chipHide, kit.cards),
+    chipAdd: pickKitCards(sections.chipAdd, kit.cards),
     catalog: disk.kitCatalog(),
     sprite: EFFECT_SPRITE,
     ...(error ? { error } : {}),
@@ -3502,7 +3498,7 @@ export async function saveCharacterSheet(
       );
     let plan: ReturnType<typeof planKit> | null = null;
     try {
-      cards = await deps.kitCards(id);
+      ({ cards } = await deps.kit(id));
       plan = planKit(changes?.kit, cards, deps.kitSections(), deps.kitCatalog());
     } catch (e: unknown) {
       kitRefuse(undefined, `kit illisible (${e instanceof Error ? e.message : String(e)})`);

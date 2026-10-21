@@ -7,6 +7,57 @@
 
 ## 2026-10-21
 
+- **A77 — Fiche perso de quick : un seul chargement du bundle pour les
+  cartes et les extras ; classe `c-read` tranchée (restes de F31).** Item du
+  TODO « Fiche perso › Skills, restes de F31 » réduit à son contrôle à
+  l'écran (le code est fait, reste à Sevih de regarder Tamamo-no-Mae ›
+  Skills). Pourquoi : `CharacterSheetDisk` portait deux dépendances,
+  `kitCards` et `kitExtras`, qui refaisaient chacune `extractedBundle(id)`
+  (~180 ms à chaud) à chaque `GET /api/character/state` ; et la classe
+  `c-read` des cartes Bursts et Transcendance n'avait aucune règle dans
+  `character.css`. Comment : (1) `c-read` retirée du HTML de `burstsHtml`
+  et `transcendHtml` (`scripts/quick/ui/tabs/character.js`) — le plus
+  simple : `scripts/quick/ui/STYLE.md` ne prévoit aucun rendu propre aux
+  cartes en lecture (« en lecture » se dit dans le texte de leur en-tête,
+  sans bouton ni savebar), aucun test ni la charte ne la citaient, le
+  sélecteur des tests reste `data-read` ; (2) une seule dépendance
+  `kit(id): Promise<KitRead>` (`scripts/quick/actions.ts`, `KitRead` =
+  `KitExtras` + `cards`) remplace les deux : elle charge le bundle une fois
+  et rend `characterKitCards` et `characterKitExtras` par-dessus ;
+  `sheetKit` l'appelle une fois (le « tout ou rien » du kit devient
+  structurel), `SheetKit` étend `KitRead`, et `saveCharacterSheet` y lit
+  `cards` — il calcule donc aussi les extras, mesurés à 0,2-0,5 ms sur le
+  bundle de Tamamo (`characterKitExtras` seul, trois mesures après
+  chauffe), négligeable devant le chargement. `character-kit.ts` inchangé.
+  Mesure (`console.time` autour de `characterSheetState('2000086')`, trois
+  lectures à chaud après une de chauffe, script
+  `/tmp/claude-1000/-home-sevih-Documents-Projet-perso-sevih-tool/0277a6b9-375c-4ef2-82f5-2863df495f2f/scratchpad/time-sheet.mts` lancé par `pnpm exec tsx --tsconfig tsconfig.json`) :
+  avant 355, 357, 341 ms ; après 197, 201, 177 ms. Tests :
+  `scripts/quick/actions.test.ts` — les stubs suivent (`kit` rend
+  `{ cards: KIT_CARDS, ...KIT_EXTRAS }` ; dans le banc de
+  `saveCharacterSheet`, l'override s'appelle `kitRead`, `kit` y désignant
+  déjà le curé des chips) ; le cas « `kit` lève » laisse toujours cartes,
+  bursts et paliers vides avec `error` ; l'ancien cas « `kitExtras` lève »,
+  devenu le même, est remplacé par « le kit lu une seule fois par
+  lecture » (la dépendance appelée une fois, pour Aer). Vérifié :
+  `NODE_ENV=development pnpm exec vitest run scripts/quick` « Tests 1177
+  passed (1177) » ; `pnpm typecheck` sans erreur (dernière ligne : la
+  commande `tsc` des trois projets, racine, `datagen` et `scripts`) ;
+  `pnpm lint` `$ eslint` (sans sortie) ; `pnpm test` « Tests 4394 passed (4394) » ; `character-kit.test.ts`
+  inchangé et vert. Banc sur un quick isolé (port 4837, clés vidées, GET
+  seuls), `shot.mjs --tabs character --hash character/2000086/skills` en
+  1440 × 1000 puis 1440 × 2600 (cartes Bursts et Transcendance dans le
+  cadre) : la capture de F31 n'existant plus (scratchpad d'une autre
+  session), la comparaison est faite entre le code de HEAD (remis le temps
+  de la capture « avant », quick relancé) et celui du lot — réponse de
+  `GET /api/character/state?id=2000086` identique à l'octet (`cmp`, 214 170
+  octets) ; PNG différents à `cmp`, comparés au pixel (PIL,
+  `ImageChops.difference`) : seule la boîte (914, 12)-(1325, 40) diffère, la
+  barre d'en-tête (compteur « Pousser » et pastille R2 pas encore chargés
+  sur la première capture : du timing), le panneau de la fiche identique
+  au pixel près. Captures : `/tmp/claude-1000/-home-sevih-Documents-Projet-perso-sevih-tool/0277a6b9-375c-4ef2-82f5-2863df495f2f/scratchpad/shots/avant-full/character.png` et
+  `/tmp/claude-1000/-home-sevih-Documents-Projet-perso-sevih-tool/0277a6b9-375c-4ef2-82f5-2863df495f2f/scratchpad/shots/apres-full/character.png`.
+
 - **A76 — Calculateur : plus de ligne de repli fantôme quand le clip de base
   est propre.** Item du TODO « 14 skills à repli fantôme (suite de F30) »
   retiré. Pourquoi : F30 a établi que le clip de l'index 0 fait foi et que
