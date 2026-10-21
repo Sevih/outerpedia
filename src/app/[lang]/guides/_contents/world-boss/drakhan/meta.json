@@ -17,6 +17,7 @@
   },
   "icon": "T_Banner_World_Boss_05",
   "author": "Sevih",
-  "updated": "2026-10-20",
-  "bossId": "4086035"
+  "updated": "2026-10-21",
+  "bossId": "4086035",
+  "updating": true
 }
