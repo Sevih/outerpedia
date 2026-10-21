@@ -15,10 +15,8 @@ les preuves et les décisions vivent dans le tri consolidé de sevih-tool
 - [ ] **Contrat solver — ce qui reste après la 1.11.0/1.11.1 de gear-solver
       (19-20/10)** : tout ce que le tri du 15/10 listait est publié (L1,
       C1, O5, M2 `statsByTier`, `combatEffects`, `corePassiveByFusion`,
-      `stat-keys.json` lu par G30). Reste : (a) M3 — `ee-passives["2000078"]`
-      est dans la donnée et passe par la boucle générique des passifs d'EE
-      de gear-solver (`packages/core/src/parse.ts`), mais aucun test ne le
-      cite : un test qui le lit (lot G, une heure) ; (b) nombre de stacks de
+      `stat-keys.json` lu par G30). Reste (M3, le passif d'EE
+      de Fatal, est lu et testé par gear-solver depuis G35) : (b) nombre de stacks de
       `BT_STACK_STAT` dans le calculateur (plus tard) ; (c) deux latents de
       J12 sans effet aujourd'hui : `datagen/lib/burst.ts:15` (« > 1 coût »
       contre `Count > 0` du client, équivalent sur les 136 skills) et
