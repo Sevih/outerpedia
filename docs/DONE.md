@@ -7,6 +7,20 @@
 
 ## 2026-10-21
 
+- **Relecture A78 (Fable 5.1) — miniature des VideoObject = image de
+  partage, validé.** Commit `bd1d99fc`, message attendu, 13 fichiers au
+  périmètre (un cinquième rendu, `VersionedBossGuide`, trouvé et traité).
+  `guideShareImage` est la source unique (métadonnées équivalentes : même
+  image, même taille 128 × 128 pour un boss) ; rejeu par `tsx` : Drakhan →
+  `FI_2000062.png`, Prevent World Alteration → `MT_4076011.png` (boss de
+  phase 2), Gear → icône PNG du guide, Beatles AL → `MT_4076003.png` (chemins
+  relatifs hors env de prod, absolus sur le site comme l'og:image d'hier).
+  Contrôles : `pnpm typecheck` 0, `pnpm lint` 0, `pnpm test` 250 fichiers /
+  4 413 verts, tests ciblés seo + VideoJsonLd + guides 112 verts. Reste à
+  Sevih, après déploiement : coller dans Discord
+  `https://outerpedia.com/guides/world-boss/drakhan?v=2` et une fiche perso
+  à vidéos — attendu, le petit portrait ; `curl` de la page : plus de
+  `ytimg` dans les `thumbnailUrl`.
 - **A78 · La miniature des `VideoObject` JSON-LD est l'image de partage de
   la page, plus la miniature YouTube.** Pourquoi : les aperçus Discord d'une
   page à vidéos (Drakhan World Boss) montraient `i.ytimg.com/…/hqdefault.jpg`,
