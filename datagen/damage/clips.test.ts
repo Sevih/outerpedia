@@ -431,6 +431,7 @@ describe('resolveSkillClips — clip de base étranger à la jointure (F30)', ()
     );
     expect(own.variants?.map((v) => v.clip.name)).toEqual(['C_Skill_1']);
     expect(own.clipHitTemplets).toBeUndefined();
+    expect(own.unplayedChains).toBeUndefined();
     const common = resolveSkillClips(
       index,
       carrier,
@@ -439,5 +440,65 @@ describe('resolveSkillClips — clip de base étranger à la jointure (F30)', ()
       hitsOf('C_Skill_5', 1),
     );
     expect(common).toEqual({});
+  });
+});
+
+describe('resolveSkillClips — clip de base propre, chaîne de la jointure jouée nulle part (A76)', () => {
+  // Valentine 1205 : `Skill5` joue `_Skill_4_1`, la jointure y ajoute
+  // `_Skill_5` (joué par le clip d'un autre skill).
+  const index = makeIndex({
+    chars: {
+      C: {
+        clips: { C_Skill_5: ['C_Skill_4_1,0'], C_Skill_6: ['C_Skill_5_1,0'] },
+        triggers: { Skill5: ['C_Skill_5'], Skill6: ['C_Skill_6'] },
+      },
+    },
+    templets: { C_Skill_4_1: { factor: 333, count: 3 }, C_Skill_5_1: { factor: 300 } },
+  });
+  const hits = [...hitsOf('C_Skill_4', 1), ...hitsOf('C_Skill_5', 1)];
+
+  it('clip de base propre + jointure étrangère → pas d’état fantôme : la chaîne sort', () => {
+    const r = resolveSkillClips(
+      index,
+      carrier,
+      skill({ type: 'SKT_STRIKE_AERIAL', triggerCsv: 'Skill5' }),
+      [],
+      hits,
+    );
+    expect(r).toEqual({
+      variants: [
+        {
+          key: 'base',
+          trigger: 'Skill5',
+          clip: { name: 'C_Skill_5', events: [{ id: 'C_Skill_4_1', factor: 333, count: 3 }] },
+        },
+      ],
+      unplayedChains: ['C_Skill_5'],
+    });
+  });
+
+  it('sans clip de base, ou une chaîne irrésolue, la jointure reste entière', () => {
+    // Index 0 sans clip (S3 d'Ame) : la chaîne garde son repli (état SKIP).
+    const noBase = resolveSkillClips(
+      index,
+      carrier,
+      skill({ triggerCsv: 'Skill3' }),
+      [],
+      hitsOf('C_Skill_5', 1),
+    );
+    expect(noBase).toEqual({});
+    // Deux clips à events sous `Skill5` : chaîne irrésolue, rien ne sort.
+    const alt = makeIndex({
+      chars: {
+        C: {
+          clips: { C_Skill_5: ['C_Skill_4_1,0'], C_Skill_5b: ['C_Skill_4_1,0'] },
+          triggers: { Skill5: ['C_Skill_5', 'C_Skill_5b'] },
+        },
+      },
+      templets: { C_Skill_4_1: { factor: 333 }, C_Skill_5_1: { factor: 300 } },
+    });
+    const r = resolveSkillClips(alt, carrier, skill({ triggerCsv: 'Skill5' }), [], hits);
+    expect(r.clipsUnresolvedChains).toEqual(['C_Skill_4']);
+    expect(r.unplayedChains).toBeUndefined();
   });
 });

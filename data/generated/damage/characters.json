@@ -47160,16 +47160,6 @@
           "multiHit": true,
           "maxHitCount": 3,
           "isAdditive": false
-        },
-        {
-          "id": "2000012_Skill_5_1",
-          "chain": "2000012_Skill_5",
-          "hit": 1,
-          "damageFactor": 300,
-          "damageType": "DT_FIRE_HIT",
-          "multiHit": false,
-          "maxHitCount": 0,
-          "isAdditive": false
         }
       ],
       "variants": [
@@ -47246,16 +47236,6 @@
           "damageType": "DT_PIERCE",
           "multiHit": true,
           "maxHitCount": 7,
-          "isAdditive": false
-        },
-        {
-          "id": "2000012_Skill_6_1",
-          "chain": "2000012_Skill_6",
-          "hit": 1,
-          "damageFactor": 1000,
-          "damageType": "DT_FIRE_HIT",
-          "multiHit": false,
-          "maxHitCount": 0,
           "isAdditive": false
         }
       ],
@@ -47431,16 +47411,6 @@
           "damageType": "DT_FIRE_HIT",
           "multiHit": true,
           "maxHitCount": 3,
-          "isAdditive": false
-        },
-        {
-          "id": "2000012_Skill_5_1",
-          "chain": "2000012_Skill_5",
-          "hit": 1,
-          "damageFactor": 300,
-          "damageType": "DT_FIRE_HIT",
-          "multiHit": false,
-          "maxHitCount": 0,
           "isAdditive": false
         }
       ],
@@ -57709,16 +57679,6 @@
           "chain": "2000022_Skill_1",
           "hit": 2,
           "damageFactor": 600,
-          "damageType": "DT_LIGHTNING_BLUE_HIT",
-          "multiHit": false,
-          "maxHitCount": 0,
-          "isAdditive": false
-        },
-        {
-          "id": "2000022_Skill_1_UP_1",
-          "chain": "2000022_Skill_1_UP",
-          "hit": 1,
-          "damageFactor": 400,
           "damageType": "DT_LIGHTNING_BLUE_HIT",
           "multiHit": false,
           "maxHitCount": 0,
@@ -78874,36 +78834,6 @@
           "id": "2000040_Burst_3_2",
           "chain": "2000040_Burst_3",
           "hit": 2,
-          "damageFactor": 300,
-          "damageType": "DT_BIG_DAMAGE",
-          "multiHit": false,
-          "maxHitCount": 0,
-          "isAdditive": false
-        },
-        {
-          "id": "2000040_Skill_2_1",
-          "chain": "2000040_Skill_2",
-          "hit": 1,
-          "damageFactor": 250,
-          "damageType": "DT_HIT",
-          "multiHit": false,
-          "maxHitCount": 0,
-          "isAdditive": false
-        },
-        {
-          "id": "2000040_Skill_2_2",
-          "chain": "2000040_Skill_2",
-          "hit": 2,
-          "damageFactor": 50,
-          "damageType": "DT_HIT",
-          "multiHit": true,
-          "maxHitCount": 9,
-          "isAdditive": false
-        },
-        {
-          "id": "2000040_Skill_2_3",
-          "chain": "2000040_Skill_2",
-          "hit": 3,
           "damageFactor": 300,
           "damageType": "DT_BIG_DAMAGE",
           "multiHit": false,
@@ -106110,36 +106040,6 @@
           "multiHit": false,
           "maxHitCount": 0,
           "isAdditive": false
-        },
-        {
-          "id": "2000065_Skill_1_5_B",
-          "chain": "2000065_Skill_1_5_B",
-          "hit": 1,
-          "damageFactor": 1100,
-          "damageType": "DT_BIG_DAMAGE",
-          "multiHit": false,
-          "maxHitCount": 0,
-          "isAdditive": false
-        },
-        {
-          "id": "2000065_Skill_Burst3_1",
-          "chain": "2000065_Skill_Burst3",
-          "hit": 1,
-          "damageFactor": 100,
-          "damageType": "DT_NATURE_HIT",
-          "multiHit": true,
-          "maxHitCount": 6,
-          "isAdditive": false
-        },
-        {
-          "id": "2000065_Skill_Burst3_2",
-          "chain": "2000065_Skill_Burst3",
-          "hit": 2,
-          "damageFactor": 400,
-          "damageType": "DT_BIG_DAMAGE",
-          "multiHit": false,
-          "maxHitCount": 0,
-          "isAdditive": false
         }
       ],
       "variants": [
@@ -106625,36 +106525,6 @@
         }
       ],
       "hits": [
-        {
-          "id": "2000065_Skill_3_1",
-          "chain": "2000065_Skill_3",
-          "hit": 1,
-          "damageFactor": 100,
-          "damageType": "DT_CUT_KEEP_BIG",
-          "multiHit": true,
-          "maxHitCount": 7,
-          "isAdditive": false
-        },
-        {
-          "id": "2000065_Skill_3_2_A",
-          "chain": "2000065_Skill_3_2_A",
-          "hit": 1,
-          "damageFactor": 500,
-          "damageType": "DT_BIG_DAMAGE",
-          "multiHit": false,
-          "maxHitCount": 0,
-          "isAdditive": false
-        },
-        {
-          "id": "2000065_Skill_3_2_B",
-          "chain": "2000065_Skill_3_2_B",
-          "hit": 1,
-          "damageFactor": 300,
-          "damageType": "DT_BIG_DAMAGE",
-          "multiHit": false,
-          "maxHitCount": 0,
-          "isAdditive": false
-        },
         {
           "id": "2000065_Skill_5_1",
           "chain": "2000065_Skill_5",
@@ -118581,16 +118451,6 @@
           "multiHit": true,
           "maxHitCount": 3,
           "isAdditive": false
-        },
-        {
-          "id": "2000076_Skill_3",
-          "chain": "2000076_Skill_3",
-          "hit": 1,
-          "damageFactor": 200,
-          "damageType": "DT_FIRE_HIT",
-          "multiHit": true,
-          "maxHitCount": 5,
-          "isAdditive": false
         }
       ],
       "variants": [
@@ -127765,26 +127625,6 @@
       ],
       "hits": [
         {
-          "id": "2000085_Skill_2_2_1",
-          "chain": "2000085_Skill_2_2",
-          "hit": 1,
-          "damageFactor": 50,
-          "damageType": "DT_WATER_HIT",
-          "multiHit": true,
-          "maxHitCount": 4,
-          "isAdditive": false
-        },
-        {
-          "id": "2000085_Skill_2_2_2",
-          "chain": "2000085_Skill_2_2",
-          "hit": 2,
-          "damageFactor": 100,
-          "damageType": "DT_WATER_HIT",
-          "multiHit": false,
-          "maxHitCount": 0,
-          "isAdditive": false
-        },
-        {
           "id": "2000085_Skill_5_1",
           "chain": "2000085_Skill_5",
           "hit": 1,
@@ -127876,26 +127716,6 @@
         }
       ],
       "hits": [
-        {
-          "id": "2000085_Skill_2_2_1",
-          "chain": "2000085_Skill_2_2",
-          "hit": 1,
-          "damageFactor": 50,
-          "damageType": "DT_WATER_HIT",
-          "multiHit": true,
-          "maxHitCount": 4,
-          "isAdditive": false
-        },
-        {
-          "id": "2000085_Skill_2_2_2",
-          "chain": "2000085_Skill_2_2",
-          "hit": 2,
-          "damageFactor": 100,
-          "damageType": "DT_WATER_HIT",
-          "multiHit": false,
-          "maxHitCount": 0,
-          "isAdditive": false
-        },
         {
           "id": "2000085_Skill_5_1",
           "chain": "2000085_Skill_5",
@@ -137719,36 +137539,6 @@
       ],
       "hits": [
         {
-          "id": "2000094_Skill_1_1",
-          "chain": "2000094_Skill_1",
-          "hit": 1,
-          "damageFactor": 200,
-          "damageType": "DT_HIT",
-          "multiHit": false,
-          "maxHitCount": 0,
-          "isAdditive": false
-        },
-        {
-          "id": "2000094_Skill_1_2",
-          "chain": "2000094_Skill_1",
-          "hit": 2,
-          "damageFactor": 300,
-          "damageType": "DT_FIRE_PIERCE",
-          "multiHit": false,
-          "maxHitCount": 0,
-          "isAdditive": false
-        },
-        {
-          "id": "2000094_Skill_1_3",
-          "chain": "2000094_Skill_1",
-          "hit": 3,
-          "damageFactor": 500,
-          "damageType": "DT_BIG_DAMAGE",
-          "multiHit": false,
-          "maxHitCount": 0,
-          "isAdditive": false
-        },
-        {
           "id": "2000094_Skill_1_1_1",
           "chain": "2000094_Skill_1_1",
           "hit": 1,
@@ -137856,36 +137646,6 @@
       ],
       "hits": [
         {
-          "id": "2000094_Skill_1_1",
-          "chain": "2000094_Skill_1",
-          "hit": 1,
-          "damageFactor": 200,
-          "damageType": "DT_HIT",
-          "multiHit": false,
-          "maxHitCount": 0,
-          "isAdditive": false
-        },
-        {
-          "id": "2000094_Skill_1_2",
-          "chain": "2000094_Skill_1",
-          "hit": 2,
-          "damageFactor": 300,
-          "damageType": "DT_FIRE_PIERCE",
-          "multiHit": false,
-          "maxHitCount": 0,
-          "isAdditive": false
-        },
-        {
-          "id": "2000094_Skill_1_3",
-          "chain": "2000094_Skill_1",
-          "hit": 3,
-          "damageFactor": 500,
-          "damageType": "DT_BIG_DAMAGE",
-          "multiHit": false,
-          "maxHitCount": 0,
-          "isAdditive": false
-        },
-        {
           "id": "2000094_Skill_1_1_1",
           "chain": "2000094_Skill_1_1",
           "hit": 1,
@@ -137992,36 +137752,6 @@
         }
       ],
       "hits": [
-        {
-          "id": "2000094_Skill_1_1",
-          "chain": "2000094_Skill_1",
-          "hit": 1,
-          "damageFactor": 200,
-          "damageType": "DT_HIT",
-          "multiHit": false,
-          "maxHitCount": 0,
-          "isAdditive": false
-        },
-        {
-          "id": "2000094_Skill_1_2",
-          "chain": "2000094_Skill_1",
-          "hit": 2,
-          "damageFactor": 300,
-          "damageType": "DT_FIRE_PIERCE",
-          "multiHit": false,
-          "maxHitCount": 0,
-          "isAdditive": false
-        },
-        {
-          "id": "2000094_Skill_1_3",
-          "chain": "2000094_Skill_1",
-          "hit": 3,
-          "damageFactor": 500,
-          "damageType": "DT_BIG_DAMAGE",
-          "multiHit": false,
-          "maxHitCount": 0,
-          "isAdditive": false
-        },
         {
           "id": "2000094_Skill_1_1_1",
           "chain": "2000094_Skill_1_1",

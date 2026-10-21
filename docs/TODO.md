@@ -35,9 +35,6 @@ les preuves et les décisions vivent dans le tri consolidé de sevih-tool
       unifier sur `STAT_TYPE_SLUGS` est un lot C avec contrat solver à bumper.
       Les trois archives `monster-archive/4548161@1`, `4548171@1`, `4548181@1`
       gardent l'ancien slug (figées).
-- [ ] **14 skills à repli fantôme (suite de F30)** : 1205, 1206, 1209, 2201,
-      4021, 6501, 6503, 6505, 7601, 8505, 8506, 9419-9421 — cellule juste,
-      une ligne de tooltip en trop. Un lot A.
 - [ ] **Fiche perso › Skills, restes de F31** : la classe `c-read` des deux
       cartes de lecture n'a pas de règle CSS (marqueur inerte) ; `kitExtras`
       recharge `extractedBundle` (~180 ms) une seconde fois par lecture de la

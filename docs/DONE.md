@@ -7,6 +7,75 @@
 
 ## 2026-10-21
 
+- **A76 — Calculateur : plus de ligne de repli fantôme quand le clip de base
+  est propre.** Item du TODO « 14 skills à repli fantôme (suite de F30) »
+  retiré. Pourquoi : F30 a établi que le clip de l'index 0 fait foi et que
+  la jointure `SkillID` de `CharacterDamageTemplet` ne sert qu'au simulateur
+  du client, mais ne l'appliquait qu'au clip de base ÉTRANGER à la
+  jointure ; quand le clip de base la joue, une chaîne rattachée au skill
+  qu'aucun de ses clips ne joue gardait, à côté des variantes, un état de
+  repli § 12.4 (`buildReportStates`, chaîne sans event) : cellule juste
+  (`states[0]`), une ligne de tooltip en trop. Le tooltip vient bien de la
+  donnée (les `hits`), `report.ts` non touché. Comment :
+  `datagen/damage/clips.ts` — clip de base présent, aucune chaîne irrésolue
+  (une chaîne est alors jouée tout entière ou pas du tout), `resolveSkillClips`
+  rend `unplayedChains`, les chaînes de la jointure absentes de tous les
+  clips du skill (base, autres index, skip, suite) ; `characters.ts` les
+  retire des hits (le champ ne sort pas dans `characters.json`). Règle
+  écrite dans l'en-tête de `clips.ts` à la suite de celle de F30, dans
+  celui de `characters.ts` et la doc de `DamageSkill.hits`, et dans
+  `docs/specs/damage-clips-joues.md` § 5 (encadré « Complété par A76 »).
+  Treize skills changent, pas quatorze : le S3 d'Ame (6503) n'a pas de clip
+  d'index 0 (`Skill3` absent de son animator), la règle ne le touche pas et
+  ses lignes `2000065_SKIP_A`/`_B` restent son état SKIP (spec § 5,
+  `CBattleManager` substitue le templet de skip). Diff sémantique de
+  `characters.json` (script `diff-a76.ts` du scratchpad de la session,
+  avant/après : racine et 129 persos identiques, 13 skills, seul `hits`
+  change, aucun hit ajouté) — retirée → reste : 1205 et 1209 Valentine
+  `2000012_Skill_5` (300 ‰) → `base` `2000012_Skill_5`, hit `_Skill_4_1`
+  333 × 3 ; 1206 `2000012_Skill_6` (1 000) → `base` `2000012_Skill_6`, hit
+  `_Skill_5_2` 100 × 7 ; 2201 Noa S1 `2000022_Skill_1_UP` (400) → `base`
+  `2000022_Skill_1`, `_1_1` 400 + `_1_2` 600 ; 4021 Mero B3
+  `2000040_Skill_2` (250, 50 × 9, 300) → `base` `2000040_Skill_2_Burst_3`,
+  `_Burst_3_1` 50 × 14 + `_Burst_3_2` 300 ; 6501 Ame S1
+  `2000065_Skill_1_5_B` (1 100) et `2000065_Skill_Burst3` (100 × 6, 400) →
+  `base`/`second`/`third`, `_Skill_1_1` à `_1_5` ; 6505 Ame `2000065_Skill_3`
+  (100 × 7), `_3_2_A` (500), `_3_2_B` (300) → `base` `2000065_Skill_5`,
+  `_5_1` 100 + `_5_2` 300 + `_5_3` 150 × 4 ; 7601 Bryn S1 `2000076_Skill_3`
+  (200 × 5) → `base` `2000076_Skill_1`, `_1_1` 125 + `_1_2` 125 + `_1_3`
+  250 × 3 ; 8505 et 8506 Regina `2000085_Skill_2_2` (50 × 4, 100) → `base`
+  `2000085_Skill_5`, `_5_1` 150 × 4 + `_5_2` 400 ; 9419-9421 Ember B1-B3
+  `2000094_Skill_1` (200, 300, 500) → `base` `2000094_Skill_1_Burst_1`,
+  `_1_1_1` 260 + `_1_1_2` 390 + `_1_1_3` 650. Fixture : `noa-rhona.json`
+  reprend la clé `S1` au lieu de `S1#base` (deux lignes) — elle ne venait que
+  de la ligne fantôme de 2201 (F29), valeurs 3 859 / 6 239 inchangées. À
+  voir dans le calculateur (`/tools/damage-calculator`) : Ember, ligne du
+  burst 1 du S1 — avant, le tooltip de la cellule montrait deux lignes (la
+  variante `base` du clip `2000094_Skill_1_Burst_1` et le repli
+  `2000094_Skill_1`) ; après, la variante seule, même valeur. Vérification :
+  `datagen/damage/clips.test.ts` + 2 cas (clip de base propre + jointure
+  étrangère → `unplayedChains`, pas d'état fantôme ; sans clip de base ou
+  avec une chaîne irrésolue, rien ne sort), `damage-data.test.ts` + 1
+  invariant (tout skill à variante `base` sans chaîne irrésolue : chaque hit
+  est joué par un de ses clips ; Ember B1 n'a plus que `2000094_Skill_1_1`) ;
+  `pnpm damage:build` (comme F30, `anim-events.json` ré-extrait identique,
+  seul `characters.json` change) ; `pnpm datagen:build` puis
+  `datagen:promote` à blanc : `solver/characters.json` identique, seul
+  `wallpapers.json` ~2 (déjà vu ce matin), rien promu — `data/generated/damage/`
+  n'est pas sous `promote` (damage:build l'écrit directement), le
+  `--apply --only` n'avait donc rien à copier ; `pnpm damage:check` : « Bilan
+  : 42 ligne(s) exacte(s), 0 en dérive, 0 sautée(s) », dont Francesca
+  `S3#base-skip` 36 798 (la fixture que le lot prêtait à Ame) et H. Dianne
+  `S2b1` 6 356 ; `pnpm typecheck` : les trois `tsc --noEmit` sans erreur ;
+  `pnpm lint` : `eslint` sans message ; `pnpm test` : « Tests 4394 passed
+  (4394) ». Laissé : la répartition par hit de Dahlia (`extra_3`, hors
+  lot) ; le clip de 1206 joue aussi `2000012_Skill_5_1`, rattaché par la
+  jointure à 1205/1209 et non à 1206 : ses lignes de détail ne le montrent
+  pas (le calcul lit les events du clip, total juste) ; `2000065_Skill_1_5_B`
+  (1 100 ‰) sort du S1 d'Ame faute de clip qui le joue — si le client le
+  substitue sous B comme les `SKIP_A`/`_B`, ce serait une variante à
+  prouver, pas un fantôme.
+
 - **Clôtures du 21/10 matin.** `bestSkill` d'Astei et de Gnosis Dahlia
   après F30 : `pnpm datagen:build` puis `datagen:promote` à blanc sur les
   tables 1.11.500 — `solver/characters.json` identique au promu (Astei S1

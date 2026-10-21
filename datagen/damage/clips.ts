@@ -59,7 +59,19 @@
  *    (`clipHitTemplets`, appliqué par characters.ts) — sans quoi sa chaîne
  *    garderait, à côté de la variante, un repli § 12.4 fantôme (la fixture
  *    de H. Dianne S2b1 rougissait ainsi sous F29 : deux lignes, plus de clé
- *    `S2b1`, alors que le clip rend les 6 356 mesurés).
+ *    `S2b1`, alors que le clip rend les 6 356 mesurés) ;
+ *  - clip de base PROPRE (lot A76, 21/10/2026) : même règle quand le clip
+ *    de l'index 0 joue la jointure. Une chaîne que `SkillID` rattache au
+ *    skill mais qu'AUCUN de ses clips ne joue (base, autres index, skip,
+ *    suite) n'est jouée qu'au simulateur : elle sort des hits
+ *    (`unplayedChains`, appliqué par characters.ts) au lieu de garder un
+ *    repli § 12.4 fantôme à côté des variantes. 13 skills au 21/10
+ *    (1205, 1206, 1209, 2201, 4021, 6501, 6505, 7601, 8505, 8506,
+ *    9419-9421 — Valentine 1205 : `Skill5` joue `2000012_Skill_4_1`, la
+ *    jointure y ajoute `2000012_Skill_5`, que joue le clip de 1206). Pas de
+ *    clip de base, pas de règle : les lignes
+ *    `2000065_SKIP_A`/`_B` du S3 d'Ame (6503, sans `Skill3` dans son
+ *    animator) sont son état SKIP (§ 5 de la spec), elles restent en repli.
  *
  * Suite additionnelle, condition : comptée PAR DÉFAUT (`selfMet`) seulement
  * quand le clip de base pose LUI-MÊME la condition du buff additif — dérivé
@@ -143,6 +155,10 @@ export interface SkillClipsResult {
    *  templets joués par les clips du skill, dans l'ordre — characters.ts en
    *  refait les hits du skill (pas un champ de `characters.json`). */
   clipHitTemplets?: string[];
+  /** Clip de base PROPRE (cf. l'en-tête) : chaînes de la jointure qu'aucun
+   *  clip du skill ne joue — characters.ts les retire des hits (pas un champ
+   *  de `characters.json`). */
+  unplayedChains?: string[];
 }
 
 const EVENTS_PATH = resolve('datagen/damage/anim-events.json');
@@ -479,10 +495,18 @@ export function resolveSkillClips(
         ),
       ]
     : undefined;
+  // Clip de base propre (cf. l'en-tête) : les chaînes de la jointure
+  // qu'aucun clip ne joue n'ont pas d'état — sans chaîne irrésolue, une
+  // chaîne est jouée tout entière ou pas du tout (`covered`).
+  const unplayedChains =
+    base !== undefined && !foreign && !unresolved.size
+      ? [...chains].filter(([, ids]) => ![...ids].some((t) => covered.has(t))).map(([c]) => c)
+      : [];
 
   return {
     ...(resolved.length ? { variants: resolved } : {}),
     ...(unresolved.size ? { clipsUnresolvedChains: [...unresolved].sort(ord) } : {}),
     ...(clipHitTemplets ? { clipHitTemplets } : {}),
+    ...(unplayedChains.length ? { unplayedChains: unplayedChains.sort(ord) } : {}),
   };
 }

@@ -314,6 +314,22 @@ describe('damage/characters.json — clips chez le porteur (revue R15, 17/10/202
       { id: '2000093_Skill_2_1', factor: 200, count: 5 },
     ]);
   });
+
+  it('clip de base propre : plus de chaîne de la jointure qu’aucun clip ne joue (A76)', () => {
+    const bad: string[] = [];
+    for (const [sid, s] of Object.entries(skills)) {
+      if (!s.variants?.some((v) => v.key === 'base') || s.clipsUnresolvedChains) continue;
+      const played = new Set(
+        s.variants.flatMap((v) =>
+          [v.clip, v.additive?.clip].flatMap((c) => c?.events.map((e) => e.id) ?? []),
+        ),
+      );
+      for (const h of s.hits) if (!played.has(h.id)) bad.push(`${sid} : ${h.id}`);
+    }
+    expect(bad).toEqual([]);
+    // Ember B1 : le clip de `Burst1` (variante renforcée du S1) reste seul.
+    expect([...new Set(skills['9419'].hits.map((h) => h.chain))]).toEqual(['2000094_Skill_1_1']);
+  });
 });
 
 describe('anim-events — bundles de fusion et états d’approche (B64)', () => {

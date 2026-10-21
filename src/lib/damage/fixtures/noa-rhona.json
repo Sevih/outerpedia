@@ -41,12 +41,12 @@
   "gameVersion": "1.4.9",
   "observed": [
     {
-      "slot": "S1#base",
+      "slot": "S1",
       "branch": "normal",
       "damage": 3859
     },
     {
-      "slot": "S1#base",
+      "slot": "S1",
       "branch": "critical",
       "damage": 6239
     },
