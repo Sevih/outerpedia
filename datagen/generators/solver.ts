@@ -21,7 +21,11 @@
  *     puissant (S1/S2/S3 + bursts, niveau max) — calculé par l'extracteur
  *     damage du MÊME build (`buildDamageCharacters`) et la règle du moteur
  *     (`stateTotalFactor`), cf. solver-best-skill.ts. Absent = pas de donnée
- *     (gear-solver replie sur 1000 ‰ et le signale).
+ *     (gear-solver replie sur 1000 ‰ et le signale) ;
+ *   - `rotation` (ajout C28, 22/10/2026, `schema` inchangé) : facteur moyen
+ *     par tour quand le perso lance à chaque tour le skill prêt le plus fort
+ *     (S3 > S2 > S1, cooldowns du jeu, ni burst ni AP ni DoT) — même kit que
+ *     `bestSkill`, cf. solver-rotation.ts. Absent dans les mêmes cas.
  *
  * ⚠ CONTRAT app externe : enums moteur BRUTS (`ST_*`, `OAT_*`, `CCT_*`, slots
  * `weapon…boots/exclusive/ooparts`), textes EN en string simple. Aucun slug wiki.
@@ -109,6 +113,7 @@ import { kitScaling, loadKitScalingTables } from '../lib/kit-scaling';
 import { missingStatKeys, statKeysFile } from '../lib/stat-keys';
 import { buildDamageCharacters } from '../damage/characters';
 import { bestSkillOf } from './solver-best-skill';
+import { rotationOf } from './solver-rotation';
 import { conditionalLabel } from './equipment';
 import {
   computeCharacterIngredients,
@@ -1189,6 +1194,7 @@ export function buildSolver(inputs: {
     const nickname = showNickName.has(c.ID) ? (textChar.get(c.NickNameID ?? '') ?? null) : null;
     const dmgChar = damage.characters[c.ID];
     const bestSkill = dmgChar ? bestSkillOf(dmgChar, damage.skills) : undefined;
+    const rotation = dmgChar ? rotationOf(dmgChar, damage.skills) : undefined;
     if (!bestSkill) withoutBestSkill.push(c.ID);
     characters[c.ID] = {
       name: textChar.get(c.NameID ?? '') ?? null,
@@ -1201,6 +1207,7 @@ export function buildSolver(inputs: {
         c.RecommandSetOptionID && c.RecommandSetOptionID !== '0' ? c.RecommandSetOptionID : null,
       ...deriveDmgScaling(c),
       ...(bestSkill ? { bestSkill } : {}),
+      ...(rotation ? { rotation } : {}),
     };
   }
   if (unreleased.length) {

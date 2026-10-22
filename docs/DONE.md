@@ -7,6 +7,82 @@
 
 ## 2026-10-22
 
+- **C28 — rotation par tour pondérée par les cooldowns : champ additif
+  `rotation` dans `solver/characters.json`, sémantique des cooldowns prouvée
+  dans le client.** Pourquoi : `bestSkill` ne donne qu'un hit, le plus fort ;
+  un S3 fort à long cooldown se compare mal, par tour, à un S2 un peu moins
+  fort deux fois plus fréquent (décision de Sevih du 22/10 : le calcul vit
+  dans le pipeline d'outerpedia, jamais dans l'app). Sémantique, lue dans
+  `.gamedata/apk/dumped/src/` avant de coder : le compteur MONTE
+  (`CSkill.CurrentCool`, `CSkill.cs` l.158-167, borné à [0, `Cool`]) ;
+  `CSkill.CanUse` (l.246-253) = `CurrentCool >= Cool` ; `Initialize` /
+  `Reset` posent `CurrentCool = StartCool` (l.204, l.240) ; +1 au DÉBUT du
+  tour du perso, avant le choix du skill : `CCharacterBattle.OnTurn` (l.1545,
+  `AddCoolSecond(1)` / `AddCoolUltimate(1)` l.1586-1587, S2 et S3 seulement,
+  `CSkillManager.cs` l.401-417), appelé en `SUB_STATE.TURN`
+  (`CStateBattle.ChangeSubState` l.812-813) qui précède `SUB_STATE.COMMAND` ;
+  remis à 0 au lancer (`CCharacterBattle.UseSkill` l.2645, l.2857). Donc un
+  S3 à `StartCool` = `Cool` = 4 est jouable au TOUR 1, et lancé au tour t il
+  revient au tour t + 4, pas t + 5 (le « tous les 5 tours » de l'énoncé est
+  en fait tous les 4) ; `Cool` 0 = toujours prêt ; seul écart `startCool` ≠
+  `cool` au niveau max : le S2 de 2700056 (3 pour 2), borné à `Cool` par le
+  setter, jouable au tour 1 lui aussi. Comment : nouveau
+  `datagen/generators/solver-rotation.ts` (`rotationOf`, même kit que
+  `bestSkillOf` : facteur `skillMaxFactor` de l'état de base, niveau max,
+  bursts exclus), simulation déterministe des seuls tours du perso — ni
+  alliés, ni AP (donc ni burst ni tour gagné : l'économie d'AP n'est pas
+  modélisée), ni DoT, ni passifs `BT_COOL_*` ; à chaque tour le skill PRÊT au
+  plus fort facteur, S3 > S2 > S1 à égalité, S1 toujours prêt, un S2/S3 sans
+  dégâts jamais choisi. Lecture retenue de « jusqu'à ce que l'état se
+  répète » : l'état d'un tour est le couple des compteurs APRÈS la montée du
+  début de tour, et la rotation est la PÉRIODE trouvée (du premier état revu
+  à sa réapparition), sans le préambule du tour 1 quand il en a un (S2 2 /
+  S3 4 : S3, puis S2 S1 S2 S3 en boucle) — c'est le régime d'un long combat ;
+  `factorPerTurn` = moyenne sur la période arrondie à l'entier ‰, `cycle` =
+  sa longueur, `uses` = lancers par slot (Σ = `cycle`), `approx: true` quand
+  un skill joué a `unresolvedHits` (compté 1000 ‰ comme `bestSkill`). Le
+  nombre d'états est borné par 7 × 7 = 49 aujourd'hui : la garde de 60 tours
+  ne joue pas. `solver.ts` émet `rotation` à côté de `bestSkill` (en-tête :
+  ajout C28, `schema` 2 inchangé, règle (a)) ; `solver.test.ts` le déclare
+  dans `CONTRACT_SHAPE` et vérifie, sur la donnée committée, qu'il accompagne
+  chaque `bestSkill`, que Σ `uses` = `cycle` et que `factorPerTurn` ≤
+  `bestSkill.factor`. `pnpm datagen:build`, `datagen:promote` à blanc :
+  `solver/characters.json` ~129, `solver/version.json` ~2 (plus
+  `wallpapers.json` ~2, hors périmètre, non promu, et 2400015 non intégré) ;
+  diff JSON sémantique : 129/129 persos gagnent `rotation`, mêmes ids, toute
+  autre clé identique ; `version.json` : `schema` 2 inchangé, hash
+  `da9fb67cc0d3` → `1f7fe7bd57b6` ; `--apply --only` de ces deux fichiers.
+  Répartition des périodes : 1 tour (44 : 40 jouent S1 à chaque tour, leur
+  S1 étant leur skill offensif le plus fort — S2/S3 utilitaires ou plus
+  faibles —, 4 un S3 à `Cool` 0 : Maxwell, Stella Demiurge, Bryn, Iota
+  Monad), 2 (1), 3 (18), 4 (53), 5 (5), 6 (2), 9 (5), 10 (1) ; `approx` sur
+  Bryn, Hilde, Rin (2700019) et Epsilon. Pour juger à l'œil :
+
+  | Perso                   | `bestSkill.factor` | `factorPerTurn` | `cycle` | `uses` S1/S2/S3 | 8 premiers tours        |
+  | ----------------------- | ------------------ | --------------- | ------- | --------------- | ----------------------- |
+  | Tamamo-no-Mae (2000086) | 2490 (S3)          | 1843            | 4       | 2/1/1           | S3 S2 S1 S1 S3 S2 S1 S1 |
+  | Francesca (2000015)     | 2800 (S3)          | 2267            | 3       | 1/1/1           | S3 S2 S1 S3 S2 S1 S3 S2 |
+  | Sterope (2000057)       | 2672 (S1 burst 3)  | 2080            | 1       | 1/0/0           | S1 × 8                  |
+  | Gnosis Beth (2000092)   | 1600 (S1)          | 1600            | 1       | 1/0/0           | S1 × 8                  |
+  | Valentine (2000012)     | 1502 (S1)          | 1502            | 1       | 1/0/0           | S1 × 8                  |
+
+  Kits au niveau max : Tamamo S1 1500 / S2 1880 `Cool` 3 / S3 2490 `Cool` 4 ;
+  Francesca 1800 / 2200 `Cool` 3 / 2800 `Cool` 3 ; Sterope S1 2080, S2 et S3
+  sans dégâts (son 2672 est un burst, hors rotation) ; Gnosis Beth 1600 /
+  1150 `Cool` 3 / 1280 `Cool` 4 (son DoT n'est toujours pas compté) ;
+  Valentine 1502 / sans dégâts / 1300 `Cool` 4. Vérification :
+  `datagen/generators/solver-rotation.test.ts` (kit synthétique de Tamamo,
+  12 tours écrits en clair et 1843 calculé à la main : (2490 + 1880 +
+  1500 + 1500) / 4 = 1842,5 ; préambule exclu ; S1 seul ; `Cool` 0 ;
+  `approx` ; kit sans dégâts → absent) ; `pnpm typecheck` (dernière ligne :
+  la commande, ses trois `tsc --noEmit` sans erreur), `pnpm lint`
+  (dernière ligne : `eslint`, sans erreur), `pnpm test` (« Tests 4425
+  passed (4425) »), `pnpm damage:check` (« 42 ligne(s) exacte(s), 0 en
+  dérive, 0 sautée(s) »). Laissé : gear-solver (lot G36, qui lira le champ
+  et retirera l'item de son `docs/todo.md`), `gear-solver/docs/data-schema.md`
+  (G36 aussi) ; bursts, AP, DoT et passifs qui touchent aux cooldowns, hors
+  périmètre ; pas d'item au `docs/TODO.md` d'outerpedia.
+
 - **B67 — vitesse du noyau en taux sur la fiche du wiki, oracle régénéré ;
   `corePassive` retiré du contrat, `schema` 2 (suites de G8).** Étape (c) de
   la règle d'évolution du contrat : (a) `corePassiveByFusion` ajouté par B56

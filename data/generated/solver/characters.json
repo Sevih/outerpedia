@@ -671,6 +671,15 @@
       "slot": "S2",
       "burst": 1,
       "factor": 2392
+    },
+    "rotation": {
+      "factorPerTurn": 1533,
+      "cycle": 3,
+      "uses": {
+        "S1": 1,
+        "S2": 1,
+        "S3": 1
+      }
     }
   },
   "2000002": {
@@ -1529,6 +1538,15 @@
     "bestSkill": {
       "slot": "S2",
       "factor": 2140
+    },
+    "rotation": {
+      "factorPerTurn": 1880,
+      "cycle": 3,
+      "uses": {
+        "S1": 2,
+        "S2": 1,
+        "S3": 0
+      }
     }
   },
   "2000003": {
@@ -2393,6 +2411,15 @@
     "bestSkill": {
       "slot": "S2",
       "factor": 1750
+    },
+    "rotation": {
+      "factorPerTurn": 1690,
+      "cycle": 3,
+      "uses": {
+        "S1": 2,
+        "S2": 1,
+        "S3": 0
+      }
     }
   },
   "2000004": {
@@ -3066,6 +3093,15 @@
     "bestSkill": {
       "slot": "S3",
       "factor": 1640
+    },
+    "rotation": {
+      "factorPerTurn": 1547,
+      "cycle": 3,
+      "uses": {
+        "S1": 2,
+        "S2": 0,
+        "S3": 1
+      }
     }
   },
   "2000005": {
@@ -3739,6 +3775,15 @@
     "bestSkill": {
       "slot": "S3",
       "factor": 1630
+    },
+    "rotation": {
+      "factorPerTurn": 1582,
+      "cycle": 4,
+      "uses": {
+        "S1": 1,
+        "S2": 2,
+        "S3": 1
+      }
     }
   },
   "2000006": {
@@ -4597,6 +4642,15 @@
     "bestSkill": {
       "slot": "S3",
       "factor": 2730
+    },
+    "rotation": {
+      "factorPerTurn": 2140,
+      "cycle": 3,
+      "uses": {
+        "S1": 1,
+        "S2": 1,
+        "S3": 1
+      }
     }
   },
   "2000007": {
@@ -5270,6 +5324,15 @@
     "bestSkill": {
       "slot": "S1",
       "factor": 1500
+    },
+    "rotation": {
+      "factorPerTurn": 1500,
+      "cycle": 1,
+      "uses": {
+        "S1": 1,
+        "S2": 0,
+        "S3": 0
+      }
     }
   },
   "2000008": {
@@ -6151,6 +6214,15 @@
     "bestSkill": {
       "slot": "S3",
       "factor": 1670
+    },
+    "rotation": {
+      "factorPerTurn": 1610,
+      "cycle": 4,
+      "uses": {
+        "S1": 3,
+        "S2": 0,
+        "S3": 1
+      }
     }
   },
   "2000009": {
@@ -6824,6 +6896,15 @@
     "bestSkill": {
       "slot": "S1",
       "factor": 1650
+    },
+    "rotation": {
+      "factorPerTurn": 1650,
+      "cycle": 1,
+      "uses": {
+        "S1": 1,
+        "S2": 0,
+        "S3": 0
+      }
     }
   },
   "2000010": {
@@ -7688,6 +7769,15 @@
     "bestSkill": {
       "slot": "S3",
       "factor": 2430
+    },
+    "rotation": {
+      "factorPerTurn": 2077,
+      "cycle": 3,
+      "uses": {
+        "S1": 0,
+        "S2": 2,
+        "S3": 1
+      }
     }
   },
   "2000011": {
@@ -8554,6 +8644,15 @@
     "bestSkill": {
       "slot": "S2",
       "factor": 1750
+    },
+    "rotation": {
+      "factorPerTurn": 1530,
+      "cycle": 3,
+      "uses": {
+        "S1": 2,
+        "S2": 1,
+        "S3": 0
+      }
     }
   },
   "2000012": {
@@ -9428,6 +9527,15 @@
     "bestSkill": {
       "slot": "S1",
       "factor": 1502
+    },
+    "rotation": {
+      "factorPerTurn": 1502,
+      "cycle": 1,
+      "uses": {
+        "S1": 1,
+        "S2": 0,
+        "S3": 0
+      }
     }
   },
   "2000013": {
@@ -10101,6 +10209,15 @@
     "bestSkill": {
       "slot": "S3",
       "factor": 1670
+    },
+    "rotation": {
+      "factorPerTurn": 1543,
+      "cycle": 4,
+      "uses": {
+        "S1": 3,
+        "S2": 0,
+        "S3": 1
+      }
     }
   },
   "2000014": {
@@ -10774,6 +10891,15 @@
     "bestSkill": {
       "slot": "S2",
       "factor": 2038
+    },
+    "rotation": {
+      "factorPerTurn": 1679,
+      "cycle": 3,
+      "uses": {
+        "S1": 2,
+        "S2": 1,
+        "S3": 0
+      }
     }
   },
   "2000015": {
@@ -11648,6 +11774,15 @@
     "bestSkill": {
       "slot": "S3",
       "factor": 2800
+    },
+    "rotation": {
+      "factorPerTurn": 2267,
+      "cycle": 3,
+      "uses": {
+        "S1": 1,
+        "S2": 1,
+        "S3": 1
+      }
     }
   },
   "2000016": {
@@ -12512,6 +12647,15 @@
     "bestSkill": {
       "slot": "S1",
       "factor": 1610
+    },
+    "rotation": {
+      "factorPerTurn": 1610,
+      "cycle": 1,
+      "uses": {
+        "S1": 1,
+        "S2": 0,
+        "S3": 0
+      }
     }
   },
   "2000017": {
@@ -13266,6 +13410,15 @@
     "bestSkill": {
       "slot": "S3",
       "factor": 1530
+    },
+    "rotation": {
+      "factorPerTurn": 1515,
+      "cycle": 4,
+      "uses": {
+        "S1": 3,
+        "S2": 0,
+        "S3": 1
+      }
     }
   },
   "2000018": {
@@ -13939,6 +14092,15 @@
     "bestSkill": {
       "slot": "S3",
       "factor": 2860
+    },
+    "rotation": {
+      "factorPerTurn": 1988,
+      "cycle": 4,
+      "uses": {
+        "S1": 2,
+        "S2": 1,
+        "S3": 1
+      }
     }
   },
   "2000019": {
@@ -14813,6 +14975,15 @@
     "bestSkill": {
       "slot": "S1",
       "factor": 2000
+    },
+    "rotation": {
+      "factorPerTurn": 2000,
+      "cycle": 1,
+      "uses": {
+        "S1": 1,
+        "S2": 0,
+        "S3": 0
+      }
     }
   },
   "2000020": {
@@ -15503,6 +15674,15 @@
       "slot": "S2",
       "burst": 3,
       "factor": 1372
+    },
+    "rotation": {
+      "factorPerTurn": 1310,
+      "cycle": 4,
+      "uses": {
+        "S1": 3,
+        "S2": 0,
+        "S3": 1
+      }
     }
   },
   "2000021": {
@@ -16200,6 +16380,15 @@
       "burst": 1,
       "factor": 1400,
       "unresolvedHits": true
+    },
+    "rotation": {
+      "factorPerTurn": 1320,
+      "cycle": 4,
+      "uses": {
+        "S1": 3,
+        "S2": 0,
+        "S3": 1
+      }
     }
   },
   "2000022": {
@@ -17074,6 +17263,15 @@
     "bestSkill": {
       "slot": "S1",
       "factor": 1900
+    },
+    "rotation": {
+      "factorPerTurn": 1900,
+      "cycle": 1,
+      "uses": {
+        "S1": 1,
+        "S2": 0,
+        "S3": 0
+      }
     }
   },
   "2000023": {
@@ -17763,6 +17961,15 @@
     "bestSkill": {
       "slot": "S1",
       "factor": 1550
+    },
+    "rotation": {
+      "factorPerTurn": 1550,
+      "cycle": 1,
+      "uses": {
+        "S1": 1,
+        "S2": 0,
+        "S3": 0
+      }
     }
   },
   "2000024": {
@@ -18436,6 +18643,15 @@
     "bestSkill": {
       "slot": "S2",
       "factor": 2150
+    },
+    "rotation": {
+      "factorPerTurn": 1483,
+      "cycle": 4,
+      "uses": {
+        "S1": 3,
+        "S2": 1,
+        "S3": 0
+      }
     }
   },
   "2000025": {
@@ -19310,6 +19526,15 @@
     "bestSkill": {
       "slot": "S3",
       "factor": 2800
+    },
+    "rotation": {
+      "factorPerTurn": 2133,
+      "cycle": 3,
+      "uses": {
+        "S1": 2,
+        "S2": 0,
+        "S3": 1
+      }
     }
   },
   "2000026": {
@@ -19997,6 +20222,15 @@
     "bestSkill": {
       "slot": "S2",
       "factor": 1840
+    },
+    "rotation": {
+      "factorPerTurn": 1560,
+      "cycle": 3,
+      "uses": {
+        "S1": 2,
+        "S2": 1,
+        "S3": 0
+      }
     }
   },
   "2000027": {
@@ -20670,6 +20904,15 @@
     "bestSkill": {
       "slot": "S1",
       "factor": 1550
+    },
+    "rotation": {
+      "factorPerTurn": 1550,
+      "cycle": 1,
+      "uses": {
+        "S1": 1,
+        "S2": 0,
+        "S3": 0
+      }
     }
   },
   "2000028": {
@@ -21359,6 +21602,15 @@
     "bestSkill": {
       "slot": "S3",
       "factor": 3150
+    },
+    "rotation": {
+      "factorPerTurn": 3150,
+      "cycle": 1,
+      "uses": {
+        "S1": 0,
+        "S2": 0,
+        "S3": 1
+      }
     }
   },
   "2000029": {
@@ -22217,6 +22469,15 @@
     "bestSkill": {
       "slot": "S2",
       "factor": 1700
+    },
+    "rotation": {
+      "factorPerTurn": 1473,
+      "cycle": 3,
+      "uses": {
+        "S1": 2,
+        "S2": 1,
+        "S3": 0
+      }
     }
   },
   "2000030": {
@@ -22890,6 +23151,15 @@
     "bestSkill": {
       "slot": "S3",
       "factor": 2490
+    },
+    "rotation": {
+      "factorPerTurn": 1670,
+      "cycle": 3,
+      "uses": {
+        "S1": 2,
+        "S2": 0,
+        "S3": 1
+      }
     }
   },
   "2000031": {
@@ -23754,6 +24024,15 @@
     "bestSkill": {
       "slot": "S1",
       "factor": 1560
+    },
+    "rotation": {
+      "factorPerTurn": 1560,
+      "cycle": 1,
+      "uses": {
+        "S1": 1,
+        "S2": 0,
+        "S3": 0
+      }
     }
   },
   "2000032": {
@@ -24612,6 +24891,15 @@
     "bestSkill": {
       "slot": "S3",
       "factor": 2830
+    },
+    "rotation": {
+      "factorPerTurn": 2278,
+      "cycle": 4,
+      "uses": {
+        "S1": 2,
+        "S2": 1,
+        "S3": 1
+      }
     }
   },
   "2000033": {
@@ -25470,6 +25758,15 @@
     "bestSkill": {
       "slot": "S1",
       "factor": 1850
+    },
+    "rotation": {
+      "factorPerTurn": 1850,
+      "cycle": 1,
+      "uses": {
+        "S1": 1,
+        "S2": 0,
+        "S3": 0
+      }
     }
   },
   "2000034": {
@@ -26328,6 +26625,15 @@
     "bestSkill": {
       "slot": "S3",
       "factor": 2430
+    },
+    "rotation": {
+      "factorPerTurn": 1888,
+      "cycle": 4,
+      "uses": {
+        "S1": 2,
+        "S2": 1,
+        "S3": 1
+      }
     }
   },
   "2000035": {
@@ -27202,6 +27508,15 @@
     "bestSkill": {
       "slot": "S1",
       "factor": 1500
+    },
+    "rotation": {
+      "factorPerTurn": 1500,
+      "cycle": 1,
+      "uses": {
+        "S1": 1,
+        "S2": 0,
+        "S3": 0
+      }
     }
   },
   "2000036": {
@@ -27875,6 +28190,15 @@
     "bestSkill": {
       "slot": "S1",
       "factor": 1598
+    },
+    "rotation": {
+      "factorPerTurn": 1598,
+      "cycle": 1,
+      "uses": {
+        "S1": 1,
+        "S2": 0,
+        "S3": 0
+      }
     }
   },
   "2000037": {
@@ -28564,6 +28888,15 @@
     "bestSkill": {
       "slot": "S3",
       "factor": 2420
+    },
+    "rotation": {
+      "factorPerTurn": 1580,
+      "cycle": 4,
+      "uses": {
+        "S1": 3,
+        "S2": 0,
+        "S3": 1
+      }
     }
   },
   "2000038": {
@@ -29245,6 +29578,15 @@
     "bestSkill": {
       "slot": "S1",
       "factor": 1510
+    },
+    "rotation": {
+      "factorPerTurn": 1510,
+      "cycle": 1,
+      "uses": {
+        "S1": 1,
+        "S2": 0,
+        "S3": 0
+      }
     }
   },
   "2000039": {
@@ -30125,6 +30467,15 @@
     "bestSkill": {
       "slot": "S3",
       "factor": 2500
+    },
+    "rotation": {
+      "factorPerTurn": 1473,
+      "cycle": 4,
+      "uses": {
+        "S1": 0,
+        "S2": 3,
+        "S3": 1
+      }
     }
   },
   "2000040": {
@@ -30999,6 +31350,15 @@
     "bestSkill": {
       "slot": "S1",
       "factor": 1500
+    },
+    "rotation": {
+      "factorPerTurn": 1500,
+      "cycle": 1,
+      "uses": {
+        "S1": 1,
+        "S2": 0,
+        "S3": 0
+      }
     }
   },
   "2000041": {
@@ -31863,6 +32223,15 @@
     "bestSkill": {
       "slot": "S3",
       "factor": 2420
+    },
+    "rotation": {
+      "factorPerTurn": 1900,
+      "cycle": 5,
+      "uses": {
+        "S1": 2,
+        "S2": 2,
+        "S3": 1
+      }
     }
   },
   "2000042": {
@@ -32552,6 +32921,15 @@
     "bestSkill": {
       "slot": "S1",
       "factor": 1500
+    },
+    "rotation": {
+      "factorPerTurn": 1500,
+      "cycle": 1,
+      "uses": {
+        "S1": 1,
+        "S2": 0,
+        "S3": 0
+      }
     }
   },
   "2000043": {
@@ -33242,6 +33620,15 @@
       "slot": "S2",
       "burst": 3,
       "factor": 2730
+    },
+    "rotation": {
+      "factorPerTurn": 1433,
+      "cycle": 4,
+      "uses": {
+        "S1": 2,
+        "S2": 1,
+        "S3": 1
+      }
     }
   },
   "2000044": {
@@ -33931,6 +34318,15 @@
     "bestSkill": {
       "slot": "S3",
       "factor": 3180
+    },
+    "rotation": {
+      "factorPerTurn": 2327,
+      "cycle": 3,
+      "uses": {
+        "S1": 1,
+        "S2": 1,
+        "S3": 1
+      }
     }
   },
   "2000045": {
@@ -34612,6 +35008,15 @@
     "bestSkill": {
       "slot": "S3",
       "factor": 2720
+    },
+    "rotation": {
+      "factorPerTurn": 1762,
+      "cycle": 6,
+      "uses": {
+        "S1": 5,
+        "S2": 0,
+        "S3": 1
+      }
     }
   },
   "2000046": {
@@ -35478,6 +35883,15 @@
     "bestSkill": {
       "slot": "S3",
       "factor": 2470
+    },
+    "rotation": {
+      "factorPerTurn": 1770,
+      "cycle": 3,
+      "uses": {
+        "S1": 2,
+        "S2": 0,
+        "S3": 1
+      }
     }
   },
   "2000047": {
@@ -36151,6 +36565,15 @@
     "bestSkill": {
       "slot": "S1",
       "factor": 1650
+    },
+    "rotation": {
+      "factorPerTurn": 1650,
+      "cycle": 1,
+      "uses": {
+        "S1": 1,
+        "S2": 0,
+        "S3": 0
+      }
     }
   },
   "2000048": {
@@ -36824,6 +37247,15 @@
     "bestSkill": {
       "slot": "S3",
       "factor": 1290
+    },
+    "rotation": {
+      "factorPerTurn": 1268,
+      "cycle": 4,
+      "uses": {
+        "S1": 3,
+        "S2": 0,
+        "S3": 1
+      }
     }
   },
   "2000049": {
@@ -37690,6 +38122,15 @@
     "bestSkill": {
       "slot": "S3",
       "factor": 2600
+    },
+    "rotation": {
+      "factorPerTurn": 1925,
+      "cycle": 4,
+      "uses": {
+        "S1": 3,
+        "S2": 0,
+        "S3": 1
+      }
     }
   },
   "2000050": {
@@ -38371,6 +38812,15 @@
     "bestSkill": {
       "slot": "S1",
       "factor": 1508
+    },
+    "rotation": {
+      "factorPerTurn": 1508,
+      "cycle": 1,
+      "uses": {
+        "S1": 1,
+        "S2": 0,
+        "S3": 0
+      }
     }
   },
   "2000051": {
@@ -39243,6 +39693,15 @@
     "bestSkill": {
       "slot": "S3",
       "factor": 1540
+    },
+    "rotation": {
+      "factorPerTurn": 1143,
+      "cycle": 4,
+      "uses": {
+        "S1": 3,
+        "S2": 0,
+        "S3": 1
+      }
     }
   },
   "2000052": {
@@ -40118,6 +40577,15 @@
       "slot": "S2",
       "burst": 3,
       "factor": 1790
+    },
+    "rotation": {
+      "factorPerTurn": 1600,
+      "cycle": 4,
+      "uses": {
+        "S1": 3,
+        "S2": 0,
+        "S3": 1
+      }
     }
   },
   "2000053": {
@@ -40998,6 +41466,15 @@
     "bestSkill": {
       "slot": "S3",
       "factor": 2400
+    },
+    "rotation": {
+      "factorPerTurn": 2400,
+      "cycle": 1,
+      "uses": {
+        "S1": 0,
+        "S2": 0,
+        "S3": 1
+      }
     }
   },
   "2000054": {
@@ -41687,6 +42164,15 @@
     "bestSkill": {
       "slot": "S1",
       "factor": 1700
+    },
+    "rotation": {
+      "factorPerTurn": 1700,
+      "cycle": 1,
+      "uses": {
+        "S1": 1,
+        "S2": 0,
+        "S3": 0
+      }
     }
   },
   "2000055": {
@@ -42561,6 +43047,15 @@
     "bestSkill": {
       "slot": "S3",
       "factor": 2950
+    },
+    "rotation": {
+      "factorPerTurn": 2250,
+      "cycle": 4,
+      "uses": {
+        "S1": 2,
+        "S2": 1,
+        "S3": 1
+      }
     }
   },
   "2000056": {
@@ -43436,6 +43931,15 @@
       "slot": "S1",
       "burst": 3,
       "factor": 1984
+    },
+    "rotation": {
+      "factorPerTurn": 1505,
+      "cycle": 4,
+      "uses": {
+        "S1": 3,
+        "S2": 0,
+        "S3": 1
+      }
     }
   },
   "2000057": {
@@ -44126,6 +44630,15 @@
       "slot": "S1",
       "burst": 3,
       "factor": 2672
+    },
+    "rotation": {
+      "factorPerTurn": 2080,
+      "cycle": 1,
+      "uses": {
+        "S1": 1,
+        "S2": 0,
+        "S3": 0
+      }
     }
   },
   "2000058": {
@@ -44815,6 +45328,15 @@
     "bestSkill": {
       "slot": "S1",
       "factor": 1598
+    },
+    "rotation": {
+      "factorPerTurn": 1598,
+      "cycle": 1,
+      "uses": {
+        "S1": 1,
+        "S2": 0,
+        "S3": 0
+      }
     }
   },
   "2000059": {
@@ -45504,6 +46026,15 @@
     "bestSkill": {
       "slot": "S1",
       "factor": 2730
+    },
+    "rotation": {
+      "factorPerTurn": 2730,
+      "cycle": 1,
+      "uses": {
+        "S1": 1,
+        "S2": 0,
+        "S3": 0
+      }
     }
   },
   "2000060": {
@@ -46378,6 +46909,15 @@
     "bestSkill": {
       "slot": "S2",
       "factor": 1350
+    },
+    "rotation": {
+      "factorPerTurn": 1192,
+      "cycle": 4,
+      "uses": {
+        "S1": 3,
+        "S2": 1,
+        "S3": 0
+      }
     }
   },
   "2000061": {
@@ -47067,6 +47607,15 @@
     "bestSkill": {
       "slot": "S3",
       "factor": 1520
+    },
+    "rotation": {
+      "factorPerTurn": 1505,
+      "cycle": 4,
+      "uses": {
+        "S1": 3,
+        "S2": 0,
+        "S3": 1
+      }
     }
   },
   "2000062": {
@@ -47941,6 +48490,15 @@
     "bestSkill": {
       "slot": "S3",
       "factor": 2800
+    },
+    "rotation": {
+      "factorPerTurn": 2125,
+      "cycle": 4,
+      "uses": {
+        "S1": 2,
+        "S2": 1,
+        "S3": 1
+      }
     }
   },
   "2000063": {
@@ -48576,6 +49134,15 @@
     "bestSkill": {
       "slot": "S3",
       "factor": 3150
+    },
+    "rotation": {
+      "factorPerTurn": 1990,
+      "cycle": 5,
+      "uses": {
+        "S1": 4,
+        "S2": 0,
+        "S3": 1
+      }
     }
   },
   "2000064": {
@@ -49450,6 +50017,15 @@
     "bestSkill": {
       "slot": "S1",
       "factor": 1500
+    },
+    "rotation": {
+      "factorPerTurn": 1500,
+      "cycle": 1,
+      "uses": {
+        "S1": 1,
+        "S2": 0,
+        "S3": 0
+      }
     }
   },
   "2000065": {
@@ -50230,6 +50806,15 @@
     "bestSkill": {
       "slot": "S3",
       "factor": 3864
+    },
+    "rotation": {
+      "factorPerTurn": 1425,
+      "cycle": 5,
+      "uses": {
+        "S1": 4,
+        "S2": 0,
+        "S3": 1
+      }
     }
   },
   "2000066": {
@@ -51104,6 +51689,15 @@
     "bestSkill": {
       "slot": "S1",
       "factor": 1500
+    },
+    "rotation": {
+      "factorPerTurn": 1500,
+      "cycle": 1,
+      "uses": {
+        "S1": 1,
+        "S2": 0,
+        "S3": 0
+      }
     }
   },
   "2000067": {
@@ -51799,6 +52393,15 @@
     "bestSkill": {
       "slot": "S3",
       "factor": 2956
+    },
+    "rotation": {
+      "factorPerTurn": 1939,
+      "cycle": 4,
+      "uses": {
+        "S1": 3,
+        "S2": 0,
+        "S3": 1
+      }
     }
   },
   "2000068": {
@@ -52488,6 +53091,15 @@
     "bestSkill": {
       "slot": "S1",
       "factor": 1600
+    },
+    "rotation": {
+      "factorPerTurn": 1600,
+      "cycle": 1,
+      "uses": {
+        "S1": 1,
+        "S2": 0,
+        "S3": 0
+      }
     }
   },
   "2000069": {
@@ -53177,6 +53789,15 @@
     "bestSkill": {
       "slot": "S3",
       "factor": 1540
+    },
+    "rotation": {
+      "factorPerTurn": 1518,
+      "cycle": 4,
+      "uses": {
+        "S1": 3,
+        "S2": 0,
+        "S3": 1
+      }
     }
   },
   "2000070": {
@@ -54052,6 +54673,15 @@
       "slot": "S2",
       "burst": 3,
       "factor": 1582
+    },
+    "rotation": {
+      "factorPerTurn": 1398,
+      "cycle": 4,
+      "uses": {
+        "S1": 3,
+        "S2": 0,
+        "S3": 1
+      }
     }
   },
   "2000071": {
@@ -54927,6 +55557,15 @@
     "bestSkill": {
       "slot": "S3",
       "factor": 2305
+    },
+    "rotation": {
+      "factorPerTurn": 1851,
+      "cycle": 4,
+      "uses": {
+        "S1": 2,
+        "S2": 1,
+        "S3": 1
+      }
     }
   },
   "2000072": {
@@ -55808,6 +56447,15 @@
       "slot": "S1",
       "burst": 3,
       "factor": 1874
+    },
+    "rotation": {
+      "factorPerTurn": 1450,
+      "cycle": 1,
+      "uses": {
+        "S1": 1,
+        "S2": 0,
+        "S3": 0
+      }
     }
   },
   "2000073": {
@@ -56682,6 +57330,15 @@
     "bestSkill": {
       "slot": "S3",
       "factor": 1770
+    },
+    "rotation": {
+      "factorPerTurn": 1568,
+      "cycle": 4,
+      "uses": {
+        "S1": 3,
+        "S2": 0,
+        "S3": 1
+      }
     }
   },
   "2000074": {
@@ -57371,6 +58028,15 @@
     "bestSkill": {
       "slot": "S1",
       "factor": 1180
+    },
+    "rotation": {
+      "factorPerTurn": 1180,
+      "cycle": 1,
+      "uses": {
+        "S1": 1,
+        "S2": 0,
+        "S3": 0
+      }
     }
   },
   "2000075": {
@@ -58246,6 +58912,15 @@
       "slot": "S1",
       "burst": 3,
       "factor": 1550
+    },
+    "rotation": {
+      "factorPerTurn": 1238,
+      "cycle": 4,
+      "uses": {
+        "S1": 3,
+        "S2": 0,
+        "S3": 1
+      }
     }
   },
   "2000076": {
@@ -58936,6 +59611,16 @@
       "slot": "S3",
       "factor": 2800,
       "unresolvedHits": true
+    },
+    "rotation": {
+      "factorPerTurn": 2800,
+      "cycle": 1,
+      "uses": {
+        "S1": 0,
+        "S2": 0,
+        "S3": 1
+      },
+      "approx": true
     }
   },
   "2000077": {
@@ -59626,6 +60311,15 @@
     "bestSkill": {
       "slot": "S3",
       "factor": 3546
+    },
+    "rotation": {
+      "factorPerTurn": 1862,
+      "cycle": 4,
+      "uses": {
+        "S1": 3,
+        "S2": 0,
+        "S3": 1
+      }
     }
   },
   "2000078": {
@@ -60500,6 +61194,15 @@
     "bestSkill": {
       "slot": "S3",
       "factor": 2100
+    },
+    "rotation": {
+      "factorPerTurn": 1810,
+      "cycle": 10,
+      "uses": {
+        "S1": 5,
+        "S2": 3,
+        "S3": 2
+      }
     }
   },
   "2000079": {
@@ -61189,6 +61892,15 @@
     "bestSkill": {
       "slot": "S1",
       "factor": 1550
+    },
+    "rotation": {
+      "factorPerTurn": 1550,
+      "cycle": 1,
+      "uses": {
+        "S1": 1,
+        "S2": 0,
+        "S3": 0
+      }
     }
   },
   "2000080": {
@@ -61879,6 +62591,15 @@
     "bestSkill": {
       "slot": "S2",
       "factor": 2004
+    },
+    "rotation": {
+      "factorPerTurn": 1735,
+      "cycle": 4,
+      "uses": {
+        "S1": 1,
+        "S2": 2,
+        "S3": 1
+      }
     }
   },
   "2000081": {
@@ -62753,6 +63474,15 @@
     "bestSkill": {
       "slot": "S2",
       "factor": 1950
+    },
+    "rotation": {
+      "factorPerTurn": 1717,
+      "cycle": 3,
+      "uses": {
+        "S1": 2,
+        "S2": 1,
+        "S3": 0
+      }
     }
   },
   "2000082": {
@@ -63443,6 +64173,15 @@
       "slot": "S1",
       "burst": 3,
       "factor": 2055
+    },
+    "rotation": {
+      "factorPerTurn": 1757,
+      "cycle": 9,
+      "uses": {
+        "S1": 4,
+        "S2": 3,
+        "S3": 2
+      }
     }
   },
   "2000083": {
@@ -64133,6 +64872,15 @@
       "slot": "S1",
       "burst": 3,
       "factor": 2090
+    },
+    "rotation": {
+      "factorPerTurn": 1600,
+      "cycle": 1,
+      "uses": {
+        "S1": 1,
+        "S2": 0,
+        "S3": 0
+      }
     }
   },
   "2000084": {
@@ -64823,6 +65571,15 @@
       "slot": "S1",
       "burst": 3,
       "factor": 2368
+    },
+    "rotation": {
+      "factorPerTurn": 1780,
+      "cycle": 1,
+      "uses": {
+        "S1": 1,
+        "S2": 0,
+        "S3": 0
+      }
     }
   },
   "2000085": {
@@ -65697,6 +66454,15 @@
     "bestSkill": {
       "slot": "S2",
       "factor": 3237
+    },
+    "rotation": {
+      "factorPerTurn": 2259,
+      "cycle": 9,
+      "uses": {
+        "S1": 4,
+        "S2": 3,
+        "S3": 2
+      }
     }
   },
   "2000086": {
@@ -66387,6 +67153,15 @@
     "bestSkill": {
       "slot": "S3",
       "factor": 2490
+    },
+    "rotation": {
+      "factorPerTurn": 1843,
+      "cycle": 4,
+      "uses": {
+        "S1": 2,
+        "S2": 1,
+        "S3": 1
+      }
     }
   },
   "2000087": {
@@ -67262,6 +68037,15 @@
       "slot": "S2",
       "burst": 3,
       "factor": 2965
+    },
+    "rotation": {
+      "factorPerTurn": 2367,
+      "cycle": 3,
+      "uses": {
+        "S1": 1,
+        "S2": 1,
+        "S3": 1
+      }
     }
   },
   "2000088": {
@@ -67953,6 +68737,16 @@
       "slot": "S3",
       "factor": 2100,
       "unresolvedHits": true
+    },
+    "rotation": {
+      "factorPerTurn": 1638,
+      "cycle": 4,
+      "uses": {
+        "S1": 2,
+        "S2": 1,
+        "S3": 1
+      },
+      "approx": true
     }
   },
   "2000089": {
@@ -68828,6 +69622,15 @@
     "bestSkill": {
       "slot": "S2",
       "factor": 1950
+    },
+    "rotation": {
+      "factorPerTurn": 1717,
+      "cycle": 9,
+      "uses": {
+        "S1": 4,
+        "S2": 3,
+        "S3": 2
+      }
     }
   },
   "2000090": {
@@ -69702,6 +70505,15 @@
     "bestSkill": {
       "slot": "S1",
       "factor": 2220
+    },
+    "rotation": {
+      "factorPerTurn": 2220,
+      "cycle": 2,
+      "uses": {
+        "S1": 1,
+        "S2": 1,
+        "S3": 0
+      }
     }
   },
   "2000091": {
@@ -70399,6 +71211,15 @@
     "bestSkill": {
       "slot": "S3",
       "factor": 1480
+    },
+    "rotation": {
+      "factorPerTurn": 1458,
+      "cycle": 4,
+      "uses": {
+        "S1": 3,
+        "S2": 0,
+        "S3": 1
+      }
     }
   },
   "2000092": {
@@ -71255,6 +72076,15 @@
     "bestSkill": {
       "slot": "S1",
       "factor": 1600
+    },
+    "rotation": {
+      "factorPerTurn": 1600,
+      "cycle": 1,
+      "uses": {
+        "S1": 1,
+        "S2": 0,
+        "S3": 0
+      }
     }
   },
   "2000093": {
@@ -72136,6 +72966,15 @@
       "slot": "S2",
       "burst": 3,
       "factor": 3046
+    },
+    "rotation": {
+      "factorPerTurn": 1960,
+      "cycle": 3,
+      "uses": {
+        "S1": 2,
+        "S2": 1,
+        "S3": 0
+      }
     }
   },
   "2000094": {
@@ -72825,6 +73664,15 @@
     "bestSkill": {
       "slot": "S1",
       "factor": 1820
+    },
+    "rotation": {
+      "factorPerTurn": 1820,
+      "cycle": 1,
+      "uses": {
+        "S1": 1,
+        "S2": 0,
+        "S3": 0
+      }
     }
   },
   "2000095": {
@@ -73570,6 +74418,15 @@
       "slot": "S1",
       "burst": 3,
       "factor": 2255
+    },
+    "rotation": {
+      "factorPerTurn": 1873,
+      "cycle": 4,
+      "uses": {
+        "S1": 3,
+        "S2": 0,
+        "S3": 1
+      }
     }
   },
   "2000096": {
@@ -74427,6 +75284,15 @@
       "slot": "S1",
       "burst": 3,
       "factor": 1979
+    },
+    "rotation": {
+      "factorPerTurn": 1610,
+      "cycle": 4,
+      "uses": {
+        "S1": 3,
+        "S2": 0,
+        "S3": 1
+      }
     }
   },
   "2000097": {
@@ -75271,6 +76137,15 @@
     "bestSkill": {
       "slot": "S3",
       "factor": 3000
+    },
+    "rotation": {
+      "factorPerTurn": 2250,
+      "cycle": 4,
+      "uses": {
+        "S1": 0,
+        "S2": 3,
+        "S3": 1
+      }
     }
   },
   "2000098": {
@@ -75960,6 +76835,15 @@
     "bestSkill": {
       "slot": "S1",
       "factor": 1600
+    },
+    "rotation": {
+      "factorPerTurn": 1600,
+      "cycle": 1,
+      "uses": {
+        "S1": 1,
+        "S2": 0,
+        "S3": 0
+      }
     }
   },
   "2000099": {
@@ -76835,6 +77719,15 @@
     "bestSkill": {
       "slot": "S3",
       "factor": 2830
+    },
+    "rotation": {
+      "factorPerTurn": 2188,
+      "cycle": 4,
+      "uses": {
+        "S1": 2,
+        "S2": 1,
+        "S3": 1
+      }
     }
   },
   "2000100": {
@@ -77506,6 +78399,15 @@
     "bestSkill": {
       "slot": "S1",
       "factor": 1500
+    },
+    "rotation": {
+      "factorPerTurn": 1500,
+      "cycle": 1,
+      "uses": {
+        "S1": 1,
+        "S2": 0,
+        "S3": 0
+      }
     }
   },
   "2000101": {
@@ -78380,6 +79282,15 @@
     "bestSkill": {
       "slot": "S2",
       "factor": 1353
+    },
+    "rotation": {
+      "factorPerTurn": 1243,
+      "cycle": 9,
+      "uses": {
+        "S1": 4,
+        "S2": 3,
+        "S3": 2
+      }
     }
   },
   "2000102": {
@@ -79071,6 +79982,15 @@
       "slot": "S1",
       "burst": 3,
       "factor": 1450
+    },
+    "rotation": {
+      "factorPerTurn": 1100,
+      "cycle": 4,
+      "uses": {
+        "S1": 3,
+        "S2": 0,
+        "S3": 1
+      }
     }
   },
   "2000103": {
@@ -79760,6 +80680,15 @@
     "bestSkill": {
       "slot": "S1",
       "factor": 1885
+    },
+    "rotation": {
+      "factorPerTurn": 1885,
+      "cycle": 1,
+      "uses": {
+        "S1": 1,
+        "S2": 0,
+        "S3": 0
+      }
     }
   },
   "2000105": {
@@ -80634,6 +81563,15 @@
     "bestSkill": {
       "slot": "S3",
       "factor": 2250
+    },
+    "rotation": {
+      "factorPerTurn": 1713,
+      "cycle": 4,
+      "uses": {
+        "S1": 2,
+        "S2": 1,
+        "S3": 1
+      }
     }
   },
   "2000106": {
@@ -81325,6 +82263,15 @@
       "slot": "S1",
       "burst": 3,
       "factor": 1750
+    },
+    "rotation": {
+      "factorPerTurn": 1400,
+      "cycle": 1,
+      "uses": {
+        "S1": 1,
+        "S2": 0,
+        "S3": 0
+      }
     }
   },
   "2000107": {
@@ -81959,6 +82906,15 @@
     "bestSkill": {
       "slot": "S3",
       "factor": 2460
+    },
+    "rotation": {
+      "factorPerTurn": 1878,
+      "cycle": 4,
+      "uses": {
+        "S1": 2,
+        "S2": 1,
+        "S3": 1
+      }
     }
   },
   "2000108": {
@@ -82648,6 +83604,15 @@
     "bestSkill": {
       "slot": "S1",
       "factor": 1600
+    },
+    "rotation": {
+      "factorPerTurn": 1600,
+      "cycle": 1,
+      "uses": {
+        "S1": 1,
+        "S2": 0,
+        "S3": 0
+      }
     }
   },
   "2000109": {
@@ -83523,6 +84488,15 @@
     "bestSkill": {
       "slot": "S2",
       "factor": 2800
+    },
+    "rotation": {
+      "factorPerTurn": 2011,
+      "cycle": 9,
+      "uses": {
+        "S1": 4,
+        "S2": 3,
+        "S3": 2
+      }
     }
   },
   "2000110": {
@@ -84342,6 +85316,15 @@
     "bestSkill": {
       "slot": "S1",
       "factor": 1700
+    },
+    "rotation": {
+      "factorPerTurn": 1700,
+      "cycle": 1,
+      "uses": {
+        "S1": 1,
+        "S2": 0,
+        "S3": 0
+      }
     }
   },
   "2000111": {
@@ -85161,6 +86144,15 @@
     "bestSkill": {
       "slot": "S3",
       "factor": 1894
+    },
+    "rotation": {
+      "factorPerTurn": 1894,
+      "cycle": 1,
+      "uses": {
+        "S1": 0,
+        "S2": 0,
+        "S3": 1
+      }
     }
   },
   "2000112": {
@@ -85852,6 +86844,15 @@
       "slot": "S1",
       "burst": 3,
       "factor": 2190
+    },
+    "rotation": {
+      "factorPerTurn": 1808,
+      "cycle": 4,
+      "uses": {
+        "S1": 3,
+        "S2": 0,
+        "S3": 1
+      }
     }
   },
   "2000113": {
@@ -86541,6 +87542,15 @@
     "bestSkill": {
       "slot": "S1",
       "factor": 860
+    },
+    "rotation": {
+      "factorPerTurn": 860,
+      "cycle": 1,
+      "uses": {
+        "S1": 1,
+        "S2": 0,
+        "S3": 0
+      }
     }
   },
   "2000114": {
@@ -87416,6 +88426,15 @@
     "bestSkill": {
       "slot": "S3",
       "factor": 3100
+    },
+    "rotation": {
+      "factorPerTurn": 2013,
+      "cycle": 4,
+      "uses": {
+        "S1": 3,
+        "S2": 0,
+        "S3": 1
+      }
     }
   },
   "2000116": {
@@ -88106,6 +89125,15 @@
     "bestSkill": {
       "slot": "S3",
       "factor": 2500
+    },
+    "rotation": {
+      "factorPerTurn": 1804,
+      "cycle": 5,
+      "uses": {
+        "S1": 4,
+        "S2": 0,
+        "S3": 1
+      }
     }
   },
   "2000117": {
@@ -88980,6 +90008,15 @@
     "bestSkill": {
       "slot": "S3",
       "factor": 2560
+    },
+    "rotation": {
+      "factorPerTurn": 2015,
+      "cycle": 4,
+      "uses": {
+        "S1": 2,
+        "S2": 1,
+        "S3": 1
+      }
     }
   },
   "2000118": {
@@ -89670,6 +90707,15 @@
       "slot": "S1",
       "burst": 3,
       "factor": 2330
+    },
+    "rotation": {
+      "factorPerTurn": 1813,
+      "cycle": 4,
+      "uses": {
+        "S1": 3,
+        "S2": 0,
+        "S3": 1
+      }
     }
   },
   "2000119": {
@@ -90359,6 +91405,15 @@
     "bestSkill": {
       "slot": "S3",
       "factor": 3600
+    },
+    "rotation": {
+      "factorPerTurn": 2350,
+      "cycle": 6,
+      "uses": {
+        "S1": 5,
+        "S2": 0,
+        "S3": 1
+      }
     }
   },
   "2000121": {
@@ -91203,6 +92258,15 @@
     "bestSkill": {
       "slot": "S3",
       "factor": 3000
+    },
+    "rotation": {
+      "factorPerTurn": 2252,
+      "cycle": 4,
+      "uses": {
+        "S1": 0,
+        "S2": 3,
+        "S3": 1
+      }
     }
   },
   "2000122": {
@@ -91892,6 +92956,15 @@
     "bestSkill": {
       "slot": "S3",
       "factor": 2800
+    },
+    "rotation": {
+      "factorPerTurn": 1888,
+      "cycle": 4,
+      "uses": {
+        "S1": 2,
+        "S2": 1,
+        "S3": 1
+      }
     }
   },
   "2000124": {
@@ -92748,6 +93821,15 @@
     "bestSkill": {
       "slot": "S3",
       "factor": 2200
+    },
+    "rotation": {
+      "factorPerTurn": 1825,
+      "cycle": 4,
+      "uses": {
+        "S1": 3,
+        "S2": 0,
+        "S3": 1
+      }
     }
   },
   "2000129": {
@@ -93629,6 +94711,15 @@
       "slot": "S1",
       "burst": 3,
       "factor": 1950
+    },
+    "rotation": {
+      "factorPerTurn": 1550,
+      "cycle": 1,
+      "uses": {
+        "S1": 1,
+        "S2": 0,
+        "S3": 0
+      }
     }
   },
   "2700003": {
@@ -94582,6 +95673,15 @@
     "bestSkill": {
       "slot": "S3",
       "factor": 3100
+    },
+    "rotation": {
+      "factorPerTurn": 2071,
+      "cycle": 4,
+      "uses": {
+        "S1": 2,
+        "S2": 1,
+        "S3": 1
+      }
     }
   },
   "2700005": {
@@ -95345,6 +96445,15 @@
       "slot": "S2",
       "burst": 3,
       "factor": 2187
+    },
+    "rotation": {
+      "factorPerTurn": 1590,
+      "cycle": 4,
+      "uses": {
+        "S1": 2,
+        "S2": 1,
+        "S3": 1
+      }
     }
   },
   "2700019": {
@@ -96221,6 +97330,16 @@
       "burst": 3,
       "factor": 2038,
       "unresolvedHits": true
+    },
+    "rotation": {
+      "factorPerTurn": 1613,
+      "cycle": 4,
+      "uses": {
+        "S1": 2,
+        "S2": 1,
+        "S3": 1
+      },
+      "approx": true
     }
   },
   "2700035": {
@@ -97040,6 +98159,15 @@
     "bestSkill": {
       "slot": "S1",
       "factor": 1650
+    },
+    "rotation": {
+      "factorPerTurn": 1650,
+      "cycle": 1,
+      "uses": {
+        "S1": 1,
+        "S2": 0,
+        "S3": 0
+      }
     }
   },
   "2700037": {
@@ -97827,6 +98955,15 @@
     "bestSkill": {
       "slot": "S3",
       "factor": 2420
+    },
+    "rotation": {
+      "factorPerTurn": 1524,
+      "cycle": 5,
+      "uses": {
+        "S1": 4,
+        "S2": 0,
+        "S3": 1
+      }
     }
   },
   "2700043": {
@@ -98614,6 +99751,15 @@
       "slot": "S2",
       "burst": 3,
       "factor": 2730
+    },
+    "rotation": {
+      "factorPerTurn": 1433,
+      "cycle": 4,
+      "uses": {
+        "S1": 2,
+        "S2": 1,
+        "S3": 1
+      }
     }
   },
   "2700056": {
@@ -99586,6 +100732,15 @@
       "slot": "S1",
       "burst": 3,
       "factor": 1985
+    },
+    "rotation": {
+      "factorPerTurn": 1505,
+      "cycle": 4,
+      "uses": {
+        "S1": 3,
+        "S2": 0,
+        "S3": 1
+      }
     }
   },
   "2700070": {
@@ -100559,6 +101714,16 @@
       "slot": "S3",
       "factor": 2800,
       "unresolvedHits": true
+    },
+    "rotation": {
+      "factorPerTurn": 1855,
+      "cycle": 4,
+      "uses": {
+        "S1": 3,
+        "S2": 0,
+        "S3": 1
+      },
+      "approx": true
     }
   }
 }

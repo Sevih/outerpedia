@@ -64,6 +64,12 @@ const characters = charactersData as Record<
     star: number | null;
     ingredients: unknown;
     bestSkill?: { slot: string; burst?: number; factor: number; unresolvedHits?: true };
+    rotation?: {
+      factorPerTurn: number;
+      cycle: number;
+      uses: Record<'S1' | 'S2' | 'S3', number>;
+      approx?: true;
+    };
   }
 >;
 const equipment = equipmentData as Record<
@@ -300,6 +306,20 @@ describe('solver — bestSkill (colonne Damage de gear-solver)', () => {
   });
 });
 
+describe('solver — rotation (colonnes par tour de gear-solver)', () => {
+  it('à côté de chaque bestSkill : Σ uses = cycle, factorPerTurn entier ≤ bestSkill.factor', () => {
+    // Chaque tour joue un skill de base ≤ au meilleur hit (bursts compris) : une
+    // moyenne au-dessus trahirait une unité ou un facteur faux.
+    for (const [id, c] of Object.entries(characters)) {
+      expect(!!c.rotation, id).toBe(!!c.bestSkill);
+      const r = c.rotation!;
+      expect(r.uses.S1 + r.uses.S2 + r.uses.S3, id).toBe(r.cycle);
+      expect(Number.isInteger(r.factorPerTurn) && r.factorPerTurn > 0, id).toBe(true);
+      expect(r.factorPerTurn, id).toBeLessThanOrEqual(c.bestSkill!.factor);
+    }
+  });
+});
+
 describe('singleValue (constantes lues des tables)', () => {
   it('rend la valeur commune à toutes les lignes', () => {
     expect(singleValue([0.4, 0.4, 0.4], 'x')).toBe(0.4);
@@ -367,6 +387,11 @@ const CONTRACT_SHAPE: Record<string, Shape> = {
         dmgSec: '*',
         noCrit: '*',
         bestSkill: { obj: { slot: '*', factor: '*' }, opt: { burst: '*', unresolvedHits: '*' } },
+        // Ajout C28 (règle (a), `schema` inchangé).
+        rotation: {
+          obj: { factorPerTurn: '*', cycle: '*', uses: { obj: { S1: '*', S2: '*', S3: '*' } } },
+          opt: { approx: '*' },
+        },
       },
     },
   },
