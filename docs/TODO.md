@@ -146,8 +146,9 @@ les preuves et les décisions vivent dans le tri consolidé de sevih-tool
       Shrine, un petit lien qui ouvre (fenêtre ou panneau) le guide du boss
       du moment. Point dur : le cache — les DS tournent chaque jour, le lien
       doit lire le boss courant à la demande (ou avec une revalidation
-      quotidienne alignée sur le reset), jamais figé au build. À rédiger en
-      lot une fois G36 rendu.
+      quotidienne alignée sur le reset), jamais figé au build. → lot B68
+      (le serveur envoie guide par saison et table des boss de Singularity,
+      le client choisit avec son horloge ; nouvel onglet, guild raid exclu).
 
 ## 🧪 À jouer au prochain patch
 
