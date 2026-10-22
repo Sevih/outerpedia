@@ -7,6 +7,32 @@
 
 ## 2026-10-22
 
+- **Relecture G46 (Fable 5.1) — onglet Presets : ordre du jeu, filtre et tri
+  par classe, Optimize par héros, menu des héros au-dessus des cartes,
+  validé.** `4d87778` de gear-solver (19 fichiers, message attendu, ni
+  `package.json` ni lock). Lu : le core lit `PresetOrderList` (type
+  `RawPresetOrder` tolérant), `Preset` gagne `presetType` et `sortOrder`,
+  `comparePresets` reproduit `CEquipPresetData.SortPreset` du client (type,
+  favoris, rang décroissant, numéro) et `presetRows` trie avec ;
+  `backdrop-blur-sm` retiré des cartes (contexte d'empilement qui confinait
+  le `z-30` du menu), argumenté par lecture du DOM ; `presetClasses` prend
+  les restrictions de classe des pièces (`GearPiece.classLimit`), deux
+  classes gardées, repli référence → porteurs → associés ;
+  `arrangePresets` filtre et trie ; `CLASSES` de `homeStats.ts` exportée
+  plutôt que `CLASS_CHOICES` de Builds (chargé à la demande) ;
+  `onOptimize` câblé comme Builds. Contrôles sur HEAD : typecheck vert,
+  lint 14 avertissements inchangés, tests 169 + 196 + 668 verts. Rejoué par
+  `tsx` : six presets mélangés rendus dans l'ordre favoris / rang / numéro,
+  Master League en dernier ; classes d'un preset à deux pièces restreintes,
+  replis et inconnue ; filtre Mage et tri par classe avec les cartes vides
+  et inconnues en fin. À contrôler par Sevih sur le fixe : l'ordre des
+  cartes est celui de l'éditeur du jeu (sinon regarder la forme réelle de
+  `PresetOrderList` dans `user_item.json`, déduite du client faute de
+  capture sur le portable), le menu Reference / Associated par-dessus la
+  carte suivante, les chips et « Sort: Class », « Optimize → ». Piste au
+  TODO : ouvrir le Builder avec le contexte du preset. Suite : release
+  1.15.0 (G44 + G45 + G46) sur le mot de Sevih après le banc d'Electron.
+
 - **Relecture G45 (Fable 5.1) — Electron 42.4.1 → 44.9.3, installeur non
   publié pour le banc du fixe, validé.** `7dba658` de gear-solver (4
   fichiers, message attendu) : la devDependency et `build.electronVersion`

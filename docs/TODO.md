@@ -148,7 +148,10 @@ les preuves et les décisions vivent dans le tri consolidé de sevih-tool
 - [ ] **Presets du jeu — restes** : le pool de gemmes d'EE des presets ignore
       les réservations de la Worklist (relevé par G41) ; priorités par héros
       en session (le Builder repart propre), l'onglet Presets replie sur la
-      build sauvegardée — à passer en localStorage si Sevih le demande.
+      build sauvegardée — à passer en localStorage si Sevih le demande ;
+      « Optimize → » (G46) ouvre le Builder sur le héros sans contexte de
+      preset : piste = exclure les pièces des autres presets, figer celles du
+      preset.
 - [ ] **Suivi en direct — restes (vus par G44)** : la Worklist garde
       `toName` / `toMain` figés à la mise en file (la main d'un talisman ne
       suit pas l'enchant) ; une pièce en file ou dans un preset mangée en jeu
