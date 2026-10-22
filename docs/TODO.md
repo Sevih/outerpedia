@@ -141,15 +141,9 @@ les preuves et les décisions vivent dans le tri consolidé de sevih-tool
 
 ## 🔧 gear-solver (suites de G37, 22/10)
 
-- [ ] **La release depuis le portable n'embarque pas la DLL du plugin** :
-      `apps/desktop/scripts/fetch-binaries.mjs` appelle `dotnet.exe` en dur et
-      ne tourne pas sous Linux ; la 1.12.0 a embarqué la DLL du 05/09 (0.1.0).
-      Avant la prochaine release : chemin Linux (`dotnet`) dans le script, ou
-      vérification de la version de la DLL de `resources/capture-steam/` par
-      `release.mjs` ; la 0.2.0 de G37 doit partir avec la release qui l'active.
-- [ ] **Worklist** (retours de Sevih du 22/10) : une entrée par perso, gemmes
-      à sertir listées, message d'échec par cause, toast quand l'onglet change
-      seul → lot G38.
+- [ ] **La release depuis le portable n'embarque pas la DLL du plugin**
+      (`fetch-binaries.mjs` = `dotnet.exe`, jamais appelé par la release ; la
+      1.12.0 a embarqué la DLL du 05/09) → lot G39, avant la release 1.13.0.
 
 ## 🧪 À jouer au prochain patch
 

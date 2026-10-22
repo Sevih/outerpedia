@@ -7,6 +7,33 @@
 
 ## 2026-10-22
 
+- **Relecture G38 (Fable 5.1) — Worklist : une entrée par perso, gemmes à
+  sertir, échec d'Apply par cause, toast, validé.** `b7b037c` de gear-solver
+  (16 fichiers, message attendu, todo ajusté). Lu : `upsertWorklistEntry`
+  (remplacement par `heroUid`, nouvelle entrée en tête) et la lecture d'un
+  stockage d'avant qui ne garde que la première entrée d'un perso ;
+  `WorklistChange` devenu union `pièce | gemme` (`kind: "gem"`, `gemIndex`,
+  `toGem`/`fromGem` instantanés de `game.gems`), `isChangeApplied` (pièce sur
+  le perso ET gemme dans son emplacement) partagé par `reconcileWorklist`,
+  `remainingChangeCount` et `changeState` ; `worklistChangesFor` dans
+  `lib/worklist/changes.ts` compare `gemAllocation` à `gemSlots` de la pièce
+  du build en ignorant les 0 ; `superseded` retiré du plan et de l'écran ;
+  `equipAssignments` rend `EquipOutcome`, textes partagés dans
+  `EQUIP_FAILURE` ; `design/Toast.tsx` = petit store externe testable + pile
+  en bas à droite, `appliedNotice` groupe par import, l'import qui suit un
+  Apply de la Worklist est muet (`quietReconcile`). Contrôles sur `b7b037c` :
+  `npm run typecheck` 0, `npm test` core 166 / desktop 175 / renderer 608,
+  `npm run lint` 14 avertissements 0 erreur (un de moins : une ligne retirée
+  par le lot). Pas de rejeu visuel possible ici (Electron) : les 25 tests de
+  `worklist.test.ts` couvrent remplacement, lignes gemme, applied/pas applied,
+  badge, claims, lecture d'un ancien stockage, toast à timers factices.
+  Repéré par le lot, pris dans le lot G39 : la puce `[Unreleased]` de
+  `docs/release-notes.md` pour G38 manque. À voir par Sevih sur le fixe (après
+  la release) : solve d'un perso déjà en Worklist → « Replace in worklist »,
+  une seule entrée ; un build qui ne change qu'une gemme → une ligne gemme ;
+  déplacer la pièce en jeu → toast « Worklist: 1 change applied — … ». Suite :
+  G39 (release depuis le portable avec la DLL 0.2.0 et la note de G38), puis
+  release 1.13.0.
 - **Relecture B68 et G37 (Fable 5.1) — lien vers le guide du boss en cours
   dans le progress tracker ; le snapshot de gear-solver suit les déplacements
   faits en jeu, validés.** B68 `ab1f1580` (16 fichiers, message attendu, le
