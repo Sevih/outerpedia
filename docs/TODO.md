@@ -41,13 +41,6 @@ les preuves et les décisions vivent dans le tri consolidé de sevih-tool
       sorti du S1 d'Ame faute de clip qui le joue — possible variante sous
       B, à prouver dans le client avant de la remettre.
 
-## 🧹 Restes de la relecture du 20/10 (A74, F30, F31, G34)
-
-- [ ] **Fiche perso › Skills, F31 à l'écran par Sevih** (restes de code
-      faits par A77) : Tamamo-no-Mae › Skills (badges « via burst 3 » sur
-      Extra Turn et Cooldown Reduction, cartes Bursts et Transcendance sans
-      bouton).
-
 ## 🧹 Suites de la rédaction du 18/10 (lots A62 à C26, G8 à G30, F28, OB3, TW2)
 
 - [ ] **Suites de G8** : fiche du wiki en vitesse en taux avec régénération

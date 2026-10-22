@@ -5,6 +5,16 @@
 > détail vit dans git. Le `CHANGELOG.md` racine est GELÉ depuis le 03/08 —
 > ce fichier et le log git SONT le journal du projet.
 
+## 2026-10-22
+
+- **Clôtures du 22/10.** Tamamo-no-Mae › Skills vu par Sevih (fin des restes
+  de F31 et A77 : la section « Restes de la relecture du 20/10 » du TODO
+  disparaît). Décisions : suites de G8 → lot B67 ; DPS de rotation pondéré
+  par les cooldowns → lots C28 (outerpedia, champ additif `rotation`) puis
+  G36 (gear-solver) ; DoT dans le meilleur hit, perf du solver, Advices,
+  Equip/Unequip : laissés tels quels au TODO de gear-solver ; reroll
+  Transistone après le calculateur ; F12 au prochain perso limité.
+
 ## 2026-10-21
 
 - **Relecture A78 (Fable 5.1) — miniature des VideoObject = image de
