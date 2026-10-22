@@ -1406,6 +1406,7 @@ const fr: Record<TranslationKey, string> = {
   'progress.task.memorial-match': 'Memorial Match',
   'progress.task.ad-stamina': 'Ad Stamina',
   'progress.task.dimensional-singularity': 'Dimensional Singularity (mer.–dim.)',
+  'progress.task.guide_link': 'Guide : {name}',
   'progress.task.shop-daily-free-gift': 'Cadeau gratuit quotidien',
   'progress.task.shop-weekly-free-gift': 'Cadeau gratuit hebdomadaire',
   'progress.task.shop-monthly-free-gift': 'Cadeau gratuit mensuel',

@@ -1324,6 +1324,7 @@ const zh: Record<TranslationKey, string> = {
   'progress.task.memorial-match': '纪念赛',
   'progress.task.ad-stamina': '广告体力',
   'progress.task.dimensional-singularity': '次元奇点 (周三~周日)',
+  'progress.task.guide_link': '攻略: {name}',
   'progress.task.shop-daily-free-gift': '每日免费礼物',
   'progress.task.shop-weekly-free-gift': '每周免费礼物',
   'progress.task.shop-monthly-free-gift': '每月免费礼物',

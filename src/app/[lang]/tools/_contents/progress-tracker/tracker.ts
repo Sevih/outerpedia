@@ -12,7 +12,8 @@
  */
 
 import type { StoreSpec } from '@/lib/client-storage';
-import { isSingularityBattleDay } from '@/lib/data/singularity';
+import { isSingularityBattleDay, singularityStateAt } from '@/lib/data/singularity';
+import type { TrackerGuideLink } from './contracts';
 import {
   TASK_DEFINITIONS,
   TASK_TYPES,
@@ -148,13 +149,42 @@ export function isDimensionalSingularityActive(now: number): boolean {
 
 /**
  * Fenêtres jouables des modes saisonniers, telles que servies par la page
- * (`playableWindowsFrom`). Clés = ids de tâche saisonnière.
+ * (`playableWindowsFrom`). Clés = ids de tâche saisonnière. `guide` = le guide
+ * du boss de la saison (`guide-links.ts`), absent si aucun ne le traite.
  */
-export type SeasonWindows = Partial<Record<string, { start: string; end: string }[]>>;
+export type SeasonWindows = Partial<
+  Record<string, { start: string; end: string; guide?: TrackerGuideLink }[]>
+>;
+
+/** Fenêtre ouverte à l'instant `now` (même règle partout, `end` exclu). */
+function liveWindow(windows: SeasonWindows, id: string, now: number) {
+  return (windows[id] ?? []).find((w) => Date.parse(w.start) <= now && now < Date.parse(w.end));
+}
 
 /** Ce mode saisonnier est-il ouvert à l'instant `now` ? */
 export function isSeasonLive(windows: SeasonWindows, id: string, now: number): boolean {
-  return (windows[id] ?? []).some((w) => Date.parse(w.start) <= now && now < Date.parse(w.end));
+  return liveWindow(windows, id, now) !== undefined;
+}
+
+/**
+ * Lien vers le guide du boss EN COURS pour une tâche, choisi par l'horloge du
+ * CLIENT dans des données stables servies par la page : World Boss et Joint
+ * Challenge → le guide de la fenêtre ouverte ; Singularity → le guide du boss
+ * du jour (aucun un jour de récompense). Toute autre tâche : `undefined`.
+ */
+export function taskGuideLink(
+  taskId: string,
+  now: number,
+  windows: SeasonWindows,
+  singularityGuides: Record<string, TrackerGuideLink>,
+): TrackerGuideLink | undefined {
+  if (taskId === 'world-boss' || taskId === 'joint-challenge')
+    return liveWindow(windows, taskId, now)?.guide;
+  if (taskId === 'dimensional-singularity') {
+    const boss = singularityStateAt(new Date(now)).today?.monsters[0];
+    return boss ? singularityGuides[boss] : undefined;
+  }
+  return undefined;
 }
 
 /**

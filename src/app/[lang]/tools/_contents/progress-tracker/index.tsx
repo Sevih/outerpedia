@@ -8,6 +8,8 @@ import type { TrackerAssets, TrackerLabels } from './contracts';
 import { TASK_DEFINITIONS, TASK_TYPES } from './tasks';
 import type { SeasonWindows } from './tracker';
 import { playableWindowsFrom } from '@/lib/data/content-schedule';
+import { listGuidesByCategory } from '@/lib/data/guides';
+import { seasonGuideLinks, singularityGuideLinks } from './guide-links';
 import { serverNow } from '@/lib/time';
 
 /**
@@ -129,6 +131,7 @@ export default async function ProgressTracker({ lang }: { lang: Lang }) {
     autoSeasonalDesc: t('progress.autoSeasonalDesc'),
     autoSeasonalLive: t('progress.autoSeasonalLive'),
     autoSeasonalOff: t('progress.autoSeasonalOff'),
+    guideLink: t('progress.task.guide_link'),
   };
 
   const assets: TrackerAssets = {
@@ -146,11 +149,34 @@ export default async function ProgressTracker({ lang }: { lang: Lang }) {
   // « c'est ouvert » calculé ici — le client les compare à son horloge, donc
   // l'auto-détection reste juste même sur une page servie depuis le cache.
   const windows = playableWindowsFrom(serverNow());
+  // Le guide de chaque fenêtre et celui de chaque boss de Singularity sont des
+  // DONNÉES STABLES : le client choisit le lien « en cours » avec son horloge.
   const seasonWindows: SeasonWindows = {
-    'joint-challenge': windows['joint-challenge'],
+    'joint-challenge': seasonGuideLinks(
+      'joint-challenge',
+      windows['joint-challenge'],
+      listGuidesByCategory('joint-challenge'),
+      lang,
+    ),
     'guild-raid': windows['guild-raid'],
-    'world-boss': windows['world-boss'],
+    'world-boss': seasonGuideLinks(
+      'world-boss',
+      windows['world-boss'],
+      listGuidesByCategory('world-boss'),
+      lang,
+    ),
   };
+  const singularityGuides = singularityGuideLinks(
+    listGuidesByCategory('dimensional-singularity'),
+    lang,
+  );
 
-  return <ProgressTrackerBrowser labels={labels} assets={assets} seasonWindows={seasonWindows} />;
+  return (
+    <ProgressTrackerBrowser
+      labels={labels}
+      assets={assets}
+      seasonWindows={seasonWindows}
+      singularityGuides={singularityGuides}
+    />
+  );
 }

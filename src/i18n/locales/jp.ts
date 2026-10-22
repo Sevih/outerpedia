@@ -1367,6 +1367,7 @@ const jp: Record<TranslationKey, string> = {
   'progress.task.memorial-match': 'メモリアル対戦',
   'progress.task.ad-stamina': '広告スタミナ',
   'progress.task.dimensional-singularity': '次元特異点 (水〜日)',
+  'progress.task.guide_link': 'ガイド: {name}',
   'progress.task.shop-daily-free-gift': 'デイリープレゼント',
   'progress.task.shop-weekly-free-gift': 'ウィークリー無料プレゼント',
   'progress.task.shop-monthly-free-gift': 'マンスリー無料プレゼント',

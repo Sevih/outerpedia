@@ -7,6 +7,57 @@
 
 ## 2026-10-22
 
+- **B68 (Opus 5.5) — progress tracker : lien vers le guide du boss en cours
+  sur World Boss, Joint Challenge et Dimensional Singularity, choisi par
+  l'horloge du client.** Pourquoi : idée de Sevih du 22/10, le suivi sait
+  quel contenu est ouvert mais n'emmenait pas au guide du boss. Le point dur
+  était le cache (ISR 24 h, Singularity qui tourne à minuit UTC) : rien de
+  « en cours » n'est calculé au rendu. Le serveur envoie des DONNÉES
+  STABLES — nouveau module `guide-links.ts` :
+  `seasonGuideLinks(mode, windows, guides, lang)` pose sur chaque fenêtre
+  jouable un `guide?: TrackerGuideLink` (`{ href, name }`, nouveau type de
+  `contracts.ts`), le guide visible (`listGuidesByCategory`) dont le monstre
+  est combattu dans la saison du mode qui ouvre au même `start` (jointure
+  `seasonsForBoss`, suffixe `@n` retiré) ; `singularityGuideLinks(guides, lang)` rend la table guide
+  par id de monstre `600000xx`. Nom = `getMonster(bossId)` par `lRec`, repli
+  sur le titre du guide ; pas de guide → pas de champ. `index.tsx` appelle
+  les deux et passe `singularityGuides` à `ProgressTrackerBrowser` à côté de
+  `seasonWindows` (dont le type gagne `guide?`). Le client choisit :
+  `taskGuideLink(taskId, now, windows, singularityGuides)` dans `tracker.ts`
+  — WB/JC : le guide de la fenêtre live (même règle que `isSeasonLive`, les
+  deux passent désormais par un `liveWindow` privé) ; DS :
+  `singularityStateAt(new Date(now)).today?.monsters[0]` → la table, rien un
+  jour de récompense ; autre tâche → `undefined`. UI : `TaskList` calcule le
+  lien au tic de 60 s et le passe à `TaskItem`, qui pose après le libellé un
+  `<a>` icône livre (SVG en ligne, même trait que l'horloge de la ligne VHT,
+  pas de dépendance), `target="_blank"`, `rel="noopener"`, `title` et
+  `aria-label` = nouvelle clé `progress.task.guide_link` « Guide: {name} »
+  (six locales ; jp « ガイド », kr « 가이드 », zh « 攻略 »), `stopPropagation`
+  pour ne pas compter +1, `text-content-muted` ; rien d'autre ne bouge à
+  l'écran. Vérifié : `guide-links.test.ts` sur la vraie donnée — WB 26
+  (fenêtre du 20/10) → `/guides/world-boss/drakhan`, JC 31 (06/10) →
+  `/guides/joint-challenge/annihilator`, les 15 boss de Singularity ont
+  chacun un guide (aucun manquant), une fenêtre sans guide n'a pas de champ,
+  une fenêtre WB ne prend pas un guide JC ; `tracker.test.ts` — live/pas live
+  (borne `end` exclue), fenêtre ouverte sans guide, DS le mercredi 21/10/2026
+  (boss d'ordre 0, Chimera `60000007`) et le lendemain (autre boss, absent de
+  la table factice), lundi 26/10 (récompense) → `undefined`, `story-hard` et
+  `guild-raid` → `undefined`. `pnpm typecheck` : les trois `tsc --noEmit`
+  (racine, `datagen`, `scripts`) sans erreur ; `pnpm lint` : `eslint` sans
+  sortie ;
+  `pnpm test` : `Tests  4434 passed (4434)` (dont `keys.test.ts`). Pas de
+  serveur sur :3000 pendant le lot, rien de vu en vrai. À voir par Sevih sur
+  `/tools/progress-tracker` en dev : la ligne World Boss montre l'icône
+  (Drakhan jusqu'au 27/10 00:00 UTC) ; Joint Challenge n'apparaît pas du tout
+  en auto-détection (JC 31 fermé le 13/10, aucune saison suivante en table),
+  donc pas d'icône ; Dimensional Singularity montre le guide du boss du jour
+  (jeudi 22/10 : Frozen Dragon of Phantasm Harshna, `60000005`), absente les
+  lundi et mardi de récompense ; le clic ouvre le guide dans un nouvel onglet
+  sans cocher la tâche, et l'infobulle dit « Guide: Drakhan ». Laissé : le
+  guild raid (boss dérivé sans `bossId`, change par phase — hors périmètre) ;
+  pour Urd, Verdandi et Skuld, lumière et ténèbres portent le même nom de
+  monstre, le nom de l'infobulle ne les distingue pas (le lien, si) —
+  `monsterDisplayNames` le ferait si Sevih le veut.
 - **Relecture G36 (Fable 5.1) — gear-solver lit `rotation` pour les colonnes
   par tour, le meilleur hit reste pour `dmg`/`mcd`, validé.** Périmètre :
   `5a7456d` de gear-solver, 22 fichiers, message attendu : `CharacterDef.rotation?`

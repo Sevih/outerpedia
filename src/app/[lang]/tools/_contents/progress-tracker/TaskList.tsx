@@ -20,10 +20,12 @@ import {
   getNextVHTUnlockTime,
   getTaskMaxCount,
   getVHTUnlockedPhase,
+  taskGuideLink,
+  type SeasonWindows,
   type UserProgress,
   type UserSettings,
 } from './tracker';
-import type { TrackerAssets, TrackerLabels } from './contracts';
+import type { TrackerAssets, TrackerGuideLink, TrackerLabels } from './contracts';
 import { TaskLabel } from './ui';
 
 function TaskItem({
@@ -33,6 +35,7 @@ function TaskItem({
   labels,
   assets,
   compact = false,
+  guide,
   onRowClick,
   onCheckboxChange,
 }: {
@@ -42,6 +45,8 @@ function TaskItem({
   labels: TrackerLabels;
   assets: TrackerAssets;
   compact?: boolean;
+  /** Guide du boss en cours (World Boss, Joint Challenge, Singularity). */
+  guide?: TrackerGuideLink;
   onRowClick: () => void;
   onCheckboxChange: () => void;
 }) {
@@ -70,6 +75,28 @@ function TaskItem({
       >
         <TaskLabel def={def} completed={completed} labels={labels} assets={assets} />
       </button>
+      {guide && (
+        // Nouvel onglet : le suivi reste ouvert. La ligne entière vaut +1 → le
+        // clic sur le lien ne remonte pas.
+        <a
+          href={guide.href}
+          target="_blank"
+          rel="noopener"
+          title={labels.guideLink.replace('{name}', guide.name)}
+          aria-label={labels.guideLink.replace('{name}', guide.name)}
+          onClick={(e) => e.stopPropagation()}
+          className="text-content-muted hover:text-content-strong shrink-0 transition"
+        >
+          <svg className="size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden>
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+            />
+          </svg>
+        </a>
+      )}
       <span className="text-content-muted text-sm">
         {count}/{max}
       </span>
@@ -155,6 +182,8 @@ export function TaskList({
   now,
   labels,
   assets,
+  seasonWindows,
+  singularityGuides,
   onIncrement,
   onToggle,
   onSweepAll,
@@ -167,6 +196,8 @@ export function TaskList({
   now: number;
   labels: TrackerLabels;
   assets: TrackerAssets;
+  seasonWindows: SeasonWindows;
+  singularityGuides: Record<string, TrackerGuideLink>;
   onIncrement: (taskId: string, type: TaskType) => void;
   onToggle: (taskId: string, type: TaskType) => void;
   onSweepAll: () => void;
@@ -215,6 +246,7 @@ export function TaskList({
         labels={labels}
         assets={assets}
         compact={compact}
+        guide={taskGuideLink(id, now, seasonWindows, singularityGuides)}
         onRowClick={() => onIncrement(id, type)}
         onCheckboxChange={() => onToggle(id, type)}
       />

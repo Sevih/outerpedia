@@ -14,6 +14,15 @@ export interface TrackerItem {
   icon: string | null;
 }
 
+/**
+ * Lien vers le guide d'un boss, résolu au SERVEUR (href localisé, nom du boss
+ * dans la langue) : donnée stable du build, choisie au client par son horloge.
+ */
+export interface TrackerGuideLink {
+  href: string;
+  name: string;
+}
+
 export interface TrackerLabels {
   /** Libellé par id de tâche (défs SANS `shopItemKey`). */
   tasks: Record<string, string>;
@@ -72,6 +81,8 @@ export interface TrackerLabels {
   autoSeasonalDesc: string;
   autoSeasonalLive: string;
   autoSeasonalOff: string;
+  /** « Guide: {name} » — `{name}` remplacé au client. */
+  guideLink: string;
 }
 
 export interface TrackerAssets {

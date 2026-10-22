@@ -1397,6 +1397,7 @@ const en = {
   'progress.task.memorial-match': 'Memorial Match',
   'progress.task.ad-stamina': 'Ad Stamina',
   'progress.task.dimensional-singularity': 'Dimensional Singularity (Wed–Sun)',
+  'progress.task.guide_link': 'Guide: {name}',
   'progress.task.shop-daily-free-gift': 'Daily Free Gift',
   'progress.task.shop-weekly-free-gift': 'Weekly Free Gift',
   'progress.task.shop-monthly-free-gift': 'Monthly Free Gift',

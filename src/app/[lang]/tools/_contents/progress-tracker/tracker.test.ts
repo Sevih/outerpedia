@@ -26,6 +26,7 @@ import {
   normalizeSettings,
   reconcileProgress,
   syncProgressWithSettings,
+  taskGuideLink,
   VHT_PHASE_LABELS,
   VHT_UNLOCK_DAYS,
   withCategoryToggled,
@@ -35,7 +36,7 @@ import {
   withTaskCount,
   type UserSettings,
 } from './tracker';
-import { isSingularityBattleDay } from '@/lib/data/singularity';
+import { isSingularityBattleDay, singularityStateAt } from '@/lib/data/singularity';
 
 const DAY = 86_400_000;
 // Mercredi 15/07/2026 10:00 UTC (jour du mois 15 → phase VHT 3, singularité ouverte)
@@ -508,5 +509,56 @@ describe('contenus saisonniers — auto-détection', () => {
     expect(live.daily['joint-challenge']).toBeDefined();
     const closed = reconcileProgress(EMPTY_PROGRESS, auto, SUN, windows);
     expect(closed.daily['joint-challenge']).toBeUndefined();
+  });
+});
+
+describe('lien vers le guide du boss en cours (choisi par l’horloge du client)', () => {
+  const wb = { href: '/guides/world-boss/a', name: 'A' };
+  const jc = { href: '/guides/joint-challenge/b', name: 'B' };
+  const windows = {
+    'world-boss': [{ start: '2026-10-20T00:00:00Z', end: '2026-10-27T00:00:00Z', guide: wb }],
+    'joint-challenge': [
+      { start: '2026-10-06T00:00:00Z', end: '2026-10-13T00:00:00Z', guide: jc },
+      // Fenêtre ouverte mais sans guide : pas de lien.
+      { start: '2026-11-03T00:00:00Z', end: '2026-11-10T00:00:00Z' },
+    ],
+  };
+  // Mercredi 21/10/2026 : premier jour de combat de la semaine (boss d'ordre 0).
+  const WED = Date.parse('2026-10-21T12:00:00Z');
+  // Lundi 26/10/2026 : jour de récompense, aucun boss combattable.
+  const MON = Date.parse('2026-10-26T12:00:00Z');
+  const todayBoss = singularityStateAt(new Date(WED)).today!;
+  const ds = { href: '/guides/dimensional-singularity/c', name: 'C' };
+  const singularityGuides = { [todayBoss.monsters[0]]: ds };
+
+  it('World Boss / Joint Challenge : le guide de la fenêtre ouverte, rien hors fenêtre', () => {
+    expect(taskGuideLink('world-boss', WED, windows, {})).toEqual(wb);
+    expect(taskGuideLink('world-boss', Date.parse('2026-10-27T00:00:00Z'), windows, {})).toBe(
+      undefined,
+    );
+    expect(
+      taskGuideLink('joint-challenge', Date.parse('2026-10-07T00:00:00Z'), windows, {}),
+    ).toEqual(jc);
+    expect(taskGuideLink('joint-challenge', WED, windows, {})).toBeUndefined();
+    expect(
+      taskGuideLink('joint-challenge', Date.parse('2026-11-04T00:00:00Z'), windows, {}),
+    ).toBeUndefined();
+  });
+
+  it('Singularity : le guide du boss du jour, rien un jour de récompense', () => {
+    expect(todayBoss.order).toBe(0);
+    expect(taskGuideLink('dimensional-singularity', WED, windows, singularityGuides)).toEqual(ds);
+    // Le lendemain, un autre boss : absent de la table → pas de lien.
+    expect(
+      taskGuideLink('dimensional-singularity', WED + DAY, windows, singularityGuides),
+    ).toBeUndefined();
+    expect(taskGuideLink('dimensional-singularity', MON, windows, singularityGuides)).toBe(
+      undefined,
+    );
+  });
+
+  it('une tâche sans lien (guild raid compris) : undefined', () => {
+    expect(taskGuideLink('story-hard', WED, windows, singularityGuides)).toBeUndefined();
+    expect(taskGuideLink('guild-raid', WED, windows, singularityGuides)).toBeUndefined();
   });
 });
