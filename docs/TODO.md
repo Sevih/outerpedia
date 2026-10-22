@@ -149,6 +149,14 @@ les preuves et les décisions vivent dans le tri consolidé de sevih-tool
       les réservations de la Worklist (relevé par G41) ; priorités par héros
       en session (le Builder repart propre), l'onglet Presets replie sur la
       build sauvegardée — à passer en localStorage si Sevih le demande.
+- [ ] **Suivi en direct — restes (vus par G44)** : la Worklist garde
+      `toName` / `toMain` figés à la mise en file (la main d'un talisman ne
+      suit pas l'enchant) ; une pièce en file ou dans un preset mangée en jeu
+      ressort « absente », et le `PresetList` du snapshot garde son uid
+      jusqu'au lobby. `item/sell` et `item/lock` non suivis (la réponse ne
+      porte pas l'item). Si une dissolution ne retire pas la pièce sur le
+      fixe : journaliser la requête, le client n'applique pas le `ItemList`
+      de la réponse.
 
 ## 🧪 À jouer au prochain patch
 

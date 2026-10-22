@@ -7,6 +7,32 @@
 
 ## 2026-10-22
 
+- **Relecture G44 (Fable 5.1) — améliorations faites en jeu suivies en direct
+  (enchant, reset, limite d'étoiles, smelting, fusion, craft, dissolution ;
+  plugin 0.4.0), validé.** `838a08d` de gear-solver (11 fichiers, message
+  attendu, ni `package.json` ni lock). Lu : le plugin journalise huit chemins
+  de plus, version 0.4.0 des deux côtés ; `equip-events.ts` remplace
+  `ITEM_UPSERTS` par `ITEM_FIELDS`, table chemin → champs entiers / simples,
+  recoupée avec le client décompilé (`CWebRES_Item*.OnApply`,
+  `CItemInventory.UpdateItem` / `UpdateSimpleData` : quantité réécrite, 0 =
+  `RemoveItem`, uid inconnu = rien) ; `breakLimit` et `craft` créent des
+  pièces entières, `dissolve` est plié depuis le `ItemList` de la réponse
+  alors que le client retire d'après sa requête (limite dite dans l'en-tête
+  et le README). Contrôles sur HEAD : typecheck vert, lint 14 avertissements
+  (fichiers du renderer, inchangés), tests 166 + 196 + 658 verts ; `dotnet
+build` du plugin vert, « 0.4.0 » lu dans la DLL. Rejoué par `tsx` : journal
+  enchant + dissolve + sell + craft sur un snapshot de trois pièces → pièce
+  portée à son nouvel `Exp`, fodder retiré, stack décrémenté puis dissous,
+  uid inconnu et `item/sell` ignorés, pièce craftée ajoutée en fin, second
+  rejeu identique (`applied` 0). À contrôler par Sevih sur le fixe après la
+  release : Update plugin jeu fermé, un +0 → +3 visible dans les 5 s avec le
+  fodder disparu, un smelting, une dissolution (sinon envoyer
+  `equip-events.ndjson`). Vu en passant, au TODO : la Worklist garde
+  `toName` / `toMain` figés, une pièce en file ou dans un preset mangée en
+  jeu ressort « absente » et le `PresetList` du snapshot garde son uid
+  jusqu'au lobby. Suite : release 1.15.0 sur le mot de Sevih ; G45 Electron
+  44 à rédiger sur « go ».
+
 - **Relecture G42 (Fable 5.1) — gemmes et sous-stats suivies en direct
   (plugin 0.3.0), ligne gemme appliquée par compte d'exemplaires, validé.**
   `80adc3a` de gear-solver (18 fichiers, message attendu). Lu : le plugin
