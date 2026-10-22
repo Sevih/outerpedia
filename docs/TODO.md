@@ -152,8 +152,9 @@ les preuves et les décisions vivent dans le tri consolidé de sevih-tool
       associés, score de chaque associé avec la tenue contre son meilleur
       build seul, avertissement chiffré au-delà d'un seuil) ; G41 : gemmes
       d'EE optimisées par associé à pièces fixées, et lignes Worklist par
-      preset. G40 rédigé le 22/10 ; la release 1.13.0 attend G40 (décision de
-      Sevih).
+      preset. G40 fait le 22/10 ; G41 rédigé (gemmes d'EE, Worklist, priorité
+      reprise de la build sauvegardée, sauvegarde) ; la release 1.13.0 attend
+      G41 (décision de Sevih).
 
 ## 🧪 À jouer au prochain patch
 
