@@ -7,6 +7,23 @@
 
 ## 2026-10-22
 
+- **Relecture G43 (Fable 5.1) — Builder › Mains : exclusion d'une main stat
+  par slot, validé.** `f46f687` de gear-solver (19 fichiers, message
+  attendu). Lu : `mainExcludes` additif à côté de `mainPicks` (absent =
+  `{}` dans `cloneFilters`, presets de filtres, filtres par héros), les deux
+  bascules s'excluent mutuellement dans le reducer, le reco ne touche pas
+  aux exclusions ; `allow()` rejette une main exclue AVANT les acceptables
+  et compte les rejets dans `poolSizes[slot].mainExcluded`, que le message
+  « pool vide » du Builder cite ; `pruneFilters` élague les clés de stat
+  hors `StatType` (table compile-vérifiée) sur les deux cartes ; chips à
+  trois états (cyan acceptée, rose + ✕ exclue), compteur du bouton = les
+  deux. Contrôles sur `f46f687` : `npm run typecheck` 0, `npm test` core
+  166 / desktop 179 / renderer 653, `npm run lint` 14 avertissements 0
+  erreur. À voir par Sevih sur le fixe après la release : Mains › Talisman ›
+  ATK en exclu (deux clics) → plus aucun build avec un talisman ATK, le
+  compteur monte, un preset de filtres rechargé garde l'exclusion. G42 en
+  cours (bloqué puis débloqué : `toCount` par ligne gemme). Suite : release
+  1.14.0 après G42.
 - **Relecture G41 (Fable 5.1) — Presets : gemmes d'EE par associé, Worklist
   par perso du preset, priorité reprise de la build sauvegardée, store dans
   la sauvegarde, validé.** `f8557c4` de gear-solver (20 fichiers, message
