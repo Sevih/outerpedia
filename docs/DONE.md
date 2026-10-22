@@ -7,6 +7,33 @@
 
 ## 2026-10-22
 
+- **Relecture G40 (Fable 5.1) — onglet Presets en lecture, validé.**
+  `530dc7a` de gear-solver (24 fichiers, message attendu, todo : item G41
+  ajouté, seul ajout). Lu : `lib/presets/presetRows.ts` (signature hors EE
+  partagée avec Builds, slot d'une pièce absente déduit de la position sur
+  le fil — ordre Weapon, Accessory, Helmet, Armor, Gloves, Boots, EE,
+  Talisman, déjà documenté dans `raw.ts` —, pièces partagées entre presets,
+  uid vide `0`), `lib/presets/evaluate.ts` (composition par
+  `computeFinalStats` avec les pièces du preset + l'EE du perso en ordre
+  d'inventaire, ratings aux facteurs du perso, score à SA priorité ;
+  meilleure tenue connue = build sauvegardée la plus récente re-notée avec la
+  priorité courante, sinon tenue actuelle ; `presetLoss` null sans score),
+  store `gs.presetHeroes` (uid hors roster ignoré), écran avec sélecteurs,
+  bandeau pièces absentes / partagées, seuil réglable 5-50 % dans Settings ›
+  Solver (`gs.solver.presetLossWarn`, 15 par défaut), `Preset.favorite`
+  ajouté au parse. Contrôles sur `530dc7a` : `npm run typecheck` 0, `npm
+test` core 166 / desktop 179 / renderer 626, `npm run lint` 14
+  avertissements 0 erreur. Limite relevée par le lot, à trancher pour G41 :
+  la priorité par héros vit en sessionStorage (`gs.solver.heroFilters`), donc
+  après un relancement de l'app un associé n'a pas de score tant qu'il n'a
+  pas été rouvert dans le Builder ; `SavedBuild.reforge.priority` garde la
+  priorité de chaque build sauvegardée, repli naturel. Hors périmètre
+  relevé : `gs.presetHeroes` absent de l'export/import de sauvegarde et de
+  l'élagage au changement de données. À voir par Sevih sur le fixe (après
+  la release) : les porteurs et l'étoile des presets justes (le slot vide
+  est supposé `0` sur le fil), Ame associée à un preset de DLuna → ligne
+  orange. Suite : G41 (gemmes d'EE par associé, lignes Worklist, priorité
+  persistante, sauvegarde du store), puis release 1.13.0.
 - **Relecture G39 (Fable 5.1) — la release recompile et vérifie la DLL du
   plugin, dotnet sous Linux, note de G38, validé.** `a80f52d` de gear-solver
   (9 fichiers, message attendu). Lu : `assertPluginVersion` (Plugin.cs,
