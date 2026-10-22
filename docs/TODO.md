@@ -147,9 +147,9 @@ les preuves et les décisions vivent dans le tri consolidé de sevih-tool
       Avant la prochaine release : chemin Linux (`dotnet`) dans le script, ou
       vérification de la version de la DLL de `resources/capture-steam/` par
       `release.mjs` ; la 0.2.0 de G37 doit partir avec la release qui l'active.
-- [ ] **Message d'échec de la Worklist** (« Apply failed — close the game
-      while the Steam plugin is live ») : ne dit pas encore que le jeu ouvert
-      suffit depuis G37 ; aligner sur le popup du Builder (`EquipOutcome`).
+- [ ] **Worklist** (retours de Sevih du 22/10) : une entrée par perso, gemmes
+      à sertir listées, message d'échec par cause, toast quand l'onglet change
+      seul → lot G38.
 
 ## 🧪 À jouer au prochain patch
 
