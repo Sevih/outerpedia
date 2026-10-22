@@ -7,6 +7,41 @@
 
 ## 2026-10-22
 
+- **Relecture B67 et C28 (Fable 5.1) — vitesse du noyau en taux sur la fiche,
+  `corePassive` retiré, `schema` 2 ; rotation par tour pondérée par les
+  cooldowns, validés.** Périmètre : B67 `ff3cf203` (12 fichiers : contrat,
+  fiche, `stat-compose`, oracle, tests, DONE, TODO) et son second commit de
+  docs dans gear-solver (`2c604f9`, trois fichiers de docs, aucun code) ; C28
+  `eee970ad` (7 fichiers : `solver-rotation.ts` + test, `solver.ts` + test,
+  les deux tables, DONE). Messages attendus, rien hors périmètre, rien
+  d'emporté. Contrôles sur `eee970ad` : `pnpm typecheck` 0, `pnpm lint` 0,
+  `pnpm test` 252 fichiers / 4 425 verts. Rejoué : les cinq preuves du client
+  citées par C28 relues aux lignes données (`CSkill.CurrentCool` borné à
+  `[0, Cool]`, `CanUse` = `CurrentCool >= Cool`, `Initialize`/`Reset` posent
+  `StartCool`, `OnTurn` fait `AddCoolSecond(1)` / `AddCoolUltimate(1)` avant
+  la commande, `UseSkill` remet à 0 sauf action additive non passive) : la
+  lecture « un S3 à `Cool` 4 revient au tour t + 4 » tient. `rotationOf`
+  rejoué par `tsx` sur la donnée damage pour Tamamo, Francesca, Sterope,
+  Gnosis Beth, Valentine, Notia (S2 `startCool` 3 pour `cool` 2), Rin
+  (`approx`) et 2000001 : identique à la table committée, séquences du DONE
+  exactes, répartition des périodes (44 / 1 / 18 / 53 / 5 / 2 / 5 / 1) et les
+  quatre `approx` retrouvés, 129/129 avec `rotation` = `bestSkill`. B67 :
+  `progression.json` n'a que des bonus `speed` plats (31 blocs, aucun taux),
+  l'oracle ne bouge que sur Snow lv1/20/40 (139/142/145 → 138/141/144), Lisha
+  119 plate donc 124 partout ; provenance de l'oracle = données `36a57d7fdbc9`
+  (format 1, d'avant B67) : les valeurs sont les mêmes au format 2,
+  gear-solver lit `corePassiveByFusion` dans les deux. Synchro faite :
+  `npm run data:sync` dans gear-solver → `data/derived` au hash `1f7fe7bd57b6`
+  (format 2, `rotation` sur 129 persos, zéro `corePassive`), commit `60963bb`
+  (non poussé) ; `npm run typecheck` 0, mais `npm test` ROUGE : 3 tests de
+  `packages/core/test/compose-stats.test.ts` (« fallback on a cache without
+  corePassiveByFusion ») fabriquent leur cache legacy en retirant
+  `corePassiveByFusion` de la vraie donnée et attendent un `corePassive` qui
+  n'existe plus au format 2 — c'est ce que la PR `data-sync` quotidienne aurait
+  vu rouge. Réparation confiée à G36 (point 0 ajouté à son prompt : fixture
+  legacy écrite à la main, Snow +6 cuit, Notia EFF 255 à tout palier). À voir
+  par Sevih : `/characters/snow` Base Stats lv1 / 20 / 40 → 138 / 141 / 144.
+  Suite : G36, seul.
 - **C28 — rotation par tour pondérée par les cooldowns : champ additif
   `rotation` dans `solver/characters.json`, sémantique des cooldowns prouvée
   dans le client.** Pourquoi : `bestSkill` ne donne qu'un hit, le plus fort ;

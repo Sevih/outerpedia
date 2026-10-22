@@ -139,6 +139,16 @@ les preuves et les décisions vivent dans le tri consolidé de sevih-tool
       largeur avec ses miniatures de 120 px — pas trop haute sur un perso à
       quatre ou cinq vidéos ?
 
+## 🌐 Site
+
+- [ ] **Progress tracker : un lien vers le guide du boss en cours** (idée de
+      Sevih du 22/10) : sur les cartes World Boss, Joint Boss et Dimensional
+      Shrine, un petit lien qui ouvre (fenêtre ou panneau) le guide du boss
+      du moment. Point dur : le cache — les DS tournent chaque jour, le lien
+      doit lire le boss courant à la demande (ou avec une revalidation
+      quotidienne alignée sur le reset), jamais figé au build. À rédiger en
+      lot une fois G36 rendu.
+
 ## 🧪 À jouer au prochain patch
 
 - [ ] **Rapport des effets de portrait (lot F12)** : au premier patch qui
