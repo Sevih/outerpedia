@@ -7,6 +7,28 @@
 
 ## 2026-10-22
 
+- **Relecture G45 (Fable 5.1) — Electron 42.4.1 → 44.9.3, installeur non
+  publié pour le banc du fixe, validé.** `7dba658` de gear-solver (4
+  fichiers, message attendu) : la devDependency et `build.electronVersion`
+  montent ensemble, le lock ne bouge que sur l'entrée `electron` et la
+  version du workspace desktop que npm a resynchronisée (1.10.0 → 1.14.0),
+  aucune autre dépendance ; les ruptures 43/44 recoupées par grep (un
+  `showErrorBox`, `navigator.clipboard` côté renderer seulement) ; plus
+  aucune mention de la 42 hors changelog ; ligne `[Unreleased]` des release
+  notes. Contrôles sur HEAD : typecheck vert, lint 14 avertissements
+  inchangés, tests 166 + 196 + 658 verts ; `electron --version` répond
+  v44.9.3 (piège noté par l'agent : `ELECTRON_RUN_AS_NODE` hérité du
+  terminal VS Code fait répondre Node) ; l'exe de `win-unpacked` porte
+  « Electron/44.9.3 » et `resources/capture-steam/GearSolverCapture.dll`
+  fait 16 896 octets (la 0.4.0 de G44) ; l'installeur
+  `Outerpedia Gear Solver Setup 1.14.0-g45.exe` est dans
+  `~/Echanges-Claude` (115 870 480 octets), identique à celui de
+  `apps/desktop/release/`. À contrôler par Sevih sur le fixe : installer
+  par-dessus la 1.14.0, Update plugin jeu fermé, capture au lobby,
+  déplacement et enchant suivis en direct, solve, Equip this build jeu
+  fermé ; puis release 1.15.0 (G44 + G45), auto-update depuis la 1.14.0,
+  fermer la PR Dependabot #36. Aucun lot ouvert.
+
 - **Relecture G44 (Fable 5.1) — améliorations faites en jeu suivies en direct
   (enchant, reset, limite d'étoiles, smelting, fusion, craft, dissolution ;
   plugin 0.4.0), validé.** `838a08d` de gear-solver (11 fichiers, message

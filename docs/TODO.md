@@ -141,11 +141,10 @@ les preuves et les décisions vivent dans le tri consolidé de sevih-tool
 
 ## 🔧 gear-solver
 
-- [ ] **Electron 42 hors support depuis la 45.0.0 (21/10)** : monter en 44.x
-      (pas la PR Dependabot telle quelle — banc réel sur le fixe : capture,
-      plugin, déplacement suivi, solve, Equip build, auto-update depuis la
-      1.13.0), puis release. Lot G45 rédigé le 22/10 (installeur `1.14.0-g45`
-      non publié, banc par Sevih, puis release 1.15.0 avec G44).
+- [ ] **Electron 44.9.3 (G45, 22/10) — banc du fixe à faire** avec
+      l'installeur `1.14.0-g45` de ~/Echanges-Claude, puis release 1.15.0
+      (G44 + G45), auto-update depuis la 1.14.0, fermer la PR Dependabot #36
+      (et #37 vitest, #38 @types/node si Sevih les veut).
 - [ ] **Presets du jeu — restes** : le pool de gemmes d'EE des presets ignore
       les réservations de la Worklist (relevé par G41) ; priorités par héros
       en session (le Builder repart propre), l'onglet Presets replie sur la
