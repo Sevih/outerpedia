@@ -84,6 +84,10 @@
  *     avant) ne sont tenues que par (a) ;
  *   - un push sur `main` part tel quel chez toutes les installations : jamais
  *     (c) avant que (b) soit publié.
+ * Historique : `schema` 2 (22/10/2026, B67) = (c) du noyau des Core Fusion —
+ * `ingredients.corePassive` (vitesse pré-cuite en plat) retiré, ajouté à côté
+ * en (a) par `corePassiveByFusion` (B56, 16/10), lu par gear-solver depuis sa
+ * 1.11.0 (b) ; `corePassiveByFusion` est désormais le seul encodage du noyau.
  */
 import { createHash } from 'node:crypto';
 import { existsSync, readFileSync } from 'node:fs';
@@ -115,7 +119,7 @@ import {
 const lang = 'English';
 
 /** Forme du contrat — ne monte que pour un changement mal lu par une ancienne app (cf. en-tête, (a)→(b)→(c)). */
-export const SOLVER_SCHEMA = 1;
+export const SOLVER_SCHEMA = 2;
 
 // ---- vue « sets » injectée depuis buildEquipment() (même build, source unique) --
 interface SetsViewEffect {

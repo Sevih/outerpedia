@@ -9,17 +9,15 @@
  * les blocs BRUTS par source. Règles d'encodage (contrat, NE PAS « corriger ») :
  *   - CHC/CHD/PEN/DMG± : per-mille ÷10 → points de %
  *   - ATK/DEF/HP OAT_RATE → atkPct/defPct/hpPct ; OAT_ADD → flat
- *   - SPD OAT_RATE, deux encodages (seul le noyau d'un Core Fusion en porte) :
- *       · ANCIEN, `corePassive` : flat PRÉ-CUIT contre `baseForRate.spd` (vitesse
- *         lv100 + évos max). Faux sous lv60 et avec de la vitesse d'équipement :
- *         le client met ce taux dans `m_nBuffValueRate`, qui multiplie la stat
- *         courante ENTIÈRE, équipement compris, avec troncature
- *         (`CFormula.CalcFinalStat`). Gardé tel quel : les versions installées
- *         de gear-solver le lisent (étape (a), en-tête de `solver.ts`) ;
- *       · NOUVEAU, `corePassiveByFusion` : taux brut en points de % dans
- *         `spdPct`, `spd` n'y porte que du plat.
- *     Dans tout autre bloc, un SPD OAT_RATE de fiche fait JETER le générateur :
- *     il y serait cuit, il lui faut d'abord un champ en taux ;
+ *   - SPD OAT_RATE (seul le noyau d'un Core Fusion en porte) : taux brut en
+ *     points de % dans `spdPct` de `corePassiveByFusion`, `spd` n'y porte que du
+ *     plat. Le client met ce taux dans `m_nBuffValueRate`, qui multiplie la stat
+ *     courante ENTIÈRE, équipement compris, avec troncature
+ *     (`CFormula.CalcFinalStat`) : il ne se cuit pas en plat. L'ancien
+ *     `corePassive` (un bloc au niveau max, vitesse pré-cuite contre la vitesse
+ *     lv100 + évos) est retiré depuis le `schema` 2 (étape (c), en-tête de
+ *     `solver.ts`). Dans tout autre bloc, un SPD OAT_RATE de fiche fait JETER
+ *     le générateur : il lui faut d'abord un champ en taux ;
  *   - EFF/RES OAT_RATE → effRate/resRate (le composeur les applique via
  *     BuffValueRate — cf. le cas Notia +50% EFF)
  *   - buffs de compétence (classe, S1-S3, Skill_8, noyau) : le filtre du client,
@@ -121,12 +119,10 @@ function isEmpty(s: WorkBlock): boolean {
 
 /**
  * Sort d'un SPD OAT_RATE selon le bloc qui le reçoit (cf. en-tête) :
- * `bake` = ancien encodage, cuit en plat contre `spd` (`corePassive` seul) ;
  * `rate` = taux brut dans `spdPct` (`corePassiveByFusion`) ; `reject` = tout
  * autre bloc, le générateur jette.
  */
-type SpdRateMode =
-  { kind: 'bake'; spd: number } | { kind: 'rate' } | { kind: 'reject'; block: string };
+type SpdRateMode = { kind: 'rate' } | { kind: 'reject'; block: string };
 
 /** Index par clé (tri optionnel) — évite les `.filter()` par perso sur des tables à milliers de lignes. */
 function indexBy(rows: Row[], keyField: string, sortField?: string): Map<string, Row[]> {
@@ -326,7 +322,6 @@ export function applyStatBonus(
       return;
     case 'ST_SPEED':
       if (!rate) dest.spd += value;
-      else if (spdRate.kind === 'bake') dest.spd += Math.floor((spdRate.spd * value) / 1000);
       else if (spdRate.kind === 'rate') dest.spdPct = (dest.spdPct ?? 0) + value / 10;
       else {
         // Le client applique ce taux à la stat courante entière (`CalcFinalStat`) :
@@ -508,7 +503,6 @@ export interface CharacterIngredients {
   s1ByLevel: Record<string, StatBlock>;
   s2ByLevel: Record<string, StatBlock>;
   s3ByLevel: Record<string, StatBlock>;
-  corePassive: StatBlock | null;
   /** Fusionnés seulement : noyau (`Skill_23`) au niveau de chaque niveau de fusion, clés `"1"`…`"5"`. */
   corePassiveByFusion?: Record<string, RateStatBlock>;
 }
@@ -580,13 +574,6 @@ export function computeCharacterIngredients(tables: IngredientsTables): {
     // (Snow, Lisha, Veronica, lv100, 09/10/2026).
     const base = extractBase(templetById.get(evoCharId) ?? row);
     const evoByLevel = extractEvoByLevel(evosByCharId.get(evoCharId));
-    // Seul `spd` est encore consommé (SPD OAT_RATE pré-cuit de `corePassive`, sur
-    // lv100 max + évo max).
-    const evoMax = zeroStats();
-    for (const k of Object.keys(evoByLevel)) {
-      for (const f of Object.keys(evoMax) as (keyof StatBlock)[]) evoMax[f] += evoByLevel[k][f];
-    }
-    const bakeSpd: SpdRateMode = { kind: 'bake', spd: base.spd.max + evoMax.spd };
     // Transcendance d'un fusionné : échelle de l'origine, à partir de sa propre étoile.
     const transcendByStar = fusionRow
       ? extractTranscendByStar(
@@ -607,14 +594,6 @@ export function computeCharacterIngredients(tables: IngredientsTables): {
     const s1ByLevel = skillByLevel('Skill_1');
     const s2ByLevel = skillByLevel('Skill_2');
     const s3ByLevel = skillByLevel('Skill_3');
-    // Core fusion (2700xxx) : passif Skill_23 émis en un bloc au niveau max
-    // (ancien encodage, SPD cuite — cf. en-tête).
-    let corePassive: StatBlock | null = null;
-    if (/^2700\d{3}$/.test(id) && row.Skill_23) {
-      const byLv = extractSkillPassiveByLevel(row.Skill_23, skillsByID, buffsByID, bakeSpd);
-      const levels = Object.keys(byLv).map(Number);
-      if (levels.length) corePassive = byLv[String(Math.max(...levels))];
-    }
     // Le client prend Skill_23 au niveau `Skill_23_Level` du niveau de fusion
     // (`CSkillManager.Create`) : un bloc par ligne de `CharacterFusionLevelTemplet`
     // du groupe. Un niveau sans buff de fiche vaut zéro, jamais de repli.
@@ -639,7 +618,6 @@ export function computeCharacterIngredients(tables: IngredientsTables): {
       s1ByLevel,
       s2ByLevel,
       s3ByLevel,
-      corePassive,
       ...(corePassiveByFusion ? { corePassiveByFusion } : {}),
     };
   }

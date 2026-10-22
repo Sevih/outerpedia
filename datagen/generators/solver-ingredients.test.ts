@@ -185,11 +185,11 @@ describe('computeCharacterIngredients — corePassiveByFusion', () => {
     for (const lv of ['1', '2', '3', '4'])
       expect(Object.values(byFusion[lv]).every((v) => v === 0)).toBe(true);
     expect(byFusion['5'].effRate).toBe(50);
-    // L'ancien champ reste au niveau max.
-    expect(c.corePassive?.effRate).toBe(50);
+    // Schema 2 (B67) : l'ancien champ n'est plus émis.
+    expect(c).not.toHaveProperty('corePassive');
   });
 
-  it('SPD OAT_RATE : taux brut dans spdPct, spd à 0 ; corePassive garde le plat cuit (Snow)', () => {
+  it('SPD OAT_RATE : taux brut dans spdPct, spd à 0, rien de cuit en plat (Snow)', () => {
     const lv = (n: string) => ({ SkillID: '27000231', SkillLevel: n, BuffID: 'spd,atk' });
     const c = fused(
       [lv('1'), lv('2')],
@@ -200,9 +200,7 @@ describe('computeCharacterIngredients — corePassiveByFusion', () => {
       expect(block.spd).toBe(0);
       expect(block.atkPct).toBe(10.2);
     }
-    // floor((138 + 16) × 43 / 1000) = 6 : l'encodage que lisent les versions installées.
-    expect(c.corePassive?.spd).toBe(6);
-    expect(c.corePassive).not.toHaveProperty('spdPct');
+    expect(c).not.toHaveProperty('corePassive');
   });
 
   it('un fusionné sans buff de fiche a cinq blocs à zéro, un non-fusionné pas de champ', () => {
@@ -266,7 +264,7 @@ describe('solver/characters.json — corePassiveByFusion des six fusionnés', ()
     (
       solverCharacters as unknown as Record<
         string,
-        { ingredients: { corePassive: Block | null; corePassiveByFusion?: Record<string, Block> } }
+        { ingredients: { corePassiveByFusion?: Record<string, Block> } }
       >
     )[id].ingredients;
   const nonZero = (b: Block) => Object.fromEntries(Object.entries(b).filter(([, v]) => v !== 0));
@@ -299,9 +297,9 @@ describe('solver/characters.json — corePassiveByFusion des six fusionnés', ()
     },
   );
 
-  it('corePassive inchangé : Snow garde la vitesse cuite (+6)', () => {
-    expect(ing('2700003').corePassive?.spd).toBe(6);
-    expect(ing('2700003').corePassive).not.toHaveProperty('spdPct');
+  it('schema 2 : plus aucun perso ne porte corePassive', () => {
+    const all = Object.keys(solverCharacters);
+    expect(all.filter((id) => 'corePassive' in ing(id))).toEqual([]);
   });
 });
 

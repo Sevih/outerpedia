@@ -295,15 +295,25 @@ const SKILL_SLOTS = [
  *
  * Le jeu les prend au niveau COURANT de chaque compétence ; une fiche de wiki
  * doit en choisir un : le niveau MAXIMUM, comme le Combat Power de la même
- * section (skills Lv5) et le niveau de fusion max que le contrat suppose pour
- * le noyau. Un niveau sans entrée dans le contrat ne porte aucun buff de fiche
- * et vaut zéro (Claire, S2 niv. 1) — jamais de repli sur un autre niveau.
+ * section (skills Lv5), et le noyau au niveau de fusion max (la clé la plus
+ * haute de `corePassiveByFusion`). Un niveau sans entrée dans le contrat ne
+ * porte aucun buff de fiche et vaut zéro (Claire, S2 niv. 1) — jamais de repli
+ * sur un autre niveau. La vitesse en taux du noyau (`spdPct`) n'est pas un
+ * plat : elle part en `spdPct` de la couche, appliquée en dernier sur la
+ * vitesse totale (`composeStep`).
  */
 function sheetPassives(char: Character): LayerParts {
   const ing = ingredientsOf(char);
   const parts: LayerParts = {};
   blockToParts(parts, ing.classPassive);
-  if (ing.corePassive) blockToParts(parts, ing.corePassive);
+  const fusion = ing.corePassiveByFusion;
+  if (fusion) {
+    const core = fusion[String(Math.max(...Object.keys(fusion).map(Number)))];
+    if (core) {
+      blockToParts(parts, core);
+      if (core.spdPct) parts.spdPct = (parts.spdPct ?? 0) + core.spdPct;
+    }
+  }
   for (const [type, field] of SKILL_SLOTS) {
     const skill = char.skills.map((id) => SKILLS[id]).find((sk) => sk?.type === type);
     const maxLevel = Math.max(0, ...(skill?.levels.map((l) => l.level) ?? []));

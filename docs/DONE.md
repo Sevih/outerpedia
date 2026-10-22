@@ -7,6 +7,80 @@
 
 ## 2026-10-22
 
+- **B67 — vitesse du noyau en taux sur la fiche du wiki, oracle régénéré ;
+  `corePassive` retiré du contrat, `schema` 2 (suites de G8).** Étape (c) de
+  la règle d'évolution du contrat : (a) `corePassiveByFusion` ajouté par B56
+  (16/10), (b) lu et `schema` 2 accepté par gear-solver 1.11.0 / 1.11.1
+  (`SUPPORTED_SOLVER_SCHEMA = 2`, vérifié dans `apps/desktop/src/data-sync.ts`
+  et les tags). Fiche : `sheetPassives` (`src/lib/data/char-progression.ts`)
+  lit le noyau dans `corePassiveByFusion` à la clé la plus haute (fusion 5,
+  comme le niveau max des skills), le bloc hors vitesse passe par
+  `blockToParts` comme avant, et `spdPct` part dans un nouveau champ
+  `LayerParts.spdPct` au lieu d'un plat cuit. `src/lib/stat-compose.ts` gagne
+  `applySpdRate(total, ratePct) = trunc(total × (1000 + ratePct × 10) / 1000)`,
+  taux 0 = identité, copie de la règle de gear-solver ; le bake « base + évo »
+  de la branche SPD de `composeStep` disparaît. Point d'application : dans
+  `composeStep`, sur la somme de TOUS les plats de vitesse de la couche
+  affichée — blanc (base + évo) + quirks stat + quirks buff + Skill_8 +
+  passifs — taux = Σ `spdPct` des couches buff (seul le noyau en porte). C'est
+  `CalcFinalStat` pour SPD : ni taux de stat ni transcendance ni codex, donc
+  `part1` = base + évo + quirks, `combined` = + plats de buff, `part2` =
+  `trunc(combined × (1000 + buffRate) / 1000)` ; et c'est le
+  `applySpdRate(spdBeforeRate, spdPct)` de `composeCharStats`. Aucun quirk ni
+  Skill_8 ne porte de taux de SPD (`progression.json` : zéro bonus `speed` non
+  plat), le générateur solver jette sur un SPD OAT_RATE hors noyau. Contrat :
+  `datagen/generators/solver-ingredients.ts` n'émet plus `corePassive`
+  (interface, mode `bake` de `SpdRateMode`, calcul `evoMax` / `bakeSpd`
+  retirés ; le jet « SPD OAT_RATE hors noyau » reste), en-tête réécrit ;
+  `datagen/generators/solver.ts` : `SOLVER_SCHEMA = 2`, l'en-tête date le (c).
+  `pnpm datagen:build` puis `datagen:promote` à blanc : `solver/characters.json`
+  ~129, `solver/version.json` ~3 (plus `wallpapers.json` ~2, hors périmètre,
+  non promu, et 2400015 non intégré) ; diff JSON sémantique de
+  `characters.json` : une seule sorte d'écart, `*.ingredients.corePassive`
+  retiré sur les 129 persos (126 `null`, 3 blocs), rien d'autre ;
+  `version.json` : `schema` 1 → 2, hash `36a57d7fdbc9` → `da9fb67cc0d3` ;
+  `--apply --only` de ces deux fichiers. Oracle : `npm run oracle:wiki` de
+  gear-solver est CASSÉ (`ERR_MODULE_NOT_FOUND` sur
+  `packages/core/src/rules.js`, importé par `compose-stats.ts` : le
+  type-stripping de Node ne réécrit pas `.js` → `.ts`) ; même script lancé par
+  le `tsx` d'outerpedia (`tsx scripts/export-wiki-oracle.mjs --out …`, depuis
+  gear-solver, sans install ni modification) ; provenance de
+  `src/lib/data/fixtures/gear-solver-oracle.json` : commit `fb5ca9e3`, propre,
+  données `36a57d7fdbc9` (1.11.500, 20/10, `corePassiveByFusion` présent).
+  Diff de l'oracle : mêmes niveaux et colonnes, 129 persos, SEULE Snow bouge —
+  `full` SPD lv1 139 → 138, lv20 142 → 141, lv40 145 → 144. Snow (blanc → fiche,
+  avant entre parenthèses ; sans couches et par défaut identiques, elle n'a ni
+  quirk ni Skill_8 de vitesse) : lv1 133 → 138 (139), lv20 136 → 141 (142),
+  lv40 139 → 144 (145), lv60 142 → 148 (148), lv100 149 → 155 (155), lv120
+  157 → 163 (163). Lisha ne bouge à AUCUN niveau, contrairement à l'attendu
+  du lot : sa vitesse est plate (119 du niveau 1 au 120), et le bake contre
+  119 + 0 d'évo donnait déjà 119 + 5 = 124 = `trunc(119 × 1043 / 1000)`. La
+  capture de Snow lv100 (SPD 155, +6) reste verte dans
+  `char-progression.test.ts`, sans retouche. Tests : `src/lib/stat-compose.test.ts`
+  créé (`trunc`, taux 0 = identité, 4,3 % sur 133 → 138, taux appliqué au
+  total des plats et non à la seule base) ; `solver-ingredients.test.ts`
+  (plus de `corePassive`, contrôle sur tout `characters.json`) et
+  `solver.test.ts` (`CONTRACT_SHAPE` sans `corePassive`, `schema` suit
+  `SOLVER_SCHEMA`). `grep -w corePassive` dans `src/`, `datagen/`,
+  `scripts/` : plus aucune lecture — restent deux commentaires d'historique
+  (en-têtes de `solver-ingredients.ts` et `solver.ts`) et les tests qui en
+  vérifient l'absence. Le calculateur ne lisait pas `corePassive` (grep
+  `datagen/damage`, `src/lib/damage` : rien). Contrôles : `pnpm typecheck`
+  0 erreur (dernière ligne : la commande `tsc … -p scripts/tsconfig.json`,
+  sans sortie), `pnpm lint` 0 (`$ eslint`, sans sortie), `pnpm test`
+  « Test Files 251 passed (251) », 4 418 verts, `pnpm damage:check`
+  « Bilan : 42 ligne(s) exacte(s), 0 en dérive, 0 sautée(s) ». Docs de
+  gear-solver dans un second commit, de ce dépôt-là (`docs/data-schema.md`,
+  `docs/reference.md`, `wiki/Engine-Reference.md` : format 2 émis depuis le
+  22/10, repli `corePassive` réservé aux vieux caches), aucun code touché. À
+  voir par Sevih : `/characters/snow`, section Base Stats, curseur lv1 / 20 /
+  40 → SPD 138 / 141 / 144 (lv100 : 155) ; `/characters/lisha` : 124
+  partout, inchangé. Après le push : la PR `data-sync/1.11.500-<hash>` de
+  gear-solver doit s'ouvrir (ou `npm run data:sync`), et Settings › Data de
+  GS dire « format 2 ». Laissé : le script `oracle:wiki` de gear-solver à
+  réparer (hors périmètre) ; le helper `fused()` de
+  `solver-ingredients.test.ts` garde des lignes `Speed_Max` / évo qui ne
+  servaient qu'au bake, inoffensives.
 - **Clôtures du 22/10.** Tamamo-no-Mae › Skills vu par Sevih (fin des restes
   de F31 et A77 : la section « Restes de la relecture du 20/10 » du TODO
   disparaît). Décisions : suites de G8 → lot B67 ; DPS de rotation pondéré

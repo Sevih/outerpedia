@@ -356,9 +356,8 @@ const CONTRACT_SHAPE: Record<string, Shape> = {
             s1ByLevel: '*',
             s2ByLevel: '*',
             s3ByLevel: '*',
-            corePassive: '*',
           },
-          // B56, étape (a) : fusionnés seulement, à côté de `corePassive`.
+          // Fusionnés seulement (B56) ; seul encodage du noyau depuis le schema 2 (B67).
           opt: { corePassiveByFusion: '*' },
         },
         recommendSetId: '*',

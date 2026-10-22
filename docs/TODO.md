@@ -41,12 +41,6 @@ les preuves et les décisions vivent dans le tri consolidé de sevih-tool
       sorti du S1 d'Ame faute de clip qui le joue — possible variante sous
       B, à prouver dans le client avant de la remettre.
 
-## 🧹 Suites de la rédaction du 18/10 (lots A62 à C26, G8 à G30, F28, OB3, TW2)
-
-- [ ] **Suites de G8** : fiche du wiki en vitesse en taux avec régénération
-      de l'oracle (`char-progression.ts`), puis retrait de `corePassive`
-      (`schema` 2), seulement après la release de gear-solver qui porte G8.
-
 ## 🧰 Outil quick
 
 - [ ] **« Extraction » › versionnage — contrôles à l'écran (lot F22)** : le

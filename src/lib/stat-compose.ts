@@ -22,6 +22,8 @@
  *   part2    = trunc(combined × (1000 + buffRate) / 1000)
  *   codex    = trunc(base × codexRate / 1000)
  *   final    = max(0, part2 + codex)
+ * SPD n'a ni taux de stat ni codex : `final = trunc(Σ plats × (1000 + buffRate) / 1000)`,
+ * soit `applySpdRate` sur le total (le taux du noyau d'un Core Fusion).
  */
 
 import { calcFinalStat as engineCalcFinalStat } from './damage/formula';
@@ -72,8 +74,11 @@ export interface StatStepView {
 export interface LayerParts {
   /** Plats en unités d'AFFICHAGE (entiers pour ATK/DEF/HP/SPD/EFF/RES, % pour CHC…). */
   flat?: Partial<Record<StepStatKey, number>>;
-  /** Taux per-mille (axes compound + SPD, baké sur base+évo). */
+  /** Taux per-mille des axes compound (ATK/DEF/HP/EFF/RES). */
   ratePM?: Partial<Record<StepStatKey, number>>;
+  /** Taux de vitesse EXTERNE (points de %, `spdPct` du noyau d'un Core Fusion),
+   * appliqué en dernier sur la vitesse totale (`applySpdRate`). */
+  spdPct?: number;
 }
 
 export interface TranscendLayer {
@@ -158,6 +163,16 @@ export function calcFinalStat(
   });
 }
 
+/**
+ * Taux de vitesse de buff (`BuffValueRate`, points de %) appliqué EN DERNIER sur
+ * la vitesse totale, comme l'étage externe de `CalcFinalStat` :
+ * `trunc(total × (1000 + taux‰) / 1000)`. Même règle que `applySpdRate` de
+ * gear-solver (`packages/core/src/compose-stats.ts`). Taux 0 = identité.
+ */
+export function applySpdRate(total: number, ratePct: number): number {
+  return ratePct === 0 ? total : Math.trunc((total * (1000 + ratePct * 10)) / 1000);
+}
+
 const flatOf = (p: LayerParts | undefined, k: StepStatKey) => p?.flat?.[k] ?? 0;
 const rateOf = (p: LayerParts | undefined, k: StepStatKey) => p?.ratePM?.[k] ?? 0;
 
@@ -217,16 +232,12 @@ export function composeStep(
       );
       whiteRef = calcFinalStat(base, evo, flatOf(qStat, key), rateOf(qStat, key), 0, 0, 0, 0);
     } else if (key === 'SPD') {
-      // Les rares taux de SPD sont bakés sur base+évo (baseline constante).
-      const baked = Math.floor(
-        ((white + flatOf(qStat, key)) * (rateOf(qStat, key) + buffPM)) / 1000,
-      );
-      value = Math.floor(white + flatOf(qStat, key) + buffFlat + baked);
-      whiteRef = Math.floor(
-        white +
-          flatOf(qStat, key) +
-          Math.floor(((white + flatOf(qStat, key)) * rateOf(qStat, key)) / 1000),
-      );
+      // `CalcFinalStat` sans taux de stat ni codex : la somme des plats (base,
+      // évo, quirks, buffs), puis le taux de buff EXTERNE (noyau d'un Core
+      // Fusion) sur ce TOTAL. Aucun quirk ni Skill_8 ne porte de taux de SPD.
+      const spdPct = (qBuff?.spdPct ?? 0) + (s8?.spdPct ?? 0) + (passives?.spdPct ?? 0);
+      whiteRef = white + flatOf(qStat, key);
+      value = applySpdRate(whiteRef + buffFlat, spdPct);
     } else {
       // CHC / CHD / DMG UP% / DMG RED% — purement additifs (unités %) ; un
       // éventuel taux de buff s'applique sur la portion blanche.
