@@ -139,7 +139,17 @@ les preuves et les décisions vivent dans le tri consolidé de sevih-tool
       largeur avec ses miniatures de 120 px — pas trop haute sur un perso à
       quatre ou cinq vidéos ?
 
-## 🌐 Site
+## 🔧 gear-solver (suites de G37, 22/10)
+
+- [ ] **La release depuis le portable n'embarque pas la DLL du plugin** :
+      `apps/desktop/scripts/fetch-binaries.mjs` appelle `dotnet.exe` en dur et
+      ne tourne pas sous Linux ; la 1.12.0 a embarqué la DLL du 05/09 (0.1.0).
+      Avant la prochaine release : chemin Linux (`dotnet`) dans le script, ou
+      vérification de la version de la DLL de `resources/capture-steam/` par
+      `release.mjs` ; la 0.2.0 de G37 doit partir avec la release qui l'active.
+- [ ] **Message d'échec de la Worklist** (« Apply failed — close the game
+      while the Steam plugin is live ») : ne dit pas encore que le jeu ouvert
+      suffit depuis G37 ; aligner sur le popup du Builder (`EquipOutcome`).
 
 ## 🧪 À jouer au prochain patch
 

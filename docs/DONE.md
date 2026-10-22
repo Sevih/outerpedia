@@ -7,6 +7,42 @@
 
 ## 2026-10-22
 
+- **Relecture B68 et G37 (Fable 5.1) — lien vers le guide du boss en cours
+  dans le progress tracker ; le snapshot de gear-solver suit les déplacements
+  faits en jeu, validés.** B68 `ab1f1580` (16 fichiers, message attendu, le
+  TODO ajusté) : `guide-links.ts` résout au serveur un guide par fenêtre
+  saisonnière (jointure `seasonsForBoss` sur le `start` de la fenêtre) et une
+  table par boss de Singularity, `taskGuideLink` choisit au client avec le tic
+  de 60 s, `TaskItem` pose un `<a>` nouvel onglet avec `stopPropagation` ;
+  rien d'autre à l'écran. Contrôles sur `ab1f1580` : `pnpm typecheck` 0,
+  `pnpm lint` 0, `pnpm test` 253 fichiers / 4 434 verts (les tests du lot
+  lisent la vraie donnée : Drakhan, Annihilator, 15 boss de Singularity
+  couverts). Resté vide après le lot : la section « 🌐 Site » du TODO,
+  retirée ici. G37 `6432455` de gear-solver (19 fichiers, message attendu) :
+  plugin 0.2.0 qui journalise `item/equip` et `item/equipAll` dans
+  `equip-events.ndjson` et le tronque à chaque `/user/item` ; desktop
+  `equip-events.ts` qui plie le journal par uid à chaque sonde de 5 s, rejoue
+  tout le journal (propriétaires absolus, idempotent) dès qu'un de
+  `{ first, last, mtime }` change — écart assumé et argumenté avec la lettre
+  du lot, accepté : plus simple et sans le cas du redémarrage du jeu ;
+  `EquipOutcome` distingue 409 / snapshot illisible / échec. Contrôles sur
+  `6432455` : `npm run typecheck` 0, `npm test` core 166 / desktop 175 /
+  renderer 586, `npm run lint` 15 avertissements 0 erreur. Lu : les quatre
+  cas de `movesOf` contre `CWebRES_ItemEquip` et `UpdateEquipItems` du client
+  (ordre `UnEquipList`, `ToInvenList`, `ToEquipList`), la troncature faite
+  dans l'action unique du thread d'écriture (pas d'entrelacement avec un
+  `item/equip`), le journal lu avant le snapshot. Installeur non publié
+  `apps/desktop/release/Outerpedia Gear Solver Setup 1.12.0-g37.exe`
+  (105 698 097 octets, DLL 0.2.0 dedans) copié par moi dans
+  `~/Echanges-Claude/` (dossier Syncthing partagé avec le fixe). Repéré par
+  le lot, à suivre : `fetch-binaries.mjs` appelle `dotnet.exe` et ne tourne
+  pas sous Linux — la release 1.12.0 faite depuis le portable a embarqué la
+  DLL du 05/09 (0.1.0, inchangée alors) ; la prochaine release DOIT embarquer
+  la 0.2.0 (au TODO). À voir par Sevih : `/tools/progress-tracker` (icône sur
+  World Boss → Drakhan, sur Singularity → le boss du jour, clic = nouvel
+  onglet sans +1) ; sur le fixe, l'installeur g37, Settings › Setup › Update
+  plugin jeu fermé, puis un déplacement de pièce en jeu suivi dans les 5 s.
+  Suite : aucun lot ouvert ; release de gear-solver après le test du fixe.
 - **B68 (Opus 5.5) — progress tracker : lien vers le guide du boss en cours
   sur World Boss, Joint Challenge et Dimensional Singularity, choisi par
   l'horloge du client.** Pourquoi : idée de Sevih du 22/10, le suivi sait
