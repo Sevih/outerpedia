@@ -7,6 +7,26 @@
 
 ## 2026-10-22
 
+- **Relecture G36 (Fable 5.1) — gear-solver lit `rotation` pour les colonnes
+  par tour, le meilleur hit reste pour `dmg`/`mcd`, validé.** Périmètre :
+  `5a7456d` de gear-solver, 22 fichiers, message attendu : `CharacterDef.rotation?`
+  typé, `turnSkillFactor` et `dmgSkillInfo(best, rotation).turn`,
+  `computeCheapRatings(…, skillFactor, turnFactor = skillFactor)` avec le
+  facteur par tour appliqué au même endroit sur `dmgs`/`mcds` seulement,
+  `SolveContext.turnFactor` passé aux deux appels, infobulles DmgS/McdS,
+  docs et wiki, note de release Unreleased, item du todo retiré, et les 3
+  tests legacy de `compose-stats.test.ts` réparés par une fixture reconstruite
+  depuis `corePassiveByFusion["5"]` (Snow `spd` 6, Notia 0), compositeur
+  intouché. Contrôles sur `5a7456d` : `npm run typecheck` 0 ; `npm test` core
+  166 / desktop 159 / renderer 586 verts ; `npm run lint` 15 avertissements,
+  0 erreur. Rejoué sur `data/derived` : Tamamo-no-Mae 2000080 meilleur hit
+  2,004 contre 1,735 par tour (S1 ×1, S2 ×2, S3 ×1 sur 4 tours), Kitsune of
+  Eternity 2000086 2,490 contre 1,843 — les chiffres du changelog. Le
+  classement mono-perso est tenu par un test d'ordre sur 4 builds et 3
+  paires de facteurs. À voir par Sevih dans l'app : l'infobulle de DmgS d'un
+  perso à S3 long (Tamamo) dit la rotation et un facteur plus bas que Dmg.
+  Suite : release gear-solver quand Sevih le décide (`npm run release --
+minor`, note Unreleased prête) ; aucun lot ouvert.
 - **Relecture B67 et C28 (Fable 5.1) — vitesse du noyau en taux sur la fiche,
   `corePassive` retiré, `schema` 2 ; rotation par tour pondérée par les
   cooldowns, validés.** Périmètre : B67 `ff3cf203` (12 fichiers : contrat,
