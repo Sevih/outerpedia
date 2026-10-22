@@ -7,6 +7,22 @@
 
 ## 2026-10-22
 
+- **Relecture G39 (Fable 5.1) — la release recompile et vérifie la DLL du
+  plugin, dotnet sous Linux, note de G38, validé.** `a80f52d` de gear-solver
+  (9 fichiers, message attendu). Lu : `assertPluginVersion` (Plugin.cs,
+  `.csproj`, et la chaîne cherchée en UTF-16LE dans la DLL — la copie UTF-8
+  vient des attributs du `.csproj` et ne trahirait pas un Plugin.cs
+  périmé), `dotnet` hors win32, le script ne s'exécute qu'en tant que script
+  (le test importe la fonction sans compiler), `release.mjs` : pré-contrôle
+  `dotnet --version` à l'étape 1 et `fetch-binaries` en tête de l'étape 5 ;
+  puce `[Unreleased]` de G38 posée. Contrôles sur `a80f52d` : `npm run
+typecheck` 0, `npm test` core 166 / desktop 179 / renderer 608, `npm run
+lint` 14 avertissements 0 erreur ; `npm run fetch-binaries -w
+@gear-solver/desktop` rejoué ici : « [ok] capture-steam plugin 0.2.0
+  (16 384 bytes) », icône 512×512, arbre propre après. Suite : release
+  1.13.0 (G37 + G38 + G39) quand Sevih le dit ; presets du jeu à cadrer
+  (réponses de Sevih du 22/10 : groupes à la main avec avertissement quand un
+  perso perd trop, pièces jamais partagées entre presets).
 - **Relecture G38 (Fable 5.1) — Worklist : une entrée par perso, gemmes à
   sertir, échec d'Apply par cause, toast, validé.** `b7b037c` de gear-solver
   (16 fichiers, message attendu, todo ajusté). Lu : `upsertWorklistEntry`

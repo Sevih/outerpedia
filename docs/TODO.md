@@ -139,11 +139,18 @@ les preuves et les décisions vivent dans le tri consolidé de sevih-tool
       largeur avec ses miniatures de 120 px — pas trop haute sur un perso à
       quatre ou cinq vidéos ?
 
-## 🔧 gear-solver (suites de G37, 22/10)
+## 🔧 gear-solver
 
-- [ ] **La release depuis le portable n'embarque pas la DLL du plugin**
-      (`fetch-binaries.mjs` = `dotnet.exe`, jamais appelé par la release ; la
-      1.12.0 a embarqué la DLL du 05/09) → lot G39, avant la release 1.13.0.
+- [ ] **Presets du jeu — optimisation** (idée de Sevih du 22/10) : 30 presets
+      de 7 pièces (EE exclue) déjà parsés (`Inventory.presets`), pas montrés.
+      Décisions : groupes de persos faits À LA MAIN (pas d'auto par rôle :
+      Ame, S.Regina, Rhona… ont des besoins que le rôle ne dit pas), avec un
+      avertissement quand un perso du groupe perd trop par rapport à son
+      meilleur build seul ; une pièce ne peut pas être dans deux presets (deux
+      presets mages peuvent jouer le même combat). Lots : G40 lecture (onglet
+      Presets, pièces, porteurs, score par perso associé), puis G41 (tenue
+      commune par preset, critère = le membre le moins bien servi, lignes
+      Worklist). À rédiger après la release 1.13.0.
 
 ## 🧪 À jouer au prochain patch
 
