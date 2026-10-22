@@ -7,6 +7,29 @@
 
 ## 2026-10-22
 
+- **Relecture G41 (Fable 5.1) — Presets : gemmes d'EE par associé, Worklist
+  par perso du preset, priorité reprise de la build sauvegardée, store dans
+  la sauvegarde, validé.** `f8557c4` de gear-solver (20 fichiers, message
+  attendu, item G41 retiré du todo). Lu : `lib/presets/eeGems.ts` — pool
+  restreint à l'EE du perso et aux porteurs de gemmes que personne ne porte
+  (jamais le Talisman du preset ni une pièce d'un autre perso), score à la
+  priorité du perso avec `fillGain`, allocation des seuls emplacements d'EE
+  plafonnée au CHC, `alignToSockets` garde en place une gemme déjà sertie
+  (moins de lignes Worklist), proposition rendue seulement si le score monte ;
+  `evaluate.ts` — `eeGemOverride` remet les subs du Talisman (le composeur
+  saute les deux porteurs), `presetPriorityOf` session > build sauvegardée >
+  null avec la source affichée ; `presetWorklist.ts` — diff des pièces
+  présentes + lignes gemme d'EE, pièces manquantes comptées ;
+  `transfer.ts` — `presetHeroes` exporté et fusionné (le local gagne) ; pas
+  d'élagage `dataHash` (le store ne porte que des numéros de preset et des
+  uids de compte, `knownRefs` n'a rien à y confronter — argument accepté).
+  Contrôles sur `f8557c4` : `npm run typecheck` 0, `npm test` core 166 /
+  desktop 179 / renderer 638, `npm run lint` 14 avertissements 0 erreur.
+  Relevé par le lot, laissé : le pool de gemmes ignore les réservations de
+  la Worklist. À voir par Sevih sur le fixe après la release : Ame associée
+  à un preset de DLuna → « EE gems: … » et la perte recalculée, « + Worklist »
+  → une entrée pièces + gemmes, relancer l'app → les scores restent. Suite :
+  release 1.13.0 (G37, G38, G39, G40, G41).
 - **Relecture G40 (Fable 5.1) — onglet Presets en lecture, validé.**
   `530dc7a` de gear-solver (24 fichiers, message attendu, todo : item G41
   ajouté, seul ajout). Lu : `lib/presets/presetRows.ts` (signature hors EE

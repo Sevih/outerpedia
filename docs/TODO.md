@@ -141,20 +141,10 @@ les preuves et les décisions vivent dans le tri consolidé de sevih-tool
 
 ## 🔧 gear-solver
 
-- [ ] **Presets du jeu** (idée de Sevih du 22/10) : 30 presets de 7 pièces
-      (EE exclue) déjà parsés (`Inventory.presets`), pas montrés. Modèle
-      décidé : un preset = la tenue d'UN perso de référence (solve normal du
-      Builder) + N persos associés qui la portent telle quelle et se règlent
-      par les gemmes de leur EE (hors preset, donc propres à chacun). Pas
-      d'objectif multi-persos. Groupes à la main (le rôle ne dit pas les
-      besoins : Ame, S.Regina, Rhona…) ; une pièce jamais dans deux presets.
-      Lots : G40 lecture (onglet Presets : pièces, porteurs, référence et
-      associés, score de chaque associé avec la tenue contre son meilleur
-      build seul, avertissement chiffré au-delà d'un seuil) ; G41 : gemmes
-      d'EE optimisées par associé à pièces fixées, et lignes Worklist par
-      preset. G40 fait le 22/10 ; G41 rédigé (gemmes d'EE, Worklist, priorité
-      reprise de la build sauvegardée, sauvegarde) ; la release 1.13.0 attend
-      G41 (décision de Sevih).
+- [ ] **Presets du jeu — restes** : le pool de gemmes d'EE des presets ignore
+      les réservations de la Worklist (relevé par G41) ; priorités par héros
+      en session (le Builder repart propre), l'onglet Presets replie sur la
+      build sauvegardée — à passer en localStorage si Sevih le demande.
 
 ## 🧪 À jouer au prochain patch
 
