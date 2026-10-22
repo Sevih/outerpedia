@@ -7,6 +7,28 @@
 
 ## 2026-10-22
 
+- **Relecture G42 (Fable 5.1) — gemmes et sous-stats suivies en direct
+  (plugin 0.3.0), ligne gemme appliquée par compte d'exemplaires, validé.**
+  `80adc3a` de gear-solver (18 fichiers, message attendu). Lu : le plugin
+  journalise quatre chemins de plus (`gemInsert`, `gemRemove`,
+  `gemChangeOption`, `subOptionChange`), version 0.3.0 des deux côtés ;
+  `equip-events.ts` plie les `WSItemData` portés (`Item`, `ItemGem`,
+  `ItemData`) en remplaçant l'entrée de même uid ou en l'ajoutant, uids en
+  strings, `IsLock` normalisé, champs absents de la réponse conservés du
+  snapshot, pile de gemme consommée non modélisée (dit) ; côté Worklist le
+  blocage de l'agent (compter les lignes cochait trop tôt) est résolu par
+  `toCount` enregistré à la mise en Worklist = exemplaires gardés par la
+  build + rang de la ligne, jugé « nombre d'exemplaires dans `gemSlots` ≥
+  `toCount` » quel que soit l'emplacement, repli par rang pour les lignes
+  stockées avant. Contrôles sur `80adc3a` : `npm run typecheck` 0, `npm
+test` core 166 / desktop 186 / renderer 658, `npm run lint` 14
+  avertissements 0 erreur ; `fetch-binaries` : « plugin 0.3.0 (16 384
+  bytes) ». À voir par Sevih sur le fixe après la release : Update plugin
+  jeu fermé (« plugin 0.3.0 live »), sertir la gemme demandée → la ligne se
+  coche dans les 5 s, la retirer → elle revient ; reforger une pièce → ses
+  sous-stats changent sans lobby ; confirmer sur le fil la forme de `IsLock`
+  et `CharUID` (déduite des autres réponses, aucune capture réelle ici).
+  Suite : release 1.14.0 (G42 + G43).
 - **Relecture G43 (Fable 5.1) — Builder › Mains : exclusion d'une main stat
   par slot, validé.** `f46f687` de gear-solver (19 fichiers, message
   attendu). Lu : `mainExcludes` additif à côté de `mainPicks` (absent =
