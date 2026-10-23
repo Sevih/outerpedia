@@ -7,6 +7,28 @@
 
 ## 2026-10-23
 
+- **Ménage des branches et des pushes (Fable 5.1, sur demande de Sevih).**
+  Poussé : gear-solver `270ddb1` (quality.test.ts à 30 s) et les deux
+  commits de docs d'outerpedia, après `git pull --rebase` des fusions
+  Dependabot. Supprimé, après vérification « 0 commit hors de main » branche
+  par branche : 31 branches distantes `claude/*` de gear-solver (les
+  `t1`…`t17` et `t3-*` du 09/10), 10 d'outerpedia (`t1`, `t5`…`t9`, `t14`,
+  `t16`, `t18`, `audit-doublons-solver`), les refs locales `pr/*` (32 et 60,
+  jamais des branches distantes), la branche locale
+  `feat/banner-mileage-maj-25-08` d'août, fusionnée. Reste
+  `claude/project-thread-1l5ypz` sur gear-solver : dix correctifs du 09/10
+  dont le contenu est dans main sous d'autres commits (vérifié par grep :
+  Mitigation, useReforged, 400 sur URL malformée, rang effaçable) — le
+  classifieur refuse sa suppression (Git Destructive), commande donnée à
+  Sevih. Tests verts sur les nouveaux outils : gear-solver 169 + 196 + 701,
+  outerpedia 4434 (vitest 5, happy-dom 21). `npm audit` de gear-solver :
+  27 vulnérabilités, toutes dans l'arbre d'electron-builder 25 ; le
+  correctif est electron-builder 26.15.3 (majeur), lot à rédiger sur
+  demande. Rappel donné à Sevih sur next : la 16.3.1 du 25/09 a cassé le
+  standalone (`@swc/helpers` 0.5.23, `MODULE_NOT_FOUND`, 502 de 2 h) ; la
+  16.4.0 a été validée par un banc standalone le 14/10 ; la 16.4.2 de la
+  PR #62 passe par le même banc.
+
 - **Tri des PR qui traînaient (Fable 5.1, sur demande de Sevih).** gear-solver :
   les sept brouillons `claude/t4-*` du 09/10 (#24 à #30) fermés — chaque
   branche a 0 commit hors de main (les quatorze branches `claude/t4-*`
