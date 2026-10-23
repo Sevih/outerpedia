@@ -7,6 +7,26 @@
 
 ## 2026-10-23
 
+- **Relecture G52 (Fable 5.1) — mode compact des cartes de la build
+  sélectionnée (réglage Settings › Solver), validé.** `4472913` de gear-solver
+  (12 fichiers, message attendu). Lu : réglage `gs.builder.compactCards`
+  (`App.tsx`, `SolverPane`, prop `compact` jusqu'à `ResultGearDetailBody`,
+  qui est le corps propre aux résultats : `design/GearDetail.tsx` de
+  l'Inventaire et des tooltips n'est pas touché) ; `compactName` exportée et
+  testée (EE → « EE », armure → nom du set, repli sur le nom, suffixe
+  Singularity jamais ajouté, dégradé conservé) ; stats icône + valeur avec
+  le niveau en badge et le détail en `title`, qualité sur une ligne, effets
+  tronqués avec le texte complet en `title`, effets de combat non rendus,
+  carte `w-64`, second seuil de grille 1360 px calculé comme celui de G51
+  (les deux jeux de classes écrits en entier pour Tailwind). Propositions
+  laissées hors diff dans son changelog (qualité en « 14/20 » seul, etc.).
+  Contrôles sur HEAD : typecheck vert, lint 13 avertissements inchangés,
+  tests 169 + 196 + 701 verts. Rejoué par `tsx` : EE, set « Aggressor »,
+  set sans nom et set inconnu → nom de la pièce, arme inchangée. À contrôler
+  par Sevih sur le fixe : le Switch « Compact result cards », les huit cartes
+  raccourcies, l'Inventaire intact, le réglage conservé au redémarrage.
+  Installeur de banc `1.14.0-g52` rebâti. Aucun lot ouvert.
+
 - **Relecture G51 (Fable 5.1) — cartes de la build sélectionnée dans l'ordre
   de l'écran d'équipement du jeu, ordre partagé, validé.** `3a3e169` de
   gear-solver (11 fichiers, message attendu). Lu : `GAME_GEAR_GRID` et
