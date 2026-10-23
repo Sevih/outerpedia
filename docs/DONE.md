@@ -5,6 +5,35 @@
 > détail vit dans git. Le `CHANGELOG.md` racine est GELÉ depuis le 03/08 —
 > ce fichier et le log git SONT le journal du projet.
 
+## 2026-10-23
+
+- **Relecture G47 (Fable 5.1) — « Optimize preset → » : mêmes effets
+  d'arme / accessoire / talisman requis, sous-stats prioritaires depuis la
+  tenue et la reco, validé.** `7f57f65` de gear-solver (13 fichiers, message
+  attendu, ni `package.json` ni lock). Lu : `lib/presets/optimize.ts` pur
+  (`presetOptimizePatch`, `presetOptimizeNote`) — effets par `setId`, talisman
+  élargi à sa famille, tout en `required` (`RecoFilterPatch.talismanEffectPicks`
+  élargi à `"required" | "preferred"`, `translateRecoBuild` inchangé) ;
+  priorité = max(reco, tenue) avec 4 pièces → 3, 3 → 2, 2 → 1, ordre poids
+  puis reco puis nombre de pièces, coupe à 5 ; mains de la reco seulement ;
+  `setPlans: []` que `mergePreset` transforme en plan vide — choix dit dans
+  le changelog (les plans mémorisés du héros sont remplacés, le lot disait
+  « sets ouverts »). Plomberie : `onOptimizePreset` sur la ligne de référence
+  (« Fetching… » pendant `fetchRecoForHero`), `builderPatch` d'`App.tsx`,
+  `initialPatch` consommé avec `initialHeroUid` dans `BuilderScreen`
+  (`mergePreset` puis ligne de statut), les associés gardent « Optimize → ».
+  Contrôles sur HEAD : typecheck vert, lint 13 avertissements (un de moins,
+  0 erreur), tests 169 + 196 + 677 verts. Rejoué par `tsx` sur une tenue de
+  quatre pièces plus talisman : sans reco `atk` 3 / `spd` 2 / `critRate` 1 et
+  la note « outfit only » ; avec une reco à deux builds, fusion coupée à cinq
+  clés, main d'arme de la reco, note « first of 2 ». Installeur non publié
+  `Outerpedia Gear Solver Setup 1.14.0-g47.exe` rebâti (G44 + G45 + G46 +
+  G47, Electron 44.9.3, DLL 0.4.0) et déposé dans `~/Echanges-Claude` à la
+  place du g46. À contrôler par Sevih sur le fixe : « Optimize preset → »
+  ouvre le Builder avec les chips d'effet requis et 4-5 sous-stats
+  priorisées, ligne de statut avec la source ; plus le banc d'Electron et de
+  l'onglet Presets. Suite : release 1.15.0 sur son mot.
+
 ## 2026-10-22
 
 - **Relecture G46 (Fable 5.1) — onglet Presets : ordre du jeu, filtre et tri
