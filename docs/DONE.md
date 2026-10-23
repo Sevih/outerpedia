@@ -16,8 +16,7 @@
   site (locales `en es fr ja ko zh`, sous-domaines `jp` et `kr`), le
   serveur standalone avait servi la langue par défaut. Vu en passant :
   `zh.outerpedia.com` résout directement sur l'IP du VPS (213.32.67.18)
-  alors que les autres passent par Cloudflare — à regarder dans la zone DNS
-  si ce n'est pas voulu.
+  alors que les autres passent par Cloudflare — voulu (Sevih, 23/10).
 
 - **Banc standalone de la PR #62 (next 16.4.2, react 19.3.1, mysql2 3.24.6,
   radix hover-card 1.2.1, eslint-config-next 16.4.2, lefthook 2.2.2) —
