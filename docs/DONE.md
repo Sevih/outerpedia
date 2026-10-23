@@ -7,6 +7,21 @@
 
 ## 2026-10-23
 
+- **Relecture G51 (Fable 5.1) — cartes de la build sélectionnée dans l'ordre
+  de l'écran d'équipement du jeu, ordre partagé, validé.** `3a3e169` de
+  gear-solver (11 fichiers, message attendu). Lu : `GAME_GEAR_GRID` et
+  `toEngineSlot` dans `design/tokens.ts`, importés par Builds, la bande du
+  Builder et Presets (qui en dérive sa grille moteur), les trois copies
+  supprimées, commentaire de `lib/solver/types.ts` corrigé sans toucher
+  l'ordre du champ ; la bande passe en grille quatre colonnes à partir de
+  1616 px, seuil calculé (4 cartes de 320 + marges + colonne de droite de 288) plutôt que `xl` / `2xl`, trop bas ; test `gameGearGrid.test.ts`.
+  Contrôles sur HEAD : typecheck vert, lint 13 avertissements inchangés,
+  tests 169 + 196 + 696 verts. Suite : G52 (mode compact) doit ajouter un
+  second seuil pour ses cartes `w-64`, ajouté à sa section. À contrôler par
+  Sevih sur le fixe : deux rangées Arme | EE | Tête | Torse / Accessoire |
+  Talisman | Gants | Bottes sous les résultats sur un écran assez large,
+  sinon retour à la ligne dans le même ordre.
+
 - **Relecture G48, G49 et G50 (Fable 5.1) — Builder (CP avant / après,
   colonne Swaps, seuils par clic droit), Presets et Worklist (pleine largeur,
   grille du jeu, overcap), crit brut visible dans le Builder, validés.**
