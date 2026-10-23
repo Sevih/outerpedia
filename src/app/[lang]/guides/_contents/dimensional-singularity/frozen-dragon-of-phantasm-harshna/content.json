@@ -78,7 +78,7 @@
           }
         },
         {
-          "characters": ["Charlotte"],
+          "characters": ["Charlotte", "Kitsune of Eternity Tamamo-no-Mae"],
           "reason": {
             "en": "{B/BT_STAT|ST_CRITICAL_DMG_RATE} buffer.",
             "jp": "{B/BT_STAT|ST_CRITICAL_DMG_RATE}バッファー。",
@@ -146,7 +146,7 @@
           }
         },
         {
-          "characters": ["Tamamo-no-Mae"],
+          "characters": ["Tamamo-no-Mae", "Titia"],
           "reason": {
             "en": "Pick 3. Boss damage bonus for {E/Fire}-element allies. Can leave the stage as soon as her buffs are applied.",
             "jp": "3体から選択。{E/Fire}属性味方のボスダメージボーナス。バフを付与し次第退場可能。",
