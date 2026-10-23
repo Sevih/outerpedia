@@ -7,6 +7,23 @@
 
 ## 2026-10-23
 
+- **Tri des PR qui traînaient (Fable 5.1, sur demande de Sevih).** gear-solver :
+  les sept brouillons `claude/t4-*` du 09/10 (#24 à #30) fermés — chaque
+  branche a 0 commit hors de main (les quatorze branches `claude/t4-*`
+  distantes sont toutes contenues dans main, à supprimer si Sevih veut) ;
+  #36 (Electron 44.9.0) déjà fermée par Dependabot après G45. Restent les
+  bumps Dependabot au CI vert sur les deux OS : gear-solver #34 (checkout
+  7.0.1), #35 (eslint, typescript-eslint, react-virtual, tailwind 4.3.3),
+  #37 (vitest 5.0.5), #38 (@types/node 26.6.5) ; #33 (setup-node 7.1.0) a un
+  Windows rouge du 19/10 (bascule `quality.test.ts`), job relancé.
+  outerpedia : #63 (vitest 5.0.5) et #64 (happy-dom 21.0.3) verts ; #62
+  (next 16.4.2, react 19.3.1, mysql2, radix hover-card, lefthook) touche le
+  runtime : à valider par un banc standalone comme next 16.4.0 le 14/10,
+  pas sur le CI seul. Le classifieur refuse que je fusionne une PR (« Merge
+  Without Review ») : commandes `gh pr merge --squash --delete-branch`
+  données à Sevih. Après fusion : `git pull --rebase` avant de pousser
+  (gear-solver porte `202b27a` local).
+
 - **Release gear-solver 1.15.0 (Fable 5.1, sur le mot de Sevih).** `GH_TOKEN="$(gh
 auth token)" npm run release -- minor` depuis un shell de login : DLL 0.4.0
   recompilée, installeur sur Electron 44.9.3, SHA-256
