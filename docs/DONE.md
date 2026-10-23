@@ -7,6 +7,25 @@
 
 ## 2026-10-23
 
+- **Banc standalone de la PR #62 (next 16.4.2, react 19.3.1, mysql2 3.24.6,
+  radix hover-card 1.2.1, eslint-config-next 16.4.2, lefthook 2.2.2) —
+  validé (Fable 5.1, sur le « go » de Sevih).** Même recette que la 16.4.0
+  du 14/10 : worktree détaché de la tête de la PR (`20c011dc`, rebasée sur
+  le main du jour, 1 commit), `pnpm install --frozen-lockfile`, `pnpm build`
+  avec `NODE_ENV=production`, `CI=true` et les cinq `NEXT_PUBLIC_*` du
+  Dockerfile, sans `.env.local` ; `static` et `public` recopiés comme
+  l'image ; `HOSTNAME=0.0.0.0 PORT=3917 node server.js`. `@swc/helpers`
+  reste en 0.5.23 et son `esm/` est tracé (le `MODULE_NOT_FOUND` du 25/09
+  ne revient pas). Sondes avec `Host:` : `/`, `/characters`, `/guides`,
+  `/equipment`, `/tierlist`, `/coupons`, `/tools`, `/changelog`,
+  `/sitemap.xml`, `/characters/aer`, `/equipment/steel-sword` en 200 ;
+  `fr.` et `de.` en 200 ; `/api/search?q=regina` 200 ; URL et slug inconnus
+  en 404 comme en prod ; `/api/tierlist` 405 en GET (normal) ; journal
+  serveur sans erreur. Avertissements de build : les mêmes traçages
+  dynamiques des guides qu'avant. Serveur arrêté, worktree retiré. Le
+  classifieur refuse la fusion : `gh pr merge 62 --squash --delete-branch`
+  à Sevih ; le job `docker` de la CI relancera l'image avant de la publier.
+
 - **Ménage des branches et des pushes (Fable 5.1, sur demande de Sevih).**
   Poussé : gear-solver `270ddb1` (quality.test.ts à 30 s) et les deux
   commits de docs d'outerpedia, après `git pull --rebase` des fusions
