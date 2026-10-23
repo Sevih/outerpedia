@@ -7,6 +7,18 @@
 
 ## 2026-10-23
 
+- **next 16.4.2 déployé (PR #62 fusionnée par Sevih, suivi Fable 5.1).** CI/CD
+  `40022295161` : check 3 min, docker 5 min 30 (image lancée avant
+  publication), deploy 1 min, tout vert. Sondes prod après déploiement :
+  `/`, `/characters`, `/characters/aer`, `/equipment/steel-sword`,
+  `/api/search?q=regina` en 200, `x-nextjs-cache: HIT` ; URL inconnue en
+  404 ; les cinq sous-domaines de langue `fr`, `es`, `jp`, `kr`, `zh` en 200. Mon banc avait sondé `de.` par erreur : `de` n'est pas une langue du
+  site (locales `en es fr ja ko zh`, sous-domaines `jp` et `kr`), le
+  serveur standalone avait servi la langue par défaut. Vu en passant :
+  `zh.outerpedia.com` résout directement sur l'IP du VPS (213.32.67.18)
+  alors que les autres passent par Cloudflare — à regarder dans la zone DNS
+  si ce n'est pas voulu.
+
 - **Banc standalone de la PR #62 (next 16.4.2, react 19.3.1, mysql2 3.24.6,
   radix hover-card 1.2.1, eslint-config-next 16.4.2, lefthook 2.2.2) —
   validé (Fable 5.1, sur le « go » de Sevih).** Même recette que la 16.4.0
