@@ -7,6 +7,40 @@
 
 ## 2026-10-23
 
+- **Relecture G48, G49 et G50 (Fable 5.1) — Builder (CP avant / après,
+  colonne Swaps, seuils par clic droit), Presets et Worklist (pleine largeur,
+  grille du jeu, overcap), crit brut visible dans le Builder, validés.**
+  gear-solver `d2dfad6` (11 fichiers), `c369f60` (13), `ec1a214` (13),
+  messages attendus, ni `package.json` ni lock. G48 : `StatsPanel` reçoit
+  `cp` et ouvre sur une ligne CP au format des stats ; « Upg » → « Swaps »
+  (en-tête, tooltips, panneau des ratings, docs ; clés de stockage
+  inchangées) ; `CellMenu` fixe à la position du clic droit (`useClickOutside`,
+  Échap), « Min ≥ / Max ≤ <valeur affichée> » → `setStatFilter` /
+  `setRatingFilter` puis `startSolve(lastSolveMode)` par un ref lu dans un
+  effet sur `filters` ; pas de test de rendu (pas de testing-library, dit) ;
+  la ligne `[Unreleased]` manquait, je l'ai ajoutée (`57d9af4`, mon oubli
+  dans le prompt). G49 : `lib/overcap.ts` partagé (`overcapOf`, crit sur
+  `critRateUncapped` contre 102, pen contre 100), `buildAdvice` l'appelle ;
+  `presetOvercap` (`warn` ≥ 10 points, `fromGems` par comparaison à
+  `asSocketed`) ; grille 4 × 2 `GAME_GRID` avec l'EE du héros de référence
+  atténuée et sa note ; carte en deux colonnes `xl:`, Worklist en
+  `xl:grid-cols-2` sans largeur max, textes à 11-11,5 px. G50 :
+  `critCell.ts` (`critRawOf`, `critCellParts`, `critCellTitle`,
+  `CRIT_TOLERANCE` exportée d'`overcap.ts`), cellule « 100% ⁺42 » en ambre,
+  chaleur et tri sur la brute, panneau courant et projeté pareil. Contrôles
+  sur HEAD : typecheck vert, lint 13 avertissements inchangés, tests 169 +
+  196 + 693 verts. Rejoué par `tsx` : 95 → rien, 102 → rien, brut 142 →
+  « 40% wasted over the 102% cap », pen 120 → 20 ; `presetOvercap` 142
+  contre 105 serti → `warn` et `fromGems` ; `critCellParts` 100/142 → +42,
+  98 → 0, tooltip « within the 2% buffer » à 101.5. Remarque de G48 à
+  connaître : la borne posée est la valeur affichée arrondie, une ligne à
+  85.26 est exclue par « Min ≥ 85.3 ». À contrôler par Sevih sur le fixe :
+  ligne CP, « Swaps », clic droit → seuil + resolve ; Presets et Worklist en
+  deux colonnes, grille Arme | EE | Tête | Torse / Acc | Tal | Gants | Bottes,
+  Regina sur « Striker 1 » en orange avec son badge crit ; « 100% ⁺N » dans
+  les résultats. Suite : installeur de banc à rebâtir, release 1.15.0 sur
+  son mot. Aucun lot ouvert.
+
 - **Relecture G47 (Fable 5.1) — « Optimize preset → » : mêmes effets
   d'arme / accessoire / talisman requis, sous-stats prioritaires depuis la
   tenue et la reco, validé.** `7f57f65` de gear-solver (13 fichiers, message
