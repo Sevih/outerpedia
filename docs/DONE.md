@@ -7,6 +7,19 @@
 
 ## 2026-10-23
 
+- **Release gear-solver 1.15.0 (Fable 5.1, sur le mot de Sevih).** `GH_TOKEN="$(gh
+auth token)" npm run release -- minor` depuis un shell de login : DLL 0.4.0
+  recompilée, installeur sur Electron 44.9.3, SHA-256
+  `5fd305eb…56e5a9af`, VirusTotal soumis, notes de 32 commits (G44 à G52),
+  commit `aaee513` poussé avec le tag `v1.15.0`,
+  https://github.com/Sevih/gear-solver/releases/tag/v1.15.0. Le CI du push
+  précédent (G52) était rouge sur Windows : `quality.test.ts` « on every item
+  of data/derived/equipment.json » a dépassé 5 s, la bascule connue depuis la
+  1.13.0 ; corrigée par un timeout de 30 s sur ce test (`202b27a`, local,
+  à pousser sur le mot de Sevih). Sur le fixe : auto-update depuis la
+  1.14.0, puis Settings › Setup › Update plugin jeu fermé (0.4.0), fermer
+  la PR Dependabot #36 (Electron 44.9.0, dépassée).
+
 - **Relecture G52 (Fable 5.1) — mode compact des cartes de la build
   sélectionnée (réglage Settings › Solver), validé.** `4472913` de gear-solver
   (12 fichiers, message attendu). Lu : réglage `gs.builder.compactCards`
