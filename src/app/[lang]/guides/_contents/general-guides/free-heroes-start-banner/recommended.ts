@@ -59,7 +59,7 @@ export const customBannerPicks: CustomBannerPick[] = [
     },
   },
   {
-    names: ['Dahlia', 'Iota', 'Kanon'],
+    names: ['Dahlia', 'Iota', 'Resonance Eliza'],
     reason: {
       en: 'Excellent PvP units.',
       jp: '優秀なPvPユニット。',
@@ -70,7 +70,7 @@ export const customBannerPicks: CustomBannerPick[] = [
     },
   },
   {
-    names: ['Ame', 'Rey', 'Roxie', 'Maxwell'],
+    names: ['Resonance Rin', 'Ame', 'Rey', 'Roxie'],
     reason: {
       en: 'High damage dealers for general content.',
       jp: '汎用コンテンツ向けの高火力アタッカー。',
@@ -103,7 +103,7 @@ export const customBannerPicks: CustomBannerPick[] = [
     },
   },
   {
-    names: ['Eris', 'Drakhan', 'Regina', 'Caren', 'Vlada', 'Maxie', 'Fortuna'],
+    names: ['Kanon', 'Eris', 'Drakhan', 'Regina', 'Caren', 'Vlada', 'Maxie', 'Fortuna'],
     reason: {
       en: 'DPS with special use cases.',
       jp: '特定用途向けDPS。',
@@ -152,7 +152,6 @@ export const customBannerPicks: CustomBannerPick[] = [
       'Alice',
       'Saeran',
       'Mero',
-      'Leo',
       'Christina',
       'Edelweiss',
       'Delta',

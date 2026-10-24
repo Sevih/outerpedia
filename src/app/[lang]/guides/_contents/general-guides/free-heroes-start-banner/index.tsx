@@ -55,11 +55,14 @@ export default async function FreeHeroesStartBannerGuide({ lang }: { lang: Lang 
     freeHeroesSources.flatMap((s) => s.entries.flatMap((e) => e.names)),
   );
 
-  // « Pas encore dans la Custom Banner » : réguliers 3★ hors du pool réel.
+  // « Pas encore dans la Custom Banner » : réguliers 3★ hors du pool réel. Ceux
+  // de l'onglet Free Heroes (Leo, Maxwell : récompenses du Story Dungeon) n'y
+  // entreront JAMAIS — ce ne sont pas des sorties récentes, on les écarte.
   const notYetInPool: GuideCharacter[] = getAllCharacters()
     .filter((c) => c.rarity === 3)
     .filter((c) => !(c.tags ?? []).some((tag) => SPECIAL_TAGS.has(tag)))
     .filter((c) => !isInCustomRecruitPool(c.id))
+    .filter((c) => !freeHeroNames.has(characterDisplayName(c, 'en')))
     .map((c) => {
       const slug = slugForId(c.id);
       return {
