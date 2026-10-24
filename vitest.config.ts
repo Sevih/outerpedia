@@ -16,5 +16,11 @@ export default defineConfig({
     // Pour tester des composants React plus tard : passer en 'jsdom' + plugin react.
     environment: 'node',
     include: ['{src,datagen,scripts}/**/*.test.{ts,tsx}'],
+    // 15 s au lieu des 5 s par défaut : sur le fixe (Windows), les tests qui
+    // lisent le vrai corpus sur disque tournent 2 à 3 fois plus lentement que sur
+    // le portable (Fedora) ; quatre frôlaient les 5 s dans la suite complète
+    // (boss-view, search-index ×2, bot-api.contract : 3,5 à 4,6 s, 24/10). Les
+    // plus lourds gardent leur `{ timeout: 30_000 }` explicite.
+    testTimeout: 15_000,
   },
 });

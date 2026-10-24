@@ -85,12 +85,19 @@ describe('/api/bot/guides', () => {
     }
   });
 
-  it('`href` mène à une page de guide qui existe', () => {
-    for (const g of buildBotGuides()) {
-      expect(g.href).toBe(`/guides/${g.category}/${g.slug}`);
-      expect(getGuide(g.category, g.slug), g.href).toBeDefined();
-    }
-  });
+  it(
+    '`href` mène à une page de guide qui existe',
+    // Parcourt le disque : hors production, chaque `getGuide` rescanne tous les
+    // guides, donc ~150 scans complets ; ~7 s seul sur le fixe (Windows), sous
+    // les 5 s sur le portable (Fedora) — 24/10.
+    { timeout: 30_000 },
+    () => {
+      for (const g of buildBotGuides()) {
+        expect(g.href).toBe(`/guides/${g.category}/${g.slug}`);
+        expect(getGuide(g.category, g.slug), g.href).toBeDefined();
+      }
+    },
+  );
 });
 
 describe('/api/bot/coupons', () => {

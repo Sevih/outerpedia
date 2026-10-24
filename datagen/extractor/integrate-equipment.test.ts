@@ -239,7 +239,8 @@ describe('integrateEquipmentData — fichier présent mais cassé', () => {
     writeFileSync(join(dir, 'equipment/weapon.json'), CONFLICT);
     const before = snapshot();
     await expect(integrateEquipmentData(dir, fresh, 'weapon', '10')).rejects.toThrow(
-      /equipment\/weapon\.json : JSON invalide/,
+      // Séparateur `[\\/]` : le message porte le chemin natif (`\` sous Windows).
+      /equipment[\\/]weapon\.json : JSON invalide/,
     );
     expect(snapshot()).toEqual(before);
   });
@@ -249,7 +250,7 @@ describe('integrateEquipmentData — fichier présent mais cassé', () => {
     writeFileSync(join(dir, 'equipment/pools.json'), '{ "pExisting": { "v": -1 ');
     const before = snapshot();
     await expect(integrateEquipmentData(dir, fresh, 'weapon', '10')).rejects.toThrow(
-      /equipment\/pools\.json : JSON invalide/,
+      /equipment[\\/]pools\.json : JSON invalide/,
     );
     expect(snapshot()).toEqual(before);
   });

@@ -69,38 +69,45 @@ describe('vidéos des guides', () => {
     expect(égarées).toEqual([]);
   });
 
-  it("l'aller-retour du brouillon admin ne perd aucun contenu", () => {
-    const pertes: string[] = [];
-    for (const g of listGuides()) {
-      const spec = guideSpec(g.category);
-      if (!spec) continue;
-      const draft = loadGuideDraft(g.category, g.slug);
-      const compare = (before: unknown, after: unknown, at: string): void => {
-        if (before === undefined && after === null) return;
-        if (JSON.stringify(canon(before ?? null)) !== JSON.stringify(canon(after ?? null)))
-          pertes.push(at);
-      };
+  it(
+    "l'aller-retour du brouillon admin ne perd aucun contenu",
+    // Parcourt le disque : hors production, chaque `loadGuideDraft` → `getGuide`
+    // rescanne tous les guides, donc ~150 scans complets ; ~7 s seul sur le fixe
+    // (Windows), sous les 5 s sur le portable (Fedora) — 24/10.
+    { timeout: 30_000 },
+    () => {
+      const pertes: string[] = [];
+      for (const g of listGuides()) {
+        const spec = guideSpec(g.category);
+        if (!spec) continue;
+        const draft = loadGuideDraft(g.category, g.slug);
+        const compare = (before: unknown, after: unknown, at: string): void => {
+          if (before === undefined && after === null) return;
+          if (JSON.stringify(canon(before ?? null)) !== JSON.stringify(canon(after ?? null)))
+            pertes.push(at);
+        };
 
-      if (spec.contentFile) {
-        const before = read(g.category, g.slug, 'content.json');
-        if (before !== undefined)
-          compare(before, fromContentDraft(spec, draft), `${g.category}/${g.slug}/content.json`);
-      } else if (spec.versioned) {
-        for (const v of g.versions) {
-          const vd = draft.versions.find((d) => d.key === v.key);
-          if (!vd) continue;
-          for (const [file, data] of Object.entries(fromVersionDraft(spec, vd)))
-            compare(
-              read(g.category, g.slug, 'versions', v.key, file),
-              data,
-              `${g.category}/${g.slug}@${v.key}/${file}`,
-            );
+        if (spec.contentFile) {
+          const before = read(g.category, g.slug, 'content.json');
+          if (before !== undefined)
+            compare(before, fromContentDraft(spec, draft), `${g.category}/${g.slug}/content.json`);
+        } else if (spec.versioned) {
+          for (const v of g.versions) {
+            const vd = draft.versions.find((d) => d.key === v.key);
+            if (!vd) continue;
+            for (const [file, data] of Object.entries(fromVersionDraft(spec, vd)))
+              compare(
+                read(g.category, g.slug, 'versions', v.key, file),
+                data,
+                `${g.category}/${g.slug}@${v.key}/${file}`,
+              );
+          }
+        } else {
+          for (const [file, data] of Object.entries(fromFlatDraft(spec, draft)))
+            compare(read(g.category, g.slug, file), data, `${g.category}/${g.slug}/${file}`);
         }
-      } else {
-        for (const [file, data] of Object.entries(fromFlatDraft(spec, draft)))
-          compare(read(g.category, g.slug, file), data, `${g.category}/${g.slug}/${file}`);
       }
-    }
-    expect(pertes).toEqual([]);
-  });
+      expect(pertes).toEqual([]);
+    },
+  );
 });
