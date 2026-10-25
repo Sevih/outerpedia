@@ -5,6 +5,28 @@
 > détail vit dans git. Le `CHANGELOG.md` racine est GELÉ depuis le 03/08 —
 > ce fichier et le log git SONT le journal du projet.
 
+## 2026-10-25
+
+- **Revue des cinq commits du fixe du 24/10 (Fable 5.1, à la demande de
+  Sevih).** `64eb9943` notes de patch (`buff-events.json`, `posts.json`) ;
+  `a2ff8fce` suite verte sous Windows (séparateur natif dans
+  `integrate-equipment`, timeouts de 30 s sur guide-videos, repin-guides,
+  bot-api qui rescannent ~150 guides hors prod, `testTimeout` global à
+  15 s) ; `9b314703` TODO : `rmSync` des grosses sorties de `.gamedata`
+  sans nouvel essai (EPERM passager sous Windows, correctif = `maxRetries` /
+  `retryDelay` via un utilitaire commun de `datagen/lib/`, trois appels) ;
+  `e8810652` bannière free-heroes selon Shiraen (Resonance Eliza en PvP,
+  Kanon en DPS spécial, Resonance Rin en tête du général, Leo et Maxwell
+  retirés) ; `17ec57c4` patch 1.11.502 (1.7.12, wallpapers +30, pushed.json),
+  CI/CD vert, déployé le 24/10 à 18 h. Contrôles sur HEAD : typecheck,
+  lint, format:check verts, 253 fichiers / 4434 tests. Suites : instantané
+  cloud `outerpedia-gamedata` régénéré pour la 1.11.502 (`1dc089e`, 752
+  fichiers dont 536 périmés retirés, à pousser sur le mot de Sevih) ;
+  `data-sync.yml` de gear-solver déclenché à la main → PR #40 « tables
+  1.11.502 », seul `data/derived/version.json` change (hash des tables
+  inchangé `1f7fe7b`), à fusionner par Sevih ; l'item EPERM du TODO est un
+  lot à rédiger sur « go ».
+
 ## 2026-10-23
 
 - **next 16.4.2 déployé (PR #62 fusionnée par Sevih, suivi Fable 5.1).** CI/CD
