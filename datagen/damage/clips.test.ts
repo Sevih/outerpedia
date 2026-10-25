@@ -535,3 +535,54 @@ describe('resolveSkillClips — un clip sert plusieurs skills (A81)', () => {
     expect(r.unplayedChains).toBeUndefined();
   });
 });
+
+describe('resolveSkillClips — skill sans jointure résolu par ses clips (A82)', () => {
+  // Bursts d'Ame : `Burst1` joue les templets du S1 (rattachés au seul S1)
+  // puis `_Skill_1_5_B`, le coup final ; aucune ligne de jointure.
+  const index = makeIndex({
+    chars: {
+      C: {
+        clips: {
+          C_Skill_1_Burst: ['C_Skill_1_2 ,0', 'C_Skill_1_1,0', 'C_Skill_1_5_B ,0'],
+          C_Skill_5: ['Skip_Finish_Fire ,0'],
+          C_Skill_6: [],
+        },
+        triggers: { Burst1: ['C_Skill_1_Burst'], Skill5: ['C_Skill_5'], Skill6: ['C_Skill_6'] },
+      },
+    },
+    templets: {
+      C_Skill_1_1: { factor: 100 },
+      C_Skill_1_2: { factor: 50, count: 3 },
+      C_Skill_1_5_B: { factor: 1100 },
+      Skip_Finish_Fire: { factor: 1000, owned: false },
+    },
+  });
+
+  it('jointure vide : variante `base`, hits = templets du clip dans l’ordre des events', () => {
+    const r = resolveSkillClips(
+      index,
+      carrier,
+      skill({ type: 'SKT_BURST_1', triggerCsv: 'Burst1' }),
+      [],
+      [],
+    );
+    expect(r.variants?.map((v) => [v.key, v.clip.name])).toEqual([['base', 'C_Skill_1_Burst']]);
+    expect(r.clipHitTemplets).toEqual(['C_Skill_1_2', 'C_Skill_1_1', 'C_Skill_1_5_B']);
+    expect(r.unplayedChains).toBeUndefined();
+    expect(r.sharedTemplets).toBeUndefined();
+  });
+
+  it('sans clip à events, ou un clip de templets communs : rien, le skill reste irrésolu', () => {
+    for (const trigger of ['Skill5', 'Skill6', 'Absent', ''])
+      expect(
+        resolveSkillClips(
+          index,
+          carrier,
+          skill({ type: 'SKT_BACKUP_GROUND', triggerCsv: trigger }),
+          [],
+          [],
+        ),
+        trigger,
+      ).toEqual({});
+  });
+});

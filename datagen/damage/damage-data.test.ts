@@ -188,7 +188,8 @@ describe('damage/characters.json — forme', () => {
   it('les hits sont triés par (chain, hit) et portent l’ID brut', () => {
     const bad: string[] = [];
     for (const s of Object.values(skills)) {
-      for (let i = 1; i < s.hits.length; i++) {
+      // Hits des clips seuls : l'ordre des events (test A82 plus bas).
+      for (let i = 1; s.hitsSource !== 'clips' && i < s.hits.length; i++) {
         const a = s.hits[i - 1];
         const b = s.hits[i];
         const ordered = a.chain < b.chain || (a.chain === b.chain && a.hit <= b.hit);
@@ -338,11 +339,63 @@ describe('damage/characters.json — clips chez le porteur (revue R15, 17/10/202
       '2000012_Skill_5_2',
     ]);
     // `2000065_Skill_1_5_B` n'est joué que par `Burst1` (bursts 6519-6521,
-    // sans jointure, hors de la règle) : il reste hors du S1 d'Ame.
+    // résolus par leurs clips, A82) : il reste hors du S1 d'Ame.
     const ame = animEventsData as unknown as Record<string, { clips: Record<string, string[]> }>;
     expect(ame['2000065'].clips['2000065_Skill_1_Burst']).toContain('2000065_Skill_1_5_B ,0');
     expect(skills['6501'].hits.map((h) => h.id)).not.toContain('2000065_Skill_1_5_B');
-    for (const sid of ['6519', '6520', '6521']) expect(skills[sid].hitsUnresolved, sid).toBe(true);
+  });
+
+  it('tout skill à clips joués a ses hits dans l’ordre des events (A82)', () => {
+    const bad: string[] = [];
+    for (const [sid, s] of Object.entries(skills)) {
+      if (s.hitsSource !== 'clips') continue;
+      const played = [
+        ...new Set(
+          (s.variants ?? []).flatMap((v) =>
+            [v.clip, v.additive?.clip].flatMap((c) => c?.events.map((e) => e.id) ?? []),
+          ),
+        ),
+      ];
+      const ids = s.hits.map((h) => h.id);
+      if (!played.length || ids.join() !== played.join()) bad.push(sid);
+    }
+    expect(bad).toEqual([]);
+  });
+
+  it('un skill sans jointure est résolu par ses clips : bursts d’Ame, restes justifiés (A82)', () => {
+    // `Burst1` → `2000065_Skill_1_Burst` : le `_B` est le coup final
+    // (100 + 75 + 50 × 3 + 75 + 1 100 = 1 500 ‰).
+    for (const sid of ['6519', '6520', '6521']) {
+      const s = skills[sid];
+      expect(s.hitsUnresolved, sid).toBeUndefined();
+      expect(s.hitsSource, sid).toBe('clips');
+      expect(
+        s.variants?.map((v) => [v.key, v.clip.name]),
+        sid,
+      ).toEqual([['base', '2000065_Skill_1_Burst']]);
+      expect(
+        s.hits.map((h) => h.id),
+        sid,
+      ).toEqual([
+        '2000065_Skill_1_1',
+        '2000065_Skill_1_2',
+        '2000065_Skill_1_3',
+        '2000065_Skill_1_4',
+        '2000065_Skill_1_5_B',
+      ]);
+      const total = s.variants![0].clip.events.reduce((t, e) => t + e.factor * e.count, 0);
+      expect(total, sid).toBe(1500);
+    }
+    // Restent irrésolus : les passifs de chaîne (sans `TriggerName`) et six
+    // skills dont le clip n'a aucun EventAttackStart extrait.
+    const left = Object.values(skills).filter((s) => s.hitsUnresolved);
+    expect(left.filter((s) => s.variants?.length)).toEqual([]);
+    expect(
+      left
+        .filter((s) => s.type !== 'SKT_CHAIN_PASSIVE')
+        .map((s) => s.id)
+        .sort(),
+    ).toEqual(['1110', '2119', '2120', '2121', '509', '510']);
   });
 });
 

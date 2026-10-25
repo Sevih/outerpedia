@@ -78,8 +78,15 @@
  *    appliqué par characters.ts) — le clip `2000012_Skill_6` de Valentine
  *    1206 joue `2000012_Skill_5_1` (300 ‰, rattaché à 1205/1209) avant
  *    `_5_2` : ses lignes de détail le montrent, le total (events du clip)
- *    ne change pas. Un skill SANS jointure (bursts, backups, fusionnés :
- *    `hitsUnresolved`) n'entre pas dans la règle, résolu ou non par son clip.
+ *    ne change pas ;
+ *  - skill SANS jointure (lot A82, 25/10/2026 : bursts, backups, strikes,
+ *    kits de fusionnés) : il n'a que ses clips, la règle du clip de base
+ *    étranger s'applique d'elle-même — ses hits sont les templets que jouent
+ *    ses clips (`clipHitTemplets`), dans l'ordre des events, rattachés à un
+ *    autre skill ou non. Les bursts 6519-6521 d'Ame jouent `Burst1` →
+ *    `2000065_Skill_1_Burst`, templets du S1 puis `2000065_Skill_1_5_B`
+ *    (1 100 ‰, le coup final). Sans clip de base (passif sans trigger, clip
+ *    sans event extrait), rien ne sort : `hitsUnresolved`.
  *
  * Suite additionnelle, condition : comptée PAR DÉFAUT (`selfMet`) seulement
  * quand le clip de base pose LUI-MÊME la condition du buff additif — dérivé
@@ -159,9 +166,10 @@ export interface SkillClipsResult {
   /** Chaînes dont l'affectation n'est pas résolue (cf. en-tête) — le moteur
    *  retombe sur l'heuristique § 12.4 pour ces états. */
   clipsUnresolvedChains?: string[];
-  /** Clip de base ÉTRANGER à la jointure `SkillID` (cf. l'en-tête) : les
-   *  templets joués par les clips du skill, dans l'ordre — characters.ts en
-   *  refait les hits du skill (pas un champ de `characters.json`). */
+  /** Clip de base ÉTRANGER à la jointure `SkillID`, ou jointure vide (A82,
+   *  cf. l'en-tête) : les templets joués par les clips du skill, dans
+   *  l'ordre des events — characters.ts en refait les hits du skill (pas un
+   *  champ de `characters.json`). */
   clipHitTemplets?: string[];
   /** Clip de base PROPRE (cf. l'en-tête) : chaînes de la jointure qu'aucun
    *  clip du skill ne joue — characters.ts les retire des hits (pas un champ
@@ -303,7 +311,8 @@ export function resolveSkillClips(
   kitBuffIds: Iterable<string>,
   hits: { id: string; chain: string }[],
 ): SkillClipsResult {
-  if (!hits.length) return {};
+  // Sans jointure (`hits` vide), le skill n'a que ses clips : la règle du
+  // clip de base étranger s'applique d'elle-même (lot A82, cf. l'en-tête).
   const entry = index.chars.get(carrier.model);
   if (!entry) return {};
 
@@ -507,6 +516,9 @@ export function resolveSkillClips(
         ),
       ]
     : undefined;
+  // Sans jointure ni clip de base : rien à servir, le skill reste
+  // `hitsUnresolved` (characters.ts).
+  if (!hits.length && !clipHitTemplets) return {};
   // Clip de base propre (cf. l'en-tête) : les chaînes de la jointure
   // qu'aucun clip ne joue n'ont pas d'état — sans chaîne irrésolue, une
   // chaîne est jouée tout entière ou pas du tout (`covered`).

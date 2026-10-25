@@ -13,7 +13,9 @@
  * burst 1/2) couvre 1506/1542 lignes ; le reliquat sans `SkillID` est composé
  * de templets communs (`DT_*`, `Skip_Finish_*`) affectés par AnimationEvents
  * (spec formule § 12.4) — un skill à `DamageFactor > 0` sans aucune ligne de
- * hits est marqué `hitsUnresolved`, jamais comblé par une supposition.
+ * hits est résolu par les clips qui le jouent (lot A82 : bursts, backups,
+ * fusionnés, `hitsSource: 'clips'`), sinon marqué `hitsUnresolved`, jamais
+ * comblé par une supposition.
  *
  * La clé de chaîne (`chain`/`hit`) est DÉRIVÉE de la convention d'ID
  * (`<charId>_Skill_<n>[_<variante>]_<hit>`) : c'est une indication, l'ID brut
@@ -114,9 +116,16 @@ export interface DamageSkill {
    *  templets de ses clips rattachés à d'autres skills (cf. l'en-tête). */
   hits: DamageHit[];
   /**
-   * `DamageFactor > 0` à au moins un niveau mais AUCUNE ligne de hits par la
-   * jointure `SkillID` : l'affectation vit dans les AnimationEvents (spec
-   * § 12.4), non extraite — incertitude documentée, jamais comblée.
+   * `clips` : les hits sont les templets que jouent les clips du skill, dans
+   * l'ordre des events — jointure vide (bursts, backups, fusionnés, lot A82)
+   * ou étrangère à son clip de base (F30). Absent : la jointure `SkillID`.
+   */
+  hitsSource?: 'clips';
+  /**
+   * `DamageFactor > 0` à au moins un niveau mais AUCUNE ligne de hits, ni par
+   * la jointure `SkillID` ni par un clip de base (A82 : passifs de chaîne sans
+   * `TriggerName`, clips sans `EventAttackStart` extrait) — incertitude
+   * documentée, jamais comblée.
    */
   hitsUnresolved?: boolean;
   /**
@@ -325,31 +334,36 @@ export function buildDamageCharacters(): DamageCharactersData {
         `damage/characters: skill ${id} — aucun de ses hits n'est joué par l'animator ${carrier.model}`,
       );
     }
-    const { clipHitTemplets, unplayedChains, sharedTemplets, ...clips } = resolveSkillClips(
-      clipIndex,
-      { id: carrier.id, model: carrier.model, originId: fusionOrigin.get(carrier.id) },
-      {
-        id,
-        type: s?.SkillType ?? '',
-        triggerCsv: s?.TriggerName,
-        triggerSkipCsv: s?.TriggerNameSkip,
-        buffIds: [...new Set(levels.flatMap((l) => l.buffIds))],
-      },
-      kitBuffIdsByChar.get(carrier.id) ?? [],
-      joinedHits,
-    );
-    // Clip de base étranger à la jointure `SkillID` (clips.ts) : les hits du
-    // skill sont les templets que ses clips jouent. Clip de base propre
-    // (lot A76) : les chaînes de la jointure qu'aucun clip ne joue en sortent,
-    // les templets de ses clips rattachés à d'autres skills y entrent (A81).
+    const offensive = levels.some((l) => l.damageFactor > 0);
+    // Sans jointure, seul un skill offensif est résolu par ses clips (A82).
+    const { clipHitTemplets, unplayedChains, sharedTemplets, ...clips } =
+      joinedHits.length || offensive
+        ? resolveSkillClips(
+            clipIndex,
+            { id: carrier.id, model: carrier.model, originId: fusionOrigin.get(carrier.id) },
+            {
+              id,
+              type: s?.SkillType ?? '',
+              triggerCsv: s?.TriggerName,
+              triggerSkipCsv: s?.TriggerNameSkip,
+              buffIds: [...new Set(levels.flatMap((l) => l.buffIds))],
+            },
+            kitBuffIdsByChar.get(carrier.id) ?? [],
+            joinedHits,
+          )
+        : {};
+    // Clip de base étranger à la jointure `SkillID`, ou jointure vide (A82)
+    // (clips.ts) : les hits du skill sont les templets que ses clips jouent,
+    // dans l'ordre des events. Clip de base propre (lot A76) : les chaînes de
+    // la jointure qu'aucun clip ne joue en sortent, les templets de ses clips
+    // rattachés à d'autres skills y entrent (A81).
     const unplayed = new Set(unplayedChains);
     const hits = clipHitTemplets
-      ? clipHitTemplets.map((t) => hitById.get(t)!).sort(byHitOrder)
+      ? clipHitTemplets.map((t) => hitById.get(t)!)
       : [
           ...joinedHits.filter((h) => !unplayed.has(h.chain)),
           ...(sharedTemplets ?? []).map((t) => hitById.get(t)!),
         ].sort(byHitOrder);
-    const offensive = levels.some((l) => l.damageFactor > 0);
     // Burstable : règle PARTAGÉE avec le générateur skills (datagen/lib/burst)
     // — les deux artefacts doivent porter le même marqueur (garde croisée).
     const burstCosts = burstAPCosts(s?.RequireAP);
@@ -362,6 +376,7 @@ export function buildDamageCharacters(): DamageCharactersData {
       levels,
       ...(burstCosts ? { burstAP: burstCosts } : {}),
       hits,
+      ...(clipHitTemplets ? { hitsSource: 'clips' as const } : {}),
       ...(offensive && !hits.length ? { hitsUnresolved: true } : {}),
       ...clips,
     };

@@ -7,6 +7,77 @@
 
 ## 2026-10-25
 
+- **A82 — Calculateur : un skill sans jointure (bursts, backups, strikes,
+  kits de fusionnés) est résolu par les clips qui le jouent ; 273 → 130
+  `hitsUnresolved`, les bursts d'Ame affichent leurs hits.** Suite d'A81 :
+  la règle « un skill joué par le clip d'un autre » étendue aux skills
+  qu'aucune ligne `SkillID` ne sert. Pourquoi : le client ne lit que les
+  `EventAttackStart` du clip courant (spec `damage-clips-joues.md` § 1.3),
+  la jointure ne sert qu'au simulateur ; ces skills tombaient en « pas
+  encore supporté » et `solver-best-skill.ts` leur comptait le facteur plein
+  en repli. Comment : `datagen/damage/clips.ts` › `resolveSkillClips` ne
+  sort plus tôt sur une jointure vide, et la règle du clip de base étranger
+  (F30) s'y applique d'elle-même : les hits sont les templets que jouent les
+  clips (`clipHitTemplets`), dans l'ordre des events, rattachés à un autre
+  skill ou non ; sans clip de base, rien ne sort. `characters.ts` ne résout
+  sans jointure que les skills offensifs, garde l'ordre des events pour ces
+  hits (plus de retri par chaîne) et pose le champ ADDITIF
+  `DamageSkill.hitsSource: 'clips'`, aussi sur les 16 skills de F30
+  (jointure étrangère : ce champ seul change pour eux, hits et ordre
+  identiques) ; absent, la jointure. Règle écrite dans les en-têtes de
+  `clips.ts` et `characters.ts`, la doc de `hitsSource` et de
+  `hitsUnresolved`, et la spec § 5 (encadré « Complété par A82 », exemples
+  d'Ame et de Valentine). Diff sémantique de `characters.json` (script du
+  scratchpad) : racine et persos identiques, 159 skills touchés, +8 077/−1 060
+  lignes ; 143 résolus (`hits`, une variante `base`, `hitsSource`, plus de
+  `hitsUnresolved`) — 82 backups ; 14 strikes, dont Valentine 1207 (`Skill7`
+  → `2000012_Skill_6_1`, rattaché à 1206) ; 9 S1/S2/S3, fusionnés Rin
+  1951-1953, Veronica 3752, Epsilon 7051-7053, et les S3 de Bryn 7603 et de
+  Hilde 8803 ; 38 bursts (13 B1, 13 B2, 12 B3), dont Ame 6519-6521 (`Burst1`
+  → `2000065_Skill_1_Burst`, templets du S1 puis `2000065_Skill_1_5_B`,
+  100 + 75 + 50 × 3 + 75 + 1 100 = 1 500 ‰) et Valentine 1219-1221
+  (`2000012_Skill_1_Upgrade`, 7 × 143 ‰ = 1 001 ‰). Seuls les backups de
+  Kanon 7109/7110 (`_5_1`, `_5_1_1`, `_5_2`) ont un ordre des events autre
+  que celui des chaînes ; le commun `Sound_Mute` (0 ‰) entre dans les hits
+  du S3 de Rin fusionnée, comme les communs sous F30. Restent
+  `hitsUnresolved` (130), par famille : bursts, Hanbyul Lee 2119-2121 (clip
+  `2000021_Skill_2_Upgrade` sans `EventAttackStart` extrait) ; backups,
+  Lisha 509/510 et Lily 1110 (même raison) ; fusionnés, aucun ; autres, les
+  124 passifs de chaîne offensifs du roster (`SKT_CHAIN_PASSIVE`, sans
+  `TriggerName`). Facteur max (`skillMaxFactor`) : 130 des 143 inchangés
+  (clips à 1 000 ‰ pile) ; changent Ame 6519-6521 1 630 → 2 445 (+50 %),
+  Valentine 1219-1221 1 500 → 1 502, backups 6110 et 6409 1 200 → 1 202,
+  9109/9110 1 200 → 1 201, et le strike et les backups de Lisha fusionnée
+  (556/559/560) 1 050 → 525 (leur clip joue 500 ‰, règle inchangée du
+  moteur) ; sur les 38 bursts, variation min 0, médiane 0, max +50 % (Ame).
+  Contrat solver : aucun ne gagne `bestSkill` (Ame reste au S3, 3 864 ;
+  Valentine au S1, 1 502) ; `pnpm datagen:build` puis `datagen:promote` à
+  blanc : « 65 identique(s), 2 différent(s) », `solver/version.json` (hash,
+  date) et `solver/characters.json`, où seuls les drapeaux facultatifs
+  `bestSkill.unresolvedHits` et `rotation.approx` disparaissent pour Bryn
+  (S3 2 800), Hilde (S3 2 100), Rin fusionnée (S2 burst 3, 2 038) et Epsilon
+  fusionnée (S3 2 800), facteurs identiques ; aucun champ retiré du schéma,
+  `schema` intouché : une gear-solver 1.15.x n'est pas nécessaire, elle lira
+  les valeurs telles quelles. Vérification : `pnpm damage:build` :
+  `anim-events.json` ré-extrait identique, seul `damage/characters.json`
+  change, « 130 offensifs sans chaîne de hits », « Bilan : 42 ligne(s)
+  exacte(s), 0 en dérive, 0 sautée(s) » ; pas de ligne de référence pour Ame
+  B1 (aucune capture en jeu, la fiche n'affiche que le facteur de la table,
+  1 630 ‰, que la donnée lit déjà). `damage-data.test.ts` + 2 tests :
+  l'invariant « tout skill à clips joués a ses hits dans l'ordre des events »
+  et les bursts d'Ame (variante, hits dans l'ordre, 1 500 ‰) avec les six
+  restes hors passifs de chaîne ; le test A81 ne dit plus 6519-6521
+  irrésolus, « triés par (chain, hit) » exempte `hitsSource: 'clips'`.
+  `clips.test.ts` + 2 cas (jointure vide → `clipHitTemplets` dans l'ordre
+  des events ; sans clip à events, clip de communs, trigger absent ou vide →
+  rien). `pnpm typecheck` : les trois `tsc --noEmit` sans erreur ;
+  `pnpm lint` : `eslint` sans message ; `pnpm test` : « Tests 4454 passed (4454) ».
+  Laissé : les phrases datées de `damage-data-mapping.md` (« 256 skills ») et
+  `damage-report-inputs.md` (« LIVRÉ 03/08 ») sur `hitsUnresolved`,
+  historiques ; les six clips sans event, à ré-extraire si besoin. ⏳ Sevih :
+  un burst d'Ame affiche désormais ses hits dans le calculateur ; vérifier
+  une valeur en jeu si possible.
+
 - **Relecture A80 (corrigé) et A81 (Fable 5.1) — burstable selon le client et
   `timegate-resources` lisant la quantité par achat ; clip de Valentine 1206
   rattaché, `_B` d'Ame prouvé : les deux validés.** A80 `a91db023` +
