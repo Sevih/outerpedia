@@ -7,6 +7,26 @@
 
 ## 2026-10-25
 
+- **Relecture B69 (Fable 5.1) — badge « Updating » sur les vues à bannière
+  et les autres vues qui ouvrent un guide, version dupliquée dans quick née
+  visible, validé.** `ccd8de8d` (18 fichiers, message attendu). Lu :
+  `UpdatingBadge` extrait de `GuideCard` et posé dans `BannerGrid`,
+  `SkywardTowerView`, `TieredList`, `MonadGateView` / `MonadGateGallery`,
+  `SpecialRequestSplit`, `IrregularChaseMap`, `LicenseTabs`, `AdventureGrid`
+  / `AdventureLicense` / `AdventureSeasons`, `SingularityRotation` ; les
+  vues client reçoivent le texte déjà localisé, seulement si le guide est en
+  mise à jour ; `CardArt`, `ModeColumns` et `DefaultGrid` passent par
+  `GuideCard`. Quick : `guide-store.ts` écrit `hidden: false` dans le
+  `version.json` copié (label gardé, source inchangée), message de
+  `actions.ts` suivi, trois cas dans `guide-store.pinned.test.ts`.
+  Contrôles sur HEAD (A80 compris) : typecheck, lint, format:check verts,
+  255 fichiers / 4447 tests, quick 8 / 1177. À contrôler par Sevih à
+  l'écran : site › Guides › World Boss avec un guide coché « En cours de
+  mise à jour » → marqueur sur la bannière ; quick › Guides › Drakhan ›
+  « ＋ version » sur une version cachée → la nouvelle est visible. A80 :
+  un point renvoyé à l'agent (voir sa relecture) ; A81 : bloqué, question à
+  Sevih.
+
 - **Guides « en cours de mise à jour » : marqueur sur les vues à bannière et
   partout où un guide s'ouvre, une version dupliquée dans quick naît visible
   (B69).** Quoi : les deux restes de B66 du TODO (« Restes de la relecture du
