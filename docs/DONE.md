@@ -7,6 +7,22 @@
 
 ## 2026-10-25
 
+- **Relecture A79 (Fable 5.1) — `rmTree` avec nouvel essai pour les
+  suppressions récursives de `.gamedata`, validé.** `90ceac44` (7 fichiers,
+  message attendu, ni `package.json` ni lock). Lu : `datagen/lib/fs.ts` ›
+  `rmTree(path, opts?)` = `rmSync` récursif, `force`, `maxRetries` 5 et
+  `retryDelay` 200 par défaut, en-tête qui dit le plantage du 24/10 et les
+  codes que Node réessaie ; les six appels d'`extract.ts`,
+  `extract-wallpapers.ts` et `extract-audio.ts` passent par lui, imports
+  `rmSync` retirés, commentaire voisin suivi ; `fs.test.ts` à quatre cas
+  (arbre entier, chemin absent, options par défaut transmises, surcharge)
+  avec un espion qui délègue au vrai `rmSync`. Contrôles sur HEAD :
+  typecheck, lint, format:check verts, 254 fichiers / 4438 tests. Rejoué par
+  `tsx` : un arbre temporaire à deux niveaux disparaît, un chemin absent ne
+  lève pas. À contrôler par Sevih sur le fixe au prochain `pnpm dev` ou
+  `datagen:extract` : plus d'EPERM en vidant `extracted/images` ; s'il
+  revient au même dossier à chaque relance, chercher le processus.
+
 - **datagen : suppressions récursives de `.gamedata` avec nouvel essai sur
   EPERM / EBUSY / ENOTEMPTY, utilitaire commun `rmTree` (A79).** Quoi :
   `rmTree(path, opts?)` dans `datagen/lib/fs.ts` = `rmSync` récursif et
