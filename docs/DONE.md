@@ -7,6 +7,45 @@
 
 ## 2026-10-25
 
+- **Relectures A82 (outerpedia) et G53, G54, G56 (gear-solver) (Fable 5.1) —
+  les quatre validés.** A82 `311f6408` (7 fichiers) : un skill sans
+  jointure est résolu par les clips de son trigger ; 159 skills touchés
+  (82 backups, 14 strikes dont Valentine 1207, bursts et fusionnés), 130
+  `hitsUnresolved` restants listés par famille ; sur les 38 bursts du
+  contrat, variation min 0, médiane 0, max +50 % (Ame) ;
+  `datagen:promote` à blanc « 65 identiques, 2 différents » : `solver/`
+  perd seulement les drapeaux facultatifs `bestSkill.unresolvedHits` /
+  `rotation.approx` chez Bryn, Hilde, Rin fusionnée et Epsilon fusionnée,
+  facteurs identiques, schéma intact ; spec § 5 complétée. Contrôles sur
+  HEAD : typecheck, lint, format:check verts, 255 fichiers / 4454 tests,
+  `damage:check` « 42 exactes, 0 en dérive ». À contrôler par Sevih : un
+  burst d'Ame affiche ses hits dans le calculateur ; après le prochain
+  `datagen:promote --apply`, gear-solver lit les nouveaux drapeaux tel quel
+  (forme inchangée, pas de release nécessaire). gear-solver G53 `b6c74e1` :
+  `worklistClaims` d'`App.tsx` jusqu'à `buildGemPool` via
+  `PresetEvalContext`, test « gemme d'un EE réservé pour un autre héros non
+  proposée » ; l'agent a VÉRIFIÉ sur Electron 44.9.3 que `gs.solver.heroFilters`
+  est en sessionStorage (survit au rechargement, pas au relancement) : le
+  mot « session » était juste, textes précisés, le reste du TODO corrigé.
+  G54 `87a24d4` : la Worklist résout nom et main dans l'inventaire courant
+  (repli sur les champs stockés), une pièce absente est « gone » (non
+  cochable, hors compte et hors réservations, toast `goneNotice`),
+  `foldEquipEvents` met à 0 l'uid retiré dans chaque `PresetList` ; rejoué
+  par `tsx` : fodder d'un preset → son slot à 0, rejeu idempotent. G56
+  `a61c5b4` (23 fichiers) : `lib/solver/reroll.ts` avec la règle lue dans
+  le client (Option Change sur 4 lignes, palier 4 seulement pour 6★ Unique
+  via `ItemOptionChangeTemplet` lignes 24 et 48, une ligne au palier 4 par
+  pièce, reforges conservées, pas de compteur), option « Transistone
+  potential » dans les filtres par héros et la barre du Builder, projection
+  et `addedTicks` marqués, qualité `reachable` ; rejoué par `tsx` : 6★
+  unique 3/3/3/1 → +1 sur la ligne prioritaire, 4/3/3/3 → rien, 5★ rare →
+  rien. Contrôles gear-solver sur HEAD : typecheck vert, lint 13
+  avertissements inchangés, tests 169 + 199 + 729 verts. À contrôler par
+  Sevih sur le fixe : gemme d'un EE réservé absente des propositions d'un
+  autre héros ; main d'un talisman en file qui suit l'enchant, ligne
+  « gone » après un fodder ; option Transistone sur une 3/3/3/1. Suite :
+  G55 seul (electron-builder 26), puis release 1.16.0.
+
 - **A82 — Calculateur : un skill sans jointure (bursts, backups, strikes,
   kits de fusionnés) est résolu par les clips qui le jouent ; 273 → 130
   `hitsUnresolved`, les bursts d'Ame affichent leurs hits.** Suite d'A81 :
