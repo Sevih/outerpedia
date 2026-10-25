@@ -7,6 +7,33 @@
 
 ## 2026-10-25
 
+- **Relecture G55 (gear-solver) (Fable 5.1) — electron-builder 25.1.8 → 26.15.3
+  et electron-updater aligné, installeur de banc, validé.** `0406952`, trois
+  fichiers : `apps/desktop/package.json` (`electron-builder` `^26.15.3`,
+  `electron-updater` `^6.8.9` aux deux endroits, dépendance et
+  `build.extraMetadata`), `package-lock.json`, `docs/changelog.md`. Message de
+  commit conforme ; `pnpm-lock.yaml` absent. Périmètre du lock rejoué par un
+  script d'atteignabilité à moi (`node`, racines = workspaces, arêtes sans
+  `electron-builder` ni `electron-updater`) : 348 paquets atteignables avant,
+  348 après, zéro version qui bouge — le lock ne change que sous les deux
+  paquets visés. `npm audit` relancé : 12 vulnérabilités (1 modérée, 11
+  hautes, 0 critique) contre 27 ; installés : electron-builder 26.15.3,
+  app-builder-lib 26.15.3, electron-updater 6.8.9 (version déjà résolue par
+  le lock avant le lot, l'updater embarqué ne change pas). Contrôles sur HEAD :
+  `npm run typecheck` vert, `npm run lint` 13 avertissements (inchangé),
+  `npm test` 169 + 199 + 729. Installeur `Outerpedia Gear Solver Setup
+1.15.0-g55.exe` présent dans `~/Echanges-Claude/` (112 824 374 octets,
+  SHA-256 `605ea568…209a4a`, celui du journal) ; `latest.yml` de `release/`
+  remis à la 1.15.0. `scripts/release.mjs` non touché : `hashInstaller` cherche
+  « setup » + version + `.exe`, et l'asset GitHub garde les espaces changés en
+  tirets, ce que la 26 produit toujours. **À Sevih, sur le fixe** : installer
+  la g55 par-dessus la 1.15.0 → capture au lobby, un solve, « Equip this
+  build » jeu fermé. **Suite** : release 1.16.0 (G53, G54, G55, G56) sur son
+  mot ; le vrai contrôle de la 26 est l'auto-update depuis la 1.15.0 à cette
+  release (`latest.yml` et blockmap désormais produits par la 26). Laissé :
+  `npm audit fix` des 12 restantes (`vite`, `wait-on`, `eslint`, `electron`),
+  hors lot. Aucun lot ouvert.
+
 - **Relectures A82 (outerpedia) et G53, G54, G56 (gear-solver) (Fable 5.1) —
   les quatre validés.** A82 `311f6408` (7 fichiers) : un skill sans
   jointure est résolu par les clips de son trigger ; 159 skills touchés
