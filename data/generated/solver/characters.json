@@ -59609,8 +59609,7 @@
     "recommendSetId": "1,12,13",
     "bestSkill": {
       "slot": "S3",
-      "factor": 2800,
-      "unresolvedHits": true
+      "factor": 2800
     },
     "rotation": {
       "factorPerTurn": 2800,
@@ -59619,8 +59618,7 @@
         "S1": 0,
         "S2": 0,
         "S3": 1
-      },
-      "approx": true
+      }
     }
   },
   "2000077": {
@@ -68735,8 +68733,7 @@
     "dmgStat": "hp",
     "bestSkill": {
       "slot": "S3",
-      "factor": 2100,
-      "unresolvedHits": true
+      "factor": 2100
     },
     "rotation": {
       "factorPerTurn": 1638,
@@ -68745,8 +68742,7 @@
         "S1": 2,
         "S2": 1,
         "S3": 1
-      },
-      "approx": true
+      }
     }
   },
   "2000089": {
@@ -97328,8 +97324,7 @@
     "bestSkill": {
       "slot": "S2",
       "burst": 3,
-      "factor": 2038,
-      "unresolvedHits": true
+      "factor": 2038
     },
     "rotation": {
       "factorPerTurn": 1613,
@@ -97338,8 +97333,7 @@
         "S1": 2,
         "S2": 1,
         "S3": 1
-      },
-      "approx": true
+      }
     }
   },
   "2700035": {
@@ -101712,8 +101706,7 @@
     "dmgStat": "def",
     "bestSkill": {
       "slot": "S3",
-      "factor": 2800,
-      "unresolvedHits": true
+      "factor": 2800
     },
     "rotation": {
       "factorPerTurn": 1855,
@@ -101722,8 +101715,7 @@
         "S1": 3,
         "S2": 0,
         "S3": 1
-      },
-      "approx": true
+      }
     }
   }
 }
