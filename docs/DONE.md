@@ -7,6 +7,28 @@
 
 ## 2026-10-25
 
+- **Correction A80 : `ProductGoodsValue` vide ou à 0 compte 1 unité par achat
+  dans `timegate-resources`.** Quoi : `datagen/generators/timegate-resources.ts`
+  › `shopSourcesFor` multiplie `MaxBuyCount` par `num(r.ProductGoodsValue) || 1`
+  au lieu de `num(r.ProductGoodsValue)`. Pourquoi : demandé à la relecture d'A80
+  ; le jeu ne vend pas zéro item, et une valeur absente faisait tomber à 0 une
+  ligne qui compte au moins un achat. La table courante en porte une (29001,
+  Guild Shop, item 1000000, `MaxBuyCount` 10, `PRT_DAILY`) : elle est
+  aujourd'hui écartée par `isCurrent` (ouverture en 2999) et l'item n'est pas
+  suivi, mais une date réelle l'aurait comptée 0. L'entrée A80 ci-dessous disait
+  « sans défaut à 1 », c'est celle-ci qui fait foi ; `shop-priorities.ts` garde
+  son `gives: num(r.ProductGoodsValue)` (0 pour une valeur absente), hors
+  périmètre. Comment : commentaire de `shopSourcesFor` suivi, nouveau cas dans
+  `timegate-resources.test.ts` (valeur absente et valeur `'0'` → `MaxBuyCount`
+  inchangé, 3 par semaine). Vérifié : `pnpm datagen:build` à blanc,
+  `timegate-resources.json` identique octet pour octet au validé et
+  `pnpm datagen:promote` en dry « 67 identique(s), 0 différent(s) » ;
+  `pnpm typecheck` et `pnpm lint` verts ; `pnpm test` « Tests 1 failed | 4447
+  passed (4448) », le seul rouge dans `datagen/damage/clips.test.ts` (« index 0
+  seul : une variante `base` »), fichier que je n'ai pas touché et dont la
+  source `datagen/damage/clips.ts` est modifiée dans l'arbre par un autre lot en
+  cours ; `timegate-resources.test.ts` passe ses 6 cas.
+
 - **Relecture B69 (Fable 5.1) — badge « Updating » sur les vues à bannière
   et les autres vues qui ouvrent un guide, version dupliquée dans quick née
   visible, validé.** `ccd8de8d` (18 fichiers, message attendu). Lu :

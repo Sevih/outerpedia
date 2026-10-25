@@ -72,4 +72,9 @@ describe('shopSourcesFor — quantité par achat', () => {
   it('un par achat → MaxBuyCount inchangé', () => {
     expect(weeklyOf(pack('1'))).toBe(3);
   });
+
+  it('valeur absente ou à 0 → 1 par achat, MaxBuyCount inchangé', () => {
+    expect(weeklyOf(pack(undefined))).toBe(3);
+    expect(weeklyOf(pack('0'))).toBe(3);
+  });
 });

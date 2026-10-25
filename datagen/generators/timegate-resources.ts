@@ -174,7 +174,8 @@ function itemIcon(
  * plafond le plus élevé, puis on fond hebdo + mensuel sur UNE ligne (les deux
  * colonnes de la table les portent). Le daily est ramené en hebdo (×7).
  * Les quantités sont des UNITÉS d'item : `MaxBuyCount` achats × `ProductGoodsValue`
- * unités par achat (lu comme `shop-priorities`, `gives`) — un pack de 5 compte 5.
+ * unités par achat — un pack de 5 compte 5. Valeur vide ou à 0 → 1 : le jeu ne
+ * vend pas zéro item (des lignes PGT_ITEM sans valeur existent).
  */
 export function shopSourcesFor(
   itemId: string,
@@ -191,7 +192,7 @@ export function shopSourcesFor(
       if (!isCurrent(r, asOf, maxYear)) continue;
       const period = PERIOD[r.ProductResetType ?? ''];
       if (!period || period === 'one-time') continue; // récurrent seulement
-      const c = num(r.MaxBuyCount) * num(r.ProductGoodsValue);
+      const c = num(r.MaxBuyCount) * (num(r.ProductGoodsValue) || 1);
       if (c > (best.get(period) ?? 0)) best.set(period, c);
     }
     if (!best.size) continue;
