@@ -7,6 +7,30 @@
 
 ## 2026-10-25
 
+- **Relecture A80 (corrigé) et A81 (Fable 5.1) — burstable selon le client et
+  `timegate-resources` lisant la quantité par achat ; clip de Valentine 1206
+  rattaché, `_B` d'Ame prouvé : les deux validés.** A80 `a91db023` +
+  `a3b204c7` : `burst.ts` dit la règle du client (`CSkill.cs:75`,
+  `IsBurstEntryType => 0 < RequireAPList.Count`), un seul coût est burstable,
+  test ajouté ; `shopSourcesFor` multiplie `MaxBuyCount` par
+  `ProductGoodsValue`, valeur vide ou 0 → 1 après ma demande (une ligne
+  PGT_ITEM du Guild Coin shop est sans valeur), tests « pack de 5 », « un
+  par achat », « valeur absente ou 0 » ; `datagen:promote` à blanc par
+  l'agent : 67 identiques. A81 `b7063413` : `resolveSkillClips` rend
+  `sharedTemplets` (templets joués par les clips d'un skill mais rattachés
+  par la jointure à un autre, pour un skill à jointure non vide),
+  `characters.ts` les ajoute aux hits dans l'ordre ; 1206 montre
+  `2000012_Skill_5_1` dans ses lignes (`damage/characters.json`, +200
+  lignes), total inchangé ; `2000065_Skill_1_5_B` prouvé non-variante :
+  dernier event du clip `2000065_Skill_1_Burst` (trigger `Burst1`) que
+  portent les bursts 6519-6521, aujourd'hui `hitsUnresolved` — laissé sorti,
+  la règle générale fait le lot A82 ; spec et tests suivis. Contrôles sur
+  HEAD : typecheck, lint, format:check verts, 255 fichiers / 4450 tests,
+  `damage:check` « 42 exactes, 0 en dérive, 0 sautée ». `solver/` inchangé
+  (seul `damage/characters.json` dans le diff). À contrôler par Sevih :
+  fiche de Valentine, S5 : la ligne `2000012_Skill_5_1` apparaît, total
+  identique. Suite : A82 rédigé.
+
 - **A81 — Calculateur : le clip de Valentine 1206 montre `2000012_Skill_5_1`
   dans ses lignes de détail ; `2000065_Skill_1_5_B` prouvé joué par les
   bursts d'Ame, laissé hors du S1.** Item du TODO « Deux restes d'A76 »
