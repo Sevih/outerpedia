@@ -162,10 +162,6 @@ les preuves et les décisions vivent dans le tri consolidé de sevih-tool
 
 ## 🔧 gear-solver
 
-- [ ] **Electron 44.9.3 (G45, 22/10) — banc du fixe à faire** avec
-      l'installeur `1.14.0-g45` de ~/Echanges-Claude, puis release 1.15.0
-      (G44 + G45), auto-update depuis la 1.14.0, fermer la PR Dependabot #36
-      (et #37 vitest, #38 @types/node si Sevih les veut).
 - [ ] **Presets du jeu — restes** : le pool de gemmes d'EE des presets ignore
       les réservations de la Worklist (relevé par G41) ; priorités par héros
       en session (le Builder repart propre), l'onglet Presets replie sur la
