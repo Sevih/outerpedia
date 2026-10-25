@@ -20,14 +20,6 @@ les preuves et les décisions vivent dans le tri consolidé de sevih-tool
       `BT_STACK_STAT` dans le calculateur (plus tard). Les deux latents (c)
       sont FAITS (A80, 25/10).
 
-## 🧹 Restes de la relecture du 21/10 (B66, A76, A77, C27, G35)
-
-- [ ] **Deux restes d'A76 (calculateur)** : le clip de Valentine 1206 joue
-      `2000012_Skill_5_1`, rattaché par la jointure à 1205/1209 et absent de
-      ses lignes de détail (total juste) ; `2000065_Skill_1_5_B` (1 100 ‰)
-      sorti du S1 d'Ame faute de clip qui le joue — possible variante sous
-      B, à prouver dans le client avant de la remettre.
-
 ## 🧰 Outil quick
 
 - [ ] **« Extraction » › versionnage — contrôles à l'écran (lot F22)** : le

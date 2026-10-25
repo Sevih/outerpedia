@@ -45634,6 +45634,26 @@
       ],
       "hits": [
         {
+          "id": "2000010_Skill_1_1",
+          "chain": "2000010_Skill_1",
+          "hit": 1,
+          "damageFactor": 250,
+          "damageType": "DT_CUT",
+          "multiHit": false,
+          "maxHitCount": 0,
+          "isAdditive": false
+        },
+        {
+          "id": "2000010_Skill_1_2",
+          "chain": "2000010_Skill_1",
+          "hit": 2,
+          "damageFactor": 350,
+          "damageType": "DT_CUT",
+          "multiHit": false,
+          "maxHitCount": 0,
+          "isAdditive": false
+        },
+        {
           "id": "2000010_Skill_1_3_Upgrade",
           "chain": "2000010_Skill_1_3_Upgrade",
           "hit": 1,
@@ -45721,6 +45741,26 @@
       ],
       "hits": [
         {
+          "id": "2000010_Skill_1_1",
+          "chain": "2000010_Skill_1",
+          "hit": 1,
+          "damageFactor": 250,
+          "damageType": "DT_CUT",
+          "multiHit": false,
+          "maxHitCount": 0,
+          "isAdditive": false
+        },
+        {
+          "id": "2000010_Skill_1_2",
+          "chain": "2000010_Skill_1",
+          "hit": 2,
+          "damageFactor": 350,
+          "damageType": "DT_CUT",
+          "multiHit": false,
+          "maxHitCount": 0,
+          "isAdditive": false
+        },
+        {
           "id": "2000010_Skill_1_3_Upgrade",
           "chain": "2000010_Skill_1_3_Upgrade",
           "hit": 1,
@@ -45807,6 +45847,26 @@
         }
       ],
       "hits": [
+        {
+          "id": "2000010_Skill_1_1",
+          "chain": "2000010_Skill_1",
+          "hit": 1,
+          "damageFactor": 250,
+          "damageType": "DT_CUT",
+          "multiHit": false,
+          "maxHitCount": 0,
+          "isAdditive": false
+        },
+        {
+          "id": "2000010_Skill_1_2",
+          "chain": "2000010_Skill_1",
+          "hit": 2,
+          "damageFactor": 350,
+          "damageType": "DT_CUT",
+          "multiHit": false,
+          "maxHitCount": 0,
+          "isAdditive": false
+        },
         {
           "id": "2000010_Skill_1_3_Upgrade",
           "chain": "2000010_Skill_1_3_Upgrade",
@@ -47228,6 +47288,16 @@
         }
       ],
       "hits": [
+        {
+          "id": "2000012_Skill_5_1",
+          "chain": "2000012_Skill_5",
+          "hit": 1,
+          "damageFactor": 300,
+          "damageType": "DT_FIRE_HIT",
+          "multiHit": false,
+          "maxHitCount": 0,
+          "isAdditive": false
+        },
         {
           "id": "2000012_Skill_5_2",
           "chain": "2000012_Skill_5",
@@ -103210,6 +103280,16 @@
           "multiHit": false,
           "maxHitCount": 0,
           "isAdditive": false
+        },
+        {
+          "id": "2000062_Skill_1_5",
+          "chain": "2000062_Skill_1",
+          "hit": 5,
+          "damageFactor": 300,
+          "damageType": "DT_BIG_DAMAGE",
+          "multiHit": false,
+          "maxHitCount": 0,
+          "isAdditive": false
         }
       ],
       "variants": [
@@ -110368,6 +110448,16 @@
         }
       ],
       "hits": [
+        {
+          "id": "2000068_Skill_2_1",
+          "chain": "2000068_Skill_2",
+          "hit": 1,
+          "damageFactor": 0,
+          "damageType": "DT_NONE",
+          "multiHit": false,
+          "maxHitCount": 0,
+          "isAdditive": false
+        },
         {
           "id": "2000068_Skill_Burst3_1",
           "chain": "2000068_Skill_Burst3",
@@ -127400,6 +127490,26 @@
           "multiHit": false,
           "maxHitCount": 0,
           "isAdditive": false
+        },
+        {
+          "id": "2000085_Skill_2_2_1",
+          "chain": "2000085_Skill_2_2",
+          "hit": 1,
+          "damageFactor": 50,
+          "damageType": "DT_WATER_HIT",
+          "multiHit": true,
+          "maxHitCount": 4,
+          "isAdditive": false
+        },
+        {
+          "id": "2000085_Skill_2_2_2",
+          "chain": "2000085_Skill_2_2",
+          "hit": 2,
+          "damageFactor": 100,
+          "damageType": "DT_WATER_HIT",
+          "multiHit": false,
+          "maxHitCount": 0,
+          "isAdditive": false
         }
       ],
       "variants": [
@@ -128095,6 +128205,26 @@
           "multiHit": false,
           "maxHitCount": 0,
           "isAdditive": false
+        },
+        {
+          "id": "2000085_Skill_2_2_1",
+          "chain": "2000085_Skill_2_2",
+          "hit": 1,
+          "damageFactor": 50,
+          "damageType": "DT_WATER_HIT",
+          "multiHit": true,
+          "maxHitCount": 4,
+          "isAdditive": false
+        },
+        {
+          "id": "2000085_Skill_2_2_2",
+          "chain": "2000085_Skill_2_2",
+          "hit": 2,
+          "damageFactor": 100,
+          "damageType": "DT_WATER_HIT",
+          "multiHit": false,
+          "maxHitCount": 0,
+          "isAdditive": false
         }
       ],
       "variants": [
@@ -128227,6 +128357,26 @@
           "multiHit": false,
           "maxHitCount": 0,
           "isAdditive": false
+        },
+        {
+          "id": "2000085_Skill_2_2_1",
+          "chain": "2000085_Skill_2_2",
+          "hit": 1,
+          "damageFactor": 50,
+          "damageType": "DT_WATER_HIT",
+          "multiHit": true,
+          "maxHitCount": 4,
+          "isAdditive": false
+        },
+        {
+          "id": "2000085_Skill_2_2_2",
+          "chain": "2000085_Skill_2_2",
+          "hit": 2,
+          "damageFactor": 100,
+          "damageType": "DT_WATER_HIT",
+          "multiHit": false,
+          "maxHitCount": 0,
+          "isAdditive": false
         }
       ],
       "variants": [
@@ -128356,6 +128506,26 @@
           "hit": 4,
           "damageFactor": 500,
           "damageType": "DT_CUT",
+          "multiHit": false,
+          "maxHitCount": 0,
+          "isAdditive": false
+        },
+        {
+          "id": "2000085_Skill_2_2_1",
+          "chain": "2000085_Skill_2_2",
+          "hit": 1,
+          "damageFactor": 50,
+          "damageType": "DT_WATER_HIT",
+          "multiHit": true,
+          "maxHitCount": 4,
+          "isAdditive": false
+        },
+        {
+          "id": "2000085_Skill_2_2_2",
+          "chain": "2000085_Skill_2_2",
+          "hit": 2,
+          "damageFactor": 100,
+          "damageType": "DT_WATER_HIT",
           "multiHit": false,
           "maxHitCount": 0,
           "isAdditive": false
@@ -132608,6 +132778,36 @@
           "hit": 3,
           "damageFactor": 100,
           "damageType": "DT_BIG_DAMAGE",
+          "multiHit": false,
+          "maxHitCount": 0,
+          "isAdditive": false
+        },
+        {
+          "id": "2000090_Skill_extra_1",
+          "chain": "2000090_Skill_extra",
+          "hit": 1,
+          "damageFactor": 75,
+          "damageType": "DT_ICE_HIT",
+          "multiHit": true,
+          "maxHitCount": 8,
+          "isAdditive": false
+        },
+        {
+          "id": "2000090_Skill_extra_2",
+          "chain": "2000090_Skill_extra",
+          "hit": 2,
+          "damageFactor": 75,
+          "damageType": "DT_FIRE_HIT",
+          "multiHit": true,
+          "maxHitCount": 8,
+          "isAdditive": false
+        },
+        {
+          "id": "2000090_Skill_extra_3",
+          "chain": "2000090_Skill_extra",
+          "hit": 3,
+          "damageFactor": 0,
+          "damageType": "DT_NONE",
           "multiHit": false,
           "maxHitCount": 0,
           "isAdditive": false

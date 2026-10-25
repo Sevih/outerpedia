@@ -29,7 +29,9 @@
  * de ses clips : la jointure n'y sert qu'au simulateur. Quand ce clip la
  * joue (clip de base propre, lot A76), les chaînes de la jointure qu'aucun
  * clip du skill ne joue sortent de ses hits (clips.ts `unplayedChains`) :
- * plus de ligne de repli fantôme à côté des variantes.
+ * plus de ligne de repli fantôme à côté des variantes ; les templets que ses
+ * clips jouent mais que la jointure rattache à d'autres skills y entrent
+ * (clips.ts `sharedTemplets`, lot A81 : Valentine 1206).
  *
  * Affinité (`trust`) : la chaîne PROPRE au perso, comme le client
  * (`CDungeonScene.CreateTrustBuff`) — lignes `TrustRewardTemplet` du perso,
@@ -108,8 +110,8 @@ export interface DamageSkill {
   burstAP?: number[];
   /** Lignes de `CharacterDamageTemplet` dont `SkillID` référence ce skill —
    *  ou, clip de base étranger à cette jointure, celles que ses clips jouent ;
-   *  clip de base propre, sans les chaînes qu'aucun clip ne joue (cf.
-   *  l'en-tête). */
+   *  clip de base propre, sans les chaînes qu'aucun clip ne joue et avec les
+   *  templets de ses clips rattachés à d'autres skills (cf. l'en-tête). */
   hits: DamageHit[];
   /**
    * `DamageFactor > 0` à au moins un niveau mais AUCUNE ligne de hits par la
@@ -323,7 +325,7 @@ export function buildDamageCharacters(): DamageCharactersData {
         `damage/characters: skill ${id} — aucun de ses hits n'est joué par l'animator ${carrier.model}`,
       );
     }
-    const { clipHitTemplets, unplayedChains, ...clips } = resolveSkillClips(
+    const { clipHitTemplets, unplayedChains, sharedTemplets, ...clips } = resolveSkillClips(
       clipIndex,
       { id: carrier.id, model: carrier.model, originId: fusionOrigin.get(carrier.id) },
       {
@@ -338,11 +340,15 @@ export function buildDamageCharacters(): DamageCharactersData {
     );
     // Clip de base étranger à la jointure `SkillID` (clips.ts) : les hits du
     // skill sont les templets que ses clips jouent. Clip de base propre
-    // (lot A76) : les chaînes de la jointure qu'aucun clip ne joue en sortent.
+    // (lot A76) : les chaînes de la jointure qu'aucun clip ne joue en sortent,
+    // les templets de ses clips rattachés à d'autres skills y entrent (A81).
     const unplayed = new Set(unplayedChains);
     const hits = clipHitTemplets
       ? clipHitTemplets.map((t) => hitById.get(t)!).sort(byHitOrder)
-      : joinedHits.filter((h) => !unplayed.has(h.chain));
+      : [
+          ...joinedHits.filter((h) => !unplayed.has(h.chain)),
+          ...(sharedTemplets ?? []).map((t) => hitById.get(t)!),
+        ].sort(byHitOrder);
     const offensive = levels.some((l) => l.damageFactor > 0);
     // Burstable : règle PARTAGÉE avec le générateur skills (datagen/lib/burst)
     // — les deux artefacts doivent porter le même marqueur (garde croisée).

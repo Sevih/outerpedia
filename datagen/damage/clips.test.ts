@@ -97,6 +97,8 @@ describe('resolveSkillClips — variantes par index (F29)', () => {
           },
         },
       ],
+      // Templet d'un autre skill joué par le clip : rattaché aux hits (A81).
+      sharedTemplets: ['X_Other_1'],
     });
   });
 
@@ -499,6 +501,37 @@ describe('resolveSkillClips — clip de base propre, chaîne de la jointure jou�
     });
     const r = resolveSkillClips(alt, carrier, skill({ triggerCsv: 'Skill5' }), [], hits);
     expect(r.clipsUnresolvedChains).toEqual(['C_Skill_4']);
+    expect(r.unplayedChains).toBeUndefined();
+  });
+});
+
+describe('resolveSkillClips — un clip sert plusieurs skills (A81)', () => {
+  // Valentine 1206 : `Skill6` joue `_Skill_5_1` (rattaché à 1205/1209) puis
+  // `_Skill_5_2` (sa jointure).
+  const index = makeIndex({
+    chars: {
+      C: {
+        clips: { C_Skill_6: ['C_Skill_5_1,0', 'C_Skill_5_2,0', 'Skip_Finish_Fire ,0'] },
+        triggers: { Skill6: ['C_Skill_6'] },
+      },
+    },
+    templets: {
+      C_Skill_5_1: { factor: 300 },
+      C_Skill_5_2: { factor: 100, count: 7 },
+      Skip_Finish_Fire: { factor: 0, owned: false },
+    },
+  });
+
+  it('clip de base propre : le templet d’un autre skill qu’il joue entre dans les hits, pas un commun', () => {
+    const r = resolveSkillClips(
+      index,
+      carrier,
+      skill({ type: 'SKT_STRIKE_GROUND', triggerCsv: 'Skill6' }),
+      [],
+      [{ id: 'C_Skill_5_2', chain: 'C_Skill_5' }],
+    );
+    expect(r.variants?.map((v) => v.clip.name)).toEqual(['C_Skill_6']);
+    expect(r.sharedTemplets).toEqual(['C_Skill_5_1']);
     expect(r.unplayedChains).toBeUndefined();
   });
 });

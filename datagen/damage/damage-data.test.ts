@@ -330,6 +330,20 @@ describe('damage/characters.json — clips chez le porteur (revue R15, 17/10/202
     // Ember B1 : le clip de `Burst1` (variante renforcée du S1) reste seul.
     expect([...new Set(skills['9419'].hits.map((h) => h.chain))]).toEqual(['2000094_Skill_1_1']);
   });
+
+  it('un clip sert plusieurs skills : Valentine 1206 montre `2000012_Skill_5_1` (A81)', () => {
+    expect(skills['1206'].variants?.map((v) => v.clip.name)).toEqual(['2000012_Skill_6']);
+    expect(skills['1206'].hits.map((h) => h.id)).toEqual([
+      '2000012_Skill_5_1',
+      '2000012_Skill_5_2',
+    ]);
+    // `2000065_Skill_1_5_B` n'est joué que par `Burst1` (bursts 6519-6521,
+    // sans jointure, hors de la règle) : il reste hors du S1 d'Ame.
+    const ame = animEventsData as unknown as Record<string, { clips: Record<string, string[]> }>;
+    expect(ame['2000065'].clips['2000065_Skill_1_Burst']).toContain('2000065_Skill_1_5_B ,0');
+    expect(skills['6501'].hits.map((h) => h.id)).not.toContain('2000065_Skill_1_5_B');
+    for (const sid of ['6519', '6520', '6521']) expect(skills[sid].hitsUnresolved, sid).toBe(true);
+  });
 });
 
 describe('anim-events — bundles de fusion et états d’approche (B64)', () => {

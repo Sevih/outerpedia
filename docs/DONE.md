@@ -7,6 +7,79 @@
 
 ## 2026-10-25
 
+- **A81 — Calculateur : le clip de Valentine 1206 montre `2000012_Skill_5_1`
+  dans ses lignes de détail ; `2000065_Skill_1_5_B` prouvé joué par les
+  bursts d'Ame, laissé hors du S1.** Item du TODO « Deux restes d'A76 »
+  retiré (et sa section « Restes de la relecture du 21/10 », vide). Pourquoi :
+  le clip `2000012_Skill_6` de 1206 joue `2000012_Skill_5_1` (300 ‰) avant
+  `_5_2` (100 × 7), mais `SkillID` rattache `_5_1` à 1205/1209 : le total
+  était juste (le calcul lit les events du clip), le tooltip ne montrait que
+  `_5_2`. Comment : `datagen/damage/clips.ts` — clip de base propre, aucune
+  chaîne irrésolue, `resolveSkillClips` rend `sharedTemplets`, les templets
+  que les clips du skill jouent (base, autres index, skip, suite) et que la
+  jointure rattache à d'AUTRES skills seulement (un templet commun, sans
+  `SkillID`, n'y entre pas) ; `characters.ts` les ajoute aux hits (le champ
+  ne sort pas dans `characters.json`). Règle écrite dans l'en-tête de
+  `clips.ts`, celui de `characters.ts`, la doc de `DamageSkill.hits` et
+  `docs/specs/damage-clips-joues.md` § 5 (encadré « Complété par A81 »).
+  Sur décision de Sevih, la règle reste limitée aux skills À jointure non
+  vide. Diff sémantique de `characters.json` (avant/après, script du
+  scratchpad) : racine et 130 persos identiques, 11 skills, seul `hits`
+  change, aucun hit retiré, et pour chacun `buildReportStates` +
+  `stateTotalFactor` rendent les mêmes états aux mêmes totaux, suite
+  comptée ou non — 1206 `2000012_Skill_5_1` 300 ; 1019-1021 (bursts 1-3 du
+  S1 de 2000010) `2000010_Skill_1_1` 250 + `_1_2` 350, à côté de
+  `_1_3_Upgrade` ; 6201 (S1 de Drakhan) `2000062_Skill_1_5` 300 ; 6821
+  (burst 3 de 2000068) `2000068_Skill_2_1` 0 ; 8502 et 8519-8521 (Poolside
+  Regina S2 et ses bursts) `2000085_Skill_2_2_1` 50 × 4 + `_2_2_2` 100,
+  rattachés à 8505/8506 et joués par la suite additionnelle (ne s'affichent
+  que quand elle est comptée) ; 9001 (Dahlia S1) `2000090_Skill_extra_1`
+  75 × 8, `_extra_2` 75 × 8, `_extra_3` 0 sur la variante `second`, dont les
+  lignes de détail étaient vides. La répartition par hit de Dahlia
+  (`extra_3`, hors lot) ne bouge pas : la cascade lit les events du clip,
+  pas ces lignes. `2000065_Skill_1_5_B` (1 100 ‰), prouvé dans le client
+  (dump 1.4.19) : les damage templets n'arrivent que par l'event du clip
+  (`CCharacter.cs:1363-1372`, `EventAttackStart`, qui retire les espaces de
+  la chaîne), par le prefab d'effet (`CEffect.cs:329`,
+  `m_strDamageEffectTempletID`), par le scan du facteur (`CFormula.cs:300`)
+  et par une seule substitution, `Test_Skip_Finish` → `2000065_SKIP_A`/`_B`
+  sous le buff A/B (`CBattleManager.cs:587-599`) ; sous `BT_2000065_A`/`_B`,
+  `GetUseTriggerName` (`CCharacterBattle.cs:5170-5190`) ne change que le
+  TRIGGER (`TriggerNameSecond`/`Third`, clips `2000065_Skill_1_1`/`_1_2`, qui
+  jouent `2000065_Skill_1_5` comme la base), jamais un templet. Le scan
+  UnityPy des bundles d'Ame (`character/pc/2000065`, `prefabs/character`,
+  `prefabs/effect/fx_2000065`, `scenes/directedscene`) ne trouve le `_B`
+  qu'en un endroit : dernier event du clip `2000065_Skill_1_Burst`
+  (`2000065_Skill_1_5_B ,0`), seul clip du trigger `Burst1`, que portent les
+  bursts 6519, 6520 et 6521 (`TriggerName` = `Burst1`). Ce n'est donc ni un
+  fantôme ni une variante du S1 sous B : c'est le coup final des bursts
+  (100 + 75 + 50 × 3 + 75 + 1 100 = 1 500 ‰). Ces trois bursts n'ont aucune
+  ligne de jointure (tous les `2000065_Skill_1_*` sont rattachés au seul 6501) : `hitsUnresolved`, « pas encore supporté » dans le calculateur, et
+  hors de la règle d'A81. Le `_B` reste sorti du S1. Vérification :
+  `datagen/damage/clips.test.ts` + 1 cas (clip de base propre : le templet
+  d'un autre skill qu'il joue entre dans `sharedTemplets`, pas un commun ;
+  le cas F29 « index 0 seul » attend désormais son `X_Other_1`) ;
+  `damage-data.test.ts` + 1 test (1206 : hits `_5_1` puis `_5_2` ; le clip
+  `2000065_Skill_1_Burst` porte le `_B`, absent des hits de 6501, bursts
+  6519-6521 `hitsUnresolved`) ; `pnpm damage:build` : `anim-events.json`
+  ré-extrait identique, seul `characters.json` change, « Bilan : 42
+  ligne(s) exacte(s), 0 en dérive, 0 sautée(s) » ; `pnpm datagen:build` puis
+  `datagen:promote` à blanc : « 67 identique(s), 0 différent(s) »
+  (`solver/characters.json` compris) ; `pnpm typecheck` : les trois `tsc
+--noEmit` sans erreur ; `pnpm lint` : `eslint` sans message ; `pnpm test`
+  : « Tests 4450 passed (4450) ». 1206 n'entre pas à `damage:check` : aucune
+  capture en jeu de son strike (seule fixture de Valentine :
+  `valentine-rhona.json`, S1/S3), et la fiche n'affiche que le facteur de la
+  table (1 200 ‰), que la donnée lit déjà : pas une référence. Laissé (lot à
+  part, décision de Sevih) : la règle générale « skill joué par le clip d'un
+  autre » pour les skills SANS jointure — 143 skills `hitsUnresolved` ont un
+  seul clip d'index 0, propre et fait de templets rattachés ailleurs
+  (82 backups, 14 strikes, 9 S1/S2/S3 — kits de fusionnés comme 1951-1971
+  et 7051-7071 — et 38 bursts du contrat, Valentine 1219-1221, Akari 6419-6420, Drakhan
+  6219-6220 et Ame 6519-6521 compris) ; les résoudre donnerait à ces bursts
+  leur facteur réel au lieu du 1 000 ‰ de repli que `solver-best-skill.ts`
+  leur compte, à revérifier dans `solver/characters.json`.
+
 - **Correction A80 : `ProductGoodsValue` vide ou à 0 compte 1 unité par achat
   dans `timegate-resources`.** Quoi : `datagen/generators/timegate-resources.ts`
   › `shopSourcesFor` multiplie `MaxBuyCount` par `num(r.ProductGoodsValue) || 1`

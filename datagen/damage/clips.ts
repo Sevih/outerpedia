@@ -71,7 +71,15 @@
  *    jointure y ajoute `2000012_Skill_5`, que joue le clip de 1206). Pas de
  *    clip de base, pas de règle : les lignes
  *    `2000065_SKIP_A`/`_B` du S3 d'Ame (6503, sans `Skill3` dans son
- *    animator) sont son état SKIP (§ 5 de la spec), elles restent en repli.
+ *    animator) sont son état SKIP (§ 5 de la spec), elles restent en repli ;
+ *  - un clip sert plusieurs skills (lot A81, 25/10/2026) : clip de base
+ *    propre, un templet que ses clips jouent mais que `SkillID` rattache à
+ *    d'AUTRES skills seulement entre dans ses hits (`sharedTemplets`,
+ *    appliqué par characters.ts) — le clip `2000012_Skill_6` de Valentine
+ *    1206 joue `2000012_Skill_5_1` (300 ‰, rattaché à 1205/1209) avant
+ *    `_5_2` : ses lignes de détail le montrent, le total (events du clip)
+ *    ne change pas. Un skill SANS jointure (bursts, backups, fusionnés :
+ *    `hitsUnresolved`) n'entre pas dans la règle, résolu ou non par son clip.
  *
  * Suite additionnelle, condition : comptée PAR DÉFAUT (`selfMet`) seulement
  * quand le clip de base pose LUI-MÊME la condition du buff additif — dérivé
@@ -159,6 +167,10 @@ export interface SkillClipsResult {
    *  clip du skill ne joue — characters.ts les retire des hits (pas un champ
    *  de `characters.json`). */
   unplayedChains?: string[];
+  /** Clip de base PROPRE (cf. l'en-tête) : templets joués par ses clips que
+   *  la jointure rattache à d'autres skills seulement — characters.ts les
+   *  ajoute aux hits (pas un champ de `characters.json`). */
+  sharedTemplets?: string[];
 }
 
 const EVENTS_PATH = resolve('datagen/damage/anim-events.json');
@@ -502,11 +514,19 @@ export function resolveSkillClips(
     base !== undefined && !foreign && !unresolved.size
       ? [...chains].filter(([, ids]) => ![...ids].some((t) => covered.has(t))).map(([c]) => c)
       : [];
+  // Clip de base propre (cf. l'en-tête) : un templet que ses clips jouent
+  // mais que `SkillID` rattache à un AUTRE skill entre dans les hits — les
+  // templets communs (sans SkillID) n'appartiennent à aucun skill.
+  const sharedTemplets =
+    base !== undefined && !foreign && !unresolved.size
+      ? [...covered].filter((t) => !chainOfId.has(t) && index.templet.get(t)?.owned)
+      : [];
 
   return {
     ...(resolved.length ? { variants: resolved } : {}),
     ...(unresolved.size ? { clipsUnresolvedChains: [...unresolved].sort(ord) } : {}),
     ...(clipHitTemplets ? { clipHitTemplets } : {}),
     ...(unplayedChains.length ? { unplayedChains: unplayedChains.sort(ord) } : {}),
+    ...(sharedTemplets.length ? { sharedTemplets: sharedTemplets.sort(ord) } : {}),
   };
 }
