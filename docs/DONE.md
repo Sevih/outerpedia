@@ -7,6 +7,43 @@
 
 ## 2026-10-25
 
+- **datagen : marqueur burstable selon la règle du client, `timegate-resources`
+  lit `ProductGoodsValue` (A80).** Quoi : les deux points (c) de l'item
+  « Contrat solver — ce qui reste » du TODO, sans effet aujourd'hui mais faux
+  par construction. (c1) `datagen/lib/burst.ts` › `burstAPCosts` tenait un skill
+  pour burstable si `RequireAP` portait PLUS D'UN coût au premier coût
+  strictement positif ; le client dit
+  `IsBurstEntryType => 0 < RequireAPList.Count` (`CSkill.cs:75`), liste remplie
+  par `CSplitter.Split` (`CSkillTemplet.cs:159`, chaîne vide → liste vide, aucun
+  filtre sur la valeur). La règle devient « liste de coûts non vide » : un skill
+  à UN seul coût est burstable, et la condition « premier coût positif » de
+  l'ancienne règle tombe aussi, le client ne la fait pas (sur les 1 650 lignes
+  de `CharacterSkillTemplet`, 136 ont un `RequireAP`, toutes à plusieurs coûts
+  et premier coût positif : équivalent aujourd'hui). L'en-tête de `burst.ts`
+  cite fichier et ligne du client ; nouveau `datagen/lib/burst.test.ts`
+  (vide/absent, plusieurs coûts, un seul coût). (c2)
+  `datagen/generators/timegate-resources.ts` › `shopSourcesFor` comptait
+  `MaxBuyCount` achats sans la quantité par achat : il multiplie désormais par
+  `num(r.ProductGoodsValue)`, lu comme le `gives` de `shop-priorities.ts` (même
+  `num`, sans défaut à 1 : la seule ligne de shop retenu sans valeur, 29001 du
+  Guild Shop, est un placeholder de 2999 que `isCurrent` écarte) ; la fonction
+  est exportée pour un test à lignes synthétiques dans
+  `timegate-resources.test.ts` (pack de 5 × 3 achats → 15 par semaine, un par
+  achat → 3), en-tête du générateur suivi. Vérifié : `pnpm datagen:build` à
+  blanc puis `pnpm datagen:promote` en dry (« 67 identique(s), 0 différent(s) »,
+  `skills.json` et `timegate-resources.json` identiques octet pour octet au
+  validé) ; `damage/characters.json` recalculé en mémoire par
+  `buildDamageCharacters()` et comparé au committé, sans réécrire
+  `data/generated/damage/` : skills et personnages identiques, 129 skills
+  `burstAP` des deux côtés. `pnpm typecheck` vert (ses trois `tsc --noEmit`,
+  app, datagen et scripts), `pnpm lint` vert (`eslint`), `pnpm test` « Tests
+  4447 passed (4447) », 255 fichiers. Laissé : (b), le nombre de stacks de
+  `BT_STACK_STAT` dans le calculateur, au TODO ; hors périmètre, l'invariant de
+  `datagen/generators/skills.test.ts` « burstAP a au moins 2 paliers » redit
+  l'ancienne règle et rougirait sur un futur burst à un seul coût (alarme utile
+  ou règle à aligner, à décider), et `skills.ts` ne pose `requireAP` que si le
+  premier coût est positif.
+
 - **Relecture A79 (Fable 5.1) — `rmTree` avec nouvel essai pour les
   suppressions récursives de `.gamedata`, validé.** `90ceac44` (7 fichiers,
   message attendu, ni `package.json` ni lock). Lu : `datagen/lib/fs.ts` ›

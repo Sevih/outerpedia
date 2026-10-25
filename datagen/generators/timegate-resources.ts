@@ -12,10 +12,10 @@
  *  • SHOPS (dérivés de `ProductTemplet`) — tout shop permanent « à monnaie »
  *    qui vend l'item avec un reset RÉCURRENT (daily/weekly/monthly) et dont le
  *    produit est COURANT (même ancre `asOf` déterministe que `shop-priorities`,
- *    réutilisée telle quelle). La quantité = `MaxBuyCount` × période : elle se
- *    corrige toute seule quand le jeu rebrasse un shop (le Guild Shop l'a fait
- *    le 2024-12-03). La dérivation trouve MÊME des shops que la hand-list
- *    avait ratés (Tower Coin, Real-Time Arena, Remains).
+ *    réutilisée telle quelle). La quantité = `MaxBuyCount` × `ProductGoodsValue`
+ *    × période : elle se corrige toute seule quand le jeu rebrasse un shop (le
+ *    Guild Shop l'a fait le 2024-12-03). La dérivation trouve MÊME des shops que
+ *    la hand-list avait ratés (Tower Coin, Real-Time Arena, Remains).
  *
  *  • NON-SHOP (curés, `data/curated/timegate-resources.json`) — les sources
  *    dont la quantité N'EST PAS dans la donnée car c'est une estimation joueur
@@ -173,8 +173,10 @@ function itemIcon(
  * Un shop peut mêler plusieurs monnaies/périodes : on garde par période le
  * plafond le plus élevé, puis on fond hebdo + mensuel sur UNE ligne (les deux
  * colonnes de la table les portent). Le daily est ramené en hebdo (×7).
+ * Les quantités sont des UNITÉS d'item : `MaxBuyCount` achats × `ProductGoodsValue`
+ * unités par achat (lu comme `shop-priorities`, `gives`) — un pack de 5 compte 5.
  */
-function shopSourcesFor(
+export function shopSourcesFor(
   itemId: string,
   byShop: Map<string, Row[]>,
   asOf: string,
@@ -189,7 +191,7 @@ function shopSourcesFor(
       if (!isCurrent(r, asOf, maxYear)) continue;
       const period = PERIOD[r.ProductResetType ?? ''];
       if (!period || period === 'one-time') continue; // récurrent seulement
-      const c = num(r.MaxBuyCount);
+      const c = num(r.MaxBuyCount) * num(r.ProductGoodsValue);
       if (c > (best.get(period) ?? 0)) best.set(period, c);
     }
     if (!best.size) continue;

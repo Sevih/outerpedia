@@ -17,11 +17,8 @@ les preuves et les décisions vivent dans le tri consolidé de sevih-tool
       C1, O5, M2 `statsByTier`, `combatEffects`, `corePassiveByFusion`,
       `stat-keys.json` lu par G30). Reste (M3, le passif d'EE
       de Fatal, est lu et testé par gear-solver depuis G35) : (b) nombre de stacks de
-      `BT_STACK_STAT` dans le calculateur (plus tard) ; (c) deux latents de
-      J12 sans effet aujourd'hui : `datagen/lib/burst.ts:15` (« > 1 coût »
-      contre `Count > 0` du client, équivalent sur les 136 skills) et
-      `timegate-resources` qui ignore `ProductGoodsValue` (aucun produit
-      courant > 1).
+      `BT_STACK_STAT` dans le calculateur (plus tard). Les deux latents (c)
+      sont FAITS (A80, 25/10).
 
 ## 🧹 Restes de la relecture du 21/10 (B66, A76, A77, C27, G35)
 

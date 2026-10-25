@@ -5,11 +5,13 @@
  * CURÉES — une dérive rendrait un total faux ou une source orpheline.
  *
  * Les cœurs `computeAsOf`/`isCurrent` sont PARTAGÉS avec shop-priorities et déjà
- * couverts là-bas ; ici, invariants seuls sur la sortie. Tourne SANS `.gamedata`.
+ * couverts là-bas ; ici, invariants sur la sortie, plus la quantité par achat
+ * de `shopSourcesFor` sur des lignes synthétiques. Tourne SANS `.gamedata`.
  */
 import { describe, expect, it } from 'vitest';
 import timegateData from '../../data/generated/timegate-resources.json';
-import type { TimegateResourcesData } from './timegate-resources';
+import type { Row } from '../lib/tables';
+import { shopSourcesFor, type TimegateResourcesData } from './timegate-resources';
 
 const tg = timegateData as unknown as TimegateResourcesData;
 const TYPES = new Set(['mission', 'guild', 'shop', 'craft']);
@@ -46,5 +48,28 @@ describe('timegate-resources.json — invariants', () => {
       }
     }
     expect(bad).toEqual([]);
+  });
+});
+
+describe('shopSourcesFor — quantité par achat', () => {
+  // Produit hebdo courant (sans dates) du Guild Shop : 3 achats d'un pack de 5.
+  const pack = (value: string | undefined): Row => ({
+    ID: '1',
+    ProductBuyType: 'PBT_GUILD_COIN',
+    ProductGoodsType: 'PGT_ITEM',
+    ProductGoodsID: 'ITEM_X',
+    ProductResetType: 'PRT_WEEKLY',
+    MaxBuyCount: '3',
+    ...(value === undefined ? {} : { ProductGoodsValue: value }),
+  });
+  const weeklyOf = (r: Row) =>
+    shopSourcesFor('ITEM_X', new Map([['guild', [r]]]), '2026-10-25', 2026)[0]?.weekly;
+
+  it('ProductGoodsValue multiplie MaxBuyCount (pack de 5 → 15/semaine)', () => {
+    expect(weeklyOf(pack('5'))).toBe(15);
+  });
+
+  it('un par achat → MaxBuyCount inchangé', () => {
+    expect(weeklyOf(pack('1'))).toBe(3);
   });
 });
