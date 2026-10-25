@@ -35,6 +35,7 @@ export default async function AdventureLicense({ lang, guides }: CategoryViewPro
       href: localePath(lang, `/guides/${g.category}/${g.slug}`),
       name: lRec(g.title, lang),
       src: img.guideIcon(g.icon),
+      ...(g.updating ? { updatingText: t('page.guide.updating_badge') } : {}),
     };
     if (g.icon.endsWith('_Lock')) {
       promotion.push({ ...card, openSrc: img.guideIcon(g.icon.replace(/_Lock$/, '_Open')) });

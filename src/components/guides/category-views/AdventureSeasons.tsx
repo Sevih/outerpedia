@@ -92,5 +92,6 @@ function stageCard(guide: Guide, lang: Lang, t: TFunction): StageCard {
     area: (dungeon.area ? lRec(dungeon.area, lang) : '') || lRec(guide.title, lang),
     src: img.guideIcon(guide.icon),
     boss: { name: lRec(monster.name, lang) || monster.name.en, thumb: monsterThumb(monster) },
+    ...(guide.updating ? { updatingText: t('page.guide.updating_badge') } : {}),
   };
 }

@@ -7,6 +7,63 @@
 
 ## 2026-10-25
 
+- **Guides « en cours de mise à jour » : marqueur sur les vues à bannière et
+  partout où un guide s'ouvre, une version dupliquée dans quick naît visible
+  (B69).** Quoi : les deux restes de B66 du TODO (« Restes de la relecture du
+  21/10 »). (1) Le badge `page.guide.updating_badge` ne vivait que dans
+  `GuideCard` (grille par défaut, guides libres de Dimensional Singularity) ;
+  décision de Sevih : un marqueur aussi sur les bannières, même texte, discret,
+  seulement si `guide.updating`. Il sort de `GuideCard.tsx` en
+  `UpdatingBadge` (même pastille ; variante `overlay` pour un art : fond
+  `bg-surface-base/75` flouté, `text-2xs`, tronquée à la largeur, sur le modèle
+  des pastilles de `RailBanner`) et `GuideCard` l'utilise sans changement de
+  rendu. Posé dans toutes les vues qui ouvrent un guide : `BannerGrid`
+  (world boss, guild raid, joint challenge — sous la date du coin haut gauche,
+  à côté elle heurtait la pastille de saison du coin droit) ;
+  `SkywardTowerView` (tours de difficulté : à droite du nom ; tours
+  élémentaires : sous l'en-tête, la carte est trop étroite) ; `TieredList`
+  (à côté du titre de la leçon, comme `GuideCard`) ; `SingularityRotation`
+  (bannière du jour : à côté du nom ; bannières du rail : coin haut gauche, le
+  seul libre ; cartes de bibliothèque : à côté de l'identité) ;
+  `AdventureSeasons`/`AdventureGrid` (sous la zone, dans l'en-tête de la
+  carte) ; `AdventureLicense`/`LicenseTabs` (coin haut gauche de l'art, sur
+  les DEUX faces d'une carte promotion — rien d'un spoiler) ;
+  `MonadGateView`/`MonadGateGallery` (sous le nom de la tuile, ou sous la
+  pastille de chaque part d'une profondeur Story à plusieurs guides) ;
+  `SpecialRequestSplit` (coin haut gauche de la bannière) ;
+  `IrregularChaseMap` (sous le pin, `order-2` pour rester dernier quel que
+  soit l'ordre que `mobileTop` donne au nom et à la vignette — il allonge le
+  pin d'une ligne, donc le décale d'une demi-ligne vers le haut, à voir à
+  l'écran si un guide de poursuite passe un jour en mise à jour). Les vues
+  client (`AdventureGrid`, `LicenseTabs`, `MonadGateGallery`) reçoivent un
+  `updatingText?` déjà localisé sur leur carte préparée côté serveur, présent
+  seulement si le guide est en mise à jour ; `CardArt`, `ModeColumns`,
+  `EmptyCategory` ne rendent pas de guide. Sans `updating` (tous les guides
+  sauf `world-boss/drakhan` aujourd'hui), le rendu est inchangé : les seuls
+  conteneurs ajoutés (date de `BannerGrid`, en-tête des tours élémentaires,
+  titre de `TieredList` et de la bannière du jour, rangée d'identité de la
+  bibliothèque, part Monad en `flex-col`) gardent la géométrie d'avant à un
+  seul enfant. Aucune clé i18n ajoutée. (2) `src/lib/admin/guide-store.ts` ›
+  `addGuideVersion` recopiait `version.json` tel quel : la copie d'une version
+  cachée naissait cachée. Après la copie, le fichier passe par
+  `writeVersionHidden(…, false)`, le même chemin que la case « Cachée » de
+  « Enregistrer » : `hidden` retiré (le site lit `raw?.hidden === true`,
+  l'absence vaut visible), le `label` gardé, un fichier vidé disparaît ; la
+  source n'est pas touchée. Le journal de `addGuideVersionAction`
+  (`scripts/quick/actions.ts`) le dit (« sans son épinglage, visible »). Quatre
+  cas dans `guide-store.pinned.test.ts` (source cachée sans label → pas de
+  `version.json` ; avec label → le label seul ; la source reste cachée ; source
+  visible → copiée telle quelle). Vérifié : `pnpm typecheck` et `pnpm lint`
+  muets (dernières lignes `$ tsc --noEmit && … -p scripts/tsconfig.json` et
+  `$ eslint`), `pnpm test` « Tests 4447 passed (4447) »,
+  `NODE_ENV=development pnpm exec vitest run scripts/quick` « Tests 1177 passed
+  (1177) ». Pas de serveur sur :3000, rendu non vu. ⏳ Sevih à l'écran : site ›
+  Guides › World Boss, Drakhan coché « En cours de mise à jour » → marqueur
+  sous la date de sa bannière (desktop et mobile, avec et sans pastille de
+  saison) ; quick › Guides › Drakhan › « ＋ version » dupliquée d'une version
+  cachée → la nouvelle est visible. Laissé : le reste de B66 (bandeau en tête
+  du guide, sélecteur), hors périmètre.
+
 - **datagen : marqueur burstable selon la règle du client, `timegate-resources`
   lit `ProductGoodsValue` (A80).** Quoi : les deux points (c) de l'item
   « Contrat solver — ce qui reste » du TODO, sans effet aujourd'hui mais faux

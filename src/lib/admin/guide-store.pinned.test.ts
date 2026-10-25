@@ -176,3 +176,43 @@ describe('sauvegarder un guide — la version cachée dans `version.json`', () =
     expect(existsSync(vjson('2026-03'))).toBe(false);
   });
 });
+
+/**
+ * Dupliquer une version CACHÉE (B69) : la copie naît visible — `hidden` reste
+ * derrière comme le pin, le `label` suit comme le reste.
+ */
+describe('dupliquer une version — `hidden` RESTE derrière', () => {
+  const vjson = (key: string) => join(versions, key, 'version.json');
+  const readVersion = (key: string): Record<string, unknown> =>
+    JSON.parse(readFileSync(vjson(key), 'utf8')) as Record<string, unknown>;
+  const label = { en: 'Season 3', fr: 'Saison 3' };
+  beforeEach(() => {
+    writeConfig('2026-03', { group: GROUP });
+    rmSync(join(versions, '2026-08'), { recursive: true, force: true });
+  });
+
+  it('source cachée sans label : la copie n’a pas de `version.json`', async () => {
+    writeFileSync(vjson('2026-03'), JSON.stringify({ hidden: true }), 'utf8');
+    expect(await addGuideVersion(CAT, SLUG, '2026-08', '2026-03')).toEqual([]);
+    expect(existsSync(vjson('2026-08'))).toBe(false);
+    expect(readConfig('2026-08').group).toBe(GROUP);
+  });
+
+  it('source cachée avec label : le label suit, `hidden` non', async () => {
+    writeFileSync(vjson('2026-03'), JSON.stringify({ label, hidden: true }), 'utf8');
+    await addGuideVersion(CAT, SLUG, '2026-08', '2026-03');
+    expect(readVersion('2026-08')).toEqual({ label });
+  });
+
+  it('la version SOURCE reste cachée', async () => {
+    writeFileSync(vjson('2026-03'), JSON.stringify({ label, hidden: true }), 'utf8');
+    await addGuideVersion(CAT, SLUG, '2026-08', '2026-03');
+    expect(readVersion('2026-03')).toEqual({ label, hidden: true });
+  });
+
+  it('source visible : `version.json` copié tel quel', async () => {
+    writeFileSync(vjson('2026-03'), JSON.stringify({ label }), 'utf8');
+    await addGuideVersion(CAT, SLUG, '2026-08', '2026-03');
+    expect(readVersion('2026-08')).toEqual({ label });
+  });
+});

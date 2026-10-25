@@ -11,7 +11,7 @@ import {
   singularityStateAt,
   type SingularityBoss,
 } from '@/lib/data/singularity';
-import { GuideCard } from '@/components/guides/GuideCard';
+import { GuideCard, UpdatingBadge } from '@/components/guides/GuideCard';
 import { SingularityCountdown } from '@/components/guides/SingularityCountdown';
 import { formatGuideDate, guideUpdatedDate, type Guide } from '@/lib/data/guides';
 import type { Monster } from '@contracts';
@@ -158,6 +158,7 @@ export default async function SingularityRotation({ lang, guides }: CategoryView
                 name={names.get(day.boss.monsters[0]) ?? ''}
                 lang={lang}
                 guide={guideOf.get(day.boss.monsters[0])}
+                updatingText={t('page.guide.updating_badge')}
               />
             ))}
           </div>
@@ -307,9 +308,12 @@ function FeaturedBanner({
 
       <div className="flex items-start justify-between gap-3 px-0.5">
         <div className="min-w-0">
-          <h3 className="text-content-strong group-hover:text-accent line-clamp-1 text-base font-semibold tracking-tight transition-colors sm:text-lg">
-            {name}
-          </h3>
+          <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
+            <h3 className="text-content-strong group-hover:text-accent line-clamp-1 text-base font-semibold tracking-tight transition-colors sm:text-lg">
+              {name}
+            </h3>
+            {guide?.updating && <UpdatingBadge text={t('page.guide.updating_badge')} />}
+          </div>
           {guide && (
             <p className="text-content-muted mt-1 line-clamp-2 text-sm">
               {lRec(guide.description, lang)}
@@ -345,11 +349,13 @@ function RailBanner({
   name,
   lang,
   guide,
+  updatingText,
 }: {
   day: Day;
   name: string;
   lang: Lang;
   guide?: Guide;
+  updatingText: string;
 }) {
   const monster = getMonster(day.boss.monsters[0]);
   if (!monster || !day.boss.banner) return null;
@@ -370,6 +376,11 @@ function RailBanner({
           className="absolute inset-0 h-full w-full object-cover"
           loading="lazy"
         />
+
+        {/* Le coin haut gauche est le seul libre : jour et identité à droite, nom en bas. */}
+        {guide?.updating && (
+          <UpdatingBadge text={updatingText} overlay className="absolute top-1.5 left-1.5" />
+        )}
 
         <div className="absolute top-1.5 right-1.5 flex items-center gap-1">
           <Identity monster={monster} size="sm" overlay />
@@ -421,8 +432,9 @@ function LibraryCard({
           <h3 className="text-content-strong group-hover:text-accent line-clamp-2 text-sm font-semibold transition-colors">
             {name}
           </h3>
-          <div className="mt-1.5">
+          <div className="mt-1.5 flex flex-wrap items-center gap-1.5">
             <Identity monster={monster} size="sm" />
+            {guide?.updating && <UpdatingBadge text={t('page.guide.updating_badge')} />}
           </div>
         </div>
         {active && (

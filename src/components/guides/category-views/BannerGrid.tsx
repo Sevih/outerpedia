@@ -7,6 +7,7 @@ import { formatGuideDate, guideBossMonster, guideUpdatedDate } from '@/lib/data/
 import { compareBySeason, seasonStandingAt, seasonsForBoss } from '@/lib/data/content-schedule';
 import { serverNow } from '@/lib/time';
 import { SeasonBadge } from '@/components/guides/SeasonBadge';
+import { UpdatingBadge } from '@/components/guides/GuideCard';
 import { EmptyCategory } from './EmptyCategory';
 import type { CategoryViewProps } from './types';
 
@@ -76,9 +77,14 @@ export default async function BannerGrid({ lang, guides }: CategoryViewProps) {
             />
             {/* Voile : le texte se lit quelle que soit la bannière. */}
             <div className="from-surface-base/95 via-surface-base/40 to-surface-base/10 absolute inset-0 bg-linear-to-t" />
-            <span className="text-content absolute top-1.5 left-2.5 text-xs drop-shadow-lg">
-              {t('page.guide.updated', { date: formatGuideDate(guideUpdatedDate(guide), lang) })}
-            </span>
+            {/* Coin haut gauche : la date, et SOUS elle le marqueur « en mise à
+                jour » — à côté, il heurterait la pastille de saison du coin droit. */}
+            <div className="absolute top-1.5 left-2.5 flex flex-col items-start gap-1">
+              <span className="text-content text-xs drop-shadow-lg">
+                {t('page.guide.updated', { date: formatGuideDate(guideUpdatedDate(guide), lang) })}
+              </span>
+              {guide.updating && <UpdatingBadge text={t('page.guide.updating_badge')} overlay />}
+            </div>
             <SeasonBadge bossId={bossId} lang={lang} />
             {/* `w-full after:hidden` : neutralise la règle globale des titres —
                 `width: fit-content` réduirait ce calque plein-carte à la largeur

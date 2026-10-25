@@ -394,6 +394,10 @@ export async function addGuideVersion(
         continue;
       }
       copyFileSync(sp, resolve(dst, file));
+      // Même raison pour `hidden` (B69) : dupliquer une version cachée la
+      // faisait naître cachée, et il fallait décocher la case après coup. La
+      // copie naît VISIBLE, son `label` gardé ; vidé, le fichier disparaît.
+      if (file === 'version.json') await writeVersionHidden(resolve(dst, file), false);
     }
   }
   return [];

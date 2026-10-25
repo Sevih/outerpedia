@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { getT } from '@/i18n';
 import type { Lang } from '@/lib/i18n/config';
 import { lRec } from '@/lib/i18n/localize';
 import { localePath } from '@/lib/navigation';
@@ -7,6 +8,7 @@ import type { Guide } from '@/lib/data/guides';
 import { getMonster } from '@/lib/data/monsters';
 import { encountersOfGroup, modeLabel } from '@/lib/data/encounters';
 import { lootSignature, lootTableOf, type LootBadge } from '@/lib/data/rewards';
+import { UpdatingBadge } from '@/components/guides/GuideCard';
 import { EmptyCategory } from './EmptyCategory';
 import { ModeColumns } from './ModeColumns';
 import type { CategoryViewProps } from './types';
@@ -26,7 +28,9 @@ import type { CategoryViewProps } from './types';
  * loot écrit à la main ; un boss ajouté au mode y serait resté invisible.
  */
 export default async function SpecialRequestSplit({ lang, guides }: CategoryViewProps) {
+  const t = await getT(lang);
   if (guides.length === 0) return <EmptyCategory lang={lang} />;
+  const updatingText = t('page.guide.updating_badge');
 
   const placed = guides.map((guide) => {
     // `requires: ['group']` au scan — le garde reste pour un appel hors catégorie.
@@ -64,7 +68,13 @@ export default async function SpecialRequestSplit({ lang, guides }: CategoryView
         content: (
           <div className="flex flex-col gap-3">
             {entries.map(({ guide, sig }) => (
-              <BannerCard key={guide.slug} guide={guide} lang={lang} sig={sig} />
+              <BannerCard
+                key={guide.slug}
+                guide={guide}
+                lang={lang}
+                sig={sig}
+                updatingText={updatingText}
+              />
             ))}
           </div>
         ),
@@ -78,7 +88,17 @@ export default async function SpecialRequestSplit({ lang, guides }: CategoryView
  * (`CLG_Raid_*`) rendu en fond plein, le nom en pastille, la signature de loot
  * à droite sur deux rangées.
  */
-function BannerCard({ guide, lang, sig }: { guide: Guide; lang: Lang; sig: LootSig }) {
+function BannerCard({
+  guide,
+  lang,
+  sig,
+  updatingText,
+}: {
+  guide: Guide;
+  lang: Lang;
+  sig: LootSig;
+  updatingText: string;
+}) {
   // Le NOM DU BOSS, pas le titre du guide (huit metas portent le générique
   // « Strategy Guide ») : le monstre que `bossId` désigne — pas les boss du
   // combat, dont la liste est bruitée (le jumeau de Dek'Ril est un renfort,
@@ -116,6 +136,10 @@ function BannerCard({ guide, lang, sig }: { guide: Guide; lang: Lang; sig: LootS
         loading="lazy"
         className="absolute inset-0 h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
       />
+      {/* Coin haut gauche, le seul libre : nom en bas, butin à droite. */}
+      {guide.updating && (
+        <UpdatingBadge text={updatingText} overlay className="absolute top-1.5 left-3" />
+      )}
       <div className="absolute inset-x-0 bottom-0 px-3 pb-1.5">
         <p className="bg-surface-sunken/60 text-content-strong inline-block rounded px-3 py-0.5 text-lg font-bold drop-shadow-lg">
           {name}

@@ -6,6 +6,7 @@ import { localePath } from '@/lib/navigation';
 import { ELEMENT_ORDER, ELEMENT_RING, img } from '@/lib/images';
 import type { Guide } from '@/lib/data/guides';
 import { getTower, TOWER_DIFFICULTY_MODES, TOWER_ELEMENT_MODE } from '@/lib/data/towers';
+import { UpdatingBadge } from '@/components/guides/GuideCard';
 import { ART_TILE, GuideCardArt } from './CardArt';
 import { EmptyCategory } from './EmptyCategory';
 import type { CategoryViewProps } from './types';
@@ -62,6 +63,7 @@ export default async function SkywardTowerView({ lang, guides }: CategoryViewPro
   const elemental = placed
     .filter((p) => p.tower.mode === TOWER_ELEMENT_MODE)
     .sort((a, b) => rank(a.tower.element) - rank(b.tower.element));
+  const updatingText = t('page.guide.updating_badge');
 
   return (
     <div className="space-y-8">
@@ -70,7 +72,12 @@ export default async function SkywardTowerView({ lang, guides }: CategoryViewPro
           <h2 className="mb-4">{t('guides.skyward_tower.difficulty')}</h2>
           <div className="flex flex-wrap justify-center gap-4">
             {difficulty.map(({ guide }) => (
-              <DifficultyCard key={guide.slug} guide={guide} lang={lang} />
+              <DifficultyCard
+                key={guide.slug}
+                guide={guide}
+                lang={lang}
+                updatingText={updatingText}
+              />
             ))}
           </div>
         </section>
@@ -81,7 +88,13 @@ export default async function SkywardTowerView({ lang, guides }: CategoryViewPro
           <h2 className="mb-4">{t('guides.skyward_tower.elemental')}</h2>
           <div className="flex flex-wrap justify-center gap-3">
             {elemental.map(({ guide, tower }) => (
-              <ElementalCard key={guide.slug} guide={guide} lang={lang} element={tower.element} />
+              <ElementalCard
+                key={guide.slug}
+                guide={guide}
+                lang={lang}
+                element={tower.element}
+                updatingText={updatingText}
+              />
             ))}
           </div>
         </section>
@@ -91,7 +104,15 @@ export default async function SkywardTowerView({ lang, guides }: CategoryViewPro
 }
 
 /** Tour de difficulté : bannière large, nom en tête, description en pied. */
-function DifficultyCard({ guide, lang }: { guide: Guide; lang: Lang }) {
+function DifficultyCard({
+  guide,
+  lang,
+  updatingText,
+}: {
+  guide: Guide;
+  lang: Lang;
+  updatingText: string;
+}) {
   const name = lRec(guide.title, lang);
   return (
     <Link
@@ -100,7 +121,10 @@ function DifficultyCard({ guide, lang }: { guide: Guide; lang: Lang }) {
     >
       <GuideCardArt icon={guide.icon} hoverScale />
       <div className="absolute inset-0 flex flex-col justify-between p-3">
-        <p className="text-content-strong text-lg font-bold drop-shadow-lg">{name}</p>
+        <div className="flex items-start justify-between gap-2">
+          <p className="text-content-strong text-lg font-bold drop-shadow-lg">{name}</p>
+          {guide.updating && <UpdatingBadge text={updatingText} overlay className="mt-1" />}
+        </div>
         <p className="text-content-muted text-2xs line-clamp-3 drop-shadow-lg sm:text-xs">
           {lRec(guide.description, lang)}
         </p>
@@ -114,10 +138,12 @@ function ElementalCard({
   guide,
   lang,
   element: raw,
+  updatingText,
 }: {
   guide: Guide;
   lang: Lang;
   element?: string;
+  updatingText: string;
 }) {
   const name = lRec(guide.title, lang);
   // `none` : l'Universal Tower (06/10/2026) est du menu élémentaire sans
@@ -130,19 +156,24 @@ function ElementalCard({
       className={`group ring-line-subtle ${ART_TILE} ring-1 transition-all ${ring}`}
     >
       <GuideCardArt icon={guide.icon} topVeil hoverScale />
-      <div className="absolute inset-x-0 top-0 flex items-center gap-1 p-2">
-        {badge && (
-          <img
-            src={badge}
-            alt=""
-            aria-hidden
-            loading="lazy"
-            className="h-4 w-4 drop-shadow-lg"
-            width={16}
-            height={16}
-          />
-        )}
-        <p className="text-content line-clamp-1 text-xs font-medium drop-shadow-lg">{name}</p>
+      {/* Le marqueur « en mise à jour » SOUS l'en-tête : la carte est trop
+          étroite pour le loger à côté du nom. */}
+      <div className="absolute inset-x-0 top-0 space-y-1 p-2">
+        <div className="flex items-center gap-1">
+          {badge && (
+            <img
+              src={badge}
+              alt=""
+              aria-hidden
+              loading="lazy"
+              className="h-4 w-4 drop-shadow-lg"
+              width={16}
+              height={16}
+            />
+          )}
+          <p className="text-content line-clamp-1 text-xs font-medium drop-shadow-lg">{name}</p>
+        </div>
+        {guide.updating && <UpdatingBadge text={updatingText} overlay className="block w-fit" />}
       </div>
       <div className="absolute inset-x-0 bottom-0 p-2">
         <p className="text-content-muted text-2xs drop-shadow-lg sm:text-xs">

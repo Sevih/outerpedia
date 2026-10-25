@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import type { Route } from 'next';
 import Link from 'next/link';
+import { UpdatingBadge } from '@/components/guides/GuideCard';
 import { ART_TILE, GuideCardArt } from './CardArt';
 
 /**
@@ -21,7 +22,13 @@ export interface RouteTile {
   /** Nom de sprite de l'art de map (namespace guides). */
   icon: string;
   href?: string;
-  segments?: { label: string; href: string }[];
+  /**
+   * Présent = le guide de la tuile est « en mise à jour » (`meta.updating`) :
+   * le marqueur, déjà localisé. Une part de profondeur Story est un guide à
+   * elle seule : elle porte le sien.
+   */
+  updatingText?: string;
+  segments?: { label: string; href: string; updatingText?: string }[];
 }
 
 /** Une profondeur Endless et ses tuiles (pour le sélecteur). */
@@ -41,6 +48,9 @@ export function Tile({ tile }: { tile: RouteTile }) {
       <p className="text-content text-xs font-medium drop-shadow-lg">{tile.depthLabel}</p>
       {tile.name && (
         <p className="text-content line-clamp-3 text-xs font-medium drop-shadow-lg">{tile.name}</p>
+      )}
+      {tile.updatingText && (
+        <UpdatingBadge text={tile.updatingText} overlay className="mt-1 block w-fit" />
       )}
     </div>
   );
@@ -70,13 +80,14 @@ export function Tile({ tile }: { tile: RouteTile }) {
           <Link
             key={s.href}
             href={s.href as Route}
-            className={`hover:bg-content/10 flex flex-1 items-center justify-center transition-colors ${
+            className={`hover:bg-content/10 flex flex-1 flex-col items-center justify-center gap-1 transition-colors ${
               i > 0 ? 'border-line border-t' : ''
             }`}
           >
             <span className="bg-surface-sunken text-content-strong text-2xs rounded px-2 py-0.5 font-bold drop-shadow-lg sm:text-xs">
               {s.label}
             </span>
+            {s.updatingText && <UpdatingBadge text={s.updatingText} overlay />}
           </Link>
         ))}
       </div>

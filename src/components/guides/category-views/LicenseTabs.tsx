@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import type { Route } from 'next';
 import Link from 'next/link';
+import { UpdatingBadge } from '@/components/guides/GuideCard';
 
 /** Une carte de licence, préparée côté serveur (URLs complètes, nom localisé). */
 export interface LicenseCard {
@@ -13,6 +14,8 @@ export interface LicenseCard {
   src: string;
   /** Face révélée — présent = carte spoiler, à retourner avant de naviguer. */
   openSrc?: string;
+  /** Présent = guide « en mise à jour » (`meta.updating`) : le marqueur, déjà localisé. */
+  updatingText?: string;
 }
 
 /** Largeur de carte : 3 par rangée en mobile, 7 en desktop (inchangé). */
@@ -92,6 +95,9 @@ function WeeklyCard({ card }: { card: LicenseCard }) {
           loading="lazy"
           className="absolute inset-0 h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
         />
+        {card.updatingText && (
+          <UpdatingBadge text={card.updatingText} overlay className="absolute top-1.5 left-1.5" />
+        )}
       </div>
       <p className="text-content line-clamp-2 w-full text-center text-xs font-medium">
         {card.name}
@@ -116,6 +122,10 @@ function PromotionCard({
   onReveal: () => void;
   revealLabel: string;
 }) {
+  // Le marqueur n'a rien d'un spoiler : posé sur les DEUX faces, il tourne avec elles.
+  const badge = card.updatingText && (
+    <UpdatingBadge text={card.updatingText} overlay className="absolute top-1.5 left-1.5" />
+  );
   return (
     <div className={`flex flex-col items-center gap-1.5 ${CARD_W}`}>
       <div className="relative aspect-150/260 w-full perspective-[600px]">
@@ -142,6 +152,7 @@ function PromotionCard({
               loading="lazy"
               className="absolute inset-0 h-full w-full object-cover"
             />
+            {badge}
           </button>
 
           {/* Face arrière — révélée (lien vers le guide). Hors focus/lecteurs
@@ -158,6 +169,7 @@ function PromotionCard({
               loading="lazy"
               className="absolute inset-0 h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
             />
+            {badge}
           </Link>
         </div>
       </div>

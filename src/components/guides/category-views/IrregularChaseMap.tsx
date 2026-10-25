@@ -11,6 +11,7 @@ import { encountersOfGroup } from '@/lib/data/encounters';
 import { lootTableOf, pursuitLoot, type LootVariant } from '@/lib/data/rewards';
 import { ItemInline } from '@/components/inline/ItemInline';
 import { Thumbnail } from '@/components/ui/Thumbnail';
+import { UpdatingBadge } from '@/components/guides/GuideCard';
 import { EmptyCategory } from './EmptyCategory';
 import type { CategoryViewProps } from './types';
 
@@ -135,6 +136,11 @@ function BossPin({ guide, lang, t }: { guide: Guide; lang: Lang; t: TFunction })
             className="h-12 w-12 lg:h-16 lg:w-16"
           />
         </span>
+        {/* Toujours DERNIER (`order-2`), sous le nom comme sous la vignette —
+            quel que soit l'ordre que `mobileTop` donne aux deux. */}
+        {guide.updating && (
+          <UpdatingBadge text={t('page.guide.updating_badge')} overlay className="order-2" />
+        )}
       </Link>
       {loot && (
         <div className="bg-surface-sunken/80 text-2xs hidden flex-col items-center gap-0.5 rounded px-2 py-1 lg:flex">

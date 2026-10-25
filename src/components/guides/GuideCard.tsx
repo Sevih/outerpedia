@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { cn } from '@/lib/cn';
 import type { Lang } from '@/lib/i18n/config';
 import { lRec } from '@/lib/i18n/localize';
 import { localePath } from '@/lib/navigation';
@@ -48,11 +49,7 @@ export function GuideCard({
           <h2 className="text-content-strong group-hover:text-accent static pb-0 text-sm font-semibold transition-colors after:hidden">
             {lRec(guide.title, lang)}
           </h2>
-          {guide.updating && (
-            <span className="border-line-subtle text-content-muted shrink-0 rounded-full border px-2 py-0.5 text-xs">
-              {updatingText}
-            </span>
-          )}
+          {guide.updating && <UpdatingBadge text={updatingText} />}
         </div>
         <p className="text-content-muted mt-1 line-clamp-2 text-xs">
           {lRec(guide.description, lang)}
@@ -60,5 +57,35 @@ export function GuideCard({
         <p className="text-content-subtle mt-2 text-xs">{updatedText}</p>
       </div>
     </Link>
+  );
+}
+
+/**
+ * Marqueur « en mise à jour » (`meta.updating`) — le badge de la carte, partagé
+ * par toutes les vues qui ouvrent un guide (B69). `overlay` : posé SUR un art,
+ * il lui faut son propre fond (l'art est clair) et un corps plus petit, à la
+ * hauteur d'une bannière.
+ */
+export function UpdatingBadge({
+  text,
+  overlay = false,
+  className,
+}: {
+  text: string;
+  overlay?: boolean;
+  className?: string;
+}) {
+  return (
+    <span
+      className={cn(
+        'text-content-muted shrink-0 rounded-full border px-2 py-0.5',
+        overlay
+          ? 'border-line/60 bg-surface-base/75 text-2xs max-w-full truncate backdrop-blur-[2px]'
+          : 'border-line-subtle text-xs',
+        className,
+      )}
+    >
+      {text}
+    </span>
   );
 }

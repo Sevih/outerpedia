@@ -4,6 +4,7 @@ import { useState } from 'react';
 import type { Route } from 'next';
 import Link from 'next/link';
 import { Thumbnail, type MonsterThumb } from '@/components/ui/Thumbnail';
+import { UpdatingBadge } from '@/components/guides/GuideCard';
 
 /** Un stage guidé, préparé côté serveur (URLs complètes, textes localisés). */
 export interface StageCard {
@@ -17,6 +18,8 @@ export interface StageCard {
   src: string;
   /** Le boss du guide — caché tant que le lecteur n'a pas accepté le spoiler. */
   boss: { name: string; thumb: MonsterThumb };
+  /** Présent = guide « en mise à jour » (`meta.updating`) : le marqueur, déjà localisé. */
+  updatingText?: string;
 }
 
 /** Une saison de l'histoire : sa section dans la page. */
@@ -103,6 +106,9 @@ function StageTile({ stage, spoilers }: { stage: StageCard; spoilers: boolean })
         <p className="text-content-strong line-clamp-3 text-xs font-medium drop-shadow-lg">
           {stage.area}
         </p>
+        {stage.updatingText && (
+          <UpdatingBadge text={stage.updatingText} overlay className="block w-fit" />
+        )}
       </div>
 
       {spoilers && (

@@ -99,9 +99,11 @@ function depthTile(depth: number, items: Row[], lang: Lang, t: TFunction): Route
       key: `d${depth}`,
       depthLabel,
       icon: items[0].guide.icon,
+      // Une part = un guide : son marqueur « en mise à jour » est le sien.
       segments: items.map((r) => ({
         label: lRec(r.guide.title, lang),
         href: routeUrl(r.guide, lang),
+        ...(r.guide.updating ? { updatingText: t('page.guide.updating_badge') } : {}),
       })),
     };
   }
@@ -113,12 +115,14 @@ function routeTile(depth: number, r: Row, lang: Lang, t: TFunction): RouteTile {
   const depthLabel = t('guides.monad_gate.depth', { n: depth });
   const name = lRec(r.guide.title, lang);
   const base = routeUrl(r.guide, lang);
+  const updating = r.guide.updating ? { updatingText: t('page.guide.updating_badge') } : {};
   if (r.variants > 1) {
     return {
       key: r.guide.slug,
       depthLabel,
       name,
       icon: r.guide.icon,
+      ...updating,
       segments: Array.from({ length: r.variants }, (_, i) => ({
         // Étiquette A, B, C… — le layout de map que la page ouvrira via `?v`.
         label: t('guides.monad_gate.variant', { v: String.fromCharCode(65 + i) }),
@@ -126,5 +130,5 @@ function routeTile(depth: number, r: Row, lang: Lang, t: TFunction): RouteTile {
       })),
     };
   }
-  return { key: r.guide.slug, depthLabel, name, icon: r.guide.icon, href: base };
+  return { key: r.guide.slug, depthLabel, name, icon: r.guide.icon, href: base, ...updating };
 }

@@ -6,6 +6,7 @@ import { img } from '@/lib/images';
 import { GUIDE_TIERS, GUIDE_TIER_KEYS } from '@/lib/data/guide-categories';
 import { formatGuideDate, guideUpdatedDate, type Guide } from '@/lib/data/guides';
 import type { Lang } from '@/lib/i18n/config';
+import { UpdatingBadge } from '@/components/guides/GuideCard';
 import { EmptyCategory } from './EmptyCategory';
 import type { CategoryViewProps } from './types';
 
@@ -48,6 +49,7 @@ export default async function TieredList({ lang, guides }: CategoryViewProps) {
                 lang={lang}
                 by={t('page.guide.by', { author: guide.author })}
                 date={formatGuideDate(guideUpdatedDate(guide), lang)}
+                updatingText={t('page.guide.updating_badge')}
               />
             ))}
           </div>
@@ -63,11 +65,13 @@ function LessonCard({
   lang,
   by,
   date,
+  updatingText,
 }: {
   guide: Guide;
   lang: Lang;
   by: string;
   date: string;
+  updatingText: string;
 }) {
   return (
     <Link
@@ -86,9 +90,12 @@ function LessonCard({
         />
       </div>
       <div className="flex min-w-0 flex-1 flex-col gap-1.5">
-        <h3 className="text-content-strong group-hover:text-accent text-sm font-semibold tracking-tight transition-colors">
-          {lRec(guide.title, lang)}
-        </h3>
+        <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
+          <h3 className="text-content-strong group-hover:text-accent text-sm font-semibold tracking-tight transition-colors">
+            {lRec(guide.title, lang)}
+          </h3>
+          {guide.updating && <UpdatingBadge text={updatingText} />}
+        </div>
         <p className="text-content-muted text-xs">{lRec(guide.description, lang)}</p>
         <div className="text-content-muted mt-auto flex items-center justify-between gap-3 pt-2 font-mono text-[9.5px] tracking-[0.12em] uppercase">
           <span>{by}</span>

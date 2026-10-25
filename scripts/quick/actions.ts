@@ -6406,7 +6406,7 @@ export async function addGuideVersionAction(
   return {
     ok: true,
     log: [
-      `version ${key} créée sur le disque${from ? ` (copie de ${from}, sans son épinglage)` : ' (vierge)'} — pas committée : « Enregistrer » l’emportera.`,
+      `version ${key} créée sur le disque${from ? ` (copie de ${from}, sans son épinglage, visible)` : ' (vierge)'} — pas committée : « Enregistrer » l’emportera.`,
     ],
     draft: deps.draft(category, slug),
     version: key,
