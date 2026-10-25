@@ -7,6 +7,52 @@
 
 ## 2026-10-25
 
+- **datagen : suppressions récursives de `.gamedata` avec nouvel essai sur
+  EPERM / EBUSY / ENOTEMPTY, utilitaire commun `rmTree` (A79).** Quoi :
+  `rmTree(path, opts?)` dans `datagen/lib/fs.ts` = `rmSync` récursif et
+  `force` avec `maxRetries: 5` et `retryDelay: 200`, options surchargeables ; les six suppressions d'`extract*` y passent — les trois
+  grosses (`extract.ts` `t.out`, `extract-wallpapers.ts` `OUT_WP`,
+  `extract-audio.ts` `OUT_BGM`) et les trois petites d'`extract-audio.ts`
+  (`WAV_TMP` ×2, `input`) ; l'import `rmSync` disparaît de
+  `extract-wallpapers.ts` et `extract-audio.ts`, le commentaire
+  d'`extract.ts` cite désormais `rmTree(OUT_BGM)`. Pourquoi : le 24/10 sur
+  le fixe (Node 24.13.1), vider `extracted/images` a planté en EPERM, un
+  handle tenu un instant par un autre processus refusant le `rmdir` d'un
+  dossier tout juste vidé ; Node réessaie de lui-même sur ces codes (et
+  EMFILE/ENFILE) quand `maxRetries` est passé, ce qu'aucun `rmSync` du dépôt
+  ne faisait. Comment : options natives, pas de boucle maison ; le
+  commentaire d'en-tête dit le plantage, les codes, et qu'un plantage qui
+  revient au même endroit à chaque relance n'est plus passager (trouver le
+  processus). Écart avec la commande : elle annonçait « ≈ 1 s de
+  patience », mais la doc Node décrit une attente qui croît de `retryDelay`
+  à chaque essai, soit ≈ 3 s au pire pour 5 × 200 ms — le commentaire dit
+  3 s, les valeurs sont celles demandées. Vérification :
+  `datagen/lib/fs.test.ts` (nouveau, 4 tests : arbre réel supprimé dans un
+  `mkdtempSync`, chemin absent sans throw, options par défaut puis
+  surchargées transmises à `rmSync`, espion `vi.fn` qui délègue au vrai
+  `node:fs` par `vi.mock`) — `pnpm exec vitest run datagen/lib/fs.test.ts`
+  « Tests 4 passed (4) » ; piège vu en route : un `beforeEach` en flèche
+  sur `vi.mocked(rmSync).mockClear()` RENVOIE l'espion, que vitest
+  prend pour un nettoyage et appelle sans argument (TypeError « path …
+  Received undefined » sur les 4 tests), d'où le corps en bloc commenté.
+  `pnpm typecheck` vert (dernière ligne : les trois `tsc --noEmit`, racine,
+  `datagen/` et `scripts/`), `pnpm lint` vert (dernière ligne : `eslint`),
+  `pnpm test` « Test Files 254 passed (254) », « Tests 4438 passed (4438) » ; pas de `datagen:build` ni d'extraction
+  réelle (des Go de sorties) : la preuve est le test et le diff. Laissé :
+  les autres `rmSync` — `extract.ts` `rmSync(input)` (le dossier de bundles
+  stagés, même module et même risque : le premier à mériter `rmTree`, hors
+  liste de la commande), `snapshot.ts` (purge fichier par fichier des
+  périmés de l'instantané, mérite aussi le traitement s'il touche
+  `.gamedata` synchronisé), `refresh.ts` (point de reprise, fichier seul),
+  `bundle-manifest.ts`, `json.ts` (temporaire d'écriture atomique),
+  `pull-gamedata.ts`, `tools.ts`, `pull-steam.ts`, `dump-steam.ts` ; aucune
+  doc ne décrivait les helpers de `datagen/lib/` ni les sorties reparties
+  de zéro, donc rien dans `datagen/README.md`. Item « Vu au `pnpm dev` du
+  24/10 » retiré du TODO (section vide retirée). ⏳ Sevih sur le fixe, au
+  prochain `pnpm dev` ou `datagen:extract` : plus d'EPERM en vidant
+  `extracted/images` ; s'il revient au même dossier à chaque relance,
+  chercher le processus.
+
 - **Revue des cinq commits du fixe du 24/10 (Fable 5.1, à la demande de
   Sevih).** `64eb9943` notes de patch (`buff-events.json`, `posts.json`) ;
   `a2ff8fce` suite verte sous Windows (séparateur natif dans

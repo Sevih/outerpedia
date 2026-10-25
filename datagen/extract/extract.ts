@@ -40,6 +40,7 @@ import {
   stageBundles,
   type ExtractTarget,
 } from '../lib/bundle-manifest';
+import { rmTree } from '../lib/fs';
 import { isMain } from '../lib/is-main';
 import { ASSETSTUDIO, ensureTool } from './tools';
 import { runAudio } from './extract-audio';
@@ -119,14 +120,14 @@ function runTarget(key: keyof typeof TARGETS, force: boolean, extraArgs: string[
     return;
   }
   console.log(`↻ extraction des ${t.label} — ${summary} sur ${readManifest().length}...`);
-  // Sortie REPARTIE DE ZÉRO, comme le fait déjà la cible audio (`rmSync(OUT_BGM)`).
+  // Sortie REPARTIE DE ZÉRO, comme le fait déjà la cible audio (`rmTree(OUT_BGM)`).
   // Sans ça les fichiers d'une extraction précédente survivent indéfiniment :
   // constaté le 28/08/2026, la sortie images portait 14 258 fichiers là où
   // l'extraction n'en produit que 13 175 — l'union exacte du périmé et du frais
   // (13 735 + 13 175 − 12 652 communs). Dedans, 28 `T_FX_*` que le filtre exclut
   // pourtant, et des doublons aux pathID d'avant le dernier patch du jeu.
   // L'empreinte n'étant écrite qu'APRÈS succès, une passe interrompue se rejoue.
-  rmSync(t.out, { recursive: true, force: true });
+  rmTree(t.out);
   mkdirSync(t.out, { recursive: true });
   const input = stageBundles(key, bundles);
   const args = [input, '-m', 'export', '-r', '-o', t.out, '--log-level', 'warning'];

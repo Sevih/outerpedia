@@ -26,18 +26,10 @@
  * + ffmpeg. Surcharges d'exe : ASTUDIO_CLI, FFMPEG (build local).
  */
 import { execFileSync } from 'node:child_process';
-import {
-  existsSync,
-  mkdirSync,
-  readdirSync,
-  renameSync,
-  rmSync,
-  unlinkSync,
-  writeFileSync,
-} from 'node:fs';
+import { existsSync, mkdirSync, readdirSync, renameSync, unlinkSync, writeFileSync } from 'node:fs';
 import { cpus } from 'node:os';
 import { parse as parsePath, resolve } from 'node:path';
-import { walkFiles } from '../lib/fs';
+import { rmTree, walkFiles } from '../lib/fs';
 import { isMain } from '../lib/is-main';
 import { ASSETSTUDIO, FFMPEG, ensureTool } from './tools';
 import { bundlesFor, readManifest, stageBundles } from '../lib/bundle-manifest';
@@ -65,7 +57,7 @@ function ffmpegBin(): string {
 /** 1) Extraction WAV depuis les bundles, à plat dans `WAV_TMP`. */
 function extractWavs(): number {
   const bin = process.env.ASTUDIO_CLI ?? ensureTool(ASSETSTUDIO);
-  rmSync(WAV_TMP, { recursive: true, force: true });
+  rmTree(WAV_TMP);
   mkdirSync(WAV_TMP, { recursive: true });
   const maxTasks = Math.min(Math.max(cpus().length - 4, 1), 16);
   // CIBLÉ PAR LE MANIFESTE, comme les cibles `bytes` et `images` — l'audio
@@ -104,7 +96,7 @@ function extractWavs(): number {
     ],
     { timeout: 600_000, stdio: 'inherit' },
   );
-  rmSync(input, { recursive: true, force: true });
+  rmTree(input);
   // `-g none` peut nicher sous un sous-dossier selon l'outil : on récupère les
   // WAV où qu'ils soient, remontés à plat dans WAV_TMP.
   const wavs: string[] = [];
@@ -194,7 +186,7 @@ export function runAudio(): void {
   console.log(`✓ ${count} WAV extraits.`);
 
   // Sortie propre : on repart de zéro (les mp3 sont dérivés, pas des sources).
-  rmSync(OUT_BGM, { recursive: true, force: true });
+  rmTree(OUT_BGM);
   mkdirSync(OUT_BGM, { recursive: true });
 
   const { pairs, standalone } = findPairs();
@@ -214,7 +206,7 @@ export function runAudio(): void {
     converted++;
   }
 
-  rmSync(WAV_TMP, { recursive: true, force: true });
+  rmTree(WAV_TMP);
   const total = readdirSync(OUT_BGM).filter((f) => f.endsWith('.mp3')).length;
   console.log(
     `✅ Audio extrait : ${total} mp3 (${merged} fusionnés intro+loop, ${converted} isolés) → ${OUT_BGM}`,

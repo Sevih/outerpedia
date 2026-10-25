@@ -41,27 +41,6 @@ les preuves et les décisions vivent dans le tri consolidé de sevih-tool
       sorti du S1 d'Ame faute de clip qui le joue — possible variante sous
       B, à prouver dans le client avant de la remettre.
 
-## 🧹 Vu au `pnpm dev` du 24/10
-
-- [ ] **Suppressions récursives de `.gamedata` sans nouvel essai sous
-      Windows** : `datagen/extract/extract.ts:129` a planté en EPERM en
-      vidant `extracted/images` avant réextraction (Node 24.13.1). L'erreur
-      cite la racine `images`, mais l'échec est au premier dossier traité
-      (`assets/art/ui/dungeon/ig_button_burst_02`) : son fichier est parti,
-      puis le `rmdir` du dossier vide a été refusé. Aucun fichier en lecture
-      seule, aucun nom interdit, chemin max à 201 caractères, rien de
-      verrouillé après coup : c'est un handle tenu un instant par un autre
-      processus (indexeur, Defender, Syncthing qui synchronise `.gamedata`,
-      ou Explorer), sans qu'on sache lequel. Sans gravité : l'empreinte
-      n'étant écrite qu'après succès, la passe suivante rejoue. Correction :
-      `maxRetries` et `retryDelay` (Node réessaie alors sur EPERM, EBUSY et
-      ENOTEMPTY), qu'aucun `rmSync` du repo n'utilise, sur les trois grosses
-      suppressions : `extract.ts:129`, `extract-wallpapers.ts:330`,
-      `extract-audio.ts:197`. Mieux vaut un petit utilitaire commun dans
-      `datagen/lib/` qu'une option recopiée trois fois. Si le plantage
-      revient au même endroit à chaque relance, il ne s'agit plus d'un
-      blocage passager : trouver le processus avant de corriger.
-
 ## 🧰 Outil quick
 
 - [ ] **« Extraction » › versionnage — contrôles à l'écran (lot F22)** : le

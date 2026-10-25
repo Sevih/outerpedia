@@ -30,11 +30,12 @@
  * `pnpm datagen:extract [all]` via `runWallpapers()` (cf. extract.ts).
  * Outillage : sharp (dédup perceptuelle + webp), pas de binaire externe.
  */
-import { copyFileSync, existsSync, mkdirSync, readdirSync, rmSync } from 'node:fs';
+import { copyFileSync, existsSync, mkdirSync, readdirSync } from 'node:fs';
 import { cpus } from 'node:os';
 import { basename, extname, join, resolve } from 'node:path';
 import sharp from 'sharp';
 import { mapLimit } from '../lib/concurrency';
+import { rmTree } from '../lib/fs';
 import { isMain } from '../lib/is-main';
 import { readPngSize } from '../lib/png';
 import { gamedata } from '../lib/paths';
@@ -327,7 +328,7 @@ export async function runWallpapers(): Promise<void> {
   const skip = await detectDuplicates(candidates);
 
   // Sortie propre : les webp/png sont dérivés, on repart de zéro (déterministe).
-  rmSync(OUT_WP, { recursive: true, force: true });
+  rmTree(OUT_WP);
   const counts = await writeOutputs(candidates, skip);
 
   const total = [...counts.values()].reduce((a, b) => a + b, 0);
