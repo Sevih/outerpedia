@@ -26951,8 +26951,7 @@
     "grade": "rare",
     "type": "costume",
     "star": 0,
-    "characterId": "2000061",
-    "source": "event_attendence"
+    "characterId": "2000061"
   },
   "COSTUME_72": {
     "kind": "costume",
