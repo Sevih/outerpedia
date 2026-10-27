@@ -1,6 +1,36 @@
 {
   "posts": [
     {
+      "id": 12041,
+      "date": "2026-10-27",
+      "modified": "2026-10-27T05:01:27",
+      "slug": "notice-10-27tue-sequential-rolling-patch",
+      "lang": "en",
+      "type": "notice",
+      "title": "[Notice] 10/27(Tue) Sequential Rolling Patch",
+      "content": "<figure class=\"size-full\"><img width=\"658\" height=\"200\" src=\"/images/patch-notes/548f09f13ebc61b3.webp\" alt=\"\"></figure>\n\n<p>Hello, Masters.<br><br>We will carry out a patch to improve the game experience.<br>Please note that players may experience some server instability during this time, but players can continue to play.<br><br>We kindly ask for your understanding. Please see below for more information.</p>\n\n<p>◈ Patch Schedule</p>\n\n<ul>\n<li>10/27(Tue) 05:30 ~ 06:00 (UTC)</li>\n\n<li>It will be applied sequentially within the specified timeframe.</li>\n</ul>\n\n<p>◈ Details</p>\n\n<ol><li>An issue where Christina’s “Utopia Survivor Christina” costume cannot be equipped will be fixed.</li><li>An issue where the event shop for “Operation Bunny Moon: A Big Thank-You!” is not displayed will be fixed.</li><li>Some translations will be corrected.</li></ol>\n\n<p>◈ Notice</p>\n\n<ul>\n<li>Players may experience some server instability.</li>\n\n<li>Please restart the game after the patch to apply the changes.</li>\n</ul>\n\n<p>We sincerely apologize for any inconvenience caused.<br>We will continue doing our best to provide you with the best service possible.</p>\n\n<p>Thank you.</p>\n"
+    },
+    {
+      "id": 12039,
+      "date": "2026-10-27",
+      "modified": "2026-10-27T05:01:03",
+      "slug": "%ea%b3%b5%ec%a7%80-10-27%ed%99%94-%eb%ac%b4%ec%a0%90%ea%b2%80-%ed%8c%a8%ec%b9%98-%ec%a7%84%ed%96%89-%ec%95%88%eb%82%b4",
+      "lang": "kr",
+      "type": "notice",
+      "title": "[공지] 10/27(화) 무점검 패치 진행 안내",
+      "content": "<figure class=\"size-full\"><img width=\"658\" height=\"200\" src=\"/images/patch-notes/621af36733a8d627.webp\" alt=\"\"></figure>\n\n<p>안녕하세요. GM 아메입니다.</p>\n\n<p>게임 서비스 개선을 위한 패치가 진행될 예정입니다.<br>패치를 진행하는 동안 일시적으로 접속 불안정 현상이 발생할 수 있는 점 너그러운 양해 부탁드립니다.</p>\n\n<p>자세한 내용은 아래에서 확인해 주시기 바랍니다.</p>\n\n<p>◈ 패치 진행 일정</p>\n\n<ul>\n<li>10/27(화) 14:30 ~ 15:00 (KST)<br>※ 위 시간 내 순차적으로 적용됩니다.</li>\n</ul>\n\n<p>◈ 내용</p>\n\n<ol><li>크리스티나 코스튬 ‘유토피아의 생존자 크리스티나’를 착용할 수 없는 현상이 수정됩니다.</li><li>감사의 버니문 대소동! 이벤트 상점이 노출되지 않는 현상이 수정됩니다.</li><li>일부 번역 문구가 수정됩니다.</li></ol>\n\n<p>◈ 유의사항</p>\n\n<ul>\n<li>패치 진행하는 동안 접속 불안정 현상이 있을 수 있습니다.</li>\n\n<li>재접속 후 개선된 내용을 이용할 수 있습니다.</li>\n</ul>\n\n<p>이용에 불편을 드려 대단히 죄송합니다.<br>보다 쾌적하고 안정적인 환경을 제공해 드릴 수 있도록 최선을 다하겠습니다.<br>감사합니다.<br></p>\n"
+    },
+    {
+      "id": 12043,
+      "date": "2026-10-27",
+      "modified": "2026-10-27T05:01:33",
+      "slug": "%e3%80%90%e3%81%8a%e7%9f%a5%e3%82%89%e3%81%9b%e3%80%91%e3%83%87%e3%83%bc%e3%82%bf%e6%9b%b4%e6%96%b0%e4%bd%9c%e6%a5%ad%e3%81%ae%e3%81%8a%e7%9f%a5%e3%82%89%e3%81%9b10-27",
+      "lang": "jp",
+      "type": "notice",
+      "title": "【お知らせ】データ更新作業のお知らせ(10/27)",
+      "content": "<figure class=\"size-full\"><img width=\"658\" height=\"200\" src=\"/images/patch-notes/f50b9aec4b98cb8e.webp\" alt=\"\"></figure>\n\n<p>いつも『アウタープレーン』をプレイしていただき、誠にありがとうございます。<br>『アウタープレーン』運営チームです。</p>\n\n<p>10/27(火)、データ更新作業を実施いたします。<br>一時的に接続が不安定になる場合がございます。<br>より快適なサービス提供のための対応となりますので、<br>マスター様のご理解とご協力をお願いいたします。<br>詳細内容は下記をご確認ください。</p>\n\n<p>◈データ更新実施時間<br>: 10/27(火) 14:30 ~ 15:00 (JST)<br>※上記時間中、順次適用されます。</p>\n\n<p>◈更新内容</p>\n\n<ol><li>クリスティーナのスキン「ユートピアの生き残り・クリスティーナ」が装着できない現象を修正いたします。</li><li>【感謝のバニームーン大作戦！】イベントショップが表示されない現象を修正いたします。</li><li>一部の翻訳テキストを修正いたします。</li></ol>\n\n<p>※注意事項<br>・データ更新と共に接続が中断される場合があります。<br>・更新されたデータは、実施時間後ゲームに再度接続した時に自動でダウンロードされます。<br>・再ログイン後、更新内容が適用されます。</p>\n\n<p>この度はご迷惑をおかけいたしましたことをお詫び申し上げます。<br>安定的なサービスをご提供できるよう、最善を尽くしてまいります。</p>\n"
+    },
+    {
       "id": 12020,
       "date": "2026-10-23",
       "modified": "2026-10-23T07:01:36",
@@ -123,12 +153,12 @@
     {
       "id": 11976,
       "date": "2026-10-20",
-      "modified": "2026-10-23T02:43:29",
+      "modified": "2026-10-27T02:46:37",
       "slug": "1020kie",
       "lang": "en",
       "type": "known-issue",
-      "title": "[Issues] Known Issues (10/20 Maintenance) (Added on 10/23 02:42 UTC)",
-      "content": "<figure class=\"size-full\"><img width=\"658\" height=\"200\" src=\"/images/patch-notes/2711930b3fbdcd80.webp\" alt=\"\"></figure>\n<p>Hello Masters,</p>\n<p>We would like to inform you about issues that have been identified. We apologize for the inconvenience.</p>\n<p><s><strong>1. An issue where the score record for Thump, Thump! Moon Bunny’s Mill is saved as the final score.</strong><br>→ This issue is scheduled to be fixed.</s></p>\n<p><strong>2. An issue where selecting the “Go” button on the Lobby Collection screen takes you to the “Thump, Thump! Moon Bunny’s Mill” banner.</strong><br>→ We are currently investigating this issue.</p>\n<p><s><strong>3. An issue where heroes cannot level up from Lv. 119 to Lv. 120 with EXP earned from clearing stages.</strong><br>→ We are currently investigating this issue.</s></p>\n<p><s><strong>4. An issue where Skadi’s skill description in the Tower of Light incorrectly displays the Increased Accuracy tooltip.</strong><br>→ We are currently investigating this issue.</s></p>\n<p><s><strong>5. An issue where an unintended Side Story background appears in Lobby Settings.</strong><br>→ We are currently investigating this issue.</s></p>\n<p><s><strong>6. An issue where Normal Stage 2-12 in Week 2 of Operation Bunny Moon: A Big Thank-You! does not appear on the stage selection screen.</strong><br>→ We are currently investigating this issue.</s></p>\n<p><strong>7. An issue where the “Supply Calls x150” mission incorrectly shows an increase of 10 calls when the last selected piece of gear is obtained within 10 Supply Calls in Dimensional Supply, regardless of the actual number of calls made.</strong><br>→ Mission progress is displayed correctly after logging back in.</p>\n<p><s><strong>8. An issue where an error popup appears and prevents 1★–6★ gear from being crafted at Kate’s Workshop, excluding guaranteed Legendary gear crafting.</strong></s></p>\n<p><s><strong>9. An issue where Hero Piece rewards cannot be claimed from certain content if the hero has reached maximum Transcendence or you already have all the Pieces needed to reach it.</strong></s></p>\n<p><strong>10. An issue where Christina’s “Utopia Survivor Christina” costume cannot be equipped.</strong></p>\n<p>We will work to resolve these issues as quickly as possible and provide updates in this notice if there are any changes.</p><p>Thank you.</p>\n"
+      "title": "[Issues] Known Issues (10/20 Maintenance) (Added on 10/27 02:46 UTC)",
+      "content": "<figure class=\"size-full\"><img width=\"658\" height=\"200\" src=\"/images/patch-notes/2711930b3fbdcd80.webp\" alt=\"\"></figure>\n<p>Hello Masters,</p>\n<p>We would like to inform you about issues that have been identified. We apologize for the inconvenience.</p>\n<p><s><strong>1. An issue where the score record for Thump, Thump! Moon Bunny’s Mill is saved as the final score.</strong><br>→ This issue is scheduled to be fixed.</s></p>\n<p><strong>2. An issue where selecting the “Go” button on the Lobby Collection screen takes you to the “Thump, Thump! Moon Bunny’s Mill” banner.</strong><br>→ We are currently investigating this issue.</p>\n<p><s><strong>3. An issue where heroes cannot level up from Lv. 119 to Lv. 120 with EXP earned from clearing stages.</strong><br>→ We are currently investigating this issue.</s></p>\n<p><s><strong>4. An issue where Skadi’s skill description in the Tower of Light incorrectly displays the Increased Accuracy tooltip.</strong><br>→ We are currently investigating this issue.</s></p>\n<p><s><strong>5. An issue where an unintended Side Story background appears in Lobby Settings.</strong><br>→ We are currently investigating this issue.</s></p>\n<p><s><strong>6. An issue where Normal Stage 2-12 in Week 2 of Operation Bunny Moon: A Big Thank-You! does not appear on the stage selection screen.</strong><br>→ We are currently investigating this issue.</s></p>\n<p><strong>7. An issue where the “Supply Calls x150” mission incorrectly shows an increase of 10 calls when the last selected piece of gear is obtained within 10 Supply Calls in Dimensional Supply, regardless of the actual number of calls made.</strong><br>→ Mission progress is displayed correctly after logging back in.</p>\n<p><s><strong>8. An issue where an error popup appears and prevents 1★–6★ gear from being crafted at Kate’s Workshop, excluding guaranteed Legendary gear crafting.</strong></s></p>\n<p><s><strong>9. An issue where Hero Piece rewards cannot be claimed from certain content if the hero has reached maximum Transcendence or you already have all the Pieces needed to reach it.</strong></s></p>\n<p><strong>10. An issue where Christina’s “Utopia Survivor Christina” costume cannot be equipped.</strong></p>\n<p><strong>11. An issue where the event shop for “Operation Bunny Moon: A Big Thank-You!” is not displayed.</strong></p>\n<p>We will work to resolve these issues as quickly as possible and provide updates in this notice if there are any changes.</p><p>Thank you.</p>\n"
     },
     {
       "id": 11970,
@@ -143,12 +173,12 @@
     {
       "id": 11975,
       "date": "2026-10-20",
-      "modified": "2026-10-23T02:43:16",
+      "modified": "2026-10-27T02:46:37",
       "slug": "1020kik",
       "lang": "kr",
       "type": "known-issue",
-      "title": "[이슈] 10/20 업데이트 이후 확인된 현상 (10/23 11:42 추가)",
-      "content": "<figure class=\"size-full\"><img width=\"658\" height=\"200\" src=\"/images/patch-notes/efd8449fdbb282dd.webp\" alt=\"\"></figure>\n<p>안녕하세요, 오너 여러분.<br>GM 아메입니다.</p>\n<p>현재 확인된 현상에 대해 안내 드립니다.<br>게임 내 오류 현상으로 이용에 불편을 드려 죄송합니다.</p>\n<p><s><strong>1. 쿵덕쿵! 달토끼의 방앗간에서 점수 기록이 최종 점수로 저장되는 현상</strong><br>→ 해당 현상은 수정 예정입니다.</s></p>\n<p><strong>2. 로비 수집 화면에서 바로가기 버튼 선택 시 쿵덕쿵! 달토끼의 방앗간 배너로 이동되는 현상</strong><br>→ 해당 현상 확인 중에 있습니다.</p>\n<p><s><strong>3. 클리어 경험치 획득 시 119레벨 동료가 120레벨로 레벨업되지 않는 현상</strong><br>→ 해당 현상 확인 중에 있습니다.</s></p>\n<p><s><strong>4. 빛의 탑에 등장하는 스카디의 스킬 설명에서 명중 증가 툴팁이 잘못 노출되는 현상</strong><br>→ 해당 현상 확인 중에 있습니다.</s></p>\n<p><s><strong>5. 로비 설정에서 아이슬라 외전 배경이 노출되는 현상</strong><br>→ 해당 현상 확인 중에 있습니다.</s></p>\n<p><s><strong>6. 감사의 버니문 대소동! 2주차 이벤트에서 노멀 2-12 스테이지가 던전 선택 화면에 노출되지 않는 현상</strong><br>→ 해당 현상 확인 중에 있습니다.</s></p>\n<p><strong>7. 차원 물자 호출에서 마지막 선택 장비를 10회 이내에 획득할 경우, ‘차원 물자 호출 150회’ 미션의 진행 횟수가 10회 증가한 것으로 표시되는 현상</strong><br>→ 재접속 시 정상적으로 표시됩니다.</p>\n<p><s><strong>8. 케이트 공방에서 전설 확정 제작을 제외한 1~6성 장비 제작 시 에러 팝업이 노출되며 제작이 진행되지 않는 현상</strong></s></p>\n<p><s><strong>9. 동료가 최대 초월 상태이거나 최대 초월에 필요한 조각을 모두 보유한 경우, 일부 콘텐츠에서 해당 동료의 조각 보상을 수령할 수 없는 현상</strong></s></p>\n<p><strong>10. 크리스티나 코스튬 ‘유토피아의 생존자 크리스티나’를 착용할 수 없는 현상</strong></p>\n<p>위 현상에 대해 빠르게 정상화될 수 있도록 노력하겠으며,<br>추가 현상이나 변동 사항이 있을 시 해당 공지를 통해 안내 드리겠습니다.</p><p>감사합니다.</p>\n"
+      "title": "[이슈] 10/20 업데이트 이후 확인된 현상 (10/27 11:46 추가)",
+      "content": "<figure class=\"size-full\"><img width=\"658\" height=\"200\" src=\"/images/patch-notes/efd8449fdbb282dd.webp\" alt=\"\"></figure>\n<p>안녕하세요, 오너 여러분.<br>GM 아메입니다.</p>\n<p>현재 확인된 현상에 대해 안내 드립니다.<br>게임 내 오류 현상으로 이용에 불편을 드려 죄송합니다.</p>\n<p><s><strong>1. 쿵덕쿵! 달토끼의 방앗간에서 점수 기록이 최종 점수로 저장되는 현상</strong><br>→ 해당 현상은 수정 예정입니다.</s></p>\n<p><strong>2. 로비 수집 화면에서 바로가기 버튼 선택 시 쿵덕쿵! 달토끼의 방앗간 배너로 이동되는 현상</strong><br>→ 해당 현상 확인 중에 있습니다.</p>\n<p><s><strong>3. 클리어 경험치 획득 시 119레벨 동료가 120레벨로 레벨업되지 않는 현상</strong><br>→ 해당 현상 확인 중에 있습니다.</s></p>\n<p><s><strong>4. 빛의 탑에 등장하는 스카디의 스킬 설명에서 명중 증가 툴팁이 잘못 노출되는 현상</strong><br>→ 해당 현상 확인 중에 있습니다.</s></p>\n<p><s><strong>5. 로비 설정에서 아이슬라 외전 배경이 노출되는 현상</strong><br>→ 해당 현상 확인 중에 있습니다.</s></p>\n<p><s><strong>6. 감사의 버니문 대소동! 2주차 이벤트에서 노멀 2-12 스테이지가 던전 선택 화면에 노출되지 않는 현상</strong><br>→ 해당 현상 확인 중에 있습니다.</s></p>\n<p><strong>7. 차원 물자 호출에서 마지막 선택 장비를 10회 이내에 획득할 경우, ‘차원 물자 호출 150회’ 미션의 진행 횟수가 10회 증가한 것으로 표시되는 현상</strong><br>→ 재접속 시 정상적으로 표시됩니다.</p>\n<p><s><strong>8. 케이트 공방에서 전설 확정 제작을 제외한 1~6성 장비 제작 시 에러 팝업이 노출되며 제작이 진행되지 않는 현상</strong></s></p>\n<p><s><strong>9. 동료가 최대 초월 상태이거나 최대 초월에 필요한 조각을 모두 보유한 경우, 일부 콘텐츠에서 해당 동료의 조각 보상을 수령할 수 없는 현상</strong></s></p>\n<p><strong>10. 크리스티나 코스튬 ‘유토피아의 생존자 크리스티나’를 착용할 수 없는 현상</strong></p>\n<p><strong>11. 감사의 버니문 대소동! 이벤트 상점이 노출되지 않는 현상</strong></p>\n<p>위 현상에 대해 빠르게 정상화될 수 있도록 노력하겠으며,<br>추가 현상이나 변동 사항이 있을 시 해당 공지를 통해 안내 드리겠습니다.</p><p>감사합니다.</p>\n"
     },
     {
       "id": 11969,
@@ -163,12 +193,12 @@
     {
       "id": 11977,
       "date": "2026-10-20",
-      "modified": "2026-10-23T02:43:35",
+      "modified": "2026-10-27T02:46:38",
       "slug": "1020kij",
       "lang": "jp",
       "type": "known-issue",
-      "title": "【不具合】現在確認されている不具合について (10/20)（10/23 11:42 追記）",
-      "content": "<figure class=\"size-full\"><img width=\"658\" height=\"200\" src=\"/images/patch-notes/213ce7185b5a83ed.webp\" alt=\"\"></figure>\n<p>いつも「アウタープレーン」をプレイしていただき、誠にありがとうございます。<br>「アウタープレーン」運営チームです。</p>\n<p>大変ご不便をおかけして申し訳ございません。<br>現在確認されている不具合についてご案内いたします。</p>\n<p><s><strong>1. 【ぺったんぺったん！ 月ウサギの餅つき場】のスコア記録が最終スコアとして保存される現象</strong><br>→ 本現象は修正を予定しております。</s></p>\n<p><strong>2. ロビーコレクション画面で「移動する」ボタンを選択すると、「ぺったんぺったん！ 月ウサギの餅つき場」のバナーに遷移する現象</strong><br>→ 現在、本現象について調査を行っております。</p>\n<p><s><strong>3. クリア経験値を獲得した際、Lv.119の仲間がLv.120にレベルアップしない現象</strong><br>→ 現在、本現象について調査を行っております。</s></p>\n<p><s><strong>4. 「光の塔」に登場するスカディのスキル説明において、「命中UP」のツールチップが誤って表示される現象</strong><br>→ 現在、本現象について調査を行っております。</s></p>\n<p><s><strong>5. 「ロビー設定」に「ロビー背景 – アイスラ外伝」が表示される現象</strong><br>→ 現在、本現象について調査を行っております。</s></p>\n<p><s><strong>6. 「感謝のバニームーン大作戦！」の2週目イベントにおいて、ノーマル2-12ステージがダンジョン選択画面に表示されない現象</strong><br>→ 現在、本現象について調査を行っております。</s></p>\n<p><strong>7. 次元物資召喚で、選択した装備のうち最後の1つを10回以内に獲得した場合、「次元物資召喚 150回」ミッションの進行回数が、実際の召喚回数にかかわらず10回分増加したように表示される現象</strong><br>→ 現在、本現象について調査を進めております。<br>→ 再ログインすると、進行回数が正常に表示されます。</p>\n<p><s><strong>8. ケイトの鍛冶工房で★1～★6装備を作成する際（レジェンド確定作成を除く）、エラーポップアップが表示され、作成できない現象</strong></s></p>\n<p><s><strong>9. 対象の仲間が最大まで超越している、または最大まで超越するために必要なピースをすべて所持している場合、一部のコンテンツでその仲間のピース、または仲間を報酬として受け取ろうとすると、「リクエスト形式が正しくありません。」というエラー画面が表示され、報酬を受け取れない現象</strong></s></p>\n<p><strong>10. クリスティーナのスキン「ユートピアの生き残り・クリスティーナ」が装着できない現象</strong></p>\n<p>この度は皆さまにご迷惑をおかけしておりますことをお詫び申し上げます。<br>不具合解消まで今しばらくお待ちいただけますよう、お願い申し上げます。</p>\n"
+      "title": "【不具合】現在確認されている不具合について (10/20)（10/27 11:46 追記）",
+      "content": "<figure class=\"size-full\"><img width=\"658\" height=\"200\" src=\"/images/patch-notes/213ce7185b5a83ed.webp\" alt=\"\"></figure>\n<p>いつも「アウタープレーン」をプレイしていただき、誠にありがとうございます。<br>「アウタープレーン」運営チームです。</p>\n<p>大変ご不便をおかけして申し訳ございません。<br>現在確認されている不具合についてご案内いたします。</p>\n<p><s><strong>1. 【ぺったんぺったん！ 月ウサギの餅つき場】のスコア記録が最終スコアとして保存される現象</strong><br>→ 本現象は修正を予定しております。</s></p>\n<p><strong>2. ロビーコレクション画面で「移動する」ボタンを選択すると、「ぺったんぺったん！ 月ウサギの餅つき場」のバナーに遷移する現象</strong><br>→ 現在、本現象について調査を行っております。</p>\n<p><s><strong>3. クリア経験値を獲得した際、Lv.119の仲間がLv.120にレベルアップしない現象</strong><br>→ 現在、本現象について調査を行っております。</s></p>\n<p><s><strong>4. 「光の塔」に登場するスカディのスキル説明において、「命中UP」のツールチップが誤って表示される現象</strong><br>→ 現在、本現象について調査を行っております。</s></p>\n<p><s><strong>5. 「ロビー設定」に「ロビー背景 – アイスラ外伝」が表示される現象</strong><br>→ 現在、本現象について調査を行っております。</s></p>\n<p><s><strong>6. 「感謝のバニームーン大作戦！」の2週目イベントにおいて、ノーマル2-12ステージがダンジョン選択画面に表示されない現象</strong><br>→ 現在、本現象について調査を行っております。</s></p>\n<p><strong>7. 次元物資召喚で、選択した装備のうち最後の1つを10回以内に獲得した場合、「次元物資召喚 150回」ミッションの進行回数が、実際の召喚回数にかかわらず10回分増加したように表示される現象</strong><br>→ 現在、本現象について調査を進めております。<br>→ 再ログインすると、進行回数が正常に表示されます。</p>\n<p><s><strong>8. ケイトの鍛冶工房で★1～★6装備を作成する際（レジェンド確定作成を除く）、エラーポップアップが表示され、作成できない現象</strong></s></p>\n<p><s><strong>9. 対象の仲間が最大まで超越している、または最大まで超越するために必要なピースをすべて所持している場合、一部のコンテンツでその仲間のピース、または仲間を報酬として受け取ろうとすると、「リクエスト形式が正しくありません。」というエラー画面が表示され、報酬を受け取れない現象</strong></s></p>\n<p><strong>10. クリスティーナのスキン「ユートピアの生き残り・クリスティーナ」が装着できない現象</strong></p>\n<p><strong>11. 【感謝のバニームーン大作戦！】イベントショップが表示されない現象</strong></p>\n<p>この度は皆さまにご迷惑をおかけしておりますことをお詫び申し上げます。<br>不具合解消まで今しばらくお待ちいただけますよう、お願い申し上げます。</p>\n"
     },
     {
       "id": 11972,
