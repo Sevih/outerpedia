@@ -7,6 +7,34 @@
 
 ## 2026-10-27
 
+- **Relecture G59 (gear-solver) (Fable 5.1) — vente et verrou faits en jeu
+  suivis en direct, requête journalisée pour `item/sell` et `item/lock`,
+  plugin 0.5.0, validé.** `359f441`, 11 fichiers, message conforme, ni
+  `package.json` ni lock. Blocage levé en cours de lot : le client n'envoie
+  jamais ces deux requêtes par la voie qui appelle `Log2InternalWeb`, donc
+  postfix Harmony sur `CWebRES_ItemSell.OnApply` et `CWebRES_ItemLock.OnApply`
+  (succès seulement), champs typés copiés dans la file du writer, ligne
+  `{ seq, at, path, req, res }` écrite là, `res` = dernière réponse du chemin
+  gardée par le writer (`LastRes`) ou `{}` ; les deux chemins hors de
+  `Journal`, une ligne par geste ; classe ou méthode absente → `LogWarning`,
+  chemin non suivi. Relu : `WithRequest` rempli au hook (thread principal) et
+  lu au `Capture` (même thread), `LastRes` touché par le writer seul. Desktop :
+  vente = entrées simples à 0 (retrait, `clearPresetSlots` compris), verrou =
+  `IsLock` 1/0 d'après le bool de la requête, tout le reste `skipped`.
+  Contrôles sur HEAD : `npm run typecheck` vert, `npm run lint` 13
+  avertissements (inchangé), `npm test` 169 + 205 (+6) + 747 ;
+  `dotnet build -c Release` → 0 erreur, DLL 0.5.0 de 20 992 octets. Rejoué
+  par `tsx` sur un snapshot factice : vente de deux pièces dont une équipée et
+  les deux dans un preset → retirées, slots du preset à 0, 4 appliqués ; uid
+  inconnu → intact, 1 sauté ; verrou puis `IsLock` non booléen → cadenas sur
+  la première, 1 sauté ; lignes sans `req` → 2 sautés ; rejeu idempotent.
+  Pas de CI pour le plugin : `fetch-binaries.mjs` le reconstruit à la release
+  en vérifiant la version. **À Sevih, sur le fixe** (après la release et
+  Settings › Setup › Update plugin, jeu fermé) : vendre une pièce en file →
+  « piece gone » dans la Worklist, pièce hors de l'Inventaire ; verrouiller
+  une pièce → cadenas ; `equip-events.ndjson` porte des lignes avec `req`.
+  **Suite** : G58 (`npm audit fix`) seul, puis release 1.16.0 (G53 à G59).
+
 - **Relecture G57 (gear-solver) (Fable 5.1) — rang de priorité et verrou des
   presets, pièces des presets mieux classés ou verrouillés hors du pool,
   validé.** `984a341`, 27 fichiers, message conforme, ni `package.json` ni
