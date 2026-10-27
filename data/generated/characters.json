@@ -6760,7 +6760,6 @@
         "icon": "TI_Costume_Clothes_2000061_03",
         "grade": "rare",
         "sort": 2,
-        "source": "event_attendence",
         "art": true
       }
     ]
