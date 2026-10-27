@@ -7,6 +7,24 @@
 
 ## 2026-10-27
 
+- **Relecture G58 (gear-solver) (Fable 5.1) — `npm audit fix` des 12
+  vulnérabilités restantes, lock seul, validé.** `139e11d`, deux fichiers :
+  `package-lock.json` et `docs/changelog.md`, aucun `package.json`, pas de
+  `pnpm-lock.yaml`. Lock rejoué entrée par entrée sur les deux révisions : 587
+  entrées avant et après, 0 ajoutée, 0 retirée, 16 changées en version
+  seulement (axios, follow-redirects, joi, vite 6.4.3 → 6.4.5, postcss,
+  nanoid, source-map-js, browserslist et ses quatre suiveurs, js-yaml 4.2.0 →
+  4.3.2, brace-expansion, undici), les chiffres du changelog. `npm audit` :
+  0 vulnérabilité ; `npm ls --all` code 0 ; installés : electron 44.9.3,
+  vite 6.4.5, js-yaml 4.3.2. Contrôles sur HEAD : `npm run typecheck` vert,
+  `npm run lint` 13 avertissements (inchangé), `npm test` 169 + 205 + 747.
+  Reconstruit ici : `npm run desktop:build` puis `npm run pack -- --win` →
+  « packaging platform=win32 arch=x64 electron=44.9.3 » sans erreur ; dans
+  l'`app.asar` produit, js-yaml 4.3.2 et electron-updater 6.8.9 (lus par
+  `@electron/asar` depuis la racine, sans extraction sur disque). **Suite** :
+  aucun lot ouvert ; release 1.16.0 (G53 à G59, plugin 0.5.0) sur le mot de
+  Sevih, après son test de l'installeur g55 sur le fixe.
+
 - **Relecture G59 (gear-solver) (Fable 5.1) — vente et verrou faits en jeu
   suivis en direct, requête journalisée pour `item/sell` et `item/lock`,
   plugin 0.5.0, validé.** `359f441`, 11 fichiers, message conforme, ni
