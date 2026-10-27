@@ -1,6 +1,6 @@
 {
   "name": "outerpedia",
-  "version": "1.7.12",
+  "version": "1.7.13",
   "private": true,
   "packageManager": "pnpm@11.13.1",
   "engines": {
