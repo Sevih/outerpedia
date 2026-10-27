@@ -5,6 +5,37 @@
 > détail vit dans git. Le `CHANGELOG.md` racine est GELÉ depuis le 03/08 —
 > ce fichier et le log git SONT le journal du projet.
 
+## 2026-10-27
+
+- **Relecture G57 (gear-solver) (Fable 5.1) — rang de priorité et verrou des
+  presets, pièces des presets mieux classés ou verrouillés hors du pool,
+  validé.** `984a341`, 27 fichiers, message conforme, ni `package.json` ni
+  lock. Le modèle de rang des persos est extrait dans
+  `lib/storage/rankPriority.ts` sans changer les clés des persos (21 tests
+  intacts) ; `presetPriority.ts` porte `gs.presets.rank`, `.seen`, `.locked`
+  ; `lib/presets/presetHolds.ts` calcule la table uid → presets tenants et
+  les uids bloqués une fois par solve, lus dans `allow()` juste après
+  `excludedPieceUids` et dans le pool de gemmes (le talisman d'un preset
+  bloqué garde ses gemmes). Preset visé porté de « Optimize preset → » au
+  Builder, perdu au changement de perso, ligne de statut dans la Library.
+  Contrôles sur HEAD : `npm run typecheck` vert, `npm run lint` 13
+  avertissements (inchangé), `npm test` 169 + 199 + 747 (+17 `presetHolds`,
+  +1 tri Priority). Rejoué par `tsx` sur cinq presets factices (rangs 1, 2,
+  3, un verrouillé, un non classé, une pièce tenue par deux presets) : sans
+  preset visé seul le verrouillé bloque ; visé rang 3 → les pièces des rangs
+  1 et 2 et du verrouillé sortent, la pièce partagée avec le rang 2 aussi ;
+  visé rang 1 → seul le verrouillé ; visé non classé → tout autre preset
+  bloque (deux non classés ne se prennent rien, comme les persos) ;
+  `presetHoldersOf` ne cite pas le preset visé. Les deux points tranchés à sa
+  place tiennent : sans preset visé seuls les verrous comptent ; un verrou
+  vaut aussi pour les pièces que porte le héros résolu. Laissé par l'agent,
+  à suivre : la sauvegarde `transfer.ts` n'emporte ni `gs.presets.*` ni
+  `gs.priority.*`. **À Sevih, sur le fixe** : les contrôles du changelog
+  (rang 1 et 2, un verrouillé, « Optimize preset → » sur le rang 2 puis le 1,
+  un solve depuis Builds, la ligne de statut qui disparaît au changement de
+  perso). **Suite** : G59 en cours (débloqué sur le postfix `OnApply`), G58
+  seul après.
+
 ## 2026-10-25
 
 - **Relecture G55 (gear-solver) (Fable 5.1) — electron-builder 25.1.8 → 26.15.3
