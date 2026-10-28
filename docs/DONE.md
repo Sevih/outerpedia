@@ -7,6 +7,33 @@
 
 ## 2026-10-28
 
+- **Relectures A83 (outerpedia) et G61, G62, G63 (gear-solver) (Fable 5.1) —
+  les quatre validés ; promotion d'A83 appliquée.** A83 `5c5cba48` (3
+  fichiers) : `items.json` = 1 048 objets hors équipement (ex. 21104 =
+  « Legendary Reforge Catalyst », icône, type, grade, vente 400), aucune clé
+  d'`equipment.json` ; contrôles 255 fichiers / 4455 tests, dry-run de
+  promote = `items.json` nouveau + `version.json` seuls ; promotion
+  appliquée et commitée `424bd1c7` (hash cdd388748fb5), synchro des tables
+  gear-solver déclenchée. G61 `4af53be` (11 fichiers, plugin 0.5.1) : la
+  dissolution est pliée d'après la requête journalisée par le postfix
+  `OnApply`, comme la vente ; rejoué par `tsx` : deux pièces dont une équipée
+  et deux dans un preset → retirées, slots à 0 ; la vraie ligne 0.5.0 de
+  Sevih (sans `req`) → sautée sans exception ; uid inconnu → sauté ;
+  `dotnet build` 0 erreur, DLL 0.5.1. G62 `7a84757` (7 fichiers) : filtre
+  « Base rolls » sur `baseStage` partagé avec le reroll (ticks − reforge) ;
+  rejoué : 3/3/3/1 passe « ≥ 3/3/3/0 », 3/3/2/2 non et l'inverse en
+  « below », 1/3/3/3 trié, pièce à 3 lignes = 4e à 0, base 2 reforgée +2
+  reste 2, motif 0/0/0/0 inactif. G63 `71a2a56` (17 fichiers) :
+  `solver-files-optional.json` = `items.json`, livraison des autres tables
+  maintenue si elle manque, `game.items` vide sur 404, `itemNameOf`.
+  Contrôles gear-solver sur HEAD : typecheck vert, lint 13 avertissements
+  (inchangé), tests 169 + 219 + 761. **À Sevih, sur le fixe** (après la
+  prochaine release) : désassembler une pièce en jeu → elle quitte
+  l'Inventaire dans les 5 s ; Filter › Base rolls « worse than 3/3/3/0 » ;
+  après la PR de synchro, `data/derived/items.json` présent. **Suite** :
+  PR de synchro des tables à merger (par Sevih), `private` rebasée, lots
+  privés P3 et P4, puis release 1.17.0. Aucun lot public ouvert.
+
 - **A83 — table `items.json` du contrat solver : tout objet hors équipement
   (nom, icône, type, grade, vente).** Quoi : `datagen/generators/solver.ts`
   émet `items.json` juste après `equipment.json`, `{ [id]: { name, icon,
