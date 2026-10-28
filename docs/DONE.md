@@ -5,6 +5,52 @@
 > détail vit dans git. Le `CHANGELOG.md` racine est GELÉ depuis le 03/08 —
 > ce fichier et le log git SONT le journal du projet.
 
+## 2026-10-28
+
+- **A83 — table `items.json` du contrat solver : tout objet hors équipement
+  (nom, icône, type, grade, vente).** Quoi : `datagen/generators/solver.ts`
+  émet `items.json` juste après `equipment.json`, `{ [id]: { name, icon,
+itemType, itemSubType, grade, canSell, sellPrice } }`, par la fonction
+  exportée `solverItems(itemTemplet, equipment, textItem)` : les lignes
+  d'`ItemTemplet` dont l'`ID` n'est pas une clé de l'`equipment` du même build
+  (le critère `SLOT[ItemSubType]` de la boucle equipment, relu sur son
+  résultat, pas recopié), triées par id numérique ; nom EN par
+  `textMap('TextItem')` comme l'équipement, `CanSell` par `bool()`,
+  `SellPrice` vide → 0, pas de `DescID`. Pourquoi : gear-solver reçoit les
+  gains d'un désassemblage en ids (`21104` × 248) et n'a aucune table pour
+  les nommer (le toast affiche « item <id> ») ; G63 synchronisera la table.
+  Comment : `itemType`, `itemSubType` et `grade` restent les enums BRUTS du
+  jeu (`IT_MATERIAL`, `IG_UNIQUE`), selon la règle du contrat et le type
+  `grade: string` demandé — pas le vocabulaire `normal…unique` que
+  `equipment.json` mappe ; ajout de règle (a), `SOLVER_SCHEMA` inchangé ;
+  l'en-tête de `solver.ts` décrit le fichier et passe à « 21 tables » dans le
+  hash (`version.json` hache tous les fichiers émis, dans l'ordre : il suit
+  sans autre changement). `solver.test.ts` : test de `solverItems` sur lignes
+  synthétiques (matériau 21104 présent et nommé, arme `1` présente dans
+  `equipment` absente, `CanSell` « False » sans `SellPrice` → false / 0, nom
+  ou icône vides → null, tri) ; `items.json` déclaré dans `CONTRACT_SHAPE`.
+  Les tests de forme lisent le committé et la promotion n'est pas faite :
+  `AWAITING_PROMOTION` (`items.json`) tolère son absence, la forme est
+  vérifiée dès qu'il est committé — vérifié en copiant l'extrait dans
+  `data/generated/solver/` le temps d'un `vitest` (93 tests verts, copie
+  retirée) ; l'entrée peut partir après la promotion. Vérification :
+  `pnpm datagen:build` « OK — 130 persos, 1650 skills, 4850 monstres (4072
+  skills), 1212 items, 200 effets », `solver/items.json` 238 Ko, 1 048
+  objets, aucun en commun avec `equipment.json`, 4 sans nom EN ; avertissements
+  inchangés (butin d'encounters, groupes d'option 1504 / 12004 / 12010,
+  perso 2400015 sans nom). `pnpm datagen:promote` à blanc : « 66
+  identique(s), 2 différent(s) — solver/items.json NOUVEAU fichier,
+  solver/version.json ~2 » (plus le perso 2400015 jamais promu, habituel).
+  `pnpm typecheck` et `pnpm lint` sans sortie après la commande, `pnpm test`
+  « Test Files 255 passed (255) · Tests 4455 passed (4455) ». Pas de doc de
+  contrat côté outerpedia qui liste les fichiers (`sub-ticks.json` n'est cité
+  que par `docs/audit-doublons-solver.md`, pour son sens) ; le schéma côté
+  consommateur (`gear-solver/docs/data-schema.md`) est hors périmètre, G63.
+  TODO : rien à retirer. ⏳ **Sevih** : `pnpm datagen:promote --apply` puis
+  commit de `data/generated/solver/items.json` + `version.json`, et
+  déclencher `data-sync.yml` côté gear-solver (`gh workflow run`) pour que la
+  table arrive en PR.
+
 ## 2026-10-27
 
 - **Relecture G58 (gear-solver) (Fable 5.1) — `npm audit fix` des 12

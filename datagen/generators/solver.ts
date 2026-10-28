@@ -33,11 +33,14 @@
  * livre le contrat à toutes les installations, pas le déploiement du site.
  * `version.json` = `{schema, resVersion, hash, builtAt}` : `schema` = forme du
  * contrat (`SOLVER_SCHEMA`), `resVersion` = version des tables du jeu, `hash` =
- * clé d'invalidation (les 20 tables seules), `builtAt` = dernier vrai changement.
+ * clé d'invalidation (les 21 tables seules), `builtAt` = dernier vrai changement.
  * `stat-keys.json` (ajout C26) = la table `ST_*` / `OAT_*` → clé du vocabulaire
  * du contrat (`atk`, `atkPct`, `chc`, `res`, `resRate`…), nature « % » et
  * abréviation du wiki (`datagen/lib/stat-keys.ts`) ; le build jette sur toute
  * paire émise qui n'y a pas sa ligne.
+ * `items.json` (ajout A83, `schema` inchangé) = tout objet d'`ItemTemplet` absent
+ * d'`equipment.json` (matériaux, consommables, boîtes…) : nom EN, icône, type,
+ * sous-type et grade bruts, vente (`solverItems`) — de quoi nommer un gain.
  * Règles que gear-solver recopiait à la main, émises depuis B62 (ajouts, `schema`
  * inchangé ; le build jette quand la table ne porte plus ce qu'elles supposent) :
  *   - `enhance.json` › `gemSlots` = emplacements de gemme d'un talisman ou d'un
@@ -274,6 +277,46 @@ export function gemSlotRules(rows: Row[]): {
   }
   for (const list of Object.values(unlocks)) list.sort((a, b) => a.enhanceLevel - b.enhanceLevel);
   return { baseByGrade: { ...GEM_SLOTS_BY_GRADE }, unlocks };
+}
+
+/** Entrée d'`items.json` : un objet hors équipement, enums du jeu bruts. */
+export interface SolverItem {
+  name: string | null;
+  icon: string | null;
+  itemType: string;
+  itemSubType: string;
+  grade: string;
+  canSell: boolean;
+  sellPrice: number;
+}
+
+/**
+ * `items.json` : chaque ligne d'`ItemTemplet` dont l'`ID` n'est pas une clé de
+ * `equipment` (le critère est celui de la boucle equipment, pas recopié), triée
+ * par id numérique. `CanSell` « True » → true, `SellPrice` vide → 0.
+ */
+export function solverItems(
+  itemTemplet: Row[],
+  equipment: Record<string, unknown>,
+  textItem: Map<string, string | null>,
+): Record<string, SolverItem> {
+  const rows = itemTemplet
+    .filter((it) => !(it.ID in equipment))
+    .sort((a, b) => Number(a.ID) - Number(b.ID));
+  return Object.fromEntries(
+    rows.map((it) => [
+      it.ID,
+      {
+        name: textItem.get(it.NameID ?? '') ?? null,
+        icon: it.IconName || null,
+        itemType: it.ItemType ?? '',
+        itemSubType: it.ItemSubType ?? '',
+        grade: it.ItemGrade ?? '',
+        canSell: bool(it.CanSell),
+        sellPrice: Number(it.SellPrice || 0),
+      },
+    ]),
+  );
 }
 
 /**
@@ -569,6 +612,7 @@ export function buildSolver(inputs: {
     };
   }
   emit('equipment.json', equipment);
+  emit('items.json', solverItems(itemTemplet, equipment, textItem));
 
   // ---- enhance : constantes + courbes d'XP cumulée par (slot, grade, star) ----
   // `enhanceFactor` et `tierFactor` sont LUS des tables, comme le client

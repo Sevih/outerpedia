@@ -24,7 +24,7 @@
  *
  * Tourne SANS `.gamedata` (contrainte CI) : rien n'appelle `buildSolver()`.
  */
-import { readdirSync, readFileSync } from 'node:fs';
+import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import charactersData from '../../data/generated/solver/characters.json';
@@ -54,6 +54,7 @@ import {
   reforgeBudgets,
   reforgeMaxTicks,
   SOLVER_SCHEMA,
+  solverItems,
 } from './solver';
 
 const characters = charactersData as Record<
@@ -449,6 +450,20 @@ const CONTRACT_SHAPE: Record<string, Shape> = {
   },
   'exp-character.json': { arr: '*' },
   'gems.json': { rec: { obj: { type: '*', level: '*', st: '*', ap: '*', v: '*' } } },
+  // Ajout A83 (règle (a), `schema` inchangé).
+  'items.json': {
+    rec: {
+      obj: {
+        name: '*',
+        icon: '*',
+        itemType: '*',
+        itemSubType: '*',
+        grade: '*',
+        canSell: '*',
+        sellPrice: '*',
+      },
+    },
+  },
   'multi-tier-passives.json': {
     rec: {
       obj: { name: '*', tiers: { arr: { obj: { unlockLevel: '*', isAdd: '*', desc: '*' } } } },
@@ -535,17 +550,27 @@ const SHAPE_RULE =
   'de sens monte SOLVER_SCHEMA et attend la release de gear-solver qui le lit : ' +
   '(a) → (b) → (c), en-tête de datagen/generators/solver.ts.';
 
+/**
+ * Déclarés mais pas encore promus (`datagen:promote --apply`, geste de Sevih) :
+ * absents du committé sans casser le test, vérifiés dès qu'ils y sont. A83 :
+ * `items.json` (l'entrée peut partir une fois la table committée).
+ */
+const AWAITING_PROMOTION = new Set(['items.json']);
+
 describe('solver — forme du contrat (clés déclarées, règle (a) → (b) → (c))', () => {
   const dir = resolve('data/generated/solver');
+  const promoted = Object.keys(CONTRACT_SHAPE).filter(
+    (f) => !AWAITING_PROMOTION.has(f) || existsSync(resolve(dir, f)),
+  );
 
   it('les fichiers émis sont exactement ceux de CONTRACT_SHAPE', () => {
     const files = readdirSync(dir)
       .filter((f) => f.endsWith('.json'))
       .sort();
-    expect(files, SHAPE_RULE).toEqual(Object.keys(CONTRACT_SHAPE).sort());
+    expect(files, SHAPE_RULE).toEqual(promoted.sort());
   });
 
-  it.each(Object.keys(CONTRACT_SHAPE))('%s : ni clé en plus ni clé en moins', (file) => {
+  it.each(promoted)('%s : ni clé en plus ni clé en moins', (file) => {
     const data: unknown = JSON.parse(readFileSync(resolve(dir, file), 'utf8'));
     const errors = new Set<string>();
     shapeErrors(data, CONTRACT_SHAPE[file], file, errors);
@@ -900,6 +925,56 @@ describe('solver — règles émises (B62) : gemmes, reforge, évolution, combat
     expect(() => gemSlotRules([...rows, gemRow('5', 'ITS_EQUIP_WEAPON', '5', '1')])).toThrow(
       /ITS_EQUIP_WEAPON » hors des slots/,
     );
+  });
+
+  it('solverItems : objets hors équipement seulement, nom EN, conversions, tri par id', () => {
+    const rows: Row[] = [
+      {
+        ID: '21104',
+        NameID: 'ITEM_EQUIP_MATERIAL_04_NAME',
+        IconName: 'TI_Item_Growth_Dissolve_04',
+        ItemType: 'IT_MATERIAL',
+        ItemSubType: 'ITS_MATERIAL_EQUIP_TRANSCEND',
+        ItemGrade: 'IG_UNIQUE',
+        CanSell: 'True',
+        SellPrice: '400',
+      },
+      {
+        ID: '1',
+        NameID: 'ITEM_WEAPON_N_1_NAME',
+        IconName: 'TI_Equipment_Weapon_01',
+        ItemType: 'IT_EQUIP',
+        ItemSubType: 'ITS_EQUIP_WEAPON',
+        ItemGrade: 'IG_NORMAL',
+        CanSell: 'True',
+        SellPrice: '360',
+      },
+      {
+        ID: '9000',
+        NameID: 'ITEM_SANS_TEXTE',
+        IconName: '',
+        ItemType: 'IT_BOX',
+        ItemSubType: 'ITS_BOX_RANDOM',
+        ItemGrade: 'IG_RARE',
+        CanSell: 'False',
+      },
+    ];
+    const textItem = new Map([
+      ['ITEM_EQUIP_MATERIAL_04_NAME', 'Legendary Reforge Catalyst'],
+      ['ITEM_WEAPON_N_1_NAME', 'Sword'],
+    ]);
+    const items = solverItems(rows, { '1': {} }, textItem);
+    expect(Object.keys(items)).toEqual(['9000', '21104']);
+    expect(items['21104']).toEqual({
+      name: 'Legendary Reforge Catalyst',
+      icon: 'TI_Item_Growth_Dissolve_04',
+      itemType: 'IT_MATERIAL',
+      itemSubType: 'ITS_MATERIAL_EQUIP_TRANSCEND',
+      grade: 'IG_UNIQUE',
+      canSell: true,
+      sellPrice: 400,
+    });
+    expect(items['9000']).toMatchObject({ name: null, icon: null, canSell: false, sellPrice: 0 });
   });
 
   const optRow = (ID: string, GroupID: string, v: string, f: string | null, max: string): Row => ({
