@@ -7,6 +7,23 @@
 
 ## 2026-10-29
 
+- **Relecture G65 (gear-solver) (Fable 5.1) — filtre « Base rolls » avec
+  opérateur ligne à ligne et X libre, validé.** `d7a32df`, 6 fichiers,
+  message conforme, ni `package.json` ni lock. `baseRolls = { op, lines }`,
+  chaque ligne non-X doit vérifier `palier <op> valeur` sur le motif trié ;
+  migration des deux modes de G62 à la lecture, clé de stockage inchangée.
+  Rejoué par `tsx` : « < 2-2-2-2 » exclut 3/1/3/1 et garde 1/1/1/1 ;
+  « ≤ 2-2-2-2 » garde 2/2/2/2 ; « ≥ 4-3-X-X » garde 3/4/1/1 (trié) et
+  exclut 4/2/2/2 ; « = 3-3-3-1 » exclut une pièce à trois lignes et garde
+  1/3/3/3 ; reforge ignorée ; quatre X = inactif, non compté ; un état G62
+  « below 3/3/3/0 » devient « < 3/3/3/X ». Contrôles sur HEAD : typecheck
+  vert, lint 13 avertissements (inchangé), tests 169 + 219 + 770 (+5).
+  **À Sevih, sur le fixe** (après la release) : « < 2-2-2-2 » → plus
+  aucune pièce avec un 3 ou un 4 ; « ≥ 4-3-X-X » → seulement les pièces
+  dont les deux meilleures lignes sont 4 puis au moins 3. **Suite** :
+  release 1.18.0 (G64, G65), merge dans `private`, build
+  `1.18.0-private.1`. Aucun lot public ouvert.
+
 - **Relecture G64 (gear-solver) (Fable 5.1) — la grille de l'Inventaire
   défile seule sous un en-tête fixe, virtualisation effective, validé.**
   `c9f3da1`, 6 fichiers, message conforme, ni `package.json` ni lock. Cause
