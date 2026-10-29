@@ -7,6 +7,26 @@
 
 ## 2026-10-29
 
+- **Relecture G69 (gear-solver) (Fable 5.1) — chasse aux bugs : deux
+  corrections sûres, six bugs au todo, validé.** `cb05394`, 9 fichiers,
+  message conforme, ni `package.json` ni lock. Corrigé : `loadFilterPresets`
+  (presets du Builder) saute une entrée illisible au lieu de rendre une
+  carte vide que le Save suivant persistait par-dessus les bons ; date des
+  fichiers exportés (sauvegarde, roster) en jour local par
+  `lib/dateStamp.ts` au lieu du jour UTC. Au `docs/todo.md`, section
+  « Bugs trouvés par l'audit du 2026-10-29 (G69) » : quatre prouvés mais à
+  trancher (drill de Home élagué par l'onglet quitté ; preset de filtres
+  appliqué hors de la portée affichée → grille vide sans puce ; Load d'un
+  preset efface la recherche ; import de sauvegarde qui compte des entrées
+  jetées) et deux plausibles (clé `num` des presets du jeu sans
+  `PresetType` ; auto-prune sur inventaire pas encore chargé). Le
+  changelog liste ce qui a été examiné sans rien trouver. Contrôles sur
+  `main` : typecheck vert, tests core 169 / desktop 219 / renderer 800,
+  lint 13 avertissements 0 erreur (inchangé). Rejoué par `tsx` : une carte
+  `{ h1: [bon, { id, name }], h2: [bon] }` rend h1 = [ok] et h2 ; sous
+  `TZ=Europe/Paris`, 29/10 23:30 UTC donne `2026-10-30` en local là où
+  l'ISO donnait le 29. Reste à Sevih : trancher les quatre bugs (b) du
+  todo. Aucun lot public ouvert.
 - **Relecture G68 (gear-solver) (Fable 5.1) — filtre « Reachable quality »
   de l'Inventaire, validé.** `d92b1be`, 6 fichiers, message conforme, ni
   `package.json` ni lock. `FilterState.reachable: Set<QualityTier>` dans la
