@@ -9,8 +9,7 @@
 
 - **Relecture G70 (gear-solver) (Fable 5.1) — les quatre bugs prouvés de
   l'audit G69, validé.** `df4af8d`, 12 fichiers, message conforme, ni
-  `package.json` ni lock. Drill de Home : l'auto-prune porte `if (drill)
-return;` avec `drill` en dépendance (seule exception à la note « à ne pas
+  `package.json` ni lock. Drill de Home : l'auto-prune se tait tant qu'un drill est en attente (`drill` en dépendance) (seule exception à la note « à ne pas
   toucher »). Preset hors portée : la bascule sur All se fait à l'Apply
   (`applyFilters` dans l'écran, pas au Load : voie plus simple, dite dans
   le changelog, un Cancel laisse l'onglet) ; une valeur sélectionnée sans
