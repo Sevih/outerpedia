@@ -7,6 +7,33 @@
 
 ## 2026-10-29
 
+- **Relecture G70 (gear-solver) (Fable 5.1) — les quatre bugs prouvés de
+  l'audit G69, validé.** `df4af8d`, 12 fichiers, message conforme, ni
+  `package.json` ni lock. Drill de Home : l'auto-prune porte `if (drill)
+return;` avec `drill` en dépendance (seule exception à la note « à ne pas
+  toucher »). Preset hors portée : la bascule sur All se fait à l'Apply
+  (`applyFilters` dans l'écran, pas au Load : voie plus simple, dite dans
+  le changelog, un Cancel laisse l'onglet) ; une valeur sélectionnée sans
+  pièce dans la vue reste rendue en `opacity-50`, cliquable pour la
+  retirer, sur Main, Sub, Set, Class, Star, Grade, Quality et Reachable.
+  Load garde la recherche du brouillon. Import : `mergeListMap` prend un
+  prédicat (`isReadableFilterPreset`, `isReadableInventoryPreset`), une
+  entrée refusée n'est ni fusionnée ni comptée. Tests : banc d'effets
+  `inventoryScreen.test.ts` (moteur de hooks maison, 4), modale rendue
+  côté serveur (4), transfer (+3) ; chaque test échouait avant. Contrôles
+  sur `main` : typecheck vert, tests core 169 / desktop 219 / renderer
+  811, lint 13 avertissements 0 erreur (inchangé). Rejoué par `tsx` : une
+  sauvegarde avec un preset Builder sans `filters` et trois presets
+  d'Inventaire invalides (nom vide, JSON cassé, nom du preset fourni) →
+  comptes 0 et 0, rien de chargé (la carte Builder est écrite vide `{}`,
+  sans effet). Les quatre puces (b) ont quitté `docs/todo.md`. Laissé par
+  l'agent, porté au todo de gear-solver : l'auto-prune à l'Apply d'un
+  preset qui change de portée perd encore en silence une valeur absente de
+  la nouvelle portée ; `docs/reference.md` donne un compte de tests
+  périmé pour `transfer.test.ts`. Reste à Sevih (fixe) : Home › clic sur
+  un palier avec l'Inventaire laissé sur Special Gear ; un preset
+  enregistré sur Special chargé sur Gear → All à l'Apply. Aucun lot
+  public ouvert.
 - **Relecture G69 (gear-solver) (Fable 5.1) — chasse aux bugs : deux
   corrections sûres, six bugs au todo, validé.** `cb05394`, 9 fichiers,
   message conforme, ni `package.json` ni lock. Corrigé : `loadFilterPresets`
