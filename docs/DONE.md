@@ -7,6 +7,22 @@
 
 ## 2026-10-29
 
+- **Relecture G71 (gear-solver) (Fable 5.1) — règle Transistone complétée
+  (un palier 3 reste possible quand un palier 4 est déjà là), validé.**
+  `2024909`, 14 fichiers, message conforme, ni `package.json` ni lock.
+  `rerollGains` vise le palier 4 sans ligne au palier 4, le palier 3
+  sinon ; null seulement hors éligibilité ; `rerollPotential` et
+  `applyRerollPotential` inchangés (la ligne monte de `pot.ticks`) ;
+  textes d'accord (`QUALITY_REACHABLE_HELP`, infobulle du Builder, wiki,
+  `docs/solver.md`, `docs/reference.md`). Contrôles sur `main` :
+  typecheck vert, tests core 169 / desktop 219 / renderer 819, lint 13
+  avertissements 0 erreur (inchangé). Rejoué par `tsx` : 4/4/3/2 → gains
+  [0,0,0,1] et reachable 14/14 ; 3/3/3/3 → [1,1,1,1] ; 4/4/3/3 → zéros ;
+  4/3/3/3 sans reachable ; 4/4/1/1 → [0,0,2,2] ; 5★ et trois lignes →
+  null ; une ligne reforgée au cap LV6 ne gagne rien. Reste à Sevih
+  (fixe) : une 4/4/3/2 6★ Legendary sous Reachable › Perfect ; projection
+  Transistone du Builder sur une pièce qui a déjà un 4. Aucun lot public
+  ouvert.
 - **Relecture G70 (gear-solver) (Fable 5.1) — les quatre bugs prouvés de
   l'audit G69, validé.** `df4af8d`, 12 fichiers, message conforme, ni
   `package.json` ni lock. Drill de Home : l'auto-prune se tait tant qu'un drill est en attente (`drill` en dépendance) (seule exception à la note « à ne pas
