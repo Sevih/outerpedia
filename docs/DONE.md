@@ -7,6 +7,49 @@
 
 ## 2026-10-29
 
+- **Relecture G67 (gear-solver) (Fable 5.1) — presets de filtres de
+  l'Inventaire et preset fourni « Scrap candidates », validé.** `cc1c67d`,
+  9 fichiers, message conforme, ni `package.json` ni lock. Module
+  `lib/storage/inventoryFilterPresets.ts` (clé `gs.inv.filterPresets`,
+  `filters` stocké par `FILTER_CODEC.serialize`, `query` vidée, nom 1..24
+  trimé, nom repris = même id écrasé en place, nom du preset fourni refusé,
+  entrée mal formée ignorée) ; preset `SCRAP_CANDIDATES` défini en code
+  (étoiles 5-6, `not` + at least 3/3/3/X, +0, T0, non reforgée, équipées
+  exclues) ; rangée « Presets » sous le titre de la modale (sélecteur,
+  Load dans le draft, Save as… inline, Delete sur un preset utilisateur
+  seulement, Escape ne ferme que le champ) ; sauvegarde `transfer.ts`
+  (liste exportée, import qui ne prend que les entrées neuves par id et
+  nom, compte ajouté au message de `BackupPane`). Contrôles sur `main` :
+  typecheck vert, tests core 169 / desktop 219 / renderer 790, lint 13
+  avertissements 0 erreur (inchangé). Rejoué par `tsx` avec un
+  `localStorage` factice : le preset fourni garde une 6★ 2/2/1/0 et une
+  3/2/2/1 (+0, T0, non reforgée, libre), rejette 3/3/3/0, une 5★ +3, une
+  4★, un talisman, une équipée, une reforgée ; save « Mon tri » vide la
+  recherche et garde les Sets, re-save du même nom garde l'id, noms vide /
+  25 caractères / « Scrap candidates » refusés, liste avec une entrée
+  `[1]`, un `42` et un nom vide ne rend que l'entrée saine, delete vide
+  la liste. Reste à Sevih (fixe) : Presets › Scrap candidates › Load ›
+  Apply, puis Save as… d'un preset à lui et le retrouver après relance.
+  Aucun lot public ouvert.
+- **Relecture G66 (gear-solver) (Fable 5.1) — filtre « Base rolls » en
+  toutes lettres avec inversion `not`, talismans et EE exclus, cases +0 /
+  T0 / Not reforged, validé.** `7265cd2`, 6 fichiers, message conforme,
+  ni `package.json` ni lock. Opérateurs `at least` / `more than` /
+  `exactly` / `at most` / `less than` (mêmes valeurs stockées, `title`
+  explicatif) ; `baseRolls.not` (false par défaut, `match === not` →
+  rejet) ; `hasNoRolledSubs` (slot talisman ou EE, ou aucune sous-stat,
+  critère de `qualityScore`) fait échouer la pièce avant l'inversion ;
+  `enhanceZero` / `breakthroughZero` / `notReforged` comptés par
+  `activeFilterCount`, clé `gs.inv.filters.v3` inchangée ; wiki et
+  release-notes à jour. Contrôles : mêmes chiffres que G67 (relus
+  ensemble). Rejoué par `tsx` : `not` + at least 3/3/3/X garde 3/2/2/1 et
+  rejette 3/3/3/0 là où less than 3/3/3/X jette la 3/2/2/1 ; less than
+  2/2/2/2 et `not` + at least 2/2/2/2 ne gardent ni talisman ni EE, un
+  motif inactif coché `not` les montre encore ; +0 only rejette +3, T0
+  only rejette bt 1, Not reforged rejette n = 1 ; une base 2 montée à 4
+  par reforge reste « pas au moins 3 » (bases seules) ; un état v3 sans
+  les champs se lit false partout. Reste à Sevih (fixe) : la rangée de
+  cinq cases sur deux lignes, à l'œil. Suite : G67.
 - **Relecture G65 (gear-solver) (Fable 5.1) — filtre « Base rolls » avec
   opérateur ligne à ligne et X libre, validé.** `d7a32df`, 6 fichiers,
   message conforme, ni `package.json` ni lock. `baseRolls = { op, lines }`,
