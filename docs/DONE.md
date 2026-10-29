@@ -7,6 +7,54 @@
 
 ## 2026-10-29
 
+- **G73 — `equipment.json` (contrat solver) porte prix de vente et
+  récompenses de désassemblage.** Quoi : chaque entrée gagne `canSell`,
+  `sellPrice` (0 si invendable), `canDissolve` et `dissolve`
+  (`{ assets: [{type, min, max}], items: [{id, min, max}] }` ou null), noms
+  du contrat fixés avec G74. Pourquoi : gear-solver affichera la valeur de
+  rebut d'un filtre (G74) telle que l'écran « Item clear » la calcule avant la
+  demande (`CUIItemClear.CalcutateSell` / `CalculateDisassembly`). Comment :
+  `datagen/generators/solver.ts`, `rewardTables` (index `RewardTemplet`,
+  `RewardGroupTemplet` par `GroupID`, ids d'`ItemTemplet`), `dissolveOf` (port
+  de `CUtilUI.GetDisplayItemListFromRewardID(id, false, true)`) et
+  `equipmentScrap`, étalé dans la boucle equipment. Lu dans le client :
+  `CreditMin > 0` → `AT_GOLD` de `CreditMin` à `CreditMax`, colonnes simples
+  (`Crystal` → `AT_CRYSTAL_FREE`, `FriendPoint`, `GuildCoin`, `EventCoin_*`,
+  `PvPPoint`, `ResearchCoin`…) nommées par l'inverse de
+  `CExtension.ConvertToUIAssetType` ; si `GroupItemID` > 0, cet objet seul
+  compté `RandomGroupID.length` fois (c'est tout l'effet de
+  `_bIsGroupItemCount` ; les `StaticGroupID` sont alors ignorés), sinon les
+  lignes de chaque `StaticGroupID` dans l'ordre (`TypeID`, `MinCount`,
+  `MaxCount`) ; les `RandomGroupID` jamais tirés (`_bIncludeRandom: false`).
+  Le build jette sur une colonne d'asset sans `ASSET_TYPE` (Stamina,
+  GuildMedal, PVPLeaguePoint) et sur une ligne de groupe hors `RIT_ITEM` ; un
+  `DissolveRewardID` qui ne résout rien → `dissolve: null` et un avertissement
+  par id (idem par groupe statique ou objet-groupe manquant). L'en-tête de
+  `solver.ts` documente les champs, la lecture, les conditions d'INSTANCE du
+  client hors contrat (vente : `EnchantExp == 0`, non équipée, non verrouillée,
+  pas PvP ; désassemblage : non équipée, non verrouillée, pas PvP, talisman
+  sans gemme) et deux écarts de l'écran : il somme le `MaxCount` par objet et
+  écarte les assets (`m_nTempletID` 0). Sur les tables actuelles (rejeu `tsx`
+  des fonctions, sans `datagen:build`) : 3 154 équipements, 3 025 vendables et
+  désassemblables, 129 EE ni l'un ni l'autre, 27 rewards toutes résolues,
+  aucun asset, aucun avertissement ; les gears rendent 5 à 40 catalyseurs
+  (21101 à 21104), les talismans `10001001` à `10001003` × 3 ou × 2.
+  `schema` : inchangé (règle de l'en-tête de `solver.ts` : un ajout de champs
+  ne casse pas une ancienne version, seul un retrait ou un changement de sens
+  le monte). Vérification : `solver.test.ts`, `CONTRACT_SHAPE` déclare les
+  quatre champs en `opt` (à passer en `obj` après régénération) et cinq tests
+  (« equipmentScrap : vendable / non vendable… », « dissolveOf : assets (or
+  min ≠ max) puis groupe statique (min ≠ max), random exclu », « dissolveOf :
+  GroupItemID compté RandomGroupID.length fois… », « equipmentScrap :
+  DissolveRewardID inconnu → dissolve null, id noté une fois », « dissolveOf :
+  jette sur un asset sans ASSET_TYPE et sur un groupe hors RIT_ITEM ») : 98
+  passés ; `pnpm typecheck` (`tsc --noEmit … -p scripts/tsconfig.json`, sans
+  erreur), `pnpm lint` (`eslint`, sans erreur), `pnpm test`
+  (`Tests 4461 passed`). Laissé : la régénération (`datagen:build` puis promotion, geste de
+  Sevih) ; le remboursement des matériaux d'une pièce améliorée, calculé par
+  `CItem.GetMaterialReduction()` (`.gamedata/apk/dumped/src/CItem.cs`), hors
+  table et hors contrat ; la lecture côté gear-solver (G74).
+
 - **Relecture G72 (gear-solver) (Fable 5.1) — presets locaux enregistrés
   dans GS, créés depuis le Builder ou par copie, listés dans l'onglet
   Presets, validé.** `ba475be`, 15 fichiers, message conforme, ni

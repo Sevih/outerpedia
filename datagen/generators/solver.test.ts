@@ -52,7 +52,10 @@ import {
   evoUnlockLevels,
   gemSlotRules,
   reforgeBudgets,
+  dissolveOf,
+  equipmentScrap,
   reforgeMaxTicks,
+  rewardTables,
   SOLVER_SCHEMA,
   solverItems,
 } from './solver';
@@ -439,6 +442,20 @@ const CONTRACT_SHAPE: Record<string, Shape> = {
         effectIcon: '*',
         armorSetIcon: '*',
         class: '*',
+      },
+      // Ajout G73 (règle (a), `schema` inchangé) : facultatives tant que la table
+      // committée n'est pas régénérée (`datagen:build`, geste de Sevih), à passer
+      // dans `obj` à la promotion.
+      opt: {
+        canSell: '*',
+        sellPrice: '*',
+        canDissolve: '*',
+        dissolve: {
+          obj: {
+            assets: { arr: { obj: { type: '*', min: '*', max: '*' } } },
+            items: { arr: { obj: { id: '*', min: '*', max: '*' } } },
+          },
+        },
       },
     },
   },
@@ -975,6 +992,109 @@ describe('solver — règles émises (B62) : gemmes, reforge, évolution, combat
       sellPrice: 400,
     });
     expect(items['9000']).toMatchObject({ name: null, icon: null, canSell: false, sellPrice: 0 });
+  });
+
+  // G73 : vente et désassemblage d'un templet d'équipement.
+  const scrapTables = rewardTables(
+    [
+      // assets (or min ≠ max, cristal simple) + groupe statique à min ≠ max
+      {
+        ID: '700',
+        CreditMin: '1000',
+        CreditMax: '3000',
+        Crystal: '5',
+        StaticGroupID: '7000',
+        RandomGroupID: '7009',
+      },
+      // objet-groupe : compté autant que de tirages random, statiques ignorés
+      {
+        ID: '701',
+        RandomGroupID: '7009,7009,7009',
+        GroupItemID: '10001001',
+        StaticGroupID: '7000',
+      },
+      { ID: '702', Stamina: '10' },
+      { ID: '703', StaticGroupID: '7001' },
+    ],
+    [
+      { ID: '1', GroupID: '7000', Type: 'RIT_ITEM', TypeID: '21104', MinCount: '5', MaxCount: '8' },
+      { ID: '2', GroupID: '7000', Type: 'RIT_ITEM', TypeID: '21101', MinCount: '1', MaxCount: '1' },
+      { ID: '3', GroupID: '7009', Type: 'RIT_ITEM', TypeID: '15001', MinCount: '1', MaxCount: '1' },
+      { ID: '4', GroupID: '7001', Type: 'RIT_ASSET', TypeID: '0', MinCount: '1', MaxCount: '1' },
+    ],
+    [{ ID: '10001001' }, { ID: '21104' }, { ID: '21101' }],
+  );
+  const equipRow = (over: Partial<Row>): Row => ({
+    ID: '1',
+    ItemSubType: 'ITS_EQUIP_WEAPON',
+    CanSell: 'True',
+    SellPrice: '360',
+    CanDissolve: 'True',
+    DissolveRewardID: '700',
+    ...over,
+  });
+  it('equipmentScrap : vendable / non vendable, sellPrice à 0 quand canSell est faux', () => {
+    const unresolved = new Set<string>();
+    const noWarn = (line: string): void => {
+      throw new Error(line);
+    };
+    expect(equipmentScrap(equipRow({}), scrapTables, unresolved, noWarn)).toMatchObject({
+      canSell: true,
+      sellPrice: 360,
+      canDissolve: true,
+    });
+    expect(
+      equipmentScrap(
+        equipRow({ CanSell: 'False', CanDissolve: 'False' }),
+        scrapTables,
+        unresolved,
+        noWarn,
+      ),
+    ).toEqual({ canSell: false, sellPrice: 0, canDissolve: false, dissolve: null });
+    expect(
+      equipmentScrap(equipRow({ DissolveRewardID: '0' }), scrapTables, unresolved, noWarn).dissolve,
+    ).toBeNull();
+    expect(unresolved.size).toBe(0);
+  });
+
+  it('dissolveOf : assets (or min ≠ max) puis groupe statique (min ≠ max), random exclu', () => {
+    const scrap = equipmentScrap(equipRow({}), scrapTables, new Set(), () => {});
+    expect(scrap.dissolve).toEqual({
+      assets: [
+        { type: 'AT_GOLD', min: 1000, max: 3000 },
+        { type: 'AT_CRYSTAL_FREE', min: 5, max: 5 },
+      ],
+      items: [
+        { id: '21104', min: 5, max: 8 },
+        { id: '21101', min: 1, max: 1 },
+      ],
+    });
+  });
+
+  it('dissolveOf : GroupItemID compté RandomGroupID.length fois, ses tirages exclus', () => {
+    expect(dissolveOf('701', scrapTables, () => {})).toEqual({
+      assets: [],
+      items: [{ id: '10001001', min: 3, max: 3 }],
+    });
+  });
+
+  it('equipmentScrap : DissolveRewardID inconnu → dissolve null, id noté une fois', () => {
+    const unresolved = new Set<string>();
+    for (const ID of ['1', '2']) {
+      const scrap = equipmentScrap(
+        equipRow({ ID, DissolveRewardID: '999' }),
+        scrapTables,
+        unresolved,
+        () => {},
+      );
+      expect(scrap).toMatchObject({ canDissolve: true, dissolve: null });
+    }
+    expect([...unresolved]).toEqual(['999']);
+  });
+
+  it('dissolveOf : jette sur un asset sans ASSET_TYPE et sur un groupe hors RIT_ITEM', () => {
+    expect(() => dissolveOf('702', scrapTables, () => {})).toThrow(/Stamina 10/);
+    expect(() => dissolveOf('703', scrapTables, () => {})).toThrow(/RIT_ASSET/);
   });
 
   const optRow = (ID: string, GroupID: string, v: string, f: string | null, max: string): Row => ({

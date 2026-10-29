@@ -41,6 +41,40 @@
  * `items.json` (ajout A83, `schema` inchangé) = tout objet d'`ItemTemplet` absent
  * d'`equipment.json` (matériaux, consommables, boîtes…) : nom EN, icône, type,
  * sous-type et grade bruts, vente (`solverItems`) — de quoi nommer un gain.
+ * Vente et désassemblage d'un équipement (G73, ajout, `schema` inchangé :
+ * `equipmentScrap`) — ce que l'écran « Item clear » calcule AVANT la demande
+ * (`CUIItemClear.CalcutateSell` / `CalculateDisassembly`) :
+ *   - `canSell` = `ItemTemplet.CanSell`, `sellPrice` = `SellPrice` (0 si
+ *     `canSell` est faux), sommé tel quel par l'écran (`CItem.SellPrice`) ;
+ *   - `canDissolve` = `ItemTemplet.CanDissolve` (le client le force à vrai sur
+ *     un talisman, déjà vrai dans la table) ;
+ *   - le client y ajoute des conditions d'INSTANCE que le contrat ne porte pas :
+ *     vente = `CanSell && EnchantExp == 0 && CharacterUID <= 0 && !IsLock &&
+ *     !IsPVPEquip` ; désassemblage = `CanDissolve && CharacterUID <= 0 && !IsLock
+ *     && !IsPVPEquip`, et pas un talisman qui porte une gemme. Une pièce
+ *     améliorée (`EnchantExp > 0`) rend EN PLUS `CItem.GetMaterialReduction()`
+ *     (remboursement des matériaux d'amélioration, calculé, hors table et hors
+ *     contrat) ;
+ *   - `dissolve` = null quand `canDissolve` est faux, `DissolveRewardID` vaut 0
+ *     ou ne résout aucun `RewardTemplet` (un avertissement par id au build) ;
+ *     sinon `CUtilUI.GetDisplayItemListFromRewardID(id, _bIncludeRandom: false,
+ *     _bIsGroupItemCount: true)` lu ainsi (`dissolveOf`) :
+ *     · `assets` : `CreditMin > 0` → `AT_GOLD` de `CreditMin` à `CreditMax`,
+ *       puis chaque colonne simple > 0 (`Crystal`, `FriendPoint`… dans l'ordre
+ *       du client) en `min = max`, nommée par l'enum `ASSET_TYPE`
+ *       (`REWARD_ASSET_COLUMNS`, inverse de `ConvertToUIAssetType`) ;
+ *     · `items`, si `GroupItemID` > 0 : CET objet seul (les `StaticGroupID`
+ *       sont alors ignorés par le client), compté `RandomGroupID.length` fois —
+ *       c'est ce que change `_bIsGroupItemCount` (sinon 1) — les tirages random
+ *       eux-mêmes exclus (5001104 : 3 × l'objet 10001001) ;
+ *     · sinon les lignes de `RewardGroupTemplet` de chaque `StaticGroupID`, dans
+ *       l'ordre : `id` = `TypeID`, `min` / `max` = `MinCount` / `MaxCount` ; les
+ *       `RandomGroupID` exclus (`_bIncludeRandom: false`) ;
+ *     · l'écran, lui, somme par objet le `MaxCount` (`m_nCount`) et écarte les
+ *       assets (`m_nTempletID` 0 → « TempletID = 0 ») : aucun désassemblage
+ *       d'équipement ne porte d'asset au patch de G73 (29/10/2026).
+ *   Jette sur un asset sans `ASSET_TYPE` (Stamina, GuildMedal, PVPLeaguePoint)
+ *   et sur une ligne de groupe hors `RIT_ITEM` : le contrat ne sait pas les dire.
  * Règles que gear-solver recopiait à la main, émises depuis B62 (ajouts, `schema`
  * inchangé ; le build jette quand la table ne porte plus ce qu'elles supposent) :
  *   - `enhance.json` › `gemSlots` = emplacements de gemme d'un talisman ou d'un
@@ -319,6 +353,169 @@ export function solverItems(
   );
 }
 
+/** `dissolve` d'une entrée d'`equipment.json` (G73) : assets puis objets, min / max. */
+export interface SolverDissolve {
+  assets: { type: string; min: number; max: number }[];
+  items: { id: string; min: number; max: number }[];
+}
+
+/** Les quatre champs de vente et de désassemblage d'une entrée d'`equipment.json`. */
+export interface SolverScrap {
+  canSell: boolean;
+  sellPrice: number;
+  canDissolve: boolean;
+  dissolve: SolverDissolve | null;
+}
+
+/**
+ * Colonnes d'asset simple de `RewardTemplet`, dans l'ordre où
+ * `GetDisplayItemListFromRewardID` les lit (après `CreditMin` / `CreditMax`),
+ * avec le nom de l'enum `ASSET_TYPE` — l'inverse de
+ * `CExtension.ConvertToUIAssetType`. `null` = colonne affichée sans
+ * `ASSET_TYPE` correspondant (STAMINA, GUILD_MEDAL, PVP_LEAGUE_POINT) : le
+ * contrat ne sait pas la nommer, `dissolveOf` jette. `CharacterEXP`,
+ * `AccountEXP` et `WorldBossCoin` ne sont pas lus par le client : ignorés.
+ */
+const REWARD_ASSET_COLUMNS: [string, string | null][] = [
+  ['Crystal', 'AT_CRYSTAL_FREE'],
+  ['Stamina', null],
+  ['FriendPoint', 'AT_FRIENDSHIP'],
+  ['FacilityPoint', 'AT_FACILITY'],
+  ['GuildCoin', 'AT_GUILD_COIN'],
+  ['GuildMedal', null],
+  ['EventCoin_1', 'AT_EVENT_COIN_1'],
+  ['EventCoin_2', 'AT_EVENT_COIN_2'],
+  ['EventCoin_3', 'AT_EVENT_COIN_3'],
+  ['EventCoin_4', 'AT_EVENT_COIN_4'],
+  ['EventCoin_5', 'AT_EVENT_COIN_5'],
+  ['EventCoin_6', 'AT_EVENT_COIN_6'],
+  ['PvPPoint', 'AT_PVP'],
+  ['ResearchCoin', 'AT_RESEARCH'],
+  ['PVPLeaguePoint', null],
+];
+
+/** Tables d'une récompense, indexées une fois par build. */
+export interface RewardTables {
+  rewards: Map<string, Row>;
+  /** `GroupID` → lignes de `RewardGroupTemplet`, dans l'ordre de la table. */
+  groups: Map<string, Row[]>;
+  itemIds: Set<string>;
+}
+
+export function rewardTables(rewardRows: Row[], groupRows: Row[], itemRows: Row[]): RewardTables {
+  const groups = new Map<string, Row[]>();
+  for (const g of groupRows) {
+    const list = groups.get(g.GroupID ?? '');
+    if (list) list.push(g);
+    else groups.set(g.GroupID ?? '', [g]);
+  }
+  return {
+    rewards: new Map(rewardRows.map((r) => [r.ID, r])),
+    groups,
+    itemIds: new Set(itemRows.map((i) => i.ID)),
+  };
+}
+
+/** Liste d'ids d'une colonne `CSplitter` (`"a,b,c"`), vide si la colonne l'est. */
+function idList(v: string | undefined): string[] {
+  return v ? v.split(',').map((s) => s.trim()) : [];
+}
+
+/**
+ * Un `RewardTemplet` résolu comme `CUtilUI.GetDisplayItemListFromRewardID(id,
+ * _bIncludeRandom: false, _bIsGroupItemCount: true)` (cf. en-tête). `null` si
+ * l'id ne résout aucune ligne. `warn` reçoit une ligne par groupe ou objet
+ * manquant (le client les saute en loguant). Jette sur ce que le contrat ne
+ * sait pas dire : asset sans `ASSET_TYPE`, ligne de groupe hors `RIT_ITEM`.
+ */
+export function dissolveOf(
+  rewardId: string,
+  t: RewardTables,
+  warn: (line: string) => void,
+): SolverDissolve | null {
+  const r = t.rewards.get(rewardId);
+  if (!r) return null;
+  const assets: SolverDissolve['assets'] = [];
+  const creditMin = Number(r.CreditMin || 0);
+  if (creditMin > 0)
+    assets.push({ type: 'AT_GOLD', min: creditMin, max: Number(r.CreditMax || 0) });
+  for (const [col, type] of REWARD_ASSET_COLUMNS) {
+    const v = Number(r[col] || 0);
+    if (v <= 0) continue;
+    if (!type) {
+      throw new Error(
+        `solver : RewardTemplet ${rewardId} porte ${col} ${v}, sans ASSET_TYPE côté client — ` +
+          `revoir equipment.json › dissolve.assets`,
+      );
+    }
+    assets.push({ type, min: v, max: v });
+  }
+  const items: SolverDissolve['items'] = [];
+  const groupItemId = r.GroupItemID && r.GroupItemID !== '0' ? r.GroupItemID : null;
+  if (groupItemId) {
+    // `_bIsGroupItemCount` : l'objet-groupe compte autant que de tirages random.
+    const random = idList(r.RandomGroupID);
+    const n = random.length > 0 && random[0] !== '0' ? random.length : 1;
+    if (t.itemIds.has(groupItemId)) items.push({ id: groupItemId, min: n, max: n });
+    else warn(`GroupItemID ${groupItemId} (RewardTemplet ${rewardId}) absent d'ItemTemplet`);
+  } else {
+    const statics = idList(r.StaticGroupID);
+    if (statics.length > 0 && statics[0] !== '0') {
+      for (const gid of statics) {
+        const rows = t.groups.get(gid);
+        if (!rows) {
+          warn(
+            `StaticGroupID ${gid} (RewardTemplet ${rewardId}) sans ligne dans RewardGroupTemplet`,
+          );
+          continue;
+        }
+        for (const g of rows) {
+          if (g.Type !== 'RIT_ITEM') {
+            throw new Error(
+              `solver : RewardGroupTemplet ${g.ID} (groupe ${gid}, RewardTemplet ${rewardId}) ` +
+                `de type ${g.Type} — dissolve.items ne porte que des RIT_ITEM, revoir le contrat`,
+            );
+          }
+          items.push({
+            id: String(g.TypeID),
+            min: Number(g.MinCount || 0),
+            max: Number(g.MaxCount || 0),
+          });
+        }
+      }
+    }
+  }
+  return { assets, items };
+}
+
+/**
+ * Vente et désassemblage d'un templet d'équipement (G73). `sellPrice` = 0 quand
+ * `canSell` est faux ; `dissolve` = null quand `canDissolve` est faux, que
+ * `DissolveRewardID` vaut 0 ou qu'il ne résout rien (id ajouté à `unresolved`,
+ * une ligne par id au build).
+ */
+export function equipmentScrap(
+  it: Row,
+  t: RewardTables,
+  unresolved: Set<string>,
+  warn: (line: string) => void,
+): SolverScrap {
+  const canSell = bool(it.CanSell);
+  const canDissolve = bool(it.CanDissolve);
+  const rewardId = it.DissolveRewardID && it.DissolveRewardID !== '0' ? it.DissolveRewardID : null;
+  let dissolve: SolverDissolve | null = null;
+  if (canDissolve && rewardId) {
+    dissolve = dissolveOf(rewardId, t, warn);
+    if (!dissolve) unresolved.add(rewardId);
+  }
+  return {
+    canSell,
+    sellPrice: canSell ? Number(it.SellPrice || 0) : 0,
+    canDissolve,
+    dissolve,
+  };
+}
+
 /**
  * Paliers d'une sous-stat, ligne de base comprise. Client (`CItemSubOptionData`) :
  * valeur = min(OptionValue + niveau × OptionFactor, OptionMaxValue), d'où
@@ -587,6 +784,17 @@ export function buildSolver(inputs: {
   // set_icon + prose par tier ← la vue equipment du même build (mapping
   // non-linéaire de l'icône — Speed 13 → TI_Icon_Set_Enchant_15 — déjà résolu là).
   const { setsView } = inputs;
+  // Vente et désassemblage (G73) : RewardTemplet / RewardGroupTemplet indexés une fois.
+  const rewards = rewardTables(
+    loadTable('RewardTemplet'),
+    loadTable('RewardGroupTemplet'),
+    itemTemplet,
+  );
+  const unresolvedDissolve = new Set<string>();
+  const dissolveWarnings = new Set<string>();
+  const warnDissolve = (line: string): void => {
+    dissolveWarnings.add(line);
+  };
 
   const equipment: Record<string, unknown> = {};
   for (const it of itemTemplet) {
@@ -609,8 +817,13 @@ export function buildSolver(inputs: {
         : null,
       armorSetIcon: armorSetId ? (setsView[armorSetId]?.icon ?? null) : null,
       class: CLASS_NAME[it.ClassLimit ?? ''] ?? null,
+      ...equipmentScrap(it, rewards, unresolvedDissolve, warnDissolve),
     };
   }
+  for (const id of [...unresolvedDissolve].sort()) {
+    console.warn(`⚠ solver : DissolveRewardID ${id} absent de RewardTemplet — dissolve: null`);
+  }
+  for (const line of dissolveWarnings) console.warn(`⚠ solver : ${line}`);
   emit('equipment.json', equipment);
   emit('items.json', solverItems(itemTemplet, equipment, textItem));
 
