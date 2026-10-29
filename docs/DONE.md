@@ -7,6 +7,22 @@
 
 ## 2026-10-29
 
+- **Relecture G68 (gear-solver) (Fable 5.1) — filtre « Reachable quality »
+  de l'Inventaire, validé.** `d92b1be`, 6 fichiers, message conforme, ni
+  `package.json` ni lock. `FilterState.reachable: Set<QualityTier>` dans la
+  liste des Sets du codec, compté par `activeFilterCount` ;
+  `reachableTier(p)` = `qualityTierFromScore(reachable ?? current, max)`,
+  null sans score ; section « Reachable quality » après « Quality » avec
+  `QUALITY_REACHABLE_HELP` en `title`, disponibilité et élagage comme
+  Quality ; wiki à jour. Contrôles sur `main` : typecheck vert, tests core
+  169 / desktop 219 / renderer 796, lint 13 avertissements 0 erreur
+  (inchangé). Rejoué par `tsx` : une pièce 11/14 (good) dont le reachable
+  est 13 (93 %) est gardée par reachable = {excellent} et rejetée par
+  quality = {excellent} ; sans potentiel, le palier atteignable est le
+  courant ; un talisman rend null et ne passe pas ; le codec rend bien un
+  `Set` après aller-retour ; le filtre compte 1. Reste à Sevih (fixe) : la
+  section dans la modale, les pilules grisées quand aucun palier n'est
+  atteignable. Aucun lot public ouvert.
 - **Relecture G67 (gear-solver) (Fable 5.1) — presets de filtres de
   l'Inventaire et preset fourni « Scrap candidates », validé.** `cc1c67d`,
   9 fichiers, message conforme, ni `package.json` ni lock. Module
