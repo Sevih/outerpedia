@@ -5,6 +5,78 @@
 > détail vit dans git. Le `CHANGELOG.md` racine est GELÉ depuis le 03/08 —
 > ce fichier et le log git SONT le journal du projet.
 
+## 2026-10-30
+
+- **Relecture G75 (gear-solver) (Fable 5.1) — couche plateforme avec
+  implémentation Linux (Steam natif, jeu sous Proton, chemins Wine),
+  validé.** `2591004`, 13 fichiers, message conforme, ni `package.json`
+  ni lock, `game-client.json` intact (les racines Linux y étaient déjà,
+  table curée identique des deux côtés). `apps/desktop/src/platform.ts` :
+  interface `Platform` (racines Steam, pids, lancement, unzip,
+  `toPluginPath` / `fromPluginPath`, `ownsHeartbeat`, `protonLaunchOptions`),
+  `win32Platform` = le code d'avant déplacé tel quel, `linuxPlatform`
+  (`/proc/*/cmdline` pour `OUTERPLANE.exe`, `xdg-open steam://`, `unzip`
+  avec message « unzip is not installed », `Z:\…` aller-retour),
+  `platform()` / `setPlatform` pour les tests ; plus aucun `reg.exe`,
+  `tasklist.exe`, `cmd.exe` ni `powershell.exe` dans `steam-capture.ts` et
+  `download.ts`. Trouvaille juste de l'agent : le pid du battement de cœur
+  est celui de Wine, pas un pid Linux, donc sous Linux le battement
+  appartient au jeu s'il est écrit après le démarrage d'un de ses processus
+  (`/proc/<pid>/stat` champ 22 + `btime`). `launchOptionsOk` lu dans
+  `userdata/<id>/config/localconfig.vdf` par un lecteur KeyValues minimal,
+  cache sur taille + mtime ; `SteamSetupPane` affiche la ligne à coller
+  quand il manque, rien ne change sous Windows. Contrôles sur `main` (avec
+  G74) : typecheck vert, tests core 169 / desktop 231 / renderer 842, lint
+  13 avertissements 0 erreur (inchangé). Rejoué par `tsx` avec HOME, `/proc`
+  et `localconfig.vdf` factices : racine native trouvée, pid 4242 repéré,
+  battement accepté après le démarrage et refusé avant ou illisible,
+  traduction `/home/sévih/.config/Outerpedia Gear Solver/capture-out` ↔
+  `Z:\home\sévih\…`, autre lecteur laissé tel quel, option de lancement
+  vraie / null sans userdata, identité sous Windows. Reste à Sevih : rien
+  avant la build Linux (G76). Suite : G76.
+- **Relecture G74 (gear-solver) (Fable 5.1) — valeur de rebut des pièces
+  filtrées, vente et désassemblage depuis les tables, validé.** `ad46301`,
+  8 fichiers, message conforme, ni `package.json` ni lock, `data/derived/`
+  intact. `packages/core/src/gamedata.ts` : les quatre champs facultatifs
+  sur `EquipmentDef` (mêmes noms que G73). `lib/inventory/scrapValue.ts`
+  pur : règles de l'écran « Item clear » (vente = `canSell`, +0, libre ;
+  désassemblage = `canDissolve`, libre ; améliorée comptée en
+  `enhancedCount`), or `AT_GOLD` et matériaux additionnés par id en min et
+  max, `unknown` pour une entrée absente ou sans les champs,
+  `hasScrapFields` qui tait la ligne sur une table ancienne, `formatGold`
+  (U+202F) et `formatRange`. `ScrapLine` sous `SortHeader`, seulement avec
+  un filtre actif et des tables qui portent les champs ; « +n more » en
+  `title` au-delà de quatre matériaux. Contrôles : voir G75. Rejoué par
+  `tsx` : 1 360 or sur deux vendables, trois désassemblables dont une
+  améliorée, or 200–400, matériau commun fusionné 11–21, matériau sans nom
+  « item 21102 », deux inconnues ; `hasScrapFields` faux sur une table
+  sans champ ; « 12 400 » et « 2 100–3 400 ». Écart noté par l'agent :
+  la pièce capturée porte son niveau, pas son Exp, donc une pièce +0 avec
+  de l'Exp partielle compte comme vendable (rare). La ligne n'apparaîtra
+  qu'après la régénération des tables (G73) et `npm run data:sync`. Reste
+  à Sevih : après la synchro, filtre « Scrap candidates » → comparer la
+  ligne à l'écran « Item clear » du jeu. Suite : P5 (privé) une fois main
+  mergée dans la ligne privée.
+- **Relecture G73 (Fable 5.1) — `equipment.json` porte prix de vente et
+  récompenses de désassemblage, validé.** `2511a066`, 3 fichiers, message
+  conforme, ni `package.json` ni lock, rien régénéré. `rewardTables`,
+  `dissolveOf` (port fidèle de
+  `CUtilUI.GetDisplayItemListFromRewardID(id, false, true)`, relu dans le
+  client : `CreditMin > 0` → `AT_GOLD` min–max, colonnes simples nommées
+  par l'inverse de `ConvertToUIAssetType`, `GroupItemID` compté
+  `RandomGroupID.length` fois, sinon les lignes de chaque `StaticGroupID`,
+  random exclus) et `equipmentScrap` étalé dans la boucle equipment ;
+  jette sur un asset sans `ASSET_TYPE` ou un groupe hors `RIT_ITEM`,
+  avertit une fois par id non résolu ; en-tête documenté, `schema`
+  inchangé (ajout de champs). Contrôles : typecheck (trois tsconfig),
+  eslint sans erreur, tests 4461 (255 fichiers). Rejoué par `tsx` sur les
+  tables du 29/10 : 3 154 équipements, 3 025 vendables et désassemblables,
+  129 EE à faux / faux / null, aucun avertissement, aucun id non résolu ;
+  arme 1 → 360 or et 5 × 21101, talisman 10001 → 10 000 or et trois
+  objets 10001001. Reste à Sevih : `pnpm datagen:build` puis la promotion, puis
+  `npm run data:sync` côté gear-solver (ou la prochaine release, qui le
+  fait). Suite : G74 lit ces champs.
+
 ## 2026-10-29
 
 - **G73 — `equipment.json` (contrat solver) porte prix de vente et
