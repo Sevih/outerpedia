@@ -7,6 +7,29 @@
 
 ## 2026-10-29
 
+- **Relecture G72 (gear-solver) (Fable 5.1) — presets locaux enregistrés
+  dans GS, créés depuis le Builder ou par copie, listés dans l'onglet
+  Presets, validé.** `ba475be`, 15 fichiers, message conforme, ni
+  `package.json` ni lock. `lib/storage/localPresets.ts` (clé
+  `gs.presets.local`, nom 1..12 trimé, huit uids dans l'ordre du fil, EE
+  forcée à "0", lecture tolérante, plus récent en premier) ;
+  `wireUidsFromBuild` (ordre moteur → fil) et `localCopyOf` (nom tronqué,
+  « Preset #num » sans nom) ; `localPresetRows` fabrique un `Preset` à
+  `num` négatif par position avec `localId`, jamais vu des clés
+  `gs.presets.*` ni des holds (`presetHolds` ne lit que
+  `inventory.presets`, test posé) ; carte locale avec badge, Rename,
+  Delete en deux clics, ligne du héros de référence ; « Save as local
+  preset… » dans la barre latérale du Builder ; sauvegarde par
+  `transfer.ts` avec garde à l'import. Contrôles sur `main` : typecheck
+  vert, tests core 169 / desktop 219 / renderer 832, lint 13
+  avertissements 0 erreur (inchangé). Rejoué par `tsx` : conversion moteur
+  → fil exacte avec l'EE à "0" ; copie d'un preset « Nom beaucoup trop
+  long » → « Nom beaucoup » ; nom de 13 caractères refusé ; rename et
+  remove ; entrées mal formées (sans champs, nombre, trois uids) ignorées ;
+  ligne synthétique num −1 avec la pièce absente marquée manquante. Reste
+  à Sevih (fixe) : Builder › Save as local preset… puis la carte dans
+  Presets › Local presets, Rename, Delete ; copie d'un preset du jeu.
+  Suite : merge dans la ligne privée puis P7. Aucun lot public ouvert.
 - **Relecture G71 (gear-solver) (Fable 5.1) — règle Transistone complétée
   (un palier 3 reste possible quand un palier 4 est déjà là), validé.**
   `2024909`, 14 fichiers, message conforme, ni `package.json` ni lock.
