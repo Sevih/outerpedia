@@ -5,6 +5,26 @@
 > détail vit dans git. Le `CHANGELOG.md` racine est GELÉ depuis le 03/08 —
 > ce fichier et le log git SONT le journal du projet.
 
+## 2026-10-29
+
+- **Relecture G64 (gear-solver) (Fable 5.1) — la grille de l'Inventaire
+  défile seule sous un en-tête fixe, virtualisation effective, validé.**
+  `c9f3da1`, 6 fichiers, message conforme, ni `package.json` ni lock. Cause
+  confirmée par l'agent et par la lecture : `main` en hauteur minimale,
+  donc `h-full` des écrans = `auto`, la page défilait et le virtualiseur
+  montait tout. Correctif : coquille `h-screen flex-col overflow-hidden`,
+  `main` en `min-h-0 flex-1 overflow-hidden`, Home et Worklist enveloppés
+  d'un `h-full overflow-y-auto`, Inventaire / Builds / Presets / Builder
+  défilent dans la zone qu'ils avaient déjà. Mesure par le test du
+  virtualiseur piloté sans DOM : 1 500 tuiles montées avant, 100 à 600 px
+  après, 170 défilé profond. Contrôles sur HEAD : typecheck vert, lint 13
+  avertissements (inchangé), tests 169 + 219 + 765 (+4). **À Sevih, sur le
+  fixe** (après la prochaine release) : Inventaire, descendre tout en bas →
+  l'en-tête et « Filter » restent, défilement fluide ; chaque autre onglet
+  défile encore jusqu'à son bas ; sans capture, la ligne « Manual
+  fallback » est collée en bas de la fenêtre. **Suite** : G65 (Base rolls
+  avec opérateur et X), puis release 1.18.0 et merge dans `private`.
+
 ## 2026-10-28
 
 - **Relectures A83 (outerpedia) et G61, G62, G63 (gear-solver) (Fable 5.1) —
