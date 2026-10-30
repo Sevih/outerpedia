@@ -40,6 +40,11 @@ export interface TierItem {
   /** Costume : nom du perso de base (affiché quand « noms de skin » est off). */
   baseLabel?: string;
   baseShort?: string;
+  /**
+   * Forme Core Fusion : un héros à part entière (pas un costume), rangé APRÈS
+   * tous les autres dans le canon de partage (cf. `buildCanon`).
+   */
+  isFusion?: boolean;
 }
 
 export interface TlmLabels {

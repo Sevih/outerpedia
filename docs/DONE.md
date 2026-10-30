@@ -7,6 +7,42 @@
 
 ## 2026-10-30
 
+- **A84 · tier list maker : les six formes Core Fusion entrent dans le pool
+  des personnages, sans casser les liens de partage.** Remarque de Sevih du
+  30/10 : le pool écartait Snow, Lisha, Veronica, Eternal, Notia et Epsilon
+  en forme fusion (`filter((c) => !c.originalCharacter)`), alors que ce sont
+  des héros classés à part de leur forme de base. Construction du pool
+  extraite d'`index.tsx` vers `character-items.ts` (`buildCharacterItems`,
+  logique d'avant inchangée) pour être testée : chaque forme fusion suit son
+  origine et ses costumes, `prefix` = `characterNamePrefix` (« Core Fusion »
+  localisé), `label` nu, `short` si curé, élément, classe et tags de la forme
+  elle-même, `rarity` = la rareté affichée (3, celle de la fiche et de
+  `CharacterCard`, pas `progressionStar`), et `isFusion: true` (nouveau champ
+  de `TierItem`, `contracts.ts`). Pas de `isSkin` : la case « skins » et
+  « Skins seulement » ne les touchent pas, le compteur de l'onglet les compte
+  comme persos de base ; élément, classe, rareté, tags et recherche les
+  filtrent par les mêmes champs que les autres. `share-codec.ts` : `buildCanon`
+  trie par `(isFusion ? 1 : 0, id numérique)` — 2700003 et 2700005 seraient
+  passés devant Eliza (2700035) et auraient décalé son index dans tout lien
+  partagé ; commentaire d'en-tête d'`index.tsx` et du codec mis à jour.
+  Export PNG (`use-export-png.ts`) et export / import JSON
+  (`TierListMakerBrowser.tsx`) passent par les clés et `itemMap` : rien à
+  faire, une fusion y est un item comme un autre (le PNG reprend son
+  `prefix`). Tests : `share-codec.test.ts` (canon sans fusions = préfixe exact
+  du canon avec, par type ; lien à trois tiers avec Eliza et un costume encodé
+  sur le canon sans fusions, décodé à l'identique sur le canon avec),
+  `character-items.test.ts` sur la vraie donnée (les six fusions après leur
+  origine, rien entre les deux que des costumes, `isFusion`, préfixe,
+  élément / classe / rareté, aucune comptée comme skin). Vérification :
+  typecheck vert (`tsc --noEmit … -p scripts/tsconfig.json`, sans erreur),
+  lint vert (`eslint`, sans sortie), `pnpm test` « Tests 4470 passed (4470) »
+  sur 256 fichiers. Aucun changement visuel hors l'apparition des six
+  cartes. Laissé, hors périmètre : le canon n'est pas vraiment en
+  append-only — un nouveau héros 2000xxx (ou un costume 2010xxx) s'insère
+  devant 2700019, 2700035 et désormais devant tout le bloc fusion, et
+  décale leurs index dans les liens déjà partagés qui les contiennent ; seul
+  un ordre figé (liste versionnée des clés) en protégerait.
+
 - **Relecture G78 (gear-solver) (Fable 5.1) — l'allocation de gemmes sert
   les bornes minimales des filtres de stats avant la priorité, repli sur
   les gemmes serties, validé.** `37e8e6c`, 9 fichiers, message conforme,

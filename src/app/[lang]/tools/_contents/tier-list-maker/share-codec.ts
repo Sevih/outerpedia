@@ -13,6 +13,11 @@
  * `ceil(log2(restants))` bits. Les premiers coûtent ~7 bits, les derniers 0 :
  * proche du plancher d'information, loin devant un index fixe par item.
  *
+ * Exception à l'ordre par id : les formes Core Fusion (`isFusion`, entrées le
+ * 30/10/2026) sont classées APRÈS tous les autres items de leur type. Leurs ids
+ * (2700003, 2700005…) passeraient sinon devant d'anciens persos (Eliza,
+ * 2700035) et décaleraient leur index dans tous les liens déjà partagés.
+ *
  * Format du paramètre `z` :
  *   "1" + b64url(titre) + "," + (b64url(label) + "," + codeCouleur) par tier
  *       + "," + b64url(binaire)
@@ -53,20 +58,22 @@ function bitsFor(n: number): number {
   return n <= 1 ? 0 : 32 - Math.clz32(n - 1);
 }
 
-/** Listes par type triées par id numérique (stable) + index inverse. */
+/**
+ * Listes par type triées par (fusion après le reste, id numérique) — stable —
+ * plus l'index inverse.
+ */
 export type Canon = {
   byType: { key: string }[][]; // [characters, ee, bosses]
   index: Map<string, { type: number; idx: number }>;
 };
 
-export function buildCanon(
-  characters: { key: string }[],
-  ee: { key: string }[],
-  bosses: { key: string }[],
-): Canon {
+type CanonItem = { key: string; isFusion?: boolean };
+
+export function buildCanon(characters: CanonItem[], ee: CanonItem[], bosses: CanonItem[]): Canon {
   const numId = (k: string) => Number(k.slice(1)) || 0;
+  const late = (it: CanonItem) => (it.isFusion ? 1 : 0);
   const byType = [characters, ee, bosses].map((arr) =>
-    [...arr].sort((a, b) => numId(a.key) - numId(b.key)),
+    [...arr].sort((a, b) => late(a) - late(b) || numId(a.key) - numId(b.key)),
   );
   const index = new Map<string, { type: number; idx: number }>();
   byType.forEach((list, type) => list.forEach((it, idx) => index.set(it.key, { type, idx })));

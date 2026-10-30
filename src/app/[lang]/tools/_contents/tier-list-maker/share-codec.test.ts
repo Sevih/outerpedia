@@ -25,6 +25,29 @@ describe('buildCanon', () => {
     expect(shuffled.byType[0].map((i) => i.key)).toEqual(['c2000001', 'c2000010', 'c2010002']);
     expect(shuffled.index.get('c2000010')).toEqual({ type: 0, idx: 1 });
   });
+
+  it('formes Core Fusion APRÈS les autres : le canon sans elles en est un préfixe exact', () => {
+    // Eliza (2700035) a un id plus haut que les fusions de Snow et Lisha : un tri
+    // par id seul la décalerait derrière elles.
+    const base = [
+      { key: 'c2000003' },
+      { key: 'c2000005' },
+      { key: 'c2700035' },
+      { key: 'c2000003001' },
+    ];
+    const fusions = [
+      { key: 'c2700005', isFusion: true },
+      { key: 'c2700003', isFusion: true },
+    ];
+    const before = buildCanon(base, ee, bosses);
+    const after = buildCanon([...fusions, ...base], ee, bosses);
+    before.byType.forEach((list, type) =>
+      expect(after.byType[type].slice(0, list.length).map((i) => i.key)).toEqual(
+        list.map((i) => i.key),
+      ),
+    );
+    expect(after.byType[0].slice(base.length).map((i) => i.key)).toEqual(['c2700003', 'c2700005']);
+  });
 });
 
 describe('encode / decode', () => {
@@ -68,6 +91,28 @@ describe('encode / decode', () => {
     expect(decodeState('2abc,def', canon)).toBeNull();
     expect(decodeState('1seul-segment', canon)).toBeNull();
     expect(decodeState('1a,b,c', canon)).toBeNull(); // longueur impaire
+  });
+
+  it("un lien encodé avant les formes Core Fusion se décode à l'identique avec elles", () => {
+    const base = ['c2000003', 'c2000005', 'c2000010', 'c2700035', 'c2000003001'].map((key) => ({
+      key,
+    }));
+    const withFusions = [
+      ...base,
+      { key: 'c2700003', isFusion: true },
+      { key: 'c2700005', isFusion: true },
+    ];
+    const tiers = [
+      tier('S', ['c2700035', 'c2000003001']),
+      tier('A', ['c2000005'], '#0a1b2c'),
+      tier('B', ['c2000010']),
+    ];
+    // Lien « d'avant » : encodé sur le canon SANS les fusions.
+    const z = encodeState('Avant', tiers, buildCanon(base, ee, bosses));
+    const decoded = decodeState(z, buildCanon(withFusions, ee, bosses))!;
+    expect(decoded.title).toBe('Avant');
+    expect(decoded.tiers.map((t) => t.items)).toEqual(tiers.map((t) => t.items));
+    expect(decoded.tiers[1].color).toBe('#0a1b2c');
   });
 
   it('ÉPINGLAGE du format de fil (compat des liens partagés — ne doit JAMAIS changer)', () => {

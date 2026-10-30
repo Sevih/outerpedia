@@ -1,15 +1,13 @@
 import { getT, type TranslationKey } from '@/i18n';
 import type { Lang } from '@/lib/i18n/config';
 import { lRec } from '@/lib/i18n/localize';
-import { characterNamePrefix, getAllCharacters } from '@/lib/data/characters';
-import { loadShortNames } from '@/lib/data/short-names';
-import { characterTags, loadCuratedCharacters } from '@/lib/data/curated';
 import { loadDataJson } from '@/lib/data/disk';
 import { monsterIconSrc } from '@/lib/data/monsters';
 import type { Monster } from '@contracts';
 import { img, CLASS_ORDER, ELEMENT_ORDER } from '@/lib/images';
 import { getEquipmentEe } from '@/lib/data/equipment-ee';
 import { TierListMakerBrowser } from './TierListMakerBrowser';
+import { buildCharacterItems } from './character-items';
 import type { TierItem, TlmLabels } from './contracts';
 
 /**
@@ -18,9 +16,9 @@ import type { TierItem, TlmLabels } from './contracts';
  * localise rien) et URLs de sprites résolues. L'état vit côté client ; le
  * partage passe par `share-codec` + `/api/tierlist`.
  *
- * Canon d'encodage (compat des liens déjà partagés) : les entités core-fusion
- * sont EXCLUES du pool perso — il n'y en avait pas, les inclure décalerait les positions des
- * liens `?z=` existants (le canon trie par id numérique).
+ * Canon d'encodage (compat des liens déjà partagés) : les formes Core Fusion
+ * sont dans le pool perso (`isFusion`), mais `buildCanon` les range APRÈS tous
+ * les autres — les positions des liens `?z=` d'avant leur arrivée ne bougent pas.
  */
 
 interface EeEntry {
@@ -61,54 +59,7 @@ function buildBossItems(lang: Lang): TierItem[] {
 
 export default async function TierListMaker({ lang }: { lang: Lang }) {
   const t = await getT(lang);
-  const shorts = loadShortNames();
-
-  // Personnages (tri par nom localisé), chacun suivi de ses costumes — les 99
-  // modèles de costume ont leurs sprites FI_/CT_ sur R2 (collecte `appearances`).
-  const characters: TierItem[] = [];
-  // Tags CURÉS COMPRIS et triés canoniquement : `Character.tags` seul n'a pas
-  // `free` (tag humain, couche curée) — les pills « Free » ne matchaient donc
-  // jamais rien. Le curé se charge une fois, pas une lecture par perso.
-  const curated = loadCuratedCharacters();
-  const bases = getAllCharacters()
-    .filter((c) => !c.originalCharacter)
-    .map((c) => ({ c, label: lRec(c.name, lang) }))
-    .sort((a, b) => a.label.localeCompare(b.label));
-  for (const { c, label } of bases) {
-    const short = shorts[c.id]?.[lang];
-    characters.push({
-      key: `c${c.id}`,
-      label,
-      short,
-      img: img.face(c.id),
-      cardId: c.id,
-      // Le portrait écrit le titre et le nom dans DEUX champs séparés : `label`
-      // reste le nom nu, le titre voyage à côté (cf. `characterDisplayName`).
-      prefix: characterNamePrefix(c, lang) ?? undefined,
-      element: c.element,
-      cls: c.class,
-      rarity: c.rarity,
-      tags: characterTags(c, curated),
-    });
-    for (const cos of c.costumes ?? []) {
-      if (!cos.model || cos.model === '0' || cos.model === c.id) continue;
-      characters.push({
-        key: `c${cos.model}`,
-        label: lRec(cos.name, lang),
-        short: shorts[cos.model]?.[lang],
-        img: img.face(cos.model),
-        cardId: cos.model,
-        // un costume garde l'élément/classe/rareté du personnage
-        element: c.element,
-        cls: c.class,
-        rarity: c.rarity,
-        tags: characterTags(c, curated),
-        isSkin: true,
-        baseLabel: label,
-        baseShort: short,
-      });
-    }
-  }
+  const characters = buildCharacterItems(lang);
 
   const ee: TierItem[] = Object.values<EeEntry>(getEquipmentEe())
     .map((e) => ({
