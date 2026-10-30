@@ -7,6 +7,35 @@
 
 ## 2026-10-30
 
+- **Relecture G76 (gear-solver) (Fable 5.1) — cible Linux AppImage,
+  release Windows + Linux, auto-update Linux, validé.** `5c2dcd0`,
+  14 fichiers, message conforme ; dans `apps/desktop/package.json` seul le
+  bloc `build` bouge (exception du lot), scripts et dépendances intacts,
+  lock intact. Bloc `linux` (AppImage x64, `executableName`, icône PNG,
+  `artifactName` produit-version, `build/icon.png` ajouté à l'asar pour
+  l'icône de fenêtre de G75), `desktopName` pour le WM_CLASS ;
+  `fetch-binaries.mjs` copie le PNG 512×512 d'outerpedia à côté de l'ICO ;
+  `release.mjs` construit `--win --linux` en une passe, table `ARTIFACTS`
+  avec correspondance stricte sur la version avant l'extension (l'ancien
+  `includes` aurait pris la build `-private.1` du portable), erreur si un
+  des deux manque, VirusTotal et note d'intégrité par artefact ;
+  `updater.ts` `appImageUpdateBlocker` (pur) et phase `manual` quand
+  l'AppImage ne peut pas se remplacer (sans `APPIMAGE`, ou dossier en
+  lecture seule), carte Home « Manual » ambre, vérification maintenue sans
+  téléchargement. Contrôles sur `main` : typecheck vert, tests core 169 /
+  desktop 237 / renderer 842, lint 13 avertissements 0 erreur (inchangé).
+  Contrôlé sur la build locale de l'agent (`release/Outerpedia Gear
+Solver-1.20.0.AppImage`, 126 Mo, extraite dans le scratchpad) : fichier
+  `.desktop` (`StartupWMClass` = `outerpedia-gear-solver`, catégorie
+  Game), `resources/app-update.yml` GitHub, asar avec `dist/`,
+  `build/icon.png` et `desktopName`, DLL du plugin et tables dérivées à
+  bord, `latest-linux.yml` cohérent (url, taille, sha512). L'AppImage n'a
+  pas été lancé. Reste à Sevih (portable) : lancer l'AppImage, icône et
+  carte Home, capture sous Proton (G75) ; à la prochaine release, les deux
+  artefacts et les deux `latest*.yml` sur la page, l'auto-update AppImage
+  réel seulement à partir de la release d'après. Note joueur « Linux
+  AppImage » à écrire dans `docs/release-notes.md` avant la release.
+  Aucun lot public ouvert.
 - **Relecture G75 (gear-solver) (Fable 5.1) — couche plateforme avec
   implémentation Linux (Steam natif, jeu sous Proton, chemins Wine),
   validé.** `2591004`, 13 fichiers, message conforme, ni `package.json`
