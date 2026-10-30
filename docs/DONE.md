@@ -7,6 +7,34 @@
 
 ## 2026-10-30
 
+- **Relecture G78 (gear-solver) (Fable 5.1) — l'allocation de gemmes sert
+  les bornes minimales des filtres de stats avant la priorité, repli sur
+  les gemmes serties, validé.** `37e8e6c`, 9 fichiers, message conforme,
+  ni `package.json` ni lock. `gems.ts` : `allocateGemsServingMins(scored,
+talismanSlots, eeSlots, mins, preGemCrc, reachCap)` pose d'abord les
+  gemmes de chaque stat sous sa borne (tout le pool, score 0 ou négatif
+  compris, plus gros gain d'abord) jusqu'à couvrir le manque, puis le cap
+  de CHC et `pickOrder` comme avant ; `reachCap` ajouté par l'agent pour
+  porter `wantCritCap`, juste. `composeBuild.ts` : `rollGainOnSheet` =
+  `composeMultStat` avec la gemme seule moins sans elle (ATK / DEF / HP /
+  EFF / RES), la valeur ailleurs. `engine.ts` : chemin lent entré seulement
+  quand `passesSpecs` échoue sur une borne `min` avec un delta appliqué ;
+  manques arrondis vers le haut (10 sur ATK / DEF / HP, 0,1 en %), mémo en
+  trie de clés entières, réallocation puis recomposition si elle diffère,
+  sinon retest avec les gemmes serties et allocation vide ; une borne `max`
+  seule est écartée comme avant ; SOLVE CP sans priorité n'a que le repli.
+  Banc de l'agent : 345 → 340 ms sans filtre, 343 → 336 ms filtre tenu du
+  premier coup, 258 ms et 0 résultat → 713 ms et 100 résultats sur le cas
+  du bug. Docs `docs/solver.md` § 5, `wiki/Solver.md`, `wiki/Using-the-App.md`.
+  Contrôles : typecheck vert, tests core 169 / desktop 237 / renderer 860,
+  lint 13 avertissements 0 erreur (inchangé). Rejoué par `tsx` avec une
+  mise à l'échelle réaliste (base 3 000, buff 20 %) : une gemme ATK 4 %
+  vaut 158 ATK, un manque de 600 prend quatre gemmes ATK puis la priorité
+  (DMG) sur le reste, un manque incouvrable prend les dix gemmes ATK ;
+  `STAT_TO_PRIORITY` ramène bien `atkPct` sur `atk`. Reste à Sevih (après
+  release) : rejouer le cas réel ATK ≥ 12 000 avec la priorité ATK 3 / CHD 3
+  / SPD 2 / CHC 2, des résultats doivent sortir avec les gemmes ATK dans la
+  bande du bas. Suite : P11 (privé) sur `private` après merge de main.
 - **Relecture G77 (gear-solver) (Fable 5.1) — carte « Scrap value » sous
   le panneau de la pièce, icônes et sélection de pièces, validé.**
   `d57e879`, 8 fichiers, message conforme, ni `package.json` ni lock.
