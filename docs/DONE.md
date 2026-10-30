@@ -7,6 +7,24 @@
 
 ## 2026-10-30
 
+- **Relecture A84 (Fable 5.1) — formes Core Fusion dans le pool du tier
+  list maker, canon de partage stable, validé.** `1681d091`, 7 fichiers,
+  message conforme, ni `package.json` ni lock. Construction du pool
+  extraite vers `character-items.ts` (`buildCharacterItems`, logique
+  d'avant reprise ligne à ligne), chaque forme fusion après son origine et
+  ses costumes, `isFusion`, préfixe « Core Fusion » par
+  `characterNamePrefix`, rareté affichée comme la fiche. `buildCanon` trie
+  par (fusion après le reste, id numérique) : l'index d'Eliza (2700035) ne
+  bouge pas, test du préfixe exact et d'un lien d'avant décodé à
+  l'identique. Export PNG et JSON par les clés, rien à faire. Contrôles :
+  typecheck vert, lint vert, tests 4470 sur 256 fichiers (le test du pool
+  tourne sur la vraie donnée). Sprites `FI_2700003` et `FI_2700070`
+  présents sur le CDN. Suivi noté au TODO (vu par l'agent, hors
+  périmètre) : le canon n'est pas append-only pour un NOUVEAU héros
+  2000xxx, qui s'insère devant 2700019, 2700035 et le bloc fusion dans les
+  liens déjà partagés. Reste à Sevih (après déploiement) : les six cartes
+  dans le pool, le préfixe sur la carte, les pills élément / classe /
+  rareté, un lien partagé ancien qui s'ouvre pareil. Aucun lot ouvert.
 - **A84 · tier list maker : les six formes Core Fusion entrent dans le pool
   des personnages, sans casser les liens de partage.** Remarque de Sevih du
   30/10 : le pool écartait Snow, Lisha, Veronica, Eternal, Notia et Epsilon

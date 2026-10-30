@@ -22,6 +22,13 @@ les preuves et les décisions vivent dans le tri consolidé de sevih-tool
 
 ## 🧰 Outil quick
 
+- [ ] **Tier list maker — canon de partage append-only** : `buildCanon`
+      trie par id numérique (fusions après, A84 du 30/10) ; un NOUVEAU héros
+      2000xxx ou costume 2010xxx s'insère devant Eliza (2700035), 2700019 et
+      le bloc fusion, et décale leur index dans les liens `?z=` déjà
+      partagés. Protection possible : une liste versionnée des clés (ordre
+      figé, nouveaux items ajoutés en queue), à faire avant le prochain héros.
+
 - [ ] **« Extraction » › versionnage — contrôles à l'écran (lot F22)** : le
       banc ne clique pas, et RIEN n'a été figé (`POST /api/extractor/freeze`
       n'est pas dans `READ_ONLY_POSTS`) ; ses refus sont testés. Relancer
