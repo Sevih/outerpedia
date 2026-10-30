@@ -1,10 +1,11 @@
 import type { Lang } from '@/lib/i18n/config';
 import { lRec } from '@/lib/i18n/localize';
-import { characterNamePrefix, getAllCharacters } from '@/lib/data/characters';
+import { characterNamePrefix, getAllCharacters, joinDisplayName } from '@/lib/data/characters';
 import { loadShortNames } from '@/lib/data/short-names';
 import { characterTags, loadCuratedCharacters } from '@/lib/data/curated';
 import { img } from '@/lib/images';
 import type { TierItem } from './contracts';
+import { buildSearchText } from './pool-filter';
 
 /**
  * Pool PERSONNAGES du Tier List Maker (extrait d'`index.tsx` pour être testé) :
@@ -37,6 +38,10 @@ export function buildCharacterItems(lang: Lang): TierItem[] {
   const characters: TierItem[] = [];
   for (const { c, label } of bases) {
     const short = shorts[c.id]?.[lang];
+    const prefix = characterNamePrefix(c, lang) ?? undefined;
+    // Nom complet (« Demiurge Luna ») : le costume le cherche aussi, il n'a
+    // pas de `prefix` à lui.
+    const fullName = joinDisplayName(prefix, label);
     characters.push({
       key: `c${c.id}`,
       label,
@@ -45,18 +50,21 @@ export function buildCharacterItems(lang: Lang): TierItem[] {
       cardId: c.id,
       // Le portrait écrit le titre et le nom dans DEUX champs séparés : `label`
       // reste le nom nu, le titre voyage à côté (cf. `characterDisplayName`).
-      prefix: characterNamePrefix(c, lang) ?? undefined,
+      prefix,
       element: c.element,
       cls: c.class,
       rarity: c.rarity,
       tags: characterTags(c, curated),
+      search: buildSearchText(fullName, short, label),
     });
     for (const cos of c.costumes ?? []) {
       if (!cos.model || cos.model === '0' || cos.model === c.id) continue;
+      const cosLabel = lRec(cos.name, lang);
+      const cosShort = shorts[cos.model]?.[lang];
       characters.push({
         key: `c${cos.model}`,
-        label: lRec(cos.name, lang),
-        short: shorts[cos.model]?.[lang],
+        label: cosLabel,
+        short: cosShort,
         img: img.face(cos.model),
         cardId: cos.model,
         // un costume garde l'élément/classe/rareté du personnage
@@ -67,24 +75,29 @@ export function buildCharacterItems(lang: Lang): TierItem[] {
         isSkin: true,
         baseLabel: label,
         baseShort: short,
+        search: buildSearchText(cosLabel, cosShort, fullName, short),
       });
     }
     // Forme Core Fusion : ses propres élément, classe et tags ; la rareté
     // AFFICHÉE (`rarity`, 3) comme la fiche et `CharacterCard`, pas l'étoile de
     // progression de l'origine. Pas de costume.
     for (const f of fusionsByOrigin.get(c.id) ?? []) {
+      const fLabel = lRec(f.name, lang);
+      const fShort = shorts[f.id]?.[lang];
+      const fPrefix = characterNamePrefix(f, lang) ?? undefined;
       characters.push({
         key: `c${f.id}`,
-        label: lRec(f.name, lang),
-        short: shorts[f.id]?.[lang],
+        label: fLabel,
+        short: fShort,
         img: img.face(f.id),
         cardId: f.id,
-        prefix: characterNamePrefix(f, lang) ?? undefined,
+        prefix: fPrefix,
         element: f.element,
         cls: f.class,
         rarity: f.rarity,
         tags: characterTags(f, curated),
         isFusion: true,
+        search: buildSearchText(joinDisplayName(fPrefix, fLabel), fShort, fLabel),
       });
     }
   }

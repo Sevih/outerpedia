@@ -45,6 +45,12 @@ export interface TierItem {
    * tous les autres dans le canon de partage (cf. `buildCanon`).
    */
   isFusion?: boolean;
+  /**
+   * Texte cherchable, DÉJÀ normalisé (`buildSearchText`, calculé au serveur) :
+   * nom complet titre compris, nom court, et pour un costume ou un EE le nom
+   * complet de son perso. La recherche du pool compare la saisie à lui seul.
+   */
+  search: string;
 }
 
 export interface TlmLabels {

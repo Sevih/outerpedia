@@ -6,9 +6,11 @@ import { monsterIconSrc } from '@/lib/data/monsters';
 import type { Monster } from '@contracts';
 import { img, CLASS_ORDER, ELEMENT_ORDER } from '@/lib/images';
 import { getEquipmentEe } from '@/lib/data/equipment-ee';
+import { characterDisplayName, getCharacter } from '@/lib/data/characters';
 import { TierListMakerBrowser } from './TierListMakerBrowser';
 import { buildCharacterItems } from './character-items';
 import type { TierItem, TlmLabels } from './contracts';
+import { buildSearchText } from './pool-filter';
 
 /**
  * Tier List Maker — wrapper SERVEUR : construit les trois pools (personnages +
@@ -46,12 +48,14 @@ function buildBossItems(lang: Lang): TierItem[] {
   for (const [id, m] of Object.entries(monsters)) {
     if (m.type !== 'boss' || !referenced.has(id) || seen.has(m.icon)) continue;
     seen.add(m.icon);
+    const label = lRec(m.name, lang);
     items.push({
       key: `b${m.icon}`,
-      label: lRec(m.name, lang),
+      label,
       img: monsterIconSrc(m),
       element: m.element,
       cls: m.class,
+      search: buildSearchText(label),
     });
   }
   return items.sort((a, b) => a.label.localeCompare(b.label));
@@ -62,11 +66,17 @@ export default async function TierListMaker({ lang }: { lang: Lang }) {
   const characters = buildCharacterItems(lang);
 
   const ee: TierItem[] = Object.values<EeEntry>(getEquipmentEe())
-    .map((e) => ({
-      key: `e${e.character}`,
-      label: lRec(e.name, lang),
-      img: img.ee(e.character),
-    }))
+    .map((e) => {
+      const label = lRec(e.name, lang);
+      // Un EE se cherche aussi par le nom complet de son porteur.
+      const holder = getCharacter(e.character);
+      return {
+        key: `e${e.character}`,
+        label,
+        img: img.ee(e.character),
+        search: buildSearchText(label, holder && characterDisplayName(holder, lang)),
+      };
+    })
     .sort((a, b) => a.label.localeCompare(b.label));
 
   const labels: TlmLabels = {

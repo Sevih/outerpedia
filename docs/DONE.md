@@ -7,6 +7,42 @@
 
 ## 2026-10-30
 
+- **A85 — tier list maker : la recherche du pool cherche aussi le titre
+  (Demiurge, Monad, Core Fusion…) et le nom court, accents et casse
+  repliés.** Bug vu par Sevih : « Demi » ne rendait rien, la recherche ne
+  comparait que `${label} ${baseLabel}` en `toLowerCase().includes`, donc ni
+  le titre (`prefix`), ni le nom court curé (`short` : « D.Luna »), ni les
+  accents. Nouveau champ `search` sur `TierItem` (`contracts.ts`), texte DÉJÀ
+  normalisé calculé au serveur par `buildSearchText` (nouveau `pool-filter.ts`,
+  qui passe chaque nom par `normalizeSearchText` de `src/lib/search-text.ts`) :
+  perso = nom complet (`joinDisplayName(prefix, label)`) + nom court + nom nu ;
+  costume = son nom + son nom court + le nom complet de sa base (calculé une
+  fois par perso dans `character-items.ts`, pas de champ `basePrefix`) + nom
+  court de la base ; forme Core Fusion = idem perso ; EE = son nom + le nom
+  complet du porteur (`characterDisplayName` dans `index.tsx`) ; boss = son
+  nom. Dédoublonnage par NOM entier et non mot à mot : un nom déjà contenu tel
+  quel dans ce qui précède est sauté (« luna » après « demiurge luna »), parce
+  que le mot à mot coupait les noms composés — « round-the-clock tourist luna »
+  suivi de « demiurge luna » donnait « … luna demiurge » et le costume n'était
+  plus trouvable par le nom complet de sa base, ce que le lot exige. Le filtre
+  du pool sort en fonction pure `poolFilter` (items, puis `q`, `placed`,
+  `skinsOnly`, `showSkins` et les quatre filtres de pills), règles recopiées
+  telles quelles ; `use-pool.ts` l'appelle avec la saisie passée par
+  `normalizeSearchText` après `trim` et garde le tri. Vérifié :
+  `pool-filter.test.ts` (items fabriqués : « demi » → Demiurge et leurs
+  costumes seulement, « Démiurge »/« DEMI » identiques, « monad », « core
+  fusion », « d.luna »/« luna », costume par le nom complet de sa base, saisie
+  vide, non-régression `placed` et `skinsOnly`) et `character-items.test.ts`
+  sur la vraie donnée (« demi » rend EXACTEMENT les persos de titre Demiurge —
+  ils sont huit, pas quatre comme l'écrivait le lot —, Monad, Resonance, Core
+  Fusion, Gnosis, Omega, Luna/D.Luna et ses trois costumes). `pnpm typecheck`
+  (`tsc --noEmit -p scripts/tsconfig.json` sans erreur), `pnpm lint`
+  (`eslint` sans sortie), `pnpm test` (`Tests 4488 passed (4488)`). Aucun
+  changement visuel : seul le texte comparé change, le champ, les pills et le
+  tri sont intacts. Laissé : « d.luna » ne rend évidemment pas Luna nue (pas
+  le même nom court) ; une saisie à double espace entre deux mots ne trouve
+  rien, la saisie n'étant que trimée comme le prescrit le lot.
+
 - **Relecture A84 (Fable 5.1) — formes Core Fusion dans le pool du tier
   list maker, canon de partage stable, validé.** `1681d091`, 7 fichiers,
   message conforme, ni `package.json` ni lock. Construction du pool

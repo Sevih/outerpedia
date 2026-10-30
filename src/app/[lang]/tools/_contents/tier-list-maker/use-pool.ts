@@ -8,8 +8,10 @@
  */
 import { useDeferredValue, useMemo, useState } from 'react';
 import { ELEMENT_ORDER } from '@/lib/images';
+import { normalizeSearchText } from '@/lib/search-text';
 import type { Tier } from './share-codec';
 import type { SortKey, Tab, TierItem } from './contracts';
+import { poolFilter } from './pool-filter';
 
 export function usePool({
   sourceByTab,
@@ -36,22 +38,16 @@ export function usePool({
   const placed = useMemo(() => new Set(tiers.flatMap((t) => t.items)), [tiers]);
 
   const poolItems = useMemo(() => {
-    const q = query.trim().toLowerCase();
-    const filtered = sourceByTab[tab].filter((it) => {
-      if (placed.has(it.key)) return false;
-      // « Skins seulement » outrepasse le masquage par défaut des skins : le
-      // filtre marche même quand le réglage est décoché.
-      if (skinsOnly) {
-        if (!it.isSkin) return false;
-      } else if (it.isSkin && !showSkins) return false;
-      if (elementFilter.length && (!it.element || !elementFilter.includes(it.element)))
-        return false;
-      if (classFilter.length && (!it.cls || !classFilter.includes(it.cls))) return false;
-      if (rarityFilter.length && (it.rarity === undefined || !rarityFilter.includes(it.rarity)))
-        return false;
-      if (tagFilter.length && !it.tags?.some((tg) => tagFilter.includes(tg))) return false;
-      if (q && !`${it.label} ${it.baseLabel ?? ''}`.toLowerCase().includes(q)) return false;
-      return true;
+    const q = normalizeSearchText(query.trim());
+    const filtered = poolFilter(sourceByTab[tab], {
+      q,
+      placed,
+      skinsOnly,
+      showSkins,
+      elementFilter,
+      classFilter,
+      rarityFilter,
+      tagFilter,
     });
     if (sort === 'default') return filtered;
     const arr = [...filtered];
