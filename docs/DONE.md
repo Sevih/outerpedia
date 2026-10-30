@@ -7,6 +7,31 @@
 
 ## 2026-10-30
 
+- **Relecture G77 (gear-solver) (Fable 5.1) — carte « Scrap value » sous
+  le panneau de la pièce, icônes et sélection de pièces, validé.**
+  `d57e879`, 8 fichiers, message conforme, ni `package.json` ni lock.
+  `lib/inventory/scrapCard.ts` pur (`scrapScope` : la sélection même hors
+  de la vue, sinon la vue filtrée, libellés « n selected » / « n shown » ;
+  `materialRows` avec nom et icône depuis `items.json` ; `toggleSelection`,
+  `addAll`, `pruneSelection` qui rendent le même `Set` quand rien ne change) ;
+  `ScrapCard.tsx` (or avec `CM_Goods_Gold`, tuiles de matériaux 24 px avec
+  badge de quantité et carré à deux lettres sans icône, six puis « +n
+  more », notes, rangée Select pieces / Select all shown / Select excluded /
+  Clear) ; colonne gauche en `flex-col`, panneau de la pièce conservé ;
+  `ScrapLine` de G74 supprimée. Sélection éphémère élaguée pendant le rendu
+  quand l'inventaire change ; clic en mode sélection bascule et affiche,
+  Ctrl+clic bascule toujours, coche ambre en haut à gauche de la tuile qui
+  coexiste avec l'exclusion ; handlers stables pour les tuiles mémoïsées.
+  La carte s'affiche aussi dès que le mode sélection est activé sans
+  filtre (ajout sensé de l'agent). Contrôles sur `main` : typecheck vert,
+  tests core 169 / desktop 237 / renderer 850, lint 13 avertissements 0
+  erreur (inchangé). Rejoué par `tsx` : portée vide → « 2 shown », une
+  sélection avec un id disparu → « 1 selected », lignes de matériaux avec
+  icône et repli `item 999`, bascule, ajout sans doublon qui rend le même
+  Set, élagage. Reste à Sevih (portable, prochaine build) : la carte sous
+  le panneau avec un filtre « Scrap candidates », les icônes, le mode
+  sélection, Ctrl+clic. Suite : merge dans la ligne privée puis P8.
+  Aucun lot public ouvert.
 - **Relecture G76 (gear-solver) (Fable 5.1) — cible Linux AppImage,
   release Windows + Linux, auto-update Linux, validé.** `5c2dcd0`,
   14 fichiers, message conforme ; dans `apps/desktop/package.json` seul le
