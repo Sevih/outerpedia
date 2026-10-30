@@ -7,6 +7,29 @@
 
 ## 2026-10-30
 
+- **Relecture A85 (Fable 5.1) — recherche du pool du tier list maker sur le
+  nom complet, le nom court, accents et casse repliés, validé.** `c55dbcd4`,
+  8 fichiers (`contracts.ts`, `character-items.ts`, `index.tsx`, `use-pool.ts`,
+  nouveaux `pool-filter.ts` et `pool-filter.test.ts`, `character-items.test.ts`,
+  DONE), message conforme, ni `package.json` ni lock, rien hors périmètre (tri,
+  pills, canon et autres outils intacts). Contrat tenu : `search` normalisé
+  calculé au serveur (perso, costume avec le nom complet de sa base, forme
+  Core Fusion, EE avec le porteur, boss), saisie passée par
+  `normalizeSearchText` après `trim`, filtre extrait en `poolFilter` pure avec
+  les règles recopiées à l'identique. Écart assumé et justifié dans l'entrée :
+  dédoublonnage par nom entier et non mot à mot, sans quoi « demiurge luna »
+  éclatait derrière un costume et la base ne se trouvait plus par son nom
+  complet. Contrôles sur HEAD : `pnpm typecheck` (trois `tsc` sans erreur),
+  `pnpm lint` sans sortie, `pnpm test` 257 fichiers, 4488 tests verts. Rejeu
+  par `tsx` sur la vraie donnée anglaise (237 items, 31 avec titre) : « demi »,
+  « Démiurge » et « DEMI » rendent les mêmes huit Demiurge et rien d'autre (le
+  lot en annonçait quatre, chiffre faux de ma rédaction) ; « monad » 2,
+  « resonance » 2, « core fusion » 6, « gnosis » 5, « omega » 1 ; « luna » rend
+  Luna et Demiurge Luna, « d.luna » Demiurge Luna seule ; « demiurge luna »
+  avec les skins rend D.Luna et ses trois costumes ; « xyz » rien. À contrôler
+  par Sevih sur le site après déploiement : taper « Demi », « Monad », « Core
+  Fusion » et « D.Luna » dans le pool. Aucun lot public ouvert.
+
 - **A85 — tier list maker : la recherche du pool cherche aussi le titre
   (Demiurge, Monad, Core Fusion…) et le nom court, accents et casse
   repliés.** Bug vu par Sevih : « Demi » ne rendait rien, la recherche ne
