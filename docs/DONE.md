@@ -5,6 +5,27 @@
 > détail vit dans git. Le `CHANGELOG.md` racine est GELÉ depuis le 03/08 —
 > ce fichier et le log git SONT le journal du projet.
 
+## 2026-11-01
+
+- **Relecture G85 (Fable 5.1) — cartes compactes à la hauteur de leur
+  contenu, sans étirement de rangée, validé.** gear-solver `3a19899` sur
+  `main`, 6 fichiers (`ResultGearDetail.tsx`, `BottomGearBand.tsx`,
+  `compactCard.test.ts`, changelog, `docs/solver.md`, `wiki/Solver.md`),
+  message attendu, rien hors périmètre. Conforme : la racine compacte de la
+  bande reçoit `items-start content-start`, `CardShell` prend `fill` qui seul
+  pose `h-full` (`ResultItemDetail` passe `!compact`, `ResultPairDetail`
+  `false`), l'état vide ne porte `h-full` qu'en non compact ; le `flex-1
+overflow-y-auto` du corps et le `grow` de la cellule du bas restent (sans
+  effet en compact, dit et justifié) ; bande non compacte, `w-56`, seuil
+  1232 px et `COMPACT_GEAR_GRID` inchangés. Contrôles sur HEAD : `npm run
+typecheck` vert, `npm test` 169 + 238 + 908 (+3 renderer), `npm run lint`
+  8 avertissements, 0 erreur, inchangé ; les trois tests lisent les classes
+  du rendu statique (racine et sept `aside` en compact, huit `aside` en
+  `h-full` sinon, état vide des deux côtés). Laissé à Sevih : la bande compacte
+  des deux côtés de 1232 px (rangées alignées en haut) et la bande non
+  compacte inchangée. Suite : release 1.27.1, merge dans private, build
+  privée ; aucun lot public ouvert.
+
 ## 2026-10-31
 
 - **Relecture G84 (Fable 5.1) — carte compacte EE + talisman fusionnée,
