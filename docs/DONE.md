@@ -7,6 +7,26 @@
 
 ## 2026-10-31
 
+- **Relecture G81 (Fable 5.1) — « Expand all » / « Collapse all » sur
+  l'onglet Presets, validé.** gear-solver `8f5de50` sur `main`, 6 fichiers
+  (`lib/presets/cardOpen.ts` nouveau, `PresetsScreen.tsx`,
+  `presetCardOpen.test.ts` nouveau, changelog, `docs/reference.md`,
+  `wiki/Using-the-App.md`), message attendu, rien hors périmètre. Conforme au
+  contrat : état dérivé pur `cardOpen(forced, local, defaultOpen)` sans
+  `useEffect`, commande `forceCards` numérotée par génération, deux boutons
+  texte après le groupe Sort et avant Clear avec les `title` demandés, `forced`
+  passé aux cartes du jeu ET locales, chevron qui pose un choix daté de la
+  génération courante. Contrôles sur HEAD : `npm run typecheck` vert, `npm test`
+  169 + 237 + 888 (renderer 78 fichiers, +9), `npm run lint` 13 avertissements,
+  0 erreur, inchangé. Test lu : les cinq cas de `cardOpen` demandés, puis
+  l'écran entier en `renderToStaticMarkup` sur un preset garni et un vide, la
+  commande semée par un mock partiel de `initialCardCommand` (un seul
+  `aria-expanded="true"` sans commande, deux après Expand all, zéro après
+  Collapse all). Laissé à Sevih : l'essai à l'œil (Collapse all, une carte
+  rouverte à la main, nouveau Collapse all la referme ; cartes locales). Suite :
+  routine de release (1.26.0) puis merge dans `private` ; G82 (audit) et P12
+  (delete + new preset) restent ouverts.
+
 - **Relecture G80 (Fable 5.1) — bonus +15 en libellé court sur la carte
   compacte, validé.** gear-solver `06ce5df` sur `main`, 6 fichiers
   (`ResultGearDetail.tsx`, `compactCard.test.ts`, changelog, `docs/solver.md`,
