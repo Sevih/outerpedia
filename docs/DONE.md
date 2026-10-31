@@ -7,6 +7,27 @@
 
 ## 2026-10-31
 
+- **Relecture G83 (Fable 5.1) — journal et statut dans un onglet « Logs »
+  de Settings, bandeau retiré, validé.** gear-solver `c51b25e` sur `main`,
+  9 fichiers (`App.tsx`, `SettingsModal.tsx`, `LogsPane.tsx` et
+  `lib/log/appLog.ts` nouveaux, `BackupPane.tsx` commentaire, deux tests,
+  changelog, `docs/reference.md`), message attendu, rien hors périmètre.
+  Conforme : le bloc du bandeau et `logOpen` disparaissent d'App, `pushLog`
+  passe par `appendBounded` (500 lignes), `report` = statut + ligne horodatée,
+  `announce` = `report` + toast sur les seuls résultats demandés (plugin,
+  Steam, import manuel, fin de synchro, synchro de lancement, « Game data
+  updated »), « Syncing… » et l'import automatique au journal seul ;
+  `onStatus` des panneaux Settings passe par `report` ; onglet « Logs » après
+  Debug avec Copy / Clear / état vide et note de pied. `notify` est stable
+  (store de `useToasts`), donc l'effet de démarrage qui le liste ne se rejoue
+  pas. Écart assumé : l'installation du plugin ne vide plus le journal à son
+  début (historique de session, borné). Contrôles sur HEAD : `npm run
+typecheck` vert, `npm test` 169 + 238 + 897 (+7 renderer), `npm run lint`
+  8 avertissements, 0 erreur, inchangé ; `grep "Show.*log"` vide. Laissé à
+  Sevih : l'onglet Logs à l'œil, Copy dans Electron, les toasts d'une
+  installation. Suite : release 1.27.0 avec G84 quand il sera relu (pas de
+  release pendant qu'un lot tourne dans le clone) ; G84 ouvert.
+
 - **Relecture G82 (Fable 5.1) — audit du code de gear-solver (bugs, perf,
   nettoyage), rapport classé puis corrections sûres, validé.** gear-solver
   `13b0490` sur `main`, 26 fichiers, message attendu, rien dans
