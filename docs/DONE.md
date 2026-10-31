@@ -5,6 +5,28 @@
 > détail vit dans git. Le `CHANGELOG.md` racine est GELÉ depuis le 03/08 —
 > ce fichier et le log git SONT le journal du projet.
 
+## 2026-10-31
+
+- **Relecture G79 (Fable 5.1) — mode compact des cartes de résultat du
+  Builder resserré, validé.** gear-solver `394c182` sur `main`, 9 fichiers
+  (`ResultGearDetail.tsx`, `SolverPane.tsx`, `quality.ts`,
+  `BottomGearBand.tsx`, nouveau `compactCard.test.ts`, changelog,
+  `docs/solver.md`, `wiki/Solver.md`, `wiki/Using-the-App.md`), message
+  conforme, ni `package.json` ni lock. Les six demandes sont tenues sur le
+  seul chemin `compact` : plus d'`EquipmentIcon` (`+15`, `T2`, `6★` dans
+  l'en-tête), gemmes en cinq icônes avec le détail en `title`, effets
+  Singularity sur une ligne en icône + valeur ou nom court (`compactEffect`),
+  qualité `14/20 →17 Exc.` (`qualityShortLabel`), rangée `CardActions` avec la
+  seule action exclure / inclure sous `RichTooltip`, substats en grille 2 × 2
+  icône + valeur seules (LV, reforges et Transistone en `title`, teinte cyan /
+  violet / ambre), carte en `w-56` et seuil de grille 1232 px recalculé. Les
+  branches non compactes ne perdent que des ternaires morts ; `GearDetail.tsx`
+  intact. Contrôles sur HEAD : `npm run typecheck` sans erreur, `npm test` 872
+  - 237 + 169 tests verts, `npm run lint` 13 avertissements, aucun dans les
+    fichiers du lot. Relu le diff entier et le test de rendu serveur (12 cas).
+    À contrôler par Sevih : Settings › Solver › Compact result cards sur le
+    fixe. Suite : release 1.24.0 sur son mot. Aucun lot public ouvert.
+
 ## 2026-10-30
 
 - **Relecture A85 (Fable 5.1) — recherche du pool du tier list maker sur le
