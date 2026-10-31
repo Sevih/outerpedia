@@ -7,6 +7,31 @@
 
 ## 2026-10-31
 
+- **Relecture G84 (Fable 5.1) — carte compacte EE + talisman fusionnée,
+  passif du talisman masqué en compact, validé.** gear-solver `baac7e6` sur
+  `main`, 7 fichiers (`ResultGearDetail.tsx`, `BottomGearBand.tsx`,
+  `compactCard.test.ts`, changelog, `docs/solver.md`, `wiki/Solver.md`,
+  `wiki/Using-the-App.md`), message attendu, rien hors périmètre. Conforme :
+  `visiblePassiveTiers` reprend à l'identique le filtre en ligne (palier de
+  base masqué par son amélioration active), `compactPassiveTitle` (actifs
+  d'abord, sans balises, « · ») rejoint le `title` du nom sous le nom complet,
+  bloc du passif rendu seulement hors compact, Singularity toujours rendu ;
+  `CardShell` extrait sans dupliquer le conteneur, `CompactExcludeFooter`
+  garde les libellés d'origine sans `what` et nomme la pièce avec (« Exclude EE
+  from the solver » / « Exclude talisman from the solver ») ; `ResultPairDetail`
+  empile deux cellules dans un `w-56` avec filet, état vide par `emptyLabel`
+  sans action ; `BottomGearBand` : `cardOf(slot)` partagé (gemmes
+  recommandées, porteur, presets, exclusion, ticks), `COMPACT_GEAR_GRID` sept
+  cellules en compact, `GAME_GEAR_GRID` huit cartes sinon. Contrôles sur
+  HEAD : `npm run typecheck` vert, `npm test` 169 + 238 + 905 (+8 renderer),
+  `npm run lint` 8 avertissements, 0 erreur, inchangé ; la bande est montée en
+  rendu statique dans le test (sept `aside` dont la double en deuxième, EE
+  au-dessus du talisman ; huit en non compact) ; `docs/todo.md` sans item.
+  Laissé à Sevih : la bande compacte à 1232 px et plus (la première rangée est
+  plus haute, les autres cartes s'étirent) et le survol du nom du talisman.
+  Suite : release 1.27.0 (G83 + G84), merge dans private, build privée ;
+  aucun lot public ouvert.
+
 - **Relecture G83 (Fable 5.1) — journal et statut dans un onglet « Logs »
   de Settings, bandeau retiré, validé.** gear-solver `c51b25e` sur `main`,
   9 fichiers (`App.tsx`, `SettingsModal.tsx`, `LogsPane.tsx` et
