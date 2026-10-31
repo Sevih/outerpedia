@@ -7,6 +7,25 @@
 
 ## 2026-10-31
 
+- **Relecture G80 (Fable 5.1) — bonus +15 en libellé court sur la carte
+  compacte, validé.** gear-solver `06ce5df` sur `main`, 6 fichiers
+  (`ResultGearDetail.tsx`, `compactCard.test.ts`, changelog, `docs/solver.md`,
+  `wiki/Solver.md`, `wiki/Using-the-App.md`), message conforme, ni
+  `package.json` ni lock. `singularityShortLabel` (table de sept motifs sur le
+  nom, casse et espaces de bord tolérés, `null` sinon), `singularityGrade`
+  (lettre C à S+ et couleur de sa balise en tête de la `desc`), `compactEffect`
+  rend `kind: "short"` pour un nom reconnu et garde ses deux branches sinon ;
+  rendu compact grade coloré + icône + libellé + valeur, `title` = `desc` sans
+  balises ; carte non compacte intacte. Contrôles sur HEAD : `npm run
+typecheck` sans erreur, `npm test` 879 + 237 + 169 tests verts, `npm run
+lint` 13 avertissements, le même compte. Rejeu par un test vitest temporaire
+  sur la vraie `singularity-options.json` (229 options) : libellé court ET
+  grade trouvés pour chacune, aucune dans le repli. Mon énoncé disait 30 noms,
+  il y en a 15 (le 30 comptait les variantes S+), tous couverts. À contrôler
+  par Sevih sur une pièce Singularity en compact : lisibilité du grade sur le
+  fond, et `S+ vs Water DMG- +100%` qui tient en `w-56`. Suite : release
+  (1.25.0, ou avec le prochain lot) sur son mot. Aucun lot public ouvert.
+
 - **Relecture G79 (Fable 5.1) — mode compact des cartes de résultat du
   Builder resserré, validé.** gear-solver `394c182` sur `main`, 9 fichiers
   (`ResultGearDetail.tsx`, `SolverPane.tsx`, `quality.ts`,
