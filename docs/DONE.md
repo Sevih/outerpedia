@@ -7,6 +7,32 @@
 
 ## 2026-10-31
 
+- **Relecture G82 (Fable 5.1) — audit du code de gear-solver (bugs, perf,
+  nettoyage), rapport classé puis corrections sûres, validé.** gear-solver
+  `13b0490` sur `main`, 26 fichiers, message attendu, rien dans
+  `screens/presets/`, `tools/capture-steam/` ni `apps/desktop/scripts/`, ni
+  `package.json`. Rapport `docs/audit-2026-10-31.md` : 102 constats (31 bugs,
+  12 perf, 59 nettoyage), chacun avec fichier:ligne, correction proposée,
+  risque et colonne Fait ; 26 corrigés, 76 laissés avec leur raison (change un
+  résultat du solveur, décision, fichier d'un autre lot). Corrections lues une
+  à une : quatre bugs avec test rouge → vert (import de sauvegarde qui notifie
+  même si une écriture échoue, `loadSavedBuilds` qui n'écarte que l'entrée
+  cassée au lieu de tous les builds, `writePluginConfig` avec un `$` dans le
+  chemin, `statSync` sans course ENOENT), cinq avertissements lint
+  « setState dans un effet » remplacés par un état dérivé au rendu, exports
+  morts retirés (`SlotGlyph`, `StarRow`, `displayNameOf` dupliqué,
+  ré-export `FinalStats`, trois constantes), neuf commentaires et six passages
+  de `docs/architecture.md` / `docs/solver.md` corrigés. Aucun changement dans
+  le solveur, aucune dépendance, aucun outil ajouté. Contrôles sur HEAD :
+  `npm run typecheck` vert, `npm test` 169 + 238 + 890 (+1 desktop, +2
+  renderer), `npm run lint` 13 → 8 avertissements, 0 erreur. Les bugs du
+  solveur rapportés (B1 prune de dominance CP avec un MIN, B2 réallocation
+  sous cap en CP, B3 seuil 102 avec des gemmes crit fines, B4 sets cassés au
+  prune de budget) attendent la décision de Sevih : le rapport suffit à en
+  faire des lots. Suite : release 1.26.1 (G82 ; recolle aussi les binaires au
+  source après l'incident de la 1.26.0), merge dans `private` ; aucun lot
+  public ouvert.
+
 - **Relecture G81 (Fable 5.1) — « Expand all » / « Collapse all » sur
   l'onglet Presets, validé.** gear-solver `8f5de50` sur `main`, 6 fichiers
   (`lib/presets/cardOpen.ts` nouveau, `PresetsScreen.tsx`,
