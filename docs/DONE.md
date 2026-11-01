@@ -7,6 +7,41 @@
 
 ## 2026-11-01
 
+- **Relecture G99 (Fable 5.1) — U10b : une seule carte de pièce `GearCard`
+  pour Inventory, les infobulles Builds / Presets et les résultats du Builder,
+  validé.** gear-solver `fb87426` sur `main`, 25 fichiers (`design/GearCard.tsx`
+  et `design/gearCardText.ts` nouveaux ; `design/GearDetail.tsx` et
+  `design/ResultGearDetail.tsx` supprimés ; ItemDetail réduit à une enveloppe
+  de `GearCardPanel` ; BottomGearBand, BuildsScreen, PresetsScreen, FilterModal,
+  presetQuality, commentaire d'engine ; tests `gearCard` nouveau, `compactCard`,
+  `compactName`, `gearDetailSetLevel`, `gearDetailWearer` réimportés ;
+  changelog, solver / Solver, Using-the-App, architecture / Architecture,
+  STATUS, reference / Engine-Reference), message attendu, ni `package.json` ni
+  lock, rien d'un autre lot. Vérifié par diff : `FullBody` est l'ancien
+  `GearDetailBody` mot pour mot plus les options (`effects` masque passif et
+  bonus de set, `bareEE` = EE image + gemmes sans effets, `projection` passée à
+  `SubstatRow`, `QUALITY_HELP` partagé, `visiblePassiveTiers` sorti tel quel) :
+  Inventory et infobulles rendent exactement comme avant ; le Builder non
+  compact gagne ce qui était demandé (bloc Qualité titré avec aide et barre,
+  ligne rareté / slot, titre +15, dégradé horizontal, portrait carré dans la
+  ligne de l'icône) ; `CompactBody` est l'ancien corps compact repris tel quel,
+  `GearCardPanel` = l'ancien `ResultItemDetail` avec `excludeHint` et les textes
+  d'état vide passés par l'appelant, `ResultPairDetail` / `CardShell` /
+  `CardActions` déménagés sans changement. `grep` des anciens noms vide dans
+  src et test. Contrôles sur `fb87426` : `npm run typecheck` OK ; `npm test`
+  169 + 238 + 1059 (dont `gearCard.test.ts` 10 : même corps Inventory / Builder
+  non projeté, seule la ligne du porteur diffère, `effects` card / none,
+  projection cyan et `T+n`, compact) ; `npm run lint` 7 avertissements, 0
+  erreur, comme avant. Hors périmètre relevé par l'agent : le `GearCard` local
+  de `BottomGearBand.tsx` porte le nom du nouveau fichier (à renommer) ; « No
+  item selected » d'Inventory contredit le glossaire (pour U13) ;
+  `GearTileWithHover` (tuiles Builds / Presets avec verrou) reste à faire. À
+  contrôler par Sevih sur la build privée : les huit cartes non compactes du
+  Builder (Qualité avec barre, rareté / slot, portrait carré, hauteur de la
+  bande), Inventory (`LV 6 (4 + 2)` sur la colonne élargie), infobulles Builds /
+  Presets et cartes compactes inchangées. Pas de release (refonte) : main mergée
+  dans private. Suite : G100 = U11 (renommage des onglets, `gs.tab` migré).
+
 - **Relecture G98 (Fable 5.1) — U10a : un seul sélecteur de héros
   `HeroPicker` simple / multiple, recherche et ordre des héros partagés,
   validé.** gear-solver `351c731` sur `main`, 20 fichiers (`design/HeroPicker.tsx`,
