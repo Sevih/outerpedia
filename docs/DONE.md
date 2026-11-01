@@ -7,6 +7,26 @@
 
 ## 2026-11-01
 
+- **Relecture G89 (Fable 5.1) — U1 de la refonte : vocabulaire unifié et
+  textes corrigés sans rien déplacer, validé.** gear-solver `d704df7` sur
+  `main`, 47 fichiers (31 sources et tests du renderer, changelog, todo,
+  docs et wiki), message attendu, aucun onglet ni réglage déplacé, aucune
+  clé `gs.*` renommée. Conforme : glossaire appliqué (Never use / Never used
+  — click to allow, Hide equipped, Don't take from…, Load reco, Filter set,
+  Rank, Singularity, tier), cartes de résultat vides par slot (« No weapon in
+  this build », « No weapon yet » sans build), « Apply to snapshot » avec
+  dialogue qui dit que seule la capture est réécrite, grisé d'avance par
+  `applyBlockedReason(steam)` pur sur `steam.live` (le signal du 409), les
+  trois écrans vides « Arm capture » réécrits, pied du Builder en chemins de
+  menu, bouton d'en-tête « Settings », manuel repris. Contrôles sur HEAD :
+  typecheck vert, tests 169 + 238 + 925 (+6 renderer, dont
+  `applyToSnapshot.test.ts`), lint 8 avertissements, 0 erreur ; le grep des
+  anciens libellés ne rend que des commentaires de code sur le type
+  `FilterPreset`. Laissé à Sevih : les libellés à l'écran et le grisé jeu
+  ouvert ; à trancher plus tard : « Apply locally » / « Apply all » de la
+  Worklist. Suite (règle refonte, pas de release) : merge dans private, build
+  1.28.0-private.2, puis U2 ; aucun lot public ouvert.
+
 - **Relecture G88 (Fable 5.1) — audit UX de gear-solver : répartition des
   écrans, parcours, savoir dupliqué, rapport sans code, validé.** gear-solver
   `eef207c` sur `main`, 2 fichiers (`docs/ux-audit-2026-11-01.md` nouveau,
