@@ -7,6 +7,28 @@
 
 ## 2026-11-01
 
+- **Relecture G96 (Fable 5.1) — U8 : en-tête unique (une pastille de
+  capture, action plugin / jeu dans l'en-tête et Setup seulement, badge de
+  mise à jour partout, une version des données), validé.** gear-solver
+  `1a194a6` sur `main`, 21 fichiers (steam, Shell, App, SettingsModal,
+  DataPane, SteamSetupPane, Home, EmptyDashboard, `SystemHealthCard.tsx`,
+  `hooks/useAppUpdate.ts`, `hooks/useDataVersion.ts`, `lib/dataVersion.ts`,
+  `lib/update.ts`, UpdateCard, test `headerU8.test.ts`, changelog, reference,
+  wiki), message attendu, rien hors périmètre. Conforme : `captureBadge(steam)`
+  pur à sept états avec `title` détaillé (écart justifié : pas de second
+  argument), `SteamBadge` supprimé (grep vide), « Install plugin / Launch
+  game » seulement dans `Shell.tsx` et `SteamSetupPane.tsx` (grep), Home ›
+  System health avec « Open Setup » (`openOn` de SettingsModal), état vide
+  sans bouton d'action, `useAppUpdate` dans App au même rythme qu'avant,
+  `updateBadge` dans l'en-tête cliquable → Home, `dataVersionLabel` lu par
+  Data et Setup, sha de commit retiré de l'UI. Contrôles sur HEAD : typecheck
+  vert, tests 169 + 238 + 1020 (+9 renderer), lint 7 avertissements, 0
+  erreur. Noté hors lot : la pastille Live / Idle d'Account snapshot redit
+  l'état (part avec Home en U13). Laissé à Sevih (build finale) : la pastille
+  et ses états, « Open Setup », Home vide, le badge « vX ready » depuis un
+  autre onglet. Suite : merge dans private, puis U9 ; aucun lot public
+  ouvert.
+
 - **Relecture G95 (Fable 5.1) — U7 : liens retour Worklist et carte de pièce
   vers le Builder et l'Inventory, réservations dites par la Worklist,
   validé.** gear-solver `ab8bc6e` sur `main`, 14 fichiers (App, GearDetail,
