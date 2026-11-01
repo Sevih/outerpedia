@@ -7,6 +7,26 @@
 
 ## 2026-11-01
 
+- **Relecture G95 (Fable 5.1) — U7 : liens retour Worklist et carte de pièce
+  vers le Builder et l'Inventory, réservations dites par la Worklist,
+  validé.** gear-solver `ab8bc6e` sur `main`, 14 fichiers (App, GearDetail,
+  WorklistScreen, InventoryScreen, ItemDetail, trois tests, changelog,
+  reference, solver, wiki), message attendu, rien hors périmètre. Conforme :
+  portrait + nom d'une carte de Worklist = bouton « Optimize → », « on
+  ‹héros› » vers le porteur, « in Inventory » vers la pièce par un drill
+  étendu de `pieceUid` (vue gardée si visible, remise au défaut sinon, uid
+  inconnu consommé sans effet), ligne ⓘ des réservations avec un texte
+  recalé sur `worklistClaims` (≤ Lower : un héros mieux classé peut prendre
+  la pièce ; All ignore ; les gemmes ne réservent rien) : écart justifié au
+  texte proposé ; `GearDetailBody` `onOptimizeWearer` (jamais en tooltip),
+  « Optimize wearer → » grisé sur une pièce libre. Contrôles sur HEAD :
+  typecheck vert, tests 169 + 238 + 1011 (+13 renderer), lint 7
+  avertissements, 0 erreur. Noté hors lot : la grille de l'Inventory ne
+  défile pas jusqu'à la tuile drillée ; le portrait de la Worklist mène au
+  Builder, pas à Heroes comme la maquette. Laissé à Sevih (build finale) :
+  les trois liens de la Worklist, la ligne ⓘ, « Optimize wearer → ». Suite :
+  merge dans private, puis U8 ; aucun lot public ouvert.
+
 - **Relecture G94 (Fable 5.1) — U6 : priorité par défaut depuis la reco
   outerpedia, bandeau « No priority » visible, mode CP sans menu, validé.**
   gear-solver `a92ff6d` sur `main`, 16 fichiers (`lib/reco/recoPriority.ts`
