@@ -5,6 +5,39 @@
 > détail vit dans git. Le `CHANGELOG.md` racine est GELÉ depuis le 03/08 —
 > ce fichier et le log git SONT le journal du projet.
 
+## 2026-11-02
+
+- **Relecture G103 (Fable 5.1) — D5 : mode de reforge et Transistone par
+  défaut dans Settings › Solver, surcharge par héros gardée avec ses filtres,
+  migration `useReforged` écrite une fois, validé.** gear-solver `6a830e0`
+  sur `main`, 24 fichiers (`lib/settings.ts` : `reforgeMode` choice défaut
+  `classic` et `rerollPotential` bool sous `gs.solver.*`,
+  `SOLVER_PANE_SETTINGS` à cinq ; `SolverPane.tsx` : bandeau « Hero
+  defaults », quatre `SegButton` avec `title`, `Switch` ; `SolverSettings` +
+  App par `useSetting` ; `lib/solver/builderFilters.ts` :
+  `filterDefaults(mode, potential)` et `resetAll` avec `to` ;
+  `screens/builder/reforge.ts` → `lib/solver/reforge.ts` (`git mv`) avec
+  `legacyReforgeMode` partagé par `migrateReforge` et le chargeur de
+  `filterPresets.ts` ; `BuilderScreen` : props `defaultReforgeMode` /
+  `defaultRerollPotential`, `defaultsRef` relu après chaque commit, servis par
+  `startFiltersFor` à un héros sans filtres gardés ; `BuilderToolbar` :
+  infobulles du libellé Reforge et du toggle Transistone, « reset filters »
+  revient aux défauts ; `keys.ts` labels « Solver settings » ; tests
+  `reforgeDefaults` nouveau (9), `builderFilters`, `settings`,
+  `settingsPanes`, `transfer` ajustés ; changelog, reference /
+  Engine-Reference, solver / Solver, Using-the-App), message attendu, ni
+  `package.json` ni lock, rien d'un autre lot. Vérifié : plus aucune copie de
+  la règle `useReforged` hors `legacyReforgeMode`, plus d'import de
+  `screens/builder/reforge`, `appliesNextSolve` faux pour les deux réglages
+  (le test « flags only… » reste vrai), un héros avec filtres gardés n'est pas
+  touché par un changement du défaut (le `defaultsRef` n'est lu qu'au
+  changement de héros). Contrôles sur `6a830e0` : typecheck OK, tests 169 +
+  238 + 1089, lint 7 avertissements 0 erreur. Pour Sevih sur la build (après
+  U14) : « Hero defaults » sous Per-worker depth, un héros jamais ouvert prend
+  le défaut, un héros déjà ouvert garde son mode, Reset remet +10R6 / off.
+  Suite : merge `main` → `private` (SolverPane privé et `solver={{…}}` d'App
+  en conflit probable), puis G104 = D11 + D12.
+
 ## 2026-11-01
 
 - **Relecture G102 (Fable 5.1) — U13 : Home dissous dans Gear (Overview /
