@@ -7,6 +7,42 @@
 
 ## 2026-11-01
 
+- **Relecture G98 (Fable 5.1) — U10a : un seul sélecteur de héros
+  `HeroPicker` simple / multiple, recherche et ordre des héros partagés,
+  validé.** gear-solver `351c731` sur `main`, 20 fichiers (`design/HeroPicker.tsx`,
+  `lib/heroes/heroName.ts` et `lib/heroes/heroListOrder.ts` nouveaux ;
+  `screens/builder/HeroSelect.tsx` et `screens/builder/heroName.ts` supprimés,
+  `ExcludeHeroesPicker` retiré d'`OptionsPanel` ; BuilderToolbar, BuilderScreen,
+  PresetsScreen, BuildsScreen, App ; tests `heroPicker` nouveau, `presetCardOpen`
+  et `solver` ajustés ; changelog, reference / Engine-Reference, solver / Solver,
+  Using-the-App), message attendu, ni `package.json` ni lock, rien d'un autre
+  lot. Lu en entier : `HeroPicker` = `usePickerList` partagé (recherche,
+  surbrillance clavier, `useId` pour les id de liste, ↓ ouvre, ↑/↓, Entrée
+  choisit en single et coche en multi, Échap), `HeroRow` commun (portrait
+  fusionné d'un Core Fusion, nom affiché, case en multi) ; `heroSearchHaystack`
+  lit `effectiveCharacter(...).def` plus le surnom de la fiche de base, le nom
+  brut et les deux charId ; `heroMatches` ; `heroListOrder` tri explicite par
+  index (rang croissant via `rankOrder`, sans rang après ; CP décroissant, sans
+  CP après ; ordre d'entrée), entrée non mutée. Appelants : Builder et Presets
+  passent `{ rank: heroPriority }` seulement (pas de CP roster), Presets reçoit
+  `heroPriority` d'App (prop nouvelle) ; `candidates` des Associated dérivé du
+  roster trié ; Builds appelle `heroMatches` et `heroListOrder` avec
+  `{ rank: byRank ? heroPriority : null, cp: bp }`. Changement voulu et
+  documenté : à CP égal Builds départage désormais par capture au lieu de nombre
+  de pièces puis étoiles. Seul écart visuel, demandé : « Don't take from… » puis
+  « N selected » avec portraits et clavier. `grep HeroSelect|ExcludeHeroesPicker`
+  vide. Contrôles sur `351c731` : `npm run typecheck` OK ; `npm test` 169 + 238 +
+  1049 (dont `heroPicker.test.ts` 12) ; `npm run lint` 7 avertissements, 0 erreur,
+  comme avant. Pas de rejeu au-delà des tests (rendu statique couvert).
+  Hors périmètre relevé par l'agent : `design/HeroPicker.tsx` importe
+  `screens/builder/useClickOutside.ts` (seul import de `design/` vers
+  `screens/`), à déplacer dans `hooks/` un jour. À contrôler par Sevih sur la
+  build privée : ordre des rangs dans la liste du Builder, Entrée qui coche dans
+  « Don't take from… », Reference / Associated des Presets, recherche Builds d'un
+  Core Fusion par son surnom fusionné. Pas de release (refonte) : main mergée
+  dans private (`NewPresetButton.tsx` privé passé sur `HeroPicker`). Suite :
+  G99 = U10b (carte de pièce unique).
+
 - **Relecture G97 (Fable 5.1) — U9 : registre des clés `gs.*`, sauvegarde
   complète v2 avec fusion par forme, liste de ce qui part, validé.**
   gear-solver `af0204d` sur `main`, 17 fichiers (`lib/storage/keys.ts` et
