@@ -7,6 +7,32 @@
 
 ## 2026-11-01
 
+- **Relecture G100 (Fable 5.1) — U11 : onglets Heroes / Optimizer / Gear dans
+  l'ordre cible, `gs.tab` migré, textes et manuel alignés, validé.** gear-solver
+  `bf341e4` sur `main`, 29 fichiers (`design/Shell.tsx` : `Tab` et `TABS` =
+  Home, Heroes, Optimizer, Presets, Worklist, Gear, `TabCounts` suit, `parseTab`
+  avec une `Map` des trois anciens libellés ; `App.tsx` : `TAB_CODEC` en
+  `deserialize` de `usePersistedState("gs.tab")`, `setTab` et compteurs
+  renommés ; textes de GearCard, WorklistScreen, OptionsPanel, BuildsScreen,
+  HomeScreen, PresetsScreen, `lib/settings.ts`, `lib/storage/keys.ts` ; tests
+  `tabs` nouveau, `headerU8`, `transfer`, `worklist` ajustés ; README,
+  changelog, todo, architecture / Architecture, data-schema / Data-Schema,
+  reference / Engine-Reference, solver / Solver, FAQ, Getting-Started, Home,
+  Using-the-App), message attendu, ni `package.json` ni lock, rien d'un autre
+  lot, aucun fichier ni identifiant renommé. Vérifié : le `deserialize` est
+  sous le `try` de `usePersistedState`, donc une valeur illisible retombe sur
+  Home ; `grep -rnwE "Builder|Inventory|Builds" apps/renderer/src` rend 330
+  lignes, et filtrées aux chaînes visibles il n'en reste qu'une, « Builds
+  returned to the table » de `FilterFooter.tsx` (des builds du solveur,
+  glossaire 5.c, voulu) ; « Builds & data management » de `wiki/FAQ.md` parle
+  des builds sauvegardés, gardé. Contrôles sur `bf341e4` : typecheck OK, tests
+  169 + 238 + 1064, lint 7 avertissements 0 erreur. Pour Sevih sur la build
+  (après U14) : l'app rouvre l'onglet laissé sous son nouveau nom, ordre Home,
+  Heroes, Optimizer, Presets, Worklist, Gear, Settings › Backup liste « Gear
+  filter sets » et « Optimizer layout ». Suite : merge `main` → `private`
+  (les `setTab("Builder")` et textes des fichiers privés à renommer à la main),
+  puis G101 = U12 (Settings réorganisés).
+
 - **Relecture G99 (Fable 5.1) — U10b : une seule carte de pièce `GearCard`
   pour Inventory, les infobulles Builds / Presets et les résultats du Builder,
   validé.** gear-solver `fb87426` sur `main`, 25 fichiers (`design/GearCard.tsx`
