@@ -7,6 +7,28 @@
 
 ## 2026-11-01
 
+- **Relecture G97 (Fable 5.1) — U9 : registre des clés `gs.*`, sauvegarde
+  complète v2 avec fusion par forme, liste de ce qui part, validé.**
+  gear-solver `af0204d` sur `main`, 17 fichiers (`lib/storage/keys.ts` et
+  `importSignal.ts` nouveaux, transfer réécrit, dataHash, worklist,
+  usePersistedState, settings, App, BackupPane, SettingsModal, tests `keys`
+  et `transfer`, changelog, reference, wiki), message attendu, rien hors
+  périmètre. Conforme à D7 : 41 clés dont 22 sauvegardées, exceptions
+  limitées à `gs.tab`, `gs.settings.pane`, `gs.onboarding.done`,
+  `gs.data.hash` et `gs.*.seen` (justifiées) ; bundle v2 par clé, v1 toujours
+  lu ; fusion par forme (listes par héros, liste par id, map par id, union,
+  valeur bornée) avec les règles actuelles conservées ; rangs importés
+  renumérotés 1..N (règle ajoutée, un rang étant unique) ; élagage par
+  `PRUNED_KEYS` ; les états montés se rechargent à l'import
+  (`usePersistedState` relit, App recharge filtres / worklist / exclusions).
+  Contrôles sur HEAD : typecheck vert, tests 169 + 238 + 1037 (+17
+  renderer), lint 7 avertissements, 0 erreur. Laissé : `gs.inv.filterPresets`
+  non élagué (format à part) ; l'élagage des filtres importés attend le
+  prochain hash. Laissé à Sevih (build finale) : export, liste sous Export,
+  import sur poste vierge et sur l'origine, import d'un fichier v1. Suite :
+  merge dans private (les clés `gs.game.*` privées entrent dans le registre
+  côté private), puis U10a ; aucun lot public ouvert.
+
 - **Relecture G96 (Fable 5.1) — U8 : en-tête unique (une pastille de
   capture, action plugin / jeu dans l'en-tête et Setup seulement, badge de
   mise à jour partout, une version des données), validé.** gear-solver
