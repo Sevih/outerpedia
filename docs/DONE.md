@@ -7,6 +7,25 @@
 
 ## 2026-11-01
 
+- **Relecture G87 (Fable 5.1) — carte de preset : icône + valeur sous les
+  tuiles, colonne qualité entre tuiles et Reference, référence sans doublon,
+  infobulles Score / Dmg / DmgS, validé.** gear-solver `dce4d4a` sur `main`,
+  7 fichiers (`presetQuality.ts` et son test, `PresetsScreen.tsx`, changelog,
+  `docs/solver.md`, `wiki/Solver.md`, `wiki/Using-the-App.md`), message
+  attendu, rien hors périmètre. Conforme : `presetTileMain` pure (arme = la
+  première main qui n'est pas l'ATK plat, accessoire et talisman = première
+  main, armures et EE = rien), `TileMain` = `StatIcon` 14 px + valeur avec
+  tous les labels en `title`, case EE sans ligne de main ; `PresetSummary`
+  colonne `shrink-0` entre la grille et Reference / Associated ; `HeroLine`
+  `nameAbove` posé seulement sur la référence d'une carte du jeu (la carte
+  locale n'a pas de sélecteur, elle garde le nom : écart justifié) ; `Metric`
+  en `cursor-help` avec `title`, trois textes d'aide. Contrôles sur HEAD :
+  typecheck vert, tests 169 + 238 + 919 (+4 renderer), lint 8 avertissements,
+  0 erreur, inchangé. Laissé à Sevih : une carte réelle (icônes sous les
+  tuiles, colonne qualité en xl et empilée en dessous, portrait seul sur la
+  référence). Suite : release 1.28.0 (G86 + G87), merge dans private, build
+  privée ; aucun lot public ouvert.
+
 - **Relecture G86 (Fable 5.1) — qualité du preset sur 138 et grades du +15
   offensif / défensif sur la carte de preset, validé.** gear-solver `d3d4b55`
   sur `main`, 7 fichiers (`lib/presets/presetQuality.ts` et son test
