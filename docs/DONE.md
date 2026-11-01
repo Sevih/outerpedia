@@ -7,6 +7,50 @@
 
 ## 2026-11-01
 
+- **Relecture G102 (Fable 5.1) — U13 : Home dissous dans Gear (Overview /
+  Pieces / Scrap), atterrissage Heroes, état vide de première installation
+  sur Heroes et Gear, validé.** gear-solver `2814696` sur `main`, 45 fichiers
+  (`design/Shell.tsx` : `Tab` à cinq, `parseTab` Home et inconnu → Heroes ;
+  `App.tsx` : `gs.tab` défaut Heroes, branche Home retirée, `GearScreen`
+  chargé à la place d'`InventoryScreen`, `steam` et `onOpenSetup` passés à
+  `BuildsScreen` ; `screens/gear/GearScreen.tsx` nouveau : barre Overview ·
+  Pieces · Scrap, `gs.gear.view`, un drill force Pieces pendant le rendu,
+  `FirstCapture` sans inventaire ; `screens/gear/OverviewView.tsx` = ex-Home
+  avec ligne Snapshot, qualité, Roster + Export, Gear breakdown quatre vues
+  (`gs.gear.breakdownView`), sans Account snapshot / Library / System health
+  (`SystemHealthCard.tsx` supprimé) ; `screens/home/` → `screens/gear/overview/`
+  par `git mv` (primitives, icônes, ClassEffectRow, OopartsTable,
+  ExportRosterButton) ; `lib/homeStats.ts` → `lib/gear/overviewStats.ts`
+  (`OverviewStats`) ; `EmptyDashboard` → `screens/FirstCapture.tsx` rendu par
+  Heroes et Gear ; `UpdateCard.tsx` → `design/settings/` avec `Num` et l'icône
+  recopiés, `design/` n'importe plus `screens/home` ; `InventoryScreen.tsx` :
+  prop `mode`, filtres `gs.gear.scrap.filters` seedés par
+  `scrapDefaultFilters()` = `SCRAP_CANDIDATES.filters()`, lien « Scrap
+  candidates », `gs.gear.scrap.selectMode` vrai par défaut (inactif sans
+  champs scrap), carte Scrap value toujours rendue en Scrap, phrase ambre sans
+  prix de rebut, `InventoryEmpty` retiré ; `keys.ts` : quatre clés de session
+  `gs.gear.*`, `gs.home.gearView` retirée ; tests `gearScreen` nouveau (6),
+  `overviewSets` renommé, `headerU8`, `inventoryScreen`, `sessionViewState`,
+  `settingsPanes`, `tabs` ajustés ; changelog, todo, README, architecture /
+  Architecture, data-schema / Data-Schema, reference / Engine-Reference,
+  solver / Solver, Getting-Started, Home, Using-the-App avec la section Gear
+  en trois sous-sections), message attendu, ni `package.json` ni lock, rien
+  d'un autre lot. Vérifié : `grep -rnw Home apps/renderer/src` ne rend que des
+  commentaires datés et `LEGACY_TABS`, `grep -rn screens/home` vide, `design/`
+  n'importe de `screens/` que `useClickOutside` (déjà noté) ; les tests
+  affirment Overview sans « Account snapshot », « Library », « System
+  health », « Sync game data », « Open Optimizer », Scrap avec le lien et la
+  phrase sans prix, Heroes sans capture avec les étapes. Écart accepté : un
+  inventaire chargé mais vide rend la grille vide au lieu de l'ancien
+  « No capture yet ». Contrôles sur `2814696` : typecheck OK, tests 169 + 238
+  - 1080, lint 7 avertissements 0 erreur. Pour Sevih sur la build (après
+    U14) : l'app rouvre Heroes si elle était sur Home ; Gear › Overview sans les
+    trois cartes, ses clics ouvrent Pieces filtré ; Scrap s'ouvre sur les
+    candidats, sélection active, carte toujours là ; la Worklist « in Gear »
+    ouvre Pieces. Suite : merge `main` → `private` (InventoryScreen privé :
+    itemActions / sell / dissolve à faire passer par `GearScreen`), puis les
+    lots D5 / D11 / D12 / D14 et U14.
+
 - **Relecture G101 (Fable 5.1) — U12 : Settings en six panneaux Setup, Data &
   updates, Solver, Display, Backup, Advanced ; centre de mise à jour dans
   Settings ; seuil de perte sur l'écran Presets, validé.** gear-solver
