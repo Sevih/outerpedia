@@ -7,6 +7,29 @@
 
 ## 2026-11-01
 
+- **Relecture G94 (Fable 5.1) — U6 : priorité par défaut depuis la reco
+  outerpedia, bandeau « No priority » visible, mode CP sans menu, validé.**
+  gear-solver `a92ff6d` sur `main`, 16 fichiers (`lib/reco/recoPriority.ts`
+  et `screens/builder/PriorityBanner.tsx` nouveaux, BuilderScreen,
+  BuilderToolbar, SubstatPriorityPanel, useSolverSession, App, deux tests,
+  changelog, reference, solver, wiki dont FAQ), message attendu, rien hors
+  périmètre. Conforme à D3 : `recoPriorityOf` (premier build, priorité seule
+  via `translateRecoBuild`), `solveDecision` pur à quatre issues, Solve en
+  Score sans poids charge la reco et pose les poids par le chemin normal des
+  filtres (gardés, vus par Presets) ; sans reco, CP pour cette fois et toast,
+  héros sans reco retenu pour la session, échec réseau retenté ; bandeau à
+  trois états (aucune priorité, sans reco, priorité de la reco avec Edit /
+  Clear, dérivé par `samePriority`) ; segment Score | CP + un seul Solve.
+  Écart assumé : en mode CP le bandeau dit « CP mode needs none » sans Use
+  CP. Contrôles sur HEAD : typecheck vert, tests 169 + 238 + 998 (+21
+  renderer, fetch stubé), lint 7 avertissements, 0 erreur. Relevé par
+  l'agent, à reprendre plus tard : README dit encore « SOLVE / SOLVE CP » ;
+  l'estimation pré-solve se calcule en Score sans poids quand Solve partira
+  avec la reco ou en CP. Laissé à Sevih (build finale) : Solve sur un héros
+  sans priorité (Loading reco…, bandeau « Priority from outerpedia reco »),
+  Clear, héros sans reco (toast, résultats CP). Suite : merge dans private,
+  puis U7 ; aucun lot public ouvert.
+
 - **Relecture G93 (Fable 5.1) — U5 : états de vue gardés au changement
   d'onglet (Inventory, Presets, Home), validé.** gear-solver `d5bf580` sur
   `main`, 16 fichiers (usePersistedState codecs, scrapCard, cardOpen, Home,
