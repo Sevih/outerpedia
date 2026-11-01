@@ -7,6 +7,27 @@
 
 ## 2026-11-01
 
+- **Relecture G88 (Fable 5.1) — audit UX de gear-solver : répartition des
+  écrans, parcours, savoir dupliqué, rapport sans code, validé.** gear-solver
+  `eef207c` sur `main`, 2 fichiers (`docs/ux-audit-2026-11-01.md` nouveau,
+  1913 lignes, et le changelog), message attendu, aucun code ni doc existante
+  touché. Les six sections demandées y sont : inventaire (43 tableaux, 469
+  lignes, 6 onglets et 6 panneaux de Settings, chaque contrôle avec son
+  « quand » et son accès), quatre parcours chiffrés, seize cas de savoir
+  dupliqué avec source unique proposée (dont « preset » qui nomme cinq
+  choses, les poids de priorité écrits seulement au changement de héros et
+  relus par Presets au montage, la perte de Presets qui compare un build
+  projeté à des jets réels, 32 clés `gs.*`), huit raisons du diagnostic,
+  navigation cible en deux variantes (A cinq onglets par tâche recommandée,
+  B six onglets renommés) avec maquettes ASCII, glossaire, carte des états et
+  quatorze lots U1 à U14 ordonnés, quatorze décisions D1 à D14. Quatre
+  affirmations recontrôlées dans le code (écriture des filtres au changement
+  de héros, bouton « Setup », contenu de la sauvegarde, relecture de la
+  priorité au montage de Presets). Contrôles sur HEAD : typecheck vert, tests
+  169 + 238 + 919, lint 8 avertissements, 0 erreur. Pas de release (rapport).
+  Suite : Sevih lit le rapport et répond aux décisions, puis lots U1 à U14
+  rédigés un par un ; aucun lot public ouvert.
+
 - **Relecture G87 (Fable 5.1) — carte de preset : icône + valeur sous les
   tuiles, colonne qualité entre tuiles et Reference, référence sans doublon,
   infobulles Score / Dmg / DmgS, validé.** gear-solver `dce4d4a` sur `main`,
