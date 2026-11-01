@@ -7,6 +7,41 @@
 
 ## 2026-11-01
 
+- **Relecture G101 (Fable 5.1) — U12 : Settings en six panneaux Setup, Data &
+  updates, Solver, Display, Backup, Advanced ; centre de mise à jour dans
+  Settings ; seuil de perte sur l'écran Presets, validé.** gear-solver
+  `6a601fe` sur `main`, 51 fichiers (`lib/settings.ts` : `SETTINGS_PANES`
+  réordonné, champ `legacy` du spec `choice` lu par `choiceOf` dans
+  `parseSetting` et `clampSetting`, `settingsPane.legacy = { debug, logs →
+advanced }`, réglage `resultRows` 5–15 défaut 12, `SOLVER_PANE_SETTINGS` à
+  trois, `DISPLAY_PANE_SETTINGS` ; `SettingsModal` rail et notes de pied,
+  props `display`, `update`, `onCheckUpdate`, `onInstallUpdate` ; `DataPane`
+  avec `UpdateCard` importé de `screens/home/` tel quel ; `DisplayPane`
+  nouveau ; `DebugPane` renommé `AdvancedPane` avec Reset onboarding et
+  `LogsPane` ; `Setter`, `stepBy`, `HelpText` montés dans `SettingsControls` ;
+  `SolverPane` réduit ; `PresetsScreen` : `Stepper` dans la phrase de
+  l'en-tête, prop `onLossWarnChange` ; `BuilderScreen` : `resultRows` et
+  `onResultRowsChange` d'App, poignée tenue par `clampSetting` ; `keys.ts` :
+  ligne `gs.builder.resultRows` générée par `settingKeys()`, libellés
+  « Display settings », « Result rows », « Preset loss warning », « Developer
+  toggles » ; Home sans `UpdateCard`, badge d'en-tête → `openSettings("data")`
+  ; tests `settingsPanes` nouveau, `settings`, `headerU8`, `presetCardOpen`,
+  `transfer` ajustés ; commentaires desktop `updater`, `api-handler`, `main`,
+  `repo-source` ; changelog ; manuel Using-the-App section Settings réécrite,
+  FAQ, Getting-Started, README, Capture-Pipeline, architecture / Architecture,
+  data-schema / Data-Schema, solver / Solver, reference / Engine-Reference),
+  message attendu, ni `package.json` ni lock, rien d'un autre lot. Vérifié :
+  `grep -rnE "Settings (›|→) (Debug|Logs)"` sur src, desktop, wiki, README,
+  docs vide ; « Settings → Data » ne reste que dans le changelog daté et
+  Roadmap ; la logique d'ouverture du modal inchangée ; Reset onboarding ferme
+  toujours le modal. Contrôles sur `6a601fe` : typecheck OK, tests 169 + 238
+  - 1074, lint 7 avertissements 0 erreur. Pour Sevih sur la build (après
+    U14) : Settings rouvre Advanced s'il était sur Debug ou Logs, le badge
+    « vX ready » ouvre Data & updates, « Data & updates » tient dans le rail,
+    Result rows et la poignée se suivent, le stepper de Presets recolore les
+    lignes. Suite : merge `main` → `private` (le `SolverPane` privé porte la
+    section « Game actions (experimental) » et son reset), puis G102 = U13.
+
 - **Relecture G100 (Fable 5.1) — U11 : onglets Heroes / Optimizer / Gear dans
   l'ordre cible, `gs.tab` migré, textes et manuel alignés, validé.** gear-solver
   `bf341e4` sur `main`, 29 fichiers (`design/Shell.tsx` : `Tab` et `TABS` =
