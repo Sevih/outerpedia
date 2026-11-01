@@ -7,6 +7,27 @@
 
 ## 2026-11-01
 
+- **Relecture G90 (Fable 5.1) — U2 : registre des réglages, Reset complet,
+  bandeau juste, Échap et dernier panneau de Settings, validé.** gear-solver
+  `01a5af6` sur `main`, 15 fichiers (`lib/settings.ts` et `hooks/useSetting.ts`
+  nouveaux, App, SolverPane, DebugPane, SettingsModal, orchestrator, log,
+  BuilderScreen, presetHeroes, test `settings.test.ts`, changelog, reference,
+  wiki), message attendu, aucun réglage déplacé, aucune clé renommée.
+  Conforme : neuf déclarations (dont `gs.settings.pane`), `clampSetting` /
+  `parseSetting` / `readSetting` / `resetSettings`, les deux lecteurs hors
+  React (`resolveWorkerCount`, `debugEnabled`) passent par `readSetting`,
+  défauts de props de BuilderScreen et replis de l'orchestrateur par
+  `settingDefault`, Reset typé qui exige un setter par réglage (compactCards
+  et presetLossWarn compris), bandeau « applies next solve » sur workers /
+  topN / topK seuls et groupe « Display » pour le reste, Échap, panneau
+  mémorisé sauf onboarding. Contrôles sur HEAD : typecheck vert, tests
+  169 + 238 + 943 (+18 renderer), lint 8 avertissements, 0 erreur ; grep des
+  lectures brutes `gs.solver` / `gs.debug` hors `lib/settings.ts` vide, aucun
+  défaut en dur restant. Laissé hors lot par l'agent : la note de pied du
+  panneau Solver dit encore « next solve » pour tout ; à reprendre en U12.
+  Suite (règle refonte) : merge dans private, pas de build, puis U3 ; aucun
+  lot public ouvert.
+
 - **Relecture G89 (Fable 5.1) — U1 de la refonte : vocabulaire unifié et
   textes corrigés sans rien déplacer, validé.** gear-solver `d704df7` sur
   `main`, 47 fichiers (31 sources et tests du renderer, changelog, todo,
