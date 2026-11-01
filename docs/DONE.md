@@ -7,6 +7,28 @@
 
 ## 2026-11-01
 
+- **Relecture G86 (Fable 5.1) — qualité du preset sur 138 et grades du +15
+  offensif / défensif sur la carte de preset, validé.** gear-solver `d3d4b55`
+  sur `main`, 7 fichiers (`lib/presets/presetQuality.ts` et son test
+  nouveaux, `PresetsScreen.tsx`, changelog, `docs/solver.md`,
+  `wiki/Solver.md`, `wiki/Using-the-App.md`), message attendu, rien hors
+  périmètre. Conforme : `PRESET_QUALITY_MAX` calculé depuis
+  `DEFAULT_RULES.reforge` (14 + 6 + 3 = 23, × 6 = 138), `presetQuality` somme
+  `gearPieceQuality` sur les six slots (manquant = 0, talisman / EE jamais
+  comptés, `investedMax` et `counted`), `presetRolls` par slot via
+  `singularityGrade` sur l'entrée `source: "singularity"` ; `PresetSummary`
+  sous la grille, `RollGrades` colore chaque lettre et nomme l'option dans le
+  `title`, `Metric` accepte un `ReactNode` et un `title`. Contrôles sur HEAD,
+  lancés par workspace : typecheck vert, tests 169 + 238 + 915 (+7 renderer),
+  `eslint .` 8 avertissements, 0 erreur, inchangé. Incident à part du lot :
+  le `package.json` racine du working tree avait été écrasé par celui du
+  desktop (mon test d'`asar extract-file` du matin, qui écrit dans le dossier
+  courant) ; l'agent l'a vu, ne l'a pas touché et a vérifié par workspace ;
+  le classifieur refuse que je le restaure, commande donnée à Sevih. Laissé à
+  Sevih : un coup d'œil aux trois lignes sur une carte réelle. Suite : G87
+  (icône + valeur sous les tuiles, bloc déplacé, référence sans doublon,
+  infobulles) puis release 1.28.0 avec les deux ; G87 ouvert.
+
 - **Relecture G85 (Fable 5.1) — cartes compactes à la hauteur de leur
   contenu, sans étirement de rangée, validé.** gear-solver `3a19899` sur
   `main`, 6 fichiers (`ResultGearDetail.tsx`, `BottomGearBand.tsx`,
