@@ -7,6 +7,24 @@
 
 ## 2026-11-01
 
+- **Relecture G92 (Fable 5.1) — U4 : une source pour les poids de priorité,
+  filtres par héros gardés entre les lancements, Presets en direct, validé.**
+  gear-solver `76757ad` sur `main`, 23 fichiers (`lib/heroPriority/weights.ts`
+  nouveau, heroFilters, evaluate, engine, orchestrator, reroll, App,
+  BuilderScreen, SubstatPriorityPanel, PresetsScreen, six tests, changelog,
+  STATUS, reference, solver, wiki), message attendu, rien hors périmètre.
+  Conforme : `hasPriority` seul prédicat (grep des copies vide),
+  `effectivePriority` et `latestSavedBuild` déménagés, `priorityOf` filtres →
+  build sauvé → null, `gs.solver.heroFilters` en localStorage possédé par
+  App (sessionStorage ignoré), écrit à chaque changement sans debounce avec
+  un garde-fou qui n'écrit pas un jeu tout juste chargé, Presets lit la prop,
+  Builder part de `priorityOf` sans filtres gardés. Contrôles sur HEAD :
+  typecheck vert, tests 169 + 238 + 959 (+7 renderer), lint 8
+  avertissements, 0 erreur. Laissé à Sevih (build finale) : poids réglés dans
+  le Builder visibles dans Presets sans changer de héros, filtres retrouvés
+  après relancement, même score pour un héros jamais réglé mais avec un build
+  sauvé. Suite : merge dans private, puis U5 ; aucun lot public ouvert.
+
 - **Relecture G91 (Fable 5.1) — U3 : rangs par défaut des héros et des
   presets posés par App à chaque import, validé.** gear-solver `8d2d8a6` sur
   `main`, 13 fichiers (`lib/storage/rankDefaults.ts` et
