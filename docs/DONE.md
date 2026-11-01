@@ -7,6 +7,28 @@
 
 ## 2026-11-01
 
+- **Relecture G93 (Fable 5.1) — U5 : états de vue gardés au changement
+  d'onglet (Inventory, Presets, Home), validé.** gear-solver `d5bf580` sur
+  `main`, 16 fichiers (usePersistedState codecs, scrapCard, cardOpen, Home,
+  Inventory, Presets, quatre tests, changelog, reference, solver, wiki),
+  message attendu, rien hors périmètre. Conforme : sept états en
+  `useSessionState` sous `gs.inv.selected` / `.selection` / `.selectMode`,
+  `gs.presets.classFilter` / `.sort` / `.forced` / `.open`, `gs.home.gearView`
+  (grep des clés dans les trois écrans) ; codecs tolérants (`jsonStringSet`,
+  `jsonOneOf`, `FORCED_CODEC` avec sa génération, `CHOICES_CODEC`) ; élagage
+  des uids disparus dès le premier rendu avec inventaire, pas sans ;
+  `cardOpen` reste la règle pure, les clics gardés sont tamponnés de la
+  génération de la commande gardée. Écart assumé : sessionStorage plutôt
+  qu'un état d'App pour la sélection Inventory, cohérent avec les filtres
+  voisins. Contrôles sur HEAD : typecheck vert, tests 169 + 238 + 977 (+18
+  renderer), lint 7 avertissements (un de moins : le setter du drill vient
+  d'un hook maison que la règle ne suit pas), 0 erreur ; nouvelle base lint
+  = 7. Laissé à Sevih (build finale) : sélection et pièce de l'Inventory
+  retrouvées après un aller-retour d'onglet, pièce vendue retirée après
+  capture, chips / tri / cartes de Presets gardés, vue de Home gardée, tout
+  revenu aux défauts après relancement. Suite : merge dans private, puis U6 ;
+  aucun lot public ouvert.
+
 - **Relecture G92 (Fable 5.1) — U4 : une source pour les poids de priorité,
   filtres par héros gardés entre les lancements, Presets en direct, validé.**
   gear-solver `76757ad` sur `main`, 23 fichiers (`lib/heroPriority/weights.ts`
