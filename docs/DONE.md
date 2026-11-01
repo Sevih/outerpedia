@@ -7,6 +7,25 @@
 
 ## 2026-11-01
 
+- **Relecture G91 (Fable 5.1) — U3 : rangs par défaut des héros et des
+  presets posés par App à chaque import, validé.** gear-solver `8d2d8a6` sur
+  `main`, 13 fichiers (`lib/storage/rankDefaults.ts` et
+  `hooks/useRankDefaults.ts` nouveaux, App, BuildsScreen, PresetsScreen,
+  builderFilters, test `rankDefaults.test.ts`, changelog, reference, solver,
+  wiki), message attendu, rien hors périmètre. Conforme : `rankDefaults` pur
+  (sans nouveauté, `changed` faux et objets d'entrée rendus tels quels ; une
+  clé vue sans rang jamais reclassée), `heroRankOrder` = CP décroissant comme
+  Builds, `presetRankOrder` = `presetGameOrder`, hook mince appelé par App
+  sur chaque inventaire, les deux effets retirés des écrans (grep vide de
+  `persistSeen` / `fillUnrankedByOrder` dans `screens/`). Change un résultat
+  (D13 de Sevih) : ≤ Lower et les holds de presets agissent dès le premier
+  solve. Contrôles sur HEAD : typecheck vert, tests 169 + 238 + 952 (+9
+  renderer), lint 8 avertissements, 0 erreur. À suivre : le calcul de CP est
+  recopié de BuildsScreen dans `heroRankOrder`, à factoriser plus tard (le
+  rapport prévoit les composants uniques en U10). Laissé à Sevih : à la build
+  finale, un solve ≤ Lower sans ouvrir Builds. Suite : merge dans private,
+  puis U4 ; aucun lot public ouvert.
+
 - **Relecture G90 (Fable 5.1) — U2 : registre des réglages, Reset complet,
   bandeau juste, Échap et dernier panneau de Settings, validé.** gear-solver
   `01a5af6` sur `main`, 15 fichiers (`lib/settings.ts` et `hooks/useSetting.ts`
