@@ -7,6 +7,35 @@
 
 ## 2026-11-02
 
+**Relecture G106 (Fable 5.1) — U14, manuel et `docs/solver.md` § 4 réécrits pour la navigation 2.0, C17 à C20 soldés, validé**
+Commit 6e778c9 (gear-solver, main), un seul commit, message attendu, huit fichiers, tous documentaires :
+`wiki/Using-the-App.md`, `wiki/Getting-Started.md`, `wiki/Home.md`, `wiki/FAQ.md`, `README.md`, `docs/solver.md`,
+`wiki/Solver.md`, `docs/changelog.md` ; aucun `.ts` / `.tsx`, ni `package.json`. `docs/todo.md` ne portait aucun item
+sur le manuel ni sur C17-C20 (grep vide), rien à retirer. Manuel réécrit dans l'ordre des onglets (intro, A typical
+session en dix points, Heroes, Optimizer en dix sous-sections, Presets, Worklist, Gear, Settings, The menu bar, Keeping
+things up to date), glossaire 5.c appliqué. Contrôlé contre le code : les vingt libellés cités existent dans le fichier
+annoncé (Search hero…, Solve / Cancel / Loading reco… / Filter / reset filters / Maxed only / Transistone potential,
+Load reco / Set priority / Use CP, + OR / Match:, Don't take from… / Min quality, columns / height, Save build + filter
+set / Save as local preset…, Replace in worklist, Apply to snapshot, Step by step in Settings › Setup, Re-check / Close,
+Apply locally / Apply all / Remove, Copy as local preset / Lock / Locked / Optimize preset →) ; Score | CP est bien un
+contrôle segmenté sans ▾ (`SolveModeControl`), +10R6 = mode `classic` par défaut, Result rows 5–15 défaut 12, menu
+File / View / Help conforme à `menu.ts`, filtres de Heroes et état des cartes Presets en sessionStorage (le manuel dit
+« reset on the next launch »), badge « Preset » des cartes Worklist. Liens d'ancre : 18 liens `Page#ancre` du wiki,
+README et docs recalculés par script (règle GitHub), 0 cassé. Greps du lot : noms d'onglets périmés seulement dans
+`wiki/Roadmap.md` (jalons historiques), les mentions « ex-onglets » / « formerly » et le type `Inventory` ; mots bannis
+seulement dans `wiki/Engine-Reference.md` (hors périmètre : « outfit » l. 858 et 872, « filter presets » l. 838, faux
+positif « tar**get preset** » l. 217) ; `crc` / `chd` seulement dans la liste historique de `LEGACY_STAT_KEY_RENAME`.
+`docs/solver.md` § 4 : chaque panneau avec son fichier et ses actions de reducer ; C17 (Solve devient Cancel, Filter / ✕,
+reset filters → `filterDefaults`), C18 (clés moteur), C19 (Require / Exclude, cycle off → 2pc → 4pc → off, + OR),
+C20 (`keepTopUnion` + `floorScorers`, gate `minQuality`, `pruneDominatedForCp`, `computeFinalStatsFromPrefix` /
+`aggregatePrefixBuckets`) : tous ces noms existent dans `engine.ts`. Contrôles sur 6e778c9 : typecheck OK, tests
+169 + 244 + 1098, lint 7 avertissements, 0 erreur. À Sevih : relire le manuel sur le wiki publié (longueur de la section
+Optimizer). Suites notées par l'agent, hors de ce lot documentaire, pour un lot code ultérieur : « Apply locally »
+(Worklist) vs « Apply to snapshot », « outfit » dans `presetOptimizeNote` et dans le texte d'attente de Presets,
+infobulle du bouton Settings qui cite « debug, logs » (`Shell.tsx`), commentaire « self-dismisses » de
+`SettingsModal.tsx`, les trois mots bannis d'`Engine-Reference.md`. Dernier lot de la refonte : aucun lot public
+ouvert ; suite = merge main → private et build 1.28.0-private.3 pour les tests de Sevih.
+
 - **Relecture G105 (Fable 5.1) — D14 : menu Electron minimal sans
   rechargement, outils de développement et guide dans le menu, validé.**
   gear-solver `4169f98` sur `main`, 9 fichiers (`apps/desktop/src/menu.ts`
