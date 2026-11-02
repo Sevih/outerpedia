@@ -7,6 +7,40 @@
 
 ## 2026-11-02
 
+**Relecture G108 (Fable 5.1) — version du jeu publiée par outerpedia servie par `/api/game-version`, le renderer ne fetch plus GitHub (CSP), validé**
+Commit 7a68159 (gear-solver, main), message attendu ; sept fichiers : `apps/desktop/src/api-handler.ts`,
+`game-version.ts` (nouveau), `repo-source.ts` (`GAME_VERSION_URL` à côté des autres URLs du dépôt outerpedia),
+`apps/renderer/src/game-version.ts`, deux tests, changelog ; ni `package.json` ni CSP. Lu en entier : la route répond
+toujours 200, `{ resVersion: null, at: null }` sur échec réseau, statut non `ok`, JSON illisible ou sans
+`resVersion` texte, un seul cache de 10 min par handler et jamais d'échec en cache ; le client renderer garde sa
+signature et son cache, et refuse un `resVersion` non texte ; `grep -rn "raw.githubusercontent" apps/renderer/src`
+vide. Constat utile de l'agent, vérifié dans `Shell.tsx` : `gameVersion` ne s'affiche que dans le sous-titre de
+l'en-tête (« Outerpedia · vX · game Y »), pas dans Settings › Setup comme le lot le supposait ; ce sous-titre n'a
+jamais montré « game Y » dans une build depuis la CSP du 27/06. Contrôles sur HEAD (bd0ae4c, G107 au-dessus) :
+typecheck OK, 169 + 247 + 1110, lint 7 avertissements, 0 erreur. À Sevih (build privée suivante) : plus de
+violation CSP en console, le sous-titre porte la version live.
+
+**Relecture G107 (Fable 5.1) — barre de qualité cliquable, cartes de l'Optimizer en largeur fluide avec en-tête à deux lignes, popovers remontés sur la ligne 1, validé**
+Commit bd0ae4c (gear-solver, main), message attendu ; quatorze fichiers : `design/GearCard.tsx`,
+`screens/builder/BottomGearBand.tsx`, `screens/builder/BuilderToolbar.tsx`, `screens/gear/OverviewView.tsx`, quatre
+tests (deux nouveaux), changelog, `docs/solver.md` + `wiki/Solver.md`, la phrase du manuel autorisée, et les index
+de tests de `docs/reference.md` / `wiki/Engine-Reference.md` (deux lignes ajoutées, un compte : accepté, c'est leur
+rôle). Lu en entier : `QualityBar` exporté, une tranche = un `button` aux mêmes proportions, `title` des boutons de
+palier, inerte sans `onDrill` ou à zéro ; bande en `grid-cols-[repeat(auto-fit,minmax(max(224px,calc((100%_-_24px)/4)),1fr))]`
+(320 px en carte pleine), prop `fluid` sur `GearCardPanel` et `ResultPairDetail` (`w-full`), la carte de Gear › Pieces
+et les infobulles gardent `w-80` / `w-56` ; en-tête compact sur deux lignes « 6★ | T3 » puis « +15 » (« 6★ » seul
+sans breakthrough), nom en `wrap-break-word`, nom plein en `line-clamp-2`, slot et classe en deux `span` ; les sept
+popovers dans un groupe `ml-auto flex-wrap` à droite de la ligne 1 (ligne 1 en `flex-wrap`), Sets passe en
+`align="right"` comme Effects, ligne 2 = Reforge, Maxed only, Transistone, reset filters, `ToolbarDivider` retiré.
+Tailwind 4.3 : `opacity-92` et `wrap-break-word` existent (CSS généré contrôlé par l'agent). Écart assumé et
+accepté : le `max(…, un quart de la bande)` plafonne la grille à quatre colonnes pour garder le 4 × 2 du jeu sur
+grand écran (le lot disait `minmax(224px, 1fr)` nu, qui aurait mis sept cartes compactes sur une rangée dès
+1 616 px). Contrôles sur bd0ae4c : typecheck OK, 169 + 247 + 1110 (renderer +12 : 3 + 3 + 6 nouveaux), lint 7
+avertissements, 0 erreur. À Sevih (build privée suivante) : cartes à ~224 et ~400 px de colonne sans débordement ni
+chevauchement, grille 4 × 2 sur fenêtre large, popovers renvoyés à la ligne en fenêtre étroite et Sets / Effects
+ouverts vers la gauche, clic sur les tranches de la barre de qualité. Reste G109 (défaut du Scrap), qui attendait
+ce commit.
+
 **Relecture F30 (Fable 5.1) — quick : notes de patch de l'onglet Discord relues depuis `posts.json` (mtime), liste rafraîchie par « recharger la liste », validé**
 Commit fc27282c, un seul, message attendu ; huit fichiers, tous sous `scripts/quick/` plus `docs/DONE.md` ; ni
 `package.json` ni `pnpm-lock.yaml`, `src/lib/data/patch-posts.ts` et `scripts/get-news.ts` intacts. Lu en entier :
