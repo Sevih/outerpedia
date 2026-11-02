@@ -180,6 +180,7 @@ import {
   stopJob,
   type Planned,
 } from './patch';
+import { patchPostsReader } from './patch-posts';
 import { assemblePage, resolveUiFile } from './ui-serve';
 import { childEnv, draftModel, proposeDraft, runClaude } from './claude-draft';
 import { acquirePatchJob } from '@/lib/admin/patch-runner';
@@ -255,13 +256,14 @@ const discord = discordSession({
 });
 
 /**
- * Les notes officielles, chargées à la PREMIÈRE demande de l'onglet Discord :
- * 7 Mo de JSON que les quatre autres gestes ne lisent jamais, et qui n'ont pas
- * à peser sur le démarrage.
+ * Les notes officielles, lues à la PREMIÈRE demande de l'onglet Discord (7 Mo
+ * de JSON que les autres gestes ne lisent jamais), puis relues dès que
+ * `posts.json` change sur le disque : un « Get news » se voit sans redémarrer.
+ * `QUICK_PATCH_POSTS` pointe un autre fichier (banc sur une copie).
  */
-let notePosts: Promise<NotePost[]> | null = null;
-const patchPosts = (): Promise<NotePost[]> =>
-  (notePosts ??= import('@/lib/data/patch-posts').then((m) => m.getPatchPosts()));
+const patchPosts: () => Promise<NotePost[]> = patchPostsReader(
+  process.env.QUICK_PATCH_POSTS ? resolve(process.env.QUICK_PATCH_POSTS) : undefined,
+);
 
 /** Images des notes : `get-news` les dépose ici, `pnpm images` les pousse sur R2. */
 const NOTE_IMAGES = resolve('.assets-staging/images/patch-notes');

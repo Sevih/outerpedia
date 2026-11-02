@@ -13312,7 +13312,11 @@ describe('Patch — la page, sur le vrai markup', () => {
       git: { branch: 'main', ahead: 2, behind: 0 },
     });
     expect(page.el('journal').dataset.state).toBe('ok');
-    expect(page.text(page.el('journal-last'))).toBe('notes de patch (getNews) : terminé.');
+    // L'issue du serveur reste, la ligne pour l'onglet Discord la suit.
+    expect(page.el('log').textContent).toContain('notes de patch (getNews) : terminé.');
+    expect(page.text(page.el('journal-last'))).toBe(
+      'notes de patch à jour : onglet Discord, « recharger la liste »',
+    );
     expect(page.text(page.el('push-count'))).toBe('2');
     expect(page.el('push').disabled).toBe(false);
     expect(page.el('p-get-news').classList.contains('busy')).toBe(false);

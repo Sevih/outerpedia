@@ -354,7 +354,21 @@ $('p-refresh').onclick = () => {
 };
 
 // Pas de `outdated()` : le scrape ne touche pas la proposition d'extraction.
-$('p-get-news').onclick = () => run({ ...NEWS, button: $('p-get-news'), payload: {} });
+// L'onglet Discord relit `posts.json` à son prochain état : le journal le dit,
+// sans y basculer.
+$('p-get-news').onclick = () =>
+  run({
+    ...NEWS,
+    button: $('p-get-news'),
+    payload: {},
+    after: (data) => {
+      if (data.ok)
+        log(
+          [...(data.log ?? []), 'notes de patch à jour : onglet Discord, « recharger la liste »'],
+          true,
+        );
+    },
+  });
 
 $('p-dry').onclick = () => {
   const box = $('p-review');

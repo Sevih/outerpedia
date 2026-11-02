@@ -450,15 +450,41 @@ $('d-emoji-guilds').onchange = async (e) => {
   await previewDiscord();
 };
 
+/** La note choisie d'office au dernier remplissage : la page la suit tant qu'on n'en change pas. */
+let dAutoNote = '';
+
+/**
+ * Les notes officielles de l'état lu, dans `d-note`. La note choisie est
+ * gardée si elle y est encore ; sinon, ou si c'était le choix d'office, la
+ * note de patch la plus récente — c'est elle qu'on résume. Rend vrai si la
+ * note sélectionnée a changé.
+ */
+function fillNotes() {
+  const before = $('d-note').value;
+  const notes = dState.notes ?? [];
+  $('d-note').innerHTML = notes
+    .map((n) => `<option value="${esc(n.id)}">${esc(n.date)} · ${esc(n.title)}</option>`)
+    .join('');
+  const patch = notes.find((n) => n.type === 'update');
+  const kept = before !== dAutoNote && notes.some((n) => n.id === before);
+  if (kept) $('d-note').value = before;
+  else if (patch) $('d-note').value = dAutoNote = patch.id;
+  return $('d-note').value !== before;
+}
+
 /**
  * La liste des serveurs du bot, puis les salons et les emojis qui en
- * dépendent. `reload` (« recharger la liste ») : le serveur local oublie
- * tout ce qu'il a lu de Discord, la page aussi — un serveur où le bot
- * vient d'être invité apparaît sans redémarrer l'outil.
+ * dépendent, et les notes officielles. `reload` (« recharger la liste ») : le
+ * serveur local oublie tout ce qu'il a lu de Discord, la page aussi — un
+ * serveur où le bot vient d'être invité apparaît sans redémarrer l'outil ; les
+ * notes, relues par le serveur dès que `posts.json` change, suivent un
+ * « Get news » de la même façon.
  */
 async function loadServers(reload) {
   dState = await (await fetch(`/api/discord/state${reload ? '?reload=1' : ''}`)).json();
   if (reload) gEmojis.clear();
+  // Au premier chargement, `loadDiscord` affiche la note lui-même.
+  if (fillNotes() && reload) await loadNote();
   $('d-hint').textContent = [dState.hint, dState.palette?.error].filter(Boolean).join(' — ');
   const guilds = dState.guilds ?? [];
   // Messages gardés par une version d'avant le choix du serveur : ils
@@ -1232,12 +1258,6 @@ async function loadDiscord() {
   $('d-request-k').max = dState.requestExamples.max;
   $('d-request-k').value = mem.get('requestExamples', dState.requestExamples.default);
   $('d-request-k').value = requestCount();
-  $('d-note').innerHTML = dState.notes
-    .map((n) => `<option value="${esc(n.id)}">${esc(n.date)} · ${esc(n.title)}</option>`)
-    .join('');
-  // La note de patch la plus récente sous la main : c'est elle qu'on résume.
-  const patch = dState.notes.find((n) => n.type === 'update');
-  if (patch) $('d-note').value = patch.id;
 
   await Promise.all([loadNote(), previewDiscord()]);
 

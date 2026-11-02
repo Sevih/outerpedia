@@ -7,6 +7,59 @@
 
 ## 2026-11-02
 
+- **F30 · quick : les notes de patch de l'onglet Discord suivent
+  `posts.json` sur le disque.** Après « Get news » (onglet Patch,
+  `pnpm getNews`), la liste des notes officielles de l'onglet Discord ne bougeait
+  pas : `server.ts` mémorisait UNE promesse sur `@/lib/data/patch-posts`, dont
+  l'import JSON statique fige `posts.json` au chargement, et `discord.js` ne
+  remplissait `d-note` qu'à l'initialisation ; il fallait relancer
+  `pnpm quick`. Nouveau module `scripts/quick/patch-posts.ts` :
+  `patchPostsReader(file, deps)` lit `data/patch-notes/posts.json` (le chemin
+  d'`OUT_DIR` de
+  `get-news.ts`) par `readFile` + `JSON.parse`, dans un cache tenu par la
+  mtime et la taille (`stat` à chaque appel, relecture seulement si l'une
+  change ; la promesse est gardée, deux demandes simultanées partagent la
+  lecture) ; fichier absent, illisible ou sans tableau `posts` : `[]` et un
+  `console.warn` `[quick] notes de patch : …`, une fois par état du fichier,
+  jamais de 500. `server.ts` : `patchPosts` est ce lecteur (toujours lu à la
+  première demande seulement), et `QUICK_PATCH_POSTS` pointe un autre fichier
+  pour un banc sur copie ; `/api/discord/state`, `/api/discord/note` et le
+  reste ne changent pas, `?reload=1` non plus. `src/lib/data/patch-posts.ts`
+  et le site ne bougent pas. `discord.js` : le remplissage de `d-note` passe
+  de `loadDiscord` à `loadServers(reload)` (`fillNotes`), la liste est donc
+  reconstruite à chaque état lu, « recharger la liste » compris ; la note
+  choisie est gardée si elle existe encore, sinon la plus récente de type
+  `update` ; après un reload, `loadNote()` n'est rappelée que si la sélection
+  a changé. Écart assumé à la lettre du lot, pour tenir la manipulation qu'il
+  demande (« la nouvelle note apparaît et est sélectionnée ») : une sélection
+  restée sur le choix d'office (`dAutoNote`) suit la nouvelle note de patch
+  la plus récente ; seule une note choisie à la main est gardée. Le bouton
+  `d-reload` de `discord.html` gagne une infobulle (« Relit les serveurs du
+  bot, leurs emojis et les notes officielles »), libellé et mise en page
+  inchangés. `patch.js` : à la fin d'un « Get news » réussi, le journal finit
+  sur « notes de patch à jour : onglet Discord, « recharger la liste » »
+  (l'issue du serveur reste au-dessus), sans bascule d'onglet ; le test du
+  vrai markup de `ui-serve.test.ts` attend cette dernière ligne. Vérifié :
+  `patch-posts.test.ts` (6 tests, `posts.json` dans un `mkdtemp`, mtime posée
+  par `utimes`, lectures comptées par un `readFile` injecté : lu une fois, pas
+  relu sans changement, relu sur mtime puis sur taille seule, lecture
+  partagée, absent → `[]` et un seul avertissement, illisible puis réparé) ;
+  banc sur un quick isolé (port 4791, clés vidées, `QUICK_PATCH_POSTS` sur une
+  copie) : `GET /api/discord/state` rend 40 notes, une note ajoutée à la copie
+  apparaît en tête au GET suivant sans redémarrer, `/api/discord/note?id=…` la
+  sert, copie retirée → 200 et liste vide avec un avertissement, remise → la
+  liste revient ; vrai `posts.json` jamais touché. Pas de capture avant /
+  après (non exigée) ; aucun changement visuel hors infobulle.
+  `NODE_ENV=development pnpm exec vitest run scripts/quick` : 9 fichiers, 1183
+  tests ; `pnpm typecheck` et `pnpm lint` sans sortie d'erreur (code 0) ;
+  `pnpm test` : « Tests 4494 passed
+  (4494) ». Pour Sevih, sur son quick (relancé une fois pour charger le
+  nouveau serveur) : Patch › Get news, le journal finit sur la ligne pour
+  Discord ; puis Discord › menu « Emojis de » › « recharger la liste » : la
+  nouvelle note apparaît en tête et est sélectionnée (si la note affichée
+  était celle choisie d'office), son aperçu s'affiche. `docs/TODO.md` : aucun
+  item.
+
 **Relecture G106 (Fable 5.1) — U14, manuel et `docs/solver.md` § 4 réécrits pour la navigation 2.0, C17 à C20 soldés, validé**
 Commit 6e778c9 (gear-solver, main), un seul commit, message attendu, huit fichiers, tous documentaires :
 `wiki/Using-the-App.md`, `wiki/Getting-Started.md`, `wiki/Home.md`, `wiki/FAQ.md`, `README.md`, `docs/solver.md`,
