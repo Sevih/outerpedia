@@ -7,6 +7,28 @@
 
 ## 2026-11-02
 
+- **Relecture G105 (Fable 5.1) — D14 : menu Electron minimal sans
+  rechargement, outils de développement et guide dans le menu, validé.**
+  gear-solver `4169f98` sur `main`, 9 fichiers (`apps/desktop/src/menu.ts`
+  nouveau : `appMenuTemplate` pur, File › Quit, View › zoom ×3, plein écran,
+  Toggle developer tools F12 + jumeau caché Ctrl+Shift+I, Help › User guide,
+  Report an issue, About ; `main.ts` : `Menu.setApplicationMenu` au
+  `whenReady` avant la fenêtre, `showAbout` par `dialog.showMessageBox`
+  (versions app, Electron, Chromium), `autoHideMenuBar` gardé ; aide de
+  `debugSolver` dans `lib/settings.ts` ; test `apps/desktop/test/menu.test.ts`
+  (6 tests sans Electron) ; changelog, architecture / Architecture, FAQ
+  (« Ctrl+R (or F5) does nothing »), Using-the-App (« The menu bar »)),
+  message attendu, ni `package.json` ni lock, rien d'un autre lot. Vérifié :
+  aucun rôle `reload` / `forceReload` ni accélérateur en `+R` / `F5` dans le
+  gabarit (le test parcourt tout l'arbre) ; la table des tests et l'arbre de
+  reference / Engine-Reference ne listent aucun test ni fichier du desktop,
+  donc rien n'y manquait. Contrôles sur `4169f98` : typecheck OK, tests 169
+  - 244 + 1098, lint 7 avertissements 0 erreur. Pour Sevih sur la build
+    (D14 dit « à confirmer en lançant l'app ») : Alt montre la barre, F12 ouvre
+    les outils, Ctrl+R et F5 n'ont plus d'effet, Help › About affiche les
+    versions. Suite : merge `main` → `private`, puis G106 = U14 (manuel et
+    `docs/solver.md` § 4), dernier lot de la refonte avant la build privée.
+
 - **Relecture G104 (Fable 5.1) — D11 + D12 : perte des presets en jets
   réels des deux côtés, verrou de preset sans effet sur le pool de gemmes,
   validé.** gear-solver `56083e2` sur `main`, 16 fichiers
