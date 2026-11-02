@@ -7,6 +7,34 @@
 
 ## 2026-11-02
 
+- **Relecture G104 (Fable 5.1) — D11 + D12 : perte des presets en jets
+  réels des deux côtés, verrou de preset sans effet sur le pool de gemmes,
+  validé.** gear-solver `56083e2` sur `main`, 16 fichiers
+  (`lib/presets/evaluate.ts` : `GemAllocationPick`, `gemAllocationOverride`
+  dont `eeGemOverride` n'est plus qu'un cas, `bestKnownFor` recompose le
+  build sauvé depuis `build.pieceUids` tel que capturé avec les gemmes de
+  `gemAllocation` quand elle en porte, repli `current` si une pièce manque,
+  `finalStats` stocké jamais lu ; `lib/solver/gems.ts` :
+  `GemPoolOptions.presetBlocked` supprimé ; `engine.ts` : `buildGemPool` sans
+  lui, `presetBlocked` ne garde que le pool de pièces (`allow()`) ;
+  `presetHolds.ts`, `types.ts`, `eeGems.ts` : commentaires ; `PresetsScreen` :
+  phrase d'en-tête et `title` de la perte ; tests `presetLossRealRolls`
+  nouveau, `presetHolds` (le bloc « gem pool with presetBlocked » devient
+  « gem pool ignores preset locks », plus un test d'engine : le Talisman
+  verrouillé sort du pool de pièces, ses gemmes restent notées), `presets`
+  ajusté ; changelog, reference / Engine-Reference, solver / Solver,
+  Using-the-App), message attendu, ni `package.json` ni lock, rien d'un autre
+  lot. Vérifié : plus aucune lecture de `build.finalStats` dans
+  `evaluate.ts`, plus de `presetBlocked` dans `gems.ts` ni dans l'appel du
+  pool de gemmes, le test (a) affirme une perte nulle pour un preset fait des
+  pièces du build sauvé alors que ses stats stockées sont fausses (ATK ×10).
+  Contrôles sur `56083e2` : typecheck OK, tests 169 + 238 + 1098, lint 7
+  avertissements 0 erreur. Pour Sevih sur la build (après U14) : dans
+  Presets un preset identique au build sauvé du héros affiche 0 % (plus de
+  perte venue de la projection) ; l'Optimizer propose à nouveau les gemmes du
+  Talisman d'un preset verrouillé, sans toucher à ses pièces. Suite : merge
+  `main` → `private`, puis G105 = D14 (menu Electron).
+
 - **Relecture G103 (Fable 5.1) — D5 : mode de reforge et Transistone par
   défaut dans Settings › Solver, surcharge par héros gardée avec ses filtres,
   migration `useReforged` écrite une fois, validé.** gear-solver `6a830e0`
