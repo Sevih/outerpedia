@@ -7,6 +7,21 @@
 
 ## 2026-11-02
 
+**Relecture G109 (Fable 5.1) — un filter set au choix comme défaut de Gear › Scrap, persistant et sauvegardé, lien de rappel à son nom, validé**
+Commit f3fca0f (gear-solver, main), message attendu ; quatorze fichiers : `lib/storage/inventoryFilterPresets.ts`
+(seul propriétaire de `gs.gear.scrap.default` : `scrapDefaultPreset()`, `setScrapDefault()`, Delete du défaut →
+l'intégré), `lib/storage/keys.ts` (clé en `backup: true`, règle `value`), `screens/inventory/FilterModal.tsx`
+(`scrapMode`, bouton **Use for Scrap** / **Scrap default ✓** par la fonction pure `scrapDefaultButton`, suffixe
+« (Scrap default) », `title` de Delete), `screens/inventory/InventoryScreen.tsx` (`scrapDefaultFilters()` lit le
+réglage, le lien porte le nom du set, relu à l'ouverture et à la fermeture de la modale), quatre tests, changelog,
+manuel (sections Scrap et Backup), `docs/architecture.md` + miroir, index de tests `docs/reference.md` + miroir ;
+ni `package.json`. Lu en entier : la retombée sur l'intégré se fait à la lecture (clé absente, illisible, `id`
+inconnu ou importé d'ailleurs), jamais à l'import ; le clic Use for Scrap n'applique rien au draft ; Pieces ne
+montre pas le bouton. Contrôles sur f3fca0f : typecheck OK, 169 + 247 + 1119 (+9 renderer), lint 7 avertissements,
+0 erreur. À Sevih (build privée suivante) : Gear › Scrap › Filter, choisir un set, Use for Scrap, fermer, changer
+d'onglet et revenir, relancer l'app : Scrap s'ouvre dessus et le lien porte son nom. Aucun lot ouvert ; suite :
+merge main → private et build 1.28.0-private.4 (G107 à G109).
+
 **Relecture G108 (Fable 5.1) — version du jeu publiée par outerpedia servie par `/api/game-version`, le renderer ne fetch plus GitHub (CSP), validé**
 Commit 7a68159 (gear-solver, main), message attendu ; sept fichiers : `apps/desktop/src/api-handler.ts`,
 `game-version.ts` (nouveau), `repo-source.ts` (`GAME_VERSION_URL` à côté des autres URLs du dépôt outerpedia),
