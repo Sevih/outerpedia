@@ -7,6 +7,23 @@
 
 ## 2026-11-02
 
+**Relecture F30 (Fable 5.1) — quick : notes de patch de l'onglet Discord relues depuis `posts.json` (mtime), liste rafraîchie par « recharger la liste », validé**
+Commit fc27282c, un seul, message attendu ; huit fichiers, tous sous `scripts/quick/` plus `docs/DONE.md` ; ni
+`package.json` ni `pnpm-lock.yaml`, `src/lib/data/patch-posts.ts` et `scripts/get-news.ts` intacts. Lu en entier :
+`patch-posts.ts` (lecteur injectable, cache par mtime + taille, promesse partagée, avertissement une fois par état du
+fichier, jamais de 500), `server.ts` (le lecteur remplace la promesse mémorisée sur l'import statique ;
+`QUICK_PATCH_POSTS` pour un banc sur copie), `discord.js` (`fillNotes` dans `loadServers`, note gardée si choisie à
+la main, sinon la plus récente de type `update` ; `loadNote()` rappelée après un reload seulement si la sélection a
+changé — écart assumé et justifié : une sélection restée sur le choix d'office suit la nouvelle note, ce que la
+manipulation du lot demandait), `discord.html` (infobulle du bouton, mise en page inchangée), `patch.js` (ligne finale
+du journal après un « Get news » réussi ; `log()` de `lib.js` re-rend le journal en entier, donc `[...data.log, ligne]`
+ne doublonne rien, ce que le test du vrai markup de `ui-serve.test.ts` fixe). Contrôles sur fc27282c : typecheck et
+lint sans erreur, `pnpm test` 4494 tests (258 fichiers), `NODE_ENV=development pnpm exec vitest run scripts/quick`
+1183 tests (9 fichiers), dont les 6 nouveaux de `patch-posts.test.ts`. Banc de l'agent (quick isolé, copie de
+`posts.json`) relu dans le DONE, non rejoué : le test unitaire couvre le cache, et une relecture sur le vrai fichier
+n'apporterait rien de plus. À Sevih : relancer son quick une fois (nouveau serveur), puis Patch › Get news, et dans
+Discord « recharger la liste » : la nouvelle note apparaît en tête et est sélectionnée. Aucun lot ouvert.
+
 - **F30 · quick : les notes de patch de l'onglet Discord suivent
   `posts.json` sur le disque.** Après « Get news » (onglet Patch,
   `pnpm getNews`), la liste des notes officielles de l'onglet Discord ne bougeait
