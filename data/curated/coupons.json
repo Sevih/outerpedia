@@ -1,5 +1,13 @@
 [
   {
+    "code": "GWOSHI",
+    "start": "2026-10-09",
+    "end": "2026-11-30",
+    "description": {
+      "SYS_ASSET_FREE_CRYSTAL": "1500"
+    }
+  },
+  {
     "code": "THANKU1ST",
     "start": "2026-10-21",
     "end": "2026-12-20",
@@ -388,7 +396,7 @@
   {
     "code": "HAPPYNEW2026",
     "start": "2026-02-13",
-    "end": "2026-09-30",
+    "end": "2026-11-30",
     "description": {
       "SYS_ASSET_FREE_CRYSTAL": "1500",
       "COSTUME_22": "1"
