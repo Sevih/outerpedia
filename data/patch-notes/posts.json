@@ -1,6 +1,36 @@
 {
   "posts": [
     {
+      "id": 12197,
+      "date": "2026-11-04",
+      "modified": "2026-11-04T01:35:54",
+      "slug": "notice-update-on-the-11-3-maintenance-delay",
+      "lang": "en",
+      "type": "notice",
+      "title": "[Notice] Update on the 11/3 Maintenance Delay",
+      "content": "<figure class=\"size-full\"><img width=\"658\" height=\"200\" src=\"/images/patch-notes/6751a61933da5e30.webp\" alt=\"\" style=\"max-width:100%;height:auto;\"></figure>\n\n<p>Dear Masters,</p>\n<p>We sincerely apologize for the inconvenience and uncertainty caused by the delay in confirming the update maintenance schedule.</p>\n<p>Following our previous announcement, we would like to share the latest information on the postponement of the 11/3 (Tue) update maintenance.</p>\n<p>To help you understand the current situation, we have outlined the App Store review process and the status of our submission below.</p>\n<p>■ App Store Review Process</p>\n<p>[Prepare for Submission] → [Waiting for Review] → [In Review] → [Ready for Distribution]</p>\n<p>The update has been submitted to Apple and is currently “Waiting for Review.” Apple has received our submission but has not yet begun reviewing it, so it has not moved to the “In Review” stage.</p>\n<p>We are closely monitoring the review status for any changes. However, we do not yet know when the review will begin or be completed, so we are unable to confirm a revised maintenance schedule at this time.</p>\n<p>Once the review is complete and the maintenance schedule is confirmed, we will share the details in a separate announcement.</p>\n<p>Once again, we sincerely apologize for the extended wait.</p>\n<p>Thank you.</p>\n"
+    },
+    {
+      "id": 12196,
+      "date": "2026-11-04",
+      "modified": "2026-11-04T01:35:37",
+      "slug": "%ea%b3%b5%ec%a7%80-11-3%ed%99%94-%ec%97%85%eb%8d%b0%ec%9d%b4%ed%8a%b8-%ec%a0%90%ea%b2%80-%ec%9d%bc%ec%a0%95-%ec%a7%80%ec%97%b0-%ea%b4%80%eb%a0%a8-%ec%b6%94%ea%b0%80-%ec%95%88%eb%82%b4",
+      "lang": "kr",
+      "type": "notice",
+      "title": "[공지] 11/3(화) 업데이트 점검 일정 지연 관련 추가 안내",
+      "content": "<figure class=\"size-full\"><img width=\"658\" height=\"200\" src=\"/images/patch-notes/90db829624102f79.webp\" alt=\"\" style=\"max-width:100%;height:auto;\"></figure>\n\n<p>안녕하세요, 오너 여러분.<br>GM 아메입니다.</p>\n<p>업데이트 점검 일정 확정이 늦어져 오너 여러분께 불편과 심려를 끼쳐드린 점 진심으로 사과드립니다.</p>\n<p>이전 공지를 통해 안내해 드린 11/3(화) 업데이트 점검 일정 지연과 관련하여, 현재 진행 상황을 추가로 안내해 드립니다.</p>\n<p>업데이트를 기다리고 계신 오너 여러분께 현재 상황을 설명해 드리고자, 애플 앱스토어 검수 절차와 진행 단계를 안내해 드립니다.</p>\n<p>■ 애플 앱스토어 검수 절차</p>\n<p>[제출 준비 중] → [심사 대기 중] → [심사 중] → [배포 준비 완료]</p>\n<p>현재 업데이트 빌드는 제출을 완료한 후 ‘심사 대기 중’ 상태에 머물러 있으며, 애플에서 실제로 앱을 검토하는 ‘심사 중’ 단계는 아직 시작되지 않았습니다.</p>\n<p>운영팀은 심사 진행 상황과 상태 변경 여부를 지속적으로 확인하고 있습니다. 다만, 심사 시작 및 완료 시점이 확정되지 않아 정확한 업데이트 점검 일정을 안내해 드리기 어려운 점 양해 부탁드립니다.</p>\n<p>검수가 완료되고 업데이트 점검 일정이 확정되는 대로 별도 공지를 통해 안내해 드리겠습니다.</p>\n<p>오랜 시간 기다려 주시는 오너 여러분께 다시 한번 사과드립니다.</p>\n<p>감사합니다.</p>\n"
+    },
+    {
+      "id": 12198,
+      "date": "2026-11-04",
+      "modified": "2026-11-04T01:35:55",
+      "slug": "%e3%80%90%e3%81%8a%e7%9f%a5%e3%82%89%e3%81%9b%e3%80%9111-3%e7%81%ab%e3%82%a2%e3%83%83%e3%83%97%e3%83%87%e3%83%bc%e3%83%88%e3%83%a1%e3%83%b3%e3%83%86%e3%83%8a%e3%83%b3%e3%82%b9%e6%97%a5%e7%a8%8b",
+      "lang": "jp",
+      "type": "notice",
+      "title": "【お知らせ】11/3(火)アップデートメンテナンス日程の延期に関する追加のご案内",
+      "content": "<figure class=\"size-full\"><img width=\"658\" height=\"200\" src=\"/images/patch-notes/3819f5f7ab09ef1b.webp\" alt=\"\" style=\"max-width:100%;height:auto;\"></figure>\n\n<p>マスターの皆様、こんにちは。<br>GMあめです。</p>\n<p>アップデートメンテナンスの日程確定までに時間を要しており、マスターの皆様を長らくお待たせしておりますこと、深くお詫び申し上げます。</p>\n<p>11月3日(火)に予定していたアップデートメンテナンスの延期につきまして、現在の状況をご案内いたします。</p>\n<p>■ App Storeでの審査・配信準備の主な流れ</p>\n<p>［提出準備中］→［審査待ち］→［審査中］→［配信準備完了］</p>\n<p>アップデート版のアプリはすでにAppleへ提出しておりますが、現在も「審査待ち」の状態が続いております。Appleがアプリの内容を確認する「審査中」の段階には、まだ進んでおりません。</p>\n<p>運営チームでは、審査の進捗や状況の変化を継続して確認しております。<br>しかしながら、審査の開始および完了時期の見通しが立っておらず、現時点ではアップデートメンテナンスの具体的な日程をご案内できない状況です。何卒ご理解くださいますようお願い申し上げます。</p>\n<p>審査が完了し、メンテナンス日程が確定次第、改めてお知らせいたします。</p>\n<p>アップデートをお待ちいただいているマスター様に、ご不便とご心配をおかけしておりますこと、重ねてお詫び申し上げます。</p>\n<p>今後とも『アウタープレーン』をよろしくお願いいたします。</p>\n"
+    },
+    {
       "id": 12086,
       "date": "2026-11-02",
       "modified": "2026-11-02T06:09:44",
