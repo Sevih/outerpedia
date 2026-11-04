@@ -6971,6 +6971,61 @@
         }
       ],
       "substats": "CHC>HP>SPD>CHD>DMG UP%"
+    },
+    {
+      "name": "Dimensional Singularity",
+      "weapons": [
+        {
+          "id": "24",
+          "mainStat": "HP%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1010",
+          "mainStat": "PEN%/HP%"
+        },
+        {
+          "id": "1793",
+          "mainStat": "HP%/PEN%"
+        }
+      ],
+      "talismans": ["10007", "10010"],
+      "sets": [
+        {
+          "pieces": [
+            {
+              "set": "10",
+              "count": 2
+            },
+            {
+              "set": "3",
+              "count": 2
+            }
+          ]
+        },
+        {
+          "pieces": [
+            {
+              "set": "10",
+              "count": 2
+            },
+            {
+              "set": "11",
+              "count": 2
+            }
+          ]
+        }
+      ],
+      "substats": "CHC > HP% > CHD > DMG UP% = HP > DEF = DMG RED% = DEF%",
+      "note": {
+        "en": "+15 effects: \nWeapon/Accessory: Damage Increase in Dimensional Singularity\nArmor: Damage Reduction in Dimensional Singularity (At least 3x)",
+        "fr": "+15 effets : \nArme/Accessoire : Augmentation des dégâts dans la singularité dimensionnelle\nArmure : Réduction des dégâts dans la singularité dimensionnelle (au moins 3x)",
+        "es": "+15 efectos: \nArma/Accesorio: Aumento del daño en «Singularidad dimensional»\nArmadura: Reducción del daño en «Singularidad dimensional» (al menos 3 veces)",
+        "jp": "+15の効果：\n武器／アクセサリー：「次元の特異点」でのダメージ増加\n防具：「次元の特異点」でのダメージ軽減（少なくとも3倍）",
+        "kr": "+15 효과: \n무기/액세서리: 차원 특이점 내 피해 증가\n방어구: 차원 특이점 내 피해 감소 (최소 3배)",
+        "zh": "+15 效果：\n武器/饰品：在“维度奇点”中提升伤害\n护甲：在“维度奇点”中降低所受伤害（至少3倍）"
+      }
     }
   ],
   "2000116": [
