@@ -5,6 +5,10 @@
 > détail vit dans git. Le `CHANGELOG.md` racine est GELÉ depuis le 03/08 —
 > ce fichier et le log git SONT le journal du projet.
 
+## 2026-11-04
+
+**Relecture G110 (Fable 5.1) — journaliser les `loadDeck` (Lineup Record › Restore Team) et les replier comme des `equipAll` (plugin 0.5.2), validé.** `3bfa7c7` sur main, 9 fichiers, message attendu, rien hors périmètre. Plugin 0.5.1 → 0.5.2 : `/singularity/loadDeck`, `/worldBoss/loadDeck`, `/guild/raid/loadDeck`, `/irregular/chase/loadDeck` dans `Journal` (même préfixe `/` que les autres, posé par `Capture`), commentaire et README (paragraphe et table du journal). Desktop `equip-events.ts` : `movesOf` factorisé en `equipAllMoves(entry, char)` ; une réponse à `ItemEquipAllList` donne un equipAll par entrée avec le `CharUID` de l'entrée, entrées nulles ou à `CharUID` 0 ignorées comme le client. Tests : deux héros dont une pièce reprise à l'autre, entrée nulle et `CharUID` 0 → propriétaires justes ; liste vide → snapshot identique. Docs `reference.md`, wiki Capture-Pipeline et Engine-Reference. Contrôles sur HEAD : typecheck vert, tests 169 + 249 (+2) + 1119, lint 7 avertissements 0 erreur, `dotnet build` 0 erreur. Laissé à Sevih sur le fixe (plugin par Settings › Setup › Update plugin jeu fermé) : Singularity ou World Boss › Lineup Record › Restore Team → les pièces sur les bons héros sans relancer. Suite : fusion dans private, release 2.0 sur son mot.
+
 ## 2026-11-02
 
 **Relecture G109 (Fable 5.1) — un filter set au choix comme défaut de Gear › Scrap, persistant et sauvegardé, lien de rappel à son nom, validé**
