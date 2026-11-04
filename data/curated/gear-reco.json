@@ -7448,7 +7448,7 @@
           "mainStat": "PEN%"
         }
       ],
-      "talismans": ["$CPdps"],
+      "talismans": ["$CPplusVang"],
       "sets": [
         {
           "preset": "p4"
@@ -7486,7 +7486,7 @@
           "mainStat": "PEN%"
         }
       ],
-      "talismans": ["$CPdps"],
+      "talismans": ["$CPplusVang"],
       "sets": [
         {
           "preset": "s4"
@@ -7524,10 +7524,48 @@
           "mainStat": "PEN%"
         }
       ],
-      "talismans": ["$CPdps"],
+      "talismans": ["$CPplusVang"],
       "sets": [
         {
           "preset": "chd4"
+        }
+      ],
+      "substats": "$dps"
+    },
+    {
+      "name": "Attack",
+      "weapons": [
+        {
+          "id": "17",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "784",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "7",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1013",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1034",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1796",
+          "mainStat": "PEN%"
+        }
+      ],
+      "talismans": ["$CPplusVang"],
+      "sets": [
+        {
+          "preset": "a4"
         }
       ],
       "substats": "$dps"
@@ -7562,7 +7600,7 @@
           "mainStat": "PEN%"
         }
       ],
-      "talismans": ["$CPdps"],
+      "talismans": ["$CPplusVang"],
       "sets": [
         {
           "preset": "p2s2"
