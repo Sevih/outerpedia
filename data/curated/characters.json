@@ -4846,6 +4846,11 @@
   },
   "2000123": {
     "role": "support",
+    "skillPriority": {
+      "first": 3,
+      "second": 2,
+      "ultimate": 1
+    },
     "videos": [
       {
         "platform": "youtube",
