@@ -33,93 +33,38 @@
       "weapons": [
         {
           "id": "14",
-          "mainStat": "ATK%"
+          "mainStat": "HP%"
         },
         {
           "id": "19",
-          "mainStat": "ATK%"
+          "mainStat": "HP%"
+        },
+        {
+          "id": "780",
+          "mainStat": "HP%"
         }
       ],
       "amulets": [
         {
           "id": "1031",
           "mainStat": "PEN%"
+        },
+        {
+          "id": "1010",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1793",
+          "mainStat": "PEN%"
         }
       ],
-      "talismans": ["$s"],
+      "talismans": ["$esv"],
       "sets": [
         {
           "preset": "s4"
         }
       ],
-      "substats": "ATK>SPD>HP",
-      "note": {
-        "en": "PvP : {I-T/Assassin's Charm} or {I-T/Tactician's Charm}",
-        "es": "PvP: {I-T/Assassin's Charm} o {I-T/Tactician's Charm}",
-        "fr": "PvP : {I-T/Assassin's Charm} ou {I-T/Tactician's Charm}"
-      }
-    },
-    {
-      "name": "Counter",
-      "weapons": [
-        {
-          "id": "14",
-          "mainStat": "ATK%"
-        },
-        {
-          "id": "19",
-          "mainStat": "ATK%"
-        }
-      ],
-      "amulets": [
-        {
-          "id": "1031",
-          "mainStat": "PEN%"
-        }
-      ],
-      "talismans": ["$s"],
-      "sets": [
-        {
-          "preset": "ct4"
-        }
-      ],
-      "substats": "ATK>SPD>HP",
-      "note": {
-        "en": "PvP : {I-T/Assassin's Charm} or {I-T/Tactician's Charm}",
-        "es": "PvP: {I-T/Assassin's Charm} o {I-T/Tactician's Charm}",
-        "fr": "PvP : {I-T/Assassin's Charm} ou {I-T/Tactician's Charm}"
-      }
-    },
-    {
-      "name": "Scaling",
-      "weapons": [
-        {
-          "id": "14",
-          "mainStat": "ATK%"
-        },
-        {
-          "id": "19",
-          "mainStat": "ATK%"
-        }
-      ],
-      "amulets": [
-        {
-          "id": "1031",
-          "mainStat": "PEN%"
-        }
-      ],
-      "talismans": ["$s"],
-      "sets": [
-        {
-          "preset": "ct2sw2"
-        }
-      ],
-      "substats": "ATK>SPD>HP",
-      "note": {
-        "en": "PvP : {I-T/Assassin's Charm} or {I-T/Tactician's Charm}",
-        "es": "PvP: {I-T/Assassin's Charm} o {I-T/Tactician's Charm}",
-        "fr": "PvP : {I-T/Assassin's Charm} ou {I-T/Tactician's Charm}"
-      }
+      "substats": "HP%>SPD>HP>DMG RED%=DMG UP%>DEF=RES"
     }
   ],
   "2000010": [
