@@ -2879,6 +2879,21 @@
       }
     ]
   },
+  "2000123": {
+    "name": "Aisla's Exclusive Equipment",
+    "tiers": [
+      {
+        "unlockLevel": 1,
+        "isAdd": false,
+        "desc": "All Fire enemies' Penetration -25%"
+      },
+      {
+        "unlockLevel": 10,
+        "isAdd": true,
+        "desc": "Counterattacks with <color=#28d9ed>A Fierce Introduction</color> when hit (once per turn)"
+      }
+    ]
+  },
   "2000124": {
     "name": "Demiurge Lambda's Exclusive Equipment",
     "tiers": [
@@ -2995,7 +3010,7 @@
       {
         "unlockLevel": 10,
         "isAdd": true,
-        "desc": "Right after using <color=#28d9ed>Death Sentence</color>, does not trigger an enemy's Counterattack, Revenge, or Agile Response.\n"
+        "desc": "Right after using <color=#28d9ed>Death Sentence</color>, does not trigger an enemy's Counterattack, Revenge, or Agile Response.\\n"
       }
     ]
   },

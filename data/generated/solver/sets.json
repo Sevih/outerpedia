@@ -10935,6 +10935,38 @@
       }
     ]
   },
+  "2000123": {
+    "name": null,
+    "desc": null,
+    "levels": [
+      {
+        "level": 1,
+        "p2": null,
+        "p4": null,
+        "p2_desc": null,
+        "p4_desc": null,
+        "breakLimitCounts": [],
+        "ignoreLowSet": false,
+        "combatEffects": {
+          "p2": null,
+          "p4": null
+        }
+      },
+      {
+        "level": 10,
+        "p2": null,
+        "p4": null,
+        "p2_desc": null,
+        "p4_desc": null,
+        "breakLimitCounts": [],
+        "ignoreLowSet": false,
+        "combatEffects": {
+          "p2": null,
+          "p4": null
+        }
+      }
+    ]
+  },
   "2000124": {
     "name": null,
     "desc": null,

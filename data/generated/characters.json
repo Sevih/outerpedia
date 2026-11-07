@@ -13937,6 +13937,144 @@
       }
     ]
   },
+  "2000123": {
+    "id": "2000123",
+    "name": {
+      "en": "Aisla",
+      "jp": "アイスラ",
+      "kr": "아이슬라",
+      "zh": "艾丝拉",
+      "fr": "Aisla",
+      "es": "Aisla"
+    },
+    "rarity": 3,
+    "element": "water",
+    "class": "defender",
+    "race": "human",
+    "icon": "2000123",
+    "skills": [
+      "12301",
+      "12302",
+      "12303",
+      "12304",
+      "12305",
+      "12306",
+      "12308",
+      "12309",
+      "12310",
+      "12319",
+      "12320",
+      "12321",
+      "1"
+    ],
+    "stats": {
+      "hp": {
+        "min": 533,
+        "max": 3927
+      },
+      "atk": {
+        "min": 83,
+        "max": 838
+      },
+      "def": {
+        "min": 35,
+        "max": 370
+      },
+      "speed": {
+        "min": 99,
+        "max": 99
+      },
+      "critical_rate": {
+        "min": 50,
+        "max": 50
+      },
+      "critical_dmg": {
+        "min": 1500,
+        "max": 1500
+      },
+      "buff_chance": {
+        "min": 10,
+        "max": 10
+      },
+      "buff_resist": {
+        "min": 16,
+        "max": 160
+      }
+    },
+    "nickname": {
+      "en": "Self-Made Chairwoman",
+      "jp": "叩き上げの会長",
+      "kr": "자수성가 회장님",
+      "zh": "白手起家的董事长",
+      "fr": "Présidente qui s'est faite toute seule",
+      "es": "Presidenta hecha a sí misma"
+    },
+    "subClass": "sweeper",
+    "chainType": "join",
+    "gift": "present_02",
+    "voiceActor": {
+      "en": "Kawase Maki",
+      "jp": "河瀬茉希",
+      "kr": "김순미",
+      "zh": "河瀬茉希",
+      "fr": "Kawase Maki",
+      "es": "Kawase Maki"
+    },
+    "profile": {
+      "birthday": "08/21",
+      "height": 163,
+      "weight": 46,
+      "story": {
+        "en": "Meet the beautiful and illustrious Chairwoman <Color=#FFBF00>Aisla</Color>.\\nThey say she comes from a prominent family on Earth. But rather than relying on her family's prestige, this remarkable young woman is determined to succeed on her own merits and make a name for herself. She was transported to Mirsha under unfortunate circumstances, but she plans to seize this opportunity to make her name known across the land.\\n\\nThink I'm laying the praise on a little thick this time? Perhaps I've been dazzled by Chairwoman Aisla's brilliance, just like you, Premier.",
+        "jp": "こちらは、美しく偉大な会長、<Color=#FFBF00>アイスラ</Color>様です。\\nかつて地球では、名家のご令嬢だったそうです。しかし、家柄の威光に頼らず、ご自身の名前と力だけで成功を収めることを目標にしておられる、実に立派なお方なのです。残念ながら、ある事情でメルシャへ転移してしまいましたが、むしろそれを好機と捉え、メルシャ全土にご自身の名を知らしめるおつもりだそうです。\\n\\n今回はやけに美辞麗句が多い、ですか？　きっと私も宰相様と同じように、アイスラ会長の威光に感銘を受けたからではないでしょうか？",
+        "kr": "이분은 아름답고 위대한 회장님, <Color=#FFBF00>아이슬라</Color> 님이세요.\\n과거 지구에서 유명한 가문의 영애였다고 해요. 하지만 가문의 위광에 기대지 않고, 오롯이 자신의 이름과 힘으로 자수성가하는 걸 목표로 삼으신 대단한 분이시랍니다.  애석하게도 모종의 일로 메르샤에 전이되었지만, 오히려 이 일을 기회로 온 메르샤에 자신의 이름을 알리실 계획이라고 해요.\\n\\n왠지 이번에는 미사여구가 많은 것 같다고요? 아마 저도 재상님처럼 아이슬라 회장님의 위광에 감명받아서가 아닐까요?",
+        "zh": "这位就是美丽而伟大的会长<Color=#FFBF00>艾丝拉</Color>大人。\\n听说她曾是地球上名门望族的千金。但她并不依靠家族的声望，而是立志凭自己的本事白手起家，闯出一番名堂，真是一位了不起的人物呢。虽然她因某些缘故，不幸被传送到了弥乐沙，但她反而打算借此机会，让自己的名字传遍整个弥乐沙。\\n\\n您觉得这次的溢美之词好像特别多吗？或许我也和宰相大人一样，被艾丝拉会长的光辉折服了吧？",
+        "fr": "Voici la belle et illustre présidente <Color=#FFBF00>Aisla</Color>.\\nOn dit qu'elle est issue d'une famille réputée sur Terre. Mais plutôt que de s'appuyer sur le prestige de sa famille, cette jeune femme remarquable est déterminée à réussir par ses propres moyens et à se faire un nom. Elle a été transportée à Mirsha dans de regrettables circonstances, mais elle compte bien saisir cette occasion pour faire connaître son nom aux quatre coins de ce monde.\\n\\nVous trouvez que je me répands un peu trop en éloges cette fois ? Peut-être que, tout comme vous, Chancelier, j'ai été éblouie par le rayonnement de la présidente Aisla.",
+        "es": "Le presento a la bella e ilustre presidenta <Color=#FFBF00>Aisla</Color>.\\nSe dice que proviene de una familia de renombre en la Tierra. Pero, en lugar de apoyarse en el prestigio de su familia, esta extraordinaria joven está decidida a triunfar por sus propios méritos y hacerse un nombre. Aunque fue transportada a Mirsha en circunstancias desafortunadas, piensa aprovechar la oportunidad para dar a conocer su nombre por todo Mirsha.\\n\\n¿Le parece que esta vez me estoy excediendo con los elogios? Tal vez yo también me haya dejado deslumbrar por el esplendor de la presidenta Aisla, igual que usted, Canciller."
+      }
+    },
+    "ee": "2000123",
+    "recommendedSets": ["3", "2", "7"],
+    "ignoreDefense": ["kit"],
+    "tags": ["ignore-defense"],
+    "appearances": ["2010123", "2020123"],
+    "costumes": [
+      {
+        "id": "114",
+        "model": "2010123",
+        "name": {
+          "en": "Magnificent Bunny Girl Aisla",
+          "jp": "偉大なるバニーガール・アイスラ",
+          "kr": "위대한 바니걸 아이슬라",
+          "zh": "伟大兔女郎艾丝拉",
+          "fr": "Magnifique Bunny Girl Aisla",
+          "es": "Magnífica Chica Conejo Aisla"
+        },
+        "icon": "TI_Costume_Clothes_2000123_02",
+        "grade": "rare",
+        "sort": 1,
+        "source": "battlepass",
+        "art": true
+      },
+      {
+        "id": "115",
+        "model": "2020123",
+        "name": {
+          "en": "Daring Bunny Girl Aisla",
+          "jp": "大胆なバニーガール・アイスラ",
+          "kr": "대담한 바니걸 아이슬라",
+          "zh": "大胆兔女郎艾丝拉",
+          "fr": "Audacieuse Bunny Girl Aisla",
+          "es": "Atrevida Chica Conejo Aisla"
+        },
+        "icon": "TI_Costume_Clothes_2000123_03",
+        "grade": "rare",
+        "sort": 2,
+        "source": "battlepass",
+        "art": true
+      }
+    ]
+  },
   "2000124": {
     "id": "2000124",
     "name": {

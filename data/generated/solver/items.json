@@ -1871,6 +1871,15 @@
     "canSell": true,
     "sellPrice": 300
   },
+  "23047": {
+    "name": "Oath with Aisla",
+    "icon": "TI_present_Max_Public",
+    "itemType": "IT_PRESENT",
+    "itemSubType": "ITS_PRESENT_MAX",
+    "grade": "IG_UNIQUE",
+    "canSell": true,
+    "sellPrice": 300
+  },
   "24001": {
     "name": "Proof of Destiny",
     "icon": "TI_Gift_Cost_01",
@@ -6399,7 +6408,7 @@
     "sellPrice": 0
   },
   "30517": {
-    "name": "Lobby - Black Calix",
+    "name": "Purple Memory Stone x10",
     "icon": "TI_BOX_LOBBY_SEASONAL_06",
     "itemType": "IT_BOX",
     "itemSubType": "ITS_BOX_TYPE_RANDOM",
@@ -7508,6 +7517,42 @@
   "50063": {
     "name": "Skill Ark Stage 12 Daily Bonus Reward",
     "icon": "TI_Item_Growth_Book_03",
+    "itemType": "IT_BOX",
+    "itemSubType": "ITS_BOX_TYPE_RANDOM",
+    "grade": "IG_UNIQUE",
+    "canSell": false,
+    "sellPrice": 0
+  },
+  "50064": {
+    "name": "Relationship Codex Reward [Drifters]",
+    "icon": "TI_Common_Box05",
+    "itemType": "IT_BOX",
+    "itemSubType": "ITS_BOX_TYPE_RANDOM",
+    "grade": "IG_UNIQUE",
+    "canSell": false,
+    "sellPrice": 0
+  },
+  "50065": {
+    "name": "Relationship Codex Reward [Drifters]",
+    "icon": "TI_Common_Box05",
+    "itemType": "IT_BOX",
+    "itemSubType": "ITS_BOX_TYPE_RANDOM",
+    "grade": "IG_UNIQUE",
+    "canSell": false,
+    "sellPrice": 0
+  },
+  "50066": {
+    "name": "Relationship Codex Reward [Soulslayers]",
+    "icon": "TI_Common_Box05",
+    "itemType": "IT_BOX",
+    "itemSubType": "ITS_BOX_TYPE_RANDOM",
+    "grade": "IG_UNIQUE",
+    "canSell": false,
+    "sellPrice": 0
+  },
+  "50067": {
+    "name": "Relationship Codex Reward [The Powers That Be]",
+    "icon": "TI_Common_Box05",
     "itemType": "IT_BOX",
     "itemSubType": "ITS_BOX_TYPE_RANDOM",
     "grade": "IG_UNIQUE",

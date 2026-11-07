@@ -1,5 +1,5 @@
 {
-  "resVersion": "1.11.504",
+  "resVersion": "1.11.601",
   "skills": {
     "101": {
       "desc": {
@@ -19139,6 +19139,108 @@
         "zh": "最终辩论冷却时间重置",
         "fr": "Réinit. la recharge de Plaidoirie finale",
         "es": "Reinicia la recarga de Alegato final"
+      }
+    },
+    "12301": {
+      "desc": {
+        "en": "Attacks an enemy and deals Fixed Damage equal to <color=#28d9ed>[Buff_V_2000123_1_1]</color> of the target's Max Health.\\nIf the target is <color=#28d9ed>Fire</color>, ignores <color=#28d9ed>50%</color> of its Defense.\\nDamage dealt increases in proportion to Defense instead of Attack.",
+        "jp": "敵単体にダメージを与え、対象の最大HPの<color=#28d9ed>[Buff_V_2000123_1_1]</color>分の固定ダメージを与える。\\n対象が<color=#28d9ed>火属性</color>の場合、防御力を<color=#28d9ed>50%</color>無視する。\\nこのスキルは攻撃力の代わりに防御力が高いほどダメージがUPする。",
+        "kr": "적을 공격하고 대상 최대 체력의 <color=#28d9ed>[Buff_V_2000123_1_1]</color> 만큼 고정 피해를 입힙니다.\\n대상이 <color=#28d9ed>화속성</color>인 경우 방어력의 <color=#28d9ed>50%</color>를 무시합니다.\\n이 스킬은 공격력 대신 방어력에 비례하여 피해가 증가합니다.",
+        "zh": "攻击敌人，并造成相当于目标生命值上限<color=#28d9ed>[Buff_V_2000123_1_1]</color>的固定伤害。\\n若目标为<color=#28d9ed>火属性</color>，无视其<color=#28d9ed>50%</color>的防御力。\\n此技能伤害依据防御力而非攻击力提升。",
+        "fr": "Attaque un ennemi et inflige des DGT fixes équivalant à <color=#28d9ed>[Buff_V_2000123_1_1]</color> des PV max de la cible.\\nSi la cible est de type <color=#28d9ed>Feu</color>, ignore <color=#28d9ed>50%</color> de sa DÉF.\\nLes DGT augmentent selon la DÉF au lieu de l'ATQ.",
+        "es": "Ataca a un enemigo e inflige Daño fijo equivalente al <color=#28d9ed>[Buff_V_2000123_1_1]</color> de la Vida máx. del objetivo.\\nSi el objetivo es de <color=#28d9ed>Fuego</color>, ignora el <color=#28d9ed>50%</color> de su DEF.\\nEl daño aumenta en proporción a la DEF en lugar del ATQ."
+      },
+      "levels": [
+        {
+          "level": 1,
+          "vars": {
+            "2000123_1_1": {
+              "c": "100%",
+              "v": "2%"
+            }
+          }
+        },
+        {
+          "level": 5,
+          "vars": {
+            "2000123_1_1": {
+              "c": "100%",
+              "v": "3%"
+            }
+          }
+        }
+      ]
+    },
+    "12302": {
+      "desc": {
+        "en": "Attacks all enemies, then reduces damage taken by all allies by <color=#28d9ed>15%</color> (stacks up to 4 times) and grants <color=#28d9ed>Counterattack</color> for <color=#28d9ed>2 turns</color>.\\nDamage dealt increases in proportion to Defense instead of Attack.",
+        "jp": "敵全体にダメージを与えた後、味方全体の受けるダメージを<color=#28d9ed>15%</color>減少させ（最大4回まで重複）、<color=#28d9ed>反撃</color>を<color=#28d9ed>2ターン</color>付与する。\\nこのスキルは攻撃力の代わりに防御力が高いほどダメージがUPする。",
+        "kr": "적 전체를 공격한 뒤, 아군 전체의 받는 피해를 <color=#28d9ed>15%</color> 감소시키고(최대 4회 누적),<color=#28d9ed>반격</color>을 <color=#28d9ed>2턴</color> 동안 부여합니다.\\n이 스킬은 공격력 대신 방어력에 비례하여 피해가 증가합니다.",
+        "zh": "攻击全体敌人后，使全体友军受到的伤害减少<color=#28d9ed>15%</color>（最多叠加4次），并赋予<color=#28d9ed>反击</color>，持续<color=#28d9ed>2回合</color>。\\n此技能伤害依据防御力而非攻击力提升。",
+        "fr": "Attaque tous les ennemis, réduit les DGT subis par tous les alliés de <color=#28d9ed>15%</color> (cumulable 4 fois) et leur accorde <color=#28d9ed>Contre-ATQ</color> pendant <color=#28d9ed>2 tours</color>.\\nLes DGT augmentent selon la DÉF au lieu de l'ATQ.",
+        "es": "Ataca a todos los enemigos, reduce el daño recibido por todos los aliados un <color=#28d9ed>15%</color> (hasta 4 acumulaciones) y les otorga <color=#28d9ed>Contraataque</color> durante <color=#28d9ed>2 turnos</color>.\\nEl daño aumenta en proporción a la DEF en lugar del ATQ."
+      }
+    },
+    "12303": {
+      "desc": {
+        "en": "Attacks all enemies and decreases the targets' <color=#28d9ed>Defense</color> for <color=#28d9ed>[Buff_T_2000123_3_1] turns</color>, then fully depletes their <color=#28d9ed>Unique Resource</color>. (Ignores Resilience)\\nReduces the skill cooldowns of all <color=#28d9ed>Water</color> allies by <color=#28d9ed>1 turn</color>.\\nDamage dealt increases in proportion to Defense instead of Attack.",
+        "jp": "敵全体にダメージを与え、対象の<color=#28d9ed>防御力</color>を<color=#28d9ed>[Buff_T_2000123_3_1]ターン</color>の間DOWNさせた後、対象の<color=#28d9ed>固有資源</color>をすべて減少させる。（効果抵抗無視）\\n<color=#28d9ed>水属性</color>の味方全体のスキルターンを<color=#28d9ed>1ターン</color>短縮する。\\nこのスキルは攻撃力の代わりに防御力が高いほどダメージがUPする。",
+        "kr": "적 전체를 공격하고 대상의 <color=#28d9ed>방어력</color>을 <color=#28d9ed>[Buff_T_2000123_3_1]턴</color> 동안 감소시킨 뒤, 보유한 <color=#28d9ed>고유 자원</color>의 수량을 모두 감소시킵니다.(효과 저항 무시)\\n<color=#28d9ed>수속성</color> 아군 전체의 스킬 쿨타임을 <color=#28d9ed>1턴</color> 감소시킵니다.\\n이 스킬은 공격력 대신 방어력에 비례하여 피해가 증가합니다.",
+        "zh": "攻击全体敌人，使目标的<color=#28d9ed>防御力</color>降低<color=#28d9ed>[Buff_T_2000123_3_1]回合</color>，随后清空目标持有的<color=#28d9ed>固有资源</color>。（无视效果抵抗）\\n使全体<color=#28d9ed>水属性</color>友军的技能冷却时间减少<color=#28d9ed>1回合</color>。\\n此技能伤害依据防御力而非攻击力提升。",
+        "fr": "Attaque tous les ennemis et réduit la <color=#28d9ed>DÉF</color> des cibles pendant <color=#28d9ed>[Buff_T_2000123_3_1] tours</color>, puis épuise entièrement leur <color=#28d9ed>Ressource unique</color>. (Ignore la RÉS)\\nRéduit le temps de recharge des compétences de tous les alliés d'élément <color=#28d9ed>Eau</color> de <color=#28d9ed>1 tour</color>.\\nLes DGT augmentent selon la DÉF au lieu de l'ATQ.",
+        "es": "Ataca a todos los enemigos y reduce la <color=#28d9ed>DEF</color> de los objetivos durante <color=#28d9ed>[Buff_T_2000123_3_1] turnos</color>, luego agota por completo su <color=#28d9ed>Recurso único</color>. (Ignora la Resistencia)\\nReduce el enfriamiento de las habilidades de todos los aliados de <color=#28d9ed>Agua</color> en <color=#28d9ed>1 turno</color>.\\nEl daño aumenta en proporción a la DEF en lugar del ATQ."
+      },
+      "levels": [
+        {
+          "level": 1,
+          "vars": {
+            "2000123_3_1": {
+              "c": "100%",
+              "v": "50%",
+              "t": "2"
+            }
+          }
+        },
+        {
+          "level": 5,
+          "vars": {
+            "2000123_3_1": {
+              "c": "100%",
+              "v": "50%",
+              "t": "3"
+            }
+          }
+        }
+      ]
+    },
+    "12319": {
+      "desc": {
+        "en": "Fixed Damage +2%",
+        "jp": "固定ダメージ+2%",
+        "kr": "고정 피해 +2%",
+        "zh": "固定伤害+2%",
+        "fr": "DGT fixes +2%",
+        "es": "Daño fijo +2%"
+      }
+    },
+    "12320": {
+      "desc": {
+        "en": "DMG Increase\\nWG Reduction +1",
+        "jp": "ダメージUP\\nWGダメージ +1",
+        "kr": "피해 증가\\nWG 감소 +1",
+        "zh": "伤害提升\\nWG降低 +1",
+        "fr": "Dégâts +\\nRéduction de WG +1",
+        "es": "Aumento de daño\\nReducción de WG +1"
+      }
+    },
+    "12321": {
+      "desc": {
+        "en": "Replaced with Empowered Attack\\nResets the cooldown of <color=#28d9ed>Temnein Ton Desmon</color>",
+        "jp": "強化攻撃に変更\\n<color=#28d9ed>【テムネイン・トン・デスモン】</color>のスキルターン初期化",
+        "kr": "강화 공격으로 교체\\n<color=#28d9ed>템네인 톤 데스몬</color> 쿨타임 초기화",
+        "zh": "替换为强化攻击\\n重置<color=#28d9ed>特姆涅因通德斯蒙</color>的冷却时间",
+        "fr": "Passe à une ATQ renforcée\\nRéinitialise le temps de recharge de <color=#28d9ed>Temnein Ton Desmon</color>",
+        "es": "Cambia a ATQ mejorado\\nReinicia el enfriamiento de <color=#28d9ed>Temnein Ton Desmon</color>"
       }
     },
     "12401": {

@@ -86176,6 +86176,25 @@
     "canDissolve": false,
     "dissolve": null
   },
+  "2000123": {
+    "slot": "exclusive",
+    "grade": "unique",
+    "star": 6,
+    "classLimit": null,
+    "setId": "2000123,2100123",
+    "armorSetId": null,
+    "name": "Bergelmir",
+    "mainGroup": "2000123",
+    "subGroup": null,
+    "image": "TI_Equipment_EX_2000123",
+    "effectIcon": "TI_Icon_UO_EXCLUSIVE",
+    "armorSetIcon": null,
+    "class": null,
+    "canSell": false,
+    "sellPrice": 0,
+    "canDissolve": false,
+    "dissolve": null
+  },
   "2000124": {
     "slot": "exclusive",
     "grade": "unique",

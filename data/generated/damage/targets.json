@@ -1,5 +1,5 @@
 {
-  "resVersion": "1.11.504",
+  "resVersion": "1.11.601",
   "targets": {
     "400101": {
       "id": "400101",
@@ -36725,7 +36725,7 @@
         "trigger": "TURN_COUNT",
         "steps": [
           {
-            "value": 3,
+            "value": 4,
             "duration": 4
           }
         ],
@@ -36815,7 +36815,7 @@
         "trigger": "TURN_COUNT",
         "steps": [
           {
-            "value": 3,
+            "value": 4,
             "duration": 4
           }
         ],
@@ -36909,7 +36909,7 @@
         "trigger": "TURN_COUNT",
         "steps": [
           {
-            "value": 3,
+            "value": 4,
             "duration": 4
           }
         ],
@@ -216018,7 +216018,7 @@
           "damageFactor": 900,
           "wgReduce": 0,
           "buffIds": ["event_monster_buff_451", "event_monster_buff_452"],
-          "cool": 3,
+          "cool": 4,
           "startCool": 1
         }
       ]

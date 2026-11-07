@@ -4912,6 +4912,9 @@
   "20122": {
     "buffId": "BID_CEQUIP_MAIN_DMG_FIRE"
   },
+  "20123": {
+    "buffId": "BID_CEQUIP_MAIN_DMG_WATER"
+  },
   "20124": {
     "buffId": "BID_CEQUIP_MAIN_DMG_LIGHT"
   },
