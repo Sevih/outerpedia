@@ -1534,6 +1534,56 @@
       "date": "2026-11-02",
       "type": "special-identification",
       "raw": "Challenge! Special Request: Identification Drop Rate +30%"
+    },
+    {
+      "date": "2026-11-07",
+      "type": "story-survey",
+      "raw": "[Origin Story] Survey Points x2"
+    },
+    {
+      "date": "2026-11-08",
+      "type": "doppelganger",
+      "raw": "[Doppelgänger Hunt] Increases piece received by +1"
+    },
+    {
+      "date": "2026-11-09",
+      "type": "special-identification",
+      "raw": "Challenge! Special Request: Identification Drop Rate +30%"
+    },
+    {
+      "date": "2026-11-10",
+      "type": "frog-food",
+      "raw": "Hypnotic Frog Hall: Increased Food Rewards by 100%"
+    },
+    {
+      "date": "2026-11-11",
+      "type": "frog-gold",
+      "raw": "Hypnotic Frog Hall: Increased Gold Rewards by 100%"
+    },
+    {
+      "date": "2026-11-12",
+      "type": "ark-raid",
+      "raw": "Ark Raid: Increased Item Rewards by 100%"
+    },
+    {
+      "date": "2026-11-13",
+      "type": "special-ecology",
+      "raw": "Challenge! Special Request: Ecology Study Drop Rate +30%"
+    },
+    {
+      "date": "2026-11-14",
+      "type": "kate-workshop",
+      "raw": "Kate’s Workshop Crafting Gold 30% Discount Event"
+    },
+    {
+      "date": "2026-11-15",
+      "type": "story-survey",
+      "raw": "[Origin Story] Survey Points x2"
+    },
+    {
+      "date": "2026-11-16",
+      "type": "special-identification",
+      "raw": "Challenge! Special Request: Identification Drop Rate +30%"
     }
   ]
 }
