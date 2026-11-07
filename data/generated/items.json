@@ -4897,6 +4897,31 @@
     "star": 0,
     "characterLimit": "2000124"
   },
+  "23047": {
+    "kind": "item",
+    "name": {
+      "en": "Oath with Aisla",
+      "jp": "アイスラとの誓約",
+      "kr": "아이슬라와의 서약",
+      "zh": "与艾丝拉之约",
+      "fr": "Serment avec Aisla",
+      "es": "Juramento con Aisla"
+    },
+    "desc": {
+      "en": "A token that forges an eternal bond with [Aisla].\\nWhen used, grants enough Affinity EXP (170,000) to raise [Aisla]'s Affinity to Lv.10 at once.\\nIf Affinity is already maxed, this item can be sold for 300 Ether (Free).",
+      "jp": "【アイスラ】との絆をより深めることができる証票。\\n使用すると【アイスラ】の親密度を一気にLv.10まで上げられる経験値（170,000）を獲得できる。\\nすでに親密度が最大の場合、このアイテムを300無償エーテルで売却できる。",
+      "kr": "[아이슬라]와 영원한 애정 관계를 구축할 수 있는 증표.\\n사용 시 [아이슬라]의 애정도를 한번에 10LV까지 성장 시킬 수 있는 분량의 경험치 (170,000) 를 제공합니다.\\n이미 완벽한 애정 관계가 구축되신 경우, 해당 아이템을 300 무료 에테르로 판매하실 수 있습니다.",
+      "zh": "与【艾丝拉】建立永恒关系的凭证。\\n使用后可获得足以将【艾丝拉】的亲密度一次提升至Lv.10的经验值（170,000）。\\n若亲密度已达最大，则可出售该道具换取300无偿以太。",
+      "fr": "Un gage qui crée un lien éternel avec [Aisla].\\nÀ l'utilisation, accorde assez d'EXP d'Affinité (170 000) pour monter immédiatement l'Affinité de [Aisla] au niv. 10.\\nSi l'Affinité est déjà au maximum, cet objet peut être vendu pour 300 Éthers (gratuits).",
+      "es": "Símbolo que forja un vínculo eterno con [Aisla].\\nAl usarlo, otorga suficiente EXP de Afinidad (170.000) para subir de una vez la Afinidad de [Aisla] a Nv. 10.\\nSi la Afinidad ya está al máximo, véndelo por 300 Éter (gratis)."
+    },
+    "icon": "TI_present_Max_Public",
+    "grade": "unique",
+    "type": "present",
+    "subType": "present_max",
+    "star": 0,
+    "characterLimit": "2000123"
+  },
   "24001": {
     "kind": "item",
     "name": {
@@ -5364,12 +5389,12 @@
       "es": "Cofre Material Mejora Superior"
     },
     "desc": {
-      "en": "Obtain all of the following. \n - Expert's Hammer x10\n - Superior Reforge Catalyst x10",
-      "jp": "以下のアイテムをすべて獲得できる。 \n- いい強化ハンマー10個 \n- 再錬カタリスト(レア)10個",
+      "en": "Obtain all of the following. \\n - Expert's Hammer x10\\n - Superior Reforge Catalyst x10",
+      "jp": "以下のアイテムをすべて獲得できる。 \\n- いい強化ハンマー10個 \\n- 再錬カタリスト(レア)10個",
       "kr": "아래 아이템을 모두 획득할 수 있습니다.\n - 수련 강화 도구 10개\n - 고급 재련 촉매제 10개",
-      "zh": "可获得以下所有道具。\n- 10个修炼强化道具\n- 10个高级重铸催化剂",
-      "fr": "Obtenir toutes les données suivantes.\n- Hammer X10 X10 de l'expert\n- Catalyseur de refoulement supérieur x1",
-      "es": "Obtén todos los siguientes.\\n - Martillo de Experto x10\\n - Catalizador de Reforjar Superior x10"
+      "zh": "可获得以下所有道具。\\n- 10个修炼强化道具\\n- 10个高级重铸催化剂",
+      "fr": "Obtenez tous les objets suivants :\\n- Expert's Hammer x10\\n- Superior Reforge Catalyst x10",
+      "es": "Obtén todos los objetos siguientes:\\n- Martillo del Experto x10\\n- Catalizador de Reforjar Superior x10"
     },
     "icon": "TI_Common_Box03",
     "grade": "magic",
@@ -16972,7 +16997,7 @@
   "30517": {
     "kind": "item",
     "name": {
-      "en": "Lobby - Black Calix",
+      "en": "Purple Memory Stone x10",
       "jp": "ロビー - ブラックカリックス",
       "kr": "로비 - 블랙 캘릭스",
       "zh": "大厅 - 黑色圣杯",
@@ -19868,6 +19893,102 @@
       "es": "Obtén Manuales de Habilidad según las siguientes\\ntasas. Manual de Habilidad Básico x1:\\n100% Manual de Habilidad Intermedio x1:\\n48.8% Manual de Habilidad Profesional x1: 5.25%"
     },
     "icon": "TI_Item_Growth_Book_03",
+    "grade": "unique",
+    "type": "box",
+    "subType": "box_type_random",
+    "star": 0
+  },
+  "50064": {
+    "kind": "item",
+    "name": {
+      "en": "Relationship Codex Reward [Drifters]",
+      "jp": "絆図鑑報酬【漂流者たち】",
+      "kr": "인연 도감 보상 [표류자들]",
+      "zh": "友情图鉴奖励【漂泊者们】",
+      "fr": "Récompense du Codex des relations [Vagabonds]",
+      "es": "Recompensa del Códice de Relaciones [Errantes]"
+    },
+    "desc": {
+      "en": "Complete the Relationship Codex to obtain the following rewards.\\nEther (Free) x20\\n400,000 Gold",
+      "jp": "絆図鑑を完成すると、以下の報酬を獲得できます。\\n無料エーテル×20\\n40万ゴールド",
+      "kr": "인연 도감 완성 시, 아래의 보상을 얻습니다.\\n에테르(무료) x20\\n40만 골드",
+      "zh": "完成友情图鉴后，可获得以下奖励。\\n免费以太x20\\n40万金币",
+      "fr": "Terminez le Codex des relations pour obtenir les récompenses suivantes.\\nÉthers gratuits x20\\n400 000 Or",
+      "es": "Completa el Códice de Relaciones para obtener las siguientes recompensas.\\nÉter gratis x20\\n400,000 de Oro"
+    },
+    "icon": "TI_Common_Box05",
+    "grade": "unique",
+    "type": "box",
+    "subType": "box_type_random",
+    "star": 0
+  },
+  "50065": {
+    "kind": "item",
+    "name": {
+      "en": "Relationship Codex Reward [Drifters]",
+      "jp": "絆図鑑報酬【漂流者たち】",
+      "kr": "인연 도감 보상 [표류자들]",
+      "zh": "友情图鉴奖励【漂泊者们】",
+      "fr": "Récompense du Codex des relations [Vagabonds]",
+      "es": "Recompensa del Códice de Relaciones [Errantes]"
+    },
+    "desc": {
+      "en": "Complete the Relationship Codex to obtain the following rewards.\\nEther (Free) x40\\n300,000 Gold",
+      "jp": "絆図鑑を完成すると、以下の報酬を獲得できます。\\n無料エーテル×40\\n30万ゴールド",
+      "kr": "인연 도감 완성 시, 아래의 보상을 얻습니다.\\n에테르(무료) x40\\n30만 골드",
+      "zh": "完成友情图鉴后，可获得以下奖励。\\n免费以太x40\\n30万金币",
+      "fr": "Terminez le Codex des relations pour obtenir les récompenses suivantes.\\nÉthers gratuits x40\\n300 000 Or",
+      "es": "Completa el Códice de Relaciones para obtener las siguientes recompensas.\\nÉter gratis x40\\n300,000 de Oro"
+    },
+    "icon": "TI_Common_Box05",
+    "grade": "unique",
+    "type": "box",
+    "subType": "box_type_random",
+    "star": 0
+  },
+  "50066": {
+    "kind": "item",
+    "name": {
+      "en": "Relationship Codex Reward [Soulslayers]",
+      "jp": "絆図鑑報酬【霊斬士】",
+      "kr": "인연 도감 보상 [영참사]",
+      "zh": "友情图鉴奖励【灵斩师】",
+      "fr": "Récompense du Codex des relations [Tueurs d'âmes]",
+      "es": "Recompensa del Códice de Relaciones [Segadores de Almas]"
+    },
+    "desc": {
+      "en": "Complete the Relationship Codex to obtain the following rewards.\\nEther (Free) x30\\n300,000 Gold",
+      "jp": "絆図鑑を完成すると、以下の報酬を獲得できます。\\n無料エーテル×30\\n30万ゴールド",
+      "kr": "인연 도감 완성 시, 아래의 보상을 얻습니다.\\n에테르(무료) x30\\n30만 골드",
+      "zh": "完成友情图鉴后，可获得以下奖励。\\n免费以太x30\\n30万金币",
+      "fr": "Terminez le Codex des relations pour obtenir les récompenses suivantes.\\nÉthers gratuits x30\\n300 000 Or",
+      "es": "Completa el Códice de Relaciones para obtener las siguientes recompensas.\\nÉter gratis x30\\n300,000 de Oro"
+    },
+    "icon": "TI_Common_Box05",
+    "grade": "unique",
+    "type": "box",
+    "subType": "box_type_random",
+    "star": 0
+  },
+  "50067": {
+    "kind": "item",
+    "name": {
+      "en": "Relationship Codex Reward [The Powers That Be]",
+      "jp": "絆図鑑報酬【お偉方】",
+      "kr": "인연 도감 보상 [높으신 분들]",
+      "zh": "友情图鉴奖励【大人物们】",
+      "fr": "Récompense du Codex des relations [Hauts Placés]",
+      "es": "Recompensa del Códice de Relaciones [Altos Mandos]"
+    },
+    "desc": {
+      "en": "Complete the Relationship Codex to obtain the following rewards.\\nEther (Free) x40\\n300,000 Gold",
+      "jp": "絆図鑑を完成すると、以下の報酬を獲得できます。\\n無料エーテル×40\\n30万ゴールド",
+      "kr": "인연 도감 완성 시, 아래의 보상을 얻습니다.\\n에테르(무료) x40\\n30만 골드",
+      "zh": "完成友情图鉴后，可获得以下奖励。\\n免费以太x40\\n30万金币",
+      "fr": "Terminez le Codex des relations pour obtenir les récompenses suivantes.\\nÉthers gratuits x40\\n300 000 Or",
+      "es": "Completa el Códice de Relaciones para obtener las siguientes recompensas.\\nÉter gratis x40\\n300,000 de Oro"
+    },
+    "icon": "TI_Common_Box05",
     "grade": "unique",
     "type": "box",
     "subType": "box_type_random",
@@ -25181,7 +25302,7 @@
     "type": "costume",
     "star": 0,
     "characterId": "2000124",
-    "source": "battlepass"
+    "source": "shop"
   },
   "COSTUME_109": {
     "kind": "costume",
@@ -25303,6 +25424,56 @@
     "type": "costume",
     "star": 0,
     "characterId": "2000092"
+  },
+  "COSTUME_114": {
+    "kind": "costume",
+    "name": {
+      "en": "Magnificent Bunny Girl Aisla",
+      "jp": "偉大なるバニーガール・アイスラ",
+      "kr": "위대한 바니걸 아이슬라",
+      "zh": "伟大兔女郎艾丝拉",
+      "fr": "Magnifique Bunny Girl Aisla",
+      "es": "Magnífica Chica Conejo Aisla"
+    },
+    "desc": {
+      "en": "A costume that can be equipped by [Aisla].",
+      "jp": "[アイスラ]が着用できるスキンです。",
+      "kr": "[아이슬라]가 착용할 수 있는 코스튬입니다.",
+      "zh": "[艾丝拉]可穿戴的皮肤。",
+      "fr": "Un costume pouvant être porté par [Aisla].",
+      "es": "Un Aspecto que puede equipar [Aisla]."
+    },
+    "icon": "TI_Costume_Clothes_2000123_02",
+    "grade": "rare",
+    "type": "costume",
+    "star": 0,
+    "characterId": "2000123",
+    "source": "battlepass"
+  },
+  "COSTUME_115": {
+    "kind": "costume",
+    "name": {
+      "en": "Daring Bunny Girl Aisla",
+      "jp": "大胆なバニーガール・アイスラ",
+      "kr": "대담한 바니걸 아이슬라",
+      "zh": "大胆兔女郎艾丝拉",
+      "fr": "Audacieuse Bunny Girl Aisla",
+      "es": "Atrevida Chica Conejo Aisla"
+    },
+    "desc": {
+      "en": "A costume that can be equipped by [Aisla].",
+      "jp": "[アイスラ]が着用できるスキンです。",
+      "kr": "[아이슬라]가 착용할 수 있는 코스튬입니다.",
+      "zh": "[艾丝拉]可穿戴的皮肤。",
+      "fr": "Un costume pouvant être porté par [Aisla].",
+      "es": "Un Aspecto que puede equipar [Aisla]."
+    },
+    "icon": "TI_Costume_Clothes_2000123_03",
+    "grade": "rare",
+    "type": "costume",
+    "star": 0,
+    "characterId": "2000123",
+    "source": "battlepass"
   },
   "COSTUME_12": {
     "kind": "costume",
