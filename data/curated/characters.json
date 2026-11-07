@@ -106,6 +106,68 @@
       "first": 3,
       "second": 2,
       "ultimate": 1
+    },
+    "prosCons": {
+      "pros": [
+        {
+          "en": "All Skills scale from her max health, deal {B/HEAVY_STRIKE} and do increase damage by 50% to all bosses.",
+          "jp": "すべてのスキルは彼女の最大HPを基準に効果が決まり、与ダメージは{B/HEAVY_STRIKE}となるが、すべてのボスに対してはダメージが50％増加する。",
+          "kr": "모든 스킬은 그녀의 최대 체력을 기준으로 계산되며, 피해량은 {B/HEAVY_STRIKE}이고 모든 보스에게 가하는 피해는 50% 증가합니다.",
+          "zh": "所有技能的伤害均基于她的最大生命值计算，对普通敌人造成{B/HEAVY_STRIKE}点伤害，并对所有BOSS造成50%的额外伤害。",
+          "fr": "Toutes les compétences sont calculées en fonction de sa santé maximale, infligent {B/HEAVY_STRIKE} de dégâts et augmentent les dégâts de 50 % contre tous les boss.",
+          "es": "Todas las habilidades se calculan en función de su salud máxima, infligen {B/HEAVY_STRIKE} y aumentan el daño en un 50 % contra todos los jefes."
+        },
+        {
+          "en": "Can Self-Sustain with {SK/Rhona|S2}. \n",
+          "jp": "{SK/Rhona|S2}で自立可能。",
+          "kr": "{SK/Rhona|S2}으로도 자립할 수 있다.",
+          "zh": "{SK/Rhona|S2}即可实现自给自足。",
+          "fr": "Peut s'autofinancer avec {SK/Rhona|S2}.",
+          "es": "Puede ser autosuficiente con un{SK/Rhona|S2}."
+        },
+        {
+          "en": "Inflict {D/BT_STAT|ST_DEF} 100% while ignoring {S/RES}.",
+          "jp": "{D/BT_STAT|ST_DEF}のダメージを与え、{S/RES}を無視する。",
+          "kr": "{D/BT_STAT|ST_DEF}의 피해를 100% 입히며, {S/RES}은 무시합니다.",
+          "zh": "造成{D/BT_STAT|ST_DEF} 100% 的伤害，同时忽略{S/RES}。",
+          "fr": "Inflige {D/BT_STAT|ST_DEF} 100 % tout en ignorant {S/RES}.",
+          "es": "Inflige {D/BT_STAT|ST_DEF} al 100 %, ignorando {S/RES}."
+        },
+        {
+          "en": "With {EE/Rhona}, She is the Fastest {C/Striker} Bruiser class in the game. ",
+          "jp": "{EE/Rhona}の状態では、彼女はゲーム内で最速の{C/Striker}の「ブルイザー」クラスです。",
+          "kr": "{EE/Rhona}을 적용하면, 그녀는 게임 내 가장 빠른 {C/Striker} 브루저 클래스입니다.",
+          "zh": "在{EE/Rhona}级时，她是游戏中速度最快的{C/Striker}级“斗士”职业。",
+          "fr": "Avec une valeur de {EE/Rhona}, elle est la classe « Bruiser » la plus rapide ({C/Striker}) du jeu.",
+          "es": "Con un valor de {EE/Rhona}, es la clase {C/Striker} más rápida del juego."
+        }
+      ],
+      "cons": [
+        {
+          "en": "{B/HEAVY_STRIKE} Prevent her from Doing Critical hit. {S/CHC} and {S/CHD} Stats will be wasted on her.",
+          "jp": "{B/HEAVY_STRIKE} 彼女のクリティカルヒットを阻止する。{S/CHC}と{S/CHD}のステータスは彼女には無駄になってしまう。",
+          "kr": "{B/HEAVY_STRIKE} 크리티컬 히트를 막아라. {S/CHC}과 {S/CHD} 능력치는 그녀에게 쓸모가 없을 것이다.",
+          "zh": "{B/HEAVY_STRIKE} 阻止她打出暴击。{S/CHC}和{S/CHD}的属性值对她来说是浪费。",
+          "fr": "{B/HEAVY_STRIKE} Empêchez-la d'infliger des coups critiques. Les statistiques {S/CHC} et {S/CHD} seront gaspillées avec elle.",
+          "es": "{B/HEAVY_STRIKE} Evita que consiga un golpe crítico. Las estadísticas {S/CHC} y {S/CHD} no le servirán de nada."
+        },
+        {
+          "en": "Cannot Gain {B/EXTRA_TURN} unless the target among the enemies is a Boss.",
+          "jp": "敵の中にボスが含まれていない限り、{B/EXTRA_TURN}を獲得することはできません。",
+          "kr": "적 중 대상이 보스가 아닌 경우, {B/EXTRA_TURN}을 획득할 수 없습니다.",
+          "zh": "除非敌人中的目标是BOSS，否则无法获得{B/EXTRA_TURN}。",
+          "fr": "On ne peut pas gagner {B/EXTRA_TURN} à moins que la cible parmi les ennemis ne soit un boss.",
+          "es": "No se puede obtener un{B/EXTRA_TURN} a menos que el objetivo entre los enemigos sea un jefe."
+        },
+        {
+          "en": "Her Skills cannot be fully utilize unless the enemy is a Boss.",
+          "jp": "敵がボスでない限り、彼女のスキルは十分に発揮できない。",
+          "kr": "적의 유형이 보스가 아닌 이상, 그녀의 스킬을 제대로 활용할 수 없습니다.",
+          "zh": "除非敌人是BOSS，否则她的技能无法充分发挥作用。",
+          "fr": "Ses compétences ne peuvent être pleinement exploitées que si l'adversaire est un boss.",
+          "es": "Sus habilidades no se pueden aprovechar al máximo a menos que el enemigo sea un jefe."
+        }
+      ]
     }
   },
   "2000009": {
