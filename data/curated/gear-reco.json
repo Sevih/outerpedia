@@ -65,6 +65,100 @@
         }
       ],
       "substats": "HP%>SPD>HP>DMG RED%=DMG UP%>DEF=RES"
+    },
+    {
+      "name": "Penetration",
+      "weapons": [
+        {
+          "id": "14",
+          "mainStat": "HP%"
+        },
+        {
+          "id": "19",
+          "mainStat": "HP%"
+        },
+        {
+          "id": "780",
+          "mainStat": "HP%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1031",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1010",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1793",
+          "mainStat": "PEN%"
+        }
+      ],
+      "talismans": ["$esv"],
+      "sets": [
+        {
+          "preset": "p4"
+        }
+      ],
+      "substats": "HP%>SPD>HP>DMG RED%=DMG UP%>DEF=RES"
+    },
+    {
+      "name": "Life mix",
+      "weapons": [
+        {
+          "id": "14",
+          "mainStat": "HP%"
+        },
+        {
+          "id": "19",
+          "mainStat": "HP%"
+        },
+        {
+          "id": "780",
+          "mainStat": "HP%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1031",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1010",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1793",
+          "mainStat": "PEN%"
+        }
+      ],
+      "talismans": ["$esv"],
+      "sets": [
+        {
+          "preset": "ct2hp2"
+        },
+        {
+          "pieces": [
+            {
+              "set": "3",
+              "count": 2
+            },
+            {
+              "set": "10",
+              "count": 2
+            }
+          ]
+        },
+        {
+          "preset": "p2hp2"
+        },
+        {
+          "preset": "hp2sw2"
+        }
+      ],
+      "substats": "HP%>SPD>HP>DMG RED%=DMG UP%>DEF=RES"
     }
   ],
   "2000010": [
