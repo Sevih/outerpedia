@@ -4845,7 +4845,16 @@
     ]
   },
   "2000123": {
-    "role": "support"
+    "role": "support",
+    "videos": [
+      {
+        "platform": "youtube",
+        "id": "VIW7twqtDJI",
+        "title": "[OUTERPLANE] Aisla (VA. Kawase Maki)",
+        "author": "아우터플레인 공식 채널",
+        "uploadDate": "2026-11-06T10:02:30Z"
+      }
+    ]
   },
   "2000124": {
     "rank": "S",
