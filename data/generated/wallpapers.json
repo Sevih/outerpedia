@@ -663,6 +663,11 @@
       "h": 1100
     },
     {
+      "f": "IMG_2000123",
+      "w": 682,
+      "h": 1024
+    },
+    {
       "f": "IMG_2000124",
       "w": 1708,
       "h": 1170
@@ -998,6 +1003,11 @@
       "h": 670
     },
     {
+      "f": "IMG_2010123",
+      "w": 350,
+      "h": 826
+    },
+    {
       "f": "IMG_2010124",
       "w": 624,
       "h": 920
@@ -1161,6 +1171,11 @@
       "f": "IMG_2020120",
       "w": 688,
       "h": 1024
+    },
+    {
+      "f": "IMG_2020123",
+      "w": 358,
+      "h": 824
     },
     {
       "f": "IMG_2030012",
@@ -1883,6 +1898,11 @@
       "h": 1024
     },
     {
+      "f": "T_CutIn_2000123",
+      "w": 512,
+      "h": 1024
+    },
+    {
       "f": "T_CutIn_2000124",
       "w": 512,
       "h": 1024
@@ -2203,6 +2223,11 @@
       "h": 1024
     },
     {
+      "f": "T_CutIn_2010123",
+      "w": 512,
+      "h": 1024
+    },
+    {
       "f": "T_CutIn_2010124",
       "w": 512,
       "h": 1024
@@ -2363,6 +2388,11 @@
       "h": 1024
     },
     {
+      "f": "T_CutIn_2020123",
+      "w": 512,
+      "h": 1024
+    },
+    {
       "f": "T_CutIn_2030012",
       "w": 512,
       "h": 1024
@@ -2478,6 +2508,12 @@
       "h": 1024
     },
     {
+      "f": "T_CutIn_2000008@1",
+      "w": 512,
+      "h": 1024,
+      "retired": true
+    },
+    {
       "f": "T_CutIn_2000035@1",
       "w": 512,
       "h": 1024,
@@ -2497,6 +2533,11 @@
     }
   ],
   "Banner": [
+    {
+      "f": "T_Event_Banner_Attendance_01",
+      "w": 890,
+      "h": 526
+    },
     {
       "f": "T_Event_Banner_Full_001",
       "w": 890,
@@ -3310,6 +3351,91 @@
       "h": 1024
     },
     {
+      "f": "T_ScenarioCG_A0106",
+      "w": 2048,
+      "h": 1024
+    },
+    {
+      "f": "T_ScenarioCG_A0206",
+      "w": 2048,
+      "h": 1024
+    },
+    {
+      "f": "T_ScenarioCG_A0313",
+      "w": 2048,
+      "h": 1024
+    },
+    {
+      "f": "T_ScenarioCG_A0401",
+      "w": 2048,
+      "h": 1024
+    },
+    {
+      "f": "T_ScenarioCG_A0506",
+      "w": 2048,
+      "h": 1024
+    },
+    {
+      "f": "T_ScenarioCG_A0611",
+      "w": 2048,
+      "h": 1024
+    },
+    {
+      "f": "T_ScenarioCG_A0710",
+      "w": 2048,
+      "h": 1024
+    },
+    {
+      "f": "T_ScenarioCG_A0811",
+      "w": 2048,
+      "h": 1024
+    },
+    {
+      "f": "T_ScenarioCG_A0911",
+      "w": 2048,
+      "h": 1024
+    },
+    {
+      "f": "T_ScenarioCG_AER_01",
+      "w": 2048,
+      "h": 1024
+    },
+    {
+      "f": "T_ScenarioCG_AISLA_01",
+      "w": 2048,
+      "h": 1024
+    },
+    {
+      "f": "T_ScenarioCG_AKARI_01",
+      "w": 2048,
+      "h": 1024
+    },
+    {
+      "f": "T_ScenarioCG_ALICE_01",
+      "w": 2048,
+      "h": 1024
+    },
+    {
+      "f": "T_ScenarioCG_AME_01",
+      "w": 2048,
+      "h": 1024
+    },
+    {
+      "f": "T_ScenarioCG_ANARCHY_01",
+      "w": 2048,
+      "h": 1024
+    },
+    {
+      "f": "T_ScenarioCG_ANARCHY_02",
+      "w": 2048,
+      "h": 1024
+    },
+    {
+      "f": "T_ScenarioCG_ASTEI_01",
+      "w": 2048,
+      "h": 1024
+    },
+    {
       "f": "T_ScenarioCG_BRYN_01",
       "w": 2048,
       "h": 1024
@@ -3331,6 +3457,26 @@
     },
     {
       "f": "T_ScenarioCG_CHRISTINA_01",
+      "w": 2048,
+      "h": 1024
+    },
+    {
+      "f": "T_ScenarioCG_DALIA_01",
+      "w": 2048,
+      "h": 1024
+    },
+    {
+      "f": "T_ScenarioCG_DELTA_01",
+      "w": 2048,
+      "h": 1024
+    },
+    {
+      "f": "T_ScenarioCG_DIANNE_01",
+      "w": 2048,
+      "h": 1024
+    },
+    {
+      "f": "T_ScenarioCG_DRAIKAN_01",
       "w": 2048,
       "h": 1024
     },
@@ -3821,6 +3967,12 @@
       "retired": true
     },
     {
+      "f": "T_ScenarioCG_RONA_01@1",
+      "w": 2048,
+      "h": 1024,
+      "retired": true
+    },
+    {
       "f": "T_ScenarioBG_E2405_01",
       "w": 2048,
       "h": 1024,
@@ -4008,6 +4160,403 @@
       "f": "image_030_0000",
       "w": 2048,
       "h": 1024
+    }
+  ],
+  "Emotes": [
+    {
+      "f": "T_Chat_Emoticon_01",
+      "w": 128,
+      "h": 128
+    },
+    {
+      "f": "T_Chat_Emoticon_02",
+      "w": 128,
+      "h": 128
+    },
+    {
+      "f": "T_Chat_Emoticon_03",
+      "w": 128,
+      "h": 128
+    },
+    {
+      "f": "T_Chat_Emoticon_04",
+      "w": 128,
+      "h": 128
+    },
+    {
+      "f": "T_Chat_Emoticon_05",
+      "w": 128,
+      "h": 128
+    },
+    {
+      "f": "T_Chat_Emoticon_06",
+      "w": 128,
+      "h": 128
+    },
+    {
+      "f": "T_Chat_Emoticon_07",
+      "w": 128,
+      "h": 128
+    },
+    {
+      "f": "T_Chat_Emoticon_08",
+      "w": 128,
+      "h": 128
+    },
+    {
+      "f": "T_Chat_Emoticon_09",
+      "w": 128,
+      "h": 128
+    },
+    {
+      "f": "T_Chat_Emoticon_10",
+      "w": 128,
+      "h": 128
+    },
+    {
+      "f": "T_Chat_Emoticon_11",
+      "w": 128,
+      "h": 128
+    },
+    {
+      "f": "T_Chat_Emoticon_12",
+      "w": 128,
+      "h": 128
+    },
+    {
+      "f": "T_Chat_Emoticon_13",
+      "w": 128,
+      "h": 128
+    },
+    {
+      "f": "T_Chat_Emoticon_14",
+      "w": 128,
+      "h": 128
+    },
+    {
+      "f": "T_Chat_Emoticon_15",
+      "w": 128,
+      "h": 128
+    },
+    {
+      "f": "T_Chat_Emoticon_16",
+      "w": 128,
+      "h": 128
+    },
+    {
+      "f": "T_Chat_Emoticon_17",
+      "w": 128,
+      "h": 128
+    },
+    {
+      "f": "T_Chat_Emoticon_18",
+      "w": 128,
+      "h": 128
+    },
+    {
+      "f": "T_Chat_Emoticon_19",
+      "w": 128,
+      "h": 128
+    },
+    {
+      "f": "T_Chat_Emoticon_20",
+      "w": 128,
+      "h": 128
+    },
+    {
+      "f": "T_Chat_Emoticon_21",
+      "w": 128,
+      "h": 128
+    },
+    {
+      "f": "T_Chat_Emoticon_22",
+      "w": 128,
+      "h": 128
+    },
+    {
+      "f": "T_Chat_Emoticon_23",
+      "w": 128,
+      "h": 128
+    },
+    {
+      "f": "T_Chat_Emoticon_24",
+      "w": 128,
+      "h": 128
+    },
+    {
+      "f": "T_Chat_Emoticon_25",
+      "w": 128,
+      "h": 128
+    },
+    {
+      "f": "T_Chat_Emoticon_26",
+      "w": 128,
+      "h": 128
+    },
+    {
+      "f": "T_Chat_Emoticon_27",
+      "w": 128,
+      "h": 128
+    },
+    {
+      "f": "T_Chat_Emoticon_28",
+      "w": 128,
+      "h": 128
+    },
+    {
+      "f": "T_Chat_Emoticon_29",
+      "w": 128,
+      "h": 128
+    },
+    {
+      "f": "T_Chat_Emoticon_30",
+      "w": 128,
+      "h": 128
+    },
+    {
+      "f": "T_Chat_Emoticon_31",
+      "w": 128,
+      "h": 128
+    },
+    {
+      "f": "T_Chat_Emoticon_32",
+      "w": 128,
+      "h": 128
+    },
+    {
+      "f": "T_Chat_Emoticon_33",
+      "w": 128,
+      "h": 128
+    },
+    {
+      "f": "T_Chat_Emoticon_34",
+      "w": 128,
+      "h": 128
+    },
+    {
+      "f": "T_Chat_Emoticon_35",
+      "w": 128,
+      "h": 128
+    },
+    {
+      "f": "T_Chat_Emoticon_36",
+      "w": 128,
+      "h": 128
+    },
+    {
+      "f": "T_Chat_Emoticon_37",
+      "w": 128,
+      "h": 128
+    },
+    {
+      "f": "T_Chat_Emoticon_38",
+      "w": 128,
+      "h": 128
+    },
+    {
+      "f": "T_Chat_Emoticon_39",
+      "w": 128,
+      "h": 128
+    },
+    {
+      "f": "T_Chat_Emoticon_40",
+      "w": 128,
+      "h": 128
+    },
+    {
+      "f": "T_Chat_Emoticon_41",
+      "w": 128,
+      "h": 128
+    },
+    {
+      "f": "T_Chat_Emoticon_42",
+      "w": 128,
+      "h": 128
+    },
+    {
+      "f": "T_Chat_Emoticon_43",
+      "w": 128,
+      "h": 128
+    },
+    {
+      "f": "T_Chat_Emoticon_44",
+      "w": 128,
+      "h": 128
+    },
+    {
+      "f": "T_Chat_Emoticon_45",
+      "w": 128,
+      "h": 128
+    },
+    {
+      "f": "T_Chat_Emoticon_46",
+      "w": 128,
+      "h": 128
+    },
+    {
+      "f": "T_Chat_Emoticon_47",
+      "w": 128,
+      "h": 128
+    },
+    {
+      "f": "T_Chat_Emoticon_48",
+      "w": 128,
+      "h": 128
+    },
+    {
+      "f": "T_Chat_Emoticon_49",
+      "w": 128,
+      "h": 128
+    },
+    {
+      "f": "T_Chat_Emoticon_50",
+      "w": 128,
+      "h": 128
+    },
+    {
+      "f": "T_Chat_Emoticon_51",
+      "w": 128,
+      "h": 128
+    },
+    {
+      "f": "T_Chat_Emoticon_52",
+      "w": 128,
+      "h": 128
+    },
+    {
+      "f": "T_Chat_Emoticon_53",
+      "w": 128,
+      "h": 128
+    },
+    {
+      "f": "T_Chat_Emoticon_54",
+      "w": 128,
+      "h": 128
+    },
+    {
+      "f": "T_Chat_Emoticon_55",
+      "w": 128,
+      "h": 128
+    },
+    {
+      "f": "T_Chat_Emoticon_56",
+      "w": 128,
+      "h": 128
+    },
+    {
+      "f": "T_Chat_Emoticon_57",
+      "w": 128,
+      "h": 128
+    },
+    {
+      "f": "T_Chat_Emoticon_58",
+      "w": 128,
+      "h": 128
+    },
+    {
+      "f": "T_Chat_Emoticon_59",
+      "w": 128,
+      "h": 128
+    },
+    {
+      "f": "T_Chat_Emoticon_60",
+      "w": 128,
+      "h": 128
+    },
+    {
+      "f": "T_Chat_Emoticon_61",
+      "w": 128,
+      "h": 128
+    },
+    {
+      "f": "T_Chat_Emoticon_62",
+      "w": 128,
+      "h": 128
+    },
+    {
+      "f": "T_Chat_Emoticon_63",
+      "w": 128,
+      "h": 128
+    },
+    {
+      "f": "T_Chat_Emoticon_64",
+      "w": 128,
+      "h": 128
+    },
+    {
+      "f": "T_Chat_Emoticon_65",
+      "w": 128,
+      "h": 128
+    },
+    {
+      "f": "T_Chat_Emoticon_66",
+      "w": 128,
+      "h": 128
+    },
+    {
+      "f": "T_Chat_Emoticon_67",
+      "w": 128,
+      "h": 128
+    },
+    {
+      "f": "T_Chat_Emoticon_68",
+      "w": 128,
+      "h": 128
+    },
+    {
+      "f": "T_Chat_Emoticon_69",
+      "w": 128,
+      "h": 128
+    },
+    {
+      "f": "T_Chat_Emoticon_70",
+      "w": 128,
+      "h": 128
+    },
+    {
+      "f": "T_Chat_Emoticon_71",
+      "w": 128,
+      "h": 128
+    },
+    {
+      "f": "T_Chat_Emoticon_72",
+      "w": 128,
+      "h": 128
+    },
+    {
+      "f": "T_Chat_Emoticon_73",
+      "w": 128,
+      "h": 128
+    },
+    {
+      "f": "T_Chat_Emoticon_74",
+      "w": 128,
+      "h": 128
+    },
+    {
+      "f": "T_Chat_Emoticon_75",
+      "w": 128,
+      "h": 128
+    },
+    {
+      "f": "T_Chat_Emoticon_76",
+      "w": 128,
+      "h": 128
+    },
+    {
+      "f": "T_Chat_Emoticon_77",
+      "w": 128,
+      "h": 128
+    },
+    {
+      "f": "T_Chat_Emoticon_78",
+      "w": 128,
+      "h": 128
+    },
+    {
+      "f": "T_Chat_Emoticon_79",
+      "w": 128,
+      "h": 128
     }
   ]
 }
