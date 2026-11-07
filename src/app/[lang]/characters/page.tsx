@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { normalizeLang, type Lang } from '@/lib/i18n/config';
+import { LANGUAGES, normalizeLang, type Lang } from '@/lib/i18n/config';
 import { getT, type TFunction, type TranslationKey } from '@/i18n';
 import { createPageMetadata, buildItemListJsonLd, buildUrl } from '@/lib/seo';
 import JsonLd from '@/components/seo/JsonLd';
@@ -73,6 +73,9 @@ const TEAM_BONUS_ORDER = [
 /** Libellés localisés des gifts (present_0X → nom), depuis le glossaire. */
 const GIFT_NAMES: Record<string, Record<string, string>> = getGlossaries().gifts ?? {};
 
+/** Sous-classes (code → nom, description), depuis le glossaire du jeu. */
+const SUB_CLASSES = getGlossaries().subClasses;
+
 export async function generateMetadata({
   params,
 }: {
@@ -103,6 +106,7 @@ function buildRows(lang: Lang): CharacterRow[] {
       searchNames: characterSearchNames(c, aliases[c.id]),
       element: c.element,
       class: c.class,
+      subClass: c.subClass ?? null,
       rarity: c.rarity,
       chainType: c.chainType,
       gift: c.gift,
@@ -163,6 +167,20 @@ function buildLabels(rows: CharacterRow[], lang: Lang, t: TFunction): Characters
   // tag selon la page, et jamais traduit.
   const presentTags = new Set(rows.flatMap((r) => r.tags));
   const tagMap = Object.fromEntries([...presentTags].map((tg) => [tg, tagLabel(tg, lang)]));
+
+  // Sous-classes présentes, nommées par le glossaire (comme la fiche perso).
+  // Ordre alphabétique du libellé localisé : le glossaire n'en porte aucun
+  // (ses entrées suivent l'ordre de rencontre dans les tables de monstres).
+  const subClassMap = Object.fromEntries(
+    [...new Set(rows.map((r) => r.subClass).filter((v): v is string => Boolean(v)))].map((v) => [
+      v,
+      lRec(SUB_CLASSES[v]?.name, lang) || v,
+    ]),
+  );
+  const subClassOrder = Object.keys(subClassMap).sort((a, b) =>
+    subClassMap[a].localeCompare(subClassMap[b], LANGUAGES[lang].htmlLang),
+  );
+  const subClassIcons = Object.fromEntries(subClassOrder.map((v) => [v, img.subClass(v)]));
   const tagIcons = Object.fromEntries([...presentTags].map((tg) => [tg, img.tag(tg)]));
 
   /**
@@ -233,6 +251,7 @@ function buildLabels(rows: CharacterRow[], lang: Lang, t: TFunction): Characters
       tabTags: t('characters.filters.tab.tags'),
       chains: t('characters.filters.chains'),
       roles: t('characters.filters.roles'),
+      subClasses: t('filters.subclasses'),
       gifts: t('characters.filters.gifts'),
       teamBonus: t('characters.filters.teamBonus'),
       tags: t('characters.filters.tab.tags'),
@@ -272,6 +291,7 @@ function buildLabels(rows: CharacterRow[], lang: Lang, t: TFunction): Characters
         rows.map((r) => r.class),
         'sys.class',
       ),
+      subClass: subClassMap,
       role: optionMap(
         rows.map((r) => r.role),
         'filters.roles',
@@ -280,6 +300,8 @@ function buildLabels(rows: CharacterRow[], lang: Lang, t: TFunction): Characters
       gift: giftMap,
       tag: tagMap,
     },
+    subClassOrder,
+    subClassIcons,
     tagIcons,
     tagOrder,
     tagGroups: groupTags.length ? { [LIMITED_GROUP]: groupTags } : {},

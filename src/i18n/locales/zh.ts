@@ -1039,6 +1039,7 @@ const zh: Record<TranslationKey, string> = {
   'filters.rarity': '星级',
   'filters.elements': '属性',
   'filters.classes': '战斗类型',
+  'filters.subclasses': '副职业',
   'filters.roles.dps': '输出',
   'filters.roles.support': '辅助',
   'filters.roles.sustain': '奶/坦',

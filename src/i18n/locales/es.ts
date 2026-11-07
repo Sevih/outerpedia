@@ -1114,6 +1114,7 @@ const es: Record<TranslationKey, string> = {
   'filters.rarity': 'Rareza',
   'filters.elements': 'Elementos',
   'filters.classes': 'Clases',
+  'filters.subclasses': 'Subclases',
   'filters.roles.dps': 'DPS',
   'filters.roles.support': 'Apoyo',
   'filters.roles.sustain': 'Sustentación',

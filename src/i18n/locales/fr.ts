@@ -1108,6 +1108,7 @@ const fr: Record<TranslationKey, string> = {
   'filters.rarity': 'Rareté',
   'filters.elements': 'Éléments',
   'filters.classes': 'Classes',
+  'filters.subclasses': 'Sous-classes',
   'filters.roles.dps': 'DPS',
   'filters.roles.support': 'Support',
   'filters.roles.sustain': 'Sustain',

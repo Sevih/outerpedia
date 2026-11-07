@@ -1060,6 +1060,7 @@ const kr: Record<TranslationKey, string> = {
   'filters.rarity': '희귀도',
   'filters.elements': '속성',
   'filters.classes': '클래스',
+  'filters.subclasses': '서브클래스',
   'filters.roles.dps': 'DPS',
   'filters.roles.support': '서포트',
   'filters.roles.sustain': '탱커',

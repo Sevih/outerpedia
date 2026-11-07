@@ -1104,6 +1104,7 @@ const en = {
   'filters.rarity': 'Rarity',
   'filters.elements': 'Elements',
   'filters.classes': 'Classes',
+  'filters.subclasses': 'Sub-classes',
   'filters.roles.dps': 'DPS',
   'filters.roles.support': 'Support',
   'filters.roles.sustain': 'Sustain',

@@ -13,10 +13,10 @@ import {
 } from './filters/ActiveFiltersStrip';
 import type { AdvancedPanelLabels, FilterOption } from './filters/AdvancedFiltersPanel';
 import { ELEMENT_HEX, ROLE_HEX, RARITY_HEX, TONE } from './filters/FilterAtoms';
-import { decodeFilters, encodeFilters } from './filters/filter-codec';
+import { decodeFilters, encodeFilters, type FilterState } from './filters/filter-codec';
+import { filterCharacterRows } from './filters/filter-rows';
 import { shortShareUrl } from '@/lib/short-share';
 import { useCopyToClipboard } from '@/hooks/useCopyToClipboard';
-import { normalizeSearchText } from '@/lib/search-text';
 import { CLASS_ORDER, ELEMENT_ORDER, inOrder } from '@/lib/images';
 import type { EffectGroup } from '@/lib/data/effect-filters';
 
@@ -34,6 +34,8 @@ export interface CharacterRow {
   searchNames: string[];
   element: string;
   class: string;
+  /** Code de sous-classe du jeu (`bruiser`) — `null` si le perso n'en a pas. */
+  subClass: string | null;
   rarity: number;
   chainType?: string;
   gift?: string;
@@ -66,11 +68,17 @@ export interface CharactersBrowserLabels {
   options: {
     element: Record<string, string>;
     class: Record<string, string>;
+    /** Code de sous-classe → nom du glossaire, dans la langue de la page. */
+    subClass: Record<string, string>;
     role: Record<string, string>;
     chain: Record<string, string>;
     gift: Record<string, string>;
     tag: Record<string, string>;
   };
+  /** Sous-classes présentes, dans l'ordre d'affichage (alphabétique du libellé). */
+  subClassOrder: string[];
+  /** Icônes des sous-classes (code → URL). */
+  subClassIcons: Record<string, string>;
   /** Icônes des tags (slug → URL). */
   tagIcons: Record<string, string>;
   /**
@@ -116,6 +124,7 @@ export function CharactersBrowser({
   const [q, setQ] = useState('');
   const [element, setElement] = useState<string[]>([]);
   const [klass, setKlass] = useState<string[]>([]);
+  const [subClass, setSubClass] = useState<string[]>([]);
   const [rarity, setRarity] = useState<number[]>([]);
   const [chain, setChain] = useState<string[]>([]);
   const [gift, setGift] = useState<string[]>([]);
@@ -156,14 +165,6 @@ export function CharactersBrowser({
   // Ordonnées côté serveur (ordre canonique + familles) : le client ne
   // retrie pas des slugs dont il n'affiche que les libellés.
   const allTags = labels.tagOrder;
-  /** Le row porte-t-il ce tag — ou, pour une famille, l'un de ses tags ? */
-  const matchTag = useMemo(() => {
-    const groups = labels.tagGroups;
-    return (row: CharacterRow, tag: string) => {
-      const members = groups[tag];
-      return members ? members.some((m) => row.tags.includes(m)) : row.tags.includes(tag);
-    };
-  }, [labels.tagGroups]);
 
   // ── Bascule multi-sélection générique ──
   const toggle =
@@ -184,6 +185,8 @@ export function CharactersBrowser({
     setQ(decoded ? decoded.q : (p.get('q') ?? ''));
     setElement(decoded ? decoded.element : list('el'));
     setKlass(decoded ? decoded.klass : list('cl'));
+    // Pas d'équivalent en clair : la sous-classe est postérieure aux params `?el=…`.
+    setSubClass(decoded ? decoded.subClass : []);
     setRarity(
       decoded
         ? decoded.rarity
@@ -218,6 +221,7 @@ export function CharactersBrowser({
       q,
       element,
       klass,
+      subClass,
       rarity,
       chain,
       gift,
@@ -247,6 +251,7 @@ export function CharactersBrowser({
     q,
     element,
     klass,
+    subClass,
     rarity,
     chain,
     gift,
@@ -264,83 +269,45 @@ export function CharactersBrowser({
     pathname,
   ]);
 
-  // ── Filtrage ──
+  // ── Filtrage ── (fonction pure, cf. `filters/filter-rows.ts`)
   const filtered = useMemo(() => {
-    const needle = normalizeSearchText(q);
-    const elS = new Set(element);
-    const clS = new Set(klass);
-    const rS = new Set(rarity);
-    const chS = new Set(chain);
-    const gS = new Set(gift);
-    const roS = new Set(role);
-
-    // Un effet appliqué par le perso, RESTREINT aux sources sélectionnées le cas
-    // échéant (règle historique `charHasEffectFromSources`). Clés déjà canoniques.
-    const hasEffect = (row: CharacterRow, key: string, side: 'buff' | 'debuff') => {
-      if (!sources.length) return (row[side] ?? []).includes(key);
-      const ebs = row.effectsBySource;
-      if (!ebs) return (row[side] ?? []).includes(key);
-      return sources.some((s) => (ebs[s]?.[side] ?? []).includes(key));
+    const state: FilterState = {
+      q,
+      element,
+      klass,
+      subClass,
+      rarity,
+      chain,
+      gift,
+      role,
+      tags,
+      tagLogic,
+      buffs,
+      debuffs,
+      effectLogic,
+      sources,
+      showUnique,
+      teamBonuses,
     };
-
-    return rows.filter((row) => {
-      if (needle && !row.searchNames.some((n) => n.includes(needle))) return false;
-      if (elS.size && !elS.has(row.element)) return false;
-      if (clS.size && !clS.has(row.class)) return false;
-      if (rS.size && !rS.has(row.rarity)) return false;
-      if (chS.size && (!row.chainType || !chS.has(row.chainType))) return false;
-      if (gS.size && (!row.gift || !gS.has(row.gift))) return false;
-      if (roS.size && (!row.role || !roS.has(row.role))) return false;
-      if (tags.length) {
-        const ok =
-          tagLogic === 'AND'
-            ? tags.every((t) => matchTag(row, t))
-            : tags.some((t) => matchTag(row, t));
-        if (!ok) return false;
-      }
-      // Effets : buffs et debuffs combinés selon la logique ET/OU (inchangé).
-      if (buffs.length || debuffs.length) {
-        const hb = buffs.length
-          ? effectLogic === 'AND'
-            ? buffs.every((b) => hasEffect(row, b, 'buff'))
-            : buffs.some((b) => hasEffect(row, b, 'buff'))
-          : true;
-        const hd = debuffs.length
-          ? effectLogic === 'AND'
-            ? debuffs.every((d) => hasEffect(row, d, 'debuff'))
-            : debuffs.some((d) => hasEffect(row, d, 'debuff'))
-          : true;
-        const match =
-          buffs.length && debuffs.length
-            ? effectLogic === 'AND'
-              ? hb && hd
-              : hb || hd
-            : buffs.length
-              ? hb
-              : hd;
-        if (!match) return false;
-      }
-      // Bonus d'équipe : le perso doit fournir AU MOINS un des bonus cochés (OU).
-      if (teamBonuses.length && !row.teamBonuses?.some((tb) => teamBonuses.includes(tb)))
-        return false;
-      return true;
-    });
+    return filterCharacterRows(rows, state, labels.tagGroups);
   }, [
     rows,
     q,
     element,
     klass,
+    subClass,
     rarity,
     chain,
     gift,
     role,
     tags,
     tagLogic,
-    matchTag,
+    labels.tagGroups,
     buffs,
     debuffs,
     effectLogic,
     sources,
+    showUnique,
     teamBonuses,
   ]);
 
@@ -368,6 +335,7 @@ export function CharactersBrowser({
     setQ('');
     setElement([]);
     setKlass([]);
+    setSubClass([]);
     setRarity([]);
     setChain([]);
     setGift([]);
@@ -405,6 +373,13 @@ export function CharactersBrowser({
         label: labels.options.class[cl] ?? cl,
         color: TONE.cyan,
         onRemove: () => setKlass((p) => p.filter((v) => v !== cl)),
+      });
+    for (const sc of subClass)
+      out.push({
+        key: `sc-${sc}`,
+        label: labels.options.subClass[sc] ?? sc,
+        color: TONE.cyan,
+        onRemove: () => setSubClass((p) => p.filter((v) => v !== sc)),
       });
     for (const r of rarity)
       out.push({
@@ -482,6 +457,7 @@ export function CharactersBrowser({
     q,
     element,
     klass,
+    subClass,
     rarity,
     chain,
     role,
@@ -495,6 +471,7 @@ export function CharactersBrowser({
   ]);
 
   const advancedCount =
+    subClass.length +
     chain.length +
     role.length +
     gift.length +
@@ -507,6 +484,9 @@ export function CharactersBrowser({
 
   const panelProps = {
     labels: labels.panel,
+    subClasses: toOptions(labels.subClassOrder, labels.options.subClass, labels.subClassIcons),
+    subClassFilter: subClass,
+    onToggleSubClass: toggle(setSubClass),
     chains: toOptions(chains, labels.options.chain),
     chainFilter: chain,
     onToggleChain: toggle(setChain),

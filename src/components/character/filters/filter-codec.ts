@@ -26,6 +26,8 @@ export interface FilterState {
   q: string;
   element: string[];
   klass: string[];
+  /** Codes de sous-classe du jeu (`bruiser`, `sage`…). */
+  subClass: string[];
   rarity: number[];
   chain: string[];
   gift: string[];
@@ -61,6 +63,12 @@ interface ZPayload {
   bx?: string[];
   dx?: string[];
   tx?: string[];
+  /**
+   * Sous-classes (A86, 07/11/2026), EN CLAIR : le champ n'existait pas dans le
+   * format hérité, et les codes sont les slugs du jeu (`bruiser`) — pas de
+   * table de bits à geler ni à tenir à jour si le jeu en ajoute une.
+   */
+  sc?: string[];
 }
 
 // ── Vocabulaires fermés : slugs actuels aux positions de bits héritées ─────
@@ -533,6 +541,7 @@ export function encodeFilters(s: FilterState): string | undefined {
     bx: b.extra,
     dx: d.extra,
     tx: t.extra,
+    sc: s.subClass.length ? s.subClass : undefined,
   };
   const json = JSON.stringify(z);
   if (json === '{}') return undefined;
@@ -550,6 +559,7 @@ export function decodeFilters(z: string | null | undefined): FilterState | null 
       q: raw.q ?? '',
       element: fromBits(raw.e, ELEM_INV, 5),
       klass: fromBits(raw.c, CLASS_INV, 5),
+      subClass: Array.isArray(raw.sc) ? raw.sc.filter((v) => typeof v === 'string') : [],
       rarity: fromBits(raw.r, RARITY_INV, 3),
       chain: fromBits(raw.ch, CHAIN_INV, 3),
       gift: fromBits(raw.g, GIFT_INV, 5),

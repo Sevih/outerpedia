@@ -1074,6 +1074,7 @@ const jp: Record<TranslationKey, string> = {
   'filters.rarity': 'レアリティ',
   'filters.elements': '属性',
   'filters.classes': 'クラス',
+  'filters.subclasses': 'サブクラス',
   'filters.roles.dps': 'DPS',
   'filters.roles.support': 'サポート',
   'filters.roles.sustain': '耐久',

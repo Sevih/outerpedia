@@ -20,6 +20,7 @@ export interface AdvancedPanelLabels {
   tabTags: string;
   chains: string;
   roles: string;
+  subClasses: string;
   gifts: string;
   teamBonus: string;
   tags: string;
@@ -41,6 +42,13 @@ export interface AdvancedFiltersPanelProps {
   roles: FilterOption[];
   roleFilter: string[];
   onToggleRole: (v: string) => void;
+  /**
+   * Sous-classes du jeu (A86). Ici et pas dans la barre : dix pilules
+   * icône + libellé n'y tiennent pas sur une ligne à 1280 px.
+   */
+  subClasses: FilterOption[];
+  subClassFilter: string[];
+  onToggleSubClass: (v: string) => void;
   gifts: FilterOption[];
   giftFilter: string[];
   onToggleGift: (v: string) => void;
@@ -90,6 +98,9 @@ export function AdvancedFiltersPanel(props: AdvancedFiltersPanelProps) {
     roles,
     roleFilter,
     onToggleRole,
+    subClasses,
+    subClassFilter,
+    onToggleSubClass,
     gifts,
     giftFilter,
     onToggleGift,
@@ -120,7 +131,7 @@ export function AdvancedFiltersPanel(props: AdvancedFiltersPanelProps) {
   const hasBonus = teamBonusOptions.length > 0;
 
   const counts: Record<TabKey, number> = {
-    combat: chainFilter.length + roleFilter.length + giftFilter.length,
+    combat: chainFilter.length + roleFilter.length + subClassFilter.length + giftFilter.length,
     effects:
       selectedBuffs.length + selectedDebuffs.length + sourceFilter.length + (showUnique ? 1 : 0),
     bonus: teamBonusFilter.length,
@@ -187,6 +198,13 @@ export function AdvancedFiltersPanel(props: AdvancedFiltersPanelProps) {
               options={roles}
               selected={roleFilter}
               onToggle={onToggleRole}
+            />
+            <PillSection
+              label={labels.subClasses}
+              options={subClasses}
+              selected={subClassFilter}
+              onToggle={onToggleSubClass}
+              withIcon
             />
             <PillSection
               label={labels.gifts}

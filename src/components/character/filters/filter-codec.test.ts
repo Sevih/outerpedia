@@ -12,6 +12,7 @@ const EMPTY: FilterState = {
   q: '',
   element: [],
   klass: [],
+  subClass: [],
   rarity: [],
   chain: [],
   gift: [],
@@ -36,6 +37,7 @@ describe('encodeFilters', () => {
       q: 'luna',
       element: ['fire', 'earth'],
       klass: ['striker', 'mage'],
+      subClass: ['bruiser', 'wizard'],
       rarity: [3],
       chain: ['join'],
       gift: ['present_03'],
@@ -78,6 +80,20 @@ describe('encodeFilters', () => {
     expect(round.tags).toEqual(['festival', 'limited']);
   });
 
+  it('sous-classes : clé `sc` en clair, aller-retour, absente si vide', () => {
+    const z = encodeFilters({ ...EMPTY, klass: ['striker'], subClass: ['bruiser'] })!;
+    expect(JSON.parse(LZString.decompressFromEncodedURIComponent(z))).toEqual({
+      c: 1,
+      sc: ['bruiser'],
+    });
+    expect(decodeFilters(z)!.subClass).toEqual(['bruiser']);
+    // Sans sous-classe, la clé n'apparaît pas : les liens existants restent
+    // octet pour octet identiques (cf. l'épinglage ci-dessous).
+    expect(encodeFilters({ ...EMPTY, klass: ['striker'] })).toBe(
+      LZString.compressToEncodedURIComponent('{"c":1}'),
+    );
+  });
+
   it('ÉPINGLAGE du format de fil (compat liens — ne doit JAMAIS changer)', () => {
     const state: FilterState = {
       ...EMPTY,
@@ -115,6 +131,7 @@ describe('decodeFilters — format hérité brut', () => {
     expect(decoded.teamBonuses).toEqual(['SPD', 'ATK']);
     expect(decoded.showUnique).toBe(true);
     expect(decoded.q).toBe('ml');
+    expect(decoded.subClass).toEqual([]);
   });
 
   it('indices d’effets/tags hérités → clés canoniques, variantes repliées + dédup', () => {
