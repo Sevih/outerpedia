@@ -3445,6 +3445,35 @@
       }
     ]
   },
+  "2000123": {
+    "name": {
+      "en": "Bergelmir",
+      "jp": "ベルゲルミル",
+      "kr": "베르겔미르",
+      "zh": "贝格尔米尔",
+      "fr": "Bergelmir",
+      "es": "Bergelmir"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000123",
+    "craftable": false,
+    "character": "2000123",
+    "trustLevel": 10,
+    "options": ["2000123"],
+    "passives": [
+      {
+        "id": "2000123",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100123",
+        "level": 10,
+        "isAdd": true
+      }
+    ]
+  },
   "2000124": {
     "name": {
       "en": "Salvage Spear",

@@ -11896,6 +11896,39 @@
       }
     ]
   },
+  "2000123": {
+    "name": {
+      "en": "Aisla's Exclusive Equipment",
+      "jp": "アイスラ専用装備",
+      "kr": "아이슬라의 전용 장비",
+      "zh": "艾丝拉的专属装备",
+      "fr": "Équipement exclusif d'Aisla",
+      "es": "Equipo exclusivo de Aisla"
+    },
+    "desc": {
+      "en": "All Fire enemies' Penetration -25%",
+      "jp": "火属性の敵全体の貫通力-25%",
+      "kr": "화속성 적 전체 관통력 -25%",
+      "zh": "全体火属性敌人的穿透力-25%",
+      "fr": "PÉN contre tous les ennemis de Feu -25 %",
+      "es": "Penetración contra todos los enemigos de Fuego -25 %"
+    },
+    "values": [{}],
+    "levels": [1],
+    "icon": "TI_Icon_UO_EXCLUSIVE",
+    "buff": "BID_CEQUIP_2000123",
+    "effects": [
+      {
+        "family": "stat",
+        "category": "debuff",
+        "type": "BT_STAT",
+        "target": "enemy_team_element_fire_all",
+        "buff": "BID_CEQUIP_2000123",
+        "stat": "pierce_power_rate",
+        "mode": "down"
+      }
+    ]
+  },
   "2000124": {
     "name": {
       "en": "Demiurge Lambda's Exclusive Equipment",
@@ -16248,6 +16281,38 @@
         "buff": "BID_CEQUIP_2000122_ADD",
         "stat": "damage_boost",
         "mode": "up"
+      }
+    ]
+  },
+  "2100123": {
+    "name": {
+      "en": "Aisla's Exclusive Equipment",
+      "jp": "アイスラ専用装備",
+      "kr": "아이슬라의 전용 장비",
+      "zh": "艾丝拉的专属装备",
+      "fr": "Équipement exclusif d'Aisla",
+      "es": "Equipo exclusivo de Aisla"
+    },
+    "desc": {
+      "en": "Counterattacks with <color=#28d9ed>A Fierce Introduction</color> when hit (once per turn)",
+      "jp": "ダメージを受けた時、<color=#28d9ed>【手荒いご挨拶】</color>で反撃する（1ターンに1回のみ発動）",
+      "kr": "자신 피격 시 <color=#28d9ed>격렬한 첫인사</color>로 반격(1턴에 1회만 발동)",
+      "zh": "受到攻击时，以<color=#28d9ed>激烈的初次问候</color>进行反击（每回合仅触发1次）",
+      "fr": "Contre-attaque avec <color=#28d9ed>Des salutations musclées</color> après avoir subi une attaque (1 seule fois par tour)",
+      "es": "Al recibir un ataque, contraataca con <color=#28d9ed>Una presentación contundente</color> (solo 1 vez por turno)"
+    },
+    "values": [{}],
+    "levels": [1],
+    "icon": "TI_Icon_UO_EXCLUSIVE",
+    "buff": "BID_CEQUIP_2000123_ADD",
+    "effects": [
+      {
+        "family": "trigger",
+        "category": "buff",
+        "type": "BT_RUN_FIRST_SKILL_ON_TURN_END_DEFENDER",
+        "target": "me",
+        "buff": "BID_CEQUIP_2000123_ADD",
+        "label": "SYS_BUFF_COUNTER"
       }
     ]
   },
