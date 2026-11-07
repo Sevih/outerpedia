@@ -88,6 +88,12 @@ const CATEGORIES: CategoryDef[] = [
  *    `^T_Event_World_` (36), `_(d|body|cloud|a)` (21), `#` (10), `^sactx` (7),
  *    `^T_MonadGate_` (3), puis Recruit_Normal / Dialog_Title / `^T_Intro` /
  *    `^T_ScenarioBG_\d+` (1 chacun) ;
+ *    le compte de `_(d|body|cloud|a)` n'est PLUS VRAI — re-mesure du 2026-11-07
+ *    (A87, pool de 13 686 PNG) : non ancré en fin, le motif était le seul rempart
+ *    de 23 images, toutes de VRAIS wallpapers (CG de chapitre `A0106`…, CG
+ *    d'origine `AER_01`, `DELTA_01`…, `T_Event_Banner_Attendance_01`). Ancré, il
+ *    n'écarte plus aucun candidat seul sur ce pool (seul `T_Space_A` matche, déjà
+ *    écarté par `space`) : gardé par assurance, comme les inertes ;
  *  - 12 motifs INERTES sur ce pool (0 match) — assurance héritée (familles de
  *    textures/UI absentes du pool extrait : FX, Lightmap, colormap, mask, SDF,
  *    Nebula…) GARDÉS délibérément (décision Sevih 2026-07-26) : 12 lignes pour
@@ -99,7 +105,11 @@ const CATEGORIES: CategoryDef[] = [
 const EXCLUDE_PATTERNS: RegExp[] = [
   /#/,
   /^T_FX_/,
-  /(?:^T_.+_(d|body|cloud|a))/i,
+  // Textures suffixées `_d` / `_body` / `_cloud` / `_a` : ANCRÉ en fin de nom
+  // (extension tolérée, `shouldExclude` reçoit le basename AVEC `.png`). Sans
+  // l'ancre, le motif écartait tout nom dont un segment COMMENCE par A ou D
+  // (`T_ScenarioCG_A0106`, `T_ScenarioCG_AER_01`, `T_ScenarioBG_DELTA_01`…).
+  /^T_.+_(?:d|body|cloud|a)(?:\.\w+)?$/i,
   /^FX_/,
   /^T_DL/,
   /^LOADING_/,

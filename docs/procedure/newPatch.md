@@ -27,6 +27,18 @@ pnpm datagen:regen           # après une correction curée (quick, Effets…) :
 pnpm images                  # assets:collect + assets:push (R2) — AVANT le push git
 ```
 
+`pnpm images` (`datagen/assets/images.ts`) déroule, arrêt à la première étape
+en échec : `assets:collect-wallpapers` → `assets:collect` →
+`assets:collect-audio` → `assets:collect-comics` → (seulement si la collecte
+des wallpapers a archivé une version `<stem>@<n>`, un wallpaper que le jeu a
+remplacé en place) `datagen:build` puis `datagen:promote --apply --only
+wallpapers.json` → `editorial:push` → `assets:push` →
+`assets:sync-comics-seed` → `assets:commit`. Le regen rattrape l'archive que
+le build lancé plus haut ne pouvait pas voir (elle naît dans la collecte) :
+sans lui, l'onglet « Archivés » de `/wallpapers` l'ignorait jusqu'au build
+suivant. Le `wallpapers.json` régénéré reste au working tree, et `pnpm commit`
+l'embarque.
+
 Vérifier dans quick — Données › Extraction, la revue par cible et
 l'intégration entité par entité —, puis publier :
 

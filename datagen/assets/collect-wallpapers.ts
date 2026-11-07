@@ -21,6 +21,15 @@
  * D'où l'ORDRE dans `pnpm images` : cette collecte passe AVANT `assets:collect`,
  * qui réécrit `images/characters/full/` et effacerait la trace de l'ancien art.
  *
+ * Une archive créée ici change le CATALOGUE : `wallpapers.json` (générateur
+ * `buildWallpapers`) doit la lister pour que l'onglet « Archivés » la serve. Or
+ * le build tourne AVANT `pnpm images` dans le cycle d'un patch — il ne la voyait
+ * qu'au build suivant (Rhona, 07/11). D'où l'orchestrateur `datagen/assets/images.ts` :
+ * si cette collecte rend `archived` non vide, il rejoue `datagen:build` puis
+ * `datagen:promote --apply --only wallpapers.json` après les collectes et AVANT
+ * `editorial:push` / `assets:push`. Lancée seule (`pnpm assets:collect-wallpapers`),
+ * la collecte ne régénère rien : `pnpm datagen:regen` à la main ensuite.
+ *
  * Idempotent (recopie si absent/taille différente). Pools absents → no-op sans
  * erreur (extraction pas encore lancée), pour ne pas casser `pnpm images`.
  *
@@ -174,15 +183,18 @@ export async function collectWallpapers(): Promise<CollectStats> {
   return total;
 }
 
+/** Compte rendu console d'une collecte (exécution directe et `pnpm images`). */
+export function logCollectStats({ copied, skipped, pruned, archived }: CollectStats): void {
+  if (archived.length)
+    console.log(
+      `wallpapers → ${archived.length} version(s) archivée(s) (remplacée(s) en place par le jeu) : ${archived.join(', ')}`,
+    );
+  if (copied || skipped || pruned) {
+    const tail = pruned ? `, ${pruned} retirés (perso non intégré)` : '';
+    console.log(`wallpapers → ${copied} copiés, ${skipped} à jour${tail}`);
+  }
+}
+
 if (isMain(import.meta.url)) {
-  collectWallpapers().then(({ copied, skipped, pruned, archived }) => {
-    if (archived.length)
-      console.log(
-        `wallpapers → ${archived.length} version(s) archivée(s) (remplacée(s) en place par le jeu) : ${archived.join(', ')}`,
-      );
-    if (copied || skipped || pruned) {
-      const tail = pruned ? `, ${pruned} retirés (perso non intégré)` : '';
-      console.log(`wallpapers → ${copied} copiés, ${skipped} à jour${tail}`);
-    }
-  });
+  collectWallpapers().then(logCollectStats);
 }

@@ -21,8 +21,9 @@
  * un pool amputé ne produit pas de manifeste, donc rien à pousser, donc rien à
  * synchroniser ici.
  *
- * Exécution : dernier maillon de `pnpm images`, APRÈS `assets:push` — le `&&`
- * de la chaîne garantit qu'on ne passe ici que si le push a réussi.
+ * Exécution : dernier maillon de `pnpm images`, APRÈS `assets:push` — l'orchestrateur
+ * (`datagen/assets/images.ts`) s'arrête à la première étape en échec : on ne
+ * passe ici que si le push a réussi.
  */
 import { createHash } from 'node:crypto';
 import { existsSync, readFileSync } from 'node:fs';

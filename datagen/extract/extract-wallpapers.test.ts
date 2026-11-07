@@ -47,7 +47,7 @@ describe('blocklist PORTEUSE — comportement gelé (mesure E7 du 26/07)', () =>
     'T_Banner_Summer.png', // ^T_Banner_ — 80 rattrapés
     'LOADING_Chapter3.png', // ^LOADING_ — 64
     'T_Event_World_Map.png', // ^T_Event_World_ — 36
-    'T_Boss_a.png', // _(d|body|cloud|a) — 21
+    'T_Boss_a.png', // _(d|body|cloud|a), ancré en fin de nom (A87)
     'weird#name.png', // # — 10
   ];
 
@@ -56,6 +56,24 @@ describe('blocklist PORTEUSE — comportement gelé (mesure E7 du 26/07)', () =>
       expect(getCategory(name, 2048, 1024)).not.toBeNull(); // sortirait sinon…
       expect(shouldExclude(`/pool/${name}`, name)).toBe(true); // …mais la blocklist l'écarte
     }
+  });
+});
+
+describe('motif `_(d|body|cloud|a)` ancré en fin de nom (A87)', () => {
+  const excl = (name: string) => shouldExclude(`/pool/${name}`, name);
+
+  it('écarte toujours les textures suffixées, extension comprise', () => {
+    expect(excl('T_Boss_a.png')).toBe(true);
+    expect(excl('T_Boss_D.png')).toBe(true);
+    expect(excl('T_Sky_cloud.png')).toBe(true);
+    expect(excl('T_Hero_body')).toBe(true);
+  });
+
+  it('garde les CG dont un segment COMMENCE par A ou D (non ancré, ils étaient exclus)', () => {
+    expect(excl('T_ScenarioCG_A0106.png')).toBe(false); // CG de chapitre
+    expect(excl('T_ScenarioCG_AER_01.png')).toBe(false); // CG d'origine
+    expect(excl('T_ScenarioBG_DELTA_01.png')).toBe(false);
+    expect(excl('T_Event_Banner_Attendance_01.png')).toBe(false);
   });
 });
 

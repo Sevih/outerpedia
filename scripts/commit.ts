@@ -286,7 +286,9 @@ async function main(): Promise<void> {
     // commit : c'est le dernier prompt possible (stdin est libéré ensuite), et
     // un « non » ne laisse rien de publié ni de modifié. Les étapes suivantes
     // n'ajoutent que leurs propres fichiers d'état (meta des guides re-datés,
-    // `pushed.json`, package.json bumpé).
+    // `pushed.json`, package.json bumpé) — et `data/generated/wallpapers.json`
+    // quand `pnpm images` a archivé un wallpaper remplacé (regen ciblé, cf.
+    // datagen/assets/images.ts).
     // Sortie BRUTE (pas `shOut`, qui rogne l'espace de tête de la première
     // ligne : ` M fichier` y perdrait une colonne).
     const { tracked, untracked } = pendingFiles(
