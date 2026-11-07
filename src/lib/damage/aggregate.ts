@@ -156,8 +156,12 @@ export interface AdditionalDamageContext {
   branch: 'normal' | 'critical' | 'miss';
   attacker?: { maxHP: number; hp: number };
   defender?: { maxHP: number; hp: number };
-  /** Stats FINALES par `ST_*` (familles OWNER_STAT/CASTER_STAT). */
+  /** Stats FINALES par `ST_*` (familles OWNER_STAT/CASTER_STAT) — `GetStatValue`,
+   *  donc ST_HP = `MaxHP` APRÈS le buff MAX_HP § 16.2. */
   attackerStat?: (stat: string) => number;
+  /** `GetFinalStat` par `ST_*` (swap d'attaque § 10.1) : ST_HP AVANT
+   *  `MaxHPRate` § 16.2 — absent → `attackerStat`. */
+  attackerFinalStat?: (stat: string) => number;
   /** Stats FINALES du défenseur (famille TARGET_STAT). */
   defenderStat?: (stat: string) => number;
   attackerBuffCount?: number;

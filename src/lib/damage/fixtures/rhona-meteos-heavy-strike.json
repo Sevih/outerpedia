@@ -1,0 +1,50 @@
+{
+  "name": "Rhona vs Blazing Knight Meteos (raid) - S1 normal, 2e coup (1 stack Heavy Strike)",
+  "z": "N4IghiBcIEwAwIQDhAGhADygNnQGwDcoBGBdAaylAGVioBWdamBpgZgYF90BTKOdEUigwAF0rR4AdjhoQACwAOUEFPowAnHIDGAJwCWo-drB4A+gBMAtgHMVxJLPSL9PXdp5nFAewDubs10xPmgnEGsbMwAjb28AZ1EVWW4QIxV6OHg2ZEgAFjgpbAQYeik5MAAzEjIQHm9+dDAoqABtFoUeMAIATzMEg3JPbW8rK28AOzRiAF1pziA",
+  "codex": 11,
+  "guild": 10,
+  "quirks": {
+    "1": 10,
+    "12": 2,
+    "21": 10,
+    "31": 2,
+    "41": 10,
+    "53": 2,
+    "61": 10,
+    "67": 1,
+    "69": 1,
+    "81": 10,
+    "87": 1,
+    "93": 1,
+    "121": 10,
+    "231": 10,
+    "232": 1,
+    "233": 1,
+    "234": 1,
+    "236": 1,
+    "237": 1,
+    "238": 1,
+    "240": 1,
+    "242": 1,
+    "243": 1,
+    "244": 1,
+    "245": 1,
+    "246": 1,
+    "251": 10,
+    "252": 1,
+    "257": 1,
+    "262": 1,
+    "264": 1,
+    "267": 1,
+    "268": 1
+  },
+  "gameVersion": "1.4.19",
+  "observed": [
+    {
+      "slot": "S1",
+      "branch": "normal",
+      "damage": 2850
+    }
+  ],
+  "notes": "2e S1 du meme combat que rhona-meteos (captures Sevih 07/11/2026, patch 1.11.601), 1 stack Heavy Strike (+50 % DMG boost apres le 1er skill, ST_DMG_BOOST +500 pm additif § 7.6). Meme swap d'attaque sur GetFinalStat(ST_HP) avant MaxHPRate."
+}

@@ -12,6 +12,7 @@ import valentineRhona from './valentine-rhona.json';
 import noaRhona from './noa-rhona.json';
 import noaChimera from './noa-chimera.json';
 import rhonaMeteos from './rhona-meteos.json';
+import rhonaMeteosHeavyStrike from './rhona-meteos-heavy-strike.json';
 import carenMeteos from './caren-meteos.json';
 import carenAmadeus from './caren-amadeus.json';
 import erisMeteosS2 from './eris-meteos-s2.json';
@@ -46,6 +47,9 @@ export const FIXTURES: DamageFixture[] = [
   // (défactorisation sheet.ts : le « +60 DEF » des Caren était le terme
   // croisé trust × premiums, résolu le jour même).
   rhonaMeteos as DamageFixture,
+  // Remesure 07/11/2026 (patch 1.11.601) : 2e S1 du même combat, 1 stack
+  // Heavy Strike — le swap § 10.1 lit l'HP AVANT le buff de guilde.
+  rhonaMeteosHeavyStrike as DamageFixture,
   carenMeteos as DamageFixture,
   carenAmadeus as DamageFixture,
   // Captures du 19/08/2026 (Sevih) — compteurs § 9.1 : débuffs de la cible

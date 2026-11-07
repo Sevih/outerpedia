@@ -513,11 +513,10 @@ export function buildSkillReport(
     };
   }
 
-  const attackStat = resolveAttackStat(
-    scenario.attacker.attackStat,
-    flags.swapAttack,
-    scenario.additionalContext?.attackerStat,
-  );
+  // § 10.1 : `GetFinalStat` (ST_HP avant MaxHPRate), repli sur les stats finales.
+  const swapStatOf =
+    scenario.additionalContext?.attackerFinalStat ?? scenario.additionalContext?.attackerStat;
+  const attackStat = resolveAttackStat(scenario.attacker.attackStat, flags.swapAttack, swapStatOf);
   const elementalRate = getElementeryDamageRate({
     attackerElement: scenario.attacker.element,
     defenderElement: scenario.defender.element,
@@ -539,7 +538,7 @@ export function buildSkillReport(
   // élément § 6, agrégats défenseur § 9.2/9.3 — § 9.1 dépend de la branche).
   const preamble: TraceStep[] = [];
   if (withTrace) {
-    if (flags.swapAttack && !scenario.additionalContext?.attackerStat) {
+    if (flags.swapAttack && !swapStatOf) {
       // Contexte incomplet (§ 10.1) : on NE devine pas la stat swappée.
       preamble.push({
         ref: '§ 10.1',

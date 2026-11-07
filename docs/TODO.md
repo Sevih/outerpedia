@@ -20,29 +20,6 @@ les preuves et les décisions vivent dans le tri consolidé de sevih-tool
       `BT_STACK_STAT` dans le calculateur (plus tard). Les deux latents (c)
       sont FAITS (A80, 25/10).
 
-## 🎯 Calculateur de dégâts
-
-- [ ] **Rhona 1.11.601 : swap d'attaque sur l'HP et Heavy Strike, écart 2,7 %
-      (07/11)** : fixture `rhona-meteos.json` en `skipRef`. Mesures de Sevih
-      (raid Meteos Stage 8, Rhona seule, affinity 100, fiche HP 7529) : HP de
-      combat **10 555** (moteur 8 658 = fiche × 1,15 guilde seulement : il manque
-      ~+25 %, premium PRIEST_PASSIVE_2 et/ou titre / raid), 1er S1 **2 327**
-      (moteur 2 392 : swap 20 % de 8 658 → attaque 1 731, +50 % boss, facteur
-      1 630, heavy strike 0 stack), 2e S1 **2 850** (+22,5 % ; un stack
-      `heavy_strike_common` +50 % DMG boost additif donnerait +20,7 %). Si le
-      swap lisait 10 555, le S1 ferait 2 917 : relire GetAttackStat § 10.1 et
-      l'HP de combat § 16 dans le binaire, puis retirer le `skipRef`.
-      Relevé du 07/11 (copie instrumentée du moteur) : la somme § 9.1 du 1er S1
-      vaut 2 000 ‰ = BT_DMG 1 000 (passif, le « +100 % » du mot-clé Heavy
-      Strike, glossaire 87 : avant le patch il disait +50 %) + BT_DMG 200
-      (source à identifier) + BT_DMG_TO_BOSS 300 (éveil) + BT_DMG_TO_BOSS 500
-      (2000008_1_4) ; `heavy_strike_common` (+50 % ST_DMG_BOOST à la fin d'un
-      skill, 5 stacks) n'y est pas au 1er coup, à raison. En résolvant les deux
-      mesures avec un stack de +500 ‰ au 2e S1, il faudrait une somme de base
-      ≈ 1 800 ‰ (le BT_DMG 200 en trop ?) et une attaque swappée ≈ 1 832, soit
-      20 % d'un HP ≈ 9 160 (ni 8 658 ni 10 555) : deux inconnues, à trancher
-      dans le binaire.
-
 ## 🧰 Outil quick
 
 - [ ] **Tier list maker — canon de partage append-only** : `buildCanon`

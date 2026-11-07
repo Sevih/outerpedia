@@ -1504,8 +1504,10 @@ export function buildDamageReport(
   // Buffs MAX_HP § 16.2 (guilde + titre) : seul le HP MAX bouge. Chaque part
   // est active dans SES modes (preset) ou sur SA coche (cible manuelle) —
   // jamais supposée ; la SOMME des parts actives fait le taux, comme le
-  // manager du jeu. Appliqué AVANT le scénario : le HP servi au swap § 10.1
-  // et au contexte PV est celui du combat réel.
+  // manager du jeu. Appliqué AVANT le scénario : le HP servi au contexte PV
+  // (§ 8, § 14, familles *_STAT via `GetStatValue` → `MaxHP`) est celui du
+  // combat réel. Le swap § 10.1, lui, lit `GetFinalStat(ST_HP)` = la stat
+  // AVANT `MaxHPRate` (`hpBefore`) — prouvé par Rhona 1.11.601 le 07/11/2026.
   let maxHpBuff: MaxHpBuffInfo | undefined;
   const guildLevel = attacker.guildLevel ?? 0;
   const premiumHp = attacker.premiumHp === true;
@@ -1545,6 +1547,10 @@ export function buildDamageReport(
     const slug = sheetSlugOfStat(st);
     return slug !== undefined ? (combatStats[slug] ?? 0) : 0;
   };
+  // `GetFinalStat` (§ 10.1, swap d'attaque) : comme `statOf`, sauf ST_HP lu
+  // AVANT le buff MAX_HP § 16.2 (`MaxHPRate` n'existe que dans `get_MaxHP`).
+  const finalStatOf = (st: string): number =>
+    st === 'ST_HP' && maxHpBuff !== undefined ? maxHpBuff.hpBefore : statOf(st);
   // Stats FINALES du défenseur (famille TARGET_STAT § 9.1 — ex. Noa
   // 2000022_2_2 : +3 % des PV max de la CIBLE en taux) : celles que le
   // scénario porte (TARGET_STAT_MAP) ; absente → 0, jamais devinée.
@@ -1596,6 +1602,7 @@ export function buildDamageReport(
             }
           : undefined,
       attackerStat: statOf,
+      attackerFinalStat: finalStatOf,
       defenderStat: defenderStatOf,
       targetIsBoss: target.boss === true,
       ...(target.broken !== undefined ? { targetIsBreak: target.broken } : {}),
@@ -1627,8 +1634,11 @@ export function buildDamageReport(
   const isStatChannel = (b: ActiveBuff): boolean =>
     b.type === 'BT_STAT' || b.type.startsWith('BT_STAT_OWNER_LOST_HP_RATE');
   // Stats de combat pour une liste de buffs (2 passes « PV perdus » § 14 +
-  // buff MAX_HP § 16.2 réappliqué) — sert le canal PAR SLOT.
-  const combatStatsWith = (buffsList: ActiveBuff[]): Record<string, number> => {
+  // buff MAX_HP § 16.2 réappliqué) — sert le canal PAR SLOT. `finalHp` garde
+  // l'HP AVANT `MaxHPRate` (`GetFinalStat(ST_HP)`, lu par le swap § 10.1).
+  const combatStatsWith = (
+    buffsList: ActiveBuff[],
+  ): { stats: Record<string, number>; finalHp: number } => {
     let stats = buildCombatStats(attacker, char, data.growth, buffsList, undefined, premiumRates);
     if (buffsList.some((b) => b.type.startsWith('BT_STAT_OWNER_LOST_HP_RATE'))) {
       const maxHP = stats.hp ?? 0;
@@ -1646,10 +1656,11 @@ export function buildDamageReport(
         );
       }
     }
-    if (maxHpBuff !== undefined && maxHpBuff.sum > 0 && (stats.hp ?? 0) > 0) {
-      stats.hp = applyMaxHpRate(stats.hp, maxHpBuff.rate);
+    const finalHp = stats.hp ?? 0;
+    if (maxHpBuff !== undefined && maxHpBuff.sum > 0 && finalHp > 0) {
+      stats.hp = applyMaxHpRate(finalHp, maxHpBuff.rate);
     }
-    return stats;
+    return { stats, finalHp };
   };
 
   // DoT posés par un skill : les BT_DOT_* de ses `buffIds` au niveau servi.
@@ -1829,9 +1840,10 @@ export function buildDamageReport(
       const defStatRemoved = defenderStatBuffs.some((b) => removed.has(b));
       let slotAttacker = scenario.attacker;
       let slotStatOf = statOf;
+      let slotFinalStatOf = finalStatOf;
       let slotAtkHp = scenario.additionalContext?.attacker;
       if (statAtk.length || attackerBuffs.some((b) => removed.has(b) && isStatChannel(b))) {
-        const sc = combatStatsWith([...baseAtk, ...statAtk]);
+        const { stats: sc, finalHp } = combatStatsWith([...baseAtk, ...statAtk]);
         slotAttacker = {
           ...scenario.attacker,
           attackStat: sc.atk ?? 0,
@@ -1843,6 +1855,10 @@ export function buildDamageReport(
         slotStatOf = (st: string): number => {
           const slug = sheetSlugOfStat(st);
           return slug !== undefined ? (sc[slug] ?? 0) : 0;
+        };
+        slotFinalStatOf = (st: string): number => {
+          const slug = sheetSlugOfStat(st);
+          return st === 'ST_HP' ? finalHp : slug !== undefined ? (sc[slug] ?? 0) : 0;
         };
         const hp = sc.hp ?? 0;
         slotAtkHp =
@@ -1886,6 +1902,7 @@ export function buildDamageReport(
           attacker: slotAtkHp,
           defender: slotDefHp,
           attackerStat: slotStatOf,
+          attackerFinalStat: slotFinalStatOf,
           defenderStat: slotDefStat,
         },
       };

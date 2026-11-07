@@ -1,6 +1,6 @@
 {
   "name": "Rhona vs Blazing Knight Meteos (raid) - S1 normal, premier coup",
-  "z": "N4IghiBcIEwAwIQDhAGhADygNnQGwDcoBGBdAaylAGVioBWdamBpgZgYF90BTKOdEUigwAF0rR4AdjhoQACwAOUEFPowAnHIDGAJwCWo-drB4A+gBMAtgHMVxJLPSL9PXdp5nFAewDubs10xPmgnEGsbMwAjb28AZ1EVWW4QIxV6OHg2ZEgAFjgpbAQYeikQTiA",
+  "z": "N4IghiBcIEwAwIQDhAGhADygNnQGwDcoBGBdAaylAGVioBWdamBpgZgYF90BTKOdEUigwAF0rR4AdjhoQACwAOUEFPowAnHIDGAJwCWo-drB4A+gBMAtgHMVxJLPSL9PXdp5nFAewDubs10xPmgnEGsbMwAjb28AZ1EVWW4QIxV6OHg2ZEgAFjgpbAQYeik5MAAzEjIQHm9+TiA",
   "codex": 11,
   "guild": 10,
   "quirks": {
@@ -46,6 +46,5 @@
       "damage": 2327
     }
   ],
-  "notes": "Captures Sevih 18/08/2026 - un combat par mesure, premier coup, etat neutre. A PROUVE : procs SKILL_START au lanceur (passive_3 +300 pm pierce TARGET_IS_BOSS) et dedup des buffs multi-references - delta 0.00 % exact. MESURES 07/11/2026 (patch 1.11.601, Rhona reequilibree : S1 scale sur l'HP, Heavy Strike) : HP combat 10555 (fiche 7529, affinity 100), 1er S1 2327, 2e S1 2850 ; moteur 2392 (HP combat 8658, swap 20 %, heavy strike 0 stack au 1er coup). Ecart 2,7 % non explique : skipRef en attendant la relecture du binaire.",
-  "skipRef": "Rhona 1.11.601 : swap d'attaque sur HP et Heavy Strike — HP combat 10555 (moteur 8658), S1 2327 puis 2850 (moteur 2392), à relire dans le binaire (§ 10.1, § 16)"
+  "notes": "Captures Sevih 18/08/2026 - un combat par mesure, premier coup, etat neutre. A PROUVE : procs SKILL_START au lanceur (passive_3 +300 pm pierce TARGET_IS_BOSS) et dedup des buffs multi-references. Remesure 07/11/2026 (patch 1.11.601, Rhona reequilibree : S1 scale sur l'HP, Heavy Strike), affinite 100, sans EE, 1er S1 du combat 2327. A PROUVE : le swap d'attaque (BT_SWAP_STAT_ATTACK, 20 % HP) lit GetFinalStat(ST_HP) = HP AVANT MaxHPRate (9179, pas l'HP de combat 10555 apres guilde 10) ; l'affinite entre dans l'HP (5 paliers +300 HP x premium PRIEST_PASSIVE_2 +100 pm) ; Heavy Strike absent au 1er coup (0 stack)."
 }

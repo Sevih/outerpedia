@@ -682,6 +682,22 @@ if buff != null && buff.CheckAvailable(Attacker):
 return Attacker.Data.Atk        // stat finale ST_ATK (4), buffs inclus
 ```
 
+**HP swappé = HP AVANT `MaxHPRate`** (07/11/2026) : `GetFinalStat(type)` =
+`ApplyPreviewStatCap(type, StatDic[type].GetFinalValue())` (`CCharacterData.cs`
+du dump 1.4.19), sans `MaxHPRate` — ce taux n'existe que dans `get_MaxHP`
+([`CCharacterData_get_MaxHP.cs`](./damage-formula-cs/CCharacterData_get_MaxHP.cs),
+§ 16.2). Un swap sur `ST_HP` lit donc l'HP de combat SANS le buff de guilde /
+titre. À l'inverse, `GetStatValue(ST_HP)` (familles `*_OWNER_STAT` /
+`*_CASTER_STAT` § 9.1, via `GetStatValuePermille`) rend `MaxHP`, buff inclus.
+Prouvé à l'unité (patch 1.11.601, Rhona rééquilibrée, raid Meteos Stage 8,
+fiche HP 7 529, affinité 100, sans EE, codex 11, guilde 10) : HP de combat
+affiché 10 555 = `floor(float32(1,15 × 9 179))`, 9 179 = fiche + 5 paliers
+d'affinité (+300 HP) × (1 + 100 ‰ premium `PRIEST_PASSIVE_2`) ; 1er S1 mesuré
+2 327 = swap 20 % de **9 179** (1 835), 2e S1 2 850 = idem + 1 stack Heavy
+Strike (+500 ‰ `ST_DMG_BOOST`) — fixtures `rhona-meteos` et
+`rhona-meteos-heavy-strike` à 0 %. Avec l'HP après guilde (10 555 → 2 111),
+2 536 / 3 060 : faux.
+
 ### 10.2 Getters `CCharacterData.get_*`
 
 Tous identiques (ex. [`CCharacterData_get_Def.cs`](./damage-formula-cs/CCharacterData_get_Def.cs)) :
@@ -1666,8 +1682,11 @@ adventure — ni nulle part ailleurs.
 **Conséquences moteur** : la FICHE hors combat n'inclut jamais ce taux
 (`MaxHPRate` n'est posé qu'au chargement d'un donjon) — en contenu éligible,
 le HP de combat = `floor(float32(rate × HP_fiche_reconstruite))`, à reproduire
-en float32 (`Math.fround`). Seul le HP max bouge (scaling § 10.1 sur HP,
-contexte PV § 8, vampiric § 14) ; l'ATK/DEF/vitesse ne sont pas touchés, et
+en float32 (`Math.fround`). Seul le HP max bouge (contexte PV § 8, vampiric
+§ 14, familles `*_STAT` § 9.1 sur HP via `GetStatValue` → `MaxHP`, HP max
+affiché) ; le scaling § 10.1 sur HP ne bouge PAS (`GetFinalStat` lit la stat
+avant `MaxHPRate` — corrigé le 07/11/2026, preuve Rhona § 10.1) ;
+l'ATK/DEF/vitesse ne sont pas touchés, et
 les MONSTRES n'ont pas ce champ (classe `CCharacterData` = persos).
 
 **Autres sources `EBT_MAX_HP` recensées** (scan exhaustif 04/08/2026 :
