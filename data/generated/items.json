@@ -1398,7 +1398,7 @@
       "jp": "食べ放題食券",
       "kr": "무제한 식당 이용권",
       "zh": "餐厅无限使用券",
-      "fr": "Unlimited Restaurant Voucher",
+      "fr": "Bon de restaurant illimité",
       "es": "Vale de Restaurante Ilimitado"
     },
     "desc": {
@@ -1974,8 +1974,8 @@
       "jp": "スキル教本：はじまり編",
       "kr": "초급 스킬 교본",
       "zh": "初级技能教材",
-      "fr": "Basic comp. manuel",
-      "es": "Manual de Habilidades"
+      "fr": "Manuel de compétences de base",
+      "es": "Manual básico de habilidades"
     },
     "desc": {
       "en": "Contains basic knowledge on skill use. Can be used to enhance skills.",
@@ -1998,8 +1998,8 @@
       "jp": "スキル教本：応用編",
       "kr": "중급 스킬 교본",
       "zh": "中级技能教材",
-      "fr": "Intermediate comp. manuel",
-      "es": "Manual de hab. intermedia"
+      "fr": "Manuel de compétences intermédiaires",
+      "es": "Manual intermedio de habilidades"
     },
     "desc": {
       "en": "Contains advanced knowledge on skill use. Can be used to enhance skills.",
@@ -2022,8 +2022,8 @@
       "jp": "スキル教本：専門家編",
       "kr": "전문 스킬 교본",
       "zh": "专家技能教材",
-      "fr": "Professional comp. manuel",
-      "es": "Manual de hab. profesional"
+      "fr": "Manuel de compétences professionnelles",
+      "es": "Manual profesional de habilidades"
     },
     "desc": {
       "en": "Contains the knowledge of masters who reached the pinnacle of skill use. Can be used to enhance skills.",
@@ -2118,7 +2118,7 @@
       "jp": "達人の強化ハンマー",
       "kr": "명인 강화 도구",
       "zh": "名匠强化道具",
-      "fr": "Artisan's Hammer",
+      "fr": "Marteau de l'artisan",
       "es": "Martillo del Artesano"
     },
     "desc": {
@@ -2814,7 +2814,7 @@
       "jp": "再錬リセットスクロール【レジェンド】",
       "kr": "재련 초기화 스크롤[전설]",
       "zh": "重铸初始化卷轴【传说】",
-      "fr": "Reforge Reset Scroll [Legendary]",
+      "fr": "Parchemin de réinitialisation du reforgeage [légendaire]",
       "es": "Pergamino de reinicio de Reforjar [Legendario]"
     },
     "desc": {
@@ -3582,7 +3582,7 @@
       "jp": "ブルーメモリーストーン",
       "kr": "블루 메모리 스톤",
       "zh": "蓝色记忆石",
-      "fr": "Blue Memory Stone",
+      "fr": "Pierre de mémoire bleue",
       "es": "Piedra de Memoria Azul"
     },
     "desc": {
@@ -3606,8 +3606,8 @@
       "jp": "ブルースターダスト",
       "kr": "블루 스타 더스트",
       "zh": "蓝色星尘",
-      "fr": "Blue Stardust",
-      "es": "Polvo estelar azul"
+      "fr": "Poussière d'étoile bleue",
+      "es": "Polvo de Estrella Azul"
     },
     "desc": {
       "en": "A material used for enhancing Talisman.",
@@ -3654,8 +3654,8 @@
       "jp": "パープルスターダスト",
       "kr": "퍼플 스타 더스트",
       "zh": "紫色星尘",
-      "fr": "Purple Stardust",
-      "es": "Polvo de estrellas púrpura"
+      "fr": "Poussière d'étoile violette",
+      "es": "Polvo de Estrella Púrpura"
     },
     "desc": {
       "en": "A rare material used for enhancing Talisman.",
@@ -4904,8 +4904,8 @@
       "jp": "絆の証",
       "kr": "인연의 증명",
       "zh": "友情证明",
-      "fr": "Preuve de la destinyété",
-      "es": "Prueba Destino"
+      "fr": "Preuve du destin",
+      "es": "Prueba del Destino"
     },
     "desc": {
       "en": "A normal resource used for Quirks to enhance heroes.\\nSelling this item grants 2 Gold.",
@@ -4928,7 +4928,7 @@
       "jp": "繋がりの印",
       "kr": "결연의 징표",
       "zh": "结缘之物",
-      "fr": "Cache-code de connexion",
+      "fr": "Jeton de connexion",
       "es": "Signo de Conexión"
     },
     "desc": {
@@ -5000,7 +5000,7 @@
       "jp": "リロードカートリッジ",
       "kr": "리로드 카트리지",
       "zh": "换弹匣",
-      "fr": "Reload Cartridge",
+      "fr": "Cartouche de rechargement",
       "es": "Cartucho de Recarga"
     },
     "desc": {
@@ -5028,11 +5028,11 @@
       "es": "Cofre Aleatorio (Prueba)"
     },
     "desc": {
-      "en": "Randomly obtain one of the following materials used for hero growth.\n- Food of any grade\n- Elemental Upgrade Stone of any grade",
-      "jp": "以下の素材の中からランダムで1個獲得できる。\n- レア度別食べ物\n- レア度別属性進化石",
+      "en": "Randomly obtain one of the following materials used for hero growth.\\n- Food of any grade\\n- Elemental Upgrade Stone of any grade",
+      "jp": "以下の素材の中からランダムで1個獲得できる。\\n- レア度別食べ物\\n- レア度別属性進化石",
       "kr": "다음 동료 성장 재료 중, 랜덤으로 1개의 아이템을 획득할 수 있습니다.\n- 등급별 음식\n- 등급별 속성 진화석",
-      "zh": "可随机获得下列物品中的1项。\n- 随机级别食物\n- 随机级别属性进化石",
-      "fr": "Obtenez aléatoirement l'un des matériaux de progression suivants :\n- Nourriture de tout rang\n- Pierre d'amélioration élémentaire de tout rang",
+      "zh": "可随机获得下列物品中的1项。\\n- 随机级别食物\\n- 随机级别属性进化石",
+      "fr": "Obtenez aléatoirement l'un des matériaux de progression suivants :\\n- Nourriture de tout rang\\n- Pierre d'amélioration élémentaire de tout rang",
       "es": "Obtén aleatoriamente uno de los siguientes materiales utilizados para el crecimiento del héroe.\\n- Comida de cualquier grado\\n- Piedra de Mejora Elemental de cualquier grado"
     },
     "icon": "TI_Common_Box01",
@@ -5340,12 +5340,12 @@
       "es": "Caja Mejora"
     },
     "desc": {
-      "en": "Randomly obtain one of the following.\n - 1 to 5 Apprentice's Hammers\n - 1 to 5 Expert's Hammers\n - 1 to 5 Master's Hammers\n - 1 to 5 Artisan's Hammers",
-      "jp": "以下のアイテムをランダムで獲得できる。 \n- まあまあな強化ハンマー1～5個 \n- いい強化ハンマー1～5個 \n- 洗練された強化ハンマー1～5個 \n- 達人の強化ハンマー1～5個",
+      "en": "Randomly obtain one of the following.\\n - Apprentice's Hammer x1–5\\n - Expert's Hammer x1–5\\n - Master's Hammer x1–5\\n - Artisan's Hammer x1–5",
+      "jp": "以下のアイテムをランダムで獲得できる。 \\n- まあまあな強化ハンマー1～5個 \\n- いい強化ハンマー1～5個 \\n- 洗練された強化ハンマー1～5個 \\n- 達人の強化ハンマー1～5個",
       "kr": "랜덤으로 다음 내용물 중 1종을 획득할 수 있습니다.\n - 입문 강화 도구 1~5개\n - 수련 강화 도구 1~5개\n - 전문 강화 도구 1~5개\n - 명인 강화 도구 1~5개",
-      "zh": "可随机获得下列物品中的1项。\n- 1~5个入门强化道具\n- 1~5个修炼强化道具\n- 1~5个专家强化道具\n- 1~5个名匠强化道具",
-      "fr": "Obtenir au hasard l'un des éléments suivants.\n- 1 à 5 Marteaux de l'apprenti\n- 1 à 5 Marteaux d'experts de 1 à 5\n- 1 à 5 Marteaux de Maître de à \n- à Marteaux d'Artisan de à",
-      "es": "Obtén aleatoriamente uno de los siguientes.\\n - 1 a 5 Martillos de Aprendiz\\n - 1 a 5 Martillos de Experto\\n - 1 a 5 Martillos de Amo\\n - 1 a 5 Martillos de Artesano"
+      "zh": "可随机获得下列物品中的1项。\\n- 1~5个入门强化道具\\n- 1~5个修炼强化道具\\n- 1~5个专家强化道具\\n- 1~5个名匠强化道具",
+      "fr": "Obtenez au hasard l'un des lots suivants :\\n- Apprentice's Hammer x1–5\\n- Expert's Hammer x1–5\\n- Master's Hammer x1–5\\n- Artisan's Hammer x1–5",
+      "es": "Obtén al azar uno de los siguientes lotes:\\n- Martillo del Aprendiz x1–5\\n- Martillo del Experto x1–5\\n- Martillo del Amo x1–5\\n- Martillo del Artesano x1–5"
     },
     "icon": "TI_Common_Box01",
     "grade": "normal",
@@ -5388,11 +5388,11 @@
       "es": "Cofre de selección de fragmentos de piedra de mejora"
     },
     "desc": {
-      "en": "Select and obtain one of the following:\n - Earth Upgrade Stone Piece x50\n - Fire Upgrade Stone Piece x50\n - Water Upgrade Stone Piece x50\n - Light Upgrade Stone Piece x50\n - Dark Upgrade Stone Piece x50",
-      "jp": "以下の中から1種を選択して獲得できる。 \n- 地の進化石の結晶 50個 \n- 火の進化石の結晶 50個 \n- 水の進化石の結晶 50個 \n- 光の進化石の結晶 50個 \n- 闇の進化石の結晶 50個",
+      "en": "Select and obtain one of the following:\\n - Earth Upgrade Stone Piece x50\\n - Fire Upgrade Stone Piece x50\\n - Water Upgrade Stone Piece x50\\n - Light Upgrade Stone Piece x50\\n - Dark Upgrade Stone Piece x50",
+      "jp": "以下の中から1種を選択して獲得できる。 \\n- 地の進化石の結晶 50個 \\n- 火の進化石の結晶 50個 \\n- 水の進化石の結晶 50個 \\n- 光の進化石の結晶 50個 \\n- 闇の進化石の結晶 50個",
       "kr": "아래 구성품 중, 1종을 선택하여 획득할 수 있습니다.\n - 지속성 진화석 조각 50개\n - 화속성 진화석 조각 50개\n - 수속성 진화석 조각 50개\n - 명속성 진화석 조각 50개\n - 암속성 진화석 조각 50개",
-      "zh": "可选择并获得下列物品中的1项。\n- 50个土之进化石碎片\n- 50个火之进化石碎片\n- 50个水之进化石碎片\n- 50个光之进化石碎片\n- 50个暗之进化石碎片",
-      "fr": "Sélectionnez et obtenez l'une des options suivantes:\n- Terre Upgrade Piece Pierre x50\n- Feu Upgrade Piece Pierre x50\n- Eau Upgrade Piece Pierre x50 x5\n- Light Upgrade Pierre Pièce x5\n- Dark Upgrade Pierre Pièce x5",
+      "zh": "可选择并获得下列物品中的1项。\\n- 50个土之进化石碎片\\n- 50个火之进化石碎片\\n- 50个水之进化石碎片\\n- 50个光之进化石碎片\\n- 50个暗之进化石碎片",
+      "fr": "Sélectionnez et obtenez l'une des options suivantes:\\n- Terre Upgrade Piece Pierre x50\\n- Feu Upgrade Piece Pierre x50\\n- Eau Upgrade Piece Pierre x50 x5\\n- Light Upgrade Pierre Pièce x5\\n- Dark Upgrade Pierre Pièce x5",
       "es": "Seleccione y obtenga una de las siguientes opciones:\\n - Fragmento de Piedra de Mejora de Tierra x50\\n - Fragmento de Piedra de Mejora de Fuego x50\\n - Fragmento de Piedra de Mejora de Agua x50\\n - Fragmento de Piedra de Mejora de Luz x50\\n - Fragmento de Piedra de Mejora de Oscuridad x50"
     },
     "icon": "TI_Common_Box03",
@@ -5412,12 +5412,12 @@
       "es": "Cofre Selección Héroe"
     },
     "desc": {
-      "en": "Select and obtain one hero.\nIf you select a hero that you already own, it will automatically be converted into pieces.",
-      "jp": "仲間1体を選択して獲得できる。\nすでに獲得した仲間はピースに変換される。",
+      "en": "Select and obtain any hero.\\nHeroes you already own will be converted into Hero Pieces.",
+      "jp": "仲間1体を選択して獲得できる。\\nすでに獲得した仲間はピースに変換される。",
       "kr": "전체 동료 캐릭터 중 하나를 선택하여 영입할 수 있습니다.\n이미 영입한 동료는 조각으로 획득합니다.",
-      "zh": "可在所有同伴角色中选择1名进行招募。\n已招募到的同伴将获得相应碎片。",
-      "fr": "Sélectionner et obtenir un héros.\nSi vous sélectionnez un héros que vous possédez déjà, il sera automatiquement converti en pièces.",
-      "es": "Selecciona y obtén un héroe.\nSi seleccionas un héroe que ya posees, se convertirá automáticamente en piezas."
+      "zh": "可在所有同伴角色中选择1名进行招募。\\n已招募到的同伴将获得相应碎片。",
+      "fr": "Sélectionner et obtenir un héros.\\nSi vous sélectionnez un héros que vous possédez déjà, il sera automatiquement converti en pièces.",
+      "es": "Selecciona y obtén un héroe.\\nSi seleccionas un héroe que ya posees, se convertirá automáticamente en piezas."
     },
     "icon": "TI_CharacterCard_03",
     "grade": "unique",
@@ -5436,11 +5436,11 @@
       "es": "Cofre de selección de fragmento de piedra de mejora"
     },
     "desc": {
-      "en": "Select and obtain one of the following:\n - Earth Upgrade Stone Fragment x30\n - Fire Upgrade Stone Fragment x30\n - Water Upgrade Stone Fragment x30\n - Light Upgrade Stone Fragment x30\n - Dark Upgrade Stone Fragment x30",
-      "jp": "以下の中から1種を選択して獲得できる。 \n- 地の進化石のかけら 30個 \n- 火の進化石のかけら 30個 \n- 水の進化石のかけら 30個 \n- 光の進化石のかけら 30個 \n- 闇の進化石のかけら 30個",
+      "en": "Select and obtain one of the following:\\n - Earth Upgrade Stone Fragment x30\\n - Fire Upgrade Stone Fragment x30\\n - Water Upgrade Stone Fragment x30\\n - Light Upgrade Stone Fragment x30\\n - Dark Upgrade Stone Fragment x30",
+      "jp": "以下の中から1種を選択して獲得できる。 \\n- 地の進化石のかけら 30個 \\n- 火の進化石のかけら 30個 \\n- 水の進化石のかけら 30個 \\n- 光の進化石のかけら 30個 \\n- 闇の進化石のかけら 30個",
       "kr": "아래 구성품 중, 1종을 선택하여 획득할 수 있습니다.\n - 지속성 진화석 파편 30개\n - 화속성 진화석 파편 30개\n - 수속성 진화석 파편 30개\n - 명속성 진화석 파편 30개\n - 암속성 진화석 파편 30개",
-      "zh": "可选择并获得下列物品中的1项。\n- 30个土之进化石残片\n- 30个火之进化石残片\n- 30个水之进化石残片\n- 30个光之进化石残片\n- 30个暗之进化石残片",
-      "fr": "Sélectionnez et obtenez l'une des options suivantes:\n- Terre Upgrade Stone Fragment x30 Fragment x30\n- Incendie Upgrade Stone Fragment x30\n- Eau Upgrade Fragment Pierre x3 Fragment\n- Light Upgrade Stone Fragment x3 - Fragment de pierre de lumière de mise à niveau\n- Dark Upgrade Stone Fragment x3",
+      "zh": "可选择并获得下列物品中的1项。\\n- 30个土之进化石残片\\n- 30个火之进化石残片\\n- 30个水之进化石残片\\n- 30个光之进化石残片\\n- 30个暗之进化石残片",
+      "fr": "Sélectionnez et obtenez l'une des options suivantes:\\n- Terre Upgrade Stone Fragment x30 Fragment x30\\n- Incendie Upgrade Stone Fragment x30\\n- Eau Upgrade Fragment Pierre x3 Fragment\\n- Light Upgrade Stone Fragment x3 - Fragment de pierre de lumière de mise à niveau\\n- Dark Upgrade Stone Fragment x3",
       "es": "Seleccione y obtenga una de las siguientes opciones:\\n - Fragmento de Piedra de Mejora de Tierra x30\\n - Fragmento de Piedra de Mejora de Fuego x30\\n - Fragmento de Piedra de Mejora de Agua x30\\n - Fragmento de Piedra de Mejora de Luz x30\\n - Fragmento de Piedra de Mejora de Oscuridad x30"
     },
     "icon": "TI_Common_Box01",
@@ -5825,7 +5825,7 @@
       "kr": "아래 구성품 중, 1종을 선택하여 획득할 수 있습니다.\\n - 지속성 진화석 5개\\n - 화속성 진화석 5개\\n - 수속성 진화석 5개\\n - 명속성 진화석 5개\\n - 암속성 진화석 5개",
       "zh": "可选择并获得下列物品中的1项。\\n - 5个土之进化石\\n - 5个火之进化石\\n - 5个水之进化石\\n - 5个光之进化石\\n - 5个暗之进化石",
       "fr": "Choisissez une récompense :\\n- Pierre d'amélioration de Terre x5\\n- Pierre d'amélioration de Feu x5\\n- Pierre d'amélioration d'Eau x5\\n- Pierre d'amélioration de Lumière x5\\n- Pierre d'amélioration de Ténèbres x5",
-      "es": "Selecciona y obtén una de las siguientes opciones:\n- Piedra de Mejora de Tierra\nx5 - Piedra de Mejora de Fuego\nx5 - Piedra de Mejora de Agua x5 -\nPiedra de Mejora de Luz x5 - Piedra\nde Mejora de Oscuridad x5"
+      "es": "Selecciona y obtén una de las siguientes opciones:\\n- Piedra de Mejora de Tierra\\nx5 - Piedra de Mejora de Fuego\\nx5 - Piedra de Mejora de Agua x5 -\\nPiedra de Mejora de Luz x5 - Piedra\\nde Mejora de Oscuridad x5"
     },
     "icon": "TI_Common_Box04",
     "grade": "rare",
@@ -9036,7 +9036,7 @@
       "es": "[CBT] Boleto de selección Héroe 3★"
     },
     "desc": {
-      "en": "CBT Participation Reward: Select and obtain one 3★ hero.\nIf you select a hero that you already own, it will automatically be converted into pieces.",
+      "en": "CBT Participation Reward: Select and obtain one 3★ hero.\\nIf you select a hero that you already own, it will automatically be converted into pieces.",
       "jp": "CBT参加報酬：★3の仲間から1体を選択して獲得できる。すでに獲得した仲間はピースに変換される。",
       "kr": "CBT 참여 보상 : 3성 동료 중 1명을 선택하여 영입할 수 있습니다. 이미 획득하신 동료는 조각으로 입수하실 수 있습니다.",
       "zh": "CBT参与奖励：可选择并招募1名\\n3星同伴。若招募到重复同伴，\\n则将以碎片形式获得。",
@@ -9665,7 +9665,7 @@
       "kr": "아래 구성품 중, 1종을 선택하여 획득할 수 있습니다.\\n - 지속성 진화석 1개\\n - 화속성 진화석 1개\\n - 수속성 진화석 1개\\n - 명속성 진화석 1개\\n - 암속성 진화석 1개",
       "zh": "可选择并获得下列物品中的1项。\\n - 1个土之进化石\\n - 1个火之进化石\\n - 1个水之进化石\\n - 1个光之进化石\\n - 1个暗之进化石",
       "fr": "Sélectionnez et obtenez l'une des options suivantes:\\n- Terre Upgrade Stone x1\\n- Incendie Upgrade Stone x1\\n- Eau de mise à niveau Pierre x1\\n- Lumière de mise à niveau Pierre x1\\n- Dark Upgrade Stone x1",
-      "es": "Seleccione y obtenga uno de los siguientes:\n- Piedra de Mejora de Tierra x1 -\nPiedra de Mejora de Fuego x1 -\nPiedra de Mejora de Agua x1 -\nPiedra de Mejora de Luz x1 - Piedra\nde Mejora de Oscuridad x1"
+      "es": "Seleccione y obtenga uno de los siguientes:\\n- Piedra de Mejora de Tierra x1 -\\nPiedra de Mejora de Fuego x1 -\\nPiedra de Mejora de Agua x1 -\\nPiedra de Mejora de Luz x1 - Piedra\\nde Mejora de Oscuridad x1"
     },
     "icon": "TI_Common_Box04",
     "grade": "rare",
@@ -9737,7 +9737,7 @@
       "kr": "아래 구성품 중, 1종을 선택하여 획득할 수 있습니다.\\n - USB 드라이브 1개\\n - 수집용 동전 1개\\n - 마력 회복제 1개\\n - 종이학 1개\\n - 나무 열매 1개",
       "zh": "可选择并获得下列物品中的1项。\\n - 1个USB驱动器\\n - 1个硬币藏品\\n - 1个魔力恢复剂\\n - 1个纸鹤\\n - 1个树果",
       "fr": "Choisissez une récompense :\\n- Clé USB x1\\n- Pièce de collection x1\\n- Potion de mana x1\\n- Grue en papier x1\\n- Baie x1",
-      "es": "Selecciona y obtén uno de los siguientes:\n- Unidad USB x1 -\nMoneda de Colección x1 -\nPoción de Maná x1\n- Grulla de Papel\nx1 - Baya x1"
+      "es": "Selecciona y obtén uno de los siguientes:\\n- Unidad USB x1 -\\nMoneda de Colección x1 -\\nPoción de Maná x1\\n- Grulla de Papel\\nx1 - Baya x1"
     },
     "icon": "TI_Common_Box01",
     "grade": "normal",
@@ -9785,7 +9785,7 @@
       "kr": "아래 구성품 중, 1종을 선택하여 획득할 수 있습니다.\\n - 스마트폰 1개\\n - 장식용 갑옷 1개\\n - 마녀의 가마솥 1개\\n - 사자 조각상 1개\\n - 괴조의 알 1개",
       "zh": "可选择并获得下列物品中的1项。\\n - 1个智能手机\\n - 1个盔甲装饰\\n - 1个魔女铁锅\\n - 1个狮子像\\n - 1个异禽的蛋",
       "fr": "Choisissez une récompense :\\n- Smartphone x1\\n- Coffre d'armure décoratif x1\\n- Chaudron de sorcière x1\\n- Statue de lion x1\\n- Œuf d'oiseau fantôme x1",
-      "es": "Selecciona y obtén uno de los siguientes:\n- Smartphone\nx1 - Peto Decorativo x1 - Caldero\nde Bruja x1 - Estatua\nde León x1 -\nHuevo del Ave Fantasma x1"
+      "es": "Selecciona y obtén uno de los siguientes:\\n- Smartphone\\nx1 - Peto Decorativo x1 - Caldero\\nde Bruja x1 - Estatua\\nde León x1 -\\nHuevo del Ave Fantasma x1"
     },
     "icon": "TI_Common_Box04",
     "grade": "rare",
@@ -9809,7 +9809,7 @@
       "kr": "아래 구성품 중, 1종을 선택하여 획득할 수 있습니다.\\n - 던전 코어 파편 1개\\n - 귀족용 의장검 1개\\n - 마법 이론서 1개\\n - 드림 캐처 1개\\n - 세계수의 잎 1개",
       "zh": "可选择并获得下列物品中的1项。\\n - 1个暗堡核心残片\\n - 1个贵族礼剑\\n - 1个魔法理论书\\n - 1个捕梦网\\n - 1个世界树叶子",
       "fr": "Choisissez une récompense :\\n- Fragment de cœur de donjon x1\\n- Épée cérémonielle de noble x1\\n- Manuel de magie x1\\n- Attrape-rêves x1\\n- Feuille de l'Arbre-Monde x1",
-      "es": "Selecciona y obtén uno de los siguientes:\n- Fragmento del Dungeon Core x1 -\nEspada Ceremonial de Noble x1 - Libro\nde Texto de Magia x1\n- Atrapasueños x1 -\nHoja del Árbol del Mundo x1"
+      "es": "Selecciona y obtén uno de los siguientes:\\n- Fragmento del Dungeon Core x1 -\\nEspada Ceremonial de Noble x1 - Libro\\nde Texto de Magia x1\\n- Atrapasueños x1 -\\nHoja del Árbol del Mundo x1"
     },
     "icon": "TI_Common_Box05",
     "grade": "unique",
@@ -12017,7 +12017,7 @@
       "kr": "6성 영웅 방어구를 세트별로 선택하여 획득할 수 있습니다.\\n아래 목록의 세트를 선택할 수 있습니다.\\n[공격], [방어], [생명], [치명], [적중], [저항], [반격], [개전 방벽], [무력화], [흡혈], [관통], [극대화], [속도]",
       "zh": "可在下列套装中选择并获得6星英雄防具套装：\\n【攻击】【防御】【生命】【暴击】【效果命中】【抵抗】【反击】【命中】【回避】【吸血】【穿透】【暴伤】【速度】",
       "fr": "Vous pouvez sélectionner l'ensemble de et obtenir 6★ Epic armure.\\nVous pouvez sélectionner les ensembles suivants:\\nAttaque, DÉF, Vie, Critique, Frappe, Efficacité, RÉS, Contre-attaque, Fortification, Mitigation, Fusil de vie, PÉN, Critique, VIT",
-      "es": "Puedes seleccionar el set y obtener armaduras épicas de 6★.\nPuedes seleccionar entre los siguientes sets:\nAtaque, DEF, Vida, Golpe Crítico, Efectividad, Resistencia, Contraataque, Fortificación, Mitigación, Robo de vida, PEN, Golpe Crítico, VEL"
+      "es": "Puedes seleccionar el set y obtener armaduras épicas de 6★.\\nPuedes seleccionar entre los siguientes sets:\\nAtaque, DEF, Vida, Golpe Crítico, Efectividad, Resistencia, Contraataque, Fortificación, Mitigación, Robo de vida, PEN, Golpe Crítico, VEL"
     },
     "icon": "TI_Armor_Box02",
     "grade": "rare",
@@ -12041,7 +12041,7 @@
       "kr": "5단계 보석 중 랜덤하게 1개를 획득합니다.\\n\\n구성품 종류:\\n5단계 공격 보석 / 5단계 방어 보석 / 5단계 체력 보석 / 5단계 치명 보석 / 5단계 극대화 보석 / 5단계 적중 보석 / 5단계 저항 보석 / 5단계 피해 증가 보석 / 5단계 피해 감소 보석",
       "zh": "可在下列第5阶段宝石中随机选择并获得1个。\\n\\n第5阶段攻击宝石 / 第5阶段防御宝石 / 第5阶段生命值宝石 / 第5阶段暴击宝石 / 第5阶段暴伤宝石 / 第5阶段效果命中宝石 / 第5阶段抵抗宝石 / 第5阶段造成伤害提升宝石 / 第5阶段受伤害降低宝石",
       "fr": "Obtenir 1 aléatoire étape 5 Gem. Gem..\\n\\nÉléments disponibles:\\nÉtape 5 Gémographie d'attaque / Étape 5 GémÃ ̈me de défense / Ã?tape 5 GÃ ̈me de PV / Ã©tape 5 CrÃ©ature Chance de la gÃ ̈me / Ã©tape 5 CrÃ©ature DMG GÃ ̈me / Ã©tape 5 Efficacité de la gÃ ̈me / Ã©tape 5 GÃ ̈me de rÃ©silience / Ã©tape 5 GÃ ̈me de rÃ©silience / Ã©tape 5 GÃ ̈me DMG Incr Gem / Ã©tape GÃ ̈me / Ã©tape GÃ ̈me DMG Réduire la gÃ ̈me de gÃ ̈me",
-      "es": "Obtén 1 Gema de Fase 5 aleatoria.\n\nObjetos disponibles:\nGema de ATQ de Fase 5 / Gema de DEF de Fase 5 / Gema de Salud de Fase 5 / Gema de Prob. CRIT de Fase 5 / Gema de DÑO CRIT de Fase 5 / Gema de Efectividad de Fase 5 / Gema de Resistencia de Fase 5 / Gema de Aum. de Daño de Fase 5 / Gema de red. de daño recibido de Fase 5"
+      "es": "Obtén 1 Gema de Fase 5 aleatoria.\\n\\nObjetos disponibles:\\nGema de ATQ de Fase 5 / Gema de DEF de Fase 5 / Gema de Salud de Fase 5 / Gema de Prob. CRIT de Fase 5 / Gema de DÑO CRIT de Fase 5 / Gema de Efectividad de Fase 5 / Gema de Resistencia de Fase 5 / Gema de Aum. de Daño de Fase 5 / Gema de red. de daño recibido de Fase 5"
     },
     "icon": "TI_GEM_Box_01",
     "grade": "unique",
@@ -12137,7 +12137,7 @@
       "kr": "5성 탈리스만 11종 중 1가지를 랜덤으로 습득할 수 있습니다.\\n\\n구성품 종류:\\n처형인의 탈리스만 / 검투사의 탈리스만 / 도적의 탈리스만 / 현자의 탈리스만 / 예언자의 탈리스만 / 성자의 탈리스만 / 전술가의 탈리스만 / 암살자의 탈리스만 / 마법사의 탈리스만 / 선봉대의 탈리스만 / 장의사의 탈리스만",
       "zh": "可在下列11种5星护身符中随机获得1个。\\n\\n刽子手的护身符 / 剑斗士的护身符 / 盗贼的护身符 / 贤者的护身符 / 预言者的护身符/ 圣者的护身符 / 战略家的护身符 / 刺客的护身符 / 魔法师的护身符 / 先锋队的护身符 / 送葬者的护身符",
       "fr": "Obtenir un sur 11 différent 5★ Talismans au hasard.\\n\\nÉléments disponibles:\\nCharme de bourreau / Charme de gladiateur / Charme de Rogue / Charme de Sage / Charme de Prophète / Charme de Saint / Charme de Tacticien / Charme de Assassin / Charme de Mage / Charme de Vanguard / Charme de Vanguard / Charme de Undertaker",
-      "es": "Obtén aleatoriamente uno de 11 Talismanes de 5★ diferentes.\n\nArtículos disponibles:\nTalismán del Verdugo / Talismán del Gladiador / Talismán del Ladrón / Talismán del Sabio / Talismán del Profeta / Talismán del Santo / Talismán del Táctico / Talismán del Asesino / Talismán del Mago / Talismán de Vanguard / Talismán del Enterrador"
+      "es": "Obtén aleatoriamente uno de 11 Talismanes de 5★ diferentes.\\n\\nArtículos disponibles:\\nTalismán del Verdugo / Talismán del Gladiador / Talismán del Ladrón / Talismán del Sabio / Talismán del Profeta / Talismán del Santo / Talismán del Táctico / Talismán del Asesino / Talismán del Mago / Talismán de Vanguard / Talismán del Enterrador"
     },
     "icon": "TI_Talisman_Box02",
     "grade": "unique",
@@ -12473,7 +12473,7 @@
       "kr": "CP관련 옵션을 지닌 4성 탈리스만 중 한가지를 선택하여 얻을 수 있습니다.\\n\\n구성품 종류:\\n처형인의 탈리스만 / 검투사의 탈리스만 / 도적의 탈리스만 / 현자의 탈리스만 / 예언자의 탈리스만 / 성자의 탈리스만",
       "zh": "可选在下列有CP相关属性的4星护身符中选择并获得1个。\\n\\n刽子手的护身符 / 剑斗士的护身符 / 盗贼的护身符 / 贤者的护身符 / 预言者的护身符 / 圣者的护身符",
       "fr": "Sélectionnez et obtenir un 4★ Talisman avec un effet lié à Points de Chaîne.\\n\\nÉléments disponibles:\\nCharme du bourreau / Charme du gladiateur / Charme du Rogue / Charme du Sage / Charme du Prophète / Charme du Saint",
-      "es": "Selecciona y obtén uno de los Talismanes de 4★ con un efecto relacionado con los Puntos de Cadena.\n\nObjetos disponibles:\nAmuleto del Verdugo / Amuleto del Gladiador / Amuleto del Ladrón / Amuleto del Sabio / Amuleto del Profeta / Amuleto del Santo"
+      "es": "Selecciona y obtén uno de los Talismanes de 4★ con un efecto relacionado con los Puntos de Cadena.\\n\\nObjetos disponibles:\\nAmuleto del Verdugo / Amuleto del Gladiador / Amuleto del Ladrón / Amuleto del Sabio / Amuleto del Profeta / Amuleto del Santo"
     },
     "icon": "TI_Talisman_Box02",
     "grade": "unique",
@@ -12497,7 +12497,7 @@
       "kr": "AP관련 옵션을 지닌 4성 탈리스만 중 한가지를 선택하여 얻을 수 있습니다.\\n\\n구성품 종류:\\n전술가의 탈리스만 / 암살자의 탈리스만 / 마법사의 탈리스만 / 선봉대의 탈리스만 / 장의사의 탈리스만",
       "zh": "可在下列有AP相关属性的4星护身符中选择并获得1个。\\n\\n战略家的护身符 / 刺客的护身符 / 魔法师的护身符 / 先锋队的护身符 / 送葬者的护身符",
       "fr": "Sélectionnez et obtenir un 4★ Talisman avec un effet lié aux PA.\\n\\nÉléments disponibles:\\nCharme de Tacticien / Charme de Assassin / Charme de Mage / Charme de Vanguard / Charme de Undertaker de Charme de Soudain",
-      "es": "Selecciona y obtén uno de los Talismanes de 4★ con un efecto relacionado con los Puntos de Acción.\n\nObjetos disponibles:\nAmuleto del Táctico / Amuleto del Asesino / Amuleto del Mago / Amuleto de Vanguard / Amuleto del Enterrador"
+      "es": "Selecciona y obtén uno de los Talismanes de 4★ con un efecto relacionado con los Puntos de Acción.\\n\\nObjetos disponibles:\\nAmuleto del Táctico / Amuleto del Asesino / Amuleto del Mago / Amuleto de Vanguard / Amuleto del Enterrador"
     },
     "icon": "TI_Talisman_Box02",
     "grade": "unique",
@@ -12521,7 +12521,7 @@
       "kr": "6성 전설 무기/악세서리 중 한가지를 선택하여 얻을 수 있습니다. \\n메인 옵션 및 서브 옵션은 정해진 종류 내에서 랜덤하게 적용됩니다.\\n\\n구성품 종류:\\n특별의뢰:정체규명 [지], [수], [화]에서 획득 가능한 '무기 15종 / 악세서리 15종'이 포함되어 있습니다.",
       "zh": "可在下列6星传说级别武器/饰品中选择并获得1个。\\n主属性与副属性将在指定种类内随机套用。\\n\\n可在特别委托：查清身份【土】、【水】、【火】中获得的15种武器 / 15种饰品。",
       "fr": "Vous pouvez sélectionner et obtenir une arme 6★ Légendaire ou accessoire.\\nStat et Sousstats Main seront aléatoirement appliqués selon des types fixes de statis.\\n\\nÉléments disponibles:\\n15 Armes / 15 Accessoires obtenus dans la demande spéciale: Identification [Earth], [Water] et [Fire].",
-      "es": "Puedes seleccionar y obtener una Arma o Accesorio Legendario de 6★.\nLa estadística principal y las subestadísticas se aplicarán aleatoriamente según los tipos de estadísticas fijas.\n\nObjetos disponibles:\n15 Armas / 15 Accesorios obtenibles en la Encargo especial: Identificación [Tierra], [Agua], e [Ígneo]."
+      "es": "Puedes seleccionar y obtener una Arma o Accesorio Legendario de 6★.\\nLa estadística principal y las subestadísticas se aplicarán aleatoriamente según los tipos de estadísticas fijas.\\n\\nObjetos disponibles:\\n15 Armas / 15 Accesorios obtenibles en la Encargo especial: Identificación [Tierra], [Agua], e [Ígneo]."
     },
     "icon": "TI_Weapon_Box02",
     "grade": "unique",
@@ -12641,7 +12641,7 @@
       "kr": "3성 동료 중 한명을 선택해 영입할 수 있습니다. \\n이미 획득한 동료는 동료 조각 50개로 획득합니다.\\n\\n획득 가능 캐릭터: \\n로나,발렌타인,프란시스카,린,앨리스,이한별,노아,세이란,베스,맥스웰,엘리제,베로니카,레오,이터널,라플라스,메네,아에르,노티아",
       "zh": "可选择并招募1名3星同伴。\\n对于已获得的同伴将获得同伴碎片50个。\\n\\n可获得角色：\\n罗娜、瓦伦塔茵、弗朗西丝卡、琳、爱丽丝、李寒星、诺雅、萨伊蓝、贝丝、麦克斯威尔、伊莉莎、维罗妮卡、雷欧、伊特诺、拉普拉丝、麦尼、艾耶尔、诺缇亚",
       "fr": "Vous pouvez sélectionner et recruter un 3★ héros.\\nSi vous sélectionnez un héros que vous possédez déjà, il sera automatiquement converti en 50 pièces de héros.\\n\\nHéros récupérables:\\nRhona, Valentine, Francesca, Rin, Alice, Hanbyul Lee, Noa, Saeran, Beth, Maxwell, Eliza, Veronica, Léo, Éternel, Laplace, Mene, Aer, Notia, Notia, Aer, Notia, Notia, Nota, Laplace, Mene, Laplace, Leo, Eternal, Laplace, Lave, Lave,",
-      "es": "Puedes seleccionar y reclutamiento un héroe de 3★.\nSi seleccionas un héroe que ya posees, se convertirá automáticamente en 50 Fragmentos de Héroe.\n\nHéroes obtenibles:\nRhona, Valentine, Francesca, Rin, Alice, Hanbyul Lee, Noa, Saeran, Beth, Maxwell, Eliza, Veronica, Leo, Eternal, Laplace, Mene, Aer, Notia"
+      "es": "Puedes seleccionar y reclutamiento un héroe de 3★.\\nSi seleccionas un héroe que ya posees, se convertirá automáticamente en 50 Fragmentos de Héroe.\\n\\nHéroes obtenibles:\\nRhona, Valentine, Francesca, Rin, Alice, Hanbyul Lee, Noa, Saeran, Beth, Maxwell, Eliza, Veronica, Leo, Eternal, Laplace, Mene, Aer, Notia"
     },
     "icon": "TI_CharacterCard_05",
     "grade": "unique",
@@ -12689,7 +12689,7 @@
       "kr": "6성 탈리스만 11종 중 1가지를 선택해서 습득할 수 있습니다.\\n\\n구성품 종류:\\n처형인의 탈리스만 / 검투사의 탈리스만 / 도적의 탈리스만 / 현자의 탈리스만 / 예언자의 탈리스만 / 성자의 탈리스만 / 전술가의 탈리스만 / 암살자의 탈리스만 / 마법사의 탈리스만 / 선봉대의 탈리스만 / 장의사의 탈리스만",
       "zh": "可在下列11种6星护身符中选择并获得1个护身符。\\n\\n刽子手的护身符 / 剑斗士的护身符 / 盗贼的护身符 / 贤者的护身符 / 预言者的护身符/ 圣者的护身符 / 战略家的护身符 / 刺客的护身符 / 魔法师的护身符 / 先锋队的护身符 / 送葬者的护身符",
       "fr": "Sélectionnez et obtenir un sur 11 différent 6★ Talismans.\\n\\nÉléments disponibles:\\nCharme de bourreau / Charme de gladiateur / Charme de Rogue / Charme de Sage / Charme de Prophète / Charme de Saint / Charme de Tacticien / Charme de Assassin / Charme de Mage / Charme de Vanguard / Charme de Vanguard / Charme de Undertaker",
-      "es": "Seleccione y obtenga uno de 11 Talismanes 6★ diferentes.\n\nArtículos disponibles:\nTalismán del Verdugo / Talismán del Gladiador / Talismán del Ladrón / Talismán del Sabio / Talismán del Profeta / Talismán del Santo / Talismán del Táctico / Talismán del Asesino / Talismán del Mago / Talismán del Vanguard"
+      "es": "Seleccione y obtenga uno de 11 Talismanes 6★ diferentes.\\n\\nArtículos disponibles:\\nTalismán del Verdugo / Talismán del Gladiador / Talismán del Ladrón / Talismán del Sabio / Talismán del Profeta / Talismán del Santo / Talismán del Táctico / Talismán del Asesino / Talismán del Mago / Talismán del Vanguard"
     },
     "icon": "TI_Talisman_Box02",
     "grade": "unique",
@@ -13097,7 +13097,7 @@
       "kr": "3단계 보석 중 1개를 무작위로 획득합니다.\\n\\n구성품 종류:\\n3단계 공격 보석 / 3단계 방어 보석 / 3단계 체력 보석 / 3단계 치명 보석 / 3단계 극대화 보석 / 3단계 적중 보석 / 3단계 저항 보석 / 3단계 피해 증가 보석 / 3단계 피해 감소 보석",
       "zh": "可在下列第3阶段宝石中随机获得1个。\\n\\n物品种类：\\n第3阶段攻击宝石 / 第3阶段防御宝石 / 第3阶段生命值宝石 / 第3阶段暴击宝石 / 第3阶段暴伤宝石/ 第3阶段效果命中宝石 / 第3阶段抵抗宝石 / 第3阶段造成伤害提升宝石 / 第3阶段受伤害降低 宝石",
       "fr": "Obtenir 1 aléatoire Étape 3 Gém. Gem.\\n\\nÉléments disponibles:\\nÉtape 3 Gémographie d'attaque / Étape 3 Gem de défense / Étape 3 Gem de PV / Étape 3 Crit Chance Gem / Étape 3 Crit Gémographie DGT / Étape 3 Efficacité Gémographie DGT / Étape 3 Gem de résilience / Étape 3 Gémographie DGT Incr Gem / Étape 3 DGT Incr Gem / Étape DGT Réduire Gémographie DGT Réduire Gémographie Réduire",
-      "es": "Obtén 1 Gema de Fase 3 aleatoria.\n\nObjetos disponibles:\nGema de ATQ de Fase 3 / Gema de DEF de Fase 3 / Gema de Salud de Fase 3 / Gema de Prob. CRIT de Fase 3 / Gema de DÑO CRIT de Fase 3 / Gema de Efectividad de Fase 3 / Gema de Resistencia de Fase 3 / Gema de Aum. de Daño de Fase 3 / Gema de red. de daño recibido de Fase 3"
+      "es": "Obtén 1 Gema de Fase 3 aleatoria.\\n\\nObjetos disponibles:\\nGema de ATQ de Fase 3 / Gema de DEF de Fase 3 / Gema de Salud de Fase 3 / Gema de Prob. CRIT de Fase 3 / Gema de DÑO CRIT de Fase 3 / Gema de Efectividad de Fase 3 / Gema de Resistencia de Fase 3 / Gema de Aum. de Daño de Fase 3 / Gema de red. de daño recibido de Fase 3"
     },
     "icon": "TI_GEM_Box_01",
     "grade": "rare",
@@ -13121,7 +13121,7 @@
       "kr": "아래의 방어구 제작 재료를 획득합니다.\\n\\n소녀의 꿈 140개\\n폭군의 발톱 140개\\n자율 수복 외장 140개\\n\\n합성된 영혼 84개\\n위험종의 심장 84개\\n로스트 메모리즈 84개",
       "zh": "可获得下列防具制作材料。\\n\\n少女的梦x140\\n暴君的魔爪x140\\n自主修复外部装备x140\\n\\n合成的灵魂x84\\n危险物种的心脏x84\\n遗失的记忆x84",
       "fr": "Obtenir les matériaux suivants pour le travail des armures.\\n\\n140 Essence du rêve d'une petite fille\\n140 Griffe de tyran de tyran\\n140 Placage auto-régénéré\\n\\n84 âme fusée âme frémissante\\n84 Apex Predator's Heart de coeur du prédateur Apex\\n84 Mémoire perdue de mémoire",
-      "es": "Obtén los siguientes materiales para crear armaduras.\n\n140 Esencia del Sueño de una Chica\n140 Garra del Tyrant\n140 Placa Autoregenerativa\n\n84 Alma Fusionada\n84 Corazón del Depredador Supremo\n84 Memoria Perdida"
+      "es": "Obtén los siguientes materiales para crear armaduras.\\n\\n140 Esencia del Sueño de una Chica\\n140 Garra del Tyrant\\n140 Placa Autoregenerativa\\n\\n84 Alma Fusionada\\n84 Corazón del Depredador Supremo\\n84 Memoria Perdida"
     },
     "icon": "TI_Armor_Box02",
     "grade": "unique",
@@ -13352,8 +13352,8 @@
       "jp": "貴方を待っていたエヴァ",
       "kr": "당신을 기다려온 에바",
       "zh": "等待你的艾娃",
-      "fr": "Eva qui vous attend",
-      "es": "Eva que te espera con cariño"
+      "fr": "Attendant avec impatience Eva",
+      "es": "Eva que Espera con Cariño"
     },
     "desc": {
       "en": "This is a costume that can be worn by Eva.",
@@ -14248,7 +14248,7 @@
       "jp": "【百鬼夜行の夜】コンセプトの交換用専用ロビーを獲得する。\\n専用ロビーは【バッグ】内でロビーアイテムを使用した後、【ロビー設定】 - 【専用背景】項目で変更できます。",
       "kr": "[백귀야행의 밤] 컨셉의 교체용 전용 로비를 얻습니다.\\n전용 로비는 [소지품] 내에서 로비 아이템을 사용하신 후, [로비 설정] - [전용 배경] 항목에서 변경하실 수 있습니다.",
       "zh": "获得【百鬼夜行之夜】概念的替换专属大厅。\\n在【背包】内使用大厅道具后，可在【大厅设置】 - 【专属背景】项目中进行更换。",
-      "fr": "Obtenez un hall exclusif de remplacement sur le thème [Nuit des esprits sauvages].\nAprès avoir utilisé l'objet dans [Inventaire], sélectionnez-le dans [Paramètres du hall] - [Arrière-plan exclusif].",
+      "fr": "Obtenez un hall exclusif de remplacement sur le thème [Nuit des esprits sauvages].\\nAprès avoir utilisé l'objet dans [Inventaire], sélectionnez-le dans [Paramètres du hall] - [Arrière-plan exclusif].",
       "es": "Obtén un vestíbulo exclusivo de reemplazo con concepto [Night of the Wild Spirits].\\nTras usar el objeto en [Inventario], cámbialo en [Configuración Vestíbulo] - [Fondo Exclusivo]"
     },
     "icon": "TI_BOX_LOBBY_SEASONAL_01",
@@ -14729,7 +14729,7 @@
       "kr": "원하는 동료의 조각을 선택하여 얻을 수 있습니다.\\n\\n입수 가능 동료 조각 : 달리아, 아에르, 아메, 엡실론, 드레이칸",
       "zh": "可选择并获得所选同伴的碎片。\\n\\n可选同伴碎片：达利娅、艾耶尔、亚美、埃普西隆、德雷坎",
       "fr": "Choisissez et obtenez les fragments du héros souhaité.\\n\\nFragments disponibles : Dahlia, Aer, Ame, Epsilon, Drakhan",
-      "es": "Puedes seleccionar y obtener piezas de tus héroes deseados.\n\nPiezas de héroe obtenibles: Dahlia, Aer, Ame, Epsilon, Drakhan"
+      "es": "Puedes seleccionar y obtener piezas de tus héroes deseados.\\n\\nPiezas de héroe obtenibles: Dahlia, Aer, Ame, Epsilon, Drakhan"
     },
     "icon": "TI_CharacterCard_05",
     "grade": "unique",
@@ -14825,7 +14825,7 @@
       "kr": "아래 데미우르고스 동료 중, 1종을 선택하여 획득할 수 있습니다.\\n- 데미우르고스 스텔라, 데미우르고스 아스테, 데미우르고스 드레이칸, 데미우르고스 블라다, 모나드 에바\\n\\n※ 더 이상 획득할 수 있는 보상이 없을 경우 [3,000 에테르]로 판매 가능합니다.",
       "zh": "可在下列创世之神阵容中选择并获得1个。\\n- 创世之神·斯黛拉、创世之神·奥斯黛、创世之神·德雷坎、创世之神·布拉达、单子艾娃\\n\\n※  如已拥有全部可选角色，此次选择将转换为【3,000以太】。",
       "fr": "Sélectionnez et obtenez l'un des suivants Demiurge Heroes..\\n- Demiurge Stella, Demiurge Astei, Demiurge Drakhan, Demiurge Vlada, Monad Eva\\n\\nї Si aucune autre récompense ne peut être obtenue, elle peut être vendue pour 3,000 Éther..",
-      "es": "Selecciona y obtén uno de los siguientes Héroes Demiurge.\n- Demiurge Stella, Demiurge Astei, Demiurge Drakhan, Demiurge Vlada, Monad Eva ※\n\nSi no se pueden obtener más recompensas, se puede vender por 3.000 Éter."
+      "es": "Selecciona y obtén uno de los siguientes Héroes Demiurge.\\n- Demiurge Stella, Demiurge Astei, Demiurge Drakhan, Demiurge Vlada, Monad Eva ※\\n\\nSi no se pueden obtener más recompensas, se puede vender por 3.000 Éter."
     },
     "icon": "TI_CharacterCard_04",
     "grade": "unique",
@@ -14969,7 +14969,7 @@
       "kr": "아래의 데미우르고스 동료 1명을 영입할 수 있습니다.\\n데미우르고스 스텔라\\n데미우르고스 아스테\\n데미우르고스 드레이칸\\n데미우르고스 블라다\\n모나드 에바\\n\\n선택권에 포함된 모든 동료의 초월을 완료하신 경우, 선택권을 7000 무료 에테르로 판매하실 수 있습니다.",
       "zh": "可以招募以下创世之神同伴中的1名。\\n创世之神·斯黛拉\\n创世之神·奥斯黛\\n创世之神·德雷坎\\n创世之神·布拉达\\n单子·艾娃\\n\\n若已完成选择券内所有同伴的超越，可将选择券以7000无偿以太出售。",
       "fr": "Recrutez 1 des héros suivants :\\nDemiurge Stella\\nDemiurge Astei\\nDemiurge Drakhan\\nDemiurge Vlada\\nMonad Eva\\n\\nSi tous les héros du ticket ont atteint la Transcendance max., le ticket peut être vendu pour 7 000 Éthers gratuits.",
-      "es": "Puedes Reclutamiento 1 de los siguientes héroes Demiurge.\nDemiurge\nStella Demiurge\nAstei Demiurge Drakhan\nDemiurge Vlada\nMonad Eva\n\nSi has completado la Trascendencia de todos los héroes incluidos en el Boleto de selección, se puede vender por 7,000 Éter Gratis."
+      "es": "Puedes Reclutamiento 1 de los siguientes héroes Demiurge.\\nDemiurge\\nStella Demiurge\\nAstei Demiurge Drakhan\\nDemiurge Vlada\\nMonad Eva\\n\\nSi has completado la Trascendencia de todos los héroes incluidos en el Boleto de selección, se puede vender por 7,000 Éter Gratis."
     },
     "icon": "TI_CharacterCard_05",
     "grade": "unique",
@@ -15281,7 +15281,7 @@
       "kr": "100 레벨 / 최대 스킬 레벨로 성장이 진행된 3성 동료를 선택하여 얻습니다.\\n이미 보유하신 동료를 선택하실 경우 해당 동료가 성장합니다.\\n선택하신 동료가 싱크로 룸에 등록되어 있을 경우, 자동으로 해제됩니다.\\n\\n더 이상 해당 아이템으로 성장을 진행할 수 있는 동료가 없는 경우, 아이템을 150만골드에 판매하실 수 있습니다.",
       "zh": "选择并获得已成长至100级/最大技能等级的3★同伴。\\n若选择已持有的同伴，该同伴将成长。\\n若所选同伴已在同步室中登录，将自动解除。\\n\\n若已没有可通过该道具成长的同伴，可将道具以150万金币出售。",
       "fr": "Sélectionnez et obtenir un héros 3★ a grandi à niveau 100 / Max niveau de comp..\\nSi vous sélectionnez un héros que vous possédez déjà, ce héros grandira.\\nSi le héros sélectionné est enregistré dans la salle Syncro, ils seront automatiquement supprimés.\\n\\nSi il n'y a plus de héros qui peuvent être cultivés avec cet article, il peut être vendu pour 1,500,000 Or.",
-      "es": "Selecciona y obtén un héroe 3★ que haya crecido hasta el Nivel 100 / Nivel Máximo de Habilidad.\nSi seleccionas un héroe que ya posees, ese héroe crecerá.\nSi el héroe seleccionado está registrado en la Sala Syncro, se eliminará automáticamente.\n\nSi no quedan más héroes que puedan crecer con este objeto, se puede vender por 1.500.000 de Oro."
+      "es": "Selecciona y obtén un héroe 3★ que haya crecido hasta el Nivel 100 / Nivel Máximo de Habilidad.\\nSi seleccionas un héroe que ya posees, ese héroe crecerá.\\nSi el héroe seleccionado está registrado en la Sala Syncro, se eliminará automáticamente.\\n\\nSi no quedan más héroes que puedan crecer con este objeto, se puede vender por 1.500.000 de Oro."
     },
     "icon": "TI_CharacterCard_05",
     "grade": "unique",
@@ -17057,7 +17057,7 @@
       "kr": "100 레벨 / 최대 스킬 레벨로 성장이 진행된 3성 동료를 선택하여 얻습니다.\\n이미 보유하신 동료를 선택하실 경우 해당 동료가 성장합니다.\\n선택하신 동료가 싱크로 룸에 등록되어 있을 경우, 자동으로 해제됩니다.\\n\\n더 이상 해당 아이템으로 성장을 진행할 수 있는 동료가 없는 경우, 아이템을 150만골드에 판매하실 수 있습니다.",
       "zh": "选择并获得已成长至100级/最大技能等级的3★同伴。\\n若选择已持有的同伴，该同伴将成长。\\n若所选同伴已在同步室中登录，将自动解除。\\n\\n若已没有可通过该道具成长的同伴，可将道具以150万金币出售。",
       "fr": "Sélectionnez et obtenir un héros 3★ a grandi à niveau 100 / Max niveau de comp..\\nSi vous sélectionnez un héros que vous possédez déjà, ce héros grandira.\\nSi le héros sélectionné est enregistré dans la salle Syncro, ils seront automatiquement supprimés.\\n\\nSi il n'y a plus de héros qui peuvent être cultivés avec cet article, il peut être vendu pour 1,500,000 Or.",
-      "es": "Selecciona y obtén un héroe 3★ que haya crecido hasta el Nivel 100 / Nivel Máximo de Habilidad.\nSi seleccionas un héroe que ya posees, ese héroe crecerá.\nSi el héroe seleccionado está registrado en la Sala Syncro, se eliminará automáticamente.\n\nSi no quedan más héroes que puedan crecer con este objeto, se puede vender por 1.500.000 de Oro."
+      "es": "Selecciona y obtén un héroe 3★ que haya crecido hasta el Nivel 100 / Nivel Máximo de Habilidad.\\nSi seleccionas un héroe que ya posees, ese héroe crecerá.\\nSi el héroe seleccionado está registrado en la Sala Syncro, se eliminará automáticamente.\\n\\nSi no quedan más héroes que puedan crecer con este objeto, se puede vender por 1.500.000 de Oro."
     },
     "icon": "TI_CharacterCard_05",
     "grade": "unique",
@@ -17081,7 +17081,7 @@
       "kr": "3성 동료 중 한명을 선택해 해당 동료의 조각을 150개 입수할 수 있습니다.\\n\\n더 이상 해당 아이템으로 성장을 진행할 수 있는 동료가 없는 경우, 아이템을 50만골드에 판매하실 수 있습니다.",
       "zh": "从3★同伴中选择1名，可获得该同伴的150个碎片。\\n\\n若已没有可通过该道具成长的同伴，可将道具以50万金币出售。",
       "fr": "Sélectionnez l'un des héros 3★ pour obtenir 150 pièces de ce héros.\\n\\nSi il n'y a plus de héros qui peuvent être cultivés avec cet article, il peut être vendu pour 500,000 Or.",
-      "es": "Seleccione uno de los héroes 3★ para obtener 150 Piezas de ese héroe.\n\nSi no hay más héroes que puedan crecer con este objeto, se puede vender por 500.000 de Oro."
+      "es": "Seleccione uno de los héroes 3★ para obtener 150 Piezas de ese héroe.\\n\\nSi no hay más héroes que puedan crecer con este objeto, se puede vender por 500.000 de Oro."
     },
     "icon": "TI_CharacterCard_05",
     "grade": "unique",
@@ -17440,7 +17440,7 @@
       "jp": "【ロマンティックサマー】コンセプトの交換用専用ロビーを獲得する。\\n専用ロビーは【バッグ】内でロビーアイテムを使用した後、【ロビー設定】 - 【専用背景】項目で変更できます。",
       "kr": "[로맨틱 서머] 컨셉의 교체용 전용 로비를 얻습니다.\\n전용 로비는 [소지품] 내에서 로비 아이템을 사용하신 후, [로비 설정] - [전용 배경] 항목에서 변경하실 수 있습니다.",
       "zh": "获得【浪漫夏日】概念的替换专属大厅。\\n在【背包】内使用大厅道具后，可在【大厅设置】 - 【专属背景】项目中进行更换。",
-      "fr": "Obtenez un hall exclusif sur le thème [Été romantique].\nAprès avoir utilisé l'objet dans [Inventaire], sélectionnez-le dans [Paramètres du hall] - [Arrière-plan exclusif].",
+      "fr": "Obtenez un hall exclusif sur le thème [Été romantique].\\nAprès avoir utilisé l'objet dans [Inventaire], sélectionnez-le dans [Paramètres du hall] - [Arrière-plan exclusif].",
       "es": "Obtén un Vestíbulo exclusivo con concepto [Verano Romántico].\\nTras usar el elemento del lobby en [Inventario], cámbialo en [Configuración Lobby] - [Fondo Exclusivo]"
     },
     "icon": "TI_BOX_LOBBY_SEASONAL_07",
@@ -19457,7 +19457,7 @@
       "kr": "아래의 확률에 따라 스킬 교본을 얻습니다.\\n초급 스킬 교본 1개 : 100%\\n중급 스킬 교본 1개 : 20%\\n전문 스킬 교본 1개 : 1%",
       "zh": "按以下概率获得技能教材。\\n初级技能教材1个：100%\\n中级技能教材1个：20%\\n专业技能教材1个：1%",
       "fr": "Obtenir les manuels des comp. selon les taux suivants.\\nManuel de base des comp. x1: 100% 20%\\nCompétence intermédiaire Manuel x1: 1% \\nCompétence professionnelle Manuel x1: Manuel x1:",
-      "es": "Obtenga Manuales de Habilidad según las siguientes tasas.\nManual Básico\nx1 : 100% Manual Intermedio x1\n: 20% Manual Profesional x1 : 1%"
+      "es": "Obtenga Manuales de Habilidad según las siguientes tasas.\\nManual Básico\\nx1 : 100% Manual Intermedio x1\\n: 20% Manual Profesional x1 : 1%"
     },
     "icon": "TI_Item_Growth_Book_03",
     "grade": "unique",
@@ -19481,7 +19481,7 @@
       "kr": "아래의 확률에 따라 스킬 교본을 얻습니다.\\n초급 스킬 교본 1개 : 100%\\n중급 스킬 교본 1개 : 22.5%\\n전문 스킬 교본 1개 : 1.5%",
       "zh": "按以下概率获得技能教材。\\n初级技能教材1个：100%\\n中级技能教材1个：22.5%\\n专业技能教材1个：1.5%",
       "fr": "Obtenir les manuels des comp. selon les taux suivants.\\nManuel de base des comp. x1: 100% 22.5%\\nCompétence intermédiaire Manuel x1: 1.5% \\nCompétence professionnelle Manuel x1: manuel x1:",
-      "es": "Obtenga Manuales de Habilidad según las siguientes tasas.\nManual Básico\nx1 : 100% Manual Intermedio x1 : 22.5%\nManual Profesional x1 : 1.5%"
+      "es": "Obtenga Manuales de Habilidad según las siguientes tasas.\\nManual Básico\\nx1 : 100% Manual Intermedio x1 : 22.5%\\nManual Profesional x1 : 1.5%"
     },
     "icon": "TI_Item_Growth_Book_03",
     "grade": "unique",
@@ -19505,7 +19505,7 @@
       "kr": "아래의 확률에 따라 스킬 교본을 얻습니다.\\n초급 스킬 교본 1개 : 100%\\n중급 스킬 교본 1개 : 25%\\n전문 스킬 교본 1개 : 2%",
       "zh": "按以下概率获得技能教材。\\n初级技能教材1个：100%\\n中级技能教材1个：25%\\n专业技能教材1个：2%",
       "fr": "Obtenir les manuels des comp. selon les taux suivants.\\nManuel de base des comp. x1: 100% 25%\\nCompétence intermédiaire Manuel x1: 2% \\nCompétence professionnelle Manuel x1:",
-      "es": "Obtenga Manuales de Habilidad según las siguientes tasas.\nManual Básico\nx1 : 100% Manual Intermedio x1\n: 25% Manual Profesional x1 : 2%"
+      "es": "Obtenga Manuales de Habilidad según las siguientes tasas.\\nManual Básico\\nx1 : 100% Manual Intermedio x1\\n: 25% Manual Profesional x1 : 2%"
     },
     "icon": "TI_Item_Growth_Book_03",
     "grade": "unique",
@@ -19529,7 +19529,7 @@
       "kr": "아래의 확률에 따라 스킬 교본을 얻습니다.\\n초급 스킬 교본 1개 : 100%\\n중급 스킬 교본 1개 : 27.5%\\n전문 스킬 교본 1개 : 2.5%",
       "zh": "按以下概率获得技能教材。\\n初级技能教材1个：100%\\n中级技能教材1个：27.5%\\n专业技能教材1个：2.5%",
       "fr": "Obtenir les manuels des comp. selon les taux suivants.\\nManuel de base des comp. x1: 100% 27.5%\\nCompétence intermédiaire Manuel x1: 2.5% \\nCompétence professionnelle Manuel x1:",
-      "es": "Obtenga Manuales de Habilidad según las siguientes tasas.\nManual Básico\nx1 : 100% Manual Intermedio x1 : 27.5%\nManual Profesional x1 : 2.5%"
+      "es": "Obtenga Manuales de Habilidad según las siguientes tasas.\\nManual Básico\\nx1 : 100% Manual Intermedio x1 : 27.5%\\nManual Profesional x1 : 2.5%"
     },
     "icon": "TI_Item_Growth_Book_03",
     "grade": "unique",
@@ -19553,7 +19553,7 @@
       "kr": "아래의 확률에 따라 스킬 교본을 얻습니다.\\n초급 스킬 교본 1개 : 100%\\n중급 스킬 교본 1개 : 30%\\n전문 스킬 교본 1개 : 3%",
       "zh": "按以下概率获得技能教材。\\n初级技能教材1个：100%\\n中级技能教材1个：30%\\n专业技能教材1个：3%",
       "fr": "Obtenir les manuels des comp. selon les taux suivants.\\nManuel de base des comp. x1: 100% 30%\\nCompétence intermédiaire Manuel x1: 3% \\nCompétence professionnelle Manuel x1: Manuel de comp. professionnelles x1:",
-      "es": "Obtenga Manuales de Habilidad según las siguientes tasas.\nManual Básico\nx1 : 100% Manual Intermedio x1\n: 30% Manual Profesional x1 : 3%"
+      "es": "Obtenga Manuales de Habilidad según las siguientes tasas.\\nManual Básico\\nx1 : 100% Manual Intermedio x1\\n: 30% Manual Profesional x1 : 3%"
     },
     "icon": "TI_Item_Growth_Book_03",
     "grade": "unique",
@@ -19577,7 +19577,7 @@
       "kr": "아래의 확률에 따라 스킬 교본을 얻습니다.\\n초급 스킬 교본 1개 : 100%\\n중급 스킬 교본 1개 : 32.5%\\n전문 스킬 교본 1개 : 3.5%",
       "zh": "按以下概率获得技能教材。\\n初级技能教材1个：100%\\n中级技能教材1个：32.5%\\n专业技能教材1个：3.5%",
       "fr": "Obtenir les manuels des comp. selon les taux suivants.\\nManuel de base des comp. x1: 100% 32.5%\\nManuel de comp. intermédiaire x1: 3.5%\\nCompétences professionnelles Manuel x1:",
-      "es": "Obtenga Manuales de Habilidad según las siguientes tasas.\nManual Básico\nx1 : 100% Manual Intermedio x1 : 32.5%\nManual Profesional x1 : 3.5%"
+      "es": "Obtenga Manuales de Habilidad según las siguientes tasas.\\nManual Básico\\nx1 : 100% Manual Intermedio x1 : 32.5%\\nManual Profesional x1 : 3.5%"
     },
     "icon": "TI_Item_Growth_Book_03",
     "grade": "unique",
@@ -23945,7 +23945,7 @@
       "kr": "아래 구성품 중, 1종을 선택하여 획득할 수 있습니다.\\n - 던전 코어 파편 1개\\n - 귀족용 의장검 1개\\n - 마법 이론서 1개\\n - 드림 캐처 1개\\n - 세계수의 잎 1개",
       "zh": "可选择并获得下列物品中的1项。\\n - 1个暗堡核心残片\\n - 1个贵族礼剑\\n - 1个魔法理论书\\n - 1个捕梦网\\n - 1个世界树叶子",
       "fr": "Choisissez une récompense :\\n- Fragment de cœur de donjon x1\\n- Épée cérémonielle de noble x1\\n- Manuel de magie x1\\n- Attrape-rêves x1\\n- Feuille de l'Arbre-Monde x1",
-      "es": "Selecciona y obtén uno de los siguientes:\n- Fragmento del Dungeon Core x1 -\nEspada Ceremonial de Noble x1 - Libro\nde Texto de Magia x1\n- Atrapasueños x1 -\nHoja del Árbol del Mundo x1"
+      "es": "Selecciona y obtén uno de los siguientes:\\n- Fragmento del Dungeon Core x1 -\\nEspada Ceremonial de Noble x1 - Libro\\nde Texto de Magia x1\\n- Atrapasueños x1 -\\nHoja del Árbol del Mundo x1"
     },
     "icon": "TI_Birthday_Cake",
     "grade": "unique",
@@ -24905,7 +24905,7 @@
       "kr": "추천 패키지 3회 구입 시, \\n획득 가능한 보상입니다.\\n아래의 보상을 획득할 수 있습니다.\\n\\n스테이크 정식 50개\\n초급 스킬 교본 10개\\n진화석 파편 선택 상자 30개\\n진화석 조각 선택 상자 35개\\n전설 선물 선택 상자 20개\\n6성 영웅 투구 선택 상자[극대화/속도/흡혈] 1개\\n전문 강화 도구 10개",
       "zh": "购买推荐礼包3次时，\\n可获得如下奖励：\\n\\n50个牛排套餐\\n10本初级技能教材\\n30个进化石残片选择箱\\n35个进化石碎片选择箱\\n20个传说礼物选择箱\\n1个6星英雄头盔选择箱【暴伤/速度/吸血】\\n10个专家强化道具",
       "fr": "Récompenses obtenues pour l'achat Packs recommandés 3 fois..\\nLes récompenses suivantes sont obtenables:\\n\\nBouillon de biscuit x50\\nManuel de base des compétences x10 manuel x15\\nMise à niveau de la pierre Fragment sélection Châte x30\\nMise à niveau de pierre Pièce sélection Châte x3\\nQualité légendaire Sélection actuelle Coffre x2 Coffre x2\\n6★ Épic Casque sélection thoracique [Critical Strike/Speed/Lifesteal] x1\\nMarteau de maître x1 marteau de maître",
-      "es": "Recompensas obtenibles al comprar Paquetes Recomendados 3 veces.\nLas siguientes recompensas son obtenibles:\n\nPlato de bistec x50\nManual básico de hab. x10 Cofre\nde selección de Fragmento de piedra de mejora x30\nCofre de selección de piezas de piedra de mejora\nx35 Cofre de selección de regalos de calidad legendaria x20 Cofre de selección de casco épico\n6★\n[Golpe crítico/VEL/Robo de Vida] x1 Martillo del Amo x10"
+      "es": "Recompensas obtenibles al comprar Paquetes Recomendados 3 veces.\\nLas siguientes recompensas son obtenibles:\\n\\nPlato de bistec x50\\nManual básico de hab. x10 Cofre\\nde selección de Fragmento de piedra de mejora x30\\nCofre de selección de piezas de piedra de mejora\\nx35 Cofre de selección de regalos de calidad legendaria x20 Cofre de selección de casco épico\\n6★\\n[Golpe crítico/VEL/Robo de Vida] x1 Martillo del Amo x10"
     },
     "icon": "TI_Common_Box05",
     "grade": "unique",
@@ -24929,7 +24929,7 @@
       "kr": "추천 패키지 5회 구입 시, \\n획득 가능한 보상입니다.\\n아래의 보상을 획득할 수 있습니다.\\n\\n스테이크 정식 50개\\n중급 스킬 교본 15개\\n진화석 조각 선택 상자 40개\\n진화석 선택 상자 50개\\n전설 선물 선택 상자 50개\\n6성 영웅 갑옷 선택 상자[극대화/속도/흡혈] 1개\\n전문 강화 도구 10개",
       "zh": "购买推荐礼包5次时，\\n可获得如下奖励：\\n\\n50个牛排套餐\\n15本中级技能教材\\n40个进化石碎片选择箱\\n50个进化石选择箱\\n50个传说礼物选择箱\\n1个6星英雄盔甲选择箱【暴伤/速度/吸血】\\n10个专家强化道具",
       "fr": "Récompenses obtenues après 5 achats de Packs recommandés.\\nRécompenses disponibles :\\n\\nPlat de steak x50\\nManuel de comp. intermédiaire x15\\nCoffre de sélection de fragments de pierre d'amélioration x40\\nCoffre de sélection de pierre d'amélioration x50\\nCoffre de sélection de cadeau légendaire x50\\nCoffre de sélection d'armure épique 6★ [Coup critique/VIT/Vol de vie] x1\\nMarteau de maître x10",
-      "es": "Recompensas obtenibles al comprar Paquetes Recomendados 5 veces.\nLas siguientes recompensas son obtenibles:\n\nPlato de bistec x50\nManual intermedio de hab. x15 Cofre\nde selección de piezas de piedra de mejora\nx40 Cofre de selección de piedra de mejora\nx50 Cofre de selección de regalos de calidad legendaria x50 Cofre de selección de Peto épico\n6★\n[Golpe crítico/VEL/Robo de Vida] x1 Martillo del Amo x10"
+      "es": "Recompensas obtenibles al comprar Paquetes Recomendados 5 veces.\\nLas siguientes recompensas son obtenibles:\\n\\nPlato de bistec x50\\nManual intermedio de hab. x15 Cofre\\nde selección de piezas de piedra de mejora\\nx40 Cofre de selección de piedra de mejora\\nx50 Cofre de selección de regalos de calidad legendaria x50 Cofre de selección de Peto épico\\n6★\\n[Golpe crítico/VEL/Robo de Vida] x1 Martillo del Amo x10"
     },
     "icon": "TI_Common_Box05",
     "grade": "unique",
@@ -27504,7 +27504,7 @@
       "jp": "危険なスパイ・エリス",
       "kr": "위험한 스파이 에리스",
       "zh": "危险间谍·艾理斯",
-      "fr": "Espion redoutable Eris",
+      "fr": "Espionne redoutable Eris",
       "es": "Espía peligrosa Eris"
     },
     "desc": {
@@ -28054,20 +28054,20 @@
   "SYS_ASSET_EVENT_COIN_1": {
     "kind": "goods",
     "name": {
-      "en": "Apocryphal Page",
-      "jp": "外典の頁",
-      "kr": "외경의 낱장",
-      "zh": "外典残页",
-      "fr": "Page apocryphe",
-      "es": "Página Apócrifa"
+      "en": "Security Card",
+      "jp": "セキュリティカード",
+      "kr": "보안 카드",
+      "zh": "安保卡",
+      "fr": "Carte de sécurité",
+      "es": "Tarjeta de seguridad"
     },
     "desc": {
-      "en": "Just as birth and death are inevitable, so too was destruction foretold... Can be exchanged for various items in the Event Shop.",
-      "jp": "生と死が必然であるように、滅びもまた予言されていた……イベントショップでさまざまなアイテムと交換できます。",
-      "kr": "탄생과 죽음이 당연하듯, 멸망은 예고된 것이다… 이벤트 상점에서 다양한 상품과 교환할 수 있습니다.",
-      "zh": "正如诞生与死亡皆为必然，毁灭也早已被预示……可在活动商店兑换各种商品。",
-      "fr": "Tout comme la naissance & la mort sont inévitables, la destruction l'était également... Peut être échangé contre divers objets dans la boutique de l'événement",
-      "es": "Así como nacer y morir son inevitables, la destrucción estaba anunciada... Se puede canjear por objetos en la Tienda del Evento."
+      "en": "A key to the secret warehouse. Only a specific Security Card can open its heavy door. Can be exchanged for various items in the Event Shop.",
+      "jp": "秘密倉庫の鍵。分厚い扉は特定のセキュリティカードでしか開けられない。イベントショップでさまざまなアイテムと交換できます。",
+      "kr": "비밀 창고의 열쇠, 특정한 보안 카드만 그 두꺼운 문을 연다. 이벤트 상점에서 다양한 상품과 교환할 수 있습니다.",
+      "zh": "秘密仓库的钥匙。厚重的大门只能用特定的安保卡打开。可在活动商店兑换各种商品。",
+      "fr": "La clé de l'entrepôt secret. Seule une carte de sécurité précise ouvre sa lourde porte. Peut être échangée contre divers articles dans la boutique de l'événement.",
+      "es": "La llave del almacén secreto. Solo una tarjeta de seguridad específica abre su pesada puerta. Se puede canjear por varios artículos en la Tienda del evento."
     },
     "icon": "TI_Item_Event_Coin_01",
     "grade": "unique",
@@ -28077,20 +28077,20 @@
   "SYS_ASSET_EVENT_COIN_2": {
     "kind": "goods",
     "name": {
-      "en": "Glass Bottle of Materials",
-      "jp": "素材のガラス瓶",
-      "kr": "재료가 담긴 유리병",
-      "zh": "材料瓶",
-      "fr": "Bouteille en verre de maté.",
-      "es": "Botella de cristal con mater."
+      "en": "Fuel Tank",
+      "jp": "燃料タンク",
+      "kr": "연료통",
+      "zh": "燃料罐",
+      "fr": "Réservoir de carburant",
+      "es": "Depósito de combustible"
     },
     "desc": {
-      "en": "A glass bottle containing fresh wild fruits used as food ingredients. Can be exchanged for various items in the Event Shop.",
-      "jp": "料理の素材として使われる新鮮な野生の果物が入ったガラス瓶。イベントショップで様々なアイテムと交換できる。",
-      "kr": "음식 재료로 사용되는 신선한 야생 과일을 담은 유리병. 이벤트 상점에서 다양한 상품과 교환할 수 있습니다.",
-      "zh": "装有用作食材的新鲜野生水果的玻璃瓶。可在活动商店兑换各种商品。",
-      "fr": "Une bouteille en verre contenant des fruits sauvages frais utilisés comme ingrédients. Échangeable contre divers articles dans la boutique de l'événement",
-      "es": "Una botella de cristal que contiene frutas silvestres frescas utilizadas como ingredientes culinarios. Se puede intercambiar por varios objetos en la Tienda de Eventos"
+      "en": "A container used to transport fuel. Can be exchanged for various items in the Event Shop.",
+      "jp": "燃料を運搬するための容器。イベントショップでさまざまなアイテムと交換できます。",
+      "kr": "운송 수단으로 연료를 옮기는 도구. 이벤트 상점에서 다양한 상품과 교환할 수 있습니다.",
+      "zh": "用于运输燃料的容器。可在活动商店兑换各种商品。",
+      "fr": "Un récipient servant à transporter du carburant. Peut être échangé contre divers articles dans la boutique de l'événement.",
+      "es": "Un recipiente para transportar combustible. Se puede canjear por varios artículos en la Tienda del evento."
     },
     "icon": "TI_Item_Event_Coin_02",
     "grade": "normal",
@@ -28169,20 +28169,20 @@
   "SYS_ASSET_EVENT_COIN_6": {
     "kind": "goods",
     "name": {
-      "en": "Sunset Droplet",
-      "jp": "夕焼け雫",
-      "kr": "노을빛 물방울",
-      "zh": "落日水滴",
-      "fr": "Goutt. de coucher de soleil",
-      "es": "Gota de atar."
+      "en": "Chairwoman's Business Card",
+      "jp": "会長の名刺",
+      "kr": "회장님 명함",
+      "zh": "董事长的名片",
+      "fr": "Carte de visite de la présidente",
+      "es": "Tarjeta de visita de la presidenta"
     },
     "desc": {
-      "en": "A droplet-shaped [Potential] that seems to hold the sunset within. The lingering echo of summer, distorted by the Singularity Core. Can be exchanged for various items in the Event Shop.",
-      "jp": "落日を宿しているかのような雫の形をした【可能性】。特異点コアによって歪められた夏の残響。イベントショップでさまざまなアイテムと交換できます。",
-      "kr": "노을을 담은 것 같은 물방울 형상의 [가능성]. 특이점 코어에 의해 왜곡된 여름의 잔향. 이벤트 상점에서 다양한 상품과 교환할 수 있습니다.",
-      "zh": "形如水滴、仿佛蕴含落日的【可能性】。被特异点核心所扭曲的夏日余韵。可在活动商店兑换各种商品。",
-      "fr": "Un [Potentiel] en forme de goutte qui semble contenir le crépuscule. L'écho persistant de l'été, déformé par le Noyau de Singularité. Peut être échangé contre divers objets dans la Boutique de l'événement",
-      "es": "Una gota de [Potencial] con el atardecer dentro. Eco del verano, distorsionado por el Core de Singularidad. Intercambiable en la Tienda de Eventos."
+      "en": "A business card that appears to belong to Aisla. She has no employees, yet her title is Chairwoman. Can be exchanged for various items in the Event Shop.",
+      "jp": "アイスラのものと思われる名刺。社員は一人もいないが、肩書きは会長。イベントショップでさまざまなアイテムと交換できます。",
+      "kr": "아이슬라의 것으로 보이는 명함. 사원은 한 명도 없지만, 직함은 회장이다. 이벤트 상점에서 다양한 상품과 교환할 수 있습니다.",
+      "zh": "一张似乎属于艾丝拉的名片。虽然没有一名员工，头衔却是董事长。可在活动商店兑换各种商品。",
+      "fr": "Une carte de visite qui semble appartenir à Aisla. Elle n'a aucun employé, mais porte le titre de présidente. Peut être échangée contre divers articles dans la boutique de l'événement.",
+      "es": "Una tarjeta de visita que parece ser de Aisla. Aunque no tiene empleados, su cargo es el de presidenta. Se puede canjear por varios artículos en la Tienda del evento."
     },
     "icon": "TI_Item_Event_Coin_06",
     "grade": "normal",
