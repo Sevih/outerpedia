@@ -55,16 +55,6 @@ const KNOWN_DIVERGENCES: ReadonlyArray<{ file: string; path: string; why: string
   },
   // — Une balise que jp/kr/zh ajoutent là où `en` ne nomme rien —
   {
-    file: `${GUIDES}/joint-challenge/deep-sea-guardian/versions/2026-01/recommended.json`,
-    path: '[3].reason',
-    why: 'en « …COUNTER_RATE buff » ; jp/kr/zh « un {C/Striker} qui a …COUNTER_RATE »',
-  },
-  {
-    file: `${GUIDES}/joint-challenge/deep-sea-guardian/versions/2026-06/recommended.json`,
-    path: '[3].reason',
-    why: 'même phrase que la version 2026-01 : {C/Striker} en plus dans jp/kr/zh',
-  },
-  {
     file: `${GUIDES}/special-request/glicys/recommended.json`,
     path: '[1].reason',
     why: 'en « {C/Healer} options » ; jp/kr/zh « {C/Healer} {E/Earth} qui a {B/BT_IMMUNE} »',
