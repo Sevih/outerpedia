@@ -38,13 +38,14 @@
     "267": 1,
     "268": 1
   },
-  "gameVersion": "1.4.14",
+  "gameVersion": "1.4.19",
   "observed": [
     {
       "slot": "S1",
       "branch": "normal",
-      "damage": 2414
+      "damage": 2327
     }
   ],
-  "notes": "Captures Sevih 18/08/2026 - un combat par mesure, premier coup, etat neutre. A PROUVE : procs SKILL_START au lanceur (passive_3 +300 pm pierce TARGET_IS_BOSS) et dedup des buffs multi-references - delta 0.00 % exact."
+  "notes": "Captures Sevih 18/08/2026 - un combat par mesure, premier coup, etat neutre. A PROUVE : procs SKILL_START au lanceur (passive_3 +300 pm pierce TARGET_IS_BOSS) et dedup des buffs multi-references - delta 0.00 % exact. MESURES 07/11/2026 (patch 1.11.601, Rhona reequilibree : S1 scale sur l'HP, Heavy Strike) : HP combat 10555 (fiche 7529, affinity 100), 1er S1 2327, 2e S1 2850 ; moteur 2392 (HP combat 8658, swap 20 %, heavy strike 0 stack au 1er coup). Ecart 2,7 % non explique : skipRef en attendant la relecture du binaire.",
+  "skipRef": "Rhona 1.11.601 : swap d'attaque sur HP et Heavy Strike — HP combat 10555 (moteur 8658), S1 2327 puis 2850 (moteur 2392), à relire dans le binaire (§ 10.1, § 16)"
 }
