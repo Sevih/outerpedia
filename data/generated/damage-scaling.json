@@ -6,7 +6,7 @@
     "dot": true
   },
   "2000008": {
-    "bonusStats": ["hp"]
+    "attackStat": "hp"
   },
   "2000010": {
     "bonusStats": ["def"]
@@ -175,6 +175,9 @@
   },
   "2000121": {
     "bonusStats": ["speed"]
+  },
+  "2000123": {
+    "attackStat": "def"
   },
   "2000129": {
     "bonusStats": ["speed"],

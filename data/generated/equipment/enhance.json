@@ -60,7 +60,7 @@
             "jp": "達人の強化ハンマー",
             "kr": "명인 강화 도구",
             "zh": "名匠强化道具",
-            "fr": "Artisan's Hammer",
+            "fr": "Marteau de l'artisan",
             "es": "Martillo del Artesano"
           },
           "icon": "TI_Item_Growth_Enhance_04",
@@ -115,7 +115,7 @@
               "jp": "達人の強化ハンマー",
               "kr": "명인 강화 도구",
               "zh": "名匠强化道具",
-              "fr": "Artisan's Hammer",
+              "fr": "Marteau de l'artisan",
               "es": "Martillo del Artesano"
             },
             "icon": "TI_Item_Growth_Enhance_04",
@@ -167,7 +167,7 @@
               "jp": "達人の強化ハンマー",
               "kr": "명인 강화 도구",
               "zh": "名匠强化道具",
-              "fr": "Artisan's Hammer",
+              "fr": "Marteau de l'artisan",
               "es": "Martillo del Artesano"
             },
             "icon": "TI_Item_Growth_Enhance_04",
@@ -219,7 +219,7 @@
               "jp": "達人の強化ハンマー",
               "kr": "명인 강화 도구",
               "zh": "名匠强化道具",
-              "fr": "Artisan's Hammer",
+              "fr": "Marteau de l'artisan",
               "es": "Martillo del Artesano"
             },
             "icon": "TI_Item_Growth_Enhance_04",
@@ -271,7 +271,7 @@
               "jp": "達人の強化ハンマー",
               "kr": "명인 강화 도구",
               "zh": "名匠强化道具",
-              "fr": "Artisan's Hammer",
+              "fr": "Marteau de l'artisan",
               "es": "Martillo del Artesano"
             },
             "icon": "TI_Item_Growth_Enhance_04",
@@ -323,7 +323,7 @@
               "jp": "達人の強化ハンマー",
               "kr": "명인 강화 도구",
               "zh": "名匠强化道具",
-              "fr": "Artisan's Hammer",
+              "fr": "Marteau de l'artisan",
               "es": "Martillo del Artesano"
             },
             "icon": "TI_Item_Growth_Enhance_04",
@@ -352,7 +352,7 @@
             "jp": "リロードカートリッジ",
             "kr": "리로드 카트리지",
             "zh": "换弹匣",
-            "fr": "Reload Cartridge",
+            "fr": "Cartouche de rechargement",
             "es": "Cartucho de Recarga"
           },
           "icon": "TI_Equip_Monad_Growth_Enhance_02",

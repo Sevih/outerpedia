@@ -16841,7 +16841,7 @@
       "es": "Equipo Core Fusion Eternal"
     },
     "desc": {
-      "en": "Right after using <color=#28d9ed>Death Sentence</color>, does not trigger an enemy's Counterattack, Revenge, or Agile Response.",
+      "en": "Right after using <color=#28d9ed>Death Sentence</color>, does not trigger an enemy's Counterattack, Revenge, or Agile Response.\\n",
       "jp": "<color=#28d9ed>【死刑宣告】</color>使用直後、敵の反撃、復讐、迅速対応を防ぐ",
       "kr": "<color=#28d9ed>사형 선고</color> 사용 직후 적의 반격, 복수, 신속 대응 방지",
       "zh": "使用<color=#28d9ed>死刑宣判</color>后立即防止敌方反击、复仇、迅速应对",

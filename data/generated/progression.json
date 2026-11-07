@@ -4122,6 +4122,29 @@
         }
       ]
     },
+    "12308": {
+      "2": [
+        {
+          "stat": "dmg_reduce",
+          "applying": "add",
+          "value": 24
+        }
+      ],
+      "3": [
+        {
+          "stat": "dmg_reduce",
+          "applying": "add",
+          "value": 24
+        }
+      ],
+      "4": [
+        {
+          "stat": "dmg_reduce",
+          "applying": "add",
+          "value": 48
+        }
+      ]
+    },
     "12408": {
       "3": [
         {

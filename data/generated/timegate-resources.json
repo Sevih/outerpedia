@@ -1,5 +1,5 @@
 {
-  "asOf": "2026-10-27",
+  "asOf": "2026-11-10",
   "tabs": [
     {
       "key": "books",
@@ -11,8 +11,8 @@
             "jp": "スキル教本：はじまり編",
             "kr": "초급 스킬 교본",
             "zh": "初级技能教材",
-            "fr": "Basic comp. manuel",
-            "es": "Manual de Habilidades"
+            "fr": "Manuel de compétences de base",
+            "es": "Manual básico de habilidades"
           },
           "icon": "TI_Item_Growth_Book_01",
           "iconKind": "item",
@@ -62,8 +62,8 @@
             "jp": "スキル教本：応用編",
             "kr": "중급 스킬 교본",
             "zh": "中级技能教材",
-            "fr": "Intermediate comp. manuel",
-            "es": "Manual de hab. intermedia"
+            "fr": "Manuel de compétences intermédiaires",
+            "es": "Manual intermedio de habilidades"
           },
           "icon": "TI_Item_Growth_Book_02",
           "iconKind": "item",
@@ -119,8 +119,8 @@
             "jp": "スキル教本：専門家編",
             "kr": "전문 스킬 교본",
             "zh": "专家技能教材",
-            "fr": "Professional comp. manuel",
-            "es": "Manual de hab. profesional"
+            "fr": "Manuel de compétences professionnelles",
+            "es": "Manual profesional de habilidades"
           },
           "icon": "TI_Item_Growth_Book_03",
           "iconKind": "item",
@@ -148,8 +148,7 @@
               "sourceKey": "arena",
               "origin": "shop",
               "type": "shop",
-              "weekly": 1,
-              "monthly": 5
+              "weekly": 2
             },
             {
               "sourceKey": "stars",
@@ -165,9 +164,9 @@
             }
           ],
           "totals": {
-            "weekly": 4,
-            "monthly": 13,
-            "grandMonthly": 29
+            "weekly": 5,
+            "monthly": 8,
+            "grandMonthly": 28
           }
         }
       ]
@@ -325,8 +324,8 @@
             "jp": "ブルースターダスト",
             "kr": "블루 스타 더스트",
             "zh": "蓝色星尘",
-            "fr": "Blue Stardust",
-            "es": "Polvo estelar azul"
+            "fr": "Poussière d'étoile bleue",
+            "es": "Polvo de Estrella Azul"
           },
           "icon": "TI_Talisman_Growth_Enhance_01",
           "iconKind": "item",
@@ -370,8 +369,8 @@
             "jp": "パープルスターダスト",
             "kr": "퍼플 스타 더스트",
             "zh": "紫色星尘",
-            "fr": "Purple Stardust",
-            "es": "Polvo de estrellas púrpura"
+            "fr": "Poussière d'étoile violette",
+            "es": "Polvo de Estrella Púrpura"
           },
           "icon": "TI_Talisman_Growth_Enhance_02",
           "iconKind": "item",
@@ -407,8 +406,8 @@
                   "jp": "ブルースターダスト",
                   "kr": "블루 스타 더스트",
                   "zh": "蓝色星尘",
-                  "fr": "Blue Stardust",
-                  "es": "Polvo estelar azul"
+                  "fr": "Poussière d'étoile bleue",
+                  "es": "Polvo de Estrella Azul"
                 },
                 "icon": "TI_Talisman_Growth_Enhance_01",
                 "grade": "unique"
@@ -429,7 +428,7 @@
             "jp": "ブルーメモリーストーン",
             "kr": "블루 메모리 스톤",
             "zh": "蓝色记忆石",
-            "fr": "Blue Memory Stone",
+            "fr": "Pierre de mémoire bleue",
             "es": "Piedra de Memoria Azul"
           },
           "icon": "TI_EX_Equip_Growth_Enhance_01",
@@ -511,7 +510,7 @@
                   "jp": "ブルーメモリーストーン",
                   "kr": "블루 메모리 스톤",
                   "zh": "蓝色记忆石",
-                  "fr": "Blue Memory Stone",
+                  "fr": "Pierre de mémoire bleue",
                   "es": "Piedra de Memoria Azul"
                 },
                 "icon": "TI_EX_Equip_Growth_Enhance_01",
@@ -577,7 +576,7 @@
             "jp": "リロードカートリッジ",
             "kr": "리로드 카트리지",
             "zh": "换弹匣",
-            "fr": "Reload Cartridge",
+            "fr": "Cartouche de rechargement",
             "es": "Cartucho de Recarga"
           },
           "icon": "TI_Equip_Monad_Growth_Enhance_02",

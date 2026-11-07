@@ -73681,7 +73681,7 @@
       "trigger": "turn_count",
       "steps": [
         {
-          "value": 3,
+          "value": 4,
           "duration": 4
         }
       ]
@@ -73763,7 +73763,7 @@
       "trigger": "turn_count",
       "steps": [
         {
-          "value": 3,
+          "value": 4,
           "duration": 4
         }
       ]
@@ -73845,7 +73845,7 @@
       "trigger": "turn_count",
       "steps": [
         {
-          "value": 3,
+          "value": 4,
           "duration": 4
         }
       ]
@@ -73931,7 +73931,7 @@
       "trigger": "turn_count",
       "steps": [
         {
-          "value": 3,
+          "value": 4,
           "duration": 4
         }
       ]
@@ -215125,6 +215125,441 @@
     "pushBack": true,
     "pushUp": false,
     "summonedBy": ["40103002"]
+  },
+  "55400001": {
+    "id": "55400001",
+    "name": {
+      "en": "Liselotte",
+      "jp": "リーゼロッテ",
+      "kr": "리젤로테",
+      "zh": "莉婕洛特",
+      "fr": "Liselotte",
+      "es": "Liselotte"
+    },
+    "type": "boss",
+    "race": "alien",
+    "class": "striker",
+    "element": "fire",
+    "rarity": 3,
+    "icon": "2000098",
+    "skills": ["152004", "152005", "152006"],
+    "stats": {
+      "hp": {
+        "min": 372,
+        "max": 55200
+      },
+      "atk": {
+        "min": 120,
+        "max": 5176
+      },
+      "def": {
+        "min": 44,
+        "max": 1200
+      },
+      "speed": {
+        "min": 105,
+        "max": 160
+      },
+      "guard": {
+        "min": 10,
+        "max": 35
+      },
+      "critical_rate": {
+        "min": 50,
+        "max": 160
+      },
+      "critical_dmg": {
+        "min": 1500,
+        "max": 1500
+      },
+      "dmg_reduce": {
+        "min": 0,
+        "max": 100
+      },
+      "buff_chance": {
+        "min": 26,
+        "max": 80
+      },
+      "buff_resist": {
+        "min": 53,
+        "max": 160
+      }
+    },
+    "nickname": {
+      "en": "Top Mage",
+      "jp": "一流の魔法使い",
+      "kr": "일류 마법사",
+      "zh": "一流魔法师",
+      "fr": "Mage d'élite",
+      "es": "Mago de élite"
+    },
+    "subClass": "wizard",
+    "aiType": "attack",
+    "pushBack": true,
+    "pushUp": true
+  },
+  "55400002": {
+    "id": "55400002",
+    "name": {
+      "en": "Veronica",
+      "jp": "ヴェロニカ",
+      "kr": "베로니카",
+      "zh": "维罗妮卡",
+      "fr": "Veronica",
+      "es": "Veronica"
+    },
+    "type": "boss",
+    "race": "alien",
+    "class": "striker",
+    "element": "water",
+    "rarity": 3,
+    "icon": "2000037",
+    "skills": ["150315", "150319", "150320"],
+    "stats": {
+      "hp": {
+        "min": 372,
+        "max": 55200
+      },
+      "atk": {
+        "min": 120,
+        "max": 5176
+      },
+      "def": {
+        "min": 44,
+        "max": 1200
+      },
+      "speed": {
+        "min": 105,
+        "max": 160
+      },
+      "guard": {
+        "min": 10,
+        "max": 35
+      },
+      "critical_rate": {
+        "min": 50,
+        "max": 160
+      },
+      "critical_dmg": {
+        "min": 1500,
+        "max": 1500
+      },
+      "dmg_reduce": {
+        "min": 0,
+        "max": 100
+      },
+      "buff_chance": {
+        "min": 26,
+        "max": 80
+      },
+      "buff_resist": {
+        "min": 53,
+        "max": 160
+      }
+    },
+    "nickname": {
+      "en": "Invincible Knight Commander",
+      "jp": "天下無敵の騎士団長",
+      "kr": "무적의 기사단장",
+      "zh": "无敌的骑士团长",
+      "fr": "Commandant des Chevaliers Invincibles",
+      "es": "Comendador Invencible"
+    },
+    "aiType": "attack",
+    "pushBack": true,
+    "pushUp": true
+  },
+  "55400003": {
+    "id": "55400003",
+    "name": {
+      "en": "Vlada Assault Suit",
+      "jp": "重装機兵ヴラダ",
+      "kr": "블라다 중장기병",
+      "zh": "布拉达重骑兵",
+      "fr": "Vlada Combinaison d'assaut",
+      "es": "Traje Asalto Vlada"
+    },
+    "type": "boss",
+    "race": "automaton",
+    "class": "mage",
+    "element": "fire",
+    "rarity": 3,
+    "icon": "4044006",
+    "skills": ["132704", "132705", "1327061"],
+    "stats": {
+      "hp": {
+        "min": 1240,
+        "max": 73600
+      },
+      "atk": {
+        "min": 180,
+        "max": 6064
+      },
+      "def": {
+        "min": 44,
+        "max": 1199
+      },
+      "speed": {
+        "min": 110,
+        "max": 165
+      },
+      "guard": {
+        "min": 10,
+        "max": 35
+      },
+      "critical_rate": {
+        "min": 50,
+        "max": 160
+      },
+      "critical_dmg": {
+        "min": 1500,
+        "max": 1500
+      },
+      "dmg_reduce": {
+        "min": 0,
+        "max": 100
+      },
+      "buff_chance": {
+        "min": 33,
+        "max": 100
+      },
+      "buff_resist": {
+        "min": 66,
+        "max": 200
+      }
+    },
+    "aiType": "attack",
+    "pushBack": false,
+    "pushUp": false,
+    "buffImmune": [
+      "BT_GOLDEN_CURSE",
+      "BT_STUN",
+      "BT_FREEZE",
+      "BT_STONE",
+      "BT_AGGRO",
+      "BT_SILENCE",
+      "BT_DOT_BLEED",
+      "BT_DOT_POISON"
+    ],
+    "immuneTooltips": ["104", "34", "33", "35", "37", "32", "3", "4", "103"]
+  },
+  "55400004": {
+    "id": "55400004",
+    "name": {
+      "en": "Veronica",
+      "jp": "ヴェロニカ",
+      "kr": "베로니카",
+      "zh": "维罗妮卡",
+      "fr": "Veronica",
+      "es": "Veronica"
+    },
+    "type": "boss",
+    "race": "alien",
+    "class": "defender",
+    "element": "water",
+    "rarity": 3,
+    "icon": "2000037",
+    "skills": ["150315", "150319", "150320"],
+    "stats": {
+      "hp": {
+        "min": 506,
+        "max": 75072
+      },
+      "atk": {
+        "min": 150,
+        "max": 6470
+      },
+      "def": {
+        "min": 44,
+        "max": 1200
+      },
+      "speed": {
+        "min": 105,
+        "max": 160
+      },
+      "guard": {
+        "min": 15,
+        "max": 45
+      },
+      "critical_rate": {
+        "min": 50,
+        "max": 160
+      },
+      "critical_dmg": {
+        "min": 1500,
+        "max": 1500
+      },
+      "buff_chance": {
+        "min": 23,
+        "max": 72
+      },
+      "buff_resist": {
+        "min": 53,
+        "max": 160
+      }
+    },
+    "nickname": {
+      "en": "Invincible Knight Commander",
+      "jp": "天下無敵の騎士団長",
+      "kr": "무적의 기사단장",
+      "zh": "无敌的骑士团长",
+      "fr": "Commandant des Chevaliers Invincibles",
+      "es": "Comendador Invencible"
+    },
+    "aiType": "attack",
+    "pushBack": true,
+    "pushUp": true,
+    "buffImmune": ["BT_GOLDEN_CURSE", "BT_FREEZE", "BT_STONE", "BT_STUN", "BT_SILENCE"],
+    "statBuffImmune": ["ST_SPEED"],
+    "immuneTooltips": ["104", "33", "34", "35", "37", "26"]
+  },
+  "55400005": {
+    "id": "55400005",
+    "name": {
+      "en": "Vlada Assault Suit",
+      "jp": "重装機兵ヴラダ",
+      "kr": "블라다 중장기병",
+      "zh": "布拉达重骑兵",
+      "fr": "Vlada Combinaison d'assaut",
+      "es": "Traje Asalto Vlada"
+    },
+    "type": "boss",
+    "race": "automaton",
+    "class": "mage",
+    "element": "fire",
+    "rarity": 3,
+    "icon": "4044006",
+    "skills": ["132704", "132705", "1327061"],
+    "stats": {
+      "hp": {
+        "min": 1686,
+        "max": 100096
+      },
+      "atk": {
+        "min": 225,
+        "max": 7580
+      },
+      "def": {
+        "min": 44,
+        "max": 1199
+      },
+      "speed": {
+        "min": 110,
+        "max": 165
+      },
+      "guard": {
+        "min": 15,
+        "max": 45
+      },
+      "critical_rate": {
+        "min": 50,
+        "max": 160
+      },
+      "critical_dmg": {
+        "min": 1500,
+        "max": 1500
+      },
+      "dmg_reduce": {
+        "min": 0,
+        "max": 100
+      },
+      "buff_chance": {
+        "min": 30,
+        "max": 90
+      },
+      "buff_resist": {
+        "min": 66,
+        "max": 200
+      }
+    },
+    "aiType": "attack",
+    "pushBack": false,
+    "pushUp": false,
+    "buffImmune": [
+      "BT_GOLDEN_CURSE",
+      "BT_STUN",
+      "BT_FREEZE",
+      "BT_STONE",
+      "BT_AGGRO",
+      "BT_SILENCE",
+      "BT_DOT_BLEED",
+      "BT_DOT_POISON"
+    ],
+    "immuneTooltips": ["104", "34", "33", "35", "37", "32", "3", "4", "103"]
+  },
+  "55400006": {
+    "id": "55400006",
+    "name": {
+      "en": "Vlada Assault Suit",
+      "jp": "重装機兵ヴラダ",
+      "kr": "블라다 중장기병",
+      "zh": "布拉达重骑兵",
+      "fr": "Vlada Combinaison d'assaut",
+      "es": "Traje Asalto Vlada"
+    },
+    "type": "boss",
+    "race": "automaton",
+    "class": "mage",
+    "element": "fire",
+    "rarity": 3,
+    "icon": "4044006",
+    "skills": ["132704", "132705", "1327061", "132714"],
+    "stats": {
+      "hp": {
+        "min": 1686,
+        "max": 100096
+      },
+      "atk": {
+        "min": 225,
+        "max": 7580
+      },
+      "def": {
+        "min": 44,
+        "max": 1199
+      },
+      "speed": {
+        "min": 110,
+        "max": 165
+      },
+      "guard": {
+        "min": 15,
+        "max": 45
+      },
+      "critical_rate": {
+        "min": 50,
+        "max": 160
+      },
+      "critical_dmg": {
+        "min": 1500,
+        "max": 1500
+      },
+      "dmg_reduce": {
+        "min": 0,
+        "max": 100
+      },
+      "buff_chance": {
+        "min": 30,
+        "max": 90
+      },
+      "buff_resist": {
+        "min": 66,
+        "max": 200
+      }
+    },
+    "aiType": "attack",
+    "pushBack": false,
+    "pushUp": false,
+    "buffImmune": [
+      "BT_GOLDEN_CURSE",
+      "BT_STUN",
+      "BT_FREEZE",
+      "BT_STONE",
+      "BT_AGGRO",
+      "BT_SILENCE",
+      "BT_DOT_BLEED",
+      "BT_DOT_POISON"
+    ],
+    "immuneTooltips": ["104", "34", "33", "35", "37", "32", "3", "4", "103"]
   },
   "60000001": {
     "id": "60000001",

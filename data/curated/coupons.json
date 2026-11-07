@@ -1,5 +1,13 @@
 [
   {
+    "code": "1STANNIV",
+    "start": "2026-11-05",
+    "end": "2026-11-30",
+    "description": {
+      "SYS_ASSET_FREE_CRYSTAL": "1500"
+    }
+  },
+  {
     "code": "GWOSHI",
     "start": "2026-10-09",
     "end": "2026-11-30",

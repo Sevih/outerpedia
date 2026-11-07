@@ -2558,6 +2558,74 @@
       "end": "2026-10-13T00:00:00Z",
       "boss": "4318042",
       "bonusCharacters": ["2000098", "2000028"]
+    },
+    {
+      "id": "32",
+      "name": {
+        "en": "Defeat Deep Sea Guardian",
+        "jp": "深海のボス討伐",
+        "kr": "심해 가디언 처치",
+        "zh": "击杀深海守护者",
+        "fr": "Vaincre le Gardien de Profondeurs",
+        "es": "Derrota al Guardián de Mar Profundo"
+      },
+      "dungeons": ["90200000", "90200100", "90200200"],
+      "monsters": ["4134045", "4134055", "4134065"],
+      "start": "2026-11-03T00:00:00Z",
+      "end": "2026-11-17T00:00:00Z",
+      "boss": "4034005",
+      "bonusCharacters": ["2000085", "2000071"]
+    },
+    {
+      "id": "33",
+      "name": {
+        "en": "Defeat Shichifuja",
+        "jp": "七歩蛇討伐",
+        "kr": "시치후샤 처치",
+        "zh": "击杀七步蛇困难",
+        "fr": "Vaincre Shichifuja",
+        "es": "Vence a Shichifuja"
+      },
+      "dungeons": ["90300000", "90300100", "90300200"],
+      "monsters": ["4634064", "4634074", "4634084"],
+      "start": "2026-12-01T00:00:00Z",
+      "end": "2026-12-08T00:00:00Z",
+      "boss": "4634064",
+      "bonusCharacters": ["2000091", "2000080"]
+    },
+    {
+      "id": "34",
+      "name": {
+        "en": "Defeat Prototype EX-78",
+        "jp": "試作機：EX-78討伐",
+        "kr": "EX-78 시범기 처치",
+        "zh": "击杀EX-78示范机",
+        "fr": "Défaite de prot. EX-78",
+        "es": "Derrota al Prototipo EX-78"
+      },
+      "dungeons": ["90400000", "90400100", "90400200"],
+      "monsters": ["4548161", "4548171", "4548181"],
+      "start": "2026-12-29T00:00:00Z",
+      "end": "2027-01-18T00:00:00Z",
+      "boss": "4548001",
+      "bonusCharacters": ["2000108", "2000103"]
+    },
+    {
+      "id": "35",
+      "name": {
+        "en": "Defeat Knight of Hope",
+        "jp": "光明の騎士討伐",
+        "kr": "광명의 기사 처치",
+        "zh": "击杀光明骑士",
+        "fr": "Vaincre le Chevalier Espoir",
+        "es": "Derrota al Caballero de Esperanza"
+      },
+      "dungeons": ["90500000", "90500100", "90500200"],
+      "monsters": ["4176132", "4176142", "4176152"],
+      "start": "2027-01-26T00:00:00Z",
+      "end": "2027-02-02T00:00:00Z",
+      "boss": "4076102",
+      "bonusCharacters": ["2000119", "2000076"]
     }
   ]
 }

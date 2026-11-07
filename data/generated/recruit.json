@@ -238,7 +238,7 @@
     },
     {
       "kind": "pickup",
-      "groupId": "124",
+      "groupId": "125",
       "rates": [
         {
           "titleKey": "SYS_RECRUIT_RATEINFO_TITLE_05",
@@ -355,7 +355,10 @@
             "2000113",
             "2000116",
             "2000117",
-            "2000118"
+            "2000118",
+            "2000122",
+            "2700019",
+            "2700035"
           ]
         },
         {
@@ -398,7 +401,7 @@
       "eventTicketId": "1000004",
       "ticketCost": 1,
       "freeCount": 0,
-      "bannerImage": "CM_Btn_Recruit_PickUp_03",
+      "bannerImage": "CM_Btn_Recruit_PickUp",
       "mileageCost": 200
     },
     {
@@ -1347,19 +1350,19 @@
       "characterId": "2000090",
       "kind": "fes",
       "start": "2026-11-03",
-      "end": "2026-11-17"
+      "end": "2026-11-24"
     },
     {
       "characterId": "2000091",
       "kind": "fes",
       "start": "2026-11-03",
-      "end": "2026-11-17"
+      "end": "2026-11-24"
     },
     {
       "characterId": "2000102",
       "kind": "fes",
       "start": "2026-11-03",
-      "end": "2026-11-17"
+      "end": "2026-11-24"
     }
   ]
 }

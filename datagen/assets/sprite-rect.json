@@ -713,6 +713,12 @@
     "left": 2,
     "bottom": 2
   },
+  "at_thumbnailcharacterruntime/CT_2000123": {
+    "w": 180,
+    "h": 344,
+    "left": 2,
+    "bottom": 2
+  },
   "at_thumbnailcharacterruntime/CT_2000124": {
     "w": 180,
     "h": 344,
@@ -1109,6 +1115,12 @@
     "left": 2,
     "bottom": 2
   },
+  "at_thumbnailcharacterruntime/CT_2010123": {
+    "w": 180,
+    "h": 344,
+    "left": 2,
+    "bottom": 2
+  },
   "at_thumbnailcharacterruntime/CT_2010124": {
     "w": 180,
     "h": 344,
@@ -1296,6 +1308,12 @@
     "bottom": 2
   },
   "at_thumbnailcharacterruntime/CT_2020120": {
+    "w": 180,
+    "h": 344,
+    "left": 2,
+    "bottom": 2
+  },
+  "at_thumbnailcharacterruntime/CT_2020123": {
     "w": 180,
     "h": 344,
     "left": 2,
@@ -1535,6 +1553,12 @@
     "left": 0,
     "bottom": 6
   },
+  "at_thumbnailcharacterruntime/CT_Account_Frame_Aislar": {
+    "w": 116,
+    "h": 116,
+    "left": 0,
+    "bottom": 1
+  },
   "at_thumbnailcharacterruntime/CT_Account_Frame_Aiz": {
     "w": 116,
     "h": 116,
@@ -1656,6 +1680,12 @@
     "bottom": 1
   },
   "at_thumbnailcharacterruntime/CT_Account_Frame_EternalLight": {
+    "w": 116,
+    "h": 116,
+    "left": 0,
+    "bottom": 1
+  },
+  "at_thumbnailcharacterruntime/CT_Account_Frame_Exclusive_Reward": {
     "w": 116,
     "h": 116,
     "left": 0,

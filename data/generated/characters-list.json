@@ -193,7 +193,13 @@
     "teamBonuses": []
   },
   "2000008": {
-    "buff": ["BT_ADDITIVE_TURN", "BT_COOL_CHARGE", "BT_STAT|ST_DEF", "HEAVY_STRIKE"],
+    "buff": [
+      "BT_ADDITIVE_TURN",
+      "BT_COOL_CHARGE",
+      "BT_STAT|ST_DEF",
+      "DAMAGE_INCREASE",
+      "HEAVY_STRIKE"
+    ],
     "debuff": ["BT_STAT|ST_DEF", "WEAKNESS_GAUGE_DAMAGE"],
     "effectsBySource": {
       "ultimate": {
@@ -2863,6 +2869,7 @@
       "BT_COOL_CHARGE",
       "BT_CP_CHARGE",
       "BT_STAT|ST_BUFF_CHANCE",
+      "DAMAGE_INCREASE",
       "FINAL_BRAND",
       "HEAVY_STRIKE",
       "UNCOUNTERABLE"
@@ -3886,6 +3893,34 @@
       }
     },
     "teamBonuses": ["CHC"]
+  },
+  "2000123": {
+    "buff": ["BT_COOL_CHARGE", "BT_DAMAGE_TAKEN", "BT_STAT|ST_COUNTER_RATE"],
+    "debuff": [
+      "BT_FIXED_DAMAGE",
+      "BT_STAT|ST_DEF",
+      "UNIQUE_RESOURCE_DOWN",
+      "WEAKNESS_GAUGE_DAMAGE"
+    ],
+    "effectsBySource": {
+      "s2": {
+        "buff": ["BT_DAMAGE_TAKEN", "BT_STAT|ST_COUNTER_RATE"],
+        "debuff": []
+      },
+      "ultimate": {
+        "buff": ["BT_COOL_CHARGE"],
+        "debuff": ["BT_STAT|ST_DEF", "UNIQUE_RESOURCE_DOWN"]
+      },
+      "s1": {
+        "buff": ["BT_COOL_CHARGE"],
+        "debuff": ["BT_FIXED_DAMAGE", "WEAKNESS_GAUGE_DAMAGE"]
+      },
+      "exclusiveEquip": {
+        "buff": ["BT_STAT|ST_COUNTER_RATE"],
+        "debuff": []
+      }
+    },
+    "teamBonuses": ["DMG RED%"]
   },
   "2000124": {
     "buff": [

@@ -1342,6 +1342,18 @@
       "isDebuff": false
     }
   ],
+  "2000123": [
+    {
+      "key": "stat:pierce_power_rate:down",
+      "label": "Penetration down",
+      "isDebuff": true
+    },
+    {
+      "key": "status:45",
+      "label": "Counterattack",
+      "isDebuff": false
+    }
+  ],
   "2000124": [
     {
       "key": "damage:BT_DMG_TARGET_STAT:hp",
