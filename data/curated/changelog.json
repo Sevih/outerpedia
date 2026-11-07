@@ -1,5 +1,38 @@
 [
   {
+    "id": "212e035f",
+    "date": "2026-11-07",
+    "type": "character",
+    "title": {
+      "en": "Aisla",
+      "jp": "アイスラ",
+      "kr": "Aisla",
+      "zh": "艾斯拉",
+      "fr": "Aisla",
+      "es": "Aisla"
+    },
+    "content": {
+      "en": [
+        "Aisla has been added to the database with full skills, stats and exclusive equipment."
+      ],
+      "jp": ["Aislaが、スキル、ステータス、専用装備をすべて含めてデータベースに追加されました。"],
+      "kr": [
+        "아이슬라가 모든 스킬, 능력치 및 전용 장비를 갖춘 상태로 데이터베이스에 추가되었습니다."
+      ],
+      "zh": ["艾斯拉已加入数据库，包含完整的技能、属性及专属装备。"],
+      "fr": [
+        "Aisla a été ajoutée à la base de données avec l'ensemble de ses compétences, ses statistiques et son équipement exclusif."
+      ],
+      "es": [
+        "Se ha añadido a Aisla a la base de datos con todas sus habilidades, estadísticas y equipamiento exclusivo."
+      ]
+    },
+    "link": {
+      "kind": "character",
+      "slug": "aisla"
+    }
+  },
+  {
     "id": "b0f61048",
     "date": "2026-10-06",
     "type": "character",
