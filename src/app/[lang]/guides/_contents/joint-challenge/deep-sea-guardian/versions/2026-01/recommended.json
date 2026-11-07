@@ -36,9 +36,9 @@
     "characters": ["Delta", "Fran"],
     "reason": {
       "en": "{B/BT_STAT|ST_COUNTER_RATE} buff (boss is fast).",
-      "jp": "{B/BT_STAT|ST_COUNTER_RATE}持ちの{C/Striker}（ボスが速い）。",
-      "kr": "{B/BT_STAT|ST_COUNTER_RATE}를 가진 {C/Striker} (보스가 빠름).",
-      "zh": "拥有{B/BT_STAT|ST_COUNTER_RATE}的{C/Striker}（首领速度快）。",
+      "jp": "{B/BT_STAT|ST_COUNTER_RATE}持ち（ボスが速い）。",
+      "kr": "{B/BT_STAT|ST_COUNTER_RATE} 보유 (보스가 빠름).",
+      "zh": "拥有{B/BT_STAT|ST_COUNTER_RATE}（首领速度快）。",
       "fr": "Buff {B/BT_STAT|ST_COUNTER_RATE} (le boss est rapide).",
       "es": "Bono de {B/BT_STAT|ST_COUNTER_RATE} (el jefe es rápido)."
     }
