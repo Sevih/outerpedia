@@ -7933,6 +7933,67 @@
         }
       ],
       "substats": "DEF>CHC>CHD=SSPD>HP=DMG RED%>DMG UP%"
+    },
+    {
+      "name": "Defense Mix",
+      "weapons": [
+        {
+          "id": "787",
+          "mainStat": "DEF%"
+        },
+        {
+          "id": "25",
+          "mainStat": "DEF%"
+        },
+        {
+          "id": "5",
+          "mainStat": "DEF%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1799",
+          "mainStat": "DEF%"
+        },
+        {
+          "id": "1037",
+          "mainStat": "DEF%"
+        },
+        {
+          "id": "1166",
+          "mainStat": "DEF%"
+        },
+        {
+          "id": "1794",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1011",
+          "mainStat": "PEN%"
+        }
+      ],
+      "talismans": ["$CPplusVang"],
+      "sets": [
+        {
+          "preset": "p2def2"
+        },
+        {
+          "preset": "def2sw2"
+        },
+        {
+          "pieces": [
+            {
+              "set": "2",
+              "count": 2
+            },
+            {
+              "set": "13",
+              "count": 2
+            }
+          ]
+        }
+      ],
+      "substats": "DEF>CHC>CHD=SSPD>HP=DMG RED%>DMG UP%"
     }
   ],
   "2000124": [
