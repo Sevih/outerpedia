@@ -74087,7 +74087,7 @@
       "trigger": "turn_count",
       "steps": [
         {
-          "value": 3,
+          "value": 4,
           "duration": 4
         }
       ]
