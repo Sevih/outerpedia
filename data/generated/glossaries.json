@@ -2170,12 +2170,12 @@
         "es": "Golpe Pesado"
       },
       "desc": {
-        "en": "This attack cannot deal a critical hit, but DMG dealt increases by 50% and ignores 30% of the boss's Defense.",
-        "jp": "この攻撃は会心攻撃が発生しないが、\\n与ダメージが50%UPされ、\\nボスの防御力を30%無視する。",
-        "kr": "해당 공격은 치명 공격이 발생하지 않지만, 주는 피해가 50% 증가하고 보스의 방어력을 30% 무시합니다.",
-        "zh": "该攻击不会发生暴击，\\n但造成的伤害提升50%，\\n并无视首领30%的防御力。",
-        "fr": "Cette ATQ ne peut pas infliger de coup critique, mais les dégâts infligés augmentent de 50 % & ignorent 30 % de la DÉF du boss",
-        "es": "Este ataque no puede causar un golpe crítico, pero el DMG sube un 50% e ignora el 30% de la Defensa del jefe."
+        "en": "This attack cannot deal a critical hit, but DMG dealt increases by 100% and ignores 30% of the boss's Defense.\\nAfter attacking, increases own DMG dealt by 50% (stacks up to 5 times).",
+        "jp": "この攻撃は会心攻撃が発生しないが、与ダメージが100%UPし、ボスの防御力を30%無視する。\\n攻撃後、自身の与ダメージが50%UPする（最大5回まで重複）。",
+        "kr": "해당 공격은 치명 공격이 발생하지 않지만, 주는 피해가 100% 증가하고 보스의 방어력을 30% 무시합니다.\\n공격 후 자신의 피해를 50% 증가시킵니다.(최대 5회 누적)",
+        "zh": "该攻击不会发生暴击，但造成的伤害提升100%，并无视首领30%的防御力。\\n攻击后，自身造成的伤害提升50%（最多叠加5次）。",
+        "fr": "Cette ATQ ne peut pas infliger de coup critique, mais les dégâts infligés augmentent de 100 % et ignorent 30 % de la DÉF du boss.\\nAprès l'attaque, ses dégâts infligés augmentent de 50 % (cumulable jusqu'à 5 fois).",
+        "es": "Este ataque no puede causar un golpe crítico, pero el DMG infligido aumenta un 100 % e ignora el 30 % de la DEF del jefe.\\nTras atacar, aumenta su DMG infligido un 50 % (se acumula hasta 5 veces)."
       },
       "icon": "SC_Buff_Effect_Heavy_bk",
       "isDebuff": false,
@@ -3861,7 +3861,7 @@
         "es": "Dios Egoísta"
       },
       "desc": {
-        "en": "When an enemy uses a non-attack skill: increases the caster's AP by 50\\nWhen an enemy with lower Health than the caster takes action: increases the caster's Priority by 10%\\n\\n(Irremovable)",
+        "en": "When an enemy uses a non-attack skill: increases the caster's AP by 50\\nWhen an enemy with lower Health than the caster takes action: increases the caster's Priority by 10%\\n\\n(Irremovable)\\n\\n",
         "jp": "敵が攻撃以外のスキル使用時\\n：自分のAP+50\\n自分よりHPが低い敵行動時\\n：自分の行動ゲージ+10％\\n\\n（解除不可）",
         "kr": "적이 공격이 아닌 스킬 사용 시: 자신의 AP +50\\n자신보다 체력이 낮은 적 행동시 : 자신의 행동 게이지 +10%\\n\\n(해제 불가)",
         "zh": "敌人使用非攻击技能时：自身AP+50\\n生命值低于自身的敌人行动时：\\n自身行动条 +10%\\n\\n（无法被解除）",
@@ -4435,12 +4435,12 @@
         "es": "Luz del Mar Profundo"
       },
       "desc": {
-        "en": "For each stack held, the caster gains the following effects (up to 10 stacks).\\n1. Damage +5% (up to 50%)\\n2. Damage Taken Reduction +15% (up to 150%)\\n3. Speed +10 (up to 100)\\nThe caster gains the following additional effects upon reaching the specified stack thresholds.\\n5 stacks: After an enemy's action ends, Priority +10%\\n10 stacks: Damage dealt to bosses +100%",
+        "en": "For each stack held, the caster gains the following effects (up to 10 stacks).\\n1. Damage +5% (up to 50%)\\n2. DMG Reduction +15% (up to 150%)\\n3. Speed +10 (up to 100)\\nThe caster gains the following additional effects upon reaching the specified stack thresholds.\\n\\n5 stacks: After an enemy's action ends, Priority +10%\\n10 stacks: Damage dealt to bosses +100%",
         "jp": "保有数1個につき、自分に以下の効果を付与します。\\n(最大10スタック)\\n1. 与ダメージ +5%（最大50%）\\n2. 被ダメージ減少 +15%（最大150%）\\n3. スピード +10（最大100）\\n一定数以上保有している場合、以下の追加効果を獲得します。\\n5個：敵の行動終了後、自分の行動ゲージ +10%\\n10個：ボスへの与ダメージ +100%",
         "kr": "보유 개수 1개당 자신에게 아래 효과를 줍니다.(최대 10스텍)\\n1. 피해 +5%(최대 50%)\\n2.받는 피해 감소 15%(최대 150%)\\n3.속도 +10(최대 100)\\n일정 개수 이상 보유 시 아래 추가 효과를 얻습니다.\\n\n5개: 적 행동 종료 후 자신 행동 게이지 +10%\\n10개: 보스 대상 피해 +100%",
-        "zh": "每持有1个，赋予自身以下效果。（最多叠加10次）\\n1. 伤害 +5%（最多50%）\\n2. 受到的伤害降低15%（最多150%）\\n3. 速度 +10（最多100）\\n持有达到指定数量时，获得以下追加效果。\\n5个：敌人行动结束后，自身行动值 +10%\\n10个：对首领怪物造成的伤害 +100%",
-        "fr": "Pour chaque cumul détenu, obtient les effets suivants. (Max. 10 cumuls)\\n1. Dégâts +5% (max. 50%)\\n2. Réduction des dégâts reçus +15% (max. 150%)\\n3. VIT +10 (max. 100)\\nLorsque le nombre de cumuls requis est atteint, obtient les effets supplémentaires suivants.\\n5 cumuls : À la fin de l'action d'un ennemi, Priorité +10%\\n10 cumuls : Dégâts contre les boss +100%",
-        "es": "Por cada acumulación, obtiene los siguientes efectos. (Máx. 10 acumulaciones)\\n1. Daño +5% (máx. 50%)\\n2. Reducción de daño recibido +15% (máx. 150%)\\n3. VEL +10 (máx. 100)\\nAl alcanzar la cantidad indicada de acumulaciones, obtiene los siguientes efectos adicionales.\\n5 acumulaciones: Tras terminar la acción de un enemigo, Prioridad +10%\\n10 acumulaciones: Daño contra jefes +100%"
+        "zh": "每持有1个，赋予自身以下效果。（最多叠加10次）\\n1. 伤害 +5%（最多50%）\\n2. 受到的伤害降低15%（最多150%）\\n3. 速度 +10（最多100）\\n持有达到指定数量时，获得以下追加效果。\\n\\n5个：敌人行动结束后，自身行动值 +10%\\n10个：对首领怪物造成的伤害 +100%",
+        "fr": "Pour chaque cumul détenu, obtient les effets suivants. (Max. 10 cumuls)\\n1. Dégâts +5% (max. 50%)\\n2. Réduction des dégâts reçus +15% (max. 150%)\\n3. VIT +10 (max. 100)\\nLorsque le nombre de cumuls requis est atteint, obtient les effets supplémentaires suivants.\\n\\n5 cumuls : À la fin de l'action d'un ennemi, Priorité +10%\\n10 cumuls : Dégâts contre les boss +100%",
+        "es": "Por cada acumulación, obtiene los siguientes efectos. (Máx. 10 acumulaciones)\\n1. Daño +5% (máx. 50%)\\n2. Reducción de daño recibido +15% (máx. 150%)\\n3. VEL +10 (máx. 100)\\nAl alcanzar la cantidad indicada de acumulaciones, obtiene los siguientes efectos adicionales.\\n\\n5 acumulaciones: Tras terminar la acción de un enemigo, Prioridad +10%\\n10 acumulaciones: Daño contra jefes +100%"
       },
       "icon": "IG_Buff_Effect_2000124_Interruption",
       "isDebuff": false,
@@ -4626,12 +4626,12 @@
         "es": "Dominio del Purosangre verdadero"
       },
       "desc": {
-        "en": "Decreases Final DMG taken by 80% and caps Detonation Damage taken at 5,000.\\nCannot be removed until Eliza dies.",
-        "jp": "受ける最終ダメージが80%DOWNし、受ける破裂ダメージは5000に制限される。\\nエリーゼが倒れるまで解除されない。",
+        "en": "Decreases Final DMG taken by 80% and caps Detonation Damage taken at 5,000.\\n\\nCannot be removed until Eliza dies.",
+        "jp": "受ける最終ダメージが80%DOWNし、受ける破裂ダメージは5000に制限される。\\n\\nエリーゼが倒れるまで解除されない。",
         "kr": "받는 최종 피해가 80% 감소하고 받는 폭발 피해는 5000으로 제한됩니다.\\n\n엘리제가 사망하기 전까지 해제되지 않습니다.",
-        "zh": "受到的最终伤害减少80%，受到的爆发伤害上限为5000。\\n伊莉莎死亡前无法解除。",
-        "fr": "Réduit les dégâts finaux subis de 80 % et limite à 5 000 les dégâts de détonation subis.\\nNe peut pas être dissipé avant la mort d'Eliza.",
-        "es": "Reduce un 80% el Daño final recibido y limita a 5000 el Daño de Detonación recibido.\\nNo se puede eliminar hasta que Eliza muera."
+        "zh": "受到的最终伤害减少80%，受到的爆发伤害上限为5000。\\n\\n伊莉莎死亡前无法解除。",
+        "fr": "Réduit les dégâts finaux subis de 80 % et limite à 5 000 les dégâts de détonation subis.\\n\\nNe peut pas être dissipé avant la mort d'Eliza.",
+        "es": "Reduce un 80% el Daño final recibido y limita a 5000 el Daño de Detonación recibido.\\n\\nNo se puede eliminar hasta que Eliza muera."
       },
       "icon": "IG_Buff_2000035_Interruption",
       "isDebuff": false,
