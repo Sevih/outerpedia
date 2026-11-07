@@ -1295,6 +1295,7 @@ const jp: Record<TranslationKey, string> = {
   'wallpapers.download': 'PNGをダウンロード',
   'wallpapers.cat.Outerpedia': 'Outerpedia',
   'wallpapers.cat.Art': 'デミウルゴスアート',
+  'wallpapers.cat.Emotes': 'エモート',
   'wallpapers.cat.Banner': 'バナー',
   'wallpapers.cat.Full:Events': 'イベント',
   'wallpapers.cat.Full:Scenario': 'シナリオ',

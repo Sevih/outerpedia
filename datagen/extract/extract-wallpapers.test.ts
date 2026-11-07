@@ -3,13 +3,15 @@
  * d'images ni sharp, ils ne prennent que nom/chemin/dimensions :
  *   - `shouldExclude`   : la blocklist (nom + chemin) qui écarte UI, FX, textures 3D
  *     et les HeroFullArt réutilisés ailleurs (`IMG_<id>`) ;
- *   - `getCategory`     : Full (dimensionnel) / Banner / Cutin / Art — premier match
- *     gagne, l'ORDRE est significatif ;
+ *   - `getCategory`     : Emotes / Full (dimensionnel) / Banner / Cutin / Art —
+ *     premier match gagne, l'ORDRE est significatif ;
+ *   - `classify`        : la catégorie après le seuil de largeur (250 px, 128 px
+ *     pour Emotes) ;
  *   - `getPriorityScore`: départage les quasi-doublons — CG scénario > BG scénario
  *     > BG event > CG event, bonus `_E2`, IMG_ par id décroissant.
  */
 import { describe, expect, it } from 'vitest';
-import { getCategory, getPriorityScore, shouldExclude } from './extract-wallpapers';
+import { classify, getCategory, getPriorityScore, shouldExclude } from './extract-wallpapers';
 
 describe('shouldExclude — blocklist nom + chemin', () => {
   const excl = (name: string) => shouldExclude(`/pool/${name}`, name);
@@ -93,9 +95,32 @@ describe('getCategory — premier match gagne (ordre significatif)', () => {
     expect(getCategory('T_Demi_Something', 500, 500)).toBe('Art');
   });
 
+  it('Emotes se classe par NOM (émoticônes de chat, A88)', () => {
+    expect(getCategory('T_Chat_Emoticon_12', 128, 128)).toBe('Emotes');
+  });
+
   it('aucune catégorie → null (le scan l’écarte)', () => {
     expect(getCategory('T_Inconnu', 500, 500)).toBeNull();
     expect(getCategory('T_CutIn_2000001', 100, 100)).toBe('Cutin'); // le nom suffit, dims libres
+  });
+});
+
+describe('classify — seuil de largeur, 128 px pour la seule catégorie Emotes', () => {
+  it('128 px accepté pour Emotes, refusé ailleurs', () => {
+    expect(classify('T_Chat_Emoticon_12', 128, 128)).toBe('Emotes');
+    expect(classify('T_CutIn_2000001', 128, 128)).toBeNull();
+    expect(classify('T_Demi_Something', 128, 128)).toBeNull();
+    expect(classify('T_Event_Banner_X', 128, 64)).toBeNull();
+  });
+
+  it('sous 128 px, même une émoticône est écartée ; 250 px reste le seuil commun', () => {
+    expect(classify('T_Chat_Emoticon_12', 127, 127)).toBeNull();
+    expect(classify('T_Demi_Something', 249, 500)).toBeNull();
+    expect(classify('T_Demi_Something', 250, 500)).toBe('Art');
+  });
+
+  it('aucune règle d’exclusion n’écarte une émoticône', () => {
+    expect(shouldExclude('/pool/T_Chat_Emoticon_12.png', 'T_Chat_Emoticon_12.png')).toBe(false);
   });
 });
 

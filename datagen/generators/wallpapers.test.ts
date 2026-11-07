@@ -11,6 +11,10 @@ import wallpapersData from '../../data/generated/wallpapers.json';
 import { type WallpapersData, type Wallpaper } from './wallpapers';
 
 const data = wallpapersData as WallpapersData;
+/** Emotes suit l'ordre NATUREL du numéro (`_9` avant `_10`), les autres l'ordre lexical. */
+const natural = new Intl.Collator('en', { numeric: true });
+const before = (cat: string, a: string, b: string): boolean =>
+  cat === 'Emotes' ? natural.compare(a, b) < 0 : a < b;
 
 describe('wallpapers.json — invariants de catalogue', () => {
   it('catégories éditoriales toujours présentes', () => {
@@ -37,7 +41,7 @@ describe('wallpapers.json — invariants de catalogue', () => {
         if (!(typeof w.h === 'number' && w.h >= 0)) bad.push(`${cat}/${w.f} : h ${w.h}`);
         if (w.retired) inArchive = true;
         else if (inArchive) bad.push(`${cat}/${w.f} : vivante après une archivée`);
-        else if (w.f < prev) bad.push(`${cat} : ${prev} > ${w.f} (non trié)`);
+        else if (prev && before(cat, w.f, prev)) bad.push(`${cat} : ${prev} > ${w.f} (non trié)`);
         prev = w.f;
       }
     }

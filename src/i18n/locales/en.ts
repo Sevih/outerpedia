@@ -1325,6 +1325,7 @@ const en = {
   'wallpapers.download': 'Download PNG',
   'wallpapers.cat.Outerpedia': 'Outerpedia',
   'wallpapers.cat.Art': 'Demiurge Art',
+  'wallpapers.cat.Emotes': 'Emotes',
   'wallpapers.cat.Banner': 'Banners',
   'wallpapers.cat.Full:Events': 'Events',
   'wallpapers.cat.Full:Scenario': 'Scenario',

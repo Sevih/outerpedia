@@ -8,9 +8,11 @@
  *     liste vient de `listHeroFullArt` (source partagée avec le manifest, qui en
  *     garantit l'hébergement) : superset de l'ancien set (base + skins + arts
  *     alternatifs `_NN` + arts de PNJ), sans l'ancienne dédup perceptuelle lossy.
- *   - **Cutin / Full / Banner / Art** : pool wallpaper extrait NATIVEMENT par le
- *     worker (`.gamedata/extracted/wallpapers/<cat>`, webp + png dédupliqués).
- *     `Full` est éclaté en `Full:Events` / `Full:Scenario` / `Full:Others`.
+ *   - **Cutin / Full / Banner / Art / Emotes** : pool wallpaper extrait
+ *     NATIVEMENT par le worker (`.gamedata/extracted/wallpapers/<cat>`, webp +
+ *     png dédupliqués). `Full` est éclaté en `Full:Events` / `Full:Scenario` /
+ *     `Full:Others`. `Emotes` (émoticônes de chat `T_Chat_Emoticon_NN`) suit
+ *     l'ordre NATUREL du numéro — celui de la table `EmoticonTemplet`.
  *   - **Outerpedia** : 5 wallpapers ÉDITORIAUX faits main, rapatriés
  *     (`.editorial/wallpapers/Outerpedia`, gitignoré → R2).
  *   - **Versions archivées** `<stem>@<n>` : un asset que le jeu a REMPLACÉ en
@@ -50,7 +52,7 @@ export interface Wallpaper {
 }
 export type WallpapersData = Record<string, Wallpaper[]>;
 
-/** Pool wallpaper extrait du jeu (worker) — catégories Cutin/Full/Banner/Art. */
+/** Pool wallpaper extrait du jeu (worker) — catégories Cutin/Full/Banner/Art/Emotes. */
 const GAME_POOL = gamedata('extracted/wallpapers');
 /** Pool éditorial rapatrié (Outerpedia). */
 const EDITORIAL = resolve('.editorial/wallpapers');
@@ -60,8 +62,20 @@ function byF(a: Wallpaper, b: Wallpaper): number {
   return a.f < b.f ? -1 : a.f > b.f ? 1 : 0;
 }
 
+/**
+ * Tri NATUREL (numéros comparés en valeur) : `_9` avant `_10`, `_99` avant
+ * `_100` — l'ordre de la table pour les émoticônes, au-delà de deux chiffres.
+ */
+const naturalCollator = new Intl.Collator('en', { numeric: true });
+function byNaturalF(a: Wallpaper, b: Wallpaper): number {
+  return naturalCollator.compare(a.f, b.f);
+}
+
 /** Scanne un dossier de catégorie : une entrée par `.png`, dimensions lues. */
-function scanCategory(dir: string): Wallpaper[] {
+function scanCategory(
+  dir: string,
+  order: (a: Wallpaper, b: Wallpaper) => number = byF,
+): Wallpaper[] {
   if (!existsSync(dir)) return [];
   return (
     readdirSync(dir)
@@ -76,7 +90,7 @@ function scanCategory(dir: string): Wallpaper[] {
         const d = readPngSize(join(dir, `${stem}.png`));
         return { f: stem, w: d?.w ?? 0, h: d?.h ?? 0 };
       })
-      .sort(byF)
+      .sort(order)
   );
 }
 
@@ -96,7 +110,10 @@ function heroFullArt(): Wallpaper[] {
  * entrées `retired`, triées, après les vivantes. Même filtre perso que le reste
  * (l'id se lit en tête du stem, le suffixe n'y change rien).
  */
-async function scanArchived(category: string): Promise<Wallpaper[]> {
+async function scanArchived(
+  category: string,
+  order: (a: Wallpaper, b: Wallpaper) => number = byF,
+): Promise<Wallpaper[]> {
   const dir = join(EDITORIAL, category);
   if (!existsSync(dir)) return [];
   const stems = [
@@ -118,7 +135,7 @@ async function scanArchived(category: string): Promise<Wallpaper[]> {
     }
     out.push({ f: stem, w: d?.w ?? 0, h: d?.h ?? 0, retired: true });
   }
-  return out.sort(byF);
+  return out.sort(order);
 }
 
 /** Construit le catalogue complet des wallpapers. */
@@ -143,6 +160,13 @@ export async function buildWallpapers(): Promise<WallpapersData> {
   out['Full:Others'] = full.filter(
     (w) => !w.f.startsWith('T_Event') && !w.f.startsWith('T_Scenario'),
   );
+
+  // Émoticônes de chat : comme Art, mais en ordre NATUREL (`_01` … `_79`, puis
+  // `_100` après `_99` le jour où la table dépasse deux chiffres).
+  out.Emotes = [
+    ...scanCategory(join(GAME_POOL, 'Emotes'), byNaturalF),
+    ...(await scanArchived('Emotes', byNaturalF)),
+  ];
 
   return out;
 }

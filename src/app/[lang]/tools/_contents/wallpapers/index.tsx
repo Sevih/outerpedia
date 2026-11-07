@@ -4,7 +4,7 @@ import { getWallpapers } from '@/lib/data/wallpapers';
 import { ARCHIVED } from './archived';
 import { WallpapersGallery, type Wallpaper, type WallpapersData } from './WallpapersGallery';
 
-/** Ordre d'affichage des catégories (inchangé). */
+/** Ordre d'affichage des catégories (Emotes, émoticônes de chat, en dernier). */
 const CATEGORY_ORDER = [
   'Outerpedia',
   'HeroFullArt',
@@ -14,6 +14,7 @@ const CATEGORY_ORDER = [
   'Full:Others',
   'Banner',
   'Art',
+  'Emotes',
 ] as const;
 
 /**

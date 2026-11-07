@@ -1337,6 +1337,7 @@ const es: Record<TranslationKey, string> = {
   'wallpapers.download': 'Descargar PNG',
   'wallpapers.cat.Outerpedia': 'Outerpedia',
   'wallpapers.cat.Art': 'Arte Demiurge',
+  'wallpapers.cat.Emotes': 'Emoticonos',
   'wallpapers.cat.Banner': 'Banners',
   'wallpapers.cat.Full:Events': 'Eventos',
   'wallpapers.cat.Full:Scenario': 'Escenario',

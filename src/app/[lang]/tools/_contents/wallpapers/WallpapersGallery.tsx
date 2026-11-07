@@ -40,6 +40,11 @@ const HELPSHIFT_URL = 'https://outerplane.helpshift.com/hc/en/4-outerplane/';
 
 /** Catégories en orientation PORTRAIT (grille + lightbox plus étroits). */
 const PORTRAIT = new Set(['HeroFullArt', 'Cutin']);
+/**
+ * Catégories CARRÉES et petites (émoticônes de chat, 128×128) : grille plus
+ * dense, tuiles carrées, image contenue sur le fond de la carte.
+ */
+const SQUARE = new Set(['Emotes']);
 
 /**
  * Enregistre `url` sous `filename` via `fetch → blob → object URL` : l'attribut
@@ -81,6 +86,7 @@ export function WallpapersGallery({
   const [lightbox, setLightbox] = useState<number | null>(null);
 
   const isPortrait = PORTRAIT.has(selected);
+  const isSquare = SQUARE.has(selected);
   // Une entrée archivée garde son dossier de service d'origine (`cat`) : c'est
   // lui qui fait l'URL et l'orientation, pas l'onglet.
   const items = useMemo(
@@ -90,6 +96,7 @@ export function WallpapersGallery({
         return {
           ...w,
           portrait: PORTRAIT.has(cat),
+          square: SQUARE.has(cat),
           src: wallpaperSrc(cat, w.f),
           download: wallpaperDownload(cat, w.f),
           blobDownload: reusesHeroArt(cat, w.f),
@@ -176,9 +183,11 @@ export function WallpapersGallery({
       {/* Grille */}
       <div
         className={`mt-6 grid gap-3 sm:gap-4 ${
-          isPortrait
-            ? 'grid-cols-3 sm:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6'
-            : 'grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5'
+          isSquare
+            ? 'grid-cols-4 sm:grid-cols-6 lg:grid-cols-8 xl:grid-cols-10'
+            : isPortrait
+              ? 'grid-cols-3 sm:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6'
+              : 'grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5'
         }`}
       >
         {items.map((w, i) => (
@@ -187,14 +196,14 @@ export function WallpapersGallery({
             type="button"
             onClick={() => setLightbox(i)}
             className={`group border-line-subtle bg-surface-raised relative overflow-hidden rounded-lg border transition-all hover:scale-[1.02] hover:border-sky-500 ${
-              w.portrait ? 'aspect-3/4' : 'aspect-video'
+              w.square ? 'aspect-square' : w.portrait ? 'aspect-3/4' : 'aspect-video'
             }`}
           >
             <img
               src={w.src}
               alt={w.f}
               loading="lazy"
-              className={`size-full ${w.portrait ? 'object-contain' : 'object-cover'}`}
+              className={`size-full ${w.portrait || w.square ? 'object-contain' : 'object-cover'}`}
             />
             <span className="bg-scrim/70 text-content text-2xs absolute right-1 bottom-1 rounded px-1.5 py-0.5 font-mono">
               {w.w}×{w.h}

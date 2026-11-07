@@ -1280,6 +1280,7 @@ const kr: Record<TranslationKey, string> = {
   'wallpapers.download': 'PNG 다운로드',
   'wallpapers.cat.Outerpedia': 'Outerpedia',
   'wallpapers.cat.Art': '데미우르고스 아트',
+  'wallpapers.cat.Emotes': '이모티콘',
   'wallpapers.cat.Banner': '배너',
   'wallpapers.cat.Full:Events': '이벤트',
   'wallpapers.cat.Full:Scenario': '시나리오',

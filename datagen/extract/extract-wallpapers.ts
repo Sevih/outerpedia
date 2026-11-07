@@ -6,7 +6,8 @@
  * (`.gamedata/extracted/images/`, produit par `extract.ts`), on ne ré-extrait
  * rien. Trois temps :
  *   1. SCAN + FILTRE : tous les PNG du pool → exclusions (EXCLUDE_PATTERNS),
- *      largeur mini (MIN_WIDTH), puis catégorisation (Cutin/Full/Banner/Art).
+ *      catégorisation (Emotes/Full/Banner/Cutin/Art), puis largeur mini
+ *      (MIN_WIDTH, sauf seuil propre à la catégorie : Emotes en 128 px).
  *   2. DÉDUP        : hash perceptuel 16×16 gris ; les quasi-doublons sont
  *      regroupés, on garde le meilleur représentant (getPriorityScore).
  *   3. ÉCRITURE     : par entrée retenue, un `.webp` (affichage, réencodé sharp)
@@ -22,7 +23,7 @@
  * extraits/hébergés et RÉUTILISÉS tels quels par le générateur — on ne les
  * ré-extrait pas ici (cf. `/^IMG_\d+/` dans EXCLUDE_PATTERNS).
  *
- * Sortie : `.gamedata/extracted/wallpapers/{Cutin,Full,Banner,Art}/<name>.{webp,png}`
+ * Sortie : `.gamedata/extracted/wallpapers/{Emotes,Cutin,Full,Banner,Art}/<name>.{webp,png}`
  * — pool possédé par ce repo, gitignoré, artefact de build (comme l'audio). `assets/collect`
  * le collecte ensuite vers le staging.
  *
@@ -54,20 +55,30 @@ const CONCURRENCY = Math.min(Math.max(cpus().length, 1), 16);
 
 /** Largeur minimale d'un candidat wallpaper (rejette les petites UI). */
 const MIN_WIDTH = 250;
+/**
+ * Seuil propre aux émoticônes de chat : `T_Chat_Emoticon_NN` font 128×128 (table
+ * `EmoticonTemplet`, colonne `FileName`), sous MIN_WIDTH. Le nom suffit à les
+ * reconnaître — seule cette catégorie y déroge.
+ */
+const EMOTE_MIN_WIDTH = 128;
 /** Qualité webp d'affichage (le png reste la source lossless pour le download). */
 const WEBP_QUALITY = 90;
 
 interface CategoryDef {
   name: string;
   match: (name: string, w: number, h: number) => boolean;
+  /** Largeur minimale propre à la catégorie (MIN_WIDTH à défaut). */
+  minWidth?: number;
 }
 
 /**
  * Ordre SIGNIFICATIF (premier match gagne) — inchangé, MOINS
  * HeroFullArt (réutilisé ailleurs, cf. en-tête). Full est dimensionnel, les
- * autres sont par nom.
+ * autres sont par nom. Emotes (émoticônes de chat, A88) passe en tête : son
+ * nom la désigne quelle que soit la taille.
  */
 const CATEGORIES: CategoryDef[] = [
+  { name: 'Emotes', match: (n) => /^T_Chat_Emoticon_/.test(n), minWidth: EMOTE_MIN_WIDTH },
   { name: 'Full', match: (_n, w, h) => w === 2048 && h === 1024 },
   { name: 'Banner', match: (n) => /_Banner_/.test(n) },
   { name: 'Cutin', match: (n) => /^T_CutIn_/i.test(n) },
@@ -212,6 +223,17 @@ export function getCategory(name: string, w: number, h: number): string | null {
   return null;
 }
 
+/**
+ * Catégorie d'un candidat APRÈS le seuil de largeur : MIN_WIDTH, ou celui de sa
+ * catégorie s'il en porte un (Emotes, 128 px). `null` = écarté par le scan.
+ */
+export function classify(name: string, w: number, h: number): string | null {
+  const category = getCategory(name, w, h);
+  if (!category) return null;
+  const min = CATEGORIES.find((c) => c.name === category)?.minWidth ?? MIN_WIDTH;
+  return w < min ? null : category;
+}
+
 /** Dimensions : en-tête PNG (bon marché) sinon sharp (jpg/webp éventuels). */
 async function readDims(filePath: string): Promise<{ width: number; height: number } | null> {
   if (/\.png$/i.test(filePath)) {
@@ -261,8 +283,8 @@ async function scanAndFilter(): Promise<FileInfo[]> {
     const name = basename(path);
     if (shouldExclude(path, name)) return null;
     const dims = await readDims(path);
-    if (!dims || dims.width < MIN_WIDTH) return null;
-    const category = getCategory(name, dims.width, dims.height);
+    if (!dims) return null;
+    const category = classify(name, dims.width, dims.height);
     if (!category) return null;
     return { path, name, width: dims.width, height: dims.height, category };
   });

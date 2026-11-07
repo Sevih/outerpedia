@@ -5,7 +5,7 @@
  *
  * Deux sources, aucune extérieure :
  *   - **jeu** : pool extrait par le worker `.gamedata/extracted/wallpapers/<cat>`
- *     (Cutin/Full/Banner/Art) ;
+ *     (Cutin/Full/Banner/Art/Emotes) ;
  *   - **éditorial** : `.editorial/wallpapers/<cat>` — les 5 faits main
  *     (`Outerpedia`) ET les VERSIONS ARCHIVÉES `<stem>@<n>` des catégories jeu +
  *     `HeroFullArt` (cf. wallpaper-versions.ts). Pour HeroFullArt seul le webp
@@ -55,7 +55,7 @@ const DEST = resolve(STAGING_DIR, 'images/download');
 const STAGING_FULL = resolve(STAGING_DIR, 'images/characters/full');
 
 /** Catégories jeu (worker) — chacune doublée de son dossier éditorial d'archives. */
-const GAME_CATEGORIES = ['Cutin', 'Full', 'Banner', 'Art'] as const;
+const GAME_CATEGORIES = ['Cutin', 'Full', 'Banner', 'Art', 'Emotes'] as const;
 
 interface Source {
   root: string;
