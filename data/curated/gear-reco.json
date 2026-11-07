@@ -7932,7 +7932,7 @@
           "preset": "pat4"
         }
       ],
-      "substats": "DEF>CHC>CHD=SSPD>HP=DMG RED%>DMG UP%"
+      "substats": "DEF>CHC>CHD=SPD>HP=DMG RED%>DMG UP%"
     },
     {
       "name": "Defense Mix",
@@ -7993,7 +7993,7 @@
           ]
         }
       ],
-      "substats": "DEF>CHC>CHD=SSPD>HP=DMG RED%>DMG UP%"
+      "substats": "DEF>CHC>CHD=SPD>HP=DMG RED%>DMG UP%"
     }
   ],
   "2000124": [
