@@ -52,9 +52,9 @@ Les sections suivantes détaillent chaque étape (et servent de secours manuel).
 
 ## 1. Prérequis
 
-- **Node 24** (voir `.nvmrc`). Le projet exige `>=24` ; pnpm 11.13 refuse de
+- **Node 24** (voir `.nvmrc`). Le projet exige `>=24` ; pnpm 12 refuse de
   tourner sous Node < 22.13 de toute façon.
-- **pnpm 11.13.1** via corepack (voir §3). Pas 11.13.0 : cette release est
+- **pnpm 12.18.0** via corepack (voir §3). Jamais 11.13.0 : cette release est
   cassée côté npm (`@pnpm/exe` publié sans binaire) et pnpm refuse de
   l'installer depuis, CI compris.
 - **git**.
@@ -128,8 +128,8 @@ depuis l'APK installé sur l'émulateur (voir §4).
 nvm install 24
 nvm use 24                       # nvm-windows : global par version de Node
 corepack enable
-corepack prepare pnpm@11.13.1 --activate
-pnpm -v                          # doit afficher 11.13.1
+corepack prepare pnpm@12.18.0 --activate
+pnpm -v                          # doit afficher 12.18.0
 ```
 
 **Pièges rencontrés :**

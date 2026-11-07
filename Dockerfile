@@ -16,7 +16,7 @@ ENV NEXT_TELEMETRY_DISABLED=1
 # COPY de package.json, pour garder le cache Docker de cette couche. Une dérive
 # entre les deux se paie au `pnpm install --frozen-lockfile` ci-dessous, donc au
 # build de PROD et non en dev.
-RUN npm install -g pnpm@11.13.1
+RUN npm install -g pnpm@12.18.0
 
 # ---- Étape 1 : dépendances ----
 FROM base AS deps
