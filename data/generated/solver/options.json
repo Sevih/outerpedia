@@ -4556,393 +4556,913 @@
     "v": 48
   },
   "20001": {
+    "st": "ST_HIT_AP",
+    "ap": "OAT_ADD",
+    "f": 1,
+    "max": 10,
     "buffId": "BID_CEQUIP_MAIN_DMG_REDUCE_FIRE"
   },
   "20002": {
+    "st": "ST_KILL_AP",
+    "ap": "OAT_ADD",
+    "f": 2,
+    "max": 20,
     "buffId": "BID_CEQUIP_MAIN_DMG_DARK"
   },
   "20003": {
+    "st": "ST_KILL_AP",
+    "ap": "OAT_ADD",
+    "f": 2,
+    "max": 20,
     "buffId": "BID_CEQUIP_MAIN_BUFF_CHANCE_WATER"
   },
   "20004": {
+    "st": "ST_KILL_AP",
+    "ap": "OAT_ADD",
+    "f": 2,
+    "max": 20,
     "buffId": "BID_CEQUIP_MAIN_BUFF_CHANCE_FIRE"
   },
   "20005": {
+    "st": "ST_KILL_AP",
+    "ap": "OAT_ADD",
+    "f": 2,
+    "max": 20,
     "buffId": "BID_CEQUIP_MAIN_DMG_FIRE"
   },
   "20006": {
+    "st": "ST_KILL_AP",
+    "ap": "OAT_ADD",
+    "f": 2,
+    "max": 20,
     "buffId": "BID_CEQUIP_MAIN_DMG_WATER"
   },
   "20007": {
+    "st": "ST_KILL_AP",
+    "ap": "OAT_ADD",
+    "f": 2,
+    "max": 20,
     "buffId": "BID_CEQUIP_MAIN_BUFF_CHANCE_WATER"
   },
   "20008": {
+    "st": "ST_KILL_AP",
+    "ap": "OAT_ADD",
+    "f": 2,
+    "max": 20,
     "buffId": "BID_CEQUIP_MAIN_DMG_REDUCE_EARTH"
   },
   "20009": {
+    "st": "ST_HIT_AP",
+    "ap": "OAT_ADD",
+    "f": 1,
+    "max": 10,
     "buffId": "BID_CEQUIP_MAIN_DMG_REDUCE_LIGHT"
   },
   "20010": {
+    "st": "ST_KILL_AP",
+    "ap": "OAT_ADD",
+    "f": 2,
+    "max": 20,
     "buffId": "BID_CEQUIP_MAIN_DMG_REDUCE_EARTH"
   },
   "20011": {
+    "st": "ST_KILL_AP",
+    "ap": "OAT_ADD",
+    "f": 1,
+    "max": 10,
     "buffId": "BID_CEQUIP_MAIN_BUFF_CHANCE_WATER"
   },
   "20012": {
+    "st": "ST_KILL_AP",
+    "ap": "OAT_ADD",
+    "f": 2,
+    "max": 20,
     "buffId": "BID_CEQUIP_MAIN_BUFF_CHANCE_FIRE"
   },
   "20013": {
+    "st": "ST_KILL_AP",
+    "ap": "OAT_ADD",
+    "f": 2,
+    "max": 20,
     "buffId": "BID_CEQUIP_MAIN_BUFF_CHANCE_EARTH"
   },
   "20014": {
+    "st": "ST_KILL_AP",
+    "ap": "OAT_ADD",
+    "f": 2,
+    "max": 20,
     "buffId": "BID_CEQUIP_MAIN_BUFF_CHANCE_WATER"
   },
   "20015": {
+    "st": "ST_KILL_AP",
+    "ap": "OAT_ADD",
+    "f": 2,
+    "max": 20,
     "buffId": "BID_CEQUIP_MAIN_BUFF_CHANCE_DARK"
   },
   "20016": {
+    "st": "ST_KILL_AP",
+    "ap": "OAT_ADD",
+    "f": 2,
+    "max": 20,
     "buffId": "BID_CEQUIP_MAIN_DMG_REDUCE_EARTH"
   },
   "20017": {
+    "st": "ST_HIT_AP",
+    "ap": "OAT_ADD",
+    "f": 1,
+    "max": 10,
     "buffId": "BID_CEQUIP_MAIN_DMG_FIRE"
   },
   "20018": {
+    "st": "ST_KILL_AP",
+    "ap": "OAT_ADD",
+    "f": 2,
+    "max": 20,
     "buffId": "BID_CEQUIP_MAIN_BUFF_CHANCE_DARK"
   },
   "20019": {
+    "st": "ST_KILL_AP",
+    "ap": "OAT_ADD",
+    "f": 2,
+    "max": 20,
     "buffId": "BID_CEQUIP_MAIN_DMG_WATER"
   },
   "20020": {
+    "st": "ST_KILL_AP",
+    "ap": "OAT_ADD",
+    "f": 2,
+    "max": 20,
     "buffId": "BID_CEQUIP_MAIN_BUFF_CHANCE_EARTH"
   },
   "20021": {
+    "st": "ST_HIT_AP",
+    "ap": "OAT_ADD",
+    "f": 1,
+    "max": 10,
     "buffId": "BID_CEQUIP_MAIN_DMG_REDUCE_EARTH"
   },
   "20022": {
+    "st": "ST_KILL_AP",
+    "ap": "OAT_ADD",
+    "f": 2,
+    "max": 20,
     "buffId": "BID_CEQUIP_MAIN_DMG_EARTH"
   },
   "20023": {
+    "st": "ST_HIT_AP",
+    "ap": "OAT_ADD",
+    "f": 1,
+    "max": 10,
     "buffId": "BID_CEQUIP_MAIN_DMG_REDUCE_EARTH"
   },
   "20024": {
+    "st": "ST_HIT_AP",
+    "ap": "OAT_ADD",
+    "f": 1,
+    "max": 10,
     "buffId": "BID_CEQUIP_MAIN_DMG_REDUCE_FIRE"
   },
   "20025": {
+    "st": "ST_KILL_AP",
+    "ap": "OAT_ADD",
+    "f": 2,
+    "max": 20,
     "buffId": "BID_CEQUIP_MAIN_DMG_WATER"
   },
   "20026": {
+    "st": "ST_HIT_AP",
+    "ap": "OAT_ADD",
+    "f": 1,
+    "max": 10,
     "buffId": "BID_CEQUIP_MAIN_DMG_REDUCE_EARTH"
   },
   "20027": {
+    "st": "ST_HIT_AP",
+    "ap": "OAT_ADD",
+    "f": 1,
+    "max": 10,
     "buffId": "BID_CEQUIP_MAIN_DMG_REDUCE_LIGHT"
   },
   "20028": {
+    "st": "ST_KILL_AP",
+    "ap": "OAT_ADD",
+    "f": 2,
+    "max": 20,
     "buffId": "BID_CEQUIP_MAIN_DMG_DARK"
   },
   "20029": {
+    "st": "ST_KILL_AP",
+    "ap": "OAT_ADD",
+    "f": 2,
+    "max": 20,
     "buffId": "BID_CEQUIP_MAIN_BUFF_CHANCE_EARTH"
   },
   "20030": {
+    "st": "ST_HIT_AP",
+    "ap": "OAT_ADD",
+    "f": 1,
+    "max": 10,
     "buffId": "BID_CEQUIP_MAIN_DMG_REDUCE_FIRE"
   },
   "20031": {
+    "st": "ST_KILL_AP",
+    "ap": "OAT_ADD",
+    "f": 2,
+    "max": 20,
     "buffId": "BID_CEQUIP_MAIN_DMG_REDUCE_WATER"
   },
   "20032": {
+    "st": "ST_KILL_AP",
+    "ap": "OAT_ADD",
+    "f": 2,
+    "max": 20,
     "buffId": "BID_CEQUIP_MAIN_BUFF_CHANCE_FIRE"
   },
   "20033": {
+    "st": "ST_KILL_AP",
+    "ap": "OAT_ADD",
+    "f": 2,
+    "max": 20,
     "buffId": "BID_CEQUIP_MAIN_DMG_WATER"
   },
   "20034": {
+    "st": "ST_KILL_AP",
+    "ap": "OAT_ADD",
+    "f": 2,
+    "max": 20,
     "buffId": "BID_CEQUIP_MAIN_DMG_REDUCE_FIRE"
   },
   "20035": {
+    "st": "ST_KILL_AP",
+    "ap": "OAT_ADD",
+    "f": 2,
+    "max": 20,
     "buffId": "BID_CEQUIP_MAIN_BUFF_CHANCE_DARK"
   },
   "20036": {
+    "st": "ST_HIT_AP",
+    "ap": "OAT_ADD",
+    "f": 1,
+    "max": 10,
     "buffId": "BID_CEQUIP_MAIN_DMG_REDUCE_FIRE"
   },
   "20037": {
+    "st": "ST_HIT_AP",
+    "ap": "OAT_ADD",
+    "f": 1,
+    "max": 10,
     "buffId": "BID_CEQUIP_MAIN_DMG_REDUCE_WATER"
   },
   "20038": {
+    "st": "ST_HIT_AP",
+    "ap": "OAT_ADD",
+    "f": 1,
+    "max": 10,
     "buffId": "BID_CEQUIP_MAIN_DMG_REDUCE_WATER"
   },
   "20039": {
+    "st": "ST_KILL_AP",
+    "ap": "OAT_ADD",
+    "f": 2,
+    "max": 20,
     "buffId": "BID_CEQUIP_MAIN_DMG_LIGHT"
   },
   "20040": {
+    "st": "ST_KILL_AP",
+    "ap": "OAT_ADD",
+    "f": 2,
+    "max": 20,
     "buffId": "BID_CEQUIP_MAIN_DMG_FIRE"
   },
   "20041": {
+    "st": "ST_KILL_AP",
+    "ap": "OAT_ADD",
+    "f": 2,
+    "max": 20,
     "buffId": "BID_CEQUIP_MAIN_DMG_EARTH"
   },
   "20042": {
+    "st": "ST_HIT_AP",
+    "ap": "OAT_ADD",
+    "f": 1,
+    "max": 10,
     "buffId": "BID_CEQUIP_MAIN_DMG_REDUCE_LIGHT"
   },
   "20043": {
+    "st": "ST_KILL_AP",
+    "ap": "OAT_ADD",
+    "f": 2,
+    "max": 20,
     "buffId": "BID_CEQUIP_MAIN_BUFF_CHANCE_FIRE"
   },
   "20044": {
+    "st": "ST_KILL_AP",
+    "ap": "OAT_ADD",
+    "f": 2,
+    "max": 20,
     "buffId": "BID_CEQUIP_MAIN_BUFF_CHANCE_WATER"
   },
   "20045": {
+    "st": "ST_KILL_AP",
+    "ap": "OAT_ADD",
+    "f": 2,
+    "max": 20,
     "buffId": "BID_CEQUIP_MAIN_DMG_WATER"
   },
   "20046": {
+    "st": "ST_KILL_AP",
+    "ap": "OAT_ADD",
+    "f": 2,
+    "max": 20,
     "buffId": "BID_CEQUIP_MAIN_BUFF_CHANCE_EARTH"
   },
   "20047": {
+    "st": "ST_HIT_AP",
+    "ap": "OAT_ADD",
+    "f": 1,
+    "max": 10,
     "buffId": "BID_CEQUIP_MAIN_DMG_REDUCE_WATER"
   },
   "20048": {
+    "st": "ST_HIT_AP",
+    "ap": "OAT_ADD",
+    "f": 1,
+    "max": 10,
     "buffId": "BID_CEQUIP_MAIN_BUFF_CRITICAL_RATE_WATER"
   },
   "20049": {
+    "st": "ST_KILL_AP",
+    "ap": "OAT_ADD",
+    "f": 2,
+    "max": 20,
     "buffId": "BID_CEQUIP_MAIN_DMG_FIRE"
   },
   "20050": {
+    "st": "ST_HIT_AP",
+    "ap": "OAT_ADD",
+    "f": 1,
+    "max": 10,
     "buffId": "BID_CEQUIP_MAIN_DMG_REDUCE_EARTH"
   },
   "20051": {
+    "st": "ST_KILL_AP",
+    "ap": "OAT_ADD",
+    "f": 2,
+    "max": 20,
     "buffId": "BID_CEQUIP_MAIN_DMG_REDUCE_EARTH"
   },
   "20052": {
+    "st": "ST_KILL_AP",
+    "ap": "OAT_ADD",
+    "f": 2,
+    "max": 20,
     "buffId": "BID_CEQUIP_MAIN_DMG_DARK"
   },
   "20053": {
+    "st": "ST_KILL_AP",
+    "ap": "OAT_ADD",
+    "f": 2,
+    "max": 20,
     "buffId": "BID_CEQUIP_MAIN_DMG_REDUCE_LIGHT"
   },
   "20054": {
+    "st": "ST_HIT_AP",
+    "ap": "OAT_ADD",
+    "f": 1,
+    "max": 10,
     "buffId": "BID_CEQUIP_MAIN_DMG_REDUCE_WATER"
   },
   "20055": {
+    "st": "ST_KILL_AP",
+    "ap": "OAT_ADD",
+    "f": 2,
+    "max": 20,
     "buffId": "BID_CEQUIP_MAIN_DMG_FIRE"
   },
   "20056": {
+    "st": "ST_KILL_AP",
+    "ap": "OAT_ADD",
+    "f": 2,
+    "max": 20,
     "buffId": "BID_CEQUIP_MAIN_DMG_EARTH"
   },
   "20057": {
+    "st": "ST_HIT_AP",
+    "ap": "OAT_ADD",
+    "f": 1,
+    "max": 10,
     "buffId": "BID_CEQUIP_MAIN_DMG_REDUCE_DARK"
   },
   "20058": {
+    "st": "ST_HIT_AP",
+    "ap": "OAT_ADD",
+    "f": 1,
+    "max": 10,
     "buffId": "BID_CEQUIP_MAIN_DMG_REDUCE_FIRE"
   },
   "20059": {
+    "st": "ST_KILL_AP",
+    "ap": "OAT_ADD",
+    "f": 2,
+    "max": 20,
     "buffId": "BID_CEQUIP_MAIN_DMG_DARK"
   },
   "20060": {
+    "st": "ST_KILL_AP",
+    "ap": "OAT_ADD",
+    "f": 2,
+    "max": 20,
     "buffId": "BID_CEQUIP_MAIN_BUFF_CRITICAL_RATE_WATER"
   },
   "20061": {
+    "st": "ST_HIT_AP",
+    "ap": "OAT_ADD",
+    "f": 1,
+    "max": 10,
     "buffId": "BID_CEQUIP_MAIN_BUFF_CHANCE_FIRE"
   },
   "20062": {
+    "st": "ST_KILL_AP",
+    "ap": "OAT_ADD",
+    "f": 2,
+    "max": 20,
     "buffId": "BID_CEQUIP_MAIN_DMG_LIGHT"
   },
   "20063": {
+    "st": "ST_HIT_AP",
+    "ap": "OAT_ADD",
+    "f": 1,
+    "max": 10,
     "buffId": "BID_CEQUIP_MAIN_DMG_REDUCE_LIGHT"
   },
   "20064": {
+    "st": "ST_KILL_AP",
+    "ap": "OAT_ADD",
+    "f": 2,
+    "max": 20,
     "buffId": "BID_CEQUIP_MAIN_BUFF_CHANCE_LIGHT"
   },
   "20065": {
+    "st": "ST_KILL_AP",
+    "ap": "OAT_ADD",
+    "f": 2,
+    "max": 20,
     "buffId": "BID_CEQUIP_MAIN_DMG_EARTH"
   },
   "20066": {
+    "st": "ST_KILL_AP",
+    "ap": "OAT_ADD",
+    "f": 2,
+    "max": 20,
     "buffId": "BID_CEQUIP_MAIN_BUFF_CHANCE_EARTH"
   },
   "20067": {
+    "st": "ST_KILL_AP",
+    "ap": "OAT_ADD",
+    "f": 2,
+    "max": 20,
     "buffId": "BID_CEQUIP_MAIN_BUFF_CRITICAL_RATE_LIGHT"
   },
   "20068": {
+    "st": "ST_KILL_AP",
+    "ap": "OAT_ADD",
+    "f": 2,
+    "max": 20,
     "buffId": "BID_CEQUIP_MAIN_BUFF_CHANCE_WATER"
   },
   "20069": {
+    "st": "ST_KILL_AP",
+    "ap": "OAT_ADD",
+    "f": 2,
+    "max": 20,
     "buffId": "BID_CEQUIP_MAIN_BUFF_CHANCE_DARK"
   },
   "20070": {
+    "st": "ST_KILL_AP",
+    "ap": "OAT_ADD",
+    "f": 2,
+    "max": 20,
     "buffId": "BID_CEQUIP_MAIN_DMG_DARK"
   },
   "20071": {
+    "st": "ST_KILL_AP",
+    "ap": "OAT_ADD",
+    "f": 2,
+    "max": 20,
     "buffId": "BID_CEQUIP_MAIN_DMG_FIRE"
   },
   "20072": {
+    "st": "ST_KILL_AP",
+    "ap": "OAT_ADD",
+    "f": 2,
+    "max": 20,
     "buffId": "BID_CEQUIP_MAIN_BUFF_CHANCE_WATER"
   },
   "20073": {
+    "st": "ST_KILL_AP",
+    "ap": "OAT_ADD",
+    "f": 2,
+    "max": 20,
     "buffId": "BID_CEQUIP_MAIN_DMG_FIRE"
   },
   "20074": {
+    "st": "ST_HIT_AP",
+    "ap": "OAT_ADD",
+    "f": 1,
+    "max": 10,
     "buffId": "BID_CEQUIP_MAIN_DMG_LIGHT"
   },
   "20075": {
+    "st": "ST_KILL_AP",
+    "ap": "OAT_ADD",
+    "f": 2,
+    "max": 20,
     "buffId": "BID_CEQUIP_MAIN_BUFF_CHANCE_DARK"
   },
   "20076": {
+    "st": "ST_KILL_AP",
+    "ap": "OAT_ADD",
+    "f": 2,
+    "max": 20,
     "buffId": "BID_CEQUIP_MAIN_DMG_FIRE"
   },
   "20077": {
+    "st": "ST_HIT_AP",
+    "ap": "OAT_ADD",
+    "f": 1,
+    "max": 10,
     "buffId": "BID_CEQUIP_MAIN_BUFF_CRITICAL_RATE_EARTH"
   },
   "20078": {
+    "st": "ST_KILL_AP",
+    "ap": "OAT_ADD",
+    "f": 2,
+    "max": 20,
     "buffId": "BID_CEQUIP_MAIN_DMG_WATER"
   },
   "20079": {
+    "st": "ST_KILL_AP",
+    "ap": "OAT_ADD",
+    "f": 2,
+    "max": 20,
     "buffId": "BID_CEQUIP_MAIN_BUFF_CHANCE_LIGHT"
   },
   "20080": {
+    "st": "ST_KILL_AP",
+    "ap": "OAT_ADD",
+    "f": 2,
+    "max": 20,
     "buffId": "BID_CEQUIP_MAIN_DMG_FIRE"
   },
   "20081": {
+    "st": "ST_KILL_AP",
+    "ap": "OAT_ADD",
+    "f": 2,
+    "max": 20,
     "buffId": "BID_CEQUIP_MAIN_BUFF_CHANCE_FIRE"
   },
   "20082": {
+    "st": "ST_KILL_AP",
+    "ap": "OAT_ADD",
+    "f": 2,
+    "max": 20,
     "buffId": "BID_CEQUIP_MAIN_BUFF_CRITICAL_RATE_WATER"
   },
   "20083": {
+    "st": "ST_HIT_AP",
+    "ap": "OAT_ADD",
+    "f": 1,
+    "max": 10,
     "buffId": "BID_CEQUIP_MAIN_DMG_REDUCE_DARK"
   },
   "20084": {
+    "st": "ST_HIT_AP",
+    "ap": "OAT_ADD",
+    "f": 1,
+    "max": 10,
     "buffId": "BID_CEQUIP_MAIN_DMG_REDUCE_LIGHT"
   },
   "20085": {
+    "st": "ST_KILL_AP",
+    "ap": "OAT_ADD",
+    "f": 2,
+    "max": 20,
     "buffId": "BID_CEQUIP_MAIN_DMG_WATER"
   },
   "20086": {
+    "st": "ST_KILL_AP",
+    "ap": "OAT_ADD",
+    "f": 2,
+    "max": 20,
     "buffId": "BID_CEQUIP_MAIN_DMG_EARTH"
   },
   "20087": {
+    "st": "ST_KILL_AP",
+    "ap": "OAT_ADD",
+    "f": 2,
+    "max": 20,
     "buffId": "BID_CEQUIP_MAIN_DMG_EARTH"
   },
   "20088": {
+    "st": "ST_HIT_AP",
+    "ap": "OAT_ADD",
+    "f": 1,
+    "max": 10,
     "buffId": "BID_CEQUIP_MAIN_BUFF_CHANCE_DARK"
   },
   "20089": {
+    "st": "ST_KILL_AP",
+    "ap": "OAT_ADD",
+    "f": 2,
+    "max": 20,
     "buffId": "BID_CEQUIP_MAIN_DMG_REDUCE_WATER"
   },
   "20090": {
+    "st": "ST_KILL_AP",
+    "ap": "OAT_ADD",
+    "f": 2,
+    "max": 20,
     "buffId": "BID_CEQUIP_MAIN_DMG_DARK"
   },
   "20091": {
+    "st": "ST_KILL_AP",
+    "ap": "OAT_ADD",
+    "f": 2,
+    "max": 20,
     "buffId": "BID_CEQUIP_MAIN_DMG_REDUCE_LIGHT"
   },
   "20092": {
+    "st": "ST_KILL_AP",
+    "ap": "OAT_ADD",
+    "f": 2,
+    "max": 20,
     "buffId": "BID_CEQUIP_MAIN_DMG_REDUCE_LIGHT"
   },
   "20093": {
+    "st": "ST_KILL_AP",
+    "ap": "OAT_ADD",
+    "f": 2,
+    "max": 20,
     "buffId": "BID_CEQUIP_MAIN_DMG_FIRE"
   },
   "20094": {
+    "st": "ST_HIT_AP",
+    "ap": "OAT_ADD",
+    "f": 1,
+    "max": 10,
     "buffId": "BID_CEQUIP_MAIN_DMG_FIRE"
   },
   "20095": {
+    "st": "ST_HIT_AP",
+    "ap": "OAT_ADD",
+    "f": 1,
+    "max": 10,
     "buffId": "BID_CEQUIP_MAIN_DMG_FIRE"
   },
   "20096": {
+    "st": "ST_HIT_AP",
+    "ap": "OAT_ADD",
+    "f": 1,
+    "max": 10,
     "buffId": "BID_CEQUIP_MAIN_DMG_REDUCE_LIGHT"
   },
   "20097": {
+    "st": "ST_HIT_AP",
+    "ap": "OAT_ADD",
+    "f": 1,
+    "max": 10,
     "buffId": "BID_CEQUIP_MAIN_DMG_EARTH"
   },
   "20098": {
+    "st": "ST_HIT_AP",
+    "ap": "OAT_ADD",
+    "f": 1,
+    "max": 10,
     "buffId": "BID_CEQUIP_MAIN_DMG_REDUCE_FIRE"
   },
   "20099": {
+    "st": "ST_HIT_AP",
+    "ap": "OAT_ADD",
+    "f": 1,
+    "max": 10,
     "buffId": "BID_CEQUIP_MAIN_DMG_REDUCE_EARTH"
   },
   "20100": {
+    "st": "ST_HIT_AP",
+    "ap": "OAT_ADD",
+    "f": 1,
+    "max": 10,
     "buffId": "BID_CEQUIP_MAIN_DMG_REDUCE_DARK"
   },
   "20101": {
+    "st": "ST_HIT_AP",
+    "ap": "OAT_ADD",
+    "f": 1,
+    "max": 10,
     "buffId": "BID_CEQUIP_MAIN_DMG_REDUCE_LIGHT"
   },
   "20102": {
+    "st": "ST_HIT_AP",
+    "ap": "OAT_ADD",
+    "f": 1,
+    "max": 10,
     "buffId": "BID_CEQUIP_MAIN_DMG_REDUCE_DARK"
   },
   "20103": {
+    "st": "ST_HIT_AP",
+    "ap": "OAT_ADD",
+    "f": 1,
+    "max": 10,
     "buffId": "BID_CEQUIP_MAIN_DMG_REDUCE_WATER"
   },
   "20105": {
+    "st": "ST_KILL_AP",
+    "ap": "OAT_ADD",
+    "f": 2,
+    "max": 20,
     "buffId": "BID_CEQUIP_MAIN_DMG_EARTH"
   },
   "20106": {
+    "st": "ST_HIT_AP",
+    "ap": "OAT_ADD",
+    "f": 1,
+    "max": 10,
     "buffId": "BID_CEQUIP_MAIN_DMG_WATER"
   },
   "20107": {
+    "st": "ST_KILL_AP",
+    "ap": "OAT_ADD",
+    "f": 2,
+    "max": 20,
     "buffId": "BID_CEQUIP_MAIN_BUFF_CHANCE_WATER"
   },
   "20108": {
+    "st": "ST_HIT_AP",
+    "ap": "OAT_ADD",
+    "f": 1,
+    "max": 10,
     "buffId": "BID_CEQUIP_MAIN_DMG_REDUCE_EARTH"
   },
   "20109": {
+    "st": "ST_KILL_AP",
+    "ap": "OAT_ADD",
+    "f": 2,
+    "max": 20,
     "buffId": "BID_CEQUIP_MAIN_DMG_DARK"
   },
   "20110": {
+    "st": "ST_KILL_AP",
+    "ap": "OAT_ADD",
+    "f": 2,
+    "max": 20,
     "buffId": "BID_CEQUIP_MAIN_DMG_LIGHT"
   },
   "20111": {
+    "st": "ST_KILL_AP",
+    "ap": "OAT_ADD",
+    "f": 2,
+    "max": 20,
     "buffId": "BID_CEQUIP_MAIN_BUFF_CHANCE_DARK"
   },
   "20112": {
+    "st": "ST_KILL_AP",
+    "ap": "OAT_ADD",
+    "f": 2,
+    "max": 20,
     "buffId": "BID_CEQUIP_MAIN_BUFF_CHANCE_DARK"
   },
   "20113": {
+    "st": "ST_KILL_AP",
+    "ap": "OAT_ADD",
+    "f": 2,
+    "max": 20,
     "buffId": "BID_CEQUIP_MAIN_DMG_REDUCE_WATER"
   },
   "20114": {
+    "st": "ST_KILL_AP",
+    "ap": "OAT_ADD",
+    "f": 2,
+    "max": 20,
     "buffId": "BID_CEQUIP_MAIN_DMG_FIRE"
   },
   "20116": {
+    "st": "ST_HIT_AP",
+    "ap": "OAT_ADD",
+    "f": 1,
+    "max": 10,
     "buffId": "BID_CEQUIP_MAIN_DMG_REDUCE_LIGHT"
   },
   "20117": {
+    "st": "ST_KILL_AP",
+    "ap": "OAT_ADD",
+    "f": 2,
+    "max": 20,
     "buffId": "BID_CEQUIP_MAIN_DMG_FIRE"
   },
   "20118": {
+    "st": "ST_KILL_AP",
+    "ap": "OAT_ADD",
+    "f": 2,
+    "max": 20,
     "buffId": "BID_CEQUIP_MAIN_DMG_WATER"
   },
   "20119": {
+    "st": "ST_KILL_AP",
+    "ap": "OAT_ADD",
+    "f": 2,
+    "max": 20,
     "buffId": "BID_CEQUIP_MAIN_DMG_LIGHT"
   },
   "20121": {
+    "st": "ST_KILL_AP",
+    "ap": "OAT_ADD",
+    "f": 2,
+    "max": 20,
     "buffId": "BID_CEQUIP_MAIN_DMG_EARTH"
   },
   "20122": {
+    "st": "ST_KILL_AP",
+    "ap": "OAT_ADD",
+    "f": 2,
+    "max": 20,
     "buffId": "BID_CEQUIP_MAIN_DMG_FIRE"
   },
   "20123": {
+    "st": "ST_HIT_AP",
+    "ap": "OAT_ADD",
+    "f": 1,
+    "max": 10,
     "buffId": "BID_CEQUIP_MAIN_DMG_WATER"
   },
   "20124": {
+    "st": "ST_KILL_AP",
+    "ap": "OAT_ADD",
+    "f": 2,
+    "max": 20,
     "buffId": "BID_CEQUIP_MAIN_DMG_LIGHT"
   },
   "20129": {
+    "st": "ST_KILL_AP",
+    "ap": "OAT_ADD",
+    "f": 2,
+    "max": 20,
     "buffId": "BID_CEQUIP_MAIN_DMG_DARK"
   },
   "27003": {
+    "st": "ST_KILL_AP",
+    "ap": "OAT_ADD",
+    "f": 2,
+    "max": 20,
     "buffId": "BID_CEQUIP_MAIN_BUFF_CHANCE_WATER"
   },
   "27005": {
+    "st": "ST_KILL_AP",
+    "ap": "OAT_ADD",
+    "f": 2,
+    "max": 20,
     "buffId": "BID_CEQUIP_MAIN_DMG_FIRE"
   },
   "27019": {
+    "st": "ST_KILL_AP",
+    "ap": "OAT_ADD",
+    "f": 2,
+    "max": 20,
     "buffId": "BID_CEQUIP_MAIN_DMG_WATER"
   },
   "27035": {
+    "st": "ST_KILL_AP",
+    "ap": "OAT_ADD",
+    "f": 2,
+    "max": 20,
     "buffId": "BID_CEQUIP_MAIN_BUFF_CHANCE_DARK"
   },
   "27037": {
+    "st": "ST_KILL_AP",
+    "ap": "OAT_ADD",
+    "f": 2,
+    "max": 20,
     "buffId": "BID_CEQUIP_MAIN_DMG_WATER"
   },
   "27043": {
+    "st": "ST_KILL_AP",
+    "ap": "OAT_ADD",
+    "f": 2,
+    "max": 20,
     "buffId": "BID_CEQUIP_MAIN_BUFF_CHANCE_FIRE"
   },
   "27056": {
+    "st": "ST_KILL_AP",
+    "ap": "OAT_ADD",
+    "f": 2,
+    "max": 20,
     "buffId": "BID_CEQUIP_MAIN_DMG_EARTH"
   },
   "27070": {
+    "st": "ST_KILL_AP",
+    "ap": "OAT_ADD",
+    "f": 2,
+    "max": 20,
     "buffId": "BID_CEQUIP_MAIN_DMG_DARK"
   },
   "30001": {

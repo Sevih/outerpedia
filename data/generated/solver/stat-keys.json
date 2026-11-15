@@ -118,9 +118,23 @@
       "abbr": "RES%"
     }
   },
+  "ST_HIT_AP": {
+    "OAT_ADD": {
+      "key": "hitAp",
+      "percent": false,
+      "abbr": null
+    }
+  },
   "ST_ENTER_AP": {
     "OAT_ADD": {
       "key": "enterAp",
+      "percent": false,
+      "abbr": null
+    }
+  },
+  "ST_KILL_AP": {
+    "OAT_ADD": {
+      "key": "killAp",
       "percent": false,
       "abbr": null
     }

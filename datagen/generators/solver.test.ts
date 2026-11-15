@@ -53,6 +53,7 @@ import {
   gemSlotRules,
   reforgeBudgets,
   dissolveOf,
+  enchantCostRateOf,
   equipmentScrap,
   reforgeMaxTicks,
   rewardTables,
@@ -84,11 +85,12 @@ const equipment = equipmentData as Record<
     star: number | null;
     classLimit: string | null;
     name: unknown;
+    enchantCostRate?: number;
   }
 >;
 const options = optionsData as Record<
   string,
-  { st?: string; ap?: string; v?: number; buffId?: string }
+  { st?: string; ap?: string; v?: number; f?: number; max?: number; buffId?: string }
 >;
 const gems = gemsData as Record<
   string,
@@ -443,7 +445,7 @@ const CONTRACT_SHAPE: Record<string, Shape> = {
         armorSetIcon: '*',
         class: '*',
       },
-      // Ajout G73 (règle (a), `schema` inchangé) : facultatives tant que la table
+      // Ajouts G73 et A89 (règle (a), `schema` inchangé). G73 (règle (a), `schema` inchangé) : facultatives tant que la table
       // committée n'est pas régénérée (`datagen:build`, geste de Sevih), à passer
       // dans `obj` à la promotion.
       opt: {
@@ -456,6 +458,8 @@ const CONTRACT_SHAPE: Record<string, Shape> = {
             items: { arr: { obj: { id: '*', min: '*', max: '*' } } },
           },
         },
+        // A89 : omis quand 0 (taux neutre du client).
+        enchantCostRate: '*',
       },
     },
   },
@@ -486,7 +490,10 @@ const CONTRACT_SHAPE: Record<string, Shape> = {
       obj: { name: '*', tiers: { arr: { obj: { unlockLevel: '*', isAdd: '*', desc: '*' } } } },
     },
   },
-  'options.json': { rec: { obj: {}, opt: { st: '*', ap: '*', v: '*', buffId: '*' } } },
+  // `f` / `max` : ajout A89 (mains d'EE, règle (a), `schema` inchangé).
+  'options.json': {
+    rec: { obj: {}, opt: { st: '*', ap: '*', v: '*', f: '*', max: '*', buffId: '*' } },
+  },
   'progression.json': { obj: { evoUnlockLevel: { rec: '*' } } },
   'sets.json': {
     rec: {
@@ -803,6 +810,58 @@ describe('solver — libellés des mains d’EE (R12)', () => {
   });
 });
 
+describe('solver — taux d’enchantement et ligne Hit AP / Kill AP des EE (A89)', () => {
+  it('enchantCostRateOf : omis quand 0 ou vide, entier émis tel quel, refus hors entier ≥ 0', () => {
+    expect(enchantCostRateOf({ ID: '1' })).toEqual({});
+    expect(enchantCostRateOf({ ID: '1', ItemEnchantCostRate: '0' })).toEqual({});
+    expect(enchantCostRateOf({ ID: '1', ItemEnchantCostRate: '300' })).toEqual({
+      enchantCostRate: 300,
+    });
+    expect(enchantCostRateOf({ ID: '1', ItemEnchantCostRate: '1000' })).toEqual({
+      enchantCostRate: 1000,
+    });
+    expect(() => enchantCostRateOf({ ID: '1', ItemEnchantCostRate: 'x' })).toThrow(/A89/);
+    expect(() => enchantCostRateOf({ ID: '1', ItemEnchantCostRate: '-5' })).toThrow(/A89/);
+  });
+
+  it('equipment : enchantCostRate entier > 0, Festival 5★ et arme débutant présents', () => {
+    const rated = Object.entries(equipment).filter(([, e]) => e.enchantCostRate !== undefined);
+    for (const [id, e] of rated) {
+      expect(Number.isInteger(e.enchantCostRate), id).toBe(true);
+      expect(e.enchantCostRate, id).toBeGreaterThan(0);
+    }
+    // 27 modèles au patch 1.11.601 : 10 Festival 5★ (300), 16 « Settlement » 6★
+    // (300), l'arme débutant 650 (500).
+    expect(rated.length).toBeGreaterThanOrEqual(27);
+    expect(equipment['645']?.enchantCostRate).toBe(300);
+    expect(equipment['650']?.enchantCostRate).toBe(500);
+    expect(equipment['1']?.enchantCostRate).toBeUndefined();
+  });
+
+  it('options : une ligne IOT_BUFF à stat porte st / ap / f / max ET buffId (mains d’EE)', () => {
+    const withStat = Object.entries(options).filter(([, o]) => o.buffId && o.st);
+    expect(withStat.length).toBeGreaterThanOrEqual(130);
+    for (const [id, o] of withStat) {
+      expect(['ST_HIT_AP', 'ST_KILL_AP'], id).toContain(o.st);
+      expect(o.ap, id).toBe('OAT_ADD');
+      expect(Number.isInteger(o.f) && o.f! > 0, id).toBe(true);
+      expect(Number.isInteger(o.max) && o.max! >= o.f!, id).toBe(true);
+      expect(o.buffId?.startsWith('BID_CEQUIP_MAIN_'), id).toBe(true);
+      expect(o.v, id).toBeUndefined();
+    }
+    expect(options['20001']).toEqual({
+      st: 'ST_HIT_AP',
+      ap: 'OAT_ADD',
+      f: 1,
+      max: 10,
+      buffId: 'BID_CEQUIP_MAIN_DMG_REDUCE_FIRE',
+    });
+    expect(options['20002']).toMatchObject({ st: 'ST_KILL_AP', f: 2, max: 20 });
+    // Une ligne IOT_BUFF sans stat (ooparts) reste un simple renvoi.
+    expect(options['10001']).toEqual({ buffId: 'BID_ITEM_STAT_OOPARTS_ATK_4' });
+  });
+});
+
 describe('solver — stat-keys (L6) : ST_* / OAT_* vers la clé du contrat', () => {
   const statKeys = statKeysData as Record<
     string,
@@ -837,7 +896,7 @@ describe('solver — stat-keys (L6) : ST_* / OAT_* vers la clé du contrat', () 
     ]);
   });
 
-  it('les 24 lignes : clé, nature « % », abréviation du wiki', () => {
+  it('les 26 lignes : clé, nature « % », abréviation du wiki', () => {
     expect(lines).toEqual([
       ['ST_HP', 'OAT_ADD', 'hp', false, 'HP'],
       ['ST_HP', 'OAT_RATE', 'hpPct', true, 'HP%'],
@@ -858,7 +917,9 @@ describe('solver — stat-keys (L6) : ST_* / OAT_* vers la clé du contrat', () 
       ['ST_BUFF_CHANCE', 'OAT_RATE', 'effRate', true, 'EFF%'],
       ['ST_BUFF_RESIST', 'OAT_ADD', 'res', false, 'RES'],
       ['ST_BUFF_RESIST', 'OAT_RATE', 'resRate', true, 'RES%'],
+      ['ST_HIT_AP', 'OAT_ADD', 'hitAp', false, null],
       ['ST_ENTER_AP', 'OAT_ADD', 'enterAp', false, null],
+      ['ST_KILL_AP', 'OAT_ADD', 'killAp', false, null],
       ['ST_COUNTER_RATE', 'OAT_ADD', 'counter', true, null],
       ['ST_DMG_BOOST', 'OAT_ADD', 'dmgInc', true, 'DMG UP%'],
       ['ST_DMG_BOOST', 'OAT_RATE', 'dmgInc', true, 'DMG UP%'],

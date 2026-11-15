@@ -333,9 +333,17 @@ describe('applyStatBonus tenu contre stat-keys (L6)', () => {
     return Object.fromEntries(Object.entries(dest).filter(([, v]) => v !== 0));
   };
 
-  it('les clés hors bloc sont les cinq clés nouvelles du contrat', () => {
+  it('les clés hors bloc sont les sept clés nouvelles du contrat', () => {
     const outside = [...new Set(pairs.map((p) => p.key).filter((k) => !BLOCK_KEYS.has(k)))];
-    expect(outside.sort()).toEqual(['avoid', 'cdmgRed', 'counter', 'enterAp', 'lifesteal']);
+    expect(outside.sort()).toEqual([
+      'avoid',
+      'cdmgRed',
+      'counter',
+      'enterAp',
+      'hitAp',
+      'killAp',
+      'lifesteal',
+    ]);
   });
 
   it.each(pairs.filter((p) => BLOCK_KEYS.has(p.key)))(

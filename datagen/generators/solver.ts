@@ -38,6 +38,12 @@
  * du contrat (`atk`, `atkPct`, `chc`, `res`, `resRate`…), nature « % » et
  * abréviation du wiki (`datagen/lib/stat-keys.ts`) ; le build jette sur toute
  * paire émise qui n'y a pas sa ligne.
+ * Ajouts A89 (`schema` inchangé) : `equipment.json` › `enchantCostRate` (‰ du
+ * coût d'XP d'amélioration, omis quand 0, `enchantCostRateOf`) ; `options.json`
+ * › les lignes `IOT_BUFF` qui portent une stat (mains d'EE, `ST_HIT_AP` /
+ * `ST_KILL_AP`) gagnent `st`, `ap`, `f` (`OptionFactor`) et `max`
+ * (`OptionMaxValue`) à côté de `buffId` : la ligne Hit AP / Kill AP de l'EE
+ * dès +1 vaut min(niveau × `f`, `max`), hors fiche et hors CP.
  * `items.json` (ajout A83, `schema` inchangé) = tout objet d'`ItemTemplet` absent
  * d'`equipment.json` (matériaux, consommables, boîtes…) : nom EN, icône, type,
  * sous-type et grade bruts, vente (`solverItems`) — de quoi nommer un gain.
@@ -351,6 +357,26 @@ export function solverItems(
       },
     ]),
   );
+}
+
+/**
+ * `enchantCostRate` d'une entrée d'`equipment.json` (A89) = `ItemTemplet.ItemEnchantCostRate`,
+ * en ‰ du coût d'XP d'amélioration : `CItemEnchantTemplet.RequireExp` renvoie
+ * `trunc(coût × taux × 0,001)` (float32), le coût brut quand le taux vaut ≤ 0.
+ * Convention : OMIS quand 0 (colonne vide de la table, taux neutre du client) ;
+ * un 1000 explicite serait émis tel quel (aucun au patch d'A89 : 300 sur les
+ * Festival 5★ et les « Settlement » 6★, 500 sur l'arme débutant).
+ */
+export function enchantCostRateOf(it: Row): { enchantCostRate?: number } {
+  const raw = it.ItemEnchantCostRate;
+  const rate = Number(raw ?? 0);
+  if (!Number.isInteger(rate) || rate < 0) {
+    throw new Error(
+      `ItemTemplet ${it.ID} : ItemEnchantCostRate « ${raw} » n'est pas un entier ≥ 0 — ` +
+        `revoir equipment.json › enchantCostRate (A89)`,
+    );
+  }
+  return rate > 0 ? { enchantCostRate: rate } : {};
 }
 
 /** `dissolve` d'une entrée d'`equipment.json` (G73) : assets puis objets, min / max. */
@@ -679,12 +705,33 @@ export function buildSolver(inputs: {
   }
 
   // ---- options : IOT_STAT direct, IOT_BUFF → renvoi BuffTemplet ----
-  const options: Record<string, { st?: string; ap?: string; v?: number; buffId?: string }> = {};
+  // Ligne IOT_BUFF qui porte AUSSI une stat (A89) : les mains d'EE (groupes
+  // 200xx, 201xx, 270xx ; `ST_HIT_AP` / `ST_KILL_AP`). Dès +1, le client ajoute
+  // à l'EE `m_ExclusiveStatOption` = min(niveau × OptionFactor, OptionMaxValue)
+  // sur cette ligne (`CItem.cs`, lue par `CStatValue.cs`), hors fiche et hors
+  // CP : `st` / `ap` / `f` / `max` à côté de `buffId`, qui reste.
+  const options: Record<
+    string,
+    { st?: string; ap?: string; v?: number; f?: number; max?: number; buffId?: string }
+  > = {};
   for (const o of loadTable('ItemOptionTemplet')) {
     if (o.OptionType === 'IOT_STAT') {
       options[o.ID] = { st: o.StatType, ap: o.ApplyingType, v: Number(o.OptionValue) };
     } else if (o.OptionType === 'IOT_BUFF' && o.BuffID) {
-      options[o.ID] = { buffId: o.BuffID };
+      if (o.StatType && o.StatType !== 'ST_NONE') {
+        const f = Number(o.OptionFactor);
+        const max = Number(o.OptionMaxValue);
+        if (!o.ApplyingType || !Number.isInteger(f) || f <= 0 || !Number.isInteger(max)) {
+          throw new Error(
+            `ItemOptionTemplet ${o.ID} : IOT_BUFF ${o.StatType} sans ApplyingType, OptionFactor ` +
+              `(« ${o.OptionFactor} ») ou OptionMaxValue (« ${o.OptionMaxValue} ») entiers — ` +
+              `revoir options.json › f / max (A89)`,
+          );
+        }
+        options[o.ID] = { st: o.StatType, ap: o.ApplyingType, f, max, buffId: o.BuffID };
+      } else {
+        options[o.ID] = { buffId: o.BuffID };
+      }
     }
   }
   emit('options.json', options);
@@ -817,6 +864,7 @@ export function buildSolver(inputs: {
         : null,
       armorSetIcon: armorSetId ? (setsView[armorSetId]?.icon ?? null) : null,
       class: CLASS_NAME[it.ClassLimit ?? ''] ?? null,
+      ...enchantCostRateOf(it),
       ...equipmentScrap(it, rewards, unresolvedDissolve, warnDissolve),
     };
   }

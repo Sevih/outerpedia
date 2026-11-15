@@ -5,9 +5,10 @@
  *
  * Les clés existantes sont les champs que `applyStatBonus`
  * (`generators/solver-ingredients.ts`) remplit — `StatBlock`, plus `spdPct`
- * (vitesse en taux, `corePassiveByFusion`) ; les cinq autres (`cdmgRed`,
- * `lifesteal`, `counter`, `enterAp`, `avoid`) nomment des paires que les
- * fichiers du contrat portent sans qu'aucun bloc ne les reçoive. Un test
+ * (vitesse en taux, `corePassiveByFusion`) ; les sept autres (`cdmgRed`,
+ * `lifesteal`, `counter`, `enterAp`, `avoid`, et `hitAp` / `killAp` des mains
+ * d'EE d'`options.json`, A89) nomment des paires que les fichiers du contrat
+ * portent sans qu'aucun bloc ne les reçoive. Un test
  * croisé tient la table contre `applyStatBonus`.
  *
  * Une ligne par paire que les fichiers émis portent, dans l'ordre du
@@ -34,7 +35,9 @@ export const STAT_KEYS: Readonly<Record<string, Readonly<Record<string, string>>
   ST_AVOID: { OAT_ADD: 'avoid' },
   ST_BUFF_CHANCE: { OAT_ADD: 'eff', OAT_RATE: 'effRate' },
   ST_BUFF_RESIST: { OAT_ADD: 'res', OAT_RATE: 'resRate' },
+  ST_HIT_AP: { OAT_ADD: 'hitAp' },
   ST_ENTER_AP: { OAT_ADD: 'enterAp' },
+  ST_KILL_AP: { OAT_ADD: 'killAp' },
   ST_COUNTER_RATE: { OAT_ADD: 'counter' },
   ST_DMG_BOOST: { OAT_ADD: 'dmgInc', OAT_RATE: 'dmgInc' },
   ST_E_CRI_DMG_REDUCE: { OAT_ADD: 'cdmgRed' },
