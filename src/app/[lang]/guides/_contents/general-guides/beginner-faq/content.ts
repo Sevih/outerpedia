@@ -416,12 +416,12 @@ export const LABELS = {
     es: 'En Desafíos, el {L/Special Requests|/guides/special-request} te permitirá desbloquear un fuerte pack inicial de 6 héroes, junto con equipo y materiales de mejora para ellos.',
   },
   experienceSlow: {
-    en: 'Experience is slow at the start, progress through the Bandit Chase stages to get more food daily.',
-    jp: '序盤は経験値獲得が遅いです。バンディットチェイスのステージを進めて、毎日より多くの食糧を獲得しましょう。',
-    kr: '초반에는 경험치 획득이 느립니다. 밴디트 체이스 스테이지를 진행해서 매일 더 많은 식량을 획득하세요.',
-    zh: '初期经验获取较慢。推进悬赏追击关卡来每天获得更多食物。',
-    fr: "L'expérience est lente au début ; progressez dans les stages Bandit Chase pour obtenir plus de food quotidiennement.",
-    es: 'La experiencia es lenta al principio, avanza por las etapas de Bandit Chase para obtener más comida diariamente.',
+    en: 'Experience is slow at the start, progress through the Hypnotic Frog Hall stages to get more food daily.',
+    jp: '序盤は経験値獲得が遅いです。催眠カエルの殿堂のステージを進めて、毎日より多くの食糧を獲得しましょう。',
+    kr: '초반에는 경험치 획득이 느립니다. 최면 개구리의 전당 스테이지를 진행해서 매일 더 많은 식량을 획득하세요.',
+    zh: '初期经验获取较慢。推进催眠青蛙殿堂关卡来每天获得更多食物。',
+    fr: "L'expérience est lente au début ; progressez dans les stages Hypnotic Frog Hall pour obtenir plus de food quotidiennement.",
+    es: 'La experiencia es lenta al principio, avanza por las etapas de la Sala de la Rana Hipnótica para obtener más comida diariamente.',
   },
   skywardTowerLine: {
     en: '{L/Skyward Tower|/guides/skyward-tower} resets monthly, try to get as high as you can.',

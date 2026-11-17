@@ -101,6 +101,7 @@ const BUFF_TYPE_MATCHERS: { type: string; test: RegExp }[] = [
   { type: 'story-survey', test: /survey/i },
   { type: 'evolution-stone', test: /evolution stone/i },
   { type: 'bounty-hunter', test: /bounty/i },
+  // Ancien nom du Hypnotic Frog Hall, événements jusqu'en avril 2026 ; les nouveaux passent par frog-gold / frog-food.
   { type: 'bandit-chase', test: /bandit/i },
 ];
 
