@@ -20,6 +20,8 @@ les preuves et les décisions vivent dans le tri consolidé de sevih-tool
       `BT_STACK_STAT` dans le calculateur (plus tard). Les deux latents (c)
       sont FAITS (A80, 25/10).
 
+- [ ] Guides : `heroes-growth/labels.ts` nomme le Hypnotic Frog Hall autrement en jp/kr/zh/es (« 催眠カエルホール », « 최면 개구리 홀 », « 催眠青蛙大厅 », es en anglais) ; aligner sur les noms officiels du `lockScreenName` comme `daily-stamina` et la FAQ (relecture A90, 17/11).
+
 ## 🧰 Outil quick
 
 - [ ] **Tier list maker — canon de partage append-only** : `buildCanon`
