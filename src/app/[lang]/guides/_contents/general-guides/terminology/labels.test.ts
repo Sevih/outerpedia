@@ -17,6 +17,18 @@ import { LABELS } from './labels';
 
 const entries = Object.entries(LABELS) as [string, Record<string, string>][];
 
+/** Jetons `{…}` qu'`index.tsx` remplace (filtre des héros, chiffres du recrutement). */
+const TOKENS = [
+  'filter',
+  'advanced',
+  'pity',
+  'rate3',
+  'rateFeatured',
+  'price',
+  'pricePremium',
+  'callCost',
+];
+
 /** Pages hors guides et hors outils que le guide cible. */
 const STATIC_PAGES = new Set(['/characters', '/equipment', '/tierlist']);
 
@@ -84,6 +96,24 @@ describe('terminology — labels.ts', () => {
       const known = STATIC_PAGES.has(href) || (tool !== null && tool.status === 'available');
       expect(known, `cible inconnue : ${href}`).toBe(true);
     }
+  });
+
+  it('les jetons injectés sont connus et identiques d’une langue à l’autre', () => {
+    const tokensOf = (text: string): string[] =>
+      [...text.matchAll(/\{([a-zA-Z0-9]+)\}/g)].map(([, name]) => name).sort();
+    const used = new Set<string>();
+    for (const [key, text] of entries) {
+      const ref = tokensOf(text.en);
+      for (const name of ref) {
+        used.add(name);
+        expect(TOKENS, `${key} : jeton inconnu {${name}}`).toContain(name);
+      }
+      for (const lang of LANGS) {
+        expect(tokensOf(text[lang]), `${key}.${lang}`).toEqual(ref);
+      }
+    }
+    // Un jeton que plus aucun texte n'emploie est à retirer d'`index.tsx`.
+    expect([...used].sort()).toEqual([...TOKENS].sort());
   });
 
   it('le filtre de la liste des héros est injecté dans chaque langue', () => {
