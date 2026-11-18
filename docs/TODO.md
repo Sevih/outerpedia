@@ -22,6 +22,8 @@ les preuves et les décisions vivent dans le tri consolidé de sevih-tool
 
 - [ ] Guides : `heroes-growth/labels.ts` nomme le Hypnotic Frog Hall autrement en jp/kr/zh/es (« 催眠カエルホール », « 최면 개구리 홀 », « 催眠青蛙大厅 », es en anglais) ; aligner sur les noms officiels du `lockScreenName` comme `daily-stamina` et la FAQ (relecture A90, 17/11).
 
+- [ ] Liste des héros : le filtre « Damage scaling » (B70) lit les textes EN des skills alors que `data/generated/damage-scaling.json` porte déjà `attackStat` (mécanique `BT_SWAP_STAT_ATTACK`, `lib/kit-scaling.ts`), concordance exacte le 18/11 ; brancher le filtre sur `attackStat` ou ajouter un test de concordance texte / structuré pour qu'un nouveau kit rédigé autrement ne passe pas entre les deux (relecture B70).
+
 ## 🧰 Outil quick
 
 - [ ] **Tier list maker — canon de partage append-only** : `buildCanon`
