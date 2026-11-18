@@ -26,6 +26,8 @@ les preuves et les décisions vivent dans le tri consolidé de sevih-tool
 
 - [ ] Guides, vus à la relecture F31 (18/11) : le guide Stats (`sf_set2`) donne 12 % au Speed Set 2 pièces alors que `sets.json` porte 13 % + 12 % au palier amélioré ; la Beginner FAQ (`skywardTowerLine`) écrit « 昇天の塔 / 승천의 탑 / 升天之塔 » au lieu des noms du jeu « 飛天の塔 / 비천의 탑 / 飞天之塔 » ; `src/components/home/BeginnerGuides.tsx` ne liste pas le nouveau guide Terminology.
 
+- [ ] Guides, vus à la relecture F32 (18/11) : `terminology/labels.ts` `rolesIntro` et l'entrée Support laissent « DPS, Support, Sustain » en anglais en jp/kr/zh/es alors que `filters.roles.*` les traduit (basculer les deux ensemble) ; Heroes Growth (`skillUpgradeDesc1`) dit « Skill Books » au lieu de « Skill Manual » ; le Start Dash a deux noms jp/kr/zh entre la Beginner FAQ et Banners & Mileage ; les guides disent « 募集 / 모집 » pour le Recruit quand le jeu dit « スカウト / 영입 » ; Daily Stamina titre « スタミナ / 스태미나 / 体力 » quand l'objet s'appelle « 活力 / 행동력 / 行动力 ».
+
 ## 🧰 Outil quick
 
 - [ ] **Tier list maker — canon de partage append-only** : `buildCanon`
