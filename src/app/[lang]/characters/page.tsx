@@ -107,6 +107,7 @@ function buildRows(lang: Lang): CharacterRow[] {
       element: c.element,
       class: c.class,
       subClass: c.subClass ?? null,
+      scaling: c.damageScaling ?? 'atk',
       rarity: c.rarity,
       chainType: c.chainType,
       gift: c.gift,
@@ -181,6 +182,18 @@ function buildLabels(rows: CharacterRow[], lang: Lang, t: TFunction): Characters
     subClassMap[a].localeCompare(subClassMap[b], LANGUAGES[lang].htmlLang),
   );
   const subClassIcons = Object.fromEntries(subClassOrder.map((v) => [v, img.subClass(v)]));
+  // Stat de base des dégâts : ATK / HP / DEF (abréviations du jeu), icône de
+  // stat, seulement les valeurs présentes (pas de pilule morte).
+  const presentScaling = new Set(rows.map((r) => r.scaling));
+  const scaling = (
+    [
+      { value: 'atk', label: t('filters.scaling.atk'), stat: 'ATK' },
+      { value: 'hp', label: t('filters.scaling.hp'), stat: 'HP' },
+      { value: 'def', label: t('filters.scaling.def'), stat: 'DEF' },
+    ] as const
+  )
+    .filter((o) => presentScaling.has(o.value))
+    .map((o) => ({ value: o.value, label: o.label, icon: img.statIcon(STAT_ICON[o.stat]) }));
   const tagIcons = Object.fromEntries([...presentTags].map((tg) => [tg, img.tag(tg)]));
 
   /**
@@ -252,6 +265,7 @@ function buildLabels(rows: CharacterRow[], lang: Lang, t: TFunction): Characters
       chains: t('characters.filters.chains'),
       roles: t('characters.filters.roles'),
       subClasses: t('filters.subclasses'),
+      scaling: t('filters.scaling'),
       gifts: t('characters.filters.gifts'),
       teamBonus: t('characters.filters.teamBonus'),
       tags: t('characters.filters.tab.tags'),
@@ -302,6 +316,7 @@ function buildLabels(rows: CharacterRow[], lang: Lang, t: TFunction): Characters
     },
     subClassOrder,
     subClassIcons,
+    scaling,
     tagIcons,
     tagOrder,
     tagGroups: groupTags.length ? { [LIMITED_GROUP]: groupTags } : {},

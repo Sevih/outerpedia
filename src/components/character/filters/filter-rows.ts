@@ -25,6 +25,7 @@ export function filterCharacterRows(
   const chS = new Set(s.chain);
   const gS = new Set(s.gift);
   const roS = new Set(s.role);
+  const dsS = new Set(s.scaling);
   const { tags, tagLogic, buffs, debuffs, effectLogic, sources, teamBonuses } = s;
 
   /** Le row porte-t-il ce tag — ou, pour une famille, l'un de ses tags ? */
@@ -48,6 +49,8 @@ export function filterCharacterRows(
     if (clS.size && !clS.has(row.class)) return false;
     // Un perso sans sous-classe n'est jamais retenu quand le filtre est actif.
     if (scS.size && (!row.subClass || !scS.has(row.subClass))) return false;
+    // Stat de base des dégâts : OU entre les stats cochées (`atk` = cas général).
+    if (dsS.size && !dsS.has(row.scaling)) return false;
     if (rS.size && !rS.has(row.rarity)) return false;
     if (chS.size && (!row.chainType || !chS.has(row.chainType))) return false;
     if (gS.size && (!row.gift || !gS.has(row.gift))) return false;

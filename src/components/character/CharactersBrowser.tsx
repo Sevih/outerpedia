@@ -36,6 +36,8 @@ export interface CharacterRow {
   class: string;
   /** Code de sous-classe du jeu (`bruiser`) — `null` si le perso n'en a pas. */
   subClass: string | null;
+  /** Stat de base des dégâts (`atk` sauf texte de skill « … instead of Attack »). */
+  scaling: 'atk' | 'hp' | 'def';
   rarity: number;
   chainType?: string;
   gift?: string;
@@ -79,6 +81,8 @@ export interface CharactersBrowserLabels {
   subClassOrder: string[];
   /** Icônes des sous-classes (code → URL). */
   subClassIcons: Record<string, string>;
+  /** Pilules « Damage scaling » présentes (ATK/HP/DEF, icône de stat), dans l'ordre. */
+  scaling: FilterOption[];
   /** Icônes des tags (slug → URL). */
   tagIcons: Record<string, string>;
   /**
@@ -125,6 +129,7 @@ export function CharactersBrowser({
   const [element, setElement] = useState<string[]>([]);
   const [klass, setKlass] = useState<string[]>([]);
   const [subClass, setSubClass] = useState<string[]>([]);
+  const [scaling, setScaling] = useState<string[]>([]);
   const [rarity, setRarity] = useState<number[]>([]);
   const [chain, setChain] = useState<string[]>([]);
   const [gift, setGift] = useState<string[]>([]);
@@ -187,6 +192,7 @@ export function CharactersBrowser({
     setKlass(decoded ? decoded.klass : list('cl'));
     // Pas d'équivalent en clair : la sous-classe est postérieure aux params `?el=…`.
     setSubClass(decoded ? decoded.subClass : []);
+    setScaling(decoded ? decoded.scaling : []);
     setRarity(
       decoded
         ? decoded.rarity
@@ -222,6 +228,7 @@ export function CharactersBrowser({
       element,
       klass,
       subClass,
+      scaling,
       rarity,
       chain,
       gift,
@@ -252,6 +259,7 @@ export function CharactersBrowser({
     element,
     klass,
     subClass,
+    scaling,
     rarity,
     chain,
     gift,
@@ -276,6 +284,7 @@ export function CharactersBrowser({
       element,
       klass,
       subClass,
+      scaling,
       rarity,
       chain,
       gift,
@@ -296,6 +305,7 @@ export function CharactersBrowser({
     element,
     klass,
     subClass,
+    scaling,
     rarity,
     chain,
     gift,
@@ -336,6 +346,7 @@ export function CharactersBrowser({
     setElement([]);
     setKlass([]);
     setSubClass([]);
+    setScaling([]);
     setRarity([]);
     setChain([]);
     setGift([]);
@@ -380,6 +391,14 @@ export function CharactersBrowser({
         label: labels.options.subClass[sc] ?? sc,
         color: TONE.cyan,
         onRemove: () => setSubClass((p) => p.filter((v) => v !== sc)),
+      });
+    const dsL = new Map(labels.scaling.map((o) => [o.value, o.label] as const));
+    for (const ds of scaling)
+      out.push({
+        key: `ds-${ds}`,
+        label: dsL.get(ds) ?? ds,
+        color: TONE.cyan,
+        onRemove: () => setScaling((p) => p.filter((v) => v !== ds)),
       });
     for (const r of rarity)
       out.push({
@@ -458,6 +477,7 @@ export function CharactersBrowser({
     element,
     klass,
     subClass,
+    scaling,
     rarity,
     chain,
     role,
@@ -472,6 +492,7 @@ export function CharactersBrowser({
 
   const advancedCount =
     subClass.length +
+    scaling.length +
     chain.length +
     role.length +
     gift.length +
@@ -487,6 +508,9 @@ export function CharactersBrowser({
     subClasses: toOptions(labels.subClassOrder, labels.options.subClass, labels.subClassIcons),
     subClassFilter: subClass,
     onToggleSubClass: toggle(setSubClass),
+    scalingOptions: labels.scaling,
+    scalingFilter: scaling,
+    onToggleScaling: toggle(setScaling),
     chains: toOptions(chains, labels.options.chain),
     chainFilter: chain,
     onToggleChain: toggle(setChain),

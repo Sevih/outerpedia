@@ -25,6 +25,7 @@ const EMPTY: FilterState = {
   sources: [],
   showUnique: false,
   teamBonuses: [],
+  scaling: [],
 };
 
 describe('encodeFilters', () => {
@@ -50,6 +51,7 @@ describe('encodeFilters', () => {
       sources: ['s1', 'chainPassive'],
       showUnique: true,
       teamBonuses: ['SPD', 'ATK'],
+      scaling: ['hp', 'def'],
     };
     const z = encodeFilters(state)!;
     // L'alphabet lz-string URI-safe contient `+` : URLSearchParams le rend en
@@ -94,6 +96,19 @@ describe('encodeFilters', () => {
     );
   });
 
+  it('damage scaling : clé `ds` en clair, aller-retour, absente si vide', () => {
+    const z = encodeFilters({ ...EMPTY, scaling: ['hp', 'def'] })!;
+    expect(JSON.parse(LZString.decompressFromEncodedURIComponent(z))).toEqual({
+      ds: ['hp', 'def'],
+    });
+    expect(decodeFilters(z)!.scaling).toEqual(['hp', 'def']);
+    expect(decodeFilters(encodeFilters({ ...EMPTY, scaling: ['atk'] })!)!.scaling).toEqual(['atk']);
+    // Sans filtre, pas de clé : les liens existants restent identiques.
+    expect(encodeFilters({ ...EMPTY, klass: ['striker'] })).toBe(
+      LZString.compressToEncodedURIComponent('{"c":1}'),
+    );
+  });
+
   it('ÉPINGLAGE du format de fil (compat liens — ne doit JAMAIS changer)', () => {
     const state: FilterState = {
       ...EMPTY,
@@ -132,6 +147,8 @@ describe('decodeFilters — format hérité brut', () => {
     expect(decoded.showUnique).toBe(true);
     expect(decoded.q).toBe('ml');
     expect(decoded.subClass).toEqual([]);
+    // Lien hérité (ou antérieur à B70) sans `ds` : aucun filtre de scaling.
+    expect(decoded.scaling).toEqual([]);
   });
 
   it('indices d’effets/tags hérités → clés canoniques, variantes repliées + dédup', () => {

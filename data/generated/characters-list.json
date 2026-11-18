@@ -215,7 +215,8 @@
         "debuff": ["WEAKNESS_GAUGE_DAMAGE"]
       }
     },
-    "teamBonuses": ["DEF"]
+    "teamBonuses": ["DEF"],
+    "damageScaling": "hp"
   },
   "2000009": {
     "buff": ["BT_AP_CHARGE", "BT_BARRIER", "BT_COOL_CHARGE"],
@@ -1925,7 +1926,8 @@
         "debuff": ["EXTINCTION"]
       }
     },
-    "teamBonuses": []
+    "teamBonuses": [],
+    "damageScaling": "hp"
   },
   "2000064": {
     "buff": ["BT_STAT|ST_ATK", "UNCOUNTERABLE"],
@@ -2217,7 +2219,8 @@
         "debuff": ["WEAKNESS_GAUGE_DAMAGE"]
       }
     },
-    "teamBonuses": ["DEF"]
+    "teamBonuses": ["DEF"],
+    "damageScaling": "def"
   },
   "2000072": {
     "buff": [
@@ -2411,7 +2414,8 @@
         "debuff": []
       }
     },
-    "teamBonuses": ["DMG RED%"]
+    "teamBonuses": ["DMG RED%"],
+    "damageScaling": "def"
   },
   "2000078": {
     "buff": [
@@ -2511,7 +2515,8 @@
         "debuff": ["BT_STAT|ST_DEF"]
       }
     },
-    "teamBonuses": ["EFF"]
+    "teamBonuses": ["EFF"],
+    "damageScaling": "hp"
   },
   "2000081": {
     "buff": [
@@ -2797,7 +2802,8 @@
         "debuff": []
       }
     },
-    "teamBonuses": ["DMG RED%"]
+    "teamBonuses": ["DMG RED%"],
+    "damageScaling": "hp"
   },
   "2000089": {
     "buff": ["BT_ACTION_GAUGE", "BT_COOL_CHARGE", "EXTRA_SKILL", "UNCOUNTERABLE"],
@@ -2820,7 +2826,8 @@
         "debuff": ["BT_STAT|ST_CRITICAL_DMG_RATE"]
       }
     },
-    "teamBonuses": ["DEF"]
+    "teamBonuses": ["DEF"],
+    "damageScaling": "def"
   },
   "2000090": {
     "buff": [
@@ -2906,7 +2913,8 @@
         "debuff": []
       }
     },
-    "teamBonuses": ["EFF"]
+    "teamBonuses": ["EFF"],
+    "damageScaling": "hp"
   },
   "2000092": {
     "buff": ["BT_COOL_CHARGE", "BT_STEALTHED", "RETRIBUTIONS_DOMINION", "UNCOUNTERABLE"],
@@ -3169,7 +3177,8 @@
         "debuff": ["WEAKNESS_GAUGE_DAMAGE"]
       }
     },
-    "teamBonuses": ["DEF"]
+    "teamBonuses": ["DEF"],
+    "damageScaling": "hp"
   },
   "2000100": {
     "buff": [
@@ -3284,7 +3293,8 @@
         "debuff": ["BT_STAT|ST_SPEED"]
       }
     },
-    "teamBonuses": ["RES"]
+    "teamBonuses": ["RES"],
+    "damageScaling": "hp"
   },
   "2000103": {
     "buff": [
@@ -3381,7 +3391,8 @@
         "debuff": ["BT_REMOVE_BUFF"]
       }
     },
-    "teamBonuses": ["DMG RED%"]
+    "teamBonuses": ["DMG RED%"],
+    "damageScaling": "hp"
   },
   "2000107": {
     "buff": [
@@ -3492,7 +3503,8 @@
         "debuff": ["CORROSIVE_POISON"]
       }
     },
-    "teamBonuses": ["DEF"]
+    "teamBonuses": ["DEF"],
+    "damageScaling": "hp"
   },
   "2000110": {
     "buff": [
@@ -3625,7 +3637,8 @@
         "debuff": []
       }
     },
-    "teamBonuses": []
+    "teamBonuses": [],
+    "damageScaling": "def"
   },
   "2000113": {
     "buff": [
@@ -3695,7 +3708,8 @@
         "debuff": []
       }
     },
-    "teamBonuses": ["DEF"]
+    "teamBonuses": ["DEF"],
+    "damageScaling": "hp"
   },
   "2000116": {
     "buff": [
@@ -3729,7 +3743,8 @@
         "debuff": []
       }
     },
-    "teamBonuses": []
+    "teamBonuses": [],
+    "damageScaling": "def"
   },
   "2000117": {
     "buff": [
@@ -3920,7 +3935,8 @@
         "debuff": []
       }
     },
-    "teamBonuses": ["DMG RED%"]
+    "teamBonuses": ["DMG RED%"],
+    "damageScaling": "def"
   },
   "2000124": {
     "buff": [
@@ -4192,7 +4208,8 @@
         "debuff": []
       }
     },
-    "teamBonuses": ["DMG RED%"]
+    "teamBonuses": ["DMG RED%"],
+    "damageScaling": "hp"
   },
   "2700043": {
     "buff": [
@@ -4316,6 +4333,7 @@
         "debuff": []
       }
     },
-    "teamBonuses": ["DEF"]
+    "teamBonuses": ["DEF"],
+    "damageScaling": "def"
   }
 }

@@ -10,7 +10,9 @@
  *   - `effectsBySource` : les mêmes, ventilés par SOURCE de skill (s1/s2/…) et par
  *     l'équipement exclusif (`exclusiveEquip`) ;
  *   - `teamBonuses` : stats données à TOUTE L'ÉQUIPE en permanence via le passif
- *     de TRANSCENDANCE (clés STAT_ICON : SPD/ATK/…).
+ *     de TRANSCENDANCE (clés STAT_ICON : SPD/ATK/…) ;
+ *   - `damageScaling` : la stat de BASE des dégâts quand ce n'est pas l'ATK
+ *     (`hp`/`def`), lue dans les TEXTES EN du kit (cf. `damageScalingFromTexts`).
  *
  * RÉSOLUTION DE CLÉ (le point délicat) : le `type` brut d'un effet de skill a
  * des variantes (`BT_STAT_PREMIUM`…) qui NE SONT PAS des clés de taxonomie. On
@@ -50,6 +52,39 @@ export interface CharacterEffects {
   effectsBySource: Record<string, { buff: string[]; debuff: string[] }>;
   /** Stats offertes à l'équipe par le passif de transcendance (clés STAT_ICON). */
   teamBonuses: string[];
+  /** Stat de base des dégâts quand ce n'est pas l'ATK (absent = ATK, le cas général). */
+  damageScaling?: DamageScalingStat;
+}
+
+/** Stat qui REMPLACE l'ATK comme base des dégâts (filtre « Damage scaling »). */
+export type DamageScalingStat = 'hp' | 'def';
+
+/**
+ * « … proportional to Max Health instead of Attack » et ses variantes de
+ * rédaction vues dans les kits (« in proportion to Defense instead of Attack »,
+ * « scales with Max Health instead of Attack »), balises `<color>` retirées
+ * avant. Le « instead of Attack » est le marqueur : les formules de BONUS
+ * (« proportional to the caster's Defense », « missing Health », « number of
+ * targets ») s'ajoutent à des dégâts d'ATK et ne le portent pas.
+ */
+const SCALING_RE =
+  /\b(?:proportional to|in proportion to|scales with)\s+(max health|defense)\s+instead of\s+attack\b/gi;
+const SCALING_STAT: Record<string, DamageScalingStat> = { 'max health': 'hp', defense: 'def' };
+
+/**
+ * Stat de base des dégâts d'un kit d'après ses textes EN (desc des skills et de
+ * leurs niveaux). Le jeu n'a pas de champ de skill qui la porte
+ * (`CharacterSkillLevelTemplet` ne donne que `DamageFactor`). `undefined` = ATK.
+ * Un kit qui annoncerait HP ET DEF est une anomalie à trancher : on jette.
+ */
+export function damageScalingFromTexts(texts: string[]): DamageScalingStat | undefined {
+  const found = new Set<DamageScalingStat>();
+  for (const raw of texts) {
+    const flat = raw.replace(/<[^>]*>/g, '').replace(/\\n|\r?\n/g, ' ');
+    for (const m of flat.matchAll(SCALING_RE)) found.add(SCALING_STAT[m[1].toLowerCase()]);
+  }
+  if (found.size > 1) throw new Error(`damageScaling ambigu (${[...found].join(' + ')})`);
+  return [...found][0];
 }
 
 /**
@@ -202,6 +237,8 @@ export function buildCharactersList(deps: CharactersListDeps): CharactersListDat
     const union: Record<Side, Set<string>> = { buff: new Set(), debuff: new Set() };
     const bySource: Record<string, Record<Side, Set<string>>> = {};
     const team = new Set<string>();
+    // Textes EN du kit (desc du skill + desc par niveau) — source du `damageScaling`.
+    const texts: string[] = [];
 
     // Résout un effet en (côté, clé canonique) et l'ajoute à l'union + à sa
     // source. On s'en tient aux STATUTS NOMMÉS (tooltip/label → id = les chips
@@ -245,6 +282,8 @@ export function buildCharactersList(deps: CharactersListDeps): CharactersListDat
     for (const skillId of char.skills) {
       const sk = skills[skillId];
       if (!sk) continue;
+      if (sk.desc?.en) texts.push(sk.desc.en);
+      for (const lv of sk.levels ?? []) if (lv.desc?.en) texts.push(lv.desc.en);
       // Bonus d'équipe : le passif de TRANSCENDANCE (unique_passive) décrit son
       // gain d'équipe sur le desc PAR NIVEAU (SE_DESC_SKILL08_*).
       if (sk.type === 'unique_passive')
@@ -282,11 +321,19 @@ export function buildCharactersList(deps: CharactersListDeps): CharactersListDat
       if (buff.length || debuff.length) effectsBySource[source] = { buff, debuff };
     }
 
+    let damageScaling: DamageScalingStat | undefined;
+    try {
+      damageScaling = damageScalingFromTexts(texts);
+    } catch (err) {
+      throw new Error(`${char.id} : ${(err as Error).message}`);
+    }
+
     out[char.id] = {
       buff: [...union.buff].sort(),
       debuff: [...union.debuff].sort(),
       effectsBySource,
       teamBonuses: [...team].sort((a, b) => TB_ORDER.indexOf(a) - TB_ORDER.indexOf(b)),
+      ...(damageScaling ? { damageScaling } : {}),
     };
   }
 
@@ -321,10 +368,13 @@ if (isMain(import.meta.url)) {
     const withDebuff = Object.values(data).filter((c) => c.debuff.length).length;
     const withSrc = Object.values(data).filter((c) => Object.keys(c.effectsBySource).length).length;
     const withTeam = Object.values(data).filter((c) => c.teamBonuses.length).length;
+    const hp = Object.values(data).filter((c) => c.damageScaling === 'hp').length;
+    const def = Object.values(data).filter((c) => c.damageScaling === 'def').length;
     console.log(`characters-list: ${n} persos`);
     console.log(
       `  avec buff: ${withBuff} · debuff: ${withDebuff} · sources: ${withSrc} · teamBonuses: ${withTeam}`,
     );
+    console.log(`  damageScaling: hp ${hp} · def ${def}`);
   };
   run();
 }

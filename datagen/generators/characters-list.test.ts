@@ -6,6 +6,7 @@
  *      construites à la main (résolution effet→id→clé, repli sur le `group`,
  *      ventilation par source, EE, ZÉRO faux positif sur un effet mécanique sans
  *      tooltip), plus `teamStatsFromDesc` (regex ally-stat, vocabulaire fermé),
+ *      `damageScalingFromTexts` (stat de base des dégâts HP/DEF, B70),
  *      `invertKeys` (préférence base sur variante) et `effectId`. Aucune table.
  *
  *   2. INVARIANTS RÉFÉRENTIELS sur `data/generated/characters-list.json` : clés
@@ -23,6 +24,7 @@ import charactersData from '../../data/generated/characters.json';
 import { resolveEffectKey } from '../../src/lib/data/effects';
 import {
   buildCharactersList,
+  damageScalingFromTexts,
   effectId,
   invertKeys,
   teamStatsFromDesc,
@@ -51,6 +53,51 @@ describe('teamStatsFromDesc — stats d’équipe dans un texte de transcendance
 
   it('sans marqueur ally → rien (une montée de SPD en self ne compte pas)', () => {
     expect(stats('Increases own Speed by 10%')).toEqual([]);
+  });
+});
+
+describe('damageScalingFromTexts — stat de base des dégâts (HP/DEF au lieu de l’ATK)', () => {
+  it('HP et DEF, toutes rédactions vues dans les kits', () => {
+    expect(
+      damageScalingFromTexts(['Damage dealt is proportional to Max Health instead of Attack.']),
+    ).toBe('hp');
+    expect(
+      damageScalingFromTexts([
+        'Damage dealt increases in proportion to Defense instead of Attack.',
+      ]),
+    ).toBe('def');
+    expect(
+      damageScalingFromTexts(["This skill's damage scales with Max Health instead of Attack."]),
+    ).toBe('hp');
+  });
+
+  it('tolère les balises <color> autour des stats, insensible à la casse', () => {
+    expect(
+      damageScalingFromTexts([
+        'This skill deals damage proportional to <color=#28d9ed>Defense</color> instead of <color=#28d9ed>Attack</color>.',
+      ]),
+    ).toBe('def');
+    expect(damageScalingFromTexts(['PROPORTIONAL TO max health INSTEAD OF attack'])).toBe('hp');
+  });
+
+  it('les formules de BONUS ne comptent pas : ATK (undefined)', () => {
+    expect(
+      damageScalingFromTexts([
+        "Damage dealt increases proportional to the caster's Defense.",
+        "Deals additional damage proportional to the caster's Max Health.",
+        'Damage increases proportional to missing Health and the number of targets.',
+      ]),
+    ).toBeUndefined();
+    expect(damageScalingFromTexts([])).toBeUndefined();
+  });
+
+  it('HP ET DEF dans un même kit : anomalie, jette', () => {
+    expect(() =>
+      damageScalingFromTexts([
+        'proportional to Max Health instead of Attack',
+        'proportional to Defense instead of Attack',
+      ]),
+    ).toThrow(/ambigu/);
   });
 });
 
@@ -147,6 +194,28 @@ describe('buildCharactersList — agrégation end-to-end (synthétique)', () => 
     });
   });
 
+  it('damageScaling lu dans la desc du skill ou celle d’un niveau, absent = ATK', () => {
+    const withText = (s1: object) =>
+      buildCharactersList({
+        ...deps,
+        skills: { ...deps.skills, S1: { ...deps.skills.S1, ...s1 } },
+      } as unknown as CharactersListDeps).C1.damageScaling;
+    expect(
+      withText({ desc: { ...emptyDict(), en: 'Proportional to Defense instead of Attack.' } }),
+    ).toBe('def');
+    expect(
+      withText({
+        levels: [
+          {
+            level: 1,
+            desc: { ...emptyDict(), en: 'Proportional to Max Health instead of Attack.' },
+          },
+        ],
+      }),
+    ).toBe('hp');
+    expect(withText({})).toBeUndefined();
+  });
+
   it('replie une clé variante sur son `group` canonique', () => {
     const d = {
       characters: { C1: { id: 'C1', skills: ['S'] } },
@@ -234,6 +303,16 @@ describe('characters-list.json — invariants', () => {
       }
     }
     expect(bad).toEqual([]);
+  });
+
+  it('damageScaling ∈ {hp, def} quand présent (absent = ATK)', () => {
+    const bad = entries
+      .filter(([, c]) => c.damageScaling !== undefined && !['hp', 'def'].includes(c.damageScaling))
+      .map(([id, c]) => `${id} : ${c.damageScaling}`);
+    expect(bad).toEqual([]);
+    // Représentativité : la jointure texte → stat vit (15+ persos au 18/11/2026).
+    expect(entries.some(([, c]) => c.damageScaling === 'hp')).toBe(true);
+    expect(entries.some(([, c]) => c.damageScaling === 'def')).toBe(true);
   });
 
   it('teamBonuses dans le vocabulaire STAT_ICON', () => {

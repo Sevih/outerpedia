@@ -112,6 +112,8 @@ export interface CharacterListItem {
   effectsBySource?: CharacterEffects['effectsBySource'];
   /** Stats offertes à l'équipe (passif de transcendance) — clés STAT_ICON. */
   teamBonuses?: CharacterEffects['teamBonuses'];
+  /** Stat de base des dégâts quand ce n'est pas l'ATK (`hp`/`def`) — absent = ATK. */
+  damageScaling?: CharacterEffects['damageScaling'];
 }
 
 export function getAllCharacters(): Character[] {

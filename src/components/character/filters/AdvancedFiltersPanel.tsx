@@ -21,6 +21,7 @@ export interface AdvancedPanelLabels {
   chains: string;
   roles: string;
   subClasses: string;
+  scaling: string;
   gifts: string;
   teamBonus: string;
   tags: string;
@@ -49,6 +50,10 @@ export interface AdvancedFiltersPanelProps {
   subClasses: FilterOption[];
   subClassFilter: string[];
   onToggleSubClass: (v: string) => void;
+  /** Stat de base des dégâts (B70) : ATK / HP / DEF, icônes de stat. */
+  scalingOptions: FilterOption[];
+  scalingFilter: string[];
+  onToggleScaling: (v: string) => void;
   gifts: FilterOption[];
   giftFilter: string[];
   onToggleGift: (v: string) => void;
@@ -101,6 +106,9 @@ export function AdvancedFiltersPanel(props: AdvancedFiltersPanelProps) {
     subClasses,
     subClassFilter,
     onToggleSubClass,
+    scalingOptions,
+    scalingFilter,
+    onToggleScaling,
     gifts,
     giftFilter,
     onToggleGift,
@@ -131,7 +139,12 @@ export function AdvancedFiltersPanel(props: AdvancedFiltersPanelProps) {
   const hasBonus = teamBonusOptions.length > 0;
 
   const counts: Record<TabKey, number> = {
-    combat: chainFilter.length + roleFilter.length + subClassFilter.length + giftFilter.length,
+    combat:
+      chainFilter.length +
+      roleFilter.length +
+      subClassFilter.length +
+      scalingFilter.length +
+      giftFilter.length,
     effects:
       selectedBuffs.length + selectedDebuffs.length + sourceFilter.length + (showUnique ? 1 : 0),
     bonus: teamBonusFilter.length,
@@ -204,6 +217,13 @@ export function AdvancedFiltersPanel(props: AdvancedFiltersPanelProps) {
               options={subClasses}
               selected={subClassFilter}
               onToggle={onToggleSubClass}
+              withIcon
+            />
+            <PillSection
+              label={labels.scaling}
+              options={scalingOptions}
+              selected={scalingFilter}
+              onToggle={onToggleScaling}
               withIcon
             />
             <PillSection

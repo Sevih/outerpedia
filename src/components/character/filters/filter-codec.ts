@@ -40,6 +40,8 @@ export interface FilterState {
   sources: string[];
   showUnique: boolean;
   teamBonuses: string[];
+  /** Stat de base des dégâts (`atk`/`hp`/`def`, B70). */
+  scaling: string[];
 }
 
 /** Payload compact sérialisé (clés héritées + extensions bx/dx/tx). */
@@ -69,6 +71,11 @@ interface ZPayload {
    * table de bits à geler ni à tenir à jour si le jeu en ajoute une.
    */
   sc?: string[];
+  /**
+   * Stat de base des dégâts (B70, 18/11/2026), EN CLAIR comme `sc` : champ
+   * postérieur au format hérité, trois slugs courts (`atk`/`hp`/`def`).
+   */
+  ds?: string[];
 }
 
 // ── Vocabulaires fermés : slugs actuels aux positions de bits héritées ─────
@@ -542,6 +549,7 @@ export function encodeFilters(s: FilterState): string | undefined {
     dx: d.extra,
     tx: t.extra,
     sc: s.subClass.length ? s.subClass : undefined,
+    ds: s.scaling.length ? s.scaling : undefined,
   };
   const json = JSON.stringify(z);
   if (json === '{}') return undefined;
@@ -572,6 +580,7 @@ export function decodeFilters(z: string | null | undefined): FilterState | null 
       sources: fromBits(raw.src, SRC_INV, 7),
       showUnique: raw.u === 1,
       teamBonuses: fromBits(raw.tb, TB_INV, TB_KEYS.length),
+      scaling: Array.isArray(raw.ds) ? raw.ds.filter((v) => typeof v === 'string') : [],
     };
   } catch {
     return null;
