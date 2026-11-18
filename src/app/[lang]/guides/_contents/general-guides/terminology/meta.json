@@ -19,5 +19,6 @@
   "author": "Sevih",
   "updated": "2026-11-18",
   "order": 3,
-  "tier": "first-steps"
+  "tier": "first-steps",
+  "hidden": true
 }
