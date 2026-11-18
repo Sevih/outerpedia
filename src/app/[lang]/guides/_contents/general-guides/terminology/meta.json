@@ -1,0 +1,23 @@
+{
+  "title": {
+    "en": "Terminology & TL;DR",
+    "jp": "用語集＆TL;DR",
+    "kr": "용어집 & TL;DR",
+    "zh": "术语表与TL;DR",
+    "fr": "Terminologie & TL;DR",
+    "es": "Terminología y TL;DR"
+  },
+  "description": {
+    "en": "The chat jargon in one page — rotation, pen set, counter, SSS++ and more: a short definition per term, with links to the guides and tools.",
+    "jp": "チャットの用語を1ページに — ローテーション、pen set、counter、SSS++など。用語ごとの短い説明と、ガイドやツールへのリンク。",
+    "kr": "채팅 용어를 한 페이지에 — 로테이션, pen set, counter, SSS++ 등. 용어별 짧은 설명과 가이드·도구 링크.",
+    "zh": "一页看懂聊天术语 — rotation、pen set、counter、SSS++等：每个词一句解释，并附指南和工具链接。",
+    "fr": "Le jargon du chat en une page — rotation, pen set, counter, SSS++… : une définition courte par terme, avec les liens vers les guides et les outils.",
+    "es": "La jerga del chat en una página — rotación, pen set, counter, SSS++ y más: una definición corta por término, con enlaces a las guías y herramientas."
+  },
+  "icon": "T_Chat_Emoticon_04",
+  "author": "Sevih",
+  "updated": "2026-11-18",
+  "order": 3,
+  "tier": "first-steps"
+}
