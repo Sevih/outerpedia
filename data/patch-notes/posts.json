@@ -1,6 +1,36 @@
 {
   "posts": [
     {
+      "id": 12400,
+      "date": "2026-11-18",
+      "modified": "2026-11-18T11:49:52",
+      "slug": "notice-compensation-for-the-update-delay",
+      "lang": "en",
+      "type": "notice",
+      "title": "[Notice] Compensation for the Update Delay",
+      "content": "<p><img src=\"/images/patch-notes/6751a61933da5e30.webp\" alt=\"Notice\" style=\"max-width:100%;height:auto;\"></p>\n<p>Dear Masters,</p>\n<p>The update originally scheduled for 11/17 (Tue) has been delayed due to the ongoing app store review. We sincerely apologize for the inconvenience this has caused.</p>\n<p>We also apologize that we are still unable to confirm a revised maintenance schedule.</p>\n<p>As compensation for the delay, we will provide the items below based on the number of days the update is delayed, starting from 11/17 (Tue).</p>\n<p>◈ Update Delay Compensation<br>– Compensation will be calculated from 11/17 (Tue).<br>– Compensation for each day of delay: Gold x200,000 + Transistone (Individual) x1</p>\n<p>We will announce the update maintenance schedule as soon as it is confirmed.</p>\n<p>Once again, we sincerely apologize for keeping you waiting.</p>\n<p>Thank you.</p>\n"
+    },
+    {
+      "id": 12398,
+      "date": "2026-11-18",
+      "modified": "2026-11-18T11:47:15",
+      "slug": "%ea%b3%b5%ec%a7%80-%ec%97%85%eb%8d%b0%ec%9d%b4%ed%8a%b8-%ec%a7%80%ec%97%b0-%eb%b3%b4%ec%83%81-%ec%95%88%eb%82%b4",
+      "lang": "kr",
+      "type": "notice",
+      "title": "[공지] 업데이트 지연 보상 안내",
+      "content": "<p><img src=\"/images/patch-notes/90db829624102f79.webp\" alt=\"공지사항\" style=\"max-width:100%;height:auto;\"></p>\n<p>안녕하세요, 오너 여러분.<br>GM 아메입니다.</p>\n<p>마켓 검수 지연으로 11/17(화) 예정되어 있던 업데이트를 진행하지 못해, 오너 여러분께 불편을 드린 점 진심으로 사과드립니다.</p>\n<p>업데이트를 기다리고 계신 오너 여러분께 아직 점검 일정을 안내해 드리지 못해 죄송합니다.</p>\n<p>업데이트 지연에 대한 보상으로, 11/17(화)부터 지연된 일수에 따라 아래 보상을 지급해 드릴 예정입니다.</p>\n<p>◈ 업데이트 지연 보상<br>– 산정 시작일: 11/17(화)<br>– 지연 1일당 보상: 골드 200,000개 + 트랜스톤(개별) 1개</p>\n<p>업데이트 점검 일정이 확정되는 대로 공지를 통해 안내해 드리겠습니다.</p>\n<p>오랜 시간 기다려 주시는 오너 여러분께 다시 한번 사과드립니다.</p>\n<p>감사합니다.</p>\n"
+    },
+    {
+      "id": 12401,
+      "date": "2026-11-18",
+      "modified": "2026-11-18T11:51:11",
+      "slug": "%e3%80%90%e3%81%8a%e7%9f%a5%e3%82%89%e3%81%9b%e3%80%91%e3%82%a2%e3%83%83%e3%83%97%e3%83%87%e3%83%bc%e3%83%88%e5%bb%b6%e6%9c%9f%e3%81%ab%e4%bc%b4%e3%81%86%e8%a3%9c%e5%a1%ab%e3%81%ae%e3%81%94%e6%a1%88",
+      "lang": "jp",
+      "type": "notice",
+      "title": "【お知らせ】アップデート延期に伴う補填のご案内",
+      "content": "<p><img src=\"/images/patch-notes/3819f5f7ab09ef1b.webp\" alt=\"お知らせ\" style=\"max-width:100%;height:auto;\"></p>\n<p>マスターの皆様、こんにちは。<br>GMあめです。</p>\n<p>ストア審査の遅延により、11/17(火)に予定していたアップデートを実施できず、マスターの皆様にご不便をおかけしておりますこと、深くお詫び申し上げます。</p>\n<p>アップデートをお待ちいただいている皆様に、現時点でもメンテナンス日程をご案内できず、誠に申し訳ございません。</p>\n<p>今回のアップデート延期に伴い、11/17(火)からの遅延日数に応じて、以下のアイテムを補填いたします。</p>\n<p>◈ アップデート延期に伴う補填<br>– 算定開始日：11/17(火)<br>– 遅延1日につき：ゴールド×200,000 ＋ トランストーン(選択)×1</p>\n<p>アップデートメンテナンスの日程が確定次第、改めてお知らせいたします。</p>\n<p>長らくお待たせしておりますこと、重ねてお詫び申し上げます。</p>\n<p>今後とも『アウタープレーン』をよろしくお願いいたします。</p>\n"
+    },
+    {
       "id": 12344,
       "date": "2026-11-16",
       "modified": "2026-11-16T07:58:18",
