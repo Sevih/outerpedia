@@ -24,6 +24,8 @@ les preuves et les décisions vivent dans le tri consolidé de sevih-tool
 
 - [ ] Liste des héros : le filtre « Damage scaling » (B70) lit les textes EN des skills alors que `data/generated/damage-scaling.json` porte déjà `attackStat` (mécanique `BT_SWAP_STAT_ATTACK`, `lib/kit-scaling.ts`), concordance exacte le 18/11 ; brancher le filtre sur `attackStat` ou ajouter un test de concordance texte / structuré pour qu'un nouveau kit rédigé autrement ne passe pas entre les deux (relecture B70).
 
+- [ ] Guides, vus à la relecture F31 (18/11) : le guide Stats (`sf_set2`) donne 12 % au Speed Set 2 pièces alors que `sets.json` porte 13 % + 12 % au palier amélioré ; la Beginner FAQ (`skywardTowerLine`) écrit « 昇天の塔 / 승천의 탑 / 升天之塔 » au lieu des noms du jeu « 飛天の塔 / 비천의 탑 / 飞天之塔 » ; `src/components/home/BeginnerGuides.tsx` ne liste pas le nouveau guide Terminology.
+
 ## 🧰 Outil quick
 
 - [ ] **Tier list maker — canon de partage append-only** : `buildCanon`
