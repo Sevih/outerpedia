@@ -2203,7 +2203,7 @@
     "id": "2000021",
     "name": {
       "en": "Hanbyul Lee",
-      "jp": "イ・ハンビョル",
+      "jp": "星野きらら",
       "kr": "이한별",
       "zh": "李寒星",
       "fr": "Hanbyul Lee",
@@ -2289,7 +2289,7 @@
       "weight": 30,
       "story": {
         "en": "She is a young girl with a small backpack, a glowing halo around her head, and two pearly white wings sprouting from her back. Though the wings and halo are nothing but props she made herself for a play, they change into enormous real wings when she activates her abilities and awes the viewer. Among all the ones who have been transferred to Mirsha, her Quirk is one of the most powerful.\\n\\nHer ability to heal and protect people has even made some people start treating her as the messenger of gods in some regions. She shares any joy she finds and tries to help anyone she comes across. Thanks to Hanbyul's special Quirk, you will find yourself filled with energy and vigor just by looking at her.",
-        "jp": "小さなカバンに純白の翼、輝くリングを頭につけた女の子です。翼とリングは演劇用に自分で作った小道具ですが、能力を発揮する時は、巨大な本物の翼に変わり、見る者を圧倒させます。地球から転移した者たちの中でも指折りのギフト所有者で、とてつもない力を発揮します。\\n\\n人々を癒やして守る力により、一部の地域では神の使者として崇め慕われています。良いものを見つければ何でも分け与えようとし、誰に対しても力になろうとする精神の持ち主。ハンビョルさんの特別なギフトのおかげで、彼女を見ているだけでもマスターの活力が湧いてきて、力がみなぎってくるでしょう。",
+        "jp": "小さなカバンに純白の翼、輝くリングを頭につけた女の子です。翼とリングは演劇用に自分で作った小道具ですが、能力を発揮する時は、巨大な本物の翼に変わり、見る者を圧倒させます。地球から転移した者たちの中でも指折りのギフト所有者で、とてつもない力を発揮します。\\n\\n人々を癒やして守る力により、一部の地域では神の使者として崇め慕われています。良いものを見つければ何でも分け与えようとし、誰に対しても力になろうとする精神の持ち主。きららさんの特別なギフトのおかげで、彼女を見ているだけでもマスターの活力が湧いてきて、力がみなぎってくるでしょう。",
         "kr": "작은 가방과 순백의 날개, 빛나는 링을 머리에 두른 여자아이입니다. 날개와 링은 연극을 위해 본인이 직접 만든 소품이지만, 능력을 발휘할 때는 거대한 진짜 날개로 변해 보는 이를 압도합니다. 지구에서 전이된 자들 중 손에 꼽을 정도의 기프트 소유자로 무지막지한 힘을 발휘합니다. \\n\\n사람들을 치유하고 보호하는 힘으로 일부 지역에서는 신의 사자로 추앙받고 있습니다. 좋은 것이 있으면 무엇이든 나누려고 하며, 누구에게나 힘이 되어 주려 하죠. 한별님의 특별한 기프트 덕에 그녀를 보고만 있어도 오너의 활력이 솟고 파워가 충전될 것입니다.",
         "zh": "这个小女孩有着小小的背包与雪白的翅膀，且头上带着发光环。虽然翅膀与环是为了表演而亲手制作的道具，可当小女孩发挥能力时，会变成巨大的真翅膀，大家对此都惊讶不已。她能发挥异常强大的力量，这天赋在穿越过来的人中可是数一数二的。\\n\\n用力量治愈并保护人们的她，在有些地区被尊为神的使者。寒星大人只要有好东西都会分享并倾力帮助他人，主人看着她都会充满力量。",
         "fr": "C'est une jeune fille avec un petit sac à dos, une auréole lumineuse autour de la tête & deux ailes d'un blanc nacré qui lui poussent dans le dos. Bien que ces ailes & cette auréole ne soient que des accessoires qu'elle a fabriqués elle-même pour une pièce de théâtre, elles se transforment en d'immenses ailes véritables lorsqu'elle active ses pouvoirs, émerveillant le spectateur. Parmi tous ceux qui ont été transférés à Mirsha, son Alter est l'un des + puissants.\\n\\nSon pouvoir de soigner & de protéger les gens lui a même valu d'être considérée comme la messagère des dieux dans certaines régions. Elle partage la moindre joie & tente d'aider quiconque croise son chemin. Grâce à l'Alter exceptionnel de Hanbyul, sa simple présence suffit à vous emplir d'énergie & de vitalité",
@@ -6607,7 +6607,7 @@
         "icon": "TI_Costume_Clothes_2000060_03",
         "grade": "rare",
         "sort": 2,
-        "source": "shop_asset_normal",
+        "source": "event_shop",
         "art": true
       },
       {
@@ -7848,7 +7848,7 @@
           "jp": "エッセプの機能服・イオータ",
           "kr": "엣셉흐의 기능복 요타",
           "zh": "埃瑟夫赫的功能服佑妲",
-          "fr": "Eseph Functional Wear Iota",
+          "fr": "Iota en tenue fonctionnelle d'Eseph",
           "es": "Ropa funcional Iota de Eseph"
         },
         "icon": "TI_Costume_Clothes_2000069_03",
@@ -12402,7 +12402,7 @@
           "jp": "致命的なバニーガール・ビエラ",
           "kr": "치명적인 바니걸 비엘라",
           "zh": "致命兔女郎比埃拉",
-          "fr": "Fatal Bunny Girl Viella",
+          "fr": "Viella, lapine fatale",
           "es": "Fatal Chica Conejo Viella"
         },
         "icon": "TI_Costume_Clothes_2000108_02",
