@@ -86301,6 +86301,25 @@
     "canDissolve": false,
     "dissolve": null
   },
+  "2700021": {
+    "slot": "exclusive",
+    "grade": "unique",
+    "star": 6,
+    "classLimit": null,
+    "setId": "2700021,2710021",
+    "armorSetId": null,
+    "name": "Miracle Maker",
+    "mainGroup": "2700021",
+    "subGroup": null,
+    "image": "TI_Equipment_EX_2700021",
+    "effectIcon": "TI_Icon_UO_EXCLUSIVE",
+    "armorSetIcon": null,
+    "class": null,
+    "canSell": false,
+    "sellPrice": 0,
+    "canDissolve": false,
+    "dissolve": null
+  },
   "2700035": {
     "slot": "exclusive",
     "grade": "unique",

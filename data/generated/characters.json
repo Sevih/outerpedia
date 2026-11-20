@@ -14770,6 +14770,107 @@
     "ee": "2700019",
     "recommendedSets": ["1", "12", "13"]
   },
+  "2700021": {
+    "id": "2700021",
+    "name": {
+      "en": "Hanbyul Lee",
+      "jp": "星野きらら",
+      "kr": "이한별",
+      "zh": "李寒星",
+      "fr": "Hanbyul Lee",
+      "es": "Hanbyul Lee"
+    },
+    "rarity": 3,
+    "element": "earth",
+    "class": "defender",
+    "race": "human",
+    "icon": "2700021",
+    "skills": [
+      "2151",
+      "2152",
+      "2153",
+      "2154",
+      "2155",
+      "2156",
+      "2157",
+      "2158",
+      "2159",
+      "2160",
+      "2169",
+      "2170",
+      "2171",
+      "1"
+    ],
+    "stats": {
+      "hp": {
+        "min": 636,
+        "max": 4683
+      },
+      "atk": {
+        "min": 75,
+        "max": 757
+      },
+      "def": {
+        "min": 33,
+        "max": 351
+      },
+      "speed": {
+        "min": 99,
+        "max": 99
+      },
+      "critical_rate": {
+        "min": 50,
+        "max": 50
+      },
+      "critical_dmg": {
+        "min": 1500,
+        "max": 1500
+      },
+      "buff_chance": {
+        "min": 10,
+        "max": 10
+      },
+      "buff_resist": {
+        "min": 16,
+        "max": 160
+      }
+    },
+    "nickname": {
+      "en": "Resonance",
+      "jp": "レゾナンス",
+      "kr": "레조넌스",
+      "zh": "共鸣",
+      "fr": "Résonance",
+      "es": "Resonancia"
+    },
+    "showNickName": true,
+    "subClass": "phalanx",
+    "chainType": "finish",
+    "gift": "present_05",
+    "voiceActor": {
+      "en": "Akari Kito",
+      "jp": "鬼頭明里",
+      "kr": "장예나",
+      "zh": "鬼头明里",
+      "fr": "Akari Kito",
+      "es": "Akari Kito"
+    },
+    "profile": {
+      "birthday": "01/19",
+      "height": 142,
+      "weight": 30,
+      "story": {
+        "en": "This is the angelic young girl, <Color=#FFBF00>Hanbyul Lee</Color>.\\nShe once told us that she was transported here under mysterious circumstances while dressed as an angel. Since meeting you, Premier, she seems to have taken on a form worthy of that name. Of course, even with her new appearance, she's still the same kind girl with a pure heart.\\n\\nSince the two of you already share such a lovely bond, why not make her your companion... or rather, your adorable little sister?",
+        "jp": "こちらは天使のような少女、<Color=#FFBF00>星野きらら</Color>様です。\\n以前、ある事情から天使の衣装を着たまま転移されたと伺いましたが、宰相様と出会ってからは、その名にふさわしいお姿へと変わられたようですね。もちろん、外見が変わっても、純粋で優しい心を持つ素敵な方であることに変わりはありません。\\n\\nせっかく宰相様とよいご縁を結ばれた方ですし、仲間に……いえ、かわいい妹に迎えてはいかがでしょうか？",
+        "kr": "이분은 천사 같은 소녀, <Color=#FFBF00>이한별</Color> 님이십니다.\\n과거, 모종의 일로 천사 복장을 한 채 전이하셨다고 했는데. 재상님과의 만남 이후, 그 존재에 걸맞은 모습으로 변하신 거 같아요. 물론, 겉이 바뀌어도 여전히 순수하고 선한 마음씨를 지닌 좋은 분이지만요.\\n\\n마침 재상님과 좋은 인연을 맺으신 분이니, 동료로 삼으시는… 아니, 귀여운 여동생으로 삼으시는 건 어떠신가요?",
+        "zh": "这位是天使般的少女，<Color=#FFBF00>李寒星</Color>大人。\\n她曾说过，自己因某种缘由，穿着天使服装转移到了这里。与宰相大人相遇之后，她似乎变成了更符合天使之名的模样。当然，即使外表变了，她依然是那个纯真善良的好孩子。\\n\\n既然她与宰相大人结下了如此美好的缘分，不如让她成为同伴……不，是成为您可爱的妹妹，如何？",
+        "fr": "Voici l'angélique <Color=#FFBF00>Hanbyul Lee</Color>.\\nElle nous avait raconté avoir été transportée ici dans des circonstances mystérieuses, alors qu'elle portait un costume d'ange. Depuis votre rencontre, Premier ministre, elle semble avoir pris une apparence digne de ce nom. Bien sûr, malgré ce changement, elle reste la même enfant au cœur pur et généreux.\\n\\nPuisque vous partagez déjà un si beau lien, pourquoi ne pas en faire votre alliée... ou plutôt, votre adorable petite sœur ?",
+        "es": "Esta es la angelical <Color=#FFBF00>Hanbyul Lee</Color>.\\nNos contó que llegó aquí, por circunstancias misteriosas, vestida de ángel. Desde que lo conoció, Primer Ministro, parece haber adoptado una forma digna de ese nombre. Por supuesto, aunque su aspecto haya cambiado, sigue siendo la misma niña bondadosa de corazón puro.\\n\\nYa que comparten un vínculo tan bonito, ¿por qué no la convierte en su aliada... o mejor dicho, en su adorable hermanita?"
+      }
+    },
+    "ee": "2700021",
+    "recommendedSets": ["3", "2", "13"]
+  },
   "2700035": {
     "id": "2700035",
     "name": {

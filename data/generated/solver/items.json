@@ -6929,6 +6929,33 @@
     "canSell": false,
     "sellPrice": 0
   },
+  "30578": {
+    "name": "6★ Legendary Weapon Selection Chest",
+    "icon": "TI_Weapon_Box02",
+    "itemType": "IT_BOX",
+    "itemSubType": "ITS_BOX_TYPE_CHOICE_ITEM",
+    "grade": "IG_UNIQUE",
+    "canSell": false,
+    "sellPrice": 0
+  },
+  "30579": {
+    "name": "6★ Legendary Accessory Selection Chest",
+    "icon": "TI_Accessary_Box02",
+    "itemType": "IT_BOX",
+    "itemSubType": "ITS_BOX_TYPE_CHOICE_ITEM",
+    "grade": "IG_UNIQUE",
+    "canSell": false,
+    "sellPrice": 0
+  },
+  "30580": {
+    "name": "6★ Legendary Armor Chest [Speed]",
+    "icon": "TI_Armor_Box02",
+    "itemType": "IT_BOX",
+    "itemSubType": "ITS_BOX_TYPE_RANDOM",
+    "grade": "IG_UNIQUE",
+    "canSell": false,
+    "sellPrice": 0
+  },
   "40001": {
     "name": "Lobby Background: Magnolia City",
     "icon": "TI_Common_Box03",

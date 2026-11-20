@@ -2480,12 +2480,12 @@
       {
         "unlockLevel": 1,
         "isAdd": false,
-        "desc": "Increases Action Points by <color=#28d9ed>60</color> at the start of battle"
+        "desc": "Increases Action Points by <color=#28d9ed>+60</color> at the start of battle"
       },
       {
         "unlockLevel": 10,
         "isAdd": true,
-        "desc": "Increases damage dealt to Boss by <color=#28d9ed>100%</color>"
+        "desc": "Increases damage dealt to Boss by <color=#28d9ed>+100%</color>"
       }
     ]
   },
@@ -2966,6 +2966,21 @@
         "unlockLevel": 10,
         "isAdd": true,
         "desc": "Damage Dealt to Fire enemies <color=#28d9ed>+75%</color> (Unaffected by elemental advantage bonuses)"
+      }
+    ]
+  },
+  "2700021": {
+    "name": "Resonance Hanbyul Lee's Exclusive Equipment",
+    "tiers": [
+      {
+        "unlockLevel": 1,
+        "isAdd": false,
+        "desc": "When hit, increases the caster's Priority by <color=#28d9ed>+40%</color>. (Activates once every 2 turns)"
+      },
+      {
+        "unlockLevel": 10,
+        "isAdd": true,
+        "desc": "When hit, all enemies' Priority <color=#28d9ed>-10%</color>. (Activates once every 3 turns, ignores Resilience)"
       }
     ]
   },

@@ -1,5 +1,5 @@
 {
-  "resVersion": "1.11.601",
+  "resVersion": "1.11.701",
   "targets": {
     "400101": {
       "id": "400101",
@@ -5498,10 +5498,6 @@
         "Def": {
           "min": 37,
           "max": 1000
-        },
-        "DMGReduceRate": {
-          "min": 0,
-          "max": 100
         },
         "CriticalRate": {
           "min": 100,
@@ -255096,7 +255092,6 @@
     "Singularity_Passive_Dmg_down_a",
     "Singularity_Passive_Dmg_down_aa",
     "Singularity_Passive_Dmg_down_aaa",
-    "Singularity_Passive_Dmg_down_aaa_2",
     "Singularity_Passive_Dmg_down_aaa_3",
     "Singularity_Passive_Dmg_down_c",
     "Singularity_Passive_Dmg_down_d",
@@ -255109,7 +255104,6 @@
     "Singularity_Passive_Dmg_up_a",
     "Singularity_Passive_Dmg_up_aa",
     "Singularity_Passive_Dmg_up_aaa",
-    "Singularity_Passive_Dmg_up_aaa_2",
     "Singularity_Passive_Dmg_up_aaa_3",
     "Singularity_Passive_Dmg_up_c",
     "Singularity_Passive_Dmg_up_d",
@@ -255137,6 +255131,9 @@
     "guild_boss_water_2",
     "guild_boss_water_3",
     "guild_boss_water_4",
-    "guild_boss_water_5"
+    "guild_boss_water_5",
+    "singularity_passive_normal_limit_dot1",
+    "singularity_passive_normal_limit_dot2",
+    "singularity_passive_normal_limit_dot3"
   ]
 }

@@ -5430,6 +5430,13 @@
     "max": 20,
     "buffId": "BID_CEQUIP_MAIN_DMG_WATER"
   },
+  "27021": {
+    "st": "ST_HIT_AP",
+    "ap": "OAT_ADD",
+    "f": 1,
+    "max": 10,
+    "buffId": "BID_CEQUIP_MAIN_DMG_REDUCE_EARTH"
+  },
   "27035": {
     "st": "ST_KILL_AP",
     "ap": "OAT_ADD",
