@@ -4907,6 +4907,8 @@
     ]
   },
   "2000123": {
+    "rank": "A",
+    "rankPvp": "B",
     "role": "support",
     "skillPriority": {
       "first": 3,
