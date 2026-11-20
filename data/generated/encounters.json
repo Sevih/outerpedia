@@ -41356,6 +41356,505 @@
       "spd": 910
     }
   },
+  "141403": {
+    "mode": "origin_hard",
+    "name": {
+      "en": "The Three Calamities",
+      "jp": "三凶",
+      "kr": "삼흉",
+      "zh": "三凶",
+      "fr": "Les Trois Calamités",
+      "es": "Las Tres Calamidades"
+    },
+    "area": {
+      "en": "Neo Eseph",
+      "jp": "ネオ・エッセプ",
+      "kr": "네오 엣셉흐",
+      "zh": "尼奥埃瑟夫赫",
+      "fr": "Néo Éséph",
+      "es": "Neo Eseph"
+    },
+    "monsters": [
+      {
+        "id": "4101302",
+        "level": 206,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1,
+        "count": 2
+      },
+      {
+        "id": "4101303",
+        "level": 206,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1,
+        "count": 2
+      },
+      {
+        "id": "4101304",
+        "level": 206,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 2,
+        "count": 2
+      },
+      {
+        "id": "4101301",
+        "level": 206,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 2,
+        "count": 2
+      },
+      {
+        "id": "4103301",
+        "level": 206,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 3
+      },
+      {
+        "id": "4101303",
+        "level": 206,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 3,
+        "count": 2
+      }
+    ],
+    "season": 4,
+    "episode": 4,
+    "stage": 3,
+    "reward": "157103",
+    "adv": {
+      "atk": -535,
+      "hp": 800,
+      "spd": 910
+    }
+  },
+  "141404": {
+    "mode": "origin_hard",
+    "name": {
+      "en": "Hunting the Man-Eating Flower",
+      "jp": "人食い花を探して",
+      "kr": "식인꽃 수색",
+      "zh": "搜寻食人花",
+      "fr": "À la recherche de la fleur dévoreuse",
+      "es": "En busca de la flor devoradora"
+    },
+    "area": {
+      "en": "Neo Eseph",
+      "jp": "ネオ・エッセプ",
+      "kr": "네오 엣셉흐",
+      "zh": "尼奥埃瑟夫赫",
+      "fr": "Néo Éséph",
+      "es": "Neo Eseph"
+    },
+    "monsters": [
+      {
+        "id": "4102302",
+        "level": 206,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 1
+      },
+      {
+        "id": "4101302",
+        "level": 206,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1,
+        "count": 2
+      },
+      {
+        "id": "4101301",
+        "level": 206,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 2,
+        "count": 3
+      },
+      {
+        "id": "4101304",
+        "level": 206,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 3,
+        "count": 2
+      },
+      {
+        "id": "4103302",
+        "level": 206,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 3
+      }
+    ],
+    "season": 4,
+    "episode": 4,
+    "stage": 4,
+    "reward": "157104",
+    "adv": {
+      "atk": -535,
+      "hp": 100,
+      "spd": 910
+    }
+  },
+  "141405": {
+    "mode": "origin_hard",
+    "name": {
+      "en": "A Team Torn Apart",
+      "jp": "崩れたチーム",
+      "kr": "와해된 팀",
+      "zh": "分崩离析的小队",
+      "fr": "Une équipe déchirée",
+      "es": "Un equipo dividido"
+    },
+    "area": {
+      "en": "Neo Eseph",
+      "jp": "ネオ・エッセプ",
+      "kr": "네오 엣셉흐",
+      "zh": "尼奥埃瑟夫赫",
+      "fr": "Néo Éséph",
+      "es": "Neo Eseph"
+    },
+    "monsters": [
+      {
+        "id": "4101303",
+        "level": 207,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1
+      },
+      {
+        "id": "4101304",
+        "level": 207,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1
+      },
+      {
+        "id": "4101302",
+        "level": 207,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1
+      },
+      {
+        "id": "4101301",
+        "level": 207,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1
+      },
+      {
+        "id": "4102301",
+        "level": 207,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 2
+      },
+      {
+        "id": "4101301",
+        "level": 207,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 2,
+        "count": 2
+      },
+      {
+        "id": "4103301",
+        "level": 207,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 3
+      }
+    ],
+    "season": 4,
+    "episode": 4,
+    "stage": 5,
+    "reward": "157105",
+    "adv": {
+      "atk": -535,
+      "hp": 800,
+      "spd": 910
+    }
+  },
+  "141408": {
+    "mode": "origin_hard",
+    "name": {
+      "en": "Sensing Souls",
+      "jp": "魂の探知",
+      "kr": "영혼 탐지",
+      "zh": "灵魂探测",
+      "fr": "Détecter les âmes",
+      "es": "Detectar almas"
+    },
+    "area": {
+      "en": "Neo Eseph",
+      "jp": "ネオ・エッセプ",
+      "kr": "네오 엣셉흐",
+      "zh": "尼奥埃瑟夫赫",
+      "fr": "Néo Éséph",
+      "es": "Neo Eseph"
+    },
+    "monsters": [
+      {
+        "id": "4101304",
+        "level": 208,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1,
+        "count": 2
+      },
+      {
+        "id": "4102302",
+        "level": 208,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 1
+      },
+      {
+        "id": "4101304",
+        "level": 208,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 2,
+        "count": 3
+      },
+      {
+        "id": "4101303",
+        "level": 208,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 3
+      },
+      {
+        "id": "4101301",
+        "level": 208,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 3
+      },
+      {
+        "id": "4101302",
+        "level": 208,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 3
+      },
+      {
+        "id": "4103302",
+        "level": 208,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 3
+      }
+    ],
+    "season": 4,
+    "episode": 4,
+    "stage": 8,
+    "reward": "157108",
+    "adv": {
+      "atk": -535,
+      "hp": 800,
+      "spd": 910
+    }
+  },
+  "141409": {
+    "mode": "origin_hard",
+    "name": {
+      "en": "A History of Decay",
+      "jp": "衰退の歴史",
+      "kr": "쇄락의 역사",
+      "zh": "衰败的历史",
+      "fr": "Une histoire de déclin",
+      "es": "Una historia de decadencia"
+    },
+    "area": {
+      "en": "Neo Eseph",
+      "jp": "ネオ・エッセプ",
+      "kr": "네오 엣셉흐",
+      "zh": "尼奥埃瑟夫赫",
+      "fr": "Néo Éséph",
+      "es": "Neo Eseph"
+    },
+    "monsters": [
+      {
+        "id": "4102302",
+        "level": 209,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 1
+      },
+      {
+        "id": "4101303",
+        "level": 209,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1
+      },
+      {
+        "id": "4101301",
+        "level": 209,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1
+      },
+      {
+        "id": "4101304",
+        "level": 209,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1
+      },
+      {
+        "id": "4102301",
+        "level": 209,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 2
+      },
+      {
+        "id": "4101304",
+        "level": 209,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 2
+      },
+      {
+        "id": "4101303",
+        "level": 209,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 2
+      },
+      {
+        "id": "4101302",
+        "level": 209,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 2
+      },
+      {
+        "id": "4103301",
+        "level": 209,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 3
+      },
+      {
+        "id": "4101301",
+        "level": 209,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 3
+      },
+      {
+        "id": "4101302",
+        "level": 209,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 3
+      },
+      {
+        "id": "4101304",
+        "level": 209,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 3
+      }
+    ],
+    "season": 4,
+    "episode": 4,
+    "stage": 9,
+    "reward": "157109",
+    "adv": {
+      "atk": -535,
+      "hp": 800,
+      "spd": 910
+    }
+  },
+  "141410": {
+    "mode": "origin_hard",
+    "name": {
+      "en": "The Soul Plunderer",
+      "jp": "魂の略奪者",
+      "kr": "영혼 약탈자",
+      "zh": "灵魂掠夺者",
+      "fr": "Le Pilleur d'âmes",
+      "es": "El Saqueador de Almas"
+    },
+    "area": {
+      "en": "Neo Eseph",
+      "jp": "ネオ・エッセプ",
+      "kr": "네오 엣셉흐",
+      "zh": "尼奥埃瑟夫赫",
+      "fr": "Néo Éséph",
+      "es": "Neo Eseph"
+    },
+    "monsters": [
+      {
+        "id": "4101304",
+        "level": 210,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1
+      },
+      {
+        "id": "4101303",
+        "level": 210,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1
+      },
+      {
+        "id": "4101303",
+        "level": 210,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 2
+      },
+      {
+        "id": "4101301",
+        "level": 210,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 2
+      },
+      {
+        "id": "4101302",
+        "level": 210,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 2
+      },
+      {
+        "id": "4500384",
+        "level": 210,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 3
+      },
+      {
+        "id": "4304005",
+        "level": 210,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 3
+      }
+    ],
+    "season": 4,
+    "episode": 4,
+    "stage": 10,
+    "reward": "157110",
+    "adv": {
+      "atk": -535,
+      "hp": -175,
+      "spd": 980
+    }
+  },
   "200101": {
     "mode": "normal",
     "name": {

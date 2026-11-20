@@ -58920,6 +58920,36 @@
         "dungeon": "131707",
         "level": 178,
         "hpLines": 10
+      },
+      {
+        "dungeon": "141403",
+        "level": 206,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "141404",
+        "level": 206,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "141405",
+        "level": 207,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "141408",
+        "level": 208,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "141409",
+        "level": 209,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "141410",
+        "level": 210,
+        "hpLines": 10
       }
     ]
   },

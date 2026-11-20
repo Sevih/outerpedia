@@ -43931,6 +43931,100 @@
         }
       ]
     },
+    "4304005": {
+      "id": "4304005",
+      "element": "CET_EARTH",
+      "class": "CCT_ATTACKER",
+      "subClass": "NONE",
+      "race": "CRT_HUMAN",
+      "basicStar": 3,
+      "baseStats": {
+        "HP": {
+          "min": 4340,
+          "max": 279680
+        },
+        "WG": {
+          "min": 30,
+          "max": 60
+        },
+        "Speed": {
+          "min": 55,
+          "max": 99
+        },
+        "Atk": {
+          "min": 185,
+          "max": 8186
+        },
+        "Def": {
+          "min": 123,
+          "max": 3537
+        },
+        "DMGReduceRate": {
+          "min": 0,
+          "max": 100
+        },
+        "CriticalRate": {
+          "min": 50,
+          "max": 160
+        },
+        "CriticalDMGRate": {
+          "min": 1500,
+          "max": 1500
+        },
+        "BuffChance": {
+          "min": 63,
+          "max": 190
+        },
+        "BuffResist": {
+          "min": 26,
+          "max": 100
+        }
+      },
+      "buffImmune": [
+        "BT_GOLDEN_CURSE",
+        "BT_STUN",
+        "BT_FREEZE",
+        "BT_STONE",
+        "BT_SILENCE",
+        "BT_AGGRO"
+      ],
+      "rage": {
+        "trigger": "HP_RATE",
+        "steps": [
+          {
+            "value": 500,
+            "duration": 4
+          }
+        ],
+        "breakBuffIds": ["BID_BREAK_1", "BID_BREAK_2", "BID_BREAK_3"]
+      },
+      "skills": [
+        {
+          "slot": 1,
+          "id": "931567"
+        },
+        {
+          "slot": 2,
+          "id": "931568"
+        },
+        {
+          "slot": 3,
+          "id": "931569"
+        },
+        {
+          "slot": 12,
+          "id": "931570"
+        },
+        {
+          "slot": 15,
+          "id": "931571"
+        },
+        {
+          "slot": 16,
+          "id": "931572"
+        }
+      ]
+    },
     "4312071": {
       "id": "4312071",
       "element": "CET_EARTH",
@@ -59604,6 +59698,75 @@
         {
           "slot": 3,
           "id": "150003"
+        }
+      ]
+    },
+    "4500384": {
+      "id": "4500384",
+      "element": "CET_WATER",
+      "class": "CCT_MAGE",
+      "subClass": "ENCHANTER",
+      "race": "CRT_HUMAN",
+      "basicStar": 3,
+      "baseStats": {
+        "HP": {
+          "min": 218,
+          "max": 32531
+        },
+        "Speed": {
+          "min": 90,
+          "max": 90
+        },
+        "Atk": {
+          "min": 64,
+          "max": 5814
+        },
+        "Def": {
+          "min": 37,
+          "max": 1000
+        },
+        "DMGReduceRate": {
+          "min": 0,
+          "max": 100
+        },
+        "CriticalRate": {
+          "min": 100,
+          "max": 100
+        },
+        "CriticalDMGRate": {
+          "min": 1500,
+          "max": 1500
+        },
+        "BuffChance": {
+          "min": 50,
+          "max": 300
+        },
+        "BuffResist": {
+          "min": 80,
+          "max": 300
+        }
+      },
+      "buffImmune": [
+        "BT_GOLDEN_CURSE",
+        "BT_STUN",
+        "BT_FREEZE",
+        "BT_STONE",
+        "BT_AGGRO",
+        "BT_SILENCE",
+        "BT_REMOVE_BUFF"
+      ],
+      "skills": [
+        {
+          "slot": 1,
+          "id": "153919"
+        },
+        {
+          "slot": 2,
+          "id": "153920"
+        },
+        {
+          "slot": 3,
+          "id": "153921"
         }
       ]
     },
@@ -244335,6 +244498,57 @@
         }
       ]
     },
+    "153919": {
+      "id": "153919",
+      "type": "SKT_FIRST",
+      "subType": "ACTIVE",
+      "targetTeamType": "ENEMY",
+      "rangeType": "DOUBLE",
+      "levels": [
+        {
+          "level": 1,
+          "damageFactor": 1200,
+          "wgReduce": 0,
+          "buffIds": ["event_monster_buff_576"],
+          "cool": 0,
+          "startCool": 0
+        }
+      ]
+    },
+    "153920": {
+      "id": "153920",
+      "type": "SKT_SECOND",
+      "subType": "ACTIVE",
+      "targetTeamType": "ENEMY",
+      "rangeType": "DOUBLE",
+      "levels": [
+        {
+          "level": 1,
+          "damageFactor": 1300,
+          "wgReduce": 0,
+          "buffIds": ["event_monster_buff_577"],
+          "cool": 3,
+          "startCool": 1
+        }
+      ]
+    },
+    "153921": {
+      "id": "153921",
+      "type": "SKT_ULTIMATE",
+      "subType": "ACTIVE",
+      "targetTeamType": "ENEMY",
+      "rangeType": "DOUBLE",
+      "levels": [
+        {
+          "level": 1,
+          "damageFactor": 1500,
+          "wgReduce": 0,
+          "buffIds": ["event_monster_buff_578", "event_monster_buff_579"],
+          "cool": 4,
+          "startCool": 3
+        }
+      ]
+    },
     "154001": {
       "id": "154001",
       "type": "SKT_MONSTER_1",
@@ -254168,6 +254382,123 @@
             "singularity_passive_enemy_1_ranger",
             "singularity_passive_enemy_1_mage"
           ],
+          "cool": 0,
+          "startCool": 0
+        }
+      ]
+    },
+    "931567": {
+      "id": "931567",
+      "type": "SKT_FIRST",
+      "subType": "ACTIVE",
+      "targetTeamType": "ENEMY",
+      "rangeType": "SINGLE",
+      "levels": [
+        {
+          "level": 1,
+          "damageFactor": 1200,
+          "wgReduce": 0,
+          "buffIds": ["4004005_1_1"],
+          "cool": 0,
+          "startCool": 0
+        }
+      ]
+    },
+    "931568": {
+      "id": "931568",
+      "type": "SKT_SECOND",
+      "subType": "ACTIVE",
+      "targetTeamType": "ENEMY",
+      "rangeType": "SINGLE",
+      "levels": [
+        {
+          "level": 1,
+          "damageFactor": 1100,
+          "wgReduce": 0,
+          "buffIds": ["4004005_2_2"],
+          "cool": 3,
+          "startCool": 2
+        }
+      ]
+    },
+    "931569": {
+      "id": "931569",
+      "type": "SKT_ULTIMATE",
+      "subType": "ACTIVE",
+      "targetTeamType": "ENEMY",
+      "rangeType": "ALL",
+      "levels": [
+        {
+          "level": 1,
+          "damageFactor": 1600,
+          "wgReduce": 0,
+          "buffIds": ["event_monster_buff_8st_359", "event_monster_buff_8st_360"],
+          "cool": 4,
+          "startCool": 2
+        }
+      ]
+    },
+    "931570": {
+      "id": "931570",
+      "type": "SKT_MONSTER_1",
+      "subType": "PASSIVE",
+      "targetTeamType": "NONE",
+      "rangeType": "NONE",
+      "levels": [
+        {
+          "level": 1,
+          "damageFactor": 0,
+          "wgReduce": 0,
+          "buffIds": [
+            "4004005_4_3",
+            "4004005_4_3_2",
+            "4004005_4_4",
+            "4004005_4_5",
+            "4004005_4_6",
+            "4004005_4_7",
+            "4004005_4_8",
+            "4004005_4_9",
+            "4004005_4_10",
+            "4004005_4_11",
+            "4004005_4_13",
+            "4004005_4_14",
+            "4004005_4_15",
+            "4004005_4_16"
+          ],
+          "cool": 0,
+          "startCool": 0
+        }
+      ]
+    },
+    "931571": {
+      "id": "931571",
+      "type": "SKT_RAGE_ENTER1",
+      "subType": "ACTIVE",
+      "targetTeamType": "ENEMY",
+      "rangeType": "SINGLE",
+      "levels": [
+        {
+          "level": 1,
+          "damageFactor": 0,
+          "wgReduce": 0,
+          "buffIds": [],
+          "cool": 0,
+          "startCool": 0
+        }
+      ]
+    },
+    "931572": {
+      "id": "931572",
+      "type": "SKT_RAGE_FINISH1",
+      "subType": "ACTIVE",
+      "targetTeamType": "ENEMY",
+      "rangeType": "ALL",
+      "levels": [
+        {
+          "level": 1,
+          "damageFactor": 2500,
+          "wgReduce": 0,
+          "buffIds": ["Common_Rage_Buff_13"],
           "cool": 0,
           "startCool": 0
         }

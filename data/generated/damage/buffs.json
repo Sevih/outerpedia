@@ -112996,6 +112996,84 @@
         "tooltipId": 34
       }
     ],
+    "event_monster_buff_576": [
+      {
+        "level": 1,
+        "type": "BT_STAT",
+        "targetType": "ENEMY_SKILL_TARGET",
+        "createRate": 1000,
+        "stackCount": 1,
+        "buffDebuffType": "DEBUFF",
+        "stat": "ST_DEF",
+        "applyingType": "OAT_RATE",
+        "value": -500,
+        "callerSkillType": "SKT_FIRST",
+        "createType": "SKILL_FINISH",
+        "turnDuration": 1,
+        "removeType": "ON_TURN_END",
+        "additiveAttack": true,
+        "tooltipId": 17
+      }
+    ],
+    "event_monster_buff_577": [
+      {
+        "level": 1,
+        "type": "BT_DOT_CURSE",
+        "targetType": "ENEMY_SKILL_TARGET",
+        "createRate": 1000,
+        "stackCount": 1,
+        "buffDebuffType": "DEBUFF",
+        "applyingType": "OAT_RATE",
+        "value": 30,
+        "callerSkillType": "SKT_SECOND",
+        "createType": "SKILL_FINISH",
+        "turnDuration": 2,
+        "removeType": "ON_TURN_END",
+        "isIdOverlap": true,
+        "isTypeOverlap": true,
+        "additiveAttack": true,
+        "removeOnCasterDie": true,
+        "tooltipId": 2
+      }
+    ],
+    "event_monster_buff_578": [
+      {
+        "level": 1,
+        "type": "BT_STAT",
+        "targetType": "ME",
+        "createRate": 1000,
+        "stackCount": 1,
+        "buffDebuffType": "BUFF",
+        "stat": "ST_ATK",
+        "applyingType": "OAT_RATE",
+        "value": 300,
+        "callerSkillType": "SKT_ULTIMATE",
+        "createType": "SKILL_FINISH",
+        "turnDuration": 3,
+        "removeType": "ON_TURN_END",
+        "additiveAttack": true,
+        "tooltipId": 7
+      }
+    ],
+    "event_monster_buff_579": [
+      {
+        "level": 1,
+        "type": "BT_STAT",
+        "targetType": "ME",
+        "createRate": 1000,
+        "stackCount": 1,
+        "buffDebuffType": "BUFF",
+        "stat": "ST_SPEED",
+        "applyingType": "OAT_RATE",
+        "value": 300,
+        "callerSkillType": "SKT_ULTIMATE",
+        "createType": "SKILL_FINISH",
+        "turnDuration": 3,
+        "removeType": "ON_TURN_END",
+        "additiveAttack": true,
+        "tooltipId": 15
+      }
+    ],
     "event_monster_buff_84": [
       {
         "level": 1,
@@ -113038,6 +113116,46 @@
         "additiveAttack": true,
         "removeOnCasterDie": true,
         "tooltipId": 4
+      }
+    ],
+    "event_monster_buff_8st_359": [
+      {
+        "level": 1,
+        "type": "BT_DOT_POISON",
+        "targetType": "ENEMY_TEAM",
+        "createRate": 1000,
+        "stackCount": 1,
+        "buffDebuffType": "DEBUFF",
+        "stat": "ST_ATK",
+        "applyingType": "OAT_RATE",
+        "value": 755,
+        "callerSkillType": "SKT_ULTIMATE",
+        "createType": "SKILL_START",
+        "turnDuration": 2,
+        "removeType": "ON_TURN_END",
+        "isIdOverlap": true,
+        "isTypeOverlap": true,
+        "additiveAttack": true,
+        "removeOnCasterDie": true,
+        "tooltipId": 4
+      }
+    ],
+    "event_monster_buff_8st_360": [
+      {
+        "level": 1,
+        "type": "BT_IMMEDIATELY_POISON",
+        "targetType": "ENEMY_TEAM",
+        "createRate": 1000,
+        "stackCount": 1,
+        "buffDebuffType": "NEUTRAL",
+        "applyingType": "OAT_RATE",
+        "value": 9999,
+        "callerSkillType": "SKT_ULTIMATE",
+        "createType": "SKILL_FINISH",
+        "conditionType": "CASTER_HAS_BUFF",
+        "conditionValue": 9998,
+        "removeType": "IMMEDIATELY",
+        "additiveAttack": true
       }
     ],
     "event_monster_buff_91": [
