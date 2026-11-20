@@ -8753,6 +8753,74 @@
         }
       ],
       "substats": "HP>SPD>DEF=DMG RED%=RES=CHC"
+    },
+    {
+      "name": "Life Mix",
+      "weapons": [
+        {
+          "id": "10",
+          "mainStat": "HP%"
+        },
+        {
+          "id": "25",
+          "mainStat": "HP%"
+        },
+        {
+          "id": "782",
+          "mainStat": "HP%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1021",
+          "mainStat": "DMG RED%"
+        },
+        {
+          "id": "1011",
+          "mainStat": "HP%"
+        },
+        {
+          "id": "1166",
+          "mainStat": "SPD"
+        },
+        {
+          "id": "1037",
+          "mainStat": "SPD"
+        }
+      ],
+      "talismans": ["$rsv"],
+      "sets": [
+        {
+          "preset": "hp2sw2"
+        },
+        {
+          "pieces": [
+            {
+              "set": "3",
+              "count": 2
+            },
+            {
+              "set": "13",
+              "count": 2
+            }
+          ]
+        },
+        {
+          "preset": "ct2hp2"
+        },
+        {
+          "preset": "hp2i2"
+        }
+      ],
+      "substats": "HP>SPD>DEF=DMG RED%=RES=CHC",
+      "note": {
+        "en": "You can use any combinaison of the 5 sets used here. ",
+        "fr": "Vous pouvez utiliser n'importe quelle combinaison des 5 ensembles présentés ici.",
+        "es": "Puedes utilizar cualquier combinación de los 5 conjuntos que se utilizan aquí.",
+        "jp": "ここで使用している5つのセットは、どのような組み合わせでも使用できます。",
+        "kr": "여기에서 사용된 5가지 세트 중 어떤 조합이든 사용할 수 있습니다.",
+        "zh": "你可以任意组合这里使用的5组内容。"
+      }
     }
   ],
   "2700035": [
