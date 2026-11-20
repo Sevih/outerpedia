@@ -272,12 +272,12 @@ export const GUIDE_CATEGORIES = {
         es: 'La Singularidad Dimensional es un modo de fin de juego accesible desde Puerta Monad al cambiar al Modo Singularidad Dimensional. Un jefe de Singularidad diferente está activo cada día de miércoles a domingo, y tu puntuación diaria determina tu clasificación y recompensas. No hay límite diario de entradas: cada nueva mejor puntuación del día suma su mejora a la puntuación total, y la Batalla simulada permite probar cualquier jefe sin recompensas.',
       },
       unlock: {
-        en: 'Unlock condition: clear Monad Gate Depth 1 True Ending.',
-        jp: '解放条件：モナドゲート深層1の真エンディングをクリア。',
-        kr: '해금 조건: 모나드 게이트 심층 1 진 엔딩 클리어.',
-        zh: '解锁条件：通关单子门深层1的真结局。',
-        fr: 'Condition de déblocage : terminer la True Ending de Monad Gate Depth 1.',
-        es: 'Condición de desbloqueo: completa el Final Verdadero de la Profundidad 1 de Puerta Monad.',
+        en: "Unlock condition: clear stage 5-14 (Notia's Letter) of Origin Story Season 2 Normal, the last stage of Area 5.",
+        jp: '解放条件：オリジンストーリー シーズン2 ノーマル、エリア5の最終ステージ5-14「ノティアの手紙」をクリア。',
+        kr: '해금 조건: 오리진 스토리 시즌 2 노말 5지역의 마지막 스테이지 5-14 「노티아의 편지」 클리어.',
+        zh: '解锁条件：通关起源剧情第二季普通难度第5区域的最终关卡5-14「诺缇亚的信」。',
+        fr: "Condition de déblocage : clear le stage 5-14 (Lettre de Notia) de l'Origin Story Season 2 en Normal, dernier stage de l'Area 5.",
+        es: 'Condición de desbloqueo: completa la fase 5-14 (Carta de Notia) de Origin Story Season 2 Normal, la última fase del Area 5.',
       },
       schedule: {
         en: 'Open every week from Wednesday 00:00 UTC to Sunday 23:59 UTC. The target boss changes daily at 00:00 UTC. No entry limit; the daily reward requires at least one run per day.',
