@@ -6,7 +6,9 @@
  * dérivé (shops) / curé (non-shop). Ici ne vivent que la présentation (intro,
  * en-têtes, badges, onglets) et les NOMS de source en 5 langues, mappés par clé.
  *
- * Les libellés de source hérités sont transplantés verbatim. UN SHOP = UN ONGLET
+ * Les libellés de source hérités sont transplantés verbatim (sauf ceux de la
+ * Singularité, réécrits au patch 1.4.22 : rangs jusqu'à EX+++, run illimité
+ * mais récompense quotidienne). UN SHOP = UN ONGLET
  * d'échange réel (cf. le générateur) : les 7 shops canoniques, Arena unifié
  * (points d'arène + temps réel = même onglet). Tower/Remains sont écartés
  * (aucun onglet d'échange — décision Sevih 19/07).
@@ -16,12 +18,12 @@ import type { SourceType } from '@contracts';
 
 export const LABELS = {
   intro: {
-    en: 'This guide lists every regular weekly and monthly source of timegated resources in Outerplane. Shop rows are derived from game data, so they stay current when a shop is reshuffled; non-shop rows (dungeon drops, mission and singularity rewards) are player estimates that assume things like reaching SSS++ rank or playing every eligible day. The items below can also occasionally come from limited-time events or cash packs, which are not counted here.',
-    jp: 'このガイドは、アウタープレーンで定期的に入手できる週間・月間の時限リソースをすべてまとめています。ショップの行はゲームデータから導出しているため、ショップが再編されても最新の内容を保ちます。ショップ以外の行（ダンジョンのドロップ、ミッションや特異点の報酬）は、SSS++ランク到達や毎日プレイなどを前提とした推定値です。ここに記載のアイテムは期間限定イベントや課金パックでも入手できる場合がありますが、それらは含みません。',
-    kr: '이 가이드는 아우터플레인에서 정기적으로 획득할 수 있는 주간·월간 시간제한 리소스를 모두 정리한 것입니다. 상점 항목은 게임 데이터에서 도출되므로 상점이 개편되어도 최신 상태를 유지합니다. 상점 외 항목(던전 드롭, 미션·특이점 보상)은 SSS++ 등급 도달이나 매일 플레이 등을 전제로 한 추정치입니다. 아래 아이템은 기간 한정 이벤트나 캐시 패키지로도 얻을 수 있지만 여기에는 포함하지 않습니다.',
-    zh: '本指南列出了《Outerplane》中所有可定期获取的每周和每月限时资源。商店行由游戏数据推导，因此在商店重排后仍保持最新；非商店行（副本掉落、任务与奇点奖励）为玩家估算值，假设达成 SSS++ 评级或每天参与等条件。下列物品有时也可通过限时活动或充值礼包获得，但这些不计入本表。',
-    fr: "Ce guide liste toutes les sources hebdomadaires et mensuelles régulières de ressources timegated dans Outerplane. Les lignes de shop sont dérivées des données du jeu : elles restent à jour quand un shop est rebrassé. Les lignes hors shop (drops de donjon, récompenses de mission et de singularité) sont des estimations joueur qui supposent par exemple d'atteindre le rang SSS++ ou de jouer chaque jour éligible. Les items ci-dessous peuvent aussi provenir d'events à durée limitée ou de packs payants, non comptés ici.",
-    es: 'Esta guía lista todas las fuentes semanales y mensuales regulares de recursos con límite de tiempo en Outerplane. Las filas de tienda se derivan de datos del juego, así que se mantienen actualizadas cuando una tienda se reorganiza; las filas que no son de tienda (drops de dungeon, recompensas de misión y singularidad) son estimaciones de jugadores que asumen cosas como alcanzar el rango SSS++ o jugar cada día elegible. Los ítems de abajo también pueden venir ocasionalmente de eventos por tiempo limitado o paquetes de pago, que no se cuentan aquí.',
+    en: 'This guide lists every regular weekly and monthly source of timegated resources in Outerplane. Shop rows are derived from game data, so they stay current when a shop is reshuffled; non-shop rows (dungeon drops, mission and singularity rewards) are player estimates that assume things like reaching EX+++ rank or playing every eligible day. The items below can also occasionally come from limited-time events or cash packs, which are not counted here.',
+    jp: 'このガイドは、アウタープレーンで定期的に入手できる週間・月間の時限リソースをすべてまとめています。ショップの行はゲームデータから導出しているため、ショップが再編されても最新の内容を保ちます。ショップ以外の行（ダンジョンのドロップ、ミッションや特異点の報酬）は、EX+++ランク到達や毎日プレイなどを前提とした推定値です。ここに記載のアイテムは期間限定イベントや課金パックでも入手できる場合がありますが、それらは含みません。',
+    kr: '이 가이드는 아우터플레인에서 정기적으로 획득할 수 있는 주간·월간 시간제한 리소스를 모두 정리한 것입니다. 상점 항목은 게임 데이터에서 도출되므로 상점이 개편되어도 최신 상태를 유지합니다. 상점 외 항목(던전 드롭, 미션·특이점 보상)은 EX+++ 등급 도달이나 매일 플레이 등을 전제로 한 추정치입니다. 아래 아이템은 기간 한정 이벤트나 캐시 패키지로도 얻을 수 있지만 여기에는 포함하지 않습니다.',
+    zh: '本指南列出了《Outerplane》中所有可定期获取的每周和每月限时资源。商店行由游戏数据推导，因此在商店重排后仍保持最新；非商店行（副本掉落、任务与奇点奖励）为玩家估算值，假设达成 EX+++ 评级或每天参与等条件。下列物品有时也可通过限时活动或充值礼包获得，但这些不计入本表。',
+    fr: "Ce guide liste toutes les sources hebdomadaires et mensuelles régulières de ressources timegated dans Outerplane. Les lignes de shop sont dérivées des données du jeu : elles restent à jour quand un shop est rebrassé. Les lignes hors shop (drops de donjon, récompenses de mission et de singularité) sont des estimations joueur qui supposent par exemple d'atteindre le rang EX+++ ou de jouer chaque jour éligible. Les items ci-dessous peuvent aussi provenir d'events à durée limitée ou de packs payants, non comptés ici.",
+    es: 'Esta guía lista todas las fuentes semanales y mensuales regulares de recursos con límite de tiempo en Outerplane. Las filas de tienda se derivan de datos del juego, así que se mantienen actualizadas cuando una tienda se reorganiza; las filas que no son de tienda (drops de dungeon, recompensas de misión y singularidad) son estimaciones de jugadores que asumen cosas como alcanzar el rango EX+++ o jugar cada día elegible. Los ítems de abajo también pueden venir ocasionalmente de eventos por tiempo limitado o paquetes de pago, que no se cuentan aquí.',
   },
 
   tabs: {
@@ -205,12 +207,12 @@ export const LABELS = {
       es: 'Misión Semanal',
     },
     'singularity-rank': {
-      en: 'Dimensional Singularity — SSS++ Rank Reward',
-      jp: '次元特異点 SSS++ランク報酬',
-      kr: '차원 특이점 SSS++ 등급 보상',
-      zh: '次元奇点 SSS++评级奖励',
-      fr: 'Singularité dimensionnelle — Récompense rang SSS++',
-      es: 'Singularidad Dimensional — Recompensa de Rango SSS++',
+      en: 'Dimensional Singularity — Rank Rewards (E to EX+++)',
+      jp: '次元特異点 ランク報酬 (E〜EX+++)',
+      kr: '차원 특이점 등급 보상 (E~EX+++)',
+      zh: '次元奇点 评级奖励 (E~EX+++)',
+      fr: 'Singularité dimensionnelle — Récompenses de rang (E à EX+++)',
+      es: 'Singularidad Dimensional — Recompensas de Rango (E a EX+++)',
     },
     'singularity-weekly-mission': {
       en: 'Dimensional Singularity — Weekly Missions',
@@ -221,12 +223,12 @@ export const LABELS = {
       es: 'Singularidad Dimensional — Misiones Semanales',
     },
     'singularity-daily-run': {
-      en: 'Dimensional Singularity — Daily Run (Wed–Sun)',
-      jp: '次元特異点 デイリー参加 (水〜日)',
-      kr: '차원 특이점 일일 참여 (수~일)',
-      zh: '次元奇点 每日参与 (周三~周日)',
-      fr: 'Singularité dimensionnelle — Run quotidien (Mer–Dim)',
-      es: 'Singularidad Dimensional — Ejecución Diaria (Mié–Dom)',
+      en: 'Dimensional Singularity — Daily Reward (1 run per day, Wed–Sun)',
+      jp: '次元特異点 デイリー報酬 (1日1回プレイ、水〜日)',
+      kr: '차원 특이점 일일 보상 (하루 1회 플레이, 수~일)',
+      zh: '次元奇点 每日奖励 (每天挑战1次，周三~周日)',
+      fr: 'Singularité dimensionnelle — Récompense quotidienne (1 run par jour, Mer–Dim)',
+      es: 'Singularidad Dimensional — Recompensa Diaria (1 ejecución por día, Mié–Dom)',
     },
     'singularity-daily-ranking': {
       en: 'Dimensional Singularity — Daily Ranking',

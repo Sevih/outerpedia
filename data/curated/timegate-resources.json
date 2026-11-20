@@ -1,5 +1,5 @@
 {
-  "_doc": "Overlay curé du guide « Weekly & Monthly Reference Tables » (timegate-resources). NE CONTIENT QUE l'éditorial non-dérivable : (1) le panel d'items et leur regroupement en onglets (choix « quelles ressources comptent »), (2) les sources NON-SHOP dont la quantité est une estimation joueur absente de la donnée (drops de Floor 3, échange de points d'Extermination, missions/récompenses hebdo, Singularité rang/daily/ranking, atelier de Kate). Les sources de SHOP sont DÉRIVÉES de ProductTemplet par le générateur (quantité auto-corrigée) — ne JAMAIS les remettre ici (double comptage). Clés = item id du catalogue. Chiffres transplantés de la V2 (guides/general-guides/timegate-resource).",
+  "_doc": "Overlay curé du guide « Weekly & Monthly Reference Tables » (timegate-resources). NE CONTIENT QUE l'éditorial non-dérivable : (1) le panel d'items et leur regroupement en onglets (choix « quelles ressources comptent »), (2) les sources NON-SHOP dont la quantité est une estimation joueur absente de la donnée (drops de Floor 3, échange de points d'Extermination, missions/récompenses hebdo, atelier de Kate). Les sources de SHOP sont DÉRIVÉES de ProductTemplet, et les quatre sources de Singularité (rang, run quotidien, classement quotidien, missions hebdomadaires) des tables de récompense (SingularityGradeTemplet, SingularityTemplet, SingularityRankingTemplet, MissionTaskTemplet) par le générateur (quantités auto-corrigées) — ne JAMAIS les remettre ici (double comptage ; le build jette sur une clé singularity-*). Clés = item id du catalogue. Chiffres transplantés de la V2 (guides/general-guides/timegate-resource).",
 
   "tabs": [
     { "key": "books", "items": ["20201", "20202", "20203"] },
@@ -39,48 +39,24 @@
 
     "22031": [
       { "source": "irregular-extermination-points", "monthly": 150 },
-      { "source": "kates-workshop", "weekly": 70 },
-      { "source": "singularity-daily-run", "weekly": 25 }
+      { "source": "kates-workshop", "weekly": 70 }
     ],
     "22033": [
       { "source": "irregular-extermination-points", "monthly": 300 },
-      { "source": "kates-workshop", "weekly": 10, "costItemId": "22031", "costAmount": 30 },
-      { "source": "singularity-rank", "weekly": 320 }
+      { "source": "kates-workshop", "weekly": 10, "costItemId": "22031", "costAmount": 30 }
     ],
     "22030": [
       { "source": "irregular-extermination-points", "monthly": 150 },
-      { "source": "kates-workshop", "weekly": 70 },
-      { "source": "singularity-daily-run", "weekly": 25 }
+      { "source": "kates-workshop", "weekly": 70 }
     ],
     "22032": [
       { "source": "irregular-extermination-points", "monthly": 300 },
-      { "source": "kates-workshop", "weekly": 10, "costItemId": "22030", "costAmount": 30 },
-      { "source": "singularity-rank", "weekly": 320 }
-    ],
-
-    "25001": [
-      { "source": "singularity-rank", "weekly": 320 },
-      { "source": "singularity-daily-run", "weekly": 200 },
-      { "source": "singularity-daily-ranking", "weeklyRange": [25, 300] }
-    ],
-    "25002": [
-      { "source": "singularity-daily-run", "weekly": 250 },
-      { "source": "singularity-daily-ranking", "weeklyRange": [50, 200] }
-    ],
-    "60001": [
-      { "source": "singularity-weekly-mission", "weekly": 100 },
-      { "source": "singularity-daily-run", "weekly": 125 }
+      { "source": "kates-workshop", "weekly": 10, "costItemId": "22030", "costAmount": 30 }
     ],
 
     "21127": [
       { "source": "irregular-extermination-points", "monthly": 9 },
       { "source": "kates-workshop", "weekly": 4 }
-    ],
-
-    "30519": [
-      { "source": "singularity-rank", "weekly": 160 },
-      { "source": "singularity-daily-run", "weekly": 125 },
-      { "source": "singularity-daily-ranking", "weeklyRange": [25, 200] }
     ]
   }
 }

@@ -17,23 +17,31 @@
  *    Guild Shop l'a fait le 2024-12-03). La dérivation trouve MÊME des shops que
  *    la hand-list avait ratés (Tower Coin, Real-Time Arena, Remains).
  *
+ *  • SINGULARITÉ (dérivées des tables de récompense, `singularitySources`) —
+ *    rang (somme des 34 paliers E → EX+++ de la saison la plus récente),
+ *    récompense quotidienne × jours de saison, classement quotidien (plage
+ *    min–max des tranches × jours de saison), missions hebdomadaires
+ *    (`MCT_SINGULARITY_WEEKLY*`). Elles suivent seules un ajout de rang ou un
+ *    rebrassage des récompenses (patch 1.4.22 : EX à EX+++).
+ *
  *  • NON-SHOP (curés, `data/curated/timegate-resources.json`) — les sources
  *    dont la quantité N'EST PAS dans la donnée car c'est une estimation joueur
- *    bâtie sur des hypothèses (rang SSS++ atteint, 4 jours joués Mer→Sam, taux
- *    de drop d'un clear de Floor, budget de points) : drops d'Infiltration
- *    Floor 3, échange de points d'Extermination, missions/récompenses de jeu
- *    hebdo, Singularité (rang/daily/ranking), atelier de Kate (la recette
- *    existe mais la limite hebdo de craft, non). Chiffres transplantés verbatim.
+ *    bâtie sur des hypothèses (taux de drop d'un clear de Floor, budget de
+ *    points) : drops d'Infiltration Floor 3, échange de points d'Extermination,
+ *    missions/récompenses de jeu hebdo, atelier de Kate (la recette existe mais
+ *    la limite hebdo de craft, non). Chiffres transplantés verbatim.
  *
  * Le panel d'items ET leur regroupement en onglets sont eux aussi curés (choix
  * éditorial « quelles ressources comptent »). Le générateur ne fait que : (1)
  * dériver les lignes de shop par item, (2) fusionner les lignes non-shop curées,
- * (3) calculer les totaux (mensuel global = mensuel + hebdo×4, règle héritée).
+ * (3) dériver les lignes de Singularité, (4) calculer les totaux (mensuel
+ * global = mensuel + hebdo×4, règle héritée).
  */
 import type { LangDict } from '../lib/lang';
 import { isMain } from '../lib/is-main';
-import { loadTable, num, type Row } from '../lib/tables';
+import { groupBy, indexBy, loadTable, num, type Row } from '../lib/tables';
 import { readCuratedJson } from '../lib/json';
+import { readRewardRow } from './encounters';
 import { buildItemCatalog, type CatalogEntry } from './item-catalog';
 import {
   computeAsOf,
@@ -72,9 +80,10 @@ const SHOPS: { key: string; buyTypes: string[] }[] = [
 const shopBadge = (key: string): SourceType => (key === 'guild' ? 'guild' : 'shop');
 
 /**
- * Type de badge des sources NON-SHOP curées, par clé de source. `craft` =
- * atelier de Kate ; tout le reste (drops, missions, singularité, points) =
- * `mission`. Une clé absente ici jette au build (source curée non déclarée).
+ * Type de badge des sources NON-SHOP (curées et Singularité dérivée), par clé
+ * de source. `craft` = atelier de Kate ; tout le reste (drops, missions,
+ * singularité, points) = `mission`. Une clé curée absente ici jette au build
+ * (source curée non déclarée).
  */
 const NON_SHOP_BADGE: Record<string, SourceType> = {
   'irregular-infiltration-floor-3': 'mission',
@@ -87,6 +96,25 @@ const NON_SHOP_BADGE: Record<string, SourceType> = {
   'singularity-daily-ranking': 'mission',
   'kates-workshop': 'craft',
 };
+
+/**
+ * Sources de Singularité DÉRIVÉES des tables (`singularitySources`), dans
+ * l'ordre d'affichage. Une de ces clés dans le curé jette au build : elle y
+ * serait comptée deux fois.
+ */
+const SINGULARITY_KEYS = [
+  'singularity-rank',
+  'singularity-weekly-mission',
+  'singularity-daily-run',
+  'singularity-daily-ranking',
+] as const;
+type SingularityKey = (typeof SINGULARITY_KEYS)[number];
+
+/** Catégories de `MissionTaskTemplet` des missions hebdomadaires de Singularité. */
+const SINGULARITY_WEEKLY_MISSIONS = new Set([
+  'MCT_SINGULARITY_WEEKLY',
+  'MCT_SINGULARITY_WEEKLY_COMPLETE',
+]);
 
 /** Ordre d'affichage des types de source (mission → guild → shop → craft). */
 const SOURCE_TYPE_ORDER: Record<SourceType, number> = {
@@ -102,8 +130,11 @@ export type SourceType = 'mission' | 'guild' | 'shop' | 'craft';
 export interface TimegateSource {
   /** Clé de source : clé de shop (`guild`…) ou clé curée (`kates-workshop`…). */
   sourceKey: string;
-  /** Origine (shop dérivé vs éditorial curé) — utile au rendu/diagnostic. */
-  origin: 'shop' | 'cured';
+  /**
+   * Origine (shop dérivé, tables de récompense de Singularité, éditorial curé)
+   * — utile au diagnostic ; le badge, lui, vient de `type`.
+   */
+  origin: 'shop' | 'reward' | 'cured';
   /** Type de badge (ordre + couleur). */
   type: SourceType;
   /** Quantité hebdomadaire (absente si mensuelle ou plage). */
@@ -206,6 +237,138 @@ export function shopSourcesFor(
   return out;
 }
 
+/** Tables lues par `singularitySources` (lignes brutes de `.gamedata/parsed`). */
+export interface SingularityTables {
+  /** `SingularityTemplet` : une ligne par saison. */
+  seasons: Row[];
+  /** `SingularityGradeTemplet` : les rangs de chaque saison (`SingularityID`). */
+  grades: Row[];
+  /** `SingularityRankingTemplet` : les tranches de classement de chaque saison. */
+  rankings: Row[];
+  /** `MissionTaskTemplet` (seules les catégories `MCT_SINGULARITY_WEEKLY*` comptent). */
+  missionTasks: Row[];
+  /** `RewardTemplet` indexé par `ID`. */
+  rewardById: Map<string, Row>;
+  /** `RewardGroupTemplet` groupé par `GroupID`. */
+  rewardGroups: Map<string, Row[]>;
+}
+
+/**
+ * Sources de Singularité par item, dérivées des tables de récompense
+ * (`RewardTemplet` → `StaticGroupID` → `RewardGroupTemplet`, lu par
+ * `readRewardRow` d'encounters). Saison retenue : la plus récente
+ * (`SingularityTemplet.ID` maximal) ; une saison = `SingularityPeriodDate`
+ * jours (5, Mer→Dim).
+ *
+ *  • `singularity-rank` : somme des récompenses de TOUS les rangs de la saison
+ *    (E → EX+++), touchées une fois par saison donc par semaine ;
+ *  • `singularity-daily-run` : `SingularityDailyRewardID` × jours de saison — la
+ *    récompense reste quotidienne (un run par jour) même sans limite d'entrées
+ *    (`SingularityDailyEntryCount` ignoré : la limite est levée côté serveur) ;
+ *  • `singularity-daily-ranking` : plage [min, max] des tranches de classement
+ *    (une tranche sans l'item compte 0) × jours de saison, hors totaux ;
+ *  • `singularity-weekly-mission` : somme des missions `MCT_SINGULARITY_WEEKLY*`.
+ *
+ * Seuls les items comptent : or (`CreditMin`), cristaux et objet-boîte
+ * d'affichage (`GroupItemID`, ignoré par le client quand des `StaticGroupID`
+ * existent) sont écartés. Jette sur une table vide, un `RewardID` introuvable ou
+ * un butin que la table ne sait pas dire (tirage aléatoire, quantité variable).
+ */
+export function singularitySources(t: SingularityTables): Map<string, TimegateSource[]> {
+  if (!t.seasons.length) throw new Error('timegate : SingularityTemplet vide');
+  const season = t.seasons.reduce((a, b) => (num(b.ID) > num(a.ID) ? b : a));
+  const sid = season.ID;
+  const days = num(season.SingularityPeriodDate);
+  if (days <= 0)
+    throw new Error(`timegate : saison de Singularité ${sid} sans SingularityPeriodDate`);
+
+  /** Items d'un `RewardID` → quantité (garantie, fixe). */
+  const itemsOf = (rewardId: string | undefined, what: string): Map<string, number> => {
+    const row = rewardId ? t.rewardById.get(rewardId) : undefined;
+    if (!row) throw new Error(`timegate : RewardID ${rewardId ?? '(vide)'} introuvable (${what})`);
+    const out = new Map<string, number>();
+    for (const e of readRewardRow(row, t.rewardGroups).table.entries ?? []) {
+      if (e.kind !== 'item') continue;
+      if (e.random || e.min !== e.max)
+        throw new Error(
+          `timegate : RewardID ${rewardId} (${what}) donne ${e.id} en tirage ou en quantité variable`,
+        );
+      out.set(e.id, (out.get(e.id) ?? 0) + e.max);
+    }
+    return out;
+  };
+  const addInto = (into: Map<string, number>, from: Map<string, number>, factor = 1) => {
+    for (const [id, n] of from) into.set(id, (into.get(id) ?? 0) + n * factor);
+  };
+
+  // Rang : somme des récompenses de tous les paliers de la saison.
+  const grades = t.grades.filter((r) => r.SingularityID === sid);
+  if (!grades.length) throw new Error(`timegate : SingularityGradeTemplet vide (saison ${sid})`);
+  const rank = new Map<string, number>();
+  for (const g of grades) addInto(rank, itemsOf(g.RewardID, `rang ${g.RankName ?? g.Rank}`));
+
+  // Run quotidien : récompense du jour × jours de saison.
+  const daily = new Map<string, number>();
+  addInto(daily, itemsOf(season.SingularityDailyRewardID, `récompense quotidienne`), days);
+
+  // Classement quotidien : plage min–max des tranches, × jours de saison.
+  const rankings = t.rankings.filter((r) => r.SingularityID === sid);
+  if (!rankings.length)
+    throw new Error(`timegate : SingularityRankingTemplet vide (saison ${sid})`);
+  const tiers = rankings.map((r) => itemsOf(r.RewardID, `classement ${r.MyRankText ?? r.ID}`));
+  const ranking = new Map<string, [number, number]>();
+  for (const id of new Set(tiers.flatMap((m) => [...m.keys()]))) {
+    const amounts = tiers.map((m) => m.get(id) ?? 0);
+    ranking.set(id, [Math.min(...amounts) * days, Math.max(...amounts) * days]);
+  }
+
+  // Missions hebdomadaires.
+  const missions = t.missionTasks.filter((r) =>
+    SINGULARITY_WEEKLY_MISSIONS.has(r.MissionCategoryType ?? ''),
+  );
+  if (!missions.length)
+    throw new Error('timegate : aucune mission MCT_SINGULARITY_WEEKLY dans MissionTaskTemplet');
+  const weeklyMission = new Map<string, number>();
+  for (const m of missions) addInto(weeklyMission, itemsOf(m.RewardID, `mission ${m.ID}`));
+
+  const weekly: Record<
+    Exclude<SingularityKey, 'singularity-daily-ranking'>,
+    Map<string, number>
+  > = {
+    'singularity-rank': rank,
+    'singularity-weekly-mission': weeklyMission,
+    'singularity-daily-run': daily,
+  };
+  const out = new Map<string, TimegateSource[]>();
+  const push = (id: string, src: TimegateSource) => {
+    const list = out.get(id);
+    if (list) list.push(src);
+    else out.set(id, [src]);
+  };
+  for (const key of SINGULARITY_KEYS) {
+    const base = { sourceKey: key, origin: 'reward' as const, type: NON_SHOP_BADGE[key] };
+    if (key === 'singularity-daily-ranking') {
+      for (const [id, range] of ranking)
+        if (range[1] > 0) push(id, { ...base, weeklyRange: range });
+    } else {
+      for (const [id, n] of weekly[key]) if (n > 0) push(id, { ...base, weekly: n });
+    }
+  }
+  return out;
+}
+
+/** Lit les tables de Singularité sur disque (cf. `singularitySources`). */
+function loadSingularityTables(): SingularityTables {
+  return {
+    seasons: loadTable('SingularityTemplet'),
+    grades: loadTable('SingularityGradeTemplet'),
+    rankings: loadTable('SingularityRankingTemplet'),
+    missionTasks: loadTable('MissionTaskTemplet'),
+    rewardById: indexBy(loadTable('RewardTemplet')),
+    rewardGroups: groupBy(loadTable('RewardGroupTemplet'), 'GroupID'),
+  };
+}
+
 /** Entrées optionnelles : mêmes que `buildShopPriorities` (fournies par `datagen:build`). */
 export function buildTimegateResources(inputs?: {
   catalog?: Record<string, CatalogEntry>;
@@ -218,6 +381,7 @@ export function buildTimegateResources(inputs?: {
   if (!curated) throw new Error('timegate : data/curated/timegate-resources.json absent');
 
   const { asOf, maxYear } = computeAsOf(products);
+  const singularity = singularitySources(loadSingularityTables());
 
   // Pré-indexe les produits par shop retenu (une seule passe sur ProductTemplet).
   const byShop = new Map<string, Row[]>(SHOPS.map((s) => [s.key, []]));
@@ -245,6 +409,10 @@ export function buildTimegateResources(inputs?: {
       const type = NON_SHOP_BADGE[cs.source];
       if (!type)
         throw new Error(`timegate : source curée « ${cs.source} » (item ${id}) non déclarée`);
+      if ((SINGULARITY_KEYS as readonly string[]).includes(cs.source))
+        throw new Error(
+          `timegate : source « ${cs.source} » (item ${id}) dérivée des tables, à retirer du curé`,
+        );
       const src: TimegateSource = { sourceKey: cs.source, origin: 'cured', type };
       if (cs.weeklyRange) {
         src.weeklyRange = cs.weeklyRange; // hors totaux (estimation, inchangé)
@@ -262,6 +430,12 @@ export function buildTimegateResources(inputs?: {
         src.costItem = { id: cs.costItemId, name: ci.name, icon: ci.icon, grade: gradeOf(ci) };
         src.costAmount = cs.costAmount;
       }
+      sources.push(src);
+    }
+
+    // 3. Sources de Singularité dérivées (le ranking, plage estimée, hors totaux).
+    for (const src of singularity.get(id) ?? []) {
+      if (src.weekly) totals.weekly += src.weekly;
       sources.push(src);
     }
 
@@ -299,9 +473,10 @@ if (isMain(import.meta.url)) {
     console.log(`\n[${tab.key}]`);
     for (const it of tab.items) {
       const shop = it.sources.filter((s) => s.origin === 'shop').length;
+      const reward = it.sources.filter((s) => s.origin === 'reward').length;
       const cured = it.sources.filter((s) => s.origin === 'cured').length;
       console.log(
-        `  ${it.name.en.padEnd(26)} ${shop} shop + ${cured} curé → mensuel global ${it.totals.grandMonthly}`,
+        `  ${it.name.en.padEnd(26)} ${shop} shop + ${reward} table + ${cured} curé → mensuel global ${it.totals.grandMonthly}`,
       );
     }
   }
