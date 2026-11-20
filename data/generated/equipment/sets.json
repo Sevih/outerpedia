@@ -289,7 +289,7 @@
             "jp": "最初の2回の攻撃に対して、受けるダメージDOWN 40% (被弾時解除/解除不可) \\n自身のスピードDOWN 1ターン (免疫効果無視/解除不可)",
             "kr": "최초 2회의 공격에 대한 받는 피해 감소 -40%(피격 시 해제/해제 불가)\\n자신 속도 감소 1턴(면역 무시/해제 불가)",
             "zh": "首次受到的2次攻击所受伤害-40%（受到攻击时解除/不可解除）\\n自身速度降低1回合（无视免疫/不可解除）",
-            "fr": "les dégâts pris diminuent de 40% pour les 2 premières attaques entrantes (Removed when hit/Irremovible)\\nDiminution de la vitesse de utilisateur pour 1 tour (Ignore Immunité/Irremovible)",
+            "fr": "Réduit de 40 % les DGT subis des 2 premières attaques (consommé à chaque attaque subie, indissipable)\\nRéduit la VIT du lanceur pendant 1 tour (ignore l'Immunité, indissipable)",
             "es": "Daño recibido baja 40% en primeros 2 ataques (Se elimina al\\ndaño/Ineludible) Velocidad del lanzador baja 1 turno (Ignora Inmunidad/Ineludible)"
           }
         },
