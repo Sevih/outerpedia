@@ -4337,7 +4337,7 @@
       "jp": "【ヴェロニカ】との絆をより深めることができる証票。\\n【ヴェロニカ】の親密度が170,000上昇し、一度にLv.10まで上げることができます。\\n既に最大なら10万ゴールドで売却可能。",
       "kr": "베로니카에게 선물하면 애정도를 한번에 10LV까지 성장 시킬 수 있는 분량의 경험치 (170,000) 를 제공합니다.\\n이미 완벽한 애정 관계가 구축되신 경우, 해당 아이템을 10만골드로 판매하실 수 있습니다.",
       "zh": "赠予维罗妮卡后，提供可一次性将亲密度成长至10级的经验值（170,000）。\\n若已建立完美的爱情关系，可将该道具以10万金币出售。",
-      "fr": "si gifted to Veronica, provides enough EXP (170,000) to grow Affinity to Level 10 at once.\\nIf a perfect bond of affection has already been established, this item can be sold durant 100,000 Gold.",
+      "fr": "Offert à Veronica, cet objet fournit assez d'EXP (170 000) pour atteindre immédiatement le niveau 10 d'Affinité.\\nSi l'Affinité est déjà au maximum, cet objet peut être vendu pour 100 000 d'Or.",
       "es": "Al obsequiarlo a Veronica, proporciona la EXP suficiente (170.000) para llevar la Afinidad al Nivel 10\\nde una vez. Si ya se ha establecido un vínculo perfecto de afecto, este objeto puede venderse por 100.000 de Oro."
     },
     "icon": "TI_present_2000037_2",
@@ -5465,7 +5465,7 @@
       "jp": "以下の中から1種を選択して獲得できる。 \\n- 地の進化石のかけら 30個 \\n- 火の進化石のかけら 30個 \\n- 水の進化石のかけら 30個 \\n- 光の進化石のかけら 30個 \\n- 闇の進化石のかけら 30個",
       "kr": "아래 구성품 중, 1종을 선택하여 획득할 수 있습니다.\n - 지속성 진화석 파편 30개\n - 화속성 진화석 파편 30개\n - 수속성 진화석 파편 30개\n - 명속성 진화석 파편 30개\n - 암속성 진화석 파편 30개",
       "zh": "可选择并获得下列物品中的1项。\\n- 30个土之进化石残片\\n- 30个火之进化石残片\\n- 30个水之进化石残片\\n- 30个光之进化石残片\\n- 30个暗之进化石残片",
-      "fr": "Sélectionnez et obtenez l'une des options suivantes:\\n- Terre Upgrade Stone Fragment x30 Fragment x30\\n- Incendie Upgrade Stone Fragment x30\\n- Eau Upgrade Fragment Pierre x3 Fragment\\n- Light Upgrade Stone Fragment x3 - Fragment de pierre de lumière de mise à niveau\\n- Dark Upgrade Stone Fragment x3",
+      "fr": "Choisissez et obtenez l'un des lots suivants :\n- Fragment de pierre d'évolution de terre x30\n- Fragment de pierre d'évolution de feu x30\n- Fragment de pierre d'évolution d'eau x30\n- Fragment de pierre d'évolution de lumière x30\n- Fragment de pierre d'évolution ténébreuse x30",
       "es": "Seleccione y obtenga una de las siguientes opciones:\\n - Fragmento de Piedra de Mejora de Tierra x30\\n - Fragmento de Piedra de Mejora de Fuego x30\\n - Fragmento de Piedra de Mejora de Agua x30\\n - Fragmento de Piedra de Mejora de Luz x30\\n - Fragmento de Piedra de Mejora de Oscuridad x30"
     },
     "icon": "TI_Common_Box01",
@@ -5801,7 +5801,7 @@
       "jp": "以下の中から1種を選択して獲得できる。\\n- 地の進化石のかけら 10個\\n- 火の進化石のかけら 10個\\n- 水の進化石のかけら 10個\\n- 光の進化石のかけら 10個\\n- 闇の進化石のかけら 10個",
       "kr": "아래 구성품 중, 1종을 선택하여 획득할 수 있습니다.\\n - 지속성 진화석 파편 10개\\n - 화속성 진화석 파편 10개\\n - 수속성 진화석 파편 10개\\n - 명속성 진화석 파편 10개\\n - 암속성 진화석 파편 10개",
       "zh": "可选择并获得下列物品中的1项。\\n - 10个土之进化石残片\\n - 10个火之进化石残片\\n - 10个水之进化石残片\\n - 10个光之进化石残片\\n - 10个暗之进化石残片",
-      "fr": "Sélectionnez et obtenez l'une des options suivantes:\\n- Terre Upgrade Stone Fragment x10\\n- Incendie Upgrade Stone Fragment x10 Fragment\\n- Eau de mise à niveau Fragment de pierre x10 x1\\n- Light Upgrade Stone Fragment x1 - Fragment de pierre de lumière de mise à niveau x1\\n- Dark Upgrade Stone Fragment x1",
+      "fr": "Choisissez et obtenez l'un des lots suivants :\\n- Fragment de pierre d'évolution de terre x10\\n- Fragment de pierre d'évolution de feu x10\\n- Fragment de pierre d'évolution d'eau x10\\n- Fragment de pierre d'évolution de lumière x10\\n- Fragment de pierre d'évolution ténébreuse x10",
       "es": "Selecciona y obtén una de las siguientes\\nopciones: - Fragmento de Piedra de Mejora de\\nTierra x10 - Fragmento de Piedra de Mejora de\\nFuego x10 - Fragmento de Piedra de Mejora de\\nAgua x10 - Fragmento Piedra Evol. Luz\\nx10 - Fragmento de Piedra de Mejora de Oscuridad"
     },
     "icon": "TI_Common_Box01",
@@ -8193,7 +8193,7 @@
       "jp": "スターターブーストパックA",
       "kr": "스타팅 부스터 팩 A",
       "zh": "新手加速包A",
-      "fr": "Starter's Booster pack A",
+      "fr": "Pack de bonus de départ A",
       "es": "Pack Reforzador Starter A"
     },
     "desc": {
@@ -8201,7 +8201,7 @@
       "jp": "エーテル×3,000と300,000ゴールドを獲得できる。",
       "kr": "300,000 골드와 3,000 에테르를 습득할 수 있습니다.",
       "zh": "可获得300,000金币\\n和3,000以太。",
-      "fr": "Obtain 300,000 Gold and Éther x3,000.",
+      "fr": "Obtenez 300 000 d'Or et 3 000 Éthers.",
       "es": "Obtén 300.000 de Oro y 3.000 de Éter."
     },
     "icon": "TI_Common_Box05",
@@ -13241,7 +13241,7 @@
       "jp": "500,000ゴールド、★5アクセサリー\\n選択ボックス【レジェンド】を獲得できる。",
       "kr": "50만 골드와 5성 전설 악세서리 선택 상자를 얻습니다.",
       "zh": "可获得50万金币和5星传说饰品选择箱。",
-      "fr": "Obtain 500,000 Gold and a 5★ Légendaire Accessory sélection coffre",
+      "fr": "Obtenez 500 000 d'Or et un Coffre de sélection d'accessoire légendaire 5★.",
       "es": "Obtén 500,000 de Oro y un Cofre de Selección de Accesorio Legendario 5★."
     },
     "icon": "TI_Common_Box05",
@@ -15689,7 +15689,7 @@
       "jp": "ゴールド600万、達人の強化ハンマー×150、再練カタリスト（レジェンド）×800を獲得。",
       "kr": "600만 골드, 명인 강화 도구 150개, 전설 재련 촉매제 800개를 얻습니다.",
       "zh": "獲得600萬金幣、名匠強化工具×150、传说鍛造催化劑×800。",
-      "fr": "Obtain 6,000,000 Gold, 150 Master Smithing Tools, and 800 Légendaire Refining Catalysts.",
+      "fr": "Obtenez 6 000 000 d'Or, 150 Marteaux de l'artisan et 800 Catalyseurs de reforgeage légendaires.",
       "es": "Obtén 6M Oro, 150 Herr. Forja Amo y 800 Catalizadores Legendarios."
     },
     "icon": "TI_Common_Box05",
@@ -18381,6 +18381,78 @@
       "es": "Obtén las siguientes recompensas.\\n1,500 de Éter gratis\\nMarco de perfil [¡Pum, pam, pum!]"
     },
     "icon": "TI_Common_Box05",
+    "grade": "unique",
+    "type": "box",
+    "subType": "box_type_random",
+    "star": 0
+  },
+  "30578": {
+    "kind": "item",
+    "name": {
+      "en": "6★ Legendary Weapon Selection Chest",
+      "jp": "★6武器選択ボックス【レジェンド】",
+      "kr": "6성 전설 무기 선택 상자",
+      "zh": "6星传说武器选择箱",
+      "fr": "Coffre de sélection d'arme légendaire 6★",
+      "es": "Cofre de Selección de Arma Legendaria 6★"
+    },
+    "desc": {
+      "en": "Select and obtain one 6★ Legendary Weapon. The equipment provided will have fixed stats.",
+      "jp": "★6レジェンド武器の中から1個を選択して獲得できる。オプションはすべて固定された状態で提供されます。",
+      "kr": "6성 전설 무기 중 한가지를 선택하여 얻습니다. 제공되는 장비는 고정된 옵션으로 제공됩니다.",
+      "zh": "选择并获得一件6星传说武器。所提供的装备将附带固定属性。",
+      "fr": "Sélectionnez et obtenez une arme légendaire 6★. Les statistiques de cet équipement sont fixes.",
+      "es": "Selecciona y obtén un arma legendaria de 6★. El equipo tendrá estadísticas fijas."
+    },
+    "icon": "TI_Weapon_Box02",
+    "grade": "unique",
+    "type": "box",
+    "subType": "box_type_choice_item",
+    "star": 0
+  },
+  "30579": {
+    "kind": "item",
+    "name": {
+      "en": "6★ Legendary Accessory Selection Chest",
+      "jp": "★6アクセサリー選択ボックス【レジェンド】",
+      "kr": "6성 전설 악세서리 선택 상자",
+      "zh": "6星传说饰品选择箱",
+      "fr": "Coffre de sélection d'accessoire légendaire 6★",
+      "es": "Cofre de Selección de Accesorio Legendario 6★"
+    },
+    "desc": {
+      "en": "Select and obtain one 6★ Legendary Accessory. The equipment provided will have fixed stats.",
+      "jp": "★6レジェンドアクセサリーの中から1個を選択して獲得できる。オプションはすべて固定された状態で提供されます。",
+      "kr": "6성 전설 악세서리 중 한가지를 선택하여 얻습니다. 제공되는 장비는 고정된 옵션으로 제공됩니다.",
+      "zh": "选择并获得一件6星传说饰品。所提供的装备将附带固定属性。",
+      "fr": "Sélectionnez et obtenez un accessoire légendaire 6★. Les statistiques de cet équipement sont fixes.",
+      "es": "Selecciona y obtén un accesorio legendario de 6★. El equipo tendrá estadísticas fijas."
+    },
+    "icon": "TI_Accessary_Box02",
+    "grade": "unique",
+    "type": "box",
+    "subType": "box_type_choice_item",
+    "star": 0
+  },
+  "30580": {
+    "kind": "item",
+    "name": {
+      "en": "6★ Legendary Armor Chest [Speed]",
+      "jp": "★6速度の防具ボックス【レジェンド】",
+      "kr": "6성 전설 방어구 상자 [속도]",
+      "zh": "6星传说防具箱 [速度]",
+      "fr": "Coffre d'armure légendaire 6★ [VIT]",
+      "es": "Cofre de Armadura Legendaria 6★ [VEL]"
+    },
+    "desc": {
+      "en": "Obtain all pieces of 6★ Legendary [Speed] set armor. The equipment provided will have fixed stats.",
+      "jp": "★6レジェンド防具(速度セット)をすべて獲得できる。オプションはすべて固定された状態で提供されます。",
+      "kr": "6성 전설 [속도] 세트 방어구를 모두 얻습니다. 제공되는 장비는 고정된 옵션으로 제공됩니다.",
+      "zh": "获得所有6星传说[速度]套装防具。所提供的装备将附带固定属性。",
+      "fr": "Obtenez toutes les pièces d'armure légendaire 6★ du set [VIT]. Les statistiques de cet équipement sont fixes.",
+      "es": "Obtén todas las piezas de armadura legendaria de 6★ del set [VEL]. El equipo tendrá estadísticas fijas."
+    },
+    "icon": "TI_Armor_Box02",
     "grade": "unique",
     "type": "box",
     "subType": "box_type_random",
@@ -26673,7 +26745,7 @@
     "type": "costume",
     "star": 0,
     "characterId": "2000060",
-    "source": "shop_asset_normal"
+    "source": "event_shop"
   },
   "COSTUME_56": {
     "kind": "costume",
