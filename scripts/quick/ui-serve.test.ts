@@ -419,6 +419,7 @@ describe('shot — la page que le banc de captures photographie', () => {
       '/api/monsters',
       '/api/discord/send',
       '/api/quit',
+      '/api/restart',
     ])
       expect(READ_ONLY_POSTS.has(path), path).toBe(false);
   });
@@ -18349,5 +18350,127 @@ describe('Extraction — la page, sur le vrai markup', () => {
     expect(v.note).toBe(
       'Ce monstre n’est pas encore committé : rien à figer — l’intégrer d’abord.',
     );
+  });
+});
+
+describe('« Relancer quick » — le bouton de l’en-tête', () => {
+  afterEach(() => vi.unstubAllGlobals());
+
+  /**
+   * La VRAIE coquille et le vrai `lib.js`, démarrés sans section. `confirm` dit
+   * `yes`, `POST /api/restart` rend `restart` (une pièce JSON, comme le
+   * serveur), `GET /api/ping` rend tour à tour les PID de `pings` (`null` : le
+   * serveur ne répond pas encore), et `location.reload` est compté.
+   */
+  async function page(opts: {
+    yes?: boolean;
+    restart: unknown;
+    status?: number;
+    pings: (number | null)[];
+  }) {
+    vi.resetModules();
+    const window = openWindow({ url: 'http://localhost:4747/' });
+    const { document } = window;
+    document.body.innerHTML = (
+      /<body>([\s\S]*)<\/body>/.exec(assemblePage(shell(), readTab))?.[1] ?? ''
+    ).replace(/<script[\s\S]*?<\/script>/g, '');
+    const one = (data: unknown, status = 200) => {
+      let sent = false;
+      return {
+        ok: status < 400,
+        status,
+        json: async () => data,
+        body: {
+          getReader: () => ({
+            read: async () => {
+              if (sent) return { done: true };
+              sent = true;
+              return { value: new TextEncoder().encode(JSON.stringify(data)) };
+            },
+          }),
+        },
+      };
+    };
+    const posted: string[] = [];
+    const fetch = vi.fn(async (path: string, init?: unknown) => {
+      if (path === '/api/state') return one({ git: { branch: 'main', ahead: 0, behind: 0 } });
+      if (path === '/api/ping') {
+        const pid = opts.pings.shift();
+        if (pid === null || pid === undefined) throw new TypeError('Failed to fetch');
+        return one({ ok: true, pid });
+      }
+      if (init) {
+        posted.push(path);
+        return one(opts.restart, opts.status ?? 200);
+      }
+      return one({});
+    });
+    const reload = vi.fn();
+    vi.stubGlobal('window', window);
+    vi.stubGlobal('document', document);
+    vi.stubGlobal('location', { ...window.location, hash: '', reload });
+    vi.stubGlobal('history', window.history);
+    vi.stubGlobal('fetch', fetch);
+    const asked: string[] = [];
+    vi.stubGlobal('confirm', (q: string) => (asked.push(q), opts.yes ?? true));
+    const lib = (await import(/* @vite-ignore */ resolve(UI, 'lib.js'))) as {
+      sections: { start: () => void };
+      relaunch: (o?: { every?: number; within?: number }) => Promise<boolean>;
+    };
+    lib.sections.start();
+    const el = (id: string) => document.getElementById(id) as unknown as HTMLButtonElement;
+    return {
+      lib,
+      posted,
+      reload,
+      asked,
+      button: () => el('restart'),
+      log: () => el('log').textContent,
+      state: () => el('journal').dataset.state,
+    };
+  }
+
+  it('est dans l’en-tête, à côté de « Quitter »', () => {
+    const header = /<header class="top">[\s\S]*?<\/header>/.exec(shell())?.[0] ?? '';
+    expect(header).toContain('id="restart"');
+    expect(header.indexOf('id="restart"')).toBeLessThan(header.indexOf('id="quit"'));
+  });
+
+  it('demande d’abord ; refusé, rien ne part', async () => {
+    const p = await page({ yes: false, restart: { ok: true, pid: 1 }, pings: [] });
+    expect(await p.lib.relaunch({ every: 1, within: 50 })).toBe(false);
+    expect(p.asked[0]).toContain('Relancer quick ?');
+    expect(p.posted).toEqual([]);
+  });
+
+  it('accepté : attend un AUTRE PID sur `/api/ping`, puis recharge la page', async () => {
+    // L'ancien répond encore, puis plus personne, puis le nouveau.
+    const p = await page({
+      restart: { ok: true, log: ['quick redémarre…'], pid: 41 },
+      pings: [41, null, 42],
+    });
+    const out = p.lib.relaunch({ every: 1, within: 2000 });
+    expect(await out).toBe(true);
+    expect(p.posted).toEqual(['/api/restart']);
+    expect(p.reload).toHaveBeenCalledTimes(1);
+  });
+
+  it('refusé par le serveur (un geste court) : le journal dit lequel, le bouton se rallume', async () => {
+    const error = 'Relance refusée : un geste est en cours (/api/ranks) — attends sa fin.';
+    const p = await page({ restart: { ok: false, error }, status: 409, pings: [] });
+    expect(await p.lib.relaunch({ every: 1, within: 50 })).toBe(false);
+    expect(p.log()).toContain(error);
+    expect(p.state()).toBe('ko');
+    expect(p.button().disabled).toBe(false);
+    expect(p.reload).not.toHaveBeenCalled();
+  });
+
+  it('pas de retour dans le délai : le journal dit de lire la sortie du serveur', async () => {
+    const p = await page({ restart: { ok: true, pid: 41 }, pings: [41, 41, 41, 41, 41, 41] });
+    expect(await p.lib.relaunch({ every: 5, within: 20 })).toBe(false);
+    expect(p.state()).toBe('ko');
+    expect(p.log()).toContain('outerpedia-quick.log');
+    expect(p.button().disabled).toBe(false);
+    expect(p.reload).not.toHaveBeenCalled();
   });
 });

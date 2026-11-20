@@ -43,7 +43,7 @@
  * pas deux serveurs.
  */
 // EN PREMIER, avant tout import qui tirerait l'admin : cf. `env.ts`.
-import './env';
+import { LAUNCH_ENV } from './env';
 import { spawn } from 'node:child_process';
 import { existsSync, mkdirSync, readFileSync, renameSync, statSync, writeFileSync } from 'node:fs';
 import { createServer, type IncomingMessage, type ServerResponse } from 'node:http';
@@ -181,13 +181,27 @@ import {
   type Planned,
 } from './patch';
 import { patchPostsReader } from './patch-posts';
+import {
+  PORT_RETRY_MS,
+  createGestures,
+  portBusy,
+  restartAnswer,
+  restartQuick,
+  takeRestartMark,
+} from './restart';
 import { assemblePage, resolveUiFile } from './ui-serve';
 import { childEnv, draftModel, proposeDraft, runClaude } from './claude-draft';
-import { acquirePatchJob } from '@/lib/admin/patch-runner';
+import { acquirePatchJob, runningPatchJob } from '@/lib/admin/patch-runner';
 import type { MonsterKitDisk } from '@/lib/admin/monster-kit';
 import { getCharacterListItems } from '@/lib/data/characters';
 import type { Banner, PromoCode } from '@/lib/admin/promo-banner-store';
 import type { GearBuild } from '@contracts';
+
+/**
+ * Ce quick succède-t-il à un autre (« Relancer quick ») ? Alors il attend le
+ * port au lieu de conclure « déjà lancé », et ne rouvre pas le navigateur.
+ */
+const RESTARTED = takeRestartMark(process.env, LAUNCH_ENV);
 
 // Les stores lisent `process.env` (écrits pour Next, qui charge .env.local seul).
 for (const [k, v] of Object.entries(loadEnvLocal())) process.env[k] ??= v;
@@ -313,6 +327,14 @@ const json = (res: ServerResponse, data: unknown, status = 200): void => {
 };
 
 /**
+ * Les gestes en cours : chaque `stream()` y compte le sien, sous sa route.
+ * « Relancer quick » est refusé tant qu'il en court un (cf. `restart.ts`).
+ */
+const gestures = createGestures();
+/** Une relance acceptée : la suivante est refusée (cf. `restartRefusal`). */
+let restarting = false;
+
+/**
  * Réponse en NDJSON — une ligne JSON par étape, ÉCRITE DÈS QU'ELLE ARRIVE, puis
  * une dernière ligne `{ done: … }` qui porte le résultat complet.
  *
@@ -326,21 +348,25 @@ const json = (res: ServerResponse, data: unknown, status = 200): void => {
  * d'en accumuler d'autres — c'est-à-dire exactement le temps qu'on veut couvrir.
  */
 async function stream<T>(res: ServerResponse, run: (report: Report) => Promise<T>): Promise<void> {
-  res.socket?.setNoDelay(true);
-  res.writeHead(200, {
-    'content-type': 'application/x-ndjson; charset=utf-8',
-    'cache-control': 'no-store',
+  // Compté jusqu'au bout, échec compris : `track` décompte dans un `finally`.
+  const label = new URL(res.req?.url ?? '/', 'http://quick').pathname;
+  await gestures.track(label, async () => {
+    res.socket?.setNoDelay(true);
+    res.writeHead(200, {
+      'content-type': 'application/x-ndjson; charset=utf-8',
+      'cache-control': 'no-store',
+    });
+    const line = (o: unknown): void => void res.write(`${JSON.stringify(o)}\n`);
+    try {
+      line({ done: await run((step, doing) => line(doing ? { step, doing: true } : { step })) });
+    } catch (e: unknown) {
+      // Les en-têtes sont partis : plus question de répondre en 500, l'échec passe
+      // par le journal comme le reste (le `catch` de `createServer` ne pourrait
+      // plus qu'échouer sur des en-têtes déjà envoyés).
+      line({ done: { ok: false, log: [String(e)] } });
+    }
+    res.end();
   });
-  const line = (o: unknown): void => void res.write(`${JSON.stringify(o)}\n`);
-  try {
-    line({ done: await run((step, doing) => line(doing ? { step, doing: true } : { step })) });
-  } catch (e: unknown) {
-    // Les en-têtes sont partis : plus question de répondre en 500, l'échec passe
-    // par le journal comme le reste (le `catch` de `createServer` ne pourrait
-    // plus qu'échouer sur des en-têtes déjà envoyés).
-    line({ done: { ok: false, log: [String(e)] } });
-  }
-  res.end();
 }
 
 /**
@@ -463,6 +489,13 @@ async function route(req: IncomingMessage, res: ServerResponse): Promise<void> {
       // Le bouton « Pousser » : la branche et ses commits en attente.
       git: gitState(),
     });
+    return;
+  }
+
+  if (req.method === 'GET' && url.pathname === '/api/ping') {
+    // La lecture la plus légère : rien que le PID qui sert. La page la relit
+    // après « Relancer quick » jusqu'à voir un autre PID que l'ancien.
+    json(res, { ok: true, pid: process.pid });
     return;
   }
 
@@ -1310,6 +1343,32 @@ async function route(req: IncomingMessage, res: ServerResponse): Promise<void> {
     return;
   }
 
+  if (req.method === 'POST' && url.pathname === '/api/restart') {
+    // « Relancer quick » : un geste, refusé (409) tant qu'un autre court — le
+    // verrou de « Patch » ou un geste qui stream. Sinon on répond d'abord, et
+    // la relance part une fois la réponse partie (cf. `restart.ts`).
+    const busy = () => ({ patchJob: runningPatchJob(), gestures: gestures.running() });
+    const out = restartAnswer({ ...busy(), restarting }, process.pid);
+    json(res, out.body, out.status);
+    if (!out.restart) return;
+    restarting = true;
+    res.on('finish', () => {
+      void restartQuick({
+        execPath: process.execPath,
+        execArgv: process.execArgv,
+        argv: process.argv,
+        env: LAUNCH_ENV,
+        cwd: process.cwd(),
+        server,
+        spawn,
+        exit: (code) => process.exit(code),
+        say: (line) => console.log(line),
+        busy,
+      });
+    });
+    return;
+  }
+
   json(res, { error: 'route inconnue' }, 404);
 }
 
@@ -1348,7 +1407,18 @@ const server = createServer((req, res) => {
   route(req, res).catch((e: unknown) => json(res, { ok: false, log: [String(e)] }, 500));
 });
 
+/** Les refus du port essuyés par un quick relancé. */
+let portTries = 0;
+
 server.on('error', (e: NodeJS.ErrnoException) => {
+  // Relancé : l'ancien quick rend le port, on l'attend quelques secondes.
+  if (e.code === 'EADDRINUSE' && RESTARTED) {
+    const next = portBusy(++portTries, PORT);
+    if (next.say) (next.retry ? console.log : console.error)(next.say);
+    if (!next.retry) process.exit(1);
+    setTimeout(listen, PORT_RETRY_MS);
+    return;
+  }
   // Instance déjà en place : on lui rend la main plutôt que d'échouer.
   if (e.code === 'EADDRINUSE') {
     console.log(`quick tourne déjà sur ${PORT} — ouverture du navigateur.`);
@@ -1371,9 +1441,17 @@ server.on('error', (e: NodeJS.ErrnoException) => {
 server.keepAliveTimeout = 125_000;
 server.headersTimeout = 130_000;
 
-server.listen(PORT, PEERS.length ? '0.0.0.0' : '127.0.0.1', () => {
-  console.log(`quick → http://localhost:${PORT}/`);
+function listen(): void {
+  server.listen(PORT, PEERS.length ? '0.0.0.0' : '127.0.0.1');
+}
+
+server.on('listening', () => {
+  console.log(
+    `quick → http://localhost:${PORT}/${RESTARTED ? ` (relancé, PID ${process.pid})` : ''}`,
+  );
   if (PEERS.length)
     console.log(`        https://${QUICK_HOST}/ depuis les deux PC (${PEERS.join(', ')})`);
-  if (!process.argv.includes('--no-open')) openBrowser();
+  if (!RESTARTED && !process.argv.includes('--no-open')) openBrowser();
 });
+
+listen();

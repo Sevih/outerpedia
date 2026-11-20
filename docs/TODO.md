@@ -36,6 +36,30 @@ les preuves et les décisions vivent dans le tri consolidé de sevih-tool
 
 ## 🧰 Outil quick
 
+- [ ] **« Relancer quick » — test sur le vrai quick (lot B72)** : le banc
+      n'a relancé qu'un quick isolé (port 4799, clés vidées, scope
+      `b72-quick`). D'abord une relance À LA MAIN (le quick qui tourne n'a
+      pas la route) : arrêt par son scope `run-p<PID>-*.scope` ou « Quitter »,
+      puis le lanceur. Ensuite : (1) « Relancer », à droite de l'en-tête, avant
+      « Quitter » : une question, puis « redémarrage… » au journal, et la page
+      se recharge seule en quelques secondes ; le journal du lanceur
+      (`$XDG_RUNTIME_DIR/outerpedia-quick.log`, ou celui du scope) dit
+      « quick : relance demandée… », « port libéré… », puis
+      « quick → http://localhost:4747/ (relancé, PID …) » — même port, autre
+      PID, toujours dans le même scope :
+      `systemctl --user status run-p<PID>-*.scope`. (2) Données rechargées :
+      après une promotion (`pnpm datagen:promote --apply` ou Patch ›
+      Promouvoir) ou une intégration, un perso nouveau paraît dans le picker
+      de la Fiche perso après « Relancer », sans arrêt à la main. (3) Refus : « Relancer »
+      pendant un « Pousser » ou un geste de Patch en cours → journal rouge
+      « Relance refusée : un geste est en cours (git push, /api/push) ».
+      (4) Sur le FIXE (Windows, `launch.cmd`) : même essai ; la console reste
+      ouverte, affiche « quick a ete relance : il continue dans cette
+      fenetre. », et les lignes du nouveau quick s'y écrivent ; la fermer
+      l'arrête toujours ; « Quitter » ensuite ferme la fenêtre sans `pause`
+      (la console appartient alors au quick relancé). (5) Depuis l'autre PC
+      (`https://quick.outerpedia.local`) : même bouton, même retour.
+
 - [ ] **Tier list maker — canon de partage append-only** : `buildCanon`
       trie par id numérique (fusions après, A84 du 30/10) ; un NOUVEAU héros
       2000xxx ou costume 2010xxx s'insère devant Eliza (2700035), 2700019 et

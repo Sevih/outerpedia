@@ -13,6 +13,15 @@ cd /d "%~dp0..\.."
 
 node node_modules\tsx\dist\cli.mjs scripts\quick\server.ts
 
+rem Code 3 = "Relancer quick" (RESTART_EXIT_CODE, restart.ts) : le nouveau
+rem quick tourne deja, dans CETTE console (sortie heritee), qui reste ouverte
+rem tant qu'il tourne. Ni "arrete" ni `pause` : il n'est pas arrete.
+if "%ERRORLEVEL%"=="3" (
+  echo.
+  echo quick a ete relance : il continue dans cette fenetre.
+  exit /b 0
+)
+
 echo.
 echo Le serveur s'est arrete.
 pause

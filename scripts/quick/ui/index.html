@@ -61,6 +61,14 @@
           Pousser <span class="badge" id="push-count">0</span>
         </button>
         <span class="env" id="env" title="Le poste qui sert la page, et son port"></span>
+        <!-- Relance le serveur (il relit les données au démarrage) : `relaunch` (`lib.js`). -->
+        <button
+          class="btn ghost sm"
+          id="restart"
+          title="Relancer quick : le serveur redémarre et relit les données (après une intégration ou une promotion)"
+        >
+          Relancer
+        </button>
         <button class="btn ghost sm" id="quit" title="Arrête le serveur local">Quitter</button>
       </div>
     </header>

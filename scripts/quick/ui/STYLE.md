@@ -45,7 +45,14 @@ pastille.
   sections, Fiche perso, Effets, Monstres et Items, Guides la sienne, Guides,
   et Outils la sienne, Noms), puis à droite les
   pastilles des services (`.pill` + `.dot`, `title` = pourquoi), « Pousser »,
-  le poste et le port (`#env`), « Quitter ».
+  le poste et le port (`#env`), « Relancer », « Quitter ».
+- **« Relancer »** (`#restart`, `.btn.ghost.sm`, lot B72) : relance quick, qui
+  relit ses données au démarrage (après une intégration ou une promotion).
+  Confirmation d'abord (`confirm`, qui prévient d'un travail non enregistré),
+  puis `busy` et « redémarrage… » au journal ; la page relit `GET /api/ping`
+  jusqu'à un autre PID et se recharge seule. Refusée pendant un geste (le
+  journal dit lequel) ; sans retour en 45 s, le journal renvoie à la sortie du
+  serveur (`relaunch` de `lib.js`, `restart.ts`).
 - **« Pousser »** (`#push`, un `.btn.primary.sm` et son `.badge` `#push-count`) :
   le seul geste qui pousse — un enregistrement ne fait que committer. Le badge
   compte les commits en attente (`gitBar(git)` de `lib.js`, d'après

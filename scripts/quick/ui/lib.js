@@ -419,6 +419,60 @@ export async function post(path, payload, onStep) {
   return data;
 }
 
+// ------------------------------------------------------ « Relancer quick »
+/**
+ * « Relancer quick » (`POST /api/restart`, cf. `restart.ts`) : le serveur se
+ * remplace par un quick neuf, qui relit les données. Confirmation d'abord —
+ * elle prévient si une section porte du travail non enregistré, que le
+ * rechargement perdra. Refusée (un geste court), le journal dit lequel.
+ * Acceptée, la page relit `GET /api/ping` toutes les `every` ms jusqu'à y voir
+ * un AUTRE PID que celui de la réponse, puis se recharge — sans la question
+ * du travail en attente, déjà posée. Au-delà de `within` ms, le journal dit de
+ * lire la sortie du serveur.
+ */
+export async function relaunch({ every = 500, within = 45_000 } = {}) {
+  const dirty = [...registry.values()].some((s) => s.dirty?.());
+  const ask = `Relancer quick ? Le serveur redémarre (quelques secondes) et relit les données.${
+    dirty ? '\n\nUne section a des changements non enregistrés : le rechargement les perdra.' : ''
+  }`;
+  if (!confirm(ask)) return false;
+  const btn = $('restart');
+  btn.disabled = true;
+  btn.classList.add('busy');
+  log([], undefined, 'redémarrage…');
+  const data = await post('/api/restart', {});
+  if (!data.ok) {
+    btn.disabled = false;
+    btn.classList.remove('busy');
+    return false;
+  }
+  log([], undefined, 'redémarrage… en attente du nouveau quick');
+  const until = Date.now() + within;
+  while (Date.now() < until) {
+    await new Promise((done) => setTimeout(done, every));
+    try {
+      const res = await fetch('/api/ping');
+      const ping = res.ok ? await res.json() : null;
+      if (ping && typeof ping.pid === 'number' && ping.pid !== data.pid) {
+        window.onbeforeunload = null;
+        location.reload();
+        return true;
+      }
+    } catch {
+      /* pas encore revenu : on réessaie */
+    }
+  }
+  log(
+    [
+      `quick n’est pas revenu en ${Math.round(within / 1000)} s — regarde sa sortie : le journal du lanceur ($XDG_RUNTIME_DIR/outerpedia-quick.log) sous Linux, la fenêtre de console sous Windows.`,
+    ],
+    false,
+  );
+  btn.disabled = false;
+  btn.classList.remove('busy');
+  return false;
+}
+
 // ------------------------------------------------------ le roster des persos
 let heroes = null;
 
@@ -657,6 +711,8 @@ export const sections = {
       document.body.style.opacity = 0.5;
       for (const b of document.querySelectorAll('button')) b.disabled = true;
     };
+
+    $('restart').onclick = () => relaunch();
 
     for (const s of registry.values()) s.init?.();
     registry.get(current)?.open?.();
