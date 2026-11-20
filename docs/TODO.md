@@ -28,6 +28,8 @@ les preuves et les décisions vivent dans le tri consolidé de sevih-tool
 
 - [ ] Guides, vus à la relecture F32 (18/11) : `terminology/labels.ts` `rolesIntro` et l'entrée Support laissent « DPS, Support, Sustain » en anglais en jp/kr/zh/es alors que `filters.roles.*` les traduit (basculer les deux ensemble) ; Heroes Growth (`skillUpgradeDesc1`) dit « Skill Books » au lieu de « Skill Manual » ; le Start Dash a deux noms jp/kr/zh entre la Beginner FAQ et Banners & Mileage ; les guides disent « 募集 / 모집 » pour le Recruit quand le jeu dit « スカウト / 영입 » ; Daily Stamina titre « スタミナ / 스태미나 / 体力 » quand l'objet s'appelle « 活力 / 행동력 / 行动力 ».
 
+- [ ] Guides, vus à la relecture B71 (20/11) : l'intro de Core Fusion (`general-guides/core-fusion/labels.ts`) dit « 25 per Daily Run from Wednesday to Saturday — about 200 a week » alors que la saison dure cinq jours (Mer→Dim : 125 du quotidien + 100 des missions hebdo = 225) ; l'intro du guide Timegate range encore les lignes Singularité parmi les « estimations joueur » alors qu'elles sont dérivées des tables depuis B71.
+
 - [ ] **Après B71** : promouvoir timegate-resources.json (`pnpm datagen:promote --apply --only timegate-resources.json`) et le committer ; seules les sources Singularity et les totaux qui en dépendent bougent (écarts item par item dans l'entrée DONE de B71, 20/11).
 
 ## 🧰 Outil quick
