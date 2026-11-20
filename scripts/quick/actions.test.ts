@@ -154,6 +154,7 @@ import type { CharacterKitPatch } from '@/lib/admin/character-skill-curated-stor
 import { collapseBuild, expandBuild } from '@/lib/admin/gear-preset-resolve';
 import type { ItemCurated } from '@/lib/admin/item-curated-store';
 import type { GuideDraft } from '@/lib/admin/guide-draft';
+import type { RaidTemplateDraft } from '@/lib/admin/guild-raid-draft';
 import type {
   CoreFusionData,
   FreeHeroesData,
@@ -7984,7 +7985,9 @@ describe('guidesOverview, guideDraftState, saveGuide, addGuideVersionAction — 
   const SR = guide('special-request', 'amadeus', { group: 'raid_2:X', order: 5 });
   const SR2 = guide('special-request', 'ars-nova', { group: 'raid_2:Y', order: 1 });
   const AL = guide('adventure-license', 'al-1', { hidden: true, group: 'adventure_challenge:Z' });
-  const GR = guide('guild-raid', 'frost-legion', { versions: [{ key: '2026-09' }] });
+  const GR = guide('guild-raid', 'frost-legion', {
+    versions: [{ key: '2026-09' }, { key: '2025-11' }, { key: '2025-05' }],
+  });
   const ADV = guide('adventure', 'S1-8-5', { dungeons: ['100805', '100806'], order: 108 });
   const MG = guide('monad-gate', 'depth1', { hidden: true, depth: 1, route: 1 });
 
@@ -8050,7 +8053,60 @@ describe('guidesOverview, guideDraftState, saveGuide, addGuideVersionAction — 
       },
     ],
   };
+  /** Une version de guild raid au gabarit : ses trois combats, un sous-boss, une équipe. */
+  const raidVersion = (): RaidTemplateDraft => ({
+    subA: 'guild_raid:A',
+    subB: 'guild_raid:B',
+    main: 'guild_raid:G',
+    bossA: {
+      // Un texte du disque dont les balises divergent de l'anglais (une
+      // exception nommée d'`inline-tag-parity.test.ts`, comme Frost Legion).
+      notes: [{ en: 'Use {P/Aer}', fr: 'x', es: 'x', jp: 'x', kr: 'x', zh: 'x' }],
+      recommended: [{ characters: ['Aer'], reason: { en: 'Fast {S/SPD}' } }],
+      slots: [['Aer']],
+    },
+    bossB: { notes: [], recommended: [], slots: [] },
+    teams: [
+      {
+        title: { en: 'Burn' },
+        element: 'fire',
+        slots: [['Aer'], ['Alice']],
+        geas: { bonus: ['1'], malus: ['3'] },
+        builds: [{ character: 'Aer', stats: { spd: '166' }, equipment: { set: ['{AS/Revenge}'] } }],
+        notes: [{ p: { en: 'Sacrifice' } }],
+      },
+    ],
+  });
+  const raidDraftVersion = (key: string, raid: GuideDraft['versions'][number]['raid']) => ({
+    key,
+    pinned: [] as string[],
+    tipSections: [],
+    notes: [],
+    recommended: [],
+    recoSections: [],
+    teams: [],
+    videos: [],
+    raid,
+  });
+  // Trois versions : la courante au gabarit ; une ancienne au gabarit elle
+  // aussi, mais qui active un geas (9) que ses sous-boss ne débloquent pas —
+  // un écart d'avant quick ; une à l'ancien format, en lecture.
+  const GR_DRAFT: GuideDraft = {
+    intro: { en: 'Intro' },
+    versions: [
+      raidDraftVersion('2026-09', raidVersion()),
+      raidDraftVersion('2025-11', {
+        ...raidVersion(),
+        teams: [{ ...raidVersion().teams[0], geas: { bonus: ['9'], malus: [] } }],
+      }),
+      raidDraftVersion('2025-05', {
+        legacy: ['config.json : sans combat « subA » (saison archivée)'],
+        files: { config: {}, main: { teams: [{ title: { en: 'Old' }, slots: [['Aer']] }] } },
+      }),
+    ],
+  };
   const DRAFTS: Record<string, GuideDraft> = {
+    'guild-raid/frost-legion': GR_DRAFT,
     'joint-challenge/annihilator': JC_DRAFT,
     'special-request/amadeus': SR_DRAFT,
     'special-request/ars-nova': SR_DRAFT,
@@ -8112,8 +8168,24 @@ describe('guidesOverview, guideDraftState, saveGuide, addGuideVersionAction — 
           { group: 'raid_2:Y', label: 'Ars Nova · Special Request' },
           { group: 'guild_raid:G', label: 'Golden Guardian · Guild Raid' },
           { group: 'adventure_challenge:Z', label: 'Z · Weekly Mission' },
+          ...(modes?.[0] === 'guild_raid_sub_boss'
+            ? [
+                { group: 'guild_raid:A', label: 'Sub A · Guild Raid' },
+                { group: 'guild_raid:B', label: 'Sub B · Guild Raid' },
+              ]
+            : []),
         ];
       },
+      geas: (group) =>
+        (({ 'guild_raid:A': ['1', '2'], 'guild_raid:B': ['3'] })[group] ?? []).map((id) => ({
+          id,
+          kill: Number(id),
+          text: `geas ${id}`,
+          frame: '/images/ui/geas/GD_Slot_Bg_01.webp',
+          points: id === '1' ? -250 : 200,
+          bonus: id !== '1',
+          positive: id === '1',
+        })),
       dungeons: () => [
         { id: '100805', label: 'S1 8-5 · Normal' },
         { id: '100806', label: 'S1 8-5 · Hard' },
@@ -8194,8 +8266,9 @@ describe('guidesOverview, guideDraftState, saveGuide, addGuideVersionAction — 
           editable: true,
         },
       ]);
-      // Un guild raid : pas éditable (contenu en code), son combat lu du `config.json` de sa version récente.
-      expect(by['guild-raid']).toMatchObject({ editable: false, versioned: false });
+      // Un guild raid : éditable (F33), versionné, son combat lu du `config.json` de sa version récente.
+      expect(by['guild-raid']).toMatchObject({ editable: true, versioned: true });
+      expect(by['guild-raid'].guides[0]).toMatchObject({ editable: true, versions: 3 });
       expect(by['guild-raid'].guides[0].battle).toBe('Golden Guardian · Guild Raid');
       // Adventure : ses donjons, le premier nommé, les autres comptés.
       expect(by['adventure'].guides[0].battle).toBe('S1 8-5 · Normal (+1)');
@@ -8224,6 +8297,11 @@ describe('guidesOverview, guideDraftState, saveGuide, addGuideVersionAction — 
         expect.objectContaining({ slug: 'al-1', hidden: true, battle: 'Z · Weekly Mission' }),
       ]);
       expect(out.counts.categories).toBe(6);
+      // Monad Gate : son contenu est en code, quick ne l'édite pas.
+      expect(out.categories.find((c) => c.slug === 'monad-gate')).toMatchObject({
+        editable: false,
+        versioned: false,
+      });
     });
 
     it('le palier d’un guide général sur sa ligne, et la liste des paliers dans l’ordre de lecture du site', () => {
@@ -8272,9 +8350,40 @@ describe('guidesOverview, guideDraftState, saveGuide, addGuideVersionAction — 
       expect(await guideDraftState('joint-challenge', 'nope', fake)).toEqual({
         error: 'guide inconnu : joint-challenge/nope',
       });
-      expect(await guideDraftState('guild-raid', 'frost-legion', fake)).toEqual({
-        error: 'catégorie non éditable, contenu en code : guild-raid',
+      expect(await guideDraftState('monad-gate', 'depth1', fake)).toEqual({
+        error: 'catégorie non éditable, contenu en code : monad-gate',
       });
+    });
+
+    it('F33 — un guild raid : ses versions (au gabarit, ou en lecture), ses combats par rôle, le pool de geas de chaque sous-boss', async () => {
+      const { calls, fake } = deps();
+      const out = await guideDraftState('guild-raid', 'frost-legion', fake);
+      if ('error' in out) throw new Error(out.error);
+      expect(out.spec).toMatchObject({ versioned: true, raid: true, teams: 'none' });
+      expect(out.draft).toEqual(GR_DRAFT);
+      expect(out.draft.versions.map((v) => Boolean(v.raid && 'legacy' in v.raid))).toEqual([
+        false,
+        false,
+        true,
+      ]);
+      // Pas de combat unique : les sous-boss et les boss principaux, chacun de son mode.
+      expect(out.options.groups).toEqual([]);
+      expect(calls.groups).toEqual([['guild_raid_sub_boss'], ['guild_raid_main_boss']]);
+      const raid = out.options.raid!;
+      expect(raid.subs.map((g) => g.group)).toContain('guild_raid:A');
+      expect(raid.mains.map((g) => g.group)).toContain('guild_raid:G');
+      expect(raid.geas['guild_raid:A'].map((c) => c.id)).toEqual(['1', '2']);
+      expect(raid.geas['guild_raid:B'].map((c) => c.id)).toEqual(['3']);
+      expect(raid.geas['guild_raid:A'][0]).toMatchObject({ text: 'geas 1', points: -250 });
+      expect(raid.elements).toEqual(['fire', 'water', 'earth', 'light', 'dark']);
+      expect(raid.stats).toEqual(['spd', 'eff', 'atk', 'def', 'hp', 'chc', 'chd', 'trans']);
+      expect(raid.equipment).toEqual(['weapon', 'amulet', 'talisman', 'set', 'ee']);
+      expect(raid.maxSlots).toBe(4);
+      expect(calls.pins).toBe(1);
+      // Les autres catégories n'en portent pas.
+      const jc = await guideDraftState('joint-challenge', 'annihilator', fake);
+      if ('error' in jc) throw new Error(jc.error);
+      expect(jc.options).not.toHaveProperty('raid');
     });
 
     it('un versionné : le brouillon, le meta, les combats DU MODE, les pins, le roster, les langues', async () => {
@@ -8704,10 +8813,151 @@ describe('guidesOverview, guideDraftState, saveGuide, addGuideVersionAction — 
       expect(loose.calls.save[0].versions[0]).not.toHaveProperty('hidden');
     });
 
+    describe('F33 — un guild raid', () => {
+      const G = 'guild-raid';
+      const S = 'frost-legion';
+      const RBASE = 'src/app/[lang]/guides/_contents/guild-raid/frost-legion/';
+      const send = (draft: GuideDraft, fake: GuidesDeps) =>
+        saveGuide(G, S, { draft, meta: metaOf(GR), was: wasOf(GR) }, fake);
+      const current = (d: GuideDraft) => d.versions[0].raid as RaidTemplateDraft;
+
+      it('la version retouchée part au store, contrôlée ; les autres sont celles du disque ; un commit', async () => {
+        const { calls, fake } = deps({ dirty: [`${RBASE}versions/2026-09/main.json`] });
+        const draft = clone(GR_DRAFT);
+        current(draft).teams[0].builds[0].stats = { spd: '170', trans: '6' };
+        current(draft).teams[0].geas.malus = ['3', '2'];
+        // Ce que la page renvoie d'une version en lecture ne compte pas.
+        draft.versions[2].raid = { legacy: [], files: {} };
+        const r = await send(draft, fake);
+        expect(r).toMatchObject({ ok: true, written: true, refused: [] });
+        const sent = calls.save[0];
+        expect((sent.versions[0].raid as RaidTemplateDraft).teams[0]).toMatchObject({
+          geas: { bonus: ['1'], malus: ['3', '2'] },
+          builds: [{ character: 'Aer', stats: { spd: '170', trans: '6' } }],
+        });
+        // 2025-11 n'a pas bougé : celle du disque, son geas hors pool compris, sans refus.
+        expect(sent.versions[1].raid).toEqual(GR_DRAFT.versions[1].raid);
+        // 2025-05, ancien format : celle du disque, pas celle de la page.
+        expect(sent.versions[2].raid).toEqual(GR_DRAFT.versions[2].raid);
+        expect(calls.stamp).toEqual([[`${RBASE}meta.json`, '2026-10-11']]);
+        expect(calls.git).toEqual([
+          [
+            [`${RBASE}versions/2026-09/main.json`, `${RBASE}meta.json`],
+            'chore(guides): guild-raid/frost-legion',
+          ],
+        ]);
+      });
+
+      it('les refus sont situés à la version, à la phase, à l’équipe, au champ — et rien n’est écrit', async () => {
+        const { calls, fake } = deps();
+        const draft = clone(GR_DRAFT);
+        const raid = current(draft);
+        raid.main = 'guild_raid:NOPE';
+        raid.bossA.recommended[0].characters = ['Nobody'];
+        raid.bossB.slots = [['Aer'], []];
+        raid.teams[0].title = { en: ' ' };
+        raid.teams[0].slots = [['Aer'], ['Alice'], ['Aer'], ['Alice'], ['Aer']];
+        raid.teams[0].geas.bonus = ['1', '9'];
+        raid.teams[0].builds[0].equipment = { weapon: ['{I-W/No Such Blade}'] };
+        raid.teams[0].notes = [
+          { p: { en: 'Bad {B/NOPE_TAG}' } },
+          { turnOrder: [{ character: 'Aer', speed: 166 }] } as never,
+        ];
+        const r = await send(draft, fake);
+        expect(r.ok).toBe(false);
+        expect(r.refused.map((x) => [x.version, x.tab, x.index, x.field, x.reason])).toEqual([
+          ['2026-09', 'battle', undefined, 'main', 'combat inconnu : « guild_raid:NOPE »'],
+          ['2026-09', 'phase1', 0, 'recommended', 'hors du roster : « Nobody »'],
+          ['2026-09', 'phase1', 1, 'slots', 'poste 2 vide'],
+          ['2026-09', 'phase2', 0, 'title', 'équipe sans titre'],
+          [
+            '2026-09',
+            'phase2',
+            0,
+            'geas',
+            'geas 9 hors du pool déblocable des sous-boss de la version',
+          ],
+          [
+            '2026-09',
+            'phase2',
+            0,
+            'build.0',
+            expect.stringMatching(/^weapon : tag inconnu \{I-W\/No Such Blade\}/),
+          ],
+          ['2026-09', 'phase2', 0, 'note.0', expect.stringMatching(/tag inconnu \{B\/NOPE_TAG\}/)],
+          [
+            '2026-09',
+            'phase2',
+            0,
+            'note.1',
+            'bloc turnOrder : l’ordre de jeu se lit dans les builds',
+          ],
+          ['2026-09', 'phase2', 0, 'slots', 'plus de 4 postes'],
+        ]);
+        expect(calls.save).toEqual([]);
+        expect(calls.git).toEqual([]);
+      });
+
+      it('une ancienne version au gabarit, retouchée, est contrôlée à son tour : son geas hors pool se refuse', async () => {
+        const { calls, fake } = deps();
+        const draft = clone(GR_DRAFT);
+        (draft.versions[1].raid as RaidTemplateDraft).teams[0].title = { en: 'Burn v2' };
+        const r = await send(draft, fake);
+        expect(r.refused).toEqual([
+          {
+            version: '2025-11',
+            tab: 'phase2',
+            index: 0,
+            field: 'geas',
+            reason: 'geas 9 hors du pool déblocable des sous-boss de la version',
+          },
+        ]);
+        expect(calls.save).toEqual([]);
+      });
+
+      it('un texte déjà sur le disque n’est pas recontrôlé ; retouché, il l’est', async () => {
+        const { calls, fake } = deps({ dirty: [`${RBASE}versions/2026-09/subA.json`] });
+        const draft = clone(GR_DRAFT);
+        // La version bouge ailleurs : la note aux balises divergentes passe telle quelle.
+        current(draft).bossA.slots = [['Alice']];
+        expect((await send(draft, fake)).refused).toEqual([]);
+        expect(calls.save).toHaveLength(1);
+        // La même note retouchée : la parité des balises se contrôle.
+        current(draft).bossA.notes[0].fr = 'y';
+        const r = await send(draft, fake);
+        expect(r.refused).toEqual([
+          {
+            version: '2026-09',
+            tab: 'phase1',
+            index: 0,
+            field: 'notes',
+            reason: expect.stringMatching(/fr : balises « aucune », « en » porte « \{P\/Aer\} »/),
+          },
+        ]);
+        expect(calls.save).toHaveLength(1);
+      });
+
+      it('rien n’a bougé : rien à committer, et la version à l’ancien format ne se refuse jamais', async () => {
+        const { calls, fake } = deps({ dirty: [] });
+        const r = await send(clone(GR_DRAFT), fake);
+        expect(r).toMatchObject({ ok: true, written: false, refused: [] });
+        expect(calls.save[0]).toEqual(GR_DRAFT);
+        expect(calls.git).toEqual([]);
+      });
+
+      it('une vidéo d’équipe ajoutée rafraîchit le cache des métadonnées', async () => {
+        const { fake, refreshed } = deps({ dirty: [`${RBASE}versions/2026-09/main.json`] });
+        const draft = clone(GR_DRAFT);
+        current(draft).teams[0].video = { platform: 'youtube', id: 'abc', title: 'T', author: 'A' };
+        expect((await send(draft, fake)).ok).toBe(true);
+        expect(refreshed.n).toBe(1);
+      });
+    });
+
     it('un guide inconnu ou une catégorie non éditable : refusés sans rien lire', async () => {
       const { calls, fake } = deps();
-      expect((await saveGuide('guild-raid', 'frost-legion', {}, fake)).log).toEqual([
-        'catégorie non éditable : guild-raid.',
+      expect((await saveGuide('monad-gate', 'depth1', {}, fake)).log).toEqual([
+        'catégorie non éditable : monad-gate.',
       ]);
       expect((await saveGuide(CAT, 'nope', {}, fake)).log).toEqual([
         'guide inconnu : joint-challenge/nope.',
@@ -9055,6 +9305,7 @@ describe('generalGuideState, saveGeneralGuide, importContributionAction — les 
         roster: () => ROSTER,
         refs: () => ({}) as InlineRefs,
         pins: async () => [],
+        geas: () => [],
       };
       const by = Object.fromEntries(guidesOverview(disk).categories.map((c) => [c.slug, c]));
       expect(by['general-guides'].editable).toBe(true);

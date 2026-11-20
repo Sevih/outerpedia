@@ -306,7 +306,7 @@ Guides : Guides (= Guide editor › Overview + les catégories de boss, étape
 16, lot F18 : la vue d'ensemble de TOUS les guides du site par catégorie —
 titre, boss ou combat en clair, date, versions, caché, « contenu en code »
 pour ce que quick n'édite pas —, recherche par début de mot, case
-« cachés » ; puis l'éditeur d'un guide des sept catégories de `GUIDE_SPECS`,
+« cachés » ; puis l'éditeur d'un guide des catégories de `GUIDE_SPECS` (sept à F18, huit avec Guild Raid depuis F33),
 en sous-onglets : Méta (titre et description en six langues, « Traduire »,
 caché), Combat (le combat avec picker en lignes, ou les donjons ordonnés, ou
 le boss ; pour un versionné les pins de la version en lecture et
@@ -326,7 +326,14 @@ vue d'ensemble ne montre qu'UNE catégorie à la fois : une rangée de
 catégories au-dessus de la liste, `#guides/<cat>`, la dernière montrée
 retenue par le navigateur, les généraux rangés par palier, et la recherche
 qui traverse toutes les catégories. Liens des catégories de boss retirés du
-menu admin le 11/10), et les guides GÉNÉRAUX à fragment éditable (= Guide
+menu admin le 11/10. Depuis le 20/11 (lot F33) les Guild Raids s'y éditent
+aussi, au NOUVEAU FORMAT seulement — le gabarit de Dignity 2026-08, défini et
+contrôlé par `src/lib/admin/guild-raid-draft.ts` — sous leurs sous-onglets à
+eux : Méta, Combat (les trois combats de la version), Intro, Phase 1 (les
+deux sous-boss), Phase 2 (les équipes : postes, geas du pool de la version,
+builds, notes, vidéo). Une version à l'ancien format s'y lit sous un bandeau
+et n'est jamais réécrite ; « ＋ version » duplique une version au gabarit), et
+les guides GÉNÉRAUX à fragment éditable (= Guide
 editor › General guides, trois guides sur quatorze : Premium & Limited,
 Free Heroes, Shop priorities — plus Core Fusion depuis le lot C13, que
 l'admin n'éditait pas — étape 17, lot F19 : ouverts depuis la même
@@ -554,11 +561,20 @@ Chaque entrée : l'écran admin, ce qu'il contient, puis la ligne
     section, B48), ni dans le menu de l'admin — sauf la case « cachés », qui les montre avec leur badge. Les
     sept catégories de `GUIDE_SPECS` sont portées ; leurs liens sortent du
     menu de l'admin (« Overview » y est resté jusqu'à l'étape 17, F19, qui
-    porte l'import de contribution). NOTE : guild-raid, skyward-tower, other, monad-gate et les
+    porte l'import de contribution). NOTE : skyward-tower, other, monad-gate et les
     guides généraux en `.ts` (contenu dans `index.tsx` ou un composant) ne
     sont éditables ni dans l'admin ni dans quick — c'est un choix, pas un
     oubli : leur contenu est du code, il se retouche dans le dépôt. La vue
     d'ensemble les liste quand même (« contenu en code », lien vers le site).
+    REVENU DESSUS pour Guild Raid (lot F33, décision de Sevih du 20/11) : les
+    guild raids s'éditent désormais dans quick, au NOUVEAU FORMAT seulement —
+    le gabarit de `guild-raid/dignity-of-the-golden-kingdom/versions/2026-08/`
+    (ses trois combats, builds en `requirements`, notes en `p` / `ul`,
+    `element` ou `icon`, `author` des vidéos, aucun `turnOrder`), le seul que
+    quick écrit (`guild-raid-draft.ts` : prédicat, convertisseur, refus). Les
+    versions à l'ancien format restent en LECTURE dans quick (bandeau
+    « ancien format, non éditable dans quick ») et ne sont jamais réécrites.
+    La vue d'ensemble ne les dit plus « contenu en code ».
     L'entrée reste pour que la numérotation ne bouge pas.
     `GuideEditor` (989 l.) : joint-challenge, special-request, irregular-extermination, adventure-license ; `InlineTextField`, traduction, vidéos
     - Agacements : deja certaines categorie n'existe plus (genre les AL ou monad gates) — corrigé : la règle « au moins un guide visible » (`categoriesWithVisibleGuide`, `guide-nav.ts`) s'applique partout, AL et Monad ne se proposent plus.

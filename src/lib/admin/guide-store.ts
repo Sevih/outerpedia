@@ -9,6 +9,11 @@
  * Le store réécrit au format canonique (`writeJson` → diffs stables) et sait
  * créer une nouvelle version en dupliquant une version existante.
  *
+ * GUILD RAID (`spec.raid`, lot F33) : versionné, quatre fichiers par version
+ * (`config`, `subA`, `subB`, `main`). Seule une version AU GABARIT
+ * (`guild-raid-draft.ts`) s'écrit ; une version à l'ancien format n'est jamais
+ * réécrite, et un fichier dont le contenu ne change pas n'est pas touché.
+ *
  * Validité des références : garantie par CONSTRUCTION côté éditeur (sélecteurs
  * sur la donnée réelle) ; le build la revérifie au rendu.
  */
@@ -32,6 +37,14 @@ import {
   type RawTeams,
   type RawTips,
 } from '@/lib/admin/guide-draft';
+import {
+  RAID_FILES,
+  fromRaidDraft,
+  isRaidLegacy,
+  isRaidTemplate,
+  readRaidVersion,
+  type RaidRawFiles,
+} from '@/lib/admin/guild-raid-draft';
 import type { VideoItem } from '@/components/ui/MultiVideoEmbed';
 
 const CONTENTS_DIR = resolve(process.cwd(), 'src/app/[lang]/guides/_contents');
@@ -75,6 +88,28 @@ export function loadGuideDraft(category: string, slug: string): GuideDraft {
   if (!guide) throw new Error(`Unknown guide : ${category}/${slug}`);
   const spec = guideSpec(category);
   if (!spec) throw new Error(`Non-editable category : ${category}`);
+
+  if (spec.raid) {
+    // Guild raid : chaque version lue en entier — au gabarit, son brouillon ;
+    // sinon ses écarts et ses fichiers, en lecture. L'épinglage voyage comme
+    // pour les autres versionnés (`pinned`, cf. `VersionDraft`).
+    const strings = readGuideFile<GuideStrings>(guide, 'strings.json');
+    const versions = guide.versions.map((v) => {
+      const files: RaidRawFiles = {
+        config: readGuideVersionFile<unknown>(guide, v.key, 'config.json'),
+        subA: readGuideVersionFile<unknown>(guide, v.key, 'subA.json'),
+        subB: readGuideVersionFile<unknown>(guide, v.key, 'subB.json'),
+        main: readGuideVersionFile<unknown>(guide, v.key, 'main.json'),
+      };
+      const pinned = (files.config as { pinned?: unknown } | undefined)?.pinned;
+      return {
+        ...toVersionDraft(spec, v.key, {}, v.label, v.hidden),
+        pinned: Array.isArray(pinned) ? (pinned as string[]) : [],
+        raid: readRaidVersion(files),
+      };
+    });
+    return { intro: strings?.intro ?? { en: '' }, versions };
+  }
 
   if (spec.versioned) {
     const strings = readGuideFile<GuideStrings>(guide, 'strings.json');
@@ -271,6 +306,10 @@ export async function saveGuideDraft(
     if (errors.length) return errors;
 
     await writeJson(resolve(base, 'strings.json'), { intro: draft.intro });
+    if (spec.raid) {
+      for (const v of draft.versions) await writeRaidVersion(resolve(base, 'versions', v.key), v);
+      return [];
+    }
     for (const v of draft.versions) {
       const vdir = resolve(base, 'versions', v.key);
       mkdirSync(vdir, { recursive: true });
@@ -315,6 +354,69 @@ export async function saveGuideDraft(
   for (const [file, data] of Object.entries(payload))
     await writeOrRemove(resolve(base, file), data);
   return [];
+}
+
+/** Un JSON lu AU CHEMIN, à l'instant (pas le cache du scan) ; absent ou illisible : `undefined`. */
+function readJsonAt(path: string): unknown {
+  if (!existsSync(path)) return undefined;
+  try {
+    return JSON.parse(readFileSync(path, 'utf8')) as unknown;
+  } catch {
+    return undefined;
+  }
+}
+
+/** Les quatre fichiers d'une version de guild raid, lus du disque à l'instant. */
+function readRaidFiles(vdir: string): RaidRawFiles {
+  return {
+    config: readJsonAt(resolve(vdir, 'config.json')),
+    subA: readJsonAt(resolve(vdir, 'subA.json')),
+    subB: readJsonAt(resolve(vdir, 'subB.json')),
+    main: readJsonAt(resolve(vdir, 'main.json')),
+  };
+}
+
+/**
+ * Écrit UNE version de guild raid — si elle est au gabarit, et seulement ce
+ * qui change.
+ *
+ * Trois gardes, dans l'ordre :
+ *   - le brouillon de la version est à l'ancien format (ou n'en porte pas) :
+ *     rien ne s'écrit — c'est ce que la page a reçu en lecture ;
+ *   - le DISQUE porte une version à l'ancien format : rien non plus, quoi que
+ *     dise le brouillon — quick n'écrit que le gabarit, et ne convertit pas ;
+ *   - un fichier dont le contenu (le JSON, pas ses octets) est déjà celui du
+ *     brouillon n'est pas réécrit : enregistrer un guide ne reformate pas ses
+ *     versions qu'on n'a pas touchées.
+ * L'épinglage suit la règle des versionnés (`VersionDraft.pinned`) : absent du
+ * brouillon, celui du disque est reporté. `hidden` (`version.json`) se pose
+ * dans tous les cas.
+ */
+async function writeRaidVersion(vdir: string, v: GuideDraft['versions'][number]): Promise<void> {
+  if (v.raid && !isRaidLegacy(v.raid)) {
+    const disk = readRaidFiles(vdir);
+    const born = RAID_FILES.every((f) => !existsSync(resolve(vdir, f)));
+    if (born || isRaidTemplate(disk)) {
+      mkdirSync(vdir, { recursive: true });
+      const kept = (disk.config as { pinned?: unknown } | undefined)?.pinned;
+      const pinned = v.pinned ?? (Array.isArray(kept) ? (kept as string[]) : undefined);
+      const payload = fromRaidDraft(v.raid, pinned);
+      const onDisk: Record<(typeof RAID_FILES)[number], unknown> = {
+        'config.json': disk.config,
+        'subA.json': disk.subA,
+        'subB.json': disk.subB,
+        'main.json': disk.main,
+      };
+      for (const file of RAID_FILES) {
+        if (JSON.stringify(payload[file] ?? null) === JSON.stringify(onDisk[file] ?? null))
+          continue;
+        await writeOrRemove(resolve(vdir, file), payload[file]);
+      }
+    }
+  }
+  // La case « Cachée » vit dans `version.json`, hors des quatre fichiers : elle
+  // se pose aussi sur une version à l'ancien format, sans rien y réécrire.
+  if (existsSync(vdir)) await writeVersionHidden(resolve(vdir, 'version.json'), v.hidden === true);
 }
 
 /**
@@ -376,10 +478,17 @@ export async function addGuideVersion(
   // laissait derrière lui un dossier de version vide, que le scanner voit.
   const srcDir = fromKey ? resolve(base, 'versions', fromKey) : null;
   if (srcDir && !existsSync(srcDir)) return [`Source version not found : ${fromKey}.`];
+  // Guild raid : une version naît d'une version AU GABARIT. Vierge, ou copiée
+  // d'une version à l'ancien format, elle ne serait pas éditable dans quick.
+  if (spec.raid) {
+    if (!srcDir) return ['Guild raid : a new version is duplicated from a template version.'];
+    if (!isRaidTemplate(readRaidFiles(srcDir)))
+      return [`Guild raid : version ${fromKey} is in the old format, not duplicable.`];
+  }
 
   mkdirSync(dst, { recursive: true });
   if (srcDir) {
-    for (const file of [...VERSION_FILES, 'version.json']) {
+    for (const file of [...(spec.raid ? RAID_FILES : VERSION_FILES), 'version.json']) {
       const sp = resolve(srcDir, file);
       if (!existsSync(sp)) continue;
       // Le `pinned` NE SE DUPLIQUE PAS. Une nouvelle version décrit le combat

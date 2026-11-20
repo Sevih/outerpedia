@@ -9,6 +9,10 @@
  *   - équipes en `slots` (une équipe), `buckets` (par plage de stages) ou
  *     `named` (équipes nommées, titre `SectionTitle` + note multi-paragraphes).
  *
+ * Le GUILD RAID (`raid`) est versionné mais n'entre pas dans cette forme : deux
+ * phases, trois combats, quatre fichiers par version. Son brouillon voyage dans
+ * `VersionDraft.raid`, et son format vit dans `guild-raid-draft.ts`.
+ *
  * Les références (group, noms de persos) sont garanties par CONSTRUCTION côté
  * éditeur (sélecteurs sur la donnée réelle) et revérifiées au rendu (build).
  */
@@ -16,12 +20,14 @@ import type { LocalizedText } from '@contracts';
 import { hasText } from './review-shape';
 import type { SectionTitle } from '@/lib/data/guide-sections';
 import type { VideoItem } from '@/components/ui/MultiVideoEmbed';
+import type { RaidVersionDraft } from './guild-raid-draft';
 
 export type LText = LocalizedText & { en: string };
 
 /* --- Spec de catégorie --- */
 
-export type MonsterKind = 'group-config' | 'group-meta' | 'dungeons-meta' | 'bossId-meta';
+export type MonsterKind =
+  'group-config' | 'group-meta' | 'dungeons-meta' | 'bossId-meta' | 'raid-config';
 export type TeamKind = 'slots' | 'buckets' | 'named' | 'sections' | 'none';
 
 export interface CatSpec {
@@ -33,6 +39,13 @@ export interface CatSpec {
    */
   contentFile?: boolean;
   contentShape?: 'story' | 'boss';
+  /**
+   * Guild raid : les versions portent `config` / `subA` / `subB` / `main` (les
+   * trois combats dans `config.json`), éditées par `VersionDraft.raid` au
+   * gabarit de `guild-raid-draft.ts` — les autres champs d'une version restent
+   * vides. Implique `versioned`.
+   */
+  raid?: boolean;
   /** Où se lit/écrit « le monstre ». */
   monster: MonsterKind;
   /**
@@ -83,6 +96,19 @@ export const GUIDE_SPECS: Record<string, CatSpec> = {
     videos: true,
     notes: true,
     tipTitles: true,
+    introRequired: true,
+  },
+  // Deux phases, trois combats par version : sa forme propre (`raid`), au
+  // gabarit de Dignity 2026-08 — les versions à l'ancien format se lisent.
+  'guild-raid': {
+    versioned: true,
+    raid: true,
+    monster: 'raid-config',
+    groupModes: ['guild_raid_sub_boss', 'guild_raid_main_boss'],
+    teams: 'none',
+    videos: false,
+    notes: false,
+    tipTitles: false,
     introRequired: true,
   },
   'special-request': {
@@ -219,6 +245,12 @@ export interface VersionDraft {
   recoSections: RecoSectionDraft[];
   teams: TeamDraft[];
   videos: VideoItem[];
+  /**
+   * Guild raid : la version entière — au gabarit (éditable) ou à l'ancien
+   * format (ses écarts et ses fichiers, en lecture). Les champs ci-dessus
+   * restent vides.
+   */
+  raid?: RaidVersionDraft;
 }
 
 export interface GuideDraft {

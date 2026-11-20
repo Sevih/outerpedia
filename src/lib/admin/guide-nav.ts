@@ -26,6 +26,7 @@ export interface GuideEditorCategory {
 const CATEGORY_LABEL: Record<string, string> = {
   'joint-challenge': 'Joint Challenge',
   'world-boss': 'World Boss',
+  'guild-raid': 'Guild Raid',
   'special-request': 'Special Request',
   'irregular-extermination': 'Irregular Extermination',
   'adventure-license': 'Adventure License',

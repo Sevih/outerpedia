@@ -1021,3 +1021,302 @@
   opacity: 0.55;
   cursor: progress;
 }
+
+/* ---------------------------------------------------------------- le guild raid (F33)
+   Combat : une ligne par combat de la version (son rôle en tête). Phase 1 :
+   une carte par sous-boss, en sections (`.gd-rsec` : un titre en capitales
+   grises, une indication, le corps). Phase 2 : la rangée des équipes
+   (`.gd-rteams`, des onglets qui se glissent), puis la carte de celle qui est
+   montrée — geas en deux colonnes, un build par perso, les notes ordonnées.
+   Une version à l'ancien format : le bandeau `.gd-legacy`, ses cartes en
+   lecture (`.gd-old`). */
+#tab-guides .gd-legacy {
+  gap: 8px;
+  border-color: var(--warn);
+}
+#tab-guides .gd-old {
+  opacity: 0.85;
+}
+#tab-guides .gd-old .card-head .badge {
+  margin-left: auto;
+}
+#tab-guides .gd-ro {
+  margin: 0;
+  color: var(--content-muted);
+  font-size: 13px;
+  line-height: 1.5;
+}
+#tab-guides ul.gd-ro {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-left: 20px;
+}
+#tab-guides .gd-ro:empty {
+  display: none;
+}
+#tab-guides .gd-rgroup {
+  padding: 8px 0;
+  border-top: 1px solid var(--line-subtle);
+}
+#tab-guides .gd-rgroup:first-child {
+  padding-top: 0;
+  border-top: 0;
+}
+#tab-guides .gd-rrole {
+  flex: none;
+  width: 110px;
+}
+#tab-guides .gd-rgroup .gd-err {
+  flex-basis: 100%;
+}
+#tab-guides .gd-rico {
+  width: 28px;
+  height: 28px;
+  flex: none;
+  border-radius: 6px;
+  background: var(--surface-overlay);
+  object-fit: cover;
+}
+#tab-guides .gd-rsec {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line-subtle);
+}
+#tab-guides .gd-rsec:first-child {
+  padding-top: 0;
+  border-top: 0;
+}
+#tab-guides .gd-rh {
+  display: flex;
+  align-items: center;
+  gap: 8px 12px;
+  flex-wrap: wrap;
+  min-height: 28px;
+}
+#tab-guides .gd-rh > span:first-child {
+  color: var(--content-muted);
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+#tab-guides .gd-rmoves {
+  display: inline-flex;
+  gap: 2px;
+  margin-left: auto;
+}
+/* Un groupe de persos recommandés : ses tuiles et son ✕, sa raison dessous. */
+#tab-guides .gd-rgroup-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 8px 10px;
+  align-items: center;
+  padding: 10px 12px;
+  border: 1px solid var(--line-subtle);
+  border-radius: 10px;
+}
+#tab-guides .gd-rgroup-row > .gd-text,
+#tab-guides .gd-rgroup-row > .gd-ro {
+  grid-column: 1 / -1;
+}
+#tab-guides .gd-rauthor {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+/* La rangée des équipes : les onglets de 32 px, « ＋ équipe » à leur suite. */
+#tab-guides .gd-rbar {
+  display: flex;
+  align-items: center;
+  gap: 8px 12px;
+  flex-wrap: wrap;
+}
+#tab-guides .gd-rteams {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px 4px;
+  min-width: 0;
+  border-bottom: 1px solid var(--line-subtle);
+}
+#tab-guides .gd-rteams.drop-end {
+  border-bottom-color: var(--accent);
+}
+#tab-guides .gd-rtab {
+  flex: none;
+  height: 32px;
+  padding: 0 12px;
+  font-size: 13px;
+  cursor: grab;
+}
+#tab-guides .gd-rtab.dragging {
+  opacity: 0.4;
+}
+#tab-guides .gd-rtab.drop-before {
+  box-shadow: -5px 0 0 -1px var(--accent);
+}
+#tab-guides .gd-rtab.drop-after {
+  box-shadow: 5px 0 0 -1px var(--accent);
+}
+#tab-guides .gd-rbadge {
+  width: 20px;
+  height: 20px;
+  flex: none;
+  object-fit: contain;
+}
+#tab-guides .gd-rbadge-pv {
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+}
+#tab-guides .gd-card .card-head .btn.icon.gd-rnext {
+  margin-left: 0;
+}
+/* Les geas : deux colonnes (bonus, malus de score), un bouton par geas du pool
+   — son cadre de grade et son glyphe, son texte, ses points ; enfoncé = actif. */
+#tab-guides .gd-geas-cols {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px 18px;
+  align-items: start;
+}
+@media (max-width: 1000px) {
+  #tab-guides .gd-geas-cols {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+#tab-guides .gd-gcol {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+#tab-guides .gd-geas {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 10px;
+  border: 1px solid var(--line-subtle);
+  border-radius: 10px;
+  background: var(--surface-base);
+  color: var(--content-muted);
+  font: inherit;
+  font-size: 13px;
+  text-align: left;
+  cursor: pointer;
+}
+#tab-guides .gd-geas:hover {
+  border-color: var(--line-strong);
+}
+#tab-guides .gd-geas:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 1px;
+}
+#tab-guides .gd-geas[aria-pressed='true'] {
+  border-color: var(--accent);
+  background: var(--surface-overlay);
+  color: var(--content);
+}
+#tab-guides .gd-gico {
+  position: relative;
+  flex: none;
+  width: 36px;
+  height: 36px;
+}
+#tab-guides .gd-gico img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+#tab-guides .gd-gico img + img {
+  inset: 5%;
+  width: 90%;
+  height: 90%;
+}
+#tab-guides .gd-gtext {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+#tab-guides .gd-gpts {
+  flex: none;
+  font-family: var(--mono);
+  font-size: 12.5px;
+}
+#tab-guides .gd-gpts.up {
+  color: var(--success);
+}
+#tab-guides .gd-gpts.down {
+  color: var(--danger);
+}
+#tab-guides .gd-stray {
+  border-color: var(--danger);
+  color: var(--danger);
+}
+/* Un build : la tuile du perso, ses stats en champs courts, ↑ ↓ ✕ ; la
+   priorité ; l'équipement, une colonne par pièce ; ses notes. */
+#tab-guides .gd-rbuild {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 12px 14px;
+  border: 1px solid var(--line-subtle);
+  border-radius: 10px;
+}
+#tab-guides .gd-rbuild.ko {
+  border-color: var(--danger);
+}
+#tab-guides .gd-rbuild-head {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px 16px;
+  flex-wrap: wrap;
+}
+#tab-guides .gd-rstats {
+  display: flex;
+  gap: 8px 10px;
+  flex-wrap: wrap;
+  flex: 1 1 320px;
+}
+#tab-guides .gd-rstat {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+#tab-guides .gd-rstat input {
+  width: 9ch;
+}
+#tab-guides .gd-rprio,
+#tab-guides .gd-requip,
+#tab-guides .gd-rnote {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+#tab-guides .gd-rprio input,
+#tab-guides .gd-requip textarea {
+  width: 100%;
+  min-height: 0;
+  font-size: 13px;
+}
+#tab-guides .gd-rprio input {
+  max-width: 60ch;
+}
+#tab-guides .gd-requips {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 10px 14px;
+  align-items: start;
+}
+#tab-guides .gd-requip textarea {
+  resize: vertical;
+  min-height: 34px;
+}
+#tab-guides .gd-rnote {
+  padding: 10px 12px;
+  border: 1px solid var(--line-subtle);
+  border-radius: 10px;
+}

@@ -12,6 +12,7 @@
  */
 import { getT } from '@/i18n';
 import type { GuideDraft } from '@/lib/admin/guide-draft';
+import { isRaidLegacy } from '@/lib/admin/guild-raid-draft';
 import { encounterLabel, encountersOfGroup } from '@/lib/data/encounters';
 import {
   getMonster,
@@ -79,5 +80,22 @@ export async function pinTargetsOfGroup(group: string): Promise<PinTarget[]> {
 /** Les cibles de pin d'un brouillon : celles du combat de sa première version qui en a un. */
 export async function buildPinTargets(draft: Pick<GuideDraft, 'versions'>): Promise<PinTarget[]> {
   const group = draft.versions.find((v) => v.group)?.group;
-  return group ? pinTargetsOfGroup(group) : [];
+  if (group) return pinTargetsOfGroup(group);
+  // Guild raid : trois combats par version (deux sous-boss, le boss principal),
+  // pris sur la première version au gabarit — un monstre n'y est listé qu'une fois.
+  for (const v of draft.versions) {
+    if (!v.raid || isRaidLegacy(v.raid)) continue;
+    const groups = [v.raid.subA, v.raid.subB, v.raid.main].filter((g): g is string => Boolean(g));
+    if (!groups.length) continue;
+    const seen = new Set<string>();
+    const out: PinTarget[] = [];
+    for (const g of groups)
+      for (const target of await pinTargetsOfGroup(g)) {
+        if (seen.has(target.id)) continue;
+        seen.add(target.id);
+        out.push(target);
+      }
+    return out;
+  }
+  return [];
 }

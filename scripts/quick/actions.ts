@@ -200,6 +200,19 @@ import { gearSelectOptions, type GearOption } from '@/lib/admin/gear-options';
 import { previewGearReco } from '@/lib/admin/gear-preview-actions';
 import { resolveInlineBatch } from '@/lib/admin/inline-preview';
 import { buildInlineRefs } from '@/lib/admin/inline-refs';
+import {
+  RAID_ELEMENTS,
+  RAID_EQUIP_KEYS,
+  RAID_MAX_SLOTS,
+  RAID_STAT_KEYS,
+  cleanRaidVersion,
+  fromRaidDraft,
+  isRaidLegacy,
+  raidVideos,
+  type RaidCheckContext,
+  type RaidVersionDraft,
+} from '@/lib/admin/guild-raid-draft';
+import { raidGeasChoices, type RaidGeasChoice } from '@/lib/admin/guild-raid-geas';
 import { expandBuild } from '@/lib/admin/gear-preset-resolve';
 import {
   bakeItemCatalogEntry,
@@ -5765,6 +5778,8 @@ export interface GuidesDisk {
   roster: () => SheetRosterRow[];
   refs: () => InlineRefs;
   pins: (draft: GuideDraft) => Promise<PinTarget[]>;
+  /** Les geas qu'un sous-boss de guild raid débloque (son combat) ; vide sans table. */
+  geas: (group: string) => RaidGeasChoice[];
 }
 
 /** Les écritures de `saveGuide` et d'« ＋ version », injectées : les stores, le stamp, git. */
@@ -5798,6 +5813,7 @@ export const GUIDES_DEPS: GuidesDeps = {
   roster: () => characterRoster().roster,
   refs: buildInlineRefs,
   pins: buildPinTargets,
+  geas: raidGeasChoices,
   saveDraft: saveGuideDraft,
   patchMeta: patchGuideMetaFields,
   addVersion: addGuideVersion,
@@ -5807,6 +5823,10 @@ export const GUIDES_DEPS: GuidesDeps = {
   refreshVideoMeta,
   commitPaths,
 };
+
+/** Les modes de donjon des combats de guild raid, par rôle (`DungeonRef.mode`). */
+const RAID_SUB_MODES = ['guild_raid_sub_boss'] as const;
+const RAID_MAIN_MODES = ['guild_raid_main_boss'] as const;
 
 /** Le site de dev du poste, où « ouvrir sur le site » mène (cf. `guideBase` des monstres). */
 const guidesSiteBase = (): string =>
@@ -5927,6 +5947,21 @@ export async function guideDraftState(
   if (!spec) return { error: `catégorie non éditable, contenu en code : ${category}` };
   const draft = disk.draft(category, slug);
   const usesGroup = spec.monster === 'group-config' || spec.monster === 'group-meta';
+  // Guild raid : ses combats rangés par rôle (deux sous-boss, un boss
+  // principal), et pour chaque sous-boss les geas qu'il débloque — le pool
+  // d'une équipe est celui des deux sous-boss de SA version.
+  const raidSubs = spec.raid ? disk.groups(RAID_SUB_MODES) : [];
+  const raid = spec.raid
+    ? {
+        subs: raidSubs,
+        mains: disk.groups(RAID_MAIN_MODES),
+        geas: Object.fromEntries(raidSubs.map((g) => [g.group, disk.geas(g.group)])),
+        elements: [...RAID_ELEMENTS],
+        stats: [...RAID_STAT_KEYS],
+        equipment: [...RAID_EQUIP_KEYS],
+        maxSlots: RAID_MAX_SLOTS,
+      }
+    : undefined;
   return {
     guide: {
       category,
@@ -5947,6 +5982,7 @@ export async function guideDraftState(
       dungeons: spec.monster === 'dungeons-meta' ? disk.dungeons() : [],
       monsters: spec.monster === 'bossId-meta' ? disk.monsters() : [],
       roster: disk.roster(),
+      ...(raid ? { raid } : {}),
     },
     refs: disk.refs(),
     pins: spec.versioned ? await disk.pins(draft) : [],
@@ -5962,7 +5998,9 @@ export async function guideDraftState(
  * Un refus SITUÉ d'un enregistrement de guide : la version (`''` pour un guide
  * plat, absente pour ce qui vaut pour tout le guide), l'onglet de la page
  * (`guide`, `meta`, `battle`, `intro`, `tips`, `notes`, `reco`, `team`,
- * `videos`), le rang dans la liste de l'onglet, le champ.
+ * `videos` ; `phase1` et `phase2` d'un guild raid — le rang y est celui du
+ * sous-boss ou de l'équipe, le champ `slots`, `geas`, `build.<n>`,
+ * `note.<n>`…), le rang dans la liste de l'onglet, le champ.
  */
 export interface GuideRefusal {
   version?: string;
@@ -6041,6 +6079,7 @@ function cleanGuideVersion(
   spec: CatSpec,
   names: ReadonlySet<string>,
   refuse: (r: Omit<GuideRefusal, 'version'>) => void,
+  raid?: RaidCheck,
 ): VersionDraft | null {
   if (!raw || typeof raw !== 'object' || Array.isArray(raw)) {
     refuse({ tab: 'guide', reason: 'version : forme inattendue' });
@@ -6188,7 +6227,86 @@ function cleanGuideVersion(
     ok = false;
   } else out.videos = videos;
   if (spec.notes === false && out.notes.length) out.notes = [];
+  if (spec.raid && raid) {
+    const onDisk = raid.disk(out.key);
+    const kept = cleanGuideRaid(v.raid, onDisk, raid.ctx(onDisk), (r) => {
+      refuse(r);
+      ok = false;
+    });
+    if (kept) out.raid = kept;
+  }
   return ok ? out : null;
+}
+
+/**
+ * Les textes localisés d'une valeur, à toute profondeur : ce qui porte un `en`
+ * et rien que des chaînes. Chacun sérialisé — la clé d'un « déjà sur le disque ».
+ */
+function localizedKeys(value: unknown, out = new Set<string>()): Set<string> {
+  if (Array.isArray(value)) for (const x of value) localizedKeys(x, out);
+  else if (value && typeof value === 'object') {
+    const o = value as Record<string, unknown>;
+    if (typeof o.en === 'string' && Object.values(o).every((s) => typeof s === 'string'))
+      out.add(JSON.stringify(o));
+    else for (const x of Object.values(o)) localizedKeys(x, out);
+  }
+  return out;
+}
+
+/**
+ * Un texte d'une version de guild raid venu de la page : réduit aux langues
+ * écrites, et contrôlé (`localizedIssues`) — SAUF s'il est déjà sur le disque
+ * tel quel (`known`). Deux blocs de Frost Legion divergent de l'anglais par
+ * leurs balises, exceptions nommées d'`inline-tag-parity.test.ts` : les
+ * recontrôler refuserait tout enregistrement de ces versions tant qu'on ne
+ * les réécrit pas.
+ */
+function raidText(raw: unknown, known: ReadonlySet<string>): { text?: LTextOut; issue?: string } {
+  if (raw === undefined || raw === null) return {};
+  if (!raw || typeof raw !== 'object' || Array.isArray(raw))
+    return { issue: 'texte : forme inattendue' };
+  const out: Record<string, string> = {};
+  for (const [lang, value] of Object.entries(raw as Record<string, unknown>)) {
+    if (!isValidLang(lang)) return { issue: `langue inconnue : ${lang}` };
+    if (typeof value !== 'string') return { issue: `${lang} : une chaîne attendue` };
+    if (value.trim()) out[lang] = value;
+  }
+  if (!Object.keys(out).length) return {};
+  const text = out as LTextOut;
+  if (known.has(JSON.stringify(text))) return { text };
+  const bad = localizedIssues(text);
+  return { text, ...(bad.length ? { issue: bad.join(' ; ') } : {}) };
+}
+
+/** Ce que le contrôle d'une version de guild raid lit : la donnée, et la version du disque. */
+interface RaidCheck {
+  /** Le contexte du contrôle, pour UNE version : les textes que son disque porte déjà passent. */
+  ctx: (disk: RaidVersionDraft | undefined) => RaidCheckContext;
+  /** La version de cette clé telle que le disque la porte (`loadGuideDraft`). */
+  disk: (key: string) => RaidVersionDraft | undefined;
+}
+
+/**
+ * La version de guild raid venue de la page, contre celle du disque :
+ *   - le disque porte l'ANCIEN FORMAT : la version du disque est rendue telle
+ *     quelle, quoi que dise la page — le store ne l'écrira pas ;
+ *   - la page rend ce que le disque porte déjà (mêmes fichiers à l'écriture) :
+ *     la version du disque est rendue SANS contrôle — une version qu'on n'a
+ *     pas touchée ne bloque pas l'enregistrement des autres, même si elle
+ *     porte un écart d'avant quick (un geas hors du pool) ;
+ *   - sinon elle est contrôlée (`cleanRaidVersion`), chaque écart situé.
+ */
+function cleanGuideRaid(
+  raw: unknown,
+  disk: RaidVersionDraft | undefined,
+  ctx: RaidCheckContext,
+  refuse: (r: Omit<GuideRefusal, 'version'>) => void,
+): RaidVersionDraft | undefined {
+  if (disk && isRaidLegacy(disk)) return disk;
+  const { raid, issues } = cleanRaidVersion(raw, ctx);
+  if (raid && disk && sameJson(fromRaidDraft(raid), fromRaidDraft(disk))) return disk;
+  for (const issue of issues) refuse(issue);
+  return raid ?? undefined;
 }
 
 /**
@@ -6305,9 +6423,30 @@ export async function saveGuide(
   else if (spec.introRequired && !intro?.en?.trim())
     refuse({ tab: 'intro', reason: 'l’intro (anglais) est requise' });
   const names = new Set(deps.roster().map((c) => c.name));
+  const raid: RaidCheck | undefined = spec.raid
+    ? {
+        ctx: (onDisk) => ({
+          text: (
+            (known) => (value: unknown) =>
+              raidText(value, known)
+          )(localizedKeys(onDisk)),
+          token: (value) =>
+            checkText(value)
+              .filter((c) => !c.ok)
+              .map((c) => `tag inconnu ${c.tag} (${c.reason ?? 'sans correspondance'})`),
+          names,
+          groups: new Set(
+            [...deps.groups(RAID_SUB_MODES), ...deps.groups(RAID_MAIN_MODES)].map((g) => g.group),
+          ),
+          geas: (group) => deps.geas(group).map((c) => c.id),
+          platform: isVideoPlatform,
+        }),
+        disk: (key) => disk.draft.versions.find((v) => v.key === key)?.raid,
+      }
+    : undefined;
   const versions = raw.versions.map((v) => {
     const key = v && typeof v === 'object' ? String((v as { key?: unknown }).key ?? '') : '';
-    return cleanGuideVersion(v, spec, names, (r) => refuse({ ...r, version: key }));
+    return cleanGuideVersion(v, spec, names, (r) => refuse({ ...r, version: key }), raid);
   });
   for (const v of versions) {
     if (!v) continue;
@@ -6368,7 +6507,7 @@ export async function saveGuide(
     if (stamped) j.done(`meta.updated : ${today}`);
   } else j.done('archives seules : la date du guide ne bouge pas');
   // Le cache des métadonnées suit les vidéos écrites, version par version.
-  const videosOf = (d: GuideDraft) => d.versions.map((v) => [v.key, v.videos]);
+  const videosOf = (d: GuideDraft) => d.versions.map((v) => [v.key, v.videos, raidVideos(v.raid)]);
   const cached =
     !sameJson(videosOf(draft), videosOf(disk.draft)) &&
     (await refreshVideoCache(deps.refreshVideoMeta, j));

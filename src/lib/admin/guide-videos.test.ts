@@ -91,6 +91,10 @@ describe('vidéos des guides', () => {
           const before = read(g.category, g.slug, 'content.json');
           if (before !== undefined)
             compare(before, fromContentDraft(spec, draft), `${g.category}/${g.slug}/content.json`);
+        } else if (spec.raid) {
+          // Guild raid : quatre fichiers par version, son aller-retour à l'octet
+          // près dans `guild-raid-draft.test.ts`.
+          continue;
         } else if (spec.versioned) {
           for (const v of g.versions) {
             const vd = draft.versions.find((d) => d.key === v.key);

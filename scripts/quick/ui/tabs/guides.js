@@ -1,8 +1,8 @@
 // Onglet « Guides » : la vue d'ensemble des guides du site, une catégorie à la
 // fois (une rangée de catégories, la recherche les traverse toutes), et
 // l'éditeur des guides de boss (les catégories de `GUIDE_SPECS` : joint
-// challenge, world boss, special request, irregular extermination, adventure
-// license, adventure, dimensional singularity) — l'éditeur « Guide editor » de
+// challenge, world boss, guild raid, special request, irregular extermination,
+// adventure license, adventure, dimensional singularity) — l'éditeur « Guide editor » de
 // l'admin, sans ses catégories mortes — et, sous la même coquille, les quatre
 // guides GÉNÉRAUX à fragment éditable (Premium & Limited, Free Heroes, Shop
 // priorities, Core Fusion), rendus d'après la FORME que le serveur sert (`gen`, plus bas),
@@ -10,6 +10,8 @@
 // fois, en sous-onglets : Méta (titre et description en six langues, caché),
 // Combat (ce que la catégorie demande, et pour un versionné les pins en
 // lecture), Intro, puis par version — Tips, Notes, Persos, Équipe, Vidéos.
+// Un guild raid (F33) a ses sous-onglets à lui — Combat, Phase 1, Phase 2 — et
+// ne s'édite qu'au gabarit ; une version à l'ancien format s'y lit.
 // L'anglais se saisit et porte la structure, « Traduire » génère les autres
 // langues, chaque texte porte son aperçu. Vidéos : la liste, ✕, et l'ajout par
 // la chaîne officielle ou par URL (`video-add.js`). Une savebar, un enregistrement, un
@@ -28,14 +30,21 @@ const SUBS = [
   { id: 'meta', label: 'Méta' },
   { id: 'battle', label: 'Combat' },
   { id: 'intro', label: 'Intro' },
-  { id: 'tips', label: 'Tips', scoped: true },
+  { id: 'tips', label: 'Tips', scoped: true, when: (spec) => !spec.raid },
   { id: 'notes', label: 'Notes', scoped: true, when: (spec) => spec.notes },
-  { id: 'reco', label: 'Persos', scoped: true },
+  { id: 'reco', label: 'Persos', scoped: true, when: (spec) => !spec.raid },
   { id: 'team', label: 'Équipe', scoped: true, when: (spec) => spec.teams !== 'none' },
   { id: 'videos', label: 'Vidéos', scoped: true, when: (spec) => spec.videos },
+  // Un guild raid : ses deux phases, celles de la version.
+  { id: 'phase1', label: 'Phase 1', scoped: true, when: (spec) => spec.raid },
+  { id: 'phase2', label: 'Phase 2', scoped: true, when: (spec) => spec.raid },
 ];
 /** Le mode d'un gabarit « Mise à jour » du Journal du site, par catégorie versionnée. */
-const UPDATE_MODE = { 'joint-challenge': 'Joint Challenge', 'world-boss': 'World Boss' };
+const UPDATE_MODE = {
+  'joint-challenge': 'Joint Challenge',
+  'world-boss': 'World Boss',
+  'guild-raid': 'Guild Raid',
+};
 /** Nombre max de slots d'une équipe (contrainte du jeu). */
 const MAX_SLOTS = 4;
 // L'aperçu part ce délai après la dernière frappe, celui de la Fiche perso.
@@ -154,6 +163,7 @@ function versionOut(x) {
       }))
       .filter((t) => t.slots.length),
     videos: x.videos,
+    ...(x.raid ? { raid: raidOut(x.raid) } : {}),
   };
 }
 /** Un brouillon tel qu'il partirait — le même nettoyage pour le disque et la saisie. */
@@ -184,7 +194,14 @@ function sliceOf(d, m, tab, vi) {
     case 'battle':
       // Les pins du disque ne comptent que si la page y a touché (sinon ils ne partent pas).
       return x
-        ? { group: x.group, dungeons: x.dungeons, bossId: x.bossId, pinned: x.pinned }
+        ? {
+            group: x.group,
+            dungeons: x.dungeons,
+            bossId: x.bossId,
+            pinned: x.pinned,
+            // Un guild raid : les trois combats de la version.
+            raid: x.raid && [x.raid.subA, x.raid.subB, x.raid.main],
+          }
         : null;
     case 'tips':
       return x?.tipSections;
@@ -196,15 +213,41 @@ function sliceOf(d, m, tab, vi) {
       return x?.teams;
     case 'videos':
       return x?.videos;
+    case 'phase1':
+      return x?.raid ? [x.raid.bossA, x.raid.bossB] : null;
+    case 'phase2':
+      return x?.raid?.teams;
     case 'version':
       return x ? { hidden: Boolean(x.hidden) } : null;
     default:
       return null;
   }
 }
+// Le brouillon nettoyé ne se recalcule pas à chaque tranche : celui du disque
+// tant que `was` est le même objet (il ne change qu'au chargement), celui de
+// la saisie le temps d'UN passage de `counted` (les points des onglets, des
+// versions et la savebar le lisent une trentaine de fois de suite, sans
+// qu'aucune saisie ne s'intercale — un guild raid porte des centaines de textes).
+let wasMemo = { of: null, draft: null };
+let nowMemo = null;
+const cleanWas = () => {
+  if (wasMemo.of !== was) wasMemo = { of: was, draft: cleanDraft(was.draft) };
+  return wasMemo.draft;
+};
+const cleanNow = () => (nowMemo ? (nowMemo.draft ??= cleanDraft(draft)) : cleanDraft(draft));
+/** Joue `fn` avec le brouillon de la saisie nettoyé UNE fois : rien ne s'y saisit entre-temps. */
+function counted(fn) {
+  if (nowMemo) return fn();
+  nowMemo = { draft: null };
+  try {
+    return fn();
+  } finally {
+    nowMemo = null;
+  }
+}
 /** Ce que le disque portait d'une tranche, nettoyé comme la saisie — comparable. */
-const diskSlice = (tab, vi) => sliceOf(cleanDraft(was.draft), cleanMeta(was.meta), tab, vi);
-const nowSlice = (tab, vi) => sliceOf(cleanDraft(draft), cleanMeta(meta), tab, vi);
+const diskSlice = (tab, vi) => sliceOf(cleanWas(), cleanMeta(was.meta), tab, vi);
+const nowSlice = (tab, vi) => sliceOf(cleanNow(), cleanMeta(meta), tab, vi);
 const same = (a, b) => JSON.stringify(a ?? null) === JSON.stringify(b ?? null);
 /** Un sous-onglet (d'une version) diffère-t-il du disque ? */
 const tabMoved = (tab, vi = ver) =>
@@ -269,6 +312,7 @@ function allTexts(d) {
       if (t.note) out.push(t.note);
       if (t.notes) out.push(...t.notes);
     }
+    out.push(...rTexts(x.raid));
   }
   return out;
 }
@@ -517,6 +561,11 @@ function battleLabel() {
     const first = sheet.options.dungeons.find((o) => o.id === d[0])?.label ?? d[0];
     return d.length ? (d.length > 1 ? `${first} (+${d.length - 1})` : first) : '';
   }
+  if (spec().raid) {
+    // Un guild raid : le boss principal de sa version au gabarit la plus récente.
+    const main = draft.versions.find((y) => y.raid?.main)?.raid.main;
+    return rOpts().mains.find((g) => g.group === main)?.label ?? main ?? '';
+  }
   const group = draft.versions.find((y) => y.group)?.group;
   return sheet.options.groups.find((g) => g.group === group)?.label ?? group ?? '';
 }
@@ -615,7 +664,10 @@ function changelogLink(key) {
   const g = sheet.guide;
   const values = {
     template: 'update',
-    guide: (meta.title[def()] || g.title).replace(/\s+(Joint Challenge|World Boss)\s+Guide$/i, ''),
+    guide: (meta.title[def()] || g.title).replace(
+      /\s+(Joint Challenge|World Boss|Guild Raid)\s+Guide$/i,
+      '',
+    ),
     mode: UPDATE_MODE[g.category] ?? '',
     month: monthOf(key),
     slug: g.slug,
@@ -642,18 +694,25 @@ function versionsBar() {
           .some((s) => tabMoved(s.id, i));
       return `<button class="tab" type="button" data-ver="${i}" aria-selected="${i === ver}">${esc(x.key)}${
         i === 0 ? '<span class="lbl">récente</span>' : ''
-      }${x.hidden ? '<span class="lbl">cachée</span>' : ''}${bad ? '<span class="dot ko" title="refusé"></span>' : moved ? '<span class="dot edit" title="modifiée"></span>' : ''}</button>`;
+      }${x.hidden ? '<span class="lbl">cachée</span>' : ''}${rLegacy(x.raid) ? '<span class="lbl">ancien format</span>' : ''}${bad ? '<span class="dot ko" title="refusé"></span>' : moved ? '<span class="dot edit" title="modifiée"></span>' : ''}</button>`;
     })
     .join('');
+  // Un guild raid : la clé du mois en cours, et la copie d'une version AU
+  // GABARIT seulement (la plus récente d'abord) — une ancienne ne se duplique pas.
+  const isRaid = Boolean(spec().raid);
+  const sources = draft.versions.filter((x) => !isRaid || (x.raid && !rLegacy(x.raid)));
+  const month = isRaid ? new Intl.DateTimeFormat('sv-SE').format(new Date()).slice(0, 7) : '';
   const form = adding
     ? `<div class="form gd-addv">
-        <div class="field"><label for="gd-newkey">Nouvelle version (AAAA-MM)</label><input id="gd-newkey" class="w-text mono" placeholder="2026-11" autocomplete="off" /></div>
+        <div class="field"><label for="gd-newkey">Nouvelle version (AAAA-MM)</label><input id="gd-newkey" class="w-text mono" placeholder="2026-11" value="${esc(month)}" autocomplete="off" /></div>
         ${
-          draft.versions.length
-            ? `<div class="field"><label for="gd-fromkey">Dupliquer depuis</label><select id="gd-fromkey">${draft.versions
+          sources.length
+            ? `<div class="field"><label for="gd-fromkey">Dupliquer depuis</label><select id="gd-fromkey">${sources
                 .map((x) => `<option value="${esc(x.key)}">${esc(x.key)}</option>`)
                 .join('')}</select></div>`
-            : '<span class="lbl">Première version : vierge.</span>'
+            : isRaid
+              ? '<span class="gd-ko">Aucune version au gabarit à dupliquer.</span>'
+              : '<span class="lbl">Première version : vierge.</span>'
         }
         <button class="btn ghost" type="button" data-act="create-version">Créer la version</button>
         <button class="btn ghost sm" type="button" data-act="cancel-version">annuler</button>
@@ -669,7 +728,11 @@ function versionsBar() {
     ? `<label class="check"><input type="checkbox" data-vhidden${x.hidden ? ' checked' : ''} /> Cachée — hors du sélecteur du site, joignable par <span class="mono">#version=${esc(x.key)}</span></label>`
     : '';
   const focused = document.activeElement?.matches?.('[data-vhidden]');
-  el.innerHTML = `<div class="gd-vtabs" role="tablist" aria-label="Versions">${tabs}<button class="btn ghost sm" type="button" data-act="add-version" aria-expanded="${adding}">＋ version</button><span class="lbl">Méta, Combat et Intro valent pour tout le guide ; l’état du boss, Tips, Notes, Persos, Équipe et Vidéos sont ceux de la version.</span></div>${hide}${form}${note}`;
+  el.innerHTML = `<div class="gd-vtabs" role="tablist" aria-label="Versions">${tabs}<button class="btn ghost sm" type="button" data-act="add-version" aria-expanded="${adding}">＋ version</button><span class="lbl">${
+    isRaid
+      ? 'Méta et Intro valent pour tout le guide ; Combat, Phase 1 et Phase 2 sont ceux de la version.'
+      : 'Méta, Combat et Intro valent pour tout le guide ; l’état du boss, Tips, Notes, Persos, Équipe et Vidéos sont ceux de la version.'
+  }</span></div>${hide}${form}${note}`;
   if (focused) el.querySelector('[data-vhidden]')?.focus();
 }
 
@@ -1084,6 +1147,770 @@ function videosHtml() {
     <div class="gd-body">${vidAdd.html()}</div>
   </div></div>`;
 }
+
+// ------------------------------------------------------ le guild raid (F33)
+// Un guild raid n'a pas la forme des autres guides de boss : deux phases, trois
+// combats, quatre fichiers par version. Sa version voyage dans `raid` du
+// brouillon — au GABARIT (`guild-raid-draft.ts` : builds en `requirements`,
+// notes en `p` / `ul`, `element` ou `icon`, `author` des vidéos), elle
+// s'édite ; à l'ANCIEN FORMAT (`legacy` : ses écarts, ses fichiers), elle se
+// lit sous un bandeau et aucun enregistrement ne la réécrit. Sous-onglets :
+// Combat (les trois `group` de la version), Phase 1 (les deux sous-boss),
+// Phase 2 (les équipes, une à la fois, dans un ordre réordonnable).
+/** Les deux sous-boss : leur clé dans le brouillon, leur combat, leur fichier, leur nom. */
+const R_BOSSES = [
+  { key: 'bossA', group: 'subA', label: 'Sous-boss A' },
+  { key: 'bossB', group: 'subB', label: 'Sous-boss B' },
+];
+/** Les combats d'une version, dans l'ordre de `config.json` : leur clé, leur rôle. */
+const R_GROUPS = [
+  { key: 'subA', label: 'Sous-boss A', main: false },
+  { key: 'subB', label: 'Sous-boss B', main: false },
+  { key: 'main', label: 'Boss principal', main: true },
+];
+const R_STAT = {
+  spd: 'SPD',
+  eff: 'EFF',
+  atk: 'ATK',
+  def: 'DEF',
+  hp: 'HP',
+  chc: 'CHC',
+  chd: 'CHD',
+  trans: 'Trans.',
+};
+/** L'équipement d'un build : son libellé, le tag de son token, la liste de `refs` qui le propose. */
+const R_EQUIP = {
+  weapon: { label: 'Arme', tag: 'I-W', refs: 'weapon' },
+  amulet: { label: 'Amulette', tag: 'I-A', refs: 'amulet' },
+  talisman: { label: 'Talisman', tag: 'I-T', refs: 'talisman' },
+  set: { label: 'Set', tag: 'AS', refs: 'set' },
+  ee: { label: 'EE' },
+};
+/** Le nom d'un champ refusé (`GuideRefusal.field`), en clair. */
+const R_FIELD = {
+  title: 'titre',
+  badge: 'badge',
+  slots: 'postes',
+  geas: 'geas',
+  notes: 'notes',
+  recommended: 'persos recommandés',
+  teamNote: 'note d’équipe',
+  buildsNote: 'note des builds',
+  video: 'vidéo',
+};
+
+let rTeam = 0; // l'équipe de phase 2 montrée (index dans `raid().teams`)
+let rVid = ''; // le logement où « ＋ vidéo » est ouvert (`bossA`, `teams.2`), ou rien
+const tokens = new Map(); // au dessin : clé d'une chaîne nue à prévisualiser → la chaîne
+
+const raid = () => v()?.raid;
+const rLegacy = (r = raid()) => Boolean(r && 'legacy' in r);
+const rOpts = () => sheet.options.raid;
+const rGroup = (key, group) =>
+  (key === 'main' ? rOpts().mains : rOpts().subs).find((o) => o.group === group);
+
+/**
+ * Une version de guild raid telle qu'elle partirait : les clés du gabarit, les
+ * textes nettoyés — ce que la savebar compare au disque. Un poste vidé RESTE
+ * (le serveur le refuse : il se retire par son ✕) ; une version à l'ancien
+ * format ne part pas, le serveur garde celle du disque.
+ */
+function raidOut(r) {
+  if (rLegacy(r)) return { legacy: true };
+  const list = (texts) => (texts ?? []).filter(hasText).map(textOut);
+  const names = (all) => all.map((n) => n.trim()).filter(Boolean);
+  const opt = (key, t) => (optText(t) ? { [key]: optText(t) } : {});
+  const boss = (b) => ({
+    notes: list(b.notes),
+    recommended: b.recommended
+      .map((g) => ({ characters: names(g.characters), ...opt('reason', g.reason) }))
+      .filter((g) => g.characters.length || g.reason),
+    slots: b.slots.map(names),
+    ...opt('teamNote', b.teamNote),
+    ...(b.video ? { video: b.video } : {}),
+  });
+  const build = (e) => {
+    const stats = Object.fromEntries(Object.entries(e.stats ?? {}).filter(([, s]) => s.trim()));
+    const equipment = Object.fromEntries(
+      Object.entries(e.equipment ?? {})
+        .map(([k, lines]) => [k, lines.filter((s) => s.trim())])
+        .filter(([, lines]) => lines.length),
+    );
+    const prio = (e.prio ?? []).filter((s) => s.trim());
+    return {
+      character: e.character,
+      ...(Object.keys(stats).length ? { stats } : {}),
+      ...(prio.length ? { prio } : {}),
+      ...(Object.keys(equipment).length ? { equipment } : {}),
+      ...(list(e.notes).length ? { notes: list(e.notes) } : {}),
+    };
+  };
+  return {
+    ...(r.subA ? { subA: r.subA } : {}),
+    ...(r.subB ? { subB: r.subB } : {}),
+    ...(r.main ? { main: r.main } : {}),
+    bossA: boss(r.bossA),
+    bossB: boss(r.bossB),
+    teams: r.teams.map((t) => ({
+      title: textOut(t.title),
+      ...(t.element ? { element: t.element } : t.icon?.trim() ? { icon: t.icon.trim() } : {}),
+      slots: t.slots.map(names),
+      geas: { bonus: [...t.geas.bonus], malus: [...t.geas.malus] },
+      builds: t.builds.map(build),
+      ...opt('buildsNote', t.buildsNote),
+      notes: t.notes
+        .map((b) => ('ul' in b ? { ul: list(b.ul) } : { p: textOut(b.p) }))
+        .filter((b) => ('ul' in b ? b.ul.length : hasText(b.p))),
+      ...(t.video ? { video: t.video } : {}),
+    })),
+  };
+}
+
+/** Les textes d'un sous-boss, d'une équipe — les OBJETS (la traduction écrit dedans). */
+const rBossTexts = (b) =>
+  [...b.notes, ...b.recommended.map((g) => g.reason), b.teamNote].filter(Boolean);
+const rTeamTexts = (t) =>
+  [
+    t.title,
+    t.buildsNote,
+    ...t.builds.flatMap((e) => e.notes ?? []),
+    ...t.notes.flatMap((b) => ('ul' in b ? b.ul : [b.p])),
+  ].filter(Boolean);
+/** Les textes d'une phase d'une version au gabarit : TOUS, l'équipe montrée et les autres. */
+function rTexts(r, tab) {
+  if (!r || rLegacy(r)) return [];
+  const one = tab !== 'phase2' ? R_BOSSES.flatMap((b) => rBossTexts(r[b.key])) : [];
+  const two = tab !== 'phase1' ? r.teams.flatMap(rTeamTexts) : [];
+  return [...one, ...two];
+}
+
+/** Le bandeau d'une version à l'ancien format : pourquoi, et ce que ça implique. */
+function rBanner() {
+  const r = raid();
+  if (!rLegacy(r)) return '';
+  const shown = r.legacy.slice(0, 3);
+  const more = r.legacy.length - shown.length;
+  return `<div class="card pad gd-legacy" role="note">
+    <div class="form"><span class="badge warn">ancien format</span><strong>Version ${esc(v().key)} : ancien format, non éditable dans quick.</strong></div>
+    <span class="lbl">Elle se lit ici ; aucun enregistrement ne la réécrit. Ce qui l’écarte du gabarit : ${esc(shown.join(' ; '))}${more > 0 ? ` ; et ${more} de plus` : ''}.</span>
+  </div>`;
+}
+
+/** Les refus d'une carte (un sous-boss, une équipe) qu'aucun champ ne montre sous lui. */
+const rErr = (bad) =>
+  bad.length
+    ? `<p class="gd-err">${esc(
+        bad
+          .map((x) => {
+            const [, kind, n] = /^(build|note)\.(\d+)$/.exec(x.field ?? '') ?? [];
+            const where = kind ? `${kind} ${Number(n) + 1}` : (R_FIELD[x.field] ?? x.field);
+            return where ? `${where} : ${x.reason}` : x.reason;
+          })
+          .join(' ; '),
+      )}</p>`
+    : '';
+
+// --- Combat
+function rBattleHtml() {
+  const r = raid();
+  const old = rLegacy(r);
+  const cfg = old ? (r.files.config ?? {}) : r;
+  const bad = refusedIn('battle');
+  const row = ({ key, label }) => {
+    const group = typeof cfg[key] === 'string' ? cfg[key] : '';
+    const g = rGroup(key, group);
+    const none = old
+      ? '<span class="lbl">aucun combat</span>'
+      : '<span class="gd-ko">Un combat est requis.</span>';
+    return `<div class="gd-battle gd-rgroup" data-rgroup="${key}"><span class="lbl gd-rrole">${label}</span>${
+      group
+        ? `${g?.icon ? `<img src="${srcAt(g.icon)}" alt="" aria-hidden="true" width="36" height="36" />` : ''}<strong>${esc(g?.label ?? group)}</strong><span class="mono lbl">${esc(group)}</span>`
+        : none
+    }${
+      old
+        ? ''
+        : `<button class="btn ghost sm" type="button" data-act="raid" data-do="pick-group" data-k="${key}" aria-haspopup="dialog">${group ? 'Changer…' : 'Choisir un combat…'}</button>`
+    }${errHtml(bad.filter((x) => x.field === key))}</div>`;
+  };
+  const pins = old
+    ? ''
+    : `<div class="card gd-card" data-card="pins">
+        <div class="card-head"><strong>État des boss pour ${esc(v().key)}</strong><span class="lbl">live, ou une archive figée — se dépingle ici, s’épingle depuis l’extractor</span></div>
+        <div class="gd-body">${
+          sheet.pins.length
+            ? sheet.pins.map(pinHtml).join('')
+            : '<p class="lbl">Aucun combat sur ce guide : rien à épingler.</p>'
+        }</div>
+      </div>`;
+  return `<div class="gd-stack">${rBanner()}<div class="card gd-card" data-card="battle">
+    <div class="card-head"><strong>Combats de ${esc(v().key)}</strong><span class="lbl">ceux de la version : deux sous-boss (phase 1, leurs geas), le boss principal (phase 2)</span></div>
+    <div class="gd-body">${R_GROUPS.map(row).join('')}</div>
+  </div>${pins}${errHtml(bad.filter((x) => !x.field))}</div>`;
+}
+
+// --- Les briques partagées des deux phases
+/** Des persos en LECTURE : leurs tuiles, sans geste. */
+const rTiles = (names) =>
+  `<div class="gd-heroes">${names
+    .map((n) => {
+      const c = heroByName(n);
+      return `<span class="gd-hero${c ? '' : ' unknown'}">${heroTile(state, c ?? { name: n }, { name: true })}</span>`;
+    })
+    .join('')}</div>`;
+/** Une rangée de persos (un groupe, un poste) à `path` dans la version, et son « ＋ héros ». */
+const rHeroes = (names, path) =>
+  `<div class="gd-heroes">${names
+    .map((n) => {
+      const c = heroByName(n);
+      return `<span class="gd-hero${c ? '' : ' unknown'}" title="${esc(c ? c.name : `« ${n} » : hors du roster`)}">${heroTile(
+        state,
+        c ?? { name: n },
+        { name: true },
+      )}<button class="btn icon" type="button" data-act="raid" data-do="del-hero" data-path="${path}" data-name="${esc(n)}" title="Retirer" aria-label="Retirer ${esc(n)}">✕</button></span>`;
+    })
+    .join(
+      '',
+    )}<button class="btn ghost sm" type="button" data-act="raid" data-do="add-hero" data-path="${path}" aria-haspopup="dialog">＋ héros</button></div>`;
+/** Les postes d'une équipe : une rangée numérotée par poste (ses alternatives), ✕, « ＋ poste ». */
+const rSlots = (slots, path) =>
+  `<div class="gd-slots">${slots
+    .map(
+      (slot, si) =>
+        `<div class="gd-slot"><span class="lbl">${si + 1}</span>${rHeroes(slot, `${path}.${si}`)}<button class="btn icon" type="button" data-act="raid" data-do="del" data-path="${path}" data-i="${si}" title="Retirer le poste" aria-label="Retirer le poste ${si + 1}">✕</button></div>`,
+    )
+    .join('')}${
+    slots.length < rOpts().maxSlots
+      ? `<div class="gd-foot"><button class="btn ghost sm" type="button" data-act="raid" data-do="add-slot" data-path="${path}">＋ poste</button></div>`
+      : ''
+  }</div>`;
+/** Une section d'une carte : son titre en capitales grises, une indication, son corps. */
+const rSec = (title, hint, body) =>
+  `<div class="gd-rsec"><div class="gd-rh"><span>${title}</span>${hint ? `<span class="lbl">${hint}</span>` : ''}</div>${body}</div>`;
+/** ↑ ↓ ✕ d'une ligne d'une liste ordonnée à `path`. */
+const rMoves = (path, i, count, what) =>
+  `<button class="btn icon" type="button" data-act="raid" data-do="move" data-path="${path}" data-i="${i}" data-d="-1" title="Monter" aria-label="Monter ${what}"${i ? '' : ' disabled'}>↑</button><button class="btn icon" type="button" data-act="raid" data-do="move" data-path="${path}" data-i="${i}" data-d="1" title="Descendre" aria-label="Descendre ${what}"${i < count - 1 ? '' : ' disabled'}>↓</button><button class="btn icon" type="button" data-act="raid" data-do="del" data-path="${path}" data-i="${i}" title="Retirer" aria-label="Retirer ${what}">✕</button>`;
+
+// « ＋ vidéo » d'un sous-boss ou d'une équipe : le formulaire partagé, dans le
+// logement ouvert (`rVid`). UNE vidéo par logement ; son `author` vient de
+// YouTube et se corrige dans son champ.
+const raidVid = videoAdder({
+  root: $('gd-panel'),
+  id: 'gd-rva',
+  has: () => false,
+  scope: () => `${v()?.key} ${rVid}`,
+  onAdd: (vid) => {
+    const owner = getAt(raid(), pathOf(rVid));
+    if (!owner) return;
+    owner.video = {
+      platform: vid.platform,
+      id: vid.id,
+      title: vid.title,
+      ...(vid.author ? { author: vid.author } : {}),
+    };
+    const path = rVid;
+    rVid = '';
+    forgive(sub);
+    render();
+    $('gd-panel').querySelector(`[data-rauthor="${path}"]`)?.focus();
+  },
+});
+/** La vidéo d'un logement (`path` : `bossA`, `teams.2`) : sa ligne et son auteur, ou « ＋ vidéo ». */
+function rVideo(owner, path) {
+  const vid = owner.video;
+  if (vid)
+    return `<ul class="gd-videos"><li><span class="gd-vt">${esc(vid.title || vid.id || 'vidéo sans id')}</span><span class="lbl">${esc([vid.platform ?? 'youtube', vid.id || 'id vide'].join(' · '))}</span><label class="gd-rauthor"><span class="lbl">Auteur</span><input class="w-text" data-rauthor="${path}" value="${esc(vid.author ?? '')}" placeholder="chaîne ou pseudo" autocomplete="off" /></label><button class="btn icon" type="button" data-act="raid" data-do="del-video" data-path="${path}" title="Retirer" aria-label="Retirer la vidéo">✕</button></li></ul>`;
+  return rVid === path
+    ? `${raidVid.html()}<div class="gd-foot"><button class="btn ghost sm" type="button" data-act="raid" data-do="close-video">annuler</button><span class="lbl">Elle part avec « Enregistrer ».</span></div>`
+    : `<div class="gd-foot"><button class="btn ghost sm" type="button" data-act="raid" data-do="open-video" data-path="${path}">＋ vidéo</button></div>`;
+}
+
+// --- Phase 1
+function rPhase1Html() {
+  const r = raid();
+  if (rLegacy(r)) return rOldPhase1(r);
+  const card = (b, bi) => {
+    const boss = r[b.key];
+    const bad = refusedAt('phase1', bi);
+    const g = rGroup(b.group, r[b.group]);
+    const at = (field) => bad.filter((x) => x.field === field);
+    const groups = boss.recommended
+      .map(
+        (grp, gi) =>
+          `<div class="gd-rgroup-row" data-reco="${gi}">${rHeroes(grp.characters, `${b.key}.recommended.${gi}.characters`)}<button class="btn icon" type="button" data-act="raid" data-do="del" data-path="${b.key}.recommended" data-i="${gi}" title="Retirer le groupe" aria-label="Retirer le groupe ${gi + 1}">✕</button>${textHtml(
+            `p1.${bi}.reco.${gi}`,
+            (grp.reason ??= { [def()]: '' }),
+            {
+              what: `Raison du groupe ${gi + 1}, ${b.label}`,
+              placeholder: 'Pourquoi ces persos (facultatif)…',
+            },
+          )}</div>`,
+      )
+      .join('');
+    return `<div class="card gd-card${bad.length ? ' ko' : ''}" data-card="boss-${bi}">
+      <div class="card-head">${g?.icon ? `<img class="gd-rico" src="${srcAt(g.icon)}" alt="" aria-hidden="true" width="28" height="28" />` : ''}<strong>${b.label}</strong><span class="lbl">${esc(g?.label ?? r[b.group] ?? 'aucun combat')}</span></div>
+      <div class="gd-body">
+        ${rSec('Notes', 'un paragraphe par ligne', blockHtml(`p1.${bi}.notes`, boss.notes, { what: `Notes du ${b.label}`, placeholder: 'Un paragraphe par ligne…', bad: at('notes') }))}
+        ${rSec('Persos recommandés', 'un groupe = des persos et leur raison', `${groups}${rErr(at('recommended'))}<div class="gd-foot"><button class="btn ghost sm" type="button" data-act="raid" data-do="add-group" data-path="${b.key}.recommended">＋ groupe</button></div>`)}
+        ${rSec('Équipe', `${rOpts().maxSlots} postes au plus ; une ligne = les alternatives d’un poste`, `${rSlots(boss.slots, `${b.key}.slots`)}${rErr(at('slots'))}${textHtml(`p1.${bi}.teamNote`, (boss.teamNote ??= { [def()]: '' }), { what: `Note d’équipe, ${b.label}`, placeholder: 'Note (facultatif)…', bad: at('teamNote') })}`)}
+        ${rSec('Vidéo', '', `${rVideo(boss, b.key)}${rErr(at('video'))}`)}
+      </div>
+    </div>`;
+  };
+  return `<div class="gd-stack">${R_BOSSES.map(card).join('')}${tabErr('phase1')}${translateHtml()}</div>`;
+}
+
+// --- Phase 2
+const rPoints = (p) => `${p > 0 ? '+' : ''}${p / 10}%`;
+/** La pastille d'une équipe : son élément, ou son sprite d'effet. */
+function rBadge(t) {
+  const path = t.element
+    ? `ui/elem/IG_Turn_Element_${t.element[0].toUpperCase()}${t.element.slice(1)}`
+    : t.icon?.trim()
+      ? `ui/effect/${t.icon.trim()}`
+      : '';
+  return path
+    ? `<img class="gd-rbadge" src="${src(esc(path))}" alt="" aria-hidden="true" width="20" height="20" />`
+    : '';
+}
+/** Le pool d'une version : les geas que ses deux sous-boss débloquent, une fois chacun. */
+function rPool(r) {
+  const seen = new Set();
+  return [...(rOpts().geas[r.subA] ?? []), ...(rOpts().geas[r.subB] ?? [])].filter((c) =>
+    seen.has(c.id) ? false : (seen.add(c.id), true),
+  );
+}
+/** Les geas d'une équipe : le pool en deux colonnes (bonus, malus de score), ceux actifs enfoncés. */
+function rGeasHtml(t, r) {
+  const pool = rPool(r);
+  const active = new Set([...t.geas.bonus, ...t.geas.malus]);
+  const stray = [...active].filter((id) => !pool.some((c) => c.id === id));
+  const one = (c) =>
+    `<button class="gd-geas" type="button" data-act="raid" data-do="geas" data-id="${esc(c.id)}" aria-pressed="${active.has(c.id)}" title="geas ${esc(c.id)} — palier ${c.kill}"><span class="gd-gico"><img src="${srcAt(c.frame)}" alt="" aria-hidden="true" width="36" height="36" />${c.icon ? `<img class="${c.positive ? 'aid' : 'harm'}" src="${srcAt(c.icon)}" alt="" aria-hidden="true" />` : ''}</span><span class="gd-gtext">${esc(c.text)}</span><span class="gd-gpts ${c.bonus ? 'up' : 'down'}">${rPoints(c.points)}</span></button>`;
+  const col = (title, list) =>
+    `<div class="gd-gcol"><div class="gd-rh"><span>${title}</span><span class="badge off">${list.filter((c) => active.has(c.id)).length} / ${list.length}</span></div>${list.map(one).join('')}</div>`;
+  const byKill = (a, b) => a.kill - b.kill;
+  return `${
+    pool.length
+      ? `<div class="gd-geas-cols">${col('Bonus de score', pool.filter((c) => c.bonus).sort(byKill))}${col('Malus de score', pool.filter((c) => !c.bonus).sort(byKill))}</div>`
+      : '<p class="gd-ko">Aucun geas déblocable : les sous-boss de la version n’ont pas de table de geas (onglet Combat).</p>'
+  }${
+    stray.length
+      ? `<div class="chips">${stray.map((id) => `<span class="chip gd-stray">geas ${esc(id)} — hors du pool de la version<button class="btn icon" type="button" data-act="raid" data-do="geas" data-id="${esc(id)}" aria-label="Retirer le geas ${esc(id)}">✕</button></span>`).join('')}</div>`
+      : ''
+  }`;
+}
+/** Le build d'un perso : ses stats, sa priorité, son équipement en tokens, ses notes. */
+function rBuildHtml(e, ti, bi, count) {
+  const key = `p2.${ti}.b${bi}`;
+  const c = heroByName(e.character);
+  const bad = refusedAt('phase2', ti, `build.${bi}`);
+  const stat = (k) =>
+    `<label class="gd-rstat"><span class="lbl">${R_STAT[k] ?? k}</span><input data-rstat="${k}" data-b="${bi}" value="${esc(e.stats?.[k] ?? '')}" autocomplete="off" aria-label="${R_STAT[k] ?? k} de ${esc(e.character)}" /></label>`;
+  const prio = (e.prio ?? []).join(' > ');
+  tokens.set(`${key}.prio`, (e.prio ?? []).join(' › '));
+  const equip = rOpts()
+    .equipment.map((k) => {
+      const lines = e.equipment?.[k] ?? [];
+      const meta = R_EQUIP[k] ?? { label: k };
+      tokens.set(`${key}.${k}`, lines.join(', '));
+      return `<div class="gd-requip"><div class="gd-rh"><span>${meta.label}</span>${
+        meta.tag
+          ? `<button class="btn ghost sm" type="button" data-act="raid" data-do="pick-token" data-kind="${k}" data-b="${bi}" aria-haspopup="dialog" title="Insérer un token {${meta.tag}/…}">＋</button>`
+          : ''
+      }</div><textarea class="mono" rows="${Math.max(2, lines.length)}" data-requip="${k}" data-b="${bi}" placeholder="une option par ligne" aria-label="${meta.label} de ${esc(e.character)}, une option par ligne">\n${esc(lines.join('\n'))}</textarea><p class="gd-pv pv-note${pv.busy ? ' busy' : ''}" data-pv="${esc(`${key}.${k}`)}">${pvBody(`${key}.${k}`)}</p></div>`;
+    })
+    .join('');
+  return `<div class="gd-rbuild${bad.length ? ' ko' : ''}" data-build="${bi}">
+    <div class="gd-rbuild-head"><span class="gd-hero${c ? '' : ' unknown'}" title="${esc(c ? c.name : `« ${e.character} » : hors du roster`)}">${heroTile(state, c ?? { name: e.character }, { name: true })}</span>
+      <div class="gd-rstats">${rOpts().stats.map(stat).join('')}</div>
+      <span class="gd-rmoves">${rMoves(`teams.${ti}.builds`, bi, count, `le build de ${esc(e.character)}`)}</span>
+    </div>
+    ${rErr(bad)}
+    <div class="gd-rprio"><div class="gd-rh"><span>Priorité de stats</span><button class="btn ghost sm" type="button" data-act="raid" data-do="pick-token" data-kind="prio" data-b="${bi}" aria-haspopup="dialog" title="Ajouter un token {S/…}">＋</button></div><input class="mono" data-rprio data-b="${bi}" value="${esc(prio)}" placeholder="{S/ATK} > {S/CHC}" autocomplete="off" aria-label="Priorité de stats de ${esc(e.character)}, séparées par >" /><p class="gd-pv pv-note${pv.busy ? ' busy' : ''}" data-pv="${esc(`${key}.prio`)}">${pvBody(`${key}.prio`)}</p></div>
+    <div class="gd-requips">${equip}</div>
+    ${blockHtml(`${key}.notes`, (e.notes ??= []), { what: `Notes du build de ${e.character}`, placeholder: 'Une note par ligne…' })}
+  </div>`;
+}
+function rTeamHtml(t, ti, r) {
+  const bad = refusedAt('phase2', ti);
+  const at = (field) => bad.filter((x) => x.field === field);
+  const kind = t.element ? t.element : t.icon !== undefined ? 'icon' : '';
+  const icons = [
+    ...new Set(
+      draft.versions.flatMap((x) =>
+        x.raid && !rLegacy(x.raid) ? x.raid.teams.map((y) => y.icon?.trim()).filter(Boolean) : [],
+      ),
+    ),
+  ].sort();
+  const badge = `<div class="form"><div class="field"><label for="gd-rkind">Badge</label><select id="gd-rkind" data-rkind>
+      <option value=""${kind ? '' : ' selected'}>aucun</option>${rOpts()
+        .elements.map(
+          (el) => `<option value="${el}"${kind === el ? ' selected' : ''}>${el}</option>`,
+        )
+        .join(
+          '',
+        )}<option value="icon"${kind === 'icon' ? ' selected' : ''}>sprite d’effet…</option></select></div>${
+        kind === 'icon'
+          ? `<div class="field"><label for="gd-ricon">Sprite d’effet</label><input id="gd-ricon" class="w-text mono" data-ricon list="gd-ricons" value="${esc(t.icon ?? '')}" placeholder="IG_Buff_Dot_Burn" autocomplete="off" /><datalist id="gd-ricons">${icons.map((i) => `<option value="${esc(i)}"></option>`).join('')}</datalist></div>`
+          : ''
+      }<span class="gd-rbadge-pv" data-rbadge>${rBadge(t)}</span></div>${rErr(at('badge'))}`;
+  const builds = t.builds.map((e, bi) => rBuildHtml(e, ti, bi, t.builds.length)).join('');
+  const notes = t.notes
+    .map((b, ni) => {
+      const list = 'ul' in b;
+      const opts = {
+        what: `${list ? 'Liste' : 'Paragraphe'} ${ni + 1} de l’équipe`,
+        bad: at(`note.${ni}`),
+      };
+      return `<div class="gd-rnote" data-note="${ni}"><div class="gd-rh"><span>${list ? 'Liste à puces' : 'Paragraphe'}</span><span class="gd-rmoves">${rMoves(`teams.${ti}.notes`, ni, t.notes.length, `la note ${ni + 1}`)}</span></div>${
+        list
+          ? blockHtml(`p2.${ti}.n${ni}`, b.ul, { ...opts, placeholder: 'Une puce par ligne…' })
+          : textHtml(`p2.${ti}.n${ni}`, b.p, opts)
+      }</div>`;
+    })
+    .join('');
+  const active = t.geas.bonus.length + t.geas.malus.length;
+  return `<div class="card gd-card${bad.length ? ' ko' : ''}" data-card="team-${ti}">
+    <div class="card-head"><strong>Équipe ${ti + 1}</strong><span class="lbl">${plural(t.slots.length, 'poste')} · ${active} geas · ${plural(t.builds.length, 'build')}</span><button class="btn icon" type="button" data-act="raid" data-do="move-team" data-d="-1" title="Avancer l’équipe" aria-label="Avancer l’équipe"${ti ? '' : ' disabled'}>←</button><button class="btn icon gd-rnext" type="button" data-act="raid" data-do="move-team" data-d="1" title="Reculer l’équipe" aria-label="Reculer l’équipe"${ti < r.teams.length - 1 ? '' : ' disabled'}>→</button><button class="btn icon gd-rnext" type="button" data-act="raid" data-do="del-team" title="Retirer l’équipe" aria-label="Retirer l’équipe ${ti + 1}">✕</button></div>
+    <div class="gd-body">
+      ${rSec('Titre', 'le nom de l’onglet de l’équipe, et sa pastille', `${textHtml(`p2.${ti}.title`, t.title, { what: `Titre de l’équipe ${ti + 1}`, line: true, placeholder: 'Titre (requis)', bad: at('title') })}${badge}`)}
+      ${rSec('Postes', `${rOpts().maxSlots} au plus ; une ligne = les alternatives d’un poste`, `${rSlots(t.slots, `teams.${ti}.slots`)}${rErr(at('slots'))}`)}
+      ${rSec('Geas actifs', 'ceux que les deux sous-boss de la version débloquent, rangés par le signe de leurs points comme sur le site', `${rGeasHtml(t, r)}${rErr(at('geas'))}`)}
+      ${rSec('Builds', 'un par perso ; le site les trie par vitesse, un build sans SPD garde sa place', `${builds || '<p class="lbl">Aucun build.</p>'}<div class="gd-foot"><button class="btn ghost sm" type="button" data-act="raid" data-do="add-build" aria-haspopup="dialog">＋ build</button></div>${textHtml(`p2.${ti}.buildsNote`, (t.buildsNote ??= { [def()]: '' }), { what: 'Note de pied des builds', placeholder: 'Note de pied du tableau (facultatif)…', bad: at('buildsNote') })}`)}
+      ${rSec('Notes', 'des paragraphes et des listes à puces, dans l’ordre', `${notes || '<p class="lbl">Aucune note.</p>'}<div class="gd-foot"><button class="btn ghost sm" type="button" data-act="raid" data-do="add-p">＋ paragraphe</button><button class="btn ghost sm" type="button" data-act="raid" data-do="add-ul">＋ liste</button></div>`)}
+      ${rSec('Vidéo', '', `${rVideo(t, `teams.${ti}`)}${rErr(at('video'))}`)}
+    </div>
+  </div>`;
+}
+function rPhase2Html() {
+  const r = raid();
+  if (rLegacy(r)) return rOldPhase2(r);
+  rTeam = Math.max(0, Math.min(rTeam, r.teams.length - 1));
+  const tabs = r.teams
+    .map(
+      (t, i) =>
+        `<button class="tab gd-rtab" type="button" role="tab" draggable="true" data-act="raid" data-do="show-team" data-i="${i}" aria-selected="${i === rTeam}">${rBadge(t)}<span>${esc(t.title[def()] || `Équipe ${i + 1}`)}</span>${
+          refusedAt('phase2', i).length ? '<span class="dot ko" title="refusée"></span>' : ''
+        }</button>`,
+    )
+    .join('');
+  const t = r.teams[rTeam];
+  return `<div class="gd-stack">
+    <div class="gd-rbar"><div class="gd-rteams" role="tablist" aria-label="Équipes de phase 2">${tabs}</div><button class="btn ghost sm" type="button" data-act="raid" data-do="add-team">＋ équipe</button><span class="lbl">une équipe à la fois ; glisser un onglet, ou ← →, change l’ordre du site</span></div>
+    ${t ? rTeamHtml(t, rTeam, r) : '<div class="empty">Aucune équipe : « ＋ équipe » pour commencer.</div>'}
+    ${tabErr('phase2')}${translateHtml()}
+  </div>`;
+}
+
+// --- Une version à l'ancien format, en lecture : ce que ses fichiers portent
+const rText = (t) => esc(t?.[def()] ?? '');
+const rOldVideo = (vid) =>
+  vid
+    ? `<p class="lbl">Vidéo : ${esc([vid.title || vid.id, vid.author, vid.platform ?? 'youtube'].filter(Boolean).join(' · '))}</p>`
+    : '';
+const rOldSlots = (slots) =>
+  `<div class="gd-slots">${(slots ?? []).map((slot, si) => `<div class="gd-slot"><span class="lbl">${si + 1}</span>${rTiles(slot)}</div>`).join('')}</div>`;
+function rOldPhase1(r) {
+  const card = (b) => {
+    const file = r.files[b.group];
+    const g = rGroup(b.group, r.files.config?.[b.group]);
+    const body = file
+      ? `${(file.notes ?? []).map((t) => `<p class="gd-ro">${rText(t)}</p>`).join('')}${(
+          file.recommended ?? []
+        )
+          .map(
+            (grp) =>
+              `<div class="gd-rgroup-row">${rTiles(grp.characters ?? [])}<p class="gd-ro">${rText(grp.reason)}</p></div>`,
+          )
+          .join(
+            '',
+          )}${file.team ? `${rOldSlots(file.team.slots)}<p class="gd-ro">${rText(file.team.note)}</p>` : ''}${rOldVideo(file.video)}`
+      : '<p class="lbl">Aucun contenu.</p>';
+    return `<div class="card gd-card gd-old" data-card="old-${b.key}"><div class="card-head"><strong>${b.label}</strong><span class="lbl">${esc(g?.label ?? 'aucun combat')}</span><span class="badge off">lecture</span></div><div class="gd-body">${body}</div></div>`;
+  };
+  return `<div class="gd-stack">${rBanner()}${R_BOSSES.map(card).join('')}</div>`;
+}
+function rOldPhase2(r) {
+  const teams = r.files.main?.teams ?? [];
+  const note = (b) => {
+    if (b.turnOrder)
+      return `<p class="gd-ro"><span class="badge warn">turnOrder</span> ${esc(b.turnOrder.map((s) => `${s.character} ${s.speed}`).join(' › '))}${b.note ? ` — ${rText(b.note)}` : ''}</p>`;
+    if (b.ul) return `<ul class="gd-ro">${b.ul.map((t) => `<li>${rText(t)}</li>`).join('')}</ul>`;
+    return `<p class="gd-ro">${rText(b.p)}</p>`;
+  };
+  const build = (e) =>
+    `<li><strong>${esc(e.character)}</strong> <span class="lbl">${esc(
+      [
+        ...Object.entries(e.stats ?? {}).map(([k, s]) => `${R_STAT[k] ?? k} ${s}`),
+        ...(e.prio?.length ? [`prio ${e.prio.join(' > ')}`] : []),
+        ...Object.entries(e.equipment ?? {}).map(
+          ([k, l]) => `${R_EQUIP[k]?.label ?? k} : ${l.join(', ')}`,
+        ),
+        ...(e.notes?.length ? [plural(e.notes.length, 'note')] : []),
+      ].join(' · '),
+    )}</span></li>`;
+  const card = (t, i) => {
+    const geas = (t.geasActive?.bonus?.length ?? 0) + (t.geasActive?.malus?.length ?? 0);
+    const builds = t.requirements?.entries ?? [];
+    return `<div class="card gd-card gd-old" data-card="old-team-${i}">
+      <div class="card-head">${rBadge(t)}<strong>${rText(t.title) || `Équipe ${i + 1}`}</strong><span class="lbl">${plural((t.slots ?? []).length, 'poste')} · ${geas} geas · ${plural(builds.length, 'build')}</span><span class="badge off">lecture</span></div>
+      <div class="gd-body">${rOldSlots(t.slots)}${builds.length ? `<ul class="gd-ro">${builds.map(build).join('')}</ul>${t.requirements.note ? `<p class="gd-ro">${rText(t.requirements.note)}</p>` : ''}` : ''}${(t.notes ?? []).map(note).join('')}${rOldVideo(t.video)}</div>
+    </div>`;
+  };
+  return `<div class="gd-stack">${rBanner()}${teams.length ? teams.map(card).join('') : '<div class="empty">Aucune équipe.</div>'}</div>`;
+}
+
+// --- Les gestes
+/** Les gestes d'un guild raid (`data-act="raid"`, `data-do`) sur la version montrée, au gabarit. */
+function raidAct(el) {
+  const r = raid();
+  if (!r || rLegacy(r)) return undefined;
+  const what = el.dataset.do;
+  const { path } = el.dataset;
+  const i = Number(el.dataset.i ?? -1);
+  const t = r.teams[rTeam];
+  const at = () => getAt(r, pathOf(path ?? ''));
+  const redo = (focus) => {
+    forgive(sub);
+    render();
+    if (focus) $('gd-panel').querySelector(focus)?.focus();
+  };
+  switch (what) {
+    case 'pick-group': {
+      const key = el.dataset.k;
+      const main = key === 'main';
+      return pickRows({
+        title: main ? 'Choisir le boss principal' : 'Choisir un sous-boss',
+        options: (main ? rOpts().mains : rOpts().subs).map((g) => ({
+          id: g.group,
+          name: g.label,
+          icon: g.icon,
+        })),
+        chosen: r[key],
+        placeholder: 'Chercher un combat de guild raid…',
+        none: 'Aucun combat ne correspond.',
+        opener: () => el,
+        onPick: (group) => {
+          r[key] = group;
+          redo(`[data-do="pick-group"][data-k="${key}"]`);
+        },
+      });
+    }
+    case 'add-hero':
+    case 'del-hero': {
+      const names = at();
+      if (!Array.isArray(names)) return undefined;
+      const set = (next) => {
+        names.length = 0;
+        names.push(...next);
+        redo(`[data-do="add-hero"][data-path="${path}"]`);
+      };
+      if (what === 'del-hero') return set(names.filter((n) => n !== el.dataset.name));
+      return pickHeroes(names, () => el, set);
+    }
+    case 'add-slot': {
+      const slots = at();
+      if (!Array.isArray(slots) || slots.length >= rOpts().maxSlots) return undefined;
+      slots.push([]);
+      return redo(`[data-do="add-hero"][data-path="${path}.${slots.length - 1}"]`);
+    }
+    case 'add-group': {
+      const groups = at();
+      groups.push({ characters: [] });
+      return redo(`[data-do="add-hero"][data-path="${path}.${groups.length - 1}.characters"]`);
+    }
+    case 'del':
+      at()?.splice(i, 1);
+      return redo();
+    case 'move': {
+      const list = at();
+      const j = i + Number(el.dataset.d);
+      if (!Array.isArray(list) || j < 0 || j >= list.length) return undefined;
+      [list[i], list[j]] = [list[j], list[i]];
+      return redo(`[data-do="move"][data-path="${path}"][data-i="${j}"][data-d="${el.dataset.d}"]`);
+    }
+    case 'show-team':
+      if (i === rTeam) return undefined;
+      rTeam = i;
+      rVid = '';
+      render();
+      return $('gd-panel').querySelector(`.gd-rtab[data-i="${i}"]`)?.focus();
+    case 'add-team':
+      r.teams.push({
+        title: { [def()]: '' },
+        slots: [],
+        geas: { bonus: [], malus: [] },
+        builds: [],
+        notes: [],
+      });
+      rTeam = r.teams.length - 1;
+      rVid = '';
+      return redo(`[data-key="p2.${rTeam}.title"]`);
+    case 'del-team':
+      if (
+        !t ||
+        !confirm(`Retirer l’équipe « ${t.title[def()] || rTeam + 1} » de la version ${v().key} ?`)
+      )
+        return undefined;
+      r.teams.splice(rTeam, 1);
+      rVid = '';
+      return redo('[data-do="add-team"]');
+    case 'move-team': {
+      const j = rTeam + Number(el.dataset.d);
+      if (!t || j < 0 || j >= r.teams.length) return undefined;
+      [r.teams[rTeam], r.teams[j]] = [r.teams[j], r.teams[rTeam]];
+      rTeam = j;
+      rVid = '';
+      return redo(`[data-do="move-team"][data-d="${el.dataset.d}"]`);
+    }
+    case 'geas': {
+      const { id } = el.dataset;
+      if (!t) return undefined;
+      const on = t.geas.bonus.includes(id) || t.geas.malus.includes(id);
+      t.geas.bonus = t.geas.bonus.filter((x) => x !== id);
+      t.geas.malus = t.geas.malus.filter((x) => x !== id);
+      // Le fichier range les aides (`positive`) en `bonus`, les handicaps en `malus`.
+      const c = rPool(r).find((x) => x.id === id);
+      if (!on && c) t.geas[c.positive ? 'bonus' : 'malus'].push(id);
+      return redo(`[data-do="geas"][data-id="${id}"]`);
+    }
+    case 'add-build':
+      if (!t) return undefined;
+      return pickHero(
+        () => el,
+        undefined,
+        (name) => {
+          if (!t.builds.some((e) => e.character === name)) t.builds.push({ character: name });
+          redo(
+            `[data-build="${t.builds.findIndex((e) => e.character === name)}"] [data-rstat="spd"]`,
+          );
+        },
+      );
+    case 'add-p':
+    case 'add-ul':
+      if (!t) return undefined;
+      t.notes.push(what === 'add-ul' ? { ul: [] } : { p: { [def()]: '' } });
+      return redo(`[data-note="${t.notes.length - 1}"] textarea`);
+    case 'open-video':
+      rVid = path;
+      raidVid.reset();
+      render();
+      return $('gd-panel').querySelector('#gd-rva [data-va="url"]')?.focus();
+    case 'close-video':
+      rVid = '';
+      return render();
+    case 'del-video': {
+      const owner = at();
+      if (owner) delete owner.video;
+      return redo(`[data-do="open-video"][data-path="${path}"]`);
+    }
+    case 'pick-token': {
+      const e = t?.builds[Number(el.dataset.b)];
+      const { kind } = el.dataset;
+      const meta = kind === 'prio' ? { label: 'Stat', tag: 'S', refs: 'stat' } : R_EQUIP[kind];
+      if (!e || !meta?.tag) return undefined;
+      return pickRows({
+        title: `${meta.label} — insérer un token`,
+        options: (sheet.refs[meta.refs] ?? []).map((x) => ({ id: x.value, name: x.label })),
+        placeholder: 'Chercher par le début d’un mot…',
+        none: 'Rien ne correspond.',
+        opener: () => el,
+        onPick: (value) => {
+          const token = `{${meta.tag}/${value}}`;
+          if (kind === 'prio') e.prio = [...(e.prio ?? []), token];
+          else rSetEquip(e, kind, [...(e.equipment?.[kind] ?? []), token]);
+          redo(`[data-do="pick-token"][data-kind="${kind}"][data-b="${el.dataset.b}"]`);
+        },
+      });
+    }
+    default:
+      return undefined;
+  }
+}
+
+/** Pose une ligne d'équipement d'un build, les clés rangées dans l'ordre du rendu. */
+function rSetEquip(e, kind, lines) {
+  const next = { ...(e.equipment ?? {}), [kind]: lines };
+  e.equipment = Object.fromEntries(
+    rOpts()
+      .equipment.filter((k) => next[k]?.length)
+      .map((k) => [k, next[k]]),
+  );
+}
+
+/** La saisie des champs nus d'un guild raid (stats, priorité, équipement, badge, auteur) ; rend `true` si c'en était un. */
+function raidInput(el) {
+  const r = raid();
+  if (!r || rLegacy(r)) return false;
+  const t = r.teams[rTeam];
+  const e = el.dataset.b !== undefined ? t?.builds[Number(el.dataset.b)] : undefined;
+  const key = `p2.${rTeam}.b${el.dataset.b}`;
+  if (el.dataset.rauthor !== undefined) {
+    const vid = getAt(r, pathOf(el.dataset.rauthor))?.video;
+    if (!vid) return true;
+    if (el.value.trim()) vid.author = el.value.trim();
+    else delete vid.author;
+  } else if (el.dataset.ricon !== undefined && t) {
+    t.icon = el.value;
+    const pvEl = $('gd-panel').querySelector('[data-rbadge]');
+    if (pvEl) pvEl.innerHTML = rBadge(t);
+  } else if (el.dataset.rkind !== undefined && t) {
+    delete t.element;
+    if (el.value === 'icon') t.icon ??= '';
+    else {
+      delete t.icon;
+      if (el.value) t.element = el.value;
+    }
+    forgive(sub);
+    render();
+    $('gd-panel')
+      .querySelector(el.value === 'icon' ? '[data-ricon]' : '[data-rkind]')
+      ?.focus();
+    return true;
+  } else if (el.dataset.rstat !== undefined && e) {
+    const next = { ...(e.stats ?? {}), [el.dataset.rstat]: el.value };
+    e.stats = Object.fromEntries(
+      rOpts()
+        .stats.filter((k) => next[k]?.trim())
+        .map((k) => [k, next[k]]),
+    );
+  } else if (el.dataset.rprio !== undefined && e) {
+    e.prio = el.value
+      .split('>')
+      .map((s) => s.trim())
+      .filter(Boolean);
+    tokens.set(`${key}.prio`, e.prio.join(' › '));
+  } else if (el.dataset.requip !== undefined && e) {
+    const lines = el.value.split('\n').filter((s) => s.trim());
+    rSetEquip(e, el.dataset.requip, lines);
+    tokens.set(`${key}.${el.dataset.requip}`, lines.join(', '));
+    el.rows = Math.max(2, el.value.split('\n').length);
+  } else return false;
+  forgive(sub);
+  marks();
+  pvAsk(PV_DELAY);
+  return true;
+}
+
+// Le glisser-déposer des onglets d'équipe : l'ordre des équipes est celui du
+// site. ← → de la carte restent le chemin du clavier et du banc.
+sortable($('gd-panel'), {
+  item: '.gd-rtab',
+  list: '.gd-rteams',
+  onMove: (from, to) => {
+    const r = raid();
+    if (gen || !r || rLegacy(r)) return;
+    const shown = r.teams[rTeam];
+    const [moved] = r.teams.splice(from, 1);
+    if (!moved) return;
+    r.teams.splice(to, 0, moved);
+    rTeam = r.teams.indexOf(shown);
+    rVid = '';
+    forgive(sub);
+    render();
+    $('gd-panel').querySelector(`.gd-rtab[data-i="${to}"]`)?.focus();
+  },
+});
 
 // ------------------------------------------------------ les guides généraux
 // Quatre guides généraux ont un fragment éditable (Premium & Limited, Free
@@ -2104,6 +2931,7 @@ function render() {
   const panel = $('gd-panel');
   keepOpen();
   texts.clear();
+  tokens.clear();
   renderOverview();
   if (!sheet) {
     panel.innerHTML = '';
@@ -2137,20 +2965,24 @@ function render() {
         : '<div class="empty">Aucune version : « ＋ version » pour commencer.</div>'
     : {
         meta: metaHtml,
-        battle: battleHtml,
+        battle: spec().raid ? rBattleHtml : battleHtml,
         intro: introHtml,
         tips: tipsHtml,
         notes: notesHtml,
         reco: recoHtml,
         team: teamHtml,
         videos: videosHtml,
+        phase1: rPhase1Html,
+        phase2: rPhase2Html,
       }[sub]();
   panel.innerHTML = global + content;
   growAll(panel);
   head();
-  subTabs();
-  versionsBar();
-  bar();
+  counted(() => {
+    subTabs();
+    versionsBar();
+    bar();
+  });
   pvLangs();
   pvAsk();
 }
@@ -2183,9 +3015,11 @@ function marks() {
     const updating = $('gd-head').querySelector('[data-updating]');
     if (updating) updating.textContent = meta.updating ? 'en mise à jour' : '';
   }
-  subTabs();
-  versionsBar();
-  bar();
+  counted(() => {
+    subTabs();
+    versionsBar();
+    bar();
+  });
 }
 
 // ------------------------------------------------------ l'aperçu
@@ -2213,6 +3047,8 @@ function pvTexts() {
   for (const [key, t] of texts)
     if (Array.isArray(t)) t.forEach((x, i) => out.push([`${key}:${i}`, pick(x)]));
     else out.push([key, pick(t)]);
+  // Les chaînes nues d'un build de guild raid (priorité, équipement) : telles quelles.
+  for (const [key, value] of tokens) out.push([key, value]);
   return out;
 }
 
@@ -2267,6 +3103,8 @@ $('gd-panel').oninput = (e) => {
   if (note) return targetNote(note);
   const nude = e.target.closest('[data-gen]');
   if (nude) return genInput(nude);
+  // Un champ nu d'un guild raid (stat, priorité, équipement, sprite, auteur) ; son `select` : `change`.
+  if (!gen && spec().raid && !e.target.matches('select') && raidInput(e.target)) return undefined;
   const field = e.target.closest('[data-key]');
   if (field) {
     const key = field.dataset.key;
@@ -2301,6 +3139,7 @@ $('gd-panel').onchange = (e) => {
   // Un `select` ou une case d'un guide général : `change` seulement, pas `input`.
   const nude = e.target.closest('select[data-gen], input[type="checkbox"][data-gen]');
   if (nude) return genInput(nude);
+  if (!gen && spec().raid && e.target.matches('select[data-rkind]')) return raidInput(e.target);
   const box = e.target.closest('input[data-meta="hidden"], input[data-meta="updating"]');
   if (box) {
     meta[box.dataset.meta] = box.checked;
@@ -2382,6 +3221,7 @@ $('gd-panel').onclick = (e) => {
   if (!el || !sheet) return;
   const { act } = el.dataset;
   if (gen) return genAct(el, act);
+  if (act === 'raid') return raidAct(el);
   const i = Number(el.dataset.i ?? -1);
   const si = Number(el.dataset.s ?? -1);
   const x = v();
@@ -2597,7 +3437,9 @@ async function translate() {
   if (tr.busy || !sheet) return;
   const todo = [];
   // Les textes de l'onglet : ceux dessinés — ou, pour un guide général, ceux de ses données.
-  for (const t of gen ? genTexts(sub) : texts.values())
+  // … et pour une phase d'un guild raid, ceux de TOUTES ses équipes, pas de la seule montrée.
+  const phase = !gen && spec().raid && (sub === 'phase1' || sub === 'phase2');
+  for (const t of gen ? genTexts(sub) : phase ? rTexts(raid(), sub) : texts.values())
     for (const x of Array.isArray(t) ? t : [t]) if (en(x)) todo.push({ text: x, en: x[def()] });
   if (!todo.length) return log(['Rien à traduire : aucun texte anglais dans cet onglet.'], true);
   tr = { busy: true, error: '' };
@@ -2690,6 +3532,8 @@ $('gd-tabs').onkeydown = (e) => {
 function showVersion(i) {
   if (!draft.versions[i] || i === ver) return;
   ver = i;
+  rTeam = 0;
+  rVid = '';
   render();
   writeHash();
 }
@@ -2737,6 +3581,9 @@ async function load(cat, slug, keep = false) {
     adding = false;
     trOpen.clear();
     vidAdd.reset();
+    raidVid.reset();
+    rTeam = 0;
+    rVid = '';
   }
   // Le sous-onglet que le hash demande passe devant, s'il est de ce guide.
   if (subsOn().some((t) => t.id === wantedSub)) sub = wantedSub;

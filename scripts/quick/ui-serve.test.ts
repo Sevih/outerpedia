@@ -13988,6 +13988,39 @@ describe('Guides — la page, sur le vrai markup', () => {
       notes?: Text[];
     }[];
     videos: { platform: string; id: string; title: string; author?: string; label?: string }[];
+    /** Guild raid (F33) : la version au gabarit, ou ses fichiers en lecture. */
+    raid?: RaidDraft | { legacy: string[]; files: Record<string, unknown> };
+  }
+  interface RaidBoss {
+    notes: Text[];
+    recommended: { characters: string[]; reason?: Text }[];
+    slots: string[][];
+    teamNote?: Text;
+    video?: { platform: string; id: string; title: string; author?: string };
+  }
+  interface RaidDraft {
+    subA?: string;
+    subB?: string;
+    main?: string;
+    bossA: RaidBoss;
+    bossB: RaidBoss;
+    teams: {
+      title: Text;
+      element?: string;
+      icon?: string;
+      slots: string[][];
+      geas: { bonus: string[]; malus: string[] };
+      builds: {
+        character: string;
+        stats?: Record<string, string>;
+        prio?: string[];
+        equipment?: Record<string, string[]>;
+        notes?: Text[];
+      }[];
+      buildsNote?: Text;
+      notes: ({ p: Text } | { ul: Text[] })[];
+      video?: { platform: string; id: string; title: string; author?: string };
+    }[];
   }
   interface Draft {
     intro: Text;
@@ -14025,6 +14058,45 @@ describe('Guides — la page, sur le vrai markup', () => {
     notes: false,
     tipTitles: false,
     introRequired: true,
+  };
+  const GR_SPEC = {
+    versioned: true,
+    raid: true,
+    monster: 'raid-config',
+    groupModes: ['guild_raid_sub_boss', 'guild_raid_main_boss'],
+    teams: 'none',
+    videos: false,
+    notes: false,
+    tipTitles: false,
+    introRequired: true,
+  };
+  const geas = (id: string, points: number, positive: boolean) => ({
+    id,
+    kill: Number(id),
+    text: `Geas ${id}`,
+    icon: '/images/ui/geas/G.webp',
+    frame: '/images/ui/geas/GD_Slot_Bg_01.webp',
+    points,
+    bonus: points >= 0,
+    positive,
+  });
+  /** Les options d'un guild raid : ses combats par rôle, le pool de geas de chaque sous-boss. */
+  const GR_OPTIONS = {
+    subs: [
+      { group: 'guild_raid:A', label: 'Sub A · Guild Raid', icon: '/images/sa.webp' },
+      { group: 'guild_raid:B', label: 'Sub B · Guild Raid' },
+      { group: 'guild_raid:C', label: 'Sub C · Guild Raid' },
+    ],
+    mains: [{ group: 'guild_raid:M', label: 'Main · Guild Raid' }],
+    geas: {
+      'guild_raid:A': [geas('1', -250, true), geas('2', 200, false)],
+      'guild_raid:B': [geas('3', 400, false)],
+      'guild_raid:C': [],
+    },
+    elements: ['fire', 'water', 'earth', 'light', 'dark'],
+    stats: ['spd', 'eff', 'atk', 'def', 'hp', 'chc', 'chd', 'trans'],
+    equipment: ['weapon', 'amulet', 'talisman', 'set', 'ee'],
+    maxSlots: 4,
   };
   const version = (key: string, over: Partial<Version> = {}): Version => ({
     key,
@@ -14065,6 +14137,81 @@ describe('Guides — la page, sur le vrai markup', () => {
       meta: {
         title: { en: 'Annihilator Joint Challenge Guide' },
         description: { en: 'JC desc' },
+        hidden: false,
+        updating: false,
+      },
+    },
+    // Un guild raid : sa version courante au gabarit (une équipe à geas hors
+    // pool, le 9), une version à l'ancien format en lecture.
+    'guild-raid/frost-legion': {
+      draft: {
+        intro: { en: 'GR intro' },
+        versions: [
+          version('2026-09', {
+            group: undefined,
+            raid: {
+              subA: 'guild_raid:A',
+              subB: 'guild_raid:B',
+              main: 'guild_raid:M',
+              bossA: {
+                notes: [{ en: 'Boss note' }],
+                recommended: [{ characters: ['Aer'], reason: { en: 'Fast' } }],
+                slots: [['Aer']],
+                video: { platform: 'youtube', id: 'vid1', title: 'Sub run' },
+              },
+              bossB: { notes: [], recommended: [], slots: [] },
+              teams: [
+                {
+                  title: { en: 'Burn', fr: 'Brûlure' },
+                  element: 'fire',
+                  slots: [['Aer'], ['Alice']],
+                  geas: { bonus: ['1'], malus: ['3', '9'] },
+                  builds: [
+                    {
+                      character: 'Aer',
+                      stats: { spd: '166' },
+                      prio: ['{S/ATK}', '{S/CHC}'],
+                      equipment: { set: ['{AS/Revenge}'], talisman: ['{I-T/Rogue}'] },
+                      notes: [{ en: 'Build note' }],
+                    },
+                  ],
+                  notes: [{ p: { en: 'Para' } }, { ul: [{ en: 'one' }, { en: 'two' }] }],
+                },
+                {
+                  title: { en: 'Solo' },
+                  icon: 'IG_Buff_Dot_Burn',
+                  slots: [['Alice']],
+                  geas: { bonus: [], malus: [] },
+                  builds: [],
+                  notes: [{ p: { en: 'Solo para' } }],
+                },
+              ],
+            },
+          }),
+          version('2025-05', {
+            group: undefined,
+            raid: {
+              legacy: ['main.json équipe 1 note 1 : bloc turnOrder'],
+              files: {
+                config: {},
+                subA: { recommended: [{ characters: ['Alice'], reason: { en: 'Old reason' } }] },
+                main: {
+                  teams: [
+                    {
+                      title: { en: 'Old team' },
+                      slots: [['Aer']],
+                      notes: [{ turnOrder: [{ character: 'Aer', speed: 166 }] }],
+                    },
+                  ],
+                },
+              },
+            },
+          }),
+        ],
+      } as Draft,
+      meta: {
+        title: { en: 'Frost Legion Guild Raid Guide' },
+        description: { en: 'GR desc' },
         hidden: false,
         updating: false,
       },
@@ -14503,29 +14650,40 @@ describe('Guides — la page, sur le vrai markup', () => {
         const g = data[key];
         if (!g) return answer({ error: `guide inconnu : ${key}` }, 404);
         const jc = key === 'joint-challenge/annihilator';
+        const gr = key === 'guild-raid/frost-legion';
         const [category, slug] = key.split('/');
         return answer({
           guide: {
             category,
             slug,
-            label: jc ? 'Joint Challenge' : 'Special Request',
+            label: jc ? 'Joint Challenge' : gr ? 'Guild Raid' : 'Special Request',
             title: g.meta.title.en,
             updated: '2026-10-07',
             icon: 'I',
             author: 'A',
             hidden: g.meta.hidden,
-            versions: jc ? [{ key: '2026-10' }, { key: '2026-05' }] : [],
+            versions: jc
+              ? [{ key: '2026-10' }, { key: '2026-05' }]
+              : gr
+                ? [{ key: '2026-09' }, { key: '2025-05' }]
+                : [],
           },
-          spec: jc ? JC_SPEC : SR_SPEC,
+          spec: jc ? JC_SPEC : gr ? GR_SPEC : SR_SPEC,
           draft: JSON.parse(JSON.stringify(g.draft)),
           meta: JSON.parse(JSON.stringify(g.meta)),
           options: {
-            groups: jc ? GROUPS : SR_GROUPS,
+            groups: jc ? GROUPS : gr ? [] : SR_GROUPS,
             dungeons: [],
             monsters: [],
             roster: ROSTER,
+            ...(gr ? { raid: GR_OPTIONS } : {}),
           },
-          refs: {},
+          refs: gr
+            ? {
+                stat: [{ value: 'SPD', label: 'Speed' }],
+                weapon: [{ value: 'Blade', label: 'Blade' }],
+              }
+            : {},
           pins: jc
             ? [
                 {
@@ -14950,6 +15108,294 @@ describe('Guides — la page, sur le vrai markup', () => {
     // Relu du disque après l'écriture : plus rien en attente.
     expect(page.states()).toBe(2);
     expect(page.count()).toBe('aucune modification');
+  });
+
+  describe('F33 — un guild raid', () => {
+    const GR = '#guides/guild-raid/frost-legion';
+    const raidOf = (sent: Sent, vi = 0) => sent.draft.versions[vi].raid as RaidDraft;
+
+    it('ses sous-onglets : Méta, Combat, Intro, Phase 1, Phase 2 ; Combat montre les trois combats de la version, « Changer… » en change un', async () => {
+      const page = await guides({ hash: `${GR}/2026-09/battle` });
+      expect(page.subs()).toEqual(['meta', 'battle', 'intro', 'phase1', 'phase2']);
+      expect(page.all('#gd-head .gd-traits')[0].textContent).toContain('Main · Guild Raid');
+      expect(page.all('#gd-panel [data-rgroup]').map((r) => r.textContent)).toEqual([
+        'Sous-boss ASub A · Guild Raidguild_raid:AChanger…',
+        'Sous-boss BSub B · Guild Raidguild_raid:BChanger…',
+        'Boss principalMain · Guild Raidguild_raid:MChanger…',
+      ]);
+      expect(page.all('#gd-versions [data-ver]').map((t) => t.textContent)).toEqual([
+        '2026-09récente',
+        '2025-05ancien format',
+      ]);
+      expect(page.all('#gd-versions .gd-vtabs > .lbl')[0].textContent).toBe(
+        'Méta et Intro valent pour tout le guide ; Combat, Phase 1 et Phase 2 sont ceux de la version.',
+      );
+      // Le picker ne propose que les sous-boss ; choisi, le combat change et l'onglet compte.
+      page.all('#gd-panel [data-do="pick-group"][data-k="subB"]')[0].click();
+      const rows = page.all('.hp-modal [data-id]');
+      expect(rows.map((r) => r.dataset.id)).toEqual([
+        'guild_raid:A',
+        'guild_raid:B',
+        'guild_raid:C',
+      ]);
+      rows[2].click();
+      expect(page.all('#gd-panel [data-rgroup="subB"] strong')[0].textContent).toBe(
+        'Sub C · Guild Raid',
+      );
+      expect(page.dots()).toEqual([['battle', 'dot edit']]);
+      await page.save();
+      expect(raidOf(page.posted()[0])).toMatchObject({
+        subA: 'guild_raid:A',
+        subB: 'guild_raid:C',
+      });
+    });
+
+    it('« ＋ version » : la clé du mois, et seules les versions au gabarit se dupliquent', async () => {
+      const page = await guides({ hash: GR });
+      page.all('#gd-versions [data-act="add-version"]')[0].click();
+      expect(page.el('gd-newkey').value).toMatch(/^\d{4}-\d{2}$/);
+      expect(page.all('#gd-fromkey option').map((o) => o.textContent)).toEqual(['2026-09']);
+    });
+
+    it('Phase 1 : les deux sous-boss — notes, persos recommandés, équipe, vidéo et son auteur', async () => {
+      const page = await guides({ hash: `${GR}/2026-09/phase1` });
+      expect(page.all('#gd-panel [data-card] .card-head').map((h) => h.textContent)).toEqual([
+        'Sous-boss ASub A · Guild Raid',
+        'Sous-boss BSub B · Guild Raid',
+      ]);
+      expect(page.val(page.field('p1.0.notes'))).toBe('Boss note');
+      expect(page.val(page.field('p1.0.reco.0'))).toBe('Fast');
+      // Un poste de plus au sous-boss A, laissé vide : il part tel quel (le serveur le refuse).
+      page.all('#gd-panel [data-do="add-slot"][data-path="bossA.slots"]')[0].click();
+      // L'auteur de la vidéo se corrige dans son champ.
+      page.type(
+        page.all('#gd-panel [data-rauthor="bossA"]')[0] as unknown as HTMLInputElement,
+        'Tango',
+      );
+      // Un groupe au sous-boss B, sa raison saisie.
+      page.all('#gd-panel [data-do="add-group"][data-path="bossB.recommended"]')[0].click();
+      page.type(page.field('p1.1.reco.0'), 'Because');
+      expect(page.dots()).toEqual([['phase1', 'dot edit']]);
+      await page.save();
+      const raid = raidOf(page.posted()[0]);
+      expect(raid.bossA.slots).toEqual([['Aer'], []]);
+      expect(raid.bossA.video).toEqual({
+        platform: 'youtube',
+        id: 'vid1',
+        title: 'Sub run',
+        author: 'Tango',
+      });
+      expect(raid.bossB.recommended).toEqual([{ characters: [], reason: { en: 'Because' } }]);
+      // La version à l'ancien format ne repart pas : un marqueur, le serveur garde le disque.
+      expect(page.posted()[0].draft.versions[1].raid).toEqual({ legacy: true });
+    });
+
+    it('Phase 2 : une équipe à la fois ; ses geas rangés par le signe des points, pris dans le pool de la version, un geas hors pool montré et retirable', async () => {
+      const page = await guides({ hash: `${GR}/2026-09/phase2` });
+      expect(
+        page.all('#gd-panel .gd-rtab').map((t) => [t.textContent, t.getAttribute('aria-selected')]),
+      ).toEqual([
+        ['Burn', 'true'],
+        ['Solo', 'false'],
+      ]);
+      expect(page.all('#gd-panel .gd-rtab img').map((i) => i.getAttribute('src'))).toEqual([
+        'https://img.test/images/ui/elem/IG_Turn_Element_Fire.webp',
+        'https://img.test/images/ui/effect/IG_Buff_Dot_Burn.webp',
+      ]);
+      const cols = page.all('#gd-panel .gd-gcol');
+      expect(cols.map((c) => c.querySelector('.gd-rh')?.textContent)).toEqual([
+        'Bonus de score1 / 2',
+        'Malus de score1 / 1',
+      ]);
+      const geasOf = (col: HTMLElement) =>
+        [...col.querySelectorAll('.gd-geas')].map((b) => [
+          (b as HTMLElement).dataset.id,
+          b.getAttribute('aria-pressed'),
+          b.querySelector('.gd-gpts')?.textContent,
+        ]);
+      // Bonus de score : points positifs (2, 3) ; malus : négatifs (1) — pas la liste du fichier.
+      expect(geasOf(cols[0])).toEqual([
+        ['2', 'false', '+20%'],
+        ['3', 'true', '+40%'],
+      ]);
+      expect(geasOf(cols[1])).toEqual([['1', 'true', '-25%']]);
+      expect(page.all('#gd-panel .gd-stray').map((c) => c.textContent)).toEqual([
+        'geas 9 — hors du pool de la version✕',
+      ]);
+      // Activer le 2 (un handicap : la liste `malus` du fichier), retirer le 1 et le 9.
+      page.all('#gd-panel .gd-geas[data-id="2"]')[0].click();
+      page.all('#gd-panel .gd-geas[data-id="1"]')[0].click();
+      page.all('#gd-panel .gd-stray [data-do="geas"]')[0].click();
+      expect(page.all('#gd-panel .gd-stray')).toEqual([]);
+      await page.save();
+      expect(raidOf(page.posted()[0]).teams[0].geas).toEqual({ bonus: [], malus: ['3', '2'] });
+    });
+
+    it('Phase 2 : un build — stats, priorité, équipement en tokens (aperçus), notes ; les clés rangées à la saisie', async () => {
+      const page = await guides({ hash: `${GR}/2026-09/phase2` });
+      const input = (selector: string) =>
+        page.all(`#gd-panel ${selector}`)[0] as unknown as HTMLInputElement;
+      expect(input('[data-rstat="spd"]').value).toBe('166');
+      expect(input('[data-rprio]').value).toBe('{S/ATK} > {S/CHC}');
+      expect(page.val(input('[data-requip="set"]'))).toBe('{AS/Revenge}');
+      // Les tokens ont leur aperçu, demandés avec les textes de l'onglet.
+      const sent = page.previews().at(-1)!.texts;
+      expect(sent).toEqual(
+        expect.arrayContaining(['{S/ATK} › {S/CHC}', '{AS/Revenge}', 'Build note']),
+      );
+      expect(page.all('#gd-panel [data-pv="p2.0.b0.set"]')[0].textContent).toBe('[{AS/Revenge}]');
+      page.type(input('[data-rstat="trans"]'), '6');
+      page.type(input('[data-rstat="eff"]'), '134');
+      page.type(input('[data-rprio]'), '{S/SPD} >  {S/EFF} > ');
+      page.type(input('[data-requip="weapon"]'), 'T4 {I-W/Blade}\n\n{I-W/Other}');
+      page.type(page.field('p2.0.b0.notes'), 'Build note\nSecond note');
+      // « ＋ » d'une pièce : le picker pose son token à la suite.
+      page.all('#gd-panel [data-do="pick-token"][data-kind="prio"]')[0].click();
+      page.all('.hp-modal [data-id="SPD"]')[0].click();
+      await page.save();
+      expect(raidOf(page.posted()[0]).teams[0].builds).toEqual([
+        {
+          character: 'Aer',
+          stats: { spd: '166', eff: '134', trans: '6' },
+          prio: ['{S/SPD}', '{S/EFF}', '{S/SPD}'],
+          equipment: {
+            weapon: ['T4 {I-W/Blade}', '{I-W/Other}'],
+            talisman: ['{I-T/Rogue}'],
+            set: ['{AS/Revenge}'],
+          },
+          notes: [{ en: 'Build note' }, { en: 'Second note' }],
+        },
+      ]);
+    });
+
+    it('Phase 2 : titre, badge, postes, notes en `p` / `ul` ordonnées, équipes réordonnées ; « Traduire » vaut pour toutes les équipes', async () => {
+      const page = await guides({ hash: `${GR}/2026-09/phase2` });
+      const click = (selector: string) => page.all(`#gd-panel ${selector}`)[0].click();
+      // Le badge : un élément, un sprite d'effet, ou rien.
+      const kind = page.all('#gd-panel [data-rkind]')[0] as unknown as HTMLSelectElement;
+      expect(kind.value).toBe('fire');
+      kind.value = 'icon';
+      kind.dispatchEvent(new page.window.Event('change', { bubbles: true }) as unknown as Event);
+      page.type(
+        page.all('#gd-panel [data-ricon]')[0] as unknown as HTMLInputElement,
+        'SC_Buff_Revenge',
+      );
+      // Les notes : la liste passe devant le paragraphe, un paragraphe de plus.
+      click('[data-do="move"][data-path="teams.0.notes"][data-i="1"][data-d="-1"]');
+      click('[data-do="add-p"]');
+      page.type(page.field('p2.0.n2'), 'Third');
+      // L'équipe montrée recule : Solo passe devant.
+      click('[data-do="move-team"][data-d="1"]');
+      expect(
+        page.all('#gd-panel .gd-rtab').map((t) => [t.textContent, t.getAttribute('aria-selected')]),
+      ).toEqual([
+        ['Solo', 'false'],
+        ['Burn', 'true'],
+      ]);
+      // « Traduire » : les textes des DEUX équipes, pas de la seule montrée.
+      click('[data-act="translate"]');
+      await page.settle();
+      const asked = page.calls.find((c) => c.path === '/api/translate')!.body as {
+        texts: string[];
+      };
+      expect(asked.texts).toEqual([
+        'Solo',
+        'Solo para',
+        'Burn',
+        'Build note',
+        'one',
+        'two',
+        'Para',
+        'Third',
+      ]);
+      await page.save();
+      const raid = raidOf(page.posted()[0]);
+      expect(raid.teams.map((t) => t.title.en)).toEqual(['Solo', 'Burn']);
+      expect(raid.teams[1]).toMatchObject({
+        icon: 'SC_Buff_Revenge',
+        title: { en: 'Burn', fr: 'fr Burn' },
+      });
+      expect(raid.teams[1]).not.toHaveProperty('element');
+      expect(raid.teams[1].notes.map((b) => Object.keys(b)[0])).toEqual(['ul', 'p', 'p']);
+      expect(raid.teams[0].notes).toEqual([
+        {
+          p: {
+            en: 'Solo para',
+            fr: 'fr Solo para',
+            es: 'es Solo para',
+            jp: 'jp Solo para',
+            kr: 'kr Solo para',
+            zh: 'zh Solo para',
+          },
+        },
+      ]);
+    });
+
+    it('un refus situé : le point rouge sur Phase 2 et sur l’équipe, sa raison dans la carte', async () => {
+      const page = await guides({
+        hash: `${GR}/2026-09/phase2`,
+        saved: () => ({
+          ok: false,
+          log: [],
+          written: false,
+          stale: false,
+          refused: [
+            {
+              version: '2026-09',
+              tab: 'phase2',
+              index: 0,
+              field: 'geas',
+              reason: 'geas 9 hors du pool',
+            },
+            {
+              version: '2026-09',
+              tab: 'phase2',
+              index: 0,
+              field: 'build.0',
+              reason: 'weapon : tag inconnu',
+            },
+          ],
+        }),
+      });
+      page.type(page.field('p2.0.title'), 'Burn 2');
+      await page.save();
+      expect(page.dots()).toEqual([['phase2', 'dot ko']]);
+      expect(page.all('#gd-panel .gd-rtab .dot.ko')).toHaveLength(1);
+      expect(
+        page
+          .all('#gd-panel .gd-err')
+          .map((e) => e.textContent)
+          .filter(Boolean),
+      ).toEqual(['geas : geas 9 hors du pool', 'build 1 : weapon : tag inconnu']);
+    });
+
+    it('une version à l’ancien format : le bandeau, ses fichiers en lecture, aucun champ ni geste', async () => {
+      const page = await guides({ hash: `${GR}/2025-05/phase2` });
+      expect(page.all('#gd-panel .gd-legacy strong')[0].textContent).toBe(
+        'Version 2025-05 : ancien format, non éditable dans quick.',
+      );
+      expect(page.all('#gd-panel .gd-legacy .lbl')[0].textContent).toContain(
+        'main.json équipe 1 note 1 : bloc turnOrder',
+      );
+      expect(page.all('#gd-panel .gd-old .card-head').map((h) => h.textContent)).toEqual([
+        'Old team1 poste · 0 geas · 0 buildlecture',
+      ]);
+      expect(page.all('#gd-panel .gd-old .gd-ro')[0].textContent).toBe('turnOrder Aer 166');
+      for (const tab of ['phase2', 'phase1', 'battle']) {
+        await page.sub(tab);
+        expect(page.all('#gd-panel .gd-legacy'), tab).toHaveLength(1);
+        expect(
+          page.all('#gd-panel input, #gd-panel textarea, #gd-panel select, #gd-panel [data-act]'),
+          tab,
+        ).toEqual([]);
+      }
+      expect(page.all('#gd-panel [data-rgroup]').map((r) => r.textContent)).toEqual([
+        'Sous-boss Aaucun combat',
+        'Sous-boss Baucun combat',
+        'Boss principalaucun combat',
+      ]);
+      expect(page.count()).toBe('aucune modification');
+    });
   });
 
   it('un versionné par le hash, sur sa version : la barre des versions, les pins en lecture, « dépingler » envoie `pinned`', async () => {
