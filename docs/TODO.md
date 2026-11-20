@@ -30,11 +30,9 @@ les preuves et les décisions vivent dans le tri consolidé de sevih-tool
 
 - [ ] Guides, vus à la relecture B71 (20/11) : l'intro de Core Fusion (`general-guides/core-fusion/labels.ts`) dit « 25 per Daily Run from Wednesday to Saturday — about 200 a week » alors que la saison dure cinq jours (Mer→Dim : 125 du quotidien + 100 des missions hebdo = 225) ; l'intro du guide Timegate range encore les lignes Singularité parmi les « estimations joueur » alors qu'elles sont dérivées des tables depuis B71.
 
-- [ ] **Après B71** : promouvoir timegate-resources.json (`pnpm datagen:promote --apply --only timegate-resources.json`) et le committer ; seules les sources Singularity et les totaux qui en dépendent bougent (écarts item par item dans l'entrée DONE de B71, 20/11).
-
 - [ ] Guides, vu à la relecture C27 (20/11) : l'EX Buff propre à chaque créneau (`singularity.json`, `exBuffs` et `bosses[].exBuff`, ex. « All Fire allies' Damage +200% ») n'est montré ni sur les cartes de la rotation Dimensional Singularity ni sur les guides de boss ; la section « Ranks » ne le donne qu'en générique. Sur le mot de Sevih.
 
-- [ ] **Après C27** : promouvoir `encounters.json`, `reward-tables.json` et `singularity.json` (une commande par fichier, seul le dernier `--only` compte : `pnpm datagen:promote --apply --only encounters.json`, puis `--only reward-tables.json`, puis `--only singularity.json` ; ou avec la promotion du patch) et les committer : seuls `ranks[].reward` (15 donjons × 34 rangs), les 34 tables `8200001`…`8200034` et `exBuffs` / `bosses[].exBuff` apparaissent. Puis contrôle visuel de la section « Ranks » de `/guides/dimensional-singularity` (desktop et mobile : tableau à défilement horizontal, colonne des récompenses, ligne EX avec l'EX Buff +200 %).
+- [ ] **Après B71 et C27** : promotions faites le 20/11 (`timegate-resources.json`, `encounters.json`, `reward-tables.json`, `singularity.json`), à committer avec les données du patch ; reste le contrôle visuel de la section « Ranks » de `/guides/dimensional-singularity` (desktop et mobile : tableau à défilement horizontal, colonne des récompenses, ligne EX avec l'EX Buff +200 %).
 
 ## 🧰 Outil quick
 
