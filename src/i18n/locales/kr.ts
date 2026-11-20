@@ -796,6 +796,11 @@ const kr: Record<TranslationKey, string> = {
   'guides.singularity.ranks.col_changes': '보스 변화',
   'guides.singularity.ranks.ex_buff':
     'EX 버프: 보스가 지정한 속성 또는 클래스의 동료 피해 +{value}%',
+  // EX Buff du créneau (B73) : cartes de la rotation et guides de boss.
+  'guides.singularity.ex_buff.label': 'EX 버프',
+  'guides.singularity.appearances.title': '향후 등장',
+  'guides.singularity.appearances.tagline': '향후 {weeks}주(로테이션 한 주기).',
+  'guides.singularity.appearances.ex_note': 'EX 버프는 보스가 아니라 슬롯마다 정해집니다.',
   // Guide landing — categories index
   'guides.counter': '가이드 {guides}개 · 카테고리 {categories}개',
   'guides.count.one': '가이드 {count}개',

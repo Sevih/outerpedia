@@ -825,6 +825,11 @@ const en = {
   'guides.singularity.ranks.col_changes': 'Boss changes',
   'guides.singularity.ranks.ex_buff':
     'EX Buff: +{value}% DMG for allies of the element or class designated by the boss',
+  // EX Buff du créneau (B73) : cartes de la rotation et guides de boss.
+  'guides.singularity.ex_buff.label': 'EX Buff',
+  'guides.singularity.appearances.title': 'Upcoming appearances',
+  'guides.singularity.appearances.tagline': 'The next {weeks} weeks, one full rotation cycle.',
+  'guides.singularity.appearances.ex_note': 'The EX Buff depends on the slot, not on the boss.',
   // Guide landing — categories index
   'guides.counter': '{guides} guides · {categories} categories',
   'guides.count.one': '{count} GUIDE',

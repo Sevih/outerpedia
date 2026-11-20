@@ -778,6 +778,11 @@ const zh: Record<TranslationKey, string> = {
   'guides.singularity.ranks.col_damage': '所需伤害',
   'guides.singularity.ranks.col_changes': 'Boss变化',
   'guides.singularity.ranks.ex_buff': 'EX增益：Boss指定属性或职业的同伴伤害+{value}%',
+  // EX Buff du créneau (B73) : cartes de la rotation et guides de boss.
+  'guides.singularity.ex_buff.label': 'EX增益',
+  'guides.singularity.appearances.title': '后续出现',
+  'guides.singularity.appearances.tagline': '未来{weeks}周（一个完整轮换周期）。',
+  'guides.singularity.appearances.ex_note': 'EX增益取决于时段，而非Boss。',
   // Guide landing — categories index
   'guides.counter': '{guides} 篇攻略 · {categories} 个分类',
   'guides.count.one': '{count} 篇攻略',

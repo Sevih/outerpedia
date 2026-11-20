@@ -2,7 +2,11 @@ import { describe, expect, it } from 'vitest';
 import {
   bossesByDay,
   isSingularityBattleDay,
+  singularityAppearancesAt,
   singularityBattleDays,
+  singularityCycleWeeks,
+  singularityExBuffOf,
+  singularityExBuffTarget,
   singularityGroups,
   singularityStateAt,
   type SingularityBoss,
@@ -220,5 +224,128 @@ describe('isSingularityBattleDay — la même horloge que la page', () => {
         );
       }
     }
+  });
+});
+
+/**
+ * EX Buff (patch du 20/11/2026) : il dépend du CRÉNEAU (semaine × jour), pas du
+ * boss. Ancré sur un constat en jeu de Sevih : le vendredi 20/11/2026 (groupe 5),
+ * Abomination Hunter Belial, EX Buff Water.
+ */
+describe('singularityAppearancesAt — les prochaines apparitions d’un boss, avec leur EX Buff', () => {
+  const BELIAL = '60000001';
+  const VERDANDI = '60000011';
+  const noon = (iso: string) => new Date(`${iso}T12:00:00Z`);
+  const DAY_MS = 86_400_000;
+  const N = singularityCycleWeeks();
+  /** Créneaux du monstre dans un cycle : (groupe, jour) via la règle `bossesByDay`. */
+  const slotsOf = (monster: string) =>
+    singularityGroups().flatMap((g) =>
+      bossesByDay(g.bosses, BATTLE)
+        .filter((b) => b.monsters[0] === monster)
+        .map((b) => ({ group: g.id, exBuff: b.exBuff })),
+    );
+
+  it('le cycle fait autant de semaines que de groupes (12 au 20/11/2026)', () => {
+    expect(N).toBe(GROUP_IDS.length);
+  });
+
+  it('vendredi 20/11/2026 : Belial aujourd’hui, groupe 5, EX Buff Water (constaté en jeu)', () => {
+    const now = noon('2026-11-20');
+    const s = singularityStateAt(now);
+    expect(s.week.group.id).toBe(5);
+    expect(s.today?.monsters[0]).toBe(BELIAL);
+    const buff = singularityExBuffOf(s.today!);
+    expect(buff?.desc.en).toBe("All Water allies' Damage +200%");
+    expect(buff?.value).toBe(2000);
+    expect(singularityExBuffTarget(buff!)).toEqual({ kind: 'element', id: 'water' });
+
+    const first = singularityAppearancesAt(BELIAL, now)[0];
+    expect(first).toMatchObject({ date: '2026-11-20', state: 'today' });
+    expect(first.group.id).toBe(5);
+    expect(first.exBuff).toBe(buff);
+  });
+
+  it('en phase de récompense : aucune apparition le jour même, toutes à venir et un jour de combat', () => {
+    const now = noon('2026-11-23'); // lundi : récompense (semaine ouverte le 18/11)
+    expect(singularityStateAt(now).betweenWeeks).toBe(true);
+    const list = singularityAppearancesAt(BELIAL, now);
+    expect(list.length).toBeGreaterThan(0);
+    for (const a of list) {
+      expect(a.state, a.date).toBe('upcoming');
+      expect(a.date > '2026-11-24', a.date).toBe(true); // rien avant le mercredi 25/11
+      expect(isSingularityBattleDay(Date.parse(`${a.date}T12:00:00Z`)), a.date).toBe(true);
+    }
+  });
+
+  it('un boss présent dans plusieurs groupes apparaît une fois par créneau, sur un cycle exact', () => {
+    const now = noon('2026-11-20');
+    const list = singularityAppearancesAt(BELIAL, now);
+    const slots = slotsOf(BELIAL);
+    expect(new Set(slots.map((s) => s.group)).size).toBeGreaterThanOrEqual(2);
+    expect(list).toHaveLength(slots.length);
+    // Un groupe différent à chaque apparition (un groupe ne porte Belial qu'une fois).
+    expect(new Set(list.map((a) => a.group.id)).size).toBe(list.length);
+    // Fenêtre [aujourd'hui, aujourd'hui + 7 × N) et dates croissantes.
+    const end = new Date(Date.parse('2026-11-20') + 7 * N * DAY_MS).toISOString().slice(0, 10);
+    for (const a of list) expect(a.date >= '2026-11-20' && a.date < end, a.date).toBe(true);
+    expect([...list].map((a) => a.date).sort()).toEqual(list.map((a) => a.date));
+    // L'EX Buff est celui du créneau.
+    for (const a of list) expect(a.exBuff).toBe(singularityExBuffOf(a.boss));
+  });
+
+  it('le buff suit le créneau, pas le boss : Verdandi donne Striker (groupe 5) et Ranger (groupe 6)', () => {
+    const list = singularityAppearancesAt(VERDANDI, noon('2026-11-20'));
+    const byGroup = new Map(
+      list.map((a) => [a.group.id, a.exBuff && singularityExBuffTarget(a.exBuff)]),
+    );
+    expect(byGroup.get(5)).toEqual({ kind: 'class', id: 'striker' });
+    expect(byGroup.get(6)).toEqual({ kind: 'class', id: 'ranger' });
+  });
+
+  it('sur un cycle, tous boss confondus : chaque jour de combat exactement une fois', () => {
+    const now = noon('2026-11-20');
+    const monsters = new Set(
+      singularityGroups().flatMap((g) => g.bosses.map((b) => b.monsters[0])),
+    );
+    const dates = [...monsters].flatMap((m) => singularityAppearancesAt(m, now).map((a) => a.date));
+    expect(dates).toHaveLength(N * BATTLE);
+    expect(new Set(dates).size).toBe(dates.length);
+  });
+
+  it('un monstre hors rotation n’a aucune apparition', () => {
+    expect(singularityAppearancesAt('0', noon('2026-11-20'))).toEqual([]);
+  });
+});
+
+describe('EX Buff — résolution et cible', () => {
+  const buff = (option: string) => ({ rank: 'EX', desc: { en: '' }, option, value: 2000 });
+
+  it('sans `exBuff` dans la donnée (d’avant patch), aucun buff', () => {
+    expect(singularityExBuffOf({ order: 0, dungeon: '1', monsters: ['1'] })).toBeUndefined();
+  });
+
+  it('lit la cible dans l’option du jeu : élément, ou classe nommée par son rôle', () => {
+    expect(singularityExBuffTarget(buff('singularity_passive_ex_up_fire'))).toEqual({
+      kind: 'element',
+      id: 'fire',
+    });
+    expect(singularityExBuffTarget(buff('singularity_passive_ex_up_speed'))).toEqual({
+      kind: 'class',
+      id: 'ranger',
+    });
+    expect(singularityExBuffTarget(buff('singularity_passive_ex_up_attack'))).toEqual({
+      kind: 'class',
+      id: 'striker',
+    });
+    expect(singularityExBuffTarget(buff('singularity_passive_ex_up_mage'))).toEqual({
+      kind: 'class',
+      id: 'mage',
+    });
+  });
+
+  it('option inconnue : pas de cible inventée', () => {
+    expect(singularityExBuffTarget(buff('singularity_passive_ex_up_zzz'))).toBeUndefined();
+    expect(singularityExBuffTarget(buff('autre_chose'))).toBeUndefined();
   });
 });

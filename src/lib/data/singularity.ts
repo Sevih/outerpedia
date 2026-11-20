@@ -246,6 +246,94 @@ export function singularityExBuffs(): Record<string, SingularityExBuff> {
   return raw.exBuffs ?? {};
 }
 
+/** Buff EX d'un créneau, résolu — `undefined` sans buff dans la donnée (donnée d'avant patch). */
+export function singularityExBuffOf(boss: SingularityBoss): SingularityExBuff | undefined {
+  return boss.exBuff ? singularityExBuffs()[boss.exBuff] : undefined;
+}
+
+/** Ce que vise un buff EX : un élément ou une classe (slugs de `img.element` / `img.klass`). */
+export type SingularityExBuffTarget = { kind: 'element' | 'class'; id: string };
+
+const EX_BUFF_ELEMENTS = new Set(['fire', 'water', 'earth', 'light', 'dark']);
+/**
+ * Suffixe d'option du jeu → classe. Le jeu nomme les classes par leur RÔLE
+ * (`speed` = Ranger, `attack` = Striker — cf. les `desc` six langues) ; un nom
+ * de classe direct est accepté tel quel.
+ */
+const EX_BUFF_CLASSES: Record<string, string> = {
+  speed: 'ranger',
+  attack: 'striker',
+  mage: 'mage',
+  ranger: 'ranger',
+  striker: 'striker',
+  defender: 'defender',
+  healer: 'healer',
+};
+
+/**
+ * Cible d'un buff EX, lue dans son option (`singularity_passive_ex_up_<cible>`).
+ * `undefined` pour une option inconnue : la vue retombe alors sur la seule `desc`
+ * du jeu, sans icône inventée.
+ */
+export function singularityExBuffTarget(
+  buff: SingularityExBuff,
+): SingularityExBuffTarget | undefined {
+  const suffix = /_ex_up_([a-z]+)$/.exec(buff.option)?.[1];
+  if (!suffix) return undefined;
+  if (EX_BUFF_ELEMENTS.has(suffix)) return { kind: 'element', id: suffix };
+  const klass = EX_BUFF_CLASSES[suffix];
+  return klass ? { kind: 'class', id: klass } : undefined;
+}
+
+/** Une apparition à venir d'un boss dans la rotation. */
+export interface SingularityAppearance {
+  /** Date ISO `YYYY-MM-DD` (UTC) du jour de combat. */
+  date: string;
+  group: SingularityGroup;
+  boss: SingularityBoss;
+  /** Buff EX du créneau — absent d'une donnée d'avant le 20/11/2026. */
+  exBuff?: SingularityExBuff;
+  state: 'today' | 'upcoming';
+}
+
+/** Longueur d'un cycle complet de rotation, en semaines (= nombre de groupes). */
+export function singularityCycleWeeks(): number {
+  return GROUPS.length;
+}
+
+/**
+ * Les PROCHAINES apparitions du monstre `monsterId` (le `bossId` d'un guide)
+ * sur un cycle complet de rotation, à partir du jour de `now` inclus.
+ *
+ * Même horloge que `singularityStateAt` (jours UTC comptés depuis l'ancre, un
+ * boss par jour de combat via `bossesByDay`). La fenêtre fait exactement
+ * `7 × nombre de groupes` jours : chaque créneau (semaine du cycle × jour) y
+ * tombe UNE fois — un boss présent dans deux groupes apparaît donc deux fois.
+ * Un jour de combat déjà passé de la semaine en cours n'y figure pas : il
+ * reviendra au cycle suivant, hors fenêtre. Pure : `now` injecté.
+ */
+export function singularityAppearancesAt(monsterId: string, now: Date): SingularityAppearance[] {
+  const today = utcDay(now.getTime());
+  const end = today + 7 * GROUPS.length;
+  const firstWeek = Math.floor((today - ANCHOR_DAY) / 7);
+  const out: SingularityAppearance[] = [];
+  for (let w = firstWeek; ANCHOR_DAY + w * 7 < end; w++) {
+    const week = buildWeek(w, today);
+    week.days.forEach((d, i) => {
+      const day = ANCHOR_DAY + w * 7 + i;
+      if (day < today || day >= end || d.boss.monsters[0] !== monsterId) return;
+      out.push({
+        date: d.date,
+        group: week.group,
+        boss: d.boss,
+        exBuff: singularityExBuffOf(d.boss),
+        state: day === today ? 'today' : 'upcoming',
+      });
+    });
+  }
+  return out;
+}
+
 /** Nombre de jours de combat par semaine (lu dans les tables du jeu). */
 export function singularityBattleDays(): number {
   return SCHEDULE.battleDays;

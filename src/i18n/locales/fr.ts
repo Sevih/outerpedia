@@ -832,6 +832,12 @@ const fr: Record<TranslationKey, string> = {
   'guides.singularity.ranks.col_changes': 'Changements du boss',
   'guides.singularity.ranks.ex_buff':
     "EX Buff : +{value}% de dégâts pour les alliés de l'élément ou de la classe désignés par le boss",
+  // EX Buff du créneau (B73) : cartes de la rotation et guides de boss.
+  'guides.singularity.ex_buff.label': 'EX Buff',
+  'guides.singularity.appearances.title': 'Prochaines apparitions',
+  'guides.singularity.appearances.tagline':
+    'Les {weeks} prochaines semaines, soit un cycle complet de rotation.',
+  'guides.singularity.appearances.ex_note': "L'EX Buff dépend du créneau, pas du boss.",
   // Guide landing — categories index
   'guides.counter': '{guides} guides · {categories} catégories',
   'guides.count.one': '{count} GUIDE',

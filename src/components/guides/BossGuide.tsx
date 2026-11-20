@@ -5,6 +5,7 @@ import { parseText, type ParseCtx } from '@/lib/parse-text';
 import { guideShareImage, readGuideFile, type GuideContentProps } from '@/lib/data/guides';
 import { resolveSectionTitle, type SectionTitle } from '@/lib/data/guide-sections';
 import { BossPanel } from '@/components/guides/BossPanel';
+import SingularityAppearances from '@/components/guides/SingularityExBuff';
 import { TacticalTips } from '@/components/guides/TacticalTips';
 import { RecommendedCharacters } from '@/components/guides/RecommendedCharacters';
 import { MultiVideoEmbed, type VideoItem } from '@/components/ui/MultiVideoEmbed';
@@ -64,6 +65,12 @@ export async function BossGuide({ lang, guide }: GuideContentProps) {
       </p>
 
       {guide.bossId && <BossPanel monsterId={guide.bossId} lang={lang} />}
+
+      {/* Singularity seulement : le même monstre peut avoir un guide d'un autre
+          mode (Tyrant Toddler en World Boss), où la rotation n'a pas de sens. */}
+      {guide.category === 'dimensional-singularity' && guide.bossId && (
+        <SingularityAppearances monsterId={guide.bossId} lang={lang} />
+      )}
 
       {content.tips?.map((section, i) => (
         <TacticalTips

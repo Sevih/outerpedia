@@ -806,6 +806,11 @@ const jp: Record<TranslationKey, string> = {
   'guides.singularity.ranks.col_changes': 'ボスの変化',
   'guides.singularity.ranks.ex_buff':
     'EXバフ：ボスが指定する属性またはクラスの味方の与ダメージ+{value}%',
+  // EX Buff du créneau (B73) : cartes de la rotation et guides de boss.
+  'guides.singularity.ex_buff.label': 'EXバフ',
+  'guides.singularity.appearances.title': '今後の出現',
+  'guides.singularity.appearances.tagline': '今後{weeks}週間（ローテーション1周分）。',
+  'guides.singularity.appearances.ex_note': 'EXバフはボスではなく枠ごとに決まります。',
   // Guide landing — categories index
   'guides.counter': 'ガイド{guides}件 · カテゴリー{categories}件',
   'guides.count.one': 'ガイド{count}件',

@@ -7,11 +7,13 @@ import { img } from '@/lib/images';
 import { serverNow } from '@/lib/time';
 import { getMonster, monsterDisplayNames } from '@/lib/data/monsters';
 import {
+  singularityExBuffOf,
   singularityGroups,
   singularityStateAt,
   type SingularityBoss,
 } from '@/lib/data/singularity';
 import { GuideCard, UpdatingBadge } from '@/components/guides/GuideCard';
+import { ExBuffBadge } from '@/components/guides/SingularityExBuff';
 import { SingularityCountdown } from '@/components/guides/SingularityCountdown';
 import SingularityRanks from '@/components/guides/SingularityRanks';
 import { formatGuideDate, guideUpdatedDate, type Guide } from '@/lib/data/guides';
@@ -158,8 +160,8 @@ export default async function SingularityRotation({ lang, guides }: CategoryView
                 day={day}
                 name={names.get(day.boss.monsters[0]) ?? ''}
                 lang={lang}
+                t={t}
                 guide={guideOf.get(day.boss.monsters[0])}
-                updatingText={t('page.guide.updating_badge')}
               />
             ))}
           </div>
@@ -294,6 +296,8 @@ function FeaturedBanner({
   const monster = getMonster(day.boss.monsters[0]);
   if (!monster || !day.boss.banner) return null;
   const isToday = day.state === 'today';
+  // L'EX Buff est celui du CRÉNEAU (ce jour de cette semaine), pas du boss.
+  const exBuff = singularityExBuffOf(day.boss);
 
   return (
     <Frame guide={guide} lang={lang} className="group flex flex-col gap-2">
@@ -319,6 +323,11 @@ function FeaturedBanner({
             </h3>
             {guide?.updating && <UpdatingBadge text={t('page.guide.updating_badge')} />}
           </div>
+          {exBuff && (
+            <p className="mt-1.5">
+              <ExBuffBadge buff={exBuff} lang={lang} t={t} variant="inline" />
+            </p>
+          )}
           {guide && (
             <p className="text-content-muted mt-1 line-clamp-2 text-sm">
               {lRec(guide.description, lang)}
@@ -353,17 +362,18 @@ function RailBanner({
   day,
   name,
   lang,
+  t,
   guide,
-  updatingText,
 }: {
   day: Day;
   name: string;
   lang: Lang;
+  t: TFunction;
   guide?: Guide;
-  updatingText: string;
 }) {
   const monster = getMonster(day.boss.monsters[0]);
   if (!monster || !day.boss.banner) return null;
+  const exBuff = singularityExBuffOf(day.boss);
 
   return (
     <Frame
@@ -382,9 +392,15 @@ function RailBanner({
           loading="lazy"
         />
 
-        {/* Le coin haut gauche est le seul libre : jour et identité à droite, nom en bas. */}
-        {guide?.updating && (
-          <UpdatingBadge text={updatingText} overlay className="absolute top-1.5 left-1.5" />
+        {/* Le coin haut gauche est le seul libre : jour et identité à droite, nom en
+            bas. L'EX Buff du créneau s'y pose, la `desc` du jeu en infobulle. */}
+        {(guide?.updating || exBuff) && (
+          <div className="absolute top-1.5 left-1.5 flex max-w-[45%] items-center gap-1">
+            {exBuff && <ExBuffBadge buff={exBuff} lang={lang} t={t} variant="overlay" />}
+            {guide?.updating && (
+              <UpdatingBadge text={t('page.guide.updating_badge')} overlay className="min-w-0" />
+            )}
+          </div>
         )}
 
         <div className="absolute top-1.5 right-1.5 flex items-center gap-1">
