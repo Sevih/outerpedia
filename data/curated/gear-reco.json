@@ -8711,6 +8711,48 @@
         }
       ],
       "substats": "HP>SPD>DEF=DMG RED%=RES=CHC"
+    },
+    {
+      "name": "Counterattack",
+      "weapons": [
+        {
+          "id": "10",
+          "mainStat": "HP%"
+        },
+        {
+          "id": "25",
+          "mainStat": "HP%"
+        },
+        {
+          "id": "782",
+          "mainStat": "HP%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1021",
+          "mainStat": "DMG RED%"
+        },
+        {
+          "id": "1011",
+          "mainStat": "HP%"
+        },
+        {
+          "id": "1166",
+          "mainStat": "SPD"
+        },
+        {
+          "id": "1037",
+          "mainStat": "SPD"
+        }
+      ],
+      "talismans": ["$rsv"],
+      "sets": [
+        {
+          "preset": "ct4"
+        }
+      ],
+      "substats": "HP>SPD>DEF=DMG RED%=RES=CHC"
     }
   ],
   "2700035": [
