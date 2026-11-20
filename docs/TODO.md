@@ -28,6 +28,8 @@ les preuves et les décisions vivent dans le tri consolidé de sevih-tool
 
 - [ ] Guides, vus à la relecture F32 (18/11) : `terminology/labels.ts` `rolesIntro` et l'entrée Support laissent « DPS, Support, Sustain » en anglais en jp/kr/zh/es alors que `filters.roles.*` les traduit (basculer les deux ensemble) ; Heroes Growth (`skillUpgradeDesc1`) dit « Skill Books » au lieu de « Skill Manual » ; le Start Dash a deux noms jp/kr/zh entre la Beginner FAQ et Banners & Mileage ; les guides disent « 募集 / 모집 » pour le Recruit quand le jeu dit « スカウト / 영입 » ; Daily Stamina titre « スタミナ / 스태미나 / 体力 » quand l'objet s'appelle « 活力 / 행동력 / 行动力 ».
 
+- [ ] Guild Raid Planetary Control Unit, version `2026-11` (lot B74, 20/11) : contrôle visuel sur le dev, que l'agent ne pouvait pas lancer. Ouvrir `/en/guides/guild-raid/planetary-control-unit` : la 2026-11 s'ouvre par défaut et le sélecteur propose 2026-02 puis 2025-08 (bandeau « ancienne version ») ; onglets Phase 1 (deux sous-boss, geas, équipes, vidéos) et Phase 2 (quatre équipes) ; « Plan de jeu » de la Burn Team trié Akari 294, Maxie 276, Roxie 263, Vlada 126, sans file ATB, et la phrase « Lots of flexibility… » en paragraphe normal sous le plan ; Burn Team (Revenge) triée Akari 294, Roxie 257, Maxie 229, Vlada 95 avec sa note de pied ; Solo Ember et Mero + Claire sans vitesse (ordre d'écriture) ; vidéos et auteurs ; une langue jp ou zh pour la casse.
+
 ## 🧰 Outil quick
 
 - [ ] **« Relancer quick » — reste à essayer sur le FIXE (lot B72)** : validé
