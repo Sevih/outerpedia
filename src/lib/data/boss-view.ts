@@ -347,6 +347,12 @@ export interface RankOptionLabels {
   finalDmgReduce: string;
   /** `BT_WG_DMG_REDUCE` (« Weakness Gauge DMG Reduction »). */
   wgDmgReduce: string;
+  /**
+   * `BT_ENHANCE_ALL` négatif porté par le boss (« DoT DMG Taken ») : les crans
+   * EX de Singularity (patch du 20/11/2026) réduisent les dégâts de TOUS les DoT
+   * que le boss subit (−20 % / −30 % / −50 %, `singularity_passive_normal_limit_dot*`).
+   */
+  dotDmgTaken: string;
 }
 
 /** Montant d'une option : per-mille → % pour les taux (convention du jeu, cf. statScales). */
@@ -390,6 +396,8 @@ export function bossRankOptionLabels(
       out[id] = `${labels.finalDmgReduce} ${o.value / 10}%`;
     } else if (o.type === 'BT_WG_DMG_REDUCE' && o.value) {
       out[id] = `${labels.wgDmgReduce} ${o.value / 10}%`;
+    } else if (o.type === 'BT_ENHANCE_ALL' && o.value) {
+      out[id] = `${labels.dotDmgTaken} ${o.value > 0 ? '+' : ''}${o.value / 10}%`;
     }
   }
   return out;

@@ -233,6 +233,7 @@ export async function BossCard({
               rankOptionLabels={bossRankOptionLabels(view, spawns, lang, {
                 finalDmgReduce: t('guides.boss_display.rank_option_final_dmg_reduce'),
                 wgDmgReduce: t('guides.boss_display.rank_option_wg_dmg_reduce'),
+                dotDmgTaken: t('guides.boss_display.rank_option_dot_dmg_taken'),
               })}
               hideContextLabel={hideSpawnLabel}
               labels={{

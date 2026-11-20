@@ -244,11 +244,21 @@ export function resolveRewardTable(id: string, lang: Lang): ResolvedReward[] {
       ),
     );
   }
-  const entries = table.entries ?? [];
+  const entries = (table.entries ?? []).filter((x) => !EVENT_ONLY_KINDS.has(x.kind));
   for (const e of entries.filter((x) => !x.random)) out.push(resolveRewardEntry(e, lang));
   for (const e of entries.filter((x) => x.random)) out.push(resolveRewardEntry(e, lang));
   return out;
 }
+
+/**
+ * Lignes de table qui ne sont PAS du butin du mode, écartées EXPRÈS (et
+ * nommées ici, pour que tout autre kind inconnu reste bruyant) :
+ * `event_game_point` = points d'un événement temporaire greffés sur les tables
+ * permanentes (« OUTER Reward Board », patch du 20/11/2026 : 10 / 15 / 20 points
+ * par stage 8+ de Special Request, jusqu'au 08/12/2026). Ils n'ont ni item de
+ * catalogue ni page, et n'ont rien à faire dans le loot d'un guide.
+ */
+const EVENT_ONLY_KINDS: ReadonlySet<string> = new Set(['event_game_point']);
 
 /** Une pastille de signature de loot : l'icône et son nom (tooltip). */
 export interface LootBadge {

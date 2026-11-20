@@ -8,7 +8,7 @@
  */
 import { describe, expect, it } from 'vitest';
 import etherData from '../../data/generated/ether-rankings.json';
-import { byRank, type EtherRankTier, type EtherRankingsData } from './ether-rankings';
+import { byRank, rankKindOf, type EtherRankTier, type EtherRankingsData } from './ether-rankings';
 
 const tier = (o: Partial<EtherRankTier>): EtherRankTier =>
   ({ kind: 'rank', min: 0, max: 0, ether: 1, ...o }) as EtherRankTier;
@@ -39,6 +39,25 @@ describe('byRank — ordre des paliers', () => {
 });
 
 const er = etherData as unknown as EtherRankingsData;
+
+describe('rankKindOf — RankType, ou le texte affiché quand ils divergent', () => {
+  it('RankType RATE → rate, RANK → rank', () => {
+    expect(rankKindOf({ RankType: 'RATE', MyRankText: 'SYS_SINGULARITY_MY_RANK_RATE_1' })).toBe(
+      'rate',
+    );
+    expect(rankKindOf({ RankType: 'RANK', MyRankText: 'SYS_SINGULARITY_MY_RANK_IN_10' })).toBe(
+      'rank',
+    );
+  });
+  it('RANK mais texte « RATE » (saisons 7–12 de Singularity, patch du 20/11/2026) → rate', () => {
+    expect(rankKindOf({ RankType: 'RANK', MyRankText: 'SYS_SINGULARITY_MY_RANK_RATE_100' })).toBe(
+      'rate',
+    );
+  });
+  it('sans texte : RankType seul', () => {
+    expect(rankKindOf({ RankType: 'RANK' })).toBe('rank');
+  });
+});
 
 describe('ether-rankings.json — invariants', () => {
   it('les 4 échelles sont peuplées', () => {

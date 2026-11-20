@@ -46,5 +46,6 @@
       "damage": 4492
     }
   ],
-  "notes": "Capture Sevih 19/08/2026, Dianne SEULE, ot=2 declare a la capture. Deuxieme point du +10 %/buff (branche normale, jeu de buffs different du crit). Une serie du meme jour avec ATK+SPD donnait le meme zero a ot=2 : le compte est generique, pas lie a la nature des buffs. Delta 0.00 %."
+  "notes": "Capture Sevih 19/08/2026, Dianne SEULE, ot=2 declare a la capture. Deuxieme point du +10 %/buff (branche normale, jeu de buffs different du crit). Une serie du meme jour avec ATK+SPD donnait le meme zero a ot=2 : le compte est generique, pas lie a la nature des buffs. Delta 0.00 %.",
+  "skipRef": "H. Dianne 1.4.22 : rééquilibrée au patch du 20/11/2026 (note officielle : dégâts de Winter Night's Blessing +23 %, enhancement du skill revu) — mesure 1.4.14 périmée, S3 à remesurer en jeu"
 }

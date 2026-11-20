@@ -46,5 +46,6 @@
       "damage": 6087
     }
   ],
-  "notes": "Capture Sevih 19/08/2026, Dianne SEULE, ot=2 declare a la capture (2 buffs portes AVANT le coup, chip ATK up seul a effet de montant). VALIDE le compteur de buffs d equipe (2000093_3_1, +10 %/buff, S3 seul) sur la branche critique. Le compte se lit AU MOMENT du hit (les poses du S3 lui-meme ne comptent pas) et inclut le LANCEUR ainsi que les buffs sans effet de montant. Delta 0.00 %."
+  "notes": "Capture Sevih 19/08/2026, Dianne SEULE, ot=2 declare a la capture (2 buffs portes AVANT le coup, chip ATK up seul a effet de montant). VALIDE le compteur de buffs d equipe (2000093_3_1, +10 %/buff, S3 seul) sur la branche critique. Le compte se lit AU MOMENT du hit (les poses du S3 lui-meme ne comptent pas) et inclut le LANCEUR ainsi que les buffs sans effet de montant. Delta 0.00 %.",
+  "skipRef": "H. Dianne 1.4.22 : rééquilibrée au patch du 20/11/2026 (note officielle : dégâts de Winter Night's Blessing +23 %, enhancement du skill revu) — mesure 1.4.14 périmée, S3 à remesurer en jeu"
 }

@@ -36,12 +36,12 @@
           "es": "El jefe recibe más daño de {B/BT_COUNTERATTACK}, {B/BT_REVENGE} y {B/BT_CALL_BACKUP} (+200%) pero -50% de forma general en el resto — prioriza fuentes de daño de contraataque/ataque doble."
         },
         {
-          "en": "Rank scaling (D → SSS): boss gains up to +300% DMG dealt and -200% DMG taken, plus elemental advantage filter from rank B+ and {S/PEN%} swap from rank S.",
-          "jp": "ランクスケーリング（D → SSS）：ボスは与ダメ最大+300%、被ダメ最大-200%。RANK B以上で属性有利フィルター、RANK Sで{S/PEN%}スワップが追加。",
-          "kr": "랭크 스케일링(D → SSS): 보스는 최대 +300% 주는 피해 / -200% 받는 피해, RANK B+에서 속성 상성 필터, RANK S에서 {S/PEN%} 스왑이 추가됩니다.",
-          "zh": "排名缩放(D → SSS)：Boss造成伤害最高+300%/受到伤害最高-200%，RANK B以上启用属性克制过滤，RANK S起新增{S/PEN%}互换。",
-          "fr": "Échelle de rang (D → SSS) : le Boss gagne jusqu'à +300% de dégâts infligés et -200% de dégâts subis, plus un filtre d'avantage élémentaire à partir du rang B+ et un échange de {S/PEN%} à partir du rang S.",
-          "es": "Escalado por rango (D → SSS): el jefe gana hasta +300% de daño infligido y -200% de daño recibido, además de un filtro de ventaja elemental desde el rango B+ y cambio de {S/PEN%} desde el rango S."
+          "en": "Rank scaling (D → SSS): boss gains up to +300% DMG dealt and -200% DMG taken, plus elemental advantage filter from rank S and {S/PEN%} swap from rank S.",
+          "jp": "ランクスケーリング（D → SSS）：ボスは与ダメ最大+300%、被ダメ最大-200%。RANK S以上で属性有利フィルター、RANK Sで{S/PEN%}スワップが追加。",
+          "kr": "랭크 스케일링(D → SSS): 보스는 최대 +300% 주는 피해 / -200% 받는 피해, RANK S부터 속성 상성 필터, RANK S에서 {S/PEN%} 스왑이 추가됩니다.",
+          "zh": "排名缩放(D → SSS)：Boss造成伤害最高+300%/受到伤害最高-200%，RANK S以上启用属性克制过滤，RANK S起新增{S/PEN%}互换。",
+          "fr": "Échelle de rang (D → SSS) : le Boss gagne jusqu'à +300% de dégâts infligés et -200% de dégâts subis, plus un filtre d'avantage élémentaire à partir du rang S et un échange de {S/PEN%} à partir du rang S.",
+          "es": "Escalado por rango (D → SSS): el jefe gana hasta +300% de daño infligido y -200% de daño recibido, además de un filtro de ventaja elemental desde el rango S y cambio de {S/PEN%} desde el rango S."
         }
       ]
     },

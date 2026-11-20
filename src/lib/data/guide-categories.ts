@@ -264,12 +264,12 @@ export const GUIDE_CATEGORIES = {
     icon: 'CM_Gate_Icon_Monad',
     info: {
       intro: {
-        en: 'Dimensional Singularity is an endgame mode accessible from Monad Gate by switching to Dimensional Singularity Mode. A different Singularity boss is active each day from Wednesday to Sunday, and your daily score determines your ranking and rewards.',
-        jp: '次元特異点はモナドゲートから「次元特異点モード」に切り替えてアクセスするエンドコンテンツです。水曜から日曜まで、毎日異なる特異点ボスが出現し、その日のスコアによってランキングと報酬が決まります。',
-        kr: '차원 특이점은 모나드 게이트에서 「차원 특이점 모드」로 전환하여 접근하는 엔드 콘텐츠입니다. 수요일부터 일요일까지 매일 다른 특이점 보스가 등장하며, 일일 점수에 따라 랭킹과 보상이 결정됩니다.',
-        zh: '次元奇点是从单子门切换至「次元奇点模式」进入的终局内容。每周三到周日，每天会出现不同的奇点Boss，当日分数将决定排名与奖励。',
-        fr: 'Dimensional Singularity est un mode de fin de jeu accessible depuis Monad Gate en passant en Dimensional Singularity Mode. Un Boss Singularity différent est actif chaque jour du mercredi au dimanche, et votre score quotidien détermine votre classement et vos récompenses.',
-        es: 'La Singularidad Dimensional es un modo de fin de juego accesible desde Puerta Monad al cambiar al Modo Singularidad Dimensional. Un jefe de Singularidad diferente está activo cada día de miércoles a domingo, y tu puntuación diaria determina tu clasificación y recompensas.',
+        en: 'Dimensional Singularity is an endgame mode accessible from Monad Gate by switching to Dimensional Singularity Mode. A different Singularity boss is active each day from Wednesday to Sunday, and your daily score determines your ranking and rewards. There is no daily entry limit: each new daily best adds its gain to your total score, and Mock Battle lets you try any boss without rewards.',
+        jp: '次元特異点はモナドゲートから「次元特異点モード」に切り替えてアクセスするエンドコンテンツです。水曜から日曜まで、毎日異なる特異点ボスが出現し、その日のスコアによってランキングと報酬が決まります。1日の挑戦回数に制限はなく、その日の最高スコアを更新するたびに増えた分が累計スコアに加算されます。模擬戦では報酬なしで好きなボスに挑戦できます。',
+        kr: '차원 특이점은 모나드 게이트에서 「차원 특이점 모드」로 전환하여 접근하는 엔드 콘텐츠입니다. 수요일부터 일요일까지 매일 다른 특이점 보스가 등장하며, 일일 점수에 따라 랭킹과 보상이 결정됩니다. 하루 입장 횟수 제한은 없으며, 그날의 최고 점수를 갱신할 때마다 늘어난 만큼이 누적 점수에 더해집니다. 모의전에서는 보상 없이 원하는 보스에 도전할 수 있습니다.',
+        zh: '次元奇点是从单子门切换至「次元奇点模式」进入的终局内容。每周三到周日，每天会出现不同的奇点Boss，当日分数将决定排名与奖励。每日挑战次数不限：每次刷新当日最高分，增加的部分会计入总分；模拟战可无奖励地挑战任意Boss。',
+        fr: "Dimensional Singularity est un mode de fin de jeu accessible depuis Monad Gate en passant en Dimensional Singularity Mode. Un Boss Singularity différent est actif chaque jour du mercredi au dimanche, et votre score quotidien détermine votre classement et vos récompenses. Il n'y a pas de limite d'entrées : chaque nouveau meilleur score du jour ajoute sa progression au score total, et le Mock Battle permet d'essayer n'importe quel boss sans récompense.",
+        es: 'La Singularidad Dimensional es un modo de fin de juego accesible desde Puerta Monad al cambiar al Modo Singularidad Dimensional. Un jefe de Singularidad diferente está activo cada día de miércoles a domingo, y tu puntuación diaria determina tu clasificación y recompensas. No hay límite diario de entradas: cada nueva mejor puntuación del día suma su mejora a la puntuación total, y la Batalla simulada permite probar cualquier jefe sin recompensas.',
       },
       unlock: {
         en: 'Unlock condition: clear Monad Gate Depth 1 True Ending.',

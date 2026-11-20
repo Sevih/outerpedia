@@ -59,6 +59,20 @@ export function byRank(a: EtherRankTier, b: EtherRankTier): number {
       : 1;
 }
 
+/**
+ * `rank` ou `rate` d'une ligne de classement. `RankType` fait foi, SAUF quand le
+ * texte affiché par le jeu dit le contraire : depuis le patch du 20/11/2026, les
+ * saisons 7 à 12 de `SingularityRankingTemplet` typent `RANK` leurs quatre paliers
+ * en pourcentage, alors que leur `MyRankText` reste `SYS_SINGULARITY_MY_RANK_RATE_*`
+ * (« Top x% ») et que leurs `RewardID` sont ceux des paliers `RATE` des saisons 1
+ * à 6. Lues comme des rangs (0–1, 1–10, 10–50, 50–100), ces lignes doubleraient les
+ * vrais rangs et le palier « Top 100% » disparaîtrait (calculateur d'Ether).
+ */
+export function rankKindOf(r: { RankType?: string; MyRankText?: string }): 'rank' | 'rate' {
+  if (r.RankType === 'RATE') return 'rate';
+  return /_RANK_RATE_\d+$/.test(r.MyRankText ?? '') ? 'rate' : 'rank';
+}
+
 export function buildEtherRankings(): EtherRankingsData {
   const tsys = loadTextIndex('TextSystem');
   const rewards = new Map(loadTable('RewardTemplet').map((r) => [r.ID, r]));
@@ -70,7 +84,7 @@ export function buildEtherRankings(): EtherRankingsData {
     return ether;
   };
   const tierOf = (r: Row, where: string): EtherRankTier => ({
-    kind: r.RankType === 'RATE' ? 'rate' : 'rank',
+    kind: rankKindOf(r),
     min: num(r.Min),
     max: num(r.Max),
     ether: etherOf(r.RewardID, where),

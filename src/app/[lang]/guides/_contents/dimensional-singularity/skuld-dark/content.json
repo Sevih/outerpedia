@@ -20,12 +20,12 @@
           "es": "Sé más lento que el jefe. Los héroes con menor {S/SPD} que Skuld le infligen +50% de daño, mientras que los héroes más rápidos que ella reciben +50% de daño. Ella aumenta el {S/SPD} de todo tu equipo en 5% al inicio de cada turno (máx. +25%), así que deja un amplio margen de velocidad."
         },
         {
-          "en": "As a {E/Dark} boss, her Berserk passive reduces Final DMG and WG DMG taken from non-advantage targets by 70% / 50% (from Rank B). Build around {E/Light} heroes for elemental advantage.",
-          "jp": "{E/Dark}属性ボスのため、狂暴化パッシブは有利相性でない対象から受ける最終ダメージとWGダメージをそれぞれ70%／50%減少させる（RANK B から）。属性有利を取れる{E/Light}属性の味方を中心に編成する。",
-          "kr": "{E/Dark} 속성 보스이므로 광폭화 패시브는 유리 상성이 아닌 대상에게 받는 최종 피해와 WG 피해를 각각 70%/50% 감소시킵니다(RANK B 부터). 속성 유리를 가지는 {E/Light} 속성 아군을 중심으로 편성하세요.",
-          "zh": "作为{E/Dark}属性Boss，她的狂暴化被动会使受到非克制属性目标的最终伤害和WG伤害分别减少70%/50%（从RANK B开始）。请以拥有属性克制的{E/Light}属性友军为核心进行编成。",
-          "fr": "En tant que boss {E/Dark}, son passif de Berserk réduit les dégâts finaux et les dégâts de WG subis des cibles sans avantage de 70% / 50% (à partir du Rang B). Construisez autour de héros {E/Light} pour l'avantage élémentaire.",
-          "es": "Como jefe {E/Dark}, su pasiva Berserk reduce el Daño Final y el Daño WG recibido de objetivos sin ventaja en 70% / 50% (desde el Rango B). Arma tu equipo en torno a héroes {E/Light} para obtener ventaja elemental."
+          "en": "As a {E/Dark} boss, her Berserk passive reduces Final DMG and WG DMG taken from non-advantage targets by 70% / 50% (from Rank S). Build around {E/Light} heroes for elemental advantage.",
+          "jp": "{E/Dark}属性ボスのため、狂暴化パッシブは有利相性でない対象から受ける最終ダメージとWGダメージをそれぞれ70%／50%減少させる（RANK S から）。属性有利を取れる{E/Light}属性の味方を中心に編成する。",
+          "kr": "{E/Dark} 속성 보스이므로 광폭화 패시브는 유리 상성이 아닌 대상에게 받는 최종 피해와 WG 피해를 각각 70%/50% 감소시킵니다(RANK S 부터). 속성 유리를 가지는 {E/Light} 속성 아군을 중심으로 편성하세요.",
+          "zh": "作为{E/Dark}属性Boss，她的狂暴化被动会使受到非克制属性目标的最终伤害和WG伤害分别减少70%/50%（从RANK S开始）。请以拥有属性克制的{E/Light}属性友军为核心进行编成。",
+          "fr": "En tant que boss {E/Dark}, son passif de Berserk réduit les dégâts finaux et les dégâts de WG subis des cibles sans avantage de 70% / 50% (à partir du Rang S). Construisez autour de héros {E/Light} pour l'avantage élémentaire.",
+          "es": "Como jefe {E/Dark}, su pasiva Berserk reduce el Daño Final y el Daño WG recibido de objetivos sin ventaja en 70% / 50% (desde el Rango S). Arma tu equipo en torno a héroes {E/Light} para obtener ventaja elemental."
         },
         {
           "en": "The boss takes +50% damage from heroes at 90% current HP or less — avoid over-healing your damage dealers.",

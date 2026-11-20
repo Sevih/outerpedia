@@ -22,6 +22,8 @@ describe('rankBadgeSprite — badge de palier', () => {
     expect(rankBadgeSprite('E++')).toBe('CM_Event_Rank_E_02');
     expect(rankBadgeSprite('SSS++')).toBe('CM_Event_Rank_SSS_02');
     expect(rankBadgeSprite('AAA+')).toBe('CM_Event_Rank_AAA_01');
+    expect(rankBadgeSprite('EX')).toBe('CM_Event_Rank_EX');
+    expect(rankBadgeSprite('EX+++')).toBe('CM_Event_Rank_EX_03');
   });
 
   /**
@@ -34,7 +36,7 @@ describe('rankBadgeSprite — badge de palier', () => {
     expect(rankNames.length).toBeGreaterThan(0);
     for (const name of rankNames) {
       expect(rankBadgeSprite(name), name).toMatch(
-        /^CM_Event_Rank_(E|D|C|B|A|AA|AAA|S|SS|SSS)(_0[12])?$/,
+        /^CM_Event_Rank_(E|D|C|B|A|AA|AAA|S|SS|SSS|EX)(_0[123])?$/,
       );
     }
   });

@@ -202,6 +202,7 @@ describe('bossRankOptionLabels', () => {
   const labels = {
     finalDmgReduce: 'Final DMG Reduction',
     wgDmgReduce: 'Weakness Gauge DMG Reduction',
+    dotDmgTaken: 'DoT DMG Taken',
   };
 
   it('une option de stat en % rend sa valeur per-mille en pourcentage', () => {
@@ -281,7 +282,7 @@ describe('archives figées : l’ancien slug mécanique lu par compatibilité (C
   // Les trois boss épinglés de Dimensional Singularity (données FIGÉES avant C27).
   const PINNED = ['4548161@1', '4548171@1', '4548181@1'];
   const legacy = new Set(Object.keys(LEGACY_STAT_SLUGS));
-  const labels = { finalDmgReduce: 'F', wgDmgReduce: 'W' };
+  const labels = { finalDmgReduce: 'F', wgDmgReduce: 'W', dotDmgTaken: 'D' };
 
   it('withCurrentStatSlugs traduit effets, tooltipKinds et options de rang ensemble', () => {
     const src = sources();

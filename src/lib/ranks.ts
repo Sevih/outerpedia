@@ -1,9 +1,11 @@
 /**
  * BADGES DE PALIER (`CM_Event_Rank_*`) — sprite dérivé du NOM du palier.
  *
- * Le jeu nomme ses paliers `E`, `E+`, `E++`, `D`, … `SSS`, `SSS+`, `SSS++` et
- * ses sprites `CM_Event_Rank_<BASE>` / `_01` (« + ») / `_02` (« ++ »). Les deux
- * séries sont en bijection (30 paliers ↔ 30 sprites, vérifié par test).
+ * Le jeu nomme ses paliers `E`, `E+`, `E++`, `D`, … `SSS`, `SSS+`, `SSS++`, puis
+ * (patch du 20/11/2026, Dimensional Singularity) `EX`, `EX+`, `EX++`, `EX+++`, et
+ * ses sprites `CM_Event_Rank_<BASE>` / `_01` (« + ») / `_02` (« ++ ») / `_03`
+ * (« +++ », EX seulement). Les deux séries sont en bijection (34 paliers ↔ 34
+ * sprites, vérifié par test).
  *
  * Oui, c'est une dérivation depuis une chaîne — le travers qu'on reproche à la
  * avant. La différence : ici la chaîne EST l'identifiant canonique du palier
