@@ -382,7 +382,7 @@
       "jp": "ご主人様の贈り物",
       "kr": "주인님의 선물",
       "zh": "主人的礼物",
-      "fr": "Master's Gift",
+      "fr": "Cadeau du maître",
       "es": "Regalo del Amo"
     },
     "grade": "unique",
@@ -411,7 +411,7 @@
       "jp": "閃撃の鉤爪",
       "kr": "섬격철조",
       "zh": "闪击铁爪",
-      "fr": "Iron Claws of Calamity",
+      "fr": "Griffes de fer foudroyantes",
       "es": "Garras de Hierro de la Calamidad"
     },
     "grade": "unique",
@@ -440,7 +440,7 @@
       "jp": "誂えた騎士の剣",
       "kr": "기사단 특주 대검",
       "zh": "骑士团特制巨剑",
-      "fr": "Knight's Special Great Sword",
+      "fr": "Espadon sur mesure des chevaliers",
       "es": "Gran Espada Caballero"
     },
     "grade": "unique",
@@ -614,7 +614,7 @@
       "jp": "スーパー天才専用工具",
       "kr": "슈퍼 천재 전용 공구 세트",
       "zh": "超级天才专用工套装",
-      "fr": "Super Genius's Toolkit",
+      "fr": "Boîte à outils du super génie",
       "es": "Kit Super Genio"
     },
     "grade": "unique",
@@ -846,7 +846,7 @@
       "jp": "鍛冶屋の信念",
       "kr": "대장장이의 신념",
       "zh": "铁匠的信念",
-      "fr": "The Blacksmith's Devotion",
+      "fr": "Conviction du forgeron",
       "es": "La devoción del herrero"
     },
     "grade": "unique",
@@ -1716,7 +1716,7 @@
       "jp": "No.62：タイム・レペント",
       "kr": "No.62 참회의 준비",
       "zh": "No.62忏悔之准备",
-      "fr": "No.62's Punishment",
+      "fr": "No.62 – Préparatifs du repentir",
       "es": "El Castigo del No.62"
     },
     "grade": "unique",
@@ -2006,7 +2006,7 @@
       "jp": "ザイの予備コア",
       "kr": "크사이의 예비 코어",
       "zh": "科赛的预备核心",
-      "fr": "Ksai's Spare Core",
+      "fr": "Cœur de rechange de Ksai",
       "es": "El Core de Repuesto de Ksai"
     },
     "grade": "unique",
@@ -2436,7 +2436,7 @@
       "jp": "レジーナの万能浮き輪",
       "kr": "레지나의 만능 튜브",
       "zh": "蕾吉纳的万能游泳圈",
-      "fr": "Regina's All-Purpose Tube",
+      "fr": "Bouée multifonction de Regina",
       "es": "Tubo Multiusos de Regina"
     },
     "grade": "unique",
@@ -2871,7 +2871,7 @@
       "jp": "蝋の翼",
       "kr": "밀랍날개",
       "zh": "蜡翼",
-      "fr": "Wax Wings",
+      "fr": "Ailes de cire",
       "es": "Alas Cera"
     },
     "grade": "unique",
@@ -3567,7 +3567,7 @@
       "jp": "大魔女の親友",
       "kr": "대마녀의 단짝",
       "zh": "大魔女的挚友",
-      "fr": "The Supreme Witch's Companion",
+      "fr": "Compagnon de la grande sorcière",
       "es": "Compañera de la Suprema Bruja"
     },
     "grade": "unique",
