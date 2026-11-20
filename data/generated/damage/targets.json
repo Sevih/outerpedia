@@ -41450,6 +41450,89 @@
         }
       ]
     },
+    "4204005": {
+      "id": "4204005",
+      "element": "CET_EARTH",
+      "class": "CCT_ATTACKER",
+      "subClass": "NONE",
+      "race": "CRT_HUMAN",
+      "basicStar": 3,
+      "baseStats": {
+        "HP": {
+          "min": 3348,
+          "max": 202400
+        },
+        "WG": {
+          "min": 20,
+          "max": 50
+        },
+        "Speed": {
+          "min": 55,
+          "max": 99
+        },
+        "Atk": {
+          "min": 144,
+          "max": 6549
+        },
+        "Def": {
+          "min": 110,
+          "max": 3357
+        },
+        "DMGReduceRate": {
+          "min": 0,
+          "max": 100
+        },
+        "CriticalRate": {
+          "min": 50,
+          "max": 160
+        },
+        "CriticalDMGRate": {
+          "min": 1500,
+          "max": 1500
+        },
+        "BuffChance": {
+          "min": 63,
+          "max": 190
+        },
+        "BuffResist": {
+          "min": 26,
+          "max": 100
+        }
+      },
+      "buffImmune": ["BT_STUN", "BT_FREEZE", "BT_STONE", "BT_SILENCE", "BT_AGGRO"],
+      "rage": {
+        "trigger": "HP_RATE",
+        "steps": [
+          {
+            "value": 500,
+            "duration": 4
+          }
+        ],
+        "breakBuffIds": ["BID_BREAK_1", "BID_BREAK_2", "BID_BREAK_3"]
+      },
+      "skills": [
+        {
+          "slot": 1,
+          "id": "931567"
+        },
+        {
+          "slot": 2,
+          "id": "931568"
+        },
+        {
+          "slot": 3,
+          "id": "931569"
+        },
+        {
+          "slot": 15,
+          "id": "931571"
+        },
+        {
+          "slot": 16,
+          "id": "931572"
+        }
+      ]
+    },
     "4211051": {
       "id": "4211051",
       "element": "CET_WATER",
@@ -43009,6 +43092,83 @@
         {
           "slot": 16,
           "id": "165012"
+        }
+      ]
+    },
+    "4284001": {
+      "id": "4284001",
+      "element": "CET_EARTH",
+      "class": "CCT_ATTACKER",
+      "subClass": "NONE",
+      "race": "CRT_ALIEN",
+      "basicStar": 3,
+      "baseStats": {
+        "HP": {
+          "min": 558,
+          "max": 88320
+        },
+        "WG": {
+          "min": 15,
+          "max": 40
+        },
+        "Speed": {
+          "min": 63,
+          "max": 96
+        },
+        "Atk": {
+          "min": 120,
+          "max": 5435
+        },
+        "Def": {
+          "min": 44,
+          "max": 1200
+        },
+        "DMGReduceRate": {
+          "min": 0,
+          "max": 100
+        },
+        "CriticalRate": {
+          "min": 50,
+          "max": 160
+        },
+        "CriticalDMGRate": {
+          "min": 1500,
+          "max": 1500
+        },
+        "BuffChance": {
+          "min": 36,
+          "max": 112
+        },
+        "BuffResist": {
+          "min": 32,
+          "max": 96
+        }
+      },
+      "buffImmune": [
+        "BT_GOLDEN_CURSE",
+        "BT_FREEZE",
+        "BT_STONE",
+        "BT_STUN",
+        "BT_SILENCE",
+        "BT_AGGRO"
+      ],
+      "rage": {
+        "trigger": "NONE",
+        "steps": [],
+        "breakBuffIds": ["BID_BREAK_1", "BID_BREAK_2", "BID_BREAK_3"]
+      },
+      "skills": [
+        {
+          "slot": 1,
+          "id": "131579"
+        },
+        {
+          "slot": 2,
+          "id": "131580"
+        },
+        {
+          "slot": 3,
+          "id": "131581"
         }
       ]
     },
@@ -59264,6 +59424,75 @@
         }
       ]
     },
+    "4500374": {
+      "id": "4500374",
+      "element": "CET_EARTH",
+      "class": "CCT_DEFENDER",
+      "subClass": "NONE",
+      "race": "CRT_AUTOMATON",
+      "basicStar": 3,
+      "baseStats": {
+        "HP": {
+          "min": 558,
+          "max": 88320
+        },
+        "WG": {
+          "min": 15,
+          "max": 40
+        },
+        "Speed": {
+          "min": 63,
+          "max": 96
+        },
+        "Atk": {
+          "min": 120,
+          "max": 5435
+        },
+        "Def": {
+          "min": 44,
+          "max": 1200
+        },
+        "DMGReduceRate": {
+          "min": 0,
+          "max": 100
+        },
+        "CriticalRate": {
+          "min": 50,
+          "max": 160
+        },
+        "CriticalDMGRate": {
+          "min": 1500,
+          "max": 1500
+        },
+        "BuffChance": {
+          "min": 36,
+          "max": 112
+        },
+        "BuffResist": {
+          "min": 32,
+          "max": 96
+        }
+      },
+      "rage": {
+        "trigger": "NONE",
+        "steps": [],
+        "breakBuffIds": ["BID_BREAK_1", "BID_BREAK_2", "BID_BREAK_3"]
+      },
+      "skills": [
+        {
+          "slot": 1,
+          "id": "152015"
+        },
+        {
+          "slot": 2,
+          "id": "152016"
+        },
+        {
+          "slot": 3,
+          "id": "152017"
+        }
+      ]
+    },
     "4500376": {
       "id": "4500376",
       "element": "CET_EARTH",
@@ -59698,6 +59927,75 @@
         {
           "slot": 3,
           "id": "150003"
+        }
+      ]
+    },
+    "4500383": {
+      "id": "4500383",
+      "element": "CET_WATER",
+      "class": "CCT_MAGE",
+      "subClass": "ENCHANTER",
+      "race": "CRT_HUMAN",
+      "basicStar": 3,
+      "baseStats": {
+        "HP": {
+          "min": 160,
+          "max": 23920
+        },
+        "Speed": {
+          "min": 90,
+          "max": 90
+        },
+        "Atk": {
+          "min": 51,
+          "max": 4651
+        },
+        "Def": {
+          "min": 37,
+          "max": 1000
+        },
+        "DMGReduceRate": {
+          "min": 0,
+          "max": 100
+        },
+        "CriticalRate": {
+          "min": 100,
+          "max": 100
+        },
+        "CriticalDMGRate": {
+          "min": 1500,
+          "max": 1500
+        },
+        "BuffChance": {
+          "min": 50,
+          "max": 300
+        },
+        "BuffResist": {
+          "min": 80,
+          "max": 300
+        }
+      },
+      "buffImmune": [
+        "BT_GOLDEN_CURSE",
+        "BT_STUN",
+        "BT_FREEZE",
+        "BT_STONE",
+        "BT_AGGRO",
+        "BT_SILENCE",
+        "BT_REMOVE_BUFF"
+      ],
+      "skills": [
+        {
+          "slot": 1,
+          "id": "153919"
+        },
+        {
+          "slot": 2,
+          "id": "153920"
+        },
+        {
+          "slot": 3,
+          "id": "153921"
         }
       ]
     },

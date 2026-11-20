@@ -343,7 +343,7 @@
       "jp": "ハンマー強打",
       "kr": "망치 강타",
       "zh": "强力锤击",
-      "fr": "Hammer Smite",
+      "fr": "Frappe de marteau",
       "es": "Martillazo Azote"
     },
     "type": "second",
@@ -2002,7 +2002,7 @@
       "jp": "撹乱の剣撃",
       "kr": "교란의 검격",
       "zh": "干扰剑击",
-      "fr": "Disruptive Slash",
+      "fr": "Entaille perturbatrice",
       "es": "Corte disruptivo"
     },
     "type": "second",
@@ -2053,7 +2053,7 @@
       "jp": "上昇剣撃",
       "kr": "상승검격",
       "zh": "上升剑击",
-      "fr": "Rising Slash",
+      "fr": "Entaille ascendante",
       "es": "Corte ascendente"
     },
     "type": "ultimate",
@@ -2759,7 +2759,7 @@
       "jp": "エネルギースラッシュ",
       "kr": "에너지 슬래쉬",
       "zh": "能量斩击",
-      "fr": "Energy Slash",
+      "fr": "Entaille d'énergie",
       "es": "Corte de energía"
     },
     "type": "ultimate",
@@ -2890,7 +2890,7 @@
       "jp": "敵全体にダメージを与え、対象に<color=#28d9ed>[Buff_C_common_monster_buff_59]</color>の確率で<color=#28d9ed>火傷</color>を<color=#28d9ed>[Buff_T_common_monster_buff_59]ターン</color>の間付与する。",
       "kr": "적 전체를 공격하고 <color=#28d9ed>[Buff_C_common_monster_buff_59]</color> 확률로 대상에게 <color=#28d9ed>[Buff_T_common_monster_buff_59]턴</color> 동안 <color=#28d9ed>화상</color>을 부여합니다.",
       "zh": "攻击全体敌人，并有<color=#28d9ed>[Buff_C_common_monster_buff_59]</color>的几率对目标造成<color=#28d9ed>烧伤</color>效果，持续<color=#28d9ed>[Buff_T_common_monster_buff_59]回合</color>。",
-      "fr": "attaque tous les ennemis, and a une <color=#28d9ed>[Buff_C_common_monster_buff_59]</color> chance de inflict <color=#28d9ed>Brûlure</color> à la cible durant <color=#28d9ed>[Buff_T_common_monster_buff_59] tour(s)</color>.",
+      "fr": "Attaque tous les ennemis et a <color=#28d9ed>[Buff_C_common_monster_buff_59]</color> de chances d'infliger <color=#28d9ed>Brûlure</color> aux cibles pendant <color=#28d9ed>[Buff_T_common_monster_buff_59] tour(s)</color>.",
       "es": "Ataca a los enemigos y tiene una <color=#28d9ed>[Buff_C_common_monster_buff_59]</color> probabilidad de infligir <color=#28d9ed>Quemadura</color> al objetivo por <color=#28d9ed>[Buff_T_common_monster_buff_59] turno(s)</color>"
     },
     "target": "enemy",
@@ -3024,7 +3024,7 @@
       "jp": "クロス斬り",
       "kr": "교차베기",
       "zh": "交叉斩",
-      "fr": "Cross Slash",
+      "fr": "Entaille croisée",
       "es": "Corte Cruz"
     },
     "type": "first",
@@ -3175,7 +3175,7 @@
       "jp": "クロス斬り",
       "kr": "교차베기",
       "zh": "交叉斩",
-      "fr": "Cross Slash",
+      "fr": "Entaille croisée",
       "es": "Corte Cruz"
     },
     "type": "first",
@@ -3426,7 +3426,7 @@
       "jp": "盾足突き",
       "kr": "방패다리 찍기",
       "zh": "盾桥下劈",
-      "fr": "Shield Swing",
+      "fr": "Frappe de bouclier",
       "es": "Golpe Escudo"
     },
     "type": "second",
@@ -3729,7 +3729,7 @@
       "jp": "警備隊の大剣術",
       "kr": "경비대 대검술",
       "zh": "警卫队对剑术",
-      "fr": "Guard Two-handed Swordcraft",
+      "fr": "Art de l'espadon de la garde",
       "es": "Artes. Espada Guardia"
     },
     "type": "first",
@@ -3921,7 +3921,7 @@
       "jp": "斬撃",
       "kr": "참격",
       "zh": "斩击",
-      "fr": "Slash",
+      "fr": "Entaille",
       "es": "Corte"
     },
     "type": "second",
@@ -3974,7 +3974,7 @@
       "jp": "警備隊の大剣術",
       "kr": "경비대 대검술",
       "zh": "警卫队对剑术",
-      "fr": "Guard Two-handed Swordcraft",
+      "fr": "Art de l'espadon de la garde",
       "es": "Artes. Espada Guardia"
     },
     "type": "first",
@@ -4632,7 +4632,7 @@
       "jp": "断罪の斬撃",
       "kr": "단죄의 참격",
       "zh": "定罪斩击",
-      "fr": "Condemning Slash",
+      "fr": "Entaille de condamnation",
       "es": "Tajo Condenatorio"
     },
     "type": "second",
@@ -4863,7 +4863,7 @@
       "jp": "敵全体にダメージを与え、<color=#28d9ed>[Buff_C_common_monster_buff_44]</color>の確率で対象の<color=#28d9ed>行動ゲージ</color>を<color=#28d9ed>[Buff_V_common_monster_buff_44]</color>DOWNさせる。",
       "kr": "적 전체를 공격하고 <color=#28d9ed>[Buff_C_common_monster_buff_44]</color> 확률로 대상의 <color=#28d9ed>행동 게이지</color>를 <color=#28d9ed>[Buff_V_common_monster_buff_44]</color>를 감소시킵니다.",
       "zh": "攻击全体敌人，并有<color=#28d9ed>[Buff_C_common_monster_buff_44]</color>的几率使目标的<color=#28d9ed>行动值</color>降低<color=#28d9ed>[Buff_V_common_monster_buff_44]</color>。",
-      "fr": "attaque tous les ennemis and a une <color=#28d9ed>[Buff_C_common_monster_buff_44]</color> chance de reduce <color=#28d9ed>Prior. Gauge</color> of la cible by <color=#28d9ed>[Buff_V_common_monster_buff_44]</color>.",
+      "fr": "Attaque tous les ennemis et a <color=#28d9ed>[Buff_C_common_monster_buff_44]</color> de chances de réduire la <color=#28d9ed>Prior.</color> des cibles de <color=#28d9ed>[Buff_V_common_monster_buff_44]</color>.",
       "es": "Ataca a los enemigos y tiene una <color=#28d9ed>[Buff_C_common_monster_buff_44]</color> probabilidad de Red. de la <color=#28d9ed>Barra de Prior.</color> del objetivo en <color=#28d9ed>[Buff_V_common_monster_buff_44]</color>."
     },
     "target": "enemy",
@@ -5358,7 +5358,7 @@
       "jp": "脚部破壊",
       "kr": "다리 저미기",
       "zh": "剪刀腿",
-      "fr": "Slash Leg",
+      "fr": "Entaille aux jambes",
       "es": "Corte Pierna"
     },
     "type": "second",
@@ -5812,7 +5812,7 @@
       "jp": "敵全体にダメージを与え、対象に<color=#28d9ed>[Buff_C_common_monster_buff_51]</color>の確率で<color=#28d9ed>呪い</color>を<color=#28d9ed>[Buff_T_common_monster_buff_51]ターン</color>の間付与する。",
       "kr": "적 전체를 공격하고 <color=#28d9ed>[Buff_C_common_monster_buff_51]</color> 확률로 대상에게 <color=#28d9ed>[Buff_T_common_monster_buff_51]턴</color> 동안 <color=#28d9ed>저주</color>를 부여합니다.",
       "zh": "攻击全体敌人，并有<color=#28d9ed>[Buff_C_common_monster_buff_51]</color>的几率对目标造成<color=#28d9ed>诅咒</color>效果，持续<color=#28d9ed>[Buff_T_common_monster_buff_51]回合</color>。",
-      "fr": "attaque tous les ennemis and a une <color=#28d9ed>[Buff_C_common_monster_buff_51]</color> chance de inflict <color=#28d9ed>Maudit</color> à la cible durant <color=#28d9ed>[Buff_T_common_monster_buff_51] tour(s)</color>.",
+      "fr": "Attaque tous les ennemis et a <color=#28d9ed>[Buff_C_common_monster_buff_51]</color> de chances d'infliger <color=#28d9ed>Maudit</color> aux cibles pendant <color=#28d9ed>[Buff_T_common_monster_buff_51] tour(s)</color>.",
       "es": "Ataca a los enemigos. <color=#28d9ed>[Buff_C_common_monster_buff_51]</color> probabilidad de infligir <color=#28d9ed>Maldición</color> al objetivo por <color=#28d9ed>[Buff_T_common_monster_buff_51] turno(s)</color>."
     },
     "target": "enemy",
@@ -6443,7 +6443,7 @@
       "jp": "稲妻",
       "kr": "번개",
       "zh": "雷电",
-      "fr": "Lightning",
+      "fr": "Éclair",
       "es": "Relámpago"
     },
     "type": "second",
@@ -7159,7 +7159,7 @@
       "jp": "貫通電撃",
       "kr": "관통 전격",
       "zh": "贯穿电击",
-      "fr": "Penetrating Lightning",
+      "fr": "Éclair perforant",
       "es": "Relámpago Penetrante"
     },
     "type": "second",
@@ -7236,7 +7236,7 @@
       "jp": "敵全体にダメージを与え、対象に<color=#28d9ed>[Buff_C_common_monster_buff_50]</color>の確率で<color=#28d9ed>感電</color>を<color=#28d9ed>[Buff_T_common_monster_buff_50]ターン</color>の間付与する。",
       "kr": "적 전체를 공격하고 <color=#28d9ed>[Buff_C_common_monster_buff_50]</color> 확률로 대상에게 <color=#28d9ed>[Buff_T_common_monster_buff_50]턴</color> 동안 <color=#28d9ed>감전</color>을 부여합니다.",
       "zh": "攻击全体敌人，并有<color=#28d9ed>[Buff_C_common_monster_buff_50]</color>的几率对目标造成<color=#28d9ed>触电</color>效果，持续<color=#28d9ed>[Buff_T_common_monster_buff_50]回合</color>。",
-      "fr": "attaque tous les ennemis and a une <color=#28d9ed>[Buff_C_common_monster_buff_50]</color> chance de inflict <color=#28d9ed>Électrocuté</color> à la cible durant <color=#28d9ed>[Buff_T_common_monster_buff_50] tour(s)</color>.",
+      "fr": "Attaque tous les ennemis et a <color=#28d9ed>[Buff_C_common_monster_buff_50]</color> de chances d'infliger <color=#28d9ed>Électrocuté</color> aux cibles pendant <color=#28d9ed>[Buff_T_common_monster_buff_50] tour(s)</color>.",
       "es": "Ataca a los enemigos y tiene una <color=#28d9ed>[Buff_C_common_monster_buff_50]</color> probabilidad de infligir <color=#28d9ed>Electrocutado</color> al objetivo por <color=#28d9ed>[Buff_T_common_monster_buff_50] turno(s)</color>."
     },
     "target": "enemy",
@@ -7550,7 +7550,7 @@
       "jp": "敵全体にダメージを与え、対象に<color=#28d9ed>[Buff_C_4052001_1]</color>の確率で<color=#28d9ed>中毒</color>を<color=#28d9ed>[Buff_T_4052001_1]ターン</color>の間付与する。",
       "kr": "적 전체를 공격하고 <color=#28d9ed>[Buff_C_4052001_1]</color> 확률로 대상에게 <color=#28d9ed>[Buff_T_4052001_1]턴</color> 동안 <color=#28d9ed>중독</color>을 부여합니다.",
       "zh": "攻击全体敌人，并有<color=#28d9ed>[Buff_C_4052001_1]</color>的几率对目标造成<color=#28d9ed>中毒</color>效果，持续<color=#28d9ed>[Buff_T_4052001_1]回合</color>。",
-      "fr": "attaque tous les ennemis and a une <color=#28d9ed>[Buff_C_4052001_1]</color> chance de inflict <color=#28d9ed>Poisonné</color> à la cible durant <color=#28d9ed>[Buff_T_4052001_1] tour(s)</color>.",
+      "fr": "Attaque tous les ennemis et a <color=#28d9ed>[Buff_C_4052001_1]</color> de chances d'infliger <color=#28d9ed>Poisonné</color> aux cibles pendant <color=#28d9ed>[Buff_T_4052001_1] tour(s)</color>.",
       "es": "Ataca a los enemigos y tiene una <color=#28d9ed>[Buff_C_4052001_1]</color> probabilidad de infligir <color=#28d9ed>Envenenado</color> al objetivo por <color=#28d9ed>[Buff_T_4052001_1] turno(s)</color>."
     },
     "target": "enemy",
@@ -7977,7 +7977,7 @@
       "jp": "敵全体にダメージを与え、対象に<color=#28d9ed>[Buff_C_common_monster_buff_51]</color>の確率で<color=#28d9ed>呪い</color>を<color=#28d9ed>[Buff_T_common_monster_buff_51]ターン</color>の間付与する。",
       "kr": "적 전체를 공격하고 <color=#28d9ed>[Buff_C_common_monster_buff_51]</color> 확률로 대상에게 <color=#28d9ed>[Buff_T_common_monster_buff_51]턴</color> 동안 <color=#28d9ed>저주</color>를 부여합니다.",
       "zh": "攻击全体敌人，并有<color=#28d9ed>[Buff_C_common_monster_buff_51]</color>的几率对目标造成<color=#28d9ed>诅咒</color>效果，持续<color=#28d9ed>[Buff_T_common_monster_buff_51]回合</color>。",
-      "fr": "attaque tous les ennemis and a une <color=#28d9ed>[Buff_C_common_monster_buff_51]</color> chance de inflict <color=#28d9ed>Maudit</color> à la cible durant <color=#28d9ed>[Buff_T_common_monster_buff_51] tour(s)</color>.",
+      "fr": "Attaque tous les ennemis et a <color=#28d9ed>[Buff_C_common_monster_buff_51]</color> de chances d'infliger <color=#28d9ed>Maudit</color> aux cibles pendant <color=#28d9ed>[Buff_T_common_monster_buff_51] tour(s)</color>.",
       "es": "Ataca a los enemigos. <color=#28d9ed>[Buff_C_common_monster_buff_51]</color> probabilidad de infligir <color=#28d9ed>Maldición</color> al objetivo por <color=#28d9ed>[Buff_T_common_monster_buff_51] turno(s)</color>."
     },
     "target": "enemy",
@@ -8101,7 +8101,7 @@
       "jp": "フォースソード",
       "kr": "포스 소드",
       "zh": "力量之剑",
-      "fr": "Force Sword",
+      "fr": "Épée de force",
       "es": "Espada Fuerza"
     },
     "type": "first",
@@ -8404,7 +8404,7 @@
       "jp": "フォースソード",
       "kr": "포스 소드",
       "zh": "力量之剑",
-      "fr": "Force Sword",
+      "fr": "Épée de force",
       "es": "Espada Fuerza"
     },
     "type": "first",
@@ -9587,7 +9587,7 @@
       "jp": "ウィンドリング",
       "kr": "윈드 링",
       "zh": "飓风领域",
-      "fr": "Wind Ring",
+      "fr": "Anneau de vent",
       "es": "Anillo Viento"
     },
     "type": "first",
@@ -10255,7 +10255,7 @@
       "jp": "バッドスラッシュ",
       "kr": "배드 슬래쉬",
       "zh": "绝境劈斩",
-      "fr": "Sinister Slash",
+      "fr": "Entaille sinistre",
       "es": "Corte siniestro"
     },
     "type": "first",
@@ -10305,7 +10305,7 @@
       "jp": "ダガースロウ",
       "kr": "대거 쓰로우",
       "zh": "投掷匕首",
-      "fr": "Dagger Throw",
+      "fr": "Lancer de dague",
       "es": "Lanzamiento de daga"
     },
     "type": "first",
@@ -10727,7 +10727,7 @@
       "jp": "バッドスラッシュ",
       "kr": "배드 슬래쉬",
       "zh": "绝境劈斩",
-      "fr": "Sinister Slash",
+      "fr": "Entaille sinistre",
       "es": "Corte siniestro"
     },
     "type": "first",
@@ -10777,7 +10777,7 @@
       "jp": "サイドスラッシュ",
       "kr": "사이드 슬래쉬",
       "zh": "侧斩",
-      "fr": "Side Slash",
+      "fr": "Entaille latérale",
       "es": "Corte lateral"
     },
     "type": "second",
@@ -10929,7 +10929,7 @@
       "jp": "ロックハンマー",
       "kr": "락 해머",
       "zh": "定点锤击",
-      "fr": "Rock Hammer",
+      "fr": "Marteau de roche",
       "es": "Martillo Roca"
     },
     "type": "first",
@@ -10981,7 +10981,7 @@
       "jp": "ライトニングロード",
       "kr": "라이트닝 로드",
       "zh": "避雷针",
-      "fr": "Lightning Rod",
+      "fr": "Paratonnerre",
       "es": "Relámpago"
     },
     "type": "first",
@@ -11192,7 +11192,7 @@
       "jp": "ライトニングロード",
       "kr": "라이트닝 로드",
       "zh": "避雷针",
-      "fr": "Lightning Rod",
+      "fr": "Paratonnerre",
       "es": "Relámpago"
     },
     "type": "first",
@@ -11271,7 +11271,7 @@
       "jp": "敵全体にダメージを与え、対象に<color=#28d9ed>[Buff_C_common_monster_buff_50]</color>の確率で<color=#28d9ed>感電</color>を<color=#28d9ed>[Buff_T_common_monster_buff_50]ターン</color>の間付与する。",
       "kr": "적 전체를 공격하고 <color=#28d9ed>[Buff_C_common_monster_buff_50]</color> 확률로 대상에게 <color=#28d9ed>[Buff_T_common_monster_buff_50]턴</color> 동안 <color=#28d9ed>감전</color>을 부여합니다.",
       "zh": "攻击全体敌人，并有<color=#28d9ed>[Buff_C_common_monster_buff_50]</color>的几率对目标造成<color=#28d9ed>触电</color>效果，持续<color=#28d9ed>[Buff_T_common_monster_buff_50]回合</color>。",
-      "fr": "attaque tous les ennemis and a une <color=#28d9ed>[Buff_C_common_monster_buff_50]</color> chance de inflict <color=#28d9ed>Électrocuté</color> à la cible durant <color=#28d9ed>[Buff_T_common_monster_buff_50] tour(s)</color>.",
+      "fr": "Attaque tous les ennemis et a <color=#28d9ed>[Buff_C_common_monster_buff_50]</color> de chances d'infliger <color=#28d9ed>Électrocuté</color> aux cibles pendant <color=#28d9ed>[Buff_T_common_monster_buff_50] tour(s)</color>.",
       "es": "Ataca a los enemigos y tiene una <color=#28d9ed>[Buff_C_common_monster_buff_50]</color> probabilidad de infligir <color=#28d9ed>Electrocutado</color> al objetivo por <color=#28d9ed>[Buff_T_common_monster_buff_50] turno(s)</color>."
     },
     "target": "enemy",
@@ -11297,7 +11297,7 @@
       "jp": "ロックハンマー",
       "kr": "락 해머",
       "zh": "定点锤击",
-      "fr": "Rock Hammer",
+      "fr": "Marteau de roche",
       "es": "Martillo Roca"
     },
     "type": "first",
@@ -11349,7 +11349,7 @@
       "jp": "ロックマウント",
       "kr": "락 마운트",
       "zh": "岩击",
-      "fr": "Rock Strike",
+      "fr": "Frappe de roche",
       "es": "Golpe Roca"
     },
     "type": "second",
@@ -11862,7 +11862,7 @@
       "jp": "魔人一閃",
       "kr": "마인일섬",
       "zh": "魔人一闪",
-      "fr": "Demonic Slash",
+      "fr": "Entaille démoniaque",
       "es": "Tajo Demoníaco"
     },
     "type": "second",
@@ -12228,7 +12228,7 @@
       "jp": "天雷無妄",
       "kr": "천뢰무망",
       "zh": "天雷无妄",
-      "fr": "Heavenly Thunder of Justice",
+      "fr": "Foudre céleste de la justice",
       "es": "Trueno Justiciero"
     },
     "type": "second",
@@ -13897,7 +13897,7 @@
       "jp": "敵全体にダメージを与え、対象に<color=#28d9ed>[Buff_C_common_monster_buff_31]</color>の確率で<color=#28d9ed>凍結</color>を<color=#28d9ed>[Buff_T_common_monster_buff_31]ターン</color>の間付与する。",
       "kr": "적 전체를 공격하고 <color=#28d9ed>[Buff_C_common_monster_buff_31]</color> 확률로 대상을 <color=#28d9ed>[Buff_T_common_monster_buff_31]턴</color> 동안 <color=#28d9ed>빙결</color> 상태로 만듭니다.",
       "zh": "攻击全体敌人，并有<color=#28d9ed>[Buff_C_common_monster_buff_31]</color>的几率使敌人陷入<color=#28d9ed>冰冻</color>状态，持续<color=#28d9ed>[Buff_T_common_monster_buff_31]回合</color>。",
-      "fr": "attaque tous les ennemis and a une <color=#28d9ed>[Buff_C_common_monster_buff_31]</color> chance de inflict <color=#28d9ed>Gelé</color> à la cible durant <color=#28d9ed>[Buff_T_common_monster_buff_31] tour(s)</color>.",
+      "fr": "Attaque tous les ennemis et a <color=#28d9ed>[Buff_C_common_monster_buff_31]</color> de chances d'infliger <color=#28d9ed>Gelé</color> aux cibles pendant <color=#28d9ed>[Buff_T_common_monster_buff_31] tour(s)</color>.",
       "es": "Ataca a los enemigos con un <color=#28d9ed>[Buff_C_common_monster_buff_31]</color> de probabilidad de infligir <color=#28d9ed>Congelado</color> por <color=#28d9ed>[Buff_T_common_monster_buff_31] turno(s)</color>."
     },
     "target": "enemy",
@@ -16484,7 +16484,7 @@
       "jp": "敵全体にダメージを与え、対象に<color=#28d9ed>[Buff_C_4033012_3_1]</color>の確率で<color=#28d9ed>火傷</color>を<color=#28d9ed>[Buff_T_4033012_3_1]ターン</color>の間付与する。",
       "kr": "적 전체를 공격하고 <color=#28d9ed>[Buff_C_4033012_3_1]</color> 확률로 대상에게 <color=#28d9ed>[Buff_T_4033012_3_1]턴</color> 동안 <color=#28d9ed>화상</color>을 부여합니다.",
       "zh": "攻击全体敌人，并有<color=#28d9ed>[Buff_C_4033012_3_1]</color>的几率对目标造成<color=#28d9ed>烧伤</color>效果，持续<color=#28d9ed>[Buff_T_4033012_3_1]回合</color>。",
-      "fr": "attaque tous les ennemis and a une <color=#28d9ed>[Buff_C_4033012_3_1]</color> chance de inflict <color=#28d9ed>Brûlure</color> à la cible durant <color=#28d9ed>[Buff_T_4033012_3_1] tour(s)</color>.",
+      "fr": "Attaque tous les ennemis et a <color=#28d9ed>[Buff_C_4033012_3_1]</color> de chances d'infliger <color=#28d9ed>Brûlure</color> aux cibles pendant <color=#28d9ed>[Buff_T_4033012_3_1] tour(s)</color>.",
       "es": "Ataca a los enemigos y tiene una <color=#28d9ed>[Buff_C_4033012_3_1]</color> probabilidad de infligir <color=#28d9ed>Quemadura</color> al objetivo por <color=#28d9ed>[Buff_T_4033012_3_1] turno(s)</color>."
     },
     "target": "enemy",
@@ -18723,7 +18723,7 @@
       "jp": "攻撃シーケンス稼働【猛毒】",
       "kr": "공격 시퀀스 가동 [맹독]",
       "zh": "攻击代码启动【剧毒】",
-      "fr": "Initiate Offensive Sequence [Poison]",
+      "fr": "Activation de la séquence offensive [Poison]",
       "es": "Iniciar Secuencia Ofensiva [Poison]"
     },
     "type": "first",
@@ -18895,7 +18895,7 @@
       "jp": "対象に<color=#28d9ed>[Buff_C_1036001_01]</color>の確率で<color=#28d9ed>凍結</color>を<color=#28d9ed>[Buff_T_1036001_01]ターン</color>の間付与する。",
       "kr": "<color=#28d9ed>[Buff_C_1036001_01]</color> 확률로 대상을 <color=#28d9ed>[Buff_T_1036001_01]턴</color> 동안 <color=#28d9ed>빙결</color> 상태로 만듭니다.",
       "zh": "有<color=#28d9ed>[Buff_C_1036001_01]</color>的几率使目标陷入<color=#28d9ed>冰冻</color>状态，持续\\n<color=#28d9ed>[Buff_T_1036001_01]回合</color>。",
-      "fr": "a une <color=#28d9ed>[Buff_C_1036001_01]</color> chance de inflict <color=#28d9ed>Gelé</color> on the ennemi cible durant <color=#28d9ed>[Buff_T_1036001_01] tour(s)</color>.",
+      "fr": "A <color=#28d9ed>[Buff_C_1036001_01]</color> de chances d'infliger <color=#28d9ed>Gelé</color> à l'ennemi ciblé pendant <color=#28d9ed>[Buff_T_1036001_01] tour(s)</color>.",
       "es": "<color=#28d9ed>[Buff_C_1036001_01]</color> de probabilidad de causar <color=#28d9ed>Congelado</color> al blanco durante <color=#28d9ed>[Buff_T_1036001_01] turno(s)</color>."
     },
     "target": "enemy",
@@ -19005,7 +19005,7 @@
       "jp": "攻撃シーケンス稼働【高熱】",
       "kr": "공격 시퀀스 가동 [고열]",
       "zh": "攻击代码启动【高温】",
-      "fr": "Initiate Offensive Sequence [Heat]",
+      "fr": "Activation de la séquence offensive [Chaleur]",
       "es": "Inicia Secuencia Ofensiva [Heat]"
     },
     "type": "first",
@@ -19067,7 +19067,7 @@
       "jp": "殲滅シーケンス稼働【高熱】",
       "kr": "섬멸 시퀀스 가동 [고열]",
       "zh": "歼灭代码启动【高温】",
-      "fr": "Initiate Annihilation Sequence [Heat]",
+      "fr": "Activation de la séquence d'anéantissement [Chaleur]",
       "es": "Inicia Secuencia Aniquil. [Heat]"
     },
     "type": "first",
@@ -22032,7 +22032,7 @@
       "jp": "人でも獣でもない",
       "kr": "사람도 짐승도 아닌",
       "zh": "非人非兽",
-      "fr": "Neither Human Nor Beast",
+      "fr": "Ni homme ni bête",
       "es": "Ni Humano ni Bestia"
     },
     "type": "monster_1",
@@ -24741,7 +24741,7 @@
       "jp": "黄金砂の波動",
       "kr": "황금 모래의 물결",
       "zh": "金沙之浪",
-      "fr": "Golden Sand's Flow",
+      "fr": "Ondulation du sable doré",
       "es": "Flujo Arena Dorada"
     },
     "type": "monster_1",
@@ -26038,7 +26038,7 @@
       "jp": "敵全体にダメージを与え、<color=#28d9ed>[Buff_C_common_monster_buff_40]</color>の確率で対象の<color=#28d9ed>攻撃力</color>を<color=#28d9ed>[Buff_T_common_monster_buff_40]ターン</color>の間DOWNさせる。",
       "kr": "적 전체를 공격하고 <color=#28d9ed>[Buff_C_common_monster_buff_40]</color> 확률로 대상의 <color=#28d9ed>공격력</color>을 <color=#28d9ed>[Buff_T_common_monster_buff_40]턴</color> 동안 감소시킵니다.",
       "zh": "攻击全体敌人，并有<color=#28d9ed>[Buff_C_common_monster_buff_40]</color>的几率对目标造成<color=#28d9ed>攻击力</color>效果，持续<color=#28d9ed>[Buff_T_common_monster_buff_40]回合</color>。",
-      "fr": "attaque tous les ennemis and a une <color=#28d9ed>[Buff_C_common_monster_buff_40]</color> chance de inflict reduced <color=#28d9ed>ATQ</color> durant <color=#28d9ed>[Buff_T_common_monster_buff_40] tour(s)</color>.",
+      "fr": "Attaque tous les ennemis et a <color=#28d9ed>[Buff_C_common_monster_buff_40]</color> de chances de réduire l'<color=#28d9ed>ATQ</color> des cibles pendant <color=#28d9ed>[Buff_T_common_monster_buff_40] tour(s)</color>.",
       "es": "Ataca a los enemigos y tiene una prob. de <color=#28d9ed>[Buff_C_common_monster_buff_40]</color> de reducir el <color=#28d9ed>ATQ</color> del objetivo por <color=#28d9ed>[Buff_T_common_monster_buff_40] turno(s)</color>."
     },
     "target": "enemy",
@@ -26256,7 +26256,7 @@
       "jp": "敵全体にダメージを与え、<color=#28d9ed>[Buff_C_common_monster_buff_40]</color>の確率で対象の<color=#28d9ed>攻撃力</color>を<color=#28d9ed>[Buff_T_common_monster_buff_40]ターン</color>の間DOWNさせる。",
       "kr": "적 전체를 공격하고 <color=#28d9ed>[Buff_C_common_monster_buff_40]</color> 확률로 <color=#28d9ed>[Buff_T_common_monster_buff_40]턴</color> 동안 대상의 <color=#28d9ed>공격력</color>을 감소시킵니다.",
       "zh": "攻击全体敌人，并有<color=#28d9ed>[Buff_C_common_monster_buff_40]</color>的几率使目标的<color=#28d9ed>攻击力</color>降低，持续<color=#28d9ed>[Buff_T_common_monster_buff_40]回合</color>。",
-      "fr": "attaque tous les ennemis and a une <color=#28d9ed>[Buff_C_common_monster_buff_40]</color> chance de inflict reduced <color=#28d9ed>ATQ</color> durant <color=#28d9ed>[Buff_T_common_monster_buff_40] tour(s)</color>.",
+      "fr": "Attaque tous les ennemis et a <color=#28d9ed>[Buff_C_common_monster_buff_40]</color> de chances de réduire l'<color=#28d9ed>ATQ</color> des cibles pendant <color=#28d9ed>[Buff_T_common_monster_buff_40] tour(s)</color>.",
       "es": "Ataca a los enemigos y tiene una <color=#28d9ed>[Buff_C_common_monster_buff_40]</color> probabilidad de infligir una red. de la mejora <color=#28d9ed>ATQ</color> por <color=#28d9ed>[Buff_T_common_monster_buff_40] turno(s)</color>."
     },
     "target": "enemy",
@@ -26480,7 +26480,7 @@
       "jp": "波動斬り",
       "kr": "파도 베기",
       "zh": "波涛斩",
-      "fr": "Wave Slash",
+      "fr": "Entaille des vagues",
       "es": "Corte Ola"
     },
     "type": "second",
@@ -27426,12 +27426,12 @@
       }
     ],
     "desc": {
-      "en": "Attacks all enemies, and has a <color=#28d9ed>[Buff_C_common_monster_buff_40]</color> chance to inflict reduced <color=#28d9ed>Attack</color> on the target for <color=#28d9ed>[Buff_T_common_monster_buff_40 turn(s)</color>.",
+      "en": "Attacks all enemies, and has a <color=#28d9ed>[Buff_C_common_monster_buff_40]</color> chance to inflict reduced <color=#28d9ed>Attack</color> on the target for <color=#28d9ed>[Buff_T_common_monster_buff_40] turn(s)</color>.",
       "jp": "敵全体にダメージを与え、対象に<color=#28d9ed>[Buff_C_common_monster_buff_40]</color>の確率で、<color=#28d9ed>攻撃力</color>を<color=#28d9ed>[Buff_T_common_monster_buff_40]ターン</color>の間DOWNさせる。",
       "kr": "적 전체를 공격하고 <color=#28d9ed>[Buff_C_common_monster_buff_40]</color> 확률로 대상의 <color=#28d9ed>공격력</color>을 <color=#28d9ed>[Buff_T_common_monster_buff_40]턴</color> 동안 감소시킵니다.",
       "zh": "攻击全体敌人，并有<color=#28d9ed>[Buff_C_common_monster_buff_40]</color>的几率使<color=#28d9ed>攻击力</color>降低，持续<color=#28d9ed>[Buff_T_common_monster_buff_40]回合</color>。",
-      "fr": "attaque tous les ennemis, and a une <color=#28d9ed>[Buff_C_common_monster_buff_40]</color> chance de inflict reduced <color=#28d9ed>ATQ</color> à la cible durant <color=#28d9ed>[Buff_T_common_monster_buff_40 tour(s)</color>.",
-      "es": "Ataca a los enemigos y tiene una <color=#28d9ed>[Buff_C_common_monster_buff_40]</color> probabilidad de infligir una red. de la mejora <color=#28d9ed>ATQ</color> al objetivo por <color=#28d9ed>[Buff_T_common_monster_buff_40 turno(s)</color>."
+      "fr": "Attaque tous les ennemis et a <color=#28d9ed>[Buff_C_common_monster_buff_40]</color> de chances de réduire l'<color=#28d9ed>ATQ</color> des cibles pendant <color=#28d9ed>[Buff_T_common_monster_buff_40] tour(s)</color>.",
+      "es": "Ataca a los enemigos y tiene una <color=#28d9ed>[Buff_C_common_monster_buff_40]</color> probabilidad de infligir una red. de la mejora <color=#28d9ed>ATQ</color> al objetivo por <color=#28d9ed>[Buff_T_common_monster_buff_40] turno(s)</color>."
     },
     "target": "enemy",
     "range": "all",
@@ -27508,7 +27508,7 @@
       "jp": "竜に似た拳",
       "kr": "용을 닮은 권",
       "zh": "拟龙之拳",
-      "fr": "Dragon-like Fist",
+      "fr": "Poing du dragon",
       "es": "Puño tipo Dragón"
     },
     "type": "first",
@@ -28174,7 +28174,7 @@
       "jp": "敵全体にダメージを与え、<color=#28d9ed>[Buff_C_common_monster_buff_52]</color>の確率で<color=#28d9ed>呪い</color>を<color=#28d9ed>[Buff_T_common_monster_buff_52]ターン</color>の間付与する。",
       "kr": "적 전체를 공격하고 <color=#28d9ed>[Buff_C_common_monster_buff_52]</color> 확률로 <color=#28d9ed>[Buff_T_common_monster_buff_52]턴</color> 동안 <color=#28d9ed>저주</color>를 부여합니다.",
       "zh": "攻击全体敌人，并有<color=#28d9ed>[Buff_C_common_monster_buff_52]</color>的几率造成<color=#28d9ed>诅咒</color>效果，持续<color=#28d9ed>[Buff_T_common_monster_buff_52]回合</color>。",
-      "fr": "attaque tous les ennemis and a une <color=#28d9ed>[Buff_C_common_monster_buff_52]</color> chance de inflict <color=#28d9ed>Maudit</color> durant <color=#28d9ed>[Buff_T_common_monster_buff_52] tour(s)</color>.",
+      "fr": "Attaque tous les ennemis et a <color=#28d9ed>[Buff_C_common_monster_buff_52]</color> de chances de leur infliger <color=#28d9ed>Maudit</color> pendant <color=#28d9ed>[Buff_T_common_monster_buff_52] tour(s)</color>.",
       "es": "Ataca a los enemigos y tiene una <color=#28d9ed>[Buff_C_common_monster_buff_52]</color> probabilidad de infligir <color=#28d9ed>Maldición</color> por <color=#28d9ed>[Buff_T_common_monster_buff_52] turno(s)</color>."
     },
     "target": "enemy",
@@ -28477,7 +28477,7 @@
       "jp": "敵単体にダメージを与え、<color=#28d9ed>[Buff_C_common_monster_buff_70]</color>の確率で<color=#28d9ed>中毒</color>を<color=#28d9ed>[Buff_T_common_monster_buff_70]ターン</color>の間付与する。",
       "kr": "적을 공격하고 <color=#28d9ed>[Buff_C_common_monster_buff_70]</color> 확률로 <color=#28d9ed>[Buff_T_common_monster_buff_70]턴</color> 동안 <color=#28d9ed>중독</color>을 부여합니다.",
       "zh": "攻击敌人，并有<color=#28d9ed>[Buff_C_common_monster_buff_70]</color>的几率造成<color=#28d9ed>中毒</color>效果，持续<color=#28d9ed>[Buff_T_common_monster_buff_70]回合</color>。",
-      "fr": "attaque un ennemi, and a une <color=#28d9ed>[Buff_C_common_monster_buff_70]</color> chance de inflict <color=#28d9ed>Poisonné</color> durant <color=#28d9ed>[Buff_T_common_monster_buff_70] tour(s)</color>.",
+      "fr": "Attaque un ennemi et a <color=#28d9ed>[Buff_C_common_monster_buff_70]</color> de chances de lui infliger <color=#28d9ed>Poisonné</color> pendant <color=#28d9ed>[Buff_T_common_monster_buff_70] tour(s)</color>.",
       "es": "Ataca a un enemigo y tiene una prob. de <color=#28d9ed>[Buff_C_common_monster_buff_70]</color> de infligir <color=#28d9ed>Envenenado</color> por <color=#28d9ed>[Buff_T_common_monster_buff_70] turno(s)</color>."
     },
     "target": "enemy",
@@ -28529,7 +28529,7 @@
       "jp": "敵単体にダメージを与え、<color=#28d9ed>[Buff_C_common_monster_buff_67]</color>の確率で<color=#28d9ed>火傷</color>を<color=#28d9ed>[Buff_T_common_monster_buff_67]ターン</color>の間付与する。",
       "kr": "적을 공격하고 <color=#28d9ed>[Buff_C_common_monster_buff_67]</color> 확률로 <color=#28d9ed>[Buff_T_common_monster_buff_67]턴</color> 동안 <color=#28d9ed>화상</color>을 부여합니다.",
       "zh": "攻击敌人，并有<color=#28d9ed>[Buff_C_common_monster_buff_67]</color>的几率造成<color=#28d9ed>烧伤</color>效果，持续<color=#28d9ed>[Buff_T_common_monster_buff_67]回合</color>。",
-      "fr": "attaque un ennemi, and a une <color=#28d9ed>[Buff_C_common_monster_buff_67]</color> chance de inflict <color=#28d9ed>Brûlure</color> durant <color=#28d9ed>[Buff_T_common_monster_buff_67] tour(s)</color>.",
+      "fr": "Attaque un ennemi et a <color=#28d9ed>[Buff_C_common_monster_buff_67]</color> de chances de lui infliger <color=#28d9ed>Brûlure</color> pendant <color=#28d9ed>[Buff_T_common_monster_buff_67] tour(s)</color>.",
       "es": "Ataca a un enemigo, <color=#28d9ed>[Buff_C_common_monster_buff_67]</color> de probabilidad causa <color=#28d9ed>Quemadura</color> por <color=#28d9ed>[Buff_T_common_monster_buff_67] turno(s)</color>."
     },
     "target": "enemy",
@@ -28735,7 +28735,7 @@
       "jp": "敵単体にダメージを与え、<color=#28d9ed>[Buff_C_common_monster_buff_67]</color>の確率で<color=#28d9ed>火傷</color>を<color=#28d9ed>[Buff_T_common_monster_buff_67]ターン</color>の間付与する。",
       "kr": "적을 공격하고 <color=#28d9ed>[Buff_C_common_monster_buff_67]</color> 확률로 <color=#28d9ed>[Buff_T_common_monster_buff_67]턴</color> 동안 <color=#28d9ed>화상</color>을 부여합니다.",
       "zh": "攻击敌人，并有<color=#28d9ed>[Buff_C_common_monster_buff_67]</color>的几率造成<color=#28d9ed>烧伤</color>效果，持续<color=#28d9ed>[Buff_T_common_monster_buff_67]回合</color>。",
-      "fr": "attaque un ennemi, and a une <color=#28d9ed>[Buff_C_common_monster_buff_67]</color> chance de inflict <color=#28d9ed>Brûlure</color> durant <color=#28d9ed>[Buff_T_common_monster_buff_67] tour(s)</color>.",
+      "fr": "Attaque un ennemi et a <color=#28d9ed>[Buff_C_common_monster_buff_67]</color> de chances de lui infliger <color=#28d9ed>Brûlure</color> pendant <color=#28d9ed>[Buff_T_common_monster_buff_67] tour(s)</color>.",
       "es": "Ataca a un enemigo, <color=#28d9ed>[Buff_C_common_monster_buff_67]</color> de probabilidad causa <color=#28d9ed>Quemadura</color> por <color=#28d9ed>[Buff_T_common_monster_buff_67] turno(s)</color>."
     },
     "target": "enemy",
@@ -28837,7 +28837,7 @@
       "jp": "敵全体にダメージを与え、<color=#28d9ed>[Buff_C_common_monster_buff_71]</color>の確率で<color=#28d9ed>凍結</color>を<color=#28d9ed>[Buff_T_common_monster_buff_71]ターン</color>の間付与する。",
       "kr": "적 전체를 공격하고 <color=#28d9ed>[Buff_C_common_monster_buff_71]</color> 확률로 <color=#28d9ed>[Buff_T_common_monster_buff_71]턴</color> 동안 <color=#28d9ed>빙결</color>을 부여합니다.",
       "zh": "攻击全体敌人，并有<color=#28d9ed>[Buff_C_common_monster_buff_71]</color>的几率造成<color=#28d9ed>冰冻</color>效果，持续<color=#28d9ed>[Buff_T_common_monster_buff_71]回合</color>。",
-      "fr": "attaque tous les ennemis, and a une <color=#28d9ed>[Buff_C_common_monster_buff_71]</color> chance de inflict <color=#28d9ed>Gelé</color> durant <color=#28d9ed>[Buff_T_common_monster_buff_71] tour(s)</color>.",
+      "fr": "Attaque tous les ennemis et a <color=#28d9ed>[Buff_C_common_monster_buff_71]</color> de chances de leur infliger <color=#28d9ed>Gelé</color> pendant <color=#28d9ed>[Buff_T_common_monster_buff_71] tour(s)</color>.",
       "es": "Ataca a los enemigos, <color=#28d9ed>[Buff_C_common_monster_buff_71]</color> de probabilidad causa <color=#28d9ed>Congelado</color> por <color=#28d9ed>[Buff_T_common_monster_buff_71] turno(s)</color>."
     },
     "target": "enemy",
@@ -28891,7 +28891,7 @@
       "jp": "敵全体にダメージを与え、<color=#28d9ed>[Buff_C_common_monster_buff_71]</color>の確率で<color=#28d9ed>凍結</color>を<color=#28d9ed>[Buff_T_common_monster_buff_71]ターン</color>の間付与する。\\nこのスキルは凍結状態の場合、ダメージがUPする。",
       "kr": "적 전체를 공격하고 <color=#28d9ed>[Buff_C_common_monster_buff_71]</color> 확률로 <color=#28d9ed>[Buff_T_common_monster_buff_71]턴</color> 동안 <color=#28d9ed>빙결</color>을 부여합니다. \\n빙결 상태인 적에게 주는 피해가 증가합니다.",
       "zh": "攻击全体敌人，并有<color=#28d9ed>[Buff_C_common_monster_buff_71]</color>的几率造成<color=#28d9ed>冰冻</color>效果，持续<color=#28d9ed>[Buff_T_common_monster_buff_71]回合</color>。\\n对处于冰冻状态的敌人造成的伤害量提升。",
-      "fr": "attaque tous les ennemis, and a une <color=#28d9ed>[Buff_C_common_monster_buff_71]</color> chance de inflict <color=#28d9ed>Gelé</color> durant <color=#28d9ed>[Buff_T_common_monster_buff_71] tour(s)</color>.\\nIncreases dégâts infligés to ennemis inflicted with Frozen.",
+      "fr": "Attaque tous les ennemis et a <color=#28d9ed>[Buff_C_common_monster_buff_71]</color> de chances de leur infliger <color=#28d9ed>Gelé</color> pendant <color=#28d9ed>[Buff_T_common_monster_buff_71] tour(s)</color>.\\nAugmente les DGT infligés aux ennemis affectés par Gelé.",
       "es": "Ataca a los enemigos y tiene una prob. de <color=#28d9ed>[Buff_C_common_monster_buff_71]</color> de infligir <color=#28d9ed>Congelado</color> por\\n<color=#28d9ed>[Buff_T_common_monster_buff_71] turno(s)</color>. Sube el daño infligido a los enemigos con Congelación."
     },
     "target": "enemy",
@@ -29221,7 +29221,7 @@
       "jp": "フローズンニードル",
       "kr": "프로즌 니들",
       "zh": "冰霜针刺",
-      "fr": "Frozen Needle",
+      "fr": "Aiguille gelée",
       "es": "Aguja Congelada"
     },
     "type": "second",
@@ -29274,7 +29274,7 @@
       "jp": "フローズンウェーブ",
       "kr": "프로즌 웨이브",
       "zh": "冰霜波动",
-      "fr": "Frozen Wave",
+      "fr": "Vague gelée",
       "es": "Ola Congelada"
     },
     "type": "ultimate",
@@ -29300,7 +29300,7 @@
       "jp": "敵全体にダメージを与え、対象に<color=#28d9ed>[Buff_C_common_monster_buff_126]</color>の確率で<color=#28d9ed>凍結</color>を<color=#28d9ed>[Buff_T_common_monster_buff_126]ターン</color>の間付与する。",
       "kr": "적 전체를 공격하고 <color=#28d9ed>[Buff_C_common_monster_buff_126]</color> 확률로 <color=#28d9ed>[Buff_T_common_monster_buff_126]턴</color> 동안 대상에게 <color=#28d9ed>빙결</color>을 부여합니다.",
       "zh": "攻击全体敌人，并有<color=#28d9ed>[Buff_C_common_monster_buff_126]</color>的几率对目标造成<color=#28d9ed>冰冻</color>效果，持续<color=#28d9ed>[Buff_T_common_monster_buff_126]回合</color>。",
-      "fr": "attaque tous les ennemis, and a une <color=#28d9ed>[Buff_C_common_monster_buff_126]</color> chance de inflict <color=#28d9ed>Gelé</color> à la cible durant <color=#28d9ed>[Buff_T_common_monster_buff_126] tour(s).</color>",
+      "fr": "Attaque tous les ennemis et a <color=#28d9ed>[Buff_C_common_monster_buff_126]</color> de chances d'infliger <color=#28d9ed>Gelé</color> aux cibles pendant <color=#28d9ed>[Buff_T_common_monster_buff_126] tour(s).</color>",
       "es": "Ataca a todos y tiene <color=#28d9ed>[Buff_C_common_monster_buff_126]</color> de infligir <color=#28d9ed>Congelado</color> por <color=#28d9ed>[Buff_T_common_monster_buff_126] turno(s).</color>"
     },
     "target": "enemy",
@@ -29499,7 +29499,7 @@
       "jp": "敵単体にダメージを与え、対象に<color=#28d9ed>[Buff_C_common_monster_buff_58]</color>確率で<color=#28d9ed>火傷</color>を<color=#28d9ed>[Buff_T_common_monster_buff_58]ターン</color>の間付与する。",
       "kr": "적을 공격하고 <color=#28d9ed>[Buff_C_common_monster_buff_58]</color> 확률로 <color=#28d9ed>[Buff_T_common_monster_buff_58]턴</color> 동안 <color=#28d9ed>화상</color>을 부여합니다.",
       "zh": "攻击敌人，并有<color=#28d9ed>[Buff_C_common_monster_buff_58]</color>的几率造成<color=#28d9ed>烧伤</color>效果，持续<color=#28d9ed>[Buff_T_common_monster_buff_58]回合</color>。",
-      "fr": "attaque un ennemi, and a une <color=#28d9ed>[Buff_C_common_monster_buff_58]</color> chance de inflict <color=#28d9ed>Brûlure</color> durant <color=#28d9ed>[Buff_T_common_monster_buff_58] tour(s)</color>.",
+      "fr": "Attaque un ennemi et a <color=#28d9ed>[Buff_C_common_monster_buff_58]</color> de chances de lui infliger <color=#28d9ed>Brûlure</color> pendant <color=#28d9ed>[Buff_T_common_monster_buff_58] tour(s)</color>.",
       "es": "Ataca a un enemigo y tiene una <color=#28d9ed>[Buff_C_common_monster_buff_58]</color> probabilidad de infligir <color=#28d9ed>Quemadura</color> por <color=#28d9ed>[Buff_T_common_monster_buff_58] turno(s)</color>."
     },
     "target": "enemy",
@@ -29549,7 +29549,7 @@
       "jp": "敵単体にダメージを与え、対象に<color=#28d9ed>[Buff_C_common_monster_buff_58]</color>確率で<color=#28d9ed>火傷</color>を<color=#28d9ed>[Buff_T_common_monster_buff_58]ターン</color>の間付与する。",
       "kr": "적을 공격하고 <color=#28d9ed>[Buff_C_common_monster_buff_58]</color> 확률로 <color=#28d9ed>[Buff_T_common_monster_buff_58]턴</color> 동안 <color=#28d9ed>화상</color>을 부여합니다.",
       "zh": "攻击敌人，并有<color=#28d9ed>[Buff_C_common_monster_buff_58]</color>的几率造成<color=#28d9ed>烧伤</color>效果，持续<color=#28d9ed>[Buff_T_common_monster_buff_58]回合</color>。",
-      "fr": "attaque un ennemi, and a une <color=#28d9ed>[Buff_C_common_monster_buff_58]</color> chance de inflict <color=#28d9ed>Brûlure</color> durant <color=#28d9ed>[Buff_T_common_monster_buff_58] tour(s)</color>.",
+      "fr": "Attaque un ennemi et a <color=#28d9ed>[Buff_C_common_monster_buff_58]</color> de chances de lui infliger <color=#28d9ed>Brûlure</color> pendant <color=#28d9ed>[Buff_T_common_monster_buff_58] tour(s)</color>.",
       "es": "Ataca a un enemigo y tiene una <color=#28d9ed>[Buff_C_common_monster_buff_58]</color> probabilidad de infligir <color=#28d9ed>Quemadura</color> por <color=#28d9ed>[Buff_T_common_monster_buff_58] turno(s)</color>."
     },
     "target": "enemy",
@@ -29598,7 +29598,7 @@
       "jp": "敵単体にダメージを与え、対象に<color=#28d9ed>[Buff_C_common_monster_buff_32]</color>の確率で<color=#28d9ed>スタン</color>を<color=#28d9ed>[Buff_T_common_monster_buff_32]ターン</color>の間付与する。",
       "kr": "적을 공격하고 <color=#28d9ed>[Buff_C_common_monster_buff_32]</color> 확률로 <color=#28d9ed>[Buff_T_common_monster_buff_32]턴</color> 동안 <color=#28d9ed>스턴</color>을 부여합니다.",
       "zh": "攻击敌人，并有<color=#28d9ed>[Buff_C_common_monster_buff_32]</color>的几率造成<color=#28d9ed>晕眩</color>效果，持续<color=#28d9ed>[Buff_T_common_monster_buff_32]回合</color>。",
-      "fr": "attaque un ennemi, and a une <color=#28d9ed>[Buff_C_common_monster_buff_32]</color> chance de inflict <color=#28d9ed>Étourdi</color> durant <color=#28d9ed>[Buff_T_common_monster_buff_32] tour(s)</color>.",
+      "fr": "Attaque un ennemi et a <color=#28d9ed>[Buff_C_common_monster_buff_32]</color> de chances de lui infliger <color=#28d9ed>Étourdi</color> pendant <color=#28d9ed>[Buff_T_common_monster_buff_32] tour(s)</color>.",
       "es": "Ataca a un enemigo y, con <color=#28d9ed>[Buff_C_common_monster_buff_32]</color> de prob., causa <color=#28d9ed>Aturdimiento</color> por <color=#28d9ed>[Buff_T_common_monster_buff_32] turno(s)</color>."
     },
     "target": "enemy",
@@ -31528,7 +31528,7 @@
       "jp": "敵単体にダメージを与え、<color=#28d9ed>[Buff_C_common_monster_buff_84]</color>の確率で味方全体の<color=#28d9ed>強化効果</color>の持続ターンを<color=#28d9ed>[Buff_V_common_monster_buff_84]ターン</color>の間UPさせる。",
       "kr": "적을 공격하고 <color=#28d9ed>[Buff_C_common_monster_buff_84]</color> 확률로 아군 전체의 <color=#28d9ed>강화 효과</color> 지속 턴을 <color=#28d9ed>[Buff_V_common_monster_buff_84]턴</color> 증가시킵니다.",
       "zh": "攻击敌人，并有<color=#28d9ed>[Buff_C_common_monster_buff_84]</color>的几率使全体友军<color=#28d9ed>强化效果</color>的持续回合增加<color=#28d9ed>[Buff_V_common_monster_buff_84]回合</color>。",
-      "fr": "attaque un ennemi and a une <color=#28d9ed>[Buff_C_common_monster_buff_84]</color> chance de accroît the duration of <color=#28d9ed>Bonus</color> durant les alliés durant <color=#28d9ed>[Buff_V_common_monster_buff_84] tour(s)</color>.",
+      "fr": "Attaque un ennemi et a <color=#28d9ed>[Buff_C_common_monster_buff_84]</color> de chances de prolonger les <color=#28d9ed>Bonus</color> de tous les alliés de <color=#28d9ed>[Buff_V_common_monster_buff_84] tour(s)</color>.",
       "es": "Ataca a un enemigo con <color=#28d9ed>[Buff_C_common_monster_buff_84]</color> probabilidad de subir la duración de <color=#28d9ed>mejoras</color> a los aliados en <color=#28d9ed>[Buff_V_common_monster_buff_84] turno(s)</color>."
     },
     "target": "enemy",
@@ -31708,7 +31708,7 @@
       "jp": "サンドスピア",
       "kr": "샌드 스피어",
       "zh": "沙漠之矛",
-      "fr": "Sand Spear",
+      "fr": "Lance de sable",
       "es": "Lanza Arena"
     },
     "type": "first",
@@ -31990,7 +31990,7 @@
       "jp": "敵全体にダメージを与え、<color=#28d9ed>[Buff_C_common_monster_buff_94]</color>の確率で<color=#28d9ed>黄金砂漠の波動</color>のスキルターンが<color=#28d9ed>[Buff_V_common_monster_buff_94]ターン</color>減少する。",
       "kr": "적 전체를 공격하고, <color=#28d9ed>[Buff_C_common_monster_buff_94]</color>확률로 <color=#28d9ed>황금 사막의 파도</color>의 스킬 쿨타임이 <color=#28d9ed>[Buff_V_common_monster_buff_94]턴</color> 감소합니다.",
       "zh": "攻击全体敌人，并有<color=#28d9ed>[Buff_C_common_monster_buff_94]</color>的几率使<color=#28d9ed>黄金沙漠之涛</color>的技能冷却时间减少<color=#28d9ed>[Buff_V_common_monster_buff_94]回合</color>。",
-      "fr": "attaque tous les ennemis, and a une <color=#28d9ed>[Buff_C_common_monster_buff_94]</color> chance de reduce comp. cooldown of <color=#28d9ed>Golden Desert's Wave</color> by <color=#28d9ed>[Buff_V_common_monster_buff_94] tour(s)</color>.",
+      "fr": "Attaque tous les ennemis et a <color=#28d9ed>[Buff_C_common_monster_buff_94]</color> de chances de réduire le temps de recharge de <color=#28d9ed>Vague du désert doré</color> de <color=#28d9ed>[Buff_V_common_monster_buff_94] tour(s)</color>.",
       "es": "Ataca a los enemigos y tiene una <color=#28d9ed>[Buff_C_common_monster_buff_94]</color> probabilidad de Red. del Tiempo de recarga de <color=#28d9ed>Golden Desert's Wave</color> en <color=#28d9ed>[Buff_V_common_monster_buff_94] turno(s)</color>."
     },
     "target": "enemy",
@@ -32014,7 +32014,7 @@
       "jp": "黄金砂漠の波動",
       "kr": "황금 사막의 파도",
       "zh": "黄金沙漠之涛",
-      "fr": "Golden Desert's Wave",
+      "fr": "Vague du désert doré",
       "es": "Ola del Desierto Dorado"
     },
     "type": "ultimate",
@@ -32116,7 +32116,7 @@
       "jp": "黄金砂漠の震怒",
       "kr": "황금 사막의 진노",
       "zh": "黄金沙漠之怒",
-      "fr": "Golden Desert's Wrath",
+      "fr": "Courroux du désert doré",
       "es": "Ira del Desierto Dorado"
     },
     "type": "ultimate",
@@ -32475,7 +32475,7 @@
       "jp": "エアロスピン",
       "kr": "에어로 스핀",
       "zh": "气旋",
-      "fr": "Arrow Spin",
+      "fr": "Tourbillon aérien",
       "es": "Giro Flecha"
     },
     "type": "second",
@@ -32501,7 +32501,7 @@
       "jp": "敵全体にダメージを与え、<color=#28d9ed>[Buff_C_common_monster_buff_97]</color>の確率で味方全体の<color=#28d9ed>強化効果</color>を<color=#28d9ed>[Buff_V_common_monster_buff_97]ターン</color>増加させる。",
       "kr": "적 전체를 공격하고, <color=#28d9ed>[Buff_C_common_monster_buff_97]</color> 확률로 아군 전체의 <color=#28d9ed>강화 효과</color>를 <color=#28d9ed>[Buff_V_common_monster_buff_97]턴</color> 증가시킵니다.",
       "zh": "攻击全体敌人，并有<color=#28d9ed>[Buff_C_common_monster_buff_97]</color>的几率使全体友军的<color=#28d9ed>强化效果</color>提升，持续<color=#28d9ed>[Buff_V_common_monster_buff_97]回合</color>。",
-      "fr": "attaque tous les ennemis, and a une <color=#28d9ed>[Buff_C_common_monster_buff_97]</color> chance de accroît the duration of <color=#28d9ed>Bonus</color> of les alliés durant <color=#28d9ed>[Buff_V_common_monster_buff_97] tour(s)</color>.",
+      "fr": "Attaque tous les ennemis et a <color=#28d9ed>[Buff_C_common_monster_buff_97]</color> de chances de prolonger les <color=#28d9ed>Bonus</color> de tous les alliés de <color=#28d9ed>[Buff_V_common_monster_buff_97] tour(s)</color>.",
       "es": "Ataca a todos los enemigos; con <color=#28d9ed>[Buff_C_common_monster_buff_97]</color> de prob., aumenta la duración de los <color=#28d9ed>mejoras</color> de aliados en <color=#28d9ed>[Buff_V_common_monster_buff_97] turnos</color>."
     },
     "target": "enemy",
@@ -32557,7 +32557,7 @@
       "jp": "敵全体にダメージを与え、味方全体に<color=#28d9ed>[Buff_C_common_monster_buff_96]</color>の確率で<color=#28d9ed>免疫/継続回復</color>を<color=#28d9ed>[Buff_T_common_monster_buff_96]ターン</color>の間付与する。",
       "kr": "적 전체를 공격하고, 아군 전체에게 <color=#28d9ed>[Buff_C_common_monster_buff_96]</color> 확률로 <color=#28d9ed>[Buff_T_common_monster_buff_96]턴</color> 동안 <color=#28d9ed>면역/지속 회복</color>을 부여합니다.",
       "zh": "攻击全体敌人，并有<color=#28d9ed>[Buff_C_common_monster_buff_96]</color>的几率使全体友军获得<color=#28d9ed>免疫/持续恢复</color>效果，持续<color=#28d9ed>[Buff_T_common_monster_buff_96]回合</color>。",
-      "fr": "attaque tous les ennemis, and a une <color=#28d9ed>[Buff_C_common_monster_buff_96]</color> chance de grant <color=#28d9ed>Immunité/Sustained Recovery</color> to les alliés durant <color=#28d9ed>[Buff_T_common_monster_buff_96] tour(s)</color>.",
+      "fr": "Attaque tous les ennemis et a <color=#28d9ed>[Buff_C_common_monster_buff_96]</color> de chances d'accorder <color=#28d9ed>Immunité/Régénération</color> à tous les alliés pendant <color=#28d9ed>[Buff_T_common_monster_buff_96] tour(s)</color>.",
       "es": "Ataca enemigos con <color=#28d9ed>[Buff_C_common_monster_buff_96]</color> probabilidad de dar <color=#28d9ed>Inmunidad/Recuperación sostenida</color> a aliados por <color=#28d9ed>[Buff_T_common_monster_buff_96] turno(s)</color>."
     },
     "target": "enemy",
@@ -32771,7 +32771,7 @@
       "jp": "敵全体にダメージを与え、対象に<color=#28d9ed>[Buff_C_common_monster_buff_67_2]</color>の確率で<color=#28d9ed>火傷</color>を<color=#28d9ed>[Buff_T_common_monster_buff_67_2]ターン</color>の間付与する。(解除不可)",
       "kr": "적 전체를 공격하고, 대상에게 <color=#28d9ed>[Buff_C_common_monster_buff_67_2]</color> 확률로 <color=#28d9ed>[Buff_T_common_monster_buff_67_2]턴</color> 동안 <color=#28d9ed>화상</color>을 부여합니다. (해제 불가)",
       "zh": "攻击全体敌人，并有<color=#28d9ed>[Buff_C_common_monster_buff_67_2]</color>的几率对目标造成<color=#28d9ed>烧伤</color>效果，持续<color=#28d9ed>[Buff_T_common_monster_buff_67_2]回合</color>。(无法解除)",
-      "fr": "attaque tous les ennemis, and a une <color=#28d9ed>[Buff_C_common_monster_buff_67_2]</color> chance de inflict <color=#28d9ed>Brûlure</color> à la cible durant <color=#28d9ed>[Buff_T_common_monster_buff_67_2] tour(s)</color>. (Irremovable)",
+      "fr": "Attaque tous les ennemis et a <color=#28d9ed>[Buff_C_common_monster_buff_67_2]</color> de chances d'infliger <color=#28d9ed>Brûlure</color> aux cibles pendant <color=#28d9ed>[Buff_T_common_monster_buff_67_2] tour(s)</color> (indissipable).",
       "es": "Ataca a los enemigos y tiene <color=#28d9ed>[Buff_C_common_monster_buff_67_2]</color> probabilidad de infligir <color=#28d9ed>Quemadura</color> al objetivo por <color=#28d9ed>[Buff_T_common_monster_buff_67_2] turno(s)</color> (Irremovable)"
     },
     "target": "enemy",
@@ -32844,7 +32844,7 @@
       "jp": "魔性の断閃",
       "kr": "가로지르는 마성",
       "zh": "魔性横斩",
-      "fr": "Demonic Slash",
+      "fr": "Entaille démoniaque",
       "es": "Corte Demoníaco"
     },
     "type": "first",
@@ -33499,7 +33499,7 @@
       "jp": "古代の拳",
       "kr": "고대의 주먹",
       "zh": "远古拳头",
-      "fr": "Ancient Fist",
+      "fr": "Poing antique",
       "es": "Puño Antiguo"
     },
     "type": "first",
@@ -33677,7 +33677,7 @@
       "jp": "敵全体にダメージを与える。<color=#28d9ed>[Buff_C_common_monster_buff_147]</color>の確率で対象の会心ダメージを<color=#28d9ed>[Buff_T_common_monster_buff_147]ターン</color>の間DOWNさせる。",
       "kr": "적 전체를 공격하고 <color=#28d9ed>[Buff_C_common_monster_buff_147]</color> 확률로 <color=#28d9ed>[Buff_T_common_monster_buff_147]턴</color> 동안 대상의 <color=#28d9ed>치명 피해</color>를 감소시킵니다.",
       "zh": "攻击全体敌人，并有<color=#28d9ed>[Buff_C_common_monster_buff_147]</color>的几率使目标<color=#28d9ed>暴击伤害</color>降低，持续<color=#28d9ed>[Buff_T_common_monster_buff_147]回合</color>。",
-      "fr": "attaque tous les ennemis, and a une <color=#28d9ed>[Buff_C_common_monster_buff_147]</color> chance de inflict reduced <color=#28d9ed>DGT CRIT</color> à la cible durant <color=#28d9ed>[Buff_T_common_monster_buff_147] tour(s)</color>.",
+      "fr": "Attaque tous les ennemis et a <color=#28d9ed>[Buff_C_common_monster_buff_147]</color> de chances de réduire les <color=#28d9ed>DGT CRIT</color> des cibles pendant <color=#28d9ed>[Buff_T_common_monster_buff_147] tour(s)</color>.",
       "es": "Ataca a los enemigos y tiene <color=#28d9ed>[Buff_C_common_monster_buff_147]</color> probabilidad de reducir el <color=#28d9ed>Daño CRIT</color> del objetivo por <color=#28d9ed>[Buff_T_common_monster_buff_147] turno(s)</color>"
     },
     "target": "enemy",
@@ -34193,7 +34193,7 @@
       "jp": "敵全体にダメージを与え、対象に<color=#28d9ed>[Buff_C_common_monster_buff_113]</color>の確率で<color=#28d9ed>中毒</color>2個を<color=#28d9ed>[Buff_T_common_monster_buff_113]ターン</color>の間付与する。",
       "kr": "적 전체를 공격하고 <color=#28d9ed>[Buff_C_common_monster_buff_113]</color> 확률로 <color=#28d9ed>[Buff_T_common_monster_buff_113]턴</color> 동안 대상에게 <color=#28d9ed>중독</color>을 부여합니다. (2회 적용)",
       "zh": "攻击全体敌人，并有<color=#28d9ed>[Buff_C_common_monster_buff_113]</color>的几率对目标造成<color=#28d9ed>中毒</color>效果，持续<color=#28d9ed>[Buff_T_common_monster_buff_113]回合</color>。(可叠加2次)",
-      "fr": "attaque tous les ennemis, and a une <color=#28d9ed>[Buff_C_common_monster_buff_113]</color> chance de inflict <color=#28d9ed>Poisonné</color> à la cible durant <color=#28d9ed>[Buff_T_common_monster_buff_113] tour(s)</color>. (Applied 2 times)",
+      "fr": "Attaque tous les ennemis et a <color=#28d9ed>[Buff_C_common_monster_buff_113]</color> de chances d'infliger <color=#28d9ed>Poisonné</color> aux cibles pendant <color=#28d9ed>[Buff_T_common_monster_buff_113] tour(s)</color> (2 applications).",
       "es": "Ataca a los enemigos, y tiene una prob. de <color=#28d9ed>[Buff_C_common_monster_buff_113]</color> de infligir <color=#28d9ed>Envenenado</color> al objetivo por <color=#28d9ed>[Buff_T_common_monster_buff_113] turno(s)</color>. (Se aplica 2 veces)"
     },
     "target": "enemy",
@@ -34649,7 +34649,7 @@
       "jp": "敵全体にダメージを与え、対象に<color=#28d9ed>[Buff_C_common_monster_buff_132]</color>の確率で<color=#28d9ed>火傷</color>2個を<color=#28d9ed>[Buff_T_common_monster_buff_132]ターン</color>の間付与する。",
       "kr": "적 전체를 공격하고 <color=#28d9ed>[Buff_C_common_monster_buff_132]</color> 확률로 <color=#28d9ed>[Buff_T_common_monster_buff_132]턴</color> 동안 대상에게 <color=#28d9ed>화상</color>을 부여합니다. (2회 적용)",
       "zh": "攻击全体敌人，并有<color=#28d9ed>[Buff_C_common_monster_buff_132]</color>的几率对目标造成<color=#28d9ed>烧伤</color>效果，持续<color=#28d9ed>[Buff_T_common_monster_buff_132]回合</color>。(可叠加2次)",
-      "fr": "attaque tous les ennemis, and a une <color=#28d9ed>[Buff_C_common_monster_buff_132]</color> chance de inflict <color=#28d9ed>Brûlure</color> à la cible durant <color=#28d9ed>[Buff_T_common_monster_buff_132] tour(s)</color>. (Applied 2 times)",
+      "fr": "Attaque tous les ennemis et a <color=#28d9ed>[Buff_C_common_monster_buff_132]</color> de chances d'infliger <color=#28d9ed>Brûlure</color> aux cibles pendant <color=#28d9ed>[Buff_T_common_monster_buff_132] tour(s)</color> (2 applications).",
       "es": "Ataca a los enemigos, y tiene una prob. de <color=#28d9ed>[Buff_C_common_monster_buff_132]</color> de infligir <color=#28d9ed>Quemadura</color> al objetivo por <color=#28d9ed>[Buff_T_common_monster_buff_132] turno(s)</color>. (Se aplica 2 veces)"
     },
     "target": "enemy",
@@ -34829,7 +34829,7 @@
       "jp": "精霊の裁き",
       "kr": "정령의 징벌",
       "zh": "精灵制裁",
-      "fr": "Spirit's Punishment",
+      "fr": "Châtiment de l'esprit",
       "es": "Castigo Espiritual"
     },
     "type": "ultimate",
@@ -35151,7 +35151,7 @@
       "jp": "敵単体にダメージを与え、<color=#28d9ed>[Buff_C_common_monster_buff_79]</color>の確率で自分の行動ゲージを<color=#28d9ed>[Buff_V_common_monster_buff_79]</color>UPさせる。",
       "kr": "적을 공격하고 <color=#28d9ed>[Buff_C_common_monster_buff_79]</color> 확률로 자신의 행동 게이지를 <color=#28d9ed>[Buff_V_common_monster_buff_79]</color> 증가시킵니다.",
       "zh": "攻击敌人，并有<color=#28d9ed>[Buff_C_common_monster_buff_79]</color>的几率使自身行动值提升<color=#28d9ed>[Buff_V_common_monster_buff_79]</color>。",
-      "fr": "attaque un ennemi, and a une <color=#28d9ed>[Buff_C_common_monster_buff_79]</color> chance de accroît priorité of the lanceur by <color=#28d9ed>[Buff_V_common_monster_buff_79]</color>.",
+      "fr": "Attaque un ennemi et a <color=#28d9ed>[Buff_C_common_monster_buff_79]</color> de chances d'augmenter sa Prior. de <color=#28d9ed>[Buff_V_common_monster_buff_79]</color>.",
       "es": "Ataca a un enemigo y tiene una <color=#28d9ed>[Buff_C_common_monster_buff_79]</color> probabilidad de aumentar la Prior. propio en <color=#28d9ed>[Buff_V_common_monster_buff_79]</color>."
     },
     "target": "enemy",
@@ -36352,7 +36352,7 @@
       "jp": "燃え上がる拳",
       "kr": "솟아나는 주먹",
       "zh": "力如拳涌",
-      "fr": "Rising Fist",
+      "fr": "Poing ascendant",
       "es": "Puño Asc."
     },
     "type": "second",
@@ -37723,7 +37723,7 @@
       "jp": "完成：熱光線乱射",
       "kr": "완성 : 열광선 난사",
       "zh": "完成：热射线扫射",
-      "fr": "Completion: Heat Ray Spray",
+      "fr": "Achèvement : Rafale de rayons thermiques",
       "es": "Completado: Rociada de Rayo Calórico"
     },
     "type": "first",
@@ -42384,7 +42384,7 @@
     ],
     "desc": {
       "en": "(Passive Effect) Fixed Damage taken cannot exceed <color=#28d9ed>100000</color>.\\nWhen hit, increases the caster's Priority by <color=#28d9ed>5%</color>, and when an enemy ends its action while the caster is not affected by <color=#28d9ed>Cursed</color>, decreases Skill Cooldown by <color=#28d9ed>1 turn</color>.\\nIf the caster has no debuffs, takes no WG damage.",
-      "jp": "(パッシブ効果)受ける固定ダメージは最大<color=#28d9ed>100000</color>を超えない。\\n攻撃を受けると自分の行動ゲージが<color=#28d9ed>5%</color>UPし、<color=#28d9ed>呪い</color>がない状態で敵の行動終了時、スキルクールタイムが<color=#28d9ed>1ターン</color>短縮する。\\n弱体効果がない場合、WGダメージを受けない。",
+      "jp": "(パッシブ効果)受ける固定ダメージは最大<color=#28d9ed>100000</color>を超えない。\\n攻撃を受けると自分の行動ゲージが<color=#28d9ed>5%</color>UPし、<color=#28d9ed>呪い</color>がない状態で敵の行動終了時、スキルターンが<color=#28d9ed>1ターン</color>減少する。\\n弱体効果がない場合、WGダメージを受けない。",
       "kr": "(패시브 효과) 고정 피해로 받는 피해는 최대 <color=#28d9ed>100000</color>을 초과하지 않습니다.\\n피격 시 자신의 행동 게이지를 <color=#28d9ed>5%</color> 증가시키고 <color=#28d9ed>저주</color> 미 보유 상태에서 적 행동 종료 시 스킬 쿨타임을 <color=#28d9ed>1턴</color> 감소시킵니다.\\n약화 효과가 없다면 WG 피해를 받지 않습니다.",
       "zh": "（被动效果）受到的固定伤害不会超过<color=#28d9ed>100000</color>。\\n受到攻击时，自身行动值提升<color=#28d9ed>5%</color>；未持有<color=#28d9ed>诅咒</color>时，敌方行动结束后技能冷却时间减少<color=#28d9ed>1回合</color>。\\n若没有弱化效果，则不会受到WG伤害。",
       "fr": "(Effet passif) Les Dégâts fixes subis ne peuvent pas dépasser <color=#28d9ed>100000</color>.\\nLorsqu'il est touché, augmente la Priorité du lanceur de <color=#28d9ed>5 %</color>. Lorsqu'un ennemi termine son action alors que le lanceur n'est pas affecté par <color=#28d9ed>Malédiction</color>, réduit le temps de recharge de compétence de <color=#28d9ed>1 tour</color>.\\nSans malus, ne subit aucun dégât de WG.",
@@ -49406,7 +49406,7 @@
       "jp": "ガーディアンスラッシュ",
       "kr": "가디언 슬래쉬",
       "zh": "守护者劈斩",
-      "fr": "Guardian Slash",
+      "fr": "Entaille du gardien",
       "es": "Corte del Guardián"
     },
     "type": "first",
@@ -66283,7 +66283,7 @@
       "jp": "天使の歌声",
       "kr": "꾀꼬리 같은 목소리",
       "zh": "黄莺般的嗓音",
-      "fr": "Voice of a Songbird",
+      "fr": "Voix de rossignol",
       "es": "Voz Pajarillo Cant."
     },
     "type": "first",
@@ -66668,7 +66668,7 @@
       "jp": "<color=#28d9ed>[Buff_C_tower_hard_mob_26_07]</color>の確率で味方全体の<color=#28d9ed>会心率</color>を<color=#28d9ed>[Buff_T_tower_hard_mob_26_07]ターン</color>の間UPさせた後、敵単体にダメージを与える。\\n会心が発生した場合、<color=#28d9ed>[Buff_C_tower_hard_mob_26_07]</color>の確率で対象に<color=#28d9ed>沈黙</color>を<color=#28d9ed>[Buff_T_tower_hard_mob_26_07]ターン</color>の間付与する。",
       "kr": "<color=#28d9ed>[Buff_C_tower_hard_mob_26_07]</color> 확률로 <color=#28d9ed>[Buff_T_tower_hard_mob_26_07]턴</color> 동안 아군 전체의 <color=#28d9ed>치명 확률</color>을 증가시킨 후 적을 공격합니다.\\n치명 공격 시 <color=#28d9ed>[Buff_C_tower_hard_mob_26_07]</color> 확률로 <color=#28d9ed>[Buff_T_tower_hard_mob_26_07]턴</color> 동안 대상에게 <color=#28d9ed>침묵</color>을 부여합니다.",
       "zh": "有<color=#28d9ed>[Buff_C_tower_hard_mob_26_07]</color>的几率使全体友军的<color=#28d9ed>暴击率</color>提升，持续<color=#28d9ed>[Buff_T_tower_hard_mob_26_07]回合</color>后，攻击敌人。\\n发动暴击时，有<color=#28d9ed>[Buff_C_tower_hard_mob_26_07]</color>的几率对目标造成<color=#28d9ed>沉默</color>效果，持续<color=#28d9ed>[Buff_T_tower_hard_mob_26_07]回合</color>。",
-      "fr": "a une <color=#28d9ed>[Buff_C_tower_hard_mob_26_07]</color> chance de grant les alliés increased <color=#28d9ed>Tx CRIT</color> durant <color=#28d9ed>[Buff_T_tower_hard_mob_26_07] tour(s)</color>, avant attacking an ennemi.\\nWhen scoring a critical touché, a une <color=#28d9ed>[Buff_C_tower_hard_mob_26_07]</color> chance de inflict <color=#28d9ed>Silence</color> à la cible durant <color=#28d9ed>[Buff_T_tower_hard_mob_26_07] tour(s)</color>.",
+      "fr": "A <color=#28d9ed>[Buff_C_tower_hard_mob_26_07]</color> de chances d'augmenter le <color=#28d9ed>Tx CRIT</color> de tous les alliés pendant <color=#28d9ed>[Buff_T_tower_hard_mob_26_07] tour(s)</color>, puis attaque un ennemi.\\nEn infligeant un coup critique, a <color=#28d9ed>[Buff_C_tower_hard_mob_26_07]</color> de chances d'infliger <color=#28d9ed>Silence</color> à la cible pendant <color=#28d9ed>[Buff_T_tower_hard_mob_26_07] tour(s)</color>.",
       "es": "Antes de atacar, tiene <color=#28d9ed>[Buff_C_tower_hard_mob_26_07]</color> probabilidad de subir la <color=#28d9ed>Prob. CRIT</color> a aliados por <color=#28d9ed>[Buff_T_tower_hard_mob_26_07] turno(s)</color>.\\nAl asestar un golpe crítico, tiene una <color=#28d9ed>[Buff_C_tower_hard_mob_26_07]</color> probabilidad de infligir <color=#28d9ed>Silenciado</color> al objetivo por <color=#28d9ed>[Buff_T_tower_hard_mob_26_07] turno(s)</color>."
     },
     "target": "enemy",
@@ -71831,7 +71831,7 @@
       "jp": "ネバネバコブシ",
       "kr": "점액질 주먹",
       "zh": "粘液拳头",
-      "fr": "Slimy Fist",
+      "fr": "Poing visqueux",
       "es": "Puño Viscoso"
     },
     "type": "first",
@@ -72364,7 +72364,7 @@
       "jp": "ネバネバコブシ",
       "kr": "점액질 주먹",
       "zh": "粘液拳头",
-      "fr": "Slimy Fist",
+      "fr": "Poing visqueux",
       "es": "Puño Viscoso"
     },
     "type": "first",
@@ -81826,7 +81826,7 @@
       "jp": "(パッシブ効果)\\n攻撃を受けた時、<color=#28d9ed>[Buff_C_common_boss_monster_passive_12_1]</color>の確率でスキルターンを<color=#28d9ed>[Buff_V_common_boss_monster_passive_12_1]ターン</color>減少させる。\\n戦闘開始時、自分に<color=#28d9ed>免疫</color>を<color=#28d9ed>[Buff_T_common_boss_monster_passive_12]ターン</color>の間付与する。",
       "kr": "(패시브 효과)\\n피격 시 쿨타임을 <color=#28d9ed>[Buff_C_common_boss_monster_passive_12_1]</color> 확률로 <color=#28d9ed>[Buff_V_common_boss_monster_passive_12_1]턴</color> 감소시킵니다.\\n전투 시작 시 <color=#28d9ed>[Buff_T_common_boss_monster_passive_12]턴</color> 동안 <color=#28d9ed>면역</color> 상태가 됩니다.",
       "zh": "(被动效果)\\n受到攻击时，有<color=#28d9ed>[Buff_C_common_boss_monster_passive_12_1]</color>的几率使冷却时间减少<color=#28d9ed>[Buff_V_common_boss_monster_passive_12_1]回合</color>。\\n战斗开始时，获得<color=#28d9ed>免疫</color>效果，持续<color=#28d9ed>[Buff_T_common_boss_monster_passive_12]回合</color>。",
-      "fr": "(Passive effet)\\nHas a <color=#28d9ed>[Buff_C_common_boss_monster_passive_12_1]</color> chance de reduce cooldowns by <color=#28d9ed>[Buff_V_common_boss_monster_passive_12_1] tour(s)</color> si touché.\\nGrants <color=#28d9ed>Immunité</color> durant <color=#28d9ed>[Buff_T_common_boss_monster_passive_12] tour(s)</color> at the start of battle.",
+      "fr": "(Effet passif)\\nEn subissant une attaque, a <color=#28d9ed>[Buff_C_common_boss_monster_passive_12_1]</color> de chances de réduire ses temps de recharge de <color=#28d9ed>[Buff_V_common_boss_monster_passive_12_1] tour(s)</color>.\\nAu début du combat, obtient <color=#28d9ed>Immunité</color> pendant <color=#28d9ed>[Buff_T_common_boss_monster_passive_12] tour(s)</color>.",
       "es": "(Efecto pasivo) Tiene una <color=#28d9ed>[Buff_C_common_boss_monster_passive_12_1]</color> probabilidad de red. de recargas en\\n<color=#28d9ed>[Buff_V_common_boss_monster_passive_12_1] turno(s)</color> al ser golpeado.\\nOtorga <color=#28d9ed>Inmunidad</color> por <color=#28d9ed>[Buff_T_common_boss_monster_passive_12] turno(s)</color> al inicio de la batalla."
     },
     "icon": "MT_Passive_1_Earth",
@@ -82067,7 +82067,7 @@
       "jp": "人でも獣でもない",
       "kr": "사람도 짐승도 아닌",
       "zh": "非人非兽",
-      "fr": "Neither Human Nor Beast",
+      "fr": "Ni homme ni bête",
       "es": "Ni Humano ni Bestia"
     },
     "type": "monster_1",
@@ -82764,7 +82764,7 @@
       "jp": "黄金砂の波動",
       "kr": "황금 모래의 물결",
       "zh": "金沙之浪",
-      "fr": "Golden Sand's Flow",
+      "fr": "Ondulation du sable doré",
       "es": "Flujo Arena Dorada"
     },
     "type": "monster_1",
@@ -91319,7 +91319,7 @@
       "jp": "(パッシブ効果)全体攻撃でダメージを受けるたびに、自分に<color=#28d9ed>シールド</color>を<color=#28d9ed>[Buff_T_2000071_2_5]ターン</color>の間付与する。\\n\\n(発動効果)味方が敵を攻撃時、会心が発生した場合、もしくは敵から会心ダメージを受けた場合<color=#28d9ed>最も攻撃力が高い敵</color>に<color=#28d9ed>【強えぇヤツか!】</color>を使用する。\\n攻撃力の代わりに防御力が高いほどダメージがUPし、自分のHPと行動ゲージが<color=#28d9ed>[Buff_V_2000071_2_2]</color>回復する。",
       "kr": "(패시브 효과) 전체 공격으로 피격 될 때 마다 자신에게 <color=#28d9ed>실드</color>를 <color=#28d9ed>[Buff_T_2000071_2_5]턴</color> 동안 부여합니다.\\n\\n(발동 효과) 아군이 치명 공격을 하거나 당할 시 <color=#28d9ed>공격력이 가장 높은 적</color>에게 <color=#28d9ed>센 녀석이냐!</color>를 사용합니다.\\n공격력 대신 방어력에 비례하여 피해가 증가하며, 자신의 체력 및 행동게이지가 <color=#28d9ed>[Buff_V_2000071_2_2]</color> 회복합니다.",
       "zh": "(被动效果)每当受到全体攻击时，使自身获得<color=#28d9ed>护盾</color>效果，持续<color=#28d9ed>[Buff_T_2000071_2_5]回合</color>。\\n\\n(触发效果)友军发动暴击或受到暴击时，对<color=#28d9ed>攻击力最高的敌人</color>发动<color=#28d9ed>厉害的家伙！</color>。\\n根据防御力而非攻击力等比提升伤害，且使自身生命值和行动值恢复<color=#28d9ed>[Buff_V_2000071_2_2]</color>。",
-      "fr": "(Expression passive) Lorsqu'une attaque cible tous les ennemis est frappée, il donne un tour(s) <color=#28d9ed>Barrière</color> à l'utilisateur pour <color=#28d9ed>[Buff_T_2000071_2_5] tour(s)</color>.\\n\\n(Triggered Effect) Lorsqu'un allié marque ou prend un coup critique, active <color=#28d9ed>Are You Strong?!</color> sur l'ennemi <color=#28d9ed> avec la plus haute ATQ</color>.\\nLes DGT causés augmentent proportionnellement à la DÉF au lieu d'ATQ. Récupère PV et accroît la priorité propre par <color=#28d9ed>[Buff_V_2000071_2_2]</color>.",
+      "fr": "(Effet passif) Chaque fois que le lanceur subit une attaque de zone, s'accorde une <color=#28d9ed>Barrière</color> pendant <color=#28d9ed>[Buff_T_2000071_2_5] tour(s)</color>.\\n\\n(Effet déclenché) Lorsqu'un allié inflige ou subit un coup critique, utilise <color=#28d9ed>Êtes-vous fort?!!!</color> sur l'ennemi <color=#28d9ed>à l'ATQ la plus élevée</color>.\\nLes DGT augmentent en fonction de la DÉF au lieu de l'ATQ, et le lanceur récupère <color=#28d9ed>[Buff_V_2000071_2_2]</color> de ses PV et de sa Prior.",
       "es": "(Efecto pasivo) Al recibir un ataque que apunta a todos los enemigos, otorga una <color=#28d9ed>Barrera</color> al lanzador durante <color=#28d9ed>[Buff_T_2000071_2_5]\\nturno(s)</color>. (Efecto Activado) Cuando un aliado logra o recibe un golpe crítico,\\nactiva <color=#28d9ed>¿Eres fuerte?</color> en el <color=#28d9ed>enemigo con mayor ATQ</color>. El daño influido aumenta proporcionalmente a la DEF en lugar del ATQ.\\nRecupera Vida y aumenta la Prior. del lanzador en <color=#28d9ed>[Buff_V_2000071_2_2]</color>."
     },
     "target": "enemy",
@@ -91396,7 +91396,7 @@
       "jp": "金剛昇天拳",
       "kr": "금강승천권",
       "zh": "金刚升天拳",
-      "fr": "Ascending Diamond Fist",
+      "fr": "Poing de diamant ascendant",
       "es": "Puño Diamante Ascendente"
     },
     "type": "ultimate",
@@ -106007,7 +106007,7 @@
       "jp": "ガーディアンスラッシュ",
       "kr": "가디언 슬래쉬",
       "zh": "守护者劈斩",
-      "fr": "Guardian Slash",
+      "fr": "Entaille du gardien",
       "es": "Corte del Guardián"
     },
     "type": "first",
@@ -106100,7 +106100,7 @@
       "jp": "敵全体にダメージを与え、対象に<color=#28d9ed>[Buff_C_4044001_3_1]</color>の確率で<color=#28d9ed>スタン</color>を<color=#28d9ed>[Buff_T_4044001_3_1]ターン</color>の間付与する。",
       "kr": "적 전체를 공격하고 <color=#28d9ed>[Buff_C_4044001_3_1]</color> 확률로 대상을 <color=#28d9ed>[Buff_T_4044001_3_1]턴</color> 동안 <color=#28d9ed>스턴</color> 상태로 만듭니다.",
       "zh": "攻击全体敌人，并有<color=#28d9ed>[Buff_C_4044001_3_1]</color>的几率使目标陷入<color=#28d9ed>晕眩</color>状态，持续<color=#28d9ed>[Buff_T_4044001_3_1]回合</color>。",
-      "fr": "attaque tous les ennemis and a une <color=#28d9ed>[Buff_C_4044001_3_1]</color> chance de inflict <color=#28d9ed>Étourdi</color> à la cible durant <color=#28d9ed>[Buff_T_4044001_3_1] tour(s)</color>.",
+      "fr": "Attaque tous les ennemis et a <color=#28d9ed>[Buff_C_4044001_3_1]</color> de chances d'infliger <color=#28d9ed>Étourdi</color> aux cibles pendant <color=#28d9ed>[Buff_T_4044001_3_1] tour(s)</color>.",
       "es": "Ataca a los enemigos y tiene una <color=#28d9ed>[Buff_C_4044001_3_1]</color> probabilidad de infligir <color=#28d9ed>Aturdimiento</color> al objetivo por <color=#28d9ed>[Buff_T_4044001_3_1] turno(s)</color>."
     },
     "target": "enemy",
@@ -110764,7 +110764,7 @@
       "jp": "敵全体にダメージを与え、対象に<color=#28d9ed>[Buff_C_4004002_2_1]</color>の確率で<color=#28d9ed>凍結</color>を<color=#28d9ed>[Buff_T_4004002_2_1]ターン</color>の間付与する。",
       "kr": "적 전체를 공격하고 <color=#28d9ed>[Buff_C_4004002_2_1]</color> 확률로 대상에게 <color=#28d9ed>[Buff_T_4004002_2_1]턴</color> 동안 <color=#28d9ed>빙결</color>을 부여합니다.",
       "zh": "攻击全体敌人，并有<color=#28d9ed>[Buff_C_4004002_2_1]</color>的几率对目标造成<color=#28d9ed>冰冻</color>效果，持续<color=#28d9ed>[Buff_T_4004002_2_1]回合</color>。",
-      "fr": "attaque tous les ennemis and a une <color=#28d9ed>[Buff_C_4004002_2_1]</color> chance de inflict <color=#28d9ed>Gelé</color> à la cible durant <color=#28d9ed>[Buff_T_4004002_2_1] tour(s)</color>.",
+      "fr": "Attaque tous les ennemis et a <color=#28d9ed>[Buff_C_4004002_2_1]</color> de chances d'infliger <color=#28d9ed>Gelé</color> aux cibles pendant <color=#28d9ed>[Buff_T_4004002_2_1] tour(s)</color>.",
       "es": "Ataca a los enemigos. <color=#28d9ed>[Buff_C_4004002_2_1]</color> probabilidad de infligir <color=#28d9ed>Congelado</color> al objetivo por <color=#28d9ed>[Buff_T_4004002_2_1] turno(s)</color>"
     },
     "target": "enemy",
@@ -110817,7 +110817,7 @@
       "jp": "敵全体にダメージを与え、対象に<color=#28d9ed>[Buff_C_4004002_3_1]</color>の確率で<color=#28d9ed>感電</color>を<color=#28d9ed>[Buff_T_4004002_3_1]ターン</color>の間付与する。",
       "kr": "적 전체를 공격하고 <color=#28d9ed>[Buff_C_4004002_3_1]</color> 확률로 대상에게 <color=#28d9ed>[Buff_T_4004002_3_1]턴</color> 동안 <color=#28d9ed>감전</color>을 부여합니다.",
       "zh": "攻击全体敌人，并有<color=#28d9ed>[Buff_C_4004002_3_1]</color>的几率对目标造成<color=#28d9ed>触电</color>效果，持续<color=#28d9ed>[Buff_T_4004002_3_1]回合</color>。",
-      "fr": "attaque tous les ennemis and a une <color=#28d9ed>[Buff_C_4004002_3_1]</color> chance de inflict <color=#28d9ed>Électrocuté</color> à la cible durant <color=#28d9ed>[Buff_T_4004002_3_1] tour(s)</color>.",
+      "fr": "Attaque tous les ennemis et a <color=#28d9ed>[Buff_C_4004002_3_1]</color> de chances d'infliger <color=#28d9ed>Électrocuté</color> aux cibles pendant <color=#28d9ed>[Buff_T_4004002_3_1] tour(s)</color>.",
       "es": "Ataca a los enemigos y tiene una <color=#28d9ed>[Buff_C_4004002_3_1]</color> probabilidad de infligir <color=#28d9ed>Electrocutado</color> al objetivo por <color=#28d9ed>[Buff_T_4004002_3_1] turno(s)</color>."
     },
     "target": "enemy",
@@ -122190,7 +122190,7 @@
       "jp": "敵全体にダメージを与え、対象に<color=#28d9ed>[Buff_C_4054001_1_1]</color>の確率で<color=#28d9ed>スタン</color>を<color=#28d9ed>[Buff_T_4054001_1_1]ターン</color>の間付与する。",
       "kr": "적 전체를 공격하고 <color=#28d9ed>[Buff_C_4054001_1_1]</color> 확률로 대상을 <color=#28d9ed>[Buff_T_4054001_1_1]턴</color> 동안 <color=#28d9ed>스턴</color> 상태로 만듭니다.",
       "zh": "攻击全体敌人，并有<color=#28d9ed>[Buff_C_4054001_1_1]</color>的几率使目标陷入<color=#28d9ed>晕眩</color>状态，持续<color=#28d9ed>[Buff_T_4054001_1_1]回合</color>。",
-      "fr": "attaque tous les ennemis and a une <color=#28d9ed>[Buff_C_4054001_1_1]</color> chance de inflict <color=#28d9ed>Étourdi</color> à la cible durant <color=#28d9ed>[Buff_T_4054001_1_1] tour(s)</color>.",
+      "fr": "Attaque tous les ennemis et a <color=#28d9ed>[Buff_C_4054001_1_1]</color> de chances d'infliger <color=#28d9ed>Étourdi</color> aux cibles pendant <color=#28d9ed>[Buff_T_4054001_1_1] tour(s)</color>.",
       "es": "Ataca a los enemigos y tiene una <color=#28d9ed>[Buff_C_4054001_1_1]</color> probabilidad de infligir <color=#28d9ed>Aturdimiento</color> al objetivo por <color=#28d9ed>[Buff_T_4054001_1_1] turno(s)</color>"
     },
     "target": "enemy",
@@ -128349,7 +128349,7 @@
       "jp": "敵単体にダメージを与える。<color=#28d9ed>攻撃力</color>がUPした状態の場合、<color=#28d9ed>敵全体</color>にダメージを与える。",
       "kr": "적을 공격합니다. <color=#28d9ed>공격력</color>이 증가한 상태라면 <color=#28d9ed>적 전체</color>를 공격합니다.",
       "zh": "攻击敌人。若<color=#28d9ed>攻击力</color>处于提升状态，则攻击<color=#28d9ed>全体敌人</color>。",
-      "fr": "attaque un ennemi. Attacks <color=#28d9ed>all enemies</color> si the lanceur's <color=#28d9ed>ATQ</color> is currently increased.",
+      "fr": "Attaque un ennemi. Si son <color=#28d9ed>ATQ</color> est augmentée, attaque <color=#28d9ed>tous les ennemis</color>.",
       "es": "Ataca a un enemigo. Ataca <color=#28d9ed>a los enemigos</color> si el <color=#28d9ed>ATQ</color> propio está actualmente subedo."
     },
     "target": "enemy",
@@ -129172,7 +129172,7 @@
       "jp": "魔力湧動",
       "kr": "마력 용출",
       "zh": "魔力涌动",
-      "fr": "Éruption de la main",
+      "fr": "Éruption de mana",
       "es": "Erupción de Maná"
     },
     "type": "first",
@@ -129222,7 +129222,7 @@
       "jp": "乾燥穿風",
       "kr": "건조성 돌풍",
       "zh": "干燥旋风",
-      "fr": "Arid Gust",
+      "fr": "Rafale aride",
       "es": "Ráfaga Árida"
     },
     "type": "second",
@@ -129290,7 +129290,7 @@
       "jp": "無尽の砂嵐",
       "kr": "그치지 않는 모래 폭풍",
       "zh": "不息沙暴",
-      "fr": "Impossible de s'arrêter Sandstorm",
+      "fr": "Tempête de sable incessante",
       "es": "Tormenta de Arena Imparable"
     },
     "type": "ultimate",
@@ -129364,19 +129364,19 @@
           },
           "4004005_4_4": {
             "c": "100%",
-            "v": "30%"
+            "v": "50%"
           },
           "4004005_4_5": {
             "c": "100%",
-            "v": "30%"
+            "v": "50%"
           },
           "4004005_4_6": {
             "c": "100%",
-            "v": "30%"
+            "v": "50%"
           },
           "4004005_4_7": {
             "c": "100%",
-            "v": "30%"
+            "v": "50%"
           },
           "4004005_4_8": {
             "c": "100%",
@@ -130427,7 +130427,7 @@
       "jp": "ずっしりとした乱撃",
       "kr": "육중한 난격",
       "zh": "沉重猛击",
-      "fr": "Heavy Slash",
+      "fr": "Frappes pesantes",
       "es": "Tajo Pesado"
     },
     "type": "second",
@@ -130979,7 +130979,7 @@
       "jp": "サソリの形象",
       "kr": "사막 전갈의 형상",
       "zh": "沙漠蝎子形态",
-      "fr": "Desert Scorpion's Form",
+      "fr": "Forme du scorpion du désert",
       "es": "Forma Alacrán Desierto"
     },
     "type": "monster_1",
@@ -131231,7 +131231,7 @@
       "jp": "(発動効果)ダメージを受けた後、最大HPが最も低い敵単体に<color=#28d9ed>【来て、ハウンド】</color>を使用する。<color=#28d9ed>[Buff_C_4500277_2_2]</color>の確率で対象に<color=#28d9ed>石化</color>を<color=#28d9ed>[Buff_T_4500277_2_2]ターン</color>の間付与する。",
       "kr": "(발동 효과) 피격 후 최대 체력이 가장 낮은 적에게 <color=#28d9ed>와줘, 하운드</color>를 사용합니다. <color=#28d9ed>[Buff_C_4500277_2_2]</color> 확률로 대상에게 <color=#28d9ed>[Buff_T_4500277_2_2]턴</color> 동안 <color=#28d9ed>석화</color>를 부여합니다.",
       "zh": "(触发效果)受到攻击后，使生命值上限最低的敌人使用<color=#28d9ed>来吧，哈恩德</color>。有<color=#28d9ed>[Buff_C_4500277_2_2]</color>的几率对目标造成<color=#28d9ed>石化</color>效果，持续<color=#28d9ed>[Buff_T_4500277_2_2]回合</color>。",
-      "fr": "(Triggered Effect) Après avoir été frappé, utilise <color=#28d9ed>Come Here, Hound</color> sur l'ennemi avec le maximum de PV le plus bas. A une <color=#28d9ed>[Buff_C_4500277_2_2]</color> chance d'infliger <color=#28d9ed>Pétrifié</color> sur la cible pour <color=#28d9ed>[Buff_T_4500277_2_2] tour(s)</color>.",
+      "fr": "(Effet déclenché) Après avoir subi une attaque, utilise <color=#28d9ed>Viens, Hound</color> sur l'ennemi aux PV max les plus faibles. A <color=#28d9ed>[Buff_C_4500277_2_2]</color> de chances d'infliger <color=#28d9ed>Pétrifié</color> à la cible pendant <color=#28d9ed>[Buff_T_4500277_2_2] tour(s)</color>.",
       "es": "(Efecto Activado) Al recibir daño, usa <color=#28d9ed>Ven aquí, Sabueso</color> en el enemigo con menor Salud máxima. Con <color=#28d9ed>[Buff_C_4500277_2_2]</color> de probabilidad, inflige <color=#28d9ed>Petrificado</color> al blanco por <color=#28d9ed>[Buff_T_4500277_2_2] turno(s)</color>."
     },
     "target": "enemy",
@@ -131330,7 +131330,7 @@
       "jp": "パンデモニウムの盾",
       "kr": "판데모니움의 방패",
       "zh": "万魔殿盾牌",
-      "fr": "Pandemonium's Shield",
+      "fr": "Bouclier de Pandemonium",
       "es": "Escudo de Pandemonium"
     },
     "type": "monster_1",
@@ -135958,7 +135958,7 @@
       "jp": "再現：竜の野望",
       "kr": "재현 : 용의 야만성",
       "zh": "再现：龙之野蛮",
-      "fr": "Reproduction: Dragon's Brutality",
+      "fr": "Reproduction : Brutalité du dragon",
       "es": "Reproducción: Brutalidad Dragón"
     },
     "type": "first",
@@ -136110,7 +136110,7 @@
       "jp": "再現：竜の波動",
       "kr": "재현 : 용의 파동",
       "zh": "再现：龙之波动",
-      "fr": "Reproduction: Dragon's Wave",
+      "fr": "Reproduction : Onde du dragon",
       "es": "Reproducción: Onda del Dragón"
     },
     "type": "ultimate",
@@ -148546,7 +148546,7 @@
       "jp": "スーパー天才の改良",
       "kr": "슈퍼 천재의 개량",
       "zh": "超级天才改良",
-      "fr": "Super Genius's Improvement",
+      "fr": "Amélioration du super génie",
       "es": "Mejora del súper genio"
     },
     "type": "monster_1",
@@ -161191,7 +161191,7 @@
       "jp": "ローズスラッシュ",
       "kr": "로즈 슬래쉬",
       "zh": "玫瑰斩击",
-      "fr": "Rose Slash",
+      "fr": "Entaille de rose",
       "es": "Corte de Rosa"
     },
     "type": "first",
@@ -161291,7 +161291,7 @@
       "jp": "三連剣",
       "kr": "삼연검",
       "zh": "三连剑",
-      "fr": "Triple Slash",
+      "fr": "Triple entaille",
       "es": "Triple Corte"
     },
     "type": "first",
@@ -162490,7 +162490,7 @@
       "jp": "シールドラッシュ",
       "kr": "실드 러시",
       "zh": "护盾突击",
-      "fr": "Shield Rush",
+      "fr": "Ruée au bouclier",
       "es": "Embestida de Escudo"
     },
     "type": "first",
@@ -164488,7 +164488,7 @@
       "jp": "敵全体にダメージを与え、<color=#28d9ed>[Buff_C_2000011_3_1]</color>の確率で対象の<color=#28d9ed>攻撃力</color>を<color=#28d9ed>[Buff_T_2000011_3_1]ターン</color>の間DOWNさせる。",
       "kr": "적 전체를 공격하고 <color=#28d9ed>[Buff_C_2000011_3_1]</color> 확률로 <color=#28d9ed>[Buff_T_2000011_3_1]턴</color> 동안 대상의 <color=#28d9ed>공격력</color>을 감소시킵니다.",
       "zh": "攻击全体敌人，并有<color=#28d9ed>[Buff_C_2000011_3_1]</color>的几率使目标的<color=#28d9ed>攻击力</color>降低，持续<color=#28d9ed>[Buff_T_2000011_3_1]回合</color>。",
-      "fr": "attaque tous les ennemis and a une <color=#28d9ed>[Buff_C_2000011_3_1]</color> chance de inflict reduced <color=#28d9ed>ATQ</color> à la cible durant <color=#28d9ed>[Buff_T_2000011_3_1] tour(s)</color>.",
+      "fr": "Attaque tous les ennemis et a <color=#28d9ed>[Buff_C_2000011_3_1]</color> de chances de réduire l'<color=#28d9ed>ATQ</color> des cibles pendant <color=#28d9ed>[Buff_T_2000011_3_1] tour(s)</color>.",
       "es": "Ataca a los enemigos y hay <color=#28d9ed>[Buff_C_2000011_3_1]</color> de probabilidad de bajar <color=#28d9ed>ATQ</color> al objetivo durante <color=#28d9ed>[Buff_T_2000011_3_1] turno(s)</color>."
     },
     "target": "enemy",
@@ -166523,7 +166523,7 @@
       "kr": "준비 됐나? 네, 선장님!",
       "zh": "准备好了吗？是，船长！",
       "fr": "Aye Aye, capitaine!",
-      "es": "Aye Aye, ¡Captain!"
+      "es": "¿Preparados? ¡Sí, capitán!"
     },
     "type": "ultimate",
     "subType": "active",
@@ -170388,7 +170388,7 @@
       "jp": "敵全体にダメージを与え、対象に<color=#28d9ed>[Buff_C_2000007_3_1]</color>の確率で<color=#28d9ed>スタン</color>を<color=#28d9ed>[Buff_T_2000007_3_1]ターン</color>の間付与する。",
       "kr": "적 전체를 공격하고 <color=#28d9ed>[Buff_C_2000007_3_1]</color> 확률로 대상을 <color=#28d9ed>[Buff_T_2000007_3_1]턴</color> 동안 <color=#28d9ed>스턴</color> 상태로 만듭니다.",
       "zh": "攻击全体敌人，并有<color=#28d9ed>[Buff_C_2000007_3_1]</color>的几率使目标陷入<color=#28d9ed>晕眩</color>状态，持续<color=#28d9ed>[Buff_T_2000007_3_1]回合</color>。",
-      "fr": "attaque tous les ennemis and a une <color=#28d9ed>[Buff_C_2000007_3_1]</color> chance de inflict <color=#28d9ed>Étourdi</color> à la cible durant <color=#28d9ed>[Buff_T_2000007_3_1] tour(s)</color>.",
+      "fr": "Attaque tous les ennemis et a <color=#28d9ed>[Buff_C_2000007_3_1]</color> de chances d'infliger <color=#28d9ed>Étourdi</color> aux cibles pendant <color=#28d9ed>[Buff_T_2000007_3_1] tour(s)</color>.",
       "es": "Ataca a los enemigos y tiene una <color=#28d9ed>[Buff_C_2000007_3_1]</color> probabilidad de infligir <color=#28d9ed>Aturdimiento</color> al objetivo por <color=#28d9ed>[Buff_T_2000007_3_1] turno(s)</color>"
     },
     "target": "enemy",
@@ -170933,7 +170933,7 @@
       "jp": "閃撃の会壱番槍",
       "kr": "섬격회 일번창",
       "zh": "闪击会第一枪",
-      "fr": "Spear Barrage",
+      "fr": "Rafale de lance",
       "es": "Lluvia Lanzas"
     },
     "type": "first",
@@ -170986,7 +170986,7 @@
       "jp": "突撃隊長の猛威",
       "kr": "돌격대장의 맹위",
       "zh": "突击队长的威严",
-      "fr": "Blitz Commander's Spite",
+      "fr": "Fureur du commandant d'assaut",
       "es": "El Apego del Comandante Blitz"
     },
     "type": "second",
@@ -173475,7 +173475,7 @@
       "jp": "味方全体のHPを<color=#28d9ed>[Buff_V_4500041_2_1]</color>回復させ、必殺スキルのスキルターンを<color=#28d9ed>[Buff_V_4500041_2_2]ターン</color>減少させる。また、自分のWGを<color=#28d9ed>[Buff_V_4500041_2_3]</color>回復させる。",
       "kr": "아군 전체의 체력을 <color=#28d9ed>[Buff_V_4500041_2_1]</color> 회복시키고, 필살기의 쿨타임을 <color=#28d9ed>[Buff_V_4500041_2_2]턴</color> 감소시킵니다. 그리고 자신의 WG를 <color=#28d9ed>[Buff_V_4500041_2_3]</color> 회복시킵니다.",
       "zh": "使全体友军生命值恢复<color=#28d9ed>[Buff_V_4500041_2_1]</color>，必杀技的冷却时间减少<color=#28d9ed>[Buff_V_4500041_2_2]回合</color>。并使自身的WG恢复<color=#28d9ed>[Buff_V_4500041_2_3]</color>。",
-      "fr": "Heals les alliés by <color=#28d9ed>[Buff_V_4500041_2_1]</color> and réduit ultimate comp. cooldowns by <color=#28d9ed>[Buff_V_4500041_2_2] tour(s)</color>. Additionally, recovers the lanceur's jauge de faiblesse by <color=#28d9ed>[Buff_V_4500041_2_3]</color>.",
+      "fr": "Restaure <color=#28d9ed>[Buff_V_4500041_2_1]</color> des PV de tous les alliés et réduit le temps de recharge de leur compétence ultime de <color=#28d9ed>[Buff_V_4500041_2_2] tour(s)</color>. Récupère ensuite <color=#28d9ed>[Buff_V_4500041_2_3]</color> de sa WG.",
       "es": "Restaura la salud de los aliados en <color=#28d9ed>[Buff_V_4500041_2_1]</color> y reduce las recargas de hab. definitivas en <color=#28d9ed>[Buff_V_4500041_2_2] turno(s)</color>. Además, recupera la Barrera de Debilidad propio en <color=#28d9ed>[Buff_V_4500041_2_3]</color>."
     },
     "target": "team",
@@ -175429,7 +175429,7 @@
       "jp": "敵全体にダメージを与え、<color=#28d9ed>[Buff_C_450000704_2]</color>の確率で対象の<color=#28d9ed>防御力</color>を<color=#28d9ed>[Buff_T_450000704_2]ターン</color>の間DOWNさせる。\\n対象がシールド状態の場合、ダメージがDOWNする。",
       "kr": "적 전체를 공격하고 <color=#28d9ed>[Buff_C_450000704_2]</color> 확률로 대상의 <color=#28d9ed>방어력</color>을 <color=#28d9ed>[Buff_T_450000704_2]턴</color> 동안 감소시킵니다.\\n대상이 실드를 가지고 있다면 피해가 감소합니다.",
       "zh": "攻击全体敌人，并有<color=#28d9ed>[Buff_C_450000704_2]</color>的几率使目标的<color=#28d9ed>防御力</color>降低，持续<color=#28d9ed>[Buff_T_450000704_2]回合</color>。\\n若目标附带护盾效果，则伤害降低。",
-      "fr": "attaque tous les ennemis and a une <color=#28d9ed>[Buff_C_450000704_2]</color> chance de reduce la cible's <color=#28d9ed>DÉF</color> durant <color=#28d9ed>[Buff_T_450000704_2] tour(s)</color>.\\nDamage is reduced si la cible a une barrière.",
+      "fr": "Attaque tous les ennemis et a <color=#28d9ed>[Buff_C_450000704_2]</color> de chances de réduire leur <color=#28d9ed>DÉF</color> pendant <color=#28d9ed>[Buff_T_450000704_2] tour(s)</color>.\\nLes DGT sont réduits si la cible possède une Barrière.",
       "es": "Ataca a los enemigos y tiene una <color=#28d9ed>[Buff_C_450000704_2]</color> probabilidad de red. de la <color=#28d9ed>DEF</color> del objetivo por\\n<color=#28d9ed>[Buff_T_450000704_2] turno(s)</color>. El daño se reduce si el objetivo tiene una Barrera."
     },
     "target": "enemy",
@@ -180017,7 +180017,7 @@
       "jp": "敵全体にダメージを与える。<color=#28d9ed>[Buff_C_2000091_2_1]</color>の確率で敵全体に解除不可能な<color=#28d9ed>強化不可</color>を<color=#28d9ed>[Buff_T_event_monster_buff_370]ターン</color>の間付与し、<color=#28d9ed>[Buff_C_event_monster_buff_371]<color=#28d9ed>の確率で対象のすべての</color>スキルターン</color>を<color=#28d9ed>2ターン</color>増加させる。",
       "kr": "적 전체를 공격합니다. <color=#28d9ed>[Buff_C_2000091_2_1]</color> 확률로 <color=#28d9ed>[Buff_T_event_monster_buff_370]턴</color> 동안 적 전체에게 해제 불가능한 <color=#28d9ed>강화 불가</color>를 부여하고, <color=#28d9ed>[Buff_C_event_monster_buff_371]</color> 확률로 대상 모두의 <color=#28d9ed>스킬 쿨타임</color>을 <color=#28d9ed>2턴</color> 증가시킵니다.",
       "zh": "攻击全体敌人。有<color=#28d9ed>[Buff_C_2000091_2_1]</color>的几率使全体敌人陷入无法被解除的<color=#28d9ed>无法强化</color>状态，持续<color=#28d9ed>[Buff_T_event_monster_buff_370]回合</color>，并有<color=#28d9ed>[Buff_C_event_monster_buff_371]</color>的几率使全体目标的<color=#28d9ed>技能冷却时间</color>增加<color=#28d9ed>2回合</color>。",
-      "fr": "attaque tous les ennemis. a une <color=#28d9ed>[Buff_C_2000091_2_1]</color> chance de inflict irremovable <color=#28d9ed>Bonus interdit</color> on tous les ennemis durant <color=#28d9ed>[Buff_T_event_monster_buff_370] tour(s)</color>, and a <color=#28d9ed>[Buff_C_event_monster_buff_371]</color> chance de accroît <color=#28d9ed>temps de recharge des compétences</color> of all targets by <color=#28d9ed>2 tours</color>.",
+      "fr": "Attaque tous les ennemis. A <color=#28d9ed>[Buff_C_2000091_2_1]</color> de chances d'infliger un effet indissipable de <color=#28d9ed>Bonus interdit</color> à tous les ennemis pendant <color=#28d9ed>[Buff_T_event_monster_buff_370] tour(s)</color>, puis a <color=#28d9ed>[Buff_C_event_monster_buff_371]</color> de chances d'augmenter les <color=#28d9ed>temps de recharge des compétences</color> de toutes les cibles de <color=#28d9ed>2 tours</color>.",
       "es": "Ataca a los enemigos. Tiene una <color=#28d9ed>[Buff_C_2000091_2_1]</color> probabilidad de infligir irremovible <color=#28d9ed>No mejorable</color> a los enemigos por <color=#28d9ed>[Buff_T_event_monster_buff_370] turno(s)</color>, y una <color=#28d9ed>[Buff_C_event_monster_buff_371]</color> probabilidad de aumentar las <color=#28d9ed>tiempos de recarga de las habilidades</color> de todos los objetivos en <color=#28d9ed>2 turno</color>."
     },
     "target": "enemy",
@@ -180084,7 +180084,7 @@
       "jp": "<color=#28d9ed>[Buff_C_event_monster_buff_372]</color>の確率で敵全体の<color=#28d9ed>強化効果</color>をすべて解除し、 敵全体にダメージを与える。攻撃後、敵全体に<color=#28d9ed>[Buff_C_event_monster_buff_373]</color>の確率で<color=#28d9ed>防御力DOWN</color>を<color=#28d9ed>[Buff_T_event_monster_buff_373]ターン</color>の間付与する。",
       "kr": "<color=#28d9ed>[Buff_C_event_monster_buff_372]</color> 확률로 적 전체의 <color=#28d9ed>강화 효과</color>를 모두 해제하고 적 전체를 공격합니다. 공격 후 <color=#28d9ed>[Buff_C_event_monster_buff_373]</color> 확률로 <color=#28d9ed>[Buff_T_event_monster_buff_373]턴</color> 동안 적 전체에게 <color=#28d9ed>방어력 감소</color>를 부여합니다.",
       "zh": "有<color=#28d9ed>[Buff_C_event_monster_buff_372]</color>的几率使全体敌人的<color=#28d9ed>强化效果</color>全部解除，并攻击全体敌人。攻击后，有<color=#28d9ed>[Buff_C_event_monster_buff_373]</color>的几率赋予全体敌人<color=#28d9ed>防御力降低</color>效果，持续<color=#28d9ed>[Buff_T_event_monster_buff_373]回合</color>。",
-      "fr": "a une <color=#28d9ed>[Buff_C_event_monster_buff_372]</color> chance de remove all <color=#28d9ed>Bonus</color> from tous les ennemis, and attaque tous les ennemis. après attacking, a une <color=#28d9ed>[Buff_C_event_monster_buff_373]</color> chance de inflict <color=#28d9ed>DÉF réduite</color> on tous les ennemis durant <color=#28d9ed>[Buff_T_event_monster_buff_373] tour(s)</color>.",
+      "fr": "A <color=#28d9ed>[Buff_C_event_monster_buff_372]</color> de chances de dissiper tous les <color=#28d9ed>Bonus</color> de tous les ennemis, puis les attaque tous. Après l'attaque, a <color=#28d9ed>[Buff_C_event_monster_buff_373]</color> de chances d'infliger <color=#28d9ed>DÉF réduite</color> à tous les ennemis pendant <color=#28d9ed>[Buff_T_event_monster_buff_373] tour(s)</color>.",
       "es": "Tiene una <color=#28d9ed>[Buff_C_event_monster_buff_372]</color> probabilidad de eliminar todas las <color=#28d9ed>mejoras</color> de los enemigos y ataca a los enemigos. Tras atacar, tiene una <color=#28d9ed>[Buff_C_event_monster_buff_373]</color> probabilidad de infligir <color=#28d9ed>DEF Reducida</color> a los enemigos por <color=#28d9ed>[Buff_T_event_monster_buff_373] turno(s)</color>."
     },
     "target": "enemy",
@@ -181194,7 +181194,7 @@
       "jp": "(パッシブ効果)\\nダメージを受けた時、自分に強化効果がある場合、HPとWGを<color=#28d9ed>[Buff_V_4500143_4_1_1]</color>ずつ回復する。\\n弱体効果のある対象に攻撃時、凍結を<color=#28d9ed>[Buff_T_4500143_4_3]ターン</color>の間付与する。\\nターン開始時、<color=#28d9ed>[Buff_C_4500143_4_4]</color>の確率でランダムな敵2体の<color=#28d9ed>効果抵抗</color>を<color=#28d9ed>[Buff_T_4500143_4_4]ターン</color>の間DOWNさせる。(対象の効果抵抗を無視する)",
       "kr": "(패시브 효과)\\n피격 시 자신이 강화 효과를 보유했다면 체력과 WG를 <color=#28d9ed>[Buff_V_4500143_4_1_1]</color>씩 회복합니다.\\n약화 효과가 있는 대상을 공격 할 때 <color=#28d9ed>[Buff_T_4500143_4_3]턴</color> 동안 <color=#28d9ed>빙결</color>을 대상에게 부여합니다.\\n턴 시작 시 <color=#28d9ed>[Buff_C_4500143_4_4]</color> 확률로 랜덤한 적 2인의 <color=#28d9ed>효과 저항</color>을 <color=#28d9ed>[Buff_T_4500143_4_4]턴</color> 동안 감소시킵니다. (저항 무시)",
       "zh": "（被动效果）\\n受到攻击时，若附带<color=#28d9ed>强化效果</color>，则每次恢复自身的生命值与WG各<color=#28d9ed>[Buff_V_4500143_4_1_1]</color>。\\n攻击附带<color=#28d9ed>弱化效果</color>的目标时，使其陷入<color=#28d9ed>冰冻</color>状态，持续<color=#28d9ed>[Buff_T_4500143_4_3]回合</color>。\\n回合开始时，有<color=#28d9ed>[Buff_C_4500143_4_4]</color>的几率使随机两名敌人的<color=#28d9ed>效果抵抗</color>降低，持续<color=#28d9ed>[Buff_T_4500143_4_4]回合</color>。(无视抵抗)",
-      "fr": "(effet passif)\\nSi l'utilisateur reçoit un buff lorsqu'elle est frappée, récupère PV and Faakness Gauge par <color=#28d9ed>[Buff_V_4500143_4_1_1]</color> chacun.\\nLorsqu'on attaque une cible infligée avec un débuff, on inflige <color=#28d9ed>Gelé</color> pour <color=#28d9ed>[Buff_T_4500143_4_3] tour(s)</color>.\\nAu début du tour, a un au début de la tour, a un.<color=#28d9ed>[Buff_C_4500143_4_4]</color>chance de réduire le risque de réduire<color=#28d9ed>RÉS</color>de 2 ennemis aléatoires pour ennemis aléatoires pour<color=#28d9ed>[Buff_T_4500143_4_4]Tour(s)</color>(Ignore la résilience)",
+      "fr": "(Effet passif)\\nEn subissant une attaque, si un bonus est actif sur le lanceur, récupère <color=#28d9ed>[Buff_V_4500143_4_1_1]</color> de ses PV et de sa WG.\\nEn attaquant une cible affectée par un malus, lui inflige <color=#28d9ed>Gelé</color> pendant <color=#28d9ed>[Buff_T_4500143_4_3] tour(s)</color>.\\nAu début du tour, a <color=#28d9ed>[Buff_C_4500143_4_4]</color> de chances de réduire la <color=#28d9ed>RÉS</color> de 2 ennemis aléatoires pendant <color=#28d9ed>[Buff_T_4500143_4_4]Tour(s)</color> (ignore la Résilience).",
       "es": "(Efecto pasivo) Si el lanzador recibe una mejora al ser golpeado, recupera Vida y Barrera de debilidad en <color=#28d9ed>[Buff_V_4500143_4_1_1]</color> cada uno. Al atacar a un objetivo con penalización,\\ninflige <color=#28d9ed>Congelado</color> por <color=#28d9ed>[Buff_T_4500143_4_3] turno(s)</color>. Al inicio del turno,\\ntiene una prob. de <color=#28d9ed>[Buff_C_4500143_4_4]</color> de reducir la <color=#28d9ed>Resistencia</color> de 2 enemigos aleatorios por <color=#28d9ed>[Buff_T_4500143_4_4] turno(s)</color>.\\n(Ignora la Resistencia)"
     },
     "icon": "MT_Passive_1_Water",
@@ -197186,7 +197186,7 @@
       "jp": "<color=#28d9ed>[Buff_C_tower_element_52598_1]</color>の確率で<color=#28d9ed>[Buff_T_tower_element_52598_1]ターン</color>の間味方全体の<color=#28d9ed>会心率</color>をUPさせた後、敵単体にダメージを与える。\\n会心が発生した場合、対象に<color=#28d9ed>[Buff_C_tower_element_52598_2]</color>の確率で<color=#28d9ed>沈黙</color>を<color=#28d9ed>[Buff_T_tower_element_52598_2]ターン</color>の間付与する。",
       "kr": "<color=#28d9ed>[Buff_C_tower_element_52598_1]</color> 확률로 <color=#28d9ed>[Buff_T_tower_element_52598_1]턴</color> 동안 아군 전체의 <color=#28d9ed>치명 확률</color>을 증가시킨 후 적을 공격합니다.\\n치명 공격 시 <color=#28d9ed>[Buff_C_tower_element_52598_2]</color> 확률로 <color=#28d9ed>[Buff_T_tower_element_52598_2]턴</color> 동안 대상에게 <color=#28d9ed>침묵</color>을 부여합니다.",
       "zh": "有<color=#28d9ed>[Buff_C_tower_element_52598_1]</color>的几率使全体友军的<color=#28d9ed>暴击率</color>提升，持续<color=#28d9ed>[Buff_T_tower_element_52598_1]回合</color>后，攻击敌人。\\n发动暴击时，有<color=#28d9ed>[Buff_C_tower_element_52598_2]</color>的几率对目标造成<color=#28d9ed>沉默</color>效果，持续<color=#28d9ed>[Buff_T_tower_element_52598_2]回合</color>。",
-      "fr": "a une <color=#28d9ed>[Buff_C_tower_element_52598_1]</color> chance de grant les alliés increased <color=#28d9ed>Tx CRIT</color> durant <color=#28d9ed>[Buff_T_tower_element_52598_1] tour(s)</color>, avant attacking an ennemi.\\nWhen scoring a critical touché, a une <color=#28d9ed>[Buff_C_tower_element_52598_2]</color> chance de inflict <color=#28d9ed>Silence</color> à la cible durant <color=#28d9ed>[Buff_T_tower_element_52598_2] tour(s)</color>.",
+      "fr": "A <color=#28d9ed>[Buff_C_tower_element_52598_1]</color> de chances d'augmenter le <color=#28d9ed>Tx CRIT</color> de tous les alliés pendant <color=#28d9ed>[Buff_T_tower_element_52598_1] tour(s)</color>, puis attaque un ennemi.\\nEn infligeant un coup critique, a <color=#28d9ed>[Buff_C_tower_element_52598_2]</color> de chances d'infliger <color=#28d9ed>Silence</color> à la cible pendant <color=#28d9ed>[Buff_T_tower_element_52598_2] tour(s)</color>.",
       "es": "Tiene una <color=#28d9ed>[Buff_C_tower_element_52598_1]</color> probabilidad de otorgar a los aliados un <color=#28d9ed>Prob. CRIT</color> subedo por <color=#28d9ed>[Buff_T_tower_element_52598_1]\\nturno(s)</color>, antes de atacar a un enemigo. Al lograr un golpe crítico, tiene una <color=#28d9ed>[Buff_C_tower_element_52598_2]</color> probabilidad de infligir <color=#28d9ed>Silenciado</color> al objetivo por <color=#28d9ed>[Buff_T_tower_element_52598_2] turno(s)</color>"
     },
     "target": "enemy",
@@ -197737,7 +197737,7 @@
       "jp": "天使の歌声",
       "kr": "꾀꼬리 같은 목소리",
       "zh": "黄莺般的嗓音",
-      "fr": "Voice of a Songbird",
+      "fr": "Voix de rossignol",
       "es": "Voz Pajarillo Cant."
     },
     "type": "first",
@@ -198436,7 +198436,7 @@
       "jp": "バーニングフィスト",
       "kr": "버닝 피스트",
       "zh": "燃烧之拳",
-      "fr": "Burning Fist",
+      "fr": "Poing ardent",
       "es": "Puño Ardiente"
     },
     "type": "second",
@@ -198515,7 +198515,7 @@
       "jp": "超覇王暴竜流星黒炎拳",
       "kr": "초패왕폭룡유성흑염권",
       "zh": "楚霸王暴龙流星黑焰拳",
-      "fr": "Conquering Dragon Meteor Fist",
+      "fr": "Poing du dragon conquérant aux météores et flammes noires",
       "es": "Puño Meteorítico del Dragón Conquistador"
     },
     "type": "ultimate",
@@ -199477,7 +199477,7 @@
       "jp": "敵単体にダメージを与え、自分の<color=#28d9ed>行動ゲージ</color>を<color=#28d9ed>[Buff_V_tower_element_52671_1]</color>UPさせる。",
       "kr": "적을 공격하고 자신의 <color=#28d9ed>행동 게이지</color>를 <color=#28d9ed>[Buff_V_tower_element_52671_1]</color> 증가시킵니다.",
       "zh": "攻击敌人，并使自身<color=#28d9ed>行动值</color>提升<color=#28d9ed>[Buff_V_tower_element_52671_1]</color>。",
-      "fr": "attaque un ennemi and augmente the <color=#28d9ed>Prior.</color> of the lanceur by <color=#28d9ed>[Buff_V_tower_element_52671_1]</color>.",
+      "fr": "Attaque un ennemi et augmente sa <color=#28d9ed>Prior.</color> de <color=#28d9ed>[Buff_V_tower_element_52671_1]</color>.",
       "es": "Ataca a un enemigo y aumenta la <color=#28d9ed>Prior.</color> del lanzador en <color=#28d9ed>[Buff_V_tower_element_52671_1]</color>."
     },
     "target": "enemy",
@@ -258940,6 +258940,253 @@
         "stat": "damage_boost",
         "mode": "up",
         "label": "SYS_BUFF_DMG"
+      }
+    ]
+  },
+  "931567": {
+    "id": "931567",
+    "name": {
+      "en": "Mana Eruption",
+      "jp": "魔力湧動",
+      "kr": "마력 용출",
+      "zh": "魔力涌动",
+      "fr": "Éruption de mana",
+      "es": "Erupción de Maná"
+    },
+    "type": "first",
+    "subType": "active",
+    "offensive": true,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "damageFactor": 1200,
+        "vars": {
+          "4004005_1_1": {
+            "c": "100%",
+            "v": "15%"
+          }
+        }
+      }
+    ],
+    "desc": {
+      "en": "Attacks an enemy, and recovers Health of the caster by <color=#28d9ed>[Buff_V_4004005_1_1]</color>.",
+      "jp": "敵単体にダメージを与え、自分のHPを<color=#28d9ed>[Buff_V_4004005_1_1]</color>回復する。",
+      "kr": "적을 공격하고 자신의 체력을 <color=#28d9ed>[Buff_V_4004005_1_1]</color> 회복 합니다.",
+      "zh": "攻击敌人，并使自身生命值恢复<color=#28d9ed>[Buff_V_4004005_1_1]</color>。",
+      "fr": "Attaque un ennemi et récupère PV propre par <color=#28d9ed>[Buff_V_4004005_1_1]</color>..",
+      "es": "Ataca a un enemigo y recupera la Vida del lanzador en <color=#28d9ed>[Buff_V_4004005_1_1]</color>."
+    },
+    "target": "enemy",
+    "range": "single",
+    "icon": "Skill_First_3000043",
+    "effects": [
+      {
+        "family": "heal",
+        "category": "buff",
+        "type": "BT_HEAL_BASED_CASTER",
+        "target": "me",
+        "buff": "4004005_1_1",
+        "stat": "hp",
+        "mode": "up",
+        "caller": "first"
+      }
+    ]
+  },
+  "931568": {
+    "id": "931568",
+    "name": {
+      "en": "Arid Gust",
+      "jp": "乾燥穿風",
+      "kr": "건조성 돌풍",
+      "zh": "干燥旋风",
+      "fr": "Rafale aride",
+      "es": "Ráfaga Árida"
+    },
+    "type": "second",
+    "subType": "active",
+    "offensive": true,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "damageFactor": 1100,
+        "cool": 3,
+        "startCool": 2,
+        "vars": {
+          "4004005_2_2": {
+            "c": "100%",
+            "v": "20%",
+            "t": "2"
+          }
+        },
+        "tooltips": ["88"]
+      }
+    ],
+    "desc": {
+      "en": "Attacks an enemy and grants the caster <color=#28d9ed>Lifesteal</color> for <color=#28d9ed>[Buff_T_4004005_2_2] turns</color>.",
+      "jp": "敵単体にダメージを与え、自分に<color=#28d9ed>[Buff_T_4004005_2_2]ターン</color>の間<color=#28d9ed>吸収</color>を付与する。",
+      "kr": "적을 공격하고 자신에게 <color=#28d9ed>[Buff_T_4004005_2_2]턴</color> 동안 <color=#28d9ed>흡혈</color>을 부여합니다.",
+      "zh": "攻击敌人，并赋予自身<color=#28d9ed>吸血</color>，持续<color=#28d9ed>[Buff_T_4004005_2_2]回合</color>。",
+      "fr": "Attaque un ennemi et accorde au lanceur <color=#28d9ed>Vol de vie</color> pendant <color=#28d9ed>[Buff_T_4004005_2_2] tours</color>.",
+      "es": "Ataca a un enemigo y otorga al lanzador <color=#28d9ed>Robo Vida</color> durante <color=#28d9ed>[Buff_T_4004005_2_2] turnos</color>."
+    },
+    "target": "enemy",
+    "range": "single",
+    "icon": "Skill_Second_3000043",
+    "effects": [
+      {
+        "family": "stat",
+        "category": "buff",
+        "type": "BT_STAT",
+        "target": "me",
+        "buff": "4004005_2_2",
+        "stat": "vampiric",
+        "mode": "up",
+        "tooltip": "88",
+        "caller": "second"
+      }
+    ]
+  },
+  "931569": {
+    "id": "931569",
+    "name": {
+      "en": "Unstoppable Sandstorm",
+      "jp": "無尽の砂嵐",
+      "kr": "그치지 않는 모래 폭풍",
+      "zh": "不息沙暴",
+      "fr": "Tempête de sable incessante",
+      "es": "Tormenta de Arena Imparable"
+    },
+    "type": "ultimate",
+    "subType": "active",
+    "offensive": true,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "damageFactor": 1600,
+        "cool": 4,
+        "startCool": 2,
+        "vars": {
+          "event_monster_buff_8st_359": {
+            "c": "100%",
+            "v": "75.5%",
+            "t": "2"
+          },
+          "event_monster_buff_8st_360": {
+            "c": "100%",
+            "v": "999.9%"
+          }
+        },
+        "tooltips": ["4"]
+      }
+    ],
+    "desc": {
+      "en": "Before attacking, inflicts <color=#28d9ed>Poisoned</color> on all enemies for <color=#28d9ed>2 turns</color>, then attacks all enemies.\\nIf the caster has any <color=#28d9ed>buffs</color>, detonates their Poisoned effects.",
+      "jp": "攻撃前、敵全体に<color=#28d9ed>中毒</color>を<color=#28d9ed>2ターン</color>の間付与した後、敵全体にダメージを与える。\\n自分に<color=#28d9ed>強化効果</color>が付与されている場合、中毒を破裂させる。",
+      "kr": "공격 전 적 전체에게 <color=#28d9ed>중독</color>을 <color=#28d9ed>2턴</color> 동안 부여한 뒤, 적 전체를 공격합니다.\\n자신이 <color=#28d9ed>강화 효과</color>를 보유 중이라면 중독을 폭발 시킵니다.",
+      "zh": "攻击前，对敌方全体赋予<color=#28d9ed>中毒</color>，持续<color=#28d9ed>2回合</color>，随后攻击敌方全体。\\n若自身持有<color=#28d9ed>强化效果</color>，则引爆中毒。",
+      "fr": "Avant d'attaquer, inflige <color=#28d9ed>Empoisonné</color> à tous les ennemis pendant <color=#28d9ed>2 tours</color>, puis attaque tous les ennemis.\\nSi le lanceur a des <color=#28d9ed>bonus</color>, fait exploser les effets « Empoisonné » des ennemis.",
+      "es": "Antes de atacar, inflige <color=#28d9ed>Enven.</color> a todos los enemigos durante <color=#28d9ed>2 turnos</color> y después ataca a todos los enemigos.\\nSi el lanzador tiene algún <color=#28d9ed>buff</color>, detona los efectos de Enven. de los enemigos."
+    },
+    "target": "enemy",
+    "range": "all",
+    "icon": "Skill_Ultimate_3000043",
+    "effects": [
+      {
+        "family": "dot",
+        "category": "debuff",
+        "type": "BT_DOT_POISON",
+        "target": "enemy_team",
+        "buff": "event_monster_buff_8st_359",
+        "stat": "atk",
+        "mode": "up",
+        "tooltip": "4",
+        "caller": "ultimate"
+      },
+      {
+        "family": "dot",
+        "category": "neutral",
+        "type": "BT_IMMEDIATELY_POISON",
+        "target": "enemy_team",
+        "buff": "event_monster_buff_8st_360",
+        "label": "SYS_BUFF_DOT_IMMEDIATELY",
+        "caller": "ultimate"
+      }
+    ]
+  },
+  "931571": {
+    "id": "931571",
+    "name": {
+      "en": "Enraged",
+      "jp": "狂暴化",
+      "kr": "광폭화",
+      "zh": "狂暴化",
+      "fr": "Rage",
+      "es": "Furia"
+    },
+    "type": "rage_enter1",
+    "subType": "active",
+    "offensive": false,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "tooltips": ["1069"]
+      }
+    ],
+    "desc": {
+      "en": "When Health falls to <color=#28d9ed>50%</color> of Max Health or lower, becomes <color=#28d9ed>Enraged</color>.\\n\\n<color=#28d9ed>Enraged</color>: Ends after 3 turns.\\n\\n<color=#28d9ed>Furious Earth</color>: Used when Enraged ends.\\nAttacks all enemies and grants the caster a permanent, irremovable effect that <color=#28d9ed>reduces damage taken</color>.",
+      "jp": "HPが最大HPの<color=#28d9ed>50%</color>以下になると、<color=#28d9ed>狂暴化</color>状態に切り替わる。\\n\\n<color=#28d9ed>狂暴化</color>：3ターン後に終了する。\\n\\n<color=#28d9ed>大地の怒り</color>：狂暴化終了時に発動する。\\n敵全体にダメージを与え、自分に解除不可能な<color=#28d9ed>ダメージDOWN</color>を永続的に付与する。",
+      "kr": "최대 체력의 <color=#28d9ed>50%</color> 이하가 되면 <color=#28d9ed>광폭화</color> 상태로 전환합니다. \\n\\n<color=#28d9ed>광폭화 돌입</color> :  3턴 후 광폭화가 종료됩니다.\\n\\n<color=#28d9ed>격앙하는 대지</color> : 광폭화 종료 시 사용.\\n적 전체를 공격하고 자신에게 영구적으로 해제되지 않는 <color=#28d9ed>피해 감소</color>를 부여합니다.",
+      "zh": "当生命值降至最大生命值的<color=#28d9ed>50%</color>及以下时，进入<color=#28d9ed>狂暴化</color>状态。\\n\\n<color=#28d9ed>陷入狂暴化</color>：3回合后狂暴化结束。\\n\\n<color=#28d9ed>愤怒的大地</color>：狂暴化结束时发动。\\n攻击敌方全体，并为自身赋予永久且无法解除的<color=#28d9ed>伤害降低</color>效果。",
+      "fr": "Lorsque ses PV tombent à <color=#28d9ed>50 %</color> de ses PV max. ou moins, passe à l'état <color=#28d9ed>Enragé</color>.\\n\\n<color=#28d9ed>Enragé</color> : Prend fin après 3 tours.\\n\\n<color=#28d9ed>Terre furieuse</color> : Utilisé à la fin d'Enragé.\\nAttaque tous les ennemis et accorde au lanceur une <color=#28d9ed>réduction des dégâts subis</color> permanente et indissipable.",
+      "es": "Al caer la Vida al <color=#28d9ed>50%</color> de la Vida máxima o menos, entra en estado <color=#28d9ed>Enfurecido</color>.\\n\\n<color=#28d9ed>Enfurecido</color>: Termina después de 3 turnos.\\n\\n<color=#28d9ed>Tierra furiosa</color>: Se usa al terminar Enfurecido.\\nAtaca a todos los enemigos y otorga al usuario una <color=#28d9ed>reducción del daño recibido</color> permanente e irremovible."
+    },
+    "target": "enemy",
+    "range": "single",
+    "icon": "MT_Boss_Rage_Common_1"
+  },
+  "931572": {
+    "id": "931572",
+    "name": {
+      "en": "",
+      "jp": "",
+      "kr": "",
+      "zh": "",
+      "fr": "",
+      "es": ""
+    },
+    "type": "rage_finish1",
+    "subType": "active",
+    "offensive": true,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "damageFactor": 2500,
+        "vars": {
+          "Common_Rage_Buff_13": {
+            "c": "100%",
+            "v": "40%"
+          }
+        }
+      }
+    ],
+    "target": "enemy",
+    "range": "all",
+    "icon": "MT_Boss_Rage_Common_1",
+    "effects": [
+      {
+        "family": "stat",
+        "category": "buff",
+        "type": "BT_STAT",
+        "target": "me",
+        "buff": "Common_Rage_Buff_13",
+        "stat": "dmg_reduce",
+        "mode": "up",
+        "tooltip": "1069"
       }
     ]
   },
