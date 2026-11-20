@@ -1494,7 +1494,7 @@
       "jp": "地の進化石のかけら",
       "kr": "지속성 진화석 파편",
       "zh": "土之进化石残片",
-      "fr": "terre Upgrade Stone Fragment",
+      "fr": "Fragment de pierre d'évolution de terre",
       "es": "Fragmento Piedra Mejora Tierra"
     },
     "desc": {
@@ -1542,7 +1542,7 @@
       "jp": "地の進化石",
       "kr": "지속성 진화석",
       "zh": "土之进化石",
-      "fr": "Terre Upgrade Stone",
+      "fr": "Pierre d'évolution de terre",
       "es": "Piedra de Mejora de Tierra"
     },
     "desc": {
@@ -1590,7 +1590,7 @@
       "jp": "火の進化石のかけら",
       "kr": "화속성 진화석 파편",
       "zh": "火之进化石残片",
-      "fr": "feu Upgrade Stone Fragment",
+      "fr": "Fragment de pierre d'évolution de feu",
       "es": "Fragmento Piedra Mejoramiento Fuego"
     },
     "desc": {
@@ -1638,7 +1638,7 @@
       "jp": "火の進化石",
       "kr": "화속성 진화석",
       "zh": "火之进化石",
-      "fr": "Incendie Upgrade Stone",
+      "fr": "Pierre d'évolution de feu",
       "es": "Piedra de Mejora de Fuego"
     },
     "desc": {
@@ -1686,7 +1686,7 @@
       "jp": "水の進化石のかけら",
       "kr": "수속성 진화석 파편",
       "zh": "水之进化石残片",
-      "fr": "Eau de mise à niveau Pierre Fragment",
+      "fr": "Fragment de pierre d'évolution d'eau",
       "es": "Fragmento Piedra Mejora Agua"
     },
     "desc": {
@@ -1734,7 +1734,7 @@
       "jp": "水の進化石",
       "kr": "수속성 진화석",
       "zh": "水之进化石",
-      "fr": "Eau de mise à niveau Stone",
+      "fr": "Pierre d'évolution d'eau",
       "es": "Piedra de Mejora de Agua"
     },
     "desc": {
@@ -1782,7 +1782,7 @@
       "jp": "光の進化石のかけら",
       "kr": "명속성 진화석 파편",
       "zh": "光之进化石残片",
-      "fr": "lumière Upgrade Stone Fragment",
+      "fr": "Fragment de pierre d'évolution de lumière",
       "es": "Fragmento Piedra Evolución Luz"
     },
     "desc": {
@@ -1830,7 +1830,7 @@
       "jp": "光の進化石",
       "kr": "명속성 진화석",
       "zh": "光之进化石",
-      "fr": "Lumière Upgrade Stone",
+      "fr": "Pierre d'évolution de lumière",
       "es": "Piedra de Mejora de Luz"
     },
     "desc": {
@@ -1878,7 +1878,7 @@
       "jp": "闇の進化石のかけら",
       "kr": "암속성 진화석 파편",
       "zh": "暗之进化石残片",
-      "fr": "ténébreux Upgrade Stone Fragment",
+      "fr": "Fragment de pierre d'évolution ténébreuse",
       "es": "Fragmento de Piedra de Mejora de Oscuridad"
     },
     "desc": {
@@ -1926,7 +1926,7 @@
       "jp": "闇の進化石",
       "kr": "암속성 진화석",
       "zh": "暗之进化石",
-      "fr": "Dark Upgrade Stone",
+      "fr": "Pierre d'évolution ténébreuse",
       "es": "Piedra de Mejora de Oscuridad"
     },
     "desc": {
@@ -2046,7 +2046,7 @@
       "jp": "まあまあな強化ハンマー",
       "kr": "입문 강화 도구",
       "zh": "入门强化道具",
-      "fr": "Apprentice's Hammer",
+      "fr": "Marteau de l'apprenti",
       "es": "Martillo del Aprendiz"
     },
     "desc": {
@@ -2070,7 +2070,7 @@
       "jp": "いい強化ハンマー",
       "kr": "수련 강화 도구",
       "zh": "修炼强化道具",
-      "fr": "Expert's Hammer",
+      "fr": "Marteau de l'expert",
       "es": "Martillo del Experto"
     },
     "desc": {
@@ -2094,7 +2094,7 @@
       "jp": "洗練された強化ハンマー",
       "kr": "전문 강화 도구",
       "zh": "专家强化道具",
-      "fr": "Master's Hammer",
+      "fr": "Marteau du maître",
       "es": "Martillo del Amo"
     },
     "desc": {
@@ -2166,7 +2166,7 @@
       "jp": "再錬カタリスト(レア)",
       "kr": "고급 재련 촉매제",
       "zh": "高级重铸催化剂",
-      "fr": "Superior Reforge Catalyst",
+      "fr": "Catalyseur de reforgeage supérieur",
       "es": "Catalizador de Reforjar Superior"
     },
     "desc": {
@@ -2214,7 +2214,7 @@
       "jp": "再錬カタリスト(レジェンド)",
       "kr": "전설 재련 촉매제",
       "zh": "传说重铸催化剂",
-      "fr": "Légendaire Reforge Catalyst",
+      "fr": "Catalyseur de reforgeage légendaire",
       "es": "Catalizador de Reforjar Legendario"
     },
     "desc": {
@@ -2238,7 +2238,7 @@
       "jp": "再錬リセットスクロール",
       "kr": "재련 초기화 스크롤",
       "zh": "重铸重置卷轴",
-      "fr": "Reforge Reset Scroll",
+      "fr": "Parchemin de réinitialisation du reforgeage",
       "es": "Pergamino de Reinicio de Reforjar"
     },
     "desc": {
@@ -2310,7 +2310,7 @@
       "jp": "呪術師一族の宝物",
       "kr": "주술사 일족의 보물",
       "zh": "咒术师一族的宝藏",
-      "fr": "Sorcerer's Family Heirloom",
+      "fr": "Trésor du clan des sorciers",
       "es": "Reliquia de la Familia del Hechicero"
     },
     "desc": {
@@ -2406,7 +2406,7 @@
       "jp": "人類最強の極印",
       "kr": "인류최강의 인장",
       "zh": "人类最强印章",
-      "fr": "Mark of Humanity's Strongest",
+      "fr": "Sceau du plus fort de l'humanité",
       "es": "Marca del Más Fuerte Humano"
     },
     "desc": {
@@ -2726,7 +2726,7 @@
       "jp": "特定の装備と同じ性質を帯びるように、加工が容易な鉱物。\\nイベントショップで購入できる【盲人の仕込み刀】の突破に使用できる。",
       "kr": "특정한 장비와 동일한 성질을 띄도록 가공하기 쉬운 광물입니다. \\n[맹인의 지팡이칼] 의 돌파에 사용됩니다.",
       "zh": "易加工成与特定装备性质相同的矿物。\\n可作为在活动商店中购买的【盲人拐杖刀】的突破材料使用。",
-      "fr": "Un minéral malléable qui peut être traité pour prendre les propriétés spécifiques d'un morceau d'engrenage.\\nUtilisé dans la percée de Guide Cane-Sword.",
+      "fr": "Un minéral facile à façonner pour lui donner les mêmes propriétés qu'un équipement précis.\\nUtilisé pour la percée de Canne-épée d'aveugle.",
       "es": "Un mineral maleable que puede procesarse para adquirir las propiedades específicas de una pieza\\nde equipo. Se utiliza en la ruptura del Bastón-Espada Guía."
     },
     "icon": "TI_Equipment_Growth_Prodduct01",
@@ -2790,7 +2790,7 @@
       "jp": "再錬リセットスクロール【ユニーク】",
       "kr": "재련 초기화 스크롤[영웅]",
       "zh": "重铸初始化卷轴【英雄】",
-      "fr": "Reforge Reset Scroll [Epic]",
+      "fr": "Parchemin de réinitialisation du reforgeage [épique]",
       "es": "Pergamino de Reinicio de Reforjar [Épico]"
     },
     "desc": {
@@ -2910,7 +2910,7 @@
       "jp": "暴君の爪",
       "kr": "폭군의 발톱",
       "zh": "暴君的魔爪",
-      "fr": "Tyrant's Claw",
+      "fr": "Griffe du tyran",
       "es": "Garra Tyrant"
     },
     "desc": {
@@ -2982,7 +2982,7 @@
       "jp": "凍てつく息吹",
       "kr": "얼어붙은 숨결",
       "zh": "冻结的气息",
-      "fr": "Frozen Breath",
+      "fr": "Souffle gelé",
       "es": "Aliento Congelado"
     },
     "desc": {
@@ -3030,7 +3030,7 @@
       "jp": "合成された魂",
       "kr": "합성된 영혼",
       "zh": "合成的灵魂",
-      "fr": "Fused Soul",
+      "fr": "Âme fusionnée",
       "es": "Alma Fusionada"
     },
     "desc": {
@@ -3054,7 +3054,7 @@
       "jp": "危険種の心臓",
       "kr": "위험종의 심장",
       "zh": "危险物种的心脏",
-      "fr": "Apex Predator's Heart",
+      "fr": "Cœur du prédateur suprême",
       "es": "Corazón del Depredador Supremo"
     },
     "desc": {
@@ -3270,7 +3270,7 @@
       "jp": "不滅のおふだ",
       "kr": "불멸의 부적",
       "zh": "不灭符咒",
-      "fr": "Talisman of Immortality",
+      "fr": "Talisman d'immortalité",
       "es": "Talismán Inmortal"
     },
     "desc": {
@@ -3630,7 +3630,7 @@
       "jp": "パープルメモリーストーン",
       "kr": "퍼플 메모리 스톤",
       "zh": "紫色记忆石",
-      "fr": "Purple Memory Stone",
+      "fr": "Pierre de mémoire violette",
       "es": "Piedra Memoria Púrpura"
     },
     "desc": {
@@ -3798,7 +3798,7 @@
       "jp": "ポータブルゲーム機",
       "kr": "휴대용 게임기",
       "zh": "掌上游戏机",
-      "fr": "Dispositif de jeu portable pour jeux",
+      "fr": "Console portable",
       "es": "Dispositivo juego portátil"
     },
     "desc": {
@@ -3846,7 +3846,7 @@
       "jp": "ダンジョンコアの破片",
       "kr": "던전 코어 파편",
       "zh": "暗堡核心残片",
-      "fr": "Dungeon Core Fragment",
+      "fr": "Fragment de cœur de donjon",
       "es": "Fragmento de Dungeon Core"
     },
     "desc": {
@@ -3870,7 +3870,7 @@
       "jp": "コレクション用コイン",
       "kr": "수집용 동전",
       "zh": "硬币藏品",
-      "fr": "Coin de collectionneur",
+      "fr": "Pièce de collection",
       "es": "Moneda Coleccionista"
     },
     "desc": {
@@ -3942,7 +3942,7 @@
       "jp": "貴族の儀装剣",
       "kr": "귀족용 의장검",
       "zh": "贵族礼剑",
-      "fr": "Noble's Ceremonial Sword",
+      "fr": "Épée d'apparat de noble",
       "es": "Espada Ceremonial Noble"
     },
     "desc": {
@@ -4230,7 +4230,7 @@
       "jp": "世界樹の葉",
       "kr": "세계수의 잎",
       "zh": "世界树叶子",
-      "fr": "Leaf of World Tree",
+      "fr": "Feuille de l'Arbre-Monde",
       "es": "Hoja del Árbol del Mundo"
     },
     "desc": {
@@ -4279,7 +4279,7 @@
       "jp": "ナイトウォッチの名誉勲章",
       "kr": "나이트워치 명예훈장",
       "zh": "骑士堡荣誉勋章",
-      "fr": "Night Watch Badge of Honor",
+      "fr": "Médaille d'honneur de la Night Watch",
       "es": "Insignia de Honor de la Guardia Nocturna"
     },
     "desc": {
@@ -5369,7 +5369,7 @@
       "jp": "以下のアイテムをランダムで獲得できる。 \\n- まあまあな強化ハンマー1～5個 \\n- いい強化ハンマー1～5個 \\n- 洗練された強化ハンマー1～5個 \\n- 達人の強化ハンマー1～5個",
       "kr": "랜덤으로 다음 내용물 중 1종을 획득할 수 있습니다.\n - 입문 강화 도구 1~5개\n - 수련 강화 도구 1~5개\n - 전문 강화 도구 1~5개\n - 명인 강화 도구 1~5개",
       "zh": "可随机获得下列物品中的1项。\\n- 1~5个入门强化道具\\n- 1~5个修炼强化道具\\n- 1~5个专家强化道具\\n- 1~5个名匠强化道具",
-      "fr": "Obtenez au hasard l'un des lots suivants :\\n- Apprentice's Hammer x1–5\\n- Expert's Hammer x1–5\\n- Master's Hammer x1–5\\n- Artisan's Hammer x1–5",
+      "fr": "Obtenez au hasard l'un des lots suivants :\n- Marteau de l'apprenti x1–5\n- Marteau de l'expert x1–5\n- Marteau du maître x1–5\n- Marteau de l'artisan x1–5",
       "es": "Obtén al azar uno de los siguientes lotes:\\n- Martillo del Aprendiz x1–5\\n- Martillo del Experto x1–5\\n- Martillo del Amo x1–5\\n- Martillo del Artesano x1–5"
     },
     "icon": "TI_Common_Box01",
@@ -5393,7 +5393,7 @@
       "jp": "以下のアイテムをすべて獲得できる。 \\n- いい強化ハンマー10個 \\n- 再錬カタリスト(レア)10個",
       "kr": "아래 아이템을 모두 획득할 수 있습니다.\n - 수련 강화 도구 10개\n - 고급 재련 촉매제 10개",
       "zh": "可获得以下所有道具。\\n- 10个修炼强化道具\\n- 10个高级重铸催化剂",
-      "fr": "Obtenez tous les objets suivants :\\n- Expert's Hammer x10\\n- Superior Reforge Catalyst x10",
+      "fr": "Obtenez tous les objets suivants :\n- Marteau de l'expert x10\n- Catalyseur de reforgeage supérieur x10",
       "es": "Obtén todos los objetos siguientes:\\n- Martillo del Experto x10\\n- Catalizador de Reforjar Superior x10"
     },
     "icon": "TI_Common_Box03",
@@ -8217,7 +8217,7 @@
       "jp": "スターターブーストパックB",
       "kr": "스타팅 부스터 팩 B",
       "zh": "新手加速包B",
-      "fr": "Starter's Booster pack B",
+      "fr": "Pack de bonus de départ B",
       "es": "Pack Reforzador Starter B"
     },
     "desc": {
@@ -8241,7 +8241,7 @@
       "jp": "スターターブーストパックC",
       "kr": "스타팅 부스터 팩 C",
       "zh": "新手加速包C",
-      "fr": "Starter's Booster pack C",
+      "fr": "Pack de bonus de départ C",
       "es": "Pack Reforzador Starter C"
     },
     "desc": {
@@ -9689,7 +9689,7 @@
       "jp": "以下の中から1種を選択して獲得できる。\\n- 地の進化石 1個\\n- 火の進化石 1個\\n- 水の進化石 1個\\n- 光の進化石 1個\\n- 闇の進化石 1個",
       "kr": "아래 구성품 중, 1종을 선택하여 획득할 수 있습니다.\\n - 지속성 진화석 1개\\n - 화속성 진화석 1개\\n - 수속성 진화석 1개\\n - 명속성 진화석 1개\\n - 암속성 진화석 1개",
       "zh": "可选择并获得下列物品中的1项。\\n - 1个土之进化石\\n - 1个火之进化石\\n - 1个水之进化石\\n - 1个光之进化石\\n - 1个暗之进化石",
-      "fr": "Sélectionnez et obtenez l'une des options suivantes:\\n- Terre Upgrade Stone x1\\n- Incendie Upgrade Stone x1\\n- Eau de mise à niveau Pierre x1\\n- Lumière de mise à niveau Pierre x1\\n- Dark Upgrade Stone x1",
+      "fr": "Choisissez et obtenez l'un des lots suivants :\\n- Pierre d'évolution de terre x1\\n- Pierre d'évolution de feu x1\\n- Pierre d'évolution d'eau x1\\n- Pierre d'évolution de lumière x1\\n- Pierre d'évolution ténébreuse x1",
       "es": "Seleccione y obtenga uno de los siguientes:\\n- Piedra de Mejora de Tierra x1 -\\nPiedra de Mejora de Fuego x1 -\\nPiedra de Mejora de Agua x1 -\\nPiedra de Mejora de Luz x1 - Piedra\\nde Mejora de Oscuridad x1"
     },
     "icon": "TI_Common_Box04",
@@ -10137,7 +10137,7 @@
       "jp": "ロビーマスコット - SDエターナル",
       "kr": "로비 마스코트 - SD 이터널",
       "zh": "大厅吉祥物 - 迷你伊特诺",
-      "fr": "Lobby Mascot: Chibi Eternal",
+      "fr": "Mascotte de lobby : Chibi Eternal",
       "es": "Mascota del vestíbulo: Chibi Eternal"
     },
     "desc": {
@@ -10425,7 +10425,7 @@
       "jp": "連合戦参加報酬3",
       "kr": "연합전 참여 보상 3",
       "zh": "公会联合战参与奖励3",
-      "fr": "Guild Raid Participation Prize 3",
+      "fr": "Récompense de participation au Raid de guilde 3",
       "es": "Premio Incursión Gremio 3"
     },
     "desc": {
@@ -11001,7 +11001,7 @@
       "jp": "★2仲間スカウトチケット",
       "kr": "2성 동료 소환권",
       "zh": "2星同伴召唤券",
-      "fr": "2★ Hero Ticket",
+      "fr": "Ticket de recrutement de Héros 2★",
       "es": "Ticket de Héroe 2★"
     },
     "desc": {
@@ -11745,7 +11745,7 @@
       "jp": "ロビーマスコット\\n - あめ",
       "kr": "로비 마스코트 - SD 아메",
       "zh": "大厅吉祥物 - 迷你亚美",
-      "fr": "Lobby Mascot: Chibi Ame",
+      "fr": "Mascotte de lobby : Chibi Ame",
       "es": "Mascota del vestíbulo - Chibi Ame"
     },
     "desc": {
@@ -12081,7 +12081,7 @@
       "jp": "ナイトウォッチの補給パック",
       "kr": "나이트워치 전투 보급팩",
       "zh": "骑士堡战斗补给包",
-      "fr": "Nightwatch Battle Supply pack",
+      "fr": "Pack de ravitaillement de la Night Watch",
       "es": "Suministro Batalla Nightwatch"
     },
     "desc": {
@@ -12633,7 +12633,7 @@
       "jp": "ロビー背景 - ダリアの魔王城",
       "kr": "로비 - 달리아의 마왕성",
       "zh": "大厅 - 达利娅的魔王城堡",
-      "fr": "Lobby: Dahlia's Archdemon Castle",
+      "fr": "Lobby : Château de l'Archidémon Dahlia",
       "es": "Vestíbulo: Castillo de Dahlia, Archidemonio"
     },
     "desc": {
@@ -12662,7 +12662,7 @@
     },
     "desc": {
       "en": "You can select and recruit one 3★ hero. \\nIf you select a hero that you already own, it will automatically be converted into 50 Hero Pieces.\\n\\nObtainable heroes: \\nRhona, Valentine, Francesca, Rin, Alice, Hanbyul Lee, Noa, Saeran, Beth, Maxwell, Eliza, Veronica, Leo, Eternal, Laplace, Mene, Aer, Notia",
-      "jp": "★3の仲間から1体を選択して獲得できる。\\nすでに獲得している仲間は仲間のピース50個を獲得できる。\\n\\n獲得できる仲間：\\nロナ、バレンタイン、フランシスカ、リン、アリス、イ・ハンビョル、ノア、セイラン、ベス、マクスウェル、エリーゼ、ヴェロニカ、レオ、エターナル、ラプラス、メネ、アエル、ノティア",
+      "jp": "★3の仲間から1体を選択して獲得できる。\\nすでに獲得している仲間は仲間のピース50個を獲得できる。\\n\\n獲得できる仲間：\\nロナ、バレンタイン、フランシスカ、リン、アリス、星野きらら、ノア、セイラン、ベス、マクスウェル、エリーゼ、ヴェロニカ、レオ、エターナル、ラプラス、メネ、アエル、ノティア",
       "kr": "3성 동료 중 한명을 선택해 영입할 수 있습니다. \\n이미 획득한 동료는 동료 조각 50개로 획득합니다.\\n\\n획득 가능 캐릭터: \\n로나,발렌타인,프란시스카,린,앨리스,이한별,노아,세이란,베스,맥스웰,엘리제,베로니카,레오,이터널,라플라스,메네,아에르,노티아",
       "zh": "可选择并招募1名3星同伴。\\n对于已获得的同伴将获得同伴碎片50个。\\n\\n可获得角色：\\n罗娜、瓦伦塔茵、弗朗西丝卡、琳、爱丽丝、李寒星、诺雅、萨伊蓝、贝丝、麦克斯威尔、伊莉莎、维罗妮卡、雷欧、伊特诺、拉普拉丝、麦尼、艾耶尔、诺缇亚",
       "fr": "Vous pouvez sélectionner et recruter un 3★ héros.\\nSi vous sélectionnez un héros que vous possédez déjà, il sera automatiquement converti en 50 pièces de héros.\\n\\nHéros récupérables:\\nRhona, Valentine, Francesca, Rin, Alice, Hanbyul Lee, Noa, Saeran, Beth, Maxwell, Eliza, Veronica, Léo, Éternel, Laplace, Mene, Aer, Notia, Notia, Aer, Notia, Notia, Nota, Laplace, Mene, Laplace, Leo, Eternal, Laplace, Lave, Lave,",
@@ -13145,7 +13145,7 @@
       "jp": "以下の防具素材を獲得できる。\\n\\n少女の夢 140個\\n暴君の爪 140個\\n自律修復外装 140個\\n\\n合成された魂 84個\\n危険種の心臓 84個\\nロストメモリーズ 84個",
       "kr": "아래의 방어구 제작 재료를 획득합니다.\\n\\n소녀의 꿈 140개\\n폭군의 발톱 140개\\n자율 수복 외장 140개\\n\\n합성된 영혼 84개\\n위험종의 심장 84개\\n로스트 메모리즈 84개",
       "zh": "可获得下列防具制作材料。\\n\\n少女的梦x140\\n暴君的魔爪x140\\n自主修复外部装备x140\\n\\n合成的灵魂x84\\n危险物种的心脏x84\\n遗失的记忆x84",
-      "fr": "Obtenir les matériaux suivants pour le travail des armures.\\n\\n140 Essence du rêve d'une petite fille\\n140 Griffe de tyran de tyran\\n140 Placage auto-régénéré\\n\\n84 âme fusée âme frémissante\\n84 Apex Predator's Heart de coeur du prédateur Apex\\n84 Mémoire perdue de mémoire",
+      "fr": "Obtenez les matériaux de fabrication d'armure suivants :\\n\\nEssence de rêves d'une petite fille x140\\nGriffe du tyran x140\\nPlacage auto-régénéré x140\\n\\nÂme fusionnée x84\\nCœur du prédateur suprême x84\\nMémoire perdue x84",
       "es": "Obtén los siguientes materiales para crear armaduras.\\n\\n140 Esencia del Sueño de una Chica\\n140 Garra del Tyrant\\n140 Placa Autoregenerativa\\n\\n84 Alma Fusionada\\n84 Corazón del Depredador Supremo\\n84 Memoria Perdida"
     },
     "icon": "TI_Armor_Box02",
@@ -14217,7 +14217,7 @@
       "jp": "ワールドボス浄化報酬",
       "kr": "월드 보스 정화 보상",
       "zh": "世界首领净化奖励",
-      "fr": "World boss Purification Reward",
+      "fr": "Récompense de purification du Boss mondial",
       "es": "Recompensa Purificación Jefe Mundial"
     },
     "desc": {
@@ -14606,7 +14606,7 @@
     },
     "desc": {
       "en": "You can recruit a random 3★ hero. \\nIf you recruit a hero that you already own, it will automatically be converted into 50 Hero Pieces.\\n\\nObtainable heroes: \\nRhona, Valentine, Francesca, Alice, Maxwell, Noa, Saeran, Beth, Eliza, Veronica, Leo, Laplace, Rin, Eternal, Hanbyul Lee, Aer, Mene, Notia, Sterope, Astei, Tamara, Christina, Akari, Ame, Drakhan, Epsilon, Dahlia, Mero, Charlotte, Regina, Vlada, Kanon, Edelweiss, Dianne, Iota.",
-      "jp": "★3の仲間から1体をランダムで獲得できる。\\nすでに獲得している仲間は仲間のピース50個を獲得できる。\\n\\n獲得できる仲間：\\nロナ、バレンタイン、フランシスカ、アリス、マクスウェル、ノア、セイラン、ベス、エリーゼ、ヴェロニカ、レオ、ラプラス、リン、エターナル、イ・ハンビョル、アエル、メネ、ノティア、ステロペ、アステ、タマラ、クリスティーナ、アカリ、あめ、ドレイカーン、イプシロン、ダリア、メロ、シャーロット、ヴラダ、カノン、エーデルバイス、ダイアン、イオータ。",
+      "jp": "★3の仲間から1体をランダムで獲得できる。\\nすでに獲得している仲間は仲間のピース50個を獲得できる。\\n\\n獲得できる仲間：\\nロナ、バレンタイン、フランシスカ、アリス、マクスウェル、ノア、セイラン、ベス、エリーゼ、ヴェロニカ、レオ、ラプラス、リン、エターナル、星野きらら、アエル、メネ、ノティア、ステロペ、アステ、タマラ、クリスティーナ、アカリ、あめ、ドレイカーン、イプシロン、ダリア、メロ、シャーロット、ヴラダ、カノン、エーデルバイス、ダイアン、イオータ。",
       "kr": "3성 동료 중 한명을 영입할 수 있습니다. \\n이미 획득한 동료는 동료 조각 50개로 획득합니다.\\n\\n획득 가능 캐릭터: \\n로나, 발렌타인, 프란시스카, 앨리스, 맥스웰, 노아, 세이란, 베스, 엘리제, 베로니카, 레오, 라플라스, 린, 이터널, 이한별, 아에르, 메네, 노티아, 스테로페, 아스테, 타마라, 크리스티나, 아카리, 아메, 드레이칸, 엡실론, 달리아, 메로, 샬롯, 레지나, 블라다, 카논, 에델바이스, 다이안, 요타.",
       "zh": "可选择并招募1名3星同伴。\\n对于已获得的同伴将获得同伴碎片50个。\\n\\n可获得角色：\\n罗娜、瓦伦塔茵、弗朗西丝卡、爱丽丝、麦克斯威尔、诺雅、萨伊蓝、贝丝、伊莉莎、维罗妮卡、雷欧、拉普拉丝、琳、伊特诺、李寒星、艾耶尔、麦尼、诺缇亚、史提洛佩、奥斯黛、塔玛拉、克莉丝提娜、阿卡莉、亚美、德雷坎、埃普西隆、达利娅、梅罗、夏洛特、蕾吉纳、布拉达、卡农、艾妲尔薇斯、黛安、佑妲。",
       "fr": "Vous pouvez recruter un aléatoire 3★ héros.\\nSi vous recrutez un héros que vous possédez déjà, il sera automatiquement converti en 50 Hero Pieces.\\n\\nHéros récupérables:\\nRhona, Valentine, Francesca, Alice, Maxwell, Noa, Saeran, Beth, Eliza, Veronica, Léo, Laplace, Rin, Eternal, Hanbyul Lee, Aer, Mene, Notia, Sterope, Astai, Tamara, Christina, Akari, Ame, Drakhan, Epsilon, Dahlia, Mero, Charlotte, Regina, Vlada, Kanon, Edelweiss, Dianne, Iota.",
@@ -14961,7 +14961,7 @@
       "jp": "プロソンのラッキードロー",
       "kr": "프로손의 럭키 드로우",
       "zh": "弗洛森的幸运抽奖",
-      "fr": "Proxxon's Lucky Draw",
+      "fr": "Tirage au sort de Proxxon",
       "es": "La Suerte de Proxxon"
     },
     "desc": {
@@ -15373,12 +15373,12 @@
       "es": "Cofre Secreto de la Línea Mundial"
     },
     "desc": {
-      "en": "A chest that can be obtained as a Monad Report reward. Contains various items based on chance.",
-      "jp": "モナドレポートの報酬で獲得できるBOXです。一定の確率で様々なアイテムを獲得する。",
-      "kr": "모나드 리포트 보상으로 얻을 수 있는 상자입니다. 다양한 아이템을 확률에 따라 얻습니다.",
-      "zh": "这是透过单子门报告奖励获得的宝箱。可依照几率获得各种道具。",
-      "fr": "Une coffre qui peut être obtenue comme une récompense Monad Rapport. Contient divers éléments basés sur le hasard.",
-      "es": "Cofre del Informe Monad. Contiene objetos según la suerte."
+      "en": "A chest obtainable as a reward from the Dimensional Singularity Weekly Mission. Grants various items at random.",
+      "jp": "次元特異点ウィークリーミッションの報酬で獲得できるBOXです。一定の確率で様々なアイテムを獲得できます。",
+      "kr": "차원 특이점 주간 미션 보상으로 얻을 수 있는 상자입니다. 다양한 아이템을 확률에 따라 얻습니다.",
+      "zh": "可作为次元奇点每周任务奖励获得的宝箱。开启后可随机获得各种道具。",
+      "fr": "Coffre disponible en récompense de la Mission hebdomadaire de Singularité Dimensionnelle. Son ouverture permet d'obtenir divers objets aléatoires.",
+      "es": "Cofre que se obtiene como recompensa de la Misión semanal de Singularidad Dimensional. Al abrirlo, se obtienen distintos objetos al azar."
     },
     "icon": "TI_G_Dungeon_Box02",
     "grade": "unique",
@@ -15417,7 +15417,7 @@
       "jp": "ロビー：ユートピアへの航海",
       "kr": "로비 - 유토피아로의 항해",
       "zh": "大廳：航向烏托邦",
-      "fr": "Lobby – Voyage to Utopia",
+      "fr": "Lobby – Voyage vers Utopia",
       "es": "Vestíbulo – Viaje a Utopia"
     },
     "desc": {
@@ -16881,7 +16881,7 @@
       "jp": "限界突破メモリー【火】",
       "kr": "한계 돌파 메모리 [화]",
       "zh": "极限突破记忆[火]",
-      "fr": "Limit Break Memory [Fire]",
+      "fr": "Mémoire de dépassement de limite [Feu]",
       "es": "Memoria de Ruptura del Límite [Fire]"
     },
     "desc": {
@@ -16905,7 +16905,7 @@
       "jp": "限界突破メモリー【水】",
       "kr": "한계 돌파 메모리 [수]",
       "zh": "极限突破记忆[水]",
-      "fr": "Limit Break Memory [Water]",
+      "fr": "Mémoire de dépassement de limite [Eau]",
       "es": "Memoria de Ruptura del Límite [Water]"
     },
     "desc": {
@@ -17049,7 +17049,7 @@
       "jp": "限界突破メモリー",
       "kr": "한계 돌파 메모리",
       "zh": "极限突破记忆",
-      "fr": "Limit Break Memory",
+      "fr": "Mémoire de dépassement de limite",
       "es": "Memoria de Ruptura Límite"
     },
     "desc": {
@@ -17241,7 +17241,7 @@
       "jp": "ワールドアリーナ10回参加報酬",
       "kr": "실시간 대전 10회 참여 보상",
       "zh": "世界竞技场参与10次奖励",
-      "fr": "Real-Time Arena 10 Participations Reward",
+      "fr": "Récompense pour 10 participations à l'Arène en temps réel",
       "es": "Recompensa 10 participaciones Arena Tiempo Real"
     },
     "desc": {
@@ -18393,7 +18393,7 @@
       "jp": "ロビー背景 - マグノリア魔法学園",
       "kr": "로비 배경 - 매그놀리아 시내",
       "zh": "大厅背景 - 麦格诺里亚市区",
-      "fr": "Lobby Background: Magnolia City",
+      "fr": "Fond de lobby : Centre-ville de Magnolia",
       "es": "Fondo de Vestíbulo: Ciudad Magnolia"
     },
     "desc": {
@@ -20433,7 +20433,7 @@
       "jp": "次元特異点デイリー参加報酬",
       "kr": "차원 특이점 일일 참여 보상",
       "zh": "次元奇点每日参与奖励",
-      "fr": "Dimensional Singularity Daily Participation Reward",
+      "fr": "Récompense de participation quotidienne à la Singularité dim.",
       "es": "Recompensa Diaria de Participación en la Singularidad Dimensional"
     },
     "desc": {
@@ -20649,7 +20649,7 @@
       "jp": "次元特異点ランキング報酬 - 51位~100位",
       "kr": "차원 특이점 랭킹 보상 - 51위~100위",
       "zh": "次元奇点排名奖励 - 第51~100名",
-      "fr": "Dimensional Singularity Ranking Reward - 51st~100th Place",
+      "fr": "Récompense de classement de la Singularité dim. – 51e à 100e place",
       "es": "Recompensa de Clasificación de Singularidad Dimensional - Puestos 51°~100°"
     },
     "desc": {
@@ -20745,7 +20745,7 @@
       "jp": "次元特異点ランキング参加報酬",
       "kr": "차원 특이점 랭킹 참가 보상",
       "zh": "次元奇点排名参与奖励",
-      "fr": "Dimensional Singularity Ranking Participation Reward",
+      "fr": "Récompense de participation au classement de la Singularité dim.",
       "es": "Recompensa de Participación en Clasificación de Singularidad Dimensional"
     },
     "desc": {
@@ -20817,7 +20817,7 @@
       "jp": "限界突破メモリー x30",
       "kr": "한계 돌파 메모리 x30",
       "zh": "极限突破记忆 x30",
-      "fr": "Limit Break Memory x30",
+      "fr": "Mémoire de dépassement de limite x30",
       "es": "Memoria de Ruptura Límite x30"
     },
     "desc": {
@@ -20841,7 +20841,7 @@
       "jp": "限界突破メモリー x30",
       "kr": "한계 돌파 메모리 x30",
       "zh": "极限突破记忆 x30",
-      "fr": "Limit Break Memory x30",
+      "fr": "Mémoire de dépassement de limite x30",
       "es": "Memoria de Ruptura Límite x30"
     },
     "desc": {
@@ -20865,7 +20865,7 @@
       "jp": "限界突破メモリー x30",
       "kr": "한계 돌파 메모리 x30",
       "zh": "极限突破记忆 x30",
-      "fr": "Limit Break Memory x30",
+      "fr": "Mémoire de dépassement de limite x30",
       "es": "Memoria de Ruptura Límite x30"
     },
     "desc": {
@@ -20889,7 +20889,7 @@
       "jp": "限界突破メモリー x30",
       "kr": "한계 돌파 메모리 x30",
       "zh": "极限突破记忆 x30",
-      "fr": "Limit Break Memory x30",
+      "fr": "Mémoire de dépassement de limite x30",
       "es": "Memoria de Ruptura Límite x30"
     },
     "desc": {
@@ -23361,7 +23361,7 @@
       "jp": "リミテッドスカウトチケット",
       "kr": "리미티드 영입 티켓",
       "zh": "限定招募券",
-      "fr": "limité Recruitment Ticket",
+      "fr": "Ticket de recrutement limité",
       "es": "Boleto de Reclutamiento Limitado"
     },
     "desc": {
@@ -23385,7 +23385,7 @@
       "jp": "リミテッドスカウトチケット(イベント)",
       "kr": "리미티드 영입 티켓 (이벤트)",
       "zh": "限定招募券(活动)",
-      "fr": "Billet de recrutement limité (événement)",
+      "fr": "Ticket de recrutement limité (événement)",
       "es": "Boleto de Reclutamiento Limitado (Evento)"
     },
     "desc": {
@@ -23433,7 +23433,7 @@
       "jp": "次元召喚チケット（イベント）",
       "kr": "차원 호출 티켓(이벤트)",
       "zh": "次元召唤券（活动）",
-      "fr": "Dimensional Supply Ticket (Event)",
+      "fr": "Billet d'approvisionnement dimensionnel (événement)",
       "es": "Boleto Suministro Dim. (Evento)"
     },
     "desc": {
@@ -23457,7 +23457,7 @@
       "jp": "スタータースカウトチケット",
       "kr": "스타터 영입 티켓",
       "zh": "新手招募券",
-      "fr": "Starter Recruitment Ticket",
+      "fr": "Ticket de recrutement de départ",
       "es": "Boleto de Reclutamiento Inicial"
     },
     "desc": {
@@ -24513,7 +24513,7 @@
       "jp": "看守ニャンのコア",
       "kr": "간수냥이의 코어",
       "zh": "看守喵的核心",
-      "fr": "Officer Felix's Core",
+      "fr": "Cœur d'Officier Felix",
       "es": "Core Oficial Felix"
     },
     "desc": {
@@ -24609,7 +24609,7 @@
       "jp": "ビーチタオル応募券",
       "kr": "비치타월 응모권",
       "zh": "沙滩毛巾应募券",
-      "fr": "Beach Towel Raffle Ticket",
+      "fr": "Ticket de tombola pour une serviette de plage",
       "es": "Sorteo Toalla Playa"
     },
     "desc": {
@@ -24633,7 +24633,7 @@
       "jp": "マウスパッド応募券",
       "kr": "마우스패드 응모권",
       "zh": "鼠标垫应募券",
-      "fr": "Mouse Pad Raffle Ticket",
+      "fr": "Ticket de tombola pour un tapis de souris",
       "es": "Boleto de Rifa de Alfombrilla de Ratón"
     },
     "desc": {
@@ -24657,7 +24657,7 @@
       "jp": "マット応募券",
       "kr": "매트 응모권",
       "zh": "地垫应募券",
-      "fr": "Mat Raffle Ticket",
+      "fr": "Ticket de tombola pour un tapis",
       "es": "Boleto de Rifa de Esterilla"
     },
     "desc": {
@@ -24681,7 +24681,7 @@
       "jp": "折りたたみ傘応募券",
       "kr": "우산 응모권",
       "zh": "雨伞应募券",
-      "fr": "Umbrella Raffle Ticket",
+      "fr": "Ticket de tombola pour un parapluie",
       "es": "Sorteo Paraguas"
     },
     "desc": {
@@ -24729,7 +24729,7 @@
       "jp": "ドーリーパック応募券",
       "kr": "돌리 패키지 응모권",
       "zh": "多莉礼包应募券",
-      "fr": "Dolly pack Raffle Ticket",
+      "fr": "Ticket de tombola pour un pack Dolly",
       "es": "Sorteo Pack Dolly"
     },
     "desc": {
@@ -24825,7 +24825,7 @@
       "jp": "【デイリー】まあまあな強化ボックス",
       "kr": "[일일] 입문 강화 도구 상자",
       "zh": "【每日】入门强化道具箱",
-      "fr": "[Daily] Apprentice's Hammer coffre",
+      "fr": "[Quotidien] Coffre de Marteaux de l'apprenti",
       "es": "[Diario] Cofre Martillo del Aprendiz"
     },
     "desc": {
@@ -26207,7 +26207,7 @@
       "jp": "エッセプの機能服・イオータ",
       "kr": "엣셉흐의 기능복 요타",
       "zh": "埃瑟夫赫的功能服佑妲",
-      "fr": "Eseph Functional Wear Iota",
+      "fr": "Iota en tenue fonctionnelle d'Eseph",
       "es": "Ropa funcional Iota de Eseph"
     },
     "desc": {
@@ -27206,7 +27206,7 @@
       "jp": "致命的なバニーガール・ビエラ",
       "kr": "치명적인 바니걸 비엘라",
       "zh": "致命兔女郎比埃拉",
-      "fr": "Fatal Bunny Girl Viella",
+      "fr": "Viella, lapine fatale",
       "es": "Fatal Chica Conejo Viella"
     },
     "desc": {
@@ -28271,20 +28271,20 @@
   "SYS_ASSET_EVENT_COIN_3": {
     "kind": "goods",
     "name": {
-      "en": "Sealed Invitation",
-      "jp": "印つき招待状",
-      "kr": "인장이 찍힌 초대장",
-      "zh": "盖有印章的邀请函",
-      "fr": "Invitation scellée",
-      "es": "Invitación Sellada"
+      "en": "Ame's Relic",
+      "jp": "あめの舎利",
+      "kr": "아메의 사리",
+      "zh": "亚美的舍利",
+      "fr": "Relique d'Ame",
+      "es": "Reliquia de Ame"
     },
     "desc": {
-      "en": "An invitation stamped with an elegant seal in sealing wax. Can be exchanged for various items in the Event Shop.",
-      "jp": "シーリングワックスで上品な印章が押された招待状。イベントショップでさまざまなアイテムと交換できます。",
-      "kr": "실링 왁스로 위에 고급스러운 형태의 인장이 찍힌 초대장. 이벤트 상점에서 다양한 상품과 교환할 수 있습니다.",
-      "zh": "用封蜡盖有精致印章的邀请函。可在活动商店兑换各种商品。",
-      "fr": "Une invitation ornée d'un élégant sceau de cire. Peut être échangée contre divers objets dans la Boutique de l'événement.",
-      "es": "Una invitación con un elegante sello de lacre. Se puede canjear por varios artículos en la Tienda del Evento."
+      "en": "A relic formed within Ame as proof of the suffering caused by her attendants' bizarre antics. Can be exchanged for various items in the Event Shop.",
+      "jp": "従者たちのさまざまな奇行によって、あめの体内に生じた苦行の証。イベントショップでさまざまなアイテムと交換できます。",
+      "kr": "자신의 수행원들이 벌이는 각종 기행으로 인해, 아메의 속에 생격난 고행의 증거. 이벤트 상점에서 다양한 상품과 교환할 수 있습니다.",
+      "zh": "因随从们的种种奇异举动而在亚美体内形成的苦行之证。可在活动商店兑换各种商品。",
+      "fr": "Une relique formée dans le corps d'Ame, témoin des souffrances causées par les excentricités de ses compagnons. Échangeable contre divers objets dans la boutique de l'événement.",
+      "es": "Una reliquia formada en el interior de Ame como prueba del sufrimiento que le causan las excentricidades de sus acompañantes. Se puede canjear por diversos artículos en la Tienda del Evento."
     },
     "icon": "TI_Item_Event_Coin_03",
     "grade": "normal",
@@ -28294,20 +28294,20 @@
   "SYS_ASSET_EVENT_COIN_4": {
     "kind": "goods",
     "name": {
-      "en": "Prototype Moon Dumpling",
-      "jp": "試作月団子",
-      "kr": "시제품 달경단",
-      "zh": "试制月亮团子",
-      "fr": "Prototype de boulette de riz lunaire",
-      "es": "Prototipo de bolita de arroz lunar"
+      "en": "Wishful Letter",
+      "jp": "願いを込めた手紙",
+      "kr": "소원이 담긴 편지",
+      "zh": "愿望信",
+      "fr": "Lettre à souhaits",
+      "es": "Carta con deseos"
     },
     "desc": {
-      "en": "A pure white Moon Dumpling shaped like the moon. This rice cake is still in its plain, unmodified form, with nothing added yet. Can be exchanged for various items in the Event Shop.",
-      "jp": "月をかたどった純白の月団子。まだ何も加えられていない、素の状態の餅。イベントショップでさまざまなアイテムと交換できます。",
-      "kr": "달을 본따 만든 순백색의 달경단. 아직 아무것도 첨가하지 않은 순정 상태의 떡이다. 이벤트 상점에서 다양한 상품과 교환할 수 있습니다.",
-      "zh": "仿照月亮制成的纯白色月亮团子。仍是尚未加入任何添加物的原始年糕。可在活动商店兑换各种商品。",
-      "fr": "Une boulette de riz lunaire d'un blanc pur, façonnée à l'image de la lune. Ce gâteau de riz est encore à l'état brut, sans aucun ajout. Peut être échangé contre divers articles dans la boutique de l'événement.",
-      "es": "Una bolita de arroz lunar de color blanco puro, hecha a imagen de la luna. Todavía es un pastel de arroz sin modificar, al que no se le ha añadido nada. Se puede canjear por diversos artículos en la Tienda del Evento."
+      "en": "A letter said to bring special luck to whoever reads it. Can be exchanged for various items in the Event Shop.",
+      "jp": "読んだ人に特別な幸運をもたらすといわれる手紙。イベントショップでさまざまなアイテムと交換できます。",
+      "kr": "읽는 자에게 특별한 행운을 전해준다는 편지. 이벤트 상점에서 다양한 상품과 교환할 수 있습니다.",
+      "zh": "据说能为阅读者带来特别好运的信。可在活动商店兑换各种商品。",
+      "fr": "Une lettre qui apporterait une chance particulière à quiconque la lit. Échangeable contre divers objets dans la boutique de l'événement.",
+      "es": "Una carta que, según dicen, trae una suerte especial a quien la lee. Se puede canjear por diversos artículos en la Tienda del Evento."
     },
     "icon": "TI_Item_Event_Coin_04",
     "grade": "normal",
@@ -28318,19 +28318,19 @@
     "kind": "goods",
     "name": {
       "en": "Doughppelgänger",
-      "jp": "餅ペルゲンガー",
+      "jp": "モチッペルゲンガー",
       "kr": "떡플갱어",
       "zh": "年糕二重身",
-      "fr": "Monnaie de ville de Neo Iota",
+      "fr": "Doughppelgänger",
       "es": "Doughppelgänger"
     },
     "desc": {
-      "en": "A parasitic rice cake containing a Doppelgänger's core. Despite its cute appearance, it uses living creatures as hosts and siphons their mana. Can be exchanged for various items in the Event Shop.",
-      "jp": "自己像幻視の核を宿した寄生性の餅。かわいらしい見た目とは裏腹に、生物を宿主として魔力を奪う。イベントショップでさまざまなアイテムと交換できます。",
+      "en": "A parasitic rice cake containing a Doppelgänger's core. Despite its cute appearance, it takes living creatures as hosts and siphons their mana. Can be exchanged for various items in the Event Shop.",
+      "jp": "ドッペルゲンガーのコアを宿した寄生型の餅。かわいらしい見た目とは裏腹に、生き物を宿主として魔力を奪う。イベントショップでさまざまなアイテムと交換できます。",
       "kr": "도플갱어의 핵을 품은 기생형 떡. 귀여운 외형과 달리, 생물을 숙주로 삼아 마력을 갈취한다. 이벤트 상점에서 다양한 상품과 교환할 수 있습니다.",
-      "zh": "包裹着二重身核心的寄生型年糕。与可爱的外表不同，会以生物为宿主，掠夺其魔力。可在活动商店兑换各种商品。",
-      "fr": "Un billet neuf, doré & impeccable. Échangeable contre divers articles dans la boutique de l'événement",
-      "es": "Un pastel de arroz parásito que contiene el núcleo de un Doppelgänger. A pesar de su aspecto adorable, usa a seres vivos como huéspedes y les absorbe el maná. Se puede canjear por diversos artículos en la Tienda del Evento."
+      "zh": "藏有二重身核心的寄生型年糕。与可爱的外表不同，它会以生物为宿主，榨取魔力。可在活动商店兑换各种商品。",
+      "fr": "Un gâteau de riz parasite abritant le noyau d'un Sosie. Malgré son apparence adorable, il prend des êtres vivants pour hôtes et siphonne leur mana. Échangeable contre divers objets dans la boutique de l'événement.",
+      "es": "Un pastel de arroz parasitario que alberga el núcleo de un Doppelgänger. Pese a su aspecto adorable, usa seres vivos como huéspedes y les absorbe el maná. Se puede canjear por diversos artículos en la Tienda del Evento."
     },
     "icon": "TI_Item_Event_Coin_05",
     "grade": "normal",
