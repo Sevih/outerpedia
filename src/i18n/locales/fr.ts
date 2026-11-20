@@ -814,6 +814,24 @@ const fr: Record<TranslationKey, string> = {
   'guides.singularity.library.title': 'Bibliothèque des boss',
   'guides.singularity.library.tagline':
     "Chaque guide reste accessible même quand son boss n'est pas actif.",
+  // Section « Ranks » (C27) : les chiffres viennent de l'échelle dérivée des tables.
+  'guides.singularity.ranks.title': 'Rangs',
+  'guides.singularity.ranks.tagline':
+    "De E à EX+++ : ce que chaque rang change sur le boss, et ce qu'il rapporte.",
+  'guides.singularity.ranks.how':
+    'Votre rang dépend des dégâts infligés en un seul run. Chaque rang est une barre de PV du boss : une fois franchie, le boss passe au rang suivant, monte de niveau et, à certains rangs, gagne de nouveaux passifs.',
+  'guides.singularity.ranks.element_note':
+    'Dès le rang S, les héros sans avantage élémentaire sur le boss infligent beaucoup moins de dégâts et de dégâts de jauge de faiblesse (lignes Réduction finale des dégâts et Réduction des dégâts de jauge de faiblesse).',
+  'guides.singularity.ranks.ex_note':
+    "Dès le rang EX, le boss subit moins de dégâts des DoT, et l'EX Buff renforce les alliés de l'élément ou de la classe désignés par le boss.",
+  'guides.singularity.ranks.rewards_note':
+    'Chaque rang atteint donne sa propre récompense. Les récompenses de rang se réinitialisent chaque semaine, à chaque nouvelle saison hebdomadaire.',
+  'guides.singularity.ranks.ether_note':
+    "L'{ether} ne vient pas des rangs : il s'obtient par le classement quotidien, calculé sur votre score total.",
+  'guides.singularity.ranks.col_damage': 'Dégâts requis',
+  'guides.singularity.ranks.col_changes': 'Changements du boss',
+  'guides.singularity.ranks.ex_buff':
+    "EX Buff : +{value}% de dégâts pour les alliés de l'élément ou de la classe désignés par le boss",
   // Guide landing — categories index
   'guides.counter': '{guides} guides · {categories} catégories',
   'guides.count.one': '{count} GUIDE',

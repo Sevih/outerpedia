@@ -26,8 +26,12 @@
  * appartient à l'app (pure fonction de l'ancre et de la date) ; ce fichier
  * fournit les paramètres, pas un calendrier déroulé.
  *
- * Les paliers E…SSS (SingularityGradeTemplet) vivent déjà sur
- * `encounters.json` (`DungeonRef.ranks`) — pas dupliqués ici.
+ * Les paliers E…EX+++ (SingularityGradeTemplet) vivent déjà sur
+ * `encounters.json` (`DungeonRef.ranks`) — pas dupliqués ici. Le BUFF EX
+ * (patch du 20/11/2026), lui, n'est pas un passif de palier : il dépend du
+ * CRÉNEAU de rotation (`SingularityDungeonGroupTemplet.BossRankBuffGroupID`,
+ * un même donjon n'a pas le même buff d'une semaine à l'autre) — il sort donc
+ * ici, en glossaire `exBuffs` référencé par `SingularityBoss.exBuff`.
  */
 import type { LangDict } from '../lib/lang';
 import { slugEnum } from '../lib/enums';
@@ -48,6 +52,25 @@ export interface SingularityBoss {
   /** Sprites de la table (vignette/bannière — nommés d'après le boss SOURCE). */
   thumbnail?: string;
   banner?: string;
+  /** Buff EX de ce créneau (`BossRankBuffGroupID` — réf `SingularityData.exBuffs`). */
+  exBuff?: string;
+}
+
+/**
+ * BUFF EX (`SingularityBossRankBuffTemplet`) : au palier d'activation, les
+ * héros d'un élément ou d'une classe désignés par le boss gagnent un bonus de
+ * dégâts (« All Fire allies' Damage +200% »). Choisi en Mock Battle, imposé
+ * par le créneau en combat classé.
+ */
+export interface SingularityExBuff {
+  /** Palier d'activation : `RankName` du rang `BuffActiveRank` (« EX »). */
+  rank: string;
+  /** Libellé du jeu (`OptionDesc`, TextSystem). */
+  desc: LangDict;
+  /** Buff appliqué (`OptionID` → `BuffTemplet.BuffID`). */
+  option: string;
+  /** Valeur brute du buff (per-mille : 2000 = +200 %), si le buff est résolu. */
+  value?: number;
 }
 
 /** Un groupe de la rotation (une semaine). */
@@ -84,6 +107,11 @@ export interface SingularitySchedule {
 export interface SingularityData {
   schedule: SingularitySchedule;
   groups: SingularityGroup[];
+  /**
+   * Buffs EX par `BossRankBuffGroupID`. Optionnel dans le TYPE : une donnée
+   * générée avant le patch du 20/11/2026 ne le porte pas.
+   */
+  exBuffs?: Record<string, SingularityExBuff>;
 }
 
 const CURATED_PATH = 'data/curated/singularity.json';
@@ -159,6 +187,7 @@ export function buildSingularity(): SingularityData {
   const dungeonById = indexBy(loadTable('DungeonTemplet'));
   const spawnsByGroup = groupBy(loadTable('DungeonSpawnTemplet'), 'GroupID');
   const dungeonGroups = groupBy(loadTable('SingularityDungeonGroupTemplet'), 'GroupID');
+  const exBuffs = buildExBuffs(tsys);
 
   /** Monstres spawnés d'un donjon (traversée partagée — cf. encounters). */
   const monstersOf = (dungeonId: string): string[] =>
@@ -187,6 +216,11 @@ export function buildSingularity(): SingularityData {
         };
         if (g.BossThumbnail) boss.thumbnail = g.BossThumbnail;
         if (g.BossBanner) boss.banner = g.BossBanner;
+        const ex = g.BossRankBuffGroupID;
+        if (ex) {
+          if (exBuffs[ex]) boss.exBuff = ex;
+          else console.warn(`⚠ singularity : buff EX ${ex} (donjon ${g.DungeonID}) introuvable.`);
+        }
         return boss;
       })
       .sort((a, b) => a.order - b.order);
@@ -207,7 +241,44 @@ export function buildSingularity(): SingularityData {
   const anchor = loadAnchor(new Set(groups.map((g) => g.id)), startDow);
   if (anchor) schedule.anchor = anchor;
   for (const w of singularityWarnings({ schedule, groups })) console.warn(w);
-  return { schedule, groups };
+  return { schedule, groups, exBuffs };
+}
+
+/**
+ * Glossaire des buffs EX : une entrée par `GroupID` de
+ * `SingularityBossRankBuffTemplet`. Le palier d'activation est un NUMÉRO de
+ * rang (`BuffActiveRank` = colonne `Rank` de `SingularityGradeTemplet`) :
+ * on le nomme par la table des paliers, identique d'un thème à l'autre — une
+ * divergence est signalée, jamais tranchée en silence.
+ */
+function buildExBuffs(tsys: ReturnType<typeof loadTextIndex>): Record<string, SingularityExBuff> {
+  const rankNames = new Map<string, string>();
+  for (const g of loadTable('SingularityGradeTemplet')) {
+    if (!g.Rank || !g.RankName) continue;
+    const seen = rankNames.get(g.Rank);
+    if (!seen) rankNames.set(g.Rank, g.RankName);
+    else if (seen !== g.RankName)
+      console.warn(`⚠ singularity : rang ${g.Rank} nommé « ${seen} » et « ${g.RankName} ».`);
+  }
+  const buffs = indexBy(loadTable('BuffTemplet'), 'BuffID');
+  const out: Record<string, SingularityExBuff> = {};
+  for (const r of loadTable('SingularityBossRankBuffTemplet')) {
+    const id = r.GroupID;
+    const rank = rankNames.get(r.BuffActiveRank ?? '');
+    if (!id || !r.OptionID || !rank) {
+      console.warn(`⚠ singularity : buff EX ${r.ID} incomplet (groupe, option ou rang).`);
+      continue;
+    }
+    const ex: SingularityExBuff = {
+      rank,
+      desc: resolveText(tsys, r.OptionDesc),
+      option: r.OptionID,
+    };
+    const value = num(buffs.get(r.OptionID)?.Value);
+    if (value) ex.value = value;
+    out[id] = ex;
+  }
+  return out;
 }
 
 // Exécution directe.

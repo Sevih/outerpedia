@@ -197,10 +197,10 @@ function resolveRewardEntry(e: RewardEntry, lang: Lang): ResolvedReward {
  * Une table complète, résolue et ORDONNÉE pour l'affichage : monnaies de tête
  * (crystal/credit), puis lignes garanties, puis le pool aléatoire.
  *
- * Son seul usage est une GARDE, et c'est voulu : `encounters.test.ts` la
- * parcourt sur toutes les tables des stages, et comme elle est stricte, une
- * table de récompense qu'un patch rend irrésoluble casse `pnpm test` plutôt
- * que l'écran. La supprimer, faute d'appelant, supprimerait la garde.
+ * C'est d'abord une GARDE : `encounters.test.ts` la parcourt sur toutes les
+ * tables des stages, et comme elle est stricte, une table de récompense qu'un
+ * patch rend irrésoluble casse `pnpm test` plutôt que l'écran. Elle rend aussi
+ * les récompenses de rang de Dimensional Singularity (`singularity-ranks.ts`).
  */
 export function resolveRewardTable(id: string, lang: Lang): ResolvedReward[] {
   const table = getRewardTable(id);

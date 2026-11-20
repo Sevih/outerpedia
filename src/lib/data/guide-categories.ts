@@ -280,12 +280,12 @@ export const GUIDE_CATEGORIES = {
         es: 'Condición de desbloqueo: completa el Final Verdadero de la Profundidad 1 de Puerta Monad.',
       },
       schedule: {
-        en: 'Open every week from Wednesday 00:00 UTC to Sunday 23:59 UTC. The target boss changes daily at 00:00 UTC. 1 entry per day.',
-        jp: '毎週水曜00:00 UTCから日曜23:59 UTCまで開放。対象ボスは毎日00:00 UTCに変化。1日1回挑戦可能。',
-        kr: '매주 수요일 00:00 UTC부터 일요일 23:59 UTC까지 개방. 대상 보스는 매일 00:00 UTC에 변경. 1일 1회 도전 가능.',
-        zh: '每周三00:00 UTC至周日23:59 UTC开放。目标Boss每日00:00 UTC更换。每日1次挑战机会。',
-        fr: 'Ouvert chaque semaine du mercredi 00:00 UTC au dimanche 23:59 UTC. Le Boss cible change chaque jour à 00:00 UTC. 1 entrée par jour.',
-        es: 'Abierto cada semana de miércoles 00:00 UTC a domingo 23:59 UTC. El jefe objetivo cambia diariamente a las 00:00 UTC. 1 entrada por día.',
+        en: 'Open every week from Wednesday 00:00 UTC to Sunday 23:59 UTC. The target boss changes daily at 00:00 UTC. No entry limit; the daily reward requires at least one run per day.',
+        jp: '毎週水曜00:00 UTCから日曜23:59 UTCまで開放。対象ボスは毎日00:00 UTCに変化。挑戦回数の制限はなく、日次報酬には1日1回以上の挑戦が必要。',
+        kr: '매주 수요일 00:00 UTC부터 일요일 23:59 UTC까지 개방. 대상 보스는 매일 00:00 UTC에 변경. 입장 횟수 제한은 없으며, 일일 보상은 하루 1회 이상 도전해야 받을 수 있음.',
+        zh: '每周三00:00 UTC至周日23:59 UTC开放。目标Boss每日00:00 UTC更换。挑战次数不限，每日至少挑战1次才能获得每日奖励。',
+        fr: "Ouvert chaque semaine du mercredi 00:00 UTC au dimanche 23:59 UTC. Le Boss cible change chaque jour à 00:00 UTC. Pas de limite d'entrées ; la récompense quotidienne demande au moins un run par jour.",
+        es: 'Abierto cada semana de miércoles 00:00 UTC a domingo 23:59 UTC. El jefe objetivo cambia diariamente a las 00:00 UTC. Sin límite de entradas; la recompensa diaria requiere al menos una partida al día.',
       },
       features: [
         {

@@ -356,12 +356,42 @@ export interface RankOptionLabels {
 }
 
 /** Montant d'une option : per-mille → % pour les taux (convention du jeu, cf. statScales). */
-function rankOptionAmount(o: RankOption, view: BossView, signed: boolean): string {
+function rankOptionAmount(
+  o: RankOption,
+  statScales: Record<string, string> | undefined,
+  signed: boolean,
+): string {
   if (!o.value) return '';
   const sign = signed && o.value > 0 ? '+' : '';
-  return o.stat && view.statScales?.[o.stat] === 'percent'
+  return o.stat && statScales?.[o.stat] === 'percent'
     ? ` ${sign}${o.value / 10}%`
     : ` ${sign}${o.value}`;
+}
+
+/**
+ * Libellé d'UNE option de palier (règles : cf. `bossRankOptionLabels`) ;
+ * `undefined` = option sans nom ni stat ni type connu, qu'on tait. Partagé
+ * avec la section « Ranks » de Dimensional Singularity, qui libelle les
+ * paliers sans passer par la vue d'un boss.
+ */
+export function rankOptionLabel(
+  o: RankOption,
+  statScales: Record<string, string> | undefined,
+  lang: Lang,
+  labels: RankOptionLabels,
+): string | undefined {
+  const name = o.name ? lRec(o.name, lang) : undefined;
+  if (name) return `${name}${rankOptionAmount(o, statScales, true)}`;
+  if (o.stat) {
+    const stat = statName(o.stat, lang);
+    return `${stat}${rankOptionAmount(o, statScales, !/[+-]$/.test(stat))}`;
+  }
+  if (o.type === 'BT_DMG_REDUCE_FINAL' && o.value)
+    return `${labels.finalDmgReduce} ${o.value / 10}%`;
+  if (o.type === 'BT_WG_DMG_REDUCE' && o.value) return `${labels.wgDmgReduce} ${o.value / 10}%`;
+  if (o.type === 'BT_ENHANCE_ALL' && o.value)
+    return `${labels.dotDmgTaken} ${o.value > 0 ? '+' : ''}${o.value / 10}%`;
+  return undefined;
 }
 
 /**
@@ -386,19 +416,8 @@ export function bossRankOptionLabels(
   for (const id of new Set(contexts.flatMap((c) => c.options ?? []))) {
     const o = view.rankOptions[id];
     if (!o) continue;
-    const name = o.name ? lRec(o.name, lang) : undefined;
-    if (name) {
-      out[id] = `${name}${rankOptionAmount(o, view, true)}`;
-    } else if (o.stat) {
-      const stat = statName(o.stat, lang);
-      out[id] = `${stat}${rankOptionAmount(o, view, !/[+-]$/.test(stat))}`;
-    } else if (o.type === 'BT_DMG_REDUCE_FINAL' && o.value) {
-      out[id] = `${labels.finalDmgReduce} ${o.value / 10}%`;
-    } else if (o.type === 'BT_WG_DMG_REDUCE' && o.value) {
-      out[id] = `${labels.wgDmgReduce} ${o.value / 10}%`;
-    } else if (o.type === 'BT_ENHANCE_ALL' && o.value) {
-      out[id] = `${labels.dotDmgTaken} ${o.value > 0 ? '+' : ''}${o.value / 10}%`;
-    }
+    const label = rankOptionLabel(o, view.statScales, lang, labels);
+    if (label) out[id] = label;
   }
   return out;
 }

@@ -99,8 +99,9 @@ export const DAILY_TASK_DEFINITIONS: Record<string, TaskDefinition> = stamp('dai
   // 10 pubs × 18 stamina = 180 stamina/jour — masquée avec le pack premium
   // Veronica (la stamina est alors réclamée automatiquement, sans pub)
   'ad-stamina': { category: 'task', permanent: true, maxCount: 10 },
-  // 1 entrée/jour, ouvert mercredi → dimanche seulement, les jours de combat
-  // des tables (filtré à la synchro).
+  // 1 run/jour pour la récompense (plus de limite d'entrées depuis 1.4.22),
+  // ouvert mercredi → dimanche seulement, les jours de combat des tables
+  // (filtré à la synchro).
   // Les 2 entrées ont fusionné en une seule au patch du 12/08/2026, récompense
   // combinée — le nombre de passages baisse, pas le gain quotidien.
   'dimensional-singularity': { category: 'task', permanent: true, maxCount: 1 },

@@ -789,6 +789,23 @@ const jp: Record<TranslationKey, string> = {
   'guides.singularity.library.title': 'ボス一覧',
   'guides.singularity.library.tagline':
     'ローテーション外でも、各ボスのガイドは常時アクセス可能です。',
+  // Section « Ranks » (C27) : les chiffres viennent de l'échelle dérivée des tables.
+  'guides.singularity.ranks.title': 'ランク',
+  'guides.singularity.ranks.tagline': 'EからEX+++まで：各ランクでボスに起こる変化と報酬。',
+  'guides.singularity.ranks.how':
+    'ランクは1回の戦闘で与えたダメージで決まります。各ランクはボスのHPバー1本に相当し、削り切るとボスは次のランクに上がってレベルが上昇し、ランクによっては新たなパッシブを得ます。',
+  'guides.singularity.ranks.element_note':
+    'Sランク以降、ボスに対して属性有利を持たない英雄は、与ダメージと弱点ゲージダメージが大きく減少します（「最終被ダメージ軽減」「弱点ゲージダメージ軽減」の行）。',
+  'guides.singularity.ranks.ex_note':
+    'EXランク以降、ボスが受ける継続ダメージが減少し、EXバフがボスの指定する属性またはクラスの味方を強化します。',
+  'guides.singularity.ranks.rewards_note':
+    '到達した各ランクにはそれぞれ報酬があります。ランク報酬は毎週、新しい週間シーズンごとにリセットされます。',
+  'guides.singularity.ranks.ether_note':
+    '{ether}はランク報酬ではなく、累計スコアに基づく日次ランキングから得られます。',
+  'guides.singularity.ranks.col_damage': '必要ダメージ',
+  'guides.singularity.ranks.col_changes': 'ボスの変化',
+  'guides.singularity.ranks.ex_buff':
+    'EXバフ：ボスが指定する属性またはクラスの味方の与ダメージ+{value}%',
   // Guide landing — categories index
   'guides.counter': 'ガイド{guides}件 · カテゴリー{categories}件',
   'guides.count.one': 'ガイド{count}件',

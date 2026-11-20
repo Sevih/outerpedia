@@ -13,6 +13,7 @@ import {
 } from '@/lib/data/singularity';
 import { GuideCard, UpdatingBadge } from '@/components/guides/GuideCard';
 import { SingularityCountdown } from '@/components/guides/SingularityCountdown';
+import SingularityRanks from '@/components/guides/SingularityRanks';
 import { formatGuideDate, guideUpdatedDate, type Guide } from '@/lib/data/guides';
 import type { Monster } from '@contracts';
 import type { CategoryViewProps } from './types';
@@ -190,6 +191,10 @@ export default async function SingularityRotation({ lang, guides }: CategoryView
           ))}
         </div>
       </section>
+
+      {/* L'échelle des rangs (E…EX+++) : ce que le rang change et rapporte,
+          dérivé des tables — commun à tous les boss, donc après la bibliothèque. */}
+      <SingularityRanks lang={lang} />
 
       {looseGuides.length > 0 && (
         <section className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">

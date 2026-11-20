@@ -807,6 +807,24 @@ const en = {
   'guides.singularity.library.title': 'Boss library',
   'guides.singularity.library.tagline':
     "Every guide stays accessible even when its boss isn't active.",
+  // Section « Ranks » (C27) : les chiffres viennent de l'échelle dérivée des tables.
+  'guides.singularity.ranks.title': 'Ranks',
+  'guides.singularity.ranks.tagline':
+    'From E to EX+++: what each rank changes on the boss, and what it gives.',
+  'guides.singularity.ranks.how':
+    "Your rank is set by the damage you deal in a single run. Each rank is one bar of the boss's HP: break through it and the boss moves up to the next rank, with a higher level and, at some ranks, new passives.",
+  'guides.singularity.ranks.element_note':
+    'From rank S, heroes without an elemental advantage over the boss deal far less damage and Weakness Gauge damage (Final DMG Reduction and Weakness Gauge DMG Reduction lines).',
+  'guides.singularity.ranks.ex_note':
+    'From rank EX, the boss takes less damage from damage over time, and the EX Buff boosts the allies of the element or class designated by the boss.',
+  'guides.singularity.ranks.rewards_note':
+    'Each rank reached grants its own reward. Rank rewards reset every week, with each new weekly season.',
+  'guides.singularity.ranks.ether_note':
+    '{ether} is not a rank reward: it comes from the daily ranking, based on your total score.',
+  'guides.singularity.ranks.col_damage': 'DMG required',
+  'guides.singularity.ranks.col_changes': 'Boss changes',
+  'guides.singularity.ranks.ex_buff':
+    'EX Buff: +{value}% DMG for allies of the element or class designated by the boss',
   // Guide landing — categories index
   'guides.counter': '{guides} guides · {categories} categories',
   'guides.count.one': '{count} GUIDE',

@@ -814,6 +814,24 @@ const es: Record<TranslationKey, string> = {
   'guides.singularity.library.title': 'Biblioteca de jefes',
   'guides.singularity.library.tagline':
     'Cada guía permanece accesible incluso cuando su jefe no está activo.',
+  // Section « Ranks » (C27) : les chiffres viennent de l'échelle dérivée des tables.
+  'guides.singularity.ranks.title': 'Rangos',
+  'guides.singularity.ranks.tagline':
+    'De E a EX+++: lo que cada rango cambia en el jefe y lo que otorga.',
+  'guides.singularity.ranks.how':
+    'Tu rango depende del daño que infliges en una sola partida. Cada rango es una barra de PV del jefe: al superarla, el jefe sube al rango siguiente, gana nivel y, en algunos rangos, nuevos pasivos.',
+  'guides.singularity.ranks.element_note':
+    'Desde el rango S, los héroes sin ventaja elemental sobre el jefe infligen mucho menos daño y daño al medidor de debilidad (líneas Reducción final de daño y Reducción de daño al medidor de debilidad).',
+  'guides.singularity.ranks.ex_note':
+    'Desde el rango EX, el jefe recibe menos daño de los DoT, y el EX Buff potencia a los aliados del elemento o la clase designados por el jefe.',
+  'guides.singularity.ranks.rewards_note':
+    'Cada rango alcanzado otorga su propia recompensa. Las recompensas de rango se reinician cada semana, con cada nueva temporada semanal.',
+  'guides.singularity.ranks.ether_note':
+    'El {ether} no es una recompensa de rango: proviene de la clasificación diaria, basada en tu puntuación total.',
+  'guides.singularity.ranks.col_damage': 'Daño requerido',
+  'guides.singularity.ranks.col_changes': 'Cambios del jefe',
+  'guides.singularity.ranks.ex_buff':
+    'EX Buff: +{value}% de daño para los aliados del elemento o la clase designados por el jefe',
   // Guide landing — categories index
   'guides.counter': '{guides} guías · {categories} categorías',
   'guides.count.one': '{count} GUÍA',

@@ -32,6 +32,8 @@ les preuves et les décisions vivent dans le tri consolidé de sevih-tool
 
 - [ ] **Après B71** : promouvoir timegate-resources.json (`pnpm datagen:promote --apply --only timegate-resources.json`) et le committer ; seules les sources Singularity et les totaux qui en dépendent bougent (écarts item par item dans l'entrée DONE de B71, 20/11).
 
+- [ ] **Après C27** : promouvoir `encounters.json`, `reward-tables.json` et `singularity.json` (`pnpm datagen:promote --apply --only encounters.json reward-tables.json singularity.json`, ou avec la promotion du patch) et les committer : seuls `ranks[].reward` (15 donjons × 34 rangs), les 34 tables `8200001`…`8200034` et `exBuffs` / `bosses[].exBuff` apparaissent. Puis contrôle visuel de la section « Ranks » de `/guides/dimensional-singularity` (desktop et mobile : tableau à défilement horizontal, colonne des récompenses, ligne EX avec l'EX Buff +200 %).
+
 ## 🧰 Outil quick
 
 - [ ] **Tier list maker — canon de partage append-only** : `buildCanon`

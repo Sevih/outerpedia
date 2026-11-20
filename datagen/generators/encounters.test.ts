@@ -220,6 +220,32 @@ describe('encounters.json — invariants référentiels', () => {
     expect(missing).toEqual([]);
   });
 
+  it('chaque récompense de palier (ranks[].reward) existe dans rewardTables', () => {
+    const missing: string[] = [];
+    for (const [id, d] of dungeonEntries) {
+      for (const r of d.ranks ?? []) {
+        if (r.reward && !rewardTables[r.reward]) missing.push(`${id} ${r.name} → ${r.reward}`);
+      }
+    }
+    expect(missing).toEqual([]);
+  });
+
+  it('Dimensional Singularity : une seule échelle de rangs pour tous les donjons', () => {
+    // La section « Ranks » de la page de catégorie lit l'échelle sur UN donjon
+    // (`singularity-ranks.ts`) : elle n'est juste que si tous la partagent —
+    // noms, seuils, niveaux, passifs et récompenses.
+    const ladders = new Set(
+      dungeonEntries
+        .filter(([, d]) => d.mode === 'monad_battle_2' && d.ranks?.length)
+        .map(([, d]) =>
+          JSON.stringify(
+            d.ranks!.map((r) => [r.name, r.damage, r.level, r.options, r.reward] as const),
+          ),
+        ),
+    );
+    expect(ladders.size).toBe(1);
+  });
+
   it('vagues : tout-ou-rien par donjon, 1-based, non-décroissantes, counts ≥ 2', () => {
     // Contrat de `DungeonMonster.wave` : ÉMIS SEULEMENT si le donjon a
     // plusieurs groupes (absent = combat en une vague). La dédup est PAR

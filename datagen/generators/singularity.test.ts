@@ -57,6 +57,26 @@ describe('singularity.json — invariants structurels', () => {
     expect(issues).toEqual([]);
   });
 
+  it('chaque buff EX cité existe et s’active à un rang de l’échelle', () => {
+    // Vide tant que la donnée générée précède le patch du 20/11/2026 (champ
+    // optionnel) ; dès qu'elle le porte, une réf morte ou un rang inconnu casse.
+    const exBuffs = sing.exBuffs ?? {};
+    const issues: string[] = [];
+    for (const g of sing.groups)
+      for (const b of g.bosses) {
+        if (!b.exBuff) continue;
+        const ex = exBuffs[b.exBuff];
+        if (!ex) {
+          issues.push(`groupe ${g.id} / donjon ${b.dungeon} → buff EX ${b.exBuff}`);
+          continue;
+        }
+        const ranks = (dungeons[b.dungeon]?.ranks ?? []).map((r) => r.name);
+        if (!ranks.includes(ex.rank)) issues.push(`buff EX ${b.exBuff} : rang ${ex.rank} absent`);
+        if (!ex.desc.en) issues.push(`buff EX ${b.exBuff} : libellé vide`);
+      }
+    expect(issues).toEqual([]);
+  });
+
   it('les positions (`order`) d’un groupe sont uniques et triées', () => {
     for (const g of sing.groups) {
       const orders = g.bosses.map((b) => b.order);

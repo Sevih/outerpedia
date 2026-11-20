@@ -149,6 +149,13 @@ export interface DungeonRank {
   adv?: DungeonAdv;
   /** Passifs ADDITIONNELS du boss (`OptionID` — résolus dans `rankOptions`). */
   options?: string[];
+  /**
+   * Récompense d'ATTEINTE du palier (`RewardID` — réf `rewardTables`). Émise
+   * pour Dimensional Singularity seulement (`SingularityGradeTemplet`), la
+   * section « Ranks » de sa page de catégorie la montre rang par rang ; les
+   * autres modes à palier n'en ont pas l'usage à ce jour.
+   */
+  reward?: string;
 }
 
 /**
@@ -1454,15 +1461,22 @@ export function buildEncounters(): EncountersData {
   }
 
   // 6) Singularity (Monad Gate) : thème → groupe de donjons ; les rangs
-  // (E…SSS, 30 par thème) s'appliquent à tous les donjons du thème.
+  // (E…SSS++ puis EX…EX+++ depuis le patch du 20/11/2026, 34 par thème)
+  // s'appliquent à tous les donjons du thème, avec leur récompense d'atteinte.
   const singuRanks = groupBy(loadTable('SingularityGradeTemplet'), 'SingularityID');
   const singuGroups = groupBy(loadTable('SingularityDungeonGroupTemplet'), 'GroupID');
+  const singuRankOf = (row: Record<string, string | undefined>): DungeonRank => {
+    const rank = rankOf(row);
+    const reward = resolveReward(row.RewardID);
+    if (reward) rank.reward = reward;
+    return rank;
+  };
   for (const r of loadTable('SingularityTemplet')) {
     const ranks = singuRanks.get(r.ID ?? '');
     if (!ranks?.length) continue;
     for (const g of singuGroups.get(r.SingularityDungeonGroupID ?? '') ?? []) {
       const d = dungeons[g.DungeonID ?? ''];
-      if (d) d.ranks = ranks.map(rankOf);
+      if (d) d.ranks = ranks.map(singuRankOf);
     }
   }
 

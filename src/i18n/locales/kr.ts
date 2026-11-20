@@ -779,6 +779,23 @@ const kr: Record<TranslationKey, string> = {
   'guides.singularity.library.title': '보스 도감',
   'guides.singularity.library.tagline':
     '보스가 활성화되지 않아도 모든 가이드는 언제든 열람 가능합니다.',
+  // Section « Ranks » (C27) : les chiffres viennent de l'échelle dérivée des tables.
+  'guides.singularity.ranks.title': '랭크',
+  'guides.singularity.ranks.tagline': 'E부터 EX+++까지: 랭크별 보스의 변화와 보상.',
+  'guides.singularity.ranks.how':
+    '랭크는 한 번의 전투에서 입힌 피해량으로 결정됩니다. 각 랭크는 보스 HP 바 하나에 해당하며, 이를 돌파하면 보스가 다음 랭크로 올라 레벨이 오르고, 일부 랭크에서는 새로운 패시브를 얻습니다.',
+  'guides.singularity.ranks.element_note':
+    'S 랭크부터 보스에 대해 속성 우위가 없는 영웅은 피해와 약점 게이지 피해가 크게 감소합니다(최종 받는 피해 감소, 약점 게이지 피해 감소 항목).',
+  'guides.singularity.ranks.ex_note':
+    'EX 랭크부터 보스가 받는 지속 피해가 감소하고, EX 버프가 보스가 지정한 속성 또는 클래스의 동료를 강화합니다.',
+  'guides.singularity.ranks.rewards_note':
+    '달성한 각 랭크마다 보상이 있습니다. 랭크 보상은 매주, 새로운 주간 시즌마다 초기화됩니다.',
+  'guides.singularity.ranks.ether_note':
+    '{ether}는 랭크 보상이 아니라, 누적 점수에 따른 일일 랭킹에서 얻습니다.',
+  'guides.singularity.ranks.col_damage': '필요 피해량',
+  'guides.singularity.ranks.col_changes': '보스 변화',
+  'guides.singularity.ranks.ex_buff':
+    'EX 버프: 보스가 지정한 속성 또는 클래스의 동료 피해 +{value}%',
   // Guide landing — categories index
   'guides.counter': '가이드 {guides}개 · 카테고리 {categories}개',
   'guides.count.one': '가이드 {count}개',

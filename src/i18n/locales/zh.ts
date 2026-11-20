@@ -763,6 +763,21 @@ const zh: Record<TranslationKey, string> = {
     '奖励阶段 —— 当前没有可挑战的首领。下一轮将于 {date} 开始。',
   'guides.singularity.library.title': 'Boss 图鉴',
   'guides.singularity.library.tagline': '无论Boss是否处于轮换中，每篇攻略都始终可访问。',
+  // Section « Ranks » (C27) : les chiffres viennent de l'échelle dérivée des tables.
+  'guides.singularity.ranks.title': '评级',
+  'guides.singularity.ranks.tagline': '从E到EX+++：每个评级对Boss的改变与奖励。',
+  'guides.singularity.ranks.how':
+    '评级取决于单场战斗中造成的伤害。每个评级对应Boss的一条HP：打穿后Boss会升至下一评级，等级提升，部分评级还会获得新的被动。',
+  'guides.singularity.ranks.element_note':
+    '从S评级起，对Boss没有属性优势的英雄造成的伤害与弱点槽伤害大幅降低（见“最终伤害减免”与“弱点槽伤害减免”行）。',
+  'guides.singularity.ranks.ex_note':
+    '从EX评级起，Boss受到的持续伤害降低，EX增益会强化Boss指定属性或职业的同伴。',
+  'guides.singularity.ranks.rewards_note':
+    '每达成一个评级都有对应奖励。评级奖励每周重置，随每个新的周赛季刷新。',
+  'guides.singularity.ranks.ether_note': '{ether}并非评级奖励：它来自基于总分的每日排名。',
+  'guides.singularity.ranks.col_damage': '所需伤害',
+  'guides.singularity.ranks.col_changes': 'Boss变化',
+  'guides.singularity.ranks.ex_buff': 'EX增益：Boss指定属性或职业的同伴伤害+{value}%',
   // Guide landing — categories index
   'guides.counter': '{guides} 篇攻略 · {categories} 个分类',
   'guides.count.one': '{count} 篇攻略',

@@ -36,6 +36,21 @@ export interface SingularityBoss {
   monsters: string[];
   thumbnail?: string;
   banner?: string;
+  /** Buff EX du créneau (réf `singularityExBuffs()`) — absent d'une donnée d'avant le 20/11/2026. */
+  exBuff?: string;
+}
+
+/**
+ * Buff EX (patch du 20/11/2026) : au palier `rank`, les alliés d'un élément ou
+ * d'une classe désignés par le boss gagnent un bonus de dégâts. Cf. le
+ * générateur (`SingularityExBuff`).
+ */
+export interface SingularityExBuff {
+  rank: string;
+  desc: LocalizedText;
+  option: string;
+  /** Per-mille (2000 = +200 %). */
+  value?: number;
 }
 
 /** Un groupe de rotation = une semaine de contenu. */
@@ -60,6 +75,7 @@ interface Schedule {
 const raw = singularityData as unknown as {
   schedule: Schedule;
   groups: SingularityGroup[];
+  exBuffs?: Record<string, SingularityExBuff>;
 };
 
 const DAY_MS = 86_400_000;
@@ -223,6 +239,11 @@ export function singularityStateAt(now: Date): SingularityState {
 /** Tous les groupes de la rotation (bibliothèque des boss). */
 export function singularityGroups(): SingularityGroup[] {
   return GROUPS;
+}
+
+/** Buffs EX par id de créneau — vide tant que la donnée générée ne les porte pas. */
+export function singularityExBuffs(): Record<string, SingularityExBuff> {
+  return raw.exBuffs ?? {};
 }
 
 /** Nombre de jours de combat par semaine (lu dans les tables du jeu). */
