@@ -3619,6 +3619,35 @@
       }
     ]
   },
+  "2700021": {
+    "name": {
+      "en": "Miracle Maker",
+      "jp": "ミラクルメーカー",
+      "kr": "미라클 메이커",
+      "zh": "奇迹创造者",
+      "fr": "Créateur de miracles",
+      "es": "Creador de milagros"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2700021",
+    "craftable": false,
+    "character": "2700021",
+    "trustLevel": 10,
+    "options": ["2700021"],
+    "passives": [
+      {
+        "id": "2700021",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2710021",
+        "level": 10,
+        "isAdd": true
+      }
+    ]
+  },
   "2700035": {
     "name": {
       "en": "Bloodbringer",

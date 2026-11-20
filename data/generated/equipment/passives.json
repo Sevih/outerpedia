@@ -16479,6 +16479,38 @@
       }
     ]
   },
+  "2700021": {
+    "name": {
+      "en": "Resonance Hanbyul Lee's Exclusive Equipment",
+      "jp": "レゾナンス・星野きららの専用装備",
+      "kr": "레조넌스 이한별의 전용장비",
+      "zh": "共鸣李寒星的专属装备",
+      "fr": "Équipement exclusif de Résonance Hanbyul Lee",
+      "es": "Equipo exclusivo de Resonancia Hanbyul Lee"
+    },
+    "desc": {
+      "en": "When hit, increases the caster's Priority by <color=#28d9ed>+40%</color>. (Activates once every 2 turns)",
+      "jp": "自分が攻撃を受けた時、自分の行動ゲージ<color=#28d9ed>+40%</color>（2ターンに1回のみ発動）",
+      "kr": "피격 시 자신 행동 게이지 <color=#28d9ed>+40%</color>  (2턴에 1회만 발동)",
+      "zh": "受到攻击时，自身行动值<color=#28d9ed>+40%</color>（每2回合仅触发1次）",
+      "fr": "Lorsqu'il subit une attaque, Priorité du lanceur <color=#28d9ed>+40 %</color>. (Une fois tous les 2 tours)",
+      "es": "Al recibir un ataque, Prioridad propia <color=#28d9ed>+40%</color>. (Se activa una vez cada 2 turnos)"
+    },
+    "values": [{}],
+    "levels": [1],
+    "icon": "TI_Icon_UO_EXCLUSIVE",
+    "buff": "BID_CEQUIP_2700021",
+    "effects": [
+      {
+        "family": "gauge",
+        "category": "buff",
+        "type": "BT_ACTION_GAUGE",
+        "target": "me",
+        "buff": "BID_CEQUIP_2700021",
+        "label": "SYS_BUFF_ACTION_GAUGE_UP"
+      }
+    ]
+  },
   "2700035": {
     "name": {
       "en": "Resonance Eliza's Exclusive Equipment",
@@ -16760,6 +16792,38 @@
         "type": "BT_DMG",
         "target": "me",
         "buff": "BID_CEQUIP_2700019_ADD"
+      }
+    ]
+  },
+  "2710021": {
+    "name": {
+      "en": "Resonance Hanbyul Lee's Exclusive Equipment",
+      "jp": "レゾナンス・星野きららの専用装備",
+      "kr": "레조넌스 이한별의 전용장비",
+      "zh": "共鸣李寒星的专属装备",
+      "fr": "Équipement exclusif de Résonance Hanbyul Lee",
+      "es": "Equipo exclusivo de Resonancia Hanbyul Lee"
+    },
+    "desc": {
+      "en": "When hit, all enemies' Priority <color=#28d9ed>-10%</color>. (Activates once every 3 turns, ignores Resilience)",
+      "jp": "自分が攻撃を受けた時、敵全体の行動ゲージ<color=#28d9ed>-10%</color>（3ターンに1回のみ発動、効果抵抗無視）",
+      "kr": "피격 시 적 전체 행동 게이지 <color=#28d9ed>-10%</color>  (3턴에 1회만 발동, 효과 저항 무시)",
+      "zh": "受到攻击时，敌方全体行动值<color=#28d9ed>-10%</color>（每3回合仅触发1次，无视效果抵抗）",
+      "fr": "Lorsqu'il subit une attaque, Priorité de tous les ennemis <color=#28d9ed>-10 %</color>. (Une fois tous les 3 tours, ignore la Résilience)",
+      "es": "Al recibir un ataque, Prioridad de todos los enemigos <color=#28d9ed>-10%</color>. (Una vez cada 3 turnos, ignora la RES)"
+    },
+    "values": [{}],
+    "levels": [1],
+    "icon": "TI_Icon_UO_EXCLUSIVE",
+    "buff": "BID_CEQUIP_2700021_ADD",
+    "effects": [
+      {
+        "family": "gauge",
+        "category": "debuff",
+        "type": "BT_ACTION_GAUGE",
+        "target": "enemy_team",
+        "buff": "BID_CEQUIP_2700021_ADD",
+        "label": "SYS_BUFF_ACTION_GAUGE_DOWN"
       }
     ]
   },
