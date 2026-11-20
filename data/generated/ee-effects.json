@@ -1414,6 +1414,18 @@
       "isDebuff": false
     }
   ],
+  "2700021": [
+    {
+      "key": "status:61",
+      "label": "Priority Increase",
+      "isDebuff": false
+    },
+    {
+      "key": "status:62",
+      "label": "Priority Decrease",
+      "isDebuff": true
+    }
+  ],
   "2700035": [
     {
       "key": "stat:buff_chance:up",

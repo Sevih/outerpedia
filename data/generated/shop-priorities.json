@@ -1,5 +1,5 @@
 {
-  "asOf": "2026-11-10",
+  "asOf": "2026-12-08",
   "shops": [
     {
       "key": "guild",
@@ -674,7 +674,7 @@
             "jp": "アリーナチケット 5枚",
             "kr": "결투장 티켓 5개",
             "zh": "5张竞技场入场券",
-            "fr": "Arena Ticket x5",
+            "fr": "Ticket d'Arène x5",
             "es": "Ticket de Arena x5"
           },
           "icon": "TI_Item_Ticket_PVP",
@@ -696,7 +696,7 @@
             "jp": "まあまあな強化ボックス",
             "kr": "입문 강화 도구 상자",
             "zh": "入门强化道具箱",
-            "fr": "Apprentice's Hammer coffre",
+            "fr": "Coffre de Marteaux de l'apprenti",
             "es": "Pecho Martillo del Aprendiz"
           },
           "icon": "TI_Common_Box01",
@@ -1324,7 +1324,7 @@
             "jp": "アリーナチケット 5枚",
             "kr": "결투장 티켓 5개",
             "zh": "5张竞技场入场券",
-            "fr": "Arena Ticket x5",
+            "fr": "Ticket d'Arène x5",
             "es": "Ticket de Arena x5"
           },
           "icon": "TI_Item_Ticket_PVP",
@@ -1742,7 +1742,7 @@
             "jp": "パープルメモリーストーン",
             "kr": "퍼플 메모리 스톤",
             "zh": "紫色记忆石",
-            "fr": "Purple Memory Stone",
+            "fr": "Pierre de mémoire violette",
             "es": "Piedra Memoria Púrpura"
           },
           "icon": "TI_EX_Equip_Growth_Enhance_02",
@@ -1786,7 +1786,7 @@
             "jp": "再錬リセットスクロール【ユニーク】",
             "kr": "재련 초기화 스크롤[영웅]",
             "zh": "重铸初始化卷轴【英雄】",
-            "fr": "Reforge Reset Scroll [Epic]",
+            "fr": "Parchemin de réinitialisation du reforgeage [épique]",
             "es": "Pergamino de Reinicio de Reforjar [Épico]"
           },
           "icon": "TI_Item_Growth_Scroll_01",
@@ -2045,7 +2045,7 @@
             "jp": "不敗の指導者・ネラ",
             "kr": "불패의 지도자 넬라",
             "zh": "不败的领袖内拉",
-            "fr": "Leader invaincu Nella.",
+            "fr": "Chef invaincu Nella",
             "es": "Nella, la Líder Invicta"
           },
           "icon": "TI_Costume_Clothes_2000091_02",
@@ -2238,7 +2238,7 @@
             "jp": "再錬カタリスト(レジェンド)",
             "kr": "전설 재련 촉매제",
             "zh": "传说重铸催化剂",
-            "fr": "Légendaire Reforge Catalyst",
+            "fr": "Catalyseur de reforgeage légendaire",
             "es": "Catalizador de Reforjar Legendario"
           },
           "icon": "TI_Item_Growth_Dissolve_04",
@@ -2612,7 +2612,7 @@
             "jp": "強力な冒険者のタリスマン",
             "kr": "강력한 모험가의 탈리스만",
             "zh": "强力冒险家的护身符",
-            "fr": "Powerful Adventurer's Talisman",
+            "fr": "Talisman du puissant aventurier",
             "es": "Talismán Poderoso del Aventurero"
           },
           "icon": "TI_Equipment_Talisman_08",
@@ -2678,7 +2678,7 @@
             "jp": "冒険者の首飾り",
             "kr": "모험가의 목걸이",
             "zh": "冒险家项链",
-            "fr": "Adventurer's Necklace",
+            "fr": "Collier d'aventurier",
             "es": "Collar del Aventurero"
           },
           "icon": "TI_Equipment_Accessary_06",

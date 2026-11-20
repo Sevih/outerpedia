@@ -1,5 +1,5 @@
 {
-  "asOf": "2026-11-10",
+  "asOf": "2026-12-08",
   "tabs": [
     {
       "key": "books",
@@ -339,7 +339,7 @@
             },
             {
               "sourceKey": "singularity-daily-run",
-              "origin": "cured",
+              "origin": "reward",
               "type": "mission",
               "weekly": 25
             },
@@ -384,9 +384,9 @@
             },
             {
               "sourceKey": "singularity-rank",
-              "origin": "cured",
+              "origin": "reward",
               "type": "mission",
-              "weekly": 320
+              "weekly": 80
             },
             {
               "sourceKey": "stars",
@@ -416,9 +416,9 @@
             }
           ],
           "totals": {
-            "weekly": 330,
+            "weekly": 90,
             "monthly": 350,
-            "grandMonthly": 1670
+            "grandMonthly": 710
           }
         },
         {
@@ -443,7 +443,7 @@
             },
             {
               "sourceKey": "singularity-daily-run",
-              "origin": "cured",
+              "origin": "reward",
               "type": "mission",
               "weekly": 25
             },
@@ -473,7 +473,7 @@
             "jp": "パープルメモリーストーン",
             "kr": "퍼플 메모리 스톤",
             "zh": "紫色记忆石",
-            "fr": "Purple Memory Stone",
+            "fr": "Pierre de mémoire violette",
             "es": "Piedra Memoria Púrpura"
           },
           "icon": "TI_EX_Equip_Growth_Enhance_02",
@@ -488,9 +488,9 @@
             },
             {
               "sourceKey": "singularity-rank",
-              "origin": "cured",
+              "origin": "reward",
               "type": "mission",
-              "weekly": 320
+              "weekly": 80
             },
             {
               "sourceKey": "stars",
@@ -520,9 +520,9 @@
             }
           ],
           "totals": {
-            "weekly": 330,
+            "weekly": 90,
             "monthly": 350,
-            "grandMonthly": 1670
+            "grandMonthly": 710
           }
         }
       ]
@@ -546,27 +546,27 @@
           "sources": [
             {
               "sourceKey": "singularity-rank",
-              "origin": "cured",
+              "origin": "reward",
               "type": "mission",
-              "weekly": 320
+              "weekly": 360
             },
             {
               "sourceKey": "singularity-daily-run",
-              "origin": "cured",
+              "origin": "reward",
               "type": "mission",
               "weekly": 200
             },
             {
               "sourceKey": "singularity-daily-ranking",
-              "origin": "cured",
+              "origin": "reward",
               "type": "mission",
               "weeklyRange": [25, 300]
             }
           ],
           "totals": {
-            "weekly": 520,
+            "weekly": 560,
             "monthly": 0,
-            "grandMonthly": 2080
+            "grandMonthly": 2240
           }
         },
         {
@@ -584,22 +584,28 @@
           "grade": "unique",
           "sources": [
             {
+              "sourceKey": "singularity-rank",
+              "origin": "reward",
+              "type": "mission",
+              "weekly": 50
+            },
+            {
               "sourceKey": "singularity-daily-run",
-              "origin": "cured",
+              "origin": "reward",
               "type": "mission",
               "weekly": 250
             },
             {
               "sourceKey": "singularity-daily-ranking",
-              "origin": "cured",
+              "origin": "reward",
               "type": "mission",
               "weeklyRange": [50, 200]
             }
           ],
           "totals": {
-            "weekly": 250,
+            "weekly": 300,
             "monthly": 0,
-            "grandMonthly": 1000
+            "grandMonthly": 1200
           }
         },
         {
@@ -618,13 +624,13 @@
           "sources": [
             {
               "sourceKey": "singularity-weekly-mission",
-              "origin": "cured",
+              "origin": "reward",
               "type": "mission",
               "weekly": 100
             },
             {
               "sourceKey": "singularity-daily-run",
-              "origin": "cured",
+              "origin": "reward",
               "type": "mission",
               "weekly": 125
             }
@@ -757,7 +763,7 @@
             "jp": "限界突破メモリー",
             "kr": "한계 돌파 메모리",
             "zh": "极限突破记忆",
-            "fr": "Limit Break Memory",
+            "fr": "Mémoire de dépassement de limite",
             "es": "Memoria de Ruptura Límite"
           },
           "icon": "TI_CharacterCard_07",
@@ -766,27 +772,27 @@
           "sources": [
             {
               "sourceKey": "singularity-rank",
-              "origin": "cured",
+              "origin": "reward",
               "type": "mission",
-              "weekly": 160
+              "weekly": 180
             },
             {
               "sourceKey": "singularity-daily-run",
-              "origin": "cured",
+              "origin": "reward",
               "type": "mission",
               "weekly": 125
             },
             {
               "sourceKey": "singularity-daily-ranking",
-              "origin": "cured",
+              "origin": "reward",
               "type": "mission",
               "weeklyRange": [25, 200]
             }
           ],
           "totals": {
-            "weekly": 285,
+            "weekly": 305,
             "monthly": 0,
-            "grandMonthly": 1140
+            "grandMonthly": 1220
           }
         }
       ]

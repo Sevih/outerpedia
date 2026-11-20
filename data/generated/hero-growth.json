@@ -710,7 +710,7 @@
                 "jp": "パープルメモリーストーン",
                 "kr": "퍼플 메모리 스톤",
                 "zh": "紫色记忆石",
-                "fr": "Purple Memory Stone",
+                "fr": "Pierre de mémoire violette",
                 "es": "Piedra Memoria Púrpura"
               },
               "icon": "TI_EX_Equip_Growth_Enhance_02",
@@ -749,7 +749,7 @@
                 "jp": "パープルメモリーストーン",
                 "kr": "퍼플 메모리 스톤",
                 "zh": "紫色记忆石",
-                "fr": "Purple Memory Stone",
+                "fr": "Pierre de mémoire violette",
                 "es": "Piedra Memoria Púrpura"
               },
               "icon": "TI_EX_Equip_Growth_Enhance_02",
@@ -788,7 +788,7 @@
                 "jp": "パープルメモリーストーン",
                 "kr": "퍼플 메모리 스톤",
                 "zh": "紫色记忆石",
-                "fr": "Purple Memory Stone",
+                "fr": "Pierre de mémoire violette",
                 "es": "Piedra Memoria Púrpura"
               },
               "icon": "TI_EX_Equip_Growth_Enhance_02",
@@ -827,7 +827,7 @@
                 "jp": "パープルメモリーストーン",
                 "kr": "퍼플 메모리 스톤",
                 "zh": "紫色记忆石",
-                "fr": "Purple Memory Stone",
+                "fr": "Pierre de mémoire violette",
                 "es": "Piedra Memoria Púrpura"
               },
               "icon": "TI_EX_Equip_Growth_Enhance_02",
@@ -866,7 +866,7 @@
                 "jp": "パープルメモリーストーン",
                 "kr": "퍼플 메모리 스톤",
                 "zh": "紫色记忆石",
-                "fr": "Purple Memory Stone",
+                "fr": "Pierre de mémoire violette",
                 "es": "Piedra Memoria Púrpura"
               },
               "icon": "TI_EX_Equip_Growth_Enhance_02",
@@ -1376,7 +1376,7 @@
         "jp": "コレクション用コイン",
         "kr": "수집용 동전",
         "zh": "硬币藏品",
-        "fr": "Coin de collectionneur",
+        "fr": "Pièce de collection",
         "es": "Moneda Coleccionista"
       },
       "icon": "TI_Present_02_01",
@@ -1436,7 +1436,7 @@
         "jp": "ポータブルゲーム機",
         "kr": "휴대용 게임기",
         "zh": "掌上游戏机",
-        "fr": "Dispositif de jeu portable pour jeux",
+        "fr": "Console portable",
         "es": "Dispositivo juego portátil"
       },
       "icon": "TI_Present_01_02",
@@ -1586,7 +1586,7 @@
         "jp": "ダンジョンコアの破片",
         "kr": "던전 코어 파편",
         "zh": "暗堡核心残片",
-        "fr": "Dungeon Core Fragment",
+        "fr": "Fragment de cœur de donjon",
         "es": "Fragmento de Dungeon Core"
       },
       "icon": "TI_Present_01_04",
@@ -1601,7 +1601,7 @@
         "jp": "貴族の儀装剣",
         "kr": "귀족용 의장검",
         "zh": "贵族礼剑",
-        "fr": "Noble's Ceremonial Sword",
+        "fr": "Épée d'apparat de noble",
         "es": "Espada Ceremonial Noble"
       },
       "icon": "TI_Present_02_04",
@@ -1646,7 +1646,7 @@
         "jp": "世界樹の葉",
         "kr": "세계수의 잎",
         "zh": "世界树叶子",
-        "fr": "Leaf of World Tree",
+        "fr": "Feuille de l'Arbre-Monde",
         "es": "Hoja del Árbol del Mundo"
       },
       "icon": "TI_Present_05_04",

@@ -1808,6 +1808,39 @@
         }
       ]
     },
+    "2158": {
+      "2": [
+        {
+          "stat": "buff_resist",
+          "applying": "rate",
+          "value": 30
+        }
+      ],
+      "3": [
+        {
+          "stat": "buff_resist",
+          "applying": "rate",
+          "value": 30
+        },
+        {
+          "stat": "buff_resist",
+          "applying": "add",
+          "value": 150
+        }
+      ],
+      "4": [
+        {
+          "stat": "buff_resist",
+          "applying": "rate",
+          "value": 60
+        },
+        {
+          "stat": "buff_resist",
+          "applying": "add",
+          "value": 150
+        }
+      ]
+    },
     "2208": {
       "2": [
         {
@@ -3519,26 +3552,7 @@
       ]
     },
     "9308": {
-      "2": [
-        {
-          "stat": "damage_boost",
-          "applying": "add",
-          "value": 50
-        }
-      ],
-      "3": [
-        {
-          "stat": "damage_boost",
-          "applying": "add",
-          "value": 50
-        }
-      ],
       "4": [
-        {
-          "stat": "damage_boost",
-          "applying": "add",
-          "value": 50
-        },
         {
           "stat": "pierce_power_rate",
           "applying": "add",

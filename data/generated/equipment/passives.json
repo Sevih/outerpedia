@@ -417,7 +417,7 @@
       "jp": "全体攻撃時、対象に[Rate]の確率で出血を[Turn]ターンの間付与する。",
       "kr": "전체 공격 시 [Rate] 확률로 대상에게 [Turn]턴 동안 출혈 효과 부여",
       "zh": "发动全体攻击时，有[Rate]的几率对目标造成出血效果，持续[Turn]回合",
-      "fr": "a une [Rate] chance de inflict Bleeding on all targets durant [tour] tour(s) si attacking tous les ennemis",
+      "fr": "En attaquant tous les ennemis, a [Rate] de chances d'infliger Saignement à toutes les cibles pendant [Turn] tour(s)",
       "es": "Tiene una prob. de [Rate] de infligir Sangrado a todos los objetivos por [turno] turno(s) al atacar a los enemigos"
     },
     "values": [
@@ -619,7 +619,7 @@
       "jp": "剣舞",
       "kr": "검무",
       "zh": "剑舞",
-      "fr": "Sword Dance",
+      "fr": "Danse des épées",
       "es": "Danza de Espadas"
     },
     "desc": {
@@ -1414,7 +1414,7 @@
       "jp": "敵単体にスキル使用前、[Rate]の確率で防御力を1ターンの間UPする。\\n(2ターンに1回のみ発動)",
       "kr": "단일 대상 스킬 사용 전 [Rate] 확률로 방어력 +1턴 (2턴에 1회만 발동)",
       "zh": "使用单体技能前，有[Rate]的几率提升防御力+1回合(2回合最多触发1次)",
-      "fr": "A une chance [Rate] d'accorder une défense accrue pour 1 tour avant d'utiliser une comp. Single Target (Activated only once to cada 2 t.)",
+      "fr": "Avant d'utiliser une compétence à cible unique, a [Rate] de chances d'augmenter sa DÉF pendant 1 tour (une fois tous les 2 tours)",
       "es": "Tiene una prob. de [Rate] de otorgar DEF subeda por 1 turno antes de usar una hab. de objetivo único (Se activa solo una vez cada 2 t.)"
     },
     "values": [
@@ -1562,7 +1562,7 @@
       "jp": "全体攻撃時、ダメージが[+Value]UPする。",
       "kr": "전체 범위 공격 시 피해 [+Value]",
       "zh": "使用全体范围攻击时，伤害[+Value]",
-      "fr": "si using an attaque that targets tous les ennemis, accroît dégâts infligés by [Value]",
+      "fr": "Augmente les DGT infligés de [+Value] lors d'une attaque de zone",
       "es": "Aumenta el daño [Value] al atacar a todos los enemigos con un ataque."
     },
     "values": [
@@ -1770,7 +1770,7 @@
       "jp": "全体攻撃使用後、自分の強化効果が1ターン増加する。\\n ([Turn2]に1回のみ発動)",
       "kr": "전체 범위 스킬 사용 후 자신의 강화 효과 +1턴 ([Turn2]턴에 1회만 발동)",
       "zh": "使用全体范围技能后，自身强化效果+1回合([Turn2]回合内仅触发1次)",
-      "fr": "Prolonge la durée des buffs accordés à l'utilisateur par 1 tour après avoir utilisé une attaque qui cible tous les ennemis (Activated only once any [Turn2] tour(s)))",
+      "fr": "Prolonge ses bonus de 1 tour après l'utilisation d'une compétence de zone (une fois tous les [Turn2] tours)",
       "es": "Extiende la duración de los buffs otorgados al portador en 1 turno después de usar un ataque que apunta a los enemigos (Se activa solo una vez cada [Turn2] turno(s))"
     },
     "values": [
@@ -2013,7 +2013,7 @@
       "jp": "剣舞",
       "kr": "검무",
       "zh": "剑舞",
-      "fr": "Sword Dance",
+      "fr": "Danse des épées",
       "es": "Danza de Espadas"
     },
     "desc": {
@@ -2212,7 +2212,7 @@
       "jp": "出演料大出血",
       "kr": "출연료 대출혈",
       "zh": "出场费大出血",
-      "fr": "Appearance Fee Bleed-Out",
+      "fr": "Cachet exorbitant",
       "es": "Hemorr. Tarifa Aparic."
     },
     "desc": {
@@ -2220,7 +2220,7 @@
       "jp": "全体攻撃時、対象に[Rate]の確率で出血を[Turn]ターンの間付与する。",
       "kr": "전체 공격 시 [Rate] 확률로 대상에게 [Turn]턴 동안 출혈 효과 부여",
       "zh": "发动全体攻击时，有[Rate]的几率对目标造成出血效果，持续[Turn]回合",
-      "fr": "a une [Rate] chance de inflict Bleeding on all targets durant [tour] tour(s) si attacking tous les ennemis",
+      "fr": "En attaquant tous les ennemis, a [Rate] de chances d'infliger Saignement à toutes les cibles pendant [Turn] tour(s)",
       "es": "Tiene una prob. de [Rate] de infligir Sangrado a todos los objetivos por [turno] turno(s) al atacar a los enemigos"
     },
     "values": [
@@ -2647,7 +2647,7 @@
       "jp": "戦闘開始時、それぞれ[Rate1]の確率で会心率・効果命中を[+Turn1]ターンの間UPさせる。",
       "kr": "전투 입장 시 각각 [Rate1] 확률로 치명 확률,효과 적중 [+Turn1]턴",
       "zh": "战斗开始时，各有[Rate1]的几率使暴击率、效果命中提升，持续[+Turn1]回合。",
-      "fr": "Upon entering battle, each a une [Rate1] chance de gain taux CRIT and Efficacité pendant [+Turn1] tours",
+      "fr": "À l'entrée en combat, a [Rate1] de chances pour chaque effet d'augmenter son Taux CRIT et son Efficacité pendant [+Turn1] tour(s)",
       "es": "Al entrar en batalla, cada uno tiene una prob. de [Rate1] de ganar Prob. CRIT y Efectividad por [+Turno1] turno(s)."
     },
     "values": [
@@ -2766,7 +2766,7 @@
       "jp": "倒れた時、[Rate]の確率で最大HPの[Value]を回復して復活する。\\n(戦闘につき1回のみ発動)",
       "kr": "사망 시 [Rate] 확률로 최대 체력의 [Value]를 회복하며 부활 (전투당 1회 발동)",
       "zh": "死亡时，有[Rate]的几率复活且使生命值恢复上限的[Value](每场战斗触发1次)",
-      "fr": "a une [Rate] chance de resurrect and heal durant [Value] of max. PV si killed (activated once per battle)",
+      "fr": "À sa mort, a [Rate] de chances de ressusciter en récupérant [Value] de ses PV max (une fois par combat)",
       "es": "Tiene una prob. de [Rate] de resucitar y restaurar un [Value] de Vida máxima al morir (activado una vez por batalla)"
     },
     "values": [
@@ -3653,7 +3653,7 @@
       "jp": "味方が全体攻撃後、自分の行動ゲージが[+Value]UPする。\\n(2ターンに1回のみ発動)",
       "kr": "아군이 전체 공격 후 자신의 행동 게이지 [+Value] (2턴에 1회만 발동)",
       "zh": "友军使用全体攻击后，自身行动值[+Value](2回合最多触发1次)",
-      "fr": "Accroît la priorité de l'utilisateur par [Value] après qu'un allié utilise une attaque qui cible tous les ennemis (Activated only once only to cada 2 t.)",
+      "fr": "Augmente sa Prior. de [+Value] après une attaque de zone d'un allié (une fois tous les 2 tours)",
       "es": "Sube la Prior. del portador en [Value] después de que un aliado use un ataque que apunta a los enemigos (Se activa solo una vez cada 2 t.)"
     },
     "values": [
@@ -3900,7 +3900,7 @@
       "jp": "敵から全体攻撃を受けた場合、防御力が1ターンの間UPする。\\n([Turn2]ターンに1回のみ発動)",
       "kr": "전체 공격 피격 시 자신의 방어력 +1턴 ([Turn2]턴에 1회만 발동)",
       "zh": "受到全体攻击时，提升防御力+1回合([Turn2]回合内仅触发1次)",
-      "fr": "Lorsqu'elle est frappée par une attaque qui cible tous les ennemis, accorde une défense accrue pour 1 tour (Activated only once any [Turn2] tour(s)))",
+      "fr": "Lorsqu'une attaque de zone touche le lanceur, augmente sa DÉF pendant 1 tour (une fois tous les [Turn2] tours)",
       "es": "Al recibir un ataque que apunta a los enemigos, otorga DEF aumentada por 1 turno (Se activa solo una vez cada [Turn2] turno(s))"
     },
     "values": [
@@ -4131,7 +4131,7 @@
       "jp": "CP獲得 - 必殺スキル",
       "kr": "CP회복 - 필살기",
       "zh": "CP恢复-必杀技",
-      "fr": "Chain Point Generation: Ultimate",
+      "fr": "Récupération de PC – Compétence ultime",
       "es": "Generación de Puntos Cadena: Definitivo"
     },
     "desc": {
@@ -4530,7 +4530,7 @@
       "jp": "CP獲得 - 必殺スキル",
       "kr": "CP회복 - 필살기",
       "zh": "CP恢复-必杀技",
-      "fr": "Chain Point Generation: Ultimate",
+      "fr": "Récupération de PC – Compétence ultime",
       "es": "Generación de Puntos Cadena: Definitivo"
     },
     "desc": {
@@ -4929,7 +4929,7 @@
       "jp": "CP獲得 - 必殺スキル",
       "kr": "CP회복 - 필살기",
       "zh": "CP恢复-必杀技",
-      "fr": "Chain Point Generation: Ultimate",
+      "fr": "Récupération de PC – Compétence ultime",
       "es": "Generación de Puntos Cadena: Definitivo"
     },
     "desc": {
@@ -5415,7 +5415,7 @@
       "jp": "CP獲得 - 必殺スキル",
       "kr": "CP회복 - 필살기",
       "zh": "CP恢复-必杀技",
-      "fr": "Chain Point Generation: Ultimate",
+      "fr": "Récupération de PC – Compétence ultime",
       "es": "Generación de Puntos Cadena: Definitivo"
     },
     "desc": {
@@ -6426,7 +6426,7 @@
       "jp": "中毒状態の対象に与えるダメージが[Value]UPする。",
       "kr": "중독 보유 대상에게 입히는 피해 [Value] 증가",
       "zh": "对附带中毒效果的目标造成的伤害提升\\n[Value]",
-      "fr": "accroît dégâts infligés to targets inflicted with Poison by [Value]",
+      "fr": "Augmente les DGT infligés aux cibles affectées par Poisonné de [Value]",
       "es": "Aumenta el daño infligido a los objetivos con Veneno en [Value]"
     },
     "values": [
@@ -6559,7 +6559,7 @@
       "jp": "ヴェロニカの特訓",
       "kr": "베로니카의 특훈",
       "zh": "维罗妮卡特训",
-      "fr": "Veronica's Special Training",
+      "fr": "Entraînement spécial de Veronica",
       "es": "Entrenamiento Especial Veronica"
     },
     "desc": {
@@ -7110,7 +7110,7 @@
       "jp": "敵から全体攻撃を受けた場合、防御力が1ターンの間UPする。\\n([Turn2]ターンに1回のみ発動)",
       "kr": "전체 공격 피격 시 자신의 방어력 +1턴 ([Turn2]턴에 1회만 발동)",
       "zh": "受到全体攻击时，提升防御力+1回合([Turn2]回合内仅触发1次)",
-      "fr": "Lorsqu'elle est frappée par une attaque qui cible tous les ennemis, accorde une défense accrue pour 1 tour (Activated only once any [Turn2] tour(s)))",
+      "fr": "Lorsqu'une attaque de zone touche le lanceur, augmente sa DÉF pendant 1 tour (une fois tous les [Turn2] tours)",
       "es": "Al recibir un ataque que apunta a los enemigos, otorga DEF aumentada por 1 turno (Se activa solo una vez cada [Turn2] turno(s))"
     },
     "values": [
@@ -7266,7 +7266,7 @@
       "jp": "戦闘開始時、それぞれ[Rate1]の確率で会心率・効果命中を[+Turn1]ターンの間UPさせる。",
       "kr": "전투 입장 시 각각 [Rate1] 확률로 치명 확률,효과 적중 [+Turn1]턴",
       "zh": "战斗开始时，各有[Rate1]的几率使暴击率、效果命中提升，持续[+Turn1]回合。",
-      "fr": "Upon entering battle, each a une [Rate1] chance de gain taux CRIT and Efficacité pendant [+Turn1] tours",
+      "fr": "À l'entrée en combat, a [Rate1] de chances pour chaque effet d'augmenter son Taux CRIT et son Efficacité pendant [+Turn1] tour(s)",
       "es": "Al entrar en batalla, cada uno tiene una prob. de [Rate1] de ganar Prob. CRIT y Efectividad por [+Turno1] turno(s)."
     },
     "values": [
@@ -7439,7 +7439,7 @@
       "jp": "味方が全体攻撃後、自分の行動ゲージが[+Value]UPする。\\n(2ターンに1回のみ発動)",
       "kr": "아군이 전체 공격 후 자신의 행동 게이지 [+Value] (2턴에 1회만 발동)",
       "zh": "友军使用全体攻击后，自身行动值[+Value](2回合最多触发1次)",
-      "fr": "Accroît la priorité de l'utilisateur par [Value] après qu'un allié utilise une attaque qui cible tous les ennemis (Activated only once only to cada 2 t.)",
+      "fr": "Augmente sa Prior. de [+Value] après une attaque de zone d'un allié (une fois tous les 2 tours)",
       "es": "Sube la Prior. del portador en [Value] después de que un aliado use un ataque que apunta a los enemigos (Se activa solo una vez cada 2 t.)"
     },
     "values": [
@@ -7601,7 +7601,7 @@
       "jp": "ケイの専用装備",
       "kr": "케이의 전용장비",
       "zh": "凯伊专属装备",
-      "fr": "K's Exclusive Equipment",
+      "fr": "Équipement exclusif de K",
       "es": "Equipo Exclusivo de K"
     },
     "desc": {
@@ -7676,7 +7676,7 @@
       "jp": "スノーの専用装備",
       "kr": "스노우의 전용장비",
       "zh": "雪诺专属装备",
-      "fr": "Snow's Exclusive Equipment",
+      "fr": "Équipement exclusif de Snow",
       "es": "Equipo Exclusivo de Snow"
     },
     "desc": {
@@ -7827,7 +7827,7 @@
       "jp": "アルファの専用装備",
       "kr": "알파의 전용장비",
       "zh": "阿尔法专属装备",
-      "fr": "Alpha's Exclusive Equipment",
+      "fr": "Équipement exclusif d'Alpha",
       "es": "Equipo Exclusivo de Alpha"
     },
     "desc": {
@@ -7985,7 +7985,7 @@
       "jp": "リリィの専用装備",
       "kr": "릴리의 전용장비",
       "zh": "莉莉专属装备",
-      "fr": "Lily's Exclusive Equipment",
+      "fr": "Équipement exclusif de Lily",
       "es": "Equipo Exclusivo de Lily"
     },
     "desc": {
@@ -8062,7 +8062,7 @@
       "jp": "ドーリーの専用装備",
       "kr": "돌리의 전용장비",
       "zh": "多莉专属装备",
-      "fr": "Dolly's Exclusive Equipment",
+      "fr": "Équipement exclusif de Dolly",
       "es": "Equipo Exclusivo de Dolly"
     },
     "desc": {
@@ -8220,7 +8220,7 @@
       "jp": "会心発生時、すべてのスキルターンが[Value]ターン減少する。",
       "kr": "치명 공격 시 모든 스킬 쿨타임 [Value]턴 감소",
       "zh": "发动暴击时，使所有技能冷却时间减少[Value]\\n回合",
-      "fr": "réduit the cooldown of all skills by [Value] tour(s) upon scoring a critical touché",
+      "fr": "En infligeant un coup critique, réduit les temps de recharge de toutes ses compétences de [Value] tour(s)",
       "es": "Reduce el Tiempo de recarga de habilidades en [Value] turno(s) con golpe crítico"
     },
     "values": [
@@ -8256,7 +8256,7 @@
       "jp": "<color=#28d9ed>【邪魔者は消えて】</color>使用後、敵単体に感電を[Turn]ターンの間付与する。\\n(対象の効果抵抗を無視)",
       "kr": "<color=#28d9ed>방해물은 사라져</color> 사용 후 [Turn]턴 동안 감전 부여 (대상의 효과 저항 무시)",
       "zh": "使用<color=#28d9ed>消除障碍</color>后，造成触电效果，持续\\n[Turn]回合\\n(无视目标的效果抵抗)",
-      "fr": "Après avoir utilisé <color=#28d9ed>Out of My Way</color>, inflige Électrocuté for [tour] tour(s) (ignore la résilience de la cible)",
+      "fr": "Après avoir utilisé <color=#28d9ed>Hors de mon chemin</color>, inflige Électrocuté pendant [Turn] tour(s) (ignore la résilience de la cible)",
       "es": "Después de usar <color=#28d9ed>Fuera de mi camino</color>, inflige Electrocutado por [turno] turno(s) (ignora la Resistencia del objetivo)."
     },
     "values": [
@@ -8287,7 +8287,7 @@
       "jp": "リンの専用装備",
       "kr": "린의 전용장비",
       "zh": "琳专属装备",
-      "fr": "Rin's Exclusive Equipment",
+      "fr": "Équipement exclusif de Rin",
       "es": "Equipo Exclusivo de Rin"
     },
     "desc": {
@@ -8358,10 +8358,10 @@
   "2000021": {
     "name": {
       "en": "Hanbyul Lee's Exclusive Equipment",
-      "jp": "イ・ハンビョルの専用装備",
+      "jp": "星野きららの専用装備",
       "kr": "이한별의 전용장비",
       "zh": "李寒星专属装备",
-      "fr": "Hanbyul Lee's Exclusive Equipment",
+      "fr": "Équipement exclusif de Hanbyul Lee",
       "es": "Equipo Exclusivo de Hanbyul Lee"
     },
     "desc": {
@@ -8397,7 +8397,7 @@
       "jp": "ノアの専用装備",
       "kr": "노아의 전용장비",
       "zh": "诺雅专属装备",
-      "fr": "Noa's Exclusive Equipment",
+      "fr": "Équipement exclusif de Noa",
       "es": "Equipo Exclusivo de Noa"
     },
     "desc": {
@@ -8429,7 +8429,7 @@
       "jp": "セイランの専用装備",
       "kr": "세이란의 전용장비",
       "zh": "萨伊蓝专属装备",
-      "fr": "Saeran's Exclusive Equipment",
+      "fr": "Équipement exclusif de Saeran",
       "es": "Equipo exclusivo de Saeran"
     },
     "desc": {
@@ -8437,7 +8437,7 @@
       "jp": "<color=#28d9ed>【我らをご照覧あれ】</color>使用時、味方全体の行動ゲージが[+Value]UPする。",
       "kr": "<color=#28d9ed>우리를 굽어 살피소서</color> 사용 시 모든 아군의 행동 게이지 [+Value]",
       "zh": "使用<color=#28d9ed>庇佑降临</color>时，使全体友军的行动值[+Value]",
-      "fr": "si using <color=#28d9ed>Gaze Upon Us</color>, accroît the priorité of les alliés by [Value]",
+      "fr": "Lors de l'utilisation de <color=#28d9ed>Veillez sur nous</color>, augmente la Prior. de tous les alliés de [+Value]",
       "es": "Al usar <color=#28d9ed>Mira hacia nosotros</color>, aumenta la Prior. de los aliados en [Value]"
     },
     "values": [
@@ -8535,7 +8535,7 @@
       "jp": "ユーリの専用装備",
       "kr": "유리의 전용장비",
       "zh": "尤莉专属装备",
-      "fr": "Yuri's Exclusive Equipment",
+      "fr": "Équipement exclusif d'Yuri",
       "es": "Equipo exclusivo de Yuri"
     },
     "desc": {
@@ -8756,7 +8756,7 @@
       "jp": "パルティーの専用装備",
       "kr": "파르티의 전용장비",
       "zh": "帕尔蒂专属装备",
-      "fr": "Parti's Exclusive Equipment",
+      "fr": "Équipement exclusif de Parti",
       "es": "Equipo exclusivo de Parti"
     },
     "desc": {
@@ -8795,7 +8795,7 @@
       "jp": "アデリーの専用装備",
       "kr": "아델리의 전용장비",
       "zh": "阿黛莉专属装备",
-      "fr": "Adelie's Exclusive Equipment",
+      "fr": "Équipement exclusif d'Adelie",
       "es": "Equipo exclusivo de Adelie"
     },
     "desc": {
@@ -8968,7 +8968,7 @@
       "jp": "シューの専用装備",
       "kr": "슈의 전용장비",
       "zh": "小芙专属装备",
-      "fr": "Shu's Exclusive Equipment",
+      "fr": "Équipement exclusif de Shu",
       "es": "Equipo exclusivo de Shu"
     },
     "desc": {
@@ -9001,7 +9001,7 @@
       "jp": "ステラの専用装備",
       "kr": "스텔라의 전용장비",
       "zh": "斯黛拉专属装备",
-      "fr": "Stella's Exclusive Equipment",
+      "fr": "Équipement exclusif de Stella",
       "es": "Equipo exclusivo de Stella"
     },
     "desc": {
@@ -9110,7 +9110,7 @@
       "jp": "レオの専用装備",
       "kr": "레오의 전용장비",
       "zh": "雷欧专属装备",
-      "fr": "Leo's Exclusive Equipment",
+      "fr": "Équipement exclusif de Leo",
       "es": "Equipo exclusivo de Leo"
     },
     "desc": {
@@ -9287,7 +9287,7 @@
       "jp": "ライラの専用装備",
       "kr": "라일라의 전용장비",
       "zh": "莱拉专属装备",
-      "fr": "Lyla's Exclusive Equipment",
+      "fr": "Équipement exclusif de Lyla",
       "es": "Equipo exclusivo de Lyla"
     },
     "desc": {
@@ -9433,7 +9433,7 @@
       "jp": "オーロックスの専用装備",
       "kr": "오록스의 전용장비",
       "zh": "欧路士专属装备",
-      "fr": "Orox's Exclusive Equipment",
+      "fr": "Équipement exclusif d'Orox",
       "es": "Equipo exclusivo de Orox"
     },
     "desc": {
@@ -9508,7 +9508,7 @@
       "jp": "【デミウルゴス】ステラの専用装備",
       "kr": "[데미우르고스] 스텔라의 전용장비",
       "zh": "【创世之神】斯黛拉的专属装备",
-      "fr": "Demiurge Stella's Exclusive Equipment",
+      "fr": "Équipement exclusif de Démiurge Stella",
       "es": "Equipo Exclusivo de Demiurge Stella"
     },
     "desc": {
@@ -9545,7 +9545,7 @@
       "jp": "メネの専用装備",
       "kr": "메네의 전용장비",
       "zh": "麦尼的专属装备",
-      "fr": "Mene's Exclusive Equipment",
+      "fr": "Équipement exclusif de Mene",
       "es": "Equipo Exclusivo de Mene"
     },
     "desc": {
@@ -9612,7 +9612,7 @@
       "jp": "ノティアの専用装備",
       "kr": "노티아의 전용장비",
       "zh": "诺缇亚专属装备",
-      "fr": "Notia's Exclusive Equipment",
+      "fr": "Équipement exclusif de Notia",
       "es": "Equipo Exclusivo Notia"
     },
     "desc": {
@@ -9650,7 +9650,7 @@
       "jp": "ステロペの専用装備",
       "kr": "스테로페의 전용장비",
       "zh": "史提洛佩的专属装备",
-      "fr": "Sterope's Exclusive Equipment",
+      "fr": "Équipement exclusif de Sterope",
       "es": "Equipo Exclusivo de Sterope"
     },
     "desc": {
@@ -9719,7 +9719,7 @@
       "jp": "【デミウルゴス】アステの専用装備",
       "kr": "[데미우르고스] 아스테의 전용장비",
       "zh": "【创世之神】奥斯黛专属装备",
-      "fr": "Demiurge Astei's Exclusive Equipment",
+      "fr": "Équipement exclusif de Démiurge Astei",
       "es": "Equipo Exclusivo de Demiurge Astei"
     },
     "desc": {
@@ -9796,7 +9796,7 @@
       "jp": "クリスティーナの専用装備",
       "kr": "크리스티나의 전용 장비",
       "zh": "克莉丝提娜专属装备",
-      "fr": "Christina's Exclusive Equipment",
+      "fr": "Équipement exclusif de Christina",
       "es": "Equipo Exclusivo de Christina"
     },
     "desc": {
@@ -9833,7 +9833,7 @@
       "jp": "ドレイカーンの専用装備",
       "kr": "드레이칸의 전용 장비",
       "zh": "德雷坎专属装备",
-      "fr": "Drakhan's Exclusive Equipment",
+      "fr": "Équipement exclusif de Drakhan",
       "es": "Equipo Exclusivo de Drakhan"
     },
     "desc": {
@@ -9869,7 +9869,7 @@
       "jp": "【デミウルゴス】ドレイカーンの専用装備",
       "kr": "[데미우르고스] 드레이칸의 전용 장비",
       "zh": "【创世之神】德雷坎专属装备",
-      "fr": "Demiurge Drakhan's Exclusive Equipment",
+      "fr": "Équipement exclusif de Démiurge Drakhan",
       "es": "Equipo Exclusivo del Demiurge Drakhan"
     },
     "desc": {
@@ -9907,7 +9907,7 @@
       "jp": "アカリの専用装備",
       "kr": "아카리의 전용 장비",
       "zh": "阿卡莉专属装备",
-      "fr": "Akari's Exclusive Equipment",
+      "fr": "Équipement exclusif d'Akari",
       "es": "Equipo Exclusivo de Akari"
     },
     "desc": {
@@ -9944,7 +9944,7 @@
       "jp": "あめの専用装備",
       "kr": "아메의 전용 장비",
       "zh": "亚美专属装备",
-      "fr": "Ame's Exclusive Equipment",
+      "fr": "Équipement exclusif d'Ame",
       "es": "Equipo Exclusivo de Ame"
     },
     "desc": {
@@ -9979,7 +9979,7 @@
       "jp": "シャーロットの専用装備",
       "kr": "샬롯의 전용 장비",
       "zh": "夏洛特专属装备",
-      "fr": "Charlotte's Exclusive Equipment",
+      "fr": "Équipement exclusif de Charlotte",
       "es": "Equipo Exclusivo de Charlotte"
     },
     "desc": {
@@ -10308,7 +10308,7 @@
       "jp": "【デミウルゴス】ヴラダの専用装備",
       "kr": "[데미우르고스] 블라다의 전용 장비",
       "zh": "【创世之神】布拉达专属装备",
-      "fr": "Demiurge Vlada's Exclusive Equipment",
+      "fr": "Équipement exclusif de Démiurge Vlada",
       "es": "Equipo Exclusivo de Demiurge Vlada"
     },
     "desc": {
@@ -10663,7 +10663,7 @@
       "jp": "【プールの】レジーナの専用装備",
       "kr": "[풀장의] 레지나의 전용 장비",
       "zh": "【泳池】蕾吉纳专属装备",
-      "fr": "[Poolside] Regina's Exclusive Equipment",
+      "fr": "Équipement exclusif de Farceur de la Piscine Regina",
       "es": "[Poolside] Equipo exclusivo de Regina"
     },
     "desc": {
@@ -10729,7 +10729,7 @@
       "jp": "レイの専用装備",
       "kr": "레이의 전용 장비",
       "zh": "雷伊的专属装备",
-      "fr": "Rey's Exclusive Equipment",
+      "fr": "Équipement exclusif de Rey",
       "es": "Equipo Exclusivo de Rey"
     },
     "desc": {
@@ -10838,7 +10838,7 @@
       "jp": "【グノーシス】ダリアの専用装備",
       "kr": "[그노시스] 달리아의 전용 장비",
       "zh": "【诺希斯】达利娅专属装备",
-      "fr": "Gnosis Dahlia's Exclusive Equipment",
+      "fr": "Équipement exclusif de Gnose Dahlia",
       "es": "Equipo Exclusivo de Gnosis Dahlia"
     },
     "desc": {
@@ -10876,7 +10876,7 @@
       "jp": "【グノーシス】ネラの専用装備",
       "kr": "[그노시스] 넬라의 전용 장비",
       "zh": "【诺希斯】内拉的专属装备",
-      "fr": "Gnosis Nella's Exclusive Equipment",
+      "fr": "Équipement exclusif de Gnose Nella",
       "es": "Equipo Exclusivo de Gnosis Nella"
     },
     "desc": {
@@ -10921,7 +10921,7 @@
       "jp": "【グノーシス】ベスの専用装備",
       "kr": "[그노시스] 베스의 전용 장비",
       "zh": "【诺希斯】贝丝的专属装备",
-      "fr": "Gnosis Beth's Exclusive Equipment",
+      "fr": "Équipement exclusif de Gnose Beth",
       "es": "Equipo exclusivo Gnosis Beth"
     },
     "desc": {
@@ -10956,16 +10956,16 @@
       "jp": "【聖夜の祝福】ダイアンの専用装備",
       "kr": "[성야의 축복] 다이안의 전용 장비",
       "zh": "【圣诞夜的祝福】黛安专属装备",
-      "fr": "Holy Night's Blessing Dianne's Exclusive Equipment",
+      "fr": "Équipement exclusif de Bénédiction de la Sainte Nuit Dianne",
       "es": "Bendición Noche Sagrada Equipo exclusivo Dianne"
     },
     "desc": {
-      "en": "Increases Action Points by [Value] at the start of battle",
+      "en": "Increases Action Points by [+Value] at the start of battle",
       "jp": "戦闘開始時、APを[+Value]獲得する。",
       "kr": "입장 시 AP [+Value]",
       "zh": "入场时AP[+Value]",
-      "fr": "Accroît les PA par [Value] au début de la bataille au début de la bataille.",
-      "es": "Sube los Puntos de Acción en [Value] al inicio de la batalla"
+      "fr": "Au début du combat, PA [+Value]",
+      "es": "Sube los Puntos de Acción en [+Value] al inicio de la batalla"
     },
     "values": [
       {
@@ -11139,7 +11139,7 @@
       "jp": "シールドを保有する味方が受けるダメージDOWN",
       "kr": "실드를 보유한 아군이 받는 피해 감소",
       "zh": "附带护盾的友军所受伤害降低",
-      "fr": "dégâts subis reduced durant alliés with barrière",
+      "fr": "Réduit les DGT subis par les alliés bénéficiant d'une Barrière",
       "es": "Daño recibido reducido aliados con Barrera"
     },
     "values": [{}],
@@ -11162,7 +11162,7 @@
       "jp": "デルタの専用装備",
       "kr": "델타의 전용 장비",
       "zh": "德尔塔专属装备",
-      "fr": "Delta's Exclusive Equipment",
+      "fr": "Équipement exclusif de Delta",
       "es": "Equipo exclusivo de Delta"
     },
     "desc": {
@@ -11198,7 +11198,7 @@
       "jp": "【デミウルゴス】デルタの専用装備",
       "kr": "[데미우르고스] 델타의 전용 장비",
       "zh": "【创世之神】德尔塔专属装备",
-      "fr": "Demiurge Delta's Exclusive Equipment",
+      "fr": "Équipement exclusif de Démiurge Delta",
       "es": "Equipo exclusivo de Demiurge Delta"
     },
     "desc": {
@@ -11235,7 +11235,7 @@
       "jp": "スカディの専用装備",
       "kr": "스카디의 전용 장비",
       "zh": "斯卡蒂专属装备",
-      "fr": "Skadi's Exclusive Equipment",
+      "fr": "Équipement exclusif de Skadi",
       "es": "Equipo Exclusivo de Skadi"
     },
     "desc": {
@@ -11387,7 +11387,7 @@
       "jp": "【青雲の志】エンバー専用装備",
       "kr": "[청운의 꿈] 엠버의 전용 장비",
       "zh": "【青云之志】炎珀的专属装备",
-      "fr": "[Summer Knight's Dream] Ember's Exclusive Equipment",
+      "fr": "Équipement exclusif de Le Rêve du Chevalier d'Été Ember",
       "es": "[Sueño del Caballero de Verano] Equipo Exclusivo de Ember"
     },
     "desc": {
@@ -11486,7 +11486,7 @@
       "jp": "【グノーシス】ビエラの専用装備",
       "kr": "[그노시스] 비엘라의 전용 장비",
       "zh": "【诺希斯】比耶拉的专属装备",
-      "fr": "Gnosis Viella's Exclusive Equipment",
+      "fr": "Équipement exclusif de Gnose Viella",
       "es": "Equipo Exclusivo de Gnosis Viella"
     },
     "desc": {
@@ -11494,7 +11494,7 @@
       "jp": "ダメージを受けた場合、敵全体に<color=#28d9ed>酸性の毒液</color> [+Turn]ターン\\n(2ターンに一度のみ発動、効果抵抗無視)",
       "kr": "피격 시 적 전체에게 <color=#28d9ed>산성독</color> [+Turn]턴(2턴에 1회, 효과 저항 무시)",
       "zh": "受到攻击时，对所有敌人施加<color=#28d9ed>酸性毒液</color>[+Turn]回合（每2回合触发1次，效果抵抗无视）",
-      "fr": "Quand c'est touché, <color=#28d9ed>Poison corrosive</color> [+tour] tour(s) vers tous les ennemis (Activated only once toth 2 tours, Ignores Resilience)",
+      "fr": "En subissant une attaque, inflige <color=#28d9ed>Poison corrosif</color> à tous les ennemis pendant [+Turn] tour(s) (une fois tous les 2 tours, ignore la Résilience)",
       "es": "Al recibir un golpe, inflige Veneno Corrosivo<color=#28d9ed></color> [+Turno] a los enemigos (Se activa solo una vez cada 2 turno, Ignora Resistencia)"
     },
     "values": [
@@ -11559,7 +11559,7 @@
       "jp": "[モナド]イオータの専用装備",
       "kr": "[모나드] 요타의 전용 장비",
       "zh": "[单子]佑妲的专用装备",
-      "fr": "[Monad] Iota's Exclusive Equipment",
+      "fr": "Équipement exclusif de Monade Iota",
       "es": "[Monad] Equipo Exclusivo de Iota"
     },
     "desc": {
@@ -11832,7 +11832,7 @@
       "jp": "真夏のポリス・デルタの専用装備",
       "kr": "히트 웨이브 캅 델타의 전용 장비",
       "zh": "热浪警官 德尔塔的专属装备",
-      "fr": "Heatwave Cop Delta's Exclusive Equipment",
+      "fr": "Équipement exclusif de Flic de la canicule Delta",
       "es": "Equipo Exclusivo de Heatwave Cop Delta"
     },
     "desc": {
@@ -11968,7 +11968,7 @@
       "jp": "デミウルゴス・セイランの専用装備",
       "kr": "데미우르고스 세이란의 고유장비",
       "zh": "创世之神·萨伊蓝的专属装备",
-      "fr": "Demiurge Saeran's Exclusive Equipment",
+      "fr": "Équipement exclusif de Démiurge Saeran",
       "es": "Equipo exclusivo de Demiurge Saeran"
     },
     "desc": {
@@ -12001,7 +12001,7 @@
       "jp": "ケイの専用装備",
       "kr": "케이의 전용장비",
       "zh": "凯伊专属装备",
-      "fr": "K's Exclusive Equipment",
+      "fr": "Équipement exclusif de K",
       "es": "Equipo Exclusivo de K"
     },
     "desc": {
@@ -12076,7 +12076,7 @@
       "jp": "スノーの専用装備",
       "kr": "스노우의 전용장비",
       "zh": "雪诺专属装备",
-      "fr": "Snow's Exclusive Equipment",
+      "fr": "Équipement exclusif de Snow",
       "es": "Equipo Exclusivo de Snow"
     },
     "desc": {
@@ -12241,7 +12241,7 @@
       "jp": "アルファの専用装備",
       "kr": "알파의 전용장비",
       "zh": "阿尔法专属装备",
-      "fr": "Alpha's Exclusive Equipment",
+      "fr": "Équipement exclusif d'Alpha",
       "es": "Equipo Exclusivo de Alpha"
     },
     "desc": {
@@ -12385,7 +12385,7 @@
       "jp": "リリィの専用装備",
       "kr": "릴리의 전용장비",
       "zh": "莉莉专属装备",
-      "fr": "Lily's Exclusive Equipment",
+      "fr": "Équipement exclusif de Lily",
       "es": "Equipo Exclusivo de Lily"
     },
     "desc": {
@@ -12458,7 +12458,7 @@
       "jp": "ドーリーの専用装備",
       "kr": "돌리의 전용장비",
       "zh": "多莉专属装备",
-      "fr": "Dolly's Exclusive Equipment",
+      "fr": "Équipement exclusif de Dolly",
       "es": "Equipo Exclusivo de Dolly"
     },
     "desc": {
@@ -12681,7 +12681,7 @@
       "jp": "リンの専用装備",
       "kr": "린의 전용장비",
       "zh": "琳专属装备",
-      "fr": "Rin's Exclusive Equipment",
+      "fr": "Équipement exclusif de Rin",
       "es": "Equipo Exclusivo de Rin"
     },
     "desc": {
@@ -12746,10 +12746,10 @@
   "2100021": {
     "name": {
       "en": "Hanbyul Lee's Exclusive Equipment",
-      "jp": "イ・ハンビョルの専用装備",
+      "jp": "星野きららの専用装備",
       "kr": "이한별의 전용장비",
       "zh": "李寒星专属装备",
-      "fr": "Hanbyul Lee's Exclusive Equipment",
+      "fr": "Équipement exclusif de Hanbyul Lee",
       "es": "Equipo Exclusivo de Hanbyul Lee"
     },
     "desc": {
@@ -12785,7 +12785,7 @@
       "jp": "ノアの専用装備",
       "kr": "노아의 전용장비",
       "zh": "诺雅专属装备",
-      "fr": "Noa's Exclusive Equipment",
+      "fr": "Équipement exclusif de Noa",
       "es": "Equipo Exclusivo de Noa"
     },
     "desc": {
@@ -12827,7 +12827,7 @@
       "jp": "セイランの専用装備",
       "kr": "세이란의 전용장비",
       "zh": "萨伊蓝专属装备",
-      "fr": "Saeran's Exclusive Equipment",
+      "fr": "Équipement exclusif de Saeran",
       "es": "Equipo exclusivo de Saeran"
     },
     "desc": {
@@ -12835,7 +12835,7 @@
       "jp": "<color=#28d9ed>【我らをご照覧あれ】</color>使用時、\\n味方全体の行動ゲージが[+Value]UPする。",
       "kr": "<color=#28d9ed>우리를 굽어 살피소서</color> 사용 시 모든 아군의 행동 게이지 [+Value]",
       "zh": "使用<color=#28d9ed>庇佑降临</color>时，使全体友军的行动值[+Value]",
-      "fr": "si using <color=#28d9ed>Gaze Upon Us</color>, accroît the priorité of les alliés by [Value]",
+      "fr": "Lors de l'utilisation de <color=#28d9ed>Veillez sur nous</color>, augmente la Prior. de tous les alliés de [+Value]",
       "es": "Al usar <color=#28d9ed>Mira hacia nosotros</color>, aumenta la Prior. de los aliados en [Value]"
     },
     "values": [
@@ -12939,7 +12939,7 @@
       "jp": "ユーリの専用装備",
       "kr": "유리의 전용장비",
       "zh": "尤莉专属装备",
-      "fr": "Yuri's Exclusive Equipment",
+      "fr": "Équipement exclusif d'Yuri",
       "es": "Equipo exclusivo de Yuri"
     },
     "desc": {
@@ -13166,7 +13166,7 @@
       "jp": "パルティーの専用装備",
       "kr": "파르티의 전용장비",
       "zh": "帕尔蒂专属装备",
-      "fr": "Parti's Exclusive Equipment",
+      "fr": "Équipement exclusif de Parti",
       "es": "Equipo exclusivo de Parti"
     },
     "desc": {
@@ -13205,7 +13205,7 @@
       "jp": "アデリーの専用装備",
       "kr": "아델리의 전용장비",
       "zh": "阿黛莉专属装备",
-      "fr": "Adelie's Exclusive Equipment",
+      "fr": "Équipement exclusif d'Adelie",
       "es": "Equipo exclusivo de Adelie"
     },
     "desc": {
@@ -13386,7 +13386,7 @@
       "jp": "シューの専用装備",
       "kr": "슈의 전용장비",
       "zh": "小芙专属装备",
-      "fr": "Shu's Exclusive Equipment",
+      "fr": "Équipement exclusif de Shu",
       "es": "Equipo exclusivo de Shu"
     },
     "desc": {
@@ -13424,7 +13424,7 @@
       "jp": "ステラの専用装備",
       "kr": "스텔라의 전용장비",
       "zh": "斯黛拉专属装备",
-      "fr": "Stella's Exclusive Equipment",
+      "fr": "Équipement exclusif de Stella",
       "es": "Equipo exclusivo de Stella"
     },
     "desc": {
@@ -13529,7 +13529,7 @@
       "jp": "レオの専用装備",
       "kr": "레오의 전용장비",
       "zh": "雷欧专属装备",
-      "fr": "Leo's Exclusive Equipment",
+      "fr": "Équipement exclusif de Leo",
       "es": "Equipo exclusivo de Leo"
     },
     "desc": {
@@ -13713,7 +13713,7 @@
       "jp": "ライラの専用装備",
       "kr": "라일라의 전용장비",
       "zh": "莱拉专属装备",
-      "fr": "Lyla's Exclusive Equipment",
+      "fr": "Équipement exclusif de Lyla",
       "es": "Equipo exclusivo de Lyla"
     },
     "desc": {
@@ -13861,7 +13861,7 @@
       "jp": "オーロックスの専用装備",
       "kr": "오록스의 전용장비",
       "zh": "欧路士专属装备",
-      "fr": "Orox's Exclusive Equipment",
+      "fr": "Équipement exclusif d'Orox",
       "es": "Equipo exclusivo de Orox"
     },
     "desc": {
@@ -13933,7 +13933,7 @@
       "jp": "【デミウルゴス】ステラの専用装備",
       "kr": "[데미우르고스] 스텔라의 전용장비",
       "zh": "【创世之神】斯黛拉的专属装备",
-      "fr": "Demiurge Stella's Exclusive Equipment",
+      "fr": "Équipement exclusif de Démiurge Stella",
       "es": "Equipo Exclusivo de Demiurge Stella"
     },
     "desc": {
@@ -13970,7 +13970,7 @@
       "jp": "メネの専用装備",
       "kr": "메네의 전용장비",
       "zh": "麦尼的专属装备",
-      "fr": "Mene's Exclusive Equipment",
+      "fr": "Équipement exclusif de Mene",
       "es": "Equipo Exclusivo de Mene"
     },
     "desc": {
@@ -14040,7 +14040,7 @@
       "jp": "ノティアの専用装備",
       "kr": "노티아의 전용장비",
       "zh": "诺缇亚专属装备",
-      "fr": "Notia's Exclusive Equipment",
+      "fr": "Équipement exclusif de Notia",
       "es": "Equipo Exclusivo Notia"
     },
     "desc": {
@@ -14077,7 +14077,7 @@
       "jp": "ステロペの専用装備",
       "kr": "스테로페의 전용장비",
       "zh": "史提洛佩的专属装备",
-      "fr": "Sterope's Exclusive Equipment",
+      "fr": "Équipement exclusif de Sterope",
       "es": "Equipo Exclusivo de Sterope"
     },
     "desc": {
@@ -14150,7 +14150,7 @@
       "jp": "【デミウルゴス】アステの専用装備",
       "kr": "[데미우르고스] 아스테의 전용장비",
       "zh": "【创世之神】奥斯黛专属装备",
-      "fr": "Demiurge Astei's Exclusive Equipment",
+      "fr": "Équipement exclusif de Démiurge Astei",
       "es": "Equipo Exclusivo de Demiurge Astei"
     },
     "desc": {
@@ -14220,7 +14220,7 @@
       "jp": "クリスティーナの専用装備",
       "kr": "크리스티나의 전용 장비",
       "zh": "克莉丝提娜专属装备",
-      "fr": "Christina's Exclusive Equipment",
+      "fr": "Équipement exclusif de Christina",
       "es": "Equipo Exclusivo de Christina"
     },
     "desc": {
@@ -14257,7 +14257,7 @@
       "jp": "ドレイカーンの専用装備",
       "kr": "드레이칸의 전용 장비",
       "zh": "德雷坎专属装备",
-      "fr": "Drakhan's Exclusive Equipment",
+      "fr": "Équipement exclusif de Drakhan",
       "es": "Equipo Exclusivo de Drakhan"
     },
     "desc": {
@@ -14265,7 +14265,7 @@
       "jp": "<color=#28d9ed>【超覇王暴竜流星黒炎拳】</color>使用前、\\n対象に呪いを[+Turn]の間付与する。",
       "kr": "<color=#28d9ed>초패왕폭룡유성흑염권</color> 사용 전 대상에게 저주 [+Turn]턴",
       "zh": "使用<color=#28d9ed>楚霸王暴龙流星黑焰拳</color>前，对目标施加诅咒[+Turn]回合",
-      "fr": "Avant d'utiliser <color=#28d9ed>Conquering Dragon Meteor Fist</color>, inflige Maudit sur la cible pour [tour] tour(s)",
+      "fr": "Avant d'utiliser <color=#28d9ed>Poing du dragon conquérant aux météores et flammes noires</color>, inflige Maudit sur la cible pour [+Turn] tour(s)",
       "es": "Antes de usar <color=#28d9ed>Puño Meteorítico del Dragón Conquistador</color>, inflige Maldición al objetivo por [turno] turno(s)"
     },
     "values": [
@@ -14294,7 +14294,7 @@
       "jp": "【デミウルゴス】ドレイカーンの専用装備",
       "kr": "[데미우르고스] 드레이칸의 전용 장비",
       "zh": "【创世之神】德雷坎专属装备",
-      "fr": "Demiurge Drakhan's Exclusive Equipment",
+      "fr": "Équipement exclusif de Démiurge Drakhan",
       "es": "Equipo Exclusivo del Demiurge Drakhan"
     },
     "desc": {
@@ -14331,7 +14331,7 @@
       "jp": "アカリの専用装備",
       "kr": "아카리의 전용 장비",
       "zh": "阿卡莉专属装备",
-      "fr": "Akari's Exclusive Equipment",
+      "fr": "Équipement exclusif d'Akari",
       "es": "Equipo Exclusivo de Akari"
     },
     "desc": {
@@ -14368,7 +14368,7 @@
       "jp": "あめの専用装備",
       "kr": "아메의 전용 장비",
       "zh": "亚美专属装备",
-      "fr": "Ame's Exclusive Equipment",
+      "fr": "Équipement exclusif d'Ame",
       "es": "Equipo Exclusivo de Ame"
     },
     "desc": {
@@ -14402,7 +14402,7 @@
       "jp": "シャーロットの専用装備",
       "kr": "샬롯의 전용 장비",
       "zh": "夏洛特专属装备",
-      "fr": "Charlotte's Exclusive Equipment",
+      "fr": "Équipement exclusif de Charlotte",
       "es": "Equipo Exclusivo de Charlotte"
     },
     "desc": {
@@ -14736,7 +14736,7 @@
       "jp": "【デミウルゴス】ヴラダの専用装備",
       "kr": "[데미우르고스] 블라다의 전용 장비",
       "zh": "【创世之神】布拉达专属装备",
-      "fr": "Demiurge Vlada's Exclusive Equipment",
+      "fr": "Équipement exclusif de Démiurge Vlada",
       "es": "Equipo Exclusivo de Demiurge Vlada"
     },
     "desc": {
@@ -15046,7 +15046,7 @@
       "jp": "【プールの】レジーナの専用装備",
       "kr": "[풀장의] 레지나의 전용 장비",
       "zh": "【泳池】蕾吉纳专属装备",
-      "fr": "[Poolside] Regina's Exclusive Equipment",
+      "fr": "Équipement exclusif de Farceur de la Piscine Regina",
       "es": "[Poolside] Equipo exclusivo de Regina"
     },
     "desc": {
@@ -15113,7 +15113,7 @@
       "jp": "レイの専用装備",
       "kr": "레이의 전용 장비",
       "zh": "雷伊的专属装备",
-      "fr": "Rey's Exclusive Equipment",
+      "fr": "Équipement exclusif de Rey",
       "es": "Equipo Exclusivo de Rey"
     },
     "desc": {
@@ -15218,7 +15218,7 @@
       "jp": "【グノーシス】ダリアの専用装備",
       "kr": "[그노시스] 달리아의 전용 장비",
       "zh": "【诺希斯】达利娅专属装备",
-      "fr": "Gnosis Dahlia's Exclusive Equipment",
+      "fr": "Équipement exclusif de Gnose Dahlia",
       "es": "Equipo Exclusivo de Gnosis Dahlia"
     },
     "desc": {
@@ -15254,7 +15254,7 @@
       "jp": "【グノーシス】ネラの専用装備",
       "kr": "[그노시스] 넬라의 전용 장비",
       "zh": "【诺希斯】内拉的专属装备",
-      "fr": "Gnosis Nella's Exclusive Equipment",
+      "fr": "Équipement exclusif de Gnose Nella",
       "es": "Equipo Exclusivo de Gnosis Nella"
     },
     "desc": {
@@ -15287,7 +15287,7 @@
       "jp": "【グノーシス】ベスの専用装備",
       "kr": "[그노시스] 베스의 전용 장비",
       "zh": "【诺希斯】贝丝的专属装备",
-      "fr": "Gnosis Beth's Exclusive Equipment",
+      "fr": "Équipement exclusif de Gnose Beth",
       "es": "Equipo exclusivo Gnosis Beth"
     },
     "desc": {
@@ -15320,16 +15320,16 @@
       "jp": "【聖夜の祝福】ダイアンの専用装備",
       "kr": "[성야의 축복] 다이안의 전용 장비",
       "zh": "【圣诞夜的祝福】黛安专属装备",
-      "fr": "Holy Night's Blessing Dianne's Exclusive Equipment",
+      "fr": "Équipement exclusif de Bénédiction de la Sainte Nuit Dianne",
       "es": "Bendición Noche Sagrada Equipo exclusivo Dianne"
     },
     "desc": {
-      "en": "Increases damage dealt to Boss by [Value]",
+      "en": "Increases damage dealt to Boss by [+Value]",
       "jp": "ボスに与えるダメージが[+Value]UPする。",
       "kr": "보스에게 입히는 피해 [+Value]",
       "zh": "对首领造成的伤害[+Value]",
-      "fr": "Accroît les DGT infligés à Boss par le boss.[Value]",
-      "es": "Sube el daño infligido a los Jefes en [Value]"
+      "fr": "DGT infligés aux boss [+Value]",
+      "es": "Sube el daño infligido a los Jefes en [+Value]"
     },
     "values": [
       {
@@ -15526,7 +15526,7 @@
       "jp": "デルタの専用装備",
       "kr": "델타의 전용 장비",
       "zh": "德尔塔专属装备",
-      "fr": "Delta's Exclusive Equipment",
+      "fr": "Équipement exclusif de Delta",
       "es": "Equipo exclusivo de Delta"
     },
     "desc": {
@@ -15561,7 +15561,7 @@
       "jp": "【デミウルゴス】デルタの専用装備",
       "kr": "[데미우르고스] 델타의 전용 장비",
       "zh": "【创世之神】德尔塔专属装备",
-      "fr": "Demiurge Delta's Exclusive Equipment",
+      "fr": "Équipement exclusif de Démiurge Delta",
       "es": "Equipo exclusivo de Demiurge Delta"
     },
     "desc": {
@@ -15600,7 +15600,7 @@
       "jp": "スカディの専用装備",
       "kr": "스카디의 전용 장비",
       "zh": "斯卡蒂专属装备",
-      "fr": "Skadi's Exclusive Equipment",
+      "fr": "Équipement exclusif de Skadi",
       "es": "Equipo Exclusivo de Skadi"
     },
     "desc": {
@@ -15777,7 +15777,7 @@
       "jp": "【青雲の志】エンバー専用装備",
       "kr": "[청운의 꿈] 엠버의 전용 장비",
       "zh": "【青云之志】炎珀的专属装备",
-      "fr": "[Summer Knight's Dream] Ember's Exclusive Equipment",
+      "fr": "Équipement exclusif de Le Rêve du Chevalier d'Été Ember",
       "es": "[Sueño del Caballero de Verano] Equipo Exclusivo de Ember"
     },
     "desc": {
@@ -15878,7 +15878,7 @@
       "jp": "【グノーシス】ビエラの専用装備",
       "kr": "[그노시스] 비엘라의 전용 장비",
       "zh": "【诺希斯】比耶拉的专属装备",
-      "fr": "Gnosis Viella's Exclusive Equipment",
+      "fr": "Équipement exclusif de Gnose Viella",
       "es": "Equipo Exclusivo de Gnosis Viella"
     },
     "desc": {
@@ -15948,7 +15948,7 @@
       "jp": "[モナド]イオータの専用装備",
       "kr": "[모나드] 요타의 전용 장비",
       "zh": "[单子]佑妲的专用装备",
-      "fr": "[Monad] Iota's Exclusive Equipment",
+      "fr": "Équipement exclusif de Monade Iota",
       "es": "[Monad] Equipo Exclusivo de Iota"
     },
     "desc": {
@@ -16223,7 +16223,7 @@
       "jp": "真夏のポリス・デルタの専用装備",
       "kr": "히트 웨이브 캅 델타의 전용 장비",
       "zh": "热浪警官 德尔塔的专属装备",
-      "fr": "Heatwave Cop Delta's Exclusive Equipment",
+      "fr": "Équipement exclusif de Flic de la canicule Delta",
       "es": "Equipo Exclusivo de Heatwave Cop Delta"
     },
     "desc": {
@@ -16355,7 +16355,7 @@
       "jp": "デミウルゴス・セイランの専用装備",
       "kr": "데미우르고스 세이란의 고유장비",
       "zh": "创世之神·萨伊蓝的专属装备",
-      "fr": "Demiurge Saeran's Exclusive Equipment",
+      "fr": "Équipement exclusif de Démiurge Saeran",
       "es": "Equipo exclusivo de Demiurge Saeran"
     },
     "desc": {
@@ -16386,7 +16386,7 @@
       "jp": "コアフュージョン・スノーの専用装備",
       "kr": "코어 융합 스노우의 전용 장비",
       "zh": "核心融合雪诺的专用装备",
-      "fr": "Core Fusion Snow's Exclusive Equipment",
+      "fr": "Équipement exclusif de Fusion Core Snow",
       "es": "Equipo Exclusivo Fusión Core de Snow"
     },
     "desc": {
@@ -16554,7 +16554,7 @@
       "jp": "コアフュージョン・ヴェロニカの専用装備",
       "kr": "코어 융합 베로니카의 전용 장비",
       "zh": "核心融合后的维罗妮卡专属装备",
-      "fr": "Core-Fused Veronica's Exclusive Equipment",
+      "fr": "Équipement exclusif de Fusion Core Veronica",
       "es": "Equipo exclusivo de Veronica Core-Fusionada"
     },
     "desc": {
@@ -16586,7 +16586,7 @@
       "jp": "コアフュージョン・エターナルの専用装備",
       "kr": "코어 융합 이터널의 전용장비",
       "zh": "核心融合伊特诺的专属装备",
-      "fr": "Core Fusion Eternal's Exclusive Gear",
+      "fr": "Équipement exclusif de Fusion Core Eternal",
       "es": "Equipo Core Fusion Eternal"
     },
     "desc": {
@@ -16623,7 +16623,7 @@
       "jp": "コアフュージョン・ノティアの専用装備",
       "kr": "코어 융합 노티아의 전용 장비",
       "zh": "核心融合诺缇亚的专属装备",
-      "fr": "Core Fusion Notia's Exclusive Equipment",
+      "fr": "Équipement exclusif de Fusion Core Notia",
       "es": "Equipo Exclusivo Fusión Core de Notia"
     },
     "desc": {
@@ -16696,7 +16696,7 @@
       "jp": "コアフュージョン・スノーの専用装備",
       "kr": "코어 융합 스노우의 전용 장비",
       "zh": "核心融合雪诺的专用装备",
-      "fr": "Core Fusion Snow's Exclusive Equipment",
+      "fr": "Équipement exclusif de Fusion Core Snow",
       "es": "Equipo Exclusivo Fusión Core de Snow"
     },
     "desc": {
@@ -16865,7 +16865,7 @@
       "jp": "コアフュージョン・ヴェロニカの専用装備",
       "kr": "코어 융합 베로니카의 전용 장비",
       "zh": "核心融合后的维罗妮卡专属装备",
-      "fr": "Core-Fused Veronica's Exclusive Equipment",
+      "fr": "Équipement exclusif de Fusion Core Veronica",
       "es": "Equipo exclusivo de Veronica Core-Fusionada"
     },
     "desc": {
@@ -16901,7 +16901,7 @@
       "jp": "コアフュージョン・エターナルの専用装備",
       "kr": "코어 융합 이터널의 전용장비",
       "zh": "核心融合伊特诺的专属装备",
-      "fr": "Core Fusion Eternal's Exclusive Gear",
+      "fr": "Équipement exclusif de Fusion Core Eternal",
       "es": "Equipo Core Fusion Eternal"
     },
     "desc": {
@@ -16934,7 +16934,7 @@
       "jp": "コアフュージョン・ノティアの専用装備",
       "kr": "코어 융합 노티아의 전용 장비",
       "zh": "核心融合诺缇亚的专属装备",
-      "fr": "Core Fusion Notia's Exclusive Equipment",
+      "fr": "Équipement exclusif de Fusion Core Notia",
       "es": "Equipo Exclusivo Fusión Core de Notia"
     },
     "desc": {

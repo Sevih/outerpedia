@@ -5974,6 +5974,7 @@
       "BT_RESOURCE_USE_SKILL": "1018",
       "BT_SEALED_RESURRECTION": "EXTINCTION",
       "BT_DOT_PUNISH": "106",
+      "BT_STAT|ST_DMG_REDUCE_RATE": "70",
       "BT_COOL2_CHARGE": "64",
       "BURNED": "1",
       "CURSED": "2",
@@ -6079,6 +6080,7 @@
       "BT_STAT|ST_ACCURACY_IR": "1024",
       "BT_RESOURCE_USE_SKILL_IR": "1018",
       "BT_DOT_PUNISH_IR": "1106",
+      "BT_STAT|ST_DMG_REDUCE_RATE_IR": "1070",
       "BURNED_IR": "1001",
       "CURSED_IR": "1002",
       "BLEEDING_IR": "1003",
@@ -7213,24 +7215,6 @@
       "value": 150,
       "irremovable": true
     },
-    "Singularity_Passive_Normal_1_1": {
-      "type": "BT_DMG_REDUCE_FINAL",
-      "value": 700
-    },
-    "Singularity_Passive_Normal_1_2": {
-      "type": "BT_DMG_REDUCE_FINAL",
-      "value": 700
-    },
-    "Singularity_Passive_Normal_2_1": {
-      "type": "BT_WG_DMG_REDUCE",
-      "value": 500,
-      "irremovable": true
-    },
-    "Singularity_Passive_Normal_2_2": {
-      "type": "BT_WG_DMG_REDUCE",
-      "value": 500,
-      "irremovable": true
-    },
     "Singularity_Passive_Dmg_up_a": {
       "type": "BT_STAT_PREMIUM",
       "stat": "damage_boost",
@@ -7267,28 +7251,22 @@
       "value": 400,
       "irremovable": true
     },
-    "Singularity_Passive_Dmg_up_aaa_2": {
-      "type": "BT_STAT_PREMIUM",
-      "stat": "damage_boost",
-      "value": 1000,
-      "irremovable": true
+    "Singularity_Passive_Normal_1_1": {
+      "type": "BT_DMG_REDUCE_FINAL",
+      "value": 700
     },
-    "Singularity_Passive_Dmg_down_aaa_2": {
-      "type": "BT_STAT_PREMIUM",
-      "stat": "dmg_reduce",
+    "Singularity_Passive_Normal_1_2": {
+      "type": "BT_DMG_REDUCE_FINAL",
+      "value": 700
+    },
+    "Singularity_Passive_Normal_2_1": {
+      "type": "BT_WG_DMG_REDUCE",
       "value": 500,
       "irremovable": true
     },
-    "Singularity_Passive_Dmg_up_aaa_3": {
-      "type": "BT_STAT_PREMIUM",
-      "stat": "damage_boost",
-      "value": 1200,
-      "irremovable": true
-    },
-    "Singularity_Passive_Dmg_down_aaa_3": {
-      "type": "BT_STAT_PREMIUM",
-      "stat": "dmg_reduce",
-      "value": 700,
+    "Singularity_Passive_Normal_2_2": {
+      "type": "BT_WG_DMG_REDUCE",
+      "value": 500,
       "irremovable": true
     },
     "Singularity_Pasive_S_1": {
@@ -7305,6 +7283,18 @@
         "fr": "Pénétration accrue",
         "es": "Penetración aumentada"
       }
+    },
+    "Singularity_Passive_Dmg_up_aaa_3": {
+      "type": "BT_STAT_PREMIUM",
+      "stat": "damage_boost",
+      "value": 1200,
+      "irremovable": true
+    },
+    "Singularity_Passive_Dmg_down_aaa_3": {
+      "type": "BT_STAT_PREMIUM",
+      "stat": "dmg_reduce",
+      "value": 700,
+      "irremovable": true
     },
     "Singularity_Passive_Dmg_up_s_2": {
       "type": "BT_STAT_PREMIUM",
@@ -7377,6 +7367,18 @@
       "stat": "dmg_reduce",
       "value": 2000,
       "irremovable": true
+    },
+    "singularity_passive_normal_limit_dot1": {
+      "type": "BT_ENHANCE_ALL",
+      "value": -200
+    },
+    "singularity_passive_normal_limit_dot2": {
+      "type": "BT_ENHANCE_ALL",
+      "value": -300
+    },
+    "singularity_passive_normal_limit_dot3": {
+      "type": "BT_ENHANCE_ALL",
+      "value": -500
     }
   },
   "geas": {
@@ -9063,7 +9065,7 @@
         "jp": "日輪の蜃気楼を使用時、\\n魔法型の仲間のスキルターン初期化",
         "kr": "광양의 신기루 사용 시 마법형 동료의 스킬 쿨타임 초기화",
         "zh": "使用烈日之海市蜃楼时，重置魔法型同伴的技能冷却时间",
-        "fr": "Resets comp. Cooldown of Mage Hero Upon Using Mad Sun's Mirage",
+        "fr": "Réinitialise les temps de recharge des compétences des Mages alliés lors de l'utilisation de Mirage du soleil dément",
         "es": "Reinicia el Tiempo de recarga de Habilidad del Héroe Mago al usar el Espejismo del Sol Furioso"
       },
       "icon": "GD_Geis_special",

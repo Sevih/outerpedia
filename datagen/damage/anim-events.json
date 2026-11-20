@@ -30662,6 +30662,120 @@
    ]
   }
  },
+ "2700021": {
+  "clips": {
+   "2700021_Skill_1": [
+    "2700021_Skill_1_1,0",
+    "2700021_Skill_1_2,0"
+   ],
+   "2700021_Skill_3": [
+    "2700021_Skill_3_1,0"
+   ],
+   "2700021_Skill_3_Skip": [
+    "Skip_Finish_Earth ,0"
+   ],
+   "2700021_Skill_5": [
+    "2700021_Skill_5,0"
+   ],
+   "2700021_Skill_6": [
+    "2700021_Skill_6,0"
+   ],
+   "2700021_Skill_7": [
+    "2700021_Skill_7,0"
+   ]
+  },
+  "triggers": {
+   "BattleEntry": [
+    "2700021_Battle_Entry"
+   ],
+   "BattleResultWin": [
+    "2700021_Battle_Result_Win"
+   ],
+   "Burst1": [
+    "2700021_Skill_2_Upgrade"
+   ],
+   "HitBig": [
+    "2700021_Hit_Big"
+   ],
+   "HitDown": [
+    "2700021_Hit_Down"
+   ],
+   "HitFly": [
+    "2700021_Hit_Fly"
+   ],
+   "HitSmall1": [
+    "2700021_Hit_Small_1"
+   ],
+   "HitSmall2": [
+    "2700021_Hit_Small_2"
+   ],
+   "HitUp": [
+    "2700021_Hit_Air_Up"
+   ],
+   "IsAir": [
+    "2700021_Hit_Air_Fall",
+    "2700021_Hit_Air_Landing"
+   ],
+   "IsBackView": [
+    "2700021_Battle_Stand",
+    "2700021_Battle_Turn",
+    "2700021_Battle_Turn_Stand"
+   ],
+   "IsBreak": [
+    "2700021_Battle_Stand",
+    "2700021_Hit_Stun_Loop"
+   ],
+   "IsChainReady": [
+    "2700021_Battle_Turn_Stand",
+    "2700021_Skill_6_Cast"
+   ],
+   "IsDead": [
+    "2700021_Death_1",
+    "2700021_Death_2",
+    "2700021_Hit_Air_Fall"
+   ],
+   "IsRunning": [
+    "2700021_Battle_Run",
+    "2700021_Battle_Stand"
+   ],
+   "IsStun": [
+    "2700021_Battle_Stand",
+    "2700021_Hit_Stun_Loop"
+   ],
+   "IsTurn": [
+    "2700021_Battle_Stand",
+    "2700021_Battle_Turn"
+   ],
+   "Return": [
+    "2700021_Battle_Return"
+   ],
+   "Skill1": [
+    "2700021_Skill_1"
+   ],
+   "Skill2": [
+    "2700021_Skill_2"
+   ],
+   "Skill3": [
+    "2700021_Skill_3"
+   ],
+   "Skill3Skip": [
+    "2700021_Skill_3_Skip"
+   ],
+   "Skill5": [
+    "2700021_Skill_5"
+   ],
+   "Skill6": [
+    "2700021_Skill_6"
+   ],
+   "Skill7": [
+    "2700021_Skill_7"
+   ],
+   "VerticalSpeed": [
+    "2700021_Hit_Air_Fall",
+    "2700021_Hit_Air_Up"
+   ]
+  }
+ },
  "2700035": {
   "clips": {
    "2700035_Skill_1": [

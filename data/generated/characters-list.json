@@ -2952,6 +2952,8 @@
       "BT_ACTION_GAUGE",
       "BT_ADDITIVE_TURN",
       "BT_AP_CHARGE",
+      "BT_COOL_CHARGE",
+      "BT_EXTEND_BUFF",
       "BT_STAT|ST_ATK",
       "BT_STAT|ST_CRITICAL_DMG_RATE",
       "BT_STAT|ST_CRITICAL_RATE",
@@ -2963,7 +2965,17 @@
     "debuff": [],
     "effectsBySource": {
       "s1": {
-        "buff": ["BT_ACTION_GAUGE"],
+        "buff": ["BT_ACTION_GAUGE", "BT_COOL_CHARGE"],
+        "debuff": []
+      },
+      "s2": {
+        "buff": [
+          "BT_ADDITIVE_TURN",
+          "BT_EXTEND_BUFF",
+          "BT_STAT|ST_PIERCE_POWER_RATE",
+          "GIFT_OF_BUFFS",
+          "RANDOM_INCREASED_STAT_EFFECT"
+        ],
         "debuff": []
       },
       "chainPassive": {
@@ -2972,15 +2984,6 @@
       },
       "dualAttack": {
         "buff": ["BT_ACTION_GAUGE"],
-        "debuff": []
-      },
-      "s2": {
-        "buff": [
-          "BT_ADDITIVE_TURN",
-          "BT_STAT|ST_PIERCE_POWER_RATE",
-          "GIFT_OF_BUFFS",
-          "RANDOM_INCREASED_STAT_EFFECT"
-        ],
         "debuff": []
       },
       "ultimate": {
@@ -4124,6 +4127,42 @@
       }
     },
     "teamBonuses": ["CHD"]
+  },
+  "2700021": {
+    "buff": [
+      "BT_ACTION_GAUGE",
+      "BT_CALL_BACKUP",
+      "BT_COOL_CHARGE",
+      "BT_IMMUNE",
+      "BT_REMOVE_DEBUFF",
+      "BT_STAT|ST_BUFF_RESIST",
+      "UNCOUNTERABLE"
+    ],
+    "debuff": ["BT_ACTION_GAUGE", "BT_SEALED", "BT_STEAL_BUFF", "INCREASED_DAMAGE_TAKEN"],
+    "effectsBySource": {
+      "s1": {
+        "buff": ["BT_ACTION_GAUGE", "BT_CALL_BACKUP"],
+        "debuff": []
+      },
+      "s2": {
+        "buff": ["BT_COOL_CHARGE", "BT_IMMUNE", "BT_REMOVE_DEBUFF", "BT_STAT|ST_BUFF_RESIST"],
+        "debuff": []
+      },
+      "ultimate": {
+        "buff": ["UNCOUNTERABLE"],
+        "debuff": ["BT_ACTION_GAUGE", "BT_SEALED", "BT_STEAL_BUFF"]
+      },
+      "dualAttack": {
+        "buff": [],
+        "debuff": ["BT_STEAL_BUFF"]
+      },
+      "exclusiveEquip": {
+        "buff": ["BT_ACTION_GAUGE"],
+        "debuff": ["BT_ACTION_GAUGE"]
+      }
+    },
+    "teamBonuses": ["RES"],
+    "damageScaling": "hp"
   },
   "2700035": {
     "buff": ["BT_ACTION_GAUGE", "BT_COOL_CHARGE", "TRUE_PUREBLOODS_DOMINION", "UNCOUNTERABLE"],

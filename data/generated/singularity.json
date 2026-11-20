@@ -33,35 +33,40 @@
           "dungeon": "75000107",
           "monsters": ["60000007"],
           "thumbnail": "MT_Singularity_4034002",
-          "banner": "T_Singularity_4034002"
+          "banner": "T_Singularity_4034002",
+          "exBuff": "8"
         },
         {
           "order": 1,
           "dungeon": "75000105",
           "monsters": ["60000005"],
           "thumbnail": "MT_Singularity_4086020",
-          "banner": "T_Singularity_4086020"
+          "banner": "T_Singularity_4086020",
+          "exBuff": "3"
         },
         {
           "order": 2,
           "dungeon": "75000102",
           "monsters": ["60000002"],
           "thumbnail": "MT_Singularity_4076011",
-          "banner": "T_Singularity_4076011"
+          "banner": "T_Singularity_4076011",
+          "exBuff": "6"
         },
         {
           "order": 3,
           "dungeon": "75000110",
           "monsters": ["60000010"],
           "thumbnail": "MT_Singularity_4004006",
-          "banner": "T_Singularity_4004006"
+          "banner": "T_Singularity_4004006",
+          "exBuff": "4"
         },
         {
           "order": 4,
           "dungeon": "75000115",
           "monsters": ["60000015"],
           "thumbnail": "MT_Singularity_4004007",
-          "banner": "T_Singularity_4004007"
+          "banner": "T_Singularity_4004007",
+          "exBuff": "5"
         }
       ]
     },
@@ -89,35 +94,40 @@
           "dungeon": "75000109",
           "monsters": ["60000009"],
           "thumbnail": "MT_Singularity_4024002",
-          "banner": "T_Singularity_4024002"
+          "banner": "T_Singularity_4024002",
+          "exBuff": "7"
         },
         {
           "order": 1,
           "dungeon": "75000104",
           "monsters": ["60000004"],
           "thumbnail": "MT_Singularity_4076005",
-          "banner": "T_Singularity_4076005"
+          "banner": "T_Singularity_4076005",
+          "exBuff": "3"
         },
         {
           "order": 2,
           "dungeon": "75000103",
           "monsters": ["60000003"],
           "thumbnail": "MT_Singularity_4076002",
-          "banner": "T_Singularity_4076002"
+          "banner": "T_Singularity_4076002",
+          "exBuff": "2"
         },
         {
           "order": 3,
           "dungeon": "75000114",
           "monsters": ["60000014"],
           "thumbnail": "MT_Singularity_4004008",
-          "banner": "T_Singularity_4004008"
+          "banner": "T_Singularity_4004008",
+          "exBuff": "6"
         },
         {
           "order": 4,
           "dungeon": "75000110",
           "monsters": ["60000010"],
           "thumbnail": "MT_Singularity_4004006",
-          "banner": "T_Singularity_4004006"
+          "banner": "T_Singularity_4004006",
+          "exBuff": "4"
         }
       ]
     },
@@ -145,35 +155,40 @@
           "dungeon": "75000108",
           "monsters": ["60000008"],
           "thumbnail": "MT_Singularity_4038004",
-          "banner": "T_Singularity_4038004"
+          "banner": "T_Singularity_4038004",
+          "exBuff": "8"
         },
         {
           "order": 1,
           "dungeon": "75000105",
           "monsters": ["60000005"],
           "thumbnail": "MT_Singularity_4086020",
-          "banner": "T_Singularity_4086020"
+          "banner": "T_Singularity_4086020",
+          "exBuff": "8"
         },
         {
           "order": 2,
           "dungeon": "75000101",
           "monsters": ["60000001"],
           "thumbnail": "MT_Singularity_4014005",
-          "banner": "T_Singularity_4014005"
+          "banner": "T_Singularity_4014005",
+          "exBuff": "2"
         },
         {
           "order": 3,
           "dungeon": "75000112",
           "monsters": ["60000012"],
           "thumbnail": "MT_Singularity_4004007",
-          "banner": "T_Singularity_4004007"
+          "banner": "T_Singularity_4004007",
+          "exBuff": "4"
         },
         {
           "order": 4,
           "dungeon": "75000114",
           "monsters": ["60000014"],
           "thumbnail": "MT_Singularity_4004008",
-          "banner": "T_Singularity_4004008"
+          "banner": "T_Singularity_4004008",
+          "exBuff": "7"
         }
       ]
     },
@@ -201,35 +216,40 @@
           "dungeon": "75000107",
           "monsters": ["60000007"],
           "thumbnail": "MT_Singularity_4034002",
-          "banner": "T_Singularity_4034002"
+          "banner": "T_Singularity_4034002",
+          "exBuff": "1"
         },
         {
           "order": 1,
           "dungeon": "75000106",
           "monsters": ["60000006"],
           "thumbnail": "MT_Singularity_4044008",
-          "banner": "T_Singularity_4044008"
+          "banner": "T_Singularity_4044008",
+          "exBuff": "3"
         },
         {
           "order": 2,
           "dungeon": "75000102",
           "monsters": ["60000002"],
           "thumbnail": "MT_Singularity_4076011",
-          "banner": "T_Singularity_4076011"
+          "banner": "T_Singularity_4076011",
+          "exBuff": "8"
         },
         {
           "order": 3,
           "dungeon": "75000113",
           "monsters": ["60000013"],
           "thumbnail": "MT_Singularity_4004006",
-          "banner": "T_Singularity_4004006"
+          "banner": "T_Singularity_4004006",
+          "exBuff": "5"
         },
         {
           "order": 4,
           "dungeon": "75000112",
           "monsters": ["60000012"],
           "thumbnail": "MT_Singularity_4004007",
-          "banner": "T_Singularity_4004007"
+          "banner": "T_Singularity_4004007",
+          "exBuff": "4"
         }
       ]
     },
@@ -257,35 +277,40 @@
           "dungeon": "75000108",
           "monsters": ["60000008"],
           "thumbnail": "MT_Singularity_4038004",
-          "banner": "T_Singularity_4038004"
+          "banner": "T_Singularity_4038004",
+          "exBuff": "6"
         },
         {
           "order": 1,
           "dungeon": "75000104",
           "monsters": ["60000004"],
           "thumbnail": "MT_Singularity_4076005",
-          "banner": "T_Singularity_4076005"
+          "banner": "T_Singularity_4076005",
+          "exBuff": "3"
         },
         {
           "order": 2,
           "dungeon": "75000101",
           "monsters": ["60000001"],
           "thumbnail": "MT_Singularity_4014005",
-          "banner": "T_Singularity_4014005"
+          "banner": "T_Singularity_4014005",
+          "exBuff": "2"
         },
         {
           "order": 3,
           "dungeon": "75000111",
           "monsters": ["60000011"],
           "thumbnail": "MT_Singularity_4004008",
-          "banner": "T_Singularity_4004008"
+          "banner": "T_Singularity_4004008",
+          "exBuff": "7"
         },
         {
           "order": 4,
           "dungeon": "75000113",
           "monsters": ["60000013"],
           "thumbnail": "MT_Singularity_4004006",
-          "banner": "T_Singularity_4004006"
+          "banner": "T_Singularity_4004006",
+          "exBuff": "5"
         }
       ]
     },
@@ -313,37 +338,514 @@
           "dungeon": "75000109",
           "monsters": ["60000009"],
           "thumbnail": "MT_Singularity_4024002",
-          "banner": "T_Singularity_4024002"
+          "banner": "T_Singularity_4024002",
+          "exBuff": "1"
         },
         {
           "order": 1,
           "dungeon": "75000106",
           "monsters": ["60000006"],
           "thumbnail": "MT_Singularity_4044008",
-          "banner": "T_Singularity_4044008"
+          "banner": "T_Singularity_4044008",
+          "exBuff": "8"
         },
         {
           "order": 2,
           "dungeon": "75000103",
           "monsters": ["60000003"],
           "thumbnail": "MT_Singularity_4076002",
-          "banner": "T_Singularity_4076002"
+          "banner": "T_Singularity_4076002",
+          "exBuff": "2"
         },
         {
           "order": 3,
           "dungeon": "75000115",
           "monsters": ["60000015"],
           "thumbnail": "MT_Singularity_4004007",
-          "banner": "T_Singularity_4004007"
+          "banner": "T_Singularity_4004007",
+          "exBuff": "5"
         },
         {
           "order": 4,
           "dungeon": "75000111",
           "monsters": ["60000011"],
           "thumbnail": "MT_Singularity_4004008",
-          "banner": "T_Singularity_4004008"
+          "banner": "T_Singularity_4004008",
+          "exBuff": "6"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "name": {
+        "en": "Dimensional Singularity",
+        "jp": "次元特異点",
+        "kr": "차원 특이점",
+        "zh": "次元奇点",
+        "fr": "Singularité dim.",
+        "es": "Singularidad Dim."
+      },
+      "desc": {
+        "en": "Dimensional Singularity",
+        "jp": "次元特異点",
+        "kr": "차원 특이점",
+        "zh": "次元奇点",
+        "fr": "Singularité dim.",
+        "es": "Singularidad Dim."
+      },
+      "bosses": [
+        {
+          "order": 0,
+          "dungeon": "75000107",
+          "monsters": ["60000007"],
+          "thumbnail": "MT_Singularity_4034002",
+          "banner": "T_Singularity_4034002",
+          "exBuff": "1"
+        },
+        {
+          "order": 1,
+          "dungeon": "75000105",
+          "monsters": ["60000005"],
+          "thumbnail": "MT_Singularity_4086020",
+          "banner": "T_Singularity_4086020",
+          "exBuff": "3"
+        },
+        {
+          "order": 2,
+          "dungeon": "75000102",
+          "monsters": ["60000002"],
+          "thumbnail": "MT_Singularity_4076011",
+          "banner": "T_Singularity_4076011",
+          "exBuff": "7"
+        },
+        {
+          "order": 3,
+          "dungeon": "75000110",
+          "monsters": ["60000010"],
+          "thumbnail": "MT_Singularity_4004006",
+          "banner": "T_Singularity_4004006",
+          "exBuff": "8"
+        },
+        {
+          "order": 4,
+          "dungeon": "75000115",
+          "monsters": ["60000015"],
+          "thumbnail": "MT_Singularity_4004007",
+          "banner": "T_Singularity_4004007",
+          "exBuff": "5"
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "name": {
+        "en": "Dimensional Singularity",
+        "jp": "次元特異点",
+        "kr": "차원 특이점",
+        "zh": "次元奇点",
+        "fr": "Singularité dim.",
+        "es": "Singularidad Dim."
+      },
+      "desc": {
+        "en": "Dimensional Singularity",
+        "jp": "次元特異点",
+        "kr": "차원 특이점",
+        "zh": "次元奇点",
+        "fr": "Singularité dim.",
+        "es": "Singularidad Dim."
+      },
+      "bosses": [
+        {
+          "order": 0,
+          "dungeon": "75000109",
+          "monsters": ["60000009"],
+          "thumbnail": "MT_Singularity_4024002",
+          "banner": "T_Singularity_4024002",
+          "exBuff": "8"
+        },
+        {
+          "order": 1,
+          "dungeon": "75000104",
+          "monsters": ["60000004"],
+          "thumbnail": "MT_Singularity_4076005",
+          "banner": "T_Singularity_4076005",
+          "exBuff": "3"
+        },
+        {
+          "order": 2,
+          "dungeon": "75000103",
+          "monsters": ["60000003"],
+          "thumbnail": "MT_Singularity_4076002",
+          "banner": "T_Singularity_4076002",
+          "exBuff": "2"
+        },
+        {
+          "order": 3,
+          "dungeon": "75000114",
+          "monsters": ["60000014"],
+          "thumbnail": "MT_Singularity_4004008",
+          "banner": "T_Singularity_4004008",
+          "exBuff": "6"
+        },
+        {
+          "order": 4,
+          "dungeon": "75000110",
+          "monsters": ["60000010"],
+          "thumbnail": "MT_Singularity_4004006",
+          "banner": "T_Singularity_4004006",
+          "exBuff": "4"
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "name": {
+        "en": "Dimensional Singularity",
+        "jp": "次元特異点",
+        "kr": "차원 특이점",
+        "zh": "次元奇点",
+        "fr": "Singularité dim.",
+        "es": "Singularidad Dim."
+      },
+      "desc": {
+        "en": "Dimensional Singularity",
+        "jp": "次元特異点",
+        "kr": "차원 특이점",
+        "zh": "次元奇点",
+        "fr": "Singularité dim.",
+        "es": "Singularidad Dim."
+      },
+      "bosses": [
+        {
+          "order": 0,
+          "dungeon": "75000108",
+          "monsters": ["60000008"],
+          "thumbnail": "MT_Singularity_4038004",
+          "banner": "T_Singularity_4038004",
+          "exBuff": "1"
+        },
+        {
+          "order": 1,
+          "dungeon": "75000105",
+          "monsters": ["60000005"],
+          "thumbnail": "MT_Singularity_4086020",
+          "banner": "T_Singularity_4086020",
+          "exBuff": "8"
+        },
+        {
+          "order": 2,
+          "dungeon": "75000101",
+          "monsters": ["60000001"],
+          "thumbnail": "MT_Singularity_4014005",
+          "banner": "T_Singularity_4014005",
+          "exBuff": "2"
+        },
+        {
+          "order": 3,
+          "dungeon": "75000112",
+          "monsters": ["60000012"],
+          "thumbnail": "MT_Singularity_4004007",
+          "banner": "T_Singularity_4004007",
+          "exBuff": "7"
+        },
+        {
+          "order": 4,
+          "dungeon": "75000114",
+          "monsters": ["60000014"],
+          "thumbnail": "MT_Singularity_4004008",
+          "banner": "T_Singularity_4004008",
+          "exBuff": "8"
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "name": {
+        "en": "Dimensional Singularity",
+        "jp": "次元特異点",
+        "kr": "차원 특이점",
+        "zh": "次元奇点",
+        "fr": "Singularité dim.",
+        "es": "Singularidad Dim."
+      },
+      "desc": {
+        "en": "Dimensional Singularity",
+        "jp": "次元特異点",
+        "kr": "차원 특이점",
+        "zh": "次元奇点",
+        "fr": "Singularité dim.",
+        "es": "Singularidad Dim."
+      },
+      "bosses": [
+        {
+          "order": 0,
+          "dungeon": "75000107",
+          "monsters": ["60000007"],
+          "thumbnail": "MT_Singularity_4034002",
+          "banner": "T_Singularity_4034002",
+          "exBuff": "1"
+        },
+        {
+          "order": 1,
+          "dungeon": "75000106",
+          "monsters": ["60000006"],
+          "thumbnail": "MT_Singularity_4044008",
+          "banner": "T_Singularity_4044008",
+          "exBuff": "3"
+        },
+        {
+          "order": 2,
+          "dungeon": "75000102",
+          "monsters": ["60000002"],
+          "thumbnail": "MT_Singularity_4076011",
+          "banner": "T_Singularity_4076011",
+          "exBuff": "6"
+        },
+        {
+          "order": 3,
+          "dungeon": "75000113",
+          "monsters": ["60000013"],
+          "thumbnail": "MT_Singularity_4004006",
+          "banner": "T_Singularity_4004006",
+          "exBuff": "5"
+        },
+        {
+          "order": 4,
+          "dungeon": "75000112",
+          "monsters": ["60000012"],
+          "thumbnail": "MT_Singularity_4004007",
+          "banner": "T_Singularity_4004007",
+          "exBuff": "4"
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "name": {
+        "en": "Dimensional Singularity",
+        "jp": "次元特異点",
+        "kr": "차원 특이점",
+        "zh": "次元奇点",
+        "fr": "Singularité dim.",
+        "es": "Singularidad Dim."
+      },
+      "desc": {
+        "en": "Dimensional Singularity",
+        "jp": "次元特異点",
+        "kr": "차원 특이점",
+        "zh": "次元奇点",
+        "fr": "Singularité dim.",
+        "es": "Singularidad Dim."
+      },
+      "bosses": [
+        {
+          "order": 0,
+          "dungeon": "75000108",
+          "monsters": ["60000008"],
+          "thumbnail": "MT_Singularity_4038004",
+          "banner": "T_Singularity_4038004",
+          "exBuff": "7"
+        },
+        {
+          "order": 1,
+          "dungeon": "75000104",
+          "monsters": ["60000004"],
+          "thumbnail": "MT_Singularity_4076005",
+          "banner": "T_Singularity_4076005",
+          "exBuff": "3"
+        },
+        {
+          "order": 2,
+          "dungeon": "75000101",
+          "monsters": ["60000001"],
+          "thumbnail": "MT_Singularity_4014005",
+          "banner": "T_Singularity_4014005",
+          "exBuff": "2"
+        },
+        {
+          "order": 3,
+          "dungeon": "75000111",
+          "monsters": ["60000011"],
+          "thumbnail": "MT_Singularity_4004008",
+          "banner": "T_Singularity_4004008",
+          "exBuff": "8"
+        },
+        {
+          "order": 4,
+          "dungeon": "75000113",
+          "monsters": ["60000013"],
+          "thumbnail": "MT_Singularity_4004006",
+          "banner": "T_Singularity_4004006",
+          "exBuff": "5"
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "name": {
+        "en": "Dimensional Singularity",
+        "jp": "次元特異点",
+        "kr": "차원 특이점",
+        "zh": "次元奇点",
+        "fr": "Singularité dim.",
+        "es": "Singularidad Dim."
+      },
+      "desc": {
+        "en": "Dimensional Singularity",
+        "jp": "次元特異点",
+        "kr": "차원 특이점",
+        "zh": "次元奇点",
+        "fr": "Singularité dim.",
+        "es": "Singularidad Dim."
+      },
+      "bosses": [
+        {
+          "order": 0,
+          "dungeon": "75000109",
+          "monsters": ["60000009"],
+          "thumbnail": "MT_Singularity_4024002",
+          "banner": "T_Singularity_4024002",
+          "exBuff": "1"
+        },
+        {
+          "order": 1,
+          "dungeon": "75000106",
+          "monsters": ["60000006"],
+          "thumbnail": "MT_Singularity_4044008",
+          "banner": "T_Singularity_4044008",
+          "exBuff": "6"
+        },
+        {
+          "order": 2,
+          "dungeon": "75000103",
+          "monsters": ["60000003"],
+          "thumbnail": "MT_Singularity_4076002",
+          "banner": "T_Singularity_4076002",
+          "exBuff": "2"
+        },
+        {
+          "order": 3,
+          "dungeon": "75000115",
+          "monsters": ["60000015"],
+          "thumbnail": "MT_Singularity_4004007",
+          "banner": "T_Singularity_4004007",
+          "exBuff": "5"
+        },
+        {
+          "order": 4,
+          "dungeon": "75000111",
+          "monsters": ["60000011"],
+          "thumbnail": "MT_Singularity_4004008",
+          "banner": "T_Singularity_4004008",
+          "exBuff": "7"
         }
       ]
     }
-  ]
+  ],
+  "exBuffs": {
+    "1": {
+      "rank": "EX",
+      "desc": {
+        "en": "All Fire allies' Damage +200%",
+        "jp": "火属性の味方全体のダメージ+200%",
+        "kr": "화속성 동료 전체 피해 +200%",
+        "zh": "全体火属性同伴伤害+200%",
+        "fr": "Dégâts de tous les alliés de Feu +200%",
+        "es": "Daño de todos los aliados de Fuego +200%"
+      },
+      "option": "singularity_passive_ex_up_fire",
+      "value": 2000
+    },
+    "2": {
+      "rank": "EX",
+      "desc": {
+        "en": "All Water allies' Damage +200%",
+        "jp": "水属性の味方全体のダメージ+200%",
+        "kr": "수속성 동료 전체 피해 +200%",
+        "zh": "全体水属性同伴伤害+200%",
+        "fr": "Dégâts de tous les alliés d'Eau +200%",
+        "es": "Daño de todos los aliados de Agua +200%"
+      },
+      "option": "singularity_passive_ex_up_water",
+      "value": 2000
+    },
+    "3": {
+      "rank": "EX",
+      "desc": {
+        "en": "All Earth allies' Damage +200%",
+        "jp": "地属性の味方全体のダメージ+200%",
+        "kr": "지속성 동료 전체 피해 +200%",
+        "zh": "全体土属性同伴伤害+200%",
+        "fr": "Dégâts de tous les alliés de Terre +200%",
+        "es": "Daño de todos los aliados de Tierra +200%"
+      },
+      "option": "singularity_passive_ex_up_earth",
+      "value": 2000
+    },
+    "4": {
+      "rank": "EX",
+      "desc": {
+        "en": "All Dark allies' Damage +200%",
+        "jp": "闇属性の味方全体のダメージ+200%",
+        "kr": "암속성 동료 전체 피해 +200%",
+        "zh": "全体暗属性同伴伤害+200%",
+        "fr": "Dégâts de tous les alliés de Ténèbres +200%",
+        "es": "Daño de todos los aliados de Oscuridad +200%"
+      },
+      "option": "singularity_passive_ex_up_dark",
+      "value": 2000
+    },
+    "5": {
+      "rank": "EX",
+      "desc": {
+        "en": "All Light allies' Damage +200%",
+        "jp": "光属性の味方全体のダメージ+200%",
+        "kr": "명속성 동료 전체 피해 +200%",
+        "zh": "全体光属性同伴伤害+200%",
+        "fr": "Dégâts de tous les alliés de Lumière +200%",
+        "es": "Daño de todos los aliados de Luz +200%"
+      },
+      "option": "singularity_passive_ex_up_light",
+      "value": 2000
+    },
+    "6": {
+      "rank": "EX",
+      "desc": {
+        "en": "All Ranger allies' Damage +200%",
+        "jp": "スピード型の味方全体のダメージ+200%",
+        "kr": "속도형 동료 전체 피해 +200%",
+        "zh": "全体速度型同伴伤害+200%",
+        "fr": "Dégâts de tous les alliés Rangers +200%",
+        "es": "Daño de todos los aliados de clase Ranger +200%"
+      },
+      "option": "singularity_passive_ex_up_speed",
+      "value": 2000
+    },
+    "7": {
+      "rank": "EX",
+      "desc": {
+        "en": "All Striker allies' Damage +200%",
+        "jp": "攻撃型の味方全体のダメージ+200%",
+        "kr": "공격형 동료 전체 피해 +200%",
+        "zh": "全体攻击型同伴伤害+200%",
+        "fr": "Dégâts de tous les alliés Attaquants +200%",
+        "es": "Daño de todos los aliados de clase Atacante +200%"
+      },
+      "option": "singularity_passive_ex_up_attack",
+      "value": 2000
+    },
+    "8": {
+      "rank": "EX",
+      "desc": {
+        "en": "All Mage allies' Damage +200%",
+        "jp": "魔法型の味方全体のダメージ+200%",
+        "kr": "마법형 동료 전체 피해 +200%",
+        "zh": "全体魔法型同伴伤害+200%",
+        "fr": "Dégâts de tous les alliés Mages +200%",
+        "es": "Daño de todos los aliados de clase Mago +200%"
+      },
+      "option": "singularity_passive_ex_up_mage",
+      "value": 2000
+    }
+  }
 }

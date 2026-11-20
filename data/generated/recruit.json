@@ -238,7 +238,7 @@
     },
     {
       "kind": "pickup",
-      "groupId": "125",
+      "groupId": "126",
       "rates": [
         {
           "titleKey": "SYS_RECRUIT_RATEINFO_TITLE_05",
@@ -401,7 +401,7 @@
       "eventTicketId": "1000004",
       "ticketCost": 1,
       "freeCount": 0,
-      "bannerImage": "CM_Btn_Recruit_PickUp",
+      "bannerImage": "CM_Btn_Recruit_PickUp_01",
       "mileageCost": 200
     },
     {
@@ -661,7 +661,7 @@
     },
     {
       "kind": "limited",
-      "groupId": "6109",
+      "groupId": "5019",
       "rates": [
         {
           "titleKey": "SYS_RECRUIT_RATEINFO_TITLE_05",
@@ -824,7 +824,7 @@
       "eventTicketId": "1000006",
       "ticketCost": 1,
       "freeCount": 0,
-      "bannerImage": "CM_Btn_Recruit_Fes",
+      "bannerImage": "CM_Btn_Recruit_Seasonal_Select_03",
       "mileageCost": 150
     },
     {
@@ -1363,6 +1363,18 @@
       "kind": "fes",
       "start": "2026-11-03",
       "end": "2026-11-24"
+    },
+    {
+      "characterId": "2000093",
+      "kind": "seasonal",
+      "start": "2026-11-20",
+      "end": "2026-12-22"
+    },
+    {
+      "characterId": "2000110",
+      "kind": "seasonal",
+      "start": "2026-11-20",
+      "end": "2026-12-22"
     }
   ]
 }
