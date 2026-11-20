@@ -30,35 +30,15 @@ les preuves et les décisions vivent dans le tri consolidé de sevih-tool
 
 - [ ] Guides, vus à la relecture B71 (20/11) : l'intro de Core Fusion (`general-guides/core-fusion/labels.ts`) dit « 25 per Daily Run from Wednesday to Saturday — about 200 a week » alors que la saison dure cinq jours (Mer→Dim : 125 du quotidien + 100 des missions hebdo = 225) ; l'intro du guide Timegate range encore les lignes Singularité parmi les « estimations joueur » alors qu'elles sont dérivées des tables depuis B71.
 
-- [ ] **Après B73** : contrôle visuel desktop et mobile de l'EX Buff par créneau. Sur `/guides/dimensional-singularity` : pastille « EX Buff · <cible> » et `desc` du jeu sous le titre du boss du jour, pastille compacte « EX » + icône dans le coin haut gauche des autres jours (infobulle = `desc`, à côté du badge « Updating » quand un guide en porte un), rien sur la bibliothèque. Sur un guide de boss Singularity (ex. `/guides/dimensional-singularity/abomination-hunter-belial`) : bloc « Prochaines apparitions » sous le panneau du boss (date, jour, « Aujourd'hui », EX Buff), lignes empilées sous `sm`. Les tests figés supposent `singularity.json` à 12 groupes avec `exBuffs`, promu mais pas encore committé (cf. l'item « Après B71 et C27 ») : à committer avant ou avec B73.
-
-- [ ] **Après B71 et C27** : promotions faites le 20/11 (`timegate-resources.json`, `encounters.json`, `reward-tables.json`, `singularity.json`), à committer avec les données du patch ; reste le contrôle visuel de la section « Ranks » de `/guides/dimensional-singularity` (desktop et mobile : tableau à défilement horizontal, colonne des récompenses, ligne EX avec l'EX Buff +200 %).
-
 ## 🧰 Outil quick
 
-- [ ] **« Relancer quick » — test sur le vrai quick (lot B72)** : le banc
-      n'a relancé qu'un quick isolé (port 4799, clés vidées, scope
-      `b72-quick`). D'abord une relance À LA MAIN (le quick qui tourne n'a
-      pas la route) : arrêt par son scope `run-p<PID>-*.scope` ou « Quitter »,
-      puis le lanceur. Ensuite : (1) « Relancer », à droite de l'en-tête, avant
-      « Quitter » : une question, puis « redémarrage… » au journal, et la page
-      se recharge seule en quelques secondes ; le journal du lanceur
-      (`$XDG_RUNTIME_DIR/outerpedia-quick.log`, ou celui du scope) dit
-      « quick : relance demandée… », « port libéré… », puis
-      « quick → http://localhost:4747/ (relancé, PID …) » — même port, autre
-      PID, toujours dans le même scope :
-      `systemctl --user status run-p<PID>-*.scope`. (2) Données rechargées :
-      après une promotion (`pnpm datagen:promote --apply` ou Patch ›
-      Promouvoir) ou une intégration, un perso nouveau paraît dans le picker
-      de la Fiche perso après « Relancer », sans arrêt à la main. (3) Refus : « Relancer »
-      pendant un « Pousser » ou un geste de Patch en cours → journal rouge
-      « Relance refusée : un geste est en cours (git push, /api/push) ».
-      (4) Sur le FIXE (Windows, `launch.cmd`) : même essai ; la console reste
-      ouverte, affiche « quick a ete relance : il continue dans cette
-      fenetre. », et les lignes du nouveau quick s'y écrivent ; la fermer
-      l'arrête toujours ; « Quitter » ensuite ferme la fenêtre sans `pause`
-      (la console appartient alors au quick relancé). (5) Depuis l'autre PC
-      (`https://quick.outerpedia.local`) : même bouton, même retour.
+- [ ] **« Relancer quick » — reste à essayer sur le FIXE (lot B72)** : validé
+      sur le portable le 20/11. Sur le fixe (Windows, `launch.cmd`) : la
+      console reste ouverte, affiche « quick a ete relance : il continue dans
+      cette fenetre. », les lignes du nouveau quick s'y écrivent, la fermer
+      l'arrête toujours, et « Quitter » ensuite ferme la fenêtre sans `pause`.
+      Depuis l'autre PC (`https://quick.outerpedia.local`) : même bouton, même
+      retour.
 
 - [ ] **Tier list maker — canon de partage append-only** : `buildCanon`
       trie par id numérique (fusions après, A84 du 30/10) ; un NOUVEAU héros
