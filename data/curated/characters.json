@@ -5085,6 +5085,23 @@
       }
     ]
   },
+  "2700021": {
+    "role": "support",
+    "skillPriority": {
+      "first": 3,
+      "second": 2,
+      "ultimate": 1
+    },
+    "videos": [
+      {
+        "platform": "youtube",
+        "id": "eD1FPC2aexk",
+        "title": "[OUTERPLANE] Resonance Hanbyul Lee (VA. Akari Kito)",
+        "author": "아우터플레인 공식 채널",
+        "uploadDate": "2026-11-19T11:44:47Z"
+      }
+    ]
+  },
   "2700035": {
     "rank": "A",
     "rankPvp": "S",
