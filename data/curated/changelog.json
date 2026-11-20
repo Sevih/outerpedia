@@ -1,5 +1,27 @@
 [
   {
+    "id": "b9005f72",
+    "date": "2026-11-20",
+    "type": "character",
+    "title": {
+      "en": "Resonance Hanbyul Lee",
+      "jp": "レゾナンス 星野きらら",
+      "kr": "레조넌스 이한별",
+      "zh": "共鸣 李寒星",
+      "fr": "Résonance Hanbyul Lee",
+      "es": "Resonancia Hanbyul Lee"
+    },
+    "content": {
+      "en": [
+        "Resonance Hanbyul Lee has been added to the database with full skills, stats and exclusive equipment."
+      ]
+    },
+    "link": {
+      "kind": "character",
+      "slug": "resonance-hanbyul-lee"
+    }
+  },
+  {
     "id": "52b5998d",
     "date": "2026-11-07",
     "type": "update",
