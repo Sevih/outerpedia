@@ -20,38 +20,6 @@
         "bonus": ["21", "100", "66"],
         "malus": ["5", "102", "67", "78", "29", "58", "31"]
       },
-      "notes": [
-        {
-          "p": {
-            "en": "There is some wiggle room to go slightly faster or slower than the speeds listed, as long as it results in the same move order throughout the entire fight as shown in the video.",
-            "jp": "動画と同じ行動順が戦闘全体を通して保たれる限り、記載の速度より多少速くても遅くても調整の余地があります。",
-            "kr": "영상과 동일한 행동 순서가 전투 내내 유지된다면, 기재된 속도보다 약간 빠르거나 느려도 조정 여지가 있습니다.",
-            "zh": "只要整场战斗的行动顺序与视频中一致，速度可以比所列数值略快或略慢，有一定调整空间。",
-            "fr": "Il y a une certaine marge de manœuvre pour aller légèrement plus vite ou plus lentement que les vitesses indiquées, tant que cela produit le même ordre de passage tout au long du combat, comme montré dans la vidéo.",
-            "es": "Hay cierto margen para ir un poco más rápido o más lento que las velocidades indicadas, siempre que se mantenga el mismo orden de movimiento durante todo el combate como se muestra en el video."
-          }
-        },
-        {
-          "p": {
-            "en": "Run uses a 5★ Poolside Trickster Regina and a 6★ Summer Knight's Dream Ember. Results may vary with different transcendence levels.",
-            "jp": "このランでは5★ Poolside Trickster Reginaと6★ Summer Knight's Dream Emberを使用しています。超越段階が異なると結果が変わる場合があります。",
-            "kr": "이 런은 5★ Poolside Trickster Regina와 6★ Summer Knight's Dream Ember를 사용합니다. 초월 단계가 다르면 결과가 달라질 수 있습니다.",
-            "zh": "本次通关使用5★ Poolside Trickster Regina和6★ Summer Knight's Dream Ember。超越等级不同，结果可能有所差异。",
-            "fr": "L'exécution utilise une Farceur de la Piscine Regina 5★ et un Le Rêve du Chevalier d'Été Ember 6★. Les résultats peuvent varier avec des niveaux de transcendance différents.",
-            "es": "La ejecución usa a Traviesa del borde de la piscina Regina 5★ y a Sueño del Caballero de Verano Ember 6★. Los resultados pueden variar con diferentes niveles de trascendencia."
-          }
-        },
-        {
-          "p": {
-            "en": "Poolside Trickster Regina may not proc Enrage on the boss even when dealing over 50k damage — this seems to happen when her S1 AoE hits the orbs, so target the boss with her S1 instead.",
-            "jp": "Poolside Trickster Reginaは5万以上のダメージを与えてもボスの激怒を発動させないことがあります — S1のAoEがオーブに当たったときに起こるようなので、S1はボスを対象にしてください。",
-            "kr": "Poolside Trickster Regina는 5만 이상의 피해를 줘도 보스의 격노를 발동시키지 못할 수 있습니다 — S1의 AoE가 오브에 맞을 때 발생하는 것으로 보이니, S1은 보스를 대상으로 사용하세요.",
-            "zh": "Poolside Trickster Regina即使造成超过5万伤害，也可能无法触发Boss的狂暴 — 这似乎发生在她的S1 AoE打到球上时，因此请用S1瞄准Boss。",
-            "fr": "Farceur de la Piscine Regina peut ne pas déclencher l'Enrage sur le Chef même en infligeant plus de 50k dégâts — cela semble se produire quand son S1 AoE touche les orbes, donc ciblez plutôt le Chef avec son S1.",
-            "es": "Traviesa del borde de la piscina Regina puede no activar Enrage en el jefe incluso al infligir más de 50k de daño — esto parece ocurrir cuando su S1 AoE golpea los orbes, así que apunta al jefe con su S1 en su lugar."
-          }
-        }
-      ],
       "requirements": {
         "entries": [
           {
@@ -212,6 +180,38 @@
           }
         ]
       },
+      "notes": [
+        {
+          "p": {
+            "en": "There is some wiggle room to go slightly faster or slower than the speeds listed, as long as it results in the same move order throughout the entire fight as shown in the video.",
+            "jp": "動画と同じ行動順が戦闘全体を通して保たれる限り、記載の速度より多少速くても遅くても調整の余地があります。",
+            "kr": "영상과 동일한 행동 순서가 전투 내내 유지된다면, 기재된 속도보다 약간 빠르거나 느려도 조정 여지가 있습니다.",
+            "zh": "只要整场战斗的行动顺序与视频中一致，速度可以比所列数值略快或略慢，有一定调整空间。",
+            "fr": "Il y a une certaine marge de manœuvre pour aller légèrement plus vite ou plus lentement que les vitesses indiquées, tant que cela produit le même ordre de passage tout au long du combat, comme montré dans la vidéo.",
+            "es": "Hay cierto margen para ir un poco más rápido o más lento que las velocidades indicadas, siempre que se mantenga el mismo orden de movimiento durante todo el combate como se muestra en el video."
+          }
+        },
+        {
+          "p": {
+            "en": "Run uses a 5★ Poolside Trickster Regina and a 6★ Summer Knight's Dream Ember. Results may vary with different transcendence levels.",
+            "jp": "このランでは5★ Poolside Trickster Reginaと6★ Summer Knight's Dream Emberを使用しています。超越段階が異なると結果が変わる場合があります。",
+            "kr": "이 런은 5★ Poolside Trickster Regina와 6★ Summer Knight's Dream Ember를 사용합니다. 초월 단계가 다르면 결과가 달라질 수 있습니다.",
+            "zh": "本次通关使用5★ Poolside Trickster Regina和6★ Summer Knight's Dream Ember。超越等级不同，结果可能有所差异。",
+            "fr": "L'exécution utilise une Farceur de la Piscine Regina 5★ et un Le Rêve du Chevalier d'Été Ember 6★. Les résultats peuvent varier avec des niveaux de transcendance différents.",
+            "es": "La ejecución usa a Traviesa del borde de la piscina Regina 5★ y a Sueño del Caballero de Verano Ember 6★. Los resultados pueden variar con diferentes niveles de trascendencia."
+          }
+        },
+        {
+          "p": {
+            "en": "Poolside Trickster Regina may not proc Enrage on the boss even when dealing over 50k damage — this seems to happen when her S1 AoE hits the orbs, so target the boss with her S1 instead.",
+            "jp": "Poolside Trickster Reginaは5万以上のダメージを与えてもボスの激怒を発動させないことがあります — S1のAoEがオーブに当たったときに起こるようなので、S1はボスを対象にしてください。",
+            "kr": "Poolside Trickster Regina는 5만 이상의 피해를 줘도 보스의 격노를 발동시키지 못할 수 있습니다 — S1의 AoE가 오브에 맞을 때 발생하는 것으로 보이니, S1은 보스를 대상으로 사용하세요.",
+            "zh": "Poolside Trickster Regina即使造成超过5万伤害，也可能无法触发Boss的狂暴 — 这似乎发生在她的S1 AoE打到球上时，因此请用S1瞄准Boss。",
+            "fr": "Farceur de la Piscine Regina peut ne pas déclencher l'Enrage sur le Chef même en infligeant plus de 50k dégâts — cela semble se produire quand son S1 AoE touche les orbes, donc ciblez plutôt le Chef avec son S1.",
+            "es": "Traviesa del borde de la piscina Regina puede no activar Enrage en el jefe incluso al infligir más de 50k de daño — esto parece ocurrir cuando su S1 AoE golpea los orbes, así que apunta al jefe con su S1 en su lugar."
+          }
+        }
+      ],
       "video": {
         "platform": "youtube",
         "id": "fjldefzYnds",
@@ -234,60 +234,6 @@
         "bonus": ["21", "100", "76"],
         "malus": ["25", "67", "78", "29", "31", "20", "5"]
       },
-      "notes": [
-        {
-          "p": {
-            "en": "General Requirements:",
-            "jp": "必要条件:",
-            "kr": "필수 조건:",
-            "zh": "基本要求:",
-            "fr": "Prérequis généraux :",
-            "es": "Requisitos generales:"
-          }
-        },
-        {
-          "ul": [
-            {
-              "en": "Minimum 4★ transcendence with max level chain skill for 6 WG damage on chain",
-              "jp": "最低4★超越、チェインスキル最大レベルでチェイン時6 WGダメージ",
-              "kr": "최소 4★ 초월, 체인 스킬 최대 레벨로 체인 시 6 WG 데미지",
-              "zh": "最低4★超越，连携技能满级在连携时获得6 WG伤害",
-              "fr": "Transcendance 4★ minimum avec chain skill au niveau max pour 6 de dégâts de WG sur la chaîne",
-              "es": "Trascendencia mínima de 4★ con chain skill de nivel máximo para 6 de daño WG en cadena"
-            }
-          ]
-        },
-        {
-          "p": {
-            "en": "IMPORTANT: Use the exact speeds listed above and don't deviate from them. The speed tuning is incredibly precise - even small variations can cause the run to fail due to turn order issues.",
-            "jp": "重要: 上記の速度を正確に使用し、逸脱しないこと。速度調整は非常に精密で、小さな変動でもターン順の問題で失敗する可能性あり。",
-            "kr": "중요: 위에 나열된 정확한 속도를 사용하고 벗어나지 마세요. 속도 튜닝이 매우 정밀해서 작은 변동도 턴 순서 문제로 실패할 수 있습니다.",
-            "zh": "重要：使用上面列出的精确速度，不要偏离。速度调整非常精确 - 即使微小的变化也可能因回合顺序问题导致失败。",
-            "fr": "IMPORTANT : utilisez exactement les vitesses listées ci-dessus et ne vous en écartez pas. Le réglage de vitesse est extrêmement précis — même de petites variations peuvent faire échouer la run à cause de problèmes d'ordre de jeu.",
-            "es": "IMPORTANTE: Usa exactamente las velocidades indicadas arriba y no te desvíes de ellas. El ajuste de velocidad es increíblemente preciso: incluso pequeñas variaciones pueden hacer que la run falle por problemas de orden de turnos."
-          }
-        },
-        {
-          "p": {
-            "en": "TIP: Killing both orbs at the same time only counts as killing ONE orb for the Geas power boost on unit dying. It's better to kill each orb one by one whenever possible for maximum damage boost.",
-            "jp": "ヒント: 両方のオーブを同時に倒すと、ギアスのユニット死亡パワーブーストでは1体分としかカウントされない。最大ダメージブーストのため、可能な限りオーブを1体ずつ倒す方が良い。",
-            "kr": "팁: 두 오브를 동시에 처치하면 기어스의 유닛 사망 파워 부스트에서 1개로만 카운트됩니다. 최대 데미지 부스트를 위해 가능하면 오브를 하나씩 처치하는 것이 좋습니다.",
-            "zh": "提示：同时击杀两个球只算击杀一个球的Geas单位死亡能量提升。为了最大伤害提升，尽可能一个一个击杀球。",
-            "fr": "ASTUCE : tuer les deux orbs en même temps ne compte que comme la destruction d'UN seul orb pour le bonus de puissance du Geas à la mort d'une unité. Il vaut mieux tuer chaque orb un par un dès que possible pour un boost de dégâts maximal.",
-            "es": "CONSEJO: Matar ambos orbes al mismo tiempo solo cuenta como matar UN orbe para el impulso de poder de Geas al morir una unidad. Es mejor matar cada orbe uno por uno siempre que sea posible para obtener el máximo aumento de daño."
-          }
-        },
-        {
-          "p": {
-            "en": "TIP: On turn 1, target the boss (not the orbs) with Edelweiss's and Core Fusion Veronica's S3. These AoE skills deal less damage to the orbs when aimed directly at them, so the damage to the orbs may not be enough otherwise.",
-            "jp": "ヒント: ターン1では、EdelweissとCore Fusion VeronicaのS3はオーブではなくボスを対象にしてください。これらのAoEスキルはオーブを直接狙うとオーブへのダメージが下がるため、そうしないとオーブへのダメージが足りなくなる場合があります。",
-            "kr": "팁: 턴 1에는 Edelweiss와 Core Fusion Veronica의 S3을 오브가 아닌 보스에게 사용하세요. 이 AoE 스킬들은 오브를 직접 노리면 오브에 주는 피해가 줄어들기 때문에, 그렇게 하지 않으면 오브에 주는 피해가 부족할 수 있습니다.",
-            "zh": "提示：第1回合时，Edelweiss和Core Fusion Veronica的S3请瞄准Boss（而不是球）。这些AoE技能直接瞄准球时对球造成的伤害更低，否则对球的伤害可能不够。",
-            "fr": "ASTUCE : au tour 1, ciblez le boss (et non les orbs) avec le S3 d'Edelweiss et de Core Fusion Veronica. Ces compétences de zone infligent moins de dégâts aux orbs lorsqu'elles les visent directement, sinon les dégâts sur les orbs risquent d'être insuffisants.",
-            "es": "CONSEJO: En el turno 1, apunta al jefe (no a los orbes) con el S3 de Edelweiss y Core Fusion Veronica. Estos skills AoE hacen menos daño a los orbes cuando se apuntan directamente a ellos, así que de otro modo el daño a los orbes podría no ser suficiente."
-          }
-        }
-      ],
       "requirements": {
         "entries": [
           {
@@ -411,6 +357,60 @@
           }
         ]
       },
+      "notes": [
+        {
+          "p": {
+            "en": "General Requirements:",
+            "jp": "必要条件:",
+            "kr": "필수 조건:",
+            "zh": "基本要求:",
+            "fr": "Prérequis généraux :",
+            "es": "Requisitos generales:"
+          }
+        },
+        {
+          "ul": [
+            {
+              "en": "Minimum 4★ transcendence with max level chain skill for 6 WG damage on chain",
+              "jp": "最低4★超越、チェインスキル最大レベルでチェイン時6 WGダメージ",
+              "kr": "최소 4★ 초월, 체인 스킬 최대 레벨로 체인 시 6 WG 데미지",
+              "zh": "最低4★超越，连携技能满级在连携时获得6 WG伤害",
+              "fr": "Transcendance 4★ minimum avec chain skill au niveau max pour 6 de dégâts de WG sur la chaîne",
+              "es": "Trascendencia mínima de 4★ con chain skill de nivel máximo para 6 de daño WG en cadena"
+            }
+          ]
+        },
+        {
+          "p": {
+            "en": "IMPORTANT: Use the exact speeds listed above and don't deviate from them. The speed tuning is incredibly precise - even small variations can cause the run to fail due to turn order issues.",
+            "jp": "重要: 上記の速度を正確に使用し、逸脱しないこと。速度調整は非常に精密で、小さな変動でもターン順の問題で失敗する可能性あり。",
+            "kr": "중요: 위에 나열된 정확한 속도를 사용하고 벗어나지 마세요. 속도 튜닝이 매우 정밀해서 작은 변동도 턴 순서 문제로 실패할 수 있습니다.",
+            "zh": "重要：使用上面列出的精确速度，不要偏离。速度调整非常精确 - 即使微小的变化也可能因回合顺序问题导致失败。",
+            "fr": "IMPORTANT : utilisez exactement les vitesses listées ci-dessus et ne vous en écartez pas. Le réglage de vitesse est extrêmement précis — même de petites variations peuvent faire échouer la run à cause de problèmes d'ordre de jeu.",
+            "es": "IMPORTANTE: Usa exactamente las velocidades indicadas arriba y no te desvíes de ellas. El ajuste de velocidad es increíblemente preciso: incluso pequeñas variaciones pueden hacer que la run falle por problemas de orden de turnos."
+          }
+        },
+        {
+          "p": {
+            "en": "TIP: Killing both orbs at the same time only counts as killing ONE orb for the Geas power boost on unit dying. It's better to kill each orb one by one whenever possible for maximum damage boost.",
+            "jp": "ヒント: 両方のオーブを同時に倒すと、ギアスのユニット死亡パワーブーストでは1体分としかカウントされない。最大ダメージブーストのため、可能な限りオーブを1体ずつ倒す方が良い。",
+            "kr": "팁: 두 오브를 동시에 처치하면 기어스의 유닛 사망 파워 부스트에서 1개로만 카운트됩니다. 최대 데미지 부스트를 위해 가능하면 오브를 하나씩 처치하는 것이 좋습니다.",
+            "zh": "提示：同时击杀两个球只算击杀一个球的Geas单位死亡能量提升。为了最大伤害提升，尽可能一个一个击杀球。",
+            "fr": "ASTUCE : tuer les deux orbs en même temps ne compte que comme la destruction d'UN seul orb pour le bonus de puissance du Geas à la mort d'une unité. Il vaut mieux tuer chaque orb un par un dès que possible pour un boost de dégâts maximal.",
+            "es": "CONSEJO: Matar ambos orbes al mismo tiempo solo cuenta como matar UN orbe para el impulso de poder de Geas al morir una unidad. Es mejor matar cada orbe uno por uno siempre que sea posible para obtener el máximo aumento de daño."
+          }
+        },
+        {
+          "p": {
+            "en": "TIP: On turn 1, target the boss (not the orbs) with Edelweiss's and Core Fusion Veronica's S3. These AoE skills deal less damage to the orbs when aimed directly at them, so the damage to the orbs may not be enough otherwise.",
+            "jp": "ヒント: ターン1では、EdelweissとCore Fusion VeronicaのS3はオーブではなくボスを対象にしてください。これらのAoEスキルはオーブを直接狙うとオーブへのダメージが下がるため、そうしないとオーブへのダメージが足りなくなる場合があります。",
+            "kr": "팁: 턴 1에는 Edelweiss와 Core Fusion Veronica의 S3을 오브가 아닌 보스에게 사용하세요. 이 AoE 스킬들은 오브를 직접 노리면 오브에 주는 피해가 줄어들기 때문에, 그렇게 하지 않으면 오브에 주는 피해가 부족할 수 있습니다.",
+            "zh": "提示：第1回合时，Edelweiss和Core Fusion Veronica的S3请瞄准Boss（而不是球）。这些AoE技能直接瞄准球时对球造成的伤害更低，否则对球的伤害可能不够。",
+            "fr": "ASTUCE : au tour 1, ciblez le boss (et non les orbs) avec le S3 d'Edelweiss et de Core Fusion Veronica. Ces compétences de zone infligent moins de dégâts aux orbs lorsqu'elles les visent directement, sinon les dégâts sur les orbs risquent d'être insuffisants.",
+            "es": "CONSEJO: En el turno 1, apunta al jefe (no a los orbes) con el S3 de Edelweiss y Core Fusion Veronica. Estos skills AoE hacen menos daño a los orbes cuando se apuntan directamente a ellos, así que de otro modo el daño a los orbes podría no ser suficiente."
+          }
+        }
+      ],
       "video": {
         "platform": "youtube",
         "id": "a69ltnKOfiI",

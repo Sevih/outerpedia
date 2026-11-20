@@ -238,6 +238,75 @@
       "requirements": {
         "entries": [
           {
+            "character": "Liselotte",
+            "notes": [
+              {
+                "en": "Turn 1 Strategy with {P/Liselotte} (only if you can't survive turn 1 consistently, as it lowers your damage by 1 turn):",
+                "jp": "{P/Liselotte}を使ったターン1戦略（ターン1を安定して生き残れない場合のみ、1ターン分ダメージが減る）：",
+                "kr": "{P/Liselotte}를 사용한 1턴 전략(1턴을 안정적으로 생존 못할 때만, 1턴 데미지 감소):",
+                "zh": "{P/Liselotte}第1回合策略（仅当无法稳定度过第1回合时使用，会减少1回合伤害）：",
+                "fr": "Stratégie du tour 1 avec {P/Liselotte} (uniquement si vous ne survivez pas au tour 1 de manière fiable, car cela réduit vos dégâts d'1 tour) :",
+                "es": "Estrategia del turno 1 con {P/Liselotte} (solo si no puedes sobrevivir al turno 1 de forma consistente, ya que reduce tu daño en 1 turno):"
+              },
+              {
+                "en": "Put {P/Liselotte} in front row (first slot) to reduce turn 1 RNG - If both hit 100% priority at the same time, it will always give {P/Liselotte} first turn",
+                "jp": "{P/Liselotte}を前列（最初のスロット）に配置してターン1のRNGを減らす - 両方が同時に100%優先度に達した場合、常に{P/Liselotte}が先に行動",
+                "kr": "{P/Liselotte}를 앞줄(첫 번째 슬롯)에 배치해 1턴 RNG 감소 - 둘 다 동시에 100% 우선도에 도달하면 항상 {P/Liselotte}가 먼저 행동",
+                "zh": "把{P/Liselotte}放在前排（第一个位置）以减少第1回合RNG - 如果两者同时达到100%优先级，总是{P/Liselotte}先行动",
+                "fr": "Placez {P/Liselotte} en première ligne (premier emplacement) pour réduire le RNG du tour 1 — si les deux atteignent 100% de priorité en même temps, {P/Liselotte} jouera toujours en premier",
+                "es": "Pon a {P/Liselotte} en la fila delantera (primer puesto) para reducir el RNG del turno 1 - Si ambos alcanzan 100% de prioridad al mismo tiempo, siempre le dará el primer turno a {P/Liselotte}"
+              },
+              {
+                "en": "Low speed but faster than {P/Ember} (130ish speed at max)",
+                "jp": "低速度だが{P/Ember}より速い（最大130程度）",
+                "kr": "낮은 속도지만 {P/Ember}보다 빠르게(최대 130 정도)",
+                "zh": "低速度但比{P/Ember}快（最高130左右）",
+                "fr": "Vitesse faible mais plus rapide qu'{P/Ember} (environ 130 de vitesse au maximum)",
+                "es": "Velocidad baja pero más rápida que {P/Ember} (unos 130 de velocidad al máximo)"
+              },
+              {
+                "en": "0 crit, 0 accuracy, 0 resilience",
+                "jp": "クリ0、命中0、根性0",
+                "kr": "치명타 0, 명중률 0, 효과저항 0",
+                "zh": "0暴击，0命中，0效果抵抗",
+                "fr": "0 critique, 0 précision, 0 résilience",
+                "es": "0 de crítico, 0 de precisión, 0 de Resiliencia"
+              },
+              {
+                "en": "Enough tankiness to survive the first 2 hits (including crit) + burn damage",
+                "jp": "最初の2回の攻撃（クリ含む）+ バーンダメージを生き残る程度の耐久",
+                "kr": "첫 2번의 공격(치명타 포함) + 화상 피해를 생존할 정도의 탱킹",
+                "zh": "足够的坦度撑过前2次攻击（包括暴击）+ 燃烧伤害",
+                "fr": "Assez de résistance pour survivre aux 2 premiers coups (critique compris) + les dégâts de burn",
+                "es": "Suficiente resistencia para sobrevivir a los primeros 2 golpes (incluyendo crítico) + daño de quemadura"
+              },
+              {
+                "en": "Use Vanguard Charm",
+                "jp": "ヴァンガードチャームを使用",
+                "kr": "뱅가드 부적 사용",
+                "zh": "使用先锋护符",
+                "fr": "Utilisez le Vanguard Charm",
+                "es": "Usa Vanguard Charm"
+              },
+              {
+                "en": "On her turn: Use Burst S3 or Burst 2 to top up {P/Ember}'s health before the burn damage so you survive",
+                "jp": "ターン時：バーンダメージ前にバーストS3またはバースト2で{P/Ember}のHPを回復",
+                "kr": "자기 턴: 화상 피해 전에 버스트 S3 또는 버스트 2로 {P/Ember} HP 회복",
+                "zh": "轮到她时：在燃烧伤害前用爆发S3或爆发2回复{P/Ember}的血量",
+                "fr": "À son tour : utilisez le Burst S3 ou le Burst 2 pour remonter les HP d'{P/Ember} avant les dégâts de burn afin de survivre",
+                "es": "En su turno: usa Burst S3 o Burst 2 para rellenar la vida de {P/Ember} antes del daño de quemadura para sobrevivir"
+              },
+              {
+                "en": "She'll die before her second turn",
+                "jp": "2ターン目前に死ぬ",
+                "kr": "두 번째 턴 전에 사망",
+                "zh": "第二回合前会死",
+                "fr": "Elle mourra avant son second tour",
+                "es": "Morirá antes de su segundo turno"
+              }
+            ]
+          },
+          {
             "character": "Ember",
             "stats": {
               "spd": "120-130"
@@ -429,76 +498,6 @@
               "zh": "治疗者可以持有Starlight Road",
               "fr": "Les soigneurs peuvent porter le Starlight Road",
               "es": "Los Sanadores pueden llevar Starlight Road"
-            }
-          ]
-        },
-        {
-          "p": {
-            "en": "Turn 1 Strategy with {P/Liselotte} (only if you can't survive turn 1 consistently, as it lowers your damage by 1 turn):",
-            "jp": "{P/Liselotte}を使ったターン1戦略（ターン1を安定して生き残れない場合のみ、1ターン分ダメージが減る）：",
-            "kr": "{P/Liselotte}를 사용한 1턴 전략(1턴을 안정적으로 생존 못할 때만, 1턴 데미지 감소):",
-            "zh": "{P/Liselotte}第1回合策略（仅当无法稳定度过第1回合时使用，会减少1回合伤害）：",
-            "fr": "Stratégie du tour 1 avec {P/Liselotte} (uniquement si vous ne survivez pas au tour 1 de manière fiable, car cela réduit vos dégâts d'1 tour) :",
-            "es": "Estrategia del turno 1 con {P/Liselotte} (solo si no puedes sobrevivir al turno 1 de forma consistente, ya que reduce tu daño en 1 turno):"
-          }
-        },
-        {
-          "ul": [
-            {
-              "en": "Put {P/Liselotte} in front row (first slot) to reduce turn 1 RNG - If both hit 100% priority at the same time, it will always give {P/Liselotte} first turn",
-              "jp": "{P/Liselotte}を前列（最初のスロット）に配置してターン1のRNGを減らす - 両方が同時に100%優先度に達した場合、常に{P/Liselotte}が先に行動",
-              "kr": "{P/Liselotte}를 앞줄(첫 번째 슬롯)에 배치해 1턴 RNG 감소 - 둘 다 동시에 100% 우선도에 도달하면 항상 {P/Liselotte}가 먼저 행동",
-              "zh": "把{P/Liselotte}放在前排（第一个位置）以减少第1回合RNG - 如果两者同时达到100%优先级，总是{P/Liselotte}先行动",
-              "fr": "Placez {P/Liselotte} en première ligne (premier emplacement) pour réduire le RNG du tour 1 — si les deux atteignent 100% de priorité en même temps, {P/Liselotte} jouera toujours en premier",
-              "es": "Pon a {P/Liselotte} en la fila delantera (primer puesto) para reducir el RNG del turno 1 - Si ambos alcanzan 100% de prioridad al mismo tiempo, siempre le dará el primer turno a {P/Liselotte}"
-            },
-            {
-              "en": "Low speed but faster than {P/Ember} (130ish speed at max)",
-              "jp": "低速度だが{P/Ember}より速い（最大130程度）",
-              "kr": "낮은 속도지만 {P/Ember}보다 빠르게(최대 130 정도)",
-              "zh": "低速度但比{P/Ember}快（最高130左右）",
-              "fr": "Vitesse faible mais plus rapide qu'{P/Ember} (environ 130 de vitesse au maximum)",
-              "es": "Velocidad baja pero más rápida que {P/Ember} (unos 130 de velocidad al máximo)"
-            },
-            {
-              "en": "0 crit, 0 accuracy, 0 resilience",
-              "jp": "クリ0、命中0、根性0",
-              "kr": "치명타 0, 명중률 0, 효과저항 0",
-              "zh": "0暴击，0命中，0效果抵抗",
-              "fr": "0 critique, 0 précision, 0 résilience",
-              "es": "0 de crítico, 0 de precisión, 0 de Resiliencia"
-            },
-            {
-              "en": "Enough tankiness to survive the first 2 hits (including crit) + burn damage",
-              "jp": "最初の2回の攻撃（クリ含む）+ バーンダメージを生き残る程度の耐久",
-              "kr": "첫 2번의 공격(치명타 포함) + 화상 피해를 생존할 정도의 탱킹",
-              "zh": "足够的坦度撑过前2次攻击（包括暴击）+ 燃烧伤害",
-              "fr": "Assez de résistance pour survivre aux 2 premiers coups (critique compris) + les dégâts de burn",
-              "es": "Suficiente resistencia para sobrevivir a los primeros 2 golpes (incluyendo crítico) + daño de quemadura"
-            },
-            {
-              "en": "Use Vanguard Charm",
-              "jp": "ヴァンガードチャームを使用",
-              "kr": "뱅가드 부적 사용",
-              "zh": "使用先锋护符",
-              "fr": "Utilisez le Vanguard Charm",
-              "es": "Usa Vanguard Charm"
-            },
-            {
-              "en": "On her turn: Use Burst S3 or Burst 2 to top up {P/Ember}'s health before the burn damage so you survive",
-              "jp": "ターン時：バーンダメージ前にバーストS3またはバースト2で{P/Ember}のHPを回復",
-              "kr": "자기 턴: 화상 피해 전에 버스트 S3 또는 버스트 2로 {P/Ember} HP 회복",
-              "zh": "轮到她时：在燃烧伤害前用爆发S3或爆发2回复{P/Ember}的血量",
-              "fr": "À son tour : utilisez le Burst S3 ou le Burst 2 pour remonter les HP d'{P/Ember} avant les dégâts de burn afin de survivre",
-              "es": "En su turno: usa Burst S3 o Burst 2 para rellenar la vida de {P/Ember} antes del daño de quemadura para sobrevivir"
-            },
-            {
-              "en": "She'll die before her second turn",
-              "jp": "2ターン目前に死ぬ",
-              "kr": "두 번째 턴 전에 사망",
-              "zh": "第二回合前会死",
-              "fr": "Elle mourra avant son second tour",
-              "es": "Morirá antes de su segundo turno"
             }
           ]
         }
@@ -795,6 +794,10 @@
       },
       "element": "dark",
       "slots": [["Demiurge Saeran"], ["Stella"], ["Anarky"], ["Monad Iota"]],
+      "geasActive": {
+        "bonus": ["46"],
+        "malus": ["16", "60", "7", "106", "55", "96", "58", "20"]
+      },
       "requirements": {
         "entries": [
           {
@@ -887,10 +890,6 @@
         "platform": "youtube",
         "id": "eD-C-rxEs0Y",
         "title": "D.Saeran solo"
-      },
-      "geasActive": {
-        "bonus": ["46"],
-        "malus": ["16", "60", "7", "106", "55", "96", "58", "20"]
       }
     }
   ]
