@@ -481,7 +481,7 @@ describe('cleanRaidVersion — les refus d’un brouillon venu de la page', () =
     });
   });
 
-  it('sur le dépôt : les versions courantes passent le contrôle, au geas hors pool de Dignity près', () => {
+  it('sur le dépôt : les versions courantes passent le contrôle', () => {
     const real: RaidCheckContext = {
       ...ctx,
       names: { has: (n: string) => Boolean(findCharacterByName(n)) } as ReadonlySet<string>,
@@ -500,11 +500,8 @@ describe('cleanRaidVersion — les refus d’un brouillon venu de la page', () =
       for (const issue of out.issues)
         stray.push(`${g.slug} équipe ${(issue.index ?? 0) + 1} : ${issue.reason}`);
     }
-    // Constat du lot F33 : deux équipes de Dignity 2026-08 activent le geas 30,
-    // qu'aucun de ses deux sous-boss ne débloque (le rendu ne le coche pas).
-    expect(stray).toEqual([
-      'dignity-of-the-golden-kingdom équipe 2 : geas 30 hors du pool déblocable des sous-boss de la version',
-      'dignity-of-the-golden-kingdom équipe 3 : geas 30 hors du pool déblocable des sous-boss de la version',
-    ]);
+    // Le constat du lot F33 (geas 30 de Dignity 2026-08, hors pool) est corrigé
+    // depuis le 20/11 (30 → 67, même palier) : plus aucun écart.
+    expect(stray).toEqual([]);
   });
 });

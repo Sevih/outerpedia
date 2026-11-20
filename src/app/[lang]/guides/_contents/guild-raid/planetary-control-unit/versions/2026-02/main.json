@@ -107,7 +107,7 @@
         "fr": "Équipe Burn",
         "es": "Equipo de Quemadura"
       },
-      "icon": "IG_Buff_detonate",
+      "icon": "SC_Buff_detonate",
       "slots": [["Maxie"], ["Roxie"], ["Akari"], ["Vlada"]],
       "geasActive": {
         "bonus": ["44", "50", "107"],
@@ -415,7 +415,7 @@
         "fr": "Équipe Burn (Revenge)",
         "es": "Equipo Quemadura (Venganza)"
       },
-      "icon": "IG_Buff_detonate",
+      "icon": "SC_Buff_detonate",
       "slots": [["Maxie"], ["Roxie"], ["Akari"], ["Vlada"]],
       "geasActive": {
         "bonus": ["44", "50", "107"],
