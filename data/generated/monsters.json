@@ -58788,6 +58788,11 @@
         "dungeon": "131504",
         "level": 166,
         "hpLines": 10
+      },
+      {
+        "dungeon": "141407",
+        "level": 208,
+        "hpLines": 10
       }
     ]
   },
@@ -58880,6 +58885,11 @@
         "dungeon": "131310",
         "level": 160,
         "hpLines": 10
+      },
+      {
+        "dungeon": "141407",
+        "level": 208,
+        "hpLines": 10
       }
     ]
   },
@@ -58961,6 +58971,11 @@
       {
         "dungeon": "131504",
         "level": 166,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "141407",
+        "level": 208,
         "hpLines": 10
       }
     ]
@@ -59228,6 +59243,36 @@
         "dungeon": "131707",
         "level": 178,
         "hpLines": 10
+      },
+      {
+        "dungeon": "141403",
+        "level": 206,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "141404",
+        "level": 206,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "141405",
+        "level": 207,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "141408",
+        "level": 208,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "141409",
+        "level": 209,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "141410",
+        "level": 210,
+        "hpLines": 10
       }
     ]
   },
@@ -59299,6 +59344,31 @@
       {
         "dungeon": "131706",
         "level": 177,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "141403",
+        "level": 206,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "141405",
+        "level": 207,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "141408",
+        "level": 208,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "141409",
+        "level": 209,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "141410",
+        "level": 210,
         "hpLines": 10
       }
     ]
@@ -59376,6 +59446,36 @@
       {
         "dungeon": "131707",
         "level": 178,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "141403",
+        "level": 206,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "141404",
+        "level": 206,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "141405",
+        "level": 207,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "141408",
+        "level": 208,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "141409",
+        "level": 209,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "141410",
+        "level": 210,
         "hpLines": 10
       }
     ]
@@ -62405,6 +62505,11 @@
         "dungeon": "131503",
         "level": 166,
         "hpLines": 10
+      },
+      {
+        "dungeon": "141407",
+        "level": 208,
+        "hpLines": 10
       }
     ]
   },
@@ -62580,6 +62685,16 @@
         "dungeon": "131707",
         "level": 178,
         "hpLines": 10
+      },
+      {
+        "dungeon": "141405",
+        "level": 207,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "141409",
+        "level": 209,
+        "hpLines": 10
       }
     ]
   },
@@ -62654,6 +62769,21 @@
       {
         "dungeon": "131707",
         "level": 178,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "141404",
+        "level": 206,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "141408",
+        "level": 208,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "141409",
+        "level": 209,
         "hpLines": 10
       }
     ]
@@ -64838,6 +64968,11 @@
         "dungeon": "131503",
         "level": 166,
         "hpLines": 10
+      },
+      {
+        "dungeon": "141407",
+        "level": 208,
+        "hpLines": 10
       }
     ]
   },
@@ -64993,6 +65128,21 @@
         "dungeon": "131706",
         "level": 177,
         "hpLines": 10
+      },
+      {
+        "dungeon": "141403",
+        "level": 206,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "141405",
+        "level": 207,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "141409",
+        "level": 209,
+        "hpLines": 10
       }
     ]
   },
@@ -65067,6 +65217,16 @@
       {
         "dungeon": "131707",
         "level": 178,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "141404",
+        "level": 206,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "141408",
+        "level": 208,
         "hpLines": 10
       }
     ]
@@ -72922,6 +73082,11 @@
         "dungeon": "131301",
         "level": 151,
         "hpLines": 10
+      },
+      {
+        "dungeon": "141401",
+        "level": 205,
+        "hpLines": 10
       }
     ]
   },
@@ -72993,6 +73158,11 @@
       {
         "dungeon": "131301",
         "level": 151,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "141401",
+        "level": 205,
         "hpLines": 10
       }
     ]
@@ -73202,6 +73372,11 @@
       {
         "dungeon": "131302",
         "level": 152,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "141401",
+        "level": 205,
         "hpLines": 10
       }
     ]
@@ -73483,6 +73658,11 @@
       {
         "dungeon": "131301",
         "level": 151,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "141401",
+        "level": 205,
         "hpLines": 10
       }
     ]
@@ -89621,6 +89801,86 @@
       ]
     }
   },
+  "4304005": {
+    "id": "4304005",
+    "name": {
+      "en": "Betrayed Deshret",
+      "jp": "見捨てられたデシュレト",
+      "kr": "배신당한 데슈레트",
+      "zh": "被背叛的戴休雷特",
+      "fr": "Deshret la Traîtresse",
+      "es": "Deshret traicionado"
+    },
+    "type": "area_boss",
+    "race": "human",
+    "class": "striker",
+    "element": "earth",
+    "rarity": 3,
+    "icon": "3000043",
+    "skills": ["931567", "931568", "931569", "931570", "931571", "931572"],
+    "stats": {
+      "hp": {
+        "min": 4340,
+        "max": 279680
+      },
+      "atk": {
+        "min": 185,
+        "max": 8186
+      },
+      "def": {
+        "min": 123,
+        "max": 3537
+      },
+      "speed": {
+        "min": 55,
+        "max": 99
+      },
+      "guard": {
+        "min": 30,
+        "max": 60
+      },
+      "critical_rate": {
+        "min": 50,
+        "max": 160
+      },
+      "critical_dmg": {
+        "min": 1500,
+        "max": 1500
+      },
+      "dmg_reduce": {
+        "min": 0,
+        "max": 100
+      },
+      "buff_chance": {
+        "min": 63,
+        "max": 190
+      },
+      "buff_resist": {
+        "min": 26,
+        "max": 100
+      }
+    },
+    "aiType": "attack",
+    "pushBack": false,
+    "buffImmune": ["BT_GOLDEN_CURSE", "BT_STUN", "BT_FREEZE", "BT_STONE", "BT_SILENCE", "BT_AGGRO"],
+    "immuneTooltips": ["104", "34", "33", "35", "37", "32"],
+    "spawns": [
+      {
+        "dungeon": "141410",
+        "level": 210,
+        "hpLines": 10
+      }
+    ],
+    "rage": {
+      "trigger": "hp_rate",
+      "steps": [
+        {
+          "value": 500,
+          "duration": 4
+        }
+      ]
+    }
+  },
   "4311022": {
     "id": "4311022",
     "name": {
@@ -93590,6 +93850,77 @@
         "rate": -900
       }
     }
+  },
+  "4384001": {
+    "id": "4384001",
+    "name": {
+      "en": "Abyssal Calamity Apophis",
+      "jp": "地底の災害アポフィス",
+      "kr": "지저의 재해 아포피스",
+      "zh": "地底的灾厄·阿波菲斯",
+      "fr": "Apophis, Calamité Abyssale",
+      "es": "Calamidad Abisal Apophis"
+    },
+    "type": "boss",
+    "race": "alien",
+    "class": "striker",
+    "element": "earth",
+    "rarity": 3,
+    "icon": "4084001",
+    "skills": ["131579", "131580", "131581", "131582"],
+    "stats": {
+      "hp": {
+        "min": 595,
+        "max": 99360
+      },
+      "atk": {
+        "min": 120,
+        "max": 5952
+      },
+      "def": {
+        "min": 44,
+        "max": 1320
+      },
+      "speed": {
+        "min": 63,
+        "max": 96
+      },
+      "guard": {
+        "min": 18,
+        "max": 43
+      },
+      "critical_rate": {
+        "min": 50,
+        "max": 160
+      },
+      "critical_dmg": {
+        "min": 1500,
+        "max": 1500
+      },
+      "dmg_reduce": {
+        "min": 0,
+        "max": 100
+      },
+      "buff_chance": {
+        "min": 36,
+        "max": 112
+      },
+      "buff_resist": {
+        "min": 32,
+        "max": 96
+      }
+    },
+    "aiType": "attack",
+    "pushBack": false,
+    "buffImmune": ["BT_GOLDEN_CURSE", "BT_FREEZE", "BT_STONE", "BT_STUN", "BT_SILENCE", "BT_AGGRO"],
+    "immuneTooltips": ["104", "34", "33", "35", "37", "32"],
+    "spawns": [
+      {
+        "dungeon": "141406",
+        "level": 207,
+        "hpLines": 10
+      }
+    ]
   },
   "4384004": {
     "id": "4384004",
@@ -123147,6 +123478,84 @@
       }
     ]
   },
+  "4500375": {
+    "id": "4500375",
+    "name": {
+      "en": "Kappa",
+      "jp": "カッパ",
+      "kr": "카파",
+      "zh": "卡帕",
+      "fr": "Kappa",
+      "es": "Kappa"
+    },
+    "type": "boss",
+    "race": "automaton",
+    "class": "defender",
+    "element": "earth",
+    "rarity": 3,
+    "icon": "2000077",
+    "skills": ["152015", "152016", "152017"],
+    "stats": {
+      "hp": {
+        "min": 595,
+        "max": 99360
+      },
+      "atk": {
+        "min": 120,
+        "max": 5952
+      },
+      "def": {
+        "min": 44,
+        "max": 1320
+      },
+      "speed": {
+        "min": 63,
+        "max": 96
+      },
+      "guard": {
+        "min": 18,
+        "max": 43
+      },
+      "critical_rate": {
+        "min": 50,
+        "max": 160
+      },
+      "critical_dmg": {
+        "min": 1500,
+        "max": 1500
+      },
+      "dmg_reduce": {
+        "min": 0,
+        "max": 100
+      },
+      "buff_chance": {
+        "min": 36,
+        "max": 112
+      },
+      "buff_resist": {
+        "min": 32,
+        "max": 96
+      }
+    },
+    "nickname": {
+      "en": "Ruler of the Desert",
+      "jp": "砂漠の支配者",
+      "kr": "사막의 지배자",
+      "zh": "沙漠统治者",
+      "fr": "Souverain du Désert",
+      "es": "Regente Desierto"
+    },
+    "aiType": "attack",
+    "pushBack": false,
+    "pushUp": false,
+    "spawns": [
+      {
+        "dungeon": "141402",
+        "level": 205,
+        "hpLines": 10
+      }
+    ]
+  },
   "4500376": {
     "id": "4500376",
     "name": {
@@ -123745,6 +124154,83 @@
       {
         "dungeon": "140412",
         "level": 190,
+        "hpLines": 10
+      }
+    ]
+  },
+  "4500384": {
+    "id": "4500384",
+    "name": {
+      "en": "Eternal",
+      "jp": "エターナル",
+      "kr": "이터널",
+      "zh": "伊特诺",
+      "fr": "Eternal",
+      "es": "Eternal"
+    },
+    "type": "monster",
+    "race": "human",
+    "class": "mage",
+    "element": "water",
+    "rarity": 3,
+    "icon": "2700043",
+    "skills": ["153919", "153920", "153921"],
+    "stats": {
+      "hp": {
+        "min": 218,
+        "max": 32531
+      },
+      "atk": {
+        "min": 64,
+        "max": 5814
+      },
+      "def": {
+        "min": 37,
+        "max": 1000
+      },
+      "speed": {
+        "min": 90,
+        "max": 90
+      },
+      "critical_rate": {
+        "min": 100,
+        "max": 100
+      },
+      "critical_dmg": {
+        "min": 1500,
+        "max": 1500
+      },
+      "dmg_reduce": {
+        "min": 0,
+        "max": 100
+      },
+      "buff_chance": {
+        "min": 50,
+        "max": 300
+      },
+      "buff_resist": {
+        "min": 80,
+        "max": 300
+      }
+    },
+    "subClass": "enchanter",
+    "aiType": "attack",
+    "pushBack": true,
+    "pushUp": true,
+    "buffImmune": [
+      "BT_GOLDEN_CURSE",
+      "BT_STUN",
+      "BT_FREEZE",
+      "BT_STONE",
+      "BT_AGGRO",
+      "BT_SILENCE",
+      "BT_REMOVE_BUFF"
+    ],
+    "immuneTooltips": ["104", "34", "33", "35", "37", "32", "48"],
+    "spawns": [
+      {
+        "dungeon": "141410",
+        "level": 210,
         "hpLines": 10
       }
     ]

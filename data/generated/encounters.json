@@ -42067,6 +42067,101 @@
       "spd": 910
     }
   },
+  "141401": {
+    "mode": "origin_hard",
+    "name": {
+      "en": "Another Eseph",
+      "jp": "もう一つのエッセプ",
+      "kr": "다른 엣셉흐",
+      "zh": "另一个埃瑟夫赫",
+      "fr": "Un autre Éséph",
+      "es": "Otro Eseph"
+    },
+    "area": {
+      "en": "Neo Eseph",
+      "jp": "ネオ・エッセプ",
+      "kr": "네오 엣셉흐",
+      "zh": "尼奥埃瑟夫赫",
+      "fr": "Néo Éséph",
+      "es": "Neo Eseph"
+    },
+    "monsters": [
+      {
+        "id": "4131031",
+        "level": 205,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1
+      },
+      {
+        "id": "4131032",
+        "level": 205,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1,
+        "count": 2
+      },
+      {
+        "id": "4132031",
+        "level": 205,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 2
+      },
+      {
+        "id": "4133031",
+        "level": 205,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 3
+      }
+    ],
+    "season": 4,
+    "episode": 4,
+    "stage": 1,
+    "reward": "157101",
+    "adv": {
+      "atk": -535,
+      "hp": 800,
+      "spd": 910
+    }
+  },
+  "141402": {
+    "mode": "origin_hard",
+    "name": {
+      "en": "The Worn-Down Demon",
+      "jp": "摩耗した悪神",
+      "kr": "마모된 악신",
+      "zh": "磨损的凶神",
+      "fr": "Le Démon usé",
+      "es": "El Diablo desgastado"
+    },
+    "area": {
+      "en": "Neo Eseph",
+      "jp": "ネオ・エッセプ",
+      "kr": "네오 엣셉흐",
+      "zh": "尼奥埃瑟夫赫",
+      "fr": "Néo Éséph",
+      "es": "Neo Eseph"
+    },
+    "monsters": [
+      {
+        "id": "4500375",
+        "level": 205,
+        "hpLines": 10,
+        "role": "boss"
+      }
+    ],
+    "season": 4,
+    "episode": 4,
+    "stage": 2,
+    "reward": "157102",
+    "adv": {
+      "atk": -535,
+      "hp": 100,
+      "spd": 910
+    }
+  },
   "141403": {
     "mode": "origin_hard",
     "name": {
@@ -42289,6 +42384,117 @@
     "adv": {
       "atk": -535,
       "hp": 800,
+      "spd": 910
+    }
+  },
+  "141406": {
+    "mode": "origin_hard",
+    "name": {
+      "en": "The Core Devourer",
+      "jp": "コア捕食者",
+      "kr": "코어 포식자",
+      "zh": "核心吞噬者",
+      "fr": "Le Dévoreur de noyaux",
+      "es": "El Devorador de Núcleos"
+    },
+    "area": {
+      "en": "Neo Eseph",
+      "jp": "ネオ・エッセプ",
+      "kr": "네오 엣셉흐",
+      "zh": "尼奥埃瑟夫赫",
+      "fr": "Néo Éséph",
+      "es": "Neo Eseph"
+    },
+    "monsters": [
+      {
+        "id": "4384001",
+        "level": 207,
+        "hpLines": 10,
+        "role": "boss"
+      }
+    ],
+    "season": 4,
+    "episode": 4,
+    "stage": 6,
+    "reward": "157106",
+    "adv": {
+      "atk": -535,
+      "hp": 100,
+      "spd": 910
+    }
+  },
+  "141407": {
+    "mode": "origin_hard",
+    "name": {
+      "en": "O Life Everlasting",
+      "jp": "果てなき命よ",
+      "kr": "무궁한 삶이여",
+      "zh": "无尽的生命啊",
+      "fr": "Ô vie sans fin",
+      "es": "Oh, vida sin fin"
+    },
+    "area": {
+      "en": "Neo Eseph",
+      "jp": "ネオ・エッセプ",
+      "kr": "네오 엣셉흐",
+      "zh": "尼奥埃瑟夫赫",
+      "fr": "Néo Éséph",
+      "es": "Neo Eseph"
+    },
+    "monsters": [
+      {
+        "id": "4102201",
+        "level": 208,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 1
+      },
+      {
+        "id": "4101202",
+        "level": 208,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1,
+        "count": 2
+      },
+      {
+        "id": "4101204",
+        "level": 208,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 2,
+        "count": 2
+      },
+      {
+        "id": "4101203",
+        "level": 208,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 2
+      },
+      {
+        "id": "4103202",
+        "level": 208,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 3
+      },
+      {
+        "id": "4101202",
+        "level": 208,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 3,
+        "count": 2
+      }
+    ],
+    "season": 4,
+    "episode": 4,
+    "stage": 7,
+    "reward": "157107",
+    "adv": {
+      "atk": -535,
+      "hp": 100,
       "spd": 910
     }
   },

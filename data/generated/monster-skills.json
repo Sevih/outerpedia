@@ -10458,7 +10458,7 @@
       "jp": "ダガースロウ",
       "kr": "대거 쓰로우",
       "zh": "投掷匕首",
-      "fr": "Dagger Throw",
+      "fr": "Lancer de dague",
       "es": "Lanzamiento de daga"
     },
     "type": "first",
@@ -10542,7 +10542,7 @@
       "jp": "敵全体にダメージを与え、対象に<color=#28d9ed>[Buff_C_common_monster_buff_53]</color>の確率で<color=#28d9ed>中毒</color>を<color=#28d9ed>[Buff_T_common_monster_buff_53]ターン</color>の間付与する。",
       "kr": "적 전체를 공격하고 <color=#28d9ed>[Buff_C_common_monster_buff_53]</color> 확률로 대상에게 <color=#28d9ed>[Buff_T_common_monster_buff_53]턴</color> 동안 <color=#28d9ed>중독</color>을 부여합니다.",
       "zh": "攻击全体敌人，并有<color=#28d9ed>[Buff_C_common_monster_buff_53]</color>的几率对目标造成<color=#28d9ed>中毒</color>效果，持续<color=#28d9ed>[Buff_T_common_monster_buff_53]回合</color>。",
-      "fr": "attaque tous les ennemis and a une <color=#28d9ed>[Buff_C_common_monster_buff_53]</color> chance de inflict <color=#28d9ed>Poisonné</color> à la cible durant <color=#28d9ed>[Buff_T_common_monster_buff_53] tour(s)</color>.",
+      "fr": "Attaque tous les ennemis et a <color=#28d9ed>[Buff_C_common_monster_buff_53]</color> de chances d'infliger <color=#28d9ed>Poisonné</color> aux cibles pendant <color=#28d9ed>[Buff_T_common_monster_buff_53] tour(s)</color>.",
       "es": "Ataca a los enemigos con un <color=#28d9ed>[Buff_C_common_monster_buff_53]</color> de probabilidad de infligir <color=#28d9ed>Envenenado</color> por <color=#28d9ed>[Buff_T_common_monster_buff_53] turno(s)</color>."
     },
     "target": "enemy",
@@ -19173,7 +19173,7 @@
       "jp": "敵単体に<color=#28d9ed>[Buff_C_1036401_01]</color>の確率で<color=#28d9ed>スタン</color>を<color=#28d9ed>[Buff_T_1036401_01]ターン</color>の間付与する。",
       "kr": "<color=#28d9ed>[Buff_C_1036401_01]</color> 확률로 적 대상을 <color=#28d9ed>[Buff_T_1036401_01]턴</color> 동안 <color=#28d9ed>스턴</color> 상태로 만듭니다.",
       "zh": "有<color=#28d9ed>[Buff_C_1036401_01]</color>的几率使敌人目标陷入<color=#28d9ed>晕眩</color>状态，持续<color=#28d9ed>[Buff_T_1036401_01]回合</color>。",
-      "fr": "a une <color=#28d9ed>[Buff_C_1036401_01]</color> chance de inflict <color=#28d9ed>Étourdi</color> on the ennemi cible durant <color=#28d9ed>[Buff_T_1036401_01] tour(s)</color>.",
+      "fr": "A <color=#28d9ed>[Buff_C_1036401_01]</color> de chances d'infliger <color=#28d9ed>Étourdi</color> à l'ennemi ciblé pendant <color=#28d9ed>[Buff_T_1036401_01] tour(s)</color>.",
       "es": "Tiene una <color=#28d9ed>[Buff_C_1036401_01]</color> probabilidad de infligir <color=#28d9ed>Aturdimiento</color> al objetivo enemigo por <color=#28d9ed>[Buff_T_1036401_01] turno(s)</color>."
     },
     "target": "enemy",
@@ -30840,7 +30840,7 @@
       "jp": "燃え上がる拳",
       "kr": "솟아나는 주먹",
       "zh": "力如拳涌",
-      "fr": "Rising Fist",
+      "fr": "Poing ascendant",
       "es": "Puño Asc."
     },
     "type": "second",
@@ -83633,7 +83633,7 @@
       "jp": "敵全体にダメージを与え、対象に<color=#28d9ed>[Buff_C_403400301_2_2]</color>の確率で<color=#28d9ed>強化不可</color>を<color=#28d9ed>[Buff_T_403400301_2_2]ターン</color>の間付与する。",
       "kr": "적 전체를 공격하고, <color=#28d9ed>[Buff_C_403400301_2_2]</color> 확률로 대상에게 <color=#28d9ed>강화 불가</color>를 <color=#28d9ed>[Buff_T_403400301_2_2]턴</color> 동안 부여합니다.",
       "zh": "攻击全体敌人，并有<color=#28d9ed>[Buff_C_403400301_2_2]</color>的几率对目标造成<color=#28d9ed>无法强化</color>效果，持续<color=#28d9ed>[Buff_T_403400301_2_2]回合</color>。",
-      "fr": "attaque tous les ennemis and a une <color=#28d9ed>[Buff_C_403400301_2_2]</color> chance de inflict <color=#28d9ed>Bonus interdit</color> à la cible durant <color=#28d9ed>[Buff_T_403400301_2_2] tour(s)</color>.",
+      "fr": "Attaque tous les ennemis et a <color=#28d9ed>[Buff_C_403400301_2_2]</color> de chances d'infliger <color=#28d9ed>Bonus interdit</color> aux cibles pendant <color=#28d9ed>[Buff_T_403400301_2_2] tour(s)</color>.",
       "es": "Ataca a los enemigos y tiene una <color=#28d9ed>[Buff_C_403400301_2_2]</color> probabilidad de infligir <color=#28d9ed>No mejorable</color> al objetivo por <color=#28d9ed>[Buff_T_403400301_2_2] turno(s)</color>."
     },
     "target": "enemy",
@@ -106152,7 +106152,7 @@
       "jp": "敵全体にダメージを与え、対象に<color=#28d9ed>[Buff_C_4044001_3_2]</color>の確率で<color=#28d9ed>スタン</color>を<color=#28d9ed>[Buff_T_4044001_3_2]ターン</color>の間付与する。",
       "kr": "적 전체를 공격하고 <color=#28d9ed>[Buff_C_4044001_3_2]</color> 확률로 대상을 <color=#28d9ed>[Buff_T_4044001_3_2]턴</color> 동안 <color=#28d9ed>스턴</color> 상태로 만듭니다.",
       "zh": "攻击全体敌人，并有<color=#28d9ed>[Buff_C_4044001_3_2]</color>的几率使目标陷入<color=#28d9ed>晕眩</color>状态，持续<color=#28d9ed>[Buff_T_4044001_3_2]回合</color>。",
-      "fr": "attaque tous les ennemis and a une <color=#28d9ed>[Buff_C_4044001_3_2]</color> chance de inflict <color=#28d9ed>Étourdi</color> à la cible durant <color=#28d9ed>[Buff_T_4044001_3_2] tour(s)</color>.",
+      "fr": "Attaque tous les ennemis et a <color=#28d9ed>[Buff_C_4044001_3_2]</color> de chances d'infliger <color=#28d9ed>Étourdi</color> aux cibles pendant <color=#28d9ed>[Buff_T_4044001_3_2] tour(s)</color>.",
       "es": "Ataca a los enemigos y tiene una <color=#28d9ed>[Buff_C_4044001_3_2]</color> probabilidad de infligir <color=#28d9ed>Aturdimiento</color> al objetivo por <color=#28d9ed>[Buff_T_4044001_3_2] turno(s)</color>."
     },
     "target": "enemy",
@@ -108743,7 +108743,7 @@
       "jp": "敵全体にダメージを与え、対象に<color=#28d9ed>[Buff_C_402400170_3]</color>の確率で<color=#28d9ed>出血</color>を<color=#28d9ed>[Buff_T_402400170_3]ターン</color>の間付与する。",
       "kr": "적 전체를 공격하고 대상에게 <color=#28d9ed>[Buff_C_402400170_3]</color> 확률로 <color=#28d9ed>[Buff_T_402400170_3]턴</color> 동안 <color=#28d9ed>출혈</color>을 부여합니다.",
       "zh": "攻击全体敌人，并有<color=#28d9ed>[Buff_C_402400170_3]</color>的几率对目标造成<color=#28d9ed>出血</color>效果，持续<color=#28d9ed>[Buff_T_402400170_3]回合</color>。",
-      "fr": "attaque tous les ennemis and a une <color=#28d9ed>[Buff_C_402400170_3]</color> chance de inflict <color=#28d9ed>Saignement</color> à la cible durant <color=#28d9ed>[Buff_T_402400170_3] tour(s)</color>.",
+      "fr": "Attaque tous les ennemis et a <color=#28d9ed>[Buff_C_402400170_3]</color> de chances d'infliger <color=#28d9ed>Saignement</color> aux cibles pendant <color=#28d9ed>[Buff_T_402400170_3] tour(s)</color>.",
       "es": "Ataca a los enemigos. <color=#28d9ed>[Buff_C_402400170_3]</color> probabilidad de infligir <color=#28d9ed>Sangrado</color> al objetivo por <color=#28d9ed>[Buff_T_402400170_3] turno(s)</color>."
     },
     "target": "enemy",
@@ -110357,7 +110357,7 @@
       "jp": "敵全体にダメージを与え、対象に<color=#28d9ed>[Buff_C_4004002_2_1]</color>の確率で<color=#28d9ed>凍結</color>を<color=#28d9ed>[Buff_T_4004002_2_1]ターン</color>の間付与する。",
       "kr": "적 전체를 공격하고 <color=#28d9ed>[Buff_C_4004002_2_1]</color> 확률로 대상에게 <color=#28d9ed>[Buff_T_4004002_2_1]턴</color> 동안 <color=#28d9ed>빙결</color>을 부여합니다.",
       "zh": "攻击全体敌人，并有<color=#28d9ed>[Buff_C_4004002_2_1]</color>的几率对目标造成<color=#28d9ed>冰冻</color>效果，持续<color=#28d9ed>[Buff_T_4004002_2_1]回合</color>。",
-      "fr": "attaque tous les ennemis and a une <color=#28d9ed>[Buff_C_4004002_2_1]</color> chance de inflict <color=#28d9ed>Gelé</color> à la cible durant <color=#28d9ed>[Buff_T_4004002_2_1] tour(s)</color>.",
+      "fr": "Attaque tous les ennemis et a <color=#28d9ed>[Buff_C_4004002_2_1]</color> de chances d'infliger <color=#28d9ed>Gelé</color> aux cibles pendant <color=#28d9ed>[Buff_T_4004002_2_1] tour(s)</color>.",
       "es": "Ataca a los enemigos. <color=#28d9ed>[Buff_C_4004002_2_1]</color> probabilidad de infligir <color=#28d9ed>Congelado</color> al objetivo por <color=#28d9ed>[Buff_T_4004002_2_1] turno(s)</color>"
     },
     "target": "enemy",
@@ -110458,7 +110458,7 @@
       "jp": "敵全体にダメージを与え、対象に<color=#28d9ed>[Buff_C_4004002_3_1]</color>の確率で<color=#28d9ed>感電</color>を<color=#28d9ed>[Buff_T_4004002_3_1]ターン</color>の間付与する。",
       "kr": "적 전체를 공격하고 <color=#28d9ed>[Buff_C_4004002_3_1]</color> 확률로 대상에게 <color=#28d9ed>[Buff_T_4004002_3_1]턴</color> 동안 <color=#28d9ed>감전</color>을 부여합니다.",
       "zh": "攻击全体敌人，并有<color=#28d9ed>[Buff_C_4004002_3_1]</color>的几率对目标造成<color=#28d9ed>触电</color>效果，持续<color=#28d9ed>[Buff_T_4004002_3_1]回合</color>。",
-      "fr": "attaque tous les ennemis and a une <color=#28d9ed>[Buff_C_4004002_3_1]</color> chance de inflict <color=#28d9ed>Électrocuté</color> à la cible durant <color=#28d9ed>[Buff_T_4004002_3_1] tour(s)</color>.",
+      "fr": "Attaque tous les ennemis et a <color=#28d9ed>[Buff_C_4004002_3_1]</color> de chances d'infliger <color=#28d9ed>Électrocuté</color> aux cibles pendant <color=#28d9ed>[Buff_T_4004002_3_1] tour(s)</color>.",
       "es": "Ataca a los enemigos y tiene una <color=#28d9ed>[Buff_C_4004002_3_1]</color> probabilidad de infligir <color=#28d9ed>Electrocutado</color> al objetivo por <color=#28d9ed>[Buff_T_4004002_3_1] turno(s)</color>."
     },
     "target": "enemy",
@@ -126896,7 +126896,7 @@
       "jp": "最大HPの<color=#28d9ed>50%</color>以下になると<color=#28d9ed>【狂暴化】</color>状態に切り替わり、攻撃力とスピードが<color=#28d9ed>[Buff_V_common_rage_buff_atk_hp]</color>UPする。この効果はブレイクすると解除される。\\n\\n<color=#28d9ed>【狂暴化】</color>：自分に解除不可能な攻撃力UP/ダメージDOWN効果を3ターンの間付与し、WGを[Buff_V_common_monster_passive_wg2]回復する。【狂暴化】は3ターンの間持続する。\\n\\n<color=#28d9ed>【未来を予知しました】</color>：【狂暴化】終了時に発動する。\\nステラが時間を巻き戻し、HPを全回復し、スキルターンを初期化し、すべての弱体効果を解除する。敵に<color=#28d9ed>回復不可</color>を付与する。\\n\\n<color=#ffd732>戦闘開始時から3ターン以内に【狂暴化】した場合、敵にCPを80獲得させる。</color>",
       "kr": "최대 체력의 <color=#28d9ed>50%</color> 이하가 되면 <color=#28d9ed>광폭화</color> 상태로 전환하고, 공격력과 속도가 <color=#28d9ed>[Buff_V_common_rage_buff_atk_hp]</color> 증가합니다. 브레이크 되기 전까지 효과가 유지됩니다.\\n\\n<color=#28d9ed>광폭화 돌입</color> : 자신에게 해제되지 않는 공격력 증가/피해 감소 효과를 3턴 동안 부여하고, WG [Buff_V_common_monster_passive_wg2]를 회복합니다. 광폭화는 3턴 동안 유지됩니다.\\n\\n<color=#28d9ed>미래를 예지했어요.</color> : 광폭화 종료 시 사용.\\n지금까지 경험한 시간을 되돌려, 가장 유리한 시간대로 회귀하고, 적에게 회복 불가를 부여합니다.\\n\\n<color=#ffd732>3턴 안에 광폭화할 시 80의 CP를 회복시킵니다.</color>",
       "zh": "若生命值降至上限的<color=#28d9ed>50%</color>以下，则转换为<color=#28d9ed>狂暴化</color>状态，并使攻击力和速度提升<color=#28d9ed>[Buff_V_common_rage_buff_atk_hp]</color>。该效果将持续至进入力竭状态为止。\\n\\n<color=#28d9ed>陷入狂暴化</color>：使自身获得无法被解除的攻击力提升/伤害降低效果，持续3回合，并使WG恢复[Buff_V_common_monster_passive_wg2]。狂暴化持续3回合。\\n\\n<color=#28d9ed>预见未来</color>：狂暴化结束时发动。\\n将时间回溯至战局最有利的时刻。\\n\\n<color=#ffd732>在3回合内陷入狂暴化状态时，使CP恢复80。</color>",
-      "fr": "Devient <color=#28d9ed>Enragé</color> si PV tombe à <color=#28d9ed>50%</color> de PV max ou moins. Accroît l'attaque et la vitesse par <color=#28d9ed>[Buff_V_common_rage_buff_atk_hp]</color>. Cet effet dure jusqu'à ce que le lanceur soit infligée avec Break.\\n\\n<color=#28d9ed>Enragé</color>: Octroie un effet irrémovible à l'utilisateur qui accroît l'ATQ et réduit les DGT pris pour 3 tour(s). Récupère [Buff_V_common_monster_passive_wg2] Faiblesse Gauge. Enraged dure pour 3 tour(s).\\n\\n<color=#28d9ed>I Previewaw the Future</color>: Utilisé quand Enraged se termine. Inverse le débit du temps et retourne à la période de temps la plus avantageuse, infligeant Incurable sur les ennemis.\\n\\n<color=#ffd732>Si enragé dans 3 tour ou moins, il accorde 80 points de chaîne.</color>",
+      "fr": "Devient <color=#28d9ed>Enragé</color> lorsque ses PV sont inférieurs ou égaux à <color=#28d9ed>50%</color> de ses PV max. Augmente son ATQ et sa VIT de <color=#28d9ed>[Buff_V_common_rage_buff_atk_hp]</color> jusqu'au Break.\\n\\n<color=#28d9ed>Enragé</color> : s'accorde une augmentation d'ATQ et une réduction des DGT subis pendant 3 tours. Ces effets sont indissipables. Récupère [Buff_V_common_monster_passive_wg2] de WG. L'état Enragé dure 3 tours.\\n\\n<color=#28d9ed>J'ai vu l'avenir</color> : utilisé à la fin de l'état Enragé.\\nRemonte le temps jusqu'au moment le plus avantageux et inflige Incurable aux ennemis.\\n\\n<color=#ffd732>Si l'état Enragé est déclenché dans les 3 premiers tours, récupère 80 PC.</color>",
       "es": "Se vuelve\\n\\n<color=#28d9ed>Enfurecido</color> cuando la Vida baja al\\n\\n<color=#28d9ed>50%</color> de la Vida máxima o menos. Aumenta el ATQ y la VEL en <color=#28d9ed>[Buff_V_common_rage_buff_atk_hp]</color>. Este efecto dura hasta que el lanzador sufre Ruptura. <color=#28d9ed>Enfurecido</color>: Otorga un efecto inamovible al lanzador que aumenta el ATQ y reduce el daño recibido por 3 turno(s). Recupera [Buff_V_common_monster_passive_wg2] de la Barrera de Debilidad. Enfurecido dura 3 turno(s). <color=#28d9ed>Vi el Futuro</color>: Se usa cuando termina Enfurecido. Invierte el flujo del tiempo y regresa al período más ventajoso, infligiendo Irreparable a los enemigos.\\n\\n<color=#ffd732>Si está Enfurecido en 3 turno o menos, otorga 80 Puntos de Cadena.</color>"
     },
     "target": "enemy",
@@ -259113,6 +259113,218 @@
         "buff": "event_monster_buff_8st_360",
         "label": "SYS_BUFF_DOT_IMMEDIATELY",
         "caller": "ultimate"
+      }
+    ]
+  },
+  "931570": {
+    "id": "931570",
+    "name": {
+      "en": "Haze of Mana",
+      "jp": "魔力の陽炎",
+      "kr": "마력의 아지랑이",
+      "zh": "魔力幻影",
+      "fr": "Hazé de Manaa",
+      "es": "Bruma de Maná"
+    },
+    "type": "monster_1",
+    "subType": "passive",
+    "offensive": false,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "vars": {
+          "4004005_4_3": {
+            "c": "100%",
+            "v": "100%"
+          },
+          "4004005_4_3_2": {
+            "c": "100%",
+            "v": "30%",
+            "t": "2"
+          },
+          "4004005_4_4": {
+            "c": "100%",
+            "v": "50%"
+          },
+          "4004005_4_5": {
+            "c": "100%",
+            "v": "50%"
+          },
+          "4004005_4_6": {
+            "c": "100%",
+            "v": "50%"
+          },
+          "4004005_4_7": {
+            "c": "100%",
+            "v": "50%"
+          },
+          "4004005_4_8": {
+            "c": "100%",
+            "v": "50%"
+          },
+          "4004005_4_9": {
+            "c": "100%",
+            "v": "50%"
+          },
+          "4004005_4_10": {
+            "c": "100%",
+            "v": "50%"
+          },
+          "4004005_4_11": {
+            "c": "100%",
+            "v": "50%"
+          },
+          "4004005_4_13": {
+            "c": "100%",
+            "v": "80%"
+          },
+          "4004005_4_14": {
+            "c": "100%",
+            "v": "80%"
+          },
+          "4004005_4_15": {
+            "c": "100%",
+            "v": "80%"
+          },
+          "4004005_4_16": {
+            "c": "100%",
+            "v": "80%"
+          }
+        },
+        "tooltips": ["29"]
+      }
+    ],
+    "desc": {
+      "en": "When hit by an AoE attack, grants self a <color=#28d9ed>Barrier</color> for <color=#28d9ed>[Buff_T_4004005_4_3_2]</color> turns.\\nIf current HP exceeds 85%, damage dealt to enemies increases by <color=#28d9ed>100%</color>.\\n\\nNon-Fire enemies' <color=#28d9ed>Attack</color> and <color=#28d9ed>Effectiveness</color> are reduced by <color=#28d9ed>50%</color>, and damage taken from non-Fire enemies is reduced by <color=#28d9ed>80%</color>.",
+      "jp": "全体攻撃を受けた時、自分に<color=#28d9ed>シールド</color>を<color=#28d9ed>[Buff_T_4004005_4_3_2]</color>ターンの間付与する。\\n現在のHPが85%を超える場合、敵に与えるダメージが<color=#28d9ed>100%</color>UPする。\\n\\n火属性でない敵の<color=#28d9ed>攻撃力</color>と<color=#28d9ed>効果命中</color>が<color=#28d9ed>50%</color>DOWNし、火属性でない敵から受けるダメージが<color=#28d9ed>80%</color>DOWNする。",
+      "kr": "전체 공격에 피격 시 자신에게 <color=#28d9ed>[Buff_T_4004005_4_3_2]턴</color> 동안 <color=#28d9ed>실드</color>를 부여합니다.\\n자신의 현재 체력이 85% 초과 시 적에게 입히는 피해가 <color=#28d9ed>100%</color> 증가합니다.\\n\\n화속성이 아닌 적의 <color=#28d9ed>공격력</color>과 <color=#28d9ed>효과 적중</color>이 <color=#28d9ed>50%</color> 감소하고 화속성이 아닌 적에게 받는 피해가 <color=#28d9ed>80%</color> 감소합니다.",
+      "zh": "被全体攻击命中时，在<color=#28d9ed>[Buff_T_4004005_4_3_2]</color>回合内为自身施加<color=#28d9ed>护盾</color>。\\n当前生命值超过85%时，对敌人造成的伤害提高<color=#28d9ed>100%</color>。\\n\\n非火属性敌人的<color=#28d9ed>攻击力</color>与<color=#28d9ed>效果命中</color>降低<color=#28d9ed>50%</color>，并且受到非火属性敌人的伤害降低<color=#28d9ed>80%</color>。",
+      "fr": "Lorsqu'une attaque AoE est frappée, il se donne un <color=#28d9ed>Barrière</color> pour <color=#28d9ed>[Buff_T_4004005_4_3_2]</color> tour(s).\\nSi HP actuel dépasse 85%, les DGT infligés aux ennemis augmentent de <color=#28d9ed>100%</color>.\\n\\nLes ennemis non-foyers <color=#28d9ed>ATQ</color> et <color=#28d9ed>Efficacité</color> sont réduites par <color=#28d9ed>50%</color>, et les DGT pris par les ennemis non-foyers sont réduits par <color=#28d9ed>80%</color>.",
+      "es": "Al recibir un ataque de área, otorga a sí mismo una <color=#28d9ed>Barrera</color> por <color=#28d9ed>[Buff_T_4004005_4_3_2]</color> turno(s).\\nSi la Salud actual supera el 85%, el daño infligido a los enemigos sube en <color=#28d9ed>100%</color>.\\n\\nLos enemigos no de Fuego tienen su <color=#28d9ed>ATQ</color> y <color=#28d9ed>Efectividad</color> reducidos en <color=#28d9ed>50%</color>, y el daño recibido de los enemigos no de Fuego se reduce en <color=#28d9ed>80%</color>."
+    },
+    "icon": "MT_Passive_1_Earth",
+    "effects": [
+      {
+        "family": "damage",
+        "category": "buff",
+        "type": "BT_DMG",
+        "target": "me",
+        "buff": "4004005_4_3"
+      },
+      {
+        "family": "shield",
+        "category": "buff",
+        "type": "BT_SHIELD_BASED_CASTER",
+        "target": "me",
+        "buff": "4004005_4_3_2",
+        "stat": "hp",
+        "mode": "up",
+        "tooltip": "29"
+      },
+      {
+        "family": "stat",
+        "category": "neutral",
+        "type": "BT_STAT",
+        "target": "enemy_team",
+        "buff": "4004005_4_4",
+        "stat": "atk",
+        "mode": "down",
+        "label": "SYS_BUFF_ATTACK_DOWN"
+      },
+      {
+        "family": "stat",
+        "category": "neutral",
+        "type": "BT_STAT",
+        "target": "enemy_team",
+        "buff": "4004005_4_5",
+        "stat": "atk",
+        "mode": "down",
+        "label": "SYS_BUFF_ATTACK_DOWN"
+      },
+      {
+        "family": "stat",
+        "category": "neutral",
+        "type": "BT_STAT",
+        "target": "enemy_team",
+        "buff": "4004005_4_6",
+        "stat": "atk",
+        "mode": "down",
+        "label": "SYS_BUFF_ATTACK_DOWN"
+      },
+      {
+        "family": "stat",
+        "category": "neutral",
+        "type": "BT_STAT",
+        "target": "enemy_team",
+        "buff": "4004005_4_7",
+        "stat": "atk",
+        "mode": "down",
+        "label": "SYS_BUFF_ATTACK_DOWN"
+      },
+      {
+        "family": "stat",
+        "category": "neutral",
+        "type": "BT_STAT",
+        "target": "enemy_team",
+        "buff": "4004005_4_8",
+        "stat": "buff_chance",
+        "mode": "down"
+      },
+      {
+        "family": "stat",
+        "category": "neutral",
+        "type": "BT_STAT",
+        "target": "enemy_team",
+        "buff": "4004005_4_9",
+        "stat": "buff_chance",
+        "mode": "down"
+      },
+      {
+        "family": "stat",
+        "category": "neutral",
+        "type": "BT_STAT",
+        "target": "enemy_team",
+        "buff": "4004005_4_10",
+        "stat": "buff_chance",
+        "mode": "down"
+      },
+      {
+        "family": "stat",
+        "category": "neutral",
+        "type": "BT_STAT",
+        "target": "enemy_team",
+        "buff": "4004005_4_11",
+        "stat": "buff_chance",
+        "mode": "down"
+      },
+      {
+        "family": "dmg_reduce",
+        "category": "buff",
+        "type": "BT_DMG_REDUCE",
+        "target": "me",
+        "buff": "4004005_4_13"
+      },
+      {
+        "family": "dmg_reduce",
+        "category": "buff",
+        "type": "BT_DMG_REDUCE",
+        "target": "me",
+        "buff": "4004005_4_14"
+      },
+      {
+        "family": "dmg_reduce",
+        "category": "buff",
+        "type": "BT_DMG_REDUCE",
+        "target": "me",
+        "buff": "4004005_4_15"
+      },
+      {
+        "family": "dmg_reduce",
+        "category": "buff",
+        "type": "BT_DMG_REDUCE",
+        "target": "me",
+        "buff": "4004005_4_16"
       }
     ]
   },
