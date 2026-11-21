@@ -11,7 +11,7 @@ import {
   withPreciseCraftToggled,
   withSweepToggled,
 } from './tracker';
-import type { TrackerAssets, TrackerGuideLink, TrackerLabels } from './contracts';
+import type { TrackerAssets, TrackerBossTables, TrackerLabels } from './contracts';
 import { ExportModal } from './ExportModal';
 import { PreciseCraftSection } from './PreciseCraftSection';
 import { SettingsModal } from './SettingsModal';
@@ -36,7 +36,7 @@ export function ProgressTrackerBrowser({
   labels,
   assets,
   seasonWindows,
-  singularityGuides,
+  bossTables,
 }: {
   labels: TrackerLabels;
   assets: TrackerAssets;
@@ -48,10 +48,11 @@ export function ProgressTrackerBrowser({
    */
   seasonWindows: SeasonWindows;
   /**
-   * Guide par boss de Singularity (id du monstre) — table stable ; le boss du
-   * jour se choisit au client, la rotation tourne à minuit UTC.
+   * Guides fixes, guide / fiche par boss de Singularity et EX Buff par créneau
+   * — tables stables ; le boss du jour se choisit au client, la rotation tourne
+   * à minuit UTC.
    */
-  singularityGuides: Record<string, TrackerGuideLink>;
+  bossTables: TrackerBossTables;
 }) {
   // État, vues dérivées et gestes : dans `useTrackerState`, destructuré sous
   // les MÊMES noms que les anciens useState — le JSX n'a pas bougé.
@@ -105,7 +106,7 @@ export function ProgressTrackerBrowser({
       labels={labels}
       assets={assets}
       seasonWindows={seasonWindows}
-      singularityGuides={singularityGuides}
+      bossTables={bossTables}
       onIncrement={increment}
       onToggle={toggle}
       onSweepAll={() => debounced(() => setProgress(withSweepToggled(view, settings, now)))}

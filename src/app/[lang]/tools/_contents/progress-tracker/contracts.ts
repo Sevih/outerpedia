@@ -23,6 +23,50 @@ export interface TrackerGuideLink {
   name: string;
 }
 
+/** Une icône d'identité (élément ou classe) : sprite + nom dans la langue. */
+export interface TrackerIcon {
+  icon: string;
+  name: string;
+}
+
+/**
+ * Fiche du boss en cours (World Boss, Joint Challenge, guild raid, Singularity),
+ * résolue au SERVEUR depuis la donnée du MODE (pas du guide) : portrait, nom
+ * dans la langue, élément et classe. Choisie au client par son horloge.
+ */
+export interface TrackerBossCard {
+  portrait: string;
+  name: string;
+  element: TrackerIcon;
+  klass: TrackerIcon;
+}
+
+/**
+ * EX Buff d'un créneau de Singularity, cible résolue au serveur : icône de
+ * l'élément ou de la classe visés (absente pour une option inconnue),
+ * « EX Buff · <cible> » et la `desc` du jeu, dans la langue.
+ */
+export interface TrackerExBuff {
+  icon?: string;
+  label: string;
+  desc: string;
+}
+
+/**
+ * Tables stables du suivi pour les liens de guide et les fiches de boss : le
+ * client y choisit, par son horloge, l'entrée du boss en cours.
+ */
+export interface TrackerBossTables {
+  /** Guide FIXE par id de tâche (tour Very Hard, poursuites). */
+  fixedGuides: Record<string, TrackerGuideLink>;
+  /** Guide par boss de Singularity (id du monstre `600000xx`). */
+  singularityGuides: Record<string, TrackerGuideLink>;
+  /** Fiche par boss de Singularity (id du monstre). */
+  singularityBosses: Record<string, TrackerBossCard>;
+  /** EX Buff par id de buff (`SingularityBoss.exBuff` du créneau). */
+  singularityExBuffs: Record<string, TrackerExBuff>;
+}
+
 export interface TrackerLabels {
   /** Libellé par id de tâche (défs SANS `shopItemKey`). */
   tasks: Record<string, string>;

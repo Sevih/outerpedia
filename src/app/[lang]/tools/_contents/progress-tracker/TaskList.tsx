@@ -20,13 +20,108 @@ import {
   getNextVHTUnlockTime,
   getTaskMaxCount,
   getVHTUnlockedPhase,
+  taskBossCard,
   taskGuideLink,
   type SeasonWindows,
   type UserProgress,
   type UserSettings,
 } from './tracker';
-import type { TrackerAssets, TrackerGuideLink, TrackerLabels } from './contracts';
+import type {
+  TrackerAssets,
+  TrackerBossCard,
+  TrackerBossTables,
+  TrackerExBuff,
+  TrackerGuideLink,
+  TrackerLabels,
+} from './contracts';
 import { TaskLabel } from './ui';
+
+/**
+ * Lien « guide du boss en cours » (livre ouvert). Nouvel onglet : le suivi reste
+ * ouvert. La ligne entière vaut +1 → le clic sur le lien ne remonte pas.
+ */
+function GuideLinkIcon({ guide, labels }: { guide: TrackerGuideLink; labels: TrackerLabels }) {
+  const label = labels.guideLink.replace('{name}', guide.name);
+  return (
+    <a
+      href={guide.href}
+      target="_blank"
+      rel="noopener"
+      title={label}
+      aria-label={label}
+      onClick={(e) => e.stopPropagation()}
+      className="text-content-muted hover:text-content-strong shrink-0 transition"
+    >
+      <svg className="size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden>
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={2}
+          d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+        />
+      </svg>
+    </a>
+  );
+}
+
+/**
+ * Fiche du boss en cours, après le libellé : portrait, puis élément et classe
+ * empilés, puis l'EX Buff du créneau (Singularity). Pas de lien ni de geste
+ * propre : un clic remonte à la ligne (+1), comme sur le libellé. Le portrait
+ * porte seul le nom du boss (le libellé dit le MODE) → `alt` descriptif.
+ */
+function BossCard({ card, exBuff }: { card: TrackerBossCard; exBuff?: TrackerExBuff }) {
+  return (
+    <span className="flex shrink-0 items-center gap-1">
+      <img
+        src={card.portrait}
+        alt={card.name}
+        title={card.name}
+        width={28}
+        height={28}
+        className="border-line-subtle size-7 rounded-md border object-cover"
+        loading="lazy"
+      />
+      <span className="flex flex-col gap-0.5">
+        {[card.element, card.klass].map((i) => (
+          <img
+            key={i.icon}
+            src={i.icon}
+            alt={i.name}
+            title={i.name}
+            width={14}
+            height={14}
+            className="size-3.5 object-contain"
+          />
+        ))}
+      </span>
+      {exBuff && (
+        <span
+          title={`${exBuff.label} — ${exBuff.desc}`}
+          className="border-accent/50 bg-accent/5 ml-0.5 inline-flex h-5 items-center gap-0.5 rounded-md border px-1"
+        >
+          <span
+            className="text-accent font-mono text-[9.5px] font-bold tracking-[0.14em] uppercase"
+            aria-hidden
+          >
+            EX
+          </span>
+          {exBuff.icon && (
+            <img
+              src={exBuff.icon}
+              alt=""
+              aria-hidden
+              width={14}
+              height={14}
+              className="size-3.5 object-contain"
+            />
+          )}
+          <span className="sr-only">{`${exBuff.label} · ${exBuff.desc}`}</span>
+        </span>
+      )}
+    </span>
+  );
+}
 
 function TaskItem({
   def,
@@ -36,6 +131,7 @@ function TaskItem({
   assets,
   compact = false,
   guide,
+  boss,
   onRowClick,
   onCheckboxChange,
 }: {
@@ -45,8 +141,10 @@ function TaskItem({
   labels: TrackerLabels;
   assets: TrackerAssets;
   compact?: boolean;
-  /** Guide du boss en cours (World Boss, Joint Challenge, Singularity). */
+  /** Guide du boss en cours (World Boss, Joint Challenge, guild raid, Singularity) ou guide fixe. */
   guide?: TrackerGuideLink;
+  /** Fiche du boss en cours (World Boss, Joint Challenge, guild raid, Singularity). */
+  boss?: { card: TrackerBossCard; exBuff?: TrackerExBuff };
   onRowClick: () => void;
   onCheckboxChange: () => void;
 }) {
@@ -71,32 +169,12 @@ function TaskItem({
           ne peut pas être un bouton, elle contient la case à cocher). */}
       <button
         type="button"
-        className={`flex-1 cursor-pointer text-left ${completed ? 'text-content-subtle line-through' : 'text-content'} group-hover:text-content-strong transition`}
+        className={`min-w-0 flex-1 cursor-pointer text-left wrap-break-word ${completed ? 'text-content-subtle line-through' : 'text-content'} group-hover:text-content-strong transition`}
       >
         <TaskLabel def={def} completed={completed} labels={labels} assets={assets} />
       </button>
-      {guide && (
-        // Nouvel onglet : le suivi reste ouvert. La ligne entière vaut +1 → le
-        // clic sur le lien ne remonte pas.
-        <a
-          href={guide.href}
-          target="_blank"
-          rel="noopener"
-          title={labels.guideLink.replace('{name}', guide.name)}
-          aria-label={labels.guideLink.replace('{name}', guide.name)}
-          onClick={(e) => e.stopPropagation()}
-          className="text-content-muted hover:text-content-strong shrink-0 transition"
-        >
-          <svg className="size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden>
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
-            />
-          </svg>
-        </a>
-      )}
+      {boss && <BossCard card={boss.card} exBuff={boss.exBuff} />}
+      {guide && <GuideLinkIcon guide={guide} labels={labels} />}
       <span className="text-content-muted text-sm">
         {count}/{max}
       </span>
@@ -111,6 +189,7 @@ function VHTTaskItem({
   max,
   now,
   labels,
+  guide,
   onRowClick,
   onCheckboxChange,
 }: {
@@ -119,6 +198,8 @@ function VHTTaskItem({
   max: number;
   now: number;
   labels: TrackerLabels;
+  /** Guide fixe de la tour Very Hard. */
+  guide?: TrackerGuideLink;
   onRowClick: () => void;
   onCheckboxChange: () => void;
 }) {
@@ -151,6 +232,7 @@ function VHTTaskItem({
         <span className="text-xs text-cyan-400/80">
           {labels.vhtFloors} 1-{phase * 5}
         </span>
+        {guide && <GuideLinkIcon guide={guide} labels={labels} />}
         <span className="text-content-muted min-w-8 text-right text-sm">
           {count}/{max}
         </span>
@@ -183,7 +265,7 @@ export function TaskList({
   labels,
   assets,
   seasonWindows,
-  singularityGuides,
+  bossTables,
   onIncrement,
   onToggle,
   onSweepAll,
@@ -197,7 +279,7 @@ export function TaskList({
   labels: TrackerLabels;
   assets: TrackerAssets;
   seasonWindows: SeasonWindows;
-  singularityGuides: Record<string, TrackerGuideLink>;
+  bossTables: TrackerBossTables;
   onIncrement: (taskId: string, type: TaskType) => void;
   onToggle: (taskId: string, type: TaskType) => void;
   onSweepAll: () => void;
@@ -232,6 +314,13 @@ export function TaskList({
           max={max}
           now={now}
           labels={labels}
+          guide={taskGuideLink(
+            id,
+            now,
+            seasonWindows,
+            bossTables.singularityGuides,
+            bossTables.fixedGuides,
+          )}
           onRowClick={() => onIncrement(id, type)}
           onCheckboxChange={() => onToggle(id, type)}
         />
@@ -246,7 +335,20 @@ export function TaskList({
         labels={labels}
         assets={assets}
         compact={compact}
-        guide={taskGuideLink(id, now, seasonWindows, singularityGuides)}
+        guide={taskGuideLink(
+          id,
+          now,
+          seasonWindows,
+          bossTables.singularityGuides,
+          bossTables.fixedGuides,
+        )}
+        boss={taskBossCard(
+          id,
+          now,
+          seasonWindows,
+          bossTables.singularityBosses,
+          bossTables.singularityExBuffs,
+        )}
         onRowClick={() => onIncrement(id, type)}
         onCheckboxChange={() => onToggle(id, type)}
       />

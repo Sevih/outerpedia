@@ -26,6 +26,7 @@ import {
   normalizeSettings,
   reconcileProgress,
   syncProgressWithSettings,
+  taskBossCard,
   taskGuideLink,
   VHT_PHASE_LABELS,
   VHT_UNLOCK_DAYS,
@@ -36,7 +37,14 @@ import {
   withTaskCount,
   type UserSettings,
 } from './tracker';
-import { isSingularityBattleDay, singularityStateAt } from '@/lib/data/singularity';
+import {
+  isSingularityBattleDay,
+  singularityAppearancesAt,
+  singularityExBuffs,
+  singularityGroups,
+  singularityStateAt,
+} from '@/lib/data/singularity';
+import { playableWindowsFrom } from '@/lib/data/content-schedule';
 
 const DAY = 86_400_000;
 // Mercredi 15/07/2026 10:00 UTC (jour du mois 15 → phase VHT 3, singularité ouverte)
@@ -557,8 +565,104 @@ describe('lien vers le guide du boss en cours (choisi par l’horloge du client)
     );
   });
 
-  it('une tâche sans lien (guild raid compris) : undefined', () => {
+  it('guild raid : le guide de la fenêtre ouverte, rien hors fenêtre', () => {
+    const gr = { href: '/guides/guild-raid/d#phase=p2', name: 'D' };
+    const withGr = {
+      ...windows,
+      'guild-raid': [{ start: '2026-10-20T00:00:00Z', end: '2026-10-27T00:00:00Z', guide: gr }],
+    };
+    expect(taskGuideLink('guild-raid', WED, withGr, {})).toEqual(gr);
+    expect(taskGuideLink('guild-raid', MON + 7 * DAY, withGr, {})).toBeUndefined();
+  });
+
+  it('guides fixes (tour Very Hard, poursuites) : toujours le même, quelle que soit l’heure', () => {
+    const vht = { href: '/guides/skyward-tower/very-hard-tower', name: 'VHT' };
+    const fixed = { 'skyward-tower-vhard-20': vht };
+    expect(taskGuideLink('skyward-tower-vhard-20', WED, windows, {}, fixed)).toEqual(vht);
+    expect(taskGuideLink('skyward-tower-vhard-20', MON, windows, {}, fixed)).toEqual(vht);
+    expect(taskGuideLink('irregular-floor-3', WED, windows, {}, fixed)).toBeUndefined();
+  });
+
+  it('une tâche sans lien : undefined', () => {
     expect(taskGuideLink('story-hard', WED, windows, singularityGuides)).toBeUndefined();
-    expect(taskGuideLink('guild-raid', WED, windows, singularityGuides)).toBeUndefined();
+  });
+});
+
+describe('fiche du boss en cours (choisie par l’horloge du client)', () => {
+  const card = (name: string) => ({
+    portrait: `/p/${name}.webp`,
+    name,
+    element: { icon: '/e.webp', name: 'E' },
+    klass: { icon: '/k.webp', name: 'K' },
+  });
+
+  it('saisonnières : la fiche de la fenêtre ouverte, rien hors fenêtre (réglage manuel compris)', () => {
+    // Fenêtres RÉELLES du guild raid, prises à la donnée : la première connue.
+    const [gr] = playableWindowsFrom(new Date(0), 1000)['guild-raid'];
+    const start = Date.parse(gr.start);
+    const end = Date.parse(gr.end);
+    const windows = { 'guild-raid': [{ ...gr, boss: card('main') }] };
+    // Le boss principal pendant TOUTE la fenêtre (pas de bascule par phase).
+    expect(taskBossCard('guild-raid', start, windows)?.card.name).toBe('main');
+    expect(taskBossCard('guild-raid', end - 1, windows)?.card.name).toBe('main');
+    expect(taskBossCard('guild-raid', end, windows)).toBeUndefined();
+    expect(taskBossCard('guild-raid', start - 1, windows)).toBeUndefined();
+    // Pas d'EX Buff hors Singularity.
+    expect(taskBossCard('guild-raid', start, windows)?.exBuff).toBeUndefined();
+    // Une fenêtre sans fiche (boss inconnu) : rien.
+    expect(taskBossCard('world-boss', start, { 'world-boss': [gr] })).toBeUndefined();
+    expect(taskBossCard('story-hard', start, windows)).toBeUndefined();
+  });
+
+  // Tables factices indexées par les VRAIS ids : une fiche par boss de la
+  // rotation, un buff par id de buff — le libellé rend l'id pour le vérifier.
+  const bosses = Object.fromEntries(
+    singularityGroups().flatMap((g) => g.bosses.map((b) => [b.monsters[0], card(b.monsters[0])])),
+  );
+  const exBuffs = Object.fromEntries(
+    Object.keys(singularityExBuffs()).map((id) => [id, { label: id, desc: id }]),
+  );
+
+  it('Singularity : la fiche suit le boss du jour, rien un jour de récompense', () => {
+    for (let i = 0; i < 7; i++) {
+      const at = SING_ON + i * DAY;
+      const today = singularityStateAt(new Date(at)).today;
+      const got = taskBossCard('dimensional-singularity', at, {}, bosses, exBuffs);
+      if (today) expect(got?.card.name).toBe(today.monsters[0]);
+      else expect(got).toBeUndefined();
+    }
+    expect(taskBossCard('dimensional-singularity', SING_OFF, {}, bosses, exBuffs)).toBeUndefined();
+  });
+
+  it('Singularity : l’EX Buff suit le CRÉNEAU, pas le boss', () => {
+    // Un boss qui revient sur le cycle avec deux buffs différents.
+    const sample = singularityStateAt(new Date(SING_ON)).today!;
+    const monster = singularityGroups()
+      .flatMap((g) => g.bosses.map((b) => b.monsters[0]))
+      .find(
+        (id) =>
+          new Set(singularityAppearancesAt(id, new Date(SING_ON)).map((a) => a.boss.exBuff)).size >
+          1,
+      );
+    expect(sample).toBeDefined();
+    expect(monster).toBeDefined();
+    const appearances = singularityAppearancesAt(monster!, new Date(SING_ON));
+    for (const a of appearances) {
+      const got = taskBossCard(
+        'dimensional-singularity',
+        Date.parse(`${a.date}T12:00:00Z`),
+        {},
+        bosses,
+        exBuffs,
+      );
+      expect(got?.card.name).toBe(monster);
+      expect(got?.exBuff?.label).toBe(a.boss.exBuff);
+    }
+  });
+
+  it('Singularity : un créneau sans buff connu → fiche sans EX Buff (pas de place vide)', () => {
+    const got = taskBossCard('dimensional-singularity', SING_ON, {}, bosses, {});
+    expect(got?.card).toBeDefined();
+    expect(got && 'exBuff' in got).toBe(false);
   });
 });

@@ -13,7 +13,7 @@
 
 import type { StoreSpec } from '@/lib/client-storage';
 import { isSingularityBattleDay, singularityStateAt } from '@/lib/data/singularity';
-import type { TrackerGuideLink } from './contracts';
+import type { TrackerBossCard, TrackerExBuff, TrackerGuideLink } from './contracts';
 import {
   TASK_DEFINITIONS,
   TASK_TYPES,
@@ -150,10 +150,11 @@ export function isDimensionalSingularityActive(now: number): boolean {
 /**
  * Fenêtres jouables des modes saisonniers, telles que servies par la page
  * (`playableWindowsFrom`). Clés = ids de tâche saisonnière. `guide` = le guide
- * du boss de la saison (`guide-links.ts`), absent si aucun ne le traite.
+ * du boss de la saison (`guide-links.ts`), absent si aucun ne le traite ;
+ * `boss` = la fiche du boss de la saison, absente si le monstre est inconnu.
  */
 export type SeasonWindows = Partial<
-  Record<string, { start: string; end: string; guide?: TrackerGuideLink }[]>
+  Record<string, { start: string; end: string; guide?: TrackerGuideLink; boss?: TrackerBossCard }[]>
 >;
 
 /** Fenêtre ouverte à l'instant `now` (même règle partout, `end` exclu). */
@@ -168,21 +169,51 @@ export function isSeasonLive(windows: SeasonWindows, id: string, now: number): b
 
 /**
  * Lien vers le guide du boss EN COURS pour une tâche, choisi par l'horloge du
- * CLIENT dans des données stables servies par la page : World Boss et Joint
- * Challenge → le guide de la fenêtre ouverte ; Singularity → le guide du boss
- * du jour (aucun un jour de récompense). Toute autre tâche : `undefined`.
+ * CLIENT dans des données stables servies par la page : World Boss, Joint
+ * Challenge et guild raid → le guide de la fenêtre ouverte ; Singularity → le
+ * guide du boss du jour (aucun un jour de récompense) ; tour Very Hard et
+ * poursuites → leur guide fixe. Toute autre tâche : `undefined`.
  */
 export function taskGuideLink(
   taskId: string,
   now: number,
   windows: SeasonWindows,
   singularityGuides: Record<string, TrackerGuideLink>,
+  fixedGuides: Record<string, TrackerGuideLink> = {},
 ): TrackerGuideLink | undefined {
-  if (taskId === 'world-boss' || taskId === 'joint-challenge')
+  if (taskId === 'world-boss' || taskId === 'joint-challenge' || taskId === 'guild-raid')
     return liveWindow(windows, taskId, now)?.guide;
   if (taskId === 'dimensional-singularity') {
     const boss = singularityStateAt(new Date(now)).today?.monsters[0];
     return boss ? singularityGuides[boss] : undefined;
+  }
+  return fixedGuides[taskId];
+}
+
+/**
+ * Fiche du boss EN COURS d'une tâche, choisie comme `taskGuideLink` par
+ * l'horloge du client : World Boss, Joint Challenge et guild raid → la fiche de
+ * la fenêtre ouverte (aucune hors fenêtre, même si un réglage manuel force la
+ * tâche) ; Singularity → le boss du jour et l'EX Buff de SON créneau (aucune
+ * fiche un jour de récompense, aucun buff si le créneau n'en porte pas).
+ */
+export function taskBossCard(
+  taskId: string,
+  now: number,
+  windows: SeasonWindows,
+  singularityBosses: Record<string, TrackerBossCard> = {},
+  singularityExBuffs: Record<string, TrackerExBuff> = {},
+): { card: TrackerBossCard; exBuff?: TrackerExBuff } | undefined {
+  if (taskId === 'world-boss' || taskId === 'joint-challenge' || taskId === 'guild-raid') {
+    const card = liveWindow(windows, taskId, now)?.boss;
+    return card ? { card } : undefined;
+  }
+  if (taskId === 'dimensional-singularity') {
+    const today = singularityStateAt(new Date(now)).today;
+    const card = today ? singularityBosses[today.monsters[0]] : undefined;
+    if (!card) return undefined;
+    const exBuff = today?.exBuff ? singularityExBuffs[today.exBuff] : undefined;
+    return exBuff ? { card, exBuff } : { card };
   }
   return undefined;
 }

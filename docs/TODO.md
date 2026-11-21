@@ -34,6 +34,8 @@ les preuves et les décisions vivent dans le tri consolidé de sevih-tool
 
 - [ ] Guild Raids éditables dans quick (lot F33, 20/11) : contrôle à l'écran, que l'agent n'a fait que par captures (`shot.mjs`, lecture seule). Dans quick, Guides, Guild Raid : ouvrir un raid (Frost Legion, version 2026-09), Phase 2, retoucher un build (une stat, une pièce d'équipement par « ＋ ») et un geas, « Traduire », « Enregistrer », lire le commit `chore(guides): guild-raid/frost-legion` (seul `main.json` de la version et `meta.json` re-daté doivent bouger), puis voir le rendu sur le site. Vérifier aussi une version à l'ancien format (Planetary Control Unit 2026-02 : bandeau, aucune saisie) et « ＋ version » (clé du mois, copie d'une version au gabarit).
 
+- [ ] Progress tracker, liens de guide et fiche du boss en cours (lot B76, 21/11) : contrôle à l'écran, que l'agent ne pouvait pas lancer. Sur `/en/tools/progress-tracker` (et une autre langue) : la fiche du guild raid (boss principal de Planetary Control Unit, jusqu'au 27/11) et son livre qui ouvre l'onglet Phase 2 ; la fiche Dimensional Singularity un jour de buff (21/11, 22/11 ou dès le 25/11) avec la pastille EX et son infobulle ; la fiche Joint Challenge du 01/12 au 08/12 ; la fiche World Boss à la prochaine saison livrée ; les cinq nouveaux liens (Skyward Tower Very Hard 20F, Irregular Queen, Mutated Wyvre, Iron Stretcher, Blockbuster) ; un clic sur la fiche fait +1 comme la ligne ; à 360 px de large, aucune ligne ne déborde.
+
 ## 🧰 Outil quick
 
 - [ ] **« Relancer quick » — reste à essayer sur le FIXE (lot B72)** : validé

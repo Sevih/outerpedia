@@ -51,7 +51,10 @@ export interface Season {
 interface RawWorldBoss {
   id: string;
   name: LocalizedText;
+  dungeons: string[];
   monsters: string[];
+  /** Boss CANONIQUE d'affichage de la ligne (cf. l'en-tête). */
+  boss?: string;
   start: string;
   battleEnd: string;
   end: string;
@@ -59,7 +62,7 @@ interface RawWorldBoss {
 interface RawGuildRaid {
   id: string;
   title: LocalizedText;
-  bosses: { monsters: string[] }[];
+  bosses: { dungeons: string[]; monsters: string[] }[];
   start: string;
   battleEnd: string;
   settlementEnd: string;
@@ -67,7 +70,10 @@ interface RawGuildRaid {
 interface RawJointChallenge {
   id: string;
   name: LocalizedText;
+  dungeons: string[];
+  /** Une entité par difficulté (normal / hard / very hard), alignée sur `dungeons`. */
   monsters: string[];
+  boss?: string;
   start: string;
   end: string;
 }
@@ -111,6 +117,36 @@ export function playableWindowsFrom(now: Date, limit = 8): Record<ContentMode, S
     'guild-raid': keep(raw.guildRaid.map((s) => ({ start: s.start, end: s.battleEnd }))),
     'joint-challenge': keep(raw.jointChallenge.map((s) => ({ start: s.start, end: s.end }))),
   };
+}
+
+/** Un combat d'une saison : ses donjons (par difficulté) et les monstres qui y sont spawnés. */
+export interface SeasonFight {
+  dungeons: string[];
+  monsters: string[];
+}
+
+/** Les combats d'une saison, tels que la table les livre. */
+export interface SeasonFights {
+  /** Boss CANONIQUE de la ligne (WB/JC) — un id logique, pas forcément combattu. */
+  boss?: string;
+  /** WB/JC : un combat ; GR : un par boss (principal et sous-boss). */
+  fights: SeasonFight[];
+}
+
+/**
+ * Les combats de la saison du mode qui OUVRE à `start` — la clé des fenêtres de
+ * `playableWindowsFrom`, ce qui permet à un appelant de les joindre sans id de
+ * saison. `undefined` si aucune saison n'ouvre à cette date.
+ */
+export function seasonFightsAt(mode: ContentMode, start: string): SeasonFights | undefined {
+  if (mode === 'guild-raid') {
+    const s = raw.guildRaid.find((x) => x.start === start);
+    return s && { fights: s.bosses.map((b) => ({ dungeons: b.dungeons, monsters: b.monsters })) };
+  }
+  const s = (mode === 'world-boss' ? raw.worldBoss : raw.jointChallenge).find(
+    (x) => x.start === start,
+  );
+  return s && { boss: s.boss, fights: [{ dungeons: s.dungeons, monsters: s.monsters }] };
 }
 
 /**

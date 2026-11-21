@@ -4,12 +4,20 @@ import { getCatalog } from '@/lib/data/items';
 import { img } from '@/lib/images';
 import { durationUnits } from '@/lib/format-duration';
 import { ProgressTrackerBrowser } from './ProgressTrackerBrowser';
-import type { TrackerAssets, TrackerLabels } from './contracts';
+import type { TrackerAssets, TrackerBossTables, TrackerLabels } from './contracts';
 import { TASK_DEFINITIONS, TASK_TYPES } from './tasks';
 import type { SeasonWindows } from './tracker';
 import { playableWindowsFrom } from '@/lib/data/content-schedule';
 import { listGuidesByCategory } from '@/lib/data/guides';
-import { seasonGuideLinks, singularityGuideLinks } from './guide-links';
+import {
+  fixedGuideLinks,
+  guildRaidGuideLinks,
+  seasonBossCards,
+  seasonGuideLinks,
+  singularityBossCards,
+  singularityExBuffLabels,
+  singularityGuideLinks,
+} from './guide-links';
 import { serverNow } from '@/lib/time';
 
 /**
@@ -149,34 +157,52 @@ export default async function ProgressTracker({ lang }: { lang: Lang }) {
   // « c'est ouvert » calculé ici — le client les compare à son horloge, donc
   // l'auto-détection reste juste même sur une page servie depuis le cache.
   const windows = playableWindowsFrom(serverNow());
-  // Le guide de chaque fenêtre et celui de chaque boss de Singularity sont des
-  // DONNÉES STABLES : le client choisit le lien « en cours » avec son horloge.
+  // Le guide et la fiche du boss de chaque fenêtre, ceux de chaque boss de
+  // Singularity, l'EX Buff de chaque créneau et les guides fixes sont des
+  // DONNÉES STABLES : le client choisit l'entrée « en cours » avec son horloge.
   const seasonWindows: SeasonWindows = {
-    'joint-challenge': seasonGuideLinks(
+    'joint-challenge': seasonBossCards(
       'joint-challenge',
-      windows['joint-challenge'],
-      listGuidesByCategory('joint-challenge'),
+      seasonGuideLinks(
+        'joint-challenge',
+        windows['joint-challenge'],
+        listGuidesByCategory('joint-challenge'),
+        lang,
+      ),
       lang,
+      t,
     ),
-    'guild-raid': windows['guild-raid'],
-    'world-boss': seasonGuideLinks(
-      'world-boss',
-      windows['world-boss'],
-      listGuidesByCategory('world-boss'),
+    'guild-raid': seasonBossCards(
+      'guild-raid',
+      guildRaidGuideLinks(windows['guild-raid'], listGuidesByCategory('guild-raid'), lang),
       lang,
+      t,
+    ),
+    'world-boss': seasonBossCards(
+      'world-boss',
+      seasonGuideLinks(
+        'world-boss',
+        windows['world-boss'],
+        listGuidesByCategory('world-boss'),
+        lang,
+      ),
+      lang,
+      t,
     ),
   };
-  const singularityGuides = singularityGuideLinks(
-    listGuidesByCategory('dimensional-singularity'),
-    lang,
-  );
+  const bossTables: TrackerBossTables = {
+    fixedGuides: fixedGuideLinks(lang),
+    singularityGuides: singularityGuideLinks(listGuidesByCategory('dimensional-singularity'), lang),
+    singularityBosses: singularityBossCards(lang, t),
+    singularityExBuffs: singularityExBuffLabels(lang, t),
+  };
 
   return (
     <ProgressTrackerBrowser
       labels={labels}
       assets={assets}
       seasonWindows={seasonWindows}
-      singularityGuides={singularityGuides}
+      bossTables={bossTables}
     />
   );
 }
