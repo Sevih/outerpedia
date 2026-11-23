@@ -1,6 +1,66 @@
 {
   "posts": [
     {
+      "id": 12525,
+      "date": "2026-11-23",
+      "modified": "2026-11-23T07:50:35",
+      "slug": "notice-11-23-mon-sequential-rolling-patch",
+      "lang": "en",
+      "type": "notice",
+      "title": "[Notice] 11/23 (Mon) Sequential Rolling Patch",
+      "content": "<figure class=\"size-full\"><img src=\"/images/patch-notes/548f09f13ebc61b3.webp\" alt=\"\"></figure>\n\n\n\n<p>Dear Masters,</p>\n\n\n\n<p>We’ll roll out a patch to address the issues listed below. You can continue playing during the rollout, though you may experience brief connection interruptions.</p>\n\n\n\n<p>◈ Patch Schedule<br>11/23 (Mon) 08:00 ~ 08:30 (UTC)<br>The patch will roll out gradually during this window.</p>\n\n\n\n<p>◈ Issues to Be Fixed<br>1. An issue where Angel Attack! fails to trigger a Dual Attack when used by Resonance Hanbyul Lee.<br>2. An issue where Resonance Hanbyul Lee’s “Dual Attack Skill 2” entry is displayed incorrectly in the Voice Lines tab on the Affinity screen.<br>3. An issue where some button labels on the Affinity screen, including “Touch 1,” appear in Korean.<br>4. An issue where the “Target Enhancement Stage” label appears in Korean on the Enhance tab of the Improve Gear screen.</p>\n\n\n\n<p>◈ Notes<br>Your connection may be briefly interrupted during the rollout.<br>Please restart the game after the patch to apply the changes.</p>\n\n\n\n<p>We apologize for the inconvenience.<br>Thank you.</p>\n"
+    },
+    {
+      "id": 12516,
+      "date": "2026-11-23",
+      "modified": "2026-11-23T02:39:51",
+      "slug": "notice-december-update-schedule-change",
+      "lang": "en",
+      "type": "notice",
+      "title": "[Notice] December Update Schedule Change",
+      "content": "<figure class=\"size-full\"><img src=\"/images/patch-notes/6751a61933da5e30.webp\" alt=\"Notice\"></figure>\n\n\n\n<p>Dear Masters,</p>\n\n\n\n<p>App store reviews are taking longer than usual, so we’re adjusting the schedule for our first update in December to allow enough time for review and release.</p>\n\n\n\n<p>We know many of you have been looking forward to the update, and we’re sorry to keep you waiting longer.</p>\n\n\n\n<p>Under our usual schedule, the first December update would fall on 12/1 (Tue). We’re now aiming to release it on 12/8 (Tue).</p>\n\n\n\n<p>This change may also affect the timing of future updates. We’ll announce the maintenance hours for the 12/8 update and any changes to upcoming update dates as soon as they’re confirmed.</p>\n\n\n\n<p>Thank you for your patience.</p>\n"
+    },
+    {
+      "id": 12524,
+      "date": "2026-11-23",
+      "modified": "2026-11-23T07:50:34",
+      "slug": "%ea%b3%b5%ec%a7%80-11-23%ec%9b%94-%eb%ac%b4%ec%a0%90%ea%b2%80-%ed%8c%a8%ec%b9%98-%ec%a7%84%ed%96%89-%ec%95%88%eb%82%b4",
+      "lang": "kr",
+      "type": "notice",
+      "title": "[공지] 11/23(월) 무점검 패치 진행 안내",
+      "content": "<figure class=\"size-full\"><img src=\"/images/patch-notes/621af36733a8d627.webp\" alt=\"\"></figure>\n\n\n\n<p>안녕하세요. GM 아메입니다.</p>\n\n\n\n<p>아래 현상을 수정하기 위해 무점검 패치를 진행할 예정입니다.<br>패치 중에는 일시적으로 접속이 불안정할 수 있습니다.</p>\n\n\n\n<p>◈ 패치 진행 일정<br>11/23(월) 17:00 ~ 17:30 (KST)<br>※ 위 시간 내 순차적으로 적용됩니다.</p>\n\n\n\n<p>◈ 수정 내용<br>1. 레조넌스 이한별이 ‘엔젤 어택!’ 사용 시 협공 효과가 발동하지 않는 현상<br>2. 신뢰도 음성에서 레조넌스 이한별의 협공2가 잘못 노출 되는 현상<br>3. 애정도 화면의 ‘터치1’ 등 일부 버튼명이 한국어로 표시되는 현상<br>4. 장비 성장 화면의 강화 탭에서 ‘목표 강화 단계’ 문구가 한국어로 표시되는 현상</p>\n\n\n\n<p>◈ 유의사항<br>패치 중 접속이 일시적으로 끊길 수 있습니다.<br>패치 적용 후 게임에 다시 접속해 주세요.</p>\n\n\n\n<p>게임 이용에 불편을 드려 죄송합니다.<br>감사합니다.</p>\n"
+    },
+    {
+      "id": 12515,
+      "date": "2026-11-23",
+      "modified": "2026-11-23T02:39:48",
+      "slug": "%ea%b3%b5%ec%a7%80-12%ec%9b%94-%ec%97%85%eb%8d%b0%ec%9d%b4%ed%8a%b8-%ec%9d%bc%ec%a0%95-%eb%b3%80%ea%b2%bd-%ec%95%88%eb%82%b4",
+      "lang": "kr",
+      "type": "notice",
+      "title": "[공지] 12월 업데이트 일정 변경 안내",
+      "content": "<figure class=\"size-full\"><img src=\"/images/patch-notes/90db829624102f79.webp\" alt=\"공지사항\"></figure>\n\n\n\n<p>안녕하세요, 오너 여러분.<br>GM 아메입니다.</p>\n\n\n\n<p>최근 앱 마켓 검수에 평소보다 많은 시간이 소요되고 있습니다. 검수와 배포에 필요한 시간을 확보하기 위해 12월 첫 업데이트 일정을 아래와 같이 조정했습니다.</p>\n\n\n\n<p>평소 업데이트 주기에 맞춰 기다려 주신 오너 여러분께 일정 변경으로 불편을 드려 죄송합니다.</p>\n\n\n\n<p>■ 12월 첫 업데이트 일정<br>– 기존 업데이트 주기 기준 — 12/1(화)<br>– 변경 일정 — 12/8(화) 예정</p>\n\n\n\n<p>이번 조정에 따라 이후 업데이트 일정도 달라질 수 있습니다. 12/8(화) 업데이트의 점검 시간과 이후 일정은 각각 확정되는 대로 공지를 통해 안내드리겠습니다.</p>\n\n\n\n<p>기다려 주시는 오너 여러분께 감사드립니다.</p>\n"
+    },
+    {
+      "id": 12528,
+      "date": "2026-11-23",
+      "modified": "2026-11-23T07:50:37",
+      "slug": "%e3%80%90%e3%81%8a%e7%9f%a5%e3%82%89%e3%81%9b%e3%80%91%e3%83%87%e3%83%bc%e3%82%bf%e6%9b%b4%e6%96%b0%e4%bd%9c%e6%a5%ad%e3%81%ae%e3%81%8a%e7%9f%a5%e3%82%89%e3%81%9b11-23",
+      "lang": "jp",
+      "type": "notice",
+      "title": "【お知らせ】データ更新作業のお知らせ(11/23)",
+      "content": "<figure class=\"size-full\"><img src=\"/images/patch-notes/f50b9aec4b98cb8e.webp\" alt=\"\"></figure>\n\n\n\n<p>いつも『アウタープレーン』をプレイしていただき、誠にありがとうございます。<br>『アウタープレーン』運営チームです。</p>\n\n\n\n<p>下記の不具合を修正するため、11/23(月)にデータ更新作業を実施いたします。作業中は一時的に接続が不安定になる場合がございます。</p>\n\n\n\n<p>◈ データ更新実施時間<br>11/23(月) 17:00 ～ 17:30 (JST)<br>※上記時間中、順次適用されます。</p>\n\n\n\n<p>◈ 修正内容<br>1. 【レゾナンス・星野きらら】が【エンジェルアタック！】を使用した際、連携効果が発動しない現象<br>2. 【親密度】画面のボイス一覧で、【レゾナンス・星野きらら】の本来表示されない【連携スキル2】が表示される現象<br>3. 【親密度】画面で、【タッチ 1】など一部のボタン名が韓国語で表示される現象<br>4. 装備の【特異点強化】画面で、【一括強化】ボタンが韓国語で表示される現象</p>\n\n\n\n<p>※注意事項<br>・データ更新に伴い、接続が中断される場合がございます。<br>・再ログイン後、更新内容が適用されます。</p>\n\n\n\n<p>マスターの皆様にご不便をおかけし、誠に申し訳ございません。</p>\n"
+    },
+    {
+      "id": 12517,
+      "date": "2026-11-23",
+      "modified": "2026-11-23T02:39:52",
+      "slug": "%e3%80%90%e3%81%8a%e7%9f%a5%e3%82%89%e3%81%9b%e3%80%9112%e6%9c%88%e3%81%ae%e3%82%a2%e3%83%83%e3%83%97%e3%83%87%e3%83%bc%e3%83%88%e6%97%a5%e7%a8%8b%e5%a4%89%e6%9b%b4%e3%81%ae%e3%81%94%e6%a1%88%e5%86%85",
+      "lang": "jp",
+      "type": "notice",
+      "title": "【お知らせ】12月のアップデート日程変更のご案内",
+      "content": "<figure class=\"size-full\"><img src=\"/images/patch-notes/3819f5f7ab09ef1b.webp\" alt=\"お知らせ\"></figure>\n\n\n\n<p>マスターの皆様、こんにちは。<br>GMあめです。</p>\n\n\n\n<p>最近、ストア審査に通常よりも時間を要しております。審査と配信に必要な時間を確保するため、12月最初のアップデート日程を以下のとおり変更いたしました。</p>\n\n\n\n<p>アップデートをお待ちいただいているマスターの皆様には、日程変更によりご不便をおかけし、誠に申し訳ございません。</p>\n\n\n\n<p>■ 12月最初のアップデート日程<br>– 通常のアップデート周期に基づく日程　12/1(火)<br>– 変更後の日程　12/8(火)予定</p>\n\n\n\n<p>今回の日程変更に伴い、以降のアップデート日程も調整する場合がございます。12/8(火)のメンテナンス実施時間と今後のアップデート日程は、それぞれ確定次第、改めてお知らせいたします。</p>\n\n\n\n<p>お待ちいただいているマスターの皆様に、心より感謝申し上げます。</p>\n"
+    },
+    {
       "id": 12489,
       "date": "2026-11-20",
       "modified": "2026-11-20T06:12:53",
@@ -43,12 +103,12 @@
     {
       "id": 12303,
       "date": "2026-11-20",
-      "modified": "2026-11-20T10:21:31",
+      "modified": "2026-11-23T09:25:22",
       "slug": "issues-known-issues-11-20-maintenance",
       "lang": "en",
       "type": "known-issue",
       "title": "[Issues] Known Issues (11/20 Maintenance)",
-      "content": "<figure class=\"size-full\"><img src=\"/images/patch-notes/2711930b3fbdcd80.webp\" alt=\"\" style=\"max-width:100%;height:auto;\"></figure>\n\n\n<p>Dear Masters,</p>\n\n\n<p>We would like to inform you about issues that have been identified. We apologize for the inconvenience.</p>\n\n\n<p><strong>1. An issue where some Masters see the costumes [Goddess of Fortune Kappa], [I’m the Delivery Knight! Ember], and [Festival Safety Manager Fortuna] listed as available for purchase at Black Friday special prices in the Shop despite already owning them.</strong></p>\n\n\n<p>We will work to resolve these issues as quickly as possible and provide updates in this notice if there are any changes.</p>\n\n\n<p>Thank you.</p>\n"
+      "content": "<figure class=\"size-full\"><img src=\"/images/patch-notes/2711930b3fbdcd80.webp\" alt=\"\" style=\"max-width:100%;height:auto;\"></figure>\n\n\n<p>Dear Masters,</p>\n\n\n<p>We would like to inform you about issues that have been identified. We apologize for the inconvenience.</p>\n\n\n<p><strong>1. An issue where some Masters see the costumes [Goddess of Fortune Kappa], [I’m the Delivery Knight! Ember], and [Festival Safety Manager Fortuna] listed as available for purchase at Black Friday special prices in the Shop despite already owning them.</strong></p>\n\n\n\n<p><strong>2. An issue where Angel Attack! fails to trigger a Dual Attack when used by Resonance Hanbyul Lee.</strong></p>\n\n\n\n<p><strong>3. An issue where Resonance Hanbyul Lee’s “Dual Attack Skill 2” entry is displayed incorrectly in the Voice Lines tab on the Affinity screen.</strong></p>\n\n\n\n<p><strong>4. An issue where some button labels on the Affinity screen, including “Touch 1,” appear in Korean.</strong></p>\n\n\n\n<p><strong>5. An issue where the “Target Enhancement Stage” label appears in Korean on the Enhance tab of the Improve Gear screen.</strong></p>\n\n\n\n<p><strong>6. An issue where the game freezes when you tap Go Back after opening the Hero screen from the Mock Battle team setup screen on Mondays and Tuesdays, when Dimensional Singularity is unavailable.</strong></p>\n\n\n<p>We will work to resolve these issues as quickly as possible and provide updates in this notice if there are any changes.</p>\n\n\n<p>Thank you.</p>\n"
     },
     {
       "id": 12466,
@@ -73,12 +133,12 @@
     {
       "id": 12297,
       "date": "2026-11-20",
-      "modified": "2026-11-20T10:21:30",
+      "modified": "2026-11-23T09:25:21",
       "slug": "%ec%9d%b4%ec%8a%88-11-20-%ec%97%85%eb%8d%b0%ec%9d%b4%ed%8a%b8-%ec%9d%b4%ed%9b%84-%ed%99%95%ec%9d%b8%eb%90%9c-%ed%98%84%ec%83%81",
       "lang": "kr",
       "type": "known-issue",
       "title": "[이슈] 11/20 업데이트 이후 확인된 현상",
-      "content": "<figure class=\"size-full\"><img src=\"/images/patch-notes/efd8449fdbb282dd.webp\" alt=\"\" style=\"max-width:100%;height:auto;\"></figure>\n\n\n<p>안녕하세요, 오너 여러분.<br>GM 아메입니다.</p>\n\n\n<p>현재 확인된 현상에 대해 안내 드립니다.<br>게임 내 오류 현상으로 이용에 불편을 드려 죄송합니다.</p>\n\n\n<p><strong>1. 일부 오너님이 이미 보유한 코스튬 [행운의 여신 카파], [택배기사다 뿅 엠버], [축제 안전 관리자 포르투나]가 상점에서 블랙프라이데이 특가로 구매 가능한 상태로 표시되는 현상</strong></p>\n\n\n<p>위 현상에 대해 빠르게 정상화될 수 있도록 노력하겠으며,<br>추가 현상이나 변동 사항이 있을 시 해당 공지를 통해 안내 드리겠습니다.</p>\n\n\n<p>감사합니다.</p>\n"
+      "content": "<figure class=\"size-full\"><img src=\"/images/patch-notes/efd8449fdbb282dd.webp\" alt=\"\" style=\"max-width:100%;height:auto;\"></figure>\n\n\n<p>안녕하세요, 오너 여러분.<br>GM 아메입니다.</p>\n\n\n<p>현재 확인된 현상에 대해 안내 드립니다.<br>게임 내 오류 현상으로 이용에 불편을 드려 죄송합니다.</p>\n\n\n<p><strong>1. 일부 오너님이 이미 보유한 코스튬 [행운의 여신 카파], [택배기사다 뿅 엠버], [축제 안전 관리자 포르투나]가 상점에서 블랙프라이데이 특가로 구매 가능한 상태로 표시되는 현상</strong></p>\n\n\n\n<p><strong>2. 레조넌스 이한별이 ‘엔젤 어택!’ 사용 시 협공 효과가 발동하지 않는 현상</strong></p>\n\n\n\n<p><strong>3. 신뢰도 음성에서 레조넌스 이한별의 협공2가 잘못 노출 되는 현상</strong></p>\n\n\n\n<p><strong>4. 애정도 화면의 ‘터치1’ 등 일부 버튼명이 한국어로 표시되는 현상</strong></p>\n\n\n\n<p><strong>5. 장비 성장 화면의 강화 탭에서 ‘목표 강화 단계’ 문구가 한국어로 표시되는 현상</strong></p>\n\n\n\n<p><strong>6. 차원 특이점이 진행되지 않는 월/화요일에 모의 전투 팀 편성에서 동료 화면으로 이동한 뒤, 뒤로가기 버튼을 누르면 게임이 멈추는 현상</strong></p>\n\n\n<p>위 현상에 대해 빠르게 정상화될 수 있도록 노력하겠으며,<br>추가 현상이나 변동 사항이 있을 시 해당 공지를 통해 안내 드리겠습니다.</p>\n\n\n<p>감사합니다.</p>\n"
     },
     {
       "id": 12465,
@@ -93,12 +153,12 @@
     {
       "id": 12309,
       "date": "2026-11-20",
-      "modified": "2026-11-20T10:21:31",
+      "modified": "2026-11-23T09:25:23",
       "slug": "%e3%80%90%e4%b8%8d%e5%85%b7%e5%90%88%e3%80%91%e7%8f%be%e5%9c%a8%e7%a2%ba%e8%aa%8d%e3%81%95%e3%82%8c%e3%81%a6%e3%81%84%e3%82%8b%e4%b8%8d%e5%85%b7%e5%90%88%e3%81%ab%e3%81%a4%e3%81%84%e3%81%a6-11-20",
       "lang": "jp",
       "type": "known-issue",
       "title": "【不具合】現在確認されている不具合について (11/20)",
-      "content": "<figure class=\"size-full\"><img src=\"/images/patch-notes/213ce7185b5a83ed.webp\" alt=\"\" style=\"max-width:100%;height:auto;\"></figure>\n\n\n<p>いつも「アウタープレーン」をプレイしていただき、誠にありがとうございます。<br>「アウタープレーン」運営チームです。</p>\n\n\n<p>大変ご不便をおかけして申し訳ございません。<br>現在確認されている不具合についてご案内いたします。</p>\n\n\n<p><strong>1. 一部のマスター様において、すでに所持しているスキン「幸運の女神・カッパ」「配達騎士だぴょん・エンバー」「フェスガード・フォルトゥナ」が、ショップでブラックフライデー特価商品として購入可能と表示される現象</strong></p>\n\n\n<p>この度は皆さまにご迷惑をおかけしておりますことをお詫び申し上げます。<br>不具合解消まで今しばらくお待ちいただけますよう、お願い申し上げます。</p>\n"
+      "content": "<figure class=\"size-full\"><img src=\"/images/patch-notes/213ce7185b5a83ed.webp\" alt=\"\" style=\"max-width:100%;height:auto;\"></figure>\n\n\n<p>いつも「アウタープレーン」をプレイしていただき、誠にありがとうございます。<br>「アウタープレーン」運営チームです。</p>\n\n\n<p>大変ご不便をおかけして申し訳ございません。<br>現在確認されている不具合についてご案内いたします。</p>\n\n\n<p><strong>1. 一部のマスター様において、すでに所持しているスキン「幸運の女神・カッパ」「配達騎士だぴょん・エンバー」「フェスガード・フォルトゥナ」が、ショップでブラックフライデー特価商品として購入可能と表示される現象</strong></p>\n\n\n\n<p><strong>2. 【レゾナンス・星野きらら】が【エンジェルアタック！】を使用した際、連携効果が発動しない現象</strong></p>\n\n\n\n<p><strong>3. 【親密度】画面のボイス一覧で、【レゾナンス・星野きらら】の本来表示されない【連携スキル2】が表示される現象</strong></p>\n\n\n\n<p><strong>4. 【親密度】画面で、【タッチ 1】など一部のボタン名が韓国語で表示される現象</strong></p>\n\n\n\n<p><strong>5. 装備の【特異点強化】画面で、【一括強化】ボタンが韓国語で表示される現象</strong></p>\n\n\n\n<p><strong>6. 次元特異点が開催されていない月曜日・火曜日に、模擬戦闘の編成画面から仲間画面に移動した後、戻るボタンを押すとゲームがフリーズする現象</strong></p>\n\n\n<p>この度は皆さまにご迷惑をおかけしておりますことをお詫び申し上げます。<br>不具合解消まで今しばらくお待ちいただけますよう、お願い申し上げます。</p>\n"
     },
     {
       "id": 12471,
