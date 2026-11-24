@@ -65,7 +65,7 @@ function CardBody({
           </span>
           <span className="min-w-0 space-y-1">
             <span className="text-content-strong line-clamp-2 block text-sm font-semibold">
-              {cleanVideoTitle(first.title)}
+              {first.label ?? cleanVideoTitle(first.title)}
             </span>
             {first.author && (
               <span className="text-content-muted block text-xs">

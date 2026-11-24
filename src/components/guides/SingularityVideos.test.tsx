@@ -130,6 +130,18 @@ describe('SingularityVideosView — rendu sur une date figée', () => {
     expect(out).not.toMatch(/guides\.|video\.by/);
   });
 
+  it('la carte prend le libellé d’onglet quand il existe, le titre sinon', async () => {
+    const labelled = {
+      ...yt('oth1', 'Very long full title of the run', OTHER.target.id),
+      label: 'No crit',
+    };
+    const g = gallery(await render('en', [labelled, yt('act1', 'Active run A', ACTIVE.target.id)]));
+    expect(text(g)).toContain('No crit');
+    expect(text(g)).toContain('Active run A');
+    // Le titre complet n'est pas sur la carte (le lecteur ouvert est sur l'active).
+    expect(text(g)).not.toContain('Very long full title');
+  });
+
   it('active sans vidéo : le lecteur s’ouvre sur la première carte qui en a', async () => {
     const html = await render('en', [yt('oth1', 'Other run', OTHER.target.id)]);
     const g = gallery(html);
