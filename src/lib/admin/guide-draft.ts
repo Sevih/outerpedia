@@ -20,6 +20,7 @@ import type { LocalizedText } from '@contracts';
 import { hasText } from './review-shape';
 import type { SectionTitle } from '@/lib/data/guide-sections';
 import type { VideoItem } from '@/components/ui/MultiVideoEmbed';
+import type { SingularityVideoItem } from '@/components/guides/SingularityVideos';
 import type { RaidVersionDraft } from './guild-raid-draft';
 
 export type LText = LocalizedText & { en: string };
@@ -66,6 +67,11 @@ export interface CatSpec {
   /** Persos recommandés EN SECTIONS titrées (dimensional-singularity). */
   recoSections?: boolean;
   videos: boolean;
+  /**
+   * Vidéos rangées par combinaison boss × EX Buff (`ex` d'une vidéo, la cible
+   * du buff — dimensional-singularity, cf. `SingularityVideos`).
+   */
+  exVideos?: boolean;
   /** Paragraphes libres (`config.notes` versionné, ou `note` unique adventure). */
   notes: boolean;
   /** Sections de conseils titrées. */
@@ -160,6 +166,7 @@ export const GUIDE_SPECS: Record<string, CatSpec> = {
     teams: 'none', // les « équipes » de dim = persos recommandés EN SECTIONS
     recoSections: true,
     videos: true,
+    exVideos: true,
     notes: false,
     tipTitles: true,
     introRequired: true,
@@ -244,7 +251,8 @@ export interface VersionDraft {
   /** Persos recommandés EN SECTIONS titrées (dimensional-singularity). */
   recoSections: RecoSectionDraft[];
   teams: TeamDraft[];
-  videos: VideoItem[];
+  /** `ex` : la cible de l'EX Buff d'une vidéo (`spec.exVideos` seulement), préservée telle quelle. */
+  videos: SingularityVideoItem[];
   /**
    * Guild raid : la version entière — au gabarit (éditable) ou à l'ancien
    * format (ses écarts et ses fichiers, en lecture). Les champs ci-dessus
@@ -589,7 +597,7 @@ interface DimContent {
   intro: LText;
   tips?: DimTipsSection[];
   teams?: DimTeamSection[];
-  videos?: VideoItem[];
+  videos?: SingularityVideoItem[];
 }
 export type RawContent = StoryContent | DimContent;
 

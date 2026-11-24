@@ -838,6 +838,12 @@ const es: Record<TranslationKey, string> = {
   'guides.singularity.appearances.tagline':
     'Las próximas {weeks} semanas, un ciclo de rotación completo.',
   'guides.singularity.appearances.ex_note': 'El EX Buff depende de la franja, no del jefe.',
+  'guides.singularity.videos.title': 'Vídeos por EX Buff',
+  'guides.singularity.videos.tagline':
+    'Una tarjeta por cada EX Buff que este jefe lleva en la rotación; elige una para ver sus runs.',
+  'guides.singularity.videos.none': 'Aún no hay vídeo',
+  'guides.singularity.videos.count': '{count} vídeos',
+  'guides.singularity.videos.before_ex': 'Antes del EX Buff',
   // Guide landing — categories index
   'guides.counter': '{guides} guías · {categories} categorías',
   'guides.count.one': '{count} GUÍA',

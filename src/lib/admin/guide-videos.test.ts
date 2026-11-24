@@ -1,7 +1,13 @@
 import { existsSync, readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { describe, expect, it } from 'vitest';
-import { fromContentDraft, fromFlatDraft, fromVersionDraft, guideSpec } from './guide-draft';
+import {
+  fromContentDraft,
+  fromFlatDraft,
+  fromVersionDraft,
+  guideSpec,
+  toContentDraft,
+} from './guide-draft';
 import { loadGuideDraft } from './guide-store';
 import { listGuides } from '@/lib/data/guides';
 
@@ -114,4 +120,36 @@ describe('vidéos des guides', () => {
       expect(pertes).toEqual([]);
     },
   );
+});
+
+describe('vidéos Dimensional Singularity — le champ `ex` (C29)', () => {
+  const spec = guideSpec('dimensional-singularity')!;
+  const content = (videos: unknown[]) => ({ intro: { en: 'Intro' }, videos });
+  const back = (c: ReturnType<typeof content>) =>
+    fromContentDraft(spec, toContentDraft(spec, { bossId: '60000011' }, c as never));
+
+  it('sans `ex` : le contenu revient inchangé à l’aller-retour', () => {
+    const c = content([
+      { platform: 'youtube', id: 'a', title: 'A', author: 'Au' },
+      { platform: 'twitch', id: '1', title: 'B', label: 'Tab' },
+    ]);
+    expect(back(c)).toEqual(c);
+    expect(JSON.stringify(back(c))).not.toContain('"ex"');
+  });
+
+  it('avec `ex` : préservé tel quel, plusieurs vidéos d’une même cible comprises', () => {
+    const c = content([
+      { platform: 'youtube', id: 'a', title: 'A', ex: 'striker' },
+      { platform: 'youtube', id: 'b', title: 'B', ex: 'striker' },
+      { platform: 'youtube', id: 'c', title: 'C' },
+    ]);
+    expect(back(c)).toEqual(c);
+  });
+
+  it('les guides DS du disque : aucune vidéo ne porte encore de `ex` (rien à migrer)', () => {
+    for (const g of listGuides().filter((x) => x.category === 'dimensional-singularity')) {
+      const c = read(g.category, g.slug, 'content.json') as { videos?: { ex?: string }[] };
+      for (const v of c?.videos ?? []) if (v.ex !== undefined) expect(spec.exVideos).toBe(true);
+    }
+  });
 });

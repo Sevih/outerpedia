@@ -811,6 +811,12 @@ const jp: Record<TranslationKey, string> = {
   'guides.singularity.appearances.title': '今後の出現',
   'guides.singularity.appearances.tagline': '今後{weeks}週間（ローテーション1周分）。',
   'guides.singularity.appearances.ex_note': 'EXバフはボスではなく枠ごとに決まります。',
+  'guides.singularity.videos.title': 'EXバフ別の動画',
+  'guides.singularity.videos.tagline':
+    'ローテーションでこのボスが持つEXバフごとに1枚。選ぶとその動画を再生します。',
+  'guides.singularity.videos.none': '動画はまだありません',
+  'guides.singularity.videos.count': '動画{count}本',
+  'guides.singularity.videos.before_ex': 'EXバフ実装前',
   // Guide landing — categories index
   'guides.counter': 'ガイド{guides}件 · カテゴリー{categories}件',
   'guides.count.one': 'ガイド{count}件',

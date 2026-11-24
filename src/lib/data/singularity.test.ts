@@ -1,12 +1,16 @@
 import { describe, expect, it } from 'vitest';
+import singularityJson from '@data/generated/singularity.json';
 import {
+  SINGULARITY_EX_TARGETS,
   bossesByDay,
   isSingularityBattleDay,
+  singularityActiveComboAt,
   singularityAppearancesAt,
   singularityBattleDays,
   singularityCycleWeeks,
   singularityExBuffOf,
   singularityExBuffTarget,
+  singularityExCombos,
   singularityGroups,
   singularityStateAt,
   type SingularityBoss,
@@ -347,5 +351,112 @@ describe('EX Buff — résolution et cible', () => {
   it('option inconnue : pas de cible inventée', () => {
     expect(singularityExBuffTarget(buff('singularity_passive_ex_up_zzz'))).toBeUndefined();
     expect(singularityExBuffTarget(buff('autre_chose'))).toBeUndefined();
+  });
+});
+
+/**
+ * C29 — combinaisons boss × EX Buff d'un guide (la galerie vidéo) : recalculées
+ * ici depuis les groupes de la donnée RÉELLE, jamais figées en chiffres ; la
+ * combinaison active à des dates tirées de l'ancre et des semaines.
+ */
+describe('singularityExCombos / singularityActiveComboAt — C29', () => {
+  const raw = singularityJson as unknown as {
+    schedule: { anchor: { date: string; group: number } };
+    groups: { id: number; bosses: SingularityBoss[] }[];
+    exBuffs?: Record<string, { option: string }>;
+  };
+  /** Les cibles de chaque boss, recalculées des groupes : `monsters[0]` → cibles du buff de chaque créneau. */
+  const expected = new Map<string, Set<string>>();
+  for (const g of raw.groups)
+    for (const b of g.bosses) {
+      const buff = singularityExBuffOf(b);
+      const target = buff && singularityExBuffTarget(buff);
+      if (!target) continue;
+      const id = b.monsters[0];
+      if (!expected.has(id)) expected.set(id, new Set());
+      expected.get(id)!.add(target.id);
+    }
+  const bosses = [...new Set(raw.groups.flatMap((g) => g.bosses.map((b) => b.monsters[0])))];
+
+  it('la donnée porte des buffs EX : chaque option a une cible connue', () => {
+    expect(expected.size).toBeGreaterThan(0);
+    for (const [k, buff] of Object.entries(raw.exBuffs ?? {}))
+      expect(singularityExBuffTarget(buff as never), `buff ${k} (${buff.option})`).toBeDefined();
+  });
+
+  it('chaque boss : ses combinaisons égalent l’ensemble recalculé des groupes, sans doublon, dans l’ordre des cibles', () => {
+    for (const id of bosses) {
+      const targets = singularityExCombos(id).map((c) => c.target.id);
+      expect(new Set(targets), id).toEqual(expected.get(id) ?? new Set());
+      expect(targets.length, `${id} : doublon`).toBe(new Set(targets).size);
+      const ranks = targets.map((t) => SINGULARITY_EX_TARGETS.indexOf(t));
+      expect(ranks, `${id} : ordre`).toEqual([...ranks].sort((a, b) => a - b));
+      expect(ranks.every((r) => r >= 0)).toBe(true);
+    }
+  });
+
+  it('Verdandi (lumière, 60000011) : Striker ET Ranger — le buff suit le créneau, pas le boss', () => {
+    const targets = singularityExCombos('60000011').map((c) => c.target.id);
+    expect(targets).toContain('striker');
+    expect(targets).toContain('ranger');
+    expect(targets.length).toBeGreaterThan(1);
+  });
+
+  it('un monstre hors rotation n’a aucune combinaison', () => {
+    expect(singularityExCombos('99999999')).toEqual([]);
+  });
+
+  /** Ancre + `w` semaines + `d` jours, à midi UTC. */
+  const ANCHOR_MS = Date.parse(`${raw.schedule.anchor.date}T00:00:00Z`);
+  const dateAt = (w: number, d: number) =>
+    new Date(ANCHOR_MS + (w * 7 + d) * 86_400_000 + 43_200_000);
+  const iso = (w: number, d: number) => dateAt(w, d).toISOString().slice(0, 10);
+  const ids = singularityGroups().map((g) => g.id);
+  /** Le groupe de la semaine `w` après l'ancre (cyclique). */
+  const groupAt = (w: number) => {
+    const i = ids.indexOf(raw.schedule.anchor.group);
+    return singularityGroups()[(((i + w) % ids.length) + ids.length) % ids.length];
+  };
+  const W = 30; // une semaine quelconque, loin de l'ancre
+
+  it('un jour de combat : la combinaison du boss du jour, « today », sa date', () => {
+    for (let d = 0; d < BATTLE; d++) {
+      const boss = bossesByDay(groupAt(W).bosses, BATTLE)[d];
+      const target = singularityExBuffTarget(singularityExBuffOf(boss)!)!;
+      const active = singularityActiveComboAt(boss.monsters[0], dateAt(W, d));
+      expect(active?.target.id, `jour ${d}`).toBe(target.id);
+      expect(active?.date).toBe(iso(W, d));
+      expect(active?.state).toBe('today');
+      expect(active?.betweenWeeks).toBe(false);
+    }
+  });
+
+  it('un jour de récompense : la combinaison de la semaine SUIVANTE, à venir', () => {
+    const boss = bossesByDay(groupAt(W + 1).bosses, BATTLE)[0];
+    const target = singularityExBuffTarget(singularityExBuffOf(boss)!)!;
+    const active = singularityActiveComboAt(boss.monsters[0], dateAt(W, BATTLE));
+    expect(active?.target.id).toBe(target.id);
+    expect(active?.date).toBe(iso(W + 1, 0));
+    expect(active?.state).toBe('upcoming');
+    expect(active?.betweenWeeks).toBe(true);
+  });
+
+  it('un boss absent de la semaine n’a pas de combinaison active', () => {
+    const inWeek = new Set(bossesByDay(groupAt(W).bosses, BATTLE).map((b) => b.monsters[0]));
+    const absent = bosses.find((id) => !inWeek.has(id));
+    expect(absent).toBeDefined();
+    expect(singularityActiveComboAt(absent!, dateAt(W, 0))).toBeUndefined();
+  });
+
+  it('un jour passé de la semaine en cours : le boss y reste, état « past »', () => {
+    const boss = bossesByDay(groupAt(W).bosses, BATTLE)[0];
+    const last = BATTLE - 1;
+    const sameLater = bossesByDay(groupAt(W).bosses, BATTLE)
+      .slice(1)
+      .some((b) => b.monsters[0] === boss.monsters[0]);
+    if (sameLater) return; // le même boss plus tard dans la semaine : cas couvert par « à venir »
+    const active = singularityActiveComboAt(boss.monsters[0], dateAt(W, last));
+    expect(active?.state).toBe('past');
+    expect(active?.date).toBe(iso(W, 0));
   });
 });

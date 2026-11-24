@@ -553,6 +553,38 @@
 #tab-guides .gd-vt {
   font-size: 13.5px;
 }
+/* Dimensional Singularity : un emplacement par combinaison boss × EX Buff (son
+   icône d'élément ou de classe en tête), le choix discret d'une combinaison sur
+   une vidéo rangée hors des emplacements, une ligne refusée en rouge. */
+#tab-guides .gd-exico {
+  width: 24px;
+  height: 24px;
+  flex: none;
+  object-fit: contain;
+}
+#tab-guides .gd-vex {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+#tab-guides .gd-vex select {
+  height: 28px;
+  font-size: 12.5px;
+}
+#tab-guides .gd-videos li.ko .gd-vt {
+  color: var(--danger);
+}
+#tab-guides .gd-videos li .gd-err {
+  flex-basis: 100%;
+  margin: 0;
+}
+/* La couverture vidéo EX Buff, au-dessus de la table des guides DS. */
+#tab-guides .gd-cover .card-head {
+  flex-wrap: wrap;
+}
+#tab-guides .gd-cover table {
+  width: 100%;
+}
 
 /* ---------------------------------------------------------------- le picker
    Les pickers en lignes (un combat, un donjon, un boss), dans le picker partagé

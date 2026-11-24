@@ -838,6 +838,12 @@ const fr: Record<TranslationKey, string> = {
   'guides.singularity.appearances.tagline':
     'Les {weeks} prochaines semaines, soit un cycle complet de rotation.',
   'guides.singularity.appearances.ex_note': "L'EX Buff dépend du créneau, pas du boss.",
+  'guides.singularity.videos.title': 'Vidéos par EX Buff',
+  'guides.singularity.videos.tagline':
+    'Une carte par EX Buff que ce boss porte dans la rotation ; choisissez-en une pour voir ses runs.',
+  'guides.singularity.videos.none': 'Pas encore de vidéo',
+  'guides.singularity.videos.count': '{count} vidéos',
+  'guides.singularity.videos.before_ex': "Avant l'EX Buff",
   // Guide landing — categories index
   'guides.counter': '{guides} guides · {categories} catégories',
   'guides.count.one': '{count} GUIDE',

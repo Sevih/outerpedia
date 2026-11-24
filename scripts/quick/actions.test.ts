@@ -163,6 +163,7 @@ import type {
 import type { ShopPrioritiesEditData } from '@/lib/admin/shop-priorities-store';
 import type { InlineRefs } from '@/lib/admin/inline-refs';
 import { listGuides, type Guide } from '@/lib/data/guides';
+import { singularityExCombos } from '@/lib/data/singularity';
 import {
   monsterKitCards,
   pickMonsterKit,
@@ -8989,6 +8990,167 @@ describe('guidesOverview, guideDraftState, saveGuide, addGuideVersionAction — 
       const { fake } = deps({ addErrors: ['Version 2026-10 already exists.'] });
       const r = await addGuideVersionAction('joint-challenge', 'annihilator', '2026-10', '', fake);
       expect(r).toEqual({ ok: false, log: ['Version 2026-10 already exists.'] });
+    });
+  });
+
+  describe('Dimensional Singularity — vidéos par combinaison boss × EX Buff (C29)', () => {
+    const DS = guide('dimensional-singularity', 'verdandi-light', { bossId: '60000011' });
+    const COMBOS = singularityExCombos('60000011').map((c) => c.target.id);
+    type V = GuideDraft['versions'][number]['videos'][number];
+    const dsVersion = (videos: V[]) => ({
+      key: '',
+      bossId: '60000011',
+      tipSections: [],
+      notes: [],
+      recommended: [],
+      recoSections: [],
+      teams: [],
+      videos,
+    });
+    const PRE: V = { platform: 'youtube', id: 'pre', title: 'Old run' };
+    const DS_DRAFT: GuideDraft = { intro: { en: 'Intro' }, versions: [dsVersion([PRE])] };
+    const dsDeps = (over: Parameters<typeof deps>[0] = {}) => {
+      const d = deps({
+        dirty: [
+          'src/app/[lang]/guides/_contents/dimensional-singularity/verdandi-light/content.json',
+        ],
+        ...over,
+      });
+      d.fake = {
+        ...d.fake,
+        guides: () => [DS],
+        draft: () => clone(DS_DRAFT),
+        monsters: () => [{ id: '60000011', label: 'Verdandi' }],
+      };
+      return d;
+    };
+    const save = (videos: V[], fake: GuidesDeps) =>
+      saveGuide(
+        'dimensional-singularity',
+        'verdandi-light',
+        {
+          draft: { intro: { en: 'Intro' }, versions: [dsVersion(videos)] },
+          meta: metaOf(DS),
+          was: { draft: clone(DS_DRAFT), meta: metaOf(DS) },
+        },
+        fake,
+      );
+    const yt = (id: string, ex?: string): V => ({
+      platform: 'youtube',
+      id,
+      title: id,
+      ...(ex ? { ex } : {}),
+    });
+
+    it('la donnée : Verdandi porte plusieurs combinaisons, `healer` n’en est pas une', () => {
+      expect(COMBOS.length).toBeGreaterThan(1);
+      expect(COMBOS).not.toContain('healer');
+    });
+
+    it('un `ex` qui n’est pas une cible connue : refusé, situé, rien n’est écrit', async () => {
+      const { calls, fake } = dsDeps();
+      const r = await save([PRE, yt('a', 'banana')], fake);
+      expect(r.ok).toBe(false);
+      expect(r.refused).toEqual([
+        {
+          version: '',
+          tab: 'videos',
+          index: 1,
+          field: 'ex',
+          reason: expect.stringContaining("« banana » n'est pas une cible d'EX Buff connue"),
+        },
+      ]);
+      expect(calls.save).toEqual([]);
+      expect(calls.git).toEqual([]);
+    });
+
+    it('plusieurs vidéos d’une même combinaison : permises, écrites avec leur `ex`', async () => {
+      const { calls, fake, refreshed } = dsDeps();
+      const videos = [PRE, yt('a', COMBOS[0]), yt('b', COMBOS[0]), yt('c', COMBOS[1])];
+      const r = await save(videos, fake);
+      expect(r.refused).toEqual([]);
+      expect(r.ok).toBe(true);
+      expect(calls.save[0].versions[0].videos).toEqual(videos);
+      // Le reste du flux ne change pas : le cache des vidéos, UN commit `chore(guides): …`.
+      expect(refreshed.n).toBe(1);
+      expect(calls.git.map(([, m]) => m)).toEqual([
+        'chore(guides): dimensional-singularity/verdandi-light',
+      ]);
+    });
+
+    it('la même vidéo deux fois (même plateforme, même id) : refusée', async () => {
+      const { calls, fake } = dsDeps();
+      const r = await save([PRE, yt('a', COMBOS[0]), yt('a', COMBOS[1])], fake);
+      expect(r.refused).toEqual([
+        {
+          version: '',
+          tab: 'videos',
+          index: 2,
+          reason: 'vidéo en double : youtube a (déjà en position 2)',
+        },
+      ]);
+      expect(calls.save).toEqual([]);
+    });
+
+    it('une cible connue sortie de la rotation du boss : GARDÉE', async () => {
+      const { calls, fake } = dsDeps();
+      const r = await save([PRE, yt('g', 'healer')], fake);
+      expect(r.ok).toBe(true);
+      expect(calls.save[0].versions[0].videos[1]).toEqual(yt('g', 'healer'));
+    });
+
+    it('`ex` hors d’une catégorie DS : refusé', async () => {
+      const { calls, fake } = deps();
+      const draft = clone(JC_DRAFT);
+      (draft.versions[0].videos[0] as V).ex = 'fire';
+      const r = await saveGuide(
+        'joint-challenge',
+        'annihilator',
+        { draft, meta: metaOf(JC), was: wasOf(JC) },
+        fake,
+      );
+      expect(r.refused).toEqual([
+        {
+          version: '2026-10',
+          tab: 'videos',
+          index: 0,
+          field: 'ex',
+          reason: 'ex : réservé aux guides Dimensional Singularity',
+        },
+      ]);
+      expect(calls.save).toEqual([]);
+    });
+
+    it('guideDraftState : les combinaisons de chaque boss de la rotation, dérivées de la donnée', async () => {
+      const { fake } = dsDeps();
+      const s = (await guideDraftState('dimensional-singularity', 'verdandi-light', fake)) as {
+        options: {
+          exSlots: Record<string, { target: string; label: string; icon: string }[]>;
+          exTargets: string[];
+        };
+      };
+      expect(s.options.exSlots['60000011'].map((x) => x.target)).toEqual(COMBOS);
+      expect(s.options.exSlots['60000011'][0].icon).toMatch(
+        /^\/images\/ui\/(elem|class)\/IG_Turn_/,
+      );
+      expect(s.options.exTargets).toContain('healer');
+    });
+
+    it('guidesOverview : la couverture par boss, une combinaison couverte dès une vidéo', () => {
+      const { fake } = dsDeps();
+      fake.draft = () => ({
+        intro: { en: 'Intro' },
+        versions: [dsVersion([PRE, yt('a', COMBOS[0]), yt('b', COMBOS[0]), yt('g', 'healer')])],
+      });
+      const row = guidesOverview(fake).categories[0].guides[0];
+      expect(row.ex).toMatchObject({ covered: 1, total: COMBOS.length });
+      expect(row.ex!.slots.map((x) => [x.target, x.videos])).toEqual(
+        COMBOS.map((t, i) => [t, i === 0 ? 2 : 0]),
+      );
+      // Hors DS, pas de couverture.
+      expect(
+        guidesOverview(deps().fake).categories.every((c) => c.guides.every((g) => !g.ex)),
+      ).toBe(true);
     });
   });
 });

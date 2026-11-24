@@ -6,9 +6,12 @@ import { guideShareImage, readGuideFile, type GuideContentProps } from '@/lib/da
 import { resolveSectionTitle, type SectionTitle } from '@/lib/data/guide-sections';
 import { BossPanel } from '@/components/guides/BossPanel';
 import SingularityAppearances from '@/components/guides/SingularityExBuff';
+import SingularityVideos, {
+  type SingularityVideoItem,
+} from '@/components/guides/SingularityVideos';
 import { TacticalTips } from '@/components/guides/TacticalTips';
 import { RecommendedCharacters } from '@/components/guides/RecommendedCharacters';
-import { MultiVideoEmbed, type VideoItem } from '@/components/ui/MultiVideoEmbed';
+import { MultiVideoEmbed } from '@/components/ui/MultiVideoEmbed';
 import { VideoJsonLd } from '@/components/seo/VideoJsonLd';
 
 /** Une section de conseils : ce qui la caractérise + ses points. */
@@ -24,7 +27,11 @@ export interface BossGuideContent {
   intro: LocalizedText & { en: string };
   tips?: TipsSection[];
   teams?: TeamSection[];
-  videos?: VideoItem[];
+  /**
+   * `ex` (Dimensional Singularity seulement) : la cible de l'EX Buff que la
+   * vidéo affronte — cf. `SingularityVideos`. Absent : une vidéo d'avant l'EX Buff.
+   */
+  videos?: SingularityVideoItem[];
 }
 
 /**
@@ -92,7 +99,16 @@ export async function BossGuide({ lang, guide }: GuideContentProps) {
         />
       ))}
 
-      {content.videos?.length ? (
+      {/* Singularity : une galerie par combinaison boss × EX Buff (elle se tait
+          sans vidéo ni combinaison) ; le JSON-LD reçoit toutes les vidéos. */}
+      {guide.category === 'dimensional-singularity' && guide.bossId ? (
+        <>
+          <SingularityVideos monsterId={guide.bossId} videos={content.videos ?? []} lang={lang} />
+          {content.videos?.length ? (
+            <VideoJsonLd videos={content.videos} thumbnail={guideShareImage(guide)} />
+          ) : null}
+        </>
+      ) : content.videos?.length ? (
         <section className="space-y-2">
           <h2 className="text-content-strong text-xl font-bold">{t('guides.combat_footage')}</h2>
           <MultiVideoEmbed byLabel={t('video.by')} videos={content.videos} />

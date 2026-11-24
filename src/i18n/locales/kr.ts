@@ -801,6 +801,12 @@ const kr: Record<TranslationKey, string> = {
   'guides.singularity.appearances.title': '향후 등장',
   'guides.singularity.appearances.tagline': '향후 {weeks}주(로테이션 한 주기).',
   'guides.singularity.appearances.ex_note': 'EX 버프는 보스가 아니라 슬롯마다 정해집니다.',
+  'guides.singularity.videos.title': 'EX 버프별 영상',
+  'guides.singularity.videos.tagline':
+    '로테이션에서 이 보스가 가진 EX 버프마다 한 장. 선택하면 해당 영상을 재생합니다.',
+  'guides.singularity.videos.none': '아직 영상이 없습니다',
+  'guides.singularity.videos.count': '영상 {count}개',
+  'guides.singularity.videos.before_ex': 'EX 버프 이전',
   // Guide landing — categories index
   'guides.counter': '가이드 {guides}개 · 카테고리 {categories}개',
   'guides.count.one': '가이드 {count}개',

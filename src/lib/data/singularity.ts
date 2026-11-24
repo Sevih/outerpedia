@@ -285,6 +285,99 @@ export function singularityExBuffTarget(
   return klass ? { kind: 'class', id: klass } : undefined;
 }
 
+/**
+ * Les cibles d'EX Buff connues, dans l'ordre d'affichage : les éléments puis les
+ * classes, dans l'ordre de `sys.element.*` / `sys.class.*`. C'est le vocabulaire
+ * du champ `ex` d'une vidéo de guide (cf. `SingularityVideoItem`) : la CIBLE, pas
+ * l'id de groupe du buff (`"1"`…`"8"`), qu'un patch peut renuméroter.
+ */
+export const SINGULARITY_EX_TARGETS: readonly string[] = [
+  'fire',
+  'water',
+  'earth',
+  'light',
+  'dark',
+  'defender',
+  'striker',
+  'ranger',
+  'mage',
+  'healer',
+];
+
+/** `value` est-il une cible d'EX Buff connue ? */
+export function isSingularityExTarget(value: unknown): value is string {
+  return typeof value === 'string' && SINGULARITY_EX_TARGETS.includes(value);
+}
+
+/** Une combinaison boss × EX Buff : la cible (sa clé, `target.id`) et le buff du jeu. */
+export interface SingularityExCombo {
+  target: SingularityExBuffTarget;
+  buff: SingularityExBuff;
+}
+
+/**
+ * Les combinaisons boss × EX Buff du monstre `monsterId` (le `bossId` d'un
+ * guide), DÉRIVÉES des groupes : chaque créneau dont le boss (`monsters[0]`) est
+ * ce monstre apporte la cible de son buff, une fois par cible.
+ *
+ * Ordre : celui de la CIBLE (`SINGULARITY_EX_TARGETS`, éléments puis classes),
+ * pas celui d'apparition dans le cycle — l'ordre du cycle dépend de l'ancre et
+ * des groupes, qu'un patch déplace ; celui de la cible ne bouge pas, et la
+ * galerie d'un boss garde ses cartes à leur place d'une semaine à l'autre.
+ * Un buff sans cible connue (`singularityExBuffTarget` → `undefined`) ne donne
+ * pas de combinaison. Vide sans `exBuff` dans la donnée ou hors rotation.
+ */
+export function singularityExCombos(monsterId: string): SingularityExCombo[] {
+  const byTarget = new Map<string, SingularityExCombo>();
+  for (const group of GROUPS)
+    for (const boss of group.bosses) {
+      if (boss.monsters[0] !== monsterId) continue;
+      const buff = singularityExBuffOf(boss);
+      const target = buff && singularityExBuffTarget(buff);
+      if (buff && target && !byTarget.has(target.id)) byTarget.set(target.id, { target, buff });
+    }
+  const rank = (id: string) => {
+    const i = SINGULARITY_EX_TARGETS.indexOf(id);
+    return i < 0 ? SINGULARITY_EX_TARGETS.length : i;
+  };
+  return [...byTarget.values()].sort((a, b) => rank(a.target.id) - rank(b.target.id));
+}
+
+/** La combinaison ACTIVE d'un boss : celle de son jour dans la semaine affichée. */
+export interface SingularityActiveCombo extends SingularityExCombo {
+  /** Date ISO `YYYY-MM-DD` (UTC) du jour de combat. */
+  date: string;
+  state: SingularityDay['state'];
+  /** `true` en phase de récompense : la semaine est la PROCHAINE (cf. `SingularityState`). */
+  betweenWeeks: boolean;
+}
+
+/**
+ * La combinaison active du monstre `monsterId` à l'instant `now` : celle de son
+ * jour dans la semaine que donne `singularityStateAt(now)` (la semaine en
+ * cours, ou la suivante pendant les jours de récompense). Un boss présent deux
+ * fois dans la semaine (un groupe à moins de boss que de jours, cf.
+ * `bossesByDay`) : son jour d'aujourd'hui, sinon le premier à venir, sinon le
+ * dernier passé. `undefined` quand le boss n'est pas de la semaine ou que son
+ * créneau n'a pas de buff à cible connue. Pure : `now` injecté.
+ */
+export function singularityActiveComboAt(
+  monsterId: string,
+  now: Date,
+): SingularityActiveCombo | undefined {
+  const state = singularityStateAt(now);
+  const days = state.week.days.filter((d) => d.boss.monsters[0] === monsterId);
+  const day =
+    days.find((d) => d.state === 'today') ??
+    days.find((d) => d.state === 'upcoming') ??
+    days[days.length - 1];
+  if (!day) return undefined;
+  const buff = singularityExBuffOf(day.boss);
+  const target = buff && singularityExBuffTarget(buff);
+  if (!buff || !target) return undefined;
+  return { target, buff, date: day.date, state: day.state, betweenWeeks: state.betweenWeeks };
+}
+
 /** Une apparition à venir d'un boss dans la rotation. */
 export interface SingularityAppearance {
   /** Date ISO `YYYY-MM-DD` (UTC) du jour de combat. */

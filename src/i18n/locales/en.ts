@@ -830,6 +830,12 @@ const en = {
   'guides.singularity.appearances.title': 'Upcoming appearances',
   'guides.singularity.appearances.tagline': 'The next {weeks} weeks, one full rotation cycle.',
   'guides.singularity.appearances.ex_note': 'The EX Buff depends on the slot, not on the boss.',
+  'guides.singularity.videos.title': 'Videos by EX Buff',
+  'guides.singularity.videos.tagline':
+    'One card per EX Buff this boss carries in the rotation; select one to watch its runs.',
+  'guides.singularity.videos.none': 'No video yet',
+  'guides.singularity.videos.count': '{count} videos',
+  'guides.singularity.videos.before_ex': 'Before the EX Buff',
   // Guide landing — categories index
   'guides.counter': '{guides} guides · {categories} categories',
   'guides.count.one': '{count} GUIDE',

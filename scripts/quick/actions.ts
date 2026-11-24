@@ -109,6 +109,12 @@ import {
 import { catalogOptions, listItemEntries } from '@/lib/data/item-catalog';
 import { rankItemMatches } from '@/lib/data/item-search';
 import { isVideoPlatform, resolveVideo } from '@/lib/admin/video-add';
+import {
+  SINGULARITY_EX_TARGETS,
+  isSingularityExTarget,
+  singularityExCombos,
+  singularityGroups,
+} from '@/lib/data/singularity';
 import { fetchMeta, searchOfficial } from '@/lib/admin/youtube';
 import {
   characterKitCards,
@@ -5743,6 +5749,52 @@ export interface GuideOverviewRow {
   editable: boolean;
   /** Son palier (`meta.tier`, les guides généraux) : la page les range sous lui. */
   tier?: string;
+  /**
+   * La couverture vidéo d'un guide dimensional-singularity : ses combinaisons
+   * boss × EX Buff (`GuideExSlot`) et, pour chacune, son nombre de vidéos — une
+   * combinaison est couverte dès qu'elle en a une.
+   */
+  ex?: { slots: (GuideExSlot & { videos: number })[]; covered: number; total: number };
+}
+
+/**
+ * Une combinaison boss × EX Buff telle que la page la montre : la cible (la
+ * valeur du `ex` d'une vidéo), son nom anglais, son icône (chemin relatif à
+ * `imgBase`) et le texte du jeu (anglais).
+ */
+export interface GuideExSlot {
+  target: string;
+  kind: 'element' | 'class';
+  label: string;
+  icon: string;
+  desc: string;
+}
+
+const capitalize = (s: string): string => s.charAt(0).toUpperCase() + s.slice(1);
+
+/** Les combinaisons boss × EX Buff d'un monstre (`singularityExCombos`), pour la page. */
+export function guideExSlots(bossId: string | undefined): GuideExSlot[] {
+  if (!bossId) return [];
+  return singularityExCombos(bossId.split('@')[0]).map(({ target, buff }) => ({
+    target: target.id,
+    kind: target.kind,
+    label: capitalize(target.id),
+    icon:
+      target.kind === 'element'
+        ? `/images/ui/elem/IG_Turn_Element_${capitalize(target.id)}.webp`
+        : `/images/ui/class/IG_Turn_Class_${capitalize(target.id)}.webp`,
+    desc: buff.desc.en ?? '',
+  }));
+}
+
+/** La couverture d'un brouillon de guide DS : chaque combinaison du boss, ses vidéos comptées. */
+function guideExCoverage(draft: GuideDraft): NonNullable<GuideOverviewRow['ex']> {
+  const v = draft.versions[0];
+  const slots = guideExSlots(v?.bossId).map((slot) => ({
+    ...slot,
+    videos: (v?.videos ?? []).filter((x) => x.ex === slot.target).length,
+  }));
+  return { slots, covered: slots.filter((x) => x.videos > 0).length, total: slots.length };
 }
 
 /** Une catégorie de la vue d'ensemble, ses guides triés comme sur le site. */
@@ -5885,6 +5937,9 @@ export function guidesOverview(disk: GuidesDisk = GUIDES_DEPS, withHidden = fals
     battle: battleOf(g),
     editable: editableRow(g),
     ...(g.tier ? { tier: g.tier } : {}),
+    ...(guideSpec(g.category)?.exVideos
+      ? { ex: guideExCoverage(disk.draft(g.category, g.slug)) }
+      : {}),
   });
   const alive = new Set(categoriesWithVisibleGuide(GUIDE_CATEGORY_SLUGS, all));
   const categories: GuideOverviewCategory[] = [];
@@ -5981,6 +6036,18 @@ export async function guideDraftState(
       groups: usesGroup ? disk.groups(spec.groupModes) : [],
       dungeons: spec.monster === 'dungeons-meta' ? disk.dungeons() : [],
       monsters: spec.monster === 'bossId-meta' ? disk.monsters() : [],
+      // Les combinaisons boss × EX Buff de chaque boss de la rotation : la page
+      // suit le boss choisi au Combat sans relire le serveur.
+      ...(spec.exVideos
+        ? {
+            exSlots: Object.fromEntries(
+              [
+                ...new Set(singularityGroups().flatMap((g) => g.bosses.map((b) => b.monsters[0]))),
+              ].map((id) => [id, guideExSlots(id)]),
+            ),
+            exTargets: [...SINGULARITY_EX_TARGETS],
+          }
+        : {}),
       roster: disk.roster(),
       ...(raid ? { raid } : {}),
     },
@@ -6066,6 +6133,48 @@ function cleanVideos(raw: unknown): VideoItem[] | string {
       return `videos : « ${String(platform)} » n'est pas une plateforme connue`;
   }
   return raw as VideoItem[];
+}
+
+/**
+ * Les écarts du champ `ex` des vidéos d'une version (la cible de l'EX Buff,
+ * cf. `SingularityVideos`) : hors d'une catégorie `exVideos`, il n'a pas de
+ * sens ; dedans, c'est une cible connue (`SINGULARITY_EX_TARGETS`) — une cible
+ * qui a quitté la rotation du boss reste VALIDE (la vidéo est gardée, le site la
+ * range à part). Plusieurs vidéos d'une même cible sont permises (plusieurs
+ * stratégies) ; la même vidéo deux fois (même plateforme, même id) ne l'est pas.
+ */
+function videoExIssues(
+  videos: readonly (VideoItem & { ex?: unknown })[],
+  spec: CatSpec,
+): { index: number; field?: string; reason: string }[] {
+  const out: { index: number; field?: string; reason: string }[] = [];
+  const seen = new Map<string, number>();
+  videos.forEach((v, i) => {
+    if (v.ex !== undefined) {
+      if (!spec.exVideos)
+        out.push({
+          index: i,
+          field: 'ex',
+          reason: 'ex : réservé aux guides Dimensional Singularity',
+        });
+      else if (!isSingularityExTarget(v.ex))
+        out.push({
+          index: i,
+          field: 'ex',
+          reason: `ex : « ${String(v.ex)} » n'est pas une cible d'EX Buff connue (${SINGULARITY_EX_TARGETS.join(', ')})`,
+        });
+    }
+    if (!spec.exVideos) return;
+    const key = `${v.platform} ${v.id}`;
+    const first = seen.get(key);
+    if (first !== undefined)
+      out.push({
+        index: i,
+        reason: `vidéo en double : ${key} (déjà en position ${first + 1})`,
+      });
+    else seen.set(key, i);
+  });
+  return out;
 }
 
 /**
@@ -6225,7 +6334,13 @@ function cleanGuideVersion(
   if (typeof videos === 'string') {
     refuse({ tab: 'videos', reason: videos });
     ok = false;
-  } else out.videos = videos;
+  } else {
+    out.videos = videos;
+    for (const issue of videoExIssues(videos, spec)) {
+      refuse({ tab: 'videos', ...issue });
+      ok = false;
+    }
+  }
   if (spec.notes === false && out.notes.length) out.notes = [];
   if (spec.raid && raid) {
     const onDisk = raid.disk(out.key);

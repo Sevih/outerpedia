@@ -420,6 +420,42 @@ function rowsHtml(c) {
     .join('');
 }
 
+/**
+ * La couverture vidéo des guides Dimensional Singularity, au-dessus de leur
+ * table : par boss, ses combinaisons boss × EX Buff couvertes (« n/m », une
+ * vidéo suffit) et celles qui n'ont encore rien ; le boss ouvre son guide sur
+ * le sous-onglet Vidéos. Les plus démunis d'abord.
+ */
+function coverHtml(c) {
+  const rows = c.guides.filter((g) => g.ex?.total);
+  if (!rows.length) return '';
+  const covered = rows.reduce((n, g) => n + g.ex.covered, 0);
+  const total = rows.reduce((n, g) => n + g.ex.total, 0);
+  const sorted = [...rows].sort((a, b) => b.ex.total - b.ex.covered - (a.ex.total - a.ex.covered));
+  return `<div class="card gd-cover" data-cover="${esc(c.slug)}">
+      <div class="card-head"><strong>Couverture vidéo EX Buff</strong><span class="badge ${covered === total ? 'ok' : 'warn'}">${covered} / ${total} combinaisons</span><span class="lbl">une combinaison boss × EX Buff est couverte dès qu’elle a une vidéo</span></div>
+      <div class="scroll"><table>
+        <thead><tr><th>Boss</th><th>Couvertes</th><th>Sans vidéo</th></tr></thead>
+        <tbody>${sorted
+          .map((g) => {
+            const missing = g.ex.slots.filter((s) => !s.videos);
+            const tone = !missing.length ? 'ok' : g.ex.covered ? 'warn' : 'refused';
+            return `<tr data-slug="${esc(g.slug)}"><td><button class="gd-open" type="button" data-cat="${esc(c.slug)}" data-slug="${esc(g.slug)}" data-sub="videos">${esc(g.title)}</button></td><td><span class="badge ${tone}">${g.ex.covered}/${g.ex.total}</span></td><td>${
+              missing.length
+                ? `<div class="rws">${missing
+                    .map(
+                      (s) =>
+                        `<span class="rw"><img class="ico" src="${srcAt(s.icon)}" alt="" aria-hidden="true" width="24" height="24" />${esc(s.label)}</span>`,
+                    )
+                    .join('')}</div>`
+                : '<span class="lbl">—</span>'
+            }</td></tr>`;
+          })
+          .join('')}</tbody>
+      </table></div>
+    </div>`;
+}
+
 /** La carte d'une catégorie : son en-tête, la table de ses guides. */
 const catHtml = (c) => `<div class="card gd-cat" data-cat="${esc(c.slug)}">
       <div class="card-head"><strong>${esc(c.label)}</strong><span class="lbl mono">${esc(c.slug)}</span><span class="badge off">${plural(c.guides.length, 'guide')}</span>${
@@ -440,7 +476,7 @@ function overviewHtml() {
   const q = query.trim();
   if (!q) {
     const c = overview.categories.find((x) => x.slug === cat);
-    return c ? catHtml(c) : '<div class="empty">Aucune catégorie à ouvrir.</div>';
+    return c ? coverHtml(c) + catHtml(c) : '<div class="empty">Aucune catégorie à ouvrir.</div>';
   }
   const cats = overview.categories
     .map((c) => ({ ...c, guides: c.guides.filter((g) => starts(g.title, q) || starts(g.slug, q)) }))
@@ -546,7 +582,10 @@ $('gd-hidden').onchange = () => {
 };
 $('gd-list').onclick = (e) => {
   const b = e.target.closest('.gd-open');
-  if (b) choose(b.dataset.cat, b.dataset.slug);
+  if (!b) return;
+  // La couverture EX Buff ouvre le guide sur ses Vidéos.
+  if (b.dataset.sub) wantedSub = b.dataset.sub;
+  choose(b.dataset.cat, b.dataset.slug);
 };
 
 // ------------------------------------------------------ l'en-tête du guide
@@ -1125,8 +1164,110 @@ const vidAdd = videoAdder({
   },
 });
 
+// Dimensional Singularity (`spec.exVideos`) : les vidéos se rangent par
+// combinaison boss × EX Buff (`ex` = la cible du buff). Un emplacement par
+// combinaison du boss choisi au Combat (`options.exSlots`, dérivé de la
+// rotation) : ses vidéos (✕ chacune, plusieurs permises) et SON formulaire
+// d'ajout, qui pose la vidéo avec cet `ex`. Dessous, les vidéos dont la cible a
+// quitté la rotation du boss (gardées, signalées), puis celles d'avant l'EX
+// Buff (sans `ex`) — le choix d'une combinaison reste possible sur chacune,
+// sans y inciter.
+const exAdders = new Map(); // cible → son `videoAdder`, branché une fois sur le panneau
+function exAdder(target) {
+  let adder = exAdders.get(target);
+  if (adder) return adder;
+  adder = videoAdder({
+    root: $('gd-panel'),
+    id: `gd-va-${target}`,
+    label: true,
+    has: (id) => Boolean(v()?.videos.some((vid) => vid.id === id)),
+    scope: () => v(),
+    onAdd: (vid, label) => {
+      v().videos.push({
+        platform: vid.platform,
+        id: vid.id,
+        title: vid.title,
+        ...(vid.author ? { author: vid.author } : {}),
+        ...(label ? { label } : {}),
+        ex: target,
+      });
+      forgive('videos');
+      render();
+      $('gd-panel').querySelector(`#gd-va-${target} [data-va="url"]`)?.focus();
+    },
+  });
+  exAdders.set(target, adder);
+  return adder;
+}
+/** Les combinaisons du boss de la version montrée ; vide hors DS ou sans EX Buff dans la donnée. */
+const exSlots = () => (spec().exVideos ? (sheet.options.exSlots?.[v()?.bossId] ?? []) : []);
+
+/** Une ligne de vidéo : titre · auteur · plateforme · id · libellé · ce que l'appelant ajoute · ✕, puis son refus. */
+function videoRow(vid, i, more = '') {
+  const bad = refusedAt('videos', i);
+  return `<li${bad.length ? ' class="ko"' : ''}><span class="gd-vt">${esc(vid.title || vid.id)}</span><span class="lbl">${esc([vid.author, vid.platform ?? 'youtube', vid.id].filter(Boolean).join(' · '))}</span>${
+    vid.label ? `<span class="badge off">${esc(vid.label)}</span>` : ''
+  }${more}<button class="btn icon" type="button" data-act="del-video" data-i="${i}" title="Retirer" aria-label="Retirer ${esc(vid.title || vid.id)}">✕</button>${bad.length ? errHtml(bad) : ''}</li>`;
+}
+
+/** Le choix discret d'une combinaison pour une vidéo rangée hors des emplacements. */
+function exSelect(vid, i, slots) {
+  const gone = vid.ex && !slots.some((s) => s.target === vid.ex);
+  return `<label class="gd-vex"><span class="lbl">combinaison</span><select data-vex="${i}" aria-label="Combinaison de ${esc(vid.title || vid.id)}"><option value="">— aucune</option>${
+    gone ? `<option value="${esc(vid.ex)}" selected>${esc(vid.ex)} (disparue)</option>` : ''
+  }${slots.map((s) => `<option value="${esc(s.target)}"${vid.ex === s.target ? ' selected' : ''}>EX · ${esc(s.label)}</option>`).join('')}</select></label>`;
+}
+
+function exVideosHtml(slots) {
+  const x = v();
+  const all = x.videos.map((vid, i) => ({ vid, i }));
+  const known = new Set(slots.map((s) => s.target));
+  const gone = all.filter(({ vid }) => vid.ex !== undefined && !known.has(vid.ex));
+  const before = all.filter(({ vid }) => vid.ex === undefined);
+  const slotHtml = (slot) => {
+    const mine = all.filter(({ vid }) => vid.ex === slot.target);
+    return `<div class="card gd-card gd-exslot" data-card="ex-${esc(slot.target)}">
+    <div class="card-head"><img class="gd-exico" src="${srcAt(slot.icon)}" alt="" aria-hidden="true" width="24" height="24" /><strong>EX · ${esc(slot.label)}</strong><span class="lbl">${esc(slot.desc)}</span>${
+      mine.length
+        ? `<span class="badge ok">${plural(mine.length, 'vidéo')}</span>`
+        : '<span class="badge warn">aucune vidéo</span>'
+    }</div>
+    <div class="gd-body">${
+      mine.length
+        ? `<ul class="gd-videos">${mine.map(({ vid, i }) => videoRow(vid, i)).join('')}</ul>`
+        : ''
+    }${exAdder(slot.target).html()}</div>
+  </div>`;
+  };
+  return `<div class="gd-stack">${tabErr('videos')}<p class="lbl">${plural(slots.length, 'combinaison')} boss × EX Buff, dérivées de la rotation : chacune porte ses vidéos (plusieurs permises), elles partent avec « Enregistrer ».</p>${slots.map(slotHtml).join('')}${
+    gone.length
+      ? `<div class="card gd-card" data-card="ex-gone">
+    <div class="card-head"><strong>Combinaison disparue de la rotation</strong><span class="badge warn">${plural(gone.length, 'vidéo')}</span><span class="lbl">gardées ; le site les montre sous la galerie</span></div>
+    <div class="gd-body"><ul class="gd-videos">${gone
+      .map(({ vid, i }) =>
+        videoRow(
+          vid,
+          i,
+          `<span class="badge warn">ex · ${esc(vid.ex)}</span>${exSelect(vid, i, slots)}`,
+        ),
+      )
+      .join('')}</ul></div>
+  </div>`
+      : ''
+  }${
+    before.length
+      ? `<div class="card gd-card" data-card="ex-before">
+    <div class="card-head"><strong>Vidéos d’avant l’EX Buff</strong><span class="badge off">${before.length}</span><span class="lbl">tournées avant le patch du 20/11/2026 ; le site les montre sous la galerie</span></div>
+    <div class="gd-body"><ul class="gd-videos">${before.map(({ vid, i }) => videoRow(vid, i, exSelect(vid, i, slots))).join('')}</ul></div>
+  </div>`
+      : ''
+  }</div>`;
+}
+
 function videosHtml() {
   const x = v();
+  const slots = exSlots();
+  if (slots.length) return exVideosHtml(slots);
   return `<div class="gd-stack"><div class="card gd-card" data-card="videos">
     <div class="card-head"><strong>Vidéos</strong><span class="badge off">${x.videos.length}</span></div>
     <div class="gd-body">${
@@ -3136,6 +3277,17 @@ $('gd-panel').oninput = (e) => {
 };
 $('gd-panel').onchange = (e) => {
   if (!sheet) return;
+  // La combinaison d'une vidéo rangée hors des emplacements (DS) : `ex` posé ou retiré.
+  const vex = !gen && e.target.closest('select[data-vex]');
+  if (vex) {
+    const vid = v()?.videos[Number(vex.dataset.vex)];
+    if (!vid) return;
+    if (vex.value) vid.ex = vex.value;
+    else delete vid.ex;
+    forgive('videos');
+    render();
+    return;
+  }
   // Un `select` ou une case d'un guide général : `change` seulement, pas `input`.
   const nude = e.target.closest('select[data-gen], input[type="checkbox"][data-gen]');
   if (nude) return genInput(nude);
@@ -3581,6 +3733,7 @@ async function load(cat, slug, keep = false) {
     adding = false;
     trOpen.clear();
     vidAdd.reset();
+    for (const adder of exAdders.values()) adder.reset();
     raidVid.reset();
     rTeam = 0;
     rVid = '';

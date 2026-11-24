@@ -783,6 +783,11 @@ const zh: Record<TranslationKey, string> = {
   'guides.singularity.appearances.title': '后续出现',
   'guides.singularity.appearances.tagline': '未来{weeks}周（一个完整轮换周期）。',
   'guides.singularity.appearances.ex_note': 'EX增益取决于时段，而非Boss。',
+  'guides.singularity.videos.title': '按EX增益分类的视频',
+  'guides.singularity.videos.tagline': '该Boss在轮换中的每种EX增益各一张卡片，选择后播放对应视频。',
+  'guides.singularity.videos.none': '暂无视频',
+  'guides.singularity.videos.count': '{count} 个视频',
+  'guides.singularity.videos.before_ex': 'EX增益实装前',
   // Guide landing — categories index
   'guides.counter': '{guides} 篇攻略 · {categories} 个分类',
   'guides.count.one': '{count} 篇攻略',
