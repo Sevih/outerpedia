@@ -4,13 +4,43 @@
     "date": "2026-11-28",
     "type": "news",
     "title": {
-      "en": "OUTERPLANE Player Survey: 1,500 Free Ether"
+      "en": "OUTERPLANE Player Survey: 1,500 Free Ether",
+      "jp": "OUTERPLANE プレイヤーアンケート：イーサ1,500をプレゼント",
+      "kr": "OUTERPLANE 플레이어 설문조사: 이더 1,500 무료 지급",
+      "zh": "OUTERPLANE 玩家调查：1,500 免费以太币",
+      "fr": "Sondage auprès des joueurs d'OUTERPLANE : 1 500 Ether gratuits",
+      "es": "Encuesta para jugadores de OUTERPLANE: 1.500 Ether gratis"
     },
     "content": {
       "en": [
         "The OUTERPLANE team wants your feedback on the game and its future. Survey open until 12/31, reward: 1,500 Free Ether.",
         "The reward code is already on our Promo Codes page, but please take a few minutes to answer: it's your direct line to the devs.",
         "🔗 [Survey (Global)](https://docs.google.com/forms/d/e/1FAIpQLSdLVZm0J18bVoUZkdESMWuk1D0RlbpFMj_c1IDxewLNYePWoQ/viewform) · [問卷連結 (繁體中文)](https://docs.google.com/forms/d/e/1FAIpQLSfaZhTTXDK1clTs3_BEtlFIKeCHBQnZrdcS4vmcBkySeSzMVQ/viewform)"
+      ],
+      "jp": [
+        "OUTERPLANEチームでは、ゲームおよび今後の展開について皆様からのご意見をお待ちしております。アンケートは12月31日まで実施中です。報酬：イーサ1,500をプレゼント。",
+        "特典コードはすでに「プロモーションコード」ページに掲載されていますが、ぜひ数分お時間を割いてアンケートにご回答ください。これは開発チームと直接つながる貴重な機会です。",
+        "🔗 [アンケート（グローバル）](https://docs.google.com/forms/d/e/1FAIpQLSdLVZm0J18bVoUZkdESMWuk1D0RlbpFMj_c1IDxewLNYePWoQ/viewform) · [アンケートリンク（繁体字中国語）](https://docs.google.com/forms/d/e/1FAIpQLSfaZhTTXDK1clTs3_BEtlFIKeCHBQnZrdcS4vmcBkySeSzMVQ/viewform)"
+      ],
+      "kr": [
+        "OUTERPLANE 팀은 게임과 향후 계획에 대한 여러분의 의견을 듣고자 합니다. 설문조사는 12월 31일까지 진행되며, 보상으로는 이더 1,500을 드립니다.",
+        "보상 코드는 이미 저희 ‘프로모션 코드’ 페이지에 게시되어 있지만, 잠시 시간을 내어 설문조사에 응답해 주시기 바랍니다. 이는 개발진과 직접 소통할 수 있는 기회입니다.",
+        "🔗 [설문조사 (글로벌)](https://docs.google.com/forms/d/e/1FAIpQLSdLVZm0J18bVoUZkdESMWuk1D0RlbpFMj_c1IDxewLNYePWoQ/viewform) · [설문조사 링크 (번체 중국어)](https://docs.google.com/forms/d/e/1FAIpQLSfaZhTTXDK1clTs3_BEtlFIKeCHBQnZrdcS4vmcBkySeSzMVQ/viewform)"
+      ],
+      "zh": [
+        "OUTERPLANE 团队希望听取大家对游戏及其未来发展的反馈。问卷调查截止至 12 月 31 日，奖励：1,500 免费以太币。",
+        "奖励代码已经发布在我们的“促销代码”页面上，但请花几分钟时间回答以下问题：这是您与开发团队直接沟通的渠道。",
+        "🔗 [调查（全球）](https://docs.google.com/forms/d/e/1FAIpQLSdLVZm0J18bVoUZkdESMWuk1D0RlbpFMj_c1IDxewLNYePWoQ/viewform) · [问卷链接（繁体中文）](https://docs.google.com/forms/d/e/1FAIpQLSfaZhTTXDK1clTs3_BEtlFIKeCHBQnZrdcS4vmcBkySeSzMVQ/viewform)"
+      ],
+      "fr": [
+        "L'équipe d'OUTERPLANE souhaite connaître votre avis sur le jeu et son avenir. Le sondage est ouvert jusqu'au 31 décembre. Récompense : 1 500 Ether gratuits.",
+        "Le code de récompense figure déjà sur notre page « Codes promotionnels », mais merci de prendre quelques minutes pour répondre : c'est votre lien direct avec les développeurs.",
+        "🔗 [Sondage (mondial)](https://docs.google.com/forms/d/e/1FAIpQLSdLVZm0J18bVoUZkdESMWuk1D0RlbpFMj_c1IDxewLNYePWoQ/viewform) · [Lien vers le questionnaire (chinois traditionnel)](https://docs.google.com/forms/d/e/1FAIpQLSfaZhTTXDK1clTs3_BEtlFIKeCHBQnZrdcS4vmcBkySeSzMVQ/viewform)"
+      ],
+      "es": [
+        "El equipo de OUTERPLANE quiere conocer tu opinión sobre el juego y su futuro. La encuesta estará abierta hasta el 31 de diciembre; recompensa: 1.500 Ether gratis.",
+        "El código de recompensa ya está disponible en nuestra página de códigos promocionales, pero te pedimos que dediques unos minutos a responder: es tu vía directa con los desarrolladores.",
+        "🔗 [Encuesta (global)](https://docs.google.com/forms/d/e/1FAIpQLSdLVZm0J18bVoUZkdESMWuk1D0RlbpFMj_c1IDxewLNYePWoQ/viewform) · [Enlace a la encuesta (chino tradicional)](https://docs.google.com/forms/d/e/1FAIpQLSfaZhTTXDK1clTs3_BEtlFIKeCHBQnZrdcS4vmcBkySeSzMVQ/viewform)"
       ]
     }
   },
