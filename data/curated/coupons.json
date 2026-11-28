@@ -1,5 +1,22 @@
 [
   {
+    "code": "SURVEY1500",
+    "start": "2026-11-28",
+    "end": "2027-01-31",
+    "description": {
+      "SYS_ASSET_FREE_CRYSTAL": "1500"
+    }
+  },
+  {
+    "code": "DEVLETTER2026",
+    "start": "2026-11-27",
+    "end": "2027-01-31",
+    "description": {
+      "21201": "10",
+      "SYS_ASSET_FREE_CRYSTAL": "1500"
+    }
+  },
+  {
     "code": "1STANNIV",
     "start": "2026-11-05",
     "end": "2026-11-30",
