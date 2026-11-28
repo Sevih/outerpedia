@@ -1,5 +1,20 @@
 [
   {
+    "id": "4fba5469",
+    "date": "2026-11-28",
+    "type": "news",
+    "title": {
+      "en": "OUTERPLANE Player Survey: 1,500 Free Ether"
+    },
+    "content": {
+      "en": [
+        "The OUTERPLANE team wants your feedback on the game and its future. Survey open until 12/31, reward: 1,500 Free Ether.",
+        "The reward code is already on our Promo Codes page, but please take a few minutes to answer: it's your direct line to the devs.",
+        "🔗 [Survey (Global)](https://t.co/KxxijqwJ0f) · [問卷連結 (繁體中文)](https://t.co/OgdUxsLmOv)"
+      ]
+    }
+  },
+  {
     "id": "b9005f72",
     "date": "2026-11-20",
     "type": "character",
