@@ -169,15 +169,25 @@ const pvOf = (r) => {
 /**
  * La carte de `/changelog`, d'après `POST /api/changelog/preview` : la vignette
  * (le portrait ou la carte du guide, sinon l'emoji du type), le badge, la date,
- * le titre, les puces en segments (le gras), l'appel du lien — et, en plus de
- * la page, où il mène.
+ * le titre, les puces en segments (le gras, les liens `[libellé](cible)`),
+ * l'appel du lien — et, en plus de la page, où il mène. Un lien externe de
+ * puce s'ouvre dans un nouvel onglet ; un chemin du site n'est pas un lien
+ * ici (quick n'est pas le site) : son libellé, souligné, porte le chemin en
+ * infobulle.
  */
 function pvCard(v) {
   const src = v.image ? (v.image.startsWith('/') ? `${state.imgBase}${v.image}` : v.image) : '';
   const thumb = src
     ? `<img src="${esc(src)}" alt="" aria-hidden="true" width="56" height="56" loading="lazy" />`
     : `<span aria-hidden="true">${esc(v.icon)}</span>`;
-  const seg = (s) => (s.bold ? `<strong>${esc(s.text)}</strong>` : esc(s.text));
+  const txt = (s) => (s.bold ? `<strong>${esc(s.text)}</strong>` : esc(s.text));
+  const seg = (s) => {
+    if (!s.href) return txt(s);
+    const label = s.label.map(txt).join('');
+    return s.external
+      ? `<a class="j-link" href="${esc(s.href)}" target="_blank" rel="noopener noreferrer">${label}</a>`
+      : `<span class="j-link" title="${esc(s.href)}">${label}</span>`;
+  };
   const bullets = v.bullets.length
     ? `<ul>${v.bullets.map((b) => `<li>${b.map(seg).join('')}</li>`).join('')}</ul>`
     : '';
@@ -321,7 +331,7 @@ function sheetHtml(r) {
         )
         .join('')}</div>
     </details>
-    <div class="field"><label for="${fid(r, 'j-en')}">Puces (${esc(en)}) — une par ligne ; **gras**</label><textarea id="${fid(r, 'j-en')}" data-c="${esc(en)}">${esc(r.content[en] ?? '')}</textarea></div>
+    <div class="field"><label for="${fid(r, 'j-en')}">Puces (${esc(en)}) — une par ligne ; **gras**</label><textarea id="${fid(r, 'j-en')}" data-c="${esc(en)}" placeholder="Une puce par ligne — **gras**, liens [libellé](https://…) ou [libellé](/chemin)">${esc(r.content[en] ?? '')}</textarea></div>
     <div class="j-tr"><button class="btn ghost${busy ? ' busy' : ''}" type="button" data-act="translate"${busy ? ' disabled' : ''} title="Traduit le titre et les puces de CETTE entrée vers les cinq autres langues, et les réécrit toutes (DeepL, puis Claude Haiku). Rien ne s’écrit avant « Enregistrer ».">Traduire</button><span class="badge warn" data-stale>${stale(r) ? 'à retraduire' : ''}</span><span class="badge error" data-tr-error>${esc(tr.error.get(r.key) ?? '')}</span></div>
     <details class="j-more"${bullets ? ' open' : ''}>
       <summary><span class="btn ghost sm">Puces — autres langues</span><span class="lbl" data-tally="content">${bullets} / ${langs.length}</span></summary>

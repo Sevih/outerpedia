@@ -4,7 +4,7 @@ import { buildUrl } from '@/lib/site';
 import { getChangelog } from '@/lib/data/changelog';
 import { changelogHref } from '@/components/changelog/presentation';
 import { esc, rfc822 } from '@/lib/rss';
-import { bulletSegments } from '@/lib/changelog-bullets';
+import { bulletSegments, isBulletLink } from '@/lib/changelog-bullets';
 
 /**
  * Flux RSS du JOURNAL DU SITE (page `/changelog`). Route à la RACINE, sous
@@ -21,13 +21,21 @@ export const dynamic = 'force-static';
 
 const LIMIT = 30;
 
-/** Une puce à plat : le texte de ses segments (`bulletSegments`, la règle de la carte du site). */
+/**
+ * Une puce à plat : le texte de ses segments (`bulletSegments`, la règle de la
+ * carte du site). Un lien devient `libellé (url)`, l'url interne rendue
+ * absolue comme les autres liens du flux.
+ */
 const flat = (line: string) =>
   bulletSegments(line)
-    .map((s) => s.text)
+    .map((s) => {
+      if (!isBulletLink(s)) return s.text;
+      const url = s.external ? s.href : buildUrl(DEFAULT_LANG, s.href);
+      return `${s.label.map((p) => p.text).join('')} (${url})`;
+    })
     .join('');
 
-/** Puces → une description plate (le gras `**x**` aplati), jointes par « — ». */
+/** Puces → une description plate (gras aplati, liens en `libellé (url)`), jointes par « — ». */
 function describe(lines: string[]): string {
   return lines.map(flat).join(' — ');
 }

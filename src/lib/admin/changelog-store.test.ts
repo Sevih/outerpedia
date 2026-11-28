@@ -13,6 +13,7 @@ import { resolve } from 'node:path';
 import { afterAll, beforeEach, describe, expect, it } from 'vitest';
 import { sandbox } from './store-fixture';
 import type { ChangelogEntry, UnsavedChangelogEntry } from '@/lib/data/changelog';
+import { bulletSegments, isBulletLink } from '@/lib/changelog-bullets';
 
 const box = sandbox('changelog-');
 // ⚠ APRÈS `sandbox()` : le store fige son chemin au chargement.
@@ -173,18 +174,22 @@ describe('saveChangelog — id stable des entrées', () => {
     expect(new Set(ids).size).toBe(ids.length);
   });
 
-  it('le fichier réel : aucun lien markdown `[…](…)` dans un titre ni une puce', () => {
-    // La carte ne rend que le gras (`bulletSegments`) : un lien s'y affichait
-    // brut, crochets et URL compris (A65). Le lien d'une entrée est son `link`.
+  it('le fichier réel : aucun lien markdown dans un titre, aucun lien brut dans une puce', () => {
+    // Un titre ne rend aucun balisage : un `[…](…)` s'y afficherait brut (A65).
+    // Une puce rend ses liens depuis B77 (`bulletSegments`) ; seul un `[…](…)`
+    // qu'elle laisse en TEXTE (cible refusée : `mailto:`, relative sans `/`…)
+    // s'afficherait brut, crochets et URL compris.
     const path = resolve(import.meta.dirname, '../../../data/curated/changelog.json');
     const entries = JSON.parse(readFileSync(path, 'utf8')) as ChangelogEntry[];
     const LINK = /\[[^\]]*\]\([^)]*\)/;
+    const raw = (line: string) =>
+      bulletSegments(line).some((s) => !isBulletLink(s) && LINK.test(s.text));
     const found: string[] = [];
     for (const e of entries) {
       for (const [lang, title] of Object.entries(e.title))
         if (LINK.test(title ?? '')) found.push(`${e.id} (${lang}, titre)`);
       for (const [lang, lines] of Object.entries(e.content ?? {}))
-        if (lines?.some((l) => LINK.test(l))) found.push(`${e.id} (${lang}, puces)`);
+        if (lines?.some(raw)) found.push(`${e.id} (${lang}, puces)`);
     }
     expect(found).toEqual([]);
   });

@@ -4,7 +4,8 @@
  * Server action d'AUTO-TRADUCTION éditoriale (admin) : traduit une prose EN vers
  * les langues du site en PRÉSERVANT les fragments à ne jamais traduire — tags
  * inline `{…}` (déjà localisés au rendu par `parse-text`), balises
- * `<color=…>`/`</color>` et sauts de ligne `\n`.
+ * `<color=…>`/`</color>`, cible d'un lien markdown `[libellé](cible)` (le
+ * libellé, lui, se traduit) et sauts de ligne `\n`.
  *
  * Deux moteurs, bascule automatique :
  *   1. DeepL (primaire) — quota gratuit « Developer » (1 M caractères one-shot).
@@ -27,8 +28,10 @@ type Target = Exclude<Lang, 'en'>;
 type Translations = Partial<Record<Lang, string>>;
 
 // Fragments préservés LITTÉRALEMENT : tags inline complets + balises couleur
-// (ouvrante/fermante). Le TEXTE entre `<color>` et `</color>` est, lui, traduit.
-const PROTECT = /\{[^}]+\}|<\/?color[^>]*>/gi;
+// (ouvrante/fermante) + CIBLE d'un lien markdown (`](…)` jusqu'à la parenthèse
+// fermante : journal du site et événements, B77). Le TEXTE entre `<color>` et
+// `</color>` est, lui, traduit, comme le libellé d'un lien `[…]`.
+const PROTECT = /\{[^}]+\}|<\/?color[^>]*>|\]\([^)\n]*\)/gi;
 
 // --- DeepL ---------------------------------------------------------------------
 

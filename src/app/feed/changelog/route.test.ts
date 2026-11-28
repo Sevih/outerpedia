@@ -1,5 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import type { ResolvedChangelogEntry } from '@/lib/data/changelog';
+import { DEFAULT_LANG } from '@/lib/i18n/config';
+import { buildUrl } from '@/lib/site';
 
 /**
  * Ce que ces tests tiennent : le `guid` d'un item du flux du journal est l'id
@@ -45,5 +47,31 @@ describe('GET /feed/changelog — guid', () => {
     feed.entries = [entry('8c9d0e1f', '2026-10-12'), ...feed.entries];
     const after = await guids();
     expect(after).toEqual(['changelog-8c9d0e1f', ...before]);
+  });
+});
+
+describe('GET /feed/changelog — liens des puces (B77)', () => {
+  /** La `description` du seul item du flux, déséchappée. */
+  async function description(content: string[]): Promise<string> {
+    feed.entries = [{ ...entry('0a1b2c3d', '2026-11-28'), content }];
+    const xml = await (await GET()).text();
+    const m = xml.match(/<description>([^<]*)<\/description>\s*<pubDate>/);
+    return (m?.[1] ?? '').replace(/&amp;/g, '&');
+  }
+
+  it('un lien externe s’aplatit en `libellé (url)`', async () => {
+    expect(
+      await description([
+        '🔗 [Survey (Global)](https://t.co/KxxijqwJ0f) · [問卷連結 (繁體中文)](https://t.co/OgdUxsLmOv)',
+      ]),
+    ).toBe(
+      '🔗 Survey (Global) (https://t.co/KxxijqwJ0f) · 問卷連結 (繁體中文) (https://t.co/OgdUxsLmOv)',
+    );
+  });
+
+  it('un lien interne prend l’url absolue du site, le gras de son libellé aplati', async () => {
+    expect(await description(['See **[the guide](/guides/x)**.', 'Une **puce**'])).toBe(
+      `See the guide (${buildUrl(DEFAULT_LANG, '/guides/x')}). — Une puce`,
+    );
   });
 });

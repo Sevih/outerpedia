@@ -5557,6 +5557,26 @@ describe('previewChangelogEntry — ce que la page /changelog montrerait', () =>
     expect((await ok(ENTRY, undefined)).title).toBe('Demiurge Lambda');
   });
 
+  it('les liens markdown des puces en segments (B77), ceux que la carte du site rend', async () => {
+    const out = await ok(
+      {
+        ...ENTRY,
+        content: {
+          en: ['🔗 [Survey (Global)](https://t.co/KxxijqwJ0f) · see **[the guide](/guides/x)**'],
+        },
+      },
+      'en',
+    );
+    expect(out.bullets).toEqual([
+      [
+        { text: '🔗 ' },
+        { href: 'https://t.co/KxxijqwJ0f', external: true, label: [{ text: 'Survey (Global)' }] },
+        { text: ' · see ' },
+        { href: '/guides/x', label: [{ text: 'the guide', bold: true }] },
+      ],
+    ]);
+  });
+
   it('une image explicite l’emporte ; sans lien ni image, l’icône du type', async () => {
     const withImage = await ok({ ...ENTRY, image: '/images/ui/custom.webp' }, 'en');
     expect(withImage.image).toMatch(/\/images\/ui\/custom\.webp$/);

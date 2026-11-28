@@ -1413,7 +1413,7 @@ export interface ChangelogPreview {
   /** La date comme la carte l'écrit ; telle que saisie si elle n'en est pas une. */
   date: string;
   title: string;
-  /** Une puce = ses segments (`bulletSegments` : le gras, et lui seul). */
+  /** Une puce = ses segments (`bulletSegments` : le gras et les liens `[libellé](cible)`). */
   bullets: BulletSegment[][];
   link: { kind: ChangelogLink['kind']; label: string; href: string } | null;
   /** L'adresse de la vignette — relative à la base des images quand elle commence par `/`. */
@@ -1423,7 +1423,7 @@ export interface ChangelogPreview {
 /**
  * L'aperçu de l'onglet « Journal du site » : une entrée EN COURS d'édition,
  * rendue par les fonctions de la page — `resolveChangelogEntry` (la langue,
- * repli anglais), `bulletSegments` (le gras), et la présentation de la carte
+ * repli anglais), `bulletSegments` (le gras, les liens), et la présentation de la carte
  * (`changelogThumb` : l'image explicite, sinon le portrait du perso ou la carte
  * du guide ; `changelogHref` ; les libellés i18n du badge et du lien). Rien ne
  * s'écrit, rien n'est validé : c'est un aperçu, un titre vide passe.
